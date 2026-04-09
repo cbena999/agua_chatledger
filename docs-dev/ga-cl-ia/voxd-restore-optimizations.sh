@@ -173,6 +173,50 @@ grep -q "large-v3-turbo" "$CONFIG" 2>/dev/null && ok "Modelo en config: large-v3
 # mic level
 grep -q "mic_autoset_level: 0.6" "$CONFIG" 2>/dev/null && ok "Mic level: 0.6" || { err "Mic level: no configurado"; ALL_OK=false; }
 
+# paquetes ficticios apt (blindaje contra upgrades)
+PYQT6_VER=$(dpkg -l python3-pyqt6 2>/dev/null | grep ^ii | awk '{print $3}')
+PYPERCLIP_VER=$(dpkg -l python3-pyperclip 2>/dev/null | grep ^ii | awk '{print $3}')
+
+if [ "$PYQT6_VER" = "99.0" ]; then
+    ok "Paquete ficticio python3-pyqt6: 99.0 (blindado)"
+else
+    err "python3-pyqt6 versión '$PYQT6_VER' — debe ser 99.0. Reparar con:"
+    echo "     cd /tmp && cat > python3-pyqt6.ctl << 'EOF'"
+    echo "Section: misc"
+    echo "Priority: optional"
+    echo "Standards-Version: 3.9.2"
+    echo "Package: python3-pyqt6"
+    echo "Version: 99.0"
+    echo "Description: Dummy package (installed via pip) — pinned high to prevent apt conflicts"
+    echo "EOF"
+    echo "     equivs-build python3-pyqt6.ctl && sudo dpkg -i python3-pyqt6_99.0_all.deb"
+    ALL_OK=false
+fi
+
+if [ "$PYPERCLIP_VER" = "99.0" ]; then
+    ok "Paquete ficticio python3-pyperclip: 99.0 (blindado)"
+else
+    err "python3-pyperclip versión '$PYPERCLIP_VER' — debe ser 99.0. Reparar con:"
+    echo "     cd /tmp && cat > python3-pyperclip.ctl << 'EOF'"
+    echo "Section: misc"
+    echo "Priority: optional"
+    echo "Standards-Version: 3.9.2"
+    echo "Package: python3-pyperclip"
+    echo "Version: 99.0"
+    echo "Description: Dummy package (installed via pip) — pinned high to prevent apt conflicts"
+    echo "EOF"
+    echo "     equivs-build python3-pyperclip.ctl && sudo dpkg -i python3-pyperclip_99.0_all.deb"
+    ALL_OK=false
+fi
+
+# voxd en hold
+if apt-mark showhold 2>/dev/null | grep -q "^voxd$"; then
+    ok "voxd: en hold (protegido contra apt upgrade)"
+else
+    err "voxd NO está en hold — protegerlo con: sudo apt-mark hold voxd"
+    ALL_OK=false
+fi
+
 echo ""
 if [ "$ALL_OK" = true ]; then
     echo -e "${GREEN}✓ Todas las optimizaciones están aplicadas.${RESET}"
