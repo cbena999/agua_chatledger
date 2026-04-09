@@ -324,6 +324,37 @@ mic_autoset_level: 0.6
 
 Probado pero descartado — el ambiente de trabajo tiene ruido tenue constante que genera falsos positivos. El hotkey `Super+Z` es más apropiado.
 
+### 5 — Blindaje contra apt upgrades futuros
+
+Cada `sudo apt upgrade` en Ubuntu 22.04 intenta eliminar voxd porque `python3-pyqt6` no está disponible en los repos oficiales. Solución en 3 capas:
+
+**Capa 1 — Poner voxd en hold:**
+```bash
+sudo apt-mark hold voxd
+```
+
+**Capa 2 — Paquetes ficticios con versión alta (nunca superada por apt):**
+```bash
+cd /tmp
+for PKG in python3-pyperclip python3-pyqt6; do
+cat > ${PKG}.ctl << EOF
+Section: misc
+Priority: optional
+Standards-Version: 3.9.2
+Package: ${PKG}
+Version: 99.0
+Description: Dummy package (installed via pip) — pinned high to prevent apt conflicts
+EOF
+equivs-build ${PKG}.ctl && sudo dpkg -i ${PKG}_99.0_all.deb
+done
+```
+
+**Capa 3 — Verificar antes de cada upgrade:**
+```bash
+bash docs-dev/ga-cl-ia/voxd-restore-optimizations.sh
+# Si todo verde → sudo apt upgrade -y es seguro
+```
+
 ---
 
 ## Notas importantes
@@ -343,3 +374,5 @@ Probado pero descartado — el ambiente de trabajo tiene ruido tenue constante q
 | **Mic level** | Subido a 0.60 en `config.yaml` (default 0.45) |
 | **Modo FLUX** | Descartado — ruido ambiente constante genera falsos positivos |
 | **Modelos alternativos** | `large-v3-turbo` es el óptimo para GTX 1050 Ti (4GB VRAM). `large-v3` completo es más lento (~5-6s). Mejora real solo con GPU 8GB+ VRAM |
+| **Blindaje apt** | `apt-mark hold voxd` + paquetes ficticios `python3-pyqt6` y `python3-pyperclip` en v99.0 |
+| **Script de restauración** | `bash docs-dev/ga-cl-ia/voxd-restore-optimizations.sh` — verifica 10 puntos de salud de Voxd |
