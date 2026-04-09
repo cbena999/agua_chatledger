@@ -73,6 +73,7 @@ bash docs-dev/ga-cl-ia/chatledger_sync_ga_lnks.sh
 | Archivo | Descripción | Última modificación |
 |---|---|---|
 | `chatledger_sync_ga_lnks.sh` | Script que crea/verifica los 7 symlinks del Ground Truth. Re-ejecutable de forma segura. | 2026-04-09 |
+| `voxd-restore-optimizations.sh` | Restaura/verifica todas las optimizaciones de Voxd post-update (hilos, prompt, modelo, mic, CUDA). | 2026-04-09 |
 | `claude-ga-leeme.txt` | Leeme general para Claude y Gemini sobre el proyecto | 2026-04-09 |
 | `voxd-instalacion.md` | Instalación y optimización de Voxd en Ubuntu 22.04 con CUDA/GTX 1050 Ti para español México | 2026-04-09 |
 | `issue-mcp-mysql-port-no-estandar.md` | Solución al issue de MCP MySQL con puerto no estándar | 2026-04-09 |
