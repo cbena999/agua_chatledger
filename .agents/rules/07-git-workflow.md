@@ -14,11 +14,11 @@ Válida para **Claude Code** y **Google Antigravity/Gemini** por igual.
 
 ## Repositorio de Historial (ChatLedger)
 
-Almacena historial de conversaciones y logs técnicos de forma independiente al código fuente.
+Almacena el Ground Truth de agentes IA y logs de conversaciones, independiente del código fuente.
 
 - **Ruta Local**: `/home/carlos/GitHub/agua_chatledger/`
 - **URL Remoto**: `https://github.com/cbena999/agua_chatledger.git`
-- **Simlink en App**: `.chatledger` → `/home/carlos/GitHub/agua_chatledger/`
+- **Symlink en App**: `.chatledger` → `/home/carlos/GitHub/agua_chatledger/`
 - **Rama Git**: `master`
 
 ```bash
@@ -40,123 +40,97 @@ git push origin master
 
 ---
 
-## Archivos y Directorios Solo-Main
+## Arquitectura de Symlinks (Ground Truth)
 
-Los siguientes paths viven **únicamente en `main`** como fuente de verdad.
-**No deben editarse desde `feature/upgrade-v2-win-xampp`.**
+Los siguientes paths en el repo `agua` son **symlinks permanentes** al chatledger.
+Aplican en **ambas ramas** (`main` y `feature`). Git en `agua` **nunca reporta cambios** en su contenido.
 
-**Contexto IA (meta archivos):**
-- `CLAUDE.md`
-- `GEMINI.md`
-- `.clauderules`
-- `.agents/rules/`
-- `.agents/skills/`
-- `.agents/workflows/`
-- `.agents/README.md`
+| Symlink en repo `agua` | Apunta a | Git lo rastrea |
+| :--- | :--- | :--- |
+| `.chatledger` | `/home/carlos/GitHub/agua_chatledger/` | Solo el symlink en sí |
+| `.agents` | `.chatledger/.agents/` | Solo el symlink en sí |
+| `CLAUDE.md` | `.chatledger/CLAUDE.md` | Solo el symlink en sí |
+| `GEMINI.md` | `.chatledger/GEMINI.md` | Solo el symlink en sí |
+| `.clauderules` | `.chatledger/.clauderules` | Solo el symlink en sí |
+| `.mcp.json` | `.chatledger/.mcp.json` | Solo el symlink en sí |
+| `docs-dev/ga-cl-ia/` | `/home/carlos/GitHub/agua_chatledger/docs-dev/ga-cl-ia/` | Solo el symlink en sí |
 
-**Documentación y notas:**
-- `docs-dev/ga-cl-ia/`
-- `docs-dev/migration-aguav2/host-c-setup/manual/`
+> **Consecuencia clave:** Editar `.agents/rules/`, `CLAUDE.md`, `docs-dev/ga-cl-ia/`, etc.
+> modifica físicamente `agua_chatledger`. Para versionar esos cambios → commitear en `agua_chatledger`, no en `agua`.
 
-> **Excepción — MCP config:** `.agents/mcp_config.json` y `.mcp.json` existen en **ambas ramas**.
-> `main` es la fuente de verdad. Al modificarlos, sincronizar a feature con:
-> ```bash
-> git checkout feature/upgrade-v2-win-xampp
-> git checkout main -- .agents/mcp_config.json .mcp.json
-> git commit -m "sync: mcp config desde main"
-> ```
+Para recrear todos los symlinks en un equipo nuevo:
+```bash
+bash docs-dev/ga-cl-ia/chatledger_sync_ga_lnks.sh
+```
 
 ---
 
-## Procedimiento Obligatorio al Cambiar de Rama
+## Protocolo Obligatorio al Cambiar de Rama
 
 > Aplica para **cualquier dirección**: `main → feature` o `feature → main`.
-> Claude Code y Gemini deben seguir estos pasos antes de ejecutar `git checkout`.
+> Claude Code y Gemini deben ejecutar estos pasos **antes** de `git checkout`.
 
-### Paso 0 — Verificar y migrar untracked en docs-dev/ga-cl-ia/
-
-Antes de cualquier cambio de rama, verificar si hay archivos sin seguimiento en `docs-dev/ga-cl-ia/`:
+### Paso 1 — Verificar estado de `agua_chatledger`
 
 ```bash
-git ls-files --others --exclude-standard docs-dev/ga-cl-ia/
+git -C /home/carlos/GitHub/agua_chatledger status
 ```
 
-**Si hay archivos untracked:**
-1. Moverlos al chatledger (fuente de verdad real):
-```bash
-cp docs-dev/ga-cl-ia/<archivo> /home/carlos/GitHub/agua_chatledger/docs-dev/ga-cl-ia/
-```
-2. Commitear en chatledger:
+**Si hay cambios sin commitear:**
 ```bash
 cd /home/carlos/GitHub/agua_chatledger
-git add docs-dev/ga-cl-ia/
-git commit -m "docs(ga-cl-ia): migrar <archivo> desde repo principal"
+git add -A
+git commit -m "docs: guardar cambios antes de cambiar rama en agua"
 cd /opt/lampp/htdocs/agua
 ```
 
-> Nota: `docs-dev/ga-cl-ia/` es un **symlink** a `agua_chatledger/docs-dev/ga-cl-ia/` — cualquier archivo creado ahí ya va automáticamente al chatledger. Este paso aplica solo si por alguna razón el symlink fue reemplazado por un directorio real.
+> Esto protege reglas, skills, workflows y docs editados antes del cambio de rama.
 
-### Paso 1 — Detectar cambios en paths solo-main
-
-```bash
-git status -- \
-  CLAUDE.md GEMINI.md .clauderules \
-  .agents/rules/ .agents/skills/ .agents/workflows/ .agents/README.md \
-  docs-dev/ga-cl-ia/ \
-  docs-dev/migration-aguav2/host-c-setup/manual/
-```
-
-### Paso 2 — Según resultado:
-
-**A) Si NO hay cambios** → cambiar de rama directamente.
-
-**B) Si HAY cambios y la rama actual es `main`** → hacer commit y push en `main` antes de cambiar.
-
-**C) Si HAY cambios y la rama actual es `feature/upgrade-v2-win-xampp`** →
-usar stash para no contaminar la rama feature con archivos solo-main:
+### Paso 2 — Verificar estado de `agua`
 
 ```bash
-# 1. Guardar en stash solo los archivos solo-main modificados
-git stash push -m "solo-main: <descripcion>" -- \
-  CLAUDE.md GEMINI.md .clauderules \
-  .agents/rules/ .agents/skills/ .agents/workflows/ .agents/README.md \
-  "docs-dev/ga-cl-ia/" \
-  "docs-dev/migration-aguav2/host-c-setup/manual/"
-
-# 2. Cambiar a main
-git checkout main
-
-# 3. Aplicar el stash
-git stash pop
+git status
 ```
 
-### Paso 3 — Resolver conflictos al hacer `stash pop`
+Clasificar cada archivo reportado:
 
-Si `git stash pop` genera conflictos en archivos solo-main:
-- **Conservar siempre la versión del stash** (es la más reciente).
-- Eliminar los marcadores de conflicto (`<<<<<<<`, `=======`, `>>>>>>>`).
-- Verificar que no queden marcadores: `grep -n "^<<<<<<\|^>>>>>>>" <archivo>`
-- Hacer commit y push en `main`.
+| Tipo de archivo | Acción |
+| :--- | :--- |
+| **Código PHP/JS/SQL** modificado — pertenece a rama actual | `git add` + `git commit` antes de cambiar |
+| **Código PHP/JS/SQL** modificado — trabajo en progreso | `git stash push -m "wip: descripcion"` |
+| **Archivo nuevo sin track** (`??`) de código | Decidir: commitear en rama actual o ignorar si es temporal |
+| **Symlinks** (`.agents`, `CLAUDE.md`, etc.) | Ignorar — git no reporta cambios en su contenido |
+| **Artifacts de sync** (`work/*.sql`, `backups/*.sql.gz`) | Descartar — ver sección Artifacts |
+
+### Paso 3 — Cambiar de rama
 
 ```bash
-git add <archivos-resueltos>
-git commit -m "docs(<path>): actualizar <descripción> — resuelve conflicto stash→main"
-git push origin main
+git checkout <rama-destino>
 ```
+
+### Paso 4 — Verificar estado post-cambio
+
+```bash
+git status
+```
+
+- Árbol limpio → OK
+- Si hay stash pendiente → `git stash pop` y resolver
 
 ---
 
-## Sincronizar Meta Archivos de main → feature
+## Qué commitear en cada repo
 
-Cuando se actualicen archivos solo-main en `main` y se necesite que `feature` los tenga:
-
-```bash
-git checkout feature/upgrade-v2-win-xampp
-git checkout main -- \
-  CLAUDE.md GEMINI.md .clauderules \
-  .agents/rules/ .agents/skills/ .agents/workflows/ .agents/README.md
-git commit -m "sync: meta archivos IA desde main"
-```
+| Cambio | Repo donde commitear |
+| :--- | :--- |
+| Código PHP, JS, SQL, vistas, includes | `agua` (rama correspondiente) |
+| Reglas `.agents/rules/` | `agua_chatledger` |
+| Skills `.agents/skills/` | `agua_chatledger` |
+| Workflows `.agents/workflows/` | `agua_chatledger` |
+| `CLAUDE.md`, `GEMINI.md`, `.clauderules` | `agua_chatledger` |
+| `docs-dev/ga-cl-ia/` (docs IA) | `agua_chatledger` |
+| Symlinks nuevos (modo 120000) | `agua` (ambas ramas si aplica) |
+| `.gitignore`, `composer.json`, configs de repo | `agua` |
 
 ---
 
@@ -184,12 +158,13 @@ git checkout -- docs-dev/migration-aguav2/sync_hosta_to_hostc/work/
 
 ## Notas para Agentes IA (Claude Code y Gemini)
 
-- **Commits**: descripción clara y técnica del cambio. Formato: `tipo(scope): descripción`.
-- **Pushes**: permitidos bajo el usuario `cbena999` para consolidar tareas de la sesión.
-- **Sync ChatLedger**: cuando se indique, sincronizar en `/home/carlos/GitHub/agua_chatledger/` (rama `master`).
-- **Conflictos**: resolver antes de proponer un merge; no usar `--no-verify` ni `--force` sin autorización explícita del usuario.
-- **Scope de autorización**: una aprobación de acción (ej. `git push`) no autoriza esa acción en todos los contextos futuros.
+- **Commits**: formato `tipo(scope): descripción`. Descripción clara y técnica.
+- **Pushes**: permitidos bajo usuario `cbena999`. Confirmar con usuario antes de push a `main`.
+- **Symlinks**: no reemplazar symlinks por archivos reales. Si se detecta un directorio real donde debería haber symlink → ejecutar `chatledger_sync_ga_lnks.sh`.
+- **Conflictos**: resolver antes de proponer merge. No usar `--no-verify` ni `--force` sin autorización explícita.
+- **Scope de autorización**: una aprobación puntual no autoriza la misma acción en contextos futuros.
+- **ChatLedger primero**: ante duda de dónde commitear algo relacionado con IA/docs → siempre `agua_chatledger`.
 
 ---
 
-**Última actualización:** 2026-04-08
+**Última actualización:** 2026-04-09
