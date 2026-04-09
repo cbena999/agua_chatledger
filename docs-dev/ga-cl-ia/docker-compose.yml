@@ -1,0 +1,18 @@
+services:
+  context7-bridge:
+    image: mcp/context7:latest
+    container_name: context7-mcp-mysql
+    network_mode: "host"
+    restart: unless-stopped
+    environment:
+      - DB_TYPE=mysql
+      # NOTA: el package @f4ww4z/mcp-mysql-server usa dotenv (archivos .env),
+      # NO lee variables de entorno del sistema. Las credenciales se configuran
+      # via la URL en .mcp.json (docker exec ... npx ... mysql://user:pass@host:port/db)
+      # Ver: issue-mcp-mysql-port-no-estandar.md
+    volumes:
+      # Monta el script que parchea @f4ww4z/mcp-mysql-server al arrancar.
+      # FIX: el package ignora el puerto en la URL del CLI → ETIMEDOUT en puertos != 3306.
+      # El script aplica 3 patches al build/index.js (idempotente).
+      - ./entrypoint-patch.sh:/usr/local/bin/entrypoint-patch.sh:ro
+    entrypoint: ["/bin/sh", "/usr/local/bin/entrypoint-patch.sh"]

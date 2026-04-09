@@ -1,0 +1,56 @@
+Con base al contexto de Database Evolution hacia Windows XAMPP  7.4.33
+Ya se realizo gran parte de la migración, pero el acceso a algunas paginas esta lento.
+Primero revisa la infraestructura del stack objetivo, y determina si se pueden optimizar parametros, cpu, memoria, etc; y en caso de que no, entonces en otra conversación se planteara analizar el codigo php.
+El host c tiene estas caracteristicas:
+    VM en virtual box con
+       Windows 10 Pro, 64 bits, procesador x64
+       Procesador: 2 core
+       RAM: 6.01 GB
+
+Analiza la bd (mariadb) total, tiene acceso de root y tambien analiza la bd awa: Usando el mcp host c.
+
+Analiza los archivos de configuración que ya fueron modificados por mi manualmente, /opt/lampp/htdocs/agua/docs-dev/migration-stack2/win10_aguav2/optimizacion
+Analiza logs ya generados, /home/carlos/Documents/tmp01/logs
+
+Usa archivos meta , tipo GEMINI.md en el proyecto.
+
+Presentame un plan de mejoras para optimizar el rendiemiento en la infraestructura de software.
+
+
+Analiza todo el tema de indices en bd awa de host c, y verifica si hay redundancia, o falta crear alguno o se requiera optimizar los, informa me , antes de realizar cambios.
+
+AHora bien, podemos declarar que la bd awa ya esta toda y totalmente optimizada, o faltaria hacer cosas de optimizacion y refinamiento para:   views , storeprocedure u otros objetos de awa o del motor mariadb ?
+
+______
+Valida que le hace falta al archivo de configuración, le hace falta para monitore queyres lentos en store procedures y sql que usa la webapp agua.
+/opt/lampp/htdocs/agua/docs-dev/migration-aguav2/host-c-setup/optimizacion/my.ini
+Es el host c, donde esta este archivo de configuración y al parecer no esta registrando actividad.
+Estos son los archivos de log que esta registrando /home/carlos/Documents/tmp01/logs/
+Usa los datos de contexto como GEMINI,md y asociados para agentes, skill, etc.
+Un  proposito secundario es irlos retro alimentando estos archivos en cada iteracion.
+
+===============================================================================================================================================================
+
+Con base a todos los cambios de mejoras, optimización y migración que ya estan en bd awa y webapp desplegados en host C.
+Crear un plan de casos pruebas funcionales via UI web a ejecutar en host c primero, si hay fallas tecnicas se corregiran y se redesplegaran; y reportar resultante de las pruebas. 
+Despues hacer las mismas pruebas funcionales via UI web a ejecutar en host a, las cuales no deberian tener fallas tecnicas y reportar resultante de las pruebas. 
+
+Generar un reporte de consistencia de las mismas pruebas en ambos ambientes hosts.
+
+El set de pruebas sea de casi todos los modulos funcionales  relevantes de la webapp, excepto estos: ...
+
+
+
+===============================================================================================================================================================
+Para host a, analizar los casos de pasar e sp1 o sp2 a  activo  e ir resolviendo incosnsitencias con claude.
+Redactar para host a en comparacion quiza con host B vmwin 7
+cambios de estados del contrato.
+. Lanzar el analis, que descubra las reglas y luego pedirle como es y como deberia ser para el intercambio.
+. para los activos detener los recargos automaticos de años pasados. usar los ids de los contratos que recien hizo NANCY.
+. sacar un buen reporte a explicar.
+Enfocarme en arreglar el requerimiento original  de activo .
+Preguntar IA y diga como debe estar
+
+.... continuar con lo de corte de caja dos reportes esabilizarlo a lo que se pidio.
+
+===============================================================================================================================================================

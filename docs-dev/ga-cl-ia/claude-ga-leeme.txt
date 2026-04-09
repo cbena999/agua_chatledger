@@ -1,0 +1,154 @@
+Al 4 abril 2026,  instale wisprflow.ai en la vm windows 10 awav2_intoGAIDE
+
+    https://wisprflow.ai/r?CARLOS3026
+
+============================================================================================================================================================================
+Claude code pro, inicia 4 abril 2026, cancelar antes del 1 mayo.
+
+W2D5A7ye9f8FirVTi3kAngmNVJ36OB566Gx4jra1nzwLNIf5#11xZDskOfEFfaBQGVaoxKVatxTAJkXfwSHRHKMPJOeg
+
+==============================================================================================================================================================================
+
+@ingenierobinario
+Cómo uso CLAUDE CODE totalmente GRATIS
+https://www.youtube.com/shorts/8XNvuagIfSM
+
+
+
+https://openrouter.ai/workspaces/default/keys
+awav2_intoGAIDE
+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
+
+/opt/lampp/htdocs/agua/.claude/settings.json
+
+Ok, funciona lo hice con extension no con terminal.
+
+------- OPEN router -------
+
+¿Qué es exactamente "openrouter/free"?
+Es un router especial de OpenRouter que elige automáticamente un modelo gratuito disponible en ese momento (de forma aleatoria entre los ~25-30 modelos free que hay en abril 2026).
+No es un modelo fijo: puedes recibir DeepSeek, Qwen, Llama, Gemma, Nemotron, StepFun, etc., dependiendo de la disponibilidad.
+¿Qué puedes hacer bien con él?
+
+Tareas simples y medianas de coding:
+Explicar código
+Generar funciones pequeñas
+Refactorizar código sencillo
+Escribir tests básicos
+Ayudar con debugging ligero
+Generar documentación o comentarios
+
+Uso diario ligero en Antigravity / VS Code:
+Preguntas rápidas en el terminal con claude
+Ayuda con scripts cortos
+Ideas de implementación
+Revisión de código pequeño
+
+
+Muchos usuarios lo usan para aprendizaje y prototipado ligero sin gastar nada.
+Limitaciones importantes (la parte realista)
+
+Calidad variable
+No siempre te toca un modelo bueno. A veces te da un modelo fuerte (como Qwen3 o DeepSeek), otras veces uno más débil. El rendimiento no es estable como con Claude Sonnet u Opus.
+Límites de uso (rate limits):
+Aproximadamente 20 solicitudes por minuto
+50 solicitudes por día (si no has agregado créditos)
+Si superas el límite diario, te quedas sin acceso hasta el día siguiente.
+Las respuestas suelen ser más lentas en horas pico.
+
+Soporte de Tools / Agentic features (lo más crítico):
+Claude Code depende mucho de tool use (leer archivos, editar código, ejecutar comandos bash, git, etc.).
+Muchos modelos gratuitos de OpenRouter no soportan bien las tools o las soportan de forma limitada.
+Esto significa que funciones avanzadas como:
+Editar múltiples archivos automáticamente
+Ejecutar comandos en tu proyecto
+Crear estructura completa de proyecto
+Usar sub-agentes
+pueden fallar o funcionar mal.
+
+
+Contexto y razonamiento:
+Modelos free suelen tener menos capacidad de razonamiento complejo comparado con Claude 3.5/4 Sonnet u Opus.
+Proyectos grandes o tareas muy complejas (arquitectura de apps grandes, debugging profundo) suelen dar resultados inferiores.
+
+
+Recomendación según tu uso
+
+Bueno para: Uso ocasional, aprender, tareas rápidas, probar ideas.
+No recomendado para: Trabajo profesional diario, proyectos grandes, flujos agentic intensivos (donde Claude Code brilla de verdad).
+
+Mejores alternativas gratuitas o casi gratuitas
+Si quieres mejorar la experiencia sin pagar mucho:
+
+Usa un modelo específico en vez de "openrouter/free", por ejemplo:
+"anthropic/claude-3-haiku" (si está free) o modelos como qwen/qwen3.6-plus:free, deepseek/deepseek-chat-v3:free
+Agrega un pequeño saldo en OpenRouter ($5–10) → aumenta mucho los límites diarios.
+Cambia a un modelo pago barato cuando necesites calidad (puedes configurar varios modelos según la tarea).
+
+===================================================================================================================================================================
+¡Antigravity + Claude Code es IMPARABLE! (Agent Teams) , (Greate !!)
+Para usarse en ide google antigravity y claude al mismo tiempo, descargar skills.
+Josema Fernández | IA
+
+    https://www.youtube.com/watch?v=fdepPGqjTeo
+
+
+https://github.com/obra/superpowers/tree/main/skills
+
+===============================================================================================================================================================
+Google Antigravity + Claude Code: Automatiza TODO con Agent Teams (Paso a Paso),  (Greate !!)
+Víctor Pérez
+https://www.youtube.com/watch?v=L10H1HczvXs
+
+
+===============================================================================================================================================================
+Cada Concepto de Claude Code Explicado para Gente Normal  (Greate !!)
+Víctor Pérez
+
+https://www.youtube.com/watch?v=6jIhXLUnbTs
+
+
+==============================================================================================================================================================
+Guía Completa de Claude Code para Principiantes: Tu primera App sin Código
+Josema Fernández | IA
+https://www.youtube.com/watch?v=hMq0d6oBKkg
+
+
+===============================================================================================================================================================
+I Use These 6 CLI Tools to Make Working with Claude Code 3x Better
+Joe Njenga
+https://medium.com/@joe.njenga/i-use-these-6-cli-tools-to-make-working-with-claude-code-3x-better-a8815938a5a0
+
+
+===============================================================================================================================================================
+
+Para el mismo mcp config file lo use antigravity y claude code se hizo esto:
+
+Opción 2 — Archivo canónico en .agents/
+     Mover el archivo real a .agents/ (Ground Truth compartido) y crear symlinks desde ambas rutas:
+
+
+# Mover a Ground Truth
+mv /opt/lampp/htdocs/agua/.mcp.json /opt/lampp/htdocs/agua/.agents/mcp_config.json
+
+# Ambos agentes apuntan al mismo origen
+ln -s /opt/lampp/htdocs/agua/.agents/mcp_config.json /opt/lampp/htdocs/agua/.mcp.json
+ln -s /opt/lampp/htdocs/agua/.agents/mcp_config.json /home/carlos/.gemini/antigravity/mcp_config.json
+Pro: Consistente con la filosofía de .agents/ como Ground Truth.
+
+Contra: Un nivel más de indirección.
+
+Un solo archivo que editar, ambos agentes siempre en sync.
+algo similar ocurre con /opt/lampp/htdocs/agua/.chatledger  para que se mire en varias ramas del repo y tenga su propio directorio  y repo independeinte del proyecto agua
+
+================================================================================================================================================================
+
+Se instalo claude code nativo y se vinculo a la suscripcion pro ,adquirida el 4 abril 2026.
+
+
+===============================================================================================================================================================
+
+
+===============================================================================================================================================================
+
+
