@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__bdawahost-a__query_table",
+      "mcp__bdawahost-a__describe_table",
+      "mcp__bdawahost-a__connect_db",
+      "Bash(cat /opt/lampp/htdocs/agua/.agents/skills/*.md)",
+      "mcp__bdawahost-a__list_tables",
+      "mcp__bdawahost-c__execute",
+      "mcp__bdawahost-c__query",
+      "mcp__bdawahost-a__query",
+      "mcp__bdawahost-c__connect_db",
+      "Bash(grep -rn 'league/plates\\\\|Plates\\\\\\\\Engine\\\\|new Engine\\\\|$templates\\\\b' /opt/lampp/htdocs/agua/reportes/ /opt/lampp/htdocs/agua/admin/)",
+      "Bash(grep -oP '\\\\$[a-zA-Z_][a-zA-Z0-9_]*' /opt/lampp/htdocs/agua/ruteador.php)",
+      "Bash(grep -v '\\\\$_\\\\|\\\\$templates\\\\|\\\\$target_path\\\\|\\\\$opc\\\\b')",
+      "mcp__bdawahost-c__list_tables"
+    ]
+  },
+  "enabledMcpjsonServers": [
+    "bdawahost-a",
+    "bdawahost-b"
+  ]
+}
