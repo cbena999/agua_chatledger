@@ -2,9 +2,31 @@
 
 Inventario vivo de todo el conocimiento estructurado disponible para **Claude Code** y **Google Antigravity/Gemini** en el proyecto Agua.
 
-> **Fuente de verdad física:** `/home/carlos/GitHub/agua_chatledger/.agents/`
-> **Acceso vía symlink:** `/opt/lampp/htdocs/agua/.agents/`
+> **Fuente de verdad física:** `/home/carlos/GitHub/agua_chatledger/`
+> **Acceso vía symlink:** `/opt/lampp/htdocs/agua/` (`.agents`, `CLAUDE.md`, `GEMINI.md`, etc.)
 > **Actualizar este archivo** cada vez que se agregue, modifique o elimine un asset.
+
+---
+
+## Arquitectura de Symlinks
+
+Todos los assets de Ground Truth son symlinks en el repo `agua` — válidos en **ambas ramas**.
+Git en `agua` **nunca reporta cambios** en su contenido. Todo se commitea en `agua_chatledger`.
+
+| Symlink en repo `agua` | Destino físico | Estado |
+|---|---|---|
+| `.chatledger` | `/home/carlos/GitHub/agua_chatledger/` | ✓ OK |
+| `.agents` | `.chatledger/.agents/` | ✓ OK |
+| `CLAUDE.md` | `.chatledger/CLAUDE.md` | ✓ OK |
+| `GEMINI.md` | `.chatledger/GEMINI.md` | ✓ OK |
+| `.clauderules` | `.chatledger/.clauderules` | ✓ OK |
+| `.mcp.json` | `.chatledger/.mcp.json` | ✓ OK |
+| `docs-dev/ga-cl-ia/` | `/home/carlos/GitHub/agua_chatledger/docs-dev/ga-cl-ia/` | ✓ OK |
+
+Para recrear todos los symlinks en un equipo nuevo:
+```bash
+bash docs-dev/ga-cl-ia/chatledger_sync_ga_lnks.sh
+```
 
 ---
 
@@ -12,13 +34,13 @@ Inventario vivo de todo el conocimiento estructurado disponible para **Claude Co
 
 | # | Archivo | Nombre | Cubre | Última modificación |
 |---|---|---|---|---|
-| 01 | `01-infra-hosts.md` | Infraestructura y Hosts | Definición de Hosts A/B/C, puertos, accesos, propósito de cada ambiente | 2026-04-08 |
+| 01 | `01-infra-hosts.md` | Infraestructura y Hosts | Definición de Hosts A/B/C, puertos, accesos, propósito de cada ambiente | 2026-04-09 |
 | 02 | `02-reglas-negocio.md` | Reglas de Negocio | Facturación, estados de contrato, límite de tomas, split ligacargos, módulos críticos | 2026-04-08 |
 | 03 | `03-sincronizacion-b-a.md` | Sincronización B→A | Procedimiento de refresco de datos desde Host B (producción) a Host A (desarrollo) | 2026-04-08 |
 | 04 | `04-arquitectura-mvc.md` | Arquitectura MVC | Estructura de directorios, capas MVC, localización de lógica de negocio | 2026-04-08 |
 | 05 | `05-despliegue-host-c.md` | Despliegue Host C | Migración e implementación en Host C (MariaDB 10.4.27 / XAMPP 7.4.33 / Windows) | 2026-04-08 |
 | 06 | `06-accesos-rutas.md` | Accesos y Seguridad | Credenciales y rutas de acceso web/DB para Hosts A y B | 2026-04-08 |
-| 07 | `07-git-workflow.md` | Control de Versiones | Ramas, commits, push, procedimiento cambio de rama, symlinks chatledger, ChatLedger sync | 2026-04-09 |
+| 07 | `07-git-workflow.md` | Control de Versiones | Ramas, symlinks Ground Truth, protocolo cambio de rama (4 pasos), tabla qué commitear en cada repo | 2026-04-09 |
 
 ---
 
@@ -46,15 +68,17 @@ Inventario vivo de todo el conocimiento estructurado disponible para **Claude Co
 ## Documentación IA (`docs-dev/ga-cl-ia/`)
 
 > Symlink a `agua_chatledger/docs-dev/ga-cl-ia/` — aplica en todas las ramas.
+> Commitear cambios en `agua_chatledger`, no en `agua`.
 
-| Archivo | Descripción | Fecha |
+| Archivo | Descripción | Última modificación |
 |---|---|---|
-| `claude-ga-leeme.txt` | Leeme general para Claude y Gemini sobre el proyecto | 2026-04-07 |
-| `voxd-instalacion.md` | Instalación y optimización completa de Voxd en Ubuntu 22.04 con CUDA/GTX 1050 Ti | 2026-04-09 |
+| `chatledger_sync_ga_lnks.sh` | Script que crea/verifica los 7 symlinks del Ground Truth. Re-ejecutable de forma segura. | 2026-04-09 |
+| `claude-ga-leeme.txt` | Leeme general para Claude y Gemini sobre el proyecto | 2026-04-09 |
+| `voxd-instalacion.md` | Instalación y optimización de Voxd en Ubuntu 22.04 con CUDA/GTX 1050 Ti para español México | 2026-04-09 |
 | `issue-mcp-mysql-port-no-estandar.md` | Solución al issue de MCP MySQL con puerto no estándar | 2026-04-09 |
+| `entrypoint-patch.sh` | Parche de entrypoint para ambiente de desarrollo IA | 2026-04-09 |
 | `docker-compose.yml` | Docker compose para ambiente de desarrollo IA | 2026-04-09 |
-| `chatledger_sync_ga_lnks.sh` | Script de sincronización de symlinks ChatLedger | 2026-04-07 |
-| `promts/` | Prompts de referencia para Claude y Gemini | 2026-04-07 |
+| `promts/` | Prompts de referencia para Claude y Gemini | 2026-04-09 |
 
 ---
 
@@ -77,6 +101,7 @@ Inventario vivo de todo el conocimiento estructurado disponible para **Claude Co
 2. **Al modificar un asset existente**: actualizar la fecha en su fila.
 3. **Al eliminar un asset**: remover la fila y mover a una sección `## Eliminados` con la fecha de baja.
 4. **Al detectar un gap cubierto**: mover la fila de Gaps a la sección correspondiente.
+5. **Al validar el inventario**: verificar existencia real con `ls` y fechas con `git log` en `agua_chatledger`.
 
 ---
 
