@@ -217,6 +217,49 @@ else
     ALL_OK=false
 fi
 
+# override systemd voxd-tray con variables de entorno CUDA
+OVERRIDE="$HOME/.config/systemd/user/voxd-tray.service.d/env.conf"
+if [ -f "$OVERRIDE" ] && grep -q "VOXD_WC_BIN" "$OVERRIDE"; then
+    ok "Override systemd voxd-tray: env.conf presente con VOXD_WC_BIN"
+else
+    err "Override systemd faltante — hotkey Ctrl+J no funcionará tras reinicio"
+    err "Crear con:"
+    echo "     mkdir -p ~/.config/systemd/user/voxd-tray.service.d"
+    echo "     cat > $OVERRIDE << 'EOF'"
+    echo "     [Service]"
+    echo "     Environment=VOXD_WC_BIN=/home/carlos/.local/share/voxd/bin/whisper-cli"
+    echo "     Environment=LD_LIBRARY_PATH=/usr/local/cuda-12.2/targets/x86_64-linux/lib"
+    echo "     Environment=PATH=/usr/local/cuda-12.2/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    echo "     Environment=DISPLAY=:0"
+    echo "     Environment=XAUTHORITY=/home/carlos/.Xauthority"
+    echo "     ExecStartPre=/bin/sleep 5"
+    echo "     EOF"
+    echo "     systemctl --user daemon-reload && systemctl --user restart voxd-tray.service"
+    ALL_OK=false
+fi
+
+# Check 12 — whisper-cli estático (sin .so faltantes)
+echo -n "[12] whisper-cli sin dependencias rotas... "
+WCBIN="$HOME/.local/share/voxd/bin/whisper-cli"
+if ldd "$WCBIN" 2>&1 | grep -q "not found"; then
+    err "whisper-cli tiene dependencias .so faltantes — recompilar con BUILD_SHARED_LIBS=OFF"
+    err "Ver sección 'Causa 1' en voxd-instalacion.md"
+    ALL_OK=false
+else
+    ok "whisper-cli: sin dependencias rotas"
+fi
+
+# Check 13 — script wrapper voxd-trigger.sh
+echo -n "[13] Script wrapper ~/.local/bin/voxd-trigger.sh... "
+WRAPPER="$HOME/.local/bin/voxd-trigger.sh"
+if [ -x "$WRAPPER" ] && grep -q "VOXD_WC_BIN" "$WRAPPER"; then
+    ok "voxd-trigger.sh presente y ejecutable"
+else
+    err "Script wrapper faltante — hotkey Ctrl+J puede no funcionar"
+    err "Crear: cat > $WRAPPER con VOXD_WC_BIN y /usr/bin/voxd --trigger-record"
+    ALL_OK=false
+fi
+
 echo ""
 if [ "$ALL_OK" = true ]; then
     echo -e "${GREEN}✓ Todas las optimizaciones están aplicadas.${RESET}"

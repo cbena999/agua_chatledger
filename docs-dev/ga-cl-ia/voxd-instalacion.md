@@ -11,7 +11,7 @@
 Voxd funciona con:
 - Modelo Whisper `large-v3-turbo` (1.6GB VRAM) — máxima precisión para español México
 - Backend CUDA / GTX 1050 Ti — ~3s por grabación
-- Hotkey global `Super+Z` (Windows+Z) — toggle grabar/transcribir desde cualquier ventana
+- Hotkey global `Ctrl+J` — toggle grabar/transcribir desde cualquier ventana
 - Autostart habilitado vía systemd usuario
 - Texto transcrito se escribe automáticamente donde esté el cursor (simulación de teclado X11)
 
@@ -203,15 +203,44 @@ voxd --autostart true
 
 ---
 
-## Paso 13 — Configurar hotkey global Super+Z en KDE Plasma
+## Paso 13 — Configurar hotkey global en KDE Plasma
 
-1. Abrir **Configuración del Sistema → Accesos rápidos → Accesos rápidos personalizados**
-2. Clic en **Editar → Nuevo → Acceso rápido global → Orden/URL**
-3. Pestaña **Comentario:** `Voxd dictado`
-4. Pestaña **Acción:** `bash -c 'voxd --trigger-record'`
-5. Pestaña **Disparador:** presionar `Windows+Z`
-6. Si hay conflicto con entrada previa (creada vía terminal): clic en **Reasignar**
+1. Crear script wrapper (evita problemas con bash inline en khotkeys):
+```bash
+cat > ~/.local/bin/voxd-trigger.sh << 'EOF'
+#!/bin/bash
+export VOXD_WC_BIN=/home/carlos/.local/share/voxd/bin/whisper-cli
+export LD_LIBRARY_PATH=/usr/local/cuda-12.2/targets/x86_64-linux/lib:$LD_LIBRARY_PATH
+export PATH=/usr/local/cuda-12.2/bin:$PATH
+/usr/bin/voxd --trigger-record
+EOF
+chmod +x ~/.local/bin/voxd-trigger.sh
+```
+
+2. Abrir **Configuración del Sistema → Accesos rápidos → Accesos rápidos personalizados**
+3. Clic en **Editar → Nuevo → Acceso rápido global → Orden/URL**
+4. Pestaña **Comentario:** `Voxd dictado`
+5. Pestaña **Acción:** `/home/carlos/.local/bin/voxd-trigger.sh`
+6. Pestaña **Disparador:** presionar `Ctrl+J`
 7. Clic en **Aplicar**
+
+> **Nota:** No usar `Meta/Super+Z` — KDE/KWin intercepta la tecla Meta antes de que llegue a khotkeys.
+
+---
+
+## Directorios críticos — NO borrar
+
+| Ruta | Contenido | Borrable |
+| :--- | :--- | :---: |
+| `~/.local/share/voxd/bin/whisper-cli` | Binario whisper compilado estático | NO |
+| `~/.local/share/voxd/models/ggml-large-v3-turbo.bin` | Modelo 1.6GB | NO |
+| `~/.config/voxd/config.yaml` | Configuración voxd | NO |
+| `~/.config/systemd/user/voxd-tray.service.d/env.conf` | Override systemd (CUDA + DISPLAY) | NO |
+| `~/.local/bin/voxd-trigger.sh` | Script wrapper hotkey Ctrl+J | NO |
+| `/opt/voxd/` | Instalación voxd + virtualenv Python | NO |
+| `/usr/local/cuda-12.2/` | CUDA toolkit | NO |
+| `~/whisper-cpp-src/` | Source whisper.cpp (solo para compilar) | SÍ |
+| `/tmp/voxd/` | Audios temporales (se limpia al reiniciar) | Auto |
 
 ---
 
@@ -223,8 +252,8 @@ voxd --rh &
 ```
 
 1. Haz clic donde quieres que aparezca el texto (campo de chat, editor, etc.)
-2. Presiona `Windows+Z` → suelta → habla en español
-3. Presiona `Windows+Z` → suelta → el texto se escribe automáticamente
+2. Presiona `Ctrl+J` → suelta → habla en español
+3. Presiona `Ctrl+J` → suelta → el texto se escribe automáticamente
 
 ---
 
@@ -376,3 +405,71 @@ bash docs-dev/ga-cl-ia/voxd-restore-optimizations.sh
 | **Modelos alternativos** | `large-v3-turbo` es el óptimo para GTX 1050 Ti (4GB VRAM). `large-v3` completo es más lento (~5-6s). Mejora real solo con GPU 8GB+ VRAM |
 | **Blindaje apt** | `apt-mark hold voxd` + paquetes ficticios `python3-pyqt6` y `python3-pyperclip` en v99.0 |
 | **Script de restauración** | `bash docs-dev/ga-cl-ia/voxd-restore-optimizations.sh` — verifica 10 puntos de salud de Voxd |
+| **Hotkey `Ctrl+J`** | Combinación final funcional — `Meta/Super+Z` descartada (KWin la intercepta antes de khotkeys) |
+| **Script wrapper** | `~/.local/bin/voxd-trigger.sh` — reemplaza `bash -c 'voxd --trigger-record'` inline (más robusto) |
+| **whisper-cli estático** | Recompilado con `BUILD_SHARED_LIBS=OFF` — elimina dependencia de `libwhisper.so` / `libggml.so` |
+| **libwhisper.so.1 faltante** | El binario original necesitaba `.so` que no existían en el sistema. Solución: compilar estático |
+| **Hotkey no funciona en modo tray** | Causas: (1) systemd no hereda env de `.bashrc`, (2) X11 no disponible al arrancar, (3) Meta+Z interceptada por KWin |
+
+---
+
+## Issues resueltos — Hotkey y transcripción en modo tray (autostart)
+
+### Causa 1 — libwhisper.so.1 faltante
+
+**Síntoma:** Tray activo (ícono rojo al grabar) pero sin texto — grabación silenciosa.
+
+**Causa:** `whisper-cli` compilado con linking dinámico requería `libwhisper.so.1` y `libggml.so.0` que no existían en el sistema.
+
+**Solución:** Recompilar whisper.cpp con linking estático:
+```bash
+cd ~ && git clone --depth=1 https://github.com/ggerganov/whisper.cpp.git whisper-cpp-src
+cd whisper-cpp-src
+~/.local/bin/cmake -B build \
+  -DCMAKE_BUILD_TYPE=Release \
+  -DGGML_CUDA=ON \
+  -DCMAKE_CUDA_COMPILER=/usr/local/cuda-12.2/bin/nvcc \
+  -DBUILD_SHARED_LIBS=OFF
+~/.local/bin/cmake --build build --target whisper-cli -j$(nproc)
+cp build/bin/whisper-cli ~/.local/share/voxd/bin/whisper-cli
+```
+Verificar: `ldd ~/.local/share/voxd/bin/whisper-cli` — no debe mostrar "not found".
+
+---
+
+### Causa 2 — systemd no hereda env de .bashrc
+
+**Síntoma:** `VOXD_WC_BIN` y `LD_LIBRARY_PATH` de CUDA no disponibles en el servicio.
+
+**Solución — override del servicio:**
+```bash
+mkdir -p ~/.config/systemd/user/voxd-tray.service.d
+cat > ~/.config/systemd/user/voxd-tray.service.d/env.conf << 'EOF'
+[Service]
+Environment=VOXD_WC_BIN=/home/carlos/.local/share/voxd/bin/whisper-cli
+Environment=LD_LIBRARY_PATH=/usr/local/cuda-12.2/targets/x86_64-linux/lib
+Environment=PATH=/usr/local/cuda-12.2/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+Environment=DISPLAY=:0
+Environment=XAUTHORITY=/home/carlos/.Xauthority
+ExecStartPre=/bin/sleep 5
+EOF
+systemctl --user daemon-reload && systemctl --user restart voxd-tray.service
+```
+
+El `sleep 5` evita que el servicio arranque antes de que X11 esté disponible (causa crash en el primer intento).
+
+---
+
+### Causa 3 — Meta/Super+Z interceptada por KWin
+
+**Síntoma:** Hotkey `Meta+Z` registrado en khotkeys pero no dispara nada.
+
+**Causa:** KDE/KWin consume la tecla Meta antes de que llegue a khotkeys.
+
+**Solución:** Usar `Ctrl+J` en lugar de `Meta/Super+Z`. Configurar en **Accesos rápidos personalizados** con acción apuntando a `~/.local/bin/voxd-trigger.sh` (no bash inline).
+
+**Verificar override activo:**
+```bash
+systemctl --user show voxd-tray.service | grep "^Environment"
+# Debe mostrar VOXD_WC_BIN, LD_LIBRARY_PATH, DISPLAY
+```
