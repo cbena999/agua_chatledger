@@ -13,7 +13,8 @@
       "Bash(grep -rn 'league/plates\\\\|Plates\\\\\\\\Engine\\\\|new Engine\\\\|$templates\\\\b' /opt/lampp/htdocs/agua/reportes/ /opt/lampp/htdocs/agua/admin/)",
       "Bash(grep -oP '\\\\$[a-zA-Z_][a-zA-Z0-9_]*' /opt/lampp/htdocs/agua/ruteador.php)",
       "Bash(grep -v '\\\\$_\\\\|\\\\$templates\\\\|\\\\$target_path\\\\|\\\\$opc\\\\b')",
-      "mcp__bdawahost-c__list_tables"
+      "mcp__bdawahost-c__list_tables",
+      "Bash(time /tmp/whisper.cpp/build/bin/whisper-cli -m '~/.local/share/voxd/models/ggml-small.bin' -f '~/.local/share/voxd/recordings/20260408_232205_recording.wav' -l es -nt)"
     ]
   },
   "enabledMcpjsonServers": [
