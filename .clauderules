@@ -1,0 +1,19 @@
+# .clauderules — Proyecto Agua
+
+Este archivo es leído automáticamente por Claude Code en cada sesión.
+**No contiene reglas directamente** — toda la verdad está modularizada.
+
+## Entry Point
+Lee **CLAUDE.md** para el mapa completo de conocimiento, hosts e infraestructura.
+
+## Mandato Crítico
+Antes de editar cualquier lógica financiera o de estados, consulta:
+→ `.agents/rules/02-reglas-negocio.md`
+
+## Coexistencia de Agentes IA
+Este proyecto es asistido simultáneamente por:
+- **Claude Code** (este agente) → Entry Point: `CLAUDE.md`
+- **Google Antigravity / Gemini** → Entry Point: `GEMINI.md`
+
+Ambos comparten el mismo Ground Truth en `.agents/rules/`, `.agents/skills/` y `.agents/workflows/`.
+No duplicar conocimiento entre CLAUDE.md y GEMINI.md — editar directamente los archivos `.agents/`.
