@@ -7,7 +7,7 @@
 | **Trajectory ID** | `88253ed1-6fc5-4e5a-a27b-31ce28ae9c82` |
 | **Cascade ID** | `a966039d-cd86-440d-b61b-0788fab82e28` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 86 |
+| **Total Steps** | 148 |
 | **Started** | 10 Apr 2026, 10:49 am |
 
 ---
@@ -3412,8 +3412,1088 @@ CLI Host C (desde Host A): `/opt/lampp/bin/mysql -h 192.168.1.128 -P 7002 -u roo
 
 ### Code Edit
 
-**Status:** CORTEX_STEP_STATUS_WAITING
+**Status:** Completed
 **Created:** 10 Apr 2026, 11:16 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 10 Apr 2026, 11:19 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 10 Apr 2026, 11:19 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 10 Apr 2026, 11:19 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 10 Apr 2026, 11:19 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 10 Apr 2026, 11:20 am
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+## User Request
+
+Añade como regla que para cada converacion con resultado verificado por el usuario, se genere:  Un resumen de estos issues resueltos con scope funcional y tecnico. y colocalo en agua_chatledger; creo debe pedir mi aprobación si el resultado generes y/o la verificación po mi es satisfactoria , solo entonces generes ese asset o que vaya a sociado a la orden, realiza el commit; dame tu sugerencia como es mejor ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `cargos.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The user wants to add a rule to the Runbook that defines the workflow for generating session summaries. They're asking for my suggestion on what's the better approach - either:
+1. Always generate the summary and commit when user verifies results
+2. Ask for approval before generating/committing
+
+Let me think about the best workflow and then formalize it as a rule in the Runbook.
+
+My suggestion: The best approach is a **two-gate model**:
+- Gate 1: After implementation, the agent asks "¿Verificaste el resultado?" before generating the summary
+- Gate 2: Once user confirms verification, the agent generates the summary file AND does the commit in one atomic step (no second approval needed - the verification IS the approval)
+
+
+This avoids asking for commit approval after the fact while still protecting against uncommitted changes. I could also draft the summary as a visible artifact first and ask for content approval, but that adds friction. I'll present the two-gate model as the primary recommendation and explain the tradeoffs before writing out the formal rule.
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 8.250559445s
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+## User Request
+
+Si , totalmente de acuerdo.
+Y analiza si esta nueva regla y todo el Runbook, es compatible para que Claude code instalado en este mismo IDE google antigravity, tambien pueda usarlo.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `cargos.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The user wants me to:
+1. Formalize the new rule about session summaries in the Runbook
+2. Analyze if this new rule and the entire Runbook is compatible for Claude Code (installed in the same IDE) to use it
+
+Let me first check the existing CLAUDE.md and .clauderules to understand how Claude Code currently reads the Runbook, then check if there are any compatibility gaps.
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `CLAUDE.md`
+
+**Tool:** `view_file`
+**File:** `.clauderules`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.011633635s
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# CLAUDE.md — Entry Point para Claude Code · Proyecto Agua
+
+Cargado automáticamente por **Claude Code** en cada sesión.
+
+> [!IMPORTANT]
+> Este proyecto es asistido simultáneamente por **Claude Code** y **Google Antigravity/Gemini**.
+> Ambos comparten el mismo Ground Truth en `.agents/`. No duplicar reglas aquí — editar los archivos `.agents/` directamente.
+> Entry Point de Antigravity/Gemini: [GEMINI.md](GEMINI.md)
+
+---
+
+## Mapa de Conocimiento (Ground Truth Compartido)
+
+| Tipo | Descripción | Directorio |
+| :--- | :--- | :--- |
+| **Reglas** | Reglas permanentes (negocio, infra, git) | [.agents/rules/](.agents/rules/) |
+| **Skills** | Estándares técnicos (Plates, AJAX, PHP 7.4, DB) | [.agents/skills/](.agents/skills/) |
+| **Workflows** | Procesos repetibles (Sync B→A→C, Deploy Host C) | [.agents/workflows/](.agents/workflows/) |
+
+Estructura interna documentada en [.agents/README.md](.agents/README.md).
+Inventario completo de assets en [.agents/INVENTORY.md](.agents/INVENTORY.md).
+
+---
+
+## Hosts (Infraestructura)
+
+| Host | Propósito | Rama Git | MCP |
+| :---: | :--- | :--- | :--- |
+| **A** | Producción activa — Linux XAMPP, MySQL 5.6 | `main` | `bdawahost-a` → 127.0.0.1:3306 |
+| **B** | Espejo producción (MySQL 5.1) — solo lectura datos frescos | N/A | `bdawahost-b` → 192.168.1.120:3306 |
+| **C** | V2 MariaDB 10.4.27 — Windows XAMPP 7.4.33 | `feature/upgrade-v2-win-xampp` | `bdawahost-c` → 192.168.1.128:**7002** |
+
+- **Acceso Web Host A:** `http://localhost/agua/login/index2.php` (nancy / 260180)
+- **Acceso Web Host C:** `http://192.168.1.128:7001/agua` (Apache 7001, MariaDB 7002)
+- **Repo GitHub:** `https://github.com/cbena999/aguaclmhj.git`
+
+---
+
+## Estado de Migración Host C (2026-04-07)
+
+- Schema v2 completo, webapp PHP adaptada — **UP & RUNNING**
+- Pipeline sync B→A→C validado en ejecución real (7/7 checks OK)
+- Scripts setup en `docs-dev/migration-stack2/win10_aguav2/host-c-setup/` (01→08)
+- Checklist pase a producción en `host-c-setup/07_transferir_datos.md`
+- Ver regla detallada: [.agents/rules/05-despliegue-host-c.md](.agents/rules/05-despliegue-host-c.md)
+
+---
+
+## Reglas de Negocio Críticas (Resumen)
+
+> Leer siempre [.agents/rules/02-reglas-negocio.md](.agents/rules/02-reglas-negocio.md) antes de editar lógica financiera.
+
+- **Facturación habilitada** solo en estados `1 (ACTIVO)`, `2 (SUSP. TEMPORAL)` y `5 (SUSP. ADMINISTRATIVA)`.
+- **Límite de tomas:** Máximo 2 contratos activos por usuario en el mismo domicilio.
+- **Split ligacargos:** activa (≥2026) en `ligacargos` · histórico (≤2025) en `ligacargos_historico`.
+- **Caja/Reportes:** Sumatoria de listas debe coincidir siempre con totales de encabezado.
+
+---
+
+## Módulos Críticos
+
+| Módulo | Archivo | Riesgo |
+| :--- | :--- | :--- |
+| Cambio de Estados | Transiciones 1, 2 y 5 | Alto |
+| Facturación / Cartera | `carteravencida.php` | Alto |
+| Caja Diaria | `concentradocortecaja.php` | Alto |
+| Resumen de Caja | `reportes/concentradocortecajaresumen.php` | Alto |
+
+---
+
+## Arquitectura Brain / Ground Truth (2026-04-09)
+
+Todo el contexto de agentes IA vive en `agua_chatledger`. El repo `agua` solo tiene symlinks:
+
+| Symlink en `agua` | Destino |
+| :--- | :--- |
+| `.claude/` | `.chatledger/.claude/` (settings.json + settings.local.json) |
+| `.agents/` | `.chatledger/.agents/` |
+| `.mcp.json` | `.chatledger/.mcp.json` |
+| `CLAUDE.md` / `GEMINI.md` / `.clauderules` | `.chatledger/[archivo]` |
+| `docs-dev/ga-cl-ia/` | `agua_chatledger/docs-dev/ga-cl-ia/` |
+
+**Validar integridad antes de commitear en agua_chatledger:**
+```bash
+bash docs-dev/ga-cl-ia/chatledger_validate.sh
+```
+
+## Comandos Rápidos
+
+```bash
+# Git
+git push origin main
+git push origin feature/upgrade-v2-win-xampp
+
+# XAMPP Host A
+/opt/lampp/bin/mysql -u root awa
+
+# Sync B→A→C
+cd docs-dev/migration-stack2/win10_aguav2/syncawa_hostb_to_hosta/ && bash run_sync.sh
+cd docs-dev/migration-stack2/win10_aguav2/sync_hosta_to_hostc/    && bash run_sync.sh
+```
+
+---
+
+**Última actualización:** 2026-04-09
+
+```
+
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# .clauderules — Proyecto Agua
+
+Este archivo es leído automáticamente por Claude Code en cada sesión.
+**No contiene reglas directamente** — toda la verdad está modularizada.
+
+## Entry Point
+Lee **CLAUDE.md** para el mapa completo de conocimiento, hosts e infraestructura.
+
+## Mandato Crítico
+Antes de editar cualquier lógica financiera o de estados, consulta:
+→ `.agents/rules/02-reglas-negocio.md`
+
+## Coexistencia de Agentes IA
+Este proyecto es asistido simultáneamente por:
+- **Claude Code** (este agente) → Entry Point: `CLAUDE.md`
+- **Google Antigravity / Gemini** → Entry Point: `GEMINI.md`
+
+Ambos comparten el mismo Ground Truth en `.agents/rules/`, `.agents/skills/` y `.agents/workflows/`.
+No duplicar conocimiento entre CLAUDE.md y GEMINI.md — editar directamente los archivos `.agents/`.
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `08-integridad-ground-truth.md`
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/agua_chatledger/.agents`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# Regla 08: Integridad del Ground Truth (agua_chatledger)
+
+Esta regla protege los assets de configuración compartidos entre Claude Code y Google Antigravity/Gemini.
+**Leer antes de cualquier refactoring, cleanup o reorganización de archivos en agua_chatledger.**
+
+---
+
+## Mapa de assets — rol de cada archivo
+
+| Archivo | Rol | Prohibido |
+|---------|-----|-----------|
+| `.mcp.json` | Config MCP activa — leída automáticamente por Claude y Gemini al iniciar | Vaciar, eliminar, cambiar `docker` por `npx` directo |
+| `.agents/mcp_config.json` | Fuente de referencia — debe ser idéntico a `.mcp.json` | Usarlo como reemplazo de `.mcp.json` |
+| `.clauderules` | Directiva de entrada para Claude — máx ~25 líneas | Agregar notas, JSON, claves, URLs |
+| `CLAUDE.md` | Entry point Claude — índice hacia `.agents/` | Duplicar reglas aquí en lugar de en `.agents/` |
+| `GEMINI.md` | Entry point Gemini — índice hacia `.agents/` | Duplicar reglas aquí en lugar de en `.agents/` |
+| `.agents/rules/` | Verdades permanentes — se leen en cada sesión | Eliminar sin migrar el conocimiento |
+| `docs-dev/ga-cl-ia/entrypoint-patch.sh` | Patch al contenedor Docker para soporte puerto ≠ 3306 | Eliminar — sin él `bdawahost-c` falla con ETIMEDOUT |
+| `docs-dev/ga-cl-ia/docker-compose.yml` | Define contenedor `context7-mcp-mysql` con el patch | Eliminar o cambiar imagen sin validar |
+
+---
+
+## Arquitectura MCP — NO modificar sin entender
+
+Los tres MCPs usan **un solo contenedor Docker** con patches aplicados al arrancar:
+
+```
+Claude/Gemini → .mcp.json → docker exec -i context7-mcp-mysql npx ... mysql://host:PORT/db
+                                    ↓
+                          entrypoint-patch.sh (aplicado al arrancar)
+                          — permite puertos no estándar (Host C: 7002)
+```
+
+**Si se reemplaza `docker exec` por `npx` directo:** el patch no aplica → `bdawahost-c` falla con ETIMEDOUT.
+**Si se vacía `.mcp.json`:** ambos agentes pierden todos los MCPs sin aviso de error claro.
+**Si se elimina `bdawahost-c` de `.mcp.json`:** se pierde acceso a Host C (MariaDB 7002).
+
+---
+
+## Reglas de modificación
+
+### `.mcp.json` y `mcp_config.json`
+- Siempre deben ser **idénticos**
+- Si se edita uno, actualizar el otro en el mismo commit
+- Estructura obligatoria: `docker exec -i context7-mcp-mysql npx -y @f4ww4z/mcp-mysql-server mysql://...`
+- Deben contener los 3 hosts: `bdawahost-a`, `bdawahost-b`, `bdawahost-c`
+
+### Symlinks en repo `agua`
+- Los 7 symlinks son gestionados por `chatledger_sync_ga_lnks.sh`
+- No recrear manualmente sin usar el script
+- No convertir symlinks en archivos reales (rompe la sincronización entre ramas)
+
+### `.clauderules`
+- Solo directivas de comportamiento para Claude (< 30 líneas)
+- Notas, referencias, claves → `docs-dev/ga-cl-ia/claude-ga-leeme.txt`
+
+### Antes de cualquier "cleanup" o refactoring
+1. Ejecutar `bash docs-dev/ga-cl-ia/chatledger_validate.sh`
+2. Si algo falla → corregir antes de continuar
+3. Nunca eliminar un archivo por considerarlo "redundante" sin verificar su rol en esta regla
+
+---
+
+## Historial de incidentes
+
+| Fecha | Incidente | Causa | Fix |
+|-------|-----------|-------|-----|
+| 2026-04-08 | `.mcp.json` vaciado — MCPs rotos en ambos agentes | GA eliminó contenido por considerarlo redundante con `mcp_config.json` | Restaurar contenido Docker + 3 hosts |
+| 2026-04-09 | `settings.json` desincronizado — usaba `npx` directo sin Docker | Restauración incorrecta desde fuente equivocada | Sincronizar con `mcp_config.json` |
+
+---
+
+## Validación rápida (correr antes de commitear)
+
+```bash
+bash /opt/lampp/htdocs/agua/docs-dev/ga-cl-ia/chatledger_validate.sh
+```
+
+Si el script no existe o falla: **no commitear** hasta resolver.
+
+```
+
+</details>
+
+---
+
+<details>
+<summary>Directory: `.agents` (6 items)</summary>
+
+**Path:** `home/carlos/GitHub/agua_chatledger/.agents`
+
+| Name | Type | Size |
+|------|------|------|
+| `INVENTORY.md` | File | 9179 bytes |
+| `README.md` | File | 2515 bytes |
+| `mcp_config.json` | File | 1036 bytes |
+| `rules` | Directory | - |
+| `skills` | Directory | - |
+| `workflows` | Directory | - |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 10 Apr 2026, 11:38 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `GEMINI.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# GEMINI.md - Central Project Context for Agua (MASTER INDEX)
+
+Este archivo es el punto de entrada principal para el asistente de IA (Antigravity/Gemini) y un resumen del contexto del proyecto **Agua**. El conocimiento detallado y las reglas de oro se han distribuido en archivos modulares dentro de `.agents/rules/`.
+
+> [!IMPORTANT]
+> **Gemini**: Debes consultar y seguir las reglas detalladas en el directorio `.agents/rules/` para cada tarea orquestada en este proyecto.
+
+---
+
+## 🗺️ Índice de Reglas y Conocimiento (Ground Truth)
+
+| Regla | Descripción | Archivo |
+| :--- | :--- | :--- |
+| **01** | **Infraestructura y Hosts** | [.agents/rules/01-infra-hosts.md](file:///.agents/rules/01-infra-hosts.md) |
+| **02** | **Diccionario de Reglas por Módulo** | [.agents/rules/02-reglas-negocio.md](file:///.agents/rules/02-reglas-negocio.md) |
+| **03** | **Sincronización de Datos (B -> A)** | [.agents/rules/03-sincronizacion-b-a.md](file:///.agents/rules/03-sincronizacion-b-a.md) |
+| **04** | **Arquitectura MVC y Directorios** | [.agents/rules/04-arquitectura-mvc.md](file:///.agents/rules/04-arquitectura-mvc.md) |
+| **05** | **Despliegue y Automatización (Host C)** | [.agents/rules/05-despliegue-host-c.md](file:///.agents/rules/05-despliegue-host-c.md) |
+| **06** | **Accesos, Rutas y Herramientas (3 hosts, Docker MCP)** | [.agents/rules/06-accesos-rutas.md](file:///.agents/rules/06-accesos-rutas.md) |
+| **07** | **Control de Versiones y Git Workflow** | [.agents/rules/07-git-workflow.md](file:///.agents/rules/07-git-workflow.md) |
+| **08** | **Integridad del Ground Truth — LEER ANTES DE REFACTORIZAR** | [.agents/rules/08-integridad-ground-truth.md](file:///.agents/rules/08-integridad-ground-truth.md) |
+
+---
+
+## 🛠️ Skills Personalizadas (Workflows y Estándares)
+Estas habilidades definen **cómo** ejecuto las tareas técnicas:
+- **[UI/UX Modern Refactor](file:///.agents/skills/skill-ui-modern-refactor/SKILL.md)**: Estándares de CSS/HTML para el Host C.
+- **[Dynamic UI & AJAX](file:///.agents/skills/skill-dynamic-html-ajax/SKILL.md)**: Interactividad con `paxscript.js`.
+- **[Plates Templating Patterns](file:///.agents/skills/skill-plates-templating/SKILL.md)**: Uso del motor de plantillas Views.
+- **[PHP-Migration-74](file:///.agents/skills/skill-migration-php74/SKILL.md)**: Refactorización de PHP 5.5 a 7.4.
+- **[Database Evolution](file:///.agents/skills/skill-database-evolution/SKILL.md)**: Partición de `ligacargos` y migración a MariaDB.
+
+---
+
+## 🏗️ Workflows Disponibles (Procesos Detallados)
+- **[/update-business-data](file:///.agents/workflows/update-business-data.md)**: Sincronización de Datos Frescos de Negocio (Host B a Host A)
+- **[/deploy-to-host-c](file:///.agents/workflows/deploy-to-host-c.md)**: Despliegue de Mejoras y Refactorings en el Host C
+
+---
+
+## 🚨 Módulos Críticos y Auditoría Constante
+Existen funcionalidades core que requieren especial atención para asegurar la congruencia de datos:
+- **Estados de Contrato**: Transiciones entre `1 (ACTIVO)`, `2 (SUSPENSIÓN TEMPORAL)` y `5 (SUSPENSIÓN ADMINISTRATIVA)`.
+- **Cartera Vencida (`carteravencida.php`)**: Validación de deuda morosa.
+- **Corte de Caja (`concentradocortecaja.php`)**: Ingresos diarios contra reportes detallados.
+- **Resumen de Caja (`reportes/concentradocortecajaresumen.php`)**: Consolidación total.
+
+---
+
+## 🚀 Estado Actual: Host C UP & RUNNING (2026-04-07)
+
+- Split `ligacargos` **completado**: 2,513 activa (≥2026) + 192,545 histórico (≤2025)
+- Schema v2 completo + webapp PHP 7.4 adaptada en `feature/upgrade-v2-win-xampp`
+- Pipeline sync B→A→C operativo y validado (7/7 checks OK)
+- Puertos Host C: Apache **7001**, MariaDB **7002**
+- Checklist pase a producción: `docs-dev/migration-stack2/win10_aguav2/host-c-setup/07_transferir_datos.md`
+
+## 🐛 Bugs Host C corregidos (2026-04-07, commit `bd1cb2f`)
+
+Derivados del split `ligacargos`: 5 PHPs usaban `FROM ligacargos` directa (perdían datos ≤2025).
+
+| Archivo | Fix aplicado |
+|---------|-------------|
+| `reportes/listadeudores.php` | Eliminado cross join implícito `ligacargos.monto` → `vw_ligacargos_pendientes.monto` |
+| `reportes/carteravencida.php` | Añadido `OR anio IS NULL` para históricos migrados sin anio |
+| `reportes/concentradocortecajaresumen.php` | `FROM ligacargos` → `FROM vw_ligacargos_all` |
+| `includes/negocio/cargos.php` | SELECT duplicados y UPDATE masivo corregidos (UPDATE ahora aplica en ambas tablas) |
+| `docs-dev/sanemiento-limpieza/reportes/genera_csv.php` | 4 JOINs directos → `vw_ligacargos_all` |
+
+**Regla para nuevos PHPs**: Todo SELECT debe usar `vw_ligacargos_all` o `vw_ligacargos_pendientes`. Ver [skill-database-evolution/SKILL.md](.agents/skills/skill-database-evolution/SKILL.md).
+
+---
+---
+
+## 🏗️ Arquitectura Brain / Ground Truth (2026-04-09)
+
+Todo el contexto de agentes IA vive en `agua_chatledger`. El repo `agua` tiene solo symlinks (8/8).
+**Antes de cualquier refactoring de archivos meta, leer regla 08.**
+
+Validar integridad:
+```bash
+bash docs-dev/ga-cl-ia/chatledger_validate.sh
+```
+
+**Última actualización**: 2026-04-09
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `multi_replace_file_content`
+
+**Tool:** `multi_replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 10 Apr 2026, 11:39 am
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 10 Apr 2026, 11:39 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 10 Apr 2026, 11:39 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 10 Apr 2026, 11:39 am
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+## User Request
+
+SI, haslo y revisa que sucede con /opt/lampp/htdocs/agua/.agents/INVENTORY.md
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `cargos.php`
+**Language:** php
+</details>
+
+---
+
+<details>
+<summary>Conversation History</summary>
+
+# Conversation History
+Here are the conversation IDs, titles, and summaries of your most recent 10 conversations, in reverse chronological order:
+
+<conversation_summaries>
+## Conversation 67884311-645c-4f5a-ae15-979d81d75006: Fixing Duplicate Contract Notes
+- Created: 2026-04-10T02:43:06Z
+- Last modified: 2026-04-10T09:16:11Z
+
+### USER Objective:
+Stabilizing Agua Contract Parity
+
+The user's objective is to finalize the stabilization of the Agua web application by ensuring strict data integrity between physical infrastructure and financial records. Key goals include:
+1. Executing the remaining stabilization tasks identified in the previous session, specifically addressing the "Usuarios Especiales" search filter bug and the exclusion of users with zero contracts.
+2. Auditing historical contract state transitions (2018-present) to ensure financial consistency and prevent "deuda zombi".
+3. Implementing a proactive saneamiento strategy for historical data cleanup, ensuring that all administrative reports and search filters correctly reflect the current state of the V2 schema.
+4. Codifying these stabilization efforts into the project's ground truth documentation to maintain architectural consistency across all development environments.
+
+## Conversation 24485b9b-f530-4a20-8ea3-585e551c238f: Stabilizing User Search Filters
+- Created: 2026-04-09T04:59:38Z
+- Last modified: 2026-04-10T02:20:05Z
+
+### USER Objective:
+Stabilizing Agua Financial Saneamiento
+
+The user's objective is to stabilize the Agua web application by refactoring contract status logic and implementing a robust, web-based financial saneamiento system. Key goals include:
+1. Implementing defensive coding to enforce logical contract state transitions and prevent "Avalancha Punitiva" and "Deuda Zombi".
+2. Developing a centralized, parameter-driven administrative dashboard (`admin/saneamiento/`) for historical data cleanup (2018-2026), specifically targeting "Cargos Fantasma".
+3. Ensuring all saneamiento operations include audit trails and rollback capabilities via a new `batch_id` column to maintain fiscal integrity during the migration to the V2 schema.
+4. Organizing project assets and infrastructure within a dedicated `feature/saneamiento-v2` branch to ensure consistency with Host C migration requirements while maintaining a clean, modular codebase.
+
+## Conversation bdc4ae35-3174-4334-aa14-a427816e51bc: Migrating Assembly V2 Webapp
+- Created: 2026-04-08T17:39:02Z
+- Last modified: 2026-04-09T04:20:54Z
+
+### USER Objective:
+Finalizing Asamblea V2 Attendance Integration
+
+The user's objective is to finalize the standalone 'Asamblea V2' module by ensuring the attendance registration and reporting workflows are fully functional and compatible with the legacy system. Key goals include:
+1. UI/UX Refinement: Improving the admin grid layout and action button styling.
+2. Data Integrity: Ensuring multi-contract users are correctly grouped in the attendance list and ticket generation, while maintaining the legacy TXT report format for compatibility with the existing `asistencias.php` import process.
+3. System Synchronization: Verifying that the generated attendance TXT files remain compatible with the legacy `core.php` processing logic to prevent integration errors.
+4. Architectural Consolidation: Maintaining the `agua_chatledger` repository as the definitive source of truth for all project documentation and configuration, utilizing symlinks to ensure consistency across development environments.
+
+## Conversation aaee12b1-ccf8-44bc-b37a-b2cd531092cf: Stabilizing Host C Application Reports
+- Created: 2026-04-08T04:34:54Z
+- Last modified: 2026-04-08T06:52:29Z
+
+### USER Objective:
+Stabilizing Agua Application Migration
+
+The user's objective is to finalize the stabilization of the Agua web application on the Host C environment by completing a comprehensive audit of legacy code patterns, refactoring deprecated PHP functions to ensure compatibility with PHP 7.4/8.x, and removing obsolete legacy libraries to streamline the codebase. The goal is to ensure full operational integrity with MariaDB 10.4 by verifying that all administrative reports and CRUD operations correctly utilize the V2 split-schema views.
+
+## Conversation 3b5dff64-1c3c-474c-9796-423733a337f5: Tracking Contract Status Changes
+- Created: 2026-04-03T04:29:44Z
+- Last modified: 2026-04-08T05:18:33Z
+
+### USER Objective:
+Tracking Contract Status Changes
+
+The user's objective is to audit the recent status change history for contract #1167, associated with user JOSE GUADALUPE RIOS MALDONADO (userId 1329). The goal is to query the database—specifically checking the `cambios` or relevant audit tables—to determine if the contract's status has been modified recently and, if so, to retrieve the specific details of that transition.
+
+## Conversation 8c334798-0ddd-466f-b9a2-ec9516a28366: Optimizing MariaDB Slow Query Logging
+- Created: 2026-04-07T22:04:49Z
+- Last modified: 2026-04-08T02:03:21Z
+
+### USER Objective:
+Optimizing Contract Data Performance
+
+The user's objective is to resolve performance latency in the `ficha.php` contract view on the Host C environment. The goal is to optimize the database queries—specifically those involving `vw_ligacargos_all` and `cargos`—by refactoring the underlying SQL logic within `includes/negocio/contratos.php` to leverage the previously implemented covering indexes, ensuring faster data retrieval for contract records and associated financial history.
+
+## Conversation eec1714b-ec56-4b11-8988-005796c7496e: Counting Users On Host C
+- Created: 2026-04-08T01:08:50Z
+- Last modified: 2026-04-08T01:26:02Z
+
+### USER Objective:
+Counting Users On Host C
+
+The user's objective is to determine the total number of records in the `users` table on the Host C database environment. This involves connecting to the MariaDB instance (port 7002) on Host C and executing a `SELECT COUNT(*) FROM users;` query to retrieve the current count.
+
+## Conversation 04e85e13-ed07-4863-ae80-0a3e46d05184: 
+- Created: 2026-04-06T18:05:55Z
+- Last modified: 2026-04-07T07:00:49Z
+
+### USER Objective:
+Optimizing XAMPP Infrastructure Performance
+
+The user's objective is to resolve performance latency in the "Agua" web application by optimizing the Windows XAMPP 7.4.33 infrastructure. Key goals include tuning PHP (Opcache) and MariaDB (InnoDB buffer pool/logs) configurations, implementing system-level antivirus exclusions and VM video settings, and executing a database optimization plan that involves indexing, migrating tables to InnoDB, and implementing a historical data split for the `ligacargos` table.
+
+## Conversation f7e3d66a-32b4-4408-b5e7-81800a54b171: Identifying Project Host Configurations
+- Created: 2026-04-04T07:14:32Z
+- Last modified: 2026-04-05T05:30:29Z
+
+### USER Objective:
+Identifying Project Host Configurations
+
+The user's objective is to extract and identify the specific host configurations defined within the CLAUDE.md project documentation file. This information is required to understand the environment setup and ensure proper connectivity for the "Agua" web application.
+
+## Conversation 2efef4ff-9a00-49e5-bcbb-31f503c35747: Establishing Project Context Configuration
+- Created: 2026-04-04T03:30:29Z
+- Last modified: 2026-04-04T07:11:07Z
+
+### USER Objective:
+Centralizing Project Infrastructure And Context
+
+The user's objective is to establish a robust, persistent, and modular technical context for the "Agua" web application. This involves centralizing project documentation, business rules, and architectural standards into a structured `.agents/` directory system, enabling seamless development and migration across Linux/LAMPP and Windows/XAMPP environments. The goal is to provide a single, machine-readable source of truth that supports automated workflows, standardized code refactoring, and consistent database management for both the legacy system and the upcoming V2 migration.
+
+</conversation_summaries>
+
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 10 Apr 2026, 11:42 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+Let me check the INVENTORY.md file and then make the fixes to close the 2 gaps, and also update INVENTORY.md if needed.
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `INVENTORY.md`
+
+**Tool:** `view_file`
+**File:** `.clauderules`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.339164281s
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# INVENTORY.md — Ground Truth de Agentes IA (Claude & Gemini)
+
+Inventario vivo de todo el conocimiento estructurado disponible para **Claude Code** y **Google Antigravity/Gemini** en el proyecto Agua.
+
+> **Fuente de verdad física:** `/home/carlos/GitHub/agua_chatledger/`
+> **Acceso vía symlink:** `/opt/lampp/htdocs/agua/` (`.agents`, `CLAUDE.md`, `GEMINI.md`, etc.)
+> **Actualizar este archivo** cada vez que se agregue, modifique o elimine un asset.
+
+---
+
+## Arquitectura de Symlinks
+
+Todos los assets de Ground Truth son symlinks en el repo `agua` — válidos en **ambas ramas**.
+Git en `agua` **nunca reporta cambios** en su contenido. Todo se commitea en `agua_chatledger`.
+
+| Symlink en repo `agua` | Destino físico | Estado | Verificado |
+|---|---|---|---|
+| `.chatledger` | `/home/carlos/GitHub/agua_chatledger/` | ✓ OK | 2026-04-09 |
+| `.agents` | `.chatledger/.agents/` | ✓ OK | 2026-04-09 |
+| `.claude` | `.chatledger/.claude/` | ✓ OK | 2026-04-09 |
+| `CLAUDE.md` | `.chatledger/CLAUDE.md` | ✓ OK | 2026-04-09 |
+| `GEMINI.md` | `.chatledger/GEMINI.md` | ✓ OK | 2026-04-09 |
+| `.clauderules` | `.chatledger/.clauderules` | ✓ OK | 2026-04-09 |
+| `.mcp.json` | `.chatledger/.mcp.json` | ✓ OK | 2026-04-09 |
+| `docs-dev/ga-cl-ia` | `/home/carlos/GitHub/agua_chatledger/docs-dev/ga-cl-ia/` | ✓ OK | 2026-04-09 |
+
+> **Nota:** `docs-dev/ga-cl-ia` es symlink gestionado por `chatledger_sync_ga_lnks.sh`.
+> El directorio real vive en `agua_chatledger/docs-dev/ga-cl-ia/` — git en `agua` lo ve como symlink.
+
+### Directorios reales (no symlinks) — por diseño
+
+| Archivo | Ubicación física | Propósito |
+|---|---|---|
+| `.claude/settings.json` | `/opt/lampp/htdocs/agua/.claude/settings.json` | Config Claude Code: modelo, permisos, MCP servers (Docker), 3 hosts |
+| `.claude/settings.local.json` | `agua_chatledger/.claude/settings.local.json` | Overrides locales Claude Code (permisos adicionales, MCP habilitados) |
+| `.clauderules` | `agua_chatledger/.clauderules` | Directiva de entrada para Claude: apunta a CLAUDE.md y mandato crítico |
+| `.mcp.json` | `agua_chatledger/.mcp.json` | Config MCP activa leída por Claude y Gemini — Docker + 3 hosts |
+| `.agents/mcp_config.json` | `agua_chatledger/.agents/mcp_config.json` | Fuente de referencia de MCP — debe ser idéntico a `.mcp.json` |
+| `.agents/README.md` | `agua_chatledger/.agents/README.md` | Índice y guía de estructura del Ground Truth |
+| `.agents/INVENTORY.md` | `agua_chatledger/.agents/INVENTORY.md` | Este archivo — inventario vivo de todos los assets |
+
+> **Todos los archivos meta viven en `agua_chatledger`** — `agua` solo tiene symlinks. `.claude/` es symlink desde 2026-04-09.
+> **`.mcp.json` y `mcp_config.json` deben mantenerse idénticos** — si se edita uno, actualizar el otro.
+
+### Regla crítica: `.mcp.json` NO debe eliminarse ni vaciarse
+
+`.mcp.json` es el archivo que **Claude Code y Gemini leen automáticamente** para cargar los MCP servers.
+`mcp_config.json` en `.agents/` es la fuente de referencia — deben ser idénticos.
+Eliminar o vaciar `.mcp.json` rompe los MCPs en ambos agentes sin aviso.
+
+Para recrear todos los symlinks en un equipo nuevo:
+```bash
+bash docs-dev/ga-cl-ia/chatledger_sync_ga_lnks.sh
+```
+
+---
+
+## Reglas (`rules/`)
+
+| # | Archivo | Nombre | Cubre | Última modificación |
+|---|---|---|---|---|
+| 01 | `01-infra-hosts.md` | Infraestructura y Hosts | Definición de Hosts A/B/C, puertos, accesos, propósito de cada ambiente | 2026-04-09 |
+| 02 | `02-reglas-negocio.md` | Reglas de Negocio | Facturación, estados de contrato, límite de tomas, split ligacargos, módulos críticos | 2026-04-08 |
+| 03 | `03-sincronizacion-b-a.md` | Sincronización B→A | Procedimiento de refresco de datos desde Host B (producción) a Host A (desarrollo) | 2026-04-08 |
+| 04 | `04-arquitectura-mvc.md` | Arquitectura MVC | Estructura de directorios, capas MVC, localización de lógica de negocio | 2026-04-08 |
+| 05 | `05-despliegue-host-c.md` | Despliegue Host C | Migración e implementación en Host C (MariaDB 10.4.27 / XAMPP 7.4.33 / Windows) | 2026-04-08 |
+| 06 | `06-accesos-rutas.md` | Accesos, Rutas y Herramientas | Credenciales y rutas web/DB de los 3 hosts, arquitectura Docker MCP, regla MCP vs CLI MySQL | 2026-04-09 |
+| 07 | `07-git-workflow.md` | Control de Versiones | Ramas, symlinks Ground Truth, protocolo cambio de rama (4 pasos), tabla qué commitear en cada repo | 2026-04-09 |
+| 08 | `08-integridad-ground-truth.md` | Integridad del Ground Truth | Rol de cada asset, qué está prohibido modificar, historial de incidentes, cómo validar antes de commitear | 2026-04-09 |
+
+---
+
+## Skills (`skills/`)
+
+| Directorio | Nombre | Cubre | Última modificación |
+|---|---|---|---|
+| `skill-database-evolution/` | Database Evolution & Migration | Partición histórica de `ligacargos`, migración MySQL→MariaDB, Host A→C | 2026-04-08 |
+| `skill-dynamic-html-ajax/` | Dynamic UI & AJAX | Interactividad dinámica con jQuery/JS, estándar `paxscript.js`, peticiones AJAX | 2026-04-08 |
+| `skill-migration-php74/` | PHP Migration & Refactoring | Refactorización PHP 5.5 → 7.4 para Host C, compatibilidad de sintaxis | 2026-04-08 |
+| `skill-plates-templating/` | Plates Templating Patterns | Motor Plates v3.3, patrones de vistas, layouts, herencia de templates | 2026-04-08 |
+| `skill-ui-modern-refactor/` | UI/UX Modern Refactor | Transformación de layouts legado a Flexbox/Grid/Responsive | 2026-04-08 |
+
+---
+
+## Workflows (`workflows/`)
+
+| Archivo | Nombre | Cubre | Última modificación |
+|---|---|---|---|
+| `deploy-to-host-c.md` | Deploy to Host C | Refresco de datos y despliegue de cambios en Host C (v2 MariaDB) — dos escenarios | 2026-04-08 |
+| `update-business-data.md` | Sync B→A | Sincronización segura de datos frescos desde Host B (producción) a Host A | 2026-04-08 |
+
+---
+
+## Documentación IA (`docs-dev/ga-cl-ia/`)
+
+> Symlink a `agua_chatledger/docs-dev/ga-cl-ia/` — aplica en todas las ramas.
+> Commitear cambios en `agua_chatledger`, no en `agua`.
+
+| Archivo | Descripción | Última modificación |
+|---|---|---|
+| `chatledger_sync_ga_lnks.sh` | Crea/verifica los 7 symlinks del Ground Truth e instala el git hook pre-commit. Re-ejecutable. | 2026-04-09 |
+| `chatledger_validate.sh` | Valida integridad del Ground Truth: symlinks, .mcp.json, mcp_config.json, .clauderules, Docker. | 2026-04-09 |
+| `install-hooks.sh` | Instala el git hook pre-commit en agua_chatledger (bloquea commits si validate falla). | 2026-04-09 |
+| `docker-compose.yml` | Define contenedor `context7-mcp-mysql` con patch para soporte de puertos no estándar. | 2026-04-09 |
+| `entrypoint-patch.sh` | Aplica 3 patches a `@f4ww4z/mcp-mysql-server` al arrancar — permite puerto 7002 (Host C). | 2026-04-09 |
+| `issue-mcp-mysql-port-no-estandar.md` | Diagnóstico completo del bug de puerto en el package MCP y la solución con patches. | 2026-04-09 |
+| `voxd-instalacion.md` | Instalación y optimización de Voxd en Ubuntu 22.04 con CUDA/GTX 1050 Ti para español México. | 2026-04-09 |
+| `voxd-restore-optimizations.sh` | Restaura/verifica todas las optimizaciones de Voxd post-update. | 2026-04-09 |
+| `voxd-reporte-funcional.md` | Reporte técnico-funcional completo de la instalación Voxd en Host Roja Dell S1 (stack, arquitectura, issues resueltos, estado operativo). | 2026-04-10 |
+| `voxd-oci-viabilidad.md` | Análisis de viabilidad de correr Whisper/Voxd en VM OCI Always Free ARM A1; modelos recomendados, benchmarks estimados, casos de uso y egress. | 2026-04-10 |
+| `claude-ga-leeme.txt` | Notas personales, referencias, claves y recursos para Claude y Gemini. Repo privado. | 2026-04-09 |
+| `promts/` | Prompts de referencia para iniciar sesiones con Claude y Gemini. | 2026-04-09 |
+
+---
+
+## Gaps detectados — Áreas sin documentar
+
+| Área | Prioridad | Notas |
+|---|---|---|
+| Módulo Caja / Corte diario | Alta | `concentradocortecaja.php` es módulo crítico sin skill dedicada |
+| Módulo Cartera Vencida | Alta | `carteravencida.php` sin regla específica más allá de la 02 |
+| Cambio de Estados de contrato | Alta | Transiciones 1→2→5 mencionadas en regla 02 pero sin workflow dedicado |
+| Testing / Validación | Media | No hay skill de pruebas ni procedimiento de QA |
+| Módulo Asamblea | Media | Módulo activo sin regla o skill documentada |
+| Reportes | Baja | `concentradocortecajaresumen.php` sin documentación de agentes |
+
+---
+
+## Cómo mantener este inventario
+
+1. **Al crear un nuevo asset** (regla/skill/workflow/doc): agregar fila en la sección correspondiente con fecha.
+2. **Al modificar un asset existente**: actualizar la fecha en su fila.
+3. **Al eliminar un asset**: remover la fila y mover a una sección `## Eliminados` con la fecha de baja.
+4. **Al detectar un gap cubierto**: mover la fila de Gaps a la sección correspondiente.
+5. **Al validar el inventario**: verificar existencia real con `ls` y fechas con `git log` en `agua_chatledger`.
+
+---
+
+**Última actualización:** 2026-04-09 — CLAUDE.md y GEMINI.md actualizados con regla 08 y arquitectura brain. Feature branch alineada (8/8 symlinks idénticos a main). Todo el brain en agua_chatledger.
+
+```
+
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# .clauderules — Proyecto Agua
+
+Este archivo es leído automáticamente por Claude Code en cada sesión.
+**No contiene reglas directamente** — toda la verdad está modularizada.
+
+## Entry Point
+Lee **CLAUDE.md** para el mapa completo de conocimiento, hosts e infraestructura.
+
+## Mandato Crítico
+Antes de editar cualquier lógica financiera o de estados, consulta:
+→ `.agents/rules/02-reglas-negocio.md`
+
+## Coexistencia de Agentes IA
+Este proyecto es asistido simultáneamente por:
+- **Claude Code** (este agente) → Entry Point: `CLAUDE.md`
+- **Google Antigravity / Gemini** → Entry Point: `GEMINI.md`
+
+Ambos comparten el mismo Ground Truth en `.agents/rules/`, `.agents/skills/` y `.agents/workflows/`.
+No duplicar conocimiento entre CLAUDE.md y GEMINI.md — editar directamente los archivos `.agents/`.
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+**Tool:** `multi_replace_file_content`
+
+**Tool:** `multi_replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 10 Apr 2026, 11:46 am
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 10 Apr 2026, 11:46 am
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 10 Apr 2026, 11:46 am
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
 
 ---
 
