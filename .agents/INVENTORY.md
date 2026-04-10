@@ -17,6 +17,7 @@ Git en `agua` **nunca reporta cambios** en su contenido. Todo se commitea en `ag
 |---|---|---|---|
 | `.chatledger` | `/home/carlos/GitHub/agua_chatledger/` | ✓ OK | 2026-04-09 |
 | `.agents` | `.chatledger/.agents/` | ✓ OK | 2026-04-09 |
+| `.claude` | `.chatledger/.claude/` | ✓ OK | 2026-04-09 |
 | `CLAUDE.md` | `.chatledger/CLAUDE.md` | ✓ OK | 2026-04-09 |
 | `GEMINI.md` | `.chatledger/GEMINI.md` | ✓ OK | 2026-04-09 |
 | `.clauderules` | `.chatledger/.clauderules` | ✓ OK | 2026-04-09 |
@@ -38,7 +39,7 @@ Git en `agua` **nunca reporta cambios** en su contenido. Todo se commitea en `ag
 | `.agents/README.md` | `agua_chatledger/.agents/README.md` | Índice y guía de estructura del Ground Truth |
 | `.agents/INVENTORY.md` | `agua_chatledger/.agents/INVENTORY.md` | Este archivo — inventario vivo de todos los assets |
 
-> **Nunca convertir `.claude/` a symlink.** Los dos archivos tienen roles distintos y coexisten.
+> **Todos los archivos meta viven en `agua_chatledger`** — `agua` solo tiene symlinks. `.claude/` es symlink desde 2026-04-09.
 > **`.mcp.json` y `mcp_config.json` deben mantenerse idénticos** — si se edita uno, actualizar el otro.
 
 ### Regla crítica: `.mcp.json` NO debe eliminarse ni vaciarse
@@ -133,4 +134,4 @@ bash docs-dev/ga-cl-ia/chatledger_sync_ga_lnks.sh
 
 ---
 
-**Última actualización:** 2026-04-09 — Regla 08 integridad añadida, script chatledger_validate.sh + git hook pre-commit instalado, install-hooks.sh integrado en sync script, INVENTORY completo (7 symlinks, archivos reales, docs-dev)
+**Última actualización:** 2026-04-09 — .claude/ migrado a chatledger y convertido a symlink (8/8 symlinks), validate.sh actualizado a 7 secciones, sync script paso 8 añadido

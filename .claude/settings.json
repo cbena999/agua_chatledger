@@ -1,0 +1,58 @@
+{
+    "$schema": "https://json.schemastore.org/claude-code-settings.json",
+    "model": "claude-sonnet-4-6",
+    "permissions": {
+        "allow": [
+            "Read(*)",
+            "Search(*)",
+            "Edit(*)",
+            "Write(*)",
+            "Bash(git *)",
+            "Bash(npm *)",
+            "Bash(pnpm *)",
+            "Bash(yarn *)",
+            "Bash(ls)",
+            "Bash(pwd)",
+            "Bash(/opt/lampp/bin/php *)",
+            "Bash(/opt/lampp/bin/mysql *)"
+        ],
+        "deny": [
+            "Read(./.env)",
+            "Read(./.env.*)",
+            "Read(~/.ssh/**)",
+            "Bash(rm -rf *)",
+            "Bash(sudo *)"
+        ]
+    },
+    "askBeforeRunningTool": true,
+    "effortLevel": "medium",
+    "mcpServers": {
+        "bdawahost-a": {
+            "command": "docker",
+            "args": [
+                "exec", "-i", "context7-mcp-mysql",
+                "npx", "-y", "@f4ww4z/mcp-mysql-server",
+                "mysql://root:comite_2026@127.0.0.1:3306/awa"
+            ],
+            "env": { "DOCKER_HOST": "unix:///var/run/docker.sock" }
+        },
+        "bdawahost-b": {
+            "command": "docker",
+            "args": [
+                "exec", "-i", "context7-mcp-mysql",
+                "npx", "-y", "@f4ww4z/mcp-mysql-server",
+                "mysql://root:sdrastbuy@192.168.1.120:3306/awa"
+            ],
+            "env": { "DOCKER_HOST": "unix:///var/run/docker.sock" }
+        },
+        "bdawahost-c": {
+            "command": "docker",
+            "args": [
+                "exec", "-i", "context7-mcp-mysql",
+                "npx", "-y", "@f4ww4z/mcp-mysql-server",
+                "mysql://root:comite_2026@192.168.1.128:7002/awa"
+            ],
+            "env": { "DOCKER_HOST": "unix:///var/run/docker.sock" }
+        }
+    }
+}

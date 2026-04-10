@@ -184,6 +184,17 @@ make_symlink \
     "docs-dev/ga-cl-ia"
 
 # ------------------------------------------------------------------
+# 8. .claude  (settings.json + settings.local.json en chatledger)
+# ------------------------------------------------------------------
+echo ""
+echo "── 8. .claude ───────────────────────────────────────"
+mkdir -p "$CHATLEDGER_DIR/.claude"
+make_symlink \
+    "$REPO_DIR/.claude" \
+    ".chatledger/.claude" \
+    ".claude"
+
+# ------------------------------------------------------------------
 # Resumen final
 # ------------------------------------------------------------------
 echo ""
@@ -198,6 +209,7 @@ LINKS=(
     "$REPO_DIR/.clauderules"
     "$REPO_DIR/.mcp.json"
     "$REPO_DIR/docs-dev/ga-cl-ia"
+    "$REPO_DIR/.claude"
 )
 ALL_OK=true
 for L in "${LINKS[@]}"; do
@@ -218,10 +230,10 @@ else
 fi
 
 # ------------------------------------------------------------------
-# 8. Instalar git hook pre-commit en agua_chatledger
+# 9. Instalar git hook pre-commit en agua_chatledger
 # ------------------------------------------------------------------
 echo ""
-echo "── 8. Git hook pre-commit ───────────────────────────"
+echo "── 9. Git hook pre-commit ───────────────────────────"
 INSTALL_HOOKS="$CHATLEDGER_DIR/docs-dev/ga-cl-ia/install-hooks.sh"
 if [ -f "$INSTALL_HOOKS" ]; then
     bash "$INSTALL_HOOKS"

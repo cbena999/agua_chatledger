@@ -40,6 +40,7 @@ echo -e "${BOLD}── 1. Symlinks en repo agua ──────────�
 declare -A EXPECTED_LINKS=(
     ["$REPO_DIR/.chatledger"]="$CHATLEDGER_DIR"
     ["$REPO_DIR/.agents"]=".chatledger/.agents"
+    ["$REPO_DIR/.claude"]=".chatledger/.claude"
     ["$REPO_DIR/CLAUDE.md"]=".chatledger/CLAUDE.md"
     ["$REPO_DIR/GEMINI.md"]=".chatledger/GEMINI.md"
     ["$REPO_DIR/.clauderules"]=".chatledger/.clauderules"
@@ -61,10 +62,34 @@ for LINK in "${!EXPECTED_LINKS[@]}"; do
 done
 
 # ------------------------------------------------------------------
-# 2. .mcp.json — no vacío y contiene los 3 hosts
+# 2. .claude — settings.json y settings.local.json en chatledger
 # ------------------------------------------------------------------
 echo ""
-echo -e "${BOLD}── 2. .mcp.json — contenido y hosts ────────────────${RESET}"
+echo -e "${BOLD}── 2. .claude — archivos de configuración ───────────${RESET}"
+
+for F in "settings.json" "settings.local.json"; do
+    FPATH="$CHATLEDGER_DIR/.claude/$F"
+    if [ ! -f "$FPATH" ]; then
+        fail ".claude/$F no existe en chatledger"
+    elif [ ! -s "$FPATH" ]; then
+        fail ".claude/$F está vacío"
+    else
+        ok ".claude/$F existe"
+    fi
+done
+
+# Verificar que settings.json tiene configuración Docker MCP
+if grep -q '"docker"' "$CHATLEDGER_DIR/.claude/settings.json" 2>/dev/null; then
+    ok ".claude/settings.json usa comando docker (MCP correcto)"
+else
+    fail ".claude/settings.json no usa docker — MCP puede estar mal configurado"
+fi
+
+# ------------------------------------------------------------------
+# 3. .mcp.json — no vacío y contiene los 3 hosts
+# ------------------------------------------------------------------
+echo ""
+echo -e "${BOLD}── 3. .mcp.json — contenido y hosts ────────────────${RESET}"
 
 MCP_FILE="$CHATLEDGER_DIR/.mcp.json"
 
@@ -101,7 +126,7 @@ fi
 # 3. mcp_config.json == .mcp.json (deben ser idénticos)
 # ------------------------------------------------------------------
 echo ""
-echo -e "${BOLD}── 3. mcp_config.json idéntico a .mcp.json ─────────${RESET}"
+echo -e "${BOLD}── 4. mcp_config.json idéntico a .mcp.json ─────────${RESET}"
 
 MCP_CONFIG="$CHATLEDGER_DIR/.agents/mcp_config.json"
 
@@ -119,7 +144,7 @@ fi
 # 4. .clauderules — no contaminado (máx 35 líneas)
 # ------------------------------------------------------------------
 echo ""
-echo -e "${BOLD}── 4. .clauderules — tamaño y contenido ────────────${RESET}"
+echo -e "${BOLD}── 5. .clauderules — tamaño y contenido ────────────${RESET}"
 
 CLAUDERULES="$CHATLEDGER_DIR/.clauderules"
 LINES=$(wc -l < "$CLAUDERULES" 2>/dev/null || echo 0)
@@ -141,7 +166,7 @@ fi
 # 5. Archivos críticos de Docker MCP
 # ------------------------------------------------------------------
 echo ""
-echo -e "${BOLD}── 5. Assets Docker MCP ─────────────────────────────${RESET}"
+echo -e "${BOLD}── 6. Assets Docker MCP ─────────────────────────────${RESET}"
 
 for F in \
     "$CHATLEDGER_DIR/docs-dev/ga-cl-ia/docker-compose.yml" \
@@ -164,7 +189,7 @@ fi
 # 6. Contenedor Docker corriendo (warning, no error)
 # ------------------------------------------------------------------
 echo ""
-echo -e "${BOLD}── 6. Contenedor Docker context7-mcp-mysql ──────────${RESET}"
+echo -e "${BOLD}── 7. Contenedor Docker context7-mcp-mysql ──────────${RESET}"
 
 if docker ps --format '{{.Names}}' 2>/dev/null | grep -q "context7-mcp-mysql"; then
     ok "context7-mcp-mysql está corriendo"
