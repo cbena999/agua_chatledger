@@ -12,6 +12,8 @@ Este documento es una entidad viva para registrar el descubrimiento y clasificac
 | **C01** | Límite de **2 tomas (contratos)** activas por usuario en el mismo domicilio físico. | Implementada |
 | **C02** | Prohibida la modificación de estado de contratos en `4 (SUSPENSIÓN DEFINITIVA)`. | Implementada |
 | **C03** | Registro obligatorio de folios únicos por cada nuevo contrato. | Validada |
+| **C04** | **Motor de Paridad Universal**: Sincronización obligatoria; si una toma se activa/reconecta, su cargo anual debe restaurarse automáticamente. | Implementada |
+| **C05** | **Limpieza por Suspensión Definitiva**: Al pasar a Estado 4, se debe forzar la desconexión física y la cancelación de deuda anual actual. | Implementada |
 
 ### 📂 Módulo 02: Facturación, Cargos y Recargos
 | ID | Regla | Estado |

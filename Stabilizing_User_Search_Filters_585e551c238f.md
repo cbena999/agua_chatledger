@@ -4,10 +4,10 @@
 
 | Field | Value |
 |-------|-------|
-| **Trajectory ID** | `f6d24826-d69a-4396-8d4c-adca244e5a40` |
+| **Trajectory ID** | `c3ed4d80-5844-46d7-893c-429eb158d3ea` |
 | **Cascade ID** | `24485b9b-f530-4a20-8ea3-585e551c238f` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 480 |
+| **Total Steps** | 478 |
 | **Started** | 8 Apr 2026, 10:59 pm |
 | **Completed** | 9 Apr 2026, 5:06 pm |
 
@@ -16168,32 +16168,6 @@ function guardaNuevoContrato($id, $usr, $domicilio, $tipo, $agua, $drenaje, $mas
 }
 ?>
 ```
-
-</details>
-
----
-
-<details>
-<summary>System Message</summary>
-
-The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
-
-<EPHEMERAL_MESSAGE>
-<planning_mode>
-You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
-If the user's request warrants a plan then follow this workflow:
-1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time. The exception is if the task is trivially simple.
-2. After your research is complete, ask the user any open questions using the ask_question tool. Don't use the tool to ask trivial questions like 'should I proceed?'.
-3. Create an implementation plan artifact with `request_feedback = true`. The user must approve the plan before you are allowed to proceed.
-4. After receiving approval, begin execution. Create and update the task artifact as you work.
-5. Verify any work that you have done.
-6. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
-If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
-</planning_mode>
-<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
-</EPHEMERAL_MESSAGE>
-
-**Triggered Heuristics:** planning_mode, bash_command_reminder
 
 </details>
 
