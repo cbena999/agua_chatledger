@@ -1,7 +1,7 @@
 # Issues Resueltos — Sesión 2026-04-10 (UX Tweaks Formulario Edición)
 **Conversación:** `a966039d-cd86-440d-b61b-0788fab82e28`
 **Rama:** `feature/upgrade-v2-win-xampp`
-**Commit:** `fb40ae7`
+**Commits:** `fb40ae7` · `ad6d580`
 
 ---
 
@@ -35,17 +35,35 @@ El título del panel de referencia de tomas incluía el texto `(referencia — s
 
 ---
 
+## Issue 3 — Ajuste Fino: Botón Más Compacto y Panel de Tomas Más Arriba
+
+### Scope Funcional
+El botón "Guardar Cambios" resultó visualmente grande después de su reubicación, y el panel de tomas dejaba un margen excesivo que empujaba la sección "Acciones sobre el presente contrato" fuera de la vista sin scroll.
+
+**Botón:** `padding 12/28px, font-size 16px` → `padding 7/18px, font-size 13px` — tamaño proporcional al contexto del formulario.  
+**Panel tomas:** `margin-top 20px, padding 20px` → `margin-top 6px, padding 8px` — sube ~1.5 renglones.
+
+### Scope Técnico
+- **Archivo:** `views/contratos/ficha.php` — commit `ad6d580`
+- Campo metros: `<br><br>` → `<br>` (un salto menos antes del botón).
+- Botón: `padding 12px 28px` → `7px 18px`, `font-size 16px` → `13px`, `border-radius 8px` → `6px`.
+- `div` flex del panel: `padding: 20px 0` → `8px 0`, `margin-top: 20px` → `6px`.
+
+---
+
 ## Archivos Modificados
+
 
 | Archivo | Repo | Tipo de cambio |
 |:---|:---:|:---|
-| `views/contratos/ficha.php` | `agua` | UX: reposición botón + limpieza label |
+| `views/contratos/ficha.php` (`fb40ae7`) | `agua` | UX: reposición botón + limpieza label |
+| `views/contratos/ficha.php` (`ad6d580`) | `agua` | UX: botón compacto + panel tomas más arriba |
 
 ## Verificación
 
 | Check | Resultado |
 |:---|:---:|
-| `php -l ficha.php` | ✅ Sin errores |
+| `php -l ficha.php` (ambos commits) | ✅ Sin errores |
 | Verificación visual por usuario | ✅ Confirmado |
 
 ---
