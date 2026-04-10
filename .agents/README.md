@@ -29,8 +29,9 @@ Es compartido por todos los agentes IA que asisten el proyecto:
 | [03-sincronizacion-b-a.md](rules/03-sincronizacion-b-a.md) | Proceso de sincronización Host B → A |
 | [04-arquitectura-mvc.md](rules/04-arquitectura-mvc.md) | MVC, Plates, ruteador, paxscript |
 | [05-despliegue-host-c.md](rules/05-despliegue-host-c.md) | Scripts versionados para Host C con Rollback |
-| [06-accesos-rutas.md](rules/06-accesos-rutas.md) | Binarios XAMPP, acceso web, credenciales locales |
+| [06-accesos-rutas.md](rules/06-accesos-rutas.md) | Credenciales 3 hosts, arquitectura Docker MCP, regla MCP vs CLI |
 | [07-git-workflow.md](rules/07-git-workflow.md) | Ramas, commits, push por host |
+| [08-integridad-ground-truth.md](rules/08-integridad-ground-truth.md) | Qué está prohibido modificar, validación pre-commit, historial de incidentes |
 
 ---
 

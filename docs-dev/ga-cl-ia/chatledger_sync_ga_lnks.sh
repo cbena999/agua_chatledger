@@ -212,12 +212,26 @@ done
 echo ""
 if [ "$ALL_OK" = true ]; then
     echo -e "${GREEN}✓ Todos los symlinks están correctos.${RESET}"
-    echo ""
-    echo "  Próximos pasos recomendados:"
-    echo "  1. git -C $CHATLEDGER_DIR add -A && git -C $CHATLEDGER_DIR commit -m 'sync: contenido migrado'"
-    echo "  2. git -C $CHATLEDGER_DIR push origin master"
 else
     echo -e "${RED}✗ Algunos symlinks fallaron. Revisar errores arriba.${RESET}"
     exit 1
 fi
+
+# ------------------------------------------------------------------
+# 8. Instalar git hook pre-commit en agua_chatledger
+# ------------------------------------------------------------------
+echo ""
+echo "── 8. Git hook pre-commit ───────────────────────────"
+INSTALL_HOOKS="$CHATLEDGER_DIR/docs-dev/ga-cl-ia/install-hooks.sh"
+if [ -f "$INSTALL_HOOKS" ]; then
+    bash "$INSTALL_HOOKS"
+else
+    info "install-hooks.sh no encontrado — hook no instalado"
+fi
+
+echo "======================================================"
+echo ""
+echo "  Próximos pasos recomendados:"
+echo "  1. git -C $CHATLEDGER_DIR add -A && git -C $CHATLEDGER_DIR commit -m 'sync: symlinks y hooks verificados'"
+echo "  2. git -C $CHATLEDGER_DIR push origin main"
 echo "======================================================"

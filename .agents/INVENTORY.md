@@ -13,15 +13,39 @@ Inventario vivo de todo el conocimiento estructurado disponible para **Claude Co
 Todos los assets de Ground Truth son symlinks en el repo `agua` — válidos en **ambas ramas**.
 Git en `agua` **nunca reporta cambios** en su contenido. Todo se commitea en `agua_chatledger`.
 
-| Symlink en repo `agua` | Destino físico | Estado |
+| Symlink en repo `agua` | Destino físico | Estado | Verificado |
+|---|---|---|---|
+| `.chatledger` | `/home/carlos/GitHub/agua_chatledger/` | ✓ OK | 2026-04-09 |
+| `.agents` | `.chatledger/.agents/` | ✓ OK | 2026-04-09 |
+| `CLAUDE.md` | `.chatledger/CLAUDE.md` | ✓ OK | 2026-04-09 |
+| `GEMINI.md` | `.chatledger/GEMINI.md` | ✓ OK | 2026-04-09 |
+| `.clauderules` | `.chatledger/.clauderules` | ✓ OK | 2026-04-09 |
+| `.mcp.json` | `.chatledger/.mcp.json` | ✓ OK | 2026-04-09 |
+| `docs-dev/ga-cl-ia` | `/home/carlos/GitHub/agua_chatledger/docs-dev/ga-cl-ia/` | ✓ OK | 2026-04-09 |
+
+> **Nota:** `docs-dev/ga-cl-ia` es symlink gestionado por `chatledger_sync_ga_lnks.sh`.
+> El directorio real vive en `agua_chatledger/docs-dev/ga-cl-ia/` — git en `agua` lo ve como symlink.
+
+### Directorios reales (no symlinks) — por diseño
+
+| Archivo | Ubicación física | Propósito |
 |---|---|---|
-| `.chatledger` | `/home/carlos/GitHub/agua_chatledger/` | ✓ OK |
-| `.agents` | `.chatledger/.agents/` | ✓ OK |
-| `CLAUDE.md` | `.chatledger/CLAUDE.md` | ✓ OK |
-| `GEMINI.md` | `.chatledger/GEMINI.md` | ✓ OK |
-| `.clauderules` | `.chatledger/.clauderules` | ✓ OK |
-| `.mcp.json` | `.chatledger/.mcp.json` | ✓ OK |
-| `docs-dev/ga-cl-ia/` | `/home/carlos/GitHub/agua_chatledger/docs-dev/ga-cl-ia/` | ✓ OK |
+| `.claude/settings.json` | `/opt/lampp/htdocs/agua/.claude/settings.json` | Config Claude Code: modelo, permisos, MCP servers (Docker), 3 hosts |
+| `.claude/settings.local.json` | `agua_chatledger/.claude/settings.local.json` | Overrides locales Claude Code (permisos adicionales, MCP habilitados) |
+| `.clauderules` | `agua_chatledger/.clauderules` | Directiva de entrada para Claude: apunta a CLAUDE.md y mandato crítico |
+| `.mcp.json` | `agua_chatledger/.mcp.json` | Config MCP activa leída por Claude y Gemini — Docker + 3 hosts |
+| `.agents/mcp_config.json` | `agua_chatledger/.agents/mcp_config.json` | Fuente de referencia de MCP — debe ser idéntico a `.mcp.json` |
+| `.agents/README.md` | `agua_chatledger/.agents/README.md` | Índice y guía de estructura del Ground Truth |
+| `.agents/INVENTORY.md` | `agua_chatledger/.agents/INVENTORY.md` | Este archivo — inventario vivo de todos los assets |
+
+> **Nunca convertir `.claude/` a symlink.** Los dos archivos tienen roles distintos y coexisten.
+> **`.mcp.json` y `mcp_config.json` deben mantenerse idénticos** — si se edita uno, actualizar el otro.
+
+### Regla crítica: `.mcp.json` NO debe eliminarse ni vaciarse
+
+`.mcp.json` es el archivo que **Claude Code y Gemini leen automáticamente** para cargar los MCP servers.
+`mcp_config.json` en `.agents/` es la fuente de referencia — deben ser idénticos.
+Eliminar o vaciar `.mcp.json` rompe los MCPs en ambos agentes sin aviso.
 
 Para recrear todos los symlinks en un equipo nuevo:
 ```bash
@@ -39,8 +63,9 @@ bash docs-dev/ga-cl-ia/chatledger_sync_ga_lnks.sh
 | 03 | `03-sincronizacion-b-a.md` | Sincronización B→A | Procedimiento de refresco de datos desde Host B (producción) a Host A (desarrollo) | 2026-04-08 |
 | 04 | `04-arquitectura-mvc.md` | Arquitectura MVC | Estructura de directorios, capas MVC, localización de lógica de negocio | 2026-04-08 |
 | 05 | `05-despliegue-host-c.md` | Despliegue Host C | Migración e implementación en Host C (MariaDB 10.4.27 / XAMPP 7.4.33 / Windows) | 2026-04-08 |
-| 06 | `06-accesos-rutas.md` | Accesos y Seguridad | Credenciales y rutas de acceso web/DB para Hosts A y B | 2026-04-08 |
+| 06 | `06-accesos-rutas.md` | Accesos, Rutas y Herramientas | Credenciales y rutas web/DB de los 3 hosts, arquitectura Docker MCP, regla MCP vs CLI MySQL | 2026-04-09 |
 | 07 | `07-git-workflow.md` | Control de Versiones | Ramas, symlinks Ground Truth, protocolo cambio de rama (4 pasos), tabla qué commitear en cada repo | 2026-04-09 |
+| 08 | `08-integridad-ground-truth.md` | Integridad del Ground Truth | Rol de cada asset, qué está prohibido modificar, historial de incidentes, cómo validar antes de commitear | 2026-04-09 |
 
 ---
 
@@ -72,14 +97,16 @@ bash docs-dev/ga-cl-ia/chatledger_sync_ga_lnks.sh
 
 | Archivo | Descripción | Última modificación |
 |---|---|---|
-| `chatledger_sync_ga_lnks.sh` | Script que crea/verifica los 7 symlinks del Ground Truth. Re-ejecutable de forma segura. | 2026-04-09 |
-| `voxd-restore-optimizations.sh` | Restaura/verifica todas las optimizaciones de Voxd post-update (hilos, prompt, modelo, mic, CUDA). | 2026-04-09 |
-| `claude-ga-leeme.txt` | Leeme general para Claude y Gemini sobre el proyecto | 2026-04-09 |
-| `voxd-instalacion.md` | Instalación y optimización de Voxd en Ubuntu 22.04 con CUDA/GTX 1050 Ti para español México | 2026-04-09 |
-| `issue-mcp-mysql-port-no-estandar.md` | Solución al issue de MCP MySQL con puerto no estándar | 2026-04-09 |
-| `entrypoint-patch.sh` | Parche de entrypoint para ambiente de desarrollo IA | 2026-04-09 |
-| `docker-compose.yml` | Docker compose para ambiente de desarrollo IA | 2026-04-09 |
-| `promts/` | Prompts de referencia para Claude y Gemini | 2026-04-09 |
+| `chatledger_sync_ga_lnks.sh` | Crea/verifica los 7 symlinks del Ground Truth e instala el git hook pre-commit. Re-ejecutable. | 2026-04-09 |
+| `chatledger_validate.sh` | Valida integridad del Ground Truth: symlinks, .mcp.json, mcp_config.json, .clauderules, Docker. | 2026-04-09 |
+| `install-hooks.sh` | Instala el git hook pre-commit en agua_chatledger (bloquea commits si validate falla). | 2026-04-09 |
+| `docker-compose.yml` | Define contenedor `context7-mcp-mysql` con patch para soporte de puertos no estándar. | 2026-04-09 |
+| `entrypoint-patch.sh` | Aplica 3 patches a `@f4ww4z/mcp-mysql-server` al arrancar — permite puerto 7002 (Host C). | 2026-04-09 |
+| `issue-mcp-mysql-port-no-estandar.md` | Diagnóstico completo del bug de puerto en el package MCP y la solución con patches. | 2026-04-09 |
+| `voxd-instalacion.md` | Instalación y optimización de Voxd en Ubuntu 22.04 con CUDA/GTX 1050 Ti para español México. | 2026-04-09 |
+| `voxd-restore-optimizations.sh` | Restaura/verifica todas las optimizaciones de Voxd post-update. | 2026-04-09 |
+| `claude-ga-leeme.txt` | Notas personales, referencias, claves y recursos para Claude y Gemini. Repo privado. | 2026-04-09 |
+| `promts/` | Prompts de referencia para iniciar sesiones con Claude y Gemini. | 2026-04-09 |
 
 ---
 
@@ -106,4 +133,4 @@ bash docs-dev/ga-cl-ia/chatledger_sync_ga_lnks.sh
 
 ---
 
-**Última actualización:** 2026-04-09
+**Última actualización:** 2026-04-09 — Regla 08 integridad añadida, script chatledger_validate.sh + git hook pre-commit instalado, install-hooks.sh integrado en sync script, INVENTORY completo (7 symlinks, archivos reales, docs-dev)
