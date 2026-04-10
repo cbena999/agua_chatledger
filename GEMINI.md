@@ -19,6 +19,7 @@ Este archivo es el punto de entrada principal para el asistente de IA (Antigravi
 | **06** | **Accesos, Rutas y Herramientas (3 hosts, Docker MCP)** | [.agents/rules/06-accesos-rutas.md](file:///.agents/rules/06-accesos-rutas.md) |
 | **07** | **Control de Versiones y Git Workflow** | [.agents/rules/07-git-workflow.md](file:///.agents/rules/07-git-workflow.md) |
 | **08** | **Integridad del Ground Truth — LEER ANTES DE REFACTORIZAR** | [.agents/rules/08-integridad-ground-truth.md](file:///.agents/rules/08-integridad-ground-truth.md) |
+| **09** | **Documentación de Sesión — Resumen de Issues + Protocolo de Commit** | [.agents/rules/09-sesion-summary.md](file:///.agents/rules/09-sesion-summary.md) |
 
 ---
 
@@ -82,4 +83,6 @@ Validar integridad:
 bash docs-dev/ga-cl-ia/chatledger_validate.sh
 ```
 
-**Última actualización**: 2026-04-09
+**Última actualización**: 2026-04-10
+
+> **Nombre canónico del Runbook**: El conjunto `GEMINI.md` + todo `.agents/` (rules, skills, workflows) se denomina **"el Runbook"** del proyecto.

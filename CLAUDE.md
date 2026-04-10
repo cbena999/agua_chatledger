@@ -13,7 +13,7 @@ Cargado automáticamente por **Claude Code** en cada sesión.
 
 | Tipo | Descripción | Directorio |
 | :--- | :--- | :--- |
-| **Reglas** | Reglas permanentes (negocio, infra, git) | [.agents/rules/](.agents/rules/) |
+| **Reglas** | Reglas permanentes (negocio, infra, git, protocolo cierre sesión) | [.agents/rules/](.agents/rules/) |
 | **Skills** | Estándares técnicos (Plates, AJAX, PHP 7.4, DB) | [.agents/skills/](.agents/skills/) |
 | **Workflows** | Procesos repetibles (Sync B→A→C, Deploy Host C) | [.agents/workflows/](.agents/workflows/) |
 
@@ -102,4 +102,7 @@ cd docs-dev/migration-stack2/win10_aguav2/sync_hosta_to_hostc/    && bash run_sy
 
 ---
 
-**Última actualización:** 2026-04-09
+**Última actualización:** 2026-04-10
+
+> **Nombre canónico del Runbook**: El conjunto `CLAUDE.md` + todo `.agents/` (rules, skills, workflows) se denomina **"el Runbook"** del proyecto.
+> **Protocolo de cierre de sesión**: Ver [.agents/rules/09-sesion-summary.md](.agents/rules/09-sesion-summary.md)
