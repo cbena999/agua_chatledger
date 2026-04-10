@@ -18,6 +18,7 @@ Cargado automáticamente por **Claude Code** en cada sesión.
 | **Workflows** | Procesos repetibles (Sync B→A→C, Deploy Host C) | [.agents/workflows/](.agents/workflows/) |
 
 Estructura interna documentada en [.agents/README.md](.agents/README.md).
+Inventario completo de assets en [.agents/INVENTORY.md](.agents/INVENTORY.md).
 
 ---
 
@@ -67,6 +68,23 @@ Estructura interna documentada en [.agents/README.md](.agents/README.md).
 
 ---
 
+## Arquitectura Brain / Ground Truth (2026-04-09)
+
+Todo el contexto de agentes IA vive en `agua_chatledger`. El repo `agua` solo tiene symlinks:
+
+| Symlink en `agua` | Destino |
+| :--- | :--- |
+| `.claude/` | `.chatledger/.claude/` (settings.json + settings.local.json) |
+| `.agents/` | `.chatledger/.agents/` |
+| `.mcp.json` | `.chatledger/.mcp.json` |
+| `CLAUDE.md` / `GEMINI.md` / `.clauderules` | `.chatledger/[archivo]` |
+| `docs-dev/ga-cl-ia/` | `agua_chatledger/docs-dev/ga-cl-ia/` |
+
+**Validar integridad antes de commitear en agua_chatledger:**
+```bash
+bash docs-dev/ga-cl-ia/chatledger_validate.sh
+```
+
 ## Comandos Rápidos
 
 ```bash
@@ -84,4 +102,4 @@ cd docs-dev/migration-stack2/win10_aguav2/sync_hosta_to_hostc/    && bash run_sy
 
 ---
 
-**Última actualización:** 2026-04-07
+**Última actualización:** 2026-04-09

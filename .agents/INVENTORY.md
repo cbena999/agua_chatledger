@@ -134,4 +134,4 @@ bash docs-dev/ga-cl-ia/chatledger_sync_ga_lnks.sh
 
 ---
 
-**Última actualización:** 2026-04-09 — .claude/ migrado a chatledger y convertido a symlink (8/8 symlinks), validate.sh actualizado a 7 secciones, sync script paso 8 añadido
+**Última actualización:** 2026-04-09 — CLAUDE.md y GEMINI.md actualizados con regla 08 y arquitectura brain. Feature branch alineada (8/8 symlinks idénticos a main). Todo el brain en agua_chatledger.

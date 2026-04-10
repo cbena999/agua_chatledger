@@ -16,8 +16,9 @@ Este archivo es el punto de entrada principal para el asistente de IA (Antigravi
 | **03** | **Sincronización de Datos (B -> A)** | [.agents/rules/03-sincronizacion-b-a.md](file:///.agents/rules/03-sincronizacion-b-a.md) |
 | **04** | **Arquitectura MVC y Directorios** | [.agents/rules/04-arquitectura-mvc.md](file:///.agents/rules/04-arquitectura-mvc.md) |
 | **05** | **Despliegue y Automatización (Host C)** | [.agents/rules/05-despliegue-host-c.md](file:///.agents/rules/05-despliegue-host-c.md) |
-| **06** | **Accesos, Seguridad y Bins A/B** | [.agents/rules/06-accesos-rutas.md](file:///.agents/rules/06-accesos-rutas.md) |
+| **06** | **Accesos, Rutas y Herramientas (3 hosts, Docker MCP)** | [.agents/rules/06-accesos-rutas.md](file:///.agents/rules/06-accesos-rutas.md) |
 | **07** | **Control de Versiones y Git Workflow** | [.agents/rules/07-git-workflow.md](file:///.agents/rules/07-git-workflow.md) |
+| **08** | **Integridad del Ground Truth — LEER ANTES DE REFACTORIZAR** | [.agents/rules/08-integridad-ground-truth.md](file:///.agents/rules/08-integridad-ground-truth.md) |
 
 ---
 
@@ -69,4 +70,16 @@ Derivados del split `ligacargos`: 5 PHPs usaban `FROM ligacargos` directa (perd�
 **Regla para nuevos PHPs**: Todo SELECT debe usar `vw_ligacargos_all` o `vw_ligacargos_pendientes`. Ver [skill-database-evolution/SKILL.md](.agents/skills/skill-database-evolution/SKILL.md).
 
 ---
-**Última actualización**: 2026-04-07
+---
+
+## 🏗️ Arquitectura Brain / Ground Truth (2026-04-09)
+
+Todo el contexto de agentes IA vive en `agua_chatledger`. El repo `agua` tiene solo symlinks (8/8).
+**Antes de cualquier refactoring de archivos meta, leer regla 08.**
+
+Validar integridad:
+```bash
+bash docs-dev/ga-cl-ia/chatledger_validate.sh
+```
+
+**Última actualización**: 2026-04-09
