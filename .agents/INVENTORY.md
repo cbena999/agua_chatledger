@@ -60,13 +60,14 @@ bash docs-dev/ga-cl-ia/chatledger_sync_ga_lnks.sh
 | # | Archivo | Nombre | Cubre | Última modificación |
 |---|---|---|---|---|
 | 01 | `01-infra-hosts.md` | Infraestructura y Hosts | Definición de Hosts A/B/C, puertos, accesos, propósito de cada ambiente | 2026-04-09 |
-| 02 | `02-reglas-negocio.md` | Reglas de Negocio | Facturación, estados de contrato, límite de tomas, split ligacargos, módulos críticos | 2026-04-08 |
+| 02 | `02-reglas-negocio.md` | Reglas de Negocio | Facturación, estados de contrato, límite de tomas, split ligacargos, módulos críticos | **2026-04-10** |
 | 03 | `03-sincronizacion-b-a.md` | Sincronización B→A | Procedimiento de refresco de datos desde Host B (producción) a Host A (desarrollo) | 2026-04-08 |
 | 04 | `04-arquitectura-mvc.md` | Arquitectura MVC | Estructura de directorios, capas MVC, localización de lógica de negocio | 2026-04-08 |
 | 05 | `05-despliegue-host-c.md` | Despliegue Host C | Migración e implementación en Host C (MariaDB 10.4.27 / XAMPP 7.4.33 / Windows) | 2026-04-08 |
 | 06 | `06-accesos-rutas.md` | Accesos, Rutas y Herramientas | Credenciales y rutas web/DB de los 3 hosts, arquitectura Docker MCP, regla MCP vs CLI MySQL | 2026-04-09 |
 | 07 | `07-git-workflow.md` | Control de Versiones | Ramas, symlinks Ground Truth, protocolo cambio de rama (4 pasos), tabla qué commitear en cada repo | 2026-04-09 |
 | 08 | `08-integridad-ground-truth.md` | Integridad del Ground Truth | Rol de cada asset, qué está prohibido modificar, historial de incidentes, cómo validar antes de commitear | 2026-04-09 |
+| 09 | `09-sesion-summary.md` | Documentación de Sesión | Protocolo **"Verificación = Aprobación + Commit"**: flujo, formato `Issues_Resueltos_*.md`, commit en `agua_chatledger`. Válido para Claude Code y Gemini. | **2026-04-10** |
 
 ---
 
@@ -106,6 +107,8 @@ bash docs-dev/ga-cl-ia/chatledger_sync_ga_lnks.sh
 | `issue-mcp-mysql-port-no-estandar.md` | Diagnóstico completo del bug de puerto en el package MCP y la solución con patches. | 2026-04-09 |
 | `voxd-instalacion.md` | Instalación y optimización de Voxd en Ubuntu 22.04 con CUDA/GTX 1050 Ti para español México. | 2026-04-09 |
 | `voxd-restore-optimizations.sh` | Restaura/verifica todas las optimizaciones de Voxd post-update. | 2026-04-09 |
+| `voxd-reporte-funcional.md` | Reporte técnico-funcional completo de la instalación Voxd en Host Roja Dell S1 (stack, arquitectura, issues resueltos, estado operativo). | 2026-04-10 |
+| `voxd-oci-viabilidad.md` | Análisis de viabilidad de correr Whisper/Voxd en VM OCI Always Free ARM A1; modelos recomendados, benchmarks estimados, casos de uso y egress. | 2026-04-10 |
 | `claude-ga-leeme.txt` | Notas personales, referencias, claves y recursos para Claude y Gemini. Repo privado. | 2026-04-09 |
 | `promts/` | Prompts de referencia para iniciar sesiones con Claude y Gemini. | 2026-04-09 |
 
@@ -134,4 +137,4 @@ bash docs-dev/ga-cl-ia/chatledger_sync_ga_lnks.sh
 
 ---
 
-**Última actualización:** 2026-04-09 — CLAUDE.md y GEMINI.md actualizados con regla 08 y arquitectura brain. Feature branch alineada (8/8 symlinks idénticos a main). Todo el brain en agua_chatledger.
+**Última actualización:** 2026-04-10 — Regla 09 (protocolo cierre de sesión) agregada. CLAUDE.md con tabla numerada 01–09. `.clauderules` con mandato de cierre. `GEMINI.md` actualizado con Regla 09 e índice. `02-reglas-negocio.md` con C06 (amnistía recargos), F03 (auditoría reasignación) y F04 (renumerada). Nombre canónico "Runbook" establecido en ambos entry points.

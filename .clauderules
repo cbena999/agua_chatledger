@@ -17,3 +17,10 @@ Este proyecto es asistido simultáneamente por:
 
 Ambos comparten el mismo Ground Truth en `.agents/rules/`, `.agents/skills/` y `.agents/workflows/`.
 No duplicar conocimiento entre CLAUDE.md y GEMINI.md — editar directamente los archivos `.agents/`.
+
+## Cierre de Sesión (Regla 09)
+Al terminar una implementación verificada por el usuario:
+→ Preguntar: "¿Verificaste el resultado? Si es OK, genero el resumen y hago el commit."
+→ Verificación del usuario = aprobación implícita. Sin segunda pregunta.
+→ Ver protocolo completo: `.agents/rules/09-sesion-summary.md`
+

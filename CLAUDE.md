@@ -17,6 +17,21 @@ Cargado automáticamente por **Claude Code** en cada sesión.
 | **Skills** | Estándares técnicos (Plates, AJAX, PHP 7.4, DB) | [.agents/skills/](.agents/skills/) |
 | **Workflows** | Procesos repetibles (Sync B→A→C, Deploy Host C) | [.agents/workflows/](.agents/workflows/) |
 
+### 🗂️ Índice de Reglas (01–09)
+
+| # | Regla | Archivo |
+| :---: | :--- | :--- |
+| **01** | Infraestructura y Hosts (A/B/C, puertos, MCP) | [.agents/rules/01-infra-hosts.md](.agents/rules/01-infra-hosts.md) |
+| **02** | Reglas de Negocio por Módulo — **leer antes de editar lógica financiera** | [.agents/rules/02-reglas-negocio.md](.agents/rules/02-reglas-negocio.md) |
+| **03** | Sincronización de Datos B→A | [.agents/rules/03-sincronizacion-b-a.md](.agents/rules/03-sincronizacion-b-a.md) |
+| **04** | Arquitectura MVC y Directorios | [.agents/rules/04-arquitectura-mvc.md](.agents/rules/04-arquitectura-mvc.md) |
+| **05** | Despliegue y Automatización Host C | [.agents/rules/05-despliegue-host-c.md](.agents/rules/05-despliegue-host-c.md) |
+| **06** | Accesos, Rutas y Herramientas (3 hosts, Docker MCP) | [.agents/rules/06-accesos-rutas.md](.agents/rules/06-accesos-rutas.md) |
+| **07** | Control de Versiones y Git Workflow | [.agents/rules/07-git-workflow.md](.agents/rules/07-git-workflow.md) |
+| **08** | Integridad del Ground Truth — **leer antes de refactorizar** | [.agents/rules/08-integridad-ground-truth.md](.agents/rules/08-integridad-ground-truth.md) |
+| **09** | Documentación de Sesión — Protocolo de Commit y Resumen de Issues | [.agents/rules/09-sesion-summary.md](.agents/rules/09-sesion-summary.md) |
+
+
 Estructura interna documentada en [.agents/README.md](.agents/README.md).
 Inventario completo de assets en [.agents/INVENTORY.md](.agents/INVENTORY.md).
 
