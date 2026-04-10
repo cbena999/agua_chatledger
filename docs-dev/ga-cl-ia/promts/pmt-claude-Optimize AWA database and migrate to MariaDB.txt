@@ -21773,18 +21773,19 @@ _______________________
 
 Orden atencion apartir del 8 abril 2026
 
-1 Arreglar lo del mcp
+Ref: Contrato.estado (1  = ACTIVO  |  2 =  Suspensión Temporal  | 3  = Suspensión Administrativa   |  4  =  Suspensión Definitiva)
 
-2. Migrar la webapp asamble a la arquitectura de host c
+ok 1 Arreglar lo del mcp
+
+ok 2. Migrar la webapp asamble a la arquitectura de host c
    Meterlo directo a la rama feature
    /home/carlos/Documents/tmp01/2dawebapp/
 
-3. Hacer yo pruebas crud en host c de agua.
+ok 3. Hacer yo pruebas crud en host c de agua.
     Arreglar bugs de haber.
-    . 3.1 Probarla doña nancy.
 
 4. Resolver los 3 o 4 pendientes req originales.
-      Preguntar a ia en donde ?  ... creo sea en host c y comparar contra host a y b.
+4.1 formulario de tomas x tipo comercial o normal    
 
 3.2
 

@@ -14,13 +14,15 @@ Este documento es una entidad viva para registrar el descubrimiento y clasificac
 | **C03** | Registro obligatorio de folios únicos por cada nuevo contrato. | Validada |
 | **C04** | **Motor de Paridad Universal**: Sincronización obligatoria; si una toma se activa/reconecta, su cargo anual debe restaurarse automáticamente. | Implementada |
 | **C05** | **Limpieza por Suspensión Definitiva**: Al pasar a Estado 4, se debe forzar la desconexión física y la cancelación de deuda anual actual. | Implementada |
+| **C06** | **Amnistía de Recargos en Reactivación**: Al pasar un contrato de cualquier estado suspendido a `1 (ACTIVO)`, los recargos de años anteriores al año en curso se cancelan automáticamente (`estado=-1`). Solo permanece vigente la deuda del año actual. Implementado en `_amnistiaRecargosHistoricos()` (contratos.php) + `_sincronizaParidadFinanciera()`. | Implementada |
 
 ### 📂 Módulo 02: Facturación, Cargos y Recargos
 | ID | Regla | Estado |
 |:---:|---|:---:|
 | **F01** | Solo contratos en estados `1 (ACTIVO)`, `2 (SUSPENSIÓN TEMPORAL)` y `5 (SUSPENSIÓN ADMINISTRATIVA)` generan recargos automáticos. | Crítica |
 | **F02** | Cargos manuales a contratos en `4 (SUSPENSIÓN DEFINITIVA)` están prohibidos. | Crítica |
-| **F03** | El cálculo de la deuda debe ser atómico (Cargos + Recargos = Deuda Total). | Validada |
+| **F03** | **Auditoría de Reasignación de Cargos**: `regresarCargoCancelado()` valida estado del contrato (bloquea en estado 4) y registra la identidad del operador (`$_SESSION['usuario']`) en la tabla `cambios`. Requiere confirmación de usuario en la UI. | Implementada |
+| **F04** | El cálculo de la deuda debe ser atómico (Cargos + Recargos = Deuda Total). | Validada |
 
 ### 📂 Módulo 03: Usuarios y Segmentación
 | ID | Regla | Estado |
