@@ -21746,7 +21746,7 @@ En la rama feature/upgrade-v2-win-xampp
 Para que la webapp pueda funcionar.
 Y considero oportuno mover de main a feature/upgrade-v2-win-xampp  este directorio  e/opt/lampp/htdocs/agua/docs-dev/migration-stack2/win10_aguav2
  y que se suba todo , hasta los sql.gz backups.
-===============================================================================================================================================================
+
 
 Testear en host c, issues y corregir yo con claude.
 
@@ -21769,7 +21769,10 @@ usar mcp host c.
 4  operaciones_multas_sync.php, Ok corregido.
   Notice: Trying to access array offset on value of type null in F:\aguav2\webapp\agua\admin\operaciones_multas_sync.php on line 126
 
-_______________________
+===============================================================================================================================================================
+                                                                LISTA 1
+
+===============================================================================================================================================================
 
 Orden atencion apartir del 8 abril 2026
 
@@ -21810,6 +21813,37 @@ ok 3. Hacer yo pruebas crud en host c de agua.
 
 
 ===============================================================================================================================================================
+                                                                LISTA 2
 
 
-______
+10. pregutnar a la ia si /opt/lampp/htdocs/agua/admin/reporte_adeudos_fantasmas.php tiene que ver con: mixtos_sp_actv.php o no ?
+isss
+
+4 Plan para fix de reglas en cbos de estados del contrato, issues, buscar avance en conversaciones pasadas.
+
+3 se listen todos los procesos de saneamiento y con que herramienta se hara, si es manual o automatico, y cuales faltan, en que orden deben utilizarse para no romper consistencia.
+
+6 Pasarme a los corte de caja y reporte de columnas, dárselo a Claude.
+
+
+7 issue a investigar que pasara en el pase a producción cuando para el caso de que se han ejecutado re-cargo automatico abril a los que no han págado, que debo depurar con base a las nueva reglas pasaran o se filtraran, 
+     como refeencia hice uno de limpia de eximir a nuevos contratos de esa regla q otros casos similares me harian falta!
+
+8. Descubirir otros iisues, con base analizar movimientos recientes y sucedieron por abril y cuáles registros no debieron asignarsele y actuales si, colo limpiar este 2026, y de 2018 hacia 2025
+
+9. Corte de caja, empatar lo mas cercano, todos los que me paso doña ncy.
+_____________________
+1 pedirle, que haga un resumen fun , tec , de todo lo que se ha implem en esta conversacion, usando la regla del truth.
+
+2 se haga un listado de pendientes en esta y las dos anteriores conversaciones.
+
+5 continuar en claude con el rpt de operaciones_multas_sync
+
+
+
+11. Menú → Cargos (o donde esté el catálogo de cargos)
+En el filtro de estado, seleccionar "mostrar ocultos" o "todos" — porque el 624 ya viene con estado=0 desde el sync, así que no aparece en la lista normal de activos
+Localizar el registro: ANUALIDAD DEL AGUA 2026 con automatico = No (ese es el 624; el 621 tiene automatico = Sí)
+Hacer clic en "Eliminar" — eso pone estado=2 en la BD, que es el estado de eliminación definitiva del sistema
+___
+===============================================================================================================================================================
