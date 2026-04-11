@@ -7,8 +7,9 @@
 | **Trajectory ID** | `88253ed1-6fc5-4e5a-a27b-31ce28ae9c82` |
 | **Cascade ID** | `a966039d-cd86-440d-b61b-0788fab82e28` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 148 |
+| **Total Steps** | 209 |
 | **Started** | 10 Apr 2026, 10:49 am |
+| **Completed** | 10 Apr 2026, 3:59 pm |
 
 ---
 
@@ -4484,6 +4485,911 @@ No duplicar conocimiento entre CLAUDE.md y GEMINI.md — editar directamente los
 
 **Status:** Completed
 **Created:** 10 Apr 2026, 11:46 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 10 Apr 2026, 11:46 am
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+## User Request
+
+Mejoras:
+EL botón verde "Guardar Cambios", colocalo abajo del input text de Metros lineales, para mejor distribucion.
+Eliminma este texto: (referencia — sólo lectura)
+
+---
+
+## Agent Response
+
+### Thinking
+
+The user wants two UI tweaks to the contract edit form in ficha.php:
+
+1. Move the "Guardar Cambios" green button below the "Metros lineales" input field (in the left column of the form)
+2. Remove the text "(referencia — sólo lectura)" from the panel header
+
+Let me look at the current state of ficha.php to find the exact lines to modify.
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ficha.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.926395158s
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L91-299)</summary>
+
+**Path:** `Unknown file`
+
+```
+<div id='formato' style='display:none; width: 100%; margin: 5px 0;'>
+    <form id='datoscto' name='datoscto'>
+        <input type='hidden' value='<?= $id ?>' name='id' id='id'>
+        <div style='display: flex; gap: 40px; align-items: flex-start;'>
+            <!-- Left Column: Main Form Fields -->
+            <div style='flex: 0 0 500px;'>
+                <table width='100%'>
+                    <tr>
+                        <td style='text-align: left; padding-right: 15px;' width='160px' valign='top'><input type='hidden' value='guardaDatosContrato' id='opc' name='opc'>
+                            A nombre de:</td>
+                        <td class='mayusculas' valign='top'><b><?= $this->e($nombre) ?> | <?= $numusuario ?><?php if ($estado_usr == 2): ?> <span style='color: #c0392b; font-size: 11px;'>(USUARIO NO LOCALIZADO)</span><?php endif; ?></b><br><br></td>
+                    </tr>
+                    <tr>
+                        <td style='text-align: left; padding-right: 15px;' valign='top'>Domicilio:</td>
+                        <td valign='top'><input class='mayusculas' type='text' value='<?= $this->e($domicilio) ?>' name='domicilio'
+                                id='domicilio' style='width: 100%;' autocomplete=off <?= ($estado==4?'disabled':'') ?>><br><br></td>
+                    </tr>
+                    <tr>
+                        <td style='text-align: left; padding-right: 15px;' valign='top'>M&aacute;s datos:<br><small style='color: grey;'>Notas sobre conflictos, quejas, etc.</small></td>
+                        <td valign='top'><textarea class='mayusculas' name='masdatos' id='masdatos' style='width: 100%;' rows=3 <?= ($estado==4?'disabled':'') ?>><?= $this->e($masdatos) ?></textarea><br><br></td>
+                    </tr>
+                    <tr>
+                        <td style='text-align: left; padding-right: 15px;' valign='top'>Observaciones:<br><small style='color: grey;'>Ubicaci&oacute;n entre calles, medidas, etc.</small></td>
+                        <td valign='top'><textarea class='mayusculas' name='observaciones' id='observaciones' style='width: 100%;' rows=3 <?= ($estado==4?'disabled':'') ?>><?= $this->e($observaciones) ?></textarea><br><br></td>
+                    </tr>
+                    <tr>
+                        <td style='text-align: left; padding-right: 15px;' valign='top'>Indicador:</td>
+                        <td valign='top'><input class='mayusculas' type='text' name='numcontratoletras' id='numcontratoletras' value='<?= $this->e($numcontratoletras) ?>' style='width: 100%;' autocomplete=off <?= ($estado==4?'disabled':'') ?>><br><br></td>
+                    </tr>
+                    <tr>
+                        <td style='text-align: left; padding-right: 15px;' valign='top'>Metros lineales:</td>
+                        <td valign='top'><input class='mayusculas' type='text' value='<?= $metros ?>' name='metros' id='metros' style='width: 100%;' autocomplete=off <?= ($estado==4?'disabled':'') ?>><br><br></td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Right Column: Tomas -->
+            <div style='flex: 1; overflow: hidden; padding-top: 10px;'>
+                <div style='margin-bottom:10px;'>
+                    Tomas:&nbsp;&nbsp;Cantidad de tomas:&nbsp;
+                    <select name='num_tomas' id='num_tomas' onchange='actualizaTomas(this.value, <?= $num_tomas ?>)' <?= ($estado==4?'disabled':'') ?>>
+                        <?php for($i=1; $i<=$max_tomas; $i++): ?>
+                            <option value='<?= $i ?>' <?= ($num_tomas==$i?'selected':'') ?>><?= $i ?> Toma<?= ($i>1?'s':'') ?></option>
+                        <?php endfor; ?>
+                    </select>
+                </div>
+                <div id='tomas_container' style='display: flex; flex-wrap: nowrap; gap: 15px; overflow-x: auto;'>
+                    <?php for($n=1; $n<=$max_tomas; $n++): 
+                            $t = isset($tomas[$n]) ? $tomas[$n] : array('tipo'=>0, 'tiene_agua'=>0, 'tiene_drenaje'=>0, 'estado_agua'=>1, 'estado_drenaje'=>1);
+                            $ca = ($estado == intval($cfg['estado_activo']));
+                    ?>
+                        <div id='toma_card_<?= $n ?>' class='toma-card' style='border:1px solid #ccc; padding:10px; border-radius:8px; min-width:300px; width:300px; <?= ($n>$num_tomas?'display:none;':'') ?> background:#f9f9f9;'>
+                            <h3 style='margin-top:0; border-bottom:1px solid #ddd; padding-bottom:5px;'><?= ($n==1?'1ra.':'2da.') ?> Toma</h3>
+                            
+                            <div style='margin-bottom:10px;'>
+                                <b>Tipo:</b><br>
+                                <input type='radio' name='tomas[<?= $n ?>][tipo]' id='t_tipo_<?= $n ?>_0' value='0' <?= ($t['tipo']==0?'checked':'') ?> onchange='cambiaTipo(<?= $n ?>, 0, tarifas)' <?= ($estado==4?'disabled':'') ?>> <label for='t_tipo_<?= $n ?>_0'>Normal</label>&nbsp;&nbsp;
+                                <input type='radio' name='tomas[<?= $n ?>][tipo]' id='t_tipo_<?= $n ?>_1' value='1' <?= ($t['tipo']==1?'checked':'') ?> onchange='cambiaTipo(<?= $n ?>, 1, tarifas)' <?= ($estado==4?'disabled':'') ?>> <label for='t_tipo_<?= $n ?>_1'>Comercial</label>
+                            </div>
+
+                            <div style='margin-bottom:10px; border:1px dashed #bbb; padding:5px; background:#fff;'>
+                                <input type='checkbox' name='tomas[<?= $n ?>][tiene_agua]' id='t_agua_<?= $n ?>' value='1' <?= ($t['tiene_agua']?'checked':'') ?> onchange='actualizaInterfazTomas(<?= $n ?>, "agua")' <?= ($estado==4?'disabled':'') ?>> 
+                                <label for='t_agua_<?= $n ?>'><b>Infraestructura: Cuenta con toma</b></label>
+                                
+                                <div id='cont_estado_agua_<?= $n ?>' style='margin-top:5px; font-size:11px; <?= ($t['tiene_agua']?'':'display:none;') ?>'>
+                                    Servicio: 
+                                    <input type='radio' name='tomas[<?= $n ?>][estado_agua]' id='e_agua_<?= $n ?>_1' value='1' <?= ($t['estado_agua']?'checked':'') ?> <?= ($estado==4?'disabled':'') ?>> <label for='e_agua_<?= $n ?>_1'>Activo</label>
+                                    <input type='radio' name='tomas[<?= $n ?>][estado_agua]' id='e_agua_<?= $n ?>_0' value='0' <?= (!$t['estado_agua']?'checked':'') ?> <?= ($estado==4?'disabled':'') ?>> <label for='e_agua_<?= $n ?>_0'>Suspendido (Corte)</label>
+                                </div>
+                                <div id='desc_agua_<?= $n ?>' style='margin-top:5px; font-size:11px; color:#999; <?= (!$t['tiene_agua']?'':'display:none;') ?>'>
+                                    Servicio: <i>Sin instalaci&oacute;n física</i>
+                                </div>
+
+                                <div id='ref_agua_<?= $n ?>' style='font-size:10px; color:#666; margin-top:3px; border-top:1px dotted #ccc; padding-top:2px;'>
+                                    <?= $tarifas_referencia['agua']['leyenda'] ?>: <b>$<?= number_format($t['tipo']==1 ? $tarifas_referencia['agua']['comercial'] : $tarifas_referencia['agua']['normal'], 2) ?></b>
+                                </div>
+                            </div>
+
+                            <div style='border:1px dashed #bbb; padding:5px; background:#fff;'>
+                                <input type='checkbox' name='tomas[<?= $n ?>][tiene_drenaje]' id='t_drenaje_<?= $n ?>' value='1' <?= ($t['tiene_drenaje']?'checked':'') ?> onchange='actualizaInterfazTomas(<?= $n ?>, "drenaje")' <?= ($estado==4?'disabled':'') ?>> 
+                                <label for='t_drenaje_<?= $n ?>'><b>Instalaci&oacute;n: Cuenta con descarga</b></label>
+
+                                <div id='cont_estado_drenaje_<?= $n ?>' style='margin-top:5px; font-size:11px; <?= ($t['tiene_drenaje']?'':'display:none;') ?>'>
+                                    Servicio: 
+                                    <input type='radio' name='tomas[<?= $n ?>][estado_drenaje]' id='e_drenaje_<?= $n ?>_1' value='1' <?= ($t['estado_drenaje']?'checked':'') ?> <?= ($estado==4?'disabled':'') ?>> <label for='e_drenaje_<?= $n ?>_1'>Activo</label>
+                                    <input type='radio' name='tomas[<?= $n ?>][estado_drenaje]' id='e_drenaje_<?= $n ?>_0' value='0' <?= (!$t['estado_drenaje']?'checked':'') ?> <?= ($estado==4?'disabled':'') ?>> <label for='e_drenaje_<?= $n ?>_0'>Suspendido (Corte)</label>
+                                </div>
+                                <div id='desc_drenaje_<?= $n ?>' style='margin-top:5px; font-size:11px; color:#999; <?= (!$t['tiene_drenaje']?'':'display:none;') ?>'>
+                                    Servicio: <i>Sin descarga instalada</i>
+                                </div>
+
+                                <div id='ref_drenaje_<?= $n ?>' style='font-size:10px; color:#666; margin-top:3px; border-top:1px dotted #ccc; padding-top:2px;'>
+                                    <?= $tarifas_referencia['drenaje']['leyenda'] ?>: <b>$<?= number_format($t['tipo']==1 ? $tarifas_referencia['drenaje']['comercial'] : $tarifas_referencia['drenaje']['normal'], 2) ?></b>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endfor; ?>
+                </div>
+            </div>
+        </div>
+        <script>
+            var tarifas = <?= json_encode($tarifas_referencia) ?>;
+
+            function validaContrato() {
+                var num_tomas = parseInt($('#num_tomas').val()) || 1;
+                
+                var todo_ok = true;
+                for (var i = 1; i <= num_tomas; i++) {
+                    if (!$('#t_agua_' + i).is(':checked') && !$('#t_drenaje_' + i).is(':checked')) {
+                        todo_ok = false;
+                        break;
+                    }
+                }
+                if (!todo_ok) {
+                    alert('Error: Cada toma seleccionada debe tener habilitada al menos una conexi\u00f3n (Agua o Drenaje). Revise la ' + (num_tomas > 1 ? '1ra y 2da toma.' : 'toma principal.'));
+                    return false;
+                }
+                
+                // Validacion AJAX síncrona de tomas
+                var ok_tomas = true;
+                $.ajax({
+                    url: 'ruteador.php',
+                    type: 'POST', async: false,
+                    data: { opc: 'validaTomasSync', usuario: '<?= $numusuario ?>', contrato: '<?= $id ?>', domicilio: $('#domicilio').val(), num_tomas: num_tomas },
+                    success: function(resp) {
+                        if(resp.trim() !== 'OK') {
+                            alert(resp);
+                            ok_tomas = false;
+                        }
+                    }
+                });
+                if (!ok_tomas) return false;
+
+                return confirm('¿Est\u00e1 seguro que desea actualizar la informaci\u00f3n?');
+            }
+            
+            $(document).ready(function(){
+                $('#domicilio').on('blur', function(){
+                    if($(this).val().length > 20) {
+                        $.ajax({
+                            url: 'ruteador.php',
+                            type: 'POST', async: true,
+                            data: { opc: 'validaTomasSync', usuario: '<?= $numusuario ?>', contrato: '<?= $id ?>', domicilio: $(this).val(), num_tomas: $('#num_tomas').val() || 1 },
+                            success: function(resp) {
+                                if(resp.trim() !== 'OK') {
+                                    alert("Aviso Domicilio: " + resp);
+                                }
+                            }
+                        });
+                    }
+                });
+            });
+        </script>
+        <div style='display: flex; align-items: center; justify-content: space-between;
+                    padding: 20px 0; border-top: 1px solid #eee; margin-top: 20px; gap: 20px;'>
+
+            <!-- Panel Solo Lectura: Resumen actual de tomas (referencia para el cajero) -->
+            <div id='panel_tomas_ref' style='background: #f0f4ff; border: 1px solid #b8cdf8;
+                  border-radius: 8px; padding: 12px 18px; flex: 1; font-size: 12px; color: #333;'>
+                <b style='font-size: 13px; color: #2c5282;'>&#128202; Estado actual de tomas (referencia — sólo lectura)</b>
+                <div style='display: flex; gap: 16px; margin-top: 8px; flex-wrap: wrap;'>
+                    <?php foreach ($tomas as $n => $t): ?>
+                    <div style='background: #fff; border: 1px solid #d0d9ff; border-radius: 6px;
+                                padding: 8px 14px; min-width: 160px;'>
+                        <b style='color: #4a6fa5;'><?= ($n==1?'1ra.':'2da.') ?> Toma</b>
+                        <span style='font-size: 10px; color: #777; margin-left: 4px;'>
+                            (<?= ($t['tipo']==1 ? 'Comercial' : 'Normal') ?>)
+                        </span><br>
+                        <span style='color: <?= ($t['tiene_agua'] && $t['estado_agua'] ? "#155724" : "#721c24") ?>;'>
+                            &#128167; Agua: <b><?= ($t['tiene_agua'] ? ($t['estado_agua'] ? 'Conectada' : 'Desconectada') : 'Sin instalación') ?></b>
+                        </span><br>
+                        <span style='color: <?= ($t['tiene_drenaje'] && $t['estado_drenaje'] ? "#155724" : "#721c24") ?>;'>
+                            &#128295; Drenaje: <b><?= ($t['tiene_drenaje'] ? ($t['estado_drenaje'] ? 'Conectado' : 'Desconectado') : 'Sin descarga') ?></b>
+                        </span>
+                    </div>
+                    <?php endforeach; ?>
+                    <?php if (empty($tomas)): ?>
+                    <div style='color: #856404; font-style: italic;'>Sin tomas registradas para este contrato.</div>
+                    <?php endif; ?>
+                </div>
+            </div>
+
+            <!-- Botón Guardar Cambios -->
+            <?php if ($estado != 4): ?>
+            <div style='flex-shrink: 0; text-align: center;'>
+                <input type='submit' value='Guardar Cambios' onclick="return validaContrato();"
+                       style='background: #28a745; color: white; border: none; padding: 12px 28px;
+                              border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px;
+                              box-shadow: 0 4px 8px rgba(40,167,69,0.3); white-space: nowrap;
+                              transition: background 0.2s;'
+                       onmouseover="this.style.background='#218838'"
+                       onmouseout="this.style.background='#28a745'">
+            </div>
+            <?php endif; ?>
+
+        </div>
+    </form>
+    <div id='aviso'></div>
+    <div id='nara'></div>
+</div>
+<hr>
+
+<h2>Acciones sobre el presente contrato</h2><br>
+<p>
+<div style='display: flex; flex-wrap: wrap; gap: 10px; align-items: center;'>
+    <a class='liga opcion' style='margin:0;' href='reportes/contratoinfo2.php?numcontrato=<?= $id ?>&orden=1' target='_blank'>Informe de Cuenta</a>
+    <a class='liga opcion' style='margin:0;' href='reportes/contratoinfo2.php?numcontrato=<?= $id ?>&orden=4' target='_blank'>Informe por fecha de pago</a>
+    <?php if ($estado != 4): ?>
+    <a class='liga opcion anotacioncto' style='margin:0;' href='#' onclick="$('#realizaranotacion').toggle(); $('#textoz').focus();">Hacer una anotaci&oacute;n</a>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `multi_replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 10 Apr 2026, 3:18 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 10 Apr 2026, 3:18 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+## User Request
+
+Muy bien
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `ficha.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The user said "Muy bien" which confirms they verified the result. According to Regla 09 (the new session summary protocol), since the user has verified the result, I should now generate the summary and commit. The verification = implicit approval + commit.
+
+Let me generate the summary for this small UI tweak session and commit it.
+
+The changes were:
+1. Move "Guardar Cambios" button below "Metros lineales" input in the left column
+2. Remove "(referencia — sólo lectura)" text from the panel title
+
+This is a small change, so the summary will be brief. I need to:
+1. Commit the ficha.php change to the agua repo
+
+
+2. Generate the Issues_Resueltos_* file in agua_chatledger
+3. Commit and push both
+
+These are minimal UX tweaks, but I should still follow the protocol efficiently—commit the code change and create a brief summary file.
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 6.313981394s
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 10 Apr 2026, 3:19 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 10 Apr 2026, 3:20 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 10 Apr 2026, 3:20 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+## User Request
+
+El boton verde esta muy grande, que se suba como un renglon y medio la sección de Estado actual de tomas, para que la seccion de Acciones sobre el presente contrato se aprecie mas en la pantalla.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `Issues_Resueltos_UX_Ficha_Formulario_a966039d.md`
+**Language:** markdown
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The user wants two things:
+1. Make the green button smaller
+2. Reduce the bottom margin/padding of the "Estado actual de tomas" panel section so the "Acciones sobre el presente contrato" section appears higher on screen (about 1.5 lines up)
+
+Let me look at the current state of the relevant sections in ficha.php to make the precise changes.
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ficha.php`
+
+**Tool:** `view_file`
+**File:** `ficha.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 6.651883715s
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L120-144)</summary>
+
+**Path:** `Unknown file`
+
+```
+                    <tr>
+                        <td style='text-align: left; padding-right: 15px;' valign='top'>Metros lineales:</td>
+                        <td valign='top'><input class='mayusculas' type='text' value='<?= $metros ?>' name='metros' id='metros' style='width: 100%;' autocomplete=off <?= ($estado==4?'disabled':'') ?>><br><br></td>
+                    </tr>
+                    <?php if ($estado != 4): ?>
+                    <tr>
+                        <td colspan='2' style='padding-top: 5px; padding-bottom: 10px;'>
+                            <input type='submit' value='Guardar Cambios' onclick="return validaContrato();"
+                                   style='background: #28a745; color: white; border: none; padding: 12px 28px;
+                                          border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px;
+                                          box-shadow: 0 4px 8px rgba(40,167,69,0.3); white-space: nowrap;
+                                          transition: background 0.2s; width: 100%;'
+                                   onmouseover="this.style.background='#218838'"
+                                   onmouseout="this.style.background='#28a745'">
+                        </td>
+                    </tr>
+                    <?php endif; ?>
+                </table>
+            </div>
+
+            <!-- Right Column: Tomas -->
+            <div style='flex: 1; overflow: hidden; padding-top: 10px;'>
+                <div style='margin-bottom:10px;'>
+                    Tomas:&nbsp;&nbsp;Cantidad de tomas:&nbsp;
+                    <select name='num_tomas' id='num_tomas' onchange='actualizaTomas(this.value, <?= $num_tomas ?>)' <?= ($estado==4?'disabled':'') ?>>
+```
+
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L242-299)</summary>
+
+**Path:** `Unknown file`
+
+```
+                    if($(this).val().length > 20) {
+                        $.ajax({
+                            url: 'ruteador.php',
+                            type: 'POST', async: true,
+                            data: { opc: 'validaTomasSync', usuario: '<?= $numusuario ?>', contrato: '<?= $id ?>', domicilio: $(this).val(), num_tomas: $('#num_tomas').val() || 1 },
+                            success: function(resp) {
+                                if(resp.trim() !== 'OK') {
+                                    alert("Aviso Domicilio: " + resp);
+                                }
+                            }
+                        });
+                    }
+                });
+            });
+        </script>
+        <div style='display: flex; align-items: center; justify-content: space-between;
+                    padding: 20px 0; border-top: 1px solid #eee; margin-top: 20px; gap: 20px;'>
+
+            <!-- Panel Solo Lectura: Resumen actual de tomas (referencia para el cajero) -->
+            <div id='panel_tomas_ref' style='background: #f0f4ff; border: 1px solid #b8cdf8;
+                  border-radius: 8px; padding: 12px 18px; flex: 1; font-size: 12px; color: #333;'>
+                <b style='font-size: 13px; color: #2c5282;'>&#128202; Estado actual de tomas</b>
+                <div style='display: flex; gap: 16px; margin-top: 8px; flex-wrap: wrap;'>
+                    <?php foreach ($tomas as $n => $t): ?>
+                    <div style='background: #fff; border: 1px solid #d0d9ff; border-radius: 6px;
+                                padding: 8px 14px; min-width: 160px;'>
+                        <b style='color: #4a6fa5;'><?= ($n==1?'1ra.':'2da.') ?> Toma</b>
+                        <span style='font-size: 10px; color: #777; margin-left: 4px;'>
+                            (<?= ($t['tipo']==1 ? 'Comercial' : 'Normal') ?>)
+                        </span><br>
+                        <span style='color: <?= ($t['tiene_agua'] && $t['estado_agua'] ? "#155724" : "#721c24") ?>;'>
+                            &#128167; Agua: <b><?= ($t['tiene_agua'] ? ($t['estado_agua'] ? 'Conectada' : 'Desconectada') : 'Sin instalación') ?></b>
+                        </span><br>
+                        <span style='color: <?= ($t['tiene_drenaje'] && $t['estado_drenaje'] ? "#155724" : "#721c24") ?>;'>
+                            &#128295; Drenaje: <b><?= ($t['tiene_drenaje'] ? ($t['estado_drenaje'] ? 'Conectado' : 'Desconectado') : 'Sin descarga') ?></b>
+                        </span>
+                    </div>
+                    <?php endforeach; ?>
+                    <?php if (empty($tomas)): ?>
+                    <div style='color: #856404; font-style: italic;'>Sin tomas registradas para este contrato.</div>
+                    <?php endif; ?>
+                </div>
+            </div>
+
+            <!-- Panel de tomas: se muestra siempre debajo del formulario -->
+
+        </div>
+    </form>
+    <div id='aviso'></div>
+    <div id='nara'></div>
+</div>
+<hr>
+
+<h2>Acciones sobre el presente contrato</h2><br>
+<p>
+<div style='display: flex; flex-wrap: wrap; gap: 10px; align-items: center;'>
+    <a class='liga opcion' style='margin:0;' href='reportes/contratoinfo2.php?numcontrato=<?= $id ?>&orden=1' target='_blank'>Informe de Cuenta</a>
+    <a class='liga opcion' style='margin:0;' href='reportes/contratoinfo2.php?numcontrato=<?= $id ?>&orden=4' target='_blank'>Informe por fecha de pago</a>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `multi_replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 10 Apr 2026, 3:53 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 10 Apr 2026, 3:53 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+## User Request
+
+muy bien.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `Issues_Resueltos_UX_Ficha_Formulario_a966039d.md`
+**Language:** markdown
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Regla 09: usuario verificó → commit + push automático en agua repo + actualizar el resumen en chatledger.
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.229017497s
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 10 Apr 2026, 3:57 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Issues_Resueltos_UX_Ficha_Formulario_a966039d.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# Issues Resueltos — Sesión 2026-04-10 (UX Tweaks Formulario Edición)
+**Conversación:** `a966039d-cd86-440d-b61b-0788fab82e28`
+**Rama:** `feature/upgrade-v2-win-xampp`
+**Commit:** `fb40ae7`
+
+---
+
+## Issue 1 — Reposicionamiento del Botón "Guardar Cambios"
+
+### Scope Funcional
+El botón "Guardar Cambios" estaba al extremo derecho de un flex row compartido con el panel de tomas, generando una distribución desequilibrada. El cajero tenía que ir al extremo inferior derecho para guardar, sin relación visual clara con los campos que estaba editando.
+
+**Antes:** Botón a la derecha del panel de tomas, en el área inferior del formulario.  
+**Después:** Botón debajo del campo "Metros lineales" en la columna izquierda (`colspan=2`, `width: 100%`), logicamente agrupado con los campos editables. El panel de tomas queda solo en la parte inferior, como referencia independiente.
+
+### Scope Técnico
+- **Archivo:** `views/contratos/ficha.php`
+- Nueva fila `<tr>` con `<td colspan='2'>` insertada después del input `metros` en la `<table>` de la columna izquierda.
+- Botón removido del `div` flex inferior (que ahora solo contiene el panel de tomas).
+- Estilos del botón idénticos a los anteriores (verde `#28a745`, hover `#218838`, `width: 100%` para alinearse con inputs).
+
+---
+
+## Issue 2 — Limpieza de Label del Panel de Tomas
+
+### Scope Funcional
+El título del panel de referencia de tomas incluía el texto `(referencia — sólo lectura)` que era redundante: el diseño visual ya comunica que es de lectura (sin inputs ni controles). El texto extra añadía ruido visual.
+
+**Antes:** `📊 Estado actual de tomas (referencia — sólo lectura)`  
+**Después:** `📊 Estado actual de tomas`
+
+### Scope Técnico
+- **Archivo:** `views/contratos/ficha.php` — línea del `<b>` del panel `#panel_tomas_ref`.
+- Cambio de 1 línea: eliminación del substring `(referencia — sólo lectura)`.
+
+---
+
+## Archivos Modificados
+
+| Archivo | Repo | Tipo de cambio |
+|:---|:---:|:---|
+| `views/contratos/ficha.php` | `agua` | UX: reposición botón + limpieza label |
+
+## Verificación
+
+| Check | Resultado |
+|:---|:---:|
+| `php -l ficha.php` | ✅ Sin errores |
+| Verificación visual por usuario | ✅ Confirmado |
+
+---
+*Generado por Antigravity (Google Gemini) — 2026-04-10 · Protocolo Regla 09*
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `multi_replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 10 Apr 2026, 3:58 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Issues_Resueltos_UX_Ficha_Formulario_a966039d.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# Issues Resueltos — Sesión 2026-04-10 (UX Tweaks Formulario Edición)
+**Conversación:** `a966039d-cd86-440d-b61b-0788fab82e28`
+**Rama:** `feature/upgrade-v2-win-xampp`
+**Commits:** `fb40ae7` · `ad6d580`
+
+---
+
+## Issue 1 — Reposicionamiento del Botón "Guardar Cambios"
+
+### Scope Funcional
+El botón "Guardar Cambios" estaba al extremo derecho de un flex row compartido con el panel de tomas, generando una distribución desequilibrada. El cajero tenía que ir al extremo inferior derecho para guardar, sin relación visual clara con los campos que estaba editando.
+
+**Antes:** Botón a la derecha del panel de tomas, en el área inferior del formulario.  
+**Después:** Botón debajo del campo "Metros lineales" en la columna izquierda (`colspan=2`, `width: 100%`), logicamente agrupado con los campos editables. El panel de tomas queda solo en la parte inferior, como referencia independiente.
+
+### Scope Técnico
+- **Archivo:** `views/contratos/ficha.php`
+- Nueva fila `<tr>` con `<td colspan='2'>` insertada después del input `metros` en la `<table>` de la columna izquierda.
+- Botón removido del `div` flex inferior (que ahora solo contiene el panel de tomas).
+- Estilos del botón idénticos a los anteriores (verde `#28a745`, hover `#218838`, `width: 100%` para alinearse con inputs).
+
+---
+
+## Issue 2 — Limpieza de Label del Panel de Tomas
+
+### Scope Funcional
+El título del panel de referencia de tomas incluía el texto `(referencia — sólo lectura)` que era redundante: el diseño visual ya comunica que es de lectura (sin inputs ni controles). El texto extra añadía ruido visual.
+
+**Antes:** `📊 Estado actual de tomas (referencia — sólo lectura)`  
+**Después:** `📊 Estado actual de tomas`
+
+### Scope Técnico
+- **Archivo:** `views/contratos/ficha.php` — línea del `<b>` del panel `#panel_tomas_ref`.
+- Cambio de 1 línea: eliminación del substring `(referencia — sólo lectura)`.
+
+---
+
+## Archivos Modificados
+
+| Archivo | Repo | Tipo de cambio |
+|:---|:---:|:---|
+| `views/contratos/ficha.php` (`fb40ae7`) | `agua` | UX: reposición botón + limpieza label |
+| `views/contratos/ficha.php` (`ad6d580`) | `agua` | UX: botón compacto + panel tomas más arriba |
+
+## Verificación
+
+| Check | Resultado |
+|:---|:---:|
+| `php -l ficha.php` (ambos commits) | ✅ Sin errores |
+| Verificación visual por usuario | ✅ Confirmado |
+
+---
+*Generado por Antigravity (Google Gemini) — 2026-04-10 · Protocolo Regla 09*
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 10 Apr 2026, 3:58 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 10 Apr 2026, 3:58 pm
 
 ---
 

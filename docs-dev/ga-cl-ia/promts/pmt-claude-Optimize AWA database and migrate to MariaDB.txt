@@ -21804,6 +21804,8 @@ ok 3. Hacer yo pruebas crud en host c de agua.
 8 En http://localhost/agua/reportes/credencial.php?id=1353    (Datos del Contrato #1353
   A nombre de eulopina granados trujillo | 308) , el cuadro esta corto , el texto de la direccion se sale, checar en los otros hosts
 
+-- Refs ncy --
+  /home/carlos/Pictures/Screenshots/ncy01.png
 
 
 
