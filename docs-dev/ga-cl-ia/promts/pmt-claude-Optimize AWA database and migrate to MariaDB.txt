@@ -21814,29 +21814,49 @@ ok 3. Hacer yo pruebas crud en host c de agua.
 
 ===============================================================================================================================================================
                                                                 LISTA 2
-claude 
-1 Plan para fix de reglas en cbos de estados del contrato, issues, buscar avance en conversaciones pasadas.
-1.1 Issue a investigar que pasara en el pase a producción cuando para el caso de que se han ejecutado re-cargo automatico abril a los que no han págado.
+
+Ga
+Consistencia sql scripts refresh y migra, Validaciones
+Pedirle que cree informe md de esta peticion con imagen png del diagrama "Si, pero ejecuta todos los scripts, flujo host b -> host a -> host c , tiene sentido con la prueba T6 — Validación Cruzada Host A vs Host C ?"
+...
+
+Validar  pantallas de depuracion
+
+dar de baja cuenta premiun de ga domingo 7 pm!
+
+_____________________
+
+Claude 
+
+1. Listar todas las limpieza automaticas y manuales y el orden en que se haran 
+1.1 listen todos los procesos de saneamiento y con que herramienta se hara, si es manual o automatico, que falta, orden deben usarse y no romper consistencia.
+1.2 ver que esten todos los xlsx Datos-awa-limpieza
+  https://docs.google.com/spreadsheets/d/1wMeMPTSRoyNHqJ_xFljbw2Am82SBeybYBlrglA6uLwM/edit?gid=1440610976#gid=1440610976
+  En http://localhost/agua/admin/analisis/inventario_saneamiento.php
+
+2. Crear  Lista depurada de lo que va a realizar pruebas  y dar vobo doña Nancy y darselo a claude para que vea si esta todo eso incluido, o en scripts y que gaps hay.
+
+.....
 
 2 Arreglar lo de corte de caja y reporte de columnas, dárselo a Claude.
 2.1  Corte de caja, empatar lo mas cercano, todos los que me paso doña ncy.
 
 
+___
+GA
+1 Plan para fix de reglas en cbos de estados del contrato, issues, buscar avance en conversaciones pasadas.
+1.1 Issue a investigar que pasara en el pase a producción cuando para el caso de que se han ejecutado re-cargo automatico abril a los que no han págado.
 
-_____________________
-ga
+........
+E0. 
+Poder revertir las cancelaciones cargos de cto, susp. adm y tempo. desde la página de saneamientos.
 
-1. Listar todas las limpieza automaticas y manuales y el orden en que se haran 
-1.1 listen todos los procesos de saneamiento y con que herramienta se hara, si es manual o automatico, que falta, orden deben usarse y no romper consistencia.
-
-2  Lista depurada de lo que va a realizar pruebas  y dar vobo doña Nancy.
-
-
-
-
-
-11. Menú → Cargos (o donde esté el catálogo de cargos)
+E1. 
+Menú → Cargos (o donde esté el catálogo de cargos)
 En el filtro de estado, seleccionar "mostrar ocultos" o "todos" — porque el 624 ya viene con estado=0 desde el sync, así que no aparece en la lista normal de activos, Localizar el registro: ANUALIDAD DEL AGUA 2026 con automatico = No (ese es el 624; el 621 tiene automatico = Sí)
 Hacer clic en "Eliminar" — eso pone estado=2 en la BD, que es el estado de eliminación definitiva del sistema
+
+E2. 
+Que otras tablas seria adecuado partirlas similar a lo que ya se hizo para ligacargos ?
 
 ===============================================================================================================================================================
