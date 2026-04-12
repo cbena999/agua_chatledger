@@ -52,6 +52,7 @@ for LINK in "${!EXPECTED_LINKS[@]}"; do
     EXPECTED="${EXPECTED_LINKS[$LINK]}"
     if [ ! -L "$LINK" ]; then
         fail "$(basename $LINK) — NO es symlink (es archivo/dir real o no existe)"
+        echo -e "         ${YELLOW}REPARAR CON:${RESET} bash docs-dev/ga-cl-ia/chatledger_sync_ga_lnks.sh"
     elif [ "$(readlink "$LINK")" != "$EXPECTED" ]; then
         fail "$(basename $LINK) → apunta a '$(readlink "$LINK")' (esperado: '$EXPECTED')"
     elif [ ! -e "$LINK" ]; then

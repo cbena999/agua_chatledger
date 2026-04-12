@@ -19,6 +19,8 @@
   },
   "enabledMcpjsonServers": [
     "bdawahost-a",
-    "bdawahost-b"
-  ]
+    "bdawahost-b",
+    "bdawahost-c"
+  ],
+  "enableAllProjectMcpServers": true
 }

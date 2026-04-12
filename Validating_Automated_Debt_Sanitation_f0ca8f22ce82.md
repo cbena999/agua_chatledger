@@ -4,12 +4,12 @@
 
 | Field | Value |
 |-------|-------|
-| **Trajectory ID** | `8fcf7796-9f30-40aa-9730-1f969e4108de` |
+| **Trajectory ID** | `a477f16a-9d2e-4f3e-b232-c3995f56422a` |
 | **Cascade ID** | `641d61c3-6a67-4219-9eb6-f0ca8f22ce82` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 403 |
+| **Total Steps** | 502 |
 | **Started** | 11 Apr 2026, 11:24 am |
-| **Completed** | 11 Apr 2026, 1:41 pm |
+| **Completed** | 11 Apr 2026, 2:48 pm |
 
 ---
 
@@ -4058,7 +4058,7 @@ Let me try using the browser to render the Mermaid diagram to a PNG.
 
 ### Browser Automation
 
-**Status:** CORTEX_STEP_STATUS_RUNNING
+**Status:** Cancelled
 **Created:** 11 Apr 2026, 11:58 am
 
 ---
@@ -11059,6 +11059,4033 @@ I've finished executing the planned steps. I confirmed the validity of each step
 
 - **Thinking Duration:** 0.259447773s
 - **Model:** Gemini 3 Flash
+</details>
+
+---
+
+## User Request
+
+Encontre esto en bitacora_saneamiento / Cargos Depurados (Estado -1 / Archivados)
+1) Tiene varios cargos depurados, si esta su estado de contrato me aparce como  activo ? 
+2) Los siguientes tres recargos, no se deben depurar SI cumple:  contrato activo y no ha pagado sus cargos anuales ,entonces a partir de abir se le genera recargos automaticos; validar/buscar en profundida esta y otra reglas que ya estan implementadas pero quiza NO fueron incluidas en nuestras plan de mejoras.
+
+CTO 	Usuario 	Año 	Categoría 	Concepto / Leyenda 	Monto Depurado 	Estatus
+269 	enrique cisneros marín 	2006 	16 	RECARGOS AGUA ABRIL 	$36.00 	DEPURADO
+269 	enrique cisneros marín 	2006 	16 	RECARGOS AGUA JUNIO 	$36.00 	DEPURADO
+
+Dame un informe de este issue.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `03_sync_host_a.sql`
+**Language:** oracle-sql
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time. The exception is if the task is trivially simple.
+2. After your research is complete, ask the user any open questions using the ask_question tool. Don't use the tool to ask trivial questions like 'should I proceed?'.
+3. Create an implementation plan artifact with `request_feedback = true`. The user must approve the plan before you are allowed to proceed.
+4. After receiving approval, begin execution. Create and update the task artifact as you work.
+5. Verify any work that you have done.
+6. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Bitacora Errors**
+
+I'm currently focused on the `bitacora_saneamiento` data. I've identified two key problems so far. Firstly, an active contract inexplicably has "cargos depurados." Secondly, I'm now looking into specific "recargos" entries, like the "RECARGOS AGUA ABRIL" to determine if their state aligns with expectations.
+
+
+**Investigating Anomalies Further**
+
+I've got more information on contract 269. The recargos from June 2006 were improperly depurated. To investigate, I'll check its current status and charges, looking for the `batch_id` or timestamp to identify the source of the depuration. I'll need to validate our business logic, looking into both the recargo generation rule and `saneamiento_administrativo.php`. My new SDF logic shouldn't have touched it, since it filters by a different contract state.
+
+
+
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.469522641s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 11 Apr 2026, 2:24 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time. The exception is if the task is trivially simple.
+2. After your research is complete, ask the user any open questions using the ask_question tool. Don't use the tool to ask trivial questions like 'should I proceed?'.
+3. Create an implementation plan artifact with `request_feedback = true`. The user must approve the plan before you are allowed to proceed.
+4. After receiving approval, begin execution. Create and update the task artifact as you work.
+5. Verify any work that you have done.
+6. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 11 Apr 2026, 2:24 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time. The exception is if the task is trivially simple.
+2. After your research is complete, ask the user any open questions using the ask_question tool. Don't use the tool to ask trivial questions like 'should I proceed?'.
+3. Create an implementation plan artifact with `request_feedback = true`. The user must approve the plan before you are allowed to proceed.
+4. After receiving approval, begin execution. Create and update the task artifact as you work.
+5. Verify any work that you have done.
+6. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 11 Apr 2026, 2:24 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time. The exception is if the task is trivially simple.
+2. After your research is complete, ask the user any open questions using the ask_question tool. Don't use the tool to ask trivial questions like 'should I proceed?'.
+3. Create an implementation plan artifact with `request_feedback = true`. The user must approve the plan before you are allowed to proceed.
+4. After receiving approval, begin execution. Create and update the task artifact as you work.
+5. Verify any work that you have done.
+6. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Investigating Inconsistencies**
+
+I've found a discrepancy: only one entry in `cambios` for 269, and it is a cancellation from February 2026. However, the user claims to have seen it in `bitacora_saneamiento`. Considering this, and the fact that it is in the *manual panel* bitácora, it might have been a batch operation. Recent syncs could be the culprit!
+
+
+
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.134257486s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 11 Apr 2026, 2:24 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time. The exception is if the task is trivially simple.
+2. After your research is complete, ask the user any open questions using the ask_question tool. Don't use the tool to ask trivial questions like 'should I proceed?'.
+3. Create an implementation plan artifact with `request_feedback = true`. The user must approve the plan before you are allowed to proceed.
+4. After receiving approval, begin execution. Create and update the task artifact as you work.
+5. Verify any work that you have done.
+6. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Reviewing Automated Sanitations**
+
+I'm currently reviewing the latest run, and it indicates "36 contracts depurados" in the automatic sanitation process. Notably, the `batch_id` is set to 0. This is because it was removed in the synchronization script on Host A.
+
+
+**Investigating Sanitation Discrepancies**
+
+I'm now puzzled. The initial count of 36 sanitized contracts is throwing me off, given the overall contract number. I'm focusing on CTO 269. The query I ran should exclude it. Was it sanitized in a prior batch? I'm now exploring the logic in `saneamiento_administrativo.php` to understand potential user actions that might have triggered this, and reconciling the user's report of "active" with the sanitation data.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `02-reglas-negocio.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 4.403325274s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# Regla 02: Diccionario de Reglas de Negocio por Módulo
+
+Este documento es una entidad viva para registrar el descubrimiento y clasificación de todas las reglas de negocio contenidas en la base de datos `awa` y la webapp **Agua**.
+
+---
+
+## 📋 Clasificación por Módulos Funcionales
+
+### 📂 Módulo 01: Gestión de Contratos (Core)
+| ID | Regla | Estado |
+|:---:|---|:---:|
+| **C01** | Límite de **2 tomas (contratos)** activas por usuario en el mismo domicilio físico. | Implementada |
+| **C02** | Prohibida la modificación de estado de contratos en `4 (SUSPENSIÓN DEFINITIVA)`. | Implementada |
+| **C03** | Registro obligatorio de folios únicos por cada nuevo contrato. | Validada |
+| **C04** | **Motor de Paridad Universal**: Sincronización obligatoria; si una toma se activa/reconecta, su cargo anual debe restaurarse automáticamente. | Implementada |
+| **C05** | **Limpieza por Suspensión Definitiva**: Al pasar a Estado 4, se debe forzar la desconexión física y la cancelación de deuda anual actual. | Implementada |
+| **C06** | **Amnistía de Recargos en Reactivación**: Al pasar un contrato de cualquier estado suspendido a `1 (ACTIVO)`, los recargos de años anteriores al año en curso se cancelan automáticamente (`estado=-1`). Solo permanece vigente la deuda del año actual. Implementado en `_amnistiaRecargosHistoricos()` (contratos.php) + `_sincronizaParidadFinanciera()`. | Implementada |
+
+### 📂 Módulo 02: Facturación, Cargos y Recargos
+| ID | Regla | Estado |
+|:---:|---|:---:|
+| **F01** | Solo contratos en estados `1 (ACTIVO)`, `2 (SUSPENSIÓN TEMPORAL)` y `5 (SUSPENSIÓN ADMINISTRATIVA)` generan recargos automáticos. | Crítica |
+| **F02** | Cargos manuales a contratos en `4 (SUSPENSIÓN DEFINITIVA)` están prohibidos. | Crítica |
+| **F03** | **Auditoría de Reasignación de Cargos**: `regresarCargoCancelado()` valida estado del contrato (bloquea en estado 4) y registra la identidad del operador (`$_SESSION['usuario']`) en la tabla `cambios`. Requiere confirmación de usuario en la UI. | Implementada |
+| **F04** | El cálculo de la deuda debe ser atómico (Cargos + Recargos = Deuda Total). | Validada |
+
+### 📂 Módulo 03: Usuarios y Segmentación
+| ID | Regla | Estado |
+|:---:|---|:---:|
+| **U01** | Usuario estado `2` = **No Localizado**. Excluido de búsquedas estándar. | Implementada |
+| **U02** | Clasificación de "Usuarios Especiales": Aquellos sin contratos vinculados o con todos en suspensión definitiva. | Reporte V2 |
+
+### 📂 Módulo 04: Pagos, Caja y Folios
+| ID | Regla | Estado |
+|:---:|---|:---:|
+| **P01** | Cada pago debe generar un folio único e incremental que vincule a `ligacargos`. | Validada |
+| **P02** | Los folios de pago manuales no deben solaparse con folios de contratos nuevos. | En Revisión |
+
+### 📂 Módulo 05: Reportes y Validación de Datos
+| ID | Regla | Estado |
+|:---:|---|:---:|
+| **R01** | Sincronización estricta entre sumatoria de listas y totales de encabezado en todos los reportes operativos. | Auditoría |
+
+---
+
+## 🔍 Bitácora de Descubrimiento (Pendientes de Validar)
+Espacio para anotar comportamientos detectados en el código legado o procedimientos manuales que deben formalizarse como reglas:
+1.  **[D001]**: Investigar el trigger exacto de `calcula_recargos.php` para definir la fecha de corte mensual.
+2.  **[D002]**: Validar la lógica de "Metros Lineales" y su impacto en la deuda histórica.
+3.  **[D003]**: Determinar si existen descuentos automáticos por "Pronto Pago" no documentados.
+
+---
+**Nota para todos los agentes IA (Claude Code y Antigravity/Gemini)**: Al explorar el código, si descubres una nueva restricción o lógica condicional, agrégala aquí con un ID incremental y su módulo correspondiente.
+
+```
+
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time. The exception is if the task is trivially simple.
+2. After your research is complete, ask the user any open questions using the ask_question tool. Don't use the tool to ask trivial questions like 'should I proceed?'.
+3. Create an implementation plan artifact with `request_feedback = true`. The user must approve the plan before you are allowed to proceed.
+4. After receiving approval, begin execution. Create and update the task artifact as you work.
+5. Verify any work that you have done.
+6. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Recargos Regulations**
+
+I've been focusing on the interplay of 'Recargos' with contract states. Specifically, C06 dictates automatic cancellation of backdated recargos upon a contract's reactivation to 'ACTIVO' status, whilst F01 clarifies their generation based solely on specific states like 1 and 2. It's becoming clearer where the inconsistencies lie within the system.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `contratos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.188392110s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L799-836)</summary>
+
+**Path:** `Unknown file`
+
+```
+		    if ($num_tomas > $tomas_actuales && !in_array($c_estado, [1, 2])) {
+			    return "Restriccion: Solo se permite agregar nuevas tomas a contratos en estado Activo o Suspension Temporal.";
+		    }
+		}
+		$cond_id = " AND c.numcontrato != '$id' ";
+	} else {
+		$cond_id = "";
+	}
+
+	$dom_clean_sql_c = "REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(UPPER(c.domicilio), ' ', ''), '.', ''), ',', ''), 'Á','A'), 'É','E'), 'Í','I'), 'Ó','O'), 'Ú','U')";
+	$dom_clean_sql_v = "REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(UPPER('$domicilio'), ' ', ''), '.', ''), ',', ''), 'Á','A'), 'É','E'), 'Í','I'), 'Ó','O'), 'Ú','U')";
+	
+	$res_count = $y->q("SELECT COUNT(ct.id) FROM contrato c JOIN contrato_toma ct ON c.numcontrato = ct.numcontrato WHERE c.numusuario='$usr' AND $dom_clean_sql_c = $dom_clean_sql_v AND c.estado != 4 " . $cond_id);
+	list($tomas_otras) = $y->fetch_array($res_count);
+
+	if ($tomas_otras + intval($num_tomas) > 2) {
+		return "El usuario ya cuenta con $tomas_otras toma(s) en otros contratos para el domicilio indicado. Solo se permiten hasta 2 tomas por usuario en el mismo domicilio, previendo asignar $num_tomas extra.";
+	}
+
+	return "OK";
+}
+
+/**
+ * Regla C06 — Amnistía de Recargos en Reactivación
+ * Al reactivar un contrato (→ Estado 1 ACTIVO), cancela todos los recargos
+ * de años anteriores al año actual que estén pendientes (estado=0).
+ * Solo quedan vigentes los cargos y recargos del año en curso.
+ * Se registra auditoria en tabla cambios.
+ */
+function _amnistiaRecargosHistoricos($contrato, $y) {
+	$anio_actual = date('Y');
+
+	// Cancelar en tabla activa
+	$y->q("UPDATE ligacargos
+		    SET estado = -1
+		  WHERE numcontrato = '$contrato'
+		    AND recargo = 1
+		    AND anio < $anio_actual
+```
+
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time. The exception is if the task is trivially simple.
+2. After your research is complete, ask the user any open questions using the ask_question tool. Don't use the tool to ask trivial questions like 'should I proceed?'.
+3. Create an implementation plan artifact with `request_feedback = true`. The user must approve the plan before you are allowed to proceed.
+4. After receiving approval, begin execution. Create and update the task artifact as you work.
+5. Verify any work that you have done.
+6. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `contratos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L829-859)</summary>
+
+**Path:** `Unknown file`
+
+```
+	$anio_actual = date('Y');
+
+	// Cancelar en tabla activa
+	$y->q("UPDATE ligacargos
+		    SET estado = -1
+		  WHERE numcontrato = '$contrato'
+		    AND recargo = 1
+		    AND anio < $anio_actual
+		    AND estado = 0");
+
+	// Sincronizar en tabla histórica (esquema V2 split)
+	$y->q("UPDATE ligacargos_historico
+		    SET estado = -1
+		  WHERE numcontrato = '$contrato'
+		    AND recargo = 1
+		    AND anio < $anio_actual
+		    AND estado = 0");
+
+	// Contar filas afectadas para el log
+	$res_cnt = $y->q("SELECT COUNT(*) FROM vw_ligacargos_all
+		              WHERE numcontrato = '$contrato'
+		                AND recargo = 1
+		                AND anio < $anio_actual
+		                AND estado = -1");
+	list($afectadas) = $y->fetch_array($res_cnt);
+
+	if (intval($afectadas) > 0) {
+		$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato)
+		        VALUES(NOW(),
+		               'Amnistia de Recargos en Reactivacion (C06)',
+		               'Recargos historicos pendientes de anios anteriores a $anio_actual',
+```
+
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time. The exception is if the task is trivially simple.
+2. After your research is complete, ask the user any open questions using the ask_question tool. Don't use the tool to ask trivial questions like 'should I proceed?'.
+3. Create an implementation plan artifact with `request_feedback = true`. The user must approve the plan before you are allowed to proceed.
+4. After receiving approval, begin execution. Create and update the task artifact as you work.
+5. Verify any work that you have done.
+6. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Confirming Logic Depuration**
+
+I've confirmed the function `_amnistiaRecargosHistoricos` correctly depurates historical surcharges (recargos) from prior years. The user's input, "CTO 269 ... Año 2006 ... RECARGOS ... DEPURADO," aligns perfectly with this explicit logic. This further validates the implementation.
+
+
+
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.519168375s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 11 Apr 2026, 2:25 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time. The exception is if the task is trivially simple.
+2. After your research is complete, ask the user any open questions using the ask_question tool. Don't use the tool to ask trivial questions like 'should I proceed?'.
+3. Create an implementation plan artifact with `request_feedback = true`. The user must approve the plan before you are allowed to proceed.
+4. After receiving approval, begin execution. Create and update the task artifact as you work.
+5. Verify any work that you have done.
+6. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Potential Sources**
+
+I'm now investigating a potential source of the empty results for "Amnistia" in `cambios` for 269. It seems like the **Saneamiento Administrativo** (Manual Panel) might have cleansed those records. This panel uses its own descriptions, so I am going to check the charges for 26 to gain more insight.
+
+
+
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.329578355s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 11 Apr 2026, 2:25 pm
+
+---
+
+<details>
+<summary>Conversation History</summary>
+
+# Conversation History
+Here are the conversation IDs, titles, and summaries of your most recent 9 conversations, in reverse chronological order:
+
+<conversation_summaries>
+## Conversation 67884311-645c-4f5a-ae15-979d81d75006: Fixing Duplicate Contract Notes
+- Created: 2026-04-10T02:43:06Z
+- Last modified: 2026-04-11T06:03:31Z
+
+### USER Objective:
+Stabilizing Agua Fiscal Sanitation
+
+The user's objective is to complete the stabilization of the Agua web application by implementing a robust, auditable financial sanitation system. Key goals include:
+1. Finalizing the consolidation of reporting architecture by retiring legacy files and enforcing V2 standards.
+2. Developing an administrative "Saneamiento Administrativo" control panel with mandatory filters (status, period, category) to perform surgical, non-destructive fiscal adjustments.
+3. Implementing a "Batch ID" system for all mass sanitation operations to ensure full auditability and traceability in the `cambios` table.
+4. Hardening the data synchronization pipeline (Host B to C) to automatically sanitize "Estado 4" (Definitive Suspension) contracts while reserving manual control for other statuses.
+5. Refining the sanitation bitácora to provide professional, printable audit trails for financial adjustments.
+
+## Conversation a966039d-cd86-440d-b61b-0788fab82e28: Agua Contract Logic Stabilization
+- Created: 2026-04-10T16:49:29Z
+- Last modified: 2026-04-10T21:59:03Z
+
+### USER Objective:
+Stabilizing Agua Contract Logic
+
+The user's objective is to stabilize the Agua web application by implementing automated financial saneamiento, enforcing strict contract state transitions, and improving auditability. Key goals include:
+1. Implementing the "Amnistía de Recargos" (Regla C06) for contract reactivation to prevent punitive debt accumulation.
+2. Strengthening audit trails in `regresarCargoCancelado` (Regla F03) with operator logging and state validation.
+3. Enhancing the UI with a read-only infrastructure reference panel for contract edits.
+4. Formalizing a standardized session closure and documentation protocol (Regla 09) to ensure all verified changes are automatically committed to the `agua_chatledger` repository, maintaining architectural consistency across both Gemini and Claude Code environments.
+
+## Conversation 24485b9b-f530-4a20-8ea3-585e551c238f: Stabilizing User Search Filters
+- Created: 2026-04-09T04:59:38Z
+- Last modified: 2026-04-10T02:20:05Z
+
+### USER Objective:
+Stabilizing Agua Financial Saneamiento
+
+The user's objective is to stabilize the Agua web application by refactoring contract status logic and implementing a robust, web-based financial saneamiento system. Key goals include:
+1. Implementing defensive coding to enforce logical contract state transitions and prevent "Avalancha Punitiva" and "Deuda Zombi".
+2. Developing a centralized, parameter-driven administrative dashboard (`admin/saneamiento/`) for historical data cleanup (2018-2026), specifically targeting "Cargos Fantasma".
+3. Ensuring all saneamiento operations include audit trails and rollback capabilities via a new `batch_id` column to maintain fiscal integrity during the migration to the V2 schema.
+4. Organizing project assets and infrastructure within a dedicated `feature/saneamiento-v2` branch to ensure consistency with Host C migration requirements while maintaining a clean, modular codebase.
+
+## Conversation bdc4ae35-3174-4334-aa14-a427816e51bc: Migrating Assembly V2 Webapp
+- Created: 2026-04-08T17:39:02Z
+- Last modified: 2026-04-09T04:20:54Z
+
+### USER Objective:
+Finalizing Asamblea V2 Attendance Integration
+
+The user's objective is to finalize the standalone 'Asamblea V2' module by ensuring the attendance registration and reporting workflows are fully functional and compatible with the legacy system. Key goals include:
+1. UI/UX Refinement: Improving the admin grid layout and action button styling.
+2. Data Integrity: Ensuring multi-contract users are correctly grouped in the attendance list and ticket generation, while maintaining the legacy TXT report format for compatibility with the existing `asistencias.php` import process.
+3. System Synchronization: Verifying that the generated attendance TXT files remain compatible with the legacy `core.php` processing logic to prevent integration errors.
+4. Architectural Consolidation: Maintaining the `agua_chatledger` repository as the definitive source of truth for all project documentation and configuration, utilizing symlinks to ensure consistency across development environments.
+
+## Conversation aaee12b1-ccf8-44bc-b37a-b2cd531092cf: Stabilizing Host C Application Reports
+- Created: 2026-04-08T04:34:54Z
+- Last modified: 2026-04-08T06:52:29Z
+
+### USER Objective:
+Stabilizing Agua Application Migration
+
+The user's objective is to finalize the stabilization of the Agua web application on the Host C environment by completing a comprehensive audit of legacy code patterns, refactoring deprecated PHP functions to ensure compatibility with PHP 7.4/8.x, and removing obsolete legacy libraries to streamline the codebase. The goal is to ensure full operational integrity with MariaDB 10.4 by verifying that all administrative reports and CRUD operations correctly utilize the V2 split-schema views.
+
+## Conversation 3b5dff64-1c3c-474c-9796-423733a337f5: Tracking Contract Status Changes
+- Created: 2026-04-03T04:29:44Z
+- Last modified: 2026-04-08T05:18:33Z
+
+### USER Objective:
+Tracking Contract Status Changes
+
+The user's objective is to audit the recent status change history for contract #1167, associated with user JOSE GUADALUPE RIOS MALDONADO (userId 1329). The goal is to query the database—specifically checking the `cambios` or relevant audit tables—to determine if the contract's status has been modified recently and, if so, to retrieve the specific details of that transition.
+
+## Conversation 8c334798-0ddd-466f-b9a2-ec9516a28366: Optimizing MariaDB Slow Query Logging
+- Created: 2026-04-07T22:04:49Z
+- Last modified: 2026-04-08T02:03:21Z
+
+### USER Objective:
+Optimizing Contract Data Performance
+
+The user's objective is to resolve performance latency in the `ficha.php` contract view on the Host C environment. The goal is to optimize the database queries—specifically those involving `vw_ligacargos_all` and `cargos`—by refactoring the underlying SQL logic within `includes/negocio/contratos.php` to leverage the previously implemented covering indexes, ensuring faster data retrieval for contract records and associated financial history.
+
+## Conversation eec1714b-ec56-4b11-8988-005796c7496e: Counting Users On Host C
+- Created: 2026-04-08T01:08:50Z
+- Last modified: 2026-04-08T01:26:02Z
+
+### USER Objective:
+Counting Users On Host C
+
+The user's objective is to determine the total number of records in the `users` table on the Host C database environment. This involves connecting to the MariaDB instance (port 7002) on Host C and executing a `SELECT COUNT(*) FROM users;` query to retrieve the current count.
+
+## Conversation 04e85e13-ed07-4863-ae80-0a3e46d05184: 
+- Created: 2026-04-06T18:05:55Z
+- Last modified: 2026-04-07T07:00:49Z
+
+### USER Objective:
+Optimizing XAMPP Infrastructure Performance
+
+The user's objective is to resolve performance latency in the "Agua" web application by optimizing the Windows XAMPP 7.4.33 infrastructure. Key goals include tuning PHP (Opcache) and MariaDB (InnoDB buffer pool/logs) configurations, implementing system-level antivirus exclusions and VM video settings, and executing a database optimization plan that involves indexing, migrating tables to InnoDB, and implementing a historical data split for the `ligacargos` table.
+
+</conversation_summaries>
+
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 11 Apr 2026, 2:25 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time. The exception is if the task is trivially simple.
+2. After your research is complete, ask the user any open questions using the ask_question tool. Don't use the tool to ask trivial questions like 'should I proceed?'.
+3. Create an implementation plan artifact with `request_feedback = true`. The user must approve the plan before you are allowed to proceed.
+4. After receiving approval, begin execution. Create and update the task artifact as you work.
+5. Verify any work that you have done.
+6. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Investigating Log Differences**
+
+I've been looking over log entries for 269. No "Saneamiento" or "Amnistia" activities show up in the `cambios` table recently. The user mentioned finding something in "bitacora_saneamiento", which leads me to suspect it's not the same as `cambios`. It could be a view or report that includes data not necessarily recorded in `cambios`.
+
+
+
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.536241487s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 11 Apr 2026, 2:25 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time. The exception is if the task is trivially simple.
+2. After your research is complete, ask the user any open questions using the ask_question tool. Don't use the tool to ask trivial questions like 'should I proceed?'.
+3. Create an implementation plan artifact with `request_feedback = true`. The user must approve the plan before you are allowed to proceed.
+4. After receiving approval, begin execution. Create and update the task artifact as you work.
+5. Verify any work that you have done.
+6. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Unusual Charges**
+
+I've been analyzing the 2006 charges data and have just uncovered some unexpected entries. Most are either "Pagado" or "Pendiente," but I've now found charges with `estado = -1`. Specifically, I noticed "RECARGOS AGUA ABRIL" and "RECARGOS AGUA JUNIO" marked with this negative status. I'll need to investigate what this code means.
+
+
+
+
+### Actions
+
+**Tool:** `mcp_bdawahost-b_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.455644783s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 11 Apr 2026, 2:26 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time. The exception is if the task is trivially simple.
+2. After your research is complete, ask the user any open questions using the ask_question tool. Don't use the tool to ask trivial questions like 'should I proceed?'.
+3. Create an implementation plan artifact with `request_feedback = true`. The user must approve the plan before you are allowed to proceed.
+4. After receiving approval, begin execution. Create and update the task artifact as you work.
+5. Verify any work that you have done.
+6. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Discovering: Legacy Data's Origins**
+
+I've determined these charges were *already* processed in Legacy Host B, with an `estado = -1`. This suggests our current sync or logic didn't initiate the depuration; it's pre-existing data. Now, I'm checking the `fpago` field, which is `2011-05-`.
+
+
+**Analyzing: Depuration Scope**
+
+I'm now zeroing in on the user's report, and the interplay of active contracts. I believe the user is most concerned that new sanitation logic, or a sync, is incorrectly depurating `RECARGOS` on active contracts. D7's scope needs scrutiny, especially concerning existing data. I'm examining a query I introduced, `run_sync.sh`, looking for its impact on active contracts. My focus is narrowing to the intersection of those depurated legacy charges and the user's observations about the active contract state.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `saneamiento_administrativo.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 3.584230277s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/**
+ * Panel de Saneamiento Administrativo V2
+ * Depuración controlada de adeudos para estados 2 (Temporal) y 3 (Administrativa)
+ */
+header('Content-Type: text/html; charset=UTF-8');
+require_once "../config/Conexion.php";
+$y = new Conexion();
+$y->conectarBaseDatos();
+
+$msg = "";
+$impacto = null;
+$detalle_registros = [];
+
+// ═══════ PERIODOS OFICIALES DE CORTE ═══════
+// Patrón: trimestral/cuatrimestral según historial de la organización
+$periodos_oficiales = [
+    // 2026
+    ['ini'=>'05/01/2026','fin'=>'29/03/2026','label'=>'05 Ene 2026 al 29 Mar 2026'],
+    // 2025
+    ['ini'=>'29/11/2025','fin'=>'04/01/2026','label'=>'29 Nov 2025 al 04 Ene 2026'],
+    ['ini'=>'30/06/2025','fin'=>'28/11/2025','label'=>'30 Jun 2025 al 28 Nov 2025'],
+    ['ini'=>'31/03/2025','fin'=>'26/06/2025','label'=>'31 Mar 2025 al 26 Jun 2025'],
+    // 2024
+    ['ini'=>'16/12/2024','fin'=>'30/03/2025','label'=>'16 Dic 2024 al 30 Mar 2025'],
+    ['ini'=>'30/09/2024','fin'=>'15/12/2024','label'=>'30 Sep 2024 al 15 Dic 2024'],
+    ['ini'=>'01/07/2024','fin'=>'29/09/2024','label'=>'01 Jul 2024 al 29 Sep 2024'],
+    ['ini'=>'25/03/2024','fin'=>'30/06/2024','label'=>'25 Mar 2024 al 30 Jun 2024'],
+    // 2023
+    ['ini'=>'17/12/2023','fin'=>'24/03/2024','label'=>'17 Dic 2023 al 24 Mar 2024'],
+    ['ini'=>'01/10/2023','fin'=>'16/12/2023','label'=>'01 Oct 2023 al 16 Dic 2023'],
+    ['ini'=>'01/07/2023','fin'=>'30/09/2023','label'=>'01 Jul 2023 al 30 Sep 2023'],
+    ['ini'=>'01/04/2023','fin'=>'30/06/2023','label'=>'01 Abr 2023 al 30 Jun 2023'],
+    ['ini'=>'01/01/2023','fin'=>'31/03/2023','label'=>'01 Ene 2023 al 31 Mar 2023'],
+    // 2022
+    ['ini'=>'01/10/2022','fin'=>'31/12/2022','label'=>'01 Oct 2022 al 31 Dic 2022'],
+    ['ini'=>'01/07/2022','fin'=>'30/09/2022','label'=>'01 Jul 2022 al 30 Sep 2022'],
+    ['ini'=>'01/04/2022','fin'=>'30/06/2022','label'=>'01 Abr 2022 al 30 Jun 2022'],
+    ['ini'=>'01/01/2022','fin'=>'31/03/2022','label'=>'01 Ene 2022 al 31 Mar 2022'],
+    // 2021
+    ['ini'=>'01/10/2021','fin'=>'31/12/2021','label'=>'01 Oct 2021 al 31 Dic 2021'],
+    ['ini'=>'01/07/2021','fin'=>'30/09/2021','label'=>'01 Jul 2021 al 30 Sep 2021'],
+    ['ini'=>'01/04/2021','fin'=>'30/06/2021','label'=>'01 Abr 2021 al 30 Jun 2021'],
+    ['ini'=>'01/01/2021','fin'=>'31/03/2021','label'=>'01 Ene 2021 al 31 Mar 2021'],
+    // 2020
+    ['ini'=>'01/10/2020','fin'=>'31/12/2020','label'=>'01 Oct 2020 al 31 Dic 2020'],
+    ['ini'=>'01/07/2020','fin'=>'30/09/2020','label'=>'01 Jul 2020 al 30 Sep 2020'],
+    ['ini'=>'01/04/2020','fin'=>'30/06/2020','label'=>'01 Abr 2020 al 30 Jun 2020'],
+    ['ini'=>'01/01/2020','fin'=>'31/03/2020','label'=>'01 Ene 2020 al 31 Mar 2020'],
+    // 2019
+    ['ini'=>'01/10/2019','fin'=>'31/12/2019','label'=>'01 Oct 2019 al 31 Dic 2019'],
+    ['ini'=>'01/07/2019','fin'=>'30/09/2019','label'=>'01 Jul 2019 al 30 Sep 2019'],
+    ['ini'=>'01/04/2019','fin'=>'30/06/2019','label'=>'01 Abr 2019 al 30 Jun 2019'],
+    ['ini'=>'01/01/2019','fin'=>'31/03/2019','label'=>'01 Ene 2019 al 31 Mar 2019'],
+    // 2018
+    ['ini'=>'01/10/2018','fin'=>'31/12/2018','label'=>'01 Oct 2018 al 31 Dic 2018'],
+    ['ini'=>'01/07/2018','fin'=>'30/09/2018','label'=>'01 Jul 2018 al 30 Sep 2018'],
+    ['ini'=>'01/04/2018','fin'=>'30/06/2018','label'=>'01 Abr 2018 al 30 Jun 2018'],
+    ['ini'=>'01/01/2018','fin'=>'31/03/2018','label'=>'01 Ene 2018 al 31 Mar 2018'],
+    // Todo el año (agrupados)
+    ['ini'=>'todo_2025','fin'=>'todo_2025','label'=>'── Todo 2025 ──'],
+    ['ini'=>'todo_2024','fin'=>'todo_2024','label'=>'── Todo 2024 ──'],
+    ['ini'=>'todo_2023','fin'=>'todo_2023','label'=>'── Todo 2023 ──'],
+    ['ini'=>'todo_2022','fin'=>'todo_2022','label'=>'── Todo 2022 ──'],
+    ['ini'=>'todo_2021','fin'=>'todo_2021','label'=>'── Todo 2021 ──'],
+    ['ini'=>'todo_2020','fin'=>'todo_2020','label'=>'── Todo 2020 ──'],
+    ['ini'=>'todo_2019','fin'=>'todo_2019','label'=>'── Todo 2019 ──'],
+    ['ini'=>'todo_2018','fin'=>'todo_2018','label'=>'── Todo 2018 ──'],
+];
+
+// ═══════ CATEGORÍAS DINÁMICAS ═══════
+// Solo mostrar categorías que tengan cargos pendientes en estados 2 o 3
+$cats_con_datos = [];
+$q_cats = "SELECT l.categoria, cat.nombre, COUNT(*) as qty, SUM(l.monto) as total
+    FROM vw_ligacargos_all l
+    JOIN contrato c ON l.numcontrato = c.numcontrato
+    JOIN categorias cat ON l.categoria = cat.id
+    WHERE l.estado = 0 AND c.estado IN (2, 3, 4)
+    GROUP BY l.categoria, cat.nombre
+    ORDER BY qty DESC";
+$res_cats = $y->q($q_cats);
+while ($rc = $y->fetch_array($res_cats)) {
+    $cats_con_datos[] = $rc;
+}
+
+// ═══════ PROCESAR ACCIONES ═══════
+$action = isset($_POST['action']) ? $_POST['action'] : '';
+$filtros = [
+    'estados'    => isset($_POST['estados']) ? $_POST['estados'] : [],
+    'periodo'    => isset($_POST['periodo']) ? $_POST['periodo'] : '',
+    'categorias' => isset($_POST['categorias']) ? $_POST['categorias'] : [],
+    'motivo'     => isset($_POST['motivo']) ? trim($_POST['motivo']) : ''
+];
+
+function parsePeriodo($periodo_val) {
+    // "todo_2024" → year filter
+    if (strpos($periodo_val, 'todo_') === 0) {
+        $anio = str_replace('todo_', '', $periodo_val);
+        return ['type' => 'year', 'anio' => intval($anio)];
+    }
+    // "dd/mm/yyyy|dd/mm/yyyy"
+    $parts = explode('|', $periodo_val);
+    if (count($parts) == 2) {
+        return ['type' => 'range', 'ini' => $parts[0], 'fin' => $parts[1]];
+    }
+    return null;
+}
+
+function buildWhere($f) {
+    if (empty($f['estados'])) return "1=0";
+    
+    $estados_safe = array_map('intval', $f['estados']);
+    $where = "l.estado = 0 AND c.estado IN (" . implode(',', $estados_safe) . ")";
+    
+    // Periodo
+    $p = parsePeriodo($f['periodo']);
+    if ($p) {
+        if ($p['type'] == 'year') {
+            $where .= " AND l.anio = {$p['anio']}";
+        } else {
+            $where .= " AND l.anio <= " . intval(substr($p['fin'], 6, 4));
+        }
+    }
+    
+    // Categorías
+    if (!empty($f['categorias'])) {
+        $cats_safe = array_map('intval', $f['categorias']);
+        $where .= " AND l.categoria IN (" . implode(',', $cats_safe) . ")";
+    }
+    
+    return $where;
+}
+
+if ($action == 'calcular' || $action == 'ejecutar') {
+    $where = buildWhere($filtros);
+    
+    // Cálculo de impacto
+    $query_calc = "
+        SELECT 
+            COUNT(*) as total_filas,
+            COALESCE(SUM(l.monto), 0) as total_monto,
+            COUNT(DISTINCT l.numcontrato) as total_contratos,
+            COALESCE(SUM(CASE WHEN l.anio >= " . date('Y') . " THEN l.monto ELSE 0 END), 0) as monto_cartera_activa,
+            COALESCE(SUM(CASE WHEN l.anio < " . date('Y') . " THEN l.monto ELSE 0 END), 0) as monto_rezago_hist
+        FROM vw_ligacargos_all l
+        JOIN contrato c ON l.numcontrato = c.numcontrato
+        WHERE $where
+    ";
+    $res_calc = $y->q($query_calc);
+    $impacto = $y->fetch_array($res_calc);
+```
+
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time. The exception is if the task is trivially simple.
+2. After your research is complete, ask the user any open questions using the ask_question tool. Don't use the tool to ask trivial questions like 'should I proceed?'.
+3. Create an implementation plan artifact with `request_feedback = true`. The user must approve the plan before you are allowed to proceed.
+4. After receiving approval, begin execution. Create and update the task artifact as you work.
+5. Verify any work that you have done.
+6. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Sanitation Log Data**
+
+I've zeroed in on the "bitácora_saneamiento" to examine charges related to CTO 269 (Active). I've found that CTO 269 is designated as ACTIVO, or State 1. I'm focused on the depurated charges. I see several entries where charges against CTO 269 have been depurated. This raises questions: Why were these charges deemed necessary to depurate, and how were these determinations made?
+
+
+**Investigating Legacy Depurations**
+
+I've confirmed those depurated charges against CTO 269 predate our new sanitation process, originating from the legacy system. The key lies in the fact Host B already marked them as `estado = -1` in 2011. I am building a hypothesis: perhaps the user sees a report with *all* depurated charges, not just those from our new process, leading to confusion. The `cambios` log for 269 confirms no recent sanitation batch activity, pointing definitively to legacy depurations. Now, I must understand if these entries are appearing in the UI for the new Saneamiento Panel, and investigate how that bitácora is built. Also I am going to explore the rule validation process.
+
+
+**Uncovering Sanitation Logic Flaws**
+
+I'm now diving deep, zeroing in on the crux of the issue: our synchronization logic or another PHP script might be indiscriminately depurating recargos for active contracts (State 1). I've discovered `admin/saneamiento_administrativo.php` potentially allows the user to select state 1, which would trigger depuration of active contracts. I'm focusing on lines 89-93 and 78 for execution flow, and I am going to explore how we are pulling the correct state for the correct execution. The state selection on the UI may be the key.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `saneamiento_administrativo.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 5.334920550s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L150-391)</summary>
+
+**Path:** `Unknown file`
+
+```
+    
+    // Detalle por categoría para la segunda columna
+    $query_det = "
+        SELECT l.categoria, cat.nombre AS cat_nombre, COUNT(*) as qty, SUM(l.monto) as total
+        FROM vw_ligacargos_all l
+        JOIN contrato c ON l.numcontrato = c.numcontrato
+        JOIN categorias cat ON l.categoria = cat.id
+        WHERE $where
+        GROUP BY l.categoria, cat.nombre
+        ORDER BY total DESC
+    ";
+    $res_det = $y->q($query_det);
+    while ($rd = $y->fetch_array($res_det)) {
+        $detalle_registros[] = $rd;
+    }
+}
+
+if ($action == 'ejecutar') {
+    if (empty($filtros['motivo']) || strlen($filtros['motivo']) < 10) {
+        $msg = "<div class='alert error'>Error: Debe proporcionar un motivo válido (mín. 10 caracteres).</div>";
+    } elseif (empty($filtros['estados'])) {
+        $msg = "<div class='alert error'>Error: Debe seleccionar al menos un estado de contrato.</div>";
+    } else {
+        $batch_id = time();
+        $where = buildWhere($filtros);
+        
+        // 1. Audit trail
+        $motivo_safe = $y->real_escape_string($filtros['motivo']);
+        $insert_audit = "
+            INSERT INTO cambios (numcontrato, batch_id, fecha, descripcion, antes, despues)
+            SELECT DISTINCT l.numcontrato, $batch_id, NOW(), 
+                   'Saneamiento Administrativo: $motivo_safe', 
+                   'Estado Cargo: 0 (Pendiente)', 'Estado Cargo: -1 (Depurado)'
+            FROM vw_ligacargos_all l
+            JOIN contrato c ON l.numcontrato = c.numcontrato
+            WHERE $where
+        ";
+        $y->q($insert_audit);
+        
+        // 2. Depuración en ambas tablas físicas
+        $update_p1 = "UPDATE ligacargos l JOIN contrato c ON l.numcontrato = c.numcontrato SET l.estado = -1 WHERE $where";
+        $y->q($update_p1); $rows1 = $y->affected_rows();
+        
+        $update_p2 = "UPDATE ligacargos_historico l JOIN contrato c ON l.numcontrato = c.numcontrato SET l.estado = -1 WHERE $where";
+        $y->q($update_p2); $rows2 = $y->affected_rows();
+        
+        $total_rows = $rows1 + $rows2;
+        $msg = "<div class='alert success'>Éxito: Se han depurado <strong>$total_rows</strong> cargos. Lote: <strong>$batch_id</strong> — <a href='bitacora_saneamiento.php?batch=$batch_id' target='_blank'>Ver en Bitácora &rarr;</a></div>";
+        $impacto = null;
+        $detalle_registros = [];
+    }
+}
+
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel de Saneamiento Administrativo - Agua V2</title>
+    <style>
+        :root { --primary: #2980b9; --secondary: #34495e; --accent: #e67e22; --success: #27ae60; --danger: #e74c3c; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f0f3f5; margin: 0; padding: 20px; color: #333; }
+        .container { max-width: 1100px; margin: 0 auto; background: #fff; padding: 35px; border-radius: 12px; box-shadow: 0 4px 30px rgba(0,0,0,0.1); }
+        h1 { color: var(--secondary); border-bottom: 2px solid #eee; padding-bottom: 15px; margin-top: 0; font-size: 1.5em; }
+        .form-group { margin-bottom: 20px; }
+        label.title { display: block; font-weight: bold; margin-bottom: 8px; color: var(--secondary); font-size: 0.95em; }
+        .options-row { display: flex; gap: 25px; background: #f8f9fa; padding: 12px 15px; border-radius: 8px; border: 1px solid #dee2e6; }
+        .options-row label { font-weight: normal; cursor: pointer; font-size: 0.9em; }
+        select, input[type="text"] { width: 100%; padding: 9px 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-size: 0.9em; }
+        .btn { padding: 11px 22px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 15px; transition: 0.3s; }
+        .btn-calc { background: var(--primary); color: white; }
+        .btn-calc:hover { background: #2471a3; }
+        .btn-exec { background: var(--danger); color: white; width: 100%; margin-top: 15px; font-size: 14px; }
+        .btn-exec:hover { background: #c0392b; }
+        .alert { padding: 15px; border-radius: 6px; margin-bottom: 20px; font-size: 0.95em; }
+        .success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        
+        /* ── Dos columnas para impacto ── */
+        .impact-area { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 25px; }
+        .impact-panel { background: #fff8e1; border-left: 5px solid var(--accent); padding: 20px; border-radius: 4px; }
+        .impact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 12px; }
+        .impact-item { text-align: center; }
+        .impact-val { display: block; font-size: 18px; font-weight: bold; color: var(--danger); }
+        .impact-label { font-size: 11px; color: #666; text-transform: uppercase; }
+        .detail-panel { background: #f8f9fa; border-left: 5px solid var(--primary); padding: 20px; border-radius: 4px; }
+        .detail-panel table { width: 100%; border-collapse: collapse; font-size: 0.85em; }
+        .detail-panel th { background: #eee; text-align: left; padding: 6px 8px; font-size: 0.8em; text-transform: uppercase; color: #666; }
+        .detail-panel td { padding: 5px 8px; border-bottom: 1px solid #eee; }
+        
+        /* ── Categorías Grid ── */
+        .cats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; background: #f8f9fa; padding: 12px; border-radius: 8px; border: 1px solid #dee2e6; }
+        .cats-grid label { font-size: 0.82em; cursor: pointer; display: flex; align-items: center; gap: 5px; }
+        .cats-grid .cat-count { color: #999; font-size: 0.85em; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>&#9881; Saneamiento y Amnistías Administrativas</h1>
+    
+    <?= $msg ?>
+
+    <form method="POST">
+        <!-- 1. Estados -->
+        <div class="form-group">
+            <label class="title">1. Seleccione Estados de Contrato (Mandatorio)</label>
+            <div class="options-row">
+                <label><input type="checkbox" name="estados[]" value="2" <?= in_array(2, $filtros['estados']) ? 'checked' : '' ?>> (2) Suspensión Temporal</label>
+                <label><input type="checkbox" name="estados[]" value="3" <?= in_array(3, $filtros['estados']) ? 'checked' : '' ?>> (3) Suspensión Administrativa</label>
+                <label><input type="checkbox" name="estados[]" value="4" <?= in_array(4, $filtros['estados']) ? 'checked' : '' ?>> (4) Suspensión Definitiva</label>
+            </div>
+            <small style="color: grey;">Todos los estados se depuran con archivado lógico (estado → -1) y audit trail vía batch_id.</small>
+        </div>
+
+        <div style="display: flex; gap: 20px;">
+            <!-- 2. Periodo Oficial -->
+            <div class="form-group" style="flex: 1;">
+                <label class="title">2. Periodo de Corte</label>
+                <select name="periodo">
+                    <option value="">-- Seleccione un Periodo --</option>
+                    <?php 
+                    $current_year = '';
+                    foreach ($periodos_oficiales as $p): 
+                        // Optgroup por año
+                        $p_year = substr($p['ini'], 6, 4);
+                        if (strpos($p['ini'], 'todo_') === 0) $p_year = 'anuales';
+                        if ($p_year != $current_year) {
+                            if ($current_year) echo "</optgroup>";
+                            $group_label = ($p_year == 'anuales') ? 'Año Completo' : "Periodos $p_year";
+                            echo "<optgroup label='$group_label'>";
+                            $current_year = $p_year;
+                        }
+                        $val = (strpos($p['ini'], 'todo_') === 0) ? $p['ini'] : $p['ini'] . '|' . $p['fin'];
+                        $sel = ($filtros['periodo'] == $val) ? 'selected' : '';
+                    ?>
+                        <option value="<?= $val ?>" <?= $sel ?>><?= $p['label'] ?></option>
+                    <?php endforeach; ?>
+                    <?php if ($current_year) echo "</optgroup>"; ?>
+                </select>
+            </div>
+        </div>
+
+        <!-- 3. Categorías Dinámicas -->
+        <div class="form-group">
+            <label class="title">3. Categorías a Depurar (solo las que tienen cargos pendientes)</label>
+            <?php if (count($cats_con_datos) > 0): ?>
+            <div class="cats-grid">
+                <?php foreach ($cats_con_datos as $cat): 
+                    $checked = in_array($cat['categoria'], $filtros['categorias']) ? 'checked' : '';
+                ?>
+                    <label>
+                        <input type="checkbox" name="categorias[]" value="<?= $cat['categoria'] ?>" <?= $checked ?>>
+                        <?= htmlspecialchars($cat['nombre']) ?>
+                        <span class="cat-count">(<?= $cat['qty'] ?> cargos / $<?= number_format($cat['total'], 0) ?>)</span>
+                    </label>
+                <?php endforeach; ?>
+            </div>
+            <?php else: ?>
+                <p style="color: #95a5a6;">No hay cargos pendientes en contratos con Estado 2 o 3.</p>
+            <?php endif; ?>
+        </div>
+
+        <!-- 4. Motivo -->
+        <div class="form-group">
+            <label class="title">4. Justificación Administrativa (Motivo del Lote)</label>
+            <input type="text" name="motivo" value="<?= htmlspecialchars($filtros['motivo']) ?>" placeholder="Ej: Amnistía General aprobada en Asamblea del 10/Abr/2026..." required>
+        </div>
+
+        <button type="submit" name="action" value="calcular" class="btn btn-calc">Calcular Impacto del Saneamiento</button>
+
+        <!-- ═══════ ÁREA DE IMPACTO (Dos columnas) ═══════ -->
+        <?php if ($impacto && $impacto['total_filas'] > 0): ?>
+            <div class="impact-area">
+                <!-- Col 1: Resumen numérico -->
+                <div class="impact-panel">
+                    <h3 style="margin-top: 0;">Impacto Estimado del Ajuste</h3>
+                    <div class="impact-grid">
+                        <div class="impact-item">
+                            <span class="impact-val"><?= number_format($impacto['total_filas']) ?></span>
+                            <span class="impact-label">Cargos a Depurar</span>
+                        </div>
+                        <div class="impact-item">
+                            <span class="impact-val">$<?= number_format($impacto['total_monto'], 2) ?></span>
+                            <span class="impact-label">Monto Total</span>
+                        </div>
+                        <div class="impact-item">
+                            <span class="impact-val"><?= $impacto['total_contratos'] ?></span>
+                            <span class="impact-label">Contratos</span>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 18px; padding-top: 12px; border-top: 1px dashed #cca;">
+                        <p style="margin: 0 0 8px; font-weight: bold; font-size: 0.9em;">Reducciones en Reportes:</p>
+                        <ul style="font-size: 0.85em; margin: 0; padding-left: 20px;">
+                            <li>Reducción en <strong>Cartera Vencida (<?= date('Y') ?>+)</strong>: $<?= number_format($impacto['monto_cartera_activa'], 2) ?></li>
+                            <li>Reducción en <strong>Rezago Histórico (Pre-<?= date('Y') ?>)</strong>: $<?= number_format($impacto['monto_rezago_hist'], 2) ?></li>
+                        </ul>
+                    </div>
+
+                    <button type="submit" name="action" value="ejecutar" class="btn btn-exec" onclick="return confirm('ATENCIÓN: Se cambiará el estado de <?= number_format($impacto['total_filas']) ?> cargos a -1 (ARCHIVADO).\nMonto total: $<?= number_format($impacto['total_monto'], 2) ?>\n\n¿Desea continuar con esta depuración?')">Confirmar y Ejecutar Depuración por Lote</button>
+                </div>
+
+                <!-- Col 2: Detalle por categoría -->
+                <div class="detail-panel">
+                    <h3 style="margin-top: 0;">Detalle por Categoría</h3>
+                    <table>
+                        <thead>
+                            <tr><th>Categoría</th><th style="text-align: center;">Cargos</th><th style="text-align: right;">Monto</th></tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($detalle_registros as $d): ?>
+                            <tr>
+                                <td><?= htmlspecialchars($d['cat_nombre']) ?></td>
+                                <td style="text-align: center;"><?= $d['qty'] ?></td>
+                                <td style="text-align: right; font-family: monospace;">$<?= number_format($d['total'], 2) ?></td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        <?php elseif ($action == 'calcular'): ?>
+            <div style="background: #f8f9fa; border-left: 5px solid #6c757d; padding: 20px; border-radius: 4px; margin-top: 25px;">
+                <p style="margin: 0;">No se encontraron cargos pendientes que coincidan con los filtros seleccionados.</p>
+            </div>
+        <?php endif; ?>
+    </form>
+    
+    <div style="margin-top: 40px; text-align: center; border-top: 1px solid #eee; padding-top: 15px;">
+        <a href="bitacora_saneamiento.php" style="color: #666; text-decoration: none; font-size: 13px;">&#128196; Ver Bitácora de Saneamientos Pasados</a>
+        &nbsp;|&nbsp;
+        <a href="verif_depuracion_cargos_estado4.php" style="color: #666; text-decoration: none; font-size: 13px;">&#128270; Verificación Post-Depuración (Estado 4)</a>
+    </div>
+</div>
+
+</body>
+</html>
+<?php 
+$y->cerrarConexion(); 
+?>
+
+```
+
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time. The exception is if the task is trivially simple.
+2. After your research is complete, ask the user any open questions using the ask_question tool. Don't use the tool to ask trivial questions like 'should I proceed?'.
+3. Create an implementation plan artifact with `request_feedback = true`. The user must approve the plan before you are allowed to proceed.
+4. After receiving approval, begin execution. Create and update the task artifact as you work.
+5. Verify any work that you have done.
+6. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Investigating the Mismatch**
+
+I'm currently focused on the discrepancy between the "Bitácora" and the active contract status of CTO 269. The contract is confirmed as active (Estado 1), but I'm also finding that charges from 2006 have been depurated (Estado -1). I am working to determine how this might affect the contract's overall status.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `bitacora_saneamiento.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.662366075s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+header('Content-Type: text/html; charset=UTF-8');
+require_once "../config/Conexion.php";
+$y = new Conexion();
+$y->conectarBaseDatos();
+
+$id_contrato = isset($_GET['id']) ? $_GET['id'] : '';
+$batch_filter = isset($_GET['batch']) ? $_GET['batch'] : '';
+$fecha_ini = isset($_GET['fecha_ini']) ? $_GET['fecha_ini'] : '';
+$fecha_fin = isset($_GET['fecha_fin']) ? $_GET['fecha_fin'] : '';
+
+// ── Consulta de Audit Log ──
+// Siempre mostramos nombre, estado y detalle de cargos
+$where_cambios = $id_contrato 
+    ? "WHERE ch.numcontrato = '$id_contrato'" 
+    : "WHERE (ch.descripcion LIKE '%Saneamiento%' OR ch.batch_id > 0)";
+
+if ($batch_filter) {
+    $where_cambios .= " AND ch.batch_id = '$batch_filter'";
+}
+if ($fecha_ini && $fecha_fin) {
+    $where_cambios .= " AND DATE(ch.fecha) BETWEEN '$fecha_ini' AND '$fecha_fin'";
+}
+
+$query_audit = "
+    SELECT ch.*, 
+           c.estado AS estado_contrato,
+           u.nombre AS nombre_usuario,
+           (SELECT GROUP_CONCAT(DISTINCT n.nota SEPARATOR ' | ') 
+            FROM notas n WHERE n.numcontrato = ch.numcontrato 
+            ORDER BY n.fecha DESC LIMIT 3) AS notas_contrato
+    FROM cambios ch
+    LEFT JOIN contrato c ON ch.numcontrato = c.numcontrato
+    LEFT JOIN usuario u ON c.numusuario = u.noconsecutivo
+    $where_cambios 
+    ORDER BY ch.fecha DESC 
+    LIMIT 500
+";
+$res_audit = $y->q($query_audit);
+
+// ── Consulta de Cargos Depurados ──
+// Si viene un contrato, mostramos SUS depurados
+// Si viene un batch_id, mostramos los depurados de los contratos de ese lote
+// Si no viene nada, mostramos una muestra general
+if ($id_contrato) {
+    $where_cargos = "WHERE l.numcontrato = '$id_contrato' AND l.estado = -1";
+} elseif ($batch_filter) {
+    // Mostrar cargos depurados de los contratos que aparecen en ese lote
+    $where_cargos = "WHERE l.estado = -1 AND l.numcontrato IN (
+        SELECT DISTINCT numcontrato FROM cambios WHERE batch_id = '$batch_filter'
+    )";
+} else {
+    $where_cargos = "WHERE l.estado = -1 ORDER BY l.anio DESC, l.leyenda ASC LIMIT 200";
+}
+$query_cargos = "SELECT l.*, u.nombre AS nombre_usuario 
+    FROM vw_ligacargos_all l 
+    LEFT JOIN contrato c ON l.numcontrato = c.numcontrato
+    LEFT JOIN usuario u ON c.numusuario = u.noconsecutivo
+    $where_cargos";
+$res_cargos = $y->q($query_cargos);
+$num_cargos = $y->num_rows($res_cargos);
+
+// Mapa de estados
+$estados_label = [1=>'ACTIVO', 2=>'SUSP. TEMPORAL', 3=>'SUSP. ADMINISTRATIVA', 4=>'SUSP. DEFINITIVA'];
+
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Bitácora de Saneamiento - Agua V2</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 20px; background-color: #f4f7f6; color: #333; }
+        .container { max-width: 1400px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        h1 { color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 10px; margin-top: 0; }
+        .section-title { font-size: 1.2em; font-weight: bold; color: #2980b9; margin: 25px 0 15px 0; display: flex; align-items: center; gap: 10px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+        th, td { padding: 8px 10px; text-align: left; border-bottom: 1px solid #eee; font-size: 0.85em; }
+        th { background-color: #f8f9fa; color: #7f8c8d; text-transform: uppercase; font-size: 0.75em; letter-spacing: 0.5px; position: sticky; top: 0; }
+        tr:hover { background-color: #f9fafb; }
+        .badge { display: inline-block; padding: 3px 7px; border-radius: 4px; font-size: 0.75em; font-weight: bold; }
+        .badge-archive { background-color: #e8f4fd; color: #2980b9; border: 1px solid #d1e9f9; }
+        .badge-audit { background-color: #fef9e7; color: #9a7d0a; border: 1px solid #f9e79f; }
+        .badge-e1 { background: #d5f5e3; color: #196f3d; } .badge-e2 { background: #fef9e7; color: #9a7d0a; }
+        .badge-e3 { background: #fdedec; color: #922b21; } .badge-e4 { background: #eaecee; color: #566573; }
+        .monto { font-family: 'Courier New', Courier, monospace; font-weight: bold; text-align: right; }
+        .filters { background: #eef2f3; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
+        .filters form { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; }
+        .filter-group { display: flex; flex-direction: column; gap: 4px; }
+        .filter-group label { font-size: 11px; font-weight: bold; color: #666; }
+        .filter-group input { padding: 6px 8px; border: 1px solid #ccc; border-radius: 4px; }
+        .no-data { text-align: center; padding: 40px; color: #95a5a6; font-style: italic; }
+        .btn-back { display: inline-block; margin-bottom: 15px; color: #3498db; text-decoration: none; font-weight: bold; }
+        .notas-col { max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 0.8em; color: #888; }
+        
+        @media print {
+            body { background: white; padding: 0; }
+            .container { box-shadow: none; border: none; width: 100%; max-width: none; padding: 10px; }
+            .filters, .btn-back, h1, .no-print { display: none; }
+            .print-header { display: block !important; border-bottom: 2px solid #333; margin-bottom: 15px; }
+            table { font-size: 7pt; } th { background: #eee !important; color: black !important; }
+        }
+        .print-header { display: none; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="print-header">
+        <h2 style="margin:0;">AUDITORÍA DE SANEAMIENTO FISCAL - AGUA V2</h2>
+        <p>Fecha de Reporte: <?= date("d/m/Y H:i") ?> | <?= $id_contrato ? "Contrato: $id_contrato" : "Vista Global" ?></p>
+    </div>
+
+    <a href="javascript:history.back();" class="btn-back no-print">&larr; Volver</a>
+    
+    <h1>Bitácora de Saneamiento y Ajustes Administrativos</h1>
+    
+    <div class="filters no-print">
+        <form method="GET">
+            <?php if($id_contrato): ?><input type="hidden" name="id" value="<?= $id_contrato ?>"><?php endif; ?>
+            <div class="filter-group">
+                <label>Desde Fecha:</label>
+                <input type="date" name="fecha_ini" value="<?= $fecha_ini ?>">
+            </div>
+            <div class="filter-group">
+                <label>Hasta Fecha:</label>
+                <input type="date" name="fecha_fin" value="<?= $fecha_fin ?>">
+            </div>
+            <div class="filter-group">
+                <label>ID de Lote (Batch):</label>
+                <input type="text" name="batch" value="<?= $batch_filter ?>" placeholder="ID Lote..." style="width: 100px;">
+            </div>
+            <button type="submit" style="height: 32px; background: #3498db; color: white; border: none; padding: 0 15px; border-radius: 4px; cursor: pointer;">Filtrar</button>
+            <button type="button" onclick="window.print();" style="height: 32px; background: #2ecc71; color: white; border: none; padding: 0 15px; border-radius: 4px; cursor: pointer;">Imprimir</button>
+            <?php if($id_contrato || $batch_filter || $fecha_ini): ?>
+                <a href="bitacora_saneamiento.php" style="font-size: 0.8em; color: #e74c3c; text-decoration:none; align-self: center;">[Limpiar Filtros]</a>
+            <?php endif; ?>
+        </form>
+    </div>
+
+    <!-- ═══════ GRILLA 1: Historial de Auditoría ═══════ -->
+    <div class="section-title">
+        <span>&#128196;</span> Historial de Auditoría (Lotes y Movimientos)
+    </div>
+    <div style="overflow-x: auto;">
+    <table>
+        <thead>
+            <tr>
+                <th width="130">Fecha/Hora</th>
+                <th width="50">CTO</th>
+                <th>Usuario</th>
+                <th width="60">Estado CTO</th>
+                <th width="60">Lote</th>
+                <th>Acción / Justificación</th>
+                <th>Detalle del Cambio</th>
+                <th>Notas del Contrato</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php 
+            $audit_count = 0;
+            while($row = $y->fetch_array($res_audit)): 
+                $audit_count++;
+                $est = isset($row['estado_contrato']) ? intval($row['estado_contrato']) : 0;
+                $badge_class = 'badge-e' . min($est, 4);
+                $est_label = isset($estados_label[$est]) ? $estados_label[$est] : "($est)";
+            ?>
+                <tr>
+                    <td><small><?= $row['fecha'] ?></small></td>
+                    <td><strong><?= $row['numcontrato'] ?></strong></td>
+                    <td><small><?= htmlspecialchars($row['nombre_usuario'] ?? '-') ?></small></td>
+                    <td><span class="badge <?= $badge_class ?>"><?= $est_label ?></span></td>
+                    <td><span style="color: #2980b9; font-weight: bold;"><?= $row['batch_id'] > 0 ? $row['batch_id'] : '-' ?></span></td>
+                    <td><span class="badge badge-audit"><?= htmlspecialchars($row['descripcion']) ?></span></td>
+                    <td><small style="color: #7f8c8d;"><?= htmlspecialchars($row['antes']) ?> &rarr; <?= htmlspecialchars($row['despues']) ?></small></td>
+                    <td class="notas-col" title="<?= htmlspecialchars($row['notas_contrato'] ?? '') ?>"><?= htmlspecialchars($row['notas_contrato'] ?? '-') ?></td>
+                </tr>
+            <?php endwhile; if($audit_count == 0): ?>
+                <tr><td colspan="8" class="no-data">No se registran movimientos de auditoría para estos criterios.</td></tr>
+            <?php endif; ?>
+        </tbody>
+    </table>
+    </div>
+
+    <!-- ═══════ GRILLA 2: Cargos Depurados ═══════ -->
+    <div class="section-title">
+        <span>&#128451;</span> Cargos Depurados (Estado -1 / Archivados)
+    </div>
+    <?php if (!$id_contrato && !$batch_filter): ?>
+        <p style="color: #95a5a6; font-size: 0.85em; margin-top: -10px;">Seleccione un contrato o un ID de Lote en los filtros para ver los cargos específicos depurados. A continuación se muestra una muestra general.</p>
+    <?php endif; ?>
+    <div style="overflow-x: auto;">
+    <table>
+        <thead>
+            <tr>
+                <th width="50">CTO</th>
+                <th>Usuario</th>
+                <th width="50">Año</th>
+                <th>Categoría</th>
+                <th>Concepto / Leyenda</th>
+                <th class="monto" width="100">Monto Depurado</th>
+                <th style="text-align: center;" width="100">Estatus</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php 
+            $total_depurado = 0;
+            while($c = $y->fetch_array($res_cargos)): 
+                $total_depurado += $c['monto'];
+            ?>
+                <tr>
+                    <td><strong><?= $c['numcontrato'] ?></strong></td>
+                    <td><small><?= htmlspecialchars($c['nombre_usuario'] ?? '-') ?></small></td>
+                    <td><?= $c['anio'] ?></td>
+                    <td><small><?= $c['categoria'] ?></small></td>
+                    <td><small><?= htmlspecialchars($c['leyenda']) ?></small></td>
+                    <td class="monto">$<?= number_format($c['monto'], 2) ?></td>
+                    <td style="text-align: center;"><span class="badge badge-archive">DEPURADO</span></td>
+                </tr>
+            <?php endwhile; if($num_cargos == 0): ?>
+                <tr><td colspan="7" class="no-data">No se encontraron cargos depurados. Filtre por Contrato o por Lote para ver resultados.</td></tr>
+            <?php endif; ?>
+            <?php if($num_cargos > 0): ?>
+            <tr style="background: #f8f9fa; font-weight: bold;">
+                <td colspan="5" style="text-align: right;">TOTAL DEPURADO:</td>
+                <td class="monto">$<?= number_format($total_depurado, 2) ?></td>
+                <td style="text-align: center;"><?= $num_cargos ?> reg.</td>
+            </tr>
+            <?php endif; ?>
+        </tbody>
+    </table>
+    </div>
+
+    <div style="margin-top: 30px; font-size: 0.8em; color: #95a5a6; border-top: 1px solid #eee; padding-top: 10px;">
+        Herramienta de auditoría interna AGUA V2. Los cargos listados tienen estado -1 (Archivado).
+        <strong>Firma del Administrador: ___________________________</strong>
+    </div>
+</div>
+
+</body>
+</html>
+<?php 
+$y->cerrarConexion(); 
+?>
+
+```
+
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time. The exception is if the task is trivially simple.
+2. After your research is complete, ask the user any open questions using the ask_question tool. Don't use the tool to ask trivial questions like 'should I proceed?'.
+3. Create an implementation plan artifact with `request_feedback = true`. The user must approve the plan before you are allowed to proceed.
+4. After receiving approval, begin execution. Create and update the task artifact as you work.
+5. Verify any work that you have done.
+6. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Observing the Inconsistency**
+
+I've been reviewing the issue report for CTO 269 in `bitacora_saneamiento.php` within **Grilla 2 (Cargos Depurados)**. I've noted that an active CTO from 2006 is showing "DEPUR" as if it is cleaned up, which appears to be contradictory.
+
+
+**Analyzing the Current State**
+
+I've confirmed that `bitacora_saneamiento.php` displays ALL depurated charges (`estado = -1`), not just recent ones, explaining the user's report. Legacy system Host B shows those charges were marked for sanitation as early as 2011. Further, I looked into the new sanitation panel and confirmed the UI does not allow "Active" state charges to be selected for depuration.
+
+
+**Validating Potential Threat**
+
+I'm now investigating a potential vulnerability within `paxscript.js`, specifically the AJAX calls. I'm checking if a user in the "Ficha" of an active contract could accidentally trigger an unwanted depuration process through some "clean" button. I'm focusing on validating if any functionality within the user interface could lead to unintended mass depuration. Further, I'll revisit and validate that Standard SDF or other automated processes do not have the power to sweep active contracts.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `contratos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 5.631969238s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L149-249)</summary>
+
+**Path:** `Unknown file`
+
+```
+	while ($cf = $y->fetch_array($res)) {
+		$cargos_fuente[] = array(
+			'numconsec'    => $cf[0],
+			'nombrec'      => $cf[1],
+			'monto'        => $cf[2],
+			'monto_com'    => $cf[3],
+			'recargo'      => $cf[4],
+			'observaciones'=> $cf[5],
+			'mensualidades'=> $cf[6],
+			'anio'         => $cf[7],
+			'categoria'    => $cf[8],
+			'repetir'      => $cf[9],
+			'metros2'      => $cf[10]
+		);
+	}
+
+	// --- Notas ---
+	$q1 = "SELECT id, SUBSTRING(fecha,1,10) AS fecha, texto, estado FROM notas WHERE contrato='$id' AND estado <> -1 ORDER BY estado DESC, fecha DESC";
+	$res_notas = $y->q($q1);
+	$notas = array();
+	while ($n = $y->fetch_array($res_notas)) {
+		$notas[] = $n;
+	}
+
+	// --- Cargos cancelados ---
+	$resc = $y->q("SELECT leyenda, monto, recargo, repetido FROM vw_ligacargos_all WHERE numcontrato='$id' AND estado=-1 ORDER BY fcobro");
+	$npagosc = $y->num_rows($resc);
+	$cancelados = array();
+	while ($cc = $y->fetch_array($resc)) {
+		$cancelados[] = $cc;
+	}
+
+	// --- Histórico cancelaciones ---
+	$resnc = $y->q("SELECT antes, despues FROM cambios WHERE numcontrato='$id' AND descripcion='cancelacion' ORDER BY fecha DESC");
+	$nnotas = $y->num_rows($resnc);
+	$notas_cancelacion = array();
+	while ($nc = $y->fetch_array($resnc)) {
+		$notas_cancelacion[] = $nc;
+	}
+
+	$tiposdeestado = array("1" => "Activo", "2" => "Suspensi&oacute;n Temporal", "3" => "Suspensi&oacute;n Administrativa", "4" => "Suspensi&oacute;n Definitiva");
+
+	$letras = $y->q("SELECT numcontratoletras FROM contrato WHERE numcontrato='$id' ORDER BY numcontrato");
+	list($numcontratoletras) = $y->fetch_array($letras);
+
+	return $templates->render('contratos/ficha', array(
+		'id'                  => $id,
+		'nombre'              => $nombre,
+		'numusuario'          => $numusuario,
+		'domicilio'           => $domicilio,
+		'masdatos'            => $masdatos,
+		'tipo'                => $tipo,
+		'agua'                => $agua,
+		'drenaje'             => $drenaje,
+		'observaciones'       => $observaciones,
+		'estado'              => $estado,
+		'metros'              => $metros,
+		'numcontratoletras'   => $numcontratoletras,
+		'tipos'               => $tipos,
+		'tiposdeestado'       => $tiposdeestado,
+		'estado_usr'          => $estado_usr,
+		'foliotope'           => $foliotope,
+		'npagos'              => $npagos,
+		'adeudos'             => $adeudos,
+		'total'               => $total,
+		'recargos'            => $recargos,
+		'notas'               => $notas,
+		'salidanotas'         => !empty($notas),
+		'cargos_fuente'       => $cargos_fuente,
+		'npagosc'             => $npagosc,
+		'cancelados'          => $cancelados,
+		'nnotas'              => $nnotas,
+		'notas_cancelacion'   => $notas_cancelacion,
+		'otros_contratos'     => $otros_contratos,
+		'tomas'               => $tomas,
+		'num_tomas'           => $num_tomas,
+		'max_tomas'           => $max_tomas,
+		'tarifas_referencia'  => $tarifas_referencia,
+		'cfg'                 => $cfg,
+		'faltan_cargos'       => _verificaAnualidades($y)
+	));
+}
+
+function cambiaestado($contrato, $rp, $rt, $texto, $estado)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$cfg = cargaConfig($y);
+	$min_car = intval(obtenerValorSeguro($cfg, 'cancelacion_min_caracteres', 20));
+	$mes_st  = intval(obtenerValorSeguro($cfg, 'susptemp_mes_permitido', 12));
+
+	$res_actual = $y->q("SELECT estado FROM contrato WHERE numcontrato='$contrato'");
+	list($estado_actual) = $y->fetch_array($res_actual);
+
+	if ($estado_actual == 4) {
+		return $templates->render('sistema/mensaje', array(
+			'titulo'  => 'Acción No Permitida',
+			'mensaje' => 'No es posible cambiar el estado de un contrato que se encuentra en <b>Suspensión Definitiva</b>.'
+		));
+```
+
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time. The exception is if the task is trivially simple.
+2. After your research is complete, ask the user any open questions using the ask_question tool. Don't use the tool to ask trivial questions like 'should I proceed?'.
+3. Create an implementation plan artifact with `request_feedback = true`. The user must approve the plan before you are allowed to proceed.
+4. After receiving approval, begin execution. Create and update the task artifact as you work.
+5. Verify any work that you have done.
+6. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Bitácora Concerns**
+
+I'm focused on the depurated charges flagged within the bitácora for active contract CTO 269. My primary concern revolves around the business rules being applied in this scenario, as there's a clear mismatch, demanding closer scrutiny of the active contracts and their associated billing processes. I'm investigating the root cause now.
+
+
+**Uncovering Root Cause**
+
+I've traced the "DEPURADO" flag on 2006 recargos for CTO 269 back to the legacy system (Host B) where they were depurated years ago, and have estado = -1. The Bitácora view showing these old charges is expected. Our new sanitation logic and sync are not the cause. Active contracts are already excluded from mass depurations in the Sanitation Panel. Amnesty rule C06 also doesn't apply.
+
+
+
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 11.136276957s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 11 Apr 2026, 2:26 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time. The exception is if the task is trivially simple.
+2. After your research is complete, ask the user any open questions using the ask_question tool. Don't use the tool to ask trivial questions like 'should I proceed?'.
+3. Create an implementation plan artifact with `request_feedback = true`. The user must approve the plan before you are allowed to proceed.
+4. After receiving approval, begin execution. Create and update the task artifact as you work.
+5. Verify any work that you have done.
+6. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Investigating Legacy Data**
+
+I've determined this issue stems from legacy data. It appears that several purged charges exist within the bitacora_saneamiento log. I am now exploring if the user's contract status is accurately reflected as active. I'm focusing on validating/searching this and other potential rules to address any exclusions.
+
+
+**Refining Log Distinction**
+
+I'm now refining the `bitacora_saneamiento.php` to differentiate between Legacy/Manual Depurations and the more recent Structured Saneamiento Batches. However, I've realized I've provided a report as requested, and should instead improve the code for clarity. This avoids future confusion with the user. I'll need to check the active state logic.
+
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `calcula_recargos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 3.575060268s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Execution Error
+
+**Status:** Completed
+**Created:** 11 Apr 2026, 2:26 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 11 Apr 2026, 2:27 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time. The exception is if the task is trivially simple.
+2. After your research is complete, ask the user any open questions using the ask_question tool. Don't use the tool to ask trivial questions like 'should I proceed?'.
+3. Create an implementation plan artifact with `request_feedback = true`. The user must approve the plan before you are allowed to proceed.
+4. After receiving approval, begin execution. Create and update the task artifact as you work.
+5. Verify any work that you have done.
+6. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Investigating Legacy Entries**
+
+I've located 2006 "recargos" linked to CTO 269 within the bitácora, triggering initial rule violation concerns. It appears these are Legacy Depurations from 2011, and not the more recent logic. I'm focusing on the differences.
+
+
+**Defining the Scope**
+
+I'm now zeroing in on the generation of "recargos". I've found `admin/auditoria_recargos_suspendidos.php` and am researching recargos generation, as I couldn't locate `calcula_recargos.php`. I suspect these might be generated in Host B ("Facturador") and synced. I'm now cross-referencing this to `03_sync_host_a.sql` to confirm that it only imports `ligacargos` from Host B, supporting the hypothesis that Recargos originate there.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `recargo`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 3.856575185s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 11 Apr 2026, 2:27 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time. The exception is if the task is trivially simple.
+2. After your research is complete, ask the user any open questions using the ask_question tool. Don't use the tool to ask trivial questions like 'should I proceed?'.
+3. Create an implementation plan artifact with `request_feedback = true`. The user must approve the plan before you are allowed to proceed.
+4. After receiving approval, begin execution. Create and update the task artifact as you work.
+5. Verify any work that you have done.
+6. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Crafting an Implementation Plan**
+
+I'm now outlining a detailed implementation plan. This involves a complex investigation into the potential rule violation, and searching in depth for other possibly omitted rules. It's a logic hardening task, demanding careful planning.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.308581377s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 11 Apr 2026, 2:27 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time. The exception is if the task is trivially simple.
+2. After your research is complete, ask the user any open questions using the ask_question tool. Don't use the tool to ask trivial questions like 'should I proceed?'.
+3. Create an implementation plan artifact with `request_feedback = true`. The user must approve the plan before you are allowed to proceed.
+4. After receiving approval, begin execution. Create and update the task artifact as you work.
+5. Verify any work that you have done.
+6. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Investigating Depuration Cause**
+
+I've confirmed CTO 269 remains active despite the presence of depurated charges. The charges in question date back to 2006, originating from Host B, a legacy system. I'm now digging deeper to understand the specific processes or conditions that led to these charges being depurated while the CTO's active status persists.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `auditoria_recargos_suspendidos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.518317286s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/*
+ * auditoria_recargos_suspendidos.php — Reporte Detallado de Recargos Fantasma
+ * Muestra el desglose de cargos/recargos acumulados en contratos según su estado.
+ */
+
+header('Content-Type: text/html; charset=UTF-8');
+require_once("../config/Conexion.php");
+$y = new Conexion();
+$y->conectarBaseDatos();
+
+// Configuración de filtro
+$estado_filtro = isset($_GET['estado']) ? $_GET['estado'] : '2'; 
+$where_estado = $estado_filtro === 'all' ? "c.estado IN (1,2,3,4)" : "c.estado IN ($estado_filtro)";
+
+// Mapeo de estados para visualización
+$estados_map = array(
+    1 => "ACTIVO",
+    2 => "SUSPENSIÓN TEMPORAL",
+    3 => "SUSPENSIÓN ADMINISTRATIVA",
+    4 => "SUSPENSIÓN DEFINITIVA"
+);
+
+// --- QUERY 1: RESUMEN POR ESTADO ---
+$q_resumen = "SELECT c.estado, COUNT(l.numcontrato) as total_registros, SUM(l.monto) as total_monto
+              FROM vw_ligacargos_pendientes l
+              JOIN contrato c ON l.numcontrato = c.numcontrato
+              WHERE l.estado = 0 AND l.leyenda LIKE 'RECARGO%'
+              GROUP BY c.estado
+              ORDER BY c.estado";
+$res_resumen = $y->q($q_resumen);
+$resumen_data = array();
+while($r = $y->fetch_array($res_resumen)) {
+    $resumen_data[$r['estado']] = $r;
+}
+
+// --- QUERY 2: DETALLE PARA EL LISTADO ---
+$q_master = "SELECT u.noconsecutivo, u.nombre, c.numcontrato, c.estado as estado_cto
+             FROM contrato c 
+             JOIN usuario u ON c.numusuario = u.noconsecutivo 
+             WHERE $where_estado 
+             AND EXISTS (SELECT 1 FROM vw_ligacargos_pendientes l WHERE l.numcontrato = c.numcontrato AND l.leyenda LIKE 'RECARGO%' AND l.estado = 0)
+             ORDER BY u.nombre, c.numcontrato";
+
+$res_master = $y->q($q_master);
+
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Auditoría de Recargos por Estado</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --accent: #f1f5f9;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --success: #10b981;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1240px;
+            margin: 0 auto;
+        }
+
+        header {
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin: 0;
+            color: var(--text-dark);
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .summary-card {
+            background: var(--card-bg);
+            padding: 1.25rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .summary-card h4 {
+            margin: 0;
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+        }
+
+        .summary-card .val {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin: 0.25rem 0;
+        }
+
+        .status-header-1 { border-left: 5px solid var(--success); }
+        .status-header-2 { border-left: 5px solid var(--warning); }
+        .status-header-3 { border-left: 5px solid var(--danger); }
+        .status-header-4 { border-left: 5px solid #475569; }
+
+        .filter-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.5rem;
+        }
+
+        select {
+            padding: 0.5rem 2rem 0.5rem 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: white;
+            font-family: inherit;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .user-group {
+            background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+            margin-bottom: 3rem;
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .user-header {
+            padding: 1.5rem;
+            background: #f1f5f9;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .user-header h2 {
+            margin: 0;
+            font-size: 1.2rem;
+            color: var(--text-dark);
+        }
+
+        .contract-section {
+            padding: 1.5rem;
+            border-bottom: 1px dashed var(--border);
+        }
+
+        .contract-section:last-child {
+            border-bottom: none;
+        }
+
+        .contract-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .badge-1 { background: #dcfce7; color: #166534; }
+        .badge-2 { background: #fef9c3; color: #854d0e; }
+        .badge-3 { background: #fee2e2; color: #991b1b; }
+        .badge-4 { background: #f1f5f9; color: #475569; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+
+        th {
+            text-align: left;
+            padding: 0.5rem 1rem;
+            background: #fafafa;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border);
+        }
+
+        td {
+            padding: 0.5rem 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .monto {
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+            text-align: right;
+        }
+
+        .info-footer {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .empty-state { text-align: center; padding: 5rem; color: var(--text-muted); background: white; border-radius: 16px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div>
+                <h1>Auditoría de Cartera Fantasma</h1>
+                <p style="color: var(--text-muted); margin: 0.3rem 0 0;">Análisis resumido y detallado de recargos por estado.</p>
+            </div>
+            <form action="" method="GET" class="filter-section">
+                <label style="font-weight: 600; font-size: 0.9rem;">Filtrar detalle por:</label>
+                <select name="estado" onchange="this.form.submit()">
+                    <option value="2" <?php echo $estado_filtro == '2' ? 'selected' : ''; ?>>SUSPENSIÓN TEMPORAL</option>
+                    <option value="3" <?php echo $estado_filtro == '3' ? 'selected' : ''; ?>>SUSPENSIÓN ADMINISTRATIVA</option>
+                    <option value="1" <?php echo $estado_filtro == '1' ? 'selected' : ''; ?>>SOLO ACTIVOS</option>
+                    <option value="4" <?php echo $estado_filtro == '4' ? 'selected' : ''; ?>>SOLO DEFINITIVOS</option>
+                    <option value="all" <?php echo $estado_filtro == 'all' ? 'selected' : ''; ?>>TODOS LOS ESTADOS</option>
+                </select>
+            </form>
+        </header>
+
+        <div class="summary-grid">
+            <?php foreach($estados_map as $e_idx => $e_txt): 
+                $data = isset($resumen_data[$e_idx]) ? $resumen_data[$e_idx] : array('total_monto' => 0, 'total_registros' => 0);
+            ?>
+            <div class="summary-card status-header-<?php echo $e_idx; ?>">
+                <h4><?php echo $e_txt; ?></h4>
+                <div class="val">$<?php echo number_format($data['total_monto'], 2); ?></div>
+                <div style="font-size: 0.75rem; color: var(--text-muted);"><?php echo number_format($data['total_registros']); ?> registros</div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+
+        <?php
+        $global_total = 0;
+        $count_contratos = 0;
+        $current_user_id = null;
+
+        if ($y->num_rows($res_master) == 0):
+            echo '<div class="empty-state">No se encontraron resultados para este filtro.</div>';
+        else:
+            while ($c = $y->fetch_array($res_master)):
+                if ($current_user_id !== $c['noconsecutivo']):
+                    if ($current_user_id !== null) echo '</div>'; 
+                    $current_user_id = $c['noconsecutivo'];
+        ?>
+        <div class="user-group">
+            <div class="user-header">
+                <h2><?php echo $c['nombre']; ?></h2>
+            </div>
+        <?php endif; ?>
+
+            <div class="contract-section">
+                <div class="contract-info">
+                    <span style="font-weight: 600; color: #475569;">Contrato #<?php echo $c['numcontrato']; ?></span>
+                    <span class="badge badge-<?php echo $c['estado_cto']; ?>"><?php echo $estados_map[$c['estado_cto']]; ?></span>
+                </div>
+                
+                <?php
+                $nc = $c['numcontrato'];
+                $q_detail = "SELECT leyenda, monto, anio, fcobro FROM vw_ligacargos_pendientes
+                             WHERE numcontrato = '$nc' AND leyenda LIKE 'RECARGO%'
+                             ORDER BY anio DESC, fcobro DESC";
+                $res_detail = $y->q($q_detail);
+                $subtotal = 0;
+                ?>
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="70">Año</th>
+                            <th>Leyenda</th>
+                            <th width="140">Fecha</th>
+                            <th width="110" style="text-align: right;">Monto</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php while ($d = $y->fetch_array($res_detail)): 
+                            $subtotal += $d['monto'];
+                            $global_total += $d['monto'];
+                        ?>
+                        <tr>
+                            <td><?php echo $d['anio']; ?></td>
+                            <td><?php echo $d['leyenda']; ?></td>
+                            <td><?php echo date('d/m/Y', strtotime($d['fcobro'])); ?></td>
+                            <td class="monto">$<?php echo number_format($d['monto'], 2); ?></td>
+                        </tr>
+                        <?php endwhile; ?>
+                        <tr style="background: #fafafa; font-weight: 700;">
+                            <td colspan="3" style="text-align: right;">Total Contrato:</td>
+                            <td class="monto">$<?php echo number_format($subtotal, 2); ?></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        <?php 
+                $count_contratos++;
+            endwhile; 
+            echo '</div>'; 
+        endif;
+        ?>
+
+        <div class="info-footer">
+            <div style="font-size: 0.9rem; font-weight: 600;">
+                <?php echo number_format($count_contratos); ?> contratos mostrados.
+            </div>
+            <div style="text-align: right;">
+                <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Monto Detallado Filtrado</div>
+                <div style="font-size: 1.5rem; font-weight: 800; color: var(--danger);">$<?php echo number_format($global_total, 2); ?></div>
+            </div>
+        </div>
+
+        <footer style="margin-top: 4rem; text-align: center; color: var(--text-muted); font-size: 0.75rem;">
+            Auditoría de Cartera &copy; <?php echo date('Y'); ?>
+        </footer>
+    </div>
+</body>
+</html>
+<?php 
+$y->cerrarConexion(); 
+?>
+
+```
+
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time. The exception is if the task is trivially simple.
+2. After your research is complete, ask the user any open questions using the ask_question tool. Don't use the tool to ask trivial questions like 'should I proceed?'.
+3. Create an implementation plan artifact with `request_feedback = true`. The user must approve the plan before you are allowed to proceed.
+4. After receiving approval, begin execution. Create and update the task artifact as you work.
+5. Verify any work that you have done.
+6. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing the Mismatch**
+
+I've pinpointed a mismatch regarding CTO 269 (Active) and its depurated charges in the bitácora. I've confirmed that CTO 269 is indeed Active and that charges from 2006 are Dep. Further investigation into the specific dates and values is underway to fully understand the nature of the disparity. I'm focusing on the interaction between the active status and the historical charges.
+
+
+**Investigating Depuration Rules**
+
+I am now focusing on confirming the user's assertion about "other rules" regarding active contracts and automatic charges. I will verify if any scripts, particularly `_sincronizaParidadFinanciera`, are currently depurating charges on active contracts, especially given the context of state 1 contracts from Host B. The goal is to ensure consistency with the stated criteria and identify any potential discrepancies.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `contratos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.663307194s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L569-604)</summary>
+
+**Path:** `Unknown file`
+
+```
+/**
+ * Motor de Paridad: Asegura que la existencia de cargos coincida con el estado físico de las tomas.
+ */
+function _sincronizaParidadFinanciera($id, $y) {
+    $anio = date('Y');
+    
+    // 0. Verificar estado del contrato para el Standard SDF
+    $res_edo = $y->q("SELECT estado FROM contrato WHERE numcontrato = '$id'");
+    list($estado_cto) = $y->fetch_array($res_edo);
+
+    if (intval($estado_cto) === 4) {
+        // --- LÓGICA STANDARD SDF: Depuración Total ---
+        
+        // 1. Contar afectados para auditoría (ambas tablas)
+        $res_cnt = $y->q("SELECT COUNT(*) FROM vw_ligacargos_pendientes WHERE numcontrato = '$id'");
+        list($afectados) = $y->fetch_array($res_cnt);
+
+        if (intval($afectados) > 0) {
+            // 2. Registrar en cambios antes de limpiar
+            $y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato) 
+                   VALUES(NOW(), 'Depuración SDF Automática (Motor Paridad)', 
+                   'Cargos pendientes: $afectados', 'Estado: -1 (Depurado Total)', '$id')");
+
+            // 3. Limpiar tabla activa
+            $y->q("UPDATE ligacargos SET estado = -1 WHERE numcontrato = '$id' AND estado = 0");
+
+            // 4. Limpiar tabla histórica (Esquema V2)
+            $y->q("UPDATE ligacargos_historico SET estado = -1 WHERE numcontrato = '$id' AND estado = 0");
+        }
+        return; // Terminar aquí para SDF
+    }
+
+    // --- LÓGICA DE PARIDAD NORMAL (Estados 1, 2, 3) ---
+    
+    // Conteo físico activo
+	$r_a = $y->q("SELECT COUNT(*) FROM contrato_toma WHERE numcontrato='$id' AND tiene_agua=1 AND estado_agua=1");
+```
+
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time. The exception is if the task is trivially simple.
+2. After your research is complete, ask the user any open questions using the ask_question tool. Don't use the tool to ask trivial questions like 'should I proceed?'.
+3. Create an implementation plan artifact with `request_feedback = true`. The user must approve the plan before you are allowed to proceed.
+4. After receiving approval, begin execution. Create and update the task artifact as you work.
+5. Verify any work that you have done.
+6. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing the Inquiry**
+
+I'm focusing on the user's need for a comprehensive report, essentially a deep dive into an issue. Their query subtly pushes beyond simple explanation, requesting validation of rules potentially omitted, which adds complexity to the task. My research into Issue 269 points toward the origin being Legacy data.
+
+
+**Refining the Approach**
+
+I've shifted my focus to the user's specific concern about automatic surcharges. My earlier assessment of the UI issue remains valid. I'm now exploring if any script, potentially `_amnistiaRecargosHistoricos`, erroneously clears surcharges in April or June, especially for reactivated contracts, as the user described in the last message. I'm prioritizing checking for this specific "zombie rule".
+
+
+**Clarifying the Depuration Rule**
+
+I'm now zeroing in on the specific depuration logic concerning surcharges. My code, particularly line L830 in `contratos.php`, seems safe based on the year filter. However, I must clarify the rule: should the system depurate old surcharges on reactivation if the contract is active? The user seems to be *complaining* about depurated records that *shouldn't* have been. I need to fully understand the exact conditions where surcharges shouldn't be cleared. The conditions include an active contract and outstanding annual charges.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 6.153177437s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 11 Apr 2026, 2:28 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time. The exception is if the task is trivially simple.
+2. After your research is complete, ask the user any open questions using the ask_question tool. Don't use the tool to ask trivial questions like 'should I proceed?'.
+3. Create an implementation plan artifact with `request_feedback = true`. The user must approve the plan before you are allowed to proceed.
+4. After receiving approval, begin execution. Create and update the task artifact as you work.
+5. Verify any work that you have done.
+6. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Re-Evaluating Prior Findings**
+
+I've already researched the issue and created a preliminary report. Now, the user's request suggests a need to validate that work. I will double-check my findings to ensure that all relevant rules were, in fact, thoroughly considered and included in the previous work. I'm focusing on ensuring accuracy in my evaluation.
+
+
+
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 7.542638096s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 11 Apr 2026, 2:28 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time. The exception is if the task is trivially simple.
+2. After your research is complete, ask the user any open questions using the ask_question tool. Don't use the tool to ask trivial questions like 'should I proceed?'.
+3. Create an implementation plan artifact with `request_feedback = true`. The user must approve the plan before you are allowed to proceed.
+4. After receiving approval, begin execution. Create and update the task artifact as you work.
+5. Verify any work that you have done.
+6. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Pinpointing System Origins**
+
+I've researched the user's CTO 269 issue regarding depurated charges. My analysis pinpointed Legacy Host B, circa 2011, as the origin. Next, I'm analyzing the existing system logic. My progress includes confirming the source and potential contributing factors.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.710373228s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 11 Apr 2026, 2:28 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time. The exception is if the task is trivially simple.
+2. After your research is complete, ask the user any open questions using the ask_question tool. Don't use the tool to ask trivial questions like 'should I proceed?'.
+3. Create an implementation plan artifact with `request_feedback = true`. The user must approve the plan before you are allowed to proceed.
+4. After receiving approval, begin execution. Create and update the task artifact as you work.
+5. Verify any work that you have done.
+6. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Confirming Legacy Origin**
+
+I've confirmed that the depurated charges for CTO 269 stem from a legacy system (2011), not our new sanitation logic. Moving forward, I've developed an implementation plan to enhance UI transparency within `bitacora_s`.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.712699694s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+## User Request
+
+1) Proteger de saneamiento masivo a: ctos en estado activo, en susp tempora y en sus. definitiva.
+Para esos los 3 tipos de susp. si permitir hacerlo desde saneamiento_administrativo.php
+2)  bitacora_saneamiento.php / Cargos Depurados (Estado -1 / Archivados) 
+. Añadir algun campo existen de nota del motivo.
+. Poner un agrupador colapsable que agrupe por años los registros que aparezcan.
+3) La regla que comente de recargos automaticos cada año en abril, ¿ esta vigente  ? y esta en conguencia con los cambios que hemos estado realizando ?
+
+
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `03_sync_host_a.sql`
+**Language:** oracle-sql
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time. The exception is if the task is trivially simple.
+2. After your research is complete, ask the user any open questions using the ask_question tool. Don't use the tool to ask trivial questions like 'should I proceed?'.
+3. Create an implementation plan artifact with `request_feedback = true`. The user must approve the plan before you are allowed to proceed.
+4. After receiving approval, begin execution. Create and update the task artifact as you work.
+5. Verify any work that you have done.
+6. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Protection Strategies**
+
+I'm currently focused on the user's request, specifically protection from mass sanitation. My analysis is progressing. I've identified contracts in State 1 (Active), 2 (Suspension Temporal), and 5 (Suspension Administrativa). I will need clarification on the state 5 designation as the user may need a different protection state.
+
+
+**Clarifying Automated Sanitation**
+
+I've clarified the protection logic for mass sanitation. I now understand that only contracts in State 4 (Suspensión Definitiva) should be automatically processed via the mass sync. States 1 (Activo), 2 (Suspensión Temporal), and 5 (another administrative state, as noted) need protection from this automation. The user indicated that manual sanitation through `saneamiento_administrativo.php` *is* permissible for all three suspension types. I will now examine State 5 to confirm its meaning.
+
+
+**Investigating Process Changes**
+
+I'm now investigating recent changes to sanitation and automated processes. I need to clarify the states that affect manual and automated procedures. My plan involves searching for the logic behind the April recargos, verifying the `estado` values, and researching a UI element for the PHP reports. I also need to update the `bitacora_saneamiento.php` report to include a note for the sanitation audit reasons, and improve the grouping of "Cargos Depurados".
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `abril`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 4.403161863s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 11 Apr 2026, 2:47 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time. The exception is if the task is trivially simple.
+2. After your research is complete, ask the user any open questions using the ask_question tool. Don't use the tool to ask trivial questions like 'should I proceed?'.
+3. Create an implementation plan artifact with `request_feedback = true`. The user must approve the plan before you are allowed to proceed.
+4. After receiving approval, begin execution. Create and update the task artifact as you work.
+5. Verify any work that you have done.
+6. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `pq20cm.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/**
+ * Archivo: pq20cm.php
+ * Propósito: Obtener la fecha de pago de un folio específico.
+ */
+
+require_once __DIR__ . "/../../config/Conexion.php";
+
+function obtenerFechaPagoPorFolio($folio)
+{
+    if (empty($folio)) {
+        return null;
+    }
+
+    $y = new Conexion();
+    if (!$y->conectarBaseDatos()) {
+        return null;
+    }
+
+    $folio_esc = $y->real_escape_string($folio);
+
+    // Consultamos la fecha de pago vinculada al folio en la tabla ligacargos.
+    // Usamos LIMIT 1 ya que todos los cargos de un mismo folio deben tener la misma fecha de pago.
+    $query = "SELECT fpago FROM vw_ligacargos_all WHERE folio = '$folio_esc' AND fpago IS NOT NULL LIMIT 1";
+    $res = $y->q($query);
+
+    $fechaPago = null;
+    if ($row = $y->fetch_array($res)) {
+        $fechaPago = $row['fpago'];
+    }
+
+    $y->free_result($res);
+    $y->cerrarConexion();
+
+    return $fechaPago;
+}
+
+/**
+ * Convierte una fecha YYYY-MM-DD HH:II:SS a formato "D de Mes de YYYY"
+ */
+function formatearFechaEspanol($fecha)
+{
+    if (!$fecha)
+        return date("d/m/Y");
+
+    $timestamp = strtotime($fecha);
+    $meses = array(
+        "01" => "enero",
+        "02" => "febrero",
+        "03" => "marzo",
+        "04" => "abril",
+        "05" => "mayo",
+        "06" => "junio",
+        "07" => "julio",
+        "08" => "agosto",
+        "09" => "septiembre",
+        "10" => "octubre",
+        "11" => "noviembre",
+        "12" => "diciembre"
+    );
+
+    $dia = date("d", $timestamp);
+    $mes = $meses[date("m", $timestamp)];
+    $anio = date("Y", $timestamp);
+
+    return "$dia $mes $anio";
+}
+?>
+```
+
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time. The exception is if the task is trivially simple.
+2. After your research is complete, ask the user any open questions using the ask_question tool. Don't use the tool to ask trivial questions like 'should I proceed?'.
+3. Create an implementation plan artifact with `request_feedback = true`. The user must approve the plan before you are allowed to proceed.
+4. After receiving approval, begin execution. Create and update the task artifact as you work.
+5. Verify any work that you have done.
+6. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Isolating the Recargo Logic**
+
+I've determined that `pq20cm.php` handles date formatting, not the recargo calculations themselves. Now I'm focused on locating the recargo logic, and I've started searching through `paxscript.js` and `contratos.php`. I had also previously glanced at `_amnistiaRecargosHistoricos`.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `recargo`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.772982195s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 11 Apr 2026, 2:47 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time. The exception is if the task is trivially simple.
+2. After your research is complete, ask the user any open questions using the ask_question tool. Don't use the tool to ask trivial questions like 'should I proceed?'.
+3. Create an implementation plan artifact with `request_feedback = true`. The user must approve the plan before you are allowed to proceed.
+4. After receiving approval, begin execution. Create and update the task artifact as you work.
+5. Verify any work that you have done.
+6. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Protection Hardening**
+
+I'm focused on hardening protection measures. The "Definitive" State 4 is now fully automated and functioning correctly. For States 1 and 2, and potentially State 5 (I need to verify), the focus is now on protecting them from automated mass actions. The goal is to ensure the appropriate protective actions are applied to these states.
+
+
+**Clarifying State Definitions**
+
+I'm now refining the state mappings based on user feedback and correcting the state definitions. I now understand that Estado 2 is "Suspensión Temporal", Estado 3 is "Suspensión Administrativa", and Estado 4 is "Suspensión Definitiva". Estado 1 is Active. The user wants to protect Estado 1, 2, and 4 from mass sanitation. My previous automated sync only addressed Estado 4; I must verify if this is still correct.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 3.909752803s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 11 Apr 2026, 2:47 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time. The exception is if the task is trivially simple.
+2. After your research is complete, ask the user any open questions using the ask_question tool. Don't use the tool to ask trivial questions like 'should I proceed?'.
+3. Create an implementation plan artifact with `request_feedback = true`. The user must approve the plan before you are allowed to proceed.
+4. After receiving approval, begin execution. Create and update the task artifact as you work.
+5. Verify any work that you have done.
+6. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<failed_commands_reminder>
+As a reminder, the following commands have failed since the last planner response. These may or may not be expected, decide what the right action is based on the current context:
+Command: grep -r "date('m') == '04'" . (exit code: 1)
+</failed_commands_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, failed_commands_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `recargos_activos`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 11 Apr 2026, 2:48 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time. The exception is if the task is trivially simple.
+2. After your research is complete, ask the user any open questions using the ask_question tool. Don't use the tool to ask trivial questions like 'should I proceed?'.
+3. Create an implementation plan artifact with `request_feedback = true`. The user must approve the plan before you are allowed to proceed.
+4. After receiving approval, begin execution. Create and update the task artifact as you work.
+5. Verify any work that you have done.
+6. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Initiating Research Phase**
+
+I am now delving into the "April Recargo Rule." My immediate task is to identify its implementation. I'm focusing on locating relevant code within the `admin/`, `config/`, or root directories, specifically looking for cron-like scheduling mechanisms.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `cargos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.215511246s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/*
+ * cargos.php — Lógica de negocio para cargos
+ * Rediseño v2: calcula_recargos sin hardcodes, usa $cfg de config_sistema
+ * PHP 5.5 compatible
+ */
+
+function calcula_recargos($numcontrato, $leyenda, $monto, $recargo, $anio, $categoria, $cuenta, $y, $mescontrato, $cfg = null)
+{
+	// Cargar config si no viene como parámetro (compatibilidad)
+	if (!is_array($cfg) || count($cfg) == 0) {
+		$cfg = cargaConfig($y);
+	}
+
+	$mes_inicio = intval(isset($cfg['recargo_mes_inicio']) ? $cfg['recargo_mes_inicio'] : 4);
+	$porcentaje = floatval(isset($cfg['recargo_porcentaje']) ? $cfg['recargo_porcentaje'] : 10);
+	$cat_agua = intval(isset($cfg['recargo_categoria_agua']) ? $cfg['recargo_categoria_agua'] : 16);
+	$cat_drenaje = intval(isset($cfg['recargo_categoria_drenaje']) ? $cfg['recargo_categoria_drenaje'] : 17);
+
+	// EXENCIÓN RECARGOS PRIMER AÑO Y VALIDACIÓN DE ESTADO
+	$res_exencion = $y->q("SELECT YEAR(fecha) as anio_creacion, exento_recargo_primer_anio, estado FROM contrato WHERE numcontrato='$numcontrato'");
+	list($anio_creacion, $exento_recargo, $edo_cto) = $y->fetch_array($res_exencion);
+
+	// No generar recargos si el contrato está en Suspensión Definitiva (estado 4)
+	if (intval($edo_cto) === 4) {
+		return;
+	}
+
+	if ($exento_recargo == 1 && $anio == $anio_creacion) {
+		return;
+	}
+
+	// EXENCIÓN: NO GENERAR RECARGOS PARA CATEGORÍAS QUE YA SON RECARGOS
+	if ($categoria == $cat_agua || $categoria == $cat_drenaje) {
+		return;
+	}
+
+	$fecha_actual = time();
+	$mes_pad = str_pad($mes_inicio, 2, '0', STR_PAD_LEFT);
+	$fecha_entrada = strtotime("01-$mes_pad-$anio 01:00:00");
+
+	if ($fecha_actual > $fecha_entrada) {
+		$mes_numero = intval(date('m'));
+		$anio_numero = intval(date('Y'));
+		$meses = (($anio_numero - $anio) * 12) + ($mes_numero - 1);
+
+		$nom_meses = array("", "ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SEPT", "OCT", "NOV", "DIC");
+
+		$mesrecargo = 1;
+		$aniorecargo = $anio;
+
+		// Sin hardcode: porcentaje desde config
+		$monto_recargo = ($monto * $porcentaje) / 100;
+
+		// Sin hardcode: categorias desde config
+		$categoria_recargo = $categoria;
+		if ($categoria == 2)
+			$categoria_recargo = $cat_agua;
+		if ($categoria == 3)
+			$categoria_recargo = $cat_drenaje;
+
+		$respagado = $y->q("SELECT COUNT(numcontrato) FROM vw_ligacargos_all WHERE leyenda='$leyenda' AND numcontrato=$numcontrato AND estado=1");
+		list($pagado) = $y->fetch_array($respagado);
+
+		if ($pagado == 0) {
+			for ($i = 1; $i <= $meses; $i++) {
+				$leyenda_recargo = "RECARGO $nom_meses[$mesrecargo] $aniorecargo - $leyenda";
+				if ($aniorecargo == $anio) {
+					$q = "INSERT INTO ligacargos (numcontrato,leyenda,monto,fcobro,fpago,estado,recargo,folio,anio,numcontratoresp,idpago_vinc,categoria,repetido) VALUES('$numcontrato','$leyenda_recargo',$monto_recargo,CURDATE(),CURDATE(),0,$recargo,'',$anio,'',NULL,$categoria_recargo,$cuenta)";
+					$y->q($q);
+				}
+				if (++$mesrecargo > 12) {
+					$mesrecargo = 1;
+					$aniorecargo++;
+				}
+			}
+		}
+	}
+}
+
+function eliminaEgreso($id, $motivo)
+{
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$y->q("update egresos set estado=-1, motivoelimina='$motivo' where id='$id'");
+
+	$salida = "Se ha eliminado el egreso";
+
+	return $salida;
+}
+
+function cargaCargosEsp($cadena)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	if ($cadena == "")
+		$cadena = "1";
+
+	if ($cadena != "") {
+		$ocurrencias = explode(" ", $cadena);
+		$cadena = "";
+		foreach ($ocurrencias as $parte) {
+			$cadena .= (($cadena != "") ? "AND " : "") . "nombre like (\"%$parte%\")";
+		}
+	}
+	$q1 = "select numconsec, nombre, monto, monto_comercial, recargo, observaciones, mensualidades, anio, categoria, repetir, metros from cargos where $cadena AND estado=1 order by nombre";
+	$res = $y->q($q1);
+
+	$cargos = [];
+	while ($c = $y->fetch_array($res)) {
+		$cargos[] = [
+			'numconsec' => $c[0],
+			'nombre' => $c[1],
+			'monto' => $c[2],
+			'monto_com' => $c[3],
+			'recargo' => $c[4],
+			'observaciones' => $c[5],
+			'mensualidades' => $c[6],
+			'anio' => $c[7],
+			'categoria' => $c[8],
+			'repetir' => $c[9],
+			'metros' => $c[10]
+		];
+	}
+
+	return $templates->render('cargos/lista_tabla', ['cargos' => $cargos]);
+}
+
+function cargaCargos()
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$res = $y->q("select numconsec, nombre, monto, monto_comercial, recargo, observaciones, mensualidades, anio, categoria, repetir, metros from cargos where estado=1 order by nombre");
+	$cargos = [];
+	while ($c = $y->fetch_array($res)) {
+		$cargos[] = [
+			'numconsec' => $c[0],
+			'nombre' => $c[1],
+			'monto' => $c[2],
+			'monto_com' => $c[3],
+			'recargo' => $c[4],
+			'observaciones' => $c[5],
+			'mensualidades' => $c[6],
+			'anio' => $c[7],
+			'categoria' => $c[8],
+			'repetir' => $c[9],
+			'metros' => $c[10]
+		];
+	}
+
+	$resz = $y->q("select numconsec, nombre, monto, monto_comercial, estado from cargos where estado <> 2 order by estado, nombre, anio, monto");
+	$cargos_registrados = [];
+	while (list($num, $nom, $monto, $mon_com, $edo) = $y->fetch_array($resz)) {
+		$cargos_registrados[] = ['num' => $num, 'nom' => $nom, 'monto' => $monto, 'monto_comercial' => $mon_com, 'edo' => $edo];
+	}
+
+	$resc = $y->q("select id, nombre from categorias");
+	$categorias = [];
+	while ($cat = $y->fetch_array($resc)) {
+		$categorias[] = ['id' => $cat[0], 'descripcion' => $cat[1]];
+	}
+
+	return $templates->render('cargos/catalogo', [
+		'cargos' => $cargos,
+		'cargos_registrados' => $cargos_registrados,
+		'categorias' => $categorias
+	]);
+}
+
+function cargaresultados($query, $usuario, $agua, $dren, $marca, $estado1, $estado2, $estado3, $estado4)
+{
+	global $templates;
+	$query = trim($query);
+	$q1 = explode(' ', $query);
+	$r = "";
+	foreach ($q1 as $var) {
+		if ($usuario == 'usr') {
+			$r .= (($r == "") ? "" : " and ") . "usuario.nombre like '%$var%'";
+		} else {
+			$r .= (($r == "") ? "" : " and ") . "(contrato.domicilio like '%$var%' OR contrato.numcontrato like '%$var%')";
+		}
+	}
+
+	$estados_array = array();
+	if ($estado1 == 1)
+		array_push($estados_array, 1);
+	if ($estado2 == 1)
+		array_push($estados_array, 2);
+	if ($estado3 == 1)
+		array_push($estados_array, 3);
+	if ($estado4 == 1 || is_numeric($query))
+		array_push($estados_array, 4);
+
+	$estados = join(",", $estados_array);
+	if (empty($estados)) $estados = "0"; // Fallback to avoid empty IN clause
+	$query_sql = "select contrato.numcontrato, usuario.nombre, contrato.domicilio, contrato.agua, contrato.drenaje, if(isnull(total),0,total) as adeudo, contrato.tipo from (contrato left join usuario on contrato.numusuario=usuario.noconsecutivo) left join (select sum(monto) as total, numcontrato from vw_ligacargos_pendientes group by numcontrato) lc on contrato.numcontrato=lc.numcontrato where contrato.estado IN ($estados) and $r" . (($agua == 'x') ? "" : (($agua == '1') ? " and contrato.agua=1" : " and contrato.agua=0")) . (($dren == 'x') ? "" : (($dren == '1') ? " and contrato.drenaje=1" : " and contrato.drenaje=0"));
+
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+	$res = $y->q($query_sql);
+	$n = $y->num_rows($res);
+
+	if ($n > 0) {
+		$resultados = [];
+		while (list($numcontrato, $nombre, $domicilio, $agua, $drenaje, $adeudo, $tipo) = $y->fetch_array($res)) {
+			$resultados[] = [
+				'numcontrato' => $numcontrato,
+				'nombre' => $nombre,
+				'domicilio' => $domicilio,
+				'agua' => $agua,
+				'drenaje' => $drenaje,
+				'adeudo' => $adeudo,
+				'tipo' => $tipo
+			];
+		}
+		return $templates->render('cargos/busqueda_resultados', [
+			'n' => $n,
+			'resultados' => $resultados,
+			'marca' => $marca
+		]);
+	}
+	return "";
+}
+
+function pagacancelacargos($opc, $idc, $pago, $rp, $rt, $texto, $totalmarcado, $recibo)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	if ($opc == 'pagacargos') { // Pago de cargos.
+		// Host C: reservar folio atómico en folios_recibo; si viene $recibo del form lo usamos como referencia
+		$y->q("INSERT INTO folios_recibo (dummy) VALUES (1)");
+		$folio_sig = $y->insert_id();
+
+		foreach ($pago as $ref => $val) {
+			$lm = explode('|', $val);
+			$repetidoval = intval($lm[2]);
+			$categoriaval = isset($lm[3]) ? intval($lm[3]) : 0;
+			$leyendaval = $lm[0];
+			$monto_val = floatval($lm[1]);
+
+			if ($categoriaval == 6 || strpos(strtoupper($leyendaval), 'FALTA ASAMBLEA') !== false) {
+				// Asamblea: sp_sinc_asamblea_puntual sincroniza todos los contratos del usuario
+				$res_u = $y->q("select numusuario from contrato where numcontrato = '$idc'");
+				list($numusuario) = $y->fetch_array($res_u);
+				// Primero pagar el cargo del contrato principal
+				$y->q("CALL sp_pagar_cargo('$idc', \"$leyendaval\", $repetidoval, $folio_sig, '$idc', $monto_val, @filas)");
+				// Sincronizar el resto de contratos del mismo usuario
+				$y->q("CALL sp_sinc_asamblea_puntual($numusuario, \"$leyendaval\", 0, @filas_sinc)");
+			} else {
+				$y->q("CALL sp_pagar_cargo('$idc', \"$leyendaval\", $repetidoval, $folio_sig, '', $monto_val, @filas)");
+			}
+		}
+		return "<script>cargaDatosContrato('$idc'); window.open('reportes/recibo.php?folio=$folio_sig', 'recibo', 'width=640,height=450,scrollbars=yes');</script>";
+
+	} else { // Cancelacion de cargos.
+		$res1 = $y->q("select contrasena from contrasenas where rol = 'presidente'");
+		$res2 = $y->q("select contrasena from contrasenas where rol = 'tesorero'");
+
+		list($contrasena_presidente) = $y->fetch_array($res1);
+		list($contrasena_tesorero) = $y->fetch_array($res2);
+		// Bloque comentarizado para pruebas auth.
+		//		if (md5($rp) == $contrasena_presidente && md5($rt) == $contrasena_tesorero) {
+		$cfg = cargaConfig($y);
+		$min_car = intval(isset($cfg['cancelacion_min_caracteres']) ? $cfg['cancelacion_min_caracteres'] : 20);
+		if (strlen($texto) > $min_car) {
+			$x = "";
+			foreach ($pago as $valor) {
+				$lm = explode('|', $valor);
+				$rep_val = isset($lm[2]) ? intval($lm[2]) : 0;
+				$y->q("CALL sp_cancelar_cargo('$idc', \"" . $lm[0] . "\", $rep_val, @filas)");
+				$x .= ((strlen($x) > 0) ? ", " : "") . $lm[0] . (($lm[2] == 0) ? "" : " (r$lm[2])") . " (\$" . $lm[1] . ")";
+			}
+			$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato) VALUES(NOW(), 'cancelacion', '$texto', '$x', '$idc')");
+			return "<script>cargaDatosContrato('$idc');</script>";
+		} else {
+			return $templates->render('sistema/mensaje', [
+				'titulo' => 'Error',
+				'mensaje' => 'Debe escribir a detalle el porqu&eacute; de la cancelaci&oacute;n de estos cargos (m&iacute;nimo ' . $min_car . ' caracteres).'
+			]);
+		}
+		/*
+		} else {
+			return $templates->render('sistema/mensaje', [
+				'titulo' => 'Error',
+				'mensaje' => 'Las contrase&ntilde;as no son las correctas.'
+			]);
+		} */
+	}
+}
+
+function aplicacargos($c, $cargo)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+	$cfg = cargaConfig($y);
+
+	if (!is_array($cargo) || count($cargo) == 0) {
+		return $templates->render('sistema/mensaje', [
+			'titulo' => 'Información',
+			'mensaje' => 'No se seleccionaron cargos para aplicar.'
+		]);
+	}
+
+	$n = 0;
+	$m = 0;
+	$alertas = array();
+	foreach ($cargo as $leyenda_input) {
+		$a = explode('|', $leyenda_input);
+		$contratos_lista = is_array($c) ? $c : array($c);
+
+		foreach ($contratos_lista as $numcontrato) {
+			// Validar estado del contrato
+			$res_edo = $y->q("SELECT estado FROM contrato WHERE numcontrato='$numcontrato'");
+			list($edo_cto) = $y->fetch_array($res_edo);
+			if (intval($edo_cto) === 4) {
+				$alertas[] = "El contrato <b>$numcontrato</b> se encuentra en Suspensión Definitiva y no puede recibir nuevos cargos.";
+				continue;
+			}
+
+			// Consultar tomas activas para este contrato
+			$res_tomas = $y->q("SELECT COUNT(*) FROM contrato_toma WHERE numcontrato='$numcontrato' AND tiene_agua=1 AND estado_agua=1");
+			list($n_tomas_agua) = $y->fetch_array($res_tomas);
+			$res_tomas_d = $y->q("SELECT COUNT(*) FROM contrato_toma WHERE numcontrato='$numcontrato' AND tiene_drenaje=1 AND estado_drenaje=1");
+			list($n_tomas_drenaje) = $y->fetch_array($res_tomas_d);
+			$res_tipo = $y->q("SELECT MAX(tipo) FROM contrato_toma WHERE numcontrato='$numcontrato'");
+			list($es_comercial) = $y->fetch_array($res_tipo);
+			$es_comercial = intval($es_comercial);
+
+			$res2 = $y->q("select metros from contrato where numcontrato = '$numcontrato'");
+			list($metros) = $y->fetch_array($res2);
+
+			$res3 = $y->q("select metros, monto_comercial from cargos where UCASE(nombre) = UCASE('$a[0]') limit 1");
+			list($aplicametros, $mon_com_db) = $y->fetch_array($res3);
+
+			$leyenda = $a[0];
+			$monto = floatval($a[1]);
+			$mon_com = floatval($mon_com_db);
+			$recargo = $a[2];
+			$anio = $a[3];
+			$categoria = $a[4];
+			$repetir = $a[5];
+
+			// Lógica de multiplicación por toma y tipo (Normal/Comercial)
+			if ($categoria == 2 && $n_tomas_agua > 0) {
+				$monto_base = ($es_comercial == 1 && $mon_com > 0) ? $mon_com : (($es_comercial == 1) ? $monto * 2 : $monto);
+				$monto = $monto_base * $n_tomas_agua;
+			}
+			if ($categoria == 3 && $n_tomas_drenaje > 0) {
+				$monto_base = ($es_comercial == 1 && $mon_com > 0) ? $mon_com : (($es_comercial == 1) ? $monto * 2 : $monto);
+				$monto = $monto_base * $n_tomas_drenaje;
+			}
+
+			if ($aplicametros == 1)
+				$monto = $monto * $metros;
+
+			if ($anio == "0")
+				$anio = date('Y');
+
+			$aplicar_cargo = true;
+			if ($n_tomas_agua == 0 && $categoria == 2) {
+				$aplicar_cargo = false;
+				$alertas[] = "El cargo <b>$leyenda</b> no aplica porque el contrato $numcontrato no tiene toma de agua conectada.";
+			}
+			if ($n_tomas_drenaje == 0 && $categoria == 3) {
+				$aplicar_cargo = false;
+				$alertas[] = "El cargo <b>$leyenda</b> no aplica porque el contrato $numcontrato no tiene toma de drenaje conectada.";
+			}
+
+			if ($aplicar_cargo) {
+				if ($repetir == 0)
+					$q = "INSERT INTO ligacargos (numcontrato, leyenda, monto, fcobro, fpago, estado, recargo, folio, anio, numcontratoresp, idpago_vinc, categoria, repetido) VALUES('$numcontrato', '$leyenda', $monto, CURDATE(), CURDATE(), 0, $recargo, '', $anio, '', NULL, $categoria, 0)";
+				else {
+					$res = $y->q("SELECT COUNT(l.numcontrato) FROM vw_ligacargos_all l WHERE l.leyenda = '$leyenda' AND l.numcontrato = '$numcontrato'");
+					list($cuenta) = $y->fetch_array($res);
+					$q = "INSERT INTO ligacargos (numcontrato, leyenda, monto, fcobro, fpago, estado, recargo, folio, anio, numcontratoresp, idpago_vinc, categoria, repetido) VALUES('$numcontrato', '$leyenda', $monto, CURDATE(), CURDATE(), 0, $recargo, '', $anio, '', NULL, $categoria, $cuenta)";
+				}
+
+				if ($y->q($q)) {
+					$n++;
+					// Calcular recargos si aplica
+					calcula_recargos($numcontrato, $leyenda, $monto, $recargo, $anio, $categoria, (isset($cuenta) ? $cuenta : 0), $y, 1, $cfg);
+				} else
+					$m++;
+			}
+		}
+	}
+
+	$mensaje = "Se ha" . (($n == 1) ? "" : "n") . " aplicado <b>$n</b> cargo" . (($n == 1) ? "" : "s") . "." . (($m != 0) ? "<br>$m cargo" . (($m == 1) ? "" : "s") . " no pud" . (($m == 1) ? "o" : "ieron") . " asignarse por duplicidad." : "");
+	if (count($alertas) > 0) {
+		$mensaje .= "<div style='color:#900; margin-top:10px; font-size:11px;'><b>RECHAZADOS POR REGLA:</b><br>" . implode("<br>", array_unique($alertas)) . "</div>";
+	}
+
+	return $templates->render('sistema/mensaje', [
+		'titulo' => 'Aplicación de Cargos',
+		'mensaje' => $mensaje . "<script>$('#cargostabla').html('')</script>"
+	]);
+}
+
+function creaCargo($leyenda, $cat, $otracategoria, $monto, $mensual, $anio, $recargo, $interes, $multa, $aniocobro, $repetir, $metros, $automatico, $monto_comercial = 0)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$salida = "";
+
+	if ($cat == -1) {
+		$nombrecorto_auto = strtoupper(substr(preg_replace('/[^a-zA-Z0-9]/', '', $otracategoria), 0, 8));
+		$q = "insert into categorias (nombre, nombrecorto) values(\"$otracategoria\", \"$nombrecorto_auto\")";
+		if ($y->q($q))
+			$salida .= "Se ha creado una categor&iacute;a nueva.<br>";
+		else
+			$salida .= "No se pudo agregar la categor&iacute;a nueva.<br>";
+		$cat = $y->insert_id();
+	}
+
+	$multa = (!isset($multa)) ? 0 : $multa;
+	$repetir = (!isset($repetir)) ? 0 : $repetir;
+	$mensual = (!isset($mensual)) ? 0 : $mensual;
+	$metros = (!isset($metros)) ? 0 : $metros;
+
+	$monto_comercial = (!isset($monto_comercial) || $monto_comercial == "") ? 0 : floatval($monto_comercial);
+
+	$q = "insert into cargos values(null, '$leyenda', $monto, $multa, '', $mensual, $cat, 1, $aniocobro, $repetir, $metros, $automatico, $monto_comercial)";
+
+	if ($y->q($q)) {
+		$salida .= "Se ha agregado al cat&aacute;logo de cargos <b>$leyenda</b>.<br>";
+	} else
+		$salida .= "No se pudo dar de alta el cargo.<br>";
+
+	return $templates->render('sistema/mensaje', [
+		'titulo' => 'Crear Cargo',
+		'mensaje' => $salida . "<script>cargabusquedacontrato();</script>"
+	]);
+}
+
+function modificaCargo($num, $leyenda, $cat, $otracategoria, $monto, $mensual, $anio, $recargo, $interes, $multa, $aniocobro, $repetir, $metros, $automatico, $monto_comercial = 0)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$salida = "";
+
+	if ($cat == -1) {
+		$nombrecorto_auto = strtoupper(substr(preg_replace('/[^a-zA-Z0-9]/', '', $otracategoria), 0, 8));
+		$q = "insert into categorias (nombre, nombrecorto) values(\"$otracategoria\", \"$nombrecorto_auto\")";
+		if ($y->q($q))
+			$salida .= "Se ha creado una categor&iacute;a nueva.<br>";
+		else
+			$salida .= "No se pudo agregar la categor&iacute;a nueva.<br>";
+		$cat = $y->insert_id();
+	}
+
+	$multa = (!isset($multa)) ? 0 : $multa;
+	$repetir = (!isset($repetir)) ? 0 : $repetir;
+	$mensual = (!isset($mensual)) ? 0 : $mensual;
+	$metros = (!isset($metros)) ? 0 : $metros;
+
+	$monto_comercial = (!isset($monto_comercial) || $monto_comercial == "") ? 0 : floatval($monto_comercial);
+
+	$q = "update cargos set nombre='$leyenda', monto=$monto, monto_comercial=$monto_comercial, recargo=$multa, categoria=$cat, anio=$aniocobro, repetir=$repetir, metros=$metros, automatico=$automatico where numconsec=$num";
+
+	if ($y->q($q)) {
+		$salida .= "Se ha modificado el cargo $leyenda.<br>";
+		
+		// Sincronización de Saldo para cargos no pagados (estado = 0)
+		$res_pendientes = $y->q("SELECT l.numcontrato, l.repetido, c.tipo, c.agua, c.drenaje, c.metros as metros_cto
+								 FROM vw_ligacargos_pendientes l
+								 JOIN contrato c ON l.numcontrato = c.numcontrato
+								 WHERE l.leyenda='$leyenda'");
+		
+		$actualizados = 0;
+		while ($p = $y->fetch_array($res_pendientes)) {
+			$nc = $p['numcontrato'];
+			$rep = $p['repetido'];
+			$metros_cto = $p['metros_cto'];
+			
+			// Determinar número de tomas activas desde contrato_toma
+			$r_a = $y->q("SELECT COUNT(*) FROM contrato_toma WHERE numcontrato='$nc' AND tiene_agua=1 AND estado_agua=1");
+			list($n_agua) = $y->fetch_array($r_a);
+			$r_d = $y->q("SELECT COUNT(*) FROM contrato_toma WHERE numcontrato='$nc' AND tiene_drenaje=1 AND estado_drenaje=1");
+			list($n_drenaje) = $y->fetch_array($r_d);
+			$r_t = $y->q("SELECT MAX(tipo) FROM contrato_toma WHERE numcontrato='$nc'");
+			list($es_com) = $y->fetch_array($r_t);
+			
+			$nuevo_monto = 0;
+			
+			// Recalcular basado en la nueva tarifa
+			if ($cat == 2 && $n_agua > 0) {
+				$m_base = ($es_com == 1 && $monto_comercial > 0) ? $monto_comercial : (($es_com == 1) ? $monto * 2 : $monto);
+				$nuevo_monto = $m_base * $n_agua;
+			}
+			if ($cat == 3 && $n_drenaje > 0) {
+				$m_base = ($es_com == 1 && $monto_comercial > 0) ? $monto_comercial : (($es_com == 1) ? $monto * 2 : $monto);
+				$nuevo_monto = $m_base * $n_drenaje;
+			}
+			if ($metros == 1 && $nuevo_monto > 0) {
+				$nuevo_monto = $nuevo_monto * $metros_cto;
+			}
+			
+			// Si no es agua ni drenaje (ej. multas fijas), o usa configuración simple, aplicar tarifa directa
+			if($cat != 2 && $cat != 3 && $nuevo_monto == 0) {
+				$nuevo_monto = ($es_com == 1 && $monto_comercial > 0) ? $monto_comercial : (($es_com == 1) ? $monto * 2 : $monto);
+				if ($metros == 1) $nuevo_monto = $nuevo_monto * $metros_cto;
+			}
+
+			if ($nuevo_monto > 0) {
+				$y->q("UPDATE ligacargos SET monto=$nuevo_monto WHERE numcontrato='$nc' AND leyenda='$leyenda' AND repetido=$rep AND estado=0");
+				$y->q("UPDATE ligacargos_historico SET monto=$nuevo_monto WHERE numcontrato='$nc' AND leyenda='$leyenda' AND repetido=$rep AND estado=0");
+				$actualizados++;
+			}
+		}
+		
+		if ($actualizados > 0) {
+			$salida .= "Se sincronizó el saldo retroactivamente en <b>$actualizados</b> contratos con este cargo pendiente.<br>";
+			$antes_str = "Se modificaron tarifas del cargo. Tarifas aplicadas: Normal $\$$monto, Comercial: $\$$monto_comercial";
+			$despues_str = "Sincronizacion de saldo aplicada a $actualizados contratos pendientes.";
+			$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato) VALUES(NOW(), 'Sincr. masiva de Adeudos - $leyenda', '$antes_str', '$despues_str', '-MASIVO-')");
+		}
+
+	} else
+
+		$salida .= "No se pudo modificar el cargo.<br>";
+
+	return $templates->render('sistema/mensaje', [
+		'titulo' => 'Modificar Cargo',
+		'mensaje' => $salida . "<script>cargabusquedacontrato();</script>"
+	]);
+}
+
+function egresos()
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$res = $y->q("select max(id)+1 from egresos");
+	list($folio) = $y->fetch_array($res);
+
+	if ($folio == null)
+		$folio = 1;
+
+	$res = $y->q("select nombre from categorias_egresos");
+	$categorias_egresos = [];
+	while (list($nombrecat) = $y->fetch_array($res)) {
+		$categorias_egresos[] = $nombrecat;
+	}
+
+	$res = $y->q("select id, leyenda, monto, categoria, fecha, estado, motivoelimina from egresos order by fecha desc");
+	$egresos = [];
+	while ($row = $y->fetch_array($res)) {
+		$egresos[] = [
+			'id' => $row[0],
+			'leyenda' => $row[1],
+			'monto' => $row[2],
+			'categoria' => $row[3],
+			'fecha' => $row[4],
+			'estado' => $row[5],
+			'motivoelimina' => $row[6]
+		];
+	}
+
+	return $templates->render('cargos/egresos', [
+		'folio' => $folio,
+		'categorias_egresos' => $categorias_egresos,
+		'egresos' => $egresos
+	]);
+}
+
+function registraegreso($folio, $nombre, $cat, $monto, $nombredetalle, $recibe)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	// Resolver id_categoria desde categorias_egresos (mejora diseño Host C)
+	$res_cat = $y->q("SELECT id FROM categorias_egresos WHERE nombre = '$cat' LIMIT 1");
+	$row_cat = $y->fetch_array($res_cat);
+	$id_cat = $row_cat ? intval($row_cat['id']) : null;
+	$id_cat_sql = ($id_cat !== null) ? $id_cat : 'NULL';
+	$q = "INSERT INTO egresos (id, leyenda, monto, categoria, fecha, estado, motivoelimina, detalle, recibe, id_categoria)
+	      VALUES (null, '$nombre', $monto, '$cat', now(), 0, '', '$nombredetalle', '$recibe', $id_cat_sql)";
+
+	if ($y->q($q)) {
+		$titulo = 'Registrado';
+		$mensaje = "Se ha registrado el egreso de \$" . number_format($monto, 2, '.', ',') . ".";
+	} else {
+		$titulo = 'Error';
+		$mensaje = "No se ha podido registrar el egreso.";
+	}
+
+	$script = "<script>window.open('reportes/reciboegreso.php?folio=$folio', 'reciboegreso', 'width=640, height=450, scrollbars=yes');</script>";
+
+	return $templates->render('sistema/mensaje', [
+		'titulo' => $titulo,
+		'mensaje' => $mensaje . $script
+	]);
+}
+
+function mostrarCargo($num)
+{
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$y->q("update cargos set estado = 1 where numconsec = $num");
+}
+
+function ocultarCargo($num)
+{
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$y->q("update cargos set estado = 0 where numconsec = $num");
+}
+
+function modificarCargo($num)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$res1 = $y->q("select numconsec, nombre, monto, monto_comercial, recargo, categoria, estado, anio, repetir, metros, automatico from cargos where numconsec = $num");
+	list($numconsec, $nombre, $monto, $monto_comercial, $recargo, $categoria, $estado, $anio, $repetir, $metros, $automatico) = $y->fetch_array($res1);
+
+	$cargo = [
+		'numconsec' => $numconsec,
+		'nombre' => $nombre,
+		'monto' => $monto,
+		'monto_comercial' => $monto_comercial,
+		'recargo' => $recargo,
+		'categoria' => $categoria,
+		'estado' => $estado,
+		'anio' => $anio,
+		'repetir' => $repetir,
+		'metros' => $metros,
+		'automatico' => $automatico
+	];
+
+	$resc = $y->q("select id, nombre from categorias");
+	$categorias = [];
+	while ($cat = $y->fetch_array($resc)) {
+		$categorias[] = ['id' => $cat[0], 'descripcion' => $cat[1]];
+	}
+
+	return $templates->render('cargos/modificar', [
+		'cargo' => $cargo,
+		'categorias' => $categorias
+	]);
+}
+
+function eliminarCargo($num)
+{
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$y->q("update cargos set estado = 2 where numconsec = $num");
+}
+
+function regresarCargoCancelado($contrato, $leyenda, $repetido)
+{
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	// Reglas C02/F02: Prohibido restituir cargos en contratos en Suspensión Definitiva
+	$res_est = $y->q("SELECT estado FROM contrato WHERE numcontrato = '$contrato'");
+	list($edo_actual) = $y->fetch_array($res_est);
+	if (intval($edo_actual) === 4) {
+		return; // Bloqueado silenciosamente — la vista ya restringe visualmente esta acción
+	}
+
+	$y->q("UPDATE ligacargos SET estado = 0 WHERE numcontrato = '$contrato' AND leyenda = '$leyenda' AND repetido = $repetido");
+	// Sincronizar en tabla histórica (esquema V2 split)
+	$y->q("UPDATE ligacargos_historico SET estado = 0 WHERE numcontrato = '$contrato' AND leyenda = '$leyenda' AND repetido = $repetido");
+
+	$texto_cargo  = $leyenda . ($repetido > 0 ? " (r$repetido)" : "");
+	$operador     = (isset($_SESSION['usuario']) && $_SESSION['usuario'] !== '') ? $_SESSION['usuario'] : 'cajero';
+	$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato)
+	        VALUES(NOW(),
+	               'Reasignacion de cargo cancelado',
+	               'Cargo en estado CANCELADO (-1)',
+	               'Cargo restituido a PENDIENTE (0): $texto_cargo | Operador: $operador',
+	               '$contrato')");
+}
+
+?>
+```
+
 </details>
 
 ---

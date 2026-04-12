@@ -21740,114 +21740,76 @@ ____
 Hice cambios en rama main para los archivos aqui puestos
   /opt/lampp/htdocs/agua/docs-dev/migration-stack2/win10_aguav2/optimizacion
 
-Fue debido a que los puertos por default de apache, mariadb y phpmyadmin en el host cambiaron en la base de 7001.
-En la rama feature/upgrade-v2-win-xampp
-    Modifica lo necesario en mcp host c , /opt/lampp/htdocs/agua/config/Conexion.php
-Para que la webapp pueda funcionar.
-Y considero oportuno mover de main a feature/upgrade-v2-win-xampp  este directorio  e/opt/lampp/htdocs/agua/docs-dev/migration-stack2/win10_aguav2
- y que se suba todo , hasta los sql.gz backups.
 
 
-Testear en host c, issues y corregir yo con claude.
-
-Correción bugs en host c, para estabilizar la migracion.
-usar mcp host c.
-
-1. Listadeudores: listadeudores.php , Ok corregido.
-
-
-2. Corte de Caja  Ok corregido.
-   concentradocortecajaresumen.php (Corte de Caja (resumen), no muestra datos.
-    Notice: Undefined offset: 1 in F:\aguav2\webapp\agua\reportes\concentradocortecajaresumen.php on line 111
-
-3. carteravencida  Ok corregido.
-  año 2025 , re-validar
-    En host c muestra 800
-    En host a y b, muestra 800 registros
-
-
-4  operaciones_multas_sync.php, Ok corregido.
-  Notice: Trying to access array offset on value of type null in F:\aguav2\webapp\agua\admin\operaciones_multas_sync.php on line 126
 
 ===============================================================================================================================================================
-                                                                LISTA 1
-
-===============================================================================================================================================================
-
-Orden atencion apartir del 8 abril 2026
-
+                                                                LISTA 2
 Ref: Contrato.estado (1  = ACTIVO  |  2 =  Suspensión Temporal  | 3  = Suspensión Administrativa   |  4  =  Suspensión Definitiva)
 
-ok 1 Arreglar lo del mcp
 
-ok 2. Migrar la webapp asamble a la arquitectura de host c
-   Meterlo directo a la rama feature
-   /home/carlos/Documents/tmp01/2dawebapp/
+yo a mano:
+  1.2 ver que esten todos los xlsx Datos-awa-limpieza
+    https://docs.google.com/spreadsheets/d/1wMeMPTSRoyNHqJ_xFljbw2Am82SBeybYBlrglA6uLwM/edit?gid=1440610976#gid=1440610976
+    En http://localhost/agua/admin/analisis/inventario_saneamiento.php
 
-ok 3. Hacer yo pruebas crud en host c de agua.
-    Arreglar bugs de haber.
+   2. Crear  Lista depurada de lo que va a realizar pruebas  y dar vobo doña Nancy y darselo a claude para que vea si esta todo eso incluido, o en scripts y que gaps hay.
 
-4. Resolver los 3 o 4 pendientes req originales.
-4.1 formulario de tomas x tipo comercial o normal    
+===============================================================================================================================================================
+1) 
+Ga
+auditoria_integridad_bd
+  Se encontraron anomalías en
+  Notice: Array to string conversion in F:\aguav2\webapp\agua\admin\reportes\auditoria_integridad_bd.php on line 214
+  Array dimensiones.
+  Descarga los CSV para revisión detallada antes del próximo corte de caja. 
 
-3.2
+cv_por_tipo_edo_cto
+  Auditoría de Cartera Fantasma
 
+  Análisis resumido y detallado de recargos por estado.
+
+................
+dar de baja cuenta premiun de ga domingo 7 pm!
+
+===============================================================================================================================================================
+
+Claude 
+1) 
+Se requiere realizar estos ajustes para funcionalidad de Amnistía de Recargos, cuando un contrato se pasa a estado ACTIVO:
+1. Cuando viene de SUSPENSIÓN TEMPORAL aplicar la exención tal cual está implementado; validar que está ocurriendo con la asignación de sus cargos anuales y en recargos de abril en caso de no pago oportuno del año vigente y que otras reglas de negocio ocurren en este caso.
+2. Cuando viene de SUSPENSIÓN ADMINISTRATIVA se debe mantener su  adeudo completo (no aplica la Amnistía);  validar que está ocurriendo con la asignación de sus cargos anuales y recargos de abril en caso de no pago oportuno del año vigente y que otras reglas de negocio ocurren en este caso.
+3) Asegurarse que estos movimientos quedan registrados en la tabla “cambios” y son rastreables en bitacora_saneamiento.php; busca vincular con la página historial_auditoria.php con sentido y congruencia.
+Antes de hacer modificaciones informa el as is, y luego el tobe.
+
+2) 
+  1 Plan para fix de reglas en cbos de estados del contrato, issues, buscar avance en conversaciones pasadas.
+    /home/carlos/Documents/tmp01/stage-m-f/not-t.txt
+    
+  1.1 Issue a investigar que pasara en el pase a producción cuando para el caso de que se han ejecutado re-cargo automatico abril a los que no han págado.
+
+3) 
+
+  2 Arreglar lo de corte de caja y reporte de columnas, dárselo a Claude.
+  2.1  Corte de caja, empatar lo mas cercano, todos los que me paso doña ncy.
+  2.2 carteravencida  Ok corregido.
+    año 2025 , re-validar
+      En host c muestra 800
+      En host a y b, muestra 800 registros
+
+4)
+  3. Listar todas las limpieza automaticas y manuales y el orden en que se haran 
+  3.1 listen todos los procesos de saneamiento y con que herramienta se hara, si es manual o automatico, que falta, orden deben usarse y no romper consistencia.
+
+===============================================================================================================================================================
+
+e-1
 4.Como se le hace para que una url , se desplegue en un ventana web, sin ningun nada de botones de navegacion en chrome.
   Prueba con esta url http://localhost/agua/login/index.php
     "C:\Program Files\Google\Chrome\Application\chrome.exe" --app="http://192.168.1.128:7001/agua/login/index.php"
     Tiene que se chrome ... --window-size=1280,800
 
 
-5. Automatizar el procedure de instalacion del zip xampp, optimizaciones, cambio de puertos, scripts vb, pwsh.
-
-6(2.1). Pedirle a antigravity que redacte tests para hacerlos como pruebas sobre contratos y usuarios existente de contratos en los 3 estados.
-      y como segunda parte los automatice en ambos servers y compare si son consistentes.
-
-
-8 En http://localhost/agua/reportes/credencial.php?id=1353    (Datos del Contrato #1353
-  A nombre de eulopina granados trujillo | 308) , el cuadro esta corto , el texto de la direccion se sale, checar en los otros hosts
-
--- Refs ncy --
-  /home/carlos/Pictures/Screenshots/ncy01.png
-
-
-
-===============================================================================================================================================================
-                                                                LISTA 2
-
-Ga
-Consistencia sql scripts refresh y migra, Validaciones
-Pedirle que cree informe md de esta peticion con imagen png del diagrama "Si, pero ejecuta todos los scripts, flujo host b -> host a -> host c , tiene sentido con la prueba T6 — Validación Cruzada Host A vs Host C ?"
-...
-
-Validar  pantallas de depuracion
-
-dar de baja cuenta premiun de ga domingo 7 pm!
-
-_____________________
-
-Claude 
-
-1. Listar todas las limpieza automaticas y manuales y el orden en que se haran 
-1.1 listen todos los procesos de saneamiento y con que herramienta se hara, si es manual o automatico, que falta, orden deben usarse y no romper consistencia.
-1.2 ver que esten todos los xlsx Datos-awa-limpieza
-  https://docs.google.com/spreadsheets/d/1wMeMPTSRoyNHqJ_xFljbw2Am82SBeybYBlrglA6uLwM/edit?gid=1440610976#gid=1440610976
-  En http://localhost/agua/admin/analisis/inventario_saneamiento.php
-
-2. Crear  Lista depurada de lo que va a realizar pruebas  y dar vobo doña Nancy y darselo a claude para que vea si esta todo eso incluido, o en scripts y que gaps hay.
-
-.....
-
-2 Arreglar lo de corte de caja y reporte de columnas, dárselo a Claude.
-2.1  Corte de caja, empatar lo mas cercano, todos los que me paso doña ncy.
-
-
-___
-GA
-1 Plan para fix de reglas en cbos de estados del contrato, issues, buscar avance en conversaciones pasadas.
-1.1 Issue a investigar que pasara en el pase a producción cuando para el caso de que se han ejecutado re-cargo automatico abril a los que no han págado.
-
-........
 E0. 
 Poder revertir las cancelaciones cargos de cto, susp. adm y tempo. desde la página de saneamientos.
 
@@ -21858,5 +21820,16 @@ Hacer clic en "Eliminar" — eso pone estado=2 en la BD, que es el estado de eli
 
 E2. 
 Que otras tablas seria adecuado partirlas similar a lo que ya se hizo para ligacargos ?
+
+E3 
+Validar  pantallas de depuracion
+
+E4
+8 En http://localhost/agua/reportes/credencial.php?id=1353    (Datos del Contrato #1353
+  A nombre de eulopina granados trujillo | 308) , el cuadro esta corto , el texto de la direccion se sale, checar en los otros hosts
+
+e5
+5. Automatizar el procedure de instalacion del zip xampp, optimizaciones, cambio de puertos, scripts vb, pwsh.
+
 
 ===============================================================================================================================================================

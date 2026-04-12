@@ -65,7 +65,7 @@ Inventario completo de assets en [.agents/INVENTORY.md](.agents/INVENTORY.md).
 
 > Leer siempre [.agents/rules/02-reglas-negocio.md](.agents/rules/02-reglas-negocio.md) antes de editar lógica financiera.
 
-- **Facturación habilitada** solo en estados `1 (ACTIVO)`, `2 (SUSP. TEMPORAL)` y `5 (SUSP. ADMINISTRATIVA)`.
+- **Facturación habilitada** solo en estados `1 (ACTIVO)`, `2 (SUSP. TEMPORAL)` y `3 (SUSP. ADMINISTRATIVA)`.
 - **Límite de tomas:** Máximo 2 contratos activos por usuario en el mismo domicilio.
 - **Split ligacargos:** activa (≥2026) en `ligacargos` · histórico (≤2025) en `ligacargos_historico`.
 - **Caja/Reportes:** Sumatoria de listas debe coincidir siempre con totales de encabezado.
@@ -76,7 +76,7 @@ Inventario completo de assets en [.agents/INVENTORY.md](.agents/INVENTORY.md).
 
 | Módulo | Archivo | Riesgo |
 | :--- | :--- | :--- |
-| Cambio de Estados | Transiciones 1, 2 y 5 | Alto |
+| Cambio de Estados | Transiciones 1, 2 y 3 | Alto |
 | Facturación / Cartera | `carteravencida.php` | Alto |
 | Caja Diaria | `concentradocortecaja.php` | Alto |
 | Resumen de Caja | `reportes/concentradocortecajaresumen.php` | Alto |
