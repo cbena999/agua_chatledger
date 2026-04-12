@@ -21814,40 +21814,27 @@ ok 3. Hacer yo pruebas crud en host c de agua.
 
 ===============================================================================================================================================================
                                                                 LISTA 2
-
-0 Clc termine de arreglar /opt/lampp/htdocs/agua/admin/reporte_contratos_toma.php
-
+claude 
 1 Plan para fix de reglas en cbos de estados del contrato, issues, buscar avance en conversaciones pasadas.
-
-2 Pasarme a los corte de caja y reporte de columnas, dárselo a Claude.
+2 Arreglar lo de corte de caja y reporte de columnas, dárselo a Claude.
 2.1 Corte de caja, empatar lo mas cercano, todos los que me paso doña ncy.
 
-
 _____________________
+ga
 
-3. pregutnar a la ia si /opt/lampp/htdocs/agua/admin/reporte_adeudos_fantasmas.php tiene que ver con: mixtos_sp_actv.php o no ?
-isss
+1 Reunir y depurar todas las tools de saneamiento:
+1.0 agrupar los demas assets sueltos y dispersos ponerlos en el dir que correponda.
 
-4 Issue a investigar que pasara en el pase a producción cuando para el caso de que se han ejecutado re-cargo automatico abril a los que no han págado, que debo depurar con base a las nueva reglas pasaran o se filtraran, como refeencia hice uno de limpia de eximir a nuevos contratos de esa regla q otros casos similares me harian falta!
+1.1. Listar todas las limpieza automaticas y manuales y el orden en que se haran y lista depurada de lo que va a revisar y dar vobo doña Nancy.
+1.2 listen todos los procesos de saneamiento y con que herramienta se hara, si es manual o automatico, que falta, orden deben usarse y no romper consistencia.
 
-
-5 Se listen todos los procesos de saneamiento y con que herramienta se hara, si es manual o automatico, y cuales faltan, en que orden deben utilizarse para no romper consistencia.
-
-6. Descubirir otros iisues, con base analizar movimientos recientes y sucedieron por abril y cuáles registros no debieron asignarsele y actuales si, colo limpiar este 2026, y de 2018 hacia 2025
-
-7 Listar todas las limpieza automaticas y manuales y el orden en que se haran y lista depurada de lo que va a revisar y dar vobo doña Nancy.
-
-_____________________
-1 pedirle, que haga un resumen fun , tec , de todo lo que se ha implem en esta conversacion, usando la regla del truth.
-
-2 se haga un listado de pendientes en esta y las dos anteriores conversaciones.
-
-5 continuar en claude con el rpt de operaciones_multas_sync
+1.3 Issue a investigar que pasara en el pase a producción cuando para el caso de que se han ejecutado re-cargo automatico abril a los que no han págado.
+1.4 Que debo depurar con base a las nueva reglas pasaran o se filtraran
+1.5 cuáles registros no debieron asignarsele y actuales si, colo limpiar este 2026, y de 2018 hacia 2025
 
 
 11. Menú → Cargos (o donde esté el catálogo de cargos)
-En el filtro de estado, seleccionar "mostrar ocultos" o "todos" — porque el 624 ya viene con estado=0 desde el sync, así que no aparece en la lista normal de activos
-Localizar el registro: ANUALIDAD DEL AGUA 2026 con automatico = No (ese es el 624; el 621 tiene automatico = Sí)
+En el filtro de estado, seleccionar "mostrar ocultos" o "todos" — porque el 624 ya viene con estado=0 desde el sync, así que no aparece en la lista normal de activos, Localizar el registro: ANUALIDAD DEL AGUA 2026 con automatico = No (ese es el 624; el 621 tiene automatico = Sí)
 Hacer clic en "Eliminar" — eso pone estado=2 en la BD, que es el estado de eliminación definitiva del sistema
 
 ===============================================================================================================================================================
