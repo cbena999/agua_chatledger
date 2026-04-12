@@ -22,19 +22,19 @@ La migración inicial está **completada y ambos pipelines probados en ejecució
 
 ## Propósito del Host C
 
-Ambiente de **V2 activo** — schema optimizado (MariaDB), split histórico de ligacargos, FKs/SPs/vistas nuevas. Cuando Host C sea declarado producción, reemplaza a Host B.
+Ambiente **Target V2 FINAL** — esquema optimizado (MariaDB), split histórico de ligacargos, FKs/SPs/vistas nuevas. Host C es el destino final de la migración y la referencia de producción V2.
 
 ---
 
 ## Estrategia de Refresh de Datos (B → A → C)
 
-El refresh de datos de producción hacia Host C **siempre** sigue esta ruta de dos pasos:
+El refresh de datos hacia el Target V2 **siempre** sigue esta ruta de transformación:
 
 ```
-Host B (prod v1) → Host A (dev v1+) → Host C (v2 MariaDB)
+Host B (Legado V1) → Host A (Transición V1+) → Host C (Destino V2)
 ```
 
-**Por qué no B→C directo**: el schema de B (v1) es incompatible con C (v2). Host A actúa como capa de transformación.
+**Por qué no B→C directo**: el schema de B (v1) es incompatible con C (v2). Host A actúa como la capa de transformación Bridge (limpieza y normalización V1+). El salto a V2 ocurre en el paso A→C vía el split de tablas.
 
 ### Paso 1 — Sync B → A (script existente)
 ```bash

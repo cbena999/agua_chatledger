@@ -6,9 +6,9 @@ Esta regla define los entornos operativos de **Agua** y el acceso mandatorio por
 
 | Host | OS | Propósito | Rama Git | MCP Access | Mandatorio |
 |:---:|---|---|---|---|:---:|
-| **A** | Ubuntu 22 / XAMPP Linux | Desarrollo / Próximo Producción | `main` | `bdawahost-a` | **Estructura** |
+| **A** | Ubuntu 22 / XAMPP Linux | TRANSICIÓN (V1+) — Bridge MySQL | `main` | `bdawahost-a` | **Estructura** |
 | **B** | Windows 7 / MySQL legado | Espejo Producción — Datos Frescos | N/A | `bdawahost-b` | **Datos** |
-| **C** | Windows 10 / XAMPP 7.4.33 Portable | V2 activo — BD optimizada + webapp adaptada | `feature/upgrade-v2-win-xampp` | `bdawahost-c` | N/A |
+| **C** | Windows 10 / XAMPP 7.4.33 Portable | Target V2 FINAL — MariaDB (Split Tablas) | `feature/upgrade-v2-win-xampp` | `bdawahost-c` | N/A |
 
 ### Stack Host C (detalle)
 | Componente | Versión |
@@ -22,9 +22,9 @@ Esta regla define los entornos operativos de **Agua** y el acceso mandatorio por
 | Webapp | `F:\xampp\htdocs\agua` |
 
 ## 📐 Jerarquía y Mandatos:
-1.  **Host A Especial**: Es la **Guía Estructural Oficial**. Cualquier discrepancia entre A y B se resuelve a favor de A (tablas nuevas, índices, campos eliminados).
+1.  **Host A de Transición**: Es la **Guía Estructural Oficial (MySQL)**. Actúa como puente para transformar datos de B hacia el modelo V2. Mantiene esquema de tabla única para compatibilidad bridge.
 2.  **Host B de Datos**: Únicamente se utiliza como fuente de "Datos Frescos de Negocio" para alimentar A. Solo lectura — prohibido cambios estructurales.
-3.  **Host C de Preview**: Entorno para la optimización de `ligacargos` (split histórico) y preview de todos los cambios antes de producción. Todo cambio con scripts versionados + rollback.
+3.  **Host C Target**: Entorno para la optimización definitiva de `ligacargos` (split histórico) y uso del stack MariaDB V2. Todo cambio vía scripts versionados + rollback.
 
 ---
 **Acceso Técnico**:

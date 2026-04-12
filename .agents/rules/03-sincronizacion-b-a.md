@@ -1,6 +1,6 @@
 # Regla 03: Procedimiento de Sincronización de Datos (B -> A)
 
-Reglas para refrescar los datos operativos en el ambiente de desarrollo (Host A) desde el espejo de producción (Host B).
+Reglas para transformar datos operativos del espejo legado (Host B) hacia el ambiente de TRANSICIÓN (Host A / V1+).
 
 ---
 
@@ -16,8 +16,9 @@ Al actualizar la BD en el Host A, se debe priorizar la limpieza de **"datos de n
 ---
 
 ## 📐 Adaptación Estructural (Estructura A)
-- **Regla**: Los registros transportados de B deben **"mapearse"** a la estructura actual de A.
-- **Mandato**: Si A tiene campos nuevos (ej. `repetido`, `id_colonia`, `normalizado`) o tipos de datos actualizados, el proceso de inserción desde B debe manejar estos cambios para asegurar que el sistema en A siga siendo funcional y consistente.
+- **Regla**: Los registros transportados de B deben **"mapearse"** a la estructura de Transición de A.
+- **Mandato**: Host A mantiene el esquema de **tabla única** (`ligacargos`) para actuar como puente estable. El split histórico se reserva para el Host C.
+- **Consistencia**: El post-procesamiento transforma campos V1 a V1+ (ej. `exento_recargo`, `batch_id`) asegurando integridad inmediata.
 
 ---
 
@@ -39,8 +40,8 @@ docs-dev/migration-stack2/win10_aguav2/syncawa_hostb_to_hosta/
 | `00_pre_flight.sh` | Compara schemas A vs B, detecta drift de tablas y columnas sin modificar datos |
 | `01_backup_host_a.sh` | Backup comprimido de Host A antes de cualquier modificación |
 | `02_dump_host_b.sh` | Extrae las tablas de negocio de Host B a archivos `.sql` en `work/` |
-| `03_sync_host_a.sql` | Vacía tablas de negocio en A e importa desde `work/`; aplica defaults de columnas nuevas |
-| `04_recalc_contrato_toma.sql` | Recalcula la tabla `contrato_toma` (tabla solo-A, no existe en B) |
+| `03_sync_host_a.sql` | **Unificación y Saneamiento** — Única fuente de verdad para post-procesamiento V1+. Vacía tablas, importa y aplica D1-D7 (SDF V1+). |
+| `04_recalc_contrato_toma` | Recalc de infraestructura (Transición V1+) |
 | `05_validate.sql` | Valida conteos y consistencia referencial post-sync |
 
 ### Clasificación de Tablas (en `sync_config.sh`)
