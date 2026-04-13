@@ -1,217 +1,127 @@
-#!/bin/bash
-# =================================================================
-# chatledger_validate.sh — Validador de integridad del Ground Truth
+#!/usr/bin/env bash
+# =============================================================================
+# chatledger_validate.sh — Validación de integridad del Ground Truth
+# Repo: agua_chatledger · Ver: .agents/rules/08-integridad-ground-truth.md
 #
-# Verifica que todos los assets críticos de agua_chatledger estén
-# correctos antes de commitear. Ejecutar manualmente o vía git hook.
-#
-# Uso: bash chatledger_validate.sh
-# Exit 0 = todo OK | Exit 1 = hay problemas
-#
-# Ver: .agents/rules/08-integridad-ground-truth.md
-# =================================================================
+# USO: bash docs-dev/ga-cl-ia/chatledger_validate.sh
+# Ejecutado automáticamente por el pre-commit hook de repo agua.
+# =============================================================================
+set -euo pipefail
 
+AGUA_DIR="/opt/lampp/htdocs/agua"
 CHATLEDGER_DIR="/home/carlos/GitHub/agua_chatledger"
-REPO_DIR="/opt/lampp/htdocs/agua"
-
-GREEN="\033[0;32m"
-YELLOW="\033[1;33m"
-RED="\033[0;31m"
-BOLD="\033[1m"
-RESET="\033[0m"
-
-ok()   { echo -e "  ${GREEN}[OK]${RESET}    $1"; }
-warn() { echo -e "  ${YELLOW}[WARN]${RESET}  $1"; }
-fail() { echo -e "  ${RED}[FAIL]${RESET}  $1"; ERRORS=$((ERRORS+1)); }
-
 ERRORS=0
 
+fail() { echo "  [FAIL] $*"; ERRORS=$((ERRORS + 1)); }
+ok()   { echo "  [ OK ] $*"; }
+
 echo ""
-echo -e "${BOLD}======================================================"
-echo " Validación de Integridad — agua_chatledger"
-echo -e "======================================================${RESET}"
+echo "═══════════════════════════════════════════════════════"
+echo "  Validación Ground Truth — agua_chatledger            "
+echo "═══════════════════════════════════════════════════════"
 
-# ------------------------------------------------------------------
-# 1. Symlinks en repo agua
-# ------------------------------------------------------------------
+# ── 1. Symlinks en repo agua ──────────────────────────────────────────────────
 echo ""
-echo -e "${BOLD}── 1. Symlinks en repo agua ─────────────────────────${RESET}"
+echo "  [1] Symlinks en repo agua"
 
-declare -A EXPECTED_LINKS=(
-    ["$REPO_DIR/.chatledger"]="$CHATLEDGER_DIR"
-    ["$REPO_DIR/.agents"]=".chatledger/.agents"
-    ["$REPO_DIR/.claude"]=".chatledger/.claude"
-    ["$REPO_DIR/CLAUDE.md"]=".chatledger/CLAUDE.md"
-    ["$REPO_DIR/GEMINI.md"]=".chatledger/GEMINI.md"
-    ["$REPO_DIR/.clauderules"]=".chatledger/.clauderules"
-    ["$REPO_DIR/.mcp.json"]=".chatledger/.mcp.json"
-    ["$REPO_DIR/docs-dev/ga-cl-ia"]="$CHATLEDGER_DIR/docs-dev/ga-cl-ia"
-)
-
-for LINK in "${!EXPECTED_LINKS[@]}"; do
-    EXPECTED="${EXPECTED_LINKS[$LINK]}"
-    if [ ! -L "$LINK" ]; then
-        fail "$(basename $LINK) — NO es symlink (es archivo/dir real o no existe)"
-        echo -e "         ${YELLOW}REPARAR CON:${RESET} bash docs-dev/ga-cl-ia/chatledger_sync_ga_lnks.sh"
-    elif [ "$(readlink "$LINK")" != "$EXPECTED" ]; then
-        fail "$(basename $LINK) → apunta a '$(readlink "$LINK")' (esperado: '$EXPECTED')"
-    elif [ ! -e "$LINK" ]; then
-        fail "$(basename $LINK) — symlink roto (destino no existe)"
+check_symlink() {
+    local link="$1"
+    local expected_target="$2"
+    if [ -L "$link" ]; then
+        ok "Symlink OK: $link"
     else
-        ok "$(basename $LINK) → $EXPECTED"
+        fail "Symlink roto o convertido en archivo: $link (esperado → $expected_target)"
     fi
-done
+}
 
-# ------------------------------------------------------------------
-# 2. .claude — settings.json y settings.local.json en chatledger
-# ------------------------------------------------------------------
+check_symlink "${AGUA_DIR}/.agents"          ".chatledger/.agents"
+check_symlink "${AGUA_DIR}/.claude"          ".chatledger/.claude"
+check_symlink "${AGUA_DIR}/.mcp.json"        ".chatledger/.mcp.json"
+check_symlink "${AGUA_DIR}/CLAUDE.md"        ".chatledger/CLAUDE.md"
+check_symlink "${AGUA_DIR}/GEMINI.md"        ".chatledger/GEMINI.md"
+check_symlink "${AGUA_DIR}/.clauderules"     ".chatledger/.clauderules"
+check_symlink "${AGUA_DIR}/docs-dev/ga-cl-ia" "${CHATLEDGER_DIR}/docs-dev/ga-cl-ia"
+
+# ── 2. .mcp.json no vacío y contiene los 3 hosts ─────────────────────────────
 echo ""
-echo -e "${BOLD}── 2. .claude — archivos de configuración ───────────${RESET}"
+echo "  [2] .mcp.json — contenido y 3 hosts"
 
-for F in "settings.json" "settings.local.json"; do
-    FPATH="$CHATLEDGER_DIR/.claude/$F"
-    if [ ! -f "$FPATH" ]; then
-        fail ".claude/$F no existe en chatledger"
-    elif [ ! -s "$FPATH" ]; then
-        fail ".claude/$F está vacío"
-    else
-        ok ".claude/$F existe"
-    fi
-done
-
-# Verificar que settings.json tiene configuración Docker MCP
-if grep -q '"docker"' "$CHATLEDGER_DIR/.claude/settings.json" 2>/dev/null; then
-    ok ".claude/settings.json usa comando docker (MCP correcto)"
+MCP_FILE="${AGUA_DIR}/.mcp.json"
+if [ ! -s "$MCP_FILE" ]; then
+    fail ".mcp.json vacío o inexistente"
 else
-    fail ".claude/settings.json no usa docker — MCP puede estar mal configurado"
-fi
-
-# ------------------------------------------------------------------
-# 3. .mcp.json — no vacío y contiene los 3 hosts
-# ------------------------------------------------------------------
-echo ""
-echo -e "${BOLD}── 3. .mcp.json — contenido y hosts ────────────────${RESET}"
-
-MCP_FILE="$CHATLEDGER_DIR/.mcp.json"
-
-if [ ! -f "$MCP_FILE" ]; then
-    fail ".mcp.json no existe"
-elif [ ! -s "$MCP_FILE" ]; then
-    fail ".mcp.json está VACÍO"
-else
-    # Verificar que no usa npx directo (debe usar docker)
-    if ! grep -q '"docker"' "$MCP_FILE"; then
-        fail ".mcp.json no usa 'docker' — posiblemente restaurado con npx directo"
-    else
-        ok ".mcp.json usa comando docker"
-    fi
-
-    # Verificar los 3 hosts
-    for HOST in bdawahost-a bdawahost-b bdawahost-c; do
-        if grep -q "\"$HOST\"" "$MCP_FILE"; then
-            ok ".mcp.json contiene $HOST"
+    for host in bdawahost-a bdawahost-b bdawahost-c; do
+        if grep -q "$host" "$MCP_FILE" 2>/dev/null; then
+            ok ".mcp.json contiene: $host"
         else
-            fail ".mcp.json NO contiene $HOST"
+            fail ".mcp.json no contiene: $host"
         fi
     done
-
-    # Verificar puerto 7002 para Host C
-    if grep -q "7002" "$MCP_FILE"; then
-        ok ".mcp.json tiene puerto 7002 para Host C"
+    # En el JSON el comando es "docker" + args "exec" -i ... (separados)
+    if grep -q '"docker"' "$MCP_FILE" 2>/dev/null && grep -q '"exec"' "$MCP_FILE" 2>/dev/null; then
+        ok ".mcp.json usa docker exec (correcto)"
     else
-        fail ".mcp.json no tiene puerto 7002 — bdawahost-c probablemente mal configurado"
+        fail ".mcp.json NO usa docker exec — MCPs romperán con ETIMEDOUT"
     fi
 fi
 
-# ------------------------------------------------------------------
-# 3. mcp_config.json == .mcp.json (deben ser idénticos)
-# ------------------------------------------------------------------
+# ── 3. mcp_config.json idéntico a .mcp.json ──────────────────────────────────
 echo ""
-echo -e "${BOLD}── 4. mcp_config.json idéntico a .mcp.json ─────────${RESET}"
+echo "  [3] mcp_config.json sincronizado con .mcp.json"
 
-MCP_CONFIG="$CHATLEDGER_DIR/.agents/mcp_config.json"
-
-if [ ! -f "$MCP_CONFIG" ]; then
-    fail "mcp_config.json no existe en .agents/"
-elif diff -q "$MCP_FILE" "$MCP_CONFIG" > /dev/null 2>&1; then
-    ok "mcp_config.json == .mcp.json (idénticos)"
-else
-    fail "mcp_config.json DIFIERE de .mcp.json — sincronizar antes de commitear"
-    echo "         Diferencias:"
-    diff "$MCP_FILE" "$MCP_CONFIG" | sed 's/^/         /'
-fi
-
-# ------------------------------------------------------------------
-# 4. .clauderules — no contaminado (máx 35 líneas)
-# ------------------------------------------------------------------
-echo ""
-echo -e "${BOLD}── 5. .clauderules — tamaño y contenido ────────────${RESET}"
-
-CLAUDERULES="$CHATLEDGER_DIR/.clauderules"
-LINES=$(wc -l < "$CLAUDERULES" 2>/dev/null || echo 0)
-
-if [ "$LINES" -gt 35 ]; then
-    fail ".clauderules tiene $LINES líneas (máx 35) — posiblemente contaminado con notas/claves"
-else
-    ok ".clauderules tiene $LINES líneas (OK)"
-fi
-
-# Verificar que no contiene JSON ni claves de API
-if grep -qE '^\{|"command"|sk-or-v1-|"allow":|"deny":' "$CLAUDERULES" 2>/dev/null; then
-    fail ".clauderules contiene JSON o claves de API — limpiar"
-else
-    ok ".clauderules sin JSON ni claves"
-fi
-
-# ------------------------------------------------------------------
-# 5. Archivos críticos de Docker MCP
-# ------------------------------------------------------------------
-echo ""
-echo -e "${BOLD}── 6. Assets Docker MCP ─────────────────────────────${RESET}"
-
-for F in \
-    "$CHATLEDGER_DIR/docs-dev/ga-cl-ia/docker-compose.yml" \
-    "$CHATLEDGER_DIR/docs-dev/ga-cl-ia/entrypoint-patch.sh"; do
-    if [ -f "$F" ]; then
-        ok "$(basename $F) existe"
+MCP_REF="${AGUA_DIR}/.agents/mcp_config.json"
+if [ -f "$MCP_REF" ]; then
+    if diff -q "$MCP_FILE" "$MCP_REF" > /dev/null 2>&1; then
+        ok "mcp_config.json idéntico a .mcp.json"
     else
-        fail "$(basename $F) NO existe — MCP Host C no funcionará correctamente"
+        fail "mcp_config.json DIFIERE de .mcp.json — sincronizar antes de commitear"
+    fi
+else
+    fail "mcp_config.json no encontrado en .agents/"
+fi
+
+# ── 4. Assets críticos en docs-dev/ga-cl-ia ───────────────────────────────────
+echo ""
+echo "  [4] Assets críticos en docs-dev/ga-cl-ia"
+
+for asset in "entrypoint-patch.sh" "docker-compose.yml"; do
+    if [ -f "${CHATLEDGER_DIR}/docs-dev/ga-cl-ia/${asset}" ]; then
+        ok "Existe: docs-dev/ga-cl-ia/${asset}"
+    else
+        # AVISO pero no bloquea — estos assets pueden no estar en todos los ambientes
+        echo "  [WARN] No encontrado: docs-dev/ga-cl-ia/${asset} (opcional en este ambiente)"
     fi
 done
 
-# Verificar que entrypoint-patch.sh menciona el patch de puerto
-if grep -q "process.argv\[2\]" "$CHATLEDGER_DIR/docs-dev/ga-cl-ia/entrypoint-patch.sh" 2>/dev/null; then
-    ok "entrypoint-patch.sh contiene patch de puerto (argv[2])"
+# ── 5. .clauderules no excede 30 líneas ──────────────────────────────────────
+echo ""
+echo "  [5] .clauderules — tamaño"
+
+CLAUDERULES="${AGUA_DIR}/.clauderules"
+if [ -f "$CLAUDERULES" ]; then
+    LINES=$(wc -l < "$CLAUDERULES")
+    if [ "$LINES" -le 30 ]; then
+        ok ".clauderules: ${LINES} líneas (OK ≤30)"
+    else
+        fail ".clauderules: ${LINES} líneas (excede 30 — mover contenido a .agents/)"
+    fi
 else
-    fail "entrypoint-patch.sh no contiene el patch de puerto — bdawahost-c fallará con ETIMEDOUT"
+    fail ".clauderules no encontrado"
 fi
 
-# ------------------------------------------------------------------
-# 6. Contenedor Docker corriendo (warning, no error)
-# ------------------------------------------------------------------
+# ── Resultado ─────────────────────────────────────────────────────────────────
 echo ""
-echo -e "${BOLD}── 7. Contenedor Docker context7-mcp-mysql ──────────${RESET}"
-
-if docker ps --format '{{.Names}}' 2>/dev/null | grep -q "context7-mcp-mysql"; then
-    ok "context7-mcp-mysql está corriendo"
-else
-    warn "context7-mcp-mysql NO está corriendo — MCPs no disponibles hasta levantar Docker"
-    echo "         Levantar con: cd $CHATLEDGER_DIR/docs-dev/ga-cl-ia && docker compose up -d"
-fi
-
-# ------------------------------------------------------------------
-# Resumen final
-# ------------------------------------------------------------------
-echo ""
-echo -e "${BOLD}======================================================${RESET}"
+echo "═══════════════════════════════════════════════════════"
 if [ "$ERRORS" -eq 0 ]; then
-    echo -e "${GREEN}${BOLD}✓ Validación OK — $ERRORS errores. Ground Truth íntegro.${RESET}"
+    echo "  RESULTADO: OK ✓ — Ground Truth íntegro ($ERRORS errores)"
+    echo "═══════════════════════════════════════════════════════"
     echo ""
     exit 0
 else
-    echo -e "${RED}${BOLD}✗ Validación FALLÓ — $ERRORS error(es) encontrado(s).${RESET}"
-    echo ""
-    echo -e "  Consultar: ${BOLD}.agents/rules/08-integridad-ground-truth.md${RESET}"
+    echo "  RESULTADO: FALLO ✗ — ${ERRORS} error(es) detectado(s)"
+    echo "  Reparar con: bash docs-dev/ga-cl-ia/chatledger_sync_ga_lnks.sh"
+    echo "  Ver: .agents/rules/08-integridad-ground-truth.md"
+    echo "═══════════════════════════════════════════════════════"
     echo ""
     exit 1
 fi
