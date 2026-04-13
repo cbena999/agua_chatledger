@@ -21745,37 +21745,75 @@ Hice cambios en rama main para los archivos aqui puestos
 
 ===============================================================================================================================================================
                                                                 LISTA 2
+____ Lunes 13 ____
+
+
++ Dar otra corridas
+ . Ver si toda la sync de datos de host a hacia host c, paso bien , logs/sync_YYYYMMDD_HHMMSS.log junto con todo el output del sync. INFORME FORMATO !
+ . Muestrame los flujos de ejecución disponibles de migration-aguav2/
+ . Actualice el  Ground Truth para lo que se estabilizo de los scripts migration-aguav2/
+
++ Pedirle:para obtener un listado falta de asamblea,  en formato cvs
+  Cambio 4A — Corregir sp_sinc_asamblea_bulk en 05_stored_procedures.sql
+  Archivo: docs-dev/migration-aguav2/host-c-setup/05_stored_procedures.sql
+  Gap: La rama que sincroniza ligacargos_historico solo busca el pago en ligacargos activa. Si el pago está en ligacargos_historico (años ≤2025), no lo encuentra.
+    
+________
+
++ Con base a esta y dos pasadas sesiones, todo el codigo fuente de la webapp php, y bd awa host c; genera un documento amplio y descriptivo funcional para el rol del cajero operador; en el ambito de los flujos de las transiciones de los 6 casos de cambio de estado para un contrato en la webapp. Incluir:
+  . Todas las reglas de paridad con la ficha de datos de tomas asociadas al contrato, cargos, recargos,Amnistía, EXENCIÓNes, reglas para cada estado; y demas reglas y restricciones que no liste aqui y puedan existir o esten ocultas. 
+  . Gaps e issues. 
+  *. GA: Amnesty surcharge exemption rules by suspension type , CL: Amnesty surcharge exemption rules by suspension type
+
+
++ Añadir al pipeline de saneamiento 10_pipeline_saneamiento.sql    
+.  Exponerle caso ()Pasarle el xslx), si ya se que 160x ctos estan mezclados, y se deben arreglar de manera manual, que conviene:
+    desactivar la logica de reglas restrictivas para permitir al operador arreglarlas manualmenten en host c.
+    que el operador arreglarlas manualmenten en host b y entonces se realice la sincronizacion.
+
+. falta el de zenon, pasar entre contratos. Checar el doc: ReqFuncionales_24.02.2026_AguaColMaestro
+    https://docs.google.com/document/d/1Y8QYFnb3WFgfKw7H01pAbrs-6sOEtOAxtOieXykejmw/edit?tab=t.0
+
+
+===============================================================================================================================================================
+
+Validar si todavia hay mas issues. 
+
++ not-t.txt / RQ OTHER CASES.
+
+
 Ref: Contrato.estado (1  = ACTIVO  |  2 =  Suspensión Temporal  | 3  = Suspensión Administrativa   |  4  =  Suspensión Definitiva)
 
 
-yo a mano:
+YO A MANO:
   1.2 ver que esten todos los xlsx Datos-awa-limpieza
     https://docs.google.com/spreadsheets/d/1wMeMPTSRoyNHqJ_xFljbw2Am82SBeybYBlrglA6uLwM/edit?gid=1440610976#gid=1440610976
     En http://localhost/agua/admin/analisis/inventario_saneamiento.php
 
-   2. Crear  Lista depurada de lo que va a realizar pruebas  y dar vobo doña Nancy y darselo a claude para que vea si esta todo eso incluido, o en scripts y que gaps hay.
+DEPURACIONES:
+  - Crear  Lista depurada de lo que va a realizar pruebas  y dar vobo doña Nancy y darselo a claude para que vea si esta todo eso incluido, o en scripts y que gaps hay.
+  
+  - Orden y prioridad de depuración manual x doña nancy:
+
+  --- Prioridad 1 manual ---
+    a) mixtos_sp_actv.php   (corregir todos sus datos, principalmente por su estado , y su ficha de tomas), validar sus cargos.
+    b) Sinc. Multas Asamblea (auto)
+
+   --- Prioridad 1 automaticas ---
+    Depuracion de Cto.suspendidos y sus cargos cancelados.
+    Sync de recibos/edo cuenta/deuda de pago multa a otros contratos del mismo usuario.
+    Huerfanos como baldemar por falla en (R1)
+    ... ?
 
 ===============================================================================================================================================================
-1) 
-Ga
-auditoria_integridad_bd
-  Se encontraron anomalías en
-  Notice: Array to string conversion in F:\aguav2\webapp\agua\admin\reportes\auditoria_integridad_bd.php on line 214
-  Array dimensiones.
-  Descarga los CSV para revisión detallada antes del próximo corte de caja. 
+1) cv_por_tipo_edo_cto
+    Auditoría de Cartera Fantasma
+    Análisis resumido y detallado de recargos por estado.
 
-cv_por_tipo_edo_cto
-  Auditoría de Cartera Fantasma
-
-  Análisis resumido y detallado de recargos por estado.
-
-................
-dar de baja cuenta premiun de ga domingo 7 pm!
-
-===============================================================================================================================================================
 
 Claude 
 1) 
+
 Se requiere realizar estos ajustes para funcionalidad de Amnistía de Recargos, cuando un contrato se pasa a estado ACTIVO:
 1. Cuando viene de SUSPENSIÓN TEMPORAL aplicar la exención tal cual está implementado; validar que está ocurriendo con la asignación de sus cargos anuales y en recargos de abril en caso de no pago oportuno del año vigente y que otras reglas de negocio ocurren en este caso.
 2. Cuando viene de SUSPENSIÓN ADMINISTRATIVA se debe mantener su  adeudo completo (no aplica la Amnistía);  validar que está ocurriendo con la asignación de sus cargos anuales y recargos de abril en caso de no pago oportuno del año vigente y que otras reglas de negocio ocurren en este caso.
@@ -21788,11 +21826,13 @@ Antes de hacer modificaciones informa el as is, y luego el tobe.
     
   1.1 Issue a investigar que pasara en el pase a producción cuando para el caso de que se han ejecutado re-cargo automatico abril a los que no han págado.
 
-3) 
-
+3)
   2 Arreglar lo de corte de caja y reporte de columnas, dárselo a Claude.
   2.1  Corte de caja, empatar lo mas cercano, todos los que me paso doña ncy.
   2.2 carteravencida  Ok corregido.
+  MAS PREGUNTA IA
+    Para la impl, de no localizados como se com,porta cv, Estado de Cuenta y Corte de Caja (Por Fecha)
+
     año 2025 , re-validar
       En host c muestra 800
       En host a y b, muestra 800 registros
@@ -21830,6 +21870,28 @@ E4
 
 e5
 5. Automatizar el procedure de instalacion del zip xampp, optimizaciones, cambio de puertos, scripts vb, pwsh.
+
+
+===============================================================================================================================================================
+Ok, atendidos. PRIORITARIOS:
+
+  Vamos a continuar refinando el plan con otras preguntas para que me apoyes a inferir los gaps e issues  a  corregir, dame respuestas en as is y to be :
+
+  1) Si un contrato tiene dos tomas en el mismo domicilio, se le hacen dos cargos anuales de agua y/o drenaje?
+  2) calcula_recargos  abril, se debe realizar para ctos en estado: 
+       Activos,  susp. administrativa  y susp, temporal ?  
+  3) Al pasar a estado 3 (SUSP. ADMINISTRATIVA), las anualidades del año vigente se congelan para distinguirlas del adeudo histórico activo: es lo correcto contablemente, o lo correcto por estandar en sistemas de gestion de agua ?
+
+
+  4) Analizar  incluir en un script automatico como ultima o inmedia ejecucíón del script host-c-setup/ o sync_hosta_to_hostc; para ejecutar los siguientes scripts de sanemiento realizados previamente y en que orden seria; pues antes de llegar al estatus actual quiza estos script puedan necesitar ajustes revisa cada uno tambien; el proposito es crear un pipeline de saneamiento de datos:
+
+  4.1) host-c-setup/manual/fix_anualidades_susp_admin_2026.sql 
+
+  4.2) /opt/lampp/htdocs/agua/docs-dev/migration-aguav2/host-c-setup/05_stored_procedures.sql/sp_sinc_asamblea_bulk
+    Usa como referencia este para cubrir todos(~478) los registros, /opt/lampp/htdocs/agua/admin/saneamiento/operaciones_multas_sync.php
+
+
+  4.3) /opt/lampp/htdocs/agua/admin/saneamiento/reparacion_folios_pagados(recibos)_sin_contrato.sql
 
 
 ===============================================================================================================================================================
