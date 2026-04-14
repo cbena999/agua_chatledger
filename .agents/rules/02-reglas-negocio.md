@@ -42,7 +42,7 @@ Este documento es una entidad viva para registrar el descubrimiento y clasificac
 |:---:|---|:---:|
 | **R01** | Sincronización estricta entre sumatoria de listas y totales de encabezado en todos los reportes operativos. | Validada |
 | **R02** | **Filtros Canónicos de Cartera y Deuda** — Todos los reportes financieros deben aplicar los mismos filtros para consistencia entre sí. `excluir_cartera = [6, 16, 17, 19, 20, 21, 22]`: categorías excluidas de cartera vencida y deuda total (cat 6=multas asamblea, 16/17=recargos acumulativos, 19-22=conceptos únicos CB/PROP, MLT/DESP, CNT/NADO, CNC/FUGA). `sin_anio = [6, 16, 17]`: categorías sin filtro de año (acumulativas). Cat 11 (recargos normales) SÍ se incluye en cartera — recargos de años anteriores aparecen en columna R.CART para encuadre correcto. Siempre añadir `AND c.estado != 4` explícito en reportes sobre `ligacargos`/`vw_ligacargos_pendientes`, independiente del estado de saneamiento de la BD. Validado con $0 diferencia en encuadre para 5 períodos reales 2024-2026. Implementado en `concentradocortecaja.php`, `concentradocortecajaresumen.php`, `carteravencida.php`, `listadeudores.php`, `reporte_morosos.php`, `cv_por_tipo_edo_cto.php`. | Implementada |
-| **R03** | **Semántica de Estados en `ligacargos`** — `estado=0`: pendiente de cobro. `estado=1`: pagado. `estado=-1`: depurado/archivado por sync (transición). `estado=2`: cancelado formal por administrador. `estado=-2`: especial. `estado=-3`: condonado histórico. Para efectos de cartera y deuda solo consultar `estado=0`. El cambio de `estado=-1` a `estado=2` en cargos de contratos estado=4 es documentalmente correcto y no afecta encuadre (ambos son invisibles para reportes financieros). | Implementada |
+| **R03** | **Semántica canónica de estados en `ligacargos` / `ligacargos_historico`** — `estado=0`: pendiente de cobro. `estado=1`: pagado (por `sp_pagar_cargo` o caja.php). `estado=-1`: cancelado canónico (por `sp_cancelar_cargo`, D7, Paso 8-B, saneamiento 10c). **`estado=2` NO EXISTE** como valor válido en ligacargos — era un bug en scripts previos; todos corregidos. `estado=-2`: legacy pre-2018 (≈68 registros históricos, solo lectura). `estado=-3`: legacy pre-2018 (≈166 registros históricos, solo lectura). Para cartera y deuda solo consultar `estado=0`. Toda cancelación produce `estado=-1` con `fpago=NOW()`. Documentado en `docs-dev/migration-aguav2/PIPELINE_DECLARACION.md`. | Implementada |
 
 ---
 
@@ -53,4 +53,9 @@ Espacio para anotar comportamientos detectados en el código legado o procedimie
 3.  **[D003]**: Determinar si existen descuentos automáticos por "Pronto Pago" no documentados.
 
 ---
+| **R04** | **SQL dinámico desde catálogo** — `concentradocortecaja.php` y `concentradocortecajaresumen.php` construyen sus CASE/COUNT dinámicamente desde `SELECT id, nombre, nombrecorto FROM categorias ORDER BY id`. Esto asegura que las categorías 19–22 (V2) estén incluidas automáticamente sin hardcoding. Nunca hardcodear IDs de categoría en los reportes de caja; leer siempre desde el catálogo. | Implementada |
+| **R05** | **Conteo de folios en caja** — Un folio puede cubrir múltiples contratos del mismo usuario. El contador por columna en `concentradocortecaja.php` usa `$folios_c[$cid][$folio] = true` (array-set) para contar folios únicos, no filas del GROUP BY. El total al pie usa `COUNT(DISTINCT folio)`. Ambos deben coincidir con los `(n=X)` de `concentradocortecajaresumen.php`. Verificado $0 diferencia en 5 períodos 2024-2026. | Implementada |
+
+---
+
 **Nota para todos los agentes IA (Claude Code y Antigravity/Gemini)**: Al explorar el código, si descubres una nueva restricción o lógica condicional, agrégala aquí con un ID incremental y su módulo correspondiente.

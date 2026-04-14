@@ -60,10 +60,10 @@ bash docs-dev/ga-cl-ia/chatledger_sync_ga_lnks.sh
 | # | Archivo | Nombre | Cubre | Última modificación |
 |---|---|---|---|---|
 | 01 | `01-infra-hosts.md` | Infraestructura y Hosts | Definición de Hosts A/B/C, puertos, accesos, propósito de cada ambiente | 2026-04-09 |
-| 02 | `02-reglas-negocio.md` | Reglas de Negocio | Facturación, estados de contrato, límite de tomas, split ligacargos, módulos críticos | **2026-04-10** |
-| 03 | `03-sincronizacion-b-a.md` | Sincronización B→A | Procedimiento de refresco de datos desde Host B (producción) a Host A (desarrollo) | 2026-04-08 |
+| 02 | `02-reglas-negocio.md` | Reglas de Negocio | Facturación, estados de contrato, límite de tomas, split ligacargos, módulos críticos | **2026-04-14** |
+| 03 | `03-sincronizacion-b-a.md` | Sincronización B→A | Procedimiento de refresco de datos desde Host B (producción) a Host A (desarrollo) | **2026-04-14** |
 | 04 | `04-arquitectura-mvc.md` | Arquitectura MVC | Estructura de directorios, capas MVC, localización de lógica de negocio | 2026-04-08 |
-| 05 | `05-despliegue-host-c.md` | Despliegue Host C | Migración e implementación en Host C (MariaDB 10.4.27 / XAMPP 7.4.33 / Windows) | 2026-04-08 |
+| 05 | `05-despliegue-host-c.md` | Despliegue Host C | Migración e implementación en Host C (MariaDB 10.4.27 / XAMPP 7.4.33 / Windows) | **2026-04-14** |
 | 06 | `06-accesos-rutas.md` | Accesos, Rutas y Herramientas | Credenciales y rutas web/DB de los 3 hosts, arquitectura Docker MCP, regla MCP vs CLI MySQL | 2026-04-09 |
 | 07 | `07-git-workflow.md` | Control de Versiones | Ramas, symlinks Ground Truth, protocolo cambio de rama (4 pasos), tabla qué commitear en cada repo | 2026-04-09 |
 | 08 | `08-integridad-ground-truth.md` | Integridad del Ground Truth | Rol de cada asset, qué está prohibido modificar, historial de incidentes, cómo validar antes de commitear | 2026-04-09 |
@@ -114,16 +114,29 @@ bash docs-dev/ga-cl-ia/chatledger_sync_ga_lnks.sh
 
 ---
 
+## Documentación de Estabilización (`docs-dev/doc-estabilizacion/`)
+
+| Archivo | Descripción | Fecha |
+|---|---|---|
+| `REPORTES_CAJA_CARTERA_DECLARACION.md` | Homologación de `concentradocortecaja.php`, `concentradocortecajaresumen.php` y `carteravencida.php`: problemas, fixes, congruencia cruzada, tabla canónica de categorías | **2026-04-14** |
+
+## Pipeline de Migración (`docs-dev/migration-aguav2/`)
+
+| Archivo | Descripción | Fecha |
+|---|---|---|
+| `PIPELINE_DECLARACION.md` | Declaración formal del pipeline B→A→C: completo, correcto y verificado. Estructura de scripts, flujo de ejecución, verdad única de estados, avisos permanentes | **2026-04-14** |
+
+---
+
 ## Gaps detectados — Áreas sin documentar
 
 | Área | Prioridad | Notas |
 |---|---|---|
-| Módulo Caja / Corte diario | Alta | `concentradocortecaja.php` es módulo crítico sin skill dedicada |
-| Módulo Cartera Vencida | Alta | `carteravencida.php` sin regla específica más allá de la 02 |
-| Cambio de Estados de contrato | Alta | Transiciones 1→2→5 mencionadas en regla 02 pero sin workflow dedicado |
+| ~~Módulo Caja / Corte diario~~ | ~~Alta~~ | **Cubierto** — reglas R02/R04/R05 en 02-reglas-negocio.md + `doc-estabilizacion/REPORTES_CAJA_CARTERA_DECLARACION.md` |
+| ~~Módulo Cartera Vencida~~ | ~~Alta~~ | **Cubierto** — regla R02 + `doc-estabilizacion/REPORTES_CAJA_CARTERA_DECLARACION.md` |
+| Cambio de Estados de contrato | Alta | Transiciones 1→2→3→4 mencionadas en regla 02 pero sin workflow dedicado |
 | Testing / Validación | Media | No hay skill de pruebas ni procedimiento de QA |
 | Módulo Asamblea | Media | Módulo activo sin regla o skill documentada |
-| Reportes | Baja | `concentradocortecajaresumen.php` sin documentación de agentes |
 
 ---
 
@@ -137,4 +150,4 @@ bash docs-dev/ga-cl-ia/chatledger_sync_ga_lnks.sh
 
 ---
 
-**Última actualización:** 2026-04-10 — Regla 09 (protocolo cierre de sesión) agregada. CLAUDE.md con tabla numerada 01–09. `.clauderules` con mandato de cierre. `GEMINI.md` actualizado con Regla 09 e índice. `02-reglas-negocio.md` con C06 (amnistía recargos), F03 (auditoría reasignación) y F04 (renumerada). Nombre canónico "Runbook" establecido en ambos entry points.
+**Última actualización:** 2026-04-14 — Pipeline B→A→C declarado completo y verificado. Reglas R03/R04/R05 actualizadas (estados canónicos ligacargos, SQL dinámico caja, conteo folios). `03-sincronizacion-b-a.md` actualizado (02_dump_host_b.sh eliminado). `05-despliegue-host-c.md` actualizado (estado 2026-04-14, Paso 8-B, scripts manuales aislados). Gaps "Caja" y "Cartera Vencida" cubiertos. Nuevas secciones: `doc-estabilizacion/` y `docs-dev/migration-aguav2/PIPELINE_DECLARACION.md`.

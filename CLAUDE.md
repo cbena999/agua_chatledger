@@ -55,7 +55,7 @@ Inventario completo de assets en [.agents/INVENTORY.md](.agents/INVENTORY.md).
 
 - Schema v2 completo, webapp PHP adaptada — **UP & RUNNING**
 - Pipeline sync B→A→C validado en ejecución real (7/7 checks OK)
-- Scripts setup en `docs-dev/migration-stack2/win10_aguav2/host-c-setup/` (01→08)
+- Scripts setup en `docs-dev/migration-aguav2/host-c-setup/` (01→08)
 - Checklist pase a producción en `host-c-setup/07_transferir_datos.md`
 - Ver regla detallada: [.agents/rules/05-despliegue-host-c.md](.agents/rules/05-despliegue-host-c.md)
 
@@ -111,8 +111,8 @@ git push origin feature/upgrade-v2-win-xampp
 /opt/lampp/bin/mysql -u root awa
 
 # Sync B→A→C
-cd docs-dev/migration-stack2/win10_aguav2/syncawa_hostb_to_hosta/ && bash run_sync.sh
-cd docs-dev/migration-stack2/win10_aguav2/sync_hosta_to_hostc/    && bash run_sync.sh
+cd docs-dev/migration-aguav2/syncawa_hostb_to_hosta/ && bash run_sync.sh
+cd docs-dev/migration-aguav2/sync_hosta_to_hostc/    && bash run_sync.sh
 ```
 
 ---

@@ -30,7 +30,7 @@ Cualquier movimiento parcial de datos debe asegurar que las claves foráneas (`i
 Los scripts que implementan este protocolo ya existen y fueron utilizados exitosamente. Están en:
 
 ```
-docs-dev/migration-stack2/win10_aguav2/syncawa_hostb_to_hosta/
+docs-dev/migration-aguav2/syncawa_hostb_to_hosta/
 ```
 
 | Script | Rol |
@@ -39,7 +39,7 @@ docs-dev/migration-stack2/win10_aguav2/syncawa_hostb_to_hosta/
 | `run_sync.sh` | **Orquestador** — ejecuta el pipeline completo. Modos: `--pre-flight`, `--solo-validar`, `--solo-backup` |
 | `00_pre_flight.sh` | Compara schemas A vs B, detecta drift de tablas y columnas sin modificar datos |
 | `01_backup_host_a.sh` | Backup comprimido de Host A antes de cualquier modificación |
-| `02_dump_host_b.sh` | Extrae las tablas de negocio de Host B a archivos `.sql` en `work/` |
+| ~~`02_dump_host_b.sh`~~ | **ELIMINADO** — absorbido por `run_sync.sh`. No recrear. |
 | `03_sync_host_a.sql` | **Unificación y Saneamiento** — Única fuente de verdad para post-procesamiento V1+. Vacía tablas, importa y aplica D1-D7 (SDF V1+). |
 | `04_recalc_contrato_toma` | Recalc de infraestructura (Transición V1+) |
 | `05_validate.sql` | Valida conteos y consistencia referencial post-sync |
@@ -58,7 +58,7 @@ Al importar desde B, el post-procesamiento recalcula automáticamente:
 
 ### Comando de Uso
 ```bash
-cd docs-dev/migration-stack2/win10_aguav2/syncawa_hostb_to_hosta/
+cd docs-dev/migration-aguav2/syncawa_hostb_to_hosta/
 ./run_sync.sh               # Sync completo
 ./run_sync.sh --pre-flight  # Solo comparar schemas (seguro, sin modificar)
 ./run_sync.sh --solo-backup # Solo backup de A

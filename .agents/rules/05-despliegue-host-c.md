@@ -4,19 +4,22 @@ Reglas para la migración e implementación de mejoras en el ambiente **Host C**
 
 ---
 
-## Estado Actual (2026-04-07) — Host C UP & RUNNING ✓ — Procesos validados
+## Estado Actual (2026-04-14) — Host C UP & RUNNING ✓ — Pipeline COMPLETO, CORRECTO Y VERIFICADO
 
-La migración inicial está **completada y ambos pipelines probados en ejecución real**. Host C tiene:
+La migración está **completada, consolidada y declarada verificada**. Host C tiene:
 - BD `awa` con schema v2 completo (17 tablas InnoDB, utf8mb4, FKs, SPs, 3 vistas)
-- `ligacargos` split: activa ≥2026 (~2,607 filas) + `ligacargos_historico` ≤2025 (~191,906 filas)
-- Webapp `feature/upgrade-v2-win-xampp` adaptada al schema v2
-- Scripts de setup versionados: `docs-dev/migration-stack2/win10_aguav2/host-c-setup/` (01–08)
+- `ligacargos` split: activa ≥2026 + `ligacargos_historico` ≤2025
+- Webapp `feature/upgrade-v2-win-xampp` adaptada al schema v2 — reportes de caja y cartera homologados
+- Scripts de setup versionados: `docs-dev/migration-aguav2/host-c-setup/` (01–09)
 - Script rollback completo: `host-c-setup/08_rollback.sql`
 - `tusuario` eliminada de BD y de todos los scripts (tabla fantasma — no usada por PHP)
+- Scripts manuales aislados en `docs-dev/migration-aguav2/manual/` (no contaminan pipeline)
+- Declaración formal del pipeline: `docs-dev/migration-aguav2/PIPELINE_DECLARACION.md`
+- Declaración de homologación reportes: `docs-dev/doc-estabilizacion/REPORTES_CAJA_CARTERA_DECLARACION.md`
 
-### Pipelines probados (2026-04-07)
-- **Proceso 1 (A→C)**: ejecutado y validado — 7/7 checks OK, 25 seg
-- **Proceso 2 (setup desde cero + carga)**: simulado completo — scripts 01–05 + sync + split + validaciones 7/7 OK
+### Pipelines probados (ejecución de referencia: 2026-04-14 — BD Host C regenerada desde cero)
+- **B→A**: ejecutado y validado — 8 pasos OK
+- **A→C**: ejecutado y validado — 9 pasos (incluyendo Paso 8-B nuevo) + 7/7 checks de integridad OK
 
 ---
 
@@ -38,13 +41,13 @@ Host B (Legado V1) → Host A (Transición V1+) → Host C (Destino V2)
 
 ### Paso 1 — Sync B → A (script existente)
 ```bash
-cd docs-dev/migration-stack2/win10_aguav2/syncawa_hostb_to_hosta/
+cd docs-dev/migration-aguav2/syncawa_hostb_to_hosta/
 ./run_sync.sh
 ```
 
 ### Paso 2 — Sync A → C (pipeline)
 ```bash
-cd docs-dev/migration-stack2/win10_aguav2/sync_hosta_to_hostc/
+cd docs-dev/migration-aguav2/sync_hosta_to_hostc/
 ./run_sync.sh
 ```
 
