@@ -40,7 +40,9 @@ Este documento es una entidad viva para registrar el descubrimiento y clasificac
 ### 📂 Módulo 05: Reportes y Validación de Datos
 | ID | Regla | Estado |
 |:---:|---|:---:|
-| **R01** | Sincronización estricta entre sumatoria de listas y totales de encabezado en todos los reportes operativos. | Auditoría |
+| **R01** | Sincronización estricta entre sumatoria de listas y totales de encabezado en todos los reportes operativos. | Validada |
+| **R02** | **Filtros Canónicos de Cartera y Deuda** — Todos los reportes financieros deben aplicar los mismos filtros para consistencia entre sí. `excluir_cartera = [6, 16, 17, 19, 20, 21, 22]`: categorías excluidas de cartera vencida y deuda total (cat 6=multas asamblea, 16/17=recargos acumulativos, 19-22=conceptos únicos CB/PROP, MLT/DESP, CNT/NADO, CNC/FUGA). `sin_anio = [6, 16, 17]`: categorías sin filtro de año (acumulativas). Cat 11 (recargos normales) SÍ se incluye en cartera — recargos de años anteriores aparecen en columna R.CART para encuadre correcto. Siempre añadir `AND c.estado != 4` explícito en reportes sobre `ligacargos`/`vw_ligacargos_pendientes`, independiente del estado de saneamiento de la BD. Validado con $0 diferencia en encuadre para 5 períodos reales 2024-2026. Implementado en `concentradocortecaja.php`, `concentradocortecajaresumen.php`, `carteravencida.php`, `listadeudores.php`, `reporte_morosos.php`, `cv_por_tipo_edo_cto.php`. | Implementada |
+| **R03** | **Semántica de Estados en `ligacargos`** — `estado=0`: pendiente de cobro. `estado=1`: pagado. `estado=-1`: depurado/archivado por sync (transición). `estado=2`: cancelado formal por administrador. `estado=-2`: especial. `estado=-3`: condonado histórico. Para efectos de cartera y deuda solo consultar `estado=0`. El cambio de `estado=-1` a `estado=2` en cargos de contratos estado=4 es documentalmente correcto y no afecta encuadre (ambos son invisibles para reportes financieros). | Implementada |
 
 ---
 

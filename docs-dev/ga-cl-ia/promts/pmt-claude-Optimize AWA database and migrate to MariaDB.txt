@@ -21745,34 +21745,43 @@ Hice cambios en rama main para los archivos aqui puestos
 
 ===============================================================================================================================================================
                                                                 LISTA 2
-____ Lunes 13 ____
+Lunes 13, 2:30 pm , claude continuar: Fix null categoria IDs in egresos table
 
++ Dar otra corridas a los scripts synmc b a c , drop awa en host.
+    . Ver si toda la sync de datos de host a hacia host c, paso bien , logs/sync_YYYYMMDD_HHMMSS.log junto con todo el output del sync. INFORME FORMATO !
 
-+ Dar otra corridas
- . Ver si toda la sync de datos de host a hacia host c, paso bien , logs/sync_YYYYMMDD_HHMMSS.log junto con todo el output del sync. INFORME FORMATO !
- . Muestrame los flujos de ejecución disponibles de migration-aguav2/
- . Actualice el  Ground Truth para lo que se estabilizo de los scripts migration-aguav2/
+Con base a las 4 pasadas sesiones:
+  1) Añadir al pipeline de saneamiento este script, determinar su lugar en el pipeline , y lo renombre para su turno en el pipeline.
+    /opt/lampp/htdocs/agua/docs-dev/migration-aguav2/sync_hosta_to_hostc/saneamiento_duplicados_marzo_2026.sql
+      
 
-+ Pedirle:para obtener un listado falta de asamblea,  en formato cvs
-  Cambio 4A — Corregir sp_sinc_asamblea_bulk en 05_stored_procedures.sql
-  Archivo: docs-dev/migration-aguav2/host-c-setup/05_stored_procedures.sql
-  Gap: La rama que sincroniza ligacargos_historico solo busca el pago en ligacargos activa. Si el pago está en ligacargos_historico (años ≤2025), no lo encuentra.
-    
-________
+  2) gabracione emepzar con los dos php si cuadran folios, antes de eso deploy a host c!
 
-+ Con base a esta y dos pasadas sesiones, todo el codigo fuente de la webapp php, y bd awa host c; genera un documento amplio y descriptivo funcional para el rol del cajero operador; en el ambito de los flujos de las transiciones de los 6 casos de cambio de estado para un contrato en la webapp. Incluir:
-  . Todas las reglas de paridad con la ficha de datos de tomas asociadas al contrato, cargos, recargos,Amnistía, EXENCIÓNes, reglas para cada estado; y demas reglas y restricciones que no liste aqui y puedan existir o esten ocultas. 
-  . Gaps e issues. 
-  *. GA: Amnesty surcharge exemption rules by suspension type , CL: Amnesty surcharge exemption rules by suspension type
+  2) Genera un documento amplio y descriptivo funcional para el rol del cajero operador; en el ambito de los flujos de las transiciones de los 6 casos de cambio de estado para un contrato en la webapp. Incluir:
+    . Todas las reglas de paridad con la ficha de datos de tomas asociadas al contrato, cargos, recargos,Amnistía, EXENCIÓNes, reglas para cada estado; y demas reglas y restricciones que no liste aqui y puedan existir o esten ocultas. 
+    . Gaps e issues. 
+    . Insumo: Usa todo el codigo fuente de la webapp php, y bd awa host c.
+    . Formato del documento html con digramas en formato png o jpeg.
+  
 
+  3) Genera un documento amplio y descriptivo funcional para el rol del cajero operador y tesorero; en el ambito funcional de corte de caja, deudores, y cartera vencida. 
+    . Gaps e issues. 
+    . Insumo: Utiliza el codigo fuente relacionado con esos temas /opt/lampp/htdocs/agua/reportes/ y bd awa host c.
+    . Formato del documento html con digramas en formato png o jpeg.
+  4) Genera un documento ejecutivo  para el comite sobre los beneficios obtenidos del sanemiento, split de ligacargos, protecciones rigidas entre las transiciones de los estados validos del contrato, reglas, y paridad en la ficha del contrato.
 
-+ Añadir al pipeline de saneamiento 10_pipeline_saneamiento.sql    
+===============================================================================================================================================================  
+  
+
+NEXT cld: 
+
+ 
+
 .  Exponerle caso ()Pasarle el xslx), si ya se que 160x ctos estan mezclados, y se deben arreglar de manera manual, que conviene:
     desactivar la logica de reglas restrictivas para permitir al operador arreglarlas manualmenten en host c.
     que el operador arreglarlas manualmenten en host b y entonces se realice la sincronizacion.
 
-. falta el de zenon, pasar entre contratos. Checar el doc: ReqFuncionales_24.02.2026_AguaColMaestro
-    https://docs.google.com/document/d/1Y8QYFnb3WFgfKw7H01pAbrs-6sOEtOAxtOieXykejmw/edit?tab=t.0
+
 
 
 ===============================================================================================================================================================
@@ -21895,3 +21904,16 @@ Ok, atendidos. PRIORITARIOS:
 
 
 ===============================================================================================================================================================
+
+2026
+    05/01/2026|29/03/2026 
+2025
+    29/11/2025|04/01/2026
+    30/06/2025|28/11/2025
+    31/03/2025|26/06/2025
+2024
+    16/12/2024|30/03/2025
+    30/09/2024|15/12/2024
+    01/07/2024|29/09/2024
+    25/03/2024|30/06/2024
+    17/12/2023|24/03/2024
