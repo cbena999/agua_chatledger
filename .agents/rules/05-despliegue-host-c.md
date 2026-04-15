@@ -127,4 +127,23 @@ mysql -u root -pcomite_2026 -h 192.168.1.128 awa < host-c-setup/08_rollback.sql
 ```
 
 ---
+
+## 🛠️ Convenciones de Ejecución (Nomenclatura Sugerida)
+
+Para agilizar las solicitudes de ejecución de flujos de datos y mantenimiento, se establecen los siguientes comandos canónicos:
+
+| Comando | Acción | Scripts Orquestadores |
+| :--- | :--- | :--- |
+| **`Setup-Full-C`** | Simulación de pase a producción desde cero en Host C. | `docs-dev/migration-aguav2/host-c-setup/run_setup.sh` |
+| **`Sync-B2A`** | Refresco de datos operativos desde el espejo (B) hacia Desarrollo (A). | `docs-dev/migration-aguav2/syncawa_hostb_to_hosta/run_sync.sh` |
+| **`Sync-A2C`** | Migración y transformación de datos desde Host A hacia el Target V2 (C). | `docs-dev/migration-aguav2/sync_hosta_to_hostc/run_sync.sh` |
+| **`Full-Pipeline-Sync`**| Refresco completo de cadena: B → A → C | `docs-dev/migration-aguav2/Full-Pipeline-Sync.sh` |
+| **`Patch-Schema-C`** | Aplicar solo ajustes estructurales (vistas, SPs, fixes) sin tocar datos. | Scripts específicos en `host-c-setup/` |
+
+### Regla de Simulación de Producción (`Setup-Full-C`)
+Cuando el usuario solicite un **"Case: Setup Full C"** o similar, se asume un escenario de despliegue limpio:
+1. Se debe realizar un `DROP DATABASE IF EXISTS awa;` manual o vía script inicial en el Host C.
+2. Se deben ejecutar los 10 scripts de `host-c-setup/` en orden correlativo para reconstruir el esquema V2 completo antes de cualquier carga de datos.
+
+---
 **Nota para Gemini**: Al recibir instrucción de "refrescar Host C" o "sync producción→C", el flujo es SIEMPRE B→A→C (dos scripts separados). Nunca B→C directo.
