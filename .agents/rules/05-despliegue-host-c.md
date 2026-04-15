@@ -83,6 +83,21 @@ Las vistas `vw_ligacargos_all` y `vw_ligacargos_pendientes` unifican ambas tabla
 
 ---
 
+## Regla: PHPs en `feature` son exclusivos para Host C
+
+> **CRÍTICO — No compatibilizar con Host A.**
+> Todo el código PHP en la rama `feature/upgrade-v2-win-xampp` tiene como **único target Host C**.
+> Host A es un Bridge V1+ intencional con schema diferente — los PHPs que corren en esta rama
+> usan objetos de BD que **solo existen en Host C** (vistas, SPs, `ligacargos.id`, `cambios.id`).
+> **Nunca degradar código para hacerlo compatible con Host A** — si algo falla en Host A
+> es esperado; si falla en Host C es un bug real.
+>
+> Patrón correcto para `ligacargos`: usar `WHERE id = $id_cargo` (Host C tiene PK `id`).
+> Patrón correcto para `cambios`: usar `ORDER BY id DESC` (Host C tiene PK `id`).
+> Patrón correcto para `cambios` INSERT: usar `NOW()` (Host C tiene PK `id` AUTO_INCREMENT — sin riesgo de colisión).
+
+---
+
 ## Diferencias de Schema A (v1+) vs C (v2)
 
 | Tabla | Columna | Host A | Host C |
