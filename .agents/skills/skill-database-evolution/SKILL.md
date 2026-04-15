@@ -46,6 +46,13 @@ Con el split implementado, **todo PHP que lea `ligacargos` debe usar las vistas*
 
 **Patrón secundario a evitar**: usar `vw_ligacargos_pendientes` en el FROM pero referenciar `ligacargos.campo` en el WHERE — esto genera un cross join implícito con la tabla directa.
 
+**Campo `recargo` — trampa de semántica dual (ver F05 en 02-reglas-negocio.md)**:
+- En `cargos` (catálogo): `recargo INT` es un **flag booleano** (0=no genera recargo, 1=sí genera).
+- En `ligacargos` / `ligacargos_historico`: `recargo DECIMAL` es un **monto heredado** del catálogo al hacer INSERT — en Host C vale `0.00`; en datos migrados de Host A/B puede valer `1.00` (artefacto, no deuda real).
+- **Nunca sumar `ligacargos.recargo` en totales financieros.**
+- **Discriminador canónico**: `categoria IN (16,17)` o el alias `es_recargo_moratorio` de las vistas.
+- Filtros como `AND l.recargo = 1` son incorrectos en Host C y deben reemplazarse por `AND l.categoria IN (16,17)`.
+
 Archivos ya corregidos (2026-04-07, commit `bd1cb2f`):
 - `reportes/listadeudores.php` — WHERE con `ligacargos.monto` → `vw_ligacargos_pendientes.monto`
 - `reportes/carteravencida.php` — añadido `OR anio IS NULL` para históricos migrados
