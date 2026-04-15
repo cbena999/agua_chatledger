@@ -119,5 +119,6 @@ cd docs-dev/migration-aguav2/sync_hosta_to_hostc/    && bash run_sync.sh
 
 **Última actualización:** 2026-04-10
 
-> **Nombre canónico del Runbook**: El conjunto `CLAUDE.md` + todo `.agents/` (rules, skills, workflows) se denomina **"el Runbook"** del proyecto.
+> **Nombre canónico del Ground Truth**: El conjunto `CLAUDE.md` + todo `.agents/` (rules, skills, workflows) se denomina **"el Ground Truth"** del proyecto.
+> **Nota de terminología**: Gemini denomina este mismo conjunto **"el Runbook"**. Son el mismo repositorio de conocimiento — `.agents/` es compartido. Solo difiere el nombre según el agente.
 > **Protocolo de cierre de sesión**: Ver [.agents/rules/09-sesion-summary.md](.agents/rules/09-sesion-summary.md)
