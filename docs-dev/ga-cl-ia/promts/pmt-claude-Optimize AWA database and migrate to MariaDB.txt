@@ -21741,58 +21741,63 @@ Hice cambios en rama main para los archivos aqui puestos
   /opt/lampp/htdocs/agua/docs-dev/migration-stack2/win10_aguav2/optimizacion
 
 
-
-
 ===============================================================================================================================================================
-                                                                LISTA 2
-Lunes 13, 2:30 pm , claude continuar: Fix null categoria IDs in egresos table
+                                                               
+********* AQUI continuar miercoles 11am **********
 
-+ Dar otra corridas a los scripts synmc b a c , drop awa en host.
-    . Ver si toda la sync de datos de host a hacia host c, paso bien , logs/sync_YYYYMMDD_HHMMSS.log junto con todo el output del sync. INFORME FORMATO !
+Generame casos de prueba para las 6 transiciones de estado validas de un contrato definidas en alguna sesion pasada; incluso el de suspension temporal a activa que en la UI se bloque por la regla de que de debe hacer solo en diciiembre.
+Busca idContratos en host c para estos casos de prueba; en caso no exista alguno adecuado indicame para que se generen en host a y se sincronice.
 
-Con base a las 4 pasadas sesiones:
-  1) Añadir al pipeline de saneamiento este script, determinar su lugar en el pipeline , y lo renombre para su turno en el pipeline.
-    /opt/lampp/htdocs/agua/docs-dev/migration-aguav2/sync_hosta_to_hostc/saneamiento_duplicados_marzo_2026.sql
-      
+_____________
+mejoras ui
+  . mover los botones ver cred y movi, a abjo del boton cargar info del usuario. 
+3) Pruebas 
+    - cl Test data flow between hosts A B C
+    - a modo visual yo cuadrar cortes de caja resumen años, ciclos al ultimo marzo 2026 
+    - Yo pasar webapp a host y navegar.
+    - Arreglar issues que yo encuentre.
 
-  2) gabracione emepzar con los dos php si cuadran folios, antes de eso deploy a host c!
 
-  2) Genera un documento amplio y descriptivo funcional para el rol del cajero operador; en el ambito de los flujos de las transiciones de los 6 casos de cambio de estado para un contrato en la webapp. Incluir:
+4) Dar  a Claude como input para analisis de encuadre xlsx, renombrar pestañas poner fechas bien.
+    . Empatar lo mas cercano, todos los que me paso doña ncy. 
+
+
+5) Checar el doc de 20 req, ver que otros scripts faltan para el pase a producción o como saneamiento.
+  - Para la impl, de no localizados como se com,porta cv, Estado de Cuenta y Corte de Caja (Por Fecha)
+
+-----------------
+
+6) Genera un documento amplio y descriptivo funcional para el rol del cajero operador; en el ambito de los flujos de las transiciones de los 6 casos de cambio de estado para un contrato en la webapp. Incluir:
     . Todas las reglas de paridad con la ficha de datos de tomas asociadas al contrato, cargos, recargos,Amnistía, EXENCIÓNes, reglas para cada estado; y demas reglas y restricciones que no liste aqui y puedan existir o esten ocultas. 
     . Gaps e issues. 
     . Insumo: Usa todo el codigo fuente de la webapp php, y bd awa host c.
     . Formato del documento html con digramas en formato png o jpeg.
   
 
-  3) Genera un documento amplio y descriptivo funcional para el rol del cajero operador y tesorero; en el ambito funcional de corte de caja, deudores, y cartera vencida. 
+7) Genera un documento amplio y descriptivo funcional para el rol del cajero operador y tesorero; en el ambito funcional de corte de caja, deudores, y cartera vencida. 
     . Gaps e issues. 
     . Insumo: Utiliza el codigo fuente relacionado con esos temas /opt/lampp/htdocs/agua/reportes/ y bd awa host c.
     . Formato del documento html con digramas en formato png o jpeg.
-  4) Genera un documento ejecutivo  para el comite sobre los beneficios obtenidos del sanemiento, split de ligacargos, protecciones rigidas entre las transiciones de los estados validos del contrato, reglas, y paridad en la ficha del contrato.
+  
+8) Genera un documento ejecutivo  para el comite sobre los beneficios obtenidos del sanemiento, split de ligacargos, protecciones rigidas entre las transiciones de los estados validos del contrato, reglas, y paridad en la ficha del contrato.
+
+---------------
+9 Yo elaborar descubrimiento de:
+      Exponerle caso ()Pasarle el xslx), si ya se que 160x ctos estan mezclados, y se deben arreglar de manera manual, que conviene:
+      desactivar la logica de reglas restrictivas para permitir al operador arreglarlas manualmenten en host c.
+      que el operador arreglarlas manualmenten en host b y entonces se realice la sincronizacion.
+      comparar contra el que: . ESPERAR QUE DOÑA NANCY LOS REALICE Y MACHEAR CONTRA ESTA BUSQUEDA CLD:
+
+
 
 ===============================================================================================================================================================  
-  
-
-NEXT cld: 
-
- 
-
-.  Exponerle caso ()Pasarle el xslx), si ya se que 160x ctos estan mezclados, y se deben arreglar de manera manual, que conviene:
-    desactivar la logica de reglas restrictivas para permitir al operador arreglarlas manualmenten en host c.
-    que el operador arreglarlas manualmenten en host b y entonces se realice la sincronizacion.
-
-
-
+Jueves 16 abril:
+. Ir por backup, y darme ella la lista de contratos paso a activo, que eran cruzados !
 
 ===============================================================================================================================================================
 
-Validar si todavia hay mas issues. 
-
 + not-t.txt / RQ OTHER CASES.
-
-
 Ref: Contrato.estado (1  = ACTIVO  |  2 =  Suspensión Temporal  | 3  = Suspensión Administrativa   |  4  =  Suspensión Definitiva)
-
 
 YO A MANO:
   1.2 ver que esten todos los xlsx Datos-awa-limpieza
@@ -21820,36 +21825,6 @@ DEPURACIONES:
     Análisis resumido y detallado de recargos por estado.
 
 
-Claude 
-1) 
-
-Se requiere realizar estos ajustes para funcionalidad de Amnistía de Recargos, cuando un contrato se pasa a estado ACTIVO:
-1. Cuando viene de SUSPENSIÓN TEMPORAL aplicar la exención tal cual está implementado; validar que está ocurriendo con la asignación de sus cargos anuales y en recargos de abril en caso de no pago oportuno del año vigente y que otras reglas de negocio ocurren en este caso.
-2. Cuando viene de SUSPENSIÓN ADMINISTRATIVA se debe mantener su  adeudo completo (no aplica la Amnistía);  validar que está ocurriendo con la asignación de sus cargos anuales y recargos de abril en caso de no pago oportuno del año vigente y que otras reglas de negocio ocurren en este caso.
-3) Asegurarse que estos movimientos quedan registrados en la tabla “cambios” y son rastreables en bitacora_saneamiento.php; busca vincular con la página historial_auditoria.php con sentido y congruencia.
-Antes de hacer modificaciones informa el as is, y luego el tobe.
-
-2) 
-  1 Plan para fix de reglas en cbos de estados del contrato, issues, buscar avance en conversaciones pasadas.
-    /home/carlos/Documents/tmp01/stage-m-f/not-t.txt
-    
-  1.1 Issue a investigar que pasara en el pase a producción cuando para el caso de que se han ejecutado re-cargo automatico abril a los que no han págado.
-
-3)
-  2 Arreglar lo de corte de caja y reporte de columnas, dárselo a Claude.
-  2.1  Corte de caja, empatar lo mas cercano, todos los que me paso doña ncy.
-  2.2 carteravencida  Ok corregido.
-  MAS PREGUNTA IA
-    Para la impl, de no localizados como se com,porta cv, Estado de Cuenta y Corte de Caja (Por Fecha)
-
-    año 2025 , re-validar
-      En host c muestra 800
-      En host a y b, muestra 800 registros
-
-4)
-  3. Listar todas las limpieza automaticas y manuales y el orden en que se haran 
-  3.1 listen todos los procesos de saneamiento y con que herramienta se hara, si es manual o automatico, que falta, orden deben usarse y no romper consistencia.
-
 ===============================================================================================================================================================
 
 e-1
@@ -21858,6 +21833,7 @@ e-1
     "C:\Program Files\Google\Chrome\Application\chrome.exe" --app="http://192.168.1.128:7001/agua/login/index.php"
     Tiene que se chrome ... --window-size=1280,800
 
+/home/carlos/Documents/tmp01/stage-m-f/not-t.txt
 
 E0. 
 Poder revertir las cancelaciones cargos de cto, susp. adm y tempo. desde la página de saneamientos.
@@ -21903,6 +21879,27 @@ Ok, atendidos. PRIORITARIOS:
   4.3) /opt/lampp/htdocs/agua/admin/saneamiento/reparacion_folios_pagados(recibos)_sin_contrato.sql
 
 
+
+Con base a las 4 pasadas sesiones:
+ok  1) Añadir al pipeline de saneamiento este script, determinar su lugar en el pipeline , y lo renombre para su turno en el pipeline.
+    /opt/lampp/htdocs/agua/docs-dev/migration-aguav2/sync_hosta_to_hostc/saneamiento_duplicados_marzo_2026.sql  asi tambien añadir su fila en TABLERO RESUMEN EJECUTIVO.
+
+ok  2) Analiza y rectifica que el conteo de los folios de los cargos es: correct, completo y congruente individual y entre: concentradocortecajaresumen.php y concentradocortecajaresumen.php.
+      concentradocortecajaresumen.php
+          (CTOS/USUARIOS) es el renglon del conteo de folios por cada columna.
+      concentradocortecajaresumen.php
+          En la sección de INGRESOS, cada concepto tiene al final (#) , validar si ese numero entre parentesis son el conteo de folios.
+
+      Identificar issues y generar plan para correción.
+
+ok  2.1
+    Pregunta: Es congruente el conteo del folios entre lo que muestra cada reporte: concentradocortecajaresumen.php y concentradocortecajaresumen.php ?
+    subir git.
+   
+ok  3) Validar consistencia de todos los scripts    migration-aguav2/ , corrije de ser necesario; y ejecuta el flow(s) de datos host b => host a => host c;  a priori en forma manual borrare la bd awa en host c.
+
+      . Ver si toda la sync de datos de host a hacia host c, paso bien , logs/sync_YYYYMMDD_HHMMSS.log junto con todo el output del sync. INFORME FORMATO !
+
 ===============================================================================================================================================================
 
 2026
@@ -21911,6 +21908,8 @@ Ok, atendidos. PRIORITARIOS:
     29/11/2025|04/01/2026
     30/06/2025|28/11/2025
     31/03/2025|26/06/2025
+
+----
 2024
     16/12/2024|30/03/2025
     30/09/2024|15/12/2024

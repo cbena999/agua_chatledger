@@ -17,7 +17,7 @@ Cargado automáticamente por **Claude Code** en cada sesión.
 | **Skills** | Estándares técnicos (Plates, AJAX, PHP 7.4, DB) | [.agents/skills/](.agents/skills/) |
 | **Workflows** | Procesos repetibles (Sync B→A→C, Deploy Host C) | [.agents/workflows/](.agents/workflows/) |
 
-### 🗂️ Índice de Reglas (01–09)
+### 🗂️ Índice de Reglas (01–10)
 
 | # | Regla | Archivo |
 | :---: | :--- | :--- |
@@ -30,6 +30,7 @@ Cargado automáticamente por **Claude Code** en cada sesión.
 | **07** | Control de Versiones y Git Workflow | [.agents/rules/07-git-workflow.md](.agents/rules/07-git-workflow.md) |
 | **08** | Integridad del Ground Truth — **leer antes de refactorizar** | [.agents/rules/08-integridad-ground-truth.md](.agents/rules/08-integridad-ground-truth.md) |
 | **09** | Documentación de Sesión — Protocolo de Commit y Resumen de Issues | [.agents/rules/09-sesion-summary.md](.agents/rules/09-sesion-summary.md) |
+| **10** | Limitantes Conocidas de la Webapp — **leer antes de proponer mejoras automáticas** | [.agents/rules/10-limitantes-webapp.md](.agents/rules/10-limitantes-webapp.md) |
 
 
 Estructura interna documentada en [.agents/README.md](.agents/README.md).
