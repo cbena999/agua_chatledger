@@ -146,4 +146,6 @@ Cuando el usuario solicite un **"Case: Setup Full C"** o similar, se asume un es
 2. Se deben ejecutar los 10 scripts de `host-c-setup/` en orden correlativo para reconstruir el esquema V2 completo antes de cualquier carga de datos.
 
 ---
-**Nota para Gemini**: Al recibir instrucción de "refrescar Host C" o "sync producción→C", el flujo es SIEMPRE B→A→C (dos scripts separados). Nunca B→C directo.
+**Notas para Agentes IA (Claude/Gemini)**:
+- Al recibir instrucción de "refrescar Host C" o "sync producción→C", el flujo es SIEMPRE B→A→C (dos scripts separados). Nunca B→C directo.
+- Usar los comandos orquestadores definidos en la tabla anterior para asegurar consistencia.
