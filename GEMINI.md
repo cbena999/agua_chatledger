@@ -21,6 +21,7 @@ Este archivo es el punto de entrada principal para el asistente de IA (Antigravi
 | **08** | **Integridad del Ground Truth — LEER ANTES DE REFACTORIZAR** | [.agents/rules/08-integridad-ground-truth.md](file:///.agents/rules/08-integridad-ground-truth.md) |
 | **09** | **Documentación de Sesión — Resumen de Issues + Protocolo de Commit** | [.agents/rules/09-sesion-summary.md](file:///.agents/rules/09-sesion-summary.md) |
 | **10** | **Limitantes Conocidas de la Webapp — LEER ANTES DE PROPONER MEJORAS AUTOMÁTICAS** | [.agents/rules/10-limitantes-webapp.md](file:///.agents/rules/10-limitantes-webapp.md) |
+| **11** | **Estándares de Código y Seguridad (Hardening)** | [.agents/rules/11-estandares-codigo.md](file:///.agents/rules/11-estandares-codigo.md) |
 
 ---
 
@@ -84,6 +85,6 @@ Validar integridad:
 bash docs-dev/ga-cl-ia/chatledger_validate.sh
 ```
 
-**Última actualización**: 2026-04-10
+**Última actualización**: 2026-04-15
 
 > **Nombre canónico del Runbook**: El conjunto `GEMINI.md` + todo `.agents/` (rules, skills, workflows) se denomina **"el Runbook"** del proyecto.

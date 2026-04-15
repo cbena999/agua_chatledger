@@ -134,6 +134,40 @@ Clasificados por módulo funcional y nivel de riesgo.
 | **L05** | Artefacto histórico decimal | `ligacargos` campo `recargo` | Revisión manual | Ninguna (no financiero) |
 | **L06** | Restricción calendario UI | Cambio estado →2 | Error en UI | Baja (solo pruebas) |
 | **L07** | Ausencia atomicidad | Bloque cambio de estado | Auditoría BD | Baja (mono-user) |
+| **L08** | Fatal Error PHP 7.4 | Cualquier PHP con `$_SESSION['usuario']` como string | Error fatal en UI | **Alta — detiene ejecución** |
+
+---
+
+### L08 — `$_SESSION['usuario']` es Objeto `User`, NO un String — PHP 7.4 Fatal Error
+- **Módulo**: Cualquier PHP que use `$_SESSION['usuario']` como string directamente
+- **Descripción**: `$_SESSION['usuario']` almacena un objeto `User` (clase en `login/usuario.php`)
+  con propiedades privadas y métodos `getId()`, `getNombre()`, `getClave()`, `getRol()`.
+  En PHP 7.4, si la clase `User` **no está cargada** cuando se deserializa la sesión,
+  PHP crea un `__PHP_Incomplete_Class`. Usar ese objeto como string causa **Fatal Error** inmediato.
+  Incluso cuando la clase sí está cargada, el objeto no puede interpolarse como string.
+- **Por qué ocurre en PHP 7.4 específicamente**: PHP 7.4 endureció el manejo de objetos
+  incompletos — la conversión implícita a string que en versiones anteriores era silenciosa
+  ahora lanza `Fatal error: Object could not be converted to string`.
+- **Patrón incorrecto** (no usar):
+  ```php
+  // ❌ Fatal error si $_SESSION['usuario'] es objeto User
+  $op = $_SESSION['usuario'];  // objeto, no string
+  "INSERT ... '$op'";          // explota en interpolación
+  ```
+- **Patrón correcto** (usar siempre):
+  ```php
+  // ✅ Robusto ante objeto, string o clase incompleta
+  $ses_u = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
+  $operador = is_string($ses_u) && $ses_u !== ''
+      ? $ses_u
+      : (is_object($ses_u) && method_exists($ses_u, 'getNombre') ? $ses_u->getNombre() : 'cajero');
+  ```
+- **Para verificar rol**: usar `$_SESSION['usuario']->getRol()` — eso sí es correcto porque
+  llama al getter, no convierte el objeto a string.
+- **Archivos ya corregidos**: `includes/negocio/cargos.php:716`, `config/Conexion.php:118`
+- **Acción para agentes IA**: Al escribir cualquier PHP que necesite el nombre del operador
+  de sesión, usar siempre el patrón correcto de arriba. Nunca interpolar `$_SESSION['usuario']`
+  directamente en un string SQL o de texto.
 
 ---
 

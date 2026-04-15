@@ -31,6 +31,7 @@ Cargado automáticamente por **Claude Code** en cada sesión.
 | **08** | Integridad del Ground Truth — **leer antes de refactorizar** | [.agents/rules/08-integridad-ground-truth.md](.agents/rules/08-integridad-ground-truth.md) |
 | **09** | Documentación de Sesión — Protocolo de Commit y Resumen de Issues | [.agents/rules/09-sesion-summary.md](.agents/rules/09-sesion-summary.md) |
 | **10** | Limitantes Conocidas de la Webapp — **leer antes de proponer mejoras automáticas** | [.agents/rules/10-limitantes-webapp.md](.agents/rules/10-limitantes-webapp.md) |
+| **11** | Estándares de Código y Seguridad (Hardening) | [.agents/rules/11-estandares-codigo.md](.agents/rules/11-estandares-codigo.md) |
 
 
 Estructura interna documentada en [.agents/README.md](.agents/README.md).
@@ -118,7 +119,7 @@ cd docs-dev/migration-aguav2/sync_hosta_to_hostc/    && bash run_sync.sh
 
 ---
 
-**Última actualización:** 2026-04-10
+**Última actualización:** 2026-04-15
 
 > **Nombre canónico del Ground Truth**: El conjunto `CLAUDE.md` + todo `.agents/` (rules, skills, workflows) se denomina **"el Ground Truth"** del proyecto.
 > **Nota de terminología**: Gemini denomina este mismo conjunto **"el Runbook"**. Son el mismo repositorio de conocimiento — `.agents/` es compartido. Solo difiere el nombre según el agente.
