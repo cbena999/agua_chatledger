@@ -21745,28 +21745,23 @@ Hice cambios en rama main para los archivos aqui puestos
                                                                
 ********* AQUI continuar Jueves 16, 11am **********
 
-Pedir que refine el doc de pruebas con datos  especificos de prueba para cada caso, de id de contratos , id cargos  especificos p
-en el caso de los de UI, con pasos precisos, en el caso de los scripts de bd que crea sets de registros de prueba en host a.
--------
-Hay que volver hacer todas las pruebas 
-  ui y saneamiento , de contratos, y listados cv, cortes, etc.
+Pruebas:
 
+  .Pedir que refine el doc de pruebas con datos  especificos de prueba para cada caso, de id de contratos , id cargos  especificos en el caso de los de UI, con pasos precisos, en el caso de los scripts de bd que crea sets de registros de prueba en host a.
 
-Algo grave esta sucediendo con la ficha de contrato, al darle click en consultar el idcontrato en inputtex o click en el icono de refresh (Y quizas en otras acciones de esa ficha F5, etc, no se); sucede esto:
-Se estan multiplicado apareciendo nuevos recargos mismo nombre con postfijo (r#), analiza de raiz ese comportamiento en cargos; y en particular como issue de la pagina indicada, antes de corregir revisa ese issue no este en otra parte del contrato como en la edición de tomas donde hya Update, inserts.
+  . Algo grave esta sucediendo con la ficha de contrato, al darle click en consultar el idcontrato en inputtex o click en el icono de refresh (Y quizas en otras 
+    acciones de esa ficha F5, etc, no se); sucede esto: Se estan multiplicado apareciendo nuevos recargos mismo nombre con postfijo (r#), analiza de raiz ese comportamiento en cargos; y en particular como issue de la pagina indicada, antes de corregir revisa ese issue no este en otra parte del contrato como en la edición de tomas donde hya Update, inserts.
 
-----
+  . Generame casos de prueba para las 6 transiciones de estado validas de un contrato definidas en alguna sesion pasada; incluso el de suspension temporal a 
+    activa que en la UI se bloque por la regla de que de debe hacer solo en diciiembre.Busca idContratos en host c para estos casos de prueba; en caso no exista 
+    alguno adecuado indicame para que se generen en host a y se sincronice.
 
-Generame casos de prueba para las 6 transiciones de estado validas de un contrato definidas en alguna sesion pasada; incluso el de suspension temporal a activa que en la UI se bloque por la regla de que de debe hacer solo en diciiembre.
-Busca idContratos en host c para estos casos de prueba; en caso no exista alguno adecuado indicame para que se generen en host a y se sincronice.
-
-
-3) Pruebas 
-    - cl Test data flow between hosts A B C
+  . - cl Test data flow between hosts A B C
     - a modo visual yo cuadrar cortes de caja resumen años, ciclos al ultimo marzo 2026 
     - Yo pasar webapp a host y navegar.
     - Arreglar issues que yo encuentre.
 
+__________
 
 4) Dar  a Claude como input para analisis de encuadre xlsx, renombrar pestañas poner fechas bien.
     . Empatar lo mas cercano, todos los que me paso doña ncy. 
