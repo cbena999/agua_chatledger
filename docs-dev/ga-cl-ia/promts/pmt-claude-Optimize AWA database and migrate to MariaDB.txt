@@ -21746,7 +21746,7 @@ Hice cambios en rama main para los archivos aqui puestos
 ********* AQUI continuar Jueves 16, 11am **********
 
 Pruebas:
-
+  . incluir prueba de asamblea (del archivo que genera) vs agua/Asistencias (/opt/lampp/htdocs/agua/views/sistema/asistencias.php) 
   .Pedir que refine el doc de pruebas con datos  especificos de prueba para cada caso, de id de contratos , id cargos  especificos en el caso de los de UI, con pasos precisos, en el caso de los scripts de bd que crea sets de registros de prueba en host a.
 
   . Algo grave esta sucediendo con la ficha de contrato, al darle click en consultar el idcontrato en inputtex o click en el icono de refresh (Y quizas en otras 
@@ -21914,7 +21914,6 @@ ok  3) Validar consistencia de todos los scripts    migration-aguav2/ , corrije 
     30/06/2025|28/11/2025
     31/03/2025|26/06/2025
 
-----
 2024
     16/12/2024|30/03/2025
     30/09/2024|15/12/2024
