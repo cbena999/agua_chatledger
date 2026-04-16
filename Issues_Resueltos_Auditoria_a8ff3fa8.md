@@ -17,6 +17,30 @@ Ahora, la funcionalidad extrae, concatena y guarda automáticamente en el la bit
 
 ---
 
+## Issue 2 — Saneamiento Masivo S1-S11 (Sprints Finales)
+
+### Scope Funcional
+Se validaron los 11 puntos de saneamiento automático y manual definidos en el plan de pruebas. Destacan la exención de recargos en contratos nuevos (S1), la reparación de folios mixtos (S2/S3), la sincronización cruzada de multas de asamblea (S4) y la reclasificación técnica de Egresos (S11).
+
+### Resultados BD (Host C)
+- **S10 (Monto Comercial)**: Automatizado el cálculo x2 para cargos anuales en catálogo.
+- **S11 (Egresos)**: Reclasificados egresos "NINGUNA" a "SIN CATEGORÍA" (ID 10).
+- **Integridad General**: 0 folios mixtos residuales y 0 cargos pendientes en contratos SDF.
+
+---
+
+## Issue 3 — Mejoras Visuales en Corte de Caja (`concentradocortecaja.php`)
+
+### Scope Funcional
+Se mejoró la legibilidad del reporte operativo más crítico del sistema mediante la agrupación visual de columnas y la adición de herramientas de interpretación.
+
+### Scope Técnico
+- **Agrupación Visual**: Inyección de bordes negros de 2px (`group-start`) al inicio de cada bloque (Cuotas, Servicios, Sanciones, Recargos, Cartera).
+- **Glosario Dinámico**: Tabla al pie del reporte que mapea `Nombre Corto` -> `Nombre Completo` desde el catálogo de la BD.
+- **Claridad Conceptual**: Explicación de **C.N.L.** como Cartera No Localizada (Estado 2).
+
+---
+
 ## Runbook — Cambios en `.agents/`
 No hubo necesidad de reescribir reglas, simplemente se siguió lo anotado en `Plan de Pruebas — Sprint Post-Correcciones.md` y se corrigió una directriz de ese documento que pedía consultar erróneamente un campo excluido en una vista. (La prueba S9).
 
@@ -26,11 +50,10 @@ No hubo necesidad de reescribir reglas, simplemente se siguió lo anotado en `Pl
 
 | Archivo | Repo | Tipo de cambio |
 |:---|:---:|:---|
-| `includes/negocio/cargos.php`               | `agua` | Módulo de registro en `cambios`: Adición Folios/IDs |
-| `Plan de Pruebas — Sprint Post...`          | `agua` | Documentación: Corrección de consulta (no hay id en_all) |
-| `admin/reportes/auditoria_integridad...`    | `agua` | Require_once a User class antes del session_start |
-| `ruteador.php`                              | `agua` | Require_once preventivo de PHP Fatal Error   |
 | `asamblea/index.php`                        | `agua` | Require_once preventivo de PHP Fatal Error   |
+| `reportes/concentradocortecaja.php`        | `agua` | UI: Agrupación visual, Glosario y explicaciones |
+| `03_sync_host_a.sql`                       | `agua` | Saneamiento: D2 (monto_comercial) y D7 (SDF) |
+| `10_pipeline_saneamiento.sql`              | `agua` | Saneamiento: Reclasificación Egresos V2 |
 
 ---
 
@@ -41,11 +64,14 @@ No hubo necesidad de reescribir reglas, simplemente se siguió lo anotado en `Pl
 | Auditoría en Cancelación registra ID | OK |
 | Auditoría en Cancelación registra Operador | OK |
 | Auditoría en Reasignación registra ID/Folio | OK |
-| Ausencia de Fatal Error en Session Resume | OK |
+| Saneamiento S1-S11 Validado en C           | OK |
+| Reporte Corte de Caja (Grupos/Bordes)      | OK |
+| Glosario de Conceptos implementado         | OK |
+| Ausencia de Fatal Error en Session Resume  | OK |
 | Verificación Cero fallbacks por "Unknown column id" | OK |
 
 ### Pruebas manuales pendientes
-- Ejecutar Saneamiento S1–S9 de SQLs pendientes según el Plan de Pruebas (El usuario lo hará manualmente). 
+- Validación visual de la **Amnistía de Recargos** en el contrato **1007** (Host C). 
 
 ---
 *Generado por Antigravity — 2026-04-15*
