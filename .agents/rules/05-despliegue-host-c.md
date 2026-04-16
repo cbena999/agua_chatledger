@@ -10,12 +10,13 @@ La migración está **completada, consolidada y declarada verificada**. Host C t
 - BD `awa` con schema v2 completo (17 tablas InnoDB, utf8mb4, FKs, SPs, 3 vistas)
 - `ligacargos` split: activa ≥2026 + `ligacargos_historico` ≤2025
 - Webapp `feature/upgrade-v2-win-xampp` adaptada al schema v2 — reportes de caja y cartera homologados
-- Scripts de setup versionados: `docs-dev/migration-aguav2/host-c-setup/` (01–09)
+- Scripts de setup versionados: `docs-dev/migration-aguav2/host-c-setup/` (01–12, incluye validador)
 - Script rollback completo: `host-c-setup/08_rollback.sql`
 - `tusuario` eliminada de BD y de todos los scripts (tabla fantasma — no usada por PHP)
-- Scripts manuales aislados en `docs-dev/migration-aguav2/manual/` (no contaminan pipeline)
+- Pipeline de saneamiento integrado y automatizado en `run_sync.sh` (Paso 8)
 - Declaración formal del pipeline: `docs-dev/migration-aguav2/PIPELINE_DECLARACION.md`
 - Declaración de homologación reportes: `docs-dev/doc-estabilizacion/REPORTES_CAJA_CARTERA_DECLARACION.md`
+- **Terminología de Sesión**: Este conjunto de documentos constituye el **Ground Truth (para Claude)** y el **Runbook (para Gemini)**.
 
 ### Pipelines probados (ejecución de referencia: 2026-04-14 — BD Host C regenerada desde cero)
 - **B→A**: ejecutado y validado — 8 pasos OK
@@ -128,22 +129,32 @@ mysql -u root -pcomite_2026 -h 192.168.1.128 awa < host-c-setup/08_rollback.sql
 
 ---
 
-## 🛠️ Convenciones de Ejecución (Nomenclatura Sugerida)
+### 🚀 Scripts de Inicio de Flujos
 
-Para agilizar las solicitudes de ejecución de flujos de datos y mantenimiento, se establecen los siguientes comandos canónicos:
-
-| Comando | Acción | Scripts Orquestadores |
+| Comando | Script a Ejecutar | Acción |
 | :--- | :--- | :--- |
-| **`Setup-Full-C`** | Simulación de pase a producción desde cero en Host C. | `docs-dev/migration-aguav2/host-c-setup/run_setup.sh` |
-| **`Sync-B2A`** | Refresco de datos operativos desde el espejo (B) hacia Desarrollo (A). | `docs-dev/migration-aguav2/syncawa_hostb_to_hosta/run_sync.sh` |
-| **`Sync-A2C`** | Migración y transformación de datos desde Host A hacia el Target V2 (C). | `docs-dev/migration-aguav2/sync_hosta_to_hostc/run_sync.sh` |
-| **`Full-Pipeline-Sync`**| Refresco completo de cadena: B → A → C | `docs-dev/migration-aguav2/Full-Pipeline-Sync.sh` |
-| **`Patch-Schema-C`** | Aplicar solo ajustes estructurales (vistas, SPs, fixes) sin tocar datos. | Scripts específicos en `host-c-setup/` |
+| **`Setup-Full-C`** | `docs-dev/migration-aguav2/host-c-setup/run_setup.sh` | Simulación de pase a producción desde cero en Host C. |
+| **`Sync-B2A`** | `docs-dev/migration-aguav2/syncawa_hostb_to_hosta/run_sync.sh` | Refresco de datos operativos desde el espejo (B) hacia Desarrollo (A). |
+| **`Sync-A2C`** | `docs-dev/migration-aguav2/sync_hosta_to_hostc/run_sync.sh` | Migración y transformación de datos desde Host A hacia el Target V2 (C). |
+| **`Full-Pipeline-Sync`**| `docs-dev/migration-aguav2/Full-Pipeline-Sync.sh` | Orquestador Maestro: Refresco completo de cadena B → A → C. |
+
+---
+
+### 🛠️ Comportamiento de `Full-Pipeline-Sync.sh`
+
+1. **Sin flag (Default)**:
+   - Preserva la estructura actual de Host C.
+   - Solo refresca los datos (B → A → C). Es el flujo más rápido y seguro para el ciclo diario.
+2. **Con flag `--setup`**:
+   - Realiza un `DROP` y recreación total del esquema V2 en Host C antes de iniciar la carga de datos.
+   - Uso: Simulaciones de "Setup Producción" o desastre en la BD del Host C.
+
+---
 
 ### Regla de Simulación de Producción (`Setup-Full-C`)
 Cuando el usuario solicite un **"Case: Setup Full C"** o similar, se asume un escenario de despliegue limpio:
-1. Se debe realizar un `DROP DATABASE IF EXISTS awa;` manual o vía script inicial en el Host C.
-2. Se deben ejecutar los 10 scripts de `host-c-setup/` en orden correlativo para reconstruir el esquema V2 completo antes de cualquier carga de datos.
+1. Se invoca el orquestador `run_setup.sh`.
+2. El script realiza el `DROP DATABASE IF EXISTS awa;` y recrea el esquema V2 completo (tablas, catálogos, vistas, SPs, validador) antes de cualquier carga.
 
 ---
 **Notas para Agentes IA (Claude/Gemini)**:

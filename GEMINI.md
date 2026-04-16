@@ -16,13 +16,13 @@ Este archivo es el punto de entrada principal para el asistente de IA (Antigravi
 | **03** | **Sincronización de Datos (B -> A)** | [.agents/rules/03-sincronizacion-b-a.md](file:///.agents/rules/03-sincronizacion-b-a.md) |
 | **04** | **Arquitectura MVC y Directorios** | [.agents/rules/04-arquitectura-mvc.md](file:///.agents/rules/04-arquitectura-mvc.md) |
 | **05** | **Despliegue y Automatización (Host C)** | [.agents/rules/05-despliegue-host-c.md](file:///.agents/rules/05-despliegue-host-c.md) |
-| **06** | **Accesos, Rutas y Herramientas (3 hosts, Docker MCP)** | [.agents/rules/06-accesos-rutas.md](file:///.agents/rules/06-accesos-rutas.md) |
+| **06** | **Accesos, Rutas y Herramientas** | [.agents/rules/06-accesos-rutas.md](file:///.agents/rules/06-accesos-rutas.md) |
 | **07** | **Control de Versiones y Git Workflow** | [.agents/rules/07-git-workflow.md](file:///.agents/rules/07-git-workflow.md) |
-| **08** | **Integridad del Ground Truth — LEER ANTES DE REFACTORIZAR** | [.agents/rules/08-integridad-ground-truth.md](file:///.agents/rules/08-integridad-ground-truth.md) |
-| **09** | **Documentación de Sesión — Resumen de Issues + Protocolo de Commit** | [.agents/rules/09-sesion-summary.md](file:///.agents/rules/09-sesion-summary.md) |
-| **10** | **Limitantes Conocidas de la Webapp — LEER ANTES DE PROPONER MEJORAS AUTOMÁTICAS** | [.agents/rules/10-limitantes-webapp.md](file:///.agents/rules/10-limitantes-webapp.md) |
-| **11** | **Estándares de Código y Seguridad (Hardening)** | [.agents/rules/11-estandares-codigo.md](file:///.agents/rules/11-estandares-codigo.md) |
-| **12** | **Uso Seguro de `Conexion.php` — Regla E01 (mysqli guard)** | [.agents/rules/12-estandar-conexion-mysqli.md](file:///.agents/rules/12-estandar-conexion-mysqli.md) |
+| **08** | **Integridad del Ground Truth / Runbook** | [.agents/rules/08-integridad-ground-truth.md](file:///.agents/rules/08-integridad-ground-truth.md) |
+| **09** | **Documentación de Sesión** | [.agents/rules/09-sesion-summary.md](file:///.agents/rules/09-sesion-summary.md) |
+| **10** | **Limitantes Conocidas de la Webapp** | [.agents/rules/10-limitantes-webapp.md](file:///.agents/rules/10-limitantes-webapp.md) |
+| **11** | **Estándares de Código y Seguridad** | [.agents/rules/11-estandares-codigo.md](file:///.agents/rules/11-estandares-codigo.md) |
+| **12** | **Uso Seguro de `Conexion.php` (mysqli)** | [.agents/rules/12-estandar-conexion-mysqli.md](file:///.agents/rules/12-estandar-conexion-mysqli.md) |
 
 ---
 
@@ -37,8 +37,8 @@ Estas habilidades definen **cómo** ejecuto las tareas técnicas:
 ---
 
 ## 🏗️ Workflows Disponibles (Procesos Detallados)
-- **[/update-business-data](file:///.agents/workflows/update-business-data.md)**: Sincronización de Datos Frescos de Negocio (Host B a Host A)
-- **[/deploy-to-host-c](file:///.agents/workflows/deploy-to-host-c.md)**: Despliegue de Mejoras y Refactorings en el Host C
+- **[/update-business-data](file:///.agents/workflows/update-business-data.md)**: Sync B → A (Comando: `Sync-B2A`)
+- **[/deploy-to-host-c](file:///.agents/workflows/deploy-to-host-c.md)**: Sync A → C (Comando: `Sync-A2C`)
 
 ---
 
@@ -55,9 +55,9 @@ Existen funcionalidades core que requieren especial atención para asegurar la c
 
 - Split `ligacargos` **completado**: 2,513 activa (≥2026) + 192,545 histórico (≤2025)
 - Schema v2 completo + webapp PHP 7.4 adaptada en `feature/upgrade-v2-win-xampp`
-- Pipeline sync B→A→C operativo y validado (7/7 checks OK)
+- Pipeline de Sincronización B → A → C **Maestro** (Comando: `Full-Pipeline-Sync`)
 - Puertos Host C: Apache **7001**, MariaDB **7002**
-- Checklist pase a producción: `docs-dev/migration-stack2/win10_aguav2/host-c-setup/07_transferir_datos.md`
+- Checklist pase a producción: `docs-dev/migration-aguav2/host-c-setup/07_transferir_datos.md`
 
 ## 🐛 Bugs Host C corregidos (2026-04-07, commit `bd1cb2f`)
 
@@ -86,6 +86,9 @@ Validar integridad:
 bash docs-dev/ga-cl-ia/chatledger_validate.sh
 ```
 
-**Última actualización**: 2026-04-15
+**Última actualización**: 2026-04-16
 
-> **Nombre canónico del Runbook**: El conjunto `GEMINI.md` + todo `.agents/` (rules, skills, workflows) se denomina **"el Runbook"** del proyecto.
+> [!IMPORTANT]
+> **Terminología de Sesión**:
+> - **Ground Truth**: Denominación del contexto maestro para **Claude**.
+> - **Runbook**: Denominación del contexto maestro (GEMINI.md + .agents/) para **Gemini**.

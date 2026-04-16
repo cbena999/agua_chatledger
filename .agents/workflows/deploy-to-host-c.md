@@ -9,7 +9,7 @@ Este workflow cubre dos escenarios para Host C:
 > [!IMPORTANT]
 > Host C ya tiene schema v2 completo y webapp adaptada (estado: UP & RUNNING desde 2026-04-06).
 > Ambos pipelines validados en ejecución real (2026-04-07): Proceso 1 y Proceso 2 — 7/7 checks OK.
-> Ver [Regla 05](./../rules/05-despliegue-host-c.md) para diferencias de schema A vs C.
+> Ver [Regla 05](./../rules/05-despliegue-host-c.md) para diferencias de schema A vs C y comandos canónicos (Sync-A2C).
 > `tusuario` eliminada de BD y scripts — tabla fantasma no usada por la webapp.
 
 ---
@@ -20,14 +20,14 @@ Este workflow cubre dos escenarios para Host C:
 
 ### Paso 1 — Sync B → A
 ```bash
-cd docs-dev/migration-stack2/win10_aguav2/syncawa_hostb_to_hosta/
+cd docs-dev/migration-aguav2/syncawa_hostb_to_hosta/
 ./run_sync.sh
 ```
 Esperar que complete con éxito (≈32 segundos). Verificar log final sin errores.
 
-### Paso 2 — Sync A → C
+### Paso 2 — Sync A → C (Comando canónico: Sync-A2C)
 ```bash
-cd docs-dev/migration-stack2/win10_aguav2/sync_hosta_to_hostc/
+cd docs-dev/migration-aguav2/sync_hosta_to_hostc/
 ./run_sync.sh
 ```
 
@@ -53,7 +53,7 @@ Editar `sync_hosta_to_hostc/sync_config.sh` para actualizar conteos esperados tr
 Para cualquier cambio estructural nuevo en la BD de Host C:
 
 1. Desarrollar y validar el cambio en Host A (`main`)
-2. Crear script numerado en `docs-dev/migration-stack2/win10_aguav2/host-c-setup/`
+2. Crear script numerado en `docs-dev/migration-aguav2/host-c-setup/`
 3. Actualizar `08_rollback.sql` con el DROP/REVERT correspondiente
 4. Ejecutar en Host C:
    ```bash

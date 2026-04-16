@@ -6,15 +6,15 @@ Este workflow describe el proceso seguro de refresco de datos operativos desde e
 
 > [!IMPORTANT]
 > Los scripts están implementados y fueron utilizados exitosamente.
-> Directorio: `docs-dev/migration-stack2/win10_aguav2/syncawa_hostb_to_hosta/`
-> Consultar [Regla 03](./../rules/03-sincronizacion-b-a.md) para el protocolo completo.
+> Directorio: `docs-dev/migration-aguav2/syncawa_hostb_to_hosta/`
+> Consultar [Regla 03](./../rules/03-sincronizacion-b-a.md) para el protocolo completo y comando Sync-B2A.
 
 ---
 
-## Pipeline de 8 Pasos (Automatizado)
+### Pipeline de 8 Pasos (Comando canónico: Sync-B2A)
 
 ```bash
-cd docs-dev/migration-stack2/win10_aguav2/syncawa_hostb_to_hosta/
+cd docs-dev/migration-aguav2/syncawa_hostb_to_hosta/
 
 # Opcional pero recomendado antes de un sync:
 ./run_sync.sh --pre-flight   # Detecta drift de schemas A vs B sin modificar datos
@@ -71,7 +71,7 @@ gunzip -c backups/backup_host_a_TIMESTAMP.sql.gz | /opt/lampp/bin/mysql -u root 
 
 Si el objetivo es también refrescar Host C, ejecutar después:
 ```bash
-cd ../migration-stack2/win10_aguav2/sync_hosta_to_hostc/
+cd ../migration-aguav2/sync_hosta_to_hostc/
 ./run_sync.sh
 ```
-Ver workflow [deploy-to-host-c.md](deploy-to-host-c.md) para detalles.
+Ver workflow [deploy-to-host-c.md](deploy-to-host-c.md) para detalles sobre el comando Sync-A2C.
