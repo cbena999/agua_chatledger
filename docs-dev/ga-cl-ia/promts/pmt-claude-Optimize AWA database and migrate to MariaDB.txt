@@ -21743,10 +21743,10 @@ Hice cambios en rama main para los archivos aqui puestos
 
 ===============================================================================================================================================================
                                                                
-********* AQUI continuar Jueves 16, 11am **********
+********* AQUI continuar viernes 17, 1 pm   **********
 
 Pruebas:
-  . incluir prueba de asamblea (del archivo que genera) vs agua/Asistencias (/opt/lampp/htdocs/agua/views/sistema/asistencias.php) 
+. incluir prueba de asamblea (del archivo que genera) vs agua/Asistencias (/opt/lampp/htdocs/agua/views/sistema/asistencias.php) 
   .Pedir que refine el doc de pruebas con datos  especificos de prueba para cada caso, de id de contratos , id cargos  especificos en el caso de los de UI, con pasos precisos, en el caso de los scripts de bd que crea sets de registros de prueba en host a.
 
   . Algo grave esta sucediendo con la ficha de contrato, al darle click en consultar el idcontrato en inputtex o click en el icono de refresh (Y quizas en otras 
