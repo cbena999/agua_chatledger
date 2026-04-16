@@ -21743,14 +21743,16 @@ Hice cambios en rama main para los archivos aqui puestos
 
 ===============================================================================================================================================================
                                                                
-********* AQUI continuar miercoles 11am **********
+********* AQUI continuar Jueves 16, 11am **********
+
+
+mejoras ui
+  . mover los botones ver cred y movi, a abjo del boton cargar info del usuario. 
 
 Generame casos de prueba para las 6 transiciones de estado validas de un contrato definidas en alguna sesion pasada; incluso el de suspension temporal a activa que en la UI se bloque por la regla de que de debe hacer solo en diciiembre.
 Busca idContratos en host c para estos casos de prueba; en caso no exista alguno adecuado indicame para que se generen en host a y se sincronice.
 
-_____________
-mejoras ui
-  . mover los botones ver cred y movi, a abjo del boton cargar info del usuario. 
+
 3) Pruebas 
     - cl Test data flow between hosts A B C
     - a modo visual yo cuadrar cortes de caja resumen años, ciclos al ultimo marzo 2026 

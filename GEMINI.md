@@ -22,6 +22,7 @@ Este archivo es el punto de entrada principal para el asistente de IA (Antigravi
 | **09** | **Documentación de Sesión — Resumen de Issues + Protocolo de Commit** | [.agents/rules/09-sesion-summary.md](file:///.agents/rules/09-sesion-summary.md) |
 | **10** | **Limitantes Conocidas de la Webapp — LEER ANTES DE PROPONER MEJORAS AUTOMÁTICAS** | [.agents/rules/10-limitantes-webapp.md](file:///.agents/rules/10-limitantes-webapp.md) |
 | **11** | **Estándares de Código y Seguridad (Hardening)** | [.agents/rules/11-estandares-codigo.md](file:///.agents/rules/11-estandares-codigo.md) |
+| **12** | **Uso Seguro de `Conexion.php` — Regla E01 (mysqli guard)** | [.agents/rules/12-estandar-conexion-mysqli.md](file:///.agents/rules/12-estandar-conexion-mysqli.md) |
 
 ---
 
