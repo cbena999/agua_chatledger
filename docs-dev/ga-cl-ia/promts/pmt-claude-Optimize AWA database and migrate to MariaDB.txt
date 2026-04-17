@@ -21744,6 +21744,11 @@ Hice cambios en rama main para los archivos aqui puestos
 ===============================================================================================================================================================
                                                                
 ********* AQUI continuar viernes 17, 1 pm   **********
+A hora sobre: Plan de Pruebas — Sprint Post-Correcciones.md , . POnlo mas legible  tenga:
+.  un indice,  cada nombre de  caso/subcaso tenga un numeral compuesto pero secuencial global para ubicarlo por su numero consecutivo.
+. se respeten las 3 secciones(recuerdo), actualmente solo leo dos; recupera se nos perdio otra vez  creo.  
+. Que todo el monton de reglas, flows de negocio que estan definidos pero inmersas en este documento de pruebas;  analizalos, sintetizalos y conviertelas en reglas de negocio clasificadas para que sean parte de lo que ya contiene Ground Truth para CLAUDE y Runbook  para GEMINI.
+-------
 
 Pruebas:
 . incluir prueba de asamblea (del archivo que genera) vs agua/Asistencias (/opt/lampp/htdocs/agua/views/sistema/asistencias.php) 
