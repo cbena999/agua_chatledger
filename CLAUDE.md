@@ -112,20 +112,10 @@ git push origin feature/upgrade-v2-win-xampp
 
 # XAMPP Host A
 /opt/lampp/bin/mysql -u root awa
-
-# Sync & Setup (Flujos de Datos)
-# Setup-Full-C: Simulación de producción (DROP + Setup)
-bash docs-dev/migration-aguav2/host-c-setup/run_setup.sh
-
-# Full-Pipeline-Sync: Cadena completa B -> A -> C
-bash docs-dev/migration-aguav2/Full-Pipeline-Sync.sh
-
-# Sync-B2A: Refresco Desarrollo desde B
-cd docs-dev/migration-aguav2/syncawa_hostb_to_hosta/ && ./run_sync.sh
-
-# Sync-A2C: Migración Desarrollo a V2
-cd docs-dev/migration-aguav2/sync_hosta_to_hostc/    && ./run_sync.sh
 ```
+
+> **⚠️ Filosofía de Uso**: Los scripts de orquestación (`Sync-*` y `Full-Pipeline-Sync`) son **Herramientas de Migración**, no tareas operativas recurrentes.
+> Ver tabla de comandos canónicos, rutas exactas y comportamiento de flags en: `docs-dev/migration-aguav2/MIGRATION_PROTOCOL.md`
 
 ---
 
