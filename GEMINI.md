@@ -57,7 +57,10 @@ Existen funcionalidades core que requieren especial atención para asegurar la c
 - Schema v2 completo + webapp PHP 7.4 adaptada en `feature/upgrade-v2-win-xampp`
 - Pipeline de Sincronización B → A → C **Maestro** (Comando: `Full-Pipeline-Sync`)
 - Puertos Host C: Apache **7001**, MariaDB **7002**
+- Protocolo de Migración: `docs-dev/migration-aguav2/MIGRATION_PROTOCOL.md`
 - Checklist pase a producción: `docs-dev/migration-aguav2/host-c-setup/07_transferir_datos.md`
+
+> **⚠️ Filosofía de Uso**: Los scripts `Sync-*` y `Full-Pipeline-Sync` son **Herramientas de Migración**, no tareas recurrentes. Se ejecutan durante el desarrollo para estabilizar Host C. En producción (Go-Live) se ejecutan **una última vez** y luego se retiran. Host C opera autónomamente.
 
 ## 🐛 Bugs Host C corregidos (2026-04-07, commit `bd1cb2f`)
 

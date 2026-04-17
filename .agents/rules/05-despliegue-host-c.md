@@ -14,7 +14,7 @@ La migración está **completada, consolidada y declarada verificada**. Host C t
 - Script rollback completo: `host-c-setup/08_rollback.sql`
 - `tusuario` eliminada de BD y de todos los scripts (tabla fantasma — no usada por PHP)
 - Pipeline de saneamiento integrado y automatizado en `run_sync.sh` (Paso 8)
-- Declaración formal del pipeline: `docs-dev/migration-aguav2/PIPELINE_DECLARACION.md`
+- Protocolo de migración documentado: `docs-dev/migration-aguav2/MIGRATION_PROTOCOL.md`
 - Declaración de homologación reportes: `docs-dev/doc-estabilizacion/REPORTES_CAJA_CARTERA_DECLARACION.md`
 - **Terminología de Sesión**: Este conjunto de documentos constituye el **Ground Truth (para Claude)** y el **Runbook (para Gemini)**.
 
@@ -52,12 +52,26 @@ cd docs-dev/migration-aguav2/sync_hosta_to_hostc/
 ./run_sync.sh
 ```
 
-El pipeline A→C aplica automáticamente:
+El protocolo A→C aplica automáticamente:
 - `cambios`: importa con columnas explícitas (C tiene `id` AUTO_INCREMENT col 1)
 - `ligacargos.idpago_vinc`: convierte `''` → `NULL` (C usa `int NULL`)
 - `ligacargos.fcobro/fpago`: trunca datetime → date
 - `egresos.id_categoria`: inserta `NULL` (columna no existe en A)
-- Re-ejecuta `06_split_ligacargos.sql` (idempotente vía TRUNCATE)
+- Ejecuta `06_split_ligacargos.sql`: **Particionamiento de Migración** (idempotente vía TRUNCATE) — mueve registros `anio ≤ 2025` a la tabla histórica para aplicar el schema V2 de tablas divididas.
+
+---
+
+## 🛉 Filosofía de Uso: Herramientas de Migración vs Operación
+
+Estos scripts son **Herramientas de Migración y Transición** diseñadas para el ciclo de desarrollo del proyecto. NO son procesos operativos de la aplicación.
+
+| Fase | Actividad | Estado de Scripts |
+|------|-----------|------------------|
+| **Desarrollo** (actual) | Ejecutar iterativamente para estabilizar Host C. | ✅ Activos |
+| **Go-Live** | Ejecución **única** con datos reales de producción. | ✅ Ejecución final |
+| **Post Go-Live** | Host C es fuente de verdad autónoma. | ⛔ Retirados |
+
+> Una vez en producción real, Host C **no recibe más sincronizaciones externas**. No existe un proceso "nocturno" ni programado. El particionamiento de tablas se hizo **una sola vez** durante la migración.
 
 ---
 
@@ -131,12 +145,20 @@ mysql -u root -pcomite_2026 -h 192.168.1.128 awa < host-c-setup/08_rollback.sql
 
 ### 🚀 Scripts de Inicio de Flujos
 
+Para estandarizar y facilitar las ejecuciones durante el desarrollo, se han definido scripts **orquestadores** que encapsulan toda la lógica validada. A continuación las rutas exactas según el Runbook (GEMINI) / Ground Truth (CLAUDE):
+
+**Formalización de Comandos Canónicos**:
+- **Setup-Full-C**: Reconstrucción total (con DROP) — simulación de pase a producción.
+- **Sync-B2A**: Refresco de datos operativos desde el espejo (B) hacia Desarrollo (A).
+- **Sync-A2C**: Particionamiento y migración de datos desde Host A al Target V2 (C).
+- **Full-Pipeline-Sync**: Orquestador maestro B → A → C.
+
 | Comando | Script a Ejecutar | Acción |
 | :--- | :--- | :--- |
 | **`Setup-Full-C`** | `docs-dev/migration-aguav2/host-c-setup/run_setup.sh` | Simulación de pase a producción desde cero en Host C. |
 | **`Sync-B2A`** | `docs-dev/migration-aguav2/syncawa_hostb_to_hosta/run_sync.sh` | Refresco de datos operativos desde el espejo (B) hacia Desarrollo (A). |
 | **`Sync-A2C`** | `docs-dev/migration-aguav2/sync_hosta_to_hostc/run_sync.sh` | Migración y transformación de datos desde Host A hacia el Target V2 (C). |
-| **`Full-Pipeline-Sync`**| `docs-dev/migration-aguav2/Full-Pipeline-Sync.sh` | Orquestador Maestro: Refresco completo de cadena B → A → C. |
+| **`Full-Pipeline-Sync`** | `docs-dev/migration-aguav2/Full-Pipeline-Sync.sh` | Orquestador Maestro: cadena completa B → A → C. |
 
 ---
 
