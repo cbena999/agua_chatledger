@@ -62,6 +62,23 @@ Existen funcionalidades core que requieren especial atención para asegurar la c
 
 > **⚠️ Filosofía de Uso**: Los scripts `Sync-*` y `Full-Pipeline-Sync` son **Herramientas de Migración**, no tareas recurrentes. Se ejecutan durante el desarrollo para estabilizar Host C. En producción (Go-Live) se ejecutan **una última vez** y luego se retiran. Host C opera autónomamente.
 
+### 🚀 Scripts de Inicio de Flujos
+
+Para estandarizar y facilitar las ejecuciones, se han creado scripts **orquestadores** que encapsulan toda la lógica validada. Rutas exactas según el Runbook:
+
+| Comando | Script a Ejecutar |
+| :--- | :--- |
+| **`Setup-Full-C`** | `docs-dev/migration-aguav2/host-c-setup/run_setup.sh` |
+| **`Full-Pipeline-Sync`** | `docs-dev/migration-aguav2/Full-Pipeline-Sync.sh` |
+| **`Sync-B2A`** | `docs-dev/migration-aguav2/syncawa_hostb_to_hosta/run_sync.sh` |
+| **`Sync-A2C`** | `docs-dev/migration-aguav2/sync_hosta_to_hostc/run_sync.sh` |
+
+### 🛠️ Comportamiento de `Full-Pipeline-Sync.sh`
+
+- **Sin flag** (`./Full-Pipeline-Sync.sh`): Preserva la estructura actual de Host C. Solo refresca los datos (B → A → C). Más rápido y seguro para el ciclo de desarrollo.
+- **Con flag** (`./Full-Pipeline-Sync.sh --setup`): Realiza el `DROP` y recreación total del esquema V2 en Host C antes de cargar los datos. Usar para simulaciones de "Setup Producción" o cuando la BD de Host C esté corrupta/inexistente.
+
+
 ## 🐛 Bugs Host C corregidos (2026-04-07, commit `bd1cb2f`)
 
 Derivados del split `ligacargos`: 5 PHPs usaban `FROM ligacargos` directa (perdían datos ≤2025).
