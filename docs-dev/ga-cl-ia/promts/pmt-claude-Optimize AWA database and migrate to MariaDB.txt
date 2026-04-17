@@ -21744,6 +21744,19 @@ Hice cambios en rama main para los archivos aqui puestos
 ===============================================================================================================================================================
                                                                
 ********* AQUI continuar viernes 17, 1 pm   **********
+
+. Analiza si todos los scritps  sql y sh  en  migration-aguav2/  se esta utilizando e integrando en alguno de los archivos, dame informe.
+
+Estabilización del plan de: Plan de Pruebas — Sprint Post-Correcciones
+
+Analiza el documento /opt/lampp/htdocs/agua/docs-dev/doc-estabilizacion/Plan de Pruebas — Sprint Post-Correcciones.md
+
+. Valida que todos todos los casos tengan resultado esperado, pasos para realizar la prueba;  que tengan datos de prueba y ya esten en la bd awa host c listos, o si no hay entonces revisa 00_inject_qa_tests.sql  y  añadelo en lugar adecuado del script.
+
+. Que el indice se vincule con la seccion al dar click
+
+
+....
 A hora sobre: Plan de Pruebas — Sprint Post-Correcciones.md , . POnlo mas legible  tenga:
 .  un indice,  cada nombre de  caso/subcaso tenga un numeral compuesto pero secuencial global para ubicarlo por su numero consecutivo.
 . se respeten las 3 secciones(recuerdo), actualmente solo leo dos; recupera se nos perdio otra vez  creo.  
