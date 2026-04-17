@@ -21744,6 +21744,14 @@ Hice cambios en rama main para los archivos aqui puestos
 ===============================================================================================================================================================
                                                                
 ********* AQUI continuar viernes 17, 1 pm   **********
+Que Plan de Pruebas — Sprint Post-Correcciones.md para todos los casos de UI , se tenga almenos o un poco mas de este patron de contenido de ejemplo:
+  Meta: Restricciones de edición para Estado 2.
+  Dato QA: Contrato 9002.
+  Dato Real: Contrato 10 (en Estado 2).
+  Pasos: 
+  Intentar modificar metros o tarifa en ficha.
+
+_____
 
 . Analiza si todos los scritps  sql y sh  en  migration-aguav2/  se esta utilizando e integrando en alguno de los archivos, dame informe.
 

@@ -58,7 +58,7 @@ Inventario completo de assets en [.agents/INVENTORY.md](.agents/INVENTORY.md).
 
 - Schema v2 completo, webapp PHP adaptada — **UP & RUNNING**
 - Pipeline sync B→A→C validado en ejecución real (7/7 checks OK)
-- Scripts setup en `docs-dev/migration-aguav2/host-c-setup/` (01→08)
+- Scripts setup en `docs-dev/migration-aguav2/host-c-setup/` (02→09, manual/)
 - Checklist pase a producción en `host-c-setup/07_transferir_datos.md`
 - Ver regla detallada: [.agents/rules/05-despliegue-host-c.md](.agents/rules/05-despliegue-host-c.md)
 
@@ -119,7 +119,7 @@ git push origin feature/upgrade-v2-win-xampp
 
 ---
 
-**Última actualización:** 2026-04-15 · Regla 12 (E01 mysqli guard) añadida
+**Última actualización:** 2026-04-17 · Depuración scripts migración (01, 08, scripts_deseable eliminados)
 
 > **Nombre canónico del Ground Truth**: El conjunto `CLAUDE.md` + todo `.agents/` (rules, skills, workflows) se denomina **"el Ground Truth"** del proyecto.
 > **Nota de terminología**: Gemini denomina este mismo conjunto **"el Runbook"**. Son el mismo repositorio de conocimiento — `.agents/` es compartido. Solo difiere el nombre según el agente.

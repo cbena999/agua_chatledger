@@ -10,8 +10,7 @@ La migración está **completada, consolidada y declarada verificada**. Host C t
 - BD `awa` con schema v2 completo (17 tablas InnoDB, utf8mb4, FKs, SPs, 3 vistas)
 - `ligacargos` split: activa ≥2026 + `ligacargos_historico` ≤2025
 - Webapp `feature/upgrade-v2-win-xampp` adaptada al schema v2 — reportes de caja y cartera homologados
-- Scripts de setup versionados: `docs-dev/migration-aguav2/host-c-setup/` (01–12, incluye validador)
-- Script rollback completo: `host-c-setup/08_rollback.sql`
+- Scripts de setup versionados: `docs-dev/migration-aguav2/host-c-setup/` (02→09, manual/)
 - `tusuario` eliminada de BD y de todos los scripts (tabla fantasma — no usada por PHP)
 - Pipeline de saneamiento integrado y automatizado en `run_sync.sh` (Paso 8)
 - Protocolo de migración documentado: `docs-dev/migration-aguav2/MIGRATION_PROTOCOL.md`
@@ -133,12 +132,13 @@ Las vistas `vw_ligacargos_all` y `vw_ligacargos_pendientes` unifican ambas tabla
 
 Cualquier cambio estructural en Host C requiere:
 1. Script versionado en `host-c-setup/`
-2. Actualización de `08_rollback.sql`
-3. Actualizar la tabla de diferencias de schema arriba
+2. Actualizar la tabla de diferencias de schema arriba
 
-**Para revertir toda la migración**:
+**Para revertir toda la migración** (reconstrucción desde cero):
 ```bash
-mysql -u root -pcomite_2026 -h 192.168.1.128 awa < host-c-setup/08_rollback.sql
+cd docs-dev/migration-aguav2/host-c-setup/
+./run_setup.sh
+# Luego re-ejecutar sync A→C para repoblar datos
 ```
 
 ---

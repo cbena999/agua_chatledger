@@ -54,8 +54,7 @@ Para cualquier cambio estructural nuevo en la BD de Host C:
 
 1. Desarrollar y validar el cambio en Host A (`main`)
 2. Crear script numerado en `docs-dev/migration-aguav2/host-c-setup/`
-3. Actualizar `08_rollback.sql` con el DROP/REVERT correspondiente
-4. Ejecutar en Host C:
+3. Ejecutar en Host C:
    ```bash
    mysql -u root -pcomite_2026 -h 192.168.1.128 awa < host-c-setup/NN_nuevo_cambio.sql
    ```
@@ -73,19 +72,10 @@ Para cambios PHP:
 En caso de necesitar re-crear Host C desde cero:
 
 ```bash
-# Ejecutar en orden en Host C
-mysql -u root -pcomite_2026 awa < host-c-setup/01_create_database.sql
-mysql -u root -pcomite_2026 awa < host-c-setup/02_schema_tablas_base.sql
-mysql -u root -pcomite_2026 awa < host-c-setup/03_config_datos_catalogo.sql
-mysql -u root -pcomite_2026 awa < host-c-setup/04_views.sql
-mysql -u root -pcomite_2026 awa < host-c-setup/05_stored_procedures.sql
-# Transferir datos desde Host A (ver 07_transferir_datos.md)
-mysql -u root -pcomite_2026 awa < host-c-setup/06_split_ligacargos.sql
-```
-
-Rollback completo:
-```bash
-mysql -u root -pcomite_2026 awa < host-c-setup/08_rollback.sql
+# Método canónico: usar el orquestador run_setup.sh (hace DROP + recreación automática)
+cd docs-dev/migration-aguav2/host-c-setup/
+./run_setup.sh
+# Luego transferir datos con sync A→C
 ```
 
 ---
@@ -96,4 +86,4 @@ mysql -u root -pcomite_2026 awa < host-c-setup/08_rollback.sql
 - `sync_hosta_to_hostc/backups/backup_host_c_*.sql.gz` (máx. 5)
 
 ---
-**Nota para Gemini**: Antes de proponer cualquier cambio en Host C, verificar si ya existe un script en `host-c-setup/` que lo cubra. El rollback en `08_rollback.sql` debe mantenerse actualizado siempre.
+**Nota para agentes IA (Claude/Gemini)**: Antes de proponer cualquier cambio en Host C, verificar si ya existe un script en `host-c-setup/` que lo cubra. En caso de necesitar revertir, usar `run_setup.sh` para reconstruir desde cero.
