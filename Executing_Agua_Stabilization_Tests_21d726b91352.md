@@ -7,9 +7,9 @@
 | **Trajectory ID** | `2488caec-461b-4c4a-af81-56c23c085368` |
 | **Cascade ID** | `a8ff3fa8-c23a-4949-b8a9-21d726b91352` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 283 |
+| **Total Steps** | 298 |
 | **Started** | 15 Apr 2026, 8:11 pm |
-| **Completed** | 15 Apr 2026, 9:37 pm |
+| **Completed** | 15 Apr 2026, 9:38 pm |
 
 ---
 
@@ -10230,6 +10230,836 @@ I've been focusing on specific tools over general ones, specifically using `view
 
 **Status:** Completed
 **Created:** 15 Apr 2026, 9:37 pm
+
+---
+
+<details>
+<summary>Conversation History</summary>
+
+# Conversation History
+Here are the conversation IDs, titles, and summaries of your most recent 9 conversations, in reverse chronological order:
+
+<conversation_summaries>
+## Conversation a911cf76-d873-4c41-b740-4fb8ebf18699: Executing Agua Stabilization Tests
+- Created: 2026-04-15T21:24:50Z
+- Last modified: 2026-04-16T02:00:33Z
+
+### USER Objective:
+Hardening Agua Audit Integrity
+
+The user's objective is to resolve a silent failure in audit logging for manual cargo reassignments in the Agua V2 system. The goal is to implement direct database-level telemetry to verify execution flow, harden the `Conexion.php` layer against silent connection failures, and establish a robust pre-deployment validation pipeline (linting and Git hooks) to ensure code integrity across the Host A (development) and Host C (production-ready) environments.
+
+## Conversation 267f877f-59ee-4427-ad6a-5db69ff35126: Executing Agua Stabilization Tests
+- Created: 2026-04-15T19:34:20Z
+- Last modified: 2026-04-15T21:19:08Z
+
+### USER Objective:
+Hardening Agua Audit Integrity
+
+The user's primary objective is to finalize the stabilization of the Agua V2 application by implementing robust input escaping to prevent SQL syntax errors in audit logs, enforcing strict data integrity standards, and formalizing a repeatable "Setup-Full-C" deployment pipeline to simulate production environments. The goal is to ensure fiscal data consistency across Host A and Host C, while maintaining a fully auditable and hardened database interaction layer.
+
+## Conversation 42a2fe65-353b-453e-a2c9-f555583cc739: Validating Agua Testing Protocols
+- Created: 2026-04-15T02:05:10Z
+- Last modified: 2026-04-15T04:11:26Z
+
+## Conversation 77ef1511-74ab-40a2-ae47-02749135d6f9: 
+- Created: 2026-04-14T06:25:52Z
+- Last modified: 2026-04-14T06:39:29Z
+
+## Conversation 88e34e15-a3be-4f0e-b30e-534bc4a2df7b: Swapping User Contract IDs
+- Created: 2026-04-13T21:01:39Z
+- Last modified: 2026-04-14T01:45:27Z
+
+### USER Objective:
+Sanitizing Agua User Data
+
+The user's objective is to resolve systemic data inconsistencies by consolidating duplicate user records (Zenón Martínez López and Martín Hernández Castro) and sanitizing "phantom" debts on contracts in definitive suspension (Estado 4). The goal is to ensure data integrity by reassigning contracts to standardized user IDs and executing a targeted SQL migration script on the Host C environment, while hardening the UI in `ficha.php` to prevent unauthorized modifications to suspended contracts.
+
+## Conversation 0ff85a52-5ca7-406e-ab9c-c459b96c204c: Validating Multas Sync Logic
+- Created: 2026-04-13T20:47:25Z
+- Last modified: 2026-04-13T20:55:42Z
+
+### USER Objective:
+Validating Multas Sync Logic
+
+The user's objective is to verify the architectural integrity of the `operaciones_multas_sync.php` script within the Host C environment. Specifically, the user needs to confirm if the script correctly utilizes both `ligacargos` tables (active and historical) or the consolidated `vw_ligacargos_all` view to ensure comprehensive data coverage for all multas operations, preventing data omissions or inconsistencies during synchronization tasks.
+
+## Conversation fbb0e790-a6c6-4799-8517-eb607b5a8861: Recovering Audit File Logic
+- Created: 2026-04-13T00:15:55Z
+- Last modified: 2026-04-13T00:22:49Z
+
+### USER Objective:
+Recovering Audit File Logic
+
+The user's objective is to locate and retrieve the most recent version of the file `auditoria_recargos_suspendidos.php` from the repository history to analyze its historical purpose and functionality. The goal is to determine how this file relates to the recent stabilization efforts of the Agua V2 system, specifically regarding financial sanitation, audit trails, and contract status transitions, ensuring that any necessary logic is preserved or integrated into the current development environment.
+
+## Conversation b5b0a269-ff39-4387-ad94-d5f2fead4c34: Resolving Contract Status Transitions
+- Created: 2026-04-12T17:57:18Z
+- Last modified: 2026-04-12T20:40:08Z
+
+### USER Objective:
+Stabilizing Contract State Transitions
+
+The user's objective is to finalize the stabilization of contract status transitions in the Agua V2 system by enforcing strict business rules, hardening backend logic, and implementing UI/UX protections. Key goals include auditing state transition logic, formalizing these constraints in the project's Runbook, and establishing a robust "Escudo de Integridad" using Git Hooks and Ground Truth synchronization to prevent future data inconsistencies and architectural drift across development environments.
+
+## Conversation 641d61c3-6a67-4219-9eb6-f0ca8f22ce82: Validating Automated Debt Sanitation
+- Created: 2026-04-11T17:24:33Z
+- Last modified: 2026-04-12T00:50:57Z
+
+### USER Objective:
+Stabilizing Agua Administrative Infrastructure
+
+The user's objective is to finalize the structural stabilization of the Agua web application following a major directory reorganization. Key goals include:
+1. Ensuring full navigation consistency and asset loading (CSS/JS) across all relocated administrative modules by correcting relative paths.
+2. Implementing a comprehensive set of compatibility redirects in the `admin/` root directory to prevent 404 errors for legacy bookmarks and system links.
+3. Standardizing the UI by adding missing "Return to Menu" navigation links to all administrative reports and control panels.
+4. Validating that all financial sanitation and reporting tools remain fully functional and secure within their new subdirectories (`saneamiento`, `operaciones`, `reportes`).
+
+</conversation_summaries>
+
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 15 Apr 2026, 9:37 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Refining My Search**
+
+I'm focusing my approach, now leveraging `grep_search`. My regex initially flagged 'id' within various names like 'leyenda' and 'repetido,' but it incorrectly included 'idp' as well. I'm tweaking it to be more precise, so I need to filter out false positives.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `vw_ligacargos.*\.\bid\b|SELECT\s+(?:\w+\.)?\bid\b.*vw_ligacargos`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.335872425s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 15 Apr 2026, 9:37 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Specific Tools**
+
+I'm zeroing in on specific tools, employing `grep_search` to dissect the problem. My focus has shifted towards the migration scripts for Agua V2, specifically to find all usage of `select id`. The Plan de Pruebas references the usage of `SELECT id` and `numcontrato`. The usage fails.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `vw_ligacargos_`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.329997385s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 15 Apr 2026, 9:37 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Selection**
+
+I've honed in on the specific tool, `grep_search`, as the optimal choice. It's becoming clear that modifying `04_views.sql` isn't the direct path, nor does it involve querying `id`. I'm now actively checking `11_validate_integridad.sql` as the most likely avenue to proceed.
+
+
+**Analyzing Query Patterns**
+
+I've examined the `Plan de Pruebas` and found the problematic SQL query that includes `id` from the view. I will need to replace this query line in the Markdown file since it's an instruction. I'm also considering how the B4 results were obtained, and suspect a direct table query or the original view in Host A might be the source of the `id`. The `vw_ligacargos_all` view's differing definitions between Host A and Host C are crucial. Host A's inclusion of `id` and Host C's exclusion is a critical difference to consider for fixing it.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 4.917567846s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 15 Apr 2026, 9:38 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Direct Actions**
+
+I'm focused on direct file modifications using `replace_file_content` for efficiency. I'm investigating related tools or dependencies, particularly around SQL and `vw_ligacargos_all` usage, looking for `id` correlations. Currently, I'm performing a regex search across all `.php` files to identify any other usage cases.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `11_validate_integridad.sql`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 3.561054942s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+-- =============================================================================
+-- 11_validate_integridad.sql — Validación de Completud e Integridad BD awa
+-- Ubicación: docs-dev/migration-aguav2/sync_hosta_to_hostc/
+--
+-- PROPÓSITO:
+--   Verificación profunda de la base de datos tras el sync + saneamiento.
+--   Va más allá de 05_validate.sql (conteos y split):
+--   cubre reglas de negocio, consistencia financiera, integridad operacional
+--   y resultados del pipeline de saneamiento.
+--
+-- CONVENCIÓN DE RESULTADOS:
+--   OK ✓         — correcto, sin acción requerida
+--   AVISO ⚠      — anomalía esperada o tolerable; revisar si el número crece
+--   CRÍTICO ✗    — fallo bloqueante; requiere investigación antes de operar
+--
+-- DEPENDENCIAS:
+--   - 10_pipeline_saneamiento.sql ya ejecutado (Paso 8 del sync)
+--   - Vistas: vw_ligacargos_all, vw_ligacargos_pendientes
+-- =============================================================================
+
+USE `awa`;
+
+SELECT '═══════════════════════════════════════════════════════' AS '';
+SELECT '  VALIDACIÓN DE INTEGRIDAD Y COMPLETUD — BD awa V2    ' AS '';
+SELECT '═══════════════════════════════════════════════════════' AS '';
+SELECT NOW() AS timestamp_inicio;
+
+
+-- =============================================================================
+-- BLOQUE A: REGLAS DE NEGOCIO DE CONTRATOS
+-- =============================================================================
+SELECT '--- A: REGLAS DE NEGOCIO DE CONTRATOS ---' AS '';
+
+-- A1: Regla C02 — Sin contratos en estado 4 con cargos anuales pendientes (estado=0)
+-- Los contratos SUSP. DEFINITIVA deben tener sus anualidades canceladas (-1).
+SELECT 'A1 — C02: Anualidades pendientes en estado 4' AS verificacion,
+    COUNT(*) AS cantidad,
+    IF(COUNT(*) = 0, 'OK ✓', 'CRÍTICO ✗ — Ejecutar _sincronizaParidadFinanciera') AS resultado
+FROM vw_ligacargos_all l
+JOIN contrato c ON l.numcontrato = c.numcontrato
+WHERE c.estado = 4
+  AND l.categoria NOT IN (16, 17)  -- excluir recargos moratorios (recargo.monto es float, no bandera)
+  AND l.estado  = 0;
+
+-- A2: Regla C01 — Usuarios con más de 2 contratos activos (estado=1) en mismo domicilio
+SELECT 'A2 — C01: Más de 2 tomas activas mismo domicilio' AS verificacion,
+    COUNT(*) AS casos,
+    IF(COUNT(*) = 0, 'OK ✓', 'AVISO ⚠ — Revisar manualmente') AS resultado
+FROM (
+    SELECT c.domicilio, c.numusuario, COUNT(*) AS n_activos
+    FROM contrato c
+    WHERE c.estado = 1
+    GROUP BY c.domicilio, c.numusuario
+    HAVING n_activos > 2
+) t;
+
+-- A3: Regla C07 — Sin contratos que hayan saltado directo entre estado 2 y 3
+-- (Solo verificable si cambios tiene registros descriptivos post-implementación)
+SELECT 'A3 — C07: Saltos directos 2↔3 en bitácora' AS verificacion,
+    COUNT(*) AS registros_sospechosos,
+    IF(COUNT(*) = 0, 'OK ✓', 'AVISO ⚠ — Revisar tabla cambios') AS resultado
+FROM cambios
+WHERE (descripcion LIKE '%TEMPORAL → SUSPENSIÓN ADMIN%'
+    OR descripcion LIKE '%ADMINISTRATIVA → SUSPENSIÓN TEMP%')
+  AND fecha >= CURDATE() - INTERVAL 7 DAY;
+
+-- A4: Contratos activos (estado=1) sin anualidad vigente (año actual, estado=0)
+-- Puede indicar que _sincronizaParidadFinanciera no restauró el cargo.
+SELECT 'A4 — Contratos activos sin anualidad ' AS verificacion,
+    YEAR(NOW()) AS anio_actual,
+    COUNT(DISTINCT c.numcontrato) AS contratos_sin_anualidad,
+    IF(COUNT(DISTINCT c.numcontrato) = 0, 'OK ✓',
+       'AVISO ⚠ — Pueden ser recién reactivados o requerir paridad') AS resultado
+FROM contrato c
+WHERE c.estado = 1
+  AND NOT EXISTS (
+      SELECT 1 FROM vw_ligacargos_all l
+      WHERE l.numcontrato = c.numcontrato
+        AND l.categoria NOT IN (16, 17)  -- solo anualidades, no recargos moratorios
+        AND l.anio        = YEAR(NOW())
+        AND l.estado      IN (0, 1)
+  );
+
+-- A5: Contratos en estado 2 (SUSP. TEMPORAL) con anualidad pendiente (estado=0)
+-- La anualidad debe estar cancelada (-1) al entrar en ST.
+SELECT 'A5 — Contratos ST con anualidad aún pendiente' AS verificacion,
+    COUNT(DISTINCT c.numcontrato) AS contratos,
+    IF(COUNT(DISTINCT c.numcontrato) = 0, 'OK ✓',
+       'AVISO ⚠ — Revisar _sincronizaParidadFinanciera en transición →2') AS resultado
+FROM contrato c
+JOIN vw_ligacargos_all l ON l.numcontrato = c.numcontrato
+WHERE c.estado   = 2
+  AND l.categoria NOT IN (16, 17)  -- solo anualidades, no recargos moratorios
+  AND l.anio     = YEAR(NOW())
+  AND l.estado   = 0;
+
+
+-- =============================================================================
+-- BLOQUE B: INTEGRIDAD FINANCIERA
+-- =============================================================================
+SELECT '--- B: INTEGRIDAD FINANCIERA ---' AS '';
+
+-- B1: Folios con estados mixtos residuales (debe ser 0 post-saneamiento)
+SELECT 'B1 — Folios pagados sin Cto. residuales (pagado+cancelado)' AS verificacion,
+    COUNT(*) AS folios,
+    IF(COUNT(*) = 0, 'OK ✓', 'CRÍTICO ✗ — Saneamiento incompleto') AS resultado
+FROM (
+    SELECT folio
+    FROM ligacargos
+    WHERE folio > 0
+    GROUP BY folio
+    HAVING COUNT(CASE WHEN estado = 1  THEN 1 END) > 0
+       AND COUNT(CASE WHEN estado = -1 THEN 1 END) > 0
+) t;
+
+-- B2: Multas asamblea (categoria=6) pendientes sincronizables (debe ser 0 post-saneamiento)
+SELECT 'B2 — Multas asamblea pendientes con pagador en activa' AS verificacion,
+    COUNT(*) AS multas,
+    IF(COUNT(*) = 0, 'OK ✓', 'AVISO ⚠ — sp_sinc_asamblea_bulk no resolvió') AS resultado
+FROM ligacargos l_pend
+JOIN contrato c_pend ON l_pend.numcontrato = c_pend.numcontrato
+WHERE l_pend.categoria = 6
+  AND l_pend.estado    = 0
+  AND EXISTS (
+      SELECT 1 FROM ligacargos l_pag
+      JOIN contrato c_pag ON l_pag.numcontrato = c_pag.numcontrato
+      WHERE c_pag.numusuario  = c_pend.numusuario
+        AND l_pag.leyenda     = l_pend.leyenda
+        AND l_pag.categoria   = 6
+        AND l_pag.estado      = 1
+        AND l_pag.monto       > 0
+        AND l_pag.numcontrato != l_pend.numcontrato
+  );
+
+-- B3: Multas asamblea pendientes sincronizables en histórico
+SELECT 'B3 — Multas asamblea pendientes con pagador en histórico' AS verificacion,
+    COUNT(*) AS multas,
+    IF(COUNT(*) = 0, 'OK ✓', 'AVISO ⚠ — sp_sinc_asamblea_bulk no resolvió') AS resultado
+FROM ligacargos_historico l_pend
+JOIN contrato c_pend ON l_pend.numcontrato = c_pend.numcontrato
+WHERE l_pend.categoria = 6
+  AND l_pend.estado    = 0
+  AND EXISTS (
+      SELECT 1 FROM ligacargos_historico l_pag
+      JOIN contrato c_pag ON l_pag.numcontrato = c_pag.numcontrato
+      WHERE c_pag.numusuario  = c_pend.numusuario
+        AND l_pag.leyenda     = l_pend.leyenda
+        AND l_pag.categoria   = 6
+        AND l_pag.estado      = 1
+        AND l_pag.monto       > 0
+        AND l_pag.numcontrato != l_pend.numcontrato
+  );
+
+-- B4: Cargos con monto negativo (anomalía de datos)
+SELECT 'B4 — Cargos con monto negativo' AS verificacion,
+    SUM(cnt) AS total,
+    IF(SUM(cnt) = 0, 'OK ✓', 'CRÍTICO ✗ — Montos inválidos') AS resultado
+FROM (
+    SELECT COUNT(*) AS cnt FROM ligacargos         WHERE monto < 0
+    UNION ALL
+    SELECT COUNT(*) FROM ligacargos_historico WHERE monto < 0
+) t;
+
+-- B5: Cargos pagados (estado=1) sin folio asignado (folio=0 o NULL)
+SELECT 'B5 — Cargos pagados sin folio' AS verificacion,
+    SUM(cnt) AS total,
+    IF(SUM(cnt) = 0, 'OK ✓', 'AVISO ⚠ — Posibles pagos sin recibo registrado') AS resultado
+FROM (
+    SELECT COUNT(*) AS cnt FROM ligacargos
+        WHERE estado = 1 AND (folio IS NULL OR folio = 0) AND monto > 0
+    UNION ALL
+    SELECT COUNT(*) FROM ligacargos_historico
+        WHERE estado = 1 AND (folio IS NULL OR folio = 0) AND monto > 0
+) t;
+
+-- B6: Resumen financiero por estado (snapshot de cartera)
+SELECT 'B6 — Resumen cartera por estado' AS verificacion;
+SELECT
+    CASE l.estado
+        WHEN  0 THEN '0 = Pendiente'
+        WHEN  1 THEN '1 = Pagado'
+        WHEN -1 THEN '-1 = Cancelado'
+        ELSE CONCAT(l.estado, ' = Otro')
+    END AS estado_desc,
+    COUNT(*)      AS registros,
+    SUM(l.monto)  AS monto_total,
+    'vw_ligacargos_all' AS fuente
+FROM vw_ligacargos_all l
+GROUP BY l.estado
+ORDER BY l.estado;
+
+
+-- =============================================================================
+-- BLOQUE C: INTEGRIDAD REFERENCIAL EXTENDIDA
+-- =============================================================================
+SELECT '--- C: INTEGRIDAD REFERENCIAL EXTENDIDA ---' AS '';
+
+-- C1: ligacargos_historico sin contrato válido
+SELECT 'C1 — Histórico sin contrato válido' AS verificacion,
+    COUNT(*) AS huérfanos,
+    IF(COUNT(*) = 0, 'OK ✓', 'AVISO ⚠ — Registros huérfanos en histórico') AS resultado
+FROM ligacargos_historico l
+LEFT JOIN contrato c ON l.numcontrato = c.numcontrato
+WHERE c.numcontrato IS NULL;
+
+-- C2: idpago_vinc en activa apunta a contrato inexistente
+SELECT 'C2 — idpago_vinc activa → contrato inexistente' AS verificacion,
+    COUNT(*) AS inconsistentes,
+    IF(COUNT(*) = 0, 'OK ✓', 'AVISO ⚠') AS resultado
+FROM ligacargos l
+WHERE l.idpago_vinc IS NOT NULL
+  AND l.idpago_vinc != ''
+  AND NOT EXISTS (SELECT 1 FROM contrato c WHERE c.numcontrato = l.idpago_vinc);
+
+-- C2-bis: idpago_vinc en histórico apunta a contrato inexistente
+SELECT 'C2-bis — idpago_vinc histórico → contrato inexistente' AS verificacion,
+    COUNT(*) AS inconsistentes,
+    IF(COUNT(*) = 0, 'OK ✓', 'AVISO ⚠') AS resultado
+FROM ligacargos_historico l
+WHERE l.idpago_vinc IS NOT NULL
+  AND l.idpago_vinc != 0
+  AND NOT EXISTS (SELECT 1 FROM contrato c WHERE c.numcontrato = l.idpago_vinc);
+
+-- C3: contrato_toma sin contrato padre
+SELECT 'C3 — contrato_toma sin contrato padre' AS verificacion,
+    COUNT(*) AS huérfanos,
+    IF(COUNT(*) = 0, 'OK ✓', 'CRÍTICO ✗') AS resultado
+FROM contrato_toma ct
+LEFT JOIN contrato c ON ct.numcontrato = c.numcontrato
+WHERE c.numcontrato IS NULL;
+
+-- C4: Notas sin contrato válido
+SELECT 'C4 — Notas sin contrato válido' AS verificacion,
+    COUNT(*) AS huérfanas,
+    IF(COUNT(*) = 0, 'OK ✓', 'AVISO ⚠') AS resultado
+FROM notas n
+LEFT JOIN contrato c ON n.contrato = c.numcontrato
+WHERE c.numcontrato IS NULL;
+
+
+-- =============================================================================
+-- BLOQUE D: COMPLETUD OPERACIONAL
+-- =============================================================================
+SELECT '--- D: COMPLETUD OPERACIONAL ---' AS '';
+
+-- D1: Contratos sin contrato_toma asociado
+SELECT 'D1 — Contratos sin registro en contrato_toma' AS verificacion,
+    COUNT(*) AS sin_toma,
+    IF(COUNT(*) = 0, 'OK ✓', 'AVISO ⚠ — Revisar contratos incompletos') AS resultado
+FROM contrato c
+WHERE NOT EXISTS (
+    SELECT 1 FROM contrato_toma ct WHERE ct.numcontrato = c.numcontrato
+);
+
+-- D2: Usuarios sin ningún contrato
+SELECT 'D2 — Usuarios sin contratos' AS verificacion,
+    COUNT(*) AS sin_contrato,
+    IF(COUNT(*) = 0, 'OK ✓', 'AVISO ⚠ — Usuarios especiales (U02)') AS resultado
+FROM usuario u
+WHERE NOT EXISTS (
+    SELECT 1 FROM contrato c WHERE c.numusuario = u.noconsecutivo
+);
+
+-- D3: Stored procedures requeridos instalados
+SELECT 'D3 — SPs instalados' AS verificacion;
+SELECT
+    ROUTINE_NAME AS stored_procedure,
+    IF(ROUTINE_NAME IS NOT NULL, 'OK ✓', 'CRÍTICO ✗') AS resultado
+FROM information_schema.ROUTINES
+WHERE ROUTINE_SCHEMA = 'awa'
+  AND ROUTINE_TYPE   = 'PROCEDURE'
+  AND ROUTINE_NAME   IN (
+      'sp_pagar_cargo',
+      'sp_cancelar_cargo',
+      'sp_sinc_asamblea_puntual',
+      'sp_sinc_asamblea_bulk',
+      'sp_revertir_sinc_asamblea'
+  )
+ORDER BY ROUTINE_NAME;
+
+-- D4: Vistas requeridas existentes
+SELECT 'D4 — Vistas requeridas' AS verificacion;
+SELECT
+    TABLE_NAME AS vista,
+    IF(TABLE_NAME IS NOT NULL, 'OK ✓', 'CRÍTICO ✗') AS resultado
+FROM information_schema.VIEWS
+WHERE TABLE_SCHEMA = 'awa'
+  AND TABLE_NAME IN ('vw_ligacargos_all', 'vw_ligacargos_pendientes')
+ORDER BY TABLE_NAME;
+
+-- D5: config_sistema — claves críticas presentes
+SELECT 'D5 — config_sistema: claves críticas' AS verificacion;
+SELECT
+    clave,
+    valor,
+    IF(valor IS NOT NULL AND valor != '', 'OK ✓', 'REVISAR ✗') AS resultado
+FROM config_sistema
+WHERE clave IN (
+    'anio_activo',
+    'mes_inicio_recargos',
+    'porcentaje_recargo',
+    'mes_suspension_temporal',
+    'cat_agua',
+    'cat_drenaje'
+)
+ORDER BY clave;
+
+
+-- =============================================================================
+-- TABLERO RESUMEN EJECUTIVO
+-- Columnas: indicador | valor | umbral_esperado | estado
+-- =============================================================================
+SELECT '═══════════════════════════════════════════════════════' AS '';
+SELECT '  TABLERO RESUMEN EJECUTIVO                           ' AS '';
+SELECT '═══════════════════════════════════════════════════════' AS '';
+
+-- E1: Distribución de contratos por estado con OK/FAIL
+SELECT
+    indicador,
+    valor,
+    umbral_esperado,
+    estado
+FROM (
+    SELECT 'Contratos — ACTIVO (1)'            AS indicador,
+           COUNT(*)                             AS valor,
+           '≥ 1100'                             AS umbral_esperado,
+           IF(COUNT(*) >= 1100, 'OK ✓', 'FAIL ✗') AS estado
+    FROM contrato WHERE estado = 1
+
+    UNION ALL
+    SELECT 'Contratos — SUSP. TEMPORAL (2)',    COUNT(*), '< 400',
+           IF(COUNT(*) < 400, 'OK ✓', 'AVISO ⚠') FROM contrato WHERE estado = 2
+
+    UNION ALL
+    SELECT 'Contratos — SUSP. ADMIN. (3)',      COUNT(*), '< 50',
+           IF(COUNT(*) < 50,  'OK ✓', 'AVISO ⚠') FROM contrato WHERE estado = 3
+
+    UNION ALL
+    SELECT 'Contratos — SUSP. DEFINITIVA (4)',  COUNT(*), 'cualquiera',
+           'INFO'                               FROM contrato WHERE estado = 4
+
+    UNION ALL
+    SELECT 'Contratos — TOTAL',                 COUNT(*), '≥ 1400',
+           IF(COUNT(*) >= 1400, 'OK ✓', 'FAIL ✗') FROM contrato
+
+    UNION ALL
+    SELECT 'Usuarios — TOTAL',                  COUNT(*), '≥ 1400',
+           IF(COUNT(*) >= 1400, 'OK ✓', 'FAIL ✗') FROM usuario
+
+    UNION ALL
+    SELECT 'Usuarios — No localizados (est=2)', COUNT(*), '< 50',
+           IF(COUNT(*) < 50,  'OK ✓', 'AVISO ⚠') FROM usuario WHERE estado = 2
+) t;
+
+-- E2: Cartera financiera con match de totales
+SELECT
+    indicador,
+    valor,
+    umbral_esperado,
+    estado
+FROM (
+    SELECT 'Cargos activa — Pendientes (0)'    AS indicador, COUNT(*) AS valor, '≥ 2000' AS umbral_esperado,
+           IF(COUNT(*) >= 2000, 'OK ✓', 'AVISO ⚠') AS estado
+    FROM ligacargos WHERE estado = 0
+
+    UNION ALL
+    SELECT 'Cargos activa — Pagados (1)',        COUNT(*), '≥ 100',
+           IF(COUNT(*) >= 100, 'OK ✓', 'AVISO ⚠')
+    FROM ligacargos WHERE estado = 1
+
+    UNION ALL
+    SELECT 'Cargos activa — Cancelados (-1)',    COUNT(*), 'cualquiera', 'INFO'
+    FROM ligacargos WHERE estado = -1
+
+    UNION ALL
+    SELECT 'Cargos activa — TOTAL',             COUNT(*), '≥ 2000',
+           IF(COUNT(*) >= 2000, 'OK ✓', 'FAIL ✗')
+    FROM ligacargos
+
+    UNION ALL
+    SELECT 'Histórico — TOTAL',                 COUNT(*), '≥ 180000',
+           IF(COUNT(*) >= 180000, 'OK ✓', 'FAIL ✗')
+    FROM ligacargos_historico
+
+    UNION ALL
+    SELECT 'Histórico — Pendientes residuales (0)', COUNT(*), '< 5000',
+           IF(COUNT(*) < 5000, 'OK ✓', 'AVISO ⚠')
+    FROM ligacargos_historico WHERE estado = 0
+
+    UNION ALL
+    SELECT 'Folios pagados sin Cto. residuales',  COUNT(*), '= 0',
+           IF(COUNT(*) = 0, 'OK ✓', 'CRÍTICO ✗')
+    FROM (
+        SELECT folio FROM ligacargos WHERE folio > 0
+        GROUP BY folio
+        HAVING COUNT(CASE WHEN estado = 1  THEN 1 END) > 0
+           AND COUNT(CASE WHEN estado = -1 THEN 1 END) > 0
+    ) folios_malos
+) t;
+
+-- E3: Match de registros activa+histórico vs total esperado
+SELECT
+    'Split ligacargos — activa + historico' AS indicador,
+    (SELECT COUNT(*) FROM ligacargos) + (SELECT COUNT(*) FROM ligacargos_historico) AS total_combinado,
+    'debe coincidir con dump de Host A'     AS umbral_esperado,
+    IF(
+        (SELECT COUNT(*) FROM ligacargos) + (SELECT COUNT(*) FROM ligacargos_historico) > 0,
+        'OK ✓ — Ver conteos_a_*.txt para match exacto',
+        'FAIL ✗ — Sin datos'
+    ) AS estado;
+
+-- E4: Integridad referencial consolidada (todos los checks en una fila por tipo)
+SELECT
+    check_fk,
+    huerfanos,
+    IF(huerfanos = 0, 'OK ✓', estado_fallo) AS estado
+FROM (
+    SELECT 'contratos sin usuario'                AS check_fk,
+           COUNT(*)                               AS huerfanos,
+           'CRÍTICO ✗'                            AS estado_fallo
+    FROM contrato c LEFT JOIN usuario u ON c.numusuario = u.noconsecutivo
+    WHERE u.noconsecutivo IS NULL
+
+    UNION ALL
+    SELECT 'ligacargos activa sin contrato',       COUNT(*), 'CRÍTICO ✗'
+    FROM ligacargos l LEFT JOIN contrato c ON l.numcontrato = c.numcontrato
+    WHERE c.numcontrato IS NULL
+
+    UNION ALL
+    SELECT 'ligacargos histórico sin contrato',    COUNT(*), 'AVISO ⚠'
+    FROM ligacargos_historico l LEFT JOIN contrato c ON l.numcontrato = c.numcontrato
+    WHERE c.numcontrato IS NULL
+
+    UNION ALL
+    SELECT 'contrato_toma sin contrato padre',     COUNT(*), 'CRÍTICO ✗'
+    FROM contrato_toma ct LEFT JOIN contrato c ON ct.numcontrato = c.numcontrato
+    WHERE c.numcontrato IS NULL
+
+    UNION ALL
+    SELECT 'notas sin contrato válido',            COUNT(*), 'AVISO ⚠'
+    FROM notas n LEFT JOIN contrato c ON n.contrato = c.numcontrato
+    WHERE c.numcontrato IS NULL
+) fk;
+
+-- E5-pre: Paso 3-C — Duplicados y deuda fantasma (saneamiento_duplicados)
+SELECT
+    indicador,
+    valor,
+    umbral_esperado,
+    estado
+FROM (
+    SELECT 'Duplicados sin marcar (nombre no contiene [DUPLICADO])' AS indicador,
+           COUNT(*) AS valor,
+           '= 0' AS umbral_esperado,
+           IF(COUNT(*) = 0, 'OK ✓', 'AVISO ⚠ — Ejecutar 10c_saneamiento_duplicados.sql') AS estado
+    FROM usuario
+    WHERE noconsecutivo IN (751, 1590)
+      AND nombre NOT LIKE '%[DUPLICADO DE%'
+
+    UNION ALL
+    SELECT 'Deuda fantasma cto 391 — pendientes en activa (estado=0)',
+           COUNT(*), '= 0',
+           IF(COUNT(*) = 0, 'OK ✓', 'CRÍTICO ✗ — Contrato SDF con cargos pendientes')
+    FROM ligacargos
+    WHERE numcontrato = '391' AND estado = 0
+
+    UNION ALL
+    SELECT 'Deuda fantasma cto 391 — pendientes en histórico (estado=0)',
+           COUNT(*), '= 0',
+           IF(COUNT(*) = 0, 'OK ✓', 'CRÍTICO ✗ — Contrato SDF con cargos pendientes')
+    FROM ligacargos_historico
+    WHERE numcontrato = '391' AND estado = 0
+
+    UNION ALL
+    SELECT 'Contrato 554 asignado al ID maestro 750',
+           COUNT(*), '= 1',
+           IF(COUNT(*) = 1, 'OK ✓', 'AVISO ⚠ — Contrato 554 no asignado a usuario 750')
+    FROM contrato
+    WHERE numcontrato = '554' AND numusuario = 750
+) t;
+
+-- E5: Saneamiento — resultado del pipeline (Paso 8)
+SELECT
+    indicador,
+    valor,
+    umbral_esperado,
+    estado
+FROM (
+    SELECT 'Multas asamblea pendientes sinc. (activa)' AS indicador,  COUNT(*) AS valor, '= 0' AS umbral_esperado,
+           IF(COUNT(*) = 0, 'OK ✓', 'AVISO ⚠ — sp_sinc no resolvió') AS estado
+    FROM ligacargos l_pend
+    JOIN contrato c_pend ON l_pend.numcontrato = c_pend.numcontrato
+    WHERE l_pend.categoria = 6 AND l_pend.estado = 0
+      AND EXISTS (
+          SELECT 1 FROM ligacargos l_pag
+          JOIN contrato c_pag ON l_pag.numcontrato = c_pag.numcontrato
+          WHERE c_pag.numusuario = c_pend.numusuario
+            AND l_pag.leyenda = l_pend.leyenda AND l_pag.categoria = 6
+            AND l_pag.estado = 1 AND l_pag.monto > 0
+            AND l_pag.numcontrato != l_pend.numcontrato
+      )
+
+    UNION ALL
+    SELECT 'Multas asamblea pendientes sinc. (hist.)',   COUNT(*), '= 0',
+           IF(COUNT(*) = 0, 'OK ✓', 'AVISO ⚠ — sp_sinc no resolvió')
+    FROM ligacargos_historico l_pend
+    JOIN contrato c_pend ON l_pend.numcontrato = c_pend.numcontrato
+    WHERE l_pend.categoria = 6 AND l_pend.estado = 0
+      AND EXISTS (
+          SELECT 1 FROM ligacargos_historico l_pag
+          JOIN contrato c_pag ON l_pag.numcontrato = c_pag.numcontrato
+          WHERE c_pag.numusuario = c_pend.numusuario
+            AND l_pag.leyenda = l_pend.leyenda AND l_pag.categoria = 6
+            AND l_pag.estado = 1 AND l_pag.monto > 0
+            AND l_pag.numcontrato != l_pend.numcontrato
+      )
+) t;
+
+SELECT '═══════════════════════════════════════════════════════' AS '';
+SELECT '  FIN VALIDACIÓN DE INTEGRIDAD                        ' AS '';
+SELECT '═══════════════════════════════════════════════════════' AS '';
+SELECT NOW() AS timestamp_fin;
+
+```
+
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
 
 ---
 

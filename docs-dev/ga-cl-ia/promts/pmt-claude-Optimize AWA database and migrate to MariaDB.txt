@@ -21740,120 +21740,59 @@ ____
 Hice cambios en rama main para los archivos aqui puestos
   /opt/lampp/htdocs/agua/docs-dev/migration-stack2/win10_aguav2/optimizacion
 
-
 ===============================================================================================================================================================
                                                                
-********* AQUI continuar viernes 17, 1 pm   **********
-Que Plan de Pruebas — Sprint Post-Correcciones.md para todos los casos de UI , se tenga almenos o un poco mas de este patron de contenido de ejemplo:
-  Meta: Restricciones de edición para Estado 2.
-  Dato QA: Contrato 9002.
-  Dato Real: Contrato 10 (en Estado 2).
-  Pasos: 
-  Intentar modificar metros o tarifa en ficha.
+********* AQUI continuar Sabado 18, 10 am   **********
 
-_____
-
-. Analiza si todos los scritps  sql y sh  en  migration-aguav2/  se esta utilizando e integrando en alguno de los archivos, dame informe.
-
-Estabilización del plan de: Plan de Pruebas — Sprint Post-Correcciones
-
-Analiza el documento /opt/lampp/htdocs/agua/docs-dev/doc-estabilizacion/Plan de Pruebas — Sprint Post-Correcciones.md
-
-. Valida que todos todos los casos tengan resultado esperado, pasos para realizar la prueba;  que tengan datos de prueba y ya esten en la bd awa host c listos, o si no hay entonces revisa 00_inject_qa_tests.sql  y  añadelo en lugar adecuado del script.
-
-. Que el indice se vincule con la seccion al dar click
+cl
+  - completar lo de pruebas seccion  3
+  - completar lo de pruebas seccion  1 y 2 pára herramienta de automatizacion.
 
 
-....
-A hora sobre: Plan de Pruebas — Sprint Post-Correcciones.md , . POnlo mas legible  tenga:
-.  un indice,  cada nombre de  caso/subcaso tenga un numeral compuesto pero secuencial global para ubicarlo por su numero consecutivo.
-. se respeten las 3 secciones(recuerdo), actualmente solo leo dos; recupera se nos perdio otra vez  creo.  
-. Que todo el monton de reglas, flows de negocio que estan definidos pero inmersas en este documento de pruebas;  analizalos, sintetizalos y conviertelas en reglas de negocio clasificadas para que sean parte de lo que ya contiene Ground Truth para CLAUDE y Runbook  para GEMINI.
--------
++ Empezar ya aprobar con GA automaticas y yo amano review.
 
-Pruebas:
-. incluir prueba de asamblea (del archivo que genera) vs agua/Asistencias (/opt/lampp/htdocs/agua/views/sistema/asistencias.php) 
-  .Pedir que refine el doc de pruebas con datos  especificos de prueba para cada caso, de id de contratos , id cargos  especificos en el caso de los de UI, con pasos precisos, en el caso de los scripts de bd que crea sets de registros de prueba en host a.
-
-  . Algo grave esta sucediendo con la ficha de contrato, al darle click en consultar el idcontrato en inputtex o click en el icono de refresh (Y quizas en otras 
-    acciones de esa ficha F5, etc, no se); sucede esto: Se estan multiplicado apareciendo nuevos recargos mismo nombre con postfijo (r#), analiza de raiz ese comportamiento en cargos; y en particular como issue de la pagina indicada, antes de corregir revisa ese issue no este en otra parte del contrato como en la edición de tomas donde hya Update, inserts.
-
-  . Generame casos de prueba para las 6 transiciones de estado validas de un contrato definidas en alguna sesion pasada; incluso el de suspension temporal a 
-    activa que en la UI se bloque por la regla de que de debe hacer solo en diciiembre.Busca idContratos en host c para estos casos de prueba; en caso no exista 
-    alguno adecuado indicame para que se generen en host a y se sincronice.
-
-  . - cl Test data flow between hosts A B C
-    - a modo visual yo cuadrar cortes de caja resumen años, ciclos al ultimo marzo 2026 
-    - Yo pasar webapp a host y navegar.
-    - Arreglar issues que yo encuentre.
-
-__________
-
-4) Dar  a Claude como input para analisis de encuadre xlsx, renombrar pestañas poner fechas bien.
+. corregir y probar
+. a modo visual yo cuadrar cortes de caja resumen años,    ciclos al ultimo marzo 2026 
+. Dar  a Claude como input para analisis de encuadre xlsx, renombrar pestañas poner fechas bien.
     . Empatar lo mas cercano, todos los que me paso doña ncy. 
 
+. Arreglar issues que yo encuentre.
 
-5) Checar el doc de 20 req, ver que otros scripts faltan para el pase a producción o como saneamiento.
+
++ Probar txt input webapp  de asambleas , como validacion run que pasa .
+. fixes, up , ver fotos y audios de viernes 17 abril, validar asistentes.
+
+
++ Checar el doc de 20 req, ver que otros scripts faltan para el pase a producción o como saneamiento.
   - Para la impl, de no localizados como se com,porta cv, Estado de Cuenta y Corte de Caja (Por Fecha)
 
------------------
++ Otrod
+  .  not-t.txt / RQ OTHER CASES.
+  Ref: Contrato.estado (1  = ACTIVO  |  2 =  Suspensión Temporal  | 3  = Suspensión Administrativa   |  4  =  Suspensión Definitiva)
+  . YO A MANO:
+    ver que esten todos los xlsx Datos-awa-limpieza
+    https://docs.google.com/spreadsheets/d/1wMeMPTSRoyNHqJ_xFljbw2Am82SBeybYBlrglA6uLwM/edit?gid=1440610976#gid=1440610976
+    En http://localhost/agua/admin/analisis/inventario_saneamiento.php
 
-6) Genera un documento amplio y descriptivo funcional para el rol del cajero operador; en el ambito de los flujos de las transiciones de los 6 casos de cambio de estado para un contrato en la webapp. Incluir:
+
+
+===============================================================================================================================================================
+
++ Depurar/Generar md de documentacio  tech y de negocio de la webapp
+
+1) Genera un documento amplio y descriptivo funcional para el rol del cajero operador; en el ambito de los flujos de las transiciones de los 6 casos de cambio de estado para un contrato en la webapp. Incluir:
     . Todas las reglas de paridad con la ficha de datos de tomas asociadas al contrato, cargos, recargos,Amnistía, EXENCIÓNes, reglas para cada estado; y demas reglas y restricciones que no liste aqui y puedan existir o esten ocultas. 
     . Gaps e issues. 
     . Insumo: Usa todo el codigo fuente de la webapp php, y bd awa host c.
     . Formato del documento html con digramas en formato png o jpeg.
   
 
-7) Genera un documento amplio y descriptivo funcional para el rol del cajero operador y tesorero; en el ambito funcional de corte de caja, deudores, y cartera vencida. 
+2) Genera un documento amplio y descriptivo funcional para el rol del cajero operador y tesorero; en el ambito funcional de corte de caja, deudores, y cartera vencida. 
     . Gaps e issues. 
     . Insumo: Utiliza el codigo fuente relacionado con esos temas /opt/lampp/htdocs/agua/reportes/ y bd awa host c.
     . Formato del documento html con digramas en formato png o jpeg.
   
-8) Genera un documento ejecutivo  para el comite sobre los beneficios obtenidos del sanemiento, split de ligacargos, protecciones rigidas entre las transiciones de los estados validos del contrato, reglas, y paridad en la ficha del contrato.
-
----------------
-9 Yo elaborar descubrimiento de:
-      Exponerle caso ()Pasarle el xslx), si ya se que 160x ctos estan mezclados, y se deben arreglar de manera manual, que conviene:
-      desactivar la logica de reglas restrictivas para permitir al operador arreglarlas manualmenten en host c.
-      que el operador arreglarlas manualmenten en host b y entonces se realice la sincronizacion.
-      comparar contra el que: . ESPERAR QUE DOÑA NANCY LOS REALICE Y MACHEAR CONTRA ESTA BUSQUEDA CLD:
-
-
-
-===============================================================================================================================================================  
-Jueves 16 abril:
-. Ir por backup, y darme ella la lista de contratos paso a activo, que eran cruzados !
-
-===============================================================================================================================================================
-
-+ not-t.txt / RQ OTHER CASES.
-Ref: Contrato.estado (1  = ACTIVO  |  2 =  Suspensión Temporal  | 3  = Suspensión Administrativa   |  4  =  Suspensión Definitiva)
-
-YO A MANO:
-  1.2 ver que esten todos los xlsx Datos-awa-limpieza
-    https://docs.google.com/spreadsheets/d/1wMeMPTSRoyNHqJ_xFljbw2Am82SBeybYBlrglA6uLwM/edit?gid=1440610976#gid=1440610976
-    En http://localhost/agua/admin/analisis/inventario_saneamiento.php
-
-DEPURACIONES:
-  - Crear  Lista depurada de lo que va a realizar pruebas  y dar vobo doña Nancy y darselo a claude para que vea si esta todo eso incluido, o en scripts y que gaps hay.
-  
-  - Orden y prioridad de depuración manual x doña nancy:
-
-  --- Prioridad 1 manual ---
-    a) mixtos_sp_actv.php   (corregir todos sus datos, principalmente por su estado , y su ficha de tomas), validar sus cargos.
-    b) Sinc. Multas Asamblea (auto)
-
-   --- Prioridad 1 automaticas ---
-    Depuracion de Cto.suspendidos y sus cargos cancelados.
-    Sync de recibos/edo cuenta/deuda de pago multa a otros contratos del mismo usuario.
-    Huerfanos como baldemar por falla en (R1)
-    ... ?
-
-===============================================================================================================================================================
-1) cv_por_tipo_edo_cto
-    Auditoría de Cartera Fantasma
-    Análisis resumido y detallado de recargos por estado.
+3) Genera un documento ejecutivo  para el comite sobre los beneficios obtenidos del sanemiento, split de ligacargos, protecciones rigidas entre las transiciones de los estados validos del contrato, reglas, y paridad en la ficha del contrato.
 
 
 ===============================================================================================================================================================
@@ -21930,6 +21869,66 @@ ok  2.1
 ok  3) Validar consistencia de todos los scripts    migration-aguav2/ , corrije de ser necesario; y ejecuta el flow(s) de datos host b => host a => host c;  a priori en forma manual borrare la bd awa en host c.
 
       . Ver si toda la sync de datos de host a hacia host c, paso bien , logs/sync_YYYYMMDD_HHMMSS.log junto con todo el output del sync. INFORME FORMATO !
+
+----------
+. Analiza si todos los scritps  sql y sh  en  migration-aguav2/  se esta utilizando e integrando en alguno de los archivos, dame informe.
+
+Estabilización del plan de: Plan de Pruebas — Sprint Post-Correcciones
+
+Analiza el documento /opt/lampp/htdocs/agua/docs-dev/doc-estabilizacion/Plan de Pruebas — Sprint Post-Correcciones.md
+
+. Valida que todos todos los casos tengan resultado esperado, pasos para realizar la prueba;  que tengan datos de prueba y ya esten en la bd awa host c listos, o si no hay entonces revisa 00_inject_qa_tests.sql  y  añadelo en lugar adecuado del script.
+
+. Que el indice se vincule con la seccion al dar click
+
+
+....
+A hora sobre: Plan de Pruebas — Sprint Post-Correcciones.md , . POnlo mas legible  tenga:
+.  un indice,  cada nombre de  caso/subcaso tenga un numeral compuesto pero secuencial global para ubicarlo por su numero consecutivo.
+. se respeten las 3 secciones(recuerdo), actualmente solo leo dos; recupera se nos perdio otra vez  creo.  
+. Que todo el monton de reglas, flows de negocio que estan definidos pero inmersas en este documento de pruebas;  analizalos, sintetizalos y conviertelas en reglas de negocio clasificadas para que sean parte de lo que ya contiene Ground Truth para CLAUDE y Runbook  para GEMINI.
+
+
+. Algo grave esta sucediendo con la ficha de contrato, al darle click en consultar el idcontrato en inputtex o click en el icono de refresh (Y quizas en otras 
+    acciones de esa ficha F5, etc, no se); sucede esto: Se estan multiplicado apareciendo nuevos recargos mismo nombre con postfijo (r#), analiza de raiz ese comportamiento en cargos; y en particular como issue de la pagina indicada, antes de corregir revisa ese issue no este en otra parte del contrato como en la edición de tomas donde hya Update, inserts.
+
+  . Generame casos de prueba para las 6 transiciones de estado validas de un contrato definidas en alguna sesion pasada; incluso el de suspension temporal a 
+    activa que en la UI se bloque por la regla de que de debe hacer solo en diciiembre.Busca idContratos en host c para estos casos de prueba; en caso no exista 
+    alguno adecuado indicame para que se generen en host a y se sincronice.
+
+  . - cl Test data flow between hosts A B C
+  
+
+-------
+Estabilización  plan de pruebas
+Analiza profundamente el documento de abajo, para:
+
+1) Sección 1  y Sección 2
+  . Esten homologados en estrutura y contenido (que, como, resultado); datos de prueba sean especificos de dos tipos: existente en host c o los que no se tengan en host c, crearlos en host a con /opt/lampp/htdocs/agua/docs-dev/migration-aguav2/sync_hosta_to_hostc/00_inject_qa_tests.sql
+2) Usando todo el codigo fuente de la webapp /opt/lampp/htdocs/agua/ , bd host c; analiza y determina:
+  . SI los casos actuales en el documento esta correctos y completos; de hacer falta crealos e incluyelos.
+  . De estar erroneos, o incompletos con gaps , corrigelos y actualizalos.
+  . reClasificalos o agrupalos de ser necesarios con sub casos, por ejemplo.
+
+
+/opt/lampp/htdocs/agua/docs-dev/doc-estabilizacion/Plan de Pruebas — Sprint Post-Correcciones.md
+
+3) La SECCIÓN 3: PRUEBAS DE BACKEND (EJECUCIÓN POR IA) 
+  . No la revises todavia, eso sera la siguiente fase.
+
++ Subir bd actualizada en host b.
+. correr a amano script sync 
+    
+. pasar webapp 
+
+
+. Plan de Pruebas — Sprint Post-Correcciones.md para todos los casos de UI , se tenga almenos o un poco mas de este patron de contenido de ejemplo:
+  Meta: Restricciones de edición para Estado 2.
+  Dato QA: Contrato 9002.
+  Dato Real: Contrato 10 (en Estado 2).
+  Pasos: 
+  Intentar modificar metros o tarifa en ficha.
+
 
 ===============================================================================================================================================================
 
