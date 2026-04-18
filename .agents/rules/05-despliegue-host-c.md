@@ -13,13 +13,14 @@ La migración está **completada, consolidada y declarada verificada**. Host C t
 - Scripts de setup versionados: `docs-dev/migration-aguav2/host-c-setup/` (02→09, manual/)
 - `tusuario` eliminada de BD y de todos los scripts (tabla fantasma — no usada por PHP)
 - Pipeline de saneamiento integrado y automatizado en `run_sync.sh` (Paso 8)
-- Protocolo de migración documentado: `docs-dev/migration-aguav2/MIGRATION_PROTOCOL.md`
+- Protocolo de migración documentado: `docs-dev/doc-estabilizacion/MIGRATION_PROTOCOL.md`
 - Declaración de homologación reportes: `docs-dev/doc-estabilizacion/REPORTES_CAJA_CARTERA_DECLARACION.md`
 - **Terminología de Sesión**: Este conjunto de documentos constituye el **Ground Truth (para Claude)** y el **Runbook (para Gemini)**.
 
-### Pipelines probados (ejecución de referencia: 2026-04-14 — BD Host C regenerada desde cero)
+### Pipelines probados (ejecución de referencia: 2026-04-14; última validación: 2026-04-17)
 - **B→A**: ejecutado y validado — 8 pasos OK
-- **A→C**: ejecutado y validado — 9 pasos (incluyendo Paso 8-B nuevo) + 7/7 checks de integridad OK
+- **A→C**: ejecutado y validado — Pasos 1–8 → 8-C → 8-B → 9 + 7/7 checks OK
+- **Retención de artefactos**: 2 logs + 2 backups por pipeline (rotación automática en cada ejecución)
 
 ---
 
@@ -39,17 +40,15 @@ Host B (Legado V1) → Host A (Transición V1+) → Host C (Destino V2)
 
 **Por qué no B→C directo**: el schema de B (v1) es incompatible con C (v2). Host A actúa como la capa de transformación Bridge (limpieza y normalización V1+). El salto a V2 ocurre en el paso A→C vía el split de tablas.
 
-### Paso 1 — Sync B → A (script existente)
+### Comando canónico (orquestador maestro)
 ```bash
-cd docs-dev/migration-aguav2/syncawa_hostb_to_hosta/
-./run_sync.sh
+cd docs-dev/migration-aguav2/
+./Full-Pipeline-Sync.sh                 # Producción
+./Full-Pipeline-Sync.sh --with-qa       # Testing con Contratos Mártires
+./Full-Pipeline-Sync.sh --skip-b        # Offline (usa datos ya en A)
 ```
 
-### Paso 2 — Sync A → C (pipeline)
-```bash
-cd docs-dev/migration-aguav2/sync_hosta_to_hostc/
-./run_sync.sh
-```
+Los scripts individuales siguen disponibles para uso aislado de emergencia (ver tabla de comandos en esta misma regla).
 
 El protocolo A→C aplica automáticamente:
 - `cambios`: importa con columnas explícitas (C tiene `id` AUTO_INCREMENT col 1)
@@ -164,12 +163,15 @@ Para estandarizar y facilitar las ejecuciones durante el desarrollo, se han defi
 
 ### 🛠️ Comportamiento de `Full-Pipeline-Sync.sh`
 
-1. **Sin flag (Default)**:
-   - Preserva la estructura actual de Host C.
-   - Solo refresca los datos (B → A → C). Es el flujo más rápido y seguro para el ciclo diario.
-2. **Con flag `--setup`**:
-   - Realiza un `DROP` y recreación total del esquema V2 en Host C antes de iniciar la carga de datos.
-   - Uso: Simulaciones de "Setup Producción" o desastre en la BD del Host C.
+El script **siempre ejecuta `DROP DATABASE` en Host C** (vía `run_setup.sh`). No hay modo que lo omita. Los flags solo controlan fuente de datos y datos de prueba:
+
+| Flag | Comportamiento |
+|------|---------------|
+| *(sin flag)* | **Producción**: extrae de B → sobreescribe A → DROP+recrea C → importa y sanea |
+| `--with-qa` | **Testing**: igual que producción, pero inyecta Contratos Mártires (9001-9005) en A antes de importar a C |
+| `--skip-b` | **Offline**: salta el volcado de Host B; usa datos ya existentes en A. Combinable con `--with-qa` |
+
+> **Importante para agentes IA**: No existe flag `--setup`. El DROP es incondicional y está documentado en el log `setup_YYYYMMDD_HHMMSS.log` dentro de `sync_hosta_to_hostc/logs/`.
 
 ---
 

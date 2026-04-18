@@ -58,13 +58,23 @@ Al importar desde B, el post-procesamiento recalcula automáticamente:
 
 ### Comando de Uso
 ```bash
+# Vía orquestador maestro (recomendado):
+cd docs-dev/migration-aguav2/
+./Full-Pipeline-Sync.sh              # Producción completa B→A→C
+./Full-Pipeline-Sync.sh --skip-b     # Solo A→C (Host B apagado o iteración rápida)
+
+# Vía script individual (emergencia):
 cd docs-dev/migration-aguav2/syncawa_hostb_to_hosta/
-./run_sync.sh               # Sync completo
+./run_sync.sh               # Sync B→A completo
 ./run_sync.sh --pre-flight  # Solo comparar schemas (seguro, sin modificar)
 ./run_sync.sh --solo-backup # Solo backup de A
 ```
 
+### Retención de artefactos
+- **Logs** (`logs/sync_*.log`): se conservan los **2 más recientes** — rotación automática al inicio de cada ejecución.
+- **Backups** (`bd-schema/sync/backups/backup_host_a_*.sql.gz`): se conservan los **2 más recientes**.
+
 ---
-**Nota para Gemini**: Al recibir la instrucción de "refrescar datos" o "importar producción", este es el protocolo de seguridad obligatorio. Los scripts ya existen — referenciarlos antes de proponer pasos manuales.
+**Nota para Gemini/Claude**: Al recibir la instrucción de "refrescar datos" o "importar producción", el comando canónico es `Full-Pipeline-Sync.sh`. Los scripts individuales existen para emergencia — referenciarlos antes de proponer pasos manuales.
 
 

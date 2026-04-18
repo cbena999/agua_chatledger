@@ -115,7 +115,7 @@ git push origin feature/upgrade-v2-win-xampp
 ```
 
 > **⚠️ Filosofía de Uso**: Los scripts de orquestación (`Sync-*` y `Full-Pipeline-Sync`) son **Herramientas de Migración**, no tareas operativas recurrentes.
-> Ver tabla de comandos canónicos, rutas exactas y comportamiento de flags en: `docs-dev/migration-aguav2/MIGRATION_PROTOCOL.md`
+> Ver tabla de comandos canónicos, rutas exactas y comportamiento de flags en: `docs-dev/doc-estabilizacion/MIGRATION_PROTOCOL.md`
 
 ---
 
