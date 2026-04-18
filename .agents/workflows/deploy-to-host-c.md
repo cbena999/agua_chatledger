@@ -8,8 +8,8 @@ Este workflow cubre dos escenarios para Host C:
 
 > [!IMPORTANT]
 > Host C ya tiene schema v2 completo y webapp adaptada (estado: UP & RUNNING desde 2026-04-06).
-> Ambos pipelines validados en ejecución real (2026-04-07): Proceso 1 y Proceso 2 — 7/7 checks OK.
-> Ver [Regla 05](./../rules/05-despliegue-host-c.md) para diferencias de schema A vs C y comandos canónicos (Sync-A2C).
+> Pipeline validado en ejecución real (2026-04-17): 7/7 checks reales OK + 5 checks QA (solo `--with-qa`).
+> Ver [Regla 05](./../rules/05-despliegue-host-c.md) para diferencias de schema A vs C y flags del orquestador.
 > `tusuario` eliminada de BD y scripts — tabla fantasma no usada por la webapp.
 
 ---
@@ -17,31 +17,36 @@ Este workflow cubre dos escenarios para Host C:
 ## Escenario 1: Refresh de Datos de Producción → Host C
 
 **Flujo obligatorio**: B → A → C (nunca B→C directo — schemas incompatibles).
+**Comando canónico**: `Full-Pipeline-Sync.sh` — encapsula los dos pipelines en cadena.
 
-### Paso 1 — Sync B → A
 ```bash
-cd docs-dev/migration-aguav2/syncawa_hostb_to_hosta/
-./run_sync.sh
-```
-Esperar que complete con éxito (≈32 segundos). Verificar log final sin errores.
-
-### Paso 2 — Sync A → C (Comando canónico: Sync-A2C)
-```bash
-cd docs-dev/migration-aguav2/sync_hosta_to_hostc/
-./run_sync.sh
+cd docs-dev/migration-aguav2/
+./Full-Pipeline-Sync.sh                    # Producción: B→A→C (datos vienen de Host B)
+./Full-Pipeline-Sync.sh --skip-b           # Offline: salta volcado de B, usa A tal como está → C
+./Full-Pipeline-Sync.sh --with-qa          # Testing: B→A→C + inyecta datos sintéticos en A→C
+./Full-Pipeline-Sync.sh --with-qa --skip-b # Testing offline: sin conectar a Host B
 ```
 
-El pipeline A→C ejecuta automáticamente:
+> Los scripts individuales (`syncawa_hostb_to_hosta/run_sync.sh`, `sync_hosta_to_hostc/run_sync.sh`) existen para uso aislado de emergencia. Para el flujo normal, usar siempre `Full-Pipeline-Sync.sh`.
 
-| Paso | Acción |
-| :---: | :--- |
-| 1 | Verifica conectividad A y C |
-| 2 | Backup comprimido de Host C (`backups/backup_host_c_*.sql.gz`) |
-| 3 | Dump desde Host A con transformaciones (idpago_vinc, fechas) |
-| 4 | Vacía tablas de negocio en C (FK-safe) |
-| 5 | Importa datos con transformaciones de schema v1+→v2 |
-| 6 | Re-ejecuta split `ligacargos` (TRUNCATE historico + re-split) |
-| 7 | Validaciones finales (`05_validate.sql`) |
+El pipeline A→C (parte del orquestador) ejecuta automáticamente:
+
+| Paso | Script | Acción |
+| :---: | :--- | :--- |
+| 0 QA | `00_cleanup_qa_tests.sql` + `00_inject_qa_tests.sql` | Solo `--with-qa`: inyecta Contratos Mártires 9001–9008 en A |
+| 1 | `run_sync.sh` | Verifica conectividad A y C |
+| 2 | `01_backup_host_c.sh` | Backup comprimido de Host C (`backups/`, máx. 2) |
+| 3 | Inline | Dump desde Host A con transformaciones (idpago_vinc, fechas) |
+| 4 | Inline | Vacía tablas de negocio en C (FK-safe) |
+| 5 | Inline | Importa datos con transformaciones de schema v1+→v2 |
+| 6 | `06_split_ligacargos.sql` | Split: anio ≤ 2025 → `ligacargos_historico` |
+| 7 | `05_validate.sql` | Validaciones post-import (conteos, split) |
+| 8 | `10_pipeline_saneamiento.sql` | Folios mixtos + asamblea bulk + patch cats v2 |
+| 8-B | `10b_saneamiento_exencion_recargos.sql` | Cancela recargos indebidos contratos exentos 1er año |
+| 8-C | `10c_saneamiento_duplicados.sql` | Saneamiento duplicados reales (siempre) |
+| 8-C QA | `10c_qa_duplicados.sql` | Solo `--with-qa`: duplicados sintéticos 990x |
+| 9 | `12_validate_pipeline.sql` | Tablero validación datos reales (7 checks, siempre) |
+| 9 QA | `12_validate_pipeline_qa.sql` | Solo `--with-qa`: validación datos sintéticos 900x |
 
 ### Configuración del sync A→C
 Editar `sync_hosta_to_hostc/sync_config.sh` para actualizar conteos esperados tras cada sync exitoso.
@@ -82,8 +87,10 @@ cd docs-dev/migration-aguav2/host-c-setup/
 
 ## Logs y Evidencia (sync A→C)
 
-- `sync_hosta_to_hostc/logs/sync_YYYYMMDD_HHMMSS.log`
-- `sync_hosta_to_hostc/backups/backup_host_c_*.sql.gz` (máx. 5)
+- `sync_hosta_to_hostc/logs/sync_YYYYMMDD_HHMMSS.log` (rotación automática, máx. 2)
+- `sync_hosta_to_hostc/logs/setup_YYYYMMDD_HHMMSS.log` (log del DROP+setup C)
+- `sync_hosta_to_hostc/logs/pipeline_YYYYMMDD_HHMMSS.log` (log maestro del orquestador)
+- `sync_hosta_to_hostc/backups/backup_host_c_*.sql.gz` (máx. 2)
 
 ---
 **Nota para agentes IA (Claude/Gemini)**: Antes de proponer cualquier cambio en Host C, verificar si ya existe un script en `host-c-setup/` que lo cubra. En caso de necesitar revertir, usar `run_setup.sh` para reconstruir desde cero.

@@ -60,8 +60,11 @@ Al importar desde B, el post-procesamiento recalcula automáticamente:
 ```bash
 # Vía orquestador maestro (recomendado):
 cd docs-dev/migration-aguav2/
-./Full-Pipeline-Sync.sh              # Producción completa B→A→C
-./Full-Pipeline-Sync.sh --skip-b     # Solo A→C (Host B apagado o iteración rápida)
+./Full-Pipeline-Sync.sh                    # Producción: B→A→C (datos vienen de Host B)
+./Full-Pipeline-Sync.sh --skip-b           # Offline: salta volcado de B, usa A tal como está → C
+./Full-Pipeline-Sync.sh --with-qa          # Testing: B→A→C + inyecta datos sintéticos en A→C
+./Full-Pipeline-Sync.sh --with-qa --skip-b # Testing offline: sin conectar a Host B
+# Cualquier otra flag causa exit 1 con "Flag desconocida: X"
 
 # Vía script individual (emergencia):
 cd docs-dev/migration-aguav2/syncawa_hostb_to_hosta/

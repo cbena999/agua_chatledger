@@ -43,9 +43,11 @@ Host B (Legado V1) → Host A (Transición V1+) → Host C (Destino V2)
 ### Comando canónico (orquestador maestro)
 ```bash
 cd docs-dev/migration-aguav2/
-./Full-Pipeline-Sync.sh                 # Producción
-./Full-Pipeline-Sync.sh --with-qa       # Testing con Contratos Mártires
-./Full-Pipeline-Sync.sh --skip-b        # Offline (usa datos ya en A)
+./Full-Pipeline-Sync.sh                    # Producción: B→A→C (datos vienen de Host B)
+./Full-Pipeline-Sync.sh --skip-b           # Offline: salta volcado de B, usa A tal como está → C
+./Full-Pipeline-Sync.sh --with-qa          # Testing: B→A→C + inyecta datos sintéticos en A→C
+./Full-Pipeline-Sync.sh --with-qa --skip-b # Testing offline: sin conectar a Host B
+# Cualquier otra flag causa exit 1 con "Flag desconocida: X"
 ```
 
 Los scripts individuales siguen disponibles para uso aislado de emergencia (ver tabla de comandos en esta misma regla).
@@ -83,10 +85,10 @@ Estos scripts son **Herramientas de Migración y Transición** diseñadas para e
 
 ## Split `ligacargos` — Implementado
 
-| Tabla | Criterio | Filas aprox |
+| Tabla | Criterio | Filas (ref. 2026-04-17) |
 |-------|---------|-------------|
-| `ligacargos` (activa) | `anio >= 2026` | ~2,607 |
-| `ligacargos_historico` | `anio <= 2025` | ~191,906 |
+| `ligacargos` (activa) | `anio >= 2026` | 4,993 |
+| `ligacargos_historico` | `anio <= 2025` | 193,040 |
 
 Las vistas `vw_ligacargos_all` y `vw_ligacargos_pendientes` unifican ambas tablas. Los PHPs no consultan `ligacargos_historico` directamente.
 
@@ -135,9 +137,11 @@ Cualquier cambio estructural en Host C requiere:
 
 **Para revertir toda la migración** (reconstrucción desde cero):
 ```bash
-cd docs-dev/migration-aguav2/host-c-setup/
+cd docs-dev/migration-aguav2/
+./Full-Pipeline-Sync.sh        # Reconstruye C completo (DROP implícito) y repuebla datos
+# O si solo se quiere reconstruir el schema sin datos:
+cd host-c-setup/
 ./run_setup.sh
-# Luego re-ejecutar sync A→C para repoblar datos
 ```
 
 ---
@@ -165,11 +169,15 @@ Para estandarizar y facilitar las ejecuciones durante el desarrollo, se han defi
 
 El script **siempre ejecuta `DROP DATABASE` en Host C** (vía `run_setup.sh`). No hay modo que lo omita. Los flags solo controlan fuente de datos y datos de prueba:
 
-| Flag | Comportamiento |
-|------|---------------|
-| *(sin flag)* | **Producción**: extrae de B → sobreescribe A → DROP+recrea C → importa y sanea |
-| `--with-qa` | **Testing**: igual que producción, pero inyecta Contratos Mártires (9001-9005) en A antes de importar a C |
-| `--skip-b` | **Offline**: salta el volcado de Host B; usa datos ya existentes en A. Combinable con `--with-qa` |
+| Flag | B→A | Setup C (DROP) | A→C | Datos QA (9001–9008) |
+|------|:---:|:---:|:---:|:---:|
+| *(sin flag)* | ✅ | ✅ | ✅ | ❌ |
+| `--skip-b` | SALTADO | ✅ | ✅ | ❌ |
+| `--with-qa` | ✅ | ✅ | ✅ | ✅ inyecta en A→C |
+| `--with-qa --skip-b` | SALTADO | ✅ | ✅ | ✅ inyecta en A→C |
+
+> El DROP DATABASE en Host C **siempre ocurre** en todos los modos, sin excepción.
+> La inyección QA (Contratos Mártires 9001–9008) ocurre como pre-condición al inicio de `run_sync.sh` A→C, no afecta el pipeline B→A.
 
 > **Importante para agentes IA**: No existe flag `--setup`. El DROP es incondicional y está documentado en el log `setup_YYYYMMDD_HHMMSS.log` dentro de `sync_hosta_to_hostc/logs/`.
 

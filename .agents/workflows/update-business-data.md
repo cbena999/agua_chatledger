@@ -53,7 +53,7 @@ El orquestador `run_sync.sh` ejecuta automáticamente:
 
 Cada ejecución genera:
 - `logs/sync_YYYYMMDD_HHMMSS.log` — log completo del pipeline
-- `backups/backup_host_a_YYYYMMDD_HHMMSS.sql.gz` — backup de A (máx. 5 conservados)
+- `backups/backup_host_a_YYYYMMDD_HHMMSS.sql.gz` — backup de A (máx. 2 conservados)
 - `work/conteos_b_YYYYMMDD_HHMMSS.txt` — conteos de referencia de B
 
 ---
@@ -69,9 +69,12 @@ gunzip -c backups/backup_host_a_TIMESTAMP.sql.gz | /opt/lampp/bin/mysql -u root 
 
 ## Continuar hacia Host C
 
-Si el objetivo es también refrescar Host C, ejecutar después:
+Si el objetivo es también refrescar Host C, usar el orquestador maestro desde el inicio en lugar de los scripts individuales:
 ```bash
-cd ../migration-aguav2/sync_hosta_to_hostc/
-./run_sync.sh
+cd docs-dev/migration-aguav2/
+./Full-Pipeline-Sync.sh                    # Producción: B→A→C completo
+./Full-Pipeline-Sync.sh --with-qa          # Testing: incluye Contratos Mártires 9001–9008
+./Full-Pipeline-Sync.sh --skip-b           # Offline: usa A tal como está → C
+./Full-Pipeline-Sync.sh --with-qa --skip-b # Testing offline
 ```
-Ver workflow [deploy-to-host-c.md](deploy-to-host-c.md) para detalles sobre el comando Sync-A2C.
+Ver workflow [deploy-to-host-c.md](deploy-to-host-c.md) para el detalle completo del pipeline A→C.
