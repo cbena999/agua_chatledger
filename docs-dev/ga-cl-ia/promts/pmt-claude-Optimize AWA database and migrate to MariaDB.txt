@@ -21740,17 +21740,11 @@ ____
 Hice cambios en rama main para los archivos aqui puestos
   /opt/lampp/htdocs/agua/docs-dev/migration-stack2/win10_aguav2/optimizacion
 
-==============================================  AQUI continuar Sabado 18, 10 am   ==============================================================================
-CL,
-  Valide coherencia de los scripts , se hicieron cambios  en .sh, .sql y .mds
-  actualice los brains suyo en sincronia con gemini.
+==============================================  AQUI continuar Domingo 19, 10 am   ==============================================================================
 
-  se comitie
-
-1)
-. CORREr full.sh con  qa
-. pasar webapp
-    Probar las bitacoras, menu de listados engranaje, de GA:  Investigating Host Synchronization Anomalies
+1) Pruebas y validaciones manuales 
+  . Pasar webapp
+  . Probar las bitacoras, menu de listados engranaje, de GA:  Investigating Host Synchronization Anomalies
     ga arregle.
  
 2 GA prubas UI
@@ -21957,6 +21951,13 @@ SI ya no hay mas casos entonces:
 SIga pendiente Punto 3.
 Primero atediente SECCIÓN 3: PRUEBAS DE BACKEND (EJECUCIÓN POR IA) 
 . Analiza y corrige lo necesario para  que puedan ser input minimo adecuado para que tu u otra ia, puedan realizarlo; y considera tanto datos de rprueba existentes en host c, como nuevos a crear en host a , atavez del scrip correspondiente.
+
+CL,
+  Valide coherencia de los scripts , se hicieron cambios  en .sh, .sql y .mds
+  actualice los brains suyo en sincronia con gemini.
+
+  se comitie
+
 
 ---
 ===============================================================================================================================================================
