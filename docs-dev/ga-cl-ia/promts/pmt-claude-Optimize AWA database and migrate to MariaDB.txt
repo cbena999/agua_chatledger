@@ -21740,35 +21740,46 @@ ____
 Hice cambios en rama main para los archivos aqui puestos
   /opt/lampp/htdocs/agua/docs-dev/migration-stack2/win10_aguav2/optimizacion
 
-===============================================================================================================================================================
-                                                               
-********* AQUI continuar Sabado 18, 10 am   **********
+==============================================  AQUI continuar Sabado 18, 10 am   ==============================================================================
+CL,
+  Valide coherencia de los scripts , se hicieron cambios  en .sh, .sql y .mds
+  actualice los brains suyo en sincronia con gemini.
 
-cl
-  - completar lo de pruebas seccion  3
-  - completar lo de pruebas seccion  1 y 2 pára herramienta de automatizacion.
+  se comitie
 
-
+1)
+. CORREr full.sh con  qa
+. pasar webapp
+    Probar las bitacoras, menu de listados engranaje, de GA:  Investigating Host Synchronization Anomalies
+    ga arregle.
+ 
+2 GA prubas UI
 + Empezar ya aprobar con GA automaticas y yo amano review.
-
-. corregir y probar
-. a modo visual yo cuadrar cortes de caja resumen años,    ciclos al ultimo marzo 2026 
-. Dar  a Claude como input para analisis de encuadre xlsx, renombrar pestañas poner fechas bien.
-    . Empatar lo mas cercano, todos los que me paso doña ncy. 
-
+. corregir y probar.
 . Arreglar issues que yo encuentre.
 
+________
 
-+ Probar txt input webapp  de asambleas , como validacion run que pasa .
-. fixes, up , ver fotos y audios de viernes 17 abril, validar asistentes.
+3) CL
+3.1) Probar txt input webapp  de asambleas , como validacion run que pasa .
+  . fixes, up , ver fotos y audios de viernes 17 abril, validar asistentes.
 
+
+3.2) Dar  a Claude como input para analisis de encuadre xlsx, renombrar pestañas poner fechas bien.
+  . Empatar lo mas cercano, todos los que me paso doña ncy. 
+  . a modo visual yo cuadrar cortes de caja resumen años,    ciclos al ultimo marzo 2026 
+
+__________
+Yo:
 
 + Checar el doc de 20 req, ver que otros scripts faltan para el pase a producción o como saneamiento.
   - Para la impl, de no localizados como se com,porta cv, Estado de Cuenta y Corte de Caja (Por Fecha)
 
 + Otrod
   .  not-t.txt / RQ OTHER CASES.
-  Ref: Contrato.estado (1  = ACTIVO  |  2 =  Suspensión Temporal  | 3  = Suspensión Administrativa   |  4  =  Suspensión Definitiva)
+  
+  . Ref: Contrato.estado (1  = ACTIVO  |  2 =  Suspensión Temporal  | 3  = Suspensión Administrativa   |  4  =  Suspensión Definitiva)
+  
   . YO A MANO:
     ver que esten todos los xlsx Datos-awa-limpieza
     https://docs.google.com/spreadsheets/d/1wMeMPTSRoyNHqJ_xFljbw2Am82SBeybYBlrglA6uLwM/edit?gid=1440610976#gid=1440610976
@@ -21929,7 +21940,25 @@ Analiza profundamente el documento de abajo, para:
   Pasos: 
   Intentar modificar metros o tarifa en ficha.
 
+---
+cl
+  - completar lo de pruebas seccion  3
+  - completar lo de pruebas seccion  1 y 2 pára herramienta de automatizacion.
 
+1) Realiza todas, y clasificalas donde correspoda; si consideras otros subcasos crealos.
+
+2) Añade una pruebas mas tambien clasificala, es "webapp Asistencias en su contra parte con webapp agua" (Boton verde en menu principal).
+webapp agua tiene relacion con una mini webapp  /opt/lampp/htdocs/agua/asamblea/ la cual como resultante genera este archivo /home/carlos/Documents/tmp01/hostb/cone.txt y "Asistencias" boton verde en agua webapp, en su actividad debe leer ese txt , procesarlo y tiene que ver con store procedures  que identicaste de asambleas. 
+
+SI ya no hay mas casos entonces:
+3) Despues, analiza y corrige lo necesario para  que seccion 1 y 2; puedan ser input minimo adecuado para que una herramienta de automatizacion via web browser pueda realizarlas
+
+---
+SIga pendiente Punto 3.
+Primero atediente SECCIÓN 3: PRUEBAS DE BACKEND (EJECUCIÓN POR IA) 
+. Analiza y corrige lo necesario para  que puedan ser input minimo adecuado para que tu u otra ia, puedan realizarlo; y considera tanto datos de rprueba existentes en host c, como nuevos a crear en host a , atavez del scrip correspondiente.
+
+---
 ===============================================================================================================================================================
 
 2026
