@@ -21741,7 +21741,18 @@ Hice cambios en rama main para los archivos aqui puestos
   /opt/lampp/htdocs/agua/docs-dev/migration-stack2/win10_aguav2/optimizacion
 
 ==============================================  AQUI continuar Domingo 19, 10 am   ==============================================================================
+Pruebas SECCIÓN 1
+Inicia con la ejecución de las pruebas, usando el documento: Plan de Pruebas — Sprint Post-Correcciones.md (SECCIÓN 1) unicamente. Despues queden estables pasamos a SECCIÓN 2 y 3.
 
+. Omite las pruebas que tiene que ver con el tema asamblea.
+. No esperes input mio manual para realiza o completar alguna de las pruebas, si es requerido mi intervencion manual, salta esa prueba y realiza la siguiente, y ponlo en tu registro ese evento (issue).
+
+. El resultado que sea un formato adecuado para identificar issues propios de la webapp, datos, del browser, etc. 
+. No se corrige nada hasta haber revisado el resultado de las pruebas.
+. Usa el monitor de la laptop dell de este host, yo estare trabajando en el monitor exteno samsum.
+
+
+_______
 1) Pruebas y validaciones manuales 
   . Pasar webapp
   . Probar las bitacoras, menu de listados engranaje, de GA:  Investigating Host Synchronization Anomalies
@@ -21754,12 +21765,11 @@ Hice cambios en rama main para los archivos aqui puestos
 
 ________
 
-3) CL
-3.1) Probar txt input webapp  de asambleas , como validacion run que pasa .
-  . fixes, up , ver fotos y audios de viernes 17 abril, validar asistentes.
++CL
+1)  . Adecuar webapp asambleas: fixes, up , ver fotos y audios de viernes 17 abril, validar asistentes.
+  . Probar txt input webapp  de asambleas , como validacion run que pasa .
 
-
-3.2) Dar  a Claude como input para analisis de encuadre xlsx, renombrar pestañas poner fechas bien.
+2). Dar  a Claude como input para analisis de encuadre xlsx, renombrar pestañas poner fechas bien.
   . Empatar lo mas cercano, todos los que me paso doña ncy. 
   . a modo visual yo cuadrar cortes de caja resumen años,    ciclos al ultimo marzo 2026 
 
