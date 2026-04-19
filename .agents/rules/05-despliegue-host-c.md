@@ -17,7 +17,7 @@ La migración está **completada, consolidada y declarada verificada**. Host C t
 - Declaración de homologación reportes: `docs-dev/doc-estabilizacion/REPORTES_CAJA_CARTERA_DECLARACION.md`
 - **Terminología de Sesión**: Este conjunto de documentos constituye el **Ground Truth (para Claude)** y el **Runbook (para Gemini)**.
 
-### Pipelines probados (ejecución de referencia: 2026-04-14; última validación: 2026-04-17)
+### Pipelines probados (ejecución de referencia: 2026-04-14; última validación: 2026-04-18)
 - **B→A**: ejecutado y validado — 8 pasos OK
 - **A→C**: ejecutado y validado — Pasos 1–8 → 8-C → 8-B → 9 + 7/7 checks OK
 - **Retención de artefactos**: 2 logs + 2 backups por pipeline (rotación automática en cada ejecución)
@@ -57,7 +57,8 @@ El protocolo A→C aplica automáticamente:
 - `ligacargos.idpago_vinc`: convierte `''` → `NULL` (C usa `int NULL`)
 - `ligacargos.fcobro/fpago`: trunca datetime → date
 - `egresos.id_categoria`: inserta `NULL` (columna no existe en A)
-- Ejecuta `06_split_ligacargos.sql`: **Particionamiento de Migración** (idempotente vía TRUNCATE) — mueve registros `anio ≤ 2025` a la tabla histórica para aplicar el schema V2 de tablas divididas.
+- Ejecuta `06_split_ligacargos.sql`: **Particionamiento de Migración** (idempotente vía TRUNCATE) — mueve registros `anio ≤ 2025` a la tabla histórica para aplicar el schema V2 de tablas divididas. Incluye `INSERT INTO cambios` con métricas del split (Paso 5 — agregado 2026-04-18).
+- Ejecuta `10c_saneamiento_duplicados.sql`: consolida usuarios duplicados reales Martín (751→750) y Zenón (1590→1057). Incluye `INSERT INTO cambios` de trazabilidad (agregado 2026-04-18).
 
 ---
 
@@ -80,6 +81,20 @@ Estos scripts son **Herramientas de Migración y Transición** diseñadas para e
 - **Modo**: XAMPP portable en `F:\xampp` — sin servicios Windows.
 - **Directorio webapp**: `F:\xampp\htdocs\agua`
 - **Rama git**: `feature/upgrade-v2-win-xampp`
+
+---
+
+## DML del Pipeline — Inventario (2026-04-18)
+
+| Script | DML | Tabla(s) afectada(s) | Registra en `cambios` |
+|---|---|---|:---:|
+| `10_pipeline_saneamiento.sql` | UPDATE×6, REPLACE×2 | ligacargos, ligacargos_historico, egresos, categorias, categorias_egresos | ✅ 1 cabecera global |
+| `10b_saneamiento_exencion_recargos.sql` | UPDATE | ligacargos (estado→-1) | ✅ 1 por contrato afectado |
+| `10c_saneamiento_duplicados.sql` | UPDATE×3 | contrato, usuario | ✅ 1 cabecera global |
+| `06_split_ligacargos.sql` | INSERT + **DELETE** | ligacargos_historico, ligacargos | ✅ 1 cabecera global |
+| `run_sync.sh` Paso 6 (SDF) | UPDATE | ligacargos (contratos estado=4) | ✅ 1 cabecera global |
+
+> ⚠️ **Único DELETE del pipeline**: `06_split_ligacargos.sql` Paso 3 — `DELETE FROM ligacargos WHERE anio < YEAR(NOW())`. Es seguro: los registros ya fueron copiados a `ligacargos_historico` en el Paso 1 del mismo script.
 
 ---
 
