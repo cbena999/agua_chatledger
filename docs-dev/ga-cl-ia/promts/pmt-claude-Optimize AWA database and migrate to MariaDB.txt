@@ -21740,7 +21740,13 @@ ____
 Hice cambios en rama main para los archivos aqui puestos
   /opt/lampp/htdocs/agua/docs-dev/migration-stack2/win10_aguav2/optimizacion
 
-==============================================  AQUI continuar Domingo 19, 10 am   ==============================================================================
+==============================================  AQUI continuar Lunes 20 abril, 2 pm   ======================================================================
+
+. probar cone.txt, oir grabacion de voz ncy
+. depurar doc req que va a probar doña ncy
+  . lleve: saneam e impact, cortes resumenes difs de los 4 peridos.
+  . prepar en limpio justificación de los k saneamientos, y de cortes de caja 4 periodos 2 hosts vs libros, 
+
 ____________
 
 
@@ -21795,9 +21801,38 @@ ________
   . a modo visual yo cuadrar cortes de caja resumen años,    ciclos al ultimo marzo 2026 
 
 __________________________________________
+Recuerda usar de contexto lo de Ground Truth.
+Con base a estos periodos de corte de caja:
+2026
+
+    05/01/2026 - 29/03/2026  2026b.html
+
+2025
+    29/11/2025 - 04/01/2026  2026a.html
+    30/06/2025 - 28/11/2025  2025c.html
+    31/03/2025 - 26/06/2025  2025b.html
+
+2024
+    16/12/2024 - 30/03/2025   2025a.html
+    30/09/2024 - 15/12/2024   2024d.html
+    01/07/2024 - 29/09/2024   2024c.html
+    25/03/2024 - 30/06/2024   2024b.html
+    17/12/2023 - 24/03/2024   2024a.html
+
+Los cuales corresponden a estos informes de corte en formato html
+  /home/carlos/Documents/tmp01/xlsx/
+
+Toma cada uno iniciando del 2024a.html
+y comparalo contra el resultado de lo que te de esta url, para cada perido que tiene ir consultando, http://192.168.1.128:7001/agua/reportes/concentradocortecajaresumen.php?inicio=17/12/2023&fin=24/03/2024&existencia_anterior=0
+
+Es solo analisis de INGRESOS, el proposito es analizar el encuadre de las dos fuentes, los htmls estaticos son los reportes fisicos de libros y los urls, son los datos que tiene el actual version de la webapp que se esta migrando y reside en host c.
 
 
 ___________________________________________
+
+me cree una version simplificada del md cp, elimine todo lo que necesita la herramienta de autom de pruebas para seccion 1, y 2; el proposito es hacerlo manual. 
+
+
 __________
 Yo:
 
