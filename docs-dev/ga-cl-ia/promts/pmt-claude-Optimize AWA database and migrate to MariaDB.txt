@@ -21741,8 +21741,26 @@ Hice cambios en rama main para los archivos aqui puestos
   /opt/lampp/htdocs/agua/docs-dev/migration-stack2/win10_aguav2/optimizacion
 
 ==============================================  AQUI continuar Domingo 19, 10 am   ==============================================================================
+____________
+
+
+Continua las pruebas asi: 
+
+Intenta completar Grupo A
+  Nuevo contrato funciona asi:
+  En el input del label Buscar: Escribir un nombre completo de usuario, en caso existir coincidencias el combo de arriba se llenara; si es exacto ya queda seleccionado y lo siguiente es en la region: Seleccione un domicilio origen para la nueva toma, selecciona el primer domicilio existen; no usar Nueva Dirección.
+
+Luego avanza con:   SECCIÓN 1: PRUEBAS DE INTERFAZ DE USUARIO (UI)  / Grupo B Hasta Grupo F
+  Por cada seccion completada dame un informe y espere te autorice para avanza a siguiente grupo.
+
+Hasta que estabilicemos SECCIÓN 1 entonces se hara lo demas del documento de pruebas.
+
+
+____________
+
+
 Pruebas SECCIÓN 1
-Inicia con la ejecución de las pruebas, usando el documento: Plan de Pruebas — Sprint Post-Correcciones.md (SECCIÓN 1) unicamente. Despues queden estables pasamos a SECCIÓN 2 y 3.
+Inicia con la ejecución de las pruebas, usando el documento: Plan de Pruebas — Sprint Post-Correcciones.md (SECCIÓN 1/Grupo A) unicamente. Despues queden estables pasamos al siguiente grupo. Esperas mi aprobacion para pasar al siguiente grupo.
 
 . Omite las pruebas que tiene que ver con el tema asamblea.
 . No esperes input mio manual para realiza o completar alguna de las pruebas, si es requerido mi intervencion manual, salta esa prueba y realiza la siguiente, y ponlo en tu registro ese evento (issue).
@@ -21750,7 +21768,10 @@ Inicia con la ejecución de las pruebas, usando el documento: Plan de Pruebas �
 . El resultado que sea un formato adecuado para identificar issues propios de la webapp, datos, del browser, etc. 
 . No se corrige nada hasta haber revisado el resultado de las pruebas.
 . Usa el monitor de la laptop dell de este host, yo estare trabajando en el monitor exteno samsum.
+. Recuerda la regla de un intento maximo  , si no funcioa la prueba ir a la siguiente.
 
+_________________
+Analiza 
 
 _______
 1) Pruebas y validaciones manuales 
@@ -21773,6 +21794,10 @@ ________
   . Empatar lo mas cercano, todos los que me paso doña ncy. 
   . a modo visual yo cuadrar cortes de caja resumen años,    ciclos al ultimo marzo 2026 
 
+__________________________________________
+
+
+___________________________________________
 __________
 Yo:
 

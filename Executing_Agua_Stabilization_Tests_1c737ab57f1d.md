@@ -4,7 +4,7 @@
 
 | Field | Value |
 |-------|-------|
-| **Trajectory ID** | `8ab280ed-321d-493f-b2ab-998f1e7fafb4` |
+| **Trajectory ID** | `a8b742f5-564e-4142-853a-3e2067e36305` |
 | **Cascade ID** | `9032268e-21b7-40bc-ae16-1c737ab57f1d` |
 | **Type** | Agent Conversation |
 | **Total Steps** | 70 |
@@ -1964,7 +1964,7 @@ I'm now diving into the specifics of UI actions. I've compiled a list: adding no
 
 ### Terminal Command Execution
 
-**Status:** CORTEX_STEP_STATUS_RUNNING
+**Status:** Cancelled
 **Created:** 18 Apr 2026, 8:00 pm
 
 ---
