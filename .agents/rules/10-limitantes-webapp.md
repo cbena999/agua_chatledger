@@ -135,6 +135,7 @@ Clasificados por módulo funcional y nivel de riesgo.
 | **L06** | Restricción calendario UI | Cambio estado →2 | Error en UI | Baja (solo pruebas) |
 | **L07** | Ausencia atomicidad | Bloque cambio de estado | Auditoría BD | Baja (mono-user) |
 | **L08** | Fatal Error PHP 7.4 | Cualquier PHP con `$_SESSION['usuario']` como string | Error fatal en UI | **Alta — detiene ejecución** |
+| **L09** | Link folio→recibo requiere sesión activa | `concentradocortecaja.php` columna FOLIO | Redirige a login | Baja (uso normal dentro de sesión) |
 
 ---
 
@@ -168,6 +169,14 @@ Clasificados por módulo funcional y nivel de riesgo.
 - **Acción para agentes IA**: Al escribir cualquier PHP que necesite el nombre del operador
   de sesión, usar siempre el patrón correcto de arriba. Nunca interpolar `$_SESSION['usuario']`
   directamente en un string SQL o de texto.
+
+---
+
+### L09 — Link a recibo en `concentradocortecaja.php` requiere sesión activa
+- **Módulo**: `reportes/concentradocortecaja.php` — columna FOLIO
+- **Descripción**: El número de folio en cada fila es un `<a href='recibo.php?folio=X' target='_blank'>`. `recibo.php` verifica `$_SESSION['usuario']` al inicio — si la sesión expiró o el link se abre desde un contexto sin sesión, redirige al login.
+- **Por qué es intencional**: `recibo.php` es un documento oficial con datos de pago; requiere autenticación.
+- **Impacto operativo**: Ninguno en uso normal (el reporte se genera dentro de la sesión activa).
 
 ---
 
