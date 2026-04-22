@@ -21740,17 +21740,25 @@ ____
 Hice cambios en rama main para los archivos aqui puestos
   /opt/lampp/htdocs/agua/docs-dev/migration-stack2/win10_aguav2/optimizacion
 
-==============================================  AQUI continuar Lunes 20 abril, 2 pm   ======================================================================
+==============================================  AQUI continuar Miercoles 22 abril   ======================================================================
 
-. probar cone.txt, oir grabacion de voz ncy
-. depurar doc req que va a probar doña ncy
-  . lleve: saneam e impact, cortes resumenes difs de los 4 peridos.
-  . prepar en limpio justificación de los k saneamientos, y de cortes de caja 4 periodos 2 hosts vs libros, 
++ Continua las pruebas con base a los docs de cp
+  . manual
++ Scripts de pwsh, para proteger equipo
++ si pruebas pasan al viernes, el sabado ire a instalar de 9am a 2 pm
 
-____________
+_____________________________
+. Ref: Contrato.estado (1  = ACTIVO  |  2 =  Suspensión Temporal  | 3  = Suspensión Administrativa   |  4  =  Suspensión Definitiva)
+
++ Depurar doc req que va a probar doña ncy, incluir tambien:
+  .  Lista de saneamientos  e impactos, cortes resumenes difs de los 4 peridos.
+  .  Prepar en limpio justificación de los k saneamientos, y de cortes de caja 4 periodos 2 hosts vs libros, 
 
 
-Continua las pruebas asi: 
++ Pruebas de backend, ejecute automatico CL, OK pasaron al 21 abril 2026.
+
+
+__________________________
 
 Intenta completar Grupo A
   Nuevo contrato funciona asi:
@@ -21761,8 +21769,6 @@ Luego avanza con:   SECCIÓN 1: PRUEBAS DE INTERFAZ DE USUARIO (UI)  / Grupo B H
 
 Hasta que estabilicemos SECCIÓN 1 entonces se hara lo demas del documento de pruebas.
 
-
-____________
 
 
 Pruebas SECCIÓN 1
@@ -21776,8 +21782,6 @@ Inicia con la ejecución de las pruebas, usando el documento: Plan de Pruebas �
 . Usa el monitor de la laptop dell de este host, yo estare trabajando en el monitor exteno samsum.
 . Recuerda la regla de un intento maximo  , si no funcioa la prueba ir a la siguiente.
 
-_________________
-Analiza 
 
 _______
 1) Pruebas y validaciones manuales 
@@ -21830,24 +21834,9 @@ Es solo analisis de INGRESOS, el proposito es analizar el encuadre de las dos fu
 
 ___________________________________________
 
-me cree una version simplificada del md cp, elimine todo lo que necesita la herramienta de autom de pruebas para seccion 1, y 2; el proposito es hacerlo manual. 
 
 
-__________
-Yo:
-
-+ Checar el doc de 20 req, ver que otros scripts faltan para el pase a producción o como saneamiento.
-  - Para la impl, de no localizados como se com,porta cv, Estado de Cuenta y Corte de Caja (Por Fecha)
-
-+ Otrod
-  .  not-t.txt / RQ OTHER CASES.
   
-  . Ref: Contrato.estado (1  = ACTIVO  |  2 =  Suspensión Temporal  | 3  = Suspensión Administrativa   |  4  =  Suspensión Definitiva)
-  
-  . YO A MANO:
-    ver que esten todos los xlsx Datos-awa-limpieza
-    https://docs.google.com/spreadsheets/d/1wMeMPTSRoyNHqJ_xFljbw2Am82SBeybYBlrglA6uLwM/edit?gid=1440610976#gid=1440610976
-    En http://localhost/agua/admin/analisis/inventario_saneamiento.php
 
 
 
@@ -22028,20 +22017,61 @@ CL,
 
   se comitie
 
+Añadir este a: Configuración y Saneamiento/Operaciones y Reportes
+  
+  http://192.168.1.128:7001/agua/admin/reportes/reporte_contratos_toma.php
+
+. probar cone.txt, oir grabacion de voz ncy
+
+
+
+FALTA ASAMBLEA 29 MAR 2026, deben  
+    96  maria del carmen rosales López   
+    99  aimme lópez villa, 
+    *154 SANTIAGO MORALES , no se registro se le olvido.
+    156 florinda loyola garcía
+    1397  AUSTERLITZ SEBASTIAN SANCHEZ MENDEZ   (tiene 667, 156
+    )
+
+
+Analiza estas opciones de acceso: 
+  Listados/Corte de Caja/Por Fechas/Resumen de Caja
+  Listados/Corte de Caja/Por Fechas/Por Fechas
+
+Ambos urls al iniciar abrirse en una nueva pestaña de web browser muestran popups para capturar periodo u otros parametros.
+Para incluir estos parametros segun corresponda:
+
+Parámetro                   Detalle                        Requerido
+inicio                  Fecha inicio del período          Sí — ambos
+fin                     Fecha fin del período             Sí — ambos
+existencia_anterior     Saldo en caja al inicio           Sí — solo resumen
+anio_corte              Override del año de ciclo         No — ambos
+
+QUe cambios Y donde ES ADECUADO poner la captura de eso parametros, proponme para ambos reportes segun corresponda.
+
+en Por Fechas
+  poner link a folio para muestre el recibo
+
+Arreglar, que los 5 indicadores de ccr si aparezcan con datos , rastrear y arreglar.
+
+me cree una version simplificada del md cp, elimine todo lo que necesita la herramienta de autom de pruebas para seccion 1, y 2; el proposito es hacerlo manual. 
+
 
 ---
 ===============================================================================================================================================================
 
-2026
+
     05/01/2026|29/03/2026 
-2025
+
     29/11/2025|04/01/2026
     30/06/2025|28/11/2025
     31/03/2025|26/06/2025
 
-2024
+
     16/12/2024|30/03/2025
     30/09/2024|15/12/2024
     01/07/2024|29/09/2024
     25/03/2024|30/06/2024
     17/12/2023|24/03/2024
+
+    cambiar la captura input para que permita capturar los 4 parametros
