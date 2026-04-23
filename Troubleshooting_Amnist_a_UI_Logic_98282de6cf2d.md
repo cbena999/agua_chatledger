@@ -7,9 +7,9 @@
 | **Trajectory ID** | `267c8258-f82a-45ff-94e7-b0ccd8ebc91f` |
 | **Cascade ID** | `2c24dbf0-a237-4a36-8172-98282de6cf2d` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 393 |
+| **Total Steps** | 537 |
 | **Started** | 22 Apr 2026, 3:09 pm |
-| **Completed** | 22 Apr 2026, 5:16 pm |
+| **Completed** | 22 Apr 2026, 7:47 pm |
 
 ---
 
@@ -13442,6 +13442,5328 @@ I've pinpointed more hardcoded instances, specifically within `00_inject_qa_host
 - **Thinking Duration:** 3.523879561s
 - **Model:** Gemini 3.1 Pro (Low)
 </details>
+
+---
+
+## User Request
+
+Va mejor, despues de si cambiar a ACTIVO, 	Los recargos por superar abril, para ANUALIDAD DEL AGUA 2026 no fueron creados. ANaliza causa.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `00_cleanup_qa_tests.sql`
+**Language:** oracle-sql
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The user is saying that after reactivating contract 9002 (changing from state 2 to state 1), the surcharges (recargos) for the months that have passed (January through April 2026) were NOT created for "ANUALIDAD DEL AGUA 2026". Let me analyze the `calcula_recargos` function and the `cargaContrato` flow to understand why.
+
+The current date is April 22, 2026. So when reactivating, the system should generate recargos for January, February, March (and possibly April) since the annual fee is due and those months have passed.
+
+Let me look at the `calcula_recargos` function and the flow in `contratos.php`.
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `contratos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 6.161334007s
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/*
+ * contratos.php — Lógica de negocio para contratos
+ * Rediseño v2: usa contrato_toma y config_sistema
+ * PHP 5.5 compatible
+ */
+
+function cargaConfig($y)
+{
+	$res = $y->q("SELECT clave, valor FROM config_sistema");
+	$cfg = array();
+	while (list($k, $v) = $y->fetch_array($res)) {
+		$cfg[$k] = $v;
+	}
+	return $cfg;
+}
+
+function obtenerValorSeguro($array, $indice, $valorPorDefecto = '')
+{
+	return (isset($array[$indice]) && $array[$indice] !== null) ? $array[$indice] : $valorPorDefecto;
+}
+
+function cargaContrato($id)
+{
+	global $templates;
+	$numcontrato = $id;
+
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$cfg = cargaConfig($y);
+
+	$tipos = array(0 => "Normal", 1 => "Comercial");
+
+	$res = $y->q("SELECT usuario.nombre, contrato.numusuario, contrato.domicilio, contrato.masdatos, contrato.tipo, contrato.agua, contrato.drenaje, contrato.observaciones, contrato.estado, contrato.metros, YEAR(contrato.fecha), MONTH(contrato.fecha), usuario.estado as estado_usr FROM contrato LEFT JOIN usuario ON contrato.numusuario=usuario.noconsecutivo WHERE contrato.numcontrato='$id'");
+
+	// Host C: folio viene de folios_recibo (AUTO_INCREMENT), no de MAX(folio)
+	$resx = $y->q("SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA=DATABASE() AND TABLE_NAME='folios_recibo'");
+	list($foliotope) = $y->fetch_array($resx);
+
+	list($nombre, $numusuario, $domicilio, $masdatos, $tipo, $agua, $drenaje, $observaciones, $estado, $metros, $aniocontrato, $mescontrato, $estado_usr) = $y->fetch_array($res);
+
+	// --- TOMAS desde contrato_toma ---
+	$res_tomas = $y->q("SELECT id, num_toma, tipo, tiene_agua, tiene_drenaje, estado_agua, estado_drenaje, observaciones FROM contrato_toma WHERE numcontrato='$id' ORDER BY num_toma ASC");
+	$tomas = array();
+	while ($t = $y->fetch_array($res_tomas)) {
+		$tomas[intval($t['num_toma'])] = $t;
+	}
+	$num_tomas = count($tomas);
+	if ($num_tomas == 0) $num_tomas = 1;
+	$max_tomas = intval(obtenerValorSeguro($cfg, 'max_tomas_por_contrato', 2));
+
+	// --- TARIFAS DE REFERENCIA del año en curso (para mostrar en UI) ---
+	$anio_actual = date('Y');
+	$res_tarifas = $y->q("SELECT nombre, monto, monto_comercial, categoria FROM cargos WHERE automatico=1 AND recargo=0 AND estado=1 AND anio=$anio_actual AND categoria IN (2,3) ORDER BY categoria, numconsec");
+	$tarifas_referencia = array();
+	while ($tf = $y->fetch_array($res_tarifas)) {
+		$clave = ($tf['categoria'] == 2) ? 'agua' : 'drenaje';
+		if (!isset($tarifas_referencia[$clave])) {
+			$mon_com = (floatval($tf['monto_comercial']) > 0) ? floatval($tf['monto_comercial']) : floatval($tf['monto']) * 2;
+			$tarifas_referencia[$clave] = array(
+				'leyenda'   => $tf['nombre'],
+				'normal'    => floatval($tf['monto']),
+				'comercial' => $mon_com
+			);
+		}
+	}
+
+	// --- CARGOS AUTOMÁTICOS al cargar el contrato ---
+	if ($estado == 1) {
+		// Consultar tomas activas para calcular montos correctamente
+		$r_a = $y->q("SELECT COUNT(*) FROM contrato_toma WHERE numcontrato='$numcontrato' AND tiene_agua=1 AND estado_agua=1");
+		list($n_tomas_agua) = $y->fetch_array($r_a);
+		$r_d = $y->q("SELECT COUNT(*) FROM contrato_toma WHERE numcontrato='$numcontrato' AND tiene_drenaje=1 AND estado_drenaje=1");
+		list($n_tomas_drenaje) = $y->fetch_array($r_d);
+		$r_tc = $y->q("SELECT MAX(tipo) FROM contrato_toma WHERE numcontrato='$numcontrato'");
+		list($es_comercial) = $y->fetch_array($r_tc);
+
+		// Evitar explosión de cargos si la fecha de contrato es inválida (Regla C06 - Hardening)
+		$anio_min_facturacion = intval(date('Y')) - 1; 
+		$anio_inicio_fact = ($aniocontrato > 2000) ? $aniocontrato : $anio_min_facturacion;
+
+		$rescargos = $y->q("SELECT nombre, monto, monto_comercial, recargo, anio, categoria, repetir, metros FROM cargos WHERE estado=1 AND automatico=1 AND anio >= $anio_inicio_fact ORDER BY nombre");
+
+		while ($a = $y->fetch_array($rescargos)) {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `contratos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L84-139)</summary>
+
+**Path:** `Unknown file`
+
+```
+		while ($a = $y->fetch_array($rescargos)) {
+			$leyenda    = $a['nombre'];
+			$monto      = floatval($a['monto']);
+			$mon_com    = floatval($a['monto_comercial']);
+			$recargo    = $a['recargo'];
+			$anio       = $a['anio'];
+			$categoria  = $a['categoria'];
+			$repetir    = $a['repetir'];
+			$aplicametros = $a['metros'];
+
+			// Calcular monto usando monto_comercial (sin hardcode)
+			if ($categoria == 2 && $n_tomas_agua > 0) {
+				$monto_base = ($es_comercial == 1 && $mon_com > 0) ? $mon_com : (($es_comercial == 1) ? $monto * 2 : $monto);
+				$monto = $monto_base * $n_tomas_agua;
+			}
+			if ($categoria == 3 && $n_tomas_drenaje > 0) {
+				$monto_base = ($es_comercial == 1 && $mon_com > 0) ? $mon_com : (($es_comercial == 1) ? $monto * 2 : $monto);
+				$monto = $monto_base * $n_tomas_drenaje;
+			}
+			if ($aplicametros == 1)
+				$monto = $monto * $metros;
+			if ($anio == "0")
+				$anio = $anio_actual;
+
+			$aplicar_cargo = true;
+			if ($n_tomas_agua == 0 && $categoria == 2)    $aplicar_cargo = false;
+			if ($n_tomas_drenaje == 0 && $categoria == 3) $aplicar_cargo = false;
+
+			if ($aplicar_cargo == true) {
+				if ($repetir == 0) {
+					$chk = $y->q("SELECT numcontrato FROM vw_ligacargos_all WHERE leyenda='$leyenda' AND numcontrato='$numcontrato' LIMIT 1");
+					if ($y->num_rows($chk) == 0) {
+						$tabla_dest = ($anio <= 2025) ? "ligacargos_historico" : "ligacargos";
+						$q = "INSERT INTO $tabla_dest (numcontrato, leyenda, monto, fcobro, fpago, estado, recargo, folio, anio, numcontratoresp, idpago_vinc, categoria, repetido) VALUES('$numcontrato', '$leyenda', $monto, CURDATE(), CURDATE(), 0, $recargo, '', $anio, '', NULL, $categoria, 0)";
+						$y->q($q);
+						calcula_recargos($numcontrato, $leyenda, $monto, $recargo, $anio, $categoria, 0, $y, $mescontrato, $cfg);
+					}
+				} else {
+					// Hardening: Incluso si es repetible, no auto-generar si ya existe una instancia para el mismo año
+					// Esto previene la multiplicación infinita por refresco de UI (Refresh-bomb)
+					$chk_rep = $y->q("SELECT numcontrato FROM vw_ligacargos_all WHERE leyenda='$leyenda' AND numcontrato='$numcontrato' AND anio=$anio LIMIT 1");
+					if ($y->num_rows($chk_rep) == 0) {
+						$resautomatico = $y->q("SELECT COUNT(numcontrato) FROM vw_ligacargos_all WHERE leyenda='$leyenda' AND numcontrato='$numcontrato'");
+						list($cuenta) = $y->fetch_array($resautomatico);
+						$tabla_dest = ($anio <= 2025) ? "ligacargos_historico" : "ligacargos";
+						$q = "INSERT INTO $tabla_dest (numcontrato, leyenda, monto, fcobro, fpago, estado, recargo, folio, anio, numcontratoresp, idpago_vinc, categoria, repetido) VALUES('$numcontrato', '$leyenda', $monto, CURDATE(), CURDATE(), 0, $recargo, '', $anio, '', NULL, $categoria, $cuenta)";
+						$y->q($q);
+						calcula_recargos($numcontrato, $leyenda, $monto, $recargo, $anio, $categoria, $cuenta, $y, $mescontrato, $cfg);
+					}
+				}
+			}
+		}
+	}
+
+	// --- Otros contratos del mismo usuario ---
+	$res2 = $y->q("SELECT numcontrato, domicilio, estado FROM contrato WHERE numusuario=$numusuario AND numcontrato != '$id'");
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `function calcula_recargos`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 22 Apr 2026, 5:33 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `cargos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L21-119)</summary>
+
+**Path:** `Unknown file`
+
+```
+function calcula_recargos($numcontrato, $leyenda, $monto, $recargo, $anio, $categoria, $cuenta, $y, $mescontrato, $cfg = null)
+{
+	// Cargar config si no viene como parámetro (compatibilidad)
+	if (!is_array($cfg) || count($cfg) == 0) {
+		$cfg = cargaConfig($y);
+	}
+
+	$mes_inicio = intval(isset($cfg['recargo_mes_inicio']) ? $cfg['recargo_mes_inicio'] : 4);
+	$porcentaje = floatval(isset($cfg['recargo_porcentaje']) ? $cfg['recargo_porcentaje'] : 10);
+	$cat_agua = intval(isset($cfg['recargo_categoria_agua']) ? $cfg['recargo_categoria_agua'] : 16);
+	$cat_drenaje = intval(isset($cfg['recargo_categoria_drenaje']) ? $cfg['recargo_categoria_drenaje'] : 17);
+
+	// EXENCIÓN RECARGOS PRIMER AÑO Y VALIDACIÓN DE ESTADO
+	$res_exencion = $y->q("SELECT YEAR(fecha) as anio_creacion, exento_recargo_primer_anio, estado FROM contrato WHERE numcontrato='$numcontrato'");
+	list($anio_creacion, $exento_recargo, $edo_cto) = $y->fetch_array($res_exencion);
+
+	// REGLA F01 / SDF: No generar recargos si el contrato está en Suspensión Definitiva (estado 4)
+	// Los recargos automáticos inician en Abril (mes 4) según configuración del sistema.
+	if (intval($edo_cto) === 4) {
+		return;
+	}
+	// REGLA F01 / C06: No generar recargos en Suspensión Temporal (estado 2).
+	// La anualidad ya está cancelada (estado=-1); el recargo sobre ella no procede.
+	if (intval($edo_cto) === 2) {
+		return;
+	}
+
+	if ($exento_recargo == 1 && $anio == $anio_creacion) {
+		return;
+	}
+
+	// EXENCIÓN: NO GENERAR RECARGOS PARA CATEGORÍAS QUE YA SON RECARGOS
+	if ($categoria == $cat_agua || $categoria == $cat_drenaje) {
+		return;
+	}
+
+	$fecha_actual = time();
+	$mes_pad = str_pad($mes_inicio, 2, '0', STR_PAD_LEFT);
+	$fecha_entrada = strtotime("01-$mes_pad-$anio 01:00:00");
+
+	if ($fecha_actual > $fecha_entrada) {
+		$mes_numero = intval(date('m'));
+		$anio_numero = intval(date('Y'));
+		$meses = (($anio_numero - $anio) * 12) + ($mes_numero - 1);
+
+		$nom_meses = array("", "ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SEPT", "OCT", "NOV", "DIC");
+
+		$mesrecargo = 1;
+		$aniorecargo = $anio;
+
+		// Sin hardcode: porcentaje desde config
+		$monto_recargo = ($monto * $porcentaje) / 100;
+
+		// Sin hardcode: categorias desde config
+		$categoria_recargo = $categoria;
+		if ($categoria == 2)
+			$categoria_recargo = $cat_agua;
+		if ($categoria == 3)
+			$categoria_recargo = $cat_drenaje;
+
+		$respagado = $y->q("SELECT COUNT(numcontrato) FROM vw_ligacargos_all WHERE leyenda='$leyenda' AND numcontrato=$numcontrato AND estado=1");
+		list($pagado) = $y->fetch_array($respagado);
+
+		if ($pagado == 0) {
+			for ($i = 1; $i <= $meses; $i++) {
+				$leyenda_recargo = "RECARGO $nom_meses[$mesrecargo] $aniorecargo - $leyenda";
+				$tabla_dest = ($aniorecargo <= 2025) ? "ligacargos_historico" : "ligacargos";
+				if ($aniorecargo == $anio) {
+					$q = "INSERT INTO $tabla_dest (numcontrato,leyenda,monto,fcobro,fpago,estado,recargo,folio,anio,numcontratoresp,idpago_vinc,categoria,repetido) VALUES('$numcontrato','$leyenda_recargo',$monto_recargo,CURDATE(),CURDATE(),0,$recargo,'',$anio,'',NULL,$categoria_recargo,$cuenta)";
+					$y->q($q);
+				}
+				if (++$mesrecargo > 12) {
+					$mesrecargo = 1;
+					$aniorecargo++;
+				}
+			}
+		}
+	}
+}
+
+function eliminaEgreso($id, $motivo)
+{
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	// Obtener datos antes de eliminar para auditoría
+	$res_ant = $y->q("SELECT leyenda, monto, categoria FROM egresos WHERE id='$id'");
+	$ant = $y->fetch_array($res_ant);
+	$leyenda_e = $ant['leyenda'];
+	$monto_e   = number_format($ant['monto'], 2);
+	$cat_e     = $ant['categoria'];
+
+	$y->q("update egresos set estado=-1, motivoelimina='$motivo' where id='$id'");
+
+	$motivo_esc = $y->real_escape_string($motivo);
+	$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato) 
+	       VALUES(NOW(), 'Eliminación de Egreso', 'Egreso: $leyenda_e ($cat_e) por \$$monto_e', 'ELIMINADO. Motivo: $motivo_esc', '-EGRESO-')");
+
+	$salida = "Se ha eliminado el egreso";
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `contratos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L112-136)</summary>
+
+**Path:** `Unknown file`
+
+```
+			if ($aplicar_cargo == true) {
+				if ($repetir == 0) {
+					$chk = $y->q("SELECT numcontrato FROM vw_ligacargos_all WHERE leyenda='$leyenda' AND numcontrato='$numcontrato' LIMIT 1");
+					if ($y->num_rows($chk) == 0) {
+						$tabla_dest = ($anio <= 2025) ? "ligacargos_historico" : "ligacargos";
+						$q = "INSERT INTO $tabla_dest (numcontrato, leyenda, monto, fcobro, fpago, estado, recargo, folio, anio, numcontratoresp, idpago_vinc, categoria, repetido) VALUES('$numcontrato', '$leyenda', $monto, CURDATE(), CURDATE(), 0, $recargo, '', $anio, '', NULL, $categoria, 0)";
+						$y->q($q);
+						calcula_recargos($numcontrato, $leyenda, $monto, $recargo, $anio, $categoria, 0, $y, $mescontrato, $cfg);
+					}
+				} else {
+					// Hardening: Incluso si es repetible, no auto-generar si ya existe una instancia para el mismo año
+					// Esto previene la multiplicación infinita por refresco de UI (Refresh-bomb)
+					$chk_rep = $y->q("SELECT numcontrato FROM vw_ligacargos_all WHERE leyenda='$leyenda' AND numcontrato='$numcontrato' AND anio=$anio LIMIT 1");
+					if ($y->num_rows($chk_rep) == 0) {
+						$resautomatico = $y->q("SELECT COUNT(numcontrato) FROM vw_ligacargos_all WHERE leyenda='$leyenda' AND numcontrato='$numcontrato'");
+						list($cuenta) = $y->fetch_array($resautomatico);
+						$tabla_dest = ($anio <= 2025) ? "ligacargos_historico" : "ligacargos";
+						$q = "INSERT INTO $tabla_dest (numcontrato, leyenda, monto, fcobro, fpago, estado, recargo, folio, anio, numcontratoresp, idpago_vinc, categoria, repetido) VALUES('$numcontrato', '$leyenda', $monto, CURDATE(), CURDATE(), 0, $recargo, '', $anio, '', NULL, $categoria, $cuenta)";
+						$y->q($q);
+						calcula_recargos($numcontrato, $leyenda, $monto, $recargo, $anio, $categoria, $cuenta, $y, $mescontrato, $cfg);
+					}
+				}
+			}
+		}
+	}
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `cargos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L81-99)</summary>
+
+**Path:** `Unknown file`
+
+```
+		$respagado = $y->q("SELECT COUNT(numcontrato) FROM vw_ligacargos_all WHERE leyenda='$leyenda' AND numcontrato=$numcontrato AND estado=1");
+		list($pagado) = $y->fetch_array($respagado);
+
+		if ($pagado == 0) {
+			for ($i = 1; $i <= $meses; $i++) {
+				$leyenda_recargo = "RECARGO $nom_meses[$mesrecargo] $aniorecargo - $leyenda";
+				$tabla_dest = ($aniorecargo <= 2025) ? "ligacargos_historico" : "ligacargos";
+				if ($aniorecargo == $anio) {
+					$q = "INSERT INTO $tabla_dest (numcontrato,leyenda,monto,fcobro,fpago,estado,recargo,folio,anio,numcontratoresp,idpago_vinc,categoria,repetido) VALUES('$numcontrato','$leyenda_recargo',$monto_recargo,CURDATE(),CURDATE(),0,$recargo,'',$anio,'',NULL,$categoria_recargo,$cuenta)";
+					$y->q($q);
+				}
+				if (++$mesrecargo > 12) {
+					$mesrecargo = 1;
+					$aniorecargo++;
+				}
+			}
+		}
+	}
+}
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 22 Apr 2026, 5:33 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 22 Apr 2026, 5:34 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+## User Request
+
+Analiza otros codigos php (inserts/update), que puedan tener este issue de Si el usuario refresca la página (F5); para el tema de evitar duplicidad se corrija
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `cline_mcp_settings.json`
+**Language:** json
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+{
+  "mcpServers": {
+    "bdawahost-a": {
+      "command": "docker",
+      "args": [
+        "exec",
+        "-i",
+        "context7-mcp-mysql",
+        "npx",
+        "-y",
+        "@f4ww4z/mcp-mysql-server",
+        "mysql://root:comite_2026@127.0.0.1:3306/awa"
+      ],
+      "env": {
+        "DOCKER_HOST": "unix:///var/run/docker.sock"
+      }
+    },
+    "bdawahost-b": {
+      "command": "docker",
+      "args": [
+        "exec",
+        "-i",
+        "context7-mcp-mysql",
+        "npx",
+        "-y",
+        "@f4ww4z/mcp-mysql-server",
+        "mysql://root:sdrastbuy@192.168.1.120:3306/awa"
+      ],
+      "env": {
+        "DOCKER_HOST": "unix:///var/run/docker.sock"
+      }
+    },
+    "bdawahost-c": {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The user wants me to audit all PHP files that perform INSERT/UPDATE operations to find places where a page refresh (F5) could cause duplicate data insertion. Let me systematically search for INSERT statements in the PHP codebase, focusing on the business logic files.
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `INSERT INTO.*(ligacargos|cambios|contrato|usuario|egresos|notas)`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.869353743s
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 22 Apr 2026, 5:57 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `cargos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L104-179)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+function eliminaEgreso($id, $motivo)
+{
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	// Obtener datos antes de eliminar para auditoría
+	$res_ant = $y->q("SELECT leyenda, monto, categoria FROM egresos WHERE id='$id'");
+	$ant = $y->fetch_array($res_ant);
+	$leyenda_e = $ant['leyenda'];
+	$monto_e   = number_format($ant['monto'], 2);
+	$cat_e     = $ant['categoria'];
+
+	$y->q("update egresos set estado=-1, motivoelimina='$motivo' where id='$id'");
+
+	$motivo_esc = $y->real_escape_string($motivo);
+	$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato) 
+	       VALUES(NOW(), 'Eliminación de Egreso', 'Egreso: $leyenda_e ($cat_e) por \$$monto_e', 'ELIMINADO. Motivo: $motivo_esc', '-EGRESO-')");
+
+	$salida = "Se ha eliminado el egreso";
+
+	return $salida;
+}
+
+function cargaCargosEsp($cadena)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	if ($cadena == "")
+		$cadena = "1";
+
+	if ($cadena != "") {
+		$ocurrencias = explode(" ", $cadena);
+		$cadena = "";
+		foreach ($ocurrencias as $parte) {
+			$cadena .= (($cadena != "") ? "AND " : "") . "nombre like (\"%$parte%\")";
+		}
+	}
+	$q1 = "select numconsec, nombre, monto, monto_comercial, recargo, observaciones, mensualidades, anio, categoria, repetir, metros from cargos where $cadena AND estado=1 order by nombre";
+	$res = $y->q($q1);
+
+	$cargos = [];
+	while ($c = $y->fetch_array($res)) {
+		$cargos[] = [
+			'numconsec' => $c[0],
+			'nombre' => $c[1],
+			'monto' => $c[2],
+			'monto_com' => $c[3],
+			'recargo' => $c[4],
+			'observaciones' => $c[5],
+			'mensualidades' => $c[6],
+			'anio' => $c[7],
+			'categoria' => $c[8],
+			'repetir' => $c[9],
+			'metros' => $c[10]
+		];
+	}
+
+	return $templates->render('cargos/lista_tabla', ['cargos' => $cargos]);
+}
+
+function cargaCargos()
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$res = $y->q("select numconsec, nombre, monto, monto_comercial, recargo, observaciones, mensualidades, anio, categoria, repetir, metros from cargos where estado=1 order by nombre");
+	$cargos = [];
+	while ($c = $y->fetch_array($res)) {
+		$cargos[] = [
+			'numconsec' => $c[0],
+			'nombre' => $c[1],
+			'monto' => $c[2],
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `cargos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L399-499)</summary>
+
+**Path:** `Unknown file`
+
+```
+			$res2 = $y->q("select metros from contrato where numcontrato = '$numcontrato'");
+			list($metros) = $y->fetch_array($res2);
+
+			$res3 = $y->q("select metros, monto_comercial from cargos where UCASE(nombre) = UCASE('$a[0]') limit 1");
+			list($aplicametros, $mon_com_db) = $y->fetch_array($res3);
+
+			$leyenda = $a[0];
+			$monto = floatval($a[1]);
+			$mon_com = floatval($mon_com_db);
+			$recargo = $a[2];
+			$anio = $a[3];
+			$categoria = $a[4];
+			$repetir = $a[5];
+
+			// Lógica de multiplicación por toma y tipo (Normal/Comercial)
+			if ($categoria == 2 && $n_tomas_agua > 0) {
+				$monto_base = ($es_comercial == 1 && $mon_com > 0) ? $mon_com : (($es_comercial == 1) ? $monto * 2 : $monto);
+				$monto = $monto_base * $n_tomas_agua;
+			}
+			if ($categoria == 3 && $n_tomas_drenaje > 0) {
+				$monto_base = ($es_comercial == 1 && $mon_com > 0) ? $mon_com : (($es_comercial == 1) ? $monto * 2 : $monto);
+				$monto = $monto_base * $n_tomas_drenaje;
+			}
+
+			if ($aplicametros == 1)
+				$monto = $monto * $metros;
+
+			if ($anio == "0")
+				$anio = date('Y');
+
+			$aplicar_cargo = true;
+			if ($n_tomas_agua == 0 && $categoria == 2) {
+				$aplicar_cargo = false;
+				$alertas[] = "El cargo <b>$leyenda</b> no aplica porque el contrato $numcontrato no tiene toma de agua conectada.";
+			}
+			if ($n_tomas_drenaje == 0 && $categoria == 3) {
+				$aplicar_cargo = false;
+				$alertas[] = "El cargo <b>$leyenda</b> no aplica porque el contrato $numcontrato no tiene toma de drenaje conectada.";
+			}
+
+			if ($aplicar_cargo) {
+				$tabla_d = ($anio <= 2025) ? "ligacargos_historico" : "ligacargos";
+				if ($repetir == 0)
+					$q = "INSERT INTO $tabla_d (numcontrato, leyenda, monto, fcobro, fpago, estado, recargo, folio, anio, numcontratoresp, idpago_vinc, categoria, repetido) VALUES('$numcontrato', '$leyenda', $monto, CURDATE(), CURDATE(), 0, $recargo, '', $anio, '', NULL, $categoria, 0)";
+				else {
+					$res = $y->q("SELECT COUNT(l.numcontrato) FROM vw_ligacargos_all l WHERE l.leyenda = '$leyenda' AND l.numcontrato = '$numcontrato'");
+					list($cuenta) = $y->fetch_array($res);
+					$q = "INSERT INTO $tabla_d (numcontrato, leyenda, monto, fcobro, fpago, estado, recargo, folio, anio, numcontratoresp, idpago_vinc, categoria, repetido) VALUES('$numcontrato', '$leyenda', $monto, CURDATE(), CURDATE(), 0, $recargo, '', $anio, '', NULL, $categoria, $cuenta)";
+				}
+
+				if ($y->q($q)) {
+					$n++;
+					// Calcular recargos si aplica
+					calcula_recargos($numcontrato, $leyenda, $monto, $recargo, $anio, $categoria, (isset($cuenta) ? $cuenta : 0), $y, 1, $cfg);
+				} else
+					$m++;
+			}
+		}
+	}
+
+	$mensaje = "Se ha" . (($n == 1) ? "" : "n") . " aplicado <b>$n</b> cargo" . (($n == 1) ? "" : "s") . "." . (($m != 0) ? "<br>$m cargo" . (($m == 1) ? "" : "s") . " no pud" . (($m == 1) ? "o" : "ieron") . " asignarse por duplicidad." : "");
+	if (count($alertas) > 0) {
+		$mensaje .= "<div style='color:#900; margin-top:10px; font-size:11px;'><b>RECHAZADOS POR REGLA:</b><br>" . implode("<br>", array_unique($alertas)) . "</div>";
+	}
+
+	// Auditoría de aplicación manual
+	if ($n > 0) {
+		$lista_labels = array();
+		foreach($cargo as $l_in) { $a_l = explode('|', $l_in); $lista_labels[] = $a_l[0]; }
+		$leyendas_str = implode(', ', array_unique($lista_labels));
+		$ctos_str = is_array($c) ? implode(', ', $c) : $c;
+		
+		$leyendas_esc = $y->real_escape_string($leyendas_str);
+		$ctos_esc = $y->real_escape_string($ctos_str);
+		
+		$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato) 
+		       VALUES(NOW(), 'Aplicación manual de cargos', 'Formatos base aplicados', 'Cargos: $leyendas_esc aplicados a contrato(s): $ctos_esc', '-OPERACION-')");
+	}
+
+	return $templates->render('sistema/mensaje', [
+		'titulo' => 'Aplicación de Cargos',
+		'mensaje' => $mensaje . "<script>$('#cargostabla').html('')</script>"
+	]);
+}
+
+function creaCargo($leyenda, $cat, $otracategoria, $monto, $mensual, $anio, $recargo, $interes, $multa, $aniocobro, $repetir, $metros, $automatico, $monto_comercial = 0)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$salida = "";
+
+	if ($cat == -1) {
+		$nombrecorto_auto = strtoupper(substr(preg_replace('/[^a-zA-Z0-9]/', '', $otracategoria), 0, 8));
+		$q = "insert into categorias (nombre, nombrecorto) values(\"$otracategoria\", \"$nombrecorto_auto\")";
+		if ($y->q($q))
+			$salida .= "Se ha creado una categor&iacute;a nueva.<br>";
+		else
+			$salida .= "No se pudo agregar la categor&iacute;a nueva.<br>";
+		$cat = $y->insert_id();
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `cargos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L199-399)</summary>
+
+**Path:** `Unknown file`
+
+```
+	while ($cat = $y->fetch_array($resc)) {
+		$categorias[] = ['id' => $cat[0], 'descripcion' => $cat[1]];
+	}
+
+	return $templates->render('cargos/catalogo', [
+		'cargos' => $cargos,
+		'cargos_registrados' => $cargos_registrados,
+		'categorias' => $categorias
+	]);
+}
+
+function cargaresultados($query, $usuario, $agua, $dren, $marca, $estado1, $estado2, $estado3, $estado4)
+{
+	global $templates;
+	$query = trim($query);
+	$q1 = explode(' ', $query);
+	$r = "";
+	foreach ($q1 as $var) {
+		if ($usuario == 'usr') {
+			$r .= (($r == "") ? "" : " and ") . "usuario.nombre like '%$var%'";
+		} else {
+			$r .= (($r == "") ? "" : " and ") . "(contrato.domicilio like '%$var%' OR contrato.numcontrato like '%$var%')";
+		}
+	}
+
+	$estados_array = array();
+	if ($estado1 == 1)
+		array_push($estados_array, 1);
+	if ($estado2 == 1)
+		array_push($estados_array, 2);
+	if ($estado3 == 1)
+		array_push($estados_array, 3);
+	if ($estado4 == 1 || is_numeric($query))
+		array_push($estados_array, 4);
+
+	$estados = join(",", $estados_array);
+	if (empty($estados)) $estados = "0"; // Fallback to avoid empty IN clause
+	$query_sql = "select contrato.numcontrato, usuario.nombre, contrato.domicilio, contrato.agua, contrato.drenaje, if(isnull(total),0,total) as adeudo, contrato.tipo from (contrato left join usuario on contrato.numusuario=usuario.noconsecutivo) left join (select sum(monto) as total, numcontrato from vw_ligacargos_pendientes group by numcontrato) lc on contrato.numcontrato=lc.numcontrato where contrato.estado IN ($estados) and $r" . (($agua == 'x') ? "" : (($agua == '1') ? " and contrato.agua=1" : " and contrato.agua=0")) . (($dren == 'x') ? "" : (($dren == '1') ? " and contrato.drenaje=1" : " and contrato.drenaje=0"));
+
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+	$res = $y->q($query_sql);
+	$n = $y->num_rows($res);
+
+	if ($n > 0) {
+		$resultados = [];
+		while (list($numcontrato, $nombre, $domicilio, $agua, $drenaje, $adeudo, $tipo) = $y->fetch_array($res)) {
+			$resultados[] = [
+				'numcontrato' => $numcontrato,
+				'nombre' => $nombre,
+				'domicilio' => $domicilio,
+				'agua' => $agua,
+				'drenaje' => $drenaje,
+				'adeudo' => $adeudo,
+				'tipo' => $tipo
+			];
+		}
+		return $templates->render('cargos/busqueda_resultados', [
+			'n' => $n,
+			'resultados' => $resultados,
+			'marca' => $marca
+		]);
+	}
+	return "";
+}
+
+function pagacancelacargos($opc, $idc, $pago, $rp, $rt, $texto, $totalmarcado, $recibo)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	if ($opc == 'pagacargos') { // Pago de cargos.
+		// Host C: reservar folio atómico en folios_recibo; si viene $recibo del form lo usamos como referencia
+		$y->q("INSERT INTO folios_recibo (dummy) VALUES (1)");
+		$folio_sig = $y->insert_id();
+
+		foreach ($pago as $ref => $val) {
+			$lm = explode('|', $val);
+			$id_cargoval = intval($lm[0]);
+			$leyendaval  = $lm[1];
+			$monto_val   = floatval($lm[2]);
+			$repetidoval = intval($lm[3]);
+			$categoriaval = isset($lm[4]) ? intval($lm[4]) : 0;
+
+			if ($categoriaval == 6 || strpos(strtoupper($leyendaval), 'FALTA ASAMBLEA') !== false) {
+				// Asamblea: sp_sinc_asamblea_puntual sincroniza todos los contratos del usuario
+				$res_u = $y->q("select numusuario from contrato where numcontrato = '$idc'");
+				list($numusuario) = $y->fetch_array($res_u);
+				// Primero pagar el cargo del contrato principal (usando ID atómico)
+				$y->q("CALL sp_pagar_cargo($id_cargoval, '$idc', \"$leyendaval\", $repetidoval, $folio_sig, '$idc', $monto_val, @filas)");
+				// Sincronizar el resto de contratos del mismo usuario
+				$y->q("CALL sp_sinc_asamblea_puntual($numusuario, \"$leyendaval\", 0, @filas_sinc)");
+			} else {
+				$y->q("CALL sp_pagar_cargo($id_cargoval, '$idc', \"$leyendaval\", $repetidoval, $folio_sig, '', $monto_val, @filas)");
+			}
+		}
+		// Auditoría de Pago
+		$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato) 
+		       VALUES(NOW(), 'Cobro de Cargos', 'Emisión de Recibo Folio: $folio_sig', 'Total Marcado: \$$totalmarcado | Cargos liquidados via sp_pagar_cargo [Atomic ID Mode]', '$idc')");
+
+		return "<script>cargaDatosContrato('$idc'); window.open('reportes/recibo.php?folio=$folio_sig', 'recibo', 'width=640,height=450,scrollbars=yes');</script>";
+
+	} else { // Cancelacion de cargos.
+		$res1 = $y->q("select contrasena from contrasenas where rol = 'presidente'");
+		$res2 = $y->q("select contrasena from contrasenas where rol = 'tesorero'");
+
+		list($contrasena_presidente) = $y->fetch_array($res1);
+		list($contrasena_tesorero) = $y->fetch_array($res2);
+		// Bloque comentarizado para pruebas auth.
+		//		if (md5($rp) == $contrasena_presidente && md5($rt) == $contrasena_tesorero) {
+		$cfg = cargaConfig($y);
+		$min_car = intval(isset($cfg['cancelacion_min_caracteres']) ? $cfg['cancelacion_min_caracteres'] : 20);
+		if (strlen($texto) > $min_car) {
+			$x = "";
+			foreach ($pago as $valor) {
+				$lm = explode('|', $valor);
+				$id_c_val    = intval($lm[0]);
+				$leyenda_esc = $y->real_escape_string($lm[1]);
+				$monto_c     = floatval($lm[2]);
+				$rep_val     = isset($lm[3]) ? intval($lm[3]) : 0;
+				
+				$res_id_act = $y->q("SELECT id, folio FROM ligacargos WHERE id = $id_c_val LIMIT 1");
+				$res_id_his = $y->q("SELECT id, folio FROM ligacargos_historico WHERE id = $id_c_val LIMIT 1");
+				$row_id = $y->fetch_array($res_id_act) ?: $y->fetch_array($res_id_his);
+				$id_str = $row_id ? " [ID: {$row_id['id']}" . ($row_id['folio'] > 0 ? " | Folio: {$row_id['folio']}" : "") . "]" : " [ID: $id_c_val]";
+
+				$y->q("CALL sp_cancelar_cargo($id_c_val, '$idc', '$leyenda_esc', $rep_val, @filas)");
+				$x .= ((strlen($x) > 0) ? ", " : "") . $lm[1] . (($lm[3] == 0) ? "" : " (r$lm[3])") . " (\$" . $lm[2] . ")" . $id_str;
+			}
+			// Detección robusta de operador
+			$ses_usr  = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
+			$operador = 'cajero';
+			if (is_string($ses_usr) && $ses_usr !== '') {
+			    $operador = $ses_usr;
+			} elseif (is_object($ses_usr) && get_class($ses_usr) !== '__PHP_Incomplete_Class' && method_exists($ses_usr, 'getNombre')) {
+			    $operador = $ses_usr->getNombre();
+			}
+
+			$x .= " | Operador: " . $operador;
+
+			$texto_esc = $y->real_escape_string($texto);
+			$x_esc = $y->real_escape_string($x);
+			$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato) VALUES(NOW(), 'cancelacion', '$texto_esc', '$x_esc', '$idc')");
+			return "<script>cargaDatosContrato('$idc');</script>";
+		} else {
+			return $templates->render('sistema/mensaje', [
+				'titulo' => 'Error',
+				'mensaje' => 'Debe escribir a detalle el porqu&eacute; de la cancelaci&oacute;n de estos cargos (m&iacute;nimo ' . $min_car . ' caracteres).'
+			]);
+		}
+		/*
+		} else {
+			return $templates->render('sistema/mensaje', [
+				'titulo' => 'Error',
+				'mensaje' => 'Las contrase&ntilde;as no son las correctas.'
+			]);
+		} */
+	}
+}
+
+function aplicacargos($c, $cargo)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+	$cfg = cargaConfig($y);
+
+	if (!is_array($cargo) || count($cargo) == 0) {
+		return $templates->render('sistema/mensaje', [
+			'titulo' => 'Información',
+			'mensaje' => 'No se seleccionaron cargos para aplicar.'
+		]);
+	}
+
+	$n = 0;
+	$m = 0;
+	$alertas = array();
+	foreach ($cargo as $leyenda_input) {
+		$a = explode('|', $leyenda_input);
+		$contratos_lista = is_array($c) ? $c : array($c);
+
+		foreach ($contratos_lista as $numcontrato) {
+			// Validar estado del contrato
+			$res_edo = $y->q("SELECT estado FROM contrato WHERE numcontrato='$numcontrato'");
+			list($edo_cto) = $y->fetch_array($res_edo);
+			if (intval($edo_cto) === 4) {
+				$alertas[] = "El contrato <b>$numcontrato</b> se encuentra en Suspensión Definitiva y no puede recibir nuevos cargos.";
+				continue;
+			}
+
+			// Consultar tomas activas para este contrato
+			$res_tomas = $y->q("SELECT COUNT(*) FROM contrato_toma WHERE numcontrato='$numcontrato' AND tiene_agua=1 AND estado_agua=1");
+			list($n_tomas_agua) = $y->fetch_array($res_tomas);
+			$res_tomas_d = $y->q("SELECT COUNT(*) FROM contrato_toma WHERE numcontrato='$numcontrato' AND tiene_drenaje=1 AND estado_drenaje=1");
+			list($n_tomas_drenaje) = $y->fetch_array($res_tomas_d);
+			$res_tipo = $y->q("SELECT MAX(tipo) FROM contrato_toma WHERE numcontrato='$numcontrato'");
+			list($es_comercial) = $y->fetch_array($res_tipo);
+			$es_comercial = intval($es_comercial);
+
+			$res2 = $y->q("select metros from contrato where numcontrato = '$numcontrato'");
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `cargos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L599-699)</summary>
+
+**Path:** `Unknown file`
+
+```
+		
+		if ($actualizados > 0) {
+			$salida .= "Se sincronizó el saldo retroactivamente en <b>$actualizados</b> contratos con este cargo pendiente.<br>";
+			$antes_str = "Se modificaron tarifas del cargo. Tarifas aplicadas: Normal $\$$monto, Comercial: $\$$monto_comercial";
+			$despues_str = "Sincronizacion de saldo aplicada a $actualizados contratos pendientes.";
+			$leyenda_esc = $y->real_escape_string($leyenda);
+			$antes_esc = $y->real_escape_string($antes_str);
+			$despues_esc = $y->real_escape_string($despues_str);
+			$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato) VALUES(NOW(), 'Sincr. masiva de Adeudos - $leyenda_esc', '$antes_esc', '$despues_esc', '-MASIVO-')");
+		}
+
+	} else
+
+		$salida .= "No se pudo modificar el cargo.<br>";
+
+	return $templates->render('sistema/mensaje', [
+		'titulo' => 'Modificar Cargo',
+		'mensaje' => $salida . "<script>cargabusquedacontrato();</script>"
+	]);
+}
+
+function egresos()
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$res = $y->q("select max(id)+1 from egresos");
+	list($folio) = $y->fetch_array($res);
+
+	if ($folio == null)
+		$folio = 1;
+
+	$res = $y->q("select nombre from categorias_egresos order by id");
+	$categorias_egresos = [];
+	while (list($nombrecat) = $y->fetch_array($res)) {
+		$categorias_egresos[] = $nombrecat;
+	}
+
+	$res = $y->q("select id, leyenda, monto, categoria, fecha, estado, motivoelimina from egresos order by fecha desc");
+	$egresos = [];
+	while ($row = $y->fetch_array($res)) {
+		$egresos[] = [
+			'id' => $row[0],
+			'leyenda' => $row[1],
+			'monto' => $row[2],
+			'categoria' => $row[3],
+			'fecha' => $row[4],
+			'estado' => $row[5],
+			'motivoelimina' => $row[6]
+		];
+	}
+
+	return $templates->render('cargos/egresos', [
+		'folio' => $folio,
+		'categorias_egresos' => $categorias_egresos,
+		'egresos' => $egresos
+	]);
+}
+
+function registraegreso($folio, $nombre, $cat, $monto, $nombredetalle, $recibe)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$monto_val = floatval($monto);
+	$nombre_esc = $y->real_escape_string($nombre);
+	$cat_esc = $y->real_escape_string($cat);
+	$detalle_esc = $y->real_escape_string($nombredetalle);
+	$recibe_esc = $y->real_escape_string($recibe);
+
+	// Resolver id_categoria desde categorias_egresos (mejora diseño Host C)
+	$res_cat = $y->q("SELECT id FROM categorias_egresos WHERE nombre = '$cat_esc' LIMIT 1");
+	$row_cat = $y->fetch_array($res_cat);
+	$id_cat = $row_cat ? intval($row_cat['id']) : null;
+	$id_cat_sql = ($id_cat !== null) ? $id_cat : 'NULL';
+
+	$q = "INSERT INTO egresos (id, leyenda, monto, categoria, fecha, estado, motivoelimina, detalle, recibe, id_categoria)
+	      VALUES (null, '$nombre_esc', $monto_val, '$cat_esc', now(), 0, '', '$detalle_esc', '$recibe_esc', $id_cat_sql)";
+
+	if ($y->q($q)) {
+		$titulo = 'Registrado';
+		$mensaje = "Se ha registrado el egreso de \$" . number_format($monto, 2, '.', ',') . ".";
+		
+		$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato) 
+		       VALUES(NOW(), 'Registro de Egreso', 'NUEVO', 'Folio: $folio | Leyenda: $nombre | Monto: \$$monto | Recibe: $recibe', '-EGRESO-')");
+	} else {
+		$titulo = 'Error';
+		$mensaje = "No se ha podido registrar el egreso.";
+	}
+
+	$script = "<script>window.open('reportes/reciboegreso.php?folio=$folio', 'reciboegreso', 'width=640, height=450, scrollbars=yes');</script>";
+
+	return $templates->render('sistema/mensaje', [
+		'titulo' => $titulo,
+		'mensaje' => $mensaje . $script
+	]);
+}
+
+function mostrarCargo($num)
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `contratos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L339-419)</summary>
+
+**Path:** `Unknown file`
+
+```
+			}
+		} else {
+			// Transiciones a estado 2 (SUSP. TEMPORAL) o 3 (SUSP. ADMINISTRATIVA)
+			$nota_especifica = (intval($estado) === 2)
+				? "Facturación congelada. Anualidad vigente cancelada (Regla C06)."
+				: "Suspensión sancionatoria. Adeudo íntegro conservado. Sin amnistía al reactivar.";
+		}
+
+		// Snapshot financiero POST-cambio para auditoría
+		$res_post = $y->q("SELECT COUNT(*) AS n, SUM(monto) AS total FROM vw_ligacargos_pendientes WHERE numcontrato = '$contrato'");
+		$post = $y->fetch_array($res_post);
+		$n_post  = intval($post['n']);
+		$tot_post = number_format(floatval($post['total']), 2);
+		$resumen_financiero = "Adeudos: $n_post | Deuda: \$$tot_post";
+
+		$nombre_origen_esc      = $y->real_escape_string($nombre_origen);
+		$nombre_destino_esc     = $y->real_escape_string($nombre_destino);
+		$texto_esc              = $y->real_escape_string($texto);
+		$nota_especifica_esc    = $y->real_escape_string($nota_especifica);
+		$resumen_financiero_esc = $y->real_escape_string($resumen_financiero);
+
+		$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato) 
+		       VALUES(NOW(), 
+		              'Cambio de estado: $nombre_origen_esc → $nombre_destino_esc', 
+		              'Estado [$estado_actual] $nombre_origen_esc. Motivo: $texto_esc', 
+		              'Estado [$estado] $nombre_destino_esc. $nota_especifica_esc | $resumen_financiero_esc', 
+		              '$contrato')");
+
+		$salida = "<script>cargaDatosContrato('$contrato');</script>";
+	} else {
+		$salida = $templates->render('sistema/mensaje', array(
+			'titulo'  => 'Error',
+			'mensaje' => 'Debe escribir a detalle el porqu&eacute; de la cancelaci&oacute;n de estos cargos (m&iacute;nimo ' . $min_car . ' caracteres).'
+		));
+	}
+	return $salida;
+}
+
+function creaNota($contrato, $texto)
+{
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+	$salida = "";
+
+	// M1-fix: leer numcontratoresp real del contrato para insertarlo correctamente en notas
+	$res_resp = $y->q("SELECT numcontratoresp FROM contrato WHERE numcontrato='$contrato'");
+	list($numcontratoresp_real) = $y->fetch_array($res_resp);
+	// Fallback: si el contrato no tiene responsable diferente, usar el mismo numcontrato
+	if (empty($numcontratoresp_real)) {
+		$numcontratoresp_real = $contrato;
+	}
+
+	if ($y->q("INSERT INTO notas VALUES(null, NOW(), '$contrato', \"$texto\", 0, '$contrato', '$numcontratoresp_real')")) {
+		$texto_esc = $y->real_escape_string($texto);
+		$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato) 
+		       VALUES(NOW(), 'Nota de Contrato', 'NUEVA', 'Texto: $texto_esc', '$contrato')");
+		$salida .= "<script>cargaDatosContrato('$contrato');</script>";
+	}
+	return $salida;
+}
+
+
+function eliminaNota($id)
+{
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+	list($contrato, $texto_nota) = $y->fetch_array($y->q("SELECT contrato, texto FROM notas WHERE id='$id'"));
+	$y->q("UPDATE notas SET estado=-1 WHERE id='$id'");
+	
+	$texto_esc = $y->real_escape_string($texto_nota);
+	$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato) 
+	       VALUES(NOW(), 'Eliminación de Nota', 'Activa: $texto_esc', 'ELIMINADA', '$contrato')");
+
+	return "<script>cargaDatosContrato('$contrato');</script>";
+}
+
+function cambiapropietario($contrato, $usuario, $nuevousuario)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `contratos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L829-899)</summary>
+
+**Path:** `Unknown file`
+
+```
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+	$cfg    = cargaConfig($y);
+	$exento = intval(obtenerValorSeguro($cfg, 'nuevo_contrato_exento_default', 1));
+
+	// Validar restricción: máx 2 tomas por usuario mismo domicilio
+	$dom_clean_sql_c = "REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(UPPER(c.domicilio), ' ', ''), '.', ''), ',', ''), 'Á','A'), 'É','E'), 'Í','I'), 'Ó','O'), 'Ú','U')";
+	$dom_clean_sql_v = "REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(UPPER('$domicilio'), ' ', ''), '.', ''), ',', ''), 'Á','A'), 'É','E'), 'Í','I'), 'Ó','O'), 'Ú','U')";
+	$res_count = $y->q("SELECT COUNT(ct.id) FROM contrato c JOIN contrato_toma ct ON c.numcontrato = ct.numcontrato WHERE c.numusuario='$usr' AND $dom_clean_sql_c = $dom_clean_sql_v AND c.estado != 4");
+	list($tomas_existentes) = $y->fetch_array($res_count);
+	
+	$num_t = intval($num_tomas);
+	if ($num_t < 1) $num_t = 1;
+	
+	if ($tomas_existentes + $num_t > 2) {
+		return "<script>alert('Restriccion de Tomas: El usuario ya cuenta con $tomas_existentes toma(s) en el domicilio indicado. Solo se permiten hasta 2 tomas por usuario en el mismo domicilio.');</script>";
+	}
+
+	$q = "INSERT INTO contrato (numcontrato, numusuario, numtoma, domicilio, masdatos, tipo, agua, drenaje, observaciones, estado, numcontratoresp, numcontratoletras, fecha, metros, exento_recargo_primer_anio) VALUES('$id', '$usr', 0, \"$domicilio\", \"$masdatos\", $tipo, $agua, $drenaje, \"$observaciones\", 1, '', '', NOW(), $metros, $exento)";
+
+	if ($y->q($q)) {
+		// Crear tomas en contrato_toma
+		$num_t = intval($num_tomas);
+		if ($num_t < 1) $num_t = 1;
+		$max_t = intval(obtenerValorSeguro($cfg, 'max_tomas_por_contrato', 2));
+		if ($num_t > $max_t) $num_t = $max_t;
+
+		for ($n = 1; $n <= $num_t; $n++) {
+			$td        = isset($tomas_data[$n]) ? $tomas_data[$n] : array();
+			$tipo_t    = intval(obtenerValorSeguro($td, 'tipo', 0));
+			$t_agua    = intval(obtenerValorSeguro($td, 'tiene_agua', 1));
+			$t_drenaje = intval(obtenerValorSeguro($td, 'tiene_drenaje', 1));
+			$e_agua    = ($t_agua    ? 1 : 0);
+			$e_drenaje = ($t_drenaje ? 1 : 0);
+			$y->q("INSERT INTO contrato_toma (numcontrato,num_toma,tipo,tiene_agua,tiene_drenaje,estado_agua,estado_drenaje,fecha_alta) VALUES('$id',$n,$tipo_t,$t_agua,$t_drenaje,$e_agua,$e_drenaje,NOW())");
+		}
+
+		// Sincronizar agua/drenaje/tipo en contrato (basado en tomas creadas)
+		$r_a = $y->q("SELECT COUNT(*) FROM contrato_toma WHERE numcontrato='$id' AND tiene_agua=1");
+		list($ta) = $y->fetch_array($r_a);
+		$r_d = $y->q("SELECT COUNT(*) FROM contrato_toma WHERE numcontrato='$id' AND tiene_drenaje=1");
+		list($td2) = $y->fetch_array($r_d);
+		$r_t = $y->q("SELECT MAX(tipo) FROM contrato_toma WHERE numcontrato='$id'");
+		list($tp) = $y->fetch_array($r_t);
+		$y->q("UPDATE contrato SET agua=$ta, drenaje=$td2, tipo=" . intval($tp) . " WHERE numcontrato='$id'");
+
+        // Establecer paridad inicial (Generar cargos según tomas dadas de alta)
+        _sincronizaParidadFinanciera($id, $y);
+
+		// Auditoría de Creación
+		$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato) 
+		       VALUES(NOW(), 'Registro de Nuevo Contrato', 'NUEVO', 'Usuario: $usr | Domicilio: $domicilio', '$id')");
+
+		$salida = "<script>cargaDatosContrato('$id');</script>";
+	} else {
+		$salida = $templates->render('sistema/mensaje', array(
+			'titulo'  => 'Cambios sin efecto',
+			'mensaje' => 'No ha sido posible agregar este contrato a la base de datos.'
+		));
+	}
+	return $salida;
+}
+
+function validaTomasSync($usr, $domicilio, $num_tomas, $id = null) {
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	if ($id !== null && $id != '') {
+		// Validar estado del contrato
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `contratos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L639-799)</summary>
+
+**Path:** `Unknown file`
+
+```
+			$regAntes_esc   = $y->real_escape_string($regAntes);
+			$regDespues_esc = $y->real_escape_string($regDespues);
+			$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato) VALUES(NOW(), 'Actualizaci&oacute;n del contrato $id', '$regAntes_esc', '$regDespues_esc', '$id')");
+		}
+		$y->q("UPDATE contrato SET $full_update WHERE numcontrato='$id'");
+		
+		// Sincronización de Paridad Físico-Financiera
+		_sincronizaParidadFinanciera($id, $y);
+		
+		$salida = "<script>cargaDatosContrato('$id')</script>";
+	} else {
+		$salida = $templates->render('sistema/mensaje', array(
+			'titulo'  => 'Cambios sin efecto',
+			'mensaje' => "Ning&uacute;n cambio ha sido enviado para el contrato $id."
+		));
+	}
+	return $salida;
+}
+
+function _quitaCargoAnual($numcontrato, $servicio, $y)
+{
+	$anio_actual = date('Y');
+	$servicio    = strtoupper($servicio);
+	$y->q("CALL sp_cancelar_cargo('$numcontrato', CONCAT('ANUALIDAD DEL ', '$servicio', ' ', '$anio_actual'), 0, @filas)");
+}
+
+/**
+ * Motor de Paridad: Asegura que la existencia de cargos coincida con el estado físico de las tomas.
+ */
+function _sincronizaParidadFinanciera($id, $y) {
+    $anio = date('Y');
+    
+    // 0. Verificar estado del contrato para el Standard SDF
+    $res_edo = $y->q("SELECT estado FROM contrato WHERE numcontrato = '$id'");
+    list($estado_cto) = $y->fetch_array($res_edo);
+
+    if (intval($estado_cto) === 4) {
+        // --- LÓGICA STANDARD SDF: Depuración Total ---
+        
+        // 1. Contar afectados para auditoría (ambas tablas)
+        $res_cnt = $y->q("SELECT COUNT(*) FROM vw_ligacargos_pendientes WHERE numcontrato = '$id'");
+        list($afectados) = $y->fetch_array($res_cnt);
+
+        if (intval($afectados) > 0) {
+            // 2. Registrar en cambios antes de limpiar
+            $y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato) 
+                   VALUES(NOW(), 'Depuración SDF Automática (Motor Paridad)', 
+                   'Cargos pendientes: $afectados', 'Estado: -1 (Depurado Total)', '$id')");
+
+            // 3. Limpiar tabla activa
+            $y->q("UPDATE ligacargos SET estado = -1 WHERE numcontrato = '$id' AND estado = 0");
+
+            // 4. Limpiar tabla histórica (Esquema V2)
+            $y->q("UPDATE ligacargos_historico SET estado = -1 WHERE numcontrato = '$id' AND estado = 0");
+        }
+        return; // Terminar aquí para SDF
+    }
+
+    // --- LÓGICA DE PARIDAD NORMAL (Estados 1, 2, 3) ---
+    
+    // Conteo físico activo
+	$r_a = $y->q("SELECT COUNT(*) FROM contrato_toma WHERE numcontrato='$id' AND tiene_agua=1 AND estado_agua=1");
+	list($n_agua) = $y->fetch_array($r_a);
+	$r_d = $y->q("SELECT COUNT(*) FROM contrato_toma WHERE numcontrato='$id' AND tiene_drenaje=1 AND estado_drenaje=1");
+	list($n_drenaje) = $y->fetch_array($r_d);
+	
+	// Sincronizar AGUA (categoria=2)
+	$leyenda_a = "ANUALIDAD DEL AGUA $anio";
+	if ($n_agua > 0) {
+	    // Si hay toma física pero el cargo está cancelado (-1), restaurarlo a pendiente (0)
+	    $y->q("UPDATE ligacargos SET estado = 0 WHERE numcontrato='$id' AND leyenda='$leyenda_a' AND categoria=2 AND estado = -1");
+	    $y->q("UPDATE ligacargos_historico SET estado = 0 WHERE numcontrato='$id' AND leyenda='$leyenda_a' AND categoria=2 AND estado = -1");
+	} else {
+	    // Si no hay toma física pero el cargo está pendiente (0), cancelarlo (-1)
+	    $y->q("UPDATE ligacargos SET estado = -1 WHERE numcontrato='$id' AND leyenda='$leyenda_a' AND categoria=2 AND estado = 0");
+	    $y->q("UPDATE ligacargos_historico SET estado = -1 WHERE numcontrato='$id' AND leyenda='$leyenda_a' AND categoria=2 AND estado = 0");
+	}
+
+	// Sincronizar DRENAJE (categoria=3)
+	$leyenda_d = "ANUALIDAD DEL DRENAJE $anio";
+	if ($n_drenaje > 0) {
+	    $y->q("UPDATE ligacargos SET estado = 0 WHERE numcontrato='$id' AND leyenda='$leyenda_d' AND categoria=3 AND estado = -1");
+	    $y->q("UPDATE ligacargos_historico SET estado = 0 WHERE numcontrato='$id' AND leyenda='$leyenda_d' AND categoria=3 AND estado = -1");
+	} else {
+	    $y->q("UPDATE ligacargos SET estado = -1 WHERE numcontrato='$id' AND leyenda='$leyenda_d' AND categoria=3 AND estado = 0");
+	    $y->q("UPDATE ligacargos_historico SET estado = -1 WHERE numcontrato='$id' AND leyenda='$leyenda_d' AND categoria=3 AND estado = 0");
+	}
+
+	// Recalibrar montos de cargos PENDIENTES basados en el nuevo número de tomas y tipo
+	_sincronizaDeudaPendienteContrato($id, $y);
+}
+
+function _sincronizaDeudaPendienteContrato($numcontrato, $y)
+{
+	$r_a = $y->q("SELECT COUNT(*) FROM contrato_toma WHERE numcontrato='$numcontrato' AND tiene_agua=1 AND estado_agua=1");
+	list($n_tomas_agua) = $y->fetch_array($r_a);
+	$r_d = $y->q("SELECT COUNT(*) FROM contrato_toma WHERE numcontrato='$numcontrato' AND tiene_drenaje=1 AND estado_drenaje=1");
+	list($n_tomas_drenaje) = $y->fetch_array($r_d);
+	$r_tc = $y->q("SELECT MAX(tipo) FROM contrato_toma WHERE numcontrato='$numcontrato'");
+	list($es_comercial) = $y->fetch_array($r_tc);
+
+	$rescargos = $y->q("SELECT nombre, monto, monto_comercial, categoria, metros FROM cargos WHERE estado=1 AND automatico=1 AND categoria IN (2,3)");
+	$tarifas_automaticas = array();
+	while ($c = $y->fetch_array($rescargos)) {
+		$tarifas_automaticas[$c['nombre']] = $c;
+	}
+
+	$pendientes = $y->q("SELECT leyenda, repetido, categoria, monto as monto_actual FROM vw_ligacargos_pendientes WHERE numcontrato='$numcontrato' AND categoria IN (2,3)");
+	
+	$rm = $y->q("SELECT metros FROM contrato WHERE numcontrato='$numcontrato'");
+	list($metros_cto) = $y->fetch_array($rm);
+	if (empty($metros_cto)) $metros_cto = 0;
+
+	$actualizados = 0;
+	while ($p = $y->fetch_array($pendientes)) {
+		$leyenda = $p['leyenda'];
+		$cat = $p['categoria'];
+		$rep = $p['repetido'];
+		$monto_actual = floatval($p['monto_actual']);
+		
+		if (isset($tarifas_automaticas[$leyenda])) {
+		    $tf = $tarifas_automaticas[$leyenda];
+		    $monto = floatval($tf['monto']);
+		    $monto_com = floatval($tf['monto_comercial']);
+		    $aplicametros = $tf['metros'];
+		    
+		    $nuevo_monto = 0;
+		    if ($cat == 2 && $n_tomas_agua > 0) {
+		        $m_base = ($es_comercial == 1 && $monto_com > 0) ? $monto_com : (($es_comercial == 1) ? $monto * 2 : $monto);
+		        $nuevo_monto = $m_base * $n_tomas_agua;
+		    }
+		    if ($cat == 3 && $n_tomas_drenaje > 0) {
+		        $m_base = ($es_comercial == 1 && $monto_com > 0) ? $monto_com : (($es_comercial == 1) ? $monto * 2 : $monto);
+		        $nuevo_monto = $m_base * $n_tomas_drenaje;
+		    }
+		    if ($aplicametros == 1 && $nuevo_monto > 0) {
+		        $nuevo_monto = $nuevo_monto * $metros_cto;
+		    }
+		    
+		    if ($nuevo_monto > 0 && abs($nuevo_monto - $monto_actual) > 0.01) {
+		        $y->q("UPDATE ligacargos SET monto=$nuevo_monto WHERE numcontrato='$numcontrato' AND leyenda='$leyenda' AND categoria=$cat AND repetido=$rep AND estado=0");
+		        $y->q("UPDATE ligacargos_historico SET monto=$nuevo_monto WHERE numcontrato='$numcontrato' AND leyenda='$leyenda' AND categoria=$cat AND repetido=$rep AND estado=0");
+		        $actualizados++;
+		    }
+		}
+	}
+	
+	if ($actualizados > 0) {
+	    $y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato) VALUES(NOW(), 'Calibracion automatica de Deudas', 'Saldos desfasados por cambio de tipo', 'Se recalcularon $actualizados servicios pendientes', '$numcontrato')");
+	}
+}
+
+function cambiaEstadoConexion($numcontrato, $num_toma, $servicio, $nuevo_estado)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+	$cfg = cargaConfig($y);
+
+	// Validar contrato ACTIVO
+	$r = $y->q("SELECT estado FROM contrato WHERE numcontrato='$numcontrato'");
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `contratos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L229-269)</summary>
+
+**Path:** `Unknown file`
+
+```
+		'nombre'              => $nombre,
+		'numusuario'          => $numusuario,
+		'domicilio'           => $domicilio,
+		'masdatos'            => $masdatos,
+		'tipo'                => $tipo,
+		'agua'                => $agua,
+		'drenaje'             => $drenaje,
+		'observaciones'       => $observaciones,
+		'estado'              => $estado,
+		'metros'              => $metros,
+		'numcontratoletras'   => $numcontratoletras,
+		'tipos'               => $tipos,
+		'tiposdeestado'       => $tiposdeestado,
+		'estado_usr'          => $estado_usr,
+		'foliotope'           => $foliotope,
+		'npagos'              => $npagos,
+		'adeudos'             => $adeudos,
+		'total'               => $total,
+		'recargos'            => $recargos,
+		'notas'               => $notas,
+		'salidanotas'         => !empty($notas),
+		'cargos_fuente'       => $cargos_fuente,
+		'npagosc'             => $npagosc,
+		'cancelados'          => $cancelados,
+		'nnotas'              => $nnotas,
+		'notas_cancelacion'   => $notas_cancelacion,
+		'otros_contratos'     => $otros_contratos,
+		'tomas'               => $tomas,
+		'num_tomas'           => $num_tomas,
+		'max_tomas'           => $max_tomas,
+		'tarifas_referencia'  => $tarifas_referencia,
+		'cfg'                 => $cfg,
+		'faltan_cargos'       => _verificaAnualidades($y)
+	));
+}
+
+function cambiaestado($contrato, $rp, $rt, $texto, $estado)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `contratos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L265-379)</summary>
+
+**Path:** `Unknown file`
+
+```
+function cambiaestado($contrato, $rp, $rt, $texto, $estado)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$cfg = cargaConfig($y);
+	$min_car = intval(obtenerValorSeguro($cfg, 'cancelacion_min_caracteres', 20));
+	$mes_st  = intval(obtenerValorSeguro($cfg, 'susptemp_mes_permitido', 12));
+
+	$res_actual = $y->q("SELECT estado FROM contrato WHERE numcontrato='$contrato'");
+	list($estado_actual) = $y->fetch_array($res_actual);
+
+	if ($estado_actual == 4) {
+		return $templates->render('sistema/mensaje', array(
+			'titulo'  => 'Acción No Permitida',
+			'mensaje' => 'No es posible cambiar el estado de un contrato que se encuentra en <b>Suspensión Definitiva</b>.'
+		));
+	}
+
+	// Bloqueo de transiciones ilógicas (2 <-> 3) según análisis de Runbook
+	if ((intval($estado_actual) === 2 && intval($estado) === 3) || (intval($estado_actual) === 3 && intval($estado) === 2)) {
+		return $templates->render('sistema/mensaje', array(
+			'titulo'  => 'Transición No Permitida',
+			'mensaje' => 'No se permite saltar entre diferentes tipos de suspensión directamente. El contrato debe ser <b>Regularizado a Activo</b> antes de cambiar el tipo de suspensión.'
+		));
+	}
+
+	$res1 = $y->q("SELECT contrasena FROM contrasenas WHERE rol='presidente'");
+	$res2 = $y->q("SELECT contrasena FROM contrasenas WHERE rol='tesorero'");
+	list($contrasena_presidente) = $y->fetch_array($res1);
+	list($contrasena_tesorero)   = $y->fetch_array($res2);
+
+	// Validar mes para suspensión temporal
+	if ($estado == 2 && intval(date('m')) != $mes_st) {
+		$nom_meses = array("","Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+		return $templates->render('sistema/mensaje', array(
+			'titulo'  => 'No permitido',
+			'mensaje' => 'La Suspensi&oacute;n Temporal solo puede solicitarse en <b>' . $nom_meses[$mes_st] . '</b>.'
+		));
+	}
+
+	if (strlen($texto) > $min_car) {
+		$q = "UPDATE contrato SET estado=$estado WHERE numcontrato='$contrato'";
+		$y->q($q);
+
+		$nombres_estado = array(
+			1 => 'ACTIVO',
+			2 => 'SUSPENSIÓN TEMPORAL',
+			3 => 'SUSPENSIÓN ADMINISTRATIVA',
+			4 => 'SUSPENSIÓN DEFINITIVA'
+		);
+		$nombre_origen  = isset($nombres_estado[intval($estado_actual)]) ? $nombres_estado[intval($estado_actual)] : "ESTADO $estado_actual";
+		$nombre_destino = isset($nombres_estado[intval($estado)])        ? $nombres_estado[intval($estado)]        : "ESTADO $estado";
+
+		if (intval($estado) === 4) {
+			$y->q("UPDATE contrato_toma SET estado_agua=0, estado_drenaje=0 WHERE numcontrato='$contrato'");
+			$y->q("UPDATE contrato SET agua=0, drenaje=0 WHERE numcontrato='$contrato'");
+			
+			// Forzar paridad financiera (cancelar cargos anuales)
+			_sincronizaParidadFinanciera($contrato, $y);
+
+			$nota_especifica = "Eliminación física de tomas y depuración total de deuda (Regla C05).";
+		} else if (intval($estado) === 1) {
+			// Restaurar paridad del año actual PRIMERO — genera/restaura anualidades y recargos del año en curso
+			_sincronizaParidadFinanciera($contrato, $y);
+
+			if (intval($estado_actual) === 2) {
+				// Regla C06: Amnistía DESPUÉS de paridad — cancela recargos históricos sin que paridad los regenere
+				_amnistiaRecargosHistoricos($contrato, $y);
+				$nota_especifica = "Amnistía C06 aplicada: recargos históricos cancelados. Facturación reactivada.";
+			} else {
+				// Estado 3 → 1: NO aplica amnistía — adeudo íntegro conservado
+				$nota_especifica = "Sin amnistía C06: adeudo íntegro conservado (viene de Suspensión Administrativa).";
+			}
+		} else {
+			// Transiciones a estado 2 (SUSP. TEMPORAL) o 3 (SUSP. ADMINISTRATIVA)
+			$nota_especifica = (intval($estado) === 2)
+				? "Facturación congelada. Anualidad vigente cancelada (Regla C06)."
+				: "Suspensión sancionatoria. Adeudo íntegro conservado. Sin amnistía al reactivar.";
+		}
+
+		// Snapshot financiero POST-cambio para auditoría
+		$res_post = $y->q("SELECT COUNT(*) AS n, SUM(monto) AS total FROM vw_ligacargos_pendientes WHERE numcontrato = '$contrato'");
+		$post = $y->fetch_array($res_post);
+		$n_post  = intval($post['n']);
+		$tot_post = number_format(floatval($post['total']), 2);
+		$resumen_financiero = "Adeudos: $n_post | Deuda: \$$tot_post";
+
+		$nombre_origen_esc      = $y->real_escape_string($nombre_origen);
+		$nombre_destino_esc     = $y->real_escape_string($nombre_destino);
+		$texto_esc              = $y->real_escape_string($texto);
+		$nota_especifica_esc    = $y->real_escape_string($nota_especifica);
+		$resumen_financiero_esc = $y->real_escape_string($resumen_financiero);
+
+		$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato) 
+		       VALUES(NOW(), 
+		              'Cambio de estado: $nombre_origen_esc → $nombre_destino_esc', 
+		              'Estado [$estado_actual] $nombre_origen_esc. Motivo: $texto_esc', 
+		              'Estado [$estado] $nombre_destino_esc. $nota_especifica_esc | $resumen_financiero_esc', 
+		              '$contrato')");
+
+		$salida = "<script>cargaDatosContrato('$contrato');</script>";
+	} else {
+		$salida = $templates->render('sistema/mensaje', array(
+			'titulo'  => 'Error',
+			'mensaje' => 'Debe escribir a detalle el porqu&eacute; de la cancelaci&oacute;n de estos cargos (m&iacute;nimo ' . $min_car . ' caracteres).'
+		));
+	}
+	return $salida;
+}
+
+function creaNota($contrato, $texto)
+{
+	$y = new Conexion();
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `usuarios.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+function busquedaUsuario($query)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$coincidencias = explode(' ', $query);
+	$descripciones = "";
+
+	foreach ($coincidencias as $r) {
+		if ($r != "")
+			$descripciones .= (($descripciones == "") ? "" : " and ") . "nombre like '%$r%'";
+	}
+
+	if ($descripciones == "")
+		return "";
+
+	$q2 = "SELECT u.noconsecutivo, u.nombre, u.domicilio, u.estado,
+	              (SELECT COUNT(*) FROM usuario u2 WHERE u2.nombre = u.nombre) as cnt,
+	              (SELECT COUNT(*) FROM contrato WHERE numusuario = u.noconsecutivo) as ctotales
+	       FROM usuario u
+	       WHERE $descripciones AND u.estado <> 2
+	       GROUP BY u.noconsecutivo, u.nombre, u.domicilio, u.estado
+	       HAVING ctotales > 0";
+
+	$res = $y->q($q2);
+
+	$usuarios = [];
+	while (list($consecutivo, $nombre, $domicilio, $estado_u, $cnt) = $y->fetch_array($res)) {
+		$q3 = "select numcontrato from contrato where numusuario = $consecutivo and estado <> 4";
+
+		$res2 = $y->q($q3);
+
+		$contratos = "";
+		while (list($numcontrato) = $y->fetch_array($res2))
+			$contratos .= (($contratos == "") ? "" : "-") . $numcontrato;
+
+		$usuarios[] = [
+			'consecutivo' => $consecutivo,
+			'nombre' => $nombre,
+			'domicilio' => $domicilio,
+			'contratos' => $contratos,
+			'repetido' => ($cnt > 1),
+			'estado' => $estado_u
+		];
+	}
+
+	return $templates->render('usuarios/busqueda_resultados', ['usuarios' => $usuarios]);
+}
+
+function busquedaUsuarioCalle($query)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$coincidencias = explode(' ', $query);
+	$descripciones = "";
+
+	foreach ($coincidencias as $r) {
+		if ($r != "")
+			$descripciones .= (($descripciones == "") ? "" : " and ") . "domicilio regexp '($r+)'";
+	}
+
+	if ($descripciones == "")
+		return "";
+
+	$q2 = "SELECT u.noconsecutivo, u.nombre, u.domicilio, u.estado,
+	              (SELECT COUNT(*) FROM usuario u2 WHERE u2.nombre = u.nombre) as cnt,
+	              (SELECT COUNT(*) FROM contrato WHERE numusuario = u.noconsecutivo) as ctotales
+	       FROM usuario u
+	       WHERE $descripciones AND u.estado <> 2
+	       GROUP BY u.noconsecutivo, u.nombre, u.domicilio, u.estado
+	       HAVING ctotales > 0";
+
+	$res = $y->q($q2);
+
+	$usuarios = [];
+	while (list($consecutivo, $nombre, $domicilio, $estado_u, $cnt) = $y->fetch_array($res)) {
+		if ($nombre != "") {
+			$q3 = "select numcontrato from contrato where numusuario = $consecutivo and estado <> 4";
+
+			$res2 = $y->q($q3);
+
+			$contratos = "";
+			while (list($numcontrato) = $y->fetch_array($res2))
+				$contratos .= (($contratos == "") ? "" : "-") . $numcontrato;
+
+			$usuarios[] = [
+				'consecutivo' => $consecutivo,
+				'nombre' => $nombre,
+				'domicilio' => $domicilio,
+				'contratos' => $contratos,
+				'repetido' => ($cnt > 1),
+				'estado' => $estado_u
+			];
+		}
+	}
+
+	return $templates->render('usuarios/busqueda_resultados', ['usuarios' => $usuarios]);
+}
+
+function cargaUsuario($id)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$res = $y->q("select numcontrato, domicilio, agua, drenaje, estado from contrato where numusuario=$id and estado <> 4");
+	$contratos = [];
+
+	while (list($contrato, $domicilio, $agua, $drenaje, $edo) = $y->fetch_array($res)) {
+		$contratos[] = [
+			'numcontrato' => $contrato,
+			'domicilio' => $domicilio,
+			'agua' => $agua,
+			'drenaje' => $drenaje,
+			'estado' => $edo
+		];
+	}
+
+	$res = $y->q("select nombre, domicilio, masdatos, telefono, email, estado from usuario where noconsecutivo=$id");
+
+	list($nombre, $domicilio, $masdatos, $telefono, $email, $estado_u) = $y->fetch_array($res);
+
+	$tiposdeestado = array("1" => "Activo", "2" => "Suspensi&oacute;n Temporal", "3" => "Suspensi&oacute;n Administrativa", "4" => "Suspensi&oacute;n Definitiva");
+
+	return $templates->render('usuarios/ficha', [
+		'id' => $id,
+		'nombre' => $nombre,
+		'domicilio' => $domicilio,
+		'masdatos' => $masdatos,
+		'telefono' => $telefono,
+		'email' => $email,
+		'contratos' => $contratos,
+		'tiposdeestado' => $tiposdeestado,
+		'estado_usr' => $estado_u
+	]);
+}
+
+function buscaUsuarioCambio($query)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$coincidencias = explode(' ', $query);
+	$descripciones = "";
+	foreach ($coincidencias as $r) {
+		$descripciones .= (($descripciones == "") ? "" : " and ") . "nombre like '%$r%'";
+	}
+
+	$q = "SELECT noconsecutivo, UCASE(nombre) as nombre_uc, 
+	             (SELECT COUNT(*) FROM usuario u2 WHERE u2.nombre = u1.nombre) as cnt,
+	             (SELECT GROUP_CONCAT(numcontrato SEPARATOR '-') FROM contrato WHERE numusuario = u1.noconsecutivo and estado <> 4) as contratos,
+	             (SELECT COUNT(*) FROM contrato WHERE numusuario = u1.noconsecutivo and estado <> 4) as cactivos,
+	             domicilio
+	      FROM usuario u1
+	      WHERE $descripciones AND nombre!='' 
+	      HAVING (cnt = 1 OR cactivos > 0)
+	      ORDER BY nombre_uc";
+
+	$res = $y->q($q);
+
+	$usuarios = [];
+	while (list($consecutivo, $nombre, $cnt, $contratos, $cactivos, $domicilio) = $y->fetch_array($res)) {
+		$usuarios[] = [
+			'consecutivo' => $consecutivo,
+			'nombre' => $nombre,
+			'repetido' => ($cnt > 1),
+			'contratos' => $contratos,
+			'domicilio' => $domicilio
+		];
+	}
+
+	return $templates->render('usuarios/options', ['usuarios' => $usuarios]);
+}
+
+function nuevoUsuario()
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$res = $y->q("select nombre from usuario order by noconsecutivo desc limit 5");
+
+	$ultimos = [];
+	while (list($nombre) = $y->fetch_array($res)) {
+		$ultimos[] = $nombre;
+	}
+
+	return $templates->render('usuarios/nuevo', ['ultimos' => $ultimos]);
+}
+
+function guardaUsuario($id, $nombre, $domicilio, $telefono, $email, $masdatos, $no_localizado = 0)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$is_no_localizado = ($no_localizado == "on" || $no_localizado == "1" || $no_localizado === 1);
+
+	$vars = array("nombre", "domicilio", "telefono", "email", "masdatos");
+
+	$res = $y->q("select nombre, domicilio, telefono, email, masdatos, estado from usuario where noconsecutivo=$id");
+
+	list($nombreo, $domicilioo, $telefonoo, $emailo, $masdatoso, $estadoo) = $y->fetch_array($res);
+	$actualiza = "";
+	$regAntes = "";
+	$regDespues = "";
+
+	foreach ($vars as $vals) {
+		$orig = $vals . "o";
+		if ($$vals != $$orig) {
+			$actualiza .= (($actualiza == "") ? "" : ", ") . "$vals=\"" . $$vals . "\"";
+			$regAntes .= (($regAntes == "") ? "" : ", ") . "$vals='" . $$orig . "'";
+			$regDespues .= (($regDespues == "") ? "" : ", ") . "$vals='" . $$vals . "'";
+		}
+	}
+
+	// Caso especial: Declaratoria de No Localizado
+	if ($is_no_localizado && $estadoo != 2) {
+		$actualiza .= (($actualiza == "") ? "" : ", ") . "estado = 2, no_localizado = 1";
+		$regAntes .= (($regAntes == "") ? "" : ", ") . "estado = $estadoo, no_localizado = 0";
+		$regDespues .= (($regDespues == "") ? "" : ", ") . "estado = 2, no_localizado = 1";
+
+		// 1. Obtener contratos activos para suspender y calcular deuda
+		$res_ctos = $y->q("SELECT numcontrato, estado FROM contrato WHERE numusuario = $id AND estado <> 4");
+		$ctos_afectados = [];
+		$deuda_total = 0;
+
+		while (list($ncto, $edocto) = $y->fetch_array($res_ctos)) {
+			$ctos_afectados[] = ['num' => $ncto, 'prev' => $edocto];
+			
+			// Calcular deuda actual del contrato
+			$res_deuda = $y->q("SELECT SUM(monto) FROM vw_ligacargos_pendientes WHERE numcontrato = '$ncto'");
+			list($monto_deuda) = $y->fetch_array($res_deuda);
+			$deuda_total += floatval($monto_deuda);
+		}
+
+		if (count($ctos_afectados) > 0) {
+			$lista_ctos = array_column($ctos_afectados, 'num');
+			$str_ctos = implode('-', $lista_ctos);
+
+			// 2. Suspender contratos masivamente y desconectar tomas
+			$y->q("UPDATE contrato SET estado = 4 WHERE numusuario = $id AND estado <> 4");
+			$y->q("UPDATE contrato_toma ct JOIN contrato c ON ct.numcontrato = c.numcontrato SET ct.estado_agua = 0, ct.estado_drenaje = 0 WHERE c.numusuario = $id");
+
+			// 3. Registrar en cambios la acción masiva
+			$meses = array("01"=>"Enero","02"=>"Febrero","03"=>"Marzo","04"=>"Abril","05"=>"Mayo","06"=>"Junio","07"=>"Julio","08"=>"Agosto","09"=>"Septiembre","10"=>"Octubre","11"=>"Noviembre","12"=>"Diciembre");
+			$fecha_hoy = date('d') . " de " . $meses[date('m')] . " de " . date('Y');
+			
+			$desc_cambio = "Declaratoria No Localizado ID $id. Contratos suspendidos: $str_ctos. Deuda snapshot: $" . number_format($deuda_total, 2);
+			$desc_cambio_esc = $y->real_escape_string($desc_cambio);
+			$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato) VALUES(NOW(), '$desc_cambio_esc', 'Activos', 'Suspendidos Def. (4)', '')");
+
+			// 4. Agregar nota formal y depurar cargos masivamente
+			foreach ($ctos_afectados as $info) {
+				$txt_nota = "SUSPENSIÓN DEFINITIVA POR ACUERDO DE COMITÉ AL " . strtoupper($fecha_hoy) . ". MOTIVO: USUARIO NO LOCALIZADO. DEUDA AL MOMENTO: $" . number_format($deuda_total, 2);
+				$y->q("INSERT INTO notas (fecha, contrato, texto, estado, numcontratosin, numcontratoresp) VALUES(NOW(), '" . $info['num'] . "', '$txt_nota', 1, '" . $info['num'] . "', '" . $info['num'] . "')");
+                
+                // Aplicar Standard SDF (Lógica V2)
+                _sincronizaParidadFinanciera($info['num'], $y);
+			}
+		}
+	}
+
+	if ($actualiza != "") {
+		$regAntes_esc   = $y->real_escape_string($regAntes);
+		$regDespues_esc = $y->real_escape_string($regDespues);
+		$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato) VALUES(NOW(), 'Actualizaci&oacute;n del usuario $id', '$regAntes_esc', '$regDespues_esc', '')");
+		$salida = "update usuario set $actualiza where noconsecutivo=$id";
+		if ($y->q($salida))
+			$salida = "<script>cargaDatosUsuario($id)</script>";
+	} else {
+		$salida = $templates->render('sistema/mensaje', [
+			'titulo' => 'Cambios',
+			'mensaje' => "<b>Ningún</b> cambio ha sido enviado, el registro ha quedado igual para el usuario <b><span class='mayusculas'>$nombre</span></b>."
+		]);
+	}
+
+	return $salida;
+}
+
+function guardaNuevoUsuario($nombre, $domicilio, $telefono, $email, $masdatos)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$q = "insert into usuario (nombre, domicilio, masdatos, telefono, email, estado) values(\"$nombre\", \"$domicilio\", \"$masdatos\", \"$telefono\", \"$email\", 1)";
+
+	if ($y->q($q)) {
+		$nuevo_id = $y->insert_id();
+		$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato)
+		       VALUES(NOW(), 'Registro de Nuevo Usuario', 'NUEVO', 'Nombre: $nombre | ID: $nuevo_id', '')");
+
+		$salida = $templates->render('sistema/mensaje', [
+			'titulo' => 'Alta aceptada',
+			'mensaje' => "Ha sido dado de alta el <b>usuario</b> <span class='mayusculas'>$nombre</span>"
+		]);
+	} else {
+		$salida = $templates->render('sistema/mensaje', [
+			'titulo' => 'Alta con problemas',
+			'mensaje' => "Hubo un problema con los datos que ha ingresado. Si en los datos incluye comillas, utilice las comillas simples.<br>"
+		]);
+	}
+
+	return $salida;
+}
+
+function registrousuarios()
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$res = $y->q("select nombre, rol from users");
+
+	$usuarios = [];
+	while (list($nombre, $rol) = $y->fetch_array($res)) {
+		$usuarios[] = [
+			'nombre' => $nombre,
+			'rol' => $rol
+		];
+	}
+
+	return $templates->render('usuarios/registro', ['usuarios' => $usuarios]);
+}
+
+function registrausuario($nombreusuario, $passusuario)
+{
+	$usuario = new User();
+	$crud = new CrudUsuario();
+
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$usuario->setNombre($nombreusuario);
+	$usuario->setClave($passusuario);
+	if ($crud->buscarUsuario($nombreusuario)) {
+		$crud->insertar($usuario);
+		print "<script>alert('Usuario $nombreusuario creado satisfactoriamente');</script>";
+	} else {
+		print "<script>alert('El nombre de usuario $nombreusuario ya existe');</script>";
+	}
+
+	return registrousuarios();
+}
+
+function usuariosEspeciales()
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$query = "SELECT u.noconsecutivo AS IdUsuario, u.nombre, u.domicilio, u.estado,
+	                 COUNT(c.numcontrato) AS total_contratos,
+	                 SUM(CASE WHEN c.estado = 4 THEN 1 ELSE 0 END) AS contratos_susp_def,
+	                 GROUP_CONCAT(CASE WHEN c.estado = 4 THEN c.numcontrato ELSE NULL END ORDER BY c.numcontrato SEPARATOR ', ') AS ids_contratos
+	          FROM usuario u
+	          LEFT JOIN contrato c ON c.numusuario = u.noconsecutivo
+	          GROUP BY u.noconsecutivo, u.nombre, u.domicilio, u.estado
+	          HAVING u.estado = 2
+	             OR total_contratos = 0
+	             OR (total_contratos > 0 AND total_contratos = contratos_susp_def)
+	          ORDER BY (u.nombre = '' OR u.nombre IS NULL) ASC, u.nombre ASC";
+
+	$res = $y->q($query);
+
+	// Leer todos los registros para calcular estadísticas
+	$registros = array();
+	$sin_contrato = 0;
+	$con_susp_def = 0;
+	$no_localizados = 0;
+	$sin_nombre_con_dir = 0;
+	$sin_nombre_sin_dir = 0;
+
+	while ($row = $y->fetch_array($res)) {
+		$registros[] = $row;
+		$tiene_contratos = ($row['total_contratos'] > 0);
+		$nombre_vacio = (trim($row['nombre']) === '' || $row['nombre'] === null);
+		$dir_vacia = (trim($row['domicilio']) === '' || $row['domicilio'] === null);
+
+		if (intval($row['estado']) === 2) {
+			$no_localizados++;
+		} elseif (!$tiene_contratos) {
+			$sin_contrato++;
+		} else {
+			$con_susp_def++;
+		}
+
+		if ($nombre_vacio && !$dir_vacia) {
+			$sin_nombre_con_dir++;
+		} elseif ($nombre_vacio && $dir_vacia) {
+			$sin_nombre_sin_dir++;
+		}
+	}
+
+	$total_registros = count($registros);
+	$y->free_result($res);
+
+	return $templates->render('usuarios/especiales', [
+		'registros' => $registros,
+		'total_registros' => $total_registros,
+		'sin_contrato' => $sin_contrato,
+		'con_susp_def' => $con_susp_def,
+		'no_localizados' => $no_localizados,
+		'sin_nombre_con_dir' => $sin_nombre_con_dir,
+		'sin_nombre_sin_dir' => $sin_nombre_sin_dir
+	]);
+}
+
+function cargaSnapshot($id)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	// 1. Buscar en historial de cambios (Snapshot masivo)
+	$res_cambios = $y->q("SELECT fecha, descripcion FROM cambios WHERE descripcion LIKE 'Declaratoria No Localizado ID $id.%' ORDER BY fecha DESC LIMIT 1");
+	$cambio = $y->fetch_array($res_cambios);
+
+	// 2. Buscar Notas Formales en sus contratos
+	$res_notas = $y->q("SELECT n.fecha, n.contrato, n.texto FROM notas n JOIN contrato c ON n.contrato = c.numcontrato WHERE c.numusuario = $id AND n.texto LIKE '%USUARIO NO LOCALIZADO%' ORDER BY n.fecha DESC");
+	$notas = [];
+	while ($n = $y->fetch_array($res_notas)) {
+		$notas[] = $n;
+	}
+
+	// 3. Obtener nombre del usuario para el título
+	$res_u = $y->q("SELECT nombre FROM usuario WHERE noconsecutivo = $id");
+	list($nombre) = $y->fetch_array($res_u);
+
+	return $templates->render('usuarios/snapshot', [
+		'id' => $id,
+		'nombre' => $nombre,
+		'cambio' => $cambio,
+		'notas' => $notas
+	]);
+}
+
+function cargaDomiciliosUsr($id_usuario) {
+    if (!$id_usuario) return "";
+    $y = new Conexion();
+    $y->conectarBaseDatos();
+
+    $res_cto = $y->q("SELECT numcontrato, domicilio FROM contrato WHERE numusuario = " . intval($id_usuario));
+    
+    $domicilios_raw = [];
+    $fuentes = [];
+
+    while ($row_cto = $y->fetch_array($res_cto)) {
+        $dom = $row_cto['domicilio'];
+        $cto = $row_cto['numcontrato'];
+        $dom_clean = trim(strtoupper($dom));
+        if (!empty($dom_clean)) {
+            if (!isset($domicilios_raw[$dom_clean])) {
+                $domicilios_raw[$dom_clean] = $dom;
+            }
+            $fuentes[$dom_clean][] = "Cto. " . $cto;
+        }
+    }
+
+    $html = "<div style='margin-bottom: 8px;'><b style='color:#2980b9;'>Seleccione un domicilio origen (Contrato) para la nueva toma:</b></div>";
+    $i = 0;
+    foreach ($domicilios_raw as $clean => $raw) {
+        $f_str = implode(', ', $fuentes[$clean]);
+        $html .= "<div style='margin-bottom: 4px;'><input type='radio' name='sel_domicilio' id='dom_rad_$i' value=\"" . htmlspecialchars($raw, ENT_QUOTES) . "\" onchange='aplicaDomicilio(this.value)'> <label for='dom_rad_$i' style='cursor:pointer; font-weight:normal; font-size:13px;'>" . htmlspecialchars($raw) . " <span style='color:#7f8c8d; font-size:11px;'>(" . $f_str . ")</span></label></div>";
+        $i++;
+    }
+    $html .= "<div style='margin-top: 5px;'><input type='radio' name='sel_domicilio' id='dom_rad_nuevo' value='__NUEVO__' onchange='aplicaDomicilio(\"__NUEVO__\")'> <label for='dom_rad_nuevo' style='cursor:pointer; font-weight:bold; color:#d35400;'><i>Nueva Direcci&oacute;n...</i></label></div>";
+
+    return $html;
+}
+?>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `sistema.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+function menu($opc)
+{
+	global $templates;
+	return $templates->render('sistema/menu_options', ['opc' => $opc]);
+}
+
+function login($login, $password)
+{
+	$usuario = new User();
+	$crud = new CrudUsuario();
+
+	$usuario = $crud->obtenerUsuario($login, $password);
+	if ($usuario->getId() != NULL) {
+		$_SESSION['usuario'] = $usuario;
+		print "<script>window.location='../index2.php'</script>";
+	} else {
+		print "<script>alert('Nombre de Usuario o Contraseña incorrectos')</script>";
+		print "<script>location.reload();</script>";
+	}
+}
+
+function salir()
+{
+	unset($_SESSION['usuario']);
+}
+
+function asistencias()
+{
+	global $templates;
+	return $templates->render('sistema/asistencias', ['abriendoarchivo' => '']);
+}
+
+function listados()
+{
+	global $templates;
+	return $templates->render('sistema/listados');
+}
+
+function configuracion()
+{
+	global $templates;
+	return $templates->render('sistema/configuracion');
+}
+
+function contrasenas()
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$query = "SELECT presidente, vicepresidente, secretario, tesorero, vocal1, vocal2, vocal3, vocal4, presidente_vigilancia, secretario_vigilancia FROM firmantes limit 1";
+
+	$res = $y->q($query);
+
+	$firmantes = $y->fetch_array($res);
+
+	if (!is_array($firmantes)) {
+		$firmantes = [];
+	}
+
+	return $templates->render('sistema/contrasenas', ['firmantes' => $firmantes]);
+}
+
+
+/**
+ * Procesa el archivo de asistencias (MD5, bloques y aplicación de multas)
+ * @param string $path_archivo Ruta al archivo a procesar (opcional)
+ */
+function abriendoarchivo($path_archivo = null)
+{
+	global $templates;
+	$nombre = ($path_archivo !== null) ? $path_archivo : "lastassambly";
+	$mes = explode(",", " ,ene,feb,mar,abr,may,jun,jul,ago,sep,oct,nov,dic");
+	
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$archivo = @file_get_contents($nombre);
+
+	if ($archivo === false || trim($archivo) == "") {
+		return "<h2>No hay contenido para procesar o el archivo no existe</h2>";
+	}
+
+	// 1. Validar integridad MD5 (Firma MD5 Legacy)
+	// El archivo tiene formato: [HASH][\n-\n][RESTO_DEL_ARCHIVO]
+	$hash_proporcionado = substr($archivo, 0, 32);
+	$contenido_para_hash = substr($archivo, 32);
+	$hash_calculado = md5($contenido_para_hash);
+
+	if ($hash_proporcionado !== $hash_calculado) {
+		return "<h2 style='color:red;'>⚠️ Error de integridad: La firma digital del archivo no coincide. El archivo ha sido alterado.</h2>";
+	}
+
+	// 2. Separar por bloques canónicos (\n-\n o \r\n-\r\n)
+	// Usamos regex para ser agnósticos al fin de línea (Windows/Linux)
+	$info = preg_split("/\r?\n-\r?\n/", $contenido_para_hash);
+
+	// Mapeo según cone.txt:
+	// info[0] = (vacío, es el prefijo del primer separador)
+	// info[1] = Fecha (YYYY-MM-DD)
+	// info[2] = Resumen (X contratos, Y usuarios)
+	// info[3] = Notas de la asamblea
+	// info[4] = Datos de contratos (N:NumContrato)
+	
+	$cto = isset($info[4]) ? preg_split("/\r?\n/", $info[4]) : array();
+	$notas = isset($info[3]) ? trim($info[3]) : "";
+	$fecha_parts = isset($info[1]) ? explode("-", $info[1]) : array();
+
+	// Construir nombre del cargo de manera segura
+	if (count($fecha_parts) >= 3) {
+		$dia = $fecha_parts[2];
+		$mes_idx = intval($fecha_parts[1]);
+		$anio = intval($fecha_parts[0]);
+		$mes_str = ($mes_idx >= 1 && $mes_idx <= 12) ? $mes[$mes_idx] : "???";
+		$cargo = "falta asamblea $dia $mes_str $anio";
+	} else {
+		$cargo = "falta asamblea " . date("d M Y");
+		$anio = intval(date("Y"));
+	}
+
+	// Solo se permiten archivos de 2026 en adelante (inicio del split ligacargos/historico)
+	if ($anio <= 2025) {
+		return "<p style='color:red;'><b>Archivo rechazado:</b> El archivo corresponde al año <b>$anio</b>. Solo se aceptan archivos de asambleas a partir de 2026.</p>";
+	}
+
+	$n = 0;
+	$contratos_asistentes = array();
+
+	// Procesar bloque de datos (info[4])
+	foreach ($cto as $v) {
+		if (trim($v) == "")
+			continue;
+		$partes = explode(":", $v);
+		$ncto = isset($partes[1]) ? trim($partes[1]) : '';
+
+		if ($ncto != "" && $ncto != "-") {
+			$contratos_asistentes[] = $ncto;
+		}
+	}
+
+	// Eliminar duplicados y limpiar
+	$contratos_asistentes = array_unique($contratos_asistentes);
+
+	// Procesar cada contrato: Si asistió, se le cancela la multa (estado=-1)
+	foreach ($contratos_asistentes as $ncto) {
+		// Búsqueda robusta (Exacta o con sufijos /M, /ST)
+		$rec = $y->q("SELECT numcontrato FROM contrato WHERE numcontrato = '$ncto'");
+
+		if ($y->num_rows($rec) == 0) {
+			$ncto_limpio = str_replace("/M", "", $ncto);
+			$rec = $y->q("SELECT numcontrato FROM contrato WHERE numcontrato REGEXP '^($ncto_limpio(/(.+)|( *)ST))$'");
+		}
+
+		if ($y->num_rows($rec) > 0) {
+			list($ncto_real) = $y->fetch_array($rec);
+			// sp_cancelar_cargo es Split-Aware (busca en activa e histórico)
+			$y->q("CALL sp_cancelar_cargo(0, '$ncto_real', '$cargo', 0, @filas)");
+			$n++;
+		}
+	}
+
+	$cargo_esc = $y->real_escape_string($cargo);
+	$res_pendientes = $y->q("SELECT COUNT(*) FROM ligacargos WHERE leyenda = '$cargo_esc' AND estado = 0");
+	list($pendientes) = $y->fetch_array($res_pendientes);
+	$res_total = $y->q("SELECT COUNT(*) FROM ligacargos WHERE leyenda = '$cargo_esc'");
+	list($total_cargo) = $y->fetch_array($res_total);
+
+	return $templates->render('sistema/asistencias_resultado', [
+		'n'           => $n,
+		'cargo'       => $cargo,
+		'notas'       => $notas,
+		'pendientes'  => $pendientes,
+		'total_cargo' => $total_cargo,
+	]);
+}
+
+function registrapasspresidente($pass_nueva, $pass_anterior)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$res = $y->q("select contrasena from contrasenas where rol = 'presidente'");
+
+	list($contrasena_presidente) = $y->fetch_array($res);
+
+	// Verificación modo mixto: bcrypt nuevo o md5 legado
+	$pass_valida = password_verify($pass_anterior, $contrasena_presidente)
+		|| (md5($pass_anterior) == $contrasena_presidente);
+
+	if (trim($pass_nueva) == "" || trim($pass_anterior) == "") {
+		$salida = $templates->render('sistema/mensaje', [
+			'titulo' => 'Error',
+			'mensaje' => "<p>Los campos no deben ser vac&iacute;os</p><br>" . contrasenas()
+		]);
+	} else {
+		if (!$pass_valida) {
+			$salida = $templates->render('sistema/mensaje', [
+				'titulo' => 'Error',
+				'mensaje' => "<p>Contrase&ntilde;a anterior del Presidente no es v&aacute;lida</p><br>" . contrasenas()
+			]);
+		} else {
+			$hash_nuevo = password_hash($pass_nueva, PASSWORD_BCRYPT);
+			$q = "update contrasenas set contrasena = '$hash_nuevo' where rol = 'presidente'";
+			$y->q($q);
+			$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato) 
+			       VALUES(NOW(), 'Cambio de Clave Presidente', 'CONFIDENCIAL', 'ACTUALIZADA', '-SISTEMA-')");
+			$salida = $templates->render('sistema/mensaje', [
+				'titulo' => 'Modificado',
+				'mensaje' => "<p>Se ha modificado la contrase&ntilde;a del Presidente</p>"
+			]);
+		}
+	}
+
+	return $salida;
+}
+
+function registrapasstesorero($pass_nueva, $pass_anterior)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$res = $y->q("select contrasena from contrasenas where rol = 'tesorero'");
+
+	list($contrasena_tesorero) = $y->fetch_array($res);
+
+	// Verificación modo mixto: bcrypt nuevo o md5 legado
+	$pass_valida = password_verify($pass_anterior, $contrasena_tesorero)
+		|| (md5($pass_anterior) == $contrasena_tesorero);
+
+	if (trim($pass_nueva) == "" || trim($pass_anterior) == "") {
+		$salida = $templates->render('sistema/mensaje', [
+			'titulo' => 'Error',
+			'mensaje' => "<p>Los campos no deben ser vac&iacute;os</p><br>" . contrasenas()
+		]);
+	} else {
+		if (!$pass_valida) {
+			$salida = $templates->render('sistema/mensaje', [
+				'titulo' => 'Error',
+				'mensaje' => "<p>Contrase&ntilde;a anterior del Tesorero no es v&aacute;lida</p><br>" . contrasenas()
+			]);
+		} else {
+			$hash_nuevo = password_hash($pass_nueva, PASSWORD_BCRYPT);
+			$q = "update contrasenas set contrasena = '$hash_nuevo' where rol = 'tesorero'";
+			$y->q($q);
+			$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato) 
+			       VALUES(NOW(), 'Cambio de Clave Tesorero', 'CONFIDENCIAL', 'ACTUALIZADA', '-SISTEMA-')");
+			$salida = $templates->render('sistema/mensaje', [
+				'titulo' => 'Modificado',
+				'mensaje' => "<p>Se ha modificado la contrase&ntilde;a del Tesorero</p>"
+			]);
+		}
+	}
+
+	return $salida;
+}
+
+function registrafirmantes($nombrepresidente, $nombrevicepresidente, $nombresecretario, $nombretesorero, $nombrevocal1, $nombrevocal2, $nombrevocal3, $nombrevocal4, $nombrepresidentev, $nombresecretariov)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$q = "update firmantes SET presidente = '$nombrepresidente', vicepresidente = '$nombrevicepresidente', secretario = '$nombresecretario', tesorero = '$nombretesorero', vocal1 = '$nombrevocal1', vocal2 = '$nombrevocal2', vocal3 = '$nombrevocal3', vocal4 = '$nombrevocal4', presidente_vigilancia = '$nombrepresidentev', secretario_vigilancia = '$nombresecretariov'";
+
+	$y->q($q);
+	$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato) 
+	       VALUES(NOW(), 'Actualización de Firmantes', 'Nombres anteriores', 'Presidente: $nombrepresidente | Tesorero: $nombretesorero', '-SISTEMA-')");
+	$salida = $templates->render('sistema/mensaje', [
+		'titulo' => 'Modificado',
+		'mensaje' => "<p>Se han modificado los nombres de los firmantes de los Cortes de Caja</p>"
+	]);
+
+	return $salida;
+}
+
+function archivarBitacora()
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	// Ejecutar procedimiento de archivado
+	$y->q("CALL sp_archivar_bitacora()");
+	
+	$res_his = $y->q("SELECT COUNT(*) FROM cambios_historico");
+	list($total_his) = $y->fetch_array($res_his);
+	$res_act = $y->q("SELECT COUNT(*) FROM cambios");
+	list($total_act) = $y->fetch_array($res_act);
+
+	$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato) 
+	       VALUES(NOW(), 'Mantenimiento de Bitácora', 'Archivo masivo', 'Registros archivados. Actuales: $total_act | Históricos: $total_his', '-SISTEMA-')");
+
+	return $templates->render('sistema/mensaje', [
+		'titulo' => 'Mantenimiento Completado',
+		'mensaje' => "<p>Se han movido los registros antiguos a la tabla histórica satisfactoriamente.</p>
+		              <ul>
+		                  <li>Registros en Bitácora Activa: <b>$total_act</b></li>
+		                  <li>Registros en Histórico: <b>$total_his</b></li>
+		              </ul>"
+	]);
+}
+
+
+/**
+ * Genera URL completa para recursos de la aplicación
+ * @param string $ruta Ruta relativa al webcontext
+ * @return string URL completa
+ */
+function urlRecurso($ruta)
+{
+	static $base_url = null;
+
+	// Calcular base_url solo una vez
+	if ($base_url === null) {
+		$protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://';
+		$host = $_SERVER['HTTP_HOST'];
+
+		// Calculamos la ruta base en disco del proyecto (sistema.php está en includes/negocio/sistema.php)
+		$directorio_proyecto = realpath(dirname(__FILE__) . '/../../');
+		$document_root = realpath($_SERVER['DOCUMENT_ROOT']);
+
+		// Extraemos la parte de la ruta que está después del DOCUMENT_ROOT
+		$base_path = str_replace($document_root, '', $directorio_proyecto);
+		$base_path = str_replace('\\', '/', $base_path); // Compatibilidad con Windows si fuera el caso
+
+		$base_url = rtrim($protocol . $host . $base_path, '/');
+	}
+
+	// Asegurar que la ruta comience con /
+	if (strpos($ruta, '/') !== 0) {
+		$ruta = '/' . $ruta;
+	}
+
+	return $base_url . $ruta;
+}
+?>
+```
+
+</details>
+
+---
+
+<details>
+<summary>Conversation History</summary>
+
+# Conversation History
+Here are the conversation IDs, titles, and summaries of your most recent 8 conversations, in reverse chronological order:
+
+<conversation_summaries>
+## Conversation 772b23ae-0897-4270-9446-4689fdf95548: Executing UI Test Suite
+- Created: 2026-04-20T04:38:49Z
+- Last modified: 2026-04-20T05:36:46Z
+
+### USER Objective:
+Stabilizing Agua UI Tests
+
+USER Objective: Complete the validation of the Agua V2 testing suite (Section 1 / Group A) to ensure the system's operational readiness.
+Goals:
+1. Systematically execute UI test cases for contract management, state transitions, and infrastructure configuration based on the stabilized test plan.
+2. Refine automation protocols by documenting specific UI interactions, such as using TAB for field auto-completion and handling browser confirmation dialogues.
+3. Validate system behavior against business rules, specifically addressing contract creation constraints, parity synchronization, and administrative blocking mechanisms.
+4. Update the formal test documentation to reflect empirical findings and UI-specific interaction patterns discovered during manual and automated execution.
+
+## Conversation cbf979ab-fe6f-4218-97aa-78333e6a1a56: Audit Caja Reconciliation Discrepancies
+- Created: 2026-04-20T01:04:06Z
+- Last modified: 2026-04-20T04:13:17Z
+
+### USER Objective:
+Stabilizing Agua Reporting Modules
+
+Objective: Resolve identified logic gaps and architectural inconsistencies in the Agua V2 reporting and receipt modules on Host C.
+
+Goals:
+1. Patch the date logic in `reciboegreso.php` to ensure correct temporal mapping of expenditures.
+2. Address identified bugs and legacy function dependencies in `credencial.php` to improve module robustness.
+3. Verify all code changes against the updated forensic audit documentation to maintain system-wide congruency.
+4. Finalize and push all stabilization patches to the production repository to ensure full operational readiness.
+
+## Conversation 70313f54-0ccd-4b31-b9dd-0a85cd24482b: Validating Host C PHP Errors
+- Created: 2026-04-20T02:37:26Z
+- Last modified: 2026-04-20T02:43:35Z
+
+### USER Objective:
+Validating Host C PHP Errors
+
+Main Objective: Evaluate the current status of reported PHP notices from Host C logs without performing any code modifications.
+
+Goals:
+1. Confirm if the "Undefined index" notices in `contrasenas.php` (lines 71-116) and `carteravencida.php` (line 50) are still valid based on existing file content.
+2. Verify the persistence of the "Undefined property" notice for `Conexion::$insert_id` in `usuarios.php` (line 296).
+3. Provide a clear, non-corrective status report to the user regarding the state of these specific runtime errors.
+
+## Conversation d93a3dd6-def6-407e-bf68-58e09c7b5178: Refactoring Agua Assembly Module
+- Created: 2026-04-19T00:37:18Z
+- Last modified: 2026-04-19T01:46:32Z
+
+### USER Objective:
+Refining Asamblea Administrative Interface
+
+Main Objective: Finalize the stabilization and UI refactor of the Asamblea V2 administrative module on Host C.
+
+Goals:
+1. Complete the transition of the application entry point to the "Administración" view.
+2. Implement dynamic, database-driven labels for the "Multa por Inasistencia" to replace hardcoded inputs.
+3. Standardize and fix the administrative action table to ensure proper state-based control buttons (Start/Close/Download) appear for all assemblies.
+4. Clean up the UI by removing redundant navigation elements like the "Pase de Lista" button.
+5. Deploy changes manually to the production-ready Host C environment following established architectural constraints and legacy system protocols.
+
+## Conversation 2d2217ca-2154-4c88-b506-587e879d4278: Validating Agua Test Plan
+- Created: 2026-04-18T20:32:04Z
+- Last modified: 2026-04-18T23:01:21Z
+
+### USER Objective:
+Stabilizing Agua Testing Suite
+
+Main Objective: Complete the formalization and stabilization of the Agua V2 testing suite to ensure autonomous, production-ready execution.
+
+Goals:
+1. Finalize the "Plan de Pruebas" documentation with high-precision CSS selectors and updated Host C paths.
+2. Refactor attendance module interoperability between the Assembly generator and Agua processor, including MD5 validation and cross-table database consistency (active vs. historical).
+3. Synchronize the deployment pipeline (B→A→C) to maintain environment integrity.
+4. Establish clear operational separation for concurrent manual and automated testing across dual monitors.
+5. Secure version control integrity for all finalized protocols in remote repositories.
+
+## Conversation 857c34d0-7f04-45a0-98d9-f2c3598f2011: Investigating Host Synchronization Anomalies
+- Created: 2026-04-18T05:16:57Z
+- Last modified: 2026-04-18T06:38:48Z
+
+### USER Objective:
+Stabilizing Agua Audit Archiving
+
+Objective: Finalize the migration of the audit logging system to a partitioned architecture (active vs. historical) and ensure full operational continuity of the Agua V2 administrative dashboard.
+
+Goals:
+1. Implement and validate the archival split between `cambios` and `cambios_historico` tables to ensure data integrity and performance.
+2. Integrate the `sp_archivar_bitacora` procedure into the standard deployment pipeline (`Full-Pipeline-Sync.sh`) to prevent configuration drift on Host C.
+3. Consolidate UI access by linking the `monitor_fallbacks.php` utility into the "Operaciones y Reportes" panel.
+4. Refine system-wide SELECT queries to correctly handle temporal data distribution between the active and historical audit tables.
+
+## Conversation 4e4d201a-ecea-40ab-b382-a9c52c17a702: Reorganizing Agua Configuration Dashboard
+- Created: 2026-04-18T04:23:21Z
+- Last modified: 2026-04-18T04:52:46Z
+
+### USER Objective:
+Refining Agua System UI
+The user's primary objective is to finalize the administrative and diagnostic polish of the Agua V2 system. Key goals include:
+1. Standardizing application labels and menu terminology for consistency across the platform.
+2. Enhancing navigation and filter functionality for reporting modules, specifically in the Cartera Vencida and Saneamiento views.
+3. Troubleshooting and patching the Bitácora de Saneamiento to ensure accurate audit trail visualization post-migration.
+4. Managing version control and documentation integrity by excluding specific development notes from the deployment pipeline.
+
+## Conversation 517dd86d-fc67-42b5-9de5-f6e0f00ed9f2: Unifying Agua Testing Protocols
+- Created: 2026-04-17T05:31:40Z
+- Last modified: 2026-04-17T07:00:04Z
+
+### USER Objective:
+Stabilizing Agua UI Testing
+
+Main Objective: Complete the formalization and stabilization of the Agua V2 testing suite to ensure full operational readiness for the transition to Host C.
+
+Goals:
+1. Finalize the UI test cases in the "Plan de Pruebas" (covering state transitions, cargo management, and infrastructure modifications).
+2. Execute a full cleanup of the `migration-aguav2/` repository, removing obsolete scripts and isolating manual utilities to ensure pipeline integrity.
+3. Validate and synchronize the deployment runbooks (Runbook/Ground Truth) with the finalized, production-ready migration logic.
+4. Prepare the system for final production Go-Live by verifying the consistency of the automated sync pipeline and documentation.
+
+</conversation_summaries>
+
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 22 Apr 2026, 5:57 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 22 Apr 2026, 5:58 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+## User Request
+
+Ya hice la prueba, creo funciono correcto y completo; haver  revisa si el caso se cumplio a nivel de bd , es este:
+ UI-1 · Amnistía de recargos al reactivar desde Susp. Temporal 
+Y valida su congruencia y solidez en su descripción, lista gaps, o issues.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `cline_mcp_settings.json`
+**Language:** json
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Listing Relevant Tools**
+
+I've been focusing on listing specific tools rather than resorting to general bash commands. For DB queries, I'm noting `mcp_bdawahost-c_query` as a key tool. The `view_file` tool is another, helpful for different data analysis processes. I'm building a concise list that should speed up the entire thought process.
+
+
+
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.747125986s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 22 Apr 2026, 6:15 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Contract Details**
+
+I'm currently focused on extracting specific information for contract 9002. My primary tool for this is `mcp_bdawahost-c_query`. I plan to use it to retrieve the charge details associated with the active contract.
+
+
+
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.433787974s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** CORTEX_STEP_STATUS_ERROR
+**Created:** 22 Apr 2026, 6:15 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Investigating Data Schema**
+
+I'm currently focused on resolving an "Unknown column 'id'" error within `vw_ligacargos_all`, and have initiated an examination of the schema for the `vw_ligacargos` view, as this is related to the specific tools `mcp_bdawahost-c_query`.
+
+
+
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.437291723s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 22 Apr 2026, 6:15 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Verifying Database State**
+
+I've confirmed the database state for `9002` utilizing `vw_ligacargos_all`. Now I will move to analyze the query results, particularly focusing on identifying historical surcharges canceled due to Amnesty.
+
+
+**Validating Charge Integrity**
+
+I'm now verifying the integrity of current-year charges. I confirmed that base charges for 2026, like the water and drainage annuities, exist and are correctly valued at 600.00 and 220.00 respectively, with a 'Pending' state. Furthermore, they are not duplicated. Current surcharges for 2026 are generated as expected, with their values and states. My focus now is ensuring the generation logic is robust and maintains this level of correctness moving forward.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 5.439757806s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+## User Request
+
+Realizo esto si o no, porque:
+Limpieza post-test: sql UPDATE contrato SET estado=2 WHERE numcontrato='9002'; UPDATE
+ligacargos_historico SET estado=0 WHERE numcontrato='9002' AND categoria IN (16,17) AND anio
+< 2026;
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `cline_mcp_settings.json`
+**Language:** json
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Considering Specific Tools**
+
+I'm focusing on the specified tools, avoiding bash alternatives. My initial thought is to use `mcp_bdawahost-c_query` and `mcp_bdawahost-c_execute`, as the user seems to be contemplating running them manually. This will inform my next steps.
+
+
+**Analyzing Cleanup Strategy**
+
+I'm now evaluating a specific SQL snippet intended for post-test cleanup of UI-1. My focus is on the safety and necessity of this operation within the context of our QA pipeline. It's clear that the existing QA architecture in Agua V2, using scripts like `00_inject_qa_tests.sql` and `00_cleanup_qa_tests.sql`, already handles cleanup and reset. Therefore, I conclude that running the suggested manual cleanup is unnecessary and potentially harmful, as it could result in orphaned data within the pipeline. It also goes against the core philosophy of idempotent pipelines.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 5.247477612s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+## User Request
+
+entonces, paso a la siguiente prueba y omito secciones tipo: Limpieza post-test; para cada prueba; sin volver a ejecutar ./Full-Pipeline-Sync.sh --with-qa --skip-b ; o algunos de los casos si lo requerira; analiza e informa.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `cline_mcp_settings.json`
+**Language:** json
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Considering Available Tools**
+
+I'm focusing on available tools, specifically avoiding common bash commands. I am identifying and cataloging tools, starting with `view_file`. I plan to consult the "Guia de Pruebas — Tester Humano (V1.0)" as a starting point.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Guia de Pruebas — Tester Humano (V1.0).md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.516521147s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# 🧑‍💻 Guía de Pruebas — Tester Humano (V1.1)
+
+> Derivado del Plan de Pruebas Maestro V2.20 — Secciones 1 y 2.
+> Este documento contiene **solo lo que necesita el tester humano**: pasos claros, qué verificar en pantalla, qué consultar en BD, y cómo dejar el sistema limpio.
+> La información interna de implementación (nombres de funciones PHP, líneas de código, selectores CSS de automatización) fue eliminada.
+>
+> **V1.1 — 2026-04-20**: Corrección de pasos incompletos en UI-6 (A–F), UI-7, UI-21, UI-27 y otros casos donde los datos de prueba exactos o los pasos del formulario estaban colapsados o implícitos.
+
+---
+
+## ⚙️ Configuración Inicial
+
+| Parámetro | Valor |
+|---|---|
+| **URL de la webapp** | `http://192.168.1.128:7001/agua` |
+| **Usuario** | `nancy` |
+| **Contraseña** | `260180` |
+| **BD para verificación** | Host C → `mysql -h 192.168.1.128 -P 7002 -u root awa` |
+
+**Datos QA** (contratos de prueba sintéticos):
+- Requieren sincronización previa: `Full-Pipeline-Sync.sh --with-qa`
+- Contratos QA: `9001`, `9002`, `9003`, `9004`, `9005`, `9006`, `9007`, `9008`
+- Sin ese sync, **los contratos QA no existen** en la base de datos.
+
+---
+
+## 🚦 Reglas Generales
+
+1. **Leer cada mensaje de alerta** antes de continuar. La webapp usa alerts de browser y mensajes AJAX — ambos son resultado de la operación.
+2. Si la operación fue **rechazada o bloqueada** (mensaje con "Error", "No se permite", "no aplica", "mínimo"), anotar el texto exacto y marcar el caso como **IMPEDIDO**. Pasar al siguiente.
+3. Después de cada caso que modifica datos, ejecutar la **limpieza (revert)** antes de iniciar el siguiente caso que use el mismo contrato.
+4. **Orden de ejecución**: Grupo A → B → C → D → E → F → Sección 2.
+5. Los casos destructivos (UI-5 sub-casos C/E/G) usan contratos QA — no revierten automáticamente.
+
+---
+
+## 📑 ÍNDICE
+
+### SECCIÓN 1 — Interfaz de Usuario
+
+**Grupo A — Gestión de Contratos y Transiciones de Estado**
+- [UI-1](#ui-1) Amnistía de recargos al reactivar desde Susp. Temporal
+- [UI-2](#ui-2) Sin amnistía al reactivar desde Susp. Administrativa
+- [UI-3](#ui-3) Bloqueo de saltos de estado 2↔3
+- [UI-4](#ui-4) Bloqueos en Suspensión Definitiva
+- [UI-5](#ui-5) Transiciones de estado — 7 flujos (A a G)
+- [UI-6](#ui-6) Creación de Nuevo Contrato — 6 sub-casos (A a F)
+
+**Grupo B — Tomas Físicas y Paridad Financiera**
+- [UI-7](#ui-7) Restricción de 2 tomas por domicilio
+- [UI-8](#ui-8) Bloqueo de cargos de drenaje sin infraestructura
+- [UI-9](#ui-9) Recálculo de tarifa Normal↔Comercial
+- [UI-10](#ui-10) Paridad al desconectar infraestructura
+- [UI-11](#ui-11) Cambio rápido de conexión y paridad
+- [UI-12](#ui-12) Contratos multi-toma en reporte
+
+**Grupo C — Pagos, Recibos y Folios**
+- [UI-13](#ui-13) Flujo completo de cobro y recibo
+- [UI-14](#ui-14) Sincronización de asamblea al pagar
+- [UI-15](#ui-15) Prevención de cargos duplicados por refresco
+
+**Grupo D — Cargos, Tarifas y Cancelaciones**
+- [UI-16](#ui-16) Agregar cargos — normal y mensualidades
+- [UI-17](#ui-17) Cancelación de cargos con nota de auditoría
+- [UI-18](#ui-18) Restauración de cargos cancelados
+- [UI-19](#ui-19) Modificación de tarifa con propagación masiva
+- [UI-20](#ui-20) Cruce de años en historial de cargos
+
+**Grupo E — Usuarios, Auditoría y Operaciones Generales**
+- [UI-21](#ui-21) Cambio de propietario
+- [UI-22](#ui-22) Hacer anotación y eliminarla (soft-delete)
+- [UI-23](#ui-23) Trazabilidad del operador en cancelaciones
+- [UI-24](#ui-24) Trazabilidad visual en historial (colores y horarios)
+- [UI-25](#ui-25) Visibilidad de usuarios no localizados
+- [UI-26](#ui-26) Categorización de egresos
+- [UI-27](#ui-27) Reasignación de contrato (fusión de usuario)
+- [UI-28](#ui-28) Búsqueda de contratos con filtros combinados
+- [UI-29](#ui-29) Disposición visual de la ficha (UX)
+
+**Grupo F — Módulo Asistencias (Mini-webapp)**
+- [UI-30](#ui-30) Registro de asistencia en mini-webapp
+- [UI-31](#ui-31) Descarga del TXT con firma MD5
+- [UI-32](#ui-32) Procesamiento de asistencias en Agua
+- [UI-33](#ui-33) Verificación de cargos cancelados post-procesamiento
+
+### SECCIÓN 2 — Reportes
+- [RC-1](#rc-1) Empate detalle vs resumen de caja al centavo
+- [RC-2](#rc-2) Exclusiones canónicas en cartera vencida
+- [RC-3](#rc-3) Sincronización de egresos por categoría
+- [RC-4](#rc-4) Sub-total de deuda incobrable
+- [RC-5](#rc-5) Trazabilidad de segundos en auditoría
+
+---
+
+## 🖥️ SECCIÓN 1 — Interfaz de Usuario
+
+### GRUPO A — Gestión de Contratos y Transiciones de Estado
+
+---
+
+<a name="ui-1"></a>
+### UI-1 · Amnistía de recargos al reactivar desde Susp. Temporal
+
+**Qué valida**: Al pasar un contrato de Estado 2 (Susp. Temporal) → Estado 1 (Activo), los recargos moratorios de años anteriores deben cancelarse automáticamente. Las anualidades del año en curso deben conservarse.
+
+**Datos QA requeridos**: Sí — contrato `9002` (Estado 2, con recargos 2024 y 2025 pendientes).
+
+**Antes de empezar** — verificar en BD:
+```sql
+SELECT estado FROM contrato WHERE numcontrato='9002';
+-- Esperado: 2
+
+SELECT COUNT(*) FROM ligacargos_historico
+WHERE numcontrato='9002' AND categoria IN (16,17) AND estado=0 AND anio < 2026;
+-- Esperado: 2 (si retorna 0, marcar IMPEDIDO — datos QA no inyectados)
+```
+
+**Pasos**:
+1. Buscar contrato `9002` → abrir ficha.
+2. Anotar cuántos recargos aparecen en la tabla de adeudos (esperado: 2 recargos de años < 2026 + 1 anualidad 2026).
+3. Clic **"Modificar información"** → cambiar Estado a **1 (Activo)** → escribir motivo de **mínimo 20 caracteres** → clic **"Cambiar estado"**.
+4. Leer el mensaje de respuesta.
+
+**Qué verificar en pantalla**:
+- Los recargos de años anteriores (2024, 2025) desaparecen de la tabla de adeudos.
+- La **ANUALIDAD AGUA 2026** sigue visible y pendiente.
+- El badge de estado muestra **"Activo"**.
+
+**Verificación en BD**:
+```sql
+-- Recargos históricos cancelados:
+SELECT COUNT(*) FROM ligacargos_historico
+WHERE numcontrato='9002' AND categoria IN (16,17) AND estado=0 AND anio < 2026;
+-- Esperado: 0
+
+-- Anualidad 2026 conservada:
+SELECT COUNT(*) FROM ligacargos
+WHERE numcontrato='9002' AND categoria=2 AND anio=2026 AND estado=0;
+-- Esperado: ≥ 1
+
+-- Registro de amnistía en historial:
+SELECT descripcion FROM cambios WHERE numcontrato='9002' ORDER BY id DESC LIMIT 3;
+-- Esperado: debe aparecer 'Amnistia de Recargos en Reactivacion (C06)'
+```
+
+**Limpieza post-test**:
+```sql
+UPDATE contrato SET estado=2 WHERE numcontrato='9002';
+UPDATE ligacargos_historico SET estado=0
+WHERE numcontrato='9002' AND categoria IN (16,17) AND anio < 2026;
+```
+
+---
+
+<a name="ui-2"></a>
+### UI-2 · Sin amnistía al reactivar desde Susp. Administrativa
+
+**Qué valida**: Al pasar de Estado 3 (Susp. Administrativa) → Estado 1 (Activo), **no** se cancela ningún recargo ni deuda. Todo el adeudo se conserva íntegro.
+
+> ⚠️ **Diferencia clave con UI-1**: Susp. Temporal (2→1) sí aplica amnistía. Susp. Administrativa (3→1) NO aplica amnistía. El contrato queda activo pero con toda la deuda anterior.
+
+**Datos**: Contrato `405` (Estado 3, dato real).
+
+**Antes de empezar** — verificar en BD:
+```sql
+SELECT estado FROM contrato WHERE numcontrato='405';
+-- Esperado: 3.
+-- Si retorna 1 (viene de limpieza de UI-3-B, UI-5-F u otro caso anterior):
+--   UPDATE contrato SET estado=3 WHERE numcontrato='405';
+-- Si retorna 4 → marcar IMPEDIDO (dato real destruido, no recuperable).
+
+SELECT COUNT(*) FROM ligacargos_historico
+WHERE numcontrato='405' AND categoria IN (16,17) AND estado=0;
+-- Anotar este número — debe ser igual DESPUÉS del test.
+```
+
+**Pasos**:
+1. Ficha del contrato `405` → anotar número de filas y suma total de adeudos.
+2. Clic **"Modificar información"** → Estado `1 (Activo)` → motivo ≥20 caracteres → **"Cambiar estado"**.
+3. Verificar que la tabla de adeudos muestra **exactamente las mismas filas** de antes.
+
+**Qué verificar en pantalla**:
+- Los recargos moratorios (filas de recargo) siguen presentes — no desaparecieron.
+- El monto total de deuda es igual al anotado antes del cambio.
+
+**Verificación en BD**:
+```sql
+-- Sin amnistía aplicada (debe retornar 0):
+SELECT COUNT(*) FROM cambios
+WHERE numcontrato='405' AND descripcion='Amnistia de Recargos en Reactivacion (C06)'
+ORDER BY id DESC LIMIT 1;
+-- Esperado: 0
+
+-- Estado actualizado:
+SELECT estado FROM contrato WHERE numcontrato='405';
+-- Esperado: 1
+```
+
+**Limpieza post-test**:
+```sql
+UPDATE contrato SET estado=3 WHERE numcontrato='405';
+```
+
+---
+
+<a name="ui-3"></a>
+### UI-3 · Bloqueo de saltos de estado 2↔3
+
+**Qué valida**: No es posible pasar directamente de Susp. Temporal (2) a Susp. Administrativa (3) ni viceversa. El sistema obliga a pasar primero por Estado 1 (Activo).
+
+**Datos**: Contrato `1006` (Estado 2) para sub-caso A / Contrato `405` (Estado 3) para sub-caso B.
+
+**Antes de empezar** — verificar en BD:
+```sql
+SELECT numcontrato, estado FROM contrato WHERE numcontrato IN ('1006','405');
+-- Esperado: 1006=2, 405=3.
+-- Si 1006 ≠ 2: UPDATE contrato SET estado=2 WHERE numcontrato='1006';
+-- Si 405 = 1 (viene de limpieza de UI-2, UI-5-F u otro caso anterior):
+--   UPDATE contrato SET estado=3 WHERE numcontrato='405';
+-- Si 405 = 4 → sub-caso B: marcar IMPEDIDO (dato real destruido, no recuperable).
+```
+
+**Sub-caso A — intento 2→3:**
+1. Ficha contrato `1006` → **"Modificar información"** → seleccionar Estado **3 (Susp. Administrativa)** → escribir motivo ≥20 caracteres → **"Cambiar estado"**.
+2. Leer el mensaje de respuesta.
+
+**Sub-caso B — intento 3→2:**
+1. Ficha contrato `405` → **"Modificar información"** → seleccionar Estado **2 (Susp. Temporal)** → escribir motivo ≥20 caracteres → **"Cambiar estado"**.
+2. Leer el mensaje de respuesta.
+
+**Qué verificar en pantalla (ambos sub-casos)**:
+- Mensaje de error que incluye: `"No se permite saltar entre diferentes tipos de suspensión"`
+- El badge de estado NO cambia.
+
+**Verificación en BD**:
+```sql
+SELECT numcontrato, estado FROM contrato WHERE numcontrato IN ('1006','405');
+-- Esperado: 1006=2, 405=3 (sin cambio en ninguno)
+```
+
+**Limpieza**: Ninguna — los estados no deben haber cambiado.
+
+---
+
+<a name="ui-4"></a>
+### UI-4 · Bloqueos en Suspensión Definitiva
+
+**Qué valida**: Un contrato en Estado 4 (Susp. Definitiva) es completamente inmutable — no permite edición, ni agregar cargos, ni cambiar estado.
+
+**Datos**: Contrato `1028` (Estado 4, dato real).
+
+**Antes de empezar** — verificar en BD:
+```sql
+SELECT estado FROM contrato WHERE numcontrato='1028';
+-- Esperado: 4
+```
+
+**Pasos**:
+1. Buscar y abrir la ficha del contrato `1028`.
+2. Verificar que el botón **"Modificar información"** no está visible.
+3. Verificar que los botones de cobro y cancelación tampoco están visibles o están deshabilitados.
+4. *(Opcional — si la UI lo permite)* Intentar cambiar el estado → leer mensaje de error.
+
+**Qué verificar en pantalla**:
+- No hay enlace ni botón "Modificar información".
+- No hay botones de cobrar o cancelar cargos.
+- Si se intenta cambiar estado: mensaje `"No es posible cambiar el estado..."`.
+
+**Verificación en BD**:
+```sql
+SELECT estado FROM contrato WHERE numcontrato='1028';
+-- Esperado: 4 (sin cambio)
+```
+
+**Limpieza**: Ninguna — solo lectura.
+
+---
+
+<a name="ui-5"></a>
+### UI-5 · Transiciones de estado — 7 flujos (A a G)
+
+**Qué valida**: El ciclo de vida completo de un contrato: todas las transiciones válidas y sus efectos sobre la deuda y la infraestructura.
+
+> ⚠️ **Sub-casos C, E y G son destructivos** — dejan el contrato en Estado 4 sin posibilidad de revert automático. Usar siempre datos QA para ellos.
+
+> ⚠️ **El motivo es obligatorio** — mínimo 20 caracteres en todos los sub-casos. Sin motivo, el backend rechaza la operación antes de cualquier validación de negocio.
+
+**Resumen de sub-casos:**
+
+| Sub | Transición | Contrato | Condición especial | Efecto en deuda |
+|:---:|---|---|---|---|
+| A | 1→2 Susp. Temporal | `200` | **Solo ejecutable en diciembre** | Sin cambios en cargos |
+| B | 1→3 Susp. Administrativa | `500` | Ninguna | Sin cambios en cargos |
+| C | 1→4 Susp. Definitiva | QA `9001` | Destructivo — no revertir | **Todos los cargos cancelados**; agua=0, drenaje=0 |
+| D | 2→1 Reactivar | `1006` | Verificar estado=2 antes | Paridad + amnistía de recargos viejos |
+| E | 2→4 Baja definitiva | QA `9002` | Destructivo — no revertir | **Todos los cargos cancelados**; agua=0, drenaje=0 |
+| F | 3→1 Reactivar | `405` | Verificar estado=3 antes | Paridad — sin amnistía |
+| G | 3→4 Baja definitiva | QA `9002` o `405` | QA preferido | **Todos los cargos cancelados**; agua=0, drenaje=0 |
+
+**Antes de empezar** — verificar estados en BD:
+```sql
+SELECT numcontrato, estado FROM contrato WHERE numcontrato IN ('200','500','1006','405');
+-- Esperado: 200=1, 500=1, 1006=2, 405=3
+-- Si alguno difiere, ese sub-caso se marca IMPEDIDO.
+```
+
+---
+
+**Sub-caso A — 1→2 (contrato `200`)**
+
+> ⚠️ **Solo ejecutable en diciembre.** Si la fecha actual no es diciembre, marcar IMPEDIDO — el sistema bloqueará la operación por regla de negocio, no por error.
+
+1. Ficha contrato `200` → **"Modificar información"** → Estado **2 (Susp. Temporal)** → motivo ≥20 chars → **"Cambiar estado"**.
+
+**Verificar**: Estado cambió a 2. La tabla de adeudos no cambió (los cargos siguen igual).
+
+**Limpieza**: `UPDATE contrato SET estado=1 WHERE numcontrato='200';`
+
+---
+
+**Sub-caso B — 1→3 (contrato `500`)**
+
+1. Ficha contrato `500` → **"Modificar información"** → Estado **3 (Susp. Administrativa)** → motivo ≥20 chars → **"Cambiar estado"**.
+
+**Verificar**: Estado cambió a 3. La tabla de adeudos no cambió (los cargos siguen igual).
+
+**Limpieza**: `UPDATE contrato SET estado=1 WHERE numcontrato='500';`
+
+---
+
+**Sub-caso C — 1→4 (QA contrato `9001`) — DESTRUCTIVO**
+
+Requiere datos QA (`--with-qa`). Verificar antes:
+```sql
+SELECT estado FROM contrato WHERE numcontrato='9001';
+-- Esperado: 1
+SELECT COUNT(*) FROM ligacargos WHERE numcontrato='9001' AND estado=0;
+-- Esperado: ≥ 1 cargo pendiente
+```
+
+1. Ficha contrato `9001` → **"Modificar información"** → Estado **4 (Susp. Definitiva)** → motivo ≥20 chars → **"Cambiar estado"**.
+
+**Verificar en pantalla**: Badge muestra Estado 4. Tabla de adeudos vacía (todos cancelados).
+
+**Verificar en BD**:
+```sql
+SELECT estado, agua, drenaje FROM contrato WHERE numcontrato='9001';
+-- Esperado: estado=4, agua=0, drenaje=0
+
+SELECT COUNT(*) FROM ligacargos WHERE numcontrato='9001' AND estado=0;
+-- Esperado: 0 (ningún cargo pendiente)
+```
+
+**Sin limpieza** — re-inyectar con `--with-qa` para el siguiente ciclo de pruebas.
+
+---
+
+**Sub-caso D — 2→1 (contrato `1006`)**
+
+Verificar antes:
+```sql
+SELECT estado FROM contrato WHERE numcontrato='1006';
+-- Si retorna ≠ 2, marcar IMPEDIDO. Restaurar: UPDATE contrato SET estado=2 WHERE numcontrato='1006';
+```
+
+1. Ficha contrato `1006` → **"Modificar información"** → Estado **1 (Activo)** → motivo ≥20 chars → **"Cambiar estado"**.
+
+**Verificar**: Estado cambió a 1. Si había recargos históricos pendientes (cat 16/17 de años < 2026), ya no aparecen.
+
+**Verificar en BD**:
+```sql
+SELECT estado FROM contrato WHERE numcontrato='1006';
+-- Esperado: 1
+
+SELECT descripcion FROM cambios WHERE numcontrato='1006' ORDER BY id DESC LIMIT 3;
+-- Debe aparecer 'Calibracion automatica de Deudas' o 'Amnistia de Recargos en Reactivacion (C06)'
+```
+
+**Limpieza**: `UPDATE contrato SET estado=2 WHERE numcontrato='1006';`
+
+---
+
+**Sub-caso E — 2→4 (QA contrato `9002`) — DESTRUCTIVO**
+
+Verificar antes:
+```sql
+SELECT estado FROM contrato WHERE numcontrato='9002';
+-- Esperado: 2
+```
+
+1. Ficha contrato `9002` → **"Modificar información"** → Estado **4 (Susp. Definitiva)** → motivo ≥20 chars → **"Cambiar estado"**.
+
+**Verificar en BD**:
+```sql
+SELECT estado, agua, drenaje FROM contrato WHERE numcontrato='9002';
+-- Esperado: estado=4, agua=0, drenaje=0
+
+SELECT COUNT(*) FROM ligacargos WHERE numcontrato='9002' AND estado=0;
+-- Esperado: 0
+```
+
+**Sin limpieza** — dato QA destructivo.
+
+---
+
+**Sub-caso F — 3→1 (contrato `405`)**
+
+Verificar antes:
+```sql
+SELECT estado FROM contrato WHERE numcontrato='405';
+-- Esperado: 3.
+-- Si retorna 1 (viene de limpieza de UI-2, UI-3-B u otro caso anterior):
+--   UPDATE contrato SET estado=3 WHERE numcontrato='405';
+-- Si retorna 4 → marcar IMPEDIDO (dato real destruido, no recuperable).
+```
+
+1. Ficha contrato `405` → **"Modificar información"** → Estado **1 (Activo)** → motivo ≥20 chars → **"Cambiar estado"**.
+
+**Verificar**: Estado cambió a 1. Los recargos históricos (si existían) **siguen pendientes** — no se cancelaron (a diferencia de la transición 2→1).
+
+**Verificar en BD**:
+```sql
+SELECT estado FROM contrato WHERE numcontrato='405';
+-- Esperado: 1
+
+-- No debe haber registro de amnistía:
+SELECT COUNT(*) FROM cambios
+WHERE numcontrato='405' AND descripcion='Amnistia de Recargos en Reactivacion (C06)'
+ORDER BY id DESC LIMIT 1;
+-- Esperado: 0
+```
+
+**Limpieza**: `UPDATE contrato SET estado=3 WHERE numcontrato='405';`
+
+---
+
+**Sub-caso G — 3→4 (QA `9002` preferido, o `405` como último recurso)**
+
+Determinar qué contrato usar:
+```sql
+SELECT estado FROM contrato WHERE numcontrato='9002';
+-- Si = 3 → usar 9002 (QA, preferido) — continuar.
+-- Si = 1 (viene de UI-1 u otro caso que lo reactivó) o = 2 (estado inicial QA):
+--   UPDATE contrato SET estado=3 WHERE numcontrato='9002';
+--   Luego usar 9002.
+-- Si = 4 → 9002 ya fue destruido en UI-5-E; pasar a verificar 405.
+
+SELECT estado FROM contrato WHERE numcontrato='405';
+-- Si = 3 → usar 405 (dato real — operación irreversible, confirmar antes).
+-- Si = 1 (viene de limpieza de UI-2, UI-3-B o UI-5-F):
+--   UPDATE contrato SET estado=3 WHERE numcontrato='405';
+--   Luego usar 405.
+-- Si = 4 → marcar IMPEDIDO (ambos contratos destruidos, no recuperables).
+```
+
+1. Ficha del contrato elegido → **"Modificar información"** → Estado **4 (Susp. Definitiva)** → motivo ≥20 chars → **"Cambiar estado"**.
+
+**Verificar en BD** (reemplazar `<cto>` con el contrato usado):
+```sql
+SELECT estado, agua, drenaje FROM contrato WHERE numcontrato='<cto>';
+-- Esperado: estado=4, agua=0, drenaje=0
+
+SELECT COUNT(*) FROM ligacargos WHERE numcontrato='<cto>' AND estado=0;
+-- Esperado: 0
+```
+
+**Sin limpieza** — si se usó `405` sobre dato real, documentar en el reporte.
+
+---
+
+<a name="ui-6"></a>
+### UI-6 · Creación de Nuevo Contrato — 6 sub-casos (A a F)
+
+**Qué valida**: El formulario de Nuevo Contrato: creación exitosa, generación automática de cargos, tarifas correctas según tipo de toma, bloqueos de infraestructura y de límite de tomas.
+
+> ⚠️ **Flujo del formulario**: Usuario → presionar **TAB** para activar búsqueda → seleccionar de la lista → clic en label **"Nueva dirección..."** → ingresar domicilio → configurar tomas → clic **"Guardar Contrato"** → **confirmar el popup de confirmación** (Aceptar/OK).
+
+> ⚠️ Si no existen las anualidades 2026 en el catálogo, el contrato se crea pero sin cargos automáticos. Verificar antes:
+> ```sql
+> SELECT COUNT(*) FROM cargos WHERE nombre IN ('ANUALIDAD DEL AGUA 2026','ANUALIDAD DEL DRENAJE 2026') AND estado=1;
+> -- Esperado: 2. Si retorna < 2, marcar IMPEDIDO.
+> ```
+
+**Usuario base para todos los sub-casos**: `1` (ABAD CRUZ BLANCO — verificado sin contratos activos).
+
+---
+
+**Sub-caso A — 1 Toma Normal: agua + drenaje (caso base)**
+
+Verificar antes:
+```sql
+SELECT COUNT(*) FROM contrato WHERE numusuario=1;
+-- Esperado: 0. Si retorna > 0, ejecutar la limpieza al final de este caso antes de empezar.
+SELECT COUNT(*) FROM cargos WHERE nombre IN ('ANUALIDAD DEL AGUA 2026','ANUALIDAD DEL DRENAJE 2026') AND estado=1;
+-- Esperado: 2. Si retorna < 2, marcar IMPEDIDO.
+```
+
+**Pasos**:
+1. Menú **"Nuevo Contrato"**.
+2. En el campo de usuario escribir `ABAD` (o `ABAD CRUZ BLANCO`) → presionar **TAB** → esperar que aparezca la lista de resultados → seleccionar el usuario **1 - ABAD CRUZ BLANCO** de la lista.
+3. Clic en el label **"Nueva dirección..."** → en el campo de domicilio ingresar exactamente: `CALLE PRUEBA AUTO 6A`.
+4. Tipo de contrato: **Normal**.
+5. Toma 1: marcar **agua = Sí**, marcar **drenaje = Sí**.
+6. Clic **"Guardar Contrato"** → en el popup de confirmación que aparece, clic **Aceptar / OK**.
+7. Anotar el número del contrato creado.
+
+**Verificar en pantalla**:
+- Ficha del nuevo contrato se abre con estado **Activo**.
+- Tabla de adeudos muestra **ANUALIDAD DEL AGUA 2026** y **ANUALIDAD DEL DRENAJE 2026** pendientes.
+
+**Verificar en BD**:
+```sql
+-- Datos del contrato creado:
+SELECT estado, agua, drenaje, tipo, exento_recargo_primer_anio
+FROM contrato WHERE numusuario=1 ORDER BY numcontrato DESC LIMIT 1;
+-- Esperado: 1, 1, 1, 0, 1
+
+-- Toma creada correctamente:
+SELECT num_toma, tipo, tiene_agua, tiene_drenaje, estado_agua, estado_drenaje
+FROM contrato_toma WHERE numcontrato=(SELECT MAX(numcontrato) FROM contrato WHERE numusuario=1);
+-- Esperado: 1, 0, 1, 1, 1, 1
+
+-- Cargos automáticos generados:
+SELECT COUNT(*) FROM ligacargos
+WHERE numcontrato=(SELECT MAX(numcontrato) FROM contrato WHERE numusuario=1)
+AND categoria IN (2,3) AND estado=0;
+-- Esperado: 2
+```
+
+**Limpieza**:
+```sql
+SET @nid=(SELECT numcontrato FROM contrato WHERE numusuario=1 AND domicilio='CALLE PRUEBA AUTO 6A' ORDER BY numcontrato DESC LIMIT 1);
+DELETE FROM ligacargos WHERE numcontrato=@nid;
+DELETE FROM contrato_toma WHERE numcontrato=@nid;
+DELETE FROM contrato WHERE numcontrato=@nid;
+```
+
+---
+
+**Sub-caso B — 1 Toma Normal: solo agua, sin drenaje**
+
+Limpieza previa (borrar huérfano si sub-caso A quedó a medias):
+```sql
+SET @h=(SELECT numcontrato FROM contrato WHERE numusuario=1 AND domicilio='CALLE PRUEBA AUTO 6B' ORDER BY numcontrato DESC LIMIT 1);
+DELETE FROM ligacargos WHERE numcontrato=@h;
+DELETE FROM contrato_toma WHERE numcontrato=@h;
+DELETE FROM contrato WHERE numcontrato=@h;
+```
+
+**Pasos**:
+1. Menú **"Nuevo Contrato"**.
+2. Campo de usuario: escribir `ABAD` (o `ABAD CRUZ BLANCO`) → **TAB** → seleccionar **1 - ABAD CRUZ BLANCO** de la lista.
+3. Clic en label **"Nueva dirección..."** → ingresar domicilio: `CALLE PRUEBA AUTO 6B`.
+4. Tipo: **Normal**. Toma 1: ✅ agua, ❌ drenaje (desmarcar drenaje).
+5. Clic **"Guardar Contrato"** → **Aceptar popup**.
+
+**Verificar en pantalla**: Solo aparece **ANUALIDAD DEL AGUA 2026** en adeudos. Sin ANUALIDAD DRENAJE.
+
+**Verificar en BD**:
+```sql
+SELECT agua, drenaje FROM contrato WHERE numusuario=1 ORDER BY numcontrato DESC LIMIT 1;
+-- Esperado: 1, 0
+
+SELECT COUNT(*) FROM ligacargos
+WHERE numcontrato=(SELECT MAX(numcontrato) FROM contrato WHERE numusuario=1)
+AND categoria IN (2,3) AND estado=0;
+-- Esperado: 1 (solo agua)
+```
+
+**Limpieza** (mismo patrón que A, domicilio `'CALLE PRUEBA AUTO 6B'`).
+
+---
+
+**Sub-caso C — 1 Toma Comercial: tarifa diferenciada**
+
+Anotar la tarifa comercial antes de crear:
+```sql
+SELECT monto, monto_comercial FROM cargos WHERE nombre='ANUALIDAD DEL AGUA 2026' AND estado=1 LIMIT 1;
+-- Anotar ambos valores para comparación posterior
+```
+
+Limpieza previa (huérfano de domicilio 6C si existe).
+
+**Pasos**:
+1. Menú **"Nuevo Contrato"**.
+2. Campo de usuario: escribir `ABAD` → **TAB** → seleccionar **1 - ABAD CRUZ BLANCO**.
+3. Clic en label **"Nueva dirección..."** → ingresar domicilio: `CALLE PRUEBA AUTO 6C`.
+4. Toma 1: tipo **Comercial**, ✅ agua, ✅ drenaje.
+5. Clic **"Guardar Contrato"** → **Aceptar popup**.
+
+**Verificar en pantalla**: Ficha activa. La ANUALIDAD AGUA 2026 tiene un monto diferente al de tipo Normal.
+
+**Verificar en BD**:
+```sql
+SELECT tipo FROM contrato WHERE numusuario=1 ORDER BY numcontrato DESC LIMIT 1;
+-- Esperado: 1 (Comercial)
+
+SELECT monto FROM ligacargos
+WHERE numcontrato=(SELECT MAX(numcontrato) FROM contrato WHERE numusuario=1)
+AND leyenda='ANUALIDAD DEL AGUA 2026' AND estado=0 LIMIT 1;
+-- Esperado: igual a monto_comercial anotado antes (o monto×2 si monto_comercial=0)
+```
+
+**Limpieza** (mismo patrón, domicilio `'CALLE PRUEBA AUTO 6C'`).
+
+---
+
+**Sub-caso D — 2 Tomas: Normal + Comercial (máximo permitido)**
+
+Anotar tarifas antes:
+```sql
+SELECT nombre, monto, monto_comercial FROM cargos
+WHERE nombre IN ('ANUALIDAD DEL AGUA 2026','ANUALIDAD DEL DRENAJE 2026') AND estado=1;
+```
+
+Limpieza previa (huérfano de domicilio 6D si existe).
+
+**Pasos**:
+1. Menú **"Nuevo Contrato"**.
+2. Campo de usuario: escribir `ABAD` → **TAB** → seleccionar **1 - ABAD CRUZ BLANCO**.
+3. Clic en label **"Nueva dirección..."** → ingresar domicilio: `CALLE PRUEBA AUTO 6D`.
+4. Toma 1: tipo **Normal**, ✅ agua, ✅ drenaje.
+5. Activar **Toma 2** (clic en el botón/checkbox que habilita la segunda toma): tipo **Comercial**, ✅ agua, ❌ drenaje.
+6. Clic **"Guardar Contrato"** → **Aceptar popup**.
+
+**Verificar en pantalla**: Ficha activa. Tabla de adeudos muestra 2 anualidades con montos ajustados por el tipo Comercial (MAX de ambas tomas).
+
+**Verificar en BD**:
+```sql
+SELECT agua, drenaje, tipo FROM contrato WHERE numusuario=1 ORDER BY numcontrato DESC LIMIT 1;
+-- Esperado: 2, 1, 1
+
+SELECT COUNT(*) FROM contrato_toma
+WHERE numcontrato=(SELECT MAX(numcontrato) FROM contrato WHERE numusuario=1);
+-- Esperado: 2
+```
+
+**Limpieza** (mismo patrón, domicilio `'CALLE PRUEBA AUTO 6D'`).
+
+---
+
+**Sub-caso E — Bloqueo: 3ra toma en domicilio ya con 2**
+
+Verificar antes:
+```sql
+-- Obtener el domicilio exacto del contrato 100 (necesario para el formulario):
+SELECT domicilio FROM contrato WHERE numcontrato='100' LIMIT 1;
+-- Anotar el valor exacto
+
+-- Verificar que usuario 706 ya tiene 2 tomas activas:
+SELECT COUNT(ct.id) FROM contrato c
+JOIN contrato_toma ct ON c.numcontrato=ct.numcontrato
+WHERE c.numusuario=706 AND c.estado!=4;
+-- Esperado: 2. Si ≠ 2, marcar IMPEDIDO.
+```
+
+**Pasos**:
+1. Menú **"Nuevo Contrato"**.
+2. Campo de usuario: escribir `IBÁÑEZ` (apellido del usuario 706) → **TAB** → seleccionar usuario **706 - IBÁÑEZ** de la lista.
+3. Clic en label **"Nueva dirección..."** → ingresar **exactamente** el domicilio retornado por la consulta anterior (copiarlo tal cual, sin modificar mayúsculas ni espacios).
+4. Toma 1: tipo Normal, ✅ agua, ✅ drenaje.
+5. Clic **"Guardar Contrato"** → **Aceptar popup**.
+
+**Verificar en pantalla**: Mensaje de error: `"Solo se permiten hasta 2 tomas por usuario en el mismo domicilio"`.
+
+**Verificar en BD**:
+```sql
+SELECT COUNT(*) FROM contrato WHERE numusuario=706;
+-- Esperado: mismo número que antes (no se creó contrato nuevo)
+```
+
+**Limpieza**: Ninguna — no se creó contrato.
+
+---
+
+**Sub-caso F — Bloqueo: ID de contrato duplicado**
+
+**Pasos**:
+1. Menú **"Nuevo Contrato"**.
+2. Localizar el campo de número de contrato (campo `numcontrato` visible en el formulario) → **editar manualmente** e ingresar `100` (contrato que ya existe).
+3. Campo de usuario: escribir `ABAD` → **TAB** → seleccionar **1 - ABAD CRUZ BLANCO**.
+4. Clic en label **"Nueva dirección..."** → ingresar domicilio: `CALLE PRUEBA AUTO 6F`.
+5. Toma 1: tipo Normal, ✅ agua, ✅ drenaje.
+6. Clic **"Guardar Contrato"** → **Aceptar popup**.
+
+**Verificar en pantalla**: Mensaje de error: `"No ha sido posible agregar este contrato a la base de datos."`.
+
+**Verificar en BD**:
+```sql
+SELECT COUNT(*) FROM contrato WHERE domicilio='CALLE PRUEBA AUTO 6F';
+-- Esperado: 0 (no se creó)
+```
+
+**Limpieza**: Ninguna.
+
+---
+
+**Verificaciones transversales (aplican a sub-casos A, B, C, D exitosos)**:
+```sql
+-- Fecha de alta = hoy:
+SELECT DATE(fecha)=CURDATE() FROM contrato
+WHERE numusuario=1 ORDER BY numcontrato DESC LIMIT 1;
+-- Esperado: 1
+
+-- Sin recargos moratorios al crear (exención primer año):
+SELECT COUNT(*) FROM ligacargos
+WHERE numcontrato=(SELECT MAX(numcontrato) FROM contrato WHERE numusuario=1)
+AND categoria IN (16,17);
+-- Esperado: 0
+```
+
+---
+
+### GRUPO B — Tomas Físicas y Paridad Financiera
+
+---
+
+<a name="ui-7"></a>
+### UI-7 · Restricción de 2 tomas por domicilio
+
+**Qué valida**: El sistema bloquea agregar una 3ra toma tanto al crear un contrato nuevo (UI-7-A) como al editar uno existente (UI-7-B).
+
+**Datos**: Usuario `706` ya tiene contratos `100` y `160` en el mismo domicilio (2 tomas activas).
+
+---
+
+**Sub-caso A — vía formulario Nuevo Contrato**
+
+Verificar datos antes:
+```sql
+SELECT domicilio FROM contrato WHERE numcontrato='100' LIMIT 1;
+-- Anotar domicilio exacto
+
+SELECT COUNT(*) FROM contrato WHERE numusuario=706;
+-- Anotar cantidad actual
+```
+
+**Pasos**:
+1. Menú **"Nuevo Contrato"**.
+2. Campo de usuario: escribir `IBÁÑEZ` → **TAB** → seleccionar usuario **706 - IBÁÑEZ** de la lista.
+3. Clic en label **"Nueva dirección..."** → ingresar **exactamente** el domicilio retornado por la consulta anterior.
+4. Toma 1: tipo Normal, ✅ agua, ✅ drenaje.
+5. Clic **"Guardar Contrato"** → **Aceptar popup**.
+
+**Verificar**: Mensaje de error con "Solo se permiten hasta 2 tomas". No se crea contrato.
+
+---
+
+**Sub-caso B — vía edición de contrato existente**
+
+Verificar antes:
+```sql
+SELECT COUNT(*) FROM contrato_toma ct JOIN contrato c ON ct.numcontrato=c.numcontrato
+WHERE c.numusuario=706 AND c.estado!=4;
+-- Esperado: 2
+```
+
+**Pasos**:
+1. Ficha contrato `100` → **"Modificar información"** → intentar agregar una Toma 3 (activar el campo si existe, o incrementar el contador de tomas a 3) → motivo ≥20 chars → **Guardar cambios**.
+
+**Verificar en pantalla**: Mensaje de error con "Solo se permiten hasta 2 tomas".
+
+**Verificar en BD**:
+```sql
+SELECT COUNT(*) FROM contrato_toma WHERE numcontrato='100';
+-- Esperado: mismo número que antes
+```
+
+**Limpieza**: Ninguna — cambio fue rechazado.
+
+---
+
+<a name="ui-8"></a>
+### UI-8 · Bloqueo de cargos de drenaje sin infraestructura
+
+**Qué valida**: No es posible aplicar un cargo de drenaje a un contrato que no tiene toma de drenaje instalada.
+
+**Datos**: Contrato `1` (sin drenaje, dato real). Se puede usar también QA contrato `9006`.
+
+**Antes de empezar**:
+```sql
+SELECT drenaje FROM contrato WHERE numcontrato='1';
+-- Esperado: 0
+```
+
+**Pasos**:
+1. Buscar y abrir la ficha del contrato `1` (usuario 1536, sin drenaje).
+2. Sección **"Agregar cargos"** → en el campo de búsqueda escribir `"ANUALIDAD DEL DRENAJE 2026"` → seleccionarlo de la lista → clic **"Aplicar"**.
+
+**Verificar en pantalla**: Mensaje de error que incluye `"no tiene toma de drenaje conectada"`.
+
+**Verificar en BD**:
+```sql
+SELECT COUNT(*) FROM ligacargos
+WHERE numcontrato='1' AND leyenda='ANUALIDAD DEL DRENAJE 2026' AND estado=0;
+-- Esperado: 0 (cargo no insertado)
+```
+
+**Limpieza**: Ninguna.
+
+```
+
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Test Guide**
+
+I've just finished reviewing the test guide, and my focus now is identifying specific tools for the task. Currently, I haven't listed any, because I haven't used any yet; instead, my effort is directed to providing guidance. I'm focusing on the available information.
+
+
+**Addressing Data Integrity Issues**
+
+I've hit a snag. The "Limpieza post-test" in UI-1 is missing cleanup for newly generated surcharges. This is a critical omission, as the test suite relies on known states between tests. Continuing without a proper revert could cause unexpected failures or data corruption in subsequent tests. I need to make sure this is addressed, because if I don't, I'll need to rerun `Full-Pipeline-Sync.sh`.
+
+
+**Clarifying Clean-up Strategy**
+
+I've determined that leaving the 2026 surcharges on contract 9002 after UI-1 would break UI-5-E and UI-5-G, which depend on a specific contract state. The user has two options to prevent failures: either execute the manual clean-up (updated to remove the offending surcharges) or rerun the `Full-Pipeline-Sync.sh` script, which will reset the environment. The latter is preferred for a pristine state.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 6.349474934s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+## User Request
+
+Ejecute  UI-2 · Sin amnistía al reactivar desde Susp. Administrativa 
+ANtes Habia en edo SUSPENSION ADMINISTRATIVA se tenia: 52 adeudos del contrato (Cargos: 7,770 , Recargos: 2,916) 
+despues de pasar a Activo se tiene:  164 adeudos del contrato (Cargos:	 11,810.00, 
+Recargos:	7,026.00)
+Analiza que ocurrio. 
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `cline_mcp_settings.json`
+**Language:** json
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Identifying Relevant Tools**
+
+I've been focusing on identifying relevant tools, specifically moving away from generic bash commands. Right now, I'm considering `mcp_bdawahost-c_query` and `view_file` as potentially useful, and I'll continue to explore other specialized tools as the thinking process evolves.
+
+
+**Investigating Charge Explosion**
+
+I'm now diving into the specifics of contract 405's charge explosion. I've used `mcp_bdawahost-c_query` to confirm the reported charge increase after reactivation. It seems the `cambiaestado` function and subsequent calls to `_sincronizaParidadFinanciera` might be involved, leading to the generation of the base charges. However, the `cargaContrato` UI function, triggered on reload, appears to be the primary culprit, with its loop through automatic charges and potentially re-inserting historical charges, specifically based on the `repetir` flag and missing entries in `vw_ligacargos_all`. Next step, I will query the database for contract 40.
+
+
+
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 3.485363789s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 22 Apr 2026, 7:26 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Listing Relevant Tools**
+
+I've been focusing on listing relevant tools, specifically avoiding common Bash commands when more specialized options exist. Right now, I'm thinking about `mcp_bdawahost-c_query` as a starting point, trying to get a handle on what might have been inserted.
+
+
+
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.134851830s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 22 Apr 2026, 7:26 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Identifying Relevant Tools**
+
+I'm currently focused on identifying the best tools for this task, rather than resorting to basic bash commands. The key tool I've identified for this task is the `mcp_bdawahost-c_query` tool. I am trying to determine what specific charges were added, so this seems appropriate.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `cargos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.047966926s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L59-99)</summary>
+
+**Path:** `Unknown file`
+
+```
+	$fecha_entrada = strtotime("01-$mes_pad-$anio 01:00:00");
+
+	if ($fecha_actual > $fecha_entrada) {
+		$mes_numero = intval(date('m'));
+		$anio_numero = intval(date('Y'));
+		$meses = (($anio_numero - $anio) * 12) + ($mes_numero - 1);
+
+		$nom_meses = array("", "ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SEPT", "OCT", "NOV", "DIC");
+
+		$mesrecargo = 1;
+		$aniorecargo = $anio;
+
+		// Sin hardcode: porcentaje desde config
+		$monto_recargo = ($monto * $porcentaje) / 100;
+
+		// Sin hardcode: categorias desde config
+		$categoria_recargo = $categoria;
+		if ($categoria == 2)
+			$categoria_recargo = $cat_agua;
+		if ($categoria == 3)
+			$categoria_recargo = $cat_drenaje;
+
+		$respagado = $y->q("SELECT COUNT(numcontrato) FROM vw_ligacargos_all WHERE leyenda='$leyenda' AND numcontrato=$numcontrato AND estado=1");
+		list($pagado) = $y->fetch_array($respagado);
+
+		if ($pagado == 0) {
+			for ($i = 1; $i <= $meses; $i++) {
+				$leyenda_recargo = "RECARGO $nom_meses[$mesrecargo] $aniorecargo - $leyenda";
+				$tabla_dest = ($aniorecargo <= 2025) ? "ligacargos_historico" : "ligacargos";
+				if ($aniorecargo == $anio) {
+					// Idempotencia: no duplicar si el recargo ya existe (protege contra refresh y re-activaciones)
+					$chk_rec = $y->q("SELECT numcontrato FROM vw_ligacargos_all WHERE leyenda='$leyenda_recargo' AND numcontrato='$numcontrato' LIMIT 1");
+					if ($y->num_rows($chk_rec) == 0) {
+						$q = "INSERT INTO $tabla_dest (numcontrato,leyenda,monto,fcobro,fpago,estado,recargo,folio,anio,numcontratoresp,idpago_vinc,categoria,repetido) VALUES('$numcontrato','$leyenda_recargo',$monto_recargo,CURDATE(),CURDATE(),0,$recargo,'',$anio,'',NULL,$categoria_recargo,$cuenta)";
+						$y->q($q);
+					}
+				}
+				if (++$mesrecargo > 12) {
+					$mesrecargo = 1;
+					$aniorecargo++;
+				}
+```
+
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Tool Usage**
+
+I'm currently focused on analyzing how specific tools are being used, particularly avoiding generic bash commands like `cat`, `ls`, `grep`, and `sed`, while emphasizing the usage of specialized tools like `mcp_bdawahost-c_query`. I am examining `$meses = (($anio`, to understand how it interacts. I am considering alternative tooling to accomplish the goal of this.
+
+
+**Clarifying Surcharge Logic**
+
+I've clarified the surcharge logic. `calcula_recargos` inserts surcharges ONLY for the year the base charge was generated, which is the year `$anio`. For a 2024 base charge, the `$meses` calculation results in a loop that generates charges up to March 2026, but the `if` condition within that loop means only 2024 surcharges are inserted. I see that if a contract's `estado` is 3, it is reactivated to `estado=1`. When reactivating, `cargaContrato` queries automatic charges, but now I need to examine the query itself.
+
+
+
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 4.022837682s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 22 Apr 2026, 7:26 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Listing Relevant Tools**
+
+I've been focusing on identifying relevant tools, specifically avoiding common Bash commands. I've pinpointed `mcp_bdawahost-c_query` as a potentially useful tool. I'm noting the `cargos` table and its connection to automatic charges from the 20th of the month.
+
+
+**Analyzing Potential Consequences**
+
+Okay, I've hit a potential issue. If `$anio_inicio_fact` is 2005, the query currently grabs charges from 2018 to 2026. My updated code *always* calls `calcula_recargos` for *every* automatic charge. Previously, insertion was skipped if a base charge already existed. Now, even if "ANUALIDAD DEL AGUA 2018" is present, `calcula_recargos` runs anyway. I'm investigating how this will impact calculations within `calcula_recargos` to determine if this change presents an actual risk.
+
+
+**Clarifying Calculation Logic**
+
+I'm now diving into the implications of the `pagado == 0` check within the surcharge generation process. It appears this condition triggers generation of ALL missing surcharges for a given year if a base charge remains unpaid. My initial test case, contract 405 in `estado = 3`, illustrates this: unpaid debts meant `calcula_recargos` ran for all applicable years. The previous logic's restraint – only calling `calcula_recargos` on NEW charge insertion – explains the sudden increase in generated charges.
+
+
+
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 5.939346538s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 22 Apr 2026, 7:26 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing the Current Toolset**
+
+I'm currently focused on the `mcp_bdawahost-c_query` tool, as I identified that using more specific tools is crucial. The tool is exactly as hypothesized.
+
+
+**Calculating Surcharges' Impact**
+
+I've just run the numbers and confirmed a significant surcharge count: 102 newly generated, plus a few missing base charges that filled in. This resulted from re-activation with a "no amnesty" rule. The logic perfectly followed the runbook. The user's past debt triggered the idempotent surcharge calculation – which, upon re-activation, hit hard, as the missing surcharges for unpaid bills were filled in. It is critical to determine if this behavior is *correct*.
+
+
+**Clarifying Surcharge Logic**
+
+I've been examining the `calcula_recargos` rules closely. It appears that the system *does* correctly apply surcharges during "Suspensión Administrativa" (estado 3), as there is no specific rule excluding it. This confirms that surcharges accumulate even during suspension for non-payment, which seems counterintuitive at first, but is logically consistent with the rules. Now, I need to evaluate this from
+
+
+**Evaluating the Implications**
+
+I'm now grappling with the broader implications of the "catch-up" behavior introduced by the fix. It's becoming clear the system's previous "laziness" in surcharge generation, while problematic, might have been a hidden feature. Loading a contract profile in state 1 now triggers surcharge generation, which is a big change. Before, the system didn't generate missing surcharges for a base charge on contract load.
+
+
+**Pinpointing Conditional Trigger**
+
+I've zeroed in on the conditional logic within `cargaContrato`. The critical trigger for surcharge generation is `if ($estado == 1)`. Contracts in suspension (state 3) were previously skipped during surcharge calculations. Reactivating to state 1 forces the system to re-evaluate the charges. Because of the state transition, the loop calculates and generates all missing surcharges.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 11.390123606s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+## User Request
+
+No hay ningun cargo mal calculado,  u omitido (	AGUA POTABLE ANUALIDAD 2009, que pasa con ese cargo) ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `cline_mcp_settings.json`
+**Language:** json
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Identifying Relevant Tools**
+
+I've been focusing on identifying and listing appropriate tools, specifically steering clear of basic bash commands when specialized options are available. Currently, my thoughts center on using `mcp_bdawahost-c_query` to look for information on contract 405 within the database.
+
+
+
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.828322553s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 22 Apr 2026, 7:32 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Specific Data**
+
+I'm focusing on specific tools like `mcp_bdawahost-c_query` rather than generic terminal commands. Currently, I'm using the tool to query data for the year 2009, specifically for contract 405. The tool returned one result: `AGUA POTABLE ANUALIDAD 2009`.
+
+
+
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 3.072062866s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 22 Apr 2026, 7:32 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 22 Apr 2026, 7:32 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 22 Apr 2026, 7:32 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Identifying Relevant Tools**
+
+I've been focusing on identifying relevant tools, specifically moving away from generic bash commands. Currently, I'm thinking of `mcp_bdawahost-c_query` as a starting point. I'm trying to figure out how this tool could potentially analyze the given charge, "AGUA POTABLE ANUALIDAD 200".
+
+
+**Uncovering System Behavior**
+
+I've just had a breakthrough. `automatico=0` and `estado=0` for the charge in the catalog explains why `AGUA POTABLE ANUALIDAD 2009` isn't included. The `cargaContrato` query only fetches active, automatic charges, which this isn't. Thus, `calcula_recargos` is never called, and the F5 catch-up logic ignores it. The user's query makes it clear, they noticed this oddity!
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 4.710025577s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+## User Request
+
+Con base al resultado de las dos pruebas, analiza, y extiende las descripciónes en historial_mov_cto.php.
+Por ejemplo:
+
+ 22 de Abril de 2026 a las 19:17:23 hrs.
+Cambio de Estado
+Estado anterior / Motivo
+Estado [3] SUSPENSIÓN ADMINISTRATIVA. Motivo:  UI-2 · Sin amnistía al reactivar desde Susp. Administrativa
+
+Estado nuevo / Impacto financiero
+Estado [1] ACTIVO. Sin amnistía C06: adeudo íntegro conservado (viene de Suspensión Administrativa). | Adeudos: 52 | Deuda: $10,686.00
+______-
+. Que en estado anterior se extienda y muestra lo que en este ejemplo del caso, tiene Estado nuevo, en cuanto  a numeros de adeudos y deuda.
+. Que en estado NUEVO muestre que ocurrio  en cuanto  a numeros de adeudos y deuda; y que explique loque sucede con casos como el cargo AGUA POTABLE ANUALIDAD 2009
+
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `cline_mcp_settings.json`
+**Language:** json
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The user wants me to enhance the audit trail in `cambiaestado()` function inside `contratos.php`. Specifically:
+
+1. **Estado anterior (before)**: Should include a financial snapshot (number of pending charges and total debt) BEFORE the state change happens.
+2. **Estado nuevo (after)**: Should include:
+   - The financial snapshot AFTER the state change
+   - An explanation of what happened (e.g., "Recargos recalibrados para años sin recargos moratorios previos")
+   - Information about legacy charges that weren't recalculated (like "AGUA POTABLE ANUALIDAD 2009")
+
+Let me first look at the current `cambiaestado()` function to understand the existing audit trail, and then look at `historial_mov_cto.php` to understand how it renders the data.
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `historial_mov_cto`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 7.017265816s
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 22 Apr 2026, 7:46 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `historial_mov_cto.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/**
+ * historial_mov_cto.php — Reporte Detallado de Movimientos por Contrato
+ * Muestra cronológicamente todos los cambios registrados en la tabla 'cambios'.
+ */
+
+require_once("../config/Conexion.php");
+$y = new Conexion();
+$y->conectarBaseDatos();
+
+$id = isset($_GET['id']) ? $y->real_escape_string($_GET['id']) : '';
+
+if (empty($id)) {
+    die("Error: No se proporcionó un número de contrato válido.");
+}
+
+// Consultar datos básicos del contrato y usuario
+$q_info = "SELECT u.nombre, c.domicilio, c.estado, c.numusuario
+           FROM contrato c
+           JOIN usuario u ON c.numusuario = u.noconsecutivo
+           WHERE c.numcontrato = '$id'";
+$res_info = $y->q($q_info);
+$info = $y->fetch_array($res_info);
+
+if (!$info) {
+    die("Error: El contrato #$id no existe.");
+}
+
+// Mapeo de estados
+$estados_map = array(
+    1 => "ACTIVO",
+    2 => "SUSPENSIÓN TEMPORAL",
+    3 => "SUSPENSIÓN ADMINISTRATIVA",
+    4 => "SUSPENSIÓN DEFINITIVA"
+);
+
+$meses = array("01"=>"Enero","02"=>"Febrero","03"=>"Marzo","04"=>"Abril","05"=>"Mayo","06"=>"Junio","07"=>"Julio","08"=>"Agosto","09"=>"Septiembre","10"=>"Octubre","11"=>"Noviembre","12"=>"Diciembre");
+
+// Obtener todos los contratos del mismo usuario para incluir registros masivos
+// (ej. Declaratoria No Localizado que registra numcontrato='')
+$numusuario = intval($info['numusuario']);
+$q_ctos_usr = "SELECT numcontrato FROM contrato WHERE numusuario = $numusuario";
+$res_ctos = $y->q($q_ctos_usr);
+$ctos_usuario = array();
+while ($row = $y->fetch_array($res_ctos)) {
+    $ctos_usuario[] = "'" . $y->real_escape_string($row['numcontrato']) . "'";
+}
+$ctos_usuario[] = "''"; // incluir registros masivos (numcontrato='') del usuario
+$in_ctos = implode(',', $ctos_usuario);
+
+// Consultar historial de cambios — incluye cancelaciones, reasignaciones y declaratorias
+$q_cambios = "SELECT fecha, descripcion, antes, despues
+              FROM cambios
+              WHERE numcontrato = '$id'
+              OR (numcontrato = '' AND descripcion LIKE 'Declaratoria No Localizado ID $numusuario.%')
+              ORDER BY id DESC";
+$res_cambios = $y->q($q_cambios);
+$total_cambios = $y->num_rows($res_cambios);
+
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Historia de movimientos - Contrato #<?= $id ?></title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --accent: #f1f5f9;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 2rem;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-info h1 {
+            font-size: 1.8rem;
+            margin: 0;
+            color: var(--primary);
+        }
+
+        .contract-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1rem;
+        }
+
+        .data-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .data-item label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+        }
+
+        .data-item span {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-top: 5px;
+        }
+
+        .badge-active { background: #dcfce7; color: #166534; }
+        .badge-other { background: #fee2e2; color: #991b1b; }
+
+        .tipo-badge {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 9999px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+        .tipo-cancelacion   { background: #fee2e2; color: #991b1b; }
+        .tipo-reasignacion  { background: #dcfce7; color: #166534; }
+        .tipo-declaratoria  { background: #fef9c3; color: #854d0e; }
+        .tipo-amnistia      { background: #ede9fe; color: #5b21b6; }
+        .tipo-estado        { background: #dbeafe; color: #1e40af; }
+        .tipo-otro          { background: #e0e7ff; color: #3730a3; }
+
+        .timeline {
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 1.5rem;
+            padding-left: 20px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -26px;
+            top: 4px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 3px solid white;
+            box-shadow: 0 0 0 1px var(--border);
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .timeline-date {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .timeline-desc {
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+            color: #1e293b;
+        }
+
+        .timeline-diff {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            font-size: 0.85rem;
+            background: #f1f5f9;
+            padding: 8px;
+            border-radius: 6px;
+        }
+
+        .diff-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .diff-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: #94a3b8;
+        }
+
+        .diff-val {
+            word-break: break-all;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            background: white;
+            border-radius: 12px;
+            border: 2px dashed var(--border);
+            color: var(--text-muted);
+        }
+
+        @media print {
+            .no-print { display: none; }
+            body { padding: 0; }
+            .container { max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-info">
+                <h1>Historia de movimientos</h1>
+            </div>
+        </header>
+
+        <div class="contract-card">
+            <div class="data-item">
+                <label>Contribuyente</label>
+                <span><?= htmlspecialchars(strtoupper($info['nombre'])) ?></span>
+                <small style="color: var(--text-muted);"><?= htmlspecialchars($info['domicilio']) ?></small>
+                <small style="color: var(--text-muted); margin-top: 4px;">Usuario #<?= $info['numusuario'] ?></small>
+            </div>
+            <div class="data-item" style="text-align: right;">
+                <label>Número de Contrato</label>
+                <span style="font-size: 1.5rem; color: var(--primary);">#<?= $id ?></span>
+                <div>
+                    <span class="badge <?= ($info['estado'] == 1 ? 'badge-active' : 'badge-other') ?>">
+                        <?= isset($estados_map[$info['estado']]) ? $estados_map[$info['estado']] : 'Estado ' . $info['estado'] ?>
+                    </span>
+                </div>
+                <small style="color: var(--text-muted); margin-top: 6px;"><?= $total_cambios ?> registro(s) de auditoría</small>
+            </div>
+        </div>
+
+        <?php if ($total_cambios > 0): ?>
+            <div class="timeline">
+                <?php
+                while ($c = $y->fetch_array($res_cambios)):
+                    $time = strtotime($c['fecha']);
+                    $fecha_larga = date('d', $time) . " de " . $meses[date('m', $time)] . " de " . date('Y', $time) . " a las " . date('H:i:s', $time) . " hrs.";
+
+                    // Clasificar tipo de movimiento para color y etiqueta
+                    $desc_lower = strtolower($c['descripcion']);
+                    if ($desc_lower === 'cancelacion') {
+                        $tipo_clase  = 'tipo-cancelacion';
+                        $tipo_etiq   = 'Cancelación de Cargo';
+                        $label_antes = 'Razón de Cancelación';
+                        $label_desp  = 'Cargo(s) Cancelado(s)';
+                    } elseif (strpos($desc_lower, 'reasignacion') !== false) {
+                        $tipo_clase  = 'tipo-reasignacion';
+                        $tipo_etiq   = 'Reasignación de Cargo';
+                        $label_antes = 'Estado Anterior';
+                        $label_desp  = 'Resultado';
+                    } elseif (strpos($desc_lower, 'declaratoria') !== false) {
+                        $tipo_clase  = 'tipo-declaratoria';
+                        $tipo_etiq   = 'Declaratoria';
+                        $label_antes = 'Detalle';
+                        $label_desp  = 'Resultado';
+                    } elseif (strpos($desc_lower, 'amnistia') !== false) {
+                        $tipo_clase  = 'tipo-amnistia';
+                        $tipo_etiq   = 'Amnistía C06';
+                        $label_antes = 'Situación antes de amnistía';
+                        $label_desp  = 'Situación después de amnistía';
+                    } elseif (strpos($desc_lower, 'cambio de estado') !== false) {
+                        $tipo_clase  = 'tipo-estado';
+                        $tipo_etiq   = 'Cambio de Estado';
+                        $label_antes = 'Estado anterior / Motivo';
+                        $label_desp  = 'Estado nuevo / Impacto financiero';
+                    } else {
+                        $tipo_clase  = 'tipo-otro';
+                        $tipo_etiq   = htmlspecialchars($c['descripcion']);
+                        $label_antes = 'Antes';
+                        $label_desp  = 'Después';
+                    }
+                ?>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date"><?= $fecha_larga ?></div>
+                            <div>
+                                <span class="tipo-badge <?= $tipo_clase ?>"><?= $tipo_etiq ?></span>
+                            </div>
+                            <?php if (!empty($c['antes']) || !empty($c['despues'])): ?>
+                                <div class="timeline-diff">
+                                    <div class="diff-side">
+                                        <span class="diff-label"><?= $label_antes ?></span>
+                                        <span class="diff-val"><?= htmlspecialchars($c['antes'] ?: '—') ?></span>
+                                    </div>
+                                    <div class="diff-side">
+                                        <span class="diff-label"><?= $label_desp ?></span>
+                                        <span class="diff-val" style="color: #059669; font-weight: 600;"><?= htmlspecialchars($c['despues'] ?: '—') ?></span>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                <?php endwhile; ?>
+            </div>
+        <?php else: ?>
+            <div class="empty-state">
+                <div style="font-size: 2rem; margin-bottom: 1rem;">🔍</div>
+                No se encontraron registros de cambios para este contrato.
+            </div>
+        <?php endif; ?>
+
+        <footer style="margin-top: 3rem; text-align: center; color: var(--text-muted); font-size: 0.8rem; border-top: 1px solid var(--border); padding-top: 1rem;">
+            Reporte generado el <?= date('d') . " de " . $meses[date('m')] . " de " . date('Y') . " " . date('H:i:s') ?> | Sistema Agua V2
+        </footer>
+    </div>
+</body>
+</html>
+<?php 
+$y->cerrarConexion(); 
+?>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `contratos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L265-369)</summary>
+
+**Path:** `Unknown file`
+
+```
+function cambiaestado($contrato, $rp, $rt, $texto, $estado)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$cfg = cargaConfig($y);
+	$min_car = intval(obtenerValorSeguro($cfg, 'cancelacion_min_caracteres', 20));
+	$mes_st  = intval(obtenerValorSeguro($cfg, 'susptemp_mes_permitido', 12));
+
+	$res_actual = $y->q("SELECT estado FROM contrato WHERE numcontrato='$contrato'");
+	list($estado_actual) = $y->fetch_array($res_actual);
+
+	if ($estado_actual == 4) {
+		return $templates->render('sistema/mensaje', array(
+			'titulo'  => 'Acción No Permitida',
+			'mensaje' => 'No es posible cambiar el estado de un contrato que se encuentra en <b>Suspensión Definitiva</b>.'
+		));
+	}
+
+	// Bloqueo de transiciones ilógicas (2 <-> 3) según análisis de Runbook
+	if ((intval($estado_actual) === 2 && intval($estado) === 3) || (intval($estado_actual) === 3 && intval($estado) === 2)) {
+		return $templates->render('sistema/mensaje', array(
+			'titulo'  => 'Transición No Permitida',
+			'mensaje' => 'No se permite saltar entre diferentes tipos de suspensión directamente. El contrato debe ser <b>Regularizado a Activo</b> antes de cambiar el tipo de suspensión.'
+		));
+	}
+
+	$res1 = $y->q("SELECT contrasena FROM contrasenas WHERE rol='presidente'");
+	$res2 = $y->q("SELECT contrasena FROM contrasenas WHERE rol='tesorero'");
+	list($contrasena_presidente) = $y->fetch_array($res1);
+	list($contrasena_tesorero)   = $y->fetch_array($res2);
+
+	// Validar mes para suspensión temporal
+	if ($estado == 2 && intval(date('m')) != $mes_st) {
+		$nom_meses = array("","Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+		return $templates->render('sistema/mensaje', array(
+			'titulo'  => 'No permitido',
+			'mensaje' => 'La Suspensi&oacute;n Temporal solo puede solicitarse en <b>' . $nom_meses[$mes_st] . '</b>.'
+		));
+	}
+
+	if (strlen($texto) > $min_car) {
+		$q = "UPDATE contrato SET estado=$estado WHERE numcontrato='$contrato'";
+		$y->q($q);
+
+		$nombres_estado = array(
+			1 => 'ACTIVO',
+			2 => 'SUSPENSIÓN TEMPORAL',
+			3 => 'SUSPENSIÓN ADMINISTRATIVA',
+			4 => 'SUSPENSIÓN DEFINITIVA'
+		);
+		$nombre_origen  = isset($nombres_estado[intval($estado_actual)]) ? $nombres_estado[intval($estado_actual)] : "ESTADO $estado_actual";
+		$nombre_destino = isset($nombres_estado[intval($estado)])        ? $nombres_estado[intval($estado)]        : "ESTADO $estado";
+
+		if (intval($estado) === 4) {
+			$y->q("UPDATE contrato_toma SET estado_agua=0, estado_drenaje=0 WHERE numcontrato='$contrato'");
+			$y->q("UPDATE contrato SET agua=0, drenaje=0 WHERE numcontrato='$contrato'");
+			
+			// Forzar paridad financiera (cancelar cargos anuales)
+			_sincronizaParidadFinanciera($contrato, $y);
+
+			$nota_especifica = "Eliminación física de tomas y depuración total de deuda (Regla C05).";
+		} else if (intval($estado) === 1) {
+			// Restaurar paridad del año actual PRIMERO — genera/restaura anualidades y recargos del año en curso
+			_sincronizaParidadFinanciera($contrato, $y);
+
+			if (intval($estado_actual) === 2) {
+				// Regla C06: Amnistía DESPUÉS de paridad — cancela recargos históricos sin que paridad los regenere
+				_amnistiaRecargosHistoricos($contrato, $y);
+				$nota_especifica = "Amnistía C06 aplicada: recargos históricos cancelados. Facturación reactivada.";
+			} else {
+				// Estado 3 → 1: NO aplica amnistía — adeudo íntegro conservado
+				$nota_especifica = "Sin amnistía C06: adeudo íntegro conservado (viene de Suspensión Administrativa).";
+			}
+		} else {
+			// Transiciones a estado 2 (SUSP. TEMPORAL) o 3 (SUSP. ADMINISTRATIVA)
+			$nota_especifica = (intval($estado) === 2)
+				? "Facturación congelada. Anualidad vigente cancelada (Regla C06)."
+				: "Suspensión sancionatoria. Adeudo íntegro conservado. Sin amnistía al reactivar.";
+		}
+
+		// Snapshot financiero POST-cambio para auditoría
+		$res_post = $y->q("SELECT COUNT(*) AS n, SUM(monto) AS total FROM vw_ligacargos_pendientes WHERE numcontrato = '$contrato'");
+		$post = $y->fetch_array($res_post);
+		$n_post  = intval($post['n']);
+		$tot_post = number_format(floatval($post['total']), 2);
+		$resumen_financiero = "Adeudos: $n_post | Deuda: \$$tot_post";
+
+		$nombre_origen_esc      = $y->real_escape_string($nombre_origen);
+		$nombre_destino_esc     = $y->real_escape_string($nombre_destino);
+		$texto_esc              = $y->real_escape_string($texto);
+		$nota_especifica_esc    = $y->real_escape_string($nota_especifica);
+		$resumen_financiero_esc = $y->real_escape_string($resumen_financiero);
+
+		$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato) 
+		       VALUES(NOW(), 
+		              'Cambio de estado: $nombre_origen_esc → $nombre_destino_esc', 
+		              'Estado [$estado_actual] $nombre_origen_esc. Motivo: $texto_esc', 
+		              'Estado [$estado] $nombre_destino_esc. $nota_especifica_esc | $resumen_financiero_esc', 
+		              '$contrato')");
+
+		$salida = "<script>cargaDatosContrato('$contrato');</script>";
+	} else {
+		$salida = $templates->render('sistema/mensaje', array(
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 22 Apr 2026, 7:47 pm
+
+---
+
+<details>
+<summary>Conversation History</summary>
+
+# Conversation History
+Here are the conversation IDs, titles, and summaries of your most recent 8 conversations, in reverse chronological order:
+
+<conversation_summaries>
+## Conversation 772b23ae-0897-4270-9446-4689fdf95548: Executing UI Test Suite
+- Created: 2026-04-20T04:38:49Z
+- Last modified: 2026-04-20T05:36:46Z
+
+### USER Objective:
+Stabilizing Agua UI Tests
+
+USER Objective: Complete the validation of the Agua V2 testing suite (Section 1 / Group A) to ensure the system's operational readiness.
+Goals:
+1. Systematically execute UI test cases for contract management, state transitions, and infrastructure configuration based on the stabilized test plan.
+2. Refine automation protocols by documenting specific UI interactions, such as using TAB for field auto-completion and handling browser confirmation dialogues.
+3. Validate system behavior against business rules, specifically addressing contract creation constraints, parity synchronization, and administrative blocking mechanisms.
+4. Update the formal test documentation to reflect empirical findings and UI-specific interaction patterns discovered during manual and automated execution.
+
+## Conversation cbf979ab-fe6f-4218-97aa-78333e6a1a56: Audit Caja Reconciliation Discrepancies
+- Created: 2026-04-20T01:04:06Z
+- Last modified: 2026-04-20T04:13:17Z
+
+### USER Objective:
+Stabilizing Agua Reporting Modules
+
+Objective: Resolve identified logic gaps and architectural inconsistencies in the Agua V2 reporting and receipt modules on Host C.
+
+Goals:
+1. Patch the date logic in `reciboegreso.php` to ensure correct temporal mapping of expenditures.
+2. Address identified bugs and legacy function dependencies in `credencial.php` to improve module robustness.
+3. Verify all code changes against the updated forensic audit documentation to maintain system-wide congruency.
+4. Finalize and push all stabilization patches to the production repository to ensure full operational readiness.
+
+## Conversation 70313f54-0ccd-4b31-b9dd-0a85cd24482b: Validating Host C PHP Errors
+- Created: 2026-04-20T02:37:26Z
+- Last modified: 2026-04-20T02:43:35Z
+
+### USER Objective:
+Validating Host C PHP Errors
+
+Main Objective: Evaluate the current status of reported PHP notices from Host C logs without performing any code modifications.
+
+Goals:
+1. Confirm if the "Undefined index" notices in `contrasenas.php` (lines 71-116) and `carteravencida.php` (line 50) are still valid based on existing file content.
+2. Verify the persistence of the "Undefined property" notice for `Conexion::$insert_id` in `usuarios.php` (line 296).
+3. Provide a clear, non-corrective status report to the user regarding the state of these specific runtime errors.
+
+## Conversation d93a3dd6-def6-407e-bf68-58e09c7b5178: Refactoring Agua Assembly Module
+- Created: 2026-04-19T00:37:18Z
+- Last modified: 2026-04-19T01:46:32Z
+
+### USER Objective:
+Refining Asamblea Administrative Interface
+
+Main Objective: Finalize the stabilization and UI refactor of the Asamblea V2 administrative module on Host C.
+
+Goals:
+1. Complete the transition of the application entry point to the "Administración" view.
+2. Implement dynamic, database-driven labels for the "Multa por Inasistencia" to replace hardcoded inputs.
+3. Standardize and fix the administrative action table to ensure proper state-based control buttons (Start/Close/Download) appear for all assemblies.
+4. Clean up the UI by removing redundant navigation elements like the "Pase de Lista" button.
+5. Deploy changes manually to the production-ready Host C environment following established architectural constraints and legacy system protocols.
+
+## Conversation 2d2217ca-2154-4c88-b506-587e879d4278: Validating Agua Test Plan
+- Created: 2026-04-18T20:32:04Z
+- Last modified: 2026-04-18T23:01:21Z
+
+### USER Objective:
+Stabilizing Agua Testing Suite
+
+Main Objective: Complete the formalization and stabilization of the Agua V2 testing suite to ensure autonomous, production-ready execution.
+
+Goals:
+1. Finalize the "Plan de Pruebas" documentation with high-precision CSS selectors and updated Host C paths.
+2. Refactor attendance module interoperability between the Assembly generator and Agua processor, including MD5 validation and cross-table database consistency (active vs. historical).
+3. Synchronize the deployment pipeline (B→A→C) to maintain environment integrity.
+4. Establish clear operational separation for concurrent manual and automated testing across dual monitors.
+5. Secure version control integrity for all finalized protocols in remote repositories.
+
+## Conversation 857c34d0-7f04-45a0-98d9-f2c3598f2011: Investigating Host Synchronization Anomalies
+- Created: 2026-04-18T05:16:57Z
+- Last modified: 2026-04-18T06:38:48Z
+
+### USER Objective:
+Stabilizing Agua Audit Archiving
+
+Objective: Finalize the migration of the audit logging system to a partitioned architecture (active vs. historical) and ensure full operational continuity of the Agua V2 administrative dashboard.
+
+Goals:
+1. Implement and validate the archival split between `cambios` and `cambios_historico` tables to ensure data integrity and performance.
+2. Integrate the `sp_archivar_bitacora` procedure into the standard deployment pipeline (`Full-Pipeline-Sync.sh`) to prevent configuration drift on Host C.
+3. Consolidate UI access by linking the `monitor_fallbacks.php` utility into the "Operaciones y Reportes" panel.
+4. Refine system-wide SELECT queries to correctly handle temporal data distribution between the active and historical audit tables.
+
+## Conversation 4e4d201a-ecea-40ab-b382-a9c52c17a702: Reorganizing Agua Configuration Dashboard
+- Created: 2026-04-18T04:23:21Z
+- Last modified: 2026-04-18T04:52:46Z
+
+### USER Objective:
+Refining Agua System UI
+The user's primary objective is to finalize the administrative and diagnostic polish of the Agua V2 system. Key goals include:
+1. Standardizing application labels and menu terminology for consistency across the platform.
+2. Enhancing navigation and filter functionality for reporting modules, specifically in the Cartera Vencida and Saneamiento views.
+3. Troubleshooting and patching the Bitácora de Saneamiento to ensure accurate audit trail visualization post-migration.
+4. Managing version control and documentation integrity by excluding specific development notes from the deployment pipeline.
+
+## Conversation 517dd86d-fc67-42b5-9de5-f6e0f00ed9f2: Unifying Agua Testing Protocols
+- Created: 2026-04-17T05:31:40Z
+- Last modified: 2026-04-17T07:00:04Z
+
+### USER Objective:
+Stabilizing Agua UI Testing
+
+Main Objective: Complete the formalization and stabilization of the Agua V2 testing suite to ensure full operational readiness for the transition to Host C.
+
+Goals:
+1. Finalize the UI test cases in the "Plan de Pruebas" (covering state transitions, cargo management, and infrastructure modifications).
+2. Execute a full cleanup of the `migration-aguav2/` repository, removing obsolete scripts and isolating manual utilities to ensure pipeline integrity.
+3. Validate and synchronize the deployment runbooks (Runbook/Ground Truth) with the finalized, production-ready migration logic.
+4. Prepare the system for final production Go-Live by verifying the consistency of the automated sync pipeline and documentation.
+
+</conversation_summaries>
+
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 22 Apr 2026, 7:47 pm
 
 ---
 
