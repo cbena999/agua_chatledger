@@ -79,6 +79,7 @@ Inventario completo de assets en [.agents/INVENTORY.md](.agents/INVENTORY.md).
 
 | Módulo | Archivo | Riesgo |
 | :--- | :--- | :--- |
+| Lógica Híbrida (V2) | `docs-dev/doc-estabilizacion/pmu/transiciones_estado_contratos.md` | Crítico |
 | Cambio de Estados | Transiciones 1, 2 y 3 | Alto |
 | Facturación / Cartera | `carteravencida.php` | Alto |
 | Caja Diaria | `concentradocortecaja.php` | Alto |

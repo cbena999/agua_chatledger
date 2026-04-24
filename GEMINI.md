@@ -44,6 +44,7 @@ Estas habilidades definen **cómo** ejecuto las tareas técnicas:
 
 ## 🚨 Módulos Críticos y Auditoría Constante
 Existen funcionalidades core que requieren especial atención para asegurar la congruencia de datos:
+- **Lógica Híbrida y Retroactividad (V2)**: Motor de Mora Continuo y Reglas de Paridad en `transiciones_estado_contratos.md`.
 - **Estados de Contrato**: Transiciones entre `1 (ACTIVO)`, `2 (SUSPENSIÓN TEMPORAL)` y `5 (SUSPENSIÓN ADMINISTRATIVA)`.
 - **Cartera Vencida (`carteravencida.php`)**: Validación de deuda morosa.
 - **Corte de Caja (`concentradocortecaja.php`)**: Ingresos diarios contra reportes detallados.
