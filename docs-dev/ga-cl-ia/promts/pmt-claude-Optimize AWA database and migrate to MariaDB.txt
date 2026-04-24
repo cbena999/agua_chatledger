@@ -21752,17 +21752,31 @@ Ok UI-3 · Bloqueo de saltos de estado 2↔3
 Ok UI-4 · Bloqueos en Suspensión Definitiva 
 Ok UI-5 · Transiciones de estado — 7 flujos (A a G) 
     Sub A.  1→2. Sin cambios en cargos  
-    Sub B   1→3. Sin cambios en cargos
-    Sub C   1→4  QA 9001 Destructivo — no revertir Todos los cargos cancelados; agua=0, drenaje=0.
-    Sub D   22→1 Reactivar 1006 Verificar estado=2 antes Paridad + amnistía de recargos viejos.
-    Sub E   2→4 (QA contrato 9002) — DESTRUCTIVO
-    Sub F   3→1 Reactivar 405 
-    Sub G   3→4 Baja definitiva QA 9002 o 405 
+    Sub B.   1→3. Sin cambios en cargos
+    Sub C.   1→4  QA 9001 Destructivo — no revertir Todos los cargos cancelados; agua=0, drenaje=0.
+    Sub D.   22→1 Reactivar 1006 Verificar estado=2 antes Paridad + amnistía de recargos viejos.
+    Sub E.   2→4 (QA contrato 9002) — DESTRUCTIVO
+    Sub F.   3→1 Reactivar 405 
+    Sub G.  3→4 Baja definitiva QA 9002 o 405 
 
-  UI-6 · Creación de Nuevo Contrato — 6 sub-casos (A a F)
+Ok  UI-6 · Creación de Nuevo Contrato — 6 sub-casos (A a F)
+     Sub A. Toma Normal: agua + drenaje (caso base)  9905. exento_recargo_primer_anio OK.
+     Sub B. Toma Normal: solo agua, sin drenaje. 
+     Sub C. Toma Comercial: tarifa diferenciada.
+     Sub D. 2 Tomas: Normal + Comercial (máximo permitido) 
+     Sub E. Bloqueo: 3ra toma en domicilio ya con 2 
+     Sub F. Bloqueo: ID de contrato duplicado 
+
 
 ***** GRUPO B — Tomas Físicas y Paridad Financiera  ***** 
+Ok  UI-7 · Restricción de 2 tomas por domicilio 
+     Sub A. vía formulario Nuevo Contrato.
+     Sub-caso B — vía edición de contrato existente 
+Ok  UI-8 · Bloqueo de cargos de drenaje sin infraestructura     
+    UI-9 · Recálculo de tarifa al cambiar tipo Normal↔Comercial 
 
+
+Analiza a detalle cada php implicado en los ultimos cambios para estabilizar los casos de prueba UI-7 AL UI-9; para determinar  impactos e implicaciones para los casos de prueba ya realizados con exito  y fixes: UI-1 al UI-6 completos.
 
 
 
