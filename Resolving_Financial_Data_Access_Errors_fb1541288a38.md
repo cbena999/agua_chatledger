@@ -7,9 +7,9 @@
 | **Trajectory ID** | `88a2f16b-fe2f-440f-b7eb-b31947addcc9` |
 | **Cascade ID** | `56dc8f40-c378-4477-8cb6-fb1541288a38` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 235 |
+| **Total Steps** | 297 |
 | **Started** | 24 Apr 2026, 10:42 am |
-| **Completed** | 24 Apr 2026, 12:20 pm |
+| **Completed** | 24 Apr 2026, 12:57 pm |
 
 ---
 
@@ -9510,6 +9510,2448 @@ I'm now weighing the impact of executing `Full-Pipeline-Sync.sh --with-qa`. Whil
 
 - **Thinking Duration:** 4.620389347s
 - **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+## User Request
+
+antes, si valida el log(s) como este y otro genero /opt/lampp/htdocs/agua/docs-dev/migration-aguav2/sync_hosta_to_hostc/logs/sync_20260424_122436.log
+
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `contratos.php`
+**Language:** php
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L39-70)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+	list($nombre, $numusuario, $domicilio, $masdatos, $tipo, $agua, $drenaje, $observaciones, $estado, $metros, $aniocontrato, $mescontrato, $estado_usr) = $y->fetch_array($res);
+
+	// --- TOMAS desde contrato_toma ---
+	$res_tomas = $y->q("SELECT id, num_toma, tipo, tiene_agua, tiene_drenaje, estado_agua, estado_drenaje, observaciones FROM contrato_toma WHERE numcontrato='$id' ORDER BY num_toma ASC");
+	$tomas = array();
+	while ($t = $y->fetch_array($res_tomas)) {
+		$tomas[intval($t['num_toma'])] = $t;
+	}
+	$num_tomas = count($tomas);
+	if ($num_tomas == 0) $num_tomas = 1;
+	$max_tomas = intval(obtenerValorSeguro($cfg, 'max_tomas_por_contrato', 2));
+
+	// --- TARIFAS DE REFERENCIA del año en curso (para mostrar en UI) ---
+	$anio_actual = date('Y');
+	$res_tarifas = $y->q("SELECT nombre, monto, monto_comercial, categoria FROM cargos WHERE automatico=1 AND estado=1 AND anio=$anio_actual AND categoria IN (2,3) ORDER BY categoria, numconsec");
+	$tarifas_referencia = array();
+	while ($tf = $y->fetch_array($res_tarifas)) {
+		$clave = ($tf['categoria'] == 2) ? 'agua' : 'drenaje';
+		if (!isset($tarifas_referencia[$clave])) {
+			$mon_com = (floatval($tf['monto_comercial']) > 0) ? floatval($tf['monto_comercial']) : floatval($tf['monto']) * 2;
+			$tarifas_referencia[$clave] = array(
+				'leyenda'   => $tf['nombre'],
+				'normal'    => floatval($tf['monto']),
+				'comercial' => $mon_com
+			);
+		}
+	}
+
+	// --- CARGOS AUTOMÁTICOS al cargar el contrato ---
+	if ($estado == 1) {
+		generaCargosAutomaticos($id, $y);
+```
+
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. The goal is to sidestep broad commands where a targeted approach is possible. This is currently my primary operational guideline.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `sync_20260424_122436.log`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.005205445s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+[12:24:36] === INICIO SYNC AWA: Host A → Host C ===
+[12:24:36] Modo: --with-qa | Timestamp: 20260424_122436
+
+════════════════════════════════════════
+  PRE-CONDICIÓN: INYECCIÓN DE DATOS SINTÉTICOS DE PRUEBA (QA)
+════════════════════════════════════════
+[12:24:36] Depurando rastro de pruebas anteriores en Host A...
+Warning: Using a password on the command line interface can be insecure.
+[12:24:36] Inyectando Contratos Mártires (9001-9008) en Host A...
+Warning: Using a password on the command line interface can be insecure.
+[  OK  ] Datos de QA inyectados correctamente en Host A
+
+════════════════════════════════════════
+  PASO 1: VERIFICAR CONECTIVIDAD
+════════════════════════════════════════
+[12:24:37] Verificando Host A (127.0.0.1:3306)...
+Warning: Using a password on the command line interface can be insecure.
+status	version
+Host A OK	5.6.20-log
+[  OK  ] Host A: conectado
+[12:24:37] Verificando Host C (192.168.1.128:7002)...
+Warning: Using a password on the command line interface can be insecure.
+status	version
+Host C OK	10.4.27-MariaDB-log
+[  OK  ] Host C: conectado
+
+════════════════════════════════════════
+  PASO 2: BACKUP HOST C
+════════════════════════════════════════
+[12:24:37] Realizando backup de seguridad de Host C...
+[12:24:37] === BACKUP HOST C ===
+[12:24:37] Base de datos: awa @ 192.168.1.128:7002
+[12:24:37] Destino: /opt/lampp/htdocs/agua/docs-dev/migration-aguav2/sync_hosta_to_hostc/backups/backup_host_c_20260424_122437.sql.gz
+[12:24:37] Conectividad Host C: OK
+Warning: Using a password on the command line interface can be insecure.
+[12:24:37] Backup completado. Tamaño: 8.0K
+[12:24:37] Archivo: /opt/lampp/htdocs/agua/docs-dev/migration-aguav2/sync_hosta_to_hostc/backups/backup_host_c_20260424_122437.sql.gz
+[12:24:37] Limpieza: conservando últimos 2 backups
+[12:24:37] === BACKUP COMPLETADO ===
+/opt/lampp/htdocs/agua/docs-dev/migration-aguav2/sync_hosta_to_hostc/backups/backup_host_c_20260424_122437.sql.gz
+[  OK  ] Backup completado: /opt/lampp/htdocs/agua/docs-dev/migration-aguav2/sync_hosta_to_hostc/backups/backup_host_c_20260424_122437.sql.gz
+
+════════════════════════════════════════
+  PASO 3: DUMP DESDE HOST A
+════════════════════════════════════════
+[12:24:37]   Extrayendo usuario desde Host A...
+[  OK  ]   usuario: 1498 filas
+[12:24:37]   Extrayendo contrato desde Host A...
+[  OK  ]   contrato: 1418 filas
+[12:24:37]   Extrayendo contrato_toma desde Host A...
+[  OK  ]   contrato_toma: 1439 filas
+[12:24:37]   Extrayendo cargos desde Host A...
+[  OK  ]   cargos: 585 filas
+[12:24:37]   Extrayendo asamblea desde Host A...
+[  OK  ]   asamblea: 61 filas
+[12:24:37]   Extrayendo asistentes desde Host A...
+[  OK  ]   asistentes: 23018 filas
+[12:24:37]   Extrayendo notas desde Host A...
+[  OK  ]   notas: 3719 filas
+[12:24:37]   Extrayendo categorias desde Host A...
+[  OK  ]   categorias: 18 filas
+[12:24:37]   Extrayendo categorias_egresos desde Host A...
+[  OK  ]   categorias_egresos: 9 filas
+[12:24:37]   Extrayendo firmantes desde Host A...
+[  OK  ]   firmantes: 1 filas
+[12:24:37]   Extrayendo contrasenas desde Host A...
+[  OK  ]   contrasenas: 2 filas
+[12:24:37]   Extrayendo users desde Host A...
+[  OK  ]   users: 2 filas
+[12:24:37]   Extrayendo ligacargos desde Host A...
+[  OK  ]   ligacargos: 198059 filas
+[12:24:38]   Extrayendo egresos desde Host A...
+[  OK  ]   egresos: 474 filas
+[12:24:38]   Extrayendo cambios desde Host A...
+[  OK  ]   cambios: 4920 filas
+[12:24:38] Guardando conteos de referencia de Host A...
+Warning: Using a password on the command line interface can be insecure.
+tabla	cnt
+usuario	1498
+contrato	1418
+ligacargos	198059
+notas	3719
+cambios	4920
+egresos	474
+asamblea	61
+asistentes	23018
+cargos	585
+
+════════════════════════════════════════
+  PASO 4: VACIAR TABLAS EN HOST C
+════════════════════════════════════════
+Warning: Using a password on the command line interface can be insecure.
+paso
+categorias_egresos: 1 filas eliminadas
+paso
+categorias: 4 filas eliminadas
+paso
+firmantes: 0 filas eliminadas
+paso
+contrasenas: 0 filas eliminadas
+paso
+ligacargos_historico: 0 filas eliminadas
+paso
+ligacargos: 0 filas eliminadas
+paso
+notas: 0 filas eliminadas
+paso
+cambios: 0 filas eliminadas
+paso
+egresos: 0 filas eliminadas
+paso
+asamblea: 0 filas eliminadas
+paso
+asistentes: 0 filas eliminadas
+paso
+contrato_toma: 0 filas eliminadas
+paso
+contrato: 0 filas eliminadas
+paso
+usuario: 0 filas eliminadas
+paso
+cargos: 0 filas eliminadas
+[  OK  ] Tablas vaciadas
+
+════════════════════════════════════════
+  PASO 5: IMPORTAR DATOS EN HOST C
+════════════════════════════════════════
+[12:24:38]   Importando categorias...
+Warning: Using a password on the command line interface can be insecure.
+[  OK  ]   categorias: 18 registros
+[12:24:38]   Importando categorias_egresos...
+Warning: Using a password on the command line interface can be insecure.
+[  OK  ]   categorias_egresos: 9 registros
+[12:24:38]   Importando firmantes...
+Warning: Using a password on the command line interface can be insecure.
+[  OK  ]   firmantes: 1 registros
+[12:24:38]   Importando contrasenas...
+Warning: Using a password on the command line interface can be insecure.
+[  OK  ]   contrasenas: 2 registros
+[12:24:38]   users vacía — poblando desde Host A...
+Warning: Using a password on the command line interface can be insecure.
+[  OK  ]   users: 2 registros (poblada desde A)
+[12:24:38]   Importando usuario...
+Warning: Using a password on the command line interface can be insecure.
+[  OK  ]   usuario: 1498 registros
+[12:24:38]   Importando contrato...
+Warning: Using a password on the command line interface can be insecure.
+[  OK  ]   contrato: 1418 registros
+[12:24:38]   Importando contrato_toma...
+Warning: Using a password on the command line interface can be insecure.
+[  OK  ]   contrato_toma: 1439 registros
+[12:24:38]   Importando cargos...
+Warning: Using a password on the command line interface can be insecure.
+[  OK  ]   cargos: 518 registros
+[12:24:38]   Importando asamblea...
+Warning: Using a password on the command line interface can be insecure.
+[  OK  ]   asamblea: 61 registros
+[12:24:38]   Importando asistentes...
+Warning: Using a password on the command line interface can be insecure.
+[  OK  ]   asistentes: 23018 registros
+[12:24:39]   Importando notas...
+Warning: Using a password on the command line interface can be insecure.
+[  OK  ]   notas: 3719 registros
+[12:24:39]   Importando ligacargos...
+Warning: Using a password on the command line interface can be insecure.
+[12:24:52]   Post-proceso: convirtiendo idpago_vinc=0 (varchar '' importado como int) → NULL...
+Warning: Using a password on the command line interface can be insecure.
+[  OK  ]   ligacargos: 198059 registros
+[12:24:55]   Importando egresos (agregando id_categoria=NULL)...
+Warning: Using a password on the command line interface can be insecure.
+[  OK  ]   egresos: 474 registros (id_categoria=NULL en todos)
+[12:24:55]   Importando cambios...
+Warning: Using a password on the command line interface can be insecure.
+[  OK  ]   cambios: 4920 registros
+
+════════════════════════════════════════
+  PASO 6: SPLIT LIGACARGOS
+════════════════════════════════════════
+[12:24:56] Ejecutando split ligacargos (anio<=2025 → ligacargos_historico)...
+Warning: Using a password on the command line interface can be insecure.
+ligacargos_total	a_mover_historico	a_quedar_activos	historico_previo
+198059	193040	5019	0
+paso_0
+Iniciando Particionamiento de Migración: ligacargos_historico preparada
+historico_insertado	pendiente_borrar
+193040	193040
+ligacargos_activos	ligacargos_historico	activos_con_anio_viejo	anio_min_activo	anio_max_historico	folio_siguiente
+5019	193040	0	2026	2025	24889
+[  OK  ]   ligacargos activa: 5019 | historico: 193040
+
+════════════════════════════════════════
+  PASO 7: VALIDACIONES POST-SYNC
+════════════════════════════════════════
+[12:25:09] Ejecutando validaciones de consistencia...
+Warning: Using a password on the command line interface can be insecure.
+validacion
+====================================================
+validacion
+=== VALIDACIÓN POST-SYNC: HOST C (v2)           ===
+validacion
+====================================================
+validacion
+--- V1: CONTEOS DE REGISTROS ---
+tabla	cnt	resultado
+usuario	1498	OK ✓
+contrato	1418	OK ✓
+contrato_toma	1439	OK ✓
+ligacargos	5019	OK ✓ (activos ≥2026)
+ligacargos_historico	193040	OK ✓ (histórico ≤2025)
+cargos	518	OK ✓
+asamblea	61	OK ✓
+asamblea (col nombre)	1	OK ✓ (Esquema v2)
+egresos	474	OK ✓
+notas	3719	OK ✓
+cambios	4921	OK ✓
+validacion
+--- V2: SPLIT LIGACARGOS ---
+activos_con_anio_viejo	historico_con_anio_nuevo	anio_min_activo	anio_max_historico	resultado_split
+0	0	2026	2025	SPLIT OK ✓
+validacion
+--- V3: INTEGRIDAD REFERENCIAL ---
+check_name	problema	resultado
+contratos sin usuario	0	OK ✓
+check_name	problema	resultado
+ligacargos activa sin contrato	0	OK ✓
+check_name	problema	resultado
+egresos con id_categoria inválida	0	OK ✓
+validacion
+--- V4: IDPAGO_VINC ---
+activa_con_cero	historico_con_cero	activa_vinculados	resultado
+0	0	0	OK ✓
+validacion
+--- V5: FOLIOS_RECIBO ---
+folio_siguiente	resultado
+24889	OK ✓ (mayor al máximo histórico)
+validacion
+--- V6: CONFIG_SISTEMA ---
+claves_config	resultado
+12	OK ✓
+validacion
+--- V7: RESUMEN FINANCIERO (vw_ligacargos_all) ---
+estado	total_registros	suma_monto
+-3	166	19920.00
+-2	68	10200.00
+-1	54314	7144085.00
+0	29603	3331900.00
+1	113908	20090122.35
+validacion
+====================================================
+validacion
+=== FIN VALIDACIONES POST-SYNC                  ===
+validacion
+====================================================
+timestamp_validacion
+2026-04-24 12:25:12
+[12:25:12] Inyectando datos QA en ligacargos_historico de Host C (UI-1 / BE-5)...
+Warning: Using a password on the command line interface can be insecure.
+[  OK  ] Datos QA Host C inyectados (post-split, pre-saneamiento)
+
+════════════════════════════════════════
+  PASO 8: PIPELINE DE SANEAMIENTO
+════════════════════════════════════════
+[12:25:13] Capturando estado PRE-saneamiento en Host C...
+[12:25:24]   PRE-saneamiento — folios mixtos activa: 0 | histórico: 8
+[12:25:24]   PRE-saneamiento — multas asamblea sinc. activa: 27 | histórico: 417
+[12:25:24] Ejecutando pipeline de saneamiento post-sync...
+Warning: Using a password on the command line interface can be insecure.
+filas_reparadas_paso2
+0
+folio	pagados	cancelados_error	anio_min
+192	6	10	2005
+14236	3	1	2018
+16031	1	1	2020
+19323	2	1	2022
+20786	2	1	2023
+22406	4	1	2024
+23861	1	1	2025
+24073	4	1	2025
+filas_reparadas_paso2c
+17
+multas_asamblea_sincronizadas
+444
+paso	cats_ingreso	cat_sin_cat	egresos_sin_cat
+patch_categorias_v2	4	1	1
+folios_mixtos_residuales
+0
+folios_mixtos_residuales_historico
+0
+multas_asamblea_pendientes_sin_sinc
+0
+multas_historico_pendientes_sin_sinc
+0
+[12:25:42] Ejecutando saneamiento de duplicados reales (Paso 8-C)...
+Warning: Using a password on the command line interface can be insecure.
+
+--- PASO 8-C: SANEAMIENTO DUPLICADOS REALES (PIPELINE) ---
+resultado
+Saneamiento de duplicados reales completado
+[12:25:42] Ejecutando saneamiento de duplicados sintéticos QA (Paso 8-C QA)...
+Warning: Using a password on the command line interface can be insecure.
+
+--- PASO 8-C QA: SANEAMIENTO DUPLICADOS SINTÉTICOS (--with-qa) ---
+resultado
+Saneamiento de duplicados QA completado (casos sintéticos 990x)
+[  OK  ] Pipeline de saneamiento completado
+[12:25:42] Inyectando datos QA post-saneamiento en Host C (UI-14)...
+Warning: Using a password on the command line interface can be insecure.
+[12:25:42] Inyectando setup de datos QA para Grupos A y B...
+Warning: Using a password on the command line interface can be insecure.
+
+--- INICIANDO SETUP DE DATOS PARA GRUPOS A Y B ---
+resultado
+--- SETUP COMPLETADO CORRECTAMENTE ---
+[12:25:42] Inyectando setup de datos QA para Grupos C, D, E, F...
+Warning: Using a password on the command line interface can be insecure.
+
+--- INICIANDO SETUP DE DATOS PARA GRUPOS C, D, E, F ---
+resultado
+--- SETUP GRUPOS C-F COMPLETADO ---
+[  OK  ] Datos QA Host C post-saneamiento inyectados (UI-14 y Manual Tests)
+
+════════════════════════════════════════
+  PASO 8-B: SANEAMIENTO EXENCIÓN RECARGOS
+════════════════════════════════════════
+[12:25:42] Ejecutando saneamiento de recargos en contratos exentos primer año...
+Warning: Using a password on the command line interface can be insecure.
+
+--- INICIANDO SANEAMIENTO UNITARIO: EXENCIONES DE RECARGOS (1ER AÑO) ---
+recargos_anomalos_detectados	suma_pesos_anomalos
+6	360.00
+recargos_saneados
+6
+registros_auditoria_creados
+6
+
+--- SANEAMIENTO COMPLETADO ---
+[  OK  ] Saneamiento exención recargos completado
+
+════════════════════════════════════════
+  PASO 8-D: SANEAMIENTO CARGOS Y RECARGOS
+════════════════════════════════════════
+[12:25:42] Ejecutando unificación de categorías y neutralización F05...
+Warning: Using a password on the command line interface can be insecure.
+
+--- INICIANDO SANEAMIENTO DE RECARGOS (ESTABILIZACIÓN V2) ---
+resultado
+Catálogo cargos saneado
+resultado
+Datos de ligacargos (activa+historico) saneados
+
+--- SANEAMIENTO COMPLETADO ---
+[  OK  ] Saneamiento F05 completado
+
+════════════════════════════════════════
+  PASO 9: TABLERO DE VALIDACIÓN FINAL
+════════════════════════════════════════
+[12:25:44] Ejecutando validador de éxito de saneamiento (datos reales)...
+Warning: Using a password on the command line interface can be insecure.
+
+--- TABLERO DE VALIDACIÓN DE INTEGRIDAD (POST-SANEAMIENTO) ---
+BASE DE DATOS NO VACÍA	Resultado
+BASE DE DATOS NO VACÍA	✅ ÉXITO (Datos importados)
+FOLIOS MIXTOS (ACTIVA)	✅ ÉXITO (0 residuales)
+FOLIOS MIXTOS (HISTÓRICO)	✅ ÉXITO (0 residuales)
+SYNC MULTAS ASAMBLEA	❌ FALLO (Existen multas sin sincronizar)
+CASO REAL: MARTÍN (750/751)	✅ ÉXITO (Consolidado)
+CASO REAL: ZENÓN (1590)	✅ ÉXITO (Marcado)
+ESTADO SDF (ESTADO 4)	❌ FALLO (Sigue habiendo cargos estado=0 en SDF)
+[12:25:44] Ejecutando validador de datos sintéticos QA (Paso 9 QA)...
+Warning: Using a password on the command line interface can be insecure.
+
+--- TABLERO QA: VALIDACIÓN DATOS SINTÉTICOS (--with-qa) ---
+TEST SINTÉTICO: MARTÍN (9903/9904)	Resultado
+TEST SINTÉTICO: MARTÍN (9903/9904)	✅ ÉXITO (Consolidado)
+TEST SINTÉTICO: ZENÓN (9902)	✅ ÉXITO (Marcado)
+TEST QA: FOLIO MIXTO REPARADO (9001/9991)	✅ ÉXITO (Sin folios mixtos en 9001)
+TEST QA: SDF D7 APLICADO (9003)	❌ FALLO (Cargos estado=0 en contrato 9003)
+TEST QA: CATEGORÍAS V2 (9005 — IDs 19-22)	✅ ÉXITO (4 categorías V2 presentes)
+[12:25:44] Ejecutando suite de auditoría automatizada (Regla F05 y Paridad)...
+Warning: Using a password on the command line interface can be insecure.
+
+--- INICIANDO SUITE DE PRUEBAS AUTOMATIZADAS (SQL ASSERTIONS) ---
+TEST 1
+✅ PASS: Todos los recargos están en categorías 16/17.
+TEST 2
+✅ PASS: Regla F05 aplicada. Columna recargo neutralizada.
+TEST 3
+⚠️ WARNING: Se encontraron 1 cargos pendientes en contratos SDF (Requiere Sanemiento D7).
+TEST 4
+✅ PASS: Contrato 1030 tiene recargos correctamente identificados.
+TEST 5
+✅ PASS: Catálogo de cargos saneado.
+
+--- FIN DE SUITE DE PRUEBAS ---
+
+════════════════════════════════════════
+  SYNC COMPLETADO
+════════════════════════════════════════
+[12:25:45] ════════════════════════════════════════════════════════
+[12:25:45]   TABLERO RESUMEN EJECUTIVO — SYNC A → C               
+[12:25:45] ════════════════════════════════════════════════════════
+[12:25:45] 
+[12:25:45]   DATOS TRANSFERIDOS
+[12:25:45]   ─────────────────────────────────────────────────────
+[12:25:45]   usuario             : 1498
+[12:25:45]   contrato            : 1419
+[12:25:45]   ligacargos (activa) : 5020    (anio >= 2026)
+[12:25:45]   ligacargos_historico: 192833  (anio <= 2025)
+[12:25:45]   ligacargos TOTAL    : 197853  (debe coincidir con Host A)
+[12:25:45] 
+[12:25:45]   SANEAMIENTO SCHEMA — POST-IMPORT (Paso 5)
+[12:25:45]   ─────────────────────────────────────────────────────
+[12:25:45]   idpago_vinc='' (vacío en A) convertidos a NULL en C: 198059
+[12:25:45] 
+[12:25:45]   SANEAMIENTO SPLIT (Paso 6)
+[12:25:45]   ─────────────────────────────────────────────────────
+[12:25:45]   Registros movidos a historico (anio <= 2025): 193040
+[12:25:45]   Registros activos restantes  (anio >= 2026) : 5019
+[12:25:45]   Contratos SDF (estado=4) en Host C          : 40
+[12:25:45]   Cargos pendientes en SDF — activa           : 1   (debe ser 0 tras D7)
+[12:25:45]   Cargos pendientes en SDF — histórico        : 0   (debe ser 0 tras D7)
+[12:25:45] 
+[12:25:45]   SANEAMIENTO EXENCIÓN RECARGOS (Paso 8-B — 10b_saneamiento_exencion_recargos.sql)
+[12:25:45]   ─────────────────────────────────────────────────────
+[12:25:45]   Recargos indebidos detectados  : 6  ($360.00 en total)
+[12:25:45]   Recargos saneados (→ estado=-1): 6  (debe coincidir con detectados)
+[12:25:45]   Registros de auditoría creados : 6  (en tabla cambios, uno por contrato)
+[12:25:45] 
+[12:25:45]   PIPELINE SANEAMIENTO (Paso 8 — 10_pipeline_saneamiento.sql)
+[12:25:45]   ─────────────────────────────────────────────────────
+[12:25:45]   Folios mixtos (estado=1+estado=-1) ACTIVA   detectados : 0
+[12:25:45]   Folios mixtos (estado=1+estado=-1) ACTIVA   reparados  : 0  (registros individuales)
+[12:25:45]   Folios mixtos (estado=1+estado=-1) ACTIVA   residuales : 0   (debe ser 0)
+[12:25:45]   Folios mixtos (estado=1+estado=-1) HISTÓRICO detectados: 8
+[12:25:45]   Folios mixtos (estado=1+estado=-1) HISTÓRICO reparados : 17  (registros individuales)
+[12:25:45]   Folios mixtos (estado=1+estado=-1) HISTÓRICO residuales: 0   (debe ser 0)
+[12:25:45]   Multas asamblea pendientes pre-san.: 27  activa | 417  histórico (total: 444)
+[12:25:46]   Multas asamblea sincronizadas     : 444  (sp_sinc_asamblea_bulk procesa activa + histórico en un solo SP)
+[12:25:46]   Patch categorías V2 (Paso 3-B)   : cats_especiales=4/4  cat_sin_cat=1/1  egresos_sin_cat_residuales=1  (debe ser 0)
+[12:25:46] 
+[12:25:46]   SANEAMIENTO DUPLICADOS (Paso 8-C — 10c_saneamiento_duplicados.sql)
+[12:25:46]   ─────────────────────────────────────────────────────
+[12:25:46]   Duplicados reales procesados   : Martín (751→750) + Zenón (1590→1057) — completado: 1/1
+[12:25:46]   Duplicados sintéticos QA       : casos 990x procesados — completado: 1/1
+[12:25:46] 
+[12:25:46] ════════════════════════════════════════════════════════
+[12:25:46] Duración total: 70 segundos
+[12:25:46] Log:    /opt/lampp/htdocs/agua/docs-dev/migration-aguav2/sync_hosta_to_hostc/logs/sync_20260424_122436.log
+[12:25:46] Backup: /opt/lampp/htdocs/agua/docs-dev/migration-aguav2/sync_hosta_to_hostc/backups/backup_host_c_20260424_122437.sql.gz
+[12:25:46] 
+[12:25:46] === SYNC A → C COMPLETADO EXITOSAMENTE ===
+[12:25:46]     Revisar el log completo para verificar resultados de integridad:
+[12:25:46]     /opt/lampp/htdocs/agua/docs-dev/migration-aguav2/sync_hosta_to_hostc/logs/sync_20260424_122436.log
+
+```
+
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. The goal is to sidestep broad commands where a targeted approach is possible. This is currently my guiding principle, making sure my response is most efficient.
+
+
+**Validating Synchronization Logs**
+
+I've examined the `sync_20260424_122436.log` file, and noted that the post-sync validations (V1-V6) all passed successfully. However, V7 shows a financial summary that reflects the Host A amount ($3,331,900.00), which will be adjusted in the next stage. Moving on to the final validation, several issues surfaced: sync of assembly fines failed, and also issues with SDF data status.
+
+
+**Analyzing Pipeline Inconsistencies**
+
+I'm now investigating pipeline discrepancies, specifically the conflicting reports on assembly fines. While the summary indicates synchronization of all 444 fines, the pipeline still flags a failure. Further, a QA test revealed un-synchronized fines, and another failed due to SDF issues. There's also a warning about pending SDF charges and residual categories needing remediation.
+
+
+**Investigating Validation Discrepancies**
+
+I'm now zeroing in on the failed D7 rule for contract 9003, the QA contract, despite the expected cancellation. The validation query seems suspect; one active charge persists on a suspended contract. I suspect an issue with the pipeline's handling of `ligacargos` or a simple typo in the automation. This is made more complex by the QA data injection at step 8. The next step is a deep dive into the injection process.
+
+
+**Clarifying Validation Logic**
+
+I've just had a breakthrough. I realized the QA data injection for contract 9003, intended to test manual UI corrections, happens *after* the D7 pipeline, explaining the expected failure. The system's flagging of contract 9003 for a pending SDF charge is actually by design; it's a test case. Now, I'll confirm if this is the only failed SDF validation.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 11.552672616s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 24 Apr 2026, 12:30 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. The goal is to sidestep broad commands where a targeted approach is possible. This is currently my guiding principle, making sure my response is most efficient.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `9003`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.217804291s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 24 Apr 2026, 12:32 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. The goal is to sidestep broad commands where a targeted approach is possible. This is currently my primary operational guideline.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `12_validate_pipeline_qa.sql`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.590724079s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+-- =============================================================================
+-- 12_validate_pipeline_qa.sql — Validador de Datos Sintéticos (Solo --with-qa)
+-- Ubicación: docs-dev/migration-aguav2/sync_hosta_to_hostc/
+--
+-- PROPÓSITO:
+--   Verificar que los casos sintéticos inyectados por 00_inject_qa_tests.sql
+--   fueron correctamente procesados por el pipeline (duplicados, saneamientos).
+--
+-- INVOCADO POR: run_sync.sh ÚNICAMENTE en modo --with-qa (Paso 9 QA)
+-- NO ejecutar en producción — los IDs 900x/990x no existen fuera de QA.
+-- =============================================================================
+
+USE `awa`;
+
+SELECT '--- TABLERO QA: VALIDACIÓN DATOS SINTÉTICOS (--with-qa) ---' AS '';
+
+SELECT
+    'TEST SINTÉTICO: MARTÍN (9903/9904)',
+    CASE WHEN COUNT(*) = 0 THEN '✅ ÉXITO (Consolidado)' ELSE '❌ FALLO (Contrato 9904 sigue en ID 9904)' END AS `Resultado`
+FROM contrato WHERE numusuario = 9904 AND numcontrato = '9904'
+UNION ALL
+SELECT
+    'TEST SINTÉTICO: ZENÓN (9902)',
+    CASE WHEN COUNT(*) = 0 THEN '✅ ÉXITO (Marcado)' ELSE '❌ FALLO (ID 9902 no tiene sufijo DUPLICADO)' END
+FROM usuario WHERE noconsecutivo = 9902 AND nombre NOT LIKE '%DUPLICADO%'
+UNION ALL
+SELECT
+    'TEST QA: FOLIO MIXTO REPARADO (9001/9991)',
+    CASE WHEN COUNT(*) = 0 THEN '✅ ÉXITO (Sin folios mixtos en 9001)' ELSE '❌ FALLO (Folio 9991 sigue mixto)' END
+FROM (
+    SELECT folio FROM ligacargos WHERE numcontrato='9001' AND folio=9991
+    GROUP BY folio
+    HAVING COUNT(CASE WHEN estado=1 THEN 1 END)>0 AND COUNT(CASE WHEN estado=-1 THEN 1 END)>0
+) t
+UNION ALL
+SELECT
+    'TEST QA: SDF D7 APLICADO (9003)',
+    CASE WHEN COUNT(*) = 0 THEN '✅ ÉXITO (Sin cargos pendientes en SDF)' ELSE '❌ FALLO (Cargos estado=0 en contrato 9003)' END
+FROM ligacargos WHERE numcontrato='9003' AND estado=0
+UNION ALL
+SELECT
+    'TEST QA: CATEGORÍAS V2 (9005 — IDs 19-22)',
+    CASE WHEN COUNT(*) = 4 THEN '✅ ÉXITO (4 categorías V2 presentes)' ELSE '❌ FALLO (Faltan categorías V2 en 9005)' END
+FROM ligacargos WHERE numcontrato='9005' AND categoria IN (19,20,21,22) AND estado=0;
+
+```
+
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. The goal is to sidestep broad commands where a targeted approach is possible. This is currently my primary operational guideline.
+
+
+**Analyzing QA Script Timing**
+
+I'm now zeroing in on the timing of QA data injection. Specifically, I need to understand when the QA data for contract 9003 is introduced, in relation to the D7 pipeline, using `view_file` on related files. My analysis reveals the QA script injecting data for Groups C, D, E, F, which includes contract 9003. This injection occurs after the sanitation step in the overall process.
+
+
+**Clarifying Injection Timing**
+
+I'm now clarifying the timing of contract injections, specifically focusing on contract `9003`. It's evident now that the main pipeline, D7, processes raw data in step 8, `10_pipeline_saneamiento.sql`. The QA data, including `9003`, is injected *after* this step. This allows the QA tester to test UI workflows, rather than being cleaned by the pipeline. My current task is to understand the workflow and the reasoning behind each step. I am now working through the flow.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `D7`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 7.127436247s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 24 Apr 2026, 12:33 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. The goal is to sidestep broad commands where a targeted approach is possible. This is currently my primary operational guideline.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `estado *= *4`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.643985938s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 24 Apr 2026, 12:33 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. The goal is to sidestep broad commands where a targeted approach is possible. This is currently my guiding principle, making sure my response is most efficient.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `SDF|suspensi`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.592315173s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 24 Apr 2026, 12:33 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. The goal is to sidestep broad commands where a targeted approach is possible. This is currently my primary operational guideline.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `9003`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.633180432s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 24 Apr 2026, 12:33 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. The goal is to sidestep broad commands where a targeted approach is possible. This is currently my primary operational guideline.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `00_inject_qa_tests.sql`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.345707221s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+-- =============================================================================
+-- 00_inject_qa_tests.sql - UNIFICADO Y HARDENED (V2.15)
+-- Propósito: Inyección de datos sintéticos controlados para validación de V2.
+-- Alcance: Amnistía C06, Saltos C07, Saneamiento D7, Categorías V2 y Duplicados.
+--
+-- CASOS CUBIERTOS:
+--   UI-1  → Contrato 9002 (Estado 2, recargos históricos cat 16/17 < 2026)
+--   UI-4  → Contrato 9003 (Estado 4, SDF)
+--   UI-5C → Contrato 9001 (Estado 1 → transición a 4, destructivo)
+--   UI-5E → Contrato 9002 (Estado 2 → 4, destructivo)
+--   UI-7  → Contrato 9001 (multi-toma, bloqueo 3ra toma)
+--   UI-8  → Contrato 9006 (solo agua, sin drenaje)
+--   UI-9  → monto_comercial ANUALIDAD AGUA 2026 forzado a 99.99 y revertido al final
+--   UI-13 → Contrato 9001 (folios mixtos para cobro)
+--   UI-14 → Contratos 9007/9008 (cruce asimétrico asamblea)
+--   UI-25/RC-4 → Usuario 9905 (no localizado)
+--   BE-4  → Contrato 9003 (deuda SDF a limpiar)
+--   BE-5  → Folios 7777 (histórico mixto) y 9991 (activa mixto)
+--   BE-6  → Usuarios 9901-9904 (duplicados sintéticos)
+--   BE-7  → Contrato 9004 (exento_recargo_primer_anio=1)
+--   BE-8  → Contrato 9006 (folio NULL)
+--   BE-9  → Contrato 9005 (categorías V2: 19-22)
+--   BE-11/RC-1 → Folio 9999 (empate financiero detalle vs resumen)
+--
+-- IDEMPOTENCIA: Todos los bloques usan DELETE+INSERT (nunca INSERT IGNORE) para
+-- que cada ejecución parta de cero, sin acumulación de cargos generados por el
+-- facturador de Host A entre runs.
+-- =============================================================================
+
+-- 1. SETUP DE USUARIOS Y CONTRATOS MÁRTIRES
+-- =============================================================================
+-- Limpieza previa explícita (idempotente): garantiza estado conocido antes de insertar.
+-- El orden respeta dependencias FK: ligacargos → contrato_toma → contrato → usuario.
+DELETE FROM ligacargos    WHERE numcontrato IN ('9001','9002','9003','9004','9005','9006','9007','9008');
+DELETE FROM contrato_toma WHERE numcontrato IN ('9001','9002','9003','9004','9005','9006','9007','9008');
+DELETE FROM contrato      WHERE numcontrato IN ('9001','9002','9003','9004','9005','9006','9007','9008');
+DELETE FROM contrato      WHERE numcontrato IN ('9903','9904');
+DELETE FROM usuario       WHERE noconsecutivo IN (9900,9901,9902,9903,9904,9905,9907);
+
+-- Usuario QA dedicado para contratos 9001–9006 (reemplaza al usuario real 591).
+-- Usuario 9900 es 100% sintético — no tiene contratos reales que interfieran
+-- en pruebas de conteo de tomas (UI-7) o cruce de datos por numusuario.
+INSERT INTO usuario (noconsecutivo, nombre) VALUES (9900, 'JUAN MENDOZA TEST');
+
+-- Usuario No Localizado (Para UI-25 / RC-4)
+INSERT INTO usuario (noconsecutivo, nombre, estado) VALUES (9905, 'USUARIO NO LOCALIZADO TEST', 2);
+
+-- Contrato 9001: MULTI-TOMA, FOLIOS MIXTOS y TRANSICIÓN 1→4 (UI-5C / UI-7 / UI-13 / BE-5 / BE-11)
+-- Estado 1 (Activo). Tiene 2 tomas: 1 Normal + 1 Comercial → impide agregar una 3ra (UI-7).
+-- Usado para cobro (UI-13) y folios mixtos (BE-5).
+-- Sub-caso destructivo UI-5C lo lleva a Estado 4 — usar al final de la suite.
+INSERT INTO contrato (numcontrato, numusuario, domicilio, estado, agua, drenaje, fecha)
+VALUES ('9001', 9900, 'CALLE TEST 9001 (MULTI)', 1, 1, 1, '2026-01-01');
+INSERT INTO contrato_toma (numcontrato, num_toma, tipo, tiene_agua, tiene_drenaje)
+VALUES ('9001', 1, 0, 1, 1), ('9001', 2, 1, 1, 1);
+
+-- Contrato 9002: AMNISTÍA HISTÓRICA C06 + TRANSICIÓN 2→4 (UI-1 / UI-5E / BE-4 parcial)
+-- Estado 2 (Susp. Temporal). Tiene recargos cat 16 y 17 de años < 2026 en ligacargos_historico
+-- (inyectados en Host C por 00_inject_qa_hostc.sql post-split).
+-- Al reactivar 2→1 deben desaparecer (UI-1). Al bajar 2→4 se destruyen (UI-5E).
+INSERT INTO contrato (numcontrato, numusuario, domicilio, estado, agua, drenaje, fecha)
+VALUES ('9002', 9900, 'CALLE TEST 9002 (C06)', 2, 1, 1, '2026-01-01');
+INSERT INTO contrato_toma (numcontrato, num_toma, tipo, tiene_agua, tiene_drenaje)
+VALUES ('9002', 1, 0, 1, 1);
+
+-- Contrato 9003: SANEAMIENTO SDF D7 (UI-4 / BE-4)
+-- Estado 4 (Susp. Definitiva). Tiene deuda pendiente que el pipeline D7 debe cancelar.
+INSERT INTO contrato (numcontrato, numusuario, domicilio, estado, agua, drenaje, fecha)
+VALUES ('9003', 9900, 'CALLE TEST 9003 (D7)', 4, 0, 0, '2026-01-01');
+INSERT INTO contrato_toma (numcontrato, num_toma, tipo, tiene_agua, tiene_drenaje)
+VALUES ('9003', 1, 0, 0, 0);
+
+-- Contrato 9004: EXENCIÓN RECARGOS 1ER AÑO (BE-7)
+-- Estado 1, fecha=hoy, exento_recargo_primer_anio=1. No debe generar cat 16/17.
+INSERT INTO contrato (numcontrato, numusuario, domicilio, estado, fecha, exento_recargo_primer_anio)
+VALUES ('9004', 9900, 'CALLE TEST 9004 (BE-7)', 1, CURDATE(), 1);
+INSERT INTO contrato_toma (numcontrato, num_toma, tipo, tiene_agua, tiene_drenaje)
+VALUES ('9004', 1, 0, 1, 1);
+
+-- Contrato 9005: CATEGORÍAS V2 y DISCRIMINADOR (BE-9 / BE-3 / RC-2)
+-- Estado 1, solo agua. Cargos con cat 19-22 deben sobrevivir sync y ser excluidos de cartera.
+INSERT INTO contrato (numcontrato, numusuario, domicilio, estado, fecha)
+VALUES ('9005', 9900, 'CALLE TEST 9005 (V2)', 1, '2026-01-01');
+INSERT INTO contrato_toma (numcontrato, num_toma, tipo, tiene_agua, tiene_drenaje)
+VALUES ('9005', 1, 0, 1, 0);
+
+-- Contrato 9006: SIN DRENAJE — BLOQUEO F08 y FOLIO NULL (UI-8 / BE-8)
+-- Estado 1, agua=1 drenaje=0. Bloquea cargos de drenaje. Tiene cargo con folio NULL.
+INSERT INTO contrato (numcontrato, numusuario, domicilio, estado, agua, drenaje, fecha)
+VALUES ('9006', 9900, 'CALLE TEST 9006 (SOLO AGUA)', 1, 1, 0, '2026-01-01');
+INSERT INTO contrato_toma (numcontrato, num_toma, tipo, tiene_agua, tiene_drenaje)
+VALUES ('9006', 1, 0, 1, 0);
+
+-- Contratos 9007 and 9008: CRUCE ASIMÉTRICO ASAMBLEA (UI-14)
+-- Usuario 9907 con 2 contratos. Pagar FALTA ASAMBLEA en 9007 cancela la de 9008 automáticamente.
+INSERT INTO usuario (noconsecutivo, nombre) VALUES (9907, 'USUARIO CRUCE TEST');
+INSERT INTO contrato (numcontrato, numusuario, domicilio, estado, fecha)
+VALUES ('9007', 9907, 'DOMICILIO A', 1, '2026-01-01'), ('9008', 9907, 'DOMICILIO B', 1, '2026-01-01');
+INSERT INTO contrato_toma (numcontrato, num_toma, tipo, tiene_agua, tiene_drenaje)
+VALUES ('9007', 1, 0, 1, 1), ('9008', 1, 0, 1, 1);
+
+
+-- 2. INYECCIÓN DE CARGOS ESPECÍFICOS
+-- =============================================================================
+
+-- Bloque de Variables Dinámicas (Sin Código Duro):
+-- Busca los nombres oficiales en el catálogo cargos para garantizar coincidencia con el facturador.
+SET @L_AGUA_2026     = (SELECT nombre FROM cargos WHERE categoria=2 AND anio=2026 AND estado=1 LIMIT 1);
+SET @M_AGUA_2026     = (SELECT monto  FROM cargos WHERE categoria=2 AND anio=2026 AND estado=1 LIMIT 1);
+SET @L_DRENAJE_2026  = (SELECT nombre FROM cargos WHERE categoria=3 AND anio=2026 AND estado=1 LIMIT 1);
+SET @M_DRENAJE_2026  = (SELECT monto  FROM cargos WHERE categoria=3 AND anio=2026 AND estado=1 LIMIT 1);
+
+-- Folio Mixto en activa (9001/BE-5): folio 9991 con 1 pagado (estado=1) + 1 pendiente (estado=0).
+-- El saneamiento detecta folio con pagado+pendiente y cancela el pendiente (0 → -1).
+-- DELETE+INSERT idempotente: limpia cualquier estado residual de runs anteriores.
+DELETE FROM ligacargos WHERE numcontrato='9001' AND folio=9991;
+INSERT INTO ligacargos (numcontrato, leyenda, monto, fcobro, fpago, estado, folio, anio)
+VALUES ('9001', 'FOLIO MIXTO PAGADO',    100.00, CURDATE(), CURDATE(), 1, 9991, 2026),
+       ('9001', 'FOLIO MIXTO PENDIENTE', 100.00, CURDATE(), NULL,      0, 9991, 2026);
+
+-- Cargos para Amnistía (9002/UI-1):
+--   historico: recargos cat 16 (2024) y cat 17 (2025) → inyectados directamente en Host C
+--   por 00_inject_qa_hostc.sql (Opción C) después del split del Paso 6.
+--   activa: anualidad oficial (cat 2) → debe CONSERVARSE tras la amnistía.
+DELETE FROM ligacargos WHERE numcontrato='9002' AND leyenda = @L_AGUA_2026;
+INSERT INTO ligacargos (numcontrato, leyenda, monto, fcobro, estado, categoria, anio)
+VALUES ('9002', @L_AGUA_2026, @M_AGUA_2026, CURDATE(), 0, 2, 2026);
+
+-- Cargos para Saneamiento SDF (9003/BE-4): deuda pendiente que D7 cancela.
+-- Si BE-4 ya se ejecutó (estado=-1), restaurar para re-test.
+DELETE FROM ligacargos WHERE numcontrato='9003' AND leyenda='ANUALIDAD PENDIENTE SDF';
+INSERT INTO ligacargos (numcontrato, leyenda, monto, fcobro, estado, categoria, anio)
+VALUES ('9003', 'ANUALIDAD PENDIENTE SDF', 600.00, CURDATE(), 0, 2, 2026);
+
+-- Cargos Categorías V2 (9005/BE-9): cat 19-22.
+-- Dinámico: busca nombres para Cambio Propietario (19), Desperdicio (20), Constancia (21), Fuga (22)
+SET @L_CAMBIO     = (SELECT nombre FROM cargos WHERE categoria=19 AND estado=1 LIMIT 1);
+SET @L_DESPERDICIO = (SELECT nombre FROM cargos WHERE categoria=20 AND estado=1 LIMIT 1);
+SET @L_CONSTANCIA  = (SELECT nombre FROM cargos WHERE categoria=21 AND estado=1 LIMIT 1);
+SET @L_FUGA        = (SELECT nombre FROM cargos WHERE categoria=22 AND estado=1 LIMIT 1);
+
+DELETE FROM ligacargos WHERE numcontrato='9005' AND categoria IN (19,20,21,22);
+INSERT INTO ligacargos (numcontrato, leyenda, monto, fcobro, estado, categoria, anio)
+VALUES ('9005', IFNULL(@L_CAMBIO, 'CAMBIO PROPIETARIO V2'),   150.00, CURDATE(), 0, 19, 2026),
+       ('9005', IFNULL(@L_DESPERDICIO, 'MULTA DESPERDICIO V2'),    250.00, CURDATE(), 0, 20, 2026),
+       ('9005', IFNULL(@L_CONSTANCIA, 'CONSTANCIA NO ADEUDO V2'),  50.00, CURDATE(), 0, 21, 2026),
+       ('9005', IFNULL(@L_FUGA, 'CANCELACION FUGA V2'),     100.00, CURDATE(), 0, 22, 2026);
+
+-- Cargo con Folio NULL (9006/BE-8): debe normalizarse a folio=0.
+DELETE FROM ligacargos WHERE numcontrato='9006' AND leyenda='CARGO FOLIO NULL';
+INSERT INTO ligacargos (numcontrato, leyenda, monto, fcobro, estado, folio, anio)
+VALUES ('9006', 'CARGO FOLIO NULL', 100.00, CURDATE(), 0, NULL, 2026);
+
+-- Cruce Asimétrico (9007/9008 — UI-14):
+-- Los cargos se inyectan en Host C post-saneamiento (00_inject_qa_hostc_post.sql)
+-- para evitar que sp_sinc_asamblea_bulk los procese antes de la prueba.
+
+-- Folio Histórico Mixto (9001/BE-5): folio 7777 con 1 pagado + 1 pendiente en histórico.
+-- Inyectado directamente en Host C por 00_inject_qa_hostc.sql (Opción C)
+-- después del split del Paso 6, donde ligacargos_historico ya existe.
+
+-- Folio Empate Financiero (9001/RC-1 / BE-11): folio 9999 con total $1000 pagado.
+DELETE FROM ligacargos WHERE numcontrato='9001' AND folio=9999;
+INSERT INTO ligacargos (numcontrato, leyenda, monto, fcobro, fpago, estado, folio, anio, categoria)
+VALUES ('9001', 'CONCEPTO A', 500.00, CURDATE(), CURDATE(), 1, 9999, 2026, 2),
+       ('9001', 'CONCEPTO B', 500.00, CURDATE(), CURDATE(), 1, 9999, 2026, 3);
+
+-- Cargo de Auditoría (9001): cargo sin folio para prueba de normalización de leyenda.
+DELETE FROM ligacargos WHERE numcontrato='9001' AND leyenda='CARGO TEST AUDITORIA';
+INSERT INTO ligacargos (numcontrato, leyenda, monto, fcobro, estado, categoria, anio)
+VALUES ('9001', 'CARGO TEST AUDITORIA', 1.00, CURDATE(), 0, 1, YEAR(CURDATE()));
+
+
+-- 3. ESCENARIOS DE SANEAMIENTO DE DUPLICADOS (PIPELINE 10C)
+-- =============================================================================
+
+-- Caso ZENÓN SINTÉTICO: usuario master sin contratos + duplicado vacío (BE-6).
+INSERT INTO usuario (noconsecutivo, nombre)
+VALUES (9901, 'ZENON TEST MASTER'),
+       (9902, 'ZENON TEST DUPLICADO');
+
+-- Caso MARTÍN SINTÉTICO: contrato 9904 bajo duplicado → fusionar a master 9903 (BE-6).
+INSERT INTO usuario (noconsecutivo, nombre)
+VALUES (9903, 'MARTIN TEST MASTER'),
+       (9904, 'MARTIN TEST DUPLICADO');
+
+INSERT INTO contrato (numcontrato, numusuario, domicilio, estado)
+VALUES ('9903', 9903, 'DOMICILIO MASTER 9903',     1),
+       ('9904', 9904, 'DOMICILIO DUPLICADO 9904',  1);
+
+
+-- 4. EGRESOS Y DISCREPANCIAS TÉCNICAS
+-- =============================================================================
+
+-- Egreso legacy cat=0 (RC-3 / UI-26): valida que id_categoria no queda NULL en registros viejos.
+DELETE FROM egresos WHERE leyenda='GASTO TEST LEGACY CAT 0';
+INSERT INTO egresos (leyenda, monto, fecha, categoria)
+VALUES ('GASTO TEST LEGACY CAT 0', 1000.00, CURDATE(), 0);
+
+-- *** UI-9: monto_comercial ANUALIDAD DEL AGUA 2026 ***
+-- Se fuerza a 99.99 para probar que guardaContrato() recalcula con el valor del catálogo.
+-- ⚠️ DEBE REVERTIRSE AL FINAL DE ESTE SCRIPT (ver sección 5).
+UPDATE cargos SET monto_comercial = 99.99 WHERE nombre = 'ANUALIDAD DEL AGUA 2026';
+
+
+-- 5. REVERT DE EFECTOS COLATERALES EN CATÁLOGO
+-- =============================================================================
+-- Se ejecuta inmediatamente después de la inyección para que sólo UI-9 vea el valor corrupto
+-- en su precond_sql. El resto de los casos usa el valor correcto de 1200.00.
+-- UI-9 debe ejecutar su propio precond_sql antes de correr y corregir si todavía vale 99.99.
+UPDATE cargos SET monto_comercial = 1200.00 WHERE nombre = 'ANUALIDAD DEL AGUA 2026';
+
+```
+
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. The goal is to sidestep broad commands where a targeted approach is possible. This is currently my guiding principle, making sure my response is most efficient.
+
+
+**Clarifying Script Dependencies**
+
+I'm now tracing the data flow. The `00_inject_qa_tests.sql` script sets up a specific test case on Host A, which is then transferred to Host C. I'm focusing on how `10_pipeline_saneamiento.sql` is supposed to clean it up later, as per CRITICAL INSTRUCTION 2. It looks like it could fail to remove the data from the DB, if not properly configured.
+
+
+**Analyzing Script Omission**
+
+I've hit a snag. The QA test failed due to charges remaining in state 0 after the cleanup. I've confirmed `10_pipeline_saneamiento.sql` is missing the D7 rule (or any code for `estado = 4`). It seems the PHP hybrid logic handles this now, but the SQL script is supposed to ensure the target database starts clean. This discrepancy causes a sync issue.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `10_pipeline_saneamiento.sql`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 6.937199519s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+-- =============================================================================
+-- 10_pipeline_saneamiento.sql — Pipeline de Saneamiento Post-Sync
+-- Ubicación: docs-dev/migration-aguav2/sync_hosta_to_hostc/
+--
+-- PROPÓSITO:
+--   Ejecutar después de cada sync B→A→C para corregir inconsistencias de datos
+--   que el sync raw no puede resolver: estados mixtos en folios, multas de
+--   asamblea sin sincronizar entre contratos del mismo usuario.
+--
+-- ORDEN DE EJECUCIÓN:
+--   Paso 1   — Auditoría activa: detectar folios mixtos en ligacargos (sin cambios)
+--   Paso 2   — Reparación dinámica de folios mixtos en ligacargos (activa)
+--   Paso 2-B — Auditoría histórico: detectar folios mixtos en ligacargos_historico
+--   Paso 2-C — Reparación dinámica de folios mixtos en ligacargos_historico
+--   Paso 3   — Sincronización de multas asamblea (sp_sinc_asamblea_bulk)
+--   Paso 4   — Registro de trazabilidad en tabla cambios
+--   Paso 5   — Validación final (activa + histórico)
+--
+-- USO: Ejecutar bloque a bloque. Los Pasos 2 y 2-C tienen UPDATEs sobre
+--      ligacargos y ligacargos_historico. El Paso 3 llama a sp_sinc_asamblea_bulk.
+--
+-- DEPENDENCIAS:
+--   - 05_stored_procedures.sql (sp_sinc_asamblea_bulk debe estar instalado)
+--   - Tablas: ligacargos, ligacargos_historico, contrato, usuario, cambios
+--
+-- NOTA (2026-04-13): Pasos 2-B y 2-C agregados tras detectar que los 8 folios
+--   mixtos históricos (anios 2006–2025) no eran cubiertos por el Paso 2 original
+--   que solo opera sobre ligacargos (activa).
+-- =============================================================================
+
+USE `awa`;
+
+-- =============================================================================
+-- PASO 1: AUDITORÍA — FOLIOS CON ESTADOS MIXTOS (solo lectura)
+-- Detecta folios donde coexisten registros pagados (1) y cancelados (-1).
+-- Si el resultado es vacío, pasar directo al Paso 3.
+-- =============================================================================
+SELECT folio,
+       COUNT(CASE WHEN estado = 1  THEN 1 END) AS pagados,
+       COUNT(CASE WHEN estado = -1 THEN 1 END) AS cancelados_error
+FROM ligacargos
+WHERE folio > 0
+GROUP BY folio
+HAVING pagados > 0 AND cancelados_error > 0
+ORDER BY folio;
+
+
+-- =============================================================================
+-- PASO 2: REPARACIÓN DINÁMICA DE FOLIOS MIXTOS
+-- Solo ejecutar si el Paso 1 devolvió filas.
+-- =============================================================================
+
+CREATE TEMPORARY TABLE IF NOT EXISTS _pipe_folios_mixtos AS
+SELECT folio
+FROM ligacargos
+WHERE folio > 0
+GROUP BY folio
+HAVING COUNT(CASE WHEN estado = 1  THEN 1 END) > 0
+   AND COUNT(CASE WHEN estado = -1 THEN 1 END) > 0;
+
+-- Reparar: heredar fpago real del registro pagado del mismo folio
+UPDATE ligacargos l
+INNER JOIN (
+    SELECT folio, MAX(fpago) AS fpago_valido
+    FROM ligacargos
+    WHERE estado = 1
+      AND folio IN (SELECT folio FROM _pipe_folios_mixtos)
+    GROUP BY folio
+) ref ON l.folio = ref.folio
+SET l.estado = 1,
+    l.fpago  = ref.fpago_valido
+WHERE l.folio IN (SELECT folio FROM _pipe_folios_mixtos)
+  AND l.estado = -1;
+
+SELECT ROW_COUNT() AS filas_reparadas_paso2;
+
+DROP TEMPORARY TABLE IF EXISTS _pipe_folios_mixtos;
+
+
+-- =============================================================================
+-- PASO 2-B: AUDITORÍA HISTÓRICO — FOLIOS CON ESTADOS MIXTOS (solo lectura)
+-- Detecta folios en ligacargos_historico donde coexisten pagados (1) y cancelados (-1).
+-- Si el resultado es vacío, pasar directo al Paso 3.
+-- =============================================================================
+SELECT folio,
+       COUNT(CASE WHEN estado = 1  THEN 1 END) AS pagados,
+       COUNT(CASE WHEN estado = -1 THEN 1 END) AS cancelados_error,
+       MIN(anio) AS anio_min
+FROM ligacargos_historico
+WHERE folio > 0
+GROUP BY folio
+HAVING pagados > 0 AND cancelados_error > 0
+ORDER BY folio;
+
+
+-- =============================================================================
+-- PASO 2-C: REPARACIÓN DINÁMICA DE FOLIOS MIXTOS EN HISTÓRICO
+-- Solo ejecutar si el Paso 2-B devolvió filas.
+-- Misma lógica que Paso 2: hereda fpago real del registro pagado del mismo folio.
+-- =============================================================================
+
+CREATE TEMPORARY TABLE IF NOT EXISTS _pipe_folios_mixtos_hist AS
+SELECT folio
+FROM ligacargos_historico
+WHERE folio > 0
+GROUP BY folio
+HAVING COUNT(CASE WHEN estado = 1  THEN 1 END) > 0
+   AND COUNT(CASE WHEN estado = -1 THEN 1 END) > 0;
+
+UPDATE ligacargos_historico l
+INNER JOIN (
+    SELECT folio, MAX(fpago) AS fpago_valido
+    FROM ligacargos_historico
+    WHERE estado = 1
+      AND folio IN (SELECT folio FROM _pipe_folios_mixtos_hist)
+    GROUP BY folio
+) ref ON l.folio = ref.folio
+SET l.estado = 1,
+    l.fpago  = ref.fpago_valido
+WHERE l.folio IN (SELECT folio FROM _pipe_folios_mixtos_hist)
+  AND l.estado = -1;
+
+SELECT ROW_COUNT() AS filas_reparadas_paso2c;
+
+DROP TEMPORARY TABLE IF EXISTS _pipe_folios_mixtos_hist;
+
+
+-- =============================================================================
+-- PASO 3: SINCRONIZACIÓN DE MULTAS DE ASAMBLEA
+-- Llama al SP para sincronizar cargos de asamblea (categoria=6) entre
+-- contratos del mismo usuario. p_anio=0 procesa todos los años.
+-- =============================================================================
+
+CALL sp_sinc_asamblea_bulk(0, @filas_asamblea);
+SELECT @filas_asamblea AS multas_asamblea_sincronizadas;
+
+
+-- =============================================================================
+-- PASO 3-B: PATCH CATEGORÍAS V2 (idempotente)
+-- Asegura que categorías 19-22 existan y que ligacargos/historico estén
+-- reclasificados. También normaliza egresos.id_categoria.
+-- Referencia: host-c-setup/07_patch_categorias_v2.sql
+-- =============================================================================
+
+-- 3-B-1: Categorías especiales de ingresos
+REPLACE INTO `categorias` (`id`, `nombre`, `nombrecorto`) VALUES
+  (19, 'CAMBIO DE PROPIETARIO', 'CB/PROP'),
+  (20, 'MULTA DESPERDICIO',     'MLT/DESP'),
+  (21, 'CONSTANCIA NO ADEUDO',  'CNT/NADO'),
+  (22, 'CANCELACION FUGA',      'CNC/FUGA');
+
+-- 3-B-2: Reclasificar ligacargos activa (anio >= 2026)
+-- NOTA F05: ligacargos.recargo es monto decimal (float), NO bandera booleana.
+-- No usar recargo=0/1 como filtro de tipo — usar leyenda+categoria como fuente de verdad.
+UPDATE `ligacargos` SET categoria = 19
+WHERE (leyenda LIKE '%CAMBIO DE PROPIETARIO%' OR leyenda LIKE '%CAMBIO%PROPIETARIO%') AND categoria = 1;
+
+UPDATE `ligacargos` SET categoria = 21
+WHERE leyenda LIKE '%CONSTANCIA%' AND categoria = 1;
+
+-- 3-B-3: Reclasificar ligacargos_historico (anio <= 2025)
+UPDATE `ligacargos_historico` SET categoria = 19
+WHERE (leyenda LIKE '%CAMBIO DE PROPIETARIO%' OR leyenda LIKE '%CAMBIO%PROPIETARIO%') AND categoria = 1;
+
+UPDATE `ligacargos_historico` SET categoria = 20
+WHERE leyenda LIKE '%MULTA POR DESPERDICIO%' AND categoria = 2;
+
+UPDATE `ligacargos_historico` SET categoria = 21
+WHERE (leyenda LIKE '%CONSTANCIA%' OR leyenda LIKE '%CONSTANCIA DE NO ADEUDO%') 
+  AND (categoria = 4 OR categoria = 1);
+
+UPDATE `ligacargos_historico` SET categoria = 22
+WHERE leyenda LIKE '%EXCAB. Y CANCELACION DE TOMA DE AGUA X FUGA%';
+
+-- 3-B-4: Categoría SIN CATEGORÍA en egresos
+REPLACE INTO `categorias_egresos` (`id`, `nombre`) VALUES (10, 'SIN CATEGORÍA');
+
+UPDATE `egresos` e JOIN `categorias_egresos` ce ON e.categoria = ce.nombre
+SET e.id_categoria = ce.id
+WHERE e.id_categoria IS NULL AND e.categoria != 'NINGUNA';
+
+UPDATE `egresos` SET id_categoria = 10, categoria = 'SIN CATEGORÍA'
+WHERE categoria = 'NINGUNA';
+
+SELECT 'patch_categorias_v2' AS paso,
+    (SELECT COUNT(*) FROM categorias WHERE id IN (19,20,21,22)) AS cats_ingreso,
+    (SELECT COUNT(*) FROM categorias_egresos WHERE id = 10)     AS cat_sin_cat,
+    (SELECT COUNT(*) FROM egresos WHERE id_categoria IS NULL)   AS egresos_sin_cat
+;
+
+
+-- =============================================================================
+-- PASO 4: REGISTRO DE TRAZABILIDAD EN CAMBIOS
+-- Documenta la ejecución del pipeline para auditoría futura.
+-- =============================================================================
+
+INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato, batch_id)
+VALUES (
+    NOW(),
+    'Pipeline saneamiento post-sync ejecutado',
+    'Estado pre-saneamiento: posibles folios mixtos (activa+histórico) y multas asamblea pendientes',
+    CONCAT(
+        'Folios mixtos activa reparados: ver Paso 2. ',
+        'Folios mixtos histórico reparados: ver Paso 2-C. ',
+        'Multas asamblea sincronizadas: ', IFNULL(@filas_asamblea, 0), ' filas. ',
+        'Ejecutado: ', NOW()
+    ),
+    '',  -- sin contrato específico — aplica globalmente
+    NULL
+);
+
+
+-- =============================================================================
+-- PASO 5: VALIDACIÓN FINAL
+-- Ambas consultas deben devolver 0 para confirmar saneamiento exitoso.
+-- =============================================================================
+
+-- 5-A: Folios con estados mixtos residuales (debe ser 0)
+SELECT COUNT(*) AS folios_mixtos_residuales
+FROM (
+    SELECT folio
+    FROM ligacargos
+    WHERE folio > 0
+    GROUP BY folio
+    HAVING COUNT(CASE WHEN estado = 1  THEN 1 END) > 0
+       AND COUNT(CASE WHEN estado = -1 THEN 1 END) > 0
+) chk;
+
+-- 5-A-bis: Folios mixtos residuales en HISTÓRICO (debe ser 0)
+SELECT COUNT(*) AS folios_mixtos_residuales_historico
+FROM (
+    SELECT folio
+    FROM ligacargos_historico
+    WHERE folio > 0
+    GROUP BY folio
+    HAVING COUNT(CASE WHEN estado = 1  THEN 1 END) > 0
+       AND COUNT(CASE WHEN estado = -1 THEN 1 END) > 0
+) chk;
+
+-- 5-B: Multas de asamblea pendientes con al menos un pagado en el mismo usuario (debe ser 0)
+SELECT COUNT(*) AS multas_asamblea_pendientes_sin_sinc
+FROM ligacargos l_pend
+JOIN contrato c_pend ON l_pend.numcontrato = c_pend.numcontrato
+WHERE l_pend.categoria = 6
+  AND l_pend.estado    = 0
+  AND EXISTS (
+      SELECT 1
+      FROM ligacargos l_pag
+      JOIN contrato c_pag ON l_pag.numcontrato = c_pag.numcontrato
+      WHERE c_pag.numusuario  = c_pend.numusuario
+        AND l_pag.leyenda     = l_pend.leyenda
+        AND l_pag.categoria   = 6
+        AND l_pag.estado      = 1
+        AND l_pag.monto       > 0
+        AND l_pag.numcontrato != l_pend.numcontrato
+  );
+
+-- 5-C (mismo check en histórico)
+SELECT COUNT(*) AS multas_historico_pendientes_sin_sinc
+FROM ligacargos_historico l_pend
+JOIN contrato c_pend ON l_pend.numcontrato = c_pend.numcontrato
+WHERE l_pend.categoria = 6
+  AND l_pend.estado    = 0
+  AND EXISTS (
+      SELECT 1
+      FROM ligacargos_historico l_pag
+      JOIN contrato c_pag ON l_pag.numcontrato = c_pag.numcontrato
+      WHERE c_pag.numusuario  = c_pend.numusuario
+        AND l_pag.leyenda     = l_pend.leyenda
+        AND l_pag.categoria   = 6
+        AND l_pag.estado      = 1
+        AND l_pag.monto       > 0
+        AND l_pag.numcontrato != l_pend.numcontrato
+  );
+
+```
+
+</details>
+
+---
+
+<details>
+<summary>Conversation History</summary>
+
+# Conversation History
+Here are the conversation IDs, titles, and summaries of your most recent 9 conversations, in reverse chronological order:
+
+<conversation_summaries>
+## Conversation 79a8e9a2-6401-44f1-a5db-8896eda906a6: Validating Pipeline Synchronization Logs
+- Created: 2026-04-24T06:44:25Z
+- Last modified: 2026-04-24T08:24:54Z
+
+### USER Objective:
+Stabilizing Financial Data Integrity
+
+Objective: Finalize the stabilization and audit-readiness of the Agua V2 financial engine by enforcing strict data validation and architectural integrity.
+
+Goals:
+1. Implement Poka-Yoke sanitization protocols across core PHP modules (cargos, contratos) to prevent malicious or malformed data entry.
+2. Enforce database-level uniqueness constraints (UNIQUE KEYs) in the schema to permanently eliminate operational data duplication.
+3. Validate the hybrid surcharge logic and F05 compliance through the established automated SQL audit pipeline.
+4. Prepare the system for final production deployment by securing input sanitation and validating historical data parity.
+
+## Conversation 7b4df0fd-8f9f-4e1c-9691-7e0bbc280aa5: Validating Contract Exemption Logic
+- Created: 2026-04-23T16:57:43Z
+- Last modified: 2026-04-24T06:42:03Z
+
+### USER Objective:
+Stabilizing Agua V2 Surcharge Architecture
+
+Main Objective: Finalize the stabilization of the Agua V2 financial engine by enforcing robust debt reconciliation and audit traceability.
+
+Goals:
+1. Reconcile historical surcharge logic by aligning the V2 parametric engine with the legacy data structure, abandoning hardcoded fallbacks.
+2. Sanitize the `cargos` catalog to correctly flag historical surcharge eligibility without corrupting financial data.
+3. Validate the `Contrato 500` UI-9 transition to confirm the system correctly triggers multi-year surcharge calculations.
+4. Eliminate reliance on "soft" flags by utilizing the `es_recargo_moratorio` alias in views for financial auditing and reporting.
+5. Execute a surgical data fix in the `cargos` catalog to ensure the surcharge motor remains "obedient" and accurate, guaranteeing audit-ready data integrity for 2024–2025.
+
+## Conversation 6d27cf24-4496-444d-913c-de2298a07da5: UI Optimization for Suspended Contracts
+- Created: 2026-04-23T03:17:22Z
+- Last modified: 2026-04-23T05:53:51Z
+
+### USER Objective:
+Stabilizing Agua V2 State Transitions
+
+Objective: Finalize the stabilization of Agua V2 state transition protocols by addressing financial data integrity and enhancing administrative diagnostics.
+
+Goals:
+1. Complete manual test case execution for state transitions (D → G) and resolve discrepancies in financial reporting.
+2. Validate and patch root causes for incorrect charge generation during contract reactivations (e.g., Cto #1006).
+3. Ensure financial consistency in reporting modules (contratoinfo2.php) and verify forensic reflection of contract states.
+4. Finalize the integration of administrative reporting for "Suspensión Definitiva" contracts to ensure full audit readiness.
+
+## Conversation 2c24dbf0-a237-4a36-8172-98282de6cf2d: Troubleshooting Amnistía UI Logic
+- Created: 2026-04-22T21:09:14Z
+- Last modified: 2026-04-23T02:52:01Z
+
+### USER Objective:
+Auditing Financial State Transitions
+
+Objective: Finalize the implementation of a rigorous, self-auditing financial transaction layer across all Agua V2 modules.
+
+Goals:
+1. Standardize a universal "PRE/POST Financial Snapshot" pattern across all transaction functions (State Changes, Payments, Cancellations, Reassignments, and Manual Applications).
+2. Automate the generation of audit logs in the `cambios` table to capture the precise impact on debt totals and adeudo counts per operation.
+3. Enhance the `historial_mov_cto.php` report to visualize these financial snapshots with color-coded event classification.
+4. Ensure full consistency in financial reporting, even for legacy charges and state-based recalibrations (paridad), to guarantee complete forensic traceability for every administrative action.
+
+## Conversation 772b23ae-0897-4270-9446-4689fdf95548: Executing UI Test Suite
+- Created: 2026-04-20T04:38:49Z
+- Last modified: 2026-04-20T05:36:46Z
+
+### USER Objective:
+Stabilizing Agua UI Tests
+
+USER Objective: Complete the validation of the Agua V2 testing suite (Section 1 / Group A) to ensure the system's operational readiness.
+Goals:
+1. Systematically execute UI test cases for contract management, state transitions, and infrastructure configuration based on the stabilized test plan.
+2. Refine automation protocols by documenting specific UI interactions, such as using TAB for field auto-completion and handling browser confirmation dialogues.
+3. Validate system behavior against business rules, specifically addressing contract creation constraints, parity synchronization, and administrative blocking mechanisms.
+4. Update the formal test documentation to reflect empirical findings and UI-specific interaction patterns discovered during manual and automated execution.
+
+## Conversation cbf979ab-fe6f-4218-97aa-78333e6a1a56: Audit Caja Reconciliation Discrepancies
+- Created: 2026-04-20T01:04:06Z
+- Last modified: 2026-04-20T04:13:17Z
+
+### USER Objective:
+Stabilizing Agua Reporting Modules
+
+Objective: Resolve identified logic gaps and architectural inconsistencies in the Agua V2 reporting and receipt modules on Host C.
+
+Goals:
+1. Patch the date logic in `reciboegreso.php` to ensure correct temporal mapping of expenditures.
+2. Address identified bugs and legacy function dependencies in `credencial.php` to improve module robustness.
+3. Verify all code changes against the updated forensic audit documentation to maintain system-wide congruency.
+4. Finalize and push all stabilization patches to the production repository to ensure full operational readiness.
+
+## Conversation 70313f54-0ccd-4b31-b9dd-0a85cd24482b: Validating Host C PHP Errors
+- Created: 2026-04-20T02:37:26Z
+- Last modified: 2026-04-20T02:43:35Z
+
+### USER Objective:
+Validating Host C PHP Errors
+
+Main Objective: Evaluate the current status of reported PHP notices from Host C logs without performing any code modifications.
+
+Goals:
+1. Confirm if the "Undefined index" notices in `contrasenas.php` (lines 71-116) and `carteravencida.php` (line 50) are still valid based on existing file content.
+2. Verify the persistence of the "Undefined property" notice for `Conexion::$insert_id` in `usuarios.php` (line 296).
+3. Provide a clear, non-corrective status report to the user regarding the state of these specific runtime errors.
+
+## Conversation d93a3dd6-def6-407e-bf68-58e09c7b5178: Refactoring Agua Assembly Module
+- Created: 2026-04-19T00:37:18Z
+- Last modified: 2026-04-19T01:46:32Z
+
+### USER Objective:
+Refining Asamblea Administrative Interface
+
+Main Objective: Finalize the stabilization and UI refactor of the Asamblea V2 administrative module on Host C.
+
+Goals:
+1. Complete the transition of the application entry point to the "Administración" view.
+2. Implement dynamic, database-driven labels for the "Multa por Inasistencia" to replace hardcoded inputs.
+3. Standardize and fix the administrative action table to ensure proper state-based control buttons (Start/Close/Download) appear for all assemblies.
+4. Clean up the UI by removing redundant navigation elements like the "Pase de Lista" button.
+5. Deploy changes manually to the production-ready Host C environment following established architectural constraints and legacy system protocols.
+
+## Conversation 2d2217ca-2154-4c88-b506-587e879d4278: Validating Agua Test Plan
+- Created: 2026-04-18T20:32:04Z
+- Last modified: 2026-04-18T23:01:21Z
+
+### USER Objective:
+Stabilizing Agua Testing Suite
+
+Main Objective: Complete the formalization and stabilization of the Agua V2 testing suite to ensure autonomous, production-ready execution.
+
+Goals:
+1. Finalize the "Plan de Pruebas" documentation with high-precision CSS selectors and updated Host C paths.
+2. Refactor attendance module interoperability between the Assembly generator and Agua processor, including MD5 validation and cross-table database consistency (active vs. historical).
+3. Synchronize the deployment pipeline (B→A→C) to maintain environment integrity.
+4. Establish clear operational separation for concurrent manual and automated testing across dual monitors.
+5. Secure version control integrity for all finalized protocols in remote repositories.
+
+</conversation_summaries>
+
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 24 Apr 2026, 12:33 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. The goal is to sidestep broad commands where a targeted approach is possible. This is currently my primary operational guideline.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `04_recalc_contrato_toma.sql`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.964983440s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Execution Error
+
+**Status:** Completed
+**Created:** 24 Apr 2026, 12:33 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 24 Apr 2026, 12:34 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. The goal is to sidestep broad commands where a targeted approach is possible. This is currently my primary operational guideline.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `04_recalc_contrato_toma.sql`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.433818960s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+-- =============================================================================
+-- 04_recalc_contrato_toma.sql
+-- Recalcula la tabla contrato_toma a partir de los datos de contrato importados.
+-- Ejecutar DESPUÉS de 03_sync_host_a.sql y de importar los datos.
+--
+-- contrato_toma NO EXISTE en Host B — es una tabla nueva del redesign Host A v2.
+-- =============================================================================
+
+SET NAMES utf8mb4;
+SET foreign_key_checks = 0;
+
+SELECT '=== RECALCULANDO contrato_toma ===' AS info;
+
+-- Verificar datos de contrato disponibles
+SELECT
+    COUNT(*) AS total_contratos,
+    SUM(agua)    AS suma_agua,
+    SUM(drenaje) AS suma_drenaje
+FROM contrato;
+
+-- Limpiar si ya existía algún dato previo
+DELETE FROM contrato_toma;
+
+-- CASO 1: agua=1, drenaje=1 (contratos con ambos servicios simples)
+INSERT INTO contrato_toma (numcontrato, num_toma, tipo, tiene_agua, tiene_drenaje, estado_agua, estado_drenaje, fecha_alta)
+SELECT numcontrato, 1, tipo, 1, 1, 1, 1, fecha
+FROM contrato WHERE agua=1 AND drenaje=1;
+SELECT 'CASO 1 agua=1 drenaje=1' AS caso, ROW_COUNT() AS insertados;
+
+-- CASO 2: agua=1, drenaje=0 (solo agua)
+INSERT INTO contrato_toma (numcontrato, num_toma, tipo, tiene_agua, tiene_drenaje, estado_agua, estado_drenaje, fecha_alta)
+SELECT numcontrato, 1, tipo, 1, 0, 1, 0, fecha
+FROM contrato WHERE agua=1 AND drenaje=0;
+SELECT 'CASO 2 agua=1 drenaje=0' AS caso, ROW_COUNT() AS insertados;
+
+-- CASO 3: agua=0, drenaje=1 (solo drenaje)
+INSERT INTO contrato_toma (numcontrato, num_toma, tipo, tiene_agua, tiene_drenaje, estado_agua, estado_drenaje, fecha_alta)
+SELECT numcontrato, 1, tipo, 0, 1, 0, 1, fecha
+FROM contrato WHERE agua=0 AND drenaje=1;
+SELECT 'CASO 3 agua=0 drenaje=1' AS caso, ROW_COUNT() AS insertados;
+
+-- CASO 4: agua=0, drenaje=0 (contratos sin servicios activos)
+INSERT INTO contrato_toma (numcontrato, num_toma, tipo, tiene_agua, tiene_drenaje, estado_agua, estado_drenaje, fecha_alta, observaciones)
+SELECT numcontrato, 1, tipo, 0, 0, 0, 0, fecha, 'Sin servicios'
+FROM contrato WHERE agua=0 AND drenaje=0;
+SELECT 'CASO 4 agua=0 drenaje=0' AS caso, ROW_COUNT() AS insertados;
+
+-- CASO 5: agua=2, drenaje=2 → 2 tomas completas
+INSERT INTO contrato_toma (numcontrato, num_toma, tipo, tiene_agua, tiene_drenaje, estado_agua, estado_drenaje, fecha_alta)
+SELECT numcontrato, 1, tipo, 1, 1, 1, 1, fecha
+FROM contrato WHERE agua=2 AND drenaje=2;
+INSERT INTO contrato_toma (numcontrato, num_toma, tipo, tiene_agua, tiene_drenaje, estado_agua, estado_drenaje, fecha_alta)
+SELECT numcontrato, 2, tipo, 1, 1, 1, 1, fecha
+FROM contrato WHERE agua=2 AND drenaje=2;
+SELECT 'CASO 5 agua=2 drenaje=2' AS caso, ROW_COUNT() * 2 AS insertados;
+
+-- CASO 6: agua=2, drenaje=1 → toma1 completa, toma2 solo agua
+INSERT INTO contrato_toma (numcontrato, num_toma, tipo, tiene_agua, tiene_drenaje, estado_agua, estado_drenaje, fecha_alta)
+SELECT numcontrato, 1, tipo, 1, 1, 1, 1, fecha
+FROM contrato WHERE agua=2 AND drenaje=1;
+INSERT INTO contrato_toma (numcontrato, num_toma, tipo, tiene_agua, tiene_drenaje, estado_agua, estado_drenaje, fecha_alta, observaciones)
+SELECT numcontrato, 2, tipo, 1, 0, 1, 0, fecha, 'Revisar: toma 2 tiene drenaje?'
+FROM contrato WHERE agua=2 AND drenaje=1;
+SELECT 'CASO 6 agua=2 drenaje=1' AS caso, ROW_COUNT() * 2 AS insertados;
+
+-- CASO 7: agua=1, drenaje=2 → toma1 completa, toma2 solo drenaje
+INSERT INTO contrato_toma (numcontrato, num_toma, tipo, tiene_agua, tiene_drenaje, estado_agua, estado_drenaje, fecha_alta)
+SELECT numcontrato, 1, tipo, 1, 1, 1, 1, fecha
+FROM contrato WHERE agua=1 AND drenaje=2;
+INSERT INTO contrato_toma (numcontrato, num_toma, tipo, tiene_agua, tiene_drenaje, estado_agua, estado_drenaje, fecha_alta, observaciones)
+SELECT numcontrato, 2, tipo, 0, 1, 0, 1, fecha, 'Revisar: toma 2 tiene agua?'
+FROM contrato WHERE agua=1 AND drenaje=2;
+SELECT 'CASO 7 agua=1 drenaje=2' AS caso, ROW_COUNT() * 2 AS insertados;
+
+-- =============================================================================
+-- SANEAMIENTO POST-RECALCULO: Paridad por Estado del Contrato
+-- =============================================================================
+-- Si el contrato es Estado 4 (Suspensión Definitiva), las tomas deben estar "OFF"
+-- independientemente de lo que diga el contador legacy (Regla C06).
+
+UPDATE contrato_toma ct
+JOIN contrato c ON ct.numcontrato = c.numcontrato
+SET ct.estado_agua = 0, ct.estado_drenaje = 0
+WHERE c.estado = 4;
+
+SELECT 'SANEAMIENTO: Tomas apagadas para contratos en Estado 4' AS step, ROW_COUNT() AS actualizados;
+
+-- =============================================================================
+-- Validación de contrato_toma
+-- =============================================================================
+SELECT '=== VALIDACIÓN contrato_toma ===' AS info;
+
+SELECT
+    (SELECT SUM(agua)    FROM contrato)                                         AS agua_original,
+    (SELECT COUNT(*)     FROM contrato_toma WHERE tiene_agua=1 AND estado_agua=1) AS agua_nueva,
+    IF(
+        (SELECT SUM(agua) FROM contrato) = (SELECT COUNT(*) FROM contrato_toma WHERE tiene_agua=1 AND estado_agua=1),
+        'OK ✓', 'DIFERENCIA ✗'
+    ) AS agua_check,
+
+    (SELECT SUM(drenaje) FROM contrato)                                             AS drenaje_original,
+    (SELECT COUNT(*)     FROM contrato_toma WHERE tiene_drenaje=1 AND estado_drenaje=1) AS drenaje_nueva,
+    IF(
+        (SELECT SUM(drenaje) FROM contrato) = (SELECT COUNT(*) FROM contrato_toma WHERE tiene_drenaje=1 AND estado_drenaje=1),
+        'OK ✓', 'DIFERENCIA ✗'
+    ) AS drenaje_check;
+
+SELECT
+    COUNT(*) AS total_registros_toma,
+    (SELECT COUNT(*) FROM contrato) AS total_contratos
+FROM contrato_toma;
+
+SET foreign_key_checks = 1;
+SELECT '=== contrato_toma RECALCULADA ===' AS info;
+
+```
+
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. The goal is to sidestep broad commands where a targeted approach is possible. This is currently my primary operational guideline.
+
+
+**Identifying Missing Rules**
+
+I've hit a snag. The crucial D7 rule for SDF cancellation is missing from the automated pipeline, creating potential phantom debt. Validation failures confirm this gap in the SQL scripts. The log files reveal warnings about pending SDF charges, directly linked to this missing D7 sanitization. I'm digging into why this happened, looking through various files and sync logs.
+
+
+**Clarifying Pipeline Expectations**
+
+I've got it - the automated SQL test, specifically "TEST QA: SDF D7 APLICADO (9003)," highlights a pipeline deficiency. The pipeline, contrary to current expectations, *should* be applying the D7 sanitization for `estado=4` debt. This clarifies why contract 9003 triggered the warning, as the script is supposed to clean it, and it didn't! The issue isn't that the pipeline *shouldn't*, it's that it *doesn't*. I am digging into how the QA suite's requirements deviate from the actual pipeline behavior.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 6.829276915s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 24 Apr 2026, 12:36 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. The goal is to sidestep broad commands where a targeted approach is possible. This is currently my primary operational guideline.
+
+
+**Reviewing The Current Pipeline**
+
+I'm now deep-diving into the existing pipeline to pinpoint the cause of the `TEST QA: SDF D7 APLICADO` failure. It appears that no script in the `10*` range explicitly removes pending charges where `estado=4`, as anticipated. I'm cross-referencing this with documentation and other scripts, like `syncawa_hostb_to_hosta`, to verify if the cleanup for estado=4 is applied in a specific manner. I am looking for the C05 rule specifically in the `syncawa` pipeline.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 3.307888540s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 24 Apr 2026, 12:36 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. The goal is to sidestep broad commands where a targeted approach is possible. This is currently my primary operational guideline.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `03_sync_host_a.sql`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.512778223s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+-- =============================================================================
+-- 03_sync_host_a.sql
+-- Script UNIFICADO de post-procesamiento para Host A (Ambiente de Transición V1+).
+-- Propósito: Transformar datos provenientes del Host B (Legado) al modelo V1+.
+-- 
+-- Mantiene el esquema de tabla única (ligacargos) de Host A.
+-- =============================================================================
+
+SET NAMES utf8mb4;
+SET foreign_key_checks = 0;
+SET sql_mode = '';
+
+-- =============================================================================
+-- SECCIÓN A: COMPENSACIÓN DE COLUMNAS NUEVAS (TRANSICIÓN V1+)
+-- =============================================================================
+
+SELECT '=== APLICANDO DEFAULTS DE TRANSICIÓN (D1-D6) ===' AS info;
+
+-- D1: exento_recargo_primer_anio (Feature V2 adoptada en A)
+UPDATE contrato SET exento_recargo_primer_anio = 0;
+UPDATE contrato SET exento_recargo_primer_anio = 1 WHERE YEAR(fecha) = YEAR(NOW());
+SELECT CONCAT('D1: Contratos exentos (año actual): ', SUM(exento_recargo_primer_anio)) AS status FROM contrato;
+
+-- D2: monto_comercial en cargos
+UPDATE cargos SET monto_comercial = monto * 2
+WHERE categoria IN (2, 3) AND automatico = 1 AND monto_comercial = 0;
+SELECT CONCAT('D2: Cargos con monto_comercial: ', COUNT(*)) AS status FROM cargos WHERE monto_comercial > 0;
+
+-- D3: idpago_vinc default
+UPDATE ligacargos SET idpago_vinc = '' WHERE idpago_vinc IS NULL;
+
+-- D4: Limpiar basura de desarrollo (Cargos 2027)
+DELETE FROM cargos WHERE anio = 2027;
+SELECT CONCAT('D4: Cargos 2027 eliminados: ', ROW_COUNT()) AS status;
+
+-- D5: Limpiar cargos de prueba (estado=2 dev)
+DELETE FROM cargos WHERE estado = 2 AND nombre REGEXP '^(cargo[0-9]|cbm_|prueba_)';
+SELECT CONCAT('D5: Cargos test eliminados: ', ROW_COUNT()) AS status;
+
+-- D6: Normalización de folios (NULL -> 0)
+UPDATE ligacargos SET folio = 0 WHERE folio IS NULL;
+SELECT CONCAT('D6: Folios normalizados: ', ROW_COUNT()) AS status;
+
+-- =============================================================================
+-- SECCIÓN B: SANEAMIENTO SDF (Estándar de Paridad Transición)
+-- =============================================================================
+
+SELECT '=== EJECUTANDO SANEAMIENTO SDF (UNIFICADO V1+) ===' AS info;
+
+-- 1. Registro en Bitácora (Audit Trail)
+-- Se usa un Batch ID de sistema (0) o el ID actual en cambios.
+INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato, batch_id)
+SELECT NOW(), 
+       CONCAT('Saneamiento Automático SDF (Sync Transition): ', COUNT(DISTINCT lc.numcontrato), ' contratos depurados'), 
+       'Cargos: Pendientes (V1+)', 
+       'Estado: -1 (Depurado)', 
+       '',
+       0 -- Batch ID genérico para sync
+FROM ligacargos lc
+JOIN contrato c ON lc.numcontrato = c.numcontrato
+WHERE c.estado = 4 AND lc.estado = 0
+HAVING COUNT(*) > 0;
+
+-- 2. Depuración masiva en tabla única
+UPDATE ligacargos lc
+JOIN contrato c ON lc.numcontrato = c.numcontrato
+SET lc.estado = -1
+WHERE c.estado = 4 AND lc.estado = 0;
+
+SELECT CONCAT('D7: Cargos SDF depurados en Host A: ', ROW_COUNT()) AS status;
+
+-- =============================================================================
+-- SECCIÓN C: NORMALIZACIÓN DE CATÁLOGOS ESPECÍFICOS
+-- =============================================================================
+
+-- Ocultar cargo duplicado 624 (Si existe)
+UPDATE cargos SET estado = 0 WHERE numconsec = 624;
+
+SET foreign_key_checks = 1;
+
+SELECT '=== POST-PROCESAMIENTO EN HOST A COMPLETADO ===' AS info;
+
+```
+
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. The goal is to sidestep broad commands where a targeted approach is possible. This is currently my primary operational guideline.
+
+
+**Analyzing Data Dependencies**
+
+I've discovered the D7 step is executed during the `syncawa_hostb_to_hosta` operation, specifically within the `03_sync_host_a.sql` script. This indicates Host A charges with `estado=4` get cleaned. Interestingly, `sync_hosta_to_hostc` injects the QA contracts directly into Host A *after* the initial sync! This presents a data dependency I must understand.
+
+
+**Clarifying Execution Order**
+
+I now understand the critical execution sequence: `syncawa_hostb_to_hosta` *then* `sync_hosta_to_hostc`. This explains why the QA contracts, injected into Host A *after* the D7 cleanup, retain their pending charges when propagated to Host C. The `run_sync.sh` script for Host A to C injection occurs *after* the D7 cleanup on Host A, meaning the subsequent data dump includes the still-pending charges. Host C, lacking a D7 step, therefore fails to sanitize these QA contracts.
+
+
+**Addressing QA Contract Anomalies**
+
+I've pinpointed the root of the QA contract discrepancies. The `pipeline_qa.sql` script is failing as expected. The QA injection process is flawed because the D7 cleanup happens in the Host A pipeline, not the Host C pipeline. The validation check `TEST QA: SDF D7 APLICADO (9003) ❌ FALLO` fails due to the fact that 9003 isn't cleaned by Host C. It seems the test was written before the D7 logic migrated to Host A, or maybe it was missed.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 10.751515785s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+## User Request
+
+Inicio GRUPO A / UI-1 
+. Consulte cto: 9002 , en la ficha me aparece este msg: Aviso: Faltan por registrar en el catálogo los siguientes cargos anuales: ANUALIDAD DEL AGUA 2026.  EN la patalla si aparece, que ocurre aqui ?
+.  en php logs, aparecen 2:
+[24-Apr-2026 13:53:38 America/Mexico_City] PHP Notice:  Undefined index: agua in F:\aguav2\webapp\agua\views\contratos\ficha.php on line 169
+[24-Apr-2026 13:53:38 America/Mexico_City] PHP Notice:  Undefined index: drenaje in F:\aguav2\webapp\agua\views\contratos\ficha.php on line 187
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `contratos.php`
+**Language:** php
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. The goal is to sidestep broad commands where a targeted approach is possible. This is currently my guiding principle, making sure my response is most efficient.
+
+
+**Investigating the Missing Data**
+
+I'm now zeroing in on the data discrepancies. 'view_file' will be used to analyze `includes/negocio/contratos.php` and `views/contratos/ficha.php`. The aim is to understand the origin of `tarifas_referencia` and pinpoint why 'ANUALIDAD DEL AGUA 2026' is missing its corresponding index ('agua' and 'drenaje') within the UI display of contract 9002's UI-1 test. The focus is to determine where the data is populated, and why it is not showing up as it should be.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ficha.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 3.895921574s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L149-199)</summary>
+
+**Path:** `Unknown file`
+
+```
+                                <b>Tipo:</b><br>
+                                <input type='radio' name='tomas[<?= $n ?>][tipo]' id='t_tipo_<?= $n ?>_0' value='0' <?= ($t['tipo']==0?'checked':'') ?> onchange='cambiaTipo(<?= $n ?>, 0, tarifas)' <?= ($estado==4?'disabled':'') ?>> <label for='t_tipo_<?= $n ?>_0'>Normal</label>&nbsp;&nbsp;
+                                <input type='radio' name='tomas[<?= $n ?>][tipo]' id='t_tipo_<?= $n ?>_1' value='1' <?= ($t['tipo']==1?'checked':'') ?> onchange='cambiaTipo(<?= $n ?>, 1, tarifas)' <?= ($estado==4?'disabled':'') ?>> <label for='t_tipo_<?= $n ?>_1'>Comercial</label>
+                            </div>
+
+                            <div style='margin-bottom:10px; border:1px dashed #bbb; padding:5px; background:#fff;'>
+                                <input type='checkbox' name='tomas[<?= $n ?>][tiene_agua]' id='t_agua_<?= $n ?>' value='1' <?= ($t['tiene_agua']?'checked':'') ?> onchange='actualizaInterfazTomas(<?= $n ?>, "agua")' <?= ($estado==4?'disabled':'') ?>> 
+                                <label for='t_agua_<?= $n ?>'><b>Infraestructura: Cuenta con toma</b></label>
+                                
+                                <div id='cont_estado_agua_<?= $n ?>' style='margin-top:5px; font-size:11px; <?= ($t['tiene_agua']?'':'display:none;') ?>'>
+                                    Servicio: 
+                                    <input type='radio' name='tomas[<?= $n ?>][estado_agua]' id='e_agua_<?= $n ?>_1' value='1' <?= ($t['estado_agua']?'checked':'') ?> <?= ($estado==4?'disabled':'') ?>> <label for='e_agua_<?= $n ?>_1'>Activo</label>
+                                    <input type='radio' name='tomas[<?= $n ?>][estado_agua]' id='e_agua_<?= $n ?>_0' value='0' <?= (!$t['estado_agua']?'checked':'') ?> <?= ($estado==4?'disabled':'') ?>> <label for='e_agua_<?= $n ?>_0'>Suspendido (Corte)</label>
+                                </div>
+                                <div id='desc_agua_<?= $n ?>' style='margin-top:5px; font-size:11px; color:#999; <?= (!$t['tiene_agua']?'':'display:none;') ?>'>
+                                    Servicio: <i>Sin instalaci&oacute;n física</i>
+                                </div>
+
+                                <div id='ref_agua_<?= $n ?>' style='font-size:10px; color:#666; margin-top:3px; border-top:1px dotted #ccc; padding-top:2px;'>
+                                    <?= isset($tarifas_referencia['agua']['leyenda']) ? $tarifas_referencia['agua']['leyenda'] : 'Tarifa de Agua' ?>: <b>$<?= number_format($t['tipo']==1 ? (isset($tarifas_referencia['agua']['comercial']) ? $tarifas_referencia['agua']['comercial'] : 0) : (isset($tarifas_referencia['agua']['normal']) ? $tarifas_referencia['agua']['normal'] : 0), 2) ?></b>
+                                </div>
+                            </div>
+
+                            <div style='border:1px dashed #bbb; padding:5px; background:#fff;'>
+                                <input type='checkbox' name='tomas[<?= $n ?>][tiene_drenaje]' id='t_drenaje_<?= $n ?>' value='1' <?= ($t['tiene_drenaje']?'checked':'') ?> onchange='actualizaInterfazTomas(<?= $n ?>, "drenaje")' <?= ($estado==4?'disabled':'') ?>> 
+                                <label for='t_drenaje_<?= $n ?>'><b>Instalaci&oacute;n: Cuenta con descarga</b></label>
+
+                                <div id='cont_estado_drenaje_<?= $n ?>' style='margin-top:5px; font-size:11px; <?= ($t['tiene_drenaje']?'':'display:none;') ?>'>
+                                    Servicio: 
+                                    <input type='radio' name='tomas[<?= $n ?>][estado_drenaje]' id='e_drenaje_<?= $n ?>_1' value='1' <?= ($t['estado_drenaje']?'checked':'') ?> <?= ($estado==4?'disabled':'') ?>> <label for='e_drenaje_<?= $n ?>_1'>Activo</label>
+                                    <input type='radio' name='tomas[<?= $n ?>][estado_drenaje]' id='e_drenaje_<?= $n ?>_0' value='0' <?= (!$t['estado_drenaje']?'checked':'') ?> <?= ($estado==4?'disabled':'') ?>> <label for='e_drenaje_<?= $n ?>_0'>Suspendido (Corte)</label>
+                                </div>
+                                <div id='desc_drenaje_<?= $n ?>' style='margin-top:5px; font-size:11px; color:#999; <?= (!$t['tiene_drenaje']?'':'display:none;') ?>'>
+                                    Servicio: <i>Sin descarga instalada</i>
+                                </div>
+
+                                <div id='ref_drenaje_<?= $n ?>' style='font-size:10px; color:#666; margin-top:3px; border-top:1px dotted #ccc; padding-top:2px;'>
+                                    <?= isset($tarifas_referencia['drenaje']['leyenda']) ? $tarifas_referencia['drenaje']['leyenda'] : 'Tarifa de Drenaje' ?>: <b>$<?= number_format($t['tipo']==1 ? (isset($tarifas_referencia['drenaje']['comercial']) ? $tarifas_referencia['drenaje']['comercial'] : 0) : (isset($tarifas_referencia['drenaje']['normal']) ? $tarifas_referencia['drenaje']['normal'] : 0), 2) ?></b>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endfor; ?>
+                </div>
+            </div>
+        </div>
+        <script>
+            var tarifas = <?= json_encode($tarifas_referencia) ?>;
+
+            function validaContrato() {
+                var num_tomas = parseInt($('#num_tomas').val()) || 1;
+                
+```
+
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. The goal is to sidestep broad commands where a targeted approach is possible. This is currently my guiding principle, making sure my response is most efficient.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `Faltan por registrar`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.200666135s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 24 Apr 2026, 12:57 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
 </details>
 
 ---

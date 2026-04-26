@@ -121,7 +121,7 @@ git push origin feature/upgrade-v2-win-xampp
 
 ---
 
-**Última actualización:** 2026-04-17 · Depuración scripts migración (01, 08, scripts_deseable eliminados)
+**Última actualización:** 2026-04-26 · Guards motor recargos (G01/G02 en cargos.php), config_sistema.descripcion→TEXT, paridad_anios_max_recargo, UI configuracion.php rediseñada
 
 > **Nombre canónico del Ground Truth**: El conjunto `CLAUDE.md` + todo `.agents/` (rules, skills, workflows) se denomina **"el Ground Truth"** del proyecto.
 > **Nota de terminología**: Gemini denomina este mismo conjunto **"el Runbook"**. Son el mismo repositorio de conocimiento — `.agents/` es compartido. Solo difiere el nombre según el agente.

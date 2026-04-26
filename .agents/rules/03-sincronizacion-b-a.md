@@ -19,6 +19,7 @@ Al actualizar la BD en el Host A, se debe priorizar la limpieza de **"datos de n
 - **Regla**: Los registros transportados de B deben **"mapearse"** a la estructura de Transición de A.
 - **Mandato**: Host A mantiene el esquema de **tabla única** (`ligacargos`) para actuar como puente estable. El split histórico se reserva para el Host C.
 - **Consistencia**: El post-procesamiento transforma campos V1 a V1+ (ej. `exento_recargo`, `batch_id`) asegurando integridad inmediata.
+- **Saneamiento Estructural**: Es mandatorio consolidar asambleas duplicadas y garantizar la unicidad de cargos por `(nombre, anio)` para cumplir con las restricciones de Host C.
 
 ---
 

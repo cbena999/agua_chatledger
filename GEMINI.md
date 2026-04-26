@@ -68,6 +68,24 @@ Existen funcionalidades core que requieren especial atención para asegurar la c
 
 > Ver tabla de comandos canónicos y comportamiento de flags en: `docs-dev/migration-aguav2/MIGRATION_PROTOCOL.md`
 
+## 🔒 Fixes de Seguridad en Motor de Recargos (2026-04-26)
+
+Dos guards implementados en `includes/negocio/cargos.php` para blindar el flag `recargo` del catálogo:
+
+| Guard | Función | Descripción |
+|-------|---------|-------------|
+| **G01** | `calcula_recargos()` | Retorno temprano si `recargo=0` — la ruta de aplicación manual ya no genera mora en cargos sin flag. |
+| **G02** | `creaCargo()` / `modificaCargo()` | Fuerza `recargo=0` server-side para cualquier categoría ≠ 2 (AGUA) o 3 (DRENAJE). Cierra la vía UI del checkbox "Es una multa". |
+
+**Cambios en BD asociados:**
+- `config_sistema.descripcion` extendida de `varchar(255)` → `TEXT` (Hosts A y C).
+- Nuevos parámetros: `paridad_anios_max_recargo=5`, `paridad_ignorar_fpago_fantasma=1`.
+- Script sincronizado: `docs-dev/migration-aguav2/host-c-setup/03_config_datos_catalogo.sql`.
+
+**UI:** `admin/operaciones/configuracion.php` rediseñado — 2 columnas, modal de confirmación con diff, descripciones desde BD. Ver regla F09 en `02-reglas-negocio.md`.
+
+---
+
 ## 🐛 Bugs Host C corregidos (2026-04-07, commit `bd1cb2f`)
 
 Derivados del split `ligacargos`: 5 PHPs usaban `FROM ligacargos` directa (perdían datos ≤2025).
@@ -95,7 +113,7 @@ Validar integridad:
 bash docs-dev/ga-cl-ia/chatledger_validate.sh
 ```
 
-**Última actualización**: 2026-04-16
+**Última actualización**: 2026-04-26
 
 > [!IMPORTANT]
 > **Terminología de Sesión**:
