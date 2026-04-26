@@ -58,6 +58,7 @@ Inventario completo de assets en [.agents/INVENTORY.md](.agents/INVENTORY.md).
 
 - Schema v2 completo, webapp PHP adaptada — **UP & RUNNING**
 - Pipeline sync B→A→C validado en ejecución real (7/7 checks OK)
+- **Saneamiento Estructural Estabilizado (2026-04-26)**: 100% de asambleas consolidadas y catálogos con llaves UNIQUE.
 - Scripts setup en `docs-dev/migration-aguav2/host-c-setup/` (02→09, manual/)
 - Checklist pase a producción en `host-c-setup/07_transferir_datos.md`
 - Ver regla detallada: [.agents/rules/05-despliegue-host-c.md](.agents/rules/05-despliegue-host-c.md)

@@ -37,6 +37,12 @@ Este documento es una entidad viva para registrar el descubrimiento y clasificac
 | **U01** | Usuario estado `2` = **No Localizado**. Excluido de búsquedas estándar. | Implementada |
 | **U02** | Clasificación de "Usuarios Especiales": Aquellos sin contratos vinculados o con todos en suspensión definitiva. | Reporte V2 |
 | **U03** | **Tratamiento de No Localizados**: Usuarios con `estado=2` disparan la suspensión definitiva de sus contratos vinculados. Su deuda **no segmenta ni contabiliza** en los reportes financieros operativos (cortes de caja, cartera vencida) — ver R06. | Implementada |
+| **U04** | **Purga de Usuarios Placeholder**: Usuarios sin nombre (NULL o vacío) se eliminan automáticamente del padrón **solo si no tienen contratos vinculados** (para evitar huérfanos). Saneamiento D10. | Implementada |
+
+### 📂 Módulo 06: Asambleas y Participación
+| ID | Regla | Estado |
+|:---:|---|:---:|
+| **A01** | **Consolidación de Asambleas**: Máximo de **3 asambleas permitidas por fecha** calendario. Enforzado por el trigger `tr_asamblea_limit_3` en Host C. El saneamiento D9 consolida asambleas duplicadas históricas (B→A) eligiendo como "ganadora" la de mayor asistencia y reasignando asistentes automáticamente. | Implementada |
 
 ### 📂 Módulo 04: Pagos, Caja y Folios
 | ID | Regla | Estado |

@@ -49,6 +49,7 @@ Existen funcionalidades core que requieren especial atención para asegurar la c
 - **Cartera Vencida (`carteravencida.php`)**: Validación de deuda morosa.
 - **Corte de Caja (`concentradocortecaja.php`)**: Ingresos diarios contra reportes detallados.
 - **Resumen de Caja (`reportes/concentradocortecajaresumen.php`)**: Consolidación total.
+- **Saneamiento Estructural (PMU)**: Consolidación de asambleas, unicidad de cargos y depuración de usuarios placeholder en `analisis_paridad_3hosts.md`.
 - **Plan de Pruebas Maestro**: `docs-dev/doc-estabilizacion/Plan de Pruebas — Sprint Post-Correcciones.md`.
 
 ---
@@ -58,6 +59,7 @@ Existen funcionalidades core que requieren especial atención para asegurar la c
 - Split `ligacargos` **completado**: 2,513 activa (≥2026) + 192,545 histórico (≤2025)
 - Schema v2 completo + webapp PHP 7.4 adaptada en `feature/upgrade-v2-win-xampp`
 - Pipeline de Sincronización B → A → C **Maestro** (Comando: `Full-Pipeline-Sync`)
+- **Saneamiento Estructural (2026-04-26)**: 100% de asambleas consolidadas (max 3/día) y catálogos con llaves de unicidad.
 - Puertos Host C: Apache **7001**, MariaDB **7002**
 - Protocolo de Migración: `docs-dev/migration-aguav2/MIGRATION_PROTOCOL.md`
 - Checklist pase a producción: `docs-dev/migration-aguav2/host-c-setup/07_transferir_datos.md`
