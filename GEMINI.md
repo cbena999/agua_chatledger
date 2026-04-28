@@ -86,6 +86,19 @@ Dos guards implementados en `includes/negocio/cargos.php` para blindar el flag `
 
 ---
 
+## 🔒 Fixes Financieros y Arquitectura Poka-Yoke (2026-04-28)
+
+Se implementaron parches estructurales para asegurar la integridad de la configuración y la reversibilidad forense:
+
+| Fix | Componente | Descripción |
+|-------|---------|-------------|
+| **Poka-Yoke Numérico** | `cargaConfig()` | Intercepción con `preg_match` y `str_replace` para sanear globalmente cualquier número formateado (ej. "10,500.00") en `config_sistema` antes del casteo `floatval/intval`. Protege 18 variables nativas. |
+| **Reversa Incondicional** | `_getReversal()` | El botón "Revertir transición" se ha desacoplado de las reglas de deuda y ahora es permanentemente visible en la UI tras un cambio de estado válido. |
+| **Límite Bomba** | `calcula_recargos()` | Se introdujo una regla de quiebre de deuda máxima (`reversal_threshold`). El motor deja de generar mora si el contrato alcanza este tope de deuda. |
+| **Toggle de Límite** | `reversal_threshold_enable` | Nuevo parámetro global para activar/desactivar (1/0) el Límite Bomba de recargos a voluntad del operador. Por default, apagado. |
+
+---
+
 ## 🐛 Bugs Host C corregidos (2026-04-07, commit `bd1cb2f`)
 
 Derivados del split `ligacargos`: 5 PHPs usaban `FROM ligacargos` directa (perdían datos ≤2025).
@@ -113,7 +126,7 @@ Validar integridad:
 bash docs-dev/ga-cl-ia/chatledger_validate.sh
 ```
 
-**Última actualización**: 2026-04-26
+**Última actualización**: 2026-04-28
 
 > [!IMPORTANT]
 > **Terminología de Sesión**:
