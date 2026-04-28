@@ -21740,7 +21740,17 @@ ____
 Hice cambios en rama main para los archivos aqui puestos
   /opt/lampp/htdocs/agua/docs-dev/migration-stack2/win10_aguav2/optimizacion
 
-==============================================  AQUI continuar Jueves 23 abril   ======================================================================
+==============================================  AQUI continuar Martes  28 abril   ======================================================================
+
+Sonbre: Análisis de Gaps y Sesgos — Guía V1.2
+Corrije todo para sea correcto, completo; congruente y  consistente entre todos los casos de prueba, calro evitar omisiones y redundncias; aplica estas precisiones:
+
+. reversal_threshold se quede a  10500
+. Que la premisa sea  usar  datos de contratos, usuarios  reales de la bd awa host c; y la segunda forma en caso sea requerido o sea un caso explicito diferente entonces  se utilicen el set de pruebas inyectados con alguno de los sql ya hechos (rectificalos que sean los que necesitam utilizar).
+.Para G1 — Datos QA inexistentes y en general para atender el doc,. de pruebas, realizare yo manualmente /Full-Pipeline-Sync.sh --with-qa
+. G2  que se indique q el usuario lo cambie a priori en Configuración Global del Sistema.
+. G4 — UI-32 paso manual sin instrucción clara de ruta en Host C, se quite de las pruebas.
+
 
 ***** Grupo A — Gestión de Contratos y Transiciones de Estado ***** 
 
@@ -21793,8 +21803,6 @@ OK UI-2 · Sin amnistía al reactivar desde Susp. Administrativa
 
 ==============================================
 
-0) mejoras en historial_mov_cto.php?id=405 
-1)  Prueba CTO 405 de reversar y checar consistenciass
 2) Pruebas otra vez Del documento Guia de Pruebas — Tester Humano (V1.0).md
   + Continua las pruebas con base a los docs de cp
    . manual
@@ -21810,8 +21818,6 @@ __________________________
   .  Lista de saneamientos  e impactos, cortes resumenes difs de los 4 peridos.
   .  Prepar en limpio justificación de los k saneamientos, y de cortes de caja 4 periodos 2 hosts vs libros, 
 
-
-+ Pruebas de backend, ejecute automatico CL, OK pasaron al 21 abril 2026.
 
 ==============================================
 
@@ -22185,6 +22191,11 @@ YO Te ire informando para que realices tu parte cuando te toque tu turno,
 dudas antes de empezar ?
 
 hostb-despues-154adeudos
+
+0) mejoras en historial_mov_cto.php?id=405 
+1)  Prueba CTO 405 de reversar y checar consistenciass
+
++ Pruebas de backend, ejecute automatico CL, OK pasaron al 21 abril 2026.
 
 
 =====
