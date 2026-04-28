@@ -21778,8 +21778,6 @@ Ok  UI-8 · Bloqueo de cargos de drenaje sin infraestructura
 
 ls -lt /opt/lampp/htdocs/agua/docs-dev/migration-aguav2/sync_hosta_to_hostc/logs/ | head -n 10
 
-Analiza a detalle cada php implicado en los ultimos cambios para estabilizar los casos de prueba UI-7 AL UI-9; para determinar  impactos e implicaciones para los casos de prueba ya realizados con exito  y fixes: UI-1 al UI-6 completos.
-
 
 
 ___________ Prueba nuevas derivadas
@@ -21793,14 +21791,19 @@ OK UI-2 · Sin amnistía al reactivar desde Susp. Administrativa
 
 
 
-__________
+==============================================
 
-+ Continua las pruebas con base a los docs de cp
-  . manual
-+ Scripts de pwsh, para proteger equipo
-+ si pruebas pasan al viernes, el sabado ire a instalar de 9am a 2 pm
+0) mejoras en historial_mov_cto.php?id=405 
+1)  Prueba CTO 405 de reversar y checar consistenciass
+2) Pruebas otra vez Del documento Guia de Pruebas — Tester Humano (V1.0).md
+  + Continua las pruebas con base a los docs de cp
+   . manual
+3) Validación de Históricos: Verificar que los reportes de años anteriores (ej. 2024 o 2025) sigan mostrando datos correctos tras el split de tablas.
+   encuadre de edo cv, cortes periodos
+4) Meter opc de backup manual , lo dejara en c/tempo/respaldo-bd-aguav2-yyyy.mm.dd.hr.mm
+5) Scripts de pwsh, para proteger equipo
 
-_____________________________
+__________________________
 . Ref: Contrato.estado (1  = ACTIVO  |  2 =  Suspensión Temporal  | 3  = Suspensión Administrativa   |  4  =  Suspensión Definitiva)
 
 + Depurar doc req que va a probar doña ncy, incluir tambien:
@@ -21811,41 +21814,7 @@ _____________________________
 + Pruebas de backend, ejecute automatico CL, OK pasaron al 21 abril 2026.
 
 ==============================================
-26 abril 2026
-Del documento Guia de Pruebas — Tester Humano (V1.0).md, realizare la Prueba xxxx (Contrato #405).
-Lo Realizare en host c y luego en host b.
 
-Te comento que pretendo realizarlo con ./Full-Pipeline-Sync.sh  sin flags y con drop explicito manual previo a host c bd awa.
-
-Prueba CTO 405 icm
-Realizare PARA host c y luego en host b, una prueba manual de transicion de estado del contrato #405 de suspension administrativa hacia ACTIVO, para que me apoyes un analisis causa raiz (comparativo):
-
-1) El antes y despues del cambio de estado en host B.
-2) El antes y despues del cambio de estado en host c.
-3) La comparativa de resultados.
-4) Las diferencias del por que de los numeros adeudos y cantidades totales.
-5) Cual realiza un mejor calculo con base a que reglas.
-6) Para el host c, existe la opcion de reversa la voy a ejecutar al ultimo, para que tambien apoyes a analizar y determinar su efectividad y consistencia respecto de su estado anterior.
-
-EN host b: Para el analisis apoyate de este codigo fuente /home/carlos/Documents/tmp01/hostc/vmwin7-agua/  y bd awa de host b.
-EN host c: Para el analisis apoyate de este codigo fuente /opt/lampp/htdocs/agua/ (feature/upgrade-v2-win-xampp)  y bd awa de host c.
-
-
-YO Te ire informando para que realices tu parte cuando te toque tu turno,
-dudas antes de empezar ?
-
-hostb-despues-154adeudos
-
-
-...... Segun GA al 26 abr 2026, 11 p.m pendientes:
-Validación de Históricos: Verificar que los reportes de años anteriores (ej. 2024 o 2025) sigan mostrando datos correctos tras el split de tablas.
-Preparación Go-Live: Revisar el documento 07_transferir_datos.md para el paso final a producción una vez que des el visto bueno a la estabilidad del Host C.
-
-Meter opc de backup manual , lo dejara en c/tempo/respaldo-bd-aguav2-yyyy.mm.dd.hr.mm
-
-
-==============================================
-__________________________
 
 Intenta completar Grupo A
   Nuevo contrato funciona asi:
@@ -22193,6 +22162,29 @@ host roja fallando ahora.
 
 /opt/lampp/bin/mysql -u root -pcomite_2026 awa
 ___________
+
+Lo Realizare en host c y luego en host b.
+
+Te comento que pretendo realizarlo con ./Full-Pipeline-Sync.sh  sin flags y con drop explicito manual previo a host c bd awa.
+
+Prueba CTO 405 icm
+Realizare PARA host c y luego en host b, una prueba manual de transicion de estado del contrato #405 de suspension administrativa hacia ACTIVO, para que me apoyes un analisis causa raiz (comparativo):
+
+1) El antes y despues del cambio de estado en host B.
+2) El antes y despues del cambio de estado en host c.
+3) La comparativa de resultados.
+4) Las diferencias del por que de los numeros adeudos y cantidades totales.
+5) Cual realiza un mejor calculo con base a que reglas.
+6) Para el host c, existe la opcion de reversa la voy a ejecutar al ultimo, para que tambien apoyes a analizar y determinar su efectividad y consistencia respecto de su estado anterior.
+
+EN host b: Para el analisis apoyate de este codigo fuente /home/carlos/Documents/tmp01/hostc/vmwin7-agua/  y bd awa de host b.
+EN host c: Para el analisis apoyate de este codigo fuente /opt/lampp/htdocs/agua/ (feature/upgrade-v2-win-xampp)  y bd awa de host c.
+
+
+YO Te ire informando para que realices tu parte cuando te toque tu turno,
+dudas antes de empezar ?
+
+hostb-despues-154adeudos
 
 
 =====

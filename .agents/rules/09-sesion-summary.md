@@ -11,6 +11,15 @@ Válida para **Claude Code** y **Google Antigravity/Gemini** por igual.
 ### Cuándo aplica
 Al finalizar una sesión donde se implementaron cambios **Y** el usuario los ha verificado (explícita o implícitamente con expresiones como "OK", "funciona", "listo", "dale", "sí", "correcto", etc.).
 
+### ⚠️ Obligatorio al INICIAR sesión
+Leer [`.agents/pending.md`](../pending.md) antes de responder sobre pendientes. No confiar solo en memoria — el archivo es la fuente de verdad de tareas en vuelo.
+
+### ⚠️ Obligatorio al CERRAR sesión
+Actualizar [`.agents/pending.md`](../pending.md) con:
+1. Marcar como ✅ resuelto lo que se verificó en esta sesión (moverlo a la tabla "Resueltos")
+2. Agregar cualquier pendiente nuevo que quedó a medias, con estado BD exacto y próximo paso concreto
+3. Incluir `pending.md` en el commit de cierre
+
 ### Flujo obligatorio
 
 ```

@@ -13,6 +13,7 @@ Es compartido por todos los agentes IA que asisten el proyecto:
 
 ```
 .agents/
+├── pending.md      # ⚡ Tareas en vuelo — leer al iniciar, actualizar al cerrar sesión
 ├── rules/          # Verdades permanentes del negocio e infraestructura
 ├── skills/         # Estándares técnicos de implementación
 └── workflows/      # Procesos paso-a-paso repetibles

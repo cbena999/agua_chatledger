@@ -9,10 +9,20 @@ Cargado automáticamente por **Claude Code** en cada sesión.
 
 ---
 
+## ⚡ Pendientes Activos
+
+> **Leer al inicio de cada sesión antes de responder sobre tareas pendientes.**
+> Fuente de verdad de lo que está en vuelo — más confiable que la memoria del agente.
+
+→ [.agents/pending.md](.agents/pending.md)
+
+---
+
 ## Mapa de Conocimiento (Ground Truth Compartido)
 
 | Tipo | Descripción | Directorio |
 | :--- | :--- | :--- |
+| **Pendientes** | Tareas en vuelo — actualizar al iniciar y cerrar sesión | [.agents/pending.md](.agents/pending.md) |
 | **Reglas** | Reglas permanentes (negocio, infra, git, protocolo cierre sesión) | [.agents/rules/](.agents/rules/) |
 | **Skills** | Estándares técnicos (Plates, AJAX, PHP 7.4, DB) | [.agents/skills/](.agents/skills/) |
 | **Workflows** | Procesos repetibles (Sync B→A→C, Deploy Host C) | [.agents/workflows/](.agents/workflows/) |
