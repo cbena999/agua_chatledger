@@ -21741,18 +21741,7 @@ Hice cambios en rama main para los archivos aqui puestos
   /opt/lampp/htdocs/agua/docs-dev/migration-stack2/win10_aguav2/optimizacion
 
 ==============================================  AQUI continuar Martes  28 abril   ======================================================================
-
-Sonbre: Análisis de Gaps y Sesgos — Guía V1.2
-Corrije todo para sea correcto, completo; congruente y  consistente entre todos los casos de prueba, calro evitar omisiones y redundncias; aplica estas precisiones:
-
-. reversal_threshold se quede a  10500
-. Que la premisa sea  usar  datos de contratos, usuarios  reales de la bd awa host c; y la segunda forma en caso sea requerido o sea un caso explicito diferente entonces  se utilicen el set de pruebas inyectados con alguno de los sql ya hechos (rectificalos que sean los que necesitam utilizar).
-.Para G1 — Datos QA inexistentes y en general para atender el doc,. de pruebas, realizare yo manualmente /Full-Pipeline-Sync.sh --with-qa
-. G2  que se indique q el usuario lo cambie a priori en Configuración Global del Sistema.
-. G4 — UI-32 paso manual sin instrucción clara de ruta en Host C, se quite de las pruebas.
-
-
-***** Grupo A — Gestión de Contratos y Transiciones de Estado ***** 
+Grupo A — Gestión de Contratos y Transiciones de Estado
 
 Ok UI-1 · Amnistía de recargos al reactivar desde Susp. Temporal  
 
@@ -21761,7 +21750,8 @@ Ok UI-3 · Bloqueo de saltos de estado 2↔3
     OK Sub-caso A — intento 2→3: La UI lo bloque. 
     OK Sub-caso B — intento 3→2: La UI lo bloque. 
 Ok UI-4 · Bloqueos en Suspensión Definitiva 
-Ok UI-5 · Transiciones de estado — 7 flujos (A a G) 
+
+UI-5 · Transiciones de estado — 7 flujos (A a G) 
     Sub A.  1→2. Sin cambios en cargos  
     Sub B.   1→3. Sin cambios en cargos
     Sub C.   1→4  QA 9001 Destructivo — no revertir Todos los cargos cancelados; agua=0, drenaje=0.
@@ -21770,7 +21760,9 @@ Ok UI-5 · Transiciones de estado — 7 flujos (A a G)
     Sub F.   3→1 Reactivar 405 
     Sub G.  3→4 Baja definitiva QA 9002 o 405 
 
-Ok  UI-6 · Creación de Nuevo Contrato — 6 sub-casos (A a F)
+--- aqui actutualizar pruebas_opcionales_analisis.md.resolved
+
+  UI-6 · Creación de Nuevo Contrato — 6 sub-casos (A a F)
      Sub A. Toma Normal: agua + drenaje (caso base)  9905. exento_recargo_primer_anio OK.
      Sub B. Toma Normal: solo agua, sin drenaje. 
      Sub C. Toma Comercial: tarifa diferenciada.
@@ -21778,15 +21770,15 @@ Ok  UI-6 · Creación de Nuevo Contrato — 6 sub-casos (A a F)
      Sub E. Bloqueo: 3ra toma en domicilio ya con 2 
      Sub F. Bloqueo: ID de contrato duplicado 
 
-
+Aqui hacerlo con claude,
+	antes: actualice su memory, tome en cuenta el de pmu/ , pruebas_opcionales_analisis.md  , INVENTORY, pending.md
+	
 ***** GRUPO B — Tomas Físicas y Paridad Financiera  ***** 
-Ok  UI-7 · Restricción de 2 tomas por domicilio 
+ UI-7 · Restricción de 2 tomas por domicilio 
      Sub A. vía formulario Nuevo Contrato.
      Sub-caso B — vía edición de contrato existente 
-Ok  UI-8 · Bloqueo de cargos de drenaje sin infraestructura     
+ UI-8 · Bloqueo de cargos de drenaje sin infraestructura     
     UI-9 · Recálculo de tarifa al cambiar tipo Normal↔Comercial 
-
-ls -lt /opt/lampp/htdocs/agua/docs-dev/migration-aguav2/sync_hosta_to_hostc/logs/ | head -n 10
 
 
 
@@ -22196,6 +22188,16 @@ hostb-despues-154adeudos
 1)  Prueba CTO 405 de reversar y checar consistenciass
 
 + Pruebas de backend, ejecute automatico CL, OK pasaron al 21 abril 2026.
+
+Sonbre: Análisis de Gaps y Sesgos — Guía V1.2
+Corrije todo para sea correcto, completo; congruente y  consistente entre todos los casos de prueba, calro evitar omisiones y redundncias; aplica estas precisiones:
+
+. reversal_threshold se quede a  10500
+. Que la premisa sea  usar  datos de contratos, usuarios  reales de la bd awa host c; y la segunda forma en caso sea requerido o sea un caso explicito diferente entonces  se utilicen el set de pruebas inyectados con alguno de los sql ya hechos (rectificalos que sean los que necesitam utilizar).
+.Para G1 — Datos QA inexistentes y en general para atender el doc,. de pruebas, realizare yo manualmente /Full-Pipeline-Sync.sh --with-qa
+. G2  que se indique q el usuario lo cambie a priori en Configuración Global del Sistema.
+. G4 — UI-32 paso manual sin instrucción clara de ruta en Host C, se quite de las pruebas.
+
 
 
 =====
