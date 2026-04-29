@@ -53,10 +53,12 @@ SELECT IFNULL(SUM(monto),0) FROM vw_ligacargos_pendientes WHERE numcontrato='405
 
 ## 🟡 PRIORIDAD MEDIA
 
-### P-03 — Suite de Pruebas V2 — Continuar Grupo D
-**Qué falta**: Ejecutar Grupo D (UI-16 a UI-20) — Cargos, Tarifas y Cancelaciones.
+### P-03 — Suite de Pruebas V2 — Continuar Grupo E
+**Qué falta**: Ejecutar Grupo E (UI-21 a UI-29) — Usuarios, Auditoría y Operaciones Generales.
 
-**Estado**: Grupo C (UI-13, UI-14, UI-15) completado 2026-04-29. BD limpia.
+**Estado**: Grupo D (UI-16 a UI-20) completado 2026-04-29. BD limpia (cargo QA numconsec=631 pendiente depurar).
+
+**Pendiente antes de producción**: restaurar `reversal_threshold` a `$15,000` (actualmente `$10,500`).
 
 ---
 
@@ -64,6 +66,9 @@ SELECT IFNULL(SUM(monto),0) FROM vw_ligacargos_pendientes WHERE numcontrato='405
 
 | Fecha | Item | Detalle |
 |---|---|---|
+| 2026-04-29 | Grupo D pruebas (UI-16 a UI-20) | ✅ PASADO — cargos, cancelaciones, propagación masiva, cruce años |
+| 2026-04-29 | Propagación masiva en historial | `historial_mov_cto.php` — registros -MASIVO- visibles en cto afectado (filtro Sistema) |
+| 2026-04-29 | Fix resetForm paxscript.js | Formulario edición cargo ya no revierte al guardar |
 | 2026-04-29 | Grupo C pruebas (UI-13/14/15) | ✅ PASADO — cobro, sync asamblea, anti-duplicados |
 | 2026-04-29 | Bitácora sync asamblea | `cargos.php` — INSERT en `cambios` por cto beneficiado + nota en cobro pagador |
 | 2026-04-29 | Link recibo en historial | `historial_mov_cto.php` — link `recibo.php?folio=X` en entradas Cobro de Cargos |
@@ -80,4 +85,4 @@ SELECT IFNULL(SUM(monto),0) FROM vw_ligacargos_pendientes WHERE numcontrato='405
 
 ---
 
-*Última actualización: 2026-04-29 — Claude Code*
+*Última actualización: 2026-04-29 (sesión tarde) — Claude Code*
