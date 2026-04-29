@@ -53,12 +53,10 @@ SELECT IFNULL(SUM(monto),0) FROM vw_ligacargos_pendientes WHERE numcontrato='405
 
 ## 🟡 PRIORIDAD MEDIA
 
-### P-03 — UI-9: Validar recálculo de tarifa Normal↔Comercial — Contrato 500
-**Qué falta**: Ejecutar UI-9 completo para contrato 500.
+### P-03 — Suite de Pruebas V2 — Continuar Grupo D
+**Qué falta**: Ejecutar Grupo D (UI-16 a UI-20) — Cargos, Tarifas y Cancelaciones.
 
-**Prerequisito verificado 2026-04-26**: `tipo=0` (Normal) ✅ — contrato limpio, sin contaminación.
-
-**Contexto**: Validar que cambio Normal→Comercial dispara `_sincronizaParidadFinanciera()` con recálculo multi-año de cargos c2/c3 según tarifa comercial.
+**Estado**: Grupo C (UI-13, UI-14, UI-15) completado 2026-04-29. BD limpia.
 
 ---
 
@@ -66,6 +64,9 @@ SELECT IFNULL(SUM(monto),0) FROM vw_ligacargos_pendientes WHERE numcontrato='405
 
 | Fecha | Item | Detalle |
 |---|---|---|
+| 2026-04-29 | Grupo C pruebas (UI-13/14/15) | ✅ PASADO — cobro, sync asamblea, anti-duplicados |
+| 2026-04-29 | Bitácora sync asamblea | `cargos.php` — INSERT en `cambios` por cto beneficiado + nota en cobro pagador |
+| 2026-04-29 | Link recibo en historial | `historial_mov_cto.php` — link `recibo.php?folio=X` en entradas Cobro de Cargos |
 | 2026-04-26 | Guards G01/G02 motor recargos | `cargos.php` — guards en `calcula_recargos()` |
 | 2026-04-26 | `config_sistema.descripcion` → TEXT | Schema ampliado para textos largos |
 | 2026-04-26 | UI configuracion.php rediseñada | Nueva UI de configuración global |
@@ -79,4 +80,4 @@ SELECT IFNULL(SUM(monto),0) FROM vw_ligacargos_pendientes WHERE numcontrato='405
 
 ---
 
-*Última actualización: 2026-04-26 — Claude Code*
+*Última actualización: 2026-04-29 — Claude Code*
