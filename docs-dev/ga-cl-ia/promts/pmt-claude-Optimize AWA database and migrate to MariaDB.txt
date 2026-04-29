@@ -21745,13 +21745,13 @@ Grupo A — Gestión de Contratos y Transiciones de Estado
 
 Ok UI-1 · Amnistía de recargos al reactivar desde Susp. Temporal  
 
-OK UI-2 · Sin amnistía al reactivar desde Susp. Administrativa 
+Ok UI-2 · Sin amnistía al reactivar desde Susp. Administrativa 
 Ok UI-3 · Bloqueo de saltos de estado 2↔3
     OK Sub-caso A — intento 2→3: La UI lo bloque. 
     OK Sub-caso B — intento 3→2: La UI lo bloque. 
 Ok UI-4 · Bloqueos en Suspensión Definitiva 
 
-UI-5 · Transiciones de estado — 7 flujos (A a G) 
+Ok UI-5 · Transiciones de estado — 7 flujos (A a G) 
     Sub A.  1→2. Sin cambios en cargos  
     Sub B.   1→3. Sin cambios en cargos
     Sub C.   1→4  QA 9001 Destructivo — no revertir Todos los cargos cancelados; agua=0, drenaje=0.
@@ -21760,9 +21760,7 @@ UI-5 · Transiciones de estado — 7 flujos (A a G)
     Sub F.   3→1 Reactivar 405 
     Sub G.  3→4 Baja definitiva QA 9002 o 405 
 
---- aqui actutualizar pruebas_opcionales_analisis.md.resolved
-
-  UI-6 · Creación de Nuevo Contrato — 6 sub-casos (A a F)
+Ok UI-6 · Creación de Nuevo Contrato — 6 sub-casos (A a F)
      Sub A. Toma Normal: agua + drenaje (caso base)  9905. exento_recargo_primer_anio OK.
      Sub B. Toma Normal: solo agua, sin drenaje. 
      Sub C. Toma Comercial: tarifa diferenciada.
@@ -21770,15 +21768,27 @@ UI-5 · Transiciones de estado — 7 flujos (A a G)
      Sub E. Bloqueo: 3ra toma en domicilio ya con 2 
      Sub F. Bloqueo: ID de contrato duplicado 
 
-Aqui hacerlo con claude,
-	antes: actualice su memory, tome en cuenta el de pmu/ , pruebas_opcionales_analisis.md  , INVENTORY, pending.md
-	
-***** GRUPO B — Tomas Físicas y Paridad Financiera  ***** 
- UI-7 · Restricción de 2 tomas por domicilio 
-     Sub A. vía formulario Nuevo Contrato.
-     Sub-caso B — vía edición de contrato existente 
- UI-8 · Bloqueo de cargos de drenaje sin infraestructura     
+
+Ok GRUPO B — Tomas Físicas y Paridad Financiera 
+	UI-7 · Restricción de 2 tomas por domicilio 
+       Sub-caso B — vía edición de contrato existente 
+	UI-8 · Bloqueo de cargos de drenaje sin infraestructura     
     UI-9 · Recálculo de tarifa al cambiar tipo Normal↔Comercial 
+	UI-10 · Paridad al desconectar infraestructura (Lógica Híbrida) 
+	UI-11 · Cambio rápido de conexión y paridad 
+	UI-12 · Contratos multi-toma en reporte de tomas
+	
+
+GRUPO C — Pagos, Recibos y Folios   (16 paginas de 27, faltan: 11 paginas).
+
+
+GRUPO D — Cargos, Tarifas y Cancelaciones 
+
+GRUPO E — Usuarios, Auditoría y Operaciones Generales 
+
+GRUPO F — Módulo Asistencias (Mini-webapp) 
+
+SECCIÓN 2 — Reportes y Congruencia Financiera 
 
 
 
