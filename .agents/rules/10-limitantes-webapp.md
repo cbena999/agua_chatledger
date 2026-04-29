@@ -94,16 +94,16 @@ Clasificados por módulo funcional y nivel de riesgo.
 
 ## 🔵 Restricciones de Calendario y UI
 
-### L06 — Suspensión Temporal Solo Disponible en Diciembre
+### L06 — Suspensión Temporal Solo Disponible en el Mes Configurado
 - **Módulo**: Cambio de estado (`contratos.php`, `views/contratos/ficha.php`)
 - **Descripción**: La transición hacia estado `2 (SUSPENSIÓN TEMPORAL)` está bloqueada en
-  la UI fuera del mes de diciembre. El mensaje es: *"La Suspensión Temporal solo puede
-  solicitarse en Diciembre."*
+  la UI fuera del mes configurado en `config_sistema.susptemp_mes_permitido` (default=`12`, diciembre).
+  El mensaje es: *"La Suspensión Temporal solo puede solicitarse en [mes]."*
 - **Por qué**: Regla administrativa del municipio — la suspensión temporal se tramita al
   cierre del año fiscal para exonerar el cargo del siguiente ejercicio.
-- **Impacto en pruebas**: Al probar flujos de reactivación (2→1) fuera de diciembre, no es
-  posible poner contratos en estado 2 desde la UI. Usar contratos que ya estén en estado 2
-  en BD, o cambiar temporalmente la restricción de mes en código de prueba.
+- **Impacto en pruebas**: Al probar el flujo 1→2 fuera del mes configurado, ir a
+  `configuracion.php` → cambiar `susptemp_mes_permitido` al mes actual → ejecutar la prueba
+  → restaurar a `12` al terminar. Documentado en Guía de Pruebas UI-5A.
 
 ---
 
