@@ -35,19 +35,24 @@ SELECT IFNULL(SUM(monto),0) FROM vw_ligacargos_pendientes WHERE numcontrato='405
 
 ---
 
-### P-02 — Análisis encuadre de ingresos — 4 períodos con diferencia
+### ~~P-02~~ ✅ Análisis encuadre de ingresos — COMPLETADO 2026-04-29
 
-**Qué falta**: Investigar diferencias entre reportes archivados (HTML) y webapp Host C hasta lograr encuadre exacto.
+**Documento final**: `docs-dev/doc-estabilizacion/encuadres/analisis-encuadre-3fuentes-2024-2026.md`
 
-| Período | Archivado | Webapp C | Diferencia | Hipótesis activa |
+**Resultado por período (9 analizados)**:
+| Período | Libro | Host C | Diferencia | Estado |
 |---|---:|---:|---:|---|
-| 2024a | 872,090 | 881,760 | +9,670 webapp | Folio en fecha límite compartido con 2024b |
-| 2024b | 264,820 | 255,160 | -9,660 webapp | Mismo folio movido de período |
-| 2025a | 1,026,660 | 1,020,160 | -6,500 webapp | Diferencias c6 (asamblea) y c2/c3 |
-| 2025b | 179,562 | 184,288 | +4,726 webapp | Diferencias c6, c16/c17 y cartera |
+| 2024a | 872,090 | 881,960 | +9,870 | Explicado: folio fecha límite 25/03 |
+| 2024b | 264,820 | 255,170 | −9,650 | Explicado: mismo folio, BD lo pone en 2024b |
+| 2024c | 150,128 | 150,128 | **$0** | ✅ Empate exacto |
+| 2024d | 43,590 | 44,340 | +750 | Explicado: multas desperdicio no desglosadas |
+| 2025a | 1,026,660 | 1,020,660 | −6,000 | Explicado: sesgos S3+S5 (con anio_corte=2025) |
+| 2025b | 179,562 | 185,686 | +6,124 | Explicado: sesgo asamblea S3 |
+| 2025c | 105,609 | 100,087 | −5,522 | Explicado: S3+S5, fechas correctas 28/09 |
+| 2026a | 110,260 | 110,344 | +84 | ✅ Empate (inicio 29/09 correcto) |
+| 2026b | 539,302 | 540,122 | +820 | ✅ Empate C=B |
 
-**Fuentes**: Archivos HTML en `/home/carlos/Documents/tmp01/xlsx/*.html`
-**Empezar por**: 2024a y 2024b — sospecha de que $9,670 ≈ $9,660 es el mismo folio en corte de fecha.
+**Conclusión**: Todas las diferencias están explicadas. Sesgos estructurales documentados (S1-S5). No hay pérdida de datos ni errores de motor — son diferencias metodológicas (corte de fecha, agrupación asamblea, reclasificación cat 16/17, saneamiento V2).
 
 ---
 
