@@ -58,10 +58,9 @@ SELECT IFNULL(SUM(monto),0) FROM vw_ligacargos_pendientes WHERE numcontrato='405
 
 ## 🟡 PRIORIDAD MEDIA
 
-### P-03 — Suite de Pruebas V2 — ✅ COMPLETADA
+### ~~P-03~~ ✅ Suite de Pruebas V2 — COMPLETADA 2026-04-29
 **Estado**: Suite completa finalizada 2026-04-29. 42 PASS, 5 IMPEDIDOS documentados.
-
-**Pendiente antes de producción**: ajustar `reversal_threshold` a `$14,000` en BD (actualmente `$10,500`). Script `.sql` ya actualizado a `14000`.
+**`reversal_threshold`**: verificado en BD Host C = `$14,000` ✅ (2026-04-30).
 
 ---
 
@@ -91,4 +90,4 @@ SELECT IFNULL(SUM(monto),0) FROM vw_ligacargos_pendientes WHERE numcontrato='405
 
 ---
 
-*Última actualización: 2026-04-29 (sesión noche, Suite completa) — Claude Code*
+*Última actualización: 2026-04-30 — reversal_threshold verificado $14,000 BD ✅, P-03 cerrado — Claude Code*
