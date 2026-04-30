@@ -132,8 +132,8 @@ bash docs-dev/ga-cl-ia/chatledger_sync_ga_lnks.sh
 
 | Área | Prioridad | Notas |
 |---|---|---|
-| ~~Módulo Caja / Corte diario~~ | ~~Alta~~ | **Cubierto** — reglas R02/R04/R05 en 02-reglas-negocio.md + `doc-estabilizacion/REPORTES_CAJA_CARTERA_DECLARACION.md` |
-| ~~Módulo Cartera Vencida~~ | ~~Alta~~ | **Cubierto** — regla R02 + `doc-estabilizacion/REPORTES_CAJA_CARTERA_DECLARACION.md` |
+| ~~Módulo Caja / Corte diario~~ | ~~Alta~~ | **Cubierto** — reglas R02/R04/R05 en 02-reglas-negocio.md + `doc-estabilizacion/encuadres/REPORTES_CAJA_CARTERA_DECLARACION.md` |
+| ~~Módulo Cartera Vencida~~ | ~~Alta~~ | **Cubierto** — regla R02 + `doc-estabilizacion/encuadres/REPORTES_CAJA_CARTERA_DECLARACION.md` |
 | Cambio de Estados de contrato | Alta | Transiciones 1→2→3→4 mencionadas en regla 02 pero sin workflow dedicado |
 | Testing / Validación | Media | No hay skill de pruebas ni procedimiento de QA |
 | Módulo Asamblea | Media | Módulo activo sin regla o skill documentada |

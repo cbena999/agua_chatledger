@@ -49,8 +49,8 @@ Existen funcionalidades core que requieren especial atención para asegurar la c
 - **Cartera Vencida (`carteravencida.php`)**: Validación de deuda morosa.
 - **Corte de Caja (`concentradocortecaja.php`)**: Ingresos diarios contra reportes detallados.
 - **Resumen de Caja (`reportes/concentradocortecajaresumen.php`)**: Consolidación total.
-- **Saneamiento Estructural (PMU)**: Consolidación de asambleas, unicidad de cargos y depuración de usuarios placeholder en `analisis_paridad_3hosts.md`.
-- **Plan de Pruebas Maestro**: `docs-dev/doc-estabilizacion/Plan de Pruebas — Sprint Post-Correcciones.md`.
+- **Saneamiento Estructural (PMU)**: Consolidación de asambleas, unicidad de cargos y depuración de usuarios placeholder en `docs-dev/doc-estabilizacion/funcionalidad-reglas-negocio/analisis_paridad_3hosts.md`.
+- **Plan de Pruebas Maestro**: `docs-dev/doc-estabilizacion/pruebas-cp-manuales-auto/Plan de Pruebas — Sprint Post-Correcciones.md`.
 
 ---
 

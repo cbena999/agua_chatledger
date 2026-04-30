@@ -13,8 +13,8 @@ La migración está **completada, consolidada y declarada verificada**. Host C t
 - Scripts de setup versionados: `docs-dev/migration-aguav2/host-c-setup/` (02→09, manual/)
 - `tusuario` eliminada de BD y de todos los scripts (tabla fantasma — no usada por PHP)
 - Pipeline de saneamiento integrado y automatizado en `run_sync.sh` (Paso 8)
-- Protocolo de migración documentado: `docs-dev/doc-estabilizacion/MIGRATION_PROTOCOL.md`
-- Declaración de homologación reportes: `docs-dev/doc-estabilizacion/REPORTES_CAJA_CARTERA_DECLARACION.md`
+- Protocolo de migración documentado: `docs-dev/doc-estabilizacion/pase-a-prod/MIGRATION_PROTOCOL.md`
+- Declaración de homologación reportes: `docs-dev/doc-estabilizacion/encuadres/REPORTES_CAJA_CARTERA_DECLARACION.md`
 - **Terminología de Sesión**: Este conjunto de documentos constituye el **Ground Truth (para Claude)** y el **Runbook (para Gemini)**.
 
 ### Pipelines probados (ejecución de referencia: 2026-04-14; última validación: 2026-04-18)
