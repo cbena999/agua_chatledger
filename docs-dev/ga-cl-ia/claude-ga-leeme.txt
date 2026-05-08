@@ -147,8 +147,25 @@ Se instalo claude code nativo y se vinculo a la suscripcion pro ,adquirida el 4 
 
 
 ===============================================================================================================================================================
+4 mayo 2026
 
+. usar sd, como usar con que usuario sea visible con carlos user o se extienda, como indicarle a los programas escriban ahi en lugar de.
+. usar sd negro de minimac
+. depurar host ubuntu roja
+. instalar 2 llms locales y usar con vs code GA
+. pocs: xlsx to lamp , n8n flows, voz recog, img recog
+. az400
+
+Analiza mi host ubuntu 22, para el siguiente requerimiento:
+Yo ejecuto con el usuario: carlos  , la instalacion y ejecución de programas para comandos normales y con sudo todo ello ocurre desde esta area de disco.
+/dev/nvme0n1p4    (ya con poco espacio).
+
+Lo que requiero es poder saber como  y que se tiene que habilitar y usar; para en adelante se empiece a ocupar esta otra are:
+/dev/nvme0n1p3  , la cual pues tiene espacio  para seguir operando.
 
 ===============================================================================================================================================================
+GOOGLE ANTIGRAVITY CON GEMMA4 GRATIS Y FÁCIL (Nuevo tutorial)
+https://www.youtube.com/watch?v=bpDI_xnDleo
 
+Darío Fernández 
 
