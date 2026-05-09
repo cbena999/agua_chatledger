@@ -7,9 +7,9 @@
 | **Trajectory ID** | `faae766a-9489-4dbc-9f4f-54bf13c4fe54` |
 | **Cascade ID** | `bcf279c3-7e58-4790-9c85-a35ebec1c331` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 435 |
+| **Total Steps** | 449 |
 | **Started** | 5 May 2026, 6:58 pm |
-| **Completed** | 7 May 2026, 8:53 am |
+| **Completed** | 7 May 2026, 8:59 am |
 
 ---
 
@@ -12869,6 +12869,458 @@ I'm making sure to prioritize the use of specialized tools, specifically `grep_s
 
 - **Thinking Duration:** 0.838050376s
 - **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+## User Request
+
+no,
+el setup-full.ps1 esta ok, deberia ejecutar cual script ahora: optimize-windows10.ps1 ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `setup-full.ps1`
+**Language:** powershell
+</details>
+
+---
+
+<details>
+<summary>Conversation History</summary>
+
+# Conversation History
+Here are the conversation IDs, titles, and summaries of your most recent 9 conversations, in reverse chronological order:
+
+<conversation_summaries>
+## Conversation 70b5094f-e7ed-44ff-b37e-6634cd67ee3f: Auditing Git Sync Script
+- Created: 2026-05-06T04:38:01Z
+- Last modified: 2026-05-06T04:59:45Z
+
+### USER Objective:
+Auditing Git Sync Script
+
+Main Objective:
+Analyze the safety and integrity of the `sync with link de chatledger-entre main y rama git.sh` script on the Ubuntu 22.04 host to ensure it functions correctly without causing system corruption or repository data loss.
+
+Goals:
+1. Verify the script's logic regarding file migration, symbolic link creation, and `.gitignore` management to prevent accidental data deletion.
+2. Evaluate potential race conditions or error states if the script is re-run (idempotency checks).
+3. Ensure the script correctly handles directory transitions between the local repository and the external `STORAGE_DIR` without breaking the application's reliance on `.chatledger`.
+4. Assess the risk of Git state inconsistencies (e.g., cached vs. ignored files) during the synchronization process.
+
+## Conversation 3d0ec69e-8bdd-40fe-a2ee-0c7e71a92060: Migrating Disk Usage Ubuntu
+- Created: 2026-05-06T03:39:39Z
+- Last modified: 2026-05-06T04:19:26Z
+
+### USER Objective:
+Migrating Disk Usage Ubuntu
+
+Main Objective:
+Offload disk storage and application operations from the nearly full partition `/dev/nvme0n1p4` (/home) to the available space on the `/dev/nvme0n1p3` (/) partition.
+
+Goals:
+1. Identify specific high-occupancy directories within `/home` (the current user home area) that can be safely moved to or linked to `/dev/nvme0n1p3`.
+2. Configure persistent mounting or symbolic linking strategies to ensure that future installations and data operations default to the new, high-capacity partition.
+3. Verify permissions and system-level configuration (e.g., application paths, user data locations) to ensure that moving these assets does not break existing service deployments.
+4. Execute the migration of active development or data directories while maintaining operational continuity for the user `carlos`.
+
+## Conversation 25b74c07-23d4-48e6-b039-435b579b0cf6: Sourcing Water Delivery System Repositories
+- Created: 2026-05-05T21:11:02Z
+- Last modified: 2026-05-05T21:12:16Z
+
+### USER Objective:
+Sourcing Water Delivery System Repositories
+
+Main Objective:
+Identify and source existing, publicly available repository examples of water delivery/distribution management systems to serve as a baseline for a PHP/PostgreSQL POC.
+
+Goals:
+1. Locate repositories containing full-scope management features including inventory (garrafones), logistics (routes/schedules), vehicle tracking, and personnel management.
+2. Evaluate these repositories as data and architectural inputs to facilitate the migration of the user's current "Agua" webapp system into a modernized PHP/PostgreSQL environment.
+3. Provide direct links to relevant projects to enable the user to conduct an analysis of business logic and schema structures for the upcoming migration.
+
+## Conversation 89bc16ba-c2d5-462e-9435-d8421190f457: Kiosk Mode Browser Automation
+- Created: 2026-04-30T15:35:02Z
+- Last modified: 2026-05-01T05:21:04Z
+
+### USER Objective:
+Kiosk Mode Browser Automation
+
+Main Objective:
+Automate the deployment of the "Agua" web application in a "Kiosk" or "App" mode using Google Chrome.
+
+Goals:
+1. Create a PowerShell script (`.ps1`) that launches the specific URL `http://localhost/agua/login/index.php` in a stripped-down Chrome window without navigation bars, tabs, or address bars.
+2. Ensure the resulting script file is placed on the user's desktop for quick, one-click access.
+3. Configure the browser flags (specifically `--app` or `--kiosk`) to ensure a distraction-free, application-like experience suitable for the local web deployment.
+
+## Conversation 4207a55e-b96d-41a1-958d-feb2ced23088: Automating Agua Webapp Deployment
+- Created: 2026-04-30T05:31:52Z
+- Last modified: 2026-04-30T07:00:25Z
+
+### USER Objective:
+Automating Agua Webapp Deployment
+
+Main Objective: Create a robust Bash automation script to sanitize the Agua V2 application directory for secure deployment to the production Apache Host C.
+
+Goals:
+1. Develop a cleanup script that removes sensitive development metadata (.git, logs, temporary backups, and IDE/OS artifacts) without disrupting application functionality.
+2. Implement a safe execution workflow, preferably using rsync or dry-run validation, to ensure that only production-ready files are deployed.
+3. Preserve essential application directory structures (such as upload or cache folders) while clearing their contents to maintain environment parity.
+4. Enhance deployment reliability by ensuring the finalized production directory excludes redundant files that could pose security risks or performance overhead on the web server.
+
+## Conversation 2b323353-1b6a-422d-8f57-a17e1a802019: Diagnosing Assembly Attendance Processing
+- Created: 2026-04-30T01:25:13Z
+- Last modified: 2026-04-30T01:51:13Z
+
+### USER Objective:
+Resolving PHP Path Errors
+
+Objective: Stabilize the Agua V2 web application by resolving file inclusion errors and input limitations causing runtime failures.
+
+Goals:
+1. Standardize file inclusion paths in `ruteador.php` using `__DIR__` to ensure cross-environment compatibility between Windows (XAMPP) and Linux server deployments.
+2. Address the PHP input variable limit causing the `Unknown: Input variables exceeded 1000` warning by advising on necessary `php.ini` adjustments.
+3. Validate session and authentication state handling following the correction of the `require_once` pathing issues.
+
+## Conversation fc33595d-88d5-49e8-aa4f-13cb996237e7: Validating UI-6 Contract Creation
+- Created: 2026-04-29T03:12:31Z
+- Last modified: 2026-04-29T03:21:35Z
+
+### USER Objective:
+Validating UI-6 Contract Creation
+
+Main Objective: Complete the validation of the UI-6 contract creation suite to ensure system-wide financial integrity and accurate initial setup for new users in the Agua V2 environment.
+
+Goals:
+1. Validate the creation of new contracts for both existing and new users, ensuring correct parity and zero-balance initialization.
+2. Verify the application of financial exemptions (Rule C02) and automatic generation of current-year annualities.
+3. Confirm the successful upload and linking of user/contract documentation (constancias).
+4. Maintain alignment with the "data-first" integrity and forensic audit standards established during the previous stabilization of the financial engine.
+
+## Conversation 714f6cf7-4cdb-45d5-946c-515124112e13: Validating Full-Pipeline-Sync Integrity
+- Created: 2026-04-28T21:48:13Z
+- Last modified: 2026-04-29T02:48:48Z
+
+### USER Objective:
+Stabilizing Agua V2 Financial Engine
+
+Objective: Finalize the stabilization and forensic audit-readiness of the Agua V2 financial engine.
+Goals:
+1. Validate and enforce "data-first" integrity for SDF destructible state transitions using immutable forensic logs.
+2. Implement automated temporal grouping and subtotaling in financial audit reports to ensure precise debt reconciliation.
+3. Retroactively secure historical financial data by upgrading schema temporal types (DATE to DATETIME) and standardizing audit traceability in infrastructure scripts.
+4. Execute the UI-6 contract creation suite while maintaining parity with production business rules and automated data sanitation protocols.
+
+## Conversation 0128cbb2-ed95-429a-bbbd-c9d33455174c: Validating Full-Pipeline-Sync Execution
+- Created: 2026-04-28T20:24:02Z
+- Last modified: 2026-04-28T21:42:03Z
+
+### USER Objective:
+Refining Reversal Threshold Logic
+
+Objective: Complete the transition of the Agua V2 financial engine to a decoupled state-reversal and debt-capping architecture.
+
+Goals:
+1. Decouple the UI button visibility logic from the financial `reversal_threshold`, ensuring the "Revert Transition" button is always available for valid snapshots.
+2. Repurpose the `reversal_threshold` parameter as an active debt-capping mechanism ("Bomb Limit") to halt automatic surcharge generation when a contract's total debt exceeds the defined monetary limit.
+3. Verify the integration of the debt-cap in `cargos.php` to prevent the "snowball effect" of recursive surcharge generation.
+4. Update system documentation and PMU runbooks to accurately reflect the new business rule governing debt accumulation and forensic audit accessibility.
+
+</conversation_summaries>
+
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 7 May 2026, 8:56 am
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Specialized Tools**
+
+I'm making sure to prioritize the use of specialized tools, specifically `grep_search` and `list_dir`, instead of generic ones like `cat`, `grep`, or `ls` via bash. The focus is to avoid common bash pitfalls by leaning towards these optimized alternatives. This is leading to cleaner, more manageable workflows.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.553111972s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+## User Request
+
+dlcumenta en el .txt q despues de optimize-windows10.ps1 debe ir \optimize-windows10.ps1 o revert, y si requiere reinicios, tambien en esa seccion mueve el todo de monitor-ups.ps1 y lo de ocultar/desocultar letra drive F
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `setup-full.ps1`
+**Language:** powershell
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Specialized Tools**
+
+I'm making sure to prioritize the use of specialized tools, specifically `grep_search` and `list_dir`, instead of generic ones like `cat`, `grep`, or `ls` via bash. The focus is to avoid common bash pitfalls by leaning towards these optimized alternatives. This is leading to cleaner, more manageable workflows.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `instalacion.txt`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.491232630s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L59-129)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+==============================================================
+SECCION C: DETALLES DE INTEGRACION (GPO Y UPS)
+==============================================================
+Estas configuraciones garantizan la estabilidad del Host C.
+
+1. INICIO Y APAGADO NATIVO DE WINDOWS (GPO)
+   (Nota: setup-full.ps1 ya realiza esto, pero si necesitas
+   hacerlo manualmente, ejecuta `.\setup-gpo-scripts.ps1`).
+   
+   Windows 10 Pro ha sido configurado via Directivas de Grupo
+   (scripts.ini) para ejecutar `start-webapps.ps1` al arrancar, y
+   esperar a que `stop-webapps.ps1` termine ordenadamente al
+   apagar. Esto evita corrupciones en las tablas de MySQL.
+
+2. UPS Y PREVENCION DE APAGONES
+   El script `monitor-ups.ps1` debe estar en ejecucion para
+   detectar cortes de energia.
+   - OPCION A (USB): Si el UPS esta por USB, Windows lo detecta
+     como bateria. El script apagara el servidor tras X minutos
+     configurados en config.ps1.
+   - OPCION B (Ping): Si el UPS no tiene USB, el script hara ping
+     a la IP del router. Si falla, inicia el apagado.
+
+==============================================================
+SECCION D: EJECUCION MANUAL (SOLO SI NO SE USO SETUP-FULL)
+==============================================================
+Si estas instalando partes individuales del sistema y no usaste
+setup-full.ps1, puedes invocar los modulos individualmente:
+
+1. Crear Accesos Directos Manualmente:
+   powershell -ExecutionPolicy Bypass -File C:\aguav2-2026\scripts\setup-shortcuts.ps1
+
+   (Esto crea "Iniciar Servidor Web", "Detener Servidor Web" 
+   y "Estado del Servidor" en el Escritorio y Menu Inicio).
+
+2. Registrar en GPO Manualmente:
+   powershell -ExecutionPolicy Bypass -File C:\aguav2-2026\scripts\setup-gpo-scripts.ps1
+
+3. Pruebas y Monitoreo:
+   .\start-webapps.ps1
+   .\status-webapps.ps1   (Verifica procesos, RAM y colisiones de puerto)
+   .\stop-webapps.ps1
+
+==============================================================
+ESTRUCTURA FINAL DE ARCHIVOS ESPERADA
+==============================================================
+C:\aguav2-2026\
+├── scripts\
+│   ├── config.ps1              ← EDITA SOLO ESTE
+│   ├── start-webapps.ps1
+│   ├── stop-webapps.ps1
+│   ├── status-webapps.ps1      ← Muestra RAM, status y puertos bloqueados
+│   ├── monitor-ups.ps1
+│   ├── setup-shortcuts.ps1     
+│   ├── setup-kiosk-shortcut.ps1 ← Crea acceso directo app web y bloquea updates Chrome
+│   ├── setup-mysql-root.ps1    ← Configura pass root de BD
+│   ├── setup-full.ps1          ← Instala todo automaticamente
+│   ├── setup-gpo-scripts.ps1   ← Registra scripts en Tareas Programadas/GPO
+│   ├── shutdown-server.ps1     ← Realiza el backup y apaga el PC de forma segura (Autosolicita Admin)
+│   ├── optimize-windows10.ps1  ← Desactiva bloatware/telemetria para dejar el sistema ligero
+│   └── revert-optimize-windows10.ps1 ← Restaura los efectos visuales y telemetria de Windows
+
+Nota Importante sobre Permisos: 
+Todos los scripts deben ejecutarse con privilegios de Administrador. Scripts como `shutdown-server.ps1` cuentan con código de "auto-elevación" que solicitará la pantalla de permisos (UAC) automáticamente si un usuario estándar hace doble clic en ellos.
+└── logs\
+    └── fallo-*.txt             ← se generan si hay fallos
+
+==============================================================
+FUTURO / PENDIENTE:
+- Ocultar la unidad F: en el Explorador de Windows.
+```
+
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Specialized Tools**
+
+I'm focusing intently on using specialized tools instead of their generic counterparts. I'm actively integrating `grep_search` in place of `grep` and avoiding `cat` for file writing. I'm steering clear of `ls` and `cat` in bash when native function alternatives are available. The goal is to maximize efficiency and precision in every operation.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `instalacion.txt`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.000740061s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L127-131)</summary>
+
+**Path:** `Unknown file`
+
+```
+==============================================================
+FUTURO / PENDIENTE:
+- Ocultar la unidad F: en el Explorador de Windows.
+- Script revertir-setup.ps1 para deshacer configuraciones.
+
+```
+
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
 </details>
 
 ---
