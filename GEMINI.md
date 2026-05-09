@@ -64,6 +64,13 @@ Existen funcionalidades core que requieren especial atención para asegurar la c
 - Protocolo de Migración: `docs-dev/migration-aguav2/MIGRATION_PROTOCOL.md`
 - Checklist pase a producción: `docs-dev/migration-aguav2/host-c-setup/07_transferir_datos.md`
 
+## 🛡️ Automatización y Hardening Host C (2026-05-08)
+El entorno Windows 10 ha sido convertido en un Appliance Kiosko 100% automatizado:
+- **Agnóstico a Discos:** Todos los scripts y archivos de configuración (Apache/MySQL/PHP) heredan dinámicamente la unidad destino desde `config.ps1`.
+- **Auto-Arranque:** Tareas Programadas inician los servicios al logueo de sesión.
+- **Apagado Seguro:** El script `shutdown-server.ps1` fuerza un volcado físico en ZIP de la BD antes de apagar la máquina (evitando corrupciones).
+- **Kiosko Restringido:** El script `setup-full.ps1` crea una carpeta `aguav2` en el escritorio para la gestión técnica, y deja expuesto solo el Kiosko de Chrome y el botón de apagado para los operadores. Chrome está bloqueado vía Registro para evitar actualizaciones.
+
 > **⚠️ Filosofía de Uso**: Los scripts `Sync-*` y `Full-Pipeline-Sync` son **Herramientas de Migración**, no tareas recurrentes. Se ejecutan durante el desarrollo para estabilizar Host C. En producción (Go-Live) se ejecutan **una última vez** y luego se retiran. Host C opera autónomamente.
 
 > Ver tabla de comandos canónicos y comportamiento de flags en: `docs-dev/migration-aguav2/MIGRATION_PROTOCOL.md`
@@ -126,7 +133,7 @@ Validar integridad:
 bash docs-dev/ga-cl-ia/chatledger_validate.sh
 ```
 
-**Última actualización**: 2026-04-28
+**Última actualización**: 2026-05-08
 
 > [!IMPORTANT]
 > **Terminología de Sesión**:
