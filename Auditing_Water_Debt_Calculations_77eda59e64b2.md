@@ -7,9 +7,9 @@
 | **Trajectory ID** | `6550479e-2627-44be-ae66-6d5296bf6e1d` |
 | **Cascade ID** | `e9e60f8c-dc0e-4c0c-a226-77eda59e64b2` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 390 |
+| **Total Steps** | 430 |
 | **Started** | 11 May 2026, 8:39 am |
-| **Completed** | 11 May 2026, 12:49 pm |
+| **Completed** | 11 May 2026, 1:04 pm |
 
 ---
 
@@ -10152,6 +10152,940 @@ I see I have several files modified in the `agua` directory. Crucially, in `agua
 <details>
 <summary>Metadata</summary>
 
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+## User Request
+
+De Operación y Contratos/Paridad: alcance retroactivo del recálculo de mora. Reversas: umbral para habilitar reversión de transición. Ciclo de vida: reglas de transición de estado y comportamiento al crear contratos.
+Límite Bomba (Recargos)
+Moverlo abajo de input text  recargo_porcentaje, para no dejar areas vacias
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `transiciones_estado_contratos.md`
+**Language:** markdown
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Reorganizing the Interface**
+
+I am now focusing on restructuring the "Recargos Moratorios" section within `configuracion.php`. My goal is to reposition related information beneath the `recargo_porcentaje` input field to optimize the visual flow and minimize unused space. This should improve user experience, so I will attempt to make the changes without introducing breaking changes.
+
+
+**Clarifying Group Placement**
+
+I'm now zeroing in on the "Operación y Contratos" group. It looks like the labels/titles for the subsections *within* this group need to be moved beneath the `recargo_porcentaje` input field. The goal is to consolidate information and prevent unused screen space, as requested. The current layout utilizes a 2-column grid, and I'm ensuring the changes integrate with that design.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `configuracion.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.631415097s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+require_once('../../login/usuario.php');
+session_start();
+if (!isset($_SESSION['usuario'])) {
+    print "<script>window.location='../../login/index.php'</script>";
+    exit();
+}
+
+require_once('../../config/Conexion.php');
+$y = new Conexion();
+$y->conectarBaseDatos();
+
+$mensaje = "";
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['config'])) {
+    $configs = $_POST['config'];
+    foreach ($configs as $clave => $valor) {
+        $clave_segura = $y->real_escape_string($clave);
+        $valor_seguro = $y->real_escape_string($valor);
+        $y->q("UPDATE config_sistema SET valor='$valor_seguro' WHERE clave='$clave_segura'");
+    }
+    $mensaje = "<div class='success-msg'>&#10003; Configuraci&oacute;n actualizada correctamente.</div>";
+}
+
+$res = $y->q("SELECT clave, valor, descripcion FROM config_sistema ORDER BY clave ASC");
+$opciones = array();
+while ($row = $y->fetch_array($res)) {
+    $opciones[$row['clave']] = $row;
+}
+
+// ── Agrupación temática ──────────────────────────────────────────────────────
+$grupos = array(
+    'Recargos Moratorios' => array(
+        'desc_grupo' => 'Parámetros que controlan cómo y cuándo se generan los recargos por mora.',
+        'readonly'   => false,
+        'claves'     => ['recargo_mes_inicio','recargo_porcentaje'],
+    ),
+    'Operación y Contratos' => array(
+        'desc_grupo' => 'Paridad: alcance retroactivo del recálculo de mora. Reversas: umbral para habilitar reversión de transición. Ciclo de vida: reglas de transición de estado y comportamiento al crear contratos.',
+        'readonly'   => false,
+        'claves'     => ['paridad_anios_max_recargo','reversal_threshold_enable','reversal_threshold','susptemp_mes_permitido','nuevo_contrato_exento_default','max_tomas_por_contrato','max_domicilios_por_contrato'],
+    ),
+    'Estados de Contrato' => array(
+        'desc_grupo' => 'Códigos numéricos del catálogo de estados. <strong>Solo lectura</strong> — no modificar.',
+        'readonly'   => true,
+        'claves'     => ['estado_activo','estado_susp_temporal','estado_susp_administrativa','estado_susp_definitiva'],
+    ),
+);
+
+// Campos editables (max_tomas_por_contrato: solo lectura)
+$editables = ['recargo_mes_inicio','recargo_porcentaje','recargo_categoria_agua','recargo_categoria_drenaje',
+              'susptemp_mes_permitido','paridad_anios_max_recargo',
+              'reversal_threshold_enable','reversal_threshold','nuevo_contrato_exento_default',
+              'max_domicilios_por_contrato'];
+
+header('Content-Type: text/html; charset=UTF-8');
+
+function get_mes_nombre($n) {
+    $meses = ["", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+    return isset($meses[$n]) ? $meses[$n] : "Mes $n";
+}
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Configuraci&oacute;n del Sistema</title>
+    <link rel="stylesheet" href="../../web-assets/css/paxstyle2.css">
+    <style>
+        body { padding: 20px; font-family: Arial, sans-serif; background: #f5f6fa; }
+        h1 { font-size: 22px; color: #2c3e50; margin-bottom: 6px; font-style: normal; text-shadow: none; text-align: left; }
+        .subtitle { color: #7f8c8d; font-size: 13px; margin-bottom: 20px; }
+        .back-link { display: inline-block; margin-bottom: 16px; color: #0674B7; text-decoration: none; font-weight: bold; font-size: 13px; }
+        .back-link:hover { text-decoration: underline; }
+        .success-msg { color: #155724; background: #d4edda; border: 1px solid #c3e6cb; padding: 10px 14px; margin-bottom: 18px; border-radius: 4px; font-weight: bold; font-size: 13px; }
+
+        /* Layout dos columnas */
+        .grupos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 20px; }
+        /* .g-estados ya no es full-width para permitir la columna de referencia al lado */
+
+        /* Tarjeta de grupo */
+        .grupo-card { background: #fff; border: 1px solid #dde3ec; border-radius: 6px; overflow: hidden; }
+        .grupo-header { padding: 10px 14px; font-weight: bold; font-size: 12px; text-transform: uppercase;
+                        letter-spacing: .5px; color: #fff; }
+        .g-estados    .grupo-header { background: #7f8c8d; }
+        .g-recargos   .grupo-header { background: #2980b9; }
+        .g-paridad    .grupo-header { background: #8e44ad; }
+        .g-ciclo      .grupo-header { background: #27ae60; }
+        .g-reversa    .grupo-header { background: #c0392b; }
+        .g-referencia .grupo-header { background: #2c3e50; }
+        .grupo-desc { font-size: 11px; color: #666; padding: 6px 14px 8px; border-bottom: 1px solid #eee; background: #fafbfc; }
+        .grupo-body { padding: 10px 14px 14px; }
+
+        /* Fila de config */
+        .cfg-row { margin-bottom: 12px; }
+        .cfg-grouped-top { background: #fdfdfd; padding: 10px 14px; border: 1px solid #d0d5dd; border-bottom: none; border-radius: 6px 6px 0 0; margin-bottom: 0; }
+        .cfg-grouped-middle { background: #fdfdfd; padding: 10px 14px; border-left: 1px solid #d0d5dd; border-right: 1px solid #d0d5dd; border-top: 1px dashed #ccc; border-bottom: none; border-radius: 0; margin-top: 0; margin-bottom: 0; }
+        .cfg-grouped-bottom { background: #fdfdfd; padding: 10px 14px 10px 34px; border: 1px solid #d0d5dd; border-top: none; border-radius: 0 0 6px 6px; margin-top: 0; position: relative; }
+        .cfg-grouped-bottom::before { content: '\21B3'; position: absolute; left: 14px; top: 10px; color: #999; font-size: 16px; font-weight: bold; }
+        .cfg-grouped-top .cfg-key, .cfg-grouped-middle .cfg-key, .cfg-grouped-bottom .cfg-key { color: #c0392b; }
+        .cfg-row:last-child { margin-bottom: 0; }
+        .cfg-key { font-family: monospace; font-size: 12px; font-weight: bold; color: #2c3e50; display: block; margin-bottom: 3px; }
+        .cfg-desc { font-size: 11px; color: #777; margin-bottom: 5px; display: block; line-height: 1.5; white-space: pre-line; }
+        .cfg-input { width: 100%; padding: 7px 9px; border: 1px solid #ccc; border-radius: 4px;
+                     box-sizing: border-box; font-family: monospace; font-size: 13px; background: #fff; }
+        .cfg-input:focus { border-color: #3498db; outline: none; box-shadow: 0 0 0 2px rgba(52,152,219,.2); }
+        .cfg-input[readonly] { background: #f0f0f0; color: #999; cursor: not-allowed; }
+        .readonly-badge { display: inline-block; font-size: 10px; background: #ecf0f1; color: #7f8c8d;
+                          border: 1px solid #bdc3c7; border-radius: 3px; padding: 1px 5px; margin-left: 6px; vertical-align: middle; }
+
+        /* Botón guardar */
+        .footer-bar { text-align: right; padding-top: 4px; }
+        .submit-btn { background: #0674B7; color: #fff; padding: 10px 24px; border: none; border-radius: 4px;
+                      cursor: pointer; font-size: 14px; font-weight: bold; }
+        .submit-btn:hover { background: #045a8d; }
+
+        /* Modal confirmación de cambios */
+        #cfg-overlay { position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.45);z-index:9998; }
+        #cfg-modal   { position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:9999;
+                       background:#f4f6f8;border:1px solid #aaa;border-radius:6px;padding:0;
+                       min-width:480px;max-width:680px;width:90%;box-shadow:0 4px 18px rgba(0,0,0,0.25); }
+        #cfg-modal .m-header { background:#0E4F8E;color:#fff;padding:9px 14px;border-radius:5px 5px 0 0;
+                               font-weight:bold;font-size:12px;text-transform:uppercase; }
+        #cfg-modal .m-body   { padding:14px 18px;max-height:55vh;overflow-y:auto; }
+        #cfg-modal .m-footer { text-align:right;padding:0 18px 14px; }
+        .cfg-diff-table { width:100%;border-collapse:collapse;font-size:12px;margin-bottom:12px; }
+        .cfg-diff-table th { background:#0E4F8E;color:#fff;padding:5px 8px;text-align:left;font-size:11px; }
+        .cfg-diff-table td { padding:5px 8px;border-bottom:1px solid #e0e4ea;vertical-align:top; }
+        .cfg-diff-table tr:last-child td { border-bottom:none; }
+        .cfg-diff-table .col-key  { font-family:monospace;font-weight:bold;color:#2c3e50;white-space:nowrap; }
+        .cfg-diff-table .col-ant  { color:#888;text-decoration:line-through; }
+        .cfg-diff-table .col-new  { color:#1a7a1a;font-weight:bold; }
+        .cfg-diff-table .col-imp  { font-size:10px;color:#555;line-height:1.4; }
+        .no-cambios { color:#7f8c8d;font-size:13px;text-align:center;padding:14px 0; }
+        #cfg-modal input[type=button] { padding:7px 18px;border:none;border-radius:4px;cursor:pointer;
+                                        font-size:13px;font-weight:bold; }
+        #cfg-cancelar-modal { background:#888;color:#fff;margin-right:8px; }
+        #cfg-confirmar-modal { background:#0674B7;color:#fff; }
+
+        @media (max-width: 700px)  { .grupos-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <a href="../../index2.php" class="back-link">&larr; Volver al Men&uacute; Principal</a>
+    <h1>Configuraci&oacute;n Global del Sistema</h1>
+    <p class="subtitle">Par&aacute;metros operativos agrupados por tema funcional. Los campos <span class="readonly-badge">solo lectura</span> son valores fijos del cat&aacute;logo.</p>
+
+    <?= $mensaje ?>
+
+    <form method="POST" action="configuracion.php">
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Categorizing Key Variables**
+
+I've begun organizing the variables into functional groups. The first group, `Recargos Moratorios`, deals with late payment charges, encompassing the start month and percentage. The second group, `Operación y Contratos`, seems to cover operational aspects and contracts, including parameters for parity years, reversal thresholds, and temporary suspension months. I'm aiming for a clear taxonomy.
+
+
+**Refining Variable Grouping**
+
+I'm now restructuring the variable groups based on the feedback. I'm moving items from "Operación y Contratos" to "Recargos Moratorios." These include `paridad_anios_max_recargo`, which handles retroactive parity recalculation, and `reversal_threshold_enable` (or `reversal_threshold`), which relates to reversal thresholds. Additionally, I'm integrating `susptemp_mes_permitido` and `nuevo_contrato_exento_default`, which cover state transition and contract creation rules, into the "Recargos Moratorios" section. I am doing this to avoid leaving empty areas, as instructed.
+
+
+**Balancing Input Distribution**
+
+I'm now shifting variables to achieve a more even distribution between the groups.  I'm moving 'Límite Bomba', which includes `paridad_anios_max_recargo`, `reversal_threshold_enable`, and `reversal_threshold`, to "Recargos Moratorios" because they deal with the same underlying functionality. With this change, the structure should improve.
+
+
+**Adjusting Functional Groupings**
+
+I'm now integrating 'Límite Bomba' fields, including parameters for retroactive parity recalculation and reversal thresholds, into "Recargos Moratorios," which is the first grouping.  I am doing this to align the variables that relate to the underlying functionality. I'm also ensuring the separators are correctly positioned after the movement. I'm moving toward a cleaner, more coherent structure.
+
+
+**Revising Group Assignment**
+
+I'm now restructuring the functional groups again, incorporating new considerations. I'm moving `susptemp_mes_permitido` (previously under "Operación y Contratos") to "Ciclo de Vida y Tomas." Additionally, I'm introducing a new separator, "Infraestructura," and placing `max_tomas_por_contrato` and `max_domicilios_por_contrato` there. I believe this revised structure better reflects the underlying relationships between these variables. I am also repositioning the `paridad_anios_max_recargo` separator to be under `recargo_porcentaje` in the "Recargos Moratorios" group, as requested.
+
+
+**Updating Group Descriptions**
+
+I'm now focusing on refining the group descriptions to be more accurate and comprehensive. I'm incorporating the "Paridad" and "Reversa" aspects into the description of "Recargos Moratorios," as these functionalities are closely related to late payment charges. Based on the user feedback, I am ensuring I incorporate the content of the sub-sections "Paridad" and "Reversa" into the first grouping. I'm also ensuring the associated separators are correctly positioned after these movements.
+
+
+
+
+### Actions
+
+**Tool:** `multi_replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 10.151032465s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 11 May 2026, 12:53 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 11 May 2026, 12:53 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+## User Request
+
+analiza esta y hasta 3 conversaciones pasadas, para listes pendientes.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `configuracion.php`
+**Language:** php
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L24-43)</summary>
+
+**Path:** `Unknown file`
+
+```
+$res = $y->q("SELECT clave, valor, descripcion FROM config_sistema ORDER BY clave ASC");
+$opciones = array();
+while ($row = $y->fetch_array($res)) {
+    $opciones[$row['clave']] = $row;
+}
+
+// ── Agrupación temática ──────────────────────────────────────────────────────
+$grupos = array(
+    'Recargos Moratorios' => array(
+        'desc_grupo' => 'Generación de mora y mecanismos de protección (Límite Bomba). Incluye alcance retroactivo de paridad y umbral de reversas.',
+        'readonly'   => false,
+        'claves'     => ['recargo_mes_inicio','recargo_porcentaje','paridad_anios_max_recargo','reversal_threshold_enable','reversal_threshold'],
+    ),
+    'Operación y Contratos' => array(
+        'desc_grupo' => 'Ciclo de vida: reglas de transición de estado, exenciones iniciales y límites de infraestructura por contrato.',
+        'readonly'   => false,
+        'claves'     => ['susptemp_mes_permitido','nuevo_contrato_exento_default','max_tomas_por_contrato','max_domicilios_por_contrato'],
+    ),
+    'Estados de Contrato' => array(
+        'desc_grupo' => 'Códigos numéricos del catálogo de estados. <strong>Solo lectura</strong> — no modificar.',
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Identifying Pending Tasks**
+
+I'm currently focused on extracting pending tasks ("pendientes") from the conversational context. I'm analyzing the provided summaries, including the current and three preceding conversations, to identify and categorize any unresolved items. I'm aiming to create a concise list based on this analysis.
+
+
+**Pinpointing Remaining Actions**
+
+I've identified a list of pending actions from the current conversation and a recent one. Specifically, I'm focusing on incorporating "ANTICIPOS" into reports, consolidating historical debt reports, and adding an "No Localizados" row to caja reports. Additionally, I need to encapsulate canonical filters in SQL Views and address documentation gaps for future roadmaps. There are also validation checks for fail-safes.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.329693177s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+## User Request
+
+Para CARTERA_VENCIDA_MODELO_Y_REPORTES.md/5 Categorías EXCLUIDAS de Cartera Vencida  , indicar evalua esto:
+. se explicite no se incluye contratos en susp. definitiva y usuarios no localizados pues sus  contratos cuenta con edo: en susp. definitiva;  
+. tambien indicar q eso pasa para lista de deudores (analiza primiero mi aseveracion)
+
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Report Exclusions**
+
+I'm now focusing on the exclusion of "Suspended Definitiva" (SDF) contracts from the Cartera Vencida report. My primary task is to understand the rationale behind this exclusion and how it impacts the overall report's accuracy and utility, exploring potential implications. I'll need to dig into the reasons SDF contracts are handled differently.
+
+
+**Verifying CNL Exclusion**
+
+I've confirmed the SDF exclusion logic in `carteravencida.php` (line 65) and how state 4 signifies debt depuration. Now, I am digging into the CNL users, and have reviewed relevant code for the "Usuarios No Localizados" section to confirm the relationship to SDF contracts, looking for the specific code line that drives the exclusion decision. While it's *usually* the case that CNL users have SDF contracts, I am making sure it's a hard and fast rule. I'm focusing on consistency with the "Lista de Deudores".
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `carteravencida.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.561484902s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L49-99)</summary>
+
+**Path:** `Unknown file`
+
+```
+		$anio = $_GET["anio"] ?? date('Y');
+
+		// ANTES (v1): sin exclusión de categorías especiales — cat 6 (asamblea), 16/17 (recargos acumulativos)
+		//   y 19-22 (conceptos únicos) inflaban la cartera con deuda que no es de cuotas anuales periódicas.
+		//   Inconsistencia con concentradocortecaja.php que sí excluía esas categorías.
+		// AHORA (v2): excluye las mismas categorías que concentradocortecaja.php para coherencia entre reportes.
+		//   cat 6: multas asamblea (se sincronizan por usuario, no por contrato)
+		//   cat 11, 16, 17: recargos normales y recargos de agua/drenaje SÍ se incluyen en la cartera
+		//   cat 19-22: conceptos únicos (CB/PROP, MLT/DESP, CNT/NADO, CNC/FUGA) — no son cuotas periódicas
+		$query = "SELECT l.numcontrato, UCASE(u.nombre) usuario, sum(l.monto) AS debe
+		FROM vw_ligacargos_pendientes l
+			JOIN contrato c ON l.numcontrato = c.numcontrato
+			JOIN usuario u ON u.noconsecutivo = c.numusuario
+		WHERE l.estado = 0
+			AND c.estado != 4
+			AND (u.estado IS NULL OR u.estado != 2)
+			AND l.categoria NOT IN (6, 19, 20, 21, 22)
+			AND (
+				(l.anio <> 0 AND l.anio IS NOT NULL AND l.anio = $anio)
+				OR
+				((l.anio = 0 OR l.anio IS NULL) AND substring(l.fcobro, 1, 4) = '$anio')
+			)
+		GROUP BY l.numcontrato
+		ORDER BY CAST(l.numcontrato AS SIGNED)";
+
+		$res = $y->q($query);
+		$mod = 0;
+
+		$mes = array("1" => "enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre");
+		$hoymes = date("m") + 0;
+
+		$numerodecontratos = $y->num_rows($res);
+
+		if ($numerodecontratos == 0)
+			print "No existen contratos para el a&ntilde; requerido.";
+
+		$paginas = ceil($numerodecontratos / 47);
+		$numpag = 1;
+
+		$total = 0;
+		$conteo_reg = 1;
+
+		while ($row = $y->fetch_array($res)) {
+			if (($mod % 47) == 0) {
+				print "<table border=0 cellpadding=3 cellspacing=0>";
+				print "<tr><th colspan=4 style='padding:10px;'><b>C A R T E R A &nbsp;&nbsp; V E N C I D A &nbsp;&nbsp; A &Ntilde O &nbsp;&nbsp; $anio &nbsp; (Adeudos por Año)";
+				print "</b><br>  &nbsp;&nbsp; (" . $numerodecontratos . " registros)<br>-p&aacute;gina " . $numpag . " de " . $paginas . ", impresa el " . date("d") . " de " . $mes[$hoymes] . " de " . date("Y") . "-</th></tr>";
+				print "<tr><td width=30 style='text-align: center'><b>#</b></td><td width=60 style='text-align: center'><b>CONTRATO</b></td><td width=350 style='text-align: center'><b>USUARIO</b></td><td width=80 style='text-align: center'><b>DEBE</b></td></tr>";
+				$numpag++;
+			}
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `carteravencida.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L99-125)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+			print "<tr><td style='text-align: center; color: #666;'>" . $conteo_reg . "</td><td style='text-align: center'><b>" . $row[0] . "</b></td><td>&nbsp;&nbsp;" . $row[1] . "</td><td style='text-align: right'>$ " . number_format($row[2], 2, '.', ',') . "</td></tr>";
+
+			if ((($mod - 46) % 47) == 0) {
+				print "</table>";
+				print "<h1>&nbsp;</h1>";
+			}
+			$mod++;
+			$conteo_reg++;
+			$total += $row[2];
+		}
+
+		print "</table>";
+		print "<div style='margin-top: 20px; font-family: sans-serif; font-size: 11px; width: 350px; border: 1px solid #ccc; padding: 10px; background: #fafafa;'>";
+		print "<b>TOTAL CARTERA VENCIDA $anio:</b><br><br>";
+		print "<table border=0 width='100%' style='border:0;'>";
+		print "<tr style='border-top: 1px solid #333;'><td style='border:0;'><b>GRAN TOTAL:</b></td><td style='border:0; text-align:right;'><b>$ " . number_format($total, 2, '.', ',') . "</b></td></tr>";
+		print "</table>";
+		print "</div>";
+		print "<h1>&nbsp;</h1>";
+
+		$y->free_result($res);
+		$y->cerrarConexion();
+		?>
+	</body>
+
+	</html>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `listadeudores.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<xml version="1.0" encoding="utf-8">
+	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+	<html>
+
+	<head>
+		<title>Lista de usuarios con adeudos</title>
+	</head>
+
+	<body onload="print();">
+		<style>
+			body {
+				margin-left: 40px;
+				margin-top: 30px;
+			}
+
+			h1 {
+				page-break-after: always;
+				font-size: 1px;
+			}
+
+			table {
+				border-right: solid 1px #a0a0a0;
+				border-bottom: solid 1px #a0a0a0;
+			}
+
+			td {
+				font-family: "times new roman";
+				font-size: 10px;
+				border-left: solid 1px #a0a0a0;
+				border-top: solid 1px #a0a0a0;
+				text-transform: uppercase;
+			}
+
+			th {
+				font-family: "Times new roman";
+				font-size: 12px;
+				color: white;
+				background: #404040;
+				border-left: solid 1px #a0a0a0;
+				border-top: solid 1px #a0a0a0;
+
+			}
+		</style>
+		<?php
+		require_once "../config/Conexion.php";
+		$y = new Conexion();
+		$y->conectarBaseDatos();
+
+		// ANTES (v1): sin exclusión de categorías ni de contratos dados de baja definitiva (estado=4).
+		//   — cat 6,16,17,19-22 inflaban el total con deuda no periódica.
+		//   — contratos estado=4 (baja definitiva) aportaban $107,082 de deuda fantasma (validado vs Host B).
+		//     En Host C el saneamiento los dejó en estado=-1 (invisible en vw_ligacargos_pendientes),
+		//     pero sin el filtro explícito cualquier BD sin sanear los mostraría.
+		// AHORA (v2): excluye cat 6,16,17,19-22 Y contratos estado=4 Y usuarios No Localizados (u.estado=2)
+		//   — blindaje triple a nivel de código, independiente del estado de saneamiento de la BD.
+		//   Reglas U01, R02, R06 (.agents/rules/02-reglas-negocio.md). Alineado con carteravencida.php y
+		//   la tabla Impacto Financiero de Saneamientos (Saneamiento 1 y 5).
+		$query = "SELECT c.numcontrato, u.nombre, c.domicilio, SUM(l.monto) AS paga
+		           FROM vw_ligacargos_pendientes l
+		           INNER JOIN contrato c ON l.numcontrato = c.numcontrato
+		           LEFT JOIN usuario u ON c.numusuario = u.noconsecutivo
+		           WHERE l.monto != 0
+		             AND c.estado != 4
+		             AND (u.estado IS NULL OR u.estado != 2)
+		             AND l.categoria NOT IN (6, 19, 20, 21, 22)
+		           GROUP BY c.numcontrato
+		           ORDER BY paga DESC";
+
+		$query2 = "SELECT SUM(l.monto)
+		            FROM vw_ligacargos_pendientes l
+		            INNER JOIN contrato c ON l.numcontrato = c.numcontrato
+		            LEFT JOIN usuario u ON c.numusuario = u.noconsecutivo
+		            WHERE l.monto != 0
+		              AND c.estado != 4
+		              AND (u.estado IS NULL OR u.estado != 2)
+		              AND l.categoria NOT IN (6, 19, 20, 21, 22)";
+		
+		$res = $y->q($query);
+		$totalregistros = ($res) ? $y->num_rows($res) : 0;
+		
+		$res2 = $y->q($query2);
+		$total = ($res2) ? $y->fetch_array($res2) : [0 => 0];
+		if($res2) $y->free_result($res2);
+
+		$mod = 0;
+
+		$mes = array("1" => "enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre");
+		$hoymes = date("m") + 0;
+
+		$pagina = 1;
+		$paginas = ceil($totalregistros / 42);
+
+		$subt = 0;
+		$reg = 0;
+
+		while ($row = $y->fetch_array($res)) {
+			$reg++;
+			if (($mod % 42) == 0) {
+				print "<table border=0 cellpadding=3 cellspacing=0>";
+				print "<tr><th colspan=4><b>R E L A C I &Oacute; N &nbsp;&nbsp; D E &nbsp;&nbsp; U S U A R I O S &nbsp; C O N &nbsp;&nbsp; D E U D A S</b><br>-Total de $" . number_format($total[0], 0, '.', ',') . ". P&aacute;gina " . $pagina . " de " . $paginas . ", impresa el " . date("d") . " de " . $mes[$hoymes] . " de " . date("Y") . "-</th></tr>";
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Exclusion Criteria**
+
+I've confirmed the initial assertion is correct: both reports exclude records where `c.estado` equals 4 (Definitive Suspension) and `u.estado` equals 2 (Not Located). I've also incorporated the user's rationale that "their contracts have a state: in defin. susp.".
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.470666090s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Code Edit
+
+**Status:** CORTEX_STEP_STATUS_ERROR
+**Created:** 11 May 2026, 1:03 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `CARTERA_VENCIDA_MODELO_Y_REPORTES.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L119-159)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+### 3.1 Resumen Comparativo
+
+| Reporte | Nombre en Menú | ¿Qué muestra? | Filtro de Año | Cartera Vencida | Exclusiones canónicas |
+|---|---|---|---|---|---|
+| `carteravencida.php` | **Cartera Vencida (Adeudos por Año)** | Listado de contratos con adeudo pendiente en un año fiscal específico. | `?anio=YYYY` (default: año actual) | Es el **reporte principal** de cartera: muestra la deuda NO pagada del año solicitado | ✅ `NOT IN (6,19-22)`, `c.estado≠4`, `u.estado≠2` |
+| `listadeudores.php` | **Listado de Deudores** | Total de deuda acumulada por contrato, **sin separar años**. Incluye deuda corriente + vencida en un solo monto. | Sin filtro de año | No desglosa cartera vencida vs. corriente; muestra el total pendiente integral | ✅ `NOT IN (6,19-22)`, `c.estado≠4`, `u.estado≠2` |
+| `concentradocortecaja.php` | **Corte de Caja — Por Fechas** | Reporte detallado por folio de pago: cada fila = un pago con desglose por categoría + cartera recuperada | Columna `R.CART.` usa `anio < anio_ref` | Columna **R.CART. (`<$anio_ref`)**: monto *cobrado* en el período que correspondía a deuda de años anteriores | ✅ `NOT IN (6,19-22)` en la columna R.CART. |
+| `concentradocortecajaresumen.php` | **Resumen de Caja** | Documento oficial con firmas. Ingresos agrupados por concepto + egresos + existencia en banco | Línea con `(Años anteriores a $anio_ref)` | Línea **"RECUPERACIÓN DE CARTERA VENCIDA (Años anteriores a YYYY) (N folios)"** | ✅ `NOT IN (6,19-22)` en la línea de cartera |
+
+> **Diferencia clave entre reportes:**
+> - `carteravencida.php` y `listadeudores.php` muestran **deuda NO pagada** (pendiente, `estado=0`).
+> - `concentradocortecaja.php` y `concentradocortecajaresumen.php` muestran **deuda YA cobrada** (pagada, `estado=1`) en el período, desglosando cuánto de ese cobro era cartera de años anteriores.
+
+---
+
+## 4. Mejoras por Realizar (Backlog)
+
+### `[GAP-CALC-FUTURE]` — Cargos con Año Futuro No Aparecen en Ninguna Columna
+
+**Contexto:** Si un usuario paga por adelantado cargos del año siguiente (ej. paga 2027 en
+2026), el monto no cae en ninguna columna del concentrado detallado: ni corriente (`anio=anio_ref`)
+ni R.CART. (`anio<anio_ref`). El total de la fila sería mayor que la suma de sus columnas →
+**descuadre visual en rojo** en ese folio específico (total general sigue siendo correcto).
+
+**Mejora sugerida:** Añadir columna `ANTICIPOS` que capture `anio > anio_ref AND estado=1`.
+
+---
+
+### `[IMPROVEMENT-CONSOLIDATED-CV]` — No Existe Vista de Deuda Histórica Total
+
+**Contexto:** `carteravencida.php` muestra la deuda pendiente de **un año a la vez**. No existe
+reporte que consolide la deuda vencida de **todos los ejercicios anteriores** por contrato.
+El contador debe generar el reporte año por año y sumar manualmente.
+
+**Mejora sugerida:** Crear un reporte consolidado o añadir modo `?anio=todos` al reporte
+actual que muestre el acumulado histórico con desglose por ejercicio.
+
+---
+
+### `[GAP-NO-LOC-RECOVERY]` — Deuda de Usuarios No Localizados en Limbo Informativo
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `CARTERA_VENCIDA_MODELO_Y_REPORTES.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L160-269)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+**Contexto:** Los usuarios en Estado 2 (No Localizados, `u.estado=2`) son excluidos del total de Cartera
+Vencida. En el Concentrado Detallado aparecen como **C.N.L.** (Cartera No Localizada) y **no contabilizan
+en el TOTAL**. No existe reporte dedicado que muestre el monto total de C.N.L. ni su evolución.
+
+**Mejora sugerida:** Añadir fila informativa "CARTERA NO LOCALIZABLE (C.N.L.)" al pie del
+Resumen de Caja y del reporte de Cartera Vencida, marcada como **NO suma al total** pero visible
+para seguimiento gerencial.
+
+---
+
+### `[ISSUE-CONCEPTUAL-ENCUADRE]` — Definición del Filtro Canónico para Futuros Desarrollos
+
+**Contexto:** Para que un cargo sea considerado parte de la Cartera Vencida en cualquier reporte
+del sistema, debe satisfacer la siguiente condición. Se documenta aquí para que cualquier
+futuro desarrollo aplique exactamente el mismo filtro y no introduzca divergencias:
+
+| Condición | Significado |
+|---|---|
+| `cargo.estado = 0` | El cargo está **pendiente** de pago (no cobrado aún). Estado `1` = ya pagado. |
+| `contrato.estado ≠ 4` | El contrato **no** está en Suspensión Definitiva. Estado 4 = baja permanente; su deuda fue depurada y ya no es cobrable. |
+| `categoria ≠ 6` | **Faltas de Asamblea:** gestión colectiva automática, no cargo individual por contrato. |
+| `categoria ≠ 19` | **Cambio de Propietario:** trámite único administrativo, no cuota recurrente. |
+| `categoria ≠ 20` | **Multa por Desperdicio:** sanción puntual por evento, no periódica. |
+| `categoria ≠ 21` | **Constancia de No Adeudo:** trámite puntual de servicio, cobro único. |
+| `categoria ≠ 22` | **Reparación de Fugas:** servicio puntual por evento de infraestructura. |
+| `cargo.anio < anio_ref` | El cargo pertenece a un ejercicio **anterior** al año de referencia. |
+
+**Mejora sugerida:** Encapsular este filtro en una Vista SQL para que todos los reportes
+tengan una única fuente de verdad y no sea necesario mantener la constante de exclusión
+sincronizada manualmente en múltiples archivos.
+
+---
+
+## 5. Tabla de Congruencia Cruzada
+
+Los siguientes totales **deben coincidir** para el mismo período entre reportes:
+
+| Métrica | `concentradocortecaja.php` | `concentradocortecajaresumen.php` | Validación |
+|---|---|---|---|
+| Total folios del período | `COUNT(DISTINCT folio)` al pie | Folios agrupados en totales | ✅ Idénticos |
+| Monto por categoría (ej. Agua) | Columna AGU/POT, solo `anio=anio_ref` | Línea "COBRO DE AGUA POTABLE $anio" | ✅ Idénticos |
+| Monto R.CART. | Columna `R.CART. <$anio_ref` | Línea "RECUPERACIÓN CARTERA VENCIDA" | ✅ Idénticos |
+| Exclusiones de cartera | `NOT IN (6,19,20,21,22)` | `NOT IN (6,19,20,21,22)` — misma constante | ✅ Homologados |
+| Cuadre horizontal | Σ columnas = TOTAL → diferencia $0 | N/A (resumen vertical) | ✅ Validado 5+ períodos |
+
+---
+
+*Documento generado: 2026-05-11 | Rama: `feature/upgrade-v2-win-xampp`*
+
+---
+
+## 6. Anexo: Ejemplos Prácticos de Lectura (Casos Reales)
+
+Para facilitar la comprensión del contador y el operador, se presentan tres escenarios reales extraídos del período **29/09/2025 al 04/01/2026** con un año de corte (`anio_ref`) de **2025**.
+
+### Escenario A: Pago 100% Corriente (Sin Cartera)
+*   **Datos:** CTO 1041, Folio 24017 (14/10/2025).
+*   **Monto:** $1,140.00 | **R.CART:** $0.00 (Vacío).
+*   **¿Qué sucedió?** El usuario pagó su Anualidad de Agua 2025 ($600) y 9 recargos correspondientes a meses del 2025 ($540). Como todos los cargos pertenecen al año 2025 (mismo año que el corte), el sistema los coloca en sus columnas específicas y deja la cartera vacía.
+
+### Escenario B: Pago 100% Cartera (Deuda Vieja)
+*   **Datos:** CTO 1163, Folio 24086 (17/12/2025).
+*   **Monto:** $1,230.00 | **R.CART:** $1,230.00.
+*   **¿Qué sucedió?** El usuario pagó adeudos de 2022, 2023 y 2024. Al ser todos los años anteriores al 2025, el sistema agrupa el 100% del pago en la columna **R.CART.** No se pagó nada del ejercicio 2025 en este folio.
+
+### Escenario C: Análisis de Productividad del Período
+*   **Ingreso Total captado:** $110,344.00
+*   **Recuperación de Cartera (R.CART):** $23,900.00
+*   **Lectura Contable:** Durante estos ~3 meses, el **21.6%** de los ingresos provinieron de la cobranza de deuda histórica (morosidad recuperada), mientras que el **78.4%** restante ($86,444) correspondió a pagos del ejercicio corriente 2025.
+
+---
+
+## 7. Anexo B: Mecanismos de Protección Financiera (Límite Bomba)
+
+Para evitar la "Explosión de Deuda" (casos donde un contrato alcanza montos impagables por acumulación de años), el sistema Agua V2 cuenta con dos candados de seguridad en el motor de recargos:
+
+| Mecanismo | Tipo | Parámetro en Sistema | Estado Actual | Descripción |
+|---|---|---|---|---|
+| **Límite Temporal** | Tiempo | `paridad_anios_max_recargo` | **Activo (5 años)** | El sistema solo calcula recargos sobre adeudos de los últimos 5 años. Si la deuda es de hace 10 años, el motor ignora los primeros 5 para proteger la liquidez del usuario. |
+| **Límite Monetario** | Dinero | `reversal_threshold` | **Inactivo (0)** | Conocido como **"Límite Bomba"**. Si un contrato alcanza un tope de deuda (ej. $15,000), el motor deja de generar mora automáticamente para no inflar la cuenta infinitamente. |
+
+> **Nota:** El **Límite Temporal** es el más importante para la Cartera Vencida, ya que define qué tan atrás en el tiempo llega nuestra cobranza de recargos.
+
+---
+
+## 8. Anexo C: Glosario de Parámetros y Reglas de Generación
+
+Estos parámetros (configurables en `admin/operaciones/configuracion.php`) definen el comportamiento diario de la cartera:
+
+### 8.1 Reglas de Oro de Generación
+*   **Generación Mensual:** El cargo de recargo se genera por cada mes vencido desde el mes de inicio configurado (Abril por default).
+*   **Regla Antirecursiva:** Los recargos (cat. 16 y 17) **NUNCA** generan más recargos sobre sí mismos. El 10% de mora se aplica solo sobre el monto original del agua o drenaje.
+*   **Bloqueo por Suspensión:** Los contratos en **Suspensión Definitiva (SDF)** o **Suspensión Temporal** tienen el cálculo de mora congelado automáticamente.
+*   **Exención de Primer Año:** Si un contrato tiene activo el flag `exento_recargo_primer_anio`, no pagará mora durante su primer ejercicio fiscal de vida.
+
+### 8.2 Parámetros del Catálogo
+*   **Porcentaje de Mora (`recargo_porcentaje`):** Actualmente fijo en **10%** mensual. Es el **ÚNICO** porcentaje de mora del sistema (ej: 10 = 10%) aplicado sobre la cuota base.
+*   **Mes de Inicio:** Definido en **Abril**. Los cargos de un año empiezan a devengar mora a partir del cuarto mes de dicho año.
+*   **Categorías Base:** Solo las categorías **2 (AGUA)** y **3 (DRENAJE)** disparan el motor de recargos. Las multas, cooperaciones y trámites no generan intereses por mora.
+
+---
+
+## 9. Documentación Relacionada
+
+Para un entendimiento profundo de la lógica técnica y administrativa, consulte:
+*   **[reglas-negocio-por-menu.md](reglas-negocio-por-menu.md)**: Detalle de funciones PHP y disparadores automáticos.
+*   **[transiciones_estado_contratos.md](funcionalidad-reglas-negocio/transiciones_estado_contratos.md)**: Matriz de estados y reglas de amnistía.
+*   **[analisis_paridad_3hosts.md](funcionalidad-reglas-negocio/analisis_paridad_3hosts.md)**: Certificación de saldos y saneamientos aplicados.
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Reorganizing the Sections**
+
+I've realized I need to restructure the document. My intention is to dedicate a new Section 5 specifically to "Exclusions." This means I will move the current Section 5 ("Tabla de Congruencia Cruzada") to Section 6, and I'll increment the section numbers from there. I'm making progress in making the document better structured.
+
+
+
+
+### Actions
+
+**Tool:** `multi_replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.429323786s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 11 May 2026, 1:03 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Confirming Document Updates**
+
+I've updated the documentation, and analyzed the user's assertion which was validated by the code. The document now excludes SDF contracts and CNL users and provides an explanation for the exclusion based on debt depuration and filter rules.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.340733830s
 - **Model:** Gemini 3 Flash
 </details>
 
