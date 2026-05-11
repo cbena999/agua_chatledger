@@ -7,8 +7,9 @@
 | **Trajectory ID** | `6550479e-2627-44be-ae66-6d5296bf6e1d` |
 | **Cascade ID** | `e9e60f8c-dc0e-4c0c-a226-77eda59e64b2` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 223 |
+| **Total Steps** | 292 |
 | **Started** | 11 May 2026, 8:39 am |
+| **Completed** | 11 May 2026, 12:32 pm |
 
 ---
 
@@ -5695,8 +5696,2007 @@ Goals:
 
 ### Terminal Command Execution
 
-**Status:** CORTEX_STEP_STATUS_WAITING
+**Status:** Completed
 **Created:** 11 May 2026, 12:22 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 11 May 2026, 12:24 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing File Structure**
+
+I'm currently focused on file structure. I've noted `GEMINI.md`'s symlink nature, pointing to a chatledger directory. Also, I've observed `.agents/rules/02-reglas-negocio.md` is a regular file. Rule 08 suggests potential symlinks for all agent context, which I'm now exploring.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.510623993s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 11 May 2026, 12:24 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Investigating File Changes**
+
+I'm currently looking into a suspected modification of `.agents/rules/02-reglas-negocio.md`. I realize I used `replace_file_content`, which suggests the file content was directly altered. Now, I suspect the file could be a symlink and that the changes might be to the target. I'll run `ls -l` on the file to get confirmation.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.098787124s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 11 May 2026, 12:24 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 11 May 2026, 12:24 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 11 May 2026, 12:24 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Mapping File Paths**
+
+I'm currently working through a file path mapping. I've established an initial pattern involving moving files from a root directory, to a hidden chatledger directory, then to a specified GitHub location. I'm focusing on the translation of `GEMINI.md` and `02-reglas-negocio.md` through these stages.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.308191816s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 11 May 2026, 12:24 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Addressing the Pre-commit Hook**
+
+I'm currently dealing with a blocked commit. A pre-commit hook is preventing the update due to an integrity check failure related to `mcp_config.json`. The error message specifically flags a divergence between `mcp_config.json` and `.mcp.json`. The action item is clear: I need to synchronize these two files to proceed.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `mcp_config.json`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.869990289s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+{
+  "mcpServers": {
+    "bdawahost-a": {
+      "command": "docker",
+      "args": [
+        "exec",
+        "-i",
+        "context7-mcp-mysql",
+        "npx",
+        "-y",
+        "@f4ww4z/mcp-mysql-server",
+        "mysql://root:comite_2026@127.0.0.1:3306/awa"
+      ],
+      "env": {
+        "DOCKER_HOST": "unix:///var/run/docker.sock"
+      }
+    },
+    "bdawahost-b": {
+      "command": "docker",
+      "args": [
+        "exec",
+        "-i",
+        "context7-mcp-mysql",
+        "npx",
+        "-y",
+        "@f4ww4z/mcp-mysql-server",
+        "mysql://root:sdrastbuy@192.168.0.116:3306/awa"
+      ],
+      "env": {
+        "DOCKER_HOST": "unix:///var/run/docker.sock"
+      }
+    },
+    "bdawahost-c": {
+      "command": "docker",
+      "args": [
+        "exec",
+        "-i",
+        "context7-mcp-mysql",
+        "npx",
+        "-y",
+        "@f4ww4z/mcp-mysql-server",
+        "mysql://root:comite_2026@192.168.0.115:7002/awa"
+      ],
+      "env": {
+        "DOCKER_HOST": "unix:///var/run/docker.sock"
+      }
+    }
+  }
+}
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Resolving Network Discrepancy**
+
+I've identified a network configuration inconsistency between `mcp_config.json` and `.mcp.json` regarding `bdawahost-c`. The former holds `192.168.0.115` and the latter now reflects `192.168.1.128`. I've determined that the user updated the wrong file. I will update `/opt/lampp/ht`.
+
+
+
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.312418828s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 11 May 2026, 12:24 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 11 May 2026, 12:25 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Pushing Changes to Agua**
+
+I've successfully committed the changes in `agua`. My next task is to commit and push the corresponding updates in `agua_chatledger`. Given that files modified in `agua` are symlinks to `agua_chatledger`, the next commit is important for version synchronization between the repos.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.497493345s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Execution Error
+
+**Status:** Completed
+**Created:** 11 May 2026, 12:25 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `07-git-workflow.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# Regla 07: Control de Versiones (Git/GitHub)
+
+Esta regla define el flujo de trabajo en el repositorio oficial de **Agua**.
+Válida para **Claude Code** y **Google Antigravity/Gemini** por igual.
+
+---
+
+## Repositorio Oficial
+
+- **URL**: `https://github.com/cbena999/aguaclmhj.git`
+- **Usuario GH**: `cbena999`
+
+---
+
+## Repositorio de Historial (ChatLedger)
+
+Almacena el Ground Truth de agentes IA y logs de conversaciones, independiente del código fuente.
+
+- **Ruta Local**: `/home/carlos/GitHub/agua_chatledger/`
+- **URL Remoto**: `https://github.com/cbena999/agua_chatledger.git`
+- **Symlink en App**: `.chatledger` → `/home/carlos/GitHub/agua_chatledger/`
+- **Rama Git**: `master`
+
+```bash
+# Subir cambios al ChatLedger (cuando se indique):
+cd /home/carlos/GitHub/agua_chatledger
+git add -A
+git commit -m "Sync: <descripción breve>"
+git push origin master
+```
+
+---
+
+## Gestión de Ramas
+
+| Rama | Propósito | Host |
+| :--- | :--- | :--- |
+| `main` | Producción estable — Host A (Linux XAMPP MySQL 5.6) | A |
+| `feature/upgrade-v2-win-xampp` | Migración tecnológica a XAMPP 7.4 / Windows 10 | C |
+
+---
+
+## Arquitectura de Symlinks (Ground Truth)
+
+Los siguientes paths en el repo `agua` son **symlinks permanentes** al chatledger.
+Aplican en **ambas ramas** (`main` y `feature`). Git en `agua` **nunca reporta cambios** en su contenido.
+
+| Symlink en repo `agua` | Apunta a | Git lo rastrea |
+| :--- | :--- | :--- |
+| `.chatledger` | `/home/carlos/GitHub/agua_chatledger/` | Solo el symlink en sí |
+| `.agents` | `.chatledger/.agents/` | Solo el symlink en sí |
+| `CLAUDE.md` | `.chatledger/CLAUDE.md` | Solo el symlink en sí |
+| `GEMINI.md` | `.chatledger/GEMINI.md` | Solo el symlink en sí |
+| `.clauderules` | `.chatledger/.clauderules` | Solo el symlink en sí |
+| `.mcp.json` | `.chatledger/.mcp.json` | Solo el symlink en sí |
+| `docs-dev/ga-cl-ia/` | `/home/carlos/GitHub/agua_chatledger/docs-dev/ga-cl-ia/` | Solo el symlink en sí |
+
+> **Consecuencia clave:** Editar `.agents/rules/`, `CLAUDE.md`, `docs-dev/ga-cl-ia/`, etc.
+> modifica físicamente `agua_chatledger`. Para versionar esos cambios → commitear en `agua_chatledger`, no en `agua`.
+
+Para recrear todos los symlinks en un equipo nuevo:
+```bash
+bash docs-dev/ga-cl-ia/chatledger_sync_ga_lnks.sh
+```
+
+---
+
+## Protocolo Obligatorio al Cambiar de Rama
+
+> Aplica para **cualquier dirección**: `main → feature` o `feature → main`.
+> Claude Code y Gemini deben ejecutar estos pasos **antes** de `git checkout`.
+
+### Paso 1 — Verificar estado de `agua_chatledger`
+
+```bash
+git -C /home/carlos/GitHub/agua_chatledger status
+```
+
+**Si hay cambios sin commitear:**
+```bash
+cd /home/carlos/GitHub/agua_chatledger
+git add -A
+git commit -m "docs: guardar cambios antes de cambiar rama en agua"
+cd /opt/lampp/htdocs/agua
+```
+
+> Esto protege reglas, skills, workflows y docs editados antes del cambio de rama.
+
+### Paso 2 — Verificar estado de `agua`
+
+```bash
+git status
+```
+
+Clasificar cada archivo reportado:
+
+| Tipo de archivo | Acción |
+| :--- | :--- |
+| **Código PHP/JS/SQL** modificado — pertenece a rama actual | `git add` + `git commit` antes de cambiar |
+| **Código PHP/JS/SQL** modificado — trabajo en progreso | `git stash push -m "wip: descripcion"` |
+| **Archivo nuevo sin track** (`??`) de código | Decidir: commitear en rama actual o ignorar si es temporal |
+| **Symlinks** (`.agents`, `CLAUDE.md`, etc.) | Ignorar — git no reporta cambios en su contenido |
+| **Artifacts de sync** (`work/*.sql`, `backups/*.sql.gz`) | Descartar — ver sección Artifacts |
+
+### Paso 3 — Cambiar de rama
+
+```bash
+git checkout <rama-destino>
+```
+
+### Paso 4 — Verificar estado post-cambio
+
+```bash
+git status
+```
+
+- Árbol limpio → OK
+- Si hay stash pendiente → `git stash pop` y resolver
+
+---
+
+## Qué commitear en cada repo
+
+| Cambio | Repo donde commitear |
+| :--- | :--- |
+| Código PHP, JS, SQL, vistas, includes | `agua` (rama correspondiente) |
+| Reglas `.agents/rules/` | `agua_chatledger` |
+| Skills `.agents/skills/` | `agua_chatledger` |
+| Workflows `.agents/workflows/` | `agua_chatledger` |
+| `CLAUDE.md`, `GEMINI.md`, `.clauderules` | `agua_chatledger` |
+| `docs-dev/ga-cl-ia/` (docs IA) | `agua_chatledger` |
+| Symlinks nuevos (modo 120000) | `agua` (ambas ramas si aplica) |
+| `.gitignore`, `composer.json`, configs de repo | `agua` |
+
+---
+
+## Artifacts de Sync — Nunca Commitear
+
+Los directorios `work/` y `backups/` de los pipelines de sync son generados automáticamente. Están en `.gitignore`.
+
+| Path ignorado | Origen |
+| :--- | :--- |
+| `docs-dev/migration-aguav2/syncawa_hostb_to_hosta/work/*.sql` | Dumps sync B→A |
+| `docs-dev/migration-aguav2/syncawa_hostb_to_hosta/work/conteos_*.txt` | Logs de conteo B→A |
+| `docs-dev/migration-aguav2/syncawa_hostb_to_hosta/backups/*.sql.gz` | Backups automáticos Host A |
+| `docs-dev/migration-aguav2/sync_hosta_to_hostc/work/*.sql` | Dumps sync A→C |
+| `docs-dev/migration-aguav2/sync_hosta_to_hostc/work/conteos_*.txt` | Logs de conteo A→C |
+| `docs-dev/migration-aguav2/sync_hosta_to_hostc/backups/*.sql.gz` | Backups automáticos Host C |
+
+Si aparecen como M/D/? en `git status`, descartarlos con:
+
+```bash
+git checkout -- docs-dev/migration-aguav2/syncawa_hostb_to_hosta/work/
+git checkout -- docs-dev/migration-aguav2/sync_hosta_to_hostc/work/
+```
+
+---
+
+## Notas para Agentes IA (Claude Code y Gemini)
+
+- **Commits**: formato `tipo(scope): descripción`. Descripción clara y técnica.
+- **NO commitear tras cada cambio**: aplicar los cambios en archivos, reportar qué se modificó, y detenerse. Solo ejecutar `git add / commit / push` cuando el usuario lo solicite explícitamente ("commitea", "sube los cambios", etc.).
+- **Pushes**: permitidos bajo usuario `cbena999`. Confirmar con usuario antes de push a `main`.
+- **Symlinks**: no reemplazar symlinks por archivos reales. Si se detecta un directorio real donde debería haber symlink → ejecutar `chatledger_sync_ga_lnks.sh`.
+- **Conflictos**: resolver antes de proponer merge. No usar `--no-verify` ni `--force` sin autorización explícita.
+- **Scope de autorización**: una aprobación puntual no autoriza la misma acción en contextos futuros.
+- **ChatLedger primero**: ante duda de dónde commitear algo relacionado con IA/docs → siempre `agua_chatledger`.
+
+---
+
+**Última actualización:** 2026-04-21
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Git Operations**
+
+I'm currently focused on streamlining the Git operations. Right now, I'm examining specific commands for managing my local repository. I have several lines of code that need a brief description, so I can sync and push them.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.191125462s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 11 May 2026, 12:25 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Accessing Configuration & Files**
+
+I've successfully accessed the configuration and associated files. I can see the modifications in `.agents/mcp_config.json`, `.agents/rules/02-reglas-negocio.md`, and `.mcp.json`. Also, there are updates in `GEMINI.md` and a new file, `Auditing_Water_Debt_Calculations_77eda59`.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.434688257s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 11 May 2026, 12:25 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 11 May 2026, 12:25 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+## User Request
+
+Analiza los texto por seccione q desplega http://localhost:7001/agua/admin/operaciones/configuracion.php
+1) que texto se podrian tomar  y poner como anexo o complemento en las secciones del documento CARTERA_VENCIDA_MODELO_Y_REPORTES.md. lista melos.
+2) Sobre Límite Bomba (Recargos),  analiza la php donde se ocupan estos parametros: paridad_anios_max_recargo, reversal_threshold,  reversal_threshold_enable y dime si todos intervienen para reducir la bomba, o hay algunb mandatorio 
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `CARTERA_VENCIDA_MODELO_Y_REPORTES.md`
+**Language:** markdown
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Configuration Data**
+
+I'm currently focused on extracting text from Host C's configuration page to identify potential annex content for the "Cartera Vencida" document. I'm also delving into the "Límite Bomba" logic, aiming to fully grasp its operational implications. I'll need to determine what texts on the page can be used as annexes, and then I can dig into the "Límite Bomba" logic.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `configuracion.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.721557214s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+require_once('../../login/usuario.php');
+session_start();
+if (!isset($_SESSION['usuario'])) {
+    print "<script>window.location='../../login/index.php'</script>";
+    exit();
+}
+
+require_once('../../config/Conexion.php');
+$y = new Conexion();
+$y->conectarBaseDatos();
+
+$mensaje = "";
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['config'])) {
+    $configs = $_POST['config'];
+    foreach ($configs as $clave => $valor) {
+        $clave_segura = $y->real_escape_string($clave);
+        $valor_seguro = $y->real_escape_string($valor);
+        $y->q("UPDATE config_sistema SET valor='$valor_seguro' WHERE clave='$clave_segura'");
+    }
+    $mensaje = "<div class='success-msg'>&#10003; Configuraci&oacute;n actualizada correctamente.</div>";
+}
+
+$res = $y->q("SELECT clave, valor, descripcion FROM config_sistema ORDER BY clave ASC");
+$opciones = array();
+while ($row = $y->fetch_array($res)) {
+    $opciones[$row['clave']] = $row;
+}
+
+// ── Agrupación temática ──────────────────────────────────────────────────────
+$grupos = array(
+    'Recargos Moratorios' => array(
+        'desc_grupo' => 'Parámetros que controlan cómo y cuándo se generan los recargos por mora.',
+        'readonly'   => false,
+        'claves'     => ['recargo_mes_inicio','recargo_porcentaje'],
+    ),
+    'Operación y Contratos' => array(
+        'desc_grupo' => 'Paridad: alcance retroactivo del recálculo de mora. Reversas: umbral para habilitar reversión de transición. Ciclo de vida: reglas de transición de estado y comportamiento al crear contratos.',
+        'readonly'   => false,
+        'claves'     => ['paridad_anios_max_recargo','reversal_threshold_enable','reversal_threshold','susptemp_mes_permitido','nuevo_contrato_exento_default','max_tomas_por_contrato','max_domicilios_por_contrato'],
+    ),
+    'Estados de Contrato' => array(
+        'desc_grupo' => 'Códigos numéricos del catálogo de estados. <strong>Solo lectura</strong> — no modificar.',
+        'readonly'   => true,
+        'claves'     => ['estado_activo','estado_susp_temporal','estado_susp_administrativa','estado_susp_definitiva'],
+    ),
+);
+
+// Campos editables (max_tomas_por_contrato: solo lectura)
+$editables = ['recargo_mes_inicio','recargo_porcentaje','recargo_categoria_agua','recargo_categoria_drenaje',
+              'susptemp_mes_permitido','paridad_anios_max_recargo',
+              'reversal_threshold_enable','reversal_threshold','nuevo_contrato_exento_default',
+              'max_domicilios_por_contrato'];
+
+header('Content-Type: text/html; charset=UTF-8');
+
+function get_mes_nombre($n) {
+    $meses = ["", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+    return isset($meses[$n]) ? $meses[$n] : "Mes $n";
+}
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Configuraci&oacute;n del Sistema</title>
+    <link rel="stylesheet" href="../../web-assets/css/paxstyle2.css">
+    <style>
+        body { padding: 20px; font-family: Arial, sans-serif; background: #f5f6fa; }
+        h1 { font-size: 22px; color: #2c3e50; margin-bottom: 6px; font-style: normal; text-shadow: none; text-align: left; }
+        .subtitle { color: #7f8c8d; font-size: 13px; margin-bottom: 20px; }
+        .back-link { display: inline-block; margin-bottom: 16px; color: #0674B7; text-decoration: none; font-weight: bold; font-size: 13px; }
+        .back-link:hover { text-decoration: underline; }
+        .success-msg { color: #155724; background: #d4edda; border: 1px solid #c3e6cb; padding: 10px 14px; margin-bottom: 18px; border-radius: 4px; font-weight: bold; font-size: 13px; }
+
+        /* Layout dos columnas — tarjeta Estados ocupa fila completa al final */
+        .grupos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 20px; }
+        .g-estados { grid-column: 1 / -1; }
+
+        /* Tarjeta de grupo */
+        .grupo-card { background: #fff; border: 1px solid #dde3ec; border-radius: 6px; overflow: hidden; }
+        .grupo-header { padding: 10px 14px; font-weight: bold; font-size: 12px; text-transform: uppercase;
+                        letter-spacing: .5px; color: #fff; }
+        .g-estados    .grupo-header { background: #7f8c8d; }
+        .g-recargos   .grupo-header { background: #2980b9; }
+        .g-paridad    .grupo-header { background: #8e44ad; }
+        .g-ciclo      .grupo-header { background: #27ae60; }
+        .g-reversa    .grupo-header { background: #c0392b; }
+        .grupo-desc { font-size: 11px; color: #666; padding: 6px 14px 8px; border-bottom: 1px solid #eee; background: #fafbfc; }
+        .grupo-body { padding: 10px 14px 14px; }
+
+        /* Fila de config */
+        .cfg-row { margin-bottom: 12px; }
+        .cfg-grouped-top { background: #fdfdfd; padding: 10px 14px; border: 1px solid #d0d5dd; border-bottom: none; border-radius: 6px 6px 0 0; margin-bottom: 0; }
+        .cfg-grouped-middle { background: #fdfdfd; padding: 10px 14px; border-left: 1px solid #d0d5dd; border-right: 1px solid #d0d5dd; border-top: 1px dashed #ccc; border-bottom: none; border-radius: 0; margin-top: 0; margin-bottom: 0; }
+        .cfg-grouped-bottom { background: #fdfdfd; padding: 10px 14px 10px 34px; border: 1px solid #d0d5dd; border-top: none; border-radius: 0 0 6px 6px; margin-top: 0; position: relative; }
+        .cfg-grouped-bottom::before { content: '\21B3'; position: absolute; left: 14px; top: 10px; color: #999; font-size: 16px; font-weight: bold; }
+        .cfg-grouped-top .cfg-key, .cfg-grouped-middle .cfg-key, .cfg-grouped-bottom .cfg-key { color: #c0392b; }
+        .cfg-row:last-child { margin-bottom: 0; }
+        .cfg-key { font-family: monospace; font-size: 12px; font-weight: bold; color: #2c3e50; display: block; margin-bottom: 3px; }
+        .cfg-desc { font-size: 11px; color: #777; margin-bottom: 5px; display: block; line-height: 1.5; white-space: pre-line; }
+        .cfg-input { width: 100%; padding: 7px 9px; border: 1px solid #ccc; border-radius: 4px;
+                     box-sizing: border-box; font-family: monospace; font-size: 13px; background: #fff; }
+        .cfg-input:focus { border-color: #3498db; outline: none; box-shadow: 0 0 0 2px rgba(52,152,219,.2); }
+        .cfg-input[readonly] { background: #f0f0f0; color: #999; cursor: not-allowed; }
+        .readonly-badge { display: inline-block; font-size: 10px; background: #ecf0f1; color: #7f8c8d;
+                          border: 1px solid #bdc3c7; border-radius: 3px; padding: 1px 5px; margin-left: 6px; vertical-align: middle; }
+
+        /* Botón guardar */
+        .footer-bar { text-align: right; padding-top: 4px; }
+        .submit-btn { background: #0674B7; color: #fff; padding: 10px 24px; border: none; border-radius: 4px;
+                      cursor: pointer; font-size: 14px; font-weight: bold; }
+        .submit-btn:hover { background: #045a8d; }
+
+        /* Modal confirmación de cambios */
+        #cfg-overlay { position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.45);z-index:9998; }
+        #cfg-modal   { position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:9999;
+                       background:#f4f6f8;border:1px solid #aaa;border-radius:6px;padding:0;
+                       min-width:480px;max-width:680px;width:90%;box-shadow:0 4px 18px rgba(0,0,0,0.25); }
+        #cfg-modal .m-header { background:#0E4F8E;color:#fff;padding:9px 14px;border-radius:5px 5px 0 0;
+                               font-weight:bold;font-size:12px;text-transform:uppercase; }
+        #cfg-modal .m-body   { padding:14px 18px;max-height:55vh;overflow-y:auto; }
+        #cfg-modal .m-footer { text-align:right;padding:0 18px 14px; }
+        .cfg-diff-table { width:100%;border-collapse:collapse;font-size:12px;margin-bottom:12px; }
+        .cfg-diff-table th { background:#0E4F8E;color:#fff;padding:5px 8px;text-align:left;font-size:11px; }
+        .cfg-diff-table td { padding:5px 8px;border-bottom:1px solid #e0e4ea;vertical-align:top; }
+        .cfg-diff-table tr:last-child td { border-bottom:none; }
+        .cfg-diff-table .col-key  { font-family:monospace;font-weight:bold;color:#2c3e50;white-space:nowrap; }
+        .cfg-diff-table .col-ant  { color:#888;text-decoration:line-through; }
+        .cfg-diff-table .col-new  { color:#1a7a1a;font-weight:bold; }
+        .cfg-diff-table .col-imp  { font-size:10px;color:#555;line-height:1.4; }
+        .no-cambios { color:#7f8c8d;font-size:13px;text-align:center;padding:14px 0; }
+        #cfg-modal input[type=button] { padding:7px 18px;border:none;border-radius:4px;cursor:pointer;
+                                        font-size:13px;font-weight:bold; }
+        #cfg-cancelar-modal { background:#888;color:#fff;margin-right:8px; }
+        #cfg-confirmar-modal { background:#0674B7;color:#fff; }
+
+        @media (max-width: 700px)  { .grupos-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <a href="../../index2.php" class="back-link">&larr; Volver al Men&uacute; Principal</a>
+    <h1>Configuraci&oacute;n Global del Sistema</h1>
+    <p class="subtitle">Par&aacute;metros operativos agrupados por tema funcional. Los campos <span class="readonly-badge">solo lectura</span> son valores fijos del cat&aacute;logo.</p>
+
+    <?= $mensaje ?>
+
+    <form method="POST" action="configuracion.php">
+        <div class="footer-bar" style="margin-bottom:14px;">
+            <button type="button" class="submit-btn" onclick="abrirModalConfirmacion()">
+                Guardar Configuraci&oacute;n
+            </button>
+        </div>
+        <div class="grupos-grid">
+        <?php
+        $clases_grupo = [
+            'Estados de Contrato'  => 'g-estados',
+            'Recargos Moratorios'  => 'g-recargos',
+            'Operación y Contratos'=> 'g-paridad',
+        ];
+        foreach ($grupos as $nombre_grupo => $gdef):
+            $clase = isset($clases_grupo[$nombre_grupo]) ? $clases_grupo[$nombre_grupo] : 'g-ciclo';
+        ?>
+        <div class="grupo-card <?= $clase ?>">
+            <div class="grupo-header">
+                <?= htmlspecialchars($nombre_grupo) ?>
+                <?php if ($gdef['readonly']): ?><span class="readonly-badge">solo lectura</span><?php endif; ?>
+            </div>
+            <div class="grupo-desc"><?= $gdef['desc_grupo'] ?></div>
+            <div class="grupo-body">
+            <?php
+            $separadores_grupo = [
+                'Operación y Contratos' => [
+                    'paridad_anios_max_recargo' => 'Límite Bomba (Recargos)',
+                    'susptemp_mes_permitido' => 'Ciclo de Vida',
+                ],
+            ];
+            $seps = isset($separadores_grupo[$nombre_grupo]) ? $separadores_grupo[$nombre_grupo] : [];
+            foreach ($gdef['claves'] as $clave):
+                if (!isset($opciones[$clave])) continue;
+                $opt = $opciones[$clave];
+                $es_editable = in_array($clave, $editables) && !$gdef['readonly'];
+                if (isset($seps[$clave])): ?>
+                <div style="border-top:1px dashed #d0d5dd;margin:10px 0 10px;position:relative;">
+                    <span style="position:absolute;top:-8px;left:50%;transform:translateX(-50%);background:#fff;padding:0 6px;font-size:10px;color:#999;text-transform:uppercase;letter-spacing:.5px;"><?= $seps[$clave] ?></span>
+                </div>
+                <?php endif; ?>
+                <?php
+                $isGroupedTop = ($clave === 'paridad_anios_max_recargo');
+                $isGroupedMiddle = ($clave === 'reversal_threshold_enable');
+                $isGroupedBottom = ($clave === 'reversal_threshold');
+                $rowClass = "cfg-row";
+                if ($isGroupedTop) $rowClass .= " cfg-grouped-top";
+                elseif ($isGroupedMiddle) $rowClass .= " cfg-grouped-middle";
+                elseif ($isGroupedBottom) $rowClass .= " cfg-grouped-bottom";
+                ?>
+                <div class="<?= $rowClass ?>">
+                    <span class="cfg-key"><?= htmlspecialchars($clave) ?></span>
+                    <?php 
+                        $desc = $opt['descripcion'] ?: '';
+                        if ($clave === 'susptemp_mes_permitido') {
+                            $mes_nombre = get_mes_nombre(intval($opt['valor']));
+                            $desc .= " <strong style='color:#2980b9;'>(Actual: $mes_nombre)</strong>";
+                        }
+                    ?>
+                    <span class="cfg-desc"><?= $desc ?></span>
+                    <?php if ($clave === 'reversal_threshold_enable'): ?>
+                        <div style="display: flex; align-items: center; margin-top: 6px; gap: 8px;">
+                            <input type="hidden" name="config[<?= htmlspecialchars($clave) ?>]" value="0">
+                            <input type="checkbox"
+                                   class="cfg-input"
+                                   style="width: 18px; height: 18px; cursor: pointer; accent-color: #c0392b;"
+                                   name="config[<?= htmlspecialchars($clave) ?>]"
+                                   value="1"
+                                   data-original="<?= htmlspecialchars($opt['valor']) ?>"
+                                   <?= $opt['valor'] == '1' ? 'checked' : '' ?>
+                                   <?= $es_editable ? '' : 'disabled' ?>>
+                            <span style="font-size: 13px; font-weight: bold; color: <?= $opt['valor'] == '1' ? '#c0392b' : '#7f8c8d' ?>;">
+                                <?= $opt['valor'] == '1' ? 'Límite Activo' : 'Límite Desactivado' ?>
+                            </span>
+                        </div>
+                    <?php else: ?>
+                    <input type="text"
+                           class="cfg-input"
+                           name="config[<?= htmlspecialchars($clave) ?>]"
+                           value="<?= htmlspecialchars($opt['valor']) ?>"
+                           data-original="<?= htmlspecialchars($opt['valor']) ?>"
+                           <?= $es_editable ? '' : 'readonly' ?>>
+                    <?php endif; ?>
+                </div>
+            <?php endforeach; ?>
+            </div>
+        </div>
+        <?php endforeach; ?>
+        </div>
+
+    </form>
+
+    <div id="cfg-nara"></div>
+
+    <script>
+    // Descripciones leídas desde config_sistema.descripcion (BD)
+    var impactos = <?= json_encode(array_map(function($o){ return $o['descripcion'] ?: ''; }, $opciones), JSON_UNESCAPED_UNICODE) ?>;
+
+    function abrirModalConfirmacion() {
+        var cambios = [];
+        var inputs  = document.querySelectorAll('form input.cfg-input:not([readonly]):not([disabled])');
+
+        inputs.forEach(function(inp) {
+            var m = inp.name.match(/^config\[(.+)\]$/);
+            if (!m) return;
+            var clave = m[1];
+            var valOrig = inp.getAttribute('data-original');
+            var valNuevo = inp.type === 'checkbox' ? (inp.checked ? '1' : '0') : inp.value;
+            if (valOrig !== valNuevo) {
+                cambios.push({ clave: clave, antes: valOrig, despues: valNuevo });
+            }
+        });
+
+        var bodyHtml;
+        if (cambios.length === 0) {
+            bodyHtml = '<div class="no-cambios">No se detectaron cambios respecto a los valores actuales.</div>';
+        } else {
+            bodyHtml  = '<p style="font-size:12px;color:#555;margin:0 0 10px;">Se modificar&aacute;n <strong>' + cambios.length + '</strong> par&aacute;metro(s). Revise antes de confirmar:</p>';
+            bodyHtml += '<table class="cfg-diff-table">';
+            bodyHtml += '<tr><th>Par&aacute;metro</th><th>Antes</th><th>Despu&eacute;s</th><th>Impacto</th></tr>';
+            cambios.forEach(function(c) {
+                var imp = impactos[c.clave] || 'Afecta el comportamiento del m&oacute;dulo correspondiente de forma inmediata.';
+                bodyHtml += '<tr>' +
+                    '<td class="col-key">' + c.clave + '</td>' +
+                    '<td class="col-ant">' + escHtml(c.antes) + '</td>' +
+                    '<td class="col-new">' + escHtml(c.despues) + '</td>' +
+                    '<td class="col-imp">' + imp + '</td>' +
+                    '</tr>';
+            });
+            bodyHtml += '</table>';
+            bodyHtml += '<p style="font-size:11px;color:#b05a00;background:#fffbe6;border:1px solid #e0cc80;border-radius:4px;padding:6px 10px;margin:0;">&#9888; Los cambios son efectivos de forma inmediata y afectan el comportamiento global del sistema.</p>';
+        }
+
+        var hayCambios = cambios.length > 0;
+        var html =
+            '<div id="cfg-overlay"></div>' +
+            '<div id="cfg-modal">' +
+                '<div class="m-header">Confirmar Cambios en Configuraci&oacute;n Global</div>' +
+                '<div class="m-body">' + bodyHtml + '</div>' +
+                '<div class="m-footer">' +
+                    '<input type="button" id="cfg-cancelar-modal" value="Cancelar">' +
+                    (hayCambios ? '<input type="button" id="cfg-confirmar-modal" value="Guardar Cambios">' : '') +
+                '</div>' +
+            '</div>';
+
+        document.getElementById('cfg-nara').innerHTML = html;
+
+        document.getElementById('cfg-cancelar-modal').addEventListener('click', cerrarModal);
+        document.getElementById('cfg-overlay').addEventListener('click', cerrarModal);
+        if (hayCambios) {
+            document.getElementById('cfg-confirmar-modal').addEventListener('click', function() {
+                cerrarModal();
+                document.querySelector('form').submit();
+            });
+        }
+    }
+
+    function cerrarModal() {
+        document.getElementById('cfg-nara').innerHTML = '';
+    }
+
+    function escHtml(s) {
+        return String(s)
+            .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+            .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+    </script>
+</body>
+</html>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** CORTEX_STEP_STATUS_ERROR
+**Created:** 11 May 2026, 12:31 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 11 May 2026, 12:31 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Parameter Descriptions**
+
+I've been meticulously examining the parameter descriptions. I'm focusing on `recargo_porcentaje`, and the risk-related insights on debt. Then, I am looking closely at `paridad_anios_max_recargo`, and the rationale for its recommended value. Finally, I noticed the presence of `reversal_threshold` and `reversal_threshold_`.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `paridad_anios_max_recargo|reversal_threshold|reversal_threshold_enable`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.245991364s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 11 May 2026, 12:31 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `paridad_anios_max_recargo|reversal_threshold|reversal_threshold_enable`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 11 May 2026, 12:31 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Debt Ceiling Behavior**
+
+I'm now investigating an unexpected behavior concerning the debt ceiling (reversal_threshold) rule. It appears the system isn't behaving as anticipated based on the previously reported functionality, where debt generation should halt when the contract reaches the threshold. The current analysis suggests a deviation from this expected stop condition.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.074176299s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 11 May 2026, 12:31 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `cargos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/*
+ * cargos.php — Lógica de negocio para cargos
+ * Rediseño v2: calcula_recargos sin hardcodes, usa $cfg de config_sistema
+ * PHP 5.5 compatible
+ */
+
+/**
+ * Normaliza una leyenda para búsquedas seguras en BD.
+ * Elimina espacios extremos, colapsa espacios internos múltiples y convierte a MAYÚSCULAS.
+ * Usar en WHERE cuando $leyenda proviene de input externo (POST/GET/vista).
+ * En el SQL complementar con: UPPER(TRIM(REGEXP_REPLACE(leyenda, '\s+', ' ')))
+ * Para MySQL 5.6/MariaDB sin REGEXP_REPLACE usar: UPPER(TRIM(leyenda)) — cubre el 99% de casos.
+ */
+function normalizarLeyenda($leyenda)
+{
+    $s = trim($leyenda);
+    $s = preg_replace('/\s+/', ' ', $s);
+    return mb_strtoupper($s, 'UTF-8');
+}
+
+function calcula_recargos($numcontrato, $leyenda, $monto, $recargo, $anio, $categoria, $cuenta, $y, $mescontrato, $cfg = null)
+{
+	// Cargar config si no viene como parámetro (compatibilidad)
+	if (!is_array($cfg) || count($cfg) == 0) {
+		$cfg = cargaConfig($y);
+	}
+
+	$mes_inicio   = intval(isset($cfg['recargo_mes_inicio']) ? $cfg['recargo_mes_inicio'] : 4);
+	$porcentaje   = floatval(isset($cfg['recargo_porcentaje']) ? $cfg['recargo_porcentaje'] : 10);
+	$cat_agua     = intval(isset($cfg['recargo_categoria_agua']) ? $cfg['recargo_categoria_agua'] : 16);
+	$cat_drenaje  = intval(isset($cfg['recargo_categoria_drenaje']) ? $cfg['recargo_categoria_drenaje'] : 17);
+	$max_anios    = intval(isset($cfg['paridad_anios_max_recargo']) ? $cfg['paridad_anios_max_recargo'] : 0);
+	$ignorar_fantasma = intval(isset($cfg['paridad_ignorar_fpago_fantasma']) ? $cfg['paridad_ignorar_fpago_fantasma'] : 1);
+	$umbral_bomba_enable = intval(isset($cfg['reversal_threshold_enable']) ? $cfg['reversal_threshold_enable'] : 0);
+	$umbral_bomba = floatval(isset($cfg['reversal_threshold']) ? $cfg['reversal_threshold'] : 15000);
+
+	// REGLA: El flag recargo=0 en tabla cargos significa que el concepto no devenga mora
+	if (intval($recargo) === 0) {
+		return;
+	}
+
+	// EXENCIÓN RECARGOS PRIMER AÑO Y VALIDACIÓN DE ESTADO
+	$res_exencion = $y->q("SELECT YEAR(fecha) as anio_creacion, exento_recargo_primer_anio, estado FROM contrato WHERE numcontrato='$numcontrato'");
+	list($anio_creacion, $exento_recargo, $edo_cto) = $y->fetch_array($res_exencion);
+
+	// REGLA F01 / SDF: No generar recargos si el contrato está en Suspensión Definitiva (estado 4)
+	// Los recargos automáticos inician en Abril (mes 4) según configuración del sistema.
+	if (intval($edo_cto) === 4) {
+		return;
+	}
+	// REGLA F01 / C06: No generar recargos en Suspensión Temporal (estado 2).
+	// La anualidad ya está cancelada (estado=-1); el recargo sobre ella no procede.
+	if (intval($edo_cto) === 2) {
+		return;
+	}
+
+	if ($exento_recargo == 1 && $anio == $anio_creacion) {
+		return;
+	}
+
+	// EXENCIÓN: NO GENERAR RECARGOS PARA CATEGORÍAS QUE YA SON RECARGOS
+	if ($categoria == $cat_agua || $categoria == $cat_drenaje) {
+		return;
+	}
+
+	$fecha_actual = time();
+	$mes_pad = str_pad($mes_inicio, 2, '0', STR_PAD_LEFT);
+	$fecha_entrada = strtotime("01-$mes_pad-$anio 01:00:00");
+
+	if ($fecha_actual > $fecha_entrada) {
+		$mes_numero = intval(date('m'));
+		$anio_numero = intval(date('Y'));
+		$meses = (($anio_numero - $anio) * 12) + ($mes_numero - 1);
+
+		$nom_meses = array("", "ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SEPT", "OCT", "NOV", "DIC");
+
+		$mesrecargo = 1;
+		$aniorecargo = $anio;
+
+		// Sin hardcode: porcentaje desde config
+		$monto_recargo = ($monto * $porcentaje) / 100;
+
+		// Sin hardcode: categorias desde config
+		$categoria_recargo = $categoria;
+		if ($categoria == 2)
+			$categoria_recargo = $cat_agua;
+		if ($categoria == 3)
+			$categoria_recargo = $cat_drenaje;
+
+		$respagado = $y->q("SELECT COUNT(numcontrato) FROM vw_ligacargos_all WHERE leyenda='$leyenda' AND numcontrato=$numcontrato AND estado=1");
+		list($pagado) = $y->fetch_array($respagado);
+
+		// FILTRO: antigüedad máxima — no generar recargos sobre deudas más viejas que N años
+		if ($max_anios > 0 && $anio < (intval(date('Y')) - $max_anios)) {
+			return;
+		}
+
+		// FILTRO: fpago fantasma — excluir cargos con fecha de pago corrupta (anterior al año 2000)
+		if ($ignorar_fantasma) {
+			$res_fp = $y->q("SELECT fpago FROM vw_ligacargos_all WHERE leyenda='$leyenda' AND numcontrato='$numcontrato' AND estado=0 LIMIT 1");
+			if ($row_fp = $y->fetch_array($res_fp)) {
+				if ($row_fp['fpago'] !== null && substr($row_fp['fpago'], 0, 4) < '2000') {
+					return;
+				}
+			}
+		}
+
+		if ($pagado == 0) {
+			$res_deuda = $y->q("SELECT IFNULL(SUM(monto),0) FROM vw_ligacargos_pendientes WHERE numcontrato='$numcontrato'");
+			list($deuda_actual) = $y->fetch_array($res_deuda);
+			$deuda_actual = floatval($deuda_actual);
+
+			for ($i = 1; $i <= $meses; $i++) {
+				if ($umbral_bomba_enable == 1 && $deuda_actual >= $umbral_bomba && $umbral_bomba > 0) {
+					break; // Límite Bomba de Recargos alcanzado
+				}
+				$leyenda_recargo = "RECARGO $nom_meses[$mesrecargo] $aniorecargo - $leyenda";
+				$tabla_dest = ($aniorecargo <= 2025) ? "ligacargos_historico" : "ligacargos";
+				
+				// Idempotencia: no duplicar si el recargo ya existe (protege contra refresh y re-activaciones)
+				$chk_rec = $y->q("SELECT numcontrato FROM vw_ligacargos_all WHERE leyenda='$leyenda_recargo' AND numcontrato='$numcontrato' LIMIT 1");
+				if ($y->num_rows($chk_rec) == 0) {
+					// REGLA F05: ligacargos.recargo es neutralizado (0.00). La Fuente de Verdad es la Categoría.
+					$q = "INSERT INTO $tabla_dest (numcontrato,leyenda,monto,fcobro,fpago,estado,recargo,folio,anio,numcontratoresp,idpago_vinc,categoria,repetido) VALUES('$numcontrato','$leyenda_recargo',$monto_recargo,CURDATE(),CURDATE(),0,0.00,0,$anio,NULL,NULL,$categoria_recargo,$cuenta)";
+
+					if ($y->q($q)) {
+						$deuda_actual += $monto_recargo;
+					} else {
+						$y->_logFallback('DEBUG_SURCHARGE', $q, "Falla en anio $aniorecargo");
+					}
+				}
+				if (++$mesrecargo > 12) {
+					$mesrecargo = 1;
+					$aniorecargo++;
+				}
+			}
+		}
+	}
+}
+
+function eliminaEgreso($id, $motivo)
+{
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	// Obtener datos antes de eliminar para auditoría
+	$res_ant = $y->q("SELECT leyenda, monto, categoria FROM egresos WHERE id='$id'");
+	$ant = $y->fetch_array($res_ant);
+	$leyenda_e = $ant['leyenda'];
+	$monto_e   = number_format($ant['monto'], 2);
+	$cat_e     = $ant['categoria'];
+
+	$y->q("update egresos set estado=-1, motivoelimina='$motivo' where id='$id'");
+
+	$motivo_esc = $y->real_escape_string($motivo);
+	$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato) 
+	       VALUES(NOW(), 'Eliminación de Egreso', 'Egreso: $leyenda_e ($cat_e) por \$$monto_e', 'ELIMINADO. Motivo: $motivo_esc', '-EGRESO-')");
+
+	$salida = "Se ha eliminado el egreso";
+
+	return $salida;
+}
+
+function cargaCargosEsp($cadena)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	if ($cadena == "")
+		$cadena = "1";
+
+	if ($cadena != "") {
+		$ocurrencias = explode(" ", $cadena);
+		$cadena = "";
+		foreach ($ocurrencias as $parte) {
+			$cadena .= (($cadena != "") ? "AND " : "") . "nombre like (\"%$parte%\")";
+		}
+	}
+	$q1 = "select numconsec, nombre, monto, monto_comercial, recargo, observaciones, mensualidades, anio, categoria, repetir, metros from cargos where $cadena AND estado=1 order by nombre";
+	$res = $y->q($q1);
+
+	$cargos = [];
+	while ($c = $y->fetch_array($res)) {
+		$cargos[] = [
+			'numconsec' => $c[0],
+			'nombre' => $c[1],
+			'monto' => $c[2],
+			'monto_com' => $c[3],
+			'recargo' => $c[4],
+			'observaciones' => $c[5],
+			'mensualidades' => $c[6],
+			'anio' => $c[7],
+			'categoria' => $c[8],
+			'repetir' => $c[9],
+			'metros' => $c[10]
+		];
+	}
+
+	return $templates->render('cargos/lista_tabla', ['cargos' => $cargos]);
+}
+
+function cargaCargos()
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$res = $y->q("select numconsec, nombre, monto, monto_comercial, recargo, observaciones, mensualidades, anio, categoria, repetir, metros from cargos where estado=1 order by nombre");
+	$cargos = [];
+	while ($c = $y->fetch_array($res)) {
+		$cargos[] = [
+			'numconsec' => $c[0],
+			'nombre' => $c[1],
+			'monto' => $c[2],
+			'monto_com' => $c[3],
+			'recargo' => $c[4],
+			'observaciones' => $c[5],
+			'mensualidades' => $c[6],
+			'anio' => $c[7],
+			'categoria' => $c[8],
+			'repetir' => $c[9],
+			'metros' => $c[10]
+		];
+	}
+
+	$resz = $y->q("select numconsec, nombre, monto, monto_comercial, estado from cargos where estado <> 2 order by estado, nombre, anio, monto");
+	$cargos_registrados = [];
+	while (list($num, $nom, $monto, $mon_com, $edo) = $y->fetch_array($resz)) {
+		$cargos_registrados[] = ['num' => $num, 'nom' => $nom, 'monto' => $monto, 'monto_comercial' => $mon_com, 'edo' => $edo];
+	}
+
+	$resc = $y->q("select id, nombre from categorias");
+	$categorias = [];
+	while ($cat = $y->fetch_array($resc)) {
+		$categorias[] = ['id' => $cat[0], 'descripcion' => $cat[1]];
+	}
+
+	return $templates->render('cargos/catalogo', [
+		'cargos' => $cargos,
+		'cargos_registrados' => $cargos_registrados,
+		'categorias' => $categorias
+	]);
+}
+
+function cargaresultados($query, $usuario, $agua, $dren, $marca, $estado1, $estado2, $estado3, $estado4)
+{
+	global $templates;
+	$query = trim($query);
+	$q1 = explode(' ', $query);
+	$r = "";
+	foreach ($q1 as $var) {
+		if ($usuario == 'usr') {
+			$r .= (($r == "") ? "" : " and ") . "usuario.nombre like '%$var%'";
+		} else {
+			$r .= (($r == "") ? "" : " and ") . "(contrato.domicilio like '%$var%' OR contrato.numcontrato like '%$var%')";
+		}
+	}
+
+	$estados_array = array();
+	if ($estado1 == 1)
+		array_push($estados_array, 1);
+	if ($estado2 == 1)
+		array_push($estados_array, 2);
+	if ($estado3 == 1)
+		array_push($estados_array, 3);
+	if ($estado4 == 1 || is_numeric($query))
+		array_push($estados_array, 4);
+
+	$estados = join(",", $estados_array);
+	if (empty($estados)) $estados = "0"; // Fallback to avoid empty IN clause
+	$query_sql = "select contrato.numcontrato, usuario.nombre, contrato.domicilio, contrato.agua, contrato.drenaje, if(isnull(total),0,total) as adeudo, contrato.tipo from (contrato left join usuario on contrato.numusuario=usuario.noconsecutivo) left join (select sum(monto) as total, numcontrato from vw_ligacargos_pendientes group by numcontrato) lc on contrato.numcontrato=lc.numcontrato where contrato.estado IN ($estados) and $r" . (($agua == 'x') ? "" : (($agua == '1') ? " and contrato.agua=1" : " and contrato.agua=0")) . (($dren == 'x') ? "" : (($dren == '1') ? " and contrato.drenaje=1" : " and contrato.drenaje=0"));
+
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+	$res = $y->q($query_sql);
+	$n = $y->num_rows($res);
+
+	if ($n > 0) {
+		$resultados = [];
+		while (list($numcontrato, $nombre, $domicilio, $agua, $drenaje, $adeudo, $tipo) = $y->fetch_array($res)) {
+			$resultados[] = [
+				'numcontrato' => $numcontrato,
+				'nombre' => $nombre,
+				'domicilio' => $domicilio,
+				'agua' => $agua,
+				'drenaje' => $drenaje,
+				'adeudo' => $adeudo,
+				'tipo' => $tipo
+			];
+		}
+		return $templates->render('cargos/busqueda_resultados', [
+			'n' => $n,
+			'resultados' => $resultados,
+			'marca' => $marca
+		]);
+	}
+	return "";
+}
+
+function pagacancelacargos($opc, $idc, $pago, $rp, $rt, $texto, $totalmarcado, $recibo)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	if ($opc == 'pagacargos') { // Pago de cargos.
+		// Host C: reservar folio atómico en folios_recibo; si viene $recibo del form lo usamos como referencia
+		$y->q("INSERT INTO folios_recibo (dummy) VALUES (1)");
+		$folio_sig = $y->insert_id();
+
+		// ═══ Snapshot financiero PRE-cobro ═══
+		$res_pre = $y->q("SELECT COUNT(*) AS n, IFNULL(SUM(monto),0) AS total FROM vw_ligacargos_pendientes WHERE numcontrato = '$idc'");
+		$pre = $y->fetch_array($res_pre);
+		$n_pre = intval($pre['n']); $tot_pre = number_format(floatval($pre['total']), 2);
+
+		foreach ($pago as $ref => $val) {
+			$lm = explode('|', $val);
+			$id_cargoval = intval($lm[0]);
+			$leyendaval  = $lm[1];
+			$monto_val   = floatval($lm[2]);
+			$repetidoval = intval($lm[3]);
+			$categoriaval = isset($lm[4]) ? intval($lm[4]) : 0;
+
+			$ctos_sinc = [];
+			if ($categoriaval == 6 || strpos(strtoupper($leyendaval), 'FALTA ASAMBLEA') !== false) {
+				// Asamblea: sp_sinc_asamblea_puntual sincroniza todos los contratos del usuario
+				$res_u = $y->q("select numusuario from contrato where numcontrato = '$idc'");
+				list($numusuario) = $y->fetch_array($res_u);
+				// Primero pagar el cargo del contrato principal (usando ID atómico)
+				$y->q("CALL sp_pagar_cargo($id_cargoval, '$idc', \"$leyendaval\", $repetidoval, $folio_sig, '$idc', $monto_val, @filas)");
+				// Sincronizar el resto de contratos del mismo usuario
+				$y->q("CALL sp_sinc_asamblea_puntual($numusuario, \"$leyendaval\", 0, @filas_sinc)");
+				// Bitácora de sincronización en cada contrato afectado
+				$res_sinc = $y->q("SELECT l.numcontrato FROM ligacargos l JOIN contrato c ON l.numcontrato=c.numcontrato WHERE c.numusuario=$numusuario AND l.leyenda=\"$leyendaval\" AND l.categoria=6 AND l.folio=$folio_sig AND l.numcontrato != '$idc'");
+				while ($row_sinc = $y->fetch_array($res_sinc)) $ctos_sinc[] = $row_sinc['numcontrato'];
+				if (!empty($ctos_sinc)) {
+					$todos_ctos = array_merge([$idc], $ctos_sinc);
+					sort($todos_ctos, SORT_NUMERIC);
+					$ctos_str = implode(', ', $todos_ctos);
+					foreach ($ctos_sinc as $cto_sinc) {
+						$cto_sinc_esc = $y->real_escape_string($cto_sinc);
+						$sinc_despues = $y->real_escape_string("Sincronizado por pago en cto $idc | Concepto: $leyendaval ($ctos_str) | Folio: $folio_sig");
+						$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato) VALUES(NOW(), 'Sincronización Asamblea', 'estado=0', '$sinc_despues', '$cto_sinc_esc')");
+					}
+				}
+			} else {
+				$y->q("CALL sp_pagar_cargo($id_cargoval, '$idc', \"$leyendaval\", $repetidoval, $folio_sig, '', $monto_val, @filas)");
+			}
+		}
+
+		// ═══ Snapshot financiero POST-cobro ═══
+		$res_post = $y->q("SELECT COUNT(*) AS n, IFNULL(SUM(monto),0) AS total FROM vw_ligacargos_pendientes WHERE numcontrato = '$idc'");
+		$post = $y->fetch_array($res_post);
+		$n_post = intval($post['n']); $tot_post = number_format(floatval($post['total']), 2);
+		$cargos_liq = $n_pre - $n_post;
+		$pre_esc  = $y->real_escape_string("Adeudos: $n_pre | Deuda: \$$tot_pre");
+		$sinc_nota = !empty($ctos_sinc) ? ' | Asamblea sincronizada en cto(s): ' . implode(', ', $ctos_sinc) : '';
+		$post_esc = $y->real_escape_string("Adeudos: $n_post | Deuda: \$$tot_post | Cargos liquidados: $cargos_liq$sinc_nota");
+
+		// Auditoría de Pago
+		$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato) 
+		       VALUES(NOW(), 'Cobro de Cargos', 'Folio: $folio_sig. $pre_esc', 'Cobrado: \$$totalmarcado. $post_esc', '$idc')");
+
+		return "<script>cargaDatosContrato('$idc'); window.open('reportes/recibo.php?folio=$folio_sig', 'recibo', 'width=640,height=450,scrollbars=yes');</script>";
+
+	} else { // Cancelacion de cargos.
+		$res1 = $y->q("select contrasena from contrasenas where rol = 'presidente'");
+		$res2 = $y->q("select contrasena from contrasenas where rol = 'tesorero'");
+
+		list($contrasena_presidente) = $y->fetch_array($res1);
+		list($contrasena_tesorero) = $y->fetch_array($res2);
+		// Bloque comentarizado para pruebas auth.
+		//		if (md5($rp) == $contrasena_presidente && md5($rt) == $contrasena_tesorero) {
+		$cfg = cargaConfig($y);
+		$min_car = intval(isset($cfg['cancelacion_min_caracteres']) ? $cfg['cancelacion_min_caracteres'] : 20);
+		if (strlen($texto) > $min_car) {
+			// ═══ Snapshot financiero PRE-cancelación ═══
+			$res_pre = $y->q("SELECT COUNT(*) AS n, IFNULL(SUM(monto),0) AS total FROM vw_ligacargos_pendientes WHERE numcontrato = '$idc'");
+			$pre = $y->fetch_array($res_pre);
+			$n_pre = intval($pre['n']); $tot_pre = number_format(floatval($pre['total']), 2);
+
+			$x = "";
+			foreach ($pago as $valor) {
+				$lm = explode('|', $valor);
+				$id_c_val    = intval($lm[0]);
+				$leyenda_esc = $y->real_escape_string($lm[1]);
+				$monto_c     = floatval($lm[2]);
+				$rep_val     = isset($lm[3]) ? intval($lm[3]) : 0;
+				
+				$res_id_act = $y->q("SELECT id, folio FROM ligacargos WHERE id = $id_c_val LIMIT 1");
+				$res_id_his = $y->q("SELECT id, folio FROM ligacargos_historico WHERE id = $id_c_val LIMIT 1");
+				$row_id = $y->fetch_array($res_id_act) ?: $y->fetch_array($res_id_his);
+				$id_str = $row_id ? " [ID: {$row_id['id']}" . ($row_id['folio'] > 0 ? " | Folio: {$row_id['folio']}" : "") . "]" : " [ID: $id_c_val]";
+
+				$y->q("CALL sp_cancelar_cargo($id_c_val, '$idc', '$leyenda_esc', $rep_val, @filas)");
+				$x .= ((strlen($x) > 0) ? ", " : "") . $lm[1] . (($lm[3] == 0) ? "" : " (r$lm[3])") . " (\$" . $lm[2] . ")" . $id_str;
+			}
+			// Detección robusta de operador
+			$ses_usr  = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
+			$operador = 'cajero';
+			if (is_string($ses_usr) && $ses_usr !== '') {
+			    $operador = $ses_usr;
+			} elseif (is_object($ses_usr) && get_class($ses_usr) !== '__PHP_Incomplete_Class' && method_exists($ses_usr, 'getNombre')) {
+			    $operador = $ses_usr->getNombre();
+			}
+
+			$x .= " | Operador: " . $operador;
+
+			// ═══ Snapshot financiero POST-cancelación ═══
+			$res_post = $y->q("SELECT COUNT(*) AS n, IFNULL(SUM(monto),0) AS total FROM vw_ligacargos_pendientes WHERE numcontrato = '$idc'");
+			$post = $y->fetch_array($res_post);
+			$n_post = intval($post['n']); $tot_post = number_format(floatval($post['total']), 2);
+			$cargos_canc = $n_pre - $n_post;
+			$monto_canc = number_format(floatval($pre['total']) - floatval($post['total']), 2);
+
+			$texto_esc = $y->real_escape_string($texto);
+			$x_esc = $y->real_escape_string($x);
+			$pre_esc  = $y->real_escape_string("Adeudos: $n_pre | Deuda: \$$tot_pre");
+			$post_esc = $y->real_escape_string("Adeudos: $n_post | Deuda: \$$tot_post | Cancelados: $cargos_canc (-\$$monto_canc)");
+			$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato) VALUES(NOW(), 'cancelacion', '$texto_esc. $pre_esc', '$x_esc | $post_esc', '$idc')");
+			return "<script>cargaDatosContrato('$idc');</script>";
+		} else {
+			return $templates->render('sistema/mensaje', [
+				'titulo' => 'Error',
+				'mensaje' => 'Debe escribir a detalle el porqu&eacute; de la cancelaci&oacute;n de estos cargos (m&iacute;nimo ' . $min_car . ' caracteres).'
+			]);
+		}
+		/*
+		} else {
+			return $templates->render('sistema/mensaje', [
+				'titulo' => 'Error',
+				'mensaje' => 'Las contrase&ntilde;as no son las correctas.'
+			]);
+		} */
+	}
+}
+
+function aplicacargos($c, $cargo)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+	$cfg = cargaConfig($y);
+
+	if (!is_array($cargo) || count($cargo) == 0) {
+		return $templates->render('sistema/mensaje', [
+			'titulo' => 'Información',
+			'mensaje' => 'No se seleccionaron cargos para aplicar.'
+		]);
+	}
+
+	$n = 0;
+	$m = 0;
+	$alertas = array();
+	$cargos_aplicados_detalle = array();
+	foreach ($cargo as $leyenda_input) {
+		$a = explode('|', $leyenda_input);
+		$contratos_lista = is_array($c) ? $c : array($c);
+
+		foreach ($contratos_lista as $numcontrato) {
+			// Validar estado del contrato
+			$res_edo = $y->q("SELECT estado FROM contrato WHERE numcontrato='$numcontrato'");
+			list($edo_cto) = $y->fetch_array($res_edo);
+			if (intval($edo_cto) === 4) {
+				$alertas[] = "El contrato <b>$numcontrato</b> se encuentra en Suspensión Definitiva y no puede recibir nuevos cargos.";
+				continue;
+			}
+
+			// Consultar tomas activas para este contrato
+			$res_tomas = $y->q("SELECT COUNT(*) FROM contrato_toma WHERE numcontrato='$numcontrato' AND tiene_agua=1 AND estado_agua=1");
+			list($n_tomas_agua) = $y->fetch_array($res_tomas);
+			$res_tomas_d = $y->q("SELECT COUNT(*) FROM contrato_toma WHERE numcontrato='$numcontrato' AND tiene_drenaje=1 AND estado_drenaje=1");
+			list($n_tomas_drenaje) = $y->fetch_array($res_tomas_d);
+			$res_tipo = $y->q("SELECT MAX(tipo) FROM contrato_toma WHERE numcontrato='$numcontrato'");
+			list($es_comercial) = $y->fetch_array($res_tipo);
+			$es_comercial = intval($es_comercial);
+
+			$res2 = $y->q("select metros from contrato where numcontrato = '$numcontrato'");
+			list($metros) = $y->fetch_array($res2);
+
+			$res3 = $y->q("select metros, monto_comercial from cargos where UCASE(nombre) = UCASE('$a[0]') limit 1");
+			list($aplicametros, $mon_com_db) = $y->fetch_array($res3);
+
+			$leyenda = $a[0];
+			$monto = floatval($a[1]);
+			$mon_com = floatval($mon_com_db);
+			$recargo = $a[2];
+			$anio = $a[3];
+			$categoria = $a[4];
+			$repetir = $a[5];
+
+			// Lógica de multiplicación por toma y tipo (Normal/Comercial)
+			if ($categoria == 2 && $n_tomas_agua > 0) {
+				$monto_base = ($es_comercial == 1 && $mon_com > 0) ? $mon_com : (($es_comercial == 1) ? $monto * 2 : $monto);
+				$monto = $monto_base * $n_tomas_agua;
+			}
+			if ($categoria == 3 && $n_tomas_drenaje > 0) {
+				$monto_base = ($es_comercial == 1 && $mon_com > 0) ? $mon_com : (($es_comercial == 1) ? $monto * 2 : $monto);
+				$monto = $monto_base * $n_tomas_drenaje;
+			}
+
+			if ($aplicametros == 1)
+				$monto = $monto * $metros;
+
+			if ($anio == "0")
+				$anio = date('Y');
+
+			$aplicar_cargo = true;
+			if ($n_tomas_agua == 0 && $categoria == 2) {
+				$aplicar_cargo = false;
+				$alertas[] = "El cargo <b>$leyenda</b> no aplica porque el contrato $numcontrato no tiene toma de agua conectada.";
+			}
+			if ($n_tomas_drenaje == 0 && $categoria == 3) {
+				$aplicar_cargo = false;
+				$alertas[] = "El cargo <b>$leyenda</b> no aplica porque el contrato $numcontrato no tiene toma de drenaje conectada.";
+			}
+
+			if ($aplicar_cargo) {
+				$tabla_d = ($anio <= 2025) ? "ligacargos_historico" : "ligacargos";
+				if ($repetir == 0)
+					$q = "INSERT INTO $tabla_d (numcontrato, leyenda, monto, fcobro, fpago, estado, recargo, folio, anio, numcontratoresp, idpago_vinc, categoria, repetido) VALUES('$numcontrato', '$leyenda', $monto, CURDATE(), CURDATE(), 0, $recargo, '', $anio, '', NULL, $categoria, 0)";
+				else {
+					$res = $y->q("SELECT COUNT(l.numcontrato) FROM vw_ligacargos_all l WHERE l.leyenda = '$leyenda' AND l.numcontrato = '$numcontrato'");
+					list($cuenta) = $y->fetch_array($res);
+					$q = "INSERT INTO $tabla_d (numcontrato, leyenda, monto, fcobro, fpago, estado, recargo, folio, anio, numcontratoresp, idpago_vinc, categoria, repetido) VALUES('$numcontrato', '$leyenda', $monto, CURDATE(), CURDATE(), 0, $recargo, '', $anio, '', NULL, $categoria, $cuenta)";
+				}
+
+				if ($y->q($q)) {
+					$n++;
+					$tipo_tarifa = ($es_comercial == 1) ? 'Comercial' : 'Normal';
+					$cargos_aplicados_detalle[$numcontrato][] = "$leyenda \$$monto ($tipo_tarifa)";
+					// Calcular recargos si aplica
+					calcula_recargos($numcontrato, $leyenda, $monto, $recargo, $anio, $categoria, (isset($cuenta) ? $cuenta : 0), $y, 1, $cfg);
+				} else
+					$m++;
+			}
+		}
+	}
+
+	$mensaje = "Se ha" . (($n == 1) ? "" : "n") . " aplicado <b>$n</b> cargo" . (($n == 1) ? "" : "s") . "." . (($m != 0) ? "<br>$m cargo" . (($m == 1) ? "" : "s") . " no pud" . (($m == 1) ? "o" : "ieron") . " asignarse por duplicidad." : "");
+	if (count($alertas) > 0) {
+		$mensaje .= "<div style='color:#900; margin-top:10px; font-size:11px;'><b>RECHAZADOS POR REGLA:</b><br>" . implode("<br>", array_unique($alertas)) . "</div>";
+	}
+
+	// ═══ Snapshot financiero POST-aplicación (por cada contrato afectado) ═══
+	// Auditoría de aplicación manual
+	if ($n > 0) {
+		$lista_labels = array();
+		foreach($cargo as $l_in) { $a_l = explode('|', $l_in); $lista_labels[] = $a_l[0]; }
+		$leyendas_str = implode(', ', array_unique($lista_labels));
+		$contratos_lista_audit = is_array($c) ? $c : array($c);
+		$ctos_str = implode(', ', $contratos_lista_audit);
+		
+		// Calcular snapshot post por cada contrato afectado
+		$resumen_ctos = array();
+		foreach ($contratos_lista_audit as $cto_a) {
+			$res_p = $y->q("SELECT COUNT(*) AS n, IFNULL(SUM(monto),0) AS total FROM vw_ligacargos_pendientes WHERE numcontrato = '$cto_a'");
+			$p = $y->fetch_array($res_p);
+			$resumen_ctos[] = "Cto $cto_a: " . intval($p['n']) . " adeudos (\$" . number_format(floatval($p['total']), 2) . ")";
+		}
+		$snapshot_str = implode(' | ', $resumen_ctos);
+		
+		$leyendas_esc = $y->real_escape_string($leyendas_str);
+
+		// Registrar en cambios por cada contrato afectado (visible en historial individual)
+		foreach ($contratos_lista_audit as $cto_audit) {
+			$res_pa = $y->q("SELECT COUNT(*) AS n, IFNULL(SUM(monto),0) AS total FROM vw_ligacargos_pendientes WHERE numcontrato = '$cto_audit'");
+			$pa = $y->fetch_array($res_pa);
+			$detalle_cto = isset($cargos_aplicados_detalle[$cto_audit])
+				? implode(', ', $cargos_aplicados_detalle[$cto_audit])
+				: $leyendas_esc;
+			$snap_cto = "$detalle_cto | Adeudos: " . intval($pa['n']) . " | Deuda: \$" . number_format(floatval($pa['total']), 2);
+			$snap_cto_esc = $y->real_escape_string($snap_cto);
+			$detalle_esc = $y->real_escape_string("Cargos: $detalle_cto");
+			$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato)
+			       VALUES(NOW(), 'Aplicacion manual de cargos',
+			       '$detalle_esc',
+			       '$snap_cto_esc',
+			       '$cto_audit')");
+		}
+	}
+
+	return $templates->render('sistema/mensaje', [
+		'titulo' => 'Aplicación de Cargos',
+		'mensaje' => $mensaje . "<script>$('#cargostabla').html('')</script>"
+	]);
+}
+
+function creaCargo($leyenda, $cat, $otracategoria, $monto, $mensual, $anio, $recargo, $interes, $multa, $aniocobro, $repetir, $metros, $automatico, $monto_comercial = 0)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	// Sanitización estricta de entrada (Poka-yoke)
+	$leyenda = strtoupper(trim(strip_tags((string)$leyenda)));
+	$cat = intval($cat);
+	$monto = floatval($monto);
+	$mensual = intval($mensual);
+	$anio = intval($anio);
+	$aniocobro = intval($aniocobro);
+	$automatico = intval($automatico);
+	$monto_comercial = floatval($monto_comercial);
+	$multa = (!isset($multa)) ? 0 : intval($multa);
+	$repetir = (!isset($repetir)) ? 0 : intval($repetir);
+	$metros = (!isset($metros)) ? 0 : intval($metros);
+
+	// POKA-YOKE: Forzar categorías para conceptos administrativos fijos
+	if (strpos($leyenda, 'CAMBIO DE PROPIETARIO') !== false) {
+		$cat = 19;
+	} elseif (strpos($leyenda, 'CONSTANCIA') !== false) {
+		$cat = 21;
+	} elseif (strpos($leyenda, 'MULTA POR DESPERDICIO') !== false) {
+		$cat = 20;
+	} elseif (strpos($leyenda, 'CANCELACION DE TOMA') !== false || strpos($leyenda, 'CANCELACIÓN DE TOMA') !== false) {
+		$cat = 22;
+	}
+
+
+	$salida = "";
+
+	if ($cat == -1) {
+		$nombrecorto_auto = strtoupper(substr(preg_replace('/[^a-zA-Z0-9]/', '', $otracategoria), 0, 8));
+		$q = "insert into categorias (nombre, nombrecorto) values(\"$otracategoria\", \"$nombrecorto_auto\")";
+		if ($y->q($q))
+			$salida .= "Se ha creado una categor&iacute;a nueva.<br>";
+		else
+			$salida .= "No se pudo agregar la categor&iacute;a nueva.<br>";
+		$cat = $y->insert_id();
+	}
+
+	// FIX: El flag de recargo puede venir como 'recargo' o 'multa' desde el formulario
+	$flag_recargo = (isset($recargo) && $recargo == 1) ? 1 : $multa;
+	// GUARD: recargo=1 solo válido para cat. AGUA(2) y DRENAJE(3); cualquier otra categoría lo fuerza a 0
+	if ($cat !== 2 && $cat !== 3) $flag_recargo = 0;
+
+	$q = "insert into cargos values(null, '$leyenda', $monto, $flag_recargo, '', $mensual, $cat, 1, $aniocobro, $repetir, $metros, $automatico, $monto_comercial)";
+
+
+	if ($y->q($q)) {
+		$salida .= "Se ha agregado al cat&aacute;logo de cargos <b>$leyenda</b>.<br>";
+	} else
+		$salida .= "No se pudo dar de alta el cargo.<br>";
+
+	return $templates->render('sistema/mensaje', [
+		'titulo' => 'Crear Cargo',
+		'mensaje' => $salida . "<script>cargabusquedacontrato();</script>"
+	]);
+}
+
+function modificaCargo($num, $leyenda, $cat, $otracategoria, $monto, $mensual, $anio, $recargo, $interes, $multa, $aniocobro, $repetir, $metros, $automatico, $monto_comercial = 0)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	// Sanitización estricta de entrada (Poka-yoke)
+	$num = intval($num);
+	$leyenda = strtoupper(trim(strip_tags((string)$leyenda)));
+	$cat = intval($cat);
+	$monto = floatval($monto);
+	$mensual = intval($mensual);
+	$anio = intval($anio);
+	$aniocobro = intval($aniocobro);
+	$automatico = intval($automatico);
+	$monto_comercial = floatval($monto_comercial);
+	$multa = (!isset($multa)) ? 0 : intval($multa);
+	$repetir = (!isset($repetir)) ? 0 : intval($repetir);
+	$metros = (!isset($metros)) ? 0 : intval($metros);
+
+	// POKA-YOKE: Forzar categorías para conceptos administrativos fijos
+	if (strpos($leyenda, 'CAMBIO DE PROPIETARIO') !== false) {
+		$cat = 19;
+	} elseif (strpos($leyenda, 'CONSTANCIA') !== false) {
+		$cat = 21;
+	} elseif (strpos($leyenda, 'MULTA POR DESPERDICIO') !== false) {
+		$cat = 20;
+	} elseif (strpos($leyenda, 'CANCELACION DE TOMA') !== false || strpos($leyenda, 'CANCELACIÓN DE TOMA') !== false) {
+		$cat = 22;
+	}
+
+
+	$salida = "";
+
+	if ($cat == -1) {
+		$nombrecorto_auto = strtoupper(substr(preg_replace('/[^a-zA-Z0-9]/', '', $otracategoria), 0, 8));
+		$q = "insert into categorias (nombre, nombrecorto) values(\"$otracategoria\", \"$nombrecorto_auto\")";
+		if ($y->q($q))
+			$salida .= "Se ha creado una categor&iacute;a nueva.<br>";
+		else
+			$salida .= "No se pudo agregar la categor&iacute;a nueva.<br>";
+		$cat = $y->insert_id();
+	}
+
+	// FIX: El flag de recargo puede venir como 'recargo' o 'multa' desde el formulario
+	$flag_recargo = (isset($recargo) && $recargo == 1) ? 1 : $multa;
+	// GUARD: recargo=1 solo válido para cat. AGUA(2) y DRENAJE(3); cualquier otra categoría lo fuerza a 0
+	if ($cat !== 2 && $cat !== 3) $flag_recargo = 0;
+
+	$q = "update cargos set nombre='$leyenda', monto=$monto, monto_comercial=$monto_comercial, recargo=$flag_recargo, categoria=$cat, anio=$aniocobro, repetir=$repetir, metros=$metros, automatico=$automatico where numconsec=$num";
+
+
+	if ($y->q($q)) {
+		$salida .= "Se ha modificado el cargo $leyenda.<br>";
+		
+		// Sincronización de Saldo para cargos no pagados (estado = 0)
+		$res_pendientes = $y->q("SELECT l.numcontrato, l.repetido, c.tipo, c.agua, c.drenaje, c.metros as metros_cto
+								 FROM vw_ligacargos_pendientes l
+								 JOIN contrato c ON l.numcontrato = c.numcontrato
+								 WHERE l.leyenda='$leyenda'");
+		
+		$actualizados = 0;
+		$ctos_actualizados = array();
+		while ($p = $y->fetch_array($res_pendientes)) {
+			$nc = $p['numcontrato'];
+			$rep = $p['repetido'];
+			$metros_cto = $p['metros_cto'];
+
+			$r_t = $y->q("SELECT MAX(tipo) FROM contrato_toma WHERE numcontrato='$nc'");
+			list($es_com) = $y->fetch_array($r_t);
+
+			$nuevo_monto = 0;
+
+			// Recalcular basado en la nueva tarifa — Suma por Unidad de Toma
+			if ($cat == 2 || $cat == 3) {
+				$res_tomas = $y->q("SELECT tipo FROM contrato_toma WHERE numcontrato='$nc' AND " . ($cat == 2 ? 'tiene_agua=1 AND estado_agua=1' : 'tiene_drenaje=1 AND estado_drenaje=1'));
+				while ($t = $y->fetch_array($res_tomas)) {
+					$es_com_t = ($t['tipo'] == 1);
+					$m_base = ($es_com_t && $monto_comercial > 0) ? $monto_comercial : ($es_com_t ? $monto * 2 : $monto);
+					$nuevo_monto += $m_base;
+				}
+			} else {
+				$nuevo_monto = ($es_com == 1 && $monto_comercial > 0) ? $monto_comercial : (($es_com == 1) ? $monto * 2 : $monto);
+			}
+
+			if ($metros == 1 && $nuevo_monto > 0) {
+				$nuevo_monto = $nuevo_monto * $metros_cto;
+			}
+
+			if ($nuevo_monto > 0) {
+				$y->q("UPDATE ligacargos SET monto=$nuevo_monto WHERE numcontrato='$nc' AND leyenda='$leyenda' AND categoria=$cat AND repetido=$rep AND estado=0");
+				$y->q("UPDATE ligacargos_historico SET monto=$nuevo_monto WHERE numcontrato='$nc' AND leyenda='$leyenda' AND categoria=$cat AND repetido=$rep AND estado=0");
+				$tipo_cto = ($es_com == 1) ? 'Comercial' : 'Normal';
+				$ctos_actualizados[] = "cto $nc: \$$nuevo_monto ($tipo_cto)";
+				$actualizados++;
+			}
+		}
+
+		if ($actualizados > 0) {
+			$salida .= "Se sincronizó el saldo retroactivamente en <b>$actualizados</b> contratos con este cargo pendiente.<br>";
+			$antes_str = "Tarifas anteriores: Normal \$$monto, Comercial: \$$monto_comercial";
+			$despues_str = "Propagado a $actualizados contrato(s): " . implode(', ', $ctos_actualizados);
+			$leyenda_esc = $y->real_escape_string($leyenda);
+			$antes_esc = $y->real_escape_string($antes_str);
+			$despues_esc = $y->real_escape_string($despues_str);
+			$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato) VALUES(NOW(), 'Sincr. masiva de Adeudos - $leyenda_esc', '$antes_esc', '$despues_esc', '-MASIVO-')");
+		}
+
+	} else
+
+		$salida .= "No se pudo modificar el cargo.<br>";
+
+	return $templates->render('sistema/mensaje', [
+		'titulo' => 'Modificar Cargo',
+		'mensaje' => $salida . "<script>cargabusquedacontrato();</script>"
+	]);
+}
+
+function egresos()
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$res = $y->q("select max(id)+1 from egresos");
+	list($folio) = $y->fetch_array($res);
+
+	if ($folio == null)
+		$folio = 1;
+
+	$res = $y->q("select nombre from categorias_egresos order by id");
+	$categorias_egresos = [];
+	while (list($nombrecat) = $y->fetch_array($res)) {
+		$categorias_egresos[] = $nombrecat;
+	}
+
+	$res = $y->q("select id, leyenda, monto, categoria, fecha, estado, motivoelimina from egresos order by fecha desc");
+	$egresos = [];
+	while ($row = $y->fetch_array($res)) {
+		$egresos[] = [
+			'id' => $row[0],
+			'leyenda' => $row[1],
+			'monto' => $row[2],
+			'categoria' => $row[3],
+			'fecha' => $row[4],
+			'estado' => $row[5],
+			'motivoelimina' => $row[6]
+		];
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `cargos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L109-139)</summary>
+
+**Path:** `Unknown file`
+
+```
+			$res_deuda = $y->q("SELECT IFNULL(SUM(monto),0) FROM vw_ligacargos_pendientes WHERE numcontrato='$numcontrato'");
+			list($deuda_actual) = $y->fetch_array($res_deuda);
+			$deuda_actual = floatval($deuda_actual);
+
+			for ($i = 1; $i <= $meses; $i++) {
+				if ($umbral_bomba_enable == 1 && $deuda_actual >= $umbral_bomba && $umbral_bomba > 0) {
+					break; // Límite Bomba de Recargos alcanzado
+				}
+				$leyenda_recargo = "RECARGO $nom_meses[$mesrecargo] $aniorecargo - $leyenda";
+				$tabla_dest = ($aniorecargo <= 2025) ? "ligacargos_historico" : "ligacargos";
+				
+				// Idempotencia: no duplicar si el recargo ya existe (protege contra refresh y re-activaciones)
+				$chk_rec = $y->q("SELECT numcontrato FROM vw_ligacargos_all WHERE leyenda='$leyenda_recargo' AND numcontrato='$numcontrato' LIMIT 1");
+				if ($y->num_rows($chk_rec) == 0) {
+					// REGLA F05: ligacargos.recargo es neutralizado (0.00). La Fuente de Verdad es la Categoría.
+					$q = "INSERT INTO $tabla_dest (numcontrato,leyenda,monto,fcobro,fpago,estado,recargo,folio,anio,numcontratoresp,idpago_vinc,categoria,repetido) VALUES('$numcontrato','$leyenda_recargo',$monto_recargo,CURDATE(),CURDATE(),0,0.00,0,$anio,NULL,NULL,$categoria_recargo,$cuenta)";
+
+					if ($y->q($q)) {
+						$deuda_actual += $monto_recargo;
+					} else {
+						$y->_logFallback('DEBUG_SURCHARGE', $q, "Falla en anio $aniorecargo");
+					}
+				}
+				if (++$mesrecargo > 12) {
+					$mesrecargo = 1;
+					$aniorecargo++;
+				}
+			}
+		}
+	}
+}
+```
+
+</details>
 
 ---
 
