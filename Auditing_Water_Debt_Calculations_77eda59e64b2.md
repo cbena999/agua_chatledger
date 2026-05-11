@@ -7,9 +7,8 @@
 | **Trajectory ID** | `6550479e-2627-44be-ae66-6d5296bf6e1d` |
 | **Cascade ID** | `e9e60f8c-dc0e-4c0c-a226-77eda59e64b2` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 311 |
+| **Total Steps** | 385 |
 | **Started** | 11 May 2026, 8:39 am |
-| **Completed** | 11 May 2026, 12:35 pm |
 
 ---
 
@@ -8233,6 +8232,1886 @@ Goals:
 
 - **Model:** Gemini 3 Flash
 </details>
+
+---
+
+## User Request
+
+para  configuracion.php, desde el texto: "Ámbitos de aplicación: ...hasta • Es el año de creación del contrato y tiene exención de primer año.
+Muevelo de lugar ponlo abajo  o mas bien a lado de Estados de Contrato solo lectura, divide esta tabal en dos columnas y coloca esa descripcion que dije mueve, y referencialo para indicar que pertencece a recargo_porcentaje
+
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `CARTERA_VENCIDA_MODELO_Y_REPORTES.md`
+**Language:** markdown
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Refactoring Configuration File**
+
+I'm currently focused on refactoring `admin/operaciones/configuracion.php`. Specifically, I'm working on extracting the extensive description of `recargo_porcentaje`, which currently resides within the code, and finding a better place for it within the codebase. I need to move it out of the potentially inlined location, and into a more logical place.
+
+
+**Relocating the Description**
+
+I'm now planning the physical relocation of the `recargo_porcentaje` description. I will move it from its database-driven display within the main card, and place it beside the "Estados de Contrato" section. This entails dividing the bottom section into two columns, one for "Estados de Contrato" and another for the long description, which I will link to `recargo_porcentaje`. I'm also considering removing it from the database field to avoid redundancy.
+
+
+**Refining Presentation Details**
+
+I'm now focusing on refining the presentation. For `recargo_porcentaje`, I'll only show the one-line summary within the card itself. I'm also planning the new two-column layout at the bottom, placing the expanded description alongside "Estados de Contrato." This will involve splitting the `.g-estados` container and adding a second column to display the full description text. Finally, I'm checking the database value again, and will ensure only the short summary is in the card.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 3.736290607s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 11 May 2026, 12:37 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Refining UI Implementation**
+
+Okay, I've decided to tackle removing the verbose description from the database field `descripcion` for `recargo_porcentaje` first. After that is done, I'll add the new card in the `configuracion.php` UI, and place it at the bottom, near "Estados de Contrato". I will format it nicely afterwards.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.118327077s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 11 May 2026, 12:37 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Modifying Layout Configuration**
+
+I'm currently working on `admin/operaciones/configuracion.php`. I plan to change the CSS for a two-column layout at the bottom, or modify the `.g-estados` behavior. The current grid template has `grid-template-columns: 1fr 1fr`. My next step is to make changes, and add the new card.
+
+
+
+
+### Actions
+
+**Tool:** `multi_replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.408616409s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 11 May 2026, 12:38 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `configuracion.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L149-317)</summary>
+
+**Path:** `Unknown file`
+
+```
+    <form method="POST" action="configuracion.php">
+        <div class="footer-bar" style="margin-bottom:14px;">
+            <button type="button" class="submit-btn" onclick="abrirModalConfirmacion()">
+                Guardar Configuraci&oacute;n
+            </button>
+        </div>
+        <div class="grupos-grid">
+        <?php
+        $clases_grupo = [
+            'Estados de Contrato'  => 'g-estados',
+            'Recargos Moratorios'  => 'g-recargos',
+            'Operación y Contratos'=> 'g-paridad',
+        ];
+        foreach ($grupos as $nombre_grupo => $gdef):
+            $clase = isset($clases_grupo[$nombre_grupo]) ? $clases_grupo[$nombre_grupo] : 'g-ciclo';
+        ?>
+        <div class="grupo-card <?= $clase ?>">
+            <div class="grupo-header">
+                <?= htmlspecialchars($nombre_grupo) ?>
+                <?php if ($gdef['readonly']): ?><span class="readonly-badge">solo lectura</span><?php endif; ?>
+            </div>
+            <div class="grupo-desc"><?= $gdef['desc_grupo'] ?></div>
+            <div class="grupo-body">
+            <?php
+            $separadores_grupo = [
+                'Operación y Contratos' => [
+                    'paridad_anios_max_recargo' => 'Límite Bomba (Recargos)',
+                    'susptemp_mes_permitido' => 'Ciclo de Vida',
+                ],
+            ];
+            $seps = isset($separadores_grupo[$nombre_grupo]) ? $separadores_grupo[$nombre_grupo] : [];
+            foreach ($gdef['claves'] as $clave):
+                if (!isset($opciones[$clave])) continue;
+                $opt = $opciones[$clave];
+                $es_editable = in_array($clave, $editables) && !$gdef['readonly'];
+                if (isset($seps[$clave])): ?>
+                <div style="border-top:1px dashed #d0d5dd;margin:10px 0 10px;position:relative;">
+                    <span style="position:absolute;top:-8px;left:50%;transform:translateX(-50%);background:#fff;padding:0 6px;font-size:10px;color:#999;text-transform:uppercase;letter-spacing:.5px;"><?= $seps[$clave] ?></span>
+                </div>
+                <?php endif; ?>
+                <?php
+                $isGroupedTop = ($clave === 'paridad_anios_max_recargo');
+                $isGroupedMiddle = ($clave === 'reversal_threshold_enable');
+                $isGroupedBottom = ($clave === 'reversal_threshold');
+                $rowClass = "cfg-row";
+                if ($isGroupedTop) $rowClass .= " cfg-grouped-top";
+                elseif ($isGroupedMiddle) $rowClass .= " cfg-grouped-middle";
+                elseif ($isGroupedBottom) $rowClass .= " cfg-grouped-bottom";
+                ?>
+                <div class="<?= $rowClass ?>">
+                    <span class="cfg-key"><?= htmlspecialchars($clave) ?></span>
+                    <?php 
+                        $desc = $opt['descripcion'] ?: '';
+                        if ($clave === 'susptemp_mes_permitido') {
+                            $mes_nombre = get_mes_nombre(intval($opt['valor']));
+                            $desc .= " <strong style='color:#2980b9;'>(Actual: $mes_nombre)</strong>";
+                        }
+                    ?>
+                    <span class="cfg-desc"><?= $desc ?></span>
+                    <?php if ($clave === 'reversal_threshold_enable'): ?>
+                        <div style="display: flex; align-items: center; margin-top: 6px; gap: 8px;">
+                            <input type="hidden" name="config[<?= htmlspecialchars($clave) ?>]" value="0">
+                            <input type="checkbox"
+                                   class="cfg-input"
+                                   style="width: 18px; height: 18px; cursor: pointer; accent-color: #c0392b;"
+                                   name="config[<?= htmlspecialchars($clave) ?>]"
+                                   value="1"
+                                   data-original="<?= htmlspecialchars($opt['valor']) ?>"
+                                   <?= $opt['valor'] == '1' ? 'checked' : '' ?>
+                                   <?= $es_editable ? '' : 'disabled' ?>>
+                            <span style="font-size: 13px; font-weight: bold; color: <?= $opt['valor'] == '1' ? '#c0392b' : '#7f8c8d' ?>;">
+                                <?= $opt['valor'] == '1' ? 'Límite Activo' : 'Límite Desactivado' ?>
+                            </span>
+                        </div>
+                    <?php else: ?>
+                    <input type="text"
+                           class="cfg-input"
+                           name="config[<?= htmlspecialchars($clave) ?>]"
+                           value="<?= htmlspecialchars($opt['valor']) ?>"
+                           data-original="<?= htmlspecialchars($opt['valor']) ?>"
+                           <?= $es_editable ? '' : 'readonly' ?>>
+                    <?php endif; ?>
+                </div>
+            <?php endforeach; ?>
+            </div>
+        </div>
+        <?php endforeach; ?>
+        </div>
+
+    </form>
+
+    <div id="cfg-nara"></div>
+
+    <script>
+    // Descripciones leídas desde config_sistema.descripcion (BD)
+    var impactos = <?= json_encode(array_map(function($o){ return $o['descripcion'] ?: ''; }, $opciones), JSON_UNESCAPED_UNICODE) ?>;
+
+    function abrirModalConfirmacion() {
+        var cambios = [];
+        var inputs  = document.querySelectorAll('form input.cfg-input:not([readonly]):not([disabled])');
+
+        inputs.forEach(function(inp) {
+            var m = inp.name.match(/^config\[(.+)\]$/);
+            if (!m) return;
+            var clave = m[1];
+            var valOrig = inp.getAttribute('data-original');
+            var valNuevo = inp.type === 'checkbox' ? (inp.checked ? '1' : '0') : inp.value;
+            if (valOrig !== valNuevo) {
+                cambios.push({ clave: clave, antes: valOrig, despues: valNuevo });
+            }
+        });
+
+        var bodyHtml;
+        if (cambios.length === 0) {
+            bodyHtml = '<div class="no-cambios">No se detectaron cambios respecto a los valores actuales.</div>';
+        } else {
+            bodyHtml  = '<p style="font-size:12px;color:#555;margin:0 0 10px;">Se modificar&aacute;n <strong>' + cambios.length + '</strong> par&aacute;metro(s). Revise antes de confirmar:</p>';
+            bodyHtml += '<table class="cfg-diff-table">';
+            bodyHtml += '<tr><th>Par&aacute;metro</th><th>Antes</th><th>Despu&eacute;s</th><th>Impacto</th></tr>';
+            cambios.forEach(function(c) {
+                var imp = impactos[c.clave] || 'Afecta el comportamiento del m&oacute;dulo correspondiente de forma inmediata.';
+                bodyHtml += '<tr>' +
+                    '<td class="col-key">' + c.clave + '</td>' +
+                    '<td class="col-ant">' + escHtml(c.antes) + '</td>' +
+                    '<td class="col-new">' + escHtml(c.despues) + '</td>' +
+                    '<td class="col-imp">' + imp + '</td>' +
+                    '</tr>';
+            });
+            bodyHtml += '</table>';
+            bodyHtml += '<p style="font-size:11px;color:#b05a00;background:#fffbe6;border:1px solid #e0cc80;border-radius:4px;padding:6px 10px;margin:0;">&#9888; Los cambios son efectivos de forma inmediata y afectan el comportamiento global del sistema.</p>';
+        }
+
+        var hayCambios = cambios.length > 0;
+        var html =
+            '<div id="cfg-overlay"></div>' +
+            '<div id="cfg-modal">' +
+                '<div class="m-header">Confirmar Cambios en Configuraci&oacute;n Global</div>' +
+                '<div class="m-body">' + bodyHtml + '</div>' +
+                '<div class="m-footer">' +
+                    '<input type="button" id="cfg-cancelar-modal" value="Cancelar">' +
+                    (hayCambios ? '<input type="button" id="cfg-confirmar-modal" value="Guardar Cambios">' : '') +
+                '</div>' +
+            '</div>';
+
+        document.getElementById('cfg-nara').innerHTML = html;
+
+        document.getElementById('cfg-cancelar-modal').addEventListener('click', cerrarModal);
+        document.getElementById('cfg-overlay').addEventListener('click', cerrarModal);
+        if (hayCambios) {
+            document.getElementById('cfg-confirmar-modal').addEventListener('click', function() {
+                cerrarModal();
+                document.querySelector('form').submit();
+            });
+        }
+    }
+
+    function cerrarModal() {
+        document.getElementById('cfg-nara').innerHTML = '';
+    }
+
+    function escHtml(s) {
+        return String(s)
+            .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+            .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+    </script>
+</body>
+</html>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Refining HTML Manipulation**
+
+I've hit a snag with the HTML replacement for Chunk 2. My initial attempt targeting `</div>` failed because the tag isn't unique, or something. However, I've now identified the correct line, which is line 237, the problem has now moved past it. I'm focusing on replacing content after the groups' `foreach` loop, and also remembering that I need to REMOVE "Estados de Contrato".
+
+
+
+
+### Actions
+
+**Tool:** `multi_replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.339858331s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 11 May 2026, 12:38 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Reviewing Current State**
+
+I've just finished refactoring the UI, and pushed those changes after committing. Now, I'm verifying the code's integrity, but realized I also updated the database. I already removed the long description for `recargo_porcentaje` in the database, by moving it to the code, and so far everything looks to be correct.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `configuracion.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.410935816s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L69-99)</summary>
+
+**Path:** `Unknown file`
+
+```
+        body { padding: 20px; font-family: Arial, sans-serif; background: #f5f6fa; }
+        h1 { font-size: 22px; color: #2c3e50; margin-bottom: 6px; font-style: normal; text-shadow: none; text-align: left; }
+        .subtitle { color: #7f8c8d; font-size: 13px; margin-bottom: 20px; }
+        .back-link { display: inline-block; margin-bottom: 16px; color: #0674B7; text-decoration: none; font-weight: bold; font-size: 13px; }
+        .back-link:hover { text-decoration: underline; }
+        .success-msg { color: #155724; background: #d4edda; border: 1px solid #c3e6cb; padding: 10px 14px; margin-bottom: 18px; border-radius: 4px; font-weight: bold; font-size: 13px; }
+
+        /* Layout dos columnas */
+        .grupos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 20px; }
+        /* .g-estados ya no es full-width para permitir la columna de referencia al lado */
+
+        /* Tarjeta de grupo */
+        .grupo-card { background: #fff; border: 1px solid #dde3ec; border-radius: 6px; overflow: hidden; }
+        .grupo-header { padding: 10px 14px; font-weight: bold; font-size: 12px; text-transform: uppercase;
+                        letter-spacing: .5px; color: #fff; }
+        .g-estados    .grupo-header { background: #7f8c8d; }
+        .g-recargos   .grupo-header { background: #2980b9; }
+        .g-paridad    .grupo-header { background: #8e44ad; }
+        .g-ciclo      .grupo-header { background: #27ae60; }
+        .g-reversa    .grupo-header { background: #c0392b; }
+        .g-referencia .grupo-header { background: #2c3e50; }
+        .grupo-desc { font-size: 11px; color: #666; padding: 6px 14px 8px; border-bottom: 1px solid #eee; background: #fafbfc; }
+        .grupo-body { padding: 10px 14px 14px; }
+
+        /* Fila de config */
+        .cfg-row { margin-bottom: 12px; }
+        .cfg-grouped-top { background: #fdfdfd; padding: 10px 14px; border: 1px solid #d0d5dd; border-bottom: none; border-radius: 6px 6px 0 0; margin-bottom: 0; }
+        .cfg-grouped-middle { background: #fdfdfd; padding: 10px 14px; border-left: 1px solid #d0d5dd; border-right: 1px solid #d0d5dd; border-top: 1px dashed #ccc; border-bottom: none; border-radius: 0; margin-top: 0; margin-bottom: 0; }
+        .cfg-grouped-bottom { background: #fdfdfd; padding: 10px 14px 10px 34px; border: 1px solid #d0d5dd; border-top: none; border-radius: 0 0 6px 6px; margin-top: 0; position: relative; }
+        .cfg-grouped-bottom::before { content: '\21B3'; position: absolute; left: 14px; top: 10px; color: #999; font-size: 16px; font-weight: bold; }
+        .cfg-grouped-top .cfg-key, .cfg-grouped-middle .cfg-key, .cfg-grouped-bottom .cfg-key { color: #c0392b; }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 11 May 2026, 12:38 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+## User Request
+
+se inclyo lode que recargo_porcentaje es:  "ÚNICO porcentaje de mora del sistema (ej: 10 = 10%)." ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `CARTERA_VENCIDA_MODELO_Y_REPORTES.md`
+**Language:** markdown
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Confirming Parameter Inclusion**
+
+I've confirmed that the text "ÚNICO porcentaje de mora del sistema (ej: 10 = 10%)." was indeed added to the `descripcion` field for the `recargo_porcentaje` parameter within the `config_sistema` table in the database. I've successfully updated the DB with the provided text.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.628516940s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 11 May 2026, 12:41 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+## User Request
+
+tambien q aparezca en CARTERA_VENCIDA_MODELO_Y_REPORTES.md.
+no comitees anhu8n
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `CARTERA_VENCIDA_MODELO_Y_REPORTES.md`
+**Language:** markdown
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Adding Mora Percentage Information**
+
+I'm currently focused on incorporating the user's requested text regarding the system's delinquency percentage into the `CARTERA_VENCIDA_MODELO_Y_REPORTES.md` document. I've noted the directive to hold off on committing any changes at this stage.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.215429762s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 11 May 2026, 12:42 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+## User Request
+
+Analiza todos todos los documentos .md del dir /opt/lampp/htdocs/agua/docs-dev/doc-estabilizacion/ y alinealos, homologalos a consitencia con base al contenido y significado de CARTERA_VENCIDA_MODELO_Y_REPORTES.md
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `CARTERA_VENCIDA_MODELO_Y_REPORTES.md`
+**Language:** markdown
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/opt/lampp/htdocs/agua/docs-dev/doc-estabilizacion/`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+<details>
+<summary>Directory: `doc-estabilizacion` (7 items)</summary>
+
+**Path:** `opt/lampp/htdocs/agua/docs-dev/doc-estabilizacion`
+
+| Name | Type | Size |
+|------|------|------|
+| `CARTERA_VENCIDA_MODELO_Y_REPORTES.md` | File | 15793 bytes |
+| `data-cortes-caja-libro` | Directory | - |
+| `encuadres` | Directory | - |
+| `funcionalidad-reglas-negocio` | Directory | - |
+| `mas-features` | Directory | - |
+| `pruebas-cp-manuales-auto` | Directory | - |
+| `reglas-negocio-por-menu.md` | File | 33995 bytes |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/opt/lampp/htdocs/agua/docs-dev/doc-estabilizacion/funcionalidad-reglas-negocio/`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+<details>
+<summary>Directory: `funcionalidad-reglas-negocio` (3 items)</summary>
+
+**Path:** `opt/lampp/htdocs/agua/docs-dev/doc-estabilizacion/funcionalidad-reglas-negocio`
+
+| Name | Type | Size |
+|------|------|------|
+| `analisis_paridad_3hosts.md` | File | 6412 bytes |
+| `saneamientos_pipeline.md` | File | 16708 bytes |
+| `transiciones_estado_contratos.md` | File | 20347 bytes |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `reglas-negocio-por-menu.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# Reglas de Negocio por Módulo de Menú — Webapp Agua V2
+
+**Extraídas de código PHP y BD Host C — 2026-04-19**
+**Archivos fuente**: `includes/negocio/contratos.php`, `includes/negocio/cargos.php`, `includes/negocio/usuarios.php`, `reportes/*.php`
+
+> Este documento complementa `.agents/rules/02-reglas-negocio.md` con el detalle de implementación,
+> la función PHP exacta, la línea de código y el comportamiento verificado en Host C (MariaDB 10.4.27).
+> Al encontrar divergencias entre este doc y el código, el código manda.
+
+---
+
+## 📋 ÍNDICE
+
+- [M1 — Menú: Contratos (Ficha y Edición)](#m1-contratos)
+- [M2 — Menú: Nuevo Contrato](#m2-nuevo-contrato)
+- [M3 — Menú: Cambio de Estado del Contrato](#m3-cambio-estado)
+- [M4 — Menú: Tomas Físicas (Conexión/Desconexión)](#m4-tomas)
+- [M5 — Menú: Cargos (Agregar / Cancelar / Restaurar)](#m5-cargos)
+- [M6 — Menú: Cobro y Pagos (Caja)](#m6-cobro)
+- [M7 — Menú: Catálogo de Cargos (Admin)](#m7-catalogo)
+- [M8 — Menú: Egresos](#m8-egresos)
+- [M9 — Menú: Usuarios](#m9-usuarios)
+- [R1 — Reporte: Cartera Vencida](#r1-cartera)
+- [R2 — Reporte: Concentrado Corte de Caja](#r2-caja)
+- [R3 — Reporte: Lista de Deudores / Morosos](#r3-deudores)
+- [R4 — Reporte: Historial de Movimientos del Contrato](#r4-historial)
+- [R5 — Reporte: Auditoría de Integridad de BD](#r5-auditoria)
+
+---
+
+<a name="m1-contratos"></a>
+## M1 — Menú: Contratos (Ficha y Edición)
+
+Función principal: `cargaContrato()` en `contratos.php:40`
+
+### M1-R01 — Carga automática de cargos en apertura de ficha
+- **Dónde**: `cargaContrato()` líneas 69–131
+- **Regla**: Al abrir la ficha de un contrato en **Estado 1 (Activo)**, el sistema evalúa los cargos del catálogo con `automatico=1` desde el año de alta del contrato (`anio >= aniocontrato`). Para cada cargo, verifica si ya existe en `vw_ligacargos_all` antes de insertar.
+- **Anti-duplicado**: Si `repetir=0` → verifica existencia exacta (leyenda + contrato). Si `repetir=1` → verifica existencia por año. Solo inserta si no existe. Esto previene la "Refresh-bomb" (multiplicación por recarga de página).
+- **Monto calculado en tiempo real**: El monto insertado depende del número de tomas activas (`estado_agua=1`, `estado_drenaje=1`) y del tipo (Normal vs Comercial), usando `monto_comercial` del catálogo cuando el tipo es Comercial.
+- **Dispara**: `calcula_recargos()` inmediatamente después de cada INSERT de cargo automático.
+- **No aplica**: Estados 2, 3 y 4 — NO se insertan cargos automáticos en apertura de ficha.
+
+### M1-R02 — Vista de adeudos: separación capital vs recargo
+- **Dónde**: `cargaContrato()` líneas 142–157
+- **Regla**: La clasificación "recargo" en la vista se determina por `categoria IN (16,17)` — **nunca** por el campo `ligacargos.recargo` (que es float heredado, regla F05). El campo `recargo` se normaliza a `0/1` para el coloreado UI antes de enviarlo a la vista.
+- **Fuente de datos**: `vw_ligacargos_pendientes` (UNION automático activa + histórico V2).
+
+### M1-R03 — Cargos cancelados: COALESCE activa→histórico para ID
+- **Dónde**: `cargaContrato()` líneas 188–200
+- **Regla**: Para obtener el `id_cargo` de cargos cancelados (estado=-1), se usa `COALESCE((SELECT id FROM ligacargos ...), (SELECT id FROM ligacargos_historico ...))`. Nunca se asume que el cargo está en una sola tabla. Esto es la implementación de la Regla F06 (cobertura dual).
+
+### M1-R04 — Guardado de contrato: bloqueo total en Estado 4
+- **Dónde**: `guardaContrato()` línea 502
+- **Regla**: Si `contrato.estado=4`, `guardaContrato()` retorna alert de error y **no ejecuta ninguna otra lógica**. Implementa Regla C02.
+- **Mensaje exacto**: `"Error: Este contrato se encuentra en SUSPENSIÓN DEFINITIVA y no permite modificaciones."`
+
+### M1-R05 — Guardado: restricción de agregar tomas según estado
+- **Dónde**: `guardaContrato()` líneas 506–512
+- **Regla**: Solo se puede **agregar** nuevas tomas (num_tomas > tomas_actuales) en contratos con `estado IN (1, 2)`. Estado 3 y 4 bloquean la adición de tomas.
+- **Mensaje**: `"Restriccion: Solo se permite agregar nuevas tomas a contratos en estado Activo o Suspension Temporal."`
+
+### M1-R06 — Guardado: validación límite 2 tomas por domicilio (incluyendo otros contratos)
+- **Dónde**: `guardaContrato()` líneas 514–522
+- **Regla**: Antes de guardar, suma las tomas de **otros contratos del mismo usuario en el mismo domicilio** (`estado != 4`, excluye el contrato actual). Si `tomas_otras + tomas_solicitadas > 2`, rechaza.
+- **Normalización de domicilio**: Compara sin espacios, sin puntos, sin tildes (`UPPER + REPLACE`).
+- **Mensaje**: `"Restriccion de Tomas: El usuario ya cuenta con N toma(s) en otros contratos para este domicilio. Solo se permiten hasta 2 tomas por usuario en el mismo domicilio."`
+
+### M1-R07 — Guardado: tracking de cambios de infraestructura y tarifa
+- **Dónde**: `guardaContrato()` líneas 558–593
+- **Regla**: Cualquier cambio en `tiene_agua`, `tiene_drenaje` o `tipo` de una toma genera un registro en `cambios` con descripción `'Infrastructura Agua Toma N'`, `'Infrastructura Drenaje Toma N'` o `'Cambio de Tarifa Toma N'`.
+- **Desconexión de agua**: Si `estado_agua` pasa de 1 a 0, llama a `_quitaCargoAnual($id, 'AGUA', $y)`.
+- **Desconexión de drenaje**: Si `estado_drenaje` pasa de 1 a 0, llama a `_quitaCargoAnual($id, 'DRENAJE', $y)`.
+
+### M1-R08 — Guardado: sincronización de campos legacy y paridad al finalizar
+- **Dónde**: `guardaContrato()` líneas 598–635
+- **Regla**: Después de actualizar todas las tomas, sincroniza `contrato.agua`, `contrato.drenaje`, `contrato.tipo` desde `COUNT/MAX` de `contrato_toma`. Luego llama siempre a `_sincronizaParidadFinanciera()`.
+- **Paridad**: Solo tiene efecto financiero si el estado del contrato es 4 (depuración total) o si hay discrepancias entre tomas físicas y cargos anuales del año actual.
+
+### M1-R09 — Eliminación de toma: solo por reducción en `guardaContrato()`
+- **Dónde**: `guardaContrato()` líneas 536–542
+- **Regla**: Si `num_tomas` recibido es menor que las tomas actuales, las tomas sobrantes se **eliminan físicamente** de `contrato_toma` con DELETE, y se registra en `cambios`. No hay recuperación posible.
+
+### M1-R10 — Verificación de anualidades del año en catálogo
+- **Dónde**: `_verificaAnualidades()` líneas 456–465
+- **Regla**: Al cargar la ficha o el formulario de nuevo contrato, el sistema verifica que existan `ANUALIDAD DEL AGUA YYYY` y `ANUALIDAD DEL DRENAJE YYYY` en el catálogo `cargos` con `estado=1`. Si faltan, muestra advertencia `faltan_cargos` en la UI. Sin estas anualidades, `_sincronizaParidadFinanciera()` no puede generar cargos para el año actual.
+
+---
+
+<a name="m2-nuevo-contrato"></a>
+## M2 — Menú: Nuevo Contrato
+
+Funciones: `nuevoContrato()` (render formulario) + `guardaNuevoContrato()` (persistencia) en `contratos.php`
+
+### M2-R01 — Número de contrato: autoincremento sobre MAX(numcontrato) numérico
+- **Dónde**: `nuevoContrato()` línea 429
+- **Regla**: El ID sugerido es `MAX(CAST(numcontrato AS UNSIGNED)) + 1`. Es solo sugerencia — el operador puede cambiarlo. Si el ID ya existe en BD, el INSERT falla y muestra "No ha sido posible agregar este contrato".
+- **Riesgo**: Contratos con ID alfanumérico (ej. `100A`) pueden desincronizar el MAX.
+
+### M2-R02 — Exención de recargos primer año: valor desde config_sistema
+- **Dónde**: `guardaNuevoContrato()` línea 823
+- **Regla**: El campo `exento_recargo_primer_anio` del nuevo contrato toma el valor de `config_sistema.nuevo_contrato_exento_default` (default: 1). **No es editable en el formulario** — se establece automáticamente. Efecto: `calcula_recargos()` omitirá recargos cat 16/17 en el año de alta del contrato.
+
+### M2-R03 — Validación de límite de tomas antes de crear
+- **Dónde**: `guardaNuevoContrato()` líneas 825–836
+- **Regla**: Antes de insertar, suma las tomas existentes del usuario en el mismo domicilio (todos los contratos, excluye Estado 4). Si `existentes + solicitadas > 2`, rechaza con alert.
+- **Normalización de domicilio**: Igual que M1-R06 (UPPER + REPLACE sin tildes, espacios, puntos).
+- **Diferencia vs guardaContrato()**: Aquí NO excluye el contrato actual (no existe todavía). `guardaContrato()` sí lo excluye.
+
+### M2-R04 — Creación de tomas en contrato_toma con estado inicial activo
+- **Dónde**: `guardaNuevoContrato()` líneas 847–855
+- **Regla**: Por cada toma solicitada (1 a `max_tomas_por_contrato`), inserta en `contrato_toma` con `estado_agua = tiene_agua` y `estado_drenaje = tiene_drenaje`. Es decir, si se declara que tiene agua, la toma nace activa (`estado_agua=1`).
+- **Límite**: Nunca crea más tomas que `config_sistema.max_tomas_por_contrato` (default: 2).
+
+### M2-R05 — Sincronización de campos legacy contrato.agua/drenaje/tipo post-creación
+- **Dónde**: `guardaNuevoContrato()` líneas 857–864
+- **Regla**: Después de crear las tomas, recalcula `contrato.agua` (COUNT tomas con `tiene_agua=1`), `contrato.drenaje` (COUNT tomas con `tiene_drenaje=1`) y `contrato.tipo` (MAX tipo de tomas). Actualiza el contrato con estos valores.
+
+### M2-R06 — Paridad inicial: genera cargos anuales según tomas dadas de alta
+- **Dónde**: `guardaNuevoContrato()` línea 867
+- **Regla**: Llama a `_sincronizaParidadFinanciera($id, $y)` como **primer acto financiero** del nuevo contrato. Esto generará o confirmará los cargos anuales correspondientes a las tomas creadas.
+- **Precondición**: Requiere que `ANUALIDAD DEL AGUA YYYY` y `ANUALIDAD DEL DRENAJE YYYY` existan en el catálogo. Si no existen, la paridad no inserta cargos (ver M1-R10).
+
+### M2-R07 — Auditoría de creación en tabla cambios
+- **Dónde**: `guardaNuevoContrato()` líneas 870–872
+- **Regla**: Registra `descripcion='Registro de Nuevo Contrato'`, `antes='NUEVO'`, `despues='Usuario: X | Domicilio: Y'`.
+
+### M2-R08 — Formulario muestra tarifas de referencia del año actual
+- **Dónde**: `nuevoContrato()` líneas 432–445
+- **Regla**: Antes de renderizar el formulario, consulta `cargos WHERE automatico=1 AND recargo=0 AND estado=1 AND anio=YYYY AND categoria IN (2,3)`. Estas tarifas se muestran en la UI para orientar al operador (Normal y Comercial). Si no existen anualidades del año, la UI mostrará alerta `faltan_cargos`.
+
+### M2-R09 — Tipo comercial en toma 2: regla de negocio implícita
+- **Dónde**: `guardaNuevoContrato()` línea 849 + `_sincronizaDeudaPendienteContrato()`
+- **Regla**: `contrato.tipo` se establece como `MAX(tipo)` de todas las tomas. Si al menos una toma es Comercial (tipo=1), el contrato completo se considera Comercial para efectos de cálculo de tarifa. Los montos de anualidades se calculan usando `monto_comercial` si el tipo resultante es 1.
+
+### M2-R10 — Contrato creado siempre en Estado 1 (Activo)
+- **Dónde**: `guardaNuevoContrato()` línea 838
+- **Regla**: El INSERT de nuevo contrato hardcodea `estado=1`. No existe mecanismo para crear un contrato en otro estado inicial.
+
+### M2-R11 — Fecha de alta: NOW() al momento del INSERT
+- **Dónde**: `guardaNuevoContrato()` línea 838
+- **Regla**: `fecha = NOW()`. Esta fecha determina el `anio_creacion` usado por `calcula_recargos()` para verificar la exención F07. Si el contrato se crea en 2026 y `exento=1`, no recibirá recargos moratorios durante 2026.
+
+---
+
+<a name="m3-cambio-estado"></a>
+## M3 — Menú: Cambio de Estado del Contrato
+
+Función: `cambiaestado()` en `contratos.php:254`
+
+### M3-R01 — Estado 4 bloquea cualquier cambio posterior
+- **Dónde**: `cambiaestado()` líneas 267–272
+- **Regla**: Si `estado_actual=4`, retorna error inmediato. Ninguna transición sale de Estado 4.
+- **Mensaje**: `"No es posible cambiar el estado de un contrato que se encuentra en Suspensión Definitiva."`
+
+### M3-R02 — Bloqueo de salto directo 2↔3 (Regla C07)
+- **Dónde**: `cambiaestado()` líneas 274–280
+- **Regla**: `(2→3)` y `(3→2)` están bloqueados. El contrato debe pasar por Estado 1 primero.
+- **Implementación**: Condición `(actual==2 && destino==3) || (actual==3 && destino==2)`.
+- **Mensaje**: `"No se permite saltar entre diferentes tipos de suspensión directamente. El contrato debe ser Regularizado a Activo antes de cambiar el tipo de suspensión."`
+
+### M3-R03 — Suspensión Temporal: solo en mes configurado
+- **Dónde**: `cambiaestado()` líneas 287–294
+- **Regla**: La transición a Estado 2 solo está permitida cuando `date('m') == config_sistema.susptemp_mes_permitido` (default: 12, diciembre). Bloquea el resto del año.
+- **Mensaje**: `"La Suspensión Temporal solo puede solicitarse en [mes_nombre]."`
+
+### M3-R04 — Motivo obligatorio: mínimo de caracteres configurable
+- **Dónde**: `cambiaestado()` línea 296 + `pagacancelacargos()` línea 308
+- **Regla**: Todo cambio de estado y toda cancelación requieren un texto de motivo con longitud > `config_sistema.cancelacion_min_caracteres` (default: 20). Sin eso, retorna error sin ejecutar ninguna acción.
+
+### M3-R05 — Transición a Estado 4: C05 — Depuración Total
+- **Dónde**: `cambiaestado()` líneas 309–316
+- **Regla**: Al pasar a Estado 4:
+  1. `UPDATE contrato_toma SET estado_agua=0, estado_drenaje=0` (desconexión física total)
+  2. `UPDATE contrato SET agua=0, drenaje=0` (sincronización legacy)
+  3. `_sincronizaParidadFinanciera()` → al detectar Estado 4, cancela TODOS los cargos pendientes en `ligacargos` y `ligacargos_historico` (estado=-1)
+- **Auditoría**: `despues` contiene `"Eliminación física de tomas y depuración total de deuda (Regla C05)."`
+
+### M3-R06 — Transición a Estado 1: C04 + C06 — Paridad ANTES que Amnistía
+- **Dónde**: `cambiaestado()` líneas 317–328
+- **Regla**: Al reactivar a Estado 1:
+  1. `_sincronizaParidadFinanciera()` — restaura/confirma anualidades según tomas físicas actuales
+  2. Si venía de Estado 2: `_amnistiaRecargosHistoricos()` — cancela cat 16/17 de anio < año actual
+  3. Si venía de Estado 3: **NO amnistía** — adeudo íntegro conservado
+- **Orden crítico**: La paridad se ejecuta ANTES de la amnistía para evitar que la paridad restaure recargos que la amnistía acabará de cancelar.
+
+### M3-R07 — Transiciones a Estado 2 o 3: NO modifican cargos
+- **Dónde**: `cambiaestado()` líneas 329–334
+- **Regla**: Las transiciones `1→2` y `1→3` **no llaman** a `_sincronizaParidadFinanciera()`. Los cargos en `ligacargos` no cambian. Solo se registra una nota descriptiva en `cambios`.
+- **Nota Estado 2**: `"Facturación congelada. Anualidad vigente cancelada (Regla C06)."` — **este texto es solo descriptivo, no es una acción de código**. La anualidad ya fue cancelada por el sistema cuando el contrato entró a Estado 2 anteriormente (en ciclos previos), no en esta transición.
+- **Nota Estado 3**: `"Suspensión sancionatoria. Adeudo íntegro conservado. Sin amnistía al reactivar."`
+
+### M3-R08 — Snapshot financiero post-cambio en auditoría
+- **Dónde**: `cambiaestado()` líneas 336–341
+- **Regla**: Después de ejecutar paridad y/o amnistía, toma un snapshot `COUNT(*)/SUM(monto)` de `vw_ligacargos_pendientes` y lo incluye en `cambios.despues` como `"Adeudos: N | Deuda: $X.XX"`.
+
+---
+
+<a name="m4-tomas"></a>
+## M4 — Menú: Tomas Físicas (Conexión/Desconexión)
+
+Funciones: `cambiaEstadoConexion()` (cambio rápido) + `guardaContrato()` (modo edición completo)
+
+### M4-R01 — Cambio rápido de conexión: solo en contratos Activos
+- **Dónde**: `cambiaEstadoConexion()` líneas 787–793
+- **Regla**: El botón de cambio rápido solo opera si `contrato.estado = config_sistema.estado_activo` (default: 1). Si el contrato está en Estado 2, 3 o 4, retorna error.
+- **Mensaje**: `"Solo se puede cambiar la conexión en contratos ACTIVOS."`
+
+### M4-R02 — Cambio rápido: dispara paridad financiera automáticamente
+- **Dónde**: `cambiaEstadoConexion()` líneas 805–812
+- **Regla**: Después de actualizar `estado_agua/estado_drenaje`, recalcula `contrato.agua/drenaje` y llama a `_sincronizaParidadFinanciera()`. Esto cancela el cargo anual si se desconectó, o lo restaura si se reconectó.
+
+### M4-R03 — Motor de paridad: solo opera sobre anualidades del año actual
+- **Dónde**: `_sincronizaParidadFinanciera()` líneas 694–717
+- **Regla**: La paridad busca `"ANUALIDAD DEL AGUA YYYY"` y `"ANUALIDAD DEL DRENAJE YYYY"` donde YYYY = `date('Y')`. No opera sobre anualidades de años anteriores.
+- **Lógica**: Si hay toma activa (`estado_agua=1, tiene_agua=1`): restaura (estado=-1 → 0). Si no hay toma: cancela (estado=0 → -1). Opera en ambas tablas (activa + histórico).
+
+### M4-R04 — Motor de paridad: recalibra montos vía `_sincronizaDeudaPendienteContrato()`
+- **Dónde**: `_sincronizaParidadFinanciera()` línea 717
+- **Regla**: Después de sincronizar estados, llama a `_sincronizaDeudaPendienteContrato()`. Esta función recalcula el monto de anualidades pendientes (cat 2/3) basándose en el número actual de tomas activas y el tipo (Normal/Comercial). Si el monto difiere en más de $0.01, actualiza en ambas tablas y registra `'Calibracion automatica de Deudas'` en `cambios`.
+
+### M4-R05 — Motor de paridad en Estado 4: depuración total
+- **Dónde**: `_sincronizaParidadFinanciera()` líneas 664–683
+- **Regla**: Si al llamar a la paridad el contrato está en Estado 4, cancela TODOS los cargos pendientes (estado=0 → -1) en ambas tablas, independientemente del servicio o categoría. Registra `'Depuración SDF Automática (Motor Paridad)'` en `cambios`.
+
+### M4-R06 — Eliminación de cargo anual por desconexión: `_quitaCargoAnual()`
+- **Dónde**: `_quitaCargoAnual()` líneas 647–652
+- **Regla**: Llama a `sp_cancelar_cargo` con la leyenda `"ANUALIDAD DEL [AGUA|DRENAJE] YYYY"`. El SP opera sobre ambas tablas. Esta función se invoca desde `guardaContrato()` cuando se detecta que `estado_agua/drenaje` pasó de 1 a 0.
+
+---
+
+<a name="m5-cargos"></a>
+## M5 — Menú: Cargos (Agregar / Cancelar / Restaurar)
+
+Función: `aplicacargos()` en `cargos.php:357` + `pagacancelacargos()` modo cancelar en `cargos.php:299` + `regresarCargoCancelado()` en `contratos.php`
+
+### M5-R01 — Bloqueo total de cargos en Estado 4 (Regla F02)
+- **Dónde**: `aplicacargos()` líneas 380–385
+- **Regla**: Si el contrato está en Estado 4, rechaza el cargo con alert. No se inserta nada.
+- **Mensaje**: `"El contrato N se encuentra en Suspensión Definitiva y no puede recibir nuevos cargos."`
+
+### M5-R02 — Bloqueo de servicio sin infraestructura (Regla F08)
+- **Dónde**: `aplicacargos()` líneas 426–434
+- **Regla**: Si `categoria=2` (agua) y `n_tomas_agua=0`, rechaza. Si `categoria=3` (drenaje) y `n_tomas_drenaje=0`, rechaza.
+- **Mensajes**: `"El cargo X no aplica porque el contrato N no tiene toma de agua/drenaje conectada."`
+
+### M5-R03 — Monto calculado dinámicamente al aplicar: tomas activas + tipo
+- **Dónde**: `aplicacargos()` líneas 410–421
+- **Regla**: Para cat 2 (agua): `monto = monto_base * n_tomas_agua`. Para cat 3 (drenaje): `monto = monto_base * n_tomas_drenaje`. `monto_base` es `monto_comercial` si el contrato es Comercial y `monto_comercial > 0`, o `monto * 2` si es Comercial sin `monto_comercial`, o `monto` si es Normal.
+
+### M5-R04 — Tabla de destino según año del cargo (split V2)
+- **Dónde**: `aplicacargos()` línea 437
+- **Regla**: `$tabla_d = ($anio <= 2025) ? "ligacargos_historico" : "ligacargos"`. Cualquier cargo con año ≤2025 va a histórico; ≥2026 va a activa. Aplica tanto en `aplicacargos()` como en `calcula_recargos()`.
+
+### M5-R05 — Cargo con `repetir=0`: anti-duplicado por leyenda
+- **Dónde**: `aplicacargos()` líneas 438–439
+- **Regla**: Si `repetir=0`, usa INSERT simple. La duplicidad es detectada a nivel SQL (error de BD) o por el mensaje `"M cargo(s) no pudieron asignarse por duplicidad"` en el caso de falla.
+- **Nota**: `repetir=0` en `aplicacargos()` no verifica existencia previa explícita — a diferencia de `cargaContrato()` que sí hace SELECT previo. El error de duplicado proviene de constraint de BD o falla del INSERT.
+
+### M5-R06 — Cargo con `repetir=1`: contador incremental `repetido`
+- **Dónde**: `aplicacargos()` líneas 440–444
+- **Regla**: `repetido = COUNT(existentes en vw_ligacargos_all)`. Permite múltiples instancias del mismo cargo con índice 0, 1, 2... N-1.
+
+### M5-R07 — Cancelación: motivo obligatorio con mínimo de caracteres
+- **Dónde**: `pagacancelacargos()` línea 309
+- **Regla**: `strlen($texto) > $min_car` donde `$min_car = config_sistema.cancelacion_min_caracteres` (default: 20). La verificación es estricta (mayor, no mayor-igual).
+
+### M5-R08 — Cancelación: operador identificado en auditoría
+- **Dónde**: `pagacancelacargos()` líneas 326–335
+- **Regla**: El operador se extrae de `$_SESSION['usuario']`. Si es string: se usa directamente. Si es objeto con método `getNombre()`: se llama al método. Default: `'cajero'`. Se incluye en `cambios.despues`.
+
+### M5-R09 — Cancelación: usa `sp_cancelar_cargo` (SP que opera en ambas tablas)
+- **Dónde**: `pagacancelacargos()` línea 323
+- **Regla**: La cancelación pasa el `id_cargo` al SP. El SP es responsable de determinar en qué tabla está el cargo y actualizar `estado=-1` con `fpago=NOW()` en esa tabla.
+
+### M5-R10 — Restauración de cargo cancelado: bloqueo en Estado 4
+- **Dónde**: `regresarCargoCancelado()` en `contratos.php` (referenciado en M1-R03)
+- **Regla**: Verifica `contrato.estado != 4` antes de restaurar. Si el contrato está en SDF, rechaza. Registra operador (`$_SESSION['usuario']`) en `cambios`.
+
+### M5-R11 — `calcula_recargos()`: no genera recargos sobre recargos
+- **Dónde**: `calcula_recargos()` líneas 53–56
+- **Regla**: Si `$categoria == cat_agua (16)` o `$categoria == cat_drenaje (17)`, retorna sin hacer nada. Evita recargos sobre recargos.
+
+### M5-R12 — `calcula_recargos()`: exenciones múltiples
+- **Dónde**: `calcula_recargos()` líneas 38–51
+- **Regla**: No genera recargos si:
+  - `contrato.estado = 4` (SDF)
+  - `contrato.estado = 2` (Susp. Temporal — anualidad ya cancelada)
+  - `exento_recargo_primer_anio = 1 AND anio == anio_creacion` (F07)
+  - `categoria IN (cat_agua, cat_drenaje)` (no recargos sobre recargos)
+
+### M5-R13 — `calcula_recargos()`: solo genera el mes con nombre igual al cargo base
+- **Dónde**: `calcula_recargos()` líneas 69–98
+- **Regla**: Genera recargos con leyenda `"RECARGO [MES] [AÑO] - [LEYENDA_BASE]"`. Solo inserta recargos del mismo año que el cargo base (`if ($aniorecargo == $anio)`). Los recargos de años siguientes NO se insertan automáticamente.
+
+---
+
+<a name="m6-cobro"></a>
+## M6 — Menú: Cobro y Pagos (Caja)
+
+Función: `pagacancelacargos()` modo `pagacargos` en `cargos.php:268`
+
+### M6-R01 — Folio atómico: AUTO_INCREMENT en `folios_recibo`
+- **Dónde**: `pagacancelacargos()` líneas 269–271
+- **Regla**: Antes de pagar cualquier cargo, hace `INSERT INTO folios_recibo (dummy) VALUES (1)` y captura el `insert_id()`. Este folio es único y atómico — imposible colisión en concurrencia.
+
+### M6-R02 — Pago via `sp_pagar_cargo`
+- **Dónde**: `pagacancelacargos()` líneas 286–291
+- **Regla**: Cada cargo se paga llamando a `sp_pagar_cargo($id_cargo, $numcontrato, $leyenda, $repetido, $folio, ...)`. El SP actualiza `estado=1`, `fpago=NOW()`, `folio=X` en la tabla correcta (activa o histórico).
+
+### M6-R03 — Pago de asamblea: dispara `sp_sinc_asamblea_puntual`
+- **Dónde**: `pagacancelacargos()` líneas 281–288
+- **Regla**: Si `categoria=6` o `leyenda LIKE '%FALTA ASAMBLEA%'`, tras pagar el cargo del contrato principal llama a `sp_sinc_asamblea_puntual($numusuario, $leyenda, ...)`. El SP cancela el mismo cargo en todos los contratos hermanos del usuario.
+
+### M6-R04 — Folio vinculado: todos los cargos del cobro comparten el mismo folio
+- **Dónde**: `pagacancelacargos()` línea 286 (el folio se reutiliza en el loop)
+- **Regla**: Un recibo puede cubrir múltiples cargos y múltiples contratos del mismo usuario. Todos comparten el mismo `folio_sig`. Esto permite que `concentradocortecaja.php` cuente folios únicos (no filas).
+
+### M6-R05 — Auditoría de cobro en `cambios`
+- **Dónde**: `pagacancelacargos()` líneas 293–295
+- **Regla**: `descripcion='Cobro de Cargos'`, `antes='Emisión de Recibo Folio: X'`, `despues='Total Marcado: $Y | Cargos liquidados via sp_pagar_cargo [Atomic ID Mode]'`.
+
+---
+
+<a name="m7-catalogo"></a>
+## M7 — Menú: Catálogo de Cargos (Admin)
+
+Funciones: `creaCargo()` + `modificaCargo()` en `cargos.php`
+
+### M7-R01 — Modificación de cargo: propagación masiva a cargos pendientes
+- **Dónde**: `modificaCargo()` líneas 549–604
+- **Regla**: Al modificar el monto de un cargo en el catálogo, el sistema automáticamente recalcula y actualiza el monto en todos los registros pendientes (`estado=0`) de `ligacargos` y `ligacargos_historico` que tengan esa misma leyenda. Usa la misma lógica de tomas activas y tipo Normal/Comercial.
+- **Auditoría**: Si se actualizaron contratos, registra `'Sincr. masiva de Adeudos - [leyenda]'` con conteo de contratos afectados.
+
+### M7-R02 — Nueva categoría creada on-the-fly si `cat=-1`
+- **Dónde**: `creaCargo()` líneas 489–496 + `modificaCargo()` líneas 527–534
+- **Regla**: Si se selecciona categoría `-1` (nueva), el sistema crea la categoría en la tabla `categorias` con nombre corto auto-generado (primeros 8 chars alfanuméricos en mayúscula) y usa el ID generado para el cargo.
+
+### M7-R03 — Campo `monto_comercial`: default 0 si no se proporciona
+- **Dónde**: `creaCargo()` línea 504
+- **Regla**: Si `monto_comercial` está vacío, se guarda como `0`. La función `_sincronizaDeudaPendienteContrato()` interpreta `monto_com == 0` como "Comercial = monto × 2".
+
+---
+
+<a name="m8-egresos"></a>
+## M8 — Menú: Egresos
+
+Función: `eliminaEgreso()` en `cargos.php:102`
+
+### M8-R01 — Eliminación lógica: `estado=-1`, no DELETE físico
+- **Dónde**: `eliminaEgreso()` línea 114
+- **Regla**: Los egresos no se eliminan físicamente. Se marcan con `estado=-1` y `motivoelimina`.
+
+### M8-R02 — Auditoría de eliminación de egreso
+- **Dónde**: `eliminaEgreso()` líneas 116–118
+- **Regla**: Registra en `cambios` con `numcontrato='-EGRESO-'`, `descripcion='Eliminación de Egreso'`, incluyendo leyenda, monto y categoría del egreso eliminado.
+
+### M8-R03 — Categoría legacy `categoria=0` válida
+- **Dónde**: BD Host C, `egresos.categoria=0`
+- **Regla**: Egresos con `categoria=0` son registros legacy (pre-2018). El reporte RC-3 valida que el sistema no quede con `id_categoria=NULL` al migrar estos registros. `categoria=0` se trata como "sin categoría" — es un valor válido en la BD, no un error.
+
+---
+
+<a name="m9-usuarios"></a>
+## M9 — Menú: Usuarios
+
+Funciones: `busquedaUsuario()`, `busquedaUsuarioCalle()`, `cargaUsuario()` en `usuarios.php`
+
+### M9-R01 — Búsqueda excluye usuarios No Localizados (estado=2)
+- **Dónde**: `busquedaUsuario()` línea 23 + `busquedaUsuarioCalle()` línea 73
+- **Regla**: `WHERE u.estado <> 2`. Los usuarios marcados como No Localizados (estado=2) no aparecen en búsquedas estándar.
+
+### M9-R02 — Búsqueda solo retorna usuarios con al menos 1 contrato
+- **Dónde**: `busquedaUsuario()` línea 25
+- **Regla**: `HAVING ctotales > 0`. Usuarios sin contratos vinculados no aparecen en la búsqueda estándar de contratos.
+
+### M9-R03 — Detección de nombre duplicado en resultados de búsqueda
+- **Dónde**: `busquedaUsuario()` línea 20
+- **Regla**: `(SELECT COUNT(*) FROM usuario u2 WHERE u2.nombre = u.nombre) as cnt`. Si `cnt > 1`, el usuario se marca como "repetido" en la UI (para identificar duplicados).
+
+### M9-R04 — Ficha de usuario excluye contratos en Estado 4
+- **Dónde**: `cargaUsuario()` línea 110 + línea 31 de `busquedaUsuario()`
+- **Regla**: `WHERE estado <> 4`. La ficha del usuario no muestra contratos en Suspensión Definitiva. La lista de contratos en búsqueda tampoco.
+
+### M9-R05 — Cambio de propietario: solo reasigna `numusuario`, sin validación de contratos destino
+- **Dónde**: `cambiapropietario()` líneas 404–419
+- **Regla**: `UPDATE contrato SET numusuario='$nuevousuario'`. No verifica si el nuevo usuario ya tiene 2 tomas en el mismo domicilio. La restricción de 2 tomas se aplica solo en creación/edición de contratos.
+
+---
+
+<a name="r1-cartera"></a>
+## R1 — Reporte: Cartera Vencida
+
+Archivo: `reportes/carteravencida.php`
+
+### R1-R01 — Filtro de categorías excluidas de cartera
+- **Dónde**: `carteravencida.php` línea 66
+- **Regla**: `categoria NOT IN (6, 19, 20, 21, 22)`. Implementa Regla R02:
+  - Cat 6: multas asamblea (sincronización por usuario, no cuota periódica)
+  - Cat 16, 17: SÍ se incluyen (van a cartera cuando son de años anteriores)
+  - Cat 19–22: conceptos únicos V2 (CB/PROP, MLT/DESP, CNT/NADO, CNC/FUGA)
+  - Cat 11: recargos normales **SÍ** incluidos — van a cartera cuando son de años anteriores
+
+### R1-R02 — Exclusión de contratos Estado 4
+- **Dónde**: `carteravencida.php` línea 65
+- **Regla**: `AND c.estado != 4`. Siempre explícito, independientemente del saneamiento de la BD.
+
+### R1-R03 — Filtro por año: campo `anio` o `fcobro` como fallback
+- **Dónde**: `carteravencida.php` líneas 67–72
+- **Regla**: `(l.anio = $anio) OR ((l.anio = 0 OR l.anio IS NULL) AND SUBSTRING(fcobro,1,4) = '$anio')`. Cargos sin año en campo `anio` usan el año de `fcobro` como fallback.
+
+### R1-R04 — Segmentación por estado del usuario: "No Localizado"
+- **Dónde**: `carteravencida.php` líneas 94–110+
+- **Regla**: Los usuarios con `u.estado=2` (No Localizados) aparecen en sección separada de la cartera. Se calculan subtotales independientes: `total_activa` vs `total_no_loc`.
+
+---
+
+<a name="r2-caja"></a>
+## R2 — Reporte: Concentrado Corte de Caja
+
+Archivo: `reportes/concentradocortecaja.php` + `concentradocortecajaresumen.php`
+
+### R2-R01 — Columnas dinámicas desde catálogo `categorias`
+- **Dónde**: `concentradocortecaja.php` (construcción dinámica)
+- **Regla**: Las columnas del reporte se generan con `SELECT id, nombre, nombrecorto FROM categorias ORDER BY id`. Esto incluye automáticamente las categorías V2 (19–22) sin hardcode. Implementa Regla R04.
+
+### R2-R02 — Conteo de folios únicos: array-set por contrato
+- **Dónde**: `concentradocortecaja.php`
+- **Regla**: `$folios_c[$cid][$folio] = true` (set, no array). El total al pie usa `COUNT(DISTINCT folio)`. Los `(n=X)` de ambos reportes (detalle y resumen) deben coincidir. Implementa Regla R05.
+
+### R2-R03 — Excluye categorías de cartera (mismo filtro que R1)
+- **Dónde**: Ambos reportes de caja
+- **Regla**: Mismas exclusiones que R1-R01 para coherencia inter-reporte. Regla R02.
+
+---
+
+<a name="r3-deudores"></a>
+## R3 — Reporte: Lista de Deudores / Morosos
+
+Archivos: `reportes/listadeudores.php`, `reportes/reporte_morosos.php` (referenciado en Ground Truth)
+
+### R3-R01 — Mismos filtros canónicos de cartera
+- **Regla**: Aplica `categoria NOT IN (6, 19, 20, 21, 22)` y `c.estado != 4`. Coherencia con R1.
+
+### R3-R02 — Sin filtro de año para categorías acumulativas
+- **Regla**: La Cat 6 (Asamblea) es la única que no tiene filtro de año (`sin_anio`) — acumula deuda de cualquier año en la misma cartera. Implementa `sin_anio=[6]` de Regla R02.
+
+---
+
+<a name="r4-historial"></a>
+## R4 — Reporte: Historial de Movimientos del Contrato
+
+Archivo: `reportes/historial_mov_cto.php`
+
+### R4-R01 — Muestra registros de `cambios` con segundos
+- **Regla**: El campo `fecha` en `cambios` incluye `HH:MM:SS`. El reporte debe mostrar la hora completa para trazabilidad de operaciones dentro del mismo día (Regla RC-5).
+
+---
+
+<a name="r5-auditoria"></a>
+## R5 — Reporte: Auditoría de Integridad de BD
+
+Archivo: `admin/reportes/auditoria_integridad_bd.php`
+
+### R5-R01 — Discriminador canónico de recargos: `categoria IN (16,17)`
+- **Dónde**: `auditoria_integridad_bd.php` líneas 69 y 136 (corregidas 2026-04-15)
+- **Regla**: Para detectar recargos huérfanos (sin cargo base pagado), el criterio es `categoria IN (cat_agua, cat_drenaje)`. **Nunca** `recargo=1` en `ligacargos`. Implementa Regla F05.
+
+---
+
+## 🔑 Resumen de Funciones Clave y sus Responsabilidades
+
+| Función | Archivo | Propósito | Dispara |
+|---|---|---|---|
+| `cargaContrato()` | `contratos.php:40` | Carga ficha + inserta cargos automáticos faltantes | `calcula_recargos()` |
+| `guardaContrato()` | `contratos.php:490` | Edita contrato + tomas existentes | `_sincronizaParidadFinanciera()` |
+| `guardaNuevoContrato()` | `contratos.php:817` | Crea contrato + tomas iniciales | `_sincronizaParidadFinanciera()` |
+| `cambiaestado()` | `contratos.php:254` | Cambia estado del ciclo de vida | `_sincronizaParidadFinanciera()` + `_amnistiaRecargosHistoricos()` |
+| `cambiaEstadoConexion()` | `contratos.php:780` | Cambio rápido de conexión física | `_sincronizaParidadFinanciera()` |
+| `_sincronizaParidadFinanciera()` | `contratos.php:657` | Motor paridad: sincroniza tomas ↔ cargos | `_sincronizaDeudaPendienteContrato()` |
+| `_sincronizaDeudaPendienteContrato()` | `contratos.php:720` | Recalibra montos de anualidades pendientes | — |
+| `_amnistiaRecargosHistoricos()` | `contratos.php:924` | C06: cancela recargos cat 16/17 de anio < actual | — |
+| `_quitaCargoAnual()` | `contratos.php:647` | Cancela anualidad al desconectar | `sp_cancelar_cargo` |
+| `aplicacargos()` | `cargos.php:357` | Aplica cargos manuales | `calcula_recargos()` |
+| `pagacancelacargos()` | `cargos.php:262` | Paga o cancela cargos seleccionados | `sp_pagar_cargo` / `sp_cancelar_cargo` / `sp_sinc_asamblea_puntual` |
+| `modificaCargo()` | `cargos.php:519` | Modifica catálogo + propaga masivamente | — |
+| `calcula_recargos()` | `cargos.php:22` | Genera recargos moratorios | — |
+
+---
+
+*Generado: 2026-04-19 | Fuente: código PHP Host A (`/opt/lampp/htdocs/agua`) verificado contra BD Host C*
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Rule Revisions**
+
+I'm currently focused on the `reglas-negocio-por-menu.md` document, specifically updating rules within. I've identified key areas to be revised based on "Cartera Vencida" and "Límite Bomba" models. My primary task involves reconciling inconsistencies, particularly in the `R1` report concerning "Cartera Vencida" on line 396, which I'll be detailing shortly.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `transiciones_estado_contratos.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.615087242s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# Matriz de Transiciones y Protocolos Financieros de Contratos (Agua V2)
+
+Este documento define las reglas de operación para la gestión de estados y el comportamiento de la deuda ante cambios administrativos en el sistema Agua V2 (Estabilización 2026).
+
+---
+
+## 1. Estados del Contrato
+El sistema reconoce **4 estados** fundamentales. El estado del contrato rige la facturación automática y los permisos de edición.
+
+1.  **Activo (1)**: Estado operativo normal. Genera anualidades y recargos.
+2.  **Suspensión Temporal (2)**: Suspensión a solicitud del usuario. Congela la facturación de nuevas anualidades.
+3.  **Suspensión Administrativa (3)**: Suspensión por sanción o adeudo. Mantiene la deuda íntegra y permite el crecimiento de recargos.
+4.  **Suspensión Definitiva (4)**: Baja total e irreversible. Inmoviliza el registro y depura deudas pendientes (Regla C05).
+
+---
+
+## 2. Matriz de Transiciones Permitidas
+
+| Origen ↓ \ Destino → | 1 (Activo) | 2 (S. Temporal) | 3 (S. Administrativa) | 4 (S. Definitiva) |
+| :--- | :---: | :---: | :---: | :---: |
+| **1 (Activo)** | — | ✅ *Sí* | ✅ *Sí* | ✅ *Sí* |
+| **2 (S. Temporal)** | ✅ *Reactivación* | — | ❌ *Bloqueado* | ✅ *Sí* |
+| **3 (S. Administrativa)** | ✅ *Reactivación* | ❌ *Bloqueado* | — | ✅ *Sí* |
+| **4 (S. Definitiva)** | ❌ *Bloqueado* | ❌ *Bloqueado* | ❌ *Bloqueado* | — |
+
+> **Nota**: No se permite el salto directo entre suspensiones (2 ↔ 3). El contrato debe reactivarse (pasar a 1) para cambiar el tipo de suspensión.
+
+---
+
+## 3. Lógica Híbrida y Reglas de Retroactividad Financiera
+
+La Estabilización 2026 introduce la **Lógica Híbrida**, un diseño que protege el costo original de las deudas del pasado, pero actualiza dinámicamente la mora generada. Esta lógica se divide en dos comportamientos clave:
+
+### 3.1. Escenario Base: Regla de No Retroactividad (Protección del Pasado)
+Las modificaciones en la naturaleza administrativa o infraestructura del contrato **solo afectan la deuda base del ejercicio actual y de los ejercicios futuros** (`anio_cargo >= anio_actual`). 
+La deuda base del pasado (ej. `anio_cargo <= 2025`) queda "congelada" en su valor original.
+
+**Cambios que obedecen la No Retroactividad:**
+*   **Cambio de Tipo de Toma (Normal ↔ Comercial)**: Si un usuario cambia hoy su toma a comercial, el costo incrementado (ej. el doble) solo aplicará al año actual en adelante. Sus deudas de años pasados seguirán costando la tarifa "normal" que debían en su momento.
+*   **Modificación de Metros Lineales**: Solo afecta la facturación futura.
+*   **Aumento en Catálogo de Tarifas**: Las deudas de años anteriores no sufren aumentos ni reducciones por fluctuaciones en el catálogo vigente.
+
+### 3.2. Escenario Dinámico: Regla Retroactiva (Recargos Multi-año)
+A diferencia de la deuda base, los recargos moratorios (Categorías 16 y 17) **sí son retroactivos**. El motor V2 evalúa continuamente *toda* la deuda viva del usuario.
+*   **Motor de Mora Continuo**: Se eliminó la limitante legacy que frenaba la mora al terminar el año calendario. Un adeudo de 2024 acumulará recargos continuos por todos los meses transcurridos a través del 2025 y 2026.
+*   **Mantenimiento Financiero**: Al cambiar una tarifa base (presente) o al cambiar de estado, el sistema reevalúa ("llena los huecos") la mora de todos los años pendientes. La base de 2024 se mantiene original, pero sus recargos se mantienen al día (Lógica Híbrida).
+*   **Guard de Profundidad Histórica (`paridad_anios_max_recargo`)**: Parámetro de `config_sistema` (valor por defecto: `5`) que limita cuántos años hacia atrás puede el motor generar recargos al reactivar un contrato. Por ejemplo, con `paridad_anios_max_recargo = 5` y año actual 2026, el motor solo genera recargos para anualidades de 2021 en adelante — las de 2020 y anteriores no acumulan mora nueva. Sin este guard, un contrato con deuda desde 2005 podría explotar su saldo de forma irreversible al reactivarse. **Este parámetro es crítico para toda reactivación (transiciones 2→1 y 3→1).**
+
+### 3.3. Regla de Suma de Unidades (Multi-Toma)
+El sistema reemplazó el modelo de "Tarifa Mayor" por **Suma de Unidades**. 
+*   El costo de Agua y Drenaje resulta de sumar individualmente la tarifa (Normal o Comercial) de cada toma física conectada al contrato.
+
+---
+
+## 4. Configuración del Motor V2 (Catálogo de Cargos)
+
+### 4.1. Activación de Flags Moratorios (2026 en adelante)
+Para que las anualidades generen mora (recargos) a través del Motor V2, el catálogo de `cargos` utiliza la columna `recargo` como un *Flag de Elegibilidad*.
+*   **Deudas Base Nuevas (>= 2026)**: Tienen explícitamente `recargo = 1` en el catálogo. Esto le indica al motor que esta anualidad es elegible para acumular mora mes a mes.
+*   **Recargos Físicos (Categorías 16 y 17)**: Tienen explícitamente `recargo = 0` en el catálogo (Regla F05) para evitar la paradoja de "recargos sobre recargos".
+*   Las referencias tarifarias de UI consultan exclusivamente cargos base obviando este flag (`estado=1 AND categoria IN (2,3)`), adaptándose así a la estructura V2.
+
+### 4.2. Guards de Seguridad en Backend (2026-04-26)
+Dos guards implementados en `includes/negocio/cargos.php` refuerzan la integridad del flag `recargo`:
+
+*   **Guard G01 — Retorno temprano en `calcula_recargos()`**: Si el cargo tiene `recargo=0` (flag del catálogo), la función retorna inmediatamente sin generar mora. Esto aplica en la ruta de aplicación manual (`aplicacargos()`), que respeta el flag. La ruta de paridad automática (`_sincronizaDeudaPendienteContrato()`) no pasa por este guard por diseño — usa `categoria IN (2,3)` como criterio directo, ya que los registros históricos (≤2025) en `ligacargos_historico` tienen nombres distintos a los del catálogo actual pero sí deben devenguar mora.
+
+*   **Guard G02 — Forzado `recargo=0` en `creaCargo()` / `modificaCargo()`**: Cualquier intento de guardar `recargo=1` en un cargo de categoría distinta a `2 (AGUA)` o `3 (DRENAJE)` es neutralizado en el servidor antes del INSERT/UPDATE. Esto previene que un operador active el flag por UI (checkbox "Es una multa") en categorías incorrectas.
+
+> **Nota**: El checkbox "Es una multa" en `views/cargos/catalogo.php` y `views/cargos/modificar.php` sigue visible en el formulario (se mantiene oculta la fila "Genera recargos"), pero el Guard G02 garantiza que solo surta efecto en categorías 2 y 3.
+
+---
+
+## 5. Excepciones Administrativas y Purgas
+
+### 5.1. Amnistía de Recargos (Regla C06)
+Aplicada exclusivamente en la **Reactivación de Susp. Temporal (2 → 1)**. 
+*   El sistema cancela de forma retroactiva todos los recargos acumulados (categorías 16 y 17) de años pasados para facilitar el retorno del usuario al estado Activo. 
+*   Esta amnistía ocurre *después* de que la Paridad Financiera estabiliza la deuda base.
+*   **Excepción**: La reactivación desde *Suspensión Administrativa (3 → 1)* NO goza de amnistía. El usuario debe pagar su mora completa.
+
+### 5.2. Purga por Baja (Estado 4 - SDF)
+Al pasar a **Suspensión Definitiva**, el sistema activa una purga radical:
+*   Depura (cambia a `estado = -1`) absolutamente toda la deuda pendiente (`estado = 0`) de ese contrato, tanto en la tabla activa (`ligacargos`) como en la partición histórica (`ligacargos_historico`).
+*   Desconecta físicamente las tomas de la UI y bloquea cualquier cambio de propietario, anotación u otro estado.
+
+---
+
+## Apéndice: Clasificación de Cargos por Categoría
+
+| Categoría | Concepto | Comportamiento | Lógica PHP/BD |
+| :--- | :--- | :--- | :--- |
+| **2, 3** | Agua / Drenaje | **No Retroactivo** | Sincronización de base limitada a `anio >= actual`. Requieren flag `recargo=1` en V2. |
+| **7** | Metros Lineales | **No Retroactivo** | Multiplicador ligado a la infraestructura actual. |
+| **16, 17** | Recargos Mora | **Retroactivo** | Se recalculan dinámicamente para toda la deuda viva (Híbrido/Multi-año). Flag `recargo=0` (Regla F05). |
+| **6** | Falta Asamblea | **Estático** | Tarifa fija por evento. No cambia tras la emisión. |
+| **14, 15** | Conexiones | **Puntual** | Cargos únicos generados por eventos de alta/reactivación. |
+| **19, 21** | Trámites | **Puntual** | Cargos únicos generados por solicitud. |
+
+---
+
+## Apéndice B: Catálogo de Tipos de Movimiento del Contrato (Tabla `cambios`)
+
+Cada operación significativa que afecta un contrato queda registrada en la tabla `cambios` con una `descripcion` que actúa como tipo canónico. El reporte `reportes/historial_mov_cto.php` clasifica estos registros en grupos para su visualización. La tabla siguiente es el catálogo autoritativo.
+
+### Grupo 1 — Sistema (automáticos, sin intervención del operador)
+
+| `descripcion` (valor exacto) | Qué representa | `antes` | `despues` |
+| :--- | :--- | :--- | :--- |
+| `REVERSAL_SNAPSHOT` | Instantánea JSON grabada en *toda* transición de estado válida. Contiene los IDs exactos de cargos creados/cancelados para poder revertir. | JSON con `estado_origen`, `estado_destino`, `lc_ids_nuevos`, `lc_ids_cancelados`, `hist_ids_nuevos_hist`, `hist_ids_amnist`, `deuda_pre`, `deuda_post`, `tomas_pre`, `serv_pre` | `PENDIENTE` → `REVERTIDO` tras ejecución de reversa |
+| `Calibración Automática` | Recalibración de moras y deuda base disparada por el motor interno. | Deuda antes de calibrar | Resultado: base + moras actualizadas |
+| `Paridad Anualidades (Motor C04)` | Ajuste de anualidades de agua/drenaje según tomas físicas activas. Registra el guard `paridad_anios_max_recargo`. | Acciones realizadas (Restaurada / Cancelada por toma) | Tomas agua/drenaje activas \| límite de recargos aplicado |
+| `Facturación automática al reactivar` | Cargos base (anualidades del año en curso, conexiones) insertados al volver a estado Activo. | Snapshot PRE: adeudos y deuda antes de facturar | Lista de cargos insertados `LEYENDA ($monto)` \| snapshot POST |
+| `Depuración SDF` | Purga masiva de deuda al pasar a Suspensión Definitiva (Regla C05). | Cargos pendientes antes de depurar | Resultado (`estado=-1` total) |
+| `Cierre Anual` | Proceso de fin de año: split de `ligacargos` hacia `ligacargos_historico`. | Antes | Después |
+| `Sincr. Masiva` | Recalibración en lote de adeudos para todos los contratos. | Antes | Después |
+
+> **Nota**: Los registros de Sistema se renderizan con fondo grisáceo y menor prominencia visual en el historial. No requieren acción del operador.
+
+#### Ciclo de vida del REVERSAL_SNAPSHOT
+
+```
+cambiaestado() ejecuta transición válida
+        │
+        ▼
+INSERT cambios: descripcion='REVERSAL_SNAPSHOT', despues='PENDIENTE'
+        │
+        ├─── ¿Ocurre otro cambio de estado posterior? ──► SÍ ──► botón NO aparece (snapshot anacrónico)
+        │                                                          el registro permanece en historial
+        │
+        └─── NO ──► botón "Revertir transición" visible en ficha
+                    tooltip muestra fecha de transición + advertencia
+                            │
+                    operador confirma reversión
+                            │
+                            ▼
+                    revertirTransicion() deshace cargos exactos
+                    UPDATE cambios SET despues='REVERTIDO'
+```
+
+**Vigencia del snapshot:** Un snapshot `PENDIENTE` se vuelve inoperante (aunque no se borra) en cuanto ocurre otro `Cambio de estado:` con `id` mayor — `_getReversal()` lo detecta y suprime el botón. Solo el snapshot más reciente con `despues='PENDIENTE'` puede ejecutarse.
+
+**Depuración:** No se requiere ni se recomienda. Los snapshots son parte permanente del historial de auditoría. Un snapshot `REVERTIDO` o anacrónico no ocupa espacio significativo y permite reconstruir la historia completa del contrato.
+
+**Parámetro `reversal_threshold_enable` / `reversal_threshold`** (`config_sistema`): *Límite Bomba*. `reversal_threshold` define un umbral de deuda total (en $) que, si se alcanza, detiene la generación de recargos automáticos en el motor financiero para prevenir el efecto bola de nieve. Esto solo aplica si el operador activa el parámetro `reversal_threshold_enable` (valor = 1). Ninguno de los dos parámetros condiciona ya la visibilidad de la reversa; el botón Revertir es incondicional.
+
+---
+
+### Grupo 2 — Transiciones de Estado
+
+| `descripcion` | Qué representa | `antes` | `despues` |
+| :--- | :--- | :--- | :--- |
+| `Cambio de estado: N → M` | Transición manual o administrativa entre estados del contrato. | Estado anterior \| deuda \| motivo | Estado nuevo \| regla aplicada \| impacto financiero |
+| `Amnistía de recargos` | Cancelación de recargos acumulados (cat. 16/17) al reactivar desde Susp. Temporal (2→1, Regla C06). **No aplica en 3→1.** | Deuda total \| recargos históricos a cancelar | Deuda resultante \| recargos cancelados |
+| `Reversión de transición` | Ejecución de la reversa usando el `REVERSAL_SNAPSHOT`. Restaura el estado y los cargos al punto exacto previo a la transición. | Estado al revertir \| deuda | Estado restaurado \| impacto financiero |
+
+---
+
+### Grupo 3 — Paridad / Infraestructura (disparados por cambios en tomas)
+
+| `descripcion` | Qué representa | `antes` | `despues` |
+| :--- | :--- | :--- | :--- |
+| `Paridad financiera` | Recalibración de montos de cargos pendientes por cambio en número/tipo de tomas activas. | Situación financiera antes | Resultado de recalibración |
+| `Cambio rápido de conexión` | Modificación del estado físico de la toma (agua/drenaje ON↔OFF) desde la ficha de contrato. | Estado conexión anterior \| deuda antes | Estado conexión nuevo \| impacto financiero |
+| `Infraestructura` | Cambio estructural en toma (tipo, metros lineales, alta/baja de toma). | Estado físico anterior \| situación financiera | Estado físico nuevo (paridad pendiente de recalcular) |
+| `Desconexión` | Desconexión formal de servicio. | Estado anterior | Resultado |
+| `Eliminación de toma` | Baja permanente de una toma del contrato. | Estado anterior | Resultado |
+| `Cambio de tarifa toma` | Modificación Normal↔Comercial en una toma. Aplica Regla de No Retroactividad (solo afecta `anio >= actual`). | Tarifa anterior \| situación financiera | Tarifa nueva (paridad pendiente de recalcular) |
+
+---
+
+### Grupo 4 — Pagos y Cargos (operaciones financieras del operador)
+
+| `descripcion` | Qué representa | `antes` | `despues` |
+| :--- | :--- | :--- | :--- |
+| `Cobro de cargos` | Pago registrado por el operador. Genera folio de recibo. | Folio \| situación financiera antes | Monto cobrado \| situación financiera después |
+| `Cancelacion` | Cancelación de uno o más cargos (`estado = -1`). | Razón \| situación financiera antes | Cargo(s) cancelado(s) \| operador \| resultado |
+| `Reasignación` | Restitución de un cargo previamente cancelado a estado pendiente. | Cargo en estado cancelado \| deuda antes | Cargo restituido \| operador \| deuda después |
+| `Aplicación manual de cargos` | Aplicación de cargos del catálogo a uno o más contratos (operación `aplicacargos()`). Se graba un registro por contrato afectado. | Cargos aplicados (`LEYENDA ($monto), …`) | Snapshot financiero post-aplicación |
+
+---
+
+### Grupo 5 — Contrato / Propietario / Notas
+
+| `descripcion` | Qué representa | `antes` | `despues` |
+| :--- | :--- | :--- | :--- |
+| `Cambio de propietario` | Transferencia de titularidad del contrato. | Propietario anterior \| deuda al transferir | Nuevo propietario |
+| `Actualización de contrato` | Modificación de datos del contrato (domicilio, observaciones, etc.) desde "Modificar Información". | Datos anteriores | Datos nuevos |
+| `Registro de nuevo contrato` | Alta inicial del contrato en el sistema. | Referencia | Detalle de alta \| tomas \| situación financiera |
+| `Nota de contrato` | Nota libre agregada por el operador a la ficha del contrato. | — | Texto de la nota |
+| `Eliminación de nota` | Borrado de una nota previamente registrada. | Texto eliminado | `ELIMINADA` |
+| `Declaratoria` | Declaratoria No Localizado u otro acto formal. Puede tener `numcontrato=''` y filtrarse por `numusuario`. | Detalle | Resultado |
+
+---
+
+### Reglas de implementación (para desarrolladores)
+
+1. **Siempre insertar en `cambios`** ante cualquier operación que modifique estado, deuda o datos del contrato — incluyendo operaciones automáticas del motor.
+2. **`numcontrato`** debe ser el número real del contrato afectado. Usar `'-OPERACION-'` u otros comodines hace el registro invisible en el historial del contrato.
+3. **`REVERSAL_SNAPSHOT`** se graba en *toda* transición de estado válida. El botón de reversión (`_getReversal()`) estará siempre visible a menos que ocurra otro cambio de estado posterior. Los parámetros `reversal_threshold` y su `_enable` actúan exclusivamente como un freno (Límite Bomba) opcional para la generación automática de recargos, no para restringir UI.
+4. **Snapshot PRE/POST**: Las funciones `_sincronizaParidadFinanciera()` y `generaCargosAutomaticos()` graban sus propios registros con snapshot antes/después para mantener trazabilidad independiente de la transición principal.
+5. **Clasificación en UI**: `historial_mov_cto.php → clasificar()` mapea el campo `descripcion` de `cambios` a los grupos anteriores para renderizado visual. Al agregar un nuevo tipo de operación, actualizar `clasificar()` en ese archivo.
+
+---
+
+## Apéndice C: Retrospectiva Arquitectónica y Deuda Técnica (V2)
+
+Este ejercicio documenta las decisiones y hallazgos clave durante la estabilización del Motor V2 (Lógica Híbrida) y su contraste con el sistema Legacy.
+
+### 1. La Ilusión en el Host B (El "Ciego" y el "Sordo")
+*   **Problema (Legacy):** En el Host B, la base de datos tenía un bug en el catálogo donde el flag `recargo` de las anualidades estaba en `0` (Ciego). Sin embargo, la operación continuaba porque el código PHP ignoraba la BD y aplicaba un 10% quemado en duro (Sordo).
+*   **Solución (V2):** El código PHP ahora es estricto y lee el catálogo. Para que las anualidades de 2026 generen mora, se inyectó explícitamente `UPDATE cargos SET recargo = 1` en el catálogo de Host C (`08_saneamiento_catalogo.sql`), despertando así el flag de elegibilidad.
+
+### 2. Estabilidad Histórica vs. Rigor Futuro
+*   **Problema (Legacy):** Cualquier alteración a la tarifa o infraestructura modificaba arbitrariamente la deuda del pasado.
+*   **Solución (V2 - Lógica Híbrida):** Se aplicó la condición matemática `if ($anio_cargo >= $anio_actual)`. El pasado se estabiliza (montos base congelados), pero el rigor futuro asegura que cualquier toma nueva o cambio (ej. a Comercial) facture correctamente del 2026 en adelante, sin detener el cálculo continuo de mora en ningún año.
+
+### 3. Neutralización en lugar de Exterminio
+*   **Problema (Legacy):** Los recargos físicos (cat 16/17) en `ligacargos` tenían valores físicos en su columna `recargo`, provocando el bug de "recargo sobre recargo".
+*   **Solución (V2):** Regla F05. Se "neutralizó" la columna física (`UPDATE ligacargos SET recargo = 0.00 WHERE categoria IN (16,17)`). Esto corrigió el bug de lógica sin eliminar la columna del esquema, garantizando compatibilidad con el pipeline de sincronización B→A→C.
+
+### 4. Persistencia Total del Concepto
+*   **Problema (Legacy):** Ausencia de tipificación clara para los recargos (nombres genéricos, no persistidos claramente).
+*   **Solución (V2):** Cada recargo es una fila física (`ligacargos` o `_historico`) ligada estricta y únicamente a las categorías 16 y 17, con fechas de emisión forenses. El alias virtual `es_recargo_moratorio` permite consultar su estado instantáneamente en vistas.
+
+### 5. ¿Eliminar el campo neutralizado? (Limitantes)
+*   No es posible eliminar la columna `recargo` por dos razones:
+    1. **Sobrecarga (Overloading)**: En el catálogo (`cargos`), el campo sí es vital (actúa como Flag Maestro de elegibilidad).
+    2. **Paridad Estructural**: Eliminarlo de `ligacargos` rompería instantáneamente la sincronización de datos con el esquema de Host A/B.
+*   *Mejora Futura (V3)*: Renombrar `cargos.recargo` a `genera_mora` y deprecar `ligacargos.recargo`.
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Considering Debt Mitigation**
+
+I'm currently focused on incorporating "reversal_threshold" as a crucial element within the dynamic scenario, specifically to prevent runaway debt accumulation. I'm also delving into the security guards component, which is critical to a comprehensive strategy.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `analisis_paridad_3hosts.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.514264357s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+He profundizado en los scripts y en el Host B para ofrecerte la visión completa de los 3 niveles. Aquí está el análisis detallado de los saneamientos y la comparativa de paridad extendida.
+
+---
+
+### 📈 Certificación de Paridad Extendida (B → A → C) v1.0.0
+
+El cotejo inicial reveló el impacto financiero real del saneamiento automatizado aplicado durante la primera transición.
+
+| Métrica | Host B (Legado Raw) | Host A (Saneado V1+) | Host C (Target V2) | Estado / Impacto |
+| :--- | :---: | :---: | :---: | :---: |
+| **Contratos** | 1,406 | 1,406 | 1,406 | ✅ Match |
+| **Cargos Totales** | 195,070 | 195,070 | 195,070 | ✅ Match |
+| **Suma Pendiente** | **$3,254,369** | **$3,147,287** | **$3,147,287** | **-$107,082** (Depurado) |
+| **Bitácora (Audit)** | 4,890 | 4,891 | 4,891 | +1 (Lote Maestro) |
+
+> [!NOTE]
+> **Análisis v1.0.0**: Los **$107,082.00** de diferencia entre el Host B y el Host A representan la "Deuda Fantasma" de contratos en Suspensión Definitiva (Estado 4) que fue depurada automáticamente para evitar saldos incobrables en el nuevo sistema.
+
+---
+
+### 📈 Certificación de Paridad Extendida (B → A → C) v1.0.1 (Post-Lógica Híbrida)
+
+El recalculo actual demuestra el efecto continuo de la limpieza de datos, pruebas funcionales recientes y la aplicación rigurosa de la Lógica Híbrida en los tres entornos.
+
+| Métrica | Host B (Legado Raw) | Host A (Saneado V1+) | Host C (Target V2) | Estado / Impacto |
+| :--- | :---: | :---: | :---: | :---: |
+| **Contratos** | 1,408 | 1,418 | 1,419 | Diferencia por pruebas |
+| **Cargos Totales** | 198,047 | 198,059 | 197,974 | Depuración D4/D5 |
+| **Suma Pendiente** | **$3,437,031** | **$3,331,900** | **$3,265,974** | **-$171,057** vs B |
+| **Bitácora (Audit)** | 4,919 | 4,920 | 4,930 | Incremento Actividad |
+
+> [!NOTE]
+> **Análisis v1.0.1**: La mayor reducción de la deuda en Host C ($3.26M vs $3.43M) refleja la estabilización exitosa del Motor V2. La Lógica Híbrida ajustó las moras continuas, mientras que la estricta Regla C05 purga radicalmente cualquier deuda residual en suspensiones definitivas.
+
+---
+
+### 📈 Certificación de Paridad Final (Host C V2) v1.1.0 (Post-Saneamiento Estructural)
+
+Esta tabla representa el **Estado Maestro** del sistema tras la consolidación de asambleas y depuración de catálogos.
+
+| Métrica | Host B (Legado) | Host C (Saneado V2) | Estado / Impacto |
+| :--- | :---: | :---: | :---: |
+| **Contratos** | 1,408 | 1,408 | ✅ Sincronía Total |
+| **Cargos Totales** | 198,047 | 198,033 | -14 (Limpieza Basura) |
+| **Suma Pendiente** | **$3,437,031** | **$3,261,677** | **-$175,354** (Depurado) |
+| **Bitácora (Audit)** | 4,919 | 4,930 | Log Maestro OK |
+| **Asambleas** | 61 | 55 | -6 (Consolidadas) |
+| **Usuarios** | 1,491 | 1,406 | -85 (Placeholder Purged) |
+
+---
+
+### 🛡️ Otros Saneamientos Realizados en los Scripts
+
+Además de la depuración de contratos con Estado 4, los scripts ejecutan estas tareas críticas de integridad:
+
+1.  **Amnistía de Bienvenida (D1)**: 
+    -   Se detectan contratos creados en 2026 que el Host B no marcó correctamente. El script fuerza `exento_recargo_primer_anio = 1` para proteger a los nuevos usuarios de recargos punitivos inmediatos.
+2.  **Ajuste de Tarifa Comercial (D2)**:
+    -   Calcula automáticamente el `monto_comercial` (doble del doméstico) para cargos que en el Host B estaban planos, asegurando la equidad fiscal en tomas de negocios.
+3.  **Saneamiento de Vinculación (`idpago_vinc`) (D3)**:
+    -   Host B tiene inconsistencias (NULLs) en el campo que vincula las multas con sus pagos. El script de Host A lo unifica y el de Host C lo transforma a `int NULL` binario, evitando errores de coincidencia en consultas MariaDB.
+4.  **Limpieza de Residuos de Desarrollo (D4/D5)**:
+    -   Eliminación de cargos del año 2027 y registros con prefijos "test_" o "cbm_" que se usaron durante las pruebas de la migración y que no deben llegar al ambiente C.
+5.  **Normalización de Infraestructura (Toms ON/OFF)**:
+    -   Si el contrato es Estado 4, no solo se cancela su deuda; el script `04_recalc_contrato_toma.sql` fuerza a que todas sus tomas aparezcan en **OFF** (`estado_agua=0`). Esto previene que un usuario con contrato suspendido aparezca con servicios activos en la ficha técnica.
+6.  **Unificación de Folios (D6)**:
+    -   Corrige folios `NULL` convirtiéndolos en `0` para que el sistema de búsqueda sea consistente y no ignore registros históricos al emitir reportes de caja.
+
+> [!TIP]
+> **Nota de Arquitectura V2 (Lógica Híbrida)**: Para ver la documentación exhaustiva sobre la Barrera de No-Retroactividad, Motor de Mora Continuo, Neutralización de la Regla F05 y Amnistía C06, consulte el Ground Truth oficial: [transiciones_estado_contratos.md](transiciones_estado_contratos.md).
+
+---
+
+### 🏗️ Saneamiento Estructural y Blindaje Poka-Yoke (PMU 2026)
+
+Este protocolo (Sección D en `03_sync_host_a.sql`) corrige inconsistencias estructurales de Host B antes de pasar a C para garantizar el cumplimiento de las nuevas restricciones de integridad.
+
+#### 1. Consolidación de Asambleas (Limpieza de Fragmentación)
+*   **Problema**: Múltiples registros de asamblea para la misma fecha (ej. 7 registros el 27/03/2011), fragmentando la asistencia.
+*   **Saneamiento**: Se identifica la asamblea con más asistentes por fecha ("Ganadora"), se le reasignan todos los `asistentes` de las asambleas duplicadas y se eliminan las redundantes.
+*   **Blindaje (Host C)**: Se implementó el TRIGGER `tr_asamblea_limit_3` que permite flexibilidad (hasta 3 sesiones/día) pero bloquea la fragmentación masiva accidental.
+
+#### 2. Unicidad del Catálogo de Cargos
+*   **Saneamiento**: Algoritmo de jerarquía (Activo > Automático > ID Menor) para eliminar duplicados de tarifas.
+*   **Blindaje (Host C)**: Restricción `UNIQUE KEY uk_nombre_anio` en tabla `cargos`.
+
+#### 3. Depuración del Padrón y Catálogos Core
+*   **Usuarios**: Borrado de registros sin nombre que **no** poseen contratos vinculados.
+*   **Blindaje de Catálogos (Host C)**: Se añadieron `UNIQUE KEY (nombre)` en las tablas `categorias`, `categorias_egresos` y `contrasenas` (por rol) para evitar que el catálogo se vuelva a ensuciar.
+
+#### 4. Limpieza de Huérfanos
+*   Eliminación de registros en `asistentes` que apunten a IDs de asamblea inexistentes, asegurando una integridad referencial 1:1 en el Host C.
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing the Files**
+
+I've reviewed the files and am now implementing a homogenization plan based on `CARTERA_VENCIDA_MODELO_Y_REPORTES.md`. Specifically, I'm updating `reglas-negocio-por-menu.md`. Rule **R1 — Reporte: Cartera Vencida** will incorporate the "17 Included / 5 Excluded" criteria. The M5-R12 item will be handled in the next step.
+
+
+**Refining Recargo Calculations**
+
+I'm now integrating the "Límite Bomba" and "Límite Temporal" parameters, `reversal_threshold` and `paridad_anios_max_recargo`, into `calcula_recargos()`. I'm also adding a "Source of Truth" section for financial auditing and ensuring recargo references align with the 17/5 categorization. Additionally, I'm updating `transiciones_estado_contratos.md` to explicitly name "Límite Bomba" in **3.2** and aligning its description in **Apéndice B**. Finally, I've added a note to `analisis_paridad_3hosts.md` explaining how these limits stabilize "Suma Pendiente."
+
+
+
+
+### Actions
+
+**Tool:** `multi_replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 3.896655332s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 11 May 2026, 12:43 pm
+
+---
+
+<details>
+<summary>Conversation History</summary>
+
+# Conversation History
+Here are the conversation IDs, titles, and summaries of your most recent 9 conversations, in reverse chronological order:
+
+<conversation_summaries>
+## Conversation 219bd295-172b-4c03-a3df-83f565d88963: Validating Full-Pipeline-Sync Integrity
+- Created: 2026-05-09T05:39:34Z
+- Last modified: 2026-05-10T22:20:43Z
+
+### USER Objective:
+Hardening Agua V2 Production Resilience
+
+Objective: Finalize the migration and stabilization of the Agua V2 webapp in the Host C production environment.
+Goals:
+1. Implement autonomous UPS fail-safe monitoring with non-blocking shutdown procedures.
+2. Automate background service startup sequences and centralized log management for the Kiosko-mode environment.
+3. Redesign the Annual Consolidation (Split) interface to provide a pro-active, error-proof administrative dashboard.
+4. Validate system resilience through simulated power failure testing and ensure audit integrity across all server operations.
+
+## Conversation 65980880-a19d-4db2-82b2-19454270eff9: Validating Database Connectivity
+- Created: 2026-05-08T04:39:13Z
+- Last modified: 2026-05-09T05:27:52Z
+
+### USER Objective:
+Testing UPS Infrastructure Scripts
+
+Objective: Validate the operational safety of the Agua V2 server's power management and deployment automation in Host C.
+
+Goals:
+1. Develop a controlled testing methodology to simulate UPS power failure scenarios without requiring actual hardware power-offs.
+2. Verify the end-to-end integration of monitoring, alert, and shutdown scripts (`monitor-ups.ps1`, `shutdown-server.ps1`, and `stop-webapps.ps1`).
+3. Ensure the system demonstrates graceful shutdown, robust database backup generation, and automated startup recovery.
+4. Execute staged testing scenarios to confirm that system integrity is maintained during power-loss transitions.
+
+## Conversation 4261727a-9250-4b18-a666-5b474f1c4a4c: Identifying Broken Ubuntu Packages
+- Created: 2026-04-28T18:06:17Z
+- Last modified: 2026-05-09T05:19:39Z
+
+### USER Objective:
+System Maintenance And Cleanup
+
+Objective: Systematically clean and optimize the Ubuntu 22 environment to eliminate broken dependencies, stale configuration files, and unused resources.
+
+Goals:
+1. Purge residual 'rc' packages and outdated kernel components to reclaim system storage and stabilize package management.
+2. Identify and prune invalid '.desktop' shortcut entries that point to non-existent binaries.
+3. Validate the integrity of the critical Whisper-cpp/Voxd/CUDA stack to ensure zero-impact maintenance.
+4. Synchronize and secure the 'ga-cl-ia' documentation repository through automated git recovery and sync protocols.
+5. Enhance the existing cleanup script to include automated identification of newer broken entries and stale snap revisions.
+
+## Conversation 3d0ec69e-8bdd-40fe-a2ee-0c7e71a92060: Migrating Disk Usage Ubuntu
+- Created: 2026-05-06T03:39:39Z
+- Last modified: 2026-05-09T03:55:59Z
+
+### USER Objective:
+Optimizing Ubuntu Disk Usage
+
+Main Objective: Reclaim storage space and improve system performance by auditing and removing redundant software, large temporary files, and obsolete developer tools.
+
+Goals:
+1. Reorganize VirtualBox virtual machine storage to utilize high-speed NVMe partitions.
+2. Perform a comprehensive purge of legacy Oracle Middleware, .NET SDKs, Liquibase instances, and their associated system environment variables.
+3. Consolidate and clean up redundant tools like OnlyOffice and WebLogic Remote Console.
+4. Audit and sanitize the user's `~/.bashrc` profile to remove references to deprecated software paths, ensuring a clean and efficient shell environment.
+
+## Conversation f056b1a8-79e6-4c2a-95f5-54a33ea06e98: Explaining Financial Reporting Logic
+- Created: 2026-05-07T23:30:40Z
+- Last modified: 2026-05-09T03:35:54Z
+
+### USER Objective:
+Blindando Categorización Agua V2
+
+Objective: Eradicate Category Zero errors and ensure data integrity in the Agua V2 Host C environment by hardening the application and migration pipeline.
+
+Goals:
+1. Implement Poka-Yoke guards in PHP (`cargos.php`) to force correct category assignment (19-22) for administrative charges, overriding user input errors.
+2. Automate the sanitization of the master `cargos` catalog within the `10_pipeline_saneamiento.sql` pipeline to prevent historical category corruption post-sync.
+3. Validate that all administrative categories (Change of Owner, Fines, Constancias) are correctly mapped and immune to legacy `0` or `1` artifacts.
+4. Establish a fail-safe synchronization pattern that ensures all new transactions originate with production-ready metadata, reducing reliance on manual post-hoc SQL patches.
+
+## Conversation bcf279c3-7e58-4790-9c85-a35ebec1c331: Automating Windows Deployment Scripts
+- Created: 2026-05-06T00:58:39Z
+- Last modified: 2026-05-09T00:27:19Z
+
+### USER Objective:
+Automating Agua V2 Windows Deployment
+
+Main Objective: Complete the Agua V2 appliance hardening for Windows 10 Host C to ensure a fully autonomous, production-ready server environment.
+
+Goals:
+1. Finalize storage-agnostic infrastructure through centralized configuration ($TargetDrive).
+2. Refactor bash deployment scripts to prepare a clean, directory-structured 'agua' webapp package for seamless extraction.
+3. Optimize the Windows environment into a Kiosko appliance with automated startup/shutdown and non-intrusive UI/UX.
+4. Centralize all deployment assets and operational documentation for the production release (Pase a Producción).
+5. Ensure robust system security and stability through automated GPO integration, UPS monitoring, and Chrome Kiosko enforcement.
+
+## Conversation 70b5094f-e7ed-44ff-b37e-6634cd67ee3f: Auditing Git Sync Script
+- Created: 2026-05-06T04:38:01Z
+- Last modified: 2026-05-06T04:59:45Z
+
+### USER Objective:
+Auditing Git Sync Script
+
+Main Objective:
+Analyze the safety and integrity of the `sync with link de chatledger-entre main y rama git.sh` script on the Ubuntu 22.04 host to ensure it functions correctly without causing system corruption or repository data loss.
+
+Goals:
+1. Verify the script's logic regarding file migration, symbolic link creation, and `.gitignore` management to prevent accidental data deletion.
+2. Evaluate potential race conditions or error states if the script is re-run (idempotency checks).
+3. Ensure the script correctly handles directory transitions between the local repository and the external `STORAGE_DIR` without breaking the application's reliance on `.chatledger`.
+4. Assess the risk of Git state inconsistencies (e.g., cached vs. ignored files) during the synchronization process.
+
+## Conversation 25b74c07-23d4-48e6-b039-435b579b0cf6: Sourcing Water Delivery System Repositories
+- Created: 2026-05-05T21:11:02Z
+- Last modified: 2026-05-05T21:12:16Z
+
+### USER Objective:
+Sourcing Water Delivery System Repositories
+
+Main Objective:
+Identify and source existing, publicly available repository examples of water delivery/distribution management systems to serve as a baseline for a PHP/PostgreSQL POC.
+
+Goals:
+1. Locate repositories containing full-scope management features including inventory (garrafones), logistics (routes/schedules), vehicle tracking, and personnel management.
+2. Evaluate these repositories as data and architectural inputs to facilitate the migration of the user's current "Agua" webapp system into a modernized PHP/PostgreSQL environment.
+3. Provide direct links to relevant projects to enable the user to conduct an analysis of business logic and schema structures for the upcoming migration.
+
+## Conversation 89bc16ba-c2d5-462e-9435-d8421190f457: Kiosk Mode Browser Automation
+- Created: 2026-04-30T15:35:02Z
+- Last modified: 2026-05-01T05:21:04Z
+
+### USER Objective:
+Kiosk Mode Browser Automation
+
+Main Objective:
+Automate the deployment of the "Agua" web application in a "Kiosk" or "App" mode using Google Chrome.
+
+Goals:
+1. Create a PowerShell script (`.ps1`) that launches the specific URL `http://localhost/agua/login/index.php` in a stripped-down Chrome window without navigation bars, tabs, or address bars.
+2. Ensure the resulting script file is placed on the user's desktop for quick, one-click access.
+3. Configure the browser flags (specifically `--app` or `--kiosk`) to ensure a distraction-free, application-like experience suitable for the local web deployment.
+
+</conversation_summaries>
+
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 11 May 2026, 12:43 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 11 May 2026, 12:43 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 11 May 2026, 12:43 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 11 May 2026, 12:44 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+## User Request
+
+sube todo
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `transiciones_estado_contratos.md`
+**Language:** markdown
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L142-152)</summary>
+
+**Path:** `Unknown file`
+
+```
+**Depuración:** No se requiere ni se recomienda. Los snapshots son parte permanente del historial de auditoría. Un snapshot `REVERTIDO` o anacrónico no ocupa espacio significativo y permite reconstruir la historia completa del contrato.
+
+**Parámetro `reversal_threshold_enable` / `reversal_threshold`** (`config_sistema`): Conocido como **Límite Bomba**. `reversal_threshold` define un umbral de deuda total (en $) que, si se alcanza, detiene la generación de recargos automáticos en el motor financiero para prevenir el efecto "bola de nieve" (Explosión de Deuda). Esto solo aplica si el operador activa el parámetro `reversal_threshold_enable` (valor = 1). Ninguno de los dos parámetros condiciona la visibilidad de la reversión de transición, que es incondicional para fines de auditoría.
+
+---
+
+### Grupo 2 — Transiciones de Estado
+
+| `descripcion` | Qué representa | `antes` | `despues` |
+| :--- | :--- | :--- | :--- |
+| `Cambio de estado: N → M` | Transición manual o administrativa entre estados del contrato. | Estado anterior \| deuda \| motivo | Estado nuevo \| regla aplicada \| impacto financiero |
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Committing All Changes**
+
+I'm ready to commit and push everything. Specifically, I'll commit changes within the `agua` and `agua_chatledger` directories. In `agua`, I'll be committing `admin/operaciones/configuracion.php` and `docs-dev/doc-estabilizacion/CARTER`. I'm preparing to proceed with this workflow as planned.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.815502383s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** CORTEX_STEP_STATUS_WAITING
+**Created:** 11 May 2026, 12:46 pm
 
 ---
 
