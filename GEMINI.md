@@ -133,7 +133,33 @@ Validar integridad:
 bash docs-dev/ga-cl-ia/chatledger_validate.sh
 ```
 
-**Última actualización**: 2026-05-08
+## 🛡️ Saneamiento y Resiliencia Extrema (2026-05-10)
+Se implementó un sistema de protección de triple capa para el Host C, blindándolo contra apagados abruptos y asegurando la veracidad de la auditoría:
+
+| Capa | Componente | Descripción |
+|:---:|---|---|
+| **L1** | **Smart Backup** | `start-webapps.ps1` detecta si falta el backup de ayer. Si hubo actividad y el backup no existe, realiza un "Catch-up Backup" antes de iniciar MySQL. Omite automáticamente días no laborables (domingos/feriados) si no hay cambios en la DB. |
+| **L2** | **Pre-Vuelo** | Limpieza automática de archivos `.pid` huérfanos y ejecución externa de `aria_chk --recover` sobre las tablas de sistema MariaDB antes de lanzar el servicio. |
+| **L3** | **Auto-Repair SQL** | Health-check automático al inicio. Si detecta el Error 176 (Aria checksum), invoca `repair_aria_system_tables.sql` para reconstruir las tablas físicamente antes de abrir Apache. |
+
+**Hitos de Estabilización (Sesión 2026-05-10):**
+*   **Watchdog Automatizado**: El `monitor-ups.ps1` ahora inicia automáticamente en modo oculto vía `start-webapps.ps1`, asegurando protección 24/7 sin intervención manual.
+*   **Fail-Safe UPS**: El cronómetro de apagado (8 min) ahora es independiente de la interacción del usuario (no bloqueante), garantizando el cierre seguro incluso en ausencia del operador.
+*   **Dashboard de Consolidación**: Interfaz de "Cierre Anual" rediseñada como un tablero pro-activo que muestra registros pendientes y estado de las tablas en tiempo real.
+*   **Auditoría Global**: El reporte de historial (`id=0`) fue habilitado para visualizar los logs de sistema (migraciones, splits, configuraciones) bajo el identificador universal de sistema.
+
+**Estabilización Financiera y Cartera Vencida (2026-05-11):**
+*   **Modelo de Cartera Homologado**: Se formalizó el cálculo de Cartera Vencida (17 categorías incluidas, 5 excluidas) asegurando el cuadre a $0 en el reporte de caja mediante la inclusión de recargos históricos (11, 16, 17) en R.CART.
+*   **UI/UX de Reportes**: Renombrado de botones de acceso y encabezados en `carteravencida.php` y `concentradocortecaja.php` para mayor claridad del operador (`RECUP. CARTERA <$anio_ref`).
+*   **Fuente de Verdad**: Documento maestro creado en `docs-dev/doc-estabilizacion/CARTERA_VENCIDA_MODELO_Y_REPORTES.md`.
+
+**Mejoras de Veracidad en Pipeline:**
+*   **Limpieza de Auditoría:** `run_setup.sh` ahora ejecuta `TRUNCATE TABLE fallback_log` al inicio de cada sincronización, asegurando que los logs mostrados en la UI correspondan estrictamente a la sesión actual.
+*   **Trazabilidad '0':** El proceso de migración y split anual ahora se registra bajo el identificador universal de sistema `numcontrato = '0'`.
+
+---
+
+**Última actualización**: 2026-05-11
 
 > [!IMPORTANT]
 > **Terminología de Sesión**:
