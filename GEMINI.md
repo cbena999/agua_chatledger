@@ -153,13 +153,21 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 *   **UI/UX de Reportes**: Renombrado de botones de acceso y encabezados en `carteravencida.php` y `concentradocortecaja.php` para mayor claridad del operador (`RECUP. CARTERA <$anio_ref`).
 *   **Fuente de Verdad**: Documento maestro creado en `docs-dev/doc-estabilizacion/CARTERA_VENCIDA_MODELO_Y_REPORTES.md`.
 
+**Hitos de Estabilización y Hardening (2026-05-11 - Sesión 2):**
+*   **Conectividad Host C**: Restaurada tras apertura de Firewall en puerto **7002** (MariaDB) y **7001** (Apache). IP confirmada: `192.168.1.84`.
+*   **Auto-Elevación Poka-Yoke**: Todos los scripts de PowerShell (`.ps1`) ahora cuentan con lógica de auto-elevación a Administrador, eliminando errores de permisos del operador.
+*   **Configuración de Firewall**: Nuevo script `setup-firewall.ps1` integrado en el instalador maestro para automatizar la apertura de puertos en Windows 10.
+*   **Detección Robusta de Monitor**: El script `status-webapps.ps1` ahora detecta el Monitor UPS incluso si los permisos de visibilidad de procesos están restringidos.
+*   **Fix Kiosko Chrome**: Ajuste de rutas para el acceso directo de Google Chrome, garantizando compatibilidad con instalaciones de 64 bits.
+
 **Mejoras de Veracidad en Pipeline:**
 *   **Limpieza de Auditoría:** `run_setup.sh` ahora ejecuta `TRUNCATE TABLE fallback_log` al inicio de cada sincronización, asegurando que los logs mostrados en la UI correspondan estrictamente a la sesión actual.
 *   **Trazabilidad '0':** El proceso de migración y split anual ahora se registra bajo el identificador universal de sistema `numcontrato = '0'`.
 
 ---
 
-**Última actualización**: 2026-05-11
+**Última actualización**: 2026-05-12
+
 
 > [!IMPORTANT]
 > **Terminología de Sesión**:

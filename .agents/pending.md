@@ -88,10 +88,14 @@ SELECT IFNULL(SUM(monto),0) FROM vw_ligacargos_pendientes WHERE numcontrato='405
 | 2026-04-07 | Pipeline sync B→A→C | 7/7 validaciones OK |
 | 2026-04-07 | Bugs split ligacargos en PHPs | `vw_ligacargos_all` en listadeudores, cartera, etc. |
 
+| 2026-05-11 | Conectividad y Hardening Host C | ✅ PASADO — Firewall puerto 7002, auto-elevación UAC en scripts, fix Kiosko Chrome |
+| 2026-05-11 | Cartera Vencida y Reportes | ✅ PASADO — Modelo homologado, categorías auditadas, UI reportes clarificada |
+| 2026-05-10 | Resiliencia y Automatización C | ✅ PASADO — Monitor UPS auto-start, backups pre-vuelo, repair_aria auto |
 | 2026-05-08 | Poka-Yoke Categorización Cargos Adm. | `cargos.php` — guard en `creaCargo`/`modificaCargo` fuerza cat 19/20/21/22 |
 | 2026-05-08 | Poka-Yoke Egresos Huérfanos | `cargos.php` — `registraegreso()` fallback a `id_categoria=10` si cat inválida |
 | 2026-05-08 | Pipeline saneamiento catálogo `cargos` | `10_pipeline_saneamiento.sql` bloque 3-B-1.5 — UPDATE categorías post-sync |
 
 ---
 
-*Última actualización: 2026-05-08 — Poka-Yokes de categorización y egresos cerrados — Antigravity/Gemini*
+*Última actualización: 2026-05-12 — Estabilización de Conectividad y Hardening completados — Antigravity/Gemini*
+

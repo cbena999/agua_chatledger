@@ -7,9 +7,9 @@
 | **Trajectory ID** | `6550479e-2627-44be-ae66-6d5296bf6e1d` |
 | **Cascade ID** | `e9e60f8c-dc0e-4c0c-a226-77eda59e64b2` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 430 |
+| **Total Steps** | 452 |
 | **Started** | 11 May 2026, 8:39 am |
-| **Completed** | 11 May 2026, 1:04 pm |
+| **Completed** | 11 May 2026, 1:08 pm |
 
 ---
 
@@ -11086,6 +11086,483 @@ I've updated the documentation, and analyzed the user's assertion which was vali
 <summary>Metadata</summary>
 
 - **Thinking Duration:** 0.340733830s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+## User Request
+
+La seccion 5 Categorías EXCLUIDAS de Cartera Vencida, ya existia , dices que creaste una  nueba.-
+explica
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `CARTERA_VENCIDA_MODELO_Y_REPORTES.md`
+**Language:** markdown
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Clarifying Misunderstanding**
+
+I realize there's confusion about a new Section 5. I mistakenly presented it as such, but the user is correct, a Section 5 already existed. I was reviewing the file's content and found the original Section 5 was titled "Tabla de Congruencia Cruzada." My confusion stemmed from a misinterpretation on my part. I should have clarified the changes more accurately.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `CARTERA_VENCIDA_MODELO_Y_REPORTES.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.657652804s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# Cartera Vencida — Modelo, Cálculo y Reportes
+
+> **Audiencia:** Contador y Operador de la Webapp Agua V2
+> **Última actualización:** 2026-05-11
+> **Rama:** `feature/upgrade-v2-win-xampp`
+
+---
+
+## 1. Definición y Contexto
+
+La **Cartera Vencida** representa la suma de todos los adeudos de un usuario (contrato) que no han sido liquidados y cuyo año de cargo es **anterior al ejercicio fiscal de consulta**. Es decir: dinero que ya debió haberse cobrado en períodos anteriores y aún está pendiente.
+
+> **No confundir con:** Los adeudos del año en curso (ejercicio corriente), que son independientes aunque también sean deudas pendientes. El sistema los separa con precisión.
+
+---
+
+## 2. Modelo de Cálculo
+
+### 2.1 Variables y Parámetros Clave
+
+| Variable | Descripción | Ejemplo |
+|---|---|---|
+| `anio_ref` | **Año fiscal de referencia.** Define la frontera entre corriente y vencido. Se toma del año de la fecha de inicio del período analizado. Puede sobrescribirse con `?anio_corte=YYYY`. | `2026` |
+| `anio` (del cargo) | Ejercicio fiscal al que pertenece cada cargo en la base de datos. | `2024`, `2025` |
+| `estado` (del cargo) | `0` = pendiente de pago; `1` = pagado. | |
+| `estado` (del contrato) | `1` = Activo; `2` = Suspensión Temporal; `3` = Suspensión Administrativa; `4` = **Suspensión Definitiva** | |
+| `estado` (del usuario) | `2` = No Localizado (C.N.L.) | |
+
+### 2.2 Regla de Pertenencia a Cartera Vencida
+
+Un cargo pertenece a la Cartera Vencida si cumple **todas** las condiciones:
+
+```
+cargo.estado = 0                         →  aún no pagado
+cargo.anio < anio_ref                    →  de un ejercicio anterior
+contrato.estado ≠ 4                      →  contrato NO en Suspensión Definitiva
+categoria NOT IN (6,19,20,21,22)         →  concepto cobrable periódico (ver tabla §2.4)
+```
+
+### 2.3 Fuente de Datos (Vistas Canónicas — Host C V2)
+
+Host C opera con la tabla `ligacargos` partida en dos para optimizar rendimiento:
+
+| Vista | Contenido | Cuándo se usa |
+|---|---|---|
+| `vw_ligacargos_all` | Activa (≥2026) + histórico (≤2025), todos los estados | Concentrado de Caja (cobra **pagados** `estado=1`) |
+| `vw_ligacargos_pendientes` | Activa + histórico, solo `estado=0` | Cartera Vencida (busca **no pagados**) |
+
+---
+
+### 2.4 Tabla de Categorías — Inclusiones y Exclusiones en Cartera
+
+#### 17 Categorías INCLUIDAS en Cartera Vencida
+
+Son los conceptos de cobro periódico o acumulativo que generan deuda real cobrable:
+
+| # | ID | Nombre Largo (Catálogo) | Nombre Corto | Notas |
+|---|---|---|---|---|
+| 1 | 1 | CUOTA FIJA DE AGUA | CUOTA/FJA | Cuota base mensual |
+| 2 | 2 | COBRO DE AGUA POTABLE | AGU/POT | Cuota diferenciada por volumen |
+| 3 | 3 | COBRO DE DRENAJE | DRN | Derechos de conexión/uso |
+| 4 | 4 | COBRO POR CUOTAS ESPECIALES | CUO/ESP | Trámites especiales |
+| 5 | 5 | COBRO POR REPARACIONES | REP | Multas ordinarias/reparaciones |
+| 6 | 7 | COBRO POR METROS LINEALES | MTS/LIN | Servicios proporcionales |
+| 7 | 8 | COBRO POR CONTRATOS NUEVOS (AGUA) | CTO/NVO | Conexión nueva agua |
+| 8 | 9 | COBRO POR REPOSICIÓN DE CREDENCIAL | REP/CRD | |
+| 9 | 10 | COBRO POR COOPERACIONES | COOP | Otro ingreso cooperativo |
+| 10 | **11** | **COBRO DE RECARGOS NORMALES** | **REC/NRM** | **Recargos de años anteriores = deuda real cobrable ✓** |
+| 11 | 12 | COBRO POR SANCIONES | SANC | |
+| 12 | 13 | COBRO POR CANCELACIÓN DE SERVICIO | CANC/SRV | |
+| 13 | 14 | COBRO POR RECONEXIÓN DE SERVICIO | RCON | |
+| 14 | 15 | COBRO POR CONEXIONES | CON | |
+| 15 | **16** | **COBRO DE RECARGOS DE AGUA** | **REC/AGU** | **Recargos de años anteriores = deuda real cobrable ✓** |
+| 16 | **17** | **COBRO DE RECARGOS DE DRENAJE** | **REC/DRN** | **Recargos de años anteriores = deuda real cobrable ✓** |
+| 17 | 18 | MANTENIMIENTO | MTTO | |
+
+> **¿Por qué se incluyen los recargos (11, 16, 17)?** Los recargos de ejercicios anteriores
+> son deuda vencida real y cobrable. Su inclusión garantiza que la columna **R.CART.** del
+> concentrado de caja cuadre a **$0 de diferencia** (ver §2.5).
+
+#### 5 Categorías EXCLUIDAS de Cartera Vencida
+
+| # | ID | Nombre Largo (Catálogo) | Nombre Corto | Razón de Exclusión |
+|---|---|---|---|---|
+| 1 | **6** | COBRO POR FALTAS DE ASAMBLEA | ASAM/FLT | Se sincroniza automáticamente por usuario. No es cargo periódico individual por contrato. Sin `anio` fijo (acumulativo). |
+| 2 | **19** | COBRO POR CAMBIO DE PROPIETARIO | CB/PROP | Concepto único V2 — trámite administrativo, no cuota periódica |
+| 3 | **20** | MULTA POR DESPERDICIO DE AGUA | MLT/DESP | Concepto único V2 — sanción puntual |
+| 4 | **21** | EXPEDICIÓN DE CONSTANCIA DE NO ADEUDO | CNT/NADO | Concepto único V2 — trámite puntual |
+| 5 | **22** | REPARACIÓN DE FUGAS (EXCAVACIÓN Y CANCEL.) | CNC/FUGA | Concepto único V2 — servicio puntual |
+
+> **Total del catálogo:** 22 categorías (IDs 1–22).
+> **Incluidas:** 17 (toda categoría que NO esté en la lista de exclusiones).
+> **Excluidas:** 5 (IDs 6, 19, 20, 21, 22).
+
+---
+
+### 2.5 El Cuadre de Caja a $0 — ¿Qué Significa?
+
+En el **Concentrado de Corte de Caja** cada fila de pago (folio) tiene un total horizontal:
+
+```
+TOTAL_FILA = Σ(todas las categorías año corriente) + R.CART.
+```
+
+Al sumar todos los folios del período, la suma de columnas debe ser **idéntica** al total general:
+
+```
+Σ(R.CART.) + Σ(cat_2) + Σ(cat_3) + ... + Σ(cat_N) = TOTAL_TODO
+```
+
+Si los recargos de años anteriores (cat 11, 16, 17) se **excluyeran** de R.CART. pero el pago
+los incluyera en el folio, quedarían "flotando" sin columna asignada → el total de la fila
+superaría la suma de columnas → **descuadre visible en rojo** en la interfaz.
+
+Incluirlos en R.CART. asegura: diferencia = **$0** en todos los períodos validados.
+
+---
+
+## 3. Representación por Reporte
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Clarifying The Sections**
+
+I've located the "5 Categorías EXCLUIDAS" information; it's currently in Section 2.4, line 81. I've also just added a new Section 5, "Conceptos y Estados EXCLUIDOS (Reglas de Blindaje)" at the bottom, which is on line 195.
+
+
+**Revising Section Hierarchy**
+
+I realize I need to clarify the structure. My thinking is now focused on the fact that I promoted the "Exclusions" to a top-level Section 5 to give them more prominence and include the Contract/User states (SDF/CNL) which were not present previously. I'll need to reconcile Section 2.4, which had the exclusions as a sub-sub-section, with the new Section 5 to eliminate redundancy.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.311892785s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+## User Request
+
+ok, dale
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `CARTERA_VENCIDA_MODELO_Y_REPORTES.md`
+**Language:** markdown
+</details>
+
+---
+
+<details>
+<summary>Conversation History</summary>
+
+# Conversation History
+Here are the conversation IDs, titles, and summaries of your most recent 9 conversations, in reverse chronological order:
+
+<conversation_summaries>
+## Conversation 219bd295-172b-4c03-a3df-83f565d88963: Validating Full-Pipeline-Sync Integrity
+- Created: 2026-05-09T05:39:34Z
+- Last modified: 2026-05-10T22:20:43Z
+
+### USER Objective:
+Hardening Agua V2 Production Resilience
+
+Objective: Finalize the migration and stabilization of the Agua V2 webapp in the Host C production environment.
+Goals:
+1. Implement autonomous UPS fail-safe monitoring with non-blocking shutdown procedures.
+2. Automate background service startup sequences and centralized log management for the Kiosko-mode environment.
+3. Redesign the Annual Consolidation (Split) interface to provide a pro-active, error-proof administrative dashboard.
+4. Validate system resilience through simulated power failure testing and ensure audit integrity across all server operations.
+
+## Conversation 65980880-a19d-4db2-82b2-19454270eff9: Validating Database Connectivity
+- Created: 2026-05-08T04:39:13Z
+- Last modified: 2026-05-09T05:27:52Z
+
+### USER Objective:
+Testing UPS Infrastructure Scripts
+
+Objective: Validate the operational safety of the Agua V2 server's power management and deployment automation in Host C.
+
+Goals:
+1. Develop a controlled testing methodology to simulate UPS power failure scenarios without requiring actual hardware power-offs.
+2. Verify the end-to-end integration of monitoring, alert, and shutdown scripts (`monitor-ups.ps1`, `shutdown-server.ps1`, and `stop-webapps.ps1`).
+3. Ensure the system demonstrates graceful shutdown, robust database backup generation, and automated startup recovery.
+4. Execute staged testing scenarios to confirm that system integrity is maintained during power-loss transitions.
+
+## Conversation 4261727a-9250-4b18-a666-5b474f1c4a4c: Identifying Broken Ubuntu Packages
+- Created: 2026-04-28T18:06:17Z
+- Last modified: 2026-05-09T05:19:39Z
+
+### USER Objective:
+System Maintenance And Cleanup
+
+Objective: Systematically clean and optimize the Ubuntu 22 environment to eliminate broken dependencies, stale configuration files, and unused resources.
+
+Goals:
+1. Purge residual 'rc' packages and outdated kernel components to reclaim system storage and stabilize package management.
+2. Identify and prune invalid '.desktop' shortcut entries that point to non-existent binaries.
+3. Validate the integrity of the critical Whisper-cpp/Voxd/CUDA stack to ensure zero-impact maintenance.
+4. Synchronize and secure the 'ga-cl-ia' documentation repository through automated git recovery and sync protocols.
+5. Enhance the existing cleanup script to include automated identification of newer broken entries and stale snap revisions.
+
+## Conversation 3d0ec69e-8bdd-40fe-a2ee-0c7e71a92060: Migrating Disk Usage Ubuntu
+- Created: 2026-05-06T03:39:39Z
+- Last modified: 2026-05-09T03:55:59Z
+
+### USER Objective:
+Optimizing Ubuntu Disk Usage
+
+Main Objective: Reclaim storage space and improve system performance by auditing and removing redundant software, large temporary files, and obsolete developer tools.
+
+Goals:
+1. Reorganize VirtualBox virtual machine storage to utilize high-speed NVMe partitions.
+2. Perform a comprehensive purge of legacy Oracle Middleware, .NET SDKs, Liquibase instances, and their associated system environment variables.
+3. Consolidate and clean up redundant tools like OnlyOffice and WebLogic Remote Console.
+4. Audit and sanitize the user's `~/.bashrc` profile to remove references to deprecated software paths, ensuring a clean and efficient shell environment.
+
+## Conversation f056b1a8-79e6-4c2a-95f5-54a33ea06e98: Explaining Financial Reporting Logic
+- Created: 2026-05-07T23:30:40Z
+- Last modified: 2026-05-09T03:35:54Z
+
+### USER Objective:
+Blindando Categorización Agua V2
+
+Objective: Eradicate Category Zero errors and ensure data integrity in the Agua V2 Host C environment by hardening the application and migration pipeline.
+
+Goals:
+1. Implement Poka-Yoke guards in PHP (`cargos.php`) to force correct category assignment (19-22) for administrative charges, overriding user input errors.
+2. Automate the sanitization of the master `cargos` catalog within the `10_pipeline_saneamiento.sql` pipeline to prevent historical category corruption post-sync.
+3. Validate that all administrative categories (Change of Owner, Fines, Constancias) are correctly mapped and immune to legacy `0` or `1` artifacts.
+4. Establish a fail-safe synchronization pattern that ensures all new transactions originate with production-ready metadata, reducing reliance on manual post-hoc SQL patches.
+
+## Conversation bcf279c3-7e58-4790-9c85-a35ebec1c331: Automating Windows Deployment Scripts
+- Created: 2026-05-06T00:58:39Z
+- Last modified: 2026-05-09T00:27:19Z
+
+### USER Objective:
+Automating Agua V2 Windows Deployment
+
+Main Objective: Complete the Agua V2 appliance hardening for Windows 10 Host C to ensure a fully autonomous, production-ready server environment.
+
+Goals:
+1. Finalize storage-agnostic infrastructure through centralized configuration ($TargetDrive).
+2. Refactor bash deployment scripts to prepare a clean, directory-structured 'agua' webapp package for seamless extraction.
+3. Optimize the Windows environment into a Kiosko appliance with automated startup/shutdown and non-intrusive UI/UX.
+4. Centralize all deployment assets and operational documentation for the production release (Pase a Producción).
+5. Ensure robust system security and stability through automated GPO integration, UPS monitoring, and Chrome Kiosko enforcement.
+
+## Conversation 70b5094f-e7ed-44ff-b37e-6634cd67ee3f: Auditing Git Sync Script
+- Created: 2026-05-06T04:38:01Z
+- Last modified: 2026-05-06T04:59:45Z
+
+### USER Objective:
+Auditing Git Sync Script
+
+Main Objective:
+Analyze the safety and integrity of the `sync with link de chatledger-entre main y rama git.sh` script on the Ubuntu 22.04 host to ensure it functions correctly without causing system corruption or repository data loss.
+
+Goals:
+1. Verify the script's logic regarding file migration, symbolic link creation, and `.gitignore` management to prevent accidental data deletion.
+2. Evaluate potential race conditions or error states if the script is re-run (idempotency checks).
+3. Ensure the script correctly handles directory transitions between the local repository and the external `STORAGE_DIR` without breaking the application's reliance on `.chatledger`.
+4. Assess the risk of Git state inconsistencies (e.g., cached vs. ignored files) during the synchronization process.
+
+## Conversation 25b74c07-23d4-48e6-b039-435b579b0cf6: Sourcing Water Delivery System Repositories
+- Created: 2026-05-05T21:11:02Z
+- Last modified: 2026-05-05T21:12:16Z
+
+### USER Objective:
+Sourcing Water Delivery System Repositories
+
+Main Objective:
+Identify and source existing, publicly available repository examples of water delivery/distribution management systems to serve as a baseline for a PHP/PostgreSQL POC.
+
+Goals:
+1. Locate repositories containing full-scope management features including inventory (garrafones), logistics (routes/schedules), vehicle tracking, and personnel management.
+2. Evaluate these repositories as data and architectural inputs to facilitate the migration of the user's current "Agua" webapp system into a modernized PHP/PostgreSQL environment.
+3. Provide direct links to relevant projects to enable the user to conduct an analysis of business logic and schema structures for the upcoming migration.
+
+## Conversation 89bc16ba-c2d5-462e-9435-d8421190f457: Kiosk Mode Browser Automation
+- Created: 2026-04-30T15:35:02Z
+- Last modified: 2026-05-01T05:21:04Z
+
+### USER Objective:
+Kiosk Mode Browser Automation
+
+Main Objective:
+Automate the deployment of the "Agua" web application in a "Kiosk" or "App" mode using Google Chrome.
+
+Goals:
+1. Create a PowerShell script (`.ps1`) that launches the specific URL `http://localhost/agua/login/index.php` in a stripped-down Chrome window without navigation bars, tabs, or address bars.
+2. Ensure the resulting script file is placed on the user's desktop for quick, one-click access.
+3. Configure the browser flags (specifically `--app` or `--kiosk`) to ensure a distraction-free, application-like experience suitable for the local web deployment.
+
+</conversation_summaries>
+
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 11 May 2026, 1:07 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Refining Document Structure**
+
+I've agreed to reorganize the exclusions. Section 2.4 will keep the list of 17 included categories. I will also replace the table of 5 excluded categories in 2.4 with a list, and move it to a new Section 5. I am now working on this new list.
+
+
+
+
+### Actions
+
+**Tool:** `multi_replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.294316926s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 11 May 2026, 1:07 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+## User Request
+
+sube todo
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `CARTERA_VENCIDA_MODELO_Y_REPORTES.md`
+**Language:** markdown
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L189-202)</summary>
+
+**Path:** `Unknown file`
+
+```
+Para garantizar la veracidad contable y evitar la "Deuda Fantasma", los siguientes elementos son excluidos de la **Cartera Vencida** y de la **Lista de Deudores**:
+
+### 5.1 Categorías Excluidas (Filtro Canónico)
+
+| ID | Categoría | Razón de Exclusión |
+|---|---|---|
+| **6** | Faltas de Asamblea | Gestión colectiva por usuario. No es cargo periódico por contrato. |
+| **19** | Cambio de Propietario | Trámite administrativo V2 (único). |
+| **20** | Multa por Desperdicio | Sanción puntual por evento (único). |
+| **21** | Constancia No Adeudo | Trámite puntual de servicio (único). |
+| **22** | Reparación de Fugas | Servicio puntual de infraestructura (único). |
+
+### 5.2 Estados de Contrato y Usuario (Blindaje de Integridad)
+El sistema aplica un filtro de seguridad en el código PHP para asegurar que solo se reporte deuda cobrable:
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 11 May 2026, 1:08 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
 - **Model:** Gemini 3 Flash
 </details>
 
