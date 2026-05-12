@@ -41,6 +41,7 @@ Este documento es una entidad viva para registrar el descubrimiento y clasificac
 | **U02** | Clasificación de "Usuarios Especiales": Aquellos sin contratos vinculados o con todos en suspensión definitiva. | Reporte V2 |
 | **U03** | **Tratamiento de No Localizados**: Usuarios con `estado=2` disparan la suspensión definitiva de sus contratos vinculados. Su deuda **no segmenta ni contabiliza** en los reportes financieros operativos (cortes de caja, cartera vencida) — ver R06. | Implementada |
 | **U04** | **Purga de Usuarios Placeholder**: Usuarios sin nombre (NULL o vacío) se eliminan automáticamente del padrón **solo si no tienen contratos vinculados** (para evitar huérfanos). Saneamiento D10. | Implementada |
+| **F10** | **Homonimia Estructural**: Se prohíbe alterar el campo `usuario.nombre` para marcar duplicados. Se utiliza la columna `id_homonimo_padre` para vincular el registro secundario con el principal. El motor de búsqueda (`buscaUsuarioCambio`) detecta estos vínculos y la UI aplica semáforos (🟢/🟡/🔴) según el estado de los contratos asociados. Implementado en `includes/negocio/usuarios.php` y `views/usuarios/options.php`. Saneamiento corregido en `10c_saneamiento_duplicados.sql`. | Implementada |
 
 ### 📂 Módulo 06: Asambleas y Participación
 | ID | Regla | Estado |

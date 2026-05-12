@@ -160,13 +160,13 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 *   **Detección Robusta de Monitor**: El script `status-webapps.ps1` ahora detecta el Monitor UPS incluso si los permisos de visibilidad de procesos están restringidos.
 *   **Fix Kiosko Chrome**: Ajuste de rutas para el acceso directo de Google Chrome, garantizando compatibilidad con instalaciones de 64 bits.
 
-**Mejoras de Veracidad en Pipeline:**
-*   **Limpieza de Auditoría:** `run_setup.sh` ahora ejecuta `TRUNCATE TABLE fallback_log` al inicio de cada sincronización, asegurando que los logs mostrados en la UI correspondan estrictamente a la sesión actual.
-*   **Trazabilidad '0':** El proceso de migración y split anual ahora se registra bajo el identificador universal de sistema `numcontrato = '0'`.
+**Optimización de Homónimos y UI (2026-05-12):**
+*   **Manejo Estructural de Duplicados**: Se implementó la columna `id_homonimo_padre` en la tabla `usuario` para rastrear duplicados sin alterar el campo `nombre`. Se revirtieron todas las concatenaciones sucias (ej. `[DUPLICADO DE...]`) en la base de datos.
+*   **Semaforización de Usuarios**: El motor de búsqueda en "Nuevo Contrato" y "Cambio de Propietario" ahora incluye un semáforo visual (🟢, 🟡, 🔴) basado en el estado de los contratos de los homónimos detectados.
+*   **Detección Robusta**: La lógica de búsqueda fue blindada para ignorar acentos y sufijos temporales, asegurando la visibilidad total de registros suspendidos o duplicados.
+*   **Pipeline Clean-up**: El script `10c_saneamiento_duplicados.sql` fue refactorizado para usar el nuevo estándar estructural.
 
----
-
-**Última actualización**: 2026-05-12
+**Última actualización**: 2026-05-12 (Sesión 3)
 
 
 > [!IMPORTANT]

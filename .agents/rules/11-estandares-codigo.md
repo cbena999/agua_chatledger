@@ -49,5 +49,8 @@ Cada vez que se realice una inserción en la tabla de auditoría `cambios`, se d
 
 - **Regla de Oro**: Si el `INSERT INTO cambios` falla, se debe revisar si el mensaje de error está siendo capturado por el Monitor de Fallbacks (`admin/saneamiento/monitor_fallbacks.php`).
 
+## 🧩 5. Identidad de Usuarios
+NUNCA alterar el campo `usuario.nombre` para añadir metadatos (ej. "[DUPLICADO]"). Usar la columna `id_homonimo_padre` y manejar la visualización en la capa de View.
+
 ---
 **Nota para Gemini/Claude**: El incumplimiento de estas normas de escapado y encapsulamiento se considera una deuda técnica crítica que debe corregirse proactivamente en cada refactorización.
