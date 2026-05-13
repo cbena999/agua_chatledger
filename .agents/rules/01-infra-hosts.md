@@ -4,11 +4,15 @@ Esta regla define los entornos operativos de **Agua** y el acceso mandatorio por
 
 ## 🏢 Definición de Hosts
 
+> [!IMPORTANT]
+> **SINGLE SOURCE OF TRUTH (SSOT):**
+> Las IPs, puertos, usuarios y contraseñas para los 3 Hosts se gestionan exclusivamente en `/home/carlos/GitHub/agua_chatledger/.mcp.json`. Esta es la **única fuente de verdad**; nunca uses IPs "hardcodeadas".
+
 | Host | OS | Propósito | Rama Git | MCP Access | IP:Puerto |
 |:---:|---|---|---|---|:---:|
-| **A** | Ubuntu 22 / XAMPP Linux | TRANSICIÓN (V1+) — Bridge MySQL | `main` | `bdawahost-a` | `127.0.0.1:3306` |
-| **B** | Windows 7 / MySQL legado | Espejo Producción — Datos Frescos | N/A | `bdawahost-b` | `192.168.1.81:3306` |
-| **C** | Windows 10 / XAMPP 7.4.33 Portable | Target V2 FINAL — MariaDB (Split Tablas) | `feature/upgrade-v2-win-xampp` | `bdawahost-c` | `192.168.1.84:7002` |
+| **A** | Ubuntu 22 / XAMPP Linux | TRANSICIÓN (V1+) — Bridge MySQL | `main` | `bdawahost-a` | Ver `.mcp.json` |
+| **B** | Windows 7 / MySQL legado | Espejo Producción — Datos Frescos | N/A | `bdawahost-b` | Ver `.mcp.json` |
+| **C** | Windows 10 / XAMPP 7.4.33 Portable | Target V2 FINAL — MariaDB (Split Tablas) | `feature/upgrade-v2-win-xampp` | `bdawahost-c` | Ver `.mcp.json` |
 
 
 ### Stack Host C (detalle)

@@ -21,16 +21,16 @@ Esta regla consolida los accesos a los tres ambientes de **Agua** y define cuán
 
 | Recurso | Valor |
 |---------|-------|
-| **MySQL** | `192.168.1.120:3306` · user `root` · pass `sdrastbuy` · db `awa` |
+| **MySQL** | `192.168.1.81:3306` · user `root` · pass `sdrastbuy` · db `awa` |
 | **MCP** | `bdawahost-b` |
 
 ## Host C — Windows 10 XAMPP Portable 7.4.33 (V2 MariaDB)
 
 | Recurso | Valor |
 |---------|-------|
-| **Web URL** | `http://192.168.1.128:7001/agua` |
+| **Web URL** | `http://192.168.1.84:7001/agua` |
 | **Apache** | puerto `7001` |
-| **MariaDB** | `192.168.1.128:7002` · user `root` · pass `comite_2026` · db `awa` |
+| **MariaDB** | `192.168.1.84:7002` · user `root` · pass `comite_2026` · db `awa` |
 | **MCP** | `bdawahost-c` |
 | **XAMPP dir** | `F:\xampp` · Webapp: `F:\xampp\htdocs\agua` |
 
@@ -72,7 +72,7 @@ docker exec -i context7-mcp-mysql npx -y @f4ww4z/mcp-mysql-server mysql://user:p
 **Regla general**: Usar MCP para todo trabajo de diagnóstico e inspección. Recurrir a CLI solo cuando la operación lo requiera explícitamente.
 
 CLI Host A: `/opt/lampp/bin/mysql -u root -pcomite_2026 awa`
-CLI Host C (desde Host A): `/opt/lampp/bin/mysql -h 192.168.1.128 -P 7002 -u root -pcomite_2026 awa`
+CLI Host C (desde Host A): `/opt/lampp/bin/mysql -h 192.168.1.84 -P 7002 -u root -pcomite_2026 awa`
 
 ---
 **Nota**: Cualquier script de automatización que requiera ejecución directa de PHP o MySQL debe referenciar los binarios en `/opt/lampp/bin/` para compatibilidad con el stack legado.
