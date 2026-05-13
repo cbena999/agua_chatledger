@@ -7,9 +7,9 @@
 | **Trajectory ID** | `fefde57c-7901-4235-9f1c-2b77d14393b1` |
 | **Cascade ID** | `623aac70-896a-4dc4-8f74-afbf94f87cd5` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 184 |
+| **Total Steps** | 242 |
 | **Started** | 13 May 2026, 11:30 am |
-| **Completed** | 13 May 2026, 1:19 pm |
+| **Completed** | 13 May 2026, 2:27 pm |
 
 ---
 
@@ -7097,6 +7097,1130 @@ I've zeroed in on the `setup-kiosk-shortcut.ps1` script, specifically lines 73-1
 <summary>Metadata</summary>
 
 - **Thinking Duration:** 0.304295145s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+## User Request
+
+deberia haber un revert para protect-folder.ps1 ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `notasAtencionRqsAguapp.txt`
+**Language:** plaintext
+
+**Open Files:**
+- `notasAtencionRqsAguapp.txt`
+- `protect-folder.ps1`
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+## User Request
+
+no,  listame los demas pendientes.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `notasAtencionRqsAguapp.txt`
+**Language:** plaintext
+
+**Open Files:**
+- `notasAtencionRqsAguapp.txt`
+- `protect-folder.ps1`
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+## User Request
+
+el 1, ya quedo ayer, has el 2 y el valor ajustalo a 5 minutos.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `notasAtencionRqsAguapp.txt`
+**Language:** plaintext
+
+**Open Files:**
+- `protect-folder.ps1`
+- `notasAtencionRqsAguapp.txt`
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/opt/lampp/htdocs/agua/docs-dev/pase-a-prod/aguav2-2026/scripts/`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+<details>
+<summary>Directory: `scripts` (19 items)</summary>
+
+**Path:** `opt/lampp/htdocs/agua/docs-dev/pase-a-prod/aguav2-2026/scripts`
+
+| Name | Type | Size |
+|------|------|------|
+| `config.ps1` | File | 4349 bytes |
+| `hide-drive.ps1` | File | 2307 bytes |
+| `instalacion.txt` | File | 7154 bytes |
+| `monitor-ups.ps1` | File | 11339 bytes |
+| `optimize-windows10.ps1` | File | 6894 bytes |
+| `protect-folder.ps1` | File | 1473 bytes |
+| `revert-chrome-updates.ps1` | File | 2812 bytes |
+| `revert-optimize-windows10.ps1` | File | 5292 bytes |
+| `setup-firewall.ps1` | File | 3292 bytes |
+| `setup-full.ps1` | File | 13096 bytes |
+| `setup-gpo-scripts.ps1` | File | 3971 bytes |
+| `setup-kiosk-shortcut.ps1` | File | 4446 bytes |
+| `setup-mysql-root.ps1` | File | 3728 bytes |
+| `setup-shortcuts.ps1` | File | 5013 bytes |
+| `shutdown-server.ps1` | File | 2103 bytes |
+| `start-webapps.ps1` | File | 15576 bytes |
+| `status-webapps.ps1` | File | 9215 bytes |
+| `stop-webapps.ps1` | File | 8333 bytes |
+| `unhide-drive.ps1` | File | 1529 bytes |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `monitor-ups.ps1`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# ==============================================
+# monitor-ups.ps1 - Monitoreo de energia electrica (SIN USB)
+# ==============================================
+# Detecta cuando el equipo pierde energia haciendo pings al router.
+# Requiere que el router este conectado directo a la pared (sin UPS).
+#
+# Logica configurable via config.ps1
+# ==============================================
+# Ejecutar como Administrador
+
+# Obtener la ruta donde esta este script
+$ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+
+# Cargar el archivo de configuracion
+if (Test-Path "$ScriptDir\config.ps1") {
+    . "$ScriptDir\config.ps1"
+    Write-Host "Configuracion cargada desde: $ScriptDir\config.ps1" -ForegroundColor Green
+} else {
+    Write-Host "ERROR: No se encuentra el archivo config.ps1 en: $ScriptDir" -ForegroundColor Red
+    exit 1
+}
+
+# Funcion para mostrar popup grande (Cerrable con boton OK)
+function Show-PopupAlert {
+    param(
+        [string]$Title,
+        [string]$Message,
+        [string]$Icon = "warning"
+    )
+
+    # Colores segun tipo de alerta
+    $bgColor = "DarkOrange"
+    $fgColor = "White"
+    if ($Icon -eq "info")  { $bgColor = "DarkGreen" }
+    if ($Icon -eq "error") { $bgColor = "DarkRed" }
+
+    # Sanitizar comillas dobles para embeber en string PS
+    $safeMessage = $Message -replace '"', '`"'
+    $safeTitle   = $Title -replace '"', '`"'
+
+    $code = @"
+Add-Type -AssemblyName System.Windows.Forms
+Add-Type -AssemblyName System.Drawing
+`$form = New-Object System.Windows.Forms.Form
+`$form.Text = "$safeTitle"
+`$form.Size = New-Object System.Drawing.Size(650,320)
+`$form.StartPosition = "CenterScreen"
+`$form.TopMost = `$true
+`$form.FormBorderStyle = "FixedDialog"
+`$form.MaximizeBox = `$false
+`$form.MinimizeBox = `$false
+`$form.BackColor = [System.Drawing.Color]::$bgColor
+`$form.ForeColor = [System.Drawing.Color]::$fgColor
+`$form.Font = New-Object System.Drawing.Font("Arial", 14, [System.Drawing.FontStyle]::Bold)
+`$label = New-Object System.Windows.Forms.Label
+`$label.Text = "$safeMessage"
+`$label.AutoSize = `$false
+`$label.Size = New-Object System.Drawing.Size(600,200)
+`$label.Location = New-Object System.Drawing.Point(20,20)
+`$label.TextAlign = "MiddleCenter"
+`$form.Controls.Add(`$label)
+`$btn = New-Object System.Windows.Forms.Button
+`$btn.Text = "ENTENDIDO"
+`$btn.Size = New-Object System.Drawing.Size(200,45)
+`$btn.Location = New-Object System.Drawing.Point(220,235)
+`$btn.BackColor = [System.Drawing.Color]::White
+`$btn.ForeColor = [System.Drawing.Color]::Black
+`$btn.Font = New-Object System.Drawing.Font("Arial", 12, [System.Drawing.FontStyle]::Bold)
+`$btn.DialogResult = [System.Windows.Forms.DialogResult]::OK
+`$form.AcceptButton = `$btn
+`$form.Controls.Add(`$btn)
+`$form.ShowDialog()
+"@
+    $tmpFile = [System.IO.Path]::GetTempFileName() + ".ps1"
+    $code | Out-File -FilePath $tmpFile -Encoding UTF8
+    Start-Process powershell.exe -ArgumentList "-WindowStyle Hidden -ExecutionPolicy Bypass -File `"$tmpFile`""
+    # No usamos -Wait para que el monitor siga contando el tiempo en bateria
+    # No borramos el tmpFile inmediatamente (dejamos que el proceso hijo lo use)
+    # Se recomienda que el popup se autolimpie o sea un proceso ligero.
+}
+
+# Funcion para popup NO CERRABLE
+function Show-UnclosableAlert {
+    param(
+        [string]$Title,
+        [string]$Message
+    )
+    $code = @"
+Add-Type -AssemblyName System.Windows.Forms
+Add-Type -AssemblyName System.Drawing
+`$form = New-Object System.Windows.Forms.Form
+`$form.Text = "$Title"
+`$form.Size = New-Object System.Drawing.Size(600,300)
+`$form.StartPosition = "CenterScreen"
+`$form.ControlBox = `$false
+`$form.TopMost = `$true
+`$form.BackColor = [System.Drawing.Color]::DarkRed
+`$form.ForeColor = [System.Drawing.Color]::White
+`$form.Font = New-Object System.Drawing.Font("Arial", 12, [System.Drawing.FontStyle]::Bold)
+`$label = New-Object System.Windows.Forms.Label
+`$label.Text = "$Message"
+`$label.AutoSize = `$false
+`$label.Dock = "Fill"
+`$label.TextAlign = "MiddleCenter"
+`$form.Controls.Add(`$label)
+`$form.ShowDialog()
+"@
+    $vbsFile = [System.IO.Path]::GetTempFileName() + ".ps1"
+    $code | Out-File -FilePath $vbsFile -Encoding UTF8
+    Start-Process powershell.exe -ArgumentList "-WindowStyle Hidden -ExecutionPolicy Bypass -File `"$vbsFile`""
+}
+
+
+# Funcion para escribir en el log general
+function Write-Log {
+    param([string]$Message, [string]$Level = "INFO")
+    if ($EnableLogging) {
+        $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+        $logEntry = "[$timestamp] [$Level] $Message"
+        Add-Content -Path $LogPath -Value $logEntry
+    }
+}
+
+# ==============================================
+# DETECCION DE UPS (Ping al router)
+# ==============================================
+function Test-NetworkFailing {
+    try {
+        $pinger = New-Object System.Net.NetworkInformation.Ping
+        $result = $pinger.Send($RouterIP, 2000)  # 2000ms timeout
+        if ($result.Status -eq [System.Net.NetworkInformation.IPStatus]::Success) {
+            return $false
+        } else {
+            return $true
+        }
+    } catch {
+        return $true
+    }
+}
+
+# ==============================================
+# VERIFICACION INICIAL
+# ==============================================
+Write-Host @"
++--------------------------------------------------------------+
+|                                                              |
+|     MONITOR DE UPS (MODO PING) - PROTECCION SERVIDOR         |
+|                                                              |
+|     Modelo soportado: SBNB750 (Sin puerto USB)               |
+|                                                              |
+|     IP del Router a vigilar: $RouterIP                              |
+|     Tolerancia: $UPSPingMaxFails pings separados por $UPSPingWaitSeconds seg         |
+|     Tiempo de espera en bateria: $UPSWaitMinutes minutos                 |
+|                                                              |
++--------------------------------------------------------------+
+"@ -ForegroundColor Cyan
+
+if (-not (Test-Path $StopScriptPath)) {
+    $errorMsg = "No se encuentra el script de parada/apagado en: $StopScriptPath"
+    Write-Host "ERROR: $errorMsg" -ForegroundColor Red
+    Write-Log $errorMsg "ERROR"
+    exit 1
+}
+
+Write-Host "Monitor iniciado. Esperando fallos de conexion al router..." -ForegroundColor Green
+Write-Host "Asegurese de que el router ($RouterIP) NO este conectado al UPS." -ForegroundColor Yellow
+Write-Host "Presiona Ctrl+C para detener el monitoreo." -ForegroundColor Gray
+Write-Log "Monitor UPS (Modo Ping) iniciado."
+
+# ==============================================
+# BUCLE PRINCIPAL DE MONITOREO
+# ==============================================
+
+$onBatterySince = $null
+$powerIsOut     = $false
+$alertShown     = $false
+$failedPings    = 0
+
+while ($true) {
+    
+    if (-not $powerIsOut) {
+        # FASE 1: Deteccion con Tolerancia
+        $isFailing = Test-NetworkFailing
+        
+        if ($isFailing) {
+            $failedPings++
+            Write-Host "[$(Get-Date -Format 'HH:mm:ss')] [AVISO] Fallo de red detectado ($failedPings/$UPSPingMaxFails)." -ForegroundColor Yellow
+            
+            if ($failedPings -ge $UPSPingMaxFails) {
+                # CONFIRMADO
+                $powerIsOut = $true
+                $alertShown = $false
+                $failedPings = 0
+                
+                Write-Host ""
+                Write-Host "[$(Get-Date -Format 'HH:mm:ss')] [CRITICO] CORTE DE ENERGIA CONFIRMADO." -ForegroundColor Red
+                Write-Host "                    Se esperaran $UPSWaitMinutes minutos antes de apagar el servidor..." -ForegroundColor Yellow
+                Write-Log "Corte de energia electrica confirmado ($UPSPingMaxFails pings fallidos consecutivos)."
+                
+                # Failsafe: La cuenta regresiva INICIA de inmediato (no depende de la interaccion del usuario)
+                $onBatterySince = Get-Date
+                Write-Host "[$(Get-Date -Format 'HH:mm:ss')] [INFO] Cuenta regresiva de $UPSWaitMinutes minuto(s) INICIADA." -ForegroundColor Yellow
+                
+                # MOSTRAR POPUP 1: AVISO AL USUARIO (Informativo, no bloquea el cronometro)
+                Show-PopupAlert -Title $MsgAlertTitle -Message $MsgAlertText -Icon "warning"
+            } else {
+                # Esperar antes del siguiente ping de comprobacion
+                Write-Host "                    Esperando $UPSPingWaitSeconds segundos antes de reintentar..." -ForegroundColor Gray
+                Start-Sleep -Seconds $UPSPingWaitSeconds
+                continue # Saltar la espera normal del bucle
+            }
+        } else {
+            if ($failedPings -gt 0) {
+                Write-Host "[$(Get-Date -Format 'HH:mm:ss')] [OK] Conexion recuperada. Falsa alarma evitada." -ForegroundColor Green
+                $failedPings = 0
+            }
+        }
+        
+    } else {
+        # FASE 2: Cuenta Regresiva de Apagado
+        
+        # Revisar si la energia regreso durante la cuenta regresiva
+        $isFailing = Test-NetworkFailing
+        if (-not $isFailing) {
+            Write-Host ""
+            Write-Host "[$(Get-Date -Format 'HH:mm:ss')] [OK] ENERGIA RESTAURADA: El router volvio a responder." -ForegroundColor Green
+            Write-Host "                    Se cancela el apagado automatico." -ForegroundColor Green
+            Write-Host ""
+            Write-Log "Energia restaurada durante la cuenta regresiva. Cancelando apagado."
+            
+            $powerIsOut = $false
+            $onBatterySince = $null
+            $alertShown = $false
+            $failedPings = 0
+            
+            Show-PopupAlert -Title "[OK] ENERGIA RESTAURADA" -Message "La energia electrica ha regresado. El servidor continuara operando normalmente." -Icon "info"
+        } else {
+            $elapsedMinutes = ((Get-Date) - $onBatterySince).TotalMinutes
+            $elapsedMinutesRounded = [math]::Round($elapsedMinutes, 1)
+            $remainingMinutes      = [math]::Round($UPSWaitMinutes - $elapsedMinutes, 1)
+            
+            Write-Host "[$(Get-Date -Format 'HH:mm:ss')] [AVISO] En bateria: $elapsedMinutesRounded min transcurridos, $remainingMinutes min restantes para apagado" -ForegroundColor Yellow
+            
+            if ($elapsedMinutes -ge $UPSWaitMinutes -and -not $alertShown) {
+                Write-Host ""
+                Write-Host "[$(Get-Date -Format 'HH:mm:ss')] [CRITICO] TIEMPO LIMITE SUPERADO." -ForegroundColor Red
+                Write-Host "                    Ejecutando script de apagado total..." -ForegroundColor Red
+                Write-Log "Tiempo de espera en bateria superado. Ejecutando $StopScriptPath"
+                
+                # MOSTRAR POPUP 2: APAGADO INMINENTE (NO CERRABLE)
+                Show-UnclosableAlert -Title $MsgCriticalTitle -Message $MsgCriticalText
+                
+                try {
+                    & $StopScriptPath
+                } catch {
+                    $errMsg = "Error al ejecutar script de apagado: $_"
+                    Write-Host $errMsg -ForegroundColor Red
+                    Write-Log $errMsg "ERROR"
+                }
+                
+                $alertShown = $true
+                break # Salir del monitor
+            }
+        }
+    }
+
+    Start-Sleep -Seconds $UPSCheckIntervalSeconds
+}
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `config.ps1`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# ==============================================
+# ARCHIVO DE CONFIGURACION CENTRALIZADO
+# ==============================================
+# Edita SOLO este archivo para personalizar todos los scripts
+# ==============================================
+
+# ==============================================
+# 1. CONFIGURACION DE LA UNIDAD DESTINO
+# ==============================================
+
+# Letra de la unidad donde se instala el sistema (Ej: "F", "W", "C")
+$DriveLetter = "F"
+$TargetDrive = "${DriveLetter}:"
+
+# ==============================================
+# 2. CONFIGURACION DE LA WEBAPP (Apache + MySQL)
+# ==============================================
+
+# Ruta del ejecutable de Apache (httpd.exe)
+$ApachePath = "$TargetDrive\xampp\apache\bin\httpd.exe"
+
+# Ruta del ejecutable de MySQL (mysqld.exe)
+$MySQLPath = "$TargetDrive\xampp\mysql\bin\mysqld.exe"
+
+# Directorio de trabajo de MySQL (donde esta mysqld.exe)
+$MySQLWorkDir = "$TargetDrive\xampp\mysql\bin"
+
+# Puerto de MySQL
+$MySQLPort = 7002
+
+# Puerto de Apache
+$ApachePort = 7001
+
+# Tiempo maximo de espera para que MySQL se inicie (en segundos)
+$MySQLStartTimeout = 30
+
+# Tiempo maximo de espera para que Apache se inicie (en segundos)
+$ApacheStartTimeout = 15
+
+# ==============================================
+# 2. CONFIGURACION DEL MONITOR DE UPS
+# ==============================================
+
+# Tolerancia a caidas de red (Modo Ping)
+$UPSPingMaxFails = 3
+$UPSPingWaitSeconds = 120
+
+# Tiempo de espera en MINUTOS antes de detener el servidor al estar en bateria
+$UPSWaitMinutes = 8
+
+# Intervalo de verificacion en estado normal (en segundos)
+$UPSCheckIntervalSeconds = 20
+
+# IP del Router/Modem (para deteccion por ping, si el UPS no tiene USB)
+$RouterIP = "192.168.1.254"
+
+# ==============================================
+# NOTA: DETECCION DE UPS (MODO PING)
+# ==============================================
+# El script detecta corte de energia haciendo pings con tolerancia al
+# router (RouterIP). Si la red se cae y no vuelve, asume corte de energia.
+# IMPORTANTE: El router NO debe estar respaldado por bateria.
+# ==============================================
+
+# ==============================================
+# 3. CONFIGURACION DE RUTAS DE SCRIPTS
+# ==============================================
+
+# Ruta completa donde se guardan los scripts
+$ScriptsPath = "C:\aguav2-2026\scripts"
+
+# Ruta completa del script de parada (usado por el monitor UPS)
+$StopScriptPath = "$ScriptsPath\shutdown-server.ps1"
+
+# ==============================================
+# 4. CONFIGURACION DE LA UNIDAD PROTEGIDA
+# ==============================================
+
+# Letra de la unidad protegida
+$ProtectedDrive = $DriveLetter
+
+# Ruta completa de la unidad protegida
+$ProtectedDrivePath = "$TargetDrive\"
+
+# Subcarpetas especificas a proteger (dentro de la unidad)
+$ProtectedSubfolders = @(
+    "$TargetDrive\aguav2",
+    "$TargetDrive\xampp"
+)
+
+# ==============================================
+# 5. CONFIGURACION DE POPUPS
+# ==============================================
+
+# Tiempo que duran los popups en segundos (0 = infinito hasta que el usuario acepte)
+$PopupTimeout = 0
+
+$MsgAlertTitle = "[AVISO] CORTE DE ENERGIA CONFIRMADO"
+$MsgAlertText = "Se ha detectado un corte de energia electrica.`n`nEl sistema funcionara con la bateria del UPS durante $UPSWaitMinutes minutos antes de apagar el equipo por completo de forma automatica.`n`nPor favor, DEJE DE CAPTURAR PAGOS e informe a los usuarios que el sistema se apagara pronto."
+
+$MsgCriticalTitle = "[CRITICO] APAGANDO SERVIDOR"
+$MsgCriticalText = "TIEMPO LIMITE DE BATERIA SUPERADO.`n`nEl servidor se esta apagando AHORA de forma automatica para prevenir danos en la base de datos.`n`nESTE PROCESO ES IRREVERSIBLE Y NO PUEDE SER CANCELADO."
+
+# ==============================================
+# 6. CONFIGURACION DE LOGS
+# ==============================================
+
+# Si deseas guardar logs de eventos (true/false)
+$EnableLogging = $true
+
+# Ruta donde se copian los logs de fallo de start/stop
+$FailLogDir = "C:\aguav2-2026\logs"
+
+# Ruta del archivo de log general
+$LogPath = "$FailLogDir\webapp-security.log"
+
+# Directorio de respaldos fisicos de la base de datos
+$BackupDir = "C:\aguav2-2026\respaldobd"
+
+# ==============================================
+# FIN DEL ARCHIVO DE CONFIGURACION
+# ==============================================
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 May 2026, 2:12 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 May 2026, 2:12 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Clarifying Instructions Immediately**
+
+I need to confirm the latest update. It seems I misread the command. The user actually said "PRIBAR usb ping", not "Probar". I'll correct the mistaken "OK" status on the `Probar` test. I'm focusing on the correct instructions now.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.306633132s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+## User Request
+
+actualiza GEMINI.md y asociados, comitea y sube todo a repos.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `notasAtencionRqsAguapp.txt`
+**Language:** plaintext
+
+**Open Files:**
+- `notasAtencionRqsAguapp.txt`
+- `config.ps1`
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `GEMINI.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# GEMINI.md - Central Project Context for Agua (MASTER INDEX)
+
+Este archivo es el punto de entrada principal para el asistente de IA (Antigravity/Gemini) y un resumen del contexto del proyecto **Agua**. El conocimiento detallado y las reglas de oro se han distribuido en archivos modulares dentro de `.agents/rules/`.
+
+> [!IMPORTANT]
+> **Gemini**: Debes consultar y seguir las reglas detalladas en el directorio `.agents/rules/` para cada tarea orquestada en este proyecto.
+
+---
+
+## 🗺️ Índice de Reglas y Conocimiento (Ground Truth)
+
+| Regla | Descripción | Archivo |
+| :--- | :--- | :--- |
+| **01** | **Infraestructura y Hosts** | [.agents/rules/01-infra-hosts.md](file:///.agents/rules/01-infra-hosts.md) |
+| **02** | **Diccionario de Reglas por Módulo** | [.agents/rules/02-reglas-negocio.md](file:///.agents/rules/02-reglas-negocio.md) |
+| **03** | **Sincronización de Datos (B -> A)** | [.agents/rules/03-sincronizacion-b-a.md](file:///.agents/rules/03-sincronizacion-b-a.md) |
+| **04** | **Arquitectura MVC y Directorios** | [.agents/rules/04-arquitectura-mvc.md](file:///.agents/rules/04-arquitectura-mvc.md) |
+| **05** | **Despliegue y Automatización (Host C)** | [.agents/rules/05-despliegue-host-c.md](file:///.agents/rules/05-despliegue-host-c.md) |
+| **06** | **Accesos, Rutas y Herramientas** | [.agents/rules/06-accesos-rutas.md](file:///.agents/rules/06-accesos-rutas.md) |
+| **07** | **Control de Versiones y Git Workflow** | [.agents/rules/07-git-workflow.md](file:///.agents/rules/07-git-workflow.md) |
+| **08** | **Integridad del Ground Truth / Runbook** | [.agents/rules/08-integridad-ground-truth.md](file:///.agents/rules/08-integridad-ground-truth.md) |
+| **09** | **Documentación de Sesión** | [.agents/rules/09-sesion-summary.md](file:///.agents/rules/09-sesion-summary.md) |
+| **10** | **Limitantes Conocidas de la Webapp** | [.agents/rules/10-limitantes-webapp.md](file:///.agents/rules/10-limitantes-webapp.md) |
+| **11** | **Estándares de Código y Seguridad** | [.agents/rules/11-estandares-codigo.md](file:///.agents/rules/11-estandares-codigo.md) |
+| **12** | **Uso Seguro de `Conexion.php` (mysqli)** | [.agents/rules/12-estandar-conexion-mysqli.md](file:///.agents/rules/12-estandar-conexion-mysqli.md) |
+
+---
+
+## 🛠️ Skills Personalizadas (Workflows y Estándares)
+Estas habilidades definen **cómo** ejecuto las tareas técnicas:
+- **[UI/UX Modern Refactor](file:///.agents/skills/skill-ui-modern-refactor/SKILL.md)**: Estándares de CSS/HTML para el Host C.
+- **[Dynamic UI & AJAX](file:///.agents/skills/skill-dynamic-html-ajax/SKILL.md)**: Interactividad con `paxscript.js`.
+- **[Plates Templating Patterns](file:///.agents/skills/skill-plates-templating/SKILL.md)**: Uso del motor de plantillas Views.
+- **[PHP-Migration-74](file:///.agents/skills/skill-migration-php74/SKILL.md)**: Refactorización de PHP 5.5 a 7.4.
+- **[Database Evolution](file:///.agents/skills/skill-database-evolution/SKILL.md)**: Partición de `ligacargos` y migración a MariaDB.
+
+---
+
+## 🏗️ Workflows Disponibles (Procesos Detallados)
+- **[/update-business-data](file:///.agents/workflows/update-business-data.md)**: Sync B → A (Comando: `Sync-B2A`)
+- **[/deploy-to-host-c](file:///.agents/workflows/deploy-to-host-c.md)**: Sync A → C (Comando: `Sync-A2C`)
+
+---
+
+## 🚨 Módulos Críticos y Auditoría Constante
+Existen funcionalidades core que requieren especial atención para asegurar la congruencia de datos:
+- **Lógica Híbrida y Retroactividad (V2)**: Motor de Mora Continuo y Reglas de Paridad en `transiciones_estado_contratos.md`.
+- **Estados de Contrato**: Transiciones entre `1 (ACTIVO)`, `2 (SUSPENSIÓN TEMPORAL)`, `3 (SUSPENSIÓN ADMINISTRATIVA)` y `4 (SUSPENSIÓN DEFINITIVA)`. Ver matriz completa en `transiciones_estado_contratos.md`.
+- **Cartera Vencida (`carteravencida.php`)**: Validación de deuda morosa.
+- **Corte de Caja (`concentradocortecaja.php`)**: Ingresos diarios contra reportes detallados.
+- **Resumen de Caja (`reportes/concentradocortecajaresumen.php`)**: Consolidación total.
+- **Saneamiento Estructural (PMU)**: Consolidación de asambleas, unicidad de cargos y depuración de usuarios placeholder en `docs-dev/doc-estabilizacion/funcionalidad-reglas-negocio/analisis_paridad_3hosts.md`.
+- **Plan de Pruebas Maestro**: `docs-dev/doc-estabilizacion/pruebas-cp-manuales-auto/Plan de Pruebas — Sprint Post-Correcciones.md`.
+
+---
+
+## 🚀 Estado Actual: Host C UP & RUNNING (2026-04-07)
+
+- Split `ligacargos` **completado**: 2,513 activa (≥2026) + 192,545 histórico (≤2025)
+- Schema v2 completo + webapp PHP 7.4 adaptada en `feature/upgrade-v2-win-xampp`
+- Pipeline de Sincronización B → A → C **Maestro** (Comando: `Full-Pipeline-Sync`)
+- **Saneamiento Estructural (2026-04-26)**: 100% de asambleas consolidadas (max 3/día) y catálogos con llaves de unicidad.
+- Puertos Host C: Apache **7001**, MariaDB **7002**
+- Protocolo de Migración: `docs-dev/migration-aguav2/MIGRATION_PROTOCOL.md`
+- Checklist pase a producción: `docs-dev/migration-aguav2/host-c-setup/07_transferir_datos.md`
+
+## 🛡️ Automatización y Hardening Host C (2026-05-08)
+El entorno Windows 10 ha sido convertido en un Appliance Kiosko 100% automatizado:
+- **Agnóstico a Discos:** Todos los scripts y archivos de configuración (Apache/MySQL/PHP) heredan dinámicamente la unidad destino desde `config.ps1`.
+- **Auto-Arranque:** Tareas Programadas inician los servicios al logueo de sesión.
+- **Apagado Seguro:** El script `shutdown-server.ps1` fuerza un volcado físico en ZIP de la BD antes de apagar la máquina (evitando corrupciones).
+- **Kiosko Restringido:** El script `setup-full.ps1` crea una carpeta `aguav2` en el escritorio para la gestión técnica, y deja expuesto solo el Kiosko de Chrome y el botón de apagado para los operadores. Chrome está bloqueado vía Registro para evitar actualizaciones.
+
+> **⚠️ Filosofía de Uso**: Los scripts `Sync-*` y `Full-Pipeline-Sync` son **Herramientas de Migración**, no tareas recurrentes. Se ejecutan durante el desarrollo para estabilizar Host C. En producción (Go-Live) se ejecutan **una última vez** y luego se retiran. Host C opera autónomamente.
+
+> Ver tabla de comandos canónicos y comportamiento de flags en: `docs-dev/migration-aguav2/MIGRATION_PROTOCOL.md`
+
+## 🔒 Fixes de Seguridad en Motor de Recargos (2026-04-26)
+
+Dos guards implementados en `includes/negocio/cargos.php` para blindar el flag `recargo` del catálogo:
+
+| Guard | Función | Descripción |
+|-------|---------|-------------|
+| **G01** | `calcula_recargos()` | Retorno temprano si `recargo=0` — la ruta de aplicación manual ya no genera mora en cargos sin flag. |
+| **G02** | `creaCargo()` / `modificaCargo()` | Fuerza `recargo=0` server-side para cualquier categoría ≠ 2 (AGUA) o 3 (DRENAJE). Cierra la vía UI del checkbox "Es una multa". |
+
+**Cambios en BD asociados:**
+- `config_sistema.descripcion` extendida de `varchar(255)` → `TEXT` (Hosts A y C).
+- Nuevos parámetros: `paridad_anios_max_recargo=5`, `paridad_ignorar_fpago_fantasma=1`.
+- Script sincronizado: `docs-dev/migration-aguav2/host-c-setup/03_config_datos_catalogo.sql`.
+
+**UI:** `admin/operaciones/configuracion.php` rediseñado — 2 columnas, modal de confirmación con diff, descripciones desde BD. Ver regla F09 en `02-reglas-negocio.md`.
+
+---
+
+## 🔒 Fixes Financieros y Arquitectura Poka-Yoke (2026-04-28)
+
+Se implementaron parches estructurales para asegurar la integridad de la configuración y la reversibilidad forense:
+
+| Fix | Componente | Descripción |
+|-------|---------|-------------|
+| **Poka-Yoke Numérico** | `cargaConfig()` | Intercepción con `preg_match` y `str_replace` para sanear globalmente cualquier número formateado (ej. "10,500.00") en `config_sistema` antes del casteo `floatval/intval`. Protege 18 variables nativas. |
+| **Reversa Incondicional** | `_getReversal()` | El botón "Revertir transición" se ha desacoplado de las reglas de deuda y ahora es permanentemente visible en la UI tras un cambio de estado válido. |
+| **Límite Bomba** | `calcula_recargos()` | Se introdujo una regla de quiebre de deuda máxima (`reversal_threshold`). El motor deja de generar mora si el contrato alcanza este tope de deuda. |
+| **Toggle de Límite** | `reversal_threshold_enable` | Nuevo parámetro global para activar/desactivar (1/0) el Límite Bomba de recargos a voluntad del operador. Por default, apagado. |
+
+---
+
+## 🐛 Bugs Host C corregidos (2026-04-07, commit `bd1cb2f`)
+
+Derivados del split `ligacargos`: 5 PHPs usaban `FROM ligacargos` directa (perdían datos ≤2025).
+
+| Archivo | Fix aplicado |
+|---------|-------------|
+| `reportes/listadeudores.php` | Eliminado cross join implícito `ligacargos.monto` → `vw_ligacargos_pendientes.monto` |
+| `reportes/carteravencida.php` | Añadido `OR anio IS NULL` para históricos migrados sin anio |
+| `reportes/concentradocortecajaresumen.php` | `FROM ligacargos` → `FROM vw_ligacargos_all` |
+| `includes/negocio/cargos.php` | SELECT duplicados y UPDATE masivo corregidos (UPDATE ahora aplica en ambas tablas) |
+| `docs-dev/sanemiento-limpieza/reportes/genera_csv.php` | 4 JOINs directos → `vw_ligacargos_all` |
+
+**Regla para nuevos PHPs**: Todo SELECT debe usar `vw_ligacargos_all` o `vw_ligacargos_pendientes`. Ver [skill-database-evolution/SKILL.md](.agents/skills/skill-database-evolution/SKILL.md).
+
+---
+---
+
+## 🏗️ Arquitectura Brain / Ground Truth (2026-04-09)
+
+Todo el contexto de agentes IA vive en `agua_chatledger`. El repo `agua` tiene solo symlinks (8/8).
+**Antes de cualquier refactoring de archivos meta, leer regla 08.**
+
+Validar integridad:
+```bash
+bash docs-dev/ga-cl-ia/chatledger_validate.sh
+```
+
+## 🛡️ Saneamiento y Resiliencia Extrema (2026-05-10)
+Se implementó un sistema de protección de triple capa para el Host C, blindándolo contra apagados abruptos y asegurando la veracidad de la auditoría:
+
+| Capa | Componente | Descripción |
+|:---:|---|---|
+| **L1** | **Smart Backup** | `start-webapps.ps1` detecta si falta el backup de ayer. Si hubo actividad y el backup no existe, realiza un "Catch-up Backup" antes de iniciar MySQL. Omite automáticamente días no laborables (domingos/feriados) si no hay cambios en la DB. |
+| **L2** | **Pre-Vuelo** | Limpieza automática de archivos `.pid` huérfanos y ejecución externa de `aria_chk --recover` sobre las tablas de sistema MariaDB antes de lanzar el servicio. |
+| **L3** | **Auto-Repair SQL** | Health-check automático al inicio. Si detecta el Error 176 (Aria checksum), invoca `repair_aria_system_tables.sql` para reconstruir las tablas físicamente antes de abrir Apache. |
+
+**Hitos de Estabilización (Sesión 2026-05-10):**
+*   **Watchdog Automatizado**: El `monitor-ups.ps1` ahora inicia automáticamente en modo oculto vía `start-webapps.ps1`, asegurando protección 24/7 sin intervención manual.
+*   **Fail-Safe UPS**: El cronómetro de apagado (8 min) ahora es independiente de la interacción del usuario (no bloqueante), garantizando el cierre seguro incluso en ausencia del operador.
+*   **Dashboard de Consolidación**: Interfaz de "Cierre Anual" rediseñada como un tablero pro-activo que muestra registros pendientes y estado de las tablas en tiempo real.
+*   **Auditoría Global**: El reporte de historial (`id=0`) fue habilitado para visualizar los logs de sistema (migraciones, splits, configuraciones) bajo el identificador universal de sistema.
+
+**Estabilización Financiera y Cartera Vencida (2026-05-11):**
+*   **Modelo de Cartera Homologado**: Se formalizó el cálculo de Cartera Vencida (17 categorías incluidas, 5 excluidas) asegurando el cuadre a $0 en el reporte de caja mediante la inclusión de recargos históricos (11, 16, 17) en R.CART.
+*   **UI/UX de Reportes**: Renombrado de botones de acceso y encabezados en `carteravencida.php` y `concentradocortecaja.php` para mayor claridad del operador (`RECUP. CARTERA <$anio_ref`).
+*   **Fuente de Verdad**: Documento maestro creado en `docs-dev/doc-estabilizacion/CARTERA_VENCIDA_MODELO_Y_REPORTES.md`.
+
+**Hitos de Estabilización y Hardening (2026-05-11 - Sesión 2):**
+*   **Conectividad Host C**: Restaurada tras apertura de Firewall en puerto **7002** (MariaDB) y **7001** (Apache). (La IP y credenciales han sido delegadas al SSOT maestro).
+*   **Auto-Elevación Poka-Yoke**: Todos los scripts de PowerShell (`.ps1`) ahora cuentan con lógica de auto-elevación a Administrador, eliminando errores de permisos del operador.
+*   **Configuración de Firewall**: Nuevo script `setup-firewall.ps1` integrado en el instalador maestro para automatizar la apertura de puertos en Windows 10.
+*   **Detección Robusta de Monitor**: El script `status-webapps.ps1` ahora detecta el Monitor UPS incluso si los permisos de visibilidad de procesos están restringidos.
+*   **Fix Kiosko Chrome**: Ajuste de rutas para el acceso directo de Google Chrome, garantizando compatibilidad con instalaciones de 64 bits.
+
+**Optimización de Homónimos y UI (2026-05-12):**
+*   **Manejo Estructural de Duplicados**: Se implementó la columna `id_homonimo_padre` en la tabla `usuario` para rastrear duplicados sin alterar el campo `nombre`. Se revirtieron todas las concatenaciones sucias (ej. `[DUPLICADO DE...]`) en la base de datos.
+*   **Semaforización de Usuarios**: El motor de búsqueda en "Nuevo Contrato" y "Cambio de Propietario" ahora incluye un semáforo visual (🟢, 🟡, 🔴) basado en el estado de los contratos de los homónimos detectados.
+*   **Detección Robusta**: La lógica de búsqueda fue blindada para ignorar acentos y sufijos temporales, asegurando la visibilidad total de registros suspendidos o duplicados.
+*   **Pipeline Clean-up**: El script `10c_saneamiento_duplicados.sql` fue refactorizado para usar el nuevo estándar estructural.
+
+**Pipeline B→A→C Estabilizado y Semáforos UI (2026-05-12 — Sesión 4):**
+*   **Ejecución Full-Pipeline-Sync**: Completado exitosamente — 1,409 usuarios, 1,410 contratos, 200,921 ligacargos (split 7,105 activos / 193,816 histórico). Todos los checks de integridad en ✅.
+*   **Hardening de Schema Base**: La columna `id_homonimo_padre` se integró permanentemente en `02_schema_tablas_base.sql`. El parche temporal `12_add_homonimo_padre.sql` fue eliminado. El pipeline es ahora idempotente ante DROP DATABASE.
+*   **Fix QA Pipeline**: `12_validate_pipeline.sql` actualizado para validar el vínculo estructural (`id_homonimo_padre`) en lugar de buscar sufijos sucios `[DUPLICADO...]` en el nombre.
+*   **Fix Visibilidad Homónimos**: `includes/negocio/usuarios.php` — la cláusula `HAVING` fue extendida para incluir usuarios con vínculo estructural (`id_homonimo_padre > 0`), evitando que homónimos sin contratos quedaran ocultos en el buscador.
+*   **Paleta de Colores Semáforo (UI definitiva)**: `views/usuarios/options.php` — 🟣 Lila `#ede0ff` para **cualquier usuario sin contratos** (independiente de homónimo); 🟢🟡🔴 semáforos solo para homónimos con contratos. Sin color = usuario normal con contratos.
+*   **Fix Auth `cambiaestado()`**: `includes/negocio/contratos.php` — verificación de contraseñas (presidente/tesorero) añadida antes de ejecutar el cambio de estado, siguiendo el mismo patrón de `cancelarCargos()`.
+*   **Documentación**: `analisis_paridad_3hosts.md` actualizado con la paleta de colores definitiva. `ISSUES_Y_BACKLOG.md` extraído de `CARTERA_VENCIDA_MODELO_Y_REPORTES.md`.
+
+**Unificación de Infraestructura e IPs (2026-05-12 — Sesión 5):**
+*   **Single Source of Truth (SSOT)**: Se centralizó la configuración de red y credenciales de bases de datos para los tres entornos. La **única fuente de verdad** para las IPs, puertos, usuarios y passwords de Host A, Host B y Host C es ahora el archivo `/home/carlos/GitHub/agua_chatledger/.mcp.json`. Queda estrictamente prohibido el uso de IPs *hardcodeadas* (como `192.168.1.84` o `192.168.1.81`) en scripts y documentos.
+
+**Estabilización de Usuario No Localizado y Seguridad (2026-05-13 — Sesión 1):**
+*   **Flujo NL Cascada**: Se estabilizó la declaratoria de "Usuario No Localizado", asegurando la suspensión masiva (Estado 4 - SDF) de todos sus contratos vinculados.
+*   **Hardening Poka-Yoke**: Refactorización de `usuarios.php` y `contratos.php` para usar `password_verify()` y `trim()`, eliminando errores por espacios accidentales y permitiendo el uso de hashes Bcrypt modernos.
+*   **Fix UI Reversión**: Se corrigió el bug de visibilidad que ocultaba el botón de reversión en contratos con Suspensión Definitiva. El botón es ahora permanente ante snapshots válidos.
+*   **Restablecer Usuario**: Nueva funcionalidad añadida para revertir manualmente el estado de un usuario NL a Activo, permitiendo correcciones administrativas sin bloqueos.
+*   **Auditoría de Contraseñas**: Análisis de gaps realizado en el módulo de Comité; identificado riesgo de visibilidad de contraseñas nuevas y falta de doble confirmación.
+
+**Última actualización**: 2026-05-13 (Sesión 1)
+
+
+> [!IMPORTANT]
+> **Terminología de Sesión**:
+> - **Ground Truth**: Denominación del contexto maestro para **Claude**.
+> - **Runbook**: Denominación del contexto maestro (GEMINI.md + .agents/) para **Gemini**.
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Adding Session Milestones**
+
+I've just updated `GEMINI.md` to reflect the milestones achieved during this session, specifically for Session 2, which ends on 2026-05-13. I've documented the "Poka-Yoke Duplicados (Bloqueo)" milestone, detailing the native blocking implementation (`disabled`) within the selection combo.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.568616056s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 May 2026, 2:13 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 13 May 2026, 2:13 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Investigating File Discrepancy**
+
+Okay, I'm trying to figure out why a recently-modified file, `GEMINI.md`, isn't showing up in the expected file status. It's likely a symlink, or perhaps I missed it in my initial scan. I've located `GEMINI.md` within `/opt/lampp/htdocs/agua`, and I'm cross-referencing this to get a `git status` check, and will try to determine the reason for the discrepancy.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.513725880s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 13 May 2026, 2:16 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 13 May 2026, 2:16 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 May 2026, 2:16 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 13 May 2026, 2:16 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing the Command's Context**
+
+I'm now focusing on dissecting the command sequence. It's clear `git add .`, `git commit`, and `git push` were executed. However, a validation script, likely `chatledger_validate.sh` or something similar, was also triggered, as indicated by the separator output. I'm investigating the purpose and role of this validation step in the workflow.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.512990100s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Execution Error
+
+**Status:** Completed
+**Created:** 13 May 2026, 2:19 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Accessing Relevant Corpus**
+
+Okay, so I realized I can't directly access the specified GitHub directory if it's outside the workspace. However, the user clarified that "cbena999/aguaclmhj" is the correct corpus for the `/opt/lampp/htdocs/agua` path. I'm going to attempt to use that information for access.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.614077588s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Execution Error
+
+**Status:** Completed
+**Created:** 13 May 2026, 2:19 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 13 May 2026, 2:19 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 13 May 2026, 2:20 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
 - **Model:** Gemini 3 Flash
 </details>
 
