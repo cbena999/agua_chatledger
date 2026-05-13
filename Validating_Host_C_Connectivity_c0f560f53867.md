@@ -7,9 +7,8 @@
 | **Trajectory ID** | `3a4d0446-e71c-4077-82c8-075413267b36` |
 | **Cascade ID** | `3978a994-757c-4201-abea-c0f560f53867` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 157 |
+| **Total Steps** | 184 |
 | **Started** | 12 May 2026, 9:18 pm |
-| **Completed** | 13 May 2026, 11:45 am |
 
 ---
 
@@ -3748,6 +3747,1184 @@ The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is pro
 **Triggered Heuristics:** bash_command_reminder
 
 </details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing now on specific tools, and on avoiding unnecessary workarounds. I'm making sure I *never* use `cat` in a bash command for file creation or appending, and I'm pushing myself to use `grep_search` instead of plain `grep` in bash unless there's no other way. This is essential for both efficiency and the integrity of data and processes.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `chatledger_validate.sh`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.062891355s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+#!/usr/bin/env bash
+# =============================================================================
+# chatledger_validate.sh — Validación de integridad del Ground Truth
+# Repo: agua_chatledger · Ver: .agents/rules/08-integridad-ground-truth.md
+#
+# USO: bash docs-dev/ga-cl-ia/chatledger_validate.sh
+# Ejecutado automáticamente por el pre-commit hook de repo agua.
+# =============================================================================
+set -euo pipefail
+
+AGUA_DIR="/opt/lampp/htdocs/agua"
+CHATLEDGER_DIR="/home/carlos/GitHub/agua_chatledger"
+ERRORS=0
+
+fail() { echo "  [FAIL] $*"; ERRORS=$((ERRORS + 1)); }
+ok()   { echo "  [ OK ] $*"; }
+
+echo ""
+echo "═══════════════════════════════════════════════════════"
+echo "  Validación Ground Truth — agua_chatledger            "
+echo "═══════════════════════════════════════════════════════"
+
+# ── 1. Symlinks en repo agua ──────────────────────────────────────────────────
+echo ""
+echo "  [1] Symlinks en repo agua"
+
+check_symlink() {
+    local link="$1"
+    local expected_target="$2"
+    if [ -L "$link" ]; then
+        ok "Symlink OK: $link"
+    else
+        fail "Symlink roto o convertido en archivo: $link (esperado → $expected_target)"
+    fi
+}
+
+check_symlink "${AGUA_DIR}/.agents"          ".chatledger/.agents"
+check_symlink "${AGUA_DIR}/.claude"          ".chatledger/.claude"
+check_symlink "${AGUA_DIR}/.mcp.json"        ".chatledger/.mcp.json"
+check_symlink "${AGUA_DIR}/CLAUDE.md"        ".chatledger/CLAUDE.md"
+check_symlink "${AGUA_DIR}/GEMINI.md"        ".chatledger/GEMINI.md"
+check_symlink "${AGUA_DIR}/.clauderules"     ".chatledger/.clauderules"
+check_symlink "${AGUA_DIR}/docs-dev/ga-cl-ia" "${CHATLEDGER_DIR}/docs-dev/ga-cl-ia"
+
+# ── 2. .mcp.json no vacío y contiene los 3 hosts ─────────────────────────────
+echo ""
+echo "  [2] .mcp.json — contenido y 3 hosts"
+
+MCP_FILE="${AGUA_DIR}/.mcp.json"
+if [ ! -s "$MCP_FILE" ]; then
+    fail ".mcp.json vacío o inexistente"
+else
+    for host in bdawahost-a bdawahost-b bdawahost-c; do
+        if grep -q "$host" "$MCP_FILE" 2>/dev/null; then
+            ok ".mcp.json contiene: $host"
+        else
+            fail ".mcp.json no contiene: $host"
+        fi
+    done
+    # En el JSON el comando es "docker" + args "exec" -i ... (separados)
+    if grep -q '"docker"' "$MCP_FILE" 2>/dev/null && grep -q '"exec"' "$MCP_FILE" 2>/dev/null; then
+        ok ".mcp.json usa docker exec (correcto)"
+    else
+        fail ".mcp.json NO usa docker exec — MCPs romperán con ETIMEDOUT"
+    fi
+fi
+
+# ── 3. mcp_config.json idéntico a .mcp.json ──────────────────────────────────
+echo ""
+echo "  [3] mcp_config.json sincronizado con .mcp.json"
+
+MCP_REF="${AGUA_DIR}/.agents/mcp_config.json"
+if [ -f "$MCP_REF" ]; then
+    if diff -q "$MCP_FILE" "$MCP_REF" > /dev/null 2>&1; then
+        ok "mcp_config.json idéntico a .mcp.json"
+    else
+        fail "mcp_config.json DIFIERE de .mcp.json — sincronizar antes de commitear"
+    fi
+else
+    fail "mcp_config.json no encontrado en .agents/"
+fi
+
+# ── 4. Assets críticos en docs-dev/ga-cl-ia ───────────────────────────────────
+echo ""
+echo "  [4] Assets críticos en docs-dev/ga-cl-ia"
+
+for asset in "entrypoint-patch.sh" "docker-compose.yml"; do
+    if [ -f "${CHATLEDGER_DIR}/docs-dev/ga-cl-ia/${asset}" ]; then
+        ok "Existe: docs-dev/ga-cl-ia/${asset}"
+    else
+        # AVISO pero no bloquea — estos assets pueden no estar en todos los ambientes
+        echo "  [WARN] No encontrado: docs-dev/ga-cl-ia/${asset} (opcional en este ambiente)"
+    fi
+done
+
+# ── 5. .clauderules no excede 30 líneas ──────────────────────────────────────
+echo ""
+echo "  [5] .clauderules — tamaño"
+
+CLAUDERULES="${AGUA_DIR}/.clauderules"
+if [ -f "$CLAUDERULES" ]; then
+    LINES=$(wc -l < "$CLAUDERULES")
+    if [ "$LINES" -le 30 ]; then
+        ok ".clauderules: ${LINES} líneas (OK ≤30)"
+    else
+        fail ".clauderules: ${LINES} líneas (excede 30 — mover contenido a .agents/)"
+    fi
+else
+    fail ".clauderules no encontrado"
+fi
+
+# ── Resultado ─────────────────────────────────────────────────────────────────
+echo ""
+echo "═══════════════════════════════════════════════════════"
+if [ "$ERRORS" -eq 0 ]; then
+    echo "  RESULTADO: OK ✓ — Ground Truth íntegro ($ERRORS errores)"
+    echo "═══════════════════════════════════════════════════════"
+    echo ""
+    exit 0
+else
+    echo "  RESULTADO: FALLO ✗ — ${ERRORS} error(es) detectado(s)"
+    echo "  Reparar con: bash docs-dev/ga-cl-ia/chatledger_sync_ga_lnks.sh"
+    echo "  Ver: .agents/rules/08-integridad-ground-truth.md"
+    echo "═══════════════════════════════════════════════════════"
+    echo ""
+    exit 1
+fi
+
+```
+
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing now on ensuring I choose the optimal tool for each task. The main priority is to avoid unnecessary use of `cat` within bash commands for file creation or appending, and I'm also committing to using `grep_search` in place of `grep` within bash whenever possible, which is most of the time! This is all about ensuring the most specific tool is used for each task.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.837841468s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 13 May 2026, 11:48 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 13 May 2026, 11:48 am
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing now on ensuring I choose the optimal tool for each task. The main priority is to avoid unnecessary use of `cat` within bash commands for file creation or appending, and I'm also committing to using `grep_search` in place of `grep` within bash whenever possible, which is most of the time! This is all about ensuring the most specific tool is used for each task.
+
+
+**Addressing Push Block**
+
+I've got a critical push block due to a PHP syntax error in `includes/negocio/usuarios.php` which happened because of a syntax error and a "git add ." before realizing the error. Now, the `agua` repository commit is local, and I need to fix the syntax. I'm focusing on that now, after recalling critical instructions 1 and 2!
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `usuarios.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.444768902s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+function busquedaUsuario($query)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$coincidencias = explode(' ', $query);
+	$descripciones = "";
+
+	foreach ($coincidencias as $r) {
+		if ($r != "")
+			$descripciones .= (($descripciones == "") ? "" : " and ") . "nombre like '%$r%'";
+	}
+
+	if ($descripciones == "")
+		return "";
+
+	$q2 = "SELECT u.noconsecutivo, u.nombre, u.domicilio, u.estado,
+	              (SELECT COUNT(*) FROM usuario u2 WHERE u2.nombre = u.nombre) as cnt,
+	              (SELECT COUNT(*) FROM contrato WHERE numusuario = u.noconsecutivo) as ctotales
+	       FROM usuario u
+	       WHERE $descripciones AND u.estado <> 2
+	       GROUP BY u.noconsecutivo, u.nombre, u.domicilio, u.estado
+	       HAVING ctotales > 0";
+
+	$res = $y->q($q2);
+
+	$usuarios = [];
+	while (list($consecutivo, $nombre, $domicilio, $estado_u, $cnt) = $y->fetch_array($res)) {
+		$q3 = "select numcontrato from contrato where numusuario = $consecutivo and estado <> 4";
+
+		$res2 = $y->q($q3);
+
+		$contratos = "";
+		while (list($numcontrato) = $y->fetch_array($res2))
+			$contratos .= (($contratos == "") ? "" : "-") . $numcontrato;
+
+		$usuarios[] = [
+			'consecutivo' => $consecutivo,
+			'nombre' => $nombre,
+			'domicilio' => $domicilio,
+			'contratos' => $contratos,
+			'repetido' => ($cnt > 1),
+			'estado' => $estado_u
+		];
+	}
+
+	return $templates->render('usuarios/busqueda_resultados', ['usuarios' => $usuarios]);
+}
+
+function busquedaUsuarioCalle($query)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$coincidencias = explode(' ', $query);
+	$descripciones = "";
+
+	foreach ($coincidencias as $r) {
+		if ($r != "")
+			$descripciones .= (($descripciones == "") ? "" : " and ") . "domicilio regexp '($r+)'";
+	}
+
+	if ($descripciones == "")
+		return "";
+
+	$q2 = "SELECT u.noconsecutivo, u.nombre, u.domicilio, u.estado,
+	              (SELECT COUNT(*) FROM usuario u2 WHERE u2.nombre = u.nombre) as cnt,
+	              (SELECT COUNT(*) FROM contrato WHERE numusuario = u.noconsecutivo) as ctotales
+	       FROM usuario u
+	       WHERE $descripciones AND u.estado <> 2
+	       GROUP BY u.noconsecutivo, u.nombre, u.domicilio, u.estado
+	       HAVING ctotales > 0";
+
+	$res = $y->q($q2);
+
+	$usuarios = [];
+	while (list($consecutivo, $nombre, $domicilio, $estado_u, $cnt) = $y->fetch_array($res)) {
+		if ($nombre != "") {
+			$q3 = "select numcontrato from contrato where numusuario = $consecutivo and estado <> 4";
+
+			$res2 = $y->q($q3);
+
+			$contratos = "";
+			while (list($numcontrato) = $y->fetch_array($res2))
+				$contratos .= (($contratos == "") ? "" : "-") . $numcontrato;
+
+			$usuarios[] = [
+				'consecutivo' => $consecutivo,
+				'nombre' => $nombre,
+				'domicilio' => $domicilio,
+				'contratos' => $contratos,
+				'repetido' => ($cnt > 1),
+				'estado' => $estado_u
+			];
+		}
+	}
+
+	return $templates->render('usuarios/busqueda_resultados', ['usuarios' => $usuarios]);
+}
+
+function cargaUsuario($id)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$res = $y->q("select numcontrato, domicilio, agua, drenaje, estado from contrato where numusuario=$id");
+	$contratos = [];
+
+	while (list($contrato, $domicilio, $agua, $drenaje, $edo) = $y->fetch_array($res)) {
+		$contratos[] = [
+			'numcontrato' => $contrato,
+			'domicilio' => $domicilio,
+			'agua' => $agua,
+			'drenaje' => $drenaje,
+			'estado' => $edo
+		];
+	}
+
+	// 1.5 Buscar reversiones pendientes de los contratos de este usuario
+	$reversiones = [];
+	if (count($contratos) > 0) {
+		$lista_ctos = array_column($contratos, 'numcontrato');
+		$str_ctos = "'" . implode("','", $lista_ctos) . "'";
+		$res_rev = $y->q("SELECT numcontrato, fecha FROM cambios WHERE numcontrato IN ($str_ctos) AND descripcion = 'REVERSAL_SNAPSHOT' AND despues = 'PENDIENTE' ORDER BY fecha DESC");
+		while($r_rev = $y->fetch_assoc($res_rev)) {
+			$reversiones[$r_rev['numcontrato']] = $r_rev['fecha'];
+		}
+	}
+
+	$res = $y->q("select nombre, domicilio, masdatos, telefono, email, estado from usuario where noconsecutivo=$id");
+
+	list($nombre, $domicilio, $masdatos, $telefono, $email, $estado_u) = $y->fetch_array($res);
+
+	$tiposdeestado = array("1" => "Activo", "2" => "Suspensi&oacute;n Temporal", "3" => "Suspensi&oacute;n Administrativa", "4" => "Suspensi&oacute;n Definitiva");
+
+	return $templates->render('usuarios/ficha', [
+		'id' => $id,
+		'nombre' => $nombre,
+		'domicilio' => $domicilio,
+		'masdatos' => $masdatos,
+		'telefono' => $telefono,
+		'email' => $email,
+		'contratos' => $contratos,
+		'tiposdeestado' => $tiposdeestado,
+		'estado_usr' => $estado_u,
+		'reversiones' => $reversiones
+	]);
+}
+
+function buscaUsuarioCambio($query)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$coincidencias = explode(' ', $query);
+	$descripciones = "";
+	foreach ($coincidencias as $r) {
+		$descripciones .= (($descripciones == "") ? "" : " and ") . "nombre like '%$r%'";
+	}
+
+	$q = "SELECT noconsecutivo, UCASE(nombre) as nombre_uc, 
+	             (SELECT COUNT(*) FROM usuario u2 WHERE u2.nombre = u1.nombre) as cnt,
+	             (SELECT GROUP_CONCAT(numcontrato SEPARATOR '-') FROM contrato WHERE numusuario = u1.noconsecutivo and estado <> 4) as contratos,
+	             (SELECT COUNT(*) FROM contrato WHERE numusuario = u1.noconsecutivo and estado = 1) as cactivos,
+	             (SELECT COUNT(*) FROM contrato WHERE numusuario = u1.noconsecutivo and estado IN (2,3)) as csusp_temporal,
+	             (SELECT COUNT(*) FROM contrato WHERE numusuario = u1.noconsecutivo and estado = 4) as csusp_definitiva,
+	             (SELECT COUNT(*) FROM contrato WHERE numusuario = u1.noconsecutivo) as ctotales,
+	             domicilio, id_homonimo_padre
+	      FROM usuario u1
+	      WHERE $descripciones AND nombre!='' 
+	      HAVING (cnt = 1 OR ctotales > 0 OR id_homonimo_padre > 0 OR noconsecutivo IN (SELECT id_homonimo_padre FROM usuario WHERE id_homonimo_padre > 0))
+	      ORDER BY nombre_uc";
+
+	$res = $y->q($q);
+
+	$usuarios = [];
+	while ($r = $y->fetch_assoc($res)) {
+		$usuarios[] = [
+			'consecutivo' => $r['noconsecutivo'],
+			'nombre' => $r['nombre_uc'],
+			'domicilio' => $r['domicilio'],
+			'contratos' => $r['contratos'],
+			'repetido' => ($r['cnt'] > 1 || intval($r['id_homonimo_padre']) > 0),
+			'cactivos' => intval($r['cactivos']),
+			'csusp_temporal' => intval($r['csusp_temporal']),
+			'csusp_definitiva' => intval($r['csusp_definitiva']),
+			'ctotales' => intval($r['ctotales']),
+			'id_homonimo_padre' => intval($r['id_homonimo_padre'])
+		];
+	}
+
+	return $templates->render('usuarios/options', ['usuarios' => $usuarios]);
+}
+
+function nuevoUsuario()
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$res = $y->q("select nombre from usuario order by noconsecutivo desc limit 5");
+
+	$ultimos = [];
+	while (list($nombre) = $y->fetch_array($res)) {
+		$ultimos[] = $nombre;
+	}
+
+	return $templates->render('usuarios/nuevo', ['ultimos' => $ultimos]);
+}
+
+function guardaUsuario($id, $nombre, $domicilio, $telefono, $email, $masdatos, $no_localizado = 0, $rp = "", $rt = "", $texto = "")
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	// Sanitización estricta Poka-yoke
+	$id = intval($id);
+	$nombre = strtoupper(trim(strip_tags((string)$nombre)));
+	$domicilio = strtoupper(trim(strip_tags((string)$domicilio)));
+	$telefono = trim(strip_tags((string)$telefono));
+	$email = strtolower(trim(strip_tags((string)$email)));
+	$masdatos = trim(strip_tags((string)$masdatos));
+	$texto = trim(strip_tags((string)$texto));
+
+	// Validación ultra-estricta: Solo 'on' o '1' (como string) activan el proceso.
+	$no_localizado_str = strval($no_localizado);
+	$is_no_localizado = ($no_localizado_str === "on" || $no_localizado_str === "1");
+
+	$vars = array("nombre", "domicilio", "telefono", "email", "masdatos");
+
+	$res = $y->q("select nombre, domicilio, telefono, email, masdatos, estado from usuario where noconsecutivo=$id");
+
+	list($nombreo, $domicilioo, $telefonoo, $emailo, $masdatoso, $estadoo) = $y->fetch_array($res);
+	$actualiza = "";
+	$regAntes = "";
+	$regDespues = "";
+
+	foreach ($vars as $vals) {
+		$orig = $vals . "o";
+		if ($$vals != $$orig) {
+			$actualiza .= (($actualiza == "") ? "" : ", ") . "$vals=\"" . $$vals . "\"";
+			$regAntes .= (($regAntes == "") ? "" : ", ") . "$vals='" . $$orig . "'";
+			$regDespues .= (($regDespues == "") ? "" : ", ") . "$vals='" . $$vals . "'";
+		}
+	}
+
+	// Caso especial: Declaratoria de No Localizado
+	if ($is_no_localizado) {
+		// 1. Validaciones previas de seguridad (Mismo estándar que cambiaestado en contratos.php)
+		$cfg = cargaConfig($y);
+		$min_car = intval(obtenerValorSeguro($cfg, 'cancelacion_min_caracteres', 20));
+		
+		$res1 = $y->q("SELECT contrasena FROM contrasenas WHERE rol='presidente'");
+		$res2 = $y->q("SELECT contrasena FROM contrasenas WHERE rol='tesorero'");
+		list($contrasena_presidente) = $y->fetch_array($res1);
+		list($contrasena_tesorero)   = $y->fetch_array($res2);
+
+		// Sanitizar inputs de llaves
+		$rp = trim((string)$rp);
+		$rt = trim((string)$rt);
+
+		// Validación modo mixto: bcrypt nuevo o md5 legado (estándar Agua V2)
+		$val_p = password_verify($rp, $contrasena_presidente) || (md5($rp) == $contrasena_presidente);
+		$val_t = password_verify($rt, $contrasena_tesorero)   || (md5($rt) == $contrasena_tesorero);
+
+		// VALIDACIÓN ACTIVA (Seguridad Restaurada)
+		if (!$val_p || !$val_t) {
+			return $templates->render('sistema/mensaje', array(
+				'titulo'  => 'Error de Seguridad',
+				'mensaje' => 'Las contraseñas del Presidente o Tesorero son incorrectas o están incompletas. La declaratoria de No Localizado requiere autorización vigente.'
+			));
+		}
+
+		if (strlen($texto) < $min_car) {
+			return $templates->render('sistema/mensaje', array(
+				'titulo'  => 'Razón insuficiente',
+				'mensaje' => 'Debe escribir una razón detallada del porqué se declara como No Localizado (mínimo ' . $min_car . ' caracteres).'
+			));
+		}
+
+		// 2. Procesar contratos usando el motor formal cambiaestado()
+		$res_ctos = $y->q("SELECT numcontrato FROM contrato WHERE numusuario = $id AND estado <> 4");
+		$ctos_afectados = [];
+		while (list($ncto) = $y->fetch_array($res_ctos)) {
+			$ctos_afectados[] = $ncto;
+		}
+
+		if (count($ctos_afectados) > 0) {
+			foreach ($ctos_afectados as $num_contrato) {
+				// Llamada al motor formal (esto genera Snapshots, Notas y Sincronización Financiera)
+				// El estado 4 es SUSPENSIÓN DEFINITIVA (SDF)
+				cambiaestado($num_contrato, $rp, $rt, "Usuario No Localizado CTOS: " . $texto, 4);
+			}
+		}
+
+		// 3. Marcar al usuario como No Localizado
+		$actualiza .= (($actualiza == "") ? "" : ", ") . "estado = 2, no_localizado = 1";
+		$regAntes .= (($regAntes == "") ? "" : ", ") . "estado = $estadoo, no_localizado = 0";
+		$regDespues .= (($regDespues == "") ? "" : ", ") . "estado = 2, no_localizado = 1";
+	}
+
+	if ($actualiza != "") {
+		$regAntes_esc   = $y->real_escape_string($regAntes);
+		$regDespues_esc = $y->real_escape_string($regDespues);
+		$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato) VALUES(NOW(), 'Actualizaci&oacute;n del usuario $id', '$regAntes_esc', '$regDespues_esc', '')");
+		$salida = "update usuario set $actualiza where noconsecutivo=$id";
+		if ($y->q($salida))
+			$salida = "<script>cargaDatosUsuario($id)</script>";
+	} else {
+		$salida = $templates->render('sistema/mensaje', [
+			'titulo' => 'Cambios',
+			'mensaje' => "<b>Ningún</b> cambio ha sido enviado, el registro ha quedado igual para el usuario <b><span class='mayusculas'>$nombre</span></b>."
+		]);
+	return $salida;
+}
+
+/**
+ * Actualización atómica de nombre para usuarios sin contratos (Lila/Placeholder).
+ * Evita la sobreescritura accidental de domicilio u otros campos que ocurre con guardaUsuario.
+ */
+function actualizaNombreLila($id, $nombre)
+{
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+	$id = intval($id);
+	$nombre = strtoupper(trim(strip_tags((string)$nombre)));
+
+	if ($id <= 0 || strlen($nombre) < 3) return "Error: Datos invalidos.";
+
+	$res = $y->q("SELECT nombre FROM usuario WHERE noconsecutivo=$id");
+	if ($y->num_rows($res) == 0) return "Error: Usuario no encontrado.";
+	list($nombre_ant) = $y->fetch_array($res);
+
+	$q = "UPDATE usuario SET nombre = '$nombre' WHERE noconsecutivo=$id";
+	if ($y->q($q)) {
+		$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato) 
+		       VALUES(NOW(), 'Actualización de Nombre (Lila/Placeholder)', 'Nombre: $nombre_ant', 'Nombre: $nombre', '')");
+		return "OK";
+	}
+	return "Error al actualizar.";
+}
+
+function guardaNuevoUsuario($nombre, $domicilio, $telefono, $email, $masdatos)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	// Sanitización estricta Poka-yoke
+	$nombre = strtoupper(trim(strip_tags((string)$nombre)));
+	$domicilio = strtoupper(trim(strip_tags((string)$domicilio)));
+	$telefono = trim(strip_tags((string)$telefono));
+	$email = strtolower(trim(strip_tags((string)$email)));
+	$masdatos = trim(strip_tags((string)$masdatos));
+
+	$q = "insert into usuario (nombre, domicilio, masdatos, telefono, email, estado) values(\"$nombre\", \"$domicilio\", \"$masdatos\", \"$telefono\", \"$email\", 1)";
+
+	if ($y->q($q)) {
+		$nuevo_id = $y->insert_id();
+		$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato)
+		       VALUES(NOW(), 'Registro de Nuevo Usuario', 'NUEVO', 'Nombre: $nombre | ID: $nuevo_id', '')");
+
+		$salida = $templates->render('sistema/mensaje', [
+			'titulo' => 'Alta aceptada',
+			'mensaje' => "Ha sido dado de alta el <b>usuario</b> <span class='mayusculas'>$nombre</span>"
+		]);
+	} else {
+		$salida = $templates->render('sistema/mensaje', [
+			'titulo' => 'Alta con problemas',
+			'mensaje' => "Hubo un problema con los datos que ha ingresado. Si en los datos incluye comillas, utilice las comillas simples.<br>"
+		]);
+	}
+
+	return $salida;
+}
+
+function registrousuarios()
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$res = $y->q("select nombre, rol from users");
+
+	$usuarios = [];
+	while (list($nombre, $rol) = $y->fetch_array($res)) {
+		$usuarios[] = [
+			'nombre' => $nombre,
+			'rol' => $rol
+		];
+	}
+
+	return $templates->render('usuarios/registro', ['usuarios' => $usuarios]);
+}
+
+function registrausuario($nombreusuario, $passusuario)
+{
+	$usuario = new User();
+	$crud = new CrudUsuario();
+
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$usuario->setNombre($nombreusuario);
+	$usuario->setClave($passusuario);
+	if ($crud->buscarUsuario($nombreusuario)) {
+		$crud->insertar($usuario);
+		print "<script>alert('Usuario $nombreusuario creado satisfactoriamente');</script>";
+	} else {
+		print "<script>alert('El nombre de usuario $nombreusuario ya existe');</script>";
+	}
+
+	return registrousuarios();
+}
+
+function usuariosEspeciales()
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$query = "SELECT u.noconsecutivo AS IdUsuario, u.nombre, u.domicilio, u.estado,
+	                 COUNT(c.numcontrato) AS total_contratos,
+	                 SUM(CASE WHEN c.estado = 4 THEN 1 ELSE 0 END) AS contratos_susp_def,
+	                 GROUP_CONCAT(CASE WHEN c.estado = 4 THEN c.numcontrato ELSE NULL END ORDER BY c.numcontrato SEPARATOR ', ') AS ids_contratos
+	          FROM usuario u
+	          LEFT JOIN contrato c ON c.numusuario = u.noconsecutivo
+	          GROUP BY u.noconsecutivo, u.nombre, u.domicilio, u.estado
+	          HAVING u.estado = 2
+	             OR total_contratos = 0
+	             OR (total_contratos > 0 AND total_contratos = contratos_susp_def)
+	          ORDER BY (u.nombre = '' OR u.nombre IS NULL) ASC, u.nombre ASC";
+
+	$res = $y->q($query);
+
+	// Leer todos los registros para calcular estadísticas
+	$registros = array();
+	$sin_contrato = 0;
+	$con_susp_def = 0;
+	$no_localizados = 0;
+	$sin_nombre_con_dir = 0;
+	$sin_nombre_sin_dir = 0;
+
+	while ($row = $y->fetch_array($res)) {
+		$registros[] = $row;
+		$tiene_contratos = ($row['total_contratos'] > 0);
+		$nombre_vacio = (trim($row['nombre']) === '' || $row['nombre'] === null);
+		$dir_vacia = (trim($row['domicilio']) === '' || $row['domicilio'] === null);
+
+		if (intval($row['estado']) === 2) {
+			$no_localizados++;
+		} elseif (!$tiene_contratos) {
+			$sin_contrato++;
+		} else {
+			$con_susp_def++;
+		}
+
+		if ($nombre_vacio && !$dir_vacia) {
+			$sin_nombre_con_dir++;
+		} elseif ($nombre_vacio && $dir_vacia) {
+			$sin_nombre_sin_dir++;
+		}
+	}
+
+	$total_registros = count($registros);
+	$y->free_result($res);
+
+	return $templates->render('usuarios/especiales', [
+		'registros' => $registros,
+		'total_registros' => $total_registros,
+		'sin_contrato' => $sin_contrato,
+		'con_susp_def' => $con_susp_def,
+		'no_localizados' => $no_localizados,
+		'sin_nombre_con_dir' => $sin_nombre_con_dir,
+		'sin_nombre_sin_dir' => $sin_nombre_sin_dir
+	]);
+}
+
+function cargaSnapshot($id)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	// 1. Buscar en historial de cambios (Snapshot masivo)
+	$res_cambios = $y->q("SELECT fecha, descripcion FROM cambios WHERE descripcion LIKE 'Declaratoria No Localizado ID $id.%' ORDER BY fecha DESC LIMIT 1");
+	$cambio = $y->fetch_array($res_cambios);
+
+	// 2. Buscar Notas Formales en sus contratos
+	$res_notas = $y->q("SELECT n.fecha, n.contrato, n.texto FROM notas n JOIN contrato c ON n.contrato = c.numcontrato WHERE c.numusuario = $id AND n.texto LIKE '%USUARIO NO LOCALIZADO%' ORDER BY n.fecha DESC");
+	$notas = [];
+	while ($n = $y->fetch_array($res_notas)) {
+		$notas[] = $n;
+	}
+
+	// 3. Obtener nombre del usuario para el título
+	$res_u = $y->q("SELECT nombre FROM usuario WHERE noconsecutivo = $id");
+	list($nombre) = $y->fetch_array($res_u);
+
+	return $templates->render('usuarios/snapshot', [
+		'id' => $id,
+		'nombre' => $nombre,
+		'cambio' => $cambio,
+		'notas' => $notas
+	]);
+}
+
+function cargaDomiciliosUsr($id_usuario) {
+    if (!$id_usuario) return "";
+    $y = new Conexion();
+    $y->conectarBaseDatos();
+
+    $res_cto = $y->q("SELECT numcontrato, domicilio FROM contrato WHERE numusuario = " . intval($id_usuario));
+    
+    $domicilios_raw = [];
+    $fuentes = [];
+
+    while ($row_cto = $y->fetch_array($res_cto)) {
+        $dom = $row_cto['domicilio'];
+        $cto = $row_cto['numcontrato'];
+        $dom_clean = trim(strtoupper($dom));
+        if (!empty($dom_clean)) {
+            if (!isset($domicilios_raw[$dom_clean])) {
+                $domicilios_raw[$dom_clean] = $dom;
+            }
+            $fuentes[$dom_clean][] = "Cto. " . $cto;
+        }
+    }
+
+    $html = "<div style='margin-bottom: 8px;'><b style='color:#2980b9;'>Seleccione un domicilio origen (Contrato) para la nueva toma:</b></div>";
+    $i = 0;
+    foreach ($domicilios_raw as $clean => $raw) {
+        $f_str = implode(', ', $fuentes[$clean]);
+        $html .= "<div style='margin-bottom: 4px;'><input type='radio' name='sel_domicilio' id='dom_rad_$i' value=\"" . htmlspecialchars($raw, ENT_QUOTES) . "\" onchange='aplicaDomicilio(this.value)'> <label for='dom_rad_$i' style='cursor:pointer; font-weight:normal; font-size:13px;'>" . htmlspecialchars($raw) . " <span style='color:#7f8c8d; font-size:11px;'>(" . $f_str . ")</span></label></div>";
+        $i++;
+    }
+    $html .= "<div style='margin-top: 5px;'><input type='radio' name='sel_domicilio' id='dom_rad_nuevo' value='__NUEVO__' onchange='aplicaDomicilio(\"__NUEVO__\")'> <label for='dom_rad_nuevo' style='cursor:pointer; font-weight:bold; color:#d35400;'><i>Nueva Direcci&oacute;n...</i></label></div>";
+
+    return $html;
+}
+
+/**
+ * revertirEstadoUsuario() — Restaura el estado de un usuario de No Localizado (2) a Activo (1).
+ * Registra la acción en la bitácora de cambios.
+ */
+function revertirEstadoUsuario($id) {
+    global $templates;
+    $y = new Conexion();
+    $y->conectarBaseDatos();
+    $id = intval($id);
+
+    $res = $y->q("SELECT nombre, estado FROM usuario WHERE noconsecutivo = $id");
+    if ($y->num_rows($res) == 0) return "";
+    list($nombre, $estado_actual) = $y->fetch_array($res);
+
+    if (intval($estado_actual) !== 2) {
+        return "<script>alert('El usuario no se encuentra en estado No Localizado.'); cargaDatosUsuario($id);</script>";
+    }
+
+    // 1. Bitácora
+    $antes = "estado = 2, no_localizado = 1";
+    $despues = "estado = 1, no_localizado = 0";
+    $antes_esc = $y->real_escape_string($antes);
+    $despues_esc = $y->real_escape_string($despues);
+    $y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato) VALUES(NOW(), 'Reversión manual de No Localizado (Usuario $id)', '$antes_esc', '$despues_esc', '')");
+
+    // 2. Actualizar
+    $y->q("UPDATE usuario SET estado = 1, no_localizado = 0 WHERE noconsecutivo = $id");
+
+    return "<script>cargaDatosUsuario($id);</script>";
+}
+?>
+```
+
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing now on specific tools, and on avoiding unnecessary workarounds. I'm making sure I *never* use `cat` in a bash command for file creation or appending, and I'm pushing myself to use `grep_search` instead of plain `grep` in bash unless there's no other way. This is essential for both efficiency and the integrity of data and processes.
+
+
+**Analyzing Code Structure**
+
+I'm recalling critical instructions 1 and 2: No `ls`, `cat`, `grep`, or `sed`, and listing related tools before any call. I'm now diagnosing a PHP parse error: an unclosed brace. I've located the opening brace on line 217 within `guardaUsuario()`. I'm now scrolling down the code to find the closing brace to confirm the structure and identify the origin of the error.
+
+
+**Confirming Brace Matching**
+
+I've zeroed in on the `else` block within the `guardaUsuario` function. It seems there's a missing brace; the `return $salida;` on line 320 is inside the `else` block, yet there is no closing brace before the end of the `guardaUsuario` function on line 321. I'm now certain this missing closing brace is the origin of the PHP parsing error I'm working to resolve.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 5.736179825s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 May 2026, 11:54 am
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Execution Error
+
+**Status:** Completed
+**Created:** 13 May 2026, 11:55 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing now on specific tools, and on avoiding unnecessary workarounds. I'm making sure I *never* use `cat` in a bash command for file creation or appending, and I'm pushing myself to use `grep_search` instead of plain `grep` in bash unless there's no other way. This is essential for both efficiency and the integrity of data and processes.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.471421006s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 13 May 2026, 11:57 am
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing now on specific tools, and on avoiding unnecessary workarounds. I'm making sure I *never* use `cat` in a bash command for file creation or appending, and I'm pushing myself to use `grep_search` instead of plain `grep` in bash unless there's no other way. This is essential for both efficiency and the integrity of data and processes.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.413238355s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+## User Request
+
+Analiza el catalogo de cargos y su script sql de saneamiento pues se requiere para los siguientes items: 
+CAMBIO PROPIETARIO debe permanecer el que tiene valor de 50
+CONTRATO DE AGUA debe permanecer el que tiene valor de 2,910
+Explica por que no se tomaron items ; todavia no modifique nada
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `notasAtencionRqsAguapp.txt`
+**Language:** plaintext
+
+**Open Files:**
+- `notasAtencionRqsAguapp.txt`
+- `protect-folder.ps1`
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing now on ensuring I choose the optimal tool for each task. The main priority is to avoid unnecessary use of `cat` within bash commands for file creation or appending, and I'm also committing to using `grep_search` in place of `grep` within bash whenever possible, which is most of the time! This is all about ensuring the most specific tool is used for each task.
+
+
+**Analyzing Sanitation Script**
+
+I'm now diving into the sanitation script, explicitly recalling the instructions about tool selection. My immediate goal is to locate and examine `08_saneamiento_catalogo.sql` using the tools `list_dir` and `view_file`. I need to understand why specific catalog items, `CAMBIO PROPIETARIO` with a value of `50` and `CONTRATO DE AGUA` with a value of `2,910`, might have been treated differently by the script. This analysis is crucial before making any adjustments.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+**Tool:** `view_file`
+**File:** `08_saneamiento_catalogo.sql`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.462503653s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 13 May 2026, 1:56 pm
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+-- =============================================================================
+-- 08_saneamiento_catalogo.sql — Estrategia de Corte 2026
+-- =============================================================================
+USE `awa`;
+
+-- 1. Eliminar duplicados exactos (mismo nombre y año) dejando el ID más bajo
+DELETE c1 FROM cargos c1
+INNER JOIN cargos c2 
+WHERE c1.numconsec > c2.numconsec 
+  AND c1.nombre = c2.nombre 
+  AND c1.anio = c2.anio;
+
+-- 2. Resetear todos los flags moratorios a 0 (Corte Histórico / Estabilidad)
+UPDATE cargos SET recargo = 0;
+
+-- 3. Activar flags moratorios SOLO para 2026 (Agua y Drenaje / Rigor Futuro)
+-- Esto habilita el motor V2 para cargos nuevos sin alterar el encuadre pasado.
+UPDATE cargos 
+SET recargo = 1 
+WHERE anio = 2026 
+  AND categoria IN (2, 3);
+
+-- 4. Activar flags de mensualidad para cargos que lo requieren (X MES)
+UPDATE cargos 
+SET mensualidades = 1, repetir = 1 
+WHERE (nombre LIKE '%X MES%' OR nombre LIKE '%POR MES%')
+  AND (mensualidades = 0 OR repetir = 0);
+
+-- 5. Log de verificación
+SELECT 'CATALOGO SANEADO' AS status, COUNT(*) AS duplicados_restantes 
+FROM (SELECT nombre, anio FROM cargos GROUP BY nombre, anio HAVING COUNT(*) > 1) AS d;
+
+```
+
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing now on ensuring I choose the optimal tool for each task. The main priority is to avoid unnecessary use of `cat` within bash commands for file creation or appending, and I'm also committing to using `grep_search` in place of `grep` within bash whenever possible, which is most of the time! This is all about ensuring the most specific tool is used for each task.
+
+
+**Checking Database Connection**
+
+I've hit a snag, the connection to Host C failed again. Now, I'm shifting focus to verify the connection with Host A. I need to access the `awa` database to get the data, since the user's question concerns a script related to this database. I'm recalling the instructions to not use `ls`, `cat`, `grep`, or `sed` for the listed tasks. I also recall the instruction to list relevant tools before execution!
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.165375024s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** CORTEX_STEP_STATUS_WAITING
+**Created:** 13 May 2026, 1:56 pm
 
 ---
 
