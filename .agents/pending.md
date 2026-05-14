@@ -95,7 +95,9 @@ SELECT IFNULL(SUM(monto),0) FROM vw_ligacargos_pendientes WHERE numcontrato='405
 | 2026-05-08 | Poka-Yoke Egresos Huérfanos | `cargos.php` — `registraegreso()` fallback a `id_categoria=10` si cat inválida |
 | 2026-05-08 | Pipeline saneamiento catálogo `cargos` | `10_pipeline_saneamiento.sql` bloque 3-B-1.5 — UPDATE categorías post-sync |
 
+| 2026-05-14 | UI-Optimization & Saneamiento | ✅ PASADO — Fix Lila universal, Saneamiento Zenón (1590 Master), Filtros especiales, Hardening Shutdown C |
+
 ---
 
-*Última actualización: 2026-05-12 — Estabilización de Conectividad y Hardening completados — Antigravity/Gemini*
+*Última actualización: 2026-05-14 — Estabilización de Interfaz y Saneamiento — Antigravity/Gemini*
 

@@ -192,7 +192,15 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 *   **Hardening UPS**: El tiempo de gracia en batería fue ajustado a **5 minutos** en `config.ps1`, optimizando el margen de seguridad para el cierre de la base de datos.
 *   **Control de Chrome**: Identificado el pipeline de congelamiento de versiones en `setup-kiosk-shortcut.ps1` y su reversión en `revert-chrome-updates.ps1`.
 
-**Última actualización**: 2026-05-13 (Sesión 2)
+**Estabilización de Interfaz y Saneamiento (2026-05-14):**
+*   **Fix "Lila" Universal**: Se expandió la lógica de semaforización en `options.php` para incluir a usuarios con historial (contratos en SDF) como candidatos a color Lila. Esto asegura que placeholders con historia previa sean identificables en búsquedas de ítem único.
+*   **Saneamiento Zenón (1590 Master)**: Se consolidó al usuario Zenón Martínez López bajo el ID **1590** (que contiene los datos de contacto y notas), reasignándole los contratos **1378** y **391**. El ID 1057 quedó vinculado como duplicado estructural.
+*   **Pipeline de Saneamiento**: El script `10c_saneamiento_duplicados.sql` y el validador `12_validate_pipeline.sql` fueron actualizados para reflejar y verificar permanentemente la nueva jerarquía de Zenón, evitando regresiones en futuros sincronismos.
+*   **Filtros Especiales**: Se añadieron opciones de filtrado granular ("Sin nombre, con dir." y "Sin nombre ni dir.") en el tablero de Usuarios Especiales, facilitando la depuración de registros incompletos.
+*   **Hardening Shutdown**: Se implementó manejo de errores robusto (`try/catch`) y silenciamiento de alertas no críticas en `shutdown-server.ps1` y `stop-webapps.ps1`, eliminando parpadeos de error durante el cierre del servidor.
+
+**Última actualización**: 2026-05-14
+
 
 
 > [!IMPORTANT]

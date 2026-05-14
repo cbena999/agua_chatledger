@@ -7,9 +7,9 @@
 | **Trajectory ID** | `fefde57c-7901-4235-9f1c-2b77d14393b1` |
 | **Cascade ID** | `623aac70-896a-4dc4-8f74-afbf94f87cd5` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 242 |
+| **Total Steps** | 314 |
 | **Started** | 13 May 2026, 11:30 am |
-| **Completed** | 13 May 2026, 2:27 pm |
+| **Completed** | 13 May 2026, 3:28 pm |
 
 ---
 
@@ -8213,6 +8213,2194 @@ Okay, so I realized I can't directly access the specified GitHub directory if it
 
 **Status:** Completed
 **Created:** 13 May 2026, 2:20 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+## User Request
+
+En la ficha COnfiguracion y saneamiento, añadir un item: app asambleas con este url no hardocodeado: localhost:7001/agua/asamblea/
+
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Considering Configuration Item**
+
+I'm currently focused on incorporating "App Asambleas" into the configuration view. I've decided to link it to `localhost:7001/agua/asamblea/`. I'm also ensuring the URL isn't hardcoded.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `configuracion.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.044076383s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+require_once('../../login/usuario.php');
+session_start();
+if (!isset($_SESSION['usuario'])) {
+    print "<script>window.location='../../login/index.php'</script>";
+    exit();
+}
+
+require_once('../../config/Conexion.php');
+$y = new Conexion();
+$y->conectarBaseDatos();
+
+$mensaje = "";
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['config'])) {
+    $configs = $_POST['config'];
+    foreach ($configs as $clave => $valor) {
+        $clave_segura = $y->real_escape_string($clave);
+        $valor_seguro = $y->real_escape_string($valor);
+        $y->q("UPDATE config_sistema SET valor='$valor_seguro' WHERE clave='$clave_segura'");
+    }
+    $mensaje = "<div class='success-msg'>&#10003; Configuraci&oacute;n actualizada correctamente.</div>";
+}
+
+$res = $y->q("SELECT clave, valor, descripcion FROM config_sistema ORDER BY clave ASC");
+$opciones = array();
+while ($row = $y->fetch_array($res)) {
+    $opciones[$row['clave']] = $row;
+}
+
+// ── Agrupación temática ──────────────────────────────────────────────────────
+$grupos = array(
+    'Recargos Moratorios' => array(
+        'desc_grupo' => 'Generación de mora y mecanismos de protección (Límite Bomba). Incluye alcance retroactivo de paridad y umbral de reversas.',
+        'readonly'   => false,
+        'claves'     => ['recargo_mes_inicio','recargo_porcentaje','paridad_anios_max_recargo','reversal_threshold_enable','reversal_threshold'],
+    ),
+    'Operación y Contratos' => array(
+        'desc_grupo' => 'Ciclo de vida: reglas de transición de estado, exenciones iniciales y límites de infraestructura por contrato.',
+        'readonly'   => false,
+        'claves'     => ['susptemp_mes_permitido','nuevo_contrato_exento_default','max_tomas_por_contrato','max_domicilios_por_contrato'],
+    ),
+    'Estados de Contrato' => array(
+        'desc_grupo' => 'Códigos numéricos del catálogo de estados. <strong>Solo lectura</strong> — no modificar.',
+        'readonly'   => true,
+        'claves'     => ['estado_activo','estado_susp_temporal','estado_susp_administrativa','estado_susp_definitiva'],
+    ),
+);
+
+// Campos editables (max_tomas_por_contrato: solo lectura)
+$editables = ['recargo_mes_inicio','recargo_porcentaje','recargo_categoria_agua','recargo_categoria_drenaje',
+              'susptemp_mes_permitido','paridad_anios_max_recargo',
+              'reversal_threshold_enable','reversal_threshold','nuevo_contrato_exento_default',
+              'max_domicilios_por_contrato'];
+
+header('Content-Type: text/html; charset=UTF-8');
+
+function get_mes_nombre($n) {
+    $meses = ["", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+    return isset($meses[$n]) ? $meses[$n] : "Mes $n";
+}
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Configuraci&oacute;n del Sistema</title>
+    <link rel="stylesheet" href="../../web-assets/css/paxstyle2.css">
+    <style>
+        body { padding: 20px; font-family: Arial, sans-serif; background: #f5f6fa; }
+        h1 { font-size: 22px; color: #2c3e50; margin-bottom: 6px; font-style: normal; text-shadow: none; text-align: left; }
+        .subtitle { color: #7f8c8d; font-size: 13px; margin-bottom: 20px; }
+        .back-link { display: inline-block; margin-bottom: 16px; color: #0674B7; text-decoration: none; font-weight: bold; font-size: 13px; }
+        .back-link:hover { text-decoration: underline; }
+        .success-msg { color: #155724; background: #d4edda; border: 1px solid #c3e6cb; padding: 10px 14px; margin-bottom: 18px; border-radius: 4px; font-weight: bold; font-size: 13px; }
+
+        /* Layout dos columnas */
+        .grupos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 20px; }
+        /* .g-estados ya no es full-width para permitir la columna de referencia al lado */
+
+        /* Tarjeta de grupo */
+        .grupo-card { background: #fff; border: 1px solid #dde3ec; border-radius: 6px; overflow: hidden; }
+        .grupo-header { padding: 10px 14px; font-weight: bold; font-size: 12px; text-transform: uppercase;
+                        letter-spacing: .5px; color: #fff; }
+        .g-estados    .grupo-header { background: #7f8c8d; }
+        .g-recargos   .grupo-header { background: #2980b9; }
+        .g-paridad    .grupo-header { background: #8e44ad; }
+        .g-ciclo      .grupo-header { background: #27ae60; }
+        .g-reversa    .grupo-header { background: #c0392b; }
+        .g-referencia .grupo-header { background: #2c3e50; }
+        .grupo-desc { font-size: 11px; color: #666; padding: 6px 14px 8px; border-bottom: 1px solid #eee; background: #fafbfc; }
+        .grupo-body { padding: 10px 14px 14px; }
+
+        /* Fila de config */
+        .cfg-row { margin-bottom: 12px; }
+        .cfg-grouped-top { background: #fdfdfd; padding: 10px 14px; border: 1px solid #d0d5dd; border-bottom: none; border-radius: 6px 6px 0 0; margin-bottom: 0; }
+        .cfg-grouped-middle { background: #fdfdfd; padding: 10px 14px; border-left: 1px solid #d0d5dd; border-right: 1px solid #d0d5dd; border-top: 1px dashed #ccc; border-bottom: none; border-radius: 0; margin-top: 0; margin-bottom: 0; }
+        .cfg-grouped-bottom { background: #fdfdfd; padding: 10px 14px 10px 34px; border: 1px solid #d0d5dd; border-top: none; border-radius: 0 0 6px 6px; margin-top: 0; position: relative; }
+        .cfg-grouped-bottom::before { content: '\21B3'; position: absolute; left: 14px; top: 10px; color: #999; font-size: 16px; font-weight: bold; }
+        .cfg-grouped-top .cfg-key, .cfg-grouped-middle .cfg-key, .cfg-grouped-bottom .cfg-key { color: #c0392b; }
+        .cfg-row:last-child { margin-bottom: 0; }
+        .cfg-key { font-family: monospace; font-size: 12px; font-weight: bold; color: #2c3e50; display: block; margin-bottom: 3px; }
+        .cfg-desc { font-size: 11px; color: #777; margin-bottom: 5px; display: block; line-height: 1.5; white-space: pre-line; }
+        .cfg-input { width: 100%; padding: 7px 9px; border: 1px solid #ccc; border-radius: 4px;
+                     box-sizing: border-box; font-family: monospace; font-size: 13px; background: #fff; }
+        .cfg-input:focus { border-color: #3498db; outline: none; box-shadow: 0 0 0 2px rgba(52,152,219,.2); }
+        .cfg-input[readonly] { background: #f0f0f0; color: #999; cursor: not-allowed; }
+        .readonly-badge { display: inline-block; font-size: 10px; background: #ecf0f1; color: #7f8c8d;
+                          border: 1px solid #bdc3c7; border-radius: 3px; padding: 1px 5px; margin-left: 6px; vertical-align: middle; }
+
+        /* Botón guardar */
+        .footer-bar { text-align: right; padding-top: 4px; }
+        .submit-btn { background: #0674B7; color: #fff; padding: 10px 24px; border: none; border-radius: 4px;
+                      cursor: pointer; font-size: 14px; font-weight: bold; }
+        .submit-btn:hover { background: #045a8d; }
+
+        /* Modal confirmación de cambios */
+        #cfg-overlay { position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.45);z-index:9998; }
+        #cfg-modal   { position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:9999;
+                       background:#f4f6f8;border:1px solid #aaa;border-radius:6px;padding:0;
+                       min-width:480px;max-width:680px;width:90%;box-shadow:0 4px 18px rgba(0,0,0,0.25); }
+        #cfg-modal .m-header { background:#0E4F8E;color:#fff;padding:9px 14px;border-radius:5px 5px 0 0;
+                               font-weight:bold;font-size:12px;text-transform:uppercase; }
+        #cfg-modal .m-body   { padding:14px 18px;max-height:55vh;overflow-y:auto; }
+        #cfg-modal .m-footer { text-align:right;padding:0 18px 14px; }
+        .cfg-diff-table { width:100%;border-collapse:collapse;font-size:12px;margin-bottom:12px; }
+        .cfg-diff-table th { background:#0E4F8E;color:#fff;padding:5px 8px;text-align:left;font-size:11px; }
+        .cfg-diff-table td { padding:5px 8px;border-bottom:1px solid #e0e4ea;vertical-align:top; }
+        .cfg-diff-table tr:last-child td { border-bottom:none; }
+        .cfg-diff-table .col-key  { font-family:monospace;font-weight:bold;color:#2c3e50;white-space:nowrap; }
+        .cfg-diff-table .col-ant  { color:#888;text-decoration:line-through; }
+        .cfg-diff-table .col-new  { color:#1a7a1a;font-weight:bold; }
+        .cfg-diff-table .col-imp  { font-size:10px;color:#555;line-height:1.4; }
+        .no-cambios { color:#7f8c8d;font-size:13px;text-align:center;padding:14px 0; }
+        #cfg-modal input[type=button] { padding:7px 18px;border:none;border-radius:4px;cursor:pointer;
+                                        font-size:13px;font-weight:bold; }
+        #cfg-cancelar-modal { background:#888;color:#fff;margin-right:8px; }
+        #cfg-confirmar-modal { background:#0674B7;color:#fff; }
+
+        @media (max-width: 700px)  { .grupos-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <a href="../../index2.php" class="back-link">&larr; Volver al Men&uacute; Principal</a>
+    <h1>Configuraci&oacute;n Global del Sistema</h1>
+    <p class="subtitle">Par&aacute;metros operativos agrupados por tema funcional. Los campos <span class="readonly-badge">solo lectura</span> son valores fijos del cat&aacute;logo.</p>
+
+    <?= $mensaje ?>
+
+    <form method="POST" action="configuracion.php">
+        <div class="footer-bar" style="margin-bottom:14px;">
+            <button type="button" class="submit-btn" onclick="abrirModalConfirmacion()">
+                Guardar Configuraci&oacute;n
+            </button>
+        </div>
+        <div class="grupos-grid">
+        <?php
+        $clases_grupo = [
+            'Estados de Contrato'  => 'g-estados',
+            'Recargos Moratorios'  => 'g-recargos',
+            'Operación y Contratos'=> 'g-paridad',
+        ];
+        foreach ($grupos as $nombre_grupo => $gdef):
+            if ($nombre_grupo === 'Estados de Contrato') continue; // Se renderiza aparte al final
+            $clase = isset($clases_grupo[$nombre_grupo]) ? $clases_grupo[$nombre_grupo] : 'g-ciclo';
+        ?>
+        <div class="grupo-card <?= $clase ?>">
+            <div class="grupo-header">
+                <?= htmlspecialchars($nombre_grupo) ?>
+                <?php if ($gdef['readonly']): ?><span class="readonly-badge">solo lectura</span><?php endif; ?>
+            </div>
+            <div class="grupo-desc"><?= $gdef['desc_grupo'] ?></div>
+            <div class="grupo-body">
+            <?php
+            $separadores_grupo = [
+                'Recargos Moratorios' => [
+                    'paridad_anios_max_recargo' => 'Límite Bomba (Recargos)',
+                ],
+                'Operación y Contratos' => [
+                    'susptemp_mes_permitido' => 'Ciclo de Vida',
+                    'max_tomas_por_contrato' => 'Infraestructura',
+                ],
+            ];
+            $seps = isset($separadores_grupo[$nombre_grupo]) ? $separadores_grupo[$nombre_grupo] : [];
+            foreach ($gdef['claves'] as $clave):
+                if (!isset($opciones[$clave])) continue;
+                $opt = $opciones[$clave];
+                $es_editable = in_array($clave, $editables) && !$gdef['readonly'];
+                if (isset($seps[$clave])): ?>
+                <div style="border-top:1px dashed #d0d5dd;margin:10px 0 10px;position:relative;">
+                    <span style="position:absolute;top:-8px;left:50%;transform:translateX(-50%);background:#fff;padding:0 6px;font-size:10px;color:#999;text-transform:uppercase;letter-spacing:.5px;"><?= $seps[$clave] ?></span>
+                </div>
+                <?php endif; ?>
+                <?php
+                $isGroupedTop = ($clave === 'paridad_anios_max_recargo');
+                $isGroupedMiddle = ($clave === 'reversal_threshold_enable');
+                $isGroupedBottom = ($clave === 'reversal_threshold');
+                $rowClass = "cfg-row";
+                if ($isGroupedTop) $rowClass .= " cfg-grouped-top";
+                elseif ($isGroupedMiddle) $rowClass .= " cfg-grouped-middle";
+                elseif ($isGroupedBottom) $rowClass .= " cfg-grouped-bottom";
+                ?>
+                <div class="<?= $rowClass ?>">
+                    <span class="cfg-key"><?= htmlspecialchars($clave) ?></span>
+                    <?php 
+                        $desc = $opt['descripcion'] ?: '';
+                        if ($clave === 'susptemp_mes_permitido') {
+                            $mes_nombre = get_mes_nombre(intval($opt['valor']));
+                            $desc .= " <strong style='color:#2980b9;'>(Actual: $mes_nombre)</strong>";
+                        }
+                        
+                        // Poka-yoke: No mostrar descripción para recargo_porcentaje ya que tiene su guía técnica dedicada
+                        if ($clave !== 'recargo_porcentaje'):
+                    ?>
+                        <span class="cfg-desc"><?= $desc ?></span>
+                    <?php endif; ?>
+                    <?php if ($clave === 'reversal_threshold_enable'): ?>
+                        <div style="display: flex; align-items: center; margin-top: 6px; gap: 8px;">
+                            <input type="hidden" name="config[<?= htmlspecialchars($clave) ?>]" value="0">
+                            <input type="checkbox"
+                                   class="cfg-input"
+                                   style="width: 18px; height: 18px; cursor: pointer; accent-color: #c0392b;"
+                                   name="config[<?= htmlspecialchars($clave) ?>]"
+                                   value="1"
+                                   data-original="<?= htmlspecialchars($opt['valor']) ?>"
+                                   <?= $opt['valor'] == '1' ? 'checked' : '' ?>
+                                   <?= $es_editable ? '' : 'disabled' ?>>
+                            <span style="font-size: 13px; font-weight: bold; color: <?= $opt['valor'] == '1' ? '#c0392b' : '#7f8c8d' ?>;">
+                                <?= $opt['valor'] == '1' ? 'Límite Activo' : 'Límite Desactivado' ?>
+                            </span>
+                        </div>
+                    <?php else: ?>
+                    <input type="text"
+                           class="cfg-input"
+                           name="config[<?= htmlspecialchars($clave) ?>]"
+                           value="<?= htmlspecialchars($opt['valor']) ?>"
+                           data-original="<?= htmlspecialchars($opt['valor']) ?>"
+                           <?= $es_editable ? '' : 'readonly' ?>>
+                    <?php endif; ?>
+                </div>
+            <?php endforeach; ?>
+            </div>
+        </div>
+        <?php endforeach; ?>
+        </div>
+
+        <!-- Sección de Referencia Técnica y Catálogos (Dos Columnas) -->
+        <div class="grupos-grid" style="margin-top: 18px;">
+            
+            <!-- Columna Izquierda: Estados de Contrato (Manual) -->
+            <?php 
+            $g_est = $grupos['Estados de Contrato'];
+            ?>
+            <div class="grupo-card g-estados">
+                <div class="grupo-header">Estados de Contrato <span class="readonly-badge">solo lectura</span></div>
+                <div class="grupo-desc"><?= $g_est['desc_grupo'] ?></div>
+                <div class="grupo-body">
+                    <?php foreach ($g_est['claves'] as $clave): 
+                        $opt = $opciones[$clave]; ?>
+                        <div class="cfg-row">
+                            <span class="cfg-key"><?= htmlspecialchars($clave) ?></span>
+                            <span class="cfg-desc"><?= $opt['descripcion'] ?></span>
+                            <input type="text" class="cfg-input" value="<?= htmlspecialchars($opt['valor']) ?>" readonly>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+
+            <!-- Columna Derecha: Guía de Referencia Técnica (Recargos) -->
+            <div class="grupo-card g-referencia">
+                <div class="grupo-header">Gu&iacute;a de Referencia T&eacute;cnica (Recargos)</div>
+                <div class="grupo-desc">L&oacute;gica interna del motor de recargos (Referencia para <strong>recargo_porcentaje</strong>).</div>
+                <div class="grupo-body" style="font-size: 11px; color: #444; line-height: 1.6;">
+                    <div style="background: #fffbe6; border: 1px solid #ffe58f; padding: 10px; border-radius: 4px; margin-bottom: 10px;">
+                        <strong style="color: #b05a00;">&Aacute;mbitos de aplicaci&oacute;n:</strong><br>
+                        &bull; <strong>Reactivaci&oacute;n de contratos (3&rarr;1 y 2&rarr;1):</strong> dispara sincronizaci&oacute;n de paridad, recorre cada cargo pendiente y genera los recargos mensuales faltantes.<br>
+                        &bull; <strong>Aplicaci&oacute;n manual:</strong> al insertar un cargo de cat&aacute;logo, se genera la mora acumulada desde el mes de inicio hasta hoy.<br>
+                        &bull; <strong>Rec&aacute;lculo hist&oacute;rico (paridad):</strong> procesa registros en <em>ligacargos_historico</em> (&le;2025) seg&uacute;n el l&iacute;mite de a&ntilde;os configurado.
+                    </div>
+                    
+                    <p><strong>C&aacute;lculo:</strong> monto_original &times; <strong>recargo_porcentaje</strong> (<?= $opciones['recargo_porcentaje']['valor'] ?>%) / 100 por cada mes vencido.</p>
+                    <p style="font-size: 10px; margin-top: -8px; color: #7f8c8d;">Nota: <strong>recargo_porcentaje</strong> es el &uacute;nico par&aacute;metro de tasa global; no existen montos fijos de mora por cat&aacute;logo.</p>
+                    
+                    <p><strong>Conceptos que S&Iacute; generan recargo:</strong><br>
+                    &bull; <strong>2-AGUA:</strong> Solo anualidades &rarr; genera cat. <?= $opciones['recargo_categoria_agua']['valor'] ?>-RECARGO AGUA.<br>
+                    &bull; <strong>3-DRENAJE:</strong> Solo anualidades &rarr; genera cat. <?= $opciones['recargo_categoria_drenaje']['valor'] ?>-RECARGO DRENAJE.<br>
+                    <small>El backend fuerza recargo=0 en cualquier otra categor&iacute;a.</small></p>
+
+                    <p><strong>Dos rutas de c&aacute;lculo:</strong><br>
+                    &bull; <strong>Manual:</strong> Respeta el flag <em>recargo</em> del cat&aacute;logo.<br>
+                    &bull; <strong>Paridad:</strong> Usa categor&iacute;a IN (2,3) como criterio (omite flag para deudas hist&oacute;ricas).</p>
+
+                    <p style="color: #c0392b; font-weight: bold; margin-top: 10px;">&#9888; RIESGO DE EXPLOSI&Oacute;N DE DEUDA:</p>
+                    <p>Anualidad AGUA $600 desde 2005 &rarr; 240 cargos de mora ($14,400). Se recomienda usar <strong>paridad_anios_max_recargo</strong> para limitar este retroactivo.</p>
+
+                    <p><strong>No aplica cuando:</strong><br>
+                    &bull; El contrato est&aacute; en Susp. Temporal (2) o Definitiva (4).<br>
+                    &bull; Es el a&ntilde;o de creaci&oacute;n con exenci&oacute;n activa.</p>
+                </div>
+            </div>
+
+        </div>
+
+    </form>
+
+    <div id="cfg-nara"></div>
+
+    <script>
+    // Descripciones leídas desde config_sistema.descripcion (BD)
+    var impactos = <?= json_encode(array_map(function($o){ return $o['descripcion'] ?: ''; }, $opciones), JSON_UNESCAPED_UNICODE) ?>;
+
+    function abrirModalConfirmacion() {
+        var cambios = [];
+        var inputs  = document.querySelectorAll('form input.cfg-input:not([readonly]):not([disabled])');
+
+        inputs.forEach(function(inp) {
+            var m = inp.name.match(/^config\[(.+)\]$/);
+            if (!m) return;
+            var clave = m[1];
+            var valOrig = inp.getAttribute('data-original');
+            var valNuevo = inp.type === 'checkbox' ? (inp.checked ? '1' : '0') : inp.value;
+            if (valOrig !== valNuevo) {
+                cambios.push({ clave: clave, antes: valOrig, despues: valNuevo });
+            }
+        });
+
+        var bodyHtml;
+        if (cambios.length === 0) {
+            bodyHtml = '<div class="no-cambios">No se detectaron cambios respecto a los valores actuales.</div>';
+        } else {
+            bodyHtml  = '<p style="font-size:12px;color:#555;margin:0 0 10px;">Se modificar&aacute;n <strong>' + cambios.length + '</strong> par&aacute;metro(s). Revise antes de confirmar:</p>';
+            bodyHtml += '<table class="cfg-diff-table">';
+            bodyHtml += '<tr><th>Par&aacute;metro</th><th>Antes</th><th>Despu&eacute;s</th><th>Impacto</th></tr>';
+            cambios.forEach(function(c) {
+                var imp = impactos[c.clave] || 'Afecta el comportamiento del m&oacute;dulo correspondiente de forma inmediata.';
+                bodyHtml += '<tr>' +
+                    '<td class="col-key">' + c.clave + '</td>' +
+                    '<td class="col-ant">' + escHtml(c.antes) + '</td>' +
+                    '<td class="col-new">' + escHtml(c.despues) + '</td>' +
+                    '<td class="col-imp">' + imp + '</td>' +
+                    '</tr>';
+            });
+            bodyHtml += '</table>';
+            bodyHtml += '<p style="font-size:11px;color:#b05a00;background:#fffbe6;border:1px solid #e0cc80;border-radius:4px;padding:6px 10px;margin:0;">&#9888; Los cambios son efectivos de forma inmediata y afectan el comportamiento global del sistema.</p>';
+        }
+
+        var hayCambios = cambios.length > 0;
+        var html =
+            '<div id="cfg-overlay"></div>' +
+            '<div id="cfg-modal">' +
+                '<div class="m-header">Confirmar Cambios en Configuraci&oacute;n Global</div>' +
+                '<div class="m-body">' + bodyHtml + '</div>' +
+                '<div class="m-footer">' +
+                    '<input type="button" id="cfg-cancelar-modal" value="Cancelar">' +
+                    (hayCambios ? '<input type="button" id="cfg-confirmar-modal" value="Guardar Cambios">' : '') +
+                '</div>' +
+            '</div>';
+
+        document.getElementById('cfg-nara').innerHTML = html;
+
+        document.getElementById('cfg-cancelar-modal').addEventListener('click', cerrarModal);
+        document.getElementById('cfg-overlay').addEventListener('click', cerrarModal);
+        if (hayCambios) {
+            document.getElementById('cfg-confirmar-modal').addEventListener('click', function() {
+                cerrarModal();
+                document.querySelector('form').submit();
+            });
+        }
+    }
+
+    function cerrarModal() {
+        document.getElementById('cfg-nara').innerHTML = '';
+    }
+
+    function escHtml(s) {
+        return String(s)
+            .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+            .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+    </script>
+</body>
+</html>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Configuration Options**
+
+I've been examining the "Configuración y Saneamiento" page, specifically `admin/operaciones/configuracion.php`. It appears to be the central configuration hub, encompassing modules like "Recargos Moratorios," "Operación y Contratos," and "Guía de Referencia Técnica." The user seeks to introduce a new "App Asambleas" feature.
+
+
+
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/opt/lampp/htdocs/agua/admin/operaciones/`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.557776595s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+<details>
+<summary>Directory: `operaciones` (4 items)</summary>
+
+**Path:** `opt/lampp/htdocs/agua/admin/operaciones`
+
+| Name | Type | Size |
+|------|------|------|
+| `cierre_anual` | Directory | - |
+| `configuracion.php` | File | 23020 bytes |
+| `mantenimiento_bitacora.php` | File | 1735 bytes |
+| `repair_aria_system_tables.sql` | File | 1767 bytes |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/opt/lampp/htdocs/agua/admin/operaciones/cierre_anual/`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+<details>
+<summary>Directory: `cierre_anual` (7 items)</summary>
+
+**Path:** `opt/lampp/htdocs/agua/admin/operaciones/cierre_anual`
+
+| Name | Type | Size |
+|------|------|------|
+| `01_split_anual.sql` | File | 4667 bytes |
+| `02_validate_split.sql` | File | 6639 bytes |
+| `03_rollback_split.sql` | File | 2909 bytes |
+| `README.md` | File | 2321 bytes |
+| `index.php` | File | 12858 bytes |
+| `run_rollback.php` | File | 1487 bytes |
+| `run_split_anual.php` | File | 2384 bytes |
+
+</details>
+
+---
+
+<details>
+<summary>Conversation History</summary>
+
+# Conversation History
+Here are the conversation IDs, titles, and summaries of your most recent 9 conversations, in reverse chronological order:
+
+<conversation_summaries>
+## Conversation 3978a994-757c-4201-abea-c0f560f53867: Validating Host C Connectivity
+- Created: 2026-05-13T03:18:35Z
+- Last modified: 2026-05-13T20:41:27Z
+
+### USER Objective:
+Host C Infrastructure And Sync
+
+Objective: Stabilize the Host C production environment by synchronizing data from the Host A bridge and auditing the integrity of the migration pipeline.
+
+Goals:
+1. Validate system-wide connectivity across Hosts A, B, and C using centralized configurations.
+2. Verify the execution and success of the `Full-Pipeline-Sync.sh` migration, ensuring data parity and structural integrity.
+3. Audit the database schema and split tables (`ligacargos` vs `ligacargos_historico`) to confirm correct record distribution.
+4. Establish the `.mcp.json` file as the definitive Single Source of Truth (SSOT) for all host connectivity, eliminating manual IP hardcoding.
+5. Confirm successful post-sync cleanup, including duplicate remediation and financial parity checks in the V2 schema.
+
+## Conversation 7482f76f-5f36-47b4-9951-4eb10edd1399: Debugging Charge Application Interface
+- Created: 2026-05-12T21:47:26Z
+- Last modified: 2026-05-13T07:36:15Z
+
+### USER Objective:
+Stabilizing Lila User Workflows
+
+USER Objective:
+Ensure operational integrity when reassigning contracts to 'Lila' (placeholder) users by preserving historical metadata and preventing data loss.
+
+Goals:
+1. Implement a safe protocol for transitioning placeholder users into active contract holders without losing critical 'masdatos' (notes/owner history).
+2. Augment the user creation/assignment flow to force manual review and metadata migration when a user record contains historical owner notes.
+3. Establish a UI-based mechanism to flag and consolidate fragmented user data (e.g., 'Jaime Solano' scenarios) before finalizing new contract assignments.
+4. Maintain the consistency of the 'Lila' user status by preventing the accidental purging of records that hold meaningful historical context.
+
+## Conversation f78c40bd-132e-48c0-8d80-6846d4b5e91a: Validating Preprod Host C Connectivity
+- Created: 2026-05-12T19:05:05Z
+- Last modified: 2026-05-12T21:46:14Z
+
+### USER Objective:
+Stabilizing Agua V2 Infrastructure
+
+USER Objective:
+Finalize the stabilization, integrity validation, and audit of the Agua V2 environment on Host C to resolve data inconsistencies and operational anomalies.
+
+Goals:
+1. Conduct a root-cause analysis of the User 1335 profile anomaly to determine why it triggered an unintended "no_localizado" status and financial snapshot.
+2. Verify the consistency of the `Full-Pipeline-Sync.sh` migration and ensure referential integrity between `ligacargos`, `cargos`, and contract states.
+3. Stabilize the interaction between the "Motor de Paridad" (SDF) and administrative contract transitions to prevent cascading state changes for users.
+4. Validate the operational logic for automated billing and debt recalibration, ensuring no historical data contamination in the Host C production environment.
+
+## Conversation e9e60f8c-dc0e-4c0c-a226-77eda59e64b2: Auditing Water Debt Calculations
+- Created: 2026-05-11T14:39:45Z
+- Last modified: 2026-05-12T17:18:35Z
+
+### USER Objective:
+Stabilizing User Search Interface
+
+Objective: Finalize the stabilization of the Agua V2 user synchronization and search interface on Host C.
+Goals:
+1. Ensure the user search dropdown accurately lists duplicate records as individual, selectable entries by optimizing the `HAVING` filter.
+2. Refactor UI rendering in `options.php` to provide clear, human-readable labels and color-coded status indicators (Lila for users without contracts, semaphores for homonyms).
+3. Validate structural integrity of `id_homonimo_padre` to ensure persistent data consistency during synchronization cycles.
+4. Enforce mandatory password validation in contract state transitions to mirror secure administrative guardrails.
+5. Update technical documentation to reflect the finalized user search color palette and status logic.
+
+## Conversation a8c228f4-a1fe-463c-a8df-42513ab1e695: Validating Host C Infrastructure Connectivity
+- Created: 2026-05-11T20:43:19Z
+- Last modified: 2026-05-12T03:23:56Z
+
+### USER Objective:
+Stabilizing Agua V2 Host Connectivity
+
+Objective: Complete the production stabilization of the Agua V2 environment on Host C by finalizing infrastructure connectivity and system automation.
+
+Goals:
+1. Resolve the Host C network isolation by implementing persistent firewall rules for MariaDB (Port 7002).
+2. Restore the autonomous UPS monitoring service ("Vigilante") to ensure graceful server shutdowns during power failures.
+3. Repair the automated deployment shortcuts and Chrome Kiosk-mode configuration to ensure seamless operational access for end-users.
+4. Execute the final synchronization of the 'awa' database using the established migration pipeline to achieve data parity across the infrastructure.
+
+## Conversation 9eec5834-96ee-4f9c-953d-9bb7251a198b: Validating Host Connectivity Configuration
+- Created: 2026-05-12T00:31:59Z
+- Last modified: 2026-05-12T00:35:28Z
+
+### USER Objective:
+Validating Host Connectivity Configuration
+
+Main Objective: Verify the connectivity between the VUA MCP and MySQL clients for Host A and Host C to ensure robust data access and system synchronization.
+
+Goals:
+1. Confirm the accessibility of Host A (Ubuntu/XAMPP) via the `bdawahost-a` MCP for structural validation.
+2. Verify the connectivity of Host C (Windows 10/XAMPP) via the `bdawahost-c` MCP for final production environment validation.
+3. Validate that both MCP and CLI MySQL access paths are functioning correctly according to the defined infrastructure rules.
+4. Ensure that query execution and database communication remain stable across the defined transition and production environments.
+
+## Conversation 219bd295-172b-4c03-a3df-83f565d88963: Validating Full-Pipeline-Sync Integrity
+- Created: 2026-05-09T05:39:34Z
+- Last modified: 2026-05-10T22:20:43Z
+
+### USER Objective:
+Hardening Agua V2 Production Resilience
+
+Objective: Finalize the migration and stabilization of the Agua V2 webapp in the Host C production environment.
+Goals:
+1. Implement autonomous UPS fail-safe monitoring with non-blocking shutdown procedures.
+2. Automate background service startup sequences and centralized log management for the Kiosko-mode environment.
+3. Redesign the Annual Consolidation (Split) interface to provide a pro-active, error-proof administrative dashboard.
+4. Validate system resilience through simulated power failure testing and ensure audit integrity across all server operations.
+
+## Conversation 65980880-a19d-4db2-82b2-19454270eff9: Validating Database Connectivity
+- Created: 2026-05-08T04:39:13Z
+- Last modified: 2026-05-09T05:27:52Z
+
+### USER Objective:
+Testing UPS Infrastructure Scripts
+
+Objective: Validate the operational safety of the Agua V2 server's power management and deployment automation in Host C.
+
+Goals:
+1. Develop a controlled testing methodology to simulate UPS power failure scenarios without requiring actual hardware power-offs.
+2. Verify the end-to-end integration of monitoring, alert, and shutdown scripts (`monitor-ups.ps1`, `shutdown-server.ps1`, and `stop-webapps.ps1`).
+3. Ensure the system demonstrates graceful shutdown, robust database backup generation, and automated startup recovery.
+4. Execute staged testing scenarios to confirm that system integrity is maintained during power-loss transitions.
+
+## Conversation 4261727a-9250-4b18-a666-5b474f1c4a4c: Identifying Broken Ubuntu Packages
+- Created: 2026-04-28T18:06:17Z
+- Last modified: 2026-05-09T05:19:39Z
+
+### USER Objective:
+System Maintenance And Cleanup
+
+Objective: Systematically clean and optimize the Ubuntu 22 environment to eliminate broken dependencies, stale configuration files, and unused resources.
+
+Goals:
+1. Purge residual 'rc' packages and outdated kernel components to reclaim system storage and stabilize package management.
+2. Identify and prune invalid '.desktop' shortcut entries that point to non-existent binaries.
+3. Validate the integrity of the critical Whisper-cpp/Voxd/CUDA stack to ensure zero-impact maintenance.
+4. Synchronize and secure the 'ga-cl-ia' documentation repository through automated git recovery and sync protocols.
+5. Enhance the existing cleanup script to include automated identification of newer broken entries and stale snap revisions.
+
+</conversation_summaries>
+
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 13 May 2026, 3:21 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+require_once('../../../config/Conexion.php');
+session_start();
+
+$conn = new Conexion();
+$conn->conectarBaseDatos();
+
+$anio_actual = date('Y');
+$anio_cerrar = $anio_actual - 1;
+
+// 1. Contar registros pendientes de mover (anio < actual)
+$res_pend = $conn->q("SELECT COUNT(*) as total FROM ligacargos WHERE anio < $anio_actual");
+$pendientes = $conn->fetch_assoc($res_pend)['total'];
+
+// 2. Resumen de tablas
+$res_act = $conn->q("SELECT COUNT(*) as total FROM ligacargos");
+$total_activa = $conn->fetch_assoc($res_act)['total'];
+
+$res_hist = $conn->q("SELECT COUNT(*) as total FROM ligacargos_historico");
+$total_hist = $conn->fetch_assoc($res_hist)['total'];
+
+// Obtener último movimiento del Contrato '0'
+$res_audit = $conn->q("SELECT * FROM cambios WHERE numcontrato = '0' ORDER BY fecha DESC LIMIT 5");
+$audits = [];
+if ($res_audit) {
+    while ($r = $conn->fetch_assoc($res_audit)) {
+        $audits[] = $r;
+    }
+}
+
+// Obtener fallos recientes del proceso
+$res_fallos = $conn->q("SELECT * FROM fallback_log WHERE origen LIKE '%split%' ORDER BY fecha DESC LIMIT 5");
+$fallos = [];
+if ($res_fallos) {
+    while ($r = $conn->fetch_assoc($res_fallos)) {
+        $fallos[] = $r;
+    }
+}
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consolidación de Histórico - Agua V2</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2980b9;
+            --secondary: #3498db;
+            --accent: #d35400;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --success: #27ae60;
+            --error: #c0392b;
+            --glass: rgba(255, 255, 255, 0.95);
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: linear-gradient(135deg, #1a2a3a 0%, #000000 100%);
+            color: var(--light);
+            margin: 0;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .glass-card {
+            background: var(--glass);
+            color: var(--dark);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-weight: 600;
+            margin-top: 0;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge-ok { background: #d4efdf; color: #1e8449; }
+        .badge-err { background: #fadbd8; color: #943126; }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            box-shadow: 0 5px 15px rgba(211, 84, 0, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            background: var(--secondary);
+            box-shadow: 0 8px 20px rgba(211, 84, 0, 0.4);
+        }
+
+        .btn:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-rollback {
+            background: transparent;
+            border: 2px solid var(--error);
+            color: var(--error);
+        }
+
+        .btn-rollback:hover {
+            background: var(--error);
+            color: white;
+        }
+
+        .panel-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .info-panel {
+            background: rgba(0,0,0,0.03);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .info-panel h3 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 0;
+            color: #7f8c8d;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+
+        th { text-align: left; color: #7f8c8d; padding-bottom: 10px; }
+        td { padding: 8px 0; border-top: 1px solid rgba(0,0,0,0.05); }
+
+        .warning-box {
+            background: #fff3e0;
+            border-left: 5px solid #ff9800;
+            padding: 20px;
+            color: #e65100;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
+        .loader {
+            display: none;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+        }
+
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        .accordion {
+            margin-top: 40px;
+            border-top: 1px solid rgba(0,0,0,0.1);
+            padding-top: 20px;
+        }
+
+        .accordion-content {
+            display: none;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="glass-card">
+        <div class="header-section">
+            <div>
+                <h1>Consolidación de Histórico</h1>
+                <p style="color: #718096; margin: 5px 0 0 0;">Proceso de optimización de tablas (Split Anual)</p>
+            </div>
+            <div class="status-badge <?php echo ($pendientes > 0) ? 'badge-err' : 'badge-ok'; ?>">
+                <?php echo ($pendientes > 0) ? "PENDIENTE: $pendientes" : "SISTEMA AL DÍA"; ?>
+            </div>
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-value"><?php echo number_format($total_activa); ?></span>
+                <span class="stat-label">Tabla Activa (ligacargos)</span>
+            </div>
+            <div class="stat-card highlight">
+                <span class="stat-value" style="color: var(--accent);"><?php echo number_format($pendientes); ?></span>
+                <span class="stat-label">Pendientes de Consolidar (< <?php echo $anio_actual; ?>)</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value"><?php echo number_format($total_hist); ?></span>
+                <span class="stat-label">Histórico (historico)</span>
+            </div>
+        </div>
+
+        <div class="warning-box">
+            <strong>¿Qué hace este proceso?</strong><br>
+            Mueve los cargos de años anteriores a <strong><?php echo $anio_actual; ?></strong> a la tabla histórica. Esto garantiza que las búsquedas y cobros diarios sean instantáneos.
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 20px; margin: 40px 0;">
+            <button id="btnEjecutar" 
+                    class="btn <?php echo ($pendientes > 0) ? 'btn-accent' : ''; ?>" 
+                    onclick="ejecutarSplit()" 
+                    <?php echo ($pendientes == 0) ? 'disabled' : ''; ?>>
+                🚀 EJECUTAR CONSOLIDACIÓN (SPLIT <?php echo $anio_cerrar; ?>)
+            </button>
+            <div id="loader" class="loader"></div>
+            <div id="mainStatus" style="font-weight: 600;"></div>
+        </div>
+
+        <div class="panel-grid">
+            <!-- Auditoría de Cambios -->
+            <div class="info-panel">
+                <h3>Últimos Movimientos de Sistema</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Acción</th>
+                            <th>Resultado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($audits as $a): ?>
+                        <tr>
+                            <td><small><?php echo date('d/m/y H:i', strtotime($a['fecha'])); ?></small></td>
+                            <td><strong><?php echo $a['descripcion']; ?></strong></td>
+                            <td><small><?php echo substr($a['despues'], 0, 50); ?>...</small></td>
+                        </tr>
+                        <?php endforeach; if(empty($audits)) echo "<tr><td colspan='3'>Sin registros.</td></tr>"; ?>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Log de Fallos -->
+            <div class="info-panel">
+                <h3>Registro de Fallos (Poka-Yoke)</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Nivel</th>
+                            <th>Error</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($fallos as $f): ?>
+                        <tr>
+                            <td><small><?php echo date('d/m/y H:i', strtotime($f['fecha'])); ?></small></td>
+                            <td><span class="status-badge badge-err"><?php echo $f['nivel']; ?></span></td>
+                            <td><small><?php echo substr($f['error_msg'], 0, 40); ?>...</small></td>
+                        </tr>
+                        <?php endforeach; if(empty($fallos)) echo "<tr><td colspan='3'>Sistema operando con integridad.</td></tr>"; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Zona de Emergencia -->
+        <div class="accordion">
+            <a href="#" onclick="toggleRollback(); return false;" style="color: #7f8c8d; font-size: 0.8rem; text-decoration: none;">▶ Mostrar Opciones de Recuperación (Rollback)</a>
+            <div id="rollbackArea" class="accordion-content">
+                <p>Si la validación post-split falla o nota inconsistencias, puede revertir los cambios del último split anual. <strong>Use esta opción con precaución.</strong></p>
+                <button class="btn btn-rollback" onclick="ejecutarRollback()">REVERTIR ÚLTIMO SPLIT</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function ejecutarSplit() {
+        const pendientes = <?php echo $pendientes; ?>;
+        if (!confirm('¿Confirma la ejecución de la Consolidación de Histórico? Se moverán ' + pendientes + ' registros al archivo histórico.')) return;
+
+        const btn = document.getElementById('btnEjecutar');
+        const loader = document.getElementById('loader');
+        const status = document.getElementById('mainStatus');
+
+        btn.disabled = true;
+        loader.style.display = 'inline-block';
+        status.innerHTML = 'Procesando...';
+
+        fetch('run_split_anual.php', { method: 'POST' })
+            .then(r => r.json())
+            .then(data => {
+                loader.style.display = 'none';
+                if (data.status === 'ok') {
+                    status.innerHTML = '<span class="status-badge badge-ok">Éxito</span> ' + data.msg;
+                    alert('Cierre Anual completado.\nRegistros movidos: ' + data.movidos + '\nRespaldo: ' + data.backup);
+                    location.reload();
+                } else {
+                    status.innerHTML = '<span class="status-badge badge-err">Error</span> ' + data.msg;
+                    btn.disabled = false;
+                }
+            })
+            .catch(err => {
+                loader.style.display = 'none';
+                status.innerHTML = '<span class="status-badge badge-err">Fallo de Red</span>';
+                btn.disabled = false;
+            });
+    }
+
+    function ejecutarRollback() {
+        if (!confirm('¿Está SEGURO de revertir el split? Los registros históricos se devolverán a la tabla activa.')) return;
+        
+        fetch('run_rollback.php', { method: 'POST' })
+            .then(r => r.json())
+            .then(data => {
+                alert(data.msg);
+                if (data.status === 'ok') location.reload();
+            });
+    }
+
+    function toggleRollback() {
+        const area = document.getElementById('rollbackArea');
+        area.style.display = area.style.display === 'block' ? 'none' : 'block';
+    }
+</script>
+
+</body>
+</html>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing the Code Structure**
+
+I've located `admin/operaciones/cierre_anual/index.php`. It looks like the goal is to integrate "App Asambleas" into the "Configuración y Saneamiento" section, and I now know that `admin/operaciones/configuracion.php` is the key location for that.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index2.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.444680728s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+require_once('login/usuario.php');
+session_start();
+if (!isset($_SESSION['usuario'])) {
+	print "<script>window.location='login/index.php'</script>";
+	exit();
+}
+header('Content-Type: text/html; charset=UTF-8');
+?>
+<!DOCTYPE HTML>
+<html lang="es">
+
+<head>
+	<title>Sistema de Recaudación para Servicio de Agua Potable y Alcantarillado</title>
+    <style>
+        .gear-link { font-size: 24px !important; text-decoration: none !important; cursor: pointer !important; display: inline-block !important; padding: 0 10px !important; line-height: 26px !important; color: #477 !important; background: transparent !important; box-shadow: none !important; vertical-align: top !important; }
+        .gear-link:hover { color: #f16a70 !important; background: transparent !important; }
+        .version-tag { font-size: 11px !important; font-weight: 600 !important; color: #8a9bb0 !important; background: transparent !important; text-decoration: none !important; vertical-align: top !important; line-height: 26px !important; margin-left: -6px !important; letter-spacing: 0.03em !important; box-shadow: none !important; padding: 0 !important; }
+        .version-tag:hover { color: #477 !important; background: transparent !important; }
+    </style>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="web-assets/css/paxstyle2.css">
+	<script language="javascript" src="includes/js/paxscript.js"></script>
+	<script src="web-assets/js/jquery-3.7.1.min.js"></script>
+	<script src="web-assets/js/jquery-migrate-3.4.1.min.js"></script>
+	<script src="web-assets/js/jqueryform.min.js"></script>
+	<script src="web-assets/js/jquery.validate.min.js"></script>
+	<script src="web-assets/js/jquery.hotkeys.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Soporte para apertura directa de contratos via URL (Deep-linking)
+
+            // Soporte para apertura directa de contratos via URL (Deep-linking)
+            <?php if(isset($_GET['numcontrato'])): ?>
+                cargaDatosContrato('<?= intval($_GET['numcontrato']) ?>');
+            <?php endif; ?>
+        });
+    </script>
+</head>
+
+<body>
+	<div id='mensajes'></div>
+	<div id='clutter'>
+		<ul>
+			<li><a href='#' onclick="menu('usuario')">Usuarios</a></li>
+			<li><a href='#' onclick="menu('contrato')">Contratos</a></li>
+			<li><a href='#' onclick="cargaCargos()">Cargos</a></li>
+			<li><a href='#' onclick="gastos()">Egresos</a></li>
+			<li><a href='#' onClick="asistencias()">Asistencias</a></li>
+			<li><a href='#' onClick="listados()">Listados</a></li>
+			<li><a href='#' onClick="contrasenas()">Comité</a></li>
+			<?php
+			if ($_SESSION['usuario']->getRol() == 1)
+				print "<li><a href='#' onClick='registro()'>Registro de Usuarios</a></li>";
+			?>
+			<li><a href='#' onClick="salir()">Salir</a></li>
+			<li><a href='#' onClick="configuracion()" class="gear-link" title="Configuración y Saneamiento">&#9881;</a><a href='index2.php' class="version-tag">V2.0.0</a></li>
+		</ul>
+	</div>
+	<div id='opciones'>
+	</div>
+	<div id='nara'></div>
+	<div id='app'>
+		<h1>Bienvenido</h1>
+		<hr>
+		<img src='web-assets/img/drop.png' align=left border=0><br><br>
+		<p><b>Sistema de Agua Potable y Alcantarillado de la Colonia del Maestro</b>.</p><br>
+		<div id='tarjeta'>
+			<p>Versión 2.0.0; Comite 2026.<br><br>Huajuapan de León, Oaxaca.</p>
+		</div>
+		<br><br><br><br><br><br>
+		<div id='nara'></div>
+	</div>
+	<div id='nara'></div>
+</body>
+
+</html>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `paxscript.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L139-159)</summary>
+
+**Path:** `Unknown file`
+
+```
+		var opciones={
+				type:"POST", async: false, url: "ruteador.php",
+					success: function(msg) {
+						$("#realizaranotacion").html(msg)
+					}
+			};
+		$(this).ajaxSubmit(opciones)
+		return false
+	})
+
+	$('#agregarCargoX').unbind('submit').submit(function(){
+		if($('input[name="cargo\\[\\]"]').length == 0){
+			alert("Debe agregar al menos un cargo a la lista antes de aplicar.");
+			return false;
+		}
+		var opciones={
+				type:"POST", async: false, url: "ruteador.php",
+					success: function(msg) {
+						$("#aplicando_notificacion").html(msg)
+					}
+			};
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 13 May 2026, 3:21 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `paxscript.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L560-564)</summary>
+
+**Path:** `Unknown file`
+
+```
+function configuracion()
+{
+	$('#app').load("ruteador.php", {opc:'configuracion'})
+}
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ruteador.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L169-199)</summary>
+
+**Path:** `Unknown file`
+
+```
+    case 'aplicacargosauno':
+        $cargo = (isset($cargo) ? $cargo : array());
+        print aplicacargos($contrato, $cargo);
+        break;
+    case 'agregaNuevoCargo':
+        $mensual = (isset($mensual) ? $mensual : 0);
+        $automatico = (isset($automatico) ? $automatico : 0);
+        $anio = (isset($anio) ? $anio : date("Y"));
+        $aniocobro = (($aniocobro == "" || $aniocobro == null) ? 0 : $aniocobro);
+        $recargo = (isset($recargo) ? $recargo : 0);
+        $interes = (isset($interes) ? $interes : 0);
+        $multa = (isset($multa) ? $multa : 0);
+        $repetir = (isset($repetir) ? $repetir : 0);
+        $metros = (isset($metros) ? $metros : 0);
+        $monto_comercial = (isset($monto_comercial) ? $monto_comercial : 0);
+        print creaCargo($leyenda, $cat, $otracategoria, $monto, $mensual, $anio, $recargo, $interes, $multa, $aniocobro, $repetir, $metros, $automatico, $monto_comercial);
+        break;
+    case 'modificaCargo':
+        $mensual = (isset($mensual) ? $mensual : 0);
+        $automatico = (isset($automatico) ? $automatico : 0);
+        $anio = (isset($anio) ? $anio : date("Y"));
+        $aniocobro = (($aniocobro == "" || $aniocobro == null) ? 0 : $aniocobro);
+        $recargo = (isset($recargo) ? $recargo : 0);
+        $interes = (isset($interes) ? $interes : 0);
+        $multa = (isset($multa) ? $multa : 0);
+        $repetir = (isset($repetir) ? $repetir : 0);
+        $metros = (isset($metros) ? $metros : 0);
+        $monto_comercial = (isset($monto_comercial) ? $monto_comercial : 0);
+        print modificaCargo($num, $leyenda, $cat, $otracategoria, $monto, $mensual, $anio, $recargo, $interes, $multa, $aniocobro, $repetir, $metros, $automatico, $monto_comercial);
+        break;
+    case 'listados':
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 13 May 2026, 3:21 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ruteador.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L202-207)</summary>
+
+**Path:** `Unknown file`
+
+```
+    case 'configuracion':
+        print configuracion();
+        break;
+    case 'asistencias':
+        print asistencias();
+        break;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 13 May 2026, 3:21 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `sistema.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+function menu($opc)
+{
+	global $templates;
+	return $templates->render('sistema/menu_options', ['opc' => $opc]);
+}
+
+function login($login, $password)
+{
+	$usuario = new User();
+	$crud = new CrudUsuario();
+
+	$usuario = $crud->obtenerUsuario($login, $password);
+	if ($usuario->getId() != NULL) {
+		$_SESSION['usuario'] = $usuario;
+		print "<script>window.location='../index2.php'</script>";
+	} else {
+		print "<script>alert('Nombre de Usuario o Contraseña incorrectos')</script>";
+		print "<script>location.reload();</script>";
+	}
+}
+
+function salir()
+{
+	unset($_SESSION['usuario']);
+}
+
+function asistencias()
+{
+	global $templates;
+	return $templates->render('sistema/asistencias', ['abriendoarchivo' => '']);
+}
+
+function listados()
+{
+	global $templates;
+	return $templates->render('sistema/listados');
+}
+
+function configuracion()
+{
+	global $templates;
+	return $templates->render('sistema/configuracion');
+}
+
+function contrasenas()
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$query = "SELECT presidente, vicepresidente, secretario, tesorero, vocal1, vocal2, vocal3, vocal4, presidente_vigilancia, secretario_vigilancia FROM firmantes limit 1";
+
+	$res = $y->q($query);
+
+	$firmantes = $y->fetch_array($res);
+
+	if (!is_array($firmantes)) {
+		$firmantes = [];
+	}
+
+	return $templates->render('sistema/contrasenas', ['firmantes' => $firmantes]);
+}
+
+
+/**
+ * Procesa el archivo de asistencias (MD5, bloques y aplicación de multas)
+ * @param string $path_archivo Ruta al archivo a procesar (opcional)
+ */
+function abriendoarchivo($path_archivo = null)
+{
+	global $templates;
+	$nombre = ($path_archivo !== null) ? $path_archivo : "lastassambly";
+	$mes = explode(",", " ,ene,feb,mar,abr,may,jun,jul,ago,sep,oct,nov,dic");
+	
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$archivo = @file_get_contents($nombre);
+
+	if ($archivo === false || trim($archivo) == "") {
+		return "<h2>No hay contenido para procesar o el archivo no existe</h2>";
+	}
+
+	// 1. Validar integridad MD5 (Firma MD5 Legacy)
+	// El archivo tiene formato: [HASH][\n-\n][RESTO_DEL_ARCHIVO]
+	$hash_proporcionado = substr($archivo, 0, 32);
+	$contenido_para_hash = substr($archivo, 32);
+	$hash_calculado = md5($contenido_para_hash);
+
+	if ($hash_proporcionado !== $hash_calculado) {
+		return "<h2 style='color:red;'>⚠️ Error de integridad: La firma digital del archivo no coincide. El archivo ha sido alterado.</h2>";
+	}
+
+	// 2. Separar por bloques canónicos (\n-\n o \r\n-\r\n)
+	// Usamos regex para ser agnósticos al fin de línea (Windows/Linux)
+	$info = preg_split("/\r?\n-\r?\n/", $contenido_para_hash);
+
+	// Mapeo según cone.txt:
+	// info[0] = (vacío, es el prefijo del primer separador)
+	// info[1] = Fecha (YYYY-MM-DD)
+	// info[2] = Resumen (X contratos, Y usuarios)
+	// info[3] = Notas de la asamblea
+	// info[4] = Datos de contratos (N:NumContrato)
+	
+	$cto = isset($info[4]) ? preg_split("/\r?\n/", $info[4]) : array();
+	$notas = isset($info[3]) ? trim($info[3]) : "";
+	$fecha_parts = isset($info[1]) ? explode("-", $info[1]) : array();
+
+	// Construir nombre del cargo de manera segura
+	if (count($fecha_parts) >= 3) {
+		$dia = $fecha_parts[2];
+		$mes_idx = intval($fecha_parts[1]);
+		$anio = intval($fecha_parts[0]);
+		$mes_str = ($mes_idx >= 1 && $mes_idx <= 12) ? $mes[$mes_idx] : "???";
+		$cargo = "falta asamblea $dia $mes_str $anio";
+	} else {
+		$cargo = "falta asamblea " . date("d M Y");
+		$anio = intval(date("Y"));
+	}
+
+	// Solo se permiten archivos de 2026 en adelante (inicio del split ligacargos/historico)
+	if ($anio <= 2025) {
+		return "<p style='color:red;'><b>Archivo rechazado:</b> El archivo corresponde al año <b>$anio</b>. Solo se aceptan archivos de asambleas a partir de 2026.</p>";
+	}
+
+	$n = 0;
+	$contratos_asistentes = array();
+
+	// Procesar bloque de datos (info[4])
+	foreach ($cto as $v) {
+		if (trim($v) == "")
+			continue;
+		$partes = explode(":", $v);
+		$ncto = isset($partes[1]) ? trim($partes[1]) : '';
+
+		if ($ncto != "" && $ncto != "-") {
+			$contratos_asistentes[] = $ncto;
+		}
+	}
+
+	// Eliminar duplicados y limpiar
+	$contratos_asistentes = array_unique($contratos_asistentes);
+
+	// Procesar cada contrato: Si asistió, se le cancela la multa (estado=-1)
+	foreach ($contratos_asistentes as $ncto) {
+		// Búsqueda robusta (Exacta o con sufijos /M, /ST)
+		$rec = $y->q("SELECT numcontrato FROM contrato WHERE numcontrato = '$ncto'");
+
+		if ($y->num_rows($rec) == 0) {
+			$ncto_limpio = str_replace("/M", "", $ncto);
+			$rec = $y->q("SELECT numcontrato FROM contrato WHERE numcontrato REGEXP '^($ncto_limpio(/(.+)|( *)ST))$'");
+		}
+
+		if ($y->num_rows($rec) > 0) {
+			list($ncto_real) = $y->fetch_array($rec);
+			// sp_cancelar_cargo es Split-Aware (busca en activa e histórico)
+			$y->q("CALL sp_cancelar_cargo(0, '$ncto_real', '$cargo', 0, @filas)");
+			$n++;
+		}
+	}
+
+	$cargo_esc = $y->real_escape_string($cargo);
+	$res_pendientes = $y->q("SELECT COUNT(*) FROM ligacargos WHERE leyenda = '$cargo_esc' AND estado = 0");
+	list($pendientes) = $y->fetch_array($res_pendientes);
+	$res_total = $y->q("SELECT COUNT(*) FROM ligacargos WHERE leyenda = '$cargo_esc'");
+	list($total_cargo) = $y->fetch_array($res_total);
+
+	return $templates->render('sistema/asistencias_resultado', [
+		'n'           => $n,
+		'cargo'       => $cargo,
+		'notas'       => $notas,
+		'pendientes'  => $pendientes,
+		'total_cargo' => $total_cargo,
+	]);
+}
+
+function registrapasspresidente($pass_nueva, $pass_anterior)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$res = $y->q("select contrasena from contrasenas where rol = 'presidente'");
+
+	list($contrasena_presidente) = $y->fetch_array($res);
+
+	// Verificación modo mixto: bcrypt nuevo o md5 legado
+	$pass_valida = password_verify($pass_anterior, $contrasena_presidente)
+		|| (md5($pass_anterior) == $contrasena_presidente);
+
+	if (trim($pass_nueva) == "" || trim($pass_anterior) == "") {
+		$salida = $templates->render('sistema/mensaje', [
+			'titulo' => 'Error',
+			'mensaje' => "<p>Los campos no deben ser vac&iacute;os</p><br>" . contrasenas()
+		]);
+	} else {
+		if (!$pass_valida) {
+			$salida = $templates->render('sistema/mensaje', [
+				'titulo' => 'Error',
+				'mensaje' => "<p>Contrase&ntilde;a anterior del Presidente no es v&aacute;lida</p><br>" . contrasenas()
+			]);
+		} else {
+			$hash_nuevo = password_hash($pass_nueva, PASSWORD_BCRYPT);
+			$q = "update contrasenas set contrasena = '$hash_nuevo' where rol = 'presidente'";
+			$y->q($q);
+			$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato) 
+			       VALUES(NOW(), 'Cambio de Clave Presidente', 'CONFIDENCIAL', 'ACTUALIZADA', '-SISTEMA-')");
+			$salida = $templates->render('sistema/mensaje', [
+				'titulo' => 'Modificado',
+				'mensaje' => "<p>Se ha modificado la contrase&ntilde;a del Presidente</p>"
+			]);
+		}
+	}
+
+	return $salida;
+}
+
+function registrapasstesorero($pass_nueva, $pass_anterior)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$res = $y->q("select contrasena from contrasenas where rol = 'tesorero'");
+
+	list($contrasena_tesorero) = $y->fetch_array($res);
+
+	// Verificación modo mixto: bcrypt nuevo o md5 legado
+	$pass_valida = password_verify($pass_anterior, $contrasena_tesorero)
+		|| (md5($pass_anterior) == $contrasena_tesorero);
+
+	if (trim($pass_nueva) == "" || trim($pass_anterior) == "") {
+		$salida = $templates->render('sistema/mensaje', [
+			'titulo' => 'Error',
+			'mensaje' => "<p>Los campos no deben ser vac&iacute;os</p><br>" . contrasenas()
+		]);
+	} else {
+		if (!$pass_valida) {
+			$salida = $templates->render('sistema/mensaje', [
+				'titulo' => 'Error',
+				'mensaje' => "<p>Contrase&ntilde;a anterior del Tesorero no es v&aacute;lida</p><br>" . contrasenas()
+			]);
+		} else {
+			$hash_nuevo = password_hash($pass_nueva, PASSWORD_BCRYPT);
+			$q = "update contrasenas set contrasena = '$hash_nuevo' where rol = 'tesorero'";
+			$y->q($q);
+			$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato) 
+			       VALUES(NOW(), 'Cambio de Clave Tesorero', 'CONFIDENCIAL', 'ACTUALIZADA', '-SISTEMA-')");
+			$salida = $templates->render('sistema/mensaje', [
+				'titulo' => 'Modificado',
+				'mensaje' => "<p>Se ha modificado la contrase&ntilde;a del Tesorero</p>"
+			]);
+		}
+	}
+
+	return $salida;
+}
+
+function registrafirmantes($nombrepresidente, $nombrevicepresidente, $nombresecretario, $nombretesorero, $nombrevocal1, $nombrevocal2, $nombrevocal3, $nombrevocal4, $nombrepresidentev, $nombresecretariov)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$q = "update firmantes SET presidente = '$nombrepresidente', vicepresidente = '$nombrevicepresidente', secretario = '$nombresecretario', tesorero = '$nombretesorero', vocal1 = '$nombrevocal1', vocal2 = '$nombrevocal2', vocal3 = '$nombrevocal3', vocal4 = '$nombrevocal4', presidente_vigilancia = '$nombrepresidentev', secretario_vigilancia = '$nombresecretariov'";
+
+	$y->q($q);
+	$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato) 
+	       VALUES(NOW(), 'Actualización de Firmantes', 'Nombres anteriores', 'Presidente: $nombrepresidente | Tesorero: $nombretesorero', '-SISTEMA-')");
+	$salida = $templates->render('sistema/mensaje', [
+		'titulo' => 'Modificado',
+		'mensaje' => "<p>Se han modificado los nombres de los firmantes de los Cortes de Caja</p>"
+	]);
+
+	return $salida;
+}
+
+function archivarBitacora()
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	// Ejecutar procedimiento de archivado
+	$y->q("CALL sp_archivar_bitacora()");
+	
+	$res_his = $y->q("SELECT COUNT(*) FROM cambios_historico");
+	list($total_his) = $y->fetch_array($res_his);
+	$res_act = $y->q("SELECT COUNT(*) FROM cambios");
+	list($total_act) = $y->fetch_array($res_act);
+
+	$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato) 
+	       VALUES(NOW(), 'Mantenimiento de Bitácora', 'Archivo masivo', 'Registros archivados. Actuales: $total_act | Históricos: $total_his', '-SISTEMA-')");
+
+	return $templates->render('sistema/mensaje', [
+		'titulo' => 'Mantenimiento Completado',
+		'mensaje' => "<p>Se han movido los registros antiguos a la tabla histórica satisfactoriamente.</p>
+		              <ul>
+		                  <li>Registros en Bitácora Activa: <b>$total_act</b></li>
+		                  <li>Registros en Histórico: <b>$total_his</b></li>
+		              </ul>"
+	]);
+}
+
+
+/**
+ * Genera URL completa para recursos de la aplicación
+ * @param string $ruta Ruta relativa al webcontext
+ * @return string URL completa
+ */
+function urlRecurso($ruta)
+{
+	static $base_url = null;
+
+	// Calcular base_url solo una vez
+	if ($base_url === null) {
+		$protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://';
+		$host = $_SERVER['HTTP_HOST'];
+
+		// Calculamos la ruta base en disco del proyecto (sistema.php está en includes/negocio/sistema.php)
+		$directorio_proyecto = realpath(dirname(__FILE__) . '/../../');
+		$document_root = realpath($_SERVER['DOCUMENT_ROOT']);
+
+		// Extraemos la parte de la ruta que está después del DOCUMENT_ROOT
+		$base_path = str_replace($document_root, '', $directorio_proyecto);
+		$base_path = str_replace('\\', '/', $base_path); // Compatibilidad con Windows si fuera el caso
+
+		$base_url = rtrim($protocol . $host . $base_path, '/');
+	}
+
+	// Asegurar que la ruta comience con /
+	if (strpos($ruta, '/') !== 0) {
+		$ruta = '/' . $ruta;
+	}
+
+	return $base_url . $ruta;
+}
+?>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/opt/lampp/htdocs/agua/views/sistema/`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+<details>
+<summary>Directory: `sistema` (7 items)</summary>
+
+**Path:** `opt/lampp/htdocs/agua/views/sistema`
+
+| Name | Type | Size |
+|------|------|------|
+| `asistencias.php` | File | 2258 bytes |
+| `asistencias_resultado.php` | File | 570 bytes |
+| `configuracion.php` | File | 3060 bytes |
+| `contrasenas.php` | File | 5856 bytes |
+| `listados.php` | File | 4091 bytes |
+| `mensaje.php` | File | 86 bytes |
+| `menu_options.php` | File | 1742 bytes |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `configuracion.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<h1>Configuración y Saneamiento</h1>
+<hr>
+
+<style type="text/css">
+	.config-layout {
+		display: flex;
+		justify-content: center;
+		gap: 20px;
+		margin-top: 15px;
+	}
+
+	.config-column {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		min-width: 250px;
+	}
+
+	.config-label {
+		background: #2c3e50;
+		color: #fff;
+		width: 100%;
+		text-align: center;
+		padding: 6px 0;
+		font-weight: bold;
+		text-transform: uppercase;
+		font-size: 12px;
+		margin-bottom: 15px;
+		border-radius: 4px;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+	}
+
+	.config-items {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between; /* Asegura 2 por fila */
+		gap: 10px;
+		width: 100%;
+	}
+
+	.config-icon-container {
+		flex: 0 0 calc(50% - 5px); /* Ajuste exacto para 2 columnas verticales por bloque */
+		padding: 10px 5px;
+		background: #fff;
+		border: 1px solid #eee;
+		border-radius: 6px;
+		transition: all 0.2s ease;
+		cursor: pointer;
+		text-align: center;
+		min-height: 70px; /* Reducido */
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		box-sizing: border-box;
+	}
+
+	.config-icon-container:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+		border-color: #3498db;
+	}
+
+	.config-icon-container img {
+		width: 24px; /* Iconos más pequeños */
+		height: 24px;
+		margin-bottom: 6px;
+		filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
+	}
+
+	.config-icon-container small {
+		font-weight: 600;
+		color: #333;
+		font-size: 11px; /* Texto más compacto */
+		line-height: 1.1;
+		display: block;
+	}
+
+	/* Colores temáticos */
+	.item-saneamiento { border-left: 3px solid #e67e22; }
+	.item-auditoria { border-left: 3px solid #3498db; }
+	.item-operaciones { border-left: 3px solid #2ecc71; }
+	.item-success { border-left: 3px solid #27ae60; }
+	.item-info { border-left: 3px solid #2980b9; }
+</style>
+
+<div class="config-layout">
+	<!-- Columna: Sistema y Reportes -->
+	<div class="config-column">
+		<div class="config-label">Operaciones y Reportes</div>
+		<div class="config-items">
+			<div class="config-icon-container item-operaciones" onClick="window.open('admin/operaciones/configuracion.php', '_blank');">
+				<img src='web-assets/img/doc.png'><br>
+				<small>Configuración del Sistema</small>
+			</div>
+
+			<div class="config-icon-container item-saneamiento" onClick="window.open('admin/operaciones/cierre_anual/index.php', '_blank');">
+				<img src='web-assets/img/doc.png'><br>
+				<small style="color:red;">Cierre de Año (Split Anual)</small>
+			</div>
+
+
+			<div class="config-icon-container item-operaciones" onClick="window.open('admin/saneamiento/monitor_fallbacks.php', '_blank');">
+				<img src='web-assets/img/doc.png'><br>
+				<small>Monitor Fallbacks</small>
+			</div>
+
+			<div class="config-icon-container item-operaciones" onClick="window.open('admin/reportes/reporte_contratos_toma.php', '_blank');">
+				<img src='web-assets/img/doc.png'><br>
+				<small>Reporte Contratos por Toma</small>
+			</div>
+
+		</div>
+	</div>
+
+	</div>
+</div>
+
+<div id='nara'></div>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing the URL Structure**
+
+Okay, I've identified the "Configuración y Saneamiento" view. The user wants to integrate "App Asambleas" using the URL `localhost:7001/agua/asamblea/`. I'm going to avoid hardcoding this URL. Instead, I plan to leverage the existing logic from `includes/negocio/sistema.php` to handle it. I need to make sure I am using the existing patterns for URL handling!
+
+
+
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/opt/lampp/htdocs/agua/asamblea/`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.315494562s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+<details>
+<summary>Directory: `asamblea` (3 items)</summary>
+
+**Path:** `opt/lampp/htdocs/agua/asamblea`
+
+| Name | Type | Size |
+|------|------|------|
+| `index.php` | File | 1313 bytes |
+| `ruteador.php` | File | 15113 bytes |
+| `views` | Directory | - |
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Defining the Link Path**
+
+I've determined the correct relative path for the new link. Specifically, it's `asamblea/`, relative to the webapp's base URL, `localhost:7001/agua/`. I'm now integrating this information into the configuration file, `views/sistema/configuracion.php`, adding the link as a new item and re-using an existing icon for consistency.
+
+
+
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/opt/lampp/htdocs/agua/web-assets/img/`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.184961554s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+<details>
+<summary>Directory: `img` (16 items)</summary>
+
+**Path:** `opt/lampp/htdocs/agua/web-assets/img`
+
+| Name | Type | Size |
+|------|------|------|
+| `PlantillaCredencial.png` | File | 65055 bytes |
+| `asamblea` | Directory | - |
+| `barra.gif` | File | 6481 bytes |
+| `contratogf.png` | File | 19188 bytes |
+| `doc.png` | File | 1239 bytes |
+| `drop.png` | File | 305469 bytes |
+| `nota.png` | File | 231880 bytes |
+| `oblig.png` | File | 598 bytes |
+| `paisaje.jpg` | File | 556111 bytes |
+| `pesos.png` | File | 3818 bytes |
+| `reciclar.png` | File | 942 bytes |
+| `rfc.png` | File | 117085 bytes |
+| `sellote.png` | File | 64298 bytes |
+| `selloteAlfa.png` | File | 547494 bytes |
+| `selloteAlfa1.png` | File | 547494 bytes |
+| `selloteAlfa1_Final.png` | File | 3782 bytes |
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Icon Consistency**
+
+I've decided to maintain the `doc.png` icon for consistency, which is my primary focus. However, I'm now considering using `item-success` (Green) for "App Asambleas" because it represents an active tool. I'm planning to place it after "Reporte Contratos por Toma," adding this detail to my current thought process.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.231303405s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 May 2026, 3:22 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+## User Request
+
+si
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `configuracion.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Today's Commit**
+
+I'm focusing on getting this latest change committed and pushed. I need to update `GEMINI.md`, but I've shifted priorities to add it to today's "Hitos de Estabilización" section first, and then I will update `GEMINI.md`.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.033032417s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 May 2026, 3:26 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 13 May 2026, 3:26 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Checking Command Status**
+
+I see the background command completed! The visual confirmation (`═══════`) and the git hook validation ran successfully. The commit message confirms the changes: "[feature/upgrade-v2-win-xampp b72e54a] feat: add App Asambleas link to configuration".
+
+
+
+
+### Actions
+
+**Tool:** `command_status`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.044200695s
+- **Model:** Gemini 3 Flash
+</details>
+
+---
+
+### Process Monitor
+
+**Status:** Completed
+**Created:** 13 May 2026, 3:28 pm
 
 ---
 
