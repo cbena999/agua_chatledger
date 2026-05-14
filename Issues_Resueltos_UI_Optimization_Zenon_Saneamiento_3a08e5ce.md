@@ -12,8 +12,8 @@
 
 ### Scope Técnico
 - `views/usuarios/options.php`: Refactorización de la lógica de conteo de contratos para incluir estados `1` y `2` como activos, y marcar Lila si el total es `0`.
-- `asamblea/views/layout.php`: Ajuste de CSS `@media print` para márgenes y fuente.
-- `asamblea/views/principal.php`: Formateo de `str_contracts` (contratos separados por coma).
+- `asamblea/views/layout.php`: Ajuste de CSS `@media print` para márgenes y fuente. Implementación de auto-cierre (`onafterprint`), click-outside y auto-foco en `#buscador`.
+- `asamblea/views/principal.php`: Formateo de `str_contracts` (contratos sin corchetes), periodo de gracia de 7 días para re-apertura y lógica de foco.
 
 ---
 
@@ -31,7 +31,17 @@
 
 ---
 
-## 3 — Hardening del Entorno Host C (Shutdown)
+## 3 — Validación Full-Pipeline-Sync (B → A → C)
+
+### Scope Funcional
+- Verificación de la ejecución maestra del sincronismo total.
+- **Paridad Total**: 200,931 registros (7,115 activos / 193,816 históricos).
+- **Integridad**: 0 cargos huérfanos, 0 contratos sin usuario.
+- **Saneamiento**: 17 folios mixtos reparados en histórico. 494 multas de asamblea sincronizadas.
+
+---
+
+## 4 — Hardening del Entorno Host C (Shutdown)
 
 ### Scope Funcional
 - El proceso de apagado del servidor ahora es "silencioso" y resiliente. Se eliminaron los mensajes de error transitorios que aparecían rápidamente en pantalla durante el `Stop-Computer` y el cierre de procesos de MariaDB.
