@@ -187,7 +187,7 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 
 **Producción Final y Hardening Host C (2026-05-13 — Sesión 2):**
 *   **Poka-Yoke de Duplicados**: Implementado bloqueo estructural en `views/usuarios/options.php`. Los registros con `id_homonimo_padre > 0` aparecen ahora deshabilitados (`disabled`) con icono 🚫 y redirección al ID Maestro, previniendo la fragmentación de datos en Nuevos Contratos y Cambios de Propietario.
-*   **Protección de Directorio**: Scripts `protect-folder.ps1` y `unprotect-folder.ps1` desplegados para blindar `C:/agua2-2026` mediante reglas NTFS Deny (previene borrados/renombrados accidentales de la raíz).
+*   **Protección de Directorio**: Scripts `protect-folder.ps1` y `unprotect-folder.ps1` desplegados para blindar la raíz del sistema mediante reglas NTFS Deny. Se han actualizado para heredar dinámicamente la ruta desde `config.ps1`, corrigiendo el error de ruta inexistente.
 *   **Dashboard de Consolidación**: Integración de acceso directo a **App Asambleas** en la ficha de Configuración y Saneamiento, utilizando rutas relativas para portabilidad entre hosts.
 *   **Hardening UPS**: El tiempo de gracia en batería fue ajustado a **5 minutos** en `config.ps1`, optimizando el margen de seguridad para el cierre de la base de datos.
 *   **Control de Chrome**: Identificado el pipeline de congelamiento de versiones en `setup-kiosk-shortcut.ps1` y su reversión en `revert-chrome-updates.ps1`.
