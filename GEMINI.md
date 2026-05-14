@@ -200,6 +200,7 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 *   **Optimización Ticket Asamblea**: 
     *   Ficha de ticket ahora se cierra automáticamente tras imprimir o al hacer clic fuera (con auto-foco en buscador).
     *   Formato optimizado para impresoras térmicas (Courier New, márgenes mínimos, sin corchetes en contratos).
+    *   **Ajuste Final (v2.1)**: Fuentes escaladas (Nombre 19px, Registro 17px, Comité 13px), todo justificado a la izquierda, y márgenes de impresión negativos (-4mm) para ahorro extremo de papel.
     *   Periodo de gracia de **7 días** para reabrir asambleas cerradas.
 *   **Validación Full-Pipeline-Sync**: Ejecución verificada en Host C — 100% de paridad (200,931 cargos), saneamiento de folios mixtos (8 reparados) y consolidación real de Zenón confirmada.
 

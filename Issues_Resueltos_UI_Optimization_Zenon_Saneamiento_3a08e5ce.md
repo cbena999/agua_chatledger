@@ -10,10 +10,8 @@
 - **Color Lila Universal**: Ahora los usuarios que solo tienen contratos en "Suspensión Definitiva" (placeholder sin servicio activo) se marcan correctamente como Lila en el buscador, evitando confusión al cajero.
 - **Ticket de Asamblea**: Se ajustó el formato del ticket térmico en Host C para igualar la versión anterior (tamaño de fuente, márgenes mínimos, formato de fecha en letra y concatenación de contratos sin corchetes).
 
-### Scope Técnico
-- `views/usuarios/options.php`: Refactorización de la lógica de conteo de contratos para incluir estados `1` y `2` como activos, y marcar Lila si el total es `0`.
-- `asamblea/views/layout.php`: Ajuste de CSS `@media print` para márgenes y fuente. Implementación de auto-cierre (`onafterprint`), click-outside y auto-foco en `#buscador`.
-- `asamblea/views/principal.php`: Formateo de `str_contracts` (contratos sin corchetes), periodo de gracia de 7 días para re-apertura y lógica de foco.
+- `asamblea/views/layout.php`: Ajuste de CSS `@media print` para márgenes y fuente. Implementación de auto-cierre (`onafterprint`), click-outside y auto-foco en `#buscador`. Ajuste de márgenes negativos (-4mm) para impresión y padding de 5mm para vista.
+- `asamblea/views/principal.php`: Formateo de `str_contracts`, periodo de gracia de 7 días y lógica de foco. Refinamiento final de fuentes (Nombre 19px, Comité 13px negrita) y justificación a la izquierda.
 
 ---
 
