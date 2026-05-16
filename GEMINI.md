@@ -204,7 +204,13 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
     *   Periodo de gracia de **7 días** para reabrir asambleas cerradas.
 *   **Validación Full-Pipeline-Sync**: Ejecución verificada en Host C — 100% de paridad (200,931 cargos), saneamiento de folios mixtos (8 reparados) y consolidación real de Zenón confirmada.
 
-**Última actualización**: 2026-05-14
+**Estabilización de UI, Cobros Libres y Control UPS (2026-05-16):**
+*   **Ajuste Libre de Cobros (LIBRE)**: Se implementó un flujo flexible donde cualquier cargo de catálogo que incluya la bandera `(LIBRE)` en su nombre disparará un *prompt* interactivo para que el operador defina el monto. El backend en `cargos.php` limpia la etiqueta y exenta el cargo de multiplicadores automáticos (comercial/metros) garantizando cuadres limpios.
+*   **Monitor UPS Condicional**: El "Vigilante" de fallos eléctricos (`monitor-ups.ps1`) ahora respeta la directiva `monitoreo_ups=1|0` del archivo `configuracion.txt`. Si se desactiva, el servidor inicia de forma normal sin invocar el bucle de ping ni detonar apagados automatizados (ideal para pruebas o escenarios sin UPS conectado al router).
+*   **Transparencia en Hardening NTFS**: Se ajustaron los mensajes de salida de `protect-folder.ps1` y `unprotect-folder.ps1` para reflejar y confirmar su capacidad nativa de blindar `xampp`, `aguav2` y `aguav2-2026` simultáneamente contra borrados **y renombrados**, dando plena certidumbre al operador.
+*   **Semaforización "Lila" Poka-Yoke**: Corrección en `nuevo.php` y `options.php` para asegurar que el `<select>` principal adopte el color visual de estado (Lila, Verde, Amarillo) del usuario seleccionado. Además, se refinó la regla Lila para incluir apropiadamente a usuarios históricos (con todos sus contratos en Estado 4), permitiendo actualizar sus nombres *Placeholder* de inmediato en la ficha de Nuevo Contrato.
+
+**Última actualización**: 2026-05-16
 
 
 
