@@ -218,7 +218,12 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 *   **Guía del Catálogo de Cargos**: Nuevo documento `docs-dev/doc-estabilizacion/GUIA_CATALOGO_CARGOS.md` — referencia completa para operadores sobre: anatomía de un cargo, reglas por campo, cuándo usar `(LIBRE)` vs `repetir=1` (R(N)), conceptos por año, y catálogo de issues conocidos.
 *   **Homologación de MDs**: Nombres de categorías 13, 14, 20, 21, 22 actualizados en `CARTERA_VENCIDA_MODELO_Y_REPORTES.md` y `REPORTES_CAJA_CARTERA_DECLARACION.md` para alinearlos con los nombres canónicos de la BD.
 
-**Última actualización**: 2026-05-16
+**Validación Pipeline Final y Blindaje (2026-05-18):**
+*   **Validación Full-Pipeline-Sync**: Confirmada la ejecución exitosa del pipeline completo hacia Host C. Datos migrados sin configuración drift: 1,409 usuarios, 201,130 cargos (7,207 activos / 193,923 históricos). Tablas Poka-Yoke intactas (`id_homonimo_padre` y bandera `repetir=1` en cobros LIBRE).
+*   **Manuales Operativos Creados**: Se generaron los documentos `doc_cajero_transiciones_estado.md`, `doc_tesorero_corte_cartera.md` y `doc_ejecutivo_comite.md` detallando las reglas de paridad, el modelo homologado de Cartera Vencida y la matriz de los 6 casos de transición de estados de contrato.
+*   **Blindaje Extremo NTFS**: Se actualizó `protect-folder.ps1` para aplicar bloqueos `(DE, DC)` directamente a la carpeta `$desktop\aguaV2` en lugar de solo a los `.lnk` internos. Esto impide el arrastre a papelera y borrado de los atajos administrativos.
+
+**Última actualización**: 2026-05-18
 
 
 
