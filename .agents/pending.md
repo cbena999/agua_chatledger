@@ -99,8 +99,9 @@ SELECT IFNULL(SUM(monto),0) FROM vw_ligacargos_pendientes WHERE numcontrato='405
 | 2026-05-14 | Asamblea & Sync Stabilization | ✅ PASADO — Auto-foco ticket, gracia 7 días, paridad 100% sync, optimización ahorro papel (márgenes -4mm) |
 | 2026-05-20 | Normalización de Calles en Listados | ✅ PASADO — Agrupamiento de calles interactivo soportando acentos y ordinales sin truncar palabras clave. |
 | 2026-05-20 | Impresión de Credenciales en Lote | ✅ PASADO — Formato carta de 3 copias a 17.6 x 5.8 cm con guía de corte/doblez central y popup centrado. |
+| 2026-05-21 | Optimización de Renglones en Impresión | ✅ PASADO — Límite de registros por página incrementado de 42 a 46 en 5 reportes para aprovechar mejor el papel. |
 
 ---
 
-*Última actualización: 2026-05-20 — Normalización de Calles e Impresión de Credenciales — Antigravity/Gemini*
+*Última actualización: 2026-05-21 — Optimización de Renglones en Impresión — Antigravity/Gemini*
 
