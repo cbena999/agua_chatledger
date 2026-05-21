@@ -223,7 +223,15 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 *   **Manuales Operativos Creados**: Se generaron los documentos `doc_cajero_transiciones_estado.md`, `doc_tesorero_corte_cartera.md` y `doc_ejecutivo_comite.md` detallando las reglas de paridad, el modelo homologado de Cartera Vencida y la matriz de los 6 casos de transición de estados de contrato.
 *   **Blindaje Extremo NTFS**: Se actualizó `protect-folder.ps1` para aplicar bloqueos `(DE, DC)` directamente a la carpeta `$desktop\aguaV2` en lugar de solo a los `.lnk` internos. Esto impide el arrastre a papelera y borrado de los atajos administrativos.
 
-**Última actualización**: 2026-05-18
+**Sincronización B→A y Hardening MySQL (2026-05-19):**
+*   **Fix Truncamiento de Datos**: Se identificó y resolvió una pérdida silenciosa de datos en la migración Host B → Host A causada por el límite `max_allowed_packet` (1MB). El script `run_sync.sh` fue endurecido con los parámetros extendidos (`--max_allowed_packet=512M`, `--net_buffer_length=10M`).
+*   **Auditoría y Paridad**: Se generaron reportes para identificar los contratos omitidos y se ejecutó un Full Sync restaurando la paridad estructural completa entre los Hosts A, B y C.
+
+**Normalización de Calles y Reporte de Impresión de Credenciales (2026-05-20):**
+*   **Agrupamiento de Calles Robusto**: Se implementó una lógica de agrupamiento por expresiones regulares en `listadeudoresxc.php` para normalizar acentos, números ordinales y calificativos de dirección en las calles, evitando truncamiento de palabras clave como "NORTE".
+*   **Impresión de Credenciales en Lote**: Se diseñó un nuevo visualizador tamaño Carta en `imprimir_credencial.php` que acomoda hasta 3 credenciales de `8.8 x 5.8 cm` por cara con guías de corte y línea discontinua de doblez central. Integrado mediante popup en `ficha.php`.
+
+**Última actualización**: 2026-05-20
 
 
 

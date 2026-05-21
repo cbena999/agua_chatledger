@@ -7,9 +7,8 @@
 | **Trajectory ID** | `21ec37eb-bb92-4baa-886e-1622f837fd0e` |
 | **Cascade ID** | `52000199-3794-4c49-b9d4-373024a9f0b1` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 287 |
+| **Total Steps** | 392 |
 | **Started** | 16 May 2026, 5:58 pm |
-| **Completed** | 16 May 2026, 11:54 pm |
 
 ---
 
@@ -4602,6 +4601,2627 @@ I've established crucial tool usage rules: no `cat` for file creation/appending 
 - **Thinking Duration:** 1.492853005s
 - **Model:** Gemini 3.1 Pro (Low)
 </details>
+
+---
+
+## User Request
+
+Sobre el Plan B: La integración Directa (Modo Pro), investiga en forma precisa, como realizarlo con:
+La extension Codex – OpenAI’s coding agent: openai.chatgpt, Version 26.513.21555
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools tailored to particular tasks, like viewing files. This strategy promises a more targeted and less error-prone approach to problem-solving, which I will continue to refine and implement moving forward.
+
+
+
+
+### Actions
+
+**Tool:** `search_web`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.283496893s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### Web Research
+
+**Status:** Completed
+**Created:** 18 May 2026, 7:33 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools like 'view_file' directly, rather than resorting to broader, less direct methods. I'm aiming for targeted actions.
+
+
+**Refining Tool Choices**
+
+I'm now zeroing in on preferred tool selection. I'm focusing on adhering to strict guidelines on when and how tools are employed, prioritizing direct actions. This means avoiding `cat` for file creation and `grep` within bash unless it's the last resort. I'm preparing to provide exact instructions for configuring the local Ollama endpoint for the ChatGPT extension, which is usually mapped via `chatgpt`.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.986292471s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+## User Request
+
+Activation
+Activated by onStartupFinished event: 27ms
+
+Messages (1)
+ chatSessions/newSession is a proposed menu identifier. It requires 'package.json#enabledApiProposals: ["chatSessionsProvider"]' and is only available when running out of dev or with the following command line switch: --enable-proposed-api openai.chatgpt
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now prioritizing the most useful tools available to me. I need to make sure I'm using the best tool for each given task. Considering the context, I think a strategic approach to selecting the right tool is the key to achieving the desired outcome here.
+
+
+**Refining Tool Selection**
+
+I'm now zeroing in on more precise tool selection. I must apply strict rules: no `cat` for file creation/appending, `grep_search` is preferred over embedded `grep`, and avoiding `ls`, `cat`, `grep`, and `sed` for their basic functions. I am explicitly brainstorming all related tools before making any tool calls. I'm focusing on the "proposed" API and the error message regarding `chatSessions/newSession` with the `openai.chatgpt` extension and VS Code.
+
+
+
+
+### Actions
+
+**Tool:** `command_status`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.294378210s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### Process Monitor
+
+**Status:** Completed
+**Created:** 18 May 2026, 7:43 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools tailored to particular tasks, like viewing files. This strategy promises a more targeted and less error-prone approach to problem-solving, which I will continue to refine and implement moving forward.
+
+
+**Analyzing Extension Dependencies**
+
+I'm now investigating the VS Code extension error, specifically the `chatSessions/newSession` identifier. My current focus is identifying the missing dependencies and configurations, like the `package.json` setup and command-line switches required. This is a preliminary assessment of why the extension failed. I'm moving toward troubleshooting the installation.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.241854870s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+## User Request
+
+Solo me aparecen estas opciones para la ext, investiga en hoy 2026
+Codex: Add File to Codex Thread other commands
+Codex: Add to Codex Thread
+Codex: Focus on Codex View
+Codex: New Codex Agent
+Codex: New Thread in Codex Sidebar Ctrl + N
+Codex: Open Codex Command Menu
+Codex: Open Codex Sidebar
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools like 'view_file' directly, rather than resorting to broader, less direct methods. I'm aiming for targeted actions.
+
+
+**Refining Tool Choices**
+
+I'm now prioritizing direct tool usage based on specific commands available, avoiding unnecessary bash commands. I'm focusing on the available extension commands to configure a plugin without settings options. My current focus is to avoid generic methods, always explicitly listing related tool options before executing a set. My plan is to investigate the existing extension commands to see if they're sufficient, or if further actions are needed.
+
+
+
+
+### Actions
+
+**Tool:** `search_web`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.227598723s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### Web Research
+
+**Status:** Completed
+**Created:** 18 May 2026, 7:53 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools tailored to particular tasks, like viewing files. This strategy promises a more targeted and less error-prone approach to problem-solving, which I will continue to refine and implement moving forward.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.313652943s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+## User Request
+
+antes: como saber so ollama esta listo escuchando  y qwen2.5-coder:7b disponible ?
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on prioritizing tool usage, especially considering the available options like 'view_file' and terminal command execution. My aim is to efficiently and effectively use the right tool for the right job, ensuring that I leverage the optimal resources.
+
+
+**Refining Tool Selection**
+
+I'm now refining my approach to tool selection, adhering strictly to the new guidelines. I've focused on ensuring I use 'grep_search' instead of running 'grep' within Bash commands, and avoiding redundant tool usage. To address the user's query, I will now craft an effective set of terminal commands, starting by listing relevant tools. I think I will use the `systemctl status ollama` command for now.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.133367906s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 18 May 2026, 8:07 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools like 'view_file' directly, rather than resorting to broader, less direct methods. I'm aiming for targeted actions.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.486061479s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+## User Request
+
+Revisa /home/carlos/progreso_modelos.log  determina si ya se descaron, configuraron y estan listos todos los modelos de instalar_todos_modelos_factibles.sh
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools like 'view_file' directly, rather than resorting to broader, less direct methods. I'm aiming for targeted actions.
+
+
+**Refining Tool Choice**
+
+I've decided to prioritize `ollama list` and `view_file` for this task. I'm focusing on using `ollama list` directly to check the model status, and `view_file` to review the log for context. This should allow a direct and more efficient solution.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `progreso_modelos.log`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.425888868s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+=== Instalador Maestro de Modelos Locales (Host: Ubuntu 22, 32GB RAM, 4GB VRAM) ===
+Espacio disponible verificado: ~343 GB
+Espacio estimado a descargar: ~55 GB
+-----------------------------------------------------------------------------------
+
+--- MODELOS PARA AUTOCOMPLETADO (100% en VRAM, ultra rápidos) ---
+1/10. Descargando Qwen 2.5 Coder (1.5B)...
+[?2026h[?25l[1Gpulling manifest ⠋ [K[?25h[?2026l[?2026h[?25l[1Gpulling manifest ⠹ [K[?25h[?2026l[?2026h[?25l[1Gpulling manifest ⠹ [K[?25h[?2026l[?2026h[?25l[1Gpulling manifest ⠼ [K[?25h[?2026l[?2026h[?25l[1Gpulling manifest ⠼ [K[?25h[?2026l[?2026h[?25l[1Gpulling manifest ⠦ [K[?25h[?2026l[?2026h[?25l[1Gpulling manifest ⠦ [K[?25h[?2026l[?2026h[?25l[1Gpulling manifest ⠇ [K[?25h[?2026l[?2026h[?25l[1Gpulling manifest ⠇ [K[?25h[?2026l[?2026h[?25l[1Gpulling manifest ⠏ [K[?25h[?2026l[?2026h[?25l[1Gpulling manifest ⠙ [K[?25h[?2026l[?2026h[?25l[1Gpulling manifest ⠙ [K[?25h[?2026l[?2026h[?25l[1Gpulling manifest ⠸ [K[?25h[?2026l[?2026h[?25l[1Gpulling manifest ⠸ [K[?25h[?2026l[?2026h[?25l[1Gpulling manifest ⠼ [K[?25h[?2026l[?2026h[?25l[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   0% ▕                  ▏ 1.5 MB/986 MB                  [K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   0% ▕                  ▏ 4.2 MB/986 MB                  [K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   1% ▕                  ▏ 5.1 MB/986 MB                  [K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   1% ▕                  ▏ 6.8 MB/986 MB                  [K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   1% ▕                  ▏ 8.5 MB/986 MB                  [K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   1% ▕                  ▏ 9.4 MB/986 MB                  [K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   1% ▕                  ▏  11 MB/986 MB                  [K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   1% ▕                  ▏  11 MB/986 MB                  [K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   1% ▕                  ▏  12 MB/986 MB                  [K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   2% ▕                  ▏  15 MB/986 MB                  [K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   2% ▕                  ▏  17 MB/986 MB   15 MB/s    1m0s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   2% ▕                  ▏  18 MB/986 MB   15 MB/s    1m0s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   2% ▕                  ▏  19 MB/986 MB   15 MB/s    1m0s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   2% ▕                  ▏  21 MB/986 MB   15 MB/s    1m0s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   2% ▕                  ▏  22 MB/986 MB   15 MB/s    1m0s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   2% ▕                  ▏  23 MB/986 MB   15 MB/s    1m0s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   3% ▕                  ▏  25 MB/986 MB   15 MB/s    1m0s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   3% ▕                  ▏  26 MB/986 MB   15 MB/s    1m0s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   3% ▕                  ▏  28 MB/986 MB   15 MB/s     59s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   3% ▕                  ▏  29 MB/986 MB   15 MB/s     59s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   3% ▕                  ▏  30 MB/986 MB   15 MB/s    1m2s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   3% ▕                  ▏  32 MB/986 MB   15 MB/s    1m2s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   3% ▕                  ▏  34 MB/986 MB   15 MB/s    1m2s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   4% ▕                  ▏  34 MB/986 MB   15 MB/s    1m2s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   4% ▕                  ▏  36 MB/986 MB   15 MB/s    1m2s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   4% ▕                  ▏  38 MB/986 MB   15 MB/s    1m2s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   4% ▕                  ▏  39 MB/986 MB   15 MB/s    1m2s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   4% ▕                  ▏  40 MB/986 MB   15 MB/s    1m2s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   4% ▕                  ▏  42 MB/986 MB   15 MB/s    1m1s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   4% ▕                  ▏  43 MB/986 MB   15 MB/s    1m1s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   5% ▕                  ▏  45 MB/986 MB   15 MB/s    1m2s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   5% ▕                  ▏  46 MB/986 MB   15 MB/s    1m2s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   5% ▕                  ▏  47 MB/986 MB   15 MB/s    1m2s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   5% ▕                  ▏  49 MB/986 MB   15 MB/s    1m2s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   5% ▕                  ▏  51 MB/986 MB   15 MB/s    1m2s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   5% ▕                  ▏  52 MB/986 MB   15 MB/s    1m2s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   5% ▕                  ▏  53 MB/986 MB   15 MB/s    1m2s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   6% ▕█                 ▏  55 MB/986 MB   15 MB/s    1m2s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   6% ▕█                 ▏  56 MB/986 MB   15 MB/s    1m1s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   6% ▕█                 ▏  57 MB/986 MB   15 MB/s    1m1s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   6% ▕█                 ▏  59 MB/986 MB   14 MB/s    1m2s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   6% ▕█                 ▏  60 MB/986 MB   14 MB/s    1m2s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   6% ▕█                 ▏  62 MB/986 MB   14 MB/s    1m2s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   7% ▕█                 ▏  64 MB/986 MB   14 MB/s    1m1s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   7% ▕█                 ▏  65 MB/986 MB   14 MB/s    1m1s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   7% ▕█                 ▏  66 MB/986 MB   14 MB/s    1m1s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   7% ▕█                 ▏  68 MB/986 MB   14 MB/s    1m1s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   7% ▕█                 ▏  69 MB/986 MB   14 MB/s    1m1s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   7% ▕█                 ▏  70 MB/986 MB   14 MB/s    1m1s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   7% ▕█                 ▏  72 MB/986 MB   14 MB/s    1m1s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   7% ▕█                 ▏  73 MB/986 MB   14 MB/s    1m1s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   8% ▕█                 ▏  75 MB/986 MB   14 MB/s    1m1s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   8% ▕█                 ▏  76 MB/986 MB   14 MB/s    1m1s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   8% ▕█                 ▏  77 MB/986 MB   14 MB/s    1m1s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   8% ▕█                 ▏  78 MB/986 MB   14 MB/s    1m1s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   8% ▕█                 ▏  80 MB/986 MB   14 MB/s    1m1s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   8% ▕█                 ▏  81 MB/986 MB   14 MB/s    1m1s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   8% ▕█                 ▏  83 MB/986 MB   14 MB/s    1m0s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   9% ▕█                 ▏  84 MB/986 MB   14 MB/s    1m0s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   9% ▕█                 ▏  85 MB/986 MB   14 MB/s    1m0s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   9% ▕█                 ▏  87 MB/986 MB   14 MB/s    1m0s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   9% ▕█                 ▏  89 MB/986 MB   14 MB/s    1m1s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   9% ▕█                 ▏  89 MB/986 MB   14 MB/s    1m1s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   9% ▕█                 ▏  91 MB/986 MB   14 MB/s    1m0s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:   9% ▕█                 ▏  93 MB/986 MB   14 MB/s    1m0s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  10% ▕█                 ▏  94 MB/986 MB   14 MB/s    1m0s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  10% ▕█                 ▏  96 MB/986 MB   14 MB/s    1m0s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  10% ▕█                 ▏  97 MB/986 MB   14 MB/s    1m0s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  10% ▕█                 ▏  98 MB/986 MB   14 MB/s    1m0s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  10% ▕█                 ▏ 100 MB/986 MB   14 MB/s    1m0s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  10% ▕█                 ▏ 102 MB/986 MB   14 MB/s    1m0s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  10% ▕█                 ▏ 102 MB/986 MB   14 MB/s    1m0s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  11% ▕█                 ▏ 104 MB/986 MB   14 MB/s    1m0s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  11% ▕█                 ▏ 106 MB/986 MB   14 MB/s     59s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  11% ▕█                 ▏ 106 MB/986 MB   14 MB/s     59s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  11% ▕█                 ▏ 108 MB/986 MB   14 MB/s     59s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  11% ▕██                ▏ 110 MB/986 MB   14 MB/s     59s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  11% ▕██                ▏ 111 MB/986 MB   14 MB/s     59s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  11% ▕██                ▏ 113 MB/986 MB   14 MB/s     59s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  12% ▕██                ▏ 114 MB/986 MB   14 MB/s     59s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  12% ▕██                ▏ 115 MB/986 MB   14 MB/s     59s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  12% ▕██                ▏ 117 MB/986 MB   14 MB/s     59s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  12% ▕██                ▏ 119 MB/986 MB   14 MB/s     59s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  12% ▕██                ▏ 120 MB/986 MB   14 MB/s     59s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  12% ▕██                ▏ 121 MB/986 MB   14 MB/s     58s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  13% ▕██                ▏ 123 MB/986 MB   14 MB/s     58s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  13% ▕██                ▏ 124 MB/986 MB   14 MB/s     58s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  13% ▕██                ▏ 126 MB/986 MB   14 MB/s     58s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  13% ▕██                ▏ 127 MB/986 MB   14 MB/s     58s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  13% ▕██                ▏ 128 MB/986 MB   14 MB/s     58s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  13% ▕██                ▏ 130 MB/986 MB   14 MB/s     58s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  13% ▕██                ▏ 132 MB/986 MB   14 MB/s     58s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  14% ▕██                ▏ 133 MB/986 MB   14 MB/s     58s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  14% ▕██                ▏ 135 MB/986 MB   14 MB/s     57s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  14% ▕██                ▏ 136 MB/986 MB   14 MB/s     57s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  14% ▕██                ▏ 137 MB/986 MB   14 MB/s     57s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  14% ▕██                ▏ 139 MB/986 MB   14 MB/s     57s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  14% ▕██                ▏ 141 MB/986 MB   14 MB/s     57s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  14% ▕██                ▏ 141 MB/986 MB   14 MB/s     57s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  15% ▕██                ▏ 143 MB/986 MB   14 MB/s     57s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  15% ▕██                ▏ 145 MB/986 MB   14 MB/s     57s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  15% ▕██                ▏ 146 MB/986 MB   14 MB/s     57s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  15% ▕██                ▏ 148 MB/986 MB   14 MB/s     57s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  15% ▕██                ▏ 149 MB/986 MB   14 MB/s     57s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  15% ▕██                ▏ 150 MB/986 MB   14 MB/s     57s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  15% ▕██                ▏ 152 MB/986 MB   14 MB/s     57s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  16% ▕██                ▏ 152 MB/986 MB   14 MB/s     57s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  16% ▕██                ▏ 154 MB/986 MB   14 MB/s     57s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  16% ▕██                ▏ 156 MB/986 MB   14 MB/s     56s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  16% ▕██                ▏ 158 MB/986 MB   14 MB/s     56s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  16% ▕██                ▏ 159 MB/986 MB   14 MB/s     56s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  16% ▕██                ▏ 161 MB/986 MB   14 MB/s     56s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  17% ▕██                ▏ 162 MB/986 MB   14 MB/s     56s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  17% ▕██                ▏ 163 MB/986 MB   14 MB/s     56s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  17% ▕███               ▏ 165 MB/986 MB   14 MB/s     56s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  17% ▕███               ▏ 167 MB/986 MB   14 MB/s     56s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  17% ▕███               ▏ 167 MB/986 MB   14 MB/s     56s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  17% ▕███               ▏ 169 MB/986 MB   14 MB/s     55s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  17% ▕███               ▏ 171 MB/986 MB   14 MB/s     55s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  17% ▕███               ▏ 172 MB/986 MB   14 MB/s     55s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  18% ▕███               ▏ 174 MB/986 MB   14 MB/s     55s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  18% ▕███               ▏ 175 MB/986 MB   14 MB/s     55s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  18% ▕███               ▏ 176 MB/986 MB   14 MB/s     55s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  18% ▕███               ▏ 178 MB/986 MB   14 MB/s     55s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  18% ▕███               ▏ 179 MB/986 MB   14 MB/s     55s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  18% ▕███               ▏ 179 MB/986 MB   14 MB/s     55s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  18% ▕███               ▏ 181 MB/986 MB   14 MB/s     55s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  19% ▕███               ▏ 183 MB/986 MB   14 MB/s     54s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  19% ▕███               ▏ 183 MB/986 MB   14 MB/s     54s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  19% ▕███               ▏ 187 MB/986 MB   14 MB/s     54s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  19% ▕███               ▏ 188 MB/986 MB   14 MB/s     54s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  19% ▕███               ▏ 189 MB/986 MB   14 MB/s     54s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  19% ▕███               ▏ 191 MB/986 MB   14 MB/s     54s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  20% ▕███               ▏ 192 MB/986 MB   14 MB/s     54s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  20% ▕███               ▏ 193 MB/986 MB   14 MB/s     54s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  20% ▕███               ▏ 195 MB/986 MB   14 MB/s     53s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  20% ▕███               ▏ 197 MB/986 MB   14 MB/s     53s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  20% ▕███               ▏ 198 MB/986 MB   14 MB/s     53s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  20% ▕███               ▏ 199 MB/986 MB   14 MB/s     53s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  20% ▕███               ▏ 201 MB/986 MB   14 MB/s     53s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  21% ▕███               ▏ 202 MB/986 MB   14 MB/s     53s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  21% ▕███               ▏ 204 MB/986 MB   14 MB/s     53s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  21% ▕███               ▏ 206 MB/986 MB   14 MB/s     53s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  21% ▕███               ▏ 206 MB/986 MB   14 MB/s     53s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  21% ▕███               ▏ 208 MB/986 MB   14 MB/s     53s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  21% ▕███               ▏ 210 MB/986 MB   14 MB/s     52s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  21% ▕███               ▏ 211 MB/986 MB   14 MB/s     52s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  22% ▕███               ▏ 212 MB/986 MB   14 MB/s     52s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  22% ▕███               ▏ 214 MB/986 MB   14 MB/s     52s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  22% ▕███               ▏ 215 MB/986 MB   14 MB/s     52s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  22% ▕███               ▏ 216 MB/986 MB   14 MB/s     52s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  22% ▕███               ▏ 218 MB/986 MB   14 MB/s     52s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  22% ▕████              ▏ 219 MB/986 MB   14 MB/s     52s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  22% ▕████              ▏ 221 MB/986 MB   14 MB/s     52s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  23% ▕████              ▏ 222 MB/986 MB   14 MB/s     52s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  23% ▕████              ▏ 223 MB/986 MB   14 MB/s     51s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  23% ▕████              ▏ 225 MB/986 MB   14 MB/s     51s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  23% ▕████              ▏ 227 MB/986 MB   14 MB/s     51s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  23% ▕████              ▏ 227 MB/986 MB   14 MB/s     51s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  23% ▕████              ▏ 229 MB/986 MB   14 MB/s     51s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  23% ▕████              ▏ 231 MB/986 MB   14 MB/s     51s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  24% ▕████              ▏ 232 MB/986 MB   14 MB/s     51s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  24% ▕████              ▏ 233 MB/986 MB   14 MB/s     51s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  24% ▕████              ▏ 235 MB/986 MB   14 MB/s     51s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  24% ▕████              ▏ 236 MB/986 MB   14 MB/s     51s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  24% ▕████              ▏ 238 MB/986 MB   14 MB/s     51s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  24% ▕████              ▏ 239 MB/986 MB   14 MB/s     50s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  24% ▕████              ▏ 240 MB/986 MB   14 MB/s     50s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  25% ▕████              ▏ 242 MB/986 MB   14 MB/s     50s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  25% ▕████              ▏ 244 MB/986 MB   14 MB/s     50s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  25% ▕████              ▏ 245 MB/986 MB   14 MB/s     50s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  25% ▕████              ▏ 246 MB/986 MB   14 MB/s     50s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  25% ▕████              ▏ 248 MB/986 MB   14 MB/s     50s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  25% ▕████              ▏ 249 MB/986 MB   14 MB/s     50s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  25% ▕████              ▏ 250 MB/986 MB   14 MB/s     50s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  26% ▕████              ▏ 252 MB/986 MB   14 MB/s     50s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  26% ▕████              ▏ 253 MB/986 MB   14 MB/s     50s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  26% ▕████              ▏ 254 MB/986 MB   14 MB/s     49s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  26% ▕████              ▏ 256 MB/986 MB   14 MB/s     49s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  26% ▕████              ▏ 257 MB/986 MB   14 MB/s     49s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  26% ▕████              ▏ 259 MB/986 MB   14 MB/s     49s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  26% ▕████              ▏ 261 MB/986 MB   14 MB/s     49s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  27% ▕████              ▏ 261 MB/986 MB   14 MB/s     49s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  27% ▕████              ▏ 263 MB/986 MB   14 MB/s     49s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  27% ▕████              ▏ 265 MB/986 MB   14 MB/s     49s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  27% ▕████              ▏ 265 MB/986 MB   14 MB/s     49s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  27% ▕████              ▏ 267 MB/986 MB   14 MB/s     49s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  27% ▕████              ▏ 269 MB/986 MB   14 MB/s     49s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  27% ▕████              ▏ 270 MB/986 MB   14 MB/s     49s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  28% ▕████              ▏ 271 MB/986 MB   14 MB/s     49s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  28% ▕████              ▏ 273 MB/986 MB   14 MB/s     48s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  28% ▕█████             ▏ 274 MB/986 MB   14 MB/s     48s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  28% ▕█████             ▏ 275 MB/986 MB   14 MB/s     48s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  28% ▕█████             ▏ 277 MB/986 MB   14 MB/s     48s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  28% ▕█████             ▏ 278 MB/986 MB   14 MB/s     48s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  28% ▕█████             ▏ 280 MB/986 MB   14 MB/s     48s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  29% ▕█████             ▏ 281 MB/986 MB   14 MB/s     48s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  29% ▕█████             ▏ 282 MB/986 MB   14 MB/s     48s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  29% ▕█████             ▏ 284 MB/986 MB   14 MB/s     48s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  29% ▕█████             ▏ 286 MB/986 MB   14 MB/s     48s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  29% ▕█████             ▏ 286 MB/986 MB   14 MB/s     48s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  29% ▕█████             ▏ 288 MB/986 MB   14 MB/s     48s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  29% ▕█████             ▏ 290 MB/986 MB   14 MB/s     48s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  29% ▕█████             ▏ 290 MB/986 MB   14 MB/s     47s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  30% ▕█████             ▏ 292 MB/986 MB   14 MB/s     48s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  30% ▕█████             ▏ 293 MB/986 MB   14 MB/s     48s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  30% ▕█████             ▏ 294 MB/986 MB   14 MB/s     48s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  30% ▕█████             ▏ 296 MB/986 MB   14 MB/s     47s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  30% ▕█████             ▏ 297 MB/986 MB   14 MB/s     47s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  30% ▕█████             ▏ 298 MB/986 MB   14 MB/s     47s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  30% ▕█████             ▏ 299 MB/986 MB   14 MB/s     47s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  31% ▕█████             ▏ 301 MB/986 MB   14 MB/s     47s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  31% ▕█████             ▏ 302 MB/986 MB   14 MB/s     47s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  31% ▕█████             ▏ 304 MB/986 MB   14 MB/s     47s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  31% ▕█████             ▏ 305 MB/986 MB   14 MB/s     47s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  31% ▕█████             ▏ 306 MB/986 MB   14 MB/s     47s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  31% ▕█████             ▏ 307 MB/986 MB   14 MB/s     47s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  31% ▕█████             ▏ 308 MB/986 MB   14 MB/s     47s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  31% ▕█████             ▏ 310 MB/986 MB   14 MB/s     47s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  32% ▕█████             ▏ 312 MB/986 MB   14 MB/s     47s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  32% ▕█████             ▏ 313 MB/986 MB   14 MB/s     47s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  32% ▕█████             ▏ 314 MB/986 MB   14 MB/s     47s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  32% ▕█████             ▏ 316 MB/986 MB   14 MB/s     47s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  32% ▕█████             ▏ 317 MB/986 MB   14 MB/s     46s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  32% ▕█████             ▏ 318 MB/986 MB   14 MB/s     47s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  32% ▕█████             ▏ 320 MB/986 MB   14 MB/s     47s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  33% ▕█████             ▏ 322 MB/986 MB   14 MB/s     47s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  33% ▕█████             ▏ 322 MB/986 MB   14 MB/s     46s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  33% ▕█████             ▏ 324 MB/986 MB   14 MB/s     46s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  33% ▕█████             ▏ 326 MB/986 MB   14 MB/s     46s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  33% ▕█████             ▏ 326 MB/986 MB   14 MB/s     46s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  33% ▕██████            ▏ 328 MB/986 MB   14 MB/s     46s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  34% ▕██████            ▏ 330 MB/986 MB   14 MB/s     46s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  34% ▕██████            ▏ 331 MB/986 MB   14 MB/s     46s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  34% ▕██████            ▏ 332 MB/986 MB   14 MB/s     46s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  34% ▕██████            ▏ 334 MB/986 MB   14 MB/s     46s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  34% ▕██████            ▏ 335 MB/986 MB   14 MB/s     46s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  34% ▕██████            ▏ 337 MB/986 MB   14 MB/s     46s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  34% ▕██████            ▏ 338 MB/986 MB   14 MB/s     45s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  34% ▕██████            ▏ 339 MB/986 MB   14 MB/s     45s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  35% ▕██████            ▏ 341 MB/986 MB   14 MB/s     45s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  35% ▕██████            ▏ 342 MB/986 MB   14 MB/s     45s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  35% ▕██████            ▏ 343 MB/986 MB   14 MB/s     45s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  35% ▕██████            ▏ 345 MB/986 MB   14 MB/s     45s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  35% ▕██████            ▏ 346 MB/986 MB   14 MB/s     45s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  35% ▕██████            ▏ 347 MB/986 MB   14 MB/s     45s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  35% ▕██████            ▏ 348 MB/986 MB   14 MB/s     45s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  36% ▕██████            ▏ 350 MB/986 MB   14 MB/s     45s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  36% ▕██████            ▏ 351 MB/986 MB   14 MB/s     45s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  36% ▕██████            ▏ 352 MB/986 MB   14 MB/s     45s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  36% ▕██████            ▏ 354 MB/986 MB   14 MB/s     44s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  36% ▕██████            ▏ 355 MB/986 MB   14 MB/s     44s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  36% ▕██████            ▏ 357 MB/986 MB   14 MB/s     44s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  36% ▕██████            ▏ 358 MB/986 MB   14 MB/s     44s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  36% ▕██████            ▏ 359 MB/986 MB   14 MB/s     44s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  37% ▕██████            ▏ 361 MB/986 MB   13 MB/s     44s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  37% ▕██████            ▏ 363 MB/986 MB   13 MB/s     44s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  37% ▕██████            ▏ 363 MB/986 MB   13 MB/s     44s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  37% ▕██████            ▏ 365 MB/986 MB   13 MB/s     44s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  37% ▕██████            ▏ 367 MB/986 MB   13 MB/s     44s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  37% ▕██████            ▏ 368 MB/986 MB   13 MB/s     44s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  38% ▕██████            ▏ 369 MB/986 MB   13 MB/s     44s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  38% ▕██████            ▏ 371 MB/986 MB   13 MB/s     43s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  38% ▕██████            ▏ 372 MB/986 MB   13 MB/s     43s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  38% ▕██████            ▏ 374 MB/986 MB   13 MB/s     43s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  38% ▕██████            ▏ 375 MB/986 MB   13 MB/s     43s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  38% ▕██████            ▏ 376 MB/986 MB   13 MB/s     43s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  38% ▕██████            ▏ 378 MB/986 MB   13 MB/s     43s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  39% ▕██████            ▏ 380 MB/986 MB   13 MB/s     43s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  39% ▕██████            ▏ 380 MB/986 MB   13 MB/s     43s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  39% ▕██████            ▏ 382 MB/986 MB   13 MB/s     43s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  39% ▕███████           ▏ 384 MB/986 MB   13 MB/s     43s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  39% ▕███████           ▏ 385 MB/986 MB   13 MB/s     42s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  39% ▕███████           ▏ 386 MB/986 MB   13 MB/s     42s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  39% ▕███████           ▏ 388 MB/986 MB   13 MB/s     42s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  39% ▕███████           ▏ 389 MB/986 MB   13 MB/s     42s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  40% ▕███████           ▏ 391 MB/986 MB   13 MB/s     42s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  40% ▕███████           ▏ 392 MB/986 MB   13 MB/s     42s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  40% ▕███████           ▏ 393 MB/986 MB   13 MB/s     42s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  40% ▕███████           ▏ 395 MB/986 MB   13 MB/s     42s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  40% ▕███████           ▏ 397 MB/986 MB   13 MB/s     42s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  40% ▕███████           ▏ 398 MB/986 MB   13 MB/s     42s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  41% ▕███████           ▏ 399 MB/986 MB   13 MB/s     41s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  41% ▕███████           ▏ 401 MB/986 MB   13 MB/s     41s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  41% ▕███████           ▏ 402 MB/986 MB   13 MB/s     41s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  41% ▕███████           ▏ 404 MB/986 MB   14 MB/s     41s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  41% ▕███████           ▏ 406 MB/986 MB   14 MB/s     41s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  41% ▕███████           ▏ 406 MB/986 MB   14 MB/s     41s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  41% ▕███████           ▏ 408 MB/986 MB   14 MB/s     41s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  42% ▕███████           ▏ 410 MB/986 MB   14 MB/s     40s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  42% ▕███████           ▏ 411 MB/986 MB   14 MB/s     40s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  42% ▕███████           ▏ 413 MB/986 MB   14 MB/s     40s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  42% ▕███████           ▏ 414 MB/986 MB   14 MB/s     40s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  42% ▕███████           ▏ 415 MB/986 MB   14 MB/s     40s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  42% ▕███████           ▏ 417 MB/986 MB   14 MB/s     40s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  42% ▕███████           ▏ 419 MB/986 MB   14 MB/s     39s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  43% ▕███████           ▏ 419 MB/986 MB   14 MB/s     39s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  43% ▕███████           ▏ 421 MB/986 MB   14 MB/s     39s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  43% ▕███████           ▏ 423 MB/986 MB   14 MB/s     39s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  43% ▕███████           ▏ 424 MB/986 MB   14 MB/s     39s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  43% ▕███████           ▏ 425 MB/986 MB   14 MB/s     39s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  43% ▕███████           ▏ 427 MB/986 MB   14 MB/s     39s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  43% ▕███████           ▏ 428 MB/986 MB   14 MB/s     39s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  44% ▕███████           ▏ 430 MB/986 MB   14 MB/s     39s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  44% ▕███████           ▏ 431 MB/986 MB   14 MB/s     39s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  44% ▕███████           ▏ 432 MB/986 MB   14 MB/s     39s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  44% ▕███████           ▏ 434 MB/986 MB   14 MB/s     38s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  44% ▕███████           ▏ 435 MB/986 MB   14 MB/s     38s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  44% ▕███████           ▏ 436 MB/986 MB   14 MB/s     38s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  44% ▕████████          ▏ 438 MB/986 MB   14 MB/s     38s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  45% ▕████████          ▏ 440 MB/986 MB   14 MB/s     38s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  45% ▕████████          ▏ 440 MB/986 MB   14 MB/s     38s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  45% ▕████████          ▏ 442 MB/986 MB   14 MB/s     38s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  45% ▕████████          ▏ 444 MB/986 MB   14 MB/s     37s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  45% ▕████████          ▏ 444 MB/986 MB   14 MB/s     37s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  45% ▕████████          ▏ 446 MB/986 MB   14 MB/s     37s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  45% ▕████████          ▏ 448 MB/986 MB   14 MB/s     37s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  46% ▕████████          ▏ 448 MB/986 MB   14 MB/s     37s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  46% ▕████████          ▏ 450 MB/986 MB   14 MB/s     37s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  46% ▕████████          ▏ 452 MB/986 MB   14 MB/s     37s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  46% ▕████████          ▏ 453 MB/986 MB   14 MB/s     37s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  46% ▕████████          ▏ 455 MB/986 MB   14 MB/s     37s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  46% ▕████████          ▏ 456 MB/986 MB   14 MB/s     37s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  46% ▕████████          ▏ 457 MB/986 MB   14 MB/s     36s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  47% ▕████████          ▏ 459 MB/986 MB   14 MB/s     36s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  47% ▕████████          ▏ 461 MB/986 MB   14 MB/s     36s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  47% ▕████████          ▏ 461 MB/986 MB   14 MB/s     36s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  47% ▕████████          ▏ 463 MB/986 MB   14 MB/s     36s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  47% ▕████████          ▏ 465 MB/986 MB   14 MB/s     36s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  47% ▕████████          ▏ 466 MB/986 MB   14 MB/s     36s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  47% ▕████████          ▏ 467 MB/986 MB   14 MB/s     36s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  48% ▕████████          ▏ 469 MB/986 MB   14 MB/s     36s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  48% ▕████████          ▏ 470 MB/986 MB   14 MB/s     35s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  48% ▕████████          ▏ 471 MB/986 MB   14 MB/s     35s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  48% ▕████████          ▏ 473 MB/986 MB   14 MB/s     35s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  48% ▕████████          ▏ 474 MB/986 MB   14 MB/s     35s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  48% ▕████████          ▏ 476 MB/986 MB   14 MB/s     35s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  48% ▕████████          ▏ 477 MB/986 MB   14 MB/s     35s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  49% ▕████████          ▏ 478 MB/986 MB   14 MB/s     35s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  49% ▕████████          ▏ 480 MB/986 MB   14 MB/s     35s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  49% ▕████████          ▏ 481 MB/986 MB   14 MB/s     35s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  49% ▕████████          ▏ 482 MB/986 MB   14 MB/s     34s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  49% ▕████████          ▏ 484 MB/986 MB   14 MB/s     34s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  49% ▕████████          ▏ 486 MB/986 MB   14 MB/s     34s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  49% ▕████████          ▏ 487 MB/986 MB   14 MB/s     34s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  50% ▕████████          ▏ 488 MB/986 MB   14 MB/s     34s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  50% ▕████████          ▏ 490 MB/986 MB   14 MB/s     34s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  50% ▕████████          ▏ 491 MB/986 MB   14 MB/s     34s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  50% ▕█████████         ▏ 493 MB/986 MB   14 MB/s     34s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  50% ▕█████████         ▏ 494 MB/986 MB   14 MB/s     34s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  50% ▕█████████         ▏ 495 MB/986 MB   14 MB/s     33s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  50% ▕█████████         ▏ 497 MB/986 MB   14 MB/s     33s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  51% ▕█████████         ▏ 499 MB/986 MB   14 MB/s     33s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  51% ▕█████████         ▏ 499 MB/986 MB   14 MB/s     33s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  51% ▕█████████         ▏ 501 MB/986 MB   14 MB/s     33s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  51% ▕█████████         ▏ 503 MB/986 MB   14 MB/s     33s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  51% ▕█████████         ▏ 503 MB/986 MB   14 MB/s     33s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  51% ▕█████████         ▏ 505 MB/986 MB   14 MB/s     33s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  51% ▕█████████         ▏ 507 MB/986 MB   14 MB/s     33s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  52% ▕█████████         ▏ 508 MB/986 MB   14 MB/s     33s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  52% ▕█████████         ▏ 509 MB/986 MB   14 MB/s     33s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  52% ▕█████████         ▏ 511 MB/986 MB   14 MB/s     32s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  52% ▕█████████         ▏ 512 MB/986 MB   14 MB/s     32s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  52% ▕█████████         ▏ 514 MB/986 MB   14 MB/s     32s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  52% ▕█████████         ▏ 515 MB/986 MB   14 MB/s     32s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  52% ▕█████████         ▏ 516 MB/986 MB   14 MB/s     32s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  53% ▕█████████         ▏ 518 MB/986 MB   14 MB/s     32s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  53% ▕█████████         ▏ 519 MB/986 MB   14 MB/s     32s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  53% ▕█████████         ▏ 519 MB/986 MB   14 MB/s     32s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  53% ▕█████████         ▏ 520 MB/986 MB   14 MB/s     32s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  53% ▕█████████         ▏ 522 MB/986 MB   14 MB/s     32s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  53% ▕█████████         ▏ 523 MB/986 MB   14 MB/s     32s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  53% ▕█████████         ▏ 525 MB/986 MB   14 MB/s     31s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  54% ▕█████████         ▏ 527 MB/986 MB   14 MB/s     31s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  54% ▕█████████         ▏ 528 MB/986 MB   14 MB/s     31s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  54% ▕█████████         ▏ 531 MB/986 MB   14 MB/s     31s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  54% ▕█████████         ▏ 532 MB/986 MB   14 MB/s     31s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  54% ▕█████████         ▏ 533 MB/986 MB   14 MB/s     31s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  54% ▕█████████         ▏ 535 MB/986 MB   14 MB/s     31s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  54% ▕█████████         ▏ 536 MB/986 MB   14 MB/s     31s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  55% ▕█████████         ▏ 537 MB/986 MB   14 MB/s     31s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  55% ▕█████████         ▏ 539 MB/986 MB   14 MB/s     31s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  55% ▕█████████         ▏ 541 MB/986 MB   14 MB/s     30s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  55% ▕█████████         ▏ 542 MB/986 MB   14 MB/s     30s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  55% ▕█████████         ▏ 543 MB/986 MB   14 MB/s     30s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  55% ▕█████████         ▏ 545 MB/986 MB   14 MB/s     30s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  55% ▕█████████         ▏ 546 MB/986 MB   14 MB/s     30s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  56% ▕██████████        ▏ 548 MB/986 MB   14 MB/s     30s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  56% ▕██████████        ▏ 550 MB/986 MB   14 MB/s     30s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  56% ▕██████████        ▏ 550 MB/986 MB   14 MB/s     30s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  56% ▕██████████        ▏ 552 MB/986 MB   14 MB/s     30s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  56% ▕██████████        ▏ 554 MB/986 MB   14 MB/s     30s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  56% ▕██████████        ▏ 555 MB/986 MB   14 MB/s     30s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  56% ▕██████████        ▏ 556 MB/986 MB   14 MB/s     29s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  57% ▕██████████        ▏ 558 MB/986 MB   14 MB/s     29s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  57% ▕██████████        ▏ 559 MB/986 MB   14 MB/s     29s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  57% ▕██████████        ▏ 561 MB/986 MB   14 MB/s     29s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  57% ▕██████████        ▏ 563 MB/986 MB   14 MB/s     29s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  57% ▕██████████        ▏ 563 MB/986 MB   14 MB/s     29s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  57% ▕██████████        ▏ 565 MB/986 MB   14 MB/s     29s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  58% ▕██████████        ▏ 567 MB/986 MB   14 MB/s     29s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  58% ▕██████████        ▏ 568 MB/986 MB   14 MB/s     28s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  58% ▕██████████        ▏ 569 MB/986 MB   14 MB/s     28s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  58% ▕██████████        ▏ 571 MB/986 MB   14 MB/s     28s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  58% ▕██████████        ▏ 572 MB/986 MB   14 MB/s     28s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  58% ▕██████████        ▏ 573 MB/986 MB   14 MB/s     28s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  58% ▕██████████        ▏ 575 MB/986 MB   14 MB/s     28s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  58% ▕██████████        ▏ 576 MB/986 MB   14 MB/s     28s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  59% ▕██████████        ▏ 578 MB/986 MB   14 MB/s     28s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  59% ▕██████████        ▏ 579 MB/986 MB   14 MB/s     28s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  59% ▕██████████        ▏ 580 MB/986 MB   14 MB/s     28s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  59% ▕██████████        ▏ 582 MB/986 MB   14 MB/s     27s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  59% ▕██████████        ▏ 583 MB/986 MB   14 MB/s     27s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  59% ▕██████████        ▏ 584 MB/986 MB   14 MB/s     27s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  59% ▕██████████        ▏ 586 MB/986 MB   14 MB/s     27s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  60% ▕██████████        ▏ 587 MB/986 MB   14 MB/s     27s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  60% ▕██████████        ▏ 588 MB/986 MB   14 MB/s     27s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  60% ▕██████████        ▏ 590 MB/986 MB   14 MB/s     27s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  60% ▕██████████        ▏ 591 MB/986 MB   14 MB/s     27s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  60% ▕██████████        ▏ 592 MB/986 MB   14 MB/s     27s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  60% ▕██████████        ▏ 594 MB/986 MB   14 MB/s     27s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  60% ▕██████████        ▏ 595 MB/986 MB   14 MB/s     27s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  61% ▕██████████        ▏ 596 MB/986 MB   14 MB/s     27s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  61% ▕██████████        ▏ 598 MB/986 MB   14 MB/s     27s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  61% ▕██████████        ▏ 600 MB/986 MB   14 MB/s     26s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  61% ▕██████████        ▏ 600 MB/986 MB   14 MB/s     26s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  61% ▕███████████       ▏ 602 MB/986 MB   14 MB/s     26s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  61% ▕███████████       ▏ 604 MB/986 MB   14 MB/s     26s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  61% ▕███████████       ▏ 605 MB/986 MB   14 MB/s     26s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  62% ▕███████████       ▏ 607 MB/986 MB   14 MB/s     26s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  62% ▕███████████       ▏ 608 MB/986 MB   14 MB/s     26s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  62% ▕███████████       ▏ 608 MB/986 MB   14 MB/s     26s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  62% ▕███████████       ▏ 610 MB/986 MB   14 MB/s     26s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  62% ▕███████████       ▏ 612 MB/986 MB   14 MB/s     26s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  62% ▕███████████       ▏ 613 MB/986 MB   14 MB/s     25s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  62% ▕███████████       ▏ 615 MB/986 MB   14 MB/s     25s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  63% ▕███████████       ▏ 617 MB/986 MB   14 MB/s     25s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  63% ▕███████████       ▏ 617 MB/986 MB   14 MB/s     25s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  63% ▕███████████       ▏ 619 MB/986 MB   14 MB/s     25s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  63% ▕███████████       ▏ 621 MB/986 MB   14 MB/s     25s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  63% ▕███████████       ▏ 622 MB/986 MB   14 MB/s     25s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  63% ▕███████████       ▏ 624 MB/986 MB   14 MB/s     25s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  63% ▕███████████       ▏ 625 MB/986 MB   14 MB/s     25s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  64% ▕███████████       ▏ 626 MB/986 MB   14 MB/s     25s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  64% ▕███████████       ▏ 628 MB/986 MB   14 MB/s     24s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  64% ▕███████████       ▏ 630 MB/986 MB   14 MB/s     24s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  64% ▕███████████       ▏ 630 MB/986 MB   14 MB/s     24s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  64% ▕███████████       ▏ 632 MB/986 MB   14 MB/s     24s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  64% ▕███████████       ▏ 634 MB/986 MB   14 MB/s     24s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  64% ▕███████████       ▏ 635 MB/986 MB   14 MB/s     24s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  65% ▕███████████       ▏ 636 MB/986 MB   14 MB/s     24s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  65% ▕███████████       ▏ 638 MB/986 MB   14 MB/s     24s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  65% ▕███████████       ▏ 639 MB/986 MB   14 MB/s     24s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  65% ▕███████████       ▏ 641 MB/986 MB   14 MB/s     23s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  65% ▕███████████       ▏ 642 MB/986 MB   14 MB/s     23s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  65% ▕███████████       ▏ 643 MB/986 MB   14 MB/s     23s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  65% ▕███████████       ▏ 645 MB/986 MB   14 MB/s     23s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  66% ▕███████████       ▏ 646 MB/986 MB   14 MB/s     23s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  66% ▕███████████       ▏ 647 MB/986 MB   14 MB/s     23s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  66% ▕███████████       ▏ 649 MB/986 MB   14 MB/s     23s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  66% ▕███████████       ▏ 651 MB/986 MB   14 MB/s     23s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  66% ▕███████████       ▏ 651 MB/986 MB   14 MB/s     23s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  66% ▕███████████       ▏ 653 MB/986 MB   14 MB/s     23s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  66% ▕███████████       ▏ 655 MB/986 MB   14 MB/s     23s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  67% ▕███████████       ▏ 656 MB/986 MB   14 MB/s     22s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  67% ▕████████████      ▏ 657 MB/986 MB   14 MB/s     22s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  67% ▕████████████      ▏ 659 MB/986 MB   14 MB/s     22s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  67% ▕████████████      ▏ 660 MB/986 MB   14 MB/s     22s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  67% ▕████████████      ▏ 662 MB/986 MB   14 MB/s     22s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  67% ▕████████████      ▏ 663 MB/986 MB   14 MB/s     22s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  67% ▕████████████      ▏ 664 MB/986 MB   14 MB/s     22s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  68% ▕████████████      ▏ 666 MB/986 MB   14 MB/s     22s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  68% ▕████████████      ▏ 668 MB/986 MB   14 MB/s     22s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  68% ▕████████████      ▏ 669 MB/986 MB   14 MB/s     22s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  68% ▕████████████      ▏ 670 MB/986 MB   14 MB/s     21s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  68% ▕████████████      ▏ 672 MB/986 MB   14 MB/s     21s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  68% ▕████████████      ▏ 673 MB/986 MB   14 MB/s     21s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  68% ▕████████████      ▏ 674 MB/986 MB   14 MB/s     21s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  69% ▕████████████      ▏ 676 MB/986 MB   14 MB/s     21s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  69% ▕████████████      ▏ 677 MB/986 MB   14 MB/s     21s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  69% ▕████████████      ▏ 678 MB/986 MB   14 MB/s     21s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  69% ▕████████████      ▏ 680 MB/986 MB   14 MB/s     21s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  69% ▕████████████      ▏ 681 MB/986 MB   14 MB/s     21s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  69% ▕████████████      ▏ 683 MB/986 MB   14 MB/s     21s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  69% ▕████████████      ▏ 684 MB/986 MB   14 MB/s     20s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  70% ▕████████████      ▏ 685 MB/986 MB   14 MB/s     20s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  70% ▕████████████      ▏ 687 MB/986 MB   14 MB/s     20s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  70% ▕████████████      ▏ 689 MB/986 MB   14 MB/s     20s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  70% ▕████████████      ▏ 690 MB/986 MB   14 MB/s     20s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  70% ▕████████████      ▏ 691 MB/986 MB   14 MB/s     20s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  70% ▕████████████      ▏ 693 MB/986 MB   14 MB/s     20s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  70% ▕████████████      ▏ 694 MB/986 MB   14 MB/s     20s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  71% ▕████████████      ▏ 696 MB/986 MB   14 MB/s     20s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  71% ▕████████████      ▏ 697 MB/986 MB   14 MB/s     20s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  71% ▕████████████      ▏ 698 MB/986 MB   14 MB/s     20s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  71% ▕████████████      ▏ 700 MB/986 MB   14 MB/s     19s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  71% ▕████████████      ▏ 702 MB/986 MB   14 MB/s     19s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  71% ▕████████████      ▏ 702 MB/986 MB   14 MB/s     19s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  71% ▕████████████      ▏ 704 MB/986 MB   14 MB/s     19s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  72% ▕████████████      ▏ 706 MB/986 MB   14 MB/s     19s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  72% ▕████████████      ▏ 707 MB/986 MB   14 MB/s     19s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  72% ▕████████████      ▏ 708 MB/986 MB   14 MB/s     19s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  72% ▕████████████      ▏ 710 MB/986 MB   14 MB/s     19s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  72% ▕████████████      ▏ 711 MB/986 MB   14 MB/s     19s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  72% ▕█████████████     ▏ 713 MB/986 MB   14 MB/s     19s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  72% ▕█████████████     ▏ 714 MB/986 MB   14 MB/s     18s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  73% ▕█████████████     ▏ 715 MB/986 MB   14 MB/s     18s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  73% ▕█████████████     ▏ 717 MB/986 MB   14 MB/s     18s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  73% ▕█████████████     ▏ 719 MB/986 MB   14 MB/s     18s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  73% ▕█████████████     ▏ 720 MB/986 MB   14 MB/s     18s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  73% ▕█████████████     ▏ 721 MB/986 MB   14 MB/s     18s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  73% ▕█████████████     ▏ 723 MB/986 MB   14 MB/s     18s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  73% ▕█████████████     ▏ 724 MB/986 MB   14 MB/s     18s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  74% ▕█████████████     ▏ 726 MB/986 MB   14 MB/s     17s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  74% ▕█████████████     ▏ 727 MB/986 MB   14 MB/s     17s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  74% ▕█████████████     ▏ 728 MB/986 MB   14 MB/s     17s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  74% ▕█████████████     ▏ 730 MB/986 MB   14 MB/s     17s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  74% ▕█████████████     ▏ 731 MB/986 MB   14 MB/s     17s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  74% ▕█████████████     ▏ 732 MB/986 MB   14 MB/s     17s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  74% ▕█████████████     ▏ 734 MB/986 MB   14 MB/s     17s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  75% ▕█████████████     ▏ 736 MB/986 MB   14 MB/s     17s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  75% ▕█████████████     ▏ 737 MB/986 MB   14 MB/s     17s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  75% ▕█████████████     ▏ 738 MB/986 MB   14 MB/s     17s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  75% ▕█████████████     ▏ 740 MB/986 MB   14 MB/s     16s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  75% ▕█████████████     ▏ 741 MB/986 MB   14 MB/s     16s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  75% ▕█████████████     ▏ 743 MB/986 MB   14 MB/s     16s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  76% ▕█████████████     ▏ 744 MB/986 MB   14 MB/s     16s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  76% ▕█████████████     ▏ 745 MB/986 MB   14 MB/s     16s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  76% ▕█████████████     ▏ 747 MB/986 MB   14 MB/s     16s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  76% ▕█████████████     ▏ 749 MB/986 MB   14 MB/s     16s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  76% ▕█████████████     ▏ 750 MB/986 MB   14 MB/s     16s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  76% ▕█████████████     ▏ 751 MB/986 MB   14 MB/s     16s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  76% ▕█████████████     ▏ 753 MB/986 MB   14 MB/s     16s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  76% ▕█████████████     ▏ 753 MB/986 MB   14 MB/s     16s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  77% ▕█████████████     ▏ 754 MB/986 MB   14 MB/s     15s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  77% ▕█████████████     ▏ 756 MB/986 MB   14 MB/s     15s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  77% ▕█████████████     ▏ 758 MB/986 MB   14 MB/s     15s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  77% ▕█████████████     ▏ 760 MB/986 MB   14 MB/s     15s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  77% ▕█████████████     ▏ 762 MB/986 MB   14 MB/s     15s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  77% ▕█████████████     ▏ 763 MB/986 MB   14 MB/s     15s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  78% ▕█████████████     ▏ 764 MB/986 MB   14 MB/s     15s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  78% ▕█████████████     ▏ 766 MB/986 MB   14 MB/s     15s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  78% ▕██████████████    ▏ 767 MB/986 MB   14 MB/s     15s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  78% ▕██████████████    ▏ 769 MB/986 MB   14 MB/s     14s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  78% ▕██████████████    ▏ 770 MB/986 MB   14 MB/s     14s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  78% ▕██████████████    ▏ 771 MB/986 MB   14 MB/s     14s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  78% ▕██████████████    ▏ 773 MB/986 MB   14 MB/s     14s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  79% ▕██████████████    ▏ 775 MB/986 MB   14 MB/s     14s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  79% ▕██████████████    ▏ 776 MB/986 MB   14 MB/s     14s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  79% ▕██████████████    ▏ 778 MB/986 MB   14 MB/s     14s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  79% ▕██████████████    ▏ 779 MB/986 MB   14 MB/s     14s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  79% ▕██████████████    ▏ 780 MB/986 MB   14 MB/s     14s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  79% ▕██████████████    ▏ 782 MB/986 MB   14 MB/s     13s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  80% ▕██████████████    ▏ 784 MB/986 MB   14 MB/s     13s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  80% ▕██████████████    ▏ 785 MB/986 MB   14 MB/s     13s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  80% ▕██████████████    ▏ 786 MB/986 MB   14 MB/s     13s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  80% ▕██████████████    ▏ 788 MB/986 MB   14 MB/s     13s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  80% ▕██████████████    ▏ 789 MB/986 MB   14 MB/s     13s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  80% ▕██████████████    ▏ 790 MB/986 MB   14 MB/s     13s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  80% ▕██████████████    ▏ 792 MB/986 MB   14 MB/s     13s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  80% ▕██████████████    ▏ 793 MB/986 MB   14 MB/s     13s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  81% ▕██████████████    ▏ 795 MB/986 MB   14 MB/s     13s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  81% ▕██████████████    ▏ 797 MB/986 MB   14 MB/s     12s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  81% ▕██████████████    ▏ 797 MB/986 MB   14 MB/s     12s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  81% ▕██████████████    ▏ 799 MB/986 MB   14 MB/s     12s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  81% ▕██████████████    ▏ 801 MB/986 MB   14 MB/s     12s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  81% ▕██████████████    ▏ 802 MB/986 MB   14 MB/s     12s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  82% ▕██████████████    ▏ 804 MB/986 MB   14 MB/s     12s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  82% ▕██████████████    ▏ 805 MB/986 MB   14 MB/s     12s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  82% ▕██████████████    ▏ 806 MB/986 MB   14 MB/s     12s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  82% ▕██████████████    ▏ 808 MB/986 MB   14 MB/s     12s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  82% ▕██████████████    ▏ 810 MB/986 MB   14 MB/s     11s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  82% ▕██████████████    ▏ 811 MB/986 MB   14 MB/s     11s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  82% ▕██████████████    ▏ 812 MB/986 MB   14 MB/s     11s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  83% ▕██████████████    ▏ 814 MB/986 MB   14 MB/s     11s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  83% ▕██████████████    ▏ 815 MB/986 MB   14 MB/s     11s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  83% ▕██████████████    ▏ 816 MB/986 MB   14 MB/s     11s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  83% ▕██████████████    ▏ 818 MB/986 MB   14 MB/s     11s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  83% ▕██████████████    ▏ 819 MB/986 MB   14 MB/s     11s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  83% ▕██████████████    ▏ 821 MB/986 MB   14 MB/s     11s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  83% ▕███████████████   ▏ 823 MB/986 MB   14 MB/s     11s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  84% ▕███████████████   ▏ 824 MB/986 MB   14 MB/s     11s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  84% ▕███████████████   ▏ 825 MB/986 MB   14 MB/s     10s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  84% ▕███████████████   ▏ 827 MB/986 MB   14 MB/s     10s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  84% ▕███████████████   ▏ 828 MB/986 MB   14 MB/s     10s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  84% ▕███████████████   ▏ 830 MB/986 MB   14 MB/s     10s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  84% ▕███████████████   ▏ 832 MB/986 MB   14 MB/s     10s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  84% ▕███████████████   ▏ 832 MB/986 MB   14 MB/s     10s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  85% ▕███████████████   ▏ 834 MB/986 MB   14 MB/s     10s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  85% ▕███████████████   ▏ 836 MB/986 MB   14 MB/s     10s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  85% ▕███████████████   ▏ 837 MB/986 MB   14 MB/s     10s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  85% ▕███████████████   ▏ 839 MB/986 MB   14 MB/s      9s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  85% ▕███████████████   ▏ 840 MB/986 MB   14 MB/s      9s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  85% ▕███████████████   ▏ 841 MB/986 MB   14 MB/s      9s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  86% ▕███████████████   ▏ 843 MB/986 MB   14 MB/s      9s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  86% ▕███████████████   ▏ 844 MB/986 MB   14 MB/s      9s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  86% ▕███████████████   ▏ 845 MB/986 MB   14 MB/s      9s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  86% ▕███████████████   ▏ 847 MB/986 MB   14 MB/s      9s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  86% ▕███████████████   ▏ 849 MB/986 MB   14 MB/s      9s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  86% ▕███████████████   ▏ 850 MB/986 MB   14 MB/s      9s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  86% ▕███████████████   ▏ 851 MB/986 MB   14 MB/s      9s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  87% ▕███████████████   ▏ 853 MB/986 MB   14 MB/s      8s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  87% ▕███████████████   ▏ 854 MB/986 MB   14 MB/s      8s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  87% ▕███████████████   ▏ 856 MB/986 MB   14 MB/s      8s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  87% ▕███████████████   ▏ 858 MB/986 MB   14 MB/s      8s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  87% ▕███████████████   ▏ 858 MB/986 MB   14 MB/s      8s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  87% ▕███████████████   ▏ 860 MB/986 MB   14 MB/s      8s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  87% ▕███████████████   ▏ 862 MB/986 MB   14 MB/s      8s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  88% ▕███████████████   ▏ 863 MB/986 MB   14 MB/s      8s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  88% ▕███████████████   ▏ 865 MB/986 MB   14 MB/s      8s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  88% ▕███████████████   ▏ 866 MB/986 MB   14 MB/s      8s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  88% ▕███████████████   ▏ 867 MB/986 MB   14 MB/s      8s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  88% ▕███████████████   ▏ 869 MB/986 MB   14 MB/s      7s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  88% ▕███████████████   ▏ 871 MB/986 MB   14 MB/s      7s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  88% ▕███████████████   ▏ 872 MB/986 MB   14 MB/s      7s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  89% ▕███████████████   ▏ 873 MB/986 MB   14 MB/s      7s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  89% ▕███████████████   ▏ 875 MB/986 MB   14 MB/s      7s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  89% ▕███████████████   ▏ 876 MB/986 MB   14 MB/s      7s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  89% ▕████████████████  ▏ 878 MB/986 MB   14 MB/s      7s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  89% ▕████████████████  ▏ 879 MB/986 MB   14 MB/s      7s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  89% ▕████████████████  ▏ 880 MB/986 MB   14 MB/s      7s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  90% ▕████████████████  ▏ 882 MB/986 MB   14 MB/s      6s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  90% ▕████████████████  ▏ 884 MB/986 MB   14 MB/s      6s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  90% ▕████████████████  ▏ 885 MB/986 MB   14 MB/s      6s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  90% ▕████████████████  ▏ 886 MB/986 MB   14 MB/s      6s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  90% ▕████████████████  ▏ 888 MB/986 MB   14 MB/s      6s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  90% ▕████████████████  ▏ 889 MB/986 MB   14 MB/s      6s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  90% ▕████████████████  ▏ 891 MB/986 MB   14 MB/s      6s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  91% ▕████████████████  ▏ 893 MB/986 MB   14 MB/s      6s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  91% ▕████████████████  ▏ 893 MB/986 MB   14 MB/s      6s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  91% ▕████████████████  ▏ 895 MB/986 MB   14 MB/s      6s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  91% ▕████████████████  ▏ 897 MB/986 MB   14 MB/s      5s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  91% ▕████████████████  ▏ 898 MB/986 MB   14 MB/s      5s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  91% ▕████████████████  ▏ 900 MB/986 MB   14 MB/s      5s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  91% ▕████████████████  ▏ 901 MB/986 MB   14 MB/s      5s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  91% ▕████████████████  ▏ 901 MB/986 MB   14 MB/s      5s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  91% ▕████████████████  ▏ 902 MB/986 MB   14 MB/s      5s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  92% ▕████████████████  ▏ 904 MB/986 MB   14 MB/s      5s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  92% ▕████████████████  ▏ 905 MB/986 MB   14 MB/s      5s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  92% ▕████████████████  ▏ 907 MB/986 MB   14 MB/s      5s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  92% ▕████████████████  ▏ 909 MB/986 MB   14 MB/s      5s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  92% ▕████████████████  ▏ 910 MB/986 MB   14 MB/s      5s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  93% ▕████████████████  ▏ 912 MB/986 MB   14 MB/s      5s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  93% ▕████████████████  ▏ 913 MB/986 MB   14 MB/s      4s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  93% ▕████████████████  ▏ 914 MB/986 MB   14 MB/s      4s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  93% ▕████████████████  ▏ 916 MB/986 MB   14 MB/s      4s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  93% ▕████████████████  ▏ 918 MB/986 MB   14 MB/s      4s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  93% ▕████████████████  ▏ 919 MB/986 MB   14 MB/s      4s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  93% ▕████████████████  ▏ 920 MB/986 MB   14 MB/s      4s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  94% ▕████████████████  ▏ 922 MB/986 MB   14 MB/s      4s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  94% ▕████████████████  ▏ 923 MB/986 MB   14 MB/s      4s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  94% ▕████████████████  ▏ 925 MB/986 MB   14 MB/s      4s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  94% ▕████████████████  ▏ 927 MB/986 MB   14 MB/s      3s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  94% ▕████████████████  ▏ 928 MB/986 MB   14 MB/s      3s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  94% ▕████████████████  ▏ 929 MB/986 MB   14 MB/s      3s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  94% ▕████████████████  ▏ 931 MB/986 MB   14 MB/s      3s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  95% ▕█████████████████ ▏ 932 MB/986 MB   14 MB/s      3s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  95% ▕█████████████████ ▏ 933 MB/986 MB   14 MB/s      3s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  95% ▕█████████████████ ▏ 935 MB/986 MB   14 MB/s      3s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  95% ▕█████████████████ ▏ 936 MB/986 MB   14 MB/s      3s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  95% ▕█████████████████ ▏ 938 MB/986 MB   14 MB/s      3s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  95% ▕█████████████████ ▏ 939 MB/986 MB   14 MB/s      3s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  95% ▕█████████████████ ▏ 940 MB/986 MB   14 MB/s      3s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  96% ▕█████████████████ ▏ 942 MB/986 MB   14 MB/s      2s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  96% ▕█████████████████ ▏ 944 MB/986 MB   14 MB/s      2s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  96% ▕█████████████████ ▏ 945 MB/986 MB   14 MB/s      2s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  96% ▕█████████████████ ▏ 947 MB/986 MB   14 MB/s      2s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  96% ▕█████████████████ ▏ 948 MB/986 MB   14 MB/s      2s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  96% ▕█████████████████ ▏ 949 MB/986 MB   14 MB/s      2s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  96% ▕█████████████████ ▏ 951 MB/986 MB   14 MB/s      2s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  97% ▕█████████████████ ▏ 953 MB/986 MB   14 MB/s      2s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  97% ▕█████████████████ ▏ 953 MB/986 MB   14 MB/s      2s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  97% ▕█████████████████ ▏ 955 MB/986 MB   14 MB/s      2s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  97% ▕█████████████████ ▏ 957 MB/986 MB   14 MB/s      1s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  97% ▕█████████████████ ▏ 958 MB/986 MB   14 MB/s      1s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  97% ▕█████████████████ ▏ 960 MB/986 MB   14 MB/s      1s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  98% ▕█████████████████ ▏ 961 MB/986 MB   14 MB/s      1s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  98% ▕█████████████████ ▏ 962 MB/986 MB   14 MB/s      1s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  98% ▕█████████████████ ▏ 964 MB/986 MB   14 MB/s      1s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  98% ▕█████████████████ ▏ 966 MB/986 MB   14 MB/s      1s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  98% ▕█████████████████ ▏ 967 MB/986 MB   14 MB/s      1s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  98% ▕█████████████████ ▏ 968 MB/986 MB   14 MB/s      1s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  98% ▕█████████████████ ▏ 970 MB/986 MB   14 MB/s      1s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  99% ▕█████████████████ ▏ 971 MB/986 MB   14 MB/s      0s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  99% ▕█████████████████ ▏ 973 MB/986 MB   14 MB/s      0s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  99% ▕█████████████████ ▏ 974 MB/986 MB   14 MB/s      0s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  99% ▕█████████████████ ▏ 975 MB/986 MB   14 MB/s      0s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  99% ▕█████████████████ ▏ 977 MB/986 MB   14 MB/s      0s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  99% ▕█████████████████ ▏ 979 MB/986 MB   14 MB/s      0s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0:  99% ▕█████████████████ ▏ 980 MB/986 MB   14 MB/s      0s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0: 100% ▕█████████████████ ▏ 981 MB/986 MB   14 MB/s      0s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0: 100% ▕█████████████████ ▏ 983 MB/986 MB   14 MB/s      0s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0: 100% ▕█████████████████ ▏ 983 MB/986 MB   14 MB/s      0s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0: 100% ▕█████████████████ ▏ 985 MB/986 MB   14 MB/s      0s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0: 100% ▕█████████████████ ▏ 985 MB/986 MB   14 MB/s      0s[K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0: 100% ▕██████████████████▏ 986 MB                         [K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0: 100% ▕██████████████████▏ 986 MB                         [K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0: 100% ▕██████████████████▏ 986 MB                         [K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0: 100% ▕██████████████████▏ 986 MB                         [K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0: 100% ▕██████████████████▏ 986 MB                         [K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0: 100% ▕██████████████████▏ 986 MB                         [K[?25h[?2026l[?2026h[?25l[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0: 100% ▕██████████████████▏ 986 MB                         [K
+pulling 66b9ea09bd5b: 100% ▕██████████████████▏   68 B                         [K[?25h[?2026l[?2026h[?25l[A[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0: 100% ▕██████████████████▏ 986 MB                         [K
+pulling 66b9ea09bd5b: 100% ▕██████████████████▏   68 B                         [K[?25h[?2026l[?2026h[?25l[A[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0: 100% ▕██████████████████▏ 986 MB                         [K
+pulling 66b9ea09bd5b: 100% ▕██████████████████▏   68 B                         [K[?25h[?2026l[?2026h[?25l[A[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0: 100% ▕██████████████████▏ 986 MB                         [K
+pulling 66b9ea09bd5b: 100% ▕██████████████████▏   68 B                         [K[?25h[?2026l[?2026h[?25l[A[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0: 100% ▕██████████████████▏ 986 MB                         [K
+pulling 66b9ea09bd5b: 100% ▕██████████████████▏   68 B                         [K[?25h[?2026l[?2026h[?25l[A[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0: 100% ▕██████████████████▏ 986 MB                         [K
+pulling 66b9ea09bd5b: 100% ▕██████████████████▏   68 B                         [K[?25h[?2026l[?2026h[?25l[A[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0: 100% ▕██████████████████▏ 986 MB                         [K
+pulling 66b9ea09bd5b: 100% ▕██████████████████▏   68 B                         [K[?25h[?2026l[?2026h[?25l[A[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0: 100% ▕██████████████████▏ 986 MB                         [K
+pulling 66b9ea09bd5b: 100% ▕██████████████████▏   68 B                         [K[?25h[?2026l[?2026h[?25l[A[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0: 100% ▕██████████████████▏ 986 MB                         [K
+pulling 66b9ea09bd5b: 100% ▕██████████████████▏   68 B                         [K[?25h[?2026l[?2026h[?25l[A[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0: 100% ▕██████████████████▏ 986 MB                         [K
+pulling 66b9ea09bd5b: 100% ▕██████████████████▏   68 B                         [K[?25h[?2026l[?2026h[?25l[A[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0: 100% ▕██████████████████▏ 986 MB                         [K
+pulling 66b9ea09bd5b: 100% ▕██████████████████▏   68 B                         [K[?25h[?2026l[?2026h[?25l[A[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0: 100% ▕██████████████████▏ 986 MB                         [K
+pulling 66b9ea09bd5b: 100% ▕██████████████████▏   68 B                         [K[?25h[?2026l[?2026h[?25l[A[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0: 100% ▕██████████████████▏ 986 MB                         [K
+pulling 66b9ea09bd5b: 100% ▕██████████████████▏   68 B                         [K[?25h[?2026l[?2026h[?25l[A[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0: 100% ▕██████████████████▏ 986 MB                         [K
+pulling 66b9ea09bd5b: 100% ▕██████████████████▏   68 B                         [K
+pulling 1e65450c3067: 100% ▕██████████████████▏ 1.6 KB                         [K[?25h[?2026l[?2026h[?25l[A[A[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0: 100% ▕██████████████████▏ 986 MB                         [K
+pulling 66b9ea09bd5b: 100% ▕██████████████████▏   68 B                         [K
+pulling 1e65450c3067: 100% ▕██████████████████▏ 1.6 KB                         [K[?25h[?2026l[?2026h[?25l[A[A[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0: 100% ▕██████████████████▏ 986 MB                         [K
+pulling 66b9ea09bd5b: 100% ▕██████████████████▏   68 B                         [K
+pulling 1e65450c3067: 100% ▕██████████████████▏ 1.6 KB                         [K[?25h[?2026l[?2026h[?25l[A[A[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0: 100% ▕██████████████████▏ 986 MB                         [K
+pulling 66b9ea09bd5b: 100% ▕██████████████████▏   68 B                         [K
+pulling 1e65450c3067: 100% ▕██████████████████▏ 1.6 KB                         [K[?25h[?2026l[?2026h[?25l[A[A[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0: 100% ▕██████████████████▏ 986 MB                         [K
+pulling 66b9ea09bd5b: 100% ▕██████████████████▏   68 B                         [K
+pulling 1e65450c3067: 100% ▕██████████████████▏ 1.6 KB                         [K[?25h[?2026l[?2026h[?25l[A[A[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0: 100% ▕██████████████████▏ 986 MB                         [K
+pulling 66b9ea09bd5b: 100% ▕██████████████████▏   68 B                         [K
+pulling 1e65450c3067: 100% ▕██████████████████▏ 1.6 KB                         [K[?25h[?2026l[?2026h[?25l[A[A[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0: 100% ▕██████████████████▏ 986 MB                         [K
+pulling 66b9ea09bd5b: 100% ▕██████████████████▏   68 B                         [K
+pulling 1e65450c3067: 100% ▕██████████████████▏ 1.6 KB                         [K[?25h[?2026l[?2026h[?25l[A[A[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0: 100% ▕██████████████████▏ 986 MB                         [K
+pulling 66b9ea09bd5b: 100% ▕██████████████████▏   68 B                         [K
+pulling 1e65450c3067: 100% ▕██████████████████▏ 1.6 KB                         [K[?25h[?2026l[?2026h[?25l[A[A[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0: 100% ▕██████████████████▏ 986 MB                         [K
+pulling 66b9ea09bd5b: 100% ▕██████████████████▏   68 B                         [K
+pulling 1e65450c3067: 100% ▕██████████████████▏ 1.6 KB                         [K[?25h[?2026l[?2026h[?25l[A[A[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0: 100% ▕██████████████████▏ 986 MB                         [K
+pulling 66b9ea09bd5b: 100% ▕██████████████████▏   68 B                         [K
+pulling 1e65450c3067: 100% ▕██████████████████▏ 1.6 KB                         [K[?25h[?2026l[?2026h[?25l[A[A[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0: 100% ▕██████████████████▏ 986 MB                         [K
+pulling 66b9ea09bd5b: 100% ▕██████████████████▏   68 B                         [K
+pulling 1e65450c3067: 100% ▕██████████████████▏ 1.6 KB                         [K[?25h[?2026l[?2026h[?25l[A[A[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0: 100% ▕██████████████████▏ 986 MB                         [K
+pulling 66b9ea09bd5b: 100% ▕██████████████████▏   68 B                         [K
+pulling 1e65450c3067: 100% ▕██████████████████▏ 1.6 KB                         [K[?25h[?2026l[?2026h[?25l[A[A[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0: 100% ▕██████████████████▏ 986 MB                         [K
+pulling 66b9ea09bd5b: 100% ▕██████████████████▏   68 B                         [K
+pulling 1e65450c3067: 100% ▕██████████████████▏ 1.6 KB                         [K
+pulling 832dd9e00a68: 100% ▕██████████████████▏  11 KB                         [K[?25h[?2026l[?2026h[?25l[A[A[A[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0: 100% ▕██████████████████▏ 986 MB                         [K
+pulling 66b9ea09bd5b: 100% ▕██████████████████▏   68 B                         [K
+pulling 1e65450c3067: 100% ▕██████████████████▏ 1.6 KB                         [K
+pulling 832dd9e00a68: 100% ▕██████████████████▏  11 KB                         [K[?25h[?2026l[?2026h[?25l[A[A[A[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0: 100% ▕██████████████████▏ 986 MB                         [K
+pulling 66b9ea09bd5b: 100% ▕██████████████████▏   68 B                         [K
+pulling 1e65450c3067: 100% ▕██████████████████▏ 1.6 KB                         [K
+pulling 832dd9e00a68: 100% ▕██████████████████▏  11 KB                         [K[?25h[?2026l[?2026h[?25l[A[A[A[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0: 100% ▕██████████████████▏ 986 MB                         [K
+pulling 66b9ea09bd5b: 100% ▕██████████████████▏   68 B                         [K
+pulling 1e65450c3067: 100% ▕██████████████████▏ 1.6 KB                         [K
+pulling 832dd9e00a68: 100% ▕██████████████████▏  11 KB                         [K[?25h[?2026l[?2026h[?25l[A[A[A[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0: 100% ▕██████████████████▏ 986 MB                         [K
+pulling 66b9ea09bd5b: 100% ▕██████████████████▏   68 B                         [K
+pulling 1e65450c3067: 100% ▕██████████████████▏ 1.6 KB                         [K
+pulling 832dd9e00a68: 100% ▕██████████████████▏  11 KB                         [K[?25h[?2026l[?2026h[?25l[A[A[A[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0: 100% ▕██████████████████▏ 986 MB                         [K
+pulling 66b9ea09bd5b: 100% ▕██████████████████▏   68 B                         [K
+pulling 1e65450c3067: 100% ▕██████████████████▏ 1.6 KB                         [K
+pulling 832dd9e00a68: 100% ▕██████████████████▏  11 KB                         [K[?25h[?2026l[?2026h[?25l[A[A[A[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0: 100% ▕██████████████████▏ 986 MB                         [K
+pulling 66b9ea09bd5b: 100% ▕██████████████████▏   68 B                         [K
+pulling 1e65450c3067: 100% ▕██████████████████▏ 1.6 KB                         [K
+pulling 832dd9e00a68: 100% ▕██████████████████▏  11 KB                         [K[?25h[?2026l[?2026h[?25l[A[A[A[A[1Gpulling manifest [K
+pulling 29d8c98fa6b0: 100% ▕██████████████████▏ 986 MB                         [K
+```
+
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools tailored to particular tasks, like viewing files. This strategy promises a more targeted and less error-prone approach to problem-solving, which I will continue to refine and implement moving forward.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.427398169s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### Execution Error
+
+**Status:** Completed
+**Created:** 18 May 2026, 8:13 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools like 'view_file' directly, rather than resorting to broader, less direct methods. I'm aiming for targeted actions.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.383693439s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 18 May 2026, 8:13 pm
+
+---
+
+<details>
+<summary>Conversation History</summary>
+
+# Conversation History
+Here are the conversation IDs, titles, and summaries of your most recent 9 conversations, in reverse chronological order:
+
+<conversation_summaries>
+## Conversation 34e6f5d2-d637-4436-bb0e-5708675a2807: Optimizing Listados Menu Layout
+- Created: 2026-05-18T18:45:01Z
+- Last modified: 2026-05-18T21:59:28Z
+
+### USER Objective:
+Stabilizing Agua V2 Production Environment
+
+Objective: Stabilize the Agua V2 Windows production environment on Host C by automating service security and ensuring data integrity across the database pipeline.
+
+Goals:
+1. Harden desktop security by implementing strict NTFS controls for critical management shortcuts, migrating them to a protected subdirectory to prevent accidental deletion.
+2. Finalize and validate the Full-Pipeline-Sync migration, ensuring data parity and structural consistency between Hosts A, B, and C.
+3. Optimize the infrastructure startup scripts to correctly respect UPS monitoring states, preventing false service alerts.
+4. Execute final sanitization and parity checks on the 'awa' database, verifying successful split of historic and active ledger data.
+
+## Conversation 83df23bf-e043-4dd3-a3e8-41b37544db13: Validating Agua V2 Preproduction Sync
+- Created: 2026-05-15T20:26:08Z
+- Last modified: 2026-05-16T19:51:03Z
+
+### USER Objective:
+Stabilizing Financial Catalog Pipeline
+
+Main Objective:
+Finalize the stabilization of the financial reporting and catalog pipeline on Host C to ensure full data integrity and operational transparency.
+
+Goals:
+1. Enable repeat applications for "LIBRE" concepts by excluding them from the Poka-Yoke duplicate validation in `cargos.php` while maintaining security for static concepts.
+2. Update the `08_saneamiento_catalogo.sql` pipeline to force `repetir=1` on all "LIBRE" concepts to ensure production parity.
+3. Resolve the semantic discrepancy in the "Faltas de Asamblea" summary report by updating the counter from "folios" to "individual multas" (589 vs 257) to reflect actual work rendered.
+4. Finalize technical documentation in `GUIA_CATALOGO_CARGOS.md` regarding the distinction and specific use cases for "LIBRE" vs "repetir=1" configurations.
+
+## Conversation 623aac70-896a-4dc4-8f74-afbf94f87cd5: Validating Database Connectivity Across Hosts
+- Created: 2026-05-13T17:30:25Z
+- Last modified: 2026-05-15T05:09:56Z
+
+### USER Objective:
+Stabilizing Agua V2 Production MySQL
+
+USER Objective:
+Resolve persistent MySQL startup crashes and service termination in the Agua V2 production environment on Host C to ensure long-term stability and system integrity.
+
+Goals:
+1. Eliminate fatal "multi-master structure" initialization failures by proactively cleaning replication metadata and hardening the MariaDB configuration with 'skip-slave-start'.
+2. Implement an unconditional "Sentinel" loop in the startup script to prevent the Windows Task Scheduler from terminating child processes.
+3. Automate the cleanup of orphaned ("zombie") MySQL and Apache processes prior to service initialization to ensure clean startup conditions.
+4. Optimize the diagnostic pipeline by utilizing unbuffered console redirection for immediate failure feedback and remediation.
+5. Restore a stable, automated production cycle, including robust power failure monitoring (UPS) and verified database health checks.
+
+## Conversation 3a08e5ce-2119-456e-892a-20953653f1f3: Validating Host C Database Connectivity
+- Created: 2026-05-14T14:42:25Z
+- Last modified: 2026-05-14T22:31:46Z
+
+### USER Objective:
+Stabilizing Host C Financial Integrity
+
+Main Objective: Remediate redundant charge anomalies in the Host C production environment and harden the system against future transactional duplication.
+
+Goals:
+1. Audit and sanitize redundant entries in `ligacargos` for test contracts to restore their original pre-test state.
+2. Maintain the Poka-Yoke guards in `contratos.php` and `cargos.php` to prevent automatic restoration of canceled charges and manual entry of duplicate annual payments.
+3. Enforce strict pending-state validation in database procedures (`sp_cancelar_cargo`) to prevent accidental modification of settled records.
+4. Ensure transactional parity in the financial pipeline following the recent stabilization fixes.
+
+## Conversation 3978a994-757c-4201-abea-c0f560f53867: Validating Host C Connectivity
+- Created: 2026-05-13T03:18:35Z
+- Last modified: 2026-05-13T20:41:27Z
+
+### USER Objective:
+Host C Infrastructure And Sync
+
+Objective: Stabilize the Host C production environment by synchronizing data from the Host A bridge and auditing the integrity of the migration pipeline.
+
+Goals:
+1. Validate system-wide connectivity across Hosts A, B, and C using centralized configurations.
+2. Verify the execution and success of the `Full-Pipeline-Sync.sh` migration, ensuring data parity and structural integrity.
+3. Audit the database schema and split tables (`ligacargos` vs `ligacargos_historico`) to confirm correct record distribution.
+4. Establish the `.mcp.json` file as the definitive Single Source of Truth (SSOT) for all host connectivity, eliminating manual IP hardcoding.
+5. Confirm successful post-sync cleanup, including duplicate remediation and financial parity checks in the V2 schema.
+
+## Conversation 7482f76f-5f36-47b4-9951-4eb10edd1399: Debugging Charge Application Interface
+- Created: 2026-05-12T21:47:26Z
+- Last modified: 2026-05-13T07:36:15Z
+
+### USER Objective:
+Stabilizing Lila User Workflows
+
+USER Objective:
+Ensure operational integrity when reassigning contracts to 'Lila' (placeholder) users by preserving historical metadata and preventing data loss.
+
+Goals:
+1. Implement a safe protocol for transitioning placeholder users into active contract holders without losing critical 'masdatos' (notes/owner history).
+2. Augment the user creation/assignment flow to force manual review and metadata migration when a user record contains historical owner notes.
+3. Establish a UI-based mechanism to flag and consolidate fragmented user data (e.g., 'Jaime Solano' scenarios) before finalizing new contract assignments.
+4. Maintain the consistency of the 'Lila' user status by preventing the accidental purging of records that hold meaningful historical context.
+
+## Conversation f78c40bd-132e-48c0-8d80-6846d4b5e91a: Validating Preprod Host C Connectivity
+- Created: 2026-05-12T19:05:05Z
+- Last modified: 2026-05-12T21:46:14Z
+
+### USER Objective:
+Stabilizing Agua V2 Infrastructure
+
+USER Objective:
+Finalize the stabilization, integrity validation, and audit of the Agua V2 environment on Host C to resolve data inconsistencies and operational anomalies.
+
+Goals:
+1. Conduct a root-cause analysis of the User 1335 profile anomaly to determine why it triggered an unintended "no_localizado" status and financial snapshot.
+2. Verify the consistency of the `Full-Pipeline-Sync.sh` migration and ensure referential integrity between `ligacargos`, `cargos`, and contract states.
+3. Stabilize the interaction between the "Motor de Paridad" (SDF) and administrative contract transitions to prevent cascading state changes for users.
+4. Validate the operational logic for automated billing and debt recalibration, ensuring no historical data contamination in the Host C production environment.
+
+## Conversation e9e60f8c-dc0e-4c0c-a226-77eda59e64b2: Auditing Water Debt Calculations
+- Created: 2026-05-11T14:39:45Z
+- Last modified: 2026-05-12T17:18:35Z
+
+### USER Objective:
+Stabilizing User Search Interface
+
+Objective: Finalize the stabilization of the Agua V2 user synchronization and search interface on Host C.
+Goals:
+1. Ensure the user search dropdown accurately lists duplicate records as individual, selectable entries by optimizing the `HAVING` filter.
+2. Refactor UI rendering in `options.php` to provide clear, human-readable labels and color-coded status indicators (Lila for users without contracts, semaphores for homonyms).
+3. Validate structural integrity of `id_homonimo_padre` to ensure persistent data consistency during synchronization cycles.
+4. Enforce mandatory password validation in contract state transitions to mirror secure administrative guardrails.
+5. Update technical documentation to reflect the finalized user search color palette and status logic.
+
+## Conversation a8c228f4-a1fe-463c-a8df-42513ab1e695: Validating Host C Infrastructure Connectivity
+- Created: 2026-05-11T20:43:19Z
+- Last modified: 2026-05-12T03:23:56Z
+
+### USER Objective:
+Stabilizing Agua V2 Host Connectivity
+
+Objective: Complete the production stabilization of the Agua V2 environment on Host C by finalizing infrastructure connectivity and system automation.
+
+Goals:
+1. Resolve the Host C network isolation by implementing persistent firewall rules for MariaDB (Port 7002).
+2. Restore the autonomous UPS monitoring service ("Vigilante") to ensure graceful server shutdowns during power failures.
+3. Repair the automated deployment shortcuts and Chrome Kiosk-mode configuration to ensure seamless operational access for end-users.
+4. Execute the final synchronization of the 'awa' database using the established migration pipeline to achieve data parity across the infrastructure.
+
+</conversation_summaries>
+
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 18 May 2026, 8:13 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools tailored to particular tasks, like viewing files. This strategy promises a more targeted and less error-prone approach to problem-solving, which I will continue to refine and implement moving forward.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.316991120s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+## User Request
+
+command 'chatgpt.openSidebar' not found
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools like 'view_file' directly, rather than resorting to broader, less direct methods. I'm aiming for targeted actions.
+
+
+**Analyzing Extension Issues**
+
+I'm now diagnosing the 'chatgpt.openSidebar' error. My focus is on determining why the VS Code extension isn't functioning. I'm investigating potential causes, including activation failures, disabled extensions, and JSON settings syntax errors. I'm considering each scenario systematically.
+
+
+**Verifying Extension Activation**
+
+I'm now zeroing in on the "command 'chatgpt.openSidebar' not found" error. It appears the extension is failing to activate, likely due to the Google Antigravity IDE not fully supporting the 'openai.chatgpt' API proposals. I'm checking if the user launched with the `--enable-proposed-api openai.chatgpt` flag. If not, the extension won't load its commands. Alternatively, I'm considering verifying their existing work.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 3.173939528s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### File Changes Accepted
+
+**Status:** Completed
+**Created:** 18 May 2026, 8:40 pm
+
+---
+
+## User Request
+
+Valida la configuración, ~/.config/Antigravity/User/settings.json
+Y Guiame que mas configurar, setear para realizar la prueba de test.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `settings.json`
+**Language:** jsonc
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools like 'view_file' directly, rather than resorting to broader, less direct methods. I'm aiming for targeted actions.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `settings.json`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.402721579s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+{
+    "php.suggest.basic": false,
+    "php.validate.enable": false,
+    "emmet.excludeLanguages": [
+        "markdown",
+        "php"
+    ],
+    "files.autoSave": "afterDelay",
+    "workbench.colorTheme": "London",
+    "php.executables": {
+        "v5.5.15": "/opt/lampp/bin/php-5.5.15"
+    },
+    "antigravity.marketplaceExtensionGalleryServiceURL": "https://open-vsx.org/vscode/gallery",
+    "antigravity.marketplaceGalleryItemURL": "https://open-vsx.org/vscode/items",
+    "sqldeveloper.datagrid.fontFamily": "'Droid Sans Mono', monospace",
+    "sqldeveloper.telemetry.enabled": true,
+    "antigravity-storage-manager.backup.enabled": true,
+    "antigravity-storage-manager.backup.interval": 20,
+    "editor.minimap.enabled": false,
+    "workbench.iconTheme": "oslo-icons",
+    "workbench.preferredDarkColorTheme": "Lahabana",
+    "python.languageServer": "Default",
+    "anti-tools.language": "en",
+    "claudeCode.preferredLocation": "panel",
+    "http.systemCertificatesNode": true,
+    "chatgpt.apiUrl": "http://127.0.0.1:11434/v1",
+    "chatgpt.apiKey": "ollama",
+    "chatgpt.model": "qwen2.5-coder:7b"
+}
+```
+
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools tailored to particular tasks, like viewing files. This strategy promises a more targeted and less error-prone approach to problem-solving, which I will continue to refine and implement moving forward.
+
+
+**Refining Tool Selection**
+
+I'm now zeroing in on precise tool usage. I've formulated strict rules to guide my choices: no `cat` for file creation/appending, use `grep_search` instead of `grep` within bash unless critical, and avoid generic tools like `ls`, `cat`, `grep`, and `sed` if there's a more targeted alternative. I'm also now focusing on pre-planning tools, explicitly listing potentially useful tools before execution, choosing the most focused option if possible.
+
+
+**Diagnosing Extension Failure**
+
+I'm now investigating the "command not found" error. I've confirmed correct JSON syntax and am zeroing in on the likely cause: a missing `--enable-proposed-api` flag during IDE startup. My plan is to guide the user through the process of restarting with the flag and running a test. If that fails due to API drift in their IDE, I'll suggest an alternative. I've concluded that I cannot restart the IDE, and should provide clear manual instructions.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 3.077349992s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+## User Request
+
+como saber si est usando modelo local , en lugar de los remotos disponibles.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `settings.json`
+**Language:** jsonc
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools like 'view_file' directly, rather than resorting to broader, less direct methods. I'm aiming for targeted actions.
+
+
+**Refining Tool Application**
+
+I'm now implementing strict tool selection criteria. I've established rules to avoid common pitfalls, such as unnecessary `cat` usage. Moreover, I'm now actively listing all applicable tools before making any calls, ensuring only the most precise tools are executed. I'm focusing on directly matching the tool to the task, improving precision.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.377813697s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+## User Request
+
+Pero en el chat no se ve algo como loca model, etc
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `settings.json`
+**Language:** jsonc
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools tailored to particular tasks, like viewing files. This strategy promises a more targeted and less error-prone approach to problem-solving, which I will continue to refine and implement moving forward.
+
+
+**Refining Tool Choices**
+
+I'm now integrating stricter tool selection rules, especially avoiding `cat`, `grep` within bash, and general-purpose commands where specific tools exist. My focus is on leveraging `grep_search` and alternative tools, aiming for a more precise and optimized approach. The user's screenshot highlights tool selection within an IDE, which triggers considerations of tool specificity versus broader options. Before making any tool call, I must now explicitly list any related tools and ensure my choice is the most tailored one.
+
+
+**Clarifying UI Behavior**
+
+I've determined the discrepancy lies in a UI limitation. The extension's interface is hardcoded for OpenAI model names, regardless of the configured model. Although the dropdown displays "GPT-5.5", the request correctly uses `qwen2.5-coder:7b` through a modified JSON configuration, and is therefore running locally. I'll need to explain this is cosmetic to the user. I can confirm this by suggesting they monitor Ollama or GPU usage. I should also investigate whether the "Work locally" folder icon is relevant to workspace selection, and therefore unrelated to model selection.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 3.757269891s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+## User Request
+
+no se ven, cambios,
+revisa, diagnistica, monitorea.
+
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `settings.json`
+**Language:** jsonc
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools tailored to particular tasks, like viewing files. This strategy promises a more targeted and less error-prone approach to problem-solving, which I will continue to refine and implement moving forward.
+
+
+**Diagnosing GPU Utilization**
+
+I'm now investigating the lack of GPU utilization. The `nvidia-smi` output shows no Ollama-related processes active on the GPU. My current hypothesis is that the IDE extension is either sending requests to an external OpenAI endpoint, disregarding the custom URL, or that the request format is incompatible. I am leaning toward the first hypothesis as more likely.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.764791988s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 18 May 2026, 8:54 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools tailored to particular tasks, like viewing files. This strategy promises a more targeted and less error-prone approach to problem-solving, which I will continue to refine and implement moving forward.
+
+
+**Analyzing Tool Usage**
+
+I've shifted my focus to analyze the absence of specific tool calls, particularly within the Ollama environment. I'm noting the IDE's failure to trigger a request to Ollama, even after a successful model execution and query. This lack of interaction is crucial, as it indicates a breakdown in the expected workflow, specifically the missing `POST "/api/chat"` request from the IDE, suggesting an issue with the user interface integration.
+
+
+**Investigating Configuration Discrepancy**
+
+I'm now investigating a critical configuration discrepancy regarding the `chatgpt.apiUrl`. I instructed the user to set it to `/v1/chat/completions`, but the settings file shows `/v1` instead, which is likely causing requests to bypass Ollama altogether. I'll verify if the user's IDE indeed received a response without Ollama processing it. This could indicate a fallback to the real OpenAI server due to the incorrect URL, or, the extension might be ignoring the setting entirely due to a recent update and hardcoding the base URL.
+
+
+**Diagnosing Endpoint Issues**
+
+I'm now diagnosing potential endpoint issues, focusing on the user's interaction within the chat window, specifically whether they encountered an error like an "Invalid API Key" or received no output at all. I will ensure the `chatgpt.apiUrl` is set to `/v1/chat/completions` and `chatgpt.apiKey` is set to `"ollama"`. Furthermore, I'll consider that the extension might be coupled to OpenAI, and investigate if a different model selection within the extension is needed to override the custom endpoint.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 7.372895447s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 18 May 2026, 8:55 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools tailored to particular tasks, like viewing files. This strategy promises a more targeted and less error-prone approach to problem-solving, which I will continue to refine and implement moving forward.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.365300447s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+## User Request
+
+monitorea
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `rfc.php`
+**Language:** php
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools like 'view_file' directly, rather than resorting to broader, less direct methods. I'm aiming for targeted actions.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.383115160s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 18 May 2026, 9:00 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools like 'view_file' directly, rather than resorting to broader, less direct methods. I'm aiming for targeted actions.
+
+
+**Refining Tool Application**
+
+I'm now emphasizing stricter tool usage rules, particularly avoiding `cat` for file creation/appending and prioritizing `grep_search`. I'm also ensuring a checklist of related tools is considered prior to execution, only running tools from a set `T` when they're the most suitable. It appears that the IDE extension may not be activating correctly, and the focus is on a potential issue related to the `Proposed APIs` or server compatibility, especially concerning `/v1/chat/completions`.
+
+
+**Diagnosing API Routing**
+
+I've determined the extension is failing to route API calls to Ollama. It seems completely broken, either refusing to use the specified local URL or attempting an external connection. My diagnosis is that the extension isn't sending any information to Ollama; it's either attempting an internet connection or crashing outright. I'll propose specific alternative extensions like CodeGPT that support Ollama natively, considering the user's preference to avoid Cline and Continue. I'm focusing on providing practical solutions.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 3.498790904s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+## User Request
+
+ v3.20.6
+Unable to connect to the extension services
+
+Requirement
+Required
+System
+Status
+
+VSCODE
+^1.82.0
+1.107.0
+✓
+
+Vscode Node
+>=18.0.0
+22.21.1
+✓
+
+Server
+localhost
+✗
+
+Port
+54112
+✗
+
+Server is not running on localhost:54112
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `rfc.php`
+**Language:** php
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools tailored to particular tasks, like viewing files. This strategy promises a more targeted and less error-prone approach to problem-solving, which I will continue to refine and implement moving forward.
+
+
+**Refining Tool Choices**
+
+I'm now prioritizing direct tool usage, avoiding generic commands inside bash, particularly for file manipulation. I'm focusing on tools tailored for specific tasks, aiming to minimize errors and improve efficiency. Critical instruction 2 is now a high priority: I MUST explicitly list related tools before executing a set, which promotes targeted and effective solutions. The CodeGPT error highlights a specific issue with its local server, which seems to be the central issue and the focus of the task.
+
+
+**Exploring Alternative Extensions**
+
+I've determined that the user's CodeGPT issue is likely due to the IDE's sandbox preventing the extension's local server from binding to localhost. The problem stems from the `Google Antigravity` IDE, a VS Code fork on Ubuntu 22. Given the user's preference against CLion and Continue.dev, I'm now exploring alternative local LLM extensions. I've identified Twinny and Llama Coder as strong candidates, as they both utilize Ollama natively and avoid server-binding issues. I'm now searching the web to gather additional information.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 4.438229737s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+## User Request
+
+Instale Twinny con qwen2.5-code:1.5b., monitorea
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `rfc.php`
+**Language:** php
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools tailored to particular tasks, like viewing files. This strategy promises a more targeted and less error-prone approach to problem-solving, which I will continue to refine and implement moving forward.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.409555857s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 18 May 2026, 9:13 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools tailored to particular tasks, like viewing files. This strategy promises a more targeted and less error-prone approach to problem-solving, which I will continue to refine and implement moving forward.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.393891103s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+## User Request
+
+con Twinny, como lo asocio a mi proyecto agua
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `rfc.php`
+**Language:** php
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools tailored to particular tasks, like viewing files. This strategy promises a more targeted and less error-prone approach to problem-solving, which I will continue to refine and implement moving forward.
+
+
+
+
+### Actions
+
+**Tool:** `search_web`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.459737132s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### Web Research
+
+**Status:** Completed
+**Created:** 18 May 2026, 9:17 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools like 'view_file' directly, rather than resorting to broader, less direct methods. I'm aiming for targeted actions.
+
+
+**Refining Tool Application**
+
+I'm now prioritizing direct tool usage, avoiding generic commands. I must never use `cat` within bash for file operations or `grep` within bash unless strictly necessary. I am explicitly outlining relevant tools before execution and committing to the "Embed Workspace" feature with `all-minilm:latest` to associate the Twinny with the project.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.999702997s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 18 May 2026, 9:17 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools like 'view_file' directly, rather than resorting to broader, less direct methods. I'm aiming for targeted actions.
+
+
+**Refining Tool Application**
+
+I'm now prioritizing direct tool usage, avoiding generic commands. I must first explicitly identify related tools before execution, and only proceed if necessary, and use Twinny for context. I am also preparing to associate the `agua` project in Twinny, so the user can be instructed on context association via manual file mentioning or workspace context using embeddings.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.434920434s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+## User Request
+
+tengo archivos .gz, .log, tambien los revisa ?
+
+---
+
+## User Request
+
+que paso
+
+---
+
+## User Request
+
+que paso
+
+---
+
+## User Request
+
+que paso ?
+
+---
+
+## User Request
+
+el emebedginj tardo mucho y lo cancele en este estado de msg: Embedding: 99.38% backup_host_a_20260430_161436.sql.gz, backup_host_a_20260507_224800.sql.gz...
+
+Monitorea si se completo o hay issues 
+
+---
+
+## User Request
+
+Sube el repo agua y agua_chatledger
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools like 'view_file' directly, rather than resorting to broader, less direct methods. I'm aiming for targeted actions.
+
+
+**Refining Tool Selection**
+
+I'm now prioritizing direct tool usage, avoiding generic commands. I must focus on specific tasks, listing related tools before execution. I've formulated strict rules against using bash commands for file manipulation, prioritizing `grep_search` and alternative tools, as well as forbidding the use of `cat`, `grep`, `ls` and `sed`. My focus has shifted from finding a solution, to building a tool selection for the task at hand.
+
+
+**Addressing File Handling**
+
+I'm now prioritizing strategies to handle problematic file types. I see that large `.gz` and `.log` files are causing bottlenecks for the user's VS Code extension. I'll recommend the user to exclude these files using `.twinnyignore` or VS Code settings. I'll need to explain the performance issues caused by attempting to parse such files.
+
+I also understand the second issue is to push code to GitHub.
+I understand that I need to use the `run_command` tool to add, commit and push two repositories to their remote location.
+These repositories are located at:
+- `/opt/lampp/htdocs/agua`
+- `/home/carlos/GitHub/agua_chatledger`
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 3.832378356s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### Execution Error
+
+**Status:** Completed
+**Created:** 19 May 2026, 8:45 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools tailored to particular tasks, like viewing files. This strategy promises a more targeted and less error-prone approach to problem-solving, which I will continue to refine and implement moving forward.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.367365350s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 19 May 2026, 8:46 am
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### Execution Error
+
+**Status:** Completed
+**Created:** 19 May 2026, 8:46 am
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### Execution Error
+
+**Status:** Completed
+**Created:** 19 May 2026, 8:46 am
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### Execution Error
+
+**Status:** Completed
+**Created:** 19 May 2026, 8:46 am
 
 ---
 
