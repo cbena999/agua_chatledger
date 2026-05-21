@@ -231,8 +231,9 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 *   **Agrupamiento de Calles Robusto**: Se implementó una lógica de agrupamiento por expresiones regulares en `listadeudoresxc.php` para normalizar acentos, números ordinales y calificativos de dirección en las calles, evitando truncamiento de palabras clave como "NORTE".
 *   **Impresión de Credenciales en Lote**: Se diseñó un nuevo visualizador tamaño Carta en `imprimir_credencial.php` que acomoda hasta 3 credenciales de `8.8 x 5.8 cm` por cara con guías de corte y línea discontinua de doblez central. Integrado mediante popup en `ficha.php`.
 
-**Optimización de Impresión de Reportes a 46 Renglones (2026-05-21):**
+**Optimización de Impresión de Reportes y Rotación de Respaldos (2026-05-21):**
 *   **Aprovechamiento de Papel en Reportes**: Se incrementó la capacidad de registros por página de **42 a 46** en 5 reportes críticos (`listacontratosestado.php`, `listacontratos.php`, `listacontratosnuevos.php`, `listausuarios.php`, y `listadeudores.php`). Esto optimiza el uso de la hoja tamaño Carta reduciendo las hojas impresas sin riesgo de desborde por nombres o domicilios largos.
+*   **Rotación de Respaldos de BD (PowerShell)**: Se implementó un algoritmo de rotación basado en cantidad (máximo 7 respaldos más recientes) tanto en `start-webapps.ps1` como en `stop-webapps.ps1`. Esto evita que las múltiples pruebas de apagado/encendido del operador saturen el disco con más de 7 archivos de respaldo (data-*.zip), reemplazando el filtrado temporal estático de 7 días.
 
 **Última actualización**: 2026-05-21
 

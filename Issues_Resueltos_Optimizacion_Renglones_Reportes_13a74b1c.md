@@ -25,8 +25,25 @@ Ahora, tras un análisis de distribución de longitudes de nombres y direcciones
 
 ---
 
+## Issue 4 — Rotación de Respaldos de BD (PowerShell Host C)
+
+### Scope Funcional
+En el Host C, el operador realiza pruebas de encendido y apagado constantes. Los scripts de control (`start-webapps.ps1` y `stop-webapps.ps1`) hacían un respaldo automático de la BD en formato ZIP, pero la purga de respaldos era temporal y estática (borraba archivos con fecha de modificación superior a 7 días). Si el operador realizaba múltiples pruebas de apagado en pocos días, la carpeta de respaldos acumulaba decenas de archivos redundantes del mismo periodo.
+Para solucionar esto, se implementó un algoritmo de rotación estricto basado en cantidad que garantiza mantener **exactamente los 7 respaldos más recientes** en la carpeta, eliminando de forma segura los archivos excedentes.
+
+### Scope Técnico
+- **Archivos Modificados:**
+  1. `docs-dev/pase-a-prod/aguav2-2026/scripts/start-webapps.ps1`
+  2. `docs-dev/pase-a-prod/aguav2-2026/scripts/stop-webapps.ps1`
+- **Modificaciones:**
+  - Reemplazo de la lógica basada en tiempo (`(Get-Date).AddDays(-7)`) por una consulta ordenada descendentemente por fecha: `Sort-Object LastWriteTime -Descending`.
+  - Verificación de cantidad: si `$allBackups.Count -gt 7`, se seleccionan los elementos más antiguos a partir del índice 7: `$backupsToDelete = $allBackups[7..($allBackups.Count - 1)]`.
+  - Eliminación segura y escritura de log para auditoría (`Remove-Item -Path $file.FullName -Force -ErrorAction SilentlyContinue`).
+
+---
+
 ## Runbook — Cambios en `.agents/`
-- Se actualizó `.agents/pending.md` registrando la optimización de renglones como resuelta.
+- Se actualizó `.agents/pending.md` registrando ambas tareas como resueltas.
 - Se actualizó `GEMINI.md` añadiendo el registro de la sesión del 2026-05-21.
 
 ---
@@ -40,6 +57,8 @@ Ahora, tras un análisis de distribución de longitudes de nombres y direcciones
 | `reportes/listacontratosnuevos.php` | `agua` | Modificado |
 | `reportes/listausuarios.php` | `agua` | Modificado |
 | `reportes/listadeudores.php` | `agua` | Modificado |
+| `docs-dev/pase-a-prod/aguav2-2026/scripts/start-webapps.ps1` | `agua` | Modificado |
+| `docs-dev/pase-a-prod/aguav2-2026/scripts/stop-webapps.ps1` | `agua` | Modificado |
 | `.agents/pending.md` | `agua_chatledger` | Modificado |
 | `GEMINI.md` | `agua_chatledger` | Modificado |
 
@@ -52,6 +71,7 @@ Ahora, tras un análisis de distribución de longitudes de nombres y direcciones
 | Análisis empírico de nombres (>38 chars) en Host C | ✅ Realizado: solo 6 de 1,204 registros exceden (0.5%) |
 | Análisis empírico de domicilios (>50 chars) en Host C | ✅ Realizado: solo 4 registros en toda la BD |
 | Sintaxis de los 5 archivos PHP (Lint test) | ✅ Exitoso (`php -l` limpio en todos) |
+| Simulación de rotación PowerShell (Pruebas unitarias) | ✅ Exitoso: script de prueba rotó 10 archivos dummy a 7 correctamente |
 | Integridad del Ground Truth / Runbook | ✅ Exitoso (`chatledger_validate.sh` sin errores) |
 
 ---
