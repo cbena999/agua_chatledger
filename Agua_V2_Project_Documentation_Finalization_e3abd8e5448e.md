@@ -7,8 +7,9 @@
 | **Trajectory ID** | `2f2ae869-2e00-4218-837c-7038c87884f7` |
 | **Cascade ID** | `ea5f8c74-55db-4706-b2c7-e3abd8e5448e` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 47 |
+| **Total Steps** | 77 |
 | **Started** | 21 May 2026, 3:19 pm |
+| **Completed** | 21 May 2026, 3:24 pm |
 
 ---
 
@@ -1905,8 +1906,589 @@ I've successfully identified the execution path of `status-webapps.ps1`. My curr
 
 ### Terminal Command Execution
 
-**Status:** CORTEX_STEP_STATUS_WAITING
+**Status:** Completed
 **Created:** 21 May 2026, 3:20 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Confirming software install**
+
+I've confirmed that LibreOffice, along with key tools like `convert`, `gs`, and `pdftoppm` from ImageMagick and Ghostscript, are installed. This opens up the possibility of document conversion! I'm now thinking about how to convert various file types (like `.docx`, `.odt`, or even `.html`) to PDF.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.027726146s
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 21 May 2026, 3:23 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 21 May 2026, 3:23 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 21 May 2026, 3:24 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 21 May 2026, 3:24 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Exploring HTML to PDF**
+
+I've made some good progress. I've successfully confirmed that LibreOffice, run in headless mode, can convert HTML to PDF, which is fantastic news! I'm now testing the command line to see how it works with a simple test file.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `fallback`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.000178645s
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 21 May 2026, 3:24 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `config.ps1`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# ==============================================
+# ARCHIVO DE CONFIGURACION CENTRALIZADO
+# ==============================================
+# Edita SOLO este archivo para personalizar todos los scripts
+# ==============================================
+
+# ==============================================
+# 1. CONFIGURACION DE LA UNIDAD DESTINO
+# ==============================================
+
+# Letra de la unidad donde se instala el sistema (Ej: "F", "W", "C")
+$DriveLetter = "F"
+$TargetDrive = "${DriveLetter}:"
+
+# ==============================================
+# 2. CONFIGURACION DE LA WEBAPP (Apache + MySQL)
+# ==============================================
+
+# Ruta del ejecutable de Apache (httpd.exe)
+$ApachePath = "$TargetDrive\xampp\apache\bin\httpd.exe"
+
+# Ruta del ejecutable de MySQL (mysqld.exe)
+$MySQLPath = "$TargetDrive\xampp\mysql\bin\mysqld.exe"
+
+# Directorio de trabajo de MySQL (donde esta mysqld.exe)
+$MySQLWorkDir = "$TargetDrive\xampp\mysql\bin"
+
+# Puerto de MySQL
+$MySQLPort = 7002
+
+# Puerto de Apache
+$ApachePort = 7001
+
+# Tiempo maximo de espera para que MySQL se inicie (en segundos)
+$MySQLStartTimeout = 30
+
+# Tiempo maximo de espera para que Apache se inicie (en segundos)
+$ApacheStartTimeout = 15
+
+# ==============================================
+# 2. CONFIGURACION DEL MONITOR DE UPS
+# ==============================================
+
+# Tolerancia a caidas de red (Modo Ping)
+$UPSPingMaxFails = 3
+$UPSPingWaitSeconds = 120
+
+# Tiempo de espera en MINUTOS antes de detener el servidor al estar en bateria
+$UPSWaitMinutes = 5
+
+# Intervalo de verificacion en estado normal (en segundos)
+$UPSCheckIntervalSeconds = 20
+
+# IP del Router/Modem (para deteccion por ping, si el UPS no tiene USB)
+$RouterIP = "192.168.1.254"
+
+# ==============================================
+# NOTA: DETECCION DE UPS (MODO PING)
+# ==============================================
+# El script detecta corte de energia haciendo pings con tolerancia al
+# router (RouterIP). Si la red se cae y no vuelve, asume corte de energia.
+# IMPORTANTE: El router NO debe estar respaldado por bateria.
+# ==============================================
+
+# ==============================================
+# 3. CONFIGURACION DE RUTAS DE SCRIPTS
+# ==============================================
+
+# Ruta completa donde se guardan los scripts
+$ScriptsPath = "C:\aguav2-2026\scripts"
+
+# Ruta completa del script de parada (usado por el monitor UPS)
+$StopScriptPath = "$ScriptsPath\shutdown-server.ps1"
+
+# ==============================================
+# 4. CONFIGURACION DE LA UNIDAD PROTEGIDA
+# ==============================================
+
+# Letra de la unidad protegida
+$ProtectedDrive = $DriveLetter
+
+# Ruta completa de la unidad protegida
+$ProtectedDrivePath = "$TargetDrive\"
+
+# Subcarpetas especificas a proteger (dentro de la unidad)
+$ProtectedSubfolders = @(
+    "$TargetDrive\aguav2",
+    "$TargetDrive\xampp"
+)
+
+# ==============================================
+# 5. CONFIGURACION DE POPUPS
+# ==============================================
+
+# Tiempo que duran los popups en segundos (0 = infinito hasta que el usuario acepte)
+$PopupTimeout = 0
+
+$MsgAlertTitle = "[AVISO] CORTE DE ENERGIA CONFIRMADO"
+$MsgAlertText = "Se ha detectado un corte de energia electrica.`n`nEl sistema funcionara con la bateria del UPS durante $UPSWaitMinutes minutos antes de apagar el equipo por completo de forma automatica.`n`nPor favor, DEJE DE CAPTURAR PAGOS e informe a los usuarios que el sistema se apagara pronto."
+
+$MsgCriticalTitle = "[CRITICO] APAGANDO SERVIDOR"
+$MsgCriticalText = "TIEMPO LIMITE DE BATERIA SUPERADO.`n`nEl servidor se esta apagando AHORA de forma automatica para prevenir danos en la base de datos.`n`nESTE PROCESO ES IRREVERSIBLE Y NO PUEDE SER CANCELADO."
+
+# ==============================================
+# 6. CONFIGURACION DE LOGS
+# ==============================================
+
+# Si deseas guardar logs de eventos (true/false)
+$EnableLogging = $true
+
+# Ruta donde se copian los logs de fallo de start/stop
+$FailLogDir = "C:\aguav2-2026\logs"
+
+# Ruta del archivo de log general
+$LogPath = "$FailLogDir\webapp-security.log"
+
+# Directorio de respaldos fisicos de la base de datos
+$BackupDir = "C:\aguav2-2026\respaldobd"
+
+# ==============================================
+# FIN DEL ARCHIVO DE CONFIGURACION
+# ==============================================
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `setup-kiosk-shortcut.ps1`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# setup-kiosk-shortcut.ps1 - Acceso Directo WebApp
+# ==============================================
+
+# --- Auto-Elevacion a Administrador ---
+if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+    Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
+    exit
+}
+
+
+$ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+
+if (Test-Path "$ScriptDir\config.ps1") {
+    . "$ScriptDir\config.ps1"
+} else {
+    Write-Host "ERROR: No se encuentra config.ps1 en: $ScriptDir" -ForegroundColor Red
+    exit 1
+}
+
+Write-Host "`n========================================" -ForegroundColor Cyan
+Write-Host "CREANDO ACCESO DIRECTO KIOSKO (CHROME)" -ForegroundColor Cyan
+Write-Host "========================================" -ForegroundColor Cyan
+
+# Buscar Google Chrome en rutas comunes
+$chromePaths = @(
+    "C:\Program Files\Google\Chrome\Application\chrome.exe",
+    "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe",
+    "${env:ProgramFiles}\Google\Chrome\Application\chrome.exe",
+    "${env:ProgramFiles(x86)}\Google\Chrome\Application\chrome.exe",
+    "$env:LOCALAPPDATA\Google\Chrome\Application\chrome.exe"
+)
+
+$chromePath = "chrome.exe" # Default
+foreach ($path in $chromePaths) {
+    if (Test-Path $path) {
+        $chromePath = $path
+        break
+    }
+}
+
+if ($chromePath -eq "chrome.exe") {
+    Write-Host "[AVISO] Google Chrome no detectado en las rutas estandar." -ForegroundColor Yellow
+    Write-Host "Se creara el acceso directo apuntando a 'chrome.exe' generico." -ForegroundColor Yellow
+} else {
+    Write-Host "[OK] Google Chrome detectado en: $chromePath" -ForegroundColor Green
+}
+
+
+$url = "http://localhost:$ApachePort/agua/login/index.php"
+
+# Priorizar escritorio del usuario actual
+$desktop = [Environment]::GetFolderPath("Desktop")
+
+if (-not (Test-Path $desktop)) {
+    $desktop = [Environment]::GetFolderPath("CommonDesktopDirectory")
+}
+
+$desktopFolder = "$desktop\aguaV2"
+if (-not (Test-Path $desktopFolder)) {
+    New-Item -ItemType Directory -Path $desktopFolder -Force | Out-Null
+}
+
+$shortcutPath = "$desktopFolder\Agua V2 (Sistema).lnk"
+
+$shell = New-Object -ComObject WScript.Shell
+$shortcut = $shell.CreateShortcut($shortcutPath)
+$shortcut.TargetPath = $chromePath
+$shortcut.Arguments = "--app=`"$url`" --window-size=1500,800"
+$shortcut.Description = "Abrir Sistema Agua V2"
+if ($chromePath -ne "chrome.exe") {
+    $shortcut.IconLocation = "$chromePath,0"
+}
+$shortcut.Save()
+
+Write-Host "[OK] Acceso directo 'Agua V2 (Sistema)' creado en la carpeta Desktop\aguaV2." -ForegroundColor Green
+Write-Host "     Apunta a: $url" -ForegroundColor Gray
+
+Write-Host "`n========================================" -ForegroundColor Cyan
+Write-Host "CONGELANDO VERSION DE CHROME (Deshabilitar Updates)" -ForegroundColor Cyan
+Write-Host "========================================" -ForegroundColor Cyan
+
+try {
+    # 1. Modificar Registro (Politicas de Google)
+    $regPath = "HKLM:\SOFTWARE\Policies\Google\Update"
+    if (-not (Test-Path $regPath)) {
+        New-Item -Path $regPath -Force -ErrorAction Stop | Out-Null
+    }
+    Set-ItemProperty -Path $regPath -Name "UpdateDefault" -Value 0 -Type DWord -ErrorAction Stop
+    Set-ItemProperty -Path $regPath -Name "AutoUpdateCheckPeriodMinutes" -Value 0 -Type DWord -ErrorAction Stop
+    Set-ItemProperty -Path $regPath -Name "DisableAutoUpdateChecksCheckboxValue" -Value 1 -Type DWord -ErrorAction Stop
+    Write-Host "       [OK] Politicas de Registro aplicadas (UpdateDefault=0)" -ForegroundColor Green
+
+    # 2. Deshabilitar Servicios de Google Update
+    $services = Get-Service -Name "gupdate", "gupdatem" -ErrorAction SilentlyContinue
+    if ($services) {
+        $services | Stop-Service -ErrorAction SilentlyContinue
+        $services | Set-Service -StartupType Disabled -ErrorAction SilentlyContinue
+        Write-Host "       [OK] Servicios 'gupdate' y 'gupdatem' deshabilitados" -ForegroundColor Green
+    }
+
+    # 3. Deshabilitar Tareas Programadas
+    $tasks = Get-ScheduledTask -TaskName "GoogleUpdateTask*" -ErrorAction SilentlyContinue
+    if ($tasks) {
+        $tasks | Disable-ScheduledTask -ErrorAction SilentlyContinue | Out-Null
+        Write-Host "       [OK] Tareas programadas de Google Update desactivadas" -ForegroundColor Green
+    }
+
+} catch {
+    Write-Host "       [FALLO] No se pudieron aplicar todas las politicas de bloqueo. Asegurate de correr como Administrador." -ForegroundColor Red
+    Write-Host "       Detalle: $_" -ForegroundColor Red
+}
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 21 May 2026, 3:24 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `06-accesos-rutas.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# Regla 06: Accesos, Rutas y Herramientas (A/B/C)
+
+Esta regla consolida los accesos a los tres ambientes de **Agua** y define cuándo usar MCP vs CLI MySQL.
+
+---
+
+## Host A — Linux XAMPP (Desarrollo / Próximo Producción)
+
+| Recurso | Ruta / Credencial |
+|---------|-------------------|
+| **XAMPP Home** | `/opt/lampp` |
+| **PHP Bin** | `/opt/lampp/bin/php` |
+| **MySQL Bin** | `/opt/lampp/bin/mysql` |
+| **Source Code** | `/opt/lampp/htdocs/agua` |
+| **Web URL** | `http://localhost/agua/login/index2.php` |
+| **Web User / Pass** | `nancy` / `260180` |
+| **MySQL** | `127.0.0.1:3306` · user `root` · pass `comite_2026` · db `awa` |
+| **MCP** | `bdawahost-a` |
+
+## Host B — Windows 7 MySQL legado (Solo lectura — datos frescos)
+
+| Recurso | Valor |
+|---------|-------|
+| **MySQL** | `192.168.1.81:3306` · user `root` · pass `sdrastbuy` · db `awa` |
+| **MCP** | `bdawahost-b` |
+
+## Host C — Windows 10 XAMPP Portable 7.4.33 (V2 MariaDB)
+
+| Recurso | Valor |
+|---------|-------|
+| **Web URL** | `http://192.168.1.84:7001/agua` |
+| **Apache** | puerto `7001` |
+| **MariaDB** | `192.168.1.84:7002` · user `root` · pass `comite_2026` · db `awa` |
+| **MCP** | `bdawahost-c` |
+| **XAMPP dir** | `F:\xampp` · Webapp: `F:\xampp\htdocs\agua` |
+
+> **Puerto no estándar (7002):** El MCP de Host C requiere el patch de `entrypoint-patch.sh`
+> aplicado al contenedor Docker `context7-mcp-mysql`. Sin el patch, `@f4ww4z/mcp-mysql-server`
+> ignora el puerto de la URL y falla con ETIMEDOUT.
+> Ver: `docs-dev/ga-cl-ia/issue-mcp-mysql-port-no-estandar.md`
+
+---
+
+## Arquitectura MCP — Docker context7-mcp-mysql
+
+Los tres MCPs comparten **un solo contenedor Docker** con patches aplicados al arrancar:
+
+```bash
+# Estructura de cada MCP en .mcp.json
+docker exec -i context7-mcp-mysql npx -y @f4ww4z/mcp-mysql-server mysql://user:pass@host:PORT/db
+```
+
+- Contenedor: `context7-mcp-mysql` (imagen `mcp/context7:latest`)
+- Compose: `docs-dev/ga-cl-ia/docker-compose.yml`
+- Patch: `docs-dev/ga-cl-ia/entrypoint-patch.sh` (soporte puerto no estándar — idempotente)
+- Config activa: `.mcp.json` (symlink → `.chatledger/.mcp.json`)
+
+> **NUNCA eliminar `.mcp.json`** ni reemplazar `docker exec` por `npx` directo.
+> `mcp_config.json` en `.agents/` es la fuente de verdad de referencia — `.mcp.json` debe ser idéntico.
+
+---
+
+## Regla: MCP vs CLI MySQL
+
+| Operación | Herramienta | Razón |
+|:---|:---:|:---|
+| Diagnóstico, validación, queries ad-hoc, comparación entre hosts | **MCP** | Resultados en contexto, ejecutable en paralelo, sin parseo de terminal |
+| Scripts con `DELIMITER`, stored procedures, triggers | **CLI MySQL** | MCP no soporta `DELIMITER` |
+| Dumps, cargas masivas, migraciones de volumen | **CLI MySQL** | Más eficiente para operaciones de volumen |
+| MCP no disponible o contenedor Docker caído | **CLI MySQL** | Fallback |
+
+**Regla general**: Usar MCP para todo trabajo de diagnóstico e inspección. Recurrir a CLI solo cuando la operación lo requiera explícitamente.
+
+CLI Host A: `/opt/lampp/bin/mysql -u root -pcomite_2026 awa`
+CLI Host C (desde Host A): `/opt/lampp/bin/mysql -h 192.168.1.84 -P 7002 -u root -pcomite_2026 awa`
+
+---
+**Nota**: Cualquier script de automatización que requiera ejecución directa de PHP o MySQL debe referenciar los binarios en `/opt/lampp/bin/` para compatibilidad con el stack legado.
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Considering Fallback Locations**
+
+I'm now digging into the possible fallback locations. The rule gives one address. I'm cross-referencing that with the `man.txt` document, which mentions a fallback pattern. I think it may indicate another location. I am trying to determine if the pattern applies and where that falls.
+
+
+**Exploring Fallback URLs**
+
+I'm now investigating various fallback URLs and potential local addresses. I'm cross-referencing information, I've checked inside `docs-dev/migration-aguav2/host-c-setup/` and other docs, and searched for "fallback" in the `docs-dev/` directory. I've also examined `/opt/lampp/htdocs/agua/admin/saneamiento/monitor_fallbacks.php` and noted a direct access link. I am now looking at system behavior when a connection fails. Specifically, where the system goes for a local fallback page, and any fallback IPs or URLs, including what `man.txt` states.
+
+
+**Defining Fallback URLs**
+
+I've clarified the fallback URLs. Specifically, I'm documenting both `http://localhost:7001/agua/admin/saneamiento/monitor_fallbacks.php` (internal/diagnostic) and `http://localhost:7001/agua` as the potential fallback local URLs. I am documenting these as being very clear and easy to find, should the network IP change.
+
+
+**Generating Diagrams**
+
+I'm now focused on generating PNG diagrams. I need to create `arquitectura_mvc.png`, `flujo_sincronizacion.png`, and `estado_servidor.png` using a Python script. I plan to use the Pillow (PIL) library and store the images in the `/home/carlos/Documents/tmp01/entrega/` directory. I'm checking the directory for writability and sketching out the script's design, starting with the image content for `arquitectura_mvc.png`, which should be a clear MVC architecture diagram.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.404475555s
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
 
 ---
 

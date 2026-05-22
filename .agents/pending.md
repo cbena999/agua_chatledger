@@ -101,8 +101,9 @@ SELECT IFNULL(SUM(monto),0) FROM vw_ligacargos_pendientes WHERE numcontrato='405
 | 2026-05-20 | Impresión de Credenciales en Lote | ✅ PASADO — Formato carta de 3 copias a 17.6 x 5.8 cm con guía de corte/doblez central y popup centrado. |
 | 2026-05-21 | Optimización de Renglones en Impresión | ✅ PASADO — Límite de registros por página incrementado de 42 a 46 en 5 reportes para aprovechar mejor el papel. |
 | 2026-05-21 | Rotación de Respaldos de BD | ✅ PASADO — Reemplazado filtrado temporal estático por rotación estricta de máximo 7 respaldos zip más recientes en scripts ps1. |
+| 2026-05-22 | Desactivación de Autocompletado en Login | ✅ PASADO — Atributos autocomplete off y new-password aplicados en login/index.php para evitar llenado automático del navegador. |
 
 ---
 
-*Última actualización: 2026-05-21 — Impresión y Rotación de Respaldos de BD — Antigravity/Gemini*
+*Última actualización: 2026-05-22 — Seguridad de Login y Autocompletado — Antigravity/Gemini*
 

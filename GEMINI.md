@@ -235,7 +235,10 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 *   **Aprovechamiento de Papel en Reportes**: Se incrementó la capacidad de registros por página de **42 a 46** en 5 reportes críticos (`listacontratosestado.php`, `listacontratos.php`, `listacontratosnuevos.php`, `listausuarios.php`, y `listadeudores.php`). Esto optimiza el uso de la hoja tamaño Carta reduciendo las hojas impresas sin riesgo de desborde por nombres o domicilios largos.
 *   **Rotación de Respaldos de BD (PowerShell)**: Se implementó un algoritmo de rotación basado en cantidad (máximo 7 respaldos más recientes) tanto en `start-webapps.ps1` como en `stop-webapps.ps1`. Esto evita que las múltiples pruebas de apagado/encendido del operador saturen el disco con más de 7 archivos de respaldo (data-*.zip), reemplazando el filtrado temporal estático de 7 días.
 
-**Última actualización**: 2026-05-21
+**Seguridad y Autocompletado de Credenciales (2026-05-22):**
+*   **Desactivación de Autocompletado en Login**: Se agregaron los atributos HTML `autocomplete="off"` en el `<form>` y en el input de usuario, y `autocomplete="new-password"` en el input de contraseña de `login/index.php`. Esto mitiga el comportamiento agresivo de autocompletado en navegadores modernos (Chrome/Firefox/Edge), manteniendo los campos limpios y evitando riesgos de seguridad por credenciales recordadas.
+
+**Última actualización**: 2026-05-22
 
 
 
