@@ -40,7 +40,6 @@ git push origin master
 | :--- | :--- | :--- |
 | `main` | **Trunk activo** — V2 (Windows 10 XAMPP 7.4 / PHP 7.4 / MariaDB) | C |
 | `aguav1.0-legacy` | Referencia histórica — V1 (Linux XAMPP MySQL 5.6 / PHP 5.5) | A (legacy) |
-| `feature/saneamiento-v2` | Feature branch experimental de saneamiento | A |
 
 ---
 
