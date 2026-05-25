@@ -33,10 +33,14 @@ git push origin master
 
 ## Gestión de Ramas
 
+> **Renombramiento 2026-05-25**: `main` → `aguav1.0-legacy` y `feature/upgrade-v2-win-xampp` → `main`.
+> La rama `main` es ahora el trunk activo de producción (Host C / V2).
+
 | Rama | Propósito | Host |
 | :--- | :--- | :--- |
-| `main` | Producción estable — Host A (Linux XAMPP MySQL 5.6) | A |
-| `feature/upgrade-v2-win-xampp` | Migración tecnológica a XAMPP 7.4 / Windows 10 | C |
+| `main` | **Trunk activo** — V2 (Windows 10 XAMPP 7.4 / PHP 7.4 / MariaDB) | C |
+| `aguav1.0-legacy` | Referencia histórica — V1 (Linux XAMPP MySQL 5.6 / PHP 5.5) | A (legacy) |
+| `feature/saneamiento-v2` | Feature branch experimental de saneamiento | A |
 
 ---
 
@@ -168,4 +172,4 @@ git checkout -- docs-dev/migration-aguav2/sync_hosta_to_hostc/work/
 
 ---
 
-**Última actualización:** 2026-04-21
+**Última actualización:** 2026-05-25 — Renombramiento de ramas (main→aguav1.0-legacy, feature→main)
