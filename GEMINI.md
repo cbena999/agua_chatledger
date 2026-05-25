@@ -238,7 +238,20 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 **Seguridad y Autocompletado de Credenciales (2026-05-22):**
 *   **Desactivación de Autocompletado en Login**: Se agregaron los atributos HTML `autocomplete="off"` en el `<form>` y en el input de usuario, y `autocomplete="new-password"` en el input de contraseña de `login/index.php`. Esto mitiga el comportamiento agresivo de autocompletado en navegadores modernos (Chrome/Firefox/Edge), manteniendo los campos limpios y evitando riesgos de seguridad por credenciales recordadas.
 
-**Última actualización**: 2026-05-22
+**Habilitación HTTPS y Nginx en OCI VM (2026-05-23):**
+*   **Certificado Let's Encrypt**: Solicitud y activación exitosa de SSL para `www.caelitandem.lat` vía Certbot + plugin Nginx. Redirect 301 HTTP → HTTPS configurado limpiamente.
+*   **Auto-Renovación Blindada**: Script `/home/ubuntu/scripts/renew-certs.sh` + cron `/etc/cron.d/certbot-custom` (3:00 AM diario). Timer `certbot.timer` de systemd verificado activo.
+*   **Alcance**: Todos los sitios del OCI VM (www, kanboard, n8n, oken8n) ahora operan en HTTPS con renovación automática. Esta configuración es del servidor CaeliTandem, **no del proyecto Agua**.
+
+**Documentación de Entrega Sistema Agua V2 (2026-05-21—22):**
+*   **Manual Técnico-Operativo**: Generado `Manual_Entrega_Sistema_Recaudacion_Agua_V2.pdf` (HTML + PDF) vía script Python. Incluye arquitectura MVC, diagramas, catálogos y manuales por rol.
+*   **Apéndices**: Código fuente de `configuracion.php` y paleta de colores semáforo del buscador integrados como apéndices formales del documento de entrega.
+
+**Iniciación Repositorio emp_devhj_sw / CaeliTandem (2026-05-25):**
+*   **Nuevo Repo**: Inicializado `/home/carlos/GitHub/emp_devhj_sw/caelitandem_home` para el proyecto CaeliTandem SEO, separado del proyecto Agua.
+*   **Script dos-repos-branch-git.sh**: Creado en `docs-dev/scripts/` como guía de referencia del flujo canónico de commits para ambos repos (agua + agua_chatledger). **No es un script ejecutable automatizado**, sino documentación operativa del flujo Git de cierre de sesión.
+
+**Última actualización**: 2026-05-25
 
 
 
