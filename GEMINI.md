@@ -57,7 +57,7 @@ Existen funcionalidades core que requieren especial atención para asegurar la c
 ## 🚀 Estado Actual: Host C UP & RUNNING (2026-04-07)
 
 - Split `ligacargos` **completado**: 2,513 activa (≥2026) + 192,545 histórico (≤2025)
-- Schema v2 completo + webapp PHP 7.4 adaptada en `feature/upgrade-v2-win-xampp`
+- Schema v2 completo + webapp PHP 7.4 adaptada en `main` (ex-`feature/upgrade-v2-win-xampp`, renombrada 2026-05-25)
 - Pipeline de Sincronización B → A → C **Maestro** (Comando: `Full-Pipeline-Sync`)
 - **Saneamiento Estructural (2026-04-26)**: 100% de asambleas consolidadas (max 3/día) y catálogos con llaves de unicidad.
 - Puertos Host C: Apache **7001**, MariaDB **7002**

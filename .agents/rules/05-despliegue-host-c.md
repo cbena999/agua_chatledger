@@ -9,7 +9,7 @@ Reglas para la migración e implementación de mejoras en el ambiente **Host C**
 La migración está **completada, consolidada y declarada verificada**. Host C tiene:
 - BD `awa` con schema v2 completo (17 tablas InnoDB, utf8mb4, FKs, SPs, 3 vistas)
 - `ligacargos` split: activa ≥2026 + `ligacargos_historico` ≤2025
-- Webapp `feature/upgrade-v2-win-xampp` adaptada al schema v2 — reportes de caja y cartera homologados
+- Webapp `main` adaptada al schema v2 — reportes de caja y cartera homologados
 - Scripts de setup versionados: `docs-dev/migration-aguav2/host-c-setup/` (02→09, manual/)
 - `tusuario` eliminada de BD y de todos los scripts (tabla fantasma — no usada por PHP)
 - Pipeline de saneamiento integrado y automatizado en `run_sync.sh` (Paso 8)
@@ -80,7 +80,7 @@ Estos scripts son **Herramientas de Migración y Transición** diseñadas para e
 
 - **Modo**: XAMPP portable en `F:\xampp` — sin servicios Windows.
 - **Directorio webapp**: `F:\xampp\htdocs\agua`
-- **Rama git**: `feature/upgrade-v2-win-xampp`
+- **Rama git**: `main`
 
 ---
 
@@ -116,7 +116,7 @@ Las vistas `vw_ligacargos_all` y `vw_ligacargos_pendientes` unifican ambas tabla
 ## Regla: PHPs en `feature` son exclusivos para Host C
 
 > **CRÍTICO — No compatibilizar con Host A.**
-> Todo el código PHP en la rama `feature/upgrade-v2-win-xampp` tiene como **único target Host C**.
+> Todo el código PHP en la rama `main` tiene como **único target Host C**.
 > Host A es un Bridge V1+ intencional con schema diferente — los PHPs que corren en esta rama
 > usan objetos de BD que **solo existen en Host C** (vistas, SPs, `ligacargos.id`, `cambios.id`).
 > **Nunca degradar código para hacerlo compatible con Host A** — si algo falla en Host A

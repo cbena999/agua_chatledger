@@ -106,7 +106,7 @@ SELECT IFNULL(SUM(monto),0) FROM vw_ligacargos_pendientes WHERE numcontrato='405
 | 2026-05-23 | Habilitación HTTPS Let's Encrypt OCI VM | ✅ PASADO — Certbot + Nginx para www.caelitandem.lat, redirect HTTP→HTTPS, cron auto-renovación blindado. |
 | 2026-05-21-22 | Documentación Entrega Sistema Agua V2 | ✅ PASADO — Manual PDF generado con apéndices de configuracion.php y paleta de colores semáforo. |
 | 2026-05-25 | Script dos-repos-branch-git.sh | ✅ PASADO — Guía operativa de flujo Git canónico para cierre de sesión (agua + agua_chatledger). |
-| 2026-05-25 | GEMINI.md y docs actualizados + push repos | ✅ PASADO — Hitos 2026-05-23 a 2026-05-25 documentados, commit y push en agua (feature/upgrade-v2-win-xampp) y agua_chatledger (master). |
+| 2026-05-25 | GEMINI.md y docs actualizados + push repos | ✅ PASADO — Hitos 2026-05-23 a 2026-05-25 documentados, commit y push en agua (main) y agua_chatledger (master). |
 
 ---
 

@@ -66,9 +66,9 @@ Para cualquier cambio estructural nuevo en la BD de Host C:
 5. Actualizar la tabla de diferencias en [Regla 05](./../rules/05-despliegue-host-c.md)
 
 Para cambios PHP:
-1. Desarrollar en rama `feature/upgrade-v2-win-xampp`
+1. Desarrollar en rama `main`
 2. Commit y push al remoto
-3. En Host C: `git pull origin feature/upgrade-v2-win-xampp`
+3. En Host C: `git pull origin main`
 
 ---
 

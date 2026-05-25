@@ -10,9 +10,9 @@ Esta regla define los entornos operativos de **Agua** y el acceso mandatorio por
 
 | Host | OS | Propósito | Rama Git | MCP Access | IP:Puerto |
 |:---:|---|---|---|---|:---:|
-| **A** | Ubuntu 22 / XAMPP Linux | TRANSICIÓN (V1+) — Bridge MySQL | `main` | `bdawahost-a` | Ver `.mcp.json` |
+| **A** | Ubuntu 22 / XAMPP Linux | TRANSICIÓN (V1+) — Bridge MySQL | `aguav1.0-legacy` | `bdawahost-a` | Ver `.mcp.json` |
 | **B** | Windows 7 / MySQL legado | Espejo Producción — Datos Frescos | N/A | `bdawahost-b` | Ver `.mcp.json` |
-| **C** | Windows 10 / XAMPP 7.4.33 Portable | Target V2 FINAL — MariaDB (Split Tablas) | `feature/upgrade-v2-win-xampp` | `bdawahost-c` | Ver `.mcp.json` |
+| **C** | Windows 10 / XAMPP 7.4.33 Portable | Target V2 FINAL — MariaDB (Split Tablas) | `main` | `bdawahost-c` | Ver `.mcp.json` |
 
 
 ### Stack Host C (detalle)

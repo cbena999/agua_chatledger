@@ -124,6 +124,6 @@ $y->q("INSERT ... '$esc'");
 
 ## 🔗 Referencias
 
-- Fix commit: rama `feature/upgrade-v2-win-xampp`, sesión Apr 15-16, 2026
+- Fix commit: rama `main` (ex-`feature/upgrade-v2-win-xampp`), sesión Apr 15-16, 2026
 - Regla relacionada: [11-estandares-codigo.md](./11-estandares-codigo.md)
 - Regla relacionada: [04-arquitectura-mvc.md](./04-arquitectura-mvc.md)
