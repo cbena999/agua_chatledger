@@ -55,22 +55,19 @@ Inventario completo de assets en [.agents/INVENTORY.md](.agents/INVENTORY.md).
 | Host | Propósito | Rama Git | MCP |
 | :---: | :--- | :--- | :--- |
 | **A** | Producción activa — Linux XAMPP, MySQL 5.6 | `main` | `bdawahost-a` → 127.0.0.1:3306 |
-| **B** | Espejo producción (MySQL 5.1) — solo lectura datos frescos | N/A | `bdawahost-b` → 192.168.1.120:3306 |
-| **C** | V2 MariaDB 10.4.27 — Windows XAMPP 7.4.33 | `feature/upgrade-v2-win-xampp` | `bdawahost-c` → 192.168.1.128:**7002** |
+| **B** | Espejo producción (MySQL 5.1) — solo lectura datos frescos | N/A | `bdawahost-b` → 192.168.1.81:3306 |
+| **C (ayd-os)** | Oferta V2 MariaDB 10.4.27 — Windows XAMPP 7.4.33 | `aguad_ac_oferta` | `bdawa2host-c` → 192.168.0.100:**7002** (DB: `aguayd_os`) |
 
-- **Acceso Web Host A:** `http://localhost/agua/login/index2.php` (nancy / 260180)
-- **Acceso Web Host C:** `http://192.168.1.128:7001/agua` (Apache 7001, MariaDB 7002)
+- **Acceso Web Tenant (Host C):** `http://192.168.0.100:7001/ayd-os/` (nancy / 260180)
 - **Repo GitHub:** `https://github.com/cbena999/aguaclmhj.git`
 
 ---
 
-## Estado de Migración Host C (2026-04-07)
+## Estado de Desarrollo (Rama aguad_ac_oferta)
 
-- Schema v2 completo, webapp PHP adaptada — **UP & RUNNING**
-- Pipeline sync B→A→C validado en ejecución real (7/7 checks OK)
-- **Saneamiento Estructural Estabilizado (2026-04-26)**: 100% de asambleas consolidadas y catálogos con llaves UNIQUE.
-- Scripts setup en `docs-dev/migration-aguav2/host-c-setup/` (02→09, manual/)
-- Checklist pase a producción en `host-c-setup/07_transferir_datos.md`
+- **BD activa**: `aguayd_os` (Host C: Puerto 7002)
+- **Interfaz**: Portal híbrido glassmorphic `mockup_v4_hybrid.php` conectado al motor de reportes de tomas y directorio interactivo.
+- **Flujo de Localización**: Las herramientas y scripts de anonimización y deploy se administran en `docs-dev/pase-a-prod/aguad-osv3-2026/`.
 - Ver regla detallada: [.agents/rules/05-despliegue-host-c.md](.agents/rules/05-despliegue-host-c.md)
 
 ---

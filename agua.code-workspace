@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "../../../../opt/lampp/htdocs/agua"
+		},
+		{
+			"path": "../caelitandem_home"
+		}
+	],
+	"settings": {
+		"php.version": "",
+		"chatledger.enabled": true
+	}
+}

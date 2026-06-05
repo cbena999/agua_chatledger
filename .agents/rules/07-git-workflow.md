@@ -70,8 +70,13 @@ bash docs-dev/ga-cl-ia/chatledger_sync_ga_lnks.sh
 
 ## Protocolo Obligatorio al Cambiar de Rama
 
-> Aplica para **cualquier dirección**: `main → feature` o `feature → main`.
+> Aplica para **cualquier dirección**: `main → feature`, `main → aguad_ac_oferta`, etc.
 > Claude Code y Gemini deben ejecutar estos pasos **antes** de `git checkout`.
+
+### 🔄 Regla de Paridad de Reglas (Branch Alignment)
+- Si estás trabajando en la rama `aguad_ac_oferta` del repositorio `agua`, el repositorio `agua_chatledger` DEBE estar también en la rama `aguad_ac_oferta`.
+- Si regresas a la rama `main` en `agua`, el repositorio `agua_chatledger` debe volver a la rama `master`.
+- Esta paridad garantiza que las reglas interpretadas por el agente de IA coincidan exactamente con la versión del código activo.
 
 ### Paso 1 — Verificar estado de `agua_chatledger`
 

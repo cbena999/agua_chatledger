@@ -1,6 +1,31 @@
 # Regla 05: Despliegue y Automatización (Host C)
 
-Reglas para la migración e implementación de mejoras en el ambiente **Host C** (MariaDB 10.4.27 / XAMPP 7.4.33).
+Reglas para la migración, localización y despliegue en el ambiente **Host C** (MariaDB 10.4.27 / XAMPP 7.4.33).
+
+---
+
+## 🗺️ Despliegue y Localización (Rama aguad_ac_oferta - Tenant Tlapa)
+
+En la rama `aguad_ac_oferta`, el proceso de despliegue se enfoca en la localización del tenant para Tlapa de Comonfort, Guerrero, utilizando la base de datos `aguayd_os` en el Host C.
+
+### Suite de Herramientas de Despliegue
+Todos los scripts de control y migración están ubicados en:
+`docs-dev/pase-a-prod/aguad-osv3-2026/`
+
+| Script / Archivo | Función | Origen de Parámetros |
+| :--- | :--- | :--- |
+| `generate_anonymization.py` | Genera el SQL de anonimización mapeando nombres y calles de forma determinista usando el PDF de nombres. | `.mcp.json` SSOT |
+| `run_anonymization.sh` | Ejecuta e inyecta la anonimización directamente en la base de datos `aguayd_os` de Host C. | `.mcp.json` SSOT |
+| `deploy_ayd_os.sh` | Limpia, empaqueta la webapp actual, la transfiere al Host C y la descomprime en `/ayd-os/`. | `.mcp.json` SSOT |
+| `check_connectivity.sh` | Verifica la conectividad de red con el Host C (Apache y MariaDB) antes de proceder. | `.mcp.json` SSOT |
+| `prepare_deploy_win10.sh` | Script auxiliar para empaquetado de archivos ZIP del lado del servidor. | Rutas Relativas |
+
+### Protocolo de Ejecución de Localización (Pase a Prod)
+Para realizar una actualización o despliegue limpio del tenant en el Host C, se sigue esta secuencia:
+1. **Verificar Conectividad**: Ejecutar `bash check_connectivity.sh` para verificar el estado de red y puertos.
+2. **Generar Anonimización**: Ejecutar `python3 generate_anonymization.py` para generar el volcado SQL con datos limpios de Tlapa.
+3. **Inyectar Datos**: Ejecutar `bash run_anonymization.sh` para poblar/actualizar la base `aguayd_os` en Host C.
+4. **Desplegar Webapp**: Ejecutar `bash deploy_ayd_os.sh` para subir los archivos de la webapp (incluyendo mockups y plantillas) al directorio `/ayd-os/`.
 
 ---
 

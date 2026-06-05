@@ -54,15 +54,13 @@ Existen funcionalidades core que requieren especial atención para asegurar la c
 
 ---
 
-## 🚀 Estado Actual: Host C UP & RUNNING (2026-04-07)
+## 🚀 Estado Actual: Rama aguad_ac_oferta (Tenant Tlapa)
 
-- Split `ligacargos` **completado**: 2,513 activa (≥2026) + 192,545 histórico (≤2025)
-- Schema v2 completo + webapp PHP 7.4 adaptada en `main` (ex-`feature/upgrade-v2-win-xampp`, renombrada 2026-05-25)
-- Pipeline de Sincronización B → A → C **Maestro** (Comando: `Full-Pipeline-Sync`)
-- **Saneamiento Estructural (2026-04-26)**: 100% de asambleas consolidadas (max 3/día) y catálogos con llaves de unicidad.
+- Base de datos de oferta: `aguayd_os` (Host C: Puerto 7002 / MariaDB)
+- Interfaz Híbrida Glassmorphism: `mockup_v4_hybrid.php` integrada en la raíz, conectada al motor de reportes de tomas, estadísticas en tiempo real y directorio interactivo de ciudadanos (1,409 registros).
+- Sincronización y Despliegue de Oferta: Los scripts y herramientas de localización residen en `docs-dev/pase-a-prod/aguad-osv3-2026/` (anonymization y deploy).
 - Puertos Host C: Apache **7001**, MariaDB **7002**
-- Protocolo de Migración: `docs-dev/migration-aguav2/MIGRATION_PROTOCOL.md`
-- Checklist pase a producción: `docs-dev/migration-aguav2/host-c-setup/07_transferir_datos.md`
+- Ruta Web del Tenant: `http://192.168.0.100:7001/ayd-os/`
 
 ## 🛡️ Automatización y Hardening Host C (2026-05-08)
 El entorno Windows 10 ha sido convertido en un Appliance Kiosko 100% automatizado:

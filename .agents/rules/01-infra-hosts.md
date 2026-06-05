@@ -12,7 +12,7 @@ Esta regla define los entornos operativos de **Agua** y el acceso mandatorio por
 |:---:|---|---|---|---|:---:|
 | **A** | Ubuntu 22 / XAMPP Linux | TRANSICIÓN (V1+) — Bridge MySQL | `aguav1.0-legacy` | `bdawahost-a` | Ver `.mcp.json` |
 | **B** | Windows 7 / MySQL legado | Espejo Producción — Datos Frescos | N/A | `bdawahost-b` | Ver `.mcp.json` |
-| **C** | Windows 10 / XAMPP 7.4.33 Portable | Target V2 FINAL — MariaDB (Split Tablas) | `main` | `bdawahost-c` | Ver `.mcp.json` |
+| **C** | Windows 10 / XAMPP 7.4.33 Portable | Localización V2 (Tlapa) — MariaDB | `aguad_ac_oferta` | `bdawa2host-c` | Ver `.mcp.json` |
 
 
 ### Stack Host C (detalle)
@@ -24,18 +24,18 @@ Esta regla define los entornos operativos de **Agua** y el acceso mandatorio por
 | PHP | 7.4.33 |
 | phpMyAdmin | 5.2.0 |
 | Directorio XAMPP | `F:\xampp` |
-| Webapp | `F:\xampp\htdocs\agua` |
+| Webapp | `F:\xampp\htdocs\ayd-os` |
 
 ## 📐 Jerarquía y Mandatos:
 1.  **Host A de Transición**: Es la **Guía Estructural Oficial (MySQL)**. Actúa como puente para transformar datos de B hacia el modelo V2. Mantiene esquema de tabla única para compatibilidad bridge.
 2.  **Host B de Datos**: Únicamente se utiliza como fuente de "Datos Frescos de Negocio" para alimentar A. Solo lectura — prohibido cambios estructurales.
-3.  **Host C Target**: Entorno para la optimización definitiva de `ligacargos` (split histórico) y uso del stack MariaDB V2. Todo cambio vía scripts versionados + rollback.
-
+3.  **Host C Target**: Entorno de localización para la base de datos `aguayd_os` y el despliegue de la webapp de la oferta en `/ayd-os/` con el stack MariaDB V2.
+ 
 ---
 **Acceso Técnico**:
 - MCP `bdawahost-a` para consultas y ejecuciones en el ambiente de desarrollo.
 - MCP `bdawahost-b` exclusivamente para extracción de datos operativos (pagos, cargos).
-- MCP `bdawahost-c` para deploy y validación de scripts en Host C (Windows 10).
+- MCP `bdawa2host-c` para deploy y validación de scripts en Host C (Windows 10, BD `aguayd_os`).
 
 ### 📂 Rutas de Logs Host C
 | Archivo | Ruta | Propósito |

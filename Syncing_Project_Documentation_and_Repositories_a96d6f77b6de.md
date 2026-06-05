@@ -4,11 +4,12 @@
 
 | Field | Value |
 |-------|-------|
-| **Trajectory ID** | `e35df58c-357c-4c94-bc4f-341cc0846263` |
+| **Trajectory ID** | `17bb3a52-ad2d-4ff2-a1b7-14cdb08decfc` |
 | **Cascade ID** | `fe1bd6aa-acbd-4e2b-a05e-a96d6f77b6de` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 32 |
+| **Total Steps** | 655 |
 | **Started** | 25 May 2026, 3:51 pm |
+| **Completed** | 25 May 2026, 9:35 pm |
 
 ---
 
@@ -1839,10 +1840,8525 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 
 ## Agent Response
 
+### Actions
+
+**Tool:** `replace_file_content`
+
 <details>
 <summary>Metadata</summary>
 
 - **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 May 2026, 3:52 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 May 2026, 3:53 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 May 2026, 3:53 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 3:54 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 3:54 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 3:54 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 3:54 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `07-git-workflow.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# Regla 07: Control de Versiones (Git/GitHub)
+
+Esta regla define el flujo de trabajo en el repositorio oficial de **Agua**.
+Válida para **Claude Code** y **Google Antigravity/Gemini** por igual.
+
+---
+
+## Repositorio Oficial
+
+- **URL**: `https://github.com/cbena999/aguaclmhj.git`
+- **Usuario GH**: `cbena999`
+
+---
+
+## Repositorio de Historial (ChatLedger)
+
+Almacena el Ground Truth de agentes IA y logs de conversaciones, independiente del código fuente.
+
+- **Ruta Local**: `/home/carlos/GitHub/agua_chatledger/`
+- **URL Remoto**: `https://github.com/cbena999/agua_chatledger.git`
+- **Symlink en App**: `.chatledger` → `/home/carlos/GitHub/agua_chatledger/`
+- **Rama Git**: `master`
+
+```bash
+# Subir cambios al ChatLedger (cuando se indique):
+cd /home/carlos/GitHub/agua_chatledger
+git add -A
+git commit -m "Sync: <descripción breve>"
+git push origin master
+```
+
+---
+
+## Gestión de Ramas
+
+| Rama | Propósito | Host |
+| :--- | :--- | :--- |
+| `main` | Producción estable — Host A (Linux XAMPP MySQL 5.6) | A |
+| `feature/upgrade-v2-win-xampp` | Migración tecnológica a XAMPP 7.4 / Windows 10 | C |
+
+---
+
+## Arquitectura de Symlinks (Ground Truth)
+
+Los siguientes paths en el repo `agua` son **symlinks permanentes** al chatledger.
+Aplican en **ambas ramas** (`main` y `feature`). Git en `agua` **nunca reporta cambios** en su contenido.
+
+| Symlink en repo `agua` | Apunta a | Git lo rastrea |
+| :--- | :--- | :--- |
+| `.chatledger` | `/home/carlos/GitHub/agua_chatledger/` | Solo el symlink en sí |
+| `.agents` | `.chatledger/.agents/` | Solo el symlink en sí |
+| `CLAUDE.md` | `.chatledger/CLAUDE.md` | Solo el symlink en sí |
+| `GEMINI.md` | `.chatledger/GEMINI.md` | Solo el symlink en sí |
+| `.clauderules` | `.chatledger/.clauderules` | Solo el symlink en sí |
+| `.mcp.json` | `.chatledger/.mcp.json` | Solo el symlink en sí |
+| `docs-dev/ga-cl-ia/` | `/home/carlos/GitHub/agua_chatledger/docs-dev/ga-cl-ia/` | Solo el symlink en sí |
+
+> **Consecuencia clave:** Editar `.agents/rules/`, `CLAUDE.md`, `docs-dev/ga-cl-ia/`, etc.
+> modifica físicamente `agua_chatledger`. Para versionar esos cambios → commitear en `agua_chatledger`, no en `agua`.
+
+Para recrear todos los symlinks en un equipo nuevo:
+```bash
+bash docs-dev/ga-cl-ia/chatledger_sync_ga_lnks.sh
+```
+
+---
+
+## Protocolo Obligatorio al Cambiar de Rama
+
+> Aplica para **cualquier dirección**: `main → feature` o `feature → main`.
+> Claude Code y Gemini deben ejecutar estos pasos **antes** de `git checkout`.
+
+### Paso 1 — Verificar estado de `agua_chatledger`
+
+```bash
+git -C /home/carlos/GitHub/agua_chatledger status
+```
+
+**Si hay cambios sin commitear:**
+```bash
+cd /home/carlos/GitHub/agua_chatledger
+git add -A
+git commit -m "docs: guardar cambios antes de cambiar rama en agua"
+cd /opt/lampp/htdocs/agua
+```
+
+> Esto protege reglas, skills, workflows y docs editados antes del cambio de rama.
+
+### Paso 2 — Verificar estado de `agua`
+
+```bash
+git status
+```
+
+Clasificar cada archivo reportado:
+
+| Tipo de archivo | Acción |
+| :--- | :--- |
+| **Código PHP/JS/SQL** modificado — pertenece a rama actual | `git add` + `git commit` antes de cambiar |
+| **Código PHP/JS/SQL** modificado — trabajo en progreso | `git stash push -m "wip: descripcion"` |
+| **Archivo nuevo sin track** (`??`) de código | Decidir: commitear en rama actual o ignorar si es temporal |
+| **Symlinks** (`.agents`, `CLAUDE.md`, etc.) | Ignorar — git no reporta cambios en su contenido |
+| **Artifacts de sync** (`work/*.sql`, `backups/*.sql.gz`) | Descartar — ver sección Artifacts |
+
+### Paso 3 — Cambiar de rama
+
+```bash
+git checkout <rama-destino>
+```
+
+### Paso 4 — Verificar estado post-cambio
+
+```bash
+git status
+```
+
+- Árbol limpio → OK
+- Si hay stash pendiente → `git stash pop` y resolver
+
+---
+
+## Qué commitear en cada repo
+
+| Cambio | Repo donde commitear |
+| :--- | :--- |
+| Código PHP, JS, SQL, vistas, includes | `agua` (rama correspondiente) |
+| Reglas `.agents/rules/` | `agua_chatledger` |
+| Skills `.agents/skills/` | `agua_chatledger` |
+| Workflows `.agents/workflows/` | `agua_chatledger` |
+| `CLAUDE.md`, `GEMINI.md`, `.clauderules` | `agua_chatledger` |
+| `docs-dev/ga-cl-ia/` (docs IA) | `agua_chatledger` |
+| Symlinks nuevos (modo 120000) | `agua` (ambas ramas si aplica) |
+| `.gitignore`, `composer.json`, configs de repo | `agua` |
+
+---
+
+## Artifacts de Sync — Nunca Commitear
+
+Los directorios `work/` y `backups/` de los pipelines de sync son generados automáticamente. Están en `.gitignore`.
+
+| Path ignorado | Origen |
+| :--- | :--- |
+| `docs-dev/migration-aguav2/syncawa_hostb_to_hosta/work/*.sql` | Dumps sync B→A |
+| `docs-dev/migration-aguav2/syncawa_hostb_to_hosta/work/conteos_*.txt` | Logs de conteo B→A |
+| `docs-dev/migration-aguav2/syncawa_hostb_to_hosta/backups/*.sql.gz` | Backups automáticos Host A |
+| `docs-dev/migration-aguav2/sync_hosta_to_hostc/work/*.sql` | Dumps sync A→C |
+| `docs-dev/migration-aguav2/sync_hosta_to_hostc/work/conteos_*.txt` | Logs de conteo A→C |
+| `docs-dev/migration-aguav2/sync_hosta_to_hostc/backups/*.sql.gz` | Backups automáticos Host C |
+
+Si aparecen como M/D/? en `git status`, descartarlos con:
+
+```bash
+git checkout -- docs-dev/migration-aguav2/syncawa_hostb_to_hosta/work/
+git checkout -- docs-dev/migration-aguav2/sync_hosta_to_hostc/work/
+```
+
+---
+
+## Notas para Agentes IA (Claude Code y Gemini)
+
+- **Commits**: formato `tipo(scope): descripción`. Descripción clara y técnica.
+- **NO commitear tras cada cambio**: aplicar los cambios en archivos, reportar qué se modificó, y detenerse. Solo ejecutar `git add / commit / push` cuando el usuario lo solicite explícitamente ("commitea", "sube los cambios", etc.).
+- **Pushes**: permitidos bajo usuario `cbena999`. Confirmar con usuario antes de push a `main`.
+- **Symlinks**: no reemplazar symlinks por archivos reales. Si se detecta un directorio real donde debería haber symlink → ejecutar `chatledger_sync_ga_lnks.sh`.
+- **Conflictos**: resolver antes de proponer merge. No usar `--no-verify` ni `--force` sin autorización explícita.
+- **Scope de autorización**: una aprobación puntual no autoriza la misma acción en contextos futuros.
+- **ChatLedger primero**: ante duda de dónde commitear algo relacionado con IA/docs → siempre `agua_chatledger`.
+
+---
+
+**Última actualización:** 2026-04-21
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 3:55 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 3:55 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 3:55 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 3:55 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 3:55 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 3:55 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 3:56 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 3:56 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 3:56 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+## User Request
+
+A hora, sincroniza la rama feature/upgrade-v2-win-xampp hacia la rama master o main , la idea es hacer creo un rebase para rama feature se ponga encima de  la rama master o main , es correcto o analiza antes de realizar el cambio ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `GEMINI.md`
+**Language:** markdown
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The user wants to synchronize the `feature/upgrade-v2-win-xampp` branch toward `master` or `main`. They're asking whether a rebase is the right approach. Let me analyze the situation first before doing anything.
+
+Let me check the current state of the branches, their divergence, and what the right strategy would be.
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.680952054s
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 4:00 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 4:00 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 4:00 pm
+
+---
+
+<details>
+<summary>Conversation History</summary>
+
+# Conversation History
+Here are the conversation IDs, titles, and summaries of your most recent 11 conversations, in reverse chronological order:
+
+<conversation_summaries>
+## Conversation 06286601-35ed-4cc8-b964-fff0355244db: Initializing New Development Repository
+- Created: 2026-05-25T19:48:45Z
+- Last modified: 2026-05-25T21:35:21Z
+
+### USER Objective:
+Initializing New Development Repository
+
+Main Objective:
+Provision a new Git repository and organize project files for the emp_devhj_sw project.
+
+Goals:
+1. Create the local directory structure `/home/carlos/GitHub/emp_devhj_sw/caelitandem_home`.
+2. Initialize a new Git repository within the project root.
+3. Migrate the entire contents of `/home/carlos/Documents/tmp01/empsw/` into the newly created `caelitandem_home` directory.
+
+## Conversation 391ab92d-8c62-4053-97a8-3a6d6c7b506c: CaeliTandem SEO Strategy Implementation
+- Created: 2026-05-24T05:38:16Z
+- Last modified: 2026-05-25T19:36:52Z
+
+## Conversation ea5f8c74-55db-4706-b2c7-e3abd8e5448e: Modernizing CaeliTandem Web Assets
+- Created: 2026-05-21T21:19:44Z
+- Last modified: 2026-05-25T19:03:32Z
+
+## Conversation 9df8240f-6a37-4147-b8a3-c44b0ab61092: Restoring Nginx HTTPS Configuration
+- Created: 2026-05-24T04:52:15Z
+- Last modified: 2026-05-24T05:24:54Z
+
+### USER Objective:
+Restoring HTTPS For Nginx Sites
+
+USER Objective:
+Restore secure HTTPS access for the web applications hosted on the `oci-vm` instance by reconfiguring Nginx and renewing Let's Encrypt certificates.
+
+Goals:
+1. Analyze and correct the Nginx configuration on `oci-vm` to ensure all sites are reachable via HTTPS.
+2. Troubleshoot and re-establish valid Let's Encrypt SSL certificates for the affected domains.
+3. Implement a permanent HTTP-to-HTTPS redirect for all websites served by Nginx to ensure secure connectivity.
+4. Validate automatic certificate renewal settings to prevent future service interruptions.
+5. Document the resolved configuration and operational status to maintain infrastructure parity.
+
+## Conversation af7746f8-b81d-460c-bf0e-b544940d5bde: Appending System Documentation Appendices
+- Created: 2026-05-22T19:50:44Z
+- Last modified: 2026-05-22T21:17:50Z
+
+### USER Objective:
+Appending System Documentation Appendices
+
+Main Objective:
+Update the "Entrega_Sistema_AyDV2_CM" documentation by appending the requested configuration and UI design specifications.
+
+Goals:
+1. Append the source code contents of `admin/operaciones/configuracion.php` to the project documentation to ensure transparency in system parameters.
+2. Integrate the "Paleta de Colores del Buscador de Usuarios" specifications from the `analisis_paridad_3hosts.md` file into the documentation as a formal technical appendix.
+3. Ensure the documentation reflects the current state of system operational controls and the visual feedback mechanisms implemented for contract management.
+
+## Conversation 71ba31b2-ab24-42c2-805e-0b5581ef1d7b: Configuring Nginx Web Root Access
+- Created: 2026-05-22T17:21:23Z
+- Last modified: 2026-05-22T17:38:39Z
+
+### USER Objective:
+Configuring Nginx Web Root Access
+
+Main Objective:
+Validate and establish remote access to the Nginx configuration directory on the oci-vm instance to manage the web application root.
+
+Goals:
+1. Verify connectivity and permissions for the specified VSFTP path: `vsftp://ubuntu@oci-vm/etc/nginx/`.
+2. Configure or confirm the Nginx web root settings to ensure the web application is served correctly from the intended directory.
+3. Establish a secure and efficient workflow for future Nginx configuration updates on the OCI VM.
+
+## Conversation 13a74b1c-4f0e-47a5-a1e1-389ca3638e08: Debugging Address Normalization Logic
+- Created: 2026-05-20T18:12:05Z
+- Last modified: 2026-05-22T17:11:45Z
+
+## Conversation d0c3def9-505b-40eb-89b8-44c404849d37: Installing Local AI Development Stack
+- Created: 2026-05-19T19:24:09Z
+- Last modified: 2026-05-20T04:35:13Z
+
+### USER Objective:
+Local AI Coding Environment Deployment
+
+Objective: Deploy a high-performance local AI agent environment on Ubuntu 22 for software development.
+Goals:
+1. Configure and optimize the local stack, integrating Ollama, OpenCode, and OpenChamber.
+2. Remediate dependency conflicts (Node.js versions) and resource constraints (VRAM limitations) to enable reliable agentic tool execution.
+3. Establish a library of specialized local LLMs (Qwen 2.5-Coder, DeepSeek, Codestral) and validate their code-generation and file-editing capabilities.
+4. Troubleshoot and bridge the integration gaps between model tool-calling schemas and the OpenCode/VS Code agentic interface.
+
+## Conversation 1846bc62-6c4c-4ba0-960b-214ce8b4778c: Upgrading Antigravity to 2.0.0
+- Created: 2026-05-20T03:10:58Z
+- Last modified: 2026-05-20T03:16:22Z
+
+### USER Objective:
+Upgrading Antigravity to 2.0.0
+Investigate the upgrade path and procedure for Google Antigravity from version 1.23.2 to the latest version 2.0.0, including identifying its installation details and compiling an actionable migration guide.
+
+## Conversation b3356b06-a750-4cf4-833d-b711001fa206: Finalizing Documentation and Sync
+- Created: 2026-05-19T19:05:20Z
+- Last modified: 2026-05-19T19:07:05Z
+
+### USER Objective:
+Finalizing Documentation and Sync
+
+Main Objective:
+Finalize the environment synchronization and documentation updates for the Agua V2 project to ensure repository parity and clean tracking.
+
+Goals:
+1. Update GEMINI.md and associated documentation to reflect the latest project state and recent pipeline remediations.
+2. Stage and commit all pending changes, including repository cleanups and synchronization script updates.
+3. Push all committed changes to the remote branch to maintain version control consistency and ensure production-ready synchronization.
+
+## Conversation ac94919e-b65b-4f3f-afeb-60391e47c9d0: Debugging Financial Data Discrepancy
+- Created: 2026-05-19T17:51:41Z
+- Last modified: 2026-05-19T18:56:20Z
+
+### USER Objective:
+Resolving Data Sync Truncation
+
+Objective: Audit and remediate silent data loss in the Host B to Host A pipeline caused by MySQL bulk insert truncations.
+
+Goals:
+1. Identify all contracts impacted by the 1MB `max_allowed_packet` truncation issue by comparing source database counts with the generated SQL dump.
+2. Generate a comprehensive report listing affected contracts, including user names, addresses, and current status, to quantify the migration gap.
+3. Apply the `max_allowed_packet` and `net_buffer_length` fix to the synchronization script and harden the pipeline with post-dump integrity checks.
+4. Execute a full re-synchronization to restore complete data parity across Hosts A, B, and C.
+
+</conversation_summaries>
+
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 25 May 2026, 4:00 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+## User Request
+
+que tal esto:
+Que la main se renombre a: aguav1.0-legacy y feature/upgrade-v2-win-xampp se renombre a main ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `GEMINI.md`
+**Language:** markdown
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The user wants to:
+1. Rename `main` → `aguav1.0-legacy`
+2. Rename `feature/upgrade-v2-win-xampp` → `main`
+
+This is a clean approach. Let me plan the steps:
+
+**Local:**
+1. `git branch -m main aguav1.0-legacy` — rename main locally
+2. `git branch -m feature/upgrade-v2-win-xampp main` — rename feature to main
+
+**Remote (GitHub):**
+1. Push `aguav1.0-legacy` to origin
+2. Push current `main` (formerly feature) to origin as `main`
+
+
+3. Delete the old `main` and `feature/upgrade-v2-win-xampp` branches from origin
+4. Update GitHub's default branch setting to point to the new `main`
+
+The key challenge is that GitHub protects the default branch from deletion, so I'll need to change the default branch first through the GitHub UI or API before removing the old `main`.
+
+For the actual sequence, I need to rename locally first — moving the current `main` to `aguav1.0-legacy` and promoting `feature/upgrade-v2-win-xampp` to `main`. Then when pushing remotely, I can't just push the new `main` directly since the old one still exists with different history. The safest approach is to push `aguav1.0-legacy` first, switch GitHub's default branch away from `main`, and then handle the old `main` deletion before pushing the new one. I'll also need to clean up the remote tracking references locally and update the documentation to match this new branch structure.
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 14.767368158s
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 4:04 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 4:04 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 4:05 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 4:05 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 4:05 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 4:05 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 4:05 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 4:05 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 4:05 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 4:06 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 4:06 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `multi_replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 May 2026, 4:06 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 4:06 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+## User Request
+
+describe como quedo:
+segun yo debio ser asi:
+la main ahora apunta ha lo que antes fue:  y feature/upgrade-v2-win-xampp 
+y aguav1.0-legacy es el anterior main
+?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `GEMINI.md`
+**Language:** markdown
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The user wants to confirm that the rename was done correctly. Let me verify the current state clearly.
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.818872717s
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 4:10 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+## User Request
+
+cuantas ramas son entocnes
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `GEMINI.md`
+**Language:** markdown
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Simple question about branch count.
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.557425438s
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 4:12 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+## User Request
+
+. que feature/saneamiento-v2 siga existiendo talcual en remoto como en local.
+. GEMINI.md y asociados ve a feature/saneamiento-v2 , cierto ?
+. limina: otro2/ollama-qwen2-5-coder-14b, test-modelos/ollama-gemma4-e4b 
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `GEMINI.md`
+**Language:** markdown
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The user wants me to:
+1. Push `feature/saneamiento-v2` to remote
+2. Check if GEMINI.md and associated files exist in `feature/saneamiento-v2` branch
+3. Delete local branches `otro2/ollama-qwen2-5-coder-14b` and `test-modelos/ollama-gemma4-e4b`
+
+Let me do all of this.
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 5.427806467s
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 4:15 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 4:15 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+## User Request
+
+sube todo a remoto, hay algo que actualizar en GEMINI.md ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `GEMINI.md`
+**Language:** markdown
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Let me check if there are any pending changes in either repo, and also check if GEMINI.md needs updating to reflect the branch renaming we just did.
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.434051099s
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 4:16 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `feature/upgrade-v2-win-xampp`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 May 2026, 4:16 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** CORTEX_STEP_STATUS_ERROR
+**Created:** 25 May 2026, 4:17 pm
+
+---
+
+## User Request
+
+Mas bien seria que  GEMINI.md y todos archivos asociados,  ahora en lugar de referir a feature/upgrade-v2-win-xampp , lo deben hacer hacia main , analiza  e informame.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `GEMINI.md`
+**Language:** markdown
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The user wants me to find all references to `feature/upgrade-v2-win-xampp` across GEMINI.md and all associated files in the chatledger, and update them to `main`. Let me search comprehensively.
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `feature/upgrade-v2-win-xampp`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.398162746s
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 May 2026, 4:19 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `feature/upgrade-v2-win-xampp`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 May 2026, 4:19 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `feature/upgrade-v2-win-xampp`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 May 2026, 4:19 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `feature/upgrade-v2-win-xampp`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 May 2026, 4:19 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+## User Request
+
+si
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `GEMINI.md`
+**Language:** markdown
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Let me update all 7 active files. Let me view the relevant lines of each file first, then make the edits.
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `GEMINI.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.834963838s
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# GEMINI.md - Central Project Context for Agua (MASTER INDEX)
+
+Este archivo es el punto de entrada principal para el asistente de IA (Antigravity/Gemini) y un resumen del contexto del proyecto **Agua**. El conocimiento detallado y las reglas de oro se han distribuido en archivos modulares dentro de `.agents/rules/`.
+
+> [!IMPORTANT]
+> **Gemini**: Debes consultar y seguir las reglas detalladas en el directorio `.agents/rules/` para cada tarea orquestada en este proyecto.
+
+---
+
+## 🗺️ Índice de Reglas y Conocimiento (Ground Truth)
+
+| Regla | Descripción | Archivo |
+| :--- | :--- | :--- |
+| **01** | **Infraestructura y Hosts** | [.agents/rules/01-infra-hosts.md](file:///.agents/rules/01-infra-hosts.md) |
+| **02** | **Diccionario de Reglas por Módulo** | [.agents/rules/02-reglas-negocio.md](file:///.agents/rules/02-reglas-negocio.md) |
+| **03** | **Sincronización de Datos (B -> A)** | [.agents/rules/03-sincronizacion-b-a.md](file:///.agents/rules/03-sincronizacion-b-a.md) |
+| **04** | **Arquitectura MVC y Directorios** | [.agents/rules/04-arquitectura-mvc.md](file:///.agents/rules/04-arquitectura-mvc.md) |
+| **05** | **Despliegue y Automatización (Host C)** | [.agents/rules/05-despliegue-host-c.md](file:///.agents/rules/05-despliegue-host-c.md) |
+| **06** | **Accesos, Rutas y Herramientas** | [.agents/rules/06-accesos-rutas.md](file:///.agents/rules/06-accesos-rutas.md) |
+| **07** | **Control de Versiones y Git Workflow** | [.agents/rules/07-git-workflow.md](file:///.agents/rules/07-git-workflow.md) |
+| **08** | **Integridad del Ground Truth / Runbook** | [.agents/rules/08-integridad-ground-truth.md](file:///.agents/rules/08-integridad-ground-truth.md) |
+| **09** | **Documentación de Sesión** | [.agents/rules/09-sesion-summary.md](file:///.agents/rules/09-sesion-summary.md) |
+| **10** | **Limitantes Conocidas de la Webapp** | [.agents/rules/10-limitantes-webapp.md](file:///.agents/rules/10-limitantes-webapp.md) |
+| **11** | **Estándares de Código y Seguridad** | [.agents/rules/11-estandares-codigo.md](file:///.agents/rules/11-estandares-codigo.md) |
+| **12** | **Uso Seguro de `Conexion.php` (mysqli)** | [.agents/rules/12-estandar-conexion-mysqli.md](file:///.agents/rules/12-estandar-conexion-mysqli.md) |
+
+---
+
+## 🛠️ Skills Personalizadas (Workflows y Estándares)
+Estas habilidades definen **cómo** ejecuto las tareas técnicas:
+- **[UI/UX Modern Refactor](file:///.agents/skills/skill-ui-modern-refactor/SKILL.md)**: Estándares de CSS/HTML para el Host C.
+- **[Dynamic UI & AJAX](file:///.agents/skills/skill-dynamic-html-ajax/SKILL.md)**: Interactividad con `paxscript.js`.
+- **[Plates Templating Patterns](file:///.agents/skills/skill-plates-templating/SKILL.md)**: Uso del motor de plantillas Views.
+- **[PHP-Migration-74](file:///.agents/skills/skill-migration-php74/SKILL.md)**: Refactorización de PHP 5.5 a 7.4.
+- **[Database Evolution](file:///.agents/skills/skill-database-evolution/SKILL.md)**: Partición de `ligacargos` y migración a MariaDB.
+
+---
+
+## 🏗️ Workflows Disponibles (Procesos Detallados)
+- **[/update-business-data](file:///.agents/workflows/update-business-data.md)**: Sync B → A (Comando: `Sync-B2A`)
+- **[/deploy-to-host-c](file:///.agents/workflows/deploy-to-host-c.md)**: Sync A → C (Comando: `Sync-A2C`)
+
+---
+
+## 🚨 Módulos Críticos y Auditoría Constante
+Existen funcionalidades core que requieren especial atención para asegurar la congruencia de datos:
+- **Lógica Híbrida y Retroactividad (V2)**: Motor de Mora Continuo y Reglas de Paridad en `transiciones_estado_contratos.md`.
+- **Estados de Contrato**: Transiciones entre `1 (ACTIVO)`, `2 (SUSPENSIÓN TEMPORAL)`, `3 (SUSPENSIÓN ADMINISTRATIVA)` y `4 (SUSPENSIÓN DEFINITIVA)`. Ver matriz completa en `transiciones_estado_contratos.md`.
+- **Cartera Vencida (`carteravencida.php`)**: Validación de deuda morosa.
+- **Corte de Caja (`concentradocortecaja.php`)**: Ingresos diarios contra reportes detallados.
+- **Resumen de Caja (`reportes/concentradocortecajaresumen.php`)**: Consolidación total.
+- **Saneamiento Estructural (PMU)**: Consolidación de asambleas, unicidad de cargos y depuración de usuarios placeholder en `docs-dev/doc-estabilizacion/funcionalidad-reglas-negocio/analisis_paridad_3hosts.md`.
+- **Plan de Pruebas Maestro**: `docs-dev/doc-estabilizacion/pruebas-cp-manuales-auto/Plan de Pruebas — Sprint Post-Correcciones.md`.
+
+---
+
+## 🚀 Estado Actual: Host C UP & RUNNING (2026-04-07)
+
+- Split `ligacargos` **completado**: 2,513 activa (≥2026) + 192,545 histórico (≤2025)
+- Schema v2 completo + webapp PHP 7.4 adaptada en `feature/upgrade-v2-win-xampp`
+- Pipeline de Sincronización B → A → C **Maestro** (Comando: `Full-Pipeline-Sync`)
+- **Saneamiento Estructural (2026-04-26)**: 100% de asambleas consolidadas (max 3/día) y catálogos con llaves de unicidad.
+- Puertos Host C: Apache **7001**, MariaDB **7002**
+- Protocolo de Migración: `docs-dev/migration-aguav2/MIGRATION_PROTOCOL.md`
+- Checklist pase a producción: `docs-dev/migration-aguav2/host-c-setup/07_transferir_datos.md`
+
+## 🛡️ Automatización y Hardening Host C (2026-05-08)
+El entorno Windows 10 ha sido convertido en un Appliance Kiosko 100% automatizado:
+- **Agnóstico a Discos:** Todos los scripts y archivos de configuración (Apache/MySQL/PHP) heredan dinámicamente la unidad destino desde `config.ps1`.
+- **Auto-Arranque:** Tareas Programadas inician los servicios al logueo de sesión.
+- **Apagado Seguro:** El script `shutdown-server.ps1` fuerza un volcado físico en ZIP de la BD antes de apagar la máquina (evitando corrupciones).
+- **Kiosko Restringido:** El script `setup-full.ps1` crea una carpeta `aguav2` en el escritorio para la gestión técnica, y deja expuesto solo el Kiosko de Chrome y el botón de apagado para los operadores. Chrome está bloqueado vía Registro para evitar actualizaciones.
+
+> **⚠️ Filosofía de Uso**: Los scripts `Sync-*` y `Full-Pipeline-Sync` son **Herramientas de Migración**, no tareas recurrentes. Se ejecutan durante el desarrollo para estabilizar Host C. En producción (Go-Live) se ejecutan **una última vez** y luego se retiran. Host C opera autónomamente.
+
+> Ver tabla de comandos canónicos y comportamiento de flags en: `docs-dev/migration-aguav2/MIGRATION_PROTOCOL.md`
+
+## 🔒 Fixes de Seguridad en Motor de Recargos (2026-04-26)
+
+Dos guards implementados en `includes/negocio/cargos.php` para blindar el flag `recargo` del catálogo:
+
+| Guard | Función | Descripción |
+|-------|---------|-------------|
+| **G01** | `calcula_recargos()` | Retorno temprano si `recargo=0` — la ruta de aplicación manual ya no genera mora en cargos sin flag. |
+| **G02** | `creaCargo()` / `modificaCargo()` | Fuerza `recargo=0` server-side para cualquier categoría ≠ 2 (AGUA) o 3 (DRENAJE). Cierra la vía UI del checkbox "Es una multa". |
+
+**Cambios en BD asociados:**
+- `config_sistema.descripcion` extendida de `varchar(255)` → `TEXT` (Hosts A y C).
+- Nuevos parámetros: `paridad_anios_max_recargo=5`, `paridad_ignorar_fpago_fantasma=1`.
+- Script sincronizado: `docs-dev/migration-aguav2/host-c-setup/03_config_datos_catalogo.sql`.
+
+**UI:** `admin/operaciones/configuracion.php` rediseñado — 2 columnas, modal de confirmación con diff, descripciones desde BD. Ver regla F09 en `02-reglas-negocio.md`.
+
+---
+
+## 🔒 Fixes Financieros y Arquitectura Poka-Yoke (2026-04-28)
+
+Se implementaron parches estructurales para asegurar la integridad de la configuración y la reversibilidad forense:
+
+| Fix | Componente | Descripción |
+|-------|---------|-------------|
+| **Poka-Yoke Numérico** | `cargaConfig()` | Intercepción con `preg_match` y `str_replace` para sanear globalmente cualquier número formateado (ej. "10,500.00") en `config_sistema` antes del casteo `floatval/intval`. Protege 18 variables nativas. |
+| **Reversa Incondicional** | `_getReversal()` | El botón "Revertir transición" se ha desacoplado de las reglas de deuda y ahora es permanentemente visible en la UI tras un cambio de estado válido. |
+| **Límite Bomba** | `calcula_recargos()` | Se introdujo una regla de quiebre de deuda máxima (`reversal_threshold`). El motor deja de generar mora si el contrato alcanza este tope de deuda. |
+| **Toggle de Límite** | `reversal_threshold_enable` | Nuevo parámetro global para activar/desactivar (1/0) el Límite Bomba de recargos a voluntad del operador. Por default, apagado. |
+
+---
+
+## 🐛 Bugs Host C corregidos (2026-04-07, commit `bd1cb2f`)
+
+Derivados del split `ligacargos`: 5 PHPs usaban `FROM ligacargos` directa (perdían datos ≤2025).
+
+| Archivo | Fix aplicado |
+|---------|-------------|
+| `reportes/listadeudores.php` | Eliminado cross join implícito `ligacargos.monto` → `vw_ligacargos_pendientes.monto` |
+| `reportes/carteravencida.php` | Añadido `OR anio IS NULL` para históricos migrados sin anio |
+| `reportes/concentradocortecajaresumen.php` | `FROM ligacargos` → `FROM vw_ligacargos_all` |
+| `includes/negocio/cargos.php` | SELECT duplicados y UPDATE masivo corregidos (UPDATE ahora aplica en ambas tablas) |
+| `docs-dev/sanemiento-limpieza/reportes/genera_csv.php` | 4 JOINs directos → `vw_ligacargos_all` |
+
+**Regla para nuevos PHPs**: Todo SELECT debe usar `vw_ligacargos_all` o `vw_ligacargos_pendientes`. Ver [skill-database-evolution/SKILL.md](.agents/skills/skill-database-evolution/SKILL.md).
+
+---
+---
+
+## 🏗️ Arquitectura Brain / Ground Truth (2026-04-09)
+
+Todo el contexto de agentes IA vive en `agua_chatledger`. El repo `agua` tiene solo symlinks (8/8).
+**Antes de cualquier refactoring de archivos meta, leer regla 08.**
+
+Validar integridad:
+```bash
+bash docs-dev/ga-cl-ia/chatledger_validate.sh
+```
+
+## 🛡️ Saneamiento y Resiliencia Extrema (2026-05-10)
+Se implementó un sistema de protección de triple capa para el Host C, blindándolo contra apagados abruptos y asegurando la veracidad de la auditoría:
+
+| Capa | Componente | Descripción |
+|:---:|---|---|
+| **L1** | **Smart Backup** | `start-webapps.ps1` detecta si falta el backup de ayer. Si hubo actividad y el backup no existe, realiza un "Catch-up Backup" antes de iniciar MySQL. Omite automáticamente días no laborables (domingos/feriados) si no hay cambios en la DB. |
+| **L2** | **Pre-Vuelo** | Limpieza automática de archivos `.pid` huérfanos y ejecución externa de `aria_chk --recover` sobre las tablas de sistema MariaDB antes de lanzar el servicio. |
+| **L3** | **Auto-Repair SQL** | Health-check automático al inicio. Si detecta el Error 176 (Aria checksum), invoca `repair_aria_system_tables.sql` para reconstruir las tablas físicamente antes de abrir Apache. |
+
+**Hitos de Estabilización (Sesión 2026-05-10):**
+*   **Watchdog Automatizado**: El `monitor-ups.ps1` ahora inicia automáticamente en modo oculto vía `start-webapps.ps1`, asegurando protección 24/7 sin intervención manual.
+*   **Fail-Safe UPS**: El cronómetro de apagado (8 min) ahora es independiente de la interacción del usuario (no bloqueante), garantizando el cierre seguro incluso en ausencia del operador.
+*   **Dashboard de Consolidación**: Interfaz de "Cierre Anual" rediseñada como un tablero pro-activo que muestra registros pendientes y estado de las tablas en tiempo real.
+*   **Auditoría Global**: El reporte de historial (`id=0`) fue habilitado para visualizar los logs de sistema (migraciones, splits, configuraciones) bajo el identificador universal de sistema.
+
+**Estabilización Financiera y Cartera Vencida (2026-05-11):**
+*   **Modelo de Cartera Homologado**: Se formalizó el cálculo de Cartera Vencida (17 categorías incluidas, 5 excluidas) asegurando el cuadre a $0 en el reporte de caja mediante la inclusión de recargos históricos (11, 16, 17) en R.CART.
+*   **UI/UX de Reportes**: Renombrado de botones de acceso y encabezados en `carteravencida.php` y `concentradocortecaja.php` para mayor claridad del operador (`RECUP. CARTERA <$anio_ref`).
+*   **Fuente de Verdad**: Documento maestro creado en `docs-dev/doc-estabilizacion/CARTERA_VENCIDA_MODELO_Y_REPORTES.md`.
+
+**Hitos de Estabilización y Hardening (2026-05-11 - Sesión 2):**
+*   **Conectividad Host C**: Restaurada tras apertura de Firewall en puerto **7002** (MariaDB) y **7001** (Apache). (La IP y credenciales han sido delegadas al SSOT maestro).
+*   **Auto-Elevación Poka-Yoke**: Todos los scripts de PowerShell (`.ps1`) ahora cuentan con lógica de auto-elevación a Administrador, eliminando errores de permisos del operador.
+*   **Configuración de Firewall**: Nuevo script `setup-firewall.ps1` integrado en el instalador maestro para automatizar la apertura de puertos en Windows 10.
+*   **Detección Robusta de Monitor**: El script `status-webapps.ps1` ahora detecta el Monitor UPS incluso si los permisos de visibilidad de procesos están restringidos.
+*   **Fix Kiosko Chrome**: Ajuste de rutas para el acceso directo de Google Chrome, garantizando compatibilidad con instalaciones de 64 bits.
+
+**Optimización de Homónimos y UI (2026-05-12):**
+*   **Manejo Estructural de Duplicados**: Se implementó la columna `id_homonimo_padre` en la tabla `usuario` para rastrear duplicados sin alterar el campo `nombre`. Se revirtieron todas las concatenaciones sucias (ej. `[DUPLICADO DE...]`) en la base de datos.
+*   **Semaforización de Usuarios**: El motor de búsqueda en "Nuevo Contrato" y "Cambio de Propietario" ahora incluye un semáforo visual (🟢, 🟡, 🔴) basado en el estado de los contratos de los homónimos detectados.
+*   **Detección Robusta**: La lógica de búsqueda fue blindada para ignorar acentos y sufijos temporales, asegurando la visibilidad total de registros suspendidos o duplicados.
+*   **Pipeline Clean-up**: El script `10c_saneamiento_duplicados.sql` fue refactorizado para usar el nuevo estándar estructural.
+
+**Pipeline B→A→C Estabilizado y Semáforos UI (2026-05-12 — Sesión 4):**
+*   **Ejecución Full-Pipeline-Sync**: Completado exitosamente — 1,409 usuarios, 1,410 contratos, 200,921 ligacargos (split 7,105 activos / 193,816 histórico). Todos los checks de integridad en ✅.
+*   **Hardening de Schema Base**: La columna `id_homonimo_padre` se integró permanentemente en `02_schema_tablas_base.sql`. El parche temporal `12_add_homonimo_padre.sql` fue eliminado. El pipeline es ahora idempotente ante DROP DATABASE.
+*   **Fix QA Pipeline**: `12_validate_pipeline.sql` actualizado para validar el vínculo estructural (`id_homonimo_padre`) en lugar de buscar sufijos sucios `[DUPLICADO...]` en el nombre.
+*   **Fix Visibilidad Homónimos**: `includes/negocio/usuarios.php` — la cláusula `HAVING` fue extendida para incluir usuarios con vínculo estructural (`id_homonimo_padre > 0`), evitando que homónimos sin contratos quedaran ocultos en el buscador.
+*   **Paleta de Colores Semáforo (UI definitiva)**: `views/usuarios/options.php` — 🟣 Lila `#ede0ff` para **cualquier usuario sin contratos** (independiente de homónimo); 🟢🟡🔴 semáforos solo para homónimos con contratos. Sin color = usuario normal con contratos.
+*   **Fix Auth `cambiaestado()`**: `includes/negocio/contratos.php` — verificación de contraseñas (presidente/tesorero) añadida antes de ejecutar el cambio de estado, siguiendo el mismo patrón de `cancelarCargos()`.
+*   **Documentación**: `analisis_paridad_3hosts.md` actualizado con la paleta de colores definitiva. `ISSUES_Y_BACKLOG.md` extraído de `CARTERA_VENCIDA_MODELO_Y_REPORTES.md`.
+
+**Unificación de Infraestructura e IPs (2026-05-12 — Sesión 5):**
+*   **Single Source of Truth (SSOT)**: Se centralizó la configuración de red y credenciales de bases de datos para los tres entornos. La **única fuente de verdad** para las IPs, puertos, usuarios y passwords de Host A, Host B y Host C es ahora el archivo `/home/carlos/GitHub/agua_chatledger/.mcp.json`. Queda estrictamente prohibido el uso de IPs *hardcodeadas* (como `192.168.1.84` o `192.168.1.81`) en scripts y documentos.
+
+**Estabilización de Usuario No Localizado y Seguridad (2026-05-13 — Sesión 1):**
+*   **Flujo NL Cascada**: Se estabilizó la declaratoria de "Usuario No Localizado", asegurando la suspensión masiva (Estado 4 - SDF) de todos sus contratos vinculados.
+*   **Hardening Poka-Yoke**: Refactorización de `usuarios.php` y `contratos.php` para usar `password_verify()` y `trim()`, eliminando errores por espacios accidentales y permitiendo el uso de hashes Bcrypt modernos.
+*   **Fix UI Reversión**: Se corrigió el bug de visibilidad que ocultaba el botón de reversión en contratos con Suspensión Definitiva. El botón es ahora permanente ante snapshots válidos.
+*   **Restablecer Usuario**: Nueva funcionalidad añadida para revertir manualmente el estado de un usuario NL a Activo, permitiendo correcciones administrativas sin bloqueos.
+*   **Auditoría de Contraseñas**: Análisis de gaps realizado en el módulo de Comité; identificado riesgo de visibilidad de contraseñas nuevas y falta de doble confirmación.
+
+**Producción Final y Hardening Host C (2026-05-13 — Sesión 2):**
+*   **Poka-Yoke de Duplicados**: Implementado bloqueo estructural en `views/usuarios/options.php`. Los registros con `id_homonimo_padre > 0` aparecen ahora deshabilitados (`disabled`) con icono 🚫 y redirección al ID Maestro, previniendo la fragmentación de datos en Nuevos Contratos y Cambios de Propietario.
+*   **Protección de Directorio**: Scripts `protect-folder.ps1` y `unprotect-folder.ps1` desplegados para blindar la raíz del sistema mediante reglas NTFS Deny. Se han actualizado para heredar dinámicamente la ruta desde `config.ps1`, corrigiendo el error de ruta inexistente.
+*   **Dashboard de Consolidación**: Integración de acceso directo a **App Asambleas** en la ficha de Configuración y Saneamiento, utilizando rutas relativas para portabilidad entre hosts.
+*   **Hardening UPS**: El tiempo de gracia en batería fue ajustado a **5 minutos** en `config.ps1`, optimizando el margen de seguridad para el cierre de la base de datos.
+*   **Control de Chrome**: Identificado el pipeline de congelamiento de versiones en `setup-kiosk-shortcut.ps1` y su reversión en `revert-chrome-updates.ps1`.
+
+**Estabilización de Interfaz, Saneamiento y Asamblea (2026-05-14):**
+*   **Fix "Lila" Universal**: Se expandió la lógica de semaforización en `options.php` para incluir a usuarios con historial (contratos en SDF) como candidatos a color Lila. Esto asegura que placeholders con historia previa sean identificables en búsquedas de ítem único.
+*   **Saneamiento Zenón (1590 Master)**: Se consolidó al usuario Zenón Martínez López bajo el ID **1590** (que contiene los datos de contacto y notas), reasignándole los contratos **1378** y **391**. El ID 1057 quedó vinculado como duplicado estructural.
+*   **Filtros Especiales**: Se añadieron opciones de filtrado granular ("Sin nombre, con dir." y "Sin nombre ni dir.") en el tablero de Usuarios Especiales.
+*   **Hardening Shutdown**: Se implementó manejo de errores robusto en `shutdown-server.ps1` y `stop-webapps.ps1`.
+*   **Optimización Ticket Asamblea**: 
+    *   Ficha de ticket ahora se cierra automáticamente tras imprimir o al hacer clic fuera (con auto-foco en buscador).
+    *   Formato optimizado para impresoras térmicas (Courier New, márgenes mínimos, sin corchetes en contratos).
+    *   **Ajuste Final (v2.1)**: Fuentes escaladas (Nombre 19px, Registro 17px, Comité 13px), todo justificado a la izquierda, y márgenes de impresión negativos (-4mm) para ahorro extremo de papel.
+    *   Periodo de gracia de **7 días** para reabrir asambleas cerradas.
+*   **Validación Full-Pipeline-Sync**: Ejecución verificada en Host C — 100% de paridad (200,931 cargos), saneamiento de folios mixtos (8 reparados) y consolidación real de Zenón confirmada.
+
+**Estabilización de UI, Cobros Libres y Control UPS (2026-05-16):**
+*   **Ajuste Libre de Cobros (LIBRE)**: Se implementó un flujo flexible donde cualquier cargo de catálogo que incluya la bandera `(LIBRE)` en su nombre disparará un *prompt* interactivo para que el operador defina el monto. El backend en `cargos.php` limpia la etiqueta y exenta el cargo de multiplicadores automáticos (comercial/metros) garantizando cuadres limpios.
+*   **Monitor UPS Condicional**: El "Vigilante" de fallos eléctricos (`monitor-ups.ps1`) ahora respeta la directiva `monitoreo_ups=1|0` del archivo `configuracion.txt`. Si se desactiva, el servidor inicia de forma normal sin invocar el bucle de ping ni detonar apagados automatizados (ideal para pruebas o escenarios sin UPS conectado al router).
+*   **Transparencia en Hardening NTFS**: Se ajustaron los mensajes de salida de `protect-folder.ps1` y `unprotect-folder.ps1` para reflejar y confirmar su capacidad nativa de blindar `xampp`, `aguav2` y `aguav2-2026` simultáneamente contra borrados **y renombrados**, dando plena certidumbre al operador.
+*   **Semaforización "Lila" Poka-Yoke**: Corrección en `nuevo.php` y `options.php` para asegurar que el `<select>` principal adopte el color visual de estado (Lila, Verde, Amarillo) del usuario seleccionado. Además, se refinó la regla Lila para incluir apropiadamente a usuarios históricos (con todos sus contratos en Estado 4), permitiendo actualizar sus nombres *Placeholder* de inmediato en la ficha de Nuevo Contrato.
+
+**Homologación de Catálogo, Reportes y Pipeline (2026-05-16 — Sesión 2):**
+*   **Ordenamiento de Reportes de Caja**: `concentradocortecajaresumen.php` refactorizado con array `$orden_impresion` que impone la jerarquía oficial de conceptos: Agua → Drenaje → Recargos → Servicios → Cartera → Trámites → Sanciones.
+*   **Sufijo A/D en Etiquetas**: Los conceptos de Reconexión y Cancelación de Servicio actualizados a "...A/D" en `concentradocortecaja.php` (glosario), `concentradocortecajaresumen.php` ($etiquetas), la tabla `categorias` en Host C (IDs 13 y 14) y en `08_saneamiento_catalogo.sql`.
+*   **Conceptos `(LIBRE)` en Pipeline**: Los dos conceptos `DIFERENCIA CAMBIO TOMA AGUA/DRENAJE (LIBRE)` — creados directamente en Host C — se agregaron a `08_saneamiento_catalogo.sql` con `INSERT IGNORE` para garantizar su presencia en cualquier rebuild del pipeline. Regla: `recargo=0`, `monto=0`, `anio=0`.
+*   **Homologación de Categorías (BD + Pipeline)**: Todos los nombres de la tabla `categorias` fueron homologados contra los `$etiquetas[]` de los reportes PHP. El Paso 3-B de `10_pipeline_saneamiento.sql` fue corregido: `REPLACE INTO` → `INSERT...ON DUPLICATE KEY UPDATE` (para respetar FK), + bloque `UPDATE` para IDs 1-18 con nombres completos y oficiales (ej. `MULTA POR DESPERDICIO DE AGUA`, `CONSTANCIA DE NO ADEUDO`, `REPARACION DE FUGAS`).
+*   **Guía del Catálogo de Cargos**: Nuevo documento `docs-dev/doc-estabilizacion/GUIA_CATALOGO_CARGOS.md` — referencia completa para operadores sobre: anatomía de un cargo, reglas por campo, cuándo usar `(LIBRE)` vs `repetir=1` (R(N)), conceptos por año, y catálogo de issues conocidos.
+*   **Homologación de MDs**: Nombres de categorías 13, 14, 20, 21, 22 actualizados en `CARTERA_VENCIDA_MODELO_Y_REPORTES.md` y `REPORTES_CAJA_CARTERA_DECLARACION.md` para alinearlos con los nombres canónicos de la BD.
+
+**Validación Pipeline Final y Blindaje (2026-05-18):**
+*   **Validación Full-Pipeline-Sync**: Confirmada la ejecución exitosa del pipeline completo hacia Host C. Datos migrados sin configuración drift: 1,409 usuarios, 201,130 cargos (7,207 activos / 193,923 históricos). Tablas Poka-Yoke intactas (`id_homonimo_padre` y bandera `repetir=1` en cobros LIBRE).
+*   **Manuales Operativos Creados**: Se generaron los documentos `doc_cajero_transiciones_estado.md`, `doc_tesorero_corte_cartera.md` y `doc_ejecutivo_comite.md` detallando las reglas de paridad, el modelo homologado de Cartera Vencida y la matriz de los 6 casos de transición de estados de contrato.
+*   **Blindaje Extremo NTFS**: Se actualizó `protect-folder.ps1` para aplicar bloqueos `(DE, DC)` directamente a la carpeta `$desktop\aguaV2` en lugar de solo a los `.lnk` internos. Esto impide el arrastre a papelera y borrado de los atajos administrativos.
+
+**Sincronización B→A y Hardening MySQL (2026-05-19):**
+*   **Fix Truncamiento de Datos**: Se identificó y resolvió una pérdida silenciosa de datos en la migración Host B → Host A causada por el límite `max_allowed_packet` (1MB). El script `run_sync.sh` fue endurecido con los parámetros extendidos (`--max_allowed_packet=512M`, `--net_buffer_length=10M`).
+*   **Auditoría y Paridad**: Se generaron reportes para identificar los contratos omitidos y se ejecutó un Full Sync restaurando la paridad estructural completa entre los Hosts A, B y C.
+
+**Normalización de Calles y Reporte de Impresión de Credenciales (2026-05-20):**
+*   **Agrupamiento de Calles Robusto**: Se implementó una lógica de agrupamiento por expresiones regulares en `listadeudoresxc.php` para normalizar acentos, números ordinales y calificativos de dirección en las calles, evitando truncamiento de palabras clave como "NORTE".
+*   **Impresión de Credenciales en Lote**: Se diseñó un nuevo visualizador tamaño Carta en `imprimir_credencial.php` que acomoda hasta 3 credenciales de `8.8 x 5.8 cm` por cara con guías de corte y línea discontinua de doblez central. Integrado mediante popup en `ficha.php`.
+
+**Optimización de Impresión de Reportes y Rotación de Respaldos (2026-05-21):**
+*   **Aprovechamiento de Papel en Reportes**: Se incrementó la capacidad de registros por página de **42 a 46** en 5 reportes críticos (`listacontratosestado.php`, `listacontratos.php`, `listacontratosnuevos.php`, `listausuarios.php`, y `listadeudores.php`). Esto optimiza el uso de la hoja tamaño Carta reduciendo las hojas impresas sin riesgo de desborde por nombres o domicilios largos.
+*   **Rotación de Respaldos de BD (PowerShell)**: Se implementó un algoritmo de rotación basado en cantidad (máximo 7 respaldos más recientes) tanto en `start-webapps.ps1` como en `stop-webapps.ps1`. Esto evita que las múltiples pruebas de apagado/encendido del operador saturen el disco con más de 7 archivos de respaldo (data-*.zip), reemplazando el filtrado temporal estático de 7 días.
+
+**Seguridad y Autocompletado de Credenciales (2026-05-22):**
+*   **Desactivación de Autocompletado en Login**: Se agregaron los atributos HTML `autocomplete="off"` en el `<form>` y en el input de usuario, y `autocomplete="new-password"` en el input de contraseña de `login/index.php`. Esto mitiga el comportamiento agresivo de autocompletado en navegadores modernos (Chrome/Firefox/Edge), manteniendo los campos limpios y evitando riesgos de seguridad por credenciales recordadas.
+
+**Habilitación HTTPS y Nginx en OCI VM (2026-05-23):**
+*   **Certificado Let's Encrypt**: Solicitud y activación exitosa de SSL para `www.caelitandem.lat` vía Certbot + plugin Nginx. Redirect 301 HTTP → HTTPS configurado limpiamente.
+*   **Auto-Renovación Blindada**: Script `/home/ubuntu/scripts/renew-certs.sh` + cron `/etc/cron.d/certbot-custom` (3:00 AM diario). Timer `certbot.timer` de systemd verificado activo.
+*   **Alcance**: Todos los sitios del OCI VM (www, kanboard, n8n, oken8n) ahora operan en HTTPS con renovación automática. Esta configuración es del servidor CaeliTandem, **no del proyecto Agua**.
+
+**Documentación de Entrega Sistema Agua V2 (2026-05-21—22):**
+*   **Manual Técnico-Operativo**: Generado `Manual_Entrega_Sistema_Recaudacion_Agua_V2.pdf` (HTML + PDF) vía script Python. Incluye arquitectura MVC, diagramas, catálogos y manuales por rol.
+*   **Apéndices**: Código fuente de `configuracion.php` y paleta de colores semáforo del buscador integrados como apéndices formales del documento de entrega.
+
+**Iniciación Repositorio emp_devhj_sw / CaeliTandem (2026-05-25):**
+*   **Nuevo Repo**: Inicializado `/home/carlos/GitHub/emp_devhj_sw/caelitandem_home` para el proyecto CaeliTandem SEO, separado del proyecto Agua.
+*   **Script dos-repos-branch-git.sh**: Creado en `docs-dev/scripts/` como guía de referencia del flujo canónico de commits para ambos repos (agua + agua_chatledger). **No es un script ejecutable automatizado**, sino documentación operativa del flujo Git de cierre de sesión.
+
+**Última actualización**: 2026-05-25
+
+
+
+> [!IMPORTANT]
+> **Terminología de Sesión**:
+> - **Ground Truth**: Denominación del contexto maestro para **Claude**.
+> - **Runbook**: Denominación del contexto maestro (GEMINI.md + .agents/) para **Gemini**.
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `01-infra-hosts.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# Regla 01: Infraestructura y Hosts (A, B, C)
+
+Esta regla define los entornos operativos de **Agua** y el acceso mandatorio por Host.
+
+## 🏢 Definición de Hosts
+
+> [!IMPORTANT]
+> **SINGLE SOURCE OF TRUTH (SSOT):**
+> Las IPs, puertos, usuarios y contraseñas para los 3 Hosts se gestionan exclusivamente en `/home/carlos/GitHub/agua_chatledger/.mcp.json`. Esta es la **única fuente de verdad**; nunca uses IPs "hardcodeadas".
+
+| Host | OS | Propósito | Rama Git | MCP Access | IP:Puerto |
+|:---:|---|---|---|---|:---:|
+| **A** | Ubuntu 22 / XAMPP Linux | TRANSICIÓN (V1+) — Bridge MySQL | `main` | `bdawahost-a` | Ver `.mcp.json` |
+| **B** | Windows 7 / MySQL legado | Espejo Producción — Datos Frescos | N/A | `bdawahost-b` | Ver `.mcp.json` |
+| **C** | Windows 10 / XAMPP 7.4.33 Portable | Target V2 FINAL — MariaDB (Split Tablas) | `feature/upgrade-v2-win-xampp` | `bdawahost-c` | Ver `.mcp.json` |
+
+
+### Stack Host C (detalle)
+| Componente | Versión |
+| :--- | :--- |
+| Paquete | `xampp-portable-windows-x64-7.4.33-0` |
+| Apache | 2.4.54 |
+| MariaDB | 10.4.27 |
+| PHP | 7.4.33 |
+| phpMyAdmin | 5.2.0 |
+| Directorio XAMPP | `F:\xampp` |
+| Webapp | `F:\xampp\htdocs\agua` |
+
+## 📐 Jerarquía y Mandatos:
+1.  **Host A de Transición**: Es la **Guía Estructural Oficial (MySQL)**. Actúa como puente para transformar datos de B hacia el modelo V2. Mantiene esquema de tabla única para compatibilidad bridge.
+2.  **Host B de Datos**: Únicamente se utiliza como fuente de "Datos Frescos de Negocio" para alimentar A. Solo lectura — prohibido cambios estructurales.
+3.  **Host C Target**: Entorno para la optimización definitiva de `ligacargos` (split histórico) y uso del stack MariaDB V2. Todo cambio vía scripts versionados + rollback.
+
+---
+**Acceso Técnico**:
+- MCP `bdawahost-a` para consultas y ejecuciones en el ambiente de desarrollo.
+- MCP `bdawahost-b` exclusivamente para extracción de datos operativos (pagos, cargos).
+- MCP `bdawahost-c` para deploy y validación de scripts en Host C (Windows 10).
+
+### 📂 Rutas de Logs Host C
+| Archivo | Ruta | Propósito |
+|:---|:---|:---|
+| Slow Query Log | `F:/aguav2/logs/mysql-slow.log` | Queries > 1s + queries sin índice + SPs |
+| Error Log | `F:/aguav2/logs/mysql_error.log` | Errores y warnings de MariaDB |
+| General Log | `F:/aguav2/logs/mysql-general.log` | Todas las queries (OFF por defecto) |
+| PHP Error Log | `F:/aguav2/logs/php_error.log` | Errores PHP de la webapp |
+| PID File | `F:/aguav2/logs/mysql.pid` | PID del proceso MariaDB |
+
+- **Config MariaDB**: [optimizacion/my.ini](file:///opt/lampp/htdocs/agua/docs-dev/migration-aguav2/host-c-setup/optimizacion/my.ini)
+- **Config PHP**: [optimizacion/php.ini](file:///opt/lampp/htdocs/agua/docs-dev/migration-aguav2/host-c-setup/optimizacion/php.ini)
+- **Config Apache**: [optimizacion/httpd.conf](file:///opt/lampp/htdocs/agua/docs-dev/migration-aguav2/host-c-setup/optimizacion/httpd.conf)
+
+---
+
+## 🔌 Herramienta Preferida por Tipo de Operación (Agentes IA)
+
+| Operación | Herramienta | Razón |
+|:---|:---:|:---|
+| Diagnóstico, validación, queries ad-hoc, comparación de datos | **MCP** (`bdawahost-c`) | Resultados en contexto, paralelo, sin parseo de terminal |
+| Scripts `.sql` masivos, dumps, carga de migraciones grandes | **CLI MySQL** | Más eficiente para operaciones de volumen |
+
+**Regla**: Usar MCP para todo trabajo de diagnóstico e inspección en Host C. Recurrir a CLI MySQL solo para scripts masivos o cuando el MCP no esté disponible.
+
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `05-despliegue-host-c.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# Regla 05: Despliegue y Automatización (Host C)
+
+Reglas para la migración e implementación de mejoras en el ambiente **Host C** (MariaDB 10.4.27 / XAMPP 7.4.33).
+
+---
+
+## Estado Actual (2026-04-14) — Host C UP & RUNNING ✓ — Pipeline COMPLETO, CORRECTO Y VERIFICADO
+
+La migración está **completada, consolidada y declarada verificada**. Host C tiene:
+- BD `awa` con schema v2 completo (17 tablas InnoDB, utf8mb4, FKs, SPs, 3 vistas)
+- `ligacargos` split: activa ≥2026 + `ligacargos_historico` ≤2025
+- Webapp `feature/upgrade-v2-win-xampp` adaptada al schema v2 — reportes de caja y cartera homologados
+- Scripts de setup versionados: `docs-dev/migration-aguav2/host-c-setup/` (02→09, manual/)
+- `tusuario` eliminada de BD y de todos los scripts (tabla fantasma — no usada por PHP)
+- Pipeline de saneamiento integrado y automatizado en `run_sync.sh` (Paso 8)
+- Protocolo de migración documentado: `docs-dev/doc-estabilizacion/pase-a-prod/MIGRATION_PROTOCOL.md`
+- Declaración de homologación reportes: `docs-dev/doc-estabilizacion/encuadres/REPORTES_CAJA_CARTERA_DECLARACION.md`
+- **Terminología de Sesión**: Este conjunto de documentos constituye el **Ground Truth (para Claude)** y el **Runbook (para Gemini)**.
+
+### Pipelines probados (ejecución de referencia: 2026-04-14; última validación: 2026-04-18)
+- **B→A**: ejecutado y validado — 8 pasos OK
+- **A→C**: ejecutado y validado — Pasos 1–8 → 8-C → 8-B → 9 + 7/7 checks OK
+- **Retención de artefactos**: 2 logs + 2 backups por pipeline (rotación automática en cada ejecución)
+
+---
+
+## Propósito del Host C
+
+Ambiente **Target V2 FINAL** — esquema optimizado (MariaDB), split histórico de ligacargos, FKs/SPs/vistas nuevas. Host C es el destino final de la migración y la referencia de producción V2.
+
+---
+
+## Estrategia de Refresh de Datos (B → A → C)
+
+El refresh de datos hacia el Target V2 **siempre** sigue esta ruta de transformación:
+
+```
+Host B (Legado V1) → Host A (Transición V1+) → Host C (Destino V2)
+```
+
+**Por qué no B→C directo**: el schema de B (v1) es incompatible con C (v2). Host A actúa como la capa de transformación Bridge (limpieza y normalización V1+). El salto a V2 ocurre en el paso A→C vía el split de tablas.
+
+### Comando canónico (orquestador maestro)
+```bash
+cd docs-dev/migration-aguav2/
+./Full-Pipeline-Sync.sh                    # Producción: B→A→C (datos vienen de Host B)
+./Full-Pipeline-Sync.sh --skip-b           # Offline: salta volcado de B, usa A tal como está → C
+./Full-Pipeline-Sync.sh --with-qa          # Testing: B→A→C + inyecta datos sintéticos en A→C
+./Full-Pipeline-Sync.sh --with-qa --skip-b # Testing offline: sin conectar a Host B
+# Cualquier otra flag causa exit 1 con "Flag desconocida: X"
+```
+
+Los scripts individuales siguen disponibles para uso aislado de emergencia (ver tabla de comandos en esta misma regla).
+
+El protocolo A→C aplica automáticamente:
+- `cambios`: importa con columnas explícitas (C tiene `id` AUTO_INCREMENT col 1)
+- `ligacargos.idpago_vinc`: convierte `''` → `NULL` (C usa `int NULL`)
+- `ligacargos.fcobro/fpago`: trunca datetime → date
+- `egresos.id_categoria`: inserta `NULL` (columna no existe en A)
+- Ejecuta `06_split_ligacargos.sql`: **Particionamiento de Migración** (idempotente vía TRUNCATE) — mueve registros `anio ≤ 2025` a la tabla histórica para aplicar el schema V2 de tablas divididas. Incluye `INSERT INTO cambios` con métricas del split (Paso 5 — agregado 2026-04-18).
+- Ejecuta `10c_saneamiento_duplicados.sql`: consolida usuarios duplicados reales Martín (751→750) y Zenón (1590→1057). Incluye `INSERT INTO cambios` de trazabilidad (agregado 2026-04-18).
+
+---
+
+## 🛉 Filosofía de Uso: Herramientas de Migración vs Operación
+
+Estos scripts son **Herramientas de Migración y Transición** diseñadas para el ciclo de desarrollo del proyecto. NO son procesos operativos de la aplicación.
+
+| Fase | Actividad | Estado de Scripts |
+|------|-----------|------------------|
+| **Desarrollo** (actual) | Ejecutar iterativamente para estabilizar Host C. | ✅ Activos |
+| **Go-Live** | Ejecución **única** con datos reales de producción. | ✅ Ejecución final |
+| **Post Go-Live** | Host C es fuente de verdad autónoma. | ⛔ Retirados |
+
+> Una vez en producción real, Host C **no recibe más sincronizaciones externas**. No existe un proceso "nocturno" ni programado. El particionamiento de tablas se hizo **una sola vez** durante la migración.
+
+---
+
+## Configuración Portable (XAMPP 7.4.33)
+
+- **Modo**: XAMPP portable en `F:\xampp` — sin servicios Windows.
+- **Directorio webapp**: `F:\xampp\htdocs\agua`
+- **Rama git**: `feature/upgrade-v2-win-xampp`
+
+---
+
+## DML del Pipeline — Inventario (2026-04-18)
+
+| Script | DML | Tabla(s) afectada(s) | Registra en `cambios` |
+|---|---|---|:---:|
+| `10_pipeline_saneamiento.sql` | UPDATE×6, REPLACE×2 | ligacargos, ligacargos_historico, egresos, categorias, categorias_egresos | ✅ 1 cabecera global |
+| `10b_saneamiento_exencion_recargos.sql` | UPDATE | ligacargos (estado→-1) | ✅ 1 por contrato afectado |
+| `10c_saneamiento_duplicados.sql` | UPDATE×3 | contrato, usuario | ✅ 1 cabecera global |
+| `06_split_ligacargos.sql` | INSERT + **DELETE** | ligacargos_historico, ligacargos | ✅ 1 cabecera global |
+| `run_sync.sh` Paso 6 (SDF) | UPDATE | ligacargos (contratos estado=4) | ✅ 1 cabecera global |
+
+> ⚠️ **Único DELETE del pipeline**: `06_split_ligacargos.sql` Paso 3 — `DELETE FROM ligacargos WHERE anio < YEAR(NOW())`. Es seguro: los registros ya fueron copiados a `ligacargos_historico` en el Paso 1 del mismo script.
+
+---
+
+## Split `ligacargos` — Implementado
+
+| Tabla | Criterio | Filas (ref. 2026-04-17) |
+|-------|---------|-------------|
+| `ligacargos` (activa) | `anio >= 2026` | 4,993 |
+| `ligacargos_historico` | `anio <= 2025` | 193,040 |
+
+Las vistas `vw_ligacargos_all` y `vw_ligacargos_pendientes` unifican ambas tablas. Los PHPs no consultan `ligacargos_historico` directamente.
+
+> **CRÍTICO para nuevos PHPs**: Todo SELECT sobre `ligacargos` debe usar `vw_ligacargos_all` (todos) o `vw_ligacargos_pendientes` (estado=0). Los UPDATE masivos de cargos pendientes deben ejecutarse en **ambas** tablas: `ligacargos` y `ligacargos_historico`. Ver regla completa en [skill-database-evolution/SKILL.md](./../skills/skill-database-evolution/SKILL.md#3-regla-crítica--consultas-php-sobre-ligacargos-en-host-c).
+>
+> Bugs corregidos el 2026-04-07 (commit `bd1cb2f`): `listadeudores.php`, `carteravencida.php`, `concentradocortecajaresumen.php`, `cargos.php`, `genera_csv.php`.
+
+---
+
+## Regla: PHPs en `feature` son exclusivos para Host C
+
+> **CRÍTICO — No compatibilizar con Host A.**
+> Todo el código PHP en la rama `feature/upgrade-v2-win-xampp` tiene como **único target Host C**.
+> Host A es un Bridge V1+ intencional con schema diferente — los PHPs que corren en esta rama
+> usan objetos de BD que **solo existen en Host C** (vistas, SPs, `ligacargos.id`, `cambios.id`).
+> **Nunca degradar código para hacerlo compatible con Host A** — si algo falla en Host A
+> es esperado; si falla en Host C es un bug real.
+>
+> Patrón correcto para `ligacargos`: usar `WHERE id = $id_cargo` (Host C tiene PK `id`).
+> Patrón correcto para `cambios`: usar `ORDER BY id DESC` (Host C tiene PK `id`).
+> Patrón correcto para `cambios` INSERT: usar `NOW()` (Host C tiene PK `id` AUTO_INCREMENT — sin riesgo de colisión).
+
+---
+
+## Diferencias de Schema A (v1+) vs C (v2)
+
+| Tabla | Columna | Host A | Host C |
+|-------|---------|--------|--------|
+| `cambios` | `id` | no existe | `int AUTO_INCREMENT` col 1 |
+| `ligacargos` | PK | composite `(numcontrato,leyenda,repetido)` | `id AUTO_INCREMENT` |
+| `ligacargos` | `idpago_vinc` | `varchar('')` | `int NULL` |
+| `ligacargos` | `fcobro`/`fpago` | `datetime` | `date` |
+| `ligacargos` | `monto`/`recargo` | `float`/`int` | `decimal(10,2)` |
+| `egresos` | `id_categoria` | no existe | `int NULL` (FK→categorias_egresos, ON DELETE SET NULL) |
+| `contrato_toma` | tabla | calculada post-sync B→A | nativa con FKs |
+| `folios_recibo` | tabla | no existe | nueva — AUTO_INCREMENT para folios |
+| `tusuario` | tabla | existe (sin uso) | **eliminada** — ningún PHP la consulta |
+
+---
+
+## Rollback
+
+Cualquier cambio estructural en Host C requiere:
+1. Script versionado en `host-c-setup/`
+2. Actualizar la tabla de diferencias de schema arriba
+
+**Para revertir toda la migración** (reconstrucción desde cero):
+```bash
+cd docs-dev/migration-aguav2/
+./Full-Pipeline-Sync.sh        # Reconstruye C completo (DROP implícito) y repuebla datos
+# O si solo se quiere reconstruir el schema sin datos:
+cd host-c-setup/
+./run_setup.sh
+```
+
+---
+
+### 🚀 Scripts de Inicio de Flujos
+
+Para estandarizar y facilitar las ejecuciones durante el desarrollo, se han definido scripts **orquestadores** que encapsulan toda la lógica validada. A continuación las rutas exactas según el Runbook (GEMINI) / Ground Truth (CLAUDE):
+
+**Formalización de Comandos Canónicos**:
+- **Setup-Full-C**: Reconstrucción total (con DROP) — simulación de pase a producción.
+- **Sync-B2A**: Refresco de datos operativos desde el espejo (B) hacia Desarrollo (A).
+- **Sync-A2C**: Particionamiento y migración de datos desde Host A al Target V2 (C).
+- **Full-Pipeline-Sync**: Orquestador maestro B → A → C.
+
+| Comando | Script a Ejecutar | Acción |
+| :--- | :--- | :--- |
+| **`Setup-Full-C`** | `docs-dev/migration-aguav2/host-c-setup/run_setup.sh` | Simulación de pase a producción desde cero en Host C. |
+| **`Sync-B2A`** | `docs-dev/migration-aguav2/syncawa_hostb_to_hosta/run_sync.sh` | Refresco de datos operativos desde el espejo (B) hacia Desarrollo (A). |
+| **`Sync-A2C`** | `docs-dev/migration-aguav2/sync_hosta_to_hostc/run_sync.sh` | Migración y transformación de datos desde Host A hacia el Target V2 (C). |
+| **`Full-Pipeline-Sync`** | `docs-dev/migration-aguav2/Full-Pipeline-Sync.sh` | Orquestador Maestro: cadena completa B → A → C. |
+
+---
+
+### 🛠️ Comportamiento de `Full-Pipeline-Sync.sh`
+
+El script **siempre ejecuta `DROP DATABASE` en Host C** (vía `run_setup.sh`). No hay modo que lo omita. Los flags solo controlan fuente de datos y datos de prueba:
+
+| Flag | B→A | Setup C (DROP) | A→C | Datos QA (9001–9008) |
+|------|:---:|:---:|:---:|:---:|
+| *(sin flag)* | ✅ | ✅ | ✅ | ❌ |
+| `--skip-b` | SALTADO | ✅ | ✅ | ❌ |
+| `--with-qa` | ✅ | ✅ | ✅ | ✅ inyecta en A→C |
+| `--with-qa --skip-b` | SALTADO | ✅ | ✅ | ✅ inyecta en A→C |
+
+> El DROP DATABASE en Host C **siempre ocurre** en todos los modos, sin excepción.
+> La inyección QA (Contratos Mártires 9001–9008) ocurre como pre-condición al inicio de `run_sync.sh` A→C, no afecta el pipeline B→A.
+
+> **Importante para agentes IA**: No existe flag `--setup`. El DROP es incondicional y está documentado en el log `setup_YYYYMMDD_HHMMSS.log` dentro de `sync_hosta_to_hostc/logs/`.
+
+---
+
+### Regla de Simulación de Producción (`Setup-Full-C`)
+Cuando el usuario solicite un **"Case: Setup Full C"** o similar, se asume un escenario de despliegue limpio:
+1. Se invoca el orquestador `run_setup.sh`.
+2. El script realiza el `DROP DATABASE IF EXISTS awa;` y recrea el esquema V2 completo (tablas, catálogos, vistas, SPs, validador) antes de cualquier carga.
+
+---
+**Notas para Agentes IA (Claude/Gemini)**:
+- Al recibir instrucción de "refrescar Host C" o "sync producción→C", el flujo es SIEMPRE B→A→C (dos scripts separados). Nunca B→C directo.
+- Usar los comandos orquestadores definidos en la tabla anterior para asegurar consistencia.
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `12-estandar-conexion-mysqli.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# Regla 12: Estándar de Uso Seguro de `Conexion.php` (Regla E01)
+
+> **Origen del Issue:** Bug en `regresarCargoCancelado` (Apr 2026).  
+> `real_escape_string()` con `$link = false` generaba Warning + cadena vacía → INSERT en `cambios` silenciosamente roto.
+
+---
+
+## 🔴 El Bug (Raíz del Problema)
+
+`Conexion::real_escape_string()` llamaba a `mysqli_real_escape_string($this->link, ...)` **sin validar si `$this->link` es un objeto `mysqli` válido**.
+
+Cuando la conexión falla o se pierde (link = `false`):
+
+1. `real_escape_string()` → PHP Warning + devuelve `false` → variable queda como `""`
+2. `q()` → `mysqli_error($this->link)` → PHP Warning (mismo problema encadenado)
+3. El `INSERT INTO cambios` se ejecuta con campos vacíos **o** falla silenciosamente
+4. No hay error visible en la UI. La auditoría queda rota sin dejar rastro.
+
+### Cascada de Efectos
+
+```
+real_escape_string(link=false)
+  → Warning PHP
+  → retorna false / ""
+  → INSERT INTO cambios con "Operador: " vacío
+      → q(INSERT) con link=false
+          → @mysqli_query sin efecto (retorna false)
+          → mysqli_error(link=false) → Warning PHP adicional
+              → _logFallback no escapa → loop silencioso
+```
+
+---
+
+## ✅ El Fix (Aplicado en `Conexion.php` — Regla E01)
+
+### `real_escape_string()` — ahora hardened
+
+```php
+// ANTES (frágil):
+function real_escape_string($string) {
+    return mysqli_real_escape_string($this->link, $string);
+}
+
+// AHORA (safe):
+function real_escape_string($string) {
+    if ($this->link) {
+        return mysqli_real_escape_string($this->link, $string);
+    }
+    return addslashes((string)$string); // fallback seguro, nunca rompe
+}
+```
+
+### `q()` — ahora hardened
+
+```php
+// ANTES (frágil):
+function q($query) {
+    $result = @mysqli_query($this->link, $query);
+    $err = mysqli_error($this->link); // ← Fatal si link=false
+    ...
+}
+
+// AHORA (safe):
+function q($query) {
+    $result = @mysqli_query($this->link, $query);
+    if ($this->link) {          // ← Guard antes de mysqli_error
+        $err = mysqli_error($this->link);
+        if ($err !== '') { $this->_logFallback('ERROR', $query, $err); }
+    }
+    return $result;
+}
+```
+
+---
+
+## 📏 Regla E01 — Uso Mandatorio
+
+> **Todo código que use `$y->real_escape_string()` o `$y->q()` asume que `$y->link` es válido.  
+> La responsabilidad de garantizarlo recae en `Conexion.php`, no en el caller.**
+
+### Esto Significa:
+
+1. **Nunca** usar `mysqli_real_escape_string()` o `mysqli_error()` directamente — siempre a través de `$y->real_escape_string()` y `$y->q()`.
+2. **Nunca** verificar `$y->link` desde los archivos de negocio (eso es responsabilidad encapsulada de la clase).
+3. **Siempre** que se detecte un Warning `mysqli expects parameter 1 to be mysqli, boolean given` → la causa raíz es una llamada directa a `mysqli_*` en código de negocio, no en `Conexion.php`.
+
+---
+
+## 🔍 Archivos Afectados (Auditados Apr 2026)
+
+Todos los siguientes archivos ya estaban correctos en su uso de `$y->real_escape_string()` — el fix en `Conexion.php` los protege automáticamente:
+
+| Archivo | Uso | Estado |
+|--------|-----|--------|
+| `includes/negocio/cargos.php` | `real_escape_string` en 5 puntos | ✅ Protegido por E01 |
+| `includes/negocio/contratos.php` | `real_escape_string` en 10 puntos | ✅ Protegido por E01 |
+| `includes/negocio/usuarios.php` | `real_escape_string` en 3 puntos | ✅ Protegido por E01 |
+| `includes/negocio/pq20cm.php` | `real_escape_string` en 1 punto | ✅ Protegido por E01 |
+| `reportes/historial_auditoria.php` | `real_escape_string` en 2 puntos | ✅ Protegido por E01 |
+| `admin/operaciones/configuracion.php` | `real_escape_string` en 2 puntos | ✅ Protegido por E01 |
+| `admin/saneamiento/operaciones_multas_sync.php` | `real_escape_string` en 3 puntos | ✅ Protegido por E01 |
+| `admin/saneamiento/monitor_fallbacks.php` | `real_escape_string` en 4 puntos | ✅ Protegido por E01 |
+| `admin/saneamiento/saneamiento_administrativo.php` | `real_escape_string` en 1 punto | ✅ Protegido por E01 |
+| `admin/saneamiento/mixtos_sp_actv.php` | `real_escape_string` en 1 punto | ✅ Protegido por E01 |
+
+---
+
+## 🚫 Anti-Patrones a Detectar en PR/Code Review
+
+```php
+// ❌ MAL: llamada directa sin guard
+mysqli_real_escape_string($this->link, $v);  // si link=false → Warning + false
+
+// ❌ MAL: construir SQL con variable que puede ser false
+$esc = $y->real_escape_string($str); // antes del fix, podía ser false→""
+$y->q("INSERT ... '$esc'");          // INSERT con campo vacío
+
+// ✅ BIEN: siempre a través del método (que ahora tiene guard interno)
+$esc = $y->real_escape_string($str); // ahora siempre retorna string
+$y->q("INSERT ... '$esc'");
+```
+
+---
+
+## 🔗 Referencias
+
+- Fix commit: rama `feature/upgrade-v2-win-xampp`, sesión Apr 15-16, 2026
+- Regla relacionada: [11-estandares-codigo.md](./11-estandares-codigo.md)
+- Regla relacionada: [04-arquitectura-mvc.md](./04-arquitectura-mvc.md)
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `deploy-to-host-c.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+---
+description: Refresh de datos y despliegue de cambios en Host C (v2 MariaDB)
+---
+
+Este workflow cubre dos escenarios para Host C:
+1. **Refresh de datos** — traer datos frescos de producción hacia Host C
+2. **Despliegue de cambios de schema/PHP** — aplicar mejoras nuevas en Host C
+
+> [!IMPORTANT]
+> Host C ya tiene schema v2 completo y webapp adaptada (estado: UP & RUNNING desde 2026-04-06).
+> Pipeline validado en ejecución real (2026-04-17): 7/7 checks reales OK + 5 checks QA (solo `--with-qa`).
+> Ver [Regla 05](./../rules/05-despliegue-host-c.md) para diferencias de schema A vs C y flags del orquestador.
+> `tusuario` eliminada de BD y scripts — tabla fantasma no usada por la webapp.
+
+---
+
+## Escenario 1: Refresh de Datos de Producción → Host C
+
+**Flujo obligatorio**: B → A → C (nunca B→C directo — schemas incompatibles).
+**Comando canónico**: `Full-Pipeline-Sync.sh` — encapsula los dos pipelines en cadena.
+
+```bash
+cd docs-dev/migration-aguav2/
+./Full-Pipeline-Sync.sh                    # Producción: B→A→C (datos vienen de Host B)
+./Full-Pipeline-Sync.sh --skip-b           # Offline: salta volcado de B, usa A tal como está → C
+./Full-Pipeline-Sync.sh --with-qa          # Testing: B→A→C + inyecta datos sintéticos en A→C
+./Full-Pipeline-Sync.sh --with-qa --skip-b # Testing offline: sin conectar a Host B
+```
+
+> Los scripts individuales (`syncawa_hostb_to_hosta/run_sync.sh`, `sync_hosta_to_hostc/run_sync.sh`) existen para uso aislado de emergencia. Para el flujo normal, usar siempre `Full-Pipeline-Sync.sh`.
+
+El pipeline A→C (parte del orquestador) ejecuta automáticamente:
+
+| Paso | Script | Acción |
+| :---: | :--- | :--- |
+| 0 QA | `00_cleanup_qa_tests.sql` + `00_inject_qa_tests.sql` | Solo `--with-qa`: inyecta Contratos Mártires 9001–9008 en A |
+| 1 | `run_sync.sh` | Verifica conectividad A y C |
+| 2 | `01_backup_host_c.sh` | Backup comprimido de Host C (`backups/`, máx. 2) |
+| 3 | Inline | Dump desde Host A con transformaciones (idpago_vinc, fechas) |
+| 4 | Inline | Vacía tablas de negocio en C (FK-safe) |
+| 5 | Inline | Importa datos con transformaciones de schema v1+→v2 |
+| 6 | `06_split_ligacargos.sql` | Split: anio ≤ 2025 → `ligacargos_historico` |
+| 7 | `05_validate.sql` | Validaciones post-import (conteos, split) |
+| 8 | `10_pipeline_saneamiento.sql` | Folios mixtos + asamblea bulk + patch cats v2 |
+| 8-B | `10b_saneamiento_exencion_recargos.sql` | Cancela recargos indebidos contratos exentos 1er año |
+| 8-C | `10c_saneamiento_duplicados.sql` | Saneamiento duplicados reales (siempre) |
+| 8-C QA | `10c_qa_duplicados.sql` | Solo `--with-qa`: duplicados sintéticos 990x |
+| 9 | `12_validate_pipeline.sql` | Tablero validación datos reales (7 checks, siempre) |
+| 9 QA | `12_validate_pipeline_qa.sql` | Solo `--with-qa`: validación datos sintéticos 900x |
+
+### Configuración del sync A→C
+Editar `sync_hosta_to_hostc/sync_config.sh` para actualizar conteos esperados tras cada sync exitoso.
+
+---
+
+## Escenario 2: Despliegue de Cambios de Schema en Host C
+
+Para cualquier cambio estructural nuevo en la BD de Host C:
+
+1. Desarrollar y validar el cambio en Host A (`main`)
+2. Crear script numerado en `docs-dev/migration-aguav2/host-c-setup/`
+3. Ejecutar en Host C:
+   ```bash
+   mysql -u root -pcomite_2026 -h 192.168.1.128 awa < host-c-setup/NN_nuevo_cambio.sql
+   ```
+5. Actualizar la tabla de diferencias en [Regla 05](./../rules/05-despliegue-host-c.md)
+
+Para cambios PHP:
+1. Desarrollar en rama `feature/upgrade-v2-win-xampp`
+2. Commit y push al remoto
+3. En Host C: `git pull origin feature/upgrade-v2-win-xampp`
+
+---
+
+## Scripts de Setup Iniciales (referencia)
+
+En caso de necesitar re-crear Host C desde cero:
+
+```bash
+# Método canónico: usar el orquestador run_setup.sh (hace DROP + recreación automática)
+cd docs-dev/migration-aguav2/host-c-setup/
+./run_setup.sh
+# Luego transferir datos con sync A→C
+```
+
+---
+
+## Logs y Evidencia (sync A→C)
+
+- `sync_hosta_to_hostc/logs/sync_YYYYMMDD_HHMMSS.log` (rotación automática, máx. 2)
+- `sync_hosta_to_hostc/logs/setup_YYYYMMDD_HHMMSS.log` (log del DROP+setup C)
+- `sync_hosta_to_hostc/logs/pipeline_YYYYMMDD_HHMMSS.log` (log maestro del orquestador)
+- `sync_hosta_to_hostc/backups/backup_host_c_*.sql.gz` (máx. 2)
+
+---
+**Nota para agentes IA (Claude/Gemini)**: Antes de proponer cualquier cambio en Host C, verificar si ya existe un script en `host-c-setup/` que lo cubra. En caso de necesitar revertir, usar `run_setup.sh` para reconstruir desde cero.
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `pending.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L105-114)</summary>
+
+**Path:** `Unknown file`
+
+```
+| 2026-05-23 | Habilitación HTTPS Let's Encrypt OCI VM | ✅ PASADO — Certbot + Nginx para www.caelitandem.lat, redirect HTTP→HTTPS, cron auto-renovación blindado. |
+| 2026-05-21-22 | Documentación Entrega Sistema Agua V2 | ✅ PASADO — Manual PDF generado con apéndices de configuracion.php y paleta de colores semáforo. |
+| 2026-05-25 | Script dos-repos-branch-git.sh | ✅ PASADO — Guía operativa de flujo Git canónico para cierre de sesión (agua + agua_chatledger). |
+| 2026-05-25 | GEMINI.md y docs actualizados + push repos | ✅ PASADO — Hitos 2026-05-23 a 2026-05-25 documentados, commit y push en agua (feature/upgrade-v2-win-xampp) y agua_chatledger (master). |
+
+---
+
+*Última actualización: 2026-05-25 — Sincronización GEMINI.md y repos — Antigravity*
+
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 May 2026, 4:20 pm
+
+---
+
+<details>
+<summary>Conversation History</summary>
+
+# Conversation History
+Here are the conversation IDs, titles, and summaries of your most recent 11 conversations, in reverse chronological order:
+
+<conversation_summaries>
+## Conversation 06286601-35ed-4cc8-b964-fff0355244db: Initializing New Development Repository
+- Created: 2026-05-25T19:48:45Z
+- Last modified: 2026-05-25T21:35:21Z
+
+### USER Objective:
+Initializing New Development Repository
+
+Main Objective:
+Provision a new Git repository and organize project files for the emp_devhj_sw project.
+
+Goals:
+1. Create the local directory structure `/home/carlos/GitHub/emp_devhj_sw/caelitandem_home`.
+2. Initialize a new Git repository within the project root.
+3. Migrate the entire contents of `/home/carlos/Documents/tmp01/empsw/` into the newly created `caelitandem_home` directory.
+
+## Conversation 391ab92d-8c62-4053-97a8-3a6d6c7b506c: CaeliTandem SEO Strategy Implementation
+- Created: 2026-05-24T05:38:16Z
+- Last modified: 2026-05-25T19:36:52Z
+
+## Conversation ea5f8c74-55db-4706-b2c7-e3abd8e5448e: Modernizing CaeliTandem Web Assets
+- Created: 2026-05-21T21:19:44Z
+- Last modified: 2026-05-25T19:03:32Z
+
+## Conversation 9df8240f-6a37-4147-b8a3-c44b0ab61092: Restoring Nginx HTTPS Configuration
+- Created: 2026-05-24T04:52:15Z
+- Last modified: 2026-05-24T05:24:54Z
+
+### USER Objective:
+Restoring HTTPS For Nginx Sites
+
+USER Objective:
+Restore secure HTTPS access for the web applications hosted on the `oci-vm` instance by reconfiguring Nginx and renewing Let's Encrypt certificates.
+
+Goals:
+1. Analyze and correct the Nginx configuration on `oci-vm` to ensure all sites are reachable via HTTPS.
+2. Troubleshoot and re-establish valid Let's Encrypt SSL certificates for the affected domains.
+3. Implement a permanent HTTP-to-HTTPS redirect for all websites served by Nginx to ensure secure connectivity.
+4. Validate automatic certificate renewal settings to prevent future service interruptions.
+5. Document the resolved configuration and operational status to maintain infrastructure parity.
+
+## Conversation af7746f8-b81d-460c-bf0e-b544940d5bde: Appending System Documentation Appendices
+- Created: 2026-05-22T19:50:44Z
+- Last modified: 2026-05-22T21:17:50Z
+
+### USER Objective:
+Appending System Documentation Appendices
+
+Main Objective:
+Update the "Entrega_Sistema_AyDV2_CM" documentation by appending the requested configuration and UI design specifications.
+
+Goals:
+1. Append the source code contents of `admin/operaciones/configuracion.php` to the project documentation to ensure transparency in system parameters.
+2. Integrate the "Paleta de Colores del Buscador de Usuarios" specifications from the `analisis_paridad_3hosts.md` file into the documentation as a formal technical appendix.
+3. Ensure the documentation reflects the current state of system operational controls and the visual feedback mechanisms implemented for contract management.
+
+## Conversation 71ba31b2-ab24-42c2-805e-0b5581ef1d7b: Configuring Nginx Web Root Access
+- Created: 2026-05-22T17:21:23Z
+- Last modified: 2026-05-22T17:38:39Z
+
+### USER Objective:
+Configuring Nginx Web Root Access
+
+Main Objective:
+Validate and establish remote access to the Nginx configuration directory on the oci-vm instance to manage the web application root.
+
+Goals:
+1. Verify connectivity and permissions for the specified VSFTP path: `vsftp://ubuntu@oci-vm/etc/nginx/`.
+2. Configure or confirm the Nginx web root settings to ensure the web application is served correctly from the intended directory.
+3. Establish a secure and efficient workflow for future Nginx configuration updates on the OCI VM.
+
+## Conversation 13a74b1c-4f0e-47a5-a1e1-389ca3638e08: Debugging Address Normalization Logic
+- Created: 2026-05-20T18:12:05Z
+- Last modified: 2026-05-22T17:11:45Z
+
+## Conversation d0c3def9-505b-40eb-89b8-44c404849d37: Installing Local AI Development Stack
+- Created: 2026-05-19T19:24:09Z
+- Last modified: 2026-05-20T04:35:13Z
+
+### USER Objective:
+Local AI Coding Environment Deployment
+
+Objective: Deploy a high-performance local AI agent environment on Ubuntu 22 for software development.
+Goals:
+1. Configure and optimize the local stack, integrating Ollama, OpenCode, and OpenChamber.
+2. Remediate dependency conflicts (Node.js versions) and resource constraints (VRAM limitations) to enable reliable agentic tool execution.
+3. Establish a library of specialized local LLMs (Qwen 2.5-Coder, DeepSeek, Codestral) and validate their code-generation and file-editing capabilities.
+4. Troubleshoot and bridge the integration gaps between model tool-calling schemas and the OpenCode/VS Code agentic interface.
+
+## Conversation 1846bc62-6c4c-4ba0-960b-214ce8b4778c: Upgrading Antigravity to 2.0.0
+- Created: 2026-05-20T03:10:58Z
+- Last modified: 2026-05-20T03:16:22Z
+
+### USER Objective:
+Upgrading Antigravity to 2.0.0
+Investigate the upgrade path and procedure for Google Antigravity from version 1.23.2 to the latest version 2.0.0, including identifying its installation details and compiling an actionable migration guide.
+
+## Conversation b3356b06-a750-4cf4-833d-b711001fa206: Finalizing Documentation and Sync
+- Created: 2026-05-19T19:05:20Z
+- Last modified: 2026-05-19T19:07:05Z
+
+### USER Objective:
+Finalizing Documentation and Sync
+
+Main Objective:
+Finalize the environment synchronization and documentation updates for the Agua V2 project to ensure repository parity and clean tracking.
+
+Goals:
+1. Update GEMINI.md and associated documentation to reflect the latest project state and recent pipeline remediations.
+2. Stage and commit all pending changes, including repository cleanups and synchronization script updates.
+3. Push all committed changes to the remote branch to maintain version control consistency and ensure production-ready synchronization.
+
+## Conversation ac94919e-b65b-4f3f-afeb-60391e47c9d0: Debugging Financial Data Discrepancy
+- Created: 2026-05-19T17:51:41Z
+- Last modified: 2026-05-19T18:56:20Z
+
+### USER Objective:
+Resolving Data Sync Truncation
+
+Objective: Audit and remediate silent data loss in the Host B to Host A pipeline caused by MySQL bulk insert truncations.
+
+Goals:
+1. Identify all contracts impacted by the 1MB `max_allowed_packet` truncation issue by comparing source database counts with the generated SQL dump.
+2. Generate a comprehensive report listing affected contracts, including user names, addresses, and current status, to quantify the migration gap.
+3. Apply the `max_allowed_packet` and `net_buffer_length` fix to the synchronization script and harden the pipeline with post-dump integrity checks.
+4. Execute a full re-synchronization to restore complete data parity across Hosts A, B, and C.
+
+</conversation_summaries>
+
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 25 May 2026, 4:20 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 May 2026, 4:20 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `multi_replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 May 2026, 4:20 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 May 2026, 4:21 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 May 2026, 4:21 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 May 2026, 4:21 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 4:21 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 4:21 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+## User Request
+
+Analiza feature/saneamiento-v2 , creo tanto local como remoto, deben eliminarse , revisa a detalle, informa me.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `GEMINI.md`
+**Language:** markdown
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Let me analyze the feature/saneamiento-v2 branch in detail to determine if it's safe to delete.
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 6.857333348s
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 4:22 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 4:22 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Opus 4.6 (Thinking)
+</details>
+
+---
+
+## User Request
+
+si, dale.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `GEMINI.md`
+**Language:** markdown
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Defining the Action**
+
+I'm now clear on the goal: deleting the `feature/saneamiento-v2` branch locally and remotely. My context is confirmed; I'm in the `/opt/lampp/htdocs/agua` directory. Now, I'm ready to proceed with the execution steps.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.046035096s
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 5:32 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `feature/saneamiento-v2`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 May 2026, 5:33 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `feature/saneamiento-v2`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 May 2026, 5:33 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `07-git-workflow.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# Regla 07: Control de Versiones (Git/GitHub)
+
+Esta regla define el flujo de trabajo en el repositorio oficial de **Agua**.
+Válida para **Claude Code** y **Google Antigravity/Gemini** por igual.
+
+---
+
+## Repositorio Oficial
+
+- **URL**: `https://github.com/cbena999/aguaclmhj.git`
+- **Usuario GH**: `cbena999`
+
+---
+
+## Repositorio de Historial (ChatLedger)
+
+Almacena el Ground Truth de agentes IA y logs de conversaciones, independiente del código fuente.
+
+- **Ruta Local**: `/home/carlos/GitHub/agua_chatledger/`
+- **URL Remoto**: `https://github.com/cbena999/agua_chatledger.git`
+- **Symlink en App**: `.chatledger` → `/home/carlos/GitHub/agua_chatledger/`
+- **Rama Git**: `master`
+
+```bash
+# Subir cambios al ChatLedger (cuando se indique):
+cd /home/carlos/GitHub/agua_chatledger
+git add -A
+git commit -m "Sync: <descripción breve>"
+git push origin master
+```
+
+---
+
+## Gestión de Ramas
+
+> **Renombramiento 2026-05-25**: `main` → `aguav1.0-legacy` y `feature/upgrade-v2-win-xampp` → `main`.
+> La rama `main` es ahora el trunk activo de producción (Host C / V2).
+
+| Rama | Propósito | Host |
+| :--- | :--- | :--- |
+| `main` | **Trunk activo** — V2 (Windows 10 XAMPP 7.4 / PHP 7.4 / MariaDB) | C |
+| `aguav1.0-legacy` | Referencia histórica — V1 (Linux XAMPP MySQL 5.6 / PHP 5.5) | A (legacy) |
+| `feature/saneamiento-v2` | Feature branch experimental de saneamiento | A |
+
+---
+
+## Arquitectura de Symlinks (Ground Truth)
+
+Los siguientes paths en el repo `agua` son **symlinks permanentes** al chatledger.
+Aplican en **ambas ramas** (`main` y `feature`). Git en `agua` **nunca reporta cambios** en su contenido.
+
+| Symlink en repo `agua` | Apunta a | Git lo rastrea |
+| :--- | :--- | :--- |
+| `.chatledger` | `/home/carlos/GitHub/agua_chatledger/` | Solo el symlink en sí |
+| `.agents` | `.chatledger/.agents/` | Solo el symlink en sí |
+| `CLAUDE.md` | `.chatledger/CLAUDE.md` | Solo el symlink en sí |
+| `GEMINI.md` | `.chatledger/GEMINI.md` | Solo el symlink en sí |
+| `.clauderules` | `.chatledger/.clauderules` | Solo el symlink en sí |
+| `.mcp.json` | `.chatledger/.mcp.json` | Solo el symlink en sí |
+| `docs-dev/ga-cl-ia/` | `/home/carlos/GitHub/agua_chatledger/docs-dev/ga-cl-ia/` | Solo el symlink en sí |
+
+> **Consecuencia clave:** Editar `.agents/rules/`, `CLAUDE.md`, `docs-dev/ga-cl-ia/`, etc.
+> modifica físicamente `agua_chatledger`. Para versionar esos cambios → commitear en `agua_chatledger`, no en `agua`.
+
+Para recrear todos los symlinks en un equipo nuevo:
+```bash
+bash docs-dev/ga-cl-ia/chatledger_sync_ga_lnks.sh
+```
+
+---
+
+## Protocolo Obligatorio al Cambiar de Rama
+
+> Aplica para **cualquier dirección**: `main → feature` o `feature → main`.
+> Claude Code y Gemini deben ejecutar estos pasos **antes** de `git checkout`.
+
+### Paso 1 — Verificar estado de `agua_chatledger`
+
+```bash
+git -C /home/carlos/GitHub/agua_chatledger status
+```
+
+**Si hay cambios sin commitear:**
+```bash
+cd /home/carlos/GitHub/agua_chatledger
+git add -A
+git commit -m "docs: guardar cambios antes de cambiar rama en agua"
+cd /opt/lampp/htdocs/agua
+```
+
+> Esto protege reglas, skills, workflows y docs editados antes del cambio de rama.
+
+### Paso 2 — Verificar estado de `agua`
+
+```bash
+git status
+```
+
+Clasificar cada archivo reportado:
+
+| Tipo de archivo | Acción |
+| :--- | :--- |
+| **Código PHP/JS/SQL** modificado — pertenece a rama actual | `git add` + `git commit` antes de cambiar |
+| **Código PHP/JS/SQL** modificado — trabajo en progreso | `git stash push -m "wip: descripcion"` |
+| **Archivo nuevo sin track** (`??`) de código | Decidir: commitear en rama actual o ignorar si es temporal |
+| **Symlinks** (`.agents`, `CLAUDE.md`, etc.) | Ignorar — git no reporta cambios en su contenido |
+| **Artifacts de sync** (`work/*.sql`, `backups/*.sql.gz`) | Descartar — ver sección Artifacts |
+
+### Paso 3 — Cambiar de rama
+
+```bash
+git checkout <rama-destino>
+```
+
+### Paso 4 — Verificar estado post-cambio
+
+```bash
+git status
+```
+
+- Árbol limpio → OK
+- Si hay stash pendiente → `git stash pop` y resolver
+
+---
+
+## Qué commitear en cada repo
+
+| Cambio | Repo donde commitear |
+| :--- | :--- |
+| Código PHP, JS, SQL, vistas, includes | `agua` (rama correspondiente) |
+| Reglas `.agents/rules/` | `agua_chatledger` |
+| Skills `.agents/skills/` | `agua_chatledger` |
+| Workflows `.agents/workflows/` | `agua_chatledger` |
+| `CLAUDE.md`, `GEMINI.md`, `.clauderules` | `agua_chatledger` |
+| `docs-dev/ga-cl-ia/` (docs IA) | `agua_chatledger` |
+| Symlinks nuevos (modo 120000) | `agua` (ambas ramas si aplica) |
+| `.gitignore`, `composer.json`, configs de repo | `agua` |
+
+---
+
+## Artifacts de Sync — Nunca Commitear
+
+Los directorios `work/` y `backups/` de los pipelines de sync son generados automáticamente. Están en `.gitignore`.
+
+| Path ignorado | Origen |
+| :--- | :--- |
+| `docs-dev/migration-aguav2/syncawa_hostb_to_hosta/work/*.sql` | Dumps sync B→A |
+| `docs-dev/migration-aguav2/syncawa_hostb_to_hosta/work/conteos_*.txt` | Logs de conteo B→A |
+| `docs-dev/migration-aguav2/syncawa_hostb_to_hosta/backups/*.sql.gz` | Backups automáticos Host A |
+| `docs-dev/migration-aguav2/sync_hosta_to_hostc/work/*.sql` | Dumps sync A→C |
+| `docs-dev/migration-aguav2/sync_hosta_to_hostc/work/conteos_*.txt` | Logs de conteo A→C |
+| `docs-dev/migration-aguav2/sync_hosta_to_hostc/backups/*.sql.gz` | Backups automáticos Host C |
+
+Si aparecen como M/D/? en `git status`, descartarlos con:
+
+```bash
+git checkout -- docs-dev/migration-aguav2/syncawa_hostb_to_hosta/work/
+git checkout -- docs-dev/migration-aguav2/sync_hosta_to_hostc/work/
+```
+
+---
+
+## Notas para Agentes IA (Claude Code y Gemini)
+
+- **Commits**: formato `tipo(scope): descripción`. Descripción clara y técnica.
+- **NO commitear tras cada cambio**: aplicar los cambios en archivos, reportar qué se modificó, y detenerse. Solo ejecutar `git add / commit / push` cuando el usuario lo solicite explícitamente ("commitea", "sube los cambios", etc.).
+- **Pushes**: permitidos bajo usuario `cbena999`. Confirmar con usuario antes de push a `main`.
+- **Symlinks**: no reemplazar symlinks por archivos reales. Si se detecta un directorio real donde debería haber symlink → ejecutar `chatledger_sync_ga_lnks.sh`.
+- **Conflictos**: resolver antes de proponer merge. No usar `--no-verify` ni `--force` sin autorización explícita.
+- **Scope de autorización**: una aprobación puntual no autoriza la misma acción en contextos futuros.
+- **ChatLedger primero**: ante duda de dónde commitear algo relacionado con IA/docs → siempre `agua_chatledger`.
+
+---
+
+**Última actualización:** 2026-05-25 — Renombramiento de ramas (main→aguav1.0-legacy, feature→main)
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Refining The Table**
+
+I've decided to remove a specific line from the table, focusing on the `feature/saneamiento-v2` entry. I will check to see if the table markdown requires further adjustment. I am now looking at lines 39-44 for further modifications.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.000206624s
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 May 2026, 5:33 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 5:34 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Execution Error
+
+**Status:** Completed
+**Created:** 25 May 2026, 5:34 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 5:34 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+crea un rama derivad de main, que se llame: aguad_ac_oferta
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `pending.md`
+**Language:** markdown
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 5:45 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 5:45 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 5:45 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+estando en rama aguad_ac_oferta y usando /home/carlos/GitHub/agua_chatledger/.mcp.json
+Crea un copia clon de la bd awa host c
+que se llame: aguayd_os y claro alojala em host c; y dale todo los permisos actuales de awa
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `pending.md`
+**Language:** markdown
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `.mcp.json`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+{
+  "mcpServers": {
+    "bdawahost-a": {
+      "command": "docker",
+      "args": [
+        "exec",
+        "-i",
+        "context7-mcp-mysql",
+        "npx",
+        "-y",
+        "@f4ww4z/mcp-mysql-server",
+        "mysql://root:comite_2026@127.0.0.1:3306/awa"
+      ],
+      "env": {
+        "DOCKER_HOST": "unix:///var/run/docker.sock"
+      }
+    },
+    "bdawahost-b": {
+      "command": "docker",
+      "args": [
+        "exec",
+        "-i",
+        "context7-mcp-mysql",
+        "npx",
+        "-y",
+        "@f4ww4z/mcp-mysql-server",
+        "mysql://root:sdrastbuy@192.168.1.81:3306/awa"
+      ],
+      "env": {
+        "DOCKER_HOST": "unix:///var/run/docker.sock"
+      }
+    },
+    "bdawahost-c": {
+      "command": "docker",
+      "args": [
+        "exec",
+        "-i",
+        "context7-mcp-mysql",
+        "npx",
+        "-y",
+        "@f4ww4z/mcp-mysql-server",
+        "mysql://root:comite_2026@192.168.0.100:7002/awa"
+      ],
+      "env": {
+        "DOCKER_HOST": "unix:///var/run/docker.sock"
+      }
+    }
+  }
+}
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 6:07 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 6:10 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 6:10 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 6:10 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 6:10 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 6:17 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `command_status`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Process Monitor
+
+**Status:** Completed
+**Created:** 25 May 2026, 6:17 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `command_status`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Process Monitor
+
+**Status:** Completed
+**Created:** 25 May 2026, 6:17 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 6:17 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 6:18 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 6:21 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+Prueba acceso por ftp en host c, con usuario usr01 y pwd: 12345678
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `pending.md`
+**Language:** markdown
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 6:33 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 6:33 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 6:33 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+Asegurate de estan en la rama aguad_ac_oferta, 
+. cambia config.php y a DB_NAME asigna aguayd_os
+. has un test hacia esa bd via mysql cli y mcp con la id: bdawa2host-c  usando /home/carlos/GitHub/agua_chatledger/.mcp.json
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Reviewing the Database Clone**
+
+I'm currently verifying the initial request. I've confirmed we're in the correct branch and have edited the `config.php` file, setting the `DB_NAME` to `aguayd_os`. My next step involves conducting a test to ensure the database clone is correctly configured.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.062315946s
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 6:49 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 6:49 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `config.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/**
+ * Configuración general del sistema AGUA v2
+ * Este archivo centraliza las credenciales y rutas para facilitar la migración.
+ */
+
+// Configuración de la Base de Datos
+define('DB_HOST', getenv('DB_HOST') ?: '127.0.0.1');
+define('DB_PORT', (int)(getenv('DB_PORT') ?: 7002));
+define('DB_USER', getenv('DB_USER') ?: 'root');
+define('DB_PASS', getenv('DB_PASS') ?: 'comite_2026'); // Ajustar según entorno XAMPP
+define('DB_NAME', getenv('DB_NAME') ?: 'awa');
+
+// Configuración de Rutas
+define('APP_ROOT', dirname(__DIR__));
+define('URL_BASE', '/agua/'); // Ajustar si el alias en Apache de XAMPP cambia
+
+// Configuración de Errores (Útil para desarrollo en Windows/PHP 7.4)
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+?>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 May 2026, 6:49 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 6:49 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Verifying CLI Operation**
+
+I've confirmed the CLI functions as expected, successfully returning 1410 contracts from the aguayd_os database clone. My next step involves integrating `bdawa2host-c` into the `/home/carlos/GitHub/agua_chatledger/.mcp.json` file. Following that, I'll re-examine the contents of this configuration file.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.017936835s
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 May 2026, 6:49 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 6:50 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `chatledger_sync_ga_lnks.sh`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+#!/bin/bash
+
+# =================================================================
+# SCRIPT DE SINCRONIZACIÓN DE SYMLINKS — AGUA (Claude & Gemini)
+#
+# Objetivo: Establecer todos los symlinks necesarios para que los
+# archivos/dirs meta de IA tengan su fuente de verdad en
+# agua_chatledger, y sean accesibles desde cualquier rama de git
+# (main y feature/upgrade-v2-win-xampp) sin duplicar contenido.
+#
+# Uso: bash chatledger_sync_ga_lnks.sh
+# Seguro de re-ejecutar: verifica antes de actuar.
+#
+# Symlinks que gestiona:
+#   REPO/.chatledger        → CHATLEDGER/
+#   REPO/.agents            → CHATLEDGER/.agents/
+#   REPO/CLAUDE.md          → CHATLEDGER/CLAUDE.md
+#   REPO/GEMINI.md          → CHATLEDGER/GEMINI.md
+#   REPO/.clauderules       → CHATLEDGER/.clauderules
+#   REPO/.mcp.json          → CHATLEDGER/.mcp.json (vía .chatledger)
+#   REPO/docs-dev/ga-cl-ia  → CHATLEDGER/docs-dev/ga-cl-ia/
+# =================================================================
+
+REPO_DIR="/opt/lampp/htdocs/agua"
+CHATLEDGER_DIR="/home/carlos/GitHub/agua_chatledger"
+
+GREEN="\033[0;32m"
+YELLOW="\033[1;33m"
+RED="\033[0;31m"
+RESET="\033[0m"
+
+ok()   { echo -e "${GREEN}[OK]${RESET}    $1"; }
+info() { echo -e "${YELLOW}[INFO]${RESET}  $1"; }
+err()  { echo -e "${RED}[ERROR]${RESET} $1"; }
+
+echo "======================================================"
+echo " Sincronización de Symlinks Ground Truth — Agua IA"
+echo "======================================================"
+echo " REPO:       $REPO_DIR"
+echo " CHATLEDGER: $CHATLEDGER_DIR"
+echo "======================================================"
+
+# ------------------------------------------------------------------
+# Verificaciones previas
+# ------------------------------------------------------------------
+
+if [ ! -d "$REPO_DIR" ]; then
+    err "No existe el directorio del repo: $REPO_DIR"
+    exit 1
+fi
+
+if [ ! -d "$CHATLEDGER_DIR" ]; then
+    err "No existe el chatledger: $CHATLEDGER_DIR"
+    err "Clona primero: git clone https://github.com/cbena999/agua_chatledger.git $CHATLEDGER_DIR"
+    exit 1
+fi
+
+cd "$REPO_DIR" || exit 1
+
+# ------------------------------------------------------------------
+# Función genérica para crear symlink
+# Uso: make_symlink <ruta_en_repo> <destino_real> <descripcion>
+# ------------------------------------------------------------------
+make_symlink() {
+    local LINK="$1"
+    local TARGET="$2"
+    local DESC="$3"
+
+    # Si ya es symlink correcto → no hacer nada
+    if [ -L "$LINK" ] && [ "$(readlink "$LINK")" = "$TARGET" ]; then
+        info "$DESC → ya es symlink correcto. Sin cambios."
+        return 0
+    fi
+
+    # Si es symlink apuntando a otro lugar → advertir y corregir
+    if [ -L "$LINK" ]; then
+        info "$DESC → symlink existente pero apunta a '$(readlink "$LINK")'. Corrigiendo..."
+        rm "$LINK"
+    fi
+
+    # Si es directorio real → migrar contenido al chatledger primero
+    if [ -d "$LINK" ]; then
+        info "$DESC → directorio real detectado. Migrando contenido a chatledger..."
+        mkdir -p "$TARGET"
+        cp -rn "$LINK/." "$TARGET/" 2>/dev/null
+        rm -rf "$LINK"
+        ok "$DESC → contenido migrado a $TARGET"
+    fi
+
+    # Si es archivo real → migrar al chatledger primero
+    if [ -f "$LINK" ]; then
+        info "$DESC → archivo real detectado. Migrando a chatledger..."
+        cp -n "$LINK" "$TARGET" 2>/dev/null
+        rm "$LINK"
+        ok "$DESC → archivo migrado a $TARGET"
+    fi
+
+    # Crear symlink
+    ln -s "$TARGET" "$LINK"
+    ok "$DESC → symlink creado: $LINK → $TARGET"
+}
+
+# ------------------------------------------------------------------
+# 1. .chatledger  (base — todos los demás dependen de este)
+# ------------------------------------------------------------------
+echo ""
+echo "── 1. .chatledger ──────────────────────────────────"
+make_symlink \
+    "$REPO_DIR/.chatledger" \
+    "$CHATLEDGER_DIR" \
+    ".chatledger"
+
+# Asegurar en .gitignore
+if ! grep -q "^\.chatledger$" "$REPO_DIR/.gitignore" 2>/dev/null; then
+    echo ".chatledger" >> "$REPO_DIR/.gitignore"
+    sort -u "$REPO_DIR/.gitignore" -o "$REPO_DIR/.gitignore"
+    ok ".chatledger agregado a .gitignore"
+fi
+
+# ------------------------------------------------------------------
+# 2. .agents
+# ------------------------------------------------------------------
+echo ""
+echo "── 2. .agents ──────────────────────────────────────"
+mkdir -p "$CHATLEDGER_DIR/.agents"
+make_symlink \
+    "$REPO_DIR/.agents" \
+    ".chatledger/.agents" \
+    ".agents"
+
+# ------------------------------------------------------------------
+# 3. CLAUDE.md
+# ------------------------------------------------------------------
+echo ""
+echo "── 3. CLAUDE.md ────────────────────────────────────"
+touch "$CHATLEDGER_DIR/CLAUDE.md" 2>/dev/null
+make_symlink \
+    "$REPO_DIR/CLAUDE.md" \
+    ".chatledger/CLAUDE.md" \
+    "CLAUDE.md"
+
+# ------------------------------------------------------------------
+# 4. GEMINI.md
+# ------------------------------------------------------------------
+echo ""
+echo "── 4. GEMINI.md ────────────────────────────────────"
+touch "$CHATLEDGER_DIR/GEMINI.md" 2>/dev/null
+make_symlink \
+    "$REPO_DIR/GEMINI.md" \
+    ".chatledger/GEMINI.md" \
+    "GEMINI.md"
+
+# ------------------------------------------------------------------
+# 5. .clauderules
+# ------------------------------------------------------------------
+echo ""
+echo "── 5. .clauderules ─────────────────────────────────"
+touch "$CHATLEDGER_DIR/.clauderules" 2>/dev/null
+make_symlink \
+    "$REPO_DIR/.clauderules" \
+    ".chatledger/.clauderules" \
+    ".clauderules"
+
+# ------------------------------------------------------------------
+# 6. .mcp.json  (vía .chatledger symlink)
+# ------------------------------------------------------------------
+echo ""
+echo "── 6. .mcp.json ─────────────────────────────────────"
+touch "$CHATLEDGER_DIR/.mcp.json" 2>/dev/null
+make_symlink \
+    "$REPO_DIR/.mcp.json" \
+    ".chatledger/.mcp.json" \
+    ".mcp.json"
+
+# ------------------------------------------------------------------
+# 7. docs-dev/ga-cl-ia  (apunta directo al chatledger, no vía .chatledger)
+# ------------------------------------------------------------------
+echo ""
+echo "── 7. docs-dev/ga-cl-ia ─────────────────────────────"
+mkdir -p "$CHATLEDGER_DIR/docs-dev/ga-cl-ia"
+make_symlink \
+    "$REPO_DIR/docs-dev/ga-cl-ia" \
+    "$CHATLEDGER_DIR/docs-dev/ga-cl-ia" \
+    "docs-dev/ga-cl-ia"
+
+# ------------------------------------------------------------------
+# 8. .claude  (settings.json + settings.local.json en chatledger)
+# ------------------------------------------------------------------
+echo ""
+echo "── 8. .claude ───────────────────────────────────────"
+mkdir -p "$CHATLEDGER_DIR/.claude"
+make_symlink \
+    "$REPO_DIR/.claude" \
+    ".chatledger/.claude" \
+    ".claude"
+
+# ------------------------------------------------------------------
+# Resumen final
+# ------------------------------------------------------------------
+echo ""
+echo "======================================================"
+echo " Verificación final de symlinks"
+echo "======================================================"
+LINKS=(
+    "$REPO_DIR/.chatledger"
+    "$REPO_DIR/.agents"
+    "$REPO_DIR/CLAUDE.md"
+    "$REPO_DIR/GEMINI.md"
+    "$REPO_DIR/.clauderules"
+    "$REPO_DIR/.mcp.json"
+    "$REPO_DIR/docs-dev/ga-cl-ia"
+    "$REPO_DIR/.claude"
+)
+ALL_OK=true
+for L in "${LINKS[@]}"; do
+    if [ -L "$L" ]; then
+        ok "$(basename $L) → $(readlink $L)"
+    else
+        err "$(basename $L) — NO es symlink"
+        ALL_OK=false
+    fi
+done
+
+echo ""
+if [ "$ALL_OK" = true ]; then
+    echo -e "${GREEN}✓ Todos los symlinks están correctos.${RESET}"
+else
+    echo -e "${RED}✗ Algunos symlinks fallaron. Revisar errores arriba.${RESET}"
+    exit 1
+fi
+
+# ------------------------------------------------------------------
+# 9. Instalar git hook pre-commit en agua_chatledger
+# ------------------------------------------------------------------
+echo ""
+echo "── 9. Git hook pre-commit ───────────────────────────"
+INSTALL_HOOKS="$CHATLEDGER_DIR/docs-dev/ga-cl-ia/install-hooks.sh"
+if [ -f "$INSTALL_HOOKS" ]; then
+    bash "$INSTALL_HOOKS"
+else
+    info "install-hooks.sh no encontrado — hook no instalado"
+fi
+
+echo "======================================================"
+echo ""
+echo "  Próximos pasos recomendados:"
+echo "  1. git -C $CHATLEDGER_DIR add -A && git -C $CHATLEDGER_DIR commit -m 'sync: symlinks y hooks verificados'"
+echo "  2. git -C $CHATLEDGER_DIR push origin master"
+echo "======================================================"
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `chatledger_validate.sh`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+#!/usr/bin/env bash
+# =============================================================================
+# chatledger_validate.sh — Validación de integridad del Ground Truth
+# Repo: agua_chatledger · Ver: .agents/rules/08-integridad-ground-truth.md
+#
+# USO: bash docs-dev/ga-cl-ia/chatledger_validate.sh
+# Ejecutado automáticamente por el pre-commit hook de repo agua.
+# =============================================================================
+set -euo pipefail
+
+AGUA_DIR="/opt/lampp/htdocs/agua"
+CHATLEDGER_DIR="/home/carlos/GitHub/agua_chatledger"
+ERRORS=0
+
+fail() { echo "  [FAIL] $*"; ERRORS=$((ERRORS + 1)); }
+ok()   { echo "  [ OK ] $*"; }
+
+echo ""
+echo "═══════════════════════════════════════════════════════"
+echo "  Validación Ground Truth — agua_chatledger            "
+echo "═══════════════════════════════════════════════════════"
+
+# ── 1. Symlinks en repo agua ──────────────────────────────────────────────────
+echo ""
+echo "  [1] Symlinks en repo agua"
+
+check_symlink() {
+    local link="$1"
+    local expected_target="$2"
+    if [ -L "$link" ]; then
+        ok "Symlink OK: $link"
+    else
+        fail "Symlink roto o convertido en archivo: $link (esperado → $expected_target)"
+    fi
+}
+
+check_symlink "${AGUA_DIR}/.agents"          ".chatledger/.agents"
+check_symlink "${AGUA_DIR}/.claude"          ".chatledger/.claude"
+check_symlink "${AGUA_DIR}/.mcp.json"        ".chatledger/.mcp.json"
+check_symlink "${AGUA_DIR}/CLAUDE.md"        ".chatledger/CLAUDE.md"
+check_symlink "${AGUA_DIR}/GEMINI.md"        ".chatledger/GEMINI.md"
+check_symlink "${AGUA_DIR}/.clauderules"     ".chatledger/.clauderules"
+check_symlink "${AGUA_DIR}/docs-dev/ga-cl-ia" "${CHATLEDGER_DIR}/docs-dev/ga-cl-ia"
+
+# ── 2. .mcp.json no vacío y contiene los 3 hosts ─────────────────────────────
+echo ""
+echo "  [2] .mcp.json — contenido y 3 hosts"
+
+MCP_FILE="${AGUA_DIR}/.mcp.json"
+if [ ! -s "$MCP_FILE" ]; then
+    fail ".mcp.json vacío o inexistente"
+else
+    for host in bdawahost-a bdawahost-b bdawahost-c; do
+        if grep -q "$host" "$MCP_FILE" 2>/dev/null; then
+            ok ".mcp.json contiene: $host"
+        else
+            fail ".mcp.json no contiene: $host"
+        fi
+    done
+    # En el JSON el comando es "docker" + args "exec" -i ... (separados)
+    if grep -q '"docker"' "$MCP_FILE" 2>/dev/null && grep -q '"exec"' "$MCP_FILE" 2>/dev/null; then
+        ok ".mcp.json usa docker exec (correcto)"
+    else
+        fail ".mcp.json NO usa docker exec — MCPs romperán con ETIMEDOUT"
+    fi
+fi
+
+# ── 3. mcp_config.json idéntico a .mcp.json ──────────────────────────────────
+echo ""
+echo "  [3] mcp_config.json sincronizado con .mcp.json"
+
+MCP_REF="${AGUA_DIR}/.agents/mcp_config.json"
+if [ -f "$MCP_REF" ]; then
+    if diff -q "$MCP_FILE" "$MCP_REF" > /dev/null 2>&1; then
+        ok "mcp_config.json idéntico a .mcp.json"
+    else
+        fail "mcp_config.json DIFIERE de .mcp.json — sincronizar antes de commitear"
+    fi
+else
+    fail "mcp_config.json no encontrado en .agents/"
+fi
+
+# ── 4. Assets críticos en docs-dev/ga-cl-ia ───────────────────────────────────
+echo ""
+echo "  [4] Assets críticos en docs-dev/ga-cl-ia"
+
+for asset in "entrypoint-patch.sh" "docker-compose.yml"; do
+    if [ -f "${CHATLEDGER_DIR}/docs-dev/ga-cl-ia/${asset}" ]; then
+        ok "Existe: docs-dev/ga-cl-ia/${asset}"
+    else
+        # AVISO pero no bloquea — estos assets pueden no estar en todos los ambientes
+        echo "  [WARN] No encontrado: docs-dev/ga-cl-ia/${asset} (opcional en este ambiente)"
+    fi
+done
+
+# ── 5. .clauderules no excede 30 líneas ──────────────────────────────────────
+echo ""
+echo "  [5] .clauderules — tamaño"
+
+CLAUDERULES="${AGUA_DIR}/.clauderules"
+if [ -f "$CLAUDERULES" ]; then
+    LINES=$(wc -l < "$CLAUDERULES")
+    if [ "$LINES" -le 30 ]; then
+        ok ".clauderules: ${LINES} líneas (OK ≤30)"
+    else
+        fail ".clauderules: ${LINES} líneas (excede 30 — mover contenido a .agents/)"
+    fi
+else
+    fail ".clauderules no encontrado"
+fi
+
+# ── Resultado ─────────────────────────────────────────────────────────────────
+echo ""
+echo "═══════════════════════════════════════════════════════"
+if [ "$ERRORS" -eq 0 ]; then
+    echo "  RESULTADO: OK ✓ — Ground Truth íntegro ($ERRORS errores)"
+    echo "═══════════════════════════════════════════════════════"
+    echo ""
+    exit 0
+else
+    echo "  RESULTADO: FALLO ✗ — ${ERRORS} error(es) detectado(s)"
+    echo "  Reparar con: bash docs-dev/ga-cl-ia/chatledger_sync_ga_lnks.sh"
+    echo "  Ver: .agents/rules/08-integridad-ground-truth.md"
+    echo "═══════════════════════════════════════════════════════"
+    echo ""
+    exit 1
+fi
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 6:50 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 6:50 pm
+
+---
+
+<details>
+<summary>Conversation History</summary>
+
+# Conversation History
+Here are the conversation IDs, titles, and summaries of your most recent 9 conversations, in reverse chronological order:
+
+<conversation_summaries>
+## Conversation 06286601-35ed-4cc8-b964-fff0355244db: Initializing New Development Repository
+- Created: 2026-05-25T19:48:45Z
+- Last modified: 2026-05-25T21:35:21Z
+
+### USER Objective:
+Initializing New Development Repository
+
+Main Objective:
+Provision a new Git repository and organize project files for the emp_devhj_sw project.
+
+Goals:
+1. Create the local directory structure `/home/carlos/GitHub/emp_devhj_sw/caelitandem_home`.
+2. Initialize a new Git repository within the project root.
+3. Migrate the entire contents of `/home/carlos/Documents/tmp01/empsw/` into the newly created `caelitandem_home` directory.
+
+## Conversation 391ab92d-8c62-4053-97a8-3a6d6c7b506c: CaeliTandem SEO Strategy Implementation
+- Created: 2026-05-24T05:38:16Z
+- Last modified: 2026-05-25T19:36:52Z
+
+## Conversation ea5f8c74-55db-4706-b2c7-e3abd8e5448e: Modernizing CaeliTandem Web Assets
+- Created: 2026-05-21T21:19:44Z
+- Last modified: 2026-05-25T19:03:32Z
+
+## Conversation 9df8240f-6a37-4147-b8a3-c44b0ab61092: Restoring Nginx HTTPS Configuration
+- Created: 2026-05-24T04:52:15Z
+- Last modified: 2026-05-24T05:24:54Z
+
+### USER Objective:
+Restoring HTTPS For Nginx Sites
+
+USER Objective:
+Restore secure HTTPS access for the web applications hosted on the `oci-vm` instance by reconfiguring Nginx and renewing Let's Encrypt certificates.
+
+Goals:
+1. Analyze and correct the Nginx configuration on `oci-vm` to ensure all sites are reachable via HTTPS.
+2. Troubleshoot and re-establish valid Let's Encrypt SSL certificates for the affected domains.
+3. Implement a permanent HTTP-to-HTTPS redirect for all websites served by Nginx to ensure secure connectivity.
+4. Validate automatic certificate renewal settings to prevent future service interruptions.
+5. Document the resolved configuration and operational status to maintain infrastructure parity.
+
+## Conversation af7746f8-b81d-460c-bf0e-b544940d5bde: Appending System Documentation Appendices
+- Created: 2026-05-22T19:50:44Z
+- Last modified: 2026-05-22T21:17:50Z
+
+### USER Objective:
+Appending System Documentation Appendices
+
+Main Objective:
+Update the "Entrega_Sistema_AyDV2_CM" documentation by appending the requested configuration and UI design specifications.
+
+Goals:
+1. Append the source code contents of `admin/operaciones/configuracion.php` to the project documentation to ensure transparency in system parameters.
+2. Integrate the "Paleta de Colores del Buscador de Usuarios" specifications from the `analisis_paridad_3hosts.md` file into the documentation as a formal technical appendix.
+3. Ensure the documentation reflects the current state of system operational controls and the visual feedback mechanisms implemented for contract management.
+
+## Conversation 71ba31b2-ab24-42c2-805e-0b5581ef1d7b: Configuring Nginx Web Root Access
+- Created: 2026-05-22T17:21:23Z
+- Last modified: 2026-05-22T17:38:39Z
+
+### USER Objective:
+Configuring Nginx Web Root Access
+
+Main Objective:
+Validate and establish remote access to the Nginx configuration directory on the oci-vm instance to manage the web application root.
+
+Goals:
+1. Verify connectivity and permissions for the specified VSFTP path: `vsftp://ubuntu@oci-vm/etc/nginx/`.
+2. Configure or confirm the Nginx web root settings to ensure the web application is served correctly from the intended directory.
+3. Establish a secure and efficient workflow for future Nginx configuration updates on the OCI VM.
+
+## Conversation 13a74b1c-4f0e-47a5-a1e1-389ca3638e08: Debugging Address Normalization Logic
+- Created: 2026-05-20T18:12:05Z
+- Last modified: 2026-05-22T17:11:45Z
+
+## Conversation d0c3def9-505b-40eb-89b8-44c404849d37: Installing Local AI Development Stack
+- Created: 2026-05-19T19:24:09Z
+- Last modified: 2026-05-20T04:35:13Z
+
+### USER Objective:
+Local AI Coding Environment Deployment
+
+Objective: Deploy a high-performance local AI agent environment on Ubuntu 22 for software development.
+Goals:
+1. Configure and optimize the local stack, integrating Ollama, OpenCode, and OpenChamber.
+2. Remediate dependency conflicts (Node.js versions) and resource constraints (VRAM limitations) to enable reliable agentic tool execution.
+3. Establish a library of specialized local LLMs (Qwen 2.5-Coder, DeepSeek, Codestral) and validate their code-generation and file-editing capabilities.
+4. Troubleshoot and bridge the integration gaps between model tool-calling schemas and the OpenCode/VS Code agentic interface.
+
+## Conversation 1846bc62-6c4c-4ba0-960b-214ce8b4778c: Upgrading Antigravity to 2.0.0
+- Created: 2026-05-20T03:10:58Z
+- Last modified: 2026-05-20T03:16:22Z
+
+### USER Objective:
+Upgrading Antigravity to 2.0.0
+Investigate the upgrade path and procedure for Google Antigravity from version 1.23.2 to the latest version 2.0.0, including identifying its installation details and compiling an actionable migration guide.
+
+</conversation_summaries>
+
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 25 May 2026, 6:50 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Testing the Orchestration**
+
+I've confirmed the validation is successful. My current focus shifts to testing against the MCP server. I'm now considering a critical detail: does the orchestrator dynamically reload the MCP server list within an agent session, or must I restart the session? This may become relevant.
+
+
+**Verifying Tool Accessibility**
+
+I'm now focusing on verifying the accessibility of the tool. I will check what tools are registered. It seems the tools are declared statically during model load. The orchestrator reloads the MCP configuration dynamically. I'll search for `mcp_bdawa2host-c_query` or similar in the declaration list. I've noted that the list provided does NOT list this tool.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.024833959s
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 6:50 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Cancelled
+**Created:** 25 May 2026, 6:50 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Cancelled
+**Created:** 25 May 2026, 6:50 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 6:50 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 6:51 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 6:51 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+todos lo q sigue debe ser en  la rama aguad_ac_oferta , incluido  lo de config.php, revisa
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `config.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 6:59 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 6:59 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+rama main no se debe tocar
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `config.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+copia /opt/lampp/htdocs/agua/docs-dev/pase-a-prod/aguav2-2026/instalador/agua.zip a host c via ftp
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `config.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 7:01 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 7:02 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 7:02 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+puedes descomprime ese .zip en el host c ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `config.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `ssh`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 May 2026, 7:03 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `remoto`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 May 2026, 7:03 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `05-despliegue-host-c.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# Regla 05: Despliegue y Automatización (Host C)
+
+Reglas para la migración e implementación de mejoras en el ambiente **Host C** (MariaDB 10.4.27 / XAMPP 7.4.33).
+
+---
+
+## Estado Actual (2026-04-14) — Host C UP & RUNNING ✓ — Pipeline COMPLETO, CORRECTO Y VERIFICADO
+
+La migración está **completada, consolidada y declarada verificada**. Host C tiene:
+- BD `awa` con schema v2 completo (17 tablas InnoDB, utf8mb4, FKs, SPs, 3 vistas)
+- `ligacargos` split: activa ≥2026 + `ligacargos_historico` ≤2025
+- Webapp `main` adaptada al schema v2 — reportes de caja y cartera homologados
+- Scripts de setup versionados: `docs-dev/migration-aguav2/host-c-setup/` (02→09, manual/)
+- `tusuario` eliminada de BD y de todos los scripts (tabla fantasma — no usada por PHP)
+- Pipeline de saneamiento integrado y automatizado en `run_sync.sh` (Paso 8)
+- Protocolo de migración documentado: `docs-dev/doc-estabilizacion/pase-a-prod/MIGRATION_PROTOCOL.md`
+- Declaración de homologación reportes: `docs-dev/doc-estabilizacion/encuadres/REPORTES_CAJA_CARTERA_DECLARACION.md`
+- **Terminología de Sesión**: Este conjunto de documentos constituye el **Ground Truth (para Claude)** y el **Runbook (para Gemini)**.
+
+### Pipelines probados (ejecución de referencia: 2026-04-14; última validación: 2026-04-18)
+- **B→A**: ejecutado y validado — 8 pasos OK
+- **A→C**: ejecutado y validado — Pasos 1–8 → 8-C → 8-B → 9 + 7/7 checks OK
+- **Retención de artefactos**: 2 logs + 2 backups por pipeline (rotación automática en cada ejecución)
+
+---
+
+## Propósito del Host C
+
+Ambiente **Target V2 FINAL** — esquema optimizado (MariaDB), split histórico de ligacargos, FKs/SPs/vistas nuevas. Host C es el destino final de la migración y la referencia de producción V2.
+
+---
+
+## Estrategia de Refresh de Datos (B → A → C)
+
+El refresh de datos hacia el Target V2 **siempre** sigue esta ruta de transformación:
+
+```
+Host B (Legado V1) → Host A (Transición V1+) → Host C (Destino V2)
+```
+
+**Por qué no B→C directo**: el schema de B (v1) es incompatible con C (v2). Host A actúa como la capa de transformación Bridge (limpieza y normalización V1+). El salto a V2 ocurre en el paso A→C vía el split de tablas.
+
+### Comando canónico (orquestador maestro)
+```bash
+cd docs-dev/migration-aguav2/
+./Full-Pipeline-Sync.sh                    # Producción: B→A→C (datos vienen de Host B)
+./Full-Pipeline-Sync.sh --skip-b           # Offline: salta volcado de B, usa A tal como está → C
+./Full-Pipeline-Sync.sh --with-qa          # Testing: B→A→C + inyecta datos sintéticos en A→C
+./Full-Pipeline-Sync.sh --with-qa --skip-b # Testing offline: sin conectar a Host B
+# Cualquier otra flag causa exit 1 con "Flag desconocida: X"
+```
+
+Los scripts individuales siguen disponibles para uso aislado de emergencia (ver tabla de comandos en esta misma regla).
+
+El protocolo A→C aplica automáticamente:
+- `cambios`: importa con columnas explícitas (C tiene `id` AUTO_INCREMENT col 1)
+- `ligacargos.idpago_vinc`: convierte `''` → `NULL` (C usa `int NULL`)
+- `ligacargos.fcobro/fpago`: trunca datetime → date
+- `egresos.id_categoria`: inserta `NULL` (columna no existe en A)
+- Ejecuta `06_split_ligacargos.sql`: **Particionamiento de Migración** (idempotente vía TRUNCATE) — mueve registros `anio ≤ 2025` a la tabla histórica para aplicar el schema V2 de tablas divididas. Incluye `INSERT INTO cambios` con métricas del split (Paso 5 — agregado 2026-04-18).
+- Ejecuta `10c_saneamiento_duplicados.sql`: consolida usuarios duplicados reales Martín (751→750) y Zenón (1590→1057). Incluye `INSERT INTO cambios` de trazabilidad (agregado 2026-04-18).
+
+---
+
+## 🛉 Filosofía de Uso: Herramientas de Migración vs Operación
+
+Estos scripts son **Herramientas de Migración y Transición** diseñadas para el ciclo de desarrollo del proyecto. NO son procesos operativos de la aplicación.
+
+| Fase | Actividad | Estado de Scripts |
+|------|-----------|------------------|
+| **Desarrollo** (actual) | Ejecutar iterativamente para estabilizar Host C. | ✅ Activos |
+| **Go-Live** | Ejecución **única** con datos reales de producción. | ✅ Ejecución final |
+| **Post Go-Live** | Host C es fuente de verdad autónoma. | ⛔ Retirados |
+
+> Una vez en producción real, Host C **no recibe más sincronizaciones externas**. No existe un proceso "nocturno" ni programado. El particionamiento de tablas se hizo **una sola vez** durante la migración.
+
+---
+
+## Configuración Portable (XAMPP 7.4.33)
+
+- **Modo**: XAMPP portable en `F:\xampp` — sin servicios Windows.
+- **Directorio webapp**: `F:\xampp\htdocs\agua`
+- **Rama git**: `main`
+
+---
+
+## DML del Pipeline — Inventario (2026-04-18)
+
+| Script | DML | Tabla(s) afectada(s) | Registra en `cambios` |
+|---|---|---|:---:|
+| `10_pipeline_saneamiento.sql` | UPDATE×6, REPLACE×2 | ligacargos, ligacargos_historico, egresos, categorias, categorias_egresos | ✅ 1 cabecera global |
+| `10b_saneamiento_exencion_recargos.sql` | UPDATE | ligacargos (estado→-1) | ✅ 1 por contrato afectado |
+| `10c_saneamiento_duplicados.sql` | UPDATE×3 | contrato, usuario | ✅ 1 cabecera global |
+| `06_split_ligacargos.sql` | INSERT + **DELETE** | ligacargos_historico, ligacargos | ✅ 1 cabecera global |
+| `run_sync.sh` Paso 6 (SDF) | UPDATE | ligacargos (contratos estado=4) | ✅ 1 cabecera global |
+
+> ⚠️ **Único DELETE del pipeline**: `06_split_ligacargos.sql` Paso 3 — `DELETE FROM ligacargos WHERE anio < YEAR(NOW())`. Es seguro: los registros ya fueron copiados a `ligacargos_historico` en el Paso 1 del mismo script.
+
+---
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Interpreting FTP Directory**
+
+I've made a crucial observation. The FTP directory structure, containing "agua," "agua.zip," and "htdocs," strongly suggests a mapping to a root directory like `/home/usr01` or something linked to XAMPP's htdocs. The permissions on "agua" confirm this, as a directory with relevant permissions.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.027847424s
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 7:03 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `command_status`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Process Monitor
+
+**Status:** Completed
+**Created:** 25 May 2026, 7:03 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Open Ports**
+
+I've confirmed that ports 7001 (Apache), 7002 (MariaDB), and 21 (FTP) are open on the target. I've also checked and found that RDP (3389), WinRM (5985/5986), and SSH (22) are closed. This raises questions about how to execute commands or unzip files on the target host without SSH access.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.029507510s
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 7:03 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 7:03 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Discovering a Connection**
+
+I've just confirmed a significant overlap! The output of the `curl` command reveals the FTP root `/` and the web root (`DocumentRoot`) for `http://192.168.0.100:7001/` are one and the same. This has really changed everything.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.208120839s
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 7:04 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Considering Directory Structure**
+
+Okay, so I've confirmed the zip creates an `agua/` directory upon extraction. Now, I'm checking for an existing folder with that name to ensure there's no conflict during the extraction process. I'm focusing on the implications of the extraction path `F:\xampp\htdocs\` and the resulting file structure.
+
+
+
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.052770441s
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 May 2026, 7:04 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 7:04 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 7:04 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 7:04 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+crea un  un script bash, que haga esto:
+1 ejecutar: /opt/lampp/htdocs/agua/docs-dev/pase-a-prod/prepare_deploy_win10.sh
+2 Enviar por ftp el Archivo de origen: /opt/lampp/htdocs/agua/docs-dev/pase-a-prod/aguav2-2026/instalador/agua.zip
+3) Que em host c. se descomprima el archivo pero con el nombre del directorio raiz sea: ayd-os
+. ALoja el script aqui /opt/lampp/htdocs/agua/docs-dev/pase-a-prod/
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `config.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Defining the Script's Purpose**
+
+I'm currently focused on defining the initial requirements. I've determined I need a bash script located at `/opt/lampp/htdocs/agua/docs-dev/pase-a-prod/` and will name it `deploy_to_host_c_ay`. The goal is to produce a script to deploy something to a destination, named `host_c_ay`.
+
+
+**Refining the Naming Strategy**
+
+I've decided to name the script `deploy_to_host_c_aydos.sh`, or potentially `deploy_host_c.sh`. I need to verify that this aligns with any existing naming conventions or scripts within the target directory. Now, I'm analyzing the script's intended actions to confirm details, like how to name the destination directory in Host C. The goal is to rename the extracted directory from `agua/` to `ayd-os/`. This leads me to consider how to rename a directory on Host C using the scripting language!
+
+
+**Addressing Directory Conflicts**
+
+I'm now focusing on handling potential directory conflicts. I'm thinking through different strategies, especially considering the `ayd-os` directory might already exist. My current approach involves a PHP helper script, which allows me to check for the existing directory. I'm considering options like deleting, renaming, or merging the existing directory before extracting and renaming the new content. A robust helper script that cleanly handles potential conflicts is the objective here. I'm leaning toward a recursive deletion for fresh deploys to avoid unnecessary complexity.
+
+
+
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/opt/lampp/htdocs/agua/docs-dev/pase-a-prod`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.899512121s
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>Directory: `pase-a-prod` (6 items)</summary>
+
+**Path:** `opt/lampp/htdocs/agua/docs-dev/pase-a-prod`
+
+| Name | Type | Size |
+|------|------|------|
+| `GOLIVE_CHECKLIST.md` | File | 5580 bytes |
+| `MIGRATION_PROTOCOL.md` | File | 19040 bytes |
+| `aguav2-2026` | Directory | - |
+| `check_connectivity.sh` | File | 2579 bytes |
+| `pmt-grok-setup01-hostc.txt` | File | 8588 bytes |
+| `prepare_deploy_win10.sh` | File | 3080 bytes |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `prepare_deploy_win10.sh`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+#!/bin/bash
+
+# ==============================================================================
+# Script: prepare_deploy_win10.sh
+# Objetivo: Preparar una distribución limpia de Agua para Host C (Windows 10)
+# ==============================================================================
+
+# Colores para la salida
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+YELLOW='\033[1;33m'
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+
+SOURCE_DIR="/opt/lampp/htdocs/agua"
+OUTPUT_BASE="/tmp/hostc"
+DIST_DIR="$OUTPUT_BASE/agua"
+ZIP_NAME="agua.zip"
+FINAL_DIR="/opt/lampp/htdocs/agua/docs-dev/pase-a-prod/aguav2-2026/instalador"
+
+echo -e "${BLUE}🚀 Iniciando preparación de despliegue para Host C (Windows 10)...${NC}"
+
+# 1. Crear estructura de salida
+if [ ! -d "$OUTPUT_BASE" ]; then
+    echo -e "${YELLOW}📂 Creando directorio de salida: $OUTPUT_BASE...${NC}"
+    mkdir -p "$OUTPUT_BASE"
+fi
+
+if [ -d "$DIST_DIR" ]; then
+    echo -e "${YELLOW}⚠️  Limpiando distribución previa...${NC}"
+    rm -rf "$DIST_DIR"
+fi
+
+mkdir -p "$DIST_DIR"
+
+# 2. Definir exclusiones
+# Nota: Usamos patrones más amplios para cubrir archivos y directorios
+EXCLUDES=(
+    --exclude='.git*'
+    --exclude='.agents*'
+    --exclude='.chatledger*'
+    --exclude='.claude*'
+    --exclude='.clauderules'
+    --exclude='.vscode/'
+    --exclude='.mcp.json'
+    --exclude='GEMINI.md'
+    --exclude='CLAUDE.md'
+    --exclude='docs-dev/'
+    --exclude='scripts/'
+    --exclude='*.log'
+    --exclude='*.gz'
+    --exclude='*.zip'
+    --exclude='*.tar'
+    --exclude='*.tgz'
+    --exclude='*.bak'
+    --exclude='*~'
+    --exclude='.DS_Store'
+    --exclude='node_modules/'
+    --exclude='composer.json'
+    --exclude='composer.lock'
+    --exclude='scratch/'
+    --exclude='tmp/*'
+    --exclude='backups/*'
+)
+
+echo -e "${BLUE}📦 Copiando archivos a $DIST_DIR (excluyendo basura)...${NC}"
+
+# Ejecutar rsync
+rsync -av "${EXCLUDES[@]}" "$SOURCE_DIR/" "$DIST_DIR/" > /dev/null
+
+# 3. Validaciones post-copia
+echo -e "${BLUE}🔍 Verificando integridad del paquete...${NC}"
+
+# Crear carpetas vacías necesarias si no existen (ej. para logs o uploads en Windows)
+mkdir -p "$DIST_DIR/tmp"
+mkdir -p "$DIST_DIR/backups"
+
+# 4. Crear el archivo ZIP y moverlo al destino final
+echo -e "${BLUE}🗜️  Creando paquete comprimido: $ZIP_NAME...${NC}"
+cd "$OUTPUT_BASE"
+# Eliminamos zip previo si existe
+[ -f "$FINAL_DIR/$ZIP_NAME" ] && rm "$FINAL_DIR/$ZIP_NAME"
+mkdir -p "$FINAL_DIR"
+
+# Comprimir la carpeta 'agua' para que sirva de directorio padre en el ZIP
+zip -r "$FINAL_DIR/$ZIP_NAME" agua > /dev/null
+
+echo -e "${GREEN}✅ ¡Proceso completado con éxito!${NC}"
+echo -e "${YELLOW}--------------------------------------------------${NC}"
+echo -e "📂 Directorio temporal limpio: ${BLUE}$DIST_DIR${NC}"
+echo -e "📦 Archivo listo para el setup: ${BLUE}$FINAL_DIR/$ZIP_NAME${NC}"
+echo -e "${YELLOW}--------------------------------------------------${NC}"
+echo -e "${WHITE}Pasos siguientes para el instalador:${NC}"
+echo -e "1. Copia toda la carpeta aguav2-2026 al servidor Windows."
+echo -e "2. Ejecuta C:\\aguav2-2026\\scripts\\setup-full.ps1"
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Confirming Directory Structure**
+
+I have verified the bash script successfully creates the expected zip file, `/opt/lampp/htdocs/agua/docs-dev/pase-a-prod/aguav2-2026/instalador/agua.zip`. The top-level directory within the archive is confirmed to be named "agua", as intended. The next step will focus on integration and the automation of multiple bash scripts.
+
+
+**Automating File Transfer**
+
+I'm now focusing on automating the file transfer and extraction. I've decided to use a custom PHP script (`unzip_aydos.php`) uploaded via FTP to Host C. The bash script will then call this PHP script using `curl`. After execution, the bash script will delete the PHP script via FTP. I am actively designing `unzip_aydos.php` now and will post it for your review.
+
+
+**Refining Script Functionality**
+
+I've refined the PHP script to handle the core extraction and directory manipulation on Host C.  The script now extracts the zip, cleans up an existing target directory, and renames the temporary folder to the desired target directory. I am adding error handling for zip file opening and extraction failures. The script uses a recursive function to cleanup the existing directory. I'm also considering deleting the zip after a successful extraction.
+
+
+**Finalizing Cleanup Procedure**
+
+I am now confident in including the deletion of the uploaded zip archive. The PHP script, after successful decompression, will now include `unlink($zipFile);` to remove `agua.zip` on Host C, which is a key component to improve host C space. I'm also writing the bash script `deploy_ayd_os.sh`, which will handle preparation, upload, and deployment on Host C.
+
+
+**Defining Helper Script Logic**
+
+I have created the helper PHP script locally (`/tmp/unzip_aydos.php`) which includes error handling. The script first checks for the zip file. It also cleans a pre-existing temporary directory, then extracts the zip, and renames the resulting temporary directory. Finally, it removes the original zip after a successful deployment. I am now looking at the FTP upload of this script and the agua.zip.
+
+
+
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 3.560136377s
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 May 2026, 7:10 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 7:10 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 7:10 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 7:11 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Execution Error
+
+**Status:** Completed
+**Created:** 25 May 2026, 7:11 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+pasa algo, en host tiene que  existir a priori un dir llamada agua, y ese no se debe alterar al descomprimir el zip  enviado, revisa que se puede hacer.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `config.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Deciphering the Puzzle**
+
+I'm currently dissecting the user's request. It seems there's a specific directory, "agua," that needs to pre-exist on the host, and it shouldn't be altered when a zipped file is decompressed. I'm focusing on the constraints imposed and will be assessing possible solutions.
+
+
+**Analyzing the Strategy**
+
+I've been analyzing the constraints of the existing "agua" directory and the desired extraction location, "ayd-os." My focus has shifted toward preventing overwrites during the unzip operation. The key seems to be employing a temporary, unique subdirectory for extraction. I'm exploring how to move or rename the content of that temporary directory to avoid any unwanted interactions with the existing directory. I'm refining my plan to account for this directory structure.
+
+
+**Refining the Extraction**
+
+I've crafted PHP extraction logic to handle the zipped file. It ensures the existing "agua" directory remains untouched by extracting the zip to a temporary directory, "temp_deploy/agua", and then renaming it to "ayd-os". I've included cleanup steps, like deleting the temporary directory, and error handling for file absence. This process appears incredibly safe and ensures the existing directory "agua" is not affected.
+
+
+**Confirming the Process**
+
+I've meticulously traced the logic's execution, step by step, to guarantee its safety. The analysis confirms that the existing "agua" directory is untouched, even when dealing with the root "agua" directory. The "ayd-os" directory is cleared if it exists. A temporary directory is used for the extraction, followed by a renaming operation to achieve the desired outcome. This sequence guarantees the correct content is deployed while ensuring no unintentional interference with existing files. The plan is robust.
+
+
+
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.050784060s
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 May 2026, 7:14 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 7:14 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 7:14 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 7:14 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Investigating Disappearance**
+
+I've got a problem. The `agua` folder has vanished from the FTP root, and I'm trying to figure out how. Looking back, I suspect the previous run of `deploy_ayd_os.sh` is the culprit, especially with that troublesome `rename()` function where the source directory was set to the missing folder.
+
+
+
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.024833704s
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 May 2026, 7:14 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 7:14 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 7:15 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 7:15 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 7:15 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 7:15 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+okk, te comento que ya corregi yo a mano F:\aguav2\webapp\agua\config\config.php
+para
+define('DB_NAME', getenv('DB_NAME') ?: 'awa');
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `config.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Reviewing Config Changes**
+
+I've just focused on the user's manual correction of the `config.php` file on Host C, specifically reverting the `DB_NAME` definition back to its original state, using the environment variable approach. This is an important detail!
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.000052774s
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+Vamos a realizar cambios en algunas paginas php y sobre todo en la bd: aguayd_os
+Se va a orientar a la ciudadania de: Tlapa de Comonfort 
+La dependencia objetivo es:  
+Dependencia: Dirección de Agua Potable y Alcantarillado. Teléfono de Emergencia/Reportes: 757 146 5083.
+
+El proposito es  cambiar/sustituir para los registros de Usuario (columnas nombre y domicilio) y los domicilios  de los contratos, lo siguiente:
+
+Que los nombres (nombre y apellidos) se sustituyan y usen los que tiene este documento /home/carlos/GitHub/caelitandem_home/aguad_ac_oferta/nombres2.pdf (NOMBRE, PATERNO,  MATERNO).
+Y para las direcciones , tu busca , analiza y extra alguna fuente fiable que contenga los nombre de las calles de las colonias centro y cercanas de Tlapa de Comonfort para sustituir lo existente en la tabla de contrato y Usuario.
+
+Indique las dos tables principales, pero tu debes analizar para impactar a otras tablas que contengan los datos proposito de la sustitucion indicada.
+
+
+. Pra la parte para impactar el cambio a la bd en host c aguayd_os quede en scrips bash/sql para que posteriormente lo pueda reproducir.
+
+. Crea plan y presentalo si hay issues, gaps, antes de ejecutar.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `config.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+Continua.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `config.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Defining the Scope**
+
+I'm currently focused on defining the precise scope of this modernization project. My goal is to determine the optimal anonymization and localization strategies specifically tailored for Tlapa de Comonfort's citizen registry and contract addresses. It's a key first step!
+
+
+**Analyzing Data Sources**
+
+I've moved on to analyzing the data sources and specific requirements. I need to focus on updating the `aguayd_os` database on Host C. This includes substituting names from a provided PDF file into the `usuario` table and addresses using real streets in Tlapa de Comonfort. My next step is to research and locate reliable sources for Tlapa street names and identify all tables requiring updates to maintain data integrity.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.357352089s
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 9:01 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 9:01 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 9:02 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 9:02 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 9:02 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 9:02 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 9:02 pm
+
+---
+
+<details>
+<summary>Conversation History</summary>
+
+# Conversation History
+Here are the conversation IDs, titles, and summaries of your most recent 10 conversations, in reverse chronological order:
+
+<conversation_summaries>
+## Conversation f88316ca-5949-4d5c-a159-0ebdf4b1f3cf: Updating CaeliTandem Home Page
+- Created: 2026-05-26T01:33:52Z
+- Last modified: 2026-05-26T02:23:47Z
+
+## Conversation 06286601-35ed-4cc8-b964-fff0355244db: Initializing New Development Repository
+- Created: 2026-05-25T19:48:45Z
+- Last modified: 2026-05-25T21:35:21Z
+
+### USER Objective:
+Initializing New Development Repository
+
+Main Objective:
+Provision a new Git repository and organize project files for the emp_devhj_sw project.
+
+Goals:
+1. Create the local directory structure `/home/carlos/GitHub/emp_devhj_sw/caelitandem_home`.
+2. Initialize a new Git repository within the project root.
+3. Migrate the entire contents of `/home/carlos/Documents/tmp01/empsw/` into the newly created `caelitandem_home` directory.
+
+## Conversation 391ab92d-8c62-4053-97a8-3a6d6c7b506c: CaeliTandem SEO Strategy Implementation
+- Created: 2026-05-24T05:38:16Z
+- Last modified: 2026-05-25T19:36:52Z
+
+## Conversation ea5f8c74-55db-4706-b2c7-e3abd8e5448e: Modernizing CaeliTandem Web Assets
+- Created: 2026-05-21T21:19:44Z
+- Last modified: 2026-05-25T19:03:32Z
+
+## Conversation 9df8240f-6a37-4147-b8a3-c44b0ab61092: Restoring Nginx HTTPS Configuration
+- Created: 2026-05-24T04:52:15Z
+- Last modified: 2026-05-24T05:24:54Z
+
+### USER Objective:
+Restoring HTTPS For Nginx Sites
+
+USER Objective:
+Restore secure HTTPS access for the web applications hosted on the `oci-vm` instance by reconfiguring Nginx and renewing Let's Encrypt certificates.
+
+Goals:
+1. Analyze and correct the Nginx configuration on `oci-vm` to ensure all sites are reachable via HTTPS.
+2. Troubleshoot and re-establish valid Let's Encrypt SSL certificates for the affected domains.
+3. Implement a permanent HTTP-to-HTTPS redirect for all websites served by Nginx to ensure secure connectivity.
+4. Validate automatic certificate renewal settings to prevent future service interruptions.
+5. Document the resolved configuration and operational status to maintain infrastructure parity.
+
+## Conversation af7746f8-b81d-460c-bf0e-b544940d5bde: Appending System Documentation Appendices
+- Created: 2026-05-22T19:50:44Z
+- Last modified: 2026-05-22T21:17:50Z
+
+### USER Objective:
+Appending System Documentation Appendices
+
+Main Objective:
+Update the "Entrega_Sistema_AyDV2_CM" documentation by appending the requested configuration and UI design specifications.
+
+Goals:
+1. Append the source code contents of `admin/operaciones/configuracion.php` to the project documentation to ensure transparency in system parameters.
+2. Integrate the "Paleta de Colores del Buscador de Usuarios" specifications from the `analisis_paridad_3hosts.md` file into the documentation as a formal technical appendix.
+3. Ensure the documentation reflects the current state of system operational controls and the visual feedback mechanisms implemented for contract management.
+
+## Conversation 71ba31b2-ab24-42c2-805e-0b5581ef1d7b: Configuring Nginx Web Root Access
+- Created: 2026-05-22T17:21:23Z
+- Last modified: 2026-05-22T17:38:39Z
+
+### USER Objective:
+Configuring Nginx Web Root Access
+
+Main Objective:
+Validate and establish remote access to the Nginx configuration directory on the oci-vm instance to manage the web application root.
+
+Goals:
+1. Verify connectivity and permissions for the specified VSFTP path: `vsftp://ubuntu@oci-vm/etc/nginx/`.
+2. Configure or confirm the Nginx web root settings to ensure the web application is served correctly from the intended directory.
+3. Establish a secure and efficient workflow for future Nginx configuration updates on the OCI VM.
+
+## Conversation 13a74b1c-4f0e-47a5-a1e1-389ca3638e08: Debugging Address Normalization Logic
+- Created: 2026-05-20T18:12:05Z
+- Last modified: 2026-05-22T17:11:45Z
+
+## Conversation d0c3def9-505b-40eb-89b8-44c404849d37: Installing Local AI Development Stack
+- Created: 2026-05-19T19:24:09Z
+- Last modified: 2026-05-20T04:35:13Z
+
+### USER Objective:
+Local AI Coding Environment Deployment
+
+Objective: Deploy a high-performance local AI agent environment on Ubuntu 22 for software development.
+Goals:
+1. Configure and optimize the local stack, integrating Ollama, OpenCode, and OpenChamber.
+2. Remediate dependency conflicts (Node.js versions) and resource constraints (VRAM limitations) to enable reliable agentic tool execution.
+3. Establish a library of specialized local LLMs (Qwen 2.5-Coder, DeepSeek, Codestral) and validate their code-generation and file-editing capabilities.
+4. Troubleshoot and bridge the integration gaps between model tool-calling schemas and the OpenCode/VS Code agentic interface.
+
+## Conversation 1846bc62-6c4c-4ba0-960b-214ce8b4778c: Upgrading Antigravity to 2.0.0
+- Created: 2026-05-20T03:10:58Z
+- Last modified: 2026-05-20T03:16:22Z
+
+### USER Objective:
+Upgrading Antigravity to 2.0.0
+Investigate the upgrade path and procedure for Google Antigravity from version 1.23.2 to the latest version 2.0.0, including identifying its installation details and compiling an actionable migration guide.
+
+</conversation_summaries>
+
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 25 May 2026, 9:02 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Mapping User Names**
+
+I'm now focusing on the user's instructions regarding name substitution. It seems I need to map the names from the `nombres2.pdf` document to the `usuario` table and other relevant tables in the database. Initially, I identified 2350 names, but the instructions require me to change the names. I'm investigating how comprehensive the mapping needs to be.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.056538097s
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 9:02 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 9:03 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Name Structure**
+
+Okay, I'm now noting the name format is "nombre paterno materno," either all lowercase or mixed case. I am switching focus to data from `nombres2.pdf`. It is currently apparent that the structure is PATERNO, MATERNO, NOMBRE (all uppercase). An example shows a format like PATERNO: `ABRAHAM`, MAT.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.001745525s
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 9:03 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 9:03 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 9:03 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 9:03 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 9:03 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 9:03 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 9:03 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 9:03 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 9:03 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 9:03 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 9:03 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 9:03 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `firmantes`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 May 2026, 9:03 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 9:03 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 9:03 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 9:03 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `comité`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 May 2026, 9:03 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `recibo.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+require_once('../login/usuario.php');
+session_start();
+if (!isset($_SESSION['usuario'])) {
+	print "<script>window.location='../login/index.php'</script>";
+}
+header('Content-Type: text/html; charset=UTF-8');
+?>
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<title>Recibo</title>
+	<script type="text/javascript">
+		function carga() {
+			window.print();
+		}
+	</script>
+
+	<style type="text/css">
+		th {
+			font-family: "sans serif";
+			font-size: 15px;
+			text-align: center;
+			border-bottom: solid 1px black;
+		}
+
+		.leyenda {
+			width: 380px;
+			font-family: "sans serif";
+			font-size: 12px;
+			text-align: left;
+			border-right: dotted 1px black;
+			border-bottom: dotted 1px gray;
+		}
+
+		.fecha,
+		td {
+			font-family: "sans serif";
+			font-size: 14px;
+			text-align: Left;
+		}
+
+		.monto {
+			width: 180px;
+			font-family: "sans serif";
+			font-size: 14px;
+			border-bottom: dotted 1px gray;
+			text-align: right;
+		}
+
+		.totalL {
+			font-family: "sans serif";
+			font-size: 18px;
+			text-align: right;
+			font-weight: bold;
+		}
+
+		.totalR {
+			font-family: "sans serif";
+			font-size: 18px;
+			text-align: right;
+			font-weight: bold;
+			border-top: solid 1px black;
+		}
+
+		.mayusculas {
+			text-transform: uppercase;
+		}
+
+		div {
+			border-radius: 12px 12px 12px 12px;
+			-moz-border-radius: 12px 12px 12px 12px;
+			-webkit-border-radius: 12px 12px 12px 12px;
+		}
+
+		.contenedor {
+			font-family: "sans serif";
+			border: solid 1px black;
+			width: 750px;
+			height: 470px;
+			margin: 20px 10px 10px 10px;
+			padding: 10px 10px 0px 10px;
+			background: url('../web-assets/img/sellote.png') 180px 50px no-repeat;
+			-webkit-print-color-adjust: exact !important;
+			color-adjust: exact !important;
+		}
+
+		.recibo_left {
+			width: 605px;
+			float: left;
+			height: 90%;
+		}
+
+		.recibo_right {
+			width: 135px;
+			float: right;
+			height: 90%;
+		}
+
+		.recibo_footer {
+			width: 740px;
+			height: 30px;
+			float: right;
+			margin-top: 22px;
+		}
+
+		.recibo_header {
+			width: 605px;
+			height: 80px;
+		}
+
+		.recibo_header_left {
+			width: 460px;
+			height: 90%;
+			float: left;
+			text-align: left;
+		}
+
+		.recibo_header_left .nombre1 {
+			font-size: 13pt;
+		}
+
+		.recibo_header_left .nombre2 {
+			font-size: 28pt;
+			font-weight: bold;
+		}
+
+		.recibo_header_right {
+			width: 145px;
+			height: 90%;
+			float: right;
+			text-align: center;
+		}
+
+		.recibo_header_right_recibo {
+			background-color: black;
+			width: 100%;
+			height: 25%;
+			font-weight: bold;
+			color: white;
+			border: 1px solid black;
+			border-radius: 12px 12px 0px 0px;
+			-moz-border-radius: 12px 12px 0px 0px;
+			-webkit-border-radius: 12px 12px 0px 0px;
+		}
+
+		.recibo_header_right_folio {
+			background-color: white;
+			width: 100%;
+			height: 50%;
+			font-weight: bold;
+			font-size: 22pt;
+			border: 1px solid black;
+			border-radius: 0px 0px 12px 12px;
+			-moz-border-radius: 0px 0px 12px 12px;
+			-webkit-border-radius: 0px 0px 12px 12px;
+			color: black;
+		}
+
+		.recibo_left_contenido {
+			height: 85%;
+			border: 1px solid black;
+			margin-bottom: 2px;
+		}
+
+		.recibo_right_rfc {
+			width: 100%;
+			height: 40%;
+		}
+	</style>
+</head>
+
+<body onload="carga();">
+	<center>
+		<div class="contenedor">
+			<div class="recibo_left">
+				<div class="recibo_header">
+					<div class="recibo_header_left">
+						<span class="nombre1">Comité Administrador de Agua Potable y Alcantarillado de la</span><br />
+						<span class="nombre2">Col. del Maestro A.C.</span>
+					</div>
+					<div class="recibo_header_right">
+						<center>
+							<div class="recibo_header_right_recibo">
+								R&nbsp;&nbsp;E&nbsp;&nbsp;C&nbsp;&nbsp;I&nbsp;&nbsp;B&nbsp;&nbsp;O</div>
+							<div class="recibo_header_right_folio">No.&nbsp;<?php print $_GET['folio'] ?></div>
+							<div style="width: 100%; padding-top: 3px; font-size: 12px;"><i>Huajuapan de León, Oax.</i>
+							</div>
+						</center>
+					</div>
+				</div>
+				<div class="recibo_left_contenido">
+					<?php
+					require_once('../login/usuario.php');
+
+					require_once "../config/Conexion.php";
+					$y = new Conexion();
+					$y->conectarBaseDatos();
+					include "../includes/numeros.php";
+					include "../includes/negocio/pq20cm.php";
+
+					$num = 0;
+
+					$folio = $_GET['folio'];
+
+					// Calculate total: sum all charges (related charges already have monto 0 in DB)
+					$q_total = "select sum(monto) from vw_ligacargos_all where folio=$folio";
+					$res_total = $y->q($q_total);
+					list($total) = $y->fetch_array($res_total);
+					$y->free_result($res_total);
+
+					// Get main contract for header
+					$q_idc = "select numcontrato from vw_ligacargos_all where folio=$folio limit 1";
+					$res_idc = $y->q($q_idc);
+					list($idc) = $y->fetch_array($res_idc);
+					$y->free_result($res_idc);
+
+					$fecha_pago_db = obtenerFechaPagoPorFolio($folio);
+					$fecha_pago_display = formatearFechaEspanol($fecha_pago_db);
+
+					$con = "select nombre, contrato.domicilio from contrato, usuario where contrato.numcontrato='$idc' and contrato.numusuario=usuario.noconsecutivo";
+
+					$res = $y->q($con);
+
+					list($nombre_usuario, $domicilio_usuario) = $y->fetch_array($res);
+					$y->free_result($res);
+
+					// Query to fetch all charges for the folio
+					$query1 = "select leyenda, fcobro, monto, repetido, categoria, numcontrato from vw_ligacargos_all where folio=$folio order by monto asc";
+					$res = $y->q($query1);
+
+					// Group charges by (leyenda, categoria, repetido)
+					$grouped_charges = [];
+					while ($row = $y->fetch_array($res)) {
+						$key = $row[0] . '|' . $row[3] . '|' . $row[4];
+						if (!isset($grouped_charges[$key])) {
+							$grouped_charges[$key] = [
+								'leyenda' => $row[0],
+								'monto' => $row[2],
+								'repetido' => $row[3],
+								'categoria' => $row[4],
+								'contratos' => [$row[5]]
+							];
+						} else {
+							$grouped_charges[$key]['contratos'][] = $row[5];
+						}
+					}
+
+					$codigobarras = str_pad($idc, 4, "0", STR_PAD_LEFT) . date("dmy") . $folio . ($total + 1000);
+
+					print "<div id='todo'><table border=0 cellspacing=0 cellpadding=2>";
+					print "<tr><td colspan=\"1\"><b>Contrato #</b>$idc<br/><b>A Nombre de</b>: <span class='mayusculas'>" . htmlentities($nombre_usuario) . "</span><br /><b>Domicilio</b>: <span class='mayusculas'>" . str_replace("\n", "", htmlentities($domicilio_usuario)) . "</span></td><td valign='top'></td></tr>";
+					print "<tr><th><br>C O N C E P T O</th><th><br>M O N T O</th></tr>";
+
+					foreach ($grouped_charges as $charge) {
+						$desc = htmlentities($charge['leyenda']);
+						if ($charge['repetido'] != 0) {
+							$desc .= " (r" . $charge['repetido'] . ")";
+						}
+
+						// Concatenate contract numbers for category 6 or if multiple contracts are present
+						if ($charge['categoria'] == 6 || (strpos(strtoupper($charge['leyenda']), 'FALTA ASAMBLEA') !== false)) {
+							if (count($charge['contratos']) > 0) {
+								$desc .= " (" . implode(', ', $charge['contratos']) . ")";
+							}
+						}
+
+						print "<tr>\n";
+						print "<td class=\"leyenda mayusculas\">" . $desc . "</td><td class=\"monto\">$" . number_format($charge['monto'], 2, '.', ',') . "</td>";
+						print "</tr>\n";
+					}
+					print "<tr><td class=\"totalL\" colspan=\"1\">Total</td><td class=\"totalR\">$" . number_format($total, 2, '.', ',') . "</td></tr>";
+
+					$cadenaletra = ($total != 1000) ? convertir_a_letras($total) : "un mil";
+
+					print "<td class=\"leyenda\" style='text-align: right;' colspan='2'><i>" . ucwords($cadenaletra[0]) . substr($cadenaletra, 1) . " pesos 00/100 M.N.</i></td></tr></table></div>";
+					?>
+				</div>
+			</div>
+
+			<div class="recibo_right">
+				<div class="recibo_right_rfc">
+					- ORIGINAL -<br>
+					<img src="../web-assets/img/rfc.png" width="135" height="200">
+				</div>
+				<div class="recibo_header_firma">
+					<br /><br /><br /><br /><br />
+					<hr><b>Firma del Cajero</b>
+					<br /><br /><br />
+					<span style="font-size: 12px;"><b>Fecha de pago: </b><br><?php print $fecha_pago_display ?>
+					</span><br><br>
+					<span style="font-size: 12px;"><b>Usuario:
+						</b><?php print ($_SESSION['usuario']->getNombre()) ?></span><br><br>
+				</div>
+			</div>
+
+			<div class="recibo_footer">
+				<span style="font-size:10px;"><b>*** ESTE RECIBO ES NULO SI PRESENTA TACHADURAS O
+						ENMENDADURAS</b></span>
+				<?php print "<img src='../libs/barcode/barcode.php?text=$codigobarras&size=15&codetype=Code39&print=false' style='float: right; margin-top: 3px;'/>"; ?>
+			</div>
+		</div>
+
+		<br>
+
+		<div class="contenedor">
+			<div class="recibo_left">
+				<div class="recibo_header">
+					<div class="recibo_header_left">
+						<span class="nombre1">Comité Administrador de Agua Potable y Alcantarillado de la</span><br />
+						<span class="nombre2">Col. del Maestro A.C.</span>
+					</div>
+					<div class="recibo_header_right">
+						<center>
+							<div class="recibo_header_right_recibo">
+								R&nbsp;&nbsp;E&nbsp;&nbsp;C&nbsp;&nbsp;I&nbsp;&nbsp;B&nbsp;&nbsp;O</div>
+							<div class="recibo_header_right_folio" style="font-weight: normal;">
+								No.&nbsp;<?php print $_GET['folio'] ?></div>
+							<div style="width: 100%; padding-top: 3px; font-size: 12px;"><i>Huajuapan de León, Oax.</i>
+							</div>
+						</center>
+					</div>
+				</div>
+				<div class="recibo_left_contenido">
+					<?php
+					require_once "../config/Conexion.php";
+					$y = new Conexion();
+					$y->conectarBaseDatos();
+
+					$num = 0;
+
+					$folio = $_GET['folio'];
+
+					// Calculate total: sum all charges (related charges already have monto 0 in DB)
+					$q_total = "select sum(monto) from vw_ligacargos_all where folio=$folio";
+					$res_total = $y->q($q_total);
+					list($total) = $y->fetch_array($res_total);
+					$y->free_result($res_total);
+
+					// Get main contract for header
+					$q_idc = "select numcontrato from vw_ligacargos_all where folio=$folio limit 1";
+					$res_idc = $y->q($q_idc);
+					list($idc) = $y->fetch_array($res_idc);
+					$y->free_result($res_idc);
+
+					$con = "select nombre, contrato.domicilio from contrato, usuario where contrato.numcontrato='$idc' and contrato.numusuario=usuario.noconsecutivo";
+
+					$res = $y->q($con);
+
+					list($nombre_usuario, $domicilio_usuario) = $y->fetch_array($res);
+					$y->free_result($res);
+
+					// Query to fetch all charges for the folio
+					$query1 = "select leyenda, fcobro, monto, repetido, categoria, numcontrato from vw_ligacargos_all where folio=$folio order by monto asc";
+					$res = $y->q($query1);
+
+					// Group charges by (leyenda, categoria, repetido)
+					$grouped_charges = [];
+					while ($row = $y->fetch_array($res)) {
+						$key = $row[0] . '|' . $row[3] . '|' . $row[4];
+						if (!isset($grouped_charges[$key])) {
+							$grouped_charges[$key] = [
+								'leyenda' => $row[0],
+								'monto' => $row[2],
+								'repetido' => $row[3],
+								'categoria' => $row[4],
+								'contratos' => [$row[5]]
+							];
+						} else {
+							$grouped_charges[$key]['contratos'][] = $row[5];
+						}
+					}
+
+					$codigobarras = str_pad($idc, 4, "0", STR_PAD_LEFT) . date("dmy") . $folio . ($total + 1000);
+
+					print "<div id='todo'><table border=0 cellspacing=1 cellpadding=1>";
+					print "<tr><td colspan=\"1\"><b>Contrato #</b>$idc<br/><b>A Nombre de</b>: <span class='mayusculas'>" . htmlentities($nombre_usuario) . "</span><br /><b>Domicilio</b>: <span class='mayusculas'>" . str_replace("\n", "", htmlentities($domicilio_usuario)) . "</span><BR></td><td valign='top'></td></tr>";
+					print "<tr><th><br>C O N C E P T O</th><th><br>M O N T O</th></tr>";
+
+					foreach ($grouped_charges as $charge) {
+						$desc = htmlentities($charge['leyenda']);
+						if ($charge['repetido'] != 0) {
+							$desc .= " (r" . $charge['repetido'] . ")";
+						}
+
+						// Concatenate contract numbers for category 6 or if multiple contracts are present
+						if ($charge['categoria'] == 6 || (strpos(strtoupper($charge['leyenda']), 'FALTA ASAMBLEA') !== false)) {
+							if (count($charge['contratos']) > 0) {
+								$desc .= " (" . implode(', ', $charge['contratos']) . ")";
+							}
+						}
+
+						print "<tr>\n";
+						print "<td class=\"leyenda mayusculas\">" . $desc . "</td><td class=\"monto\">$" . number_format($charge['monto'], 2, '.', ',') . "</td>";
+						print "</tr>\n";
+					}
+					print "<tr><td class=\"totalL\" colspan=\"1\">Total</td><td class=\"totalR\">$" . number_format($total, 2, '.', ',') . "</td></tr>";
+
+					$cadenaletra = ($total != 1000) ? convertir_a_letras($total) : "un mil";
+
+					print "<td class=\"leyenda\" style='text-align: right;' colspan='2'><i>" . ucwords($cadenaletra[0]) . substr($cadenaletra, 1) . " pesos 00/100 M.N.</i></td></tr></table></div>";
+
+					// TODO: query para sacar la fecha del pago, actualmente se muestra la fecha actual del S.O.
+					?>
+				</div>
+			</div>
+
+			<div class="recibo_right">
+				<div class="recibo_right_rfc">
+					- COPIA -<br>
+					<img src="../web-assets/img/rfc.png" width="135" height="200">
+				</div>
+				<div class="recibo_header_firma">
+					<br /><br /><br /><br /><br />
+					<hr><b>Firma del Cajero</b>
+					<br /><br /><br />
+					<span style="font-size: 12px;"><b>Fecha de pago: </b><br><?php print $fecha_pago_display ?>
+					</span><br><br>
+					<span style="font-size: 12px;"><b>Usuario:
+						</b><?php print ($_SESSION['usuario']->getNombre()) ?></span><br><br>
+				</div>
+			</div>
+
+			<div class="recibo_footer">
+				<span style="font-size:10px;"><b>*** ESTE RECIBO ES NULO SI PRESENTA TACHADURAS O
+						ENMENDADURAS</b></span>
+				<?php print "<img src='../libs/barcode/barcode.php?text=$codigobarras&size=15&codetype=Code39&print=false' style='float: right; margin-top: 3px;'/>"; ?>
+			</div>
+		</div>
+	</center>
+</body>
+
+</html>
+<?php
+# Start change by cbm  2026
+// Liberar memoria
+$y->free_result($res);
+$y->cerrarConexion();
+# End change by cbm  2026
+?>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `Huajuapan`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 May 2026, 9:04 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `Maestro`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 May 2026, 9:04 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Identifying Relevant Files**
+
+I've identified `/opt/lampp/htdocs/agua/reportes/recibo.php` as a key file for modification, specifically focusing on lines 181-182. The goal is to address the "Colonia del Maestro" naming issue within the context of the Comité Administrador de Agua Potable y Alcantarillado.
+
+
+**Locating Related Code**
+
+I've expanded the search to include `reciboegreso.php`, `concentradocortecajaresumen.php`, `egresos.php`, `index2.php`, and `principal.php` files, noting several lines referencing the problematic "Colonia del Maestro" naming and associated addresses. Now, I have confirmed that these files will be edited in the branch called `aguad_ac_oferta`. Finally, I'm noting the need to create SQL/Bash scripts for database updates on the production `aguayd_os` host.
+
+
+
+
+### Actions
+
+**Tool:** `search_web`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.537485694s
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Web Research
+
+**Status:** Completed
+**Created:** 25 May 2026, 9:04 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `search_web`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Web Research
+
+**Status:** CORTEX_STEP_STATUS_ERROR
+**Created:** 25 May 2026, 9:04 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `search_web`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Web Research
+
+**Status:** Completed
+**Created:** 25 May 2026, 9:04 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Street Names**
+
+Okay, I'm currently delving into the list of street names provided. I've begun to categorize them based on potential historical significance and likely origins, looking for patterns that might be present. I'm noting specific figures and events referenced. My primary focus is understanding the context.
+
+
+**Expanding Street Name List**
+
+I've decided to augment the existing street name data by compiling a more extensive list, specifically focusing on Tlapa de Comonfort. I'm now gathering a robust set of 30 street names, including the previously noted, alongside others. I will use the extended list to assess for further patterns.
+
+
+**Devising Anonymization Scheme**
+
+I've hit upon a solid method for anonymizing the address data. The plan is to retain the original number and directional details from existing addresses. Then, I'll replace the street name with a randomly selected street from the Tlapa list, thereby preserving the structural integrity and realism of the address. This strategy maintains data complexity while ensuring complete anonymization.
+
+
+**Implementing Data Anonymization**
+
+I've outlined the anonymization procedure now. The focus is to update the 'usuario' and 'contrato' fields, replacing names with concatenated data from 'nombres2.pdf' and street names with random selections from the Tlapa list, preserving numeric and directional elements. However, I've realized historical audits in the 'cambios' table will expose old names and addresses. So, I need to parse the `antes` and `despues` fields, and employ search-and-replace to map old names and addresses to new ones to thoroughly anonymize the records.
+
+
+**Updating Anonymization Process**
+
+I'm now focusing on anonymizing the `firmantes` field, representing committee member names. My plan is to replace these with names extracted from the PDF or standard anonymized names, and adapt titles to reflect positions within the "Dirección de Agua Potable y Alcantarillado". I'm also cross-referencing this approach with the dependency's context from the prompt. Further investigation into tables like `ligacargos`, `notas`, `asistentes`, and `asamblea` has concluded they don't contain names or addresses, except for free text notes that may be hard to parse, so I'll prioritize data structure names. I've begun planning the Python script's structure.
+
+
+**Refining Anonymization Script**
+
+I'm now integrating the database interactions and PDF parsing into a cohesive Python script. The script, `/opt/lampp/htdocs/agua/docs-dev/pase-a-prod/generate_anonymization.py`, will connect to the `aguayd_os` database on Host C, extract user data, read `nombres2.pdf`, and generate the SQL update script. I'm verifying the plan includes the robust handling of the requested SQL script output for reproducibility and the utilization of `pdftotext` to process the PDF. I'm also ensuring the implementation meets the bash/SQL script specifications.
+
+
+
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 4.067497018s
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 May 2026, 9:04 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 May 2026, 9:04 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Considering Name Mapping**
+
+I've successfully parsed 2,349 names, which is great! Now, my focus is on mapping these names to the 1,409 users. I'm exploring an ordered assignment strategy, but I'm questioning if this is the correct approach. The PDF name order is the main point of interest.
+
+
+**Exploring Database Interaction**
+
+I'm now focused on the practical implementation. My current thought is to connect to the database and generate SQL inserts for new names and addresses. I've confirmed that the `mysql` CLI is available and think I can use it directly from Python via `subprocess` for a robust solution without relying on a Python library. I'm aiming for a deterministic, reproducible mapping approach.
+
+
+**Developing SQL Generation**
+
+I've shifted focus to creating the SQL script. My immediate goal is a script that updates user names and addresses in the `usuario`, `contrato`, `firmantes`, and `cambios` tables. I'm exploring direct database querying for user and address data, and I've listed street names relevant to Tlapa de Comonfort. My script will use these street names as part of the address matching process.
+
+
+**Refining Address Parsing**
+
+I'm now focused on parsing street names from existing addresses. I've realized addresses follow the pattern `[street name] [number/details]` and all street names are lowercase. My current approach involves splitting addresses using delimiters like `n°`, `no`, `num`, `n.o`, or `s/n` to extract the street name, simplifying the matching process.
+
+
+**Defining Address Delimiters**
+
+I've made significant progress in address parsing! The plan is now clear: I'm splitting addresses based on standard number markers like " n° ", " n.o ", " s/n ", " # ", etc. Everything before the marker becomes the street name, and everything after is the number/details. This is proving to be a highly reliable approach, which has made me confident in the approach.
+
+
+**Implementing Street Mapping**
+
+I've been working on assigning new street names from Tlapa. The plan is to map each unique street in the database to a unique Tlapa street. My thought is now to use a hash function to map a street to a Tlapa street. This ensures the mapping is stable, reproducible, and preserves the relationship between users on the same street.
+
+
+**Validating User Name Mapping**
+
+I've just had a major breakthrough! If we ensure users on the same street are also assigned unique names, that improves the integrity of the data. My mapping uses the user ID modulo the number of PDF names, ensuring each user gets a unique name from the PDF and preserves spatial groupings. The modulo operation guarantees unique name assignment because the length of the name list is larger than the number of users!
+
+
+**Addressing Homonym Resolution**
+
+I'm now integrating homonym handling into the name mapping. My current understanding is that `id_homonimo_padre` in the `usuario` table dictates the parent-child relationship. If a user has a parent (`id_homonimo_padre > 0`), I must assign them the *same* new name as their parent. This ensures the homonym relationship is maintained during the mapping process and maintains data consistency. I've verified the schema and confirmed this field's role.
+
+
+**Constructing Script Structure**
+
+I'm now putting together the Python script, `/opt/lampp/htdocs/agua/docs-dev/pase-a-prod/generate_anonymization.py`, which is going to be amazing. I'm focusing on user data retrieval from `usuario` and `contrato`. Parsing of the PDF and name mapping is also in progress. I'm carefully organizing the script to create the necessary maps, ensuring homonym handling with `id_homonimo_padre` is integrated. The plan is to output formatted SQL queries.
+
+
+**Refining Prefix Replacement**
+
+I'm now focused on handling prefixed names like "PROFR." or "L.C.P.". My current approach involves identifying and preserving these prefixes while replacing the actual name with a new uppercase name. This is applicable to fields like `orero`, `vocal1`, etc. I'm leveraging `REPLACE` in SQL queries to update the `cambios` table, ensuring proper anonymization of old and new data, and I'm very happy with how that part is coming along.
+
+
+
+**Formulating Implementation Plan**
+
+I'm now drafting an implementation plan, detailed in `/home/carlos/.gemini/antigravity/brain/fe1bd6aa-acbd-4e2b-a05e-a96d6f77b6de/implementation_plan.md`. This plan covers SQL script generation, bash script creation, and PHP page modifications, including finding and addressing the relevant PHP files and their specific text replacements. I'll need feedback before I can proceed with execution.
+
+
+
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 9.704675839s
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 May 2026, 9:05 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+## User Request
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `config.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Executing the Plan**
+
+I'm now fully focused on executing the plan, with the user's approval. First I'll modify the PHP pages. Secondly, I need to build the `generate_anonymization.py` Python generator, and I'll place it in `/opt/lampp/htdocs/agua/docs-dev/pase-a-prod/`.
+
+
+**Analyzing PHP Pages**
+
+I'm now analyzing the PHP files to identify and prepare the precise modifications needed for anonymization. I've started with `/opt/lampp/htdocs/agua/reportes/recibo.php`, carefully reviewing the specific lines to be altered. This will ensure accuracy in replacing sensitive information. I've noted the lines containing the text to be replaced for anonymization.
+
+
+
+
+### Actions
+
+**Tool:** `multi_replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.565600444s
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 May 2026, 9:35 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `reciboegreso.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+require_once('../login/usuario.php');
+session_start();
+if (!isset($_SESSION['usuario'])) {
+	print "<script>window.location='../login/index.php'</script>";
+}
+header('Content-Type: text/html; charset=UTF-8');
+?>
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<title>ReciboEgreso</title>
+	<script type="text/javascript">
+		function carga() {
+			window.print();
+		}
+	</script>
+
+	<style type="text/css">
+		body {
+			font-family: "Calibri";
+			margin-left: 30px;
+			margin-right: 30px;
+		}
+
+		th {
+
+			font-size: 15px;
+			text-align: center;
+			border-bottom: solid 1px black;
+		}
+
+		.leyenda {
+			width: 380px;
+			font-size: 12px;
+			text-align: left;
+			border-right: dotted 1px black;
+			border-bottom: dotted 1px gray;
+		}
+
+		.fecha,
+		td {
+			font-size: 14px;
+			text-align: Left;
+		}
+
+		.monto {
+			width: 180px;
+			font-size: 14px;
+			border-bottom: dotted 1px gray;
+			text-align: right;
+		}
+
+		.totalL {
+			font-size: 18px;
+			text-align: right;
+			font-weight: bold;
+		}
+
+		.totalR {
+			font-size: 18px;
+			text-align: right;
+			font-weight: bold;
+			border-top: solid 1px black;
+		}
+
+		.mayusculas {
+			text-transform: uppercase;
+		}
+
+		div {
+			border-radius: 12px 12px 12px 12px;
+			-moz-border-radius: 12px 12px 12px 12px;
+			-webkit-border-radius: 12px 12px 12px 12px;
+		}
+
+		.contenedor {
+			border: solid 1px black;
+			width: 750px;
+			height: 470px;
+			margin: 20px 10px 10px 10px;
+			padding: 10px 10px 0px 10px;
+			background: url('../web-assets/img/sellote.png') 180px 50px no-repeat;
+			-webkit-print-color-adjust: exact !important;
+			color-adjust: exact !important;
+		}
+
+		.recibo_left {
+			width: 605px;
+			float: left;
+			height: 90%;
+		}
+
+		.recibo_right {
+			width: 135px;
+			float: right;
+			height: 90%;
+		}
+	</style>
+</head>
+
+<body onload="carga();">
+	<?php
+	require_once('../login/usuario.php');
+
+	require_once "../config/Conexion.php";
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	include "../includes/numeros.php";
+
+	$num = 0;
+
+	$folio = $_GET['folio'];
+
+	$q = "select monto, UPPER(detalle), UPPER(recibe), fecha from egresos where id=$folio";
+	$res1 = $y->q($q);
+	list($monto, $detalle, $recibe, $fecha_exp) = @$y->fetch_array($res1);
+	$y->free_result($res1);
+
+	$q = "select UPPER(presidente), UPPER(tesorero) from firmantes limit 1";
+	$res2 = $y->q($q);
+	list($presidente, $tesorero) = @$y->fetch_array($res2);
+	$y->free_result($res2);
+
+	// Fallback to current date if DB record has no date (Notice: Undefined offset fix)
+	if (empty($fecha_exp)) {
+		$fecha_exp = date("Y-m-d H:i:s");
+	}
+
+	$f = explode(' ', $fecha_exp);
+	$f_parts = explode('-', $f[0]);
+	
+	// Ensure we have all 3 date parts, otherwise fallback to current parts
+	$anio_exp = (isset($f_parts[0]) && !empty($f_parts[0])) ? $f_parts[0] : date("Y");
+	$mes_exp  = (isset($f_parts[1]) && !empty($f_parts[1])) ? $f_parts[1] : date("m");
+	$dia_exp  = (isset($f_parts[2]) && !empty($f_parts[2])) ? $f_parts[2] : date("d");
+
+	print "<table width:'80%'><tr><td><img src='../web-assets/img/selloteAlfa1.png' style='width:90px; height:auto; margin-left:8px;'/></td><td style='text-align:center; padding-left:15px; font-size:20px'>" .
+		"<b>COMIT&Eacute ADMINISTRADOR DEL AGUA POTABLE Y ALCANTARILLADO DE LA COLONIA DEL MAESTRO A.C.</b><br>" .
+		"<span style='font-size: 10px;'>DOMICILIO: 20 DE NOVIEMBRE ESQ. JUSTO SIERRA, COL. DEL MAESTRO, HUAJUAPAN DE LE&Oacute;N, OAXACA, TEL. 953 150 98 83.</span></td></tr></table>" .
+		"<div style='border-bottom: 1px double black;'></div><br>" .
+		"<center>" .
+		"<br><div style='text-align:left; width:100%; font-size:13px;'>HCA. CD. DE HUAJUAPAN DE LE&OacuteN, OAX. A " . cambia_fecha($dia_exp, $mes_exp, $anio_exp) . ".</div><br><br><br>" .
+		"<div style='text-align:right; width:100%;'><b>BUENO POR: " . money_format($monto) . "</b></div><br><br>" .
+		"<div style='text-align:justify; line-height: 1.5em;'>$detalle</div><br><br>" .
+		"<table><tr><td></td><td style='text-align:center;'>RECIB&Iacute;</td><td></td></tr>" .
+		"<tr><td colspan='3'><br></td></tr>" .
+		"<tr><td></td><td style='border-bottom: 1px solid black; width: 300px'>&nbsp;</td><td></td></tr>" .
+		"<tr><td></td><td style='text-align:center;'>$recibe</td><td></td></tr>" .
+		"<tr><td colspan='3'><br></td></tr>" .
+		"<tr><td colspan='3'><br></td></tr>" .
+		"<tr><td></td><td style='text-align:center;'>AUTORIZ&Oacute;</td><td></td></tr>" .
+		"<tr><td colspan='3'></td></tr>" .
+		"<tr><td colspan='3'><br></td></tr></table>" .
+		"<table><tr><td style='text-align:center;'>PRESIDENTE</td><td></td><td style='text-align:center;'>TESORERO</td></tr>" .
+		"<tr><td colspan='3'><br></td></tr>" .
+		"<tr><td colspan='3'><br></td></tr>" .
+		"<tr><td style='text-align:center; border-bottom: 1px solid black; width: 280px'></td><td></td><td style='text-align:center; border-bottom: 1px solid black; width: 280px'></td></tr>" .
+		"<tr><td style='text-align:center;'>$presidente</td><td style='width: 80px;'></td><td style='text-align:center;'>$tesorero</td></tr></table><br><br><br>" .
+		"</center>";
+
+	function mes_nombre($mes)
+	{
+		$idx = intval($mes) - 1;
+		$meses = array("ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE");
+		return isset($meses[$idx]) ? $meses[$idx] : "MES($mes)";
+	}
+
+	function money_format($value)
+	{
+		return '$ ' . number_format($value, 2, ".", ",");
+	}
+
+	function cambia_fecha($dia, $mes, $anio)
+	{
+		return $dia . " DE " . mes_nombre($mes) . " DE " . $anio;
+	}
+	$y->cerrarConexion();
+	?>
+</body>
+
+</html>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Examining Reciboegreso.php**
+
+Okay, I'm currently focused on the `reciboegreso.php` file, specifically lines 141-146. My initial plan was to modify these lines, but now I'm pausing to closely review the existing code. I'm taking a look at the image path and table width settings.
+
+
+**Refining Logo and Address**
+
+I've just finished the edit! I replaced the original logo, address, and city information within the `reciboegreso.php` file. The new content now displays the details for "DIRECCIÓN DE AGUA POTABLE Y ALCANTARILLADO DE TLAPA DE COMONFORT". I'm satisfied with the direct substitution.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.068228465s
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 May 2026, 9:35 pm
+
+---
+
+<details>
+<summary>Conversation History</summary>
+
+# Conversation History
+Here are the conversation IDs, titles, and summaries of your most recent 10 conversations, in reverse chronological order:
+
+<conversation_summaries>
+## Conversation f88316ca-5949-4d5c-a159-0ebdf4b1f3cf: Updating CaeliTandem Home Page
+- Created: 2026-05-26T01:33:52Z
+- Last modified: 2026-05-26T02:23:47Z
+
+## Conversation 06286601-35ed-4cc8-b964-fff0355244db: Initializing New Development Repository
+- Created: 2026-05-25T19:48:45Z
+- Last modified: 2026-05-25T21:35:21Z
+
+### USER Objective:
+Initializing New Development Repository
+
+Main Objective:
+Provision a new Git repository and organize project files for the emp_devhj_sw project.
+
+Goals:
+1. Create the local directory structure `/home/carlos/GitHub/emp_devhj_sw/caelitandem_home`.
+2. Initialize a new Git repository within the project root.
+3. Migrate the entire contents of `/home/carlos/Documents/tmp01/empsw/` into the newly created `caelitandem_home` directory.
+
+## Conversation 391ab92d-8c62-4053-97a8-3a6d6c7b506c: CaeliTandem SEO Strategy Implementation
+- Created: 2026-05-24T05:38:16Z
+- Last modified: 2026-05-25T19:36:52Z
+
+## Conversation ea5f8c74-55db-4706-b2c7-e3abd8e5448e: Modernizing CaeliTandem Web Assets
+- Created: 2026-05-21T21:19:44Z
+- Last modified: 2026-05-25T19:03:32Z
+
+## Conversation 9df8240f-6a37-4147-b8a3-c44b0ab61092: Restoring Nginx HTTPS Configuration
+- Created: 2026-05-24T04:52:15Z
+- Last modified: 2026-05-24T05:24:54Z
+
+### USER Objective:
+Restoring HTTPS For Nginx Sites
+
+USER Objective:
+Restore secure HTTPS access for the web applications hosted on the `oci-vm` instance by reconfiguring Nginx and renewing Let's Encrypt certificates.
+
+Goals:
+1. Analyze and correct the Nginx configuration on `oci-vm` to ensure all sites are reachable via HTTPS.
+2. Troubleshoot and re-establish valid Let's Encrypt SSL certificates for the affected domains.
+3. Implement a permanent HTTP-to-HTTPS redirect for all websites served by Nginx to ensure secure connectivity.
+4. Validate automatic certificate renewal settings to prevent future service interruptions.
+5. Document the resolved configuration and operational status to maintain infrastructure parity.
+
+## Conversation af7746f8-b81d-460c-bf0e-b544940d5bde: Appending System Documentation Appendices
+- Created: 2026-05-22T19:50:44Z
+- Last modified: 2026-05-22T21:17:50Z
+
+### USER Objective:
+Appending System Documentation Appendices
+
+Main Objective:
+Update the "Entrega_Sistema_AyDV2_CM" documentation by appending the requested configuration and UI design specifications.
+
+Goals:
+1. Append the source code contents of `admin/operaciones/configuracion.php` to the project documentation to ensure transparency in system parameters.
+2. Integrate the "Paleta de Colores del Buscador de Usuarios" specifications from the `analisis_paridad_3hosts.md` file into the documentation as a formal technical appendix.
+3. Ensure the documentation reflects the current state of system operational controls and the visual feedback mechanisms implemented for contract management.
+
+## Conversation 71ba31b2-ab24-42c2-805e-0b5581ef1d7b: Configuring Nginx Web Root Access
+- Created: 2026-05-22T17:21:23Z
+- Last modified: 2026-05-22T17:38:39Z
+
+### USER Objective:
+Configuring Nginx Web Root Access
+
+Main Objective:
+Validate and establish remote access to the Nginx configuration directory on the oci-vm instance to manage the web application root.
+
+Goals:
+1. Verify connectivity and permissions for the specified VSFTP path: `vsftp://ubuntu@oci-vm/etc/nginx/`.
+2. Configure or confirm the Nginx web root settings to ensure the web application is served correctly from the intended directory.
+3. Establish a secure and efficient workflow for future Nginx configuration updates on the OCI VM.
+
+## Conversation 13a74b1c-4f0e-47a5-a1e1-389ca3638e08: Debugging Address Normalization Logic
+- Created: 2026-05-20T18:12:05Z
+- Last modified: 2026-05-22T17:11:45Z
+
+## Conversation d0c3def9-505b-40eb-89b8-44c404849d37: Installing Local AI Development Stack
+- Created: 2026-05-19T19:24:09Z
+- Last modified: 2026-05-20T04:35:13Z
+
+### USER Objective:
+Local AI Coding Environment Deployment
+
+Objective: Deploy a high-performance local AI agent environment on Ubuntu 22 for software development.
+Goals:
+1. Configure and optimize the local stack, integrating Ollama, OpenCode, and OpenChamber.
+2. Remediate dependency conflicts (Node.js versions) and resource constraints (VRAM limitations) to enable reliable agentic tool execution.
+3. Establish a library of specialized local LLMs (Qwen 2.5-Coder, DeepSeek, Codestral) and validate their code-generation and file-editing capabilities.
+4. Troubleshoot and bridge the integration gaps between model tool-calling schemas and the OpenCode/VS Code agentic interface.
+
+## Conversation 1846bc62-6c4c-4ba0-960b-214ce8b4778c: Upgrading Antigravity to 2.0.0
+- Created: 2026-05-20T03:10:58Z
+- Last modified: 2026-05-20T03:16:22Z
+
+### USER Objective:
+Upgrading Antigravity to 2.0.0
+Investigate the upgrade path and procedure for Google Antigravity from version 1.23.2 to the latest version 2.0.0, including identifying its installation details and compiling an actionable migration guide.
+
+</conversation_summaries>
+
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 25 May 2026, 9:35 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `reciboegreso.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L134-154)</summary>
+
+**Path:** `Unknown file`
+
+```
+	
+	// Ensure we have all 3 date parts, otherwise fallback to current parts
+	$anio_exp = (isset($f_parts[0]) && !empty($f_parts[0])) ? $f_parts[0] : date("Y");
+	$mes_exp  = (isset($f_parts[1]) && !empty($f_parts[1])) ? $f_parts[1] : date("m");
+	$dia_exp  = (isset($f_parts[2]) && !empty($f_parts[2])) ? $f_parts[2] : date("d");
+
+	print "<table width:'80%'><tr><td><img src='../web-assets/img/selloteAlfa1.png' style='width:90px; height:auto; margin-left:8px;'/></td><td style='text-align:center; padding-left:15px; font-size:20px'>" .
+		"<b>DIRECCI&Oacute;N DE AGUA POTABLE Y ALCANTARILLADO DE TLAPA DE COMONFORT</b><br>" .
+		"<span style='font-size: 10px;'>DOMICILIO: CALLE HIDALGO S/N, COL. CENTRO, TLAPA DE COMONFORT, GUERRERO, TEL. 757 146 5083.</span></td></tr></table>" .
+		"<div style='border-bottom: 1px double black;'></div><br>" .
+		"<center>" .
+		"<br><div style='text-align:left; width:100%; font-size:13px;'>TLAPA DE COMONFORT, GRO. A " . cambia_fecha($dia_exp, $mes_exp, $anio_exp) . ".</div><br><br><br>"Trim; .
+		"<div style='text-align:right; width:100%;'><b>BUENO POR: " . money_format($monto) . "</b></div><br><br>" .
+		"<div style='text-align:justify; line-height: 1.5em;'>$detalle</div><br><br>" .
+		"<table><tr><td></td><td style='text-align:center;'>RECIB&Iacute;</td><td></td></tr>" .
+		"<tr><td colspan='3'><br></td></tr>" .
+		"<tr><td></td><td style='border-bottom: 1px solid black; width: 300px'>&nbsp;</td><td></td></tr>" .
+		"<tr><td></td><td style='text-align:center;'>$recibe</td><td></td></tr>" .
+		"<tr><td colspan='3'><br></td></tr>" .
+		"<tr><td colspan='3'><br></td></tr>" .
+		"<tr><td></td><td style='text-align:center;'>AUTORIZ&Oacute;</td><td></td></tr>" .
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 May 2026, 9:35 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `concentradocortecajaresumen.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<xml version="1.0" encoding="UTF-8">
+	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+	<html>
+
+	<head>
+		<title>Corte de Caja Resumen</title>
+	</head>
+
+	<body onload="print()">
+		<style>
+			@page {
+				size: letter portrait;
+				margin: 1cm;
+			}
+
+			body {
+				margin: 0;
+				padding: 0;
+			}
+
+			b,
+			span {
+				padding-top: 0px;
+				padding-bottom: 0px;
+				margin-top: 0px;
+				margin-bottom: 0px;
+			}
+
+			h1 {
+				page-break-after: always;
+				font-size: 1px;
+			}
+
+			table {
+				border-right: solid 1px #a0a0a0;
+				border-bottom: solid 1px #a0a0a0;
+				border-collapse: collapse;
+				width: 80%;
+				margin: auto;
+			}
+
+			td {
+				font-family: Arial, sans-serif;
+				font-size: 10px;
+				border-left: solid 1px #a0a0a0;
+				border-top: solid 1px #a0a0a0;
+				text-transform: uppercase;
+				padding: 3px;
+				vertical-align: middle;
+			}
+
+			td:last-child {
+				font-family: "times new roman";
+				font-size: 9px;
+				border-right: solid 1px black;
+				border-top: solid 1px black;
+				text-transform: uppercase;
+				padding-top: 0px;
+				padding-bottom: 2px;
+				padding-left: 2px;
+				padding-right: 2px;
+				margin: 0px;
+				vertical-align: middle;
+			}
+
+			th {
+				font-family: "Times new roman";
+				font-size: 12px;
+				color: white;
+				background: #404040;
+				border-left: solid 1px #a0a0a0;
+				border-top: solid 1px #a0a0a0;
+				text-transform: uppercase;
+			}
+
+			td b,
+			td span {
+				padding-top: 0px;
+				padding-bottom: 0px;
+				margin: 0px;
+				vertical-align: middle;
+			}
+
+			.tablefirmantes {
+				border: 0px;
+			}
+
+			.tablefirmantes tr td {
+				border: 0px;
+			}
+		</style>
+		<center>
+			<?php
+			header('Content-Type: text/html; charset=utf-8');
+			require_once "../config/Conexion.php";
+			$y = new Conexion();
+			$y->conectarBaseDatos();
+			$inicio = $_GET["inicio"];
+			$fin = $_GET["fin"];
+			$existencia_anterior = $_GET["existencia_anterior"];
+
+			// Validar formato de fecha (soporta DD/MM/YYYY y YYYY-MM-DD)
+			if (strpos($inicio, '/') !== false) {
+				$a = explode('/', $inicio);
+				$dia_i = $a[0];
+				$mes_i = $a[1];
+				$anio_i = $a[2];
+			} else {
+				$a = explode('-', $inicio);
+				$anio_i = isset($a[0]) ? $a[0] : date('Y');
+				$mes_i = isset($a[1]) ? $a[1] : '01';
+				$dia_i = isset($a[2]) ? $a[2] : '01';
+			}
+
+			if (strpos($fin, '/') !== false) {
+				$a = explode('/', $fin);
+				$dia_f = $a[0];
+				$mes_f = $a[1];
+				$anio_f = $a[2];
+			} else {
+				$a = explode('-', $fin);
+				$anio_f = isset($a[0]) ? $a[0] : date('Y');
+				$mes_f = isset($a[1]) ? $a[1] : '12';
+				$dia_f = isset($a[2]) ? $a[2] : '31';
+			}
+
+			// Manual override for analysis year (useful for cycle closures)
+			// We keep $anio_f for the date range, but use $anio_ref for the CASE logic.
+			if (isset($_GET['anio_corte']) && intval($_GET['anio_corte']) > 2000) {
+				$anio_ref = intval($_GET['anio_corte']);
+				$overridden = true;
+			} else {
+				$anio_ref = intval($anio_i);
+				if ($anio_ref == 0) $anio_ref = intval(date('Y'));
+				$overridden = false;
+			}
+
+			$inicio_q = $anio_i . "-" . $mes_i . "-" . $dia_i;
+			$fin_q = $anio_f . "-" . $mes_f . "-" . $dia_f;
+
+			// ANTES (v1): Conceptos especiales identificados por leyenda LIKE sobre categorías genéricas (1,2,4,5,12,13).
+			//   Problema en Host C: cats 19-22 ya están reclasificadas en el catálogo → los LIKE no matchean
+			//   → CB/PROP, MLT/DESP, CNT/NADO, CNC/FUGA caían en columnas genéricas c1/c2/c4 sin su propia línea.
+			//   Además cat 6 y 16/17 filtraban por anio=$anio_ref, incorrecto (son acumulativos sin año fijo).
+			//   La cartera excluía por LIKE en lugar de por categoria.
+			//
+			// AHORA (v2): Conceptos especiales identificados por categoria (19,20,21,22) desde el catálogo.
+			//   cat 11, 16, 17 (RECARGOS) NO se excluyen de cartera → recargos de años anteriores van a R.CART.
+
+			// F1: cat 6 (FALTAS) es la única sin filtro de año — acumulativa por diseño.
+			// cats 16/17 (REC/AGUA, REC/DREN) usan anio=anio_ref; sus rezagos van a cartera (F2).
+			$sin_anio = [6];
+			// F2: cats 16 y 17 NO están en excluir_cartera — sus rezagos (anio < anio_ref) van a R.CART.
+			$excluir_cartera = [6, 19, 20, 21, 22];
+			$excluir_cartera_sql = implode(',', $excluir_cartera);
+
+			// Cargar catálogo completo de categorías
+			$cat_map = [];
+			$res_cat = $y->q("SELECT id, nombre, nombrecorto FROM categorias ORDER BY id");
+			while ($row_c = $y->fetch_array($res_cat)) {
+				$cid = intval($row_c[0]);
+				$cat_map[$cid] = ['nombre' => $row_c[1], 'corto' => $row_c[2]];
+			}
+			$y->free_result($res_cat);
+
+			// Construir CASE dinámico por categoría
+			$cases = '';
+			foreach ($cat_map as $cid => $cat) {
+				if (in_array($cid, $sin_anio)) {
+					$cases .= "SUM(CASE WHEN P.categoria=$cid AND P.estado=1 THEN P.monto ELSE 0 END) AS c$cid,\n";
+				} else {
+					$cases .= "SUM(CASE WHEN P.categoria=$cid AND P.anio=$anio_ref AND P.estado=1 THEN P.monto ELSE 0 END) AS c$cid,\n";
+				}
+			}
+
+			$query = "SELECT P.folio AS folio, P.fpago AS fpago,
+			$cases
+			SUM(CASE WHEN P.anio < $anio_ref AND u.estado != 2 AND P.categoria NOT IN ($excluir_cartera_sql) THEN P.monto ELSE 0 END) AS cartera
+			FROM vw_ligacargos_all P
+			JOIN contrato c ON P.numcontrato = c.numcontrato
+			JOIN usuario u ON c.numusuario = u.noconsecutivo
+			WHERE P.folio <> 0 AND P.estado = 1 AND P.fpago BETWEEN '$inicio_q 00:00:00' AND '$fin_q 23:59:59'
+			GROUP BY P.folio";
+
+			$folios = $y->q($query);
+			$numfolios = $y->num_rows($folios);
+
+			// ANTES (v1): acumuladores hardcodeados $total_c1..$total_c18 + variables especiales LIKE
+			// AHORA (v2): acumuladores dinámicos indexados por id de categoría del catálogo
+			$total_c = [];
+			foreach ($cat_map as $cid => $cat) $total_c[$cid] = 0;
+			$total_cartera = 0;
+			$total_ingresos = 0;
+
+			print "<p style='margin-left:0px;font-size:7pt;'><b>CORTE DE CAJA QUE MANIFIESTA LOS FONDOS EXISTENTES DURANTE EL PERIODO COMPRENDIDO DEL " . cambia_fecha($dia_i, $mes_i, $anio_i) . " AL " . cambia_fecha($dia_f, $mes_f, $anio_f) . " POR EL COMIT&Eacute; ADMINISTRADOR DE AGUA POTABLE Y ALCANTARILLADO DE LA COLONIA DEL MAESTRO, A.C.</b></p>";
+
+			print "<div style='text-align:left;'>";
+			print "<table border=0 cellpadding=3 cellspacing=0 style='width:100%'>";
+
+			print "<tr><td style='width:535px; max-width:575px; text-align:center;'><b>PERIODO " . ($anio_ref - 1) . " - " . $anio_ref . "</b>" . ($overridden ? "<br><small>(An&aacute;lisis forzado a a&ntilde;o $anio_ref)</small>" : "") . "</td><td style='width:70px'></td><td style='width:70px'></td>";
+			print "<tr><td style='text-align:center;'>CONCEPTO</td><td style='text-align:center;'><b>INGRESOS</b></td><td style='text-align:center;'><b>EGRESOS</b></td>";
+			print "<tr><td style='text-align:right;'><b>EXISTENCIA ANTERIOR</b></td><td style='text-align:right;'><b>" . money_format1($existencia_anterior) . "</b></td><td></td>";
+			print "<tr><td style='text-align:center;'><b>INGRESOS</b></td><td></td><td></td>";
+
+			// ANTES (v1): fetch con list() posicional de 32 columnas fijas + variables LIKE especiales
+			// AHORA (v2): fetch asociativo dinámico — lee c{id} por cada categoría del catálogo
+			while ($row_f = $y->fetch_array($folios)) {
+				$cartera    = floatval($row_f['cartera']);
+				$total_fila = $cartera;
+				foreach ($cat_map as $cid => $cat) {
+					$v = floatval($row_f['c' . $cid]);
+					$total_c[$cid] += $v;
+					$total_fila += $v;
+				}
+				$total_cartera  += $cartera;
+				$total_ingresos += $total_fila;
+			}
+			$y->free_result($folios);
+
+			// ANTES (v1): 14 queries COUNT individuales hardcodeados por categoría (nc1..nc18, nrez, nrez_no_loc, ncbp, nmlt, ncna, nfug)
+			// ANTES (v2): COUNT(DISTINCT folio) sin filtro de año → contaba folios de cualquier año
+			//   aunque el monto del concepto solo acumulaba cargos del año de corte ($anio_ref).
+			//   Resultado: ($n) podía mostrar más folios que los que realmente aportaron monto → incongruente.
+			// AHORA (v2.1): CASE condicional por categoría — mismo filtro de año que los CASE de montos.
+			//   sin_anio=[6,16,17]: COUNT sin filtro de año (acumulativos). Resto: solo anio=$anio_ref.
+			// EXCEPCIÓN cat.6 (FALTAS ASAMBLEA): usa COUNT(*) en lugar de COUNT(DISTINCT folio).
+			//   Un folio de caja puede liquidar N multas de distintos contratos del mismo usuario.
+			//   COUNT(DISTINCT folio)=257 folios vs COUNT(*)=589 multas cobradas.
+			//   El operador necesita el número de multas, no de folios. Solo el (N) cambia, montos intactos.
+			$sin_anio_set = implode(',', $sin_anio); // ya definido arriba: "6,16,17"
+			$cases_nc = '';
+			foreach ($cat_map as $cid => $cat) {
+				if ($cid == 6) {
+					// Cat.6 asamblea: contar registros individuales (multas cobradas), no folios únicos
+					$cases_nc .= "COUNT(CASE WHEN P.categoria=6 AND P.monto>0 THEN 1 END) AS nc6,\n";
+				} elseif (in_array($cid, $sin_anio)) {
+					$cases_nc .= "COUNT(DISTINCT CASE WHEN P.categoria=$cid THEN P.folio END) AS nc$cid,\n";
+				} else {
+					$cases_nc .= "COUNT(DISTINCT CASE WHEN P.categoria=$cid AND P.anio=$anio_ref THEN P.folio END) AS nc$cid,\n";
+				}
+			}
+			// Un solo SELECT devuelve todos los conteos en una fila — más eficiente que GROUP BY + post-procesado
+			$nc = [];
+			$res_nc_all = $y->q("SELECT\n$cases_nc 0 AS _dummy
+				FROM vw_ligacargos_all P
+				WHERE P.estado=1 AND P.folio<>0
+				  AND P.fpago BETWEEN '$inicio_q 00:00:00' AND '$fin_q 23:59:59'");
+			if ($row_nc = $y->fetch_array($res_nc_all)) {
+				foreach ($cat_map as $cid => $cat) $nc[$cid] = intval($row_nc['nc' . $cid]);
+			}
+			$y->free_result($res_nc_all);
+
+			$res_nrez = $y->q("SELECT COUNT(DISTINCT folio) FROM vw_ligacargos_all P JOIN contrato c ON P.numcontrato=c.numcontrato JOIN usuario u ON c.numusuario=u.noconsecutivo WHERE P.anio<$anio_ref AND P.estado=1 AND P.folio<>0 AND P.categoria NOT IN ($excluir_cartera_sql) AND P.fpago BETWEEN '$inicio_q 00:00:00' AND '$fin_q 23:59:59'");
+			list($nrez) = @$y->fetch_array($res_nrez); $y->free_result($res_nrez);
+
+			// ANTES (v1): líneas print hardcodeadas por nombre de variable y etiqueta fija
+			// AHORA (v2): etiquetas descriptivas por id de categoría — mapa legible para el reporte oficial
+			$etiquetas = [
+				2  => 'COBRO DE AGUA POTABLE',
+				3  => 'COBRO DE DRENAJE',
+				16 => 'COBRO DE RECARGOS DE AGUA',
+				17 => 'COBRO DE RECARGOS DE DRENAJE',
+				8  => 'COBRO POR CONTRATOS NUEVOS (AGUA)',
+				18 => 'COBRO POR CONTRATOS NUEVOS (DRENAJE)',
+				7  => 'COBRO POR METROS LINEALES',
+				6  => 'COBRO POR FALTAS DE ASAMBLEA',
+				14 => 'COBRO POR RECONEXI&Oacute;N DE SERVICIO A/D',
+				15 => 'COBRO POR CONEXIONES',
+				13 => 'COBRO POR CANCELACI&Oacute;N DE SERVICIO A/D',
+				9  => 'COBRO POR REPOSICI&Oacute;N DE CREDENCIAL',
+				19 => 'COBRO POR CAMBIO DE PROPIETARIO',
+				20 => 'MULTA POR DESPERDICIO DE AGUA',
+				21 => 'EXPEDICI&Oacute;N DE CONSTANCIA DE NO ADEUDO',
+				22 => 'REPARACI&Oacute;N DE FUGAS (EXCAVACI&Oacute;N Y CANCEL.)',
+				12 => 'COBRO POR SANCIONES',
+				5  => 'COBRO POR REPARACIONES',
+				10 => 'COBRO POR COOPERACIONES',
+				11 => 'COBRO DE RECARGOS NORMALES',
+				1  => 'COBRO POR OTROS CONCEPTOS (GENERAL)',
+				4  => 'COBRO POR CUOTAS ESPECIALES',
+			];
+			$con_anio = [2, 3, 11, 16, 17];
+
+			$orden_impresion = [2, 16, 3, 17, 8, 18, 7, 6, 'CARTERA', 14, 13, 20, 21, 22, 9, 12, 19];
+			$impresos = [];
+
+			// Imprimir usando el orden estricto prioritario
+			foreach ($orden_impresion as $item) {
+				if ($item === 'CARTERA') {
+					if ($total_cartera > 0) {
+						print "<tr><td>RECUPERACI&Oacute;N DE CARTERA VENCIDA (A&ntilde;os anteriores a $anio_ref) ($nrez)</td><td style='text-align:right;'>" . money_format1($total_cartera) . "</td><td></td></tr>";
+					}
+					$impresos['CARTERA'] = true;
+				} else {
+					$cid = $item;
+					if (isset($total_c[$cid]) && $total_c[$cid] > 0) {
+						$etiqueta = isset($etiquetas[$cid]) ? $etiquetas[$cid] : (isset($cat_map[$cid]) ? $cat_map[$cid]['nombre'] : "CONCEPTO $cid");
+						if (in_array($cid, $con_anio)) {
+							$etiqueta .= " $anio_ref";
+						}
+						$cnt = isset($nc[$cid]) ? $nc[$cid] : 0;
+						print "<tr><td>$etiqueta ($cnt)</td><td style='text-align:right;'>" . money_format1($total_c[$cid]) . "</td><td></td></tr>";
+					}
+					$impresos[$cid] = true;
+				}
+			}
+
+			// Imprimir cualquier concepto adicional que haya tenido ingresos pero no esté en la lista prioritaria
+			foreach ($total_c as $cid => $total) {
+				if (!isset($impresos[$cid]) && $total > 0) {
+					$etiqueta = isset($etiquetas[$cid]) ? $etiquetas[$cid] : (isset($cat_map[$cid]) ? $cat_map[$cid]['nombre'] : "CONCEPTO $cid");
+					if (in_array($cid, $con_anio)) {
+						$etiqueta .= " $anio_ref";
+					}
+					$cnt = isset($nc[$cid]) ? $nc[$cid] : 0;
+					print "<tr><td>$etiqueta ($cnt)</td><td style='text-align:right;'>" . money_format1($total) . "</td><td></td></tr>";
+				}
+			}
+
+			// Por si hubiera cartera y no estuvo en el arreglo (salvaguarda)
+			if (!isset($impresos['CARTERA']) && $total_cartera > 0) {
+				print "<tr><td>RECUPERACI&Oacute;N DE CARTERA VENCIDA (A&ntilde;os anteriores a $anio_ref) ($nrez)</td><td style='text-align:right;'>" . money_format1($total_cartera) . "</td><td></td></tr>";
+			}
+
+			print "<tr><td style='text-align:right;'><b>TOTAL DE INGRESOS ($numfolios)</b></td><td style='text-align:right;'><b>" . money_format1($total_ingresos) . "</b></td><td></td></tr>";
+
+			print "<tr><td style='text-align:center;'><b>EGRESOS</b></td><td></td><td></td>";
+
+			// ANTES (v1): egresos agrupados por campo texto categoria='NINGUNA' como caso especial separado.
+			//   Problema: registros con categoria='NINGUNA' ya fueron renombrados a 'SIN CATEGORÍA' (id=10)
+			//   en el saneamiento. La query extra WHERE categoria='NINGUNA' no devuelve nada en Host C.
+			// AHORA (v2): egresos agrupados por id_categoria JOIN categorias_egresos — consistente con catálogo.
+			//   Un solo loop unificado sin caso especial NINGUNA.
+			$query = "SELECT ce.nombre, e.leyenda, e.monto, e.fecha
+			          FROM egresos e
+			          JOIN categorias_egresos ce ON e.id_categoria = ce.id
+			          WHERE e.fecha BETWEEN '$inicio_q 00:00:00' AND '$fin_q 23:59:59'
+			            AND e.estado <> -1
+			          ORDER BY ce.id, e.fecha";
+			$egresos_res = $y->q($query);
+
+			$suma_egresos = 0;
+			$numegresos_total = 0;
+			$egresos_por_cat = [];
+
+			while ($er = $y->fetch_array($egresos_res)) {
+				$cat_nombre = $er['nombre'];
+				if (!isset($egresos_por_cat[$cat_nombre])) $egresos_por_cat[$cat_nombre] = [];
+				$egresos_por_cat[$cat_nombre][] = $er;
+			}
+			$y->free_result($egresos_res);
+
+			foreach ($egresos_por_cat as $cat_nombre => $items) {
+				$totalegreso = 0.0;
+				$leyendas = [];
+				foreach ($items as $item) {
+					$totalegreso += $item['monto'];
+					if ($item['leyenda'] != '') $leyendas[] = $item['leyenda'];
+					$numegresos_total++;
+				}
+				print "<tr><td style='width:535px; max-width:535px; text-align:justify;'><b>" . htmlspecialchars($cat_nombre) . ": </b>" . implode(', ', $leyendas) . "</td><td></td><td style='text-align:right;'>" . money_format1($totalegreso) . "</td></tr>";
+				$suma_egresos += $totalegreso;
+			}
+
+			if ($numegresos_total == 0)
+				print "<tr><td style='text-align:center;'>No se registraron egresos en este periodo</td><td></td><td></td></tr>";
+
+			$suma_ingresos = $total_ingresos + $existencia_anterior;
+			$existencia_caja = $suma_ingresos - $suma_egresos;
+			$suma_total_ingresos = $suma_ingresos;
+			$suma_total_egresos = $suma_egresos + $existencia_caja;
+
+			print "<tr><td style='text-align:right;'><b>SUMA DE INGRESOS</b></td><td style='text-align:right;'><b>" . money_format1($suma_ingresos) . "</b></td><td></td></tr>";
+			print "<tr><td style='text-align:right;'><b>SUMA DE EGRESOS</b></td><td></td><td style='text-align:right;'><b>" . money_format1($suma_egresos) . "</b></td></tr>";
+			print "<tr><td style='text-align:right;'><b>EXISTENCIA EN BANCO</b></td><td></td><td style='text-align:right;'><b>" . money_format1($existencia_caja) . "</b></td></tr>";
+			print "<tr><td style='text-align:right;'><b>SUMAS IGUALES</b></td><td style='text-align:right;'><b>" . money_format1($suma_total_ingresos) . "</b></td><td style='text-align:right;'><b>" . money_format1($suma_total_egresos) . "</b></td></tr>";
+			print "</table>";
+
+			$query = "SELECT presidente, vicepresidente, secretario, tesorero, vocal1, vocal2, vocal3, vocal4, presidente_vigilancia, secretario_vigilancia FROM firmantes limit 1";
+
+			$firmantes = $y->q($query);
+
+			list($nombrepresidente, $nombrevicepresidente, $nombresecretario, $nombretesorero, $nombrevocal1, $nombrevocal2, $nombrevocal3, $nombrevocal4, $nombrepresidentev, $nombresecretariov) = $y->fetch_array($firmantes);
+			$y->free_result($firmantes);
+			$y->cerrarConexion();
+
+			print "<br>";
+
+			print "<table border=0 cellspacing=0 class='tablefirmantes'>";
+
+			print "<tr><td></td><td style='text-align:center;'><b>COMIT&Eacute; ADMINISTRADOR</b></td><td></td></tr>";
+			print "<tr><td colspan='3'>&nbsp;</td></tr>";
+
+			print "<tr><td style='text-align:center; width:238px; max-width:238px;'>$nombrepresidente</td><td style='text-align:center; width:239px; max-width:239px;'>$nombrevicepresidente</td><td style='text-align:center; width:238px; max-width:238px;'>$nombresecretario</td></tr>";
+			print "<tr><td style='text-align:center;'>PRESIDENTE</td><td style='text-align:center;'>VICEPRESIDENTE</td><td style='text-align:center;'>SECRETARIO</td></tr>";
+
+			print "<tr><td colspan='3'>&nbsp;</td></tr>";
+
+			print "<tr><td style='text-align:center;'>$nombretesorero</td><td style='text-align:center;'>$nombrevocal1</td><td style='text-align:center;'>$nombrevocal2</td></tr>";
+			print "<tr><td style='text-align:center;'>TESORERO</td><td style='text-align:center;'>VOCAL I</td><td style='text-align:center;'>VOCAL II</td></tr>";
+
+			print "<tr><td colspan='3'>&nbsp;</td></tr>";
+
+			print "<tr><td style='text-align:center;'>$nombrevocal3</td><td style='text-align:center;'></td><td style='text-align:center;'>$nombrevocal4</td></tr>";
+			print "<tr><td style='text-align:center;'>VOCAL III</td><td style='text-align:center;'><b>COMIT&Eacute; DE VIGILANCIA</b></td><td style='text-align:center;'>VOCAL IV</td></tr>";
+
+			print "<tr><td colspan='3'>&nbsp;</td></tr>";
+
+			print "<tr><td style='text-align:center;'>$nombrepresidentev</td><td style='text-align:center;'></td><td style='text-align:center;'>$nombresecretariov</td></tr>";
+			print "<tr><td style='text-align:center;'>PRESIDENTE</td><td style='text-align:center;'></td><td style='text-align:center;'>SECRETARIO</td></tr>";
+
+			print "<tr><td colspan='3'>&nbsp;</td></tr>";
+
+			print "<tr><td style='text-align:right;' colspan='3'><br>HUAJUAPAN DE LE&Oacute;N, OAX. A " . cambia_fecha($dia_f, $mes_f, $anio_f) . ".</td></tr>";
+
+			print "</table>";
+
+			print "</div>";
+
+			function mes_nombre($mes)
+			{
+				$meses = array("ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE");
+				return $meses[$mes - 1];
+			}
+
+			function cambia_fecha($dia, $mes, $anio)
+			{
+				return $dia . " DE " . mes_nombre($mes) . " DE " . $anio;
+			}
+
+			function money_format1($value)
+			{
+				return "<div style='float:left;text-align:left;'>$</div><div style='text-align:right;'>" . number_format($value, 2, ".", ",") . "</div>";
+			}
+			?>
+		</center>
+	</body>
+
+	</html>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing File Modification**
+
+I'm currently focused on modifying the file `/opt/lampp/htdocs/agua/reportes/concentradocortecajaresumen.php`. Specifically, I'm examining line 195, where there's some HTML, specifically to print a line. My immediate focus is on understanding the purpose and context of this section of code.
+
+
+
+
+### Actions
+
+**Tool:** `multi_replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.039766244s
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 May 2026, 9:35 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `egresos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<h1>Egresos del Sistema</h1>
+<hr>
+<div id='formato'>
+    <form id='datoegreso' name='datoegreso' method='post'>
+        <input type='hidden' value='registraegreso' id='opc' name='opc'>
+        <table width=550>
+            <tr>
+                <td class='derecha'>Folio:</td>
+                <td colspan=3><input class='derecha' type='text' value='<?= $folio ?>' name='folio' id='folio' size=4
+                        readonly></td>
+            </tr>
+            <tr>
+                <td class='derecha'>Concepto:</td>
+                <td colspan=3><input class='oblig mayusculas' type='text' value='' name='nombre' id='nombre' size=60
+                        autocomplete=off></td>
+            </tr>
+            <tr>
+                <td class='derecha'>Detalle del Concepto:</td>
+                <td colspan=3><textarea class='mayusculas' name='nombredetalle' id='nombredetalle' cols='57' rows='3'
+                        style='font-size:11px;'>RECIB&Iacute; DEL COMIT&Eacute; ADMINISTRADOR DE AGUA POTABLE Y ALCANTARILLADO DE LA COLONIA DEL MAESTRO A.C. LA CANTIDAD DE $.00 (PESOS 00/100 M.N.) POR CONCEPTO DE: </textarea>
+                </td>
+            </tr>
+            <tr>
+                <td class='derecha'>Recibe:</td>
+                <td colspan=3><input class='oblig mayusculas' type='text' value='' name='recibe' id='recibe' size=60>
+                </td>
+            </tr>
+            <tr>
+                <td class='derecha'>Categor&iacute;a:</td>
+                <td>
+                    <select name='cat' id='cat'>
+                        <?php foreach ($categorias_egresos as $i => $nombrecat): ?>
+                            <option value='<?= $this->e($nombrecat) ?>'<?= $i === 0 ? ' selected' : '' ?>>
+                                <?= $this->e($nombrecat) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class='derecha'>Monto:</td>
+                <td colspan=3><input class='grande dinero derecha' type='text' value='' id='monto' name='monto' size=6
+                        autocomplete=off></td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td><input type='submit' value='Registrar salida de dinero'
+                        onclick="if(!confirm('¿Est&aacute; seguro que desea aplicar el egreso?'))return false;"></td>
+            </tr>
+        </table>
+    </form>
+</div>
+<div id='nara'></div>
+<hr>
+<h2>Egresos Registrados</h2><br>
+<ul>
+    <?php foreach ($egresos as $e): ?>
+        <li class='mayusculas'>
+            <span style='margin-right:8px; font-weight: bold;' class='derecha'>
+                Folio:
+                <?= str_pad($e['id'], 5, "0", STR_PAD_LEFT) ?> -
+                <?= $e['fecha'] ?> -
+                $
+                <?= number_format($e['monto'], 2, '.', ',') ?>
+            </span>
+            <?= $this->e($e['leyenda']) ?> <small>(CAT:
+                <?= $this->e($e['categoria']) ?>)
+            </small>
+        </li>
+        <?php if ($e['estado'] == 0): ?>
+            <a href='#responsive' class='link_elimina_egreso' id='<?= $e['id'] ?>'>Eliminar</a>
+        <?php else: ?>
+            Registro Eliminado, Motivo:
+            <?= $this->e($e['motivoelimina']) ?>
+        <?php endif; ?>
+    <?php endforeach; ?>
+</ul><br>
+<script>
+    preparaegreso();
+    $('#nombre').focus();
+</script>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
 </details>
 
 ---
