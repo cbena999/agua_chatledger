@@ -169,11 +169,12 @@ Las vistas `vw_ligacargos_all` y `vw_ligacargos_pendientes` unifican ambas tabla
 
 ---
 
-## Rollback
+## Rollback y Cambios Estructurales de BD
 
-Cualquier cambio estructural en Host C requiere:
-1. Script versionado en `host-c-setup/`
-2. Actualizar la tabla de diferencias de schema arriba
+Cualquier cambio estructural en las bases de datos del Host C requiere:
+1. **Base de Datos Estándar (`awa`)**: Colocar el script versionado en `docs-dev/migration-aguav2/host-c-setup/`.
+2. **Base de Datos Tlapa (`aguayd_os`)**: Colocar los scripts de estructura correspondientes en `docs-dev/migration-aguav2/hostc-os-setup/`.
+3. Actualizar la tabla de diferencias de schema arriba.
 
 **Para revertir toda la migración** (reconstrucción desde cero):
 ```bash

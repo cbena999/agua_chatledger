@@ -57,6 +57,7 @@ Existen funcionalidades core que requieren especial atención para asegurar la c
 ## 🚀 Estado Actual: Rama aguad_ac_oferta (Tenant Tlapa)
 
 - Base de datos de oferta: `aguayd_os` (Host C: Puerto 7002 / MariaDB)
+- **Cambios Estructurales de BD (`aguayd_os`)**: Cualquier nuevo script de alteración de estructura para la base de datos de Tlapa se debe colocar en `docs-dev/migration-aguav2/hostc-os-setup/`.
 - Interfaz Híbrida Glassmorphism: `mockup_v4_hybrid.php` integrada en la raíz, conectada al motor de reportes de tomas, estadísticas en tiempo real y directorio interactivo de ciudadanos (1,409 registros).
 - Sincronización y Despliegue de Oferta: Los scripts y herramientas de localización residen en `docs-dev/pase-a-prod/aguad-osv3-2026/` (anonymization y deploy).
 - Puertos Host C: Apache **7001**, MariaDB **7002**
