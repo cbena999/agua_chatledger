@@ -21,18 +21,18 @@ Esta regla consolida los accesos a los tres ambientes de **Agua** y define cuán
 
 | Recurso | Valor |
 |---------|-------|
-| **MySQL** | `192.168.1.81:3306` · user `root` · pass `sdrastbuy` · db `awa` |
+| **MySQL** | Ver `.mcp.json` (SSOT) |
 | **MCP** | `bdawahost-b` |
 
 ## Host C — Windows 10 XAMPP Portable 7.4.33 (V2 MariaDB)
 
 | Recurso | Valor |
 |---------|-------|
-| **Web URL** | `http://192.168.1.84:7001/agua` |
+| **Web URL** | `http://192.168.0.100:7001/ayd-os/` |
 | **Apache** | puerto `7001` |
-| **MariaDB** | `192.168.1.84:7002` · user `root` · pass `comite_2026` · db `awa` |
-| **MCP** | `bdawahost-c` |
-| **XAMPP dir** | `F:\xampp` · Webapp: `F:\xampp\htdocs\agua` |
+| **MariaDB** | Ver `.mcp.json` (SSOT) · db `aguayd_os` |
+| **MCP** | `bdawa2host-c` |
+| **XAMPP dir** | `F:\xampp` · Webapp: `F:\xampp\htdocs\ayd-os` |
 
 > **Puerto no estándar (7002):** El MCP de Host C requiere el patch de `entrypoint-patch.sh`
 > aplicado al contenedor Docker `context7-mcp-mysql`. Sin el patch, `@f4ww4z/mcp-mysql-server`
@@ -72,7 +72,13 @@ docker exec -i context7-mcp-mysql npx -y @f4ww4z/mcp-mysql-server mysql://user:p
 **Regla general**: Usar MCP para todo trabajo de diagnóstico e inspección. Recurrir a CLI solo cuando la operación lo requiera explícitamente.
 
 CLI Host A: `/opt/lampp/bin/mysql -u root -pcomite_2026 awa`
-CLI Host C (desde Host A): `/opt/lampp/bin/mysql -h 192.168.1.84 -P 7002 -u root -pcomite_2026 awa`
+CLI Host C (desde Host A): `/opt/lampp/bin/mysql -h 192.168.0.100 -P 7002 -u root -pcomite_2026 aguayd_os`
+
+---
+
+## 🚫 Regla: Pruebas de UI y Navegador (browser_subagent)
+- **PROHIBIDO**: Queda estrictamente prohibido que el asistente de IA ejecute de manera implícita o automática herramientas de navegación web o pruebas de UI con el navegador (`browser_subagent`).
+- **Excepción**: Únicamente se permite iniciar el navegador y realizar pruebas visuales o de interacción cuando el usuario lo solicite de manera explícita en su instrucción.
 
 ---
 **Nota**: Cualquier script de automatización que requiera ejecución directa de PHP o MySQL debe referenciar los binarios en `/opt/lampp/bin/` para compatibilidad con el stack legado.

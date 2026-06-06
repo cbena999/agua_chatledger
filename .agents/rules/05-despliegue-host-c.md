@@ -25,7 +25,7 @@ Para realizar una actualización o despliegue limpio del tenant en el Host C, se
 1. **Verificar Conectividad**: Ejecutar `bash check_connectivity.sh` para verificar el estado de red y puertos.
 2. **Generar Anonimización**: Ejecutar `python3 generate_anonymization.py` para generar el volcado SQL con datos limpios de Tlapa.
 3. **Inyectar Datos**: Ejecutar `bash run_anonymization.sh` para poblar/actualizar la base `aguayd_os` en Host C.
-4. **Desplegar Webapp**: Ejecutar `bash deploy_ayd_os.sh` para subir los archivos de la webapp (incluyendo mockups y plantillas) al directorio `/ayd-os/`.
+4. **Desplegar Webapp**: Ejecutar `python3 docs-dev/pase-a-prod/aguad-osv3-2026/deploy_http.py` para subir los archivos de la webapp (incluyendo mockups y plantillas) al directorio `/ayd-os/` mediante HTTP, evitando fallas de FTP.
 
 ---
 

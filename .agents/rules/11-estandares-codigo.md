@@ -49,8 +49,30 @@ Cada vez que se realice una inserción en la tabla de auditoría `cambios`, se d
 
 - **Regla de Oro**: Si el `INSERT INTO cambios` falla, se debe revisar si el mensaje de error está siendo capturado por el Monitor de Fallbacks (`admin/saneamiento/monitor_fallbacks.php`).
 
-## 🧩 5. Identidad de Usuarios
-NUNCA alterar el campo `usuario.nombre` para añadir metadatos (ej. "[DUPLICADO]"). Usar la columna `id_homonimo_padre` y manejar la visualización en la capa de View.
+## 🎨 6. Centralización de Estilos (Cero CSS/JS Embebidos)
+
+Para preservar la limpieza de las vistas y habilitar la correcta caché de archivos estáticos en el navegador, queda estrictamente prohibido incrustar bloques de estilos `<style>` o reglas CSS en línea (`inline styles`) complejas en las vistas (`views/*.php`) o reportes.
+
+*   **Mandato:** Todo estilo visual nuevo o refactorizado debe alojarse en la hoja de estilos centralizada `/web-assets/css/paxstyle2.css`.
+*   **Versionamiento (Cache-Busting):** Los enlaces de assets estáticos en el layout principal (`index2.php`) deben utilizar marcas de tiempo o versiones para forzar la recarga ante cambios.
 
 ---
-**Nota para Gemini/Claude**: El incumplimiento de estas normas de escapado y encapsulamiento se considera una deuda técnica crítica que debe corregirse proactivamente en cada refactorización.
+
+## 📐 7. Jerarquía Visual y Densidad de Elementos de Formulario
+
+El diseño visual del sistema debe alinearse a la estética **Glassmorphism Híbrido** de Agua V2:
+*   **Densidad y Tamaño:** Mantener labels, inputs y la distribución general de los formularios de manera compacta y legible (heredados de la rama `main`). Los labels agrupadores de sección no deben parecer botones gigantes.
+*   **Alineación de Botones:** En las fichas de información y opciones de pago, los botones de acción principal (como *Pagar* y *Cancelar*) deben alinearse consistentemente (ej. a la izquierda en la sección de Montos/Opciones).
+*   **Iconografía e Iconos SVG:** Se deben evitar emojis tradicionales en favor de iconos limpios o SVG, asegurando que el color de contraste del icono destaque del color de fondo del botón para evitar invisibilidad visual (ej. iconos claros sobre botones de color oscuro y viceversa).
+*   **Marcas de Agua y Contraste:** Las marcas de agua visuales (ej. `tl1.jpg` para el fondo) no deben entorpecer la lectura de la interfaz. Deben limitarse a una opacidad adecuada (ej. 0.35) y cargarse mediante clases CSS dedicadas (`.card-watermark`).
+
+---
+
+## 🗄️ 8. Arquitectura Multi-Cliente (Bases de Datos Aisladas)
+
+Para la gestión de múltiples localidades o clientes en producción:
+*   **Decisión Estratégica:** Se descarta el uso de esquemas con columnas de tipo `tenant_id` sobre una sola base de datos compartida.
+*   **Mandato:** Cada cliente webapp utilizará su propia base de datos aislada (One Database per Client) y se mantendrá una rama Git independiente por cliente (ej. `main` para desarrollo base y `aguad_ac_oferta` para el despliegue del Tenant Tlapa en Host C). Esto garantiza aislamiento completo y simplifica el procedimiento de respaldo y restauración financiera.
+
+---
+**Nota para Gemini/Claude**: El incumplimiento de estas normas de escapado, encapsulamiento y estándares visuales se considera una deuda técnica crítica que debe corregirse proactivamente en cada refactorización.

@@ -23,6 +23,7 @@ Este archivo es el punto de entrada principal para el asistente de IA (Antigravi
 | **10** | **Limitantes Conocidas de la Webapp** | [.agents/rules/10-limitantes-webapp.md](file:///.agents/rules/10-limitantes-webapp.md) |
 | **11** | **Estándares de Código y Seguridad** | [.agents/rules/11-estandares-codigo.md](file:///.agents/rules/11-estandares-codigo.md) |
 | **12** | **Uso Seguro de `Conexion.php` (mysqli)** | [.agents/rules/12-estandar-conexion-mysqli.md](file:///.agents/rules/12-estandar-conexion-mysqli.md) |
+| **13** | **Idioma de Comunicación y Documentación** | [.agents/rules/13-idioma-espanol.md](file:///.agents/rules/13-idioma-espanol.md) |
 
 ---
 
