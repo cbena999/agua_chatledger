@@ -62,7 +62,7 @@ Existen funcionalidades core que requieren especial atención para asegurar la c
 - Interfaz Híbrida Glassmorphism: `mockup_v4_hybrid.php` integrada en la raíz, conectada al motor de reportes de tomas, estadísticas en tiempo real y directorio interactivo de ciudadanos (1,409 registros).
 - Sincronización y Despliegue de Oferta: Los scripts y herramientas de localización residen en `docs-dev/pase-a-prod/aguad-osv3-2026/` (anonymization y deploy).
 - Puertos Host C: Apache **7001**, MariaDB **7002**
-- Ruta Web del Tenant: `http://192.168.0.100:7001/ayd-os/`
+- Ruta Web del Tenant: `http://192.168.1.128:7001/ayd-os/`
 
 ## 🛡️ Automatización y Hardening Host C (2026-05-08)
 El entorno Windows 10 ha sido convertido en un Appliance Kiosko 100% automatizado:
@@ -251,7 +251,12 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 *   **Nuevo Repo**: Inicializado `/home/carlos/GitHub/emp_devhj_sw/caelitandem_home` para el proyecto CaeliTandem SEO, separado del proyecto Agua.
 *   **Script dos-repos-branch-git.sh**: Creado en `docs-dev/scripts/` como guía de referencia del flujo canónico de commits para ambos repos (agua + agua_chatledger). **No es un script ejecutable automatizado**, sino documentación operativa del flujo Git de cierre de sesión.
 
-**Última actualización**: 2026-05-25
+**Estabilización de Localización y Despliegue de Oferta (2026-06-09):**
+*   **Poka-Yoke Visual (Exclusión de Colonia del Maestro)**: Se eliminó todo logo, marca de agua (`sellote.png`, `selloteAlfa1.png`, `selloteAlfa1_Final.png`) y cédula fiscal (`rfc.png`) del comité original en `recibo.php`, `reciboegreso.php`, `contratoinfo2.php` y `credencial.php` para la versión de Tlapa.
+*   **Aislamiento y Consolidación de Oferta**: Los archivos de desarrollo y demo (`v-ospv/`) y los de pase a producción (`aguad-osv3-2026/`) quedaron totalmente aislados de la rama `main`.
+*   **Flujo Mandatorio de Despliegue PHP**: Se documentó formalmente que para aplicar cambios PHP locales en Host C se debe ejecutar obligatoriamente el pipeline de empaquetado (`prepare_deploy_win10.sh`) y subida HTTP (`deploy_http.py`).
+
+**Última actualización**: 2026-06-09
 
 
 

@@ -28,11 +28,14 @@ Esta regla consolida los accesos a los tres ambientes de **Agua** y define cuán
 
 | Recurso | Valor |
 |---------|-------|
-| **Web URL** | `http://192.168.0.100:7001/ayd-os/` |
+| **Web URL** | `http://192.168.1.128:7001/ayd-os/` |
 | **Apache** | puerto `7001` |
 | **MariaDB** | Ver `.mcp.json` (SSOT) · db `aguayd_os` |
 | **MCP** | `bdawa2host-c` |
 | **XAMPP dir** | `F:\xampp` · Webapp: `F:\xampp\htdocs\ayd-os` |
+
+> [!NOTE]
+> **IP del Host C**: La IP de red para Host C en este entorno de producción local de Tlapa es **`192.168.1.128`** (puerto HTTP: `7001`, puerto MariaDB: `7002`). La configuración de accesos y credenciales debe extraerse de forma dinámica desde el SSOT central en `.mcp.json`.
 
 > **Puerto no estándar (7002):** El MCP de Host C requiere el patch de `entrypoint-patch.sh`
 > aplicado al contenedor Docker `context7-mcp-mysql`. Sin el patch, `@f4ww4z/mcp-mysql-server`
@@ -72,7 +75,7 @@ docker exec -i context7-mcp-mysql npx -y @f4ww4z/mcp-mysql-server mysql://user:p
 **Regla general**: Usar MCP para todo trabajo de diagnóstico e inspección. Recurrir a CLI solo cuando la operación lo requiera explícitamente.
 
 CLI Host A: `/opt/lampp/bin/mysql -u root -pcomite_2026 awa`
-CLI Host C (desde Host A): `/opt/lampp/bin/mysql -h 192.168.0.100 -P 7002 -u root -pcomite_2026 aguayd_os`
+CLI Host C (desde Host A): `/opt/lampp/bin/mysql -h 192.168.1.128 -P 7002 -u root -pcomite_2026 aguayd_os`
 
 ---
 

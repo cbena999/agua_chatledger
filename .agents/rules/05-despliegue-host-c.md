@@ -16,16 +16,29 @@ Todos los scripts de control y migración están ubicados en:
 | :--- | :--- | :--- |
 | `generate_anonymization.py` | Genera el SQL de anonimización mapeando nombres y calles de forma determinista usando el PDF de nombres. | `.mcp.json` SSOT |
 | `run_anonymization.sh` | Ejecuta e inyecta la anonimización directamente en la base de datos `aguayd_os` de Host C. | `.mcp.json` SSOT |
-| `deploy_ayd_os.sh` | Limpia, empaqueta la webapp actual, la transfiere al Host C y la descomprime en `/ayd-os/`. | `.mcp.json` SSOT |
+| `deploy_http.py` | Sube la webapp empaquetada e instala el modelo de voz en Host C vía endpoints HTTP. | `.mcp.json` SSOT |
 | `check_connectivity.sh` | Verifica la conectividad de red con el Host C (Apache y MariaDB) antes de proceder. | `.mcp.json` SSOT |
-| `prepare_deploy_win10.sh` | Script auxiliar para empaquetado de archivos ZIP del lado del servidor. | Rutas Relativas |
+| `prepare_deploy_win10.sh` | Empaqueta la webapp en un ZIP limpio (`agua.zip`), excluyendo carpetas de desarrollo (`v-ospv/scratch/`). | Rutas Relativas |
+
+> [!WARNING]
+> **FLUJO OBLIGATORIO DE DESPLIEGUE PHP**:
+> Los cambios aplicados a archivos PHP locales en el entorno de desarrollo `/opt/lampp/htdocs/agua` **NO se reflejan de inmediato en Host C** (`192.168.1.128`).
+> Es **MANDATORIO** ejecutar siempre los siguientes dos pasos en cadena tras cualquier modificación de archivos locales para que los cambios se suban y apliquen en producción:
+> 1. **Empaquetar**: Ejecutar `./docs-dev/pase-a-prod/aguad-osv3-2026/prepare_deploy_win10.sh`
+> 2. **Subir y Extraer**: Ejecutar `python3 docs-dev/pase-a-prod/aguad-osv3-2026/deploy_http.py`
 
 ### Protocolo de Ejecución de Localización (Pase a Prod)
 Para realizar una actualización o despliegue limpio del tenant en el Host C, se sigue esta secuencia:
 1. **Verificar Conectividad**: Ejecutar `bash check_connectivity.sh` para verificar el estado de red y puertos.
 2. **Generar Anonimización**: Ejecutar `python3 generate_anonymization.py` para generar el volcado SQL con datos limpios de Tlapa.
 3. **Inyectar Datos**: Ejecutar `bash run_anonymization.sh` para poblar/actualizar la base `aguayd_os` en Host C.
-4. **Desplegar Webapp**: Ejecutar `python3 docs-dev/pase-a-prod/aguad-osv3-2026/deploy_http.py` para subir los archivos de la webapp (incluyendo mockups y plantillas) al directorio `/ayd-os/` mediante HTTP, evitando fallas de FTP.
+4. **Empaquetar la Webapp**: Ejecutar `./docs-dev/pase-a-prod/aguad-osv3-2026/prepare_deploy_win10.sh` para empaquetar la app.
+5. **Desplegar Webapp**: Ejecutar `python3 docs-dev/pase-a-prod/aguad-osv3-2026/deploy_http.py` para subir y extraer los archivos al directorio `/ayd-os/` mediante HTTP.
+
+### 🛡️ Estándar de Exclusión de Marcas de Agua (Poka-Yoke Visual)
+* Queda estrictamente prohibida la visualización de logotipos, marcas de agua o sellos del comité legado de la **"Colonia del Maestro"** (`sellote.png`, `selloteAlfa1.png`, `selloteAlfa1_Final.png`) o del RFC original (`rfc.png`) en reportes o recibos locales e impresos de Tlapa.
+* Cualquier nueva vista, credencial o recibo de egresos e ingresos debe omitir/comentar estas marcas de agua en su maquetación.
+
 
 ---
 
