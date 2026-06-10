@@ -264,3 +264,6 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 > **Terminología de Sesión**:
 > - **Ground Truth**: Denominación del contexto maestro para **Claude**.
 > - **Runbook**: Denominación del contexto maestro (GEMINI.md + .agents/) para **Gemini**.
+
+## ⚠️ Reglas Especiales de Asistencia (Agentes IA)
+- **Pruebas de Navegador**: Queda estrictamente prohibido realizar pruebas de navegador (`browser_subagent`) de forma implícita (sin petición expresa del operador).
