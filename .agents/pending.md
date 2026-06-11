@@ -109,9 +109,10 @@ SELECT IFNULL(SUM(monto),0) FROM vw_ligacargos_pendientes WHERE numcontrato='405
 | 2026-06-05 | Estandarización UI Contratos y Credencial | ✅ PASADO — Orden de cargos derecha-a-izquierda más reciente primero, color naranja para Recargo, leyendas estilo etiqueta, botones de acción unificados y leyenda de credencial Tlapa de Comonfort sin botón Cerrar. |
 | 2026-06-05 | Robustecimiento de POC Voz (`vozweb.php`) | ✅ PASADO — Corrección de error de sintaxis en JS, adición de logs de errores PHP/JS en tiempo de ejecución (local/servidor) y panel de diagnóstico en UI. |
 | 2026-05-25 | GEMINI.md y docs actualizados + push repos | ✅ PASADO — Hitos 2026-05-23 a 2026-05-25 documentados, commit y push en agua (main) y agua_chatledger (master). |
+| 2026-06-10 | Ruteo y optimización PHP en n8n.caelitandem.lat | ✅ PASADO — Instalación de PHP 8.1 / PHP-FPM, optimización de recursos y ruteo selectivo de scripts en Nginx. |
 
 ---
 
-*Última actualización: 2026-06-05 — Robustecimiento de POC Voz — Antigravity*
+*Última actualización: 2026-06-10 — Ruteo y optimización PHP en n8n.caelitandem.lat — Antigravity/Gemini*
 
 
