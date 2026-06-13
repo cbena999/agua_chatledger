@@ -264,7 +264,7 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 *   **Aislamiento y Consolidación de Oferta**: Los archivos de desarrollo y demo (`v-ospv/`) y los de pase a producción (`aguad-osv3-2026/`) quedaron totalmente aislados de la rama `main`.
 *   **Flujo Mandatorio de Despliegue PHP**: Se documentó formalmente que para aplicar cambios PHP locales en Host C se debe ejecutar obligatoriamente el pipeline de empaquetado (`prepare_deploy_win10.sh`) y subida HTTP (`deploy_http.py`).
 
-**Última actualización**: 2026-06-09
+**Última actualización**: 2026-06-12
 
 
 
