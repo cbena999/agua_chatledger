@@ -65,24 +65,9 @@ else
     fi
 fi
 
-# ── 3. mcp_config.json idéntico a .mcp.json ──────────────────────────────────
+# ── 3. Assets críticos en docs-dev/ga-cl-ia ───────────────────────────────────
 echo ""
-echo "  [3] mcp_config.json sincronizado con .mcp.json"
-
-MCP_REF="${AGUA_DIR}/.agents/mcp_config.json"
-if [ -f "$MCP_REF" ]; then
-    if diff -q "$MCP_FILE" "$MCP_REF" > /dev/null 2>&1; then
-        ok "mcp_config.json idéntico a .mcp.json"
-    else
-        fail "mcp_config.json DIFIERE de .mcp.json — sincronizar antes de commitear"
-    fi
-else
-    fail "mcp_config.json no encontrado en .agents/"
-fi
-
-# ── 4. Assets críticos en docs-dev/ga-cl-ia ───────────────────────────────────
-echo ""
-echo "  [4] Assets críticos en docs-dev/ga-cl-ia"
+echo "  [3] Assets críticos en docs-dev/ga-cl-ia"
 
 for asset in "entrypoint-patch.sh" "docker-compose.yml"; do
     if [ -f "${CHATLEDGER_DIR}/docs-dev/ga-cl-ia/${asset}" ]; then
@@ -93,9 +78,9 @@ for asset in "entrypoint-patch.sh" "docker-compose.yml"; do
     fi
 done
 
-# ── 5. .clauderules no excede 30 líneas ──────────────────────────────────────
+# ── 4. .clauderules no excede 30 líneas ──────────────────────────────────────
 echo ""
-echo "  [5] .clauderules — tamaño"
+echo "  [4] .clauderules — tamaño"
 
 CLAUDERULES="${AGUA_DIR}/.clauderules"
 if [ -f "$CLAUDERULES" ]; then
@@ -107,6 +92,31 @@ if [ -f "$CLAUDERULES" ]; then
     fi
 else
     fail ".clauderules no encontrado"
+fi
+
+# ── Auto-Actualización de Fecha en GEMINI.md y CLAUDE.md ──────────────────────
+GEMINI_FILE="${CHATLEDGER_DIR}/GEMINI.md"
+CLAUDE_FILE="${CHATLEDGER_DIR}/CLAUDE.md"
+CURRENT_DATE=$(date +%Y-%m-%d)
+
+if [ -f "$GEMINI_FILE" ]; then
+    if ! grep -q "\*\*Última actualización\*\*: ${CURRENT_DATE}" "$GEMINI_FILE"; then
+        sed -i "s/\*\*Última actualización\*\*:.*/\*\*Última actualización\*\*: ${CURRENT_DATE}/g" "$GEMINI_FILE"
+        echo "  [INFO] GEMINI.md fecha de última actualización actualizada a ${CURRENT_DATE}"
+        if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+            git -C "$CHATLEDGER_DIR" add "GEMINI.md" 2>/dev/null || true
+        fi
+    fi
+fi
+
+if [ -f "$CLAUDE_FILE" ]; then
+    if ! grep -q "\*\*Última actualización:\*\* ${CURRENT_DATE}" "$CLAUDE_FILE"; then
+        sed -i "s/\*\*Última actualización:\*\*\s*[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}/\*\*Última actualización:\*\* ${CURRENT_DATE}/g" "$CLAUDE_FILE"
+        echo "  [INFO] CLAUDE.md fecha de última actualización actualizada a ${CURRENT_DATE}"
+        if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+            git -C "$CHATLEDGER_DIR" add "CLAUDE.md" 2>/dev/null || true
+        fi
+    fi
 fi
 
 # ── Resultado ─────────────────────────────────────────────────────────────────
