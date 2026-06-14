@@ -52,18 +52,17 @@ sync_repo() {
     # Entrar al repositorio
     cd "$repo_dir" || return 1
     
-    # Comprobar si hay cambios
-    if [ -z "$(git status --porcelain)" ]; then
-        echo "✅ [INFO] No hay cambios pendientes en este repositorio."
-        return 0
+    # Comprobar si hay cambios locales sin confirmar
+    if [ -n "$(git status --porcelain)" ]; then
+        echo "📦 Añadiendo archivos (git add .)..."
+        git add .
+        
+        echo "📝 Creando commit..."
+        # Si falla el commit (ej. pre-commit hook bloquea), no detenemos el script entero
+        git commit -m "$commit_msg" || { echo "⚠️ Advertencia al commitear. Saltando push."; return 1; }
+    else
+        echo "✅ [INFO] No hay cambios locales pendientes para confirmar."
     fi
-
-    echo "📦 Añadiendo archivos (git add .)..."
-    git add .
-    
-    echo "📝 Creando commit..."
-    # Si falla el commit (ej. pre-commit hook bloquea), no detenemos el script entero
-    git commit -m "$commit_msg" || { echo "⚠️ Advertencia al commitear. Saltando push."; return 1; }
     
     echo "🚀 Subiendo a GitHub (git push)..."
     # Intenta hacer push normal
