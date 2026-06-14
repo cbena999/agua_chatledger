@@ -34,10 +34,17 @@ redact_secrets() {
 sync_repo() {
     local repo_dir="$1"
     local commit_msg="$2"
+    local display_name="${3:-$(basename "$repo_dir")}"
+    
+    # Obtener la rama actual del repositorio
+    local branch_name="unknown"
+    if [ -d "$repo_dir/.git" ]; then
+        branch_name=$(git -C "$repo_dir" rev-parse --abbrev-ref HEAD 2>/dev/null || echo "unknown")
+    fi
     
     echo ""
     echo "=========================================================="
-    echo " 🔄 Procesando: $repo_dir"
+    echo " 🔄 Procesando: $display_name ($branch_name)"
     echo "=========================================================="
     
     # Validar que el directorio exista
@@ -84,9 +91,9 @@ DEFAULT_MSG="chore: auto-sync and secret sanitization across workspaces"
 MESSAGE="${1:-$DEFAULT_MSG}"
 
 # Ejecutar sincronización en el orden correcto
-sync_repo "$AGUA_CHATLEDGER_DIR" "$MESSAGE"
-sync_repo "$WWW_DIR" "$MESSAGE"
-sync_repo "$CAELITANDEM_DIR" "$MESSAGE"
+sync_repo "$AGUA_CHATLEDGER_DIR" "$MESSAGE" "agua_chatledger"
+sync_repo "$WWW_DIR" "$MESSAGE" "demos-oferta"
+sync_repo "$CAELITANDEM_DIR" "$MESSAGE" "caelitandem_home"
 
 echo ""
 echo "🎉 ¡Flujo completado! Todos los repositorios han sido sincronizados de forma segura."
