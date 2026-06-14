@@ -3278,7 +3278,7 @@ I'm focusing now on how to integrate the Personal Access Token (PAT) seamlessly 
 
 ## User Request
 
-git -C /home/carlos/GitHub/caelitandem_home/restaurantb/www/ remote add origin https://cbenavides:<REDACTED_PAT>@github.com/cbenavides/demos-oferta.git
+git -C /home/carlos/GitHub/caelitandem_home/restaurantb/www/ remote add origin https://cbenavides:[REDACTED_TOKEN]@github.com/cbenavides/demos-oferta.git
 error: remoto origin ya existe.
 
 
@@ -6089,7 +6089,7 @@ I'm focusing now on how to integrate the Personal Access Token (PAT) seamlessly 
 
 ## User Request
 
-git -C /home/carlos/GitHub/caelitandem_home/restaurantb/www/ remote add origin https://cbenavides:<REDACTED_PAT>@github.com/cbenavides/demos-oferta.git
+git -C /home/carlos/GitHub/caelitandem_home/restaurantb/www/ remote add origin https://cbenavides:[REDACTED_TOKEN]@github.com/cbenavides/demos-oferta.git
 error: remoto origin ya existe.
 
 
@@ -7358,7 +7358,7 @@ I'm making sure to prioritize the use of specialized tools, steering clear of ge
 
 ## User Request
 
-git -C /home/carlos/GitHub/caelitandem_home/restaurantb/www/ remote add origin https://cbenavides:<REDACTED_PAT>@github.com/cbenavides/demos-oferta.git
+git -C /home/carlos/GitHub/caelitandem_home/restaurantb/www/ remote add origin https://cbenavides:[REDACTED_TOKEN]@github.com/cbenavides/demos-oferta.git
 error: remoto origin ya existe.
 
 
