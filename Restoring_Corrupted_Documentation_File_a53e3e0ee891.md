@@ -7,7 +7,7 @@
 | **Trajectory ID** | `de780129-773c-466d-8f4d-d38006bc9e8e` |
 | **Cascade ID** | `c23fd704-b153-4653-a5e0-a53e3e0ee891` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 193 |
+| **Total Steps** | 194 |
 | **Started** | 13 June 2026, 3:04 pm |
 | **Completed** | 14 June 2026, 6:20 pm |
 
@@ -146,161 +146,9 @@
 
 ---
 
-<details>
-<summary>System Message</summary>
-
-The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
-
-<EPHEMERAL_MESSAGE>
-<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
-</EPHEMERAL_MESSAGE>
-
-**Triggered Heuristics:** bash_command_reminder
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Prioritizing Tool Usage**
-
-I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools tailored to particular tasks, like viewing files. This strategy promises a more targeted and less error-prone approach to problem-solving, which I will continue to refine and implement moving forward.
-
-
-**Refining Tool Application**
-
-I am now focusing on refining tool application based on very specific restrictions. I'm prioritizing direct tool usage, avoiding nested commands where alternatives exist. I'm focusing on ensuring direct tool application and a systematic approach to tool selection, for a targeted and efficient workflow. I will ensure adherence to strict rules for file creation, searching, and viewing, while listing and replacing are also optimized.
-
-
-**Analyzing Replacement Strategy**
-
-I'm now prioritizing the multi_replace_file_content tool, given its safety and adherence to constraints. I'm preparing ReplacementChunks for this, focusing on exact whitespace and the multiple instances of the phrase "La captura primaria es por voz dictada con diadema" to ensure I get all matches. I've reevaluated sed usage, as it's specifically prohibited.
-
-
-**Adjusting Multiple Replacements**
-
-I'm now implementing the `AllowMultiple` parameter effectively. Since `multi_replace_file_content` handles this within each chunk, I'm focusing on the chunks themselves. For instance, my latest chunk modifies HTML content, focusing on an interaction description and adding details about PWA modification and order submission. This targeted approach ensures accurate and efficient text replacements.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `Especificacion_Funcional_Comandas_VOSK-html.html`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 7.620364836s
-- **Model:** Gemini 3.1 Pro (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L569-584)</summary>
-
-**Path:** `Unknown file`
-
-```
-<p style="position:absolute;top:392px;left:97px;white-space:nowrap" class="ft116"><i>[numero]&#34;</i></p>
-<p style="position:absolute;top:372px;left:257px;white-space:nowrap" class="ft1111">Cambia&#160;la&#160;comanda&#160;de&#160;mesa&#160;[numero]&#160;de<br/>&#34;pendiente&#34;&#160;a&#160;&#34;en_preparacion&#34;</p>
-<p style="position:absolute;top:371px;left:593px;white-space:nowrap" class="ft1112"><i>&#34;Orden&#160;de&#160;mesa&#160;[numero]&#160;en<br/>preparacion&#34;</i></p>
-<p style="position:absolute;top:428px;left:97px;white-space:nowrap" class="ft1113"><i>&#34;Preparar<br/>siguiente&#34;</i></p>
-<p style="position:absolute;top:430px;left:257px;white-space:nowrap" class="ft1114">Toma&#160;&#160;la&#160;&#160;comanda&#160;&#160;mas&#160;&#160;antigua&#160;&#160;pendiente<br/>(FIFO)&#160;y&#160;la&#160;marca&#160;como&#160;&#34;en_preparacion&#34;</p>
-<p style="position:absolute;top:428px;left:593px;white-space:nowrap" class="ft116"><i>&#34;Siguiente&#160;</i></p>
-<p style="position:absolute;top:428px;left:689px;white-space:nowrap" class="ft116"><i>orden:&#160;</i></p>
-<p style="position:absolute;top:428px;left:760px;white-space:nowrap" class="ft116"><i>mesa</i></p>
-<p style="position:absolute;top:448px;left:593px;white-space:nowrap" class="ft116"><i>[numero]:&#160;[productos]&#34;</i></p>
-<p style="position:absolute;top:485px;left:97px;white-space:nowrap" class="ft116"><i>&#34;Listo&#160;</i></p>
-<p style="position:absolute;top:485px;left:196px;white-space:nowrap" class="ft116"><i>mesa</i></p>
-<p style="position:absolute;top:506px;left:97px;white-space:nowrap" class="ft116"><i>[numero]&#34;</i></p>
-<p style="position:absolute;top:486px;left:257px;white-space:nowrap" class="ft1111">Marca&#160;&#160;la&#160;&#160;comanda&#160;&#160;de&#160;&#160;mesa&#160;&#160;[numero]<br/>como&#160;&#34;listo&#34;</p>
-<p style="position:absolute;top:485px;left:593px;white-space:nowrap" class="ft1112"><i>&#34;Orden&#160;&#160;de&#160;&#160;mesa&#160;&#160;[numero]<br/>marcada&#160;como&#160;lista&#34;</i></p>
-<p style="position:absolute;top:542px;left:97px;white-space:nowrap" class="ft1112"><i>&#34;Recuperar&#160;&#160;mesa<br/>[numero]&#34;</i></p>
-<p style="position:absolute;top:544px;left:257px;white-space:nowrap" class="ft117">Revierte&#160;</p>
-```
-
-</details>
-
----
-
-<details>
-<summary>System Message</summary>
-
-The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
-
-<EPHEMERAL_MESSAGE>
-<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
-</EPHEMERAL_MESSAGE>
-
-**Triggered Heuristics:** bash_command_reminder
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Prioritizing Tool Usage**
-
-I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools like 'view_file' directly, rather than resorting to broader, less direct methods. I'm aiming for targeted actions.
-
-
-**Refining Tool Choices**
-
-I'm now prioritizing direct tool usage, avoiding generic commands. I will replace the specified content in the HTML file using `multi_replace_file_content` to apply all of the required changes. I'll break it down into chunks for precise application. I'm focusing on efficiency and targeted actions.
-
-
-**Implementing Specific HTML Edits**
-
-I'm now implementing the specified HTML modifications. I plan to use `multi_replace_file_content` with the provided target and replacement strings. I'll make the changes in two chunks. The first chunk focuses on a direct text replacement. The second chunk inserts additional content, ensuring it's positioned as requested. I'm focusing on preserving the original structure of the document while inserting the updates.
-
-
-**Applying Specific Modifications**
-
-I'm now focusing on implementing the final HTML updates using `multi_replace_file_content`. I'll first address the target string concerning order state changes. I will then manage the replacement that addresses taking the oldest pending order (FIFO), now as "en_preparacion". This is the final step for this round of modifications.
-
-
-**Finalizing Content Updates**
-
-I'm now implementing the final HTML updates using `multi_replace_file_content`. Specifically, I'll update the "listo" state notification and insert a push notification and voice message. Then, I'll address and remove the coordination description. These are the last modifications for this round.
-
-
-**Updating Specific Text Sections**
-
-I'm now focusing on directly updating specific text sections within the HTML. My approach involves targeted replacements for the identified lines. I'll use `multi_replace_file_content` again, carefully applying the new content to ensure accuracy and maintain the HTML structure's integrity.
-
-
-**Implementing Final Updates**
-
-I'm now implementing the last HTML updates. I'll use `multi_replace_file_content` to make the final revisions. First, I'll update the "Gracias" section with the new URL. Next, I'll update the waiter notification in the PWA with push, voice, and headset details. These steps complete the current round of modifications.
-
-
-
-
-### Actions
-
-**Tool:** `multi_replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 33.143797351s
-- **Model:** Gemini 3.1 Pro (High)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 13 June 2026, 3:08 pm
 
 ---
@@ -3390,6 +3238,799 @@ I'm currently assessing the utility of the available tools. I'm focusing on how 
 <summary>Metadata</summary>
 
 - **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+<title>Especificacion Funcional y Reglas de Negocio - Sistema de Comandas VOSK</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta name="generator" content="pdftohtml 0.36"/>
+<meta name="date" content="2026-06-13T04:09:25+00:00"/>
+<style type="text/css">
+<!--
+.xflip {
+    -moz-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: fliph;
+}
+.yflip {
+    -moz-transform: scaleY(-1);
+    -webkit-transform: scaleY(-1);
+    -o-transform: scaleY(-1);
+    transform: scaleY(-1);
+    filter: flipv;
+}
+.xyflip {
+    -moz-transform: scaleX(-1) scaleY(-1);
+    -webkit-transform: scaleX(-1) scaleY(-1);
+    -o-transform: scaleX(-1) scaleY(-1);
+    transform: scaleX(-1) scaleY(-1);
+    filter: fliph + flipv;
+}
+-->
+</style>
+</head>
+<body bgcolor="#A0A0A0" vlink="blue" link="blue">
+<a name=1></a><b>Especificacion&#160;&#160;Funcional&#160;&#160;y&#160;&#160;Reglas</b><br/>
+<b>de&#160;Negocio</b><br/>
+Sistema&#160;de&#160;Comandas&#160;por&#160;Voz&#160;con&#160;Reconocimiento&#160;Offline&#160;VOSK<br/>Interfaz&#160;100%&#160;Dictada&#160;por&#160;Voz&#160;para&#160;Cocina&#160;y&#160;Comedor<br/>
+<b>Documento:</b>&#160;EF-Comandas-VOSK-v2.0<br/>
+<b>Fecha:</b>&#160;Junio&#160;2026<br/>
+<b>Revision:</b>&#160;v2.0&#160;(Modificacion&#160;de&#160;Alcance)<br/>
+<b>Plataforma:</b>&#160;PHP&#160;/&#160;MariaDB&#160;/&#160;Ubuntu&#160;22.04&#160;LTS<br/>
+Documento&#160;de&#160;especificacion&#160;funcional&#160;con&#160;reglas&#160;de&#160;negocio.&#160;Incluye&#160;modificaciones&#160;de&#160;alcance:&#160;interfaz<br/>100%&#160;por&#160;voz&#160;para&#160;cocineros&#160;y&#160;meseros&#160;mediante&#160;diademas,&#160;sistema&#160;KDS&#160;con&#160;altavoz,&#160;y&#160;cierre&#160;de&#160;cuenta<br/>dictado&#160;por&#160;voz.<br/>
+<hr/>
+<a name=2></a><b>Indice&#160;de&#160;Contenidos</b><br/>
+<a href="clean_test.html#3"><b>1.&#160;Resumen&#160;Ejecutivo</b></a><br/>
+<a href="clean_test.html#4"><b>2.&#160;Alcance,&#160;Limites&#160;y&#160;Usuarios</b></a><br/>
+<a href="clean_test.html#4">2.1.&#160;Alcance&#160;Funcional</a><br/>
+<a href="clean_test.html#5">2.2.&#160;Limites&#160;Explicitos&#160;del&#160;Sistema&#160;(Fuera&#160;de&#160;Alcance)</a><br/>
+<a href="clean_test.html#5">2.3.&#160;Usuarios&#160;y&#160;Dispositivos</a><br/>
+<a href="clean_test.html#6"><b>3.&#160;Especificaciones&#160;Funcionales</b></a><br/>
+<a href="clean_test.html#6">3.1.&#160;Modulo&#160;de&#160;Captura&#160;por&#160;Voz&#160;del&#160;Mesero</a><br/>
+<a href="clean_test.html#8">3.2.&#160;Modulo&#160;de&#160;Registro&#160;de&#160;Comandas</a><br/>
+<a href="clean_test.html#10">3.3.&#160;Modulo&#160;de&#160;Cocina:&#160;Atencion&#160;100%&#160;por&#160;Voz</a><br/>
+<a href="clean_test.html#13">3.4.&#160;Modulo&#160;de&#160;Cancelaciones&#160;y&#160;Modificaciones</a><br/>
+<a href="clean_test.html#14">3.5.&#160;Modulo&#160;de&#160;Cierre&#160;de&#160;Cuenta</a><br/>
+<a href="clean_test.html#16">3.6.&#160;Modulo&#160;de&#160;Administracion</a><br/>
+<a href="clean_test.html#17"><b>4.&#160;Interacciones&#160;Dictadas&#160;del&#160;Cocinero</b></a><br/>
+<a href="clean_test.html#20"><b>5.&#160;Interfaces&#160;Visuales&#160;y&#160;Auditivas</b></a><br/>
+<a href="clean_test.html#20">5.1.&#160;Pantalla&#160;Banner&#160;de&#160;Cocina</a><br/>
+<a href="clean_test.html#21">5.2.&#160;Notificaciones&#160;por&#160;Voz&#160;(TTS)</a><br/>
+<a href="clean_test.html#23"><b>6.&#160;Flujos&#160;de&#160;Trabajo&#160;Completos</b></a><br/>
+<a href="clean_test.html#23">6.1.&#160;Flujo&#160;de&#160;Toma&#160;de&#160;Comanda</a><br/>
+<a href="clean_test.html#23">6.2.&#160;Flujo&#160;de&#160;Atencion&#160;en&#160;Cocina</a><br/>
+<a href="clean_test.html#23">6.3.&#160;Flujo&#160;de&#160;Cancelacion&#160;Parcial</a><br/>
+<a href="clean_test.html#24">6.4.&#160;Flujo&#160;de&#160;Cierre&#160;de&#160;Cuenta</a><br/>
+<a href="clean_test.html#24"><b>7.&#160;Reglas&#160;de&#160;Negocio&#160;Consolidadas</b></a><br/>
+<a href="clean_test.html#27"><b>8.&#160;Glosario&#160;de&#160;Terminos</b></a><br/>
+<hr/>
+<a name=3></a>1.&#160;Resumen&#160;Ejecutivo<br/>
+<b>1.&#160;Resumen&#160;Ejecutivo</b><br/>
+El&#160;&#160;presente&#160;&#160;documento&#160;&#160;establece&#160;&#160;las&#160;&#160;<b>especificaciones&#160;&#160;funcionales&#160;&#160;y&#160;&#160;reglas&#160;&#160;de&#160;&#160;negocio<br/></b>para&#160;el&#160;desarrollo&#160;de&#160;un&#160;sistema&#160;de&#160;comandas&#160;por&#160;reconocimiento&#160;de&#160;voz&#160;offline,&#160;basado&#160;en<br/>el&#160;&#160;motor&#160;&#160;<b>VOSK</b>,&#160;&#160;orientado&#160;&#160;a&#160;&#160;restaurantes&#160;&#160;y&#160;&#160;centros&#160;&#160;de&#160;&#160;consumo&#160;&#160;que&#160;&#160;operan&#160;&#160;con<br/>infraestructura&#160;frugal.<br/>
+El&#160;&#160;paradigma&#160;&#160;central&#160;&#160;del&#160;&#160;sistema&#160;&#160;es&#160;&#160;que&#160;&#160;<b>tanto&#160;&#160;meseros&#160;&#160;como&#160;&#160;cocineros&#160;&#160;operan&#160;&#160;con<br/>diademas&#160;&#160;de&#160;&#160;manos&#160;&#160;libres</b>,&#160;&#160;interactuando&#160;&#160;con&#160;&#160;el&#160;&#160;sistema&#160;&#160;integramente&#160;&#160;por&#160;&#160;comandos&#160;&#160;de<br/>voz&#160;dictados&#160;en&#160;lenguaje&#160;natural&#160;espanol.&#160;El&#160;mesero&#160;captura&#160;las&#160;ordenes&#160;desde&#160;su&#160;telefono<br/>Android;&#160;&#160;el&#160;&#160;cocinero&#160;&#160;recibe&#160;&#160;las&#160;&#160;comandas&#160;&#160;en&#160;&#160;una&#160;&#160;pantalla&#160;&#160;banner&#160;&#160;visible&#160;&#160;en&#160;&#160;cocina&#160;&#160;y<br/>escucha&#160;&#160;cada&#160;&#160;orden&#160;&#160;anunciada&#160;&#160;por&#160;&#160;un&#160;&#160;<b>altavoz&#160;&#160;local</b>,&#160;&#160;gestionando&#160;&#160;la&#160;&#160;preparacion&#160;&#160;y&#160;&#160;los<br/>estados&#160;<b>unicamente&#160;mediante&#160;dictados&#160;de&#160;voz</b>&#160;a&#160;su&#160;diadema.&#160;No&#160;existe&#160;interaccion&#160;tactil<br/>ni&#160;por&#160;clic&#160;para&#160;el&#160;personal&#160;operativo.<br/>
+Las&#160;&#160;comandas&#160;&#160;transcritas&#160;&#160;se&#160;&#160;registran&#160;&#160;en&#160;&#160;un&#160;&#160;<b>servidor&#160;&#160;local</b>&#160;&#160;(PHP/MariaDB&#160;&#160;sobre&#160;&#160;Ubuntu<br/>22.04&#160;&#160;LTS)&#160;&#160;con&#160;&#160;los&#160;&#160;datos&#160;&#160;minimos&#160;&#160;obligatorios:&#160;&#160;numero&#160;&#160;de&#160;&#160;mesa,&#160;&#160;hora&#160;&#160;de&#160;&#160;captura&#160;&#160;e<br/>identificador&#160;&#160;del&#160;&#160;mesero.&#160;&#160;El&#160;&#160;sistema&#160;&#160;<b>no&#160;&#160;procesa&#160;&#160;metodos&#160;&#160;de&#160;&#160;pago</b>:&#160;&#160;el&#160;&#160;cobro&#160;&#160;se&#160;&#160;gestiona<br/>externamente,&#160;y&#160;el&#160;cierre&#160;de&#160;cuenta&#160;se&#160;activa&#160;por&#160;dictado&#160;del&#160;mesero,&#160;generando&#160;un&#160;ticket<br/>impreso&#160;con&#160;el&#160;total&#160;calculado.<br/>
+<b>Principios&#160;Fundamentales&#160;del&#160;Sistema&#160;(v2.0)</b><br/>
+<b>Interfaz&#160;&#160;100%&#160;&#160;voz</b>&#160;&#160;para&#160;&#160;meseros&#160;&#160;y&#160;&#160;cocineros&#160;&#160;mediante&#160;&#160;diademas.&#160;&#160;Sin&#160;&#160;pantallas<br/>tactiles&#160;ni&#160;raton.<br/><b>Reconocimiento&#160;&#160;offline</b>&#160;&#160;con&#160;&#160;VOSK/WebAssembly:&#160;&#160;el&#160;&#160;audio&#160;&#160;nunca&#160;&#160;sale&#160;&#160;del<br/>dispositivo.<br/><b>Pantalla&#160;banner&#160;+&#160;altavoz&#160;en&#160;cocina</b>:&#160;las&#160;ordenes&#160;se&#160;ven&#160;y&#160;se&#160;escuchan.<br/><b>Metodos&#160;de&#160;pago&#160;NO&#160;estan&#160;en&#160;alcance</b>:&#160;el&#160;sistema&#160;calcula&#160;totales&#160;pero&#160;no&#160;procesa<br/>transacciones&#160;financieras.<br/><b>Cancelaciones&#160;por&#160;voz</b>:&#160;el&#160;mesero&#160;dicta&#160;cancelaciones;&#160;el&#160;cocinero&#160;responde&#160;si&#160;es<br/>posible.<br/><b>Cierre&#160;de&#160;cuenta&#160;por&#160;voz</b>:&#160;el&#160;mesero&#160;dicta&#160;el&#160;cierre;&#160;el&#160;sistema&#160;imprime&#160;el&#160;ticket.<br/>
+3<br/>
+<hr/>
+<a name=4></a>2.&#160;Alcance,&#160;Limites&#160;y&#160;Usuarios<br/>
+<b>2.&#160;Alcance,&#160;Limites&#160;y&#160;Usuarios</b><br/>
+<b>2.1.&#160;Alcance&#160;Funcional</b><br/>
+El&#160;sistema&#160;abarca&#160;las&#160;siguientes&#160;funcionalidades&#160;organizadas&#160;por&#160;modulo:<br/>
+<b>Tabla&#160;1.&#160;Alcance&#160;Funcional&#160;del&#160;Sistema&#160;(v2.0)</b><br/>
+<b>Modulo</b><br/>
+<b>Funcionalidad</b><br/>
+<b>Actor</b><br/>
+Captura&#160;<br/>
+por<br/>
+Dictado&#160;de&#160;comandas&#160;completas&#160;con&#160;numero&#160;de&#160;mesa<br/>
+Mesero<br/>
+Voz<br/>
+Captura&#160;<br/>
+por<br/>
+Gramatica&#160;restringida&#160;al&#160;catalogo&#160;del&#160;restaurante<br/>
+Mesero<br/>
+Voz<br/>
+Registro<br/>
+Persistencia&#160;&#160;de&#160;&#160;comanda&#160;&#160;con&#160;&#160;mesa,&#160;&#160;hora,&#160;&#160;mesero&#160;&#160;y<br/>
+Sistema<br/>
+productos<br/>
+Cocina&#160;(KDS)<br/>
+Visualizacion&#160;&#160;banner&#160;&#160;de&#160;&#160;ordenes&#160;&#160;pendientes&#160;&#160;(pantalla<br/>
+Cocinero<br/>
+externa)<br/>
+Cocina&#160;(TTS)<br/>
+Anuncio&#160;de&#160;cada&#160;orden&#160;por&#160;altavoz&#160;al&#160;llegar&#160;a&#160;cocina<br/>
+Sistema<br/>
+Cocina&#160;(Voz)<br/>
+Gestion&#160;de&#160;estados&#160;(preparar,&#160;listo,&#160;recuperar)&#160;por&#160;dictado<br/>
+Cocinero<br/>
+Cocina&#160;(Voz)<br/>
+Escucha&#160;de&#160;cancelaciones&#160;en&#160;diadema&#160;del&#160;cocinero<br/>
+Sistema/Cocinero<br/>
+Cancelaciones<br/>
+Cancelacion&#160;parcial&#160;o&#160;total&#160;de&#160;una&#160;orden&#160;por&#160;dictado&#160;del<br/>
+Mesero/Cocinero<br/>
+mesero<br/>
+Cierre<br/>
+Cierre&#160;&#160;de&#160;&#160;cuenta&#160;&#160;por&#160;&#160;dictado&#160;&#160;del&#160;&#160;mesero,&#160;&#160;calculo&#160;&#160;e<br/>
+Mesero<br/>
+impresion&#160;de&#160;ticket<br/>
+Admin<br/>
+Gestion&#160;de&#160;catalogo,&#160;usuarios&#160;y&#160;reportes&#160;basicos<br/>
+Administrador<br/>
+4<br/>
+<hr/>
+<a name=5></a>2.&#160;Alcance,&#160;Limites&#160;y&#160;Usuarios<br/>
+<b>2.2.&#160;Limites&#160;Explicitos&#160;del&#160;Sistema&#160;(Fuera&#160;de&#160;Alcance)</b><br/>
+<b>Funcionalidades&#160;Explicitamente&#160;Excluidas&#160;del&#160;Alcance</b><br/>
+<b>Procesamiento&#160;de&#160;metodos&#160;de&#160;pago</b>:&#160;El&#160;sistema&#160;NO&#160;integra&#160;ni&#160;procesa&#160;pagos&#160;con<br/>tarjeta,&#160;&#160;efectivo,&#160;&#160;transferencia,&#160;&#160;ni&#160;&#160;ningun&#160;&#160;medio&#160;&#160;de&#160;&#160;pago.&#160;&#160;El&#160;&#160;cajero&#160;&#160;cobra<br/>externamente&#160;&#160;(terminal&#160;&#160;bancaria&#160;&#160;independiente,&#160;&#160;caja&#160;&#160;fisica,&#160;&#160;etc.).&#160;&#160;El&#160;&#160;sistema&#160;&#160;solo<br/>calcula&#160;el&#160;total&#160;y&#160;genera&#160;el&#160;ticket.<br/><b>Interaccion&#160;tactil&#160;o&#160;por&#160;clic&#160;para&#160;cocineros</b>:&#160;El&#160;cocinero&#160;NO&#160;toca&#160;la&#160;pantalla&#160;ni<br/>usa&#160;raton.&#160;Toda&#160;su&#160;interaccion&#160;ocurre&#160;por&#160;comandos&#160;de&#160;voz&#160;dictados&#160;a&#160;su&#160;diadema.<br/>La&#160;pantalla&#160;es&#160;solo&#160;informativa.<br/><b>Interaccion&#160;tactil&#160;para&#160;toma&#160;de&#160;comanda</b>:&#160;El&#160;mesero&#160;puede&#160;ver&#160;confirmacion&#160;en<br/>pantalla,&#160;pero&#160;la&#160;captura&#160;primaria&#160;es&#160;por&#160;voz&#160;dictada&#160;con&#160;diadema.<br/><b>Facturacion&#160;&#160;electronica&#160;&#160;(CFDI)</b>:&#160;&#160;No&#160;&#160;se&#160;&#160;generan&#160;&#160;facturas&#160;&#160;fiscales.&#160;&#160;Solo&#160;&#160;tickets&#160;&#160;de<br/>consumo&#160;internos.<br/><b>Inventario&#160;detallado</b>:&#160;El&#160;sistema&#160;descontea&#160;productos&#160;vendidos&#160;pero&#160;no&#160;gestiona<br/>compras,&#160;proveedores,&#160;ni&#160;stock&#160;minimo.<br/><b>Notificaciones&#160;&#160;a&#160;&#160;clientes</b>:&#160;&#160;No&#160;&#160;se&#160;&#160;envian&#160;&#160;mensajes&#160;&#160;SMS,&#160;&#160;WhatsApp&#160;&#160;ni&#160;&#160;push&#160;&#160;a&#160;&#160;los<br/>comensales.<br/>
+<b>2.3.&#160;Usuarios&#160;y&#160;Dispositivos</b><br/>
+<b>Tabla&#160;2.&#160;Perfiles&#160;de&#160;Usuarios&#160;y&#160;Dispositivos</b><br/>
+<b>Dispositivo</b><br/>
+<b>Rol</b><br/>
+<b>Dispositivo&#160;Principal</b><br/>
+<b>Interfaz</b><br/>
+<b>Secundario</b><br/>
+<b>Mesero</b><br/>
+Telefono&#160;&#160;Android&#160;&#160;con<br/>
+---<br/>
+Voz&#160;&#160;dictada&#160;&#160;(primaria)&#160;&#160;+<br/>
+diadema&#160;Bluetooth<br/>
+pantalla&#160;&#160;PWA&#160;&#160;(confirmacion<br/>visual)<br/>
+<b>Cocinero</b><br/>
+Diadema&#160;<br/>
+Bluetooth<br/>
+Pantalla&#160;&#160;banner&#160;&#160;en<br/>
+Voz&#160;dictada&#160;100%.&#160;Sin&#160;tactil,&#160;sin<br/>
+conectada&#160;&#160;a&#160;&#160;estacion<br/>
+cocina&#160;(solo&#160;lectura)<br/>
+clic,&#160;sin&#160;teclado.<br/>
+base<br/>
+<b>Cajero</b><br/>
+Pantalla&#160;&#160;de&#160;&#160;caja&#160;&#160;(PC&#160;&#160;o<br/>
+---<br/>
+Visual:&#160;lista&#160;de&#160;mesas&#160;activas&#160;y<br/>
+tablet)<br/>
+totales.&#160;No&#160;procesa&#160;pagos.<br/>
+5<br/>
+<hr/>
+<a name=6></a>3.&#160;Especificaciones&#160;Funcionales<br/>
+<b>Administrador</b><br/>
+PC&#160;de&#160;escritorio&#160;o&#160;laptop<br/>
+---<br/>
+Web&#160;administrativa&#160;con&#160;raton&#160;y&#160;teclado<br/>
+<b>Reglas&#160;de&#160;Negocio:&#160;Usuarios&#160;y&#160;Dispositivos</b><br/>
+<b>RN-2.1</b>:&#160;&#160;Todo&#160;&#160;mesero&#160;&#160;y&#160;&#160;todo&#160;&#160;cocinero&#160;&#160;deben&#160;&#160;contar&#160;&#160;con&#160;&#160;una&#160;&#160;diadema&#160;&#160;de&#160;&#160;manos<br/>libres&#160;&#160;asignada&#160;&#160;y&#160;&#160;funcional&#160;&#160;para&#160;&#160;operar&#160;&#160;el&#160;&#160;sistema.&#160;&#160;Sin&#160;&#160;diadema&#160;&#160;no&#160;&#160;hay<br/>interaccion.<br/><b>RN-2.2</b>:&#160;Cada&#160;mesero&#160;opera&#160;con&#160;su&#160;propio&#160;telefono&#160;Android&#160;y&#160;su&#160;propia&#160;sesion&#160;de<br/>usuario.&#160;No&#160;se&#160;comparten&#160;credenciales.<br/><b>RN-2.3</b>:&#160;&#160;El&#160;&#160;cocinero&#160;&#160;interactua&#160;&#160;exclusivamente&#160;&#160;por&#160;&#160;voz.&#160;&#160;La&#160;&#160;pantalla&#160;&#160;banner&#160;&#160;es<br/>informativa&#160;y&#160;no&#160;admite&#160;entrada&#160;tactil,&#160;clic&#160;ni&#160;teclado.<br/><b>RN-2.4</b>:&#160;El&#160;sistema&#160;no&#160;admite&#160;interaccion&#160;por&#160;parte&#160;del&#160;cocinero&#160;si&#160;no&#160;hay&#160;diadema<br/>conectada&#160;y&#160;funcionando.<br/><b>RN-2.5</b>:&#160;&#160;El&#160;&#160;cajero&#160;&#160;es&#160;&#160;un&#160;&#160;rol&#160;&#160;de&#160;&#160;solo&#160;&#160;visualizacion.&#160;&#160;No&#160;&#160;ingresa&#160;&#160;datos&#160;&#160;al&#160;&#160;sistema&#160;&#160;ni<br/>modifica&#160;estados&#160;de&#160;comandas.<br/>
+<b>3.&#160;Especificaciones&#160;Funcionales</b><br/>
+<b>3.1.&#160;Modulo&#160;de&#160;Captura&#160;por&#160;Voz&#160;del&#160;Mesero</b><br/>
+El&#160;mesero&#160;utiliza&#160;su&#160;telefono&#160;Android&#160;con&#160;una&#160;<b>diadema&#160;Bluetooth&#160;de&#160;manos&#160;libres</b>&#160;para<br/>dictar&#160;las&#160;ordenes.&#160;La&#160;interfaz&#160;de&#160;la&#160;PWA&#160;muestra&#160;confirmacion&#160;visual&#160;del&#160;texto&#160;transcrito,<br/>pero&#160;la&#160;captura&#160;primaria&#160;es&#160;siempre&#160;por&#160;voz.<br/>
+<b>3.1.1.&#160;Proceso&#160;de&#160;Dictado&#160;de&#160;Comanda</b><br/>
+1.&#160;<b>Inicio&#160;de&#160;sesion</b>:&#160;El&#160;mesero&#160;accede&#160;a&#160;la&#160;PWA&#160;e&#160;inicia&#160;sesion&#160;con&#160;sus&#160;credenciales.<br/>2.&#160;<b>Seleccion&#160;de&#160;mesa</b>:&#160;En&#160;la&#160;pantalla&#160;principal&#160;selecciona&#160;el&#160;numero&#160;de&#160;mesa&#160;a&#160;atender.<br/>3.&#160;<b>Activacion&#160;de&#160;dictado</b>:&#160;Presiona&#160;y&#160;mantiene&#160;el&#160;boton&#160;grande&#160;con&#160;icono&#160;de&#160;microfono&#160;en<br/>
+la&#160;PWA.&#160;El&#160;sistema&#160;emite&#160;un&#160;tono&#160;de&#160;confirmacion&#160;en&#160;la&#160;diadema&#160;indicando&#160;que&#160;el&#160;canal<br/>de&#160;audio&#160;esta&#160;abierto.<br/>
+4.&#160;<b>Dictado</b>:&#160;&#160;El&#160;&#160;mesero&#160;&#160;habla&#160;&#160;de&#160;&#160;forma&#160;&#160;natural:&#160;&#160;<i>&#34;Mesa&#160;&#160;cinco,&#160;&#160;dos&#160;&#160;tacos&#160;&#160;al&#160;&#160;pastor&#160;&#160;con&#160;&#160;todo,</i><br/>
+<i>una&#160;&#160;coca&#160;&#160;de&#160;&#160;medio&#160;&#160;y&#160;&#160;un&#160;&#160;agua&#160;&#160;de&#160;&#160;horchata&#34;</i>.&#160;&#160;El&#160;&#160;texto&#160;&#160;se&#160;&#160;muestra&#160;&#160;en&#160;&#160;tiempo&#160;&#160;real&#160;&#160;en&#160;&#160;la<br/>pantalla.<br/>
+6<br/>
+<hr/>
+<a name=7></a>3.&#160;Especificaciones&#160;Funcionales<br/>
+5.&#160;<b>Confirmacion</b>:&#160;Al&#160;soltar&#160;el&#160;boton,&#160;VOSK&#160;finaliza&#160;la&#160;transcripcion.&#160;El&#160;sistema&#160;muestra&#160;los<br/>
+productos&#160;identificados&#160;del&#160;catalogo&#160;con&#160;cantidades&#160;y&#160;precios.<br/>
+6.&#160;<b>Envio</b>:&#160;El&#160;mesero&#160;revisa&#160;y&#160;presiona&#160;&#34;Enviar&#34;.&#160;La&#160;comanda&#160;se&#160;transmite&#160;al&#160;servidor&#160;local.<br/>7.&#160;<b>Confirmacion&#160;&#160;auditiva</b>:&#160;&#160;El&#160;&#160;sistema&#160;&#160;emite&#160;&#160;por&#160;&#160;la&#160;&#160;diadema:&#160;&#160;<i>&#34;Comanda&#160;&#160;de&#160;&#160;mesa&#160;&#160;cinco</i><br/>
+<i>enviada&#34;</i>.<br/>
+<b>3.1.2.&#160;Dictados&#160;Especiales&#160;del&#160;Mesero</b><br/>
+Ademas&#160;&#160;de&#160;&#160;comandas&#160;&#160;normales,&#160;&#160;el&#160;&#160;mesero&#160;&#160;puede&#160;&#160;dictar&#160;&#160;los&#160;&#160;siguientes&#160;&#160;comandos<br/>especiales:<br/>
+<b>Tabla&#160;3.&#160;Comandos&#160;de&#160;Voz&#160;Especiales&#160;del&#160;Mesero</b><br/>
+<b>Comando&#160;Dictado</b><br/>
+<b>Accion&#160;del&#160;Sistema</b><br/>
+<b>Respuesta&#160;Auditiva</b><br/>
+<i>&#34;Cancelar</i><br/>
+Envia&#160;&#160;solicitud&#160;&#160;de&#160;&#160;cancelacion&#160;&#160;a<br/>
+<i>&#34;Solicitud&#160;&#160;de&#160;&#160;cancelacion&#160;&#160;enviada&#160;&#160;a</i><br/>
+<i>[producto]&#160;&#160;de&#160;&#160;mesa</i><br/>
+cocina&#160;&#160;con&#160;&#160;el&#160;&#160;producto&#160;&#160;y&#160;&#160;mesa<br/>
+<i>cocina.&#160;Espere&#160;confirmacion.&#34;</i><br/>
+<i>[numero]&#34;</i><br/>
+indicados<br/>
+<i>&#34;Cerrar&#160;&#160;cuenta&#160;&#160;de</i><br/>
+Calcula&#160;&#160;el&#160;&#160;total&#160;&#160;de&#160;&#160;todas&#160;&#160;las<br/>
+<i>&#34;Cuenta&#160;de&#160;mesa&#160;[numero]&#160;calculada.</i><br/>
+<i>mesa&#160;[numero]&#34;</i><br/>
+comandas&#160;&#160;de&#160;&#160;la&#160;&#160;mesa&#160;&#160;y&#160;&#160;genera<br/>
+<i>Total&#160;[monto]&#160;pesos.&#160;Ticket&#160;enviado&#160;a</i><br/>
+ticket&#160;para&#160;impresion<br/>
+<i>impresion.&#34;</i><br/>
+<i>&#34;Repetir&#160;&#160;comanda</i><br/>
+Muestra&#160;en&#160;pantalla&#160;los&#160;productos<br/>
+<i>&#34;Mostrando&#160;&#160;ultima&#160;&#160;comanda&#160;&#160;de</i><br/>
+<i>de&#160;mesa&#160;[numero]&#34;</i><br/>
+de&#160;la&#160;ultima&#160;comanda&#160;de&#160;esa&#160;mesa<br/>
+<i>mesa&#160;[numero]&#34;</i><br/>
+para&#160;reenvio<br/>
+<i>&#34;Estado&#160;&#160;de&#160;&#160;mesa</i><br/>
+Informa&#160;&#160;el&#160;&#160;estatus&#160;&#160;de&#160;&#160;las<br/>
+<i>&#34;Mesa&#160;&#160;[numero]:&#160;&#160;dos&#160;&#160;ordenes&#160;&#160;listas,</i><br/>
+<i>[numero]&#34;</i><br/>
+comandas&#160;de&#160;la&#160;mesa&#160;(pendientes,<br/>
+<i>una&#160;en&#160;preparacion.&#34;</i><br/>
+listas,&#160;entregadas)<br/>
+7<br/>
+<hr/>
+<a name=8></a>3.&#160;Especificaciones&#160;Funcionales<br/>
+<b>Reglas&#160;de&#160;Negocio:&#160;Captura&#160;por&#160;Voz&#160;del&#160;Mesero</b><br/>
+<b>RN-3.1</b>:&#160;El&#160;mesero&#160;debe&#160;dictar&#160;siempre&#160;el&#160;numero&#160;de&#160;mesa&#160;al&#160;inicio&#160;de&#160;la&#160;comanda.<br/>Sin&#160;numero&#160;de&#160;mesa,&#160;el&#160;sistema&#160;rechaza&#160;el&#160;dictado.<br/><b>RN-3.2</b>:&#160;&#160;Si&#160;&#160;VOSK&#160;&#160;no&#160;&#160;reconoce&#160;&#160;un&#160;&#160;producto&#160;&#160;del&#160;&#160;catalogo,&#160;&#160;el&#160;&#160;sistema&#160;&#160;lo&#160;&#160;resalta&#160;&#160;en<br/>pantalla&#160;para&#160;correccion&#160;manual&#160;del&#160;mesero&#160;antes&#160;del&#160;envio.<br/><b>RN-3.3</b>:&#160;&#160;Toda&#160;&#160;comanda&#160;&#160;enviada&#160;&#160;genera&#160;&#160;automaticamente&#160;&#160;un&#160;&#160;anuncio&#160;&#160;de&#160;&#160;voz&#160;&#160;(TTS)<br/>en&#160;el&#160;altavoz&#160;de&#160;cocina&#160;con&#160;el&#160;contenido&#160;de&#160;la&#160;orden.<br/><b>RN-3.4</b>:&#160;&#160;El&#160;&#160;sistema&#160;&#160;aplica&#160;&#160;correccion&#160;&#160;fonetica&#160;&#160;fuzzy&#160;&#160;(Levenshtein,&#160;&#160;umbral&#160;&#160;3<br/>caracteres)&#160;&#160;para&#160;&#160;mapear&#160;&#160;palabras&#160;&#160;similares&#160;&#160;a&#160;&#160;productos&#160;&#160;del&#160;&#160;catalogo&#160;&#160;antes&#160;&#160;de<br/>mostrar&#160;el&#160;resultado.<br/><b>RN-3.5</b>:&#160;&#160;El&#160;&#160;mesero&#160;&#160;puede&#160;&#160;cancelar&#160;&#160;productos&#160;&#160;individuales&#160;&#160;de&#160;&#160;una&#160;&#160;comanda&#160;&#160;ya<br/>enviada,&#160;&#160;pero&#160;&#160;solo&#160;&#160;antes&#160;&#160;de&#160;&#160;que&#160;&#160;el&#160;&#160;cocinero&#160;&#160;marque&#160;&#160;esa&#160;&#160;comanda&#160;&#160;como&#160;&#160;&#34;en<br/>preparacion&#34;.<br/><b>RN-3.6</b>:&#160;&#160;Una&#160;&#160;vez&#160;&#160;que&#160;&#160;una&#160;&#160;comanda&#160;&#160;o&#160;&#160;parte&#160;&#160;de&#160;&#160;ella&#160;&#160;esta&#160;&#160;&#34;en&#160;&#160;preparacion&#34;,&#160;&#160;solo&#160;&#160;el<br/>cocinero&#160;puede&#160;autorizar&#160;su&#160;cancelacion&#160;mediante&#160;respuesta&#160;de&#160;voz.<br/>
+<b>3.2.&#160;Modulo&#160;de&#160;Registro&#160;de&#160;Comandas</b><br/>
+Este&#160;&#160;modulo&#160;&#160;gestiona&#160;&#160;la&#160;&#160;persistencia&#160;&#160;de&#160;&#160;las&#160;&#160;comandas&#160;&#160;en&#160;&#160;la&#160;&#160;base&#160;&#160;de&#160;&#160;datos&#160;&#160;central.&#160;&#160;Cada<br/>comanda&#160;registrada&#160;contiene&#160;los&#160;datos&#160;minimos&#160;obligatorios&#160;para&#160;identificar&#160;la&#160;orden&#160;y&#160;su<br/>contexto&#160;operativo.<br/>
+<b>3.2.1.&#160;Datos&#160;Minimos&#160;de&#160;Registro</b><br/>
+<b>Tabla&#160;4.&#160;Campos&#160;Obligatorios&#160;del&#160;Registro&#160;de&#160;Comandas</b><br/>
+<b>Campo</b><br/>
+<b>Tipo</b><br/>
+<b>Descripcion</b><br/>
+<b>Ejemplo</b><br/>
+numero_mesa<br/>
+INT<br/>
+Numero&#160;&#160;identificador&#160;&#160;de&#160;&#160;la<br/>
+5,&#160;12,&#160;3<br/>
+mesa&#160;atendida<br/>
+hora_captura<br/>
+DATETIME<br/>
+Fecha&#160;&#160;y&#160;&#160;hora&#160;&#160;exacta&#160;&#160;de&#160;&#160;la<br/>
+2026-06-11&#160;14:32:18<br/>
+captura<br/>
+id_mesero<br/>
+INT<br/>
+Identificador&#160;&#160;del&#160;&#160;mesero&#160;&#160;que<br/>
+3&#160;(Juan&#160;Perez)<br/>
+capturo&#160;la&#160;orden<br/>
+texto_transcrito<br/>
+TEXT<br/>
+Texto&#160;&#160;completo&#160;&#160;tal&#160;&#160;como&#160;&#160;fue<br/>
+&#34;mesa&#160;&#160;cinco&#160;&#160;dos&#160;&#160;tacos&#160;&#160;al<br/>
+transcrito&#160;por&#160;VOSK<br/>
+pastor&#160;con&#160;todo&#160;y&#160;una&#160;coca&#34;<br/>
+8<br/>
+<hr/>
+<a name=9></a>3.&#160;Especificaciones&#160;Funcionales<br/>
+productos<br/>
+JSON<br/>
+Lista&#160;&#160;de&#160;&#160;productos&#160;&#160;identificados<br/>
+[{&#34;id&#34;:&#160;&#160;12,&#160;&#160;&#34;cant&#34;:&#160;&#160;2},&#160;&#160;{&#34;id&#34;:&#160;&#160;45,&#160;&#160;&#34;cant&#34;:<br/>
+con&#160;cantidades<br/>
+1}]<br/>
+estado<br/>
+ENUM<br/>
+Estado&#160;&#160;actual&#160;&#160;en&#160;&#160;el&#160;&#160;flujo&#160;&#160;de<br/>
+pendiente,&#160;<br/>
+en_preparacion,&#160;<br/>
+listo,<br/>
+atencion<br/>
+entregado,&#160;cancelado<br/>
+<b>3.2.2.&#160;Estados&#160;de&#160;una&#160;Comanda</b><br/>
+<b>Tabla&#160;5.&#160;Maquina&#160;de&#160;Estados&#160;de&#160;la&#160;Comanda</b><br/>
+<b>Transicion</b><br/>
+<b>Estado</b><br/>
+<b>Descripcion</b><br/>
+<b>Quien&#160;Actua</b><br/>
+<b>Siguiente</b><br/>
+<b>Pendiente</b><br/>
+Comanda&#160;&#160;registrada,&#160;&#160;en<br/>
+Sistema&#160;automatico<br/>
+En&#160;&#160;preparacion&#160;&#160;(por<br/>
+espera&#160;de&#160;cocina<br/>
+cocinero)<br/>
+<b>En</b><br/>
+Cocinero&#160;&#160;ha&#160;&#160;tomado&#160;&#160;la<br/>
+Cocinero&#160;(por&#160;voz)<br/>
+Listo&#160;(por&#160;cocinero)<br/>
+<b>preparacion</b><br/>
+orden<br/>
+<b>Listo</b><br/>
+Productos&#160;<br/>
+preparados,<br/>
+Cocinero&#160;(por&#160;voz)<br/>
+Entregado&#160;<br/>
+(por<br/>
+esperando&#160;recogida<br/>
+mesero)<br/>
+<b>Entregado</b><br/>
+Productos&#160;entregados&#160;en&#160;la<br/>
+Sistema&#160;&#160;automatico&#160;&#160;al<br/>
+Estado&#160;final<br/>
+mesa<br/>
+cierre<br/>
+<b>Cancelado</b><br/>
+Comanda&#160;&#160;o&#160;&#160;productos<br/>
+Mesero&#160;<br/>
+(solicita)&#160;<br/>
+/<br/>
+Estado&#160;final<br/>
+anulados<br/>
+Cocinero&#160;(autoriza)<br/>
+9<br/>
+<hr/>
+<a name=10></a>3.&#160;Especificaciones&#160;Funcionales<br/>
+<b>Reglas&#160;de&#160;Negocio:&#160;Registro&#160;de&#160;Comandas</b><br/>
+<b>RN-3.7</b>:&#160;Toda&#160;comanda&#160;debe&#160;registrar&#160;obligatoriamente&#160;numero&#160;de&#160;mesa,&#160;hora&#160;de<br/>captura&#160;&#160;e&#160;&#160;identificador&#160;&#160;de&#160;&#160;mesero.&#160;&#160;Faltando&#160;&#160;cualquiera,&#160;&#160;el&#160;&#160;sistema&#160;&#160;rechaza&#160;&#160;el<br/>registro.<br/><b>RN-3.8</b>:&#160;&#160;La&#160;&#160;hora&#160;&#160;de&#160;&#160;captura&#160;&#160;se&#160;&#160;toma&#160;&#160;del&#160;&#160;servidor&#160;&#160;(no&#160;&#160;del&#160;&#160;dispositivo&#160;&#160;del&#160;&#160;mesero)<br/>para&#160;evitar&#160;discrepancias&#160;por&#160;relojes&#160;desconfigurados.<br/><b>RN-3.9</b>:&#160;&#160;Las&#160;&#160;comandas&#160;&#160;se&#160;&#160;ordenan&#160;&#160;por&#160;&#160;hora&#160;&#160;de&#160;&#160;captura&#160;&#160;(FIFO).&#160;&#160;No&#160;&#160;existe<br/>mecanismo&#160;&#160;de&#160;&#160;prioridad&#160;&#160;manual;&#160;&#160;la&#160;&#160;antiguedad&#160;&#160;es&#160;&#160;el&#160;&#160;unico&#160;&#160;criterio&#160;&#160;de<br/>ordenamiento.<br/><b>RN-3.10</b>:&#160;&#160;Una&#160;&#160;comanda&#160;&#160;en&#160;&#160;estado&#160;&#160;&#34;en_preparacion&#34;&#160;&#160;o&#160;&#160;&#34;listo&#34;&#160;&#160;no&#160;&#160;puede&#160;&#160;ser<br/>modificada&#160;por&#160;el&#160;mesero.&#160;Solo&#160;el&#160;cocinero&#160;puede&#160;revertir&#160;estados.<br/><b>RN-3.11</b>:&#160;Una&#160;comanda&#160;cancelada&#160;no&#160;se&#160;elimina&#160;fisicamente;&#160;se&#160;marca&#160;con&#160;estado<br/>&#34;cancelado&#34;&#160;y&#160;se&#160;conserva&#160;para&#160;auditoria.<br/><b>RN-3.12</b>:&#160;Al&#160;cerrar&#160;la&#160;cuenta&#160;de&#160;una&#160;mesa,&#160;todas&#160;sus&#160;comandas&#160;en&#160;estados&#160;validos<br/>(pendiente,&#160;&#160;en_preparacion,&#160;&#160;listo,&#160;&#160;entregado)&#160;&#160;se&#160;&#160;consolidan&#160;&#160;en&#160;&#160;el&#160;&#160;ticket.&#160;&#160;Las<br/>canceladas&#160;se&#160;excluyen&#160;automaticamente.<br/>
+<b>3.3.&#160;Modulo&#160;de&#160;Cocina:&#160;Atencion&#160;100%&#160;por&#160;Voz</b><br/>
+Este&#160;&#160;es&#160;&#160;el&#160;&#160;modulo&#160;&#160;operativo&#160;&#160;central&#160;&#160;para&#160;&#160;el&#160;&#160;area&#160;&#160;de&#160;&#160;preparacion.&#160;&#160;El&#160;&#160;cocinero&#160;&#160;utiliza<br/><b>exclusivamente&#160;su&#160;diadema</b>&#160;para&#160;interactuar&#160;con&#160;el&#160;sistema.&#160;La&#160;pantalla&#160;banner&#160;de&#160;cocina<br/>es&#160;meramente&#160;informativa&#160;y&#160;<b>no&#160;admite&#160;entrada&#160;tactil,&#160;clic&#160;ni&#160;teclado</b>.<br/>
+<b>3.3.1.&#160;Recepcion&#160;de&#160;Comandas&#160;en&#160;Cocina</b><br/>
+Cuando&#160;el&#160;mesero&#160;envia&#160;una&#160;comanda,&#160;el&#160;sistema&#160;ejecuta&#160;simultaneamente&#160;tres&#160;acciones&#160;en<br/>el&#160;area&#160;de&#160;cocina:<br/>
+1.&#160;<b>Pantalla&#160;&#160;banner</b>:&#160;&#160;La&#160;&#160;nueva&#160;&#160;comanda&#160;&#160;aparece&#160;&#160;en&#160;&#160;la&#160;&#160;pantalla&#160;&#160;de&#160;&#160;cocina&#160;&#160;con&#160;&#160;los&#160;&#160;datos<br/>
+minimos&#160;(mesa,&#160;hora,&#160;mesero,&#160;productos,&#160;tiempo&#160;transcurrido).<br/>
+2.&#160;<b>Anuncio&#160;&#160;por&#160;&#160;altavoz</b>:&#160;&#160;El&#160;&#160;sistema&#160;&#160;utiliza&#160;&#160;sintesis&#160;&#160;de&#160;&#160;voz&#160;&#160;(Text-to-Speech,&#160;&#160;TTS)&#160;&#160;para<br/>
+anunciar&#160;en&#160;voz&#160;alta&#160;por&#160;el&#160;altavoz&#160;de&#160;la&#160;estacion&#160;de&#160;cocina:&#160;<i>&#34;Nueva&#160;orden:&#160;mesa&#160;cinco,<br/>dos&#160;tacos&#160;al&#160;pastor,&#160;una&#160;coca&#34;</i>.<br/>
+3.&#160;<b>Notificacion&#160;en&#160;diadema</b>:&#160;Si&#160;el&#160;cocinero&#160;tiene&#160;su&#160;diadema&#160;conectada,&#160;escucha&#160;un&#160;tono<br/>
+de&#160;notificacion&#160;breve&#160;indicando&#160;que&#160;hay&#160;una&#160;nueva&#160;orden.<br/>
+10<br/>
+<hr/>
+<a name=11></a>3.&#160;Especificaciones&#160;Funcionales<br/>
+<b>3.3.2.&#160;Interaccion&#160;del&#160;Cocinero&#160;por&#160;Voz&#160;Dictada</b><br/>
+El&#160;&#160;cocinero&#160;&#160;gestiona&#160;&#160;las&#160;&#160;ordenes&#160;&#160;dictando&#160;&#160;comandos&#160;&#160;de&#160;&#160;voz&#160;&#160;a&#160;&#160;su&#160;&#160;diadema.&#160;&#160;El&#160;&#160;sistema<br/>reconoce&#160;&#160;estos&#160;&#160;comandos&#160;&#160;mediante&#160;&#160;un&#160;&#160;motor&#160;&#160;VOSK&#160;&#160;secundario&#160;&#160;con&#160;&#160;<b>gramatica&#160;&#160;ultra-<br/>restringida</b>&#160;(solo&#160;comandos&#160;de&#160;control,&#160;sin&#160;catalogo&#160;de&#160;productos)&#160;para&#160;maxima&#160;precision.<br/>
+<b>Tabla&#160;6.&#160;Comandos&#160;de&#160;Voz&#160;del&#160;Cocinero&#160;para&#160;Gestion&#160;de&#160;Ordenes</b><br/>
+<b>Respuesta&#160;Auditiva&#160;(TTS</b><br/>
+<b>Comando&#160;Dictado</b><br/>
+<b>Accion&#160;del&#160;Sistema</b><br/>
+<b>en&#160;diadema)</b><br/>
+<i>&#34;Preparar&#160;</i><br/>
+<i>mesa</i><br/>
+Cambia&#160;la&#160;comanda&#160;de&#160;mesa&#160;[numero]&#160;de<br/>
+<i>&#34;Orden&#160;de&#160;mesa&#160;[numero]&#160;en</i><br/>
+<i>[numero]&#34;</i><br/>
+&#34;pendiente&#34;&#160;a&#160;&#34;en_preparacion&#34;<br/>
+<i>preparacion&#34;</i><br/>
+<i>&#34;Preparar</i><br/>
+Toma&#160;&#160;la&#160;&#160;comanda&#160;&#160;mas&#160;&#160;antigua&#160;&#160;pendiente<br/>
+<i>&#34;Siguiente&#160;</i><br/>
+<i>orden:&#160;</i><br/>
+<i>mesa</i><br/>
+<i>siguiente&#34;</i><br/>
+(FIFO)&#160;y&#160;la&#160;marca&#160;como&#160;&#34;en_preparacion&#34;<br/>
+<i>[numero]:&#160;[productos]&#34;</i><br/>
+<i>&#34;Listo&#160;</i><br/>
+<i>mesa</i><br/>
+Marca&#160;&#160;la&#160;&#160;comanda&#160;&#160;de&#160;&#160;mesa&#160;&#160;[numero]<br/>
+<i>&#34;Orden&#160;&#160;de&#160;&#160;mesa&#160;&#160;[numero]</i><br/>
+<i>[numero]&#34;</i><br/>
+como&#160;&#34;listo&#34;<br/>
+<i>marcada&#160;como&#160;lista&#34;</i><br/>
+<i>&#34;Recuperar&#160;&#160;mesa</i><br/>
+Revierte&#160;<br/>
+una&#160;<br/>
+comanda&#160;<br/>
+&#34;listo&#34;&#160;<br/>
+a<br/>
+<i>&#34;Orden&#160;&#160;de&#160;&#160;mesa&#160;&#160;[numero]</i><br/>
+<i>[numero]&#34;</i><br/>
+&#34;en_preparacion&#34;&#160;(por&#160;error)<br/>
+<i>recuperada&#160;a&#160;preparacion&#34;</i><br/>
+<i>&#34;Repetir&#160;</i><br/>
+<i>orden</i><br/>
+El&#160;sistema&#160;repite&#160;en&#160;voz&#160;alta&#160;los&#160;productos<br/>
+<i>&#34;Mesa&#160;&#160;[numero]:&#160;&#160;[lista&#160;&#160;de</i><br/>
+<i>mesa&#160;[numero]&#34;</i><br/>
+de&#160;la&#160;comanda&#160;indicada<br/>
+<i>productos]&#34;</i><br/>
+<i>&#34;Ordenes</i><br/>
+El&#160;&#160;sistema&#160;&#160;cuenta&#160;&#160;cuantas&#160;&#160;comandas&#160;&#160;hay<br/>
+<i>&#34;Tienes&#160;</i><br/>
+<i>[N]&#160;</i><br/>
+<i>ordenes</i><br/>
+<i>pendientes&#34;</i><br/>
+en&#160;cada&#160;estado<br/>
+<i>pendientes&#160;</i><br/>
+<i>y&#160;</i><br/>
+<i>[M]&#160;</i><br/>
+<i>en</i><br/>
+<i>preparacion&#34;</i><br/>
+<i>&#34;Si,&#160;cancelar&#34;</i><br/>
+Autoriza&#160;&#160;una&#160;&#160;solicitud&#160;&#160;de&#160;&#160;cancelacion<br/>
+<i>&#34;Cancelacion&#160;autorizada&#34;</i><br/>
+pendiente<br/>
+<i>&#34;No,&#160;no&#160;cancelar&#34;</i><br/>
+Rechaza&#160;una&#160;solicitud&#160;de&#160;cancelacion<br/>
+<i>&#34;Cancelacion&#160;</i><br/>
+<i>rechazada.</i><br/>
+<i>Continue&#160;preparando.&#34;</i><br/>
+<b>3.3.3.&#160;Gramatica&#160;Restringida&#160;del&#160;Cocinero</b><br/>
+Para&#160;&#160;maximizar&#160;&#160;la&#160;&#160;precision&#160;&#160;del&#160;&#160;reconocimiento&#160;&#160;en&#160;&#160;el&#160;&#160;ambiente&#160;&#160;ruidoso&#160;&#160;de&#160;&#160;la&#160;&#160;cocina,&#160;&#160;el<br/>vocabulario&#160;del&#160;cocinero&#160;se&#160;limita&#160;exclusivamente&#160;a:<br/>
+11<br/>
+<hr/>
+<a name=12></a>3.&#160;Especificaciones&#160;Funcionales<br/>
+Palabras&#160;de&#160;control:&#160;&#34;preparar&#34;,&#160;&#34;listo&#34;,&#160;&#34;recuperar&#34;,&#160;&#34;siguiente&#34;,&#160;&#34;repetir&#34;,<br/>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#34;ordenes&#34;,&#160;&#34;pendientes&#34;,&#160;&#34;cancelar&#34;,&#160;&#34;si&#34;,&#160;&#34;no&#34;,&#160;&#34;mesa&#34;<br/>
+Numeros:&#160;&#34;uno&#34;,&#160;&#34;dos&#34;,&#160;&#34;tres&#34;,&#160;&#34;cuatro&#34;,&#160;&#34;cinco&#34;,&#160;&#34;seis&#34;,&#160;&#34;siete&#34;,&#160;&#34;ocho&#34;,<br/>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#34;nueve&#34;,&#160;&#34;diez&#34;,&#160;&#34;once&#34;,&#160;&#34;doce&#34;,&#160;&#34;trece&#34;,&#160;&#34;catorce&#34;,&#160;&#34;quince&#34;,&#160;...,<br/>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#34;cien&#34;&#160;(o&#160;equivalentes&#160;numericos&#160;&#34;1&#34;,&#160;&#34;2&#34;,&#160;&#34;3&#34;,&#160;...)<br/>
+Frases&#160;compuestas&#160;validas:<br/>-&#160;&#34;preparar&#160;mesa&#160;[N]&#34;<br/>-&#160;&#34;preparar&#160;siguiente&#34;<br/>-&#160;&#34;listo&#160;mesa&#160;[N]&#34;<br/>-&#160;&#34;recuperar&#160;mesa&#160;[N]&#34;<br/>-&#160;&#34;repetir&#160;orden&#160;mesa&#160;[N]&#34;<br/>-&#160;&#34;ordenes&#160;pendientes&#34;<br/>-&#160;&#34;si&#160;cancelar&#34;<br/>-&#160;&#34;no&#160;cancelar&#34;<br/>
+<b>Reglas&#160;de&#160;Negocio:&#160;Atencion&#160;en&#160;Cocina&#160;por&#160;Voz</b><br/>
+<b>RN-3.13</b>:&#160;El&#160;cocinero&#160;interactua&#160;exclusivamente&#160;por&#160;voz&#160;dictada&#160;a&#160;su&#160;diadema.&#160;La<br/>pantalla&#160;banner&#160;es&#160;de&#160;solo&#160;lectura&#160;y&#160;no&#160;admite&#160;tactil,&#160;clic&#160;ni&#160;teclado.<br/><b>RN-3.14</b>:&#160;&#160;Cada&#160;&#160;nueva&#160;&#160;comanda&#160;&#160;se&#160;&#160;anuncia&#160;&#160;automaticamente&#160;&#160;por&#160;&#160;el&#160;&#160;altavoz&#160;&#160;de<br/>cocina&#160;mediante&#160;TTS&#160;al&#160;momento&#160;de&#160;su&#160;recepcion.<br/><b>RN-3.15</b>:&#160;El&#160;cocinero&#160;solo&#160;puede&#160;tomar&#160;comandas&#160;que&#160;esten&#160;en&#160;estado&#160;&#34;pendiente&#34;.<br/>Una&#160;&#160;comanda&#160;&#160;ya&#160;&#160;tomada&#160;&#160;(&#34;en_preparacion&#34;)&#160;&#160;requiere&#160;&#160;&#34;recuperar&#34;&#160;&#160;para<br/>reasignarla.<br/><b>RN-3.16</b>:&#160;El&#160;comando&#160;&#34;preparar&#160;siguiente&#34;&#160;siempre&#160;toma&#160;la&#160;comanda&#160;mas&#160;antigua<br/>(FIFO).&#160;No&#160;permite&#160;saltar&#160;ordenes.<br/><b>RN-3.17</b>:&#160;&#160;Si&#160;&#160;el&#160;&#160;cocinero&#160;&#160;dicta&#160;&#160;&#34;preparar&#160;&#160;mesa&#160;&#160;[N]&#34;&#160;&#160;y&#160;&#160;esa&#160;&#160;mesa&#160;&#160;tiene&#160;&#160;multiple<br/>comandas,&#160;el&#160;sistema&#160;toma&#160;la&#160;comanda&#160;mas&#160;antigua&#160;de&#160;esa&#160;mesa.<br/><b>RN-3.18</b>:&#160;&#160;Si&#160;&#160;hay&#160;&#160;multiples&#160;&#160;cocineros,&#160;&#160;cada&#160;&#160;uno&#160;&#160;ve&#160;&#160;la&#160;&#160;misma&#160;&#160;pantalla&#160;&#160;banner&#160;&#160;y<br/>escucha&#160;los&#160;mismos&#160;anuncios.&#160;La&#160;coordinacion&#160;entre&#160;cocineros&#160;es&#160;manual&#160;(ellos&#160;se<br/>reparten&#160;verbalmente&#160;quien&#160;toma&#160;cual&#160;orden).<br/><b>RN-3.19</b>:&#160;&#160;El&#160;&#160;sistema&#160;&#160;no&#160;&#160;permite&#160;&#160;marcar&#160;&#160;una&#160;&#160;comanda&#160;&#160;como&#160;&#160;&#34;listo&#34;&#160;&#160;si&#160;&#160;no&#160;&#160;fue<br/>previamente&#160;marcada&#160;como&#160;&#34;en_preparacion&#34;.<br/><b>RN-3.20</b>:&#160;&#160;Si&#160;&#160;el&#160;&#160;cocinero&#160;&#160;dicta&#160;&#160;un&#160;&#160;comando&#160;&#160;no&#160;&#160;reconocido,&#160;&#160;el&#160;&#160;sistema&#160;&#160;responde:<br/><i>&#34;Comando&#160;no&#160;reconocido.&#160;Intente&#160;de&#160;nuevo.&#34;</i><br/>
+12<br/>
+<hr/>
+<a name=13></a>3.&#160;Especificaciones&#160;Funcionales<br/>
+<b>3.4.&#160;Modulo&#160;de&#160;Cancelaciones&#160;y&#160;Modificaciones</b><br/>
+Este&#160;&#160;modulo&#160;&#160;gestiona&#160;&#160;las&#160;&#160;cancelaciones&#160;&#160;parciales&#160;&#160;o&#160;&#160;totales&#160;&#160;de&#160;&#160;comandas&#160;&#160;ya&#160;&#160;enviadas,<br/>operando&#160;como&#160;un&#160;<b>diálogo&#160;de&#160;voz</b>&#160;entre&#160;el&#160;mesero&#160;y&#160;el&#160;cocinero&#160;mediado&#160;por&#160;el&#160;sistema.<br/>
+<b>3.4.1.&#160;Flujo&#160;de&#160;Cancelacion&#160;Parcial</b><br/>
+1.&#160;<b>Solicitud&#160;&#160;del&#160;&#160;mesero</b>:&#160;&#160;El&#160;&#160;mesero&#160;&#160;dicta:&#160;&#160;<i>&#34;Cancelar&#160;&#160;[producto]&#160;&#160;de&#160;&#160;mesa&#160;&#160;[numero]&#34;</i>.<br/>
+Ejemplo:&#160;<i>&#34;Cancelar&#160;agua&#160;de&#160;horchata&#160;de&#160;mesa&#160;cinco&#34;</i>.<br/>
+2.&#160;<b>Validacion&#160;del&#160;sistema</b>:&#160;El&#160;sistema&#160;verifica&#160;que&#160;exista&#160;esa&#160;comanda&#160;con&#160;ese&#160;producto&#160;y<br/>
+que&#160;no&#160;esté&#160;ya&#160;en&#160;estado&#160;&#34;listo&#34;.<br/>
+3.&#160;<b>Notificacion&#160;al&#160;cocinero</b>:&#160;El&#160;sistema&#160;anuncia&#160;por&#160;la&#160;<b>diadema&#160;del&#160;cocinero</b>:&#160;<i>&#34;El&#160;mesero</i><br/>
+<i>[nombre]&#160;solicita&#160;cancelar&#160;[producto]&#160;de&#160;mesa&#160;[numero].&#160;Puede&#160;confirmar?&#34;</i>.<br/>
+4.&#160;<b>Respuesta&#160;del&#160;cocinero</b>:&#160;El&#160;cocinero&#160;responde&#160;por&#160;voz:<br/>
+<i>&#34;Si,&#160;cancelar&#34;</i>:&#160;El&#160;sistema&#160;marca&#160;el&#160;producto&#160;como&#160;cancelado&#160;y&#160;responde&#160;al&#160;mesero:<br/><i>&#34;Cancelacion&#160;autorizada&#160;por&#160;cocina.&#160;[Producto]&#160;cancelado&#160;de&#160;mesa&#160;[numero].&#34;<br/>&#34;No,&#160;&#160;no&#160;&#160;cancelar&#34;</i>:&#160;&#160;El&#160;&#160;sistema&#160;&#160;rechaza&#160;&#160;la&#160;&#160;cancelacion&#160;&#160;y&#160;&#160;responde&#160;&#160;al&#160;&#160;mesero:<br/><i>&#34;Cancelacion&#160;rechazada&#160;por&#160;cocina.&#160;El&#160;producto&#160;sigue&#160;en&#160;preparacion.&#34;</i><br/>
+5.&#160;<b>Actualizacion&#160;de&#160;estados</b>:&#160;Si&#160;se&#160;autoriza,&#160;el&#160;producto&#160;se&#160;marca&#160;como&#160;&#34;cancelado&#34;&#160;en&#160;la<br/>
+base&#160;de&#160;datos&#160;y&#160;se&#160;excluye&#160;del&#160;ticket&#160;de&#160;cierre.<br/>
+<b>3.4.2.&#160;Cancelacion&#160;Total&#160;de&#160;Comanda</b><br/>
+El&#160;mesero&#160;puede&#160;solicitar&#160;la&#160;cancelacion&#160;de&#160;una&#160;comanda&#160;completa:<br/>
+1.&#160;Mesero&#160;dicta:&#160;<i>&#34;Cancelar&#160;toda&#160;la&#160;orden&#160;de&#160;mesa&#160;[numero]&#34;</i>.<br/>2.&#160;El&#160;sistema&#160;anuncia&#160;en&#160;diadema&#160;del&#160;cocinero:&#160;<i>&#34;El&#160;mesero&#160;[nombre]&#160;solicita&#160;cancelar&#160;toda&#160;la</i><br/>
+<i>orden&#160;de&#160;mesa&#160;[numero]&#160;con&#160;[lista&#160;de&#160;productos].&#160;Puede&#160;confirmar?&#34;</i>.<br/>
+3.&#160;El&#160;cocinero&#160;responde&#160;&#34;Si,&#160;cancelar&#34;&#160;o&#160;&#34;No,&#160;no&#160;cancelar&#34;&#160;segun&#160;su&#160;criterio.<br/>
+13<br/>
+<hr/>
+<a name=14></a>3.&#160;Especificaciones&#160;Funcionales<br/>
+<b>Reglas&#160;de&#160;Negocio:&#160;Cancelaciones&#160;y&#160;Modificaciones</b><br/>
+<b>RN-3.21</b>:&#160;&#160;Toda&#160;&#160;cancelacion,&#160;&#160;parcial&#160;&#160;o&#160;&#160;total,&#160;&#160;requiere&#160;&#160;autorizacion&#160;&#160;explicita&#160;&#160;del<br/>cocinero&#160;por&#160;voz.&#160;El&#160;mesero&#160;no&#160;puede&#160;cancelar&#160;unilateralmente&#160;una&#160;vez&#160;enviada&#160;la<br/>comanda.<br/><b>RN-3.22</b>:&#160;Si&#160;el&#160;producto&#160;solicitado&#160;para&#160;cancelacion&#160;ya&#160;esta&#160;marcado&#160;como&#160;&#34;listo&#34;,&#160;el<br/>sistema&#160;&#160;responde&#160;&#160;automaticamente&#160;&#160;al&#160;&#160;mesero:&#160;&#160;<i>&#34;El&#160;&#160;producto&#160;&#160;ya&#160;&#160;esta&#160;&#160;listo.&#160;&#160;No&#160;&#160;se<br/>puede&#160;cancelar.&#34;</i>&#160;sin&#160;consultar&#160;al&#160;cocinero.<br/><b>RN-3.23</b>:&#160;&#160;Si&#160;&#160;la&#160;&#160;comanda&#160;&#160;completa&#160;&#160;esta&#160;&#160;en&#160;&#160;estado&#160;&#160;&#34;listo&#34;,&#160;&#160;la&#160;&#160;cancelacion&#160;&#160;total&#160;&#160;se<br/>rechaza&#160;automaticamente.<br/><b>RN-3.24</b>:&#160;&#160;El&#160;&#160;cocinero&#160;&#160;dispone&#160;&#160;de&#160;&#160;<b>30&#160;&#160;segundos</b>&#160;&#160;para&#160;&#160;responder&#160;&#160;una&#160;&#160;solicitud&#160;&#160;de<br/>cancelacion.&#160;&#160;Si&#160;&#160;no&#160;&#160;responde,&#160;&#160;el&#160;&#160;sistema&#160;&#160;rechaza&#160;&#160;la&#160;&#160;cancelacion&#160;&#160;por&#160;&#160;tiempo<br/>expirado.<br/><b>RN-3.25</b>:&#160;&#160;Las&#160;&#160;cancelaciones&#160;&#160;autorizadas&#160;&#160;se&#160;&#160;anuncian&#160;&#160;por&#160;&#160;el&#160;&#160;altavoz&#160;&#160;de&#160;&#160;cocina:<br/><i>&#34;Cancelacion&#160;autorizada:&#160;[producto]&#160;de&#160;mesa&#160;[numero].&#34;<br/></i><b>RN-3.26</b>:&#160;Todo&#160;producto&#160;cancelado&#160;se&#160;registra&#160;en&#160;el&#160;sistema&#160;con&#160;estado&#160;&#34;cancelado&#34;,<br/>se&#160;conserva&#160;para&#160;auditoria,&#160;y&#160;se&#160;excluye&#160;automaticamente&#160;del&#160;calculo&#160;del&#160;ticket&#160;de<br/>cierre.<br/><b>RN-3.27</b>:&#160;No&#160;se&#160;permiten&#160;modificaciones&#160;(cambio&#160;de&#160;producto).&#160;Solo&#160;cancelaciones.<br/>Si&#160;el&#160;cliente&#160;cambia&#160;de&#160;opinion,&#160;se&#160;cancela&#160;el&#160;producto&#160;incorrecto&#160;y&#160;se&#160;genera&#160;una<br/>nueva&#160;comanda&#160;con&#160;el&#160;producto&#160;correcto.<br/>
+<b>3.5.&#160;Modulo&#160;de&#160;Cierre&#160;de&#160;Cuenta</b><br/>
+El&#160;&#160;cierre&#160;&#160;de&#160;&#160;cuenta&#160;&#160;se&#160;&#160;activa&#160;&#160;por&#160;&#160;<b>dictado&#160;&#160;de&#160;&#160;voz&#160;&#160;del&#160;&#160;mesero</b>.&#160;&#160;El&#160;&#160;sistema&#160;&#160;calcula&#160;&#160;el&#160;&#160;total<br/>acumulado&#160;de&#160;todas&#160;las&#160;comandas&#160;de&#160;la&#160;mesa&#160;(excluyendo&#160;cancelaciones),&#160;genera&#160;un&#160;ticket&#160;y<br/>lo&#160;envia&#160;a&#160;la&#160;impresora.<br/>
+<b>3.5.1.&#160;Proceso&#160;de&#160;Cierre&#160;por&#160;Voz</b><br/>
+1.&#160;<b>Dictado&#160;de&#160;cierre</b>:&#160;El&#160;mesero&#160;dicta:&#160;<i>&#34;Cerrar&#160;cuenta&#160;de&#160;mesa&#160;[numero]&#34;</i>&#160;o&#160;<i>&#34;La&#160;cuenta&#160;de</i><br/>
+<i>mesa&#160;[numero]&#160;se&#160;va&#160;a&#160;cerrar&#34;</i>.<br/>
+2.&#160;<b>Calculo&#160;automatico</b>:&#160;El&#160;sistema&#160;suma&#160;todos&#160;los&#160;productos&#160;de&#160;todas&#160;las&#160;comandas&#160;de&#160;esa<br/>
+mesa&#160;&#160;con&#160;&#160;estados&#160;&#160;validos&#160;&#160;(pendiente,&#160;&#160;en_preparacion,&#160;&#160;listo,&#160;&#160;entregado),&#160;&#160;excluyendo<br/>cancelados.<br/>
+14<br/>
+<hr/>
+<a name=15></a>3.&#160;Especificaciones&#160;Funcionales<br/>
+3.&#160;<b>Confirmacion&#160;&#160;auditiva</b>:&#160;&#160;El&#160;&#160;sistema&#160;&#160;responde&#160;&#160;por&#160;&#160;la&#160;&#160;diadema&#160;&#160;del&#160;&#160;mesero:&#160;&#160;<i>&#34;Cuenta&#160;&#160;de</i><br/>
+<i>mesa&#160;[numero].&#160;Total:&#160;[monto]&#160;pesos.&#160;[N]&#160;productos.&#160;Ticket&#160;enviado&#160;a&#160;impresion.&#34;</i><br/>
+4.&#160;<b>Impresion&#160;del&#160;ticket</b>:&#160;El&#160;sistema&#160;envia&#160;el&#160;ticket&#160;a&#160;la&#160;impresora&#160;termica&#160;configurada.&#160;El<br/>
+ticket&#160;incluye:&#160;numero&#160;de&#160;mesa,&#160;nombre&#160;del&#160;mesero,&#160;fecha/hora,&#160;desglose&#160;itemizado&#160;de<br/>productos&#160;con&#160;cantidades&#160;y&#160;precios,&#160;subtotal,&#160;total,&#160;y&#160;un&#160;numero&#160;de&#160;ticket&#160;unico.<br/>
+5.&#160;<b>Liberacion&#160;&#160;de&#160;&#160;mesa</b>:&#160;&#160;Todas&#160;&#160;las&#160;&#160;comandas&#160;&#160;de&#160;&#160;la&#160;&#160;mesa&#160;&#160;se&#160;&#160;marcan&#160;&#160;como&#160;&#160;&#34;cobradas&#34;<br/>
+(estado&#160;final)&#160;y&#160;la&#160;mesa&#160;queda&#160;disponible&#160;para&#160;nuevos&#160;clientes.<br/>
+6.&#160;<b>Notificacion&#160;en&#160;pantalla&#160;de&#160;caja</b>:&#160;La&#160;mesa&#160;desaparece&#160;de&#160;la&#160;lista&#160;de&#160;mesas&#160;activas&#160;en<br/>
+la&#160;pantalla&#160;de&#160;caja.<br/>
+<b>3.5.2.&#160;Contenido&#160;del&#160;Ticket&#160;Impreso</b><br/>
+El&#160;ticket&#160;impreso&#160;debe&#160;contener&#160;minimamente:<br/>
+========================================<br/>&#160;&#160;&#160;&#160;&#160;&#160;[NOMBRE&#160;DEL&#160;RESTAURANTE]<br/>========================================<br/>Ticket&#160;#:&#160;1284&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Mesa:&#160;5<br/>Mesero:&#160;Juan&#160;Perez<br/>Fecha:&#160;11/06/2026&#160;&#160;&#160;&#160;&#160;&#160;&#160;Hora:&#160;15:42<br/>----------------------------------------<br/>&#160;2&#160;x&#160;Tacos&#160;al&#160;pastor&#160;&#160;&#160;&#160;&#160;&#160;&#160;$&#160;90.00<br/>&#160;1&#160;x&#160;Coca-Cola&#160;600ml&#160;&#160;&#160;&#160;&#160;&#160;&#160;$&#160;25.00<br/>&#160;1&#160;x&#160;Agua&#160;de&#160;horchata&#160;&#160;&#160;&#160;&#160;&#160;$&#160;30.00<br/>----------------------------------------<br/>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;SUBTOTAL:&#160;&#160;&#160;&#160;$&#160;145.00<br/>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;TOTAL:&#160;&#160;&#160;&#160;&#160;&#160;&#160;$&#160;145.00<br/>========================================<br/>&#160;&#160;&#160;&#160;Gracias&#160;por&#160;su&#160;preferencia<br/>========================================<br/>
+15<br/>
+<hr/>
+<a name=16></a>3.&#160;Especificaciones&#160;Funcionales<br/>
+<b>Reglas&#160;de&#160;Negocio:&#160;Cierre&#160;de&#160;Cuenta</b><br/>
+<b>RN-3.28</b>:&#160;Solo&#160;el&#160;mesero&#160;que&#160;atendio&#160;la&#160;mesa&#160;(o&#160;un&#160;administrador)&#160;puede&#160;dictar&#160;el<br/>cierre&#160;de&#160;cuenta.<br/><b>RN-3.29</b>:&#160;El&#160;cierre&#160;de&#160;cuenta&#160;solo&#160;es&#160;posible&#160;si&#160;la&#160;mesa&#160;tiene&#160;al&#160;menos&#160;una&#160;comanda<br/>en&#160;estado&#160;valido.&#160;Mesas&#160;sin&#160;comandas&#160;o&#160;con&#160;todas&#160;canceladas&#160;no&#160;generan&#160;ticket.<br/><b>RN-3.30</b>:&#160;&#160;Los&#160;&#160;productos&#160;&#160;en&#160;&#160;estado&#160;&#160;&#34;cancelado&#34;&#160;&#160;se&#160;&#160;excluyen&#160;&#160;automaticamente&#160;&#160;del<br/>calculo&#160;del&#160;total.&#160;No&#160;aparecen&#160;en&#160;el&#160;ticket.<br/><b>RN-3.31</b>:&#160;El&#160;total&#160;se&#160;calcula&#160;como&#160;la&#160;suma&#160;de&#160;(precio_unitario&#160;x&#160;cantidad)&#160;de&#160;todos<br/>los&#160;&#160;productos&#160;&#160;no&#160;&#160;cancelados&#160;&#160;de&#160;&#160;todas&#160;&#160;las&#160;&#160;comandas&#160;&#160;de&#160;&#160;la&#160;&#160;mesa.&#160;&#160;No&#160;&#160;se&#160;&#160;aplican<br/>descuentos,&#160;propinas,&#160;ni&#160;impuestos&#160;adicionales&#160;en&#160;el&#160;sistema.<br/><b>RN-3.32</b>:&#160;&#160;El&#160;&#160;sistema&#160;&#160;NO&#160;&#160;procesa&#160;&#160;metodos&#160;&#160;de&#160;&#160;pago.&#160;&#160;El&#160;&#160;ticket&#160;&#160;muestra&#160;&#160;el&#160;&#160;total&#160;&#160;a<br/>pagar;&#160;el&#160;cobro&#160;se&#160;realiza&#160;externamente&#160;por&#160;el&#160;cajero&#160;mediante&#160;los&#160;medios&#160;que&#160;el<br/>restaurante&#160;utilice&#160;(terminal&#160;bancaria&#160;independiente,&#160;caja&#160;fisica,&#160;etc.).<br/><b>RN-3.33</b>:&#160;Una&#160;vez&#160;cerrada&#160;la&#160;cuenta,&#160;la&#160;mesa&#160;queda&#160;libre&#160;inmediatamente.&#160;No&#160;hay<br/>confirmacion&#160;adicional.<br/><b>RN-3.34</b>:&#160;Cada&#160;ticket&#160;generado&#160;recibe&#160;un&#160;numero&#160;unico&#160;consecutivo&#160;para&#160;auditoria.<br/>No&#160;se&#160;permite&#160;reimprimir&#160;un&#160;ticket&#160;sin&#160;autorizacion&#160;de&#160;administrador.<br/>
+<b>3.6.&#160;Modulo&#160;de&#160;Administracion</b><br/>
+El&#160;&#160;modulo&#160;&#160;de&#160;&#160;administracion&#160;&#160;es&#160;&#160;la&#160;&#160;unica&#160;&#160;interfaz&#160;&#160;que&#160;&#160;permite&#160;&#160;interaccion&#160;&#160;con&#160;&#160;raton&#160;&#160;y<br/>teclado.&#160;Se&#160;accede&#160;desde&#160;un&#160;PC&#160;con&#160;navegador&#160;web&#160;en&#160;la&#160;oficina&#160;o&#160;area&#160;administrativa&#160;del<br/>restaurante.<br/>
+<b>3.6.1.&#160;Gestion&#160;del&#160;Catalogo&#160;de&#160;Productos</b><br/>
+<b>Alta&#160;&#160;de&#160;&#160;productos</b>:&#160;&#160;Nombre,&#160;&#160;precio&#160;&#160;unitario,&#160;&#160;categoria,&#160;&#160;palabras&#160;&#160;clave&#160;&#160;para<br/>reconocimiento&#160;de&#160;voz&#160;(incluyendo&#160;sinonimos&#160;y&#160;variaciones&#160;foneticas).<br/><b>Modificacion</b>:&#160;Edicion&#160;de&#160;precios,&#160;nombres,&#160;disponibilidad&#160;y&#160;palabras&#160;clave.<br/><b>Baja&#160;logica</b>:&#160;Desactivacion&#160;de&#160;productos&#160;sin&#160;eliminarlos&#160;del&#160;historial.<br/>
+<b>3.6.2.&#160;Gestion&#160;de&#160;Usuarios&#160;y&#160;Diademas</b><br/>
+Creacion&#160;de&#160;perfiles&#160;de&#160;meseros&#160;y&#160;cocineros&#160;con&#160;nombre,&#160;usuario&#160;y&#160;contrasena.<br/>
+16<br/>
+<hr/>
+<a name=17></a>4.&#160;Interacciones&#160;Dictadas&#160;del&#160;Cocinero<br/>
+Asignacion&#160;&#160;de&#160;&#160;diademas&#160;&#160;a&#160;&#160;usuarios&#160;&#160;(registro&#160;&#160;de&#160;&#160;numero&#160;&#160;de&#160;&#160;serie&#160;&#160;o&#160;&#160;identificador&#160;&#160;de<br/>diadema).<br/>Activacion/desactivacion&#160;de&#160;usuarios.<br/>
+<b>3.6.3.&#160;Reportes&#160;Basicos</b><br/>
+<b>Tabla&#160;7.&#160;Reportes&#160;del&#160;Modulo&#160;de&#160;Administracion</b><br/>
+<b>Reporte</b><br/>
+<b>Contenido</b><br/>
+<b>Periodicidad</b><br/>
+Ventas&#160;por&#160;periodo<br/>
+Total&#160;&#160;de&#160;&#160;ventas,&#160;&#160;numero&#160;&#160;de&#160;&#160;tickets,&#160;&#160;ticket<br/>
+Por&#160;rango&#160;de&#160;fechas<br/>
+promedio<br/>
+Productos&#160;<br/>
+mas<br/>
+Ranking&#160;por&#160;cantidad&#160;e&#160;ingresos<br/>
+Diario,&#160;<br/>
+semanal,<br/>
+vendidos<br/>
+mensual<br/>
+Cancelaciones<br/>
+Listado&#160;&#160;de&#160;&#160;productos&#160;&#160;y&#160;&#160;comandas&#160;&#160;canceladas,<br/>
+Diario,&#160;semanal<br/>
+con&#160;mesero&#160;y&#160;cocinero<br/>
+Tiempos&#160;<br/>
+de<br/>
+Tiempo&#160;promedio&#160;captura&#160;a&#160;&#34;listo&#34;<br/>
+Semanal,&#160;mensual<br/>
+preparacion<br/>
+<b>Reglas&#160;de&#160;Negocio:&#160;Administracion</b><br/>
+<b>RN-3.35</b>:&#160;&#160;El&#160;&#160;administrador&#160;&#160;es&#160;&#160;el&#160;&#160;unico&#160;&#160;rol&#160;&#160;con&#160;&#160;permiso&#160;&#160;para&#160;&#160;modificar&#160;&#160;precios&#160;&#160;y<br/>productos.&#160;Los&#160;cambios&#160;son&#160;efectivos&#160;inmediatamente&#160;para&#160;nuevas&#160;comandas.<br/><b>RN-3.36</b>:&#160;Todo&#160;producto&#160;dado&#160;de&#160;alta&#160;debe&#160;incluir&#160;al&#160;menos&#160;una&#160;palabra&#160;clave&#160;para<br/>el&#160;reconocimiento&#160;de&#160;voz.<br/><b>RN-3.37</b>:&#160;&#160;Los&#160;&#160;reportes&#160;&#160;de&#160;&#160;cancelaciones&#160;&#160;incluyen&#160;&#160;siempre:&#160;&#160;producto&#160;&#160;cancelado,<br/>mesa,&#160;mesero&#160;que&#160;solicito,&#160;cocinero&#160;que&#160;autorizo,&#160;y&#160;motivo&#160;(si&#160;se&#160;registro).<br/>
+<b>4.&#160;Interacciones&#160;Dictadas&#160;del&#160;Cocinero</b><br/>
+Esta&#160;seccion&#160;describe&#160;con&#160;precision&#160;cada&#160;interaccion&#160;de&#160;voz&#160;que&#160;el&#160;cocinero&#160;puede&#160;realizar<br/>con&#160;el&#160;sistema.&#160;Cada&#160;interaccion&#160;incluye:&#160;el&#160;<b>disparador</b>&#160;que&#160;la&#160;inicia,&#160;el&#160;<b>comando&#160;dictado</b>,<br/>la&#160;<b>accion&#160;del&#160;sistema</b>,&#160;y&#160;la&#160;<b>respuesta&#160;de&#160;voz&#160;(TTS)</b>&#160;que&#160;recibe&#160;el&#160;cocinero&#160;en&#160;su&#160;diadema.<br/>
+<b>4.1.&#160;Interaccion:&#160;Tomar&#160;una&#160;Orden&#160;para&#160;Preparar</b><br/>
+<b>Tabla&#160;8.&#160;Detalle&#160;de&#160;Interaccion:&#160;Tomar&#160;Orden</b><br/>
+17<br/>
+<hr/>
+<a name=18></a>4.&#160;Interacciones&#160;Dictadas&#160;del&#160;Cocinero<br/>
+<b>Atributo</b><br/>
+<b>Descripcion</b><br/>
+<b>Disparador</b><br/>
+El&#160;&#160;cocinero&#160;&#160;decide&#160;&#160;iniciar&#160;&#160;la&#160;&#160;preparacion&#160;&#160;de&#160;&#160;una&#160;&#160;nueva&#160;&#160;orden.&#160;&#160;Puede&#160;&#160;ser<br/>porque&#160;acaba&#160;de&#160;escuchar&#160;la&#160;notificacion&#160;de&#160;una&#160;nueva&#160;comanda,&#160;o&#160;porque<br/>tiene&#160;capacidad&#160;de&#160;preparar&#160;mas.<br/>
+<b>Comando</b><br/>
+<i>&#34;Preparar&#160;siguiente&#34;</i>&#160;(toma&#160;la&#160;mas&#160;antigua)&#160;o&#160;<i>&#34;Preparar&#160;mesa&#160;[N]&#34;</i>&#160;(toma&#160;una<br/>
+<b>dictado</b><br/>
+mesa&#160;especifica).<br/>
+<b>Precondicion</b><br/>
+Debe&#160;existir&#160;al&#160;menos&#160;una&#160;comanda&#160;en&#160;estado&#160;&#34;pendiente&#34;.<br/>
+<b>Accion&#160;</b><br/>
+<b>del</b><br/>
+Cambia&#160;el&#160;estado&#160;de&#160;la&#160;comanda&#160;de&#160;&#34;pendiente&#34;&#160;a&#160;&#34;en_preparacion&#34;.&#160;Registra<br/>
+<b>sistema</b><br/>
+el&#160;identificador&#160;del&#160;cocinero.&#160;Actualiza&#160;la&#160;pantalla&#160;banner.<br/>
+<b>Respuesta&#160;TTS</b><br/>
+<i>&#34;Orden&#160;de&#160;mesa&#160;[numero]:&#160;[lista&#160;de&#160;productos].&#160;En&#160;preparacion.&#34;</i><br/>
+<b>Postcondicion</b><br/>
+La&#160;&#160;comanda&#160;&#160;aparece&#160;&#160;en&#160;&#160;la&#160;&#160;pantalla&#160;&#160;banner&#160;&#160;con&#160;&#160;estado&#160;&#160;&#34;en_preparacion&#34;&#160;&#160;y<br/>color&#160;de&#160;tiempo&#160;actualizado.<br/>
+<b>4.2.&#160;Interaccion:&#160;Marcar&#160;Orden&#160;como&#160;Lista</b><br/>
+<b>Tabla&#160;9.&#160;Detalle&#160;de&#160;Interaccion:&#160;Orden&#160;Lista</b><br/>
+<b>Atributo</b><br/>
+<b>Descripcion</b><br/>
+<b>Disparador</b><br/>
+El&#160;cocinero&#160;ha&#160;terminado&#160;de&#160;preparar&#160;todos&#160;los&#160;productos&#160;de&#160;una&#160;comanda.<br/>
+<b>Comando</b><br/>
+<i>&#34;Listo&#160;mesa&#160;[N]&#34;</i><br/>
+<b>dictado</b><br/>
+<b>Precondicion</b><br/>
+La&#160;comanda&#160;debe&#160;estar&#160;en&#160;estado&#160;&#34;en_preparacion&#34;.<br/>
+<b>Accion&#160;</b><br/>
+<b>del</b><br/>
+Cambia&#160;el&#160;estado&#160;a&#160;&#34;listo&#34;.&#160;Calcula&#160;el&#160;tiempo&#160;transcurrido&#160;desde&#160;la&#160;captura<br/>
+<b>sistema</b><br/>
+hasta&#160;este&#160;momento.<br/>
+<b>Respuesta&#160;TTS</b><br/>
+<i>&#34;Orden&#160;de&#160;mesa&#160;[numero]&#160;lista.&#160;Tiempo&#160;de&#160;preparacion:&#160;[M]&#160;minutos.&#34;</i><br/>
+<b>Postcondicion</b><br/>
+La&#160;comanda&#160;se&#160;mueve&#160;a&#160;la&#160;seccion&#160;&#34;Listas&#34;&#160;de&#160;la&#160;pantalla&#160;banner.&#160;El&#160;mesero<br/>recibe&#160;notificacion&#160;en&#160;su&#160;PWA.<br/>
+<b>4.3.&#160;Interaccion:&#160;Recuperar&#160;Orden&#160;por&#160;Error</b><br/>
+<b>Tabla&#160;10.&#160;Detalle&#160;de&#160;Interaccion:&#160;Recuperar&#160;Orden</b><br/>
+<b>Atributo</b><br/>
+<b>Descripcion</b><br/>
+<b>Disparador</b><br/>
+El&#160;cocinero&#160;marco&#160;una&#160;orden&#160;como&#160;&#34;listo&#34;&#160;por&#160;error&#160;y&#160;necesita&#160;revertirla.<br/>
+18<br/>
+<hr/>
+<a name=19></a>4.&#160;Interacciones&#160;Dictadas&#160;del&#160;Cocinero<br/>
+<b>Comando</b><br/>
+<i>&#34;Recuperar&#160;mesa&#160;[N]&#34;</i><br/>
+<b>dictado</b><br/>
+<b>Precondicion</b><br/>
+La&#160;&#160;comanda&#160;&#160;debe&#160;&#160;estar&#160;&#160;en&#160;&#160;estado&#160;&#160;&#34;listo&#34;&#160;&#160;y&#160;&#160;no&#160;&#160;haber&#160;&#160;sido&#160;&#160;notificada&#160;&#160;al<br/>mesero&#160;hace&#160;mas&#160;de&#160;30&#160;segundos.<br/>
+<b>Accion&#160;</b><br/>
+<b>del</b><br/>
+Cambia&#160;el&#160;estado&#160;de&#160;&#34;listo&#34;&#160;a&#160;&#34;en_preparacion&#34;.<br/>
+<b>sistema</b><br/>
+<b>Respuesta&#160;TTS</b><br/>
+<i>&#34;Orden&#160;de&#160;mesa&#160;[numero]&#160;recuperada&#160;a&#160;preparacion.&#34;</i><br/>
+<b>4.4.&#160;Interaccion:&#160;Autorizar&#160;Cancelacion</b><br/>
+<b>Tabla&#160;11.&#160;Detalle&#160;de&#160;Interaccion:&#160;Autorizar&#160;Cancelacion</b><br/>
+<b>Atributo</b><br/>
+<b>Descripcion</b><br/>
+<b>Disparador</b><br/>
+El&#160;&#160;sistema&#160;&#160;anuncia&#160;&#160;en&#160;&#160;la&#160;&#160;diadema&#160;&#160;del&#160;&#160;cocinero&#160;&#160;que&#160;&#160;un&#160;&#160;mesero&#160;&#160;solicita<br/>cancelar&#160;un&#160;producto&#160;o&#160;comanda.<br/>
+<b>Comando&#160;dictado</b><br/>
+<i>&#34;Si,&#160;cancelar&#34;</i>&#160;o&#160;<i>&#34;No,&#160;no&#160;cancelar&#34;</i><br/>
+<b>Precondicion</b><br/>
+Debe&#160;&#160;haber&#160;&#160;una&#160;&#160;solicitud&#160;&#160;de&#160;&#160;cancelacion&#160;&#160;pendiente&#160;&#160;dirigida&#160;&#160;a&#160;&#160;este<br/>cocinero,&#160;y&#160;el&#160;producto/comanda&#160;no&#160;debe&#160;estar&#160;en&#160;estado&#160;&#34;listo&#34;.<br/>
+<b>Accion&#160;</b><br/>
+<b>del</b><br/>
+Marca&#160;el&#160;producto&#160;o&#160;comanda&#160;como&#160;&#34;cancelado&#34;.&#160;Responde&#160;al&#160;mesero&#160;con<br/>
+<b>sistema&#160;(Si)</b><br/>
+confirmacion.&#160;Anuncia&#160;en&#160;altavoz.<br/>
+<b>Respuesta&#160;TTS&#160;(Si)</b><br/>
+<i>&#34;Cancelacion&#160;autorizada.&#34;</i><br/>
+<b>Accion&#160;</b><br/>
+<b>del</b><br/>
+Rechaza&#160;la&#160;cancelacion.&#160;Notifica&#160;al&#160;mesero&#160;del&#160;rechazo.<br/>
+<b>sistema&#160;(No)</b><br/>
+<b>Respuesta&#160;</b><br/>
+<b>TTS</b><br/>
+<i>&#34;Cancelacion&#160;rechazada.&#160;Continue&#160;preparando.&#34;</i><br/>
+<b>(No)</b><br/>
+<b>4.5.&#160;Interaccion:&#160;Consultar&#160;Estado&#160;General</b><br/>
+<b>Tabla&#160;12.&#160;Detalle&#160;de&#160;Interaccion:&#160;Estado&#160;General</b><br/>
+<b>Atributo</b><br/>
+<b>Descripcion</b><br/>
+<b>Disparador</b><br/>
+El&#160;&#160;cocinero&#160;&#160;quiere&#160;&#160;saber&#160;&#160;cuantas&#160;&#160;ordenes&#160;&#160;hay&#160;&#160;pendientes&#160;&#160;sin&#160;&#160;mirar&#160;&#160;la<br/>pantalla.<br/>
+<b>Comando</b><br/>
+<i>&#34;Ordenes&#160;pendientes&#34;</i><br/>
+<b>dictado</b><br/>
+19<br/>
+<hr/>
+<a name=20></a>5.&#160;Interfaces&#160;Visuales&#160;y&#160;Auditivas<br/>
+<b>Accion&#160;</b><br/>
+<b>del</b><br/>
+Cuenta&#160;comandas&#160;por&#160;estado.<br/>
+<b>sistema</b><br/>
+<b>Respuesta&#160;TTS</b><br/>
+<i>&#34;Tienes&#160;&#160;[N]&#160;&#160;ordenes&#160;&#160;pendientes,&#160;&#160;[M]&#160;&#160;en&#160;&#160;preparacion&#160;&#160;y&#160;&#160;[P]&#160;&#160;listas&#160;&#160;esperando<br/>recogida.&#34;</i><br/>
+<b>4.6.&#160;Interaccion:&#160;Repetir&#160;una&#160;Orden</b><br/>
+<b>Tabla&#160;13.&#160;Detalle&#160;de&#160;Interaccion:&#160;Repetir&#160;Orden</b><br/>
+<b>Atributo</b><br/>
+<b>Descripcion</b><br/>
+<b>Disparador</b><br/>
+El&#160;cocinero&#160;no&#160;escucho&#160;bien&#160;el&#160;anuncio&#160;de&#160;una&#160;orden&#160;o&#160;necesita&#160;reconfirmar<br/>los&#160;productos.<br/>
+<b>Comando</b><br/>
+<i>&#34;Repetir&#160;orden&#160;mesa&#160;[N]&#34;</i><br/>
+<b>dictado</b><br/>
+<b>Accion&#160;</b><br/>
+<b>del</b><br/>
+Busca&#160;la&#160;comanda&#160;mas&#160;reciente&#160;de&#160;esa&#160;mesa&#160;y&#160;reproduce&#160;los&#160;productos.<br/>
+<b>sistema</b><br/>
+<b>Respuesta&#160;TTS</b><br/>
+<i>&#34;Orden&#160;de&#160;mesa&#160;[numero]:&#160;[lista&#160;detallada&#160;de&#160;productos&#160;con&#160;cantidades].&#34;</i><br/>
+<b>5.&#160;Interfaces&#160;Visuales&#160;y&#160;Auditivas</b><br/>
+<b>5.1.&#160;Pantalla&#160;Banner&#160;de&#160;Cocina</b><br/>
+La&#160;&#160;pantalla&#160;&#160;de&#160;&#160;cocina&#160;&#160;es&#160;&#160;una&#160;&#160;<b>interfaz&#160;&#160;exclusivamente&#160;&#160;informativa</b>&#160;&#160;de&#160;&#160;tipo&#160;&#160;banner.&#160;&#160;No<br/>admite&#160;&#160;tactil,&#160;&#160;clic,&#160;&#160;raton&#160;&#160;ni&#160;&#160;teclado.&#160;&#160;Su&#160;&#160;proposito&#160;&#160;es&#160;&#160;ofrecer&#160;&#160;una&#160;&#160;referencia&#160;&#160;visual<br/>permanente&#160;de&#160;las&#160;ordenes&#160;en&#160;curso.<br/>
+<b>5.1.1.&#160;Datos&#160;Minimos&#160;del&#160;Banner</b><br/>
+Cada&#160;comanda&#160;se&#160;muestra&#160;como&#160;una&#160;tarjeta&#160;con&#160;los&#160;siguientes&#160;datos&#160;minimos:<br/>
+<b>Numero&#160;&#160;de&#160;&#160;mesa</b>:&#160;&#160;Fuente&#160;&#160;muy&#160;&#160;grande&#160;&#160;(48-72&#160;&#160;px),&#160;&#160;negrita,&#160;&#160;centrado.&#160;&#160;Es&#160;&#160;el&#160;&#160;dato&#160;&#160;mas<br/>prominente.<br/><b>Hora&#160;de&#160;captura</b>:&#160;Formato&#160;24h&#160;(HH:MM).&#160;Permite&#160;calcular&#160;antiguedad.<br/><b>Nombre&#160;del&#160;mesero</b>:&#160;Fuente&#160;mediana,&#160;esquina&#160;superior.<br/><b>Lista&#160;de&#160;productos</b>:&#160;Cantidad&#160;+&#160;nombre,&#160;fuente&#160;grande&#160;y&#160;legible&#160;a&#160;2&#160;metros.<br/><b>Estado&#160;actual</b>:&#160;Indicador&#160;visual&#160;(pendiente,&#160;en&#160;preparacion,&#160;listo).<br/>
+20<br/>
+<hr/>
+<a name=21></a>5.&#160;Interfaces&#160;Visuales&#160;y&#160;Auditivas<br/>
+<b>Tiempo&#160;transcurrido</b>:&#160;Contador&#160;dinamico&#160;MM:SS&#160;desde&#160;la&#160;hora&#160;de&#160;captura.<br/><b>Indicador&#160;&#160;de&#160;&#160;color</b>:&#160;&#160;Borde&#160;&#160;izquierdo&#160;&#160;grueso:&#160;&#160;verde&#160;&#160;(0-10&#160;&#160;min),&#160;&#160;amarillo&#160;&#160;(10-20&#160;&#160;min),<br/>rojo&#160;(mas&#160;de&#160;20&#160;min).<br/>
+<b>5.1.2.&#160;Layout&#160;del&#160;Banner</b><br/>
+<b>Encabezado&#160;&#160;fijo</b>:&#160;&#160;Nombre&#160;&#160;del&#160;&#160;restaurante,&#160;&#160;reloj&#160;&#160;en&#160;&#160;tiempo&#160;&#160;real,&#160;&#160;contador&#160;&#160;de&#160;&#160;ordenes<br/>pendientes.<br/><b>Area&#160;principal</b>:&#160;Tarjetas&#160;de&#160;comanda&#160;en&#160;cuadricula&#160;de&#160;2-3&#160;columnas&#160;segun&#160;tamano&#160;del<br/>monitor.<br/><b>Ordenamiento</b>:&#160;Por&#160;hora&#160;de&#160;captura&#160;(FIFO).&#160;La&#160;mas&#160;antigua&#160;aparece&#160;primero.<br/><b>Refresco</b>:&#160;La&#160;pantalla&#160;se&#160;actualiza&#160;cada&#160;5&#160;segundos&#160;automaticamente.<br/>
+<b>5.2.&#160;Notificaciones&#160;por&#160;Voz&#160;(TTS)</b><br/>
+El&#160;sistema&#160;utiliza&#160;<b>sintesis&#160;de&#160;voz&#160;(Text-to-Speech)</b>&#160;en&#160;tres&#160;canales&#160;de&#160;audio&#160;distintos,&#160;cada<br/>uno&#160;con&#160;un&#160;proposito&#160;especifico:<br/>
+<b>5.2.1.&#160;Altavoz&#160;de&#160;Cocina&#160;(Anuncios&#160;Generales)</b><br/>
+Altavoz&#160;&#160;conectado&#160;&#160;a&#160;&#160;la&#160;&#160;estacion&#160;&#160;base&#160;&#160;de&#160;&#160;la&#160;&#160;cocina.&#160;&#160;Todos&#160;&#160;los&#160;&#160;cocineros&#160;&#160;lo&#160;&#160;escuchan.&#160;&#160;Se&#160;&#160;usa<br/>para:<br/>
+<b>Tabla&#160;14.&#160;Anuncios&#160;por&#160;Altavoz&#160;de&#160;Cocina</b><br/>
+<b>Evento</b><br/>
+<b>Mensaje&#160;TTS&#160;(ejemplo)</b><br/>
+Nueva&#160;comanda&#160;recibida<br/>
+<i>&#34;Nueva&#160;orden:&#160;mesa&#160;cinco,&#160;dos&#160;tacos&#160;al&#160;pastor,&#160;una&#160;coca.&#34;</i><br/>
+Cancelacion&#160;autorizada<br/>
+<i>&#34;Cancelacion&#160;autorizada:&#160;agua&#160;de&#160;horchata&#160;de&#160;mesa&#160;cinco.&#34;</i><br/>
+Cierre&#160;de&#160;cuenta<br/>
+<i>&#34;Cuenta&#160;cerrada:&#160;mesa&#160;cinco,&#160;total&#160;ciento&#160;cuarenta&#160;y&#160;cinco&#160;pesos.&#34;</i><br/>
+<b>5.2.2.&#160;Diadema&#160;del&#160;Cocinero&#160;(Respuestas&#160;Privadas)</b><br/>
+La&#160;diadema&#160;Bluetooth&#160;del&#160;cocinero&#160;recibe&#160;respuestas&#160;privadas&#160;que&#160;solo&#160;el&#160;escucha:<br/>
+<b>Tabla&#160;15.&#160;Mensajes&#160;TTS&#160;en&#160;Diadema&#160;del&#160;Cocinero</b><br/>
+<b>Evento</b><br/>
+<b>Mensaje&#160;TTS&#160;(ejemplo)</b><br/>
+Confirmacion&#160;de&#160;&#34;preparar&#34;<br/>
+<i>&#34;Orden&#160;de&#160;mesa&#160;cinco&#160;en&#160;preparacion.&#34;</i><br/>
+Confirmacion&#160;de&#160;&#34;listo&#34;<br/>
+<i>&#34;Orden&#160;de&#160;mesa&#160;cinco&#160;lista.&#34;</i><br/>
+21<br/>
+<hr/>
+<a name=22></a>5.&#160;Interfaces&#160;Visuales&#160;y&#160;Auditivas<br/>
+Solicitud&#160;<br/>
+de<br/>
+<i>&#34;El&#160;mesero&#160;Juan&#160;solicita&#160;cancelar&#160;agua&#160;de&#160;horchata&#160;de&#160;mesa&#160;cinco.&#160;Puede</i><br/>
+cancelacion<br/>
+<i>confirmar?&#34;</i><br/>
+Consulta&#160;<br/>
+de<br/>
+<i>&#34;Tienes&#160;tres&#160;ordenes&#160;pendientes&#160;y&#160;una&#160;en&#160;preparacion.&#34;</i><br/>
+pendientes<br/>
+Error&#160;de&#160;comando<br/>
+<i>&#34;Comando&#160;no&#160;reconocido.&#160;Intente&#160;de&#160;nuevo.&#34;</i><br/>
+<b>5.2.3.&#160;Diadema&#160;del&#160;Mesero&#160;(Confirmaciones)</b><br/>
+La&#160;diadema&#160;del&#160;mesero&#160;recibe&#160;confirmaciones&#160;de&#160;acciones:<br/>
+<b>Tabla&#160;16.&#160;Mensajes&#160;TTS&#160;en&#160;Diadema&#160;del&#160;Mesero</b><br/>
+<b>Evento</b><br/>
+<b>Mensaje&#160;TTS&#160;(ejemplo)</b><br/>
+Comanda&#160;enviada<br/>
+<i>&#34;Comanda&#160;de&#160;mesa&#160;cinco&#160;enviada.&#34;</i><br/>
+Cancelacion<br/>
+<i>&#34;Cancelacion&#160;autorizada&#160;por&#160;cocina.&#34;</i><br/>
+aprobada<br/>
+Cancelacion<br/>
+<i>&#34;Cancelacion&#160;rechazada&#160;por&#160;cocina.&#34;</i><br/>
+rechazada<br/>
+Cierre&#160;de&#160;cuenta<br/>
+<i>&#34;Cuenta&#160;&#160;de&#160;&#160;mesa&#160;&#160;cinco&#160;&#160;calculada.&#160;&#160;Total&#160;&#160;ciento&#160;&#160;cuarenta&#160;&#160;y&#160;&#160;cinco&#160;&#160;pesos.<br/>Ticket&#160;enviado.&#34;</i><br/>
+<b>Reglas&#160;de&#160;Negocio:&#160;Notificaciones&#160;por&#160;Voz</b><br/>
+<b>RN-5.1</b>:&#160;&#160;Todo&#160;&#160;mensaje&#160;&#160;TTS&#160;&#160;se&#160;&#160;reproduce&#160;&#160;en&#160;&#160;espanol&#160;&#160;mexicano&#160;&#160;(es-MX)&#160;&#160;con<br/>velocidad&#160;1.1x&#160;para&#160;agilidad&#160;sin&#160;perder&#160;claridad.<br/><b>RN-5.2</b>:&#160;Si&#160;hay&#160;multiples&#160;cocineros,&#160;todos&#160;escuchan&#160;el&#160;mismo&#160;altavoz.&#160;Los&#160;mensajes<br/>de&#160;diadema&#160;son&#160;privados&#160;por&#160;cocinero.<br/><b>RN-5.3</b>:&#160;El&#160;sistema&#160;no&#160;anuncia&#160;nuevas&#160;comandas&#160;por&#160;la&#160;diadema&#160;del&#160;cocinero&#160;(solo<br/>por&#160;el&#160;altavoz&#160;comun)&#160;para&#160;no&#160;interrumpir&#160;comunicaciones&#160;privadas.<br/><b>RN-5.4</b>:&#160;&#160;Si&#160;&#160;el&#160;&#160;altavoz&#160;&#160;esta&#160;&#160;reproduciendo&#160;&#160;un&#160;&#160;mensaje&#160;&#160;y&#160;&#160;llega&#160;&#160;un&#160;&#160;nuevo&#160;&#160;evento,&#160;&#160;el<br/>nuevo&#160;mensaje&#160;se&#160;encola&#160;y&#160;se&#160;reproduce&#160;al&#160;terminar&#160;el&#160;anterior.<br/><b>RN-5.5</b>:&#160;&#160;Las&#160;&#160;cancelaciones&#160;&#160;se&#160;&#160;anuncian&#160;&#160;obligatoriamente&#160;&#160;tanto&#160;&#160;en&#160;&#160;el&#160;&#160;altavoz&#160;&#160;de<br/>cocina&#160;&#160;como&#160;&#160;en&#160;&#160;la&#160;&#160;diadema&#160;&#160;del&#160;&#160;cocinero&#160;&#160;afectado,&#160;&#160;para&#160;&#160;garantizar&#160;&#160;que&#160;&#160;no&#160;&#160;haya<br/>confusion.<br/>
+22<br/>
+<hr/>
+<a name=23></a>6.&#160;Flujos&#160;de&#160;Trabajo&#160;Completos<br/>
+<b>6.&#160;Flujos&#160;de&#160;Trabajo&#160;Completos</b><br/>
+<b>6.1.&#160;Flujo&#160;de&#160;Toma&#160;de&#160;Comanda</b><br/>
+1.&#160;El&#160;mesero&#160;se&#160;acerca&#160;a&#160;la&#160;mesa&#160;del&#160;cliente&#160;y&#160;toma&#160;mentalmente&#160;el&#160;pedido.<br/>2.&#160;En&#160;su&#160;telefono&#160;Android&#160;con&#160;diadema&#160;puesta,&#160;selecciona&#160;la&#160;mesa&#160;en&#160;la&#160;PWA.<br/>3.&#160;Presiona&#160;&#160;el&#160;&#160;boton&#160;&#160;de&#160;&#160;microfono&#160;&#160;y&#160;&#160;dicta:&#160;&#160;<i>&#34;Mesa&#160;&#160;cinco,&#160;&#160;dos&#160;&#160;tacos&#160;&#160;al&#160;&#160;pastor&#160;&#160;con&#160;&#160;todo,&#160;&#160;una</i><br/>
+<i>coca&#160;de&#160;medio.&#34;</i><br/>
+4.&#160;VOSK&#160;&#160;transcribe&#160;&#160;el&#160;&#160;audio&#160;&#160;localmente.&#160;&#160;El&#160;&#160;texto&#160;&#160;aparece&#160;&#160;en&#160;&#160;pantalla&#160;&#160;con&#160;&#160;productos<br/>
+identificados.<br/>
+5.&#160;El&#160;mesero&#160;revisa,&#160;presiona&#160;&#34;Enviar&#34;,&#160;y&#160;escucha&#160;en&#160;su&#160;diadema:&#160;<i>&#34;Comanda&#160;de&#160;mesa&#160;cinco</i><br/>
+<i>enviada.&#34;</i><br/>
+6.&#160;El&#160;&#160;sistema&#160;&#160;envia&#160;&#160;la&#160;&#160;comanda&#160;&#160;al&#160;&#160;servidor,&#160;&#160;registra&#160;&#160;hora/mesa/mesero,&#160;&#160;y&#160;&#160;anuncia&#160;&#160;por&#160;&#160;el<br/>
+altavoz&#160;de&#160;cocina:&#160;<i>&#34;Nueva&#160;orden:&#160;mesa&#160;cinco,&#160;dos&#160;tacos&#160;al&#160;pastor,&#160;una&#160;coca&#160;de&#160;medio.&#34;</i><br/>
+7.&#160;La&#160;comanda&#160;aparece&#160;en&#160;la&#160;pantalla&#160;banner&#160;de&#160;cocina.<br/>
+<b>6.2.&#160;Flujo&#160;de&#160;Atencion&#160;en&#160;Cocina</b><br/>
+1.&#160;El&#160;cocinero&#160;escucha&#160;la&#160;notificacion&#160;de&#160;la&#160;nueva&#160;orden&#160;por&#160;el&#160;altavoz.<br/>2.&#160;Cuando&#160;esta&#160;listo&#160;para&#160;preparar,&#160;dicta&#160;a&#160;su&#160;diadema:&#160;<i>&#34;Preparar&#160;siguiente&#34;</i>.<br/>3.&#160;El&#160;sistema&#160;responde&#160;en&#160;su&#160;diadema:&#160;<i>&#34;Orden&#160;de&#160;mesa&#160;cinco:&#160;dos&#160;tacos&#160;al&#160;pastor,&#160;una&#160;coca.</i><br/>
+<i>En&#160;preparacion.&#34;</i><br/>
+4.&#160;La&#160;pantalla&#160;banner&#160;actualiza&#160;la&#160;tarjeta&#160;a&#160;estado&#160;&#34;en&#160;preparacion&#34;.<br/>5.&#160;El&#160;cocinero&#160;prepara&#160;los&#160;alimentos.<br/>6.&#160;Al&#160;terminar,&#160;dicta:&#160;<i>&#34;Listo&#160;mesa&#160;cinco&#34;</i>.<br/>7.&#160;El&#160;sistema&#160;responde:&#160;<i>&#34;Orden&#160;de&#160;mesa&#160;cinco&#160;lista.&#34;</i>&#160;La&#160;pantalla&#160;mueve&#160;la&#160;tarjeta&#160;a&#160;&#34;listo&#34;.<br/>8.&#160;El&#160;mesero&#160;recibe&#160;notificacion&#160;en&#160;su&#160;PWA&#160;y&#160;recoge&#160;la&#160;orden.<br/>
+<b>6.3.&#160;Flujo&#160;de&#160;Cancelacion&#160;Parcial</b><br/>
+1.&#160;El&#160;cliente&#160;de&#160;la&#160;mesa&#160;5&#160;decide&#160;que&#160;no&#160;quiere&#160;el&#160;agua&#160;de&#160;horchata.<br/>2.&#160;El&#160;mesero&#160;dicta&#160;a&#160;su&#160;diadema:&#160;<i>&#34;Cancelar&#160;agua&#160;de&#160;horchata&#160;de&#160;mesa&#160;cinco.&#34;<br/></i>3.&#160;El&#160;sistema&#160;valida&#160;que&#160;el&#160;producto&#160;exista&#160;en&#160;una&#160;comanda&#160;activa&#160;de&#160;esa&#160;mesa&#160;y&#160;no&#160;este<br/>
+&#34;listo&#34;.<br/>
+23<br/>
+<hr/>
+<a name=24></a>7.&#160;Reglas&#160;de&#160;Negocio&#160;Consolidadas<br/>
+4.&#160;El&#160;sistema&#160;anuncia&#160;en&#160;la&#160;diadema&#160;del&#160;cocinero:&#160;<i>&#34;El&#160;mesero&#160;Juan&#160;solicita&#160;cancelar&#160;agua&#160;de</i><br/>
+<i>horchata&#160;de&#160;mesa&#160;cinco.&#160;Puede&#160;confirmar?&#34;</i><br/>
+5.&#160;El&#160;cocinero&#160;dicta:&#160;<i>&#34;Si,&#160;cancelar.&#34;<br/></i>6.&#160;El&#160;&#160;sistema&#160;&#160;marca&#160;&#160;el&#160;&#160;producto&#160;&#160;como&#160;&#160;cancelado,&#160;&#160;anuncia&#160;&#160;por&#160;&#160;altavoz:&#160;&#160;<i>&#34;Cancelacion</i><br/>
+<i>autorizada:&#160;agua&#160;de&#160;horchata&#160;de&#160;mesa&#160;cinco.&#34;</i><br/>
+7.&#160;El&#160;mesero&#160;escucha&#160;en&#160;su&#160;diadema:&#160;<i>&#34;Cancelacion&#160;autorizada&#160;por&#160;cocina.&#160;Agua&#160;de&#160;horchata</i><br/>
+<i>cancelada&#160;de&#160;mesa&#160;cinco.&#34;</i><br/>
+<b>6.4.&#160;Flujo&#160;de&#160;Cierre&#160;de&#160;Cuenta</b><br/>
+1.&#160;El&#160;cliente&#160;de&#160;la&#160;mesa&#160;5&#160;solicita&#160;la&#160;cuenta.<br/>2.&#160;El&#160;mesero&#160;dicta:&#160;<i>&#34;Cerrar&#160;cuenta&#160;de&#160;mesa&#160;cinco&#34;</i>&#160;o&#160;<i>&#34;La&#160;cuenta&#160;de&#160;mesa&#160;cinco&#160;se&#160;va&#160;a&#160;cerrar.&#34;<br/></i>3.&#160;El&#160;&#160;sistema&#160;&#160;calcula&#160;&#160;el&#160;&#160;total&#160;&#160;sumando&#160;&#160;todos&#160;&#160;los&#160;&#160;productos&#160;&#160;no&#160;&#160;cancelados&#160;&#160;de&#160;&#160;todas&#160;&#160;las<br/>
+comandas&#160;de&#160;mesa&#160;5.<br/>
+4.&#160;El&#160;&#160;mesero&#160;&#160;escucha:&#160;&#160;<i>&#34;Cuenta&#160;&#160;de&#160;&#160;mesa&#160;&#160;cinco.&#160;&#160;Total&#160;&#160;ciento&#160;&#160;cuarenta&#160;&#160;y&#160;&#160;cinco&#160;&#160;pesos.&#160;&#160;Tres</i><br/>
+<i>productos.&#160;Ticket&#160;enviado&#160;a&#160;impresion.&#34;</i><br/>
+5.&#160;El&#160;sistema&#160;envia&#160;el&#160;ticket&#160;a&#160;la&#160;impresora&#160;termica.<br/>6.&#160;El&#160;&#160;mesero&#160;&#160;recoge&#160;&#160;el&#160;&#160;ticket&#160;&#160;impreso,&#160;&#160;lo&#160;&#160;lleva&#160;&#160;al&#160;&#160;cliente,&#160;&#160;y&#160;&#160;el&#160;&#160;cobro&#160;&#160;se&#160;&#160;gestiona<br/>
+externamente.<br/>
+7.&#160;El&#160;sistema&#160;marca&#160;todas&#160;las&#160;comandas&#160;de&#160;mesa&#160;5&#160;como&#160;cerradas&#160;y&#160;libera&#160;la&#160;mesa.<br/>8.&#160;La&#160;mesa&#160;5&#160;desaparece&#160;de&#160;la&#160;pantalla&#160;de&#160;caja.<br/>
+<b>7.&#160;Reglas&#160;de&#160;Negocio&#160;Consolidadas</b><br/>
+A&#160;&#160;continuacion&#160;&#160;se&#160;&#160;presenta&#160;&#160;el&#160;&#160;catalogo&#160;&#160;completo&#160;&#160;de&#160;&#160;reglas&#160;&#160;de&#160;&#160;negocio&#160;&#160;del&#160;&#160;sistema,<br/>organizadas&#160;por&#160;area&#160;funcional:<br/>
+<b>7.1.&#160;Reglas&#160;de&#160;Usuarios&#160;y&#160;Dispositivos</b><br/>
+<b>RN-2.1</b>:&#160;&#160;Todo&#160;&#160;mesero&#160;&#160;y&#160;&#160;todo&#160;&#160;cocinero&#160;&#160;deben&#160;&#160;contar&#160;&#160;con&#160;&#160;una&#160;&#160;diadema&#160;&#160;de&#160;&#160;manos&#160;&#160;libres<br/>asignada&#160;y&#160;funcional&#160;para&#160;operar&#160;el&#160;sistema.&#160;Sin&#160;diadema&#160;no&#160;hay&#160;interaccion.<br/><b>RN-2.2</b>:&#160;&#160;Cada&#160;&#160;mesero&#160;&#160;opera&#160;&#160;con&#160;&#160;su&#160;&#160;propio&#160;&#160;telefono&#160;&#160;Android&#160;&#160;y&#160;&#160;su&#160;&#160;propia&#160;&#160;sesion&#160;&#160;de<br/>usuario.&#160;No&#160;se&#160;comparten&#160;credenciales.<br/><b>RN-2.3</b>:&#160;&#160;El&#160;&#160;cocinero&#160;&#160;interactua&#160;&#160;exclusivamente&#160;&#160;por&#160;&#160;voz.&#160;&#160;La&#160;&#160;pantalla&#160;&#160;banner&#160;&#160;es<br/>informativa&#160;y&#160;no&#160;admite&#160;entrada&#160;tactil,&#160;clic&#160;ni&#160;teclado.<br/>
+24<br/>
+<hr/>
+<a name=25></a>7.&#160;Reglas&#160;de&#160;Negocio&#160;Consolidadas<br/>
+<b>RN-2.4</b>:&#160;&#160;El&#160;&#160;sistema&#160;&#160;no&#160;&#160;admite&#160;&#160;interaccion&#160;&#160;por&#160;&#160;parte&#160;&#160;del&#160;&#160;cocinero&#160;&#160;si&#160;&#160;no&#160;&#160;hay&#160;&#160;diadema<br/>conectada&#160;y&#160;funcionando.<br/><b>RN-2.5</b>:&#160;El&#160;cajero&#160;es&#160;un&#160;rol&#160;de&#160;solo&#160;visualizacion.&#160;No&#160;ingresa&#160;datos&#160;al&#160;sistema&#160;ni&#160;modifica<br/>estados&#160;de&#160;comandas.<br/>
+<b>7.2.&#160;Reglas&#160;de&#160;Captura&#160;y&#160;Registro</b><br/>
+<b>RN-3.1</b>:&#160;El&#160;mesero&#160;debe&#160;dictar&#160;siempre&#160;el&#160;numero&#160;de&#160;mesa&#160;al&#160;inicio&#160;de&#160;la&#160;comanda.&#160;Sin<br/>numero&#160;de&#160;mesa,&#160;el&#160;sistema&#160;rechaza&#160;el&#160;dictado.<br/><b>RN-3.2</b>:&#160;Si&#160;VOSK&#160;no&#160;reconoce&#160;un&#160;producto&#160;del&#160;catalogo,&#160;el&#160;sistema&#160;lo&#160;resalta&#160;en&#160;pantalla<br/>para&#160;correccion&#160;manual&#160;antes&#160;del&#160;envio.<br/><b>RN-3.3</b>:&#160;Toda&#160;comanda&#160;enviada&#160;genera&#160;automaticamente&#160;un&#160;anuncio&#160;de&#160;voz&#160;(TTS)&#160;en&#160;el<br/>altavoz&#160;de&#160;cocina.<br/><b>RN-3.4</b>:&#160;&#160;El&#160;&#160;sistema&#160;&#160;aplica&#160;&#160;correccion&#160;&#160;fonetica&#160;&#160;fuzzy&#160;&#160;(Levenshtein,&#160;&#160;umbral&#160;&#160;3&#160;&#160;caracteres)<br/>para&#160;mapear&#160;palabras&#160;similares&#160;a&#160;productos&#160;del&#160;catalogo.<br/><b>RN-3.5</b>:&#160;El&#160;mesero&#160;puede&#160;cancelar&#160;productos&#160;individuales&#160;de&#160;una&#160;comanda&#160;ya&#160;enviada,<br/>pero&#160;solo&#160;antes&#160;de&#160;que&#160;el&#160;cocinero&#160;la&#160;marque&#160;como&#160;&#34;en&#160;preparacion&#34;.<br/><b>RN-3.6</b>:&#160;&#160;Una&#160;&#160;vez&#160;&#160;que&#160;&#160;una&#160;&#160;comanda&#160;&#160;esta&#160;&#160;&#34;en&#160;&#160;preparacion&#34;,&#160;&#160;solo&#160;&#160;el&#160;&#160;cocinero&#160;&#160;puede<br/>autorizar&#160;su&#160;cancelacion.<br/><b>RN-3.7</b>:&#160;&#160;Toda&#160;&#160;comanda&#160;&#160;debe&#160;&#160;registrar&#160;&#160;obligatoriamente&#160;&#160;numero&#160;&#160;de&#160;&#160;mesa,&#160;&#160;hora&#160;&#160;de<br/>captura&#160;e&#160;identificador&#160;de&#160;mesero.<br/><b>RN-3.8</b>:&#160;La&#160;hora&#160;de&#160;captura&#160;se&#160;toma&#160;del&#160;servidor&#160;para&#160;evitar&#160;discrepancias&#160;por&#160;relojes<br/>desconfigurados.<br/><b>RN-3.9</b>:&#160;Las&#160;comandas&#160;se&#160;ordenan&#160;por&#160;hora&#160;de&#160;captura&#160;(FIFO).&#160;La&#160;antiguedad&#160;es&#160;el&#160;unico<br/>criterio&#160;de&#160;ordenamiento.<br/><b>RN-3.10</b>:&#160;&#160;Una&#160;&#160;comanda&#160;&#160;en&#160;&#160;estado&#160;&#160;&#34;en_preparacion&#34;&#160;&#160;o&#160;&#160;&#34;listo&#34;&#160;&#160;no&#160;&#160;puede&#160;&#160;ser&#160;&#160;modificada<br/>por&#160;el&#160;mesero.<br/><b>RN-3.11</b>:&#160;Una&#160;comanda&#160;cancelada&#160;no&#160;se&#160;elimina&#160;fisicamente;&#160;se&#160;marca&#160;como&#160;&#34;cancelado&#34;<br/>y&#160;se&#160;conserva&#160;para&#160;auditoria.<br/><b>RN-3.12</b>:&#160;Al&#160;cerrar&#160;la&#160;cuenta,&#160;todas&#160;las&#160;comandas&#160;en&#160;estados&#160;validos&#160;se&#160;consolidan.&#160;Las<br/>canceladas&#160;se&#160;excluyen&#160;automaticamente.<br/>
+<b>7.3.&#160;Reglas&#160;de&#160;Cocina</b><br/>
+<b>RN-3.13</b>:&#160;El&#160;cocinero&#160;interactua&#160;exclusivamente&#160;por&#160;voz&#160;dictada&#160;a&#160;su&#160;diadema.<br/>
+25<br/>
+<hr/>
+<a name=26></a>7.&#160;Reglas&#160;de&#160;Negocio&#160;Consolidadas<br/>
+<b>RN-3.14</b>:&#160;&#160;Cada&#160;&#160;nueva&#160;&#160;comanda&#160;&#160;se&#160;&#160;anuncia&#160;&#160;automaticamente&#160;&#160;por&#160;&#160;el&#160;&#160;altavoz&#160;&#160;de&#160;&#160;cocina<br/>mediante&#160;TTS.<br/><b>RN-3.15</b>:&#160;El&#160;cocinero&#160;solo&#160;puede&#160;tomar&#160;comandas&#160;en&#160;estado&#160;&#34;pendiente&#34;.<br/><b>RN-3.16</b>:&#160;&#160;&#34;Preparar&#160;&#160;siguiente&#34;&#160;&#160;siempre&#160;&#160;toma&#160;&#160;la&#160;&#160;comanda&#160;&#160;mas&#160;&#160;antigua&#160;&#160;(FIFO).&#160;&#160;No<br/>permite&#160;saltar&#160;ordenes.<br/><b>RN-3.17</b>:&#160;&#160;&#34;Preparar&#160;&#160;mesa&#160;&#160;[N]&#34;&#160;&#160;toma&#160;&#160;la&#160;&#160;comanda&#160;&#160;mas&#160;&#160;antigua&#160;&#160;de&#160;&#160;esa&#160;&#160;mesa&#160;&#160;si&#160;&#160;tiene<br/>multiples.<br/><b>RN-3.18</b>:&#160;Con&#160;multiples&#160;cocineros,&#160;todos&#160;ven&#160;la&#160;misma&#160;pantalla&#160;y&#160;escuchan&#160;los&#160;mismos<br/>anuncios.&#160;La&#160;coordinacion&#160;es&#160;manual.<br/><b>RN-3.19</b>:&#160;No&#160;se&#160;permite&#160;marcar&#160;como&#160;&#34;listo&#34;&#160;sin&#160;previamente&#160;estar&#160;&#34;en_preparacion&#34;.<br/><b>RN-3.20</b>:&#160;&#160;Comando&#160;&#160;no&#160;&#160;reconocido:&#160;&#160;respuesta&#160;&#160;TTS&#160;&#160;&#34;Comando&#160;&#160;no&#160;&#160;reconocido.&#160;&#160;Intente&#160;&#160;de<br/>nuevo.&#34;<br/>
+<b>7.4.&#160;Reglas&#160;de&#160;Cancelaciones</b><br/>
+<b>RN-3.21</b>:&#160;Toda&#160;cancelacion&#160;requiere&#160;autorizacion&#160;explicita&#160;del&#160;cocinero&#160;por&#160;voz.<br/><b>RN-3.22</b>:&#160;Si&#160;el&#160;producto&#160;ya&#160;esta&#160;&#34;listo&#34;,&#160;la&#160;cancelacion&#160;se&#160;rechaza&#160;automaticamente.<br/><b>RN-3.23</b>:&#160;&#160;Si&#160;&#160;la&#160;&#160;comanda&#160;&#160;completa&#160;&#160;esta&#160;&#160;&#34;listo&#34;,&#160;&#160;la&#160;&#160;cancelacion&#160;&#160;total&#160;&#160;se&#160;&#160;rechaza<br/>automaticamente.<br/><b>RN-3.24</b>:&#160;&#160;El&#160;&#160;cocinero&#160;&#160;tiene&#160;&#160;30&#160;&#160;segundos&#160;&#160;para&#160;&#160;responder&#160;&#160;una&#160;&#160;solicitud&#160;&#160;de&#160;&#160;cancelacion.<br/>Pasado&#160;ese&#160;tiempo,&#160;se&#160;rechaza.<br/><b>RN-3.25</b>:&#160;Las&#160;cancelaciones&#160;autorizadas&#160;se&#160;anuncian&#160;por&#160;el&#160;altavoz&#160;de&#160;cocina.<br/><b>RN-3.26</b>:&#160;Productos&#160;cancelados&#160;se&#160;registran&#160;para&#160;auditoria&#160;y&#160;se&#160;excluyen&#160;del&#160;ticket.<br/><b>RN-3.27</b>:&#160;No&#160;se&#160;permiten&#160;modificaciones.&#160;Solo&#160;cancelaciones&#160;y&#160;nuevas&#160;comandas.<br/>
+<b>7.5.&#160;Reglas&#160;de&#160;Cierre&#160;de&#160;Cuenta</b><br/>
+<b>RN-3.28</b>:&#160;&#160;Solo&#160;&#160;el&#160;&#160;mesero&#160;&#160;que&#160;&#160;atendio&#160;&#160;la&#160;&#160;mesa&#160;&#160;(o&#160;&#160;un&#160;&#160;administrador)&#160;&#160;puede&#160;&#160;dictar&#160;&#160;el<br/>cierre.<br/><b>RN-3.29</b>:&#160;&#160;El&#160;&#160;cierre&#160;&#160;requiere&#160;&#160;al&#160;&#160;menos&#160;&#160;una&#160;&#160;comanda&#160;&#160;en&#160;&#160;estado&#160;&#160;valido.&#160;&#160;Mesas&#160;&#160;vacias&#160;&#160;no<br/>generan&#160;ticket.<br/><b>RN-3.30</b>:&#160;Productos&#160;&#34;cancelado&#34;&#160;se&#160;excluyen&#160;automaticamente&#160;del&#160;calculo.<br/><b>RN-3.31</b>:&#160;&#160;El&#160;&#160;total&#160;&#160;es&#160;&#160;suma&#160;&#160;de&#160;&#160;(precio&#160;&#160;x&#160;&#160;cantidad).&#160;&#160;No&#160;&#160;hay&#160;&#160;descuentos,&#160;&#160;propinas&#160;&#160;ni<br/>impuestos&#160;adicionales.<br/><b>RN-3.32</b>:&#160;El&#160;sistema&#160;NO&#160;procesa&#160;metodos&#160;de&#160;pago.&#160;El&#160;ticket&#160;muestra&#160;el&#160;total;&#160;el&#160;cobro&#160;es<br/>externo.<br/>
+26<br/>
+<hr/>
+<a name=27></a>8.&#160;Glosario&#160;de&#160;Terminos<br/>
+<b>RN-3.33</b>:&#160;Al&#160;cerrar,&#160;la&#160;mesa&#160;queda&#160;libre&#160;inmediatamente.<br/><b>RN-3.34</b>:&#160;&#160;Cada&#160;&#160;ticket&#160;&#160;tiene&#160;&#160;numero&#160;&#160;unico&#160;&#160;consecutivo.&#160;&#160;Reimpresion&#160;&#160;requiere<br/>autorizacion&#160;de&#160;administrador.<br/>
+<b>7.6.&#160;Reglas&#160;de&#160;Notificaciones&#160;por&#160;Voz</b><br/>
+<b>RN-5.1</b>:&#160;TTS&#160;en&#160;espanol&#160;mexicano&#160;(es-MX)&#160;a&#160;velocidad&#160;1.1x.<br/><b>RN-5.2</b>:&#160;Altavoz&#160;de&#160;cocina&#160;es&#160;publico;&#160;diademas&#160;son&#160;privadas&#160;por&#160;usuario.<br/><b>RN-5.3</b>:&#160;Nuevas&#160;comandas&#160;se&#160;anuncian&#160;por&#160;altavoz,&#160;no&#160;por&#160;diadema&#160;de&#160;cocinero.<br/><b>RN-5.4</b>:&#160;Mensajes&#160;TTS&#160;se&#160;encolan&#160;si&#160;hay&#160;reproduccion&#160;en&#160;curso.<br/><b>RN-5.5</b>:&#160;Cancelaciones&#160;se&#160;anuncian&#160;obligatoriamente&#160;en&#160;altavoz&#160;y&#160;diadema&#160;del&#160;cocinero.<br/>
+<b>7.7.&#160;Reglas&#160;de&#160;Administracion</b><br/>
+<b>RN-3.35</b>:&#160;&#160;Solo&#160;&#160;el&#160;&#160;administrador&#160;&#160;modifica&#160;&#160;precios&#160;&#160;y&#160;&#160;productos.&#160;&#160;Cambios&#160;&#160;efectivos<br/>inmediatamente.<br/><b>RN-3.36</b>:&#160;Todo&#160;producto&#160;debe&#160;tener&#160;al&#160;menos&#160;una&#160;palabra&#160;clave&#160;para&#160;reconocimiento&#160;de<br/>voz.<br/><b>RN-3.37</b>:&#160;&#160;Reportes&#160;&#160;de&#160;&#160;cancelaciones&#160;&#160;incluyen:&#160;&#160;producto,&#160;&#160;mesa,&#160;&#160;mesero,&#160;&#160;cocinero,&#160;&#160;y<br/>motivo.<br/>
+<b>8.&#160;Glosario&#160;de&#160;Terminos</b><br/>
+<b>Comanda</b><br/>
+Orden&#160;&#160;de&#160;&#160;alimentos&#160;&#160;y&#160;&#160;bebidas&#160;&#160;solicitada&#160;&#160;por&#160;&#160;un&#160;&#160;cliente&#160;&#160;en&#160;&#160;una&#160;&#160;mesa&#160;&#160;especifica,<br/>capturada&#160;por&#160;voz&#160;por&#160;el&#160;mesero&#160;y&#160;registrada&#160;en&#160;el&#160;sistema.<br/>
+<b>Diadema</b><br/>
+Dispositivo&#160;auricular&#160;Bluetooth&#160;de&#160;manos&#160;libres&#160;con&#160;microfono&#160;integrado,&#160;utilizado&#160;por<br/>meseros&#160;y&#160;cocineros&#160;para&#160;dictar&#160;comandos&#160;de&#160;voz&#160;al&#160;sistema.<br/>
+<b>KDS&#160;(Kitchen&#160;Display&#160;System)</b><br/>
+Sistema&#160;de&#160;pantalla&#160;digital&#160;ubicado&#160;en&#160;la&#160;cocina&#160;que&#160;muestra&#160;las&#160;comandas&#160;pendientes<br/>de&#160;forma&#160;visual.&#160;En&#160;este&#160;sistema,&#160;la&#160;pantalla&#160;es&#160;exclusivamente&#160;informativa&#160;(banner).<br/>
+<b>TTS&#160;(Text-to-Speech)</b><br/>
+27<br/>
+<hr/>
+<a name=28></a>8.&#160;Glosario&#160;de&#160;Terminos<br/>
+Tecnologia&#160;&#160;de&#160;&#160;sintesis&#160;&#160;de&#160;&#160;voz&#160;&#160;que&#160;&#160;convierte&#160;&#160;texto&#160;&#160;en&#160;&#160;audio&#160;&#160;hablado.&#160;&#160;Utilizada&#160;&#160;para<br/>anunciar&#160;comandas&#160;en&#160;altavoz&#160;y&#160;responder&#160;en&#160;las&#160;diademas.<br/>
+<b>VOSK</b><br/>
+Toolkit&#160;&#160;de&#160;&#160;reconocimiento&#160;&#160;de&#160;&#160;voz&#160;&#160;offline&#160;&#160;de&#160;&#160;codigo&#160;&#160;abierto&#160;&#160;basado&#160;&#160;en&#160;&#160;Kaldi.&#160;&#160;Ejecuta<br/>localmente&#160;en&#160;el&#160;navegador&#160;via&#160;WebAssembly.<br/>
+<b>WASM&#160;(WebAssembly)</b><br/>
+Formato&#160;&#160;binario&#160;&#160;ejecutable&#160;&#160;en&#160;&#160;navegadores&#160;&#160;a&#160;&#160;velocidad&#160;&#160;cercana&#160;&#160;al&#160;&#160;codigo&#160;&#160;nativo.<br/>Permite&#160;ejecutar&#160;VOSK&#160;en&#160;el&#160;dispositivo&#160;del&#160;mesero&#160;sin&#160;instalacion.<br/>
+<b>IndexedDB</b><br/>
+Base&#160;&#160;de&#160;&#160;datos&#160;&#160;local&#160;&#160;del&#160;&#160;navegador&#160;&#160;que&#160;&#160;almacena&#160;&#160;el&#160;&#160;modelo&#160;&#160;de&#160;&#160;lenguaje&#160;&#160;de&#160;&#160;VOSK&#160;&#160;y&#160;&#160;la<br/>cola&#160;offline&#160;de&#160;comandas.<br/>
+<b>AudioWorklet</b><br/>
+API&#160;de&#160;procesamiento&#160;de&#160;audio&#160;de&#160;baja&#160;latencia&#160;que&#160;captura&#160;el&#160;audio&#160;del&#160;microfono&#160;a&#160;16<br/>kHz&#160;PCM&#160;mono.<br/>
+<b>FIFO</b><br/>
+First&#160;&#160;In,&#160;&#160;First&#160;&#160;Out.&#160;&#160;Metodo&#160;&#160;de&#160;&#160;ordenamiento&#160;&#160;donde&#160;&#160;la&#160;&#160;comanda&#160;&#160;mas&#160;&#160;antigua&#160;&#160;tiene<br/>prioridad&#160;de&#160;atencion.<br/>
+<b>Gramatica&#160;restringida</b><br/>
+Limitacion&#160;&#160;del&#160;&#160;vocabulario&#160;&#160;del&#160;&#160;reconocedor&#160;&#160;a&#160;&#160;un&#160;&#160;conjunto&#160;&#160;especifico&#160;&#160;de&#160;&#160;palabras,<br/>aumentando&#160;la&#160;precision&#160;de&#160;transcripcion.<br/>
+<b>Cola&#160;offline</b><br/>
+Mecanismo&#160;&#160;que&#160;&#160;almacena&#160;&#160;comandas&#160;&#160;localmente&#160;&#160;cuando&#160;&#160;no&#160;&#160;hay&#160;&#160;conexion&#160;&#160;Wi-Fi&#160;&#160;y&#160;&#160;las<br/>sincroniza&#160;automaticamente&#160;al&#160;restaurarse.<br/>
+<b>Correccion&#160;fonetica&#160;fuzzy</b><br/>
+Algoritmo&#160;&#160;(Levenshtein)&#160;&#160;que&#160;&#160;corrige&#160;&#160;pequenos&#160;&#160;errores&#160;&#160;de&#160;&#160;transcripcion&#160;&#160;comparando<br/>palabras&#160;contra&#160;el&#160;catalogo&#160;de&#160;productos.<br/>
+28<br/>
+<hr/>
+</body>
+</html>
+
+```
+
 </details>
 
 ---
