@@ -142,6 +142,15 @@ Un buen resumen debe permitir que:
 
 ---
 
+## 🔄 Propagación Viva de Especificaciones Técnicas (Walkthroughs)
+
+Al generar el documento de *Walkthrough* o resumen de sesión tras resolver una solicitud:
+- **Regla Estricta**: El agente DEBE analizar el contenido del *Walkthrough* generado y realizar un cruce automático con los documentos técnicos oficiales del proyecto ubicados en el directorio `/home/carlos/GitHub/caelitandem_home/restaurantb/docs/`.
+- **Acción Obligatoria**: Identificar de forma precisa a qué documento(s) HTML afecta la nueva implementación o los cambios realizados (ej. modelo de datos, UX, infraestructura, PWA).
+- **Actualización In-situ**: El agente procederá a actualizar, mejorar o expandir los documentos HTML identificados **sin perder coherencia ni romper la estructura o hipervínculos internos**. La documentación oficial debe mantenerse en paridad 1:1 con los *Walkthroughs* resueltos.
+
+---
+
 ## 📌 Notas para Agentes IA
 
 - **Claude Code:** Se espera que sigas este protocolo al cerrar una sesión de implementación verificada. Si el usuario no pregunta explícitamente, puedes proponer el cierre con: *"¿Listo para documentar y subir?"*

@@ -10,7 +10,6 @@ Esta regla protege los assets de configuración compartidos entre Claude Code y 
 | Archivo | Rol | Prohibido |
 |---------|-----|-----------|
 | `.mcp.json` | Config MCP activa — leída automáticamente por Claude y Gemini al iniciar | Vaciar, eliminar, cambiar `docker` por `npx` directo |
-| `.agents/mcp_config.json` | Fuente de referencia — debe ser idéntico a `.mcp.json` | Usarlo como reemplazo de `.mcp.json` |
 | `.clauderules` | Directiva de entrada para Claude — máx ~25 líneas | Agregar notas, JSON, claves, URLs |
 | `CLAUDE.md` | Entry point Claude — índice hacia `.agents/` | Duplicar reglas aquí en lugar de en `.agents/` |
 | `GEMINI.md` | Entry point Gemini — índice hacia `.agents/` | Duplicar reglas aquí en lugar de en `.agents/` |
@@ -27,8 +26,8 @@ Los tres MCPs usan **un solo contenedor Docker** con patches aplicados al arranc
 ```
 Claude/Gemini → .mcp.json → docker exec -i context7-mcp-mysql npx ... mysql://host:PORT/db
                                     ↓
-                          entrypoint-patch.sh (aplicado al arrancar)
-                          — permite puertos no estándar (Host C: 7002)
+                           entrypoint-patch.sh (aplicado al arrancar)
+                           — permite puertos no estándar (Host C: 7002)
 ```
 
 **Si se reemplaza `docker exec` por `npx` directo:** el patch no aplica → `bdawahost-c` falla con ETIMEDOUT.
@@ -39,11 +38,9 @@ Claude/Gemini → .mcp.json → docker exec -i context7-mcp-mysql npx ... mysql:
 
 ## Reglas de modificación
 
-### `.mcp.json` y `mcp_config.json`
-- Siempre deben ser **idénticos**
-- Si se edita uno, actualizar el otro en el mismo commit
+### `.mcp.json`
 - Estructura obligatoria: `docker exec -i context7-mcp-mysql npx -y @f4ww4z/mcp-mysql-server mysql://...`
-- Deben contener los 3 hosts: `bdawahost-a`, `bdawahost-b`, `bdawahost-c`
+- Debe contener los hosts necesarios: `bdawahost-a`, `bdawahost-b`, `bdawahost-c`, `bdrestaurant-host-a`
 
 ### Symlinks en repo `agua`
 - Los 7 symlinks son gestionados por `chatledger_sync_ga_lnks.sh`
@@ -65,8 +62,8 @@ Claude/Gemini → .mcp.json → docker exec -i context7-mcp-mysql npx ... mysql:
 
 | Fecha | Incidente | Causa | Fix |
 |-------|-----------|-------|-----|
-| 2026-04-08 | `.mcp.json` vaciado — MCPs rotos en ambos agentes | GA eliminó contenido por considerarlo redundante con `mcp_config.json` | Restaurar contenido Docker + 3 hosts |
-| 2026-04-09 | `settings.json` desincronizado — usaba `npx` directo sin Docker | Restauración incorrecta desde fuente equivocada | Sincronizar con `mcp_config.json` |
+| 2026-04-08 | `.mcp.json` vaciado — MCPs rotos en ambos agentes | GA eliminó contenido por considerarlo redundante | Restaurar contenido Docker + 3 hosts |
+| 2026-04-09 | `settings.json` desincronizado — usaba `npx` directo sin Docker | Restauración incorrecta desde fuente equivocada | Sincronizar con .mcp.json |
 
 ---
 

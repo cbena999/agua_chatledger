@@ -25,6 +25,12 @@ Este archivo es el punto de entrada principal para el asistente de IA (Antigravi
 | **12** | **Uso Seguro de `Conexion.php` (mysqli)** | [.agents/rules/12-estandar-conexion-mysqli.md](file:///.agents/rules/12-estandar-conexion-mysqli.md) |
 | **13** | **Idioma de Comunicación y Documentación** | [.agents/rules/13-idioma-espanol.md](file:///.agents/rules/13-idioma-espanol.md) |
 
+### 🍔 Reglas Específicas: Proyecto Restaurant (Comandas VOSK)
+| Regla | Descripción | Archivo |
+| :--- | :--- | :--- |
+| **14** | **Arquitectura y Activos PWA (Offline SSOT)** | [.agents/rules/14-restaurant-arquitectura-pwa.md](file:///.agents/rules/14-restaurant-arquitectura-pwa.md) |
+| **15** | **Estándares UI/UX y Patrones HTMX** | [.agents/rules/15-restaurant-htmx-estandares.md](file:///.agents/rules/15-restaurant-htmx-estandares.md) |
+
 ---
 
 ## 🛠️ Skills Personalizadas (Workflows y Estándares)
@@ -284,7 +290,7 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 *   **Aislamiento y Consolidación de Oferta**: Los archivos de desarrollo y demo (`v-ospv/`) y los de pase a producción (`aguad-osv3-2026/`) quedaron totalmente aislados de la rama `main`.
 *   **Flujo Mandatorio de Despliegue PHP**: Se documentó formalmente que para aplicar cambios PHP locales en Host C se debe ejecutar obligatoriamente el pipeline de empaquetado (`prepare_deploy_win10.sh`) y subida HTTP (`deploy_http.py`).
 
-**Última actualización**: 2026-06-14
+**Última actualización**: 2026-06-15
 
 
 

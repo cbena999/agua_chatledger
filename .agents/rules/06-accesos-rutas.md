@@ -31,7 +31,7 @@ Esta regla consolida los accesos a los tres ambientes de **Agua** y define cuán
 | **Web URL** | `http://192.168.1.128:7001/ayd-os/` |
 | **Apache** | puerto `7001` |
 | **MariaDB** | Ver `.mcp.json` (SSOT) · db `aguayd_os` |
-| **MCP** | `bdawa2host-c` |
+| **MCP** | `bdawahost-c` |
 | **XAMPP dir** | `F:\xampp` · Webapp: `F:\xampp\htdocs\ayd-os` |
 
 > [!NOTE]
@@ -59,7 +59,7 @@ docker exec -i context7-mcp-mysql npx -y @f4ww4z/mcp-mysql-server mysql://user:p
 - Config activa: `.mcp.json` (symlink → `.chatledger/.mcp.json`)
 
 > **NUNCA eliminar `.mcp.json`** ni reemplazar `docker exec` por `npx` directo.
-> `mcp_config.json` en `.agents/` es la fuente de verdad de referencia — `.mcp.json` debe ser idéntico.
+> La configuración de red y credenciales se centraliza en `.mcp.json` como SSOT.
 
 ---
 

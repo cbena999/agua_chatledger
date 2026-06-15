@@ -12,7 +12,7 @@ Esta regla define los entornos operativos de **Agua** y el acceso mandatorio por
 |:---:|---|---|---|---|:---:|
 | **A** | Ubuntu 22 / XAMPP Linux | TRANSICIÓN (V1+) — Bridge MySQL | `aguav1.0-legacy` | `bdawahost-a` | Ver `.mcp.json` |
 | **B** | Windows 7 / MySQL legado | Espejo Producción — Datos Frescos | N/A | `bdawahost-b` | Ver `.mcp.json` |
-| **C** | Windows 10 / XAMPP 7.4.33 Portable | Localización V2 (Tlapa) — MariaDB | `aguad_ac_oferta` | `bdawa2host-c` | Ver `.mcp.json` |
+| **C** | Windows 10 / XAMPP 7.4.33 Portable | Localización V2 (Tlapa) — MariaDB | `aguad_ac_oferta` | `bdawahost-c` | Ver `.mcp.json` |
 
 
 ### Stack Host C (detalle)
@@ -35,7 +35,7 @@ Esta regla define los entornos operativos de **Agua** y el acceso mandatorio por
 **Acceso Técnico**:
 - MCP `bdawahost-a` para consultas y ejecuciones en el ambiente de desarrollo.
 - MCP `bdawahost-b` exclusivamente para extracción de datos operativos (pagos, cargos).
-- MCP `bdawa2host-c` para deploy y validación de scripts en Host C (Windows 10, BD `aguayd_os`).
+- MCP `bdawahost-c` para deploy y validación de scripts en Host C (Windows 10, BD `aguayd_os`).
 
 ### 📂 Rutas de Logs Host C
 | Archivo | Ruta | Propósito |
