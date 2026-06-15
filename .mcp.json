@@ -23,7 +23,7 @@
         "context7-mcp-mysql",
         "npx",
         "-y",
-        "@f4ww4z/mcp-mysql-server",
+        "@f4ww4z/mcp-mysql-server", 
         "mysql://root:sdrastbuy@192.168.1.81:3306/awa"
       ],
       "env": {
@@ -38,8 +38,8 @@
         "context7-mcp-mysql",
         "npx",
         "-y",
-        "@f4ww4z/mcp-mysql-server",
-        "mysql://root:comite_2026@192.168.0.100:7002/awa"
+        "@f4ww4z/mcp-mysql-server", 
+        "mysql://root:comite_2026@192.168.1.128:7002/awa"
       ],
       "env": {
         "DOCKER_HOST": "unix:///var/run/docker.sock"
