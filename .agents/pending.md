@@ -64,6 +64,28 @@ SELECT IFNULL(SUM(monto),0) FROM vw_ligacargos_pendientes WHERE numcontrato='405
 
 ---
 
+### P-04 🔲 Prueba de Estrés: Poka-Yoke Histórico (`_esContratoFacturableEnAnio`)
+**Objetivo**: Validar que la reactivación de un contrato previamente suspendido no genere cargos retroactivos indebidos por los años en los que estuvo bajo suspensión. La lógica implementada en `contratos.php` revisa la tabla `cambios` para este fin.
+**Candidatos de prueba identificados**:
+- **Contratos 1362 y 1363**: Suspendidos el 31 de Marzo de 2025 (`estado = 2`). Tienen historial de cargos en 2024 (correcto porque estaban activos), pero la facturación retroactiva falló al proteger el 2026 debido a una variación en el texto del log.
+- **Contrato 142**: Reactivado al Estado 1 el 29/05/2026 tras estar en Suspensión Temporal.
+- **Contrato 1284**: Reactivado al Estado 1 el 19/05/2026 tras estar en Suspensión Temporal.
+- **Contrato 1021**: Actualmente en Suspensión Temporal (Estado 2) en Host B. *Caso ideal para simular la reactivación en vivo y observar la facturación retroactiva.*
+**Acción Pendiente**:
+1. ~~Arreglar la expresión regular en `_esContratoFacturableEnAnio` (`contratos.php`).~~ (✅ COMPLETO: Regex cambiado a `/estado.*?\[(-?1|[2-4])\]/i` y lectura de `Cambio de estado de contrato`).
+2. Simular la reactivación de estos contratos para confirmar que excluye correctamente los años de suspensión basándose en el historial blindado.
+
+---
+
+### P-05 🔲 Desarrollar Generador SQL Offline para Catch-Up (Versiones A1 y B1)
+**Objetivo**: Ejecutar la sincronización de los 64 contratos en el Host C (Kiosko Windows de producción) bajo un entorno sin red/acceso directo a Host B.
+**Acción Pendiente**:
+1. Crear un script extractor (`generador_catchup_sql.php`) que corra en Host A leyendo de Host B.
+2. En lugar de inyectar datos directamente, construir dos archivos planos `.sql` transaccionales (`catchup_camino_A1.sql` y `catchup_camino_B1.sql`).
+3. Estos archivos deben contener los `DELETE`, los `INSERT` con el split arquitectónico, y el `UPDATE` global respectivo (1 o 0), garantizando el encode UTF-8 y logs de consola `SELECT '...';`.
+
+---
+
 ## ✅ RESUELTOS RECIENTEMENTE (referencia)
 
 | Fecha | Item | Detalle |
