@@ -4,11 +4,12 @@
 
 | Field | Value |
 |-------|-------|
-| **Trajectory ID** | `fb026529-da45-45de-8870-1af30e011a47` |
+| **Trajectory ID** | `831b6131-92cd-4339-9476-f428bd07a611` |
 | **Cascade ID** | `37c0af77-ff98-45c9-9f38-1435d8640499` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 215 |
+| **Total Steps** | 327 |
 | **Started** | 16 June 2026, 12:01 pm |
+| **Completed** | 16 June 2026, 8:47 pm |
 
 ---
 
@@ -9047,15 +9048,3108 @@ I'm now focused on explicit tool choice. For the current task, I've identified t
 
 ### Terminal Command Execution
 
-**Status:** CORTEX_STEP_STATUS_WAITING
+**Status:** Completed
 **Created:** 16 June 2026, 3:12 pm
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** CORTEX_STEP_STATUS_PENDING
+**Status:** Completed
 **Created:** 16 June 2026, 3:12 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on employing specialized tools instead of generic ones for file manipulations. I'm actively integrating `view_file`, `grep_search`, `list_dir`, and `replace_file_content` where possible, rather than resorting to bash commands. This strategy aims at improving efficiency and precision in handling files, especially as I prepare to make critical updates.
+
+
+
+
+### Actions
+
+**Tool:** `command_status`
+
+**Tool:** `command_status`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.162961142s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Process Monitor
+
+**Status:** Completed
+**Created:** 16 June 2026, 3:13 pm
+
+---
+
+### Process Monitor
+
+**Status:** Completed
+**Created:** 16 June 2026, 3:13 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+## User Request
+
+se deberia mover estos archivos de /opt/lampp/htdocs/agua/admin/fixes/ hacia /opt/lampp/htdocs/agua/docs-dev/pase-a-prod/aguav2-2026/fix-issue-01/,
+recuerdo lo solicite ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `settings.json`
+**Language:** jsonc
+
+**Open Files:**
+- `workspace.json`
+- `.gitignore`
+- `run_patch.ps1`
+- `05_stored_procedures.sql`
+- `demo-cliente-rest-bar-tiendita-expendios.html`
+- `Especificacion_Funcional_Comandas_VOSK.html`
+- `Especificacion_Tecnica_Comandas_VOSK.html`
+- `chatledger_validate.sh`
+- `.gitignore`
+- `explicacion_motor_v2.md`
+- `transiciones_estado_contratos.md`
+- `GEMINI.md`
+- `pending.md`
+- `contratos.php`
+- `pending.md`
+- `04_stored_procedures.sql`
+- `02_core_schema.sql`
+- `.mcp.json`
+- `00_database.sql`
+- `ISSUE_01_MORA_HISTORICA_V2.md`
+- `Tecnica_Modelo_Datos_Comandas_VOSK.html`
+- `05_seed_data.sql`
+- `03_transactional_schema.sql`
+- `Tecnica_Infraestructura_Despliegue_Comandas_VOSK.html`
+- `Tecnica_Arquitectura_Voz_Comandas_VOSK.html`
+- `Issues_Resueltos_Sincronizacion_64_Contratos_20260615.md`
+- `SKILL.md`
+- `01_auth_schema.sql`
+- `settings.json`
+- `GUIA_CATALOGO_CARGOS.md`
+- `ISSUE_02_CROSS_CONTRACT_BUG.md`
+- `doc_cajero_explicacion_diferencias.md`
+- `configuracion.php`
+- `sw.js`
+- `setup.sh`
+- `cargos.php`
+- `06_indexes.sql`
+- `Funcional_Flujos_Trabajo_Comandas_VOSK.html`
+- `Configuring_MCP_Server_Development_Branches_d5c83311e744.md`
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on employing specialized tools instead of generic ones for file manipulations. I'm actively integrating `view_file`, `grep_search`, `list_dir`, and `replace_file_content` where possible, rather than resorting to bash commands. This strategy aims at improving efficiency and precision in handling files, especially as I prepare to make critical updates.
+
+
+**Verifying File Movements**
+
+I'm now deep-diving into the file move operation I just executed. Although I *thought* it worked initially, the `rmdir` failure has me worried. Upon closer inspection of the git output, I see missing files that should have been deleted, raising further concerns. I need to use `list_dir` to confirm the location of `doc_cajero_explicacion_diferencias.md` and `explicacion_motor_v2.md` and `view_file` on `catchup_64.php`.
+
+
+
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/opt/lampp/htdocs/agua/docs-dev/pase-a-prod/aguav2-2026/fix-issue-01`
+
+**Tool:** `list_dir`
+**Path:** `/opt/lampp/htdocs/agua/admin/fixes`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.808822254s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+<details>
+<summary>Directory: `fix-issue-01` (1 items)</summary>
+
+**Path:** `opt/lampp/htdocs/agua/docs-dev/pase-a-prod/aguav2-2026/fix-issue-01`
+
+| Name | Type | Size |
+|------|------|------|
+| `ISSUE_01_MORA_HISTORICA_V2.md` | File | 5585 bytes |
+
+</details>
+
+---
+
+<details>
+<summary>Directory: `fixes` (2 items)</summary>
+
+**Path:** `opt/lampp/htdocs/agua/admin/fixes`
+
+| Name | Type | Size |
+|------|------|------|
+| `doc_cajero_explicacion_diferencias.md` | File | 5701 bytes |
+| `explicacion_motor_v2.md` | File | 20801 bytes |
+
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now emphasizing the use of specialized tools, specifically avoiding general commands like `cat`, `grep`, `ls`, and `sed` in favor of functions like `view_file`, `grep_search`, `list_dir`, and `replace_file_content` whenever possible. This change prioritizes precision and potentially simplifies operations.
+
+
+**Refining Error Resolution**
+
+I've zeroed in on the failure of a previous `mv` command. My previous hypothesis was wrong. The initial directory move failed because a subsequent `rmdir` operation was rejected due to permission constraints. This chained execution prevented the `mv` from executing, leaving the target directory contents unchanged. This explains the presence of the expected files in their original location.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.765384707s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 16 June 2026, 8:00 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now emphasizing the use of specialized tools, specifically avoiding general commands like `cat`, `grep`, `ls`, and `sed` in favor of functions like `view_file`, `grep_search`, `list_dir`, and `replace_file_content` whenever possible. This change prioritizes precision and potentially simplifies operations.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.092040501s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 16 June 2026, 8:00 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on employing specialized tools instead of generic ones for file manipulations. I'm actively integrating `view_file`, `grep_search`, `list_dir`, and `replace_file_content` where possible, rather than resorting to bash commands. This strategy aims at improving efficiency and precision in handling files, especially as I prepare to make critical updates.
+
+
+
+
+### Actions
+
+**Tool:** `command_status`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.089075256s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Process Monitor
+
+**Status:** Completed
+**Created:** 16 June 2026, 8:01 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now emphasizing the use of specialized tools, specifically avoiding general commands like `cat`, `grep`, `ls`, and `sed` in favor of functions like `view_file`, `grep_search`, `list_dir`, and `replace_file_content` whenever possible. This change prioritizes precision and potentially simplifies operations.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.172797143s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+## User Request
+
+QUe lo que se hizo en esta conbersacion o pasada de ayer, de estos archivos, se documente en /opt/lampp/htdocs/agua/docs-dev/pase-a-prod/aguav2-2026/fix-issue-01/ISSUE_01_MORA_HISTORICA_V2.md (modificar.php y catalogo.php) , para que el MD tenga la descripcion completa para solucionar el issue 1.
+Revise que en: 
+EN GUIA_CATALOGO_CARGOS.md lo siguiente ya no es vigente:
+ 3. El Campo recargo (“¿Es una Multa?”) — La Regla más Importante
+Analiza ambos docs, y actualiza lo necesario para tener congruencia entre ambos docs y los que esten en /opt/lampp/htdocs/agua/docs-dev/pase-a-prod/aguav2-2026/fix-issue-01/
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `settings.json`
+**Language:** jsonc
+
+**Open Files:**
+- `05_stored_procedures.sql`
+- `demo-cliente-rest-bar-tiendita-expendios.html`
+- `Especificacion_Funcional_Comandas_VOSK.html`
+- `Especificacion_Tecnica_Comandas_VOSK.html`
+- `chatledger_validate.sh`
+- `.gitignore`
+- `explicacion_motor_v2.md`
+- `transiciones_estado_contratos.md`
+- `GEMINI.md`
+- `pending.md`
+- `contratos.php`
+- `pending.md`
+- `04_stored_procedures.sql`
+- `02_core_schema.sql`
+- `.mcp.json`
+- `00_database.sql`
+- `ISSUE_01_MORA_HISTORICA_V2.md`
+- `Tecnica_Modelo_Datos_Comandas_VOSK.html`
+- `05_seed_data.sql`
+- `03_transactional_schema.sql`
+- `Tecnica_Infraestructura_Despliegue_Comandas_VOSK.html`
+- `Tecnica_Arquitectura_Voz_Comandas_VOSK.html`
+- `Issues_Resueltos_Sincronizacion_64_Contratos_20260615.md`
+- `SKILL.md`
+- `01_auth_schema.sql`
+- `settings.json`
+- `GUIA_CATALOGO_CARGOS.md`
+- `ISSUE_02_CROSS_CONTRACT_BUG.md`
+- `doc_cajero_explicacion_diferencias.md`
+- `configuracion.php`
+- `sw.js`
+- `setup.sh`
+- `cargos.php`
+- `06_indexes.sql`
+- `Funcional_Flujos_Trabajo_Comandas_VOSK.html`
+- `Configuring_MCP_Server_Development_Branches_d5c83311e744.md`
+- `workspace.json`
+- `.gitignore`
+- `run_patch.ps1`
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on employing specialized tools instead of generic ones for efficiency. For example, instead of resorting to `cat` or `grep`, I'm prioritizing the use of `view_file` and `grep_search` where appropriate. This shift aims to streamline operations and enhance precision.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ISSUE_01_MORA_HISTORICA_V2.md`
+
+**Tool:** `view_file`
+**File:** `GUIA_CATALOGO_CARGOS.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.387961665s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# Issue 01: Discrepancias de Mora Histórica (Los 64 Contratos) y Estabilización V2
+
+## 🕵️‍♂️ Análisis a Profundidad y Causa Raíz
+
+Durante la validación financiera de la base de datos migrada (Host C), se detectó que al menos **64 contratos crónicos** presentaban discrepancias severas en la cantidad de adeudos y montos totales respecto al sistema antiguo (Host B). En algunos casos, los contratos pasaban de 50 adeudos a más de 120 al momento de ser consultados.
+
+**La Causa Raíz:**
+1. **Límite Ciego de 12 Meses (Host B):** El sistema legado estaba mal programado para detener el cálculo de interés simple (recargos) a los 12 meses exactos. A los grandes deudores (ej. 30 meses de adeudo) se les estaba "perdonando" ilegalmente meses de mora por un fallo en el reloj del software.
+2. **Generación JIT (Just-In-Time):** El motor no procesa recargos en la madrugada; los genera en el milisegundo en que el cajero abre la ficha del deudor.
+3. **Cobro Ilegal en Suspensión (Host B):** El viejo sistema inyectaba recargos continuos incluso si el usuario había estado en *Suspensión Temporal* o *Administrativa*, ensuciando la contabilidad.
+
+**La Solución Estructural (Motor V2 - Camino A):**
+El nuevo motor de Host C es matemáticamente exacto. No tiene límites artificiales de 12 meses y cuenta con un **escudo Poka-Yoke** que escanea el expediente y *borra* los recargos cobrados ilegalmente durante meses de suspensión, mientras que simultáneamente *inyecta* la mora ininterrumpida real (rompiendo el tope de 12 meses) para los años activos (2024 y 2025).
+
+---
+
+## 🏗️ Implementación Técnica: ¿Qué pasó con los PHPs?
+
+Respecto a tu duda sobre los archivos y sus nombres: **No se mantuvieron versiones con nombres distintos (como `_v2.php`).** 
+Toda la lógica matemática y de mitigación fue inyectada **directamente en los archivos originales** del core del sistema. La estandarización se logra compensando la matemática ruda con parámetros dinámicos provenientes del nuevo panel de **Configuración Global (`configuracion.php`)**.
+
+### Modificaciones Clave por Archivo:
+
+1. **`includes/negocio/cargos.php`** (El Motor Matemático)
+   - Contiene la función `calcula_recargos()`.
+   - **Mejora:** Elimina la barrera de 12 meses y calcula el delta de fechas exacto.
+   - **Guard G02 (Poka-Yoke):** Se forzó a nivel backend que el flag de recargo (`recargo=1`) sea *exclusivo* de las categorías 2 (AGUA) y 3 (DRENAJE). Esto evita que operadores por error cobren mora sobre Asambleas o Multas. Además, se deshabilitó este checkbox de la interfaz (UI).
+   - **Freno de Emergencia:** Incorpora la lectura de `reversal_threshold` (Límite Bomba) desde la BD para congelar cuentas incobrables altísimas.
+
+2. **`includes/negocio/contratos.php`** (Gestión de Ciclo de Vida)
+   - Incorpora la lectura dinámica `cargaConfig()`.
+   - Garantiza que al hacer una transición de estado (ej. 2 → 1), la función `_amnistiaRecargosHistoricos()` y `_sincronizaParidadFinanciera()` operen respetando las reglas sin violar los periodos suspendidos.
+
+3. **`admin/operaciones/configuracion.php`** (El Panel de Amnistía)
+   - Unifica el control político. En lugar de cambiar código para congelar mora, el Comité Administrativo ahora puede encender (`recargo=1`) o apagar (`recargo=0`) la mora de años específicos (ej. 2024 y 2025 activos, 2023 atrás en amnistía).
+
+---
+
+## 📋 La Lista de los Contratos Afectados (Muestra Representativa)
+*(Esta lista representa el diferencial de contratos crónicos donde el Poka-Yoke y el Motor V2 calibraron deudas masivas, ya sea depurando basura o rompiendo el techo de cristal)*
+
+`13, 53, 78, 91, 110, 124, 145, 163, 166, 187, 317, 370, 382, 386, 397, 398, 476, 519, 570, 573, 583, 586, 588, 606, 608, 650, 662, 663, 684, 749, 760, 789, 790, 815, 823, 833, 834, 857, 867, 896, 898, 917, 920, 928, 956, 962, 979, 988, 998, 1008, 1016, 1024, 1056, 1081, 1098, 1121, 1123, 1134, 1139, 1162, 1184, 1198, 1221, 1374.`
+
+*(Casos icónicos: El **53** subió su deuda porque el viejo sistema le ocultó meses; el **857** empató exacto porque el V2 le borró meses de mora ilegal pero le cobró justa la continua).*
+
+---
+
+## 📦 Lista de Archivos para Pase a Producción
+
+Para que la solución del **Issue 01** quede completamente activa en el servidor de producción (Host C o cualquiera en adelante), los siguientes archivos unitarios deben ser sobrescritos desde este repositorio hacia su ruta original:
+
+1. **`includes/negocio/cargos.php`** 
+2. **`includes/negocio/contratos.php`**
+3. **`admin/operaciones/configuracion.php`**
+
+---
+
+## ✅ Verificación Empírica (Front-end)
+
+1. Entra al sistema como Administrador.
+2. Ve al panel de **Configuración Global** (`admin/operaciones/configuracion.php`).
+   - *Prueba:* Al intentar apagar la mora de 2025 y dar Guardar, el sistema debe arrojar el modal de confirmación con Diff de impacto de forma exitosa.
+3. Entra como cajero y ve a crear un **Nuevo Cargo** a cualquier contrato.
+   - *Prueba:* El checkbox de "Aplica Recargo (multa)" ya NO debe mostrarse ni estar manipulable para categorías ajenas al Agua/Drenaje, confirmando el Poka-Yoke estructural.
+4. Abre la ficha del Contrato **1162** (o cualquier crónico de la lista).
+   - *Prueba:* La deuda debe aparecer completa y continua en el Estado de Cuenta. Puedes compararlo mentalmente frente al Host B (el viejo) y notar que en el V2, la suma de los "Recargos de Agua" ya no se estanca a los 12 meses, sino que refleja la temporalidad ininterrumpida que hayas dejado activa en el Panel de Amnistía.
+
+```
+
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# Guía del Catálogo de Cargos — Sistema Agua V2
+
+**Para:** Operador del Sistema / Administrador  
+**Propósito:** Referencia completa sobre cómo crear, editar e interpretar los conceptos del catálogo de cargos. Incluye reglas de negocio, ejemplos correctos e incorrectos, y advertencias sobre campos críticos.
+
+---
+
+## 1. Anatomía de un Cargo (Ficha de Campos)
+
+Cuando se crea o edita un concepto en el catálogo, estos son **todos los campos** y su significado:
+
+| Campo | Nombre en pantalla | Descripción |
+|---|---|---|
+| `nombre` | Nombre / Concepto | Texto que aparecerá en la ficha del contrato, en recibos y en reportes. |
+| `monto` | Monto base | Precio estándar para usuarios de tipo **Normal** (1 toma). El sistema puede multiplicarlo automáticamente. |
+| `monto_comercial` | Monto comercial | Si el usuario tiene toma **Comercial** (Tipo C), se usa este monto en lugar de `monto`. Si es 0, el sistema duplica el monto base. |
+| `recargo` | ¿Es una Multa? | **Campo crítico.** Controla si el sistema genera intereses de mora mensuales. Ver Sección 3. |
+| `categoria` | Categoría | Clasifica el ingreso para los reportes de Corte de Caja. Ver Sección 2. |
+| `anio` | Año | El año de vigencia del cargo. Usar `0` para conceptos que no caducan (trámites, multas). |
+| `mensualidades` | ¿Por mes? | Si está activo, el monto representa **una mensualidad** (ej. recargo mensual). |
+| `repetir` | ¿Repetible? | Si está activo, el sistema permite aplicar el mismo concepto **más de una vez** al mismo contrato. Ver Sección 4. |
+| `metros` | ¿Multiplica por metros? | Si está activo, el monto se multiplica por los metros lineales del contrato. Solo para contratos de conexión. |
+| `automatico` | Automático | Reservado para uso interno del sistema. Dejar en `0`. |
+| `estado` | Estado | `1` = Activo (visible), `0` = Inactivo (oculto en pantalla), `2` = Inactivo alternativo. |
+
+---
+
+## 2. Categorías del Sistema
+
+La categoría determina en qué columna/renglón aparece el cobro en el **Corte de Caja** y el **Reporte Resumen**. Elegir la categoría incorrecta provoca descuadres contables.
+
+| ID | Nombre | ¿Genera recargo automático? | Uso correcto |
+|---|---|---|---|
+| `1` | GENERAL | No | Cobros atípicos sin otra categoría. |
+| `2` | AGUA | **Sí** (si `recargo=1`) | **Únicamente** anualidades de agua potable. |
+| `3` | DRENAJE | **Sí** (si `recargo=1`) | **Únicamente** anualidades de drenaje/alcantarillado. |
+| `4` | CUOTAS ESPECIALES | No | Cuotas aprobadas en asamblea. |
+| `5` | REPARACIONES | No | Trabajos de fontanería a cargo del usuario. |
+| `6` | FALTAS ASAMBLEA | No | Multa por no asistir a asamblea. **Sin año**, acumulativa. |
+| `7` | METROS LINEALES | No | Cobro por conexión nueva (precio × metros). |
+| `8` | CONTRATO AGUA | No | Contrato de toma de agua nueva. |
+| `9` | CREDENCIAL | No | Reposición de credencial de usuario. |
+| `10` | COOPERACIONES | No | Cooperaciones o derramas. |
+| `11` | RECARGOS NORMALES | No | Recargos manuales históricos (pre-V2). |
+| `12` | SANCIONES | No | Sanciones administrativas. |
+| `13` | CANCELACIÓN A/D | No | Cancelación de toma de agua o drenaje. |
+| `14` | RECONEXIÓN A/D | No | Reconexión de toma de agua o drenaje. |
+| `15` | CONEXIONES | No | Conexiones especiales. |
+| `16` | RECARGO AGUA | No | **Generado automáticamente** por el motor de mora sobre Cat. 2. No crear manualmente. |
+| `17` | RECARGO DRENAJE | No | **Generado automáticamente** por el motor de mora sobre Cat. 3. No crear manualmente. |
+| `18` | CONTRATO DRENAJE | No | Contrato de conexión de drenaje nueva. |
+| `19` | CAMBIO DE PROPIETARIO | No | Trámite de cambio de titular del contrato. |
+| `20` | MULTA POR DESPERDICIO DE AGUA | No | Sanción por desperdicio. |
+| `21` | CONSTANCIA DE NO ADEUDO | No | Expedición de constancia. |
+| `22` | REPARACIÓN DE FUGAS | No | Excavación y cancelación/reparación de fuga. |
+
+> [!CAUTION]
+> Las categorías **16** y **17** son de uso **exclusivo del motor automático de recargos**. Nunca crear conceptos manuales con estas categorías. El sistema fuerza `recargo=0` en cualquier cargo cuya categoría no sea 2 o 3.
+
+---
+
+## 3. El Campo `recargo` ("¿Es una Multa?") — La Regla más Importante
+
+Este checkbox controla el **motor de mora mensual**. Su comportamiento:
+
+- Si `recargo = 1` **y** `categoria IN (2, 3)`:  
+  → Cuando el cargo queda pendiente de pago, cada mes el sistema genera automáticamente un nuevo cargo de recargo mensual (10% del monto) en las categorías 16 ó 17.
+
+- Si `recargo = 1` **y** `categoria` es cualquier otra:  
+  → El sistema **ignora el flag** (Guard G02). No genera mora. Es inofensivo pero confuso: **evitar**.
+
+- Si `recargo = 0`:  
+  → El cargo nunca genera intereses de mora, sin importar cuánto tiempo quede pendiente.
+
+### ✅ Regla de Oro
+
+| Tipo de Concepto | `recargo` correcto |
+|---|---|
+| Anualidad de Agua (Cat. 2) | `1` |
+| Anualidad de Drenaje (Cat. 3) | `1` |
+| **Todo lo demás** (trámites, multas, reconexiones, constancias, etc.) | `0` |
+
+---
+
+## 4. El Campo `repetir` — El Contador R(N)
+
+Cuando `repetir = 1`, el sistema **permite aplicar el mismo concepto más de una vez** al mismo contrato. Cada ocurrencia queda registrada con un contador creciente en el campo `repetido` de `ligacargos`:
+
+| Ocurrencia | `repetido` en BD | Visible en cancelación |
+|---|---|---|
+| 1ª vez | `0` | Sin sufijo |
+| 2ª vez | `1` | **(r1)** |
+| 3ª vez | `2` | **(r2)** |
+
+> [!IMPORTANT]
+> El sufijo **(r1), (r2)** **no se guarda en el nombre del cargo**. El PHP lo genera dinámicamente al mostrar la lista de cancelación para que el operador identifique cuál ocurrencia está anulando. En los reportes de caja siempre aparece el nombre limpio.
+
+### ¿Cuándo usar `repetir = 1`?
+
+Cuando el **mismo trámite puede ocurrir más de una vez** en la vida de un contrato y **cada ocurrencia tiene tarifa fija** (el monto del catálogo):
+
+| Situación | `repetir` | Razón |
+|---|---|---|
+| Anualidad de agua/drenaje | **`0`** | Un contrato solo tiene una anualidad por año. El sistema bloquea el duplicado. |
+| Contrato nuevo, credencial inicial | **`0`** | Único evento por contrato. |
+| Reposición de credencial (tarifa fija) | **`1`** | El usuario puede perder la credencial varias veces. |
+| Multa por desperdicio (reincidencia) | **`1`** | Puede aplicarse más de una vez al mismo contrato. |
+| Cambio de propietario | **`1`** | Un contrato puede cambiar de dueño más de una vez en su vida. |
+| Diferencia cambio de toma (LIBRE) | **`1`** | Monto variable + puede repetirse (ver sección 6). |
+
+### ¿Cuándo NO usar `repetir = 1`?
+
+- **Anualidades agua/drenaje**: siempre `0`. Si se pusiera `1`, el operador podría cobrar dos veces el mismo año sin que el sistema lo bloquee.
+- **Contratos nuevos**: siempre `0`.
+- **Conceptos de un solo evento en el año**: reconexiones, cancelaciones. Evaluar según política operativa.
+
+---
+
+## 5. El Campo `metros` — Multiplicador Lineal
+
+Solo para conceptos de conexión física (tipo METROS LINEALES).
+
+- Si `metros = 1`: el monto del cargo = `monto_base × metros_del_contrato`
+- El campo `metros` del *contrato* debe estar previamente capturado (ficha del contrato).
+
+> ⚠️ **Nunca** activar `metros = 1` en anualidades ni trámites administrativos. El resultado sería un cargo absurdamente alto.
+
+---
+
+## 6. El Sufijo `(LIBRE)` — Cobro de Monto Variable
+
+Cuando el nombre de un concepto contiene la cadena **(LIBRE)** en mayúsculas, el sistema activa un flujo especial:
+
+1. Al aplicar el cargo, se muestra un **prompt** para que el cajero escriba el monto a cobrar.
+2. El backend **elimina** el texto `(LIBRE)` del nombre antes de guardarlo en `ligacargos` (el registro queda limpio).
+3. El cargo queda **exento** de multiplicadores automáticos (no multiplica por tomas ni por metros).
+
+### ¿Cuándo crear un concepto `(LIBRE)`?
+
+Solo cuando el cobro tiene un **monto que varía en cada caso** y es imposible definir un precio fijo en el catálogo:
+
+| Situación | ¿Usar `(LIBRE)`? | Alternativa |
+|---|---|---|
+| El monto es distinto para cada usuario o trámite | **Sí** | Concepto con `monto` fijo si siempre es igual |
+| El cajero decide el precio en el momento | **Sí** | — |
+| El usuario pagó una parte y se cobra la diferencia | **Sí** | `DIFERENCIA CAMBIO TOMA AGUA (LIBRE)` |
+| El trámite tiene tarifa fija aunque se repita | **No** | Usar `repetir=1` con `monto` definido |
+| Anualidades de agua/drenaje | **Nunca** | Monto definido en asamblea cada año |
+
+> [!CAUTION]
+> **No abusar del sufijo `(LIBRE)`.** Cada concepto LIBRE es más difícil de auditar porque el monto no está normalizado. Crear solo cuando sea estrictamente necesario.
+
+### ¿Cuándo combinar `(LIBRE)` + `repetir = 1`?
+
+Esta es la combinación más compleja. Usarla cuando el cobro cumple **ambas condiciones a la vez**:
+- El monto varía en cada aplicación (justifica LIBRE)
+- El mismo trámite puede ocurrir más de una vez en el contrato (justifica repetir=1)
+
+**Ejemplo real — DIFERENCIA CAMBIO TOMA AGUA (LIBRE):**
+
+Un usuario cambia su toma de agua. El costo total es $1,500. Ya había pagado $900 antes. Se cobra solo la diferencia de $600 (monto libre). Tiempo después, el mismo contrato cambia de toma nuevamente por otra raón, con diferencia distinta de $400. El sistema debe permitir aplicarlo una segunda vez con un monto diferente.
+
+| Campo | Valor | Razón |
+|---|---|---|
+| `(LIBRE)` en nombre | Sí | El monto varía por caso |
+| `repetir` | `1` | El mismo trámite puede repetirse |
+| Resultado | Segunda aplicación aparece como **(r1)** en cancelación | Auditable y distinguible |
+
+> [!IMPORTANT]
+> **Comportamiento del poka-yoke:** El sistema tiene un guard que bloquea duplicados en cats. 2 y 3. Cuando un concepto es `(LIBRE)` Y tiene `repetir=1`, ese guard se **omite deliberadamente** porque el monto es variable y la repetición es legítima. Si se pusiera `repetir=0` en un concepto LIBRE, el sistema bloquearía la segunda aplicación aunque el monto fuera distinto.
+
+### Ficha Correcta para Conceptos `(LIBRE)`
+
+| Campo | Valor correcto | Razón |
+|---|---|---|
+| `nombre` | `CONCEPTO DESCRIPTIVO (LIBRE)` | La palabra activa el prompt |
+| `monto` | `0.00` | El cajero define el real |
+| `monto_comercial` | `0.00` | Sin tarifa comercial automática |
+| `recargo` | **`0` siempre** | Es trámite, nunca genera mora |
+| `categoria` | `2`, `3`, o la que corresponda | Define renglon en Corte de Caja |
+| `anio` | `0` | Sin año fijo |
+| `repetir` | `1` si puede repetirse, `0` si es único | Ver tabla de combinaciones arriba |
+| `metros` | `0` | Nunca se multiplica |
+
+### Tabla de Combinaciones Posibles
+
+| Tipo de concepto | `(LIBRE)` | `repetir` | Comportamiento |
+|---|---|---|---|
+| Anualidad de agua | No | `0` | Precio fijo, un solo cobro por año. Duplicado bloqueado. |
+| Reposición credencial | No | `1` | Precio fijo, puede cobrase N veces. Genera R(N). |
+| Diferencia única (caso específico) | **Sí** | `0` | Monto libre, solo una vez. La segunda sería bloqueada. |
+| Diferencia repetible (caso actual) | **Sí** | **`1`** | Monto libre cada vez, se puede aplicar N veces. Genera R(N) + prompt monto. |
+
+### Conceptos LIBRE activos en el sistema
+
+| Concepto | Cat. | `repetir` | Uso |
+|---|---|---|---|
+| `DIFERENCIA CAMBIO TOMA AGUA (LIBRE)` | 2 | `1` | Diferencia pendiente de un cambio de toma de agua |
+| `DIFERENCIA CAMBIO TOMA DRENAJE (LIBRE)` | 3 | `1` | Diferencia pendiente de un cambio de toma de drenaje |
+
+---
+
+## 7. Conceptos por Año (Anualidades) — Cuándo Crear una Nueva Versión
+
+Las anualidades de agua y drenaje se crean **una vez por año**. No se edita el concepto del año anterior; se crea uno nuevo.
+
+### Ficha Correcta: Anualidad Nueva (ej. 2027)
+
+| Campo | Valor |
+|---|---|
+| `nombre` | `ANUALIDAD DEL AGUA 2027` |
+| `monto` | Tarifa aprobada en asamblea (ej. `$1,200.00`) |
+| `monto_comercial` | Tarifa comercial (ej. `$2,400.00`), o `0` si es el doble automático |
+| `recargo` | `1` ✅ |
+| `categoria` | `2` (Agua) ó `3` (Drenaje) |
+| `anio` | `2027` |
+| `mensualidades` | `0` |
+| `repetir` | `0` |
+| `metros` | `0` |
+| `automatico` | `0` |
+| `estado` | `1` |
+
+### Conceptos que NO necesitan versión anual
+
+Los trámites administrativos usan `anio = 0` y no deben duplicarse cada año:
+
+- Cambio de Propietario
+- Reposición de Credencial
+- Constancia de No Adeudo
+- Reconexión A/D
+- Cancelación A/D
+- Contratos Nuevos (Agua / Drenaje)
+- Multas por Desperdicio
+
+---
+
+## 8. Conceptos Repetidos Históricos (Limpieza Pendiente)
+
+En la tabla `cargos` existen conceptos históricos creados en el sistema anterior (Host B) con nombres inconsistentes, typeos y duplicados de distintas épocas. Están mayormente **inactivos** (`estado = 0`) y no aparecen en la pantalla de operación, pero contaminan la base de datos.
+
+Ejemplos de conceptos históricos problemáticos identificados:
+
+| Problema | Ejemplos |
+|---|---|
+| **Nombre con año duplicado en texto** | `RECARGO DE DRENAJE 2017 2017`, `RECARGO DE DRENAJE 2016 ( X MES) 2016` |
+| **Typeo en nombre** | `RECAROS ANUAL DRENAJE 2010`, `EXCABACION Y CANCELACION DE TOMA DE AGUA` |
+| **Punto al final** | `RECARGO ANUAL DEL DRENAJE 2012.` |
+| **Nombres alternativos del mismo concepto** | `CONTRATO DEL DRENAJE 2016` vs `CONTRTO DE DRENAJE 2016` (ambos con typeo) |
+| **Categoría inconsistente** | Recargos de drenaje en Cat. 17 con `recargo = 1` (deben tener `recargo = 0` ya que las Cats 16/17 son de uso interno) |
+
+> [!NOTE]
+> Estos registros históricos **no afectan** la operación actual. El sistema nuevo (V2) usa su propio motor de recargos y no consulta estos conceptos para calcular mora. Sin embargo, para mantener el catálogo limpio, se recomienda mantenerlos en `estado = 0` y no editarlos.
+
+---
+
+## 9. Resumen Visual — Patrones por Tipo de Concepto
+
+```
+┌──────────────────────────────────────────────────────────────────────────────┐
+│  TIPO DE CONCEPTO   │ cat │ rec │ rep │ anio │ mens │ met │ Notas            │
+├──────────────────────────────────────────────────────────────────────────────┤
+│  Anualidad Agua     │  2  │  1  │  0  │ YYYY │  0   │  0  │ Nueva c/año     │
+│  Anualidad Drenaje  │  3  │  1  │  0  │ YYYY │  0   │  0  │ Nueva c/año     │
+│  Recargo Mensual    │ 16/17│ 0  │  0  │ YYYY │  1   │  0  │ Auto, no crear  │
+│  Contrato Agua      │  8  │  0  │  0  │  0   │  0   │  0  │ Precio único    │
+│  Contrato Drenaje   │ 18  │  0  │  0  │  0   │  0   │  0  │ Precio único    │
+│  Metros Lineales    │  7  │  0  │  0  │  0   │  0   │  1  │ × metros_cto    │
+│  Faltas Asamblea    │  6  │  0  │  1  │  0   │  0   │  0  │ Sin año, rep.   │
+│  Reconexión A/D     │ 14  │  0  │  0  │  0   │  0   │  0  │ Sin año         │
+│  Cancelación A/D    │ 13  │  0  │  0  │  0   │  0   │  0  │ Sin año         │
+│  Cambio Propietario │ 19  │  0  │  1  │  0   │  0   │  0  │ Repetible       │
+│  Credencial         │  9  │  0  │  1  │  0   │  0   │  0  │ Repetible       │
+│  Constancia No Ad.  │ 21  │  0  │  1  │  0   │  0   │  0  │ Repetible       │
+│  Multa Desp. A.    │ 20  │  0  │  1  │  0   │  0   │  0  │ Repetible       │
+│  Fuga/Excavación    │ 22  │  0  │  0  │  0   │  0   │  0  │ Sin año         │
+│  Cobro LIBRE        │ 2/3 │  0  │  0  │  0   │  0   │  0  │ Monto variable  │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+cat=categoría | rec=recargo | rep=repetir | mens=mensualidades | met=metros
+```
+
+---
+
+## 10. Issues Conocidos y Estado
+
+### Issue 1: `DIFERENCIA CAMBIO TOMA DRENAJE (LIBRE)` con `recargo=1`
+
+**Estado en Host C hoy:**
+- `numconsec = 633`, `recargo = 1` ← Incorrecto en BD
+- **Neutralizado en runtime** por Guard G02 de `cargos.php` — no genera mora real
+- **Corregido en pipeline:** `08_saneamiento_catalogo.sql` paso 2 hace `UPDATE cargos SET recargo = 0` masivo, y el `INSERT IGNORE` del paso 6 crea ambos conceptos LIBRE con `recargo=0` correctamente
+- **Acción manual recomendada:** Entrar al catálogo en Host C y desmarcar "¿Es una Multa?" para que la BD refleje el valor correcto sin esperar el próximo pipeline.
+
+### Issue 2: Conceptos `(LIBRE)` no estaban en el pipeline
+
+**Resuelto (2026-05-16):** Se agregaron al `08_saneamiento_catalogo.sql` con `INSERT IGNORE`, haciéndolos idempotentes en cualquier rebuild del pipeline.
+
+### Issue 3: Catálogo histórico con typeos y nombres inconsistentes
+
+**Estado:** Benigno. Todos están en `estado=0` (inactivos). No afectan operación.
+No se limpian automáticamente porque son parte del historial migrado de Host B.
+
+---
+
+*Fuente: análisis de `cargos.php` (`aplicacargos`, `calcula_recargos`), `sp_pagar_cargo`, tabla `cargos`, `ligacargos`, `ligacargos_historico` y pipeline `08_saneamiento_catalogo.sql` de Host C — Mayo 2026.*
+
+```
+
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on employing specialized tools instead of generic ones for file manipulations. I'm actively integrating `view_file`, `grep_search`, `list_dir`, and `replace_file_content` where possible, rather than resorting to bash commands. This strategy aims at improving efficiency and precision in handling files, especially as I prepare to make critical updates.
+
+
+**Refining Tool Selection**
+
+I'm now thinking specifically about how to use tools to update the markdown file at `/opt/lampp/htdocs/agua/docs-dev/pase-a-prod/aguav2-2026/fix-issue-01/ISSUE_01_MORA_HISTORICA_V2.md`. I will use `view_file` to review the current content. Then I will use `replace_file_content` to add the requested information about `views/cargos/catalogo.php`, `views/cargos/modificar.php`, and the hidden input. I plan to use `view_file` again to confirm the edits before moving on.
+
+
+**Updating Documentation Now**
+
+I'm now focused on documenting the changes made to the user interface. I plan to use `replace_file_content` to update `/opt/lampp/htdocs/agua/docs-dev/pase-a-prod/aguav2-2026/fix-issue-01/ISSUE_01_MORA_HISTORICA_V2.md` to reflect modifications to `views/cargos/catalogo.php` and `views/cargos/modificar.php`, noting their impact. Also, I'll revise `/opt/lampp/htdocs/agua/docs-dev/doc-estabilizacion/GUIA_CATALOGO_CARGOS.md` to update the description of the `recargo` field, to indicate it is now managed via Global Configuration. I'll make sure to verify these changes.
+
+
+**Clarifying System Behavior**
+
+I'm now zeroing in on documenting system behavior regarding the `recargo` flag, ensuring clarity for edge cases. I'll modify the `ISSUE_01_MORA_HISTORICA_V2.md` file to address scenarios with `recargo` values and their interactions with the category setting. I'll also modify the `GUIA_CATALOGO_CARGOS.md` file to document that manual adjustments are performed through the Amnistía panel or directly in the DB, reflecting the current capabilities.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 19.018339697s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 16 June 2026, 8:24 pm
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 16 June 2026, 8:24 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on employing specialized tools instead of generic ones for file manipulations. I'm actively integrating `view_file`, `grep_search`, `list_dir`, and `replace_file_content` where possible, rather than resorting to bash commands. This strategy aims at improving efficiency and precision in handling files, especially as I prepare to make critical updates.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `GUIA_CATALOGO_CARGOS.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.080223838s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L284-299)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+## 10. Issues Conocidos y Estado
+
+### Issue 1: `DIFERENCIA CAMBIO TOMA DRENAJE (LIBRE)` con `recargo=1`
+
+**Estado en Host C hoy:**
+- `numconsec = 633`, `recargo = 1` ← Incorrecto en BD
+- **Neutralizado en runtime** por Guard G02 de `cargos.php` — no genera mora real
+- **Corregido en pipeline:** `08_saneamiento_catalogo.sql` paso 2 hace `UPDATE cargos SET recargo = 0` masivo, y el `INSERT IGNORE` del paso 6 crea ambos conceptos LIBRE con `recargo=0` correctamente
+- **Acción manual recomendada:** Entrar al catálogo en Host C y desmarcar "¿Es una Multa?" para que la BD refleje el valor correcto sin esperar el próximo pipeline.
+
+### Issue 2: Conceptos `(LIBRE)` no estaban en el pipeline
+
+**Resuelto (2026-05-16):** Se agregaron al `08_saneamiento_catalogo.sql` con `INSERT IGNORE`, haciéndolos idempotentes en cualquier rebuild del pipeline.
+
+### Issue 3: Catálogo histórico con typeos y nombres inconsistentes
+```
+
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now emphasizing the use of specialized tools, specifically avoiding general commands like `cat`, `grep`, `ls`, and `sed` in favor of functions like `view_file`, `grep_search`, `list_dir`, and `replace_file_content` whenever possible. This change prioritizes precision and potentially simplifies operations.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.072225392s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 16 June 2026, 8:24 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now emphasizing the use of specialized tools, specifically avoiding general commands like `cat`, `grep`, `ls`, and `sed` in favor of functions like `view_file`, `grep_search`, `list_dir`, and `replace_file_content` whenever possible. This change prioritizes precision and potentially simplifies operations.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.284473123s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+## User Request
+
+Para: ISSUE_01_MORA_HISTORICA_V2.md 
+AMplia la siguiente descripcion , explicado a un nivel secretarial con conocimientos minimos de contabilidad, para que quede mas claro, quiza con algun ejemplo; como que solo se cobraban 12 meses cuando un contrato tenia 30 meses de adeudo.
+texto original:
+1. Límite Ciego de 12 Meses (Host B): El sistema legado estaba mal programado para detener el
+cálculo de interés simple (recargos) a los 12 meses exactos. A los grandes deudores (ej. 30 meses de adeudo) se les
+estaba “perdonando” ilegalmente meses de mora por un fallo en el reloj del software
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `GUIA_CATALOGO_CARGOS.md`
+**Language:** markdown
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L51-69)</summary>
+
+**Path:** `Unknown file`
+
+```
+| `19` | CAMBIO DE PROPIETARIO | No | Trámite de cambio de titular del contrato. |
+| `20` | MULTA POR DESPERDICIO DE AGUA | No | Sanción por desperdicio. |
+| `21` | CONSTANCIA DE NO ADEUDO | No | Expedición de constancia. |
+| `22` | REPARACIÓN DE FUGAS | No | Excavación y cancelación/reparación de fuga. |
+
+> [!CAUTION]
+> Las categorías **16** y **17** son de uso **exclusivo del motor automático de recargos**. Nunca crear conceptos manuales con estas categorías. El sistema fuerza `recargo=0` en cualquier cargo cuya categoría no sea 2 o 3.
+
+---
+
+## 3. El Campo `recargo` (Motor de Mora) — La Regla más Importante
+
+> **Nota:** El control individual de este campo mediante un checkbox en la interfaz fue **eliminado** por diseño arquitectónico (Poka-Yoke). Ahora, al crear nuevos conceptos de anualidad nacen apagados (`0`), y es exclusivo del **Comité (Panel de Amnistía en Configuración)** encender la mora (`1`) por año.
+
+Este flag interno de la Base de Datos controla el **motor de mora mensual**. Su comportamiento:
+
+- Si `recargo = 1` **y** `categoria IN (2, 3)`:  
+  → Cuando el cargo queda pendiente de pago, cada mes el sistema genera automáticamente un nuevo cargo de recargo mensual (10% del monto) en las categorías 16 ó 17.
+
+```
+
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now emphasizing the use of specialized tools, specifically avoiding general commands like `cat`, `grep`, `ls`, and `sed` in favor of functions like `view_file`, `grep_search`, `list_dir`, and `replace_file_content` whenever possible. This change prioritizes precision and potentially simplifies operations.
+
+
+**Refining Tool Strategy**
+
+I'm now focusing on a more explicit tool selection strategy. My approach is to list all possible tools relevant to a task and only execute a specific set if all others are either less specialized or unsuitable. My analysis of the text in `ISSUE_01_MORA_HISTORICA_V2.md`, specifically around line 8, is ongoing. I intend to simplify the explanation of the issue for a secretary-level audience with basic accounting knowledge, perhaps with a clear, concise example to reinforce it.
+
+
+**Clarifying System Defect**
+
+I'm now zeroing in on a critical software flaw in the legacy Host B system. The issue is a hidden, hard-coded 12-month limit on late fees. This caused irregular debt forgiveness for some customers, specifically large debtors, because the system would stop calculating penalties after the 12-month mark, regardless of the actual delinquency. I'm focusing on the practical implications of this flaw, and attempting to simplify the explanation of the issue for a secretary-level audience with basic accounting knowledge, perhaps with a clear example.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 6.509665361s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 16 June 2026, 8:31 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on employing specialized tools instead of generic ones for file manipulations. I'm actively integrating `view_file`, `grep_search`, `list_dir`, and `replace_file_content` where possible, rather than resorting to bash commands. This strategy aims at improving efficiency and precision in handling files, especially as I prepare to make critical updates.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.146172440s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+## User Request
+
+1) Añadele que el ejemplo empate a  un caso real de los contratos morosos vigente, analiza cual de los actuales en host c, puede usar y con ese caso se miren numeros , fechas de donde dejaba contarta y lo que omitia.
+2) Cómo le haces en configuracion.php, para  enterarte que para tal año (cargo anual ANUAL yyyy), es que  le tiene o no morosidad activada  ?
+3) En la BD que tabla y campo corresponde a activar/desactivar la morosidad ?
+4) El de cobro de morosidad es de porcentaje ?
+5) Convedria que en el configuracion.php global, muestre que agua y drenaje son los cargos mora y diga que ambos estan activos, pues quiza al operador se le pase crear uno o el otro cargo anual.
+6) Para views/cargos/catalogo.php y/o views/cargos/modificar.php , considero que se debe  poner  alguna label,  se relacione con la pantalla global de configuracion para cuando se cree el cargo anual, analiza proponme.
+7) QUe las phps dichas donde corresponda se indique que el porcentaje de mora es X para cada cargo que genere mora, y se repita aunque sea redundante; que ese porcentaje se jale de la bd (existe ?)
+No modifiques nada, presentame plan primero.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `ISSUE_01_MORA_HISTORICA_V2.md`
+**Language:** markdown
+</details>
+
+---
+
+<details>
+<summary>Conversation History</summary>
+
+# Conversation History
+Here are the conversation IDs, titles, and summaries of your most recent 9 conversations, in reverse chronological order:
+
+<conversation_summaries>
+## Conversation c3d1ede4-c440-4d00-b82c-427014028cf3: Infrastructure Validation And Fixes
+- Created: 2026-06-16T01:00:57Z
+- Last modified: 2026-06-16T09:24:09Z
+
+### USER Objective:
+Stabilizing Host C Financial Audit
+
+USER Objective: Finalize the financial synchronization and audit-ready parity for the 64 priority contracts between legacy Host B and the V2 Host C.
+
+Goals:
+1. Validate financial parity by analyzing the 64 contracts in the restored Host C production database, leveraging the new V2 motor logic.
+2. Maintain "Camino A" as the Single Source of Truth (SSOT) using the Amnesty Control Panel to manage debt generation autonomously.
+3. Remove manual "recargo" checkboxes from the UI to eliminate human error and centralize authority, effectively implementing a Poka-Yoke architecture.
+4. Establish operational documentation for the finance/secretarial team explaining the historical mathematical discrepancies caused by the Host B legacy system's "12-month cap" error versus the Host C V2 engine's accuracy.
+
+## Conversation a9b512f6-c862-4796-92d8-b86a11a0b8c9: Infrastructure Validation And Ping Tests
+- Created: 2026-06-15T19:26:51Z
+- Last modified: 2026-06-15T22:00:17Z
+
+### USER Objective:
+Syncing Financial Data Discrepancies
+
+USER Objective:
+Resolve financial discrepancies between Host B and Host C for 64 identified contracts by ensuring accurate historical charge and surcharge generation.
+
+Goals:
+1. Normalize Host C charge calculations to match legacy Host B expectations, specifically addressing the "12-month cap" on historical surcharges.
+2. Finalize the `catchup_64.php` script execution using status spoofing to force charge generation for suspended contracts.
+3. Validate data integrity by aligning the Host C debt records with Host B benchmarks, enabling accurate debt negotiation for delinquent users.
+4. Document the delta between Host C's accurate mathematical surcharge calculation and the Host B legacy system's historical limitations.
+
+## Conversation 8a1da618-e0db-405c-afe8-ee4a98822d5d: Fixes a proyecto agua
+Utiliza el conocimiento de GEMINI.md , lo que se realice en esta sesion debera
+<truncated 132 bytes>
+- Created: 2026-06-15T19:24:17Z
+- Last modified: 2026-06-15T19:24:54Z
+
+## Conversation cd61debf-2071-4da7-8578-238a85984bea: Designing Data Model And Offline Persistence
+- Created: 2026-06-15T04:56:44Z
+- Last modified: 2026-06-15T06:16:09Z
+
+### USER Objective:
+Database Infrastructure And PWA Assets
+
+Main Objective: Complete the data architecture and finalize technical specifications for the restaurant voice command system while ensuring offline-first resilience.
+
+Goals:
+1. Implement optimized SQL indexing for transactional tables (`comandas`, `detalle_comandas`) to ensure high-performance query execution.
+2. Formalize the PWA offline/local persistence layer by establishing physical directory structures for Dexie.js and Service Workers within the `web-assets/pwa` namespace.
+3. Consolidate technical and development standards into `GEMINI.md` to ensure project consistency and clean onboarding.
+4. Integrate Delight-PHP/Auth into the backend architecture to finalize secure operational access.
+5. Update technical documentation (`Especificacion_Tecnica_Comandas_VOSK.html`) to serve as the immutable source of truth for the finalized PWA architecture and folder rules.
+
+## Conversation c23fd704-b153-4653-a5e0-a53e3e0ee891: Consolidating Technical Specifications SSOT
+- Created: 2026-06-13T21:04:49Z
+- Last modified: 2026-06-15T06:11:03Z
+
+### USER Objective:
+Standardizing MCP Infrastructure Ground Truth
+
+USER Objective:
+Modernize and stabilize the MCP configuration management system across all project repositories.
+
+Goals:
+1. Resolve duplicate and outdated MCP server definitions within `.mcp.json` to ensure clean connectivity.
+2. Synchronize infrastructure documentation in `01-infra-hosts.md` and `06-accesos-rutas.md` to match the validated, centralized SSOT.
+3. Eliminate naming inconsistencies by standardizing host labels across configuration files and rules.
+4. Verify system integrity via automated validation scripts to prevent regression of the Ground Truth environment.
+
+## Conversation 2cc92db0-a3f6-4770-8a55-b2a231d18838: Converting Technical Documentation To HTML
+- Created: 2026-06-14T23:15:22Z
+- Last modified: 2026-06-15T00:02:30Z
+
+### USER Objective:
+Integrating Technical Specifications And Docs
+
+Main Objective: Unify and complete the technical specification documentation by integrating operational instructions, infrastructure details, and PWA Android development constraints.
+
+Goals:
+1. Synthesize the secondary specification PDF into the existing HTML document to create a single source of truth.
+2. Update the document title and metadata to reflect the current scope of voice-driven order management.
+3. Integrate new technical sections covering directory structures, development environments (localhost), and database configurations.
+4. Document a catalog of Android PWA/TWA development issues and their mitigations to improve system resilience.
+5. Define a clear development backlog, including dataset requirements and MVP priorities, to guide future implementation phases.
+
+## Conversation 4dc13cdd-6704-4e56-8b7a-78514bc224c5: Syncing Projects To GitHub
+- Created: 2026-06-13T21:21:21Z
+- Last modified: 2026-06-14T21:10:47Z
+
+### USER Objective:
+Synchronizing Demos-Oferta Repository
+
+Main Objective: Resolve synchronization discrepancies between the local `restaurantb/www` repository and the remote `demos-oferta` GitHub repository.
+
+Goals:
+1. Verify the integrity and branch state of the `restaurantb/www` local repository to ensure it aligns with the `demos-oferta` origin.
+2. Execute the `sync_all_repos.sh` workflow to automate the commit and push process across the `agua_chatledger`, `caelitandem_home`, and `restaurantb/www` projects.
+3. Validate that all local changes, including updated documentation and code, are correctly reflected in their respective remote repositories.
+4. Ensure all security best practices, such as GitHub PAT sanitization, are applied during the synchronization process.
+
+## Conversation cbbd8c8a-cc7a-45f4-81bb-e74fc5fd0e46: Technical Documentation And Skill Synthesis
+- Created: 2026-06-14T01:39:20Z
+- Last modified: 2026-06-14T18:47:54Z
+
+### USER Objective:
+Documenting Tech Skills And Automation
+
+Objective: Systematize technical documentation and automate cross-repository synchronization for the project's technology stack.
+Goals:
+1. Research and document best practices and workarounds for PHP 8.3, Apache 2.4, MariaDB 11, Swoole, HTMX, Vosk, Dexie.js, Service Workers, and Auth into modular SKILL.md files.
+2. Establish `agua_chatledger/.agents/skills/` as the single source of truth for technical knowledge across all project workspaces.
+3. Develop and deploy a robust shell script (`sync_all_repos.sh`) to automate git workflows, including secret sanitization to prevent GitHub push rejections.
+4. Clean up legacy assets and reorganize project documentation to ensure environment consistency and secure development practices.
+
+## Conversation f08723bc-ae05-4c9e-aaff-74a0ed235dcb: Refactoring Vosk MVP Interface
+- Created: 2026-06-14T01:03:28Z
+- Last modified: 2026-06-14T01:12:57Z
+
+### USER Objective:
+Refactoring Vosk MVP Interface
+
+The user's main objective is to modernize and clean up the `vozweb.php` application on the remote server to improve its usability and visual clarity.
+
+Goals:
+1. Simplify the interface by removing the "Prueba Rápida de Micrófono" and "Diagnóstico en Tiempo Real" sections from `vozweb.php`.
+2. Perform a cleanup of the `web-assets/` directory to delete any files that are no longer utilized by the PHP application.
+3. Update the UI input fields to improve layout: expand "Nombre Completo" to 6 rows and "Número de Contrato" to 2 rows.
+4. Refresh the CSS to implement a consistent, clear, and light-colored color scheme.
+5. Identify and rectify the correct path for `vozweb.php` on the remote server to proceed with modifications.
+
+</conversation_summaries>
+
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 16 June 2026, 8:46 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Implementation Planning**
+
+I'm now laser-focused on the implementation plan, as requested. My primary objective is to create and update the `implementation_plan.md` artifact. The user has explicitly requested this before any modifications are made, so I need to present a plan.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `Contrato 53`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.001702029s
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 16 June 2026, 8:46 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `Contrato`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 16 June 2026, 8:46 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `explicacion_motor_v2.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# Análisis de Raíz: El Salto de Adeudos y el Comportamiento JIT del Motor V2
+
+### Contexto Inicial: El Problema de Origen
+Durante el proceso de estabilización y migración al Motor V2, se detectó una discrepancia severa en la cantidad de adeudos de ciertos contratos históricos (64 casos específicos).
+Al comparar el antiguo sistema (Host B) contra el nuevo (Host C), los números no cuadraban a simple vista. Casos representativos:
+* **Contrato 1162:** En el backup de la mañana tenía 53 adeudos, pero al visitarlo en la tarde en Host B saltó a **129 adeudos**.
+* **Contrato 53:** Host B mostraba **115 adeudos**, pero Host C audita **143 adeudos**.
+
+**¿Por qué ocurrió esta discrepancia original?**
+Para asegurar la precisión absoluta, se diseñó un script ETL de paridad financiera (`catchup_64_camino_A.php`) que "plancha" los datos copiando los registros históricos pendientes directamente del Host B al Host C, antes de reactivar el motor.
+
+---
+
+### 1. La Generación "Just-In-Time" (JIT) en Host B
+
+La primera alerta fue ver que los números "brincaban" en Host B frente a los ojos del operador. 
+**No es un bug ni es basura, es el diseño arquitectónico de ambos sistemas:**
+
+1. **Ausencia de Cronjobs:** El sistema de agua no calcula los recargos de los morosos de forma silenciosa por las noches en ningún servidor.
+2. **Generación JIT (En Vivo):** El motor solo despierta y trabaja en el milisegundo exacto en que un operador humano abre la ficha de ese contrato en la webapp.
+3. **Deuda Latente y Persistencia:** Tanto en Host B como en Host C, los recargos generados **NO son volátiles**. En el instante en que el operador abre la ficha, el motor calcula la deuda e inyecta los registros permanentemente en la base de datos mediante un `INSERT`. Esto provocó que compararas un Host C congelado (de la mañana) contra un Host B que acababa de disparar y guardar su deuda latente en ese instante de la tarde.
+4. **¿Cuál es la diferencia real si ambos son persistentes?**
+   * **Cuando el Host B despertaba:** Inyectaba 12 recargos fijos (ignorando si debías 30 meses), ignoraba el catálogo (`recargo=0`), inyectaba mora aunque el usuario estuviera en suspensión administrativa, y lo guardaba todo permanentemente.
+   * **Cuando el Host C (V2) despierta:** Analiza la línea de tiempo, respeta la amnistía del catálogo (ignora 2023 hacia atrás), se salta los meses exactos donde hubo suspensión (Poka-Yoke), calcula la mora continua ininterrumpida de 2024 y 2025 (ej. 24 meses), y los guarda permanentemente (mandando los ≤2025 correctamente a la tabla `ligacargos_historico`).
+   
+   **Conclusión Práctica:** A partir de ahora, cada vez que consultes un moroso en Host C, el V2 calculará la deuda perfecta, la insertará permanentemente en tu Base de Datos, y ya no tendrás que preocuparte jamás de que las cuentas estén mal hechas.
+
+---
+
+### 2. Los Bugs del Host B vs. La Precisión de V2 (Casos 857 y 53)
+
+Al auditar a fondo los contratos **857 y 53**, se descubrió que el Host C no solo empató los datos, sino que **corrigió matemáticamente la deuda** aplicando dos reglas estrictas que el Host B violaba constantemente:
+
+#### A) El Host B cobraba recargos en periodos de Suspensión
+En el Host B (legado), si un contrato entraba en *Suspensión Temporal o Administrativa* (Estados 2 o 3), el motor base **seguía generándole recargos moratorios** de forma invisible e ilegal si el estado del contrato volvía a cambiar a Activo sin limpiar correctamente los años intermedios.
+* **Solución Host C (Poka-Yoke):** El Host C escanea el historial de cambios y anula matemáticamente los recargos que coincidan con fechas de suspensión. (Ejemplo: en el contrato 857 eliminó 48 adeudos ilegales de 2022-2023, y en el contrato 53 eliminó 16 adeudos ilegales).
+
+#### B) El Host B estaba topado a 12 meses (y violaba banderas)
+El motor antiguo del Host B estaba programado de forma estática para generar solo 12 meses de mora en el año corriente, provocando que los deudores crónicos de 2024 o 2025 dejaran de generar recargos una vez cumplido un año de su deuda. Peor aún, el Host B a veces ignoraba la instrucción global de "apagar recargos" (`recargo=0` en el catálogo) y seguía inyectándolos a capricho cuando se visitaban las fichas viejas.
+* **Solución Host C (Camino A):** Al activar el Camino A (`recargo = 1` para 2024 y 2025), el Host C rompe el techo de cristal de los 12 meses y genera mora ininterrumpida. (Ejemplo: en el contrato 53, Host C inyectó 44 recargos totalmente justos correspondientes a los meses que Host B había dejado de cobrar por su limitante legacy).
+
+**El Resumen Matemático del Contrato 53:**
+* **Deuda original en Host B:** 115 adeudos
+* **Menos:** 16 recargos ilegales (borrados por el Poka-Yoke del Host C).
+* **Más:** 44 recargos continuos justos (sumados por el Camino A en Host C rompiendo el tope de 12 meses).
+* **Total real auditado en Host C:** 143 adeudos exactos.
+
+---
+
+### Decisión Final Ejecutada: Camino A (Motor V2 Estricto)
+
+Se ha descartado el Camino B (congelamiento de mora) en favor del **Camino A**.
+El Motor V2 (Host C) operará con total libertad aplicando la matemática estricta:
+
+* **Protección al Usuario:** Ningún usuario pagará recargos por años en los que estuvo oficialmente suspendido (el Poka-Yoke lo defiende).
+* **Protección Financiera:** Ninguna deuda activa se topará artificialmente a 12 meses. El sistema cobrará la mora justa hasta el día actual de la liquidación, apoyándose en el "Límite Bomba" (`reversal_threshold`) como freno de emergencia global para evitar deudas inpagables.
+* **Transparencia Total (La Verdad Matemática):** El Comité ha decidido que el sistema no debe "mentir" para mantener un empate visual. A los 64 morosos (y a todos los demás) se les mostrará su deuda real ininterrumpida. Si un usuario reclama que su deuda subió al migrar de sistema, la respuesta oficial es: *"El sistema anterior tenía un error y le estaba omitiendo meses de recargos. El nuevo sistema expone su deuda real."*
+* **Negociación Administrativa:** En lugar de manipular el motor para ocultar la deuda, si el Comité decide apoyar a un usuario moroso para que se regularice, lo hará a través de la vía administrativa correcta (Ej. aplicando Descuentos manuales o cancelando recargos específicos en ventanilla al momento del pago).
+
+---
+
+### FAQ de Negocio: ¿Por qué solo se activó la mora para 2024 y 2025? ¿Debería ser desde la creación del contrato?
+
+Actualmente, el motor continuo del Host C fue desatado **solo para 2024 y 2025** porque en el catálogo de conceptos (tabla `cargos`), los años 2023 hacia atrás tienen el flag `recargo = 0`. Esto obedece a un patrón histórico donde los comités suelen "congelar" la mora de años muy viejos (Amnistía) para incentivar el pago, cobrando mora continua solo de los últimos 2 años.
+
+**¿Qué pasa si la Asamblea decide cobrar la mora desde que nació el contrato (ej. 2006 a 2026)?**
+El motor V2 lo soporta perfectamente. Si tú como administrador decides que la mora debe ser implacable desde el inicio de los tiempos, lo único que tienes que hacer es ejecutar un simple comando en el catálogo:
+
+`UPDATE cargos SET recargo = 1 WHERE categoria IN (2, 3);`
+
+Al hacer esto, le quitarás la venda al motor V2 para **todos los años históricos**. Si visitas un contrato que debe desde 2006, el motor calculará **20 años ininterrumpidos de recargos** (aproximadamente 240 meses de mora por cada concepto), generando deudas matemáticas reales y altísimas.
+Si decides tomar esta ruta absoluta, el uso del **Límite Bomba** (`reversal_threshold`) se volverá **obligatorio**, ya que será la única forma de evitar que las cuentas lleguen a medio millón de pesos y se vuelvan carteras perdidas.
+
+---
+
+### ¿Dónde se configura si un año/rango tiene mora activa o congelada?
+
+La configuración reside a nivel de la base de datos, específicamente en el catálogo global: la tabla `cargos`. 
+Actualmente, el control de la mora se enciende o se apaga ejecutando un comando SQL directo para modificar la columna `recargo` (donde 0 es eximir/congelar y 1 es cobrar).
+
+**Ejemplos de Gestión Política:**
+* Si el Comité decide otorgar una amnistía por crisis para el año 2024:
+  `UPDATE cargos SET recargo = 0 WHERE categoria IN (2, 3) AND anio = 2024;`
+* Si el Comité decide aplicar tolerancia cero y cobrar mora implacable desde el año 2020:
+  `UPDATE cargos SET recargo = 1 WHERE categoria IN (2, 3) AND anio >= 2020;`
+
+El año **2026** (y los venideros) nacen con `recargo=1` por defecto cuando se insertan los nuevos conceptos a principio de año. El motor V2 siempre obedecerá esta tabla como su única fuente de verdad.
+
+---
+
+### Parámetros de Emergencia (Frenos de Seguridad)
+
+Además de la tabla `cargos`, el motor V2 cuenta con parámetros de emergencia en la base de datos (tabla `config_sistema` o configuración global) que actúan como "Frenos" para la mora. Actualmente, lo matemáticamente correcto es mantenerlos en `0` o `disabled` para que el motor opere con total libertad y precisión de cálculo. Su funcionamiento es el siguiente:
+
+**1. Límite de Años Retrospectivos (`paridad_anios_max_recargo`)**
+*   **Valor Actual:** `0` (Desactivado).
+*   **Mecánica:** Si el Comité dictaminara (ej. estableciendo el valor en `5`), el motor dejaría de cobrar recargos a cualquier adeudo base que sea más viejo que 5 años, ignorando si el catálogo dice que sí se debe cobrar.
+*   **Por qué está desactivado:** Porque la gestión y amnistía se está realizando limpiamente desde el Panel Global por cada año específico, haciendo innecesario este límite ciego.
+
+**2. El "Límite Bomba" (`reversal_threshold_enable` y `reversal_threshold`)**
+*   **Valor Actual:** `enable = 0` (Desactivado) con un umbral latente de `14000`.
+*   **Mecánica:** Si se activa (`1`), el motor suspenderá permanentemente la inyección de nuevos recargos a cualquier contrato cuya deuda total acumulada rebase los $14,000 pesos. Es una protección política para evitar que cuentas incobrables sigan creciendo hasta el medio millón de pesos.
+*   **Por qué está desactivado hoy:** Porque activar el límite bomba "escondería" la verdadera deuda matemática de los grandes morosos (como el Contrato 857 que debe más de $33,000 pesos). Mantenerlo apagado asegura que el sistema exponga la auditoría pura.
+
+---
+
+### Estimación Global de Paridad para los 64 Contratos (Host B JIT vs Host C V2)
+
+Para dar total certidumbre al Comité, se ejecutó una simulación matemática que cruza la base de la deuda congelada actual en Host B, frente al impacto de aplicar su límite legado de 12 meses (JIT), versus el cálculo continuo e ininterrumpido del Motor V2 (Camino A) en el Host C.
+
+**Resumen Matemático del Choque de Motores:**
+1. **El Patrón de "+$1,728":** La mayoría de los contratos incrementan exactamente en **48 adeudos** equivalentes a $1,728 pesos, que es el remanente ininterrumpido (la mora legal de los meses continuos de 2024 y 2025 que el Host B topaba a 12).
+2. **El Patrón de "+$864":** Los contratos con mucha deuda histórica o que tuvieron ciertas suspensiones amortiguan el impacto, subiendo solo unos 24 adeudos (ya que el Poka-Yoke limpió la otra mitad ilegal).
+3. **Casos de Empate (Ej. Contrato 857):** Quedan en diferencia cero ($0.00). Esto sucede cuando la enorme deuda ilegal en suspensión de Host B (destruida por el Poka-Yoke) era exactamente del mismo tamaño monetario que la deuda continua nueva (inyectada por el V2).
+
+**Tabla de Proyección por Contrato:**
+| Contrato | Adeudos B (Estimado JIT) | Deuda B (Est) | Adeudos C (V2 Activo) | Deuda C (Est) | Dif. Cargos | Dif. Deuda |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| **13** | 67 | $5,078.00 | 115 | $6,806.00 | +48 | +$1,728.00 |
+| **53** | 163 | $11,152.00 | 195 | $12,304.00 | +32 | +$1,152.00 |
+| **78** | 75 | $3,988.00 | 123 | $5,716.00 | +48 | +$1,728.00 |
+| **91** | 68 | $5,228.00 | 116 | $6,956.00 | +48 | +$1,728.00 |
+| **110** | 115 | $8,528.00 | 163 | $10,256.00 | +48 | +$1,728.00 |
+| **124** | 208 | $18,058.00 | 232 | $18,922.00 | +24 | +$864.00 |
+| **145** | 62 | $3,828.00 | 110 | $5,556.00 | +48 | +$1,728.00 |
+| **163** | 67 | $5,078.00 | 115 | $6,806.00 | +48 | +$1,728.00 |
+| **166** | 68 | $5,228.00 | 116 | $6,956.00 | +48 | +$1,728.00 |
+| **187** | 100 | $10,918.00 | 148 | $12,646.00 | +48 | +$1,728.00 |
+| **317** | 243 | $23,434.00 | 267 | $24,298.00 | +24 | +$864.00 |
+| **370** | 192 | $23,024.00 | 216 | $23,888.00 | +24 | +$864.00 |
+| **382** | 238 | $23,434.00 | 262 | $24,298.00 | +24 | +$864.00 |
+| **386** | 200 | $23,480.00 | 224 | $24,344.00 | +24 | +$864.00 |
+| **397** | 110 | $6,864.00 | 158 | $8,592.00 | +48 | +$1,728.00 |
+| **398** | 83 | $3,372.00 | 131 | $5,100.00 | +48 | +$1,728.00 |
+| **476** | 240 | $23,024.00 | 264 | $23,888.00 | +24 | +$864.00 |
+| **519** | 247 | $23,936.00 | 271 | $24,800.00 | +24 | +$864.00 |
+| **570** | 68 | $5,228.00 | 116 | $6,956.00 | +48 | +$1,728.00 |
+| **573** | 67 | $5,078.00 | 115 | $6,806.00 | +48 | +$1,728.00 |
+| **583** | 159 | $22,580.00 | 183 | $23,444.00 | +24 | +$864.00 |
+| **586** | 245 | $24,432.00 | 269 | $25,296.00 | +24 | +$864.00 |
+| **588** | 238 | $22,580.00 | 262 | $23,444.00 | +24 | +$864.00 |
+| **606** | 179 | $23,480.00 | 203 | $24,344.00 | +24 | +$864.00 |
+| **608** | 231 | $23,434.00 | 255 | $24,298.00 | +24 | +$864.00 |
+| **650** | 56 | $1,772.00 | 104 | $3,500.00 | +48 | +$1,728.00 |
+| **662** | 68 | $5,228.00 | 116 | $6,956.00 | +48 | +$1,728.00 |
+| **663** | 67 | $5,078.00 | 115 | $6,806.00 | +48 | +$1,728.00 |
+| **684** | 237 | $23,024.00 | 261 | $23,888.00 | +24 | +$864.00 |
+| **749** | 239 | $23,480.00 | 263 | $24,344.00 | +24 | +$864.00 |
+| **760** | 129 | $9,520.00 | 153 | $10,384.00 | +24 | +$864.00 |
+| **789** | 68 | $5,228.00 | 116 | $6,956.00 | +48 | +$1,728.00 |
+| **790** | 67 | $5,078.00 | 115 | $6,806.00 | +48 | +$1,728.00 |
+| **815** | 235 | $23,964.00 | 259 | $24,828.00 | +24 | +$864.00 |
+| **823** | 215 | $25,070.00 | 239 | $25,934.00 | +24 | +$864.00 |
+| **833** | 173 | $23,024.00 | 197 | $23,888.00 | +24 | +$864.00 |
+| **834** | 177 | $23,936.00 | 201 | $24,800.00 | +24 | +$864.00 |
+| **857** | 332 | $33,550.00 | 332 | $33,550.00 | 0 | -$0.00 |
+| **867** | 158 | $12,808.00 | 182 | $13,672.00 | +24 | +$864.00 |
+| **896** | 65 | $4,278.00 | 113 | $6,006.00 | +48 | +$1,728.00 |
+| **898** | 99 | $10,768.00 | 147 | $12,496.00 | +48 | +$1,728.00 |
+| **917** | 130 | $17,616.00 | 154 | $18,480.00 | +24 | +$864.00 |
+| **920** | 226 | $16,418.00 | 250 | $17,282.00 | +24 | +$864.00 |
+| **928** | 208 | $14,502.00 | 232 | $15,366.00 | +24 | +$864.00 |
+| **956** | 240 | $22,742.00 | 264 | $23,606.00 | +24 | +$864.00 |
+| **962** | 252 | $26,496.00 | 276 | $27,360.00 | +24 | +$864.00 |
+| **979** | 215 | $24,804.00 | 239 | $25,668.00 | +24 | +$864.00 |
+| **988** | 172 | $23,936.00 | 196 | $24,800.00 | +24 | +$864.00 |
+| **998** | 240 | $22,742.00 | 264 | $23,606.00 | +24 | +$864.00 |
+| **1008** | 211 | $23,276.00 | 235 | $24,140.00 | +24 | +$864.00 |
+| **1016** | 48 | $1,728.00 | 96 | $3,456.00 | +48 | +$1,728.00 |
+| **1024** | 54 | $1,974.00 | 102 | $3,702.00 | +48 | +$1,728.00 |
+| **1056** | 49 | $1,878.00 | 97 | $3,606.00 | +48 | +$1,728.00 |
+| **1081** | 48 | $1,728.00 | 96 | $3,456.00 | +48 | +$1,728.00 |
+| **1098** | 54 | $1,974.00 | 102 | $3,702.00 | +48 | +$1,728.00 |
+| **1121** | 79 | $5,568.00 | 127 | $7,296.00 | +48 | +$1,728.00 |
+| **1123** | 54 | $1,974.00 | 102 | $3,702.00 | +48 | +$1,728.00 |
+| **1134** | 49 | $1,878.00 | 97 | $3,606.00 | +48 | +$1,728.00 |
+| **1139** | 52 | $2,728.00 | 100 | $4,456.00 | +48 | +$1,728.00 |
+| **1162** | 177 | $17,258.00 | 201 | $18,122.00 | +24 | +$864.00 |
+| **1184** | 49 | $1,878.00 | 97 | $3,606.00 | +48 | +$1,728.00 |
+| **1198** | 51 | $2,178.00 | 99 | $3,906.00 | +48 | +$1,728.00 |
+| **1221** | 51 | $2,178.00 | 99 | $3,906.00 | +48 | +$1,728.00 |
+| **1374** | 73 | $4,668.00 | 121 | $6,396.00 | +48 | +$1,728.00 |
+
+---
+
+### Preguntas Frecuentes de Auditoría (Q&A)
+
+**P: Si la mora ininterrumpida es la correcta, ¿por qué los años 2024 y 2025 aparecían "apagados" sin generar recargos los primeros días de uso en Host C (V2)?**
+
+**R (Respuesta Oficial):**
+Estaban apagados porque el Host C es una máquina que **obedece estrictamente las reglas escritas en el catálogo de base de datos**. Durante la migración, el Host C heredó exactamente la configuración del catálogo que tenía el sistema legado (Host B).
+
+Se descubrió mediante auditoría que **en el Host B, los años 2024 y 2025 siempre estuvieron dados de alta con la bandera de recargos apagada (`recargo=0`)**. La razón por la que el sistema viejo sí cobraba la mora de esos años era por un defecto de programación: el motor legado (Host B) ignoraba sus propias reglas de base de datos y forzaba ciegamente el cobro de 12 meses independientemente de lo que dictara el catálogo.
+
+Cuando el nuevo Motor V2 (Host C) inició operaciones, leyó el catálogo heredado, vio que la instrucción formal era 'Apagado' (Cero), y obedeció la instrucción deteniendo la generación de mora. Esto no fue un error del nuevo sistema, sino **una prueba de su obediencia absoluta y de la exposición del desorden del catálogo legado**. 
+Para corregirlo, simplemente se utilizó el nuevo Panel de Amnistía (`configuracion.php`) para encender formalmente dichos años, permitiendo que el motor V2 retome el cobro de forma ininterrumpida y apegada a la ley.
+
+---
+
+### Hallazgo de Auditoría: Basura Histórica en el Catálogo y Justificación Poka-Yoke
+
+Durante la estabilización, un escaneo al catálogo legado de Host B reveló un grave problema de integridad humana: **Cientos de conceptos ajenos a la cuota base tenían la bandera de mora encendida (`recargo=1`)**. 
+
+Por error o negligencia, los operadores del sistema antiguo palomearon la casilla de "Aplica Recargo" en conceptos como:
+- **Asambleas** (Ej: "FALTA ASAMBLEA 03 JUN 2018")
+- **Materiales** (Ej: "METROS LINEALES 25 MTS")
+- **Multas** (Ej: "TOMA CLANDESTINA")
+- **Trámites** (Ej: "REPOSICION DE CREDENCIAL")
+
+**Protección del Host C (Guard G02):**
+Afortunadamente, el código del Motor V2 (Host C) cuenta con un escudo de seguridad programado (Guard G02). Esta regla inquebrantable a nivel servidor dictamina que: *Si la categoría no es 2 (Agua Base) o 3 (Drenaje Base), el motor fuerza matemáticamente el valor a `0` (Apagado)*. Gracias a este blindaje estructural, el Host C jamás cobrará mora sobre adeudos de asambleas o plomería, ignorando la basura heredada de la base de datos.
+
+**Acción Correctiva (Extirpación de Interfaz):**
+A raíz de este hallazgo, se determinó **eliminar permanentemente el checkbox de "Aplica Recargo" de las pantallas de creación y edición de cargos** (para los operadores de ventanilla). 
+- **Filosofía Poka-Yoke:** Se le retira la capacidad de alterar la matemática del sistema al factor humano de ventanilla.
+- **Centralización del Poder:** El control de qué años generan mora se transfiere exclusivamente al **Comité Administrativo** mediante el Panel Global (`configuracion.php`), garantizando uniformidad y transparencia en toda la base de datos.
+
+---
+
+### ¿Qué pasaría si el Comité decidiera cobrar mora a otro concepto (ej. Asambleas o Multas)?
+
+Si en el futuro el Comité decide que un concepto ajeno al Agua o Drenaje debe generar recargos por morosidad, **esto no se puede lograr simplemente "marcando una casilla"**. Requeriría una intervención de desarrollo de software (un nuevo Sprint) por las siguientes razones de arquitectura:
+
+1. **El Escudo (Guard G02):** Habría que reprogramar el código fuente del servidor para autorizar a la nueva categoría (ej. Categoría 6 - Asambleas) a guardar el `recargo=1` en la base de datos.
+2. **El Motor V2 está calibrado para ritmos Anuales:** El motor de mora continua actual calcula el tiempo basándose en años cerrados (ej. enero a diciembre para Agua/Drenaje). Una Asamblea o Multa ocurre en una fecha arbitraria (ej. 13 de marzo), por lo que el motor necesitaría un nuevo algoritmo de cálculo de tiempo específico para fechas flotantes.
+3. **Nuevos Conceptos de Recargo:** El sistema actualmente inyecta "Recargo de Agua" (Cat. 16) y "Recargo de Drenaje" (Cat. 17). Para cobrar mora de asambleas, habría que crear una categoría completamente nueva en la base de datos (ej. "Recargo de Multa") y enseñarle al motor a inyectarla.
+
+**Conclusión:** La restricción actual no es una limitante, sino una **garantía de estabilidad**. Protege al sistema de que un operador despistado desate un cálculo de mora caótico sobre recibos que matemáticamente no tienen una regla de interés definida en el código.
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_list_tables`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 16 June 2026, 8:46 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 16 June 2026, 8:46 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 16 June 2026, 8:46 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** CORTEX_STEP_STATUS_ERROR
+**Created:** 16 June 2026, 8:46 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_describe_table`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 16 June 2026, 8:46 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 16 June 2026, 8:46 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `output.txt`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+[
+  {
+    "id_cargo": 118890,
+    "leyenda": "FALTA ASAMBLEA 04 ENE 2026",
+    "monto": "150.00",
+    "fcobro": "2026-01-29T14:20:20.000Z",
+    "fpago": "2026-01-29T00:00:00.000Z",
+    "estado": 0,
+    "anio": 2026,
+    "categoria": 6
+  },
+  {
+    "id_cargo": 118937,
+    "leyenda": "FALTA ASAMBLEA 29 MAR 2026",
+    "monto": "150.00",
+    "fcobro": "2026-04-17T11:57:32.000Z",
+    "fpago": "2026-04-17T00:00:00.000Z",
+    "estado": 0,
+    "anio": 2026,
+    "categoria": 6
+  },
+  {
+    "id_cargo": 102256,
+    "leyenda": "FALTA ASAMBLEA 09 DIC 2018",
+    "monto": "150.00",
+    "fcobro": "2019-03-28T16:39:03.000Z",
+    "fpago": "2019-03-28T00:00:00.000Z",
+    "estado": 0,
+    "anio": 2018,
+    "categoria": 6
+  },
+  {
+    "id_cargo": 153571,
+    "leyenda": "FALTA ASAMBLEA 17 DIC 2023",
+    "monto": "150.00",
+    "fcobro": "2024-02-07T13:10:14.000Z",
+    "fpago": "2024-02-07T00:00:00.000Z",
+    "estado": 0,
+    "anio": 2022,
+    "categoria": 1
+  },
+  {
+    "id_cargo": 153572,
+    "leyenda": "FALTA ASAMBLEA 18 DIC 2022",
+    "monto": "150.00",
+    "fcobro": "2022-12-28T11:16:34.000Z",
+    "fpago": "2022-12-28T00:00:00.000Z",
+    "estado": 0,
+    "anio": 2022,
+    "categoria": 6
+  },
+  {
+    "id_cargo": 153573,
+    "leyenda": "FALTA ASAMBLEA 25 SEP 2022",
+    "monto": "150.00",
+    "fcobro": "2022-11-29T14:19:30.000Z",
+    "fpago": "2022-11-29T00:00:00.000Z",
+    "estado": 0,
+    "anio": 2022,
+    "categoria": 6
+  },
+  {
+    "id_cargo": 153575,
+    "leyenda": "RECARGO ABR 2022 - ANUALIDAD DEL AGUA 2022",
+    "monto": "60.00",
+    "fcobro": "2022-05-30T10:40:58.000Z",
+    "fpago": "2022-05-30T00:00:00.000Z",
+    "estado": 0,
+    "anio": 2022,
+    "categoria": 16
+  },
+  {
+    "id_cargo": 153576,
+    "leyenda": "RECARGO ABR 2022 - ANUALIDAD DEL DRENAJE 2022",
+    "monto": "20.00",
+    "fcobro": "2022-05-30T10:41:09.000Z",
+    "fpago": "2022-05-30T00:00:00.000Z",
+    "estado": 0,
+    "anio": 2022,
+    "categoria": 17
+  },
+  {
+    "id_cargo": 153577,
+    "leyenda": "RECARGO ENE 2022 - ANUALIDAD DEL AGUA 2022",
+    "monto": "60.00",
+    "fcobro": "2022-05-30T10:40:58.000Z",
+    "fpago": "2022-05-30T00:00:00.000Z",
+    "estado": 0,
+    "anio": 2022,
+    "categoria": 16
+  },
+  {
+    "id_cargo": 153578,
+    "leyenda": "RECARGO ENE 2022 - ANUALIDAD DEL DRENAJE 2022",
+    "monto": "20.00",
+    "fcobro": "2022-05-30T10:41:08.000Z",
+    "fpago": "2022-05-30T00:00:00.000Z",
+    "estado": 0,
+    "anio": 2022,
+    "categoria": 17
+  },
+  {
+    "id_cargo": 153579,
+    "leyenda": "RECARGO FEB 2022 - ANUALIDAD DEL AGUA 2022",
+    "monto": "60.00",
+    "fcobro": "2022-05-30T10:40:58.000Z",
+    "fpago": "2022-05-30T00:00:00.000Z",
+    "estado": 0,
+    "anio": 2022,
+    "categoria": 16
+  },
+  {
+    "id_cargo": 153580,
+    "leyenda": "RECARGO FEB 2022 - ANUALIDAD DEL DRENAJE 2022",
+    "monto": "20.00",
+    "fcobro": "2022-05-30T10:41:09.000Z",
+    "fpago": "2022-05-30T00:00:00.000Z",
+    "estado": 0,
+    "anio": 2022,
+    "categoria": 17
+  },
+  {
+    "id_cargo": 153581,
+    "leyenda": "RECARGO MAR 2022 - ANUALIDAD DEL AGUA 2022",
+    "monto": "60.00",
+    "fcobro": "2022-05-30T10:40:58.000Z",
+    "fpago": "2022-05-30T00:00:00.000Z",
+    "estado": 0,
+    "anio": 2022,
+    "categoria": 16
+  },
+  {
+    "id_cargo": 153582,
+    "leyenda": "RECARGO MAR 2022 - ANUALIDAD DEL DRENAJE 2022",
+    "monto": "20.00",
+    "fcobro": "2022-05-30T10:41:09.000Z",
+    "fpago": "2022-05-30T00:00:00.000Z",
+    "estado": 0,
+    "anio": 2022,
+    "categoria": 17
+  },
+  {
+    "id_cargo": 167306,
+    "leyenda": "ANUALIDAD DEL AGUA 2023",
+    "monto": "600.00",
+    "fcobro": "2023-05-19T10:24:19.000Z",
+    "fpago": "2023-05-19T00:00:00.000Z",
+    "estado": 0,
+    "anio": 2023,
+    "categoria": 2
+  },
+  {
+    "id_cargo": 167307,
+    "leyenda": "ANUALIDAD DEL DRENAJE 2023",
+    "monto": "200.00",
+    "fcobro": "2023-05-19T10:24:34.000Z",
+    "fpago": "2023-05-19T00:00:00.000Z",
+    "estado": 0,
+    "anio": 2023,
+    "categoria": 3
+  },
+  {
+    "id_cargo": 167308,
+    "leyenda": "FALTA ASAMBLEA 02 JUL 2023",
+    "monto": "150.00",
+    "fcobro": "2024-09-05T13:30:42.000Z",
+    "fpago": "2024-09-05T00:00:00.000Z",
+    "estado": 0,
+    "anio": 2023,
+    "categoria": 6
+  },
+  {
+    "id_cargo": 167309,
+    "leyenda": "FALTA ASAMBLEA 24 SEP 2023",
+    "monto": "150.00",
+    "fcobro": "2024-01-12T12:24:52.000Z",
+    "fpago": "2024-01-12T00:00:00.000Z",
+    "estado": 0,
+    "anio": 2023,
+    "categoria": 6
+  },
+  {
+    "id_cargo": 167310,
+    "leyenda": "FALTA ASAMBLEA 26 MAR 2023",
+    "monto": "150.00",
+    "fcobro": "2024-09-05T11:31:15.000Z",
+    "fpago": "2024-09-05T00:00:00.000Z",
+    "estado": 0,
+    "anio": 2023,
+    "categoria": 6
+  },
+  {
+    "id_cargo": 167311,
+    "leyenda": "RECARGO ABR 2023 - ANUALIDAD DEL AGUA 2023",
+    "monto": "60.00",
+    "fcobro": "2023-05-19T10:24:22.000Z",
+    "fpago": "2023-05-19T00:00:00.000Z",
+    "estado": 0,
+    "anio": 2023,
+    "categoria": 16
+  },
+  {
+    "id_cargo": 167312,
+    "leyenda": "RECARGO ABR 2023 - ANUALIDAD DEL DRENAJE 2023",
+    "monto": "20.00",
+    "fcobro": "2023-05-19T10:24:36.000Z",
+    "fpago": "2023-05-19T00:00:00.000Z",
+    "estado": 0,
+    "anio": 2023,
+    "categoria": 17
+  },
+  {
+    "id_cargo": 167313,
+    "leyenda": "RECARGO ENE 2023 - ANUALIDAD DEL AGUA 2023",
+    "monto": "60.00",
+    "fcobro": "2023-05-19T10:24:22.000Z",
+    "fpago": "2023-05-19T00:00:00.000Z",
+    "estado": 0,
+    "anio": 2023,
+    "categoria": 16
+  },
+  {
+    "id_cargo": 167314,
+    "leyenda": "RECARGO ENE 2023 - ANUALIDAD DEL DRENAJE 2023",
+    "monto": "20.00",
+    "fcobro": "2023-05-19T10:24:36.000Z",
+    "fpago": "2023-05-19T00:00:00.000Z",
+    "estado": 0,
+    "anio": 2023,
+    "categoria": 17
+  },
+  {
+    "id_cargo": 167315,
+    "leyenda": "RECARGO FEB 2023 - ANUALIDAD DEL AGUA 2023",
+    "monto": "60.00",
+    "fcobro": "2023-05-19T10:24:22.000Z",
+    "fpago": "2023-05-19T00:00:00.000Z",
+    "estado": 0,
+    "anio": 2023,
+    "categoria": 16
+  },
+  {
+    "id_cargo": 167316,
+    "leyenda": "RECARGO FEB 2023 - ANUALIDAD DEL DRENAJE 2023",
+    "monto": "20.00",
+    "fcobro": "2023-05-19T10:24:36.000Z",
+    "fpago": "2023-05-19T00:00:00.000Z",
+    "estado": 0,
+    "anio": 2023,
+    "categoria": 17
+  },
+  {
+    "id_cargo": 167317,
+    "leyenda": "RECARGO MAR 2023 - ANUALIDAD DEL AGUA 2023",
+    "monto": "60.00",
+    "fcobro": "2023-05-19T10:24:22.000Z",
+    "fpago": "2023-05-19T00:00:00.000Z",
+    "estado": 0,
+    "anio": 2023,
+    "categoria": 16
+  },
+  {
+    "id_cargo": 167318,
+    "leyenda": "RECARGO MAR 2023 - ANUALIDAD DEL DRENAJE 2023",
+    "monto": "20.00",
+    "fcobro": "2023-05-19T10:24:36.000Z",
+    "fpago": "2023-05-19T00:00:00.000Z",
+    "estado": 0,
+    "anio": 2023,
+    "categoria": 17
+  },
+  {
+    "id_cargo": 180209,
+    "leyenda": "falta asamblea 11 feb 2024",
+    "monto": "150.00",
+    "fcobro": "2024-12-18T12:52:17.000Z",
+    "fpago": "2024-12-18T00:00:00.000Z",
+    "estado": 0,
+    "anio": 2024,
+    "categoria": 6
+  },
+  {
+    "id_cargo": 180210,
+    "leyenda": "FALTA ASAMBLEA 15 DIC 2024",
+    "monto": "150.00",
+    "fcobro": "2024-12-18T13:40:55.000Z",
+    "fpago": "2024-12-18T00:00:00.000Z",
+    "estado": 0,
+    "anio": 2024,
+    "categoria": 6
+  },
+  {
+    "id_cargo": 180211,
+    "leyenda": "FALTA ASAMBLEA 24 MAR 2024",
+    "monto": "150.00",
+    "fcobro": "2024-12-18T15:09:24.000Z",
+    "fpago": "2024-12-18T00:00:00.000Z",
+    "estado": 0,
+    "anio": 2024,
+    "categoria": 6
+  },
+  {
+    "id_cargo": 180212,
+    "leyenda": "FALTA ASAMBLEA 29 SEP 2024",
+    "monto": "150.00",
+    "fcobro": "2024-12-18T12:53:42.000Z",
+    "fpago": "2024-12-18T00:00:00.000Z",
+    "estado": 0,
+    "anio": 2024,
+    "categoria": 6
+  },
+  {
+    "id_cargo": 180213,
+    "leyenda": "FALTA ASAMBLEA 30 JUN 2024 ",
+    "monto": "150.00",
+    "fcobro": "2024-12-18T15:35:36.000Z",
+    "fpago": "2024-12-18T00:00:00.000Z",
+    "estado": 0,
+    "anio": 2024,
+    "categoria": 6
+  },
+  {
+    "id_cargo": 190900,
+    "leyenda": "FALTA ASAMBLEA 28 SEP 2025",
+    "monto": "150.00",
+    "fcobro": "2025-09-28T10:51:25.000Z",
+    "fpago": "2025-09-28T00:00:00.000Z",
+    "estado": 0,
+    "anio": 2025,
+    "categoria": 6
+  },
+  {
+    "id_cargo": 190901,
+    "leyenda": "FALTA ASAMBLEA 29 JUN 2025",
+    "monto": "150.00",
+    "fcobro": "2025-03-30T15:32:27.000Z",
+    "fpago": "2025-03-30T00:00:00.000Z",
+    "estado": 0,
+    "anio": 2025,
+    "categoria": 6
+  },
+  {
+    "id_cargo": 190902,
+    "leyenda": "FALTA ASAMBLEA 30 MAR 2025",
+    "monto": "150.00",
+    "fcobro": "2025-04-24T13:37:22.000Z",
+    "fpago": "2025-04-24T00:00:00.000Z",
+    "estado": 0,
+    "anio": 2025,
+    "categoria": 6
+  }
+]
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** CORTEX_STEP_STATUS_ERROR
+**Created:** 16 June 2026, 8:47 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 16 June 2026, 8:47 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 16 June 2026, 8:47 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 16 June 2026, 8:47 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `output.txt`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+[
+  {
+    "id_cargo": 167306,
+    "leyenda": "ANUALIDAD DEL AGUA 2023",
+    "monto": "600.00",
+    "fcobro": "2023-05-19T10:24:19.000Z",
+    "fpago": "2023-05-19T00:00:00.000Z",
+    "estado": 0,
+    "anio": 2023,
+    "categoria": 2,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 167307,
+    "leyenda": "ANUALIDAD DEL DRENAJE 2023",
+    "monto": "200.00",
+    "fcobro": "2023-05-19T10:24:34.000Z",
+    "fpago": "2023-05-19T00:00:00.000Z",
+    "estado": 0,
+    "anio": 2023,
+    "categoria": 3,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 153570,
+    "leyenda": "ANUALIDAD DEL DRENAJE 2022",
+    "monto": "200.00",
+    "fcobro": "2022-05-30T10:41:06.000Z",
+    "fpago": "2022-05-31T00:00:00.000Z",
+    "estado": 1,
+    "anio": 2022,
+    "categoria": 3,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 153569,
+    "leyenda": "ANUALIDAD DEL AGUA 2022",
+    "monto": "600.00",
+    "fcobro": "2022-05-30T10:40:55.000Z",
+    "fpago": "2022-05-31T00:00:00.000Z",
+    "estado": 1,
+    "anio": 2022,
+    "categoria": 2,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 139949,
+    "leyenda": "ANUALIDAD DEL AGUA 2021",
+    "monto": "600.00",
+    "fcobro": "2021-07-05T12:23:27.000Z",
+    "fpago": "2021-09-30T00:00:00.000Z",
+    "estado": 1,
+    "anio": 2021,
+    "categoria": 2,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 139950,
+    "leyenda": "ANUALIDAD DEL DRENAJE 2021 ",
+    "monto": "200.00",
+    "fcobro": "2021-07-05T12:29:05.000Z",
+    "fpago": "2021-09-30T00:00:00.000Z",
+    "estado": 1,
+    "anio": 2021,
+    "categoria": 3,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 130058,
+    "leyenda": "ANUALIDAD DEL DRENAJE 2020 ",
+    "monto": "200.00",
+    "fcobro": "2020-01-29T16:09:45.000Z",
+    "fpago": "2020-03-30T00:00:00.000Z",
+    "estado": 1,
+    "anio": 2020,
+    "categoria": 3,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 130057,
+    "leyenda": "ANUALIDAD DEL AGUA 2020",
+    "monto": "600.00",
+    "fcobro": "2020-01-29T16:09:43.000Z",
+    "fpago": "2020-03-30T00:00:00.000Z",
+    "estado": 1,
+    "anio": 2020,
+    "categoria": 2,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 117837,
+    "leyenda": "ANUALIDAD DEL AGUA 2019",
+    "monto": "600.00",
+    "fcobro": "2019-03-11T17:47:35.000Z",
+    "fpago": "2019-03-22T00:00:00.000Z",
+    "estado": 1,
+    "anio": 2019,
+    "categoria": 2,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 117838,
+    "leyenda": "ANUALIDAD DEL DRENAJE 2019",
+    "monto": "200.00",
+    "fcobro": "2019-03-11T17:47:36.000Z",
+    "fpago": "2019-03-22T00:00:00.000Z",
+    "estado": 1,
+    "anio": 2019,
+    "categoria": 3,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 102253,
+    "leyenda": "ANUALIDAD DEL AGUA 2018",
+    "monto": "600.00",
+    "fcobro": "2018-03-23T17:32:29.000Z",
+    "fpago": "2018-03-23T00:00:00.000Z",
+    "estado": 1,
+    "anio": 2018,
+    "categoria": 2,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 102254,
+    "leyenda": "ANUALIDAD DEL DRENAJE 2018",
+    "monto": "200.00",
+    "fcobro": "2018-03-23T17:32:29.000Z",
+    "fpago": "2018-03-23T00:00:00.000Z",
+    "estado": 1,
+    "anio": 2018,
+    "categoria": 3,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 89573,
+    "leyenda": "REHABILITACION DE LA RED DE AGUA POTABLE 2DA.",
+    "monto": "120.00",
+    "fcobro": "2017-02-02T13:18:02.000Z",
+    "fpago": "2017-03-31T00:00:00.000Z",
+    "estado": 1,
+    "anio": 2017,
+    "categoria": 2,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 89571,
+    "leyenda": "ANUALIDAD DEL AGUA 2017",
+    "monto": "600.00",
+    "fcobro": "2017-02-02T13:18:02.000Z",
+    "fpago": "2017-03-31T00:00:00.000Z",
+    "estado": 1,
+    "anio": 2017,
+    "categoria": 2,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 89572,
+    "leyenda": "ANUALIDAD DEL DRENAJE 2017",
+    "monto": "200.00",
+    "fcobro": "2017-02-02T13:18:02.000Z",
+    "fpago": "2017-03-31T00:00:00.000Z",
+    "estado": 1,
+    "anio": 2017,
+    "categoria": 3,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 83834,
+    "leyenda": "ANUALIDAD DEL DRENAJE 2016",
+    "monto": "200.00",
+    "fcobro": "2015-11-30T11:20:49.000Z",
+    "fpago": "2016-03-01T00:00:00.000Z",
+    "estado": 1,
+    "anio": 2016,
+    "categoria": 3,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 83833,
+    "leyenda": "ANUALIDAD DEL AGUA 2016",
+    "monto": "500.00",
+    "fcobro": "2015-11-30T11:21:11.000Z",
+    "fpago": "2016-03-01T00:00:00.000Z",
+    "estado": 1,
+    "anio": 2016,
+    "categoria": 2,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 77084,
+    "leyenda": "ANUALIDAD DEL AGUA AÑO 2015",
+    "monto": "500.00",
+    "fcobro": "2014-12-01T10:30:45.000Z",
+    "fpago": "2016-03-31T00:00:00.000Z",
+    "estado": 1,
+    "anio": 2015,
+    "categoria": 2,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 77085,
+    "leyenda": "ANUALIDAD DEL DRENAJE AÑO 2015",
+    "monto": "200.00",
+    "fcobro": "2014-12-01T10:37:47.000Z",
+    "fpago": "2016-03-31T00:00:00.000Z",
+    "estado": 1,
+    "anio": 2015,
+    "categoria": 3,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 69612,
+    "leyenda": "ANUALIDAD DEL AGUA 2014",
+    "monto": "400.00",
+    "fcobro": "2013-12-04T11:14:51.000Z",
+    "fpago": "2016-03-31T00:00:00.000Z",
+    "estado": 1,
+    "anio": 2014,
+    "categoria": 2,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 69613,
+    "leyenda": "ANUALIDAD DEL DRENAJE 2014",
+    "monto": "140.00",
+    "fcobro": "2013-12-04T11:16:10.000Z",
+    "fpago": "2016-03-31T00:00:00.000Z",
+    "estado": 1,
+    "anio": 2014,
+    "categoria": 3,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 62366,
+    "leyenda": "AGUA POTABLE ANUAL 2013 ",
+    "monto": "400.00",
+    "fcobro": "2013-10-28T19:57:37.000Z",
+    "fpago": "2016-03-31T00:00:00.000Z",
+    "estado": 1,
+    "anio": 2013,
+    "categoria": 2,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 62367,
+    "leyenda": "ANUALIDAD DEL DRENAJE DEL AÑO 2013",
+    "monto": "140.00",
+    "fcobro": "2013-10-28T19:57:37.000Z",
+    "fpago": "2016-03-31T00:00:00.000Z",
+    "estado": 1,
+    "anio": 2013,
+    "categoria": 3,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 55332,
+    "leyenda": "AGUA POTABLE AÑO 2012",
+    "monto": "360.00",
+    "fcobro": "2011-12-06T10:48:38.000Z",
+    "fpago": "2016-03-31T00:00:00.000Z",
+    "estado": 1,
+    "anio": 2012,
+    "categoria": 2,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 55333,
+    "leyenda": "ALCANTARILLADO AÑO 2012",
+    "monto": "120.00",
+    "fcobro": "2011-12-06T10:51:08.000Z",
+    "fpago": "2016-03-31T00:00:00.000Z",
+    "estado": 1,
+    "anio": 2012,
+    "categoria": 3,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 46270,
+    "leyenda": "ALCANTARILLADO AÑO 2011",
+    "monto": "120.00",
+    "fcobro": "2011-08-11T15:16:46.000Z",
+    "fpago": "2016-03-31T00:00:00.000Z",
+    "estado": 1,
+    "anio": 2011,
+    "categoria": 3,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 46269,
+    "leyenda": "AGUA POTABLE ANUALIDAD 2011",
+    "monto": "360.00",
+    "fcobro": "2011-08-11T15:16:29.000Z",
+    "fpago": "2016-03-31T00:00:00.000Z",
+    "estado": 1,
+    "anio": 2011,
+    "categoria": 2,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 36369,
+    "leyenda": "AGUA POTABLE ANUALIDAD 2010",
+    "monto": "360.00",
+    "fcobro": "2009-12-05T17:51:35.000Z",
+    "fpago": "2016-03-31T00:00:00.000Z",
+    "estado": 1,
+    "anio": 2010,
+    "categoria": 2,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 36370,
+    "leyenda": "ALCANTARILLADO AÑO 2010",
+    "monto": "120.00",
+    "fcobro": "2011-08-16T11:56:23.000Z",
+    "fpago": "2016-03-31T00:00:00.000Z",
+    "estado": 1,
+    "anio": 2010,
+    "categoria": 3,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 26674,
+    "leyenda": "AGUA POTABLE ANUALIDAD 2009 ",
+    "monto": "360.00",
+    "fcobro": "2008-10-13T19:50:11.000Z",
+    "fpago": "2016-03-31T00:00:00.000Z",
+    "estado": 1,
+    "anio": 2009,
+    "categoria": 2,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 26675,
+    "leyenda": "ALCANTARILLADO AÑO 2009",
+    "monto": "120.00",
+    "fcobro": "2008-10-13T19:52:59.000Z",
+    "fpago": "2016-03-31T00:00:00.000Z",
+    "estado": 1,
+    "anio": 2009,
+    "categoria": 3,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 19120,
+    "leyenda": "ALCANTARILLADO AÑO 2008",
+    "monto": "120.00",
+    "fcobro": "2007-11-22T13:56:11.000Z",
+    "fpago": "2016-03-31T00:00:00.000Z",
+    "estado": 1,
+    "anio": 2008,
+    "categoria": 3,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 19119,
+    "leyenda": "AGUA POTABLE 2008",
+    "monto": "360.00",
+    "fcobro": "2007-11-22T13:55:47.000Z",
+    "fpago": "2016-03-31T00:00:00.000Z",
+    "estado": 1,
+    "anio": 2008,
+    "categoria": 2,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 13416,
+    "leyenda": "AGUA POTABLE AÑO 2007    ",
+    "monto": "360.00",
+    "fcobro": "2010-03-24T12:53:29.000Z",
+    "fpago": "2016-03-31T00:00:00.000Z",
+    "estado": 1,
+    "anio": 2007,
+    "categoria": 2,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 13417,
+    "leyenda": "ALCANTARILLADO AÑO 2007",
+    "monto": "120.00",
+    "fcobro": "2011-08-16T11:56:23.000Z",
+    "fpago": "2016-03-31T00:00:00.000Z",
+    "estado": 1,
+    "anio": 2007,
+    "categoria": 3,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 6102,
+    "leyenda": "MENSUALIDAD 2006 AGUA MAYO",
+    "monto": "30.00",
+    "fcobro": "2006-09-01T23:31:52.000Z",
+    "fpago": "2011-08-16T00:00:00.000Z",
+    "estado": -1,
+    "anio": 2006,
+    "categoria": 2,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 6099,
+    "leyenda": "MENSUALIDAD 2006 AGUA JULIO",
+    "monto": "30.00",
+    "fcobro": "2006-09-01T23:31:52.000Z",
+    "fpago": "2011-08-16T00:00:00.000Z",
+    "estado": -1,
+    "anio": 2006,
+    "categoria": 2,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 6096,
+    "leyenda": "MENSUALIDAD 2006 AGUA DICIEMBRE",
+    "monto": "30.00",
+    "fcobro": "2006-09-01T23:31:52.000Z",
+    "fpago": "2011-08-16T00:00:00.000Z",
+    "estado": -1,
+    "anio": 2006,
+    "categoria": 2,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 6089,
+    "leyenda": "ALCANTARILLADO AÑO 2006",
+    "monto": "120.00",
+    "fcobro": "2006-09-01T23:31:52.000Z",
+    "fpago": "2016-03-31T00:00:00.000Z",
+    "estado": 1,
+    "anio": 2006,
+    "categoria": 3,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 6103,
+    "leyenda": "MENSUALIDAD 2006 AGUA NOVIEMBRE",
+    "monto": "30.00",
+    "fcobro": "2006-09-01T23:31:52.000Z",
+    "fpago": "2011-08-16T00:00:00.000Z",
+    "estado": -1,
+    "anio": 2006,
+    "categoria": 2,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 6100,
+    "leyenda": "MENSUALIDAD 2006 AGUA JUNIO",
+    "monto": "30.00",
+    "fcobro": "2006-09-01T23:31:52.000Z",
+    "fpago": "2011-08-16T00:00:00.000Z",
+    "estado": -1,
+    "anio": 2006,
+    "categoria": 2,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 6097,
+    "leyenda": "MENSUALIDAD 2006 AGUA ENERO",
+    "monto": "30.00",
+    "fcobro": "2006-09-01T23:31:52.000Z",
+    "fpago": "2011-08-16T00:00:00.000Z",
+    "estado": -1,
+    "anio": 2006,
+    "categoria": 2,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 6094,
+    "leyenda": "MENSUALIDAD 2006 AGUA ABRIL",
+    "monto": "30.00",
+    "fcobro": "2006-09-01T23:31:52.000Z",
+    "fpago": "2011-08-16T00:00:00.000Z",
+    "estado": -1,
+    "anio": 2006,
+    "categoria": 2,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 6104,
+    "leyenda": "MENSUALIDAD 2006 AGUA OCTUBRE",
+    "monto": "30.00",
+    "fcobro": "2006-09-01T23:31:52.000Z",
+    "fpago": "2011-08-16T00:00:00.000Z",
+    "estado": -1,
+    "anio": 2006,
+    "categoria": 2,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 6101,
+    "leyenda": "MENSUALIDAD 2006 AGUA MARZO",
+    "monto": "30.00",
+    "fcobro": "2006-09-01T23:31:52.000Z",
+    "fpago": "2011-08-16T00:00:00.000Z",
+    "estado": -1,
+    "anio": 2006,
+    "categoria": 2,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 6098,
+    "leyenda": "MENSUALIDAD 2006 AGUA FEBRERO",
+    "monto": "30.00",
+    "fcobro": "2006-09-01T23:31:52.000Z",
+    "fpago": "2011-08-16T00:00:00.000Z",
+    "estado": -1,
+    "anio": 2006,
+    "categoria": 2,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 6095,
+    "leyenda": "MENSUALIDAD 2006 AGUA AGOSTO",
+    "monto": "30.00",
+    "fcobro": "2006-09-01T23:31:52.000Z",
+    "fpago": "2011-08-16T00:00:00.000Z",
+    "estado": -1,
+    "anio": 2006,
+    "categoria": 2,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 6088,
+    "leyenda": "AGUA POTABLE AÑO 2006",
+    "monto": "360.00",
+    "fcobro": "2011-08-16T11:56:23.000Z",
+    "fpago": "2016-03-31T00:00:00.000Z",
+    "estado": 1,
+    "anio": 2006,
+    "categoria": 2,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 6105,
+    "leyenda": "MENSUALIDAD 2006 AGUA SEPTIEMBRE",
+    "monto": "30.00",
+    "fcobro": "2006-09-01T23:31:52.000Z",
+    "fpago": "2011-08-16T00:00:00.000Z",
+    "estado": -1,
+    "anio": 2006,
+    "categoria": 2,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 680,
+    "leyenda": "AGUA POTABLE AÑO 2005",
+    "monto": "360.00",
+    "fcobro": "2010-04-05T16:31:51.000Z",
+    "fpago": "2016-03-31T00:00:00.000Z",
+    "estado": 1,
+    "anio": 2005,
+    "categoria": 2,
+    "_origen": "historico"
+  },
+  {
+    "id_cargo": 681,
+    "leyenda": "ALCANTARILLADO AÑO 2005",
+    "monto": "120.00",
+    "fcobro": "2006-09-01T23:31:52.000Z",
+    "fpago": "2016-03-31T00:00:00.000Z",
+    "estado": 1,
+    "anio": 2005,
+    "categoria": 3,
+    "_origen": "historico"
+  }
+]
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 16 June 2026, 8:47 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 16 June 2026, 8:47 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 16 June 2026, 8:47 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 16 June 2026, 8:47 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 16 June 2026, 8:47 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
 
 ---
 
