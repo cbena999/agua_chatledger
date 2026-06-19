@@ -59,21 +59,6 @@
       "env": {
         "DOCKER_HOST": "unix:///var/run/docker.sock"
       }
-    },
-    "bdawa2host-c": {
-      "command": "docker",
-      "args": [
-        "exec",
-        "-i",
-        "context7-mcp-mysql",
-        "npx",
-        "-y",
-        "@f4ww4z/mcp-mysql-server",
-        "mysql://root:comite_2026@192.168.0.100:7002/aguayd_os"
-      ],
-      "env": {
-        "DOCKER_HOST": "unix:///var/run/docker.sock"
-      }
     }
   }
 }
