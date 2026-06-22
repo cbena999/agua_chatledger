@@ -90,6 +90,7 @@ SELECT IFNULL(SUM(monto),0) FROM vw_ligacargos_pendientes WHERE numcontrato='405
 
 | Fecha | Item | Detalle |
 |---|---|---|
+| 2026-06-22 | Refactorización Acordeón de Mora UI | ✅ PASADO — Reemplazo de lista plana de adeudos por 4 acordeones colapsables en adeudo_tabla.php con estadísticas dinámicas, soporte para multas de asamblea en sus años correspondientes y resaltado visual para la palabra 'RECARGO' en cargos especiales. |
 | 2026-05-23 | Habilitación HTTPS y Let's Encrypt | ✅ PASADO — Habilitación de HTTPS en Nginx para oci-vm (www.caelitandem.lat), redirect HTTP → HTTPS y verificación de timers. |
 | 2026-04-29 | Sección Reportes RC-1 a RC-5 | ✅ PASADO — empate caja, cartera vencida, trazabilidad segundos |
 | 2026-04-29 | Grupo F pruebas (UI-30, 31, 33) | ✅ PASADO — asistencias mini-webapp, TXT MD5, cancelación masiva FALTA ASAMBLEA |
@@ -132,5 +133,5 @@ SELECT IFNULL(SUM(monto),0) FROM vw_ligacargos_pendientes WHERE numcontrato='405
 
 ---
 
-*Última actualización: 2026-05-25 — Sincronización GEMINI.md y repos — Antigravity*
+*Última actualización: 2026-06-22 — Sincronización GEMINI.md y repos — Antigravity*
 
