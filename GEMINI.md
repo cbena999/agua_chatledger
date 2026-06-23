@@ -71,7 +71,7 @@ El entorno Windows 10 ha sido convertido en un Appliance Kiosko 100% automatizad
 - **Apagado Seguro:** El script `shutdown-server.ps1` fuerza un volcado físico en ZIP de la BD antes de apagar la máquina (evitando corrupciones).
 - **Kiosko Restringido:** El script `setup-full.ps1` crea una carpeta `aguav2` en el escritorio para la gestión técnica, y deja expuesto solo el Kiosko de Chrome y el botón de apagado para los operadores. Chrome está bloqueado vía Registro para evitar actualizaciones.
 
-> **⚠️ Filosofía de Uso**: Los scripts `Sync-*` y `Full-Pipeline-Sync` son **Herramientas de Migración**, no tareas recurrentes. Se ejecutan durante el desarrollo para estabilizar Host C. En producción (Go-Live) se ejecutan **una última vez** y luego se retiran. Host C opera autónomamente.
+> **⚠️ Filosofía de Uso**: Los scripts `Sync-*` y el bash `Full-Pipeline-Sync` **NO DEBEN EJECUTARSE NUNCA MÁS** a partir del 23 de mayo de 2026. Fueron utilizados exclusivamente para el setup/migración final entre Host B, Host A y hacia Host C (pase a producción). Host C ahora opera autónomamente y cualquier sincronización de este tipo destruiría los datos vivos en producción.
 
 > Ver tabla de comandos canónicos y comportamiento de flags en: `docs-dev/migration-aguav2/MIGRATION_PROTOCOL.md`
 
@@ -251,7 +251,7 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 *   **Nuevo Repo**: Inicializado `/home/carlos/GitHub/emp_devhj_sw/caelitandem_home` para el proyecto CaeliTandem SEO, separado del proyecto Agua.
 *   **Script dos-repos-branch-git.sh**: Creado en `docs-dev/scripts/` como guía de referencia del flujo canónico de commits para ambos repos (agua + agua_chatledger). **No es un script ejecutable automatizado**, sino documentación operativa del flujo Git de cierre de sesión.
 
-**Última actualización**: 2026-06-22
+**Última actualización**: 2026-06-23
 
 
 
