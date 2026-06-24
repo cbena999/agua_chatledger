@@ -86,6 +86,36 @@ SELECT IFNULL(SUM(monto),0) FROM vw_ligacargos_pendientes WHERE numcontrato='405
 
 ---
 
+### P-06 🔲 UI: Acordeón de Asambleas en `adeudo_tabla.php`
+**Objetivo**: En la vista de adeudos, actualmente la función `obtenerTotalesGrupo()` envía todas las asambleas (categoría 6) a "Histórico" porque su `recargo` interno es `0`.
+**Acción Pendiente**: Modificar la lógica para que las asambleas del año en curso se muestren correctamente en el acordeón "Ejercicio Actual" y no se mezclen con las históricas pre-2025.
+
+---
+
+### P-07 🔲 UI: Parametrizar Cantidad de Copias en `credencial.php`
+**Objetivo**: Evitar el desperdicio de papel térmico.
+**Acción Pendiente**: La vista de credenciales actualmente está rígida a 2 copias por hoja. Se requiere implementar un control `<select>` en la UI previa para permitir generar 1 sola copia.
+
+---
+
+### P-08 🔲 BD: Normalizar "Mensualidades" manuales en `01_normalizar_catalogo.sql`
+**Objetivo**: Prevenir que un operador ingrese manualmente una leyenda de mensualidad en categorías base (Agua/Drenaje) y adquiera la bandera `automatico=1`.
+**Acción Pendiente**: Añadir `MENSUALIDAD`, `UN MES`, `POR MES` a la regla `automatico=0` del script de normalización para mantener simetría arquitectónica.
+
+---
+
+### P-09 🔲 BD: Normalización tipográfica de Asambleas Históricas
+**Objetivo**: Saneamiento de la UI y los acordeones.
+**Acción Pendiente**: Correr `UPDATE ligacargos SET leyenda = UPPER(TRIM(leyenda)) WHERE categoria=6` y su equivalente en `ligacargos_historico` para corregir 229 registros en minúsculas y con espacios finales.
+
+---
+
+### P-10 🔲 BD: Falsos Positivos "Rehabilitación" en histórico
+**Objetivo**: Evitar contaminación en reportes de ingresos históricos de Agua (categoría 2).
+**Acción Pendiente**: Cambiar a `categoria=5` los 284 registros pre-2020 con leyenda `'REHABILITACION DE LA RED...'` en `ligacargos_historico`.
+
+---
+
 ## ✅ RESUELTOS RECIENTEMENTE (referencia)
 
 | Fecha | Item | Detalle |
@@ -132,6 +162,8 @@ SELECT IFNULL(SUM(monto),0) FROM vw_ligacargos_pendientes WHERE numcontrato='405
 | 2026-05-25 | GEMINI.md y docs actualizados + push repos | ✅ PASADO — Hitos 2026-05-23 a 2026-05-25 documentados, commit y push en agua (main) y agua_chatledger (master). |
 | 2026-06-23 | Optimización Acordeón UI de Mora (5 Grupos) | ✅ PASADO — Reestructuración a 5 acordeones en adeudo_tabla.php: Año en curso (abierto por defecto), Falta Asamblea histórica (nuevo), Cargos especiales, Historial reciente e Historial antiguo. Concatenación de conteo de años de deuda base y años de recargos-mora en etiqueta principal. |
 
+| 2026-06-24 | Auditoría JIT y UI Condonación | ✅ PASADO — Revisión profunda de ligacargos dual, Poka-Yoke UI oculto, y SP sp_pagar_cargo. |
+
 ---
 
-*Última actualización: 2026-06-23 — Sincronización GEMINI.md y repos — Antigravity*
+*Última actualización: 2026-06-24 — Sincronización GEMINI.md y repos — Antigravity*
