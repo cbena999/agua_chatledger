@@ -57,4 +57,30 @@ Se ejecutó la suite de validación forense `05_validation_20_anios.sql` directa
 | **Q7 (Rehab Cat 2)**: Rehabilitaciones de red mal categorizadas como 2 (Agua base) | `0` | ✅ PASADO |
 
 ---
+
+## Issue 2 — Centralización de Herramientas de Condonación y Reconciliación
+
+### Scope Funcional
+- **Unificación de la Interfaz Administrativa**: Se eliminó el archivo legacy independiente `soporte_reconciliados.php` y toda su lógica (buscadores, tablas y disparadores de POST) fue integrada de forma nativa directamente en la sección "Saneamiento y Condonación de Deuda" del panel de `configuracion.php`.
+- **Integridad y Experiencia de Usuario**: El acceso a la funcionalidad ahora es directo en la columna izquierda del panel. El botón "Condonación Histórica" en la página principal de "Configuración y Saneamiento" se actualizó para apuntar directamente al ancla `#seccion-reconciliacion` del nuevo módulo integrado.
+- **Flujos Modales Preservados**: Las confirmaciones y captura de folios físicos (Opción A) y condonaciones del comité (Opción B) operan a través de modales autocontenidos sin recargar ni alterar el resto de los controles globales de configuración.
+
+### Scope Técnico
+- **Frontend / Backend (PHP)**:
+  - `/admin/operaciones/configuracion.php`: Integración del POST controller para reconciliación de folios históricos e inserción de logs en `sys_log_reconciliacion`, validación de fecha de pago Poka-Yoke (bloqueo del año en curso), inyección de estilos para los cuadros modales `#rec-overlay` / `.rec-modal-box`, renderizado de la tabla de deudas pendientes y script de búsqueda JS.
+  - `/views/sistema/configuracion.php`: Redirección del botón del dashboard hacia `admin/operaciones/configuracion.php#seccion-reconciliacion`.
+- **Limpieza de Código**:
+  - Eliminación física de `/admin/operaciones/soporte_reconciliados.php`.
+
+---
+
+## Archivos Modificados Adicionales
+
+| Archivo | Repo | Tipo de cambio |
+|:---|:---:|:---|
+| `/admin/operaciones/configuracion.php` | `agua` | Modificado (integración del módulo de reconciliación y modales) |
+| `/views/sistema/configuracion.php` | `agua` | Modificado (redirección del botón de condonación a la sección de ancla) |
+| `/admin/operaciones/soporte_reconciliados.php` | `agua` | Borrado (eliminación física del archivo legacy) |
+
+---
 *Generado por Antigravity — 2026-06-24*
