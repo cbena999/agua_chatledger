@@ -86,33 +86,9 @@ SELECT IFNULL(SUM(monto),0) FROM vw_ligacargos_pendientes WHERE numcontrato='405
 
 ---
 
-### P-06 🔲 UI: Acordeón de Asambleas en `adeudo_tabla.php`
-**Objetivo**: En la vista de adeudos, actualmente la función `obtenerTotalesGrupo()` envía todas las asambleas (categoría 6) a "Histórico" porque su `recargo` interno es `0`.
-**Acción Pendiente**: Modificar la lógica para que las asambleas del año en curso se muestren correctamente en el acordeón "Ejercicio Actual" y no se mezclen con las históricas pre-2025.
-
----
-
 ### P-07 🔲 UI: Parametrizar Cantidad de Copias en `credencial.php`
 **Objetivo**: Evitar el desperdicio de papel térmico.
 **Acción Pendiente**: La vista de credenciales actualmente está rígida a 2 copias por hoja. Se requiere implementar un control `<select>` en la UI previa para permitir generar 1 sola copia.
-
----
-
-### P-08 🔲 BD: Normalizar "Mensualidades" manuales en `01_normalizar_catalogo.sql`
-**Objetivo**: Prevenir que un operador ingrese manualmente una leyenda de mensualidad en categorías base (Agua/Drenaje) y adquiera la bandera `automatico=1`.
-**Acción Pendiente**: Añadir `MENSUALIDAD`, `UN MES`, `POR MES` a la regla `automatico=0` del script de normalización para mantener simetría arquitectónica.
-
----
-
-### P-09 🔲 BD: Normalización tipográfica de Asambleas Históricas
-**Objetivo**: Saneamiento de la UI y los acordeones.
-**Acción Pendiente**: Correr `UPDATE ligacargos SET leyenda = UPPER(TRIM(leyenda)) WHERE categoria=6` y su equivalente en `ligacargos_historico` para corregir 229 registros en minúsculas y con espacios finales.
-
----
-
-### P-10 🔲 BD: Falsos Positivos "Rehabilitación" en histórico
-**Objetivo**: Evitar contaminación en reportes de ingresos históricos de Agua (categoría 2).
-**Acción Pendiente**: Cambiar a `categoria=5` los 284 registros pre-2020 con leyenda `'REHABILITACION DE LA RED...'` en `ligacargos_historico`.
 
 ---
 
@@ -120,6 +96,7 @@ SELECT IFNULL(SUM(monto),0) FROM vw_ligacargos_pendientes WHERE numcontrato='405
 
 | Fecha | Item | Detalle |
 |---|---|---|
+| 2026-06-24 | Saneamiento de Base de Datos y UI (GAPs 1-6) | ✅ PASADO — Normalizadas mensualidades manuales a automatico=0 en cargos. Sanitizadas tipografías y leyendas de Faltas a Asamblea en catalogos/ledger. Reclasificado concepto 'REHABILITACION' de cat 2 a cat 5. Corregido agrupamiento de asambleas del año en curso en adeudo_tabla.php y validada suite completa sin falsos positivos en Host C. |
 | 2026-06-22 | Refactorización Acordeón de Mora UI | ✅ PASADO — Reemplazo de lista plana de adeudos por 4 acordeones colapsables en adeudo_tabla.php con estadísticas dinámicas, soporte para multas de asamblea en sus años correspondientes y resaltado visual para la palabra 'RECARGO' en cargos especiales. |
 | 2026-05-23 | Habilitación HTTPS y Let's Encrypt | ✅ PASADO — Habilitación de HTTPS en Nginx para oci-vm (www.caelitandem.lat), redirect HTTP → HTTPS y verificación de timers. |
 | 2026-04-29 | Sección Reportes RC-1 a RC-5 | ✅ PASADO — empate caja, cartera vencida, trazabilidad segundos |
