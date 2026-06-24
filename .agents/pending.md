@@ -141,6 +141,7 @@ SELECT IFNULL(SUM(monto),0) FROM vw_ligacargos_pendientes WHERE numcontrato='405
 
 | 2026-06-24 | Auditoría JIT y UI Condonación | ✅ PASADO — Revisión profunda de ligacargos dual, Poka-Yoke UI oculto, y SP sp_pagar_cargo. |
 | 2026-06-24 | Centralización de Herramientas de Condonación y Reconciliación | ✅ PASADO — Eliminado el archivo físico soporte_reconciliados.php e integrada su lógica nativa de búsqueda y reconciliación (por recibo físico o por condonación) en configuracion.php. Actualizada la vista de sistema para redireccionar directamente al ancla de reconciliación en la página de configuración. |
+| 2026-06-24 | Remoción de Enlace Redundante | ✅ PASADO — Removido el enlace redundante 'Configuración del Sistema' de views/sistema/configuracion.php para simplificar el dashboard. |
 
 ---
 

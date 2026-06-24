@@ -64,6 +64,7 @@ Se ejecutó la suite de validación forense `05_validation_20_anios.sql` directa
 - **Unificación de la Interfaz Administrativa**: Se eliminó el archivo legacy independiente `soporte_reconciliados.php` y toda su lógica (buscadores, tablas y disparadores de POST) fue integrada de forma nativa directamente en la sección "Saneamiento y Condonación de Deuda" del panel de `configuracion.php`.
 - **Integridad y Experiencia de Usuario**: El acceso a la funcionalidad ahora es directo en la columna izquierda del panel. El botón "Condonación Histórica" en la página principal de "Configuración y Saneamiento" se actualizó para apuntar directamente al ancla `#seccion-reconciliacion` del nuevo módulo integrado.
 - **Flujos Modales Preservados**: Las confirmaciones y captura de folios físicos (Opción A) y condonaciones del comité (Opción B) operan a través de modales autocontenidos sin recargar ni alterar el resto de los controles globales de configuración.
+- **Remoción de Enlace Redundante**: Se eliminó el botón de acceso redundante "Configuración del Sistema" del dashboard `views/sistema/configuracion.php` para simplificar la interfaz.
 
 ### Scope Técnico
 - **Frontend / Backend (PHP)**:
