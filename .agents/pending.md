@@ -130,8 +130,8 @@ SELECT IFNULL(SUM(monto),0) FROM vw_ligacargos_pendientes WHERE numcontrato='405
 | 2026-05-21-22 | Documentación Entrega Sistema Agua V2 | ✅ PASADO — Manual PDF generado con apéndices de configuracion.php y paleta de colores semáforo. |
 | 2026-05-25 | Script dos-repos-branch-git.sh | ✅ PASADO — Guía operativa de flujo Git canónico para cierre de sesión (agua + agua_chatledger). |
 | 2026-05-25 | GEMINI.md y docs actualizados + push repos | ✅ PASADO — Hitos 2026-05-23 a 2026-05-25 documentados, commit y push en agua (main) y agua_chatledger (master). |
-| 2026-06-22 | Ejecución Caso 1 Verificación Mora 20 Años | ⏳ EN PROGRESO — Refactor de acordeones UI (adeudo_tabla.php) completado. Gap de Sincronía Catálogo-Ledger identificado y parcheado en `fix-issue-01` (Dev). Pendiente requerir backup de Host C antes de pase a prod completo. |
+| 2026-06-23 | Optimización Acordeón UI de Mora (5 Grupos) | ✅ PASADO — Reestructuración a 5 acordeones en adeudo_tabla.php: Año en curso (abierto por defecto), Falta Asamblea histórica (nuevo), Cargos especiales, Historial reciente e Historial antiguo. Concatenación de conteo de años de deuda base y años de recargos-mora en etiqueta principal. |
 
 ---
 
-*Última actualización: 2026-06-22 — Sincronización GEMINI.md y repos — Antigravity*
+*Última actualización: 2026-06-23 — Sincronización GEMINI.md y repos — Antigravity*
