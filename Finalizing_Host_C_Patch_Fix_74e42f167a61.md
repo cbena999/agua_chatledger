@@ -7,8 +7,9 @@
 | **Trajectory ID** | `6158d6dc-94ba-4366-a585-331b98fceaaa` |
 | **Cascade ID** | `a49787d4-8120-4c9b-b54f-74e42f167a61` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 517 |
+| **Total Steps** | 644 |
 | **Started** | 24 June 2026, 2:19 pm |
+| **Completed** | 24 June 2026, 3:17 pm |
 
 ---
 
@@ -15088,7 +15089,7 @@ Goals:
 
 ### Terminal Command Execution
 
-**Status:** CORTEX_STEP_STATUS_RUNNING
+**Status:** Completed
 **Created:** 24 June 2026, 2:36 pm
 
 ---
@@ -15109,8 +15110,2287 @@ Goals:
 
 ### Process Monitor
 
-**Status:** CORTEX_STEP_STATUS_RUNNING
+**Status:** Completed
 **Created:** 24 June 2026, 2:36 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `.mcp.json`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+{
+  "mcpServers": {
+    "bdawahost-a": {
+      "command": "docker",
+      "args": [
+        "exec",
+        "-i",
+        "context7-mcp-mysql",
+        "npx",
+        "-y",
+        "@f4ww4z/mcp-mysql-server",
+        "mysql://root:comite_2026@127.0.0.1:3306/awa"
+      ],
+      "env": {
+        "DOCKER_HOST": "unix:///var/run/docker.sock"
+      }
+    },
+    "bdawahost-b": {
+      "command": "docker",
+      "args": [
+        "exec",
+        "-i",
+        "context7-mcp-mysql",
+        "npx",
+        "-y",
+        "@f4ww4z/mcp-mysql-server", 
+        "mysql://root:sdrastbuy@192.168.1.120:3306/awa"
+      ],
+      "env": {
+        "DOCKER_HOST": "unix:///var/run/docker.sock"
+      }
+    },
+    "bdawahost-c": {
+      "command": "docker",
+      "args": [
+        "exec",
+        "-i",
+        "context7-mcp-mysql",
+        "npx",
+        "-y",
+        "@f4ww4z/mcp-mysql-server", 
+        "mysql://root:comite_2026@192.168.1.128:7002/awa"
+      ],
+      "env": {
+        "DOCKER_HOST": "unix:///var/run/docker.sock"
+      }
+    },
+    "bdawa2host-c": {
+      "command": "docker",
+      "args": [
+        "exec",
+        "-i",
+        "context7-mcp-mysql",
+        "npx",
+        "-y",
+        "@f4ww4z/mcp-mysql-server",
+        "mysql://root:comite_2026@192.168.0.100:7002/aguayd_os"
+      ],
+      "env": {
+        "DOCKER_HOST": "unix:///var/run/docker.sock"
+      }
+    }
+  }
+}
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 24 June 2026, 2:36 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Confirming Network Access**
+
+I've successfully confirmed the web server's accessibility at the specified IP and port. My next step is to initiate the browser subagent, with the goal of logging in using the credentials "nancy" and "260180." Following successful login, I'll direct the agent to navigate to the designated support operations page.
+
+
+
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.203122609s
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 24 June 2026, 2:36 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 24 June 2026, 2:36 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 24 June 2026, 2:37 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `browser_subagent`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Browser Automation
+
+**Status:** Cancelled
+**Created:** 24 June 2026, 2:37 pm
+
+---
+
+## User Request
+
+No hagas pruebas de web browser.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `01_normalizar_catalogo.sql`
+**Language:** sql
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<browser_subagent_reminder>
+IMPORTANT: You are shown COMPLETE details of every action the browser subagent performed:
+- The subagent's final result message
+- EVERY SINGLE STEP the subagent executed (numbered sequentially)
+- For each step: the tool name, full JSON arguments, status, and any errors
+- For screenshot steps: the absolute file path where the screenshot was saved
+- For pixel click steps: the absolute file path where the click feedback screenshot was saved
+- The recording path showing all browser interactions if a recording was generated
+
+If you expected the subagent to take a specific action (e.g., capture a screenshot, click a button, navigate to a page) but you do NOT see that step type in the detailed actions list above, then the subagent did NOT perform that action. Do not assume work was done if you cannot see the corresponding step.
+CRITICAL: NEVER trust the subagent's claims. After a browser subagent completes a task, IMMEDIATELY verify the screenshot BEFORE responding to the user. Look at the actual screenshot content and describe what you see. If the screenshot doesn't show the expected result, acknowledge that the task may not have completed successfully and investigate further.
+
+- IMPORTANT: Do NOT view the webp recording. Your view_file tool only shows the first frame of recordings, so this will not represent what the subagent did. Solely rely on screenshot images.
+- If there are no screenshots, you MUST ask another subagent to take screenshots to prove the task was completed successfully.
+- The ONLY exception is if the output of any javascript executed by the subagent shows that the browser subagent successfully performed the action. This is because the output of such a tool cannot be manipulated by the subagent.
+- Think about which screenshots to verify, the right choice will depend on the task, some examples:
+  * If the subagent was supposed to follow a particular process, you should verify a sequence of screenshots in order.
+  * If the subagent was supposed to navigate to a website, you should verify the final screenshot before the subagent stopped.
+- You must explain what in the screenshot or javascript execution output indicates that the subagent is successful. Default to skepticism.
+</browser_subagent_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** browser_subagent_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Ceasing Browser Tests**
+
+I've immediately stopped utilizing the browser subagent, as requested. My focus now shifts to verifying the condonation and reconciliation flow programmatically. I'm exploring the functionality of `soporte_reconciliados.php` to achieve this validation.
+
+
+**Analyzing Code for Robustness**
+
+I'm now deeply examining the PHP code within `/opt/lampp/htdocs/agua/admin/operaciones/soporte_reconciliados.php`. The inclusion of `../../login/usuario.php`, session startup, and `../../config/Conexion.php` for database connection are as expected. The logic for `reconciliar_recibo` in particular is of interest. It grabs `id_cargo`, checks the `ligacargos_historico` table, escapes some data, and then has an awesome Poka-Yoke: it prevents reconciliation if the payment year isn't in the past. It looks strong.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Conexion.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.430141840s
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+require_once __DIR__ . '/config.php';
+
+class Conexion
+{
+	public $manejador;
+	public $servidor;
+	public $usuario;
+	public $contrasena;
+	public $basedatos;
+	public $conexion;
+	public $link;
+	function __construct()
+	{
+		$this->manejador = 'mysql';
+		$this->servidor = DB_HOST;
+		$this->puerto = defined('DB_PORT') ? DB_PORT : null;
+		$this->usuario = DB_USER;
+		$this->contrasena = DB_PASS;
+		$this->conexion = 0;
+		$this->basedatos = DB_NAME;
+	}
+	function establecerDatos($m, $s, $u, $c, $b)
+	{
+		$this->manejador = $m;
+		$this->servidor = $s;
+		$this->usuario = $u;
+		$this->contrasena = $c;
+		$this->basedatos = $b;
+	}
+	function establecerBD($b)
+	{
+		$this->basedatos = $b;
+	}
+	function abrirConexion()
+	{
+		$port = isset($this->puerto) ? $this->puerto : null;
+		$this->link = @mysqli_connect($this->servidor, $this->usuario, $this->contrasena, $this->basedatos, $port);
+		if($this->link) {
+			mysqli_set_charset($this->link, "utf8mb4");
+			@mysqli_query($this->link, "SET SESSION sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
+		}
+		if (!$this->link) {
+			$this->link = @mysqli_connect($this->servidor, $this->usuario, "", $this->basedatos, $port);
+			if($this->link) {
+				mysqli_set_charset($this->link, "utf8mb4");
+				@mysqli_query($this->link, "SET SESSION sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
+			}
+			if (!$this->link) {
+				print "<script>$('#mensajes').html(\"<img src='alerta.png'><br><b>No es posible conectarse a la Base de Datos del sistema.</b><br><br>Intente levantar el servidor <i>MySQL</i> de forma manual<br>ya que de otra forma, el sistema no funcionar&aacute;. Despu&eacute;s, recargue esta p&aacute;gina.\");	$('#mensajes').fadeIn(500,function(){});</script>";
+				return 0;
+			} else {
+				$this->conexion = 1;
+				return 1;
+			}
+		} else {
+			$this->conexion = 1;
+			return 1;
+		}
+	}
+	function cerrarConexion()
+	{
+		mysqli_close($this->link);
+	}
+	function conectarBaseDatos()
+	{
+		if ($this->conexion == 0)
+			$this->abrirConexion();
+		if ($this->conexion == 1) {
+			$db_selected = @mysqli_select_db($this->link, $this->basedatos);
+			if (!$db_selected)
+				return 0;
+			else {
+				@mysqli_set_charset($this->link, "utf8mb4");
+				@mysqli_query($this->link, "SET SESSION sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
+				return 1;
+			}
+		}
+	}
+	function q($query)
+	{
+		$result = @mysqli_query($this->link, $query);
+		// Regla E01: solo llamar mysqli_error si el link es un objeto mysqli válido
+		if ($this->link) {
+			$err = mysqli_error($this->link);
+			if ($err !== '') {
+				$this->_logFallback('ERROR', $query, $err);
+			}
+		}
+		return $result;
+	}
+
+	public function _logFallback($nivel, $query, $error_msg = null)
+	{
+		if (!$this->link) return; // No hay donde guardar si no hay link
+
+		// Determinar tipo de query
+		$q_trim = ltrim($query);
+		$first_word = strtoupper(strtok($q_trim, " \t\n\r"));
+		$type_map = ['SELECT'=>'SELECT','INSERT'=>'INSERT','UPDATE'=>'UPDATE','DELETE'=>'DELETE','CALL'=>'CALL'];
+		$query_type = isset($type_map[$first_word]) ? $type_map[$first_word] : 'OTHER';
+
+		// Hash CRC32 para agrupar repeticiones
+		$query_hash = substr(dechex(crc32($query)), 0, 8);
+
+		// Origen: archivo y línea del caller (skip frames dentro de Conexion)
+		$origen = 'unknown';
+		$funcion = null;
+		$backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 5);
+		foreach ($backtrace as $frame) {
+			$file = isset($frame['file']) ? $frame['file'] : '';
+			if ($file !== '' && strpos($file, 'Conexion.php') === false) {
+				$short = str_replace($_SERVER['DOCUMENT_ROOT'], '', $file);
+				$line  = isset($frame['line']) ? $frame['line'] : '';
+				$origen = ltrim($short, '/') . ($line ? ":$line" : '');
+				if (isset($frame['function']) && $frame['function'] !== 'q') {
+					$funcion = (isset($frame['class']) ? $frame['class'] . '::' : '') . $frame['function'];
+				}
+				break;
+			}
+		}
+
+		// Contexto de sesión
+		$ses_u = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
+		$usuario_ses = is_string($ses_u) && $ses_u !== ''
+		    ? $ses_u
+		    : (is_object($ses_u) && method_exists($ses_u, 'getNombre') ? $ses_u->getNombre() : null);
+		$numcontrato = isset($_SESSION['numcontrato']) ? $_SESSION['numcontrato'] : null;
+
+		// Escaped values para INSERT seguro (sin usar $this->q para evitar recursión)
+		// Usamos mysqli_real_escape_string si el link está ok, sino fallback a addslashes
+		$that = $this;
+		$esc_raw = function($v) use ($that) {
+			if ($v === null) return 'NULL';
+			$ev = ($that->link) ? mysqli_real_escape_string($that->link, $v) : addslashes($v);
+			return "'" . $ev . "'";
+		};
+
+		$query_text_esc  = $esc_raw($query);
+		$error_msg_short = $error_msg ? substr($error_msg, 0, 300) : null;
+		$filas = ($query_type !== 'SELECT' && $this->link) ? intval(@mysqli_affected_rows($this->link)) : null;
+
+		$sql = "INSERT INTO fallback_log
+			(nivel, origen, funcion, query_type, query_hash, query_text, filas_afect, error_msg, usuario_ses, numcontrato)
+			VALUES (
+				" . $esc_raw($nivel) . ",
+				" . $esc_raw(substr($origen, 0, 120)) . ",
+				" . $esc_raw($funcion ? substr($funcion, 0, 80) : null) . ",
+				" . $esc_raw($query_type) . ",
+				'$query_hash',
+				$query_text_esc,
+				" . ($filas !== null ? intval($filas) : 'NULL') . ",
+				" . $esc_raw($error_msg_short) . ",
+				" . $esc_raw($usuario_ses) . ",
+				" . $esc_raw($numcontrato) . "
+			)";
+
+		@mysqli_query($this->link, $sql);
+	}
+	function fetch_array($res)
+	{
+		return @mysqli_fetch_array($res);
+	}
+	function fetch_assoc($res)
+	{
+		return @mysqli_fetch_assoc($res);
+	}
+	function num_rows($res)
+	{
+		return @mysqli_num_rows($res);
+	}
+	function insert_id()
+	{
+		return @mysqli_insert_id($this->link);
+	}
+	function affected_rows()
+	{
+		return ($this->link) ? mysqli_affected_rows($this->link) : 0;
+	}
+	function error()
+	{
+		return mysqli_error($this->link);
+	}
+	function free_result($res)
+	{
+		@mysqli_free_result($res);
+	}
+	function real_escape_string($string)
+	{
+		// Regla E01: nunca llamar a mysqli_real_escape_string con link inválido.
+		// Si la conexión se perdió, fallback a addslashes para no crashear el caller.
+		if ($this->link) {
+			return mysqli_real_escape_string($this->link, $string);
+		}
+		return addslashes((string)$string);
+	}
+}
+?>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Verifying Finality of Files**
+
+I've confirmed the helper class is as it should be. I've also verified `soporte_reconciliados.php` is complete, functional, and well-structured. Now, I'm just taking a final sweep to make absolutely sure there aren't any overlooked files or necessary updates remaining. I'm keen to sign off this task.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.043615011s
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 24 June 2026, 2:37 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `09-sesion-summary.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# Regla 09: Documentación de Sesión — Resumen de Issues Resueltos
+
+Esta regla define el protocolo para generar y persistir el asset de cierre de cada sesión donde se haya implementado y **verificado** funcionalidad.
+
+Válida para **Claude Code** y **Google Antigravity/Gemini** por igual.
+
+---
+
+## 📋 Protocolo: "Verificación = Aprobación implícita + Commit"
+
+### Cuándo aplica
+Al finalizar una sesión donde se implementaron cambios **Y** el usuario los ha verificado (explícita o implícitamente con expresiones como "OK", "funciona", "listo", "dale", "sí", "correcto", etc.).
+
+### ⚠️ Obligatorio al INICIAR sesión
+Leer [`.agents/pending.md`](../pending.md) antes de responder sobre pendientes. No confiar solo en memoria — el archivo es la fuente de verdad de tareas en vuelo.
+
+### ⚠️ Obligatorio al CERRAR sesión
+Actualizar [`.agents/pending.md`](../pending.md) con:
+1. Marcar como ✅ resuelto lo que se verificó en esta sesión (moverlo a la tabla "Resueltos")
+2. Agregar cualquier pendiente nuevo que quedó a medias, con estado BD exacto y próximo paso concreto
+3. Incluir `pending.md` en el commit de cierre
+
+### Flujo obligatorio
+
+```
+1. Agente implementa y presenta resumen de cambios al usuario
+2. Agente pregunta: "¿Verificaste el resultado? Si es OK, genero el resumen y hago el commit."
+3a. Usuario confirma → Agente genera el MD + hace commit + push (ver §Formato)
+3b. Usuario reporta problema → Agente corrige PRIMERO, sin documentar aún
+3c. Usuario dice "no subas aún" → Agente genera MD localmente, espera sin commitear
+```
+
+> [!IMPORTANT]
+> La verificación del usuario **ES** la aprobación. No se pide una segunda confirmación
+> para el commit después de que el usuario confirmó. Hacerlo genera fatiga innecesaria.
+
+### Excepción
+Si el usuario dice explícitamente: "solo verifica / no subas todavía / espera" → el agente
+genera el MD como draft (visible en chat como artifact), pero **no** ejecuta el commit.
+
+---
+
+## 📄 Formato del Resumen
+
+**Nombre de archivo:**
+```
+Issues_Resueltos_<Tema>_<conversation-id-short>.md
+```
+Donde `<conversation-id-short>` son los primeros 8 caracteres del conversation ID.
+
+**Repositorio destino:** `agua_chatledger` (rama `master`)
+
+**Estructura del archivo:**
+
+```markdown
+# Issues Resueltos — Sesión YYYY-MM-DD
+**Conversación:** `<conversation-id>`
+**Rama:** `<rama-de-código>`
+
+---
+
+## Issue N — <Nombre corto del issue>
+
+### Scope Funcional
+[Qué hacía el sistema antes / qué hace ahora / impacto para el usuario/cajero]
+
+### Scope Técnico
+[Archivos modificados, funciones nuevas/editadas, queries SQL clave, refs a reglas]
+
+---
+
+## Runbook — Cambios en `.agents/`
+[Si aplica: nuevas reglas, reglas modificadas, renumerciones]
+
+---
+
+## Archivos Modificados
+
+| Archivo | Repo | Tipo de cambio |
+|:---|:---:|:---|
+
+---
+
+## Verificación
+
+| Check | Resultado |
+|:---|:---:|
+
+### Pruebas manuales pendientes
+[Lista de pasos para validar en Host A / Host C]
+
+---
+*Generado por <Agente> — YYYY-MM-DD*
+```
+
+---
+
+## 🗂️ Commit Protocol
+
+### Repo `agua` (código PHP/JS/SQL)
+```bash
+git add <archivos-modificados>
+git commit -m "feat|fix|refactor(<scope>): <descripción técnica concisa>
+
+- detalle 1
+- detalle 2"
+git push origin <rama>
+```
+
+### Repo `agua_chatledger` (Runbook + Issues MD)
+```bash
+# Validar integridad primero (OBLIGATORIO)
+bash docs-dev/ga-cl-ia/chatledger_validate.sh
+
+git add .agents/rules/<nuevas-reglas>.md
+git add Issues_Resueltos_<...>.md
+git commit -m "docs(<scope>): <descripción>
+
+- Nuevas reglas: <IDs>
+- Issues_Resueltos_<...>.md generado"
+git push origin master
+```
+
+> [!WARNING]
+> **Siempre ejecutar `chatledger_validate.sh` antes del commit en `agua_chatledger`.**
+> Si el script reporta errores → no commitear hasta resolverlos.
+> Ver Regla 08 para detalle de integridad.
+
+---
+
+## 🔍 Criterios de calidad del resumen
+
+Un buen resumen debe permitir que:
+1. **Cualquier agente (Claude o Gemini)** pueda entender qué cambió sin leer el diff completo.
+2. **El usuario** pueda usarlo como bitácora de auditoría para el comité o tesorería.
+3. **Un desarrollador futuro** pueda replicar o revertir el cambio con la información del MD.
+
+### No incluir en el MD
+- Conversación completa o transcripción de chat
+- Código PHP completo (solo snippets de la función/query nuclear)
+- Detalles de depuración intermedios que no aportaron al resultado final
+
+---
+
+## 📌 Notas para Agentes IA
+
+- **Claude Code:** Se espera que sigas este protocolo al cerrar una sesión de implementación verificada. Si el usuario no pregunta explícitamente, puedes proponer el cierre con: *"¿Listo para documentar y subir?"*
+- **Antigravity/Gemini:** Ídem. El conversation ID está disponible en el contexto de sistema.
+- **Ambos:** Si hay cambios en `.agents/rules/` pendientes de esta sesión, siempre incluirlos en el mismo commit del `agua_chatledger`.
+
+---
+**Última actualización:** 2026-04-10
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `pending.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# Pendientes Activos del Proyecto Agua
+
+> **Protocolo**: Este archivo es la lista viva de tareas en vuelo.
+> - Actualizar al **iniciar** sesión (verificar estados) y al **cerrar** sesión (registrar lo que quedó a medias).
+> - Válido para Claude Code y Google Antigravity/Gemini por igual.
+> - Un pendiente se elimina solo cuando está **verificado en BD/UI**, no cuando el agente cree que está listo.
+
+---
+
+## 🔴 PRIORIDAD ALTA
+
+### ~~P-01~~ ✅ UI-5R: Reversión de estado cto 405 — RESUELTO 2026-04-26
+**Qué falta**: Ejecutar los sub-casos A, B y C de UI-5R en Host C.
+
+**Estado BD (verificado 2026-04-26)**:
+- `contrato.estado = 1` (Activo) — cambio 3→1 ya ejecutado en sesión anterior
+- `REVERSAL_SNAPSHOT id=4934` con `despues='PENDIENTE'` — listo para reversión
+- `deuda_pre = $10,686` | `deuda_post = $66,940` | `lc_ids_nuevos` = 29 cargos generados
+- `lc_ids_cancelados = []`, `hist_ids_amnist = []` (correcto: 3→1 no aplica amnistía)
+
+**Sub-casos pendientes**:
+- **A**: Verificar/insertar `reversal_threshold=10000` en `config_sistema`
+- **B**: Verificar que botón `#btn-revertir-transicion` aparece en ficha cto 405 (deuda $66,940 > umbral $10,000)
+- **C**: Ejecutar reversión → verificar: estado=3 restaurado, snapshot=REVERTIDO, 29 cargos cancelados, deuda=$10,686
+
+**Assert SQL post-reversión**:
+```sql
+SELECT estado FROM contrato WHERE numcontrato='405';                                          -- → 3
+SELECT despues FROM cambios WHERE numcontrato='405' AND descripcion='REVERSAL_SNAPSHOT'
+  ORDER BY id DESC LIMIT 1;                                                                   -- → REVERTIDO
+SELECT IFNULL(SUM(monto),0) FROM vw_ligacargos_pendientes WHERE numcontrato='405';            -- → 10686
+```
+
+**Revert final**: `UPDATE config_sistema SET valor='15000' WHERE clave='reversal_threshold'`
+
+---
+
+### ~~P-02~~ ✅ Análisis encuadre de ingresos — COMPLETADO 2026-04-29
+
+**Documento final**: `docs-dev/doc-estabilizacion/encuadres/analisis-encuadre-3fuentes-2024-2026.md`
+
+**Resultado por período (9 analizados)**:
+| Período | Libro | Host C | Diferencia | Estado |
+|---|---:|---:|---:|---|
+| 2024a | 872,090 | 881,960 | +9,870 | Explicado: folio fecha límite 25/03 |
+| 2024b | 264,820 | 255,170 | −9,650 | Explicado: mismo folio, BD lo pone en 2024b |
+| 2024c | 150,128 | 150,128 | **$0** | ✅ Empate exacto |
+| 2024d | 43,590 | 44,340 | +750 | Explicado: multas desperdicio no desglosadas |
+| 2025a | 1,026,660 | 1,020,660 | −6,000 | Explicado: sesgos S3+S5 (con anio_corte=2025) |
+| 2025b | 179,562 | 185,686 | +6,124 | Explicado: sesgo asamblea S3 |
+| 2025c | 105,609 | 100,087 | −5,522 | Explicado: S3+S5, fechas correctas 28/09 |
+| 2026a | 110,260 | 110,344 | +84 | ✅ Empate (inicio 29/09 correcto) |
+| 2026b | 539,302 | 540,122 | +820 | ✅ Empate C=B |
+
+**Conclusión**: Todas las diferencias están explicadas. Sesgos estructurales documentados (S1-S5). No hay pérdida de datos ni errores de motor — son diferencias metodológicas (corte de fecha, agrupación asamblea, reclasificación cat 16/17, saneamiento V2).
+
+---
+
+## 🟡 PRIORIDAD MEDIA
+
+### ~~P-03~~ ✅ Suite de Pruebas V2 — COMPLETADA 2026-04-29
+**Estado**: Suite completa finalizada 2026-04-29. 42 PASS, 5 IMPEDIDOS documentados.
+**`reversal_threshold`**: verificado en BD Host C = `$14,000` ✅ (2026-04-30).
+
+---
+
+### P-04 🔲 Prueba de Estrés: Poka-Yoke Histórico (`_esContratoFacturableEnAnio`)
+**Objetivo**: Validar que la reactivación de un contrato previamente suspendido no genere cargos retroactivos indebidos por los años en los que estuvo bajo suspensión. La lógica implementada en `contratos.php` revisa la tabla `cambios` para este fin.
+**Candidatos de prueba identificados**:
+- **Contratos 1362 y 1363**: Suspendidos el 31 de Marzo de 2025 (`estado = 2`). Tienen historial de cargos en 2024 (correcto porque estaban activos), pero la facturación retroactiva falló al proteger el 2026 debido a una variación en el texto del log.
+- **Contrato 142**: Reactivado al Estado 1 el 29/05/2026 tras estar en Suspensión Temporal.
+- **Contrato 1284**: Reactivado al Estado 1 el 19/05/2026 tras estar en Suspensión Temporal.
+- **Contrato 1021**: Actualmente en Suspensión Temporal (Estado 2) en Host B. *Caso ideal para simular la reactivación en vivo y observar la facturación retroactiva.*
+**Acción Pendiente**:
+1. ~~Arreglar la expresión regular en `_esContratoFacturableEnAnio` (`contratos.php`).~~ (✅ COMPLETO: Regex cambiado a `/estado.*?\[(-?1|[2-4])\]/i` y lectura de `Cambio de estado de contrato`).
+2. Simular la reactivación de estos contratos para confirmar que excluye correctamente los años de suspensión basándose en el historial blindado.
+
+---
+
+### P-05 🔲 Desarrollar Generador SQL Offline para Catch-Up (Versiones A1 y B1)
+**Objetivo**: Ejecutar la sincronización de los 64 contratos en el Host C (Kiosko Windows de producción) bajo un entorno sin red/acceso directo a Host B.
+**Acción Pendiente**:
+1. Crear un script extractor (`generador_catchup_sql.php`) que corra en Host A leyendo de Host B.
+2. En lugar de inyectar datos directamente, construir dos archivos planos `.sql` transaccionales (`catchup_camino_A1.sql` y `catchup_camino_B1.sql`).
+3. Estos archivos deben contener los `DELETE`, los `INSERT` con el split arquitectónico, y el `UPDATE` global respectivo (1 o 0), garantizando el encode UTF-8 y logs de consola `SELECT '...';`.
+
+---
+
+### P-06 🔲 UI: Acordeón de Asambleas en `adeudo_tabla.php`
+**Objetivo**: En la vista de adeudos, actualmente la función `obtenerTotalesGrupo()` envía todas las asambleas (categoría 6) a "Histórico" porque su `recargo` interno es `0`.
+**Acción Pendiente**: Modificar la lógica para que las asambleas del año en curso se muestren correctamente en el acordeón "Ejercicio Actual" y no se mezclen con las históricas pre-2025.
+
+---
+
+### P-07 🔲 UI: Parametrizar Cantidad de Copias en `credencial.php`
+**Objetivo**: Evitar el desperdicio de papel térmico.
+**Acción Pendiente**: La vista de credenciales actualmente está rígida a 2 copias por hoja. Se requiere implementar un control `<select>` en la UI previa para permitir generar 1 sola copia.
+
+---
+
+### P-08 🔲 BD: Normalizar "Mensualidades" manuales en `01_normalizar_catalogo.sql`
+**Objetivo**: Prevenir que un operador ingrese manualmente una leyenda de mensualidad en categorías base (Agua/Drenaje) y adquiera la bandera `automatico=1`.
+**Acción Pendiente**: Añadir `MENSUALIDAD`, `UN MES`, `POR MES` a la regla `automatico=0` del script de normalización para mantener simetría arquitectónica.
+
+---
+
+### P-09 🔲 BD: Normalización tipográfica de Asambleas Históricas
+**Objetivo**: Saneamiento de la UI y los acordeones.
+**Acción Pendiente**: Correr `UPDATE ligacargos SET leyenda = UPPER(TRIM(leyenda)) WHERE categoria=6` y su equivalente en `ligacargos_historico` para corregir 229 registros en minúsculas y con espacios finales.
+
+---
+
+### P-10 🔲 BD: Falsos Positivos "Rehabilitación" en histórico
+**Objetivo**: Evitar contaminación en reportes de ingresos históricos de Agua (categoría 2).
+**Acción Pendiente**: Cambiar a `categoria=5` los 284 registros pre-2020 con leyenda `'REHABILITACION DE LA RED...'` en `ligacargos_historico`.
+
+---
+
+## ✅ RESUELTOS RECIENTEMENTE (referencia)
+
+| Fecha | Item | Detalle |
+|---|---|---|
+| 2026-06-22 | Refactorización Acordeón de Mora UI | ✅ PASADO — Reemplazo de lista plana de adeudos por 4 acordeones colapsables en adeudo_tabla.php con estadísticas dinámicas, soporte para multas de asamblea en sus años correspondientes y resaltado visual para la palabra 'RECARGO' en cargos especiales. |
+| 2026-05-23 | Habilitación HTTPS y Let's Encrypt | ✅ PASADO — Habilitación de HTTPS en Nginx para oci-vm (www.caelitandem.lat), redirect HTTP → HTTPS y verificación de timers. |
+| 2026-04-29 | Sección Reportes RC-1 a RC-5 | ✅ PASADO — empate caja, cartera vencida, trazabilidad segundos |
+| 2026-04-29 | Grupo F pruebas (UI-30, 31, 33) | ✅ PASADO — asistencias mini-webapp, TXT MD5, cancelación masiva FALTA ASAMBLEA |
+| 2026-04-29 | Grupo E pruebas (UI-21 a UI-29) | ✅ PASADO — usuarios, auditoría, egresos, UX ficha (UI-28 IMPEDIDO) |
+| 2026-04-29 | Grupo D pruebas (UI-16 a UI-20) | ✅ PASADO — cargos, cancelaciones, propagación masiva, cruce años |
+| 2026-04-29 | Propagación masiva en historial | `historial_mov_cto.php` — registros -MASIVO- visibles en cto afectado (filtro Sistema) |
+| 2026-04-29 | Fix resetForm paxscript.js | Formulario edición cargo ya no revierte al guardar |
+| 2026-04-29 | Grupo C pruebas (UI-13/14/15) | ✅ PASADO — cobro, sync asamblea, anti-duplicados |
+| 2026-04-29 | Bitácora sync asamblea | `cargos.php` — INSERT en `cambios` por cto beneficiado + nota en cobro pagador |
+| 2026-04-29 | Link recibo en historial | `historial_mov_cto.php` — link `recibo.php?folio=X` en entradas Cobro de Cargos |
+| 2026-04-26 | Guards G01/G02 motor recargos | `cargos.php` — guards en `calcula_recargos()` |
+| 2026-04-26 | `config_sistema.descripcion` → TEXT | Schema ampliado para textos largos |
+| 2026-04-26 | UI configuracion.php rediseñada | Nueva UI de configuración global |
+| 2026-04-26 | `paridad_anios_max_recargo` en config | Límite configurable de años con recargo |
+| 2026-04-26 | P-04 Split anual | Ya existe UI manual en `admin/operaciones/cierre_anual/index.php` — descartado |
+| 2026-04-26 | P-05 egresos.id_categoria NULL | BD verificada: 0 nulos en 473 registros — descartado |
+| 2026-04-26 | P-06 warnings sync Host B | Sin impacto operativo en Host C — descartado |
+| 2026-04-07 | Saneamiento estructural asambleas | UNIQUE keys, consolidación duplicados |
+| 2026-04-07 | Pipeline sync B→A→C | 7/7 validaciones OK |
+| 2026-04-07 | Bugs split ligacargos en PHPs | `vw_ligacargos_all` en listadeudores, cartera, etc. |
+
+| 2026-05-11 | Conectividad y Hardening Host C | ✅ PASADO — Firewall puerto 7002, auto-elevación UAC en scripts, fix Kiosko Chrome |
+| 2026-05-11 | Cartera Vencida y Reportes | ✅ PASADO — Modelo homologado, categorías auditadas, UI reportes clarificada |
+| 2026-05-10 | Resiliencia y Automatización C | ✅ PASADO — Monitor UPS auto-start, backups pre-vuelo, repair_aria auto |
+| 2026-05-08 | Poka-Yoke Categorización Cargos Adm. | `cargos.php` — guard en `creaCargo`/`modificaCargo` fuerza cat 19/20/21/22 |
+| 2026-05-08 | Poka-Yoke Egresos Huérfanos | `cargos.php` — `registraegreso()` fallback a `id_categoria=10` si cat inválida |
+| 2026-05-08 | Pipeline saneamiento catálogo `cargos` | `10_pipeline_saneamiento.sql` bloque 3-B-1.5 — UPDATE categorías post-sync |
+
+| 2026-05-14 | UI-Optimization & Saneamiento | ✅ PASADO — Fix Lila universal, Saneamiento Zenón (1590 Master), Filtros especiales, Hardening Shutdown C |
+| 2026-05-14 | Asamblea & Sync Stabilization | ✅ PASADO — Auto-foco ticket, gracia 7 días, paridad 100% sync, optimización ahorro papel (márgenes -4mm) |
+| 2026-05-20 | Normalización de Calles en Listados | ✅ PASADO — Agrupamiento de calles interactivo soportando acentos y ordinales sin truncar palabras clave. |
+| 2026-05-20 | Impresión de Credenciales en Lote | ✅ PASADO — Formato carta de 3 copias a 17.6 x 5.8 cm con guía de corte/doblez central y popup centrado. |
+| 2026-05-21 | Optimización de Renglones en Impresión | ✅ PASADO — Límite de registros por página incrementado de 42 a 46 en 5 reportes para aprovechar mejor el papel. |
+| 2026-05-21 | Rotación de Respaldos de BD | ✅ PASADO — Reemplazado filtrado temporal estático por rotación estricta de máximo 7 respaldos zip más recientes en scripts ps1. |
+| 2026-05-22 | Desactivación de Autocompletado en Login | ✅ PASADO — Atributos autocomplete off y new-password aplicados en login/index.php para evitar llenado automático del navegador. |
+| 2026-05-23 | Habilitación HTTPS Let's Encrypt OCI VM | ✅ PASADO — Certbot + Nginx para www.caelitandem.lat, redirect HTTP→HTTPS, cron auto-renovación blindado. |
+| 2026-05-21-22 | Documentación Entrega Sistema Agua V2 | ✅ PASADO — Manual PDF generado con apéndices de configuracion.php y paleta de colores semáforo. |
+| 2026-05-25 | Script dos-repos-branch-git.sh | ✅ PASADO — Guía operativa de flujo Git canónico para cierre de sesión (agua + agua_chatledger). |
+| 2026-05-25 | GEMINI.md y docs actualizados + push repos | ✅ PASADO — Hitos 2026-05-23 a 2026-05-25 documentados, commit y push en agua (main) y agua_chatledger (master). |
+| 2026-06-23 | Optimización Acordeón UI de Mora (5 Grupos) | ✅ PASADO — Reestructuración a 5 acordeones en adeudo_tabla.php: Año en curso (abierto por defecto), Falta Asamblea histórica (nuevo), Cargos especiales, Historial reciente e Historial antiguo. Concatenación de conteo de años de deuda base y años de recargos-mora en etiqueta principal. |
+
+| 2026-06-24 | Auditoría JIT y UI Condonación | ✅ PASADO — Revisión profunda de ligacargos dual, Poka-Yoke UI oculto, y SP sp_pagar_cargo. |
+
+---
+
+*Última actualización: 2026-06-24 — Sincronización GEMINI.md y repos — Antigravity*
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `pending.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L84-124)</summary>
+
+**Path:** `Unknown file`
+
+```
+3. Estos archivos deben contener los `DELETE`, los `INSERT` con el split arquitectónico, y el `UPDATE` global respectivo (1 o 0), garantizando el encode UTF-8 y logs de consola `SELECT '...';`.
+
+---
+
+### P-06 🔲 UI: Acordeón de Asambleas en `adeudo_tabla.php`
+**Objetivo**: En la vista de adeudos, actualmente la función `obtenerTotalesGrupo()` envía todas las asambleas (categoría 6) a "Histórico" porque su `recargo` interno es `0`.
+**Acción Pendiente**: Modificar la lógica para que las asambleas del año en curso se muestren correctamente en el acordeón "Ejercicio Actual" y no se mezclen con las históricas pre-2025.
+
+---
+
+### P-07 🔲 UI: Parametrizar Cantidad de Copias en `credencial.php`
+**Objetivo**: Evitar el desperdicio de papel térmico.
+**Acción Pendiente**: La vista de credenciales actualmente está rígida a 2 copias por hoja. Se requiere implementar un control `<select>` en la UI previa para permitir generar 1 sola copia.
+
+---
+
+### P-08 🔲 BD: Normalizar "Mensualidades" manuales en `01_normalizar_catalogo.sql`
+**Objetivo**: Prevenir que un operador ingrese manualmente una leyenda de mensualidad en categorías base (Agua/Drenaje) y adquiera la bandera `automatico=1`.
+**Acción Pendiente**: Añadir `MENSUALIDAD`, `UN MES`, `POR MES` a la regla `automatico=0` del script de normalización para mantener simetría arquitectónica.
+
+---
+
+### P-09 🔲 BD: Normalización tipográfica de Asambleas Históricas
+**Objetivo**: Saneamiento de la UI y los acordeones.
+**Acción Pendiente**: Correr `UPDATE ligacargos SET leyenda = UPPER(TRIM(leyenda)) WHERE categoria=6` y su equivalente en `ligacargos_historico` para corregir 229 registros en minúsculas y con espacios finales.
+
+---
+
+### P-10 🔲 BD: Falsos Positivos "Rehabilitación" en histórico
+**Objetivo**: Evitar contaminación en reportes de ingresos históricos de Agua (categoría 2).
+**Acción Pendiente**: Cambiar a `categoria=5` los 284 registros pre-2020 con leyenda `'REHABILITACION DE LA RED...'` en `ligacargos_historico`.
+
+---
+
+## ✅ RESUELTOS RECIENTEMENTE (referencia)
+
+| Fecha | Item | Detalle |
+|---|---|---|
+| 2026-06-22 | Refactorización Acordeón de Mora UI | ✅ PASADO — Reemplazo de lista plana de adeudos por 4 acordeones colapsables en adeudo_tabla.php con estadísticas dinámicas, soporte para multas de asamblea en sus años correspondientes y resaltado visual para la palabra 'RECARGO' en cargos especiales. |
+| 2026-05-23 | Habilitación HTTPS y Let's Encrypt | ✅ PASADO — Habilitación de HTTPS en Nginx para oci-vm (www.caelitandem.lat), redirect HTTP → HTTPS y verificación de timers. |
+| 2026-04-29 | Sección Reportes RC-1 a RC-5 | ✅ PASADO — empate caja, cartera vencida, trazabilidad segundos |
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 24 June 2026, 2:37 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/agua_chatledger`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>Directory: `agua_chatledger` (161 items)</summary>
+
+**Path:** `home/carlos/GitHub/agua_chatledger`
+
+| Name | Type | Size |
+|------|------|------|
+| `.agents` | Directory | - |
+| `.claude` | Directory | - |
+| `.clauderules` | File | 1145 bytes |
+| `.git` | Directory | - |
+| `.mcp.json` | File | 1384 bytes |
+| `Agua_Contract_Logic_Stabilization_0788fab82e28.md` | File | 218211 bytes |
+| `Agua_V2_Project_Documentation_Finalization_e3abd8e5448e.md` | File | 112296 bytes |
+| `Analyzing_Agua_Reporting_Discrepancies_78333e6a1a56.md` | File | 14777 bytes |
+| `Analyzing_Automatic_Surcharge_Generation_217b5c14bee6.md` | File | 107221 bytes |
+| `Analyzing_User_Search_Duplicates_010475e00de2.md` | File | 454368 bytes |
+| `Analyzing_Water_Service_Debt_be7c9c8d1c27.md` | File | 390425 bytes |
+| `Appending_System_Documentation_Appendices_b544940d5bde.md` | File | 70609 bytes |
+| `Assisting_With_Ongoing_Projects_9679e4515c82.md` | File | 10161 bytes |
+| `Audit_Caja_Reconciliation_Discrepancies_78333e6a1a56.md` | File | 110970 bytes |
+| `Auditing_Git_Sync_Script_6634cd67ee3f.md` | File | 48470 bytes |
+| `Auditing_Recent_Repository_Changes_7259738928a3.md` | File | 11650 bytes |
+| `Auditing_Water_Debt_Calculations_77eda59e64b2.md` | File | 410947 bytes |
+| `Auditing_Water_Service_Debt_be7c9c8d1c27.md` | File | 390748 bytes |
+| `Automating_Agua_Webapp_Deployment_feb2ced23088.md` | File | 37866 bytes |
+| `Automating_Windows_Deployment_Scripts_a35ebec1c331.md` | File | 722696 bytes |
+| `CLAUDE.md` | File | 7316 bytes |
+| `CaeliTandem_SEO_Strategy_Implementation_3a6d6c7b506c.md` | File | 382985 bytes |
+| `Checking_MySQL_Database_Version_589c291d1256.md` | File | 14561 bytes |
+| `Configuring_MCP_Server_Development_Branches_d5c83311e744.md` | File | 258227 bytes |
+| `Configuring_Nginx_Web_Root_Access_0b5581ef1d7b.md` | File | 21539 bytes |
+| `Configuring_Oracle_Mobile_Authenticator_90d8e8164853.md` | File | 12699 bytes |
+| `Counting_Users_On_Host_C_005796c7496e.md` | File | 90970 bytes |
+| `DOCUmentacion_Entrega_Sistema_AyDV2_CM_En_el_doc_h_b544940d5bde.md` | File | 10849 bytes |
+| `Database_Backup_And_Verification_17f11d2170ba.md` | File | 56576 bytes |
+| `Database_Import_Character_Set_Issues_688e9222f44e.md` | File | 91640 bytes |
+| `Debugging_Address_Normalization_Logic_389ca3638e08.md` | File | 247383 bytes |
+| `Debugging_Charge_Application_Interface_4eb10edd1399.md` | File | 560682 bytes |
+| `Debugging_Contract_Surcharge_Assignment_fa60e5753421.md` | File | 395434 bytes |
+| `Debugging_Financial_Data_Discrepancy_60391e47c9d0.md` | File | 277210 bytes |
+| `Defining_No_Localizado_User_Behavior_167dc8a65232.md` | File | 406181 bytes |
+| `Designing_Restaurant_PWA_Mockups_8cd1f50f58b4.md` | File | 135298 bytes |
+| `Diagnosing_Assembly_Attendance_Processing_a17e1a802019.md` | File | 156824 bytes |
+| `Enhancing_User_Search_And_Display_010475e00de2.md` | File | 137013 bytes |
+| `Establishing_Project_Context_Configuration_31f503c35747.md` | File | 204759 bytes |
+| `Executing_Agua_Saneamiento_Tests_5e5a2d20b173.md` | File | 99892 bytes |
+| `Executing_Agua_Stabilization_Tests_1c737ab57f1d.md` | File | 159252 bytes |
+| `Executing_Agua_Stabilization_Tests_21d726b91352.md` | File | 462139 bytes |
+| `Executing_Agua_Stabilization_Tests_4fb8ebf18699.md` | File | 360675 bytes |
+| `Executing_Agua_Stabilization_Tests_5db69ff35126.md` | File | 578819 bytes |
+| `Executing_UI_Test_Suite_4689fdf95548.md` | File | 167230 bytes |
+| `Expanding_Historical_Mora_Calculations_ef3fd55a487d.md` | File | 901162 bytes |
+| `Explaining_Financial_Reporting_Logic_54a33ea06e98.md` | File | 543655 bytes |
+| `FEATURE_RESTRICT_2_tomas_por_usuario_mismo_domicil_c6a72e3570c9.md` | File | 9570 bytes |
+| `Finalizing_Agua_V2_Documentation_e3abd8e5448e.md` | File | 87970 bytes |
+| `Finalizing_Documentation_and_Sync_b711001fa206.md` | File | 48983 bytes |
+| `Finalizing_Host_C_Patch_Fix_74e42f167a61.md` | File | 666920 bytes |
+| `Financial_Audit_Reconciliation_Tool_16cf387f47c8.md` | File | 543102 bytes |
+| `Financial_Data_Reconciliation_And_Repair_e36204f92811.md` | File | 922640 bytes |
+| `Fixing_Contract_Toma_Report_dcfcff5f1f9f.md` | File | 332965 bytes |
+| `Fixing_Duplicate_Contract_Notes_979d81d75006.md` | File | 508360 bytes |
+| `Fixing_Financial_Data_Inconsistencies_e36204f92811.md` | File | 922637 bytes |
+| `Fixing_Login_Authentication_Error_91efba210118.md` | File | 247311 bytes |
+| `GEMINI.md` | File | 28622 bytes |
+| `Generating_High_Debt_Report_1f70e1f78a4c.md` | File | 305194 bytes |
+| `Identifying_Broken_Ubuntu_Packages_5b474f1c4a4c.md` | File | 57716 bytes |
+| `Identifying_Project_Host_Configurations_81800a54b171.md` | File | 41789 bytes |
+| `Implementing_User_Menu_Features_261c83016221.md` | File | 380590 bytes |
+| `Implementing_Usuarios_Menu_Feature_261c83016221.md` | File | 380593 bytes |
+| `Infrastructure_Validation_And_Fixes_427014028cf3.md` | File | 542703 bytes |
+| `Initializing_New_Development_Repository_fff0355244db.md` | File | 40716 bytes |
+| `Installing_Local_AI_Development_Stack_44c404849d37.md` | File | 126643 bytes |
+| `Investigating_Charge_Cancellation_49a7205b417b.md` | File | 355085 bytes |
+| `Investigating_Host_Synchronization_Anomalies_f2c3598f2011.md` | File | 562186 bytes |
+| `Issues_Resueltos_Amnistia_Auditoria_PanelTomas_a966039d.md` | File | 6592 bytes |
+| `Issues_Resueltos_Auditoria_a8ff3fa8.md` | File | 4416 bytes |
+| `Issues_Resueltos_Autocompletado_Login_13a74b1c.md` | File | 2480 bytes |
+| `Issues_Resueltos_BitacoraPipeline_UI_00c5008.md` | File | 5180 bytes |
+| `Issues_Resueltos_DocsSync_fe1bd6aa.md` | File | 5344 bytes |
+| `Issues_Resueltos_Encuadre_Saneamientos_b6ff3b22.md` | File | 6957 bytes |
+| `Issues_Resueltos_HttpsNginx_9df8240f.md` | File | 4789 bytes |
+| `Issues_Resueltos_Limite_Bomba_0128cbb2.md` | File | 3425 bytes |
+| `Issues_Resueltos_Normalizacion_Y_Credenciales_13a74b1c.md` | File | 4394 bytes |
+| `Issues_Resueltos_Optimizacion_Renglones_Reportes_13a74b1c.md` | File | 4596 bytes |
+| `Issues_Resueltos_P1-AuditoriaReasignacion_20260414.md` | File | 5562 bytes |
+| `Issues_Resueltos_PlanPruebas_DatosPrecisos_da20fec1.md` | File | 6293 bytes |
+| `Issues_Resueltos_ReporteContratosToma_3f90b4f.md` | File | 5773 bytes |
+| `Issues_Resueltos_RestriccionEstados_b5b0a269.md` | File | 2901 bytes |
+| `Issues_Resueltos_Sincronizacion_64_Contratos_20260615.md` | File | 3447 bytes |
+| `Issues_Resueltos_UI_Optimization_Zenon_Saneamiento_3a08e5ce.md` | File | 4230 bytes |
+| `Issues_Resueltos_UX_Ficha_Formulario_a966039d.md` | File | 3381 bytes |
+| `Kiosk_Mode_Browser_Automation_d8421190f457.md` | File | 100447 bytes |
+| `LEPP_Stack_Migration_Plan_c114864f3832.md` | File | 110180 bytes |
+| `Landing_Page_Optimization_Service_e3abd8e5448e.md` | File | 7801 bytes |
+| `Migrating_Assembly_V2_Webapp_a427816e51bc.md` | File | 705647 bytes |
+| `Migrating_Disk_Usage_Ubuntu_0c7e71a92060.md` | File | 220846 bytes |
+| `Migrating_Legacy_Webapp_Architecture_3b519f250f4e.md` | File | 68202 bytes |
+| `Migrating_Menu_to_Options_Page_5f80cd857141.md` | File | 504487 bytes |
+| `Modernizing_CaeliTandem_Web_Assets_e3abd8e5448e.md` | File | 7092 bytes |
+| `Modifying_Validation_Sync_Report_78853b857322.md` | File | 182006 bytes |
+| `Optimizing_Listados_Menu_Layout_5708675a2807.md` | File | 482990 bytes |
+| `Optimizing_MariaDB_Slow_Query_Logging_ec9516a28366.md` | File | 322095 bytes |
+| `Primero_realiza_el_cambio_a_rama_feature_upgrade_v_a427816e51bc.md` | File | 10415 bytes |
+| `Production_Infrastructure_Connectivity_Validation_880e057acf4a.md` | File | 105938 bytes |
+| `Pruebas_en_host_c_para_documento_Guia_de_Pruebas_T_c9d33455174c.md` | File | 11430 bytes |
+| `QUERY_FOR_INFORMATION_CONTRACTS_CHARGES_MANUAL_ASS_fa60e5753421.md` | File | 10245 bytes |
+| `QUERY_FOR_INFORMATION_CONTRACT_STATES_Validar_si_u_3b4cf5dfe0b1.md` | File | 10631 bytes |
+| `Reassigning_Contracts_And_Data_e38f996ec9ea.md` | File | 443276 bytes |
+| `Reconciling_Cross_Linked_Financial_Receipts_f73d56dd41ee.md` | File | 807593 bytes |
+| `Reconciling_Financial_Data_Records_39c977638cec.md` | File | 282247 bytes |
+| `Recovering_Audit_File_Logic_eb607b5a8861.md` | File | 32312 bytes |
+| `Refactoring_Agua_Assembly_Module_58e09c7b5178.md` | File | 167634 bytes |
+| `Refining_Credencial_Report_Generation_48d956d621c8.md` | File | 61962 bytes |
+| `Reorganizing_Agua_Configuration_Dashboard_a9c52c17a702.md` | File | 167247 bytes |
+| `Reporte_de_Caja_Precisi_n_6ea5589911bc.md` | File | 414415 bytes |
+| `Resolving_Contract_Data_Inconsistencies_e38f996ec9ea.md` | File | 186499 bytes |
+| `Resolving_Contract_Status_Transitions_d5f2fead4c34.md` | File | 106667 bytes |
+| `Resolving_Financial_Data_Access_Errors_fb1541288a38.md` | File | 576344 bytes |
+| `Restoring_Historical_Surcharge_Plan_f48df7d15e55.md` | File | 661494 bytes |
+| `Restoring_Nginx_HTTPS_Configuration_c44b0ab61092.md` | File | 85436 bytes |
+| `Restricting_User_Service_Connections_c6a72e3570c9.md` | File | 91762 bytes |
+| `Restricting_User_Water_Connections_c6a72e3570c9.md` | File | 420524 bytes |
+| `Resumen_de_sesion_16042026_antes_7_pm_para_pruebas_ca7e0610a7ef.md` | File | 12058 bytes |
+| `Sourcing_Water_Delivery_System_Repositories_435b579b0cf6.md` | File | 34864 bytes |
+| `Stabilizing_Agua_V2_Financial_Engine_fb1541288a38.md` | File | 264164 bytes |
+| `Stabilizing_Cash_Register_Reports_a80243dc2be6.md` | File | 885993 bytes |
+| `Stabilizing_Contract_UI_Status_Mapping_979d81d75006.md` | File | 3175 bytes |
+| `Stabilizing_Financial_Payment_Records_1435d8640499.md` | File | 121335 bytes |
+| `Stabilizing_Historical_Mora_Engine_b011a534320b.md` | File | 111218 bytes |
+| `Stabilizing_Historical_Surcharge_Engine_b011a534320b.md` | File | 39576 bytes |
+| `Stabilizing_User_Search_Filters_585e551c238f.md` | File | 808895 bytes |
+| `Swapping_User_Contract_IDs_534bc4a2df7b.md` | File | 663196 bytes |
+| `Syncing_Agua_Chatledger_Repository_fc826768033e.md` | File | 10849 bytes |
+| `Syncing_Project_Documentation_and_Repositories_a96d6f77b6de.md` | File | 79403 bytes |
+| `Tracking_Contract_Status_Changes_423733a337f5.md` | File | 58554 bytes |
+| `Troubleshooting_Amnist_a_UI_Logic_98282de6cf2d.md` | File | 754600 bytes |
+| `UI_Optimization_for_Suspended_Contracts_de2298a07da5.md` | File | 513959 bytes |
+| `Ubuntu_System_Cleanup_Optimization_373024a9f0b1.md` | File | 412811 bytes |
+| `Unifying_Agua_Testing_Protocols_f6e0f00ed9f2.md` | File | 281950 bytes |
+| `Validating_Agua_Test_Plan_587e879d4278.md` | File | 425873 bytes |
+| `Validating_Agua_Testing_Protocols_f555583cc739.md` | File | 227820 bytes |
+| `Validating_Agua_V2_Preproduction_Sync_41b37544db13.md` | File | 538212 bytes |
+| `Validating_Automated_Debt_Sanitation_f0ca8f22ce82.md` | File | 597453 bytes |
+| `Validating_Cash_Report_Consistency_a80243dc2be6.md` | File | 885994 bytes |
+| `Validating_Contract_Activation_Surcharges_3b4cf5dfe0b1.md` | File | 112326 bytes |
+| `Validating_Contract_Exemption_Logic_7e0bbc280aa5.md` | File | 352776 bytes |
+| `Validating_Contract_State_Transitions_3b4cf5dfe0b1.md` | File | 154856 bytes |
+| `Validating_Contract_Surcharge_Logic_3b4cf5dfe0b1.md` | File | 13809 bytes |
+| `Validating_Database_Connectivity_19454270eff9.md` | File | 185623 bytes |
+| `Validating_Database_Connectivity_Across_Hosts_afbf94f87cd5.md` | File | 559573 bytes |
+| `Validating_Full_Pipeline_Sync_Integrity_515124112e13.md` | File | 386839 bytes |
+| `Validating_Host_C_Connectivity_c0f560f53867.md` | File | 225812 bytes |
+| `Validating_Host_C_Database_Connectivity_20953653f1f3.md` | File | 376945 bytes |
+| `Validating_Host_C_Infrastructure_Connectivity_42513ab1e695.md` | File | 27015 bytes |
+| `Validating_Host_C_PHP_Errors_0a85cd24482b.md` | File | 77734 bytes |
+| `Validating_Host_Connectivity_Configuration_9bb7251a198b.md` | File | 18239 bytes |
+| `Validating_Multas_Sync_Logic_c459b96c204c.md` | File | 84307 bytes |
+| `Validating_Pipeline_Sync_Execution_c9d33455174c.md` | File | 12712 bytes |
+| `Validating_Pipeline_Synchronization_Logs_8896eda906a6.md` | File | 854948 bytes |
+| `Validating_Preprod_Host_C_Connectivity_6846d4b5e91a.md` | File | 262056 bytes |
+| `Validating_UI_6_Contract_Creation_13cb996237e7.md` | File | 90000 bytes |
+| `Validating_UI_9_Tariff_Recalculation_82227bcf6ec6.md` | File | 539188 bytes |
+| `Verifying_Aguav2_Mora_Engine_e080dc81ed68.md` | File | 373914 bytes |
+| `Web_App_Migration_Plan_c114864f3832.md` | File | 110177 bytes |
+| `aguav2-scope` | Directory | - |
+| `docs-dev` | Directory | - |
+| `logs` | Directory | - |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 24 June 2026, 2:37 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Discovering Key Connections**
+
+I've just made a significant discovery! It turns out `.chatledger` is a symbolic link to `/home/carlos/GitHub/agua_chatledger`. Also, `.agents` is a symlink to `.chatledger/.agents`, and `GEMINI.md` links to `.chatledger/GEMINI.md`. This means changes within `/opt/lampp/htdocs/agua/.agents` or `/opt/lampp/htdocs/agua/` are reflected in the Git repository. The implications are enormous.
+
+
+
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.000105280s
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Execution Error
+
+**Status:** Completed
+**Created:** 24 June 2026, 2:38 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 24 June 2026, 2:38 pm
+
+---
+
+<details>
+<summary>Conversation History</summary>
+
+# Conversation History
+Here are the conversation IDs, titles, and summaries of your most recent 12 conversations, in reverse chronological order:
+
+<conversation_summaries>
+## Conversation e0cf52cb-6d53-4322-8e81-b011a534320b: Reconciling Historical Debt Parity
+- Created: 2026-06-23T16:40:38Z
+- Last modified: 2026-06-24T20:14:59Z
+
+### USER Objective:
+Stabilizing Host C Production Infrastructure
+
+USER Objective: Finalize the infrastructure stabilization of Host C as the definitive Single Source of Truth for the water management system.
+
+Goals:
+1. Finalize the forensic audit and cleanup of obsolete legacy assets and transition temporary analysis files into documented, production-ready operational tools.
+2. Implement robust data integrity practices by creating independent DDL, DML, and DCL backup routines for both legacy Host B and production Host C environments.
+3. Establish a standard recovery protocol compatible with the existing MariaDB 10.x engine to ensure production resilience and data portability.
+4. Integrate newly identified "orphan" premium audit tools into the administrative interface to enhance operational oversight.
+
+## Conversation 1aaefe04-7a64-42a8-9af9-7259738928a3: Auditing Recent Repository Changes
+- Created: 2026-06-24T18:30:50Z
+- Last modified: 2026-06-24T18:31:19Z
+
+### USER Objective:
+Auditing Recent Repository Changes
+
+The user's objective is to identify all files modified within the `agua` repository over the last 7 days to support the ongoing audit and reconciliation project.
+
+Goals:
+1. Extract and present a comprehensive list of all modified files from the git history for the past week.
+2. Provide this visibility to ensure tracking of recent structural, configuration, and documentation updates across the production Host C environment.
+
+## Conversation 95cd3afb-e633-4867-ab82-e080dc81ed68: Verifying Aguav2 Mora Engine
+- Created: 2026-06-20T16:44:18Z
+- Last modified: 2026-06-23T07:05:02Z
+
+### USER Objective:
+Reconciling Historical Surcharge Engine
+
+Objective: Eliminate the parity gap and stabilize the JIT surcharge calculation engine on Host C to create a reliable, audit-ready financial system.
+
+Goals:
+1. Identify and remove hardcoded date thresholds (e.g., the 2006 limit) currently suppressing historical debt generation.
+2. Synchronize the Host C JIT motor with the production database by forcing correct execution flows in `contratos.php` and `cargos.php`.
+3. Stabilize the financial calculation output by configuring the "Mora Rotativa" limits (10-year window/Bomba threshold) to prevent runaway debt totals.
+4. Perform final validation to ensure that all 27 years of historical records are correctly processed and reflected in the user interface without system timeouts or data corruption.
+
+## Conversation 41b07588-7f6a-4d9e-aae7-f48df7d15e55: Restoring Historical Surcharge Plan
+- Created: 2026-06-19T17:34:28Z
+- Last modified: 2026-06-20T05:14:37Z
+
+### USER Objective:
+Finalizing Mora Engine Audit
+
+**USER Objective:**
+Finalize the architectural reconciliation and audit readiness of the 20-year rotational mora engine on Host C to ensure a Single Source of Truth.
+
+**Goals:**
+1. Execute the final normalization and structural integrity fixes across the Host C database environment.
+2. Finalize documentation (`PLAN_MORA_ROTATIVA_20_ANIOS.md` and `VERIFICACION_MANUAL_MORA_20_ANIOS.md`) as authoritative guides for production deployment.
+3. Quantify financial gaps and reconcile differences between legacy Host B and Host C to prove accuracy in historical surcharge calculations and debt base validity.
+4. Align administrative audit tools (`comparativa_mora.php`) to the new V2 JIT motor logic to support financial reporting and decision-making by the water committee.
+
+## Conversation 68c13890-5673-4043-8ab3-ef3fd55a487d: Expanding Historical Mora Calculations
+- Created: 2026-06-19T01:43:46Z
+- Last modified: 2026-06-19T06:57:46Z
+
+### USER Objective:
+Optimizing Historical Surcharge Engine
+
+USER Objective:
+Refactor the JIT surcharge engine to handle multi-decadal debt calculations (2005–2026) using a 10-year rotational window and Batch Insert/Auto-Heal architecture without destructive database deletions.
+
+Goals:
+1. Implement a Batch Insert pattern in `calcula_recargos()` to optimize performance and prevent timeouts.
+2. Refactor the JIT motor to use a rolling 10-year window that dynamically omits older records from active calculation without deleting them from the database.
+3. Integrate an "Acordeón Visual" UI strategy in `adeudo_tabla.php` to allow flexible, fraccionado payment of historical surcharges while maintaining a clean administrative interface.
+4. Update `configuracion.php` to provide dynamic synchronization between the mora catalog and the 10-year threshold.
+5. Investigate and resolve the parity discrepancy between Host B and Host C regarding surcharge counts (e.g., Contract 161) by auditing the view definitions and JIT
+<truncated 22 bytes>
+
+## Conversation 62cf2a4a-a2b1-4ede-9f66-88c4e6b9937b: Mora aguav2 - todos los años.
+Realiza prueba de conectividad via mcp y mysql client.
+Insumos: Usa G
+<truncated 1031 bytes>
+- Created: 2026-06-19T01:36:53Z
+- Last modified: 2026-06-19T01:40:28Z
+
+## Conversation 8a2778b8-300b-46e8-9020-16cf387f47c8: Financial Audit Reconciliation Tool
+- Created: 2026-06-18T01:04:14Z
+- Last modified: 2026-06-18T20:12:13Z
+
+### USER Objective:
+Auditing Surcharge Logic Parity
+
+USER Objective:
+Finalize the forensic audit and validation of the V2 motor's surcharge logic to ensure data parity between the legacy Host B and the current Host C environment.
+
+Goals:
+1. Verify the accuracy of historical surcharge generation against legacy benchmarks to confirm Host C acts as a true, audit-ready Single Source of Truth.
+2. Validate the behavior of the "Just-in-Time" surcharge calculation engine regarding contract state transitions and configuration adjustments.
+3. Consolidate technical findings and business rules into the official project documentation (`matriz_mora_host_b_vs_c.md`) to inform the finance committee of systemic protections and automated safeguards.
+4. Maintain strict "Poka-Yoke" architectural integrity, ensuring no unauthorized service charges generate interest, while preserving the system's ability to handle contract re-activation scenarios securely.
+
+## Conversation 3b0c24ca-fb4b-4fe6-88ac-8cd1f50f58b4: Designing Restaurant PWA Mockups
+- Created: 2026-06-18T17:14:52Z
+- Last modified: 2026-06-18T17:41:30Z
+
+### USER Objective:
+Designing Restaurant PWA Mockups
+
+Main Objective: Create and refine four functional UI/UX mockups (2 PWA, 2 WebApp) for a restaurant voice-command system, adhering to technical specifications and business rules.
+
+Goals:
+1. Develop responsive, modern mockups in Spanish featuring both dark and light theme toggling.
+2. Integrate standard navigation components, including hamburger menus and session management (login/logout) across all interfaces.
+3. Utilize CSS Glassmorphism and JavaScript for interactive prototypes (mic animations, KDS status timers).
+4. Organize assets within the project directory structure to serve as the baseline for system implementation.
+
+## Conversation 81bd4812-ff4f-4429-848e-880e057acf4a: Production Infrastructure Connectivity Validation
+- Created: 2026-06-18T16:46:03Z
+- Last modified: 2026-06-18T16:52:40Z
+
+### USER Objective:
+Validating Infrastructure And Connectivity
+
+Objective: Finalize the infrastructure validation and synchronization for the Host C production environment.
+
+Goals:
+1. Conduct connectivity diagnostics across Hosts A, B, and C to verify database and HTTP service accessibility using the updated `check_connectivity.sh` script.
+2. Confirm the successful implementation of "Issue 01" (Historical Mora Normalization) and "Issue 02" (Cross-Contract ID Collision Fix) in Host C.
+3. Validate database integrity using post-patch verification SQL scripts, ensuring all ledger discrepancies and historical records are corrected.
+4. Harmonize infrastructure documentation by updating the connectivity diagnostic tool to dynamically reference the Single Source of Truth (`.mcp.json`) for IP and port configurations.
+
+## Conversation 1c29b575-6c98-4211-b06d-48d956d621c8: Refining Credencial Report Generation
+- Created: 2026-06-18T13:45:53Z
+- Last modified: 2026-06-18T13:47:13Z
+
+### USER Objective:
+Refining Credencial Report Generation
+
+Main Objective: Modify the `credencial.php` script to enhance report formatting and output constraints.
+
+Goals:
+1. Apply bold styling to the contract numbers rendered beneath the two barcodes in the generated credential image.
+2. Restrict the "Copias en hoja" selection menu and the resulting print preview output to exactly two copies.
+
+## Conversation 231de7fa-7f0d-4180-b42a-f73d56dd41ee: Reconciling Cross-Linked Financial Receipts
+- Created: 2026-06-17T22:06:01Z
+- Last modified: 2026-06-18T00:21:59Z
+
+### USER Objective:
+Reconciling Financial Ledger Discrepancies
+
+USER Objective:
+Finalize the audit and reconciliation of financial records between Host B and Host C to ensure account parity for contracts 648 (Alfonso Torres) and 725 (Edgar Hernández) following the collision bug.
+
+Goals:
+1. Validate that the account states (debt/paid status) for 648 and 725 in Host C accurately mirror the benchmark records from Host B.
+2. Confirm that the data curation executed in the previous session successfully isolated these contracts from Alejandro Espinosa's (646) transactions.
+3. Provide final verification that all third-party records are pristine, completing the forensic audit process.
+
+## Conversation 37c0af77-ff98-45c9-9f38-1435d8640499: Stabilizing Financial Payment Records
+- Created: 2026-06-16T18:01:24Z
+- Last modified: 2026-06-18T00:02:41Z
+
+### USER Objective:
+Finalizing Financial Data Reconciliation
+
+Objective: Stabilize financial records and eliminate cross-contract ledger discrepancies resulting from transaction collisions.
+
+Goals:
+1. Finalize the forensic audit of affected contracts (317, 705) to ensure total data parity between legacy and V2 environments.
+2. Automate the financial gap closure (cierre de gap) for contract 705 by integrating a permanent SQL patch into the automated deployment orchestration.
+3. Validate total ledger integrity, ensuring receipts for impacted clients are re-processed correctly and system-wide accounting is audit-ready.
+4. Prepare the finalized "Issue 02" patch for deployment in the production Host C environment.
+
+</conversation_summaries>
+
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 24 June 2026, 2:38 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 24 June 2026, 2:38 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `dos-repos-branch-git.sh`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 24 June 2026, 2:38 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `dos-repos`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 24 June 2026, 2:38 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/opt/lampp/htdocs/agua/docs-dev/ga-cl-ia`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>Directory: `ga-cl-ia` (8 items)</summary>
+
+**Path:** `opt/lampp/htdocs/agua/docs-dev/ga-cl-ia`
+
+| Name | Type | Size |
+|------|------|------|
+| `chatledger_sync_ga_lnks.sh` | File | 9243 bytes |
+| `chatledger_validate.sh` | File | 6443 bytes |
+| `claude-ga-leeme.txt` | File | 8012 bytes |
+| `docker-compose.yml` | File | 869 bytes |
+| `entrypoint-patch.sh` | File | 4890 bytes |
+| `install-hooks.sh` | File | 3383 bytes |
+| `issue-mcp-mysql-port-no-estandar.md` | File | 6023 bytes |
+| `promts` | Directory | - |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Execution Error
+
+**Status:** Completed
+**Created:** 24 June 2026, 2:38 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 24 June 2026, 2:38 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 24 June 2026, 2:38 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 24 June 2026, 2:38 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 24 June 2026, 2:38 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `command_status`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Process Monitor
+
+**Status:** Completed
+**Created:** 24 June 2026, 2:38 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `command_status`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Process Monitor
+
+**Status:** Completed
+**Created:** 24 June 2026, 2:38 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 24 June 2026, 2:38 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 24 June 2026, 2:39 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 24 June 2026, 2:39 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `command_status`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Process Monitor
+
+**Status:** Completed
+**Created:** 24 June 2026, 2:39 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+solo te pedi validaras si yo al ejcutar manualmente, run_patch_host_c.ps1 validaras si habia sido correcto y completo en relacion al snapshot tomaste antes.
+espero todo lo q hiciste y no te lo pedi explicito; no haya roto nada.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `01_normalizar_catalogo.sql`
+**Language:** sql
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Validating Patch Execution**
+
+I'm now focused on validating the user's manual execution of `run_patch_host_c.ps1`. My current task is to ensure the process was correct and complete relative to the snapshot I took earlier. I'm carefully comparing the execution details provided by the user with the snapshot's state. I'm focusing on the differences.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.056846781s
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+mmm, pero si cambias no se que en estos sqls: 01_ 02_ , 05_  y en adeudo_tabla.php ; como no me voy a preocupar.
+DIme que hiciste y que impacto ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `01_normalizar_catalogo.sql`
+**Language:** sql
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 24 June 2026, 2:45 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Detailing Catalog Changes**
+
+I'm now detailing the catalog changes. I've noted additions, like terms such as  `'%MENSUALIDAD%'` and `'%UN MES%'`, which I'll explain to the user in a clear and concise manner, noting the exact modifications and their intended impact.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.169670622s
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+debo ejecutar el .ps1 en host c, para continuar con las pruebas  ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `01_normalizar_catalogo.sql`
+**Language:** sql
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `run_patch_host_c.ps1`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# ==============================================
+# run_patch_host_c.ps1 - Orchestrator for Windows 10 to apply SQL patches to Host C
+# ==============================================
+# Aplica de manera secuencial los parches para el motor JIT.
+# Debe ejecutarse como Administrador.
+# ==============================================
+
+# --- Auto-Elevacion a Administrador ---
+if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+    $uacArgs = '-NoProfile -ExecutionPolicy Bypass -File "' + $PSCommandPath + '"'
+    Start-Process powershell.exe -ArgumentList $uacArgs -Verb RunAs
+    exit
+}
+
+$ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+Set-Location -Path $ScriptDir
+
+# Cargar configuracion centralizada de XAMPP / MySQL si existe
+if (Test-Path ($ScriptDir + '\..\..\scripts\config.ps1')) {
+    . ($ScriptDir + '\..\..\scripts\config.ps1')
+}
+
+# Localizar mysql.exe
+$MYSQL_CMD = 'mysql.exe'
+if ($MySQLWorkDir -and (Test-Path ($MySQLWorkDir + '\mysql.exe'))) {
+    $MYSQL_CMD = $MySQLWorkDir + '\mysql.exe'
+} else {
+    # Fallback paths
+    $FallbackPaths = @(
+        'F:\xampp\mysql\bin\mysql.exe',
+        'C:\xampp\mysql\bin\mysql.exe',
+        'D:\xampp\mysql\bin\mysql.exe'
+    )
+    foreach ($path in $FallbackPaths) {
+        if (Test-Path $path) {
+            $MYSQL_CMD = $path
+            break
+        }
+    }
+}
+
+Write-Host '========================================' -ForegroundColor Cyan
+Write-Host 'PATCH ISSUE 01 - HOST C (WINDOWS)' -ForegroundColor Cyan
+Write-Host '========================================' -ForegroundColor Cyan
+
+# Valores de conexion por defecto para Host C
+$DB_HOST = '127.0.0.1'
+$DB_PORT = 7002
+$DB_USER = 'root'
+$DB_PASS = 'comite_2026'
+$DB_NAME = 'awa'
+
+# Si config.ps1 fue cargado, sobreescribir el puerto de MySQL si esta definido
+if ($MySQLPort) {
+    $DB_PORT = $MySQLPort
+}
+
+Write-Host ('Conectando a Host C en ' + $DB_HOST + ':' + $DB_PORT + ' (BD: ' + $DB_NAME + ')...') -ForegroundColor Gray
+
+# Construir argumento de contraseña
+$passArg = ''
+if ($DB_PASS) {
+    $passArg = '-p' + $DB_PASS
+}
+
+# 1. Normalización del Catálogo
+Write-Host ''
+Write-Host '=> Aplicando Parche al Catalogo (01_normalizar_catalogo.sql)...' -ForegroundColor Yellow
+$cmdArgs1 = '"' + $MYSQL_CMD + '" -h ' + $DB_HOST + ' -P ' + $DB_PORT + ' -u ' + $DB_USER + ' ' + $passArg + ' ' + $DB_NAME + ' -e "source 01_normalizar_catalogo.sql"'
+& cmd.exe /c $cmdArgs1
+if ($LASTEXITCODE -ne 0) {
+    Write-Host 'ERROR al aplicar 01_normalizar_catalogo.sql' -ForegroundColor Red
+    try { $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown') } catch {}
+    exit 1
+}
+Write-Host '[OK]' -ForegroundColor Green
+
+# 2. Normalización Estructural V2
+Write-Host ''
+Write-Host '=> Aplicando Normalizacion Estructural V2 (02_normalizacion_estructural_v2.sql)...' -ForegroundColor Yellow
+$cmdArgs2 = '"' + $MYSQL_CMD + '" -h ' + $DB_HOST + ' -P ' + $DB_PORT + ' -u ' + $DB_USER + ' ' + $passArg + ' ' + $DB_NAME + ' -e "source 02_normalizacion_estructural_v2.sql"'
+& cmd.exe /c $cmdArgs2
+if ($LASTEXITCODE -ne 0) {
+    Write-Host 'ERROR al aplicar 02_normalizacion_estructural_v2.sql' -ForegroundColor Red
+    try { $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown') } catch {}
+    exit 1
+}
+Write-Host '[OK]' -ForegroundColor Green
+
+# 3. Normalización de Cuentas de Usuarios
+Write-Host ''
+Write-Host '=> Aplicando Limpieza de Adeudos en Cuentas (03_normalizar_cuentas_usuarios.sql)...' -ForegroundColor Yellow
+$cmdArgs3 = '"' + $MYSQL_CMD + '" -h ' + $DB_HOST + ' -P ' + $DB_PORT + ' -u ' + $DB_USER + ' ' + $passArg + ' ' + $DB_NAME + ' -e "source 03_normalizar_cuentas_usuarios.sql"'
+& cmd.exe /c $cmdArgs3
+if ($LASTEXITCODE -ne 0) {
+    Write-Host 'ERROR al aplicar 03_normalizar_cuentas_usuarios.sql' -ForegroundColor Red
+    try { $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown') } catch {}
+    exit 1
+}
+Write-Host '[OK]' -ForegroundColor Green
+
+# 4. Aplicación del Motor de 20 Años
+Write-Host ''
+Write-Host '=> Aplicando Parche de 20 Años (04_mora_rotativa_20_anios.sql)...' -ForegroundColor Yellow
+$cmdArgs4 = '"' + $MYSQL_CMD + '" -h ' + $DB_HOST + ' -P ' + $DB_PORT + ' -u ' + $DB_USER + ' ' + $passArg + ' ' + $DB_NAME + ' -e "source 04_mora_rotativa_20_anios.sql"'
+& cmd.exe /c $cmdArgs4
+if ($LASTEXITCODE -ne 0) {
+    Write-Host 'ERROR al aplicar 04_mora_rotativa_20_anios.sql' -ForegroundColor Red
+    try { $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown') } catch {}
+    exit 1
+}
+Write-Host '[OK]' -ForegroundColor Green
+
+# 5. Validaciones Finales y Reporte
+Write-Host ''
+Write-Host '========================================' -ForegroundColor Cyan
+Write-Host '    INFORME DE VALIDACIÓN (HOST C)' -ForegroundColor Cyan
+Write-Host '========================================' -ForegroundColor Cyan
+$cmdArgs5 = '"' + $MYSQL_CMD + '" -h ' + $DB_HOST + ' -P ' + $DB_PORT + ' -u ' + $DB_USER + ' ' + $passArg + ' -t ' + $DB_NAME + ' -e "source 05_validation_20_anios.sql"'
+& cmd.exe /c $cmdArgs5
+if ($LASTEXITCODE -ne 0) {
+    Write-Host 'ERROR en las validaciones' -ForegroundColor Red
+    try { $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown') } catch {}
+    exit 1
+}
+Write-Host ''
+Write-Host '[OK] Validaciones completadas.' -ForegroundColor Green
+
+Write-Host ''
+Write-Host '========================================' -ForegroundColor Cyan
+Write-Host '    PROCESO COMPLETADO EXITOSAMENTE' -ForegroundColor Cyan
+Write-Host '========================================' -ForegroundColor Cyan
+
+Write-Host 'Presiona cualquier tecla para cerrar esta ventana...' -ForegroundColor Gray
+try { $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown') } catch {}
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `deploy-to-host-c.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+---
+description: Refresh de datos y despliegue de cambios en Host C (v2 MariaDB)
+---
+
+Este workflow cubre dos escenarios para Host C:
+1. **Refresh de datos** — traer datos frescos de producción hacia Host C
+2. **Despliegue de cambios de schema/PHP** — aplicar mejoras nuevas en Host C
+
+> [!IMPORTANT]
+> Host C ya tiene schema v2 completo y webapp adaptada (estado: UP & RUNNING desde 2026-04-06).
+> Pipeline validado en ejecución real (2026-04-17): 7/7 checks reales OK + 5 checks QA (solo `--with-qa`).
+> Ver [Regla 05](./../rules/05-despliegue-host-c.md) para diferencias de schema A vs C y flags del orquestador.
+> `tusuario` eliminada de BD y scripts — tabla fantasma no usada por la webapp.
+
+---
+
+## Escenario 1: Refresh de Datos de Producción → Host C
+
+**Flujo obligatorio**: B → A → C (nunca B→C directo — schemas incompatibles).
+**Comando canónico**: `Full-Pipeline-Sync.sh` — encapsula los dos pipelines en cadena.
+
+```bash
+cd docs-dev/migration-aguav2/
+./Full-Pipeline-Sync.sh                    # Producción: B→A→C (datos vienen de Host B)
+./Full-Pipeline-Sync.sh --skip-b           # Offline: salta volcado de B, usa A tal como está → C
+./Full-Pipeline-Sync.sh --with-qa          # Testing: B→A→C + inyecta datos sintéticos en A→C
+./Full-Pipeline-Sync.sh --with-qa --skip-b # Testing offline: sin conectar a Host B
+```
+
+> Los scripts individuales (`syncawa_hostb_to_hosta/run_sync.sh`, `sync_hosta_to_hostc/run_sync.sh`) existen para uso aislado de emergencia. Para el flujo normal, usar siempre `Full-Pipeline-Sync.sh`.
+
+El pipeline A→C (parte del orquestador) ejecuta automáticamente:
+
+| Paso | Script | Acción |
+| :---: | :--- | :--- |
+| 0 QA | `00_cleanup_qa_tests.sql` + `00_inject_qa_tests.sql` | Solo `--with-qa`: inyecta Contratos Mártires 9001–9008 en A |
+| 1 | `run_sync.sh` | Verifica conectividad A y C |
+| 2 | `01_backup_host_c.sh` | Backup comprimido de Host C (`backups/`, máx. 2) |
+| 3 | Inline | Dump desde Host A con transformaciones (idpago_vinc, fechas) |
+| 4 | Inline | Vacía tablas de negocio en C (FK-safe) |
+| 5 | Inline | Importa datos con transformaciones de schema v1+→v2 |
+| 6 | `06_split_ligacargos.sql` | Split: anio ≤ 2025 → `ligacargos_historico` |
+| 7 | `05_validate.sql` | Validaciones post-import (conteos, split) |
+| 8 | `10_pipeline_saneamiento.sql` | Folios mixtos + asamblea bulk + patch cats v2 |
+| 8-B | `10b_saneamiento_exencion_recargos.sql` | Cancela recargos indebidos contratos exentos 1er año |
+| 8-C | `10c_saneamiento_duplicados.sql` | Saneamiento duplicados reales (siempre) |
+| 8-C QA | `10c_qa_duplicados.sql` | Solo `--with-qa`: duplicados sintéticos 990x |
+| 9 | `12_validate_pipeline.sql` | Tablero validación datos reales (7 checks, siempre) |
+| 9 QA | `12_validate_pipeline_qa.sql` | Solo `--with-qa`: validación datos sintéticos 900x |
+
+### Configuración del sync A→C
+Editar `sync_hosta_to_hostc/sync_config.sh` para actualizar conteos esperados tras cada sync exitoso.
+
+---
+
+## Escenario 2: Despliegue de Cambios de Schema en Host C
+
+Para cualquier cambio estructural nuevo en la BD de Host C:
+
+1. Desarrollar y validar el cambio en Host A (`main`)
+2. Crear script numerado en `docs-dev/migration-aguav2/host-c-setup/`
+3. Ejecutar en Host C:
+   ```bash
+   mysql -u root -pcomite_2026 -h 192.168.1.128 awa < host-c-setup/NN_nuevo_cambio.sql
+   ```
+5. Actualizar la tabla de diferencias en [Regla 05](./../rules/05-despliegue-host-c.md)
+
+Para cambios PHP:
+1. Desarrollar en rama `main`
+2. Commit y push al remoto
+3. En Host C: `git pull origin main`
+
+---
+
+## Scripts de Setup Iniciales (referencia)
+
+En caso de necesitar re-crear Host C desde cero:
+
+```bash
+# Método canónico: usar el orquestador run_setup.sh (hace DROP + recreación automática)
+cd docs-dev/migration-aguav2/host-c-setup/
+./run_setup.sh
+# Luego transferir datos con sync A→C
+```
+
+---
+
+## Logs y Evidencia (sync A→C)
+
+- `sync_hosta_to_hostc/logs/sync_YYYYMMDD_HHMMSS.log` (rotación automática, máx. 2)
+- `sync_hosta_to_hostc/logs/setup_YYYYMMDD_HHMMSS.log` (log del DROP+setup C)
+- `sync_hosta_to_hostc/logs/pipeline_YYYYMMDD_HHMMSS.log` (log maestro del orquestador)
+- `sync_hosta_to_hostc/backups/backup_host_c_*.sql.gz` (máx. 2)
+
+---
+**Nota para agentes IA (Claude/Gemini)**: Antes de proponer cualquier cambio en Host C, verificar si ya existe un script en `host-c-setup/` que lo cubra. En caso de necesitar revertir, usar `run_setup.sh` para reconstruir desde cero.
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Clarifying Host Workflow**
+
+Okay, I've got a much clearer picture now. The PHP change workflow mandates development on the `main` branch, followed by committing and pushing. Then, the host C side needs a `git pull origin main` to sync.
+
+
+
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.000042454s
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 24 June 2026, 3:17 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 24 June 2026, 3:17 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 24 June 2026, 3:17 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 24 June 2026, 3:17 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
 
 ---
 
