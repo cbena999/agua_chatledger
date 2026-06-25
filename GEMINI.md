@@ -5,6 +5,11 @@ Este archivo es el punto de entrada principal para el asistente de IA (Antigravi
 > [!IMPORTANT]
 > **Gemini**: Debes consultar y seguir las reglas detalladas en el directorio `.agents/rules/` para cada tarea orquestada en este proyecto.
 
+> [!IMPORTANT]
+> **Reglas de Oro del Asistente**:
+> 1. **No comitees ni subas a ningún repositorio** a menos que el usuario lo solicite explícitamente.
+> 2. **Todas tus respuestas deben ser en español.**
+
 ---
 
 ## 🗺️ Índice de Reglas y Conocimiento (Ground Truth)
@@ -250,6 +255,11 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 **Iniciación Repositorio emp_devhj_sw / CaeliTandem (2026-05-25):**
 *   **Nuevo Repo**: Inicializado `/home/carlos/GitHub/emp_devhj_sw/caelitandem_home` para el proyecto CaeliTandem SEO, separado del proyecto Agua.
 *   **Script dos-repos-branch-git.sh**: Creado en `docs-dev/scripts/` como guía de referencia del flujo canónico de commits para ambos repos (agua + agua_chatledger). **No es un script ejecutable automatizado**, sino documentación operativa del flujo Git de cierre de sesión.
+
+**Auditoría y Conciliación de Mora (2026-06-25):**
+*   **Auditoría Masiva JIT**: Creada la página `admin/operaciones/comparativa_masiva.php` conectada dinámicamente al SSOT `.mcp.json` para ejecutar un cruce en tiempo real del motor de recargos entre Host B y Host C para los 153 contratos críticos de alta mora.
+*   **Centralización de Saneamiento**: Toda la lógica de condonación de recibos históricos fue incorporada directamente en `configuracion.php`, eliminando la página redundante `soporte_reconciliados.php`.
+*   **Estabilización de Parámetros**: Se ajustó la ventana del motor de recargos en Host C a 27 años de deuda base y 10 años de recargos máximos. Además, la descripción de `reversal_threshold` fue reescrita eliminando términos informales.
 
 **Última actualización**: 2026-06-24
 

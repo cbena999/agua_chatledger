@@ -5,10 +5,135 @@ Este reporte contiene la validación detallada de la lista de contratos proporci
 ---
 
 ## 📊 Resumen General de Resultados
-De los 64 contratos provistos en la lista inicial:
+
+### 🌐 Estadísticas Globales del Sistema (Host B):
+*   **Total de contratos con recargos activos pendientes:** **637 contratos** (acumulando un gran total de **$1,065,360.00** en mora activa).
+*   **Total de contratos con alta mora activa (deuda $\ge$ $1,000.00$):** **190 contratos**, sumando una deuda acumulada de **$917,398.00** (esto representa el **86.1%** de toda la mora activa del sistema).
+
+### 🔍 De los 64 contratos provistos en la lista inicial:
 *   **46 contratos** tienen **mora activa pendiente (estado = 0)**.
 *   **13 contratos** tienen **mora histórica pagada (estado = 1) o depurada (estado = -1)**, por lo que su saldo actual en recargos es $0.
 *   **5 contratos** no presentan registros históricos de recargos o solo cuentan con registros aislados depurados.
+
+---
+
+## 🚀 Los 112 Contratos Coincidentes con Mora > $3,000.00 en Host C (Monkey Test)
+Estos 112 contratos presentan un saldo de recargos mayor a **$3,000.00** en las tablas físicas de **Host C**. Utiliza esta lista para realizar tus pruebas de interfaz (monkey test) y comparar el comportamiento de las pantallas contra **Host B**:
+
+| Contrato | Propietario | Estado Contrato | Mora Host C ($) | Mora Host B ($) | Diferencia (B - C) ($) |
+| :---: | :--- | :---: | :---: | :---: | :---: |
+| **161** | Efrén Morales Cisneros | ACTIVO (1) | 19,644.00 | 19,808.00 | 164.00 |
+| **869** | Luisa Martínez Hernández | ACTIVO (1) | 15,570.00 | 15,570.00 | 0.00 |
+| **895** | Manuel González Burgoa | ACTIVO (1) | 15,474.00 | 15,474.00 | 0.00 |
+| **377** | Oscar Flores Cruz | ACTIVO (1) | 14,904.00 | 14,904.00 | 0.00 |
+| **76** | Juan Antonio Castillo Aragón | ACTIVO (1) | 14,552.00 | 14,142.00 | -410.00 |
+| **263** | Odilón Martínez Montes | ACTIVO (1) | 13,998.00 | 13,998.00 | 0.00 |
+| **1030** | Cristina Santos Pio Quinto | ACTIVO (1) | 13,992.00 | 13,992.00 | 0.00 |
+| **17** | Eulalia Flores Ortega | ACTIVO (1) | 13,254.00 | 13,254.00 | 0.00 |
+| **390** | Julio Medina Morales | ACTIVO (1) | 13,106.00 | 12,696.00 | -410.00 |
+| **286** | Aurelia Solano Ortíz | ACTIVO (1) | 13,056.00 | 13,056.00 | 0.00 |
+| **676** | Hosvelia Rodríguez Hernández | ACTIVO (1) | 13,056.00 | 13,056.00 | 0.00 |
+| **714** | Trinidad Del Carmen Cruz Sosa | ACTIVO (1) | 13,056.00 | 13,056.00 | 0.00 |
+| **858** | Ángela Valdés Peláez | ACTIVO (1) | 12,816.00 | 12,816.00 | 0.00 |
+| **792** | Maximino Betanzos Clemente | ACTIVO (1) | 11,796.00 | 11,796.00 | 0.00 |
+| **97** | Margarita Rodriguez Barragán | ACTIVO (1) | 11,748.00 | 11,748.00 | 0.00 |
+| **790** | Lorena Martínez Ramos | ACTIVO (1) | 11,696.00 | 11,696.00 | 0.00 |
+| **426** | Estela Espinosa Soriano | ACTIVO (1) | 10,934.00 | 10,934.00 | 0.00 |
+| **411** | Andrea Concepción Aguilera Beltrán | ACTIVO (1) | 10,200.00 | 10,200.00 | 0.00 |
+| **318** | Alejandro H. Mendoza Aroche | ACTIVO (1) | 9,586.00 | 9,586.00 | 0.00 |
+| **484** | Rubén Guzmán Alavez | ACTIVO (1) | 9,498.00 | 9,498.00 | 0.00 |
+| **527** | Isabel Pérez Pastor | ACTIVO (1) | 9,498.00 | 9,498.00 | 0.00 |
+| **22** | Carmen Rosario Rosario | ACTIVO (1) | 8,752.00 | 8,752.00 | 0.00 |
+| **365** | Maria Rubí Ramos Herrera | ACTIVO (1) | 8,736.00 | 8,736.00 | 0.00 |
+| **830** | Javier Mendoza Aroche | ACTIVO (1) | 8,712.00 | 8,712.00 | 0.00 |
+| **956** | Josefina Cruz Sánchez Vigil | ACTIVO (1) | 8,564.00 | 8,564.00 | 0.00 |
+| **56** | Soledad Reyes López | ACTIVO (1) | 8,414.00 | 8,250.00 | -164.00 |
+| **574** | Guillermina Sánchez González | ACTIVO (1) | 8,044.00 | 8,044.00 | 0.00 |
+| **290** | Marciana Montes Escamilla | ACTIVO (1) | 7,824.00 | 7,824.00 | 0.00 |
+| **962** | Leonor Maximina López Mtz. | ACTIVO (1) | 7,668.00 | 7,668.00 | 0.00 |
+| **419** | Edith Castro Díaz | ACTIVO (1) | 7,648.00 | 7,320.00 | -328.00 |
+| **387** | Ma. Del Carmen Pacheco Mendoza | ACTIVO (1) | 7,584.00 | 7,584.00 | 0.00 |
+| **1072** | Paz Devora Soriano Gil | ACTIVO (1) | 7,550.00 | 7,140.00 | -410.00 |
+| **1141** | Edgar Hernandez Alberdin | ACTIVO (1) | 7,440.00 | 7,440.00 | 0.00 |
+| **706** | Alfonso Bautista | ACTIVO (1) | 7,424.00 | 7,424.00 | 0.00 |
+| **321** | Fernando Hernández | ACTIVO (1) | 7,300.00 | 7,300.00 | 0.00 |
+| **173** | Maria Elena Cruz López | ACTIVO (1) | 7,260.00 | 7,260.00 | 0.00 |
+| **815** | Martha Morales García | ACTIVO (1) | 7,226.00 | 7,226.00 | 0.00 |
+| **975** | Colegio De Médicos Cirujanos De La Mix A.C. | ACTIVO (1) | 7,020.00 | 7,020.00 | 0.00 |
+| **537** | Nieves Cruz Cruz | ACTIVO (1) | 6,994.00 | 6,994.00 | 0.00 |
+| **1257** | Adan Luna Hernandez | ACTIVO (1) | 6,900.00 | 6,900.00 | 0.00 |
+| **583** | Elpidio Flores García | ACTIVO (1) | 6,618.00 | 6,618.00 | 0.00 |
+| **976** | Héctor Martínez Guzmán | ACTIVO (1) | 6,584.00 | 6,584.00 | 0.00 |
+| **284** | Cuauhtémoc Reyes Cruz | ACTIVO (1) | 6,560.00 | 6,560.00 | 0.00 |
+| **689** | Eva Candida Vasquez Hernandez | ACTIVO (1) | 6,460.00 | 6,460.00 | 0.00 |
+| **857** | Otilia Cruz Sosa | ACTIVO (1) | 6,408.00 | 6,408.00 | 0.00 |
+| **718** | Jorge Rojas Flores | ACTIVO (1) | 6,364.00 | 6,364.00 | 0.00 |
+| **424** | Alicia Arias Posados | ACTIVO (1) | 6,210.00 | 5,800.00 | -410.00 |
+| **72** | Manuel Liborio Pacheco Peña | ACTIVO (1) | 6,170.00 | 5,760.00 | -410.00 |
+| **708** | Patricio Calvo Castro | ACTIVO (1) | 6,112.00 | 6,112.00 | 0.00 |
+| **1303** | Ricardo De Jesus Moran Reyes | ACTIVO (1) | 6,030.00 | 6,030.00 | 0.00 |
+| **373** | Dagoberto Lara Cortázar | ACTIVO (1) | 6,006.00 | 6,006.00 | 0.00 |
+| **979** | Sandalio Ruperto Prisco | ACTIVO (1) | 5,976.00 | 5,976.00 | 0.00 |
+| **823** | Carmen Hernández Cruz | ACTIVO (1) | 5,952.00 | 5,952.00 | 0.00 |
+| **549** | Guillermina Villarreal Martínez | ACTIVO (1) | 5,940.00 | 5,940.00 | 0.00 |
+| **1262** | Leodegario Valdes Martinez | ACTIVO (1) | 5,940.00 | 5,940.00 | 0.00 |
+| **685** | Rosa Asunción Pérez Vásquez | ACTIVO (1) | 5,888.00 | 5,760.00 | -128.00 |
+| **892** | Gabriel P. Flores González | ACTIVO (1) | 5,886.00 | 6,072.00 | 186.00 |
+| **98** | Heriberto Méndez Mejía | ACTIVO (1) | 5,760.00 | 5,760.00 | 0.00 |
+| **834** | Javier Mendoza Aroche | ACTIVO (1) | 5,688.00 | 5,688.00 | 0.00 |
+| **920** | Arcadio Cortes Martínez | ACTIVO (1) | 5,590.00 | 5,590.00 | 0.00 |
+| **988** | Ovidio Pérez Pérez | ACTIVO (1) | 5,568.00 | 5,568.00 | 0.00 |
+| **1152** | Maribel Loyola Barragan | ACTIVO (1) | 5,460.00 | 5,460.00 | 0.00 |
+| **640** | Migdalia López Reyes | ACTIVO (1) | 5,314.00 | 5,314.00 | 0.00 |
+| **1154** | Carmen Flores Zamorano | SUSPENSIÓN TEMPORAL (2) | 5,220.00 | 5,220.00 | 0.00 |
+| **817** | Benjamín Hernández Pérez | ACTIVO (1) | 4,948.00 | 4,128.00 | -820.00 |
+| **118** | Sandra Castillo Pérez | ACTIVO (1) | 4,904.00 | 4,904.00 | 0.00 |
+| **1313** | Jose Esteban Hernandez Vera | ACTIVO (1) | 4,824.00 | 4,824.00 | 0.00 |
+| **302** | Darío Claudio Rodríguez | ACTIVO (1) | 4,824.00 | 4,824.00 | 0.00 |
+| **1166** | Carlos Nuñez Lopez | ACTIVO (1) | 4,800.00 | 4,800.00 | 0.00 |
+| **1264** | Norma Luna Cruz | ACTIVO (1) | 4,800.00 | 4,800.00 | 0.00 |
+| **833** | Javier Mendoza Aroche | ACTIVO (1) | 4,776.00 | 4,776.00 | 0.00 |
+| **1008** | Javier Mendoza Aroche | ACTIVO (1) | 4,608.00 | 4,608.00 | 0.00 |
+| **588** | Miguel Hernández Reyes | ACTIVO (1) | 4,520.00 | 4,520.00 | 0.00 |
+| **1043** | María Hilda Leyva Ojeda | ACTIVO (1) | 4,500.00 | 4,500.00 | 0.00 |
+| **684** | Manuela Méndez Vichao | ACTIVO (1) | 4,480.00 | 4,480.00 | 0.00 |
+| **635** | María Guadalupe Morales Carpio | ACTIVO (1) | 4,480.00 | 4,480.00 | 0.00 |
+| **999** | Octavio Cortés Ruiz | SUSPENSIÓN TEMPORAL (2) | 4,420.00 | 4,420.00 | 0.00 |
+| **38** | Artemio Silva Herrera | ACTIVO (1) | 4,320.00 | 4,320.00 | 0.00 |
+| **1131** | Ismael Barbosa Avila | ACTIVO (1) | 4,260.00 | 4,260.00 | 0.00 |
+| **1090** | Soledad Guadalupe Ramos Hernandez | ACTIVO (1) | 4,240.00 | 4,240.00 | 0.00 |
+| **1127** | Armando Hernandez Martinez | ACTIVO (1) | 4,230.00 | 4,230.00 | 0.00 |
+| **341** | Rufino Amado Guerrero Martínez | ACTIVO (1) | 4,220.00 | 4,220.00 | 0.00 |
+| **1070** | Alicia Asunción Reyes Cruz | ACTIVO (1) | 4,192.00 | 4,192.00 | 0.00 |
+| **124** | Richard A Sánchez Ramírez | ACTIVO (1) | 4,160.00 | 4,160.00 | 0.00 |
+| **841** | Catalino Villalba Cruz | ACTIVO (1) | 4,152.00 | 4,152.00 | 0.00 |
+| **756** | Juan Lima Ramírez | SUSPENSIÓN ADMINISTRATIVA (3) | 4,124.00 | 4,124.00 | 0.00 |
+| **720** | Juan Hugo Betanzos Mijangos | ACTIVO (1) | 4,110.00 | 4,110.00 | 0.00 |
+| **295** | Edna Ekatherine Barragan Hernandez | ACTIVO (1) | 4,094.00 | 4,012.00 | -82.00 |
+| **598** | Baudilio Ramirez Morales | ACTIVO (1) | 4,090.00 | 4,090.00 | 0.00 |
+| **398** | Yolamina Villarreal Santillan | ACTIVO (1) | 4,032.00 | 4,032.00 | 0.00 |
+| **1052** | Guillermina Mendoza Pérez | ACTIVO (1) | 4,020.00 | 6,600.00 | 2,580.00 |
+| **513** | Hermelinda Palma Flores | ACTIVO (1) | 4,020.00 | 4,020.00 | 0.00 |
+| **198** | Angela Gonzalez Marquez | ACTIVO (1) | 3,864.00 | 3,864.00 | 0.00 |
+| **28** | Jehieli Ramirez Sandoval | ACTIVO (1) | 3,864.00 | 3,864.00 | 0.00 |
+| **1273** | Ma. De Jesus Hernandez Solis | ACTIVO (1) | 3,840.00 | 3,840.00 | 0.00 |
+| **1165** | Jorge Hernandez Garcia | ACTIVO (1) | 3,840.00 | 3,840.00 | 0.00 |
+| **358** | Álvaro Antolin Hernández Álvarez | ACTIVO (1) | 3,780.00 | 3,780.00 | 0.00 |
+| **747** | Mario Alberto Ramírez Morales | ACTIVO (1) | 3,700.00 | 3,700.00 | 0.00 |
+| **1110** | Estefania Alonso Cruz | ACTIVO (1) | 3,610.00 | 4,810.00 | 1,200.00 |
+| **923** | Marisol Olivares Torralba | ACTIVO (1) | 3,600.00 | 3,600.00 | 0.00 |
+| **749** | Javier Melquíades Flores Ortiz | ACTIVO (1) | 3,600.00 | 3,600.00 | 0.00 |
+| **166** | Neftali J. Mendoza Aroche | ACTIVO (1) | 3,600.00 | 3,600.00 | 0.00 |
+| **210** | Francisco Hernández Ramírez | ACTIVO (1) | 3,480.00 | 3,480.00 | 0.00 |
+| **81** | José Herrera Rojas | ACTIVO (1) | 3,480.00 | 3,480.00 | 0.00 |
+| **1193** | Miguel Balbuena Martinez | ACTIVO (1) | 3,380.00 | 3,380.00 | 0.00 |
+| **178** | Pedro Vidal Martínez | ACTIVO (1) | 3,324.00 | 3,324.00 | 0.00 |
+| **1238** | Genaro Ramírez Hernández | ACTIVO (1) | 3,288.00 | 3,288.00 | 0.00 |
+| **187** | María Catalina Hernández Rojas | ACTIVO (1) | 3,240.00 | 3,240.00 | 0.00 |
+| **1280** | Rosa Francisca Rojas Hernandez | ACTIVO (1) | 3,220.00 | 3,220.00 | 0.00 |
+| **545** | Fidelina Luna Buseta | ACTIVO (1) | 3,150.00 | 3,150.00 | 0.00 |
+| **804** | Juan Hernández Guzmán | ACTIVO (1) | 3,120.00 | 3,120.00 | 0.00 |
+| **655** | Juvenil Asociación Triqui A. C. | SUSPENSIÓN ADMINISTRATIVA (3) | 3,056.00 | 3,056.00 | 0.00 |
 
 ---
 
