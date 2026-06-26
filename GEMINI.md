@@ -261,7 +261,7 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 *   **Centralización de Saneamiento**: Toda la lógica de condonación de recibos históricos fue incorporada directamente en `configuracion.php`, eliminando la página redundante `soporte_reconciliados.php`.
 *   **Estabilización de Parámetros**: Se ajustó la ventana del motor de recargos en Host C a 27 años de deuda base y 10 años de recargos máximos. Además, la descripción de `reversal_threshold` fue reescrita eliminando términos informales.
 
-**Última actualización**: 2026-06-24
+**Última actualización**: 2026-06-25
 
 
 
