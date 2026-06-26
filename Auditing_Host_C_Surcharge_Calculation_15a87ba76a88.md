@@ -4,12 +4,12 @@
 
 | Field | Value |
 |-------|-------|
-| **Trajectory ID** | `511c3d8d-8a1a-45cc-afc8-aa355222e94d` |
+| **Trajectory ID** | `82eba0fd-500c-4131-b932-4b04d62125d2` |
 | **Cascade ID** | `8335b7b4-b401-41d7-8000-15a87ba76a88` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 144 |
+| **Total Steps** | 377 |
 | **Started** | 25 June 2026, 4:29 pm |
-| **Completed** | 25 June 2026, 9:22 pm |
+| **Completed** | 25 June 2026, 9:56 pm |
 
 ---
 
@@ -5579,6 +5579,5316 @@ I'm focusing intently on tool selection, avoiding bash-based commands for file m
 
 - **Thinking Duration:** 0.175731564s
 - **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+## User Request
+
+Parse error: syntax error, unexpected end of file, expecting elseif (T_ELSEIF) or else (T_ELSE) or endif (T_ENDIF) in F:\aguav2\webapp\agua\admin\operaciones\configuracion.php on line 784
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `06_limpieza_espurios_mora.sql`
+**Language:** oracle-sql
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+-- ==============================================================================
+-- 06_limpieza_espurios_mora.sql
+-- ==============================================================================
+-- Objetivo: Cancelar (estado=-1) los recargos espurios generados erróneamente 
+-- en el período de gracia (ENE, FEB, MAR) del mismo año base del cargo.
+-- Aplica solo a años >= 2020 (respetando 2017-2019 que están en formato viejo).
+-- ==============================================================================
+
+-- 1. Limpieza en la tabla histórica (ligacargos_historico)
+UPDATE ligacargos_historico
+SET estado = -1
+WHERE estado = 0
+  AND categoria = 16
+  AND anio >= 2020
+  AND (
+    leyenda LIKE CONCAT('RECARGO ENE ', anio, ' - %') OR
+    leyenda LIKE CONCAT('RECARGO FEB ', anio, ' - %') OR
+    leyenda LIKE CONCAT('RECARGO MAR ', anio, ' - %')
+  );
+
+-- 2. Limpieza en la tabla activa (ligacargos)
+UPDATE ligacargos
+SET estado = -1
+WHERE estado = 0
+  AND categoria = 16
+  AND anio >= 2020
+  AND (
+    leyenda LIKE CONCAT('RECARGO ENE ', anio, ' - %') OR
+    leyenda LIKE CONCAT('RECARGO FEB ', anio, ' - %') OR
+    leyenda LIKE CONCAT('RECARGO MAR ', anio, ' - %')
+  );
+
+-- Reporte de filas afectadas (Opcional, para logs)
+```
+
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Selection**
+
+I'm now focusing on tool selection, avoiding bash built-ins for file manipulation and searching. I'm prioritizing `grep_search` over `grep`, and I'm avoiding `ls`, `cat`, and `sed` accessed via bash. Before making a specific tool call, I'm listing related tools to ensure the most applicable option is chosen.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `configuracion.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.410349871s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+require_once('../../login/usuario.php');
+session_start();
+if (!isset($_SESSION['usuario'])) {
+    print "<script>window.location='../../login/index.php'</script>";
+    exit();
+}
+
+require_once('../../config/Conexion.php');
+$y = new Conexion();
+$y->conectarBaseDatos();
+
+$mensaje = "";
+// Mostrar mensaje flash de guardado (Post/Redirect/Get)
+if (isset($_GET['saved']) && $_GET['saved'] == '1') {
+    $mensaje = "<div class='success-msg'>&#10003; Configuraci&oacute;n actualizada correctamente.</div>";
+} else if (isset($_GET['status'])) {
+    if ($_GET['status'] == 'success') {
+        $mensaje = "<div class='success-msg'>&#10003; El cargo hist&oacute;rico fue reconciliado/condonado correctamente.</div>";
+    } else if ($_GET['status'] == 'error_anio') {
+        $mensaje = "<div class='error-msg'>&#10060; Error de Validaci&oacute;n: La fecha de pago no puede ser del a&ntilde;o en curso ni futura.</div>";
+    } else if ($_GET['status'] == 'error_no_existe') {
+        $mensaje = "<div class='error-msg'>&#10060; El cargo no existe o ya ha sido pagado.</div>";
+    } else if ($_GET['status'] == 'error') {
+        $mensaje = "<div class='error-msg'>&#10060; Ocurri&oacute; un error al procesar la solicitud.</div>";
+    }
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // 1. Procesar Acciones de Reconciliación / Condonación
+    if (isset($_POST['action'])) {
+        if ($_POST['action'] === 'reconciliar_recibo' || $_POST['action'] === 'condonar') {
+            $id_cargo = intval($_POST['id_cargo']);
+            
+            // Verificar que el cargo exista y sea pendiente (estado=0)
+            $q_cargo = $y->q("SELECT id, numcontrato, anio, categoria, leyenda, monto FROM ligacargos_historico WHERE id = $id_cargo AND estado = 0");
+            if ($y->num_rows($q_cargo) > 0) {
+                $cargo = $y->fetch_array($q_cargo);
+                $numcontrato = $y->real_escape_string($cargo['numcontrato']);
+                
+                if ($_POST['action'] === 'reconciliar_recibo') {
+                    $folio = $y->real_escape_string($_POST['folio_viejo']);
+                    $fpago = $y->real_escape_string($_POST['fpago_vieja']);
+                    
+                    // Validar Poka-Yoke: no permitir año en curso o futuro
+                    $anio_pago = intval(substr($fpago, 0, 4));
+                    $anio_actual = intval(date('Y'));
+                    if ($anio_pago >= $anio_actual) {
+                        header("Location: configuracion.php?numcontrato=$numcontrato&status=error_anio#seccion-reconciliacion");
+                        exit();
+                    } else {
+                        $y->q("UPDATE ligacargos_historico SET estado = 1, folio = '$folio', fpago = '$fpago 12:00:00' WHERE id = $id_cargo");
+                        
+                        // Poka-Yoke: Eliminar los recargos (estado=0) generados previamente por el JIT para este año
+                        $anio = intval($cargo['anio']);
+                        $y->q("DELETE FROM ligacargos_historico WHERE numcontrato = '$numcontrato' AND anio = $anio AND categoria IN (16,17) AND estado = 0");
+                        $y->q("DELETE FROM ligacargos WHERE numcontrato = '$numcontrato' AND anio = $anio AND categoria IN (16,17) AND estado = 0");
+                        
+                        // Log en sys_log_reconciliacion
+                        $y->q("INSERT IGNORE INTO sys_log_reconciliacion (id_cargo_hist, tipo, numcontrato, anio_cargo, usuario_ejecutor, fecha_registro, folio_asignado) VALUES ($id_cargo, 'RECIBO_FISICO', '$numcontrato', {$cargo['anio']}, '{$_SESSION['usuario']}', NOW(), '$folio')");
+                        
+                        header("Location: configuracion.php?numcontrato=$numcontrato&status=success#seccion-reconciliacion");
+                        exit();
+                    }
+                } else if ($_POST['action'] === 'condonar') {
+                    $anio = intval($cargo['anio']);
+                    $folio = "990" . $anio; // Folio de ajuste interno
+                    $fpago = "$anio-12-31 23:59:59"; // Fin del año del adeudo
+                    
+                    $leyenda_nueva = $y->real_escape_string($cargo['leyenda'] . " [CONDONADO]");
+                    
+                    $y->q("UPDATE ligacargos_historico SET estado = 1, folio = '$folio', fpago = '$fpago', leyenda = '$leyenda_nueva' WHERE id = $id_cargo");
+                    
+                    // Poka-Yoke: Eliminar los recargos (estado=0) generados previamente por el JIT para este año
+                    $y->q("DELETE FROM ligacargos_historico WHERE numcontrato = '$numcontrato' AND anio = $anio AND categoria IN (16,17) AND estado = 0");
+                    $y->q("DELETE FROM ligacargos WHERE numcontrato = '$numcontrato' AND anio = $anio AND categoria IN (16,17) AND estado = 0");
+                    
+                    $y->q("INSERT IGNORE INTO sys_log_reconciliacion (id_cargo_hist, tipo, numcontrato, anio_cargo, usuario_ejecutor, fecha_registro, folio_asignado) VALUES ($id_cargo, 'CONDONACION_COMITE', '$numcontrato', {$cargo['anio']}, '{$_SESSION['usuario']}', NOW(), '$folio')");
+                    
+                    header("Location: configuracion.php?numcontrato=$numcontrato&status=success#seccion-reconciliacion");
+                    exit();
+                }
+            } else {
+                header("Location: configuracion.php?numcontrato=$numcontrato&status=error_no_existe#seccion-reconciliacion");
+                exit();
+            }
+        }
+    }
+
+    // 2. Guardar Configuración Global
+    $hubo_cambios = false;
+    
+    if (isset($_POST['config'])) {
+        $configs = $_POST['config'];
+        foreach ($configs as $clave => $valor) {
+            $clave_segura = $y->real_escape_string($clave);
+            $valor_seguro = $y->real_escape_string($valor);
+            $y->q("UPDATE config_sistema SET valor='$valor_seguro' WHERE clave='$clave_segura'");
+        }
+        $hubo_cambios = true;
+    }
+    
+    if (isset($_POST['amnistia'])) {
+        foreach ($_POST['amnistia'] as $anio => $estado) {
+            $anio_v = intval($anio);
+            $estado_v = intval($estado) === 1 ? 1 : 0;
+            // 1. Actualizar Catálogo (protegiendo variaciones comerciales)
+            $y->q("UPDATE cargos SET recargo=$estado_v WHERE anio=$anio_v AND categoria IN (2, 3) AND nombre NOT LIKE '%TIPO%' AND nombre NOT LIKE '%COMERCIAL%' AND nombre NOT LIKE '%2DA%' AND nombre NOT LIKE '%2ª%' AND nombre NOT LIKE '%SEGUNDA%'");
+            // 2. Sincronizar Libro Mayor Activo e Histórico (protegiendo variaciones comerciales)
+            $y->q("UPDATE ligacargos SET recargo=$estado_v WHERE anio=$anio_v AND categoria IN (2, 3) AND leyenda NOT LIKE '%TIPO%' AND leyenda NOT LIKE '%COMERCIAL%' AND leyenda NOT LIKE '%2DA%' AND leyenda NOT LIKE '%2ª%' AND leyenda NOT LIKE '%SEGUNDA%'");
+            $y->q("UPDATE ligacargos_historico SET recargo=$estado_v WHERE anio=$anio_v AND categoria IN (2, 3) AND leyenda NOT LIKE '%TIPO%' AND leyenda NOT LIKE '%COMERCIAL%' AND leyenda NOT LIKE '%2DA%' AND leyenda NOT LIKE '%2ª%' AND leyenda NOT LIKE '%SEGUNDA%'");
+        }
+        $hubo_cambios = true;
+    }
+    
+    // Post/Redirect/Get: redirigir siempre tras POST para evitar resubmit en F5
+    if ($hubo_cambios) {
+        header('Location: configuracion.php?saved=1');
+    } else {
+        header('Location: configuracion.php');
+    }
+    exit();
+}
+
+$res = $y->q("SELECT clave, valor, descripcion FROM config_sistema ORDER BY clave ASC");
+$opciones = array();
+while ($row = $y->fetch_array($res)) {
+    $opciones[$row['clave']] = $row;
+}
+
+// ── Cargar cargos a reconciliar/condonar ─────────────────────────────────────
+$numcontrato = isset($_GET['numcontrato']) ? $y->real_escape_string($_GET['numcontrato']) : "";
+$cargos_reconciliar = [];
+
+if ($numcontrato !== "") {
+    // Buscar cargos base pendientes en el histórico
+    $res_rec = $y->q("SELECT id, numcontrato, anio, categoria, leyenda, monto, fcobro FROM ligacargos_historico WHERE numcontrato = '$numcontrato' AND estado = 0 AND categoria IN (2,3) ORDER BY anio ASC, categoria ASC");
+    while ($row = $y->fetch_array($res_rec)) {
+        $cargos_reconciliar[] = $row;
+    }
+}
+
+// ── Cargar Años de Amnistía Dinámicos ────────────────────────────────────────
+$max_anios_limit = 0;
+if (isset($opciones['paridad_anios_max_recargo']['valor'])) {
+    $max_anios_limit = intval($opciones['paridad_anios_max_recargo']['valor']);
+}
+
+$where_anio = "";
+if ($max_anios_limit > 0) {
+    $where_anio = " AND anio >= (YEAR(CURDATE()) - $max_anios_limit) ";
+}
+
+$res_anios = $y->q("
+    SELECT 
+        anio,
+        SUM(CASE WHEN categoria = 2 THEN 1 ELSE 0 END) as tiene_agua,
+        MAX(CASE WHEN categoria = 2 THEN recargo ELSE 0 END) as recargo_agua,
+        SUM(CASE WHEN categoria = 3 THEN 1 ELSE 0 END) as tiene_drenaje,
+        MAX(CASE WHEN categoria = 3 THEN recargo ELSE 0 END) as recargo_drenaje
+    FROM cargos 
+    WHERE categoria IN (2,3) $where_anio AND anio > 0
+    GROUP BY anio 
+    ORDER BY anio DESC 
+");
+$amnistia_anios = array();
+while ($row = $y->fetch_array($res_anios)) {
+    $amnistia_anios[] = $row;
+}
+
+$activos_mora = 0;
+foreach ($amnistia_anios as $a) {
+    if (intval($a['recargo_agua']) === 1 || intval($a['recargo_drenaje']) === 1) {
+        $activos_mora++;
+    }
+}
+$total_anios_amnistia = count($amnistia_anios);
+
+// ── Agrupación temática ──────────────────────────────────────────────────────
+$grupos = array(
+    'Recargos Moratorios' => array(
+        'desc_grupo' => 'Generación de mora y límites de protección. Incluye alcance retroactivo de paridad y umbral de deuda acumulada.',
+        'readonly'   => false,
+        'claves'     => ['recargo_mes_inicio','recargo_porcentaje','paridad_anios_max_recargo','reversal_threshold'],
+    ),
+    'Operación y Contratos' => array(
+        'desc_grupo' => 'Ciclo de vida: reglas de transición de estado, exenciones iniciales, límites por contrato y valores de solo lectura de estados.',
+        'readonly'   => false,
+        'claves'     => ['susptemp_mes_permitido','nuevo_contrato_exento_default','max_tomas_por_contrato','max_domicilios_por_contrato', 'estado_activo','estado_susp_temporal','estado_susp_administrativa','estado_susp_definitiva'],
+    ),
+);
+
+// Campos editables (max_tomas_por_contrato: solo lectura)
+$editables = ['recargo_mes_inicio','recargo_porcentaje','recargo_categoria_agua','recargo_categoria_drenaje',
+              'susptemp_mes_permitido','paridad_anios_max_recargo',
+              'reversal_threshold','nuevo_contrato_exento_default',
+              'max_domicilios_por_contrato'];
+
+header('Content-Type: text/html; charset=UTF-8');
+
+function get_mes_nombre($n) {
+    $meses = ["", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+    return isset($meses[$n]) ? $meses[$n] : "Mes $n";
+}
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Configuraci&oacute;n del Sistema</title>
+    <link rel="stylesheet" href="../../web-assets/css/paxstyle2.css">
+    <style>
+        body { padding: 0 20px 20px; font-family: Arial, sans-serif; background: #f5f6fa; }
+        h1 { font-size: 20px; color: #2c3e50; margin: 0; font-style: normal; text-shadow: none; text-align: left; }
+        .config-header-bar { position: sticky; top: 0; background: #f5f6fa; z-index: 100; padding: 12px 0 8px; border-bottom: 1px solid #dde3ec; display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .back-link { display: inline-block; margin-bottom: 3px; color: #0674B7; text-decoration: none; font-weight: bold; font-size: 12px; }
+        .back-link:hover { text-decoration: underline; }
+        .success-msg { color: #155724; background: #d4edda; border: 1px solid #c3e6cb; padding: 8px 12px; margin-bottom: 12px; border-radius: 4px; font-weight: bold; font-size: 12px; }
+
+        /* Layout dos columnas */
+        .grupos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+        /* .g-estados ya no es full-width para permitir la columna de referencia al lado */
+
+        /* Tarjeta de grupo */
+        .grupo-card { background: #fff; border: 1px solid #dde3ec; border-radius: 6px; overflow: hidden; }
+        .grupo-header { padding: 8px 12px; font-weight: bold; font-size: 12px; text-transform: uppercase;
+                        letter-spacing: .5px; color: #fff; }
+        .g-estados    .grupo-header { background: #7f8c8d; }
+        .g-recargos   .grupo-header { background: #2980b9; }
+        .g-paridad    .grupo-header { background: #8e44ad; }
+        .g-ciclo      .grupo-header { background: #27ae60; }
+        .g-reversa    .grupo-header { background: #c0392b; }
+        .g-referencia .grupo-header { background: #2c3e50; }
+        .g-amnistia   .grupo-header { background: #d35400; }
+        .grupo-desc { font-size: 11px; color: #666; padding: 4px 12px 6px; border-bottom: 1px solid #eee; background: #fafbfc; }
+        .grupo-body { padding: 8px 12px 12px; }
+
+        /* Fila de config */
+        .cfg-row { margin-bottom: 8px; }
+        .cfg-grouped-top { background: #fdfdfd; padding: 8px 12px; border: 1px solid #d0d5dd; border-bottom: none; border-radius: 6px 6px 0 0; margin-bottom: 0; }
+        .cfg-grouped-middle { background: #fdfdfd; padding: 8px 12px; border-left: 1px solid #d0d5dd; border-right: 1px solid #d0d5dd; border-top: 1px dashed #ccc; border-bottom: none; border-radius: 0; margin-top: 0; margin-bottom: 0; }
+        .cfg-grouped-bottom { background: #fdfdfd; padding: 8px 12px 8px 30px; border: 1px solid #d0d5dd; border-top: none; border-radius: 0 0 6px 6px; margin-top: 0; position: relative; }
+        .cfg-grouped-bottom::before { content: '\21B3'; position: absolute; left: 12px; top: 8px; color: #999; font-size: 14px; font-weight: bold; }
+        .cfg-grouped-top .cfg-key, .cfg-grouped-middle .cfg-key, .cfg-grouped-bottom .cfg-key { color: #c0392b; }
+        .cfg-row:last-child { margin-bottom: 0; }
+        .cfg-key { font-family: monospace; font-size: 11px; font-weight: bold; color: #2c3e50; display: block; margin-bottom: 2px; }
+        .cfg-desc { font-size: 11px; color: #777; margin-bottom: 4px; display: block; line-height: 1.4; white-space: pre-line; }
+        .cfg-input { width: 100%; padding: 5px 8px; border: 1px solid #ccc; border-radius: 4px;
+                     box-sizing: border-box; font-family: monospace; font-size: 12px; background: #fff; }
+        .cfg-input:focus { border-color: #3498db; outline: none; box-shadow: 0 0 0 2px rgba(52,152,219,.2); }
+        .cfg-input[readonly] { background: #f0f0f0; color: #999; cursor: not-allowed; }
+        .readonly-badge { display: inline-block; font-size: 10px; background: #ecf0f1; color: #7f8c8d;
+                          border: 1px solid #bdc3c7; border-radius: 3px; padding: 1px 5px; margin-left: 6px; vertical-align: middle; }
+
+        /* Botón guardar */
+        .submit-btn { background: #0674B7; color: #fff; padding: 8px 18px; border: none; border-radius: 4px;
+                      cursor: pointer; font-size: 13px; font-weight: bold; }
+        .submit-btn:hover { background: #045a8d; }
+
+        /* Modal confirmación de cambios */
+        #cfg-overlay { position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.45);z-index:9998; }
+        #cfg-modal   { position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:9999;
+                       background:#f4f6f8;border:1px solid #aaa;border-radius:6px;padding:0;
+                       min-width:480px;max-width:680px;width:90%;box-shadow:0 4px 18px rgba(0,0,0,0.25); }
+        #cfg-modal .m-header { background:#0E4F8E;color:#fff;padding:9px 14px;border-radius:5px 5px 0 0;
+                               font-weight:bold;font-size:12px;text-transform:uppercase; }
+        #cfg-modal .m-body   { padding:14px 18px;max-height:55vh;overflow-y:auto; }
+        #cfg-modal .m-footer { text-align:right;padding:0 18px 14px; }
+        .cfg-diff-table { width:100%;border-collapse:collapse;font-size:12px;margin-bottom:12px; }
+        .cfg-diff-table th { background:#0E4F8E;color:#fff;padding:5px 8px;text-align:left;font-size:11px; }
+        .cfg-diff-table td { padding:5px 8px;border-bottom:1px solid #e0e4ea;vertical-align:top; }
+        .cfg-diff-table tr:last-child td { border-bottom:none; }
+        .cfg-diff-table .col-key  { font-family:monospace;font-weight:bold;color:#2c3e50;white-space:nowrap; }
+        .cfg-diff-table .col-ant  { color:#888;text-decoration:line-through; }
+        .cfg-diff-table .col-new  { color:#1a7a1a;font-weight:bold; }
+        .cfg-diff-table .col-imp  { font-size:10px;color:#555;line-height:1.4; }
+        .no-cambios { color:#7f8c8d;font-size:13px;text-align:center;padding:14px 0; }
+        #cfg-modal input[type=button] { padding:7px 18px;border:none;border-radius:4px;cursor:pointer;
+                                        font-size:13px;font-weight:bold; }
+        #cfg-cancelar-modal { background:#888;color:#fff;margin-right:8px; }
+        #cfg-confirmar-modal { background:#0674B7;color:#fff; }
+        .error-msg { color: #721c24; background: #f8d7da; border: 1px solid #f5c6cb; padding: 8px 12px; margin-bottom: 12px; border-radius: 4px; font-weight: bold; font-size: 12px; }
+
+        /* Modales de Reconciliación */
+        #rec-overlay { position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:9998; display:none; }
+        .rec-modal-box { position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:9999; background:#fff; border-radius:6px; padding:0; min-width:400px; box-shadow:0 4px 18px rgba(0,0,0,0.3); display:none; border: 1px solid #aaa; }
+        .rec-modal-header { color:#fff; padding:12px 15px; border-radius:5px 5px 0 0; font-weight:bold; font-size:14px; }
+        .rec-modal-body { padding:20px; }
+        .rec-modal-footer { text-align:right; padding:15px; background:#f9f9f9; border-top:1px solid #eee; border-radius:0 0 5px 5px; }
+        .rec-modal-box label { display: block; margin-top: 10px; font-weight: bold; font-size: 12px; }
+        .rec-modal-box input[type="text"], .rec-modal-box input[type="date"] { width:100%; padding:8px; margin-top:5px; margin-bottom:15px; border:1px solid #ccc; border-radius:4px; box-sizing:border-box; }
+        .rec-modal-box button { padding:8px 15px; border:none; border-radius:4px; font-weight:bold; cursor:pointer; }
+        .rec-btn-cancel { background:#bdc3c7; color:#333; margin-right:10px; }
+        .rec-btn-confirm { color:#fff; }
+
+        @media (max-width: 700px)  { .grupos-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <form method="POST" action="configuracion.php">
+        <div class="config-header-bar">
+            <div>
+                <a href="../../index2.php" class="back-link">&larr; Volver al Men&uacute; Principal</a>
+                <h1>Configuraci&oacute;n Global del Sistema</h1>
+            </div>
+            <div>
+                <button type="button" class="submit-btn" onclick="abrirModalConfirmacion()">
+                    Guardar Configuraci&oacute;n
+                </button>
+            </div>
+        </div>
+
+        <?= $mensaje ?>
+
+        <div class="grupos-grid">
+            <!-- Columna Izquierda: Configuración de Recargos + Catálogo Amnistía -->
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+                <!-- Card: Recargos Moratorios -->
+                <?php
+                $nombre_grupo = 'Recargos Moratorios';
+                $gdef = $grupos[$nombre_grupo];
+                $clase = 'g-recargos';
+                ?>
+                <div class="grupo-card <?= $clase ?>">
+                    <div class="grupo-header">
+                        <?= htmlspecialchars($nombre_grupo) ?>
+                    </div>
+                    <div class="grupo-desc"><?= $gdef['desc_grupo'] ?></div>
+                    <div class="grupo-body">
+                    <?php
+                    $separadores_grupo = [
+                        'Recargos Moratorios' => [
+                            'paridad_anios_max_recargo' => 'Límite Bomba (Recargos)',
+                        ],
+                    ];
+                    $seps = isset($separadores_grupo[$nombre_grupo]) ? $separadores_grupo[$nombre_grupo] : [];
+                    foreach ($gdef['claves'] as $clave):
+                        if (!isset($opciones[$clave])) continue;
+                        $opt = $opciones[$clave];
+                        $is_readonly_forced = false;
+                        $es_editable = in_array($clave, $editables) && !$is_readonly_forced;
+                        
+                        if (isset($seps[$clave])): ?>
+                        <div style="border-top:1px dashed #d0d5dd;margin:10px 0 10px;position:relative;">
+                            <span style="position:absolute;top:-8px;left:50%;transform:translateX(-50%);background:#fff;padding:0 6px;font-size:10px;color:#999;text-transform:uppercase;letter-spacing:.5px;"><?= $seps[$clave] ?></span>
+                        </div>
+                        <?php endif; ?>
+                        <?php
+                        $isGroupedTop = ($clave === 'paridad_anios_max_recargo');
+                        $isGroupedMiddle = ($clave === 'reversal_threshold_enable');
+                        $isGroupedBottom = ($clave === 'reversal_threshold');
+                        $rowClass = "cfg-row";
+                        if ($isGroupedTop) $rowClass .= " cfg-grouped-top";
+                        elseif ($isGroupedMiddle) $rowClass .= " cfg-grouped-middle";
+                        elseif ($isGroupedBottom) $rowClass .= " cfg-grouped-bottom";
+                        ?>
+                        <div class="<?= $rowClass ?>">
+                            <span class="cfg-key"><?= htmlspecialchars($clave) ?></span>
+                            <?php 
+                                $desc = $opt['descripcion'] ?: '';
+                                if ($clave !== 'recargo_porcentaje'):
+                            ?>
+                                <span class="cfg-desc"><?= $desc ?></span>
+                            <?php endif; ?>
+                            <?php if ($clave === 'reversal_threshold_enable'): ?>
+                                <div style="display: flex; align-items: center; margin-top: 6px; gap: 8px;">
+                                    <input type="hidden" name="config[<?= htmlspecialchars($clave) ?>]" value="0">
+                                    <input type="checkbox"
+                                           class="cfg-input"
+                                           style="width: 18px; height: 18px; cursor: pointer; accent-color: #c0392b;"
+                                           name="config[<?= htmlspecialchars($clave) ?>]"
+                                           value="1"
+                                           data-original="<?= htmlspecialchars($opt['valor']) ?>"
+                                           <?= $opt['valor'] == '1' ? 'checked' : '' ?>
+                                           <?= $es_editable ? '' : 'disabled' ?>>
+                                    <span style="font-size: 13px; font-weight: bold; color: <?= $opt['valor'] == '1' ? '#c0392b' : '#7f8c8d' ?>;">
+                                        <?= $opt['valor'] == '1' ? 'Límite Activo' : 'Límite Desactivado' ?>
+                                    </span>
+                                </div>
+                            <?php else: ?>
+                            <input type="text"
+                                   class="cfg-input"
+                                   name="config[<?= htmlspecialchars($clave) ?>]"
+                                   value="<?= htmlspecialchars($opt['valor']) ?>"
+                                   data-original="<?= htmlspecialchars($opt['valor']) ?>"
+                                   <?= $es_editable ? '' : 'readonly' ?>>
+                            <?php endif; ?>
+                        </div>
+                    <?php endforeach; ?>
+                    </div>
+                </div>
+            <!-- Columna Izquierda: Amnistía (Cae debajo de Recargos Moratorios en el Grid) -->
+            <div class="grupo-card g-amnistia">
+                    <div class="grupo-header" style="display:flex; justify-content:space-between; align-items:center;">
+                        <span>Control de Mora por Año (Catálogo)</span>
+                        <span style="font-size:12px; font-weight:normal; color:#7f8c8d; background:#eef2f5; border:1px solid #d0d5dd; padding:2px 8px; border-radius:12px;">
+                            <?= $activos_mora ?> activos de <?= $total_anios_amnistia ?>
+                        </span>
+                    </div>
+                    <div class="grupo-desc">Activa o congela la generación de nuevos recargos.</div>
+                    <div class="grupo-body" style="max-height: 380px; overflow-y: auto; padding-right: 5px;">
+                        <?php 
+                        $contador_amnistia = 1;
+                        foreach ($amnistia_anios as $a): 
+                            $recargo_max = max(intval($a['recargo_agua']), intval($a['recargo_drenaje']));
+                            $es_activo = ($recargo_max === 1);
+                            
+                        ?>
+                            <div class="cfg-row" style="background:#fdfdfd; padding:8px 12px; border:1px solid #d0d5dd; border-radius:4px; margin-bottom:8px;">
+                                <div style="display:flex; align-items:center; justify-content:space-between; width:100%;">
+                                    <div style="display:flex; align-items:center; gap: 10px;">
+                                        <span style="font-weight:bold; color:#7f8c8d; font-size:14px; min-width: 25px;">#<?= $contador_amnistia++ ?></span>
+                                        <div>
+                                            <span class="cfg-key" style="margin:0; font-size:14px;">Anualidad <?= $a['anio'] ?></span>
+                                            <div style="margin-top: 4px; display: flex; gap: 4px; flex-wrap: wrap;">
+                                            <?php if (intval($a['tiene_agua']) == 0): ?>
+                                                <span style="font-size: 9px; padding: 1px 4px; background: #ffd2d2; color: #a94442; border: 1px solid #ebccd1; border-radius: 3px;" title="No existe el cargo ANUALIDAD DEL AGUA en el catálogo para este año">⚠️ AGUA NO EXP.</span>
+                                            <?php else: ?>
+                                                <span style="font-size: 9px; padding: 1px 4px; background: <?= $a['recargo_agua'] == 1 ? '#d4edda' : '#ecf0f1' ?>; color: <?= $a['recargo_agua'] == 1 ? '#155724' : '#7f8c8d' ?>; border: 1px solid <?= $a['recargo_agua'] == 1 ? '#c3e6cb' : '#bdc3c7' ?>; border-radius: 3px;">💧 AGUA: <?= $a['recargo_agua'] == 1 ? 'MORA' : 'CONGELADA' ?></span>
+                                            <?php endif; ?>
+                                            
+                                            <?php if (intval($a['tiene_drenaje']) == 0): ?>
+                                                <span style="font-size: 9px; padding: 1px 4px; background: #ffd2d2; color: #a94442; border: 1px solid #ebccd1; border-radius: 3px;" title="No existe el cargo ANUALIDAD DEL DRENAJE en el catálogo para este año">⚠️ DRENAJE NO EXP.</span>
+                                            <?php else: ?>
+                                                <span style="font-size: 9px; padding: 1px 4px; background: <?= $a['recargo_drenaje'] == 1 ? '#d4edda' : '#ecf0f1' ?>; color: <?= $a['recargo_drenaje'] == 1 ? '#155724' : '#7f8c8d' ?>; border: 1px solid <?= $a['recargo_drenaje'] == 1 ? '#c3e6cb' : '#bdc3c7' ?>; border-radius: 3px;">🚽 DRENAJE: <?= $a['recargo_drenaje'] == 1 ? 'MORA' : 'CONGELADA' ?></span>
+                                            <?php endif; ?>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                        <input type="hidden" name="amnistia[<?= $a['anio'] ?>]" value="0">
+                                        <span style="font-size: 12px; font-weight: bold; color: <?= $es_activo ? '#c0392b' : '#7f8c8d' ?>;">
+                                            <?= $es_activo ? 'MORA ACTIVA' : 'CONGELADA (0)' ?>
+                                        </span>
+                                        <input type="checkbox"
+                                               class="cfg-input"
+                                               style="width: 18px; height: 18px; cursor: pointer; accent-color: #d35400; margin:0;"
+                                               name="amnistia[<?= $a['anio'] ?>]"
+                                               value="1"
+                                               data-original="<?= $recargo_max ?>"
+                                               <?= $es_activo ? 'checked' : '' ?>>
+                                    </div>
+                                </div>
+
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+
+                <!-- Card: Herramientas de Saneamiento y Condonación -->
+                <div class="grupo-card g-reversa" style="margin-top: 12px;" id="seccion-reconciliacion">
+                    <div class="grupo-header" style="background:#c0392b;">Saneamiento y Condonación de Deuda</div>
+                    <div class="grupo-desc">Mecanismos para la regularización de cuentas y aplicación de acuerdos del Comité.</div>
+                    <div class="grupo-body" style="padding: 12px;">
+                        <div style="background: #fffbe6; border: 1px solid #ffe58f; padding: 10px; border-radius: 4px; margin-bottom: 12px; font-size: 11px; color: #b05a00; line-height: 1.4;">
+                            <strong>Condonación / Reconciliación Histórica</strong><br>
+                            Permite marcar como pagada deuda histórica base (Año &le; 2025) <strong>sin ingresar dinero al Corte de Caja de hoy</strong>. Utilizar únicamente cuando el usuario presente un recibo físico legítimo de años pasados que el sistema anterior omitió, o cuando exista un acuerdo del Comité.
+                        </div>
+
+                        <!-- Buscador integrado -->
+                        <div style="background: #fdfdfd; border: 1px solid #d0d5dd; padding: 10px; border-radius: 4px; margin-bottom: 12px;">
+                            <label style="font-size: 11px; font-weight: bold; color: #444; display: block; margin-bottom: 5px;">No. de Contrato:</label>
+                            <div style="display: flex; gap: 6px;">
+                                <input type="text" id="search_numcontrato" value="<?= htmlspecialchars($numcontrato) ?>" placeholder="Ej. 760" style="padding: 6px; width: 100px; border: 1px solid #ccc; border-radius: 4px; font-size: 12px; font-weight: bold;" onkeydown="if(event.key === 'Enter') { event.preventDefault(); doSearchReconciliar(); }">
+                                <button type="button" onclick="doSearchReconciliar()" style="padding: 6px 12px; background: #2c3e50; color: #fff; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 11px;">Buscar Histórico</button>
+                            </div>
+                        </div>
+
+                        <?php if ($numcontrato !== ""): ?>
+                            <?php if (count($cargos_reconciliar) > 0): ?>
+                                <div style="overflow-x: auto; margin-top: 8px;">
+                                    <table style="width: 100%; border-collapse: collapse; font-size: 11px;">
+                                        <thead>
+                                            <tr style="background: #34495e; color: #fff;">
+                                                <th style="padding: 6px; text-align: left;">Año</th>
+                                                <th style="padding: 6px; text-align: left;">Concepto</th>
+                                                <th style="padding: 6px; text-align: right;">Monto</th>
+                                                <th style="padding: 6px; text-align: center;">Acción</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($cargos_reconciliar as $c): ?>
+                                            <tr style="border-bottom: 1px solid #eee; background: #fff;">
+                                                <td style="padding: 6px; font-weight: bold;"><?= $c['anio'] ?></td>
+                                                <td style="padding: 6px; color: #555;"><?= htmlspecialchars($c['leyenda']) ?></td>
+                                                <td style="padding: 6px; text-align: right; font-weight: bold;">$<?= number_format($c['monto'], 2) ?></td>
+                                                <td style="padding: 6px; text-align: center; display: flex; gap: 4px; justify-content: center;">
+                                                    <button type="button" style="padding: 4px 6px; font-size: 10px; background: #27ae60; color: white; border: none; border-radius: 3px; cursor: pointer; font-weight: bold;" onclick="openModalA(<?= $c['id'] ?>, '<?= addslashes($c['leyenda']) ?>')">
+                                                        📄 Recibo
+                                                    </button>
+                                                    <button type="button" style="padding: 4px 6px; font-size: 10px; background: #d35400; color: white; border: none; border-radius: 3px; cursor: pointer; font-weight: bold;" onclick="openModalB(<?= $c['id'] ?>, '<?= addslashes($c['leyenda']) ?>')">
+                                                        ❌ Condonar
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            <?php else: ?>
+                                <div style="padding: 10px; background: #d4edda; border: 1px solid #c3e6cb; border-radius: 4px; text-align: center; color: #155724; font-weight: bold; font-size: 11px; margin-top: 8px;">
+                                    ✓ Contrato <?= htmlspecialchars($numcontrato) ?> sin deuda base pendiente (&le; 2025).
+                                </div>
+                        <?php endif; ?>
+                        
+                        <!-- Enlace a Auditoría Masiva -->
+                        <div style="margin-top: 15px; padding-top: 12px; border-top: 1px dashed #d0d5dd; text-align: right;">
+                            <a href="comparativa_masiva.php" target="_blank" style="display: inline-block; padding: 6px 12px; background: #8e44ad; color: #fff; text-decoration: none; border-radius: 4px; font-weight: bold; font-size: 11px; transition: background 0.2s ease;">
+                                🔍 Auditoría Masiva de Paridad (B vs C)
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- Cierre Columna Izquierda -->
+
+            <!-- Columna Derecha: Configuración de Operación y Contratos + Guía de Referencia -->
+            <div style="display: flex; flex-direction: column; gap: 18px;">
+                <!-- Card: Operación y Contratos -->
+                <?php
+                $nombre_grupo = 'Operación y Contratos';
+                $gdef = $grupos[$nombre_grupo];
+                $clase = 'g-paridad';
+                ?>
+                <div class="grupo-card <?= $clase ?>">
+                    <div class="grupo-header">
+                        <?= htmlspecialchars($nombre_grupo) ?>
+                    </div>
+                    <div class="grupo-desc"><?= $gdef['desc_grupo'] ?></div>
+                    <div class="grupo-body">
+                    <?php
+                    $separadores_grupo = [
+                        'Operación y Contratos' => [
+                            'susptemp_mes_permitido' => 'Ciclo de Vida',
+                            'max_tomas_por_contrato' => 'Infraestructura',
+                            'estado_activo' => 'Estados de Contrato (Solo Lectura)'
+                        ],
+                    ];
+                    $seps = isset($separadores_grupo[$nombre_grupo]) ? $separadores_grupo[$nombre_grupo] : [];
+                    foreach ($gdef['claves'] as $clave):
+                        if (!isset($opciones[$clave])) continue;
+                        $opt = $opciones[$clave];
+                        $is_readonly_forced = in_array($clave, ['estado_activo','estado_susp_temporal','estado_susp_administrativa','estado_susp_definitiva']);
+                        $es_editable = in_array($clave, $editables) && !$is_readonly_forced;
+                        
+                        if (isset($seps[$clave])): ?>
+                        <div style="border-top:1px dashed #d0d5dd;margin:10px 0 10px;position:relative;">
+                            <span style="position:absolute;top:-8px;left:50%;transform:translateX(-50%);background:#fff;padding:0 6px;font-size:10px;color:#999;text-transform:uppercase;letter-spacing:.5px;"><?= $seps[$clave] ?></span>
+                        </div>
+                        <?php endif; ?>
+                        <div class="cfg-row">
+                            <span class="cfg-key"><?= htmlspecialchars($clave) ?></span>
+                            <?php 
+                                $desc = $opt['descripcion'] ?: '';
+                                if ($clave === 'susptemp_mes_permitido') {
+                                    $mes_nombre = get_mes_nombre(intval($opt['valor']));
+                                    $desc .= " <strong style='color:#2980b9;'>(Actual: $mes_nombre)</strong>";
+                                }
+                            ?>
+                            <span class="cfg-desc"><?= $desc ?></span>
+                            <input type="text"
+                                   class="cfg-input"
+                                   name="config[<?= htmlspecialchars($clave) ?>]"
+                                   value="<?= htmlspecialchars($opt['valor']) ?>"
+                                   data-original="<?= htmlspecialchars($opt['valor']) ?>"
+                                   <?= $es_editable ? '' : 'readonly' ?>>
+                        </div>
+                    <?php endforeach; ?>
+                    </div>
+                </div>
+
+            <!-- Columna Derecha: Guía de Referencia Técnica (Recargos) -->
+            <div class="grupo-card g-referencia">
+                <div class="grupo-header">Gu&iacute;a de Referencia T&eacute;cnica (Recargos)</div>
+                <div class="grupo-desc">L&oacute;gica interna del motor de recargos (Referencia para <strong>recargo_porcentaje</strong>).</div>
+                <div class="grupo-body" style="font-size: 11px; color: #444; line-height: 1.6;">
+                    <div style="background: #fffbe6; border: 1px solid #ffe58f; padding: 10px; border-radius: 4px; margin-bottom: 10px;">
+                        <strong style="color: #b05a00;">&Aacute;mbitos de aplicaci&oacute;n:</strong><br>
+                        &bull; <strong>Reactivaci&oacute;n de contratos (3&rarr;1 y 2&rarr;1):</strong> dispara sincronizaci&oacute;n de paridad, recorre cada cargo pendiente y genera los recargos mensuales faltantes.<br>
+                        &bull; <strong>Aplicaci&oacute;n manual:</strong> al insertar un cargo de cat&aacute;logo, se genera la mora acumulada desde el mes de inicio hasta hoy.<br>
+                        &bull; <strong>Rec&aacute;lculo hist&oacute;rico (paridad):</strong> procesa registros en <em>ligacargos_historico</em> (&le;2025) seg&uacute;n el l&iacute;mite de a&ntilde;os configurado.
+                    </div>
+                    
+                    <p><strong>C&aacute;lculo:</strong> monto_original &times; <strong>recargo_porcentaje</strong> (<?= $opciones['recargo_porcentaje']['valor'] ?>%) / 100 por cada mes vencido.</p>
+                    <p style="font-size: 10px; margin-top: -8px; color: #7f8c8d;">Nota: <strong>recargo_porcentaje</strong> es el &uacute;nico par&aacute;metro de tasa global; no existen montos fijos de mora por cat&aacute;logo.</p>
+                    
+                    <p><strong>Conceptos que S&Iacute; generan recargo:</strong><br>
+                    &bull; <strong>2-AGUA:</strong> Solo anualidades &rarr; genera cat. <?= $opciones['recargo_categoria_agua']['valor'] ?>-RECARGO AGUA.<br>
+                    &bull; <strong>3-DRENAJE:</strong> Solo anualidades &rarr; genera cat. <?= $opciones['recargo_categoria_drenaje']['valor'] ?>-RECARGO DRENAJE.<br>
+                    <small>El backend fuerza recargo=0 en cualquier otra categor&iacute;a.</small></p>
+
+                    <p><strong>Dos rutas de c&aacute;lculo:</strong><br>
+                    &bull; <strong>Manual:</strong> Respeta el flag <em>recargo</em> del cat&aacute;logo.<br>
+                    &bull; <strong>Paridad:</strong> Usa categor&iacute;a IN (2,3) como criterio (omite flag para deudas hist&oacute;ricas).</p>
+
+                    <p style="color: #c0392b; font-weight: bold; margin-top: 10px;">&#9888; RIESGO DE EXPLOSI&Oacute;N DE DEUDA:</p>
+                    <p>Anualidad AGUA $600 desde 2005 &rarr; 240 cargos de mora ($14,400). Se recomienda usar <strong>paridad_anios_max_recargo</strong> para limitar este retroactivo.</p>
+
+                    <p><strong>No aplica cuando:</strong><br>
+                    &bull; El contrato est&aacute; en Susp. Temporal (2) o Definitiva (4).<br>
+                    &bull; Es el a&ntilde;o de creaci&oacute;n con exenci&oacute;n activa.</p>
+                </div>
+            </div>
+            </div> <!-- Cierre Columna Derecha -->
+        </div> <!-- Cierre grupos-grid -->
+
+        <!-- La sección de Herramientas se movió a la columna izquierda debajo del Control de Mora por Año -->
+
+    </form>
+
+    <div id="cfg-nara"></div>
+
+    <script>
+    // Descripciones leídas desde config_sistema.descripcion (BD)
+    var impactos = <?= json_encode(array_map(function($o){ return $o['descripcion'] ?: ''; }, $opciones), JSON_UNESCAPED_UNICODE) ?>;
+
+    function abrirModalConfirmacion() {
+        var cambios = [];
+        var inputs  = document.querySelectorAll('form input.cfg-input:not([readonly]):not([disabled])');
+
+        inputs.forEach(function(inp) {
+            var m = inp.name.match(/^config\[(.+)\]$/);
+            var mA = inp.name.match(/^amnistia\[(.+)\]$/);
+            if (!m && !mA) return;
+            var clave = m ? m[1] : 'Mora Año ' + mA[1];
+            var valOrig = inp.getAttribute('data-original');
+            var valNuevo = inp.type === 'checkbox' ? (inp.checked ? '1' : '0') : inp.value;
+            if (valOrig !== valNuevo) {
+                cambios.push({ clave: clave, antes: valOrig, despues: valNuevo, isAmnistia: !!mA });
+            }
+        });
+
+        var bodyHtml;
+        if (cambios.length === 0) {
+            bodyHtml = '<div class="no-cambios">No se detectaron cambios respecto a los valores actuales.</div>';
+        } else {
+            bodyHtml  = '<p style="font-size:12px;color:#555;margin:0 0 10px;">Se modificar&aacute;n <strong>' + cambios.length + '</strong> par&aacute;metro(s). Revise antes de confirmar:</p>';
+            bodyHtml += '<table class="cfg-diff-table">';
+            bodyHtml += '<tr><th>Par&aacute;metro</th><th>Antes</th><th>Despu&eacute;s</th><th>Impacto</th></tr>';
+            cambios.forEach(function(c) {
+                var imp = c.isAmnistia ? 'Cambia si este año generará nuevos recargos en Host C (V2) o quedará exento.' : (impactos[c.clave] || 'Afecta el comportamiento del m&oacute;dulo correspondiente de forma inmediata.');
+                bodyHtml += '<tr>' +
+                    '<td class="col-key">' + c.clave + '</td>' +
+                    '<td class="col-ant">' + escHtml(c.antes) + '</td>' +
+                    '<td class="col-new">' + escHtml(c.despues) + '</td>' +
+                    '<td class="col-imp">' + imp + '</td>' +
+                    '</tr>';
+            });
+            bodyHtml += '</table>';
+            bodyHtml += '<p style="font-size:11px;color:#b05a00;background:#fffbe6;border:1px solid #e0cc80;border-radius:4px;padding:6px 10px;margin:0;">&#9888; Los cambios son efectivos de forma inmediata y afectan el comportamiento global del sistema.</p>';
+        }
+
+        var hayCambios = cambios.length > 0;
+        var html =
+            '<div id="cfg-overlay"></div>' +
+            '<div id="cfg-modal">' +
+                '<div class="m-header">Confirmar Cambios en Configuraci&oacute;n Global</div>' +
+                '<div class="m-body">' + bodyHtml + '</div>' +
+                '<div class="m-footer">' +
+                    '<input type="button" id="cfg-cancelar-modal" value="Cancelar">' +
+                    (hayCambios ? '<input type="button" id="cfg-confirmar-modal" value="Guardar Cambios">' : '') +
+                '</div>' +
+            '</div>';
+
+        document.getElementById('cfg-nara').innerHTML = html;
+
+        document.getElementById('cfg-cancelar-modal').addEventListener('click', cerrarModal);
+        document.getElementById('cfg-overlay').addEventListener('click', cerrarModal);
+        if (hayCambios) {
+            document.getElementById('cfg-confirmar-modal').addEventListener('click', function() {
+                cerrarModal();
+                document.querySelector('form').submit();
+            });
+        }
+    }
+
+    function cerrarModal() {
+        document.getElementById('cfg-nara').innerHTML = '';
+    }
+
+    function escHtml(s) {
+        return String(s)
+            .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+            .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+    function doSearchReconciliar() {
+        var val = document.getElementById('search_numcontrato').value.trim();
+        if (val !== "") {
+            window.location.href = 'configuracion.php?numcontrato=' + encodeURIComponent(val) + '#seccion-reconciliacion';
+        }
+    }
+
+    function openModalA(id, leyenda) {
+        document.getElementById('id_cargo_a').value = id;
+        document.getElementById('lbl-cargo-a').innerText = leyenda;
+        document.getElementById('rec-overlay').style.display = 'block';
+        document.getElementById('modal-a').style.display = 'block';
+    }
+    
+    function openModalB(id, leyenda) {
+        document.getElementById('id_cargo_b').value = id;
+        document.getElementById('lbl-cargo-b').innerText = leyenda;
+        document.getElementById('rec-overlay').style.display = 'block';
+        document.getElementById('modal-b').style.display = 'block';
+    }
+    
+    function closeRecModals() {
+        document.getElementById('rec-overlay').style.display = 'none';
+        document.getElementById('modal-a').style.display = 'none';
+        document.getElementById('modal-b').style.display = 'none';
+    }
+
+    // Auto-focus y auto-scroll si viene un contrato en el GET
+    window.addEventListener('DOMContentLoaded', (event) => {
+        var num = document.getElementById('search_numcontrato');
+        if (num && num.value.trim() !== "") {
+            num.focus();
+            num.select();
+        }
+    });
+    </script>
+
+    <!-- Modal Opción A (Reconciliación por Recibo Físico) -->
+    <div id="rec-overlay" onclick="closeRecModals()"></div>
+    <div id="modal-a" class="rec-modal-box">
+        <form method="POST" action="configuracion.php">
+            <div class="rec-modal-header" style="background:#27ae60;">Opción A: Reconciliación por Recibo Físico</div>
+            <div class="rec-modal-body">
+                <p style="font-size: 13px; color: #555; margin-top: 0; line-height: 1.4;">
+                    El usuario presentó un comprobante de pago físico válido.<br>
+                    <strong>Cargo a saldar:</strong> <span id="lbl-cargo-a" style="font-weight:bold; color:#000;"></span>
+                </p>
+                <input type="hidden" name="action" value="reconciliar_recibo">
+                <input type="hidden" name="id_cargo" id="id_cargo_a" value="">
+                
+                <label>Folio del recibo físico:</label>
+                <input type="text" name="folio_viejo" placeholder="Ej. 14500" required style="font-size:12px;">
+                
+                <label style="margin-top: 10px;">Fecha de pago IMPRESA en el recibo:</label>
+                <?php $anio_limite = intval(date('Y')) - 1; ?>
+                <input type="date" name="fpago_vieja" required max="<?= $anio_limite ?>-12-31" style="font-family: monospace; font-size:12px;">
+                <div style="font-size: 10px; color: #c0392b; font-weight: bold; margin-top:-10px; margin-bottom:10px;">
+                    Seguridad: Bloqueado el año en curso para proteger el Corte de Caja diario.
+                </div>
+                
+                <div style="background: #fdfdfd; border: 1px dashed #ccc; padding: 10px; border-radius: 4px; font-size: 11px; color: #666; margin-top: 15px; margin-bottom: 5px;">
+                    <strong>ℹ Re-impresión Disponible:</strong><br>
+                    Al concluir esta acción, el sistema registrará el pago con este folio. Podrá dirigirse al módulo de <strong>Caja &rarr; Reimprimir Recibo</strong> e ingresar el folio para entregarle una copia oficial al usuario.
+                </div>
+            </div>
+            <div class="rec-modal-footer">
+                <button type="button" class="rec-btn-cancel" onclick="closeRecModals()">Cancelar</button>
+                <button type="submit" class="rec-btn-confirm" style="background:#27ae60; padding:8px 15px; border:none; border-radius:4px; font-weight:bold; cursor:pointer;">Guardar y Aplicar</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Modal Opción B (Condonación) -->
+    <div id="modal-b" class="rec-modal-box">
+        <form method="POST" action="configuracion.php">
+            <div class="rec-modal-header" style="background:#d35400;">Opción B: Condonación por Acuerdo del Comité</div>
+            <div class="rec-modal-body">
+                <p style="font-size: 13px; color: #555; margin-top: 0; line-height: 1.4;">
+                    Se ha autorizado la eliminación de esta deuda sin recibo físico.<br>
+                    <strong>Cargo a condonar:</strong> <span id="lbl-cargo-b" style="font-weight:bold; color:#000;"></span>
+                </p>
+                <input type="hidden" name="action" value="condonar">
+                <input type="hidden" name="id_cargo" id="id_cargo_b" value="">
+                
+                <div style="background: #fdfdfd; border: 1px dashed #ccc; padding: 10px; border-radius: 4px; font-size: 11px; color: #666; margin-top: 15px;">
+                    <strong>Protocolo Transparente:</strong><br>
+                    &bull; Se le agregará el sufijo <strong>[CONDONADO]</strong> a la leyenda para auditoría futura.<br>
+                    &bull; Se asignará automáticamente un Folio Virtual Serie 99,000.<br>
+                    &bull; La fecha contable se fijará al 31 de Dic del año correspondiente.
+                </div>
+            </div>
+            <div class="rec-modal-footer">
+                <button type="button" class="rec-btn-cancel" onclick="closeRecModals()">Cancelar</button>
+                <button type="submit" class="rec-btn-confirm" style="background:#d35400; padding:8px 15px; border:none; border-radius:4px; font-weight:bold; cursor:pointer;">Autorizar Condonación</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+
+```
+
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Selection**
+
+I'm focusing intently on tool selection, prioritizing specific utilities over generic ones. I am avoiding `cat` for file manipulation in favor of more specialized tools. Currently, I'm listing related tools before committing to any action, ensuring the most appropriate option is chosen.
+
+
+**Identifying Syntax Error Source**
+
+I've identified two tools to try, `replace_file_content` and `multi_replace_file_content` and am now focused on locating the syntax error in `configuracion.php`. Line 757 and the end look normal HTML, so I've shifted to examining the code around line 450, specifically within the HTML for the "Herramientas de Saneamiento y Condonación" card and the logic related to `$numcontrato` and `$cargos_reconciliar`, which could be the location of the error.
+
+
+**Confirming Nested Conditionals**
+
+I've pinpointed the missing `endif;` statement. The analysis of the code block confirms the need for an additional closing conditional. The initial error was a mismatch between opening and closing tags. I now have identified the location of the syntax error and its cause within the PHP code.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 3.567959742s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:28 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<bash_command_reminder> CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless  absolutely needed.  (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought\nCRITICAL INSTRUCTION 1: ...\nCRITICAL INSTRUCTION 2: ...'. </bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+## User Request
+
+Analiza las phps modificadas los ultimos 5 dias, para identificar si traen algun issue/gap similiar a este, listalos.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `configuracion.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:29 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `command_status`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Process Monitor
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:29 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:29 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:29 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:29 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `command_status`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Process Monitor
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:29 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:29 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:30 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:30 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `command_status`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Process Monitor
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:30 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:30 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:30 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:30 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:30 pm
+
+---
+
+<details>
+<summary>Conversation History</summary>
+
+# Conversation History
+Here are the conversation IDs, titles, and summaries of your most recent 9 conversations, in reverse chronological order:
+
+<conversation_summaries>
+## Conversation a49787d4-8120-4c9b-b54f-74e42f167a61: Finalizing Host C Patch Fix
+- Created: 2026-06-24T20:19:39Z
+- Last modified: 2026-06-25T00:15:25Z
+
+### USER Objective:
+Auditing Mora Parity Reconciliation
+
+USER Objective: Execute a forensic audit and parity reconciliation of mora debt between Host B and Host C to establish Host C as the Single Source of Truth.
+
+Goals:
+1. Finalize the forensic audit and parity reconciliation of 153 high-mora contracts by comparing legacy Host B records with the optimized V2 JIT engine on Host C.
+2. Standardize JIT surcharge configurations (27-year base, 10-year window) to eliminate runaway interest generation.
+3. Deploy the "Monkey Testing" comparison interface to identify and resolve discrepancies in real-time.
+4. Centralize all auditing and sanitation tools into the configuration management dashboard while maintaining strict data parity.
+5. Apply security-first descriptions and logic updates to core parameters like `reversal_threshold` to prevent exponential debt growth.
+
+## Conversation cd3bbd4f-8745-42bb-bd6f-2c4e8759f627: Installing Google Antigravity 2.x
+- Created: 2026-06-24T23:41:57Z
+- Last modified: 2026-06-24T23:58:19Z
+
+### USER Objective:
+Installing Google Antigravity 2.x
+
+USER Objective: Successfully install and configure the Google Antigravity 2.0 application and its IDE on an Ubuntu 24.x virtual machine.
+
+Goals:
+1. Purge legacy or failed installations to ensure a clean deployment environment.
+2. Install Antigravity and Antigravity IDE into standardized directories (/opt/Antigravity-x64 and /opt/AntigravityIDE).
+3. Configure desktop shortcuts for seamless application access, ensuring they handle system-specific security and sandbox restrictions.
+4. Apply system-level optimizations (kernel and inotify adjustments) to guarantee stable performance for the IDE and application runtime.
+
+## Conversation e0cf52cb-6d53-4322-8e81-b011a534320b: Reconciling Historical Debt Parity
+- Created: 2026-06-23T16:40:38Z
+- Last modified: 2026-06-24T20:14:59Z
+
+### USER Objective:
+Stabilizing Host C Production Infrastructure
+
+USER Objective: Finalize the infrastructure stabilization of Host C as the definitive Single Source of Truth for the water management system.
+
+Goals:
+1. Finalize the forensic audit and cleanup of obsolete legacy assets and transition temporary analysis files into documented, production-ready operational tools.
+2. Implement robust data integrity practices by creating independent DDL, DML, and DCL backup routines for both legacy Host B and production Host C environments.
+3. Establish a standard recovery protocol compatible with the existing MariaDB 10.x engine to ensure production resilience and data portability.
+4. Integrate newly identified "orphan" premium audit tools into the administrative interface to enhance operational oversight.
+
+## Conversation 1aaefe04-7a64-42a8-9af9-7259738928a3: Auditing Recent Repository Changes
+- Created: 2026-06-24T18:30:50Z
+- Last modified: 2026-06-24T18:31:19Z
+
+### USER Objective:
+Auditing Recent Repository Changes
+
+The user's objective is to identify all files modified within the `agua` repository over the last 7 days to support the ongoing audit and reconciliation project.
+
+Goals:
+1. Extract and present a comprehensive list of all modified files from the git history for the past week.
+2. Provide this visibility to ensure tracking of recent structural, configuration, and documentation updates across the production Host C environment.
+
+## Conversation 95cd3afb-e633-4867-ab82-e080dc81ed68: Verifying Aguav2 Mora Engine
+- Created: 2026-06-20T16:44:18Z
+- Last modified: 2026-06-23T07:05:02Z
+
+### USER Objective:
+Reconciling Historical Surcharge Engine
+
+Objective: Eliminate the parity gap and stabilize the JIT surcharge calculation engine on Host C to create a reliable, audit-ready financial system.
+
+Goals:
+1. Identify and remove hardcoded date thresholds (e.g., the 2006 limit) currently suppressing historical debt generation.
+2. Synchronize the Host C JIT motor with the production database by forcing correct execution flows in `contratos.php` and `cargos.php`.
+3. Stabilize the financial calculation output by configuring the "Mora Rotativa" limits (10-year window/Bomba threshold) to prevent runaway debt totals.
+4. Perform final validation to ensure that all 27 years of historical records are correctly processed and reflected in the user interface without system timeouts or data corruption.
+
+## Conversation 41b07588-7f6a-4d9e-aae7-f48df7d15e55: Restoring Historical Surcharge Plan
+- Created: 2026-06-19T17:34:28Z
+- Last modified: 2026-06-20T05:14:37Z
+
+### USER Objective:
+Finalizing Mora Engine Audit
+
+**USER Objective:**
+Finalize the architectural reconciliation and audit readiness of the 20-year rotational mora engine on Host C to ensure a Single Source of Truth.
+
+**Goals:**
+1. Execute the final normalization and structural integrity fixes across the Host C database environment.
+2. Finalize documentation (`PLAN_MORA_ROTATIVA_20_ANIOS.md` and `VERIFICACION_MANUAL_MORA_20_ANIOS.md`) as authoritative guides for production deployment.
+3. Quantify financial gaps and reconcile differences between legacy Host B and Host C to prove accuracy in historical surcharge calculations and debt base validity.
+4. Align administrative audit tools (`comparativa_mora.php`) to the new V2 JIT motor logic to support financial reporting and decision-making by the water committee.
+
+## Conversation 68c13890-5673-4043-8ab3-ef3fd55a487d: Expanding Historical Mora Calculations
+- Created: 2026-06-19T01:43:46Z
+- Last modified: 2026-06-19T06:57:46Z
+
+### USER Objective:
+Optimizing Historical Surcharge Engine
+
+USER Objective:
+Refactor the JIT surcharge engine to handle multi-decadal debt calculations (2005–2026) using a 10-year rotational window and Batch Insert/Auto-Heal architecture without destructive database deletions.
+
+Goals:
+1. Implement a Batch Insert pattern in `calcula_recargos()` to optimize performance and prevent timeouts.
+2. Refactor the JIT motor to use a rolling 10-year window that dynamically omits older records from active calculation without deleting them from the database.
+3. Integrate an "Acordeón Visual" UI strategy in `adeudo_tabla.php` to allow flexible, fraccionado payment of historical surcharges while maintaining a clean administrative interface.
+4. Update `configuracion.php` to provide dynamic synchronization between the mora catalog and the 10-year threshold.
+5. Investigate and resolve the parity discrepancy between Host B and Host C regarding surcharge counts (e.g., Contract 161) by auditing the view definitions and JIT
+<truncated 22 bytes>
+
+## Conversation 62cf2a4a-a2b1-4ede-9f66-88c4e6b9937b: Mora aguav2 - todos los años.
+Realiza prueba de conectividad via mcp y mysql client.
+Insumos: Usa G
+<truncated 1031 bytes>
+- Created: 2026-06-19T01:36:53Z
+- Last modified: 2026-06-19T01:40:28Z
+
+## Conversation 8a2778b8-300b-46e8-9020-16cf387f47c8: Financial Audit Reconciliation Tool
+- Created: 2026-06-18T01:04:14Z
+- Last modified: 2026-06-18T20:12:13Z
+
+### USER Objective:
+Auditing Surcharge Logic Parity
+
+USER Objective:
+Finalize the forensic audit and validation of the V2 motor's surcharge logic to ensure data parity between the legacy Host B and the current Host C environment.
+
+Goals:
+1. Verify the accuracy of historical surcharge generation against legacy benchmarks to confirm Host C acts as a true, audit-ready Single Source of Truth.
+2. Validate the behavior of the "Just-in-Time" surcharge calculation engine regarding contract state transitions and configuration adjustments.
+3. Consolidate technical findings and business rules into the official project documentation (`matriz_mora_host_b_vs_c.md`) to inform the finance committee of systemic protections and automated safeguards.
+4. Maintain strict "Poka-Yoke" architectural integrity, ensuring no unauthorized service charges generate interest, while preserving the system's ability to handle contract re-activation scenarios securely.
+
+</conversation_summaries>
+
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:30 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `command_status`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Process Monitor
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:30 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:30 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:31 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:31 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:31 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:31 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:31 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:31 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:31 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:31 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:31 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Reviewing Outstanding Contract Sync**
+
+I'm digging the `includes/negocio/contratos.php` diff, especially the call to `_sincronizaDeudaPendienteContrato`. It's pretty clever to use that to wake up the JIT engine via `calcula_recargos` on each pending charge when a contract loads.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `function _sincronizaDeudaPendienteContrato`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.407793323s
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:31 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `contratos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L853-1652)</summary>
+
+**Path:** `Unknown file`
+
+```
+            // 4. Limpiar tabla histórica (Esquema V2)
+            $y->q("UPDATE ligacargos_historico SET estado = -1, fcobro = NOW() WHERE numcontrato = '$id' AND estado = 0");
+        }
+        return; // Terminar aquí para SDF
+    }
+
+    // --- LÓGICA DE PARIDAD NORMAL (Estados 1, 2, 3) ---
+
+    $cfg_par = cargaConfig($y);
+    $max_anios_par = intval(obtenerValorSeguro($cfg_par, 'paridad_anios_max_recargo', 0));
+    $anio_limite   = ($max_anios_par > 0) ? ($anio - $max_anios_par) : 0;
+
+    // Conteo físico activo
+	$r_a = $y->q("SELECT COUNT(*) FROM contrato_toma WHERE numcontrato='$id' AND tiene_agua=1 AND estado_agua=1");
+	list($n_agua) = $y->fetch_array($r_a);
+	$r_d = $y->q("SELECT COUNT(*) FROM contrato_toma WHERE numcontrato='$id' AND tiene_drenaje=1 AND estado_drenaje=1");
+	list($n_drenaje) = $y->fetch_array($r_d);
+
+	$acciones_paridad = array();
+
+	// Sincronizar AGUA (categoria=2)
+	$leyenda_a = "ANUALIDAD DEL AGUA $anio";
+	if ($n_agua > 0) {
+	    // POKA-YOKE: Solo restaurar si NO existe ya una activa o pagada (evita duplicados si el usuario agregó manuales y canceló el exceso)
+	    $res_act = $y->q("SELECT id_cargo FROM vw_ligacargos_all WHERE numcontrato='$id' AND leyenda='$leyenda_a' AND categoria=2 AND estado >= 0 LIMIT 1");
+	    if ($y->num_rows($res_act) == 0) {
+	        $y->q("UPDATE ligacargos SET estado = 0 WHERE numcontrato='$id' AND leyenda='$leyenda_a' AND categoria=2 AND estado = -1 LIMIT 1");
+	        $af_ra1 = $y->affected_rows();
+	        $y->q("UPDATE ligacargos_historico SET estado = 0 WHERE numcontrato='$id' AND leyenda='$leyenda_a' AND categoria=2 AND estado = -1 LIMIT 1");
+	        $af_ra2 = $y->affected_rows();
+	        if ($af_ra1 > 0 || $af_ra2 > 0) {
+	            $acciones_paridad[] = "Restaurada: $leyenda_a";
+	        }
+	    }
+	} else {
+	    $y->q("UPDATE ligacargos SET estado = -1 WHERE numcontrato='$id' AND leyenda='$leyenda_a' AND categoria=2 AND estado = 0");
+	    $af_a1 = $y->affected_rows();
+	    $y->q("UPDATE ligacargos_historico SET estado = -1 WHERE numcontrato='$id' AND leyenda='$leyenda_a' AND categoria=2 AND estado = 0");
+	    $af_a2 = $y->affected_rows();
+	    if ($af_a1 > 0 || $af_a2 > 0) {
+	        $acciones_paridad[] = "Cancelada (sin toma activa): $leyenda_a";
+	    } else {
+	        $acciones_paridad[] = "Sin cambio (ya cancelada): $leyenda_a";
+	    }
+	}
+
+	// Sincronizar DRENAJE (categoria=3)
+	$leyenda_d = "ANUALIDAD DEL DRENAJE $anio";
+	if ($n_drenaje > 0) {
+	    // POKA-YOKE: Solo restaurar si NO existe ya una activa o pagada
+	    $res_act_d = $y->q("SELECT id_cargo FROM vw_ligacargos_all WHERE numcontrato='$id' AND leyenda='$leyenda_d' AND categoria=3 AND estado >= 0 LIMIT 1");
+	    if ($y->num_rows($res_act_d) == 0) {
+	        $y->q("UPDATE ligacargos SET estado = 0 WHERE numcontrato='$id' AND leyenda='$leyenda_d' AND categoria=3 AND estado = -1 LIMIT 1");
+	        $af_d1 = $y->affected_rows();
+	        $y->q("UPDATE ligacargos_historico SET estado = 0 WHERE numcontrato='$id' AND leyenda='$leyenda_d' AND categoria=3 AND estado = -1 LIMIT 1");
+	        $af_d2 = $y->affected_rows();
+	        if ($af_d1 > 0 || $af_d2 > 0) {
+	            $acciones_paridad[] = "Restaurada: $leyenda_d";
+	        }
+	    }
+	} else {
+	    $y->q("UPDATE ligacargos SET estado = -1 WHERE numcontrato='$id' AND leyenda='$leyenda_d' AND categoria=3 AND estado = 0");
+	    $af_d1 = $y->affected_rows();
+	    $y->q("UPDATE ligacargos_historico SET estado = -1 WHERE numcontrato='$id' AND leyenda='$leyenda_d' AND categoria=3 AND estado = 0");
+	    $af_d2 = $y->affected_rows();
+	    if ($af_d1 > 0 || $af_d2 > 0) {
+	        $acciones_paridad[] = "Cancelada (sin toma activa): $leyenda_d";
+	    } else {
+	        $acciones_paridad[] = "Sin cambio (ya cancelada): $leyenda_d";
+	    }
+	}
+
+	// Registrar paridad en cambios si hubo modificaciones
+	if (count($acciones_paridad) > 0) {
+	    // Verificar si el contrato tiene deuda histórica para determinar si el guard aplica realmente
+	    $r_hist = $y->q("SELECT COUNT(*) FROM ligacargos_historico WHERE numcontrato='$id' AND estado=0");
+	    list($n_hist) = $y->fetch_array($r_hist);
+	    if ($max_anios_par > 0 && $n_hist > 0) {
+	        $limite_txt = "Recargos bloqueados para anio < $anio_limite (paridad_anios_max_recargo=$max_anios_par)";
+	    } elseif ($max_anios_par > 0) {
+	        $limite_txt = "Guard activo (paridad_anios_max_recargo=$max_anios_par) — sin deuda historica que limitar";
+	    } else {
+	        $limite_txt = "Sin limite de antiguedad de recargos";
+	    }
+	    // Conteo físico instalado (tiene_agua/drenaje=1) vs activo (estado_agua/drenaje=1)
+	    $r_ai = $y->q("SELECT COUNT(*) FROM contrato_toma WHERE numcontrato='$id' AND tiene_agua=1");
+	    list($n_agua_inst) = $y->fetch_array($r_ai);
+	    $r_di = $y->q("SELECT COUNT(*) FROM contrato_toma WHERE numcontrato='$id' AND tiene_drenaje=1");
+	    list($n_drenaje_inst) = $y->fetch_array($r_di);
+
+	    $agua_txt    = ($n_agua_inst > 0 && $n_agua == 0)    ? "$n_agua (instalada pero corte fisico)" : "$n_agua";
+	    $drenaje_txt = ($n_drenaje_inst > 0 && $n_drenaje == 0) ? "$n_drenaje (instalado pero corte fisico)" : "$n_drenaje";
+
+	    $acciones_esc = $y->real_escape_string(implode(' | ', $acciones_paridad));
+	    $limite_esc   = $y->real_escape_string($limite_txt);
+	    $y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato)
+	           VALUES(NOW(), 'Paridad Anualidades (Motor C04)',
+	           '$acciones_esc',
+	           'Tomas agua: $agua_txt | Tomas drenaje: $drenaje_txt | $limite_esc',
+	           '$id')");
+	}
+
+	// Recalibrar montos de cargos PENDIENTES basados en el nuevo número de tomas y tipo
+	_sincronizaDeudaPendienteContrato($id, $y);
+}
+
+function _sincronizaDeudaPendienteContrato($numcontrato, $y)
+{
+	// Snapshot PRE para auditoría
+	$res_pre = $y->q("SELECT COUNT(*) AS n, IFNULL(SUM(monto),0) AS total FROM vw_ligacargos_pendientes WHERE numcontrato = '$numcontrato'");
+	$pre = $y->fetch_array($res_pre);
+	$n_pre   = intval($pre['n']);
+	$tot_pre = number_format(floatval($pre['total']), 2);
+
+	$res_cto = $y->q("SELECT metros, MONTH(fecha) as mescontrato FROM contrato WHERE numcontrato='$numcontrato'");
+	list($metros_cto, $mescontrato) = $y->fetch_array($res_cto);
+
+	// Configuración necesaria para recargos
+	$res_cfg = $y->q("SELECT clave, valor FROM config_sistema");
+	$cfg = array();
+	while (list($k, $v) = $y->fetch_array($res_cfg)) { $cfg[$k] = $v; }
+
+	// Sincronizar montos de cargos PENDIENTES (estado = 0)
+	// LÓGICA HÍBRIDA: El monto base es NO-RETROACTIVO (protege el pasado).
+	// Los recargos son RETROACTIVOS (mantienen la mora al día para todos los años).
+	$anio_actual = date('Y');
+	$res_pend = $y->q("SELECT id_cargo, leyenda, categoria, repetido, anio, monto FROM vw_ligacargos_pendientes WHERE numcontrato='$numcontrato' AND categoria IN (2,3)");
+	
+	$actualizados = 0;
+	$mora_actualizada = 0;
+	while ($cp = $y->fetch_array($res_pend)) {
+		$id_lc = $cp['id_cargo'];
+		$monto_viva = floatval($cp['monto']);
+		$leyenda = $cp['leyenda'];
+		$cat = $cp['categoria'];
+		$rep = $cp['repetido'];
+		$anio_cargo = $cp['anio'];
+		
+		$res_cat = $y->q("SELECT monto, monto_comercial, metros, recargo FROM cargos WHERE nombre='$leyenda' AND categoria=$cat LIMIT 1");
+		if ($y->num_rows($res_cat) > 0) {
+			list($monto_n, $monto_c, $aplica_metros, $val_rec) = $y->fetch_array($res_cat);
+			
+			$monto_total = 0;
+			$res_tomas = $y->q("SELECT tipo FROM contrato_toma WHERE numcontrato='$numcontrato' AND " . ($cat == 2 ? 'tiene_agua=1 AND estado_agua=1' : 'tiene_drenaje=1 AND estado_drenaje=1'));
+			while ($t = $y->fetch_array($res_tomas)) {
+				$es_com = ($t['tipo'] == 1);
+				$m_base = ($es_com && $monto_c > 0) ? $monto_c : ($es_com ? $monto_n * 2 : $monto_n);
+				$monto_total += $m_base;
+			}
+			
+			
+			// REGLA DE ORO: Solo actualizar el monto base si es del año actual o futuro
+			if ($monto_total > 0 && $anio_cargo >= $anio_actual) {
+				$y->q("UPDATE ligacargos SET monto=$monto_total WHERE id=$id_lc");
+				$y->q("UPDATE ligacargos_historico SET monto=$monto_total WHERE id=$id_lc");
+				$monto_viva = $monto_total; // El recargo se basará en el nuevo monto
+				$actualizados++;
+			}
+			
+			// SIEMPRE recalcular recargos asociados para mantener la deuda viva (Regla F05)
+			calcula_recargos($numcontrato, $leyenda, $monto_viva, $val_rec, $anio_cargo, $cat, $rep, $y, $mescontrato, $cfg);
+			$mora_actualizada++;
+		}
+	}
+	
+	if ($mora_actualizada > 0) {
+		// Snapshot POST para auditoría
+		$res_post = $y->q("SELECT COUNT(*) AS n, IFNULL(SUM(monto),0) AS total FROM vw_ligacargos_pendientes WHERE numcontrato = '$numcontrato'");
+		$post = $y->fetch_array($res_post);
+		$n_post  = intval($post['n']);
+		$tot_post = number_format(floatval($post['total']), 2);
+		$delta_m = floatval($post['total']) - floatval($pre['total']);
+		$ajuste_txt = ($delta_m >= 0) ? "+$" . number_format($delta_m, 2) : "-$" . number_format(abs($delta_m), 2);
+
+		$antes_txt   = "Adeudos: $n_pre | Deuda: \$$tot_pre";
+		$despues_txt = "Adeudos: $n_post | Deuda: \$$tot_post | Ajuste Base: $ajuste_txt | $actualizados base recalibrados, $mora_actualizada moras procesadas por motor";
+		
+		$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato) 
+		       VALUES(NOW(), 'Calibracion automatica de Deudas (Lógica Híbrida)', 
+		       '$antes_txt', '$despues_txt', '$numcontrato')");
+	}
+}
+
+function cambiaEstadoConexion($numcontrato, $num_toma, $servicio, $nuevo_estado)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+	$cfg = cargaConfig($y);
+
+	// Validar contrato ACTIVO
+	$r = $y->q("SELECT estado FROM contrato WHERE numcontrato='$numcontrato'");
+	list($est) = $y->fetch_array($r);
+	$estado_activo = intval(obtenerValorSeguro($cfg, 'estado_activo', 1));
+	if ($est != $estado_activo) {
+		return "<b>Error:</b> Solo se puede cambiar la conexi&oacute;n en contratos ACTIVOS.";
+	}
+
+	$campo = ($servicio == 'agua') ? 'estado_agua' : 'estado_drenaje';
+
+	// ═══ Snapshot financiero PRE-paridad ═══
+	$res_pre = $y->q("SELECT COUNT(*) AS n, IFNULL(SUM(monto),0) AS total FROM vw_ligacargos_pendientes WHERE numcontrato = '$numcontrato'");
+	$pre = $y->fetch_array($res_pre);
+	$n_pre   = intval($pre['n']);
+	$tot_pre = number_format(floatval($pre['total']), 2);
+
+	$y->q("UPDATE contrato_toma SET $campo=$nuevo_estado WHERE numcontrato='$numcontrato' AND num_toma=$num_toma");
+
+    $desc_ev  = ($nuevo_estado == 0) ? 'desconectado' : 'conectado';
+    $antes_ev = ($nuevo_estado == 0) ? 'conectado' : 'desconectado';
+    $desc_ev_esc  = $y->real_escape_string($desc_ev);
+    $antes_ev_esc = $y->real_escape_string($antes_ev);
+    $servicio_esc = $y->real_escape_string($servicio);
+
+	// Sincronizar campos legacy y Paridad Financiera
+	$r_a = $y->q("SELECT COUNT(*) FROM contrato_toma WHERE numcontrato='$numcontrato' AND tiene_agua=1 AND estado_agua=1");
+	list($tot_a) = $y->fetch_array($r_a);
+	$r_d = $y->q("SELECT COUNT(*) FROM contrato_toma WHERE numcontrato='$numcontrato' AND tiene_drenaje=1 AND estado_drenaje=1");
+	list($tot_d) = $y->fetch_array($r_d);
+	$y->q("UPDATE contrato SET agua=$tot_a, drenaje=$tot_d WHERE numcontrato='$numcontrato'");
+	
+	_sincronizaParidadFinanciera($numcontrato, $y);
+
+	// ═══ Snapshot financiero POST-paridad + delta ═══
+	$res_post = $y->q("SELECT COUNT(*) AS n, IFNULL(SUM(monto),0) AS total FROM vw_ligacargos_pendientes WHERE numcontrato = '$numcontrato'");
+	$post = $y->fetch_array($res_post);
+	$n_post  = intval($post['n']);
+	$tot_post = number_format(floatval($post['total']), 2);
+	$delta_n  = $n_post - $n_pre;
+	$delta_m  = floatval($post['total']) - floatval($pre['total']);
+	$delta_str = '';
+	if ($delta_n > 0) {
+		$delta_str = " | Recalibración: +$delta_n cargos (\$" . number_format($delta_m, 2) . ")";
+	} elseif ($delta_n < 0) {
+		$delta_str = " | Depuración: " . $delta_n . " cargos (-\$" . number_format(abs($delta_m), 2) . ")";
+	}
+	$resumen_pre_esc  = $y->real_escape_string("Adeudos: $n_pre | Deuda: \$$tot_pre");
+	$resumen_post_esc = $y->real_escape_string("Adeudos: $n_post | Deuda: \$$tot_post" . $delta_str);
+	$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato) VALUES(NOW(),'Cambio Rapido de Conexion $servicio_esc toma $num_toma','$antes_ev_esc. $resumen_pre_esc','$desc_ev_esc. $resumen_post_esc','$numcontrato')");
+
+	return "<script>cargaDatosContrato('$numcontrato');</script>";
+}
+
+function guardaNuevoContrato($id, $usr, $domicilio, $tipo, $agua, $drenaje, $masdatos, $observaciones, $metros, $tomas_data, $num_tomas)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+	$cfg    = cargaConfig($y);
+	$exento = intval(obtenerValorSeguro($cfg, 'nuevo_contrato_exento_default', 1));
+
+	// Sanitización estricta Poka-yoke para inputs de texto
+	$id = trim(strip_tags((string)$id));
+	$usr = trim(strip_tags((string)$usr));
+	$domicilio = _normalizaDomicilio(strip_tags((string)$domicilio));
+	$masdatos = trim(strip_tags((string)$masdatos));
+	$observaciones = trim(strip_tags((string)$observaciones));
+	$metros = intval($metros);
+
+	$num_t = intval($num_tomas);
+	if ($num_t < 1) $num_t = 1;
+
+	// Validar restricción: máx 2 tomas por usuario mismo domicilio
+	$dom_sql_c = _normalizaDomicilioSQL('c.domicilio');
+	$dom_esc   = $y->real_escape_string($domicilio);
+	$dom_sql_v = _normalizaDomicilioSQL("'$dom_esc'");
+	$res_count = $y->q("SELECT COUNT(ct.id) FROM contrato c JOIN contrato_toma ct ON c.numcontrato = ct.numcontrato WHERE c.numusuario='$usr' AND $dom_sql_c = $dom_sql_v AND c.estado != 4");
+	list($tomas_existentes) = $y->fetch_array($res_count);
+
+	if ($tomas_existentes + $num_t > 2) {
+		return "<script>alert('Restriccion de Tomas: El usuario ya cuenta con $tomas_existentes toma(s) en el domicilio indicado. Solo se permiten hasta 2 tomas por usuario en el mismo domicilio.'); window.history.back();</script>";
+	}
+
+	// Validar restricción: máx domicilios distintos por usuario (configurable)
+	$max_dom = intval(obtenerValorSeguro($cfg, 'max_domicilios_por_contrato', 3));
+	$res_doms = $y->q("SELECT COUNT(DISTINCT $dom_sql_c) FROM contrato c WHERE c.numusuario='$usr' AND c.estado != 4");
+	list($doms_actuales) = $y->fetch_array($res_doms);
+	// Verificar si el domicilio nuevo es realmente distinto a los existentes
+	$res_dom_existe = $y->q("SELECT COUNT(*) FROM contrato c WHERE c.numusuario='$usr' AND $dom_sql_c = $dom_sql_v AND c.estado != 4");
+	list($dom_ya_existe) = $y->fetch_array($res_dom_existe);
+	if (!$dom_ya_existe && $doms_actuales >= $max_dom) {
+		return "<script>alert('Restriccion de Domicilios: El usuario ya tiene $doms_actuales domicilio(s) registrado(s). El maximo permitido es $max_dom. Si se trata de un domicilio diferente, contacte al administrador.'); window.history.back();</script>";
+	}
+
+	$q = "INSERT INTO contrato (numcontrato, numusuario, numtoma, domicilio, masdatos, tipo, agua, drenaje, observaciones, estado, numcontratoresp, numcontratoletras, fecha, metros, exento_recargo_primer_anio) VALUES('$id', '$usr', 0, \"$domicilio\", \"$masdatos\", $tipo, $agua, $drenaje, \"$observaciones\", 1, '', '', NOW(), $metros, $exento)";
+
+	if ($y->q($q)) {
+		// Crear tomas en contrato_toma
+		$num_t = intval($num_tomas);
+		if ($num_t < 1) $num_t = 1;
+		$max_t = intval(obtenerValorSeguro($cfg, 'max_tomas_por_contrato', 2));
+		if ($num_t > $max_t) $num_t = $max_t;
+
+		// Tracking de tomas para auditoría
+		$tomas_desc = array();
+		for ($n = 1; $n <= $num_t; $n++) {
+			$td        = isset($tomas_data[$n]) ? $tomas_data[$n] : array();
+			$tipo_t    = intval(obtenerValorSeguro($td, 'tipo', 0));
+			$t_agua    = intval(obtenerValorSeguro($td, 'tiene_agua', 0));
+			$t_drenaje = intval(obtenerValorSeguro($td, 'tiene_drenaje', 0));
+			$e_agua    = ($t_agua    ? 1 : 0);
+			$e_drenaje = ($t_drenaje ? 1 : 0);
+			$y->q("INSERT INTO contrato_toma (numcontrato,num_toma,tipo,tiene_agua,tiene_drenaje,estado_agua,estado_drenaje,fecha_alta) VALUES('$id',$n,$tipo_t,$t_agua,$t_drenaje,$e_agua,$e_drenaje,NOW())");
+			
+			$tomas_desc[] = "T$n: [" . ($tipo_t == 1 ? 'COM' : 'NOR') . "] " . ($t_agua ? 'AGUA' : '') . ($t_agua && $t_drenaje ? '+' : '') . ($t_drenaje ? 'DRE' : '');
+		}
+
+		// Sincronizar agua/drenaje/tipo en contrato (basado en tomas creadas)
+		$r_a = $y->q("SELECT COUNT(*) FROM contrato_toma WHERE numcontrato='$id' AND tiene_agua=1");
+		list($ta) = $y->fetch_array($r_a);
+		$r_d = $y->q("SELECT COUNT(*) FROM contrato_toma WHERE numcontrato='$id' AND tiene_drenaje=1");
+		list($td2) = $y->fetch_array($r_d);
+		$r_t = $y->q("SELECT MAX(tipo) FROM contrato_toma WHERE numcontrato='$id'");
+		list($tp) = $y->fetch_array($r_t);
+		$y->q("UPDATE contrato SET agua=$ta, drenaje=$td2, tipo=" . intval($tp) . " WHERE numcontrato='$id'");
+
+        // Establecer paridad inicial (Generar cargos según tomas dadas de alta)
+        generaCargosAutomaticos($id, $y);
+        _sincronizaParidadFinanciera($id, $y);
+
+		// ═══ Snapshot financiero POST-creación ═══
+		$res_post = $y->q("SELECT COUNT(*) AS n, IFNULL(SUM(monto),0) AS total FROM vw_ligacargos_pendientes WHERE numcontrato = '$id'");
+		$post = $y->fetch_array($res_post);
+		$n_post  = intval($post['n']);
+		$tot_post = number_format(floatval($post['total']), 2);
+
+		// Auditoría de Creación Detallada
+		$tomas_str = implode(' | ', $tomas_desc);
+		$resumen_fin = "Adeudos: $n_post | Deuda: \$$tot_post";
+		$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato) 
+		       VALUES(NOW(), 'Registro de Nuevo Contrato', 'NUEVO', 'Usuario: $usr | Domicilio: $domicilio | $tomas_str | $resumen_fin', '$id')");
+
+		$salida = "<script>cargaDatosContrato('$id');</script>";
+	} else {
+		$salida = $templates->render('sistema/mensaje', array(
+			'titulo'  => 'Cambios sin efecto',
+			'mensaje' => 'No ha sido posible agregar este contrato a la base de datos.'
+		));
+	}
+	return $salida;
+}
+
+function validaTomasSync($usr, $domicilio, $num_tomas, $id = null) {
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	if ($id !== null && $id != '') {
+		// Validar estado del contrato
+		$res_edo = $y->q("SELECT estado FROM contrato WHERE numcontrato='$id'");
+		if ($y->num_rows($res_edo) > 0) {
+		    list($c_estado) = $y->fetch_array($res_edo);
+		    $res_tomas_actuales = $y->q("SELECT COUNT(id) FROM contrato_toma WHERE numcontrato='$id'");
+		    list($tomas_actuales) = $y->fetch_array($res_tomas_actuales);
+		    
+		    if ($num_tomas > $tomas_actuales && !in_array($c_estado, [1, 2])) {
+			    return "Restriccion: Solo se permite agregar nuevas tomas a contratos en estado Activo o Suspension Temporal.";
+		    }
+		}
+		$cond_id = " AND c.numcontrato != '$id' ";
+	} else {
+		$cond_id = "";
+	}
+
+	$dom_esc_vs  = $y->real_escape_string(_normalizaDomicilio($domicilio));
+	$dom_sql_cvs = _normalizaDomicilioSQL('c.domicilio');
+	$dom_sql_vvs = _normalizaDomicilioSQL("'$dom_esc_vs'");
+
+	$res_count = $y->q("SELECT COUNT(ct.id) FROM contrato c JOIN contrato_toma ct ON c.numcontrato = ct.numcontrato WHERE c.numusuario='$usr' AND $dom_sql_cvs = $dom_sql_vvs AND c.estado != 4 " . $cond_id);
+	list($tomas_otras) = $y->fetch_array($res_count);
+
+	if ($tomas_otras + intval($num_tomas) > 2) {
+		return "El usuario ya cuenta con $tomas_otras toma(s) en otros contratos para el domicilio indicado. Solo se permiten hasta 2 tomas por usuario en el mismo domicilio, previendo asignar $num_tomas extra.";
+	}
+
+	return "OK";
+}
+
+/**
+ * Regla C06 — Amnistía de Recargos en Reactivación
+ * Al reactivar un contrato (→ Estado 1 ACTIVO), cancela todos los recargos
+ * de años anteriores al año actual que estén pendientes (estado=0).
+ * Solo quedan vigentes los cargos y recargos del año en curso.
+ * Se registra auditoria en tabla cambios.
+ */
+function _amnistiaRecargosHistoricos($contrato, $y) {
+	$anio_actual = date('Y');
+
+	// Snapshot financiero ANTES de cancelar — para auditoría con impacto real
+	$res_snap = $y->q("SELECT COUNT(*) AS total_cargos,
+		                      SUM(monto) AS total_monto,
+		                      COUNT(CASE WHEN es_recargo_moratorio = 1 AND anio < $anio_actual THEN 1 END) AS recargos_a_cancelar,
+		                      SUM(CASE WHEN es_recargo_moratorio = 1 AND anio < $anio_actual THEN monto ELSE 0 END) AS monto_a_cancelar
+		               FROM vw_ligacargos_pendientes
+		               WHERE numcontrato = '$contrato'");
+	$snap = $y->fetch_array($res_snap);
+	$cargos_antes     = intval($snap['total_cargos']);
+	$monto_antes      = number_format(floatval($snap['total_monto']), 2);
+	$recargos_cancelar = intval($snap['recargos_a_cancelar']);
+	$monto_cancelar   = number_format(floatval($snap['monto_a_cancelar']), 2);
+	$cargos_despues   = $cargos_antes - $recargos_cancelar;
+	$monto_despues    = number_format(floatval($snap['total_monto']) - floatval($snap['monto_a_cancelar']), 2);
+
+	// Cancelar recargos moratorios de años anteriores en tabla activa.
+	// Usa categoria IN (16,17) — fuente de verdad canónica (regla F05).
+	$y->q("UPDATE ligacargos
+		    SET estado = -1
+		  WHERE numcontrato = '$contrato'
+		    AND categoria IN (16, 17)
+		    AND anio < $anio_actual
+		    AND estado = 0");
+
+	// Sincronizar en tabla histórica (esquema V2 split)
+	$y->q("UPDATE ligacargos_historico
+		    SET estado = -1
+		  WHERE numcontrato = '$contrato'
+		    AND categoria IN (16, 17)
+		    AND anio < $anio_actual
+		    AND estado = 0");
+
+	if ($recargos_cancelar > 0) {
+		$antes_txt   = "Adeudos: $cargos_antes cargos | Deuda total: \$$monto_antes | Recargos moratorios hist. a cancelar: $recargos_cancelar (\$$monto_cancelar)";
+		$despues_txt = "Adeudos: $cargos_despues cargos | Deuda total: \$$monto_despues | $recargos_cancelar recargos moratorios históricos cancelados (estado=-1)";
+		
+		$antes_esc   = $y->real_escape_string($antes_txt);
+		$despues_esc = $y->real_escape_string($despues_txt);
+
+		$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato)
+		        VALUES(NOW(),
+		               'Amnistia de Recargos en Reactivacion (C06)',
+		               '$antes_esc',
+		               '$despues_esc',
+		               '$contrato')");
+	}
+}
+
+/**
+ * Comprueba si un contrato era elegible para facturación en un año histórico
+ * basándose en su estado auditado en la tabla de cambios.
+ */
+function _esContratoFacturableEnAnio($numcontrato, $anio, $conexion, $fecha_contrato) {
+    $fecha_limite = "$anio-12-31 23:59:59";
+    $res = $conexion->q("SELECT despues FROM cambios 
+                         WHERE numcontrato = '$numcontrato' 
+                           AND (descripcion LIKE 'Cambio de estado:%' OR descripcion = 'Cambio de estado de contrato')
+                           AND fecha <= '$fecha_limite' 
+                         ORDER BY fecha DESC, id DESC LIMIT 1");
+    if ($conexion->num_rows($res) > 0) {
+        list($despues_txt) = $conexion->fetch_array($res);
+        if (preg_match('/estado.*?\[(-?1|[2-4])\]/i', $despues_txt, $matches)) {
+            $estado_historico = intval($matches[1]);
+            // Solo facturan los estados 1 (Activo) y 3 (Suspensión Administrativa)
+            return ($estado_historico === 1 || $estado_historico === 3);
+        }
+    }
+    $anio_creacion = intval(date('Y', strtotime($fecha_contrato)));
+    return ($anio_creacion <= $anio);
+}
+
+function generaCargosAutomaticos($numcontrato, $y)
+{
+	// Configuración necesaria
+	$res_cfg = $y->q("SELECT clave, valor FROM config_sistema");
+	$cfg = array();
+	while (list($k, $v) = $y->fetch_array($res_cfg)) {
+		$cfg[$k] = $v;
+	}
+
+	// Snapshot PRE para auditoría
+	$res_gca_pre = $y->q("SELECT COUNT(*) AS n, IFNULL(SUM(monto),0) AS total FROM vw_ligacargos_pendientes WHERE numcontrato = '$numcontrato'");
+	$gca_pre = $y->fetch_array($res_gca_pre);
+	$gca_n_pre  = intval($gca_pre['n']);
+	$gca_t_pre  = floatval($gca_pre['total']);
+	$cargos_insertados = array();
+
+	// Datos del contrato (incluyendo fecha completa para auditoría)
+	$res_cto = $y->q("SELECT metros, fecha, MONTH(fecha) as mescontrato FROM contrato WHERE numcontrato='$numcontrato'");
+	list($metros, $fecha_contrato, $mescontrato) = $y->fetch_array($res_cto);
+
+	// Consultar tomas activas para calcular montos correctamente
+	$r_a = $y->q("SELECT COUNT(*) FROM contrato_toma WHERE numcontrato='$numcontrato' AND tiene_agua=1 AND estado_agua=1");
+	list($n_tomas_agua) = $y->fetch_array($r_a);
+	$r_d = $y->q("SELECT COUNT(*) FROM contrato_toma WHERE numcontrato='$numcontrato' AND tiene_drenaje=1 AND estado_drenaje=1");
+	list($n_tomas_drenaje) = $y->fetch_array($r_d);
+	$r_tc = $y->q("SELECT MAX(tipo) FROM contrato_toma WHERE numcontrato='$numcontrato'");
+	list($es_comercial) = $y->fetch_array($r_tc);
+
+	$anio_actual_fact = intval(date('Y'));
+	$anio_inicio_fact = intval(date('Y', strtotime($fecha_contrato)));
+	// El límite de años a facturar ahora es regulado de forma natural por el flag `estado=1` en el catálogo de cargos
+	// y por la tabla de `cambios` (auditoría de suspensión de contratos). Se elimina el hardcode de 2006.
+
+	$rescargos = $y->q("SELECT nombre, monto, monto_comercial, recargo, anio, categoria, repetir, metros FROM cargos WHERE estado=1 AND automatico=1 AND (anio = 0 OR (anio >= $anio_inicio_fact AND anio <= $anio_actual_fact)) ORDER BY nombre");
+
+	while ($a = $y->fetch_array($rescargos)) {
+		$leyenda    = $a['nombre'];
+		$monto_n    = floatval($a['monto']);
+		$monto_c    = floatval($a['monto_comercial']);
+		$recargo    = $a['recargo'];
+		$anio       = $a['anio'];
+		$categoria  = $a['categoria'];
+		$repetir    = $a['repetir'];
+		$aplicametros = $a['metros'];
+
+		// --- GUARD DE AUDITORÍA HISTÓRICA ---
+		$anio_cargo_real = ($anio == "0") ? intval(date('Y')) : intval($anio);
+		if ($anio_cargo_real > 0 && $anio_cargo_real < $anio_actual_fact) {
+			if (!_esContratoFacturableEnAnio($numcontrato, $anio_cargo_real, $y, $fecha_contrato)) {
+				continue; // El contrato no estaba activo, saltar generación de este cargo
+			}
+		}
+
+		// --- NUEVO MODELO: Suma por Unidad de Toma ---
+		$monto = 0;
+		if ($categoria == 2 || $categoria == 3) {
+			$res_tomas = $y->q("SELECT tipo FROM contrato_toma WHERE numcontrato='$numcontrato' AND " . ($categoria == 2 ? 'tiene_agua=1 AND estado_agua=1' : 'tiene_drenaje=1 AND estado_drenaje=1'));
+			while ($t = $y->fetch_array($res_tomas)) {
+				$es_com = ($t['tipo'] == 1);
+				$m_base = ($es_com && $monto_c > 0) ? $monto_c : ($es_com ? $monto_n * 2 : $monto_n);
+				$monto += $m_base;
+			}
+		} else {
+			// Para otros cargos (multas, etc), se usa la lógica anterior de 'Max Tipo' si aplica, o tarifa base
+			$r_tc = $y->q("SELECT MAX(tipo) FROM contrato_toma WHERE numcontrato='$numcontrato'");
+			list($es_com_max) = $y->fetch_array($r_tc);
+			$monto = ($es_com_max == 1 && $monto_c > 0) ? $monto_c : (($es_com_max == 1) ? $monto_n * 2 : $monto_n);
+		}
+
+		if ($aplicametros == 1)
+			$monto = $monto * $metros;
+		
+		if ($anio == "0")
+			$anio = date('Y');
+
+		$aplicar_cargo = ($monto > 0);
+		// Si es agua/drenaje pero el monto dio 0 (sin tomas activas), no aplicar
+		if (($categoria == 2 || $categoria == 3) && $monto == 0) $aplicar_cargo = false;
+
+		if ($aplicar_cargo == true) {
+			if ($repetir == 0) {
+				$chk = $y->q("SELECT numcontrato FROM vw_ligacargos_all WHERE leyenda='$leyenda' AND numcontrato='$numcontrato' LIMIT 1");
+				if ($y->num_rows($chk) == 0) {
+					$tabla_dest = ($anio <= 2025) ? "ligacargos_historico" : "ligacargos";
+					$q = "INSERT INTO $tabla_dest (numcontrato, leyenda, monto, fcobro, fpago, estado, recargo, folio, anio, numcontratoresp, idpago_vinc, categoria, repetido) VALUES('$numcontrato', '$leyenda', $monto, CURDATE(), CURDATE(), 0, $recargo, '', $anio, '', NULL, $categoria, 0)";
+					$y->q($q);
+					$cargos_insertados[] = "$leyenda (\$$monto)";
+				}
+				calcula_recargos($numcontrato, $leyenda, $monto, $recargo, $anio, $categoria, 0, $y, $mescontrato, $cfg);
+			} else {
+				$chk_rep = $y->q("SELECT numcontrato FROM vw_ligacargos_all WHERE leyenda='$leyenda' AND numcontrato='$numcontrato' AND anio=$anio LIMIT 1");
+				if ($y->num_rows($chk_rep) == 0) {
+					$resautomatico = $y->q("SELECT COUNT(numcontrato) FROM vw_ligacargos_all WHERE leyenda='$leyenda' AND numcontrato='$numcontrato'");
+					list($cuenta) = $y->fetch_array($resautomatico);
+					$tabla_dest = ($anio <= 2025) ? "ligacargos_historico" : "ligacargos";
+					$q = "INSERT INTO $tabla_dest (numcontrato, leyenda, monto, fcobro, fpago, estado, recargo, folio, anio, numcontratoresp, idpago_vinc, categoria, repetido) VALUES('$numcontrato', '$leyenda', $monto, CURDATE(), CURDATE(), 0, $recargo, '', $anio, '', NULL, $categoria, $cuenta)";
+					$y->q($q);
+					$cargos_insertados[] = "$leyenda (\$$monto)";
+					calcula_recargos($numcontrato, $leyenda, $monto, $recargo, $anio, $categoria, $cuenta, $y, $mescontrato, $cfg);
+				} else {
+					$resautomatico = $y->q("SELECT COUNT(numcontrato) FROM vw_ligacargos_all WHERE leyenda='$leyenda' AND numcontrato='$numcontrato'");
+					list($cuenta) = $y->fetch_array($resautomatico);
+					calcula_recargos($numcontrato, $leyenda, $monto, $recargo, $anio, $categoria, $cuenta, $y, $mescontrato, $cfg);
+				}
+			}
+		}
+	}
+
+	// Registrar en cambios si se insertaron cargos base nuevos
+	if (count($cargos_insertados) > 0) {
+		$res_gca_post = $y->q("SELECT COUNT(*) AS n, IFNULL(SUM(monto),0) AS total FROM vw_ligacargos_pendientes WHERE numcontrato = '$numcontrato'");
+		$gca_post = $y->fetch_array($res_gca_post);
+		$gca_n_post = intval($gca_post['n']);
+		$gca_t_post = floatval($gca_post['total']);
+		$delta_gca  = $gca_n_post - $gca_n_pre;
+		$lista_esc  = $y->real_escape_string(implode(', ', $cargos_insertados));
+		$pre_esc    = $y->real_escape_string("Adeudos: $gca_n_pre | Deuda: \$" . number_format($gca_t_pre, 2));
+		$post_esc   = $y->real_escape_string("Adeudos: $gca_n_post | Deuda: \$" . number_format($gca_t_post, 2) . " | +$delta_gca cargos base insertados");
+		$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato)
+		       VALUES(NOW(), 'Facturacion automatica al reactivar',
+		       '$pre_esc',
+		       'Cargos nuevos: $lista_esc | $post_esc',
+		       '$numcontrato')");
+	}
+}
+
+/**
+ * _getReversal() — Verifica si existe un REVERSAL_SNAPSHOT pendiente para el contrato
+ * y si la deuda total >= $15,000. Retorna null si no aplica, o array con los datos
+ * del snapshot para que la vista pueda mostrar el botón "Revertir transición".
+ *
+ * @param string $numcontrato
+ * @param float  $deuda_total  Total pendiente ($total + $recargos) calculado en cargaContrato
+ * @param object $y            Conexión activa
+ * @return array|null
+ */
+function _getReversal($numcontrato, $deuda_total, $y)
+{
+
+
+	// Buscar el REVERSAL_SNAPSHOT más reciente no revertido para este contrato
+	$res = $y->q("SELECT id, fecha, antes FROM cambios
+	              WHERE numcontrato = '$numcontrato'
+	                AND descripcion = 'REVERSAL_SNAPSHOT'
+	                AND despues = 'PENDIENTE'
+	              ORDER BY id DESC LIMIT 1");
+	if ($y->num_rows($res) == 0) {
+		return null;
+	}
+	$row = $y->fetch_array($res);
+
+	// Verificar si es el movimiento más reciente de estado (para evitar reversas anacrónicas)
+	$res_check = $y->q("SELECT id FROM cambios 
+	                   WHERE numcontrato = '$numcontrato' 
+	                     AND descripcion LIKE 'Cambio de estado:%' 
+	                   ORDER BY id DESC LIMIT 1");
+	$last_move = $y->fetch_array($res_check);
+	if ($last_move && $last_move['id'] > $row['id']) {
+		// Existe un cambio de estado posterior al snapshot
+		return null;
+	}
+
+	$data = json_decode($row['antes'], true);
+	if (!$data) {
+		return null;
+	}
+
+	return array(
+		'cambio_id'       => intval($row['id']),
+		'fecha'           => $row['fecha'],
+		'estado_origen'   => intval($data['estado_origen']),
+		'estado_destino'  => intval($data['estado_destino']),
+		'n_lc_nuevos'     => count($data['lc_ids_nuevos']),
+		'n_hist_amnist'   => count($data['hist_ids_amnist']),
+		'deuda_pre'       => floatval($data['deuda_pre']),
+		'deuda_post'      => floatval($data['deuda_post'])
+	);
+}
+
+/**
+ * revertirTransicion() — Revierte el último cambio de estado usando el REVERSAL_SNAPSHOT.
+ * Deshace exactamente lo que hizo cambiaestado():
+ *  - Restaura contrato.estado al valor origen
+ *  - Cancela los cargos generados (lc_ids_nuevos: estado=0 → estado=-1)
+ *  - Restaura los cargos amnistiados (hist_ids_amnist: estado=-1 → estado=0)
+ * Registra todo en cambios y marca el snapshot como REVERTIDO.
+ */
+function revertirTransicion($contrato)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$contrato = intval($contrato);
+
+	// 1. Obtener el snapshot pendiente más reciente
+	$res = $y->q("SELECT id, fecha, antes FROM cambios
+	              WHERE numcontrato = '$contrato'
+	                AND descripcion = 'REVERSAL_SNAPSHOT'
+	                AND despues = 'PENDIENTE'
+	              ORDER BY id DESC LIMIT 1");
+
+	if ($y->num_rows($res) == 0) {
+		return $templates->render('sistema/mensaje', array(
+			'titulo'  => 'Sin reversión disponible',
+			'mensaje' => 'No existe una transición de estado pendiente de revertir para este contrato.'
+		));
+	}
+
+	$row        = $y->fetch_array($res);
+	$snap_id    = intval($row['id']);
+	$data       = json_decode($row['antes'], true);
+
+	if (!$data) {
+		return $templates->render('sistema/mensaje', array(
+			'titulo'  => 'Error',
+			'mensaje' => 'El snapshot de reversión está corrupto. Contacte al administrador.'
+		));
+	}
+
+	$estado_origen     = intval($data['estado_origen']);
+	$estado_destino    = intval($data['estado_destino']);
+	$lc_ids_nuevos     = array_map('intval', (array)$data['lc_ids_nuevos']);
+	$lc_ids_cancelados   = array_map('intval', (array)(isset($data['lc_ids_cancelados'])   ? $data['lc_ids_cancelados']   : array()));
+	$hist_ids_amnist     = array_map('intval', (array)$data['hist_ids_amnist']);
+	$hist_ids_nuevos_hist = array_map('intval', (array)(isset($data['hist_ids_nuevos_hist']) ? $data['hist_ids_nuevos_hist'] : array()));
+	$tomas_pre           = (array)(isset($data['tomas_pre']) ? $data['tomas_pre'] : array());
+	$serv_pre          = (isset($data['serv_pre']) ? $data['serv_pre'] : array('a' => 1, 'd' => 1));
+	$deuda_pre         = floatval($data['deuda_pre']);
+	$deuda_post        = floatval($data['deuda_post']);
+
+	// Nombres de estado para la bitácora
+	$nombres_estado = array(
+		1 => 'ACTIVO', 2 => 'SUSPENSIÓN TEMPORAL',
+		3 => 'SUSPENSIÓN ADMINISTRATIVA', 4 => 'SUSPENSIÓN DEFINITIVA'
+	);
+	$nom_origen  = isset($nombres_estado[$estado_origen])  ? $nombres_estado[$estado_origen]  : "ESTADO $estado_origen";
+	$nom_destino = isset($nombres_estado[$estado_destino]) ? $nombres_estado[$estado_destino] : "ESTADO $estado_destino";
+
+	// ── Snapshot financiero PRE-reversa ──────────────────────────────────────
+	$res_snap = $y->q("SELECT COUNT(*) AS n, IFNULL(SUM(monto),0) AS total FROM vw_ligacargos_pendientes WHERE numcontrato='$contrato'");
+	$snap_pre = $y->fetch_array($res_snap);
+	$n_pre_rev  = intval($snap_pre['n']);
+	$tot_pre_rev = number_format(floatval($snap_pre['total']), 2);
+
+	// ── 2. Restaurar estado del contrato y servicios ─────────────────────────
+	$agua_pre = intval($serv_pre['a']);
+	$dren_pre = intval($serv_pre['d']);
+	$y->q("UPDATE contrato SET estado=$estado_origen, agua=$agua_pre, drenaje=$dren_pre WHERE numcontrato='$contrato'");
+
+	// ── 3. Restaurar estado físico de las tomas ─────────────────────────────
+	$n_tomas_rest = 0;
+	if (!empty($tomas_pre)) {
+		foreach ($tomas_pre as $tp) {
+			$tid = intval($tp['id']);
+			$tea = intval($tp['ea']);
+			$ted = intval($tp['ed']);
+			$y->q("UPDATE contrato_toma SET estado_agua=$tea, estado_drenaje=$ted WHERE id=$tid AND numcontrato='$contrato'");
+			$n_tomas_rest++;
+		}
+	}
+
+	// ── 4. Cancelar cargos generados por el cambio de estado ─────────────────
+	$n_cancelados = 0;
+	$n_paid = 0;
+	if (!empty($lc_ids_nuevos)) {
+		$ids_str = implode(',', $lc_ids_nuevos);
+		
+		// Verificar si alguno ya fue pagado
+		$res_paid = $y->q("SELECT COUNT(*) FROM ligacargos WHERE numcontrato='$contrato' AND id IN ($ids_str) AND estado=1");
+		list($n_paid) = $y->fetch_array($res_paid);
+
+		$y->q("UPDATE ligacargos SET estado=-1 WHERE numcontrato='$contrato' AND id IN ($ids_str) AND estado=0");
+		$n_cancelados = count($lc_ids_nuevos) - $n_paid;
+	}
+
+	// ── 5a. Restaurar cargos amnistiados en histórico (de -1 a 0) ───────────
+	$n_restaurados = 0;
+	if (!empty($hist_ids_amnist)) {
+		$ids_hist_str = implode(',', $hist_ids_amnist);
+		$y->q("UPDATE ligacargos_historico SET estado=0 WHERE numcontrato='$contrato' AND id IN ($ids_hist_str) AND estado=-1");
+		$n_restaurados = count($hist_ids_amnist);
+	}
+
+	// ── 5b. Restaurar cargos cancelados por paridad en activa (de -1 a 0) ───
+	$n_reactivados = 0;
+	if (!empty($lc_ids_cancelados)) {
+		$ids_cxl_str = implode(',', $lc_ids_cancelados);
+		$y->q("UPDATE ligacargos SET estado=0 WHERE numcontrato='$contrato' AND id IN ($ids_cxl_str) AND estado=-1");
+		$n_reactivados = count($lc_ids_cancelados);
+	}
+
+	// ── 5c. Cancelar recargos históricos nuevos (calcula_recargos anio<=2025) ─
+	// Punto ciego anterior: calcula_recargos() inserta recargos cat 16/17 en
+	// ligacargos_historico con estado=0 — no quedaban en lc_ids_nuevos (activa).
+	$n_hist_cancelados = 0;
+	if (!empty($hist_ids_nuevos_hist)) {
+		$ids_hn_str = implode(',', $hist_ids_nuevos_hist);
+		$y->q("UPDATE ligacargos_historico SET estado=-1 WHERE numcontrato='$contrato' AND id IN ($ids_hn_str) AND estado=0");
+		$n_hist_cancelados = count($hist_ids_nuevos_hist);
+	}
+
+	// ── Snapshot financiero POST-reversa ─────────────────────────────────────
+	$res_snap2 = $y->q("SELECT COUNT(*) AS n, IFNULL(SUM(monto),0) AS total FROM vw_ligacargos_pendientes WHERE numcontrato='$contrato'");
+	$snap_post = $y->fetch_array($res_snap2);
+	$n_post_rev  = intval($snap_post['n']);
+	$tot_post_rev = number_format(floatval($snap_post['total']), 2);
+
+	// ── 6. Registrar en bitácora ──────────────────────────────────────────────
+	$fecha_snap_esc = $y->real_escape_string($row['fecha']);
+	$nom_orig_esc   = $y->real_escape_string($nom_origen);
+	$nom_dest_esc   = $y->real_escape_string($nom_destino);
+	
+	$nota_pago = ($n_paid > 0) ? " | ¡AVISO! $n_paid cargos nuevos ya estaban pagados y NO se revirtieron." : "";
+
+	$antes_rev = "Estado [$estado_destino] $nom_dest_esc. " .
+	             "Adeudos: $n_pre_rev | Deuda: \$$tot_pre_rev. " .
+	             "Revirtiendo transición del $fecha_snap_esc.";
+	$despues_rev = "Estado [$estado_origen] $nom_orig_esc restaurado exactamente. " .
+	               "Adeudos: $n_post_rev | Deuda: \$$tot_post_rev. " .
+	               "Cargos nuevos cancelados: $n_cancelados. " .
+	               "Recargos históricos cancelados: $n_hist_cancelados. " .
+	               "Cargos amnistiados restaurados: $n_restaurados. " .
+	               "Cargos de paridad reactivados: $n_reactivados. " .
+	               "Tomas restauradas: $n_tomas_rest." . $nota_pago .
+	               " | Deuda: \$" . number_format($deuda_post, 2) .
+	               " → \$" . number_format($deuda_pre, 2) . " (deuda original).";
+
+
+	$antes_esc   = $y->real_escape_string($antes_rev);
+	$despues_esc = $y->real_escape_string($despues_rev);
+
+	$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato)
+	       VALUES(NOW(), 'Reversión de Transición de Estado', '$antes_esc', '$despues_esc', '$contrato')");
+
+	// ── 6. Marcar el snapshot como REVERTIDO ─────────────────────────────────
+	$y->q("UPDATE cambios SET despues='REVERTIDO' WHERE id=$snap_id");
+
+	return "<script>cargaDatosContrato('$contrato');</script>";
+}
+
+?>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `soporte_reconciliados`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:31 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Investigating File Discrepancies**
+
+I've discovered a discrepancy: `soporte_reconciliados.php` is referenced in the documentation, yet it's absent from the `/opt/lampp/htdocs/agua` directory. My working theory is it was either deleted or its functionality merged into `configuracion.php`. I'm going to proceed to examine the latter file to confirm.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.034524487s
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+## User Request
+
+En PLAN_MORA_ROTATIVA_20_ANIOS.md , creo se debe actualizar la sección  📈 9. ANEXO FINANCIERO: Comparativa Pura e Impacto Económico
+(Host B vs Host C) , pero con base a la pruebas vaya yo haciendo (consultas y dandote datos de lo que aparece en la pantalla de los calculos) y tu analizando las afectaciones en la bd awa .
+_
+Ya consulte el cto: 549 , analiza que ocurrio en la bd awa host c, host b esta disponible para que puedas consultarle.
+Host c me dio:
+308 adeudos del contrato (10 años deuda base / 7 años recargos)
+Total de cargos:	$ 9,000.00, Total de recargos:	$ 16,680.00, Total general:	$ 25,680.00.
+
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `configuracion.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Selection**
+
+I'm now focusing on specific tool implementation, especially concerning avoiding bash commands like `cat`, `grep`, and `ls`. My primary emphasis is shifting to tools like `grep_search`. I'm also ensuring a pre-call check to list relevant alternatives before executing, favoring specialized tools over generic ones whenever possible.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `.mcp.json`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.429121653s
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+{
+  "mcpServers": {
+    "bdawahost-a": {
+      "command": "docker",
+      "args": [
+        "exec",
+        "-i",
+        "context7-mcp-mysql",
+        "npx",
+        "-y",
+        "@f4ww4z/mcp-mysql-server",
+        "mysql://root:comite_2026@127.0.0.1:3306/awa"
+      ],
+      "env": {
+        "DOCKER_HOST": "unix:///var/run/docker.sock"
+      }
+    },
+    "bdawahost-b": {
+      "command": "docker",
+      "args": [
+        "exec",
+        "-i",
+        "context7-mcp-mysql",
+        "npx",
+        "-y",
+        "@f4ww4z/mcp-mysql-server", 
+        "mysql://root:sdrastbuy@192.168.1.120:3306/awa"
+      ],
+      "env": {
+        "DOCKER_HOST": "unix:///var/run/docker.sock"
+      }
+    },
+    "bdawahost-c": {
+      "command": "docker",
+      "args": [
+        "exec",
+        "-i",
+        "context7-mcp-mysql",
+        "npx",
+        "-y",
+        "@f4ww4z/mcp-mysql-server", 
+        "mysql://root:comite_2026@192.168.1.128:7002/awa"
+      ],
+      "env": {
+        "DOCKER_HOST": "unix:///var/run/docker.sock"
+      }
+    },
+    "bdawa2host-c": {
+      "command": "docker",
+      "args": [
+        "exec",
+        "-i",
+        "context7-mcp-mysql",
+        "npx",
+        "-y",
+        "@f4ww4z/mcp-mysql-server",
+        "mysql://root:comite_2026@192.168.0.100:7002/aguayd_os"
+      ],
+      "env": {
+        "DOCKER_HOST": "unix:///var/run/docker.sock"
+      }
+    }
+  }
+}
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-b_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:46 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:46 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:46 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** CORTEX_STEP_STATUS_ERROR
+**Created:** 25 June 2026, 9:46 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:46 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:46 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:46 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Pending Contract Data**
+
+I'm currently focused on contract 549, examining the `vw_ligacargos_pendientes` data. Specifically, I've identified the years included from 2017 to 2026. I'm now drilling down into Category 16 (Recargo Agua) to assess yearly counts and values. Right now, I can see that in 2026, there are 2 cargos amounting to $120.00, and there are 14 cargos in 2025.
+
+
+**Calculating Recargo & Cargo Totals**
+
+I've determined the yearly recargo values for Category 16 (Recargo Agua) from 2020 to 2026, totaling $16,680.00, which matches the user's display. I've confirmed that 2017-2019 are excluded due to zero recargos. Now, I'm summing the base debt (cargos) for Category 2 (Agua) in `vw_ligacargos_pendientes`, finding a consistent $600.00 annually from 2017 to 2026. Next step: the total base debt amount.
+
+
+
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.692667315s
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:46 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:46 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:46 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:47 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-b_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** CORTEX_STEP_STATUS_ERROR
+**Created:** 25 June 2026, 9:47 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-b_describe_table`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:47 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Execution Error
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:47 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-b_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:47 pm
+
+---
+
+<details>
+<summary>Conversation History</summary>
+
+# Conversation History
+Here are the conversation IDs, titles, and summaries of your most recent 9 conversations, in reverse chronological order:
+
+<conversation_summaries>
+## Conversation a49787d4-8120-4c9b-b54f-74e42f167a61: Finalizing Host C Patch Fix
+- Created: 2026-06-24T20:19:39Z
+- Last modified: 2026-06-25T00:15:25Z
+
+### USER Objective:
+Auditing Mora Parity Reconciliation
+
+USER Objective: Execute a forensic audit and parity reconciliation of mora debt between Host B and Host C to establish Host C as the Single Source of Truth.
+
+Goals:
+1. Finalize the forensic audit and parity reconciliation of 153 high-mora contracts by comparing legacy Host B records with the optimized V2 JIT engine on Host C.
+2. Standardize JIT surcharge configurations (27-year base, 10-year window) to eliminate runaway interest generation.
+3. Deploy the "Monkey Testing" comparison interface to identify and resolve discrepancies in real-time.
+4. Centralize all auditing and sanitation tools into the configuration management dashboard while maintaining strict data parity.
+5. Apply security-first descriptions and logic updates to core parameters like `reversal_threshold` to prevent exponential debt growth.
+
+## Conversation cd3bbd4f-8745-42bb-bd6f-2c4e8759f627: Installing Google Antigravity 2.x
+- Created: 2026-06-24T23:41:57Z
+- Last modified: 2026-06-24T23:58:19Z
+
+### USER Objective:
+Installing Google Antigravity 2.x
+
+USER Objective: Successfully install and configure the Google Antigravity 2.0 application and its IDE on an Ubuntu 24.x virtual machine.
+
+Goals:
+1. Purge legacy or failed installations to ensure a clean deployment environment.
+2. Install Antigravity and Antigravity IDE into standardized directories (/opt/Antigravity-x64 and /opt/AntigravityIDE).
+3. Configure desktop shortcuts for seamless application access, ensuring they handle system-specific security and sandbox restrictions.
+4. Apply system-level optimizations (kernel and inotify adjustments) to guarantee stable performance for the IDE and application runtime.
+
+## Conversation e0cf52cb-6d53-4322-8e81-b011a534320b: Reconciling Historical Debt Parity
+- Created: 2026-06-23T16:40:38Z
+- Last modified: 2026-06-24T20:14:59Z
+
+### USER Objective:
+Stabilizing Host C Production Infrastructure
+
+USER Objective: Finalize the infrastructure stabilization of Host C as the definitive Single Source of Truth for the water management system.
+
+Goals:
+1. Finalize the forensic audit and cleanup of obsolete legacy assets and transition temporary analysis files into documented, production-ready operational tools.
+2. Implement robust data integrity practices by creating independent DDL, DML, and DCL backup routines for both legacy Host B and production Host C environments.
+3. Establish a standard recovery protocol compatible with the existing MariaDB 10.x engine to ensure production resilience and data portability.
+4. Integrate newly identified "orphan" premium audit tools into the administrative interface to enhance operational oversight.
+
+## Conversation 1aaefe04-7a64-42a8-9af9-7259738928a3: Auditing Recent Repository Changes
+- Created: 2026-06-24T18:30:50Z
+- Last modified: 2026-06-24T18:31:19Z
+
+### USER Objective:
+Auditing Recent Repository Changes
+
+The user's objective is to identify all files modified within the `agua` repository over the last 7 days to support the ongoing audit and reconciliation project.
+
+Goals:
+1. Extract and present a comprehensive list of all modified files from the git history for the past week.
+2. Provide this visibility to ensure tracking of recent structural, configuration, and documentation updates across the production Host C environment.
+
+## Conversation 95cd3afb-e633-4867-ab82-e080dc81ed68: Verifying Aguav2 Mora Engine
+- Created: 2026-06-20T16:44:18Z
+- Last modified: 2026-06-23T07:05:02Z
+
+### USER Objective:
+Reconciling Historical Surcharge Engine
+
+Objective: Eliminate the parity gap and stabilize the JIT surcharge calculation engine on Host C to create a reliable, audit-ready financial system.
+
+Goals:
+1. Identify and remove hardcoded date thresholds (e.g., the 2006 limit) currently suppressing historical debt generation.
+2. Synchronize the Host C JIT motor with the production database by forcing correct execution flows in `contratos.php` and `cargos.php`.
+3. Stabilize the financial calculation output by configuring the "Mora Rotativa" limits (10-year window/Bomba threshold) to prevent runaway debt totals.
+4. Perform final validation to ensure that all 27 years of historical records are correctly processed and reflected in the user interface without system timeouts or data corruption.
+
+## Conversation 41b07588-7f6a-4d9e-aae7-f48df7d15e55: Restoring Historical Surcharge Plan
+- Created: 2026-06-19T17:34:28Z
+- Last modified: 2026-06-20T05:14:37Z
+
+### USER Objective:
+Finalizing Mora Engine Audit
+
+**USER Objective:**
+Finalize the architectural reconciliation and audit readiness of the 20-year rotational mora engine on Host C to ensure a Single Source of Truth.
+
+**Goals:**
+1. Execute the final normalization and structural integrity fixes across the Host C database environment.
+2. Finalize documentation (`PLAN_MORA_ROTATIVA_20_ANIOS.md` and `VERIFICACION_MANUAL_MORA_20_ANIOS.md`) as authoritative guides for production deployment.
+3. Quantify financial gaps and reconcile differences between legacy Host B and Host C to prove accuracy in historical surcharge calculations and debt base validity.
+4. Align administrative audit tools (`comparativa_mora.php`) to the new V2 JIT motor logic to support financial reporting and decision-making by the water committee.
+
+## Conversation 68c13890-5673-4043-8ab3-ef3fd55a487d: Expanding Historical Mora Calculations
+- Created: 2026-06-19T01:43:46Z
+- Last modified: 2026-06-19T06:57:46Z
+
+### USER Objective:
+Optimizing Historical Surcharge Engine
+
+USER Objective:
+Refactor the JIT surcharge engine to handle multi-decadal debt calculations (2005–2026) using a 10-year rotational window and Batch Insert/Auto-Heal architecture without destructive database deletions.
+
+Goals:
+1. Implement a Batch Insert pattern in `calcula_recargos()` to optimize performance and prevent timeouts.
+2. Refactor the JIT motor to use a rolling 10-year window that dynamically omits older records from active calculation without deleting them from the database.
+3. Integrate an "Acordeón Visual" UI strategy in `adeudo_tabla.php` to allow flexible, fraccionado payment of historical surcharges while maintaining a clean administrative interface.
+4. Update `configuracion.php` to provide dynamic synchronization between the mora catalog and the 10-year threshold.
+5. Investigate and resolve the parity discrepancy between Host B and Host C regarding surcharge counts (e.g., Contract 161) by auditing the view definitions and JIT
+<truncated 22 bytes>
+
+## Conversation 62cf2a4a-a2b1-4ede-9f66-88c4e6b9937b: Mora aguav2 - todos los años.
+Realiza prueba de conectividad via mcp y mysql client.
+Insumos: Usa G
+<truncated 1031 bytes>
+- Created: 2026-06-19T01:36:53Z
+- Last modified: 2026-06-19T01:40:28Z
+
+## Conversation 8a2778b8-300b-46e8-9020-16cf387f47c8: Financial Audit Reconciliation Tool
+- Created: 2026-06-18T01:04:14Z
+- Last modified: 2026-06-18T20:12:13Z
+
+### USER Objective:
+Auditing Surcharge Logic Parity
+
+USER Objective:
+Finalize the forensic audit and validation of the V2 motor's surcharge logic to ensure data parity between the legacy Host B and the current Host C environment.
+
+Goals:
+1. Verify the accuracy of historical surcharge generation against legacy benchmarks to confirm Host C acts as a true, audit-ready Single Source of Truth.
+2. Validate the behavior of the "Just-in-Time" surcharge calculation engine regarding contract state transitions and configuration adjustments.
+3. Consolidate technical findings and business rules into the official project documentation (`matriz_mora_host_b_vs_c.md`) to inform the finance committee of systemic protections and automated safeguards.
+4. Maintain strict "Poka-Yoke" architectural integrity, ensuring no unauthorized service charges generate interest, while preserving the system's ability to handle contract re-activation scenarios securely.
+
+</conversation_summaries>
+
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:47 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Observing Host B's Data**
+
+I've begun to parse the data for Host B. I see an "ANUALIDAD DEL AGUA 2021" entry with a pending status and amount. I've also identified multiple "RECARGO DE AGUA 2021" entries, each corresponding to a specific month. I now need to determine how to best integrate this information.
+
+
+
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.409514027s
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:47 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:47 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:47 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:47 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-b_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:47 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Enumerating Migration Data**
+
+I've begun enumerating the migrated static recargos from Host B for 2020. So far, I've confirmed that there are 11 months with migrated data, listing them from January to June, with those I've listed including January, February, March, April, May and June, all from 2020.
+
+
+
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.457034145s
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:47 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:47 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Execution Error
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:47 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Observing Automatic Correction**
+
+I'm incredibly pleased! I've confirmed the database now shows 'cancelled' status (-1) for several key entries: `RECARGO ENE 2020 - ANUALIDAD DEL AGUA 2020`, `RECARGO FEB 2020 - ANUALIDAD DEL AGUA 2020`, and `RECARGO MAR 2020 - ANUALIDAD DEL AGUA 2020`. The automatic self-healing is working exactly as expected. What a triumph!
+
+
+**Verifying Integrity Achieved**
+
+I can confirm the self-healing in `cargos.php` disabled the erroneous January, February, and March 2020 entries on Host C. I've also verified the integrity of `vw_ligacargos_pendientes`. Counting pending recargos for 2020 with the query now shows 74, matching expected calculations. The JIT engine generates 74 recargos for 'ANUALIDAD DEL AGUA 2020', and the existing static recargos were not duplicated, thanks to idempotency!
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `PLAN_MORA_ROTATIVA_20_ANIOS.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.566367323s
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# Plan Maestro y de Implementación: Motor JIT de Mora Histórica (V2 — Revisado 2026-06-24)
+
+## 📌 1. Visión y Single Source of Truth
+El motor de mora histórico ("Motor JIT") establece a la base de datos como única fuente de verdad para el cálculo de recargos. Operará exclusivamente en **Host C** mediante un modelo "Just-in-Time" que genera los cargos moratorios *al momento de consultar* la deuda de un contrato, sin batches destructivos ni procesos cron.
+
+Esta **Versión 2** introduce correcciones estructurales para blindar el motor contra falsos positivos y garantizar idempotencia. La **ventana activa de mora** no es fija: es controlada dinámicamente por el operador del Comité a través del panel **`Configuración → Control de Mora por Año`** en la webapp. La configuración actual de producción tiene activos los años **2020 a 2026**.
+
+> [!IMPORTANT]
+> La fuente de verdad de qué años generan mora es el flag `recargo = 1/0` en la tabla `cargos`, administrable desde `configuracion.php`. El parámetro `paridad_anios_max_recargo = 0` (desactivado) delega el control 100% al catálogo de la BD, no a una ventana numérica hardcodeada.
+
+---
+
+## 🏗️ 2. Arquitectura de Datos y Saneamiento Estructural
+
+El histórico de deuda puede abarcar desde 2006 hasta el presente. Debido al volumen masivo, se emplea un modelo de partición dual (`ligacargos` y `ligacargos_historico`).
+
+### 2.1 Re-Categorización y Normalización Poka-Yoke
+Para que la consulta global del Motor JIT sea segura, el catálogo base de Host C ha sido saneado de raíz. **La regla estructural inquebrantable es**: *Cualquier cobro que NO sea una anualidad base, NO debe pertenecer a la categoría 2 (Agua) ni 3 (Drenaje).*
+
+**Impacto del Saneamiento Estructural (Protección a 57 Contratos):**
+1. **Re-categorización de Falsos Positivos:** Se identificaron cargos en Host B como "MENSUALIDAD..." o "REHABILITACION..." erróneamente clasificados como Categoría 2. Se re-categorizaron a Cat 1 (General) y Cat 5 (Reparaciones). Esto protege a **52 contratos** de generar una deuda espuria de mora mensual que habría ascendido a más de $1,440 MXN por contrato.
+2. **Normalización Definitiva de Leyendas:** Se estandarizaron leyendas legacy (`AGUA POTABLE AÑO 2006` -> `ANUALIDAD DEL AGUA 2006`) tanto en el catálogo como en los historiales de deuda. Esto protege a **12 contratos** asegurando el éxito de la comparación de strings en el mecanismo de idempotencia.
+
+### 2.2 La Ventana Dinámica y Vista "Auto-Heal"
+**Control:** El campo `recargo = 1/0` en la tabla `cargos` determina qué años generan mora. El operador controla esto desde `configuracion.php → Control de Mora por Año` con checkboxes por año. **No existe una fórmula numérica fija**: la ventana activa en producción es 2020–2026 (7 años) decidida operativamente por el Comité.
+
+Se emplea la vista no destructiva `vw_ligacargos_pendientes` que une ambas particiones (`ligacargos` + `ligacargos_historico`). Incluye filtros dinámicos: si un año queda con `recargo=0` en el catálogo, la vista excluye sus recargos moratorios *sin borrar datos físicos*. El parámetro `paridad_anios_max_recargo = 0` está desactivado, dejando el control enteramente al catálogo.
+
+---
+
+## ⚙️ 3. El Motor "Just-in-Time" y sus Blindajes
+
+El motor se inyecta en `calcula_recargos()` (dentro de `cargos.php`) y se rige por cuatro reglas reforzadas:
+
+### Regla 1: Inmunidad y Guardias de Estado
+El motor **NO SE EJECUTA** y realiza retorno temprano (`return`) si el contrato está en:
+- `Estado 4` (Suspensión Definitiva / Baja)
+- `Estado 2` (Suspensión Temporal)
+- Tiene exención activa en su año de creación (`$exento_recargo == 1`).
+
+### Regla 2: Idempotencia Segura O(1) (El Gap de los 80 Contratos)
+El "Gap de 80 Contratos Crónicos" describe a usuarios que ya tienen recargos históricos pagados/cancelados. Para no duplicarles la mora al pasar al nuevo motor, el JIT lee todos sus recargos existentes de un golpe en un **Hash Map** en memoria.
+- **Seguridad V2:** La leyenda a buscar se sanitiza mediante `$y->real_escape_string()` y escapando wildcards de SQL (`%`, `_`) con `str_replace`, asegurando que ninguna leyenda especial rompa el `LIKE` y arruine la idempotencia.
+
+### Regla 3: Batch Dual In-Memory
+Para evitar *N+1 queries* y prevenir caídas por agotamiento de memoria, si el contrato requiere cientos de recargos (ej. 324 recargos por 27 años de mora), estos se generan en memoria y se insertan en una sola instrucción transaccional masiva hacia MariaDB (cuyo peso en KBs es minúsculo frente al `max_allowed_packet`), discriminando destino:
+- Año ≥ 2026 ➔ Array para inserción en `ligacargos`
+- Año ≤ 2025 ➔ Array para inserción en `ligacargos_historico`
+
+### Regla 4: Límite Bomba (Threshold)
+Si la deuda total del contrato supera `$reversal_threshold` y la regla está activa (`reversal_threshold_enable = 1`), el motor interrumpe la iteración (`break`). **En producción está desactivado** (`reversal_threshold_enable = 0`, `reversal_threshold = 0`) para registrar fielmente la deuda matemática real de cada contrato, sin topes artificiales.
+
+---
+
+## 🖥️ 4. Control Operativo y UI
+
+### 4.1 Panel de Amnistía Dinámico (Fix Off-by-One y Soporte Multi-Década)
+El panel en `configuracion.php` permite al operador habilitar o congelar recargos año por año (desde 1999 hasta el presente). Se corrigió la consulta que alimentaba este panel, eliminando un frágil `LIMIT 20` por una cláusula dinámica que garantiza sincronía exacta con la base de datos sin límites codificados duros. Es desde este panel donde el Comité, con un solo clic, altera el `estado=1` o `estado=0` de cualquier año en el catálogo, decidiendo políticamente qué años históricos son facturables sin necesidad de lanzar queries SQL manuales.
+
+### 4.2 Acordeón Visual y Blindaje de Catálogo (Poka-Yoke)
+1. **Acordeones:** La deuda activa (año en curso) y la histórica se separan en contenedores colapsables en la UI para evitar fatiga visual ("Wall of text").
+2. **Categorías 16 y 17 Ocultas:** Se prohíbe terminantemente la intervención humana. Los recargos son dominio absoluto del motor y no aparecerán en ningún combo o menú desplegable para los cajeros.
+
+---
+
+## 🛠️ 5. Orquestación de la Solución Integral (fix-issue-01)
+
+La solución a la "Bola de Nieve" de la mora histórica y los *timeouts* requiere una corrección a dos bandas: Código (PHP) y Base de Datos (SQL), orquestada automatizadamente para el Kiosko.
+
+### 5.1 Componentes de la WebApp (PHP)
+1. **`includes/negocio/contratos.php`**: Se eliminó el límite en código duro de `2006` y el bug de `anio_actual_fact` que bloqueaba artificialmente la facturación histórica. Ahora el límite de años es regulado de forma natural por el flag `estado=1` en el catálogo de la BD, restaurando exactamente la paridad legal de Host B, pero sin las limitantes de rendimiento.
+2. **`includes/negocio/cargos.php`**: El motor `calcula_recargos` fue reconstruido con una arquitectura "Idempotencia O(1)" (usando Hash Maps en memoria) e Inserciones Masivas Transaccionales (Dual Batch Inserts). Esto elimina la causa raíz de los *timeouts* masivos.
+3. **`admin/operaciones/soporte_reconciliados.php`**: Nueva herramienta Poka-Yoke que permite condonar deudas base omitidas por Host B, insertando el sufijo `[CONDONADO]` y aislando el impacto en el Corte de Caja del día.
+
+### 5.2 Secuencia SQL del Pipeline de Integridad (`run_patch_host_c.ps1` / `.sh`)
+La orquestación de la base de datos se ejecuta de forma secuencial mediante 5 scripts 100% blindados e idempotentes:
+1. **`01_normalizar_catalogo.sql`**: Destruye los duplicados en el catálogo de cargos para evitar choques de `Unique Key` y normaliza los nombres base.
+2. **`02_normalizacion_estructural_v2.sql`**: Crea la tabla de infraestructura requerida por la nueva herramienta de soporte (`sys_log_reconciliacion`), mueve los "Falsos Positivos" (ej. Mensualidades) fuera de la categoría de Anualidad y sanitiza las leyendas anómalas muy antiguas.
+3. **`03_normalizar_cuentas_usuarios.sql`**: Aplica el emparejamiento masivo (`TRIM` y reemplazo de dobles espacios) a todos los registros vivos e históricos para garantizar que el motor JIT los reconozca y el Hash Map de idempotencia funcione a la perfección.
+4. **`04_mora_rotativa_20_anios.sql`**: Inserta dinámicamente los parámetros (Límite Bomba y 10 Años) usando `INSERT IGNORE` para no romper configuración del usuario, y recompila la vista no-destructiva V2 que gestiona la mora rotativa.
+5. **`05_validation_20_anios.sql`**: Lanza los *checks* radiográficos finales automatizados para asegurar que los recargos huérfanos se esfumaron, que la integridad prevalece y que no hay falsos positivos activos.
+
+---
+
+## 📜 6. ANEXO OPERATIVO: Reglas para Cajeros y Operadores
+
+**1. Exclusividad de la Base Anual (Categorías 2 y 3):**
+Las Categorías 2 (Agua) y 3 (Drenaje) son **ÚNICAMENTE** para las anualidades base (el cargo anual oficial). **NO SE DEBEN USAR PARA NADA MÁS**. 
+
+**2. ¿Qué categoría usar para cargos `(X MES)` o convenios a plazos?**
+Si el operador necesita crear un convenio de pago en mensualidades, **DEBE asignarlo obligatoriamente** a categorías genéricas:
+*   **Categoría 1:** OTROS CONCEPTOS GENERALES
+*   **Categoría 4:** CUOTAS ESPECIALES
+*   **Categoría 12:** SANCIONES
+Al usar estas categorías, el **Guard G02** (y nuestra re-categorización V2) asegura que esas mensualidades jamás generen intereses ni activen el Motor JIT.
+
+**3. Transparencia de la Ventana:**
+Si un año sale de la ventana de los 27 años en el futuro, el motor JIT los ignora y el "Auto-Heal" los oculta. Los cajeros no necesitan borrar los recibos a mano; el sistema depura visual y matemáticamente las deudas anticuadas automáticamente.
+
+**4. Diferencia entre Cálculo de Recargos y Conteo de Deuda Base:**
+*   **El Cálculo de Recargos (Ventana configurable):** El motor JIT genera mora únicamente para los años que el Comité ha activado en **Configuración → Control de Mora por Año**. En producción (2026), están activos los años **2020 al 2026** (7 años). Si el Comité desactiva un año (toggle a 0), la vista `vw_ligacargos_pendientes` lo oculta automáticamente sin borrar datos físicos. El parámetro `paridad_anios_max_recargo = 0` está desactivado — el control es 100% por catálogo.
+*   **El Conteo de Deuda Base (Historial Completo):** La deuda principal (capital por servicio de agua y drenaje) es inmutable y se acumula íntegramente **desde el año en que el contrato empezó a tener adeudos**. El sistema conserva todos los registros históricos indefinidamente para preservar la legalidad y los balances contables del Comité.
+
+**5. Naturaleza del Rezago Histórico (Deudas anteriores a 2006):**
+La base de datos del sistema se inicializó oficialmente el **20 de Marzo de 2006** (no existe ningún contrato digital previo a esa fecha). Sin embargo, los cajeros verán deudas con años muy anteriores (ej. del 2000 al 2005). Esto **no es un error del sistema**. Es el resultado de la *Captura Manual de Rezago*: cuando se instaló el software en 2006, los operadores transcribieron a mano las deudas atrasadas desde las libretas de papel físicas hacia la computadora. Por tanto, es completamente válido y legal cobrar un adeudo del año 2000 a un contrato que digitalmente dice haber sido creado en 2006.
+
+**6. Operación de Anualidades Históricas Ocultas:**
+Existen dos banderas distintas para controlar el adeudo de años anteriores a 2006:
+*   **Visibilidad de Deuda Base (`estado`):** Si un año no aparece en el adeudo, es porque el capital base está oculto en la BD. Para activarlo, ve a **`Admin -> Catálogo de Cargos -> Cargos Registrados`**, busca la anualidad (ej. "ANUALIDAD DEL AGUA 2005") y presiona **"Mostrar"** (`estado=1`).
+*   **Activación de Mora (`recargo`):** Una vez visible la deuda base, para que genere intereses moratorios debes ir a **`Admin -> Operaciones -> Configuración -> Control de Mora por Año`** y marcar la casilla de ese año (`recargo=1`).
+
+---
+
+## 🧪 7. Plan de Verificación y Casos de Prueba (QA)
+Para las instrucciones paso a paso y sentencias SQL de validación de cada escenario crítico (Integridad Dual, Contratos Crónicos, Suspensión, etc.), consúltese el documento hermano: **[VERIFICACION_MANUAL_MORA_20_ANIOS.md](VERIFICACION_MANUAL_MORA_20_ANIOS.md)**.
+
+---
+
+## 📚 8. ANEXO TÉCNICO: Documentación de Scripts y Orquestadores
+
+El orquestador automatiza el pase a producción en Host C integrando los parches SQL sin intervención manual:
+
+### `run_patch_host_c.ps1` y `run_patch_host_c.sh`
+*   **a) ¿Qué hacen?:** Son los orquestadores de la ejecución. El archivo `.ps1` está diseñado para el Kiosko Windows 10 (con auto-elevación a Administrador y logging nativo), mientras que el `.sh` permite la ejecución desde entornos Linux o WSL.
+*   **b) ¿Por qué?:** El Host C (Appliance) restringe la intervención manual por consola para evitar errores humanos en el pase a producción de componentes financieros tan críticos.
+*   **c) ¿Para qué?:** Garantizan que los 5 parches SQL se apliquen secuencialmente, guardando un volcado de logs (`logs_patch_*.txt`) para auditoría forense post-despliegue.
+
+### `01_normalizar_catalogo.sql`
+*   **a) ¿Qué hacen?:** Consolida múltiples variaciones de nombres de recargos antiguos (ej. `RECARGO AÑO 2006`) en un solo estándar y elimina duplicados físicos en el catálogo.
+*   **b) ¿Por qué?:** Porque en Host B los operadores creaban conceptos a mano, generando cientos de "conceptos" basura que rompían la restricción de *Unique Key*.
+*   **c) ¿Para qué?:** Para tener un catálogo limpio que soporte la inserción masiva del motor JIT.
+
+### `02_normalizacion_estructural_v2.sql`
+*   **a) ¿Qué hacen?:** Mueve conceptos atípicos (como `MENSUALIDAD` o `REHABILITACION`) a Categorías no devengadoras y renombra anualidades base a su formato oficial.
+*   **b) ¿Por qué?:** Porque dejar cargos menores en Cat 2 o 3 provoca que el motor JIT los identifique como "anualidades base", inyectando moras irreales (Falso Positivo).
+*   **c) ¿Para qué?:** Para inmunizar estructuralmente al sistema contra la generación de deuda espuria.
+
+### `03_normalizar_cuentas_usuarios.sql`
+*   **a) ¿Qué hacen?:** Recorta (`TRIM`) las leyendas en `ligacargos` y mapea masivamente el historial de nombres legacy a nomenclatura V2.
+*   **b) ¿Por qué?:** En Host B existían más de 40 formas distintas de escribir la misma deuda, lo que rompe la validación algorítmica en memoria del JIT.
+*   **c) ¿Para qué?:** Para lograr paridad contable y preparar el terreno para que el Hash Map de idempotencia no falle.
+
+### `04_mora_rotativa_20_anios.sql`
+*   **a) ¿Qué hace?:** Script no destructivo con dos responsabilidades: (1) Inicializa los parámetros en `config_sistema` via `INSERT IGNORE` (respeta valores ya configurados por el operador). (2) Crea o reemplaza la vista `vw_ligacargos_pendientes` con lógica Auto-Heal.
+*   **b) ¿Por qué?:** La activación de recargos por año es responsabilidad exclusiva del operador desde `configuracion.php`. Este script **NO ejecuta** `UPDATE cargos SET recargo=...` ni `DELETE` sobre datos. Eso destruiría la configuración vigente del Comité.
+*   **c) ¿Para qué?:** Para instalar la infraestructura de la vista dinámica y los parámetros globales por defecto (apagados/0) de forma idempotente y segura en cada pase a producción.
+
+### `05_validation_20_anios.sql`
+*   **a) ¿Qué hacen?:** Ejecuta 5 consultas `SELECT` críticas que revisan conteos y cruzan falsos positivos.
+*   **b) ¿Por qué?:** Desplegar modificaciones sin QA es un riesgo crítico.
+*   **c) ¿Para qué?:** Proporcionar un informe radiográfico de "Go-Live" que asegure que el despliegue del orquestador ha sido 100% exitoso.
+
+### 8.1 El Mega Bug: El Mito del Límite de 2006
+*   **El Problema:** El operador reportó caídas masivas de deuda en Producción (Host C). Se intentó parchar poniendo un límite en código duro (`if ($anio_inicio_fact < 2006)`) por miedo a que el servidor "crasheara" (TimeOut) si calculaba desde 1999.
+*   **El Descubrimiento:** Host B jamás limitó las fechas en el código. Las deudas de 1999-2005 no aparecían porque simplemente en el catálogo de BD tienen `estado=0` (desactivadas por operadores hace años).
+*   **¿Dónde está la Solución?:** **NO EXISTE un parche SQL para este bug**. La solución definitiva se aplicó directamente en la WebApp modificando el archivo **`includes/negocio/contratos.php`**. Se eliminó por completo la línea de código `2006` y la restricción del "año actual". 
+*   **El Resultado:** Al quitar el bloqueo en PHP, devolvimos el control a la base de datos (si el catálogo dice `estado=1`, se cobra; si dice `estado=0`, se oculta), logrando paridad exacta con Host B.
+
+### 8.2 Bug de Cargos Duplicados: `automatico = 1` en Variaciones Comerciales
+
+*   **El Problema:** El script `01_normalizar_catalogo.sql` contenía una instrucción que marcaba como `automatico = 1` a **todos** los cargos de categorías 2 y 3 (`anio > 0`), incluyendo variaciones como `TIPO (C)`, `(2DA. TOMA)` y `(2DA. DESCARGA)`.
+*   **El Síntoma:** Al consultar la ficha de un contrato en la webapp, `generaCargosAutomaticos()` insertaba automáticamente estas variaciones en el ledger, inflando los cargos base. Por ejemplo, el contrato 161 pasó de 55 cargos ($25,800) a 69 cargos ($34,830) tras la primera consulta.
+*   **La Solución:** El script fue corregido para que solo las **anualidades base** (nombre sin `TIPO`, `COMERCIAL`, `2DA`, `2ª`, `SEGUNDA`) se marquen con `automatico = 1`. Las variaciones se fuerzan explícitamente a `automatico = 0`.
+*   **Cargos Atípicos Conocidos en el Catálogo:** Los siguientes cargos de categorías 2 ó 3 no generan mora y están correctamente re-categorizados o desactivados. Aparecen como aviso informativo en `admin/operaciones/configuracion.php` — ese aviso es solo orientativo para el operador y **no altera ningún cálculo**:
+    *   `2DA DESCARGA DE DRENAJE 2016` ($200.00) — Sin mora (movido a Rehabilitación)
+    *   `REHABILITACION DE LA RED DE AGUA POTABLE 2DA.` ($120.00) — Sin mora (Cat 5)
+
+### 8.3 Bug del Contagio Silencioso: Removido en Versión Final
+*   **El Problema original:** El script `04_mora_rotativa_20_anios.sql` ejecutaba `UPDATE cargos SET recargo=1/0` masivo y `DELETE` de recargos, pisando la configuración del operador en cada re-ejecución.
+*   **La Solución definitiva (2026-06-24):** El script `04` fue refactorizado para ser **100% no destructivo**. Ya no contiene ningún `UPDATE` sobre `cargos`, `ligacargos` o `ligacargos_historico`, ni ningún `DELETE`. El control de qué años generan mora recae **exclusivamente** en el panel de `configuracion.php`.
+
+### 8.4 Poka-Yoke en la Interfaz Gráfica de Amnistía (`configuracion.php`)
+*   **El Problema:** Al marcar o desmarcar el checkbox de amnistía anual, el `UPDATE` masivo podía contagiar el flag `recargo=1` a variaciones comerciales ("TIPO C").
+*   **La Solución:** Se inyectó el filtro de exclusión estructural (`NOT LIKE '%TIPO%' AND NOT LIKE '%COMERCIAL%'...`) en las tres queries de `configuracion.php` (tabla `cargos`, `ligacargos` y `ligacargos_historico`). Las variaciones comerciales permanecen aisladas sin importar las acciones del operador.
+*   **Protección anti-resubmit:** `configuracion.php` implementa el patrón **Post/Redirect/Get (PRG)**. Al guardar, el sistema hace `header('Location: configuracion.php?saved=1')` antes de renderizar HTML, evitando que un F5 del navegador reenvíe el POST y duplique los cambios.
+
+### 8.6 Bug de Generación de Espurios en Período de Gracia (Fix-06)
+*   **El Problema:** El motor JIT original iniciaba su ciclo de mora siempre en enero (`$mesrecargo = 1`) para el año del cargo, ignorando el parámetro de configuración `$mes_inicio` (abril). Esto generaba tres recargos espurios (ENE, FEB, MAR) por cada año base procesado (exceso de $180 MXN por contrato, por año).
+*   **La Solución Estructural (PHP):** Se ajustó el inicio del ciclo a `$mesrecargo = $mes_inicio` y se descontó el offset en la fórmula de meses totales (`$meses = (($anio_numero - $anio) * 12) + ($mes_numero - $mes_inicio)`). Además, se inyectó una rutina de **Auto-Heal** en `cargos.php` para cancelar dinámicamente espurios en caso de apertura de ventanas históricas nuevas.
+*   **La Solución de Datos (SQL):** El parche `06_limpieza_espurios_mora.sql` limpia la base de datos (actualizando a `estado=-1` para auditoría) todos los recargos con leyenda `RECARGO ENE/FEB/MAR [AÑO]` que pertenezcan al mismo año base (para JIT v2, años ≥ 2020), respetando el formato legacy de 2017-2019.
+
+---
+
+## 📈 9. ANEXO FINANCIERO: Comparativa Pura e Impacto Económico (Host B vs Host C)
+
+Al analizar las bases de datos (Host B como Legacy vs Host C como V2 con actividad transaccional desde el 22 de mayo), la orquestación (`run_patch_host_c.sh`) impacta las siguientes dimensiones financieras de la cartera vencida:
+
+| Métrica del Orquestador | Host B (Legacy) | Host C (V2 / Backup) | Análisis del Monto y El Gap Financiero |
+| :--- | :--- | :--- | :--- |
+| **1. Basura Legacy a Neutralizar**<br>*(Cat 16 y 17 con `estado=0`)* | **20,278** recargos<br>*(635 contratos)*<br>**$1,048,564.00 MXN** | **19,604** recargos<br>*(616 contratos)*<br>**$1,015,688.00 MXN** | **Impacto Masivo:** El orquestador va a desaparecer más de **$1 Millón de pesos** de recargos basura (irrecuperables/falsos) de la interfaz de cobranza. La diferencia de ~$32,000 pesos entre hosts es la mora legacy que fue pagada o cancelada por los cajeros desde el 22 de mayo. |
+| **2. Falsos Positivos a Extirpar**<br>*(MENSUALIDAD / REHABILITACION)* | **285** registros<br>*(285 contratos)*<br>**$34,116.00 MXN** | **285** registros<br>*(285 contratos)*<br>**$34,116.00 MXN** | **Sincronía Perfecta:** Hay exactamente **$34,116 pesos** en Host C clasificados erróneamente en Cat 2 y 3. Si el script `02` no los sacara de ahí, el motor JIT habría intentado multiplicar su deuda inyectándoles mora rotativa de hasta 27 años. |
+| **3. Nombres Atípicos a Normalizar**<br>*(AGUA POTABLE AÑO...)* | **3** registros<br>*(3 contratos)*<br>**$1,800.00 MXN** | **86** registros<br>*(86 contratos)*<br>**$32,400.00 MXN** | **El Efecto TRIM:** Host B solo detecta $1,800 pesos porque los demás registros están escondidos tras dobles y triples espacios invisibles. En Host C, gracias al saneamiento de texto previo (`03_normalizar_cuentas_usuarios.sql`), ya afloraron **$32,400 pesos** de deuda atípica que ahora sí serán renombrados correctamente para que el Hash Map de idempotencia no falle. |
+| **4. Deuda Base Real (Morosos)**<br>*(Anualidades válidas para el JIT)* | **2,860** anualidades<br>*(331 contratos)*<br>**$1,049,900.00 MXN** | **2,673** anualidades<br>*(297 contratos)*<br>**$985,720.00 MXN** | **Cobranza Activa:** La cartera vencida real y válida en Host B era de casi 1.05 millones. En Host C bajó a **$985,720 pesos**. Esa diferencia de ~$64,180 pesos es dinero real que ingresó a caja o fue saneado/cancelado operativamente desde la migración del 22 de mayo. |
+| **5. Limpieza de Espurios ENE-MAR**<br>*(Meses previos al periodo de gracia)* | **N/A** (Error oculto en Host B) | **21 cancelados por contrato moroso** | **Ajuste Fino:** El motor JIT cobraba $180 MXN extra por cada año facturado al ignorar el inicio en Abril. La corrección limpia quirúrgicamente este exceso en toda la BD. Los años viejos (2017-2019) permanecen intocados. |
+| **6. El Bombazo de los 27 Años**<br>*(Deuda Oculta de 1999 a 2005)* | **$0 MXN** *(Bloqueo de Catálogo)* | **Abierto a Decisión del Comité** | **Impacto Potencial Gigante:** Al eliminar la restricción ciega de "2006" en el código PHP, el sistema ahora es capaz de recuperar las deudas desde 1999 sin crashear. Si el Comité decide encender estas anualidades en el catálogo (`estado=1`) y ampliar la ventana rotativa, esto detonará una recuperación histórica masiva. |
+
+### 🎯 Resumen de Valor para el Comité de Agua
+
+Al aplicar la orquestación, el Comité experimenta tres impactos drásticos que **chocan positivamente** contra lo que veían en sus libros y en Host B:
+
+1. **El impacto más escandaloso (Indicador 1):** El sistema V2 "elimina" más de 1 millón de pesos que Host B reportaba como "mora por cobrar". Sin embargo, esto es **a favor de la auditoría legal**, ya que ese millón era una ficción matemática provocada por errores operativos (duplicados) y el fallido tope de 12 meses.
+2. **El impacto más lucrativo (Indicador 4):** A cambio de destruir la mora basura, el Motor JIT toma los **$985,720 MXN de Deuda Base** limpia y les aplica el cálculo de mora rotativa continua (sin el tope asfixiante de 12 meses de Host B). Esto generará cifras astronómicamente mayores, justas y 100% legalmente cobrables, recuperando el dinero que el sistema legacy le estaba regalando a los deudores crónicos.
+3. **La Puerta Abierta a 27 Años (Indicador 5):** Al solucionar la "Bola de Nieve" de timeouts y limitaciones de código PHP, el sistema ahora permite cobrar legalmente desde 1999 si el catálogo se activa. El límite ya no es tecnológico, es una decisión política y financiera del Comité.
+4. **El impacto social (Indicador 2):** Protege a 285 familias de cobros irracionales, salvando al Comité de quejas o demandas por usura.
+
+---
+
+### 8.5 Bug Visual de Inflamiento en Host B: "Total de Cargos" incluía los Recargos
+
+> [!IMPORTANT]
+> Este es el bug más tramposo de todos porque no corrompe datos — solo **miente en la pantalla**. El cajero de Host B veía un total inflado y tomaba decisiones basadas en un número falso.
+
+#### La Metáfora: La Tienda de Fruta
+
+Imagina que el cajero de una tienda tiene dos cajones:
+- 🍎 **Cajón de Frutas** (Deuda Base): Manzanas, peras, naranjas — lo que el cliente debe por el servicio de agua y drenaje.
+- 🌶️ **Cajón de Salsas** (Recargos/Mora): Los intereses que se acumularon por no pagar a tiempo.
+
+**El buen cajero (Host C V2)** siempre dice: *"Tienes $200 de fruta y $80 de salsas. Total: $280."* Dos líneas separadas. Clarísimo.
+
+**El cajero viejo (Host B)** tenía un error en su caja registradora: al calcular el "Total de fruta", **sin querer también contaba las salsas**. Entonces le decía al cliente: *"Tienes $280 de fruta"*, cuando en realidad solo tenía $200 de fruta y $80 de salsas. La suma total era la misma ($280), pero la **etiqueta estaba mal asignada**.
+
+---
+
+#### El Bug Técnico en Host B
+
+En la webapp de Host B (sistema legacy), la pantalla de adeudos calculaba `$total` sumando **todos** los registros pendientes (`estado=0`) sin distinguir si eran deuda base o recargos moratorios:
+
+```php
+// Host B — código incorrecto (pseudocódigo):
+while ($row = fetch_row($query)) {
+    $total += $row['monto'];  // ← sumaba TODO, sin filtrar cat 16 y 17
+}
+echo "Total de cargos: $" . $total;
+```
+
+El campo `recargo` en la tabla `ligacargos` de Host B guarda el **monto del recargo mensual** (un float, ej. `40.00`), no una bandera booleana. La clasificación correcta de si algo es mora o no se debe hacer por `categoria` (16 = Recargo Agua, 17 = Recargo Drenaje). El código viejo ignoraba esto.
+
+---
+
+#### La Corrección en Host C V2
+
+En `includes/negocio/contratos.php` (Host C), el ciclo de adeudos fue refactorizado para separar limpiamente los conceptos usando la `categoria` como criterio:
+
+```php
+// Host C V2 — código correcto:
+$cat_recargo_agua   = 16;  // leído desde config_sistema
+$cat_recargo_drenaje = 17;
+
+while ($resulta = fetch_array($res)) {
+    $es_recargo = ($resulta['categoria'] == $cat_recargo_agua 
+               || $resulta['categoria'] == $cat_recargo_drenaje);
+    
+    $total    += $es_recargo ? 0 : $resulta['monto'];  // ← solo deuda base
+    $recargos += $es_recargo ? $resulta['monto'] : 0;  // ← solo mora
+}
+
+// En pantalla:
+echo "Total de cargos: $"   . $total;    // solo fruta
+echo "Total de recargos: $" . $recargos; // solo salsas
+echo "Total general: $"     . ($total + $recargos);
+```
+
+La pantalla ahora tiene **tres líneas distintas** que suman correctamente al mismo total real.
+
+---
+
+#### Consecuencia Real: "Inflamiento vs. Disminución"
+
+Sí, tu intuición es **100% correcta**:
+
+| | Host B (Bug) | Host C (Correcto) | Diferencia |
+|:--|:--:|:--:|:--:|
+| "Total de cargos" pantalla | **Inflado** (base + mora mezclada) | **Real** (solo base) | Host B > Host C |
+| "Total de recargos" pantalla | Incompleto o $0 | **Real** (solo mora) | Host B < Host C |
+| "Total general" pantalla | Igual | Igual | Idéntico |
+
+**El total de lo que debe el cliente no cambia** — la suma matemática siempre da lo mismo. Lo que cambia es **cómo está etiquetado** en la pantalla. Host B infla artificialmente el renglón "Cargos" al incluir mora ahí, mientras que Host C lo muestra correctamente separado.
+
+**Ejemplo real del contrato 760 (analizado el 2026-06-24):**
+
+| Concepto | Host B muestra | Host C muestra | Diferencia |
+|:---------|:--------------:|:--------------:|:----------:|
+| Base pendiente real en BD | $7,540 | $7,880 (*) | +$340 (*) |
+| Recargos legacy sumados al "Total de cargos" (bug) | ~$1,574 | $0 | -$1,574 |
+| **"Total de cargos" en pantalla** | **$9,114** | **$7,880** | **$1,234** |
+
+> (*) El +$340 adicional en Host C corresponde a Drenaje 2014 y 2015 que llegaron a Host C sin estado pagado — es una discrepancia de datos del pipeline de migración, independiente del bug visual.
+
+#### En una sola frase
+
+> **Host B mentía en la etiqueta del renglón "Total de cargos" — metía ahí los recargos de mora. Host C corrigió eso: cada peso va a su cajón correcto. El total de lo que debe el cliente es el mismo; solo que ahora el cajero sabe de qué es cada parte.**
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-b_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:47 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Calculating Totals on Host B**
+
+Okay, I've got some initial figures from Host B. I see that the base debt (`total_cargos`) is $9,000.00, and the surcharges (`total_recargos`) are $6,780.00. There are a total of 132 outstanding debts (`count_total`). My current calculation shows a general total of $15,780.00.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `PLAN_MORA_ROTATIVA_20_ANIOS.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.459203022s
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L179-209)</summary>
+
+**Path:** `Unknown file`
+
+```
+*   **La Solución de Datos (SQL):** El parche `06_limpieza_espurios_mora.sql` limpia la base de datos (actualizando a `estado=-1` para auditoría) todos los recargos con leyenda `RECARGO ENE/FEB/MAR [AÑO]` que pertenezcan al mismo año base (para JIT v2, años ≥ 2020), respetando el formato legacy de 2017-2019.
+
+---
+
+## 📈 9. ANEXO FINANCIERO: Comparativa Pura e Impacto Económico (Host B vs Host C)
+
+Al analizar las bases de datos (Host B como Legacy vs Host C como V2 con actividad transaccional desde el 22 de mayo), la orquestación (`run_patch_host_c.sh`) impacta las siguientes dimensiones financieras de la cartera vencida:
+
+| Métrica del Orquestador | Host B (Legacy) | Host C (V2 / Backup) | Análisis del Monto y El Gap Financiero |
+| :--- | :--- | :--- | :--- |
+| **1. Basura Legacy a Neutralizar**<br>*(Cat 16 y 17 con `estado=0`)* | **20,278** recargos<br>*(635 contratos)*<br>**$1,048,564.00 MXN** | **19,604** recargos<br>*(616 contratos)*<br>**$1,015,688.00 MXN** | **Impacto Masivo:** El orquestador va a desaparecer más de **$1 Millón de pesos** de recargos basura (irrecuperables/falsos) de la interfaz de cobranza. La diferencia de ~$32,000 pesos entre hosts es la mora legacy que fue pagada o cancelada por los cajeros desde el 22 de mayo. |
+| **2. Falsos Positivos a Extirpar**<br>*(MENSUALIDAD / REHABILITACION)* | **285** registros<br>*(285 contratos)*<br>**$34,116.00 MXN** | **285** registros<br>*(285 contratos)*<br>**$34,116.00 MXN** | **Sincronía Perfecta:** Hay exactamente **$34,116 pesos** en Host C clasificados erróneamente en Cat 2 y 3. Si el script `02` no los sacara de ahí, el motor JIT habría intentado multiplicar su deuda inyectándoles mora rotativa de hasta 27 años. |
+| **3. Nombres Atípicos a Normalizar**<br>*(AGUA POTABLE AÑO...)* | **3** registros<br>*(3 contratos)*<br>**$1,800.00 MXN** | **86** registros<br>*(86 contratos)*<br>**$32,400.00 MXN** | **El Efecto TRIM:** Host B solo detecta $1,800 pesos porque los demás registros están escondidos tras dobles y triples espacios invisibles. En Host C, gracias al saneamiento de texto previo (`03_normalizar_cuentas_usuarios.sql`), ya afloraron **$32,400 pesos** de deuda atípica que ahora sí serán renombrados correctamente para que el Hash Map de idempotencia no falle. |
+| **4. Deuda Base Real (Morosos)**<br>*(Anualidades válidas para el JIT)* | **2,860** anualidades<br>*(331 contratos)*<br>**$1,049,900.00 MXN** | **2,673** anualidades<br>*(297 contratos)*<br>**$985,720.00 MXN** | **Cobranza Activa:** La cartera vencida real y válida en Host B era de casi 1.05 millones. En Host C bajó a **$985,720 pesos**. Esa diferencia de ~$64,180 pesos es dinero real que ingresó a caja o fue saneado/cancelado operativamente desde la migración del 22 de mayo. |
+| **5. Limpieza de Espurios ENE-MAR**<br>*(Meses previos al periodo de gracia)* | **N/A** (Error oculto en Host B) | **21 cancelados por contrato moroso** | **Ajuste Fino:** El motor JIT cobraba $180 MXN extra por cada año facturado al ignorar el inicio en Abril. La corrección limpia quirúrgicamente este exceso en toda la BD. Los años viejos (2017-2019) permanecen intocados. |
+| **6. El Bombazo de los 27 Años**<br>*(Deuda Oculta de 1999 a 2005)* | **$0 MXN** *(Bloqueo de Catálogo)* | **Abierto a Decisión del Comité** | **Impacto Potencial Gigante:** Al eliminar la restricción ciega de "2006" en el código PHP, el sistema ahora es capaz de recuperar las deudas desde 1999 sin crashear. Si el Comité decide encender estas anualidades en el catálogo (`estado=1`) y ampliar la ventana rotativa, esto detonará una recuperación histórica masiva. |
+
+### 🎯 Resumen de Valor para el Comité de Agua
+
+Al aplicar la orquestación, el Comité experimenta tres impactos drásticos que **chocan positivamente** contra lo que veían en sus libros y en Host B:
+
+1. **El impacto más escandaloso (Indicador 1):** El sistema V2 "elimina" más de 1 millón de pesos que Host B reportaba como "mora por cobrar". Sin embargo, esto es **a favor de la auditoría legal**, ya que ese millón era una ficción matemática provocada por errores operativos (duplicados) y el fallido tope de 12 meses.
+2. **El impacto más lucrativo (Indicador 4):** A cambio de destruir la mora basura, el Motor JIT toma los **$985,720 MXN de Deuda Base** limpia y les aplica el cálculo de mora rotativa continua (sin el tope asfixiante de 12 meses de Host B). Esto generará cifras astronómicamente mayores, justas y 100% legalmente cobrables, recuperando el dinero que el sistema legacy le estaba regalando a los deudores crónicos.
+3. **La Puerta Abierta a 27 Años (Indicador 5):** Al solucionar la "Bola de Nieve" de timeouts y limitaciones de código PHP, el sistema ahora permite cobrar legalmente desde 1999 si el catálogo se activa. El límite ya no es tecnológico, es una decisión política y financiera del Comité.
+4. **El impacto social (Indicador 2):** Protege a 285 familias de cobros irracionales, salvando al Comité de quejas o demandas por usura.
+
+---
+
+### 8.5 Bug Visual de Inflamiento en Host B: "Total de Cargos" incluía los Recargos
+
+> [!IMPORTANT]
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `PLAN_MORA_ROTATIVA_20_ANIOS.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L194-229)</summary>
+
+**Path:** `Unknown file`
+
+```
+| **6. El Bombazo de los 27 Años**<br>*(Deuda Oculta de 1999 a 2005)* | **$0 MXN** *(Bloqueo de Catálogo)* | **Abierto a Decisión del Comité** | **Impacto Potencial Gigante:** Al eliminar la restricción ciega de "2006" en el código PHP, el sistema ahora es capaz de recuperar las deudas desde 1999 sin crashear. Si el Comité decide encender estas anualidades en el catálogo (`estado=1`) y ampliar la ventana rotativa, esto detonará una recuperación histórica masiva. |
+
+### 🎯 Resumen de Valor para el Comité de Agua
+
+Al aplicar la orquestación, el Comité experimenta tres impactos drásticos que **chocan positivamente** contra lo que veían en sus libros y en Host B:
+
+1. **El impacto más escandaloso (Indicador 1):** El sistema V2 "elimina" más de 1 millón de pesos que Host B reportaba como "mora por cobrar". Sin embargo, esto es **a favor de la auditoría legal**, ya que ese millón era una ficción matemática provocada por errores operativos (duplicados) y el fallido tope de 12 meses.
+2. **El impacto más lucrativo (Indicador 4):** A cambio de destruir la mora basura, el Motor JIT toma los **$985,720 MXN de Deuda Base** limpia y les aplica el cálculo de mora rotativa continua (sin el tope asfixiante de 12 meses de Host B). Esto generará cifras astronómicamente mayores, justas y 100% legalmente cobrables, recuperando el dinero que el sistema legacy le estaba regalando a los deudores crónicos.
+3. **La Puerta Abierta a 27 Años (Indicador 5):** Al solucionar la "Bola de Nieve" de timeouts y limitaciones de código PHP, el sistema ahora permite cobrar legalmente desde 1999 si el catálogo se activa. El límite ya no es tecnológico, es una decisión política y financiera del Comité.
+4. **El impacto social (Indicador 2):** Protege a 285 familias de cobros irracionales, salvando al Comité de quejas o demandas por usura.
+
+---
+
+### 8.5 Bug Visual de Inflamiento en Host B: "Total de Cargos" incluía los Recargos
+
+> [!IMPORTANT]
+> Este es el bug más tramposo de todos porque no corrompe datos — solo **miente en la pantalla**. El cajero de Host B veía un total inflado y tomaba decisiones basadas en un número falso.
+
+#### La Metáfora: La Tienda de Fruta
+
+Imagina que el cajero de una tienda tiene dos cajones:
+- 🍎 **Cajón de Frutas** (Deuda Base): Manzanas, peras, naranjas — lo que el cliente debe por el servicio de agua y drenaje.
+- 🌶️ **Cajón de Salsas** (Recargos/Mora): Los intereses que se acumularon por no pagar a tiempo.
+
+**El buen cajero (Host C V2)** siempre dice: *"Tienes $200 de fruta y $80 de salsas. Total: $280."* Dos líneas separadas. Clarísimo.
+
+**El cajero viejo (Host B)** tenía un error en su caja registradora: al calcular el "Total de fruta", **sin querer también contaba las salsas**. Entonces le decía al cliente: *"Tienes $280 de fruta"*, cuando en realidad solo tenía $200 de fruta y $80 de salsas. La suma total era la misma ($280), pero la **etiqueta estaba mal asignada**.
+
+---
+
+#### El Bug Técnico en Host B
+
+En la webapp de Host B (sistema legacy), la pantalla de adeudos calculaba `$total` sumando **todos** los registros pendientes (`estado=0`) sin distinguir si eran deuda base o recargos moratorios:
+
+```php
+// Host B — código incorrecto (pseudocódigo):
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `PLAN_MORA_ROTATIVA_20_ANIOS.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L229-292)</summary>
+
+**Path:** `Unknown file`
+
+```
+// Host B — código incorrecto (pseudocódigo):
+while ($row = fetch_row($query)) {
+    $total += $row['monto'];  // ← sumaba TODO, sin filtrar cat 16 y 17
+}
+echo "Total de cargos: $" . $total;
+```
+
+El campo `recargo` en la tabla `ligacargos` de Host B guarda el **monto del recargo mensual** (un float, ej. `40.00`), no una bandera booleana. La clasificación correcta de si algo es mora o no se debe hacer por `categoria` (16 = Recargo Agua, 17 = Recargo Drenaje). El código viejo ignoraba esto.
+
+---
+
+#### La Corrección en Host C V2
+
+En `includes/negocio/contratos.php` (Host C), el ciclo de adeudos fue refactorizado para separar limpiamente los conceptos usando la `categoria` como criterio:
+
+```php
+// Host C V2 — código correcto:
+$cat_recargo_agua   = 16;  // leído desde config_sistema
+$cat_recargo_drenaje = 17;
+
+while ($resulta = fetch_array($res)) {
+    $es_recargo = ($resulta['categoria'] == $cat_recargo_agua 
+               || $resulta['categoria'] == $cat_recargo_drenaje);
+    
+    $total    += $es_recargo ? 0 : $resulta['monto'];  // ← solo deuda base
+    $recargos += $es_recargo ? $resulta['monto'] : 0;  // ← solo mora
+}
+
+// En pantalla:
+echo "Total de cargos: $"   . $total;    // solo fruta
+echo "Total de recargos: $" . $recargos; // solo salsas
+echo "Total general: $"     . ($total + $recargos);
+```
+
+La pantalla ahora tiene **tres líneas distintas** que suman correctamente al mismo total real.
+
+---
+
+#### Consecuencia Real: "Inflamiento vs. Disminución"
+
+Sí, tu intuición es **100% correcta**:
+
+| | Host B (Bug) | Host C (Correcto) | Diferencia |
+|:--|:--:|:--:|:--:|
+| "Total de cargos" pantalla | **Inflado** (base + mora mezclada) | **Real** (solo base) | Host B > Host C |
+| "Total de recargos" pantalla | Incompleto o $0 | **Real** (solo mora) | Host B < Host C |
+| "Total general" pantalla | Igual | Igual | Idéntico |
+
+**El total de lo que debe el cliente no cambia** — la suma matemática siempre da lo mismo. Lo que cambia es **cómo está etiquetado** en la pantalla. Host B infla artificialmente el renglón "Cargos" al incluir mora ahí, mientras que Host C lo muestra correctamente separado.
+
+**Ejemplo real del contrato 760 (analizado el 2026-06-24):**
+
+| Concepto | Host B muestra | Host C muestra | Diferencia |
+|:---------|:--------------:|:--------------:|:----------:|
+| Base pendiente real en BD | $7,540 | $7,880 (*) | +$340 (*) |
+| Recargos legacy sumados al "Total de cargos" (bug) | ~$1,574 | $0 | -$1,574 |
+| **"Total de cargos" en pantalla** | **$9,114** | **$7,880** | **$1,234** |
+
+> (*) El +$340 adicional en Host C corresponde a Drenaje 2014 y 2015 que llegaron a Host C sin estado pagado — es una discrepancia de datos del pipeline de migración, independiente del bug visual.
+
+#### En una sola frase
+
+> **Host B mentía en la etiqueta del renglón "Total de cargos" — metía ahí los recargos de mora. Host C corrigió eso: cada peso va a su cajón correcto. El total de lo que debe el cliente es el mismo; solo que ahora el cajero sabe de qué es cada parte.**
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Section Anomalies**
+
+I've hit a confusing point in section numbering: the "Bug Visual de Inflamiento en Host B" is labeled 8.5 but nested within a section labeled 9. My working assumption is that the section was moved or added later. I'll focus on the section headings to get an overview of the document's structure and the rationale for the numbering.
+
+
+**Updating Financial Appendix**
+
+I'm now focusing on adding a new subsection, "Conciliación Detallada de Contratos de Prueba (QA)", under the financial appendix. I've analyzed the structure and decided the best location for the new section is at the end of the file. My goal is to add the markdown content for this subsection, detailing contract 549, and highlighting differences between Host B (Legacy) and Host C regarding the debt.
+
+
+**Calculating Debt Comparisons**
+
+I've just finished calculating and comparing the debts for Host B and Host C. Host B's total debt is $15,780.00 MXN, while Host C's totals $25,680.00 MXN. I've noted a $9,900.00 MXN difference in recargos (late fees) between the two. I am trying to explain this, focusing on the distinct late fee calculation methods: static versus continuous JIT generation.
+
+
+**Clarifying Debt Differences**
+
+I've been analyzing the differences in recargos between Host B and Host C. Specifically, Host C, due to "Auto-Heal," zeroed out 6 spurious late fees from 2020-2021, and its engine respects and unifies migrated late fee data from Host B without duplication using a Hash Map. This clarification is based on the provided details: Host B's active monthly late fees total $16,680.00, while in contrast, the grace period routine in `cargos.php` canceled, and marked as `-1`, the grace periods.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 3.886548128s
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:47 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+. Cuanto fue la cantida total de adeudo para el año 2020, en host c? 
+. En el host b, webapp me muestra esto:
+132 adeudos del contrato, Total de cargos:	$12,060.00, Total de recargos:	$3,720.00, Total general:	$ 15780; no es del todo congruente con lo que describiste; analiza que ocurre.
+Aqui el codigo php de la webapp de host b, /opt/lampp/htdocs/vmwin7-agua/
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `configuracion.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-c_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:55 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `Total de cargos`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:55 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `Total de recargos`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:55 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `Total de cargos`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:55 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `core.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L35-834)</summary>
+
+**Path:** `Unknown file`
+
+```
+	function abrirConexion(){
+		$this->link = @mysql_connect($this->servidor, $this->usuario, $this->contrasena);
+		if (!$this->link) {
+			$this->link = @mysql_connect($this->servidor, $this->usuario, "");
+			if (!$this->link)
+			{
+				print "<script>$('#mensajes').html(\"<img src='alerta.png'><br><b>No es posible conectarse a la Base de Datos del sistema.</b><br><br>Intente levantar el servidor <i>MySQL</i> de forma manual<br>ya que de otra forma, el sistema no funcionar&aacute;. Despu&eacute;s, recargue esta p&aacute;gina.\");	$('#mensajes').fadeIn(500,function(){});</script>";
+				return 0;
+			}
+				else {$this->conexion=1; return 1;}
+		}
+		else{
+			$this->conexion=1;
+			return 1;
+		}
+	}
+	function cerrarConexion(){
+		mysql_close($this->link);
+	}
+	function conectarBaseDatos(){
+		if ($this->conexion==0)
+			$this->abrirConexion();
+		if ($this->conexion==1){
+			$db_selected = @mysql_select_db($this->basedatos, $this->link);
+			if (!$db_selected)
+				return 0;
+			else
+				return 1;
+		}
+	}
+	function q($query)
+	{
+		return @mysql_query($query);
+	}
+}
+
+function menu($opc)
+{
+	switch($opc)
+	{
+		case 'usuario':
+			return 
+			"<table align='center'><tr><td>".
+			"<form id='buscausr' name='buscausr' style='margin: -3px 2px 0px;'>".
+			"<span id='etiq'>Buscar por <b>Nombre</b>: </span>".
+			"<input type='hidden' value='busquedaUsuario' name='opc' id='opc'>".
+			"<input type='text' value='' class='mayusculas' name='cadena' id='cadena' autocomplete=off>".
+			"<input type='submit' value='Ok'></form></td><td>".
+			"<form id='buscausrcalle' name='buscausrcalle' style='margin: -3px 2px 0px;'>".
+			"<span id='etiq'>Buscar por <b>Calle</b>: </span>".
+			"<input type='hidden' value='busquedaUsuarioCalle' name='opc' id='opc'>".
+			"<input type='text' value='' class='mayusculas' name='cadenaCalle' id='cadenaCalle' autocomplete=off>".
+			"<input type='submit' value='Ok'></form></td><td>".
+			" | <input type='button' value='Nuevo Usuario' onclick=\"nuevoUsuario()\">".
+			"</td></tr></table>".
+			"<div id='nara'></div>".
+			"<script>cargaBusquedaUsuario()</script>";
+			break;
+		case 'contrato':
+			return "<form id='buscacto' name='buscacto'>".
+			"<span id='etiq'>Buscar por <b>N&uacute;mero de Contrato</b>: </span>".
+			"<input type='hidden' value='busquedaContrato' name='opc' id='opc'><input type='text' value='' name='cadena' id='cadena' autocomplete=off> ".
+			"<input type='submit' value='Ok'>".
+			" | <input type='button' value='Nuevo Contrato' onclick=\"nuevoContrato()\">".
+			"</form><div id='nara'></div>".
+			"<script>cargaBusquedaContrato()</script>";
+			break;
+		default:
+			return "";
+			break;
+	}
+}
+
+function busquedaUsuario($query)
+{
+	$y=new Conexion();
+	$y->conectarBaseDatos();
+/*
+	$letras=explode(",","a,á,e,é,i,í,o,ó,u,ú");
+
+	$query=preg_replace("(a|e|i|o|u)", "", $query);
+*/
+	$coincidencias=explode(' ',$query);
+	$descripciones="";
+	
+	foreach($coincidencias as $r)
+	{
+		if($r!="")	$descripciones.=(($descripciones=="")?"":" and ")."nombre regexp '($r+)'";
+	}
+
+	$q2="select noconsecutivo, nombre, domicilio from usuario where $descripciones";
+
+	$res=$y->q($q2);
+
+	$n=@mysql_num_rows($res);
+	
+	$salida="";
+	while(list($consecutivo, $nombre, $domicilio)=@mysql_fetch_array($res)){
+		$q3="select numcontrato from contrato where numusuario = $consecutivo";
+			
+		$res2=$y->q($q3);
+		
+		$contratos = "";
+		while(list($numcontrato)=@mysql_fetch_array($res2))
+			$contratos.=(($contratos=="")?"":"-").$numcontrato;
+		
+		$salida.="<div style=\"float: left; background: rgba(0,0,0,0.3); color: #000; width: 300px; margin: 5px; height: 30px; display: table; font-size: 14px; text-transform: capitalize; padding: 3px; text-align: center; border-radius: 5px;\"><a style=\"color: #000; text-decoration: none;\" href='#' onclick='cargaDatosUsuario($consecutivo); return false;'>$nombre<hr><span style='font-size:9px;'>$domicilio</span><hr><span style='font-size:9px;'>Contratos: $contratos</span></a></div>";
+	}
+	$salida.=($salida!="")?"<hr>":"";
+	return "<h1>B&uacute;squeda de Usuarios</h1><hr>$salida<center><p>".(($n==0)?"No coincide ningun usuario con ese texto. Intente con otras letras.":"Se muestran $n resultados. Mientras m&aacute;s letras escriba, m&aacute;s definidos ser&aacute;n los resultados.")."</p></center><div id='nara'></div>";
+}
+
+function busquedaUsuarioCalle($query)
+{
+	$y=new Conexion();
+	$y->conectarBaseDatos();
+
+	$coincidencias=explode(' ',$query);
+	$descripciones="";
+	
+	foreach($coincidencias as $r)
+	{
+		if($r!="")
+			$descripciones.=(($descripciones=="")?"":" and ")."domicilio regexp '($r+)'";
+	}
+
+	$q2="select noconsecutivo, nombre, domicilio from usuario where $descripciones";
+
+	$res=$y->q($q2);
+
+	$n=@mysql_num_rows($res);
+	
+	$salida="";
+	while(list($consecutivo, $nombre, $domicilio)=@mysql_fetch_array($res)){
+		if($nombre != ""){
+			$q3="select numcontrato from contrato where numusuario = $consecutivo";
+			
+			$res2=$y->q($q3);
+			
+			$contratos = "";
+			while(list($numcontrato)=@mysql_fetch_array($res2))
+				$contratos.=(($contratos=="")?"":"-").$numcontrato;
+				
+			$salida.="<div style=\"float: left; background: rgba(0,0,0,0.3); color: #000; width: 300px; margin: 5px; height: 30px; display: table; font-size: 14px; text-transform: capitalize; padding: 3px; text-align: center; border-radius: 5px;\"><a style=\"color: #000; text-decoration: none;\" href='#' onclick='cargaDatosUsuario($consecutivo); return false;'>$nombre<hr><span style='font-size:9px;'>$domicilio</span><hr><span style='font-size:9px;'>Contratos: $contratos</span></a></div>";
+		}
+	}
+	$salida.=($salida!="")?"<hr>":"";
+	return "<h1>B&uacute;squeda de Usuarios</h1><hr>$salida<center><p>".(($n==0)?"No coincide ningun usuario con ese texto. Intente con otras letras.":"Se muestran $n resultados. Mientras m&aacute;s letras escriba, m&aacute;s definidos ser&aacute;n los resultados.")."</p></center><div id='nara'></div>";
+}
+
+function cargaUsuario($id)
+{
+	$y=new Conexion();
+	$y->conectarBaseDatos();
+	
+	$res=$y->q("select numcontrato, domicilio, agua, drenaje, estado from contrato where numusuario=$id");
+	$contratos="";
+	
+	$n=mysql_num_rows($res);
+	if($n!=0)
+	{
+		$contratos="<h2>$n contrato".(($n>1)?"s":"")." del usuario</h2><p>";
+		while(list($contrato, $domicilio, $agua, $drenaje, $edo)=@mysql_fetch_array($res))
+		{
+			$contratos.="<div id='ficha'><div id='numcontrato'><span class='liga' onclick=\"cargaDatosContrato('$contrato');\">$contrato</span></div><div id='direccion'>".substr($domicilio,0,50).((strlen($domicilio)>50)?" (...)":"")."<br><span ".(($agua=='0')?"class='notiene'":"").">".(($agua=='1')?"&#9745;":"&#9746;")."Agua</span> ".(($drenaje=='1')?"&#9745;":"&#9746;")."Drenaje<br><b>".(($edo==2)?"Susp. Temporal":(($edo==-1)?"Cancelado":""))."</b></div></div>";
+		}
+		$contratos.="</p>";
+	}
+	else
+	{
+		$contratos="<blockquote>Este usuario <b>no tiene</b> contratos.</blockquote>";
+	}
+	
+	$res=$y->q("select nombre, domicilio, masdatos, telefono, email from usuario where noconsecutivo=$id");
+	
+	$salida="";
+	
+	list($nombre, $domicilio, $masdatos, $telefono, $email)=@mysql_fetch_array($res);
+	
+	$salida="<h1>Datos de Usuario <a href='#' onclick='if(confirm(\"Se perder&aacute;n los cambios al cargar los datos del usuario nuevamente.\\n\\n¿Desea continuar?\"))cargaDatosUsuario($id);'><img src='reciclar.png'></a></h1><hr>".
+	"<div id='infocto' style='padding-left:10px;'>".
+	"Nombre del usuario: <b class='mayusculas'>$nombre</b><br>".
+	"Domicilio del usuario: <b class='mayusculas'>$domicilio</b><br>".
+	"<br><a class='liga opcion' href='#' onclick=\"$('#infocto').hide(); $('#formato').slideToggle('fast');\">Modificar informaci&oacute;n de este usuario</a><div id='nara'></div><br>".
+	"</div>".
+	"<div id='formato' style='display:none;'>".
+	"<form id='datosusr' name='datosusr'><input type='hidden' value='$id' name='id' id='id'>".
+	"<input type='hidden' value='guardaUsuario' id='opc' name='opc'>".
+	"<div id='etiq2'>Nombre:</div><div id='campo'><input class='mayusculas' type='text' value='$nombre' name='nombre' id='nombre' size=60></div><div id='nara'></div>".
+	"<div id='etiq2'>Domicilio:</div><div id='campo'><input class='mayusculas' type='text' value='$domicilio' name='domicilio' id='domicilio' size=60></div><div id='nara'></div>".
+	"<div id='etiq2'>Tel&eacute;fono:</div><div id='campo'><input type='text' value='$telefono' name='telefono' id='telefono' size=15></div>".
+	"<div id='etiq2'>Correo electr&oacute;nico:</div><div id='campo'><input type='text' value='$email' name='email' id='email' size=20></div><div id='nara'></div>".
+	"<div id='etiq2'>Notas:</div><div id='campo'><textarea class='mayusculas' name='masdatos' id='masdatos' cols=60 rows=3>$masdatos</textarea></div>".
+	"<div id='nara'></div>".
+	"<div id='etiq2'>&nbsp;</div><input type='submit' value='Guardar Cambios' onclick=\"if(!confirm('¿Est&aacute; seguro que desea actualizar la informaci&oacute;n?'))return false;\">".
+	"</form>".
+	"<div id='nara'></div>".
+	"</div>".
+	"<hr>".
+	$contratos."<div id='nara'></div>".
+	"<hr>".
+	"<blockquote>".
+	"<h2>Recomendaciones</h2>".
+	"<ul>".
+	"<!--li>Tome en cuenta que el cambio en alguno de los datos del <i>Usuario</i>, quedar&aacute; registrado para posteriores revisiones.</li-->".
+	"<li>S&oacute;lo use esta secci&oacute;n para <b>correcci&oacute;n</b> en los datos de <i>Usuario</i>.</li>".
+	"<li>Los <b>Contratos</b> que posea el <b>Usuario</b> mostrar&aacute;n estos datos una vez guardados.</li>".
+	"</ul>".
+	"</blockquote>".
+	"<div id='nara'></div><script>guardaDatosUsuario()</script>";
+	
+	return $salida;
+}
+
+function calcula_recargos($numcontrato, $leyenda, $monto, $recargo, $anio, $categoria, $cuenta, $y, $mescontrato){
+	//$y=new Conexion();
+	//$y->conectarBaseDatos();
+	
+	$fecha_actual = strtotime(date("d-m-Y H:i:00",time()));
+	$fecha_entrada = strtotime("01-04-".$anio." 01:00:00");
+	
+	if($fecha_actual > $fecha_entrada){
+		$hoy = new DateTime(date('Y-m-d'));
+		$inicio = $anio."-01-01";
+		$fecha_inicio = new DateTime($inicio);
+		
+		//$diferencia = $fecha_inicio->diff($hoy);
+		//$meses = ( $diferencia->y * 12 ) + $diferencia->m;
+		
+		$mes_numero = date('m');
+		$anio_numero = date('Y');
+		
+		$anios = $anio_numero - $anio;
+		$meses = ($anios * 12) + ($mes_numero - 1);
+		
+		$nom_meses = array("","ENE","FEB","MAR","ABR","MAY","JUN","JUL","AGO","SEPT","OCT","NOV","DIC");
+	
+		$mesrecargo = 1;
+		$aniorecargo = $anio;
+			
+		$monto_recargo = ($monto * 10) / 100;
+		
+		$categoria_recargo = $categoria;
+		
+		if($categoria == 2)
+			$categoria_recargo = 16;
+		
+		if($categoria == 3)
+			$categoria_recargo = 17;			
+		
+		// Se checa si ya esta pagado el cargo al que se le aplciarán recargos
+		$respagado=$y->q("select count(numcontrato) from ligacargos where leyenda = '$leyenda' AND numcontrato = $numcontrato AND estado = 1");
+		list($pagado)=@mysql_fetch_array($respagado);
+		
+		if($pagado == 0){
+			for($i=1; $i<=$meses; $i++){
+				$leyenda_recargo = "RECARGO $nom_meses[$mesrecargo] $aniorecargo - $leyenda";
+			
+				if($aniorecargo == $anio){
+					
+						$q = "insert into ligacargos values('$numcontrato', '$leyenda_recargo', $monto_recargo, now(), now(), 0, $recargo, '', $anio, '', $categoria_recargo, $cuenta)";
+						$y->q($q);
+					
+				}
+				
+				$mesrecargo++;
+				if($mesrecargo > 12){
+					$mesrecargo = 1;
+					$aniorecargo++;
+				}
+			}
+		}
+	}
+}
+
+function cargaContrato($id)
+{
+	$numcontrato = $id;
+	
+	$y=new Conexion();
+	$y->conectarBaseDatos();
+	
+	$tipos=array(0=>"Normal",1=>"Comercial");
+
+	$res=$y->q("select nombre, numusuario, contrato.domicilio, contrato.masdatos, tipo, agua, drenaje, observaciones, estado, metros, YEAR(contrato.fecha), MONTH(contrato.fecha) from contrato left join usuario on numusuario=noconsecutivo where numcontrato='$id'");
+	$contratos="";
+	
+	$resx=$y->q("select folio+1 from ligacargos order by folio desc limit 0,1");
+
+	list($foliotope)=@mysql_fetch_array($resx);
+
+	list($nombre, $numusuario, $domicilio, $masdatos, $tipo, $agua, $drenaje, $observaciones, $estado, $metros, $aniocontrato, $mescontrato)=@mysql_fetch_array($res);
+	
+	$res2=$y->q("select numcontrato, domicilio from contrato where numusuario=$numusuario and numcontrato != '$id'");
+		
+	$n=@mysql_num_rows($res2);
+	
+	// CARGOS AUTOMATICOS
+	
+	// Se carga automaticamente si es un usuario en estado normal
+	if($estado == 1){
+		$rescargos=$y->q("select nombre, monto, recargo, anio, categoria, repetir, metros from cargos where estado=1 and automatico=1 AND anio >= $aniocontrato order by nombre");
+		
+		while($a = @mysql_fetch_array($rescargos)){
+			$leyenda = $a[0];
+			$monto = $a[1];
+			$recargo = $a[2];
+			$anio = $a[3];
+			$categoria = $a[4];
+			$repetir = $a[5];
+			$aplicametros = $a[6];
+			
+			// Anualidad agua comercial o doble toma monto es doble
+			if($categoria == 2 && ($tipo == 1 || $agua == 2))
+				$monto = $monto * 2;
+
+			// Anualidad drenaje comercial o doble toma monto es doble
+			if($categoria == 3 && ($tipo == 1 || $drenaje == 2))
+				$monto = $monto * 2;
+			
+			// Si el cargo aplica a metros cuadrados se multiplica 
+			if($aplicametros == 1)
+				$monto = $monto * $metros;
+			
+			// Se debe aplicar el año en curso al cargo si es del catálogo de cargos sin año (0)
+			if($anio == "0")
+				$anio = date('Y');
+
+			$aplicar_cargo = true;
+					
+			if($agua == 0 && $categoria == 2){
+				$aplicar_cargo = false;
+			}
+			if($drenaje == 0 && $categoria == 3){
+				$aplicar_cargo = false;
+			}
+			
+			if($aplicar_cargo == true){
+				if($repetir == 0){
+					$q = "insert into ligacargos values('$numcontrato', '$leyenda', $monto, now(), now(), 0, $recargo, '', $anio, '', $categoria, 0)";
+					$y->q($q);
+					
+					calcula_recargos($numcontrato, $leyenda, $monto, $recargo, $anio, $categoria, 0, $y, $mescontrato);
+				}
+				else{
+					$resautomatico=$y->q("select count(numcontrato) from ligacargos where leyenda = '$leyenda' AND numcontrato = $numcontrato");
+					list($cuenta)=@mysql_fetch_array($resautomatico);
+
+					$q = "insert into ligacargos values('$numcontrato', '$leyenda', $monto, now(), now(), 0, $recargo, '', $anio, '', $categoria, $cuenta)";
+					$y->q($q);
+					
+					calcula_recargos($numcontrato, $leyenda, $monto, $recargo, $anio, $categoria, $cuenta, $y, $mescontrato);
+				}
+			}
+		}
+	}
+	
+	// ====================
+	
+	if($n!=0)
+	{
+		$contratos="<hr><h2>Existe".(($n>1)?"n otros":"")." $n contrato".(($n>1)?"s":"")." del mismo usuario</h2><p>";
+		$z=1;
+		while(list($contrato, $domicilio2)=@mysql_fetch_array($res2))
+		{
+			$contratos.="<div id='ficha'><div id='numcontrato'><a href='#' onclick=\"if(confirm('¿Est&aacute;s seguro de querer cargar otro contrato?')){cargaDatosContrato('$contrato'); return false;}\">$contrato</a></div><div id='direccion'><small>".substr($domicilio2,0,50).((strlen($domicilio2)>50)?" (...)":"")."</small></div></div>".
+			(($z%3==0)?"<div id=nara></div>":"");
+			$z++;
+		}
+		$contratos.="</p><div id='nara'></div>";
+	}
+	else
+	{
+		$contratos="";
+	}
+	
+	$res=$y->q("select leyenda, monto, recargo, repetido from ligacargos where numcontrato='$id' and estado=0 order by anio");
+	
+	$npagos=@mysql_num_rows($res);
+	
+	$pagos="<hr><h2>$npagos adeudos del contrato</h2>".
+	"<form id='pagos' name='pagos' type='post'>".
+	"<input type='hidden' name='opc' id='opc' value='pago'>".
+	"<input type='hidden' name='idc' id='idc' value='$id'>".
+	"<table width=100%><tr><td colspan=3>".
+	"<input type='checkbox' onclick=\"checked_status=this.checked; valor=0; $('input[@id=pago]').each(function(i){this.checked=checked_status; valor+=(this.checked)?parseFloat($('input[@id=monto]').get(i).value):0; $('#totalmarcado').val(valor.toFixed(2));});\">Todos</td>";
+	$celda=0;
+	$total=0;
+	$recargos=0;
+	
+	$fila = 0;
+	$columna = 0;
+	$nfilas = $npagos / 3;
+	
+	while($resulta = @mysql_fetch_array($res)){
+		$cuadricula[$columna][$fila] = $resulta;
+		$fila++;
+		
+		if($fila >= $nfilas){
+			$columna++;
+			$fila = 0;
+		}
+	}
+
+	for($i=0; $i<$nfilas; $i++){
+		$pagos.="<tr>";
+		
+		for($j=0; $j<3; $j++){
+			$resulta=$cuadricula[$j][$i];
+			
+			$leyenda=$resulta[0];
+			$monto=$resulta[1];
+			$recargo=$resulta[2];
+			$repetir=$resulta[3];
+			
+			if($leyenda != "")
+				$pagos.="<td valign=top width=30px class='derecha'>".
+				"<input type='checkbox' id=pago name='pago[]' style='margin:0px;' value=\"$leyenda|$monto|$repetir\" onclick=\"valor=0; $('input[@id=pago]').each(function(i){valor+=($('input[@id=pago]').get(i).checked)?parseFloat($('input[@id=monto]').get(i).value):0;}); $('#totalmarcado').val(valor.toFixed(2));\">".
+				"<input type='hidden' id='monto' name='monto[]' value='$monto'></td>".
+				"<td class='mayusculas' width=220px>".(($recargo)?"<i class='rojo'>":"").$leyenda.(($repetir==0)?"":" (r$repetir)").(($recargo)?"</i>":"")."</td>".
+				"<td class='derecha' width=50px;>\$".number_format($monto,2,'.',',')."</td>";
+			else
+				$pagos.="<td valign=top width=30px class='derecha'>&nbsp;</td>".
+				"<td class='mayusculas' width=220px>&nbsp;</td>".
+				"<td class='derecha' width=50px;>&nbsp;</td>";
+			
+			$total+=($recargo)?0:$monto;
+			$recargos+=($recargo)?$monto:0;
+		}
+		$pagos.="</tr>";
+	}
+	
+	$pagos.="</table>".
+	"<div id='infodeudas' style='padding-left: 10px;'>".
+	"<table border=0>".
+	"<tr><td><fieldset><legend>Montos</legend><table>".
+	"<tr>".
+	"<td height=16 width=200px class='derecha'>Total de cargos:</td><td class='derecha'><b>\$".number_format($total,2,'.',',')."</b></td>".
+	"</tr>".
+	"<tr><td height=16 class='derecha'>Total de recargos:</td><td class='derecha'><b>\$".number_format($recargos,2,'.',',')."</b></td></tr>".
+	"<tr><td height=16 class='derecha'>Total selecci&oacute;n:</td><td class='derecha'><input class='grande dinero derecha' type='text' value='0' id='totalmarcado' name='totalmarcado' readonly size=6></td></tr>".
+	"<tr><td height=16 class='derecha'>No. consecutivo de recibo:</td><td class='derecha'><input class='derecha' type='text' value='$foliotope' id='recibo' name='recibo' size=8></td>".
+	"</table></fieldset><td>".
+	"<td class='derecha' rowspan=5 width=300px id='cancelacargos'>".
+	"<fieldset><legend>Opciones</legend>".
+	"<a href='#' class='liga' onclick=\"a_pago();\" id='botonpagar'>Pagar cargos seleccionados</a><br><br>".
+	"<a href='#' class='liga2' onclick=\"a_cancelar();\" id='botoncancelar'>Cancelar cargos seleccionados</a><br><br>".
+	"<span id='llaves' style='display:none;'>".
+	"Llave del Presidente:<br><input type='password' size=10 name='presidente' class='derecha' autocomplete=off><br>".
+	"Llave del Tesorero:<br><input type='password' size=10 name='tesorero' class='derecha' autocomplete=off><br>".
+	"Raz&oacute;n de la cancelaci&oacute;n:<br><textarea name='texto' id='texto' cols=30 rows=4></textarea>".
+	"</span></fieldset>".
+	"</td>".
+	"<td class='derecha' rowspan=5 width=300px><fieldset><legend>Confirmaci&oacute;n</legend><span id='sig'></span></fieldset>".
+	"</td>".
+	"</tr>".
+	"</table>".
+	"</form>".
+	"</div>";
+
+	$salidanotas="";
+
+	$res=$y->q("select numconsec, nombre, monto, recargo, observaciones, mensualidades, anio, categoria, repetir, metros from cargos where estado=1 order by nombre");
+	$contratos="";
+	$existentes="<br><br><table width=100% id='cargosfuente'>";
+	while(list($numconsec, $nombrec, $monto, $recargo, $observaciones, $mensualidades, $anio, $categoria, $repetir, $metros2)=@mysql_fetch_array($res))
+	{
+		$nombrec=($nombrec);
+		$existentes.="<tr class='renglon clicable'".(($recargo!=0)?" style='color:#900;'":"")." onclick=\"".
+		(($mensualidades==1)?"mens($monto+'|'+$recargo+'|'+$anio+'|'+$categoria+'|'+$repetir, '$nombrec', '".number_format($monto, 2, '.',',')."','$numconsec','$metros2')":"$('#mensuales').html(''); agregacargo('$nombrec|$monto|$recargo|$anio|$categoria|$repetir','".number_format($monto, 2, '.',',')."',$numconsec,'$metros2');").
+		"\"><td class='mayusculas'>$nombrec ".(($mensualidades==1)?"(&times; mes)":"")."</td><td nowrap class='derecha' style='width: auto;'>\$".number_format($monto, 2, '.',',').(($metros2 == 1)?"/mt":"")."</td></tr>";
+	}
+	$existentes.="</table>";
+
+	$q1="select id, substring(fecha,1,10), texto, estado from notas where contrato='$id' and estado <> -1 order by estado desc, fecha desc";
+	$res2=$y->q($q1);
+	if(@mysql_num_rows($res2)>0)
+	{
+		$salidanotas="<div id='notasCto'><ul style='border:0px; margin-left: 24px; margin-top:40px; margin-right:25px; height:105px; padding-left:0px; overflow:auto;'>";
+		while(list($id2, $fecha2, $texto2, $estado2)=@mysql_fetch_array($res2))
+		{
+			$salidanotas.="<li style='list-style:none; margin-left:0px;' class='".(($estado2==0)?"liactiva":"lidesactiva")."'><b>$fecha2</b>".(($estado2==0)?" [ <a href='#' onclick=\"eliminaNota('$id2')\">&times;</a> ] ":"")."<br>".($texto2)."</li>";
+		}
+		$salidanotas.="</ul></div>";
+	}
+	
+	$tiposdeestado=array("1"=>"Activo", "2"=>"Suspensi&oacute;n Temporal", "3"=>"Suspensi&oacute;n Administrativa", "4"=>"Suspensi&oacute;n Definitiva");
+	
+	$letras=$y->q("select numcontratoletras from contrato where numcontrato='$id' order by numcontrato");
+	list($numcontratoletras)=@mysql_fetch_array($letras);
+	
+	$salida=$salidanotas.
+	"<h1>Datos del Contrato $id$numcontratoletras <a href='#' onclick='if(confirm(\"Se perder&aacute;n los cambios al cargar los datos del contrato nuevamente.\\n\\n¿Desea continuar?\"))cargaDatosContrato(\"$id\");'><img src='reciclar.png'></a></h1><hr>".
+	"<div id='infocto' style='padding-left:10px;'>".
+	"A nombre de <b class='mayusculas'>".$nombre."</b><br>Direcci&oacute;n en <b class='mayusculas'>".($domicilio)."</b>.<br>".
+	"Estado del contrato: <b class='mayusculas'>".$tiposdeestado[$estado]."</b><br>".
+	"Toma tipo <b class='mayusculas'>$tipos[$tipo]</b>.<br>".
+	(($agua)?"C":"No c")."uenta con agua potable<br>".
+	(($drenaje)?"C":"No c")."uenta con drenaje<br>".
+	"Metros lineales: <b class='mayusculas'>".$metros." mts.</b><br>".
+	"<br><a class='liga opcion' href='#' onclick=\"$('#infocto').hide(); $('#notasCto').toggle(); $('#formato').slideToggle('fast');\">Modificar informaci&oacute;n de este contrato</a> <a class='liga opcion' href='#' onclick=\"if(confirm('¿Est&aacute; seguro que quiere cargar la informaci&oacute;n del usuario?'))cargaDatosUsuario($numusuario);\">Cargar informaci&oacute;n del usuario</a> <a class='liga opcion' href='http://localhost/agua/credencial.php?id=$id' target='_blank'>Ver Credencial</a><div id='nara'></div><br>".
+	"</div>".
+	"<div id='formato' style='display:none;'>".
+	"<form id='datoscto' name='datoscto'>".
+	"<input type='hidden' value='$id' name='id' id='id'>".
+	"<table width=100%>".
+	"<tr>".
+	"<td class='derecha'><input type='hidden' value='guardaDatosContrato' id='opc' name='opc'>".
+	"A nombre de:</td><td class='mayusculas'><b>".($nombre)."</b>".
+	"</td></tr>".
+	"<tr><td class='derecha'>Domicilio:</td><td><input class='mayusculas' type='text' value='".($domicilio)."' name='domicilio' id='domicilio' size=60 autocomplete=off></td></tr>".
+	"<tr><td class='derecha'>Tipo de toma:</td><td>";
+	
+	foreach($tipos as $k=>$vals)
+	{
+		$salida.="<input type=radio name='tipo' id='tipo".$k."' value=$k".(($tipo==$k)?" checked":"")."><label for='tipo".$k."'>$vals</label><br>";
+	}
+	
+	$salida.="</td></tr>".
+	"<tr><td class='derecha'>Agua:</td><td>".
+	"<input type=radio name='agua' id='agua0' value=0".(($agua == 0)?" checked":"")."><label for='agua'>Sin Agua</label>&nbsp;<input type=radio name='agua' id='agua1' value=1".(($agua == 1)?" checked":"")."><label for='agua1'>1 toma</label>&nbsp;<input type=radio name='agua' id='agua2' value=2".(($agua == 2)?" checked":"")."><label for='agua2'>2 tomas</label></td></tr>".
+	"<tr><td class='derecha'>Drenaje:</td><td>".
+	"<input type=radio name='drenaje' id='drenaje0' value=0".(($drenaje == 0)?" checked":"")."><label for='drenaje0'>Sin Drenaje</label>&nbsp;<input type=radio name='drenaje' id='drenaje1' value=1".(($drenaje == 1)?" checked":"")."><label for='drenaje1'>1 descarga</label>&nbsp;<input type=radio name='drenaje' id='drenaje2' value=2".(($drenaje == 2)?" checked":"")."><label for='drenaje2'>2 descargas</label></td></tr>".
+	"<tr><td class='derecha'>M&aacute;s datos:<br><small>Notas sobre conflictos, quejas, etc.</small></td><td><textarea class='mayusculas' name='masdatos' id='masdatos' cols=60 rows=5>".($masdatos)."</textarea></tr>".
+	"<tr><td class='derecha'>Observaciones:<br><small>Ubicaci&oacute;n entre calles, medidas, etc.</small></td><td><textarea class='mayusculas' name='observaciones' id='observaciones' cols=60 rows=5>".($observaciones)."</textarea></tr>".
+	"<tr><td class='derecha'>Indicador:</td><td><input type='text' name='numcontratoletras' id='numcontratoletras' value='".($numcontratoletras)."' size=60 autocomplete=off>"."</tr>".
+	"<tr><td class='derecha'>Metros lineales:</td><td><input class='mayusculas' type='text' value='".($metros)."' name='metros' id='metros' size=60 autocomplete=off></td></tr>".
+	"<tr><td>&nbsp;</td><td><input type='submit' value='Guardar Cambios' onclick=\"if(!confirm('¿Est&aacute; seguro que desea actualizar la informaci&oacute;n?'))return false;\"></td></tr>".
+	"</table>".
+	"</form>".
+	"<div id='aviso'></div>".
+	"<div id='nara'></div>".
+	"</div>".
+	"<hr>".
+
+	"<h2>Acciones sobre el presente contrato</h2><br><p>".
+	//"<a class='liga opcion' href='credencial.php?id=$id' target='_blank'>Imprimir Credencial</a> ".
+	"<a class='liga opcion' href='contratoinfo2.php?numcontrato=$id&orden=1' target='_blank'>Informe de Cuenta</a> ".
+	"<a class='liga opcion' href='contratoinfo2.php?numcontrato=$id&orden=4' target='_blank'>Informe por fecha de pago</a> ".
+	"<a class='liga opcion anotacioncto' href='#' onclick=\"$('#realizaranotacion').toggle(); $('#textoz').focus();\">Hacer una anotaci&oacute;n</a> ".
+	"<a class='liga opcion propietariocto' href='#' onclick=\"$('#cambiarprop').toggle(); $('#nuevonombre').focus();\">Cambio de propietario</a> ".
+	"<a class='liga opcion estadocto' href='#' onclick=\"$('#cambioestado').toggle();\">Cambio de estado</a> ".
+	"<a class='liga opcion cargoscto' href='#' onclick=\"$('#agregacargo').toggle();\">Agregar cargos</a> ".
+	"<a class='liga opcion cargoscto' href='#' onclick=\"$('#cargoscancelados').toggle();\">Cargos Cancelados</a> ".
+	"<a class='liga opcion cargoscto' href='#' onclick=\"$('#notascargoscancelados').toggle();\">Notas Cargos Cancelados</a><div id='nara'></div><br>".
+
+	"<div id='realizaranotacion' class='divanotacioncto' style='display:none;'><hr>".
+	"<h2>Agregar una nota al contrato</h2>".
+	"<form id='agregarNota' name='agregarNota'>".
+	"<input type=hidden name='opc' value='agregaNota'>".
+	"<input type=hidden name='contrato' id='contrato' value='$id'>".
+	"<input type='text' name='texto' id='textoz' size=40 class='mayusculas' autocomplete=off> ".
+	"<input type='submit' class='anotacioncto' value='Agregar'></form><br>".
+	"</div>".
+
+	"<div id='cambiarprop' class='divpropietariocto' style='display:none;'><hr>".
+	"<h2>Cambio de Propietario</h2>".
+	"<form id='propietario' name='propietario' style='margin-left: 20px;'>".
+	"<input type=hidden name='opc' id='opc' value='cambiandopropietario'>".
+	"<input type=hidden name='contrato' id='contrato' value='$id'>".
+	"<input type=hidden name='usuario' id='usuario' value='$numusuario'>".
+	"B&uacute;squeda: <input type='text' id='nuevonombre' name='nuevonombre' style='width:190px' onkeyup=\"$('#submitusuario').attr('disabled', 'disabled'); buscaUsuarioCambio(this.value);\" autocomplete=off><br><br>".
+	"<select name='nuevousuario' id='usuarios' size=5 onclick=\"$('#submitusuario').attr('disabled', '');\">".
+	"</select>".
+	"<br><br>".
+	"<input id='submitusuario' class='propietariocto' type='submit' value='Asignar nuevo propietario' disabled>".
+	"</form><br>".
+	"</div>".
+
+	"<div id='cambioestado' class='divestadocto' style='display:none;'><hr>".
+	"<h2>Cambiar estado del contrato</h2>".
+	"<form id='cambiaestado' name='cambiaestado' style='margin-left:10px;margin-right:10px;'>".
+	"<input type=hidden name='opc' value='cambiaestado' id='opc'>".
+	"<input type=hidden name='contrato' id='contrato' value='$id'>".
+	"<fieldset style='float: left; width:400px;'><legend>Estados</legend>".
+	"<dl>".
+	"<dt><input type=radio name='estado' value=1 ".(($estado==1)?"checked":"")."><label>Activo</label>".
+	"<dd>Se tiene la obligaci&oacute;n de pagar los servicios de agua potable y drenaje con los que cuente.".
+	"<dt><input type=radio name='estado' value=2 ".(($estado==2)?"checked":"")."><label>Suspensi&oacute;n Temporal</label>".
+	"<dd>Solo en <b>diciembre</b> del a&ntilde;o en curso se puede solicitar esta suspensi&oacute;n, para evitar pagar servicios el a&ntilde;o siguiente.".
+	"<dt><input type=radio name='estado' value=3 ".(($estado==3)?"checked":"")."><label>Suspensi&oacute;n Administrativa</label>".
+	"<dd>Cuando luego de una revisi&oacute;n ocular, se corrobore que no hay toma en el lugar y faltaba darlo de baja.".
+	"<dt><input type=radio name='estado' value='4' ".(($estado==4)?"checked":"")."><label>Suspensi&oacute;n Definitiva</label>".
+	"<dd>Eliminaci&oacute;n de los servicios as&iacute; como del contrato.".
+	"</dl>".
+	"</fieldset>".
+	"<fieldset style='float: left; width:400px; text-align: right;'><legend>Aplicar Acci&oacute;n</legend>".
+	"<span id='llaves1'>".
+	"Llave del Presidente:<br><input type='password' size=10 name='presidente' class='derecha' autocomplete=off><br>".
+	"Llave del Tesorero:<br><input type='password' size=10 name='tesorero' class='derecha' autocomplete=off><br>".
+	"Raz&oacute;n del cambio de estado:<br><textarea name='texto' id='texto' cols=30 rows=4></textarea>".
+	"</span><div id='nara'></div>".
+	"<input type='submit' class='estadocto' value='Cambiar estado'><div id='nara'></div><span id='sig1'></span>".
+	"</fieldset>".
+	"</form><div id='nara'></div><br>".
+	"</div>".
+
+	"<div id='agregacargo' class='divcargoscto' style='display:none;'><hr>".
+	"<h2>Agregar cargos al contrato</h2>".
+	"<div id='existentes' class='panel300' style='height:170px'>".
+	"<div id='okas' style='width:280px; font-size: 11px; min-height: 18px; text-align: center; color: #fff; text-transform: uppercase; text-align:center; font-weight:bold; position: absolute; left:0px; padding-top:4px; background: rgba(0,0,0,0.7);'>Cargo: <input type='text' class='mayusculas' value='' id='buscacargo' name='buscacargo' autocomplete=off></div>".
+	$existentes.
+	"</div>".
+	"<form id='agregarCargoX' name='agregarCargoX' style='margin-left:10px; margin-right:10px;'>".
+	"<input type=hidden name='opc' value='aplicacargosauno'>".
+	"<input type=hidden name='contrato' id='contrato' value='$id'>".
+	"<div id='poraplicar' style='margin-left: 10px; height:170px; width:300px; overflow-y:scroll; overflow-x:hidden; float: left; position: relative;'>".
+	"<div id='okas' style='width:280px; font-size: 11px; min-height: 18px; height:auto; text-align: center; color: #fff; text-align:center; font-weight:bold; position: absolute; left:0px; padding-top:4px; background: rgba(0,0,0,0.7);'><span class='mayusculas'>Cargos por aplicar</span> <a class='liguita' href='#' onclick=\"$('#cargostabla').html('')\">Limpiar</a>".
+	"<div id='nara'></div><div id='mensuales' style='text-align:left; height:auto; clear:both;'></div>".
+	"</div>".
+	"<br><br>".
+	"<table id='cargostabla' width=100%></table>".
+	"</div>".
+	"<div id='aplicando' style='margin-left: 10px; height:170px; width:300px; float: left; position: relative;'>".
+	"<input type='submit' class='cargoscto' value='Aplicar a este contrato'>".
+	"</div>".
+	"</form><br><div id='nara'></div>".
+	"</div>".
+
+	"</p>";
+	
+	// CARGOS CANCELADOS
+	
+	$pagosc="<div id='cargoscancelados' class='divcargoscto' style='display:none; height: 350px; overflow-y: scroll;'><hr>";
+	$resc=$y->q("select leyenda, monto, recargo, repetido from ligacargos where numcontrato='$id' and estado=-1 order by fcobro");
+	
+	$npagosc=@mysql_num_rows($resc);
+	
+	$pagosc.="<h2>$npagosc Cargos Cancelados</h2><table width=50% style='margin-left: 40px' cellspacing=0>";
+	$pagosc.="<tr><th width=200px>Cargo</th><th width=50px>Monto</th><th width=50px>Acci&oacute;n</th></tr>";
+		
+	while($resulta = @mysql_fetch_array($resc)){
+		$pagosc.="<tr class='renglon'>";
+		
+		$leyenda=$resulta[0];
+		$monto=$resulta[1];
+		$recargo=$resulta[2];
+		$repetir=$resulta[3];
+		
+		if($leyenda != "")
+			$pagosc.="<td class='mayusculas'>".(($recargo)?"<i class='rojo'>":"").$leyenda.(($repetir==0)?"":" (r$repetir)").(($recargo)?"</i>":"")."</td>".
+			"<td class='derecha'>\$".number_format($monto,2,'.',',')."</td>".
+			"<td class='derecha'><a href='#' onclick=\"regresarCargoCancelado('$id', '$leyenda', '$repetir'); return false;\">Reasignar</a></td>";
+		
+		$pagosc.="</tr>";
+	}
+	
+	$pagosc.="</table></div>";
+	
+	// NOTAS CARGOS CANCELADOS
+	
+	$notascancelados="<div id='notascargoscancelados' class='divcargoscto' style='display:none; height: 350px; overflow-y: scroll;'><hr>";
+	$resnc=$y->q("select antes, despues from cambios where numcontrato='$id' and descripcion = 'cancelacion' order by fecha DESC");
+	
+	$nnotas=@mysql_num_rows($resnc);
+	
+	$notascancelados.="<hr><h2>Hist&oacute;rico de Cargos Cancelados ($nnotas)</h2><br><table width=65% style='margin-left: 40px' cellspacing=0>";
+	$notascancelados.="<tr><th width=200px>Cargos Cancelados</th><th width=50px>Raz&oacute;n de la Cancelaci&oacute;n</th></tr>";
+		
+	while($resulta = @mysql_fetch_array($resnc)){
+		$notascancelados.="<tr class='renglon'>";
+		
+		$notascancelados.="<td class='mayusculas' width=220px>".$resulta[1]."</td>".
+		"<td class='derecha' width=150px;>".$resulta[0]."</td>";
+		
+		$notascancelados.="</tr>";
+	}
+	$notascancelados.="</table></div>";
+
+	$salida.=(($npagos!=0)?$pagos:"").(($npagosc!=0)?$pagosc:"").(($nnotas!=0)?$notascancelados:"").
+	
+	$contratos.
+	"<div id='nara'></div><script>guardaDatosContrato()</script>";
+	return $salida;
+}
+
+function cambiaestado($contrato, $rp, $rt, $texto, $estado)
+{
+	$y=new Conexion();
+	$y->conectarBaseDatos();
+	
+	$res1=$y->q("select contrasena from contrasenas where rol = 'presidente'");
+	$res2=$y->q("select contrasena from contrasenas where rol = 'tesorero'");
+	
+	list($contrasena_presidente)=@mysql_fetch_array($res1);
+	list($contrasena_tesorero)=@mysql_fetch_array($res2);
+	
+	if(md5($rp) == $contrasena_presidente && md5($rt) == $contrasena_tesorero)
+	{
+		if(strlen($texto)>20)
+		{
+			$q="update contrato set estado=$estado where numcontrato='$contrato'";
+			$y->q($q);
+			$y->q("insert into cambios values(now(), 'Cambio de estado de contrato', '$texto','Se asigna el estado del contrato $contrato a [$estado]', '$contrato')");
+			$salida="<script>cargaDatosContrato('$contrato');</script>";
+		}
+		else
+		{
+			$salida=" Debe escribir a detalle el porqu&eacute; de la cancelaci&oacute;n de estos cargos.";
+		}
+	}
+	else
+	{
+		$salida=" Las contrase&ntilde;as no son las correctas.";
+	}
+	return $salida;
+}
+
+function buscaUsuarioCambio($query)
+{
+	$y=new Conexion();
+	$y->conectarBaseDatos();
+	
+	$coincidencias=explode(' ',$query);
+	$descripciones="";
+	foreach($coincidencias as $r)
+	{
+		$descripciones.=(($descripciones=="")?"":" and ")."nombre like '%$r%'";
+	}
+	
+	$res=$y->q("select noconsecutivo, UCASE(nombre) from usuario where $descripciones and nombre!='' order by nombre");
+	
+	$n=@mysql_num_rows($res);
+	
+	$salida="";
+	while(list($consecutivo, $nombre)=@mysql_fetch_array($res)){
+		$salida.="<option value='$consecutivo' class='mayusculas'>".($nombre)."</option>";
+	}
+	return $salida;
+}
+
+function creaNota($contrato, $texto)
+{
+	$y=new Conexion();
+	$y->conectarBaseDatos();
+	
+	$salida="";
+	
+	if($y->q("insert into notas values(null, now(), '$contrato', \"$texto\", 0, '$contrato', '$contrato')"))
+	{
+		$salida.="<script>cargaDatosContrato('$contrato');</script>";
+	}
+	
+	return $salida;
+}
+
+function eliminaNota($id)
+{
+	$y=new Conexion();
+	$y->conectarBaseDatos();
+	
+	$salida="";
+	
+	list($contrato)=@mysql_fetch_array($y->q("select contrato from notas where id='$id'"));
+	
+	$y->q("update notas set estado=-1 where id='$id'");
+
+	$salida.="<script>cargaDatosContrato('$contrato');</script>";
+
+	return $salida;
+}
+
+function eliminaEgreso($id, $motivo)
+{
+	$y=new Conexion();
+	$y->conectarBaseDatos();
+		
+	$y->q("update egresos set estado=-1, motivoelimina='$motivo' where id='$id'");
+
+	$salida="Se ha eliminado el egreso";
+
+	return $salida;
+}
+
+function cambiapropietario($contrato, $usuario, $nuevousuario)
+{
+	$y=new Conexion();
+	$y->conectarBaseDatos();
+	
+	$res=$y->q("update contrato set numusuario='$nuevousuario' where numcontrato='$contrato'");
+	
+	if($res)
+	{
+		$y->q("insert into cambios values(now(), 'Cambio de propietario del contrato $contrato', 'Usuario=$usuario', 'Usuario=$nuevousuario', '$contrato')");
+	}
+	
+	return ($res)?"<script>cargaDatosContrato(\"$contrato\");</script>":"Hubo un error en la asignaci&oacute;n del propietario.";
+}
+
+function cargaCargosEsp($cadena)
+{
+	$y=new Conexion();
+	$y->conectarBaseDatos();
+
+	if($cadena=="")
+		$cadena="1";
+
+	if($cadena!="")
+	{
+		$ocurrencias=explode(" ", $cadena);
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Examining Calculation Methods**
+
+I'm now diving into the `core.php` file, specifically examining how Host B computes `$total` and `$recargos`. I'm starting by analyzing lines 422 to 466. I've pinpointed an intriguing conditional on line 462, which I need to understand better as it impacts the calculation.
+
+
+
+
+### Actions
+
+**Tool:** `mcp_bdawahost-b_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.433363275s
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:55 pm
+
+---
+
+<details>
+<summary>Conversation History</summary>
+
+# Conversation History
+Here are the conversation IDs, titles, and summaries of your most recent 9 conversations, in reverse chronological order:
+
+<conversation_summaries>
+## Conversation a49787d4-8120-4c9b-b54f-74e42f167a61: Finalizing Host C Patch Fix
+- Created: 2026-06-24T20:19:39Z
+- Last modified: 2026-06-25T00:15:25Z
+
+### USER Objective:
+Auditing Mora Parity Reconciliation
+
+USER Objective: Execute a forensic audit and parity reconciliation of mora debt between Host B and Host C to establish Host C as the Single Source of Truth.
+
+Goals:
+1. Finalize the forensic audit and parity reconciliation of 153 high-mora contracts by comparing legacy Host B records with the optimized V2 JIT engine on Host C.
+2. Standardize JIT surcharge configurations (27-year base, 10-year window) to eliminate runaway interest generation.
+3. Deploy the "Monkey Testing" comparison interface to identify and resolve discrepancies in real-time.
+4. Centralize all auditing and sanitation tools into the configuration management dashboard while maintaining strict data parity.
+5. Apply security-first descriptions and logic updates to core parameters like `reversal_threshold` to prevent exponential debt growth.
+
+## Conversation cd3bbd4f-8745-42bb-bd6f-2c4e8759f627: Installing Google Antigravity 2.x
+- Created: 2026-06-24T23:41:57Z
+- Last modified: 2026-06-24T23:58:19Z
+
+### USER Objective:
+Installing Google Antigravity 2.x
+
+USER Objective: Successfully install and configure the Google Antigravity 2.0 application and its IDE on an Ubuntu 24.x virtual machine.
+
+Goals:
+1. Purge legacy or failed installations to ensure a clean deployment environment.
+2. Install Antigravity and Antigravity IDE into standardized directories (/opt/Antigravity-x64 and /opt/AntigravityIDE).
+3. Configure desktop shortcuts for seamless application access, ensuring they handle system-specific security and sandbox restrictions.
+4. Apply system-level optimizations (kernel and inotify adjustments) to guarantee stable performance for the IDE and application runtime.
+
+## Conversation e0cf52cb-6d53-4322-8e81-b011a534320b: Reconciling Historical Debt Parity
+- Created: 2026-06-23T16:40:38Z
+- Last modified: 2026-06-24T20:14:59Z
+
+### USER Objective:
+Stabilizing Host C Production Infrastructure
+
+USER Objective: Finalize the infrastructure stabilization of Host C as the definitive Single Source of Truth for the water management system.
+
+Goals:
+1. Finalize the forensic audit and cleanup of obsolete legacy assets and transition temporary analysis files into documented, production-ready operational tools.
+2. Implement robust data integrity practices by creating independent DDL, DML, and DCL backup routines for both legacy Host B and production Host C environments.
+3. Establish a standard recovery protocol compatible with the existing MariaDB 10.x engine to ensure production resilience and data portability.
+4. Integrate newly identified "orphan" premium audit tools into the administrative interface to enhance operational oversight.
+
+## Conversation 1aaefe04-7a64-42a8-9af9-7259738928a3: Auditing Recent Repository Changes
+- Created: 2026-06-24T18:30:50Z
+- Last modified: 2026-06-24T18:31:19Z
+
+### USER Objective:
+Auditing Recent Repository Changes
+
+The user's objective is to identify all files modified within the `agua` repository over the last 7 days to support the ongoing audit and reconciliation project.
+
+Goals:
+1. Extract and present a comprehensive list of all modified files from the git history for the past week.
+2. Provide this visibility to ensure tracking of recent structural, configuration, and documentation updates across the production Host C environment.
+
+## Conversation 95cd3afb-e633-4867-ab82-e080dc81ed68: Verifying Aguav2 Mora Engine
+- Created: 2026-06-20T16:44:18Z
+- Last modified: 2026-06-23T07:05:02Z
+
+### USER Objective:
+Reconciling Historical Surcharge Engine
+
+Objective: Eliminate the parity gap and stabilize the JIT surcharge calculation engine on Host C to create a reliable, audit-ready financial system.
+
+Goals:
+1. Identify and remove hardcoded date thresholds (e.g., the 2006 limit) currently suppressing historical debt generation.
+2. Synchronize the Host C JIT motor with the production database by forcing correct execution flows in `contratos.php` and `cargos.php`.
+3. Stabilize the financial calculation output by configuring the "Mora Rotativa" limits (10-year window/Bomba threshold) to prevent runaway debt totals.
+4. Perform final validation to ensure that all 27 years of historical records are correctly processed and reflected in the user interface without system timeouts or data corruption.
+
+## Conversation 41b07588-7f6a-4d9e-aae7-f48df7d15e55: Restoring Historical Surcharge Plan
+- Created: 2026-06-19T17:34:28Z
+- Last modified: 2026-06-20T05:14:37Z
+
+### USER Objective:
+Finalizing Mora Engine Audit
+
+**USER Objective:**
+Finalize the architectural reconciliation and audit readiness of the 20-year rotational mora engine on Host C to ensure a Single Source of Truth.
+
+**Goals:**
+1. Execute the final normalization and structural integrity fixes across the Host C database environment.
+2. Finalize documentation (`PLAN_MORA_ROTATIVA_20_ANIOS.md` and `VERIFICACION_MANUAL_MORA_20_ANIOS.md`) as authoritative guides for production deployment.
+3. Quantify financial gaps and reconcile differences between legacy Host B and Host C to prove accuracy in historical surcharge calculations and debt base validity.
+4. Align administrative audit tools (`comparativa_mora.php`) to the new V2 JIT motor logic to support financial reporting and decision-making by the water committee.
+
+## Conversation 68c13890-5673-4043-8ab3-ef3fd55a487d: Expanding Historical Mora Calculations
+- Created: 2026-06-19T01:43:46Z
+- Last modified: 2026-06-19T06:57:46Z
+
+### USER Objective:
+Optimizing Historical Surcharge Engine
+
+USER Objective:
+Refactor the JIT surcharge engine to handle multi-decadal debt calculations (2005–2026) using a 10-year rotational window and Batch Insert/Auto-Heal architecture without destructive database deletions.
+
+Goals:
+1. Implement a Batch Insert pattern in `calcula_recargos()` to optimize performance and prevent timeouts.
+2. Refactor the JIT motor to use a rolling 10-year window that dynamically omits older records from active calculation without deleting them from the database.
+3. Integrate an "Acordeón Visual" UI strategy in `adeudo_tabla.php` to allow flexible, fraccionado payment of historical surcharges while maintaining a clean administrative interface.
+4. Update `configuracion.php` to provide dynamic synchronization between the mora catalog and the 10-year threshold.
+5. Investigate and resolve the parity discrepancy between Host B and Host C regarding surcharge counts (e.g., Contract 161) by auditing the view definitions and JIT
+<truncated 22 bytes>
+
+## Conversation 62cf2a4a-a2b1-4ede-9f66-88c4e6b9937b: Mora aguav2 - todos los años.
+Realiza prueba de conectividad via mcp y mysql client.
+Insumos: Usa G
+<truncated 1031 bytes>
+- Created: 2026-06-19T01:36:53Z
+- Last modified: 2026-06-19T01:40:28Z
+
+## Conversation 8a2778b8-300b-46e8-9020-16cf387f47c8: Financial Audit Reconciliation Tool
+- Created: 2026-06-18T01:04:14Z
+- Last modified: 2026-06-18T20:12:13Z
+
+### USER Objective:
+Auditing Surcharge Logic Parity
+
+USER Objective:
+Finalize the forensic audit and validation of the V2 motor's surcharge logic to ensure data parity between the legacy Host B and the current Host C environment.
+
+Goals:
+1. Verify the accuracy of historical surcharge generation against legacy benchmarks to confirm Host C acts as a true, audit-ready Single Source of Truth.
+2. Validate the behavior of the "Just-in-Time" surcharge calculation engine regarding contract state transitions and configuration adjustments.
+3. Consolidate technical findings and business rules into the official project documentation (`matriz_mora_host_b_vs_c.md`) to inform the finance committee of systemic protections and automated safeguards.
+4. Maintain strict "Poka-Yoke" architectural integrity, ensuring no unauthorized service charges generate interest, while preserving the system's ability to handle contract re-activation scenarios securely.
+
+</conversation_summaries>
+
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:55 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-b_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:55 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Examining Discrepancies**
+
+I'm deep-diving into the discrepancies between Host A and Host B. Specifically, I'm focusing on why `categoria = 2` (base cargo) is not included in the base case in Host B. I see that `categoria = 2` (Agua) has a `recargo = 0`, but the sum doesn't reflect the expected base value. There's a mismatch here that needs untangling!
+
+
+
+
+### Actions
+
+**Tool:** `mcp_bdawahost-b_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.390339946s
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:55 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-b_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:55 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `mcp_bdawahost-b_query`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 25 June 2026, 9:55 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Investigating Database Anomalies**
+
+Okay, so I've just zeroed in on the `recargo` column within the `cargos` table and discovered its value is set to `1` for Asambleas. Now, I'm trying to trace the root cause, remembering that in the legacy database, a value of 1 was specifically assigned to "Asambleas".
+
+
+**Tracing the Data Origin**
+
+I'm now zeroing in on why actual recargos, specifically those with `categoria = 16`, have `recargo = 0` in Host B. I've found an anomaly: the `ligacargos` table on Host B shows a discrepancy – most have `recargo = 0`, not 1, even though the recargo *should* be applied. My attention is now on the `calcula_recargos` function within `core.php` of Host B, to trace the value of the `$recargo` variable, specifically on lines 296 and 384 of `calcula_recargos`.
+
+
+**Uncovering Core PHP Flaw**
+
+I've traced the issue to `calcula_recargos` in `core.php`. The function receives the base cargo's `$recargo` (which is often `0`). Consequently, the inserted recargos in `ligacargos` also have `recargo = 0`. This then affects the UI's calculation of `$total` and `$recargos`, misclassifying recargos as base charges due to the condition `($recargo)?0:$monto;`, leading to the misclassification of recargos.
+
+
+**Calculating UI Logic**
+
+I've just validated that the Host B UI's categorization logic works, but with the data's inherent flaws. The UI accurately calculates `$total` and `$recargos` based on the `recargo` flag, leading to correct totals: $15,780, but misclassifying charges. Recargos are counted as 'cargos' due to a `0` value in the `recargo` column, while Asambleas and other `recargo = 1` charges are counted as actual recargos!
+
+
+**Reclassifying Charges Accurately**
+
+I've finally pinpointed the root cause! The UI in Host B misclassifies charges because the `recargo` column in `ligacargos` is corrupted. Asambleas are incorrectly flagged as recargos (`recargo = 1`), while actual recargos often have `recargo = 0`.  This leads to a mixed-up categorization, with base cargos misattributed as recargos, and actual recargos classified as base charges. This confirms that all previous categorizations were indeed incorrect.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `PLAN_MORA_ROTATIVA_20_ANIOS.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 3.071484692s
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L293-328)</summary>
+
+**Path:** `Unknown file`
+
+```
+---
+
+### 📊 9.2 Conciliación Detallada de Contratos de Prueba (Caso de Estudio: Contrato 549)
+
+Durante las pruebas de verificación en el entorno de producción de Host C, se realizó una consulta y conciliación forense del **Contrato 549** (un deudor con 10 años de rezago de agua y asambleas). La comparativa de lo que se muestra en pantalla y en la base de datos entre ambos hosts revela los siguientes resultados exactos:
+
+#### 1. Tabla Comparativa de Saldos (Host B vs Host C)
+
+| Dimensión Financiera | Host B (Legacy) | Host C (V2 JIT) | Diferencia (C vs B) | Análisis Técnico de Paridad |
+| :--- | :---: | :---: | :---: | :--- |
+| **Total de Cargos (Base)** | $9,000.00 MXN | **$9,000.00 MXN** | $0.00 MXN | **Paridad Perfecta:** 10 anualidades de Agua ($6,000.00) y 20 cargos de Asambleas ($3,000.00). La base es idéntica en ambos servidores. |
+| **Total de Recargos (Mora)**| $6,780.00 MXN | **$16,680.00 MXN** | **+$9,900.00 MXN** | **Efecto Mora Rotativa Continua:** Host B tenía los recargos estancados e incompletos. Host C calcula dinámicamente la mora del catálogo activo (2020-2026). |
+| **Total General de Deuda** | $15,780.00 MXN | **$25,680.00 MXN** | **+$9,900.00 MXN** | Refleja la mora real devengada y no cobrada acumulada a junio de 2026 para los años configurados. |
+| **Cantidad de Adeudos** | 132 registros | **308 registros** | **+176 registros** | Aumento de filas de recargos moratorios mensuales generados en Host C para mantener al día el estado de cuenta. |
+
+#### 2. Desglose y Validación Matemática de Recargos en Host C
+
+La configuración en producción tiene activos para recargos únicamente los años **2020 a 2026** (7 años). El desglose físico de los **278 adeudos de recargos** (Categoría 16) pendientes (`estado=0`) en Host C es el siguiente:
+
+*   **Año 2026:** 2 recargos ($120.00) — Correspondientes a 2 meses transcurridos desde abril (mes de inicio) a junio de 2026.
+*   **Año 2025:** 14 recargos ($840.00) — 12 meses normales + 2 cargos de rezago.
+*   **Año 2024:** 26 recargos ($1560.00)
+*   **Año 2023:** 38 recargos ($2280.00)
+*   **Año 2022:** 50 recargos ($3000.00)
+*   **Año 2021:** 74 recargos ($4,440.00) — Compuesto por 62 recargos autogenerados (JIT) para `ANUALIDAD DEL AGUA 2021` (62 meses transcurridos desde abril de 2021 a junio de 2026) y 12 recargos estáticos migrados (`RECARGO DE AGUA 2021 [mes]`).
+*   **Año 2020:** 74 recargos ($4,440.00) — Compuesto por 74 recargos autogenerados (JIT) para `ANUALIDAD DEL AGUA 2020` (74 meses transcurridos desde abril de 2020 a junio de 2026).
+*   **Años 2017 a 2019:** **0 recargos generados** — Los recargos para estos años están desactivados en el catálogo (`recargo=0`), por lo que el motor JIT los ignora por completo de acuerdo a las reglas de paridad histórica y legal.
+
+#### 3. Confirmación del Funcionamiento "Auto-Heal" en Host C
+
+La rutina de depuración automática en `cargos.php` procesó de manera exitosa las anomalías en el periodo de gracia (meses de enero, febrero y marzo previos a la fecha de inicio del cobro de mora en abril):
+*   Se cancelaron y cambiaron a `estado = -1` los recargos espurios de ENE, FEB y MAR de los años **2020** y **2021** (como `RECARGO ENE 2020 - ANUALIDAD DEL AGUA 2020` y `RECARGO ENE 2021 - ANUALIDAD DEL AGUA 2021`).
+*   Esto eliminó de la deuda activa los cobros indebidos de meses exentos, garantizando que el deudor pague exactamente lo marcado por el reglamento del Comité.
+*   La idempotencia funcionó perfectamente gracias al mapeo en memoria de las leyendas migradas de Host B, previniendo duplicados innecesarios.
+
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Reconciling Discrepancies Observed**
+
+I'm now focusing on reconciling the observed data discrepancy from Host B's web app. It shows 132 contract debts totaling $15,780.00, which doesn't align entirely with the original description. I'm carefully analyzing the data structure to identify the source of this difference and establish a coherent view of the situation. I'll need to explore how the calculations of charges and surcharges are made.
+
+
+**Clarifying Webapp Discrepancy**
+
+I've crafted the explanation for the Host B webapp discrepancy, and it's looking solid. I've pinpointed the issue: faulty data in the `recargo` field of `ligacargos`. Specifically, the system erroneously classifies Asamblea charges as surcharges, inflating the surcharge total and deflating the base charge total. This amounts to $2,850.00 from 19 Asambleas plus $150.00 from 1 cargo. I've confirmed that this misalignment, due to how `core.php` sums values, is the root cause.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.593904516s
+- **Model:** Gemini 3.5 Flash (Medium)
 </details>
 
 ---
