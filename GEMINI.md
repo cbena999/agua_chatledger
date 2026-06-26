@@ -50,6 +50,7 @@ Estas habilidades definen **cómo** ejecuto las tareas técnicas:
 ## 🚨 Módulos Críticos y Auditoría Constante
 Existen funcionalidades core que requieren especial atención para asegurar la congruencia de datos:
 - **Lógica Híbrida y Retroactividad (V2)**: Motor de Mora Continuo y Reglas de Paridad en `transiciones_estado_contratos.md`.
+- **Regla de Mora Continua (Anti Falsos Positivos)**: El periodo de gracia (Ene-Mar) aplica **únicamente al año base**. En años subsecuentes, la mora se acumula los 12 meses. Recargos como `RECARGO ENE 2026 - ANUALIDAD DEL AGUA 2020` son **VÁLIDOS** (mes 70 de mora) y **NO SON ESPURIOS**. El Auto-Heal solo cancela ENE-MAR del año base.
 - **Estados de Contrato**: Transiciones entre `1 (ACTIVO)`, `2 (SUSPENSIÓN TEMPORAL)`, `3 (SUSPENSIÓN ADMINISTRATIVA)` y `4 (SUSPENSIÓN DEFINITIVA)`. Ver matriz completa en `transiciones_estado_contratos.md`.
 - **Cartera Vencida (`carteravencida.php`)**: Validación de deuda morosa.
 - **Corte de Caja (`concentradocortecaja.php`)**: Ingresos diarios contra reportes detallados.
@@ -106,8 +107,7 @@ Se implementaron parches estructurales para asegurar la integridad de la configu
 |-------|---------|-------------|
 | **Poka-Yoke Numérico** | `cargaConfig()` | Intercepción con `preg_match` y `str_replace` para sanear globalmente cualquier número formateado (ej. "10,500.00") en `config_sistema` antes del casteo `floatval/intval`. Protege 18 variables nativas. |
 | **Reversa Incondicional** | `_getReversal()` | El botón "Revertir transición" se ha desacoplado de las reglas de deuda y ahora es permanentemente visible en la UI tras un cambio de estado válido. |
-| **Límite Bomba** | `calcula_recargos()` | Se introdujo una regla de quiebre de deuda máxima (`reversal_threshold`). El motor deja de generar mora si el contrato alcanza este tope de deuda. |
-| **Toggle de Límite** | `reversal_threshold_enable` | Nuevo parámetro global para activar/desactivar (1/0) el Límite Bomba de recargos a voluntad del operador. Por default, apagado. |
+| **Límite Bomba** | `calcula_recargos()` | Se introdujo una regla de quiebre de deuda máxima (`reversal_threshold`). El motor deja de generar mora si el contrato alcanza este tope de deuda. Se desactiva con `0`. |
 
 ---
 
