@@ -50,7 +50,10 @@ Estas habilidades definen **cómo** ejecuto las tareas técnicas:
 ## 🚨 Módulos Críticos y Auditoría Constante
 Existen funcionalidades core que requieren especial atención para asegurar la congruencia de datos:
 - **Lógica Híbrida y Retroactividad (V2)**: Motor de Mora Continuo y Reglas de Paridad en `transiciones_estado_contratos.md`.
-- **Regla de Mora Continua (Anti Falsos Positivos)**: El periodo de gracia (Ene-Mar) aplica **únicamente al año base**. En años subsecuentes, la mora se acumula los 12 meses. Recargos como `RECARGO ENE 2026 - ANUALIDAD DEL AGUA 2020` son **VÁLIDOS** (mes 70 de mora) y **NO SON ESPURIOS**. El Auto-Heal solo cancela ENE-MAR del año base.
+- **Regla de Mora Continua (Anti Falsos Positivos GAPs 01, 03, 04, 07)**: 
+  * **GAP-01/03:** El periodo de gracia (Ene-Mar) aplica **únicamente al año base**. En años subsecuentes, la mora se acumula los 12 meses. Recargos como `RECARGO ENE 2021 - ANUALIDAD 2020` son **VÁLIDOS**.
+  * **GAP-07:** El campo `anio` en `ligacargos_historico` almacena el AÑO ORIGEN de la deuda. Ver +120 recargos bajo un mismo año NO ES DOBLE CONTEO, es acumulación inter-anual correcta.
+  * **GAP-04:** Suspender un servicio NO PERDONA la deuda. Las moras activas en Estado 2 son correctas (deuda congelada). La amnistía solo aplica al reactivar.
 - **Estados de Contrato**: Transiciones entre `1 (ACTIVO)`, `2 (SUSPENSIÓN TEMPORAL)`, `3 (SUSPENSIÓN ADMINISTRATIVA)` y `4 (SUSPENSIÓN DEFINITIVA)`. Ver matriz completa en `transiciones_estado_contratos.md`.
 - **Cartera Vencida (`carteravencida.php`)**: Validación de deuda morosa.
 - **Corte de Caja (`concentradocortecaja.php`)**: Ingresos diarios contra reportes detallados.
@@ -260,6 +263,16 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 *   **Auditoría Masiva JIT**: Creada la página `admin/operaciones/comparativa_masiva.php` conectada dinámicamente al SSOT `.mcp.json` para ejecutar un cruce en tiempo real del motor de recargos entre Host B y Host C para los 153 contratos críticos de alta mora.
 *   **Centralización de Saneamiento**: Toda la lógica de condonación de recibos históricos fue incorporada directamente en `configuracion.php`, eliminando la página redundante `soporte_reconciliados.php`.
 *   **Estabilización de Parámetros**: Se ajustó la ventana del motor de recargos en Host C a 27 años de deuda base y 10 años de recargos máximos. Además, la descripción de `reversal_threshold` fue reescrita eliminando términos informales.
+
+**Estabilización de Tomas Adicionales e Historial (2026-06-26):**
+*   **Auditoría de Tomas**: Se analizó la base de datos de Host C e identificamos que solo el contrato 858 tiene una segunda toma reciente (alta en 2026).
+*   **Clasificación de Historial de Tomas**: Se corrigió `historial_mov_cto.php` para clasificar las instalaciones de tomas bajo `tipo-conexion`, mostrando la frase "Se agregó Toma $n" en el filtro de "Tomas" en lugar de quedar en el fallback general.
+*   **Sincronización Poka-Yoke**: Se habilitó la sincronización automática de cargos anuales y recargos no pagados al modificarse la configuración de tomas en `generaCargosAutomaticos()` y `_sincronizaDeudaPendienteContrato()`.
+
+**Auditoría de Reportes Financieros y Estabilidad (2026-06-26 — Sesión 2):**
+*   **Auditoría Forense de Reportes Core**: Se validó la precisión de `concentradocortecaja.php`, `concentradocortecajaresumen.php`, `contratoinfo2.php`, `listadeudores.php`, `listadeudoresxc.php`, y `cargos_cancelados_sdf.php`. Todos los reportes financieros están 100% alineados con el motor JIT y las vistas normalizadas (`vw_ligacargos_all` y `vw_ligacargos_pendientes`), garantizando la paridad tras la partición de la base de datos.
+*   **Exclusión de Conceptos No Periódicos**: Se confirmó que los reportes de deuda y cartera vencida excluyen consistentemente las categorías no periódicas (6, 19, 20, 21, 22), los estados de contrato inactivos (4) y los usuarios no localizados (Estado 2), evitando la "deuda fantasma" en los cortes de caja y listas ordinarias de cobro.
+*   **Reporte de Auditoría**: Generado y guardado el análisis detallado en `/home/carlos/.gemini/antigravity/brain/03cd7422-1442-4d78-a978-010ca624cac1/reportes_analisis_forense.md`.
 
 **Última actualización**: 2026-06-26
 

@@ -94,8 +94,8 @@ SELECT IFNULL(SUM(monto),0) FROM vw_ligacargos_pendientes WHERE numcontrato='405
 
 ## ✅ RESUELTOS RECIENTEMENTE (referencia)
 
-| Fecha | Item | Detalle |
-|---|---|---|
+| 2026-06-26 | Auditoría de Reportes Financieros y Estabilidad | ✅ PASADO — Auditados concentradocortecaja.php, concentradocortecajaresumen.php, contratoinfo2.php, listadeudores.php, listadeudoresxc.php, y cargos_cancelados_sdf.php. Se verificó que todas las consultas y cálculos utilicen las vistas unificadoras y apliquen los filtros correctos de categorías y exclusiones operativas de deuda activa. |
+| 2026-06-26 | Auditoría de Tomas Adicionales e Historial | ✅ PASADO — Auditoría de tomas (cto 858), clasificación de tomas adicionales bajo tipo-conexion con etiqueta 'Se agregó Toma $n' en historial_mov_cto.php, y sync automática Poka-Yoke de cargos/recargos pendientes en modificación de tomas. |
 | 2026-06-24 | Saneamiento de Base de Datos y UI (GAPs 1-6) | ✅ PASADO — Normalizadas mensualidades manuales a automatico=0 en cargos. Sanitizadas tipografías y leyendas de Faltas a Asamblea en catalogos/ledger. Reclasificado concepto 'REHABILITACION' de cat 2 a cat 5. Corregido agrupamiento de asambleas del año en curso en adeudo_tabla.php y validada suite completa sin falsos positivos en Host C. |
 | 2026-06-22 | Refactorización Acordeón de Mora UI | ✅ PASADO — Reemplazo de lista plana de adeudos por 4 acordeones colapsables en adeudo_tabla.php con estadísticas dinámicas, soporte para multas de asamblea en sus años correspondientes y resaltado visual para la palabra 'RECARGO' en cargos especiales. |
 | 2026-05-23 | Habilitación HTTPS y Let's Encrypt | ✅ PASADO — Habilitación de HTTPS en Nginx para oci-vm (www.caelitandem.lat), redirect HTTP → HTTPS y verificación de timers. |
@@ -145,4 +145,4 @@ SELECT IFNULL(SUM(monto),0) FROM vw_ligacargos_pendientes WHERE numcontrato='405
 
 ---
 
-*Última actualización: 2026-06-24 — Sincronización GEMINI.md y repos — Antigravity*
+*Última actualización: 2026-06-26 — Auditoría de Reportes Financieros — Antigravity*

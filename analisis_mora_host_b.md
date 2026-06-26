@@ -2,6 +2,9 @@
 
 Este reporte contiene la validación detallada de la lista de contratos proporcionada y su extensión con nuevos candidatos detectados en el Host B con deudas significativas por concepto de recargos (Categorías 11: RECARGOS, 16: RECARGO AGUA, y 17: RECARGO DRENAJE).
 
+> [!IMPORTANT]
+> **Veredicto Forense (Estabilización V2):** Todos los montos elevados reportados en este documento (ej. deudas de >$10,000 MXN y conteos de >12 recargos por año) **SON CORRECTOS**. El motor JIT acumula mora continua inter-anual de manera precisa (Regla F11). Los supuestos GAPs de "doble conteo legacy" (GAP-07) y "espurios cross-year" (GAP-01/03) fueron descartados formalmente como **falsos positivos**. No se requiere ninguna acción correctiva sobre la base de datos de Host C; es deuda legítima.
+
 ---
 
 ## 📊 Resumen General de Resultados
