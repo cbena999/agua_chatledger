@@ -7,9 +7,8 @@
 | **Trajectory ID** | `0d548e5c-29f4-4342-94b5-1a472d643275` |
 | **Cascade ID** | `ced05dd2-ca00-4b12-a28f-b00389a0a46d` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 468 |
+| **Total Steps** | 562 |
 | **Started** | 27 June 2026, 8:04 pm |
-| **Completed** | 27 June 2026, 10:10 pm |
 
 ---
 
@@ -9489,6 +9488,2112 @@ I've discovered the `docs-dev/ga-cl-ia` directory is extensively referenced. It 
 - **Thinking Duration:** 0.043451428s
 - **Model:** Gemini 3.5 Flash (Medium)
 </details>
+
+---
+
+## User Request
+
+. que todas las paginas de index*.php  conserven el estilo ui de la versión  aguad_ac_oferta
+.  quitar el item de menu superior: Comité
+.  para la ficha de contrato en la sección de:  Opciones , los botones: Pagar cargos seleccionados, y Cancelar cargos seleccionado los fondos ponerlos en un fondo gris y que cubra todo el ancho/alto de lo textos.
+. del recibo.php , se quite la imagen de RFC
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `config.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 June 2026, 10:29 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 June 2026, 10:29 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 June 2026, 10:29 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 June 2026, 10:29 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index2.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+// Establecer el huso horario para registros locales
+date_default_timezone_set('America/Mexico_City');
+
+// Si se recibe una petición de log desde el cliente (AJAX/Fetch)
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET['action']) && $_GET['action'] == 'log_client_error') {
+    header('Content-Type: application/json; charset=utf-8');
+    
+    // Obtener el JSON enviado
+    $raw_input = file_get_contents('php://input');
+    $data = json_decode($raw_input, true);
+    
+    $tipo = isset($data['tipo']) ? trim($data['tipo']) : 'ERROR_DESCONOCIDO';
+    $mensaje_err = isset($data['mensaje']) ? trim($data['mensaje']) : 'Sin mensaje';
+    $detalles = isset($data['detalles']) ? json_encode($data['detalles'], JSON_UNESCAPED_UNICODE) : '{}';
+    $url = isset($data['url']) ? trim($data['url']) : '';
+    $linea = isset($data['linea']) ? intval($data['linea']) : 0;
+    
+    // Formatear el mensaje de log para error_log
+    $log_message = "[Agua Voice Client Error] Tipo: $tipo | Mensaje: $mensaje_err | Línea: $linea | URL: $url | Detalles: $detalles";
+    
+    // Escribir en el log de errores de PHP
+    error_log($log_message);
+    
+    echo json_encode(["status" => "logged"]);
+    exit;
+}
+
+require_once('login/usuario.php');
+session_start();
+if (!isset($_SESSION['usuario'])) {
+	print "<script>window.location='login/index.php'</script>";
+	exit();
+}
+header('Content-Type: text/html; charset=UTF-8');
+
+require_once('config/Conexion.php');
+$con = new Conexion();
+if (!$con->abrirConexion()) {
+    die("Error: No se pudo conectar a la base de datos.");
+}
+
+// Ciudadanos totales
+$res_total_users = $con->q("SELECT COUNT(*) AS qty FROM usuario");
+$row_total_users = $con->fetch_array($res_total_users);
+$total_users_count = $row_total_users['qty'];
+
+// Contratos Activos
+$res_active_contracts = $con->q("SELECT COUNT(*) AS qty FROM contrato WHERE estado = 1");
+$row_active_contracts = $con->fetch_array($res_active_contracts);
+$active_contracts_count = $row_active_contracts['qty'];
+
+// Suspensiones temporales
+$res_susp_temp = $con->q("SELECT COUNT(*) AS qty FROM contrato WHERE estado = 2");
+$row_susp_temp = $con->fetch_array($res_susp_temp);
+$susp_temp_count = $row_susp_temp['qty'];
+
+// Bajas definitivas (Estado 4 - SDF)
+$res_susp_def = $con->q("SELECT COUNT(*) AS qty FROM contrato WHERE estado = 4");
+$row_susp_def = $con->fetch_array($res_susp_def);
+$susp_def_count = $row_susp_def['qty'];
+
+$con->cerrarConexion();
+?>
+<!DOCTYPE HTML>
+<html lang="es">
+
+<head>
+	<title>SADM Tlapa - Control de Agua Potable y Alcantarillado</title>
+	<meta charset="UTF-8">
+	<!-- Google Fonts: Inter & Outfit -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+	<!-- Favicon -->
+	<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💧</text></svg>">
+	
+	<link rel="stylesheet" type="text/css" href="web-assets/css/paxstyle2.css?v=<?= filemtime('web-assets/css/paxstyle2.css') ?>">
+	<link rel="stylesheet" type="text/css" href="web-assets/css/app-voice.css?v=<?= filemtime('web-assets/css/app-voice.css') ?>">
+	<script language="javascript" src="includes/js/paxscript.js"></script>
+	<script src="web-assets/js/jquery-3.7.1.min.js"></script>
+	<script src="web-assets/js/jquery-migrate-3.4.1.min.js"></script>
+	<script src="web-assets/js/jqueryform.min.js"></script>
+	<script src="web-assets/js/jquery.validate.min.js"></script>
+	<script src="web-assets/js/jquery.hotkeys.min.js"></script>
+	<script src="web-assets/js/app-main.js"></script>
+	<script src="web-assets/js/app-voice.js?v=<?= filemtime('web-assets/js/app-voice.js') ?>"></script>
+    <script>
+        $(document).ready(function() {
+            // Siempre habilitar la opción de Contratos (Buscar por Número de Contrato) en la carga inicial
+            menu('contrato');
+
+            // Soporte para apertura directa de contratos via URL (Deep-linking)
+            <?php if(isset($_GET['numcontrato'])): ?>
+                cargaDatosContrato('<?= intval($_GET['numcontrato']) ?>');
+            <?php endif; ?>
+        });
+    </script>
+</head>
+
+<body>
+	<div id='mensajes'></div>
+	<div id='clutter'>
+		<div class="brand-section" onclick="location.reload();" style="cursor:pointer;">
+			<div class="brand-icon">
+				<svg viewBox="0 0 24 24"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+			</div>
+			<div class="brand-info">
+				<h1>SADM TLAPA</h1>
+				<p>Agua Potable y Alcantarillado</p>
+			</div>
+		</div>
+		<ul>
+			<li><a href='#' onclick="menu('usuario')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> Usuarios</a></li>
+			<li><a href='#' onclick="menu('contrato')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> Contratos</a></li>
+			<li><a href='#' onclick="cargaCargos()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg> Cargos</a></li>
+			<li><a href='#' onclick="gastos()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Egresos</a></li>
+			<li><a href='#' onClick="asistencias()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> Asistencias</a></li>
+			<li><a href='#' onClick="listados()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg> Listados</a></li>
+			<li><a href='#' onClick="contrasenas()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Comité</a></li>
+			<?php if ($_SESSION['usuario']->getRol() == 1): ?>
+				<li><a href='#' onClick='registro()'><svg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2'/><circle cx='9' cy='7' r='4'/><line x1='20' y1='8' x2='20' y2='14'/><line x1='23' y1='11' x2='17' y2='11'/></svg> Registro</a></li>
+			<?php endif; ?>
+		</ul>
+		<div class="profile-area">
+			<div class="user-card">
+				<div class="avatar"><?= strtoupper(substr($_SESSION['usuario']->getNombre(), 0, 2)) ?></div>
+				<div class="user-name"><?= htmlspecialchars($_SESSION['usuario']->getNombre()) ?></div>
+			</div>
+			<button class="btn-exit" onclick="salir()" title="Salir">
+				<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+			</button>
+			<a href='#' onClick="configuracion()" class="gear-link" title="Configuración y Saneamiento" style="margin-left: 5px;">&#9881;</a>
+			<a href='index2.php' class="version-tag">V4.2.0</a>
+		</div>
+	</div>
+	<div id='opciones'></div>
+	<div id='app'>
+		<h1>Bienvenido, <?= htmlspecialchars($_SESSION['usuario']->getNombre()) ?></h1>
+		<hr>
+		
+		<!-- Stat Grid Glass -->
+		<div class="stat-grid" style="margin-top: 15px;">
+			<div class="glass-stat-card">
+				<div>
+					<div class="stat-title">Ciudadanos registrados</div>
+					<div class="stat-val"><?= number_format($total_users_count) ?></div>
+				</div>
+				<div class="stat-circle blue">
+					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+				</div>
+			</div>
+			<div class="glass-stat-card">
+				<div>
+					<div class="stat-title">Contratos Activos</div>
+					<div class="stat-val"><?= number_format($active_contracts_count) ?></div>
+				</div>
+				<div class="stat-circle green">
+					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+				</div>
+			</div>
+			<div class="glass-stat-card">
+				<div>
+					<div class="stat-title">Suspensiones Temp.</div>
+					<div class="stat-val"><?= number_format($susp_temp_count) ?></div>
+				</div>
+				<div class="stat-circle yellow">
+					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/></svg>
+				</div>
+			</div>
+			<div class="glass-stat-card">
+				<div>
+					<div class="stat-title">Bajas Definitivas</div>
+					<div class="stat-val"><?= number_format($susp_def_count) ?></div>
+				</div>
+				<div class="stat-circle red">
+					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/></svg>
+				</div>
+			</div>
+		</div>
+
+		<div id="tarjeta" style="position: relative; z-index: 1; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; box-sizing: border-box; padding: 20px 20px 12px 20px; height: 260px; margin-top: 24px;">
+			<div class="card-watermark"></div>
+			<div style="position: relative; z-index: 2;">
+				<p style="margin: 0 0 4px 0; font-size: 14px; line-height: 1.4;"><b>Dirección de Agua Potable y Alcantarillado de Tlapa de Comonfort</b>.</p>
+				<p style="margin: 0; font-size: 11px; color: #64748b;">Versión 4.2.0</p>
+			</div>
+		</div>
+		<br>
+	</div>
+
+	<!-- Loader Overlay (Reloj de espera) -->
+	<div id="loader-overlay">
+		<div class="spinner"></div>
+		<div class="loader-text">Cargando Servicios Tlapa...</div>
+	</div>
+</body>
+
+</html>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 June 2026, 10:29 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 June 2026, 10:29 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 June 2026, 10:29 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 June 2026, 10:30 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 June 2026, 10:30 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 June 2026, 10:30 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `.liga`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 June 2026, 10:30 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `paxstyle2.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L402-1201)</summary>
+
+**Path:** `Unknown file`
+
+```
+    cursor: not-allowed;
+}
+
+.liga2 {
+    background: var(--danger);
+    box-shadow: 0 2px 8px rgba(239, 68, 68, 0.15);
+}
+
+.liga2:hover {
+    background: #e11d48;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);
+}
+
+/* Modern Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+}
+
+th {
+    background: #f8fafc;
+    color: #475569;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 12px 14px;
+    border-bottom: 2px solid #e2e8f0;
+    text-align: left;
+}
+
+td {
+    padding: 12px 14px;
+    font-size: 13px;
+    color: #334155;
+    border-bottom: 1px solid #f1f5f9;
+    vertical-align: middle;
+}
+
+tr:hover td {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Status Badges */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.status-badge.active { background: rgba(16, 185, 129, 0.15); color: #047857; }
+.status-badge.lila { background: rgba(216, 180, 254, 0.25); color: #6d28d9; }
+.status-badge.suspended { background: rgba(245, 158, 11, 0.15); color: #b45309; }
+
+/* Dashboard Cards (Tarjetas) */
+#tarjeta {
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+    border-radius: 12px;
+    padding: 20px;
+    width: auto;
+    float: none;
+    margin-bottom: 20px;
+}
+
+/* Post-it Notes in Contract */
+#notasCto {
+    /* overridden by inline styles in ficha.php */
+}
+
+/* Fieldset and Legend */
+fieldset {
+    border: 1px solid rgba(0,0,0,0.06);
+    border-radius: 12px;
+    background: rgba(255,255,255,0.3);
+    padding: 20px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+legend {
+    background: var(--accent);
+    color: white;
+    padding: 4px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Specific Section Colors (Anotaciones, Propietarios, etc.) */
+.anotacioncto { background: linear-gradient(135deg, #f59e0b, #d97706) !important; color: white !important; }
+.divanotacioncto { border-left: solid 4px #f59e0b !important; }
+
+.propietariocto { background: linear-gradient(135deg, #ef4444, #dc2626) !important; color: white !important; }
+.divpropietariocto { border-left: solid 4px #ef4444 !important; }
+
+.cargoscto { background: linear-gradient(135deg, #10b981, #059669) !important; color: white !important; }
+.divcargoscto { border-left: solid 4px #10b981 !important; }
+
+.estadocto { background: linear-gradient(135deg, #8b5cf6, #6d28d9) !important; color: white !important; }
+.divestadocto { border-left: solid 4px #8b5cf6 !important; }
+
+#mensajes {
+    position: fixed;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    max-width: 90%;
+    background: rgba(15, 23, 42, 0.9);
+    backdrop-filter: blur(8px);
+    border-radius: 10px;
+    padding: 12px 24px;
+    color: white;
+    z-index: 9999;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    display: none;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.numcto {
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.clicable { cursor: pointer; }
+.derecha { text-align: right; }
+.centrar { text-align: center; }
+
+/* Submenu link list styling inside options */
+#opciones a {
+    color: #475569;
+    background: transparent;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    box-shadow: none;
+}
+
+#opciones a:hover {
+    color: var(--accent);
+    background: rgba(37, 99, 235, 0.05);
+}
+
+/* --- Profile Area --- */
+.profile-area {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.user-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.4);
+    padding: 6px 12px 6px 8px;
+    border-radius: 30px;
+    border: 1px solid var(--glass-border);
+}
+.avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    font-weight: 700;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.user-name {
+    font-size: 13px;
+    font-weight: 600;
+}
+.btn-exit {
+    background: none;
+    border: none;
+    color: #94a3b8;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn-exit:hover {
+    color: var(--danger);
+}
+.emergency-pill {
+    background: white;
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* --- Stat Grid Glass --- */
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
+}
+.glass-stat-card {
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: var(--transition);
+}
+.glass-stat-card:hover {
+    transform: scale(1.02);
+    background: rgba(255, 255, 255, 0.6);
+}
+.stat-title {
+    font-size: 11px;
+    color: #64748b;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+.stat-val {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1e293b;
+    font-family: 'Outfit', sans-serif;
+}
+.stat-circle {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+.stat-circle.blue { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
+.stat-circle.green { background: linear-gradient(135deg, #10b981, #059669); }
+.stat-circle.yellow { background: linear-gradient(135deg, #f59e0b, #d97706); }
+.stat-circle.red { background: linear-gradient(135deg, #ef4444, #b91c1c); }
+
+/* --- Split Cards --- */
+.grid-split {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 24px;
+}
+@media (max-width: 900px) {
+    .stat-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .grid-split {
+        grid-template-columns: 1fr;
+    }
+}
+@media (max-width: 480px) {
+    .stat-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --- Print & Ticket overlay from Asamblea --- */
+#print-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+}
+
+#ticket-content {
+    background: white;
+    color: black;
+    padding: 5mm;
+    border-radius: 4px;
+    width: 80mm;
+    min-height: auto;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+    text-align: left;
+}
+
+@media print {
+    @page { margin: 0; }
+    body { margin: 0; padding: 0; }
+    body * { visibility: hidden; }
+    #print-overlay, #print-overlay * { visibility: visible; }
+    #print-overlay { position: absolute; left: 0; top: 0; display: block !important; background: transparent; margin: 0; padding: 0; }
+    #ticket-content { box-shadow: none; border: none; padding: 0.5mm; margin: -4mm 0; width: 78mm; min-height: auto; }
+    .no-print { display: none !important; }
+}
+
+/* Restored utility classes for compact layout compatibility */
+.panel300 {
+    margin-left: 10px;
+    height: 300px;
+    width: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    float: left;
+    position: relative;
+}
+
+.bco {
+    color: #ffffff !important;
+}
+
+.liactiva {
+    color: #793300 !important;
+    font-weight: bold;
+}
+
+.lidesactiva {
+    color: rgba(113, 63, 18, 0.4) !important;
+}
+
+/* Restored original main style (compact layout) for adequacy and add-charges grids */
+#pagos table td,
+#agregacargo table td,
+#cargosfuente td,
+#cargostabla td,
+.divcargoscto table td {
+    padding: 2px 4px !important;
+    font-size: 11px !important;
+    color: #000000 !important;
+    border-bottom: none !important;
+    vertical-align: top !important;
+    font-family: Verdana, Geneva, sans-serif !important;
+    background: transparent !important;
+}
+
+#pagos table tr:hover td,
+#agregacargo table tr:hover td,
+#cargosfuente tr:hover td,
+#cargostabla tr:hover td,
+.divcargoscto table tr:hover td {
+    background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+.mayusculas {
+    text-transform: uppercase;
+}
+
+/* Specific styling for payments/debts legends to look like simple labels instead of big buttons */
+#pagos legend,
+#cambiaestado legend,
+#agregarCargoX legend,
+.divestadocto legend,
+.divcargoscto legend,
+.divpropietariocto legend,
+.divanotacioncto legend {
+    background: transparent !important;
+    color: #475569 !important; /* slate-600 */
+    padding: 0 4px !important;
+    font-size: 11px !important;
+    font-weight: bold !important;
+    border-radius: 0 !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+    letter-spacing: 0.05em !important;
+}
+
+/* Style for Pagar and Cancelar buttons inside debts grid to match compact action buttons */
+#botonpagar.liga, #botoncancelar.liga2 {
+    margin: 0 !important;
+    padding: 4px 8px !important;
+    font-size: 11px !important;
+    text-align: center !important;
+    text-decoration: none !important;
+    color: white !important;
+    display: inline-flex !important;
+    height: 30px !important;
+    width: 90px !important;
+    box-sizing: border-box !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 6px !important;
+    font-weight: 600 !important;
+}
+
+#botonpagar.liga:hover {
+    background: var(--accent-hover) !important;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25) !important;
+}
+
+#botoncancelar.liga2:hover {
+    background: #e11d48 !important;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25) !important;
+}
+
+/* Glassmorphism System for Cargo Panels & Forms */
+.glass-cargo-panel {
+    margin-left: 10px;
+    width: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    float: left;
+    position: relative;
+    background: rgba(255, 255, 255, 0.65) !important;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(31, 38, 135, 0.03);
+    box-sizing: border-box;
+}
+
+.cargo-column-header {
+    width: 100%;
+    font-size: 11px;
+    min-height: 24px;
+    height: auto;
+    text-align: center;
+    color: #1e293b !important; /* slate-800 */
+    text-transform: uppercase;
+    font-weight: bold;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    padding: 6px 10px;
+    background: rgba(248, 250, 252, 0.95) !important; /* light slate */
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    box-sizing: border-box;
+    z-index: 10;
+    border-radius: 11px 11px 0 0;
+}
+
+#buscacargo {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #cbd5e1;
+    color: #1e293b;
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-size: 11px;
+    margin-left: 4px;
+}
+#buscacargo:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+.cargo-column-header a.liguita {
+    color: #ef4444 !important; /* soft red */
+    text-decoration: underline;
+    font-size: 10px;
+    margin-left: 8px;
+    font-weight: 500;
+}
+.cargo-column-header a.liguita:hover {
+    color: #dc2626 !important;
+}
+
+#mensualidades {
+    margin-top: 10px;
+    border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    padding: 8px;
+    width: 100%;
+}
+#mensualidades th {
+    background: #f1f5f9;
+    color: #1e293b !important;
+    font-size: 10px;
+    padding: 6px;
+    border-radius: 6px 6px 0 0;
+    font-weight: 600;
+}
+#mensualidades td {
+    padding: 4px !important;
+    font-size: 10px !important;
+    color: #1e293b !important;
+    border-bottom: none !important;
+}
+#mensualidades input[type="checkbox"] {
+    margin-right: 4px;
+    vertical-align: middle;
+}
+#mensualidades label {
+    vertical-align: middle;
+    cursor: pointer;
+    font-weight: normal;
+    text-transform: capitalize;
+}
+
+#mensualidades a.liguita {
+    display: inline-block;
+    padding: 2px 8px;
+    margin: 4px 6px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 10px;
+    font-weight: 600;
+}
+#mensualidades a.liguita:first-of-type {
+    background: #f1f5f9;
+    color: #475569 !important;
+    border: 1px solid #cbd5e1;
+}
+#mensualidades a.liguita:first-of-type:hover {
+    background: #e2e8f0;
+}
+#mensualidades a.liguita:last-of-type {
+    background: #2563eb;
+    color: #ffffff !important;
+    border: 1px solid #1d4ed8;
+}
+#mensualidades a.liguita:last-of-type:hover {
+    background: #1d4ed8;
+}
+
+/* Glassmorphism containers for forms and tables */
+.glass-card {
+    background: rgba(255, 255, 255, 0.75) !important;
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+    padding: 20px;
+    margin-top: 15px;
+    margin-bottom: 25px;
+    box-sizing: border-box;
+}
+
+/* Glass Table styling */
+.glass-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.7) !important;
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+    border: 1px solid rgba(255,255,255,0.45);
+    margin: 10px 0;
+}
+.glass-table th {
+    background: rgba(241, 245, 249, 0.8) !important;
+    font-weight: 600;
+    color: #1e293b !important;
+    font-size: 11px !important;
+    text-transform: uppercase;
+    padding: 8px 12px !important;
+    border-bottom: 2px solid #e2e8f0 !important;
+}
+.glass-table td {
+    padding: 8px 12px !important;
+    font-size: 11px !important;
+    color: #334155 !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    font-family: inherit !important;
+    background: transparent !important;
+}
+.glass-table tr:hover td {
+    background-color: rgba(241, 245, 249, 0.5) !important;
+}
+
+/* Compact form layout for cargos creation */
+.glass-form-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 12px;
+}
+.form-column {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.form-group-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+}
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.form-field label {
+    font-size: 10px;
+    font-weight: 700;
+    color: #475569;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+.form-checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4px;
+    background: rgba(0, 0, 0, 0.02);
+    padding: 6px;
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+}
+.form-checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #334155;
+    cursor: pointer;
+}
+.glass-form-grid input[type="text"],
+.glass-form-grid select {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #cbd5e1;
+    color: #1e293b;
+    border-radius: 4px;
+    padding: 3px 6px;
+    font-size: 11px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: all 0.2s;
+}
+.glass-form-grid input[type="text"]:focus,
+.glass-form-grid select:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+.glass-form-grid input[type="checkbox"] {
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+    accent-color: #2563eb;
+    margin: 0;
+}
+
+#busquedaCto td.bco {
+    color: #475569 !important; /* slate-600 */
+    font-size: 10px !important;
+}
+#busquedaCto {
+    color: #1e293b !important; /* slate-800 */
+}
+#busquedaCto input[type="text"] {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #cbd5e1;
+    color: #1e293b;
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-size: 11px;
+}
+#busquedaCto input[type="submit"],
+#busquedaCto input[type="button"] {
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: 2px;
+}
+#busquedaCto input[type="submit"]:hover,
+#busquedaCto input[type="button"]:hover {
+    background: #1d4ed8;
+}
+#busquedaCto table {
+    width: 100%;
+}
+#busquedaCto table td {
+    padding: 2px !important;
+}
+#busquedaCto input[type="checkbox"],
+#busquedaCto input[type="radio"] {
+    vertical-align: middle;
+    margin-right: 4px;
+}
+#resultadofinal td {
+    color: #1e293b !important;
+}
+
+/* Estilos de Tomas en Ficha de Contrato (Modo Edición) */
+.glass-toma-card {
+    background: rgba(255, 255, 255, 0.8) !important;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.45) !important;
+    border-radius: 12px;
+    padding: 15px;
+    min-width: 310px;
+    width: 310px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+    box-sizing: border-box;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.glass-toma-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px rgba(31, 38, 135, 0.1);
+}
+.glass-toma-card h3 {
+    margin-top: 0;
+    margin-bottom: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #1e293b;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.05);
+    padding-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+.glass-toma-section {
+    margin-bottom: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.6);
+    transition: background-color 0.2s;
+}
+.glass-toma-section:hover {
+    background: rgba(255, 255, 255, 0.95);
+}
+.glass-toma-card label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #334155;
+    cursor: pointer;
+    vertical-align: middle;
+}
+.glass-toma-card input[type="radio"],
+.glass-toma-card input[type="checkbox"] {
+    vertical-align: middle;
+    margin-right: 4px;
+    cursor: pointer;
+    accent-color: #2563eb;
+}
+.glass-toma-card b.label-titulo {
+    font-size: 10px;
+    font-weight: 700;
+    color: #475569;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: inline-block;
+    margin-bottom: 6px;
+}
+
+/* Estilización del formulario izquierdo en Edición de Contrato (#datoscto) y Nuevo Usuario (#datosusr) */
+#datoscto input[type="text"],
+#datoscto select,
+#datoscto textarea,
+#datosusr input[type="text"],
+#datosusr select,
+#datosusr textarea {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #cbd5e1;
+    color: #1e293b;
+    border-radius: 4px;
+    padding: 3px 6px;
+    font-size: 11px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: all 0.2s;
+    font-family: inherit;
+}
+#datoscto input[type="text"]:focus,
+#datoscto select:focus,
+#datoscto textarea:focus,
+#datosusr input[type="text"]:focus,
+#datosusr select:focus,
+#datosusr textarea:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    outline: none;
+}
+#datoscto td {
+    padding-bottom: 4px !important;
+    font-size: 11px;
+    color: #475569;
+    font-weight: 600;
+}
+#datoscto td input[type="submit"] {
+    margin-top: 5px;
+}
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `Opciones`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 June 2026, 10:31 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `adeudo_tabla.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L699-739)</summary>
+
+**Path:** `Unknown file`
+
+```
+                            <tr><td colspan=2><hr style='margin:4px 0;'></td></tr>
+                            <tr>
+                                <td colspan=2 style='white-space:nowrap; padding-top:4px;'>
+                                    <span style='color:#555; font-size:12px;'>Total selecci&oacute;n</span>
+                                    <input class='derecha' type='text' value='0'
+                                        id='totalmarcado' name='totalmarcado' readonly
+                                        style='width:55px; font-size:12px; height:18px; margin-right:8px;'>
+                                    <span style='color:#555; font-size:12px;'>No. recibo</span>
+                                    <input class='derecha' type='text' value='<?= $foliotope ?>'
+                                        id='recibo' name='recibo' readonly
+                                        style='width:50px; font-size:12px; height:18px;'>
+                                </td>
+                            </tr>
+                        </table>
+                    </fieldset>
+                </td>
+                <td class='derecha' rowspan=5 width=300px id='cancelacargos'>
+                    <fieldset>
+                        <legend>Opciones</legend>
+                        <a href='#' class='liga' onclick="a_pago();" id='botonpagar'>Pagar cargos
+                            seleccionados</a><br><br>
+                        <a href='#' class='liga2' onclick="a_cancelar();" id='botoncancelar'>Cancelar cargos
+                            seleccionados</a><br><br>
+                        <span id='llaves' style='display:none;'>
+                            Llave del Presidente:<br><input type='password' size=10 name='presidente' class='derecha'
+                                autocomplete=off><br>
+                            Llave del Tesorero:<br><input type='password' size=10 name='tesorero' class='derecha'
+                                autocomplete=off><br>
+                            Raz&oacute;n de la cancelaci&oacute;n:<br><textarea name='texto' id='texto' cols=30
+                                rows=4></textarea>
+                        </span>
+                    </fieldset>
+                </td>
+                <td class='derecha' rowspan=5 width=300px>
+                    <fieldset>
+                        <legend>Confirmaci&oacute;n</legend><span id='sig'></span>
+                    </fieldset>
+                </td>
+            </tr>
+        </table>
+    </div>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Payment Flow**
+
+I'm currently looking closely at the payment functionality within `views/contratos/adeudo_tabla.php`. Specifically, lines 719-722. My focus is the `a_pago()` function and its interaction with the "Pagar cargos seleccionados" button. I'm also examining the adjacent cancel functionality. I'm beginning to dissect the flow to understand the logic for the payment process.
+
+
+**Adjusting Button Styles**
+
+I've zeroed in on the button styling within `paxstyle2.css`, specifically `#botonpagar.liga` and `#botoncancelar.liga2`. The current fixed width creates a visual issue with the text overflowing. To address this, I'm considering adjusting the width and height to cover the full extent of the text. I'm also planning to implement a sleek grey background, possibly `#64748b` or lighter, to enhance the visual appeal of these buttons, as requested.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `rfc`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.149230144s
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 June 2026, 10:31 pm
+
+---
+
+<details>
+<summary>Conversation History</summary>
+
+# Conversation History
+Here are the conversation IDs, titles, and summaries of your most recent 10 conversations, in reverse chronological order:
+
+<conversation_summaries>
+## Conversation fe1bd6aa-acbd-4e2b-a05e-a96d6f77b6de: Syncing Project Documentation and Repositories
+- Created: 2026-05-25T21:51:09Z
+- Last modified: 2026-06-27T18:47:29Z
+
+### USER Objective:
+Syncing And Securing Development Repositories
+
+Main Objective: Complete the localization of the Tlapa de Comonfort environment while synchronizing Git branches and ensuring production-grade security.
+
+Goals:
+1. Finalize the merge strategy between the `main` and `aguad_ac_oferta` branches, preserving the localized UI/UX for Tlapa de Comonfort.
+2. Automate repository synchronization using robust, secure scripts that enforce branch validation and secret-scanning (preventing token leaks).
+3. Establish a standardized, action-oriented workflow for pushing code across multiple repositories (`agua` and `agua_chatledger`) while maintaining data parity and integrity.
+4. Implement procedural safeguards in deployment and sync scripts to minimize manual intervention and ensure environment parity in Host C.
+
+## Conversation cd3bbd4f-8745-42bb-bd6f-2c4e8759f627: Installing Google Antigravity 2.x
+- Created: 2026-06-24T23:41:57Z
+- Last modified: 2026-06-27T04:47:52Z
+
+### USER Objective:
+Installing Google Antigravity 2.x
+
+USER Objective: Successfully install and configure the Google Antigravity 2.0 application and its IDE on an Ubuntu 24.x virtual machine.
+
+Goals:
+1. Purge legacy or failed installations to ensure a clean deployment environment.
+2. Install Antigravity and Antigravity IDE into standardized directories (/opt/Antigravity-x64 and /opt/AntigravityIDE).
+3. Configure desktop shortcuts for seamless application access, ensuring they handle system-specific security and sandbox restrictions.
+4. Apply system-level optimizations (kernel and inotify adjustments) to guarantee stable performance for the IDE and application runtime.
+
+## Conversation 03cd7422-1442-4d78-a978-010ca624cac1: Estabilización Integral Motor Financiero AguaV2
+- Created: 2026-06-26T14:21:26Z
+- Last modified: 2026-06-27T03:10:32Z
+
+## Conversation 8335b7b4-b401-41d7-8000-15a87ba76a88: Auditing Host C Surcharge Calculation
+- Created: 2026-06-25T22:29:30Z
+- Last modified: 2026-06-26T14:10:27Z
+
+### USER Objective:
+Reconciling Financial Debt Parity
+
+USER Objective: Establish Host C as the verified Single Source of Truth for financial reporting by reconciling historical debt discrepancies with Host B.
+
+Goals:
+1. Conduct a forensic analysis of debt parity discrepancies for specific contracts (646 and 1332) to justify the differences in total debt between the legacy Host B and the optimized Host C JIT engine.
+2. Validate the integrity of the surcharge engine by comparing the legacy PHP motor with the new JIT architecture, accounting for payment history and administrative adjustments post-migration.
+3. Provide an audit-ready, action-oriented explanation for operators that differentiates between "actual debt" and "legacy data artifacts."
+4. Finalize the technical justification for financial reporting to ensure the water committee understands why the current debt calculations in Host C are accurate and depurated.
+
+## Conversation a49787d4-8120-4c9b-b54f-74e42f167a61: Finalizing Host C Patch Fix
+- Created: 2026-06-24T20:19:39Z
+- Last modified: 2026-06-25T00:15:25Z
+
+### USER Objective:
+Auditing Mora Parity Reconciliation
+
+USER Objective: Execute a forensic audit and parity reconciliation of mora debt between Host B and Host C to establish Host C as the Single Source of Truth.
+
+Goals:
+1. Finalize the forensic audit and parity reconciliation of 153 high-mora contracts by comparing legacy Host B records with the optimized V2 JIT engine on Host C.
+2. Standardize JIT surcharge configurations (27-year base, 10-year window) to eliminate runaway interest generation.
+3. Deploy the "Monkey Testing" comparison interface to identify and resolve discrepancies in real-time.
+4. Centralize all auditing and sanitation tools into the configuration management dashboard while maintaining strict data parity.
+5. Apply security-first descriptions and logic updates to core parameters like `reversal_threshold` to prevent exponential debt growth.
+
+## Conversation e0cf52cb-6d53-4322-8e81-b011a534320b: Reconciling Historical Debt Parity
+- Created: 2026-06-23T16:40:38Z
+- Last modified: 2026-06-24T20:14:59Z
+
+### USER Objective:
+Stabilizing Host C Production Infrastructure
+
+USER Objective: Finalize the infrastructure stabilization of Host C as the definitive Single Source of Truth for the water management system.
+
+Goals:
+1. Finalize the forensic audit and cleanup of obsolete legacy assets and transition temporary analysis files into documented, production-ready operational tools.
+2. Implement robust data integrity practices by creating independent DDL, DML, and DCL backup routines for both legacy Host B and production Host C environments.
+3. Establish a standard recovery protocol compatible with the existing MariaDB 10.x engine to ensure production resilience and data portability.
+4. Integrate newly identified "orphan" premium audit tools into the administrative interface to enhance operational oversight.
+
+## Conversation 1aaefe04-7a64-42a8-9af9-7259738928a3: Auditing Recent Repository Changes
+- Created: 2026-06-24T18:30:50Z
+- Last modified: 2026-06-24T18:31:19Z
+
+### USER Objective:
+Auditing Recent Repository Changes
+
+The user's objective is to identify all files modified within the `agua` repository over the last 7 days to support the ongoing audit and reconciliation project.
+
+Goals:
+1. Extract and present a comprehensive list of all modified files from the git history for the past week.
+2. Provide this visibility to ensure tracking of recent structural, configuration, and documentation updates across the production Host C environment.
+
+## Conversation 95cd3afb-e633-4867-ab82-e080dc81ed68: Verifying Aguav2 Mora Engine
+- Created: 2026-06-20T16:44:18Z
+- Last modified: 2026-06-23T07:05:02Z
+
+### USER Objective:
+Reconciling Historical Surcharge Engine
+
+Objective: Eliminate the parity gap and stabilize the JIT surcharge calculation engine on Host C to create a reliable, audit-ready financial system.
+
+Goals:
+1. Identify and remove hardcoded date thresholds (e.g., the 2006 limit) currently suppressing historical debt generation.
+2. Synchronize the Host C JIT motor with the production database by forcing correct execution flows in `contratos.php` and `cargos.php`.
+3. Stabilize the financial calculation output by configuring the "Mora Rotativa" limits (10-year window/Bomba threshold) to prevent runaway debt totals.
+4. Perform final validation to ensure that all 27 years of historical records are correctly processed and reflected in the user interface without system timeouts or data corruption.
+
+## Conversation 41b07588-7f6a-4d9e-aae7-f48df7d15e55: Restoring Historical Surcharge Plan
+- Created: 2026-06-19T17:34:28Z
+- Last modified: 2026-06-20T05:14:37Z
+
+### USER Objective:
+Finalizing Mora Engine Audit
+
+**USER Objective:**
+Finalize the architectural reconciliation and audit readiness of the 20-year rotational mora engine on Host C to ensure a Single Source of Truth.
+
+**Goals:**
+1. Execute the final normalization and structural integrity fixes across the Host C database environment.
+2. Finalize documentation (`PLAN_MORA_ROTATIVA_20_ANIOS.md` and `VERIFICACION_MANUAL_MORA_20_ANIOS.md`) as authoritative guides for production deployment.
+3. Quantify financial gaps and reconcile differences between legacy Host B and Host C to prove accuracy in historical surcharge calculations and debt base validity.
+4. Align administrative audit tools (`comparativa_mora.php`) to the new V2 JIT motor logic to support financial reporting and decision-making by the water committee.
+
+## Conversation 62cf2a4a-a2b1-4ede-9f66-88c4e6b9937b: Mora aguav2 - todos los años.
+Realiza prueba de conectividad via mcp y mysql client.
+Insumos: Usa G
+<truncated 1031 bytes>
+- Created: 2026-06-19T01:36:53Z
+- Last modified: 2026-06-19T01:40:28Z
+
+</conversation_summaries>
+
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 27 June 2026, 10:31 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `recibo.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L269-299)</summary>
+
+**Path:** `Unknown file`
+
+```
+						print "<tr>\n";
+						print "<td class=\"leyenda mayusculas\">" . $desc . "</td><td class=\"monto\">$" . number_format($charge['monto'], 2, '.', ',') . "</td>";
+						print "</tr>\n";
+					}
+					print "<tr><td class=\"totalL\" colspan=\"1\">Total</td><td class=\"totalR\">$" . number_format($total, 2, '.', ',') . "</td></tr>";
+
+					$cadenaletra = ($total != 1000) ? convertir_a_letras($total) : "un mil";
+
+					print "<td class=\"leyenda\" style='text-align: right;' colspan='2'><i>" . ucwords($cadenaletra[0]) . substr($cadenaletra, 1) . " pesos 00/100 M.N.</i></td></tr></table></div>";
+					?>
+				</div>
+			</div>
+
+			<div class="recibo_right">
+				<div class="recibo_right_rfc">
+					- ORIGINAL -<br>
+					<img src="../web-assets/img/rfc.png" width="135" height="200">
+				</div>
+				<div class="recibo_header_firma">
+					<br /><br /><br /><br /><br />
+					<hr><b>Firma del Cajero</b>
+					<br /><br /><br />
+					<span style="font-size: 12px;"><b>Fecha de pago: </b><br><?php print $fecha_pago_display ?>
+					</span><br><br>
+					<span style="font-size: 12px;"><b>Usuario:
+						</b><?php print ($_SESSION['usuario']->getNombre()) ?></span><br><br>
+				</div>
+			</div>
+
+			<div class="recibo_footer">
+				<span style="font-size:10px;"><b>*** ESTE RECIBO ES NULO SI PRESENTA TACHADURAS O
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `recibo.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L399-424)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+					$cadenaletra = ($total != 1000) ? convertir_a_letras($total) : "un mil";
+
+					print "<td class=\"leyenda\" style='text-align: right;' colspan='2'><i>" . ucwords($cadenaletra[0]) . substr($cadenaletra, 1) . " pesos 00/100 M.N.</i></td></tr></table></div>";
+
+					// TODO: query para sacar la fecha del pago, actualmente se muestra la fecha actual del S.O.
+					?>
+				</div>
+			</div>
+
+			<div class="recibo_right">
+				<div class="recibo_right_rfc">
+					- COPIA -<br>
+					<img src="../web-assets/img/rfc.png" width="135" height="200">
+				</div>
+				<div class="recibo_header_firma">
+					<br /><br /><br /><br /><br />
+					<hr><b>Firma del Cajero</b>
+					<br /><br /><br />
+					<span style="font-size: 12px;"><b>Fecha de pago: </b><br><?php print $fecha_pago_display ?>
+					</span><br><br>
+					<span style="font-size: 12px;"><b>Usuario:
+						</b><?php print ($_SESSION['usuario']->getNombre()) ?></span><br><br>
+				</div>
+			</div>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/**
+ * Asamblea V2 Standalone - Entry Point
+ * -----------------------------------
+ * Basado en la arquitectura de Agua V2 (feature/upgrade-v2-win-xampp)
+ */
+
+require_once(__DIR__ . '/../login/usuario.php');
+session_start();
+
+// Carga de dependencias y configuración
+require_once(__DIR__ . '/../vendor/autoload.php');
+require_once(__DIR__ . '/../config/Conexion.php');
+
+// Inicializar motor de plantillas Plates
+$templates = new League\Plates\Engine(__DIR__ . '/views');
+
+// Determinar acción
+$action = isset($_GET['action']) ? $_GET['action'] : 'principal';
+
+// Ruteador básico
+try {
+    switch ($action) {
+        case 'principal':
+            // Se puede inyectar el estado de la asamblea aquí
+            echo $templates->render('principal', [
+                'titulo' => 'Asistencia - Asamblea V2',
+                'description' => 'Sistema de control de asistencia'
+            ]);
+            break;
+
+        case 'peticion':
+            require_once(__DIR__ . '/ruteador.php');
+            // La función se encargará de responder
+            procesarPeticion();
+            break;
+
+        default:
+            header("HTTP/1.0 404 Not Found");
+            echo "Acción no válida";
+            break;
+    }
+} catch (Exception $e) {
+    echo "Error en la aplicación: " . $e->getMessage();
+}
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+header('Content-Type: text/html; charset=UTF-8');
+require_once('usuario.php');
+session_start();
+unset($_SESSION['usuario']);
+?>
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<title>Sistema de Recaudación para Servicio de Agua Potable y Alcantarillado</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" type="text/css" href="../web-assets/css/paxstyle2.css">
+	<script language="javascript" src="../includes/js/paxscript.js"></script>
+	<script src="../web-assets/js/jquery-3.7.1.min.js"></script>
+	<script src="../web-assets/js/jquery-migrate-3.4.1.min.js"></script>
+	<script src="../web-assets/js/jqueryform.min.js"></script>
+	<script src="../web-assets/js/jquery.validate.min.js"></script>
+	<script src="../web-assets/js/jquery.hotkeys.min.js"></script>
+</head>
+
+<body onload="preparalogin()">
+	<div id='mensajes'></div>
+	<div id='clutter'></div>
+	<div id='opciones'></div>
+	<div id='nara'></div>
+	<div id='app'>
+		<h1>Inicio</h1>
+		<hr>
+		<img src='../web-assets/img/drop.png' style="float:left" align=left border=0><br><br>
+
+		<form id="login" method="post" name="login" style="float:left" autocomplete="off">
+			<h2>Ingrese su nombre de usuario y contraseña</h2><br><br>
+			<p>Usuario: <input type="text" name="usuariologin" id="usuariologin" autocomplete="off"></p>
+			<p>Contraseña: <input type="password" name="passwordlogin" id="passwordlogin" autocomplete="new-password"></p>
+			<br />
+			<p>
+				<input type='hidden' value='login' name='opc' id='opc'>
+				<input type='submit' value='Ingresar'>
+			</p>
+		</form>
+
+		<br><br><br><br><br><br>
+		<div id='nara'></div>
+	</div>
+	<div id='nara'></div>
+</body>
+
+</html>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 June 2026, 10:31 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `multi_replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 June 2026, 10:31 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Visualizing Contract Elements**
+
+I'm now focusing on the contract ficha. My attention is directed to the "Options" section. I'm exploring how to visually represent the "Pay Selected Charges" and "Cancel Selected Charges" buttons. The aim is to implement a gray background that covers their entire width and height, to improve the emphasis of the buttons within the ficha, and enhance readability.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `paxstyle2.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.000071368s
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L784-824)</summary>
+
+**Path:** `Unknown file`
+
+```
+    border-radius: 0 !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+    letter-spacing: 0.05em !important;
+}
+
+/* Style for Pagar and Cancelar buttons inside debts grid to match compact action buttons */
+#botonpagar.liga, #botoncancelar.liga2 {
+    margin: 0 !important;
+    padding: 4px 8px !important;
+    font-size: 11px !important;
+    text-align: center !important;
+    text-decoration: none !important;
+    color: white !important;
+    display: inline-flex !important;
+    height: 30px !important;
+    width: 90px !important;
+    box-sizing: border-box !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 6px !important;
+    font-weight: 600 !important;
+}
+
+#botonpagar.liga:hover {
+    background: var(--accent-hover) !important;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25) !important;
+}
+
+#botoncancelar.liga2:hover {
+    background: #e11d48 !important;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25) !important;
+}
+
+/* Glassmorphism System for Cargo Panels & Forms */
+.glass-cargo-panel {
+    margin-left: 10px;
+    width: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    float: left;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 June 2026, 10:31 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 June 2026, 10:31 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 June 2026, 10:32 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 June 2026, 10:32 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 June 2026, 10:32 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 June 2026, 10:32 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** CORTEX_STEP_STATUS_WAITING
+**Created:** 27 June 2026, 10:33 pm
 
 ---
 
