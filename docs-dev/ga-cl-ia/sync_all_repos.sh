@@ -86,9 +86,17 @@ sync_repo() {
 # 3. Flujo Principal
 echo "🚀 Iniciando Sincronización Global de Repositorios"
 
-# Obtener mensaje de commit de los parámetros, si no, usar uno por defecto
-DEFAULT_MSG="chore: auto-sync and secret sanitization across workspaces"
-MESSAGE="${1:-$DEFAULT_MSG}"
+# Obtener mensaje de commit de los parámetros o solicitarlo interactivamente
+if [ -n "$1" ]; then
+    MESSAGE="$1"
+else
+    echo -n "📝 Ingrese el mensaje para los commits: "
+    read MESSAGE
+    if [ -z "$MESSAGE" ]; then
+        echo "❌ Error: Operación cancelada. El mensaje de commit no puede estar vacío."
+        exit 1
+    fi
+fi
 
 # Ejecutar sincronización en el orden correcto
 sync_repo "$AGUA_CHATLEDGER_DIR" "$MESSAGE" "agua_chatledger"
