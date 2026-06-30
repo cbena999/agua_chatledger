@@ -7,7 +7,7 @@
 | **Trajectory ID** | `0f2038f7-a8ce-4f76-be9f-2a6bfc9c11b9` |
 | **Cascade ID** | `de8c1b41-674e-4011-afd2-645eeef36fe0` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 781 |
+| **Total Steps** | 779 |
 | **Started** | 29 June 2026, 2:07 pm |
 | **Completed** | 29 June 2026, 9:57 pm |
 
