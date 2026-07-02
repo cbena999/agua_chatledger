@@ -274,7 +274,7 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 *   **Exclusión de Conceptos No Periódicos**: Se confirmó que los reportes de deuda y cartera vencida excluyen consistentemente las categorías no periódicas (6, 19, 20, 21, 22), los estados de contrato inactivos (4) y los usuarios no localizados (Estado 2), evitando la "deuda fantasma" en los cortes de caja y listas ordinarias de cobro.
 *   **Reporte de Auditoría**: Generado y guardado el análisis detallado en `/home/carlos/.gemini/antigravity/brain/03cd7422-1442-4d78-a978-010ca624cac1/reportes_analisis_forense.md`.
 
-**Última actualización**: 2026-06-30
+**Última actualización**: 2026-07-01
 
 
 
