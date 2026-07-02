@@ -30,6 +30,8 @@ Este archivo es el punto de entrada principal para el asistente de IA (Antigravi
 | :--- | :--- | :--- |
 | **14** | **Arquitectura y Activos PWA (Offline SSOT)** | [.agents/rules/14-restaurant-arquitectura-pwa.md](file:///.agents/rules/14-restaurant-arquitectura-pwa.md) |
 | **15** | **Estándares UI/UX y Patrones HTMX** | [.agents/rules/15-restaurant-htmx-estandares.md](file:///.agents/rules/15-restaurant-htmx-estandares.md) |
+| **16** | **Alineación con Especificación Técnica (Scaffolding)** | [.agents/rules/16-restaurant-scaffolding-especificacion.md](file:///.agents/rules/16-restaurant-scaffolding-especificacion.md) |
+| **17** | **Autenticación, Sesiones y Seguridad RBAC** | [.agents/rules/17-restaurant-delight-auth-rbac.md](file:///.agents/rules/17-restaurant-delight-auth-rbac.md) |
 
 ---
 
@@ -290,7 +292,13 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 *   **Aislamiento y Consolidación de Oferta**: Los archivos de desarrollo y demo (`v-ospv/`) y los de pase a producción (`aguad-osv3-2026/`) quedaron totalmente aislados de la rama `main`.
 *   **Flujo Mandatorio de Despliegue PHP**: Se documentó formalmente que para aplicar cambios PHP locales en Host C se debe ejecutar obligatoriamente el pipeline de empaquetado (`prepare_deploy_win10.sh`) y subida HTTP (`deploy_http.py`).
 
-**Última actualización**: 2026-06-29
+**Scaffolding y Configuración Base Comandas VOSK (2026-07-02):**
+*   **Reconstrucción e Ingesta de BD**: Recreación de la base de datos `vcd01` con la carga semilla de un catálogo de Taquería Mexicana (pastor, suadero, alambres, aguas, refrescos) listo para las pruebas de voz offline.
+*   **Entorno Frugal sin Dependencias**: Despliegue local y aislado de Flight PHP, Plates, Delight Auth, HTMX, Dexie.js y Chart.js en `www/restaurant/` y `www/web-assets/libs/`.
+*   **Estructura Core y Front Controller**: Creación de `index.php` con enrutamiento base, bootstrap centralizado (`commons.php`), layout premium glassmorphism oscuro y esqueletos de vistas de todos los actores del sistema.
+
+**Última actualización**: 2026-07-01
+
 
 
 
