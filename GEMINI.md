@@ -32,6 +32,14 @@ Este archivo es el punto de entrada principal para el asistente de IA (Antigravi
 | **15** | **Estándares UI/UX y Patrones HTMX** | [.agents/rules/15-restaurant-htmx-estandares.md](file:///.agents/rules/15-restaurant-htmx-estandares.md) |
 | **16** | **Alineación con Especificación Técnica (Scaffolding)** | [.agents/rules/16-restaurant-scaffolding-especificacion.md](file:///.agents/rules/16-restaurant-scaffolding-especificacion.md) |
 | **17** | **Autenticación, Sesiones y Seguridad RBAC** | [.agents/rules/17-restaurant-delight-auth-rbac.md](file:///.agents/rules/17-restaurant-delight-auth-rbac.md) |
+| **18** | **Supremacía de la Especificación HTML** | [.agents/rules/18-supremacia-especificacion-html.md](file:///.agents/rules/18-supremacia-especificacion-html.md) |
+
+> [!IMPORTANT]
+> **MANDATO ESTRICTO PARA COMANDAS VOSK:** Antes de escribir código, proponer un diseño, o modificar un flujo, **ESTÁS OBLIGADO** a auditar y alinear tu solución contra el contexto definido en los documentos maestros ubicados en `docs/`: 
+> 1) `Especificacion_Funcional_Comandas_VOSK.html`
+> 2) `Especificacion_Tecnica_Comandas_VOSK.html`
+> (y los otros 10 documentos de la suite). 
+> **Cualquier desviación técnica o de UX/UI respecto a estos 12 HTMLs se considera un bug crítico.** No asumas flujos web estándar (ej. interfaces táctiles) si la especificación dicta otra cosa (ej. interfaces de voz exclusivas).
 
 ---
 
