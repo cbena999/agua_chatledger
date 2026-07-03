@@ -90,8 +90,9 @@ echo "🚀 Iniciando Sincronización Global de Repositorios"
 if [ -n "$1" ]; then
     MESSAGE="$1"
 else
-    echo -n "📝 Ingrese el mensaje para los commits: "
-    read MESSAGE
+    echo "📝 Ingrese el mensaje para los commits (Pega el mensaje y presiona Ctrl+D al finalizar):"
+    # Leer múltiples líneas hasta EOF (Ctrl+D)
+    MESSAGE=$(cat)
     if [ -z "$MESSAGE" ]; then
         echo "❌ Error: Operación cancelada. El mensaje de commit no puede estar vacío."
         exit 1
