@@ -297,7 +297,18 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 *   **Entorno Frugal sin Dependencias**: Despliegue local y aislado de Flight PHP, Plates, Delight Auth, HTMX, Dexie.js y Chart.js en `www/restaurant/` y `www/web-assets/libs/`.
 *   **Estructura Core y Front Controller**: Creación de `index.php` con enrutamiento base, bootstrap centralizado (`commons.php`), layout premium glassmorphism oscuro y esqueletos de vistas de todos los actores del sistema.
 
-**Última actualización**: 2026-07-01
+**Estabilización de Scaffolding y Auditoría Comandas VOSK (2026-07-02 - Sesión 2):**
+*   **Depuración e Integración de Historial**: Remoción de archivos base de Agua duplicados y obsoletos en `sistema/` (`Conexion.php`, `config.php`, etc.), preservando la plantilla de Reloj Checador.
+*   **Trazabilidad y Auditoría**: Modernización del visor `monitor_fallbacks.php` (trazabilidad de `sys_logs`) con Delight Auth y estilo Glassmorphism.
+*   **Mapeo de Auditoría y Folios**: Creación de las tablas `folios_ticket` (secuenciador de folios) e `historial_operaciones` (bitácora de auditoría detallada), y del visor administrativo interactivo `reportes/historial_operaciones.php`.
+*   **Delimitación del Alcance Financiero**: Validación de que el alcance del proyecto cubre únicamente **Ingresos de Operación** (comandas, cobros, cortes de caja), quedando fuera del alcance los egresos.
+
+**Arquitectura VOSK Frontend y Pruebas Offline (2026-07-02 - Sesión 3):**
+*   **Pipeline NLP Estabilizado**: Implementación definitiva de los 6 pilares de resiliencia (AudioWorklet 16kHz, Web Worker asíncrono, Gramática Kaldi, Levenshtein JS, Dexie.js y Delta Hash / Garbage Collection).
+*   **Test Suite de Integración PWA**: Creación de una suite de pruebas automática (`/sistema/pruebas-nlp`) que evalúa físicamente el hardware del Android. Ejecución condicionada al uso de puertos Docker (6001 HTTP / 8443 HTTPS).
+*   **Expansión de Roles y RBAC Base**: Ampliación del seed SQL (`05_seed_data.sql`) integrando al rol Cajero y 5 permisos granulares RBAC (`ver_kds`, `tomar_ordenes`, `cobrar_mesas`, `gestionar_menu`, `ver_reportes`) mapeados lógicamente contra los usuarios.
+
+**Última actualización**: 2026-07-02
 
 
 

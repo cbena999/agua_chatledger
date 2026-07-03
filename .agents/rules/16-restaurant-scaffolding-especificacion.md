@@ -28,9 +28,11 @@ Para asegurar que el restaurante opere sin conexión a Internet (solo red local 
 *   Frameworks y librerías de backend (como Flight PHP y Plates) deben descargarse e incluirse manualmente en `www/restaurant/commons/libs/` en sus versiones de distribución limpias.
 
 ### 4. Estándares del Núcleo Backend (Core Commons)
-Cualquier archivo de lógica o controlador en el backend debe apoyarse en la infraestructura común ya implementada:
-*   **Autocargador PSR-4 Frugal (`commons/autoload.php`):** Registra namespaces del proyecto (`App\`) y carga de forma dinámica dependencias externas sin Composer. No duplicar autoloaders.
-*   **Gestión Centralizada de Base de Datos (`commons/DB.php`):** Inicialización Singleton perezosa de PDO. Siempre se debe utilizar `Flight::db()` (registrado en el Service Container de Flight).
-*   **Registrador de Logs Redundante (`commons/Logger.php`):** Emplea escritura dual (consola/archivo físico + tabla `sys_logs` de MariaDB). Los errores se guardan bajo estándares PSR-3 de gravedad (DEBUG, INFO, WARNING, ERROR).
 *   **Contenedor de Dependencias (`commons/commons.php`):** Centraliza la inicialización de sesión, Delight Auth (`Flight::auth()`), Plates (`Flight::view()`) y el manejo global de excepciones. No reinicializar sesiones ni crear nuevas conexiones PDO directas.
+
+### 5. Prohibición de Código y Estilos Embebidos (Web-Assets Externos SSOT)
+*   **Referencia Externa Obligatoria:** Todo archivo de estilo (CSS) y código de lógica cliente (JavaScript) debe residir obligatoriamente en archivos externos estructurados dentro de `www/web-assets/css/` o `www/web-assets/js/` y ser enlazado mediante etiquetas `<link rel="stylesheet">` o `<script src="...">`.
+*   **Restricción de Bloques Embebidos:** Se prohíbe terminantemente embeber bloques de CSS en etiquetas `<style>` o código JavaScript en etiquetas `<script>` directamente en los archivos HTML o PHP, salvo excepciones muy particulares y justificadas (como la inyección en el DOM de variables de configuración dinámicas generadas del lado del servidor o pequeños scripts inline de arranque/bootstrapping de menos de 10 líneas).
+*   **Objetivo:** Esto garantiza un cacheado de red eficiente a nivel de Service Worker, limpieza en el marcado, consistencia visual compartida y modularidad total de los activos estáticos.
+
 

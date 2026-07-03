@@ -13,7 +13,7 @@ Los controladores y vistas del servidor deben residir en:
 
 ### Frontend Estático (web-assets)
 Todos los recursos accesibles públicamente y gestionados por el Service Worker deben residir bajo el árbol `web-assets/`.
-- `web-assets/pwa/` — **Raíz estricta de la PWA**. Contiene el Service Worker (`sw.js`), el manifiesto (`manifest.json`), y librerías locales que habilitan la funcionalidad offline, como Dexie (`web-assets/pwa/dexie/`).
+- `web-assets/pwa/` — **Raíz estricta de la PWA**. Contiene el Service Worker (`sw.js`), el manifiesto (`manifest.json`), y los scripts de base de datos (`db.js`). Las librerías locales que habilitan la funcionalidad offline (como Dexie) se centralizan en `web-assets/libs/dexie.min.js`.
 - `web-assets/libs/models/` — Motor VOSK en cliente, AudioWorklets, y la capa lógica offline (`app-voice.js`, `app-main.js`).
 - `web-assets/css/` y `web-assets/img/` — UI estática global.
 
