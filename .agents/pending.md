@@ -8,16 +8,14 @@
 ---
 
 ## 🔴 PRIORIDAD ALTA
-
-### P-01 🔲 Instalar y configurar Delight-PHP/Auth
-**Estado**: Pendiente
-**Descripción**: El motor de autenticación nativa Delight-PHP/Auth debe ser instalado y configurado en el proyecto. 
-- Las tablas en la base de datos `vcd01` (`users`, `users_remembered`, `users_throttling`) ya fueron creadas exitosamente mediante el orquestador de setup.
-- Queda pendiente realizar la integración de la librería a través de Composer y adaptar el código backend (micro-framework) para invocar su instanciación pasándole el objeto PDO.
+(Ninguno - Todos los componentes clave del MVP y la integración de seguridad han sido estabilizados y validados).
 
 ---
 
 ## 🟡 PRIORIDAD MEDIA
+### P-02 🔲 Módulos de Caja y Administración (Fase 5/6)
+**Estado**: Pendiente
+**Descripción**: Desarrollo de la UI y endpoints reales para el cierre de caja (Corte X y Corte Z), reportes analíticos de ventas por periodo, y el registro de horas del personal (Reloj Checador).
 
 ---
 
@@ -25,9 +23,15 @@
 
 | Fecha | Item | Detalle |
 |---|---|---|
+| 2026-07-04 | Corrección Rutas Estáticas | Remoción de symlinks y estandarización a rutas absolutas `/web-assets/...` alineadas con la PWA. |
+| 2026-07-04 | Guía Rápida de Despliegue | Creación de `Instrucciones_Despliegue_Comandas_VOSK.html` y actualización de Rule 14. |
+| 2026-07-03 | Resolución de Error 500 | Corrección de inyección de PDO y redirecciones en Flight. Configuración de entrypoint auto-reparable en Docker. |
+| 2026-07-03 | Voice-KDS Cocina Real | Integración del parser de voz cocina con base de datos real (19 palabras, sin Levenshtein). |
+| 2026-07-03 | Delight Auth & RBAC | Integración real de Delight Auth, Middleware RBAC e inicio de sesión por NIP. |
+| 2026-07-03 | Simulador NLP y Delta Hash | Creación del panel de administración de datasets y validador en tiempo real de gramática VOSK. |
 | 2026-06-14 | Creación BD y Orquestador | Se creó `setup.sh` conectando a MCP, creando esquemas transaccionales, de auth e índices. |
 | 2026-06-14 | Estrategia PWA Offline | Se descargó Dexie.js y se crearon esquemas `db.js` y `sw.js` localmente. |
 
 ---
 
-*Última actualización: 2026-06-14 — Limpieza de archivo legacy y setup base VOSK — Antigravity/Gemini*
+*Última actualización: 2026-07-04 — Remoción de Enlaces Simbólicos y Guía Rápida de Despliegue — Antigravity/Gemini*

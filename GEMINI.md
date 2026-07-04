@@ -111,6 +111,34 @@ El entorno Windows 10 ha sido convertido en un Appliance Kiosko 100% automatizad
 
 > Ver tabla de comandos canónicos y comportamiento de flags en: `docs-dev/migration-aguav2/MIGRATION_PROTOCOL.md`
 
+---
+
+## 🍔 Estándares de Oro: Proyecto Restaurant (Comandas VOSK)
+Para evitar regresiones de interfaz y optimizar el uso de tokens, los agentes de IA deben respetar obligatoriamente estos 6 principios fundamentales:
+
+1. **Rutas Absolutas de Activos (`/web-assets/`):**
+   * **Regla Estricta:** Todas las llamadas a recursos (CSS, JS, fuentes, imágenes) en plantillas, vistas o scripts PHP **DEBEN** usar la ruta absoluta raíz `/web-assets/` (ej: `/web-assets/css/style.css`), omitiendo el prefijo `/restaurant/`. Esto garantiza la paridad con la caché offline del Service Worker (`sw.js`).
+   * **Cero Symlinks:** No se debe depender de enlaces simbólicos de sistema en el despliegue para acceder a los activos estáticos.
+
+2. **Diferenciación de Pruebas (CLI vs. UI Browser):**
+   * **Pruebas CLI (`tests/run_functional_tests.php`):** Validan la BD, stored procedures, permisos RBAC en BD e inserciones transaccionales vía PDO. **No prueban** rutas HTTP, redirecciones de Flight PHP, carga de assets estáticos ni restricciones de navegador.
+   * **Pruebas de UI/Navegador:** Requieren entorno web real, HTTPS activo, inyección de cookies de sesión, redirecciones basadas en roles y hardware (micrófono) del cliente. Un pase exitoso de CLI no garantiza el funcionamiento de la UI.
+
+3. **Seguridad HTTPS Obligatoria:**
+   * La captura de audio por VOSK requiere permisos de micrófono (`getUserMedia()`), los cuales están **bloqueados en HTTP** en navegadores móviles. El acceso local debe forzarse por HTTPS (ej. `https://192.168.1.71:8443`).
+   * Queda prohibido el uso alternativo de la flag `chrome://flags/#unsafely-treat-insecure-origin-as-secure`. En su lugar, se inyectan certificados generados localmente por `mkcert`, y se debe instalar la CA raíz (`ca.crt`) en los dispositivos clientes.
+
+4. **Autenticación por NIP (PIN Único):**
+   * El inicio de sesión se realiza mediante un PIN numérico de 4 dígitos. El backend procesa el NIP, recupera el email del usuario desde Delight Auth y redirige dinámicamente utilizando el encabezado HTMX `HX-Redirect` al dashboard que corresponda al rol (`/mesero/`, `/cocina/`).
+
+5. **Aislamiento de Lógica VOSK / Service Worker:**
+   * La inicialización del modelo de voz VOSK y el AudioWorklet no deben entrelazarse con el Service Worker global. La lógica de voz corre dentro de un Web Worker dedicado (`vosk-worker.js`) y almacena comandas fallidas en IndexedDB (`Dexie.js`) en lugar de depender del Background Sync nativo.
+
+6. **Gramática Kaldi y Levenshtein local:**
+   * Para mitigar el ruido en cocina y comedor, el reconocedor Kaldi restringe su escucha a un vocabulario JSON cerrado (`grammar`). Las palabras transcritas se limpian y mapean a IDs de base de datos en cliente aplicando la distancia de Levenshtein con un umbral de tolerancia máximo de **3 caracteres**.
+
+---
+
 ## 🔒 Fixes de Seguridad en Motor de Recargos (2026-04-26)
 
 Dos guards implementados en `includes/negocio/cargos.php` para blindar el flag `recargo` del catálogo:

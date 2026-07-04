@@ -17,6 +17,12 @@ Todos los recursos accesibles públicamente y gestionados por el Service Worker 
 - `web-assets/libs/models/` — Motor VOSK en cliente, AudioWorklets, y la capa lógica offline (`app-voice.js`, `app-main.js`).
 - `web-assets/css/` y `web-assets/img/` — UI estática global.
 
+> [!IMPORTANT]
+> **Estándar de Rutas Absolutas de Activos:**
+> Todas las llamadas a recursos bajo `web-assets` en plantillas, vistas o scripts PHP **DEBEN** usar la ruta absoluta raíz `/web-assets/` (ej. `/web-assets/css/style.css`, `/web-assets/libs/htmx.min.js`), **omitiendo por completo** cualquier prefijo como `/restaurant/`. Esto garantiza:
+> 1. Paridad directa con las rutas cacheadas por el Service Worker en `sw.js` (evitando fallos de caché offline).
+> 2. Eliminación de dependencias de enlaces simbólicos (`symlinks`) a nivel de sistema de archivos en el despliegue.
+
 ## 2. Control de Versiones y Modelos IA (Offline SSOT)
 
 A diferencia de las políticas globales estándar que excluyen binarios pesados o comprimidos del versionado (como `.tar.gz`), para este proyecto **aplica una regla de excepción forzosa**:
