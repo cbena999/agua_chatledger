@@ -4,20 +4,26 @@
 
 ---
 
-## Issue 1 — Homologación PWA Multi-Rol y Estabilización
+## Issue 1 — Homologación de Layouts (PWA vs Webapp Desktop)
 
 ### Scope Funcional
-Antes, las interfaces del Cocinero (KDS) y del Administrador (NLP/Dataset) se cargaban como páginas HTML estándar sin el layout PWA glassmórfico de Mesero. Esto causaba incoherencias visuales (ausencia de menú lateral, reloj unificado y toggles de tema), impedía que se registrara el Service Worker y dejaba desprotegido el flujo ante fallos de carga en red. Además, un SyntaxError al importar la biblioteca Dexie en el hilo principal bloqueaba la UI del mesero mostrando indefinidamente el badge "Cargando...".
+Antes, las interfaces del Cocinero (KDS) y de Reloj Checador no estaban homologadas correctamente bajo los estándares de diseño móvil/escritorio correspondientes. Por otro lado, la interfaz de administración (NLP/Dataset) se había configurado erróneamente para extender el layout PWA móvil. 
 
-Ahora, todas las interfaces principales (Mesero, Cocina y Admin) están unificadas bajo el mismo shell de aplicación web (`layout-pwa.php`). La PWA es un único asset unificado y offline-first que soporta múltiples roles y redirige automáticamente al usuario según su NIP de empleado. Se resolvió la carga asíncrona de Dexie con un wrapper ESM nativo y se encapsuló la inicialización del micrófono en bloques `try...catch` independientes, garantizando que el badge de carga siempre se desactive a "Micrófono Apagado" ante fallos de permisos o de red, previniendo el congelamiento visual de la app.
+Ahora, se establece la distinción estricta de layouts definida en la arquitectura:
+1.  **Layout PWA Móvil/Hamburguesa (`layout-pwa.php`):** Utilizado por las vistas de **Mesero**, **Cocinero (KDS)** y **Reloj Checador** (`sistema/views/reloj.php`), adaptándose a dispositivos táctiles con barra lateral integrada y cabecera de diadema.
+2.  **Layout Webapp Escritorio (`layout.php`):** Utilizado por **Caja/Corte** (`caja/views/index.php`) y **Configuración NLP/VOSK** (`admin/views/catalogo.php`), proporcionando una cabecera de escritorio clásica para su uso en computadoras fijas y pantallas anchas.
+
+Se resolvió además el SyntaxError al importar la biblioteca Dexie en el hilo principal de la PWA con un wrapper ESM nativo y se encapsuló la inicialización del micrófono en bloques `try...catch` independientes, garantizando que el badge de carga siempre se desactive a "Micrófono Apagado" ante fallos de permisos o de red, previniendo el congelamiento visual de la app.
 
 ### Scope Técnico
 *   **Wrapper ESM Dexie:** Creado `/web-assets/libs/dexie.esm.js` para importar correctamente Dexie en el hilo principal sin SyntaxErrors de UMD.
 *   **Aislamiento de Errores VOSK:** Modificado `/web-assets/libs/models/app-voice.js` para aislar la inicialización asíncrona dentro de capturas de error independientes.
 *   **Layout PWA Dinámico:** Refactorizado `/restaurant/commons/views/layout-pwa.php` para soportar clases de contenedor adaptativas (`wide-container`) y ocultar de forma opcional el badge de VOSK en pantallas de administración.
+*   **Layout Webapp Escritorio:** Actualizado `/restaurant/commons/views/layout.php` para incluir el enlace a "Configuración NLP/VOSK" en la barra de navegación superior únicamente para el rol de administrador.
 *   **Homologación de Vistas:**
     *   `/restaurant/cocina/views/index.php`: Extiende `layout-pwa` con `showVoskStatus => true` y `wide-container`. Se asocia con `cocina-voice.js` usando el elemento unificado `pwa-vosk-status`.
-    *   `/restaurant/admin/views/catalogo.php`: Extiende `layout-pwa` con `showVoskStatus => false` y `wide-container`. Se añadió la ruta al sidebar de navegación en el menú lateral.
+    *   `/restaurant/sistema/views/reloj.php`: Cambiado para extender `layout-pwa` con `showVoskStatus => false` (formato PWA hamburguesa).
+    *   `/restaurant/admin/views/catalogo.php`: Cambiado para extender `layout` (webapp escritorio) con título adaptado.
 *   **Caché Offline:** Agregadas las rutas `/restaurant/cocina`, `/restaurant/admin/catalogo`, sus estilos `/web-assets/css/catalogo.css`, scripts `/web-assets/js/catalogo.js`, y el controlador `/web-assets/libs/models/cocina-voice.js` al precaché del Service Worker (`sw.js`).
 *   **Políticas de Despliegue:** Actualizado `/docs/Instrucciones_Despliegue_Comandas_VOSK.html` y `.agents/rules/14-restaurant-arquitectura-pwa.md` para documentar la arquitectura de la PWA como un único asset unificado multi-rol.
 
