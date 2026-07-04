@@ -23,6 +23,7 @@
 
 | Fecha | Item | Detalle |
 |---|---|---|
+| 2026-07-04 | Homologación PWA Multi-Rol | Adaptación de vistas Cocinero (KDS) y Administrador (NLP) a layout-pwa con soporte offline y corrección de bugs de carga. |
 | 2026-07-04 | Corrección Rutas Estáticas | Remoción de symlinks y estandarización a rutas absolutas `/web-assets/...` alineadas con la PWA. |
 | 2026-07-04 | Guía Rápida de Despliegue | Creación de `Instrucciones_Despliegue_Comandas_VOSK.html` y actualización de Rule 14. |
 | 2026-07-03 | Resolución de Error 500 | Corrección de inyección de PDO y redirecciones en Flight. Configuración de entrypoint auto-reparable en Docker. |
@@ -34,4 +35,4 @@
 
 ---
 
-*Última actualización: 2026-07-04 — Remoción de Enlaces Simbólicos y Guía Rápida de Despliegue — Antigravity/Gemini*
+*Última actualización: 2026-07-04 — Homologación PWA Multi-Rol — Antigravity/Gemini*

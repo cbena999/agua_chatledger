@@ -344,7 +344,7 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 *   **Test Suite de Integración PWA**: Creación de una suite de pruebas automática (`/sistema/pruebas-nlp`) que evalúa físicamente el hardware del Android. Ejecución condicionada al uso de puertos Docker (6001 HTTP / 8443 HTTPS).
 *   **Expansión de Roles y RBAC Base**: Ampliación del seed SQL (`05_seed_data.sql`) integrando al rol Cajero y 5 permisos granulares RBAC (`ver_kds`, `tomar_ordenes`, `cobrar_mesas`, `gestionar_menu`, `ver_reportes`) mapeados lógicamente contra los usuarios.
 
-**Última actualización**: 2026-07-03
+**Última actualización**: 2026-07-04
 
 
 

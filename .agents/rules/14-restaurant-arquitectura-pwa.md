@@ -33,6 +33,7 @@ A diferencia de las políticas globales estándar que excluyen binarios pesados 
 
 ## 3. Estrategia PWA Offline-First
 La PWA funciona bajo un esquema IT1/IT2 utilizando la API nativa y WebWorkers.
+*   **Alcance del Asset PWA**: Es una sola PWA que puede usar roles diferentes. Es correcto, es una única PWA unificada. El Service Worker y el almacenamiento IndexedDB se comparten a nivel global, y la redirección al rol correspondiente (Mesero, Cocinero o Administrador) se gestiona de forma transparente tras la autenticación por NIP.
 *   **Background Sync**: Toda petición fallida por caída de Wi-Fi se encola en IndexedDB (vía `Dexie.js`) dentro de la tabla `outbox_comandas`.
 *   La librería Dexie y el Service Worker interactúan independientemente; no se deben mezclar lógicas asíncronas de VOSK en el Service Worker global.
 
