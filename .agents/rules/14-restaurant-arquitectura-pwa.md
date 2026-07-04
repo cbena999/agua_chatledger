@@ -34,6 +34,11 @@ A diferencia de las políticas globales estándar que excluyen binarios pesados 
 ## 3. Estrategia PWA Offline-First
 La PWA funciona bajo un esquema IT1/IT2 utilizando la API nativa y WebWorkers.
 *   **Alcance del Asset PWA**: Es una sola PWA que puede usar roles diferentes. Es correcto, es una única PWA unificada. El Service Worker y el almacenamiento IndexedDB se comparten a nivel global, y la redirección al rol correspondiente (Mesero, Cocinero o Administrador) se gestiona de forma transparente tras la autenticación por NIP.
+*   **Política de Carga y Pre-caché de Rutas Autenticadas (CRÍTICO)**: 
+    *   **Prohibición de Pre-caché de Rutas Dinámicas**: Queda prohibido añadir rutas que requieran autenticación previa (como `/restaurant/mesero` o `/restaurant/cocina`) en el array de instalación estática del Service Worker (`ASSETS_TO_CACHE`). 
+    *   *Razón*: Cuando la PWA se instala (usualmente en la pantalla de login), el usuario no está logueado. Al intentar cachear estas rutas, las llamadas rebotan en el guard de autenticación del servidor y este devuelve la redirección del login, lo que causa que el Service Worker almacene el HTML de la página de login bajo el nombre de la página protegida. Esto rompe la navegación y causa pantallas desestructuradas.
+    *   **Solución**: El Service Worker debe usar una estrategia **Network First** para las vistas. Las vistas del Mesero y Cocina solo deben cachearse de forma dinámica tras un fetch exitoso con código 200 (no redireccionado), o depender de una estructura de App Shell puramente estática.
+*   **Indicador de Estado de Voz**: Toda vista PWA que requiera interactuar con VOSK debe pasar explícitamente el parámetro `'showVoskStatus' => true` en su llamada al layout (`layout-pwa`), asegurando la visualización correcta de la badge de estado del micrófono.
 *   **Background Sync**: Toda petición fallida por caída de Wi-Fi se encola en IndexedDB (vía `Dexie.js`) dentro de la tabla `outbox_comandas`.
 *   La librería Dexie y el Service Worker interactúan independientemente; no se deben mezclar lógicas asíncronas de VOSK en el Service Worker global.
 

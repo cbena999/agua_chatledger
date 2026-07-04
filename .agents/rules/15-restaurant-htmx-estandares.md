@@ -19,6 +19,10 @@ En procesos masivos o que requieran bloqueo visual completo (como el cierre de c
 El clásico refresco completo del navegador está penalizado y prohibido tras una mutación de estado.
 - **Regla Estricta**: Tras la creación o modificación exitosa de una comanda, Flight PHP (backend) NO debe redireccionar mediante el header HTTP estándar `Location`.
 - **Implementación**: Debe responder con la cabecera `HX-Redirect` o `HX-Location`. Esto instruye a HTMX a realizar la redirección mediante AJAX, preservando la App Shell e impidiendo alertas del navegador de "Reenviar formulario".
+- **Detección Confiable de HTMX/AJAX (CRÍTICO)**: 
+  Dado que HTMX no envía por defecto la cabecera `X-Requested-With: XMLHttpRequest` (utilizada por `$request->ajax`), el backend **debe** verificar explícitamente la presencia de la cabecera `HX-Request`.
+  * *Estándar PHP*: `$isAjax = $request->ajax || isset($_SERVER['HTTP_HX_REQUEST']);`
+  * *Fallo conocido*: Si no se incluye la comprobación de `HTTP_HX_REQUEST`, el servidor tratará la solicitud HTMX como una petición normal de navegador, emitiendo una redirección 302 estándar. El navegador seguirá el 302 en segundo plano y HTMX insertará (swapeará) el HTML de la página redireccionada completa dentro del contenedor de destino original (ej. inyectando el dashboard dentro de la caja de error del login).
 
 ## 4. OOB Swaps para Elementos Auxiliares
 
