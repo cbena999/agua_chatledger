@@ -344,7 +344,14 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 *   **Test Suite de Integración PWA**: Creación de una suite de pruebas automática (`/sistema/pruebas-nlp`) que evalúa físicamente el hardware del Android. Ejecución condicionada al uso de puertos Docker (6001 HTTP / 8443 HTTPS).
 *   **Expansión de Roles y RBAC Base**: Ampliación del seed SQL (`05_seed_data.sql`) integrando al rol Cajero y 5 permisos granulares RBAC (`ver_kds`, `tomar_ordenes`, `cobrar_mesas`, `gestionar_menu`, `ver_reportes`) mapeados lógicamente contra los usuarios.
 
-**Última actualización**: 2026-07-04
+**Observabilidad de PWA y Ficha Técnica Comercial (2026-07-05):**
+*   **Monitoreo y Telemetría PWA (Heartbeat)**: Implementación de la señal de latido (Heartbeat) de los meseros en línea enviada cada 15 segundos y alertas en tiempo real en la vista del Cajero mediante HTMX.
+*   **Indicadores de Sincronización en PWA**: Adición de contadores visibles en colores semáforo para el estado de conexión PWA, cola de comandos offline (`Dexie.js Outbox`) y notificaciones de preparación en cocina.
+*   **Historial de Desconexión de Meseros**: Creación de la bitácora de cortes de red por turno/día en la interfaz del cajero con historial rotativo de hasta 1 mes.
+*   **Gestión Híbrida de Energía**: Formalización en `Funcional_Flujos_Trabajo_Comandas_VOSK.html` (RN-2.3) del uso eficiente de batería para Meseros (cierre de AudioContext tras Push-to-Talk) frente al uso ininterrumpido en Cocina (WakeLock).
+*   **QA y Ficha Comercial**: Expansión de la suite de pruebas en `Pruebas_Casos_Validacion_Comandas_VOSK.html` (casos QA-OPER-05 a 08) y creación del documento de presentación del producto `Ficha_Tecnica_Comercial_Comandas_VOSK.html`.
+
+**Última actualización**: 2026-07-05
 
 
 

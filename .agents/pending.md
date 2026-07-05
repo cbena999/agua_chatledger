@@ -23,6 +23,7 @@
 
 | Fecha | Item | Detalle |
 |---|---|---|
+| 2026-07-05 | Observabilidad y Ficha Comercial | Implementación de telemetría PWA (Heartbeat), indicadores de red/cola/cocina, bitácora de desconexión del cajero, optimización Push-to-Talk vs WakeLock, suite QA extendida y Ficha Técnica Comercial (Product Sheet). |
 | 2026-07-04 | Homologación PWA Multi-Rol | Adaptación de vistas Cocinero (KDS) y Administrador (NLP) a layout-pwa con soporte offline y corrección de bugs de carga. |
 | 2026-07-04 | Corrección Rutas Estáticas | Remoción de symlinks y estandarización a rutas absolutas `/web-assets/...` alineadas con la PWA. |
 | 2026-07-04 | Guía Rápida de Despliegue | Creación de `Instrucciones_Despliegue_Comandas_VOSK.html` y actualización de Rule 14. |
@@ -35,4 +36,4 @@
 
 ---
 
-*Última actualización: 2026-07-04 — Homologación PWA Multi-Rol — Antigravity/Gemini*
+*Última actualización: 2026-07-05 — Observabilidad y Ficha Comercial — Antigravity/Gemini*
