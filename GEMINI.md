@@ -351,7 +351,13 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 *   **Gestión Híbrida de Energía**: Formalización en `Funcional_Flujos_Trabajo_Comandas_VOSK.html` (RN-2.3) del uso eficiente de batería para Meseros (cierre de AudioContext tras Push-to-Talk) frente al uso ininterrumpido en Cocina (WakeLock).
 *   **QA y Ficha Comercial**: Expansión de la suite de pruebas en `Pruebas_Casos_Validacion_Comandas_VOSK.html` (casos QA-OPER-05 a 08) y creación del documento de presentación del producto `Ficha_Tecnica_Comercial_Comandas_VOSK.html`.
 
-**Última actualización**: 2026-07-05
+**Alineación Fonética y Optimización de Catálogo VOSK (2026-07-05 - Sesión 2):**
+*   **Alineación del Catálogo Semilla**: Refactorización de `05_seed_data.sql` para usar IDs de productos explícitos, sincronizando los datos semilla con los ejemplos de dictado de la especificación técnica ("Taco de tripa" = ID 14, "Refresco" = ID 25) y refinando sus palabras clave/fonética ("taco arto", "chesco").
+*   **Orquestación de Base de Datos**: Integración de la tabla de telemetría PWA (`08_pwa_telemetry.sql`) y la declaración `USE vcd01;` en el script orquestador `setup.sh`, garantizando instalaciones e inicializaciones limpias desde cero.
+*   **Precarga de Versión Semilla**: Ingesta en `07_catalogo_versiones.sql` de una versión publicada inicial (`v1.0.0`) con la precomputación del Delta Hash (`13cf4afbd58187b03f3fbe50bc06908a`) y el payload JSON del menú, asegurando la inmediata descarga de gramática optimizada por las PWA clientes.
+*   **Validación del Motor Transaccional**: Ejecución y paso exitoso del 100% de la suite de pruebas funcionales automatizadas (`tests/run_functional_tests.php`).
+
+**Última actualización**: 2026-07-05 (Sesión 2)
 
 
 
