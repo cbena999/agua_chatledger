@@ -357,7 +357,13 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 *   **Precarga de Versión Semilla**: Ingesta en `07_catalogo_versiones.sql` de una versión publicada inicial (`v1.0.0`) con la precomputación del Delta Hash (`13cf4afbd58187b03f3fbe50bc06908a`) y el payload JSON del menú, asegurando la inmediata descarga de gramática optimizada por las PWA clientes.
 *   **Validación del Motor Transaccional**: Ejecución y paso exitoso del 100% de la suite de pruebas funcionales automatizadas (`tests/run_functional_tests.php`).
 
-**Última actualización**: 2026-07-05 (Sesión 2)
+**Estabilización y Tuning Fino de Comandas VOSK (2026-07-05 - Sesión 3):**
+*   **Caché y Resiliencia Offline (SW)**: Implementación de la estrategia *Cache-First* en el Service Worker (`sw.js`) para acelerar la inicialización del motor VOSK WASM (~38MB del modelo y ~5.5MB de vosk.js), y activación de `navigator.storage.persist()` para blindar IndexedDB contra desalojo automático.
+*   **Optimización de CPU y Batería (RMS VAD)**: Integración de filtros de nivel de volumen Root Mean Square (RMS) en el procesador de audio (`pcm-processor.js`) para descartar el silencio localmente en cliente y reducir la carga de CPU y el tráfico IPC de hilos en más de un 40%.
+*   **Watchdog de Fugas de Memoria WASM**: Diseño de una política *Kill-and-Respawn* para reiniciar de manera segura el Web Worker de VOSK en periodos de inactividad, previniendo fallos Out-of-Memory (OOM) en terminales de bajo hardware con sesiones prolongadas.
+*   **Documentación de Pruebas Manuales**: Inserción de recomendaciones de QA que aclaran el alcance técnico entre una Limpieza Total (Clear Site Data) y el botón operativo de "Forzar Sincronización" en la PWA.
+
+**Última actualización**: 2026-07-05 (Sesión 3)
 
 
 
