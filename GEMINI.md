@@ -372,7 +372,7 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 *   **Watchdog de Fugas de Memoria WASM**: Diseño de una política *Kill-and-Respawn* para reiniciar de manera segura el Web Worker de VOSK en periodos de inactividad, previniendo fallos Out-of-Memory (OOM) en terminales de bajo hardware con sesiones prolongadas.
 *   **Documentación de Pruebas Manuales**: Inserción de recomendaciones de QA que aclaran el alcance técnico entre una Limpieza Total (Clear Site Data) y el botón operativo de "Forzar Sincronización" en la PWA.
 
-**Última actualización**: 2026-07-06 (Sesión 1)
+**Última actualización**: 2026-07-07
 
 **Estabilización de Sesión Persistente, Interrupciones y Entrega de Turno (2026-07-06 — Sesión 1):**
 *   **Persistencia PHP Extendida**: Habilitado el tiempo de vida de sesión a **24 horas** en `commons.php` para prevenir expiraciones silenciosas en los dispositivos móviles durante la jornada laboral.
@@ -383,8 +383,11 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 *   **Prevención de Poison Pills**: Patcheado el bucle de sincronización en `db.js` y `sw.js` para marcar comandas con error 400 del servidor como `failed_invalid`, evitando bucles de reintento infinitos.
 *   **Documentación de Pruebas y Flujos**: Incorporación de casos de prueba manuales 2.1.B y 2.1.C en `Pruebas_Casos_Validacion_Comandas_VOSK.html`, actualización del flujo 6.5.B en `Funcional_Flujos_Trabajo_Comandas_VOSK.html` y adición de notas operativas de seguridad en `Manual_Operativo_Comandas_VOSK.html`.
 
-
-
+**Instalación PWA Android y Scripts de Orquestación (2026-07-06 — Sesión 2):**
+*   **Empaquetado Nativo Android (Add to Home Screen)**: Consolidación arquitectónica del Webcontext PWA (`manifest.json`, iconos 192/512, `sw.js`, `db.js`) requerida para que Chrome/Safari no rechacen el prompt de instalación nativa (Standalone). Estructura documentada formalmente en `Instrucciones_Despliegue_Comandas_VOSK.html`.
+*   **Alineación Manual Operativo**: La Sección 10 del `Manual_Operativo_Comandas_VOSK.html` fue reescrita como una guía estrictamente operativa (Cajeros/Gerentes) con instrucciones de 2 pasos (Instalar Certificado y Añadir a Pantalla), eliminando la carga técnica.
+*   **Reubicación de Orquestadores Python**: Los scripts utilizados para la actualización masiva de documentos HTML (`align_docs.py`, `align_docs_deep.py`, `update_docs_multipulse.py`) fueron movidos de la raíz del repo maestro hacia su nueva ubicación canónica en `restaurantb/docs/py/` para mejor organización.
+*   **Mitigación de Crash de IA**: Restauración y verificación forense del árbol de trabajo tras interrupción de sesión. Corrección de HTML corrupto (`<tr>` y `<td>` truncados) en el Manual Operativo y confirmación de que la arquitectura de la Fase 4 permaneció 100% íntegra en el código fuente.
 
 > [!IMPORTANT]
 > **Terminología de Sesión**:
