@@ -132,7 +132,7 @@ Para evitar regresiones de interfaz y optimizar el uso de tokens, los agentes de
    * El inicio de sesión se realiza mediante un PIN numérico de 4 dígitos. El backend procesa el NIP, recupera el email del usuario desde Delight Auth y redirige dinámicamente utilizando el encabezado HTMX `HX-Redirect` al dashboard que corresponda al rol (`/mesero/`, `/cocina/`).
 
 5. **Aislamiento de Lógica VOSK / Service Worker:**
-   * La inicialización del modelo de voz VOSK y el AudioWorklet no deben entrelazarse con el Service Worker global. La lógica de voz corre dentro de un Web Worker dedicado (`vosk-worker.js`) y almacena comandas fallidas en IndexedDB (`Dexie.js`) en lugar de depender del Background Sync nativo.
+   * La inicialización del modelo de voz VOSK y el AudioWorklet no deben entrelazarse con el Service Worker global. La inicialización y ejecución del modelo y del reconocedor VOSK corren en el hilo principal (app-voice.js) mediante la API nativa de Window.Vosk, mientras que el AudioWorklet (pcm-processor.js) corre en el hilo de audio de baja latencia. Se almacenan las comandas fallidas en IndexedDB (`Dexie.js`) en lugar de depender del Background Sync nativo.
 
 6. **Gramática Kaldi y Levenshtein local:**
    * Para mitigar el ruido en cocina y comedor, el reconocedor Kaldi restringe su escucha a un vocabulario JSON cerrado (`grammar`). Las palabras transcritas se limpian y mapean a IDs de base de datos en cliente aplicando la distancia de Levenshtein con un umbral de tolerancia máximo de **3 caracteres**.
