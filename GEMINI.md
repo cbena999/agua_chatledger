@@ -363,7 +363,16 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 *   **Watchdog de Fugas de Memoria WASM**: Diseño de una política *Kill-and-Respawn* para reiniciar de manera segura el Web Worker de VOSK en periodos de inactividad, previniendo fallos Out-of-Memory (OOM) en terminales de bajo hardware con sesiones prolongadas.
 *   **Documentación de Pruebas Manuales**: Inserción de recomendaciones de QA que aclaran el alcance técnico entre una Limpieza Total (Clear Site Data) y el botón operativo de "Forzar Sincronización" en la PWA.
 
-**Última actualización**: 2026-07-05 (Sesión 3)
+**Última actualización**: 2026-07-06 (Sesión 1)
+
+**Estabilización de Sesión Persistente, Interrupciones y Entrega de Turno (2026-07-06 — Sesión 1):**
+*   **Persistencia PHP Extendida**: Habilitado el tiempo de vida de sesión a **24 horas** en `commons.php` para prevenir expiraciones silenciosas en los dispositivos móviles durante la jornada laboral.
+*   **Remember Me de 28 Días**: Configurado el inicio de sesión a **28 días** en `index.php` a través de Delight PHP Auth para asegurar una ventana de persistencia física en el navegador y evitar desconexiones accidentales cuando el terminal suspende la pestaña en segundo plano (Doze).
+*   **Aislamiento y Cambio de Identidad**: Implementado flujo de token único por dispositivo. Al ingresar un nuevo NIP se limpia incondicionalmente la sesión anterior, previniendo el traslape de credenciales en dispositivos compartidos.
+*   **Manejo de Interrupciones Físicas**: Inyectado listener de `visibilitychange` en `app-voice.js` para capturar la comanda dictada y apagar lógicamente el micrófono cuando el dispositivo recibe una llamada o bloquea la pantalla.
+*   **Bloqueo Transaccional (`sending`)**: Implementado cambio de estado atómico en Dexie.js (`pending` -> `sending`) dentro de una transacción de escritura exclusiva para evitar que el hilo de primer plano y el Service Worker procesen la misma comanda duplicando pedidos.
+*   **Prevención de Poison Pills**: Patcheado el bucle de sincronización en `db.js` y `sw.js` para marcar comandas con error 400 del servidor como `failed_invalid`, evitando bucles de reintento infinitos.
+*   **Documentación de Pruebas y Flujos**: Incorporación de casos de prueba manuales 2.1.B y 2.1.C en `Pruebas_Casos_Validacion_Comandas_VOSK.html`, actualización del flujo 6.5.B en `Funcional_Flujos_Trabajo_Comandas_VOSK.html` y adición de notas operativas de seguridad en `Manual_Operativo_Comandas_VOSK.html`.
 
 
 

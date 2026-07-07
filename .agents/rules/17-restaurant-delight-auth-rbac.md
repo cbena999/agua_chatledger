@@ -25,3 +25,16 @@ Para proteger las rutas del sistema, se debe implementar una validación en cade
 ### 4. Seguridad de Contraseñas y Hash
 *   La inserción de usuarios debe realizarse utilizando hash Bcrypt nativo a través de Delight-Auth para garantizar la resiliencia criptográfica.
 *   Queda estrictamente prohibido guardar o contrastar contraseñas en texto plano.
+
+---
+
+## 🔒 Estándares de Sesión Persistente y Multi-Usuario (Remember Me)
+
+### 1. Persistencia y Ciclo de Vida
+*   **Sesión PHP:** Configurada en `commons.php` con un tiempo de vida activo de **24 horas** (`session.gc_maxlifetime = 86400` y `session.cookie_lifetime = 86400`).
+*   **Cookie de Navegador (Remember Me):** El login debe invocar `$auth->login()` pasando la expiración física de **28 días** (`2419200` segundos) como tercer parámetro. Esto evita que los mecanismos de ahorro de energía (Doze/suspensión de pestaña) invaliden la sesión.
+
+### 2. Aislamiento de Identidad y Multiusuario
+*   **Token Único:** El dispositivo mantiene estrictamente una única cookie de autenticación a la vez. No se almacena historial de múltiples tokens o usuarios en el cliente.
+*   **Intercambio de PIN:** Al introducir un nuevo NIP exitoso en la pantalla de login, Delight-Auth debe destruir de forma atómica la sesión activa del usuario anterior en el servidor y reemplazar el token persistente en el cliente con el del nuevo usuario.
+*   **Cierre de Turno:** El logout explícito destruye el token en base de datos (`users_remembered`) y del navegador. Si el usuario no hace logout, la sesión persiste de forma transparente.
