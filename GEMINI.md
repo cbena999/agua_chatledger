@@ -121,7 +121,7 @@ Para evitar regresiones de interfaz y optimizar el uso de tokens, los agentes de
    * **Cero Symlinks:** No se debe depender de enlaces simbólicos de sistema en el despliegue para acceder a los activos estáticos.
 
 2. **Diferenciación de Pruebas (CLI vs. UI Browser):**
-   * **Pruebas CLI (`tests/run_functional_tests.php`):** Validan la BD, stored procedures, permisos RBAC en BD e inserciones transaccionales vía PDO. **No prueban** rutas HTTP, redirecciones de Flight PHP, carga de assets estáticos ni restricciones de navegador.
+   * **Pruebas CLI (`www/tests/run_functional_tests.php`):** Validan la BD, stored procedures, permisos RBAC en BD e inserciones transaccionales vía PDO. **No prueban** rutas HTTP, redirecciones de Flight PHP, carga de assets estáticos ni restricciones de navegador.
    * **Pruebas de UI/Navegador:** Requieren entorno web real, HTTPS activo, inyección de cookies de sesión, redirecciones basadas en roles y hardware (micrófono) del cliente. Un pase exitoso de CLI no garantiza el funcionamiento de la UI.
 
 3. **Seguridad HTTPS Obligatoria:**
@@ -136,6 +136,15 @@ Para evitar regresiones de interfaz y optimizar el uso de tokens, los agentes de
 
 6. **Gramática Kaldi y Levenshtein local:**
    * Para mitigar el ruido en cocina y comedor, el reconocedor Kaldi restringe su escucha a un vocabulario JSON cerrado (`grammar`). Las palabras transcritas se limpian y mapean a IDs de base de datos en cliente aplicando la distancia de Levenshtein con un umbral de tolerancia máximo de **3 caracteres**.
+
+7. **Persistencia y Sesión Multiusuario (Remember Me):**
+   * Configuración de sesión PHP a **24 horas** (`commons.php`) y cookies persistentes de navegador de **28 días** (`index.php`) via Delight Auth. Al alternar de usuario (PIN), se destruye atómicamente la sesión activa del usuario anterior en base de datos para impedir el traslape de credenciales en el mismo dispositivo físico.
+
+8. **Manejo de Interrupciones en el Dispositivo (Doze/Llamadas):**
+   * Control del ciclo de vida del micrófono mediante eventos de `visibilitychange` (`app-voice.js`). La PWA debe pausar inmediatamente la captura de audio y resguardar el estado transitorio del dictado si la pantalla se apaga, entra una llamada o la aplicación pasa a segundo plano.
+
+9. **Prevención de Doble Envío Transaccional (Dexie / SW):**
+   * Empleo de estados transicionales `'sending'` en IndexedDB (Dexie) a través de transacciones de escritura exclusivas. Esto bloquea la concurrencia entre hilos concurrentes del foreground (eventos `online`) y del background (`sync` del Service Worker), garantizando cero duplicaciones en el servidor.
 
 ---
 
@@ -355,7 +364,7 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 *   **Alineación del Catálogo Semilla**: Refactorización de `05_seed_data.sql` para usar IDs de productos explícitos, sincronizando los datos semilla con los ejemplos de dictado de la especificación técnica ("Taco de tripa" = ID 14, "Refresco" = ID 25) y refinando sus palabras clave/fonética ("taco arto", "chesco").
 *   **Orquestación de Base de Datos**: Integración de la tabla de telemetría PWA (`08_pwa_telemetry.sql`) y la declaración `USE vcd01;` en el script orquestador `setup.sh`, garantizando instalaciones e inicializaciones limpias desde cero.
 *   **Precarga de Versión Semilla**: Ingesta en `07_catalogo_versiones.sql` de una versión publicada inicial (`v1.0.0`) con la precomputación del Delta Hash (`13cf4afbd58187b03f3fbe50bc06908a`) y el payload JSON del menú, asegurando la inmediata descarga de gramática optimizada por las PWA clientes.
-*   **Validación del Motor Transaccional**: Ejecución y paso exitoso del 100% de la suite de pruebas funcionales automatizadas (`tests/run_functional_tests.php`).
+*   **Validación del Motor Transaccional**: Ejecución y paso exitoso del 100% de la suite de pruebas funcionales automatizadas (`www/tests/run_functional_tests.php`).
 
 **Estabilización y Tuning Fino de Comandas VOSK (2026-07-05 - Sesión 3):**
 *   **Caché y Resiliencia Offline (SW)**: Implementación de la estrategia *Cache-First* en el Service Worker (`sw.js`) para acelerar la inicialización del motor VOSK WASM (~38MB del modelo y ~5.5MB de vosk.js), y activación de `navigator.storage.persist()` para blindar IndexedDB contra desalojo automático.
