@@ -44,8 +44,8 @@
       "env": {
         "DOCKER_HOST": "unix:///var/run/docker.sock"
       }
-    }, 
-	"bdawa2host-c": {
+    },
+    "bdawa2host-c": {
       "command": "docker",
       "args": [
         "exec",
@@ -59,8 +59,7 @@
       "env": {
         "DOCKER_HOST": "unix:///var/run/docker.sock"
       }
-    }
-	,
+    },
     "bdrestaurant-host-a": {
       "command": "docker",
       "args": [
@@ -75,7 +74,21 @@
       "env": {
         "DOCKER_HOST": "unix:///var/run/docker.sock"
       }
+    },
+    "bdrestaurant-vcd01": {
+      "command": "docker",
+      "args": [
+        "exec",
+        "-i",
+        "context7-mcp-mysql",
+        "npx",
+        "-y",
+        "@f4ww4z/mcp-mysql-server",
+        "mysql://root:comite_2026@127.0.0.1:6002/vcd01"
+      ],
+      "env": {
+        "DOCKER_HOST": "unix:///var/run/docker.sock"
+      }
     }
   }
 }
-
