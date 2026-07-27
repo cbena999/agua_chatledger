@@ -214,6 +214,9 @@ Validar integridad de Symlinks y SSOT:
 bash docs-dev/ga-cl-ia/chatledger_validate.sh
 ```
 
+> ⚠️ **Regla Estricta de Sincronización Git (2026-07-27)**: Antigravity / Gemini **NO** ejecutará `sync_all_repos.sh`, `git commit` ni `git push` de forma automática tras modificar archivos. Las operaciones de sincronización y commit se realizarán ÚNICAMENTE ante la solicitud explícita del usuario.
+
+
 ## 🛡️ Saneamiento y Resiliencia Extrema (2026-05-10)
 Se implementó un sistema de protección de triple capa para el Host C, blindándolo contra apagados abruptos y asegurando la veracidad de la auditoría:
 

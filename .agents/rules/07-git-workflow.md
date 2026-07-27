@@ -167,7 +167,7 @@ git checkout -- docs-dev/migration-aguav2/sync_hosta_to_hostc/work/
 ## Notas para Agentes IA (Claude Code y Gemini)
 
 - **Commits**: formato `tipo(scope): descripción`. Descripción clara y técnica.
-- **NO commitear tras cada cambio**: aplicar los cambios en archivos, reportar qué se modificó, y detenerse. Solo ejecutar `git add / commit / push` cuando el usuario lo solicite explícitamente ("commitea", "sube los cambios", etc.).
+- **NO commitear ni sincronizar tras cada cambio**: Queda estrictamente prohibido ejecutar `sync_all_repos.sh` o realizar `git commit` / `git push` de forma automática. Aplicar los cambios en archivos, reportar qué se modificó y detenerse. Solo ejecutar `sync_all_repos.sh` o comandos git cuando el usuario lo solicite explícitamente ("commitea", "sube los cambios", "sincroniza", etc.).
 - **Pushes**: permitidos bajo usuario `cbena999`. Confirmar con usuario antes de push a `main`.
 - **Symlinks**: no reemplazar symlinks por archivos reales. Si se detecta un directorio real donde debería haber symlink → ejecutar `chatledger_sync_ga_lnks.sh`.
 - **Conflictos**: resolver antes de proponer merge. No usar `--no-verify` ni `--force` sin autorización explícita.
