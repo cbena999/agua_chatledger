@@ -7,9 +7,9 @@
 | **Trajectory ID** | `ca25b296-481f-4bd7-a6c5-dfb52428862b` |
 | **Cascade ID** | `c4a2e136-eb90-4dc8-9045-6d7cef924e1b` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 171 |
+| **Total Steps** | 229 |
 | **Started** | 27 July 2026, 12:32 pm |
-| **Completed** | 27 July 2026, 1:28 pm |
+| **Completed** | 27 July 2026, 1:58 pm |
 
 ---
 
@@ -3858,6 +3858,851 @@ I'm currently focused on the feasibility of using the specified script, `sync_al
 <summary>Metadata</summary>
 
 - **Thinking Duration:** 0.032905864s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+Mejoras para la propuesta:
+. Ya no usar el termino Opción #, sustituir por Proyecto #-
+. Proyecto 2: Bloc Digital cambiar por Proyecto: Bloc Digital sin WhatsaApp.
+. Esquema de pago sea  2 Hitos (30/70)
+. Como ya no es una comparativa ya no poner la cruz roja, quiza ne su lugar poner un No Aplica.
+. QUE Se incluyan clasifiquen y alinene estos features:
+. el recepcionista al identificar con el #folio o x nombre paciente referido por x,y,z medico, y al localiza al paciente, puede podra asignarle a ese registro el primer estado y demas estado ya definidos /home/carlos/GitHub/caelitandem_home/portafolio-dev-2026/blocklabgd/contrato-laesh/v1.1/tecnicos/Especificacion_Funcional_y_Tecnica.md , pero en esta version claro es manual;  bajo esta linea el recepcionista subira con un upload el pdf de resultados y lo vinculara al registro del paciente remitido...
+aNALIZA y alinea el/los documentos que afectan esa version v1.1.3/
+
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `Especificacion_Funcional_y_Tecnica.md`
+**Language:** markdown
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L74-79)</summary>
+
+**Path:** `Unknown file`
+
+```
+2.  **En Atención:** El paciente llegó a la clínica, pagó y está en proceso.
+3.  **Resultados Listos:** El archivo se sincronizó con éxito y se envió la imagen al paciente.
+4.  **Cerrada:** Estado final (Terminado con éxito, o caducado).
+
+### 4.4 Caducidad Automática (Cronjob)
+*   Las solicitudes solo pueden permanecer en estado *"Remitido"* durante **1 mes**.
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Refining the Terminology**
+
+I'm now implementing the latest feedback on the proposal. Specifically, I'm replacing the "Option #" nomenclature with a clearer "Project #" structure. The first iteration involves renaming "Option #" to "Project #".
+
+
+**Updating Payment Terms**
+
+I've renamed "Bloc Digital de Solicitudes Clínicas" to **`Proyecto 2: Bloc Digital sin WhatsApp`**. Regarding payment, I'm shifting to a two-milestone structure: 30% upfront, 70% upon acceptance, for a total of $25,000 MXN. I'm also revising the comparison table format. Since the format is no longer comparing options, I will replace the red "❌" with "No aplica". I'm also working on new functional features related to patient states and manual result uploads, using the specified document for reference.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Especificacion_Funcional_y_Tecnica.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.089926228s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L59-89)</summary>
+
+**Path:** `Unknown file`
+
+```
+## 4. ESQUEMA DE SEGURIDAD, ESTADOS Y CADUCIDAD
+
+### 4.1 Privacidad y Protección de Datos
+Para tranquilidad de la clínica y los pacientes, se integran protocolos de seguridad modernos:
+*   **Tránsito de Datos:** Se usa el protocolo de seguridad HTTPS (Candado Verde) para que la información viaje encriptada por internet.
+*   **Cifrado de Contraseñas:** Las contraseñas de los usuarios se protegen con algoritmos de cifrado (como Bcrypt). Nadie en la clínica ni los desarrolladores pueden leerlas o recuperarlas.
+*   **Seguridad de Servidor:** El servidor provisto por Hostinger cuenta con estándares de protección mundial.
+*   **Manejo de Tarjetas de Crédito:** Los pagos de consumos para WhatsApp o Servidores se hacen directamente en las plataformas seguras de Meta y Hostinger. El sistema de la clínica jamás pide, ve ni almacena datos bancarios.
+
+### 4.2 Autenticación a los Portales
+*   **Paciente:** Acceso mediante **Número de Teléfono** + **Folio de la Orden**. (Doble factor de acceso para privacidad del expediente).
+*   **Médico:** Acceso mediante **Número de Teléfono** (Username) + **Fecha de Nacimiento** `DD/MM/YYYY` (Password).
+
+### 4.3 Estados de Vida de la Solicitud (Workflow)
+1.  **Remitido:** Orden creada por el médico.
+2.  **En Atención:** El paciente llegó a la clínica, pagó y está en proceso.
+3.  **Resultados Listos:** El archivo se sincronizó con éxito y se envió la imagen al paciente.
+4.  **Cerrada:** Estado final (Terminado con éxito, o caducado).
+
+### 4.4 Caducidad Automática (Cronjob)
+*   Las solicitudes solo pueden permanecer en estado *"Remitido"* durante **1 mes**.
+*   Una rutina automatizada del servidor (Cronjob) evaluará diariamente la base de datos. Si un paciente no asiste en el plazo de 1 mes, la solicitud pasará a estado *"Cerrada"* (o "Caducada").
+*   Este parámetro (30 días) será configurable en una pantalla de la clínica para evitar dejar la regla quemada en código (hardcode).
+
+### 4.5 Compatibilidad de Pantallas y Dispositivos
+Para asegurar el correcto funcionamiento y tiempos de entrega, la compatibilidad de los sistemas queda definida de la siguiente manera:
+*   **Portal del Médico:** Adaptabilidad total para celulares, tablets y computadoras de escritorio (Responsive Design).
+*   **Portal Interno (Recepción Clínica):** Diseñado exclusivamente para resoluciones de computadora de escritorio (Desktop).
+*   **Compatibilidad General:** Todas las interfaces web (incluyendo el portal del médico) están optimizadas para operar fluidamente en computadoras de escritorio con sistemas operativos **Windows 10 / Windows 11** y **macOS**, utilizando navegadores modernos como **Google Chrome** y **Apple Safari**.
+
+---
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Refining Terminology Choices**
+
+I'm now implementing the terminology refinements, specifically changing "Opción" to "Proyecto" as requested. The markdown file `Resumen_Oferta_Servicios.md` is being systematically updated to reflect these revisions for the specified items.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Resumen_Oferta_Servicios.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.005010179s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# RESUMEN DE LA OFERTA DE SERVICIOS
+**Proyecto:** Laboratorio Clínico LAESH - Digitalización
+
+Este documento presenta las dos modalidades de contratación disponibles. Las propuestas están diseñadas para permitir a "EL CLIENTE" elegir el alcance tecnológico y funcional que mejor se adapte a su presupuesto y urgencia operativa.
+
+*(Nota: Toda opción se instrumenta bajo un **Contrato Base Modular** — ver sección **Estructura Documental**).* 
+
+---
+
+### Opción 1: Sitio Web (Básico)
+
+*   **Inversión Total:** $10,000.00 MXN
+*   **Esquema de Pago (2 Hitos):** 50% Anticipo ($5,000) / 50% Firma de Aceptación ($5,000).
+*   **Tiempo de Entrega:** 1 Mes (30 días naturales).
+*   **Garantía:** 15 días naturales (Inicia a partir de la firma de Aceptación).
+*   **Alcance Funcional:** Página web sencilla (5 secciones). Incluye Inicio, Nosotros (Cédulas), Catálogo de Estudios y Precios, Contacto (con link de Google Maps y botón directo a WhatsApp), y Aviso de Privacidad. Es la solución ideal para tener una presencia profesional en internet. *(Incluye periodo de Estabilización de 15 días y capacitación; ver Condiciones Generales).*
+*   **Alcance Tecnológico:** Incluye optimización básica para posicionamiento en buscadores (Google) y adaptabilidad para celulares y tablets.
+
+---
+
+### Opción 2: Bloc Digital de Solicitudes Clínicas
+
+*   **Inversión Total:** $25,000.00 MXN
+*   **Esquema de Pago (3 Hitos):** 30% Anticipo ($7,500) / 30% Despliegue a Producción ($7,500) / 40% Firma de Aceptación ($10,000).
+*   **Tiempo de Entrega:** 2 Meses (60 días naturales).
+*   **Garantía:** 30 días naturales (Inicia a partir de la firma de Aceptación).
+*   **Alcance Funcional:** Automatización para crear y rastrear las órdenes de laboratorio. El médico tratante genera la orden clínica digital desde su portal (celular o tablet). El paciente recibe una **hoja impresa (formato LAESH)** generada por el sistema con un `#folio` único y un código de barras simple. El paciente acude a la clínica con esta hoja (o indicando su nombre). La recepción busca la orden usando un buscador unificado (autocompletado a partir de 5 caracteres, permitiendo buscar por nombre o folio en el mismo input). Adicionalmente, el sistema notifica en tiempo real (globito contador y panel de detalles) a los portales web de Laboratorio (`laesh.mx/labadmin`) y Médicos (`laesh.mx/medicos`) sobre el estatus de las solicitudes. 
+*   **Consideración Operativa:** Los resultados de laboratorio se siguen entregando de forma **tradicional (en papel por ventanilla)**. El ecosistema es 100% web y privado, sin depender de redes sociales externas (como WhatsApp) para la transmisión de órdenes ni resultados.
+*   **Alcance Tecnológico:** Sistema web en la nube, perfiles de usuario, roles de seguridad (Recepción, Médico, Administrador), generación dinámica de PDFs (hoja de paciente), motor de búsqueda por autocompletado y notificaciones en tiempo real utilizando tecnología open-source de **Node.js/Swoole**.
+
+---
+
+## Cuadro Comparativo (Inversión vs. Valor Funcional)
+Para facilitar la toma de decisiones, la siguiente tabla resume las funcionalidades, ventajas y limitantes de cada opción tecnológica ofertada, permitiendo visualizar rápidamente el costo-beneficio.
+
+| Característica | Opción 1: Sitio Web | Opción 2: Bloc Digital |
+| :--- | :--- | :--- |
+| **--- 1. CONDICIONES COMERCIALES ---** | | |
+| **Objetivo Principal** | Presencia Pública | Digitalización de Órdenes y Control Interno |
+| **Inversión Desarrollo** | $10,000 MXN | $25,000 MXN |
+| **Tiempo de Entrega** | 1 Mes | 2 Meses |
+| **Esquema de Pago** | 2 Hitos (50/50) | 3 Hitos (30/30/40) |
+| **Esquema Fiscal (Facturación)** | Montos netos (RESICO a Persona Moral) | Montos netos (RESICO a Persona Moral) |
+| **--- 2. PORTALES Y PRESENCIA WEB ---** | | |
+| **Sitio Web Público** (`laesh.mx`) | ✅ 5 secciones (Inicio, Nosotros, Servicios, Indicaciones, Contacto) | ❌ No aplica (Es un sistema interno) |
+| **Portal Médico Responsive (Celular/Tablet)** (`laesh.mx/medicos`) | ❌ | ✅ Generación de órdenes y monitoreo de pacientes referidos en tiempo real |
+| **Portal de Recepción** (`laesh.mx/labadmin`) | ❌ | ✅ Recepción de pacientes, búsqueda avanzada y actualización de estatus |
+| **--- 3. OPERACIÓN Y FUNCIONALIDADES CLAVE ---** | | |
+| **Generación de Hoja Impresa** | ❌ | ✅ Formato institucional LAESH con `#folio` único y código de barras simple para el paciente |
+| **Buscador Inteligente (Recepción)** | ❌ | ✅ Input unificado: Autocompletado (min. 5 caracteres) por nombre de paciente o folio |
+| **Notificaciones en Tiempo Real (Globito)** | ❌ | ✅ Alertas en vivo para recepcionistas y médicos (Motor Node.js/Swoole) |
+| **Flujo de Resultados** | ❌ | Tradicional (Impreso en ventanilla de la clínica) |
+| **Módulo de Reportes y Estadísticas** | ❌ | ✅ Básicas por médico, paciente y para el laboratorio |
+| **--- 4. RESPALDO, GARANTÍA Y FUTURO ---** | | |
+| **Fase de Capacitación y Estabilización** | ❌ | ✅ 15 Días presencial al momento de requerirse |
+| **Garantía Post-Entrega** | 15 días | 30 días |
+| **Seguridad y Respaldos** | ✅ (Vía Póliza Anual de Servidor) | ✅ (Vía Póliza Anual de Servidor) |
+| **Licenciamiento** | Perpetua (Sin rentas mensuales de software) | Perpetua (Sin rentas mensuales de software) |
+| **--- RESUMEN FINAL ---** | | |
+| **Pros (Ventajas)** | Económico y rápido de implementar. Atrae pacientes nuevos vía Google. | Elimina errores por mala letra en recetas. Profesionaliza la relación con el médico tratante. Buscador ágil en recepción que reduce tiempos de espera. Notificaciones en vivo. Sin costos recurrentes de terceros (Meta). |
+| **Contras (Limitantes)** | No resuelve problemas operativos internos. | No digitaliza la entrega de resultados al paciente (se mantiene en papel). No incluye página web pública (solo los portales privados). |
+
+---
+
+# SECCIÓN DE ANEXOS Y CONSIDERACIONES DETALLADAS
+*La siguiente sección profundiza en las normativas, riesgos, garantías y estructura legal que amparan la ejecución de cualquiera de las opciones listadas en el Resumen Ejecutivo superior.*
+
+---
+
+## Condiciones y Requisitos Generales (Aplicables a todos los proyectos)
+*   **Modelo de Entrega y Estabilización:** Independientemente de la opción elegida, los proyectos incluyen una fase de **15 días naturales de Estabilización** (pruebas en vivo y capacitación) que corre posterior al despliegue. Por regla general, al concluir estos 15 días se firma el Acta de Aceptación, liquidando el pago final y arrancando la Garantía correspondiente.
+*   **Presupuesto para Proveedores de Terceros (Infraestructura):** Al ser un ecosistema 100% en la Nube (Cloud), el sistema operará en servidores contratados a su nombre. Los costos estimados (pagos directos al proveedor mediante domiciliación bancaria) se resumen a continuación:
+
+    | Concepto Externo (Proveedor) | Frecuencia | Inversión Estimada | Aplica para | Observaciones Operativas |
+    | :--- | :---: | :--- | :---: | :--- |
+    | **Hosting Básico (Hostinger)** | Anual | ~$500 MXN | Opción 1 | Plan de hosting compartido básico, suficiente para una página web estática. |
+    | **Servidor en la Nube VPS (Hostinger)** | Anual | ~$1,500 a ~$2,000 MXN | Opción 2 | Plan optimizado VPS KVM 2, ideal para soportar el ecosistema web y las alertas en tiempo real. |
+    | **Dominio de Internet (.mx)** | Anual | ~$600 MXN | Todas | Nombre público e institucional de su página web (Ej. `laesh.mx`). |
+
+> **Seguridad y Privacidad de Datos:** Para tranquilidad del laboratorio y de los pacientes, el sistema usa protocolos de seguridad modernos: toda la información viaja encriptada por internet (candado verde HTTPS), y las contraseñas se guardan cifradas. El servidor provisto por Hostinger cuenta con protecciones mundiales.
+>
+> **Propiedad de Datos e Historial Clínico (5 años):** "EL CLIENTE" será siempre el dueño absoluto y exclusivo de toda su información procesada. La base de datos está diseñada para retener el historial operativo del laboratorio hasta por **5 años**.
+>
+> **Licenciamiento Tecnológico:** La clínica adquiere una **licencia de uso perpetua**; es decir, jamás pagará "rentas" por el derecho de usar el software.
+
+### Funcionalidades Fuera de Alcance
+A fin de mantener un ecosistema eficiente y sin ambigüedades, queda expresamente fuera de todas las opciones planteadas el desarrollo de:
+
+| Concepto Excluido | Detalle y Razón Operativa |
+| :--- | :--- |
+| **Notificaciones vía Redes Sociales** | El sistema no emplea WhatsApp, SMS, ni Meta Cloud API. Toda notificación es web (in-app). |
+| **Bandeja Omnicanal y Chatbots** | Todo el ecosistema opera de manera 100% web en portales. No se incluye Chatwoot ni chatbots para responder dudas médicas. |
+| **Aplicaciones Móviles Nativas** | Todo el ecosistema opera de manera 100% web. No se desarrollarán ni publicarán apps instalables en tiendas (App Store / Google Play). |
+| **Punto de Venta / Pasarelas** | Quedan excluidas las terminales de pago, pasarelas para cobro con tarjeta en línea y módulos de control de caja. |
+| **Módulos Financieros Avanzados** | Queda fuera la Facturación Electrónica (CFDI) y el cálculo de honorarios de médicos referidores. |
+| **Cuentas de Correo Corporativo** | No incluye creación ni alojamiento de buzones para empleados. |
+
+---
+
+## Servicios Post-Salida (Sugeridos para el Año 1)
+Una vez concluidos los periodos de garantía gratuitos, se sugieren las siguientes pólizas de mantenimiento:
+
+| Póliza Sugerida | Inversión Anual | Cobertura Principal | Aplica para |
+| :--- | :--- | :--- | :---: |
+| **1. Soporte a Producción (Mantenimiento)** | $8,000 MXN | Bolsa de 12 horas mensuales para cambios o resolución rápida de incidentes. | Todas |
+| **2. Administración de Servidor / Hosting** | $4,000 MXN | Mano de obra técnica (Respaldos automáticos, parches de seguridad de la nube). | Opción 2 |
+
+---
+
+## Riesgos y Mitigaciones Operativas
+
+| Riesgo Identificado | Impacto Potencial | Estrategia de Mitigación |
+| :--- | :--- | :--- |
+| **Caídas de Infraestructura de Terceros** | Interrupciones por mantenimiento o caídas globales del proveedor de hosting (Hostinger). | Contratación de la *Póliza de Administración de Servidor* para copias de seguridad continuas y reactivación ágil (SLA de 2 horas). |
+| **Fallas en Impresión de Hojas** | El paciente podría llegar sin hoja impresa si la impresora del médico tratante falla. | El buscador unificado en recepción con autocompletado por nombre mitiga este impacto, permitiendo localizar al paciente rápidamente. |
+
+---
+
+## Consideraciones Fiscales y Administrativas
+*   **Aceptación y Liberación de Pagos:** El cobro del 100% del proyecto se rige por la firma del **Acta de Aceptación de Proyecto Tecnológico**.
+*   **Montos Libres:** Todas las cantidades listadas en esta propuesta son **montos netos (libres de impuestos)** a favor del Prestador.
+*   **Cálculo Inverso:** (RESICO) El Cliente (Persona Moral) es responsable de realizar el cálculo a la inversa (de neto a bruto) al momento de la facturación.
+
+---
+
+## Estructura Documental
+Para garantizar total transparencia técnica y comercial, este proyecto se rige por un conjunto de documentos modulares complementarios.
+
+| Archivo Legal / Técnico | Abstracto del Contenido |
+| :--- | :--- |
+| **1. Carta_Presentacion.md** | Carta ejecutiva de introducción al proyecto, contexto de la oferta y próximos pasos. |
+| **2. Resumen_Oferta_Servicios.md** | Documento rector (el actual) que compara opciones, costos, infraestructura y responsabilidades. |
+| **3. Contrato_Base_Desarrollo.md** | Marco legal que establece hitos de pago, confidencialidad y límites de responsabilidad. |
+| **4. Anexo_A_Sitio_Web.md** | Especificación técnica para la Opción 1. |
+| **5. Anexo_A_Bloc_Digital.md** | Especificación técnica exclusiva para la Opción 2 (Reglas del portal médico, buscadores y notificaciones). |
+| **6. Contrato_Administracion_Servidor.md** | Póliza (opcional) para respaldos automáticos y monitoreo de la nube. |
+| **7. Anexo_B_Soporte_Produccion.md** | Póliza (opcional) de mantenimiento y corrección de bugs post-garantía. |
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Updating Files Now**
+
+I'm currently focused on the `v1.1.3/` directory. Specifically, I plan to modify `Resumen_Oferta_Servicios.md` and `Anexo_A_Bloc_Digital.md` using the `write_to_file` function. My next step will be to detail the precise changes for `Resumen_Oferta_Servicios.md`, starting with a new title.
+
+
+**Defining Project Parameters**
+
+I've outlined payment structures for both `Proyecto 1: Sitio Web` and `Proyecto 2: Bloc Digital sin WhatsApp`, including anticipated amounts for each milestone. I'm focusing on `Proyecto 2`'s functional scope, specifically detailing the four states (Remitido, En Atención, Resultados Listos, Cerrada) and the receptionist workflow with upload. I will replace the text and update the comparison table. Then, I'll update the references in other sections. Finally, I will title `Anexo_A_Bloc_Digital.md`.
+
+
+
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.655397929s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 July 2026, 1:57 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 July 2026, 1:57 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `build_docs.sh`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+#!/usr/bin/env bash
+# Script de compilación de Documentos LAESH
+# Flujo: .mmd ➔ .png HD ➔ .md ➔ .html ➔ .pdf
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+TMP_DIR="/tmp/laesh_build"
+mkdir -p "$TMP_DIR"
+
+# Si se pasa --diagrams o --all, recompila primero los diagramas Mermaid (.mmd ➔ .png HD)
+if [[ "$*" == *"--diagrams"* ]] || [[ "$*" == *"--all"* ]]; then
+    "$DIR/diagramas/build_diagrams.sh"
+fi
+
+# Compilación de los documentos PDF
+python3 "$DIR/build_pdf.py" "$@"
+
+# Renombrar a versión final (_v3) de forma segura (evita anidamientos _v3_v3)
+for pdf in "$DIR"/*.pdf; do
+    if [[ "$pdf" != *"_v3.pdf" ]] && [ -f "$pdf" ]; then
+        mv "$pdf" "${pdf%.pdf}_v3.pdf"
+    fi
+done
+
+# Si se ejecuta con ./build_docs.sh --debug, exporta los PNGs de prueba a /tmp
+if [[ "$*" == *"--debug"* ]]; then
+    for pdf in "$DIR"/*.pdf; do
+        if [ -f "$pdf" ]; then
+            name=$(basename "$pdf" .pdf)
+            pdftoppm -png -r 150 "$pdf" "$TMP_DIR/${name}_page"
+        fi
+    done
+    echo "🔍 PNGs de diagnóstico guardados en: $TMP_DIR/"
+fi
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `build_pdf.py`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+#!/usr/bin/env python3
+"""
+build_pdf.py
+Pipeline: Markdown → HTML → PDF (via Google Chrome headless)
+
+Documentos:
+  resumen  → Resumen_Oferta_Servicios.pdf      (letter portrait, multi-página)
+  tabla    → Cuadro_Comparativo.pdf             (oficio landscape, 1 hoja)
+  carta    → Carta_Presentacion.pdf             (letter portrait, 1 hoja)
+  guia     → Guia_Exposicion_Diagramas.pdf      (letter portrait)
+  anexo    → Anexo_Visual_Flujos_Operativos.pdf (legal landscape, desde HTML existente)
+
+Uso:
+  python3 build_pdf.py              # todos
+  python3 build_pdf.py carta resumen
+"""
+
+import markdown
+import os
+import re
+import subprocess
+import sys
+
+BASE = os.path.dirname(os.path.abspath(__file__)) + "/"
+TMP_BUILD = "/tmp/laesh_build/"
+os.makedirs(TMP_BUILD, exist_ok=True)
+
+SCRIPT_DIR = "/home/carlos/tools/pdf-renderer"
+PDF_RENDERER = f"{SCRIPT_DIR}/pdf_render.js"
+
+
+# ─────────────────────────────────────────────
+# Utilidades
+# ─────────────────────────────────────────────
+
+def read_md(path):
+    with open(path, "r", encoding="utf-8") as f:
+        return f.read()
+
+def write_html(path, content):
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `build_pdf.py`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L299-396)</summary>
+
+**Path:** `Unknown file`
+
+```
+    extracted_body = re.sub(
+        r'<tr>\s*<td[^>]*>\s*<strong>\s*---\s*(.*?)\s*---\s*</strong>\s*</td>.*?</tr>',
+        r'<tr><td colspan="5" style="text-align: center; background-color: #E2E8F0; color: #2B6CB0; font-weight: bold; padding: 8px; border-bottom: 2px solid #CBD5E0;">\1</td></tr>',
+        extracted_body,
+        flags=re.DOTALL
+    )
+
+    # Forzar que el Resumen Final empiece siempre en una nueva hoja
+    extracted_body = extracted_body.replace(
+        '<tr><td colspan="5" style="text-align: center; background-color: #E2E8F0; color: #2B6CB0; font-weight: bold; padding: 8px; border-bottom: 2px solid #CBD5E0;">RESUMEN FINAL</td></tr>',
+        '<tr style="page-break-before: always; break-before: page;"><td colspan="5" style="text-align: center; background-color: #E2E8F0; color: #2B6CB0; font-weight: bold; padding: 8px; border-bottom: 2px solid #CBD5E0;">RESUMEN FINAL</td></tr>'
+    )
+
+    css = css_base(
+        page_size="legal landscape",
+        page_margin="14mm 16mm",
+        font_size="10.5pt",
+        line_height="1.35",
+        extra="""
+        h2 { font-size: 1.25em; margin-top: 0.3em; margin-bottom: 0.5em; }
+        p  { margin-bottom: 0.4em; font-size: 0.98em; }
+        table { font-size: 10pt; margin: 0.4em 0; }
+        th { background: #CBD5E0; color: #1A202C; font-weight: 700; border: 1px solid #A0AEC0; }
+        th, td { padding: 8px 10px; font-size: 10pt; line-height: 1.35; }
+        """
+    )
+
+    write_html(html_path, make_html("Cuadro Comparativo - LAESH", css, extracted_body))
+    return html_to_pdf(html_path, pdf_path)
+
+
+# ─────────────────────────────────────────────
+# Guía de Exposición de Diagramas
+# ─────────────────────────────────────────────
+def build_guia():
+    md_path   = BASE + "Guia_Exposicion_Diagramas.md"
+    html_path = TMP_BUILD + "Guia_Exposicion_Diagramas.html"
+    pdf_path  = BASE + "Guia_Exposicion_Diagramas.pdf"
+
+    body = markdown.markdown(read_md(md_path), extensions=["tables"])
+    css = css_base(
+        page_size="letter portrait",
+        page_margin="16mm 20mm",
+        font_size="10pt",
+        line_height="1.4",
+    )
+
+    write_html(html_path, make_html("Guía de Exposición de Diagramas - LAESH", css, body))
+    return html_to_pdf(html_path, pdf_path)
+
+
+# ─────────────────────────────────────────────
+# Anexo Visual (HTML existente, legal landscape)
+# ─────────────────────────────────────────────
+def build_anexo():
+    md_path   = BASE + "Anexo_Visual_Flujos_Operativos.md"
+    html_path = TMP_BUILD + "Anexo_Visual_Flujos_Operativos.html"
+    pdf_path  = BASE + "Anexo_Visual_Flujos_Operativos.pdf"
+
+    content = read_md(md_path)
+    full_html = f"""<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anexo Visual - LAESH</title>
+</head>
+<body>
+{content}
+</body>
+</html>"""
+    write_html(html_path, full_html)
+    return html_to_pdf(html_path, pdf_path)
+
+
+# ─────────────────────────────────────────────
+# Runner
+# ─────────────────────────────────────────────
+DOCS = {
+    "carta":   ("Carta de Presentación (1 hoja)",       build_carta),
+    "resumen": ("Resumen de Oferta de Servicios",        build_resumen),
+    "tabla":   ("Cuadro Comparativo (oficio landscape)", build_tabla),
+    "guia":    ("Guía de Exposición de Diagramas",       build_guia),
+    "anexo":   ("Anexo Visual de Flujos",                build_anexo),
+}
+
+targets = sys.argv[1:] if len(sys.argv) > 1 else list(DOCS.keys())
+
+for key in targets:
+    if key not in DOCS:
+        print(f"⚠ '{key}' desconocido. Opciones: {list(DOCS.keys())}")
+        continue
+    name, fn = DOCS[key]
+    print(f"\n▶ {name}")
+    fn()
+
+print("\n✅ Pipeline completado.")
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 July 2026, 1:57 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 July 2026, 1:57 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 July 2026, 1:57 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `schedule`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_GENERIC
+
+**Status:** Completed
+**Created:** 27 July 2026, 1:57 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `manage_task`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_GENERIC
+
+**Status:** Completed
+**Created:** 27 July 2026, 1:57 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/portafolio-dev-2026/blocklabgd/contrato-laesh/v1.1.3`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>Directory: `v1.1.3` (6 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/portafolio-dev-2026/blocklabgd/contrato-laesh/v1.1.3`
+
+| Name | Type | Size |
+|------|------|------|
+| `Anexo_A_Bloc_Digital.md` | File | 10672 bytes |
+| `Cuadro_Comparativo_v3.pdf` | File | 148638 bytes |
+| `Resumen_Oferta_Servicios.md` | File | 13076 bytes |
+| `Resumen_Oferta_Servicios_v3.pdf` | File | 344396 bytes |
+| `build_docs.sh` | File | 1085 bytes |
+| `build_pdf.py` | File | 14925 bytes |
+
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
+
+**Status:** Completed
+**Created:** 27 July 2026, 1:57 pm
+
+---
+
+### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
+
+**Status:** Completed
+**Created:** 27 July 2026, 1:57 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 July 2026, 1:57 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `schedule`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_GENERIC
+
+**Status:** Completed
+**Created:** 27 July 2026, 1:58 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `manage_task`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_GENERIC
+
+**Status:** Completed
+**Created:** 27 July 2026, 1:58 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
+
+**Status:** Completed
+**Created:** 27 July 2026, 1:58 pm
+
+---
+
+### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
+
+**Status:** Completed
+**Created:** 27 July 2026, 1:58 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
 - **Model:** Gemini 3.6 Flash (Medium)
 </details>
 
