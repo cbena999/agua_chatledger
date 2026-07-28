@@ -7,9 +7,9 @@
 | **Trajectory ID** | `ca25b296-481f-4bd7-a6c5-dfb52428862b` |
 | **Cascade ID** | `c4a2e136-eb90-4dc8-9045-6d7cef924e1b` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 1289 |
+| **Total Steps** | 1323 |
 | **Started** | 27 July 2026, 12:32 pm |
-| **Completed** | 27 July 2026, 10:44 pm |
+| **Completed** | 27 July 2026, 10:47 pm |
 
 ---
 
@@ -21303,6 +21303,506 @@ CRITICAL INSTRUCTION 2: ...'.
 
 **Triggered Heuristics:** planning_mode, bash_command_reminder
 
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools like 'view_file' directly, rather than resorting to broader, less direct methods. I'm aiming for targeted actions.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.134637617s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+## User Request
+
+CAmbia 3. FLUJO OPERATIVO: ORDEN DIGITA... por: 3. FLUJO OPERATIVO: ORDEN DIGITAL (Funcionalidades)
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `Resumen_Oferta_Servicios.md`
+**Language:** markdown
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L67-72)</summary>
+
+**Path:** `Unknown file`
+
+```
+| 18 | **Historial de Órdenes y Búsqueda Retroactiva** | No aplica | ✅ Toda orden digital queda registrada permanentemente. La recepcionista puede consultar o reimpimir el PDF de cualquier orden pasada desde el buscador, sin importar su estado actual. | Recepcionista, Médico |
+| 19 | **Módulo de Reportes y Estadísticas** | No aplica | ✅ Conteos de pacientes por estado de la orden digital (Remitido, En Atención, Resultados Listos, Cerrada), consultables por día, semana, mes y año (hasta 5 años de historial). *No incluye cálculos financieros ni gestión de honorarios.* | Recepcionista, Médico |
+| | **--- 4. GARANTÍA, SOPORTE, PAGO DE SERVICIOS DE PLATAFORMA ---** | | | |
+| 20 | **Fase de Capacitación y Estabilización** | ✅ 10 Días (capacitación en administración de contenidos del sitio; principalmente remota) | ✅ 10 Días presencial al momento de requerirse | Médico, Recepcionista |
+| 21 | **Garantía Post-Entrega** | 10 días | 20 días | LAESH (contratante) |
+| 22 | **Seguridad y Respaldos** | ✅ Certificado SSL/HTTPS básico del hosting estático | ✅ SSL/HTTPS y Respaldos Automáticos continuos (gestionados vía Póliza de Servidor Mantenimiento, sugerida Año 1 / opcional post-garantía) | LAESH / Administrador |
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `FLUJO OPERATIVO`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 July 2026, 10:45 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 July 2026, 10:45 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 July 2026, 10:45 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
+
+**Status:** Completed
+**Created:** 27 July 2026, 10:46 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+## User Request
+
+pues, tu dime, ya esta listo, el doc ? , coherente, sin gaps, ni contradicciones ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `Resumen_Oferta_Servicios.md`
+**Language:** markdown
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L50-54)</summary>
+
+**Path:** `Unknown file`
+
+```
+| 2 | **Portal Médico Adaptable (Celular/Tablet)** (`laesh.mx/medicos`) | No aplica | ✅ Punto de entrada del flujo operativo: el médico captura las órdenes digitales, recibe notificaciones de resultados y descarga PDFs directamente. Accesible desde Navegador Web Chrome y Safari para Windows 10/11 y celular Android e iOS. | Médico |
+| 3 | **Portal de Recepción** (`laesh.mx/labadmin`) | No aplica | ✅ Centro de operaciones de la clínica: recibe notificaciones instantáneas (en el navegador Web) de nuevas órdenes, gestiona estados, localiza pacientes, sube PDFs de resultados y monitorea el flujo completo. | Recepcionista |
+| | **--- 3. FLUJO OPERATIVO: ORDEN DIGITAL (Funcionalidades) ---** | | | |
+| 4 | **Captura de la Orden Digital (Médico)** | No aplica | ✅ El médico llena el formulario digital desde su portal: nombre del paciente, estudios solicitados y datos clínicos relevantes. La orden queda registrada de forma instantánea en el sistema. | Médico |
+| 5 | **Generación Automática de Hoja Impresa con `#folio` y Código de Barras** | No aplica | ✅ Al confirmar la orden, el sistema genera en el momento una hoja en formato LAESH con `#folio` único y código de barras, disponible para imprimir o descargar en PDF desde el portal de recepción. | Sistema Bloc Digital, Recepcionista |
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Resumen_Oferta_Servicios.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L60-129)</summary>
+
+**Path:** `Unknown file`
+
+```
+| 11 | **Carga Manual de Resultados en PDF** | No aplica | ✅ Una vez realizados los estudios, la recepcionista sube el PDF de resultados mediante un botón/modal en `labadmin`. | Recepcionista |
+| 12 | **Actualización Automática de Estado: En Atención ➔ Resultados Listos** | No aplica | ✅ Al subir el PDF, el sistema actualiza automáticamente el estado a *Resultados Listos* sin que la recepcionista deba hacer ningún paso adicional. | Sistema Bloc Digital |
+| 13 | **🔕 Notificación Instantánea al Médico (Silenciosa, con Enlace al PDF)** | No aplica | ✅ El portal del médico (`medicos`) muestra un globito contador silencioso con enlace directo para descargar el PDF de resultados. El médico puede consultarlos desde su celular en cualquier momento. | Sistema Bloc Digital, Médico |
+| 14 | **Descarga del PDF de Resultados por el Médico** | No aplica | ✅ El médico descarga directamente el PDF de resultados desde su portal, accesible desde Navegador Web Chrome y Safari para Windows 10/11 y celular Android e iOS. No requiere trasladarse a la clínica. | Médico |
+| 15 | **Entrega de Resultados al Paciente en Ventanilla** | No aplica | ✅ Diseñado así: el paciente recibe sus resultados impresos directamente en ventanilla. Sin WhatsApp, sin app, sin cuenta de usuario para el paciente. | Paciente, Recepcionista |
+| 16 | **Cierre de la Orden Digital** | No aplica | ✅ La recepcionista cierra la orden manualmente al entregar los resultados, o el sistema la cierra automáticamente tras 30 días sin actividad. Estado final: *Cerrada*. | Recepcionista, Sistema Bloc Digital |
+| 17 | **Gestión de Usuarios y Catálogo de Estudios (Administrador)** | No aplica | ✅ El Administrador gestiona altas y bajas de médicos y recepcionistas, y mantiene actualizado el catálogo de estudios disponibles en el sistema. | Administrador |
+| 18 | **Historial de Órdenes y Búsqueda Retroactiva** | No aplica | ✅ Toda orden digital queda registrada permanentemente. La recepcionista puede consultar o reimpimir el PDF de cualquier orden pasada desde el buscador, sin importar su estado actual. | Recepcionista, Médico |
+| 19 | **Módulo de Reportes y Estadísticas** | No aplica | ✅ Conteos de pacientes por estado de la orden digital (Remitido, En Atención, Resultados Listos, Cerrada), consultables por día, semana, mes y año (hasta 5 años de historial). *No incluye cálculos financieros ni gestión de honorarios.* | Recepcionista, Médico |
+| | **--- 4. GARANTÍA, SOPORTE, PAGO DE SERVICIOS DE PLATAFORMA ---** | | | |
+| 20 | **Fase de Capacitación y Estabilización** | ✅ 10 Días (capacitación en administración de contenidos del sitio; principalmente remota) | ✅ 10 Días presencial al momento de requerirse | Médico, Recepcionista |
+| 21 | **Garantía Post-Entrega** | 10 días | 20 días | LAESH (contratante) |
+| 22 | **Seguridad y Respaldos** | ✅ Certificado SSL/HTTPS básico del hosting estático | ✅ SSL/HTTPS y Respaldos Automáticos continuos (gestionados vía Póliza de Servidor Mantenimiento, sugerida Año 1 / opcional post-garantía) | LAESH / Administrador |
+| 23 | **Licenciamiento** | ✅ **Pago único por desarrollo — sin rentas mensuales.** Licencia de uso perpetua; sin suscripciones obligatorias ni cuotas por usuario o uso de software. | ✅ **Pago único por desarrollo — sin rentas mensuales.** Licencia de uso perpetua; sin suscripciones obligatorias ni cuotas por usuario o uso de software. | LAESH (contratante) |
+| 24 | **Inversiones Externas (Infraestructura)** | Hosting Básico Hostinger (~$500 MXN/año) + Dominio .mx (~$600 MXN/año)<br>*(Opcional: Dominio .com.mx ~$400–$600 MXN/año adicionales)*<br><strong>Suma aprox: ~$1,100 MXN/año (sin .com.mx)</strong> | Servidor VPS KVM 2 Hostinger (~$1,500 a $2,000 MXN/año) + Dominio .mx / DNS (~$600 MXN/año)<br><strong>Suma aprox: ~$2,100 a $2,600 MXN/año</strong>.<br>*(Nota: El Dominio .mx ($600 MXN/año) es único y compartido entre ambos proyectos. Si contrata ambos proyectos, el VPS KVM 2 aloja y cubre ambos sistemas, eliminando la necesidad del Hosting Básico de $500 MXN/año)* | LAESH (contratante) |
+| 25 | **Servicios Anuales de Póliza (Sugeridos Año 1)** | Póliza de Soporte a Producción (Aplicación Web): $4,000 MXN/año (sugerida Año 1 / opcional post-garantía).<br>*(La gestión y ajuste de campañas Google Ads post-entrega no está incluida; se atiende por evento bajo demanda.)*<br><strong>Total: $4,000 MXN/año</strong> | 1) Póliza de Soporte a Producción (Aplicación Web): $4,000 MXN/año<br>2) Póliza de Servidor Mantenimiento: $4,000 MXN/año<br><strong>Total Pólizas Sugeridas: $8,000 MXN/año</strong> (sugeridas Año 1 / opcionales post-garantía).<br>*(Nota: Si se contratan ambos proyectos, las pólizas del Proyecto 2 por $8,000 MXN/año cubren de forma integral ambas aplicaciones, evitando pagar $12,000 MXN/año)* | LAESH (contratante) |
+| 26 | **Presupuesto de Anuncios en Buscador (Google Ads)** *(cargo directo con Google)* | ✅ Incluido en desarrollo: configuración inicial de 1 campaña de búsqueda + capacitación para gestionar el panel (pausar, activar o cancelar). El costo de cada clic lo cobra Google directamente al titular de la cuenta (tarjeta del cliente).<br>*Costo sugerido para iniciar: **$500 a $1,500 MXN/mes** (~$17 a $50 MXN/día). Cada vez que alguien busca "laboratorio clínico" en Google y hace clic en su anuncio, se descuenta ese monto. Usted controla el límite de gasto diario y puede pausar o cancelar en cualquier momento desde el panel.*<br>*(Gestión y optimización de campañas post-entrega: por evento bajo demanda, no incluida en póliza).* | No aplica | LAESH (contratante directo a Google) |
+
+---
+
+# SECCIÓN DE ANEXOS Y CONSIDERACIONES DETALLADAS
+*La siguiente sección profundiza en las normativas, riesgos, garantías y estructura legal que amparan la ejecución de cualquiera de las propuestas listadas en el Resumen Ejecutivo superior.*
+
+---
+
+## Condiciones y Requisitos Generales (Aplicables a todos los proyectos)
+*   **Modelo de Entrega y Estabilización:** Independientemente del proyecto elegido, se incluye una fase de **10 días naturales de Estabilización** (pruebas en vivo y capacitación) posterior al despliegue. Al concluir estos 10 días se firma el Acta de Aceptación, liquidando el hito final de pago y arrancando la Garantía correspondiente.
+*   **Presupuesto para Proveedores de Terceros (Infraestructura de Servidor y Dominio DNS):** Al ser un ecosistema 100% en la Nube (Cloud), el sistema operará en servidores contratados a nombre de "EL CLIENTE", garantizándole total independencia. **Como parte de esta oferta de servicios, mi función es apoyarle como guía consultor paso a paso para realizar estas compras con los proveedores correspondientes.** Es obligación de "EL CLIENTE" garantizar una conexión a internet estable en sus instalaciones. Los costos estimados de infraestructura (pagos directos al proveedor mediante domiciliación bancaria) se resumen a continuación:
+
+    | Concepto Externo (Proveedor) | Frecuencia | Inversión Estimada | Aplica para | Observaciones Operativas |
+    | :--- | :---: | :--- | :---: | :--- |
+    | **Hosting Básico (Hostinger)** | Anual | ~$500 MXN | Proyecto 1 | Plan de hosting compartido básico, suficiente para una página web estática. |
+    | **Servidor en la Nube VPS (Hostinger)** | Anual | ~$1,500 a ~$2,000 MXN | Proyecto 2 | Plan optimizado VPS KVM 2, ideal para soportar el ecosistema web y las notificaciones instantáneas. *(Nota: Si se contratan ambos proyectos, este servidor aloja ambos sistemas, omitiendo el Hosting Básico).* |
+    | **Dominio de Internet (.mx) / Registros DNS** | Anual | ~$600 MXN | Todos | Nombre público e institucional de su página web y configuración de registros DNS en Hostinger (Ej. `laesh.mx`). |
+    | **Dominio de Internet (.com.mx) / Registros DNS** | Anual | ~$400 a $600 MXN | Proyecto 1 (opcional) | Alternativa o complemento al `.mx`. Ambos dominios pueden apuntar al mismo sitio. Se recomienda registrar ambos para proteger la marca LAESH en internet. |
+
+> **Seguridad y Privacidad de Datos:** El sistema usa protocolos de seguridad modernos: toda la información viaja encriptada por internet (candado verde HTTPS), y las contraseñas se guardan cifradas.
+>
+> **Propiedad de Datos e Historial Clínico (5 años):** "EL CLIENTE" será siempre el dueño absoluto y exclusivo de toda su información procesada (pacientes, resultados, logotipos). Para brindar máxima tranquilidad y cumplir con estándares de salud, la base de datos está diseñada para retener el historial operativo del laboratorio hasta por **5 años**.
+>
+> **Licenciamiento Tecnológico:** La clínica adquiere una **licencia de uso perpetua**; es decir, jamás pagará "rentas" por el derecho de usar el software.
+
+---
+
+## Servicios Post-Salida (Las 2 Pólizas Anuales Sugeridas para el Año 1 / Opcionales Post-Garantía)
+Una vez concluidos los periodos de garantía gratuitos de cualquiera de las opciones anteriores (10 días para Proyecto 1 y 20 días para Proyecto 2), se sugieren las siguientes **dos pólizas anuales de servicio** para asegurar que el sistema opere continuamente en óptimas condiciones:
+
+| Póliza Anual Sugerida | Inversión Anual | Cobertura Principal | Aplica para | Carácter Operativo |
+| :--- | :--- | :--- | :---: | :--- |
+| **1. Póliza de Soporte a Producción (Aplicación Web)** | $4,000 MXN | Bolsa de 12 horas mensuales para soporte técnico, ajustes menores, actualización de contenidos y resolución prioritaria de incidentes. *No incluye gestión, ajuste de pujas ni optimización de campañas Google Ads; dicho servicio se cotiza por evento.* | Todos | **Sugerida Año 1** (Opcional por evento post-garantía) |
+| **2. Póliza de Servidor Mantenimiento** | $4,000 MXN | Mano de obra técnica especializada: respaldos automáticos continuos (backups), renovación de certificados SSL/HTTPS, monitoreo 24/7 y parches de seguridad en la nube Hostinger. *(El alquiler del hardware se paga directo a Hostinger)*. | Proyecto 2 | **Sugerida Año 1** (Opcional por evento post-garantía) |
+
+> **Flexibilidad y Ahorro por Contratación Conjunta:** Ambas pólizas son **sugeridas durante el Año 1** para brindar total tranquilidad técnica al laboratorio. Si se contratan ambos proyectos de forma combinada, el costo total por las dos pólizas es de **$8,000 MXN / año** (absorbiendo de forma integral el soporte y mantenimiento de ambos proyectos, evitando pagar $12,000 MXN por separado). Al concluir el Año 1, "EL CLIENTE" podrá decidir libremente si desea renovarlas, cambiarlas a un esquema mensual o contratarlas bajo demanda ("por evento").
+
+---
+
+## Riesgos y Mitigaciones Operativas
+
+| Riesgo Identificado | Impacto Potencial | Estrategia de Mitigación |
+| :--- | :--- | :--- |
+| **Caídas de Infraestructura de Terceros** | Interrupciones por mantenimiento o caídas globales del proveedor de hosting (Hostinger). | Contratación de la *Póliza de Servidor Mantenimiento* para copias de seguridad continuas y reactivación ágil (SLA de 2 horas). |
+| **Fallas en Impresión de Hojas** | El paciente podría llegar sin hoja impresa si la impresora del médico tratante falla. | La recepcionista recibe una notificación instantánea con sonido de silbato y enlace directo al expediente del paciente en `labadmin`, desde donde puede descargar/imprimir directamente el PDF de la orden digital. |
+
+---
+
+## Consideraciones Fiscales y Administrativas
+*   **Aceptación y Liberación de Pagos:** El cobro del 100% del proyecto se rige por el esquema de 2 hitos (Proyecto 1: 50/50, Proyecto 2: 40/60).
+*   **Montos Libres:** Todas las cantidades listadas en esta propuesta son **montos netos (libres de impuestos)** a favor del Prestador.
+*   **Cálculo Inverso:** (RESICO) El Cliente (Persona Moral) es responsable de realizar el cálculo a la inversa (de neto a bruto) al momento de la facturación.
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Considering Tool Access**
+
+I'm currently evaluating the diverse tool options. I'm focusing on how various tools, from specialized viewers to general-purpose interfaces, shape the broader process. This analysis aims to determine the best application of each resource.
+
+
+**Prioritizing Tool Specificity**
+
+I'm now focusing on specific tool selection. I will prioritize the most tailored tool for each task. I'm actively avoiding generic commands for specialized actions, such as avoiding `cat` for file creation and `grep` within bash. Further, I will ensure explicit listing of related tools before any calls. I'm also reviewing the document for errors and inconsistencies, specifically addressing typos and discrepancies in section titles and content.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `Swoole`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.486991768s
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 July 2026, 10:47 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `Node\.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 July 2026, 10:47 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `WebSocket`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 July 2026, 10:47 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `reimpimir`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 July 2026, 10:47 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 July 2026, 10:47 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `  `
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 July 2026, 10:47 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Auditing The Document**
+
+I've audited the document and checked for double spaces. The results show only standard list formatting, which seems normal for this type of document. I'm focusing on the document's structural integrity, which appears sound so far.
+
+
+**Verifying Financial Data**
+
+I've just finished verifying the financial data in the document, specifically the investment amounts, payment milestones, timelines, and guarantees for each project. All values are coherent and match between the text and the table. I'm now moving on to examining the external investments related to infrastructure and suppliers, specifically the hosting and domain costs.
+
+
+**Analyzing Operational Flow**
+
+Now I'm diving into the operational flow and the actors involved. The steps outlined in the table seem logical and ordered. I am making sure the website, medical portal, and reception portal all feed into the order capture and generation process, which I have confirmed.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.997593486s
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 July 2026, 10:47 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L66-70)</summary>
+
+**Path:** `Unknown file`
+
+```
+| 17 | **Gestión de Usuarios y Catálogo de Estudios (Administrador)** | No aplica | ✅ El Administrador gestiona altas y bajas de médicos y recepcionistas, y mantiene actualizado el catálogo de estudios disponibles en el sistema. | Administrador |
+| 18 | **Historial de Órdenes y Búsqueda Retroactiva** | No aplica | ✅ Toda orden digital queda registrada permanentemente. La recepcionista puede consultar o reimprimir el PDF de cualquier orden pasada desde el buscador, sin importar su estado actual. | Recepcionista, Médico |
+| 19 | **Módulo de Reportes y Estadísticas** | No aplica | ✅ Conteos de pacientes por estado de la orden digital (Remitido, En Atención, Resultados Listos, Cerrada), consultables por día, semana, mes y año (hasta 5 años de historial). *No incluye cálculos financieros ni gestión de honorarios.* | Recepcionista, Médico |
+| | **--- 4. GARANTÍA, SOPORTE, PAGO DE SERVICIOS DE PLATAFORMA ---** | | | |
+| 20 | **Fase de Capacitación y Estabilización** | ✅ 10 Días (capacitación en administración de contenidos del sitio; principalmente remota) | ✅ 10 Días presencial al momento de requerirse | Médico, Recepcionista |
+```
+
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
+
+**Status:** Completed
+**Created:** 27 July 2026, 10:47 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
 </details>
 
 ---
