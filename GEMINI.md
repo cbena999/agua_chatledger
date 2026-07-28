@@ -398,4 +398,4 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 > - **Runbook**: Denominación del contexto maestro (GEMINI.md + .agents/) para **Gemini**.
 
 ## ⚠️ Reglas Especiales de Asistencia (Agentes IA)
-- **Pruebas de Navegador**: Queda estrictamente prohibido realizar pruebas de navegador (`browser_subagent`) de forma implícita (sin petición expresa del operador).
+- **Verificación Visual Automatizada**: Evita realizar la "Verificación Visual Automatizada" (pruebas de navegador/capturas con `browser_subagent`) por default. Debes esperar autorización explícita del usuario antes de ejecutarla.
