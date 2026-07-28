@@ -7,9 +7,9 @@
 | **Trajectory ID** | `ca25b296-481f-4bd7-a6c5-dfb52428862b` |
 | **Cascade ID** | `c4a2e136-eb90-4dc8-9045-6d7cef924e1b` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 1323 |
+| **Total Steps** | 1358 |
 | **Started** | 27 July 2026, 12:32 pm |
-| **Completed** | 27 July 2026, 10:47 pm |
+| **Completed** | 27 July 2026, 10:53 pm |
 
 ---
 
@@ -21794,6 +21794,634 @@ Now I'm diving into the operational flow and the actors involved. The steps outl
 
 **Status:** Completed
 **Created:** 27 July 2026, 10:47 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+## User Request
+
+quita esta linea "Si se contratan ambos, el tiempo máximo es de 2.5 meses (sincronizado en la introducción y en la tabla).", y asegurar que haya consistencia que la duracion de cada proyecto es independiente y no reduce nada al contratar ambos.
+Tambien asegurar explicito que se debe cubrir el ultimo pago en la "Aceptación"  , que se defina el significado de "Aceptación" de forma clara y con base a los docs .md de la version 1.1
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `Resumen_Oferta_Servicios.md`
+**Language:** markdown
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Considering Tool Accessibility**
+
+I'm currently focused on evaluating the tools at my disposal. I'm especially considering how each tool might enhance my ability to analyze information and process requests. The goal is to maximize their utility.
+
+
+
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/portafolio-dev-2026/blocklabgd/contrato-laesh`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.057425282s
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>Directory: `contrato-laesh` (3 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/portafolio-dev-2026/blocklabgd/contrato-laesh`
+
+| Name | Type | Size |
+|------|------|------|
+| `v1.0` | Directory | - |
+| `v1.1` | Directory | - |
+| `v1.1.3` | Directory | - |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/portafolio-dev-2026/blocklabgd/contrato-laesh/v1.1`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>Directory: `v1.1` (21 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/portafolio-dev-2026/blocklabgd/contrato-laesh/v1.1`
+
+| Name | Type | Size |
+|------|------|------|
+| `Acta_Firma_Aceptacion.md` | File | 1904 bytes |
+| `Anexo_A_Bloc_Digital.md` | File | 12065 bytes |
+| `Anexo_A_Paquete_Integral.md` | File | 8434 bytes |
+| `Anexo_A_Sitio_Web.md` | File | 7947 bytes |
+| `Anexo_B_Soporte_Produccion.md` | File | 3921 bytes |
+| `Anexo_Visual_Flujos_Operativos.md` | File | 15578 bytes |
+| `Anexo_Visual_Flujos_Operativos_v2.pdf` | File | 165567 bytes |
+| `Carta_Presentacion.md` | File | 2495 bytes |
+| `Carta_Presentacion_v2.pdf` | File | 154639 bytes |
+| `Contrato_Administracion_Servidor.md` | File | 7372 bytes |
+| `Contrato_Base_Desarrollo.md` | File | 16870 bytes |
+| `Cuadro_Comparativo_v2.pdf` | File | 205144 bytes |
+| `Guia_Exposicion_Diagramas.md` | File | 2167 bytes |
+| `Guia_Exposicion_Diagramas_v2.pdf` | File | 166470 bytes |
+| `Resumen_Oferta_Servicios.md` | File | 31229 bytes |
+| `Resumen_Oferta_Servicios_v2.pdf` | File | 388687 bytes |
+| `build_docs.sh` | File | 1071 bytes |
+| `build_pdf.py` | File | 14925 bytes |
+| `diagramas` | Directory | - |
+| `tecnicos` | Directory | - |
+| `video` | Directory | - |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `Aceptación`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 July 2026, 10:52 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Considering Available Tools**
+
+I'm currently evaluating the available tools, recognizing their potential utility. The initial assessment focuses on 'view_file' as a specific example, and on the capacity for general command execution. My thought process is now on determining when and how each tool becomes relevant, and their capabilities for this task.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Resumen_Oferta_Servicios.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.063721471s
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L77-99)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+---
+
+# SECCIÓN DE ANEXOS Y CONSIDERACIONES DETALLADAS
+*La siguiente sección profundiza en las normativas, riesgos, garantías y estructura legal que amparan la ejecución de cualquiera de las propuestas listadas en el Resumen Ejecutivo superior.*
+
+---
+
+## Condiciones y Requisitos Generales (Aplicables a todos los proyectos)
+*   **Modelo de Entrega y Estabilización:** Independientemente del proyecto elegido, se incluye una fase de **10 días naturales de Estabilización** (pruebas en vivo y capacitación) posterior al despliegue. Al concluir estos 10 días se firma el Acta de Aceptación, liquidando el hito final de pago y arrancando la Garantía correspondiente.
+*   **Presupuesto para Proveedores de Terceros (Infraestructura de Servidor y Dominio DNS):** Al ser un ecosistema 100% en la Nube (Cloud), el sistema operará en servidores contratados a nombre de "EL CLIENTE", garantizándole total independencia. **Como parte de esta oferta de servicios, mi función es apoyarle como guía consultor paso a paso para realizar estas compras con los proveedores correspondientes.** Es obligación de "EL CLIENTE" garantizar una conexión a internet estable en sus instalaciones. Los costos estimados de infraestructura (pagos directos al proveedor mediante domiciliación bancaria) se resumen a continuación:
+
+    | Concepto Externo (Proveedor) | Frecuencia | Inversión Estimada | Aplica para | Observaciones Operativas |
+    | :--- | :---: | :--- | :---: | :--- |
+    | **Hosting Básico (Hostinger)** | Anual | ~$500 MXN | Proyecto 1 | Plan de hosting compartido básico, suficiente para una página web estática. |
+    | **Servidor en la Nube VPS (Hostinger)** | Anual | ~$1,500 a ~$2,000 MXN | Proyecto 2 | Plan optimizado VPS KVM 2, ideal para soportar el ecosistema web y las notificaciones instantáneas. *(Nota: Si se contratan ambos proyectos, este servidor aloja ambos sistemas, omitiendo el Hosting Básico).* |
+    | **Dominio de Internet (.mx) / Registros DNS** | Anual | ~$600 MXN | Todos | Nombre público e institucional de su página web y configuración de registros DNS en Hostinger (Ej. `laesh.mx`). |
+    | **Dominio de Internet (.com.mx) / Registros DNS** | Anual | ~$400 a $600 MXN | Proyecto 1 (opcional) | Alternativa o complemento al `.mx`. Ambos dominios pueden apuntar al mismo sitio. Se recomienda registrar ambos para proteger la marca LAESH en internet. |
+
+> **Seguridad y Privacidad de Datos:** El sistema usa protocolos de seguridad modernos: toda la información viaja encriptada por internet (candado verde HTTPS), y las contraseñas se guardan cifradas.
+>
+> **Propiedad de Datos e Historial Clínico (5 años):** "EL CLIENTE" será siempre el dueño absoluto y exclusivo de toda su información procesada (pacientes, resultados, logotipos). Para brindar máxima tranquilidad y cumplir con estándares de salud, la base de datos está diseñada para retener el historial operativo del laboratorio hasta por **5 años**.
+>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Resumen_Oferta_Servicios.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L119-129)</summary>
+
+**Path:** `Unknown file`
+
+```
+| :--- | :--- | :--- |
+| **Caídas de Infraestructura de Terceros** | Interrupciones por mantenimiento o caídas globales del proveedor de hosting (Hostinger). | Contratación de la *Póliza de Servidor Mantenimiento* para copias de seguridad continuas y reactivación ágil (SLA de 2 horas). |
+| **Fallas en Impresión de Hojas** | El paciente podría llegar sin hoja impresa si la impresora del médico tratante falla. | La recepcionista recibe una notificación instantánea con sonido de silbato y enlace directo al expediente del paciente en `labadmin`, desde donde puede descargar/imprimir directamente el PDF de la orden digital. |
+
+---
+
+## Consideraciones Fiscales y Administrativas
+*   **Aceptación y Liberación de Pagos:** El cobro del 100% del proyecto se rige por el esquema de 2 hitos (Proyecto 1: 50/50, Proyecto 2: 40/60).
+*   **Montos Libres:** Todas las cantidades listadas en esta propuesta son **montos netos (libres de impuestos)** a favor del Prestador.
+*   **Cálculo Inverso:** (RESICO) El Cliente (Persona Moral) es responsable de realizar el cálculo a la inversa (de neto a bruto) al momento de la facturación.
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `2\.5 meses`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 July 2026, 10:52 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `2\.5`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 July 2026, 10:52 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Specific Tools**
+
+I'm focusing on the importance of selecting the most appropriate tool for each task. The goal is to maximize efficiency. It is important to emphasize that selecting the specific tool for a job avoids unnecessarily complex solutions, improving the accuracy of results. I'm exploring the implications of tool selection on overall workflow.
+
+
+**Refining Search Strategies**
+
+I'm reassessing my search methods, specifically why a `grep_search` failed. I discovered a literal string search for "2\.5" was the culprit, missing the intended regex. It's crucial to understand how literal string searching works versus regex. The key takeaway is: I need to ensure correct regex usage. Now I'm checking file lines to see if I am missing something.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `2\.5`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.403567625s
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 July 2026, 10:52 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/portafolio-dev-2026/blocklabgd/contrato-laesh/v1.1.3`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>Directory: `v1.1.3` (6 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/portafolio-dev-2026/blocklabgd/contrato-laesh/v1.1.3`
+
+| Name | Type | Size |
+|------|------|------|
+| `Anexo_A_Bloc_Digital.md` | File | 13520 bytes |
+| `Cuadro_Comparativo_v3.pdf` | File | 258442 bytes |
+| `Resumen_Oferta_Servicios.md` | File | 23600 bytes |
+| `Resumen_Oferta_Servicios_v3.pdf` | File | 313386 bytes |
+| `build_docs.sh` | File | 1085 bytes |
+| `build_pdf.py` | File | 15018 bytes |
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Considering Available Tools**
+
+I'm currently assessing the potential of available tools. My goal is to determine the optimal approach, considering the distinct capabilities of each tool. The 'view_file' tool seems straightforward, but I need to consider broader applications as well.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Anexo_A_Bloc_Digital.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.002276559s
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L64-84)</summary>
+
+**Path:** `Unknown file`
+
+```
+*   **Gestión financiera de referidores:** Cálculo de honorarios, comisiones, bonos o "monederos" para médicos por referidos.
+*   **Buzones Email:** Creación de cuentas de correo corporativo para empleados.
+*   Aplicación móvil nativa (iOS/Android).
+
+**6. Tecnología y entorno**
+*   **Stack Tecnológico:** PHP, MySQL, HTML/JS/CSS, Node.js / Swoole (versiones open-source estables para el servidor de notificaciones instantáneas), framework PHP MVC, Linux Ubuntu 24.x.
+*   **Infraestructura:** La aplicación requiere un servidor en la nube que cumpla con los requisitos del plan **VPS KVM 2 de Hostinger** (~$1,500 a ~$2,000 MXN/año) y el registro del **Dominio de Internet (.mx) / DNS** (~$600 MXN/año). Al operar en la Nube, "EL CLIENTE" debe garantizar una conexión a internet estable en sus instalaciones y una impresora configurada correctamente para la emisión de las hojas de solicitud en el lado médico. *El costo de renta de los servicios externos es responsabilidad directa de "EL CLIENTE" con sus proveedores.*
+*   **Retención de Datos:** La base de datos está diseñada para retener el historial operativo del laboratorio hasta por **5 años**. 
+
+**7. Calendario de entregas**
+El sistema tendrá un plazo máximo de desarrollo y entrega de **2 meses (60 días naturales)** contados a partir de la firma del presente anexo. *(Nota: Si se contratan ambos proyectos en conjunto, el tiempo máximo de entrega para la solución integral será de hasta 2.5 meses).*
+*   **Hito 1 — Análisis, diseño y desarrollo temprano:** Mes 1.
+*   **Hito 2 — Despliegue (Inicio de Estabilización de 10 días):** Mes 2 (Día 60).
+*   **Fin de Estabilización:** Día de firma del Acta de Aceptación y detonante para facturar el último pago.
+*   **Periodo de Garantía Total (20 días naturales):** Arranca posterior al pago final.
+
+**8. Precio, Desglose de Pagos y Facturación**
+El precio total de este proyecto es de **$25,000.00 MXN (Netos)**, pagadero conforme al siguiente esquema de 2 hitos:
+
+| Hito de Facturación | Porcentaje | Monto a Pagar | Condición de Entrega |
+| :--- | :---: | :--- | :--- |
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Anexo_A_Bloc_Digital.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L79-99)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+**8. Precio, Desglose de Pagos y Facturación**
+El precio total de este proyecto es de **$25,000.00 MXN (Netos)**, pagadero conforme al siguiente esquema de 2 hitos:
+
+| Hito de Facturación | Porcentaje | Monto a Pagar | Condición de Entrega |
+| :--- | :---: | :--- | :--- |
+| **Pago 1: Anticipo** | 40% | $10,000.00 MXN (Netos) | A la firma del presente contrato / anexo, previo al inicio del desarrollo. |
+| **Pago 2: Firma de Aceptación** | 60% | $15,000.00 MXN (Netos) | Contra la firma del Acta de Aceptación (Fin de Estabilización, Día 10). |
+| **TOTAL** | **100%** | **$25,000.00 MXN (Netos)** | |
+
+**9. Criterios de aceptación**
+*   La aplicación permite crear y guardar una solicitud y exportar/imprimir la hoja LAESH con código de barras y folio generado por el sistema sin errores.
+*   El portal `laesh.mx/labadmin` recibe una notificación instantánea ("globito" con pitido de silbato) al crearse una orden digital, con un enlace directo al registro del paciente para consultar datos o descargar la orden digital en PDF.
+*   El buscador en el portal `labadmin` permite localizar pacientes por folio o por nombre (activando autocompletado con un mínimo de 5 caracteres de precisión).
+*   El portal `labadmin` permite actualizar el estado a `En Atención`, subir el archivo PDF de resultados mediante carga manual (subida de PDF), cambiando automáticamente el estado a `Resultados Listos`, y cerrar la solicitud (`Cerrada`).
+*   Las notificaciones instantáneas ("globito" silencioso) se disparan exitosamente cuando los resultados están listos, incluyendo un enlace directo para descargar el PDF de resultados desde el portal del médico.
+*   Los tiempos de respuesta de la interfaz son aceptables y opera fluidamente en navegadores de escritorio (Chrome/Safari), cumpliendo la adaptabilidad móvil de forma exclusiva para el Portal Médico.
+
+_______________________________
+**FIRMA DE CONFORMIDAD - EL CLIENTE**
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Specific Tools**
+
+I'm focusing intently on tool selection. My top priority is to pick the most specialized tool available for each task. I understand that broad tools exist, but I need to make sure I am using the most efficient route by selecting the right tool for the job first.
+
+
+**Refining Tool Usage**
+
+I'm now deeply immersed in refining tool usage, particularly adhering to strict rules to avoid common pitfalls like `cat` for file manipulation or using `grep` within bash commands. I'm focusing on explicit listing of all related tools before execution and ensuring I am using the most specific tool, and not a more generic alternative. I am making progress in updating the documents and removing contradictory statements.
+
+I've also zeroed in on the definition and implications of "Aceptación" (Acceptance), and ensuring that the final payment is explicitly linked to the acceptance process, to ensure consistency with the requirements.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Resumen_Oferta_Servicios.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.530343639s
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L19-29)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+### Proyecto 2: Bloc Digital via Internet
+
+*   **Inversión Total:** $25,000.00 MXN
+*   **Esquema de Pago (2 Hitos):** 40% Anticipo ($10,000) / 60% Firma de Aceptación ($15,000).
+*   **Tiempo de Entrega:** 2 Meses (60 días naturales). *(Nota: Si se contratan ambos proyectos en conjunto, el tiempo máximo de entrega para la solución integral será de hasta 2.5 meses).*
+*   **Garantía:** 20 días naturales (Inicia a partir de la firma de Aceptación).
+*   **Alcance Funcional:** Automatización para crear y rastrear las solicitudes de estudio de laboratorio en un ecosistema web 100% privado:
+    1. **Generación de Orden Digital (`Remitido`):** El médico tratante crea la solicitud digital desde su portal (`laesh.mx/medicos`). El sistema genera una **hoja impresa (formato LAESH)** con un `#folio` único y código de barras simple. Esta orden digital queda asociada al expediente del paciente y **disponible de forma inmediata para su descarga en PDF desde el portal de recepción (`laesh.mx/labadmin`)**. Al crearse la orden digital, **se dispara automáticamente una notificación instantánea (globito contador con pitido de sonido silbato exclusivo y panel de detalles) al portal de recepción; al abrir el detalle de la notificación, la recepcionista cuenta con un enlace directo al registro del paciente** para consultar o re-imprimir el PDF si el paciente acude sin él.
+    2. **Recepción del Paciente (`En Atención`):** El paciente acude a la clínica con su hoja (o dictando su nombre). La recepcionista lo localiza mediante la notificación o usando un **buscador unificado e inteligente** (autocompletado a partir de 5 caracteres por folio o nombre en una misma barra de búsqueda) y cambia el estado a **En Atención**.
+    3. **Carga de Resultados y Notificación al Médico (`Resultados Listos`):** Cuando el examen clínico se realiza en LAESH, el personal sube el PDF de resultados mediante un botón/modal de **Carga Manual (Subida de PDF)** en `laesh.mx/labadmin`. Al subir el archivo, el sistema **actualiza automáticamente el estado a `Resultados Listos`** y dispara de forma inmediata una **notificación instantánea (globito contador silencioso y panel de detalles) al portal del médico (`laesh.mx/medicos`)**. En el mensaje de la notificación **se incluye un enlace directo para descargar el PDF de resultados**.
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Specific Tools**
+
+I'm focusing intently on tool selection. My initial approach is to always prioritize the most specific tool for each task. I understand the value in avoiding broader, more general tools when a dedicated one exists. I'm keen to make precise choices for optimal efficiency, and I will be avoiding redundancy in tool use.
+
+
+
+
+### Actions
+
+**Tool:** `multi_replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.062736082s
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 July 2026, 10:52 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Considering Available Tools**
+
+I'm currently assessing the utility of the available tools. I see a diverse set, ranging from file viewers to terminal access. My focus is on understanding which tools offer the most direct path to information and analysis, given the task at hand. I am considering which ones can be used together for optimal efficiency.
+
+
+
+
+### Actions
+
+**Tool:** `multi_replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.067774337s
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 July 2026, 10:52 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 July 2026, 10:52 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L19-27)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+### Proyecto 2: Bloc Digital via Internet
+
+*   **Inversión Total:** $25,000.00 MXN
+*   **Esquema de Pago (2 Hitos):** 40% Anticipo ($10,000) / 60% Firma de Aceptación ($15,000).
+*   **Tiempo de Entrega:** 2 Meses (60 días naturales). *(Nota: La duración de cada proyecto es independiente y no se reduce si se contratan ambos).*
+*   **Garantía:** 20 días naturales (Inicia a partir de la firma de Aceptación).
+*   **Alcance Funcional:** Automatización para crear y rastrear las solicitudes de estudio de laboratorio en un ecosistema web 100% privado:
+    1. **Generación de Orden Digital (`Remitido`):** El médico tratante crea la solicitud digital desde su portal (`laesh.mx/medicos`). El sistema genera una **hoja impresa (formato LAESH)** con un `#folio` único y código de barras simple. Esta orden digital queda asociada al expediente del paciente y **disponible de forma inmediata para su descarga en PDF desde el portal de recepción (`laesh.mx/labadmin`)**. Al crearse la orden digital, **se dispara automáticamente una notificación instantánea (globito contador con pitido de sonido silbato exclusivo y panel de detalles) al portal de recepción; al abrir el detalle de la notificación, la recepcionista cuenta con un enlace directo al registro del paciente** para consultar o re-imprimir el PDF si el paciente acude sin él.
+```
+
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
+
+**Status:** Completed
+**Created:** 27 July 2026, 10:53 pm
 
 ---
 
