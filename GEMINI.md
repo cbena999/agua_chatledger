@@ -146,6 +146,14 @@ Para evitar regresiones de interfaz y optimizar el uso de tokens, los agentes de
 9. **Prevención de Doble Envío Transaccional (Dexie / SW):**
    * Empleo de estados transicionales `'sending'` en IndexedDB (Dexie) a través de transacciones de escritura exclusivas. Esto bloquea la concurrencia entre hilos concurrentes del foreground (eventos `online`) y del background (`sync` del Service Worker), garantizando cero duplicaciones en el servidor.
 
+## 📄 Estándares de Oro: Gestión y Generación de Contratos
+
+Para mantener la consistencia jurídica, técnica y comercial de las propuestas y acuerdos de desarrollo con los clientes, se establecen las siguientes reglas:
+
+1. **Ubicación de PDFs Oficiales**: Todos los PDFs generados a partir de los documentos contractuales oficiales (`Contrato_Base_Desarrollo.md`, `Anexo_A_Sitio_Web.md` y `Anexo_A_Bloc_Digital.md`) deben almacenarse exclusivamente dentro del subdirectorio `contrato/` de la versión correspondiente (ej: `v1.1.3/contrato/`), manteniendo las propuestas comerciales, cartas de presentación, cuadros comparativos y diagramas auxiliares en el directorio raíz.
+2. **Firmas Bilaterales**: Todos los anexos de los contratos deben incluir obligatoriamente los bloques de firma de ambas partes ("EL PRESTADOR" y "EL CLIENTE"). En el caso de personas morales, el bloque de firma de "EL CLIENTE" debe incluir el nombre y firma del Representante Legal.
+3. **Centralización de la Adaptabilidad**: El alcance tecnológico de responsividad y compatibilidad de dispositivos (Sistemas Operativos, navegadores y la exclusión de tabletas o desarrollo PWA/nativo) se define y centraliza en el Contrato Marco. Los anexos se limitarán a referenciar esta definición.
+
 ---
 
 ## 🔒 Fixes de Seguridad en Motor de Recargos (2026-04-26)
