@@ -400,7 +400,8 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 
 **Homologación de Alcances y Análisis de Assets Contratos LAESH (2026-07-31):**
 *   **Corrección de Fechas y Nombres**: Actualización de la fecha de firma a "Lunes 3 de Agosto de 2026" y renombramiento a "Sitio Web Corporativo".
-*   **Homologación Cruzada**: Sincronización del Resumen Comercial vs los 3 anexos contractuales, ajustando el alcance a 6 secciones, 21 funcionalidades operativas, responsividad móvil/desktop, exclusiones de garantías (servidores/conexión) y limitantes de borrado para perfiles médicos.
+*   **Homologación Cruzada**: Sincronización del Resumen Comercial vs los 3 anexos contractuales, ajustando el alcance a 6 secciones, 21 funcionalidades operativas, limitantes de borrado para perfiles médicos, y exclusiones de garantías (servidores/conexión).
+*   **Precisión de Adaptabilidad (Responsividad)**: Modificación del término genérico "responsivo" para detallar los Sistemas Operativos compatibles (Windows 10/11, macOS 12+, Android 12+, iOS 16+), tamaños de pantalla soportados (1280px hasta 4K), compatibilidad nativa (Safari 17+, Chrome 115+, Edge 115+) y la exclusión explícita de tabletas (ej. iPad) y aplicaciones nativas o PWAs.
 *   **Identificación de Entregables del Cliente (Assets)**: Generación del listado maestro `assets_requeridos_cliente.md` a partir de un análisis de los mockups (v1.0) para asegurar la entrega de logotipos, Excel de catálogos y accesos de Hostinger a tiempo.
 *   **Eliminación de Anglicismos**: Purga final de términos comerciales ambiguos ("CMS", "tiempo real").
 
