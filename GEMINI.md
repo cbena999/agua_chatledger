@@ -404,6 +404,7 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 *   **Precisión de Adaptabilidad (Responsividad)**: Modificación del término genérico "responsivo" para detallar los Sistemas Operativos compatibles (Windows 10/11, macOS 12+, Android 12+, iOS 16+), tamaños de pantalla soportados (1280px hasta 4K), compatibilidad nativa (Safari 17+, Chrome 115+, Edge 115+) y la exclusión explícita de tabletas (ej. iPad) y aplicaciones nativas o PWAs.
 *   **Identificación de Entregables del Cliente (Assets)**: Generación del listado maestro `assets_requeridos_cliente.md` a partir de un análisis de los mockups (v1.0) para asegurar la entrega de logotipos, Excel de catálogos y accesos de Hostinger a tiempo.
 *   **Eliminación de Anglicismos**: Purga final de términos comerciales ambiguos ("CMS", "tiempo real").
+*   **Regla de Ubicación de Contratos (PDFs)**: Todos los PDFs generados a partir de los documentos contractuales oficiales (`Contrato_Base_Desarrollo.md`, `Anexo_A_Sitio_Web.md` y `Anexo_A_Bloc_Digital.md`) deben almacenarse exclusivamente dentro del subdirectorio `contrato/` (ej: `v1.1.3/contrato/`), manteniendo las propuestas comerciales, cartas de presentación y diagramas auxiliares en el directorio raíz.
 
 > [!IMPORTANT]
 > **Terminología de Sesión**:
