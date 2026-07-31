@@ -375,7 +375,7 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 *   **Watchdog de Fugas de Memoria WASM**: Diseño de una política *Kill-and-Respawn* para reiniciar de manera segura el Web Worker de VOSK en periodos de inactividad, previniendo fallos Out-of-Memory (OOM) en terminales de bajo hardware con sesiones prolongadas.
 *   **Documentación de Pruebas Manuales**: Inserción de recomendaciones de QA que aclaran el alcance técnico entre una Limpieza Total (Clear Site Data) y el botón operativo de "Forzar Sincronización" en la PWA.
 
-**Última actualización**: 2026-07-30
+**Última actualización**: 2026-07-31
 
 **Estabilización de Sesión Persistente, Interrupciones y Entrega de Turno (2026-07-06 — Sesión 1):**
 *   **Persistencia PHP Extendida**: Habilitado el tiempo de vida de sesión a **24 horas** en `commons.php` para prevenir expiraciones silenciosas en los dispositivos móviles durante la jornada laboral.
@@ -397,6 +397,12 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 *   **Condensación y Homologación de Documentos**: Reducción de extensión (Contrato Base a 3 págs, Anexo Sitio Web a 1 pág, Anexo Bloc Digital a 2 págs) manteniendo paridad semántica, legal y funcional.
 *   **Depuración de Extranjerismos y Alcances**: Traducción a español claro (panel de administración, hospedaje web, defectos de programación), extensión a 6 secciones en el sitio web (Promociones), precisión sobre no compra de hosting (solo configuración), inclusión de enlaces FB/WA, plazo a 10 días para contenidos, sesiones con reseteo admin, PDFs permanentes y panel de configuración global.
 *   **Compilación Automatizada de PDFs**: Extensión de `build_pdf.py` e impacto en `contrato/` (`Contrato_Base_Desarrollo.pdf`, `Anexo_A_Sitio_Web.pdf`, `Anexo_A_Bloc_Digital.pdf`).
+
+**Homologación de Alcances y Análisis de Assets Contratos LAESH (2026-07-31):**
+*   **Corrección de Fechas y Nombres**: Actualización de la fecha de firma a "Lunes 3 de Agosto de 2026" y renombramiento a "Sitio Web Corporativo".
+*   **Homologación Cruzada**: Sincronización del Resumen Comercial vs los 3 anexos contractuales, ajustando el alcance a 6 secciones, 21 funcionalidades operativas, responsividad móvil/desktop, exclusiones de garantías (servidores/conexión) y limitantes de borrado para perfiles médicos.
+*   **Identificación de Entregables del Cliente (Assets)**: Generación del listado maestro `assets_requeridos_cliente.md` a partir de un análisis de los mockups (v1.0) para asegurar la entrega de logotipos, Excel de catálogos y accesos de Hostinger a tiempo.
+*   **Eliminación de Anglicismos**: Purga final de términos comerciales ambiguos ("CMS", "tiempo real").
 
 > [!IMPORTANT]
 > **Terminología de Sesión**:
