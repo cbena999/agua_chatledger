@@ -1,0 +1,1040 @@
+# Docker Stack Update and HTTPS Viability
+
+## Metadata
+
+| Field | Value |
+|-------|-------|
+| **Trajectory ID** | `cece51c3-accc-4f5b-9231-cecc2fe29faf` |
+| **Cascade ID** | `28c90be0-ae4d-445d-96c6-27146a7e0447` |
+| **Type** | Agent Conversation |
+| **Total Steps** | 35 |
+| **Started** | 31 July 2026, 7:31 pm |
+| **Completed** | 31 July 2026, 7:34 pm |
+
+---
+
+## User Request
+
+Ambiente dev local y remoto para laesh 2 proyectos.
+Investigar, Buscar con el proposito de actualizar el stack docker images/containers para tener las versiones mas actuales y estables a hoy dia 31 julio 2026, para:  Apache HTTP Server 2.4,	 PHP 8.3, Procesador PHP-FPM 8.3, MariaDB 11, etc 
+
+1) Analiza estos containers/imagenes y indicame plan de actualización y riesgos.
+2) Identificar issues/gaps para el metodo usado para generar/actualizar el certificado https "free", para determinar la viabilidad de usarse para un servidor en producción a desplegar en un servidor Hostinger vps KVM 2
+8f5078bf2f43   
+f00f2e3fc29d
+LO anterior  con base a:
+file:///home/carlos/GitHub/caelitandem_home/restaurantb/docs/Tecnica_Infraestructura_Despliegue_Comandas_VOSK.html
+NO cambies nada.
+
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 31 July 2026, 7:31 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing the Requirements**
+
+I'm focusing on the user's request, specifically the instruction "NO cambies nada." I'm also examining the scope, which involves development environments, local and remote, for "laesh 2 proyectos" (or la). My priority is to understand this constraint and the implied task thoroughly.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Tecnica_Infraestructura_Despliegue_Comandas_VOSK.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.119724163s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infraestructura y Despliegue DevOps</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="cover">
+  <h1>Infraestructura y Despliegue DevOps</h1>
+  <div class="cover-meta">
+    <div><strong>Documento:</strong> Tecnica_Infraestructura_Despliegue_Comandas_VOSK</div>
+    <div><strong>Fecha:</strong> Junio 2026</div>
+  </div>
+  <a href="Especificacion_Tecnica_Comandas_VOSK.html" style="display:inline-block; margin-top:20px; color:#2563eb; text-decoration:none; font-weight:600;">&larr; Volver a la Especificación Técnica</a>
+</header>
+<main>
+<!-- ═══════════════ 10. INFRAESTRUCTURA ═══════════════ -->
+<section id="sec10">
+  <h2>10. Infraestructura</h2>
+
+  <h3 id="sec10-1">10.1. Servidor Ubuntu 22.04</h3>
+  <table>
+    <caption>Tabla 4. Especificaciones del Servidor</caption>
+    <thead><tr><th>Componente</th><th>Mínimo</th><th>Recomendado</th></tr></thead>
+    <tbody>
+      <tr><td>CPU</td><td>Intel Core i3 / AMD Ryzen 3 (4 núcleos)</td><td>Intel Core i5 / AMD Ryzen 5 (6 núcleos)</td></tr>
+      <tr><td>RAM</td><td>4 GB</td><td>8 GB</td></tr>
+      <tr><td>Almacenamiento</td><td>120 GB SSD</td><td>256 GB SSD NVMe</td></tr>
+      <tr><td>Red</td><td>Ethernet Gigabit + Wi-Fi 802.11ac</td><td>Ethernet Gigabit + Wi-Fi 6</td></tr>
+      <tr><td>USB</td><td>4 x USB 3.0</td><td>6 x USB 3.0</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Despliegue Unificado (Docker-Compose)</h4>
+  <p>Tanto para el entorno de Desarrollo (localhost) como para Producción (Servidor Ubuntu), se utiliza una estrategia de despliegue unificada basada en <strong>Docker Compose</strong>. Esto garantiza paridad absoluta entre entornos y aísla las dependencias del sistema operativo base.</p>
+  <p><em>(Ver sección 10.5 para el detalle completo de la arquitectura Docker LAMP).</em></p>
+
+  <h4>Configuración de Impresión (CUPS)</h4>
+  <p>Para la impresión de tickets, se instala CUPS y se configura una impresora térmica conectada por USB al servidor:</p>
+<pre><code>sudo apt install -y cups cups-bsd
+sudo usermod -aG lpadmin www-data
+# Agregar impresora térmica vía interfaz web de CUPS
+# http://localhost:631/admin
+# Guardar nombre de impresora en configuración del sistema</code></pre>
+
+  <h3 id="sec10-2">10.2. Dispositivos Android y Diademas</h3>
+  <table>
+    <caption>Tabla 5. Requerimientos de Dispositivos</caption>
+    <thead><tr><th>Especificación</th><th>Mínimo</th><th>Recomendado</th></tr></thead>
+    <tbody>
+      <tr><td>SO Android</td><td>8.0 (Oreo, API 26)</td><td>11+ (API 30)</td></tr>
+      <tr><td>RAM</td><td>3 GB</td><td>4 GB+</td></tr>
+      <tr><td>Almacenamiento libre</td><td>200 MB</td><td>500 MB</td></tr>
+      <tr><td>Procesador</td><td>64-bit, Octa-core 1.8 GHz</td><td>Snapdragon 6-series</td></tr>
+      <tr><td>Navegador</td><td>Chrome 90+</td><td>Chrome 120+</td></tr>
+      <tr><td>Bluetooth</td><td>4.2 (para diadema)</td><td>5.0+</td></tr>
+    </tbody>
+  </table>
+
+  <h4 id="sec10-2-1">10.2.1. Análisis y Evaluación de Hardware (Micrófonos y Diademas)</h4>
+  <p>Para mitigar las interferencias de ruido acústico en entornos comerciales demandantes (cocina, extractor, campanas, y el bullicio del salón), se definen los siguientes criterios de selección de hardware:</p>
+  <ul>
+    <li><strong>Conexión USB Nativa:</strong> Se prefiere sobre conectores Jack 3.5mm debido a su inmunidad a estática analógica e interferencias eléctricas del local. Para dispositivos Android se requiere adaptador OTG USB-C.</li>
+    <li><strong>Patrón de Captura Cardioide / Unidireccional:</strong> La cápsula del micrófono debe atenuar el sonido ambiental trasero y lateral, concentrando la captura en la voz del mesero/cocinero.</li>
+    <li><strong>Diadema Monoaural:</strong> Mantiene un oído libre para que el operario pueda escuchar a los clientes o compañeros mientras usa el sistema.</li>
+    <li><strong>Material Sanitario:</strong> Almohadillas de vinipiel o cuero sintético fáciles de limpiar y desinfectar. Evitar esponjas de espuma por acumulación de grasa y humedad.</li>
+  </ul>
+  <p><strong>Modelos Evaluados en Costo-Beneficio:</strong></p>
+  <ul>
+    <li><strong>Gama Económica (Xuuly / Genéricos de Call Center):</strong> Costo de ~$350 – $400 MXN. Cuenta con brazo flexible largo de 360° que posiciona la cápsula de forma precisa. Recomendado para fases iniciales.</li>
+    <li><strong>Gama Empresarial (Poly Blackwire 3210 / Plantronics):</strong> Costo de ~$750 – $800 MXN. Integra un chip procesador de señales digital (DSP) que suprime ruidos eléctricos antes de mandar la señal PCM a la PWA, maximizando la precisión del motor VOSK a tasas superiores al 99%.</li>
+  </ul>
+
+  <h3 id="sec10-3">10.3. Red Local</h3>
+  <div class="diagram-container">
+    <img src="topologia_red_local.png" alt="Topología de Red Local" class="diagram-img">
+  </div>
+  <p class="diagram-caption">Figura 3. Topología de red local del restaurante</p>
+
+  <table>
+    <caption>Tabla 6. Requisitos de Red</caption>
+    <thead><tr><th>Parámetro</th><th>Especificación</th></tr></thead>
+    <tbody>
+      <tr><td>Router</td><td>Dual band (2.4 GHz y 5 GHz), mínimo AC1200</td></tr>
+      <tr><td>Cobertura Wi-Fi</td><td>100% área de comedor y cocina (repetidores si es necesario)</td></tr>
+      <tr><td>Subred</td><td>192.168.x.x/24, servidor con IP estática</td></tr>
+      <tr><td>DNS local</td><td>comandas.local apuntando a IP del servidor</td></tr>
+      <tr><td>Puertos</td><td>80 (HTTP), 443 (HTTPS) abiertos</td></tr>
+      <tr><td>Ancho de banda local</td><td>Mínimo 20 Mbps entre dispositivos y servidor</td></tr>
+    </tbody>
+  </table>
+
+  <h3 id="sec10-4">10.4. Ambiente de Desarrollo (localhost)</h3>
+  <p>El entorno de desarrollo corre en la laptop del desarrollador con el siguiente stack:</p>
+
+  <table>
+    <caption>Tabla 10. Stack de Desarrollo Local</caption>
+    <thead><tr><th>Componente</th><th>Versión</th><th>Notas</th></tr></thead>
+    <tbody>
+      <tr><td>Servidor</td><td>Apache 2.4</td><td>localhost, configuración en XAMPP / nativo</td></tr>
+      <tr><td>PHP</td><td>8.3</td><td>Con PHP-FPM habilitado</td></tr>
+      <tr><td>Base de datos</td><td>MariaDB 11</td><td>Versión LTS uniforme en desarrollo y producción</td></tr>
+    </tbody>
+  </table>
+
+  <p>Documentación de instalación: <code>/home/carlos/GitHub/caelitandem_home/restaurantb/docs/INSTALLATION_SUMMARY.md</code></p>
+
+  <h4>HTTPS en Desarrollo</h4>
+  <p>Para desarrollo local se usa un certificado de confianza firmado por CA local (ver §10.4 / Opción B). La configuración HTTPS es obligatoria para que <code>getUserMedia()</code> funcione en Chrome Android. Esto sustituye al certificado autofirmado por defecto que no era de confianza para los dispositivos cliente en la red local.</p>
+
+  <div class="note">
+    <strong>Referencia de implementación HTTPS</strong>
+    Ver memoria de instalación: <a href="certificados%20locales%20https%20para%20android-webbrowser.html">certificados locales https para android-webbrowser.html</a>.
+  </div>
+
+  <h4>Acceso al Micrófono en Redes Locales (HTTPS)</h4>
+  <p>Dado que los navegadores móviles restringen el acceso al micrófono (<code>getUserMedia</code>) exclusivamente a contextos seguros (HTTPS o localhost), acceder desde dispositivos móviles a la IP del servidor de desarrollo local causará que el navegador bloquee el micrófono silenciosamente. Para resolver esto, se requiere un entorno HTTPS nativo confiable en la red local:</p>
+  
+  <h5>Despliegue con Certificados de Confianza y CA Local (Estándar del Sistema)</h5>
+  <p>Habilita HTTPS nativo en toda la red local mediante la generación de certificados y una Autoridad Certificadora (CA) propia con <code>mkcert</code>. Esto evita advertencias de seguridad y permite el uso nativo del micrófono en todos los dispositivos cliente. <strong>(Implementado con Éxito)</strong>:</p>
+  <p>Se ha implementado el generador de certificados <code>mkcert</code> apuntando a la IP local fija <code>192.168.1.71</code>. Para más detalles, consulte la memoria de instalación y los pasos de registro del certificado raíz en dispositivos cliente: <a href="certificados%20locales%20https%20para%20android-webbrowser.html">certificados locales https para android-webbrowser.html</a>.</p>
+  <p><em>Resultado: Chrome reconoce la conexión de la red local como segura por defecto (candado verde) y otorga permisos al micrófono de forma nativa e inmediata tras registrar la CA local en el dispositivo cliente.</em></p>
+
+
+  <h4>Reglas de Arquitectura para las Webapps (KDS y Caja)</h4>
+  <ul>
+    <li><strong>Framework:</strong> Flight PHP como micro-framework para routing y middleware.</li>
+    <li><strong>Vistas:</strong> Motor de plantillas Plates (League) para todas las vistas PHP.</li>
+    <li><strong>Interactividad y Event Polling:</strong> HTMX para intercambio parcial de HTML server-driven. Las interfaces críticas como el KDS (Cocina) y la Caja no usan WebSockets para evitar fugas de memoria, sino <strong>Event Polling</strong> nativo de HTMX (ej. <code>hx-trigger="every 3s"</code>) para lograr reactividad en tiempo real manteniendo la arquitectura frugál sin estado persistente.</li>
+    <li><strong>Autenticación:</strong> Delight PHP Auth para login, roles y sesiones.</li>
+    <li><strong>UI/UX:</strong> Responsiva, homologada, estilo sencillo y de alta usabilidad para los roles: Mesero, Cajero, Cocinero. Diseño basado en principios de UI/UX estándar y modernos al 2026.</li>
+  </ul>
+
+  <!-- Integración de Resumen de Instalación Docker LAMP -->
+  <hr style="margin: 40px 0; border: 0; border-top: 1px solid var(--color-border);">
+  <section id="sec10-5">
+  <h3>Instalación del Stack Docker LAMP – <strong>restaurantb</strong></h3>
+  <h4>📦 Descripción General</h4>
+  <p>Este documento resume todo el proceso de instalación y configuración del stack <strong>LAMP</strong> (Linux, Apache, MariaDB, PHP) para el proyecto <strong>restaurantb</strong> bajo Docker.  Incluye los componentes del <code>docker‑compose.yml</code>, los archivos de configuración <strong>default</strong> y <strong>custom</strong>, variables de entorno y los comandos habituales para operar el entorno.</p>
+  <h4>📋 Prerrequisitos</h4>
+  <ul>
+    <li>Docker Engine + Docker Compose instalados (versión 2.20+ recomendada).</li>
+    <li>Acceso a la carpeta del proyecto:</li>
+<pre><code>
+  cd /home/carlos/GitHub/caelitandem_home/restaurantb/contenedor
+</code></pre>
+    <li>(Opcional) Cliente MySQL heredado de XAMPP: <code>/opt/lampp/bin/mysql</code>.</li>
+  </ul>
+  <h4>🗂️ Estructura del proyecto</h4>
+<pre><code>
+restaurantb/
+├─ contenedor/
+│   ├─ Dockerfile                     # Construye la imagen <code>restaurantb_web</code>
+│   ├─ docker-compose.yml            # Orquesta los servicios (web, db, pma)
+│   ├─ .env                          # Variables de entorno (no versionado, pre-configurado para dev)
+│   ├─ setup-ssl.sh                  # Script de automatización de HTTPS local (mkcert)
+│   ├─ conf/
+│   │   ├─ php-restaurantb.ini       # Config PHP 8.3 adaptada de XAMPP
+│   │   ├─ mariadb-restaurantb.cnf   # Config MariaDB 11 adaptada de my.ini
+│   │   ├─ apache-restaurantb.conf    # Config Apache 2.4 (sin rutas Windows)
+│   │   └─ pma-config.user.inc.php   # Config phpMyAdmin (auth cookie, allow arbitrary)
+│   └─ bd/
+│       └─ init/
+│           └─ 01_pmadb.sql          # Crea usuario <code>pma</code> y base <code>phpmyadmin</code>
+</code></pre>
+  <h4>🐳 <code>docker‑compose.yml</code> – Servicios principales</h4>
+  <table>
+    <thead><tr><th>Servicio</th><th>Imagen</th><th>Puertos (host → contenedor)</th><th>Volúmenes</th><th>Comentario</th></tr></thead>
+    <tbody>
+      <tr><td><strong>web</strong></td><td><code>restaurantb_web:latest</code> (PHP 8.3‑Apache)</td><td><code>6001 → 80</code> (HTTP) <br> <code>8443 → 443</code> (HTTPS)</td><td><code>./www:/var/www/html</code> (código) <br> <code>../logs/apache:/var/log/apache2</code></td><td>Servidor web que sirve la aplicación. Config extra <code>apache-restaurantb.conf</code> y <code>php-restaurantb.ini</code> se copian en la imagen.</td></tr>
+      <tr><td><strong>db</strong></td><td><code>mariadb:11</code></td><td><code>6002 → 3306</code></td><td><code>db_data:/var/lib/mysql</code> <br> <code>../logs/mariadb:/var/log/mysql</code> <br> <code>../bd/init:/docker-entrypoint-initdb.d</code> (scripts de arranque) <br> <code>./conf/mariadb-restaurantb.cnf:/etc/mysql/conf.d/restaurantb.cnf:ro</code></td><td>Base de datos con configuración custom (charset utf8mb4, bind‑address 0.0.0.0, logs, slow‑query‑log, etc.).</td></tr>
+      <tr><td><strong>pma</strong></td><td><code>phpmyadmin:latest</code></td><td><code>6080 → 80</code> (expuesto a *0.0.0.0*)</td><td><code>./conf/pma-config.user.inc.php:/etc/phpmyadmin/config.user.inc.php:ro</code></td><td>Interfaz web para gestión de MySQL/MariaDB. <code>PMA_ARBITRARY=1</code> permite conectar a cualquier servidor, <code>AllowArbitraryServer</code> habilitado en la configuración.</td></tr>
+    </tbody>
+  </table>
+  <h4>🔧 Configuraciones *default* vs *custom*</h4>
+  <table>
+    <thead><tr><th>Archivo</th><th>Propósito</th><th>Estado</th><th>Comentario</th></tr></thead>
+    <tbody>
+      <tr><td><code>conf/php-restaurantb.ini</code></td><td><code>php.ini</code> adaptado a PHP 8.3 (límites, logging, timezone, etc.)</td><td><strong>Custom</strong></td><td>Comentados los valores Windows, se usan rutas Linux y se habilitan buenas prácticas de producción.</td></tr>
+      <tr><td><code>conf/mariadb-restaurantb.cnf</code></td><td><code>my.cnf</code> adaptado a MariaDB 11 (charset, innodb, buffers, bind‑address, logs)</td><td><strong>Custom</strong></td><td>Se omiten rutas Windows, se ajustan tamaños de buffer a contenedor.</td></tr>
+      <tr><td><code>conf/apache-restaurantb.conf</code></td><td>Config Apache extra (headers de seguridad, compresión, disables XAMPP‑only modules)</td><td><strong>Custom</strong></td><td>Carga módulos <code>ssl</code>, <code>rewrite</code>, <code>headers</code>, <code>deflate</code>; desactiva <code>ServerTokens</code> y <code>ServerSignature</code>.</td></tr>
+      <tr><td><code>conf/pma-config.user.inc.php</code></td><td>Config phpMyAdmin (blowfish secret, auth cookie, AllowArbitraryServer)</td><td><strong>Custom</strong></td><td>Permite login seguro y conexión a cualquier host MySQL.</td></tr>
+      <tr><td><code>bd/init/01_pmadb.sql</code></td><td>Script de inicialización (crea usuario <code>pma</code> y base <code>phpmyadmin</code>)</td><td><strong>Custom</strong></td><td>Se ejecuta sólo la primera vez del contenedor de DB.</td></tr>
+      <tr><td><code>setup-ssl.sh</code></td><td>Script de automatización HTTPS local (mkcert, detección IP, reinicio Apache)</td><td><strong>Custom</strong></td><td>Ejecuta todo el flujo de generación e inyección SSL.</td></tr>
+      <tr><td><code>.env</code></td><td>Variables de entorno (contraseñas, puertos)</td><td><strong>Custom</strong></td><td>No versionado (<code>.gitignore</code>). Pre-configurado localmente para desarrollo inmediato.</td></tr>
+    </tbody>
+  </table>
+  <h4>🔐 Variables de entorno (archivo <code>.env</code>)</h4>
+  <div class="note warning" style="background-color: #fffbeb; border-left: 4px solid #d97706; padding: 15px; margin-bottom: 20px; border-radius: 4px;">
+    <strong>⚠️ Credenciales de Desarrollo Local Únicamente:</strong> Las contraseñas mostradas a continuación son exclusivas del entorno de desarrollo local (Docker en LAN). <strong>Deben cambiarse obligatoriamente antes de cualquier despliegue en producción.</strong> Nunca versionar el archivo <code>.env</code> con credenciales reales en producción.
+  </div>
+<pre><code>
+# MariaDB credentials
+MARIADB_ROOT_PASSWORD=comite_2026
+MARIADB_DATABASE=restaurantb
+MARIADB_USER=restaurantb_usr
+MARIADB_PASSWORD=rb_pass_2026
+
+# Puertos externos (host → contenedor)
+WEB_HTTP_PORT=6001
+WEB_HTTPS_PORT=8443
+DB_PORT=6002
+PMA_PORT=6080
+</code></pre>
+  <h4>🚀 Comandos de operación</h4>
+  <table>
+    <thead><tr><th>Acción</th><th>Comando</th><th>Comentario</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Iniciar / (re)construir</strong></td><td><code>docker compose up -d --build</code></td><td>Levanta los 3 servicios; <code>--build</code> recompila la imagen <code>web</code> si el Dockerfile cambió.</td></tr>
+      <tr><td><strong>Configurar HTTPS local (mkcert)</strong></td><td><code>./setup-ssl.sh</code></td><td>Ejecuta en el host la detección de IP, genera el certificado SSL local y reinicia Apache de forma automatizada.</td></tr>
+      <tr><td><strong>Detener</strong></td><td><code>docker compose down</code></td><td>Elimina contenedores, redes y volúmenes *named* (pero conserva <code>db_data</code>).</td></tr>
+      <tr><td><strong>Reiniciar</strong></td><td><code>docker compose restart</code></td><td>Reinicia los contenedores sin volver a crear imágenes.</td></tr>
+      <tr><td><strong>Estado</strong></td><td><code>docker compose ps</code></td><td>Muestra estado y puertos expuestos.</td></tr>
+      <tr><td><strong>Logs (todos)</strong></td><td><code>docker compose logs -f</code></td><td>Sigue los logs en tiempo real.</td></tr>
+      <tr><td><strong>Logs de un servicio</strong></td><td><code>docker compose logs -f <service></code> (p.ej. <code>db</code>)</td><td>Filtra por servicio.</td></tr>
+      <tr><td><strong>Shell dentro de un contenedor</strong></td><td><code>docker compose exec <service> bash</code></td><td>Útil para depuración (<code>web</code>, <code>db</code>, <code>pma</code>).</td></tr>
+      <tr><td><strong>Conectar con cliente MySQL heredado</strong></td><td><code>/opt/lampp/bin/mysql -h 127.0.0.1 -P 6002 -u root -p</code></td><td>Contraseña: <code>comite_2026</code>. Cambia <code>root</code> por <code>restaurantb_usr</code> o <code>pma</code> según necesites.</td></tr>
+    </tbody>
+  </table>
+  <h4>🌐 <strong>Resumen rápido de la instalación Docker LAMP (restaurantb) con URLs completas (IP de Red 192.168.1.71)</strong></h4>
+  <table>
+    <thead><tr><th>Servicio</th><th>URL completa (Red Local / localhost)</th><th>Usuario / Contraseña (ejemplo)</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Web – HTTP</strong></td><td><code>http://192.168.1.71:6001</code> <br> (o <code>http://localhost:6001</code>)</td><td>—</td></tr>
+      <tr><td><strong>Web – HTTPS</strong></td><td><code>https://192.168.1.71:8443</code> <br> (o <code>https://localhost:8443</code>)</td><td>— (certificado de confianza firmado por CA local <code>mkcert</code>)</td></tr>
+      <tr><td><strong>phpMyAdmin</strong></td><td><code>http://192.168.1.71:6080</code> <br> (o <code>http://localhost:6080</code>)</td><td>Usa las credenciales de <strong>db</strong> (p. ej. <code>root/comite_2026</code>).</td></tr>
+      <tr><td><strong>MariaDB</strong> (acceso CLI)</td><td><code>mysql -h 192.168.1.71 -P 6002 -u <user> -p</code></td><td><code>root/comite_2026</code> <br> <code>restaurantb_usr/rb_pass_2026</code> <br> <code>pma/pma_pass_2026</code></td></tr>
+    </tbody>
+  </table>
+  <h4>📌 Notas finales</h4>
+  <ul>
+    <li>Los puertos están mapeados a <code>0.0.0.0</code>, por lo que cualquier máquina de la LAN puede acceder usando la IP del host (ej: <code>https://192.168.1.71:8443</code>).</li>
+    <li>Para producción en la nube (ej: Let's Encrypt), se reemplaza el certificado local <code>mkcert</code> por uno público y se cambian las contraseñas del archivo <code>.env</code>.</li>
+    <li>Los volúmenes <code>db_data</code> y los logs persisten en <code>../bd/data</code> y <code>../logs/*</code> respectivamente, facilitando backups.</li>
+    <li><strong>Directorio de Logs de Aplicación:</strong> Para evitar errores de permisos al mapear el volumen <code>../www</code> desde el host (debido a diferencias de UID/GID entre el host y el contenedor), el script de arranque <code>docker-entrypoint-ssl.sh</code> (ejecutado automáticamente como <code>root</code> en el inicio del contenedor) se encarga de crear el directorio <code>/var/www/html/restaurant/logs/</code> y otorgarle permisos totales de escritura (<code>chmod 777</code>). Esto asegura que el servidor web Apache (usuario <code>www-data</code>) pueda escribir logs de auditoría sin restricciones, complementado con un archivo placeholder <code>.gitkeep</code> en el repositorio para mantener la estructura limpia.</li>
+    <li><strong>Resolución Nativa de Activos PWA (web-assets):</strong> Para alinearse de forma estricta con las rutas precacheadas por el Service Worker (<code>sw.js</code>) y evitar dependencias de enlaces simbólicos (symlinks) en el sistema de archivos del host, todas las referencias a recursos estáticos en las vistas PHP usan la ruta absoluta a la raíz de Apache (ej. <code>/web-assets/css/style.css</code>). Dado que el volumen del contenedor web mapea <code>../www</code> directamente a <code>/var/www/html/</code>, el directorio <code>web-assets</code> queda expuesto de forma nativa e inmediata en la raíz web, resolviendo peticiones directamente sin intermediación ni redirecciones del micro-framework.</li>
+  </ul>
+  <h4>🎙️ Anexo: Uso del Micrófono en Dispositivos Móviles (Red Local)</h4>
+  <h5>El problema: <code>localhost</code> vs IP Local (<code>192.168.x.x</code>)</h5>
+  <p>Los navegadores modernos tienen una regla estricta: <code>localhost</code> se considera siempre un entorno seguro, permitiendo el acceso al micrófono (<code>getUserMedia</code>). Sin embargo, al acceder desde un dispositivo móvil en la misma red local a través de la IP de la máquina (ej: <code>https://192.168.1.71:8443</code>), el navegador detectará si el certificado es autofirmado y bloqueará el micrófono silenciosamente.</p>
+  <p>Aunque se acepte la advertencia ("Continuar de forma insegura"), el navegador degradará el contexto de seguridad y <strong>bloqueará el micrófono silenciosamente</strong>.</p>
+  <h5>Solución del Canal Seguro en Red Local</h5>
+  <p>Para garantizar el acceso seguro al micrófono sin alertas del navegador, se utiliza una Autoridad Certificadora (CA) local propia en combinación con <code>mkcert</code>. Esta es la forma robusta de habilitar HTTPS nativo para todos los dispositivos clientes sin tener que tocar configuraciones experimentales internas del navegador.</p>
+  
+  <h5>Instalación de la CA Local en Dispositivos Clientes Android (IP 192.168.1.71)</h5>
+  <p>Se ha generado una CA local y un certificado firmado para la IP <code>192.168.1.71</code>. Para habilitar el soporte de voz en dispositivos clientes Android:</p>
+  <ol>
+    <li>Descarga el certificado de la CA local desde el dispositivo móvil visitando: <a href="http://192.168.1.71:6001/ca.crt" target="_blank">http://192.168.1.71:6001/ca.crt</a>.</li>
+    <li>Instálalo en tu dispositivo Android yendo a: <em>Ajustes > Seguridad > Cifrado y credenciales > Instalar certificado > Certificado de CA</em>.</li>
+    <li>Con esto, al acceder a <code>https://192.168.1.71:8443</code> tendrás candado verde y soporte nativo e inmediato del micrófono.</li>
+  </ol>
+
+ 
+  <h5>B.2) Estado de hecho en laptops y computadoras en LAN</h5>
+  <p>Si deseas acceder a la aplicación desde laptops o computadoras en la misma red mediante Chrome con soporte de micrófono, instala la CA local descargada en el sistema cliente:</p>
+  <ul>
+    <li><strong>Windows:</strong> Descarga la CA desde <a href="http://192.168.1.71:6001/ca.crt" target="_blank">http://192.168.1.71:6001/ca.crt</a>. Haz doble clic en <code>ca.crt</code> &gt; <em>Instalar certificado</em> &gt; <em>Usuario actual</em> &gt; Selecciona <em>"Colocar todos los certificados en el siguiente almacén"</em> &gt; Elige <strong>"Entidades de certificación de raíz de confianza"</strong> &gt; Finalizar y aceptar alerta de Windows. Reinicia Chrome.</li>
+    <li><strong>macOS:</strong> Descarga la CA, ábrela con <em>Acceso a Llaveros</em> (Keychain Access), arrástrala al llavero de <em>Inicio de sesión</em> (login). Haz doble clic en el certificado, expande <em>Confianza</em> (Trust), y cambia a <strong>"Confiar siempre"</strong> (Always Trust). Reinicia Chrome.</li>
+    <li><strong>Linux (Ubuntu/Debian):</strong> Copia el certificado a <code>/usr/local/share/ca-certificates/ca.crt</code> y ejecuta <code>sudo update-ca-certificates</code>. Para registrarlo en el perfil NSS de Chrome, ejecuta: <code>certutil -d sql:$HOME/.pki/nssdb -A -t "CT,C,C" -n "CA Local" -i ca.crt</code> y reinicia Chrome.</li>
+  </ul>
+
+  <h5>B.3) Uso de setup-ssl.sh en Cambios de Host o de IP (Recomendado)</h5>
+  <p>Si la IP del servidor host cambia o estás levantando la instalación por primera vez en otra máquina, puedes automatizar todo el proceso con un solo comando:</p>
+  <ol>
+    <li>Asegúrate de tener <code>mkcert</code> instalado en el sistema host (<code>sudo apt update && sudo apt install -y mkcert</code>).</li>
+    <li>Ejecuta el script de inicialización desde la carpeta del contenedor: <br>
+        <code>./setup-ssl.sh</code></li>
+    <li>El script detectará la nueva IP de forma automática, generará los certificados válidos en <code>ssl/</code>, copiará la CA pública a <code>www/ca.crt</code> y reiniciará Apache.</li>
+    <li>Posteriormente, descarga la nueva CA raíz en cada teléfono Android desde la nueva IP e instálala en la sección de Seguridad.</li>
+  </ol>
+
+  <h5>B.4) Método Alternativo Manual Paso a Paso</h5>
+  <p>Si prefieres realizar el procedimiento de forma manual:</p>
+  <ol>
+    <li>Instale <code>mkcert</code> en el servidor local (ej: <code>sudo apt install mkcert</code>).</li>
+    <li>Genere la Autoridad Certificadora local: <code>mkcert -install</code>.</li>
+    <li>Cree los certificados para la nueva IP (ej. <code>192.168.1.100</code>): <br>
+        <code>mkcert -cert-file ../ssl/server.crt -key-file ../ssl/server.key 192.168.1.100 localhost 127.0.0.1</code>.</li>
+    <li>Reemplace los archivos generados en la carpeta <code>ssl/</code> del host (que se monta en <code>/etc/apache2/ssl</code> en el contenedor <code>web</code>).</li>
+    <li>Copie el certificado de la CA raíz pública (<code>~/.local/share/mkcert/rootCA.pem</code>) como <code>www/ca.crt</code> para permitir su descarga por red.</li>
+    <li>Reinicie el contenedor de Apache: <code>docker compose restart web</code>.</li>
+    <li>Instale el archivo <code>ca.crt</code> generado como <strong>Certificado de CA</strong> en los teléfonos clientes Android de prueba.</li>
+  </ol>
+  <p>*Para más detalles y comandos de solución de problemas, consulte la memoria de instalación: <a href="certificados%20locales%20https%20para%20android-webbrowser.html">certificados locales https para android-webbrowser.html</a>.*</p>
+  </section>
+</section>
+
+<!-- ═══════════════ 11. SEGURIDAD ═══════════════ -->
+<section id="sec11">
+  <h2>11. Seguridad, Resiliencia y Observabilidad</h2>
+  <h3>11.1. Protección Activa</h3>
+  <ul>
+    <li><strong>Validación de entradas:</strong> Sanitización de datos en todos los endpoints para prevenir SQL injection (uso estricto de PDO prepare/execute).</li>
+    <li><strong>Rate Limiting (Middleware):</strong> Para evitar ataques de fuerza bruta (DDoS) o colapso por reintentos de sincronización fallidos de las PWA, Flight PHP incorpora un Middleware de Rate Limiting que limita peticiones por IP y Token, devolviendo <code>429 Too Many Requests</code> si se excede el umbral.</li>
+    <li><strong>Backup automático:</strong> Script cron cada hora: <code>mysqldump comandas_db &gt; /backup/comandas_$(date +%Y%m%d_%H).sql</code></li>
+  </ul>
+
+  <h3>11.1.5. Observabilidad (Telemetría y Logging)</h3>
+  <p>La salud del sistema offline se monitoriza a través de un esquema estructurado (estilo Log4j / PSR-3) que garantiza la trazabilidad convergente:</p>
+  <ul>
+    <li><strong>Ingesta de Logs en Ráfaga:</strong> Las PWA móviles capturan errores localmente en Dexie.js (<code>logs_telemetria</code>) y envían ráfagas JSON (Batching) al servidor cuando recuperan la conectividad.</li>
+    <li><strong>Device Fingerprint:</strong> Cada PWA genera y almacena en caché un UUID único de dispositivo en su primer inicio. Esto permite al servidor identificar exactamente de qué tablet o diadema proviene cada error reportado.</li>
+    <li><strong>Correlation ID:</strong> Toda transacción o comanda originada en el frontend genera un identificador único que viaja por la red hasta la base de datos MariaDB. Si la transacción falla en PDO, el error registrado hereda este ID, logrando trazar el ciclo de vida completo de la petición (Trazabilidad Distribuida).</li>
+    <li><strong>Dashboard Centralizado (Log Viewer):</strong> Una interfaz administrativa en el servidor construida con HTMX permite visualizar, filtrar (INFO, WARN, ERROR, CRITICAL) y buscar en tiempo real los registros de la tabla <code>SYS_LOGS</code>, cruzando errores del backend con los errores del cliente (PWA).</li>
+    <li><strong>Database Log Rotation:</strong> Para prevenir el colapso del disco duro del servidor por acumulación masiva de registros telemétricos, se configura un <strong>MariaDB Event</strong> (tarea programada del motor BD) que ejecuta un <em>Hard Delete</em> diario de registros INFO/DEBUG con más de 30 días de antigüedad, conservando los errores críticos.</li>
+  </ul>
+
+  <h3>11.2. Resiliencia Operativa</h3>
+  <ul>
+    <li><strong>Reconocimiento 100% offline:</strong> VOSK no requiere internet. La transcripción ocurre localmente.</li>
+    <li><strong>Cola offline:</strong> Comandas se almacenan en IndexedDB ante pérdida de Wi-Fi y se sincronizan al restaurar.</li>
+    <li><strong>Independencia de cloud:</strong> Sin dependencia de AWS, Google Cloud, Azure, ni APIs externas.</li>
+    <li><strong>UPS recomendado:</strong> 600VA+ para protección ante cortes eléctricos.</li>
+    <li><strong>Caché persistente:</strong> El modelo VOSK permanece en IndexedDB tras reinicios del navegador.</li>
+    <li><strong>Evicción IndexedDB:</strong> Llamar a <code>navigator.storage.persist()</code> para solicitar almacenamiento persistente y evitar que el navegador elimine el modelo VOSK o la cola offline.</li>
+    <li><strong>Dexie en modo incógnito:</strong> IndexedDB puede fallar silenciosamente en modo incógnito. Envolver operaciones Dexie en <code>try/catch</code> y avisar al usuario si la persistencia no está disponible.</li>
+    <li><strong>Background Sync en Doze Mode (D1):</strong> En Android con ahorro de batería activo, el Service Worker puede estar congelado horas. Las comandas offline no se envían automáticamente al reconectar. Solución: cola de reintentos manual en Dexie como respaldo.</li>
+  </ul>
+
+  <h3>11.3. Privacidad</h3>
+  <ul>
+    <li><strong>Audio nunca sale del dispositivo:</strong> Las grabaciones se procesan localmente y no se transmiten ni almacenan.</li>
+    <li><strong>Datos almacenados mínimos:</strong> Solo texto transcrito, hora y productos. Sin biométricos ni datos sensibles de clientes.</li>
+    <li><strong>Control local:</strong> Todos los datos residen físicamente en el servidor del restaurante.</li>
+  </ul>
+
+  <h3 id="sec11-4">11.4. Issues Conocidos y Mitigaciones (PWA Android)</h3>
+  <p>El catálogo completo de problemas técnicos identificados en el despliegue PWA/TWA sobre dispositivos Android, junto con sus mitigaciones, ha sido trasladado al documento de control de proyecto.</p>
+  <a href="Control_Proyecto_Comandas_VOSK.html#sec2" style="display:inline-block; margin-top:10px; margin-bottom:20px; color:#2563eb; text-decoration:none; font-weight:600;">&rarr; Ver Issues Conocidos y Mitigaciones</a>
+
+
+  <h3 id="sec11-5">11.5. Control Cronológico y Mitigación de Desfases (Marcas de Tiempo)</h3>
+  <p>En un entorno offline, la desincronización de relojes entre los dispositivos cliente (Chrome) y el servidor (Apache/MariaDB) o el envío de comandas horas después de su creación debido a fallas de red, exige políticas cronológicas estrictas:</p>
+  
+  <h4>1. Flujo PWA hacia Servidor (PWA to Server Side)</h4>
+  <ul>
+    <li>Al finalizar un dictado o acción en la PWA, el script <code>app.js</code> inyecta en el payload de IndexedDB:
+      <ul>
+        <li><code>cliente_timestamp</code>: La hora absoluta del dispositivo (para auditoría).</li>
+        <li><code>duracion_offline_ms</code>: Un contador dinámico que inicia en 0 y acumula la duración exacta que el registro pasa encolado localmente.</li>
+      </ul>
+    </li>
+    <li>Al restaurar la conexión, el Service Worker transmite el payload con el valor acumulado de <code>duracion_offline_ms</code>.</li>
+    <li>El servidor calcula el instante real del registro restando el tiempo offline del instante de recepción:
+      <pre><code>Hora_Real_Registro = server_received_time - duracion_offline_ms</code></pre>
+    </li>
+    <li>Esta marca calculada se inyecta en los Stored Procedures de MariaDB, garantizando que el historial refleje la secuencia cronológica real del negocio, independientemente de desfases de red.</li>
+  </ul>
+
+  <h4>2. Flujo Servidor hacia PWA (Server Side to PWA)</h4>
+  <ul>
+    <li>Las alertas y notificaciones emitidas por Server-Sent Events (SSE) incluyen obligatoriamente <code>server_sent_timestamp</code> y un tiempo de vida útil (<code>ttl_segundos</code>, ej: 120s).</li>
+    <li>Si al llegar al cliente la diferencia temporal excede el TTL, la alerta se descarta o desvía a un historial secundario silencioso.</li>
+    <li>Para evitar que ráfagas de notificaciones acumuladas durante desconexiones activen la reproducción masiva de TTS ("Voz Fantasma"), el script limpia la cola de SpeechSynthesis ejecutando <code>window.speechSynthesis.cancel()</code> si el desfase del paquete entrante excede los 5 segundos.</li>
+  </ul>
+
+</section>
+
+<!-- ═══════════════ 12. VINCULACIÓN CON SKILLS Y ESTÁNDARES DevOps ═══════════════ -->
+<section id="sec12">
+  <h2>12. Vinculación con Skills del Agente (SSOT)</h2>
+  <p>La infraestructura, automatización NTFS, bases de datos y control de servicios del servidor de comandas se rige por los siguientes estándares documentados en el directorio <code>.agents/skills/</code>:</p>
+  <ul>
+    <li><strong>Apache 2.4 Hardening (<code>.agents/skills/skill-apache24-hardening/SKILL.md</code>):</strong> Directivas de virtualización, seguridad en virtual hosts, y tunelización con PHP-FPM.</li>
+    <li><strong>MariaDB 11 Ops (<code>.agents/skills/skill-mariadb11/SKILL.md</code>):</strong> Tuning del optimizador de consultas, replicación y features de la versión 11 para la base <code>restaurantb</code>.</li>
+    <li><strong>Database Evolution (<code>.agents/skills/skill-database-evolution/SKILL.md</code>):</strong> Modelado e histórico de splits de tablas de transacciones.</li>
+    <li><strong>Native Service Worker (<code>.agents/skills/skill-service-worker-native/SKILL.md</code>):</strong> Cacheo persistente del shell de aplicación y optimización de redes móviles.</li>
+    <li><strong>Dexie.js IndexedDB (<code>.agents/skills/skill-dexie-indexeddb/SKILL.md</code>):</strong> Persistencia e indexación offline de comandas y logs.</li>
+    <li><strong>Flight PHP Framework (<code>.agents/skills/skill-flightphp/SKILL.md</code>):</strong> Inyección de dependencias, controladores ligeros y contratos REST.</li>
+    <li><strong>Plates Templating Patterns (<code>.agents/skills/skill-plates-templating/SKILL.md</code>):</strong> Reutilización de fragmentos HTML y layouts de caja/cocina.</li>
+    <li><strong>Delight PHP Auth (<code>.agents/skills/skill-delight-php-auth/SKILL.md</code>):</strong> Autenticación persistente y seguridad de accesos.</li>
+    <li><strong>HTMX Patterns (<code>.agents/skills/skill-htmx-patterns/SKILL.md</code>):</strong> Integración server-driven sin recargar el navegador.</li>
+    <li><strong>UI/UX Modern Refactor (<code>.agents/skills/skill-ui-modern-refactor/SKILL.md</code>):</strong> Plantillas modernas y responsividad de componentes.</li>
+  </ul>
+</section>
+
+</main>
+</body>
+</html>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 31 July 2026, 7:31 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `docker-compose.yml`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# ============================================================
+#  docker-compose.yml — restaurantb  (LAMP Stack + phpMyAdmin)
+#  Servicios:
+#    web  — PHP 8.3 + Apache + SSL
+#    db   — MariaDB 11 LTS  (acceso externo vía puerto DB_PORT)
+#    pma  — phpMyAdmin (acceso a todas las BDs del servidor)
+#
+#  Puertos configurables en .env:
+#    WEB_HTTP_PORT=6001   → http://localhost:6001
+#    WEB_HTTPS_PORT=8443  → https://localhost:8443
+#    DB_PORT=6002         → mysql -h <ip_host> -P 6002 -u restaurantb_usr
+#    PMA_PORT=6080        → http://localhost:6080
+#
+#  Uso:
+#    cd contenedor/
+#    docker compose up -d --build    # Primera vez (build imagen web)
+#    docker compose up -d            # Arranques posteriores (~5 seg)
+#    docker compose down             # Detiene sin borrar datos
+#    docker compose logs -f web      # Logs en vivo
+#    docker compose logs -f pma      # Logs phpMyAdmin
+# ============================================================
+
+name: restaurantb
+
+services:
+
+  # ── Servidor Web: PHP 8.3 + Apache + SSL ─────────────────
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: restaurantb_web:latest
+    container_name: restaurantb_web
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "${WEB_HTTP_PORT:-6001}:80"
+      - "${WEB_HTTPS_PORT:-8443}:443"
+    volumes:
+      - ../www:/var/www/html:rw
+      - ../logs/apache:/var/log/apache2:rw
+      - ../ssl:/etc/apache2/ssl:ro
+    environment:
+      - APACHE_RUN_USER=www-data
+      - APACHE_RUN_GROUP=www-data
+    networks:
+      - restaurantb_net
+    healthcheck:
+      test: ["CMD", "curl", "-fsk", "https://localhost/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+
+  # ── Base de Datos: MariaDB 11 LTS ────────────────────────
+  #    Acceso externo (otro host en la red):
+  #      mysql -h <IP_DEL_HOST_DOCKER> -P ${DB_PORT} \
+  #            -u restaurantb_usr -p restaurantb
+  db:
+    image: mariadb:11
+    container_name: restaurantb_db
+    restart: unless-stopped
+    ports:
+      # 0.0.0.0:DB_PORT → accesible desde cualquier host de la LAN
+      - "0.0.0.0:${DB_PORT:-6002}:3306"
+    environment:
+      MARIADB_ROOT_PASSWORD: "${MARIADB_ROOT_PASSWORD}"
+      MARIADB_DATABASE:      "${MARIADB_DATABASE}"
+      MARIADB_USER:          "${MARIADB_USER}"
+      MARIADB_PASSWORD:      "${MARIADB_PASSWORD}"
+    volumes:
+      - db_data:/var/lib/mysql:rw
+      - ../logs/mariadb:/var/log/mysql:rw
+      # Scripts SQL ejecutados solo la primera vez (BD vacía)
+      - ../bd/init:/docker-entrypoint-initdb.d:ro
+      # Configuración custom adaptada de my.ini XAMPP (cbm 2026)
+      - ./conf/mariadb-restaurantb.cnf:/etc/mysql/conf.d/restaurantb.cnf:ro
+    command: >
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+      --bind-address=0.0.0.0
+      --log-error=/var/log/mysql/mariadb_errors.log
+      --slow-query-log=1
+      --slow-query-log-file=/var/log/mysql/mariadb_slow.log
+      --long-query-time=2
+    networks:
+      - restaurantb_net
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  # ── phpMyAdmin ───────────────────────────────────────────
+  #    Acceso: http://<IP_HOST>:${PMA_PORT}  (cualquier host en la LAN)
+  #    Config adaptada de: opt-xampp7.4.33/config.inc.php (cbm 2026)
+  #    Login:  root / comite_2026  (acceso completo a todas las BDs)
+  #            restaurantb_usr / rb_pass_2026  (solo BD de la app)
+  pma:
+    image: phpmyadmin:latest
+    container_name: restaurantb_pma
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      # 0.0.0.0 → accesible desde cualquier host de la LAN
+      - "0.0.0.0:${PMA_PORT:-6080}:80"
+    volumes:
+      # Config adaptada del config.inc.php de XAMPP (cbm 2026)
+      - ./conf/pma-config.user.inc.php:/etc/phpmyadmin/config.user.inc.php:ro
+    environment:
+      # Apunta al contenedor db por nombre de servicio (red interna)
+      PMA_HOST:             db
+      PMA_PORT:             3306
+      # Habilita conexión a cualquier servidor MySQL/MariaDB desde la UI
+      PMA_ARBITRARY:        1
+      # Límite de importación (consistente con upload_max_filesize en php.ini)
+      UPLOAD_LIMIT:         40M
+      # Zona horaria (cbm 2026)
+      TZ:                   America/Mexico_City
+    networks:
+      - restaurantb_net
+
+  # ── Vosk Server (ASR Offline) ────────────────────────────
+  #    Servidor WebSocket para reconocimiento de voz en Español
+  #    Modelo: alphacep/kaldi-es (small)
+  #    Acceso WS: ws://<IP_HOST>:${VOSK_PORT:-2700}
+  vosk:
+    image: alphacep/kaldi-es:latest
+    container_name: restaurantb_vosk
+    restart: unless-stopped
+    ports:
+      # 0.0.0.0 → accesible desde cualquier host (para el Web browser del teléfono)
+      - "0.0.0.0:${VOSK_PORT:-2700}:2700"
+    environment:
+      # Optimizaciones opcionales para Vosk pueden ir aquí (por defecto es websocket server on 2700)
+      TZ: America/Mexico_City
+    networks:
+      - restaurantb_net
+
+# ── Red Dedicada ─────────────────────────────────────────────
+networks:
+  restaurantb_net:
+    driver: bridge
+
+# ── Volúmenes ────────────────────────────────────────────────
+volumes:
+  db_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ../bd/data
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Dockerfile`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# ============================================================
+#  Dockerfile — restaurantb / Servicio Web
+#  Base: PHP 8.3 + Apache (LTS estable, imagen oficial)
+#  Extensiones: pdo_mysql, gd, zip, bcmath, mbstring
+#  SSL:  certificado auto-firmado en /etc/ssl/restaurantb/
+#        (ruta interna — independiente del volumen host ssl/)
+# ============================================================
+FROM php:8.3-apache
+
+LABEL maintainer="caelitandem_home"
+LABEL description="PHP 8.3 + Apache con SSL y extensiones para restaurantb"
+
+# ── 1. Dependencias del sistema ──────────────────────────────
+RUN apt-get update && apt-get install -y --no-install-recommends \
+      openssl \
+      libpng-dev \
+      libjpeg-dev \
+      libfreetype6-dev \
+      libzip-dev \
+      libonig-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# ── 2. Extensiones PHP (se compilan y cachean en esta capa) ──
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j"$(nproc)" \
+        pdo_mysql \
+        gd \
+        zip \
+        bcmath \
+        mbstring
+
+# ── 3. Configuración PHP ─────────────────────────────────────
+# Adaptada de opt-xampp7.4.33/php.ini (cbm 2026)
+# Cada directiva documentada en conf/php-restaurantb.ini
+COPY conf/php-restaurantb.ini /usr/local/etc/php/conf.d/restaurantb.ini
+
+# ── 4. Módulos Apache ────────────────────────────────────────
+# Adaptados de opt-xampp7.4.33/httpd.conf (cbm 2026)
+RUN a2enmod ssl rewrite headers deflate
+
+# ── 4b. Configuración Apache extra ───────────────────────────
+# Adaptada de httpd.conf + httpd-xampp.conf (sin dirs Windows)
+COPY conf/apache-restaurantb.conf /etc/apache2/conf-available/restaurantb.conf
+RUN a2enconf restaurantb
+
+# ── 5. VirtualHost SSL ───────────────────────────────────────
+COPY conf/ssl-vhost.conf /etc/apache2/sites-available/restaurantb-ssl.conf
+RUN a2ensite restaurantb-ssl
+
+# ── 6. Certificado auto-firmado (ruta INTERNA — no colisiona
+#       con el volumen bind-mount del host en /etc/apache2/ssl)
+RUN mkdir -p /etc/ssl/restaurantb && chmod 700 /etc/ssl/restaurantb \
+    && openssl req -x509 -nodes -days 730 -newkey rsa:2048 \
+         -keyout /etc/ssl/restaurantb/server.key \
+         -out    /etc/ssl/restaurantb/server.crt \
+         -subj   '/C=MX/ST=Oaxaca/L=Local/O=Restaurantb/CN=localhost' \
+    && chmod 600 /etc/ssl/restaurantb/server.key
+
+# ── 7. Entrypoint: selecciona cert real (volumen) o fallback ─
+COPY conf/docker-entrypoint-ssl.sh /usr/local/bin/docker-entrypoint-ssl.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint-ssl.sh
+
+EXPOSE 80 443
+
+# El entrypoint inyecta el cert correcto y luego cede a
+# docker-php-entrypoint (entrypoint original de la imagen base)
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint-ssl.sh"]
+CMD ["apache2-foreground"]
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `setup-ssl.sh`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+#!/bin/bash
+# ==============================================================================
+#  setup-ssl.sh — Automatización de Certificados HTTPS locales con mkcert
+# ==============================================================================
+#
+# Este script se ejecuta en el HOST y automatiza todo el proceso de:
+#   1. Detección dinámica de la IP local de red del host.
+#   2. Verificación/Instalación de la CA local mediante mkcert.
+#   3. Generación del certificado SSL en la carpeta ssl/ del host.
+#   4. Copia del certificado de la CA raíz a la carpeta web para su descarga.
+#   5. Reinicio del contenedor de Apache.
+#
+
+# Detener el script si ocurre algún error
+set -e
+
+# Asegurar que el script se ejecuta en el directorio 'contenedor'
+cd "$(dirname "$0")"
+
+echo "⚙️  Iniciando configuración de certificados locales HTTPS..."
+
+# 1. Detectar la IP activa de la red local del host de forma dinámica
+IP_LOCAL=$(ip route get 1.1.1.1 2>/dev/null | grep -oP 'src \K\S+' || true)
+if [ -z "$IP_LOCAL" ]; then
+    IP_LOCAL=$(hostname -I | awk '{print $1}')
+fi
+
+if [ -z "$IP_LOCAL" ]; then
+    echo "⚠️  No se pudo detectar la IP de red local. Usando fallback 127.0.0.1"
+    IP_LOCAL="127.0.0.1"
+else
+    echo "🌐 IP local de red detectada: $IP_LOCAL"
+fi
+
+# 2. Localizar el ejecutable mkcert (global o local)
+if command -v mkcert &> /dev/null; then
+    MKCERT_CMD="mkcert"
+elif [ -x "./mkcert" ]; then
+    MKCERT_CMD="./mkcert"
+else
+    echo "❌ ERROR: 'mkcert' no está instalado en el sistema host ni se encontró un binario local en $(pwd)/mkcert."
+    echo "👉 Para instalar mkcert ejecute:"
+    echo "   sudo apt update && sudo apt install -y mkcert"
+    echo "👉 O descargue el binario ejecutable directamente en esta carpeta con el nombre 'mkcert':"
+    echo "   https://github.com/FiloSottile/mkcert/releases"
+    exit 1
+fi
+echo "🔧 Usando binario mkcert: $MKCERT_CMD"
+
+# 3. Asegurar la inicialización de la CA local
+echo "🔑 Verificando / Inicializando la Autoridad Certificadora (CA) local..."
+if ! $MKCERT_CMD -install; then
+    echo "⚠️  Nota: No se pudo registrar la CA automáticamente en los almacenes del navegador del host (requiere sudo interactivo)."
+    echo "   Esto es normal en entornos no interactivos de desarrollo. La CA de desarrollo ya ha sido creada."
+fi
+
+# 4. Asegurar que existe la carpeta de certificados ssl/ con permisos adecuados
+mkdir -p ../ssl
+
+# 5. Generar los certificados para la IP detectada y los orígenes locales
+echo " Emitiendo certificados para: $IP_LOCAL, localhost, 127.0.0.1..."
+$MKCERT_CMD -cert-file ../ssl/server.crt -key-file ../ssl/server.key "$IP_LOCAL" localhost 127.0.0.1
+
+# Establecer permisos adecuados para que el contenedor pueda leerlos de forma segura
+chmod 644 ../ssl/server.crt
+chmod 600 ../ssl/server.key
+
+# 6. Exponer la CA pública raíz en el directorio web (www/ca.crt) para descarga fácil en dispositivos clientes
+CA_ROOT_PATH=$($MKCERT_CMD -CAROOT)/rootCA.pem
+if [ -f "$CA_ROOT_PATH" ]; then
+    echo "📦 Copiando CA raíz a la carpeta pública web..."
+    cp "$CA_ROOT_PATH" ../www/ca.crt
+    chmod 644 ../www/ca.crt
+    echo "✅ CA raíz disponible para descarga por red en: http://$IP_LOCAL:6001/ca.crt"
+else
+    echo "⚠️  No se encontró la ruta de la CA raíz en: $CA_ROOT_PATH. No se copió la CA raíz."
+fi
+
+# 7. Reiniciar el contenedor web de Apache para cargar los nuevos certificados
+if command -v docker &> /dev/null && docker compose ps &> /dev/null; then
+    echo "🔄 Reiniciando contenedor web de Apache..."
+    docker compose restart web
+    echo "✅ Apache reiniciado con éxito."
+else
+    echo "⚠️  Docker o Docker Compose no están corriendo. Los certificados se aplicarán en el próximo inicio."
+fi
+
+echo "🎉 ¡Infraestructura SSL local configurada exitosamente!"
+echo "👉 Visite: https://$IP_LOCAL:8443 en su navegador."
+echo "👉 Registre el certificado 'ca.crt' en su dispositivo Android si planea usar el micrófono."
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `docker-entrypoint-ssl.sh`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+#!/bin/sh
+# ============================================================
+#  docker-entrypoint-ssl.sh
+#  Selecciona el certificado SSL correcto en runtime:
+#    - Si el volumen /etc/apache2/ssl/ contiene server.crt
+#      y server.key válidos → usa esos (cert real/custom)
+#    - Si no → usa el auto-firmado de /etc/ssl/restaurantb/
+#              generado durante el build de la imagen
+#  Crea un symlink en /run/ssl-active/ apuntando al cert activo.
+#  Luego cede la ejecución al entrypoint original de PHP-Apache.
+# ============================================================
+
+set -e
+
+ACTIVE_DIR="/run/ssl-active"
+VOLUME_CRT="/etc/apache2/ssl/server.crt"
+VOLUME_KEY="/etc/apache2/ssl/server.key"
+FALLBACK_CRT="/etc/ssl/restaurantb/server.crt"
+FALLBACK_KEY="/etc/ssl/restaurantb/server.key"
+
+mkdir -p "$ACTIVE_DIR"
+
+if [ -f "$VOLUME_CRT" ] && [ -f "$VOLUME_KEY" ] && [ -s "$VOLUME_CRT" ]; then
+    echo "[SSL] Usando certificado del volumen: $VOLUME_CRT"
+    ln -sf "$VOLUME_CRT" "$ACTIVE_DIR/server.crt"
+    ln -sf "$VOLUME_KEY" "$ACTIVE_DIR/server.key"
+else
+    echo "[SSL] Volumen ssl/ vacío — usando certificado auto-firmado (fallback)"
+    ln -sf "$FALLBACK_CRT" "$ACTIVE_DIR/server.crt"
+    ln -sf "$FALLBACK_KEY" "$ACTIVE_DIR/server.key"
+fi
+
+# Asegurar la existencia y permisos de escritura del directorio de logs de la aplicación
+mkdir -p /var/www/html/restaurant/logs
+chmod 777 /var/www/html/restaurant/logs
+
+# Ceder al entrypoint original de la imagen php:8.3-apache
+exec docker-php-entrypoint "$@"
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 31 July 2026, 7:33 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Container Data**
+
+I've gathered some great data! I've been focusing on container `8f5078bf2f43` and its environment. It's using `php:8.3-apache` as its base image, currently running Debian 12 (Bookworm). The PHP version is 8.3.31, built in May 2026. Apache is at version 2.4.67, also built recently in May 2026.
+
+
+
+
+### Actions
+
+**Tool:** `search_web`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.069419706s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Web Research
+
+**Status:** Completed
+**Created:** 31 July 2026, 7:33 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `search_web`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Web Research
+
+**Status:** Completed
+**Created:** 31 July 2026, 7:34 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `search_web`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Web Research
+
+**Status:** Completed
+**Created:** 31 July 2026, 7:34 pm
+
+---
+
+---
+
+*Generated by Chatledger for Antigravity*
