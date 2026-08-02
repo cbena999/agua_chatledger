@@ -41,6 +41,18 @@ Este archivo es el punto de entrada principal para el asistente de IA (Antigravi
 > (y los otros 10 documentos de la suite). 
 > **Cualquier desviación técnica o de UX/UI respecto a estos 12 HTMLs se considera un bug crítico.** No asumas flujos web estándar (ej. interfaces táctiles) si la especificación dicta otra cosa (ej. interfaces de voz exclusivas).
 
+### 🩺 Reglas Específicas: Proyecto LAESH (Bloc Digital & Sitio Web)
+| Regla | Descripción | Archivo |
+| :--- | :--- | :--- |
+| **19** | **Arquitectura Frugal y Bootstrap Global** | [.agents/rules/19-laesh-arquitectura-frugal.md](file:///.agents/rules/19-laesh-arquitectura-frugal.md) |
+| **20** | **Servidor WebSockets Swoole v6, Bridge y QoS** | [.agents/rules/20-laesh-swoole-qos-notificaciones.md](file:///.agents/rules/20-laesh-swoole-qos-notificaciones.md) |
+| **21** | **Trazabilidad SQL, Observabilidad y Logs de Dev** | [.agents/rules/21-laesh-trazabilidad-observabilidad.md](file:///.agents/rules/21-laesh-trazabilidad-observabilidad.md) |
+| **22** | **Estándares de Conectividad, BD y Persistencia** | [.agents/rules/22-laesh-mariadb-conexion-estandares.md](file:///.agents/rules/22-laesh-mariadb-conexion-estandares.md) |
+| **23** | **Supremacía de la Especificación HTML** | [.agents/rules/23-laesh-supremacia-especificacion-html.md](file:///.agents/rules/23-laesh-supremacia-especificacion-html.md) |
+
+> [!IMPORTANT]
+> **MANDATO ESTRICTO PARA PROYECTO LAESH:** Todo desarrollo, refactorización o propuesta de arquitectura debe auditarse obligatoriamente contra los documentos maestros en `laesh/et/`: `Especificacion_Tecnica.html`, `Tecnica_Modelo_Datos.html`, `Tecnica_Infraestructura_Despliegue.html` y `Memoria de Instalación Certificados Locales HTTPS.html`. Cualquier desviación técnica se considera un bug crítico.
+
 ---
 
 ## 🛠️ Skills Personalizadas (Workflows y Estándares)
