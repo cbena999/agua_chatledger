@@ -15,3 +15,6 @@ Cada instancia de PDO creada por `Common\DB` debe ejecutar las siguientes senten
 - **Bajas Lógicas (Soft Deletes):** Queda estrictamente prohibido el uso de `DELETE` físico sobre entidades clínicas clave (`PACIENTES`, `ESTUDIOS`, `ORDENES`). Se utilizará la columna `activo = false` o ENUMs de estado.
 - **Vistas Lógicas (Views):** Se pre-formatearán consultas complejas (JOINs) en Vistas de MariaDB (ej. `vw_ordenes_completas`) para descargar de procesamiento a PHP-FPM y renderizar fragmentos HTMX ultrarrápidos.
 - **Integridad ACID y Stored Procedures:** La creación de órdenes y asignación de folios consecutivos unificados debe encapsularse en Procedimientos Almacenados (ej: `CrearOrdenLaboratorio`) con bloques `START TRANSACTION`, `COMMIT` y `ROLLBACK`.
+- **Generación On-The-Fly de Solicitudes Digitales:** Las solicitudes digitales expedidas por el médico al paciente NO se almacenan en servidor; se renderizan dinámicamente al vuelo a partir de los datos en `ordenes` y `detalle_ordenes`.
+- **Almacenamiento Paramétrico y Depuración de Resultados (8 Meses):** La tabla `resultados_pdf` almacena únicamente `nombre_archivo`. La ruta base (`ruta_almacenamiento_pdf`) y la política de depuración automática a 8 meses (`tiempo_depuracion_pdf_meses = 8`) se parametrizan en la tabla `configuraciones`.
+
