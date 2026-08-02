@@ -7,9 +7,8 @@
 | **Trajectory ID** | `cece51c3-accc-4f5b-9231-cecc2fe29faf` |
 | **Cascade ID** | `28c90be0-ae4d-445d-96c6-27146a7e0447` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 1409 |
+| **Total Steps** | 1471 |
 | **Started** | 31 July 2026, 7:31 pm |
-| **Completed** | 2 Aug 2026, 12:18 pm |
 
 ---
 
@@ -35105,6 +35104,887 @@ I'm focusing intently on tool selection. My initial approach now prioritizes the
 
 - **Model:** Gemini 3.6 Flash (High)
 </details>
+
+---
+
+## User Request
+
+Incluye en la especifica tecnica o de base de datos lo siguiente, crea/añade seccion segun corresponda:
+
+1. Que los pdfs de solicitud digital que expide el medico al paciente, no se almacenen, que se generen al momento de acceder al link.
+2. Copia /home/carlos/GitHub/caelitandem_home/portafolio-dev-2026/blocklabgd/contrato-laesh/v1.1.3/mockup1.0/ hacia /home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/website/propuesta-1/ , sera la UI 1 del web site a refinar y faltaria la propuesta-2
+3. En la tabla resultados_pdf , se añade este campo: nombre_archivo; y este campo file_path  se mueva a la tabla configuraciones como uno de los registro de datos. Otro registro mas es: Tiempo de la depuración de los pdfs de resultados, quede en 8 meses.
+
+
+---
+
+### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
+
+**Status:** Completed
+**Created:** 2 Aug 2026, 4:49 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Initiating Core Analysis**
+
+I'm currently considering the broad applicability of available tools and trying to determine which ones are critical for initial analysis. I'm focusing on those that provide a foundational understanding of the problem space, as opposed to tools with narrow application.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.072791700s
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 2 Aug 2026, 4:49 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/website/propuesta-1`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>Directory: `propuesta-1` (6 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/website/propuesta-1`
+
+| Name | Type | Size |
+|------|------|------|
+| `assets` | Directory | - |
+| `gestion-web.html` | File | 45448 bytes |
+| `imprimir_orden.html` | File | 25265 bytes |
+| `index.html` | File | 37153 bytes |
+| `labadmin.html` | File | 54501 bytes |
+| `medicos.html` | File | 44019 bytes |
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Specific Tools**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones. My goal is to maximize efficiency, so I am always aiming to use the least generalized tool possible for a given task. I'm prioritizing the `view_file` tool over a terminal command if I simply need to read a file's content, for example.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `resultados_pdf`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.107147389s
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 2 Aug 2026, 4:50 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Tecnica_Modelo_Datos.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L104-129)</summary>
+
+**Path:** `Unknown file`
+
+```
+            int estado_id FK
+            datetime hora_captura
+        }
+        DETALLE_ORDENES {
+            bigint id PK
+            bigint orden_id FK
+            int estudio_id FK
+            string notas
+        }
+        RESULTADOS_PDF {
+            bigint id PK
+            bigint orden_id FK
+            string file_path
+            timestamp fecha_subida
+        }
+        HISTORIAL_ESTADOS_ORDEN {
+            bigint id PK
+            bigint orden_id FK
+            int estado_anterior_id FK
+            int estado_nuevo_id FK
+            int cambiado_por_user_id FK
+            timestamp created_at
+        }
+        NOTIFICACIONES {
+            bigint id PK
+            int user_id FK
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Tecnica_Modelo_Datos.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L254-299)</summary>
+
+**Path:** `Unknown file`
+
+```
+<td>PK: id | FK: medico_id, recepcion_id -&gt; users(id)<br/>FK: paciente_id -&gt; pacientes(id)<br/>FK: estado_id -&gt; catalogo_estados(id)</td>
+</tr>
+<tr>
+<td><strong>detalle_ordenes</strong></td>
+<td>Estudios individuales solicitados por cada orden</td>
+<td>notas</td>
+<td>PK: id | FK: orden_id -&gt; ordenes(id)<br/>FK: estudio_id -&gt; estudios(id)</td>
+</tr>
+<tr>
+<td><strong>resultados_pdf</strong></td>
+<td>Almacenamiento y metadatos de los resultados adjuntos</td>
+<td>file_path, fecha_subida</td>
+<td>PK: id | FK: orden_id -&gt; ordenes(id)</td>
+</tr>
+<tr>
+<td><strong>notas_orden</strong></td>
+<td>Bitácora de observaciones manuales (médico/recepción) sobre una orden (ej. "Muestra hemolizada")</td>
+<td>fecha, texto, autor_rol</td>
+<td>PK: id | FK: orden_id -&gt; ordenes(id)<br/>FK: user_id -&gt; users(id)</td>
+</tr>
+<tr>
+<td><strong>historial_estados_orden</strong></td>
+<td>Bitácora de tiempos operativos para reportes y estadísticas</td>
+<td>created_at</td>
+<td>PK: id | FK: orden_id -&gt; ordenes(id)<br/>FK: estado_anterior_id, estado_nuevo_id -&gt; catalogo_estados(id)<br/>FK: cambiado_por_user_id -&gt; users(id)</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Diccionario de Datos: Trazabilidad y Auditoría</caption>
+<thead><tr><th>Tabla</th><th>Descripción</th><th>Campos Principales</th><th>PK / Relaciones (FK)</th></tr></thead>
+<tbody>
+<tr>
+<td><strong>folios_control</strong></td>
+<td>Control de emisión atómica de folios únicos (ej. LAESH-00001)</td>
+<td>tipo_documento, ultimo_folio, prefijo, longitud</td>
+<td>PK: id</td>
+</tr>
+<tr>
+<td><strong>sys_logs</strong></td>
+<td>Ingesta centralizada de logs del sistema para observabilidad general</td>
+<td>level, message, ip_address, created_at</td>
+<td>PK: id | FK: user_id -&gt; users(id)</td>
+</tr>
+<tr>
+<td><strong>fallback_log</strong></td>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `configuracion`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 2 Aug 2026, 4:50 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Tecnica_Modelo_Datos.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L139-244)</summary>
+
+**Path:** `Unknown file`
+
+```
+            string descripcion
+            string imagen_path
+            boolean activo
+        }
+        CONFIGURACIONES {
+            int id PK
+            string clave
+            string valor
+            string descripcion
+        }
+
+        USERS ||--o| EMPLEADOS : "1:1 tiene"
+        USERS ||--o| PERFILES_MEDICOS : "1:1 detalla (médico)"
+        USERS ||--o{ RBAC_PERMISOS_USUARIOS : "1:N tiene"
+        RBAC_PERMISOS ||--o{ RBAC_PERMISOS_USUARIOS : "1:N asignado_a"
+        USERS ||--o{ SYS_LOGS : "1:N genera"
+        USERS ||--o{ NOTIFICACIONES : "1:N recibe"
+        USERS ||--o{ ORDENES : "1:N emite (médico)"
+        USERS ||--o{ ORDENES : "1:N atiende (recepción)"
+        PACIENTES ||--o{ ORDENES : "1:N tiene"
+        ESTUDIOS ||--o{ DETALLE_ORDENES : "1:N solicitado_en"
+        ORDENES ||--|{ DETALLE_ORDENES : "1:N contiene"
+        ORDENES ||--o| RESULTADOS_PDF : "1:1 tiene"
+        CATALOGO_ESTADOS ||--o{ ORDENES : "1:N clasifica"
+        ORDENES ||--o{ HISTORIAL_ESTADOS_ORDEN : "1:N registra"
+        USERS ||--o{ HISTORIAL_ESTADOS_ORDEN : "1:N cambia"
+        CATALOGO_ESTADOS ||--o{ HISTORIAL_ESTADOS_ORDEN : "1:N histórico"
+        </div>
+<h3 id="sec4-2">4.2. Diccionario de Datos (Backend MariaDB)</h3>
+<table>
+<caption>Diccionario de Datos: Autenticación y Usuarios</caption>
+<thead><tr><th>Tabla</th><th>Descripción</th><th>Campos Principales</th><th>PK / Relaciones (FK)</th></tr></thead>
+<tbody>
+<tr>
+<td><strong>users</strong></td>
+<td>Cuentas de autenticación (Delight-Auth)</td>
+<td>email, password, username, roles_mask, status</td>
+<td>PK: id</td>
+</tr>
+<tr>
+<td><strong>users_*</strong> (auxiliares)</td>
+<td>Tablas nativas auxiliares de Delight-Auth para control de accesos y seguridad</td>
+<td>users_remembered (sesiones activas), users_throttling (tasa de peticiones), users_audit_log (auditoría de eventos)</td>
+<td>Relaciones FK a <code>users(id)</code></td>
+</tr>
+<tr>
+<td><strong>empleados</strong></td>
+<td>Atributos operativos del personal de la clínica</td>
+<td>nombre_completo, rol (ENUM), activo</td>
+<td>PK: user_id | FK: user_id -&gt; users(id)</td>
+</tr>
+<tr>
+<td><strong>perfiles_medicos</strong></td>
+<td>Atributos específicos y editables del médico</td>
+<td>especialidad, cedula_profesional, telefono_contacto, direccion_consultorio</td>
+<td>PK: user_id | FK: user_id -&gt; users(id)</td>
+</tr>
+<tr>
+<td><strong>rbac_permisos</strong></td>
+<td>Catálogo central de permisos del sistema</td>
+<td>nombre, descripcion</td>
+<td>PK: id</td>
+</tr>
+<tr>
+<td><strong>rbac_permisos_usuarios</strong></td>
+<td>Asignación Many-to-Many de privilegios (RBAC)</td>
+<td>asignado_el</td>
+<td>PK: user_id, permiso_id | FK: user_id -&gt; users(id), FK: permiso_id -&gt; rbac_permisos(id)</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Diccionario de Datos: Catálogo Base</caption>
+<thead><tr><th>Tabla</th><th>Descripción</th><th>Campos Principales</th><th>PK / Relaciones (FK)</th></tr></thead>
+<tbody>
+<tr>
+<td><strong>estudios</strong></td>
+<td>Catálogo base detallado, alimentado vía archivo Excel</td>
+<td>codigo, nombre, categoria, <strong>tiempo_procesamiento</strong>, <strong>muestra_requerida</strong>, <strong>indicaciones_preparacion</strong>, activo</td>
+<td>PK: id</td>
+</tr>
+<tr>
+<td><strong>web_contenidos</strong></td>
+<td>Motor CMS Frugal para la web pública corporativa</td>
+<td>seccion (ENUM: Banner, Promocion, Paquete, Membresia, Indicacion), titulo, descripcion, imagen_path, activo</td>
+<td>PK: id</td>
+</tr>
+<tr>
+<td><strong>configuraciones</strong></td>
+<td>Parámetros globales paramétricos del administrador</td>
+<td>clave, valor, descripcion</td>
+<td>PK: id</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Diccionario de Datos: Transaccional (Bloc Digital)</caption>
+<thead><tr><th>Tabla</th><th>Descripción</th><th>Campos Principales</th><th>PK / Relaciones (FK)</th></tr></thead>
+<tbody>
+<tr>
+<td><strong>catalogo_estados</strong></td>
+<td>Catálogo paramétrico de estados del ciclo de vida de una orden</td>
+<td>valor, descripcion</td>
+<td>PK: id</td>
+</tr>
+<tr>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Considering Tool Access**
+
+I'm currently evaluating the implications of having various tools available. Specifically, I'm analyzing how different tools, ranging from specialized ones like 'view_file' to broadly applicable ones, could shape my problem-solving approach. I'm focusing on the potential impact of this access on my efficiency and overall effectiveness.
+
+
+**Prioritizing Tool Specificity**
+
+I've been instructed to prioritize the most specific tool for each task, avoiding general-purpose tools when possible. I must never use 'cat' for file creation or appending within bash commands, and I'll use 'grep_search' instead of calling 'grep' directly in bash. Before using any tool, I now explicitly list related tools to determine the most suitable. I'm focusing on the architectural implications of this approach.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Tecnica_Modelo_Datos.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.597297222s
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L109-124)</summary>
+
+**Path:** `Unknown file`
+
+```
+            bigint orden_id FK
+            int estudio_id FK
+            string notas
+        }
+        RESULTADOS_PDF {
+            bigint id PK
+            bigint orden_id FK
+            string file_path
+            timestamp fecha_subida
+        }
+        HISTORIAL_ESTADOS_ORDEN {
+            bigint id PK
+            bigint orden_id FK
+            int estado_anterior_id FK
+            int estado_nuevo_id FK
+            int cambiado_por_user_id FK
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 2 Aug 2026, 4:50 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Tecnica_Modelo_Datos.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L224-274)</summary>
+
+**Path:** `Unknown file`
+
+```
+<td>PK: id</td>
+</tr>
+<tr>
+<td><strong>configuraciones</strong></td>
+<td>Parámetros globales paramétricos del administrador</td>
+<td>clave, valor, descripcion</td>
+<td>PK: id</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Diccionario de Datos: Transaccional (Bloc Digital)</caption>
+<thead><tr><th>Tabla</th><th>Descripción</th><th>Campos Principales</th><th>PK / Relaciones (FK)</th></tr></thead>
+<tbody>
+<tr>
+<td><strong>catalogo_estados</strong></td>
+<td>Catálogo paramétrico de estados del ciclo de vida de una orden</td>
+<td>valor, descripcion</td>
+<td>PK: id</td>
+</tr>
+<tr>
+<td><strong>pacientes</strong></td>
+<td>Demografía clínica de los pacientes para captura de órdenes</td>
+<td>nombre_completo, fecha_nacimiento, sexo, telefono</td>
+<td>PK: id</td>
+</tr>
+<tr>
+<td><strong>ordenes</strong></td>
+<td>Cabecera de la solicitud clínica y su ciclo de vida</td>
+<td>folio_unico, hora_captura</td>
+<td>PK: id | FK: medico_id, recepcion_id -&gt; users(id)<br/>FK: paciente_id -&gt; pacientes(id)<br/>FK: estado_id -&gt; catalogo_estados(id)</td>
+</tr>
+<tr>
+<td><strong>detalle_ordenes</strong></td>
+<td>Estudios individuales solicitados por cada orden</td>
+<td>notas</td>
+<td>PK: id | FK: orden_id -&gt; ordenes(id)<br/>FK: estudio_id -&gt; estudios(id)</td>
+</tr>
+<tr>
+<td><strong>resultados_pdf</strong></td>
+<td>Almacenamiento y metadatos de los resultados adjuntos</td>
+<td>file_path, fecha_subida</td>
+<td>PK: id | FK: orden_id -&gt; ordenes(id)</td>
+</tr>
+<tr>
+<td><strong>notas_orden</strong></td>
+<td>Bitácora de observaciones manuales (médico/recepción) sobre una orden (ej. "Muestra hemolizada")</td>
+<td>fecha, texto, autor_rol</td>
+<td>PK: id | FK: orden_id -&gt; ordenes(id)<br/>FK: user_id -&gt; users(id)</td>
+</tr>
+<tr>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Specific Tools**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones. My goal is to maximize efficiency, so I am always aiming to use the least generalized tool possible for a given task. I'm prioritizing the `view_file` tool over a terminal command if I simply need to read a file's content, for example.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.126081918s
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 2 Aug 2026, 4:50 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Tecnica_Modelo_Datos.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L359-380)</summary>
+
+**Path:** `Unknown file`
+
+```
+  `query_text` TEXT NOT NULL,
+  `error_msg` TEXT NULL,
+  `fecha` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  INDEX `idx_hash_fecha` (`query_hash`, `fecha`),
+  INDEX `idx_origen` (`origen`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+</code></pre>
+
+<h3 id="sec4-5">4.5. Directiva Operativa de Consulta (Indexación y Rendimiento)</h3>
+<ul>
+<li><strong>Rendimiento de Autorización (RBAC):</strong> La tabla <code>rbac_permisos_usuarios</code> se estructura con una llave primaria compuesta que indexa los registros agrupados físicamente por <code>user_id</code> para autorización ultra-rápida en cada petición HTTP.</li>
+<li><strong>Rendimiento en Búsqueda de Pacientes:</strong> Para mantener la promesa de un autocompletado asíncrono responsivo (HTMX) al buscar pacientes, se establecerá un índice adecuado (FULLTEXT o B-Tree compuesto) sobre el <code>nombre_completo</code> en <code>pacientes</code> y <code>folio_unico</code> en la tabla <code>ordenes</code>.</li>
+<li><strong>Motor Transaccional y Cascadas (Integridad Fuerte):</strong> Se aplicarán restricciones lógicas a nivel de motor (ON DELETE CASCADE) para proteger la consistencia de tablas pivote o detalles transaccionales.</li>
+<li><strong>Bajas Lógicas (Soft Deletes):</strong> En contraste con las cascadas fuertes, para entidades clínicas clave (como <code>PACIENTES</code> o <code>ESTUDIOS</code>) se prohíbe estrictamente el borrado físico (Hard Delete). Se utilizarán banderas booleanas o ENUMs (ej. <code>activo = false</code>) y las Vistas de MariaDB se encargarán de filtrar los inactivos, preservando así la inmutabilidad de la historia clínica.</li>
+<li><strong>Log Rotation y Purgado (SYS_LOGS):</strong> Para evitar un sobre-consumo de almacenamiento, se programará un Evento nativo de MariaDB (<em>Event Scheduler</em>) que ejecute un borrado físico (Hard Delete) de los logs de nivel INFO o DEBUG que superen los 30 días de antigüedad, priorizando siempre la retención de registros CRITICAL.</li>
+</ul>
+
+</section>
+</main>
+</body>
+</html>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 2 Aug 2026, 4:50 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Especificacion_Tecnica.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L324-354)</summary>
+
+**Path:** `Unknown file`
+
+```
+<h3 id="sec3-5">3.5. Configuración y Tuning de Swoole v6 (Servidor WebSockets)</h3>
+<p>El servidor de WebSockets corre de manera aislada utilizando **Swoole v6** sobre PHP 8.3. Para garantizar la estabilidad ante redes móviles inestables y evitar fugas de memoria, se aplica el siguiente tuning a nivel de proceso y sockets:</p>
+<table>
+<caption>Tabla 2. Parámetros de Tuning en Swoole v6</caption>
+<thead><tr><th>Parámetro</th><th>Valor Recomendado</th><th>Justificación Técnica / Propósito</th></tr></thead>
+<tbody>
+<tr><td><code>worker_num</code></td><td><code>2</code></td><td>Suficiente para el volumen estimado en clínica. Minimiza la sobrecarga de RAM en el servidor local.</td></tr>
+<tr><td><code>max_request</code></td><td><code>2000</code></td><td>Mitigación Poka-Yoke contra fugas de memoria. El worker se reinicia automáticamente tras atender 2000 peticiones.</td></tr>
+<tr><td><code>heartbeat_check_interval</code></td><td><code>30</code></td><td>Intervalo en segundos para enviar pings y detectar desconexiones.</td></tr>
+<tr><td><code>heartbeat_idle_time</code></td><td><code>65</code></td><td>Tiempo máximo de inactividad permitido a un cliente antes de liberar su socket. Evita sockets huérfanos.</td></tr>
+<tr><td><code>open_tcp_keepalive</code></td><td><code>true</code></td><td>Habilita el sondeo TCP a nivel del Kernel de Linux.</td></tr>
+<tr><td><code>tcp_keepidle</code></td><td><code>60</code></td><td>Comienza a enviar sondas de keep-alive tras 60 segundos de inactividad de red.</td></tr>
+<tr><td><code>tcp_keepinterval</code></td><td><code>10</code></td><td>Intervalo de 10 segundos entre cada reintento de sonda TCP.</td></tr>
+<tr><td><code>tcp_keepcount</code></td><td><code>3</code></td><td>Cierra la conexión tras 3 fallos consecutivos en las sondas. Detecta la caída de señal móvil antes de que actúe el timeout de la app.</td></tr>
+</tbody>
+</table>
+
+<!-- ═══════════════ 4. MODELO DE BASE DE DATOS ═══════════════ -->
+<section id="sec4"><h2>4. Modelo de Base de Datos</h2><a href="Tecnica_Modelo_Datos.html" style="display:inline-block; margin-top:10px; margin-bottom:20px; color:#2563eb; text-decoration:none; font-weight:600;">→ Ver Modelo de Datos y Base de Datos (ER y DDL)</a></section>
+<!-- ═══════════════ 5. API BACKEND Y NEGOCIO ═══════════════ -->
+<section id="sec5">
+<a href="Tecnica_API_Backend.html" style="display:inline-block; margin-top:10px; margin-bottom:20px; color:#2563eb; text-decoration:none; font-weight:600;">→ Ver API Backend</a>
+</section>
+<!-- ═══════════════ 6. OBSERVABILIDAD Y TRAZABILIDAD ═══════════════ -->
+<section id="sec6">
+<h2>6. Observabilidad y Trazabilidad de Fallos (Logs y Auditoría)</h2>
+<p>Siguiendo la directiva de robustez y resiliencia en entornos de red y base de datos locales inestables, el ecosistema LAESH cuenta con dos clases helper dentro del espacio de nombres <code>\Common</code> para el registro de auditoría, trazabilidad SQL y telemetría:</p>
+
+<h3>6.1. Log General del Sistema (Common\Logger)</h3>
+<p>La clase <code>\Common\Logger</code> gestiona la ingesta de alertas generales de la aplicación (INFO, WARN, ERROR, FATAL) mediante una arquitectura de persistencia redundante (Dual‑Path):</p>
+<ul>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Specific Tools**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones. My goal is to maximize efficiency, so I am always aiming to use the least generalized tool possible for a given task. I'm prioritizing the `view_file` tool over a terminal command if I simply need to read a file's content, for example.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.066645516s
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 2 Aug 2026, 4:50 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `22-laesh-mariadb-conexion-estandares.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# Regla 22: Estándares de Conectividad, Diseño de BD y Persistencia (Proyecto LAESH)
+
+## 1. Conectividad PDO y Pool de Conexiones FPM
+- **Persistencia PDO Obligatoria:** Toda conexión en `Common\DB` debe inicializarse con el atributo `PDO::ATTR_PERSISTENT => true`. Esto opera como un pool de conexiones a nivel de proceso PHP-FPM, reutilizando el socket TCP de MariaDB y reduciendo la latencia en ~5-30ms por llamada HTMX.
+- **Aislamiento en Swoole:** Si Swoole requiere consultar MariaDB en el futuro, es **estrictamente obligatorio** usar `Swoole\Database\PDOPool` para arrendar conexiones por corrutina.
+
+## 2. Parámetros de Internacionalización (Español MX)
+Cada instancia de PDO creada por `Common\DB` debe ejecutar las siguientes sentencias al conectarse:
+- `SET NAMES utf8mb4 COLLATE utf8mb4_spanish_ci`: Cotejo y ordenamiento nativo en Español de México (acentos, diéresis, letra `ñ`).
+- `SET lc_time_names = 'es_MX'`: Formateo nativo de fechas SQL (`MONTHNAME()`, `DAYNAME()`) en español.
+- `SET time_zone = '-06:00'`: Sincronización con la Hora del Centro de México.
+- `SET SESSION sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))`: Exclusión de validaciones restrictivas de agrupamiento para queries legadas o de auditoría.
+
+## 3. Estándares de Diseño de Base de Datos
+- **Bajas Lógicas (Soft Deletes):** Queda estrictamente prohibido el uso de `DELETE` físico sobre entidades clínicas clave (`PACIENTES`, `ESTUDIOS`, `ORDENES`). Se utilizará la columna `activo = false` o ENUMs de estado.
+- **Vistas Lógicas (Views):** Se pre-formatearán consultas complejas (JOINs) en Vistas de MariaDB (ej. `vw_ordenes_completas`) para descargar de procesamiento a PHP-FPM y renderizar fragmentos HTMX ultrarrápidos.
+- **Integridad ACID y Stored Procedures:** La creación de órdenes y asignación de folios consecutivos unificados debe encapsularse en Procedimientos Almacenados (ej: `CrearOrdenLaboratorio`) con bloques `START TRANSACTION`, `COMMIT` y `ROLLBACK`.
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 2 Aug 2026, 4:50 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 2 Aug 2026, 4:51 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Specific Tools**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones. My goal is to maximize efficiency, so I am always aiming to use the least generalized tool possible for a given task. I'm prioritizing the `view_file` tool over a terminal command if I simply need to read a file's content, for example.
+
+
+
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.163291025s
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 2 Aug 2026, 4:51 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** CORTEX_STEP_STATUS_RUNNING
+**Created:** 2 Aug 2026, 4:51 pm
 
 ---
 
