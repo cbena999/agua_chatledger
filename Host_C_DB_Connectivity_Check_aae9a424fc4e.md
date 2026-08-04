@@ -7,9 +7,9 @@
 | **Trajectory ID** | `f51e7007-001e-45ca-b000-c3ebb8132ce0` |
 | **Cascade ID** | `31156cde-8540-4bb7-b98d-aae9a424fc4e` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 277 |
+| **Total Steps** | 378 |
 | **Started** | 4 Aug 2026, 11:40 am |
-| **Completed** | 4 Aug 2026, 1:01 pm |
+| **Completed** | 4 Aug 2026, 1:43 pm |
 
 ---
 
@@ -3665,6 +3665,3374 @@ Genera un msg en español , adecuado para todos los fixes de hoy comitea y sube 
 <summary>Metadata</summary>
 
 - **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+## User Request
+
+creo falto subir agua_chatledger~master, revisa
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `11_depuracion_deuda_fantasma_742_959.sql`
+**Language:** oracle-sql
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Aug 2026, 1:19 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Aug 2026, 1:19 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Aug 2026, 1:19 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Aug 2026, 1:19 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Aug 2026, 1:19 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+## User Request
+
+Vamos a analiza otro issue, es inconsistencia de deuda, entre la ficha del contrato y listadeudoresxc; caso contrato 76. 
+Lo correcto es 35,318 (ficha del contrato), y no lo que reporta listadeudoresxc (26,936).
+SOn varios o mas bien toda la lista que presenta listadeudoresxc.
+Identifica la causa raiz, no corrijas nada; informa me.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `11_depuracion_deuda_fantasma_742_959.sql`
+**Language:** oracle-sql
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now prioritizing the most useful tools available to me. I need to make sure I'm using the best tool for each given task. Considering the context, I think a strategic approach to selecting the right tool is the key to achieving the desired outcome here.
+
+
+**Refining Tool Selection**
+
+I'm focusing now on specific tool selection, remembering the rules about avoiding `cat`, `grep` inside bash, etc. Before I call any tool, I will explicitly list related tools, ensuring I pick the most appropriate one. The goal is to tackle the debt inconsistency issue for contract 76, so I will list tools to check debt information and compare sources.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `listadeudoresxc`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.067912996s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 4 Aug 2026, 1:34 pm
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 4 Aug 2026, 1:34 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools like 'view_file' directly, rather than resorting to broader, less direct methods. I'm aiming for targeted actions.
+
+
+**Refining Tool Choices**
+
+I'm recalling crucial instructions, especially the rules about direct tool use. I've located "listadeudoresxc" within `views/sistema/listados.php` and I'm currently searching for its definition or usage across PHP and SQL files. I'm focusing on the more efficient use of tools to get the task done.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.102144513s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Aug 2026, 1:34 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools like 'view_file' directly, rather than resorting to broader, less direct methods. I'm aiming for targeted actions.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `listadeudoresxc.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.002507016s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de deudores por Calle</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Core & Variables - Rich Modern Aesthetics */
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --success: #10b981;
+            --danger: #ef4444;
+            --background: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--background);
+            color: var(--text-main);
+            line-height: 1.5;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Top Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .header h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #1e293b;
+            letter-spacing: -0.025em;
+        }
+
+        .header h1 span {
+            color: var(--primary);
+        }
+
+        /* KPI Dashboard Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background-color: var(--primary);
+        }
+
+        .stat-card.stat-amount::after {
+            background-color: var(--success);
+        }
+
+        .stat-card.stat-streets::after {
+            background-color: #f59e0b;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        /* Advanced Filter Card */
+        .filter-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 2rem;
+        }
+
+        .filter-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #334155;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.375rem;
+        }
+
+        .filter-group label {
+            font-size: 0.825rem;
+            font-weight: 600;
+            color: #475569;
+        }
+
+        .filter-input {
+            width: 100%;
+            padding: 0.625rem 0.875rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.875rem;
+            color: var(--text-main);
+            background-color: #f8fafc;
+            transition: all 0.2s ease;
+        }
+
+        .filter-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background-color: #ffffff;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+        }
+
+        /* Controls / Toggles Row */
+        .controls-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .toggle-group {
+            display: flex;
+            background-color: #f1f5f9;
+            padding: 0.25rem;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+
+        .toggle-btn {
+            font-family: inherit;
+            font-size: 0.875rem;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 8px;
+            background: transparent;
+            color: #475569;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .toggle-btn.active {
+            background-color: var(--card-bg);
+            color: var(--primary);
+            box-shadow: var(--shadow);
+        }
+
+        .actions-group {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn {
+            font-family: inherit;
+            font-size: 0.875rem;
+            font-weight: 600;
+            padding: 0.625rem 1.25rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: #ffffff;
+            color: #334155;
+        }
+
+        .btn:hover {
+            background-color: #f8fafc;
+            border-color: #cbd5e1;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: #ffffff;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* Elegant Table Styles */
+        .table-container {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f8fafc;
+            color: #334155;
+            font-size: 0.825rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+        }
+
+        th:hover {
+            background-color: #f1f5f9;
+        }
+
+        th::after {
+            content: ' ↕';
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            opacity: 0.6;
+        }
+
+        th.sort-asc::after {
+            content: ' ▲';
+            color: var(--primary);
+            opacity: 1;
+        }
+
+        th.sort-desc::after {
+            content: ' ▼';
+            color: var(--primary);
+            opacity: 1;
+        }
+
+        td {
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.875rem;
+            color: #334155;
+            vertical-align: middle;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .tr-parent {
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .tr-parent:hover {
+            background-color: #f8fafc;
+        }
+
+        .tr-parent.expanded {
+            background-color: #f0f7ff;
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.25rem 0.5rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background-color: #e2e8f0;
+            color: #475569;
+        }
+
+        .badge-primary {
+            background-color: #e0f2fe;
+            color: var(--primary);
+        }
+
+        .badge-danger {
+            background-color: #fee2e2;
+            color: var(--danger);
+        }
+
+        /* Collapsible Sub-table */
+        .tr-child {
+            display: none;
+            background-color: #f8fafc;
+        }
+
+        .tr-child.show {
+            display: table-row;
+        }
+
+        .sub-container {
+            padding: 1rem 1.5rem 1.5rem 1.5rem;
+            border-left: 4px solid var(--primary);
+        }
+
+        .sub-table {
+            width: 100%;
+            background-color: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            box-shadow: inset 0 2px 4px 0 rgba(0,0,0,0.02);
+        }
+
+        .sub-table th {
+            padding: 0.625rem 1rem;
+            font-size: 0.75rem;
+            background-color: #f1f5f9;
+        }
+
+        .sub-table th::after {
+            content: '';
+        }
+
+        .sub-table td {
+            padding: 0.625rem 1rem;
+            font-size: 0.825rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .sub-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .monto-val {
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        /* Expand Icon Arrow */
+        .expand-arrow {
+            display: inline-block;
+            transition: transform 0.2s ease;
+            font-size: 0.75rem;
+            margin-right: 0.5rem;
+        }
+
+        .expanded .expand-arrow {
+            transform: rotate(90deg);
+        }
+
+        /* Empty State */
+        .empty-state {
+            padding: 3rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Printing Adjustments */
+        @media print {
+            body {
+                background-color: #ffffff;
+                color: #000000;
+                padding: 0;
+            }
+            .container {
+                max-width: 100%;
+            }
+            .filter-card, .header .actions-group, .header .toggle-group, .controls-row {
+                display: none !important;
+            }
+            .table-container {
+                border: none;
+                box-shadow: none;
+            }
+            th {
+                background-color: #e2e8f0 !important;
+                color: #000000 !important;
+                border-bottom: 2px solid #000000 !important;
+            }
+            th::after {
+                content: '' !important;
+            }
+            td {
+                border-bottom: 1px solid #cbd5e1 !important;
+            }
+            .tr-child {
+                display: table-row !important;
+            }
+            .tr-child .sub-container {
+                border-left: none;
+                padding: 0.5rem 0 1rem 2rem;
+            }
+            .expand-arrow {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <?php
+    require_once "../config/Conexion.php";
+    $y = new Conexion();
+    $y->conectarBaseDatos();
+
+    // Función auxiliar para extraer el nombre de la calle únicamente (sin número)
+    // Normaliza acentos, ordinales (1°→1), puntos y calificadores de ubicación
+    // para que el agrupamiento sea consistente sin importar cómo fue ingresado el domicilio.
+    function extraeCalle($dom) {
+        $s = trim(strtoupper((string)$dom));
+        // 1. Quitar acentos (clave para que "1° DE MAYO" y "1° DE MAYó" se agrupen igual)
+        $s = strtr($s, ['Á'=>'A','É'=>'E','Í'=>'I','Ó'=>'O','Ú'=>'U','Ü'=>'U','Ñ'=>'N']);
+        // 2. Normalizar ordinales en números de calle: 1°, 2°, 3° → 1, 2, 3
+        $s = preg_replace('/\b([0-9]+)\s*[°º]\s*/u', '$1 ', $s);
+        // 3. Quitar puntos (simplifica S/N. → S/N, ESQ. → ESQ, NO. → NO)
+        $s = str_replace('.', '', $s);
+        // 4. Colapsar espacios
+        $s = trim(preg_replace('/\s+/', ' ', $s));
+        // 5. Truncar en el primer indicador de número de casa o calificador de ubicación
+        $patron = '~\s*(?:'
+            . '#'                                                              // símbolo numeral
+            . '|N[°º]'                                                        // N° Nº
+            . '|\bNO\b'                                                       // NO (número)
+            . '|\bNUM\b'                                                      // NUM
+            . '|\bN\s*(?=[0-9])'                                              // N pegado antes de dígito
+            . '|\bN[-](?=[0-9])'                                              // N- antes de dígito
+            . '|\bS/?N\b'                                                     // S/N (sin número)
+            . '|\bESQ\b'                                                      // esquina
+            . '|\bLOTE\b|\bLT\b'                                             // lote
+            . '|\bMZ\b|\bMZA\b'                                              // manzana
+            . '|\bINT\b'                                                      // interior
+            . '|\bENTRE\b'                                                    // entre calles
+            . '|\bFRENTE\b'                                                   // frente a
+            . '|\bPRIV\b'                                                     // privada (sufijo)
+            . '|\bSECC\b|\bSEC\b'                                            // sección
+            . '|\b[0-9]+\s*(?:[-/][A-Z0-9]+|\s+(?:[A-Z]{1,3}[0-9]?|BIS))?\s*$'  // número al final (con sufijo -A, /B, BIS)
+            . ')~u';
+        $partes = @preg_split($patron, $s, 2);
+        if (is_array($partes) && count($partes) > 1) {
+            $calle = trim($partes[0], " \t\n\r\0\x0B,-.");
+            return empty($calle) ? $s : $calle;
+        }
+        return trim($s, " \t\n\r\0\x0B,-.");
+    }
+
+    // Consulta alineada a listadeudores.php (Filtros V2 de paridad y exclusión de categorías de saneamiento)
+    $query = "SELECT c.numcontrato, u.nombre, c.domicilio, SUM(l.monto) AS paga
+               FROM vw_ligacargos_pendientes l
+               INNER JOIN contrato c ON l.numcontrato = c.numcontrato
+               LEFT JOIN usuario u ON c.numusuario = u.noconsecutivo
+               WHERE l.monto != 0
+                 AND c.estado != 4
+                 AND (u.estado IS NULL OR u.estado != 2)
+                 AND l.categoria NOT IN (6, 19, 20, 21, 22)
+               GROUP BY c.numcontrato
+               ORDER BY paga DESC";
+
+    $res = $y->q($query);
+    $data = [];
+    while ($row = $y->fetch_array($res)) {
+        $domicilio_crudo = $row[2];
+        $calle = extraeCalle($domicilio_crudo);
+        // Si la extracción de la calle queda vacía por alguna razón, usar el domicilio original
+        if (empty($calle)) {
+            $calle = $domicilio_crudo;
+        }
+
+        $data[] = [
+            'contrato' => $row[0],
+            'nombre' => $row[1] ? $row[1] : 'SIN NOMBRE REGISTRADO',
+            'domicilio' => $domicilio_crudo,
+            'calle' => $calle,
+            'monto' => floatval($row[3])
+        ];
+    }
+    $y->free_result($res);
+    $y->cerrarConexion();
+
+    // Codificamos los datos cargados a JSON para consumirlos de forma ultra-rápida y dinámica en JS
+    $json_data = json_encode($data);
+    ?>
+
+    <div class="container">
+        <!-- Top Title Row -->
+        <div class="header">
+            <h1>Relación de <span>Deudores por Agrupaciones</span></h1>
+        </div>
+
+        <!-- Dashboard Mini Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Total Adeudos</div>
+                <div class="stat-value" id="stat-total-monto">$0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Contratos Afectados</div>
+                <div class="stat-value" id="stat-total-contratos">0</div>
+            </div>
+            <div class="stat-card stat-streets">
+                <div class="stat-label">Calles Afectadas</div>
+                <div class="stat-value" id="stat-total-calles">0</div>
+            </div>
+        </div>
+
+        <!-- Dynamic Live Filtering Card -->
+        <div class="filter-card">
+            <div class="filter-title">🔍 Filtros Interactivos & Controles de Agrupación</div>
+            <div class="filter-grid">
+                <div class="filter-group">
+                    <label for="f-contrato">No. Contrato</label>
+                    <input type="text" id="f-contrato" class="filter-input" placeholder="Ej: 1411..." oninput="filtrarYRenderizar()">
+                </div>
+                <div class="filter-group">
+                    <label for="f-nombre">Nombre de Usuario</label>
+                    <input type="text" id="f-nombre" class="filter-input" placeholder="Buscar nombre..." oninput="filtrarYRenderizar()">
+                </div>
+                <div class="filter-group">
+                    <label for="f-calle">Calle</label>
+                    <input type="text" id="f-calle" class="filter-input" placeholder="Buscar calle..." oninput="filtrarYRenderizar()">
+                </div>
+                <div class="filter-group">
+                    <label for="f-monto">Adeudo Mayor a ($)</label>
+                    <input type="number" id="f-monto" class="filter-input" placeholder="Monto mínimo..." oninput="filtrarYRenderizar()">
+                </div>
+            </div>
+
+            <!-- Controls (View Toggle) -->
+            <div class="controls-row">
+                <div class="toggle-group">
+                    <button id="btn-view-det" class="toggle-btn active" onclick="cambiarVista('detallado')">📋 Vista Detallada</button>
+                    <button id="btn-view-agr" class="toggle-btn" onclick="cambiarVista('agrupado')">🏢 Vista Agrupada por Calle</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Render Table Container -->
+        <div class="table-container">
+            <table id="main-table">
+                <!-- Se inyecta dinámicamente vía Javascript -->
+            </table>
+            <div id="empty-message" class="empty-state" style="display: none;">
+                No se encontraron registros de deudores que coincidan con los filtros ingresados.
+            </div>
+        </div>
+    </div>
+
+    <!-- Client-Side Engine -->
+    <script>
+        // Inyección directa de datos desde PHP
+        const rawData = <?php echo $json_data; ?>;
+        
+        // Estado Global del Reporte
+        let currentView = 'detallado'; // 'detallado' | 'agrupado'
+        let currentSort = { column: 'monto', direction: 'desc' };
+        let expandedStreets = new Set(); // Guarda calles abiertas en vista agrupada
+        let filteredRows = [];
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', () => {
+            filtrarYRenderizar();
+        });
+
+        // Cambiar entre vista de lista simple y vista agrupada por calle
+        function cambiarVista(vista) {
+            currentView = vista;
+            document.getElementById('btn-view-det').classList.toggle('active', vista === 'detallado');
+            document.getElementById('btn-view-agr').classList.toggle('active', vista === 'agrupado');
+            
+            // Re-ordenamientos predeterminados por vista
+            if (vista === 'agrupado') {
+                currentSort = { column: 'montoTotal', direction: 'desc' };
+            } else {
+                currentSort = { column: 'monto', direction: 'desc' };
+            }
+            
+            renderizarTabla();
+        }
+
+        // Filtra los datos locales basándose en los inputs del usuario
+        function filtrarYRenderizar() {
+            const fContrato = document.getElementById('f-contrato').value.trim().toLowerCase();
+            const fNombre = document.getElementById('f-nombre').value.trim().toLowerCase();
+            const fCalle = document.getElementById('f-calle').value.trim().toLowerCase();
+            const fMontoVal = document.getElementById('f-monto').value;
+            const fMonto = fMontoVal !== '' ? parseFloat(fMontoVal) : 0;
+
+            filteredRows = rawData.filter(item => {
+                // Filtro por contrato
+                if (fContrato && !item.contrato.toString().toLowerCase().includes(fContrato)) return false;
+                // Filtro por nombre
+                if (fNombre && !item.nombre.toLowerCase().includes(fNombre)) return false;
+                // Filtro por calle
+                if (fCalle && !item.calle.toLowerCase().includes(fCalle) && !item.domicilio.toLowerCase().includes(fCalle)) return false;
+                // Filtro por monto
+                if (fMonto && item.monto < fMonto) return false;
+                return true;
+            });
+
+            // Actualizar KPI Stats Card
+            actualizarKPIs();
+            
+            // Renderizar la tabla con los datos filtrados
+            renderizarTabla();
+        }
+
+        // Calcula y renderiza los contadores de la parte superior
+        function actualizarKPIs() {
+            const totalMonto = filteredRows.reduce((acc, item) => acc + item.monto, 0);
+            const totalContratos = filteredRows.length;
+            
+            // Calles únicas filtradas
+            const callesUnicas = new Set(filteredRows.map(item => item.calle));
+            
+            // Renderizar en UI
+            document.getElementById('stat-total-monto').textContent = '$' + totalMonto.toLocaleString('es-MX', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+            document.getElementById('stat-total-contratos').textContent = totalContratos.toLocaleString('es-MX');
+            document.getElementById('stat-total-calles').textContent = callesUnicas.size.toLocaleString('es-MX');
+        }
+
+        // Render Principal de Tabla
+        function renderizarTabla() {
+            const table = document.getElementById('main-table');
+            const emptyMessage = document.getElementById('empty-message');
+            
+            if (filteredRows.length === 0) {
+                table.innerHTML = '';
+                emptyMessage.style.display = 'block';
+                return;
+            }
+            emptyMessage.style.display = 'none';
+
+            if (currentView === 'detallado') {
+                renderVistaDetallada(table);
+            } else {
+                renderVistaAgrupada(table);
+            }
+        }
+
+        // RENDER VISTA DETALLADA
+        function renderVistaDetallada(table) {
+            // Ordenar datos
+            const sorted = [...filteredRows].sort((a, b) => {
+                let valA = a[currentSort.column];
+                let valB = b[currentSort.column];
+                
+                if (typeof valA === 'string') {
+                    return currentSort.direction === 'asc' 
+                        ? valA.localeCompare(valB) 
+                        : valB.localeCompare(valA);
+                } else {
+                    return currentSort.direction === 'asc' ? valA - valB : valB - valA;
+                }
+            });
+
+            // Construir encabezado
+            let html = `
+                <thead>
+                    <tr>
+                        <th class="${getSortClass('contrato')}" onclick="handleSort('contrato')" style="width: 10%;">No. Cto.</th>
+                        <th class="${getSortClass('nombre')}" onclick="handleSort('nombre')" style="width: 35%;">Nombre de Usuario</th>
+                        <th class="${getSortClass('domicilio')}" onclick="handleSort('domicilio')" style="width: 40%;">Domicilio Completo</th>
+                        <th class="${getSortClass('monto')}" onclick="handleSort('monto')" style="text-align: right; width: 15%;">Monto</th>
+                    </tr>
+                </thead>
+                <tbody>
+            `;
+
+            // Construir filas
+            sorted.forEach(row => {
+                html += `
+                    <tr>
+                        <td style="font-weight: 500;">${row.contrato}</td>
+                        <td style="font-weight: 500; text-transform: uppercase;">${escapeHtml(row.nombre)}</td>
+                        <td style="text-transform: uppercase;">${escapeHtml(row.domicilio)}</td>
+                        <td align="right" class="monto-val">$${row.monto.toLocaleString('es-MX', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}</td>
+                    </tr>
+                `;
+            });
+
+            html += '</tbody>';
+            table.innerHTML = html;
+        }
+
+        // RENDER VISTA AGRUPADA POR CALLE
+        function renderVistaAgrupada(table) {
+            // Agrupar filas
+            const gruposMap = {};
+            filteredRows.forEach(row => {
+                if (!gruposMap[row.calle]) {
+                    gruposMap[row.calle] = {
+                        calle: row.calle,
+                        montoTotal: 0,
+                        contratos: []
+                    };
+                }
+                gruposMap[row.calle].montoTotal += row.monto;
+                gruposMap[row.calle].contratos.push(row);
+            });
+
+            const listaGrupos = Object.values(gruposMap);
+
+            // Ordenar los grupos
+            listaGrupos.sort((a, b) => {
+                let valA = currentSort.column === 'calle' ? a.calle : (currentSort.column === 'cnt' ? a.contratos.length : a.montoTotal);
+                let valB = currentSort.column === 'calle' ? b.calle : (currentSort.column === 'cnt' ? b.contratos.length : b.montoTotal);
+                
+                if (currentSort.column === 'calle') {
+                    return currentSort.direction === 'asc' ? valA.localeCompare(valB) : valB.localeCompare(valA);
+                } else {
+                    return currentSort.direction === 'asc' ? valA - valB : valB - valA;
+                }
+            });
+
+            // Cabecera agrupada
+            let html = `
+                <thead>
+                    <tr>
+                        <th class="${getSortClass('calle')}" onclick="handleSort('calle')" style="width: 50%;">🏢 Calle únicamente (Agrupación)</th>
+                        <th class="${getSortClass('cnt')}" onclick="handleSort('cnt')" style="width: 20%; text-align: center;">Contratos</th>
+                        <th class="${getSortClass('montoTotal')}" onclick="handleSort('montoTotal')" style="text-align: right; width: 30%;">Monto Acumulado</th>
+                    </tr>
+                </thead>
+                <tbody>
+            `;
+
+            // Renglones
+            listaGrupos.forEach((grupo, index) => {
+                const esExpandido = expandedStreets.has(grupo.calle);
+                
+                html += `
+                    <tr class="tr-parent ${esExpandido ? 'expanded' : ''}" onclick="toggleCalle('${escapeQuote(grupo.calle)}')">
+                        <td style="font-weight: 600; text-transform: uppercase;">
+                            <span class="expand-arrow">▶</span> ${escapeHtml(grupo.calle)}
+                        </td>
+                        <td align="center"><span class="badge badge-primary">${grupo.contratos.length}</span></td>
+                        <td align="right" class="monto-val">$${grupo.montoTotal.toLocaleString('es-MX', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}</td>
+                    </tr>
+```
+
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools like 'view_file' directly, rather than resorting to broader, less direct methods. I'm aiming for targeted actions.
+
+
+**Refining Tool Choices**
+
+I'm now refining my approach to tool utilization, considering both Critical Instructions 1 and 2. I'm focusing on avoiding redundant or less efficient commands, particularly those involving 'cat,' 'grep,' 'ls,' and 'sed' within bash commands. Specifically, I'm prioritizing direct tool usage like `grep_search`. I'm starting the thought process by explicitly listing relevant tools.
+
+
+**Investigating Debt Calculations**
+
+I'm now focusing on how debt is calculated within the "ficha del contrato" script, specifically contrasting it with the logic in `listadeudoresxc.php`. I've examined the SQL query in `listadeudoresxc.php` and its filtering criteria, which use `vw_ligacargos_pendientes`. My next step is to locate the "ficha del contrato" script to compare these debt calculations. I'll search for files like `ficha_contrato.php` to investigate.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.794490928s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Aug 2026, 1:34 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools like 'view_file' directly, rather than resorting to broader, less direct methods. I'm aiming for targeted actions.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ficha.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.070370569s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php if ($salidanotas): ?>
+    <div id='notasCto'>
+        <ul style='border:0px; margin-left: 24px; margin-top:40px; margin-right:25px; height:105px; padding-left:0px; overflow:auto;'>
+            <?php foreach ($notas as $n): ?>
+                <li style='list-style:none; margin-left:0px;' class='<?= ($n['estado'] == 0 ? "liactiva" : "lidesactiva") ?>'>
+                    <b><?= $n['fecha'] ?></b>
+                    <?php if ($n['estado'] == 0): ?>
+                        [ <a href='#' onclick="eliminaNota('<?= $n['id'] ?>')">&times;</a> ]
+                    <?php endif; ?>
+                    <br><?= $this->e($n['texto']) ?>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+<?php endif; ?>
+
+<h1>Datos del Contrato #<?= $id ?><?= $numcontratoletras ?> <a href='#'
+        onclick="if(confirm('Se perder&aacute;n los cambios al cargar los datos del contrato nuevamente.\n\n¿Desea continuar?'))cargaDatosContrato('<?= $id ?>');"><img
+            src='web-assets/img/reciclar.png' border='0'></a></h1>
+<hr>
+<?php if(isset($faltan_cargos) && count($faltan_cargos) > 0): ?>
+    <div style='color: #856404; background-color: #fff3cd; padding: 10px; border: 1px solid #ffeeba; border-radius: 5px; margin-bottom: 15px;'>
+        <b>Aviso:</b> Faltan por registrar en el cat&aacute;logo los siguientes cargos anuales: <?= implode(', ', $faltan_cargos) ?>
+    </div>
+<?php endif; ?>
+<div id='infocto' style='padding-left:10px;'>
+    <div style='display: flex; flex-direction: row; align-items: flex-start; gap: 30px; margin-bottom: 15px;'>
+        <div>
+            A nombre de <b class='mayusculas'><?= $this->e($nombre) ?> | <?= $numusuario ?><?php if ($estado_usr == 2): ?> <span style='color: #c0392b; font-size: 11px;'>(USUARIO NO LOCALIZADO)</span><?php endif; ?></b><br>Direcci&oacute;n en <b
+                class='mayusculas'><?= $this->e($domicilio) ?></b>.<br><br>
+            Estado del contrato: 
+            <?php 
+                $color = '#f8db70'; $border = '#d4b238'; $text = '#333';
+                if ($estado == 4) { $color = '#f8d7da'; $border = '#f5c6cb'; $text = '#721c24'; }
+                if ($estado == 1) { $color = '#d4edda'; $border = '#c3e6cb'; $text = '#155724'; }
+            ?>
+            <span class='mayusculas' style='background-color: <?= $color ?>; font-weight: bold; padding: 2px 10px; border-radius: 20px; color: <?= $text ?>; font-size: 13px; border: 1px solid <?= $border ?>; box-shadow: 0 2px 4px rgba(0,0,0,0.1);'>
+                <?= (isset($tiposdeestado[(string)$estado]) ? $tiposdeestado[(string)$estado] : $estado) ?>
+            </span>
+            &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Metros lineales: <b class='mayusculas'><?= $metros ?> mts.</b><br>
+        </div>
+        <div style='display: flex; flex-direction: column; gap: 8px;'>
+            <?php if ($estado != 4): ?>
+            <a class='liga opcion' href='#'
+                onclick="$('#infocto').hide(); $('#notasCto').toggle(); $('#formato').slideToggle('fast');" style='margin:0;'>Modificar
+                informaci&oacute;n de este contrato</a>
+            <?php endif; ?>
+            <a class='liga opcion' href='#'
+                onclick="if(confirm('¿Est&aacute; seguro que quiere cargar la informaci&oacute;n del usuario?'))cargaDatosUsuario(<?= $numusuario ?>);" style='margin:0;'>Cargar
+                informaci&oacute;n del usuario</a>
+            <div style='display: flex; gap: 8px;'>
+                <a class='liga opcion' href='#' onclick="abrirImpresionCredencial('<?= $id ?>'); return false;" style='margin:0; flex:1; text-align:center;'>Ver Credencial</a>
+                <a class='liga opcion' href='reportes/historial_mov_cto.php?id=<?= $id ?>' target='_blank' style='margin:0; flex:1; text-align:center;'>Movimientos</a>
+            </div>
+        </div>
+    </div>
+    
+    <div style='display: flex; gap: 20px; margin-top: 10px; align-items: stretch; flex-wrap: wrap;'>
+        <?php foreach ($tomas as $n => $t): ?>
+            <div style='border:1px solid #ddd; padding:8px; border-radius:5px; background:#fff; min-width:200px;'>
+                <b style='color:#0056b3;'><?= ($n==1?'1ra.':'2da.') ?> Toma (<?= ($t['tipo']==1?'Comercial':'Normal') ?>)</b><br>
+                <small>
+                    Agua: <b><?= ($t['tiene_agua'] ? ($t['estado_agua'] ? 'Conectada' : 'Desconectada') : 'No cuenta') ?></b><br>
+                    Drenaje: <b><?= ($t['tiene_drenaje'] ? ($t['estado_drenaje'] ? 'Conectado' : 'Desconectado') : 'No cuenta') ?></b>
+                </small>
+            </div>
+        <?php endforeach; ?>
+    </div>
+    <div id='nara'></div><br>
+</div>
+
+
+
+<style>
+    .toma-card { transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+    .toma-card:hover { transform: translateY(-3px); box-shadow: 0 8px 15px rgba(0,0,0,0.1); }
+    .status-badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 10px; font-weight: bold; text-transform: uppercase; }
+    .status-active { background: #e3f2fd; color: #1976d2; }
+    .status-cut { background: #ffebee; color: #c62828; }
+</style>
+
+<div id='formato' style='display:none; width: 100%; margin: 5px 0;'>
+    <form id='datoscto' name='datoscto'>
+        <input type='hidden' value='<?= $id ?>' name='id' id='id'>
+        <div style='display: flex; gap: 20px; align-items: flex-start;'>
+            <!-- Left Column: Main Form Fields -->
+            <div style='flex: 0 0 360px;'>
+                <table width='100%'>
+                    <tr>
+                        <td style='text-align: left; padding-right: 8px;' width='120px' valign='top'><input type='hidden' value='guardaDatosContrato' id='opc' name='opc'>
+                            A nombre de:</td>
+                        <td class='mayusculas' valign='top'><b><?= $this->e($nombre) ?> | <?= $numusuario ?><?php if ($estado_usr == 2): ?> <span style='color: #c0392b; font-size: 11px;'>(USUARIO NO LOCALIZADO)</span><?php endif; ?></b><br><br></td>
+                    </tr>
+                    <tr>
+                        <td style='text-align: left; padding-right: 8px;' valign='top'>Domicilio:</td>
+                        <td valign='top'><input class='mayusculas' type='text' value='<?= $this->e($domicilio) ?>' name='domicilio'
+                                id='domicilio' style='width: 100%;' autocomplete=off <?= ($estado==4?'disabled':'') ?>><br><br></td>
+                    </tr>
+                    <tr>
+                        <td style='text-align: left; padding-right: 8px;' valign='top'>M&aacute;s datos:<br><small style='color: grey;'>Notas sobre conflictos, quejas, etc.</small></td>
+                        <td valign='top'><textarea class='mayusculas' name='masdatos' id='masdatos' style='width: 100%;' rows=3 <?= ($estado==4?'disabled':'') ?>><?= $this->e($masdatos) ?></textarea><br><br></td>
+                    </tr>
+                    <tr>
+                        <td style='text-align: left; padding-right: 8px;' valign='top'>Observaciones:<br><small style='color: grey;'>Ubicaci&oacute;n entre calles, medidas, etc.</small></td>
+                        <td valign='top'><textarea class='mayusculas' name='observaciones' id='observaciones' style='width: 100%;' rows=3 <?= ($estado==4?'disabled':'') ?>><?= $this->e($observaciones) ?></textarea><br><br></td>
+                    </tr>
+                    <tr>
+                        <td style='text-align: left; padding-right: 8px;' valign='top'>Indicador:</td>
+                        <td valign='top'><input class='mayusculas' type='text' name='numcontratoletras' id='numcontratoletras' value='<?= $this->e($numcontratoletras) ?>' style='width: 100%;' autocomplete=off <?= ($estado==4?'disabled':'') ?>><br><br></td>
+                    </tr>
+                    <tr>
+                        <td style='text-align: left; padding-right: 8px;' valign='top'>Metros lineales:</td>
+                        <td valign='top'><input class='mayusculas' type='text' value='<?= $metros ?>' name='metros' id='metros' style='width: 100%;' autocomplete=off <?= ($estado==4?'disabled':'') ?>><br></td>
+                    </tr>
+                    <?php if ($estado != 4): ?>
+                    <tr>
+                        <td colspan='2' style='padding-top: 4px; padding-bottom: 6px;'>
+                            <input type='submit' value='Guardar Cambios' onclick="return validaContrato();"
+                                   style='background: #28a745; color: white; border: none; padding: 7px 18px;
+                                          border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 13px;
+                                          box-shadow: 0 2px 5px rgba(40,167,69,0.25); white-space: nowrap;
+                                          transition: background 0.2s; width: 100%;'
+                                   onmouseover="this.style.background='#218838'"
+                                   onmouseout="this.style.background='#28a745'">
+                        </td>
+                    </tr>
+                    <?php endif; ?>
+                </table>
+            </div>
+
+            <!-- Right Column: Tomas -->
+            <div style='flex: 1; overflow: hidden; padding-top: 10px;'>
+                <div style='margin-bottom:10px;'>
+                    Tomas:&nbsp;&nbsp;Cantidad de tomas:&nbsp;
+                    <select name='num_tomas' id='num_tomas' onchange='actualizaTomas(this.value, <?= $num_tomas ?>)' <?= ($estado==4?'disabled':'') ?>>
+                        <?php for($i=1; $i<=$max_tomas; $i++): ?>
+                            <option value='<?= $i ?>' <?= ($num_tomas==$i?'selected':'') ?>><?= $i ?> Toma<?= ($i>1?'s':'') ?></option>
+                        <?php endfor; ?>
+                    </select>
+                </div>
+                <div id='tomas_container' style='display: flex; flex-wrap: nowrap; gap: 15px; overflow-x: auto;'>
+                    <?php for($n=1; $n<=$max_tomas; $n++): 
+                            $t = isset($tomas[$n]) ? $tomas[$n] : array('tipo'=>0, 'tiene_agua'=>0, 'tiene_drenaje'=>0, 'estado_agua'=>1, 'estado_drenaje'=>1);
+                            $ca = ($estado == intval($cfg['estado_activo']));
+                    ?>
+                        <div id='toma_card_<?= $n ?>' class='toma-card' style='border:1px solid #ccc; padding:10px; border-radius:8px; min-width:300px; width:300px; <?= ($n>$num_tomas?'display:none;':'') ?> background:#f9f9f9;'>
+                            <h3 style='margin-top:0; border-bottom:1px solid #ddd; padding-bottom:5px;'><?= ($n==1?'1ra.':'2da.') ?> Toma</h3>
+                            
+                            <div style='margin-bottom:10px;'>
+                                <b>Tipo:</b><br>
+                                <input type='radio' name='tomas[<?= $n ?>][tipo]' id='t_tipo_<?= $n ?>_0' value='0' <?= ($t['tipo']==0?'checked':'') ?> onchange='cambiaTipo(<?= $n ?>, 0, tarifas)' <?= ($estado==4?'disabled':'') ?>> <label for='t_tipo_<?= $n ?>_0'>Normal</label>&nbsp;&nbsp;
+                                <input type='radio' name='tomas[<?= $n ?>][tipo]' id='t_tipo_<?= $n ?>_1' value='1' <?= ($t['tipo']==1?'checked':'') ?> onchange='cambiaTipo(<?= $n ?>, 1, tarifas)' <?= ($estado==4?'disabled':'') ?>> <label for='t_tipo_<?= $n ?>_1'>Comercial</label>
+                            </div>
+
+                            <div style='margin-bottom:10px; border:1px dashed #bbb; padding:5px; background:#fff;'>
+                                <input type='checkbox' name='tomas[<?= $n ?>][tiene_agua]' id='t_agua_<?= $n ?>' value='1' <?= ($t['tiene_agua']?'checked':'') ?> onchange='actualizaInterfazTomas(<?= $n ?>, "agua")' <?= ($estado==4?'disabled':'') ?>> 
+                                <label for='t_agua_<?= $n ?>'><b>Infraestructura: Cuenta con toma</b></label>
+                                
+                                <div id='cont_estado_agua_<?= $n ?>' style='margin-top:5px; font-size:11px; <?= ($t['tiene_agua']?'':'display:none;') ?>'>
+                                    Servicio: 
+                                    <input type='radio' name='tomas[<?= $n ?>][estado_agua]' id='e_agua_<?= $n ?>_1' value='1' <?= ($t['estado_agua']?'checked':'') ?> <?= ($estado==4?'disabled':'') ?>> <label for='e_agua_<?= $n ?>_1'>Activo</label>
+                                    <input type='radio' name='tomas[<?= $n ?>][estado_agua]' id='e_agua_<?= $n ?>_0' value='0' <?= (!$t['estado_agua']?'checked':'') ?> <?= ($estado==4?'disabled':'') ?>> <label for='e_agua_<?= $n ?>_0'>Suspendido (Corte)</label>
+                                </div>
+                                <div id='desc_agua_<?= $n ?>' style='margin-top:5px; font-size:11px; color:#999; <?= (!$t['tiene_agua']?'':'display:none;') ?>'>
+                                    Servicio: <i>Sin instalaci&oacute;n física</i>
+                                </div>
+
+                                <div id='ref_agua_<?= $n ?>' style='font-size:10px; color:#666; margin-top:3px; border-top:1px dotted #ccc; padding-top:2px;'>
+                                    <?= (isset($tarifas_referencia['agua']) && isset($tarifas_referencia['agua']['leyenda'])) ? $tarifas_referencia['agua']['leyenda'] : 'Tarifa de Agua' ?>: <b>$<?= number_format($t['tipo']==1 ? ((isset($tarifas_referencia['agua']) && isset($tarifas_referencia['agua']['comercial'])) ? $tarifas_referencia['agua']['comercial'] : 0) : ((isset($tarifas_referencia['agua']) && isset($tarifas_referencia['agua']['normal'])) ? $tarifas_referencia['agua']['normal'] : 0), 2) ?></b>
+                                </div>
+                            </div>
+
+                            <div style='border:1px dashed #bbb; padding:5px; background:#fff;'>
+                                <input type='checkbox' name='tomas[<?= $n ?>][tiene_drenaje]' id='t_drenaje_<?= $n ?>' value='1' <?= ($t['tiene_drenaje']?'checked':'') ?> onchange='actualizaInterfazTomas(<?= $n ?>, "drenaje")' <?= ($estado==4?'disabled':'') ?>> 
+                                <label for='t_drenaje_<?= $n ?>'><b>Instalaci&oacute;n: Cuenta con descarga</b></label>
+
+                                <div id='cont_estado_drenaje_<?= $n ?>' style='margin-top:5px; font-size:11px; <?= ($t['tiene_drenaje']?'':'display:none;') ?>'>
+                                    Servicio: 
+                                    <input type='radio' name='tomas[<?= $n ?>][estado_drenaje]' id='e_drenaje_<?= $n ?>_1' value='1' <?= ($t['estado_drenaje']?'checked':'') ?> <?= ($estado==4?'disabled':'') ?>> <label for='e_drenaje_<?= $n ?>_1'>Activo</label>
+                                    <input type='radio' name='tomas[<?= $n ?>][estado_drenaje]' id='e_drenaje_<?= $n ?>_0' value='0' <?= (!$t['estado_drenaje']?'checked':'') ?> <?= ($estado==4?'disabled':'') ?>> <label for='e_drenaje_<?= $n ?>_0'>Suspendido (Corte)</label>
+                                </div>
+                                <div id='desc_drenaje_<?= $n ?>' style='margin-top:5px; font-size:11px; color:#999; <?= (!$t['tiene_drenaje']?'':'display:none;') ?>'>
+                                    Servicio: <i>Sin descarga instalada</i>
+                                </div>
+
+                                <div id='ref_drenaje_<?= $n ?>' style='font-size:10px; color:#666; margin-top:3px; border-top:1px dotted #ccc; padding-top:2px;'>
+                                    <?= (isset($tarifas_referencia['drenaje']) && isset($tarifas_referencia['drenaje']['leyenda'])) ? $tarifas_referencia['drenaje']['leyenda'] : 'Tarifa de Drenaje' ?>: <b>$<?= number_format($t['tipo']==1 ? ((isset($tarifas_referencia['drenaje']) && isset($tarifas_referencia['drenaje']['comercial'])) ? $tarifas_referencia['drenaje']['comercial'] : 0) : ((isset($tarifas_referencia['drenaje']) && isset($tarifas_referencia['drenaje']['normal'])) ? $tarifas_referencia['drenaje']['normal'] : 0), 2) ?></b>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endfor; ?>
+                </div>
+            </div>
+        </div>
+        <script>
+            var tarifas = <?= json_encode($tarifas_referencia) ?>;
+
+            function validaContrato() {
+                var num_tomas = parseInt($('#num_tomas').val()) || 1;
+                
+                var todo_ok = true;
+                for (var i = 1; i <= num_tomas; i++) {
+                    if (!$('#t_agua_' + i).is(':checked') && !$('#t_drenaje_' + i).is(':checked')) {
+                        todo_ok = false;
+                        break;
+                    }
+                }
+                if (!todo_ok) {
+                    alert('Error: Cada toma seleccionada debe tener habilitada al menos una conexi\u00f3n (Agua o Drenaje). Revise la ' + (num_tomas > 1 ? '1ra y 2da toma.' : 'toma principal.'));
+                    return false;
+                }
+                
+                // Validacion AJAX síncrona de tomas
+                var ok_tomas = true;
+                $.ajax({
+                    url: 'ruteador.php',
+                    type: 'POST', async: false,
+                    data: { opc: 'validaTomasSync', usuario: '<?= $numusuario ?>', contrato: '<?= $id ?>', domicilio: $('#domicilio').val(), num_tomas: num_tomas },
+                    success: function(resp) {
+                        if(resp.trim() !== 'OK') {
+                            alert(resp);
+                            ok_tomas = false;
+                        }
+                    }
+                });
+                if (!ok_tomas) return false;
+
+                return confirm('¿Est\u00e1 seguro que desea actualizar la informaci\u00f3n?');
+            }
+            
+            $(document).ready(function(){
+                $('#domicilio').on('blur', function(){
+                    if($(this).val().length > 20) {
+                        $.ajax({
+                            url: 'ruteador.php',
+                            type: 'POST', async: true,
+                            data: { opc: 'validaTomasSync', usuario: '<?= $numusuario ?>', contrato: '<?= $id ?>', domicilio: $(this).val(), num_tomas: $('#num_tomas').val() || 1 },
+                            success: function(resp) {
+                                if(resp.trim() !== 'OK') {
+                                    alert("Aviso Domicilio: " + resp);
+                                }
+                            }
+                        });
+                    }
+                });
+            });
+        </script>
+        <div style='display: flex; align-items: center; justify-content: space-between;
+                    padding: 8px 0; border-top: 1px solid #eee; margin-top: 6px; gap: 20px;'>
+
+            <!-- Panel Solo Lectura: Resumen actual de tomas (referencia para el cajero) -->
+            <div id='panel_tomas_ref' style='background: #f0f4ff; border: 1px solid #b8cdf8;
+                  border-radius: 8px; padding: 12px 18px; flex: 1; font-size: 12px; color: #333;'>
+                <b style='font-size: 13px; color: #2c5282;'>&#128202; Estado actual de tomas</b>
+                <div style='display: flex; gap: 16px; margin-top: 8px; flex-wrap: wrap;'>
+                    <?php foreach ($tomas as $n => $t): ?>
+                    <div style='background: #fff; border: 1px solid #d0d9ff; border-radius: 6px;
+                                padding: 8px 14px; min-width: 160px;'>
+                        <b style='color: #4a6fa5;'><?= ($n==1?'1ra.':'2da.') ?> Toma</b>
+                        <span style='font-size: 10px; color: #777; margin-left: 4px;'>
+                            (<?= ($t['tipo']==1 ? 'Comercial' : 'Normal') ?>)
+                        </span><br>
+                        <span style='color: <?= ($t['tiene_agua'] && $t['estado_agua'] ? "#155724" : "#721c24") ?>;'>
+                            &#128167; Agua: <b><?= ($t['tiene_agua'] ? ($t['estado_agua'] ? 'Conectada' : 'Desconectada') : 'Sin instalación') ?></b>
+                        </span><br>
+                        <span style='color: <?= ($t['tiene_drenaje'] && $t['estado_drenaje'] ? "#155724" : "#721c24") ?>;'>
+                            &#128295; Drenaje: <b><?= ($t['tiene_drenaje'] ? ($t['estado_drenaje'] ? 'Conectado' : 'Desconectado') : 'Sin descarga') ?></b>
+                        </span>
+                    </div>
+                    <?php endforeach; ?>
+                    <?php if (empty($tomas)): ?>
+                    <div style='color: #856404; font-style: italic;'>Sin tomas registradas para este contrato.</div>
+                    <?php endif; ?>
+                </div>
+            </div>
+
+            <!-- Panel de tomas: se muestra siempre debajo del formulario -->
+
+        </div>
+    </form>
+    <div id='aviso'></div>
+    <div id='nara'></div>
+</div>
+<hr>
+
+<h2>Acciones sobre el presente contrato</h2><br>
+<p>
+<div style='display: flex; flex-wrap: wrap; gap: 10px; align-items: center;'>
+    <a class='liga opcion' style='margin:0;' href='reportes/contratoinfo2.php?numcontrato=<?= $id ?>&orden=1' target='_blank'>Informe de Cuenta</a>
+    <a class='liga opcion' style='margin:0;' href='reportes/contratoinfo2.php?numcontrato=<?= $id ?>&orden=4' target='_blank'>Informe por fecha de pago</a>
+    <?php if ($estado != 4): ?>
+    <a class='liga opcion anotacioncto' style='margin:0;' href='#' onclick="$('#realizaranotacion').toggle(); $('#textoz').focus();">Hacer una anotaci&oacute;n</a>
+    <a class='liga opcion propietariocto' style='margin:0;' href='#' onclick="$('#cambiarprop').toggle(); $('#nuevonombre').focus();">Cambio de propietario</a>
+    <a class='liga opcion estadocto' style='margin:0;' href='#' onclick="$('#cambioestado').toggle();">Cambio de estado</a>
+    <?php else: ?>
+    <span class='liga opcion disabled' style='margin:0; opacity: 0.5; cursor: not-allowed;' title='Contrato Protegido (SDF)'>Hacer una anotaci&oacute;n</span>
+    <span class='liga opcion disabled' style='margin:0; opacity: 0.5; cursor: not-allowed;' title='Contrato Protegido (SDF)'>Cambio de propietario</span>
+    <a class='liga opcion estadocto' style='margin:0; background: #f8d7da; color: #721c24; border-color: #f5c6cb;' href='#' onclick="$('#cambioestado').toggle();">Consultar Estatus SDF</a>
+    <?php endif; ?>
+    <?php if (in_array($estado, [1, 2, 3])): ?>
+    <a class='liga opcion cargoscto' style='margin:0;' href='#' onclick="$('#agregacargo').toggle();">Agregar cargos</a>
+    <?php endif; ?>
+    <?php if ($estado != 4): ?>
+    <a class='liga opcion cargoscto' style='margin:0;' href='#' onclick="$('#cargoscancelados').toggle();">Cargos Cancelados</a>
+    <a class='liga opcion cargoscto' style='margin:0;' href='#' onclick="$('#notascargoscancelados').toggle();">Notas Cargos Cancelados</a>
+    <?php endif; ?>
+
+    <?php if (!empty($reversal_info)): ?>
+    <?php
+        $rev_fecha_fmt = date('d/m/Y H:i', strtotime($reversal_info['fecha']));
+        $estados_rev   = array(1=>'ACTIVO',2=>'SUSP. TEMPORAL',3=>'SUSP. ADMINISTRATIVA',4=>'SUSP. DEFINITIVA');
+        $rev_origen    = isset($estados_rev[$reversal_info['estado_origen']])  ? $estados_rev[$reversal_info['estado_origen']]  : $reversal_info['estado_origen'];
+        $rev_destino   = isset($estados_rev[$reversal_info['estado_destino']]) ? $estados_rev[$reversal_info['estado_destino']] : $reversal_info['estado_destino'];
+    ?>
+    <a class='liga opcion' id='btn-revertir-transicion'
+       style='margin:0; background:#fff3cd; color:#856404; border:1px solid #ffc107; font-weight:bold;'
+       href='#'
+       title='Transición del <?= $rev_fecha_fmt ?>: <?= htmlspecialchars($rev_origen) ?> → <?= htmlspecialchars($rev_destino) ?>. ATENCIÓN: si ocurre otro cambio de estado antes de revertir, esta opción dejará de estar disponible.'
+       onclick="if(confirm(
+           'REVERTIR TRANSICIÓN DE ESTADO\n\n' +
+           'Esta acción deshará el último cambio de estado del contrato:\n' +
+           '  • Transición del <?= $rev_fecha_fmt ?>: <?= addslashes($rev_origen) ?> → <?= addslashes($rev_destino) ?>\n' +
+           '  • Cargos generados a cancelar: <?= $reversal_info["n_lc_nuevos"] ?>\n' +
+           '  • Recargos amnistiados a restaurar: <?= $reversal_info["n_hist_amnist"] ?>\n' +
+           '  • Deuda tras reversión (exacta): $<?= number_format($reversal_info["deuda_pre"], 2) ?>\n\n' +
+           'IMPORTANTE: si ocurre otro cambio de estado antes de confirmar, esta reversión ya no estará disponible.\n\n' +
+           'La bitácora registrará esta reversión.\n' +
+           '¿Confirma la reversión?'
+       )) {
+           $.post('ruteador.php', {opc:'revertirTransicion', contrato:'<?= $id ?>'}, function(r){ $('#nara').html(r); });
+       } return false;">
+        &#8635; Revertir transición
+    </a>
+    <?php endif; ?>
+
+</div>
+    <div id='nara'></div><br>
+
+
+<div id='realizaranotacion' class='divanotacioncto' style='display:none;'>
+    <hr>
+    <h2>Agregar una nota al contrato</h2>
+    <form id='agregarNota' name='agregarNota'>
+        <input type=hidden name='opc' value='agregaNota'>
+        <input type=hidden name='contrato' id='contrato' value='<?= $id ?>'>
+        <input type='text' name='texto' id='textoz' size=40 class='mayusculas' autocomplete=off>
+        <input type='submit' class='anotacioncto' value='Agregar'>
+    </form><br>
+</div>
+
+<div id='cambiarprop' class='divpropietariocto' style='display:none;'>
+    <hr>
+    <h2>Cambio de Propietario</h2>
+    <form id='propietario' name='propietario' style='margin-left: 20px;'>
+        <input type=hidden name='opc' id='opc' value='cambiandopropietario'>
+        <input type=hidden name='contrato' id='contrato' value='<?= $id ?>'>
+        <input type=hidden name='usuario' id='usuario' value='<?= $numusuario ?>'>
+        B&uacute;squeda: <input type='text' id='nuevonombre' name='nuevonombre' style='width:190px'
+            onkeyup="$('#submitusuario').attr('disabled', 'disabled'); buscaUsuarioCambio(this.value);"
+            autocomplete=off><br><br>
+        <select name='nuevousuario' id='usuarios' size=5 onclick="$('#submitusuario').removeAttr('disabled');">
+        </select>
+        <br><br>
+        <input id='submitusuario' class='propietariocto' type='submit' value='Asignar nuevo propietario' disabled>
+    </form><br>
+</div>
+
+<div id='cambioestado' class='divestadocto' style='display:none;'>
+    <hr>
+    <h2>Cambiar estado del contrato</h2>
+    <?php if ($estado == 4): ?>
+        <div style='background-color: #f8d7da; color: #721c24; padding: 10px; border: 1px solid #f5c6cb; border-radius: 4px; margin-bottom: 15px;'>
+            <b>¡Atención!</b> Este contrato se encuentra en estado de <b>Suspensión Definitiva</b> y no se permite su cambio a ningún otro estado.
+        </div>
+    <?php endif; ?>
+    <form id='cambiaestado' name='cambiaestado' style='margin-left:10px;margin-right:10px;'>
+        <input type=hidden name='opc' value='cambiaestado' id='opc'>
+        <input type=hidden name='contrato' id='contrato' value='<?= $id ?>'>
+        <fieldset style='float: left; width:400px;'>
+            <legend>Estados</legend>
+            <dl>
+                <dt><input type=radio name='estado' value=1 <?= ($estado == 1 ? "checked" : "") ?> <?= ($estado == 4 ? "disabled" : "") ?>><label>Activo</label>
+                <dd>Se tiene la obligaci&oacute;n de pagar los servicios de agua potable y drenaje con los que cuente.
+                <dt><input type=radio name='estado' value=2 <?= ($estado == 2 ? "checked" : "") ?> <?= ($estado == 4 || $estado == 3 ? "disabled" : "") ?>><label>Suspensi&oacute;n
+                        Temporal</label>
+                <dd>Solo en <b><?= array("","Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre")[intval($cfg['susptemp_mes_permitido'])] ?></b> del a&ntilde;o en curso se puede solicitar esta suspensi&oacute;n, para evitar
+                    pagar servicios el a&ntilde;o siguiente. <?php if($estado == 3): ?><br><small style='color:#c0392b;'><b>Bloqueado:</b> Regularice a Activo antes de cambiar tipo de suspensi&oacute;n.</small><?php endif; ?>
+                <dt><input type=radio name='estado' value=3 <?= ($estado == 3 ? "checked" : "") ?> <?= ($estado == 4 || $estado == 2 ? "disabled" : "") ?>><label>Suspensi&oacute;n
+                        Administrativa</label>
+                <dd>Cuando luego de una revisi&oacute;n ocular, se corrobore que no hay toma en el lugar y faltaba darlo de
+                    baja. <?php if($estado == 2): ?><br><small style='color:#c0392b;'><b>Bloqueado:</b> Regularice a Activo antes de cambiar tipo de suspensi&oacute;n.</small><?php endif; ?>
+                <dt><input type=radio name='estado' value='4' <?= ($estado == 4 ? "checked" : "") ?>><label>Suspensi&oacute;n
+                        Definitiva</label>
+                <dd>Eliminaci&oacute;n de los servicios as&iacute; como del contrato.
+            </dl>
+        </fieldset>
+        <fieldset style='float: left; width:400px; text-align: right;'>
+            <legend>Aplicar Acci&oacute;n</legend>
+            <span id='llaves1'>
+                Llave del Presidente:<br><input type='password' size=10 name='presidente' class='derecha'
+                    autocomplete=off><br>
+                Llave del Tesorero:<br><input type='password' size=10 name='tesorero' class='derecha'
+                    autocomplete=off><br>
+                Raz&oacute;n del cambio de estado:<br><textarea name='texto' id='texto' cols=30 rows=4></textarea>
+            </span>
+            <div id='nara'></div>
+            <input type='submit' class='estadocto' value='Cambiar estado' <?= ($estado == 4 ? "disabled" : "") ?>>
+            <div id='nara'></div><span id='sig1'></span>
+        </fieldset>
+    </form>
+    <div id='nara'></div><br>
+</div>
+
+<div id='agregacargo' class='divcargoscto' style='display:none;'>
+    <hr>
+    <h2>Agregar cargos al contrato</h2>
+    <div id='existentes' class='panel300' style='height:170px'>
+        <div id='okas'
+            style='width:280px; font-size: 11px; min-height: 18px; text-align: center; color: #fff; text-transform: uppercase; text-align:center; font-weight:bold; position: absolute; left:0px; padding-top:4px; background: rgba(0,0,0,0.7);'>
+            Cargo: <input type='text' class='mayusculas' value='' id='buscacargo' name='buscacargo' autocomplete=off>
+        </div>
+        <br><br>
+        <table width=100% id='cargosfuente'>
+            <?php foreach ($cargos_fuente as $cf): ?>
+                <tr class='renglon clicable' <?= ($cf['recargo'] != 0 ? " style='color:#900;'" : "") ?>
+                    onclick="<?= ($cf['mensualidades'] == 1 ? "mens('{$cf['monto']}|{$cf['recargo']}|{$cf['anio']}|{$cf['categoria']}|{$cf['repetir']}', '{$cf['nombrec']}', '" . number_format($cf['monto'], 2, '.', ',') . "','{$cf['numconsec']}','{$cf['metros2']}')" : "$('#mensuales').html(''); agregacargo('{$cf['nombrec']}|{$cf['monto']}|{$cf['recargo']}|{$cf['anio']}|{$cf['categoria']}|{$cf['repetir']}','" . number_format($cf['monto'], 2, '.', ',') . "',{$cf['numconsec']},'{$cf['metros2']}');") ?>">
+                    <td class='mayusculas'><?= $this->e($cf['nombrec']) ?> <?= ($cf['mensualidades'] == 1 ? "(&times; mes)" : "") ?></td>
+                    <td nowrap class='derecha' style='width: auto;'>$<?= number_format($cf['monto'], 2, '.', ',') ?><?= ($cf['metros2'] == 1 ? "/mt" : "") ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    </div>
+    <form id='agregarCargoX' name='agregarCargoX' style='margin-left:10px; margin-right:10px;'>
+        <input type=hidden name='opc' value='aplicacargosauno'>
+        <input type=hidden name='contrato' id='contrato' value='<?= $id ?>'>
+        <div id='poraplicar'
+            style='margin-left: 10px; height:170px; width:300px; overflow-y:scroll; overflow-x:hidden; float: left; position: relative;'>
+            <div id='okas'
+                style='width:280px; font-size: 11px; min-height: 18px; height:auto; text-align: center; color: #fff; text-align:center; font-weight:bold; position: absolute; left:0px; padding-top:4px; background: rgba(0,0,0,0.7);'>
+                <span class='mayusculas'>Cargos por aplicar</span> <a class='liguita' href='#'
+                    onclick="$('#cargostabla').html('')">Limpiar</a>
+                <div id='nara'></div>
+                <div id='mensuales' style='text-align:left; height:auto; clear:both;'></div>
+            </div>
+            <br><br>
+            <table id='cargostabla' width=100%></table>
+        </div>
+        <div id='aplicando' style='margin-left: 10px; height:170px; width:300px; float: left; position: relative;'>
+            <input type='submit' class='cargoscto' value='Aplicar a este contrato'>
+            <div id='aplicando_notificacion' style='margin-top:10px;'></div>
+        </div>
+    </form><br>
+    <div id='nara'></div>
+</div>
+
+</p>
+
+<?php if ($npagos != 0): ?>
+    <?= $this->insert('contratos/adeudo_tabla', ['npagos' => $npagos, 'adeudos' => $adeudos, 'id' => $id, 'total' => $total, 'recargos' => $recargos, 'foliotope' => $foliotope]) ?>
+<?php endif; ?>
+
+<?php if ($npagosc != 0): ?>
+    <div id='cargoscancelados' class='divcargoscto' style='display:none; height: 350px; overflow-y: scroll;'>
+        <hr>
+        <h2><?= $npagosc ?> Cargos Cancelados</h2>
+        <table width=50% style='margin-left: 40px' cellspacing=0>
+            <tr>
+                <th width=200px>Cargo</th>
+                <th width=50px>Monto</th>
+                <th width=50px>Acci&oacute;n</th>
+            </tr>
+            <?php foreach ($cancelados as $cc): ?>
+                <tr class='renglon'>
+                    <td class='mayusculas'><i class='rojo'><?= $this->e($cc['leyenda']) ?><?= ($cc['repetido'] == 0 ? "" : " (r{$cc['repetido']})") ?></i>
+                    </td>
+                    <td class='derecha'>$<?= number_format($cc['monto'], 2, '.', ',') ?></td>
+                    <td class='derecha'><a href='#'
+                            onclick="if(confirm('&iquest;Desea restituir este cargo cancelado a pendiente?\n\n<?= $this->e($cc['leyenda']) ?> ($ <?= number_format($cc['monto'], 2, '.', ',') ?>)')) { regresarCargoCancelado('<?= $id ?>', '<?= $this->e($cc['leyenda']) ?>', '<?= $cc['repetido'] ?>', '<?= intval($cc['id_cargo']) ?>'); } return false;">Reasignar</a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    </div>
+<?php endif; ?>
+
+<?php if ($nnotas != 0): ?>
+    <div id='notascargoscancelados' class='divcargoscto' style='display:none; height: 350px; overflow-y: scroll;'>
+        <hr>
+        <h2>Hist&oacute;rico de Cargos Cancelados (<?= $nnotas ?>)</h2><br>
+        <table width=65% style='margin-left: 40px' cellspacing=0>
+            <tr>
+                <th width=200px>Cargos Cancelados</th>
+                <th width=50px>Raz&oacute;n de la Cancelaci&oacute;n</th>
+            </tr>
+            <?php foreach ($notas_cancelacion as $nc): ?>
+                <tr class='renglon'>
+                    <td class='mayusculas' width=220px><?= $this->e($nc['despues']) ?></td>
+                    <td class='derecha' width=150px;><?= $this->e($nc['antes']) ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    </div>
+<?php endif; ?>
+
+<?php if ($otros_contratos): ?>
+    <hr>
+    <h2>Existe<?= (count($otros_contratos) > 1 ? "n otros" : "") ?> <?= count($otros_contratos) ?> contrato<?= (count($otros_contratos) > 1 ? "s" : "") ?> del mismo usuario</h2>
+    <p>
+        <?php $z = 1; ?>
+        <?php foreach ($otros_contratos as $oc): ?>
+            <div id='ficha'>
+                <div id='numcontrato'><a href='#'
+                        onclick="if(confirm('¿Est&aacute;s seguro de querer cargar otro contrato?')){cargaDatosContrato('<?= $oc['contrato'] ?>'); return false;}"><?= $oc['contrato'] ?></a>
+                </div>
+                <div id='direccion'>
+                    <small><b>Estatus:</b> <?= isset($tiposdeestado[(string)$oc['estado']]) ? $tiposdeestado[(string)$oc['estado']] : $oc['estado'] ?></small><br>
+                    <small><?= $this->e(substr($oc['domicilio'], 0, 50)) ?><?= (strlen($oc['domicilio']) > 50 ? " (...)" : "") ?></small>
+                </div>
+            </div>
+            <?= ($z % 3 == 0 ? "<div id=nara></div>" : "") ?>
+            <?php $z++; ?>
+        <?php endforeach; ?>
+    </p>
+    <div id='nara'></div>
+<?php endif; ?>
+
+<div id='nara'></div>
+<script>
+    function abrirImpresionCredencial(id) {
+        var w = 820;
+        var h = 900;
+        var left = (screen.width/2)-(w/2);
+        var top = (screen.height/2)-(h/2);
+        window.open('reportes/imprimir_credencial.php?id=' + encodeURIComponent(id), 'ImprimirCredencial', 'width=' + w + ',height=' + h + ',top=' + top + ',left=' + left + ',toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes');
+    }
+    guardaDatosContrato()
+</script>
+
+```
+
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools tailored to particular tasks, like viewing files. This strategy promises a more targeted and less error-prone approach to problem-solving, which I will continue to refine and implement moving forward.
+
+
+**Analyzing File Dependencies**
+
+I'm now analyzing the `ficha.php` file, specifically looking at its dependencies and calls to other files, like `contratos/adeudo_tabla`. The key is to understand how these components interact and to replace incorrect commands for the task at hand. This step helps in understanding the function's broader context, allowing me to isolate errors and make informed choices.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.330776990s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Aug 2026, 1:34 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools tailored to particular tasks, like viewing files. This strategy promises a more targeted and less error-prone approach to problem-solving, which I will continue to refine and implement moving forward.
+
+
+**Refining Tool Choices**
+
+I'm adhering to the tool usage rules, specifically avoiding `cat` for file creation/appending and prioritizing `grep_search`. I've listed the tools needed to inspect the `contratos.php` file, including `grep_search` and `less`, avoiding generic options. My next step will be to execute the identified tools to get the line number and the relevant code segment. I'm focusing on line 195.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `contratos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.809079725s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/*
+ * contratos.php — Lógica de negocio para contratos
+ * Rediseño v2: usa contrato_toma y config_sistema
+ * PHP 5.5 compatible
+ */
+
+// =============================================================================
+// Normalización canónica de domicilios
+// Unifica variantes tipográficas antes de guardar en BD y para comparaciones.
+// Reglas: UPPER, sin acentos, sin puntos/comas, espacios simples,
+//         variantes de número (n°, nº, no., nO.) → N, sin punto final.
+// =============================================================================
+function _normalizaDomicilio($dom) {
+    $s = strtoupper(trim((string)$dom));
+    // Acentos y caracteres especiales
+    $s = str_replace(['Á','É','Í','Ó','Ú','Ü','Ñ'], ['A','E','I','O','U','U','N'], $s);
+    // Variantes de número ordinal (N° Nº NO. No. NO 1, N10, N-10, N.10) → # (respetando palabras como NORTE, NOGALES, PINO, CAMINO)
+    $s = preg_replace('/\bN[Oo]\.\s*|N[°º]\.?\s*|\bN[Oo]\s*(?=[0-9])|\bN[\s\.\-]*(?=[0-9])/u', '#', $s);
+    // Puntos, comas, guiones dobles
+    $s = str_replace(['.', ','], ['', ''], $s);
+    // Múltiples espacios → uno
+    $s = preg_replace('/\s+/', ' ', $s);
+    return trim($s);
+}
+
+// Expresión SQL equivalente a _normalizaDomicilio() para usar en WHERE.
+// $col: nombre de columna (ej. "c.domicilio") o valor literal entre comillas simples.
+function _normalizaDomicilioSQL($col) {
+    // Acentos y Ñ
+    $s = "REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(UPPER($col),'Á','A'),'É','E'),'Í','I'),'Ó','O'),'Ú','U'),'Ü','U'),'Ñ','N')";
+    // Variantes de número ordinal (N° Nº NO. No. NO 1, N10, N-10, N.10) → # (respetando palabras como NORTE, NOGALES, PINO, CAMINO)
+    $s = "REGEXP_REPLACE($s, '\\bN[Oo]\\.\\s*|N[°º]\\.?\\s*|\\bN[Oo]\\s*(?=[0-9])|\\bN[\\s\\.\\-]*(?=[0-9])', '#')";
+    // Puntos y comas
+    $s = "REPLACE(REPLACE($s,'.',''),',','')";
+    // Colapsar espacios dobles (SQL no tiene regex; 2 pasadas cubren hasta 4 espacios consecutivos)
+    $s = "TRIM(REPLACE(REPLACE($s,'  ',' '),'  ',' '))";
+    return $s;
+}
+
+function cargaConfig($y)
+{
+	$res = $y->q("SELECT clave, valor FROM config_sistema");
+	$cfg = array();
+	while (list($k, $v) = $y->fetch_array($res)) {
+		// Fix para números formateados (ej. 10,500 o 10,500.50)
+		if (preg_match('/^-?\d{1,3}(,\d{3})+(\.\d+)?$/', trim((string)$v))) {
+			$v = str_replace(',', '', trim((string)$v));
+		}
+		$cfg[$k] = $v;
+	}
+	return $cfg;
+}
+
+function obtenerValorSeguro($array, $indice, $valorPorDefecto = '')
+{
+	return (isset($array[$indice]) && $array[$indice] !== null) ? $array[$indice] : $valorPorDefecto;
+}
+
+function cargaContrato($id)
+{
+	global $templates;
+	$numcontrato = $id;
+
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$cfg = cargaConfig($y);
+
+	$tipos = array(0 => "Normal", 1 => "Comercial");
+
+	$res = $y->q("SELECT usuario.nombre, contrato.numusuario, contrato.domicilio, contrato.masdatos, contrato.tipo, contrato.agua, contrato.drenaje, contrato.observaciones, contrato.estado, contrato.metros, YEAR(contrato.fecha), MONTH(contrato.fecha), usuario.estado as estado_usr FROM contrato LEFT JOIN usuario ON contrato.numusuario=usuario.noconsecutivo WHERE contrato.numcontrato='$id'");
+
+	// Host C: folio viene de folios_recibo (AUTO_INCREMENT), no de MAX(folio)
+	$resx = $y->q("SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA=DATABASE() AND TABLE_NAME='folios_recibo'");
+	list($foliotope) = $y->fetch_array($resx);
+
+	list($nombre, $numusuario, $domicilio, $masdatos, $tipo, $agua, $drenaje, $observaciones, $estado, $metros, $aniocontrato, $mescontrato, $estado_usr) = $y->fetch_array($res);
+
+	// --- TOMAS desde contrato_toma ---
+	$res_tomas = $y->q("SELECT id, num_toma, tipo, tiene_agua, tiene_drenaje, estado_agua, estado_drenaje, observaciones FROM contrato_toma WHERE numcontrato='$id' ORDER BY num_toma ASC");
+	$tomas = array();
+	while ($t = $y->fetch_array($res_tomas)) {
+		$tomas[intval($t['num_toma'])] = $t;
+	}
+	$num_tomas = count($tomas);
+	if ($num_tomas == 0) $num_tomas = 1;
+	$max_tomas = intval(obtenerValorSeguro($cfg, 'max_tomas_por_contrato', 2));
+
+	// --- TARIFAS DE REFERENCIA del año en curso (para mostrar en UI) ---
+	$anio_actual = date('Y');
+	$res_tarifas = $y->q("SELECT nombre, monto, monto_comercial, categoria FROM cargos WHERE automatico=1 AND estado=1 AND anio=$anio_actual AND categoria IN (2,3) ORDER BY categoria, numconsec");
+	$tarifas_referencia = array();
+	while ($tf = $y->fetch_array($res_tarifas)) {
+		$clave = ($tf['categoria'] == 2) ? 'agua' : 'drenaje';
+		if (!isset($tarifas_referencia[$clave])) {
+			$mon_com = (floatval($tf['monto_comercial']) > 0) ? floatval($tf['monto_comercial']) : floatval($tf['monto']) * 2;
+			$tarifas_referencia[$clave] = array(
+				'leyenda'   => $tf['nombre'],
+				'normal'    => floatval($tf['monto']),
+				'comercial' => $mon_com
+			);
+		}
+	}
+
+	// --- CARGOS AUTOMÁTICOS y Sincronización de Recargos JIT al cargar el contrato ---
+	if ($estado == 1) {
+		generaCargosAutomaticos($id, $y);
+		_sincronizaDeudaPendienteContrato($id, $y);
+	}
+
+	// --- Otros contratos del mismo usuario ---
+	$res2 = $y->q("SELECT numcontrato, domicilio, estado FROM contrato WHERE numusuario=$numusuario AND numcontrato != '$id'");
+	$otros_contratos = array();
+	while (list($contrato_o, $domicilio_o, $estado_o) = $y->fetch_array($res2)) {
+		$otros_contratos[] = array('contrato' => $contrato_o, 'domicilio' => $domicilio_o, 'estado' => $estado_o);
+	}
+
+	// --- Adeudos ---
+	// Categorías de recargo según config_sistema (16=agua, 17=drenaje).
+	// El campo ligacargos.recargo contiene el monto del recargo (float), NO es bandera booleana.
+	// La clasificación cargo/recargo se determina por categoria, no por el campo recargo.
+	$cat_recargo_agua   = intval(obtenerValorSeguro($cfg, 'recargo_categoria_agua',   16));
+	$cat_recargo_drenaje = intval(obtenerValorSeguro($cfg, 'recargo_categoria_drenaje', 17));
+	$res = $y->q("SELECT id_cargo, leyenda, monto, recargo, repetido, categoria, anio FROM vw_ligacargos_pendientes WHERE numcontrato='$id' ORDER BY anio");
+	$npagos = $y->num_rows($res);
+	$adeudos = array();
+	$total = 0;
+	$recargos = 0;
+	while ($resulta = $y->fetch_array($res)) {
+		$es_recargo = ($resulta['categoria'] == $cat_recargo_agua || $resulta['categoria'] == $cat_recargo_drenaje);
+		$resulta['recargo'] = $es_recargo ? 1 : 0; // normalizar flag para la vista (coloreado rojo)
+		$adeudos[] = $resulta;
+		$total    += $es_recargo ? 0 : $resulta['monto'];
+		$recargos += $es_recargo ? $resulta['monto'] : 0;
+	}
+
+	// --- Cargos fuente ---
+	$res = $y->q("SELECT numconsec, nombre, monto, monto_comercial, recargo, observaciones, mensualidades, anio, categoria, repetir, metros FROM cargos WHERE estado=1 ORDER BY nombre");
+	$cargos_fuente = array();
+	while ($cf = $y->fetch_array($res)) {
+		$cargos_fuente[] = array(
+			'numconsec'    => $cf[0],
+			'nombrec'      => $cf[1],
+			'monto'        => $cf[2],
+			'monto_com'    => $cf[3],
+			'recargo'      => $cf[4],
+			'observaciones'=> $cf[5],
+			'mensualidades'=> $cf[6],
+			'anio'         => $cf[7],
+			'categoria'    => $cf[8],
+			'repetir'      => $cf[9],
+			'metros2'      => $cf[10]
+		);
+	}
+
+	// --- Notas ---
+	$q1 = "SELECT id, SUBSTRING(fecha,1,10) AS fecha, texto, estado FROM notas WHERE contrato='$id' AND estado <> -1 ORDER BY estado DESC, fecha DESC";
+	$res_notas = $y->q($q1);
+	$notas = array();
+	while ($n = $y->fetch_array($res_notas)) {
+		$notas[] = $n;
+	}
+
+	// --- Cargos cancelados ---
+	// Host C: ligacargos tiene PK id AUTO_INCREMENT — se pasa a regresarCargoCancelado como discriminador
+	// id_cargo: COALESCE activa→historico (Regla F06 — split anio<=2025 en ligacargos_historico)
+	$resc = $y->q("SELECT leyenda, monto, recargo, repetido, categoria, es_recargo_moratorio, fcobro,
+	               COALESCE(
+	                   (SELECT id FROM ligacargos          WHERE numcontrato='$id' AND leyenda=v.leyenda AND repetido=v.repetido AND estado=-1 LIMIT 1),
+	                   (SELECT id FROM ligacargos_historico WHERE numcontrato='$id' AND leyenda=v.leyenda AND repetido=v.repetido AND estado=-1 LIMIT 1)
+	               ) AS id_cargo
+	               FROM vw_ligacargos_all v WHERE numcontrato='$id' AND estado=-1 ORDER BY fcobro");
+	$npagosc = $y->num_rows($resc);
+	$cancelados = array();
+	while ($cc = $y->fetch_array($resc)) {
+		// Normalizar bandera para ficha.php (rojo cursiva en cargos cancelados)
+		$cc['recargo'] = $cc['es_recargo_moratorio'] ? 1 : 0;
+		$cancelados[] = $cc;
+	}
+
+	// --- Histórico cancelaciones ---
+	$resnc = $y->q("SELECT antes, despues FROM cambios WHERE numcontrato='$id' AND descripcion='cancelacion' ORDER BY fecha DESC");
+	$nnotas = $y->num_rows($resnc);
+	$notas_cancelacion = array();
+	while ($nc = $y->fetch_array($resnc)) {
+		$notas_cancelacion[] = $nc;
+	}
+
+	$tiposdeestado = array("1" => "Activo", "2" => "Suspensi&oacute;n Temporal", "3" => "Suspensi&oacute;n Administrativa", "4" => "Suspensi&oacute;n Definitiva");
+
+	$letras = $y->q("SELECT numcontratoletras FROM contrato WHERE numcontrato='$id' ORDER BY numcontrato");
+	list($numcontratoletras) = $y->fetch_array($letras);
+
+	return $templates->render('contratos/ficha', array(
+		'id'                  => $id,
+		'nombre'              => $nombre,
+		'numusuario'          => $numusuario,
+		'domicilio'           => $domicilio,
+		'masdatos'            => $masdatos,
+```
+
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools like 'view_file' directly, rather than resorting to broader, less direct methods. I'm aiming for targeted actions.
+
+
+**Refining Tool Choices**
+
+I'm now honing my tool usage, specifically avoiding bash commands that involve `cat` for file creation/appending, and preferring `grep_search` to `grep`. I'm starting by recalling my instructions, and focusing on a more strategic selection of tools. I'll explicitly list available tools before making a call.
+
+
+**Analyzing Debt Calculation Logic**
+
+I'm now investigating the debt calculation within `ficha.php`, specifically how `$total` and `$recargos` are populated based on the `$es_recargo` flag, derived from the `categoria` field. My aim is to understand how the totals are built. The recent focus is on the logic within the loop, scrutinizing the conditional assignments and how they determine the final debt amounts.
+
+
+**Comparing Debt Calculations**
+
+I'm now comparing the debt calculations in `ficha.php` and `listadeudoresxc.php`. The key difference appears to be the exclusion of categories 6, 19, 20, 21, and 22 in the latter. I'm checking if this exclusion fully explains the discrepancies, and if there are additional differences. I need to examine `contratos.php` for clues.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 5.966269223s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Aug 2026, 1:35 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools tailored to particular tasks, like viewing files. This strategy promises a more targeted and less error-prone approach to problem-solving, which I will continue to refine and implement moving forward.
+
+
+**Refining Tool Choices**
+
+I'm recalling critical instruction 1 and 2. Specifically, I'm now actively avoiding `cat`, `grep` within bash, `ls`, `cat`, `grep`, and `sed` for their respective core functions. Considering tool selection before executing, I've identified `bdawahost-c` as the suitable MCP server to access MariaDB, avoiding unnecessary reliance on other tools.
+
+
+
+
+### Actions
+
+**Tool:** `call_mcp_tool`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.320526220s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** CORTEX_STEP_STATUS_ERROR
+**Created:** 4 Aug 2026, 1:35 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools like 'view_file' directly, rather than resorting to broader, less direct methods. I'm aiming for targeted actions.
+
+
+
+
+### Actions
+
+**Tool:** `call_mcp_tool`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.058193834s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** CORTEX_STEP_STATUS_ERROR
+**Created:** 4 Aug 2026, 1:35 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools tailored to particular tasks, like viewing files. This strategy promises a more targeted and less error-prone approach to problem-solving, which I will continue to refine and implement moving forward.
+
+
+**Refining Tool Application**
+
+I'm recalling critical instruction 1 and 2. Specifically, I'm now prioritizing direct tool usage, avoiding nested command executions to prevent errors. I'm focusing on `run_command` with the MySQL client, targeting host C on port 7002, or checking the `.mcp.json` file in `agua_chatledger` as per the rule clarification about finding host connection info.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.392025555s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Aug 2026, 1:35 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools tailored to particular tasks, like viewing files. This strategy promises a more targeted and less error-prone approach to problem-solving, which I will continue to refine and implement moving forward.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.073824573s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Aug 2026, 1:35 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools like 'view_file' directly, rather than resorting to broader, less direct methods. I'm aiming for targeted actions.
+
+
+**Refining Tool Choices**
+
+I'm now refining my approach to align with the critical instructions. I am starting each thought with instruction recall. I will focus on precise tool selection. Specifically, I will avoid using generic shell commands when specialized tools are available, prioritizing 'grep_search' for searching and avoiding the use of 'cat', 'grep', 'ls' or 'sed' inside bash commands for file operations or text processing. I'm focusing on efficiency and compliance.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.255745980s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Aug 2026, 1:35 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools like 'view_file' directly, rather than resorting to broader, less direct methods. I'm aiming for targeted actions.
+
+
+**Refining Exclusions Analysis**
+
+I'm now zeroing in on discrepancies in the exclusion data. I've re-examined the totals, specifically focusing on the difference between included and excluded categories. This aligns with a user's reported value. However, the exact figure from my query presents a slight variance, which I am investigating further for accuracy.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.110477607s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Aug 2026, 1:35 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools tailored to particular tasks, like viewing files. This strategy promises a more targeted and less error-prone approach to problem-solving, which I will continue to refine and implement moving forward.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.066710351s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Aug 2026, 1:36 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools like 'view_file' directly, rather than resorting to broader, less direct methods. I'm aiming for targeted actions.
+
+
+**Refining Tool Choices**
+
+I'm now honing my tool usage strategy, always adhering to those crucial instructions. Specifically, I'm analyzing the context of `listadeudoresxc.php` and its exclusions, which involves identifying the limitations and appropriate tools before execution. My next steps involve determining the most efficient way to access and process the file content, avoiding any unnecessary or inefficient `cat` or `grep` operations.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.775836160s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Aug 2026, 1:36 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools tailored to particular tasks, like viewing files. This strategy promises a more targeted and less error-prone approach to problem-solving, which I will continue to refine and implement moving forward.
+
+
+**Refining Tool Choices**
+
+I'm now implementing new tool selection rules, moving away from generic commands. I'm focusing on tailored utilities for viewing, searching, and file manipulation to ensure efficiency. To make sure, I am also reviewing existing thought blocks, using new techniques. For instance, `grep_search` is now the preferred method for searching, avoiding `grep` within bash. This structured approach promises greater control.
+
+
+**Clarifying Debt Categories**
+
+I've pinpointed that the discrepancy in debt figures stems from how categories are handled in two different reports. `listadeudoresxc.php` intentionally excludes "saneamiento" categories (6, 19, 20, 21, 22), presenting a "core services" debt view. The root cause is these files exclude certain categories. `contratos.php` includes all categories, showing a comprehensive "total consolidated debt". This distinction clarifies the differing figures, e.g. the difference of ~$8,300 for contract 76, which is specifically related to assembly violations (category 6).
+
+
+**Explaining Root Cause**
+
+The apparent inconsistency isn't a database calculation error, but differences in **business rules applied to the reports**. I've determined that `contratos.php` reports total debt, including all categories, such as assembly violations (category 6, $8,300 for contract 76). However, `listadeudoresxc.php` excludes specific "saneamiento" categories (6, 19, 20, 21, 22), providing a different debt view. Thus, the reports show different figures.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 5.489518375s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+## User Request
+
+que en listadeudoresxc, aparezcan los montos de deuda como los que muestra la fica de contrato ( Total general:	$ 35,318.00) por ejemplo.
+CUidar no pisar nada, ni generar otros gaps/issues.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `11_depuracion_deuda_fantasma_742_959.sql`
+**Language:** oracle-sql
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools like 'view_file' directly, rather than resorting to broader, less direct methods. I'm aiming for targeted actions.
+
+
+**Refining Tool Choices**
+
+I'm now consciously avoiding unnecessary commands within bash, like cat or grep, in favor of dedicated tools such as 'grep_search'. My focus is to maximize efficiency, I'm now explicitly listing all relevant tools before using them. I will remember the critical instructions, in particular, I must think about what tools are related to the task and only use a set of tools T if all other tools in the list are either more generic or cannot be used. I will modify `listadeudoresxc` to include all categories, and, after checking the comment, `listadeudores.php` since they have the same underlying logic.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `AND l.categoria NOT IN \(6, 19, 20, 21, 22\)`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.349465443s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 4 Aug 2026, 1:39 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools tailored to particular tasks, like viewing files. This strategy promises a more targeted and less error-prone approach to problem-solving, which I will continue to refine and implement moving forward.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `l.categoria NOT IN`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.001643889s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 4 Aug 2026, 1:39 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools like 'view_file' directly, rather than resorting to broader, less direct methods. I'm aiming for targeted actions.
+
+
+**Refining Tool Choices**
+
+I'm now zeroing in on more precise tool selection, keeping Critical Instructions 1 and 2 in mind. My thought process is now highlighting potential category exclusions in `listadeudores.php`, `listadeudoresxc.php`, and `carteravencida.php`, with particular caution for the last one. I'm focusing on the necessity of matching specific tools to file tasks. I'm currently assessing matches within the specified files, using the guidelines for direct versus indirect tool applications.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.136452792s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Aug 2026, 1:39 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools tailored to particular tasks, like viewing files. This strategy promises a more targeted and less error-prone approach to problem-solving, which I will continue to refine and implement moving forward.
+
+
+**Refining Tool Application**
+
+I'm recalling critical instruction 1 and 2. I've now identified the core issue as needing to remove a specific conditional statement from two PHP files. This requires direct file modification. Given this, I will select `sed` as the appropriate tool for this targeted find-and-replace task, and consider whether other tools are more generic.
+
+
+**Clarifying Scope and Consistency**
+
+I'm now clarifying the scope to ensure consistency. The user requested modifications in `listadeudoresxc.php`, and I've determined that this likely requires a similar change in `listadeudores.php` for consistency, given their shared logic. I've decided to avoid any changes to `carteravencida.php`, which has independent logic and specific inclusion/exclusion rules.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 3.577806732s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 4 Aug 2026, 1:40 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools like 'view_file' directly, rather than resorting to broader, less direct methods. I'm aiming for targeted actions.
+
+
+
+
+### Actions
+
+**Tool:** `multi_replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.085646862s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 4 Aug 2026, 1:40 pm
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 4 Aug 2026, 1:40 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools like 'view_file' directly, rather than resorting to broader, less direct methods. I'm aiming for targeted actions.
+
+
+**Refining Tool Choices**
+
+I'm now refining my approach to tool utilization, remembering to prioritize specific tools based on the critical instructions, namely (a), (b), (c) above, which govern the interaction of tools in the environment. I've re-evaluated my steps for calculating total debt across files, ensuring they align precisely with other views, such as the "Ficha del contrato". I'm double-checking the modifications for consistency.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.101696231s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+## User Request
+
+para el depploy de este fix, seria subir esas dos phps, cierto ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `listadeudoresxc.php`
+**Language:** php
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools like 'view_file' directly, rather than resorting to broader, less direct methods. I'm aiming for targeted actions.
+
+
+**Confirming Deployment Scope**
+
+I recall critical instructions 1 and 2. Given the user's question about deploying the fix, I confirm that only the specified two `.php` files are required. No other actions seem necessary, and I confirm this.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.703125783s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Aug 2026, 1:42 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Usage**
+
+I'm now focusing on tool selection, emphasizing specific tools over general ones where possible. The goal is to optimize efficiency by leveraging tools like 'view_file' directly, rather than resorting to broader, less direct methods. I'm aiming for targeted actions.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.204558696s
+- **Model:** Gemini 3.1 Pro (Low)
+</details>
+
+---
+
+## User Request
+
+si, comitea y sube todo.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `listadeudoresxc.php`
+**Language:** php
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
 </details>
 
 ---
