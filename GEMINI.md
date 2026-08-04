@@ -395,7 +395,7 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 *   **Watchdog de Fugas de Memoria WASM**: Diseño de una política *Kill-and-Respawn* para reiniciar de manera segura el Web Worker de VOSK en periodos de inactividad, previniendo fallos Out-of-Memory (OOM) en terminales de bajo hardware con sesiones prolongadas.
 *   **Documentación de Pruebas Manuales**: Inserción de recomendaciones de QA que aclaran el alcance técnico entre una Limpieza Total (Clear Site Data) y el botón operativo de "Forzar Sincronización" en la PWA.
 
-**Última actualización**: 2026-08-02
+**Última actualización**: 2026-08-04
 
 **Estabilización de Sesión Persistente, Interrupciones y Entrega de Turno (2026-07-06 — Sesión 1):**
 *   **Persistencia PHP Extendida**: Habilitado el tiempo de vida de sesión a **24 horas** en `commons.php` para prevenir expiraciones silenciosas en los dispositivos móviles durante la jornada laboral.
@@ -425,6 +425,13 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 *   **Identificación de Entregables del Cliente (Assets)**: Generación del listado maestro `assets_requeridos_cliente.md` a partir de un análisis de los mockups (v1.0) para asegurar la entrega de logotipos, Excel de catálogos y accesos de Hostinger a tiempo.
 *   **Eliminación de Anglicismos**: Purga final de términos comerciales ambiguos ("CMS", "tiempo real").
 *   **Regla de Ubicación de Contratos (PDFs)**: Todos los PDFs generados a partir de los documentos contractuales oficiales (`Contrato_Base_Desarrollo.md`, `Anexo_A_Sitio_Web.md` y `Anexo_A_Bloc_Digital.md`) deben almacenarse exclusivamente dentro del subdirectorio `contrato/` (ej: `v1.1.3/contrato/`), manteniendo las propuestas comerciales, cartas de presentación y diagramas auxiliares en el directorio raíz.
+
+**Integración de Seguridad, Homologación y Detalle de Insumos (2026-08-04):**
+*   **Seguridad Integral**: Creación y refinamiento de `Tecnica_Seguridad_Integral.html` con una Matriz de Trazabilidad por Ambiente (Desarrollo, Docker, VPS Prod, Despliegue) para el ecosistema LAESH.
+*   **Mitigación de Gaps de Infraestructura**: Integración de directivas contra DoS mediante límites de subida de archivos controlados por base de datos (tabla `configuraciones`) y hardening SSH (bloqueo de root y llaves criptográficas).
+*   **Normalización de Índices**: Homologación del estilo visual, CSS global y navegación TOC (`<nav class="toc">`) en los 4 documentos técnicos del proyecto.
+*   **Mockups de Insumos**: Re-redacción no técnica de `assets_requeridos_cliente.md` enriquecida con imágenes capturadas con Chrome headless sobre objetivos de Google Ads y Facebook Messenger.
+*   **Otros Alcances (Upsells)**: Segmentación explícita de Facebook Ads y Blog dinámico en la lista de insumos, incluyendo una tabla de diferencias con el panel básico para facilitar la venta adicional de módulos.
 
 > [!IMPORTANT]
 > **Terminología de Sesión**:
