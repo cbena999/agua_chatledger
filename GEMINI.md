@@ -395,7 +395,7 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 *   **Watchdog de Fugas de Memoria WASM**: Diseño de una política *Kill-and-Respawn* para reiniciar de manera segura el Web Worker de VOSK en periodos de inactividad, previniendo fallos Out-of-Memory (OOM) en terminales de bajo hardware con sesiones prolongadas.
 *   **Documentación de Pruebas Manuales**: Inserción de recomendaciones de QA que aclaran el alcance técnico entre una Limpieza Total (Clear Site Data) y el botón operativo de "Forzar Sincronización" en la PWA.
 
-**Última actualización**: 2026-08-04
+**Última actualización**: 2026-08-05
 
 **Estabilización de Sesión Persistente, Interrupciones y Entrega de Turno (2026-07-06 — Sesión 1):**
 *   **Persistencia PHP Extendida**: Habilitado el tiempo de vida de sesión a **24 horas** en `commons.php` para prevenir expiraciones silenciosas en los dispositivos móviles durante la jornada laboral.
@@ -432,6 +432,10 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 *   **Normalización de Índices**: Homologación del estilo visual, CSS global y navegación TOC (`<nav class="toc">`) en los 4 documentos técnicos del proyecto.
 *   **Mockups de Insumos**: Re-redacción no técnica de `assets_requeridos_cliente.md` enriquecida con imágenes capturadas con Chrome headless sobre objetivos de Google Ads y Facebook Messenger.
 *   **Otros Alcances (Upsells)**: Segmentación explícita de Facebook Ads y Blog dinámico en la lista de insumos, incluyendo una tabla de diferencias con el panel básico para facilitar la venta adicional de módulos.
+
+**Especificación de Secciones y Formato de Impresión 1/4 Carta (2026-08-05):**
+*   **Detalle de Secciones y Banners**: Incorporación del requerimiento de hasta 6 secciones del sitio web y delimitación de dimensiones recomendadas para imágenes (1920x600px) para evitar deformación de diseño y optimizar la carga.
+*   **Impresión de Solicitud en Hojas Blancas**: Especificación de que la impresión de 1/4 de carta se hará en hojas blancas simples (donde el código PHP generará el logotipo y cabecera de contacto automáticamente), añadiendo pruebas de calibración física con base en la marca/modelo de la impresora.
 
 > [!IMPORTANT]
 > **Terminología de Sesión**:
