@@ -433,9 +433,10 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 *   **Mockups de Insumos**: Re-redacción no técnica de `assets_requeridos_cliente.md` enriquecida con imágenes capturadas con Chrome headless sobre objetivos de Google Ads y Facebook Messenger.
 *   **Otros Alcances (Upsells)**: Segmentación explícita de Facebook Ads y Blog dinámico en la lista de insumos, incluyendo una tabla de diferencias con el panel básico para facilitar la venta adicional de módulos.
 
-**Especificación de Secciones y Formato de Impresión Media Carta (2026-08-05):**
-*   **Detalle de Secciones y Banners**: Incorporación del requerimiento de hasta 6 secciones del sitio web y delimitación de dimensiones recomendadas para imágenes (1920x600px) para evitar deformación de diseño y optimizar la carga.
-*   **Impresión de Solicitud en Hojas Blancas**: Especificación de que la impresión se hará en formato Media Carta (hojas blancas simples cortadas horizontalmente a la mitad, donde el código PHP generará el logotipo y cabecera de contacto automáticamente), añadiendo pruebas de calibración física con base en la marca/modelo de la impresora.
+**Especificación de Secciones, Formato Media Carta y Generación de PDF Excluido (2026-08-05):**
+*   **Detalle de Secciones y Banners**: Incorporación del requerimiento de hasta 6 secciones del sitio web y delimitación de dimensiones recomendadas para imágenes (1920x600px). Renombrado del alcance a "Sitio Web Corporativo" y remoción de cláusulas temporales ("10 días").
+*   **Impresión de Solicitud en Hojas Blancas**: Configuración de impresión Media Carta (hoja cortada horizontalmente a la mitad, con generación automática de cabecera en PHP), vinculando requerimientos de marca/modelo de impresora para calibración.
+*   **Generador PDF con Exclusión de Upsell**: Modificación de `build_pdf.py` para añadir la tarea `assets` que compila `assets_requeridos_cliente.pdf` (Letter, font size 11) truncando dinámicamente el contenido antes de la sección de "Otros Alcances" (dejando la venta adicional oculta en el código de producción pero fuera del documento de firma del cliente).
 
 > [!IMPORTANT]
 > **Terminología de Sesión**:
