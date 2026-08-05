@@ -436,7 +436,7 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 **Especificación de Secciones, Formato Media Carta y Generación de PDF Excluido (2026-08-05):**
 *   **Detalle de Secciones y Banners**: Incorporación del requerimiento de hasta 6 secciones del sitio web y delimitación de dimensiones recomendadas para imágenes (1920x600px). Renombrado del alcance a "Sitio Web Corporativo" y remoción de cláusulas temporales ("10 días").
 *   **Impresión de Solicitud en Hojas Blancas**: Configuración de impresión Media Carta (hoja cortada horizontalmente a la mitad, con generación automática de cabecera en PHP), vinculando requerimientos de marca/modelo de impresora para calibración.
-*   **Generador PDF con Exclusión de Upsell**: Modificación de `build_pdf.py` para añadir la tarea `assets` que compila `assets_requeridos_cliente.pdf` (Letter, font size 11) truncando dinámicamente el contenido antes de la sección de "Otros Alcances" (dejando la venta adicional oculta en el código de producción pero fuera del documento de firma del cliente).
+*   **Generador PDF con Exclusión de Upsell**: Modificación de `build_pdf.py` para añadir la tarea `assets` que compila `assets_requeridos_cliente.pdf` (Letter, font size 11) truncando dinámicamente el contenido antes de la sección de "Otros Alcances" (dejando la venta adicional oculta en el código de producción pero fuera del documento de firma del cliente). Ajuste posterior de márgenes a 12mm, line-height a 1.35 y altura de mockups para compactar el documento y asegurar que quepa exactamente en 2 páginas.
 
 > [!IMPORTANT]
 > **Terminología de Sesión**:
