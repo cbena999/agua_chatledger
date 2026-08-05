@@ -7,9 +7,9 @@
 | **Trajectory ID** | `f51e7007-001e-45ca-b000-c3ebb8132ce0` |
 | **Cascade ID** | `31156cde-8540-4bb7-b98d-aae9a424fc4e` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 1268 |
+| **Total Steps** | 1539 |
 | **Started** | 4 Aug 2026, 11:40 am |
-| **Completed** | 5 Aug 2026, 8:40 am |
+| **Completed** | 5 Aug 2026, 2:40 pm |
 
 ---
 
@@ -30579,6 +30579,6720 @@ muy bien , documenta en PLAN_MOTOR_MORA_LEGACY.md,  todas estas precisiones de l
 
 **Status:** Completed
 **Created:** 5 Aug 2026, 8:40 am
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+## User Request
+
+incluye cuales/que  phps de deuda ahora usan la view y antes no.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `PLAN_MOTOR_MORA_LEGACY.md`
+**Language:** markdown
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `PLAN_MOTOR_MORA_LEGACY.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L154-169)</summary>
+
+**Path:** `Unknown file`
+
+```
+    3. Se integró la orden de ejecución del script 11 en los orquestadores `run_patch_host_c.sh` y `run_patch_host_c.ps1`.
+
+### 17. Sincronización Automatizada de Saldo Diario y Paridad Ficha vs. Deudores (4 de Agosto de 2026)
+*   **Diagnóstico y Causa Raíz del Desfase de $240 MXN:** Los reportes estáticos de deudores (como `listadeudoresxc.php`) leen directamente de la vista `vw_ligacargos_pendientes` (creada en Abril 2026), mientras que la **Ficha del Contrato** (`contratos.php` -> `cargaContrato()`) ha operado desde el setup inicial de Host C bajo un modelo híbrido JIT: primero ejecuta `generaCargosAutomaticos()` y `_sincronizaDeudaPendienteContrato()`, y luego lee los deudas de la vista. Debido a que la versión inicial del script en lote `sync_cartera_mensual.php` solo ejecutaba `generaCargosAutomaticos()`, los recargos retroactivos de contratos no abiertos manualmente en la UI (ej. contratos 484, 527, 1008) no existían físicamente en la BD, generando un desfase de $240 MXN frente al reporte general.
+*   **Ajuste Aplicado (4 de Agosto de 2026 - Commit `1c87339`):**
+    Se actualizó `sync_cartera_mensual.php` inyectando la llamada obligatoria a `_sincronizaDeudaPendienteContrato($row[0], $y)`. Con esto, el Job en lote replica milimétricamente la misma secuencia de dos pasos de la Ficha para todo el padrón.
+*   **Mecanismo de Almacenamiento Físico e Idempotencia:**
+    1.  **Persistencia en MariaDB:** Los calculos realizados no se guardan en `.txt` ni en memoria, sino físicamente como registros con `estado = 0` (pendiente) en `ligacargos` (≥ 2026) y `ligacargos_historico` (≤ 2025).
+    2.  **Protección Anti-Duplicación (Poka-Yoke):** El motor ejecuta una verificación previa (`SELECT id_cargo FROM vw_ligacargos_pendientes WHERE numcontrato = ... AND leyenda = ...`). Si el recargo ya existe, se omite (0 inserciones). Solo se insertan los renglones faltantes, garantizando 0 duplicados y ejecutabilidad idempotente.
+*   **Arquitectura del Job de Paridad Masiva:**
+    1.  **Backend Core (`admin/operaciones/sync_cartera_mensual.php`):** Recorre contratos activos (`estado IN (1, 2)`) invocando la dupla `generaCargosAutomaticos()` + `_sincronizaDeudaPendienteContrato()`.
+    2.  **Orquestador PowerShell (`job-sync-cartera.ps1`):** Ejecutable de fondo agnóstico a rutas en Host C (`F:\aguav2\webapp\agua\admin\operaciones\sync_cartera_mensual.php`) con auto-elevación a Administrador y registro de bitácora en `sync_cartera.log`.
+    3.  **Vigilante de Auditoría (`job-monitor-sync.ps1`):** Script de monitoreo que verifica la fecha de modificación y resultado del archivo de log.
+    4.  **Instalador Idempotente (`setup-sync-jobs.ps1`):** Registra las tareas programadas en el *Windows Task Scheduler* (`AguaV2_SyncCartera_Diario` y `AguaV2_MonitorSyncCartera_Diario`) para ejecutarse al iniciar sesión (`AtLogOn`) con cuenta `SYSTEM` en modo oculto (`-WindowStyle Hidden`).
+
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 8:42 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 8:43 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `manage_task`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_GENERIC
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 8:43 am
+
+---
+
+### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 8:43 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 8:43 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `manage_task`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_GENERIC
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 8:43 am
+
+---
+
+### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 8:43 am
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+## User Request
+
+Yo suponia que solo listadeudoresxc.php habia cambiado. 
+Analiza  a detalle algun impacto, gaps y/o issues que se pudieron abrir al impactiar a todos estas php, respecto de lo que la operadora consultaba antes de ayer aplicar estos cambios yo a produccion.
+Listalos, no corrijas nada.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `PLAN_MOTOR_MORA_LEGACY.md`
+**Language:** markdown
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `PLAN_MOTOR_MORA_LEGACY.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# Plan y Documentación Maestra: Motor de Mora Legacy
+
+## Contexto Histórico e Imposición del Comité
+Durante la estabilización de Host C (AguaV2), se documentó una diferencia en la Cartera Vencida entre Host B y Host C. El motor inicial de Host C estaba diseñado con una filosofía de "Mora Continua Rotativa" (cobrando de forma vitalicia todos los meses sin tope por año).
+Tras presentar la auditoría, **el Comité de Agua determinó que la matemática correcta y oficial a utilizar es la Legacy (Host B).**
+
+## Reglas Oficiales (Matemática Legacy)
+
+El cálculo financiero se rige estrictamente por dos reglas absolutas que el código PHP (`cargos.php`) respeta de manera obligatoria:
+
+### 1. Tope Estricto de 12 Meses (Anualidad Cerrada)
+La mora de un año (ej. 2021) jamás puede rebasar los 12 meses de recargo, sin importar cuántos años reales hayan pasado sin pago. 
+*   **Monto Máximo Base:** Un año adeudado de agua y drenaje genera como máximo 12 recargos (1 por mes).
+*   **Límite Bomba Eliminado:** Dado que la deuda no crece al infinito (se topa a 12 meses por año), se eliminó el concepto de "Límite Bomba" (`reversal_threshold`) de la base de datos y de la UI, ya que es matemáticamente imposible que un contrato explote exponencialmente.
+
+### 2. Detonación del Periodo de Gracia (Enero - Marzo)
+El periodo de gracia otorgado por el comité estipula que los recargos no se cobran *si* el usuario paga entre Enero y Marzo.
+*   **Detonación en Abril:** Si el usuario no paga antes de Abril, los meses de Enero, Febrero y Marzo **SÍ SE COBRAN** de forma retroactiva (detonación de golpe).
+*   **Extirpación del AUTO-HEAL:** En iteraciones previas, el sistema borraba físicamente los recargos de Ene-Marzo asumiendo que eran falsos positivos ("Auto-Heal"). **Esto se eliminó** porque causaba pérdidas de $180 MXN por año/contrato. Ahora, el recargo se genera físicamente pero la regla de detonación (si es aplicable a meses vigentes o años pasados) se maneja en el código `cargos.php`.
+
+## Arquitectura y Mantenimiento
+
+### Single Source of Truth
+Host C es ahora la **única fuente de verdad** (SSOT). La tabla de `ligacargos` y `ligacargos_historico` reflejan de manera fiel la misma matemática que se utilizaba en 2016-2025 en Host B.
+
+### Caché JIT (Just in Time)
+A pesar de retroceder a la matemática Legacy, el motor conserva la mejora de rendimiento de la versión V2:
+*   Se utiliza un Hash Map para evitar lecturas/escrituras redundantes (O(1)).
+*   La vista `vw_ligacargos_pendientes` une la tabla activa y la histórica de manera dinámica, basándose en la bandera `recargo` de la tabla de catálogo de `cargos`, la cual se puede prender/apagar desde `configuracion.php`.
+
+## Pipeline de Despliegue (`fix-issue-01`)
+El pipeline de saneamiento se ha simplificado a:
+1.  **`01_normalizar_catalogo.sql`**: Limpieza de duplicados.
+2.  **`02_normalizacion_estructural_v2.sql`**: Mensualidades se mueven a Cat 1 para evitar mora injusta.
+3.  **`03_normalizar_cuentas_usuarios.sql`**: Limpieza de Nombres y TRIM.
+4.  **`04_vista_cargos_pendientes_legacy.sql`**: Definición de la vista que une historico y activo SIN limitantes dinámicas extintas.
+5.  **`05_limpieza_trailing_spaces.sql`**: Fix vital (GAP-03) que elimina espacios al final de las leyendas para no romper el Hash Map del motor.
+6.  **`06_validation_legacy.sql`**: Comprobación final de que no hay asambleas con mora, que las mensualidades están limpias y que los recargos cuadran con las reglas.
+
+## Estabilización y Hardening Financiero (Junio 2026)
+
+Se implementaron parches de seguridad, integridad y depuración de duplicados en la gestión de reconciliación y condonación en `admin/operaciones/configuracion.php`:
+
+### 1. Eliminación del Doble DELETE (Soft-Delete de Recargos)
+*   **Problema:** El sistema realizaba un borrado físico (`DELETE`) de los recargos moratorios en estado pendiente (`estado = 0`) al condonar o reconciliar un cargo base. Esto destruía la trazabilidad de auditoría de los datos históricos.
+*   **Solución:** Se reemplazaron todas las sentencias `DELETE` por `UPDATE ligacargos[_historico] SET estado = -1, fcobro = NOW()`. Esto desactiva el recargo lógicamente de forma segura. El JIT lo ignora y los logs de auditoría preservan su existencia histórica.
+
+### 2. Poka-Yoke de Duplicados en Reconciliación / Condonación
+*   **Problema:** Al reconciliar o condonar un cargo que tenía clones/duplicados históricos, el sistema actualizaba todos a `estado = 1`. Esto generaba doble contabilidad financiera de ingresos cobrados o montos condonados.
+*   **Solución:** Se limitó la actualización a `estado = 1` estrictamente por ID único (`WHERE id = $id_cargo`). Todos los demás clones redundantes del mismo contrato, año y categoría se cancelan lógicamente actualizándolos a `estado = -1` con el sufijo `[DUPLICADO DEPURADO]`.
+
+### 3. Blindaje de Sesión y Bitácora de Auditoría (`Conexion.php`)
+*   **Problema:** Deserialización fallida del usuario de la sesión (`__PHP_Incomplete_Class`) e intentos de conversión implícita de objeto a string al guardar en `sys_log_reconciliacion`.
+*   **Solución:** Se inyectó `require_once` de la clase `User` en `Conexion.php` antes del inicio de sesión, y se extrae explícitamente el nombre del usuario ejecutor usando `->getNombre()` en la bitácora.
+
+### 4. Consolidación de Herramientas de Monkey Testing
+*   **Problema:** El script de monkey testing `comparativa_masiva.php` estaba expuesto en la UI diaria y en la carpeta de operaciones operacionales. Al depender del Host B remoto (que puede estar apagado), causaba fallas por timeout.
+*   **Solución:** Se eliminó el botón de la UI principal y se movió el script a la carpeta de herramientas premium de oro: `admin/saneamiento/comparativa_masiva.php`.
+
+### 5. Fix de Colisiones de ID (Resurrection Bug) en Transacciones
+*   **Problema:** Los Procedimientos Almacenados (`sp_pagar_cargo`, `sp_cancelar_cargo`) y algunas rutinas de PHP (`regresarCargoCancelado`) usaban el `$id` bruto provisto por la vista unificada (`vw_ligacargos_all`). Debido a que las tablas divididas (`ligacargos` y `ligacargos_historico`) tienen llaves primarias independientes, un pago o cancelación sobre un cargo histórico podía **colisionar** accidentalmente y actualizar el cargo activo de otro año si ambos compartían el mismo ID (Resurrection Bug).
+*   **Solución (Split-Aware Logic):** 
+    1. En PHP (`cargos.php` y `contratos.php`), todas las llamadas a los Stored Procedures ahora envían un `0` estático como primer parámetro (ID). 
+    2. Los SP están programados para hacer _fallback_ a la llave lógica compuesta `(numcontrato, leyenda, repetido)` si el ID es `0`. Esta llave es unificada y garantizada como única a nivel de base de datos.
+    3. Se removieron las cláusulas `WHERE id = $id` en las rutinas de reversión y auditoría en PHP para utilizar en su lugar la llave compuesta, garantizando la inmutabilidad de la información al cruzar el límite temporal del split.
+
+### 6. Liberación de Deuda Histórica (Fin del Límite de 5 Años)
+*   **Problema:** El motor V2 introdujo inicialmente una limitante artificial en la vista de la base de datos (basada en `paridad_anios_max_recargo = 5`) que ocultaba automáticamente los recargos moratorios de deudas anteriores al año 2021, provocando un descuadre masivo contra la Cartera Vencida del Host B original.
+*   **Solución:** Se erradicó por completo esta lógica de recorte en la definición de la vista unificada `vw_ligacargos_pendientes` (mediante el script `04_vista_cargos_pendientes_legacy.sql`). 
+*   **Impacto Financiero:** Esto liberó de forma inmediata **5,552 recargos moratorios** históricos generados en años previos a 2020. Estos recargos vuelven a ser visibles en los estados de cuenta, alineando milimétricamente la Cartera Vencida oficial de AguaV2 (Host C) con el modelo Legacy (Host B), y otorgando a los operadores la capacidad operativa de cobrarlos o condonarlos bajo el nuevo esquema de Soft-Delete.
+
+### 7. Poka-Yoke de Auto-Encendido y Bloqueo de Mora (Años Futuros)
+*   **Problema:** Al prescindir del Checkbox *"Causa Recargo"* en la UI de creación de cargos y al demandar que la mora histórica sea vitalicia e inalterable, existía el riesgo de que la creación de años futuros (Ej. 2028) quedara exenta de mora, o de que un operador apagara accidentalmente la mora de un año entero desde el panel de control.
+*   **Solución (Autonomía G02):**
+    1.  **Backend (`cargos.php`):** Se perfeccionó el *Guard G02*. Al crear un nuevo cargo, si la categoría es AGUA (2) o DRENAJE (3), el motor inyecta automáticamente `recargo = 1` a nivel de base de datos, ignorando por completo cualquier variable de la UI.
+    2.  **UI de Panel (`configuracion.php`):** Se inyectó el atributo `disabled` a todos los checkboxes de la tabla *"Control de Mora por Año"*.
+*   **Impacto Operativo:** El sistema es 100% autónomo. En enero de 2028, cuando el operador simplemente registre la "ANUALIDAD DEL AGUA 2028", el sistema agrupará el nuevo año, encenderá su propia mora de forma robótica y dibujará el candado rojo ("MORA ACTIVA" bloqueado) en el panel de configuración, garantizando cero errores humanos y blindando el flujo financiero a perpetuidad.
+
+### 8. Hardening en la Edición de Tomas Físicas (Bugs Históricos Resueltos)
+Durante la estabilización de AguaV2, la manipulación de tomas físicas presentó tres vulnerabilidades críticas (bugs) que ya han sido neutralizadas y documentadas bajo la nueva arquitectura:
+
+1. **El Bug de "Retroactividad Injusta" (Cobros inflados al pasado):**
+   * *Problema:* Antes, si se cambiaba el tipo de toma de un usuario (Ej. de "Normal" a "Comercial"), el sistema recalculaba y aplicaba la tarifa comercial a toda su deuda histórica acumulada.
+   * *Solución (La Base Congelada):* Actualmente, el cambio de tipo de toma o la adición de tomas afecta **únicamente al año en curso y a las anualidades futuras**. El registro histórico (años vencidos) se respeta inmutablemente al costo que tenía originalmente.
+2. **El Bug de Cancelación Cruzada (Resurrection / Collision Bug):**
+   * *Problema:* Al desconectar tomas o reducir su número (Ej. de 2 tomas a 1), el sistema intentaba limpiar la anualidad sobrante. Por un error en la separación de tablas (`ligacargos` vs `ligacargos_historico`), las cancelaciones afectaban accidentalmente los saldos de otros usuarios.
+   * *Solución:* Se implementó el parche **Issue 02 (Cross Contract Bug)**. El sistema de reversión `_quitaCargoAnual()` ahora funciona mediante Llaves Compuestas (`numcontrato` + `leyenda`), y la función maestra `_sincronizaParidadFinanciera()` aplica un Soft-Delete directo (`UPDATE ligacargos SET estado = -1`) blindado por el ID del contrato. Es matemáticamente imposible afectar otro registro.
+3. **El Bug de Multiplicación de Renglones (Clonación de Anualidades):**
+   * *Problema:* El diseño original insertaba múltiples copias idénticas del cargo *"ANUALIDAD DEL AGUA"* dependiendo del número de tomas (Ej. 2 tomas generaban 2 renglones), saturando visualmente al cajero y corrompiendo cortes de caja.
+   * *Solución (Modelo de Suma por Unidad):* La función `generaCargosAutomaticos()` ahora suma los montos subyacentes de la Toma 1 + Toma 2, agrupándolos e insertando un **solo concepto maestro** consolidado (Ej. $1,200), respaldado por Poka-Yokes que bloquean a nivel UI un máximo de 2 tomas por domicilio (Reglas M1-R05 y M1-R06).
+
+### 9. Protocolo de Pagos Compensatorios por Cambio de Tarifa (Cargos LIBRES)
+Existe un flujo operativo formalizado para resolver las discrepancias tarifarias cuando un usuario ya pagó el año actual bajo Tarifa Normal pero cambia su toma a Tarifa Comercial a mitad de año.
+
+*   **El Problema Práctico:** Al modificar la toma a "Comercial", el operador NO debe asignar nuevamente la Anualidad completa (puesto que el usuario ya cubrió su parte de Tarifa Normal y figuraría doble en el estado de cuenta).
+*   **La Solución Estructural:**
+    1.  El operador genera un cargo utilizando la bandera `(LIBRE)` (Ej. *DIFERENCIA CAMBIO TOMA AGUA (LIBRE)*).
+    2.  Esta bandera detona un *prompt* interactivo en la UI donde el operador puede ingresar manualmente la pura "diferencia" de la tarifa (Ej. si pagó $600 y comercial es $1200, cobrar los $600 faltantes).
+    3.  El backend de `cargos.php` exime al concepto `(LIBRE)` de multiplicadores automáticos o recargos (no se multiplica por metros ni por número de tomas), garantizando que cuadre a la perfección en el corte de caja.
+    4.  **Al año siguiente**, cuando el operador de caja abra la nueva generación de recibos, la función automatizada `generaCargosAutomaticos()` detectará la marca `tipo = 1` (Comercial) del contrato, inyectando de forma nativa la anualidad de Tarifa Comercial por $1,200. El ajuste compensatorio `(LIBRE)` es una solución de puenteo inter-anual de uso único.
+
+### 10. Saneamiento y Estabilización de Recargos Huérfanos (Auto-Heal)
+Durante la estabilización profunda (Junio/Julio 2026), se detectó que el motor JIT generaba o conservaba recargos moratorios pendientes (`estado = 0`) para anualidades base que habían sido previamente depuradas/canceladas (`estado = -1`). Esto causaba "adeudos fantasmas" (engrosamiento irreal de la Cartera Vencida).
+
+*   **Solución (Bloqueo Predictivo y Limpieza en Cascada):**
+    1. **Guard en Generación (`cargos.php`):** El motor de mora (`calcula_recargos()`) ahora verifica en tiempo real la existencia y estatus del cargo base antes de calcular la mora. Si el cargo base se encuentra cancelado (`estado = -1`) o no existe, la función aborta de inmediato sin generar recargos.
+    2. **Auto-Heal en Sincronización (`contratos.php`):** Al finalizar la calibración financiera de cualquier contrato, el sistema ejecuta un saneamiento en cascada que cancela lógicamente (`estado = -1`) cualquier recargo moratorio pendiente cuyo cargo base correspondiente haya sido depurado (`estado = -1`).
+    3. **Ley Dura (Julio 2026):** Por disposición estricta del Comité, **SE PROHÍBE** borrar la mora si el capital base es pagado tardíamente (`estado = 1`). Si un usuario pagó su capital en años posteriores pero el cajero omitió cobrar los recargos, dichos recargos pendientes sobreviven (`estado = 0`) y permanecen como deuda legítima exigible. El perdón automático (Auto-Condonación) ha sido desmantelado en el Script 08 y en el Auto-Heal PHP.
+
+### 11. Prescripción Maestra Variable ("El Acordeón Dinámico")
+*   **Problema Histórico:** El sistema antiguo usaba barreras artificiales para ocultar la deuda vieja en la pantalla, lo cual descuadraba totalmente los reportes de Cartera Vencida frente a la base de datos real.
+*   **Solución Arquitectónica Dinámica:**
+    1. Se migró el límite hacia la base de datos a través de la variable `paridad_anio_limite_mora` en `config_sistema`.
+    2. **Acordeón SQL:** Se inyectó una subconsulta dinámica nativa directamente en la vista unificada (`vw_ligacargos_pendientes`). Esta vista actúa como un "acordeón": si el Comité cambia el año límite en el panel a 2010, la vista automáticamente "oculta" el capital y las moras anteriores a 2010. Al desaparecer de la vista, desaparecen automáticamente de la Cartera Vencida logrando un cuadre contable maestro (Cero Fugas).
+    3. **Reversibilidad Segura:** Ya no se borran físicamente los registros base antiguos (`estado = -1`). Si el Comité decide bajar el año a 2005, el acordeón se abre y la deuda de 2005 a 2009 reaparece intacta en la cobranza.
+    4. **Doble Freno:** El motor JIT (`calcula_recargos()`) lee la misma variable y frena matemáticamente la generación de recargos mensuales para cualquier adeudo cuya base sea anterior a este límite.
+
+### 12. Erradicación de Recargos Anuales Duplicados (Falsos Positivos Históricos)
+Durante el análisis de carteras vencidas profundas (ej. Contrato 76), se identificó que el sistema sumaba la mora mensual generada por el JIT junto con antiguos recargos consolidados manualmente por la administración en el periodo 2000-2014 (ej. "RECARGO ANUAL DE AGUA 2006").
+*   **Problema de Ortografía (Variaciones Legacy):** El parche inicial de limpieza fracasó para los años 2000-2004 debido a inconsistencias ortográficas de los operadores (capturaron "RECARGO ANUAL AGUA" omitiendo el "DE", o "RECARGOS" en plural). 
+*   **Solución:** Se amplió la directiva de búsqueda en el parche `09_saneamiento_recargos_anuales_duplicados.sql` utilizando condicionales `LIKE` expansivos. Esto permitió ubicar y aplicar un *Soft-Delete* (`estado = -1`) a todas las variaciones manuales de mora en ese rango, unificando la deuda exclusivamente bajo la matemática del motor mensual automatizado.
+
+### 13. Amnistía Robusta y Limpieza JIT Asíncrona (Amnistía Llave en Mano)
+*   **Problema:** Al desmarcar una anualidad en el panel de `configuracion.php` para otorgar amnistía, la instrucción protegía/excluía erróneamente a los comercios y segundas tomas. Peor aún, apagar la casilla solo detenía la mora futura, pero **dejaba vivos** los recargos mensuales que el motor JIT ya hubiera calculado previamente, inflando la deuda a pesar de la amnistía.
+*   **Solución Arquitectónica:**
+    1. Se eliminaron las exclusiones comerciales, haciendo que el apagado de la mora sea universal para todos los cargos de Agua y Drenaje de ese año.
+    2. **Poka-Yoke de Limpieza:** Al apagar una casilla (`estado = 0`), el sistema ahora ejecuta inmediatamente un *Soft-Delete* de cualquier recargo (cat 16 y 17) pendiente (`estado = 0`) correspondiente a ese año.
+    3. **Resiliencia JIT:** Gracias a esta arquitectura, si el operador comete un error y vuelve a encender la amnistía, el motor JIT automáticamente reconstruirá y calculará de nuevo toda la mora al abrir el contrato.
+    4. **Automatización:** Se empaquetó esta lógica en `fix-issue-01` (`10_aplicar_amnistia_2005_2014.sql`) para desplegar la amnistía del bloque 2005-2014 automáticamente al inicializar Producción.
+
+### 14. Prevención de Deuda en Suspensión Temporal (Evitando el Caso 937)
+*   **La Falla Legacy (Caso 937):** En el sistema original, suspender un servicio no eximía al usuario de recibir la carga anual masiva de deuda, provocando que los contratos suspendidos acumularan capital y mora de forma injusta.
+*   **Blindaje en AguaV2:** El sistema transaccional tipificó estrictamente los estados. Cuando un contrato pasa a **Estado 2 (Suspensión Temporal)**:
+    1. El motor JIT congela la deuda preexistente y deja de emitir recargos nuevos para ella.
+    2. El "Generador Anual" de capitales de Enero excluye obligatoriamente a los contratos en Estado 2.
+    3. Al reactivar a Estado 1 (Activo) tras varios años, el contrato despierta en blanco para ese periodo de ausencia, garantizando que el "Caso 937" (cobro indebido por periodos de suspensión) no vuelva a ocurrir jamás.
+
+### 15. Poka-Yoke Híbrido (Respeto de Mora Manual Legacy <= 2017)
+Por disposición del Comité, la deuda mora de los años 2017 hacia atrás capturada manualmente por los operadores (*"RECARGO ANUAL DE AGUA..."*) debe prevalecer intacta para su cobro.
+*   **Problema de Duplicidad:** El motor JIT amenazaba con generar mora mensual sobrepuesta a esos cargos manuales.
+*   **Solución en Tres Capas:**
+    1. **Script 09:** Se acotó para que solo elimine la basura anual de 2018 en adelante.
+    2. **Escudo JIT:** En `cargos.php`, el JIT verifica si el año en proceso es `<= 2017` y si existe un cargo manual en el historial. De ser positivo, el JIT aborta la matemática mensual y cede el paso para que se cobre la deuda manual original.
+    3. **Amnistía Inteligente:** En el script 10 y en `configuracion.php`, el borrado de moras por amnistía fue limitado exclusivamente a cadenas con guion medio (`LIKE '% - %'`), blindando los cargos manuales contra borrados accidentales de interfaz.
+
+### 16. Blindaje Poka-Yoke de Transición a Activo (2 → 1) y Depuración de Deuda Retroactiva (Agosto 2026)
+Durante la operación en produccion de Host C, se identificó un GAP al cambiar contratos de **Suspensión Temporal (`2`) → Activo (`1`)**:
+*   **Causa Raíz:** `generaCargosAutomaticos()` ejecutaba `_esContratoFacturableEnAnio()` para determinar la facturación de cuotas base atrasadas. Para contratos del sistema legado (como el contrato 742) que carecían de registros formales en la tabla de auditoría `cambios` año con año, el sistema asumía por defecto que el contrato había estado activo en el pasado, inyectando masivamente cuotas base anuales de agua y drenaje atrasadas (ej. 289 cargos por $19,918 MXN en 742 y $4,254 MXN en 959).
+*   **Blindaje en Código PHP (`includes/negocio/contratos.php`):**
+    1. **Guard en Transición:** Se actualizó `_esContratoFacturableEnAnio()` y `generaCargosAutomaticos()` para recibir el parámetro `$estado_origen`. Si el contrato proviene de Suspensión Temporal (`estado_origen === 2`), la función bloquea automáticamente la generación retroactiva de cuotas base para cualquier año anterior al año actual de reactivación (`anio < anio_actual`).
+    2. **Resiliencia Legado (-ST):** Si un contrato legado no tiene logs en `cambios`, pero posee la marca de suspensión `-ST` en la clave responsiva (`numcontratoresp`), el sistema frena la facturación retroactiva para años anteriores al año actual.
+*   **Script de Remedación DB (`11_depuracion_deuda_fantasma_742_959.sql`):**
+    1. Se aplicó Soft-Delete (`estado = -1`, `fcobro = NOW()`) exclusivamente a los cargos pendientes (`estado = 0`) para años `<= 2025` de los contratos 742 y 959.
+    2. Se preservaron intactos los cobros e ingresos pagados del año 2026 (Folios `25503`, `25504`, `25513`, `25514` por $1,394.00 MXN cada uno).
+    3. Se integró la orden de ejecución del script 11 en los orquestadores `run_patch_host_c.sh` y `run_patch_host_c.ps1`.
+
+### 17. Sincronización Automatizada de Saldo Diario y Paridad Ficha vs. Deudores (4 de Agosto de 2026)
+*   **Diagnóstico y Causa Raíz del Desfase de $240 MXN:** Los reportes estáticos de deudores (como `listadeudoresxc.php`) leen directamente de la vista `vw_ligacargos_pendientes` (creada en Abril 2026), mientras que la **Ficha del Contrato** (`contratos.php` -> `cargaContrato()`) ha operado desde el setup inicial de Host C bajo un modelo híbrido JIT: primero ejecuta `generaCargosAutomaticos()` y `_sincronizaDeudaPendienteContrato()`, y luego lee los deudas de la vista. Debido a que la versión inicial del script en lote `sync_cartera_mensual.php` solo ejecutaba `generaCargosAutomaticos()`, los recargos retroactivos de contratos no abiertos manualmente en la UI (ej. contratos 484, 527, 1008) no existían físicamente en la BD, generando un desfase de $240 MXN frente al reporte general.
+*   **Ajuste Aplicado (4 de Agosto de 2026 - Commit `1c87339`):**
+    Se actualizó `sync_cartera_mensual.php` inyectando la llamada obligatoria a `_sincronizaDeudaPendienteContrato($row[0], $y)`. Con esto, el Job en lote replica milimétricamente la misma secuencia de dos pasos de la Ficha para todo el padrón.
+*   **Mecanismo de Almacenamiento Físico e Idempotencia:**
+    1.  **Persistencia en MariaDB:** Los calculos realizados no se guardan en `.txt` ni en memoria, sino físicamente como registros con `estado = 0` (pendiente) en `ligacargos` (≥ 2026) y `ligacargos_historico` (≤ 2025).
+    2.  **Protección Anti-Duplicación (Poka-Yoke):** El motor ejecuta una verificación previa (`SELECT id_cargo FROM vw_ligacargos_pendientes WHERE numcontrato = ... AND leyenda = ...`). Si el recargo ya existe, se omite (0 inserciones). Solo se insertan los renglones faltantes, garantizando 0 duplicados y ejecutabilidad idempotente.
+*   **Inventario de Archivos PHP Refactorizados a la Vista (`vw_ligacargos_pendientes` / `vw_ligacargos_all`):**
+    Originalmente en el sistema Host B (monolítico), las consultas se hacían directamente sobre la tabla `FROM ligacargos`. Al dividirse la base de datos en dos tablas (`ligacargos` activa y `ligacargos_historico`), los siguientes módulos clave de deudores y reportes fueron refactorizados para usar las Vistas unificadas:
+    1.  `reportes/listadeudores.php`: Migró de `FROM ligacargos` directa a `vw_ligacargos_pendientes` (eliminando pérdida de datos `≤ 2025`).
+    2.  `reportes/listadeudoresxc.php`: Módulo estático de deudores por calle/contrato, consulta `vw_ligacargos_pendientes`.
+    3.  `reportes/carteravencida.php`: Modelo de cartera vencida homologado, consulta `vw_ligacargos_pendientes`.
+    4.  `reportes/concentradocortecajaresumen.php`: Consolidación total de ingresos y saldos, refactorizado a `vw_ligacargos_all`.
+    5.  `reportes/contratoinfo2.php`: Consulta detallada de historia de adeudos, utiliza `vw_ligacargos_pendientes`.
+    6.  `includes/negocio/contratos.php`: Ficha del contrato (`cargaContrato()`, `_sincronizaDeudaPendienteContrato()`), consulta y sincroniza vía `vw_ligacargos_pendientes`.
+    7.  `includes/negocio/cargos.php`: Motor de recargos y cálculo global de saldos, utiliza `vw_ligacargos_pendientes`.
+    8.  `admin/saneamiento/reporte_morosos.php`: Reporte de saldos morosos, consulta `vw_ligacargos_pendientes`.
+    9.  `admin/saneamiento/operaciones_multas_sync.php`: Sincronización de multas y recargos, utiliza `vw_ligacargos_pendientes`.
+    10. `admin/saneamiento/cv_por_tipo_edo_cto.php`: Cartera vencida por tipo de contrato y estado, utiliza `vw_ligacargos_pendientes`.
+    11. `views/cargos/modificar.php`: Validación de duplicados en modificación de cargos, consulta `vw_ligacargos_pendientes`.
+    12. `docs-dev/saneamiento-limpieza/reportes/genera_csv.php`: Generador de reportes CSV de auditoría, migró 4 JOINs directos a `vw_ligacargos_all`.
+*   **Arquitectura del Job de Paridad Masiva:**
+    1.  **Backend Core (`admin/operaciones/sync_cartera_mensual.php`):** Recorre contratos activos (`estado IN (1, 2)`) invocando la dupla `generaCargosAutomaticos()` + `_sincronizaDeudaPendienteContrato()`.
+    2.  **Orquestador PowerShell (`job-sync-cartera.ps1`):** Ejecutable de fondo agnóstico a rutas en Host C (`F:\aguav2\webapp\agua\admin\operaciones\sync_cartera_mensual.php`) con auto-elevación a Administrador y registro de bitácora en `sync_cartera.log`.
+    3.  **Vigilante de Auditoría (`job-monitor-sync.ps1`):** Script de monitoreo que verifica la fecha de modificación y resultado del archivo de log.
+    4.  **Instalador Idempotente (`setup-sync-jobs.ps1`):** Registra las tareas programadas en el *Windows Task Scheduler* (`AguaV2_SyncCartera_Diario` y `AguaV2_MonitorSyncCartera_Diario`) para ejecutarse al iniciar sesión (`AtLogOn`) con cuenta `SYSTEM` en modo oculto (`-WindowStyle Hidden`).
+
+```
+
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 8:48 am
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 8:49 am
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+## User Request
+
+entonces antes de ayer , todas las phps modificadas, mostraban datos erroneos ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `PLAN_MOTOR_MORA_LEGACY.md`
+**Language:** markdown
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+## User Request
+
+analiza e identifica cuales  los reportes php, podrian fallar por timeout o falta de memoria
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `PLAN_MOTOR_MORA_LEGACY.md`
+**Language:** markdown
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `listadeudores.php`
+
+**Tool:** `view_file`
+**File:** `carteravencida.php`
+
+**Tool:** `view_file`
+**File:** `genera_csv.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<xml version="1.0" encoding="utf-8">
+	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+	<html>
+
+	<head>
+		<title>Lista de usuarios con adeudos</title>
+	</head>
+
+	<body onload="print();">
+		<style>
+			body {
+				margin-left: 40px;
+				margin-top: 30px;
+			}
+
+			h1 {
+				page-break-after: always;
+				font-size: 1px;
+			}
+
+			table {
+				border-right: solid 1px #a0a0a0;
+				border-bottom: solid 1px #a0a0a0;
+			}
+
+			td {
+				font-family: "times new roman";
+				font-size: 10px;
+				border-left: solid 1px #a0a0a0;
+				border-top: solid 1px #a0a0a0;
+				text-transform: uppercase;
+			}
+
+			th {
+				font-family: "Times new roman";
+				font-size: 12px;
+				color: white;
+				background: #404040;
+				border-left: solid 1px #a0a0a0;
+				border-top: solid 1px #a0a0a0;
+
+			}
+		</style>
+		<?php
+		require_once "../config/Conexion.php";
+		$y = new Conexion();
+		$y->conectarBaseDatos();
+
+		// ANTES (v1): sin exclusión de categorías ni de contratos dados de baja definitiva (estado=4).
+		//   — cat 6,16,17,19-22 inflaban el total con deuda no periódica.
+		//   — contratos estado=4 (baja definitiva) aportaban $107,082 de deuda fantasma (validado vs Host B).
+		//     En Host C el saneamiento los dejó en estado=-1 (invisible en vw_ligacargos_pendientes),
+		//     pero sin el filtro explícito cualquier BD sin sanear los mostraría.
+		// AHORA (v2): excluye cat 6,16,17,19-22 Y contratos estado=4 Y usuarios No Localizados (u.estado=2)
+		//   — blindaje triple a nivel de código, independiente del estado de saneamiento de la BD.
+		//   Reglas U01, R02, R06 (.agents/rules/02-reglas-negocio.md). Alineado con carteravencida.php y
+		//   la tabla Impacto Financiero de Saneamientos (Saneamiento 1 y 5).
+		$query = "SELECT c.numcontrato, u.nombre, c.domicilio, SUM(l.monto) AS paga
+		           FROM vw_ligacargos_pendientes l
+		           INNER JOIN contrato c ON l.numcontrato = c.numcontrato
+		           LEFT JOIN usuario u ON c.numusuario = u.noconsecutivo
+		           WHERE l.monto != 0
+		             AND c.estado != 4
+		             AND (u.estado IS NULL OR u.estado != 2)
+		           GROUP BY c.numcontrato
+		           ORDER BY paga DESC";
+
+		$query2 = "SELECT SUM(l.monto)
+		            FROM vw_ligacargos_pendientes l
+		            INNER JOIN contrato c ON l.numcontrato = c.numcontrato
+		            LEFT JOIN usuario u ON c.numusuario = u.noconsecutivo
+		            WHERE l.monto != 0
+		              AND c.estado != 4
+		              AND (u.estado IS NULL OR u.estado != 2)";
+		
+		$res = $y->q($query);
+		$totalregistros = ($res) ? $y->num_rows($res) : 0;
+		
+		$res2 = $y->q($query2);
+		$total = ($res2) ? $y->fetch_array($res2) : [0 => 0];
+		if($res2) $y->free_result($res2);
+
+		$mod = 0;
+
+		$mes = array("1" => "enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre");
+		$hoymes = date("m") + 0;
+
+		$pagina = 1;
+		$paginas = ceil($totalregistros / 46);
+
+		$subt = 0;
+		$reg = 0;
+
+		while ($row = $y->fetch_array($res)) {
+			$reg++;
+			if (($mod % 46) == 0) {
+				print "<table border=0 cellpadding=3 cellspacing=0>";
+				print "<tr><th colspan=4><b>R E L A C I &Oacute; N &nbsp;&nbsp; D E &nbsp;&nbsp; U S U A R I O S &nbsp; C O N &nbsp;&nbsp; D E U D A S</b><br>-Total de $" . number_format($total[0], 0, '.', ',') . ". P&aacute;gina " . $pagina . " de " . $paginas . ", impresa el " . date("d") . " de " . $mes[$hoymes] . " de " . date("Y") . "-</th></tr>";
+				print "<tr><td width=30><b>No. Cto.</b></td><td width=310><b>NOMBRE</b></td><td width=310><b>DOMICILIO</b></td><td width=50><b>MONTO</b></td></tr>";
+				$pagina++;
+			}
+			print "<tr><td align=right valign=top>" . $row[0] . "</td><td>" . htmlentities($row[1]) . "</td><td>" . substr(str_replace("\n", " ", htmlentities($row[2])), 0, 45) . "</td><td align=right>$" . number_format($row[3], 0, '.', ',') . "</td></tr>";
+			$subt += $row[3];
+			if ((($mod - 45) % 46) == 0 || $reg == $totalregistros) {
+				print "<tr><td align=right colspan=3 valign=top><b>S U B T O T A L </b></td><td align=right><b>$" . number_format($subt, 0, '.', ',') . "</b></td></tr>";
+				$subt = 0;
+				print "</table>";
+				print "<h1>&nbsp;</h1>";
+			}
+			$mod++;
+		}
+		$y->free_result($res);
+		$y->cerrarConexion();
+		?>
+	</body>
+
+	</html>
+```
+
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<xml version="1.0" encoding="utf-8">
+	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+	<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Cartera Vencida</title>
+	</head>
+
+	<body onload="print();">
+		<style>
+			body {
+				margin-left: 40px;
+				margin-top: 30px;
+			}
+
+			h1 {
+				page-break-after: always;
+				font-size: 1px;
+			}
+
+			table {
+				border-right: solid 1px #a0a0a0;
+				border-bottom: solid 1px #a0a0a0;
+			}
+
+			td {
+				font-family: "times new roman";
+				font-size: 10px;
+				border-left: solid 1px #a0a0a0;
+				border-top: solid 1px #a0a0a0;
+				text-transform: uppercase;
+			}
+
+			th {
+				font-family: "Times new roman";
+				font-size: 12px;
+				color: white;
+				background: #404040;
+				border-left: solid 1px #a0a0a0;
+				border-top: solid 1px #a0a0a0;
+				text-transform: uppercase;
+			}
+		</style>
+		<?php
+		header('Content-Type: text/html; charset=UTF-8');
+		require_once "../config/Conexion.php";
+		$y = new Conexion();
+		$y->conectarBaseDatos();
+		$anio = $_GET["anio"] ?? date('Y');
+
+		// ANTES (v1): sin exclusión de categorías especiales — cat 6 (asamblea), 16/17 (recargos acumulativos)
+		//   y 19-22 (conceptos únicos) inflaban la cartera con deuda que no es de cuotas anuales periódicas.
+		//   Inconsistencia con concentradocortecaja.php que sí excluía esas categorías.
+		// AHORA (v2): excluye las mismas categorías que concentradocortecaja.php para coherencia entre reportes.
+		//   cat 6: multas asamblea (se sincronizan por usuario, no por contrato)
+		//   cat 11, 16, 17: recargos normales y recargos de agua/drenaje SÍ se incluyen en la cartera
+		//   cat 19-22: conceptos únicos (CB/PROP, MLT/DESP, CNT/NADO, CNC/FUGA) — no son cuotas periódicas
+		$query = "SELECT l.numcontrato, UCASE(u.nombre) usuario, sum(l.monto) AS debe
+		FROM vw_ligacargos_pendientes l
+			JOIN contrato c ON l.numcontrato = c.numcontrato
+			JOIN usuario u ON u.noconsecutivo = c.numusuario
+		WHERE l.estado = 0
+			AND c.estado != 4
+			AND (u.estado IS NULL OR u.estado != 2)
+			AND l.categoria NOT IN (6, 19, 20, 21, 22)
+			AND (
+				(l.anio <> 0 AND l.anio IS NOT NULL AND l.anio = $anio)
+				OR
+				((l.anio = 0 OR l.anio IS NULL) AND substring(l.fcobro, 1, 4) = '$anio')
+			)
+		GROUP BY l.numcontrato
+		ORDER BY CAST(l.numcontrato AS SIGNED)";
+
+		$res = $y->q($query);
+		$mod = 0;
+
+		$mes = array("1" => "enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre");
+		$hoymes = date("m") + 0;
+
+		$numerodecontratos = $y->num_rows($res);
+
+		if ($numerodecontratos == 0)
+			print "No existen contratos para el a&ntilde; requerido.";
+
+		$paginas = ceil($numerodecontratos / 47);
+		$numpag = 1;
+
+		$total = 0;
+		$conteo_reg = 1;
+
+		while ($row = $y->fetch_array($res)) {
+			if (($mod % 47) == 0) {
+				print "<table border=0 cellpadding=3 cellspacing=0>";
+				print "<tr><th colspan=4 style='padding:10px;'><b>C A R T E R A &nbsp;&nbsp; V E N C I D A &nbsp;&nbsp; A &Ntilde O &nbsp;&nbsp; $anio &nbsp; (Adeudos por Año)";
+				print "</b><br>  &nbsp;&nbsp; (" . $numerodecontratos . " registros)<br>-p&aacute;gina " . $numpag . " de " . $paginas . ", impresa el " . date("d") . " de " . $mes[$hoymes] . " de " . date("Y") . "-</th></tr>";
+				print "<tr><td width=30 style='text-align: center'><b>#</b></td><td width=60 style='text-align: center'><b>CONTRATO</b></td><td width=350 style='text-align: center'><b>USUARIO</b></td><td width=80 style='text-align: center'><b>DEBE</b></td></tr>";
+				$numpag++;
+			}
+
+			print "<tr><td style='text-align: center; color: #666;'>" . $conteo_reg . "</td><td style='text-align: center'><b>" . $row[0] . "</b></td><td>&nbsp;&nbsp;" . $row[1] . "</td><td style='text-align: right'>$ " . number_format($row[2], 2, '.', ',') . "</td></tr>";
+
+			if ((($mod - 46) % 47) == 0) {
+				print "</table>";
+				print "<h1>&nbsp;</h1>";
+			}
+			$mod++;
+			$conteo_reg++;
+			$total += $row[2];
+		}
+
+		print "</table>";
+		print "<div style='margin-top: 20px; font-family: sans-serif; font-size: 11px; width: 350px; border: 1px solid #ccc; padding: 10px; background: #fafafa;'>";
+		print "<b>TOTAL CARTERA VENCIDA $anio:</b><br><br>";
+		print "<table border=0 width='100%' style='border:0;'>";
+		print "<tr style='border-top: 1px solid #333;'><td style='border:0;'><b>GRAN TOTAL:</b></td><td style='border:0; text-align:right;'><b>$ " . number_format($total, 2, '.', ',') . "</b></td></tr>";
+		print "</table>";
+		print "</div>";
+		print "<h1>&nbsp;</h1>";
+
+		$y->free_result($res);
+		$y->cerrarConexion();
+		?>
+	</body>
+
+	</html>
+```
+
+</details>
+
+---
+
+### Execution Error
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 8:55 am
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+## User Request
+
+y si revirtieramos esos cambios a esas php y solo se dejara el cambio en donde se solicito/identifico el issue (ficha contratos vs listadeudoresxc.php) ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `PLAN_MOTOR_MORA_LEGACY.md`
+**Language:** markdown
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+## User Request
+
+entonces la idea seria esperar  a me reporten "fallas" de datos "inflados" o paginas que truenan ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `PLAN_MOTOR_MORA_LEGACY.md`
+**Language:** markdown
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+## User Request
+
+mencionas: listadeudores.php  y listadeudoresxc.php (esta si esta accesible desde Listados/Usuarios/Listado de deudores (Filtros y Calles)); y pero listadeudores.php no ve su acceso desde los menues, opciones de la webapp, revisa
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `PLAN_MOTOR_MORA_LEGACY.md`
+**Language:** markdown
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. Specifically, I'm now actively avoiding the use of `cat` in bash commands for file creation or appending, and I'm always reaching for `grep_search` instead of direct `grep` calls within the shell. The key is now fully committing to avoiding `ls`, `cat`, and `grep` when I can.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `listadeudores.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.001575800s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 9:08 am
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `listadeudores`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 9:08 am
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. Specifically, I'm now actively avoiding the use of `cat` for file creation or appending, and I'm choosing `grep_search` over direct `grep` usage within bash scripts. I'm also now attempting to use the appropriate tools such as `ls` or `cat` alternatives.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `carteravencida.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.015484601s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 9:08 am
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `cartera`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 9:08 am
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+## User Request
+
+. Identfica que otras php, como esta: listadeudores.php no se estan vinculadas a ningun menu o sección, en alguna pagina "visible" al usuario operador de la webapp, listalos.
+. Identifica un dir o documento, donde se indica de otras phps, que se movieron y concentraron por un tema similar de no uso al de listadeudores.php
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `PLAN_MOTOR_MORA_LEGACY.md`
+**Language:** markdown
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool specificity. I've been refining my approach to avoid generic commands. I'm actively suppressing the impulse to default to bash, and concentrating on utilizing the most specialized tool for each task. This shift should streamline operations and enhance accuracy. My process is becoming far more efficient as a result.
+
+
+**Locating Unused PHP Files**
+
+I've made a breakthrough! I found a significant clue regarding potentially moved PHP files. My initial search within `PLAN_MOTOR_MORA_LEGACY.md` revealed information about `comparativa_masiva.php` and its relocation to resolve timeout issues. This suggests a pattern of consolidation for non-critical tools. I'm now actively seeking similar documentation to pinpoint other relocated files and their intended new locations.
+
+
+
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/opt/lampp/htdocs/agua/admin/saneamiento`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.116226609s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+<details>
+<summary>Directory: `saneamiento` (10 items)</summary>
+
+**Path:** `opt/lampp/htdocs/agua/admin/saneamiento`
+
+| Name | Type | Size |
+|------|------|------|
+| `bitacora_eventos.php` | File | 27696 bytes |
+| `bitacora_pipeline.php` | File | 27102 bytes |
+| `comparativa_masiva.php` | File | 30646 bytes |
+| `cv_por_tipo_edo_cto.php` | File | 14034 bytes |
+| `mixtos_sp_actv.php` | File | 10142 bytes |
+| `monitor_fallbacks.php` | File | 15717 bytes |
+| `operaciones_multas_sync.php` | File | 23613 bytes |
+| `reporte_ml_usage.php` | File | 9598 bytes |
+| `reporte_morosos.php` | File | 17230 bytes |
+| `saneamiento_administrativo.php` | File | 23072 bytes |
+
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. Specifically, I'm now actively avoiding the use of `cat` in bash commands for file creation or appending, and I'm always reaching for `grep_search` instead of direct `grep` calls within the shell. The key is now fully committing to avoiding `ls`, `cat`, and `grep` when I can.
+
+
+**Refining Tool Use**
+
+I'm now zeroing in on precise tool utilization. My current focus is to ensure that I leverage `sed` for all replacement tasks, and avoid using `grep` directly. I am also implementing the critical instruction to actively list alternative tools before executing any command. My goal is to identify other PHP files, like `listadeudores.php`, that are not linked in the menu. Also, I've identified the document containing the directory for unused PHPs, which is `admin/saneamiento`.
+
+
+
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/opt/lampp/htdocs/agua/reportes`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.685711161s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+<details>
+<summary>Directory: `reportes` (19 items)</summary>
+
+**Path:** `opt/lampp/htdocs/agua/reportes`
+
+| Name | Type | Size |
+|------|------|------|
+| `cargos_cancelados_sdf.php` | File | 10088 bytes |
+| `carteravencida.php` | File | 4688 bytes |
+| `concentradocortecaja.php` | File | 17250 bytes |
+| `concentradocortecajaresumen.php` | File | 19802 bytes |
+| `contratoinfo2.php` | File | 9888 bytes |
+| `credencial.php` | File | 3234 bytes |
+| `historial_mov_cto.php` | File | 29708 bytes |
+| `imprimir_credencial.php` | File | 10274 bytes |
+| `listacontratos.php` | File | 3608 bytes |
+| `listacontratosaguatomas.php` | File | 2874 bytes |
+| `listacontratosdrenajetomas.php` | File | 2902 bytes |
+| `listacontratosestado.php` | File | 4605 bytes |
+| `listacontratosnuevos.php` | File | 3881 bytes |
+| `listacontratostipo.php` | File | 3719 bytes |
+| `listadeudores.php` | File | 4405 bytes |
+| `listadeudoresxc.php` | File | 33441 bytes |
+| `listausuarios.php` | File | 2930 bytes |
+| `recibo.php` | File | 14214 bytes |
+| `reciboegreso.php` | File | 5672 bytes |
+
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. Specifically, I'm now actively avoiding the use of `cat` for file creation or appending, and I'm choosing `grep_search` over direct `grep` usage within bash scripts. I'm also now attempting to use the appropriate tools such as `ls` or `cat` alternatives.
+
+
+**Refining Tool Choices**
+
+I'm now zeroing in on precise tool usage. For searching, I'm leaning toward `grep_search` and `find`; for replacements, `sed`. Before any tool execution, I'll explicitly consider and list all related tool options. The user's questions are straightforward: the relevant directory is `admin/saneamiento/`, documented in `docs-dev/pase-a-prod/aguav2-2026/fixes/fix-issue-01/docs/PLAN_MOTOR_MORA_LEGACY.md`. I am identifying more PHP files like `listadeudores.php` that are not linked in the main UI, such as `docs-dev/saneamiento-limpieza/reportes/genera_csv.php`, and those in `admin/saneamiento/`: `reporte_morosos.php`, `operaciones_multas_sync.php`, and `cv_por_tipo_edo_cto.php`.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.729542823s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+## User Request
+
+mueve listadeudores.php a ese dir, seria el unico , cierto ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `PLAN_MOTOR_MORA_LEGACY.md`
+**Language:** markdown
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool specificity. I've been refining my approach to avoid generic commands. I'm actively suppressing the impulse to default to bash, and concentrating on utilizing the most specialized tool for each task. This shift should streamline operations and enhance accuracy. My process is becoming far more efficient as a result.
+
+
+**Analyzing File Dependencies**
+
+I'm now analyzing `listadeudores.php` for internal dependencies. I must ensure the move doesn't break relative file paths within the PHP script. The `require_once` statement in the file points to a path relative to its current location, and I must account for this before executing the move operation. This will prevent broken links and ensure seamless functionality post-relocation.
+
+
+**Executing File Relocation**
+
+I've decided to proceed directly with execution. Given the simplicity of moving `listadeudores.php` to `admin/saneamiento/` and the subsequent path adjustment in the PHP script, planning seems unnecessary. I'll use `run_command` for the move and `replace_file_content` to fix the `require_once` path. The move is trivial.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 3.115919s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 10:06 am
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. Specifically, I'm now actively avoiding the use of `cat` in bash commands for file creation or appending, and I'm always reaching for `grep_search` instead of direct `grep` calls within the shell. The key is now fully committing to avoiding `ls`, `cat`, and `grep` when I can.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.046357013s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 10:06 am
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+## User Request
+
+. Entonces que gaps/issues quedan o que se destapo apatir de ayer con lo del job diario y ahber modificado varias php  ?
+. renombrae: PLAN_MOTOR_MORA_LEGACY.md  cambiar a fixes_motor_mora_jun_a_agos.md
+. NO commitees ahun. 
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `PLAN_MOTOR_MORA_LEGACY.md`
+**Language:** markdown
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool specificity. I've been refining my approach to avoid generic commands. I'm actively suppressing the impulse to default to bash, and concentrating on utilizing the most specialized tool for each task. This shift should streamline operations and enhance accuracy. My process is becoming far more efficient as a result.
+
+
+**Addressing Remaining Issues**
+
+I've tackled the rename task using `mv` via `run_command` – straightforward. Now, focusing on outstanding gaps, specifically regarding the daily job and modified PHP files. I need to explicitly identify what's left, now that the reporting shift is done. The job itself is still there as a point to look at. I'll need to analyze it further to see what is missing.
+
+
+**Analyzing Job Consequences**
+
+I'm now deeply considering the implications of the daily job's behavior. I'm focusing on potential database bloat from repeated recargo insertions, even with `INSERT IGNORE`. I must ensure that MariaDB handles inserts into `ligacargos_historico` efficiently and that auto-increment ID conflicts, which I think are solved, remain addressed. Also, I'm analyzing the possible visual impact of the job's effects and data type mismatches.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 4.813275447s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 10:08 am
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. Specifically, I'm now actively avoiding the use of `cat` for file creation or appending, and I'm choosing `grep_search` over direct `grep` usage within bash scripts. I'm also now attempting to use the appropriate tools such as `ls` or `cat` alternatives.
+
+
+**Analyzing Tool Specificity**
+
+I'm now focusing on specific tools for specific jobs. For finding, I'll use `find` and for replacing, it's `sed`. I've added a critical step: I must list related tools before executing T, and execute T if other tools are generic. I also renamed the file and have to summarize any gaps/issues related to the new daily job process based on what was learned yesterday, regarding the job that processes more data which might take more time.
+
+
+**Addressing Potential Run Times**
+
+I'm now thinking about the implications of manual runs, especially if executed mid-day. The system could get stuck, and remain stuck for a very long time, which leads to thinking about some possible performance implications. I'm focusing on those implications and the necessity to avoid them.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 4.199086387s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+## User Request
+
+1) . documenta claramente y sin omisiones o suposiciones todas estas consecuencia donde corresponda en fixes_motor_mora_jun_a_agos.
+
+2) . precisiones: el job debe correr diariamente al iniciar el equipo servidor local; y el job verificador deberia ser un guardian para validar si se ejecuto correcto y completo el primer job diario; en caso de que no deberia volver a ejecutarlo y lo mismo asegurar que este completado;  algo creo no fue considerar es que el primer job, debe "esperar" a lanzarse hasta que el job o script de iniciaalizacioón del stack lamp este up/running, para ello analiza, revisa los .ps1 y txt en el dir, /opt/lampp/htdocs/agua/docs-dev/pase-a-prod/aguav2-2026/scripts/  para hacer las adecuaciones necesarias.
+Para este punto 2, crea primero un plan de realineacion, antes de hacer las mejoras/cambios.
+
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `PLAN_MOTOR_MORA_LEGACY.md`
+**Language:** markdown
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. Specifically, I'm now actively avoiding the use of `cat` for file creation or appending, and I'm choosing `grep_search` over direct `grep` usage within bash scripts. I'm also now attempting to use the appropriate tools such as `ls` or `cat` alternatives.
+
+
+**Planning Job Execution**
+
+I'm now in "Planning Mode," and have shifted focus to the job execution realignment. My immediate goal is to draft a comprehensive implementation plan. I will leverage the `.ps1` and `.txt` files in the provided directory to ensure a smooth, daily job start-up, with a guardian monitor. Importantly, I will plan a proper waiting period for the LAMP stack initialization before executing the job. Furthermore, I am committed to documenting the previously identified gaps.
+
+
+**Drafting Implementation Plan**
+
+I'm now drafting an implementation plan artifact, called `implementation_plan.md`, focusing on workflow realignment. My research phase is complete. I reviewed `fixes_motor_mora_jun_a_agos.md` and examined scripts in the `/opt/lampp/htdocs/agua/docs-dev/pase-a-prod/aguav2-2026/scripts/` directory, including `job-sync-cartera.ps1`, `job-monitor-sync.ps1`, `setup-sync-jobs.ps1`, `start-webapps.ps1`, and `configuracion.txt`. I'm ready to document findings and create the implementation plan.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `fixes_motor_mora_jun_a_agos.md`
+
+**Tool:** `list_dir`
+**Path:** `/opt/lampp/htdocs/agua/docs-dev/pase-a-prod/aguav2-2026/scripts`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.894958874s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# Plan y Documentación Maestra: Motor de Mora Legacy
+
+## Contexto Histórico e Imposición del Comité
+Durante la estabilización de Host C (AguaV2), se documentó una diferencia en la Cartera Vencida entre Host B y Host C. El motor inicial de Host C estaba diseñado con una filosofía de "Mora Continua Rotativa" (cobrando de forma vitalicia todos los meses sin tope por año).
+Tras presentar la auditoría, **el Comité de Agua determinó que la matemática correcta y oficial a utilizar es la Legacy (Host B).**
+
+## Reglas Oficiales (Matemática Legacy)
+
+El cálculo financiero se rige estrictamente por dos reglas absolutas que el código PHP (`cargos.php`) respeta de manera obligatoria:
+
+### 1. Tope Estricto de 12 Meses (Anualidad Cerrada)
+La mora de un año (ej. 2021) jamás puede rebasar los 12 meses de recargo, sin importar cuántos años reales hayan pasado sin pago. 
+*   **Monto Máximo Base:** Un año adeudado de agua y drenaje genera como máximo 12 recargos (1 por mes).
+*   **Límite Bomba Eliminado:** Dado que la deuda no crece al infinito (se topa a 12 meses por año), se eliminó el concepto de "Límite Bomba" (`reversal_threshold`) de la base de datos y de la UI, ya que es matemáticamente imposible que un contrato explote exponencialmente.
+
+### 2. Detonación del Periodo de Gracia (Enero - Marzo)
+El periodo de gracia otorgado por el comité estipula que los recargos no se cobran *si* el usuario paga entre Enero y Marzo.
+*   **Detonación en Abril:** Si el usuario no paga antes de Abril, los meses de Enero, Febrero y Marzo **SÍ SE COBRAN** de forma retroactiva (detonación de golpe).
+*   **Extirpación del AUTO-HEAL:** En iteraciones previas, el sistema borraba físicamente los recargos de Ene-Marzo asumiendo que eran falsos positivos ("Auto-Heal"). **Esto se eliminó** porque causaba pérdidas de $180 MXN por año/contrato. Ahora, el recargo se genera físicamente pero la regla de detonación (si es aplicable a meses vigentes o años pasados) se maneja en el código `cargos.php`.
+
+## Arquitectura y Mantenimiento
+
+### Single Source of Truth
+Host C es ahora la **única fuente de verdad** (SSOT). La tabla de `ligacargos` y `ligacargos_historico` reflejan de manera fiel la misma matemática que se utilizaba en 2016-2025 en Host B.
+
+### Caché JIT (Just in Time)
+A pesar de retroceder a la matemática Legacy, el motor conserva la mejora de rendimiento de la versión V2:
+*   Se utiliza un Hash Map para evitar lecturas/escrituras redundantes (O(1)).
+*   La vista `vw_ligacargos_pendientes` une la tabla activa y la histórica de manera dinámica, basándose en la bandera `recargo` de la tabla de catálogo de `cargos`, la cual se puede prender/apagar desde `configuracion.php`.
+
+## Pipeline de Despliegue (`fix-issue-01`)
+El pipeline de saneamiento se ha simplificado a:
+1.  **`01_normalizar_catalogo.sql`**: Limpieza de duplicados.
+2.  **`02_normalizacion_estructural_v2.sql`**: Mensualidades se mueven a Cat 1 para evitar mora injusta.
+3.  **`03_normalizar_cuentas_usuarios.sql`**: Limpieza de Nombres y TRIM.
+4.  **`04_vista_cargos_pendientes_legacy.sql`**: Definición de la vista que une historico y activo SIN limitantes dinámicas extintas.
+5.  **`05_limpieza_trailing_spaces.sql`**: Fix vital (GAP-03) que elimina espacios al final de las leyendas para no romper el Hash Map del motor.
+6.  **`06_validation_legacy.sql`**: Comprobación final de que no hay asambleas con mora, que las mensualidades están limpias y que los recargos cuadran con las reglas.
+
+## Estabilización y Hardening Financiero (Junio 2026)
+
+Se implementaron parches de seguridad, integridad y depuración de duplicados en la gestión de reconciliación y condonación en `admin/operaciones/configuracion.php`:
+
+### 1. Eliminación del Doble DELETE (Soft-Delete de Recargos)
+*   **Problema:** El sistema realizaba un borrado físico (`DELETE`) de los recargos moratorios en estado pendiente (`estado = 0`) al condonar o reconciliar un cargo base. Esto destruía la trazabilidad de auditoría de los datos históricos.
+*   **Solución:** Se reemplazaron todas las sentencias `DELETE` por `UPDATE ligacargos[_historico] SET estado = -1, fcobro = NOW()`. Esto desactiva el recargo lógicamente de forma segura. El JIT lo ignora y los logs de auditoría preservan su existencia histórica.
+
+### 2. Poka-Yoke de Duplicados en Reconciliación / Condonación
+*   **Problema:** Al reconciliar o condonar un cargo que tenía clones/duplicados históricos, el sistema actualizaba todos a `estado = 1`. Esto generaba doble contabilidad financiera de ingresos cobrados o montos condonados.
+*   **Solución:** Se limitó la actualización a `estado = 1` estrictamente por ID único (`WHERE id = $id_cargo`). Todos los demás clones redundantes del mismo contrato, año y categoría se cancelan lógicamente actualizándolos a `estado = -1` con el sufijo `[DUPLICADO DEPURADO]`.
+
+### 3. Blindaje de Sesión y Bitácora de Auditoría (`Conexion.php`)
+*   **Problema:** Deserialización fallida del usuario de la sesión (`__PHP_Incomplete_Class`) e intentos de conversión implícita de objeto a string al guardar en `sys_log_reconciliacion`.
+*   **Solución:** Se inyectó `require_once` de la clase `User` en `Conexion.php` antes del inicio de sesión, y se extrae explícitamente el nombre del usuario ejecutor usando `->getNombre()` en la bitácora.
+
+### 4. Consolidación de Herramientas de Monkey Testing
+*   **Problema:** El script de monkey testing `comparativa_masiva.php` estaba expuesto en la UI diaria y en la carpeta de operaciones operacionales. Al depender del Host B remoto (que puede estar apagado), causaba fallas por timeout.
+*   **Solución:** Se eliminó el botón de la UI principal y se movió el script a la carpeta de herramientas premium de oro: `admin/saneamiento/comparativa_masiva.php`.
+
+### 5. Fix de Colisiones de ID (Resurrection Bug) en Transacciones
+*   **Problema:** Los Procedimientos Almacenados (`sp_pagar_cargo`, `sp_cancelar_cargo`) y algunas rutinas de PHP (`regresarCargoCancelado`) usaban el `$id` bruto provisto por la vista unificada (`vw_ligacargos_all`). Debido a que las tablas divididas (`ligacargos` y `ligacargos_historico`) tienen llaves primarias independientes, un pago o cancelación sobre un cargo histórico podía **colisionar** accidentalmente y actualizar el cargo activo de otro año si ambos compartían el mismo ID (Resurrection Bug).
+*   **Solución (Split-Aware Logic):** 
+    1. En PHP (`cargos.php` y `contratos.php`), todas las llamadas a los Stored Procedures ahora envían un `0` estático como primer parámetro (ID). 
+    2. Los SP están programados para hacer _fallback_ a la llave lógica compuesta `(numcontrato, leyenda, repetido)` si el ID es `0`. Esta llave es unificada y garantizada como única a nivel de base de datos.
+    3. Se removieron las cláusulas `WHERE id = $id` en las rutinas de reversión y auditoría en PHP para utilizar en su lugar la llave compuesta, garantizando la inmutabilidad de la información al cruzar el límite temporal del split.
+
+### 6. Liberación de Deuda Histórica (Fin del Límite de 5 Años)
+*   **Problema:** El motor V2 introdujo inicialmente una limitante artificial en la vista de la base de datos (basada en `paridad_anios_max_recargo = 5`) que ocultaba automáticamente los recargos moratorios de deudas anteriores al año 2021, provocando un descuadre masivo contra la Cartera Vencida del Host B original.
+*   **Solución:** Se erradicó por completo esta lógica de recorte en la definición de la vista unificada `vw_ligacargos_pendientes` (mediante el script `04_vista_cargos_pendientes_legacy.sql`). 
+*   **Impacto Financiero:** Esto liberó de forma inmediata **5,552 recargos moratorios** históricos generados en años previos a 2020. Estos recargos vuelven a ser visibles en los estados de cuenta, alineando milimétricamente la Cartera Vencida oficial de AguaV2 (Host C) con el modelo Legacy (Host B), y otorgando a los operadores la capacidad operativa de cobrarlos o condonarlos bajo el nuevo esquema de Soft-Delete.
+
+### 7. Poka-Yoke de Auto-Encendido y Bloqueo de Mora (Años Futuros)
+*   **Problema:** Al prescindir del Checkbox *"Causa Recargo"* en la UI de creación de cargos y al demandar que la mora histórica sea vitalicia e inalterable, existía el riesgo de que la creación de años futuros (Ej. 2028) quedara exenta de mora, o de que un operador apagara accidentalmente la mora de un año entero desde el panel de control.
+*   **Solución (Autonomía G02):**
+    1.  **Backend (`cargos.php`):** Se perfeccionó el *Guard G02*. Al crear un nuevo cargo, si la categoría es AGUA (2) o DRENAJE (3), el motor inyecta automáticamente `recargo = 1` a nivel de base de datos, ignorando por completo cualquier variable de la UI.
+    2.  **UI de Panel (`configuracion.php`):** Se inyectó el atributo `disabled` a todos los checkboxes de la tabla *"Control de Mora por Año"*.
+*   **Impacto Operativo:** El sistema es 100% autónomo. En enero de 2028, cuando el operador simplemente registre la "ANUALIDAD DEL AGUA 2028", el sistema agrupará el nuevo año, encenderá su propia mora de forma robótica y dibujará el candado rojo ("MORA ACTIVA" bloqueado) en el panel de configuración, garantizando cero errores humanos y blindando el flujo financiero a perpetuidad.
+
+### 8. Hardening en la Edición de Tomas Físicas (Bugs Históricos Resueltos)
+Durante la estabilización de AguaV2, la manipulación de tomas físicas presentó tres vulnerabilidades críticas (bugs) que ya han sido neutralizadas y documentadas bajo la nueva arquitectura:
+
+1. **El Bug de "Retroactividad Injusta" (Cobros inflados al pasado):**
+   * *Problema:* Antes, si se cambiaba el tipo de toma de un usuario (Ej. de "Normal" a "Comercial"), el sistema recalculaba y aplicaba la tarifa comercial a toda su deuda histórica acumulada.
+   * *Solución (La Base Congelada):* Actualmente, el cambio de tipo de toma o la adición de tomas afecta **únicamente al año en curso y a las anualidades futuras**. El registro histórico (años vencidos) se respeta inmutablemente al costo que tenía originalmente.
+2. **El Bug de Cancelación Cruzada (Resurrection / Collision Bug):**
+   * *Problema:* Al desconectar tomas o reducir su número (Ej. de 2 tomas a 1), el sistema intentaba limpiar la anualidad sobrante. Por un error en la separación de tablas (`ligacargos` vs `ligacargos_historico`), las cancelaciones afectaban accidentalmente los saldos de otros usuarios.
+   * *Solución:* Se implementó el parche **Issue 02 (Cross Contract Bug)**. El sistema de reversión `_quitaCargoAnual()` ahora funciona mediante Llaves Compuestas (`numcontrato` + `leyenda`), y la función maestra `_sincronizaParidadFinanciera()` aplica un Soft-Delete directo (`UPDATE ligacargos SET estado = -1`) blindado por el ID del contrato. Es matemáticamente imposible afectar otro registro.
+3. **El Bug de Multiplicación de Renglones (Clonación de Anualidades):**
+   * *Problema:* El diseño original insertaba múltiples copias idénticas del cargo *"ANUALIDAD DEL AGUA"* dependiendo del número de tomas (Ej. 2 tomas generaban 2 renglones), saturando visualmente al cajero y corrompiendo cortes de caja.
+   * *Solución (Modelo de Suma por Unidad):* La función `generaCargosAutomaticos()` ahora suma los montos subyacentes de la Toma 1 + Toma 2, agrupándolos e insertando un **solo concepto maestro** consolidado (Ej. $1,200), respaldado por Poka-Yokes que bloquean a nivel UI un máximo de 2 tomas por domicilio (Reglas M1-R05 y M1-R06).
+
+### 9. Protocolo de Pagos Compensatorios por Cambio de Tarifa (Cargos LIBRES)
+Existe un flujo operativo formalizado para resolver las discrepancias tarifarias cuando un usuario ya pagó el año actual bajo Tarifa Normal pero cambia su toma a Tarifa Comercial a mitad de año.
+
+*   **El Problema Práctico:** Al modificar la toma a "Comercial", el operador NO debe asignar nuevamente la Anualidad completa (puesto que el usuario ya cubrió su parte de Tarifa Normal y figuraría doble en el estado de cuenta).
+*   **La Solución Estructural:**
+    1.  El operador genera un cargo utilizando la bandera `(LIBRE)` (Ej. *DIFERENCIA CAMBIO TOMA AGUA (LIBRE)*).
+    2.  Esta bandera detona un *prompt* interactivo en la UI donde el operador puede ingresar manualmente la pura "diferencia" de la tarifa (Ej. si pagó $600 y comercial es $1200, cobrar los $600 faltantes).
+    3.  El backend de `cargos.php` exime al concepto `(LIBRE)` de multiplicadores automáticos o recargos (no se multiplica por metros ni por número de tomas), garantizando que cuadre a la perfección en el corte de caja.
+    4.  **Al año siguiente**, cuando el operador de caja abra la nueva generación de recibos, la función automatizada `generaCargosAutomaticos()` detectará la marca `tipo = 1` (Comercial) del contrato, inyectando de forma nativa la anualidad de Tarifa Comercial por $1,200. El ajuste compensatorio `(LIBRE)` es una solución de puenteo inter-anual de uso único.
+
+### 10. Saneamiento y Estabilización de Recargos Huérfanos (Auto-Heal)
+Durante la estabilización profunda (Junio/Julio 2026), se detectó que el motor JIT generaba o conservaba recargos moratorios pendientes (`estado = 0`) para anualidades base que habían sido previamente depuradas/canceladas (`estado = -1`). Esto causaba "adeudos fantasmas" (engrosamiento irreal de la Cartera Vencida).
+
+*   **Solución (Bloqueo Predictivo y Limpieza en Cascada):**
+    1. **Guard en Generación (`cargos.php`):** El motor de mora (`calcula_recargos()`) ahora verifica en tiempo real la existencia y estatus del cargo base antes de calcular la mora. Si el cargo base se encuentra cancelado (`estado = -1`) o no existe, la función aborta de inmediato sin generar recargos.
+    2. **Auto-Heal en Sincronización (`contratos.php`):** Al finalizar la calibración financiera de cualquier contrato, el sistema ejecuta un saneamiento en cascada que cancela lógicamente (`estado = -1`) cualquier recargo moratorio pendiente cuyo cargo base correspondiente haya sido depurado (`estado = -1`).
+    3. **Ley Dura (Julio 2026):** Por disposición estricta del Comité, **SE PROHÍBE** borrar la mora si el capital base es pagado tardíamente (`estado = 1`). Si un usuario pagó su capital en años posteriores pero el cajero omitió cobrar los recargos, dichos recargos pendientes sobreviven (`estado = 0`) y permanecen como deuda legítima exigible. El perdón automático (Auto-Condonación) ha sido desmantelado en el Script 08 y en el Auto-Heal PHP.
+
+### 11. Prescripción Maestra Variable ("El Acordeón Dinámico")
+*   **Problema Histórico:** El sistema antiguo usaba barreras artificiales para ocultar la deuda vieja en la pantalla, lo cual descuadraba totalmente los reportes de Cartera Vencida frente a la base de datos real.
+*   **Solución Arquitectónica Dinámica:**
+    1. Se migró el límite hacia la base de datos a través de la variable `paridad_anio_limite_mora` en `config_sistema`.
+    2. **Acordeón SQL:** Se inyectó una subconsulta dinámica nativa directamente en la vista unificada (`vw_ligacargos_pendientes`). Esta vista actúa como un "acordeón": si el Comité cambia el año límite en el panel a 2010, la vista automáticamente "oculta" el capital y las moras anteriores a 2010. Al desaparecer de la vista, desaparecen automáticamente de la Cartera Vencida logrando un cuadre contable maestro (Cero Fugas).
+    3. **Reversibilidad Segura:** Ya no se borran físicamente los registros base antiguos (`estado = -1`). Si el Comité decide bajar el año a 2005, el acordeón se abre y la deuda de 2005 a 2009 reaparece intacta en la cobranza.
+    4. **Doble Freno:** El motor JIT (`calcula_recargos()`) lee la misma variable y frena matemáticamente la generación de recargos mensuales para cualquier adeudo cuya base sea anterior a este límite.
+
+### 12. Erradicación de Recargos Anuales Duplicados (Falsos Positivos Históricos)
+Durante el análisis de carteras vencidas profundas (ej. Contrato 76), se identificó que el sistema sumaba la mora mensual generada por el JIT junto con antiguos recargos consolidados manualmente por la administración en el periodo 2000-2014 (ej. "RECARGO ANUAL DE AGUA 2006").
+*   **Problema de Ortografía (Variaciones Legacy):** El parche inicial de limpieza fracasó para los años 2000-2004 debido a inconsistencias ortográficas de los operadores (capturaron "RECARGO ANUAL AGUA" omitiendo el "DE", o "RECARGOS" en plural). 
+*   **Solución:** Se amplió la directiva de búsqueda en el parche `09_saneamiento_recargos_anuales_duplicados.sql` utilizando condicionales `LIKE` expansivos. Esto permitió ubicar y aplicar un *Soft-Delete* (`estado = -1`) a todas las variaciones manuales de mora en ese rango, unificando la deuda exclusivamente bajo la matemática del motor mensual automatizado.
+
+### 13. Amnistía Robusta y Limpieza JIT Asíncrona (Amnistía Llave en Mano)
+*   **Problema:** Al desmarcar una anualidad en el panel de `configuracion.php` para otorgar amnistía, la instrucción protegía/excluía erróneamente a los comercios y segundas tomas. Peor aún, apagar la casilla solo detenía la mora futura, pero **dejaba vivos** los recargos mensuales que el motor JIT ya hubiera calculado previamente, inflando la deuda a pesar de la amnistía.
+*   **Solución Arquitectónica:**
+    1. Se eliminaron las exclusiones comerciales, haciendo que el apagado de la mora sea universal para todos los cargos de Agua y Drenaje de ese año.
+    2. **Poka-Yoke de Limpieza:** Al apagar una casilla (`estado = 0`), el sistema ahora ejecuta inmediatamente un *Soft-Delete* de cualquier recargo (cat 16 y 17) pendiente (`estado = 0`) correspondiente a ese año.
+    3. **Resiliencia JIT:** Gracias a esta arquitectura, si el operador comete un error y vuelve a encender la amnistía, el motor JIT automáticamente reconstruirá y calculará de nuevo toda la mora al abrir el contrato.
+    4. **Automatización:** Se empaquetó esta lógica en `fix-issue-01` (`10_aplicar_amnistia_2005_2014.sql`) para desplegar la amnistía del bloque 2005-2014 automáticamente al inicializar Producción.
+
+### 14. Prevención de Deuda en Suspensión Temporal (Evitando el Caso 937)
+*   **La Falla Legacy (Caso 937):** En el sistema original, suspender un servicio no eximía al usuario de recibir la carga anual masiva de deuda, provocando que los contratos suspendidos acumularan capital y mora de forma injusta.
+*   **Blindaje en AguaV2:** El sistema transaccional tipificó estrictamente los estados. Cuando un contrato pasa a **Estado 2 (Suspensión Temporal)**:
+    1. El motor JIT congela la deuda preexistente y deja de emitir recargos nuevos para ella.
+    2. El "Generador Anual" de capitales de Enero excluye obligatoriamente a los contratos en Estado 2.
+    3. Al reactivar a Estado 1 (Activo) tras varios años, el contrato despierta en blanco para ese periodo de ausencia, garantizando que el "Caso 937" (cobro indebido por periodos de suspensión) no vuelva a ocurrir jamás.
+
+### 15. Poka-Yoke Híbrido (Respeto de Mora Manual Legacy <= 2017)
+Por disposición del Comité, la deuda mora de los años 2017 hacia atrás capturada manualmente por los operadores (*"RECARGO ANUAL DE AGUA..."*) debe prevalecer intacta para su cobro.
+*   **Problema de Duplicidad:** El motor JIT amenazaba con generar mora mensual sobrepuesta a esos cargos manuales.
+*   **Solución en Tres Capas:**
+    1. **Script 09:** Se acotó para que solo elimine la basura anual de 2018 en adelante.
+    2. **Escudo JIT:** En `cargos.php`, el JIT verifica si el año en proceso es `<= 2017` y si existe un cargo manual en el historial. De ser positivo, el JIT aborta la matemática mensual y cede el paso para que se cobre la deuda manual original.
+    3. **Amnistía Inteligente:** En el script 10 y en `configuracion.php`, el borrado de moras por amnistía fue limitado exclusivamente a cadenas con guion medio (`LIKE '% - %'`), blindando los cargos manuales contra borrados accidentales de interfaz.
+
+### 16. Blindaje Poka-Yoke de Transición a Activo (2 → 1) y Depuración de Deuda Retroactiva (Agosto 2026)
+Durante la operación en produccion de Host C, se identificó un GAP al cambiar contratos de **Suspensión Temporal (`2`) → Activo (`1`)**:
+*   **Causa Raíz:** `generaCargosAutomaticos()` ejecutaba `_esContratoFacturableEnAnio()` para determinar la facturación de cuotas base atrasadas. Para contratos del sistema legado (como el contrato 742) que carecían de registros formales en la tabla de auditoría `cambios` año con año, el sistema asumía por defecto que el contrato había estado activo en el pasado, inyectando masivamente cuotas base anuales de agua y drenaje atrasadas (ej. 289 cargos por $19,918 MXN en 742 y $4,254 MXN en 959).
+*   **Blindaje en Código PHP (`includes/negocio/contratos.php`):**
+    1. **Guard en Transición:** Se actualizó `_esContratoFacturableEnAnio()` y `generaCargosAutomaticos()` para recibir el parámetro `$estado_origen`. Si el contrato proviene de Suspensión Temporal (`estado_origen === 2`), la función bloquea automáticamente la generación retroactiva de cuotas base para cualquier año anterior al año actual de reactivación (`anio < anio_actual`).
+    2. **Resiliencia Legado (-ST):** Si un contrato legado no tiene logs en `cambios`, pero posee la marca de suspensión `-ST` en la clave responsiva (`numcontratoresp`), el sistema frena la facturación retroactiva para años anteriores al año actual.
+*   **Script de Remedación DB (`11_depuracion_deuda_fantasma_742_959.sql`):**
+    1. Se aplicó Soft-Delete (`estado = -1`, `fcobro = NOW()`) exclusivamente a los cargos pendientes (`estado = 0`) para años `<= 2025` de los contratos 742 y 959.
+    2. Se preservaron intactos los cobros e ingresos pagados del año 2026 (Folios `25503`, `25504`, `25513`, `25514` por $1,394.00 MXN cada uno).
+    3. Se integró la orden de ejecución del script 11 en los orquestadores `run_patch_host_c.sh` y `run_patch_host_c.ps1`.
+
+### 17. Sincronización Automatizada de Saldo Diario y Paridad Ficha vs. Deudores (4 de Agosto de 2026)
+*   **Diagnóstico y Causa Raíz del Desfase de $240 MXN:** Los reportes estáticos de deudores (como `listadeudoresxc.php`) leen directamente de la vista `vw_ligacargos_pendientes` (creada en Abril 2026), mientras que la **Ficha del Contrato** (`contratos.php` -> `cargaContrato()`) ha operado desde el setup inicial de Host C bajo un modelo híbrido JIT: primero ejecuta `generaCargosAutomaticos()` y `_sincronizaDeudaPendienteContrato()`, y luego lee los deudas de la vista. Debido a que la versión inicial del script en lote `sync_cartera_mensual.php` solo ejecutaba `generaCargosAutomaticos()`, los recargos retroactivos de contratos no abiertos manualmente en la UI (ej. contratos 484, 527, 1008) no existían físicamente en la BD, generando un desfase de $240 MXN frente al reporte general.
+*   **Ajuste Aplicado (4 de Agosto de 2026 - Commit `1c87339`):**
+    Se actualizó `sync_cartera_mensual.php` inyectando la llamada obligatoria a `_sincronizaDeudaPendienteContrato($row[0], $y)`. Con esto, el Job en lote replica milimétricamente la misma secuencia de dos pasos de la Ficha para todo el padrón.
+*   **Mecanismo de Almacenamiento Físico e Idempotencia:**
+    1.  **Persistencia en MariaDB:** Los calculos realizados no se guardan en `.txt` ni en memoria, sino físicamente como registros con `estado = 0` (pendiente) en `ligacargos` (≥ 2026) y `ligacargos_historico` (≤ 2025).
+    2.  **Protección Anti-Duplicación (Poka-Yoke):** El motor ejecuta una verificación previa (`SELECT id_cargo FROM vw_ligacargos_pendientes WHERE numcontrato = ... AND leyenda = ...`). Si el recargo ya existe, se omite (0 inserciones). Solo se insertan los renglones faltantes, garantizando 0 duplicados y ejecutabilidad idempotente.
+*   **Inventario de Archivos PHP Refactorizados a la Vista (`vw_ligacargos_pendientes` / `vw_ligacargos_all`):**
+    Originalmente en el sistema Host B (monolítico), las consultas se hacían directamente sobre la tabla `FROM ligacargos`. Al dividirse la base de datos en dos tablas (`ligacargos` activa y `ligacargos_historico`), los siguientes módulos clave de deudores y reportes fueron refactorizados para usar las Vistas unificadas:
+    1.  `reportes/listadeudores.php`: Migró de `FROM ligacargos` directa a `vw_ligacargos_pendientes` (eliminando pérdida de datos `≤ 2025`).
+    2.  `reportes/listadeudoresxc.php`: Módulo estático de deudores por calle/contrato, consulta `vw_ligacargos_pendientes`.
+    3.  `reportes/carteravencida.php`: Modelo de cartera vencida homologado, consulta `vw_ligacargos_pendientes`.
+    4.  `reportes/concentradocortecajaresumen.php`: Consolidación total de ingresos y saldos, refactorizado a `vw_ligacargos_all`.
+    5.  `reportes/contratoinfo2.php`: Consulta detallada de historia de adeudos, utiliza `vw_ligacargos_pendientes`.
+    6.  `includes/negocio/contratos.php`: Ficha del contrato (`cargaContrato()`, `_sincronizaDeudaPendienteContrato()`), consulta y sincroniza vía `vw_ligacargos_pendientes`.
+    7.  `includes/negocio/cargos.php`: Motor de recargos y cálculo global de saldos, utiliza `vw_ligacargos_pendientes`.
+    8.  `admin/saneamiento/reporte_morosos.php`: Reporte de saldos morosos, consulta `vw_ligacargos_pendientes`.
+    9.  `admin/saneamiento/operaciones_multas_sync.php`: Sincronización de multas y recargos, utiliza `vw_ligacargos_pendientes`.
+    10. `admin/saneamiento/cv_por_tipo_edo_cto.php`: Cartera vencida por tipo de contrato y estado, utiliza `vw_ligacargos_pendientes`.
+    11. `views/cargos/modificar.php`: Validación de duplicados en modificación de cargos, consulta `vw_ligacargos_pendientes`.
+    12. `docs-dev/saneamiento-limpieza/reportes/genera_csv.php`: Generador de reportes CSV de auditoría, migró 4 JOINs directos a `vw_ligacargos_all`.
+*   **Arquitectura del Job de Paridad Masiva:**
+    1.  **Backend Core (`admin/operaciones/sync_cartera_mensual.php`):** Recorre contratos activos (`estado IN (1, 2)`) invocando la dupla `generaCargosAutomaticos()` + `_sincronizaDeudaPendienteContrato()`.
+    2.  **Orquestador PowerShell (`job-sync-cartera.ps1`):** Ejecutable de fondo agnóstico a rutas en Host C (`F:\aguav2\webapp\agua\admin\operaciones\sync_cartera_mensual.php`) con auto-elevación a Administrador y registro de bitácora en `sync_cartera.log`.
+    3.  **Vigilante de Auditoría (`job-monitor-sync.ps1`):** Script de monitoreo que verifica la fecha de modificación y resultado del archivo de log.
+    4.  **Instalador Idempotente (`setup-sync-jobs.ps1`):** Registra las tareas programadas en el *Windows Task Scheduler* (`AguaV2_SyncCartera_Diario` y `AguaV2_MonitorSyncCartera_Diario`) para ejecutarse al iniciar sesión (`AtLogOn`) con cuenta `SYSTEM` en modo oculto (`-WindowStyle Hidden`).
+
+```
+
+</details>
+
+---
+
+<details>
+<summary>Directory: `scripts` (23 items)</summary>
+
+**Path:** `opt/lampp/htdocs/agua/docs-dev/pase-a-prod/aguav2-2026/scripts`
+
+| Name | Type | Size |
+|------|------|------|
+| `config.ps1` | File | 4349 bytes |
+| `hide-drive.ps1` | File | 2307 bytes |
+| `instalacion.txt` | File | 7154 bytes |
+| `job-monitor-sync.ps1` | File | 2353 bytes |
+| `job-sync-cartera.ps1` | File | 1401 bytes |
+| `monitor-ups.ps1` | File | 11782 bytes |
+| `optimize-windows10.ps1` | File | 7159 bytes |
+| `protect-folder.ps1` | File | 5220 bytes |
+| `revert-chrome-updates.ps1` | File | 2812 bytes |
+| `revert-optimize-windows10.ps1` | File | 5292 bytes |
+| `setup-firewall.ps1` | File | 3292 bytes |
+| `setup-full.ps1` | File | 13108 bytes |
+| `setup-gpo-scripts.ps1` | File | 3971 bytes |
+| `setup-kiosk-shortcut.ps1` | File | 4613 bytes |
+| `setup-mysql-root.ps1` | File | 4186 bytes |
+| `setup-shortcuts.ps1` | File | 4548 bytes |
+| `setup-sync-jobs.ps1` | File | 3303 bytes |
+| `shutdown-server.ps1` | File | 2362 bytes |
+| `start-webapps.ps1` | File | 18565 bytes |
+| `status-webapps.ps1` | File | 10014 bytes |
+| `stop-webapps.ps1` | File | 10040 bytes |
+| `unhide-drive.ps1` | File | 1529 bytes |
+| `unprotect-folder.ps1` | File | 4189 bytes |
+
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. Specifically, I'm now actively avoiding the use of `cat` for file creation or appending, and I'm choosing `grep_search` over direct `grep` usage within bash scripts. I'm also now attempting to use the appropriate tools such as `ls` or `cat` alternatives.
+
+
+**Analyzing Task Requirements**
+
+I'm now fully immersed in dissecting the requirements. I will document gaps in a specific file. I'm focusing on crafting an implementation plan for job realignment after reviewing a set of PowerShell scripts. My strategy involves parallel execution of `replace_file_content` for appending to the MD file and multiple `view_file` calls for script examination.
+
+
+**Appending New Section**
+
+I've examined the file's end, line 183 of `fixes_motor_mora_jun_a_agos.md`, and determined the exact section to append: a new section titled "Gaps and Post-Implementation Analysis". This involves adding four key points related to job processing time, orphaned duplicates, historical data issues, and operational visual impact. While I considered different file modification methods, I will use `replace_file_content` to append the data.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+**Tool:** `view_file`
+**File:** `setup-sync-jobs.ps1`
+
+**Tool:** `view_file`
+**File:** `job-sync-cartera.ps1`
+
+**Tool:** `view_file`
+**File:** `job-monitor-sync.ps1`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 11.448545217s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 10:18 am
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# --- Auto-Elevacion a Administrador ---
+if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+    Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
+    exit
+}
+
+$ErrorActionPreference = "Stop"
+
+# Load shared configuration
+$ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+. "$ScriptDir\config.ps1"
+
+Write-Host "Instalando Tareas Programadas (Jobs) de Sincronizacion de Cartera..." -ForegroundColor Cyan
+
+$TaskNameSync = "AguaV2_SyncCartera_Diario"
+$TaskNameMonitor = "AguaV2_MonitorSyncCartera_Diario"
+
+$ScriptPathSync = "$ScriptDir\job-sync-cartera.ps1"
+$ScriptPathMonitor = "$ScriptDir\job-monitor-sync.ps1"
+
+# Eliminar tareas si ya existen
+if (Get-ScheduledTask -TaskName $TaskNameSync -ErrorAction SilentlyContinue) {
+    Unregister-ScheduledTask -TaskName $TaskNameSync -Confirm:$false
+}
+if (Get-ScheduledTask -TaskName $TaskNameMonitor -ErrorAction SilentlyContinue) {
+    Unregister-ScheduledTask -TaskName $TaskNameMonitor -Confirm:$false
+}
+
+# 1. Crear Tarea de Sincronizacion (Se dispara al iniciar sesion, con un retraso de 30 segundos para dejar que los servicios inicien)
+$ActionSync = New-ScheduledTaskAction -Execute "PowerShell.exe" -Argument "-ExecutionPolicy Bypass -WindowStyle Hidden -File `"$ScriptPathSync`""
+$TriggerSync = New-ScheduledTaskTrigger -AtLogOn
+# Note: Windows Task Scheduler natively supports random delays or explicit delays but through CIM/XML for granular control.
+# We will just set it AtLogOn. Start-Webapps already does its thing.
+
+$Settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable -Hidden -ExecutionTimeLimit (New-TimeSpan -Minutes 15)
+$Principal = New-ScheduledTaskPrincipal -UserId "SYSTEM" -LogonType ServiceAccount -RunLevel Highest
+
+Register-ScheduledTask -TaskName $TaskNameSync -Action $ActionSync -Trigger $TriggerSync -Settings $Settings -Principal $Principal -Description "Actualiza la base de datos de deuda todos los dias al encender el kiosko."
+Write-Host "Tarea $TaskNameSync registrada correctamente." -ForegroundColor Green
+
+# 2. Crear Tarea de Monitoreo (Se dispara 10 minutos despues del LogOn)
+$ActionMonitor = New-ScheduledTaskAction -Execute "PowerShell.exe" -Argument "-ExecutionPolicy Bypass -WindowStyle Hidden -File `"$ScriptPathMonitor`""
+# En PowerShell v5, Delay no esta directamente disponible en New-ScheduledTaskTrigger para AtLogOn sin CIM, usaremos un trigger diario de respaldo o lo corremos at startup
+$TriggerMonitor = New-ScheduledTaskTrigger -AtStartup
+$SettingsMonitor = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -Hidden
+
+Register-ScheduledTask -TaskName $TaskNameMonitor -Action $ActionMonitor -Trigger $TriggerMonitor -Settings $SettingsMonitor -Principal $Principal -Description "Verifica que la sincronizacion de cartera haya sido exitosa."
+Write-Host "Tarea $TaskNameMonitor registrada correctamente." -ForegroundColor Green
+
+Write-Host "Ambos Jobs han sido instalados correctamente en el Task Scheduler." -ForegroundColor Cyan
+Write-Host "Presione cualquier tecla para salir..."
+$null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')
+
+```
+
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# --- Auto-Elevacion a Administrador ---
+if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+    Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
+    exit
+}
+
+$ErrorActionPreference = "Stop"
+
+# Load shared configuration
+$ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+. "$ScriptDir\config.ps1"
+
+$LogFile = "$TargetDrive\aguav2\webapp\agua\admin\operaciones\sync_cartera.log"
+$PhpExecutable = "$TargetDrive\xampp\php\php.exe"
+$PhpScript = "$TargetDrive\aguav2\webapp\agua\admin\operaciones\sync_cartera_mensual.php"
+
+Write-Host "Ejecutando Job de Sincronizacion Masiva de Cartera..." -ForegroundColor Cyan
+
+try {
+    # Ejecutamos el script PHP de forma silenciosa y guardamos la salida
+    $Output = & $PhpExecutable $PhpScript 2>&1
+    
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host "Error en la ejecucion del PHP: $Output" -ForegroundColor Red
+        Add-Content -Path $LogFile -Value "ERROR FATAL: El script de sincronizacion PHP fallo con codigo $LASTEXITCODE."
+    } else {
+        Write-Host "Job ejecutado correctamente." -ForegroundColor Green
+    }
+} catch {
+    Write-Host "Error critico al intentar invocar PHP: $_" -ForegroundColor Red
+    Add-Content -Path $LogFile -Value "ERROR FATAL EXCEPCION: $_"
+}
+
+```
+
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# --- Auto-Elevacion a Administrador ---
+if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+    Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
+    exit
+}
+
+$ErrorActionPreference = "Stop"
+
+# Load shared configuration
+$ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+. "$ScriptDir\config.ps1"
+
+$LogFile = "$TargetDrive\aguav2\webapp\agua\admin\operaciones\sync_cartera.log"
+$AlertFile = "$env:USERPROFILE\Desktop\ALERTA_SISTEMA_CARTERA.txt"
+$TodayStr = Get-Date -Format "Y-m-d"
+
+Write-Host "Ejecutando Job Monitor de Sincronizacion..." -ForegroundColor Cyan
+
+# Remove old alert if exists
+if (Test-Path $AlertFile) {
+    Remove-Item $AlertFile -Force
+}
+
+$HasError = $false
+$ErrorMsg = ""
+
+if (!(Test-Path $LogFile)) {
+    $HasError = $true
+    $ErrorMsg = "No se encontro el archivo de log: $LogFile. El Job principal nunca ha corrido."
+} else {
+    # Check if the log has today's date and "FINALIZADO OK"
+    $LogContent = Get-Content $LogFile -Tail 20
+    $FoundToday = $false
+    $FoundOk = $false
+    
+    foreach ($Line in $LogContent) {
+        if ($Line -match $TodayStr) {
+            $FoundToday = $true
+        }
+        if ($Line -match "FINALIZADO OK") {
+            $FoundOk = $true
+        }
+    }
+    
+    if (!$FoundToday) {
+        $HasError = $true
+        $ErrorMsg = "El log no tiene actividad del dia de hoy ($TodayStr). El script no corrio."
+    } elseif (!$FoundOk) {
+        $HasError = $true
+        $ErrorMsg = "El script corrio hoy pero no termino correctamente (Falta 'FINALIZADO OK')."
+    }
+}
+
+if ($HasError) {
+    Write-Host "ALERTA: $ErrorMsg" -ForegroundColor Red
+    Add-Content -Path $AlertFile -Value "========================================="
+    Add-Content -Path $AlertFile -Value "ALERTA DE SISTEMA: FALLO EN SINCRONIZACION"
+    Add-Content -Path $AlertFile -Value "========================================="
+    Add-Content -Path $AlertFile -Value "Fecha de falla: $(Get-Date)"
+    Add-Content -Path $AlertFile -Value "Detalle: $ErrorMsg"
+    Add-Content -Path $AlertFile -Value "Contacte a soporte tecnico para revisar Host C."
+} else {
+    Write-Host "Monitoreo OK. Sincronizacion completa verificada." -ForegroundColor Green
+}
+
+```
+
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 10:18 am
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool specificity. I've been refining my approach to avoid generic commands. I'm actively suppressing the impulse to default to bash, and concentrating on utilizing the most specialized tool for each task. This shift should streamline operations and enhance accuracy. My process is becoming far more efficient as a result.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `start-webapps.ps1`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.028557347s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# start-webapps.ps1 - Inicio seguro de Apache + MySQL
+# ==============================================
+
+param(
+    [switch]$NoPause
+)
+
+# --- Auto-Elevacion a Administrador ---
+if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+    Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
+    exit
+}
+
+
+$ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+
+if (Test-Path "$ScriptDir\config.ps1") {
+    . "$ScriptDir\config.ps1"
+} else {
+    Write-Host "ERROR: No se encuentra config.ps1 en: $ScriptDir" -ForegroundColor Red
+    exit 1
+}
+
+function Write-Log {
+    param([string]$Message, [string]$Level = "INFO")
+    if ($EnableLogging) {
+        $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+        Add-Content -Path $LogPath -Value "[$timestamp] [$Level] $Message"
+    }
+}
+
+function Copy-FailLog {
+    param([string]$Service)
+    try {
+        if (-not (Test-Path $FailLogDir)) {
+            New-Item -ItemType Directory -Path $FailLogDir -Force | Out-Null
+        }
+        $stamp = Get-Date -Format "dd-MM-yyyy-HH-mm"
+        $destFile = "$FailLogDir\fallo-$Service-$stamp.txt"
+
+        if ($Service -eq "mysql") {
+            $logSource = "$TargetDrive\xampp\mysql\data\mysql_error.log"
+            if (-not (Test-Path $logSource)) {
+                $logSource = (Get-ChildItem "$TargetDrive\xampp\mysql\data" -Filter "*.err" -ErrorAction SilentlyContinue | Select-Object -First 1).FullName
+            }
+        } elseif ($Service -eq "apache") {
+            $logSource = "$TargetDrive\xampp\apache\logs\error.log"
+        }
+
+        $content = "=== Fallo de START: $Service - $(Get-Date) ===`r`n"
+        if ($logSource -and (Test-Path $logSource)) {
+            $content += Get-Content $logSource -Tail 50 -ErrorAction SilentlyContinue | Out-String
+        } else {
+            $content += "(No se encontro log de $Service)`r`n"
+        }
+        $content | Out-File -FilePath $destFile -Encoding UTF8
+        Write-Host "       Log de fallo copiado a: $destFile" -ForegroundColor Yellow
+        Write-Log "Log de fallo $Service copiado a: $destFile"
+    } catch {
+        Write-Host "       No se pudo copiar el log de fallo: $_" -ForegroundColor Red
+    }
+}
+
+function Test-MySQLConnection {
+    param([int]$TimeoutSeconds = $MySQLStartTimeout)
+    $endTime = (Get-Date).AddSeconds($TimeoutSeconds)
+    while ((Get-Date) -lt $endTime) {
+        try {
+            $tcp = New-Object System.Net.Sockets.TcpClient
+            $ar  = $tcp.BeginConnect("127.0.0.1", $MySQLPort, $null, $null)
+            $ok  = $ar.AsyncWaitHandle.WaitOne(2000, $false)
+            if ($ok -and $tcp.Connected) { $tcp.Close(); return $true }
+            $tcp.Close()
+        } catch {}
+        Start-Sleep -Milliseconds 500
+    }
+    return $false
+}
+
+function Test-ApacheConnection {
+    param([int]$TimeoutSeconds = $ApacheStartTimeout)
+    $endTime = (Get-Date).AddSeconds($TimeoutSeconds)
+    while ((Get-Date) -lt $endTime) {
+        try {
+            $req = [System.Net.WebRequest]::Create("http://localhost:$ApachePort")
+            $req.Timeout = 2000
+            $req.Method  = "HEAD"
+            $req.GetResponse().Close()
+            return $true
+        } catch {}
+        Start-Sleep -Milliseconds 500
+    }
+    return $false
+}
+
+# ==============================================
+Write-Host "========================================"  -ForegroundColor Cyan
+Write-Host "INICIANDO SERVIDOR WEB"                   -ForegroundColor Cyan
+Write-Host "========================================"  -ForegroundColor Cyan
+Write-Log "Iniciando servidor web..."
+
+if (-not (Test-Path $ApachePath)) {
+    Write-Host "ERROR: No se encontro Apache en: $ApachePath" -ForegroundColor Red
+    Write-Log "No se encontro Apache en: $ApachePath" "ERROR"
+    exit 1
+}
+if (-not (Test-Path $MySQLPath)) {
+    Write-Host "ERROR: No se encontro MySQL en: $MySQLPath" -ForegroundColor Red
+    Write-Log "No se encontro MySQL en: $MySQLPath" "ERROR"
+    exit 1
+}
+
+# --- Validacion de Respaldo Diario (Catch-up Backup) ---
+Write-Host "`n[0/4] Verificando respaldo del dia anterior..." -ForegroundColor Cyan
+if (-not (Test-Path $BackupDir)) {
+    New-Item -ItemType Directory -Path $BackupDir -Force | Out-Null
+}
+
+$YesterdayStr = (Get-Date).AddDays(-1).ToString("dd-MM-yyyy")
+$BackupExists = Get-ChildItem -Path $BackupDir -Filter "data-$YesterdayStr-*.zip" -ErrorAction SilentlyContinue
+
+if (-not $BackupExists) {
+    Write-Host "       [AVISO] No se encontro el respaldo del dia de ayer ($YesterdayStr)." -ForegroundColor Yellow
+    Write-Log "No se encontro el respaldo del dia de ayer ($YesterdayStr). Iniciando respaldo de recuperacion." "WARNING"
+    
+    # Solo podemos respaldar si MySQL esta detenido
+    $mysqlProc = Get-Process -Name "mysqld" -ErrorAction SilentlyContinue
+    if (-not $mysqlProc) {
+        Write-Host "       Realizando respaldo de seguridad antes de iniciar..." -ForegroundColor Yellow
+        $recoveryStamp = $YesterdayStr + "-REC-$(Get-Date -Format 'HH-mm')"
+        $zipPath = "$BackupDir\data-$recoveryStamp.zip"
+        $dataDir = "$TargetDrive\xampp\mysql\data"
+        
+        if (Test-Path $dataDir) {
+            try {
+                Compress-Archive -Path "$dataDir\*" -DestinationPath $zipPath -Force
+                Write-Host "       [OK] Respaldo de recuperacion creado: data-$recoveryStamp.zip" -ForegroundColor Green
+                Write-Log "Respaldo de recuperacion creado: data-$recoveryStamp.zip"
+            } catch {
+                Write-Host "       [FALLO] No se pudo crear el respaldo: $_" -ForegroundColor Red
+                Write-Log "Fallo en respaldo de recuperacion: $_" "ERROR"
+            }
+        }
+    } else {
+        Write-Host "       [OMITIDO] MySQL ya esta en ejecucion, no se puede realizar respaldo fisico." -ForegroundColor Yellow
+        Write-Log "Respaldo de recuperacion omitido: MySQL ya activo." "WARNING"
+    }
+} else {
+    Write-Host "       [OK] Respaldo del dia anterior verificado." -ForegroundColor Green
+}
+
+# --- Validacion de Respaldo Diario (Smart Catch-up) ---
+Write-Host "`n[0/4] Verificando integridad de respaldos..." -ForegroundColor Cyan
+if (-not (Test-Path $BackupDir)) {
+    New-Item -ItemType Directory -Path $BackupDir -Force | Out-Null
+}
+
+$TodayStr = Get-Date -Format "dd-MM-yyyy"
+$YesterdayStr = (Get-Date).AddDays(-1).ToString("dd-MM-yyyy")
+$BackupYesterday = Get-ChildItem -Path $BackupDir -Filter "data-$YesterdayStr-*.zip" -ErrorAction SilentlyContinue
+$BackupToday = Get-ChildItem -Path $BackupDir -Filter "data-$TodayStr-*.zip" -ErrorAction SilentlyContinue
+
+# Solo procedemos si falta el de ayer y no se ha hecho uno hoy
+if (-not $BackupYesterday -and -not $BackupToday) {
+    $dataDir = "$TargetDrive\xampp\mysql\data"
+    $ibData = "$dataDir\ibdata1"
+    
+    if (Test-Path $ibData) {
+        $lastDBChange = (Get-Item $ibData).LastWriteTime
+        $latestBackup = Get-ChildItem -Path $BackupDir -Filter "data-*.zip" | Sort-Object LastWriteTime -Descending | Select-Object -First 1
+        
+        $needsBackup = $true
+        if ($latestBackup) {
+            # Si el ultimo backup es mas reciente que el ultimo cambio en la BD, no hubo actividad
+            if ($latestBackup.LastWriteTime -gt $lastDBChange) {
+                $needsBackup = $false
+                Write-Host "       [INFO] No hubo actividad detectable desde el ultimo respaldo ($($latestBackup.Name))." -ForegroundColor Gray
+            }
+        }
+
+        if ($needsBackup) {
+            Write-Host "       [AVISO] No se encontro el respaldo de ayer ($YesterdayStr) y hay cambios pendientes." -ForegroundColor Yellow
+            Write-Log "Iniciando respaldo de recuperacion (falta ayer y hubo actividad)." "WARNING"
+            
+            if (-not (Get-Process -Name "mysqld" -ErrorAction SilentlyContinue)) {
+                $recoveryStamp = $YesterdayStr + "-REC-$(Get-Date -Format 'HH-mm')"
+                $zipPath = "$BackupDir\data-$recoveryStamp.zip"
+                try {
+                    Compress-Archive -Path "$dataDir\*" -DestinationPath $zipPath -Force
+                    Write-Host "       [OK] Respaldo de recuperacion creado: data-$recoveryStamp.zip" -ForegroundColor Green
+                    Write-Log "Respaldo de recuperacion creado: data-$recoveryStamp.zip"
+                } catch {
+                    Write-Host "       [FALLO] No se pudo crear el respaldo: $_" -ForegroundColor Red
+                }
+            }
+        }
+    }
+} else {
+    Write-Host "       [OK] Respaldos verificados." -ForegroundColor Green
+}
+
+# --- Rotacion de Respaldos (Mantener maximo 7) ---
+$allBackups = Get-ChildItem -Path $BackupDir -Filter "data-*.zip" -ErrorAction SilentlyContinue | Sort-Object LastWriteTime -Descending
+if ($allBackups.Count -gt 7) {
+    $backupsToDelete = $allBackups[7..($allBackups.Count - 1)]
+    foreach ($file in $backupsToDelete) {
+        Remove-Item -Path $file.FullName -Force -ErrorAction SilentlyContinue
+        Write-Host "       [ROTACION] Respaldo antiguo eliminado: $($file.Name)" -ForegroundColor Green
+        Write-Log "Respaldo antiguo purgado en rotacion: $($file.Name)"
+    }
+}
+
+# --- Pre-Vuelo: Saneamiento de Infraestructura ---
+Write-Host "`n[0.5/4] Pre-vuelo: Saneando archivos de control..." -ForegroundColor Cyan
+
+# 1. Limpieza de PID huerfano
+$dataDir = "$TargetDrive\xampp\mysql\data"
+$pidFile = "$dataDir\mysql.pid"
+if (Test-Path $pidFile) {
+    if (-not (Get-Process -Name "mysqld" -ErrorAction SilentlyContinue)) {
+        Remove-Item $pidFile -Force -ErrorAction SilentlyContinue
+        Write-Host "       [OK] Archivo PID huerfano eliminado." -ForegroundColor Green
+    }
+}
+
+# 2. Limpieza de metadatos de replicacion (Causa de crash 'multi master structures')
+$infoFiles = Get-ChildItem -Path $dataDir -Filter "*.info" -ErrorAction SilentlyContinue
+$relayFiles = Get-ChildItem -Path $dataDir -Filter "mysql-relay-bin.*" -ErrorAction SilentlyContinue
+
+if ($infoFiles -or $relayFiles) {
+    Write-Host "       [OK] Limpiando metadatos de replicacion obsoletos..." -ForegroundColor Gray
+    $infoFiles | Remove-Item -Force -ErrorAction SilentlyContinue
+    $relayFiles | Remove-Item -Force -ErrorAction SilentlyContinue
+}
+
+# 3. Verificacion Aria (Tablas de sistema)
+if (Test-Path "$dataDir\aria_log_control") {
+    Write-Host "       Verificando integridad de tablas de sistema (aria_chk)..." -ForegroundColor Gray
+    try {
+        $ariaChk = "$TargetDrive\xampp\mysql\bin\aria_chk.exe"
+        if (Test-Path $ariaChk) {
+            $null = & $ariaChk --recover --silent "$dataDir\mysql\*.MAI" 2>&1
+            Write-Host "       [OK] Tablas de sistema verificadas." -ForegroundColor Green
+        }
+    } catch {
+        Write-Host "       [AVISO] No se pudo ejecutar aria_chk: $_" -ForegroundColor Yellow
+    }
+}
+
+# --- 0. Limpieza de Zombies ---
+Write-Host "Saneando procesos previos (Anti-Zombies)..." -ForegroundColor Yellow
+Get-Process -Name "mysqld", "httpd" -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue
+Start-Sleep -Seconds 2
+
+# --- MySQL ---
+Write-Host "`n[1/4] Iniciando MySQL..." -ForegroundColor Yellow
+Write-Log "Iniciando MySQL..."
+
+$mysqlLog = "$FailLogDir\mysql-direct.log"
+if (Test-Path $mysqlLog) { Remove-Item $mysqlLog -Force }
+
+try {
+    # Usar CMD para redireccion directa (evita buffering de PowerShell)
+    $myIni = "$MySQLWorkDir\my.ini"
+    $cmdArgs = "/c `"`"$MySQLPath`" --defaults-file=`"$myIni`" --standalone --console > `"$mysqlLog`" 2>&1`""
+    
+    $p = Start-Process -FilePath "cmd.exe" -ArgumentList $cmdArgs `
+                       -WorkingDirectory $MySQLWorkDir `
+                       -PassThru -WindowStyle Hidden
+    
+    Write-Host "       Lanzado proceso CMD (Monitor de MySQL)" -ForegroundColor Green
+    Write-Log "MySQL lanzado via CMD para log directo."
+} catch {
+    Write-Host "       ERROR al iniciar MySQL: $_" -ForegroundColor Red
+    Write-Log "Fallo al iniciar MySQL: $_" "ERROR"
+    exit 1
+}
+
+Write-Host "       Esperando puerto $MySQLPort (max $MySQLStartTimeout seg)..." -ForegroundColor Yellow
+if (Test-MySQLConnection -TimeoutSeconds $MySQLStartTimeout) {
+    Write-Host "       [OK] MySQL operativo en puerto $MySQLPort" -ForegroundColor Green
+    
+    # --- Health Check (Deteccion de Corrupcion Aria) ---
+    Write-Host "       Realizando prueba de salud de base de datos..." -ForegroundColor Yellow
+    $repairScript = "$TargetDrive\aguav2\admin\operaciones\repair_aria_system_tables.sql"
+    $testQuery = "& '$MySQLWorkDir\mysql.exe' -h 127.0.0.1 -P $MySQLPort -u root -pcomite_2026 mysql -e 'SELECT 1' 2>&1"
+    $testResult = Invoke-Expression $testQuery
+    
+    if ($LASTEXITCODE -ne 0 -and ($testResult -like "*176*" -or $testResult -like "*checksum*")) {
+        Write-Host "       [CRITICO] Corrupcion de tablas detectada (Error 176). Iniciando reparacion automatica..." -ForegroundColor Red
+        Write-Log "Corrupcion detectada en startup. Ejecutando repair_aria_system_tables.sql" "ERROR"
+        
+        if (Test-Path $repairScript) {
+            $repairCmd = "& '$MySQLWorkDir\mysql.exe' -h 127.0.0.1 -P $MySQLPort -u root -pcomite_2026 mysql < '$repairScript' 2>&1"
+            $repairResult = Invoke-Expression $repairCmd
+            Write-Host "       [OK] Intento de reparacion finalizado. Verifique logs." -ForegroundColor Green
+        } else {
+            Write-Host "       [FALLO] No se encontro el script de reparacion en: $repairScript" -ForegroundColor Red
+        }
+    } else {
+        Write-Host "       [OK] Prueba de salud superada." -ForegroundColor Green
+    }
+    
+    Write-Log "MySQL operativo y verificado."
+} else {
+    Write-Host "       [FALLO] MySQL no respondio en $MySQLStartTimeout seg" -ForegroundColor Red
+    Write-Log "MySQL no respondio en $MySQLStartTimeout seg" "ERROR"
+    Copy-FailLog -Service "mysql"
+    exit 1
+}
+
+# --- Apache ---
+Write-Host "`n[2/4] Iniciando Apache..." -ForegroundColor Cyan
+Write-Log "Iniciando Apache..."
+try {
+    $apacheArgs = "-d `"$TargetDrive\xampp\apache`""
+    $p = Start-Process -FilePath $ApachePath -ArgumentList $apacheArgs -PassThru -WindowStyle Hidden
+    Write-Host "       PID: $($p.Id)" -ForegroundColor Green
+    Write-Log "Apache PID: $($p.Id)"
+} catch {
+    Write-Host "       ERROR al iniciar Apache: $_" -ForegroundColor Red
+    Write-Log "Fallo al iniciar Apache: $_" "ERROR"
+}
+Start-Sleep -Seconds 2
+
+# ==============================================
+# MANTENER PROCESO VIVO (MODO PROTECCION)
+# ==============================================
+# Entramos al bucle infinito INMEDIATAMENTE para evitar que el Job Object
+# mate los procesos. Las verificaciones seran solo informativas.
+
+Write-Host "`n[3/4] Verificacion de servicios..." -ForegroundColor Yellow
+Start-Sleep -Seconds 5
+
+$mysqlProc  = Get-Process -Name "mysqld" -ErrorAction SilentlyContinue
+$apacheProc = Get-Process -Name "httpd"  -ErrorAction SilentlyContinue
+
+Write-Host "`n[4/4] Resumen de Ejecucion:" -ForegroundColor Yellow
+Write-Host "========================================"  -ForegroundColor Cyan
+Write-Host "MySQL  (PID: $(if($mysqlProc){$mysqlProc[0].Id}else{'FALLIDO'}))" -ForegroundColor $(if($mysqlProc){'Green'}else{'Red'})
+Write-Host "Apache (PID: $(if($apacheProc){$apacheProc[0].Id}else{'FALLIDO'}))" -ForegroundColor $(if($apacheProc){'Green'}else{'Red'})
+Write-Host "========================================"  -ForegroundColor Cyan
+
+# Verificar configuracion de monitoreo UPS
+$ConfigTxtPath = "C:\aguav2-2026\config\configuracion.txt"
+$MonitoreoUPS = 1
+if (Test-Path $ConfigTxtPath) {
+    $confContent = Get-Content $ConfigTxtPath
+    $monMatch = $confContent | Select-String "monitoreo_ups=(\d+)"
+    if ($monMatch) {
+        $MonitoreoUPS = [int]$monMatch.Matches.Groups[1].Value
+    }
+}
+
+# Lanzar Monitor UPS en segundo plano si no existe y esta activado
+$monitorScript = "$ScriptsPath\monitor-ups.ps1"
+if ($MonitoreoUPS -eq 1 -and (Test-Path $monitorScript)) {
+    $monExists = Get-CimInstance Win32_Process -Filter "Name = 'powershell.exe' AND CommandLine LIKE '%monitor-ups.ps1%'" -ErrorAction SilentlyContinue
+    if (-not $monExists) {
+        Start-Process powershell.exe -ArgumentList "-NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File `"$monitorScript`""
+    }
+} elseif ($MonitoreoUPS -eq 0) {
+    Write-Host "`n       [INFO] Monitor UPS Desactivado por configuracion.txt" -ForegroundColor Gray
+}
+
+if ($mysqlProc) {
+    Write-Host "`n[OK] Servidor en ejecucion. MANTENGA ESTA VENTANA ABIERTA." -ForegroundColor Green
+    Write-Host "       (El Modo Centinela esta protegiendo los procesos)" -ForegroundColor Gray
+    Write-Log "Servidor iniciado y protegido en bucle infinito."
+    
+    while ($true) {
+        Start-Sleep -Seconds 3600
+    }
+} else {
+    Write-Host "`n[ERROR] MySQL no pudo mantenerse en ejecucion." -ForegroundColor Red
+    Write-Log "Fallo critico: MySQL murio tras el arranque." "ERROR"
+    
+    # Diagnostico exhaustivo de logs (NUEVO METODO: Redireccion de Consola)
+    Write-Host "`nRevisando salida de consola (stdout/stderr)..." -ForegroundColor Gray
+    if (Test-Path $mysqlErr) {
+        Write-Host "`n[STDERR] Ultimas lineas del error de consola:" -ForegroundColor Yellow
+        Get-Content $mysqlErr -Tail 20 | ForEach-Object { Write-Host "   > $_" -ForegroundColor DarkGray }
+    }
+    
+    if (Test-Path $mysqlOut) {
+        Write-Host "`n[STDOUT] Ultimas lineas de la salida de consola:" -ForegroundColor Cyan
+        Get-Content $mysqlOut -Tail 10 | ForEach-Object { Write-Host "   > $_" -ForegroundColor DarkGray }
+    }
+
+    Write-Host "`nBuscando otros logs de error en $TargetDrive\xampp\mysql..." -ForegroundColor Gray
+    $logFiles = Get-ChildItem -Path "$TargetDrive\xampp\mysql" -Filter "*.err" -Recurse -ErrorAction SilentlyContinue | Sort-Object LastWriteTime -Descending
+    
+    if ($logFiles) {
+        $errFile = $logFiles[0].FullName
+        Write-Host "Ultimas lineas del log de archivo ($errFile):" -ForegroundColor White
+        Get-Content $errFile -Tail 20 | ForEach-Object { Write-Host "   > $_" -ForegroundColor DarkGray }
+    }
+    
+    Copy-FailLog -Service "mysql"
+    Write-Host "`nPresiona cualquier tecla para cerrar..." -ForegroundColor Gray
+    try { $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown") } catch {}
+}
+
+if (-not $NoPause) {
+    Write-Host "`nPresiona cualquier tecla para cerrar..." -ForegroundColor Gray
+    try { $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown") } catch {}
+}
+
+```
+
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool specificity. I've been refining my approach to avoid unnecessary use of bash commands for file manipulation. Specifically, I'm now committed to using `grep_search` and other specific tools as replacements for bash commands, to enhance efficiency and maintainability.
+
+
+**Analyzing Job Dependencies**
+
+I'm now deeply analyzing the dependencies between the PowerShell jobs, especially `job-sync-cartera.ps1` and `start-webapps.ps1`. I've shifted from the `-AtLogOn` approach and started evaluating port checks versus `Get-Process` checks for `mysqld`, `httpd`, `php.exe`, and `mysql`. Considering the PHP execution in `job-sync-cartera.ps1` is key. Also, I'm thinking how `job-monitor-sync.ps1` should validate the execution of the first job.
+
+
+**Refining Monitoring Logic**
+
+I'm now refining the monitoring logic within `job-monitor-sync.ps1`. The current implementation at startup presents inconsistencies. I'm focusing on ensuring it re-executes `job-sync-cartera.ps1` upon failure, as the previous solution was incomplete. I'm focusing on the implementation details using a `write_to_file` call to construct an `implementation_plan.md` file. I'm also adding a wait loop to `job-sync-cartera.ps1` to check for MySQL and web service availability before proceeding.
+
+
+**Improving Job Orchestration**
+
+I'm now zeroing in on improving the orchestration of these jobs. The current monitor (`job-monitor-sync.ps1`) now appears problematic; It needs to retry the synchronization script and ensure it runs after the synchronization job, or on a periodic schedule. I'm focusing on creating an intelligent guardian, and how to trigger it to avoid immediate, unneeded execution.
+
+
+
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 18.536429461s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Execution Error
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 10:18 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. Specifically, I'm now actively avoiding the use of `cat` for file creation or appending, and I'm choosing `grep_search` over direct `grep` usage within bash scripts. I'm also now attempting to use the appropriate tools such as `ls` or `cat` alternatives.
+
+
+
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.000872847s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 10:18 am
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. Specifically, I'm now actively avoiding the use of `cat` for file creation or appending, and I'm choosing `grep_search` over direct `grep` usage within bash scripts. I'm also now attempting to use the appropriate tools such as `ls` or `cat` alternatives.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.226380633s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+## User Request
+
+heee, esto en el .md ,  ya no es vigente:
+"..reportes/listadeudores.php.."
+"... madrugada (background).."
+corrije.
+_
+Para complementes el plan, mira analiza el log (a como esta actualemte job, php,etc) , esto ocurrio hoy en en mi host c (vm windows).
+sync_cartera.log
+
+[2026-08-04 16:48:56] INICIANDO SINCRONIZACION MASIVA DE CARTERA (JOB DIARIO)
+[2026-08-04 16:48:56] Contratos a procesar: 1377
+[2026-08-04 16:52:22] Progreso: 500 / 1377 contratos procesados...
+[2026-08-04 16:56:00] Progreso: 1000 / 1377 contratos procesados...
+[2026-08-04 16:57:37] FINALIZADO OK. 1377 contratos sincronizados en 521.02s.
+[2026-08-05 09:10:59] INICIANDO SINCRONIZACION MASIVA DE CARTERA (JOB DIARIO)
+[2026-08-05 09:10:59] Contratos a procesar: 
+[2026-08-05 09:10:59] FINALIZADO OK. 0 contratos sincronizados en 0.01s.
+
+
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `PLAN_MOTOR_MORA_LEGACY.md`
+**Language:** markdown
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool specificity. I've been refining my approach to avoid unnecessary use of bash commands for file manipulation. Specifically, I'm now committed to using `grep_search` and other specific tools as replacements for bash commands, to enhance efficiency and maintainability.
+
+
+**Refining Detail Accuracy**
+
+I'm now zeroing in on accuracy, specifically in `fixes_motor_mora_jun_a_agos.md`. I identified outdated references to file paths and background processes. I'm correcting the path references to reflect the updated file location and ensuring the process descriptions are current. I'm replacing any ambiguous language to ensure clear and accurate documentation.
+
+
+**Updating Job Documentation**
+
+I'm updating the documentation to reflect that the job runs at logon, not at 3 AM. I'll translate this accurately as "al inicio de sesión (logon) del equipo". Furthermore, I've analyzed the `sync_cartera.log`. I've confirmed the expected longer processing time for yesterday's successful run, and noted today's quick completion, which appears normal based on the log entries.
+
+
+**Diagnosing Startup Dependencies**
+
+I'm now diagnosing startup dependencies. Today's log shows `sync_cartera_mensual.php` ran before MySQL was ready. It reported "0 contracts" processed because the database query failed. The PHP script ran too early during startup and is now continuing even in the face of an error. The `job-monitor-sync.ps1` script incorrectly flags it as "FINALIZADO OK". I need to check the PHP script to ensure it fails more gracefully, or adjust the startup sequence.
+
+
+**Addressing Startup Dependencies**
+
+I've shifted focus to adjusting startup dependencies, specifically addressing the PHP script's behavior when the database isn't ready. The fix involves updating the `implementation_plan.md` to ensure the `job-monitor-sync.ps1` script validates that 0 contracts weren't processed. I also plan to modify `fixes_motor_mora_jun_a_agos.md`, updating the file paths and clarifying the execution context of the report. The plan includes the use of `replace_file_content` to streamline fixes.
+
+
+
+
+### Actions
+
+**Tool:** `multi_replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 13.458230173s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 10:24 am
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. Specifically, I'm now actively avoiding the use of `cat` for file creation or appending, and I'm choosing `grep_search` over direct `grep` usage within bash scripts. I'm also now attempting to use the appropriate tools such as `ls` or `cat` alternatives.
+
+
+
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.101260606s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 10:24 am
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. Specifically, I'm now actively avoiding the use of `cat` for file creation or appending, and I'm choosing `grep_search` over direct `grep` usage within bash scripts. I'm also now attempting to use the appropriate tools such as `ls` or `cat` alternatives.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.165121883s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+## User Request
+
+Delay de Gracia Inicial, sea de 15  minutos.
+Pregunta, que pasa si no se ejecuta diario (solo ayer 1ra vez manual setup-sync-jobs.ps1) , que consecuencia vera el operador hoy , ,mañana, de que depende vea las "consecuencias" ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `fixes_motor_mora_jun_a_agos.md`
+**Language:** markdown
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. Specifically, I'm now actively avoiding the use of `cat` for file creation or appending, and I'm choosing `grep_search` over direct `grep` usage within bash scripts. I'm also now attempting to use the appropriate tools such as `ls` or `cat` alternatives.
+
+
+**Adjusting Execution Parameters**
+
+I'm adapting my approach based on user feedback, specifically increasing the initial grace delay to 15 minutes. This is a direct response to the user's input, and I consider this modification to be an implied approval. I'm now transitioning to an execution-focused stance, incorporating this new parameter into the plan. My priority is getting it started with the initial grace delay.
+
+
+**Initiating Execution with Consideration**
+
+I'm now ready to begin plan execution because the user's action and time modification constitutes implied approval. Before launching, I paused to address a critical question: what happens if the Job fails to run daily? I've clarified that non-execution would cause the "general reports" to only reflect historical debt. The "Ficha del Contrato," however, would still compute JIT, but it would be using an incorrect assumption if the job did not run.
+
+
+**Analyzing Time-Dependent Discrepancies**
+
+I'm now zeroing in on the implications of delayed job execution, particularly regarding the accrual of "mora" (late payment) data. I've mapped out the temporal dependencies: missed monthly updates result in inaccurate global debt reports ("Cartera Vencida"). Specifically, "mora" values will be artificially lower than actual owed amounts. Manual "Ficha" access recalculates, and updates the debts, creating data divergence that grows over time until corrected.
+
+
+
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 8.073488033s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 10:31 am
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. Specifically, I'm now actively avoiding the use of `cat` for file creation or appending, and I'm choosing `grep_search` over direct `grep` usage within bash scripts. I'm also now attempting to use the appropriate tools such as `ls` or `cat` alternatives.
+
+
+**Refining Replacement Strategy**
+
+I'm now zeroing in on replacing content within the `job-sync-cartera.ps1` file. Before I touch the file, I'm ensuring I've explicitly listed all relevant tools, prioritizing tools like `multi_replace_file_content` or `replace_file_content`. The goal is focused, using the exact tools with the correct syntax. I've decided to insert wait logic before the `try` block.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 3.634535391s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 10:32 am
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. Specifically, I'm now actively avoiding the use of `cat` in bash commands for file creation or appending, and I'm always reaching for `grep_search` instead of direct `grep` calls within the shell. The key is now fully committing to avoiding `ls`, `cat`, and `grep` when I can.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.007755887s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 10:32 am
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool specificity. I've been refining my approach to avoid generic commands. I'm actively suppressing the impulse to default to bash, and concentrating on utilizing the most specialized tool for each task. This shift should streamline operations and enhance accuracy. My process is becoming far more efficient as a result.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `job-monitor-sync.ps1`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.076846444s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# --- Auto-Elevacion a Administrador ---
+if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+    Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
+    exit
+}
+
+$ErrorActionPreference = "Stop"
+
+# Load shared configuration
+$ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+. "$ScriptDir\config.ps1"
+
+$LogFile = "$TargetDrive\aguav2\webapp\agua\admin\operaciones\sync_cartera.log"
+$AlertFile = "$env:USERPROFILE\Desktop\ALERTA_SISTEMA_CARTERA.txt"
+$TodayStr = Get-Date -Format "Y-m-d"
+
+Write-Host "Ejecutando Job Monitor de Sincronizacion..." -ForegroundColor Cyan
+
+# Remove old alert if exists
+if (Test-Path $AlertFile) {
+    Remove-Item $AlertFile -Force
+}
+
+$HasError = $false
+$ErrorMsg = ""
+
+if (!(Test-Path $LogFile)) {
+    $HasError = $true
+    $ErrorMsg = "No se encontro el archivo de log: $LogFile. El Job principal nunca ha corrido."
+} else {
+    # Check if the log has today's date and "FINALIZADO OK"
+    $LogContent = Get-Content $LogFile -Tail 20
+    $FoundToday = $false
+    $FoundOk = $false
+    
+    foreach ($Line in $LogContent) {
+        if ($Line -match $TodayStr) {
+            $FoundToday = $true
+        }
+        if ($Line -match "FINALIZADO OK") {
+            $FoundOk = $true
+        }
+    }
+    
+    if (!$FoundToday) {
+        $HasError = $true
+        $ErrorMsg = "El log no tiene actividad del dia de hoy ($TodayStr). El script no corrio."
+    } elseif (!$FoundOk) {
+        $HasError = $true
+        $ErrorMsg = "El script corrio hoy pero no termino correctamente (Falta 'FINALIZADO OK')."
+    }
+}
+
+if ($HasError) {
+    Write-Host "ALERTA: $ErrorMsg" -ForegroundColor Red
+    Add-Content -Path $AlertFile -Value "========================================="
+    Add-Content -Path $AlertFile -Value "ALERTA DE SISTEMA: FALLO EN SINCRONIZACION"
+    Add-Content -Path $AlertFile -Value "========================================="
+    Add-Content -Path $AlertFile -Value "Fecha de falla: $(Get-Date)"
+    Add-Content -Path $AlertFile -Value "Detalle: $ErrorMsg"
+    Add-Content -Path $AlertFile -Value "Contacte a soporte tecnico para revisar Host C."
+} else {
+    Write-Host "Monitoreo OK. Sincronizacion completa verificada." -ForegroundColor Green
+}
+
+```
+
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. Specifically, I'm now actively avoiding the use of `cat` for file creation or appending, and I'm choosing `grep_search` over direct `grep` usage within bash scripts. I'm also now attempting to use the appropriate tools such as `ls` or `cat` alternatives.
+
+
+**Refining Replacement Strategy**
+
+I'm now refining the strategy for rewriting `job-monitor-sync.ps1`. The thought is to replace the existing script with an improved version, incorporating a 15-minute initial delay, logic for detecting "FINALIZADO OK," and auto-healing capabilities using `job-sync-cartera.ps1`. The plan involves either a complete replacement or selective use of `multi_replace_file_content`.
+
+
+**Evaluating Log Validation**
+
+I'm now deep-diving into the `Validate-Log` function. I'm focusing on the logic within it, particularly how it checks for file existence, extracts relevant log lines, and validates the presence of critical keywords. I'm scrutinizing how the function handles different scenarios, such as missing log files or incomplete script runs, specifically the return messages that provide insight into script failures.
+
+
+**Implementing Auto-Healing Logic**
+
+I'm now integrating auto-healing into the `job-monitor-sync.ps1` script. My goal is to add logic that detects failures and initiates automatic retry using `job-sync-cartera.ps1`. I will focus on detecting script failures, triggering the retry script, revalidating the log, and managing critical alerts. I'm also ensuring the retry script exists before attempting to execute it.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 13.095641509s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 10:32 am
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. Specifically, I'm now actively avoiding the use of `cat` for file creation or appending, and I'm choosing `grep_search` over direct `grep` usage within bash scripts. I'm also now attempting to use the appropriate tools such as `ls` or `cat` alternatives.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.082564173s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 10:32 am
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. Specifically, I'm now actively avoiding the use of `cat` in bash commands for file creation or appending, and I'm always reaching for `grep_search` instead of direct `grep` calls within the shell. The key is now fully committing to avoiding `ls`, `cat`, and `grep` when I can.
+
+
+**Refining Tool Choice**
+
+I'm now implementing `multi_replace_file_content` to modify `setup-sync-jobs.ps1`, as I identified that as the tool best suited for the modifications, in line with my deliberate tool choice process. I explicitly listed related tools before making this selection. I am now reviewing the script to determine which specific lines will be modified.
+
+
+
+
+### Actions
+
+**Tool:** `multi_replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 6.267255595s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 10:33 am
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. Specifically, I'm now actively avoiding the use of `cat` in bash commands for file creation or appending, and I'm always reaching for `grep_search` instead of direct `grep` calls within the shell. The key is now fully committing to avoiding `ls`, `cat`, and `grep` when I can.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 6.284112977s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 10:33 am
+
+---
+
+### Execution Error
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 10:33 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. Specifically, I'm now actively avoiding the use of `cat` for file creation or appending, and I'm choosing `grep_search` over direct `grep` usage within bash scripts. I'm also now attempting to use the appropriate tools such as `ls` or `cat` alternatives.
+
+
+
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.051102745s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 10:33 am
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. Specifically, I'm now actively avoiding the use of `cat` in bash commands for file creation or appending, and I'm always reaching for `grep_search` instead of direct `grep` calls within the shell. The key is now fully committing to avoiding `ls`, `cat`, and `grep` when I can.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.068828914s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 10:33 am
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. Specifically, I'm now actively avoiding the use of `cat` for file creation or appending, and I'm choosing `grep_search` over direct `grep` usage within bash scripts. I'm also now attempting to use the appropriate tools such as `ls` or `cat` alternatives.
+
+
+**Refining Tool Usage**
+
+I'm now prioritizing precise tool selection for tasks. I'm focusing on adopting `sed` over `grep` for replacement operations. I am also implementing the critical instruction to list all related tools before making tool calls, ensuring a more specialized and efficient approach. I'm now formulating the final response to the user's question regarding the consequences of the daily job not running, which is based on the logic of static versus dynamic street reports.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.126199061s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+## User Request
+
+entonces no es necesario los jobs ps1 queden con ejecucion diaria ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `listadeudores.php`
+**Language:** php
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<xml version="1.0" encoding="utf-8">
+	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+	<html>
+
+	<head>
+		<title>Lista de usuarios con adeudos</title>
+	</head>
+
+	<body onload="print();">
+		<style>
+			body {
+				margin-left: 40px;
+				margin-top: 30px;
+			}
+
+			h1 {
+				page-break-after: always;
+				font-size: 1px;
+			}
+
+			table {
+				border-right: solid 1px #a0a0a0;
+				border-bottom: solid 1px #a0a0a0;
+			}
+
+			td {
+				font-family: "times new roman";
+				font-size: 10px;
+				border-left: solid 1px #a0a0a0;
+				border-top: solid 1px #a0a0a0;
+				text-transform: uppercase;
+			}
+
+```
+
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool specificity. I've been refining my approach to avoid unnecessary use of bash commands for file manipulation. Specifically, I'm now committed to using `grep_search` and other specific tools as replacements for bash commands, to enhance efficiency and maintainability.
+
+
+**Clarifying Job Frequency**
+
+I'm now clarifying the job frequency. My prior response might have misled the user. The daily job offers significant benefits. Running only monthly causes all contract JIT mora calculations to occur *on-demand* by the Ficha (Profile) view, during the month. However, running the job daily pre-calculates and caches these values, dramatically improving Ficha performance. This offers a significant optimization.
+
+
+**Evaluating Daily Benefits**
+
+I'm now evaluating the daily benefits. My analysis indicates that minimal JIT work is required because the debt is already physically recorded. I'm also considering that manual corrections are efficiently handled by the daily run, ensuring accurate aggregate reports and immediate system synchronization. Finally, a daily schedule offers crucial resilience against job failures, guaranteeing database consistency and acting as daily reconciliation. Also, Mora may not trigger only on the 1st.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 3.386636758s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+## User Request
+
+agrega estas explicaciones del porque diario al .md
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `listadeudores.php`
+**Language:** php
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. Specifically, I'm now actively avoiding the use of `cat` for file creation or appending, and I'm choosing `grep_search` over direct `grep` usage within bash scripts. I'm also now attempting to use the appropriate tools such as `ls` or `cat` alternatives.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `fixes_motor_mora_jun_a_agos.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.078213548s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# Plan y Documentación Maestra: Motor de Mora Legacy
+
+## Contexto Histórico e Imposición del Comité
+Durante la estabilización de Host C (AguaV2), se documentó una diferencia en la Cartera Vencida entre Host B y Host C. El motor inicial de Host C estaba diseñado con una filosofía de "Mora Continua Rotativa" (cobrando de forma vitalicia todos los meses sin tope por año).
+Tras presentar la auditoría, **el Comité de Agua determinó que la matemática correcta y oficial a utilizar es la Legacy (Host B).**
+
+## Reglas Oficiales (Matemática Legacy)
+
+El cálculo financiero se rige estrictamente por dos reglas absolutas que el código PHP (`cargos.php`) respeta de manera obligatoria:
+
+### 1. Tope Estricto de 12 Meses (Anualidad Cerrada)
+La mora de un año (ej. 2021) jamás puede rebasar los 12 meses de recargo, sin importar cuántos años reales hayan pasado sin pago. 
+*   **Monto Máximo Base:** Un año adeudado de agua y drenaje genera como máximo 12 recargos (1 por mes).
+*   **Límite Bomba Eliminado:** Dado que la deuda no crece al infinito (se topa a 12 meses por año), se eliminó el concepto de "Límite Bomba" (`reversal_threshold`) de la base de datos y de la UI, ya que es matemáticamente imposible que un contrato explote exponencialmente.
+
+### 2. Detonación del Periodo de Gracia (Enero - Marzo)
+El periodo de gracia otorgado por el comité estipula que los recargos no se cobran *si* el usuario paga entre Enero y Marzo.
+*   **Detonación en Abril:** Si el usuario no paga antes de Abril, los meses de Enero, Febrero y Marzo **SÍ SE COBRAN** de forma retroactiva (detonación de golpe).
+*   **Extirpación del AUTO-HEAL:** En iteraciones previas, el sistema borraba físicamente los recargos de Ene-Marzo asumiendo que eran falsos positivos ("Auto-Heal"). **Esto se eliminó** porque causaba pérdidas de $180 MXN por año/contrato. Ahora, el recargo se genera físicamente pero la regla de detonación (si es aplicable a meses vigentes o años pasados) se maneja en el código `cargos.php`.
+
+## Arquitectura y Mantenimiento
+
+### Single Source of Truth
+Host C es ahora la **única fuente de verdad** (SSOT). La tabla de `ligacargos` y `ligacargos_historico` reflejan de manera fiel la misma matemática que se utilizaba en 2016-2025 en Host B.
+
+### Caché JIT (Just in Time)
+A pesar de retroceder a la matemática Legacy, el motor conserva la mejora de rendimiento de la versión V2:
+*   Se utiliza un Hash Map para evitar lecturas/escrituras redundantes (O(1)).
+*   La vista `vw_ligacargos_pendientes` une la tabla activa y la histórica de manera dinámica, basándose en la bandera `recargo` de la tabla de catálogo de `cargos`, la cual se puede prender/apagar desde `configuracion.php`.
+
+## Pipeline de Despliegue (`fix-issue-01`)
+El pipeline de saneamiento se ha simplificado a:
+1.  **`01_normalizar_catalogo.sql`**: Limpieza de duplicados.
+2.  **`02_normalizacion_estructural_v2.sql`**: Mensualidades se mueven a Cat 1 para evitar mora injusta.
+3.  **`03_normalizar_cuentas_usuarios.sql`**: Limpieza de Nombres y TRIM.
+4.  **`04_vista_cargos_pendientes_legacy.sql`**: Definición de la vista que une historico y activo SIN limitantes dinámicas extintas.
+5.  **`05_limpieza_trailing_spaces.sql`**: Fix vital (GAP-03) que elimina espacios al final de las leyendas para no romper el Hash Map del motor.
+6.  **`06_validation_legacy.sql`**: Comprobación final de que no hay asambleas con mora, que las mensualidades están limpias y que los recargos cuadran con las reglas.
+
+## Estabilización y Hardening Financiero (Junio 2026)
+
+Se implementaron parches de seguridad, integridad y depuración de duplicados en la gestión de reconciliación y condonación en `admin/operaciones/configuracion.php`:
+
+### 1. Eliminación del Doble DELETE (Soft-Delete de Recargos)
+*   **Problema:** El sistema realizaba un borrado físico (`DELETE`) de los recargos moratorios en estado pendiente (`estado = 0`) al condonar o reconciliar un cargo base. Esto destruía la trazabilidad de auditoría de los datos históricos.
+*   **Solución:** Se reemplazaron todas las sentencias `DELETE` por `UPDATE ligacargos[_historico] SET estado = -1, fcobro = NOW()`. Esto desactiva el recargo lógicamente de forma segura. El JIT lo ignora y los logs de auditoría preservan su existencia histórica.
+
+### 2. Poka-Yoke de Duplicados en Reconciliación / Condonación
+*   **Problema:** Al reconciliar o condonar un cargo que tenía clones/duplicados históricos, el sistema actualizaba todos a `estado = 1`. Esto generaba doble contabilidad financiera de ingresos cobrados o montos condonados.
+*   **Solución:** Se limitó la actualización a `estado = 1` estrictamente por ID único (`WHERE id = $id_cargo`). Todos los demás clones redundantes del mismo contrato, año y categoría se cancelan lógicamente actualizándolos a `estado = -1` con el sufijo `[DUPLICADO DEPURADO]`.
+
+### 3. Blindaje de Sesión y Bitácora de Auditoría (`Conexion.php`)
+*   **Problema:** Deserialización fallida del usuario de la sesión (`__PHP_Incomplete_Class`) e intentos de conversión implícita de objeto a string al guardar en `sys_log_reconciliacion`.
+*   **Solución:** Se inyectó `require_once` de la clase `User` en `Conexion.php` antes del inicio de sesión, y se extrae explícitamente el nombre del usuario ejecutor usando `->getNombre()` en la bitácora.
+
+### 4. Consolidación de Herramientas de Monkey Testing
+*   **Problema:** El script de monkey testing `comparativa_masiva.php` estaba expuesto en la UI diaria y en la carpeta de operaciones operacionales. Al depender del Host B remoto (que puede estar apagado), causaba fallas por timeout.
+*   **Solución:** Se eliminó el botón de la UI principal y se movió el script a la carpeta de herramientas premium de oro: `admin/saneamiento/comparativa_masiva.php`.
+
+### 5. Fix de Colisiones de ID (Resurrection Bug) en Transacciones
+*   **Problema:** Los Procedimientos Almacenados (`sp_pagar_cargo`, `sp_cancelar_cargo`) y algunas rutinas de PHP (`regresarCargoCancelado`) usaban el `$id` bruto provisto por la vista unificada (`vw_ligacargos_all`). Debido a que las tablas divididas (`ligacargos` y `ligacargos_historico`) tienen llaves primarias independientes, un pago o cancelación sobre un cargo histórico podía **colisionar** accidentalmente y actualizar el cargo activo de otro año si ambos compartían el mismo ID (Resurrection Bug).
+*   **Solución (Split-Aware Logic):** 
+    1. En PHP (`cargos.php` y `contratos.php`), todas las llamadas a los Stored Procedures ahora envían un `0` estático como primer parámetro (ID). 
+    2. Los SP están programados para hacer _fallback_ a la llave lógica compuesta `(numcontrato, leyenda, repetido)` si el ID es `0`. Esta llave es unificada y garantizada como única a nivel de base de datos.
+    3. Se removieron las cláusulas `WHERE id = $id` en las rutinas de reversión y auditoría en PHP para utilizar en su lugar la llave compuesta, garantizando la inmutabilidad de la información al cruzar el límite temporal del split.
+
+### 6. Liberación de Deuda Histórica (Fin del Límite de 5 Años)
+*   **Problema:** El motor V2 introdujo inicialmente una limitante artificial en la vista de la base de datos (basada en `paridad_anios_max_recargo = 5`) que ocultaba automáticamente los recargos moratorios de deudas anteriores al año 2021, provocando un descuadre masivo contra la Cartera Vencida del Host B original.
+*   **Solución:** Se erradicó por completo esta lógica de recorte en la definición de la vista unificada `vw_ligacargos_pendientes` (mediante el script `04_vista_cargos_pendientes_legacy.sql`). 
+*   **Impacto Financiero:** Esto liberó de forma inmediata **5,552 recargos moratorios** históricos generados en años previos a 2020. Estos recargos vuelven a ser visibles en los estados de cuenta, alineando milimétricamente la Cartera Vencida oficial de AguaV2 (Host C) con el modelo Legacy (Host B), y otorgando a los operadores la capacidad operativa de cobrarlos o condonarlos bajo el nuevo esquema de Soft-Delete.
+
+### 7. Poka-Yoke de Auto-Encendido y Bloqueo de Mora (Años Futuros)
+*   **Problema:** Al prescindir del Checkbox *"Causa Recargo"* en la UI de creación de cargos y al demandar que la mora histórica sea vitalicia e inalterable, existía el riesgo de que la creación de años futuros (Ej. 2028) quedara exenta de mora, o de que un operador apagara accidentalmente la mora de un año entero desde el panel de control.
+*   **Solución (Autonomía G02):**
+    1.  **Backend (`cargos.php`):** Se perfeccionó el *Guard G02*. Al crear un nuevo cargo, si la categoría es AGUA (2) o DRENAJE (3), el motor inyecta automáticamente `recargo = 1` a nivel de base de datos, ignorando por completo cualquier variable de la UI.
+    2.  **UI de Panel (`configuracion.php`):** Se inyectó el atributo `disabled` a todos los checkboxes de la tabla *"Control de Mora por Año"*.
+*   **Impacto Operativo:** El sistema es 100% autónomo. En enero de 2028, cuando el operador simplemente registre la "ANUALIDAD DEL AGUA 2028", el sistema agrupará el nuevo año, encenderá su propia mora de forma robótica y dibujará el candado rojo ("MORA ACTIVA" bloqueado) en el panel de configuración, garantizando cero errores humanos y blindando el flujo financiero a perpetuidad.
+
+### 8. Hardening en la Edición de Tomas Físicas (Bugs Históricos Resueltos)
+Durante la estabilización de AguaV2, la manipulación de tomas físicas presentó tres vulnerabilidades críticas (bugs) que ya han sido neutralizadas y documentadas bajo la nueva arquitectura:
+
+1. **El Bug de "Retroactividad Injusta" (Cobros inflados al pasado):**
+   * *Problema:* Antes, si se cambiaba el tipo de toma de un usuario (Ej. de "Normal" a "Comercial"), el sistema recalculaba y aplicaba la tarifa comercial a toda su deuda histórica acumulada.
+   * *Solución (La Base Congelada):* Actualmente, el cambio de tipo de toma o la adición de tomas afecta **únicamente al año en curso y a las anualidades futuras**. El registro histórico (años vencidos) se respeta inmutablemente al costo que tenía originalmente.
+2. **El Bug de Cancelación Cruzada (Resurrection / Collision Bug):**
+   * *Problema:* Al desconectar tomas o reducir su número (Ej. de 2 tomas a 1), el sistema intentaba limpiar la anualidad sobrante. Por un error en la separación de tablas (`ligacargos` vs `ligacargos_historico`), las cancelaciones afectaban accidentalmente los saldos de otros usuarios.
+   * *Solución:* Se implementó el parche **Issue 02 (Cross Contract Bug)**. El sistema de reversión `_quitaCargoAnual()` ahora funciona mediante Llaves Compuestas (`numcontrato` + `leyenda`), y la función maestra `_sincronizaParidadFinanciera()` aplica un Soft-Delete directo (`UPDATE ligacargos SET estado = -1`) blindado por el ID del contrato. Es matemáticamente imposible afectar otro registro.
+3. **El Bug de Multiplicación de Renglones (Clonación de Anualidades):**
+   * *Problema:* El diseño original insertaba múltiples copias idénticas del cargo *"ANUALIDAD DEL AGUA"* dependiendo del número de tomas (Ej. 2 tomas generaban 2 renglones), saturando visualmente al cajero y corrompiendo cortes de caja.
+   * *Solución (Modelo de Suma por Unidad):* La función `generaCargosAutomaticos()` ahora suma los montos subyacentes de la Toma 1 + Toma 2, agrupándolos e insertando un **solo concepto maestro** consolidado (Ej. $1,200), respaldado por Poka-Yokes que bloquean a nivel UI un máximo de 2 tomas por domicilio (Reglas M1-R05 y M1-R06).
+
+### 9. Protocolo de Pagos Compensatorios por Cambio de Tarifa (Cargos LIBRES)
+Existe un flujo operativo formalizado para resolver las discrepancias tarifarias cuando un usuario ya pagó el año actual bajo Tarifa Normal pero cambia su toma a Tarifa Comercial a mitad de año.
+
+*   **El Problema Práctico:** Al modificar la toma a "Comercial", el operador NO debe asignar nuevamente la Anualidad completa (puesto que el usuario ya cubrió su parte de Tarifa Normal y figuraría doble en el estado de cuenta).
+*   **La Solución Estructural:**
+    1.  El operador genera un cargo utilizando la bandera `(LIBRE)` (Ej. *DIFERENCIA CAMBIO TOMA AGUA (LIBRE)*).
+    2.  Esta bandera detona un *prompt* interactivo en la UI donde el operador puede ingresar manualmente la pura "diferencia" de la tarifa (Ej. si pagó $600 y comercial es $1200, cobrar los $600 faltantes).
+    3.  El backend de `cargos.php` exime al concepto `(LIBRE)` de multiplicadores automáticos o recargos (no se multiplica por metros ni por número de tomas), garantizando que cuadre a la perfección en el corte de caja.
+    4.  **Al año siguiente**, cuando el operador de caja abra la nueva generación de recibos, la función automatizada `generaCargosAutomaticos()` detectará la marca `tipo = 1` (Comercial) del contrato, inyectando de forma nativa la anualidad de Tarifa Comercial por $1,200. El ajuste compensatorio `(LIBRE)` es una solución de puenteo inter-anual de uso único.
+
+### 10. Saneamiento y Estabilización de Recargos Huérfanos (Auto-Heal)
+Durante la estabilización profunda (Junio/Julio 2026), se detectó que el motor JIT generaba o conservaba recargos moratorios pendientes (`estado = 0`) para anualidades base que habían sido previamente depuradas/canceladas (`estado = -1`). Esto causaba "adeudos fantasmas" (engrosamiento irreal de la Cartera Vencida).
+
+*   **Solución (Bloqueo Predictivo y Limpieza en Cascada):**
+    1. **Guard en Generación (`cargos.php`):** El motor de mora (`calcula_recargos()`) ahora verifica en tiempo real la existencia y estatus del cargo base antes de calcular la mora. Si el cargo base se encuentra cancelado (`estado = -1`) o no existe, la función aborta de inmediato sin generar recargos.
+    2. **Auto-Heal en Sincronización (`contratos.php`):** Al finalizar la calibración financiera de cualquier contrato, el sistema ejecuta un saneamiento en cascada que cancela lógicamente (`estado = -1`) cualquier recargo moratorio pendiente cuyo cargo base correspondiente haya sido depurado (`estado = -1`).
+    3. **Ley Dura (Julio 2026):** Por disposición estricta del Comité, **SE PROHÍBE** borrar la mora si el capital base es pagado tardíamente (`estado = 1`). Si un usuario pagó su capital en años posteriores pero el cajero omitió cobrar los recargos, dichos recargos pendientes sobreviven (`estado = 0`) y permanecen como deuda legítima exigible. El perdón automático (Auto-Condonación) ha sido desmantelado en el Script 08 y en el Auto-Heal PHP.
+
+### 11. Prescripción Maestra Variable ("El Acordeón Dinámico")
+*   **Problema Histórico:** El sistema antiguo usaba barreras artificiales para ocultar la deuda vieja en la pantalla, lo cual descuadraba totalmente los reportes de Cartera Vencida frente a la base de datos real.
+*   **Solución Arquitectónica Dinámica:**
+    1. Se migró el límite hacia la base de datos a través de la variable `paridad_anio_limite_mora` en `config_sistema`.
+    2. **Acordeón SQL:** Se inyectó una subconsulta dinámica nativa directamente en la vista unificada (`vw_ligacargos_pendientes`). Esta vista actúa como un "acordeón": si el Comité cambia el año límite en el panel a 2010, la vista automáticamente "oculta" el capital y las moras anteriores a 2010. Al desaparecer de la vista, desaparecen automáticamente de la Cartera Vencida logrando un cuadre contable maestro (Cero Fugas).
+    3. **Reversibilidad Segura:** Ya no se borran físicamente los registros base antiguos (`estado = -1`). Si el Comité decide bajar el año a 2005, el acordeón se abre y la deuda de 2005 a 2009 reaparece intacta en la cobranza.
+    4. **Doble Freno:** El motor JIT (`calcula_recargos()`) lee la misma variable y frena matemáticamente la generación de recargos mensuales para cualquier adeudo cuya base sea anterior a este límite.
+
+### 12. Erradicación de Recargos Anuales Duplicados (Falsos Positivos Históricos)
+Durante el análisis de carteras vencidas profundas (ej. Contrato 76), se identificó que el sistema sumaba la mora mensual generada por el JIT junto con antiguos recargos consolidados manualmente por la administración en el periodo 2000-2014 (ej. "RECARGO ANUAL DE AGUA 2006").
+*   **Problema de Ortografía (Variaciones Legacy):** El parche inicial de limpieza fracasó para los años 2000-2004 debido a inconsistencias ortográficas de los operadores (capturaron "RECARGO ANUAL AGUA" omitiendo el "DE", o "RECARGOS" en plural). 
+*   **Solución:** Se amplió la directiva de búsqueda en el parche `09_saneamiento_recargos_anuales_duplicados.sql` utilizando condicionales `LIKE` expansivos. Esto permitió ubicar y aplicar un *Soft-Delete* (`estado = -1`) a todas las variaciones manuales de mora en ese rango, unificando la deuda exclusivamente bajo la matemática del motor mensual automatizado.
+
+### 13. Amnistía Robusta y Limpieza JIT Asíncrona (Amnistía Llave en Mano)
+*   **Problema:** Al desmarcar una anualidad en el panel de `configuracion.php` para otorgar amnistía, la instrucción protegía/excluía erróneamente a los comercios y segundas tomas. Peor aún, apagar la casilla solo detenía la mora futura, pero **dejaba vivos** los recargos mensuales que el motor JIT ya hubiera calculado previamente, inflando la deuda a pesar de la amnistía.
+*   **Solución Arquitectónica:**
+    1. Se eliminaron las exclusiones comerciales, haciendo que el apagado de la mora sea universal para todos los cargos de Agua y Drenaje de ese año.
+    2. **Poka-Yoke de Limpieza:** Al apagar una casilla (`estado = 0`), el sistema ahora ejecuta inmediatamente un *Soft-Delete* de cualquier recargo (cat 16 y 17) pendiente (`estado = 0`) correspondiente a ese año.
+    3. **Resiliencia JIT:** Gracias a esta arquitectura, si el operador comete un error y vuelve a encender la amnistía, el motor JIT automáticamente reconstruirá y calculará de nuevo toda la mora al abrir el contrato.
+    4. **Automatización:** Se empaquetó esta lógica en `fix-issue-01` (`10_aplicar_amnistia_2005_2014.sql`) para desplegar la amnistía del bloque 2005-2014 automáticamente al inicializar Producción.
+
+### 14. Prevención de Deuda en Suspensión Temporal (Evitando el Caso 937)
+*   **La Falla Legacy (Caso 937):** En el sistema original, suspender un servicio no eximía al usuario de recibir la carga anual masiva de deuda, provocando que los contratos suspendidos acumularan capital y mora de forma injusta.
+*   **Blindaje en AguaV2:** El sistema transaccional tipificó estrictamente los estados. Cuando un contrato pasa a **Estado 2 (Suspensión Temporal)**:
+    1. El motor JIT congela la deuda preexistente y deja de emitir recargos nuevos para ella.
+    2. El "Generador Anual" de capitales de Enero excluye obligatoriamente a los contratos en Estado 2.
+    3. Al reactivar a Estado 1 (Activo) tras varios años, el contrato despierta en blanco para ese periodo de ausencia, garantizando que el "Caso 937" (cobro indebido por periodos de suspensión) no vuelva a ocurrir jamás.
+
+### 15. Poka-Yoke Híbrido (Respeto de Mora Manual Legacy <= 2017)
+Por disposición del Comité, la deuda mora de los años 2017 hacia atrás capturada manualmente por los operadores (*"RECARGO ANUAL DE AGUA..."*) debe prevalecer intacta para su cobro.
+*   **Problema de Duplicidad:** El motor JIT amenazaba con generar mora mensual sobrepuesta a esos cargos manuales.
+*   **Solución en Tres Capas:**
+    1. **Script 09:** Se acotó para que solo elimine la basura anual de 2018 en adelante.
+    2. **Escudo JIT:** En `cargos.php`, el JIT verifica si el año en proceso es `<= 2017` y si existe un cargo manual en el historial. De ser positivo, el JIT aborta la matemática mensual y cede el paso para que se cobre la deuda manual original.
+    3. **Amnistía Inteligente:** En el script 10 y en `configuracion.php`, el borrado de moras por amnistía fue limitado exclusivamente a cadenas con guion medio (`LIKE '% - %'`), blindando los cargos manuales contra borrados accidentales de interfaz.
+
+### 16. Blindaje Poka-Yoke de Transición a Activo (2 → 1) y Depuración de Deuda Retroactiva (Agosto 2026)
+Durante la operación en produccion de Host C, se identificó un GAP al cambiar contratos de **Suspensión Temporal (`2`) → Activo (`1`)**:
+*   **Causa Raíz:** `generaCargosAutomaticos()` ejecutaba `_esContratoFacturableEnAnio()` para determinar la facturación de cuotas base atrasadas. Para contratos del sistema legado (como el contrato 742) que carecían de registros formales en la tabla de auditoría `cambios` año con año, el sistema asumía por defecto que el contrato había estado activo en el pasado, inyectando masivamente cuotas base anuales de agua y drenaje atrasadas (ej. 289 cargos por $19,918 MXN en 742 y $4,254 MXN en 959).
+*   **Blindaje en Código PHP (`includes/negocio/contratos.php`):**
+    1. **Guard en Transición:** Se actualizó `_esContratoFacturableEnAnio()` y `generaCargosAutomaticos()` para recibir el parámetro `$estado_origen`. Si el contrato proviene de Suspensión Temporal (`estado_origen === 2`), la función bloquea automáticamente la generación retroactiva de cuotas base para cualquier año anterior al año actual de reactivación (`anio < anio_actual`).
+    2. **Resiliencia Legado (-ST):** Si un contrato legado no tiene logs en `cambios`, pero posee la marca de suspensión `-ST` en la clave responsiva (`numcontratoresp`), el sistema frena la facturación retroactiva para años anteriores al año actual.
+*   **Script de Remedación DB (`11_depuracion_deuda_fantasma_742_959.sql`):**
+    1. Se aplicó Soft-Delete (`estado = -1`, `fcobro = NOW()`) exclusivamente a los cargos pendientes (`estado = 0`) para años `<= 2025` de los contratos 742 y 959.
+    2. Se preservaron intactos los cobros e ingresos pagados del año 2026 (Folios `25503`, `25504`, `25513`, `25514` por $1,394.00 MXN cada uno).
+    3. Se integró la orden de ejecución del script 11 en los orquestadores `run_patch_host_c.sh` y `run_patch_host_c.ps1`.
+
+### 17. Sincronización Automatizada de Saldo Diario y Paridad Ficha vs. Deudores (4 de Agosto de 2026)
+*   **Diagnóstico y Causa Raíz del Desfase de $240 MXN:** Los reportes estáticos de deudores (como `listadeudoresxc.php`) leen directamente de la vista `vw_ligacargos_pendientes` (creada en Abril 2026), mientras que la **Ficha del Contrato** (`contratos.php` -> `cargaContrato()`) ha operado desde el setup inicial de Host C bajo un modelo híbrido JIT: primero ejecuta `generaCargosAutomaticos()` y `_sincronizaDeudaPendienteContrato()`, y luego lee los deudas de la vista. Debido a que la versión inicial del script en lote `sync_cartera_mensual.php` solo ejecutaba `generaCargosAutomaticos()`, los recargos retroactivos de contratos no abiertos manualmente en la UI (ej. contratos 484, 527, 1008) no existían físicamente en la BD, generando un desfase de $240 MXN frente al reporte general.
+*   **Ajuste Aplicado (4 de Agosto de 2026 - Commit `1c87339`):**
+    Se actualizó `sync_cartera_mensual.php` inyectando la llamada obligatoria a `_sincronizaDeudaPendienteContrato($row[0], $y)`. Con esto, el Job en lote replica milimétricamente la misma secuencia de dos pasos de la Ficha para todo el padrón.
+*   **Mecanismo de Almacenamiento Físico e Idempotencia:**
+    1.  **Persistencia en MariaDB:** Los calculos realizados no se guardan en `.txt` ni en memoria, sino físicamente como registros con `estado = 0` (pendiente) en `ligacargos` (≥ 2026) y `ligacargos_historico` (≤ 2025).
+    2.  **Protección Anti-Duplicación (Poka-Yoke):** El motor ejecuta una verificación previa (`SELECT id_cargo FROM vw_ligacargos_pendientes WHERE numcontrato = ... AND leyenda = ...`). Si el recargo ya existe, se omite (0 inserciones). Solo se insertan los renglones faltantes, garantizando 0 duplicados y ejecutabilidad idempotente.
+*   **Inventario de Archivos PHP Refactorizados a la Vista (`vw_ligacargos_pendientes` / `vw_ligacargos_all`):**
+    Originalmente en el sistema Host B (monolítico), las consultas se hacían directamente sobre la tabla `FROM ligacargos`. Al dividirse la base de datos en dos tablas (`ligacargos` activa y `ligacargos_historico`), los siguientes módulos clave de deudores y reportes fueron refactorizados para usar las Vistas unificadas:
+    1.  `admin/saneamiento/listadeudores.php` (Antes en `reportes/`): Migró de `FROM ligacargos` directa a `vw_ligacargos_pendientes` (eliminando pérdida de datos `≤ 2025`).
+    2.  `reportes/listadeudoresxc.php`: Módulo estático de deudores por calle/contrato, consulta `vw_ligacargos_pendientes`.
+    3.  `reportes/carteravencida.php`: Modelo de cartera vencida homologado, consulta `vw_ligacargos_pendientes`.
+    4.  `reportes/concentradocortecajaresumen.php`: Consolidación total de ingresos y saldos, refactorizado a `vw_ligacargos_all`.
+    5.  `reportes/contratoinfo2.php`: Consulta detallada de historia de adeudos, utiliza `vw_ligacargos_pendientes`.
+    6.  `includes/negocio/contratos.php`: Ficha del contrato (`cargaContrato()`, `_sincronizaDeudaPendienteContrato()`), consulta y sincroniza vía `vw_ligacargos_pendientes`.
+    7.  `includes/negocio/cargos.php`: Motor de recargos y cálculo global de saldos, utiliza `vw_ligacargos_pendientes`.
+    8.  `admin/saneamiento/reporte_morosos.php`: Reporte de saldos morosos, consulta `vw_ligacargos_pendientes`.
+    9.  `admin/saneamiento/operaciones_multas_sync.php`: Sincronización de multas y recargos, utiliza `vw_ligacargos_pendientes`.
+    10. `admin/saneamiento/cv_por_tipo_edo_cto.php`: Cartera vencida por tipo de contrato y estado, utiliza `vw_ligacargos_pendientes`.
+    11. `views/cargos/modificar.php`: Validación de duplicados en modificación de cargos, consulta `vw_ligacargos_pendientes`.
+    12. `docs-dev/saneamiento-limpieza/reportes/genera_csv.php`: Generador de reportes CSV de auditoría, migró 4 JOINs directos a `vw_ligacargos_all`.
+*   **Arquitectura del Job de Paridad Masiva:**
+    1.  **Backend Core (`admin/operaciones/sync_cartera_mensual.php`):** Recorre contratos activos (`estado IN (1, 2)`) invocando la dupla `generaCargosAutomaticos()` + `_sincronizaDeudaPendienteContrato()`.
+    2.  **Orquestador PowerShell (`job-sync-cartera.ps1`):** Ejecutable de fondo agnóstico a rutas en Host C (`F:\aguav2\webapp\agua\admin\operaciones\sync_cartera_mensual.php`) con auto-elevación a Administrador y registro de bitácora en `sync_cartera.log`.
+    3.  **Vigilante de Auditoría (`job-monitor-sync.ps1`):** Script de monitoreo que verifica la fecha de modificación y resultado del archivo de log.
+    4.  **Instalador Idempotente (`setup-sync-jobs.ps1`):** Registra las tareas programadas en el *Windows Task Scheduler* (`AguaV2_SyncCartera_Diario` y `AguaV2_MonitorSyncCartera_Diario`) para ejecutarse al iniciar sesión (`AtLogOn`) con cuenta `SYSTEM` en modo oculto (`-WindowStyle Hidden`).
+
+### 18. Gaps y Análisis Post-Implementación (5 de Agosto de 2026)
+Tras refactorizar el sistema para utilizar las vistas unificadas (`vw_ligacargos_pendientes` y `vw_ligacargos_all`) y orquestar el Job diario, se documentan los siguientes gaps operativos y técnicos esperados:
+
+1.  **Mayor Tiempo de Procesamiento (Job Diario):** Al evaluar la lógica JIT contra el historial completo (200k+ registros), el Job en lote `sync_cartera_mensual.php` demorará significativamente más. Al ejecutarse en segundo plano al iniciar sesión el equipo (AtLogOn), no interrumpe directamente, pero no debe invocarse manualmente por HTTP para evitar *Timeouts*.
+2.  **Duplicados "Huérfanos":** Durante los meses de ceguera (V2 leyendo solo la tabla activa), es posible que se hayan cobrado o re-creado adeudos en la tabla activa que ya existían en la histórica. Al unificar las vistas, estos duplicados se suman, requiriendo que los operadores utilicen la función "Condonar" para invocar el Poka-Yoke de depuración al detectarlos.
+3.  **Basura Estructural en Datos Históricos:** La tabla `ligacargos_historico` contiene campos en `NULL` o `0` (ej. `anio`). Los reportes actuales fueron parchados, pero nuevos desarrollos que consulten las vistas deberán ser tolerantes a tipos de datos inconsistentes heredados.
+4.  **Shock Visual Operativo:** Los reportes de caja y Cartera Vencida aumentarán drásticamente sus montos al incluir la deuda histórica (≤ 2025). Esto representa el comportamiento correcto (Single Source of Truth), pero exige gestión de expectativas con el Comité y operadoras para evitar falsos reportes de bugs.
+5.  **Aislamiento de Reportes Masivos:** Para evitar colapsos por falta de memoria (OOM) o *Timeout* al hacer un `UNION ALL` masivo, el antiguo reporte `listadeudores.php` (no filtrado) fue movido definitivamente a `admin/saneamiento/listadeudores.php`, desvinculándolo de la interfaz pública. La operadora solo utilizará `listadeudoresxc.php` (filtrado por calle) que es seguro.
+
+```
+
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. Specifically, I'm now actively avoiding the use of `cat` in bash commands for file creation or appending, and I'm always reaching for `grep_search` instead of direct `grep` calls within the shell. The key is now fully committing to avoiding `ls`, `cat`, and `grep` when I can.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.001713957s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 12:04 pm
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 12:04 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. Specifically, I'm now actively avoiding the use of `cat` in bash commands for file creation or appending, and I'm always reaching for `grep_search` instead of direct `grep` calls within the shell. The key is now fully committing to avoiding `ls`, `cat`, and `grep` when I can.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.039016143s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+## User Request
+
+Pues mas bien probar/validar los ajustes alos .ps1, jobs, en host c
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `fixes_motor_mora_jun_a_agos.md`
+**Language:** markdown
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. Specifically, I'm now actively avoiding the use of `cat` for file creation or appending, and I'm choosing `grep_search` over direct `grep` usage within bash scripts. I'm also now attempting to use the appropriate tools such as `ls` or `cat` alternatives.
+
+
+**Refining OS Understanding**
+
+I'm now clarifying the operational environment. I'm wrestling with the OS setup: Linux versus Windows, specifically, is it possible to use `pwsh` or `powershell`? I realize the user's Linux OS is separate from the Windows VM ("Host C"). Thus, I'm verifying the OS in bash to determine which tools can be used in the current sandbox.
+
+
+**Confirming Script Location**
+
+I've confirmed I can't directly execute PowerShell scripts or test Windows Task Scheduler within my Linux environment. My current focus shifts to informing the user about the final location of the scripts. I'm now certain the adjusted `.ps1` jobs, which were the central focus, are ready and are placed in the `/opt/lampp/htdocs/agua/docs-dev/pase-a-prod/aguav2-2026/` directory.
+
+
+**Investigating Deployment Methods**
+
+I am now investigating the `/deploy-to-host-c` workflow to understand how to move code changes to Host C. My recent focus has been on understanding the deployment strategy. I'm now certain that the old syncing scripts shouldn't be executed. So, I am using `view_file` to read the deployment workflow, to determine how to proceed. I will need to understand how the user tests changes without using the old sync method.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 7.472363232s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+## User Request
+
+antes, los ps1; /opt/lampp/htdocs/agua/docs-dev/pase-a-prod/aguav2-2026/scripts/ , ya estan listos ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `fixes_motor_mora_jun_a_agos.md`
+**Language:** markdown
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. Specifically, I'm now actively avoiding the use of `cat` in bash commands for file creation or appending, and I'm always reaching for `grep_search` instead of direct `grep` calls within the shell. The key is now fully committing to avoiding `ls`, `cat`, and `grep` when I can.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.278090333s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+## User Request
+
+son unicamente esos 3 ps1 , cierto ? , o alguna php o .sql ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `fixes_motor_mora_jun_a_agos.md`
+**Language:** markdown
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. Specifically, I'm now actively avoiding the use of `cat` in bash commands for file creation or appending, and I'm always reaching for `grep_search` instead of direct `grep` calls within the shell. The key is now fully committing to avoiding `ls`, `cat`, and `grep` when I can.
+
+
+**Refining Tool Usage**
+
+I'm now prioritizing `sed` for replacements and rigorously listing all relevant tools before execution, only using the target tool if others are less suitable. For this task, I've confirmed modification of only three `.ps1` files and a documentation file, excluding PHP files. However, I recall a PHP file was modified in the *previous* session, requiring careful clarification on the user's focus.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.715074352s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+## User Request
+
+PS F:\parches\04-agosto-refix01\02> .\job-sync-cartera.ps1
+PS F:\parches\04-agosto-refix01\02>
+No aparece: "La consola debe quedarse en amarillo diciendo "Esperando a que los servicios web (MySQL) esten iniciados..."."
+LO que sucede es: se abren segunda ventana y aparece muy rapido y se  cierra, creo algoa fallo, revisa corrije.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `fixes_motor_mora_jun_a_agos.md`
+**Language:** markdown
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. Specifically, I'm now actively avoiding the use of `cat` for file creation or appending, and I'm choosing `grep_search` over direct `grep` usage within bash scripts. I'm also now attempting to use the appropriate tools such as `ls` or `cat` alternatives.
+
+
+**Refining Script Execution Analysis**
+
+I'm now zeroing in on the script's behavior, especially the immediate return after execution. I see the auto-elevation logic, and I'm focusing on the `Start-Process` call. My assumption is that the second window is the new PowerShell process started with elevated privileges. The script probably completes execution in that new process, while the original process exits because of the `exit` command on line 4. I'm verifying that the expected output is being directed to the appropriate console.
+
+
+**Analyzing Window Behavior**
+
+Okay, I'm now zeroing in on the rapid closure of the second window. I see that the auto-elevation is definitely triggered. If MySQL isn't running, it should loop for 10 minutes, but it's exiting fast. This means a crash must be occurring *before* the loop, likely during the script's initialization. I'm focusing on the configuration file inclusion as the potential culprit, specifically, the line `$ScriptDir = Split-` as the problem.
+
+
+**Confirming File Existence**
+
+I'm now zeroing in on the critical `config.ps1` file. The user's current directory is `F:\parches\04-agosto-refix01\02`. My immediate concern is whether this file exists in that location because the script's failure is likely stemming from a missing configuration file. The error handling in `start-webapps.ps1` contrasts with the fatal error in `job-sync-cartera.ps1` if the file is absent, which leads me to believe the script execution terminates there. My goal is to confirm `config.ps1` presence in the working directory to resolve this immediately.
+
+
+**Diagnosing Crash Source**
+
+I'm now zeroing in on the observed behavior: rapid window closure post-elevation. I see the scenario where a missing `config.ps1` in the temporary folder, and running it like this is almost certainly the root cause of this crash. The fatal error will occur almost immediately. I'm noting the importance of correct configuration in the temp file. However, my thought shifts to addressing the user, recommending they run PowerShell as an administrator from the directory containing `config.ps1`.
+
+
+**Proposing Direct Execution**
+
+I'm now suggesting a straightforward solution: execute the script directly as an administrator from its intended location. This will bypass the auto-elevation and output any errors in the same console. Alternatively, they can copy `config.ps1` to the patches folder. I'm also reviewing my most recent edits to `job-sync-cartera.ps1` for syntax issues. My immediate plan is to get the user to execute the script manually as an administrator to bypass the problem.
+
+
+**Examining Error Handling**
+
+I'm now zeroing in on the interaction between error handling and process checks within the PowerShell script. My immediate concern lies with how `$ErrorActionPreference = "Stop"` might override `-ErrorAction SilentlyContinue` in the `Get-Process` call. A non-terminating error from `Get-Process` could lead to script termination, so I'm analyzing how these settings intersect and their potential impact on script execution.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 15.159589074s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+## User Request
+
+*Laesh, sept*
+. Laesh: Miércoles, y Jueves: 6 pm, colaboración: Laesh diseñar UI contenido distribución.
+. Refinar y enviar docs de requisitos.
+. Seguridad implementar en dev stack y crear ya la bd, y empezar.
+. Ambiente a despegar Caelitandem para ver avance.
+
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `fixes_motor_mora_jun_a_agos.md`
+**Language:** markdown
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+## User Request
+
+mejora:
+Resultado Esperado: El script debe detectar inmediatamente el proceso, decir "MySQL detectado. Dando 5 segundos...", arrancar la sincronización PHP, y terminar con éxito.
+Añadir que aparezca en la venta que inicio y termino el proceso de job-sync-cartera.ps1 , y que no se cierre automatico la venta; que se cirre solo manualmente con la cruzcecita ventana.
+corrije lo anterior, y volvere a probar.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `fixes_motor_mora_jun_a_agos.md`
+**Language:** markdown
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. Specifically, I'm now actively avoiding the use of `cat` in bash commands for file creation or appending, and I'm always reaching for `grep_search` instead of direct `grep` calls within the shell. The key is now fully committing to avoiding `ls`, `cat`, and `grep` when I can.
+
+
+**Refining Tool Choices**
+
+I'm now fully committed to `sed` for replacing text, I'm avoiding using `grep` when I'm searching. I'm also now actively thinking about and explicitly listing all related tools before making tool calls. I've also briefly acknowledged some potentially unrelated notes about "Laesh, sept" and "Caelitandem", and I will decide soon whether to make a quick scratchpad for those notes. I'm now fully focused on the user's main task.
+
+
+**Addressing Script Closure**
+
+I'm now focused on modifying the PowerShell script to prevent automatic closure and provide clear process start/end indicators. I will insert `Write-Host` messages for "INICIO" and "TERMINO" in the script for job-sync-cartera.ps1, as requested. However, adding a pause with `Read-Host` presents a problem because the script runs as a hidden scheduled task under the system account, meaning it can't receive user input.
+
+
+**Resolving Script Pause**
+
+I'm now grappling with the pause implementation in the PowerShell script, considering the background system execution. Adding a `ReadKey` causes problems with the Task Scheduler. Instead, I'm leaning toward a `Start-Sleep` command for a brief delay or checking for interactive mode. I'm also considering checking `$Host.Name` or `$profile`, or checking if it's running interactively, to decide if a pause is appropriate. I'm now exploring the best way to handle this.
+
+
+**Implementing Conditional Pause**
+
+I've made progress on the script pause. I can now check for arguments and introduce a conditional pause. I'm leveraging a `$Auto` parameter passed through a switch. If `$Auto` isn't present, the script pauses. I considered the existing Task Scheduler configuration, and I'll consider if the user can update the arguments, or if I should explain why a hard pause in background execution is problematic. The user seems to want a visible window.
+
+
+**Refining Conditional Execution**
+
+I'm now refining the conditional pause implementation. I've examined `start-webapps.ps1` and noted its successful use of a `[switch]$NoPause`. I can mirror this approach in `job-sync-cartera.ps1`. The key is that if I run it manually, it pauses. I need to make sure the Task Scheduler doesn't pause. Task Scheduler currently doesn't pass `-NoPause`. If it tries to read the key, it throws an error I can ignore.
+
+
+**Confirming Conditional Exit**
+
+I'm now confirming the script's behavior in non-interactive sessions. Specifically, `$Host.UI.RawUI.ReadKey` throws an exception, and the script exits cleanly, so I'm now modifying the script. I'll add `Write-Host` messages for start/end indicators, then a `try/catch` block for a pause using `ReadKey`. This should let the script pause when run manually and exit when run by the system.
+
+
+**Applying Error Handling**
+
+I'm now implementing the improved error handling. I'm focusing on the `try/catch` block for a graceful script exit in non-interactive sessions, and I'll add `Write-Host` messages for start/end indicators. I'm verifying that the existing `$ErrorActionPreference = "Stop"` doesn't interfere with `try/catch`. Also, I'll create `notas_caelitandem.md` to save the provided notes for the user.
+
+
+
+
+### Actions
+
+**Tool:** `multi_replace_file_content`
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 18.537405297s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 12:35 pm
+
+---
+
+### Execution Error
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 12:35 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. Specifically, I'm now actively avoiding the use of `cat` in bash commands for file creation or appending, and I'm always reaching for `grep_search` instead of direct `grep` calls within the shell. The key is now fully committing to avoiding `ls`, `cat`, and `grep` when I can.
+
+
+**Refining Tool Usage**
+
+I'm now zeroing in on precise tool assignments. I've committed to using `sed` for replacements and dedicated tools for specialized tasks. I've also identified the crucial distinction for `write_to_file`. I now understand I can use it without `ArtifactMetadata` for general file writes outside of the brain. The new principle is to consider all related tools before making the tool call.
+
+
+
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.016360067s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 12:35 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. Specifically, I'm now actively avoiding the use of `cat` in bash commands for file creation or appending, and I'm always reaching for `grep_search` instead of direct `grep` calls within the shell. The key is now fully committing to avoiding `ls`, `cat`, and `grep` when I can.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.204240009s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+## User Request
+
+sigue Ejecutando Job de Sincronizacion Masiva de Cartera...
+Esperando a que los servicios web (MySQL) esten iniciados...
+MySQL detectado. Dando 5 segundos de gracia para apertura de puerto TCP...
+y ya se ve actividad en sync_cartera.log
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `job-sync-cartera.ps1`
+**Language:** powershell
+
+**Open Files:**
+- `job-sync-cartera.ps1`
+- `notas_septiembre_laesh.md`
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# --- Auto-Elevacion a Administrador ---
+if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+    Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
+    exit
+}
+
+$ErrorActionPreference = "Stop"
+
+# Load shared configuration
+$ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+. "$ScriptDir\config.ps1"
+
+$LogFile = "$TargetDrive\aguav2\webapp\agua\admin\operaciones\sync_cartera.log"
+$PhpExecutable = "$TargetDrive\xampp\php\php.exe"
+$PhpScript = "$TargetDrive\aguav2\webapp\agua\admin\operaciones\sync_cartera_mensual.php"
+
+Write-Host "==========================================================" -ForegroundColor Cyan
+Write-Host " INICIO DEL PROCESO: job-sync-cartera.ps1" -ForegroundColor Cyan
+Write-Host "==========================================================" -ForegroundColor Cyan
+
+Write-Host "Ejecutando Job de Sincronizacion Masiva de Cartera..." -ForegroundColor Cyan
+Write-Host "Esperando a que los servicios web (MySQL) esten iniciados..." -ForegroundColor Yellow
+$MaxWait = 600
+$Waited = 0
+while (-not (Get-Process -Name "mysqld" -ErrorAction SilentlyContinue) -and $Waited -lt $MaxWait) {
+    Start-Sleep -Seconds 10
+    $Waited += 10
+}
+
+if (-not (Get-Process -Name "mysqld" -ErrorAction SilentlyContinue)) {
+    Write-Host "ERROR FATAL: Timeout esperando a MySQL ($MaxWait segundos). Abortando Job." -ForegroundColor Red
+    Add-Content -Path $LogFile -Value "[$((Get-Date).ToString('yyyy-MM-dd HH:mm:ss'))] ERROR FATAL: Timeout esperando a MySQL. Job Abortado."
+    exit 1
+```
+
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. Specifically, I'm now actively avoiding the use of `cat` for file creation or appending, and I'm choosing `grep_search` over direct `grep` usage within bash scripts. I'm also now attempting to use the appropriate tools such as `ls` or `cat` alternatives.
+
+
+**Refining Tool Choice**
+
+I'm now zeroing in on dedicated tools: `grep` specifically for finding, and `sed` explicitly for replacements, aiming for precision. I am also making sure I list related tools before executing anything. The recent test on Host C confirmed the script's success, successfully invoking PHP after detecting MySQL. The `sync_cartera.log` file is updated. I will now confirm if the window stays open after the PHP script finishes, as a next step.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.099951370s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+## User Request
+
+mmm, si pero no aparecio  "INICIO DEL PROCESO: job-sync-cartera.ps1"
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `job-sync-cartera.ps1`
+**Language:** powershell
+
+**Open Files:**
+- `job-sync-cartera.ps1`
+- `notas_septiembre_laesh.md`
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. Specifically, I'm now actively avoiding the use of `cat` in bash commands for file creation or appending, and I'm always reaching for `grep_search` instead of direct `grep` calls within the shell. The key is now fully committing to avoiding `ls`, `cat`, and `grep` when I can.
+
+
+**Refining Tool Choice**
+
+I'm now zeroing in on dedicated tools, especially for finding and replacing. Before any tool call, I make sure to explicitly list related tools to determine the best choice. I just re-examined lines 1-20 of `job-sync-cartera.ps1` to re-examine the file paths. I am using `sed` for replacing text.
+
+
+**Analyzing Script Execution**
+
+I'm now carefully examining a script's execution. I'm trying to figure out why a specific output message might be missing, and it seems the discrepancy might be due to an older script version or potential output buffering issues. I'm double-checking my script writing to my local disk, and the log confirms it's correct.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 4.066872501s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+## User Request
+
+no muchacho,
+[2026-08-05 13:57:45] INICIANDO SINCRONIZACION MASIVA DE CARTERA (JOB DIARIO)
+[2026-08-05 13:57:45] Contratos a procesar: 1377
+y en la consola de pwh sigo viendo "==========================================================
+ INICIO DEL PROCESO: job-sync-cartera.ps1
+==========================================================
+Ejecutando Job de Sincronizacion Masiva de Cartera...
+Esperando a que los servicios web (MySQL) esten iniciados...
+MySQL detectado. Dando 5 segundos de gracia para apertura de puerto TCP..."
+osea la leyenda de INICIO DEL PROCESO no esta apareciendo.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `job-sync-cartera.ps1`
+**Language:** powershell
+
+**Open Files:**
+- `job-sync-cartera.ps1`
+- `notas_septiembre_laesh.md`
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. Specifically, I'm now actively avoiding the use of `cat` in bash commands for file creation or appending, and I'm always reaching for `grep_search` instead of direct `grep` calls within the shell. The key is now fully committing to avoiding `ls`, `cat`, and `grep` when I can.
+
+
+**Refining Tool Choice**
+
+I'm now completely restructuring my tool selection process. I must explicitly brainstorm all relevant tools *before* executing any. The user's input highlights a critical error in logging: the "INICIO DEL PROCESO" message is missing, meaning I haven't been as precise as I need to be. I am committed to choosing more specialized tools for each operation, such as sed instead of just grep for replacing strings.
+
+
+**Clarifying Log Expectations**
+
+I'm now zeroing in on the logging discrepancy. The user is seeing "INICIO DEL PROCESO" in the PowerShell console, and the log *does* contain "INICIANDO SINCRONIZACION MASIVA DE CARTERA." I need to understand if the user expects "INICIO DEL PROCESO" in a different format, or in a specific log location. The issue is likely a misunderstanding of what should be logged where.
+
+
+**Interpreting User Expectations**
+
+I'm now clarifying the user's log expectations based on their latest message, particularly regarding the placement of the "INICIO DEL PROCESO" message. It appears they *are* seeing this message, but maybe at an unexpected point. They might assume the "TERMINO DEL PROCESO" is absent because the PowerShell console is blocked, waiting for the PHP script to finish, which takes about 8 minutes. I need to guide the user to clarify this apparent confusion.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 6.042293273s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+## User Request
+
+no, a lo que te puse, es que no esta apareciendo este texto esperado "Un gran letrero Cyan al principio: "INICIO DEL PROCESO: job-sync-cartera.ps1""
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `job-sync-cartera.ps1`
+**Language:** powershell
+
+**Open Files:**
+- `job-sync-cartera.ps1`
+- `notas_septiembre_laesh.md`
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. Specifically, I'm now actively avoiding the use of `cat` in bash commands for file creation or appending, and I'm always reaching for `grep_search` instead of direct `grep` calls within the shell. The key is now fully committing to avoiding `ls`, `cat`, and `grep` when I can.
+
+
+**Refining Text Search Tools**
+
+I'm now zeroing in on targeted tool usage, especially for finding and replacing text. The user's report of missing text has made me shift my focus. I'm explicitly listing related tools before any execution and am actively considering why the user's reported output conflicts with their prior paste. It looks like the user's focus is on what is running now, not what they initially pasted.
+
+
+**Verifying File Transfer**
+
+I'm now completely focused on confirming the file transfer. Given that I have verified the code exists in `/opt/lampp/htdocs/agua/docs-dev/pase-a-prod/aguav2-2026/scripts/job-sync-cartera.ps1` on the local Linux system, the only possible explanation for the user not seeing it in Host C is an incomplete transfer, or they are looking in the wrong location on Host C. I am now certain of the code's existence on the Linux side.
+
+
+**Analyzing Execution Path**
+
+My focus has shifted to the script's execution environment on Host C. I am now considering that the user may not have copied the updated file at all, or they may be running the wrong version of the file. I am looking into the Auto-Elevate block in the powershell script, and am considering a potential explanation for a discrepancy: if they ran it without admin rights, a new Administrator window is launched with the script, and the user may be looking at the original window.
+
+
+**Interpreting User's Feedback**
+
+I'm now zeroing in on interpreting the user's latest report. It seems they're referring to console output, but I need to clarify what they are seeing *in their console* versus what I'm expecting. The key is to match the content of their prior pastes, and I see they may have pasted *my* prior messages in their prior message! I am still wondering what is going on, and am now completely confused. I'm checking file encodings and color rendering in their specific PowerShell console, but can't find an obvious problem.
+
+
+**Confirming File Synchronization**
+
+I'm now completely focused on ensuring file synchronization and execution paths are aligned. The user confirmed the script is running, but I need to make sure they're running the *correct* file. I've re-examined their previous console output, and I am now sure I understand the execution path of the user's initial report. It appears they were running from a different directory than the location I specified earlier. I'm focusing on clarifying that the modified script must be physically copied and executed from the workspace in `/opt/lampp/...` on the Windows VM.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 11.402227747s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+## User Request
+
+si tengo y estoy ejecutando la version ps1 con el texto incluido "INICIO DEL PROCESO..." pero no se muestra ya en runtime
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `job-sync-cartera.ps1`
+**Language:** powershell
+
+**Open Files:**
+- `job-sync-cartera.ps1`
+- `notas_septiembre_laesh.md`
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. Specifically, I'm now actively avoiding the use of `cat` in bash commands for file creation or appending, and I'm always reaching for `grep_search` instead of direct `grep` calls within the shell. The key is now fully committing to avoiding `ls`, `cat`, and `grep` when I can.
+
+
+**Analyzing Output Suppression**
+
+I'm now investigating a perplexing output suppression in the PowerShell script. It seems the `Write-Host` command, which should display text to the console, isn't working as expected during runtime. I've confirmed they're executing the correct script version with the intended text. My focus has shifted to identifying potential reasons for this failure, such as execution policies, redirection issues, or environment variables that might be interfering with the output.
+
+
+**Clarifying Elevated Execution**
+
+I've just had a breakthrough. I realized the script's behavior makes perfect sense now. If it's run from a non-elevated prompt, it'll start a *new* elevated window and then *exit* the first. The script then begins executing again in the new window, skipping the `if` check. The issue is likely a misunderstanding of which window is displaying output. I suspect they're looking at the wrong one, the original shell that quickly closes. This explains everything.
+
+
+**Investigating Console Clearing**
+
+I'm now zeroing in on a potential `Clear-Host` call, maybe in `config.ps1`. However, if `config.ps1` clears the host, it's loaded before the `Write-Host` calls in `job-sync-cartera.ps1`, so that doesn't make sense. I've re-examined the code, and those `Write-Host` lines are still present and should be printed. I'm going to look more into `job-sync-cartera.ps1` to see if there's any other way it's messing with the console.
+
+
+**Confirming File Content**
+
+I'm now certain the issue lies within the file's content. The user sees certain `Write-Host` calls but misses others, making this a file issue. The missing lines, from my `multi_replace_file_content`, are a crucial piece of the puzzle. I've re-examined the generated artifact to make sure those lines are still there. It seems my `multi_replace_file_content` did write it correctly. I need to figure out why the missing lines are not visible, given the user confirms line 21 is visible.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 8.514014196s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+## User Request
+
+este es el contenido de la ps1  ejecutada en el dir de scripts en windows 10 hostc vm:
+# --- Auto-Elevacion a Administrador ---
+if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+    Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
+    exit
+}
+
+$ErrorActionPreference = "Stop"
+
+# Load shared configuration
+$ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+. "$ScriptDir\config.ps1"
+
+$LogFile = "$TargetDrive\aguav2\webapp\agua\admin\operaciones\sync_cartera.log"
+$PhpExecutable = "$TargetDrive\xampp\php\php.exe"
+$PhpScript = "$TargetDrive\aguav2\webapp\agua\admin\operaciones\sync_cartera_mensual.php"
+
+Write-Host "==========================================================" -ForegroundColor Cyan
+Write-Host " INICIO DEL PROCESO: job-sync-cartera.ps1" -ForegroundColor Cyan
+Write-Host "==========================================================" -ForegroundColor Cyan
+
+Write-Host "Ejecutando Job de Sincronizacion Masiva de Cartera..." -ForegroundColor Cyan
+Write-Host "Esperando a que los servicios web (MySQL) esten iniciados..." -ForegroundColor Yellow
+$MaxWait = 600
+$Waited = 0
+while (-not (Get-Process -Name "mysqld" -ErrorAction SilentlyContinue) -and $Waited -lt $MaxWait) {
+    Start-Sleep -Seconds 10
+    $Waited += 10
+}
+
+if (-not (Get-Process -Name "mysqld" -ErrorAction SilentlyContinue)) {
+    Write-Host "ERROR FATAL: Timeout esperando a MySQL ($MaxWait segundos). Abortando Job." -ForegroundColor Red
+    Add-Content -Path $LogFile -Value "[$((Get-Date).ToString('yyyy-MM-dd HH:mm:ss'))] ERROR FATAL: Timeout esperando a MySQL. Job Abortado."
+    exit 1
+}
+
+Write-Host "MySQL detectado. Dando 5 segundos de gracia para apertura de puerto TCP..." -ForegroundColor Gray
+Start-Sleep -Seconds 5
+
+try {
+    # Ejecutamos el script PHP de forma silenciosa y guardamos la salida
+    $Output = & $PhpExecutable $PhpScript 2>&1
+    
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host "Error en la ejecucion del PHP: $Output" -ForegroundColor Red
+        Add-Content -Path $LogFile -Value "ERROR FATAL: El script de sincronizacion PHP fallo con codigo $LASTEXITCODE."
+    } else {
+        Write-Host "Job ejecutado correctamente." -ForegroundColor Green
+    }
+} catch {
+    Write-Host "Error critico al intentar invocar PHP: $_" -ForegroundColor Red
+    Add-Content -Path $LogFile -Value "ERROR FATAL EXCEPCION: $_"
+}
+
+Write-Host "==========================================================" -ForegroundColor Cyan
+Write-Host " TERMINO DEL PROCESO: job-sync-cartera.ps1" -ForegroundColor Cyan
+Write-Host "==========================================================" -ForegroundColor Cyan
+
+Write-Host "`nPresiona cualquier tecla para cerrar la ventana (o ciérrala en la [X])..." -ForegroundColor Gray
+try { $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown') } catch {}
+
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `job-sync-cartera.ps1`
+**Language:** powershell
+
+**Open Files:**
+- `job-sync-cartera.ps1`
+- `notas_septiembre_laesh.md`
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool specificity. I've been refining my approach to avoid generic commands. I'm actively suppressing the impulse to default to bash, and concentrating on utilizing the most specialized tool for each task. This shift should streamline operations and enhance accuracy. My process is becoming far more efficient as a result.
+
+
+**Analyzing Tool Applicability**
+
+I am now thoroughly analyzing tool applicability before execution. I'm explicitly listing related tools for each task and only using the given tool if it is the most specific or if all other tools are unusable. I'm carefully reviewing their feedback, specifically re-examining the provided text block. I am focusing on what they said about the file contents not appearing. This should lead to more robust and accurate solutions.
+
+
+**Clarifying Log Expectations**
+
+I'm now clarifying the user's expectations regarding log outputs. It appears there's a misunderstanding. I've pinpointed that they're expecting `Write-Host` output from the PowerShell script to be included in the `sync_cartera.log` file, which is incorrect. `Write-Host` is for the console only. The user's earlier request clearly indicates their intention to see this output in the console window, not the log file. They want "it to appear in the window". I'm digging into their previous queries for more context.
+
+
+**Investigating Missing Output**
+
+I'm now investigating a discrepancy in console output. I'm focusing on why a specific message, "INICIO DEL PROCESO," might be missing even when other expected lines are present. I'm dissecting their previous console output claims in detail. The user's persistence ("sigo viendo") clarifies what they are seeing or not seeing. I'm trying to determine if their initial text was their *expectation*. I'm also considering the effect of a potential `Clear-Host` command within `config.ps1`, and how it might affect the output order.
+
+
+**Addressing Console Perception**
+
+I'm now focusing on a potential misinterpretation of console output due to auto-elevation. The user may be observing the original, non-elevated console, where script output is absent after elevation. The elevated console is likely the one running the script. I'll clarify that "INICIO DEL PROCESO" would be visible if literally pasted. The issue is with "TERMINO DEL PROCESO". I'm trying to determine if there's a disconnect in their understanding of the consoles. I will re-examine the auto-elevation block to ensure I grasp the process flow.
+
+
+**Confirming Output Expectations**
+
+I've zeroed in on the user's potentially flawed perception. The focus is now on confirming that "TERMINO DEL PROCESO" is the missing message. I suspect a simple typo misled their earlier phrasing. I'll explicitly address the discrepancy, specifically asking if "TERMINO" is what they are referring to. The provided code block clearly shows "INICIO", suggesting their intended meaning was different. I'm preparing to suggest it was a typo, and that what they see is correct, if "TERMINO" is the missing message.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 10.550781861s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+## User Request
+
+dentro del ps1 si esta "¡La leyenda de INICIO DEL PROCESO sí está ahí, es la segunda línea de lo que me pegaste!"
+en sync_cartera.log ya aparece:  [2026-08-05 14:11:46] INICIANDO SINCRONIZACION MASIVA DE CARTERA (JOB DIARIO)
+[2026-08-05 14:11:46] Contratos a procesar: 1377
+Y PERO en la consola de pws no aparece " gran letrero Cyan al principio: "INICIO DEL PROCESO: job-sync-cartera.ps1"  te anexo imagen.
+
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `job-sync-cartera.ps1`
+**Language:** powershell
+
+**Open Files:**
+- `job-sync-cartera.ps1`
+- `notas_septiembre_laesh.md`
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. Specifically, I'm now actively avoiding the use of `cat` in bash commands for file creation or appending, and I'm always reaching for `grep_search` instead of direct `grep` calls within the shell. The key is now fully committing to avoiding `ls`, `cat`, and `grep` when I can.
+
+
+**Refining Tool Choices**
+
+I'm now prioritizing `sed` for replacements and rigorously listing all relevant tools before executing any command. The user's image highlights a specific output I was missing, which is the "INICIO DEL PROCESO" text. Now I remember why that was implemented. All of this underscores the need to fully grasp the user's setup, which is something I'll start focusing on.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.945726944s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+## User Request
+
+pero esa leyenda es en duro , yo esperaba ver ese texto despues de la linea:
+MySQL detectado. Dando 5 segundos de gracia para apertura de puerto TCP...
+como una deteccion 
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `job-sync-cartera.ps1`
+**Language:** powershell
+
+**Open Files:**
+- `notas_septiembre_laesh.md`
+- `job-sync-cartera.ps1`
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. Specifically, I'm now actively avoiding the use of `cat` in bash commands for file creation or appending, and I'm always reaching for `grep_search` instead of direct `grep` calls within the shell. The key is now fully committing to avoiding `ls`, `cat`, and `grep` when I can.
+
+
+**Refining Script Execution Timing**
+
+I'm now zeroing in on the precise timing of the script's output. The user wants a specific message ("INICIO DEL PROCESO: job-sync-cartera.ps1") to appear later, after the MySQL check. I'm moving the output block to the line immediately preceding the actual PHP script execution. The logic will now begin with MySQL detection, followed by the grace period, then the start message, and lastly, the PHP job itself.
+
+
+
+
+### Actions
+
+**Tool:** `multi_replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 3.785049702s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 1:15 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. Specifically, I'm now actively avoiding the use of `cat` for file creation or appending, and I'm choosing `grep_search` over direct `grep` usage within bash scripts. I'm also now attempting to use the appropriate tools such as `ls` or `cat` alternatives.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.407383393s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+## User Request
+
+similarmete debe ocurrir con "TERMINO DEL PROCESO: job-sync-cartera.ps1"
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `job-sync-cartera.ps1`
+**Language:** powershell
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. Specifically, I'm now actively avoiding the use of `cat` for file creation or appending, and I'm choosing `grep_search` over direct `grep` usage within bash scripts. I'm also now attempting to use the appropriate tools such as `ls` or `cat` alternatives.
+
+
+**Refining Target Specificity**
+
+I'm now zeroing in on achieving targeted precision. My current focus involves modifying specific text within a PowerShell script to more accurately reflect the conclusion of the PHP engine. I've pinpointed the target lines for replacement, and I'm leveraging `replace_file_content` to perform the operation. I'm deliberately steering clear of broader tools in favor of this highly specific one. I'm also ensuring that I've listed the tools related to the task before execution.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.423879964s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 1:17 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. Specifically, I'm now actively avoiding the use of `cat` for file creation or appending, and I'm choosing `grep_search` over direct `grep` usage within bash scripts. I'm also now attempting to use the appropriate tools such as `ls` or `cat` alternatives.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.146950429s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+## User Request
+
+funciono ya bien la prueba 1, me recuerdas y guias para la prueba 2
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `notas_septiembre_laesh.md`
+**Language:** markdown
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# Notas y Tareas (Septiembre) - Proyecto Caelitandem
+
+**Colaboración con Laesh:**
+*   Miércoles y Jueves, 6:00 PM.
+*   Objetivo: Diseñar UI y distribución de contenido con Laesh.
+
+**Tareas Pendientes:**
+*   Refinar y enviar documentos de requisitos.
+*   Implementar seguridad en el Dev Stack.
+*   Crear la Base de Datos y comenzar el desarrollo.
+*   Desplegar el ambiente de Caelitandem para poder visualizar los avances.
+
+```
+
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. Specifically, I'm now actively avoiding the use of `cat` in bash commands for file creation or appending, and I'm always reaching for `grep_search` instead of direct `grep` calls within the shell. The key is now fully committing to avoiding `ls`, `cat`, and `grep` when I can.
+
+
+**Refining Tool Choice**
+
+I'm now zeroing in on precise tool utilization. My workflow now involves explicitly considering all relevant tools before executing any command. The plan is to rely on `sed` for all replacement tasks and to prioritize it over other tools like `grep` whenever possible. I'm moving toward an approach of deliberate and conscious tool selection, especially in tasks like the instruction for Test 2, where I must craft precise steps for testing.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.667486342s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+## User Request
+
+si hice: 1. Provocar el Falso Positivo en el Log, debo esperar 15 min ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `notas_septiembre_laesh.md`
+**Language:** markdown
+</details>
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, emphasizing specificity. I'm actively avoiding bash workarounds like `cat` for file creation/appending, or `grep` within bash scripts. I am using `grep_search` and other task-specific utilities when appropriate. My goal is to streamline operations and ensure clarity.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.213126673s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+## User Request
+
+solo edite para poner la linea [2026-08-05 13:50:00] FINALIZADO OK. 0 contratos sincronizados en 0.01s. y guarde
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `notas_septiembre_laesh.md`
+**Language:** markdown
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+## User Request
+
+pero si mejor deseo esperar sin hacer nada mas ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `notas_septiembre_laesh.md`
+**Language:** markdown
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+## User Request
+
+pero sin hacer uso de Ejecuta en tu PowerShell: .\job-monitor-sync.ps1 , debido a estan los jobs ya instalados, no deberia solo activarse ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `notas_septiembre_laesh.md`
+**Language:** markdown
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+## User Request
+
+no hya nada de "guardian" alusivo a esto aparece este: AguaV2_MonitorSyncCartera_Diario
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `notas_septiembre_laesh.md`
+**Language:** markdown
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+## User Request
+
+[2026-08-05 13:50:00] FINALIZADO OK. 0 contratos sincronizados en 0.01s.
+[2026-08-05 15:11:13] INICIANDO SINCRONIZACION MASIVA DE CARTERA (JOB DIARIO)
+[2026-08-05 15:11:13] Contratos a procesar: 1377
+[2026-08-05 15:14:38] Progreso: 500 / 1377 contratos procesados...
+[2026-08-05 15:18:24] Progreso: 1000 / 1377 contratos procesados...
+[2026-08-05 15:20:09] FINALIZADO OK. 1377 contratos sincronizados en 536.14s.
+
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `notas_septiembre_laesh.md`
+**Language:** markdown
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+## User Request
+
+actualiza fixes_motor_mora_jun_a_agos.md , para quede alineado con la configuracion, setup en prod/host c, para los cambios en los .ps1 y asegurar el uso diario para el tema de sintonia con los php deuda , etc, Vs ficha de contrato saldos iguales.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `notas_septiembre_laesh.md`
+**Language:** markdown
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `fixes_motor_mora_jun_a_agos.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# Plan y Documentación Maestra: Motor de Mora Legacy
+
+## Contexto Histórico e Imposición del Comité
+Durante la estabilización de Host C (AguaV2), se documentó una diferencia en la Cartera Vencida entre Host B y Host C. El motor inicial de Host C estaba diseñado con una filosofía de "Mora Continua Rotativa" (cobrando de forma vitalicia todos los meses sin tope por año).
+Tras presentar la auditoría, **el Comité de Agua determinó que la matemática correcta y oficial a utilizar es la Legacy (Host B).**
+
+## Reglas Oficiales (Matemática Legacy)
+
+El cálculo financiero se rige estrictamente por dos reglas absolutas que el código PHP (`cargos.php`) respeta de manera obligatoria:
+
+### 1. Tope Estricto de 12 Meses (Anualidad Cerrada)
+La mora de un año (ej. 2021) jamás puede rebasar los 12 meses de recargo, sin importar cuántos años reales hayan pasado sin pago. 
+*   **Monto Máximo Base:** Un año adeudado de agua y drenaje genera como máximo 12 recargos (1 por mes).
+*   **Límite Bomba Eliminado:** Dado que la deuda no crece al infinito (se topa a 12 meses por año), se eliminó el concepto de "Límite Bomba" (`reversal_threshold`) de la base de datos y de la UI, ya que es matemáticamente imposible que un contrato explote exponencialmente.
+
+### 2. Detonación del Periodo de Gracia (Enero - Marzo)
+El periodo de gracia otorgado por el comité estipula que los recargos no se cobran *si* el usuario paga entre Enero y Marzo.
+*   **Detonación en Abril:** Si el usuario no paga antes de Abril, los meses de Enero, Febrero y Marzo **SÍ SE COBRAN** de forma retroactiva (detonación de golpe).
+*   **Extirpación del AUTO-HEAL:** En iteraciones previas, el sistema borraba físicamente los recargos de Ene-Marzo asumiendo que eran falsos positivos ("Auto-Heal"). **Esto se eliminó** porque causaba pérdidas de $180 MXN por año/contrato. Ahora, el recargo se genera físicamente pero la regla de detonación (si es aplicable a meses vigentes o años pasados) se maneja en el código `cargos.php`.
+
+## Arquitectura y Mantenimiento
+
+### Single Source of Truth
+Host C es ahora la **única fuente de verdad** (SSOT). La tabla de `ligacargos` y `ligacargos_historico` reflejan de manera fiel la misma matemática que se utilizaba en 2016-2025 en Host B.
+
+### Caché JIT (Just in Time)
+A pesar de retroceder a la matemática Legacy, el motor conserva la mejora de rendimiento de la versión V2:
+*   Se utiliza un Hash Map para evitar lecturas/escrituras redundantes (O(1)).
+*   La vista `vw_ligacargos_pendientes` une la tabla activa y la histórica de manera dinámica, basándose en la bandera `recargo` de la tabla de catálogo de `cargos`, la cual se puede prender/apagar desde `configuracion.php`.
+
+## Pipeline de Despliegue (`fix-issue-01`)
+El pipeline de saneamiento se ha simplificado a:
+1.  **`01_normalizar_catalogo.sql`**: Limpieza de duplicados.
+2.  **`02_normalizacion_estructural_v2.sql`**: Mensualidades se mueven a Cat 1 para evitar mora injusta.
+3.  **`03_normalizar_cuentas_usuarios.sql`**: Limpieza de Nombres y TRIM.
+4.  **`04_vista_cargos_pendientes_legacy.sql`**: Definición de la vista que une historico y activo SIN limitantes dinámicas extintas.
+5.  **`05_limpieza_trailing_spaces.sql`**: Fix vital (GAP-03) que elimina espacios al final de las leyendas para no romper el Hash Map del motor.
+6.  **`06_validation_legacy.sql`**: Comprobación final de que no hay asambleas con mora, que las mensualidades están limpias y que los recargos cuadran con las reglas.
+
+## Estabilización y Hardening Financiero (Junio 2026)
+
+Se implementaron parches de seguridad, integridad y depuración de duplicados en la gestión de reconciliación y condonación en `admin/operaciones/configuracion.php`:
+
+### 1. Eliminación del Doble DELETE (Soft-Delete de Recargos)
+*   **Problema:** El sistema realizaba un borrado físico (`DELETE`) de los recargos moratorios en estado pendiente (`estado = 0`) al condonar o reconciliar un cargo base. Esto destruía la trazabilidad de auditoría de los datos históricos.
+*   **Solución:** Se reemplazaron todas las sentencias `DELETE` por `UPDATE ligacargos[_historico] SET estado = -1, fcobro = NOW()`. Esto desactiva el recargo lógicamente de forma segura. El JIT lo ignora y los logs de auditoría preservan su existencia histórica.
+
+### 2. Poka-Yoke de Duplicados en Reconciliación / Condonación
+*   **Problema:** Al reconciliar o condonar un cargo que tenía clones/duplicados históricos, el sistema actualizaba todos a `estado = 1`. Esto generaba doble contabilidad financiera de ingresos cobrados o montos condonados.
+*   **Solución:** Se limitó la actualización a `estado = 1` estrictamente por ID único (`WHERE id = $id_cargo`). Todos los demás clones redundantes del mismo contrato, año y categoría se cancelan lógicamente actualizándolos a `estado = -1` con el sufijo `[DUPLICADO DEPURADO]`.
+
+### 3. Blindaje de Sesión y Bitácora de Auditoría (`Conexion.php`)
+*   **Problema:** Deserialización fallida del usuario de la sesión (`__PHP_Incomplete_Class`) e intentos de conversión implícita de objeto a string al guardar en `sys_log_reconciliacion`.
+*   **Solución:** Se inyectó `require_once` de la clase `User` en `Conexion.php` antes del inicio de sesión, y se extrae explícitamente el nombre del usuario ejecutor usando `->getNombre()` en la bitácora.
+
+### 4. Consolidación de Herramientas de Monkey Testing
+*   **Problema:** El script de monkey testing `comparativa_masiva.php` estaba expuesto en la UI diaria y en la carpeta de operaciones operacionales. Al depender del Host B remoto (que puede estar apagado), causaba fallas por timeout.
+*   **Solución:** Se eliminó el botón de la UI principal y se movió el script a la carpeta de herramientas premium de oro: `admin/saneamiento/comparativa_masiva.php`.
+
+### 5. Fix de Colisiones de ID (Resurrection Bug) en Transacciones
+*   **Problema:** Los Procedimientos Almacenados (`sp_pagar_cargo`, `sp_cancelar_cargo`) y algunas rutinas de PHP (`regresarCargoCancelado`) usaban el `$id` bruto provisto por la vista unificada (`vw_ligacargos_all`). Debido a que las tablas divididas (`ligacargos` y `ligacargos_historico`) tienen llaves primarias independientes, un pago o cancelación sobre un cargo histórico podía **colisionar** accidentalmente y actualizar el cargo activo de otro año si ambos compartían el mismo ID (Resurrection Bug).
+*   **Solución (Split-Aware Logic):** 
+    1. En PHP (`cargos.php` y `contratos.php`), todas las llamadas a los Stored Procedures ahora envían un `0` estático como primer parámetro (ID). 
+    2. Los SP están programados para hacer _fallback_ a la llave lógica compuesta `(numcontrato, leyenda, repetido)` si el ID es `0`. Esta llave es unificada y garantizada como única a nivel de base de datos.
+    3. Se removieron las cláusulas `WHERE id = $id` en las rutinas de reversión y auditoría en PHP para utilizar en su lugar la llave compuesta, garantizando la inmutabilidad de la información al cruzar el límite temporal del split.
+
+### 6. Liberación de Deuda Histórica (Fin del Límite de 5 Años)
+*   **Problema:** El motor V2 introdujo inicialmente una limitante artificial en la vista de la base de datos (basada en `paridad_anios_max_recargo = 5`) que ocultaba automáticamente los recargos moratorios de deudas anteriores al año 2021, provocando un descuadre masivo contra la Cartera Vencida del Host B original.
+*   **Solución:** Se erradicó por completo esta lógica de recorte en la definición de la vista unificada `vw_ligacargos_pendientes` (mediante el script `04_vista_cargos_pendientes_legacy.sql`). 
+*   **Impacto Financiero:** Esto liberó de forma inmediata **5,552 recargos moratorios** históricos generados en años previos a 2020. Estos recargos vuelven a ser visibles en los estados de cuenta, alineando milimétricamente la Cartera Vencida oficial de AguaV2 (Host C) con el modelo Legacy (Host B), y otorgando a los operadores la capacidad operativa de cobrarlos o condonarlos bajo el nuevo esquema de Soft-Delete.
+
+### 7. Poka-Yoke de Auto-Encendido y Bloqueo de Mora (Años Futuros)
+*   **Problema:** Al prescindir del Checkbox *"Causa Recargo"* en la UI de creación de cargos y al demandar que la mora histórica sea vitalicia e inalterable, existía el riesgo de que la creación de años futuros (Ej. 2028) quedara exenta de mora, o de que un operador apagara accidentalmente la mora de un año entero desde el panel de control.
+*   **Solución (Autonomía G02):**
+    1.  **Backend (`cargos.php`):** Se perfeccionó el *Guard G02*. Al crear un nuevo cargo, si la categoría es AGUA (2) o DRENAJE (3), el motor inyecta automáticamente `recargo = 1` a nivel de base de datos, ignorando por completo cualquier variable de la UI.
+    2.  **UI de Panel (`configuracion.php`):** Se inyectó el atributo `disabled` a todos los checkboxes de la tabla *"Control de Mora por Año"*.
+*   **Impacto Operativo:** El sistema es 100% autónomo. En enero de 2028, cuando el operador simplemente registre la "ANUALIDAD DEL AGUA 2028", el sistema agrupará el nuevo año, encenderá su propia mora de forma robótica y dibujará el candado rojo ("MORA ACTIVA" bloqueado) en el panel de configuración, garantizando cero errores humanos y blindando el flujo financiero a perpetuidad.
+
+### 8. Hardening en la Edición de Tomas Físicas (Bugs Históricos Resueltos)
+Durante la estabilización de AguaV2, la manipulación de tomas físicas presentó tres vulnerabilidades críticas (bugs) que ya han sido neutralizadas y documentadas bajo la nueva arquitectura:
+
+1. **El Bug de "Retroactividad Injusta" (Cobros inflados al pasado):**
+   * *Problema:* Antes, si se cambiaba el tipo de toma de un usuario (Ej. de "Normal" a "Comercial"), el sistema recalculaba y aplicaba la tarifa comercial a toda su deuda histórica acumulada.
+   * *Solución (La Base Congelada):* Actualmente, el cambio de tipo de toma o la adición de tomas afecta **únicamente al año en curso y a las anualidades futuras**. El registro histórico (años vencidos) se respeta inmutablemente al costo que tenía originalmente.
+2. **El Bug de Cancelación Cruzada (Resurrection / Collision Bug):**
+   * *Problema:* Al desconectar tomas o reducir su número (Ej. de 2 tomas a 1), el sistema intentaba limpiar la anualidad sobrante. Por un error en la separación de tablas (`ligacargos` vs `ligacargos_historico`), las cancelaciones afectaban accidentalmente los saldos de otros usuarios.
+   * *Solución:* Se implementó el parche **Issue 02 (Cross Contract Bug)**. El sistema de reversión `_quitaCargoAnual()` ahora funciona mediante Llaves Compuestas (`numcontrato` + `leyenda`), y la función maestra `_sincronizaParidadFinanciera()` aplica un Soft-Delete directo (`UPDATE ligacargos SET estado = -1`) blindado por el ID del contrato. Es matemáticamente imposible afectar otro registro.
+3. **El Bug de Multiplicación de Renglones (Clonación de Anualidades):**
+   * *Problema:* El diseño original insertaba múltiples copias idénticas del cargo *"ANUALIDAD DEL AGUA"* dependiendo del número de tomas (Ej. 2 tomas generaban 2 renglones), saturando visualmente al cajero y corrompiendo cortes de caja.
+   * *Solución (Modelo de Suma por Unidad):* La función `generaCargosAutomaticos()` ahora suma los montos subyacentes de la Toma 1 + Toma 2, agrupándolos e insertando un **solo concepto maestro** consolidado (Ej. $1,200), respaldado por Poka-Yokes que bloquean a nivel UI un máximo de 2 tomas por domicilio (Reglas M1-R05 y M1-R06).
+
+### 9. Protocolo de Pagos Compensatorios por Cambio de Tarifa (Cargos LIBRES)
+Existe un flujo operativo formalizado para resolver las discrepancias tarifarias cuando un usuario ya pagó el año actual bajo Tarifa Normal pero cambia su toma a Tarifa Comercial a mitad de año.
+
+*   **El Problema Práctico:** Al modificar la toma a "Comercial", el operador NO debe asignar nuevamente la Anualidad completa (puesto que el usuario ya cubrió su parte de Tarifa Normal y figuraría doble en el estado de cuenta).
+*   **La Solución Estructural:**
+    1.  El operador genera un cargo utilizando la bandera `(LIBRE)` (Ej. *DIFERENCIA CAMBIO TOMA AGUA (LIBRE)*).
+    2.  Esta bandera detona un *prompt* interactivo en la UI donde el operador puede ingresar manualmente la pura "diferencia" de la tarifa (Ej. si pagó $600 y comercial es $1200, cobrar los $600 faltantes).
+    3.  El backend de `cargos.php` exime al concepto `(LIBRE)` de multiplicadores automáticos o recargos (no se multiplica por metros ni por número de tomas), garantizando que cuadre a la perfección en el corte de caja.
+    4.  **Al año siguiente**, cuando el operador de caja abra la nueva generación de recibos, la función automatizada `generaCargosAutomaticos()` detectará la marca `tipo = 1` (Comercial) del contrato, inyectando de forma nativa la anualidad de Tarifa Comercial por $1,200. El ajuste compensatorio `(LIBRE)` es una solución de puenteo inter-anual de uso único.
+
+### 10. Saneamiento y Estabilización de Recargos Huérfanos (Auto-Heal)
+Durante la estabilización profunda (Junio/Julio 2026), se detectó que el motor JIT generaba o conservaba recargos moratorios pendientes (`estado = 0`) para anualidades base que habían sido previamente depuradas/canceladas (`estado = -1`). Esto causaba "adeudos fantasmas" (engrosamiento irreal de la Cartera Vencida).
+
+*   **Solución (Bloqueo Predictivo y Limpieza en Cascada):**
+    1. **Guard en Generación (`cargos.php`):** El motor de mora (`calcula_recargos()`) ahora verifica en tiempo real la existencia y estatus del cargo base antes de calcular la mora. Si el cargo base se encuentra cancelado (`estado = -1`) o no existe, la función aborta de inmediato sin generar recargos.
+    2. **Auto-Heal en Sincronización (`contratos.php`):** Al finalizar la calibración financiera de cualquier contrato, el sistema ejecuta un saneamiento en cascada que cancela lógicamente (`estado = -1`) cualquier recargo moratorio pendiente cuyo cargo base correspondiente haya sido depurado (`estado = -1`).
+    3. **Ley Dura (Julio 2026):** Por disposición estricta del Comité, **SE PROHÍBE** borrar la mora si el capital base es pagado tardíamente (`estado = 1`). Si un usuario pagó su capital en años posteriores pero el cajero omitió cobrar los recargos, dichos recargos pendientes sobreviven (`estado = 0`) y permanecen como deuda legítima exigible. El perdón automático (Auto-Condonación) ha sido desmantelado en el Script 08 y en el Auto-Heal PHP.
+
+### 11. Prescripción Maestra Variable ("El Acordeón Dinámico")
+*   **Problema Histórico:** El sistema antiguo usaba barreras artificiales para ocultar la deuda vieja en la pantalla, lo cual descuadraba totalmente los reportes de Cartera Vencida frente a la base de datos real.
+*   **Solución Arquitectónica Dinámica:**
+    1. Se migró el límite hacia la base de datos a través de la variable `paridad_anio_limite_mora` en `config_sistema`.
+    2. **Acordeón SQL:** Se inyectó una subconsulta dinámica nativa directamente en la vista unificada (`vw_ligacargos_pendientes`). Esta vista actúa como un "acordeón": si el Comité cambia el año límite en el panel a 2010, la vista automáticamente "oculta" el capital y las moras anteriores a 2010. Al desaparecer de la vista, desaparecen automáticamente de la Cartera Vencida logrando un cuadre contable maestro (Cero Fugas).
+    3. **Reversibilidad Segura:** Ya no se borran físicamente los registros base antiguos (`estado = -1`). Si el Comité decide bajar el año a 2005, el acordeón se abre y la deuda de 2005 a 2009 reaparece intacta en la cobranza.
+    4. **Doble Freno:** El motor JIT (`calcula_recargos()`) lee la misma variable y frena matemáticamente la generación de recargos mensuales para cualquier adeudo cuya base sea anterior a este límite.
+
+### 12. Erradicación de Recargos Anuales Duplicados (Falsos Positivos Históricos)
+Durante el análisis de carteras vencidas profundas (ej. Contrato 76), se identificó que el sistema sumaba la mora mensual generada por el JIT junto con antiguos recargos consolidados manualmente por la administración en el periodo 2000-2014 (ej. "RECARGO ANUAL DE AGUA 2006").
+*   **Problema de Ortografía (Variaciones Legacy):** El parche inicial de limpieza fracasó para los años 2000-2004 debido a inconsistencias ortográficas de los operadores (capturaron "RECARGO ANUAL AGUA" omitiendo el "DE", o "RECARGOS" en plural). 
+*   **Solución:** Se amplió la directiva de búsqueda en el parche `09_saneamiento_recargos_anuales_duplicados.sql` utilizando condicionales `LIKE` expansivos. Esto permitió ubicar y aplicar un *Soft-Delete* (`estado = -1`) a todas las variaciones manuales de mora en ese rango, unificando la deuda exclusivamente bajo la matemática del motor mensual automatizado.
+
+### 13. Amnistía Robusta y Limpieza JIT Asíncrona (Amnistía Llave en Mano)
+*   **Problema:** Al desmarcar una anualidad en el panel de `configuracion.php` para otorgar amnistía, la instrucción protegía/excluía erróneamente a los comercios y segundas tomas. Peor aún, apagar la casilla solo detenía la mora futura, pero **dejaba vivos** los recargos mensuales que el motor JIT ya hubiera calculado previamente, inflando la deuda a pesar de la amnistía.
+*   **Solución Arquitectónica:**
+    1. Se eliminaron las exclusiones comerciales, haciendo que el apagado de la mora sea universal para todos los cargos de Agua y Drenaje de ese año.
+    2. **Poka-Yoke de Limpieza:** Al apagar una casilla (`estado = 0`), el sistema ahora ejecuta inmediatamente un *Soft-Delete* de cualquier recargo (cat 16 y 17) pendiente (`estado = 0`) correspondiente a ese año.
+    3. **Resiliencia JIT:** Gracias a esta arquitectura, si el operador comete un error y vuelve a encender la amnistía, el motor JIT automáticamente reconstruirá y calculará de nuevo toda la mora al abrir el contrato.
+    4. **Automatización:** Se empaquetó esta lógica en `fix-issue-01` (`10_aplicar_amnistia_2005_2014.sql`) para desplegar la amnistía del bloque 2005-2014 automáticamente al inicializar Producción.
+
+### 14. Prevención de Deuda en Suspensión Temporal (Evitando el Caso 937)
+*   **La Falla Legacy (Caso 937):** En el sistema original, suspender un servicio no eximía al usuario de recibir la carga anual masiva de deuda, provocando que los contratos suspendidos acumularan capital y mora de forma injusta.
+*   **Blindaje en AguaV2:** El sistema transaccional tipificó estrictamente los estados. Cuando un contrato pasa a **Estado 2 (Suspensión Temporal)**:
+    1. El motor JIT congela la deuda preexistente y deja de emitir recargos nuevos para ella.
+    2. El "Generador Anual" de capitales de Enero excluye obligatoriamente a los contratos en Estado 2.
+    3. Al reactivar a Estado 1 (Activo) tras varios años, el contrato despierta en blanco para ese periodo de ausencia, garantizando que el "Caso 937" (cobro indebido por periodos de suspensión) no vuelva a ocurrir jamás.
+
+### 15. Poka-Yoke Híbrido (Respeto de Mora Manual Legacy <= 2017)
+Por disposición del Comité, la deuda mora de los años 2017 hacia atrás capturada manualmente por los operadores (*"RECARGO ANUAL DE AGUA..."*) debe prevalecer intacta para su cobro.
+*   **Problema de Duplicidad:** El motor JIT amenazaba con generar mora mensual sobrepuesta a esos cargos manuales.
+*   **Solución en Tres Capas:**
+    1. **Script 09:** Se acotó para que solo elimine la basura anual de 2018 en adelante.
+    2. **Escudo JIT:** En `cargos.php`, el JIT verifica si el año en proceso es `<= 2017` y si existe un cargo manual en el historial. De ser positivo, el JIT aborta la matemática mensual y cede el paso para que se cobre la deuda manual original.
+    3. **Amnistía Inteligente:** En el script 10 y en `configuracion.php`, el borrado de moras por amnistía fue limitado exclusivamente a cadenas con guion medio (`LIKE '% - %'`), blindando los cargos manuales contra borrados accidentales de interfaz.
+
+### 16. Blindaje Poka-Yoke de Transición a Activo (2 → 1) y Depuración de Deuda Retroactiva (Agosto 2026)
+Durante la operación en produccion de Host C, se identificó un GAP al cambiar contratos de **Suspensión Temporal (`2`) → Activo (`1`)**:
+*   **Causa Raíz:** `generaCargosAutomaticos()` ejecutaba `_esContratoFacturableEnAnio()` para determinar la facturación de cuotas base atrasadas. Para contratos del sistema legado (como el contrato 742) que carecían de registros formales en la tabla de auditoría `cambios` año con año, el sistema asumía por defecto que el contrato había estado activo en el pasado, inyectando masivamente cuotas base anuales de agua y drenaje atrasadas (ej. 289 cargos por $19,918 MXN en 742 y $4,254 MXN en 959).
+*   **Blindaje en Código PHP (`includes/negocio/contratos.php`):**
+    1. **Guard en Transición:** Se actualizó `_esContratoFacturableEnAnio()` y `generaCargosAutomaticos()` para recibir el parámetro `$estado_origen`. Si el contrato proviene de Suspensión Temporal (`estado_origen === 2`), la función bloquea automáticamente la generación retroactiva de cuotas base para cualquier año anterior al año actual de reactivación (`anio < anio_actual`).
+    2. **Resiliencia Legado (-ST):** Si un contrato legado no tiene logs en `cambios`, pero posee la marca de suspensión `-ST` en la clave responsiva (`numcontratoresp`), el sistema frena la facturación retroactiva para años anteriores al año actual.
+*   **Script de Remedación DB (`11_depuracion_deuda_fantasma_742_959.sql`):**
+    1. Se aplicó Soft-Delete (`estado = -1`, `fcobro = NOW()`) exclusivamente a los cargos pendientes (`estado = 0`) para años `<= 2025` de los contratos 742 y 959.
+    2. Se preservaron intactos los cobros e ingresos pagados del año 2026 (Folios `25503`, `25504`, `25513`, `25514` por $1,394.00 MXN cada uno).
+    3. Se integró la orden de ejecución del script 11 en los orquestadores `run_patch_host_c.sh` y `run_patch_host_c.ps1`.
+
+### 17. Sincronización Automatizada de Saldo Diario y Paridad Ficha vs. Deudores (4 de Agosto de 2026)
+*   **Diagnóstico y Causa Raíz del Desfase de $240 MXN:** Los reportes estáticos de deudores (como `listadeudoresxc.php`) leen directamente de la vista `vw_ligacargos_pendientes` (creada en Abril 2026), mientras que la **Ficha del Contrato** (`contratos.php` -> `cargaContrato()`) ha operado desde el setup inicial de Host C bajo un modelo híbrido JIT: primero ejecuta `generaCargosAutomaticos()` y `_sincronizaDeudaPendienteContrato()`, y luego lee los deudas de la vista. Debido a que la versión inicial del script en lote `sync_cartera_mensual.php` solo ejecutaba `generaCargosAutomaticos()`, los recargos retroactivos de contratos no abiertos manualmente en la UI (ej. contratos 484, 527, 1008) no existían físicamente en la BD, generando un desfase de $240 MXN frente al reporte general.
+*   **Ajuste Aplicado (4 de Agosto de 2026 - Commit `1c87339`):**
+    Se actualizó `sync_cartera_mensual.php` inyectando la llamada obligatoria a `_sincronizaDeudaPendienteContrato($row[0], $y)`. Con esto, el Job en lote replica milimétricamente la misma secuencia de dos pasos de la Ficha para todo el padrón.
+*   **Mecanismo de Almacenamiento Físico e Idempotencia:**
+    1.  **Persistencia en MariaDB:** Los calculos realizados no se guardan en `.txt` ni en memoria, sino físicamente como registros con `estado = 0` (pendiente) en `ligacargos` (≥ 2026) y `ligacargos_historico` (≤ 2025).
+    2.  **Protección Anti-Duplicación (Poka-Yoke):** El motor ejecuta una verificación previa (`SELECT id_cargo FROM vw_ligacargos_pendientes WHERE numcontrato = ... AND leyenda = ...`). Si el recargo ya existe, se omite (0 inserciones). Solo se insertan los renglones faltantes, garantizando 0 duplicados y ejecutabilidad idempotente.
+*   **Inventario de Archivos PHP Refactorizados a la Vista (`vw_ligacargos_pendientes` / `vw_ligacargos_all`):**
+    Originalmente en el sistema Host B (monolítico), las consultas se hacían directamente sobre la tabla `FROM ligacargos`. Al dividirse la base de datos en dos tablas (`ligacargos` activa y `ligacargos_historico`), los siguientes módulos clave de deudores y reportes fueron refactorizados para usar las Vistas unificadas:
+    1.  `admin/saneamiento/listadeudores.php` (Antes en `reportes/`): Migró de `FROM ligacargos` directa a `vw_ligacargos_pendientes` (eliminando pérdida de datos `≤ 2025`).
+    2.  `reportes/listadeudoresxc.php`: Módulo estático de deudores por calle/contrato, consulta `vw_ligacargos_pendientes`.
+    3.  `reportes/carteravencida.php`: Modelo de cartera vencida homologado, consulta `vw_ligacargos_pendientes`.
+    4.  `reportes/concentradocortecajaresumen.php`: Consolidación total de ingresos y saldos, refactorizado a `vw_ligacargos_all`.
+    5.  `reportes/contratoinfo2.php`: Consulta detallada de historia de adeudos, utiliza `vw_ligacargos_pendientes`.
+    6.  `includes/negocio/contratos.php`: Ficha del contrato (`cargaContrato()`, `_sincronizaDeudaPendienteContrato()`), consulta y sincroniza vía `vw_ligacargos_pendientes`.
+    7.  `includes/negocio/cargos.php`: Motor de recargos y cálculo global de saldos, utiliza `vw_ligacargos_pendientes`.
+    8.  `admin/saneamiento/reporte_morosos.php`: Reporte de saldos morosos, consulta `vw_ligacargos_pendientes`.
+    9.  `admin/saneamiento/operaciones_multas_sync.php`: Sincronización de multas y recargos, utiliza `vw_ligacargos_pendientes`.
+    10. `admin/saneamiento/cv_por_tipo_edo_cto.php`: Cartera vencida por tipo de contrato y estado, utiliza `vw_ligacargos_pendientes`.
+    11. `views/cargos/modificar.php`: Validación de duplicados en modificación de cargos, consulta `vw_ligacargos_pendientes`.
+    12. `docs-dev/saneamiento-limpieza/reportes/genera_csv.php`: Generador de reportes CSV de auditoría, migró 4 JOINs directos a `vw_ligacargos_all`.
+*   **Arquitectura del Job de Paridad Masiva:**
+    1.  **Backend Core (`admin/operaciones/sync_cartera_mensual.php`):** Recorre contratos activos (`estado IN (1, 2)`) invocando la dupla `generaCargosAutomaticos()` + `_sincronizaDeudaPendienteContrato()`.
+    2.  **Orquestador PowerShell (`job-sync-cartera.ps1`):** Ejecutable de fondo agnóstico a rutas en Host C (`F:\aguav2\webapp\agua\admin\operaciones\sync_cartera_mensual.php`) con auto-elevación a Administrador y registro de bitácora en `sync_cartera.log`.
+    3.  **Vigilante de Auditoría (`job-monitor-sync.ps1`):** Script de monitoreo que verifica la fecha de modificación y resultado del archivo de log.
+    4.  **Instalador Idempotente (`setup-sync-jobs.ps1`):** Registra las tareas programadas en el *Windows Task Scheduler* (`AguaV2_SyncCartera_Diario` y `AguaV2_MonitorSyncCartera_Diario`) para ejecutarse al iniciar sesión (`AtLogOn`) con cuenta `SYSTEM` en modo oculto (`-WindowStyle Hidden`).
+
+### 18. Gaps y Análisis Post-Implementación (5 de Agosto de 2026)
+Tras refactorizar el sistema para utilizar las vistas unificadas (`vw_ligacargos_pendientes` y `vw_ligacargos_all`) y orquestar el Job diario, se documentan los siguientes gaps operativos y técnicos esperados:
+
+1.  **Mayor Tiempo de Procesamiento (Job Diario):** Al evaluar la lógica JIT contra el historial completo (200k+ registros), el Job en lote `sync_cartera_mensual.php` demorará significativamente más. Al ejecutarse en segundo plano al iniciar sesión el equipo (AtLogOn), no interrumpe directamente, pero no debe invocarse manualmente por HTTP para evitar *Timeouts*.
+2.  **Duplicados "Huérfanos":** Durante los meses de ceguera (V2 leyendo solo la tabla activa), es posible que se hayan cobrado o re-creado adeudos en la tabla activa que ya existían en la histórica. Al unificar las vistas, estos duplicados se suman, requiriendo que los operadores utilicen la función "Condonar" para invocar el Poka-Yoke de depuración al detectarlos.
+3.  **Basura Estructural en Datos Históricos:** La tabla `ligacargos_historico` contiene campos en `NULL` o `0` (ej. `anio`). Los reportes actuales fueron parchados, pero nuevos desarrollos que consulten las vistas deberán ser tolerantes a tipos de datos inconsistentes heredados.
+4.  **Shock Visual Operativo:** Los reportes de caja y Cartera Vencida aumentarán drásticamente sus montos al incluir la deuda histórica (≤ 2025). Esto representa el comportamiento correcto (Single Source of Truth), pero exige gestión de expectativas con el Comité y operadoras para evitar falsos reportes de bugs.
+5.  **Aislamiento de Reportes Masivos:** Para evitar colapsos por falta de memoria (OOM) o *Timeout* al hacer un `UNION ALL` masivo, el antiguo reporte `listadeudores.php` (no filtrado) fue movido definitivamente a `admin/saneamiento/listadeudores.php`, desvinculándolo de la interfaz pública. La operadora solo utilizará `listadeudoresxc.php` (filtrado por calle) que es seguro.
+6.  **Necesidad Estricta de Ejecución Diaria:** Aunque el descuadre visual entre los reportes globales estáticos y la ficha dinámica del usuario solo sea evidente al cambio de mes, la ejecución **diaria** (`AtLogOn`) del Job es innegociable por tres factores:
+    *   **Auto-Sanación:** Si el sistema falla un día, se re-sincroniza automáticamente al día siguiente, garantizando que el desfase no dure todo un mes.
+    *   **Rendimiento en Interfaz:** El Job realiza el cálculo pesado (JIT) de mora de los 1,377 contratos en background. Si no lo hiciera, la Ficha del Contrato tardaría demasiado en procesar toda la deuda en vivo frente a la operadora.
+    *   **Cierre de Eventos Retroactivos:** Cambios manuales de estado (ej. Suspendido a Activo) o condonaciones realizadas a mitad de mes requieren el barrido nocturno/matutino del Job para propagar los saldos rectificados a los reportes globales de manera inmediata.
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 2:35 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+## User Request
+
+entonces para ir con mi cliente, proxima semana que debo realizar para dejarle correcta y completa instalada la version de los .ps1 de job y etc;  php, sql ; y describe como seria el procedimiento.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `fixes_motor_mora_jun_a_agos.md`
+**Language:** markdown
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L179-184)</summary>
+
+**Path:** `Unknown file`
+
+```
+    2.  **Orquestador PowerShell (`job-sync-cartera.ps1`):** Ejecutable de fondo agnóstico a discos en Host C. Incluye **Wait-For-It (Espera Activa)** de hasta 10 minutos esperando a que el proceso `mysqld` esté arriba antes de ejecutar PHP, previniendo falsos inicios.
+    3.  **Vigilante de Auditoría / Guardián (`job-monitor-sync.ps1`):** Script de monitoreo autónomo. Espera un periodo de gracia de 15 minutos (`Start-Sleep -Seconds 900`) para no atropellar al job principal, escanea `sync_cartera.log` y, si detecta un "Falso Positivo" (`0 contratos sincronizados`), **dispara un reintento automático de forma transparente**.
+    4.  **Instalador Idempotente (`setup-sync-jobs.ps1`):** Registra las tareas programadas en el *Windows Task Scheduler*:
+        *   `AguaV2_SyncCartera_Diario`: Lanza `job-sync-cartera.ps1` al iniciar sesión (`AtLogOn`).
+        *   `AguaV2_MonitorSyncCartera_Diario`: Lanza `job-monitor-sync.ps1` al iniciar sesión (`AtLogOn`).
+        Ambas configuradas con cuenta `SYSTEM`, ventana oculta (`-WindowStyle Hidden`) y límite de ejecución extendido a **45 minutos** para tolerar pausas de gracia y reintentos.
+```
+
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+## User Request
+
+documenta lo anterior para el setup en fixes_motor_mora_jun_a_agos.md, y lo realice en mi proxima visita al cliente una o 2 semnas, antes acabe agosto.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `fixes_motor_mora_jun_a_agos.md`
+**Language:** markdown
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 2:40 pm
 
 ---
 

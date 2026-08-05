@@ -274,6 +274,15 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 *   **Exclusión de Conceptos No Periódicos**: Se confirmó que los reportes de deuda y cartera vencida excluyen consistentemente las categorías no periódicas (6, 19, 20, 21, 22), los estados de contrato inactivos (4) y los usuarios no localizados (Estado 2), evitando la "deuda fantasma" en los cortes de caja y listas ordinarias de cobro.
 *   **Reporte de Auditoría**: Generado y guardado el análisis detallado en `/home/carlos/.gemini/antigravity/brain/03cd7422-1442-4d78-a978-010ca624cac1/reportes_analisis_forense.md`.
 
+**Estabilización Motor Legacy & Resiliencia de Jobs en Host C (2026-08-05):**
+*   **Alineación Matemática Legacy:** El Comité confirmó el retorno a la matemática Legacy (Host B) basada en un tope estricto de 12 meses de recargo por anualidad y la detonación retroactiva del periodo de gracia (Ene-Mar) en Abril.
+*   **Hardening y Poka-Yoke Financiero:** Eliminación de los *DELETE* físicos de recargos (reemplazados por *Soft-Delete* `estado = -1`), prevención de colisión de IDs en el split mediante Llaves Compuestas (`numcontrato` + `leyenda`), y exención automática de conceptos libres `(LIBRE)` en la cobranza.
+*   **Orquestación de Jobs (.ps1) & Guardián:** 
+    *   `job-sync-cartera.ps1` equipado con mecanismo **Wait-For-It** (espera activa de 10 min a `mysqld`).
+    *   `job-monitor-sync.ps1` equipado con **Guardián de 15 min** que escanea `sync_cartera.log` y re-ejecuta de forma autónoma cualquier falso positivo con `0 contratos sincronizados`.
+    *   `setup-sync-jobs.ps1` configurado con `ExecutionTimeLimit` de **45 minutos** en el Task Scheduler de Windows (`AtLogOn`).
+*   **Runbook de Despliegue en Sitio:** Documentado en `fixes_motor_mora_jun_a_agos.md` (Sección 19) con el checklist y procedimiento para la visita presencial de instalación en Producción antes del cierre de Agosto 2026.
+
 **Última actualización**: 2026-08-05
 
 
