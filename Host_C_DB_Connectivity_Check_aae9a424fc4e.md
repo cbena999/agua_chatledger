@@ -7,9 +7,9 @@
 | **Trajectory ID** | `f51e7007-001e-45ca-b000-c3ebb8132ce0` |
 | **Cascade ID** | `31156cde-8540-4bb7-b98d-aae9a424fc4e` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 1242 |
+| **Total Steps** | 1268 |
 | **Started** | 4 Aug 2026, 11:40 am |
-| **Completed** | 5 Aug 2026, 8:37 am |
+| **Completed** | 5 Aug 2026, 8:40 am |
 
 ---
 
@@ -30371,6 +30371,214 @@ las phps de la ficha de contrato, continua haciendose el calculo al momento o us
 **Active File:** `PLAN_MOTOR_MORA_LEGACY.md`
 **Language:** markdown
 </details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+## User Request
+
+ya esta asi antes de ayer o ayer se ajusto ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `PLAN_MOTOR_MORA_LEGACY.md`
+**Language:** markdown
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+## User Request
+
+muy bien , documenta en PLAN_MOTOR_MORA_LEGACY.md,  todas estas precisiones de los cambios, ajustes y del porque; añade fecha que eso ocurrio ayer.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `PLAN_MOTOR_MORA_LEGACY.md`
+**Language:** markdown
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `PLAN_MOTOR_MORA_LEGACY.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L149-164)</summary>
+
+**Path:** `Unknown file`
+
+```
+    1. **Guard en Transición:** Se actualizó `_esContratoFacturableEnAnio()` y `generaCargosAutomaticos()` para recibir el parámetro `$estado_origen`. Si el contrato proviene de Suspensión Temporal (`estado_origen === 2`), la función bloquea automáticamente la generación retroactiva de cuotas base para cualquier año anterior al año actual de reactivación (`anio < anio_actual`).
+    2. **Resiliencia Legado (-ST):** Si un contrato legado no tiene logs en `cambios`, pero posee la marca de suspensión `-ST` en la clave responsiva (`numcontratoresp`), el sistema frena la facturación retroactiva para años anteriores al año actual.
+*   **Script de Remedación DB (`11_depuracion_deuda_fantasma_742_959.sql`):**
+    1. Se aplicó Soft-Delete (`estado = -1`, `fcobro = NOW()`) exclusivamente a los cargos pendientes (`estado = 0`) para años `<= 2025` de los contratos 742 y 959.
+    2. Se preservaron intactos los cobros e ingresos pagados del año 2026 (Folios `25503`, `25504`, `25513`, `25514` por $1,394.00 MXN cada uno).
+    3. Se integró la orden de ejecución del script 11 en los orquestadores `run_patch_host_c.sh` y `run_patch_host_c.ps1`.
+
+### 17. Sincronización Automatizada de Saldo Diario y Paridad Ficha vs. Deudores (Agosto 2026)
+*   **Diagnóstico y Causa Raíz del Desfase:** Los reportes estáticos (como `listadeudoresxc.php`) consultan directamente las tablas `vw_ligacargos_pendientes` / `ligacargos`, mientras que la **Ficha del Contrato** evalúa de forma perezosa (*Lazy/JIT Evaluation*) la mora ejecutando dos funciones al momento de abrirla: `generaCargosAutomaticos()` y `_sincronizaDeudaPendienteContrato()`. Si un contrato no se abría manualmente en la UI, sus recargos mensuales o anualidades nuevas no se materializaban en la base de datos, provocando discrepancias (ej. diferencias de $240 MXN) entre lo reportado en la Ficha y la lista general de deudores.
+*   **Arquitectura del Job de Paridad Masiva:**
+    1.  **Backend Core (`admin/operaciones/sync_cartera_mensual.php`):** Script PHP en lote que recorre todos los contratos activos (`estado IN (1, 2)`) invocando secuencialmente tanto `generaCargosAutomaticos()` como `_sincronizaDeudaPendienteContrato()`. Esto garantiza la inserción física y actualización retroactiva de recargos para todo el padrón sin requerir interacción manual de los operadores.
+    2.  **Orquestador PowerShell (`job-sync-cartera.ps1`):** Ejecutable de fondo agnóstico a rutas en Host C (`F:\aguav2\webapp\agua\admin\operaciones\sync_cartera_mensual.php`) con auto-elevación a Administrador y registro detallado en `sync_cartera.log`.
+    3.  **Vigilante de Auditoría (`job-monitor-sync.ps1`):** Script de monitoreo que verifica la fecha de modificación y resultado del archivo de log.
+    4.  **Instalador Idempotente (`setup-sync-jobs.ps1`):** Registra las tareas programadas en el *Windows Task Scheduler* (`AguaV2_SyncCartera_Diario` y `AguaV2_MonitorSyncCartera_Diario`) configuradas para ejecutarse automáticamente al iniciar sesión (`AtLogOn`) con cuenta `SYSTEM` en modo oculto (`-WindowStyle Hidden`).
+
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 8:39 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 8:39 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `manage_task`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_GENERIC
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 8:40 am
+
+---
+
+### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 8:40 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 8:40 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `manage_task`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_GENERIC
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 8:40 am
+
+---
+
+### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 8:40 am
 
 ---
 
