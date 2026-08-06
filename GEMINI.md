@@ -395,7 +395,7 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 *   **Watchdog de Fugas de Memoria WASM**: Diseño de una política *Kill-and-Respawn* para reiniciar de manera segura el Web Worker de VOSK en periodos de inactividad, previniendo fallos Out-of-Memory (OOM) en terminales de bajo hardware con sesiones prolongadas.
 *   **Documentación de Pruebas Manuales**: Inserción de recomendaciones de QA que aclaran el alcance técnico entre una Limpieza Total (Clear Site Data) y el botón operativo de "Forzar Sincronización" en la PWA.
 
-**Última actualización**: 2026-08-05
+**Última actualización**: 2026-08-06
 
 **Estabilización de Sesión Persistente, Interrupciones y Entrega de Turno (2026-07-06 — Sesión 1):**
 *   **Persistencia PHP Extendida**: Habilitado el tiempo de vida de sesión a **24 horas** en `commons.php` para prevenir expiraciones silenciosas en los dispositivos móviles durante la jornada laboral.
@@ -437,6 +437,15 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 *   **Detalle de Secciones y Banners**: Incorporación del requerimiento de hasta 6 secciones del sitio web y delimitación de dimensiones recomendadas para imágenes (1920x600px). Renombrado del alcance a "Sitio Web Corporativo" y remoción de cláusulas temporales ("10 días").
 *   **Impresión de Solicitud en Hojas Blancas**: Configuración de impresión Media Carta (hoja cortada horizontalmente a la mitad, con generación automática de cabecera en PHP), vinculando requerimientos de marca/modelo de impresora para calibración.
 *   **Generador PDF con Exclusión de Upsell**: Modificación de `build_pdf.py` para añadir la tarea `assets` que compila `assets_requeridos_cliente.pdf` (Letter, font size 11) truncando dinámicamente el contenido antes de la sección de "Otros Alcances" (dejando la venta adicional oculta en el código de producción pero fuera del documento de firma del cliente). Ajuste posterior de márgenes a 12mm, line-height a 1.35 y altura de mockups para compactar el documento y asegurar que quepa exactamente en 2 páginas.
+
+**Kickoff Desarrollo Primera Etapa LAESH Sitio Web & Bloc Digital (2026-08-06):**
+*   **Alcance Inicial**: Arranque oficial de la primera etapa abarcando configuración de ambientes (local y remoto con dominio), modelado de base de datos para CMS/Auth, diseño y refinamiento de propuestas de UI (User Interfaces), e integración y extracción de web assets.
+*   **Alineación de Contexto**: Sincronización del asistente de IA con los nuevos repositorios de prototipos y documentación técnica (`portafolio-dev-2026/blocklabgd/v1.2/`, `laesh-web-assets/`, `laesh-swbldi/website/uipv0/`, y `laesh/et/`).
+*   **Mapeo de Rutas y Ambientes (Local vs Remoto/OCI)**:
+    *   **maqueta0**: Remoto `sftp://ubuntu@oci-vm/home/ubuntu/n8n-php/mvps/laesh/` corresponde localmente a `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/website/uipv0/`.
+    *   **uipv1**: Remoto `sftp://ubuntu@oci-vm/home/ubuntu/n8n-php/mvps/laesh/uipv1/` corresponde localmente a `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/website/uipv1/`.
+    *   **uipv2**: Remoto `sftp://ubuntu@oci-vm/home/ubuntu/n8n-php/mvps/laesh/uipv2/` corresponde localmente a `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/website/uipv2/`.
+    *   **Regla de Recursos Web**: Los contenidos estáticos y assets ubicados en el directorio `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-web-assets/` corresponden obligatoriamente a las páginas (HTML/PHP) que se desarrollen dentro de `uipv1/` y `uipv2/`.
 
 > [!IMPORTANT]
 > **Terminología de Sesión**:
