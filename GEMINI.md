@@ -454,3 +454,33 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 
 ## ⚠️ Reglas Especiales de Asistencia (Agentes IA)
 - **Verificación Visual Automatizada**: Evita realizar la "Verificación Visual Automatizada" (pruebas de navegador/capturas con `browser_subagent`) por default. Debes esperar autorización explícita del usuario antes de ejecutarla.
+
+---
+
+## 🎨 Estándares de Oro UI/UX y Flujos: Ecosistema LAESH Sitio Web & Portales (`laesh-swbldi/website/uipv1/`)
+
+1. **Alineación 1:1 Menú Lateral <-> Breadcrumb:** 
+   El texto exacto de la opción seleccionada en la barra lateral (`aside.sidebar`) DEBE coincidir carácter por carácter con el título que se renderiza dinámicamente en el encabezado flotante (`#header-bc-current`).
+   * *Médico:* `Nueva Orden`, `Órdenes Anteriores`, `Reportes`, `Catálogo de Estudios`.
+   * *Recepción:* `Tablero de Recepción`, `Directorio de Pacientes`, `Médicos Tratantes`, `Reportes y Estadísticas`, `Catálogo de Análisis`, `Órdenes Anteriores`, `Cambios en contenidos SitioWeb`.
+
+2. **Decisor de Búsqueda Predictiva por Estado (`medicos.html`):**
+   Al seleccionar un paciente/folio desde la lista de autocompletado en el portal médico (`input-buscador-medico`), el sistema intercepta el estado de la solicitud (`m.estado`):
+   * Si es `Resultados Listos` o `Cerrada`: abre de inmediato el **Modal de PDF Clínico** (`verResultados`).
+   * Si es `Remitido` o `En Atención`: abre el **Modal de Solicitud Digital** (`verSolicitudDigital`).
+   * El texto del `(estado)` en el resultado se renderiza en **Rojo (`#dc2626`)** con negrita legible (`font-weight: 700`).
+
+3. **Homologación de Grillas y Trazabilidad:**
+   Todas las tablas operativas (`#tabla-medico`, `#tabla-historial-completo`, `#tabla-recepcion`, `#tabla-historial-completo-admin`) comparten el estándar homologado de columnas (Folio, Paciente, Estudios, Fecha Emisión, Fecha Resultado, Estado, Acción), garantizando paridad entre el laboratorio y los médicos tratantes.
+
+4. **Escalado Proporcional en Pantallas Grandes (Desktop / Laptop):**
+   En pantallas `>=1025px`, el contenedor de carruseles e imágenes expande sus paddings laterales a `4.5rem` y las tarjetas clínicas mantienen una altura de imagen de `280px` (`object-fit: cover`) con tipografías proporcionales (+3) para un look & feel de alta gama.
+
+5. **Mapeo de Secciones UI del CMS Personalizado (`gestion-web.html`):**
+   `gestion-web.html` refleja de forma exacta las 5 secciones navegables reales de `index.html`:
+   * **1. Banner Principal (`#hero` / `#inicio`):** Edición de imágenes de fondo, etiquetas, títulos y textos CTA de los 3 slides.
+   * **2. Estudios de Rutina (`#especialidades`):** Edición del carrusel de tarjetas de especialidades e imágenes de área.
+   * **3. Promociones Vigentes (`#promociones`):** Subida y reemplazo del banner gráfico oficial (`PROMOCIONES 2026.webp`) y sus títulos explicativos. (Sin tarjetas redundantes de descuento).
+   * **4. Calidad e Instalaciones (`#calidad`):** Gestión de la galería fotográfica de áreas de laboratorio y certificaciones.
+   * **5. Ubicación y Contacto (`#ubicacion`):** Edición de teléfonos, dirección física, horario, responsable sanitario, WhatsApp y croquis (`mapa_laesh.webp`).
+   *(Nota: Se han removido secciones obsoletas como Membresías y tarjetas individuales de promoción que no pertenecen a index.html).*
