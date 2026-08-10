@@ -12,6 +12,15 @@
 
 ---
 
+### P-03 🔲 Infraestructura y Plataforma LAESH (OCI VPS / OCI Cloud)
+**Estado**: Pendiente
+**Descripción**: 
+1. **Base de Datos `laesh_db`**: Provisionamiento e inicialización del motor MariaDB 11.x / MySQL para persistencia de laesh (usuarios, órdenes, catálogo, notificaciones, CMS).
+2. **Servidor Swoole v6 (WebSockets)**: Setup de contenedor Docker / servicio Swoole en puerto `9502` para Notificaciones Real-Time en tiempo real entre Médico y Recepción.
+3. **Multidominio Nginx**: Configuración del vhost `laesh.mx` compartiendo IP con `caelitandem.lat`.
+
+---
+
 ## 🟡 PRIORIDAD MEDIA
 ### P-02 🔲 Módulos de Caja y Administración (Fase 5/6)
 **Estado**: Pendiente
