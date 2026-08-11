@@ -454,6 +454,7 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 
 ## ⚠️ Reglas Especiales de Asistencia (Agentes IA)
 - **Verificación Visual Automatizada**: Evita realizar la "Verificación Visual Automatizada" (pruebas de navegador/capturas con `browser_subagent`) por default. Debes esperar autorización explícita del usuario antes de ejecutarla.
+- **Despliegues a OCI VPS**: Queda estrictamente prohibido realizar cualquier tipo de despliegue automático a OCI VPS (vía rsync, scp u otros comandos). Los despliegues a entornos remotos se realizarán **única y exclusivamente bajo solicitud explícita del usuario**.
 
 ---
 
