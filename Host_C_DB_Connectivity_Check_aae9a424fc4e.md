@@ -7,9 +7,9 @@
 | **Trajectory ID** | `f51e7007-001e-45ca-b000-c3ebb8132ce0` |
 | **Cascade ID** | `31156cde-8540-4bb7-b98d-aae9a424fc4e` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 1539 |
+| **Total Steps** | 1877 |
 | **Started** | 4 Aug 2026, 11:40 am |
-| **Completed** | 5 Aug 2026, 2:40 pm |
+| **Completed** | 11 Aug 2026, 1:27 pm |
 
 ---
 
@@ -37293,6 +37293,7757 @@ documenta lo anterior para el setup en fixes_motor_mora_jun_a_agos.md, y lo real
 
 **Status:** Completed
 **Created:** 5 Aug 2026, 2:40 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+## User Request
+
+actualiza GEMINI.md y asociados; luego comitea con msg adecuado y sube todos los repos
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `fixes_motor_mora_jun_a_agos.md`
+**Language:** markdown
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `GEMINI.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# GEMINI.md - Central Project Context for Agua (MASTER INDEX)
+
+Este archivo es el punto de entrada principal para el asistente de IA (Antigravity/Gemini) y un resumen del contexto del proyecto **Agua**. El conocimiento detallado y las reglas de oro se han distribuido en archivos modulares dentro de `.agents/rules/`.
+
+> [!IMPORTANT]
+> **Gemini**: Debes consultar y seguir las reglas detalladas en el directorio `.agents/rules/` para cada tarea orquestada en este proyecto.
+
+> [!IMPORTANT]
+> **Reglas de Oro del Asistente**:
+> 1. **No comitees ni subas a ningún repositorio** a menos que el usuario lo solicite explícitamente.
+> 2. **Todas tus respuestas deben ser en español.**
+
+---
+
+## 🗺️ Índice de Reglas y Conocimiento (Ground Truth)
+
+| Regla | Descripción | Archivo |
+| :--- | :--- | :--- |
+| **01** | **Infraestructura y Hosts** | [.agents/rules/01-infra-hosts.md](file:///.agents/rules/01-infra-hosts.md) |
+| **02** | **Diccionario de Reglas por Módulo** | [.agents/rules/02-reglas-negocio.md](file:///.agents/rules/02-reglas-negocio.md) |
+| **03** | **Sincronización de Datos (B -> A)** | [.agents/rules/03-sincronizacion-b-a.md](file:///.agents/rules/03-sincronizacion-b-a.md) |
+| **04** | **Arquitectura MVC y Directorios** | [.agents/rules/04-arquitectura-mvc.md](file:///.agents/rules/04-arquitectura-mvc.md) |
+| **05** | **Despliegue y Automatización (Host C)** | [.agents/rules/05-despliegue-host-c.md](file:///.agents/rules/05-despliegue-host-c.md) |
+| **06** | **Accesos, Rutas y Herramientas** | [.agents/rules/06-accesos-rutas.md](file:///.agents/rules/06-accesos-rutas.md) |
+| **07** | **Control de Versiones y Git Workflow** | [.agents/rules/07-git-workflow.md](file:///.agents/rules/07-git-workflow.md) |
+| **08** | **Integridad del Ground Truth / Runbook** | [.agents/rules/08-integridad-ground-truth.md](file:///.agents/rules/08-integridad-ground-truth.md) |
+| **09** | **Documentación de Sesión** | [.agents/rules/09-sesion-summary.md](file:///.agents/rules/09-sesion-summary.md) |
+| **10** | **Limitantes Conocidas de la Webapp** | [.agents/rules/10-limitantes-webapp.md](file:///.agents/rules/10-limitantes-webapp.md) |
+| **11** | **Estándares de Código y Seguridad** | [.agents/rules/11-estandares-codigo.md](file:///.agents/rules/11-estandares-codigo.md) |
+| **12** | **Uso Seguro de `Conexion.php` (mysqli)** | [.agents/rules/12-estandar-conexion-mysqli.md](file:///.agents/rules/12-estandar-conexion-mysqli.md) |
+
+---
+
+## 🛠️ Skills Personalizadas (Workflows y Estándares)
+Estas habilidades definen **cómo** ejecuto las tareas técnicas:
+- **[UI/UX Modern Refactor](file:///.agents/skills/skill-ui-modern-refactor/SKILL.md)**: Estándares de CSS/HTML para el Host C.
+- **[Dynamic UI & AJAX](file:///.agents/skills/skill-dynamic-html-ajax/SKILL.md)**: Interactividad con `paxscript.js`.
+- **[Plates Templating Patterns](file:///.agents/skills/skill-plates-templating/SKILL.md)**: Uso del motor de plantillas Views.
+- **[PHP-Migration-74](file:///.agents/skills/skill-migration-php74/SKILL.md)**: Refactorización de PHP 5.5 a 7.4.
+- **[Database Evolution](file:///.agents/skills/skill-database-evolution/SKILL.md)**: Partición de `ligacargos` y migración a MariaDB.
+
+---
+
+## 🏗️ Workflows Disponibles (Procesos Detallados)
+- **[/update-business-data](file:///.agents/workflows/update-business-data.md)**: Sync B → A (Comando: `Sync-B2A`)
+- **[/deploy-to-host-c](file:///.agents/workflows/deploy-to-host-c.md)**: Sync A → C (Comando: `Sync-A2C`)
+
+---
+
+## 🚨 Módulos Críticos y Auditoría Constante
+Existen funcionalidades core que requieren especial atención para asegurar la congruencia de datos:
+- **Lógica Híbrida y Retroactividad (V2)**: Motor de Mora Continuo y Reglas de Paridad en `transiciones_estado_contratos.md`.
+- **Regla de Mora Continua (Anti Falsos Positivos GAPs 01, 03, 04, 07)**: 
+  * **GAP-01/03:** El periodo de gracia (Ene-Mar) aplica **únicamente al año base**. En años subsecuentes, la mora se acumula los 12 meses. Recargos como `RECARGO ENE 2021 - ANUALIDAD 2020` son **VÁLIDOS**.
+  * **GAP-07:** El campo `anio` en `ligacargos_historico` almacena el AÑO ORIGEN de la deuda. Ver +120 recargos bajo un mismo año NO ES DOBLE CONTEO, es acumulación inter-anual correcta.
+  * **GAP-04:** Suspender un servicio NO PERDONA la deuda. Las moras activas en Estado 2 son correctas (deuda congelada). La amnistía solo aplica al reactivar.
+- **Estados de Contrato**: Transiciones entre `1 (ACTIVO)`, `2 (SUSPENSIÓN TEMPORAL)`, `3 (SUSPENSIÓN ADMINISTRATIVA)` y `4 (SUSPENSIÓN DEFINITIVA)`. Ver matriz completa en `transiciones_estado_contratos.md`.
+- **Cartera Vencida (`carteravencida.php`)**: Validación de deuda morosa.
+- **Corte de Caja (`concentradocortecaja.php`)**: Ingresos diarios contra reportes detallados.
+- **Resumen de Caja (`reportes/concentradocortecajaresumen.php`)**: Consolidación total.
+- **Saneamiento Estructural (PMU)**: Consolidación de asambleas, unicidad de cargos y depuración de usuarios placeholder en `docs-dev/doc-estabilizacion/funcionalidad-reglas-negocio/analisis_paridad_3hosts.md`.
+- **Plan de Pruebas Maestro**: `docs-dev/doc-estabilizacion/pruebas-cp-manuales-auto/Plan de Pruebas — Sprint Post-Correcciones.md`.
+
+---
+
+## 🚀 Estado Actual: Host C UP & RUNNING (2026-04-07)
+
+- Split `ligacargos` **completado**: 2,513 activa (≥2026) + 192,545 histórico (≤2025)
+- Schema v2 completo + webapp PHP 7.4 adaptada en `main` (ex-`feature/upgrade-v2-win-xampp`, renombrada 2026-05-25)
+- Pipeline de Sincronización B → A → C **Maestro** (Comando: `Full-Pipeline-Sync`)
+- **Saneamiento Estructural (2026-04-26)**: 100% de asambleas consolidadas (max 3/día) y catálogos con llaves de unicidad.
+- Puertos Host C: Apache **7001**, MariaDB **7002**
+- Protocolo de Migración: `docs-dev/migration-aguav2/MIGRATION_PROTOCOL.md`
+- Checklist pase a producción: `docs-dev/migration-aguav2/host-c-setup/07_transferir_datos.md`
+
+## 🛡️ Automatización y Hardening Host C (2026-05-08)
+El entorno Windows 10 ha sido convertido en un Appliance Kiosko 100% automatizado:
+- **Agnóstico a Discos:** Todos los scripts y archivos de configuración (Apache/MySQL/PHP) heredan dinámicamente la unidad destino desde `config.ps1`.
+- **Auto-Arranque:** Tareas Programadas inician los servicios al logueo de sesión.
+- **Apagado Seguro:** El script `shutdown-server.ps1` fuerza un volcado físico en ZIP de la BD antes de apagar la máquina (evitando corrupciones).
+- **Kiosko Restringido:** El script `setup-full.ps1` crea una carpeta `aguav2` en el escritorio para la gestión técnica, y deja expuesto solo el Kiosko de Chrome y el botón de apagado para los operadores. Chrome está bloqueado vía Registro para evitar actualizaciones.
+
+> **⚠️ Filosofía de Uso**: Los scripts `Sync-*` y el bash `Full-Pipeline-Sync` **NO DEBEN EJECUTARSE NUNCA MÁS** a partir del 23 de mayo de 2026. Fueron utilizados exclusivamente para el setup/migración final entre Host B, Host A y hacia Host C (pase a producción). Host C ahora opera autónomamente y cualquier sincronización de este tipo destruiría los datos vivos en producción.
+
+> Ver tabla de comandos canónicos y comportamiento de flags en: `docs-dev/migration-aguav2/MIGRATION_PROTOCOL.md`
+
+## 🔒 Fixes de Seguridad en Motor de Recargos (2026-04-26)
+
+Dos guards implementados en `includes/negocio/cargos.php` para blindar el flag `recargo` del catálogo:
+
+| Guard | Función | Descripción |
+|-------|---------|-------------|
+| **G01** | `calcula_recargos()` | Retorno temprano si `recargo=0` — la ruta de aplicación manual ya no genera mora en cargos sin flag. |
+| **G02** | `creaCargo()` / `modificaCargo()` | Fuerza `recargo=0` server-side para cualquier categoría ≠ 2 (AGUA) o 3 (DRENAJE). Cierra la vía UI del checkbox "Es una multa". |
+
+**Cambios en BD asociados:**
+- `config_sistema.descripcion` extendida de `varchar(255)` → `TEXT` (Hosts A y C).
+- Nuevos parámetros: `paridad_anios_max_recargo=5`, `paridad_ignorar_fpago_fantasma=1`.
+- Script sincronizado: `docs-dev/migration-aguav2/host-c-setup/03_config_datos_catalogo.sql`.
+
+**UI:** `admin/operaciones/configuracion.php` rediseñado — 2 columnas, modal de confirmación con diff, descripciones desde BD. Ver regla F09 en `02-reglas-negocio.md`.
+
+---
+
+## 🔒 Fixes Financieros y Arquitectura Poka-Yoke (2026-04-28)
+
+Se implementaron parches estructurales para asegurar la integridad de la configuración y la reversibilidad forense:
+
+| Fix | Componente | Descripción |
+|-------|---------|-------------|
+| **Poka-Yoke Numérico** | `cargaConfig()` | Intercepción con `preg_match` y `str_replace` para sanear globalmente cualquier número formateado (ej. "10,500.00") en `config_sistema` antes del casteo `floatval/intval`. Protege 18 variables nativas. |
+| **Reversa Incondicional** | `_getReversal()` | El botón "Revertir transición" se ha desacoplado de las reglas de deuda y ahora es permanentemente visible en la UI tras un cambio de estado válido. |
+| **Límite Bomba** | `calcula_recargos()` | Se introdujo una regla de quiebre de deuda máxima (`reversal_threshold`). El motor deja de generar mora si el contrato alcanza este tope de deuda. Se desactiva con `0`. |
+
+---
+
+## 🐛 Bugs Host C corregidos (2026-04-07, commit `bd1cb2f`)
+
+Derivados del split `ligacargos`: 5 PHPs usaban `FROM ligacargos` directa (perdían datos ≤2025).
+
+| Archivo | Fix aplicado |
+|---------|-------------|
+| `reportes/listadeudores.php` | Eliminado cross join implícito `ligacargos.monto` → `vw_ligacargos_pendientes.monto` |
+| `reportes/carteravencida.php` | Añadido `OR anio IS NULL` para históricos migrados sin anio |
+| `reportes/concentradocortecajaresumen.php` | `FROM ligacargos` → `FROM vw_ligacargos_all` |
+| `includes/negocio/cargos.php` | SELECT duplicados y UPDATE masivo corregidos (UPDATE ahora aplica en ambas tablas) |
+| `docs-dev/sanemiento-limpieza/reportes/genera_csv.php` | 4 JOINs directos → `vw_ligacargos_all` |
+
+**Regla para nuevos PHPs**: Todo SELECT debe usar `vw_ligacargos_all` o `vw_ligacargos_pendientes`. Ver [skill-database-evolution/SKILL.md](.agents/skills/skill-database-evolution/SKILL.md).
+
+---
+---
+
+## 🏗️ Arquitectura Brain / Ground Truth (2026-04-09)
+
+Todo el contexto de agentes IA vive en `agua_chatledger`. El repo `agua` tiene solo symlinks (8/8).
+**Antes de cualquier refactoring de archivos meta, leer regla 08.**
+
+Validar integridad:
+```bash
+bash docs-dev/ga-cl-ia/chatledger_validate.sh
+```
+
+## 🛡️ Saneamiento y Resiliencia Extrema (2026-05-10)
+Se implementó un sistema de protección de triple capa para el Host C, blindándolo contra apagados abruptos y asegurando la veracidad de la auditoría:
+
+| Capa | Componente | Descripción |
+|:---:|---|---|
+| **L1** | **Smart Backup** | `start-webapps.ps1` detecta si falta el backup de ayer. Si hubo actividad y el backup no existe, realiza un "Catch-up Backup" antes de iniciar MySQL. Omite automáticamente días no laborables (domingos/feriados) si no hay cambios en la DB. |
+| **L2** | **Pre-Vuelo** | Limpieza automática de archivos `.pid` huérfanos y ejecución externa de `aria_chk --recover` sobre las tablas de sistema MariaDB antes de lanzar el servicio. |
+| **L3** | **Auto-Repair SQL** | Health-check automático al inicio. Si detecta el Error 176 (Aria checksum), invoca `repair_aria_system_tables.sql` para reconstruir las tablas físicamente antes de abrir Apache. |
+
+**Hitos de Estabilización (Sesión 2026-05-10):**
+*   **Watchdog Automatizado**: El `monitor-ups.ps1` ahora inicia automáticamente en modo oculto vía `start-webapps.ps1`, asegurando protección 24/7 sin intervención manual.
+*   **Fail-Safe UPS**: El cronómetro de apagado (8 min) ahora es independiente de la interacción del usuario (no bloqueante), garantizando el cierre seguro incluso en ausencia del operador.
+*   **Dashboard de Consolidación**: Interfaz de "Cierre Anual" rediseñada como un tablero pro-activo que muestra registros pendientes y estado de las tablas en tiempo real.
+*   **Auditoría Global**: El reporte de historial (`id=0`) fue habilitado para visualizar los logs de sistema (migraciones, splits, configuraciones) bajo el identificador universal de sistema.
+
+**Estabilización Financiera y Cartera Vencida (2026-05-11):**
+*   **Modelo de Cartera Homologado**: Se formalizó el cálculo de Cartera Vencida (17 categorías incluidas, 5 excluidas) asegurando el cuadre a $0 en el reporte de caja mediante la inclusión de recargos históricos (11, 16, 17) en R.CART.
+*   **UI/UX de Reportes**: Renombrado de botones de acceso y encabezados en `carteravencida.php` y `concentradocortecaja.php` para mayor claridad del operador (`RECUP. CARTERA <$anio_ref`).
+*   **Fuente de Verdad**: Documento maestro creado en `docs-dev/doc-estabilizacion/CARTERA_VENCIDA_MODELO_Y_REPORTES.md`.
+
+**Hitos de Estabilización y Hardening (2026-05-11 - Sesión 2):**
+*   **Conectividad Host C**: Restaurada tras apertura de Firewall en puerto **7002** (MariaDB) y **7001** (Apache). (La IP y credenciales han sido delegadas al SSOT maestro).
+*   **Auto-Elevación Poka-Yoke**: Todos los scripts de PowerShell (`.ps1`) ahora cuentan con lógica de auto-elevación a Administrador, eliminando errores de permisos del operador.
+*   **Configuración de Firewall**: Nuevo script `setup-firewall.ps1` integrado en el instalador maestro para automatizar la apertura de puertos en Windows 10.
+*   **Detección Robusta de Monitor**: El script `status-webapps.ps1` ahora detecta el Monitor UPS incluso si los permisos de visibilidad de procesos están restringidos.
+*   **Fix Kiosko Chrome**: Ajuste de rutas para el acceso directo de Google Chrome, garantizando compatibilidad con instalaciones de 64 bits.
+
+**Optimización de Homónimos y UI (2026-05-12):**
+*   **Manejo Estructural de Duplicados**: Se implementó la columna `id_homonimo_padre` en la tabla `usuario` para rastrear duplicados sin alterar el campo `nombre`. Se revirtieron todas las concatenaciones sucias (ej. `[DUPLICADO DE...]`) en la base de datos.
+*   **Semaforización de Usuarios**: El motor de búsqueda en "Nuevo Contrato" y "Cambio de Propietario" ahora incluye un semáforo visual (🟢, 🟡, 🔴) basado en el estado de los contratos de los homónimos detectados.
+*   **Detección Robusta**: La lógica de búsqueda fue blindada para ignorar acentos y sufijos temporales, asegurando la visibilidad total de registros suspendidos o duplicados.
+*   **Pipeline Clean-up**: El script `10c_saneamiento_duplicados.sql` fue refactorizado para usar el nuevo estándar estructural.
+
+**Pipeline B→A→C Estabilizado y Semáforos UI (2026-05-12 — Sesión 4):**
+*   **Ejecución Full-Pipeline-Sync**: Completado exitosamente — 1,409 usuarios, 1,410 contratos, 200,921 ligacargos (split 7,105 activos / 193,816 histórico). Todos los checks de integridad en ✅.
+*   **Hardening de Schema Base**: La columna `id_homonimo_padre` se integró permanentemente en `02_schema_tablas_base.sql`. El parche temporal `12_add_homonimo_padre.sql` fue eliminado. El pipeline es ahora idempotente ante DROP DATABASE.
+*   **Fix QA Pipeline**: `12_validate_pipeline.sql` actualizado para validar el vínculo estructural (`id_homonimo_padre`) en lugar de buscar sufijos sucios `[DUPLICADO...]` en el nombre.
+*   **Fix Visibilidad Homónimos**: `includes/negocio/usuarios.php` — la cláusula `HAVING` fue extendida para incluir usuarios con vínculo estructural (`id_homonimo_padre > 0`), evitando que homónimos sin contratos quedaran ocultos en el buscador.
+*   **Paleta de Colores Semáforo (UI definitiva)**: `views/usuarios/options.php` — 🟣 Lila `#ede0ff` para **cualquier usuario sin contratos** (independiente de homónimo); 🟢🟡🔴 semáforos solo para homónimos con contratos. Sin color = usuario normal con contratos.
+*   **Fix Auth `cambiaestado()`**: `includes/negocio/contratos.php` — verificación de contraseñas (presidente/tesorero) añadida antes de ejecutar el cambio de estado, siguiendo el mismo patrón de `cancelarCargos()`.
+*   **Documentación**: `analisis_paridad_3hosts.md` actualizado con la paleta de colores definitiva. `ISSUES_Y_BACKLOG.md` extraído de `CARTERA_VENCIDA_MODELO_Y_REPORTES.md`.
+
+**Unificación de Infraestructura e IPs (2026-05-12 — Sesión 5):**
+*   **Single Source of Truth (SSOT)**: Se centralizó la configuración de red y credenciales de bases de datos para los tres entornos. La **única fuente de verdad** para las IPs, puertos, usuarios y passwords de Host A, Host B y Host C es ahora el archivo `/home/carlos/GitHub/agua_chatledger/.mcp.json`. Queda estrictamente prohibido el uso de IPs *hardcodeadas* (como `192.168.1.84` o `192.168.1.81`) en scripts y documentos.
+
+**Estabilización de Usuario No Localizado y Seguridad (2026-05-13 — Sesión 1):**
+*   **Flujo NL Cascada**: Se estabilizó la declaratoria de "Usuario No Localizado", asegurando la suspensión masiva (Estado 4 - SDF) de todos sus contratos vinculados.
+*   **Hardening Poka-Yoke**: Refactorización de `usuarios.php` y `contratos.php` para usar `password_verify()` y `trim()`, eliminando errores por espacios accidentales y permitiendo el uso de hashes Bcrypt modernos.
+*   **Fix UI Reversión**: Se corrigió el bug de visibilidad que ocultaba el botón de reversión en contratos con Suspensión Definitiva. El botón es ahora permanente ante snapshots válidos.
+*   **Restablecer Usuario**: Nueva funcionalidad añadida para revertir manualmente el estado de un usuario NL a Activo, permitiendo correcciones administrativas sin bloqueos.
+*   **Auditoría de Contraseñas**: Análisis de gaps realizado en el módulo de Comité; identificado riesgo de visibilidad de contraseñas nuevas y falta de doble confirmación.
+
+**Producción Final y Hardening Host C (2026-05-13 — Sesión 2):**
+*   **Poka-Yoke de Duplicados**: Implementado bloqueo estructural en `views/usuarios/options.php`. Los registros con `id_homonimo_padre > 0` aparecen ahora deshabilitados (`disabled`) con icono 🚫 y redirección al ID Maestro, previniendo la fragmentación de datos en Nuevos Contratos y Cambios de Propietario.
+*   **Protección de Directorio**: Scripts `protect-folder.ps1` y `unprotect-folder.ps1` desplegados para blindar la raíz del sistema mediante reglas NTFS Deny. Se han actualizado para heredar dinámicamente la ruta desde `config.ps1`, corrigiendo el error de ruta inexistente.
+*   **Dashboard de Consolidación**: Integración de acceso directo a **App Asambleas** en la ficha de Configuración y Saneamiento, utilizando rutas relativas para portabilidad entre hosts.
+*   **Hardening UPS**: El tiempo de gracia en batería fue ajustado a **5 minutos** en `config.ps1`, optimizando el margen de seguridad para el cierre de la base de datos.
+*   **Control de Chrome**: Identificado el pipeline de congelamiento de versiones en `setup-kiosk-shortcut.ps1` y su reversión en `revert-chrome-updates.ps1`.
+
+**Estabilización de Interfaz, Saneamiento y Asamblea (2026-05-14):**
+*   **Fix "Lila" Universal**: Se expandió la lógica de semaforización en `options.php` para incluir a usuarios con historial (contratos en SDF) como candidatos a color Lila. Esto asegura que placeholders con historia previa sean identificables en búsquedas de ítem único.
+*   **Saneamiento Zenón (1590 Master)**: Se consolidó al usuario Zenón Martínez López bajo el ID **1590** (que contiene los datos de contacto y notas), reasignándole los contratos **1378** y **391**. El ID 1057 quedó vinculado como duplicado estructural.
+*   **Filtros Especiales**: Se añadieron opciones de filtrado granular ("Sin nombre, con dir." y "Sin nombre ni dir.") en el tablero de Usuarios Especiales.
+*   **Hardening Shutdown**: Se implementó manejo de errores robusto en `shutdown-server.ps1` y `stop-webapps.ps1`.
+*   **Optimización Ticket Asamblea**: 
+    *   Ficha de ticket ahora se cierra automáticamente tras imprimir o al hacer clic fuera (con auto-foco en buscador).
+    *   Formato optimizado para impresoras térmicas (Courier New, márgenes mínimos, sin corchetes en contratos).
+    *   **Ajuste Final (v2.1)**: Fuentes escaladas (Nombre 19px, Registro 17px, Comité 13px), todo justificado a la izquierda, y márgenes de impresión negativos (-4mm) para ahorro extremo de papel.
+    *   Periodo de gracia de **7 días** para reabrir asambleas cerradas.
+*   **Validación Full-Pipeline-Sync**: Ejecución verificada en Host C — 100% de paridad (200,931 cargos), saneamiento de folios mixtos (8 reparados) y consolidación real de Zenón confirmada.
+
+**Estabilización de UI, Cobros Libres y Control UPS (2026-05-16):**
+*   **Ajuste Libre de Cobros (LIBRE)**: Se implementó un flujo flexible donde cualquier cargo de catálogo que incluya la bandera `(LIBRE)` en su nombre disparará un *prompt* interactivo para que el operador defina el monto. El backend en `cargos.php` limpia la etiqueta y exenta el cargo de multiplicadores automáticos (comercial/metros) garantizando cuadres limpios.
+*   **Monitor UPS Condicional**: El "Vigilante" de fallos eléctricos (`monitor-ups.ps1`) ahora respeta la directiva `monitoreo_ups=1|0` del archivo `configuracion.txt`. Si se desactiva, el servidor inicia de forma normal sin invocar el bucle de ping ni detonar apagados automatizados (ideal para pruebas o escenarios sin UPS conectado al router).
+*   **Transparencia en Hardening NTFS**: Se ajustaron los mensajes de salida de `protect-folder.ps1` y `unprotect-folder.ps1` para reflejar y confirmar su capacidad nativa de blindar `xampp`, `aguav2` y `aguav2-2026` simultáneamente contra borrados **y renombrados**, dando plena certidumbre al operador.
+*   **Semaforización "Lila" Poka-Yoke**: Corrección en `nuevo.php` y `options.php` para asegurar que el `<select>` principal adopte el color visual de estado (Lila, Verde, Amarillo) del usuario seleccionado. Además, se refinó la regla Lila para incluir apropiadamente a usuarios históricos (con todos sus contratos en Estado 4), permitiendo actualizar sus nombres *Placeholder* de inmediato en la ficha de Nuevo Contrato.
+
+**Homologación de Catálogo, Reportes y Pipeline (2026-05-16 — Sesión 2):**
+*   **Ordenamiento de Reportes de Caja**: `concentradocortecajaresumen.php` refactorizado con array `$orden_impresion` que impone la jerarquía oficial de conceptos: Agua → Drenaje → Recargos → Servicios → Cartera → Trámites → Sanciones.
+*   **Sufijo A/D en Etiquetas**: Los conceptos de Reconexión y Cancelación de Servicio actualizados a "...A/D" en `concentradocortecaja.php` (glosario), `concentradocortecajaresumen.php` ($etiquetas), la tabla `categorias` en Host C (IDs 13 y 14) y en `08_saneamiento_catalogo.sql`.
+*   **Conceptos `(LIBRE)` en Pipeline**: Los dos conceptos `DIFERENCIA CAMBIO TOMA AGUA/DRENAJE (LIBRE)` — creados directamente en Host C — se agregaron a `08_saneamiento_catalogo.sql` con `INSERT IGNORE` para garantizar su presencia en cualquier rebuild del pipeline. Regla: `recargo=0`, `monto=0`, `anio=0`.
+*   **Homologación de Categorías (BD + Pipeline)**: Todos los nombres de la tabla `categorias` fueron homologados contra los `$etiquetas[]` de los reportes PHP. El Paso 3-B de `10_pipeline_saneamiento.sql` fue corregido: `REPLACE INTO` → `INSERT...ON DUPLICATE KEY UPDATE` (para respetar FK), + bloque `UPDATE` para IDs 1-18 con nombres completos y oficiales (ej. `MULTA POR DESPERDICIO DE AGUA`, `CONSTANCIA DE NO ADEUDO`, `REPARACION DE FUGAS`).
+*   **Guía del Catálogo de Cargos**: Nuevo documento `docs-dev/doc-estabilizacion/GUIA_CATALOGO_CARGOS.md` — referencia completa para operadores sobre: anatomía de un cargo, reglas por campo, cuándo usar `(LIBRE)` vs `repetir=1` (R(N)), conceptos por año, y catálogo de issues conocidos.
+*   **Homologación de MDs**: Nombres de categorías 13, 14, 20, 21, 22 actualizados en `CARTERA_VENCIDA_MODELO_Y_REPORTES.md` y `REPORTES_CAJA_CARTERA_DECLARACION.md` para alinearlos con los nombres canónicos de la BD.
+
+**Validación Pipeline Final y Blindaje (2026-05-18):**
+*   **Validación Full-Pipeline-Sync**: Confirmada la ejecución exitosa del pipeline completo hacia Host C. Datos migrados sin configuración drift: 1,409 usuarios, 201,130 cargos (7,207 activos / 193,923 históricos). Tablas Poka-Yoke intactas (`id_homonimo_padre` y bandera `repetir=1` en cobros LIBRE).
+*   **Manuales Operativos Creados**: Se generaron los documentos `doc_cajero_transiciones_estado.md`, `doc_tesorero_corte_cartera.md` y `doc_ejecutivo_comite.md` detallando las reglas de paridad, el modelo homologado de Cartera Vencida y la matriz de los 6 casos de transición de estados de contrato.
+*   **Blindaje Extremo NTFS**: Se actualizó `protect-folder.ps1` para aplicar bloqueos `(DE, DC)` directamente a la carpeta `$desktop\aguaV2` en lugar de solo a los `.lnk` internos. Esto impide el arrastre a papelera y borrado de los atajos administrativos.
+
+**Sincronización B→A y Hardening MySQL (2026-05-19):**
+*   **Fix Truncamiento de Datos**: Se identificó y resolvió una pérdida silenciosa de datos en la migración Host B → Host A causada por el límite `max_allowed_packet` (1MB). El script `run_sync.sh` fue endurecido con los parámetros extendidos (`--max_allowed_packet=512M`, `--net_buffer_length=10M`).
+*   **Auditoría y Paridad**: Se generaron reportes para identificar los contratos omitidos y se ejecutó un Full Sync restaurando la paridad estructural completa entre los Hosts A, B y C.
+
+**Normalización de Calles y Reporte de Impresión de Credenciales (2026-05-20):**
+*   **Agrupamiento de Calles Robusto**: Se implementó una lógica de agrupamiento por expresiones regulares en `listadeudoresxc.php` para normalizar acentos, números ordinales y calificativos de dirección en las calles, evitando truncamiento de palabras clave como "NORTE".
+*   **Impresión de Credenciales en Lote**: Se diseñó un nuevo visualizador tamaño Carta en `imprimir_credencial.php` que acomoda hasta 3 credenciales de `8.8 x 5.8 cm` por cara con guías de corte y línea discontinua de doblez central. Integrado mediante popup en `ficha.php`.
+
+**Optimización de Impresión de Reportes y Rotación de Respaldos (2026-05-21):**
+*   **Aprovechamiento de Papel en Reportes**: Se incrementó la capacidad de registros por página de **42 a 46** en 5 reportes críticos (`listacontratosestado.php`, `listacontratos.php`, `listacontratosnuevos.php`, `listausuarios.php`, y `listadeudores.php`). Esto optimiza el uso de la hoja tamaño Carta reduciendo las hojas impresas sin riesgo de desborde por nombres o domicilios largos.
+*   **Rotación de Respaldos de BD (PowerShell)**: Se implementó un algoritmo de rotación basado en cantidad (máximo 7 respaldos más recientes) tanto en `start-webapps.ps1` como en `stop-webapps.ps1`. Esto evita que las múltiples pruebas de apagado/encendido del operador saturen el disco con más de 7 archivos de respaldo (data-*.zip), reemplazando el filtrado temporal estático de 7 días.
+
+**Seguridad y Autocompletado de Credenciales (2026-05-22):**
+*   **Desactivación de Autocompletado en Login**: Se agregaron los atributos HTML `autocomplete="off"` en el `<form>` y en el input de usuario, y `autocomplete="new-password"` en el input de contraseña de `login/index.php`. Esto mitiga el comportamiento agresivo de autocompletado en navegadores modernos (Chrome/Firefox/Edge), manteniendo los campos limpios y evitando riesgos de seguridad por credenciales recordadas.
+
+**Habilitación HTTPS y Nginx en OCI VM (2026-05-23):**
+*   **Certificado Let's Encrypt**: Solicitud y activación exitosa de SSL para `www.caelitandem.lat` vía Certbot + plugin Nginx. Redirect 301 HTTP → HTTPS configurado limpiamente.
+*   **Auto-Renovación Blindada**: Script `/home/ubuntu/scripts/renew-certs.sh` + cron `/etc/cron.d/certbot-custom` (3:00 AM diario). Timer `certbot.timer` de systemd verificado activo.
+*   **Alcance**: Todos los sitios del OCI VM (www, kanboard, n8n, oken8n) ahora operan en HTTPS con renovación automática. Esta configuración es del servidor CaeliTandem, **no del proyecto Agua**.
+
+**Documentación de Entrega Sistema Agua V2 (2026-05-21—22):**
+*   **Manual Técnico-Operativo**: Generado `Manual_Entrega_Sistema_Recaudacion_Agua_V2.pdf` (HTML + PDF) vía script Python. Incluye arquitectura MVC, diagramas, catálogos y manuales por rol.
+*   **Apéndices**: Código fuente de `configuracion.php` y paleta de colores semáforo del buscador integrados como apéndices formales del documento de entrega.
+
+**Iniciación Repositorio emp_devhj_sw / CaeliTandem (2026-05-25):**
+*   **Nuevo Repo**: Inicializado `/home/carlos/GitHub/emp_devhj_sw/caelitandem_home` para el proyecto CaeliTandem SEO, separado del proyecto Agua.
+*   **Script dos-repos-branch-git.sh**: Creado en `docs-dev/scripts/` como guía de referencia del flujo canónico de commits para ambos repos (agua + agua_chatledger). **No es un script ejecutable automatizado**, sino documentación operativa del flujo Git de cierre de sesión.
+
+**Auditoría y Conciliación de Mora (2026-06-25):**
+*   **Auditoría Masiva JIT**: Creada la página `admin/operaciones/comparativa_masiva.php` conectada dinámicamente al SSOT `.mcp.json` para ejecutar un cruce en tiempo real del motor de recargos entre Host B y Host C para los 153 contratos críticos de alta mora.
+*   **Centralización de Saneamiento**: Toda la lógica de condonación de recibos históricos fue incorporada directamente en `configuracion.php`, eliminando la página redundante `soporte_reconciliados.php`.
+*   **Estabilización de Parámetros**: Se ajustó la ventana del motor de recargos en Host C a 27 años de deuda base y 10 años de recargos máximos. Además, la descripción de `reversal_threshold` fue reescrita eliminando términos informales.
+
+**Estabilización de Tomas Adicionales e Historial (2026-06-26):**
+*   **Auditoría de Tomas**: Se analizó la base de datos de Host C e identificamos que solo el contrato 858 tiene una segunda toma reciente (alta en 2026).
+*   **Clasificación de Historial de Tomas**: Se corrigió `historial_mov_cto.php` para clasificar las instalaciones de tomas bajo `tipo-conexion`, mostrando la frase "Se agregó Toma $n" en el filtro de "Tomas" en lugar de quedar en el fallback general.
+*   **Sincronización Poka-Yoke**: Se habilitó la sincronización automática de cargos anuales y recargos no pagados al modificarse la configuración de tomas en `generaCargosAutomaticos()` y `_sincronizaDeudaPendienteContrato()`.
+
+**Auditoría de Reportes Financieros y Estabilidad (2026-06-26 — Sesión 2):**
+*   **Auditoría Forense de Reportes Core**: Se validó la precisión de `concentradocortecaja.php`, `concentradocortecajaresumen.php`, `contratoinfo2.php`, `listadeudores.php`, `listadeudoresxc.php`, y `cargos_cancelados_sdf.php`. Todos los reportes financieros están 100% alineados con el motor JIT y las vistas normalizadas (`vw_ligacargos_all` y `vw_ligacargos_pendientes`), garantizando la paridad tras la partición de la base de datos.
+*   **Exclusión de Conceptos No Periódicos**: Se confirmó que los reportes de deuda y cartera vencida excluyen consistentemente las categorías no periódicas (6, 19, 20, 21, 22), los estados de contrato inactivos (4) y los usuarios no localizados (Estado 2), evitando la "deuda fantasma" en los cortes de caja y listas ordinarias de cobro.
+*   **Reporte de Auditoría**: Generado y guardado el análisis detallado en `/home/carlos/.gemini/antigravity/brain/03cd7422-1442-4d78-a978-010ca624cac1/reportes_analisis_forense.md`.
+
+**Última actualización**: 2026-08-05
+
+
+
+> [!IMPORTANT]
+> **Terminología de Sesión**:
+> - **Ground Truth**: Denominación del contexto maestro para **Claude**.
+> - **Runbook**: Denominación del contexto maestro (GEMINI.md + .agents/) para **Gemini**.
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 2:41 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 2:42 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 2:42 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 2:42 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 2:42 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 2:42 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 5 Aug 2026, 2:42 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+## User Request
+
+Valida conectividad a host c, via mcp y mysql client
+
+---
+
+### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:01 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `call_mcp_tool`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** CORTEX_STEP_STATUS_ERROR
+**Created:** 11 Aug 2026, 1:01 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `.mcp.json`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+{
+  "mcpServers": {
+    "bdawahost-a": {
+      "command": "docker",
+      "args": [
+        "exec",
+        "-i",
+        "context7-mcp-mysql",
+        "npx",
+        "-y",
+        "@f4ww4z/mcp-mysql-server",
+        "mysql://root:comite_2026@127.0.0.1:3306/awa"
+      ],
+      "env": {
+        "DOCKER_HOST": "unix:///var/run/docker.sock"
+      }
+    },
+    "bdawahost-b": {
+      "command": "docker",
+      "args": [
+        "exec",
+        "-i",
+        "context7-mcp-mysql",
+        "npx",
+        "-y",
+        "@f4ww4z/mcp-mysql-server", 
+        "mysql://root:sdrastbuy@192.168.1.120:3306/awa"
+      ],
+      "env": {
+        "DOCKER_HOST": "unix:///var/run/docker.sock"
+      }
+    },
+    "bdawahost-c": {
+      "command": "docker",
+      "args": [
+        "exec",
+        "-i",
+        "context7-mcp-mysql",
+        "npx",
+        "-y",
+        "@f4ww4z/mcp-mysql-server", 
+        "mysql://root:comite_2026@ 192.168.1.128:7002/awa"
+      ],
+      "env": {
+        "DOCKER_HOST": "unix:///var/run/docker.sock"
+      }
+    },
+    "bdawa2host-c": {
+      "command": "docker",
+      "args": [
+        "exec",
+        "-i",
+        "context7-mcp-mysql",
+        "npx",
+        "-y",
+        "@f4ww4z/mcp-mysql-server",
+        "mysql://root:comite_2026@192.168.0.100:7002/aguayd_os"
+      ],
+      "env": {
+        "DOCKER_HOST": "unix:///var/run/docker.sock"
+      }
+    }
+  }
+}
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `call_mcp_tool`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** CORTEX_STEP_STATUS_ERROR
+**Created:** 11 Aug 2026, 1:01 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `connect_db.json`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+{"name":"connect_db","description":"Connect to MySQL database","parameters":{"properties":{"database":{"description":"Database name","type":"string"},"host":{"description":"Database host","type":"string"},"password":{"description":"Database password","type":"string"},"port":{"description":"Database port (optional, default 3306)","type":"number"},"user":{"description":"Database user","type":"string"}},"required":["host","user","password","database"],"type":"object"}}
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `call_mcp_tool`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:02 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `call_mcp_tool`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** CORTEX_STEP_STATUS_ERROR
+**Created:** 11 Aug 2026, 1:02 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `query.json`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+{"name":"query","description":"Execute a SELECT query","parameters":{"properties":{"params":{"description":"Query parameters (optional)","items":{"type":["string","number","boolean","null"]},"type":"array"},"sql":{"description":"SQL SELECT query","type":"string"}},"required":["sql"],"type":"object"}}
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `call_mcp_tool`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:02 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:02 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+## User Request
+
+Me reporta el operador un issue , analiza la causa raiz para realizar las correcciones en forma correcta y completa sin pisar cosas que ya funcionan:
+Para contrato 570, 537 , etc. para abanico HISTORIAL RECIENTE...
+Se muestra lo siguiente en la ficha del contrato. 
+	ANUALIDAD DEL AGUA  2025 $220  lo correcto es 22 pesos ; pues 220 es la anualidad que no existe en el catalogo de recargos.
+	ANUALIDAD DEL DRENAJE 2025 $600  lo correcto 60 pesos  ; pues 600 es la anualidad que no existe en el catalogo de recargos.
+QUe LAS correciones se realicen como script y se coloquen  en /opt/lampp/htdocs/agua/docs-dev/pase-a-prod/aguav2-2026/fixes/fix-issue-03/ con base a como se resolvio /opt/lampp/htdocs/agua/docs-dev/pase-a-prod/aguav2-2026/fixes/fix-issue-01/
+
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `call_mcp_tool`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:09 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `output.txt`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+[
+  {
+    "id": 190940,
+    "numcontrato": "537",
+    "leyenda": "FALTA ASAMBLEA 28 SEP 2025",
+    "monto": "150.00",
+    "fcobro": "2025-09-28T10:51:27.000Z",
+    "fpago": "2025-09-28T00:00:00.000Z",
+    "estado": 0,
+    "recargo": "1.00",
+    "folio": 0,
+    "anio": 2025,
+    "numcontratoresp": "",
+    "idpago_vinc": null,
+    "categoria": 6,
+    "repetido": 0,
+    "f_sinc_mlt_asam": null
+  },
+  {
+    "id": 190941,
+    "numcontrato": "537",
+    "leyenda": "FALTA ASAMBLEA 29 JUN 2025",
+    "monto": "150.00",
+    "fcobro": "2025-03-30T15:32:28.000Z",
+    "fpago": "2025-03-30T00:00:00.000Z",
+    "estado": 0,
+    "recargo": "1.00",
+    "folio": 0,
+    "anio": 2025,
+    "numcontratoresp": "",
+    "idpago_vinc": null,
+    "categoria": 6,
+    "repetido": 0,
+    "f_sinc_mlt_asam": null
+  },
+  {
+    "id": 190942,
+    "numcontrato": "537",
+    "leyenda": "FALTA ASAMBLEA 30 MAR 2025",
+    "monto": "150.00",
+    "fcobro": "2025-04-24T13:37:23.000Z",
+    "fpago": "2025-04-24T00:00:00.000Z",
+    "estado": 0,
+    "recargo": "1.00",
+    "folio": 0,
+    "anio": 2025,
+    "numcontratoresp": "",
+    "idpago_vinc": null,
+    "categoria": 6,
+    "repetido": 0,
+    "f_sinc_mlt_asam": null
+  },
+  {
+    "id": 191248,
+    "numcontrato": "570",
+    "leyenda": "FALTA ASAMBLEA 28 SEP 2025",
+    "monto": "150.00",
+    "fcobro": "2025-09-28T10:51:07.000Z",
+    "fpago": "2025-09-28T00:00:00.000Z",
+    "estado": -1,
+    "recargo": "1.00",
+    "folio": 0,
+    "anio": 2025,
+    "numcontratoresp": "",
+    "idpago_vinc": null,
+    "categoria": 6,
+    "repetido": 0,
+    "f_sinc_mlt_asam": null
+  },
+  {
+    "id": 191249,
+    "numcontrato": "570",
+    "leyenda": "FALTA ASAMBLEA 29 JUN 2025",
+    "monto": "150.00",
+    "fcobro": "2025-03-30T15:32:08.000Z",
+    "fpago": "2025-03-30T00:00:00.000Z",
+    "estado": -1,
+    "recargo": "1.00",
+    "folio": 0,
+    "anio": 2025,
+    "numcontratoresp": "",
+    "idpago_vinc": null,
+    "categoria": 6,
+    "repetido": 0,
+    "f_sinc_mlt_asam": null
+  },
+  {
+    "id": 191250,
+    "numcontrato": "570",
+    "leyenda": "FALTA ASAMBLEA 30 MAR 2025",
+    "monto": "150.00",
+    "fcobro": "2025-04-24T13:37:24.000Z",
+    "fpago": "2025-04-24T00:00:00.000Z",
+    "estado": -1,
+    "recargo": "1.00",
+    "folio": 0,
+    "anio": 2025,
+    "numcontratoresp": "",
+    "idpago_vinc": null,
+    "categoria": 6,
+    "repetido": 0,
+    "f_sinc_mlt_asam": null
+  },
+  {
+    "id": 205177,
+    "numcontrato": "537",
+    "leyenda": "ANUALIDAD DEL DRENAJE 2025",
+    "monto": "220.00",
+    "fcobro": "2026-08-04T00:00:00.000Z",
+    "fpago": "2026-08-04T00:00:00.000Z",
+    "estado": 0,
+    "recargo": "1.00",
+    "folio": 0,
+    "anio": 2025,
+    "numcontratoresp": "",
+    "idpago_vinc": null,
+    "categoria": 3,
+    "repetido": 0,
+    "f_sinc_mlt_asam": null
+  },
+  {
+    "id": 205178,
+    "numcontrato": "537",
+    "leyenda": "RECARGO ENE 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "22.00",
+    "fcobro": "2026-08-04T00:00:00.000Z",
+    "fpago": "2026-08-04T00:00:00.000Z",
+    "estado": 0,
+    "recargo": "0.00",
+    "folio": 0,
+    "anio": 2025,
+    "numcontratoresp": null,
+    "idpago_vinc": null,
+    "categoria": 17,
+    "repetido": 0,
+    "f_sinc_mlt_asam": null
+  },
+  {
+    "id": 205179,
+    "numcontrato": "537",
+    "leyenda": "RECARGO FEB 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "22.00",
+    "fcobro": "2026-08-04T00:00:00.000Z",
+    "fpago": "2026-08-04T00:00:00.000Z",
+    "estado": 0,
+    "recargo": "0.00",
+    "folio": 0,
+    "anio": 2025,
+    "numcontratoresp": null,
+    "idpago_vinc": null,
+    "categoria": 17,
+    "repetido": 0,
+    "f_sinc_mlt_asam": null
+  },
+  {
+    "id": 205180,
+    "numcontrato": "537",
+    "leyenda": "RECARGO MAR 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "22.00",
+    "fcobro": "2026-08-04T00:00:00.000Z",
+    "fpago": "2026-08-04T00:00:00.000Z",
+    "estado": 0,
+    "recargo": "0.00",
+    "folio": 0,
+    "anio": 2025,
+    "numcontratoresp": null,
+    "idpago_vinc": null,
+    "categoria": 17,
+    "repetido": 0,
+    "f_sinc_mlt_asam": null
+  },
+  {
+    "id": 205181,
+    "numcontrato": "537",
+    "leyenda": "RECARGO ABR 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "22.00",
+    "fcobro": "2026-08-04T00:00:00.000Z",
+    "fpago": "2026-08-04T00:00:00.000Z",
+    "estado": 0,
+    "recargo": "0.00",
+    "folio": 0,
+    "anio": 2025,
+    "numcontratoresp": null,
+    "idpago_vinc": null,
+    "categoria": 17,
+    "repetido": 0,
+    "f_sinc_mlt_asam": null
+  },
+  {
+    "id": 205182,
+    "numcontrato": "537",
+    "leyenda": "RECARGO MAY 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "22.00",
+    "fcobro": "2026-08-04T00:00:00.000Z",
+    "fpago": "2026-08-04T00:00:00.000Z",
+    "estado": 0,
+    "recargo": "0.00",
+    "folio": 0,
+    "anio": 2025,
+    "numcontratoresp": null,
+    "idpago_vinc": null,
+    "categoria": 17,
+    "repetido": 0,
+    "f_sinc_mlt_asam": null
+  },
+  {
+    "id": 205183,
+    "numcontrato": "537",
+    "leyenda": "RECARGO JUN 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "22.00",
+    "fcobro": "2026-08-04T00:00:00.000Z",
+    "fpago": "2026-08-04T00:00:00.000Z",
+    "estado": 0,
+    "recargo": "0.00",
+    "folio": 0,
+    "anio": 2025,
+    "numcontratoresp": null,
+    "idpago_vinc": null,
+    "categoria": 17,
+    "repetido": 0,
+    "f_sinc_mlt_asam": null
+  },
+  {
+    "id": 205184,
+    "numcontrato": "537",
+    "leyenda": "RECARGO JUL 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "22.00",
+    "fcobro": "2026-08-04T00:00:00.000Z",
+    "fpago": "2026-08-04T00:00:00.000Z",
+    "estado": 0,
+    "recargo": "0.00",
+    "folio": 0,
+    "anio": 2025,
+    "numcontratoresp": null,
+    "idpago_vinc": null,
+    "categoria": 17,
+    "repetido": 0,
+    "f_sinc_mlt_asam": null
+  },
+  {
+    "id": 205185,
+    "numcontrato": "537",
+    "leyenda": "RECARGO AGO 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "22.00",
+    "fcobro": "2026-08-04T00:00:00.000Z",
+    "fpago": "2026-08-04T00:00:00.000Z",
+    "estado": 0,
+    "recargo": "0.00",
+    "folio": 0,
+    "anio": 2025,
+    "numcontratoresp": null,
+    "idpago_vinc": null,
+    "categoria": 17,
+    "repetido": 0,
+    "f_sinc_mlt_asam": null
+  },
+  {
+    "id": 205186,
+    "numcontrato": "537",
+    "leyenda": "RECARGO SEPT 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "22.00",
+    "fcobro": "2026-08-04T00:00:00.000Z",
+    "fpago": "2026-08-04T00:00:00.000Z",
+    "estado": 0,
+    "recargo": "0.00",
+    "folio": 0,
+    "anio": 2025,
+    "numcontratoresp": null,
+    "idpago_vinc": null,
+    "categoria": 17,
+    "repetido": 0,
+    "f_sinc_mlt_asam": null
+  },
+  {
+    "id": 205187,
+    "numcontrato": "537",
+    "leyenda": "RECARGO OCT 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "22.00",
+    "fcobro": "2026-08-04T00:00:00.000Z",
+    "fpago": "2026-08-04T00:00:00.000Z",
+    "estado": 0,
+    "recargo": "0.00",
+    "folio": 0,
+    "anio": 2025,
+    "numcontratoresp": null,
+    "idpago_vinc": null,
+    "categoria": 17,
+    "repetido": 0,
+    "f_sinc_mlt_asam": null
+  },
+  {
+    "id": 205188,
+    "numcontrato": "537",
+    "leyenda": "RECARGO NOV 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "600.00",
+    "fcobro": "2026-08-04T00:00:00.000Z",
+    "fpago": "2026-08-04T00:00:00.000Z",
+    "estado": 0,
+    "recargo": "0.00",
+    "folio": 0,
+    "anio": 2025,
+    "numcontratoresp": null,
+    "idpago_vinc": null,
+    "categoria": 17,
+    "repetido": 0,
+    "f_sinc_mlt_asam": null
+  },
+  {
+    "id": 205189,
+    "numcontrato": "537",
+    "leyenda": "RECARGO DIC 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "22.00",
+    "fcobro": "2026-08-04T00:00:00.000Z",
+    "fpago": "2026-08-04T00:00:00.000Z",
+    "estado": 0,
+    "recargo": "0.00",
+    "folio": 0,
+    "anio": 2025,
+    "numcontratoresp": null,
+    "idpago_vinc": null,
+    "categoria": 17,
+    "repetido": 0,
+    "f_sinc_mlt_asam": null
+  },
+  {
+    "id": 205352,
+    "numcontrato": "570",
+    "leyenda": "ANUALIDAD DEL AGUA 2025",
+    "monto": "600.00",
+    "fcobro": "2026-08-04T00:00:00.000Z",
+    "fpago": "2026-08-04T00:00:00.000Z",
+    "estado": 0,
+    "recargo": "1.00",
+    "folio": 0,
+    "anio": 2025,
+    "numcontratoresp": "",
+    "idpago_vinc": null,
+    "categoria": 2,
+    "repetido": 0,
+    "f_sinc_mlt_asam": null
+  },
+  {
+    "id": 205353,
+    "numcontrato": "570",
+    "leyenda": "RECARGO ENE 2025 - ANUALIDAD DEL AGUA 2025",
+    "monto": "60.00",
+    "fcobro": "2026-08-04T00:00:00.000Z",
+    "fpago": "2026-08-04T00:00:00.000Z",
+    "estado": 0,
+    "recargo": "0.00",
+    "folio": 0,
+    "anio": 2025,
+    "numcontratoresp": null,
+    "idpago_vinc": null,
+    "categoria": 16,
+    "repetido": 0,
+    "f_sinc_mlt_asam": null
+  },
+  {
+    "id": 205354,
+    "numcontrato": "570",
+    "leyenda": "RECARGO FEB 2025 - ANUALIDAD DEL AGUA 2025",
+    "monto": "60.00",
+    "fcobro": "2026-08-04T00:00:00.000Z",
+    "fpago": "2026-08-04T00:00:00.000Z",
+    "estado": 0,
+    "recargo": "0.00",
+    "folio": 0,
+    "anio": 2025,
+    "numcontratoresp": null,
+    "idpago_vinc": null,
+    "categoria": 16,
+    "repetido": 0,
+    "f_sinc_mlt_asam": null
+  },
+  {
+    "id": 205355,
+    "numcontrato": "570",
+    "leyenda": "RECARGO MAR 2025 - ANUALIDAD DEL AGUA 2025",
+    "monto": "60.00",
+    "fcobro": "2026-08-04T00:00:00.000Z",
+    "fpago": "2026-08-04T00:00:00.000Z",
+    "estado": 0,
+    "recargo": "0.00",
+    "folio": 0,
+    "anio": 2025,
+    "numcontratoresp": null,
+    "idpago_vinc": null,
+    "categoria": 16,
+    "repetido": 0,
+    "f_sinc_mlt_asam": null
+  },
+  {
+    "id": 205356,
+    "numcontrato": "570",
+    "leyenda": "RECARGO ABR 2025 - ANUALIDAD DEL AGUA 2025",
+    "monto": "60.00",
+    "fcobro": "2026-08-04T00:00:00.000Z",
+    "fpago": "2026-08-04T00:00:00.000Z",
+    "estado": 0,
+    "recargo": "0.00",
+    "folio": 0,
+    "anio": 2025,
+    "numcontratoresp": null,
+    "idpago_vinc": null,
+    "categoria": 16,
+    "repetido": 0,
+    "f_sinc_mlt_asam": null
+  },
+  {
+    "id": 205357,
+    "numcontrato": "570",
+    "leyenda": "RECARGO MAY 2025 - ANUALIDAD DEL AGUA 2025",
+    "monto": "60.00",
+    "fcobro": "2026-08-04T00:00:00.000Z",
+    "fpago": "2026-08-04T00:00:00.000Z",
+    "estado": 0,
+    "recargo": "0.00",
+    "folio": 0,
+    "anio": 2025,
+    "numcontratoresp": null,
+    "idpago_vinc": null,
+    "categoria": 16,
+    "repetido": 0,
+    "f_sinc_mlt_asam": null
+  },
+  {
+    "id": 205358,
+    "numcontrato": "570",
+    "leyenda": "RECARGO JUN 2025 - ANUALIDAD DEL AGUA 2025",
+    "monto": "60.00",
+    "fcobro": "2026-08-04T00:00:00.000Z",
+    "fpago": "2026-08-04T00:00:00.000Z",
+    "estado": 0,
+    "recargo": "0.00",
+    "folio": 0,
+    "anio": 2025,
+    "numcontratoresp": null,
+    "idpago_vinc": null,
+    "categoria": 16,
+    "repetido": 0,
+    "f_sinc_mlt_asam": null
+  },
+  {
+    "id": 205359,
+    "numcontrato": "570",
+    "leyenda": "RECARGO JUL 2025 - ANUALIDAD DEL AGUA 2025",
+    "monto": "60.00",
+    "fcobro": "2026-08-04T00:00:00.000Z",
+    "fpago": "2026-08-04T00:00:00.000Z",
+    "estado": 0,
+    "recargo": "0.00",
+    "folio": 0,
+    "anio": 2025,
+    "numcontratoresp": null,
+    "idpago_vinc": null,
+    "categoria": 16,
+    "repetido": 0,
+    "f_sinc_mlt_asam": null
+  },
+  {
+    "id": 205360,
+    "numcontrato": "570",
+    "leyenda": "RECARGO AGO 2025 - ANUALIDAD DEL AGUA 2025",
+    "monto": "60.00",
+    "fcobro": "2026-08-04T00:00:00.000Z",
+    "fpago": "2026-08-04T00:00:00.000Z",
+    "estado": 0,
+    "recargo": "0.00",
+    "folio": 0,
+    "anio": 2025,
+    "numcontratoresp": null,
+    "idpago_vinc": null,
+    "categoria": 16,
+    "repetido": 0,
+    "f_sinc_mlt_asam": null
+  },
+  {
+    "id": 205361,
+    "numcontrato": "570",
+    "leyenda": "RECARGO SEPT 2025 - ANUALIDAD DEL AGUA 2025",
+    "monto": "60.00",
+    "fcobro": "2026-08-04T00:00:00.000Z",
+    "fpago": "2026-08-04T00:00:00.000Z",
+    "estado": 0,
+    "recargo": "0.00",
+    "folio": 0,
+    "anio": 2025,
+    "numcontratoresp": null,
+    "idpago_vinc": null,
+    "categoria": 16,
+    "repetido": 0,
+    "f_sinc_mlt_asam": null
+  },
+  {
+    "id": 205362,
+    "numcontrato": "570",
+    "leyenda": "RECARGO OCT 2025 - ANUALIDAD DEL AGUA 2025",
+    "monto": "60.00",
+    "fcobro": "2026-08-04T00:00:00.000Z",
+    "fpago": "2026-08-04T00:00:00.000Z",
+    "estado": 0,
+    "recargo": "0.00",
+    "folio": 0,
+    "anio": 2025,
+    "numcontratoresp": null,
+    "idpago_vinc": null,
+    "categoria": 16,
+    "repetido": 0,
+    "f_sinc_mlt_asam": null
+  },
+  {
+    "id": 205363,
+    "numcontrato": "570",
+    "leyenda": "RECARGO NOV 2025 - ANUALIDAD DEL AGUA 2025",
+    "monto": "60.00",
+    "fcobro": "2026-08-04T00:00:00.000Z",
+    "fpago": "2026-08-04T00:00:00.000Z",
+    "estado": 0,
+    "recargo": "0.00",
+    "folio": 0,
+    "anio": 2025,
+    "numcontratoresp": null,
+    "idpago_vinc": null,
+    "categoria": 16,
+    "repetido": 0,
+    "f_sinc_mlt_asam": null
+  },
+  {
+    "id": 205364,
+    "numcontrato": "570",
+    "leyenda": "RECARGO DIC 2025 - ANUALIDAD DEL AGUA 2025",
+    "monto": "60.00",
+    "fcobro": "2026-08-04T00:00:00.000Z",
+    "fpago": "2026-08-04T00:00:00.000Z",
+    "estado": 0,
+    "recargo": "0.00",
+    "folio": 0,
+    "anio": 2025,
+    "numcontratoresp": null,
+    "idpago_vinc": null,
+    "categoria": 16,
+    "repetido": 0,
+    "f_sinc_mlt_asam": null
+  },
+  {
+    "id": 205387,
+    "numcontrato": "570",
+    "leyenda": "ANUALIDAD DEL DRENAJE 2025",
+    "monto": "220.00",
+    "fcobro": "2026-08-04T00:00:00.000Z",
+    "fpago": "2026-08-04T00:00:00.000Z",
+    "estado": 0,
+    "recargo": "1.00",
+    "folio": 0,
+    "anio": 2025,
+    "numcontratoresp": "",
+    "idpago_vinc": null,
+    "categoria": 3,
+    "repetido": 0,
+    "f_sinc_mlt_asam": null
+  },
+  {
+    "id": 205388,
+    "numcontrato": "570",
+    "leyenda": "RECARGO ENE 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "600.00",
+    "fcobro": "2026-08-04T00:00:00.000Z",
+    "fpago": "2026-08-04T00:00:00.000Z",
+    "estado": 0,
+    "recargo": "0.00",
+    "folio": 0,
+    "anio": 2025,
+    "numcontratoresp": null,
+    "idpago_vinc": null,
+    "categoria": 17,
+    "repetido": 0,
+    "f_sinc_mlt_asam": null
+  },
+  {
+    "id": 205389,
+    "numcontrato": "570",
+    "leyenda": "RECARGO FEB 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "220.00",
+    "fcobro": "2026-08-04T00:00:00.000Z",
+    "fpago": "2026-08-04T00:00:00.000Z",
+    "estado": 0,
+    "recargo": "0.00",
+    "folio": 0,
+    "anio": 2025,
+    "numcontratoresp": null,
+    "idpago_vinc": null,
+    "categoria": 17,
+    "repetido": 0,
+    "f_sinc_mlt_asam": null
+  },
+  {
+    "id": 205390,
+    "numcontrato": "570",
+    "leyenda": "RECARGO MAR 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "220.00",
+    "fcobro": "2026-08-04T00:00:00.000Z",
+    "fpago": "2026-08-04T00:00:00.000Z",
+    "estado": 0,
+    "recargo": "0.00",
+    "folio": 0,
+    "anio": 2025,
+    "numcontratoresp": null,
+    "idpago_vinc": null,
+    "categoria": 17,
+    "repetido": 0,
+    "f_sinc_mlt_asam": null
+  },
+  {
+    "id": 205391,
+    "numcontrato": "570",
+    "leyenda": "RECARGO ABR 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "220.00",
+    "fcobro": "2026-08-04T00:00:00.000Z",
+    "fpago": "2026-08-04T00:00:00.000Z",
+    "estado": 0,
+    "recargo": "0.00",
+    "folio": 0,
+    "anio": 2025,
+    "numcontratoresp": null,
+    "idpago_vinc": null,
+    "categoria": 17,
+    "repetido": 0,
+    "f_sinc_mlt_asam": null
+  },
+  {
+    "id": 205392,
+    "numcontrato": "570",
+    "leyenda": "RECARGO MAY 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "220.00",
+    "fcobro": "2026-08-04T00:00:00.000Z",
+    "fpago": "2026-08-04T00:00:00.000Z",
+    "estado": 0,
+    "recargo": "0.00",
+    "folio": 0,
+    "anio": 2025,
+    "numcontratoresp": null,
+    "idpago_vinc": null,
+    "categoria": 17,
+    "repetido": 0,
+    "f_sinc_mlt_asam": null
+  },
+  {
+    "id": 205393,
+    "numcontrato": "570",
+    "leyenda": "RECARGO JUN 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "220.00",
+    "fcobro": "2026-08-04T00:00:00.000Z",
+    "fpago": "2026-08-04T00:00:00.000Z",
+    "estado": 0,
+    "recargo": "0.00",
+    "folio": 0,
+    "anio": 2025,
+    "numcontratoresp": null,
+    "idpago_vinc": null,
+    "categoria": 17,
+    "repetido": 0,
+    "f_sinc_mlt_asam": null
+  },
+  {
+    "id": 205394,
+    "numcontrato": "570",
+    "leyenda": "RECARGO JUL 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "220.00",
+    "fcobro": "2026-08-04T00:00:00.000Z",
+    "fpago": "2026-08-04T00:00:00.000Z",
+    "estado": 0,
+    "recargo": "0.00",
+    "folio": 0,
+    "anio": 2025,
+    "numcontratoresp": null,
+    "idpago_vinc": null,
+    "categoria": 17,
+    "repetido": 0,
+    "f_sinc_mlt_asam": null
+  },
+  {
+    "id": 205395,
+    "numcontrato": "570",
+    "leyenda": "RECARGO AGO 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "220.00",
+    "fcobro": "2026-08-04T00:00:00.000Z",
+    "fpago": "2026-08-04T00:00:00.000Z",
+    "estado": 0,
+    "recargo": "0.00",
+    "folio": 0,
+    "anio": 2025,
+    "numcontratoresp": null,
+    "idpago_vinc": null,
+    "categoria": 17,
+    "repetido": 0,
+    "f_sinc_mlt_asam": null
+  },
+  {
+    "id": 205396,
+    "numcontrato": "570",
+    "leyenda": "RECARGO SEPT 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "220.00",
+    "fcobro": "2026-08-04T00:00:00.000Z",
+    "fpago": "2026-08-04T00:00:00.000Z",
+    "estado": 0,
+    "recargo": "0.00",
+    "folio": 0,
+    "anio": 2025,
+    "numcontratoresp": null,
+    "idpago_vinc": null,
+    "categoria": 17,
+    "repetido": 0,
+    "f_sinc_mlt_asam": null
+  },
+  {
+    "id": 205397,
+    "numcontrato": "570",
+    "leyenda": "RECARGO OCT 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "220.00",
+    "fcobro": "2026-08-04T00:00:00.000Z",
+    "fpago": "2026-08-04T00:00:00.000Z",
+    "estado": 0,
+    "recargo": "0.00",
+    "folio": 0,
+    "anio": 2025,
+    "numcontratoresp": null,
+    "idpago_vinc": null,
+    "categoria": 17,
+    "repetido": 0,
+    "f_sinc_mlt_asam": null
+  },
+  {
+    "id": 205398,
+    "numcontrato": "570",
+    "leyenda": "RECARGO NOV 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "220.00",
+    "fcobro": "2026-08-04T00:00:00.000Z",
+    "fpago": "2026-08-04T00:00:00.000Z",
+    "estado": 0,
+    "recargo": "0.00",
+    "folio": 0,
+    "anio": 2025,
+    "numcontratoresp": null,
+    "idpago_vinc": null,
+    "categoria": 17,
+    "repetido": 0,
+    "f_sinc_mlt_asam": null
+  },
+  {
+    "id": 205399,
+    "numcontrato": "570",
+    "leyenda": "RECARGO DIC 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "220.00",
+    "fcobro": "2026-08-04T00:00:00.000Z",
+    "fpago": "2026-08-04T00:00:00.000Z",
+    "estado": 0,
+    "recargo": "0.00",
+    "folio": 0,
+    "anio": 2025,
+    "numcontratoresp": null,
+    "idpago_vinc": null,
+    "categoria": 17,
+    "repetido": 0,
+    "f_sinc_mlt_asam": null
+  }
+]
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `call_mcp_tool`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:09 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `call_mcp_tool`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:09 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `output.txt`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+[
+  {
+    "numconsec": 599,
+    "nombre": "ANUALIDAD DEL AGUA 2025",
+    "monto": "600.00",
+    "recargo": 1,
+    "observaciones": "",
+    "mensualidades": 0,
+    "categoria": 2,
+    "estado": 1,
+    "anio": 2025,
+    "repetir": 0,
+    "metros": 0,
+    "automatico": 1,
+    "monto_comercial": "1200.00"
+  },
+  {
+    "numconsec": 600,
+    "nombre": "ANUALIDAD DEL DRENAJE 2025",
+    "monto": "220.00",
+    "recargo": 1,
+    "observaciones": "",
+    "mensualidades": 0,
+    "categoria": 3,
+    "estado": 1,
+    "anio": 2025,
+    "repetir": 0,
+    "metros": 0,
+    "automatico": 1,
+    "monto_comercial": "440.00"
+  },
+  {
+    "numconsec": 601,
+    "nombre": "FALTA ASAMBLEA 30 MAR 2025",
+    "monto": "150.00",
+    "recargo": 0,
+    "observaciones": "",
+    "mensualidades": 0,
+    "categoria": 6,
+    "estado": 1,
+    "anio": 2025,
+    "repetir": 0,
+    "metros": 0,
+    "automatico": 0,
+    "monto_comercial": "0.00"
+  },
+  {
+    "numconsec": 602,
+    "nombre": "RECARGO DE DRENAJE ENE - MAR 2025",
+    "monto": "66.00",
+    "recargo": 0,
+    "observaciones": "",
+    "mensualidades": 0,
+    "categoria": 17,
+    "estado": 1,
+    "anio": 2025,
+    "repetir": 1,
+    "metros": 0,
+    "automatico": 0,
+    "monto_comercial": "0.00"
+  },
+  {
+    "numconsec": 603,
+    "nombre": "RECARGO DE AGUA ENE - MAR 2025",
+    "monto": "180.00",
+    "recargo": 0,
+    "observaciones": "",
+    "mensualidades": 0,
+    "categoria": 16,
+    "estado": 1,
+    "anio": 2025,
+    "repetir": 0,
+    "metros": 0,
+    "automatico": 0,
+    "monto_comercial": "0.00"
+  },
+  {
+    "numconsec": 604,
+    "nombre": "RECARGO DE DRENAJE 2025 (X MES) 2025 (POR MES)",
+    "monto": "22.00",
+    "recargo": 0,
+    "observaciones": "",
+    "mensualidades": 1,
+    "categoria": 17,
+    "estado": 1,
+    "anio": 2025,
+    "repetir": 1,
+    "metros": 0,
+    "automatico": 0,
+    "monto_comercial": "0.00"
+  },
+  {
+    "numconsec": 605,
+    "nombre": "FALTA ASAMBLEA 24 abr 2025",
+    "monto": "150.00",
+    "recargo": 0,
+    "observaciones": "",
+    "mensualidades": 0,
+    "categoria": 6,
+    "estado": 1,
+    "anio": 2025,
+    "repetir": 0,
+    "metros": 0,
+    "automatico": 0,
+    "monto_comercial": "0.00"
+  },
+  {
+    "numconsec": 606,
+    "nombre": "FALTA ASAMBLEA 31 MAR 2025",
+    "monto": "150.00",
+    "recargo": 0,
+    "observaciones": "",
+    "mensualidades": 0,
+    "categoria": 6,
+    "estado": 1,
+    "anio": 2025,
+    "repetir": 0,
+    "metros": 0,
+    "automatico": 0,
+    "monto_comercial": "0.00"
+  },
+  {
+    "numconsec": 607,
+    "nombre": "RECARGO DE DRENAJE ABR 2025",
+    "monto": "22.00",
+    "recargo": 0,
+    "observaciones": "",
+    "mensualidades": 0,
+    "categoria": 17,
+    "estado": 1,
+    "anio": 2025,
+    "repetir": 0,
+    "metros": 0,
+    "automatico": 0,
+    "monto_comercial": "0.00"
+  },
+  {
+    "numconsec": 608,
+    "nombre": "RECARGO DE AGUA ABR 2025",
+    "monto": "60.00",
+    "recargo": 0,
+    "observaciones": "",
+    "mensualidades": 0,
+    "categoria": 16,
+    "estado": 1,
+    "anio": 2025,
+    "repetir": 0,
+    "metros": 0,
+    "automatico": 0,
+    "monto_comercial": "0.00"
+  },
+  {
+    "numconsec": 609,
+    "nombre": "RECARGO DE DRENAJE MAY 2025",
+    "monto": "22.00",
+    "recargo": 0,
+    "observaciones": "",
+    "mensualidades": 0,
+    "categoria": 17,
+    "estado": 1,
+    "anio": 2025,
+    "repetir": 0,
+    "metros": 0,
+    "automatico": 0,
+    "monto_comercial": "0.00"
+  },
+  {
+    "numconsec": 611,
+    "nombre": "RECARGO DE DRENAJE JUN 2025",
+    "monto": "22.00",
+    "recargo": 0,
+    "observaciones": "",
+    "mensualidades": 0,
+    "categoria": 17,
+    "estado": 1,
+    "anio": 2025,
+    "repetir": 0,
+    "metros": 0,
+    "automatico": 0,
+    "monto_comercial": "0.00"
+  },
+  {
+    "numconsec": 612,
+    "nombre": "FALTA ASAMBLEA 29 JUN 2025",
+    "monto": "150.00",
+    "recargo": 0,
+    "observaciones": "",
+    "mensualidades": 0,
+    "categoria": 6,
+    "estado": 1,
+    "anio": 2025,
+    "repetir": 0,
+    "metros": 0,
+    "automatico": 0,
+    "monto_comercial": "0.00"
+  },
+  {
+    "numconsec": 613,
+    "nombre": "RECARGO DE DRENAJE JUL 2025",
+    "monto": "22.00",
+    "recargo": 0,
+    "observaciones": "",
+    "mensualidades": 0,
+    "categoria": 17,
+    "estado": 1,
+    "anio": 2025,
+    "repetir": 0,
+    "metros": 0,
+    "automatico": 0,
+    "monto_comercial": "0.00"
+  },
+  {
+    "numconsec": 615,
+    "nombre": "RECARGO DE DRENAJE AGO 2025",
+    "monto": "22.00",
+    "recargo": 0,
+    "observaciones": "",
+    "mensualidades": 0,
+    "categoria": 17,
+    "estado": 1,
+    "anio": 2025,
+    "repetir": 0,
+    "metros": 0,
+    "automatico": 0,
+    "monto_comercial": "0.00"
+  },
+  {
+    "numconsec": 616,
+    "nombre": "RECARGO DE DRENAJE SEP 2025",
+    "monto": "22.00",
+    "recargo": 0,
+    "observaciones": "",
+    "mensualidades": 0,
+    "categoria": 17,
+    "estado": 1,
+    "anio": 2025,
+    "repetir": 0,
+    "metros": 0,
+    "automatico": 0,
+    "monto_comercial": "0.00"
+  },
+  {
+    "numconsec": 618,
+    "nombre": "FALTA ASAMBLEA 28 SEP 2025",
+    "monto": "150.00",
+    "recargo": 0,
+    "observaciones": "",
+    "mensualidades": 0,
+    "categoria": 6,
+    "estado": 1,
+    "anio": 2025,
+    "repetir": 0,
+    "metros": 0,
+    "automatico": 0,
+    "monto_comercial": "0.00"
+  },
+  {
+    "numconsec": 620,
+    "nombre": "RECARGO DE DRENAJE OCT 2025",
+    "monto": "22.00",
+    "recargo": 0,
+    "observaciones": "",
+    "mensualidades": 0,
+    "categoria": 17,
+    "estado": 1,
+    "anio": 2025,
+    "repetir": 0,
+    "metros": 0,
+    "automatico": 0,
+    "monto_comercial": "0.00"
+  }
+]
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `call_mcp_tool`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:09 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `calcula_recargos`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:09 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `cargos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L449-599)</summary>
+
+**Path:** `Unknown file`
+
+```
+						$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato) VALUES(NOW(), 'Sincronización Asamblea', 'estado=0', '$sinc_despues', '$cto_sinc_esc')");
+					}
+				}
+			} else {
+				$y->q("CALL sp_pagar_cargo(0, '$idc', \"$leyendaval\", $repetidoval, $folio_sig, '', $monto_val, @filas)");
+			}
+		}
+
+		// ═══ Snapshot financiero POST-cobro ═══
+		$res_post = $y->q("SELECT COUNT(*) AS n, IFNULL(SUM(monto),0) AS total FROM vw_ligacargos_pendientes WHERE numcontrato = '$idc'");
+		$post = $y->fetch_array($res_post);
+		$n_post = intval($post['n']);
+		$tot_post = number_format(floatval($post['total']), 2);
+		$cargos_liq = $n_pre - $n_post;
+		$pre_esc = $y->real_escape_string("Adeudos: $n_pre | Deuda: \$$tot_pre");
+		$sinc_nota = !empty($ctos_sinc) ? ' | Asamblea sincronizada en cto(s): ' . implode(', ', $ctos_sinc) : '';
+		$post_esc = $y->real_escape_string("Adeudos: $n_post | Deuda: \$$tot_post | Cargos liquidados: $cargos_liq$sinc_nota");
+
+		// Auditoría de Pago
+		$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato) 
+		       VALUES(NOW(), 'Cobro de Cargos', 'Folio: $folio_sig. $pre_esc', 'Cobrado: \$$totalmarcado. $post_esc', '$idc')");
+
+		return "<script>cargaDatosContrato('$idc'); window.open('reportes/recibo.php?folio=$folio_sig', 'recibo', 'width=640,height=450,scrollbars=yes');</script>";
+
+	} else { // Cancelacion de cargos.
+		$res1 = $y->q("select contrasena from contrasenas where rol = 'presidente'");
+		$res2 = $y->q("select contrasena from contrasenas where rol = 'tesorero'");
+
+		list($contrasena_presidente) = $y->fetch_array($res1);
+		list($contrasena_tesorero) = $y->fetch_array($res2);
+		// Bloque comentarizado para pruebas auth.
+		if (md5($rp) == $contrasena_presidente && md5($rt) == $contrasena_tesorero) {
+			$cfg = cargaConfig($y);
+			$min_car = intval(isset($cfg['cancelacion_min_caracteres']) ? $cfg['cancelacion_min_caracteres'] : 20);
+			if (strlen($texto) > $min_car) {
+				// ═══ Snapshot financiero PRE-cancelación ═══
+				$res_pre = $y->q("SELECT COUNT(*) AS n, IFNULL(SUM(monto),0) AS total FROM vw_ligacargos_pendientes WHERE numcontrato = '$idc'");
+				$pre = $y->fetch_array($res_pre);
+				$n_pre = intval($pre['n']);
+				$tot_pre = number_format(floatval($pre['total']), 2);
+
+				$x = "";
+				foreach ($pago as $valor) {
+					$lm = explode('|', $valor);
+					$id_c_val = intval($lm[0]);
+					$leyenda_esc = $y->real_escape_string($lm[1]);
+					$monto_c = floatval($lm[2]);
+					$rep_val = isset($lm[3]) ? intval($lm[3]) : 0;
+
+					$res_id_act = $y->q("SELECT id, folio FROM ligacargos WHERE numcontrato='$idc' AND leyenda='$leyenda_esc' AND repetido=$rep_val AND estado=0 LIMIT 1");
+					$res_id_his = $y->q("SELECT id, folio FROM ligacargos_historico WHERE numcontrato='$idc' AND leyenda='$leyenda_esc' AND repetido=$rep_val AND estado=0 LIMIT 1");
+					$row_id = $y->fetch_array($res_id_act) ?: $y->fetch_array($res_id_his);
+					$id_str = $row_id ? " [ID: {$row_id['id']}" . ($row_id['folio'] > 0 ? " | Folio: {$row_id['folio']}" : "") . "]" : "";
+
+					$y->q("CALL sp_cancelar_cargo(0, '$idc', '$leyenda_esc', $rep_val, @filas)");
+					$x .= ((strlen($x) > 0) ? ", " : "") . $lm[1] . (($lm[3] == 0) ? "" : " (r$lm[3])") . " (\$" . $lm[2] . ")" . $id_str;
+				}
+				// Detección robusta de operador
+				$ses_usr = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
+				$operador = 'cajero';
+				if (is_string($ses_usr) && $ses_usr !== '') {
+					$operador = $ses_usr;
+				} elseif (is_object($ses_usr) && get_class($ses_usr) !== '__PHP_Incomplete_Class' && method_exists($ses_usr, 'getNombre')) {
+					$operador = $ses_usr->getNombre();
+				}
+
+				$x .= " | Operador: " . $operador;
+
+				// ═══ Snapshot financiero POST-cancelación ═══
+				$res_post = $y->q("SELECT COUNT(*) AS n, IFNULL(SUM(monto),0) AS total FROM vw_ligacargos_pendientes WHERE numcontrato = '$idc'");
+				$post = $y->fetch_array($res_post);
+				$n_post = intval($post['n']);
+				$tot_post = number_format(floatval($post['total']), 2);
+				$cargos_canc = $n_pre - $n_post;
+				$monto_canc = number_format(floatval($pre['total']) - floatval($post['total']), 2);
+
+				$texto_esc = $y->real_escape_string($texto);
+				$x_esc = $y->real_escape_string($x);
+				$pre_esc = $y->real_escape_string("Adeudos: $n_pre | Deuda: \$$tot_pre");
+				$post_esc = $y->real_escape_string("Adeudos: $n_post | Deuda: \$$tot_post | Cancelados: $cargos_canc (-\$$monto_canc)");
+				$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato) VALUES(NOW(), 'cancelacion', '$texto_esc. $pre_esc', '$x_esc | $post_esc', '$idc')");
+				return "<script>cargaDatosContrato('$idc');</script>";
+			} else {
+				return $templates->render('sistema/mensaje', [
+					'titulo' => 'Error',
+					'mensaje' => 'Debe escribir a detalle el porqu&eacute; de la cancelaci&oacute;n de estos cargos (m&iacute;nimo ' . $min_car . ' caracteres).'
+				]);
+			}
+
+		} else {
+			return $templates->render('sistema/mensaje', [
+				'titulo' => 'Error',
+				'mensaje' => 'Las contrase&ntilde;as no son las correctas.'
+			]);
+		}
+	}
+}
+
+function aplicacargos($c, $cargo)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+	$cfg = cargaConfig($y);
+
+	if (!is_array($cargo) || count($cargo) == 0) {
+		return $templates->render('sistema/mensaje', [
+			'titulo' => 'Información',
+			'mensaje' => 'No se seleccionaron cargos para aplicar.'
+		]);
+	}
+
+	$n = 0;
+	$m = 0;
+	$alertas = array();
+	$cargos_aplicados_detalle = array();
+	foreach ($cargo as $leyenda_input) {
+		$a = explode('|', $leyenda_input);
+		$contratos_lista = is_array($c) ? $c : array($c);
+
+		foreach ($contratos_lista as $numcontrato) {
+			// Validar estado del contrato
+			$res_edo = $y->q("SELECT estado FROM contrato WHERE numcontrato='$numcontrato'");
+			list($edo_cto) = $y->fetch_array($res_edo);
+			if (intval($edo_cto) === 4) {
+				$alertas[] = "El contrato <b>$numcontrato</b> se encuentra en Suspensión Definitiva y no puede recibir nuevos cargos.";
+				continue;
+			}
+
+			// Consultar tomas activas para este contrato
+			$res_tomas = $y->q("SELECT COUNT(*) FROM contrato_toma WHERE numcontrato='$numcontrato' AND tiene_agua=1 AND estado_agua=1");
+			list($n_tomas_agua) = $y->fetch_array($res_tomas);
+			$res_tomas_d = $y->q("SELECT COUNT(*) FROM contrato_toma WHERE numcontrato='$numcontrato' AND tiene_drenaje=1 AND estado_drenaje=1");
+			list($n_tomas_drenaje) = $y->fetch_array($res_tomas_d);
+			$res_tipo = $y->q("SELECT MAX(tipo) FROM contrato_toma WHERE numcontrato='$numcontrato'");
+			list($es_comercial) = $y->fetch_array($res_tipo);
+			$es_comercial = intval($es_comercial);
+
+			$res2 = $y->q("select metros from contrato where numcontrato = '$numcontrato'");
+			list($metros) = $y->fetch_array($res2);
+
+			$res3 = $y->q("select metros, monto_comercial from cargos where UCASE(nombre) = UCASE('$a[0]') limit 1");
+			list($aplicametros, $mon_com_db) = $y->fetch_array($res3);
+
+			$leyenda = $a[0];
+			$monto = floatval($a[1]);
+			$mon_com = floatval($mon_com_db);
+			$recargo = $a[2];
+			$anio = $a[3];
+			$categoria = $a[4];
+			$repetir = $a[5];
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `ANUALIDAD DEL`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:09 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `contratos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L99-249)</summary>
+
+**Path:** `Unknown file`
+
+```
+				'normal'    => floatval($tf['monto']),
+				'comercial' => $mon_com
+			);
+		}
+	}
+
+	// --- CARGOS AUTOMÁTICOS y Sincronización de Recargos JIT al cargar el contrato ---
+	if ($estado == 1) {
+		generaCargosAutomaticos($id, $y);
+		_sincronizaDeudaPendienteContrato($id, $y);
+	}
+
+	// --- Otros contratos del mismo usuario ---
+	$res2 = $y->q("SELECT numcontrato, domicilio, estado FROM contrato WHERE numusuario=$numusuario AND numcontrato != '$id'");
+	$otros_contratos = array();
+	while (list($contrato_o, $domicilio_o, $estado_o) = $y->fetch_array($res2)) {
+		$otros_contratos[] = array('contrato' => $contrato_o, 'domicilio' => $domicilio_o, 'estado' => $estado_o);
+	}
+
+	// --- Adeudos ---
+	// Categorías de recargo según config_sistema (16=agua, 17=drenaje).
+	// El campo ligacargos.recargo contiene el monto del recargo (float), NO es bandera booleana.
+	// La clasificación cargo/recargo se determina por categoria, no por el campo recargo.
+	$cat_recargo_agua   = intval(obtenerValorSeguro($cfg, 'recargo_categoria_agua',   16));
+	$cat_recargo_drenaje = intval(obtenerValorSeguro($cfg, 'recargo_categoria_drenaje', 17));
+	$res = $y->q("SELECT id_cargo, leyenda, monto, recargo, repetido, categoria, anio FROM vw_ligacargos_pendientes WHERE numcontrato='$id' ORDER BY anio");
+	$npagos = $y->num_rows($res);
+	$adeudos = array();
+	$total = 0;
+	$recargos = 0;
+	while ($resulta = $y->fetch_array($res)) {
+		$es_recargo = ($resulta['categoria'] == $cat_recargo_agua || $resulta['categoria'] == $cat_recargo_drenaje);
+		$resulta['recargo'] = $es_recargo ? 1 : 0; // normalizar flag para la vista (coloreado rojo)
+		$adeudos[] = $resulta;
+		$total    += $es_recargo ? 0 : $resulta['monto'];
+		$recargos += $es_recargo ? $resulta['monto'] : 0;
+	}
+
+	// --- Cargos fuente ---
+	$res = $y->q("SELECT numconsec, nombre, monto, monto_comercial, recargo, observaciones, mensualidades, anio, categoria, repetir, metros FROM cargos WHERE estado=1 ORDER BY nombre");
+	$cargos_fuente = array();
+	while ($cf = $y->fetch_array($res)) {
+		$cargos_fuente[] = array(
+			'numconsec'    => $cf[0],
+			'nombrec'      => $cf[1],
+			'monto'        => $cf[2],
+			'monto_com'    => $cf[3],
+			'recargo'      => $cf[4],
+			'observaciones'=> $cf[5],
+			'mensualidades'=> $cf[6],
+			'anio'         => $cf[7],
+			'categoria'    => $cf[8],
+			'repetir'      => $cf[9],
+			'metros2'      => $cf[10]
+		);
+	}
+
+	// --- Notas ---
+	$q1 = "SELECT id, SUBSTRING(fecha,1,10) AS fecha, texto, estado FROM notas WHERE contrato='$id' AND estado <> -1 ORDER BY estado DESC, fecha DESC";
+	$res_notas = $y->q($q1);
+	$notas = array();
+	while ($n = $y->fetch_array($res_notas)) {
+		$notas[] = $n;
+	}
+
+	// --- Cargos cancelados ---
+	// Host C: ligacargos tiene PK id AUTO_INCREMENT — se pasa a regresarCargoCancelado como discriminador
+	// id_cargo: COALESCE activa→historico (Regla F06 — split anio<=2025 en ligacargos_historico)
+	$resc = $y->q("SELECT leyenda, monto, recargo, repetido, categoria, es_recargo_moratorio, fcobro,
+	               COALESCE(
+	                   (SELECT id FROM ligacargos          WHERE numcontrato='$id' AND leyenda=v.leyenda AND repetido=v.repetido AND estado=-1 LIMIT 1),
+	                   (SELECT id FROM ligacargos_historico WHERE numcontrato='$id' AND leyenda=v.leyenda AND repetido=v.repetido AND estado=-1 LIMIT 1)
+	               ) AS id_cargo
+	               FROM vw_ligacargos_all v WHERE numcontrato='$id' AND estado=-1 ORDER BY fcobro");
+	$npagosc = $y->num_rows($resc);
+	$cancelados = array();
+	while ($cc = $y->fetch_array($resc)) {
+		// Normalizar bandera para ficha.php (rojo cursiva en cargos cancelados)
+		$cc['recargo'] = $cc['es_recargo_moratorio'] ? 1 : 0;
+		$cancelados[] = $cc;
+	}
+
+	// --- Histórico cancelaciones ---
+	$resnc = $y->q("SELECT antes, despues FROM cambios WHERE numcontrato='$id' AND descripcion='cancelacion' ORDER BY fecha DESC");
+	$nnotas = $y->num_rows($resnc);
+	$notas_cancelacion = array();
+	while ($nc = $y->fetch_array($resnc)) {
+		$notas_cancelacion[] = $nc;
+	}
+
+	$tiposdeestado = array("1" => "Activo", "2" => "Suspensi&oacute;n Temporal", "3" => "Suspensi&oacute;n Administrativa", "4" => "Suspensi&oacute;n Definitiva");
+
+	$letras = $y->q("SELECT numcontratoletras FROM contrato WHERE numcontrato='$id' ORDER BY numcontrato");
+	list($numcontratoletras) = $y->fetch_array($letras);
+
+	return $templates->render('contratos/ficha', array(
+		'id'                  => $id,
+		'nombre'              => $nombre,
+		'numusuario'          => $numusuario,
+		'domicilio'           => $domicilio,
+		'masdatos'            => $masdatos,
+		'tipo'                => $tipo,
+		'agua'                => $agua,
+		'drenaje'             => $drenaje,
+		'observaciones'       => $observaciones,
+		'estado'              => $estado,
+		'metros'              => $metros,
+		'numcontratoletras'   => $numcontratoletras,
+		'tipos'               => $tipos,
+		'tiposdeestado'       => $tiposdeestado,
+		'estado_usr'          => $estado_usr,
+		'foliotope'           => $foliotope,
+		'npagos'              => $npagos,
+		'adeudos'             => $adeudos,
+		'total'               => $total,
+		'recargos'            => $recargos,
+		'notas'               => $notas,
+		'salidanotas'         => !empty($notas),
+		'cargos_fuente'       => $cargos_fuente,
+		'npagosc'             => $npagosc,
+		'cancelados'          => $cancelados,
+		'nnotas'              => $nnotas,
+		'notas_cancelacion'   => $notas_cancelacion,
+		'otros_contratos'     => $otros_contratos,
+		'tomas'               => $tomas,
+		'num_tomas'           => $num_tomas,
+		'max_tomas'           => $max_tomas,
+		'tarifas_referencia'  => $tarifas_referencia,
+		'cfg'                 => $cfg,
+		'faltan_cargos'       => _verificaAnualidades($y),
+		'reversal_info'       => _getReversal($id, ($total + $recargos), $y)
+	));
+}
+
+function cambiaestado($contrato, $rp, $rt, $texto, $estado)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$cfg = cargaConfig($y);
+	$min_car = intval(obtenerValorSeguro($cfg, 'cancelacion_min_caracteres', 20));
+	$mes_st  = intval(obtenerValorSeguro($cfg, 'susptemp_mes_permitido', 12));
+
+	$res_actual = $y->q("SELECT estado FROM contrato WHERE numcontrato='$contrato'");
+	list($estado_actual) = $y->fetch_array($res_actual);
+
+	if ($estado_actual == 4) {
+		return $templates->render('sistema/mensaje', array(
+			'titulo'  => 'Acción No Permitida',
+			'mensaje' => 'No es posible cambiar el estado de un contrato que se encuentra en <b>Suspensión Definitiva</b>.'
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ficha.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L149-249)</summary>
+
+**Path:** `Unknown file`
+
+```
+                                <b>Tipo:</b><br>
+                                <input type='radio' name='tomas[<?= $n ?>][tipo]' id='t_tipo_<?= $n ?>_0' value='0' <?= ($t['tipo']==0?'checked':'') ?> onchange='cambiaTipo(<?= $n ?>, 0, tarifas)' <?= ($estado==4?'disabled':'') ?>> <label for='t_tipo_<?= $n ?>_0'>Normal</label>&nbsp;&nbsp;
+                                <input type='radio' name='tomas[<?= $n ?>][tipo]' id='t_tipo_<?= $n ?>_1' value='1' <?= ($t['tipo']==1?'checked':'') ?> onchange='cambiaTipo(<?= $n ?>, 1, tarifas)' <?= ($estado==4?'disabled':'') ?>> <label for='t_tipo_<?= $n ?>_1'>Comercial</label>
+                            </div>
+
+                            <div style='margin-bottom:10px; border:1px dashed #bbb; padding:5px; background:#fff;'>
+                                <input type='checkbox' name='tomas[<?= $n ?>][tiene_agua]' id='t_agua_<?= $n ?>' value='1' <?= ($t['tiene_agua']?'checked':'') ?> onchange='actualizaInterfazTomas(<?= $n ?>, "agua")' <?= ($estado==4?'disabled':'') ?>> 
+                                <label for='t_agua_<?= $n ?>'><b>Infraestructura: Cuenta con toma</b></label>
+                                
+                                <div id='cont_estado_agua_<?= $n ?>' style='margin-top:5px; font-size:11px; <?= ($t['tiene_agua']?'':'display:none;') ?>'>
+                                    Servicio: 
+                                    <input type='radio' name='tomas[<?= $n ?>][estado_agua]' id='e_agua_<?= $n ?>_1' value='1' <?= ($t['estado_agua']?'checked':'') ?> <?= ($estado==4?'disabled':'') ?>> <label for='e_agua_<?= $n ?>_1'>Activo</label>
+                                    <input type='radio' name='tomas[<?= $n ?>][estado_agua]' id='e_agua_<?= $n ?>_0' value='0' <?= (!$t['estado_agua']?'checked':'') ?> <?= ($estado==4?'disabled':'') ?>> <label for='e_agua_<?= $n ?>_0'>Suspendido (Corte)</label>
+                                </div>
+                                <div id='desc_agua_<?= $n ?>' style='margin-top:5px; font-size:11px; color:#999; <?= (!$t['tiene_agua']?'':'display:none;') ?>'>
+                                    Servicio: <i>Sin instalaci&oacute;n física</i>
+                                </div>
+
+                                <div id='ref_agua_<?= $n ?>' style='font-size:10px; color:#666; margin-top:3px; border-top:1px dotted #ccc; padding-top:2px;'>
+                                    <?= (isset($tarifas_referencia['agua']) && isset($tarifas_referencia['agua']['leyenda'])) ? $tarifas_referencia['agua']['leyenda'] : 'Tarifa de Agua' ?>: <b>$<?= number_format($t['tipo']==1 ? ((isset($tarifas_referencia['agua']) && isset($tarifas_referencia['agua']['comercial'])) ? $tarifas_referencia['agua']['comercial'] : 0) : ((isset($tarifas_referencia['agua']) && isset($tarifas_referencia['agua']['normal'])) ? $tarifas_referencia['agua']['normal'] : 0), 2) ?></b>
+                                </div>
+                            </div>
+
+                            <div style='border:1px dashed #bbb; padding:5px; background:#fff;'>
+                                <input type='checkbox' name='tomas[<?= $n ?>][tiene_drenaje]' id='t_drenaje_<?= $n ?>' value='1' <?= ($t['tiene_drenaje']?'checked':'') ?> onchange='actualizaInterfazTomas(<?= $n ?>, "drenaje")' <?= ($estado==4?'disabled':'') ?>> 
+                                <label for='t_drenaje_<?= $n ?>'><b>Instalaci&oacute;n: Cuenta con descarga</b></label>
+
+                                <div id='cont_estado_drenaje_<?= $n ?>' style='margin-top:5px; font-size:11px; <?= ($t['tiene_drenaje']?'':'display:none;') ?>'>
+                                    Servicio: 
+                                    <input type='radio' name='tomas[<?= $n ?>][estado_drenaje]' id='e_drenaje_<?= $n ?>_1' value='1' <?= ($t['estado_drenaje']?'checked':'') ?> <?= ($estado==4?'disabled':'') ?>> <label for='e_drenaje_<?= $n ?>_1'>Activo</label>
+                                    <input type='radio' name='tomas[<?= $n ?>][estado_drenaje]' id='e_drenaje_<?= $n ?>_0' value='0' <?= (!$t['estado_drenaje']?'checked':'') ?> <?= ($estado==4?'disabled':'') ?>> <label for='e_drenaje_<?= $n ?>_0'>Suspendido (Corte)</label>
+                                </div>
+                                <div id='desc_drenaje_<?= $n ?>' style='margin-top:5px; font-size:11px; color:#999; <?= (!$t['tiene_drenaje']?'':'display:none;') ?>'>
+                                    Servicio: <i>Sin descarga instalada</i>
+                                </div>
+
+                                <div id='ref_drenaje_<?= $n ?>' style='font-size:10px; color:#666; margin-top:3px; border-top:1px dotted #ccc; padding-top:2px;'>
+                                    <?= (isset($tarifas_referencia['drenaje']) && isset($tarifas_referencia['drenaje']['leyenda'])) ? $tarifas_referencia['drenaje']['leyenda'] : 'Tarifa de Drenaje' ?>: <b>$<?= number_format($t['tipo']==1 ? ((isset($tarifas_referencia['drenaje']) && isset($tarifas_referencia['drenaje']['comercial'])) ? $tarifas_referencia['drenaje']['comercial'] : 0) : ((isset($tarifas_referencia['drenaje']) && isset($tarifas_referencia['drenaje']['normal'])) ? $tarifas_referencia['drenaje']['normal'] : 0), 2) ?></b>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endfor; ?>
+                </div>
+            </div>
+        </div>
+        <script>
+            var tarifas = <?= json_encode($tarifas_referencia) ?>;
+
+            function validaContrato() {
+                var num_tomas = parseInt($('#num_tomas').val()) || 1;
+                
+                var todo_ok = true;
+                for (var i = 1; i <= num_tomas; i++) {
+                    if (!$('#t_agua_' + i).is(':checked') && !$('#t_drenaje_' + i).is(':checked')) {
+                        todo_ok = false;
+                        break;
+                    }
+                }
+                if (!todo_ok) {
+                    alert('Error: Cada toma seleccionada debe tener habilitada al menos una conexi\u00f3n (Agua o Drenaje). Revise la ' + (num_tomas > 1 ? '1ra y 2da toma.' : 'toma principal.'));
+                    return false;
+                }
+                
+                // Validacion AJAX síncrona de tomas
+                var ok_tomas = true;
+                $.ajax({
+                    url: 'ruteador.php',
+                    type: 'POST', async: false,
+                    data: { opc: 'validaTomasSync', usuario: '<?= $numusuario ?>', contrato: '<?= $id ?>', domicilio: $('#domicilio').val(), num_tomas: num_tomas },
+                    success: function(resp) {
+                        if(resp.trim() !== 'OK') {
+                            alert(resp);
+                            ok_tomas = false;
+                        }
+                    }
+                });
+                if (!ok_tomas) return false;
+
+                return confirm('¿Est\u00e1 seguro que desea actualizar la informaci\u00f3n?');
+            }
+            
+            $(document).ready(function(){
+                $('#domicilio').on('blur', function(){
+                    if($(this).val().length > 20) {
+                        $.ajax({
+                            url: 'ruteador.php',
+                            type: 'POST', async: true,
+                            data: { opc: 'validaTomasSync', usuario: '<?= $numusuario ?>', contrato: '<?= $id ?>', domicilio: $(this).val(), num_tomas: $('#num_tomas').val() || 1 },
+                            success: function(resp) {
+                                if(resp.trim() !== 'OK') {
+                                    alert("Aviso Domicilio: " + resp);
+                                }
+                            }
+                        });
+                    }
+                });
+            });
+        </script>
+        <div style='display: flex; align-items: center; justify-content: space-between;
+                    padding: 8px 0; border-top: 1px solid #eee; margin-top: 6px; gap: 20px;'>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ficha.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L299-449)</summary>
+
+**Path:** `Unknown file`
+
+```
+    <?php if (in_array($estado, [1, 2, 3])): ?>
+    <a class='liga opcion cargoscto' style='margin:0;' href='#' onclick="$('#agregacargo').toggle();">Agregar cargos</a>
+    <?php endif; ?>
+    <?php if ($estado != 4): ?>
+    <a class='liga opcion cargoscto' style='margin:0;' href='#' onclick="$('#cargoscancelados').toggle();">Cargos Cancelados</a>
+    <a class='liga opcion cargoscto' style='margin:0;' href='#' onclick="$('#notascargoscancelados').toggle();">Notas Cargos Cancelados</a>
+    <?php endif; ?>
+
+    <?php if (!empty($reversal_info)): ?>
+    <?php
+        $rev_fecha_fmt = date('d/m/Y H:i', strtotime($reversal_info['fecha']));
+        $estados_rev   = array(1=>'ACTIVO',2=>'SUSP. TEMPORAL',3=>'SUSP. ADMINISTRATIVA',4=>'SUSP. DEFINITIVA');
+        $rev_origen    = isset($estados_rev[$reversal_info['estado_origen']])  ? $estados_rev[$reversal_info['estado_origen']]  : $reversal_info['estado_origen'];
+        $rev_destino   = isset($estados_rev[$reversal_info['estado_destino']]) ? $estados_rev[$reversal_info['estado_destino']] : $reversal_info['estado_destino'];
+    ?>
+    <a class='liga opcion' id='btn-revertir-transicion'
+       style='margin:0; background:#fff3cd; color:#856404; border:1px solid #ffc107; font-weight:bold;'
+       href='#'
+       title='Transición del <?= $rev_fecha_fmt ?>: <?= htmlspecialchars($rev_origen) ?> → <?= htmlspecialchars($rev_destino) ?>. ATENCIÓN: si ocurre otro cambio de estado antes de revertir, esta opción dejará de estar disponible.'
+       onclick="if(confirm(
+           'REVERTIR TRANSICIÓN DE ESTADO\n\n' +
+           'Esta acción deshará el último cambio de estado del contrato:\n' +
+           '  • Transición del <?= $rev_fecha_fmt ?>: <?= addslashes($rev_origen) ?> → <?= addslashes($rev_destino) ?>\n' +
+           '  • Cargos generados a cancelar: <?= $reversal_info["n_lc_nuevos"] ?>\n' +
+           '  • Recargos amnistiados a restaurar: <?= $reversal_info["n_hist_amnist"] ?>\n' +
+           '  • Deuda tras reversión (exacta): $<?= number_format($reversal_info["deuda_pre"], 2) ?>\n\n' +
+           'IMPORTANTE: si ocurre otro cambio de estado antes de confirmar, esta reversión ya no estará disponible.\n\n' +
+           'La bitácora registrará esta reversión.\n' +
+           '¿Confirma la reversión?'
+       )) {
+           $.post('ruteador.php', {opc:'revertirTransicion', contrato:'<?= $id ?>'}, function(r){ $('#nara').html(r); });
+       } return false;">
+        &#8635; Revertir transición
+    </a>
+    <?php endif; ?>
+
+</div>
+    <div id='nara'></div><br>
+
+
+<div id='realizaranotacion' class='divanotacioncto' style='display:none;'>
+    <hr>
+    <h2>Agregar una nota al contrato</h2>
+    <form id='agregarNota' name='agregarNota'>
+        <input type=hidden name='opc' value='agregaNota'>
+        <input type=hidden name='contrato' id='contrato' value='<?= $id ?>'>
+        <input type='text' name='texto' id='textoz' size=40 class='mayusculas' autocomplete=off>
+        <input type='submit' class='anotacioncto' value='Agregar'>
+    </form><br>
+</div>
+
+<div id='cambiarprop' class='divpropietariocto' style='display:none;'>
+    <hr>
+    <h2>Cambio de Propietario</h2>
+    <form id='propietario' name='propietario' style='margin-left: 20px;'>
+        <input type=hidden name='opc' id='opc' value='cambiandopropietario'>
+        <input type=hidden name='contrato' id='contrato' value='<?= $id ?>'>
+        <input type=hidden name='usuario' id='usuario' value='<?= $numusuario ?>'>
+        B&uacute;squeda: <input type='text' id='nuevonombre' name='nuevonombre' style='width:190px'
+            onkeyup="$('#submitusuario').attr('disabled', 'disabled'); buscaUsuarioCambio(this.value);"
+            autocomplete=off><br><br>
+        <select name='nuevousuario' id='usuarios' size=5 onclick="$('#submitusuario').removeAttr('disabled');">
+        </select>
+        <br><br>
+        <input id='submitusuario' class='propietariocto' type='submit' value='Asignar nuevo propietario' disabled>
+    </form><br>
+</div>
+
+<div id='cambioestado' class='divestadocto' style='display:none;'>
+    <hr>
+    <h2>Cambiar estado del contrato</h2>
+    <?php if ($estado == 4): ?>
+        <div style='background-color: #f8d7da; color: #721c24; padding: 10px; border: 1px solid #f5c6cb; border-radius: 4px; margin-bottom: 15px;'>
+            <b>¡Atención!</b> Este contrato se encuentra en estado de <b>Suspensión Definitiva</b> y no se permite su cambio a ningún otro estado.
+        </div>
+    <?php endif; ?>
+    <form id='cambiaestado' name='cambiaestado' style='margin-left:10px;margin-right:10px;'>
+        <input type=hidden name='opc' value='cambiaestado' id='opc'>
+        <input type=hidden name='contrato' id='contrato' value='<?= $id ?>'>
+        <fieldset style='float: left; width:400px;'>
+            <legend>Estados</legend>
+            <dl>
+                <dt><input type=radio name='estado' value=1 <?= ($estado == 1 ? "checked" : "") ?> <?= ($estado == 4 ? "disabled" : "") ?>><label>Activo</label>
+                <dd>Se tiene la obligaci&oacute;n de pagar los servicios de agua potable y drenaje con los que cuente.
+                <dt><input type=radio name='estado' value=2 <?= ($estado == 2 ? "checked" : "") ?> <?= ($estado == 4 || $estado == 3 ? "disabled" : "") ?>><label>Suspensi&oacute;n
+                        Temporal</label>
+                <dd>Solo en <b><?= array("","Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre")[intval($cfg['susptemp_mes_permitido'])] ?></b> del a&ntilde;o en curso se puede solicitar esta suspensi&oacute;n, para evitar
+                    pagar servicios el a&ntilde;o siguiente. <?php if($estado == 3): ?><br><small style='color:#c0392b;'><b>Bloqueado:</b> Regularice a Activo antes de cambiar tipo de suspensi&oacute;n.</small><?php endif; ?>
+                <dt><input type=radio name='estado' value=3 <?= ($estado == 3 ? "checked" : "") ?> <?= ($estado == 4 || $estado == 2 ? "disabled" : "") ?>><label>Suspensi&oacute;n
+                        Administrativa</label>
+                <dd>Cuando luego de una revisi&oacute;n ocular, se corrobore que no hay toma en el lugar y faltaba darlo de
+                    baja. <?php if($estado == 2): ?><br><small style='color:#c0392b;'><b>Bloqueado:</b> Regularice a Activo antes de cambiar tipo de suspensi&oacute;n.</small><?php endif; ?>
+                <dt><input type=radio name='estado' value='4' <?= ($estado == 4 ? "checked" : "") ?>><label>Suspensi&oacute;n
+                        Definitiva</label>
+                <dd>Eliminaci&oacute;n de los servicios as&iacute; como del contrato.
+            </dl>
+        </fieldset>
+        <fieldset style='float: left; width:400px; text-align: right;'>
+            <legend>Aplicar Acci&oacute;n</legend>
+            <span id='llaves1'>
+                Llave del Presidente:<br><input type='password' size=10 name='presidente' class='derecha'
+                    autocomplete=off><br>
+                Llave del Tesorero:<br><input type='password' size=10 name='tesorero' class='derecha'
+                    autocomplete=off><br>
+                Raz&oacute;n del cambio de estado:<br><textarea name='texto' id='texto' cols=30 rows=4></textarea>
+            </span>
+            <div id='nara'></div>
+            <input type='submit' class='estadocto' value='Cambiar estado' <?= ($estado == 4 ? "disabled" : "") ?>>
+            <div id='nara'></div><span id='sig1'></span>
+        </fieldset>
+    </form>
+    <div id='nara'></div><br>
+</div>
+
+<div id='agregacargo' class='divcargoscto' style='display:none;'>
+    <hr>
+    <h2>Agregar cargos al contrato</h2>
+    <div id='existentes' class='panel300' style='height:170px'>
+        <div id='okas'
+            style='width:280px; font-size: 11px; min-height: 18px; text-align: center; color: #fff; text-transform: uppercase; text-align:center; font-weight:bold; position: absolute; left:0px; padding-top:4px; background: rgba(0,0,0,0.7);'>
+            Cargo: <input type='text' class='mayusculas' value='' id='buscacargo' name='buscacargo' autocomplete=off>
+        </div>
+        <br><br>
+        <table width=100% id='cargosfuente'>
+            <?php foreach ($cargos_fuente as $cf): ?>
+                <tr class='renglon clicable' <?= ($cf['recargo'] != 0 ? " style='color:#900;'" : "") ?>
+                    onclick="<?= ($cf['mensualidades'] == 1 ? "mens('{$cf['monto']}|{$cf['recargo']}|{$cf['anio']}|{$cf['categoria']}|{$cf['repetir']}', '{$cf['nombrec']}', '" . number_format($cf['monto'], 2, '.', ',') . "','{$cf['numconsec']}','{$cf['metros2']}')" : "$('#mensuales').html(''); agregacargo('{$cf['nombrec']}|{$cf['monto']}|{$cf['recargo']}|{$cf['anio']}|{$cf['categoria']}|{$cf['repetir']}','" . number_format($cf['monto'], 2, '.', ',') . "',{$cf['numconsec']},'{$cf['metros2']}');") ?>">
+                    <td class='mayusculas'><?= $this->e($cf['nombrec']) ?> <?= ($cf['mensualidades'] == 1 ? "(&times; mes)" : "") ?></td>
+                    <td nowrap class='derecha' style='width: auto;'>$<?= number_format($cf['monto'], 2, '.', ',') ?><?= ($cf['metros2'] == 1 ? "/mt" : "") ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    </div>
+    <form id='agregarCargoX' name='agregarCargoX' style='margin-left:10px; margin-right:10px;'>
+        <input type=hidden name='opc' value='aplicacargosauno'>
+        <input type=hidden name='contrato' id='contrato' value='<?= $id ?>'>
+        <div id='poraplicar'
+            style='margin-left: 10px; height:170px; width:300px; overflow-y:scroll; overflow-x:hidden; float: left; position: relative;'>
+            <div id='okas'
+                style='width:280px; font-size: 11px; min-height: 18px; height:auto; text-align: center; color: #fff; text-align:center; font-weight:bold; position: absolute; left:0px; padding-top:4px; background: rgba(0,0,0,0.7);'>
+                <span class='mayusculas'>Cargos por aplicar</span> <a class='liguita' href='#'
+                    onclick="$('#cargostabla').html('')">Limpiar</a>
+                <div id='nara'></div>
+                <div id='mensuales' style='text-align:left; height:auto; clear:both;'></div>
+            </div>
+            <br><br>
+            <table id='cargostabla' width=100%></table>
+        </div>
+        <div id='aplicando' style='margin-left: 10px; height:170px; width:300px; float: left; position: relative;'>
+            <input type='submit' class='cargoscto' value='Aplicar a este contrato'>
+            <div id='aplicando_notificacion' style='margin-top:10px;'></div>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `HISTORIAL RECIENTE`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:09 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `adeudo_tabla.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+$anios_deuda_base = [];
+$anios_recargos_mora = [];
+foreach ($adeudos as $resulta) {
+    $anio_cargo = isset($resulta['anio']) ? intval($resulta['anio']) : 0;
+    if ($anio_cargo <= 0) {
+        if (preg_match('/\b((?:20|19)\d{2})\b/', $resulta['leyenda'], $matches)) {
+            $anio_cargo = intval($matches[1]);
+        }
+    }
+    if ($anio_cargo > 0) {
+        if (isset($resulta['recargo']) && intval($resulta['recargo']) == 1) {
+            $anios_recargos_mora[$anio_cargo] = true;
+        } else {
+            $anios_deuda_base[$anio_cargo] = true;
+        }
+    }
+}
+$num_anios_deuda = count($anios_deuda_base);
+$num_anios_mora = count($anios_recargos_mora);
+?>
+<hr>
+<h2>
+    <?= $npagos ?> adeudos del contrato (<?= $num_anios_deuda ?> años deuda base / <?= $num_anios_mora ?> años recargos)
+</h2>
+
+
+<style>
+.accordion-group {
+    margin: 12px 0;
+    border: 1px solid #dcdcdc;
+    border-radius: 6px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+    overflow: hidden;
+    font-family: inherit;
+}
+.accordion-header {
+    padding: 10px 15px;
+    background-color: #f7f9fb;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eef2f5;
+    transition: background-color 0.2s ease;
+    user-select: none;
+}
+.accordion-header:hover {
+    background-color: #edf2f7;
+}
+.accordion-title-area {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #2c3e50;
+}
+.accordion-title-area input[type="checkbox"] {
+    margin: 0;
+    cursor: pointer;
+}
+.accordion-stats-area {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 12px;
+    color: #4a5568;
+}
+.accordion-badge {
+    background-color: #e2e8f0;
+    color: #4a5568;
+    padding: 2px 6px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+}
+.accordion-subtotal {
+    font-weight: bold;
+    color: #2b6cb0;
+}
+.accordion-content {
+    padding: 15px;
+    max-height: 350px;
+    overflow-y: auto;
+    background-color: #ffffff;
+}
+.monto-desglose {
+    color: #718096;
+}
+.monto-desglose strong {
+    color: #2d3748;
+}
+.rojo-subrayado {
+    color: #e53e3e;
+    text-decoration: underline;
+    font-weight: bold;
+}
+/* Estilos para la agrupación por año (Propuesta 2) */
+.year-block {
+    margin-bottom: 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    overflow: hidden;
+    background-color: #f7fafc;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+}
+.year-block-header {
+    background-color: #edf2f7;
+    padding: 6px 12px;
+    font-weight: 700;
+    color: #4a5568;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #e2e8f0;
+}
+.year-block-body {
+    padding: 8px 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    background-color: #ffffff;
+}
+.adeudo-item {
+    display: flex;
+    align-items: center;
+    width: calc(33.333% - 11px);
+    min-width: 240px;
+    font-size: 12px;
+    color: #2d3748;
+    padding: 4px 0;
+    box-sizing: border-box;
+}
+.adeudo-item-checkbox {
+    margin-right: 8px;
+    display: flex;
+    align-items: center;
+}
+.adeudo-item-label {
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 11.5px;
+    text-transform: uppercase;
+}
+.adeudo-item-monto {
+    font-weight: bold;
+    margin-left: 8px;
+    color: #4a5568;
+    white-space: nowrap;
+}
+</style>
+
+<script>
+function renderGrupoJS(grupoData, containerId) {
+    var container = document.getElementById(containerId);
+    if (!container || container.getAttribute('data-loaded') === 'true') return;
+    
+    if (!grupoData || grupoData.length === 0) return;
+    
+    var useGrouping = (containerId === 'grupo_reciente_content' || containerId === 'grupo_antiguo_content');
+    
+    var fragment = document.createDocumentFragment();
+    
+    // Helper function to sort items
+    function sortItems(arr) {
+        var monthMap = {
+            'ENE': 1, 'FEB': 2, 'MAR': 3, 'ABR': 4, 'MAY': 5, 'JUN': 6,
+            'JUL': 7, 'AGO': 8, 'SEP': 9, 'SEPT': 9, 'OCT': 10, 'NOV': 11, 'DIC': 12
+        };
+        
+        function getItemDate(item) {
+            var legend = item.leyenda || "";
+            // 1. Try to extract DD MMM YYYY (e.g. FALTA ASAMBLEA 04 ENE 2026)
+            var matchDD_MMM_YYYY = legend.match(/\b(\d{1,2})\s+([A-Z]{3,4})\s+(\d{4})\b/i);
+            if (matchDD_MMM_YYYY) {
+                var d = parseInt(matchDD_MMM_YYYY[1]) || 1;
+                var mStr = matchDD_MMM_YYYY[2].toUpperCase();
+                var m = monthMap[mStr] || 1;
+                var y = parseInt(matchDD_MMM_YYYY[3]) || 2026;
+                return { year: y, month: m, day: d };
+            }
+            
+            // 2. Try to extract MMM YYYY (e.g. RECARGO ABR 2021)
+            var matchMMM_YYYY = legend.match(/\b([A-Z]{3,4})\s+(\d{4})\b/i);
+            if (matchMMM_YYYY) {
+                var mStr = matchMMM_YYYY[1].toUpperCase();
+                var m = monthMap[mStr] || 1;
+                var y = parseInt(matchMMM_YYYY[2]) || 2026;
+                return { year: y, month: m, day: 1 };
+            }
+            
+            // 3. Fallback to item.anio
+            var yFallback = parseInt(item.anio) || 0;
+            if (yFallback <= 0 && legend) {
+                var matchYear = legend.match(/\b((?:20|19)\d{2})\b/);
+                if (matchYear) {
+                    yFallback = parseInt(matchYear[1]);
+                }
+            }
+            if (yFallback <= 0) yFallback = 9999;
+            return { year: yFallback, month: 1, day: 1 };
+        }
+
+        arr.sort(function(a, b) {
+            var recargoA = parseInt(a.recargo) || 0;
+            var recargoB = parseInt(b.recargo) || 0;
+            if (recargoA !== recargoB) {
+                return recargoA - recargoB; // Base charges first
+            }
+            
+            var dateA = getItemDate(a);
+            var dateB = getItemDate(b);
+            
+            if (dateA.year !== dateB.year) {
+                return dateA.year - dateB.year;
+            }
+            if (dateA.month !== dateB.month) {
+                return dateA.month - dateB.month;
+            }
+            if (dateA.day !== dateB.day) {
+                return dateA.day - dateB.day;
+            }
+            
+            return a.leyenda.localeCompare(b.leyenda);
+        });
+    }
+    
+    // Helper function to render items into a container
+    function renderItemsInto(items, targetContainer) {
+        for (var i = 0; i < items.length; i++) {
+            var resulta = items[i];
+            var leyenda = resulta.leyenda;
+            var monto = parseFloat(resulta.monto);
+            var recargo = parseInt(resulta.recargo);
+            var repetir = parseInt(resulta.repetido);
+            var categoria = resulta.categoria;
+            var id_cargo = resulta.id_cargo;
+            
+            var d = document.createElement('div');
+            d.textContent = leyenda;
+            var leyenda_esc = d.innerHTML;
+            
+            if (recargo === 0 && leyenda.toUpperCase().indexOf('RECARGO') !== -1) {
+                leyenda_esc = leyenda_esc.replace(/\bRECARGO\b/gi, '<span class="rojo-subrayado">RECARGO</span>');
+            }
+            
+            var recargo_str = recargo === 1 ? "<i class='rojo'>" : "";
+            var recargo_end = recargo === 1 ? "</i>" : "";
+            var repetir_str = repetir === 0 ? "" : " (r" + repetir + ")";
+            
+            var val_str = id_cargo + "|" + d.innerHTML + "|" + monto + "|" + repetir + "|" + categoria;
+            
+            var itemDiv = document.createElement('div');
+            itemDiv.className = 'adeudo-item';
+            
+            var chkWrapper = document.createElement('div');
+            chkWrapper.className = 'adeudo-item-checkbox';
+            
+            var cb = document.createElement('input');
+            cb.type = 'checkbox';
+            cb.id = 'pago';
+            cb.name = 'pago[]';
+            cb.style.margin = '0px';
+            cb.value = val_str;
+            cb.onclick = function() {
+                var valor = 0;
+                $('input[id=pago]').each(function(idx) {
+                    if (this.checked) {
+                        var mVal = parseFloat($('input[id=monto]').get(idx).value) || 0;
+                        valor += mVal;
+                    }
+                });
+                $('#totalmarcado').val(valor.toFixed(2));
+            };
+            
+            var hiddenMonto = document.createElement('input');
+            hiddenMonto.type = 'hidden';
+            hiddenMonto.id = 'monto';
+            hiddenMonto.name = 'monto[]';
+            hiddenMonto.value = monto;
+            
+            chkWrapper.appendChild(cb);
+            chkWrapper.appendChild(hiddenMonto);
+            
+            var labelDiv = document.createElement('div');
+            labelDiv.className = 'adeudo-item-label';
+            labelDiv.innerHTML = recargo_str + leyenda_esc + repetir_str + recargo_end;
+            
+            var montoDiv = document.createElement('div');
+            montoDiv.className = 'adeudo-item-monto';
+            montoDiv.textContent = '$' + monto.toFixed(2);
+            
+            itemDiv.appendChild(chkWrapper);
+            itemDiv.appendChild(labelDiv);
+            itemDiv.appendChild(montoDiv);
+            
+            targetContainer.appendChild(itemDiv);
+        }
+    }
+
+    if (useGrouping) {
+        // Group items by year of origin
+        var grouped = {};
+        var years = [];
+        
+        for (var k = 0; k < grupoData.length; k++) {
+            var item = grupoData[k];
+            var anio = parseInt(item.anio) || 0;
+            if (anio <= 0 && item.leyenda) {
+                var matches = item.leyenda.match(/\b((?:20|19)\d{2})\b/);
+                if (matches) {
+                    anio = parseInt(matches[1]);
+                }
+            }
+            if (anio <= 0) anio = 9999;
+            
+            if (!grouped[anio]) {
+                grouped[anio] = [];
+                years.push(anio);
+            }
+            grouped[anio].push(item);
+        }
+        
+        years.sort(function(a, b) {
+            return a - b;
+        });
+        
+        for (var yIdx = 0; yIdx < years.length; yIdx++) {
+            var year = years[yIdx];
+            var itemsInYear = grouped[year];
+            
+            // Sort items in this year
+            sortItems(itemsInYear);
+            
+            var block = document.createElement('div');
+            block.className = 'year-block';
+            
+            var header = document.createElement('div');
+            header.className = 'year-block-header';
+            header.textContent = (year === 9999) ? '📅 OTROS CONCEPTOS' : '📅 AÑO ' + year;
+            block.appendChild(header);
+            
+            var body = document.createElement('div');
+            body.className = 'year-block-body';
+            
+            renderItemsInto(itemsInYear, body);
+            block.appendChild(body);
+            fragment.appendChild(block);
+        }
+    } else {
+        // Render all items in a single flat list
+        var body = document.createElement('div');
+        body.className = 'year-block-body';
+        body.style.padding = '0'; // Clean padding
+        
+        // Sort items (can still apply standard sort to be safe, e.g. base charges first)
+        sortItems(grupoData);
+        
+        renderItemsInto(grupoData, body);
+        fragment.appendChild(body);
+    }
+    
+    container.appendChild(fragment);
+    container.setAttribute('data-loaded', 'true');
+}
+
+function toggleAccordion(contentId, iconId) {
+    var content = document.getElementById(contentId);
+    var icon = document.getElementById(iconId);
+    
+    // Lazy render using embedded JSON memory
+    if (typeof adeudosData !== 'undefined') {
+        if (contentId === 'grupo_actual_content') renderGrupoJS(adeudosData.grupo_actual, contentId);
+        if (contentId === 'grupo_asambleas_historico_content') renderGrupoJS(adeudosData.grupo_asambleas_historico, contentId);
+        if (contentId === 'grupo_especiales_content') renderGrupoJS(adeudosData.grupo_especiales, contentId);
+        if (contentId === 'grupo_reciente_content') renderGrupoJS(adeudosData.grupo_reciente, contentId);
+        if (contentId === 'grupo_antiguo_content') renderGrupoJS(adeudosData.grupo_antiguo, contentId);
+    }
+
+    if (content.style.display === 'none') {
+        content.style.display = 'block';
+        icon.innerHTML = '&#9650;';
+    } else {
+        content.style.display = 'none';
+        icon.innerHTML = '&#9660;';
+    }
+}
+
+function toggleGroupCheckboxes(groupCheckbox, contentId) {
+    var status = groupCheckbox.checked;
+    
+    // Make sure it's loaded before toggling children!
+    if (typeof adeudosData !== 'undefined' && status) {
+        if (contentId === 'grupo_actual_content') renderGrupoJS(adeudosData.grupo_actual, contentId);
+        if (contentId === 'grupo_asambleas_historico_content') renderGrupoJS(adeudosData.grupo_asambleas_historico, contentId);
+        if (contentId === 'grupo_especiales_content') renderGrupoJS(adeudosData.grupo_especiales, contentId);
+        if (contentId === 'grupo_reciente_content') renderGrupoJS(adeudosData.grupo_reciente, contentId);
+        if (contentId === 'grupo_antiguo_content') renderGrupoJS(adeudosData.grupo_antiguo, contentId);
+    }
+
+    var content = document.getElementById(contentId);
+    if (content) {
+        var checkboxes = content.querySelectorAll('input[type="checkbox"][id="pago"]');
+        checkboxes.forEach(function(cb) {
+            cb.checked = status;
+        });
+        
+        // Recalcular la suma total marcada en la vista
+        var valor = 0;
+        $('input[id=pago]').each(function(i) {
+            if (this.checked) {
+                valor += parseFloat($('input[id=monto]').get(i).value) || 0;
+            }
+        });
+        $('#totalmarcado').val(valor.toFixed(2));
+    }
+}
+</script>
+
+<form id='pagos' name='pagos' method='post'>
+    <input type='hidden' name='opc' id='opc' value='pago'>
+    <input type='hidden' name='idc' id='idc' value='<?= $id ?>'>
+
+    <?php
+    // Definición de la función de cálculo de estadísticas para cada grupo
+    if (!function_exists('obtenerTotalesGrupo')) {
+        function obtenerTotalesGrupo($grupo) {
+            $cargos = 0;
+            $recargos = 0;
+            foreach ($grupo as $item) {
+                if ($item['recargo']) {
+                    $recargos += floatval($item['monto']);
+                } else {
+                    $cargos += floatval($item['monto']);
+                }
+            }
+            return [
+                'count' => count($grupo),
+                'cargos' => $cargos,
+                'recargos' => $recargos,
+                'subtotal' => $cargos + $recargos
+            ];
+        }
+    }
+
+    // Clasificación de los adeudos en grupos
+    $grupo_actual = [];
+    $grupo_asambleas_historico = [];
+    $grupo_especiales = [];
+    $grupo_reciente = [];
+    $grupo_antiguo = [];
+
+    $anio_actual_ejercicio = intval(date('Y'));
+
+    foreach ($adeudos as $resulta) {
+        $categoria = intval($resulta['categoria']);
+        $anio_cargo = isset($resulta['anio']) ? intval($resulta['anio']) : 0;
+        
+        if ($anio_cargo <= 0) {
+            if (preg_match('/\b((?:20|19)\d{2})\b/', $resulta['leyenda'], $matches)) {
+                $anio_cargo = intval($matches[1]);
+            }
+        }
+
+        $es_mora_o_agua_drenaje = in_array($categoria, [2, 3, 16, 17]);
+        $es_falta_asamblea = ($categoria == 6 || (isset($resulta['leyenda']) && stripos($resulta['leyenda'], 'ASAMBLEA') !== false));
+        
+        if ($es_falta_asamblea) {
+            if ($anio_cargo == $anio_actual_ejercicio) {
+                $grupo_actual[] = $resulta;
+            } else {
+                $grupo_asambleas_historico[] = $resulta;
+            }
+        } elseif (!$es_mora_o_agua_drenaje) {
+            $grupo_especiales[] = $resulta;
+        } else {
+            if ($anio_cargo == $anio_actual_ejercicio) {
+                $grupo_actual[] = $resulta;
+            } elseif ($anio_cargo >= $anio_actual_ejercicio - 5) {
+                $grupo_reciente[] = $resulta;
+            } else {
+                $grupo_antiguo[] = $resulta;
+            }
+        }
+    }
+
+    // Calcular el rango de años para el grupo de especiales
+    $anios_especiales = [];
+    foreach ($grupo_especiales as $item) {
+        $anio_item = isset($item['anio']) ? intval($item['anio']) : 0;
+        if ($anio_item <= 0) {
+            if (preg_match('/\b((?:20|19)\d{2})\b/', $item['leyenda'], $matches)) {
+                $anio_item = intval($matches[1]);
+            }
+        }
+        if ($anio_item > 0) {
+            $anios_especiales[] = $anio_item;
+        }
+    }
+    
+    $rango_anios_especiales = "";
+    if (!empty($anios_especiales)) {
+        $min_anio = min($anios_especiales);
+        $max_anio = max($anios_especiales);
+        if ($min_anio == $max_anio) {
+            $rango_anios_especiales = " ($min_anio)";
+        } else {
+            $rango_anios_especiales = " ($min_anio - $max_anio)";
+        }
+    }
+
+    // Calcular el rango de años para el grupo de asambleas históricas
+    $anios_asambleas = [];
+    foreach ($grupo_asambleas_historico as $item) {
+        $anio_item = isset($item['anio']) ? intval($item['anio']) : 0;
+        if ($anio_item <= 0) {
+            if (preg_match('/\b((?:20|19)\d{2})\b/', $item['leyenda'], $matches)) {
+                $anio_item = intval($matches[1]);
+            }
+        }
+        if ($anio_item > 0) {
+            $anios_asambleas[] = $anio_item;
+        }
+    }
+    
+    $rango_anios_asambleas = "";
+    if (!empty($anios_asambleas)) {
+        $min_anio = min($anios_asambleas);
+        $max_anio = max($anios_asambleas);
+        if ($min_anio == $max_anio) {
+            $rango_anios_asambleas = " ($min_anio)";
+        } else {
+            $rango_anios_asambleas = " ($min_anio - $max_anio)";
+        }
+    }
+
+    $stats_actual = obtenerTotalesGrupo($grupo_actual);
+    $stats_asambleas_historico = obtenerTotalesGrupo($grupo_asambleas_historico);
+    $stats_especiales = obtenerTotalesGrupo($grupo_especiales);
+    $stats_reciente = obtenerTotalesGrupo($grupo_reciente);
+    $stats_antiguo = obtenerTotalesGrupo($grupo_antiguo);
+
+    ?>
+
+    <!-- INYECCIÓN JSON LAZY-DOM PARA PREVENIR CONGELAMIENTO -->
+    <script>
+    var adeudosData = {
+        grupo_actual: <?= json_encode($grupo_actual, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE) ?>,
+        grupo_asambleas_historico: <?= json_encode($grupo_asambleas_historico, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE) ?>,
+        grupo_especiales: <?= json_encode($grupo_especiales, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE) ?>,
+        grupo_reciente: <?= json_encode($grupo_reciente, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE) ?>,
+        grupo_antiguo: <?= json_encode($grupo_antiguo, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE) ?>
+    };
+    
+    // Auto-renderizar el año actual nada más cargar la página (compatible con AJAX)
+    (function() {
+        if (adeudosData.grupo_actual && adeudosData.grupo_actual.length > 0) {
+            setTimeout(function() {
+                renderGrupoJS(adeudosData.grupo_actual, 'grupo_actual_content');
+            }, 50);
+        }
+    })();
+    </script>
+
+    <!-- 1. AÑO EN CURSO -->
+    <?php if ($stats_actual['count'] > 0): ?>
+        <div class="accordion-group">
+            <div class="accordion-header" onclick="toggleAccordion('grupo_actual_content', 'grupo_actual_icon')">
+                <div class="accordion-title-area">
+                    <input type="checkbox" onclick="toggleGroupCheckboxes(this, 'grupo_actual_content'); event.stopPropagation();">
+                    <span>📌 AÑO EN CURSO (<?= $anio_actual_ejercicio ?>)</span>
+                    <span class="accordion-badge"><?= $stats_actual['count'] ?> adeudos</span>
+                </div>
+                <div class="accordion-stats-area">
+                    <span class="monto-desglose">Cargos: <strong>$<?= number_format($stats_actual['cargos'], 2, '.', ',') ?></strong></span>
+                    <span class="monto-desglose">Recargos: <strong>$<?= number_format($stats_actual['recargos'], 2, '.', ',') ?></strong></span>
+                    <span class="accordion-subtotal">Subtotal: <strong>$<?= number_format($stats_actual['subtotal'], 2, '.', ',') ?></strong></span>
+                    <span id="grupo_actual_icon" style="font-size: 10px;">&#9650;</span>
+                </div>
+            </div>
+            <div id="grupo_actual_content" class="accordion-content" style="display: block;">
+                <!-- HTML Renderizado Vía JS -->
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <!-- 2. FALTAS A ASAMBLEAS ANTERIORES -->
+    <?php if ($stats_asambleas_historico['count'] > 0): ?>
+        <div class="accordion-group">
+            <div class="accordion-header" onclick="toggleAccordion('grupo_asambleas_historico_content', 'grupo_asambleas_historico_icon')">
+                <div class="accordion-title-area">
+                    <input type="checkbox" onclick="toggleGroupCheckboxes(this, 'grupo_asambleas_historico_content'); event.stopPropagation();">
+                    <span>👥 FALTAS A ASAMBLEAS ANTERIORES<?= $rango_anios_asambleas ?></span>
+                    <span class="accordion-badge"><?= $stats_asambleas_historico['count'] ?> adeudos</span>
+                </div>
+                <div class="accordion-stats-area">
+                    <span class="monto-desglose">Cargos: <strong>$<?= number_format($stats_asambleas_historico['cargos'], 2, '.', ',') ?></strong></span>
+                    <span class="monto-desglose">Recargos: <strong>$<?= number_format($stats_asambleas_historico['recargos'], 2, '.', ',') ?></strong></span>
+                    <span class="accordion-subtotal">Subtotal: <strong>$<?= number_format($stats_asambleas_historico['subtotal'], 2, '.', ',') ?></strong></span>
+                    <span id="grupo_asambleas_historico_icon" style="font-size: 10px;">&#9660;</span>
+                </div>
+            </div>
+            <div id="grupo_asambleas_historico_content" class="accordion-content" style="display: none;">
+                <!-- HTML Renderizado Vía JS -->
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <!-- 3. CARGOS ESPECIALES Y COOPERACIONES -->
+    <?php if ($stats_especiales['count'] > 0): ?>
+        <div class="accordion-group">
+            <div class="accordion-header" onclick="toggleAccordion('grupo_especiales_content', 'grupo_especiales_icon')">
+                <div class="accordion-title-area">
+                    <input type="checkbox" onclick="toggleGroupCheckboxes(this, 'grupo_especiales_content'); event.stopPropagation();">
+                    <span>💼 CARGOS ESPECIALES Y COOPERACIONES<?= $rango_anios_especiales ?></span>
+                    <span class="accordion-badge"><?= $stats_especiales['count'] ?> adeudos</span>
+                </div>
+                <div class="accordion-stats-area">
+                    <span class="monto-desglose">Cargos: <strong>$<?= number_format($stats_especiales['cargos'], 2, '.', ',') ?></strong></span>
+                    <span class="monto-desglose">Recargos: <strong>$<?= number_format($stats_especiales['recargos'], 2, '.', ',') ?></strong></span>
+                    <span class="accordion-subtotal">Subtotal: <strong>$<?= number_format($stats_especiales['subtotal'], 2, '.', ',') ?></strong></span>
+                    <span id="grupo_especiales_icon" style="font-size: 10px;">&#9660;</span>
+                </div>
+            </div>
+            <div id="grupo_especiales_content" class="accordion-content" style="display: none; max-height: 250px; overflow-y: auto;">
+                <!-- HTML Renderizado Vía JS -->
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <!-- 4. HISTORIAL RECIENTE (Últimos 5 años) -->
+    <?php if ($stats_reciente['count'] > 0): ?>
+        <div class="accordion-group">
+            <div class="accordion-header" onclick="toggleAccordion('grupo_reciente_content', 'grupo_reciente_icon')">
+                <div class="accordion-title-area">
+                    <input type="checkbox" onclick="toggleGroupCheckboxes(this, 'grupo_reciente_content'); event.stopPropagation();">
+                    <span>🕒 HISTORIAL RECIENTE (<?= $anio_actual_ejercicio - 5 ?> - <?= $anio_actual_ejercicio - 1 ?>)</span>
+                    <span class="accordion-badge"><?= $stats_reciente['count'] ?> adeudos</span>
+                </div>
+                <div class="accordion-stats-area">
+                    <span class="monto-desglose">Cargos: <strong>$<?= number_format($stats_reciente['cargos'], 2, '.', ',') ?></strong></span>
+                    <span class="monto-desglose">Recargos: <strong>$<?= number_format($stats_reciente['recargos'], 2, '.', ',') ?></strong></span>
+                    <span class="accordion-subtotal">Subtotal: <strong>$<?= number_format($stats_reciente['subtotal'], 2, '.', ',') ?></strong></span>
+                    <span id="grupo_reciente_icon" style="font-size: 10px;">&#9660;</span>
+                </div>
+            </div>
+            <div id="grupo_reciente_content" class="accordion-content" style="display: none;">
+                <!-- HTML Renderizado Vía JS -->
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <!-- 5. HISTORIAL ANTIGUO -->
+    <?php if ($stats_antiguo['count'] > 0): ?>
+        <div class="accordion-group">
+            <div class="accordion-header" onclick="toggleAccordion('grupo_antiguo_content', 'grupo_antiguo_icon')">
+                <div class="accordion-title-area">
+                    <input type="checkbox" onclick="toggleGroupCheckboxes(this, 'grupo_antiguo_content'); event.stopPropagation();">
+                    <span>⚠️ HISTORIAL ANTIGUO (<?= $anio_actual_ejercicio - 6 ?> y anteriores)</span>
+                    <span class="accordion-badge"><?= $stats_antiguo['count'] ?> adeudos</span>
+                </div>
+                <div class="accordion-stats-area">
+                    <span class="monto-desglose">Cargos: <strong>$<?= number_format($stats_antiguo['cargos'], 2, '.', ',') ?></strong></span>
+                    <span class="monto-desglose">Recargos: <strong>$<?= number_format($stats_antiguo['recargos'], 2, '.', ',') ?></strong></span>
+                    <span class="accordion-subtotal">Subtotal: <strong>$<?= number_format($stats_antiguo['subtotal'], 2, '.', ',') ?></strong></span>
+                    <span id="grupo_antiguo_icon" style="font-size: 10px;">&#9660;</span>
+                </div>
+            </div>
+            <div id="grupo_antiguo_content" class="accordion-content" style="display: none;">
+                <!-- HTML Renderizado Vía JS -->
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <!-- Resumen de Totales Generales y Opciones de Pago/Cancelación -->
+    <div id='infodeudas' style='padding-left: 10px; margin-top: 15px;'>
+        <table border=0>
+            <tr>
+                <td>
+                    <fieldset>
+                        <legend>Montos Totales</legend>
+                        <table>
+                            <tr>
+                                <td height=16 width=200px class='derecha'>Total de cargos:</td>
+                                <td class='derecha'><b>$ <?= number_format($total, 2, '.', ',') ?></b></td>
+                            </tr>
+                            <tr>
+                                <td height=16 class='derecha'>Total de recargos:</td>
+                                <td class='derecha'><b>$ <?= number_format($recargos, 2, '.', ',') ?></b></td>
+                            </tr>
+                            <tr>
+                                <td height=16 class='derecha'><b>Total general:</b></td>
+                                <td class='derecha'><b>$ <?= number_format($total + $recargos, 2, '.', ',') ?></b></td>
+                            </tr>
+                            <tr><td colspan=2><hr style='margin:4px 0;'></td></tr>
+                            <tr>
+                                <td colspan=2 style='white-space:nowrap; padding-top:4px;'>
+                                    <span style='color:#555; font-size:12px;'>Total selecci&oacute;n</span>
+                                    <input class='derecha' type='text' value='0'
+                                        id='totalmarcado' name='totalmarcado' readonly
+                                        style='width:55px; font-size:12px; height:18px; margin-right:8px;'>
+                                    <span style='color:#555; font-size:12px;'>No. recibo</span>
+                                    <input class='derecha' type='text' value='<?= $foliotope ?>'
+                                        id='recibo' name='recibo' readonly
+                                        style='width:50px; font-size:12px; height:18px;'>
+                                </td>
+                            </tr>
+                        </table>
+                    </fieldset>
+                </td>
+                <td class='derecha' rowspan=5 width=300px id='cancelacargos'>
+                    <fieldset>
+                        <legend>Opciones</legend>
+                        <a href='#' class='liga' onclick="a_pago();" id='botonpagar'>Pagar cargos
+                            seleccionados</a><br><br>
+                        <a href='#' class='liga2' onclick="a_cancelar();" id='botoncancelar'>Cancelar cargos
+                            seleccionados</a><br><br>
+                        <span id='llaves' style='display:none;'>
+                            Llave del Presidente:<br><input type='password' size=10 name='presidente' class='derecha'
+                                autocomplete=off><br>
+                            Llave del Tesorero:<br><input type='password' size=10 name='tesorero' class='derecha'
+                                autocomplete=off><br>
+                            Raz&oacute;n de la cancelaci&oacute;n:<br><textarea name='texto' id='texto' cols=30
+                                rows=4></textarea>
+                        </span>
+                    </fieldset>
+                </td>
+                <td class='derecha' rowspan=5 width=300px>
+                    <fieldset>
+                        <legend>Confirmaci&oacute;n</legend><span id='sig'></span>
+                    </fieldset>
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `call_mcp_tool`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:09 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `call_mcp_tool`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:09 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `output.txt`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+[
+  {
+    "id": 201296,
+    "numcontrato": "1263",
+    "leyenda": "RECARGO NOV 2021 - ANUALIDAD DEL AGUA 2021",
+    "monto": "600.00",
+    "categoria": 16,
+    "recargo": "0.00",
+    "fcobro": "2026-08-04T00:00:00.000Z"
+  },
+  {
+    "id": 201301,
+    "numcontrato": "1263",
+    "leyenda": "RECARGO MAR 2024 - ANUALIDAD DEL AGUA 2024",
+    "monto": "220.00",
+    "categoria": 16,
+    "recargo": "0.00",
+    "fcobro": "2026-08-04T00:00:00.000Z"
+  },
+  {
+    "id": 201306,
+    "numcontrato": "1263",
+    "leyenda": "RECARGO AGO 2024 - ANUALIDAD DEL AGUA 2024",
+    "monto": "600.00",
+    "categoria": 16,
+    "recargo": "0.00",
+    "fcobro": "2026-08-04T00:00:00.000Z"
+  },
+  {
+    "id": 201377,
+    "numcontrato": "1264",
+    "leyenda": "RECARGO MAR 2021 - ANUALIDAD DEL AGUA 2021",
+    "monto": "600.00",
+    "categoria": 16,
+    "recargo": "0.00",
+    "fcobro": "2026-08-04T00:00:00.000Z"
+  },
+  {
+    "id": 201382,
+    "numcontrato": "1264",
+    "leyenda": "RECARGO AGO 2021 - ANUALIDAD DEL AGUA 2021",
+    "monto": "220.00",
+    "categoria": 16,
+    "recargo": "0.00",
+    "fcobro": "2026-08-04T00:00:00.000Z"
+  },
+  {
+    "id": 201387,
+    "numcontrato": "1264",
+    "leyenda": "RECARGO ENE 2025 - ANUALIDAD DEL AGUA 2025",
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `cargos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L299-439)</summary>
+
+**Path:** `Unknown file`
+
+```
+		];
+	}
+
+	return $templates->render('cargos/lista_tabla', ['cargos' => $cargos]);
+}
+
+function cargaCargos()
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$res = $y->q("select numconsec, nombre, monto, monto_comercial, recargo, observaciones, mensualidades, anio, categoria, repetir, metros from cargos where estado=1 order by nombre");
+	$cargos = [];
+	while ($c = $y->fetch_array($res)) {
+		$cargos[] = [
+			'numconsec' => $c[0],
+			'nombre' => $c[1],
+			'monto' => $c[2],
+			'monto_com' => $c[3],
+			'recargo' => $c[4],
+			'observaciones' => $c[5],
+			'mensualidades' => $c[6],
+			'anio' => $c[7],
+			'categoria' => $c[8],
+			'repetir' => $c[9],
+			'metros' => $c[10]
+		];
+	}
+
+	$resz = $y->q("select numconsec, nombre, monto, monto_comercial, estado from cargos where estado <> 2 order by estado, nombre, anio, monto");
+	$cargos_registrados = [];
+	while (list($num, $nom, $monto, $mon_com, $edo) = $y->fetch_array($resz)) {
+		$cargos_registrados[] = ['num' => $num, 'nom' => $nom, 'monto' => $monto, 'monto_comercial' => $mon_com, 'edo' => $edo];
+	}
+
+	$resc = $y->q("select id, nombre from categorias");
+	$categorias = [];
+	while ($cat = $y->fetch_array($resc)) {
+		$categorias[] = ['id' => $cat[0], 'descripcion' => $cat[1]];
+	}
+
+	return $templates->render('cargos/catalogo', [
+		'cargos' => $cargos,
+		'cargos_registrados' => $cargos_registrados,
+		'categorias' => $categorias
+	]);
+}
+
+function cargaresultados($query, $usuario, $agua, $dren, $marca, $estado1, $estado2, $estado3, $estado4)
+{
+	global $templates;
+	$query = trim($query);
+	$q1 = explode(' ', $query);
+	$r = "";
+	foreach ($q1 as $var) {
+		if ($usuario == 'usr') {
+			$r .= (($r == "") ? "" : " and ") . "usuario.nombre like '%$var%'";
+		} else {
+			$r .= (($r == "") ? "" : " and ") . "(contrato.domicilio like '%$var%' OR contrato.numcontrato like '%$var%')";
+		}
+	}
+
+	$estados_array = array();
+	if ($estado1 == 1)
+		array_push($estados_array, 1);
+	if ($estado2 == 1)
+		array_push($estados_array, 2);
+	if ($estado3 == 1)
+		array_push($estados_array, 3);
+	if ($estado4 == 1 || is_numeric($query))
+		array_push($estados_array, 4);
+
+	$estados = join(",", $estados_array);
+	if (empty($estados))
+		$estados = "0"; // Fallback to avoid empty IN clause
+	$query_sql = "select contrato.numcontrato, usuario.nombre, contrato.domicilio, contrato.agua, contrato.drenaje, if(isnull(total),0,total) as adeudo, contrato.tipo from (contrato left join usuario on contrato.numusuario=usuario.noconsecutivo) left join (select sum(monto) as total, numcontrato from vw_ligacargos_pendientes group by numcontrato) lc on contrato.numcontrato=lc.numcontrato where contrato.estado IN ($estados) and $r" . (($agua == 'x') ? "" : (($agua == '1') ? " and contrato.agua=1" : " and contrato.agua=0")) . (($dren == 'x') ? "" : (($dren == '1') ? " and contrato.drenaje=1" : " and contrato.drenaje=0"));
+
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+	$res = $y->q($query_sql);
+	$n = $y->num_rows($res);
+
+	if ($n > 0) {
+		$resultados = [];
+		while (list($numcontrato, $nombre, $domicilio, $agua, $drenaje, $adeudo, $tipo) = $y->fetch_array($res)) {
+			$resultados[] = [
+				'numcontrato' => $numcontrato,
+				'nombre' => $nombre,
+				'domicilio' => $domicilio,
+				'agua' => $agua,
+				'drenaje' => $drenaje,
+				'adeudo' => $adeudo,
+				'tipo' => $tipo
+			];
+		}
+		return $templates->render('cargos/busqueda_resultados', [
+			'n' => $n,
+			'resultados' => $resultados,
+			'marca' => $marca
+		]);
+	}
+	return "";
+}
+
+function pagacancelacargos($opc, $idc, $pago, $rp, $rt, $texto, $totalmarcado, $recibo)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	if ($opc == 'pagacargos') { // Pago de cargos.
+		// Host C: reservar folio atómico en folios_recibo; si viene $recibo del form lo usamos como referencia
+		$y->q("INSERT INTO folios_recibo (dummy) VALUES (1)");
+		$folio_sig = $y->insert_id();
+
+		// ═══ Snapshot financiero PRE-cobro ═══
+		$res_pre = $y->q("SELECT COUNT(*) AS n, IFNULL(SUM(monto),0) AS total FROM vw_ligacargos_pendientes WHERE numcontrato = '$idc'");
+		$pre = $y->fetch_array($res_pre);
+		$n_pre = intval($pre['n']);
+		$tot_pre = number_format(floatval($pre['total']), 2);
+
+		foreach ($pago as $ref => $val) {
+			$lm = explode('|', $val);
+			$id_cargoval = intval($lm[0]);
+			$leyendaval = $lm[1];
+			$monto_val = floatval($lm[2]);
+			$repetidoval = intval($lm[3]);
+			$categoriaval = isset($lm[4]) ? intval($lm[4]) : 0;
+
+			$ctos_sinc = [];
+			if ($categoriaval == 6 || strpos(strtoupper($leyendaval), 'FALTA ASAMBLEA') !== false) {
+				// Asamblea: sp_sinc_asamblea_puntual sincroniza todos los contratos del usuario
+				$res_u = $y->q("select numusuario from contrato where numcontrato = '$idc'");
+				list($numusuario) = $y->fetch_array($res_u);
+				// Primero pagar el cargo del contrato principal (usando ID atómico = 0 para evitar colisiones de ID con el histórico)
+				$y->q("CALL sp_pagar_cargo(0, '$idc', \"$leyendaval\", $repetidoval, $folio_sig, '$idc', $monto_val, @filas)");
+				// Sincronizar el resto de contratos del mismo usuario
+				$y->q("CALL sp_sinc_asamblea_puntual($numusuario, \"$leyendaval\", 0, @filas_sinc)");
+				// Bitácora de sincronización en cada contrato afectado
+				$res_sinc = $y->q("SELECT l.numcontrato FROM ligacargos l JOIN contrato c ON l.numcontrato=c.numcontrato WHERE c.numusuario=$numusuario AND l.leyenda=\"$leyendaval\" AND l.categoria=6 AND l.folio=$folio_sig AND l.numcontrato != '$idc'");
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `cargos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L149-299)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+		// Validar si el cargo original ya está pagado (Usando caché estática)
+		if (!isset($pagados_cache[$numcontrato])) {
+			$pagados_cache[$numcontrato] = [];
+			$respagado = $y->q("SELECT leyenda FROM vw_ligacargos_all WHERE numcontrato=$numcontrato AND estado=1");
+			while ($row_p = $y->fetch_array($respagado)) {
+				$clean_leyenda = str_replace(" [CONDONADO]", "", $row_p['leyenda']);
+				$pagados_cache[$numcontrato][$clean_leyenda] = true;
+			}
+		}
+		$pagado = isset($pagados_cache[$numcontrato][$leyenda]) ? 1 : 0;
+
+		// Validar el estado del cargo base original (excluir si no existe o está cancelado estado=-1)
+		$res_base = $y->q("SELECT estado FROM vw_ligacargos_all WHERE numcontrato='$numcontrato' AND leyenda='$leyenda' LIMIT 1");
+		if ($y->num_rows($res_base) == 0) {
+			return; // No existe el cargo base
+		}
+		list($estado_base) = $y->fetch_array($res_base);
+		if (intval($estado_base) === -1) {
+			return; // Cargo base cancelado/depurado lógicamente
+		}
+
+		if ($pagado == 0) {
+			// Cargar deuda actual de una sola vez (Usando caché estática)
+			if (!isset($deuda_actual_cache[$numcontrato])) {
+				$res_deuda = $y->q("SELECT IFNULL(SUM(monto),0) FROM vw_ligacargos_pendientes WHERE numcontrato='$numcontrato'");
+				list($deuda) = $y->fetch_array($res_deuda);
+				$deuda_actual_cache[$numcontrato] = floatval($deuda);
+			}
+			$deuda_actual = $deuda_actual_cache[$numcontrato];
+
+			// OPTIMIZACIÓN EXTREMA / IDEMPOTENCIA O(1):
+			// Obtener de un solo golpe TODOS los recargos generados previamente para este contrato (Usando caché estática)
+			if (!isset($recargos_cache[$numcontrato])) {
+				$recargos_cache[$numcontrato] = [];
+				$chk_rec_todos = $y->q("SELECT leyenda FROM vw_ligacargos_all WHERE numcontrato='$numcontrato' AND leyenda LIKE 'RECARGO %'");
+				while ($row_rec = $y->fetch_array($chk_rec_todos)) {
+					$recargos_cache[$numcontrato][$row_rec['leyenda']] = true;
+				}
+			}
+			$hash_recargos = &$recargos_cache[$numcontrato];
+
+			// (El bloque AUTO-HEAL fue removido para restaurar la detonación Legacy completa desde Enero)
+
+			$batch_actual = [];
+			$batch_historico = [];
+
+			for ($i = 1; $i <= $meses; $i++) {
+				$leyenda_recargo = "RECARGO $nom_meses[$mesrecargo] $aniorecargo - $leyenda";
+
+				// Idempotencia O(1) usando el Hash Map en memoria
+				if (!isset($hash_recargos[$leyenda_recargo])) {
+					// RESTAURACIÓN LEGACY (HOST B): Tope estricto de 12 meses
+					// Solo se generan recargos mientras el año del recargo coincida con el año del adeudo
+					if ($aniorecargo == $anio) {
+						$insert_values = "('$numcontrato','$leyenda_recargo',$monto_recargo,CURDATE(),CURDATE(),0,0.00,0,$anio,NULL,NULL,$categoria_recargo,$cuenta)";
+						
+						if ($aniorecargo <= $anio_split) {
+							$batch_historico[] = $insert_values;
+						} else {
+							$batch_actual[] = $insert_values;
+						}
+						$deuda_actual += $monto_recargo;
+						$deuda_actual_cache[$numcontrato] = $deuda_actual;
+						$hash_recargos[$leyenda_recargo] = true;
+					}
+				}
+
+				if (++$mesrecargo > 12) {
+					$mesrecargo = 1;
+					$aniorecargo++;
+				}
+			}
+
+			// BATCH INSERT DUAL: Ejecutar inserciones agrupadas por tabla destino
+			$fields = "(numcontrato,leyenda,monto,fcobro,fpago,estado,recargo,folio,anio,numcontratoresp,idpago_vinc,categoria,repetido)";
+			
+			if (count($batch_historico) > 0) {
+				$q_hist = "INSERT INTO ligacargos_historico $fields VALUES " . implode(",", $batch_historico);
+				if (!$y->q($q_hist)) {
+					$y->_logFallback('ERROR_BATCH_HIST', $q_hist, "Falla Batch Historico Cto $numcontrato");
+				}
+			}
+
+			if (count($batch_actual) > 0) {
+				$q_act = "INSERT INTO ligacargos $fields VALUES " . implode(",", $batch_actual);
+				if (!$y->q($q_act)) {
+					$y->_logFallback('ERROR_BATCH_ACT', $q_act, "Falla Batch Actual Cto $numcontrato");
+				}
+			}
+		}
+	}
+}
+
+function eliminaEgreso($id, $motivo)
+{
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	// Obtener datos antes de eliminar para auditoría
+	$res_ant = $y->q("SELECT leyenda, monto, categoria FROM egresos WHERE id='$id'");
+	$ant = $y->fetch_array($res_ant);
+	$leyenda_e = $ant['leyenda'];
+	$monto_e = number_format($ant['monto'], 2);
+	$cat_e = $ant['categoria'];
+
+	$y->q("update egresos set estado=-1, motivoelimina='$motivo' where id='$id'");
+
+	$motivo_esc = $y->real_escape_string($motivo);
+	$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato) 
+	       VALUES(NOW(), 'Eliminación de Egreso', 'Egreso: $leyenda_e ($cat_e) por \$$monto_e', 'ELIMINADO. Motivo: $motivo_esc', '-EGRESO-')");
+
+	$salida = "Se ha eliminado el egreso";
+
+	return $salida;
+}
+
+function cargaCargosEsp($cadena)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	if ($cadena == "")
+		$cadena = "1";
+
+	if ($cadena != "") {
+		$ocurrencias = explode(" ", $cadena);
+		$cadena = "";
+		foreach ($ocurrencias as $parte) {
+			$cadena .= (($cadena != "") ? "AND " : "") . "nombre like (\"%$parte%\")";
+		}
+	}
+	$q1 = "select numconsec, nombre, monto, monto_comercial, recargo, observaciones, mensualidades, anio, categoria, repetir, metros from cargos where $cadena AND estado=1 order by nombre";
+	$res = $y->q($q1);
+
+	$cargos = [];
+	while ($c = $y->fetch_array($res)) {
+		$cargos[] = [
+			'numconsec' => $c[0],
+			'nombre' => $c[1],
+			'monto' => $c[2],
+			'monto_com' => $c[3],
+			'recargo' => $c[4],
+			'observaciones' => $c[5],
+			'mensualidades' => $c[6],
+			'anio' => $c[7],
+			'categoria' => $c[8],
+			'repetir' => $c[9],
+			'metros' => $c[10]
+		];
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `cargos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/*
+ * cargos.php — Lógica de negocio para cargos
+ * Rediseño v2: calcula_recargos sin hardcodes, usa $cfg de config_sistema
+ * PHP 5.5 compatible
+ */
+
+/**
+ * Normaliza una leyenda para búsquedas seguras en BD.
+ * Elimina espacios extremos, colapsa espacios internos múltiples y convierte a MAYÚSCULAS.
+ * Usar en WHERE cuando $leyenda proviene de input externo (POST/GET/vista).
+ * En el SQL complementar con: UPPER(TRIM(REGEXP_REPLACE(leyenda, '\s+', ' ')))
+ * Para MySQL 5.6/MariaDB sin REGEXP_REPLACE usar: UPPER(TRIM(leyenda)) — cubre el 99% de casos.
+ */
+function normalizarLeyenda($leyenda)
+{
+	$s = trim($leyenda);
+	$s = preg_replace('/\s+/', ' ', $s);
+	return mb_strtoupper($s, 'UTF-8');
+}
+
+function calcula_recargos($numcontrato, $leyenda, $monto, $recargo, $anio, $categoria, $cuenta, $y, $mescontrato, $cfg = null)
+{
+	// Caches estáticos globales para evitar el cuello de botella O(N^2)
+	static $contrato_exencion_cache = [];
+	static $fpago_cache = [];
+	static $pagados_cache = [];
+	static $deuda_actual_cache = [];
+	static $recargos_cache = [];
+
+	// Guard de memoria: Si se han cacheado datos de más de 50 contratos
+	// (por ejemplo, en ejecuciones masivas de reportes), limpiamos la caché
+	// para liberar RAM y evitar cualquier acumulación de memoria.
+	if (count($deuda_actual_cache) > 50) {
+		$contrato_exencion_cache = [];
+		$fpago_cache = [];
+		$pagados_cache = [];
+		$deuda_actual_cache = [];
+		$recargos_cache = [];
+	}
+
+	// Cargar config si no viene como parámetro (compatibilidad)
+	if (!is_array($cfg) || count($cfg) == 0) {
+		$cfg = cargaConfig($y);
+	}
+
+	$mes_inicio = intval(isset($cfg['recargo_mes_inicio']) ? $cfg['recargo_mes_inicio'] : 4);
+	$porcentaje = floatval(isset($cfg['recargo_porcentaje']) ? $cfg['recargo_porcentaje'] : 10);
+	$cat_agua = intval(isset($cfg['recargo_categoria_agua']) ? $cfg['recargo_categoria_agua'] : 16);
+	$cat_drenaje = intval(isset($cfg['recargo_categoria_drenaje']) ? $cfg['recargo_categoria_drenaje'] : 17);
+	$ignorar_fantasma = intval(isset($cfg['paridad_ignorar_fpago_fantasma']) ? $cfg['paridad_ignorar_fpago_fantasma'] : 1);
+	$anio_split = intval(isset($cfg['anio_split_historico']) ? $cfg['anio_split_historico'] : 2025);
+	$anio_limite = intval(isset($cfg['paridad_anio_limite_mora']) ? $cfg['paridad_anio_limite_mora'] : 2005);
+
+	// Guard G01: El flag recargo=0 en tabla cargos significa que el concepto no devenga mora
+	if (intval($recargo) === 0) {
+		return;
+	}
+
+	// Guard G02: Exclusión absoluta de cualquier categoría diferente de 2 (AGUA) o 3 (DRENAJE)
+	if ($categoria != 2 && $categoria != 3) {
+		return;
+	}
+
+	// EXENCIÓN RECARGOS PRIMER AÑO Y VALIDACIÓN DE ESTADO (Usando caché estática)
+	if (!isset($contrato_exencion_cache[$numcontrato])) {
+		$res_exencion = $y->q("SELECT YEAR(fecha) as anio_creacion, exento_recargo_primer_anio, estado FROM contrato WHERE numcontrato='$numcontrato'");
+		$contrato_exencion_cache[$numcontrato] = $y->fetch_array($res_exencion);
+	}
+	
+	$c_info = $contrato_exencion_cache[$numcontrato];
+	$anio_creacion = isset($c_info['anio_creacion']) ? intval($c_info['anio_creacion']) : 0;
+	$exento_recargo = isset($c_info['exento_recargo_primer_anio']) ? intval($c_info['exento_recargo_primer_anio']) : 0;
+	$edo_cto = isset($c_info['estado']) ? intval($c_info['estado']) : 1;
+
+	// REGLA F01 / SDF: No generar recargos si el contrato está en Suspensión Definitiva (estado 4)
+	if ($edo_cto === 4) {
+		return;
+	}
+	// REGLA F01 / C06: No generar recargos en Suspensión Temporal (estado 2).
+	if ($edo_cto === 2) {
+		return;
+	}
+
+	if ($exento_recargo == 1 && $anio == $anio_creacion) {
+		return;
+	}
+
+	// EXENCIÓN: NO GENERAR RECARGOS PARA CATEGORÍAS QUE YA SON RECARGOS
+	if ($categoria == $cat_agua || $categoria == $cat_drenaje) {
+		return;
+	}
+
+	// GUARD HÍBRIDO (Poka-Yoke Legacy <= 2017):
+	// Si el año es <= 2017, verificamos si el cajero capturó un cargo manual ("RECARGO ANUAL%").
+	// Si existe, el motor JIT se apaga (cede el paso) para evitar duplicidad de deuda.
+	if ($anio <= 2017) {
+		$cache_key = "legacy_mora_{$numcontrato}_{$anio}_{$categoria}";
+		static $legacy_mora_cache = [];
+		if (!isset($legacy_mora_cache[$cache_key])) {
+			$tipo_b = ($categoria == 2) ? 'AGUA' : 'DRENAJE';
+			$q_leg = "SELECT numcontrato FROM vw_ligacargos_pendientes WHERE numcontrato='$numcontrato' AND anio=$anio AND (leyenda LIKE 'RECARGO ANUAL DE $tipo_b%' OR leyenda LIKE 'RECARGO ANUAL $tipo_b%' OR leyenda LIKE 'RECARGOS ANUAL $tipo_b%') LIMIT 1";
+			$r_leg = $y->q($q_leg);
+			$legacy_mora_cache[$cache_key] = ($y->fetch_array($r_leg)) ? true : false;
+		}
+		if ($legacy_mora_cache[$cache_key]) {
+			return; // Cede el paso al recargo manual Legacy
+		}
+	}
+
+	$fecha_actual = time();
+	$mes_pad = str_pad($mes_inicio, 2, '0', STR_PAD_LEFT);
+	$fecha_entrada = strtotime("01-$mes_pad-$anio 01:00:00");
+
+	if ($fecha_actual > $fecha_entrada) {
+		$mes_numero = intval(date('m'));
+		$anio_numero = intval(date('Y'));
+		$meses = (($anio_numero - $anio) * 12) + ($mes_numero - 1);
+
+		$nom_meses = array("", "ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SEPT", "OCT", "NOV", "DIC");
+
+		$mesrecargo = 1;
+		$aniorecargo = $anio;
+
+		$monto_recargo = ($monto * $porcentaje) / 100;
+
+		$categoria_recargo = ($categoria == 2) ? $cat_agua : $cat_drenaje;
+
+		// LÍMITE ABSOLUTO: No generar mora para cargos anteriores al año límite configurado
+		if ($anio < $anio_limite) {
+			return;
+		}
+
+		// FILTRO: fpago fantasma — excluir cargos con fecha de pago corrupta (anterior al año límite) (Usando caché estática)
+		if ($ignorar_fantasma) {
+			if (!isset($fpago_cache[$numcontrato])) {
+				$fpago_cache[$numcontrato] = [];
+				$res_fp = $y->q("SELECT leyenda, fpago FROM vw_ligacargos_all WHERE numcontrato='$numcontrato' AND estado=0");
+				while ($row_fp = $y->fetch_array($res_fp)) {
+					$fpago_cache[$numcontrato][$row_fp['leyenda']] = $row_fp['fpago'];
+				}
+			}
+			if (isset($fpago_cache[$numcontrato][$leyenda])) {
+				$fpago_val = $fpago_cache[$numcontrato][$leyenda];
+				if ($fpago_val !== null && intval(substr($fpago_val, 0, 4)) < $anio_limite) {
+					return;
+				}
+			}
+		}
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:09 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:09 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:09 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `run_patch_host_c.sh`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+#!/bin/bash
+# run_patch_host_c.sh - Orchestrator for Linux to apply SQL patches to Host C using dynamic credentials from .mcp.json
+
+MCP_JSON="/home/carlos/GitHub/agua_chatledger/.mcp.json"
+
+if [ ! -f "$MCP_JSON" ]; then
+    echo "ERROR: No se encontró el archivo SSOT $MCP_JSON"
+    exit 1
+fi
+
+echo "=========================================="
+echo "    PATCH ISSUE 01 - HOST C (LINUX SCRIPT)"
+echo "    SANEAMIENTO Y MOTOR LEGACY"
+echo "=========================================="
+
+# Extraer URI desde .mcp.json usando jq
+URI=$(jq -r '.mcpServers."bdawahost-c".args[-1]' "$MCP_JSON")
+
+if [ -z "$URI" ] || [ "$URI" == "null" ]; then
+    echo "ERROR: No se pudo extraer la URI de conexión para bdawahost-c desde $MCP_JSON"
+    exit 1
+fi
+
+# Parsear componentes de la URI
+DB_USER=$(echo "$URI" | sed -r 's|mysql://([^:]+):.*|\1|')
+DB_PASS=$(echo "$URI" | sed -r 's|mysql://[^:]+:([^@]+)@.*|\1|')
+DB_HOST=$(echo "$URI" | sed -r 's|.*@([^:]+):.*|\1|')
+DB_PORT=$(echo "$URI" | sed -r 's|.*:([0-9]+)/.*|\1|')
+DB_NAME=$(echo "$URI" | sed -r 's|.*/([^/]+)$|\1|')
+
+MYSQL_CMD="mysql"
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR"
+
+echo "Conectando a Host C en $DB_HOST:$DB_PORT (BD: $DB_NAME)..."
+
+# 1. Normalización del Catálogo
+echo -e "\n=> Aplicando Parche al Catálogo (01_normalizar_catalogo.sql)..."
+$MYSQL_CMD -h "$DB_HOST" -P "$DB_PORT" -u "$DB_USER" -p"$DB_PASS" "$DB_NAME" < 01_normalizar_catalogo.sql
+if [ $? -ne 0 ]; then
+    echo "ERROR al aplicar 01_normalizar_catalogo.sql"
+    exit 1
+fi
+echo "[OK]"
+
+# 2. Normalización Estructural V2 (Renombrados y Re-categorización)
+echo -e "\n=> Aplicando Normalización Estructural V2 (02_normalizacion_estructural_v2.sql)..."
+$MYSQL_CMD -h "$DB_HOST" -P "$DB_PORT" -u "$DB_USER" -p"$DB_PASS" "$DB_NAME" < 02_normalizacion_estructural_v2.sql
+if [ $? -ne 0 ]; then
+    echo "ERROR al aplicar 02_normalizacion_estructural_v2.sql"
+    exit 1
+fi
+echo "[OK]"
+
+# 3. Normalización de Cuentas de Usuarios
+echo -e "\n=> Aplicando Limpieza de Adeudos en Cuentas (03_normalizar_cuentas_usuarios.sql)..."
+$MYSQL_CMD -h "$DB_HOST" -P "$DB_PORT" -u "$DB_USER" -p"$DB_PASS" "$DB_NAME" < 03_normalizar_cuentas_usuarios.sql
+if [ $? -ne 0 ]; then
+    echo "ERROR al aplicar 03_normalizar_cuentas_usuarios.sql"
+    exit 1
+fi
+echo "[OK]"
+
+# 4. Aplicación de la Vista Legacy
+echo -e "\n=> Aplicando Vista de Mora Legacy (04_vista_cargos_pendientes_legacy.sql)..."
+$MYSQL_CMD -h "$DB_HOST" -P "$DB_PORT" -u "$DB_USER" -p"$DB_PASS" "$DB_NAME" < 04_vista_cargos_pendientes_legacy.sql
+if [ $? -ne 0 ]; then
+    echo "ERROR al aplicar 04_vista_cargos_pendientes_legacy.sql"
+    exit 1
+fi
+echo "[OK]"
+
+# 5. Limpieza Trailing Spaces
+echo -e "\n=> Aplicando Limpieza Trailing Spaces (05_limpieza_trailing_spaces.sql)..."
+$MYSQL_CMD -h "$DB_HOST" -P "$DB_PORT" -u "$DB_USER" -p"$DB_PASS" "$DB_NAME" < 05_limpieza_trailing_spaces.sql
+if [ $? -ne 0 ]; then
+    echo "ERROR al aplicar 05_limpieza_trailing_spaces.sql"
+    exit 1
+fi
+echo "[OK]"
+
+# 7. Saneamiento de Recargos Huérfanos
+echo -e "\n=> Aplicando Saneamiento de Recargos Huérfanos (07_saneamiento_recargos_huerfanos.sql)..."
+$MYSQL_CMD -h "$DB_HOST" -P "$DB_PORT" -u "$DB_USER" -p"$DB_PASS" "$DB_NAME" < 07_saneamiento_recargos_huerfanos.sql
+if [ $? -ne 0 ]; then
+    echo "ERROR al aplicar 07_saneamiento_recargos_huerfanos.sql"
+    exit 1
+fi
+echo "[OK]"
+
+# 8. Saneamiento de Recargos Pagados
+echo -e "\n=> Aplicando Saneamiento de Recargos Pagados (08_saneamiento_recargos_pagados.sql)..."
+$MYSQL_CMD -h "$DB_HOST" -P "$DB_PORT" -u "$DB_USER" -p"$DB_PASS" "$DB_NAME" < 08_saneamiento_recargos_pagados.sql
+if [ $? -ne 0 ]; then
+    echo "ERROR al aplicar 08_saneamiento_recargos_pagados.sql"
+    exit 1
+fi
+echo "[OK]"
+
+# 9. Saneamiento de Recargos Anuales Duplicados
+echo -e "\n=> Aplicando Saneamiento de Recargos Anuales Duplicados (09_saneamiento_recargos_anuales_duplicados.sql)..."
+$MYSQL_CMD -h "$DB_HOST" -P "$DB_PORT" -u "$DB_USER" -p"$DB_PASS" "$DB_NAME" < 09_saneamiento_recargos_anuales_duplicados.sql
+if [ $? -ne 0 ]; then
+    echo "ERROR al aplicar 09_saneamiento_recargos_anuales_duplicados.sql"
+    exit 1
+fi
+echo "[OK]"
+
+# 10. Aplicar Amnistía y Purga JIT 2005-2014
+echo -e "\n=> Aplicando Amnistía y Purga JIT 2005-2014 (10_aplicar_amnistia_2005_2014.sql)..."
+$MYSQL_CMD -h "$DB_HOST" -P "$DB_PORT" -u "$DB_USER" -p"$DB_PASS" "$DB_NAME" < 10_aplicar_amnistia_2005_2014.sql
+if [ $? -ne 0 ]; then
+    echo "ERROR al aplicar 10_aplicar_amnistia_2005_2014.sql"
+    exit 1
+fi
+echo "[OK]"
+
+# 11. Depuración Deuda Fantasma Contratos 742 y 959
+echo -e "\n=> Aplicando Depuración Deuda Fantasma Contratos 742 y 959 (11_depuracion_deuda_fantasma_742_959.sql)..."
+$MYSQL_CMD -h "$DB_HOST" -P "$DB_PORT" -u "$DB_USER" -p"$DB_PASS" "$DB_NAME" < 11_depuracion_deuda_fantasma_742_959.sql
+if [ $? -ne 0 ]; then
+    echo "ERROR al aplicar 11_depuracion_deuda_fantasma_742_959.sql"
+    exit 1
+fi
+echo "[OK]"
+
+# 6. Validaciones Finales y Reporte
+echo -e "\n=========================================="
+echo "    INFORME DE VALIDACIÓN (HOST C)"
+echo "=========================================="
+$MYSQL_CMD -h "$DB_HOST" -P "$DB_PORT" -u "$DB_USER" -p"$DB_PASS" -t "$DB_NAME" < 06_validation_legacy.sql
+if [ $? -ne 0 ]; then
+    echo "ERROR en las validaciones"
+    exit 1
+fi
+echo -e "\n[OK] Validaciones completadas."
+
+echo "=========================================="
+echo "    PROCESO COMPLETADO EXITOSAMENTE"
+echo "=========================================="
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `11_depuracion_deuda_fantasma_742_959.sql`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+-- ------------------------------------------------------------------------------
+-- 11_depuracion_deuda_fantasma_742_959.sql
+-- Propósito: Depurar deudas retroactivas no reconocidas (años <= 2025) inyectadas
+-- durante el cambio de estado (2 -> 1) en los contratos 742 y 959.
+-- Preserva intactos los cobros e ingresos del año 2026 (Folios 25503, 25504, 25513, 25514).
+-- ------------------------------------------------------------------------------
+
+-- 1. Soft-Delete de cargos pendientes (estado = 0) de años <= 2025 para contrato 742 en tabla activa e histórica
+UPDATE ligacargos 
+SET estado = -1, fcobro = NOW() 
+WHERE numcontrato = '742' AND anio <= 2025 AND estado = 0;
+
+UPDATE ligacargos_historico 
+SET estado = -1, fcobro = NOW() 
+WHERE numcontrato = '742' AND anio <= 2025 AND estado = 0;
+
+-- 2. Soft-Delete de cargos pendientes (estado = 0) de años <= 2025 para contrato 959 en tabla activa e histórica
+UPDATE ligacargos 
+SET estado = -1, fcobro = NOW() 
+WHERE numcontrato = '959' AND anio <= 2025 AND estado = 0;
+
+UPDATE ligacargos_historico 
+SET estado = -1, fcobro = NOW() 
+WHERE numcontrato = '959' AND anio <= 2025 AND estado = 0;
+
+-- 3. Registrar entrada de auditoría en la tabla cambios
+INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato)
+VALUES (
+    NOW(),
+    'Depuracion de Deuda Retroactiva Atrasada (Amnistia de Suspesion ST <= 2025)',
+    'Adeudos atrasados no reconocidos generados al pasar de Suspesion Temporal a Activo',
+    'Depuracion efectuada (estado=-1). Deuda 2026 pagada en caja conservada 100% intacta.',
+    '742'
+), (
+    NOW(),
+    'Depuracion de Deuda Retroactiva Atrasada (Amnistia de Suspesion ST <= 2025)',
+    'Adeudos atrasados no reconocidos generados al pasar de Suspesion Temporal a Activo',
+    'Depuracion efectuada (estado=-1). Deuda 2026 pagada en caja conservada 100% intacta.',
+    '959'
+);
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `call_mcp_tool`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:10 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `call_mcp_tool`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:10 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `call_mcp_tool`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:10 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `call_mcp_tool`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:10 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `call_mcp_tool`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:10 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `call_mcp_tool`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** CORTEX_STEP_STATUS_ERROR
+**Created:** 11 Aug 2026, 1:10 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `call_mcp_tool`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:10 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `output.txt`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+[
+  {
+    "numconsec": 8,
+    "nombre": "ANUALIDAD DEL DRENAJE 2006",
+    "monto": "120.00",
+    "categoria": 3,
+    "anio": 2006
+  },
+  {
+    "numconsec": 21,
+    "nombre": "ANUALIDAD DEL DRENAJE 2006 TIPO (C)",
+    "monto": "240.00",
+    "categoria": 3,
+    "anio": 2006
+  },
+  {
+    "numconsec": 47,
+    "nombre": "ANUALIDAD DEL AGUA 2006 TIPO (C)",
+    "monto": "720.00",
+    "categoria": 2,
+    "anio": 2006
+  },
+  {
+    "numconsec": 56,
+    "nombre": "ANUALIDAD DEL AGUA 2006",
+    "monto": "360.00",
+    "categoria": 2,
+    "anio": 2006
+  },
+  {
+    "numconsec": 58,
+    "nombre": "ANUALIDAD DEL DRENAJE 2007",
+    "monto": "120.00",
+    "categoria": 3,
+    "anio": 2007
+  },
+  {
+    "numconsec": 59,
+    "nombre": "ANUALIDAD DEL AGUA 2007 TIPO (C)",
+    "monto": "720.00",
+    "categoria": 2,
+    "anio": 2007
+  },
+  {
+    "numconsec": 65,
+    "nombre": "ANUALIDAD DEL AGUA 2008",
+    "monto": "360.00",
+    "categoria": 2,
+    "anio": 2008
+  },
+  {
+    "numconsec": 66,
+    "nombre": "ANUALIDAD DEL DRENAJE 2008",
+    "monto": "120.00",
+    "categoria": 3,
+    "anio": 2008
+  },
+  {
+    "numconsec": 79,
+    "nombre": "ANUALIDAD DEL DRENAJE 2007 TIPO (C)",
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `call_mcp_tool`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:10 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `call_mcp_tool`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:10 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `output.txt`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+[
+  {
+    "numconsec": 24,
+    "nombre": "RECARGOS AGUA 2006",
+    "monto": "36.00",
+    "monto_comercial": "0.00",
+    "recargo": 0,
+    "observaciones": "",
+    "mensualidades": 1,
+    "anio": 2006,
+    "categoria": 16,
+    "repetir": 0,
+    "metros": 0
+  },
+  {
+    "numconsec": 25,
+    "nombre": "RECARGOS DRENAJE 2006",
+    "monto": "12.00",
+    "monto_comercial": "0.00",
+    "recargo": 0,
+    "observaciones": "",
+    "mensualidades": 1,
+    "anio": 2006,
+    "categoria": 17,
+    "repetir": 0,
+    "metros": 0
+  },
+  {
+    "numconsec": 60,
+    "nombre": "RECARGOS AGUA 2007",
+    "monto": "36.00",
+    "monto_comercial": "0.00",
+    "recargo": 0,
+    "observaciones": "",
+    "mensualidades": 1,
+    "anio": 2007,
+    "categoria": 16,
+    "repetir": 0,
+    "metros": 0
+  },
+  {
+    "numconsec": 62,
+    "nombre": "RECARGOS DRENAJE 2007",
+    "monto": "12.00",
+    "monto_comercial": "0.00",
+    "recargo": 0,
+    "observaciones": "",
+    "mensualidades": 1,
+    "anio": 2007,
+    "categoria": 17,
+    "repetir": 0,
+    "metros": 0
+  },
+  {
+    "numconsec": 67,
+    "nombre": "RECARGOS AGUA 2008",
+    "monto": "36.00",
+    "monto_comercial": "0.00",
+    "recargo": 0,
+    "observaciones": "",
+    "mensualidades": 1,
+    "anio": 2008,
+    "categoria": 16,
+    "repetir": 0,
+    "metros": 0
+  },
+  {
+    "numconsec": 68,
+    "nombre": "RECARGOS DRENAJE 2008",
+    "monto": "12.00",
+    "monto_comercial": "0.00",
+    "recargo": 0,
+    "observaciones": "",
+    "mensualidades": 1,
+    "anio": 2008,
+    "categoria": 17,
+    "repetir": 0,
+    "metros": 0
+  },
+  {
+    "numconsec": 71,
+    "nombre": "RECARGOS ANUAL AGUA 2005",
+    "monto": "432.00",
+    "monto_comercial": "0.00",
+    "recargo": 0,
+    "observaciones": "",
+    "mensualidades": 0,
+    "anio": 2005,
+    "categoria": 16,
+    "repetir": 0,
+    "metros": 0
+  },
+  {
+    "numconsec": 72,
+    "nombre": "RECARGOS ANUAL AGUA 2006",
+    "monto": "432.00",
+    "monto_comercial": "0.00",
+    "recargo": 0,
+    "observaciones": "",
+    "mensualidades": 0,
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `cargos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L114-139)</summary>
+
+**Path:** `Unknown file`
+
+```
+	if ($fecha_actual > $fecha_entrada) {
+		$mes_numero = intval(date('m'));
+		$anio_numero = intval(date('Y'));
+		$meses = (($anio_numero - $anio) * 12) + ($mes_numero - 1);
+
+		$nom_meses = array("", "ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SEPT", "OCT", "NOV", "DIC");
+
+		$mesrecargo = 1;
+		$aniorecargo = $anio;
+
+		$monto_recargo = ($monto * $porcentaje) / 100;
+
+		$categoria_recargo = ($categoria == 2) ? $cat_agua : $cat_drenaje;
+
+		// LÍMITE ABSOLUTO: No generar mora para cargos anteriores al año límite configurado
+		if ($anio < $anio_limite) {
+			return;
+		}
+
+		// FILTRO: fpago fantasma — excluir cargos con fecha de pago corrupta (anterior al año límite) (Usando caché estática)
+		if ($ignorar_fantasma) {
+			if (!isset($fpago_cache[$numcontrato])) {
+				$fpago_cache[$numcontrato] = [];
+				$res_fp = $y->q("SELECT leyenda, fpago FROM vw_ligacargos_all WHERE numcontrato='$numcontrato' AND estado=0");
+				while ($row_fp = $y->fetch_array($res_fp)) {
+					$fpago_cache[$numcontrato][$row_fp['leyenda']] = $row_fp['fpago'];
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `calcula_recargos`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:10 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `calcula_recargos`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:10 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `_sincronizaDeudaPendienteContrato`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:10 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `contratos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/*
+ * contratos.php — Lógica de negocio para contratos
+ * Rediseño v2: usa contrato_toma y config_sistema
+ * PHP 5.5 compatible
+ */
+
+// =============================================================================
+// Normalización canónica de domicilios
+// Unifica variantes tipográficas antes de guardar en BD y para comparaciones.
+// Reglas: UPPER, sin acentos, sin puntos/comas, espacios simples,
+//         variantes de número (n°, nº, no., nO.) → N, sin punto final.
+// =============================================================================
+function _normalizaDomicilio($dom) {
+    $s = strtoupper(trim((string)$dom));
+    // Acentos y caracteres especiales
+    $s = str_replace(['Á','É','Í','Ó','Ú','Ü','Ñ'], ['A','E','I','O','U','U','N'], $s);
+    // Variantes de número ordinal (N° Nº NO. No. NO 1, N10, N-10, N.10) → # (respetando palabras como NORTE, NOGALES, PINO, CAMINO)
+    $s = preg_replace('/\bN[Oo]\.\s*|N[°º]\.?\s*|\bN[Oo]\s*(?=[0-9])|\bN[\s\.\-]*(?=[0-9])/u', '#', $s);
+    // Puntos, comas, guiones dobles
+    $s = str_replace(['.', ','], ['', ''], $s);
+    // Múltiples espacios → uno
+    $s = preg_replace('/\s+/', ' ', $s);
+    return trim($s);
+}
+
+// Expresión SQL equivalente a _normalizaDomicilio() para usar en WHERE.
+// $col: nombre de columna (ej. "c.domicilio") o valor literal entre comillas simples.
+function _normalizaDomicilioSQL($col) {
+    // Acentos y Ñ
+    $s = "REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(UPPER($col),'Á','A'),'É','E'),'Í','I'),'Ó','O'),'Ú','U'),'Ü','U'),'Ñ','N')";
+    // Variantes de número ordinal (N° Nº NO. No. NO 1, N10, N-10, N.10) → # (respetando palabras como NORTE, NOGALES, PINO, CAMINO)
+    $s = "REGEXP_REPLACE($s, '\\bN[Oo]\\.\\s*|N[°º]\\.?\\s*|\\bN[Oo]\\s*(?=[0-9])|\\bN[\\s\\.\\-]*(?=[0-9])', '#')";
+    // Puntos y comas
+    $s = "REPLACE(REPLACE($s,'.',''),',','')";
+    // Colapsar espacios dobles (SQL no tiene regex; 2 pasadas cubren hasta 4 espacios consecutivos)
+    $s = "TRIM(REPLACE(REPLACE($s,'  ',' '),'  ',' '))";
+    return $s;
+}
+
+function cargaConfig($y)
+{
+	$res = $y->q("SELECT clave, valor FROM config_sistema");
+	$cfg = array();
+	while (list($k, $v) = $y->fetch_array($res)) {
+		// Fix para números formateados (ej. 10,500 o 10,500.50)
+		if (preg_match('/^-?\d{1,3}(,\d{3})+(\.\d+)?$/', trim((string)$v))) {
+			$v = str_replace(',', '', trim((string)$v));
+		}
+		$cfg[$k] = $v;
+	}
+	return $cfg;
+}
+
+function obtenerValorSeguro($array, $indice, $valorPorDefecto = '')
+{
+	return (isset($array[$indice]) && $array[$indice] !== null) ? $array[$indice] : $valorPorDefecto;
+}
+
+function cargaContrato($id)
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `contratos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L249-299)</summary>
+
+**Path:** `Unknown file`
+
+```
+			'mensaje' => 'No es posible cambiar el estado de un contrato que se encuentra en <b>Suspensión Definitiva</b>.'
+		));
+	}
+
+	// Bloqueo de cambio al mismo estado (UI Fix)
+	if (intval($estado_actual) === intval($estado)) {
+		$nombres_map = array(1 => 'ACTIVO', 2 => 'SUSPENSIÓN TEMPORAL', 3 => 'SUSPENSIÓN ADMINISTRATIVA', 4 => 'SUSPENSIÓN DEFINITIVA');
+		return $templates->render('sistema/mensaje', array(
+			'titulo'  => 'Sin cambios',
+			'mensaje' => 'El contrato ya se encuentra en estado <b>' . $nombres_map[intval($estado)] . '</b>. No se realizó ninguna acción.'
+		));
+	}
+
+	// Bloqueo de transiciones ilógicas (2 <-> 3) según análisis de Runbook
+	if ((intval($estado_actual) === 2 && intval($estado) === 3) || (intval($estado_actual) === 3 && intval($estado) === 2)) {
+		return $templates->render('sistema/mensaje', array(
+			'titulo'  => 'Transición No Permitida',
+			'mensaje' => 'No se permite saltar entre diferentes tipos de suspensión directamente. El contrato debe ser <b>Regularizado a Activo</b> antes de cambiar el tipo de suspensión.'
+		));
+	}
+
+	$res1 = $y->q("SELECT contrasena FROM contrasenas WHERE rol='presidente'");
+	$res2 = $y->q("SELECT contrasena FROM contrasenas WHERE rol='tesorero'");
+	list($contrasena_presidente) = $y->fetch_array($res1);
+	list($contrasena_tesorero)   = $y->fetch_array($res2);
+
+	// Validar mes para suspensión temporal
+	if ($estado == 2 && intval(date('m')) != $mes_st) {
+		$nom_meses = array("","Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+		return $templates->render('sistema/mensaje', array(
+			'titulo'  => 'No permitido',
+			'mensaje' => 'La Suspensi&oacute;n Temporal solo puede solicitarse en <b>' . $nom_meses[$mes_st] . '</b>.'
+		));
+	}
+
+	// Sanitizar inputs de llaves
+	$rp = trim((string)$rp);
+	$rt = trim((string)$rt);
+
+	// VALIDACIÓN ACTIVA: Modo mixto (Bcrypt nuevo o MD5 legado)
+	$val_p = password_verify($rp, $contrasena_presidente) || (md5($rp) == $contrasena_presidente);
+	$val_t = password_verify($rt, $contrasena_tesorero)   || (md5($rt) == $contrasena_tesorero);
+
+	if (!$val_p || !$val_t) {
+		return $templates->render('sistema/mensaje', array(
+			'titulo'  => 'Error de Seguridad',
+			'mensaje' => 'Las contraseñas del Presidente o Tesorero son incorrectas o están incompletas. La transición de estado requiere autorización vigente.'
+		));
+	}
+
+	if (strlen($texto) > $min_car) {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `function _sincronizaDeudaPendienteContrato`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:10 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `contratos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1649-1727)</summary>
+
+**Path:** `Unknown file`
+
+```
+	$n_cancelados = 0;
+	$n_paid = 0;
+	if (!empty($lc_ids_nuevos)) {
+		$ids_str = implode(',', $lc_ids_nuevos);
+		
+		// Verificar si alguno ya fue pagado
+		$res_paid = $y->q("SELECT COUNT(*) FROM ligacargos WHERE numcontrato='$contrato' AND id IN ($ids_str) AND estado=1");
+		list($n_paid) = $y->fetch_array($res_paid);
+
+		$y->q("UPDATE ligacargos SET estado=-1 WHERE numcontrato='$contrato' AND id IN ($ids_str) AND estado=0");
+		$n_cancelados = count($lc_ids_nuevos) - $n_paid;
+	}
+
+	// ── 5a. Restaurar cargos amnistiados en histórico (de -1 a 0) ───────────
+	$n_restaurados = 0;
+	if (!empty($hist_ids_amnist)) {
+		$ids_hist_str = implode(',', $hist_ids_amnist);
+		$y->q("UPDATE ligacargos_historico SET estado=0 WHERE numcontrato='$contrato' AND id IN ($ids_hist_str) AND estado=-1");
+		$n_restaurados = count($hist_ids_amnist);
+	}
+
+	// ── 5b. Restaurar cargos cancelados por paridad en activa (de -1 a 0) ───
+	$n_reactivados = 0;
+	if (!empty($lc_ids_cancelados)) {
+		$ids_cxl_str = implode(',', $lc_ids_cancelados);
+		$y->q("UPDATE ligacargos SET estado=0 WHERE numcontrato='$contrato' AND id IN ($ids_cxl_str) AND estado=-1");
+		$n_reactivados = count($lc_ids_cancelados);
+	}
+
+	// ── 5c. Cancelar recargos históricos nuevos (calcula_recargos anio<=2025) ─
+	// Punto ciego anterior: calcula_recargos() inserta recargos cat 16/17 en
+	// ligacargos_historico con estado=0 — no quedaban en lc_ids_nuevos (activa).
+	$n_hist_cancelados = 0;
+	if (!empty($hist_ids_nuevos_hist)) {
+		$ids_hn_str = implode(',', $hist_ids_nuevos_hist);
+		$y->q("UPDATE ligacargos_historico SET estado=-1 WHERE numcontrato='$contrato' AND id IN ($ids_hn_str) AND estado=0");
+		$n_hist_cancelados = count($hist_ids_nuevos_hist);
+	}
+
+	// ── Snapshot financiero POST-reversa ─────────────────────────────────────
+	$res_snap2 = $y->q("SELECT COUNT(*) AS n, IFNULL(SUM(monto),0) AS total FROM vw_ligacargos_pendientes WHERE numcontrato='$contrato'");
+	$snap_post = $y->fetch_array($res_snap2);
+	$n_post_rev  = intval($snap_post['n']);
+	$tot_post_rev = number_format(floatval($snap_post['total']), 2);
+
+	// ── 6. Registrar en bitácora ──────────────────────────────────────────────
+	$fecha_snap_esc = $y->real_escape_string($row['fecha']);
+	$nom_orig_esc   = $y->real_escape_string($nom_origen);
+	$nom_dest_esc   = $y->real_escape_string($nom_destino);
+	
+	$nota_pago = ($n_paid > 0) ? " | ¡AVISO! $n_paid cargos nuevos ya estaban pagados y NO se revirtieron." : "";
+
+	$antes_rev = "Estado [$estado_destino] $nom_dest_esc. " .
+	             "Adeudos: $n_pre_rev | Deuda: \$$tot_pre_rev. " .
+	             "Revirtiendo transición del $fecha_snap_esc.";
+	$despues_rev = "Estado [$estado_origen] $nom_orig_esc restaurado exactamente. " .
+	               "Adeudos: $n_post_rev | Deuda: \$$tot_post_rev. " .
+	               "Cargos nuevos cancelados: $n_cancelados. " .
+	               "Recargos históricos cancelados: $n_hist_cancelados. " .
+	               "Cargos amnistiados restaurados: $n_restaurados. " .
+	               "Cargos de paridad reactivados: $n_reactivados. " .
+	               "Tomas restauradas: $n_tomas_rest." . $nota_pago .
+	               " | Deuda: \$" . number_format($deuda_post, 2) .
+	               " → \$" . number_format($deuda_pre, 2) . " (deuda original).";
+
+
+	$antes_esc   = $y->real_escape_string($antes_rev);
+	$despues_esc = $y->real_escape_string($despues_rev);
+
+	$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato)
+	       VALUES(NOW(), 'Reversión de Transición de Estado', '$antes_esc', '$despues_esc', '$contrato')");
+
+	// ── 6. Marcar el snapshot como REVERTIDO ─────────────────────────────────
+	$y->q("UPDATE cambios SET despues='REVERTIDO' WHERE id=$snap_id");
+
+	return "<script>cargaDatosContrato('$contrato');</script>";
+}
+
+?>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `contratos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1499-1648)</summary>
+
+**Path:** `Unknown file`
+
+```
+		$gca_t_post = floatval($gca_post['total']);
+		$delta_gca  = $gca_n_post - $gca_n_pre;
+		$lista_esc  = $y->real_escape_string(implode(', ', $cargos_insertados));
+		$pre_esc    = $y->real_escape_string("Adeudos: $gca_n_pre | Deuda: \$" . number_format($gca_t_pre, 2));
+		$post_esc   = $y->real_escape_string("Adeudos: $gca_n_post | Deuda: \$" . number_format($gca_t_post, 2) . " | +$delta_gca cargos base insertados");
+		$y->q("INSERT INTO cambios (fecha, descripcion, antes, despues, numcontrato)
+		       VALUES(NOW(), 'Facturacion automatica al reactivar',
+		       '$pre_esc',
+		       'Cargos nuevos: $lista_esc | $post_esc',
+		       '$numcontrato')");
+	}
+}
+
+/**
+ * _getReversal() — Verifica si existe un REVERSAL_SNAPSHOT pendiente para el contrato
+ * y si la deuda total >= $15,000. Retorna null si no aplica, o array con los datos
+ * del snapshot para que la vista pueda mostrar el botón "Revertir transición".
+ *
+ * @param string $numcontrato
+ * @param float  $deuda_total  Total pendiente ($total + $recargos) calculado en cargaContrato
+ * @param object $y            Conexión activa
+ * @return array|null
+ */
+function _getReversal($numcontrato, $deuda_total, $y)
+{
+
+
+	// Buscar el REVERSAL_SNAPSHOT más reciente no revertido para este contrato
+	$res = $y->q("SELECT id, fecha, antes FROM cambios
+	              WHERE numcontrato = '$numcontrato'
+	                AND descripcion = 'REVERSAL_SNAPSHOT'
+	                AND despues = 'PENDIENTE'
+	              ORDER BY id DESC LIMIT 1");
+	if ($y->num_rows($res) == 0) {
+		return null;
+	}
+	$row = $y->fetch_array($res);
+
+	// Verificar si es el movimiento más reciente de estado (para evitar reversas anacrónicas)
+	$res_check = $y->q("SELECT id FROM cambios 
+	                   WHERE numcontrato = '$numcontrato' 
+	                     AND descripcion LIKE 'Cambio de estado:%' 
+	                   ORDER BY id DESC LIMIT 1");
+	$last_move = $y->fetch_array($res_check);
+	if ($last_move && $last_move['id'] > $row['id']) {
+		// Existe un cambio de estado posterior al snapshot
+		return null;
+	}
+
+	$data = json_decode($row['antes'], true);
+	if (!$data) {
+		return null;
+	}
+
+	return array(
+		'cambio_id'       => intval($row['id']),
+		'fecha'           => $row['fecha'],
+		'estado_origen'   => intval($data['estado_origen']),
+		'estado_destino'  => intval($data['estado_destino']),
+		'n_lc_nuevos'     => count($data['lc_ids_nuevos']),
+		'n_hist_amnist'   => count($data['hist_ids_amnist']),
+		'deuda_pre'       => floatval($data['deuda_pre']),
+		'deuda_post'      => floatval($data['deuda_post'])
+	);
+}
+
+/**
+ * revertirTransicion() — Revierte el último cambio de estado usando el REVERSAL_SNAPSHOT.
+ * Deshace exactamente lo que hizo cambiaestado():
+ *  - Restaura contrato.estado al valor origen
+ *  - Cancela los cargos generados (lc_ids_nuevos: estado=0 → estado=-1)
+ *  - Restaura los cargos amnistiados (hist_ids_amnist: estado=-1 → estado=0)
+ * Registra todo en cambios y marca el snapshot como REVERTIDO.
+ */
+function revertirTransicion($contrato)
+{
+	global $templates;
+	$y = new Conexion();
+	$y->conectarBaseDatos();
+
+	$contrato = intval($contrato);
+
+	// 1. Obtener el snapshot pendiente más reciente
+	$res = $y->q("SELECT id, fecha, antes FROM cambios
+	              WHERE numcontrato = '$contrato'
+	                AND descripcion = 'REVERSAL_SNAPSHOT'
+	                AND despues = 'PENDIENTE'
+	              ORDER BY id DESC LIMIT 1");
+
+	if ($y->num_rows($res) == 0) {
+		return $templates->render('sistema/mensaje', array(
+			'titulo'  => 'Sin reversión disponible',
+			'mensaje' => 'No existe una transición de estado pendiente de revertir para este contrato.'
+		));
+	}
+
+	$row        = $y->fetch_array($res);
+	$snap_id    = intval($row['id']);
+	$data       = json_decode($row['antes'], true);
+
+	if (!$data) {
+		return $templates->render('sistema/mensaje', array(
+			'titulo'  => 'Error',
+			'mensaje' => 'El snapshot de reversión está corrupto. Contacte al administrador.'
+		));
+	}
+
+	$estado_origen     = intval($data['estado_origen']);
+	$estado_destino    = intval($data['estado_destino']);
+	$lc_ids_nuevos     = array_map('intval', (array)$data['lc_ids_nuevos']);
+	$lc_ids_cancelados   = array_map('intval', (array)(isset($data['lc_ids_cancelados'])   ? $data['lc_ids_cancelados']   : array()));
+	$hist_ids_amnist     = array_map('intval', (array)$data['hist_ids_amnist']);
+	$hist_ids_nuevos_hist = array_map('intval', (array)(isset($data['hist_ids_nuevos_hist']) ? $data['hist_ids_nuevos_hist'] : array()));
+	$tomas_pre           = (array)(isset($data['tomas_pre']) ? $data['tomas_pre'] : array());
+	$serv_pre          = (isset($data['serv_pre']) ? $data['serv_pre'] : array('a' => 1, 'd' => 1));
+	$deuda_pre         = floatval($data['deuda_pre']);
+	$deuda_post        = floatval($data['deuda_post']);
+
+	// Nombres de estado para la bitácora
+	$nombres_estado = array(
+		1 => 'ACTIVO', 2 => 'SUSPENSIÓN TEMPORAL',
+		3 => 'SUSPENSIÓN ADMINISTRATIVA', 4 => 'SUSPENSIÓN DEFINITIVA'
+	);
+	$nom_origen  = isset($nombres_estado[$estado_origen])  ? $nombres_estado[$estado_origen]  : "ESTADO $estado_origen";
+	$nom_destino = isset($nombres_estado[$estado_destino]) ? $nombres_estado[$estado_destino] : "ESTADO $estado_destino";
+
+	// ── Snapshot financiero PRE-reversa ──────────────────────────────────────
+	$res_snap = $y->q("SELECT COUNT(*) AS n, IFNULL(SUM(monto),0) AS total FROM vw_ligacargos_pendientes WHERE numcontrato='$contrato'");
+	$snap_pre = $y->fetch_array($res_snap);
+	$n_pre_rev  = intval($snap_pre['n']);
+	$tot_pre_rev = number_format(floatval($snap_pre['total']), 2);
+
+	// ── 2. Restaurar estado del contrato y servicios ─────────────────────────
+	$agua_pre = intval($serv_pre['a']);
+	$dren_pre = intval($serv_pre['d']);
+	$y->q("UPDATE contrato SET estado=$estado_origen, agua=$agua_pre, drenaje=$dren_pre WHERE numcontrato='$contrato'");
+
+	// ── 3. Restaurar estado físico de las tomas ─────────────────────────────
+	$n_tomas_rest = 0;
+	if (!empty($tomas_pre)) {
+		foreach ($tomas_pre as $tp) {
+			$tid = intval($tp['id']);
+			$tea = intval($tp['ea']);
+			$ted = intval($tp['ed']);
+			$y->q("UPDATE contrato_toma SET estado_agua=$tea, estado_drenaje=$ted WHERE id=$tid AND numcontrato='$contrato'");
+			$n_tomas_rest++;
+		}
+	}
+
+	// ── 4. Cancelar cargos generados por el cambio de estado ─────────────────
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `contratos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1349-1498)</summary>
+
+**Path:** `Unknown file`
+
+```
+        if (preg_match('/estado.*?\[(-?1|[2-4])\]/i', $despues_txt, $matches)) {
+            $estado_historico = intval($matches[1]);
+            // Solo facturan los estados 1 (Activo) y 3 (Suspensión Administrativa)
+            return ($estado_historico === 1 || $estado_historico === 3);
+        }
+    }
+
+    // Si no hay registros históricos en cambios, verificar si el contrato era legado con suspensión (-ST)
+    $res_cto_st = $conexion->q("SELECT estado, numcontratoresp FROM contrato WHERE numcontrato = '$numcontrato'");
+    if ($r_st = $conexion->fetch_array($res_cto_st)) {
+        if (intval($r_st['estado']) === 2 || strpos((string)$r_st['numcontratoresp'], '-ST') !== false) {
+            if ($anio < $anio_actual) {
+                return false; // Evita facturación retroactiva para contratos legado etiquetados como ST
+            }
+        }
+    }
+
+    $anio_creacion = intval(date('Y', strtotime($fecha_contrato)));
+    return ($anio_creacion <= $anio);
+}
+
+function generaCargosAutomaticos($numcontrato, $y, $estado_origen = null)
+{
+	// Configuración necesaria
+	$res_cfg = $y->q("SELECT clave, valor FROM config_sistema");
+	$cfg = array();
+	while (list($k, $v) = $y->fetch_array($res_cfg)) {
+		$cfg[$k] = $v;
+	}
+	$anio_split = intval(isset($cfg['anio_split_historico']) ? $cfg['anio_split_historico'] : 2025);
+
+	// Snapshot PRE para auditoría
+	$res_gca_pre = $y->q("SELECT COUNT(*) AS n, IFNULL(SUM(monto),0) AS total FROM vw_ligacargos_pendientes WHERE numcontrato = '$numcontrato'");
+	$gca_pre = $y->fetch_array($res_gca_pre);
+	$gca_n_pre  = intval($gca_pre['n']);
+	$gca_t_pre  = floatval($gca_pre['total']);
+	$cargos_insertados = array();
+
+	// Datos del contrato (incluyendo fecha completa para auditoría)
+	$res_cto = $y->q("SELECT metros, fecha, MONTH(fecha) as mescontrato FROM contrato WHERE numcontrato='$numcontrato'");
+	list($metros, $fecha_contrato, $mescontrato) = $y->fetch_array($res_cto);
+
+	// Consultar tomas activas para calcular montos correctamente
+	$r_a = $y->q("SELECT COUNT(*) FROM contrato_toma WHERE numcontrato='$numcontrato' AND tiene_agua=1 AND estado_agua=1");
+	list($n_tomas_agua) = $y->fetch_array($r_a);
+	$r_d = $y->q("SELECT COUNT(*) FROM contrato_toma WHERE numcontrato='$numcontrato' AND tiene_drenaje=1 AND estado_drenaje=1");
+	list($n_tomas_drenaje) = $y->fetch_array($r_d);
+	$r_tc = $y->q("SELECT MAX(tipo) FROM contrato_toma WHERE numcontrato='$numcontrato'");
+	list($es_comercial) = $y->fetch_array($r_tc);
+
+	$anio_actual_fact = intval(date('Y'));
+	$anio_inicio_fact = intval(date('Y', strtotime($fecha_contrato)));
+	// El límite de años a facturar ahora es regulado de forma natural por el flag `estado=1` en el catálogo de cargos
+	// y por la tabla de `cambios` (auditoría de suspensión de contratos). Se elimina el hardcode de 2006.
+
+	$rescargos = $y->q("SELECT nombre, monto, monto_comercial, recargo, anio, categoria, repetir, metros FROM cargos WHERE estado=1 AND automatico=1 AND (anio = 0 OR (anio >= $anio_inicio_fact AND anio <= $anio_actual_fact)) ORDER BY nombre");
+
+	while ($a = $y->fetch_array($rescargos)) {
+		$leyenda    = $a['nombre'];
+		$monto_n    = floatval($a['monto']);
+		$monto_c    = floatval($a['monto_comercial']);
+		$recargo    = $a['recargo'];
+		$anio       = $a['anio'];
+		$categoria  = $a['categoria'];
+		$repetir    = $a['repetir'];
+		$aplicametros = $a['metros'];
+
+		// --- GUARD DE AUDITORÍA HISTÓRICA ---
+		$anio_cargo_real = ($anio == "0") ? intval(date('Y')) : intval($anio);
+		if ($anio_cargo_real > 0 && $anio_cargo_real < $anio_actual_fact) {
+			if (!_esContratoFacturableEnAnio($numcontrato, $anio_cargo_real, $y, $fecha_contrato, $estado_origen)) {
+				continue; // El contrato no estaba activo, saltar generación de este cargo
+			}
+		}
+
+		// --- NUEVO MODELO: Suma por Unidad de Toma ---
+		$monto = 0;
+		if ($categoria == 2 || $categoria == 3) {
+			$res_tomas = $y->q("SELECT tipo FROM contrato_toma WHERE numcontrato='$numcontrato' AND " . ($categoria == 2 ? 'tiene_agua=1 AND estado_agua=1' : 'tiene_drenaje=1 AND estado_drenaje=1'));
+			while ($t = $y->fetch_array($res_tomas)) {
+				$es_com = ($t['tipo'] == 1);
+				$m_base = ($es_com && $monto_c > 0) ? $monto_c : ($es_com ? $monto_n * 2 : $monto_n);
+				$monto += $m_base;
+			}
+		} else {
+			// Para otros cargos (multas, etc), se usa la lógica anterior de 'Max Tipo' si aplica, o tarifa base
+			$r_tc = $y->q("SELECT MAX(tipo) FROM contrato_toma WHERE numcontrato='$numcontrato'");
+			list($es_com_max) = $y->fetch_array($r_tc);
+			$monto = ($es_com_max == 1 && $monto_c > 0) ? $monto_c : (($es_com_max == 1) ? $monto_n * 2 : $monto_n);
+		}
+
+		if ($aplicametros == 1)
+			$monto = $monto * $metros;
+		
+		if ($anio == "0")
+			$anio = date('Y');
+
+		$aplicar_cargo = ($monto > 0);
+		// Si es agua/drenaje pero el monto dio 0 (sin tomas activas), no aplicar
+		if (($categoria == 2 || $categoria == 3) && $monto == 0) $aplicar_cargo = false;
+
+		if ($aplicar_cargo == true) {
+			if ($repetir == 0) {
+				$chk = $y->q("SELECT id_cargo AS id, monto, estado FROM vw_ligacargos_all WHERE leyenda LIKE '$leyenda%' AND numcontrato='$numcontrato' LIMIT 1");
+				if ($y->num_rows($chk) == 0) {
+					$tabla_dest = ($anio <= $anio_split) ? "ligacargos_historico" : "ligacargos";
+					$q = "INSERT INTO $tabla_dest (numcontrato, leyenda, monto, fcobro, fpago, estado, recargo, folio, anio, numcontratoresp, idpago_vinc, categoria, repetido) VALUES('$numcontrato', '$leyenda', $monto, CURDATE(), CURDATE(), 0, $recargo, '', $anio, '', NULL, $categoria, 0)";
+					$y->q($q);
+					$cargos_insertados[] = "$leyenda (\$$monto)";
+				} else {
+					$c_row = $y->fetch_array($chk);
+					$c_monto = floatval($c_row['monto']);
+					$c_estado = intval($c_row['estado']);
+					if ($c_estado == 0 && $c_monto != $monto) {
+						$tabla_dest = ($anio <= $anio_split) ? "ligacargos_historico" : "ligacargos";
+						$y->q("UPDATE $tabla_dest SET monto=$monto WHERE numcontrato='$numcontrato' AND leyenda='$leyenda' AND estado=0");
+
+						// Sincronizar recargos no pagados asociados
+						$porcentaje = floatval(isset($cfg['recargo_porcentaje']) ? $cfg['recargo_porcentaje'] : 10);
+						$monto_recargo = ($monto * $porcentaje) / 100;
+						$y->q("UPDATE $tabla_dest SET monto=$monto_recargo WHERE numcontrato='$numcontrato' AND leyenda LIKE 'RECARGO % - $leyenda' AND estado=0");
+
+						$cargos_insertados[] = "Actualización de $leyenda (\$$c_monto -> \$$monto) y moras";
+					}
+				}
+				calcula_recargos($numcontrato, $leyenda, $monto, $recargo, $anio, $categoria, 0, $y, $mescontrato, $cfg);
+			} else {
+				$chk_rep = $y->q("SELECT numcontrato FROM vw_ligacargos_all WHERE leyenda LIKE '$leyenda%' AND numcontrato='$numcontrato' AND anio=$anio LIMIT 1");
+				if ($y->num_rows($chk_rep) == 0) {
+					$resautomatico = $y->q("SELECT COUNT(numcontrato) FROM vw_ligacargos_all WHERE leyenda='$leyenda' AND numcontrato='$numcontrato'");
+					list($cuenta) = $y->fetch_array($resautomatico);
+					$tabla_dest = ($anio <= $anio_split) ? "ligacargos_historico" : "ligacargos";
+					$q = "INSERT INTO $tabla_dest (numcontrato, leyenda, monto, fcobro, fpago, estado, recargo, folio, anio, numcontratoresp, idpago_vinc, categoria, repetido) VALUES('$numcontrato', '$leyenda', $monto, CURDATE(), CURDATE(), 0, $recargo, '', $anio, '', NULL, $categoria, $cuenta)";
+					$y->q($q);
+					$cargos_insertados[] = "$leyenda (\$$monto)";
+					calcula_recargos($numcontrato, $leyenda, $monto, $recargo, $anio, $categoria, $cuenta, $y, $mescontrato, $cfg);
+				} else {
+					$resautomatico = $y->q("SELECT COUNT(numcontrato) FROM vw_ligacargos_all WHERE leyenda='$leyenda' AND numcontrato='$numcontrato'");
+					list($cuenta) = $y->fetch_array($resautomatico);
+					calcula_recargos($numcontrato, $leyenda, $monto, $recargo, $anio, $categoria, $cuenta, $y, $mescontrato, $cfg);
+				}
+			}
+		}
+	}
+
+	// Registrar en cambios si se insertaron cargos base nuevos
+	if (count($cargos_insertados) > 0) {
+		$res_gca_post = $y->q("SELECT COUNT(*) AS n, IFNULL(SUM(monto),0) AS total FROM vw_ligacargos_pendientes WHERE numcontrato = '$numcontrato'");
+		$gca_post = $y->fetch_array($res_gca_post);
+		$gca_n_post = intval($gca_post['n']);
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `call_mcp_tool`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:11 pm
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:11 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `call_mcp_tool`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:11 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `call_mcp_tool`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:11 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `output.txt`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+[
+  {
+    "id": 205352,
+    "numcontrato": "570",
+    "leyenda": "ANUALIDAD DEL AGUA 2025",
+    "monto": "600.00",
+    "categoria": 2,
+    "estado": 0,
+    "fcobro": "2026-08-04T00:00:00.000Z"
+  },
+  {
+    "id": 205353,
+    "numcontrato": "570",
+    "leyenda": "RECARGO ENE 2025 - ANUALIDAD DEL AGUA 2025",
+    "monto": "60.00",
+    "categoria": 16,
+    "estado": 0,
+    "fcobro": "2026-08-04T00:00:00.000Z"
+  },
+  {
+    "id": 205354,
+    "numcontrato": "570",
+    "leyenda": "RECARGO FEB 2025 - ANUALIDAD DEL AGUA 2025",
+    "monto": "60.00",
+    "categoria": 16,
+    "estado": 0,
+    "fcobro": "2026-08-04T00:00:00.000Z"
+  },
+  {
+    "id": 205355,
+    "numcontrato": "570",
+    "leyenda": "RECARGO MAR 2025 - ANUALIDAD DEL AGUA 2025",
+    "monto": "60.00",
+    "categoria": 16,
+    "estado": 0,
+    "fcobro": "2026-08-04T00:00:00.000Z"
+  },
+  {
+    "id": 205356,
+    "numcontrato": "570",
+    "leyenda": "RECARGO ABR 2025 - ANUALIDAD DEL AGUA 2025",
+    "monto": "60.00",
+    "categoria": 16,
+    "estado": 0,
+    "fcobro": "2026-08-04T00:00:00.000Z"
+  },
+  {
+    "id": 205357,
+    "numcontrato": "570",
+    "leyenda": "RECARGO MAY 2025 - ANUALIDAD DEL AGUA 2025",
+    "monto": "60.00",
+    "categoria": 16,
+    "estado": 0,
+    "fcobro": "2026-08-04T00:00:00.000Z"
+  },
+  {
+    "id": 205358,
+    "numcontrato": "570",
+    "leyenda": "RECARGO JUN 2025 - ANUALIDAD DEL AGUA 2025",
+    "monto": "60.00",
+    "categoria": 16,
+    "estado": 0,
+    "fcobro": "2026-08-04T00:00:00.000Z"
+  },
+  {
+    "id": 205359,
+    "numcontrato": "570",
+    "leyenda": "RECARGO JUL 2025 - ANUALIDAD DEL AGUA 2025",
+    "monto": "60.00",
+    "categoria": 16,
+    "estado": 0,
+    "fcobro": "2026-08-04T00:00:00.000Z"
+  },
+  {
+    "id": 205360,
+    "numcontrato": "570",
+    "leyenda": "RECARGO AGO 2025 - ANUALIDAD DEL AGUA 2025",
+    "monto": "60.00",
+    "categoria": 16,
+    "estado": 0,
+    "fcobro": "2026-08-04T00:00:00.000Z"
+  },
+  {
+    "id": 205361,
+    "numcontrato": "570",
+    "leyenda": "RECARGO SEPT 2025 - ANUALIDAD DEL AGUA 2025",
+    "monto": "60.00",
+    "categoria": 16,
+    "estado": 0,
+    "fcobro": "2026-08-04T00:00:00.000Z"
+  },
+  {
+    "id": 205362,
+    "numcontrato": "570",
+    "leyenda": "RECARGO OCT 2025 - ANUALIDAD DEL AGUA 2025",
+    "monto": "60.00",
+    "categoria": 16,
+    "estado": 0,
+    "fcobro": "2026-08-04T00:00:00.000Z"
+  },
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `output.txt`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L100-235)</summary>
+
+**Path:** `Unknown file`
+
+```
+  {
+    "id": 205363,
+    "numcontrato": "570",
+    "leyenda": "RECARGO NOV 2025 - ANUALIDAD DEL AGUA 2025",
+    "monto": "60.00",
+    "categoria": 16,
+    "estado": 0,
+    "fcobro": "2026-08-04T00:00:00.000Z"
+  },
+  {
+    "id": 205364,
+    "numcontrato": "570",
+    "leyenda": "RECARGO DIC 2025 - ANUALIDAD DEL AGUA 2025",
+    "monto": "60.00",
+    "categoria": 16,
+    "estado": 0,
+    "fcobro": "2026-08-04T00:00:00.000Z"
+  },
+  {
+    "id": 205387,
+    "numcontrato": "570",
+    "leyenda": "ANUALIDAD DEL DRENAJE 2025",
+    "monto": "220.00",
+    "categoria": 3,
+    "estado": 0,
+    "fcobro": "2026-08-04T00:00:00.000Z"
+  },
+  {
+    "id": 205388,
+    "numcontrato": "570",
+    "leyenda": "RECARGO ENE 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "600.00",
+    "categoria": 17,
+    "estado": 0,
+    "fcobro": "2026-08-04T00:00:00.000Z"
+  },
+  {
+    "id": 205389,
+    "numcontrato": "570",
+    "leyenda": "RECARGO FEB 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "220.00",
+    "categoria": 17,
+    "estado": 0,
+    "fcobro": "2026-08-04T00:00:00.000Z"
+  },
+  {
+    "id": 205390,
+    "numcontrato": "570",
+    "leyenda": "RECARGO MAR 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "220.00",
+    "categoria": 17,
+    "estado": 0,
+    "fcobro": "2026-08-04T00:00:00.000Z"
+  },
+  {
+    "id": 205391,
+    "numcontrato": "570",
+    "leyenda": "RECARGO ABR 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "220.00",
+    "categoria": 17,
+    "estado": 0,
+    "fcobro": "2026-08-04T00:00:00.000Z"
+  },
+  {
+    "id": 205392,
+    "numcontrato": "570",
+    "leyenda": "RECARGO MAY 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "220.00",
+    "categoria": 17,
+    "estado": 0,
+    "fcobro": "2026-08-04T00:00:00.000Z"
+  },
+  {
+    "id": 205393,
+    "numcontrato": "570",
+    "leyenda": "RECARGO JUN 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "220.00",
+    "categoria": 17,
+    "estado": 0,
+    "fcobro": "2026-08-04T00:00:00.000Z"
+  },
+  {
+    "id": 205394,
+    "numcontrato": "570",
+    "leyenda": "RECARGO JUL 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "220.00",
+    "categoria": 17,
+    "estado": 0,
+    "fcobro": "2026-08-04T00:00:00.000Z"
+  },
+  {
+    "id": 205395,
+    "numcontrato": "570",
+    "leyenda": "RECARGO AGO 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "220.00",
+    "categoria": 17,
+    "estado": 0,
+    "fcobro": "2026-08-04T00:00:00.000Z"
+  },
+  {
+    "id": 205396,
+    "numcontrato": "570",
+    "leyenda": "RECARGO SEPT 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "220.00",
+    "categoria": 17,
+    "estado": 0,
+    "fcobro": "2026-08-04T00:00:00.000Z"
+  },
+  {
+    "id": 205397,
+    "numcontrato": "570",
+    "leyenda": "RECARGO OCT 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "220.00",
+    "categoria": 17,
+    "estado": 0,
+    "fcobro": "2026-08-04T00:00:00.000Z"
+  },
+  {
+    "id": 205398,
+    "numcontrato": "570",
+    "leyenda": "RECARGO NOV 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "220.00",
+    "categoria": 17,
+    "estado": 0,
+    "fcobro": "2026-08-04T00:00:00.000Z"
+  },
+  {
+    "id": 205399,
+    "numcontrato": "570",
+    "leyenda": "RECARGO DIC 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "220.00",
+    "categoria": 17,
+    "estado": 0,
+    "fcobro": "2026-08-04T00:00:00.000Z"
+  }
+]
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `call_mcp_tool`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:11 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `call_mcp_tool`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:11 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `call_mcp_tool`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:11 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `call_mcp_tool`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:11 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `call_mcp_tool`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:11 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `call_mcp_tool`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:11 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `output.txt`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+[
+  {
+    "id": 205114,
+    "numcontrato": "537",
+    "leyenda": "RECARGO ENE 2015 - ANUALIDAD DEL DRENAJE 2015",
+    "monto": "20.00",
+    "categoria": 17,
+    "recargo": "0.00",
+    "fcobro": "2026-08-04T00:00:00.000Z"
+  },
+  {
+    "id": 205115,
+    "numcontrato": "537",
+    "leyenda": "RECARGO FEB 2015 - ANUALIDAD DEL DRENAJE 2015",
+    "monto": "20.00",
+    "categoria": 17,
+    "recargo": "0.00",
+    "fcobro": "2026-08-04T00:00:00.000Z"
+  },
+  {
+    "id": 205116,
+    "numcontrato": "537",
+    "leyenda": "RECARGO MAR 2015 - ANUALIDAD DEL DRENAJE 2015",
+    "monto": "20.00",
+    "categoria": 17,
+    "recargo": "0.00",
+    "fcobro": "2026-08-04T00:00:00.000Z"
+  },
+  {
+    "id": 205117,
+    "numcontrato": "537",
+    "leyenda": "RECARGO ABR 2015 - ANUALIDAD DEL DRENAJE 2015",
+    "monto": "20.00",
+    "categoria": 17,
+    "recargo": "0.00",
+    "fcobro": "2026-08-04T00:00:00.000Z"
+  },
+  {
+    "id": 205118,
+    "numcontrato": "537",
+    "leyenda": "RECARGO MAY 2015 - ANUALIDAD DEL DRENAJE 2015",
+    "monto": "220.00",
+    "categoria": 17,
+    "recargo": "0.00",
+    "fcobro": "2026-08-04T00:00:00.000Z"
+  },
+  {
+    "id": 205119,
+    "numcontrato": "537",
+    "leyenda": "RECARGO JUN 2015 - ANUALIDAD DEL DRENAJE 2015",
+    "monto": "20.00",
+    "categoria": 17,
+    "recargo": "0.00",
+    "fcobro": "2026-08-04T00:00:00.000Z"
+  },
+  {
+    "id": 205120,
+    "numcontrato": "537",
+    "leyenda": "RECARGO JUL 2015 - ANUALIDAD DEL DRENAJE 2015",
+    "monto": "20.00",
+    "categoria": 17,
+    "recargo": "0.00",
+    "fcobro": "2026-08-04T00:00:00.000Z"
+  },
+  {
+    "id": 205121,
+    "numcontrato": "537",
+    "leyenda": "RECARGO AGO 2015 - ANUALIDAD DEL DRENAJE 2015",
+    "monto": "20.00",
+    "categoria": 17,
+    "recargo": "0.00",
+    "fcobro": "2026-08-04T00:00:00.000Z"
+  },
+  {
+    "id": 205122,
+    "numcontrato": "537",
+    "leyenda": "RECARGO SEPT 2015 - ANUALIDAD DEL DRENAJE 2015",
+    "monto": "20.00",
+    "categoria": 17,
+    "recargo": "0.00",
+    "fcobro": "2026-08-04T00:00:00.000Z"
+  },
+  {
+    "id": 205123,
+    "numcontrato": "537",
+    "leyenda": "RECARGO OCT 2015 - ANUALIDAD DEL DRENAJE 2015",
+    "monto": "20.00",
+    "categoria": 17,
+    "recargo": "0.00",
+    "fcobro": "2026-08-04T00:00:00.000Z"
+  },
+  {
+    "id": 205124,
+    "numcontrato": "537",
+    "leyenda": "RECARGO NOV 2015 - ANUALIDAD DEL DRENAJE 2015",
+    "monto": "20.00",
+    "categoria": 17,
+    "recargo": "0.00",
+    "fcobro": "2026-08-04T00:00:00.000Z"
+  },
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `cargos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L119-144)</summary>
+
+**Path:** `Unknown file`
+
+```
+		$nom_meses = array("", "ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SEPT", "OCT", "NOV", "DIC");
+
+		$mesrecargo = 1;
+		$aniorecargo = $anio;
+
+		$monto_recargo = ($monto * $porcentaje) / 100;
+
+		$categoria_recargo = ($categoria == 2) ? $cat_agua : $cat_drenaje;
+
+		// LÍMITE ABSOLUTO: No generar mora para cargos anteriores al año límite configurado
+		if ($anio < $anio_limite) {
+			return;
+		}
+
+		// FILTRO: fpago fantasma — excluir cargos con fecha de pago corrupta (anterior al año límite) (Usando caché estática)
+		if ($ignorar_fantasma) {
+			if (!isset($fpago_cache[$numcontrato])) {
+				$fpago_cache[$numcontrato] = [];
+				$res_fp = $y->q("SELECT leyenda, fpago FROM vw_ligacargos_all WHERE numcontrato='$numcontrato' AND estado=0");
+				while ($row_fp = $y->fetch_array($res_fp)) {
+					$fpago_cache[$numcontrato][$row_fp['leyenda']] = $row_fp['fpago'];
+				}
+			}
+			if (isset($fpago_cache[$numcontrato][$leyenda])) {
+				$fpago_val = $fpago_cache[$numcontrato][$leyenda];
+				if ($fpago_val !== null && intval(substr($fpago_val, 0, 4)) < $anio_limite) {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `calcula_recargos(`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:11 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `cargos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L589-639)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+			$res3 = $y->q("select metros, monto_comercial from cargos where UCASE(nombre) = UCASE('$a[0]') limit 1");
+			list($aplicametros, $mon_com_db) = $y->fetch_array($res3);
+
+			$leyenda = $a[0];
+			$monto = floatval($a[1]);
+			$mon_com = floatval($mon_com_db);
+			$recargo = $a[2];
+			$anio = $a[3];
+			$categoria = $a[4];
+			$repetir = $a[5];
+
+			$cfg = cargaConfig($y);
+			$anio_split = intval(isset($cfg['anio_split_historico']) ? $cfg['anio_split_historico'] : 2025);
+
+			$es_libre = false;
+			if (strpos($leyenda, '(LIBRE)') !== false) {
+				$es_libre = true;
+				$leyenda = trim(str_replace('(LIBRE)', '', $leyenda));
+			}
+
+			// Lógica de multiplicación por toma y tipo (Normal/Comercial)
+			if (!$es_libre) {
+				if ($categoria == 2 && $n_tomas_agua > 0) {
+					$monto_base = ($es_comercial == 1 && $mon_com > 0) ? $mon_com : (($es_comercial == 1) ? $monto * 2 : $monto);
+					$monto = $monto_base * $n_tomas_agua;
+				}
+				if ($categoria == 3 && $n_tomas_drenaje > 0) {
+					$monto_base = ($es_comercial == 1 && $mon_com > 0) ? $mon_com : (($es_comercial == 1) ? $monto * 2 : $monto);
+					$monto = $monto_base * $n_tomas_drenaje;
+				}
+
+				if ($aplicametros == 1)
+					$monto = $monto * $metros;
+			}
+
+			if ($anio == "0")
+				$anio = date('Y');
+
+			$aplicar_cargo = true;
+			if ($n_tomas_agua == 0 && $categoria == 2) {
+				$aplicar_cargo = false;
+				$alertas[] = "El cargo <b>$leyenda</b> no aplica porque el contrato $numcontrato no tiene toma de agua conectada.";
+			}
+			if ($n_tomas_drenaje == 0 && $categoria == 3) {
+				$aplicar_cargo = false;
+				$alertas[] = "El cargo <b>$leyenda</b> no aplica porque el contrato $numcontrato no tiene toma de drenaje conectada.";
+			}
+
+			// POKA-YOKE FINANCIERO: Bloquear duplicidad manual de anualidades ya asignadas o pagadas
+			// Excepción: conceptos (LIBRE) con repetir=1 son repetibles por diseño (monto variable por caso)
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `cargos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L640-679)</summary>
+
+**Path:** `Unknown file`
+
+```
+			if ($aplicar_cargo && ($categoria == 2 || $categoria == 3) && !($es_libre && $repetir == 1)) {
+				$res_f = $y->q("SELECT id_cargo FROM vw_ligacargos_all WHERE numcontrato='$numcontrato' AND leyenda='$leyenda' AND estado >= 0 LIMIT 1");
+				if ($y->num_rows($res_f) > 0) {
+					$aplicar_cargo = false;
+					$alertas[] = "El contrato <b>$numcontrato</b> ya cuenta con el cargo <b>$leyenda</b> (Activo/Pagado).";
+				}
+			}
+
+			if ($aplicar_cargo) {
+				$tabla_d = ($anio <= $anio_split) ? "ligacargos_historico" : "ligacargos";
+				if ($repetir == 0)
+					$q = "INSERT INTO $tabla_d (numcontrato, leyenda, monto, fcobro, fpago, estado, recargo, folio, anio, numcontratoresp, idpago_vinc, categoria, repetido) VALUES('$numcontrato', '$leyenda', $monto, CURDATE(), CURDATE(), 0, $recargo, '', $anio, '', NULL, $categoria, 0)";
+				else {
+					$res = $y->q("SELECT COUNT(l.numcontrato) FROM vw_ligacargos_all l WHERE l.leyenda = '$leyenda' AND l.numcontrato = '$numcontrato'");
+					list($cuenta) = $y->fetch_array($res);
+					$q = "INSERT INTO $tabla_d (numcontrato, leyenda, monto, fcobro, fpago, estado, recargo, folio, anio, numcontratoresp, idpago_vinc, categoria, repetido) VALUES('$numcontrato', '$leyenda', $monto, CURDATE(), CURDATE(), 0, $recargo, '', $anio, '', NULL, $categoria, $cuenta)";
+				}
+
+				if ($y->q($q)) {
+					$n++;
+					$tipo_tarifa = ($es_comercial == 1) ? 'Comercial' : 'Normal';
+					$cargos_aplicados_detalle[$numcontrato][] = "$leyenda \$$monto ($tipo_tarifa)";
+					// Calcular recargos si aplica
+					calcula_recargos($numcontrato, $leyenda, $monto, $recargo, $anio, $categoria, (isset($cuenta) ? $cuenta : 0), $y, 1, $cfg);
+				} else
+					$m++;
+			}
+		}
+	}
+
+	$mensaje = "Se ha" . (($n == 1) ? "" : "n") . " aplicado <b>$n</b> cargo" . (($n == 1) ? "" : "s") . "." . (($m != 0) ? "<br>$m cargo" . (($m == 1) ? "" : "s") . " no pud" . (($m == 1) ? "o" : "ieron") . " asignarse por duplicidad." : "");
+	if (count($alertas) > 0) {
+		$mensaje .= "<div style='color:#900; margin-top:10px; font-size:11px;'><b>RECHAZADOS POR REGLA:</b><br>" . implode("<br>", array_unique($alertas)) . "</div>";
+	}
+
+	// ═══ Snapshot financiero POST-aplicación (por cada contrato afectado) ═══
+	// Auditoría de aplicación manual
+	if ($n > 0) {
+		$lista_labels = array();
+		foreach ($cargo as $l_in) {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:11 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:11 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:11 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:11 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:12 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:12 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:12 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:12 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:12 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `call_mcp_tool`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_MCP_TOOL
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:12 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `output.txt`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+[
+  {
+    "id": 190940,
+    "numcontrato": "537",
+    "leyenda": "FALTA ASAMBLEA 28 SEP 2025",
+    "monto": "150.00",
+    "recargo": "1.00",
+    "categoria": 6,
+    "anio": 2025
+  },
+  {
+    "id": 190941,
+    "numcontrato": "537",
+    "leyenda": "FALTA ASAMBLEA 29 JUN 2025",
+    "monto": "150.00",
+    "recargo": "1.00",
+    "categoria": 6,
+    "anio": 2025
+  },
+  {
+    "id": 190942,
+    "numcontrato": "537",
+    "leyenda": "FALTA ASAMBLEA 30 MAR 2025",
+    "monto": "150.00",
+    "recargo": "1.00",
+    "categoria": 6,
+    "anio": 2025
+  },
+  {
+    "id": 191248,
+    "numcontrato": "570",
+    "leyenda": "FALTA ASAMBLEA 28 SEP 2025",
+    "monto": "150.00",
+    "recargo": "1.00",
+    "categoria": 6,
+    "anio": 2025
+  },
+  {
+    "id": 191249,
+    "numcontrato": "570",
+    "leyenda": "FALTA ASAMBLEA 29 JUN 2025",
+    "monto": "150.00",
+    "recargo": "1.00",
+    "categoria": 6,
+    "anio": 2025
+  },
+  {
+    "id": 191250,
+    "numcontrato": "570",
+    "leyenda": "FALTA ASAMBLEA 30 MAR 2025",
+    "monto": "150.00",
+    "recargo": "1.00",
+    "categoria": 6,
+    "anio": 2025
+  },
+  {
+    "id": 205177,
+    "numcontrato": "537",
+    "leyenda": "ANUALIDAD DEL DRENAJE 2025",
+    "monto": "220.00",
+    "recargo": "1.00",
+    "categoria": 3,
+    "anio": 2025
+  },
+  {
+    "id": 205178,
+    "numcontrato": "537",
+    "leyenda": "RECARGO ENE 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "22.00",
+    "recargo": "0.00",
+    "categoria": 17,
+    "anio": 2025
+  },
+  {
+    "id": 205179,
+    "numcontrato": "537",
+    "leyenda": "RECARGO FEB 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "22.00",
+    "recargo": "0.00",
+    "categoria": 17,
+    "anio": 2025
+  },
+  {
+    "id": 205180,
+    "numcontrato": "537",
+    "leyenda": "RECARGO MAR 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "22.00",
+    "recargo": "0.00",
+    "categoria": 17,
+    "anio": 2025
+  },
+  {
+    "id": 205181,
+    "numcontrato": "537",
+    "leyenda": "RECARGO ABR 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "22.00",
+    "recargo": "0.00",
+    "categoria": 17,
+    "anio": 2025
+  },
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `output.txt`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L100-199)</summary>
+
+**Path:** `Unknown file`
+
+```
+  {
+    "id": 205182,
+    "numcontrato": "537",
+    "leyenda": "RECARGO MAY 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "22.00",
+    "recargo": "0.00",
+    "categoria": 17,
+    "anio": 2025
+  },
+  {
+    "id": 205183,
+    "numcontrato": "537",
+    "leyenda": "RECARGO JUN 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "22.00",
+    "recargo": "0.00",
+    "categoria": 17,
+    "anio": 2025
+  },
+  {
+    "id": 205184,
+    "numcontrato": "537",
+    "leyenda": "RECARGO JUL 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "22.00",
+    "recargo": "0.00",
+    "categoria": 17,
+    "anio": 2025
+  },
+  {
+    "id": 205185,
+    "numcontrato": "537",
+    "leyenda": "RECARGO AGO 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "22.00",
+    "recargo": "0.00",
+    "categoria": 17,
+    "anio": 2025
+  },
+  {
+    "id": 205186,
+    "numcontrato": "537",
+    "leyenda": "RECARGO SEPT 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "22.00",
+    "recargo": "0.00",
+    "categoria": 17,
+    "anio": 2025
+  },
+  {
+    "id": 205187,
+    "numcontrato": "537",
+    "leyenda": "RECARGO OCT 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "22.00",
+    "recargo": "0.00",
+    "categoria": 17,
+    "anio": 2025
+  },
+  {
+    "id": 205188,
+    "numcontrato": "537",
+    "leyenda": "RECARGO NOV 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "22.00",
+    "recargo": "0.00",
+    "categoria": 17,
+    "anio": 2025
+  },
+  {
+    "id": 205189,
+    "numcontrato": "537",
+    "leyenda": "RECARGO DIC 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "22.00",
+    "recargo": "0.00",
+    "categoria": 17,
+    "anio": 2025
+  },
+  {
+    "id": 205352,
+    "numcontrato": "570",
+    "leyenda": "ANUALIDAD DEL AGUA 2025",
+    "monto": "600.00",
+    "recargo": "1.00",
+    "categoria": 2,
+    "anio": 2025
+  },
+  {
+    "id": 205353,
+    "numcontrato": "570",
+    "leyenda": "RECARGO ENE 2025 - ANUALIDAD DEL AGUA 2025",
+    "monto": "60.00",
+    "recargo": "0.00",
+    "categoria": 16,
+    "anio": 2025
+  },
+  {
+    "id": 205354,
+    "numcontrato": "570",
+    "leyenda": "RECARGO FEB 2025 - ANUALIDAD DEL AGUA 2025",
+    "monto": "60.00",
+    "recargo": "0.00",
+    "categoria": 16,
+    "anio": 2025
+  },
+  {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `output.txt`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L299-406)</summary>
+
+**Path:** `Unknown file`
+
+```
+    "id": 205388,
+    "numcontrato": "570",
+    "leyenda": "RECARGO ENE 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "22.00",
+    "recargo": "0.00",
+    "categoria": 17,
+    "anio": 2025
+  },
+  {
+    "id": 205389,
+    "numcontrato": "570",
+    "leyenda": "RECARGO FEB 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "22.00",
+    "recargo": "0.00",
+    "categoria": 17,
+    "anio": 2025
+  },
+  {
+    "id": 205390,
+    "numcontrato": "570",
+    "leyenda": "RECARGO MAR 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "22.00",
+    "recargo": "0.00",
+    "categoria": 17,
+    "anio": 2025
+  },
+  {
+    "id": 205391,
+    "numcontrato": "570",
+    "leyenda": "RECARGO ABR 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "22.00",
+    "recargo": "0.00",
+    "categoria": 17,
+    "anio": 2025
+  },
+  {
+    "id": 205392,
+    "numcontrato": "570",
+    "leyenda": "RECARGO MAY 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "22.00",
+    "recargo": "0.00",
+    "categoria": 17,
+    "anio": 2025
+  },
+  {
+    "id": 205393,
+    "numcontrato": "570",
+    "leyenda": "RECARGO JUN 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "22.00",
+    "recargo": "0.00",
+    "categoria": 17,
+    "anio": 2025
+  },
+  {
+    "id": 205394,
+    "numcontrato": "570",
+    "leyenda": "RECARGO JUL 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "22.00",
+    "recargo": "0.00",
+    "categoria": 17,
+    "anio": 2025
+  },
+  {
+    "id": 205395,
+    "numcontrato": "570",
+    "leyenda": "RECARGO AGO 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "22.00",
+    "recargo": "0.00",
+    "categoria": 17,
+    "anio": 2025
+  },
+  {
+    "id": 205396,
+    "numcontrato": "570",
+    "leyenda": "RECARGO SEPT 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "22.00",
+    "recargo": "0.00",
+    "categoria": 17,
+    "anio": 2025
+  },
+  {
+    "id": 205397,
+    "numcontrato": "570",
+    "leyenda": "RECARGO OCT 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "22.00",
+    "recargo": "0.00",
+    "categoria": 17,
+    "anio": 2025
+  },
+  {
+    "id": 205398,
+    "numcontrato": "570",
+    "leyenda": "RECARGO NOV 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "22.00",
+    "recargo": "0.00",
+    "categoria": 17,
+    "anio": 2025
+  },
+  {
+    "id": 205399,
+    "numcontrato": "570",
+    "leyenda": "RECARGO DIC 2025 - ANUALIDAD DEL DRENAJE 2025",
+    "monto": "22.00",
+    "recargo": "0.00",
+    "categoria": 17,
+    "anio": 2025
+  }
+]
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:12 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+## User Request
+
+Los archivos como job-sync-cartera.ps1, setup-sync-jobs.ps1, job-monitor-sync.ps1, sync_cartera_mensual.php, etc, se deberian alinear al fix-issue-03 , analiza a detalle algun impacto a los fixes y ajustes realizados de hoy hacia atras que se realizaron en /opt/lampp/htdocs/agua/docs-dev/pase-a-prod/aguav2-2026/fixes/fix-issue-01/ y este en git hasta el 15-julio.
+Dame informe , no cambies nada.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `01_depuracion_recargos_corruptos_monto_base.sql`
+**Language:** oracle-sql
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+-- ------------------------------------------------------------------------------
+-- 01_depuracion_recargos_corruptos_monto_base.sql
+-- Propósito: Sanitizar los recargos moratorios pendientes (estado = 0) insertados
+-- con montos inflados/corruptos (monto = 220 o 600) en ligacargos y ligacargos_historico,
+-- corrigiendo su monto a la tarifa unitaria de recargo oficial ($22.00 para Drenaje
+-- y $60.00 para Agua) de acuerdo a las reglas de negocio de AguaV2.
+-- ------------------------------------------------------------------------------
+
+-- 1. Corregir recargos moratorios pendientes de AGUA (Cat 16) con monto $600.00 -> $60.00
+UPDATE ligacargos
+SET monto = 60.00
+WHERE categoria = 16 AND monto = 600.00 AND estado = 0;
+
+UPDATE ligacargos_historico
+SET monto = 60.00
+WHERE categoria = 16 AND monto = 600.00 AND estado = 0;
+
+-- 2. Corregir recargos moratorios pendientes de DRENAJE (Cat 17) con monto $220.00 -> $22.00
+UPDATE ligacargos
+SET monto = 22.00
+WHERE categoria = 17 AND monto = 220.00 AND estado = 0;
+
+UPDATE ligacargos_historico
+SET monto = 22.00
+WHERE categoria = 17 AND monto = 220.00 AND estado = 0;
+
+-- 3. Corregir recargos moratorios pendientes de DRENAJE (Cat 17) con monto $600.00 -> $22.00 (Casos de colisión cruzada)
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `sync_cartera_mensual.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/**
+ * Sincronización Masiva de Cartera Vencida (Background Job)
+ * 
+ * Este script recorre todos los contratos activos del padrón y evalúa 
+ * recargos y adeudos en lote para asegurar que los reportes estáticos 
+ * (listadeudoresxc.php) estén al día y cuadren perfectamente con la Ficha.
+ * 
+ * Diseñado para ser ejecutado vía línea de comandos (Powershell/Cron).
+ */
+
+require_once __DIR__ . "/../../config/Conexion.php";
+require_once __DIR__ . "/../../includes/negocio/sistema.php";
+require_once __DIR__ . "/../../includes/negocio/cargos.php";
+require_once __DIR__ . "/../../includes/negocio/contratos.php";
+
+$y = new Conexion();
+$y->conectarBaseDatos();
+$cfg = cargaConfig($y);
+
+$log_file = __DIR__ . "/sync_cartera.log";
+$start = microtime(true);
+
+// Limpiar log si excede 5MB para no llenar el disco del servidor
+if (file_exists($log_file) && filesize($log_file) > 5242880) {
+    unlink($log_file);
+}
+
+function write_log($msg) {
+    global $log_file;
+    $date = date('Y-m-d H:i:s');
+    file_put_contents($log_file, "[$date] $msg\n", FILE_APPEND);
+}
+
+write_log("INICIANDO SINCRONIZACION MASIVA DE CARTERA (JOB DIARIO)");
+
+// Seleccionamos contratos activos (estado 1) y suspendidos temporales (estado 2)
+// Excluimos suspensión administrativa (3) y definitiva (4) donde no genera mora
+$q_contratos = "SELECT numcontrato FROM contrato WHERE estado IN (1, 2)";
+$res = $y->q($q_contratos);
+$total = $y->num_rows($res);
+
+write_log("Contratos a procesar: $total");
+
+$count = 0;
+while($row = $y->fetch_array($res)) {
+    // generaCargosAutomaticos es la función core que inserta recargos/anualidades faltantes
+    generaCargosAutomaticos($row[0], $y);
+    // _sincronizaDeudaPendienteContrato actualiza las deudas vivas y RECARGOS retroactivos
+    _sincronizaDeudaPendienteContrato($row[0], $y);
+    $count++;
+    
+    // Log progress every 500 contracts
+    if ($count % 500 == 0) {
+        write_log("Progreso: $count / $total contratos procesados...");
+    }
+}
+
+$end = microtime(true);
+$duration = round($end - $start, 2);
+
+write_log("FINALIZADO OK. $count contratos sincronizados en {$duration}s.");
+echo "OK: $count procesados en {$duration}s\n";
+?>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `job-sync-cartera.ps1`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# --- Auto-Elevacion a Administrador ---
+if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+    Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
+    exit
+}
+
+$ErrorActionPreference = "Stop"
+
+# Load shared configuration
+$ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+. "$ScriptDir\config.ps1"
+
+$LogFile = "$TargetDrive\aguav2\webapp\agua\admin\operaciones\sync_cartera.log"
+$PhpExecutable = "$TargetDrive\xampp\php\php.exe"
+$PhpScript = "$TargetDrive\aguav2\webapp\agua\admin\operaciones\sync_cartera_mensual.php"
+
+Write-Host "Ejecutando Job de Sincronizacion Masiva de Cartera..." -ForegroundColor Cyan
+Write-Host "Esperando a que los servicios web (MySQL) esten iniciados..." -ForegroundColor Yellow
+$MaxWait = 600
+$Waited = 0
+while (-not (Get-Process -Name "mysqld" -ErrorAction SilentlyContinue) -and $Waited -lt $MaxWait) {
+    Start-Sleep -Seconds 10
+    $Waited += 10
+}
+
+if (-not (Get-Process -Name "mysqld" -ErrorAction SilentlyContinue)) {
+    Write-Host "ERROR FATAL: Timeout esperando a MySQL ($MaxWait segundos). Abortando Job." -ForegroundColor Red
+    Add-Content -Path $LogFile -Value "[$((Get-Date).ToString('yyyy-MM-dd HH:mm:ss'))] ERROR FATAL: Timeout esperando a MySQL. Job Abortado."
+    exit 1
+}
+
+Write-Host "MySQL detectado. Dando 5 segundos de gracia para apertura de puerto TCP..." -ForegroundColor Gray
+Start-Sleep -Seconds 5
+
+Write-Host "==========================================================" -ForegroundColor Cyan
+Write-Host " INICIANDO MOTOR PHP: Sincronizacion de Cartera" -ForegroundColor Cyan
+Write-Host "==========================================================" -ForegroundColor Cyan
+
+try {
+    # Ejecutamos el script PHP de forma silenciosa y guardamos la salida
+    $Output = & $PhpExecutable $PhpScript 2>&1
+    
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host "Error en la ejecucion del PHP: $Output" -ForegroundColor Red
+        Add-Content -Path $LogFile -Value "ERROR FATAL: El script de sincronizacion PHP fallo con codigo $LASTEXITCODE."
+    } else {
+        Write-Host "Job ejecutado correctamente." -ForegroundColor Green
+    }
+} catch {
+    Write-Host "Error critico al intentar invocar PHP: $_" -ForegroundColor Red
+    Add-Content -Path $LogFile -Value "ERROR FATAL EXCEPCION: $_"
+}
+
+Write-Host "==========================================================" -ForegroundColor Cyan
+Write-Host " TERMINO DEL MOTOR PHP: Sincronizacion de Cartera" -ForegroundColor Cyan
+Write-Host "==========================================================" -ForegroundColor Cyan
+
+Write-Host "`nPresiona cualquier tecla para cerrar la ventana (o ciérrala en la [X])..." -ForegroundColor Gray
+try { $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown') } catch {}
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `job-monitor-sync.ps1`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# --- Auto-Elevacion a Administrador ---
+if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+    Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
+    exit
+}
+
+$ErrorActionPreference = "Stop"
+
+# Load shared configuration
+$ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+. "$ScriptDir\config.ps1"
+
+$LogFile = "$TargetDrive\aguav2\webapp\agua\admin\operaciones\sync_cartera.log"
+$AlertFile = "$env:USERPROFILE\Desktop\ALERTA_SISTEMA_CARTERA.txt"
+$TodayStr = Get-Date -Format "Y-m-d"
+
+Write-Host "Iniciando Job Monitor de Sincronizacion. Esperando 15 minutos de gracia inicial..." -ForegroundColor Cyan
+Start-Sleep -Seconds 900
+
+Write-Host "Ejecutando verificacion del log..." -ForegroundColor Cyan
+
+# Remove old alert if exists
+if (Test-Path $AlertFile) {
+    Remove-Item $AlertFile -Force
+}
+
+function Validate-Log {
+    if (!(Test-Path $LogFile)) { return "No se encontro el archivo de log: $LogFile. El Job principal nunca ha corrido." }
+    $LogContent = Get-Content $LogFile -Tail 20
+    $FoundToday = $false
+    $FoundOk = $false
+    $ZeroContracts = $false
+    
+    foreach ($Line in $LogContent) {
+        if ($Line -match $TodayStr) { $FoundToday = $true }
+        if ($Line -match "FINALIZADO OK") { $FoundOk = $true }
+        if ($Line -match "0 contratos sincronizados") { $ZeroContracts = $true }
+    }
+    
+    if (!$FoundToday) { return "El log no tiene actividad del dia de hoy ($TodayStr). El script no corrio." }
+    if (!$FoundOk) { return "El script corrio hoy pero no termino correctamente (Falta 'FINALIZADO OK')." }
+    if ($ZeroContracts) { return "Falso Positivo: El script reporta FINALIZADO OK pero proceso 0 contratos (MySQL no estaba listo)." }
+    
+    return "OK"
+}
+
+$Result = Validate-Log
+
+if ($Result -ne "OK") {
+    Write-Host "FALLO DETECTADO: $Result" -ForegroundColor Yellow
+    Write-Host "Iniciando reintento automatico (Guardian activado)..." -ForegroundColor Cyan
+    
+    $ScriptPathSync = "$ScriptDir\job-sync-cartera.ps1"
+    if (Test-Path $ScriptPathSync) {
+        # Corremos el script principal y esperamos a que termine
+        $p = Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File `"$ScriptPathSync`"" -PassThru -Wait
+        
+        Write-Host "Reintento finalizado. Revalidando log..." -ForegroundColor Cyan
+        Start-Sleep -Seconds 2 # Tiempo para liberar el archivo de log
+        $Result = Validate-Log
+    } else {
+        $Result = "El script de reintento no existe en la ruta esperada: $ScriptPathSync"
+    }
+}
+
+if ($Result -ne "OK") {
+    Write-Host "ALERTA CRITICA: $Result" -ForegroundColor Red
+    Add-Content -Path $AlertFile -Value "========================================="
+    Add-Content -Path $AlertFile -Value "ALERTA DE SISTEMA: FALLO EN SINCRONIZACION"
+    Add-Content -Path $AlertFile -Value "========================================="
+    Add-Content -Path $AlertFile -Value "Fecha de falla: $(Get-Date)"
+    Add-Content -Path $AlertFile -Value "Detalle: $Result"
+    Add-Content -Path $AlertFile -Value "El Guardián intentó re-ejecutar el Job pero también falló."
+    Add-Content -Path $AlertFile -Value "Contacte a soporte tecnico para revisar Host C."
+} else {
+    Write-Host "Monitoreo OK. Sincronizacion completa verificada con éxito." -ForegroundColor Green
+}
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `setup-sync-jobs.ps1`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# --- Auto-Elevacion a Administrador ---
+if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+    Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
+    exit
+}
+
+$ErrorActionPreference = "Stop"
+
+# Load shared configuration
+$ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+. "$ScriptDir\config.ps1"
+
+Write-Host "Instalando Tareas Programadas (Jobs) de Sincronizacion de Cartera..." -ForegroundColor Cyan
+
+$TaskNameSync = "AguaV2_SyncCartera_Diario"
+$TaskNameMonitor = "AguaV2_MonitorSyncCartera_Diario"
+
+$ScriptPathSync = "$ScriptDir\job-sync-cartera.ps1"
+$ScriptPathMonitor = "$ScriptDir\job-monitor-sync.ps1"
+
+# Eliminar tareas si ya existen
+if (Get-ScheduledTask -TaskName $TaskNameSync -ErrorAction SilentlyContinue) {
+    Unregister-ScheduledTask -TaskName $TaskNameSync -Confirm:$false
+}
+if (Get-ScheduledTask -TaskName $TaskNameMonitor -ErrorAction SilentlyContinue) {
+    Unregister-ScheduledTask -TaskName $TaskNameMonitor -Confirm:$false
+}
+
+# 1. Crear Tarea de Sincronizacion (Se dispara al iniciar sesion, la espera de servicios web se maneja internamente en el .ps1)
+$ActionSync = New-ScheduledTaskAction -Execute "PowerShell.exe" -Argument "-ExecutionPolicy Bypass -WindowStyle Hidden -File `"$ScriptPathSync`""
+$TriggerSync = New-ScheduledTaskTrigger -AtLogOn
+# Note: Windows Task Scheduler natively supports random delays or explicit delays but through CIM/XML for granular control.
+# We will just set it AtLogOn. Start-Webapps already does its thing.
+
+$Settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable -Hidden -ExecutionTimeLimit (New-TimeSpan -Minutes 45)
+$Principal = New-ScheduledTaskPrincipal -UserId "SYSTEM" -LogonType ServiceAccount -RunLevel Highest
+
+Register-ScheduledTask -TaskName $TaskNameSync -Action $ActionSync -Trigger $TriggerSync -Settings $Settings -Principal $Principal -Description "Actualiza la base de datos de deuda todos los dias al encender el kiosko."
+Write-Host "Tarea $TaskNameSync registrada correctamente." -ForegroundColor Green
+
+# 2. Crear Tarea de Monitoreo (Se dispara AtStartup, pero el script ps1 incluye un Delay interno de gracia de 15 minutos)
+$ActionMonitor = New-ScheduledTaskAction -Execute "PowerShell.exe" -Argument "-ExecutionPolicy Bypass -WindowStyle Hidden -File `"$ScriptPathMonitor`""
+# En PowerShell v5, Delay no esta directamente disponible en New-ScheduledTaskTrigger para AtLogOn sin CIM
+$TriggerMonitor = New-ScheduledTaskTrigger -AtStartup
+$SettingsMonitor = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -Hidden -ExecutionTimeLimit (New-TimeSpan -Minutes 45)
+
+Register-ScheduledTask -TaskName $TaskNameMonitor -Action $ActionMonitor -Trigger $TriggerMonitor -Settings $SettingsMonitor -Principal $Principal -Description "Verifica que la sincronizacion de cartera haya sido exitosa."
+Write-Host "Tarea $TaskNameMonitor registrada correctamente." -ForegroundColor Green
+
+Write-Host "Ambos Jobs han sido instalados correctamente en el Task Scheduler." -ForegroundColor Cyan
+Write-Host "Presione cualquier tecla para salir..."
+$null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+## User Request
+
+sync_cartera_mensual.php esta alineado a usar los valores correctos de catalogo de cargos, pues como se ejecuta diario , no cause algun issue ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `01_depuracion_recargos_corruptos_monto_base.sql`
+**Language:** oracle-sql
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `sync_cartera_mensual.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/**
+ * Sincronización Masiva de Cartera Vencida (Background Job)
+ * 
+ * Este script recorre todos los contratos activos del padrón y evalúa 
+ * recargos y adeudos en lote para asegurar que los reportes estáticos 
+ * (listadeudoresxc.php) estén al día y cuadren perfectamente con la Ficha.
+ * 
+ * Diseñado para ser ejecutado vía línea de comandos (Powershell/Cron).
+ */
+
+require_once __DIR__ . "/../../config/Conexion.php";
+require_once __DIR__ . "/../../includes/negocio/sistema.php";
+require_once __DIR__ . "/../../includes/negocio/cargos.php";
+require_once __DIR__ . "/../../includes/negocio/contratos.php";
+
+$y = new Conexion();
+$y->conectarBaseDatos();
+$cfg = cargaConfig($y);
+
+$log_file = __DIR__ . "/sync_cartera.log";
+$start = microtime(true);
+
+// Limpiar log si excede 5MB para no llenar el disco del servidor
+if (file_exists($log_file) && filesize($log_file) > 5242880) {
+    unlink($log_file);
+}
+
+function write_log($msg) {
+    global $log_file;
+    $date = date('Y-m-d H:i:s');
+    file_put_contents($log_file, "[$date] $msg\n", FILE_APPEND);
+}
+
+write_log("INICIANDO SINCRONIZACION MASIVA DE CARTERA (JOB DIARIO)");
+
+// Seleccionamos contratos activos (estado 1) y suspendidos temporales (estado 2)
+// Excluimos suspensión administrativa (3) y definitiva (4) donde no genera mora
+$q_contratos = "SELECT numcontrato FROM contrato WHERE estado IN (1, 2)";
+$res = $y->q($q_contratos);
+$total = $y->num_rows($res);
+
+write_log("Contratos a procesar: $total");
+
+$count = 0;
+while($row = $y->fetch_array($res)) {
+    // generaCargosAutomaticos es la función core que inserta recargos/anualidades faltantes
+    generaCargosAutomaticos($row[0], $y);
+    // _sincronizaDeudaPendienteContrato actualiza las deudas vivas y RECARGOS retroactivos
+    _sincronizaDeudaPendienteContrato($row[0], $y);
+    $count++;
+    
+    // Log progress every 500 contracts
+    if ($count % 500 == 0) {
+        write_log("Progreso: $count / $total contratos procesados...");
+    }
+}
+
+$end = microtime(true);
+$duration = round($end - $start, 2);
+
+write_log("FINALIZADO OK. $count contratos sincronizados en {$duration}s.");
+echo "OK: $count procesados en {$duration}s\n";
+?>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+## User Request
+
+recuerdo antes del ultimo commit para: job-sync-cartera.ps1, setup-sync-jobs.ps1, job-monitor-sync.ps1 se tenia un issue/gap en uno de ellos que impedia se ejcutara diario o algo asi, analiza la historia de git y compara para determinar si debo pasar a prod la version actual de esos .ps1
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `01_depuracion_recargos_corruptos_monto_base.sql`
+**Language:** oracle-sql
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:25 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:25 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+## User Request
+
+copia en /opt/lampp/htdocs/agua/docs-dev/pase-a-prod/aguav2-2026/fixes/fix-issue-03/ y un readme de instrucciones para hacer el despligue.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `01_depuracion_recargos_corruptos_monto_base.sql`
+**Language:** oracle-sql
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:27 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:27 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:27 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 11 Aug 2026, 1:27 pm
 
 ---
 
