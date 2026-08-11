@@ -27,7 +27,7 @@ Cargado automáticamente por **Claude Code** en cada sesión.
 | **Skills** | Estándares técnicos (Plates, AJAX, PHP 7.4, DB) | [.agents/skills/](.agents/skills/) |
 | **Workflows** | Procesos repetibles (Sync B→A→C, Deploy Host C) | [.agents/workflows/](.agents/workflows/) |
 
-### 🗂️ Índice de Reglas (01–10)
+### 🗂️ Índice de Reglas (01–13)
 
 | # | Regla | Archivo |
 | :---: | :--- | :--- |
@@ -43,6 +43,7 @@ Cargado automáticamente por **Claude Code** en cada sesión.
 | **10** | Limitantes Conocidas de la Webapp — **leer antes de proponer mejoras automáticas** | [.agents/rules/10-limitantes-webapp.md](.agents/rules/10-limitantes-webapp.md) |
 | **11** | Estándares de Código y Seguridad (Hardening) | [.agents/rules/11-estandares-codigo.md](.agents/rules/11-estandares-codigo.md) |
 | **12** | **Uso Seguro de `Conexion.php` — Regla E01 (mysqli guard)** — **leer antes de usar `real_escape_string` o `q()`** | [.agents/rules/12-estandar-conexion-mysqli.md](.agents/rules/12-estandar-conexion-mysqli.md) |
+| **13** | **LAESH — Arquitectura CSS de Responsividad por Dispositivo** — **leer antes de editar style.css o layouts de portales LAESH** | [.agents/rules/13-laesh-css-responsividad.md](.agents/rules/13-laesh-css-responsividad.md) |
 
 
 Estructura interna documentada en [.agents/README.md](.agents/README.md).
@@ -128,7 +129,7 @@ git push origin feature/upgrade-v2-win-xampp
 
 ---
 
-**Última actualización:** 2026-08-08 · Guards motor recargos (G01/G02 en cargos.php), config_sistema.descripcion→TEXT, paridad_anios_max_recargo, UI configuracion.php rediseñada
+**Última actualización:** 2026-08-11 · Regla 13 LAESH CSS responsividad — mapa de bloques, R1–R7 (SFS móvil, header alignment, solicitud_dac_impr layout, sidebar-rail.js)
 
 > **Nombre canónico del Ground Truth**: El conjunto `CLAUDE.md` + todo `.agents/` (rules, skills, workflows) se denomina **"el Ground Truth"** del proyecto.
 > **Nota de terminología**: Gemini denomina este mismo conjunto **"el Runbook"**. Son el mismo repositorio de conocimiento — `.agents/` es compartido. Solo difiere el nombre según el agente.
