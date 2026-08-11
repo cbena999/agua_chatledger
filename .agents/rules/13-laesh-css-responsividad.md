@@ -88,9 +88,9 @@
 | `laesh-web-assets/js/app.js` | syncHeights para medicos y labadmin. Inyecta `.nav-hamburger` en tablet/móvil |
 | `laesh-swbldi/.../medicos.html` | Solo SFS IIFE + lógica de órdenes médico. Sin toggle rail inline |
 | `laesh-swbldi/.../labadmin.html` | Solo SFS IIFE + lógica de recepción. Sin toggle rail inline |
-| `laesh-swbldi/.../gestion-web.html` | Sin SFS. Sin app.js. sidebar-rail.js maneja todo el sidebar |
+| `laesh-swbldi/.../gestion-web.html` | Sin SFS. Carga app.js (hamburger) + sidebar-rail.js (toggle rail). sidebar-mobile-only en sidebar, portal-header-right en nav |
 | `laesh-swbldi/.../solicitud_dac_impr.html` | Override `body { flex-direction: column }` en su propio `<style>` |
 
 ---
 
-**Última actualización:** 2026-08-11 · Corrección SFS móvil, alineación header desktop, layout solicitud_dac_impr, reglas documentadas
+**Última actualización:** 2026-08-11 · Fix hamburger móvil gestion-web.html: app.js + portal-header-right + sidebar-mobile-only
