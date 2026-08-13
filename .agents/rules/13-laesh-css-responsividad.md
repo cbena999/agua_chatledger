@@ -106,4 +106,13 @@
 
 ---
 
-**Última actualización:** 2026-08-13 · T1 Mosquito Std Black → fallback permanente; no hay entrega de archivos de fuente
+### R8 — Browser-Window Simulation: ELIMINADO
+- **Decisión (2026-08-13):** El feature de "simulación de ventana de navegador" (`.browser-window` con dots decorativos, URL-bar ficticia, border-radius y box-shadow) fue **eliminado permanentemente** de `index.html`.
+- `<main class="browser-window">` → `<main>` (class removida). El DOM del `.browser-header` fue eliminado del HTML.
+- El CSS `.browser-window { }` permanece en `style.css` como dead code inofensivo; no se aplica a ninguna página activa.
+- `body { padding: 0 env(safe-area-inset-right, 1rem) }` en index.html → homologado con los márgenes laterales de medicos.html y labadmin.html (~16px = 1rem fijo por lado).
+- **NO restaurar** este feature. Si se necesita un efecto de card/frame, usar otra estrategia CSS.
+
+---
+
+**Última actualización:** 2026-08-13 · R8 Browser-window eliminado; T1 Mosquito Std Black → fallback permanente

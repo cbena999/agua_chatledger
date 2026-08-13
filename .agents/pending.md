@@ -13,6 +13,17 @@
 ---
 
 ## 🟡 PRIORIDAD MEDIA
+
+### P-LAESH-01 🔲 [LAESH Website] B1 — Refactorización de Inline Styles
+**Estado**: Deuda técnica registrada — no abordar sin sesión dedicada  
+**Archivos**: `uipv1/index.html` (275 styles) · `uipv1/labadmin.html` (151) · `uipv1/medicos.html` (101)  
+**Descripción**: Extraer todos los atributos `style=""` a clases CSS en los archivos correspondientes dentro de `laesh-web-assets-uipv1a/css/`. Requiere auditoría contexto-por-contexto para evitar regresiones de layout responsivo.  
+**Registrado**: 2026-08-13 · Claude Code  
+
+### P-LAESH-02 ✅ [LAESH Website] Dominio definitivo para OG/canonical — RESUELTO
+**Estado**: Cerrado 2026-08-13  
+**Resolución**: Dominio canónico = `https://laesh.mx/`. Todos los OG tags y canonicals actualizados en las 9 páginas activas de uipv1a/.
+
 ### P-02 🔲 Módulos de Caja y Administración (Fase 5/6)
 **Estado**: Pendiente
 **Descripción**: Desarrollo de la UI y endpoints reales para el cierre de caja (Corte X y Corte Z), reportes analíticos de ventas por periodo, y el registro de horas del personal (Reloj Checador).
