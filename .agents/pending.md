@@ -14,11 +14,14 @@
 
 ## 🟡 PRIORIDAD MEDIA
 
-### P-LAESH-01 🔲 [LAESH Website] B1 — Refactorización de Inline Styles
-**Estado**: Deuda técnica registrada — no abordar sin sesión dedicada  
-**Archivos**: `uipv1/index.html` (275 styles) · `uipv1/labadmin.html` (151) · `uipv1/medicos.html` (101)  
-**Descripción**: Extraer todos los atributos `style=""` a clases CSS en los archivos correspondientes dentro de `laesh-web-assets-uipv1a/css/`. Requiere auditoría contexto-por-contexto para evitar regresiones de layout responsivo.  
-**Registrado**: 2026-08-13 · Claude Code  
+### P-LAESH-01 ✅ [LAESH Website] B1 — Refactorización de Inline Styles — RESUELTO
+**Estado**: Cerrado 2026-08-13  
+**Resolución**: ~305 inline styles extraídos a clases CSS.  
+- `index.html`: 274 → 110 restantes (164 eliminados). Nuevas clases en `<style>` del archivo: `.carousel-card img/h3/p/.__body`, `.slide-caption`, `.aviso-h4/p/list`, `.flex-ic-8`, `.chevron-open`, `.hr-sep`, `.btn-outline-white`, `.icon-22/24/20`, helpers de texto.  
+- `medicos.html`: 101 → 54 restantes (47 eliminados).  
+- `labadmin.html`: 151 → 55 restantes (96 eliminados).  
+- Clases compartidas portales en `laesh-web-assets-uipv1a/css/style.css`: `.form-label`, `.form-label--sm`, `.req`, `.form-input`, `.form-input--bg`, `.form-select`, `.form-input-sm`, `.select-sm`, `.form-field`, `.select-arrow`, `.modal-sect-hd`, `.progress-label`, `.progress-track`, `.col-group`, y ~15 utilities (`.txt-pgd`, `.txt-muted-sm`, `.flex-1`, `.mb-0`, etc.).  
+- Inline styles restantes (~219 total): background-image URLs únicas, grid-template-columns únicos, display:none controlados por JS y valores verdaderamente únicos — costo/beneficio no justifica extracción.  
 
 ### P-LAESH-02 ✅ [LAESH Website] Dominio definitivo para OG/canonical — RESUELTO
 **Estado**: Cerrado 2026-08-13  
