@@ -93,4 +93,17 @@
 
 ---
 
-**Última actualización:** 2026-08-11 · Fix hamburger móvil gestion-web.html: app.js + portal-header-right + sidebar-mobile-only
+## Tipografía — Decisiones Permanentes
+
+### T1 — Mosquito Std Black: NO usar, NO buscar archivos
+- **Decisión (2026-08-13):** Los archivos de fuente Mosquito Std Black (`.woff2`/`.woff`) **no serán entregados ni utilizados** en ningún entorno.
+- **Fallback permanente y canónico** para todos los `h1`–`h6` y `.logo`:
+  ```css
+  font-family: 'Mosquito Std Black', 'Arial Black', Impact, sans-serif;
+  ```
+  El nombre `'Mosquito Std Black'` se mantiene en el `font-family` para compatibilidad futura si el cliente cambia de opinión, pero en la práctica el navegador cargará `'Arial Black'` o `Impact`.
+- **No instalar** la fuente en el directorio `fonts/`, no buscarla, no reportarla como pendiente.
+
+---
+
+**Última actualización:** 2026-08-13 · T1 Mosquito Std Black → fallback permanente; no hay entrega de archivos de fuente

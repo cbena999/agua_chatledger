@@ -158,4 +158,15 @@ Al generar el documento de *Walkthrough* o resumen de sesión tras resolver una 
 - **Ambos:** Si hay cambios en `.agents/rules/` pendientes de esta sesión, siempre incluirlos en el mismo commit del `agua_chatledger`.
 
 ---
-**Última actualización:** 2026-04-10
+
+## 🚦 Restricción de Despliegue — OCI VPS (oci-vm)
+
+### D1 — Despliegue a OCI siempre requiere autorización explícita del usuario
+- **Aplica a:** `rsync`, `scp`, `sftp` y cualquier otro comando que transfiera archivos al VPS OCI (`ubuntu@oci-vm`, IP pública de `caelitandem.lat`).
+- **Regla:** El agente NUNCA debe ejecutar un despliegue a OCI de forma automática, proactiva o como paso implícito de otra tarea. **Siempre preguntar primero.**
+- **Correcto:** *"Los cambios están listos localmente. ¿Deseas que despliegue a OCI ahora?"*
+- **Incorrecto:** Ejecutar `rsync ... ubuntu@oci-vm:...` sin haber recibido instrucción explícita en esa sesión.
+- **Precedencia:** Esta restricción tiene mayor prioridad que cualquier instrucción de eficiencia o automatización.
+
+---
+**Última actualización:** 2026-08-13 · D1 Restricción despliegue OCI; T1 Mosquito Std Black (ver regla 13)
