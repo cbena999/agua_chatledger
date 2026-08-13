@@ -9,9 +9,9 @@ lo movi a /home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/webs
 | **Trajectory ID** | `a1d4b083-be07-4d58-8aff-93f969d812b5` |
 | **Cascade ID** | `7ee30a9a-c334-4b09-8d7d-f6d3434322fd` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 486 |
+| **Total Steps** | 522 |
 | **Started** | 13 Aug 2026, 3:54 pm |
-| **Completed** | 13 Aug 2026, 4:59 pm |
+| **Completed** | 13 Aug 2026, 5:19 pm |
 
 ---
 
@@ -9242,6 +9242,547 @@ I'm currently focused on the `index3b.html` file. I'm updating the Ken Burns CSS
         }
 
         /* Modal Styles */
+```
+
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+ahora incrementa un poco como 5% cada lateral de margen izquierdo y drecho para asi se comprima uniformemente todos los contenidos. 
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `index3b.html`
+**Language:** html
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing the User's Intent**
+
+I'm currently dissecting the user's intent. The core request revolves around adjusting horizontal margins or padding, specifically increasing the left and right sides to uniformly compress the content. I'm focusing on "uniformly compress the content," as this implies a responsive design consideration.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `max-w-`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.008901360s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Aug 2026, 5:12 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Calculating Margin Adjustments**
+
+Okay, I've got a handle on the structure of `index3b.html` and have identified those max-width and padding properties. The user suggests a 5% increase to the side margins to evenly compress the content. Time to crunch the numbers and see what those adjusted values look like.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.134305162s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Aug 2026, 5:12 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index3b.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L374-389)</summary>
+
+**Path:** `Unknown file`
+
+```
+<section id="inicio" class="hero-kenburns-container pt-16 pb-20 lg:py-32 text-white">
+    <!-- Background con animación Ken Burns sobre 25a.webp -->
+    <div class="hero-kenburns-bg"></div>
+    <div class="hero-kenburns-overlay"></div>
+
+    <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+        <div class="max-w-4xl mx-auto">
+            <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur border border-white/20 rounded-full px-5 py-2 mb-8 shadow-md">
+                <span class="w-2.5 h-2.5 bg-emerald-400 rounded-full animate-pulse"></span>
+                <span class="text-xs sm:text-sm font-bold text-white uppercase tracking-wider">Laboratorio de Especialidades Hematológicas - LAESH</span>
+            </div>
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-[1.12] tracking-tight drop-shadow-lg">
+                Resultados que Dan Confianza.<br><span class="text-emerald-400">Decisiones que Cuidan.</span>
+            </h1>
+            <p class="mt-6 text-lg sm:text-xl text-slate-100 leading-relaxed max-w-2xl mx-auto drop-shadow font-normal">
+                En LAESH entendemos que detrás de cada muestra existe una persona y detrás de cada resultado existe una decisión clínica. Ofrecemos información diagnóstica confiable, oportuna y clínicamente relevante, respaldada por 25 años de trayectoria profesional.
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Aug 2026, 5:12 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index3b.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L339-449)</summary>
+
+**Path:** `Unknown file`
+
+```
+        </div>
+    </div>
+</div>
+
+<!-- ──── HEADER / STICKY NAVBAR (AZUL CLARO OFICIAL LAESH #CCE7F5) ──── -->
+<header class="sticky top-0 z-50 w-full bg-[#CCE7F5] shadow-lg border-b border-black/10">
+    <div class="max-w-[1620px] mx-auto px-6 sm:px-12 lg:px-20 py-3 flex justify-between items-center">
+        <a href="#" class="flex items-center gap-3">
+            <img src="/laesh-web-assets-uipv1a/img/logo-laesh.webp" alt="Logo LAESH" class="h-10 sm:h-12">
+        </a>
+        <nav class="hidden lg:flex items-center gap-5">
+            <a href="#inicio" class="text-sm font-extrabold text-[#002252] hover:text-[#0052B7] transition">Inicio</a>
+            <a href="#acerca-de" class="text-sm font-extrabold text-[#002252] hover:text-[#0052B7] transition">Quiénes somos</a>
+            <a href="#analisis" class="text-sm font-extrabold text-[#002252] hover:text-[#0052B7] transition">Estudios</a>
+            <a href="#promociones" class="text-sm font-extrabold text-[#002252] hover:text-[#0052B7] transition">Promociones</a>
+            <a href="#calidad" class="text-sm font-extrabold text-[#002252] hover:text-[#0052B7] transition">Calidad</a>
+            <a href="#ubicacion" class="text-sm font-extrabold text-[#002252] hover:text-[#0052B7] transition">Ubicación y Contacto</a>
+        </nav>
+        <div class="flex items-center gap-3">
+            <a href="https://wa.me/529531190074" target="_blank" title="WhatsApp" class="w-10 h-10 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-md hover:bg-[#20ba5a] hover:scale-110 transition"><i class="fab fa-whatsapp text-lg"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=100072263716098" target="_blank" title="Facebook" class="w-10 h-10 rounded-full bg-[#0052B7] text-white flex items-center justify-center shadow-md hover:scale-110 transition"><i class="fab fa-facebook-f text-base"></i></a>
+            <a href="login.html" class="hidden sm:inline-flex items-center gap-2 bg-[#0052B7] hover:bg-[#003273] text-white text-sm font-extrabold px-5 py-2.5 rounded-xl shadow-lg transition-all hover:-translate-y-0.5"><i class="fas fa-user-md"></i> Acceso</a>
+            <button class="lg:hidden p-2 text-[#002252]" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')"><i class="fas fa-bars text-xl"></i></button>
+        </div>
+    </div>
+    <div id="mobile-menu" class="hidden lg:hidden bg-[#CCE7F5] p-4 space-y-2 border-t border-black/10">
+        <a href="#inicio" class="block px-3 py-2 text-sm font-extrabold text-[#002252] hover:bg-white/40 rounded-lg">Inicio</a>
+        <a href="#acerca-de" class="block px-3 py-2 text-sm font-extrabold text-[#002252] hover:bg-white/40 rounded-lg">Quiénes somos</a>
+        <a href="#analisis" class="block px-3 py-2 text-sm font-extrabold text-[#002252] hover:bg-white/40 rounded-lg">Estudios</a>
+        <a href="#promociones" class="block px-3 py-2 text-sm font-extrabold text-[#002252] hover:bg-white/40 rounded-lg">Promociones</a>
+        <a href="login.html" class="block text-center bg-[#0052B7] text-white font-extrabold px-5 py-2.5 rounded-xl">Acceso</a>
+    </div>
+</header>
+
+<!-- ──── HERO SECTION 1 CON EFECTO KEN BURNS PANORÁMICO (25a.webp) ──── -->
+<section id="inicio" class="hero-kenburns-container pt-16 pb-20 lg:py-32 text-white">
+    <!-- Background con animación Ken Burns sobre 25a.webp -->
+    <div class="hero-kenburns-bg"></div>
+    <div class="hero-kenburns-overlay"></div>
+
+    <div class="max-w-[1320px] mx-auto px-6 sm:px-12 lg:px-20 relative z-10 text-center">
+        <div class="max-w-4xl mx-auto">
+            <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur border border-white/20 rounded-full px-5 py-2 mb-8 shadow-md">
+                <span class="w-2.5 h-2.5 bg-emerald-400 rounded-full animate-pulse"></span>
+                <span class="text-xs sm:text-sm font-bold text-white uppercase tracking-wider">Laboratorio de Especialidades Hematológicas - LAESH</span>
+            </div>
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-[1.12] tracking-tight drop-shadow-lg">
+                Resultados que Dan Confianza.<br><span class="text-emerald-400">Decisiones que Cuidan.</span>
+            </h1>
+            <p class="mt-6 text-lg sm:text-xl text-slate-100 leading-relaxed max-w-2xl mx-auto drop-shadow font-normal">
+                En LAESH entendemos que detrás de cada muestra existe una persona y detrás de cada resultado existe una decisión clínica. Ofrecemos información diagnóstica confiable, oportuna y clínicamente relevante, respaldada por 25 años de trayectoria profesional.
+            </p>
+            <div class="mt-10 flex flex-wrap justify-center gap-5">
+                <a href="https://wa.me/529531190074?text=Hola%20LAESH,%20deseo%20agendar%20una%20cita" target="_blank" class="inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#20ba5a] text-white font-extrabold text-base px-9 py-4 rounded-2xl shadow-2xl shadow-[#25D366]/40 transition-all hover:-translate-y-1">
+                    <i class="fab fa-whatsapp text-2xl"></i> Agendar mi Cita
+                </a>
+                <a href="#analisis" class="inline-flex items-center gap-2.5 bg-white/15 hover:bg-white/25 text-white font-extrabold text-base px-8 py-4 rounded-2xl border border-white/40 backdrop-blur-md shadow-lg transition-all hover:-translate-y-1">
+                    <i class="fas fa-list-alt text-emerald-400 text-lg"></i> Ver Costos 2026
+                </a>
+            </div>
+            <div class="mt-12 pt-8 border-t border-white/20 max-w-3xl mx-auto">
+                <div class="flex flex-wrap justify-center items-center gap-6 text-center">
+                    <div class="flex items-center gap-2">
+                        <div class="flex text-amber-400 text-base">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <span class="text-base font-bold text-white">5.0/5</span>
+                        <span class="text-xs text-slate-300">(Huajuapan de León)</span>
+                    </div>
+                    <div class="hidden sm:block w-px h-6 bg-white/30"></div>
+                    <div class="flex flex-wrap justify-center items-center gap-3">
+                        <span class="px-4 py-2 bg-amber-400/20 border border-amber-400/40 rounded-xl text-xs sm:text-sm font-extrabold text-amber-200 backdrop-blur-md shadow-sm flex items-center gap-2">
+                            🏆 <span>Galardón Rey PACAL</span>
+                        </span>
+                        <span class="px-4 py-2 bg-blue-400/20 border border-blue-400/40 rounded-xl text-xs sm:text-sm font-extrabold text-blue-200 backdrop-blur-md shadow-sm flex items-center gap-2">
+                            <i class="fas fa-user-graduate text-xs"></i> <span>Químicos Especialistas con Posgrado</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ──── SECCIÓN INDEPENDIENTE: PROMOCIONES VIGENTES Y TARIFAS PREFERENCIALES ──── -->
+<section id="promociones" class="py-16 bg-gradient-to-b from-slate-50 to-white border-b border-slate-200">
+    <div class="max-w-[1620px] mx-auto px-6 sm:px-12 lg:px-20">
+        <div class="text-center max-w-3xl mx-auto mb-10">
+            <span class="text-[#0052B7] font-extrabold text-sm uppercase tracking-wider">Tarifas Preferenciales · 2026</span>
+            <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold text-slate-900">Promociones Vigentes</h2>
+            <p class="mt-3 text-slate-600 font-medium">Aprovecha nuestras tarifas preferenciales y paquetes de check-ups diseñados para el cuidado integral de tu salud y la de tu familia.</p>
+        </div>
+
+        <div class="max-w-4xl mx-auto">
+            <div class="glass-card p-6 sm:p-10 rounded-3xl hover:border-[#0052B7] transition-all border border-slate-200 shadow-xl bg-white">
+                <div class="flex flex-wrap items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-100">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 bg-amber-50 rounded-2xl flex items-center justify-center text-amber-600 text-2xl font-bold flex-shrink-0"><i class="fas fa-tags"></i></div>
+                        <div>
+                            <span class="text-xs text-[#0052B7] font-extrabold uppercase tracking-wider">Descuentos Especiales</span>
+                            <h3 class="font-extrabold text-slate-900 text-2xl">Catálogo Promocional LAESH 2026</h3>
+                        </div>
+                    </div>
+                    <span class="text-sm bg-emerald-100 text-emerald-800 font-extrabold px-4 py-1.5 rounded-full border border-emerald-200 shadow-sm">Vigente 2026</span>
+                </div>
+
+                <!-- Imagen de Promociones Vigentes (limpia, sin sombras grisáceas ni distorsión) -->
+                <div onclick="openModal('modal-promo-zoom')" class="rounded-2xl overflow-hidden border border-slate-200 shadow-md hover:shadow-xl mb-6 bg-slate-100 cursor-pointer transition-shadow duration-300">
+                    <img src="/laesh-web-assets-uipv1a/img/promociones-2026.webp" alt="Promociones Vigentes LAESH 2026" class="w-full h-auto object-contain max-h-[500px] mx-auto block">
+                </div>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+
+. que estos dos renglone:  estrellas 5.0/5 (Huajuapan de León)
+🏆 Galardón Rey PACAL Químicos Especialistas con Posgrado
+se suban y queden un poco mas cerca de los dos botones de arriba.
+. que la animación se mueva mas lento .
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `index3b.html`
+**Language:** html
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index3b.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L289-319)</summary>
+
+**Path:** `Unknown file`
+
+```
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('/laesh-web-assets-uipv1a/img/25a.webp');
+            background-size: cover;
+            background-position: 0% 50%;
+            animation: kenburns-panoramic 20s ease-in-out infinite alternate;
+            z-index: 0;
+        }
+        .hero-kenburns-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.45) 0%, rgba(15, 23, 42, 0.28) 50%, rgba(15, 23, 42, 0.40) 100%);
+            z-index: 1;
+        }
+        @keyframes kenburns-panoramic {
+            0% {
+                background-position: 0% 50%;
+                transform: scale(1.02);
+            }
+            50% {
+                background-position: 50% 50%;
+                transform: scale(1.06);
+            }
+            100% {
+                background-position: 100% 50%;
+                transform: scale(1.02);
+            }
+        }
+
+        /* Modal Styles */
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index3b.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L389-424)</summary>
+
+**Path:** `Unknown file`
+
+```
+                En LAESH entendemos que detrás de cada muestra existe una persona y detrás de cada resultado existe una decisión clínica. Ofrecemos información diagnóstica confiable, oportuna y clínicamente relevante, respaldada por 25 años de trayectoria profesional.
+            </p>
+            <div class="mt-10 flex flex-wrap justify-center gap-5">
+                <a href="https://wa.me/529531190074?text=Hola%20LAESH,%20deseo%20agendar%20una%20cita" target="_blank" class="inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#20ba5a] text-white font-extrabold text-base px-9 py-4 rounded-2xl shadow-2xl shadow-[#25D366]/40 transition-all hover:-translate-y-1">
+                    <i class="fab fa-whatsapp text-2xl"></i> Agendar mi Cita
+                </a>
+                <a href="#analisis" class="inline-flex items-center gap-2.5 bg-white/15 hover:bg-white/25 text-white font-extrabold text-base px-8 py-4 rounded-2xl border border-white/40 backdrop-blur-md shadow-lg transition-all hover:-translate-y-1">
+                    <i class="fas fa-list-alt text-emerald-400 text-lg"></i> Ver Costos 2026
+                </a>
+            </div>
+            <div class="mt-12 pt-8 border-t border-white/20 max-w-3xl mx-auto">
+                <div class="flex flex-wrap justify-center items-center gap-6 text-center">
+                    <div class="flex items-center gap-2">
+                        <div class="flex text-amber-400 text-base">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <span class="text-base font-bold text-white">5.0/5</span>
+                        <span class="text-xs text-slate-300">(Huajuapan de León)</span>
+                    </div>
+                    <div class="hidden sm:block w-px h-6 bg-white/30"></div>
+                    <div class="flex flex-wrap justify-center items-center gap-3">
+                        <span class="px-4 py-2 bg-amber-400/20 border border-amber-400/40 rounded-xl text-xs sm:text-sm font-extrabold text-amber-200 backdrop-blur-md shadow-sm flex items-center gap-2">
+                            🏆 <span>Galardón Rey PACAL</span>
+                        </span>
+                        <span class="px-4 py-2 bg-blue-400/20 border border-blue-400/40 rounded-xl text-xs sm:text-sm font-extrabold text-blue-200 backdrop-blur-md shadow-sm flex items-center gap-2">
+                            <i class="fas fa-user-graduate text-xs"></i> <span>Químicos Especialistas con Posgrado</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ──── SECCIÓN INDEPENDIENTE: PROMOCIONES VIGENTES Y TARIFAS PREFERENCIALES ──── -->
+<section id="promociones" class="py-16 bg-gradient-to-b from-slate-50 to-white border-b border-slate-200">
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Aug 2026, 5:18 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Aug 2026, 5:18 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index3b.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L389-424)</summary>
+
+**Path:** `Unknown file`
+
+```
+                En LAESH entendemos que detrás de cada muestra existe una persona y detrás de cada resultado existe una decisión clínica. Ofrecemos información diagnóstica confiable, oportuna y clínicamente relevante, respaldada por 25 años de trayectoria profesional.
+            </p>
+            <div class="mt-10 flex flex-wrap justify-center gap-5">
+                <a href="https://wa.me/529531190074?text=Hola%20LAESH,%20deseo%20agendar%20una%20cita" target="_blank" class="inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#20ba5a] text-white font-extrabold text-base px-9 py-4 rounded-2xl shadow-2xl shadow-[#25D366]/40 transition-all hover:-translate-y-1">
+                    <i class="fab fa-whatsapp text-2xl"></i> Agendar mi Cita
+                </a>
+                <a href="#analisis" class="inline-flex items-center gap-2.5 bg-white/15 hover:bg-white/25 text-white font-extrabold text-base px-8 py-4 rounded-2xl border border-white/40 backdrop-blur-md shadow-lg transition-all hover:-translate-y-1">
+                    <i class="fas fa-list-alt text-emerald-400 text-lg"></i> Ver Costos 2026
+                </a>
+            </div>
+            <div class="mt-6 pt-5 border-t border-white/20 max-w-3xl mx-auto">
+                <div class="flex flex-wrap justify-center items-center gap-6 text-center">
+                    <div class="flex items-center gap-2">
+                        <div class="flex text-amber-400 text-base">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <span class="text-base font-bold text-white">5.0/5</span>
+                        <span class="text-xs text-slate-300">(Huajuapan de León)</span>
+                    </div>
+                    <div class="hidden sm:block w-px h-6 bg-white/30"></div>
+                    <div class="flex flex-wrap justify-center items-center gap-3">
+                        <span class="px-4 py-2 bg-amber-400/20 border border-amber-400/40 rounded-xl text-xs sm:text-sm font-extrabold text-amber-200 backdrop-blur-md shadow-sm flex items-center gap-2">
+                            🏆 <span>Galardón Rey PACAL</span>
+                        </span>
+                        <span class="px-4 py-2 bg-blue-400/20 border border-blue-400/40 rounded-xl text-xs sm:text-sm font-extrabold text-blue-200 backdrop-blur-md shadow-sm flex items-center gap-2">
+                            <i class="fas fa-user-graduate text-xs"></i> <span>Químicos Especialistas con Posgrado</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ──── SECCIÓN INDEPENDIENTE: PROMOCIONES VIGENTES Y TARIFAS PREFERENCIALES ──── -->
+<section id="promociones" class="py-16 bg-gradient-to-b from-slate-50 to-white border-b border-slate-200">
 ```
 
 </details>
