@@ -9,9 +9,9 @@ lo movi a /home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/webs
 | **Trajectory ID** | `a1d4b083-be07-4d58-8aff-93f969d812b5` |
 | **Cascade ID** | `7ee30a9a-c334-4b09-8d7d-f6d3434322fd` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 791 |
+| **Total Steps** | 891 |
 | **Started** | 13 Aug 2026, 3:54 pm |
-| **Completed** | 14 Aug 2026, 11:36 am |
+| **Completed** | 14 Aug 2026, 2:25 pm |
 
 ---
 
@@ -14038,6 +14038,1330 @@ I'm focusing on the user's specific feedback regarding image 25a. It seems there
 ```
 
 </details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+que la imagen promociones-2026, ocupe para visualizarse toda el area del rectangulo gris con esquinas ovalas.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `index3b.html`
+**Language:** html
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `promociones-2026`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 14 Aug 2026, 12:07 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index3b.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L479-534)</summary>
+
+**Path:** `Unknown file`
+
+```
+        </div>
+    </div>
+</section>
+
+<!-- ──── SECCIÓN INDEPENDIENTE: PROMOCIONES VIGENTES Y TARIFAS PREFERENCIALES ──── -->
+<section id="promociones" class="py-16 bg-gradient-to-b from-slate-50 to-white border-b border-slate-200">
+    <div class="max-w-[1620px] mx-auto px-6 sm:px-12 lg:px-20">
+        <div class="text-center max-w-3xl mx-auto mb-10">
+            <span class="text-[#0052B7] font-extrabold text-sm uppercase tracking-wider">Tarifas Preferenciales · 2026</span>
+            <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold text-slate-900">Promociones Vigentes</h2>
+            <p class="mt-3 text-slate-600 font-medium">Aprovecha nuestras tarifas preferenciales y paquetes de check-ups diseñados para el cuidado integral de tu salud y la de tu familia.</p>
+        </div>
+
+        <div class="max-w-4xl mx-auto">
+            <div class="glass-card p-6 sm:p-10 rounded-3xl hover:border-[#0052B7] transition-all border border-slate-200 shadow-xl bg-white">
+                <div class="flex flex-wrap items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-100">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 bg-amber-50 rounded-2xl flex items-center justify-center text-amber-600 text-2xl font-bold flex-shrink-0"><i class="fas fa-tags"></i></div>
+                        <div>
+                            <span class="text-xs text-[#0052B7] font-extrabold uppercase tracking-wider">Descuentos Especiales</span>
+                            <h3 class="font-extrabold text-slate-900 text-2xl">Catálogo Promocional LAESH 2026</h3>
+                        </div>
+                    </div>
+                    <span class="text-sm bg-emerald-100 text-emerald-800 font-extrabold px-4 py-1.5 rounded-full border border-emerald-200 shadow-sm">Vigente 2026</span>
+                </div>
+
+                <!-- Imagen de Promociones Vigentes (limpia, sin sombras grisáceas ni distorsión) -->
+                <div onclick="openModal('modal-promo-zoom')" class="rounded-2xl overflow-hidden border border-slate-200 shadow-md hover:shadow-xl mb-6 bg-slate-100 cursor-pointer transition-shadow duration-300">
+                    <img src="/laesh-web-assets-uipv1a/img/promociones-2026.webp" alt="Promociones Vigentes LAESH 2026" class="w-full h-auto object-contain max-h-[500px] mx-auto block">
+                </div>
+
+                <div class="flex flex-wrap sm:flex-nowrap gap-4 pt-2">
+                    <a href="#analisis" class="block text-center w-full py-3.5 px-6 bg-[#0052B7] hover:bg-[#003273] text-white font-extrabold text-sm rounded-xl transition shadow-md">
+                        <i class="fas fa-list-alt mr-2"></i> Ver Catálogo Completo de Costos
+                    </a>
+                    <a href="https://wa.me/529531190074?text=Hola%20LAESH,%20deseo%20informacion%20sobre%20las%20Promociones%20Vigentes" target="_blank" class="block text-center w-full py-3.5 px-6 bg-[#25D366] hover:bg-[#20ba5a] text-white font-extrabold text-sm rounded-xl transition shadow-md">
+                        <i class="fab fa-whatsapp mr-2"></i> Consultar Promoción por WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ──── QUIÉNES SOMOS / POR QUÉ ELEGIRNOS ──── -->
+<section id="acerca-de" class="py-16 bg-white/60">
+    <div class="max-w-[1620px] mx-auto px-6 sm:px-12 lg:px-20">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+            <span class="text-[#0052B7] font-extrabold text-sm uppercase tracking-wider">Quiénes Somos · LAESH®</span>
+            <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold text-slate-900">¿Por Qué Elegir LAESH?</h2>
+            <p class="mt-3 text-slate-600 font-medium">La calidad de un resultado también se mide por la confianza que genera. <strong class="text-emerald-600 font-extrabold">25 años</strong> transformando resultados en decisiones clínicas.</p>
+        </div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <!-- Ficha 1: ¿POR QUÉ CONFIAR EN LAESH? -->
+            <div class="glass-card p-8 hover:border-[#0052B7] transition-all duration-300 transform hover:-translate-y-1">
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing the Request**
+
+Okay, I'm now digging into the specifics of the user's request. It seems they want the promotional image to completely fill a rounded, gray rectangle. I'm focusing on understanding how to achieve this visual effect, considering the existing HTML structure, specifically lines 507-509, which appear to define the container for the image. I'm parsing the relevant HTML to work out the intended layout.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.611774169s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 14 Aug 2026, 12:07 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index3b.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L499-514)</summary>
+
+**Path:** `Unknown file`
+
+```
+                            <h3 class="font-extrabold text-slate-900 text-2xl">Catálogo Promocional LAESH 2026</h3>
+                        </div>
+                    </div>
+                    <span class="text-sm bg-emerald-100 text-emerald-800 font-extrabold px-4 py-1.5 rounded-full border border-emerald-200 shadow-sm">Vigente 2026</span>
+                </div>
+
+                <!-- Imagen de Promociones Vigentes (ocupa 100% del área del rectángulo con esquinas ovaladas) -->
+                <div onclick="openModal('modal-promo-zoom')" class="rounded-2xl overflow-hidden border border-slate-200 shadow-md hover:shadow-xl mb-6 cursor-pointer transition-all duration-300">
+                    <img src="/laesh-web-assets-uipv1a/img/promociones-2026.webp" alt="Promociones Vigentes LAESH 2026" class="w-full h-auto object-cover block mx-auto rounded-2xl">
+                </div>
+
+                <div class="flex flex-wrap sm:flex-nowrap gap-4 pt-2">
+                    <a href="#analisis" class="block text-center w-full py-3.5 px-6 bg-[#0052B7] hover:bg-[#003273] text-white font-extrabold text-sm rounded-xl transition shadow-md">
+                        <i class="fas fa-list-alt mr-2"></i> Ver Catálogo Completo de Costos
+                    </a>
+                    <a href="https://wa.me/529531190074?text=Hola%20LAESH,%20deseo%20informacion%20sobre%20las%20Promociones%20Vigentes" target="_blank" class="block text-center w-full py-3.5 px-6 bg-[#25D366] hover:bg-[#20ba5a] text-white font-extrabold text-sm rounded-xl transition shadow-md">
+```
+
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+. elimina esta label: Catálogo Promocional LAESH 2026, 
+. reduce un poco el alto de de la imagen.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `index3b.html`
+**Language:** html
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index3b.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L489-519)</summary>
+
+**Path:** `Unknown file`
+
+```
+            <p class="mt-3 text-slate-600 font-medium">Aprovecha nuestras tarifas preferenciales y paquetes de check-ups diseñados para el cuidado integral de tu salud y la de tu familia.</p>
+        </div>
+
+        <div class="max-w-4xl mx-auto">
+            <div class="glass-card p-6 sm:p-10 rounded-3xl hover:border-[#0052B7] transition-all border border-slate-200 shadow-xl bg-white">
+                <div class="flex flex-wrap items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-100">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 bg-amber-50 rounded-2xl flex items-center justify-center text-amber-600 text-2xl font-bold flex-shrink-0"><i class="fas fa-tags"></i></div>
+                        <div>
+                            <span class="text-xs text-[#0052B7] font-extrabold uppercase tracking-wider">Descuentos Especiales</span>
+                            <h3 class="font-extrabold text-slate-900 text-2xl">Catálogo Promocional LAESH 2026</h3>
+                        </div>
+                    </div>
+                    <span class="text-sm bg-emerald-100 text-emerald-800 font-extrabold px-4 py-1.5 rounded-full border border-emerald-200 shadow-sm">Vigente 2026</span>
+                </div>
+
+                <!-- Imagen de Promociones Vigentes (ocupa 100% del área del rectángulo con esquinas ovaladas) -->
+                <div onclick="openModal('modal-promo-zoom')" class="rounded-2xl overflow-hidden border border-slate-200 shadow-md hover:shadow-xl mb-6 cursor-pointer transition-all duration-300">
+                    <img src="/laesh-web-assets-uipv1a/img/promociones-2026.webp" alt="Promociones Vigentes LAESH 2026" class="w-full h-auto object-cover block mx-auto rounded-2xl">
+                </div>
+
+                <div class="flex flex-wrap sm:flex-nowrap gap-4 pt-2">
+                    <a href="#analisis" class="block text-center w-full py-3.5 px-6 bg-[#0052B7] hover:bg-[#003273] text-white font-extrabold text-sm rounded-xl transition shadow-md">
+                        <i class="fas fa-list-alt mr-2"></i> Ver Catálogo Completo de Costos
+                    </a>
+                    <a href="https://wa.me/529531190074?text=Hola%20LAESH,%20deseo%20informacion%20sobre%20las%20Promociones%20Vigentes" target="_blank" class="block text-center w-full py-3.5 px-6 bg-[#25D366] hover:bg-[#20ba5a] text-white font-extrabold text-sm rounded-xl transition shadow-md">
+                        <i class="fab fa-whatsapp mr-2"></i> Consultar Promoción por WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Refining Catalogue Title**
+
+I've been working on refining the catalogue title. Specifically, I've identified the redundant title "Catálogo Promocional LAESH 2026" within the code, specifically in lines 495 to 504. My plan is to either remove this title or simplify the header of the card banner to avoid redundancy and streamline the layout.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.380925119s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 14 Aug 2026, 12:14 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index3b.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L489-514)</summary>
+
+**Path:** `Unknown file`
+
+```
+            <p class="mt-3 text-slate-600 font-medium">Aprovecha nuestras tarifas preferenciales y paquetes de check-ups diseñados para el cuidado integral de tu salud y la de tu familia.</p>
+        </div>
+
+        <div class="max-w-4xl mx-auto">
+            <div class="glass-card p-6 sm:p-10 rounded-3xl hover:border-[#0052B7] transition-all border border-slate-200 shadow-xl bg-white">
+                <div class="flex flex-wrap items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-100">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-amber-50 rounded-2xl flex items-center justify-center text-amber-600 text-xl font-bold flex-shrink-0"><i class="fas fa-tags"></i></div>
+                        <div>
+                            <span class="text-xs text-[#0052B7] font-extrabold uppercase tracking-wider">Descuentos Especiales</span>
+                        </div>
+                    </div>
+                    <span class="text-sm bg-emerald-100 text-emerald-800 font-extrabold px-4 py-1.5 rounded-full border border-emerald-200 shadow-sm">Vigente 2026</span>
+                </div>
+
+                <!-- Imagen de Promociones Vigentes (alto reducido con esquinas ovaladas) -->
+                <div onclick="openModal('modal-promo-zoom')" class="rounded-2xl overflow-hidden border border-slate-200 shadow-md hover:shadow-xl mb-6 cursor-pointer transition-all duration-300 max-h-[360px] sm:max-h-[400px]">
+                    <img src="/laesh-web-assets-uipv1a/img/promociones-2026.webp" alt="Promociones Vigentes LAESH 2026" class="w-full h-full max-h-[360px] sm:max-h-[400px] object-cover object-top block mx-auto rounded-2xl">
+                </div>
+
+                <div class="flex flex-wrap sm:flex-nowrap gap-4 pt-2">
+                    <a href="#analisis" class="block text-center w-full py-3.5 px-6 bg-[#0052B7] hover:bg-[#003273] text-white font-extrabold text-sm rounded-xl transition shadow-md">
+                        <i class="fas fa-list-alt mr-2"></i> Ver Catálogo Completo de Costos
+                    </a>
+                    <a href="https://wa.me/529531190074?text=Hola%20LAESH,%20deseo%20informacion%20sobre%20las%20Promociones%20Vigentes" target="_blank" class="block text-center w-full py-3.5 px-6 bg-[#25D366] hover:bg-[#20ba5a] text-white font-extrabold text-sm rounded-xl transition shadow-md">
+                        <i class="fab fa-whatsapp mr-2"></i> Consultar Promoción por WhatsApp
+```
+
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+Coloca un tooltip a la image que diga:  click para ver imagen completa; no pongas efectos extra. 
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `index3b.html`
+**Language:** html
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing the Request**
+
+Okay, I'm breaking down the user's request. My focus right now is on understanding the phrasing, specifically, the command to "place a tooltip on the image that says: click to see full image". I'm making sure I grasp the specific instruction to avoid any unnecessary effects.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.115364970s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 14 Aug 2026, 12:19 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index3b.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L499-514)</summary>
+
+**Path:** `Unknown file`
+
+```
+                        </div>
+                    </div>
+                    <span class="text-sm bg-emerald-100 text-emerald-800 font-extrabold px-4 py-1.5 rounded-full border border-emerald-200 shadow-sm">Vigente 2026</span>
+                </div>
+
+                <!-- Imagen de Promociones Vigentes (alto reducido con esquinas ovaladas) -->
+                <div onclick="openModal('modal-promo-zoom')" title="click para ver imagen completa" class="rounded-2xl overflow-hidden border border-slate-200 shadow-md hover:shadow-xl mb-6 cursor-pointer transition-all duration-300 max-h-[360px] sm:max-h-[400px]">
+                    <img src="/laesh-web-assets-uipv1a/img/promociones-2026.webp" alt="Promociones Vigentes LAESH 2026" title="click para ver imagen completa" class="w-full h-full max-h-[360px] sm:max-h-[400px] object-cover object-top block mx-auto rounded-2xl">
+                </div>
+
+                <div class="flex flex-wrap sm:flex-nowrap gap-4 pt-2">
+                    <a href="#analisis" class="block text-center w-full py-3.5 px-6 bg-[#0052B7] hover:bg-[#003273] text-white font-extrabold text-sm rounded-xl transition shadow-md">
+                        <i class="fas fa-list-alt mr-2"></i> Ver Catálogo Completo de Costos
+                    </a>
+                    <a href="https://wa.me/529531190074?text=Hola%20LAESH,%20deseo%20informacion%20sobre%20las%20Promociones%20Vigentes" target="_blank" class="block text-center w-full py-3.5 px-6 bg-[#25D366] hover:bg-[#20ba5a] text-white font-extrabold text-sm rounded-xl transition shadow-md">
+                        <i class="fab fa-whatsapp mr-2"></i> Consultar Promoción por WhatsApp
+```
+
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+que la imagen de: Croquis de Ubicación, ocupe casi toda el area de la ficha blanca contenedora, con los 4 margenes minimos
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `index3b.html`
+**Language:** html
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `ubicacion`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 14 Aug 2026, 12:21 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index3b.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1164-1234)</summary>
+
+**Path:** `Unknown file`
+
+```
+    </div>
+</section>
+
+<!-- ──── SUCURSAL Y UBICACIÓN (SECCIÓN UBICACIÓN DE INDEX.HTML) ──── -->
+<section id="ubicacion" class="py-16 bg-slate-50 border-t border-slate-200">
+    <div class="max-w-[1620px] mx-auto px-6 sm:px-12 lg:px-20">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+            <span class="text-brand-600 font-bold text-sm uppercase tracking-wider">Nuestra Ubicación</span>
+            <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold text-slate-900">Visítanos en Huajuapan de León</h2>
+            <p class="mt-3 text-slate-600">Instalaciones accesibles e higiénicas en la mixteca oaxaqueña.</p>
+        </div>
+        <div class="grid lg:grid-cols-2 gap-8 items-center">
+            <div class="glass-card p-8 rounded-3xl space-y-6">
+                <div class="flex items-start gap-4">
+                    <div class="w-12 h-12 bg-accent-500/15 text-accent-600 rounded-2xl flex items-center justify-center text-xl flex-shrink-0"><i class="fas fa-map-marked-alt"></i></div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900">Laboratorio LAESH</h3>
+                        <p class="text-slate-600 text-sm mt-1">Calle Azucenas No. 8, Col. Jardines del Sur, Huajuapan de León, Oaxaca.</p>
+                    </div>
+                </div>
+                <div class="grid sm:grid-cols-2 gap-4 pt-4 border-t border-slate-200">
+                    <div>
+                        <p class="text-xs font-bold text-slate-400 uppercase">Horario de Atención</p>
+                        <p class="text-sm font-semibold text-slate-800 mt-1"><i class="fas fa-clock text-accent-600 mr-1.5"></i>Lunes a sábado: 7:00 a.m. – 9:00 p.m.<br>Domingo: 7:00 a.m. – 3:00 p.m.</p>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold text-slate-400 uppercase">Contacto Directo</p>
+                        <p class="text-sm font-semibold text-slate-800 mt-1"><i class="fas fa-phone text-brand-600 mr-1.5"></i>953 688 7694<br><i class="fab fa-whatsapp text-accent-600 mr-1.5"></i>953 119 0074</p>
+                    </div>
+                </div>
+                <div class="flex gap-4 pt-2">
+                    <button id="btn-map-static" onclick="showMapTab('static')" class="flex-1 py-3 bg-brand-600 text-white text-xs font-bold rounded-xl shadow transition">Croquis de Ubicación</button>
+                    <button id="btn-map-interactive" onclick="showMapTab('interactive')" class="flex-1 py-3 bg-white border border-slate-300 text-slate-700 text-xs font-bold rounded-xl hover:bg-slate-50 transition">Google Maps Interactivo</button>
+                </div>
+            </div>
+            <div class="glass-card rounded-3xl overflow-hidden h-[380px] relative border border-slate-200">
+                <div id="map-static" class="w-full h-full bg-white flex items-center justify-center">
+                    <img src="/laesh-web-assets-uipv1a/img/mapa-laesh.webp" alt="Croquis de Ubicación LAESH" class="w-full h-full object-contain p-2 bg-white rounded-2xl">
+                </div>
+                <div id="map-interactive" class="w-full h-full hidden">
+                    <iframe data-src="https://maps.google.com/maps?q=Laboratorio+de+Especialidades+Hematologicas+Huajuapan&t=&z=18&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ──── TESTIMONIOS ──── -->
+<section class="py-16 bg-white">
+    <div class="max-w-[1620px] mx-auto px-6 sm:px-12 lg:px-20">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+            <span class="text-accent-600 font-bold text-sm uppercase tracking-wider">Experiencias de Pacientes</span>
+            <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold text-slate-900">Opiniones sobre LAESH</h2>
+        </div>
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="glass-card p-6">
+                <div class="flex text-amber-400 text-sm mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <p class="text-slate-600 text-sm leading-relaxed mb-6">"Excelente servicio en Huajuapan. La atención para mi muestra de citometría fue rápida y el químico me explicó mis dudas con mucha amabilidad."</p>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-accent-500/20 text-accent-700 rounded-full flex items-center justify-center font-bold text-sm">MR</div>
+                    <div><p class="text-sm font-bold text-slate-900">María R.</p><p class="text-xs text-slate-400">Paciente en Huajuapan</p></div>
+                </div>
+            </div>
+            <div class="glass-card p-6">
+                <div class="flex text-amber-400 text-sm mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <p class="text-slate-600 text-sm leading-relaxed mb-6">"La toma a domicilio para mi abuelita fue una bendición. La enfermera llegó puntual y fue muy cuidadosa. Resultados el mismo día."</p>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-brand-500/20 text-brand-700 rounded-full flex items-center justify-center font-bold text-sm">JG</div>
+                    <div><p class="text-sm font-bold text-slate-900">José G.</p><p class="text-xs text-slate-400">Servicio a Domicilio</p></div>
+                </div>
+            </div>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 14 Aug 2026, 12:21 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index3b.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1194-1211)</summary>
+
+**Path:** `Unknown file`
+
+```
+                <div class="flex gap-4 pt-2">
+                    <button id="btn-map-static" onclick="showMapTab('static')" class="flex-1 py-3 bg-brand-600 text-white text-xs font-bold rounded-xl shadow transition">Croquis de Ubicación</button>
+                    <button id="btn-map-interactive" onclick="showMapTab('interactive')" class="flex-1 py-3 bg-white border border-slate-300 text-slate-700 text-xs font-bold rounded-xl hover:bg-slate-50 transition">Google Maps Interactivo</button>
+                </div>
+            </div>
+            <div class="glass-card rounded-3xl overflow-hidden h-[400px] sm:h-[440px] relative border border-slate-200 bg-white p-1 sm:p-1.5 shadow-lg">
+                <div id="map-static" class="w-full h-full bg-white flex items-center justify-center rounded-2xl overflow-hidden">
+                    <img src="/laesh-web-assets-uipv1a/img/mapa-laesh.webp" alt="Croquis de Ubicación LAESH" class="w-full h-full object-cover block mx-auto rounded-2xl">
+                </div>
+                <div id="map-interactive" class="w-full h-full hidden rounded-2xl overflow-hidden">
+                    <iframe data-src="https://maps.google.com/maps?q=Laboratorio+de+Especialidades+Hematologicas+Huajuapan&t=&z=18&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ──── TESTIMONIOS ──── -->
+```
+
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+que las dos fichas de la seeción: Aseguramiento de Calidad,  se ajusten la del carrusel a +10% y la otra a -10% y quede proporcional si alterar mas cosas.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `index3b.html`
+**Language:** html
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `Aseguramiento de Calidad`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 14 Aug 2026, 12:24 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index3b.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1064-1164)</summary>
+
+**Path:** `Unknown file`
+
+```
+</section>
+
+<!-- ──── ASEGURAMIENTO DE CALIDAD Y RECONOCIMIENTOS (SECCIÓN INDEX.HTML) ──── -->
+<section id="calidad" class="py-16 bg-white border-t border-slate-200">
+    <div class="max-w-[1620px] mx-auto px-6 sm:px-12 lg:px-20">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <span class="text-[#0052B7] font-extrabold text-sm uppercase tracking-wider">Excelencia Analítica</span>
+                <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold text-slate-900">Aseguramiento de Calidad</h2>
+                <p class="mt-4 text-slate-600 leading-relaxed">
+                    En LAESH® implementamos controles estrictos en todas nuestras fases analíticas. Contamos con un programa diario de control interno y participamos activamente en evaluaciones de calidad externas para validar la precisión diagnóstica de cada una de nuestras áreas de trabajo.
+                </p>
+                
+                <div class="mt-6 space-y-4">
+                    <div class="flex items-start gap-4 p-4 rounded-2xl bg-emerald-50 border border-emerald-200">
+                        <div class="w-10 h-10 bg-emerald-500 text-white rounded-xl flex items-center justify-center text-lg flex-shrink-0"><i class="fas fa-award"></i></div>
+                        <div>
+                            <h4 class="font-extrabold text-slate-900 text-base">Galardón Rey PACAL</h4>
+                            <p class="text-xs text-slate-600 mt-0.5">Reconocimiento oficial a nuestro desempeño de <strong class="text-emerald-700 font-bold">EXCELENCIA</strong> en programas de evaluación externa de calidad.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4 p-4 rounded-2xl bg-blue-50 border border-blue-200">
+                        <div class="w-10 h-10 bg-[#0052B7] text-white rounded-xl flex items-center justify-center text-lg flex-shrink-0"><i class="fas fa-microscope"></i></div>
+                        <div>
+                            <h4 class="font-extrabold text-slate-900 text-base">Control Analítico Diario</h4>
+                            <p class="text-xs text-slate-600 mt-0.5">Calibración continua y validación de reactivos e instrumentos por Químicos Especialistas con estudios de posgrado.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 flex flex-wrap gap-4">
+                    <a href="https://wa.me/529531190074?text=Hola%20LAESH,%20deseo%20informacion%20sobre%20sus%20procesos%20de%20calidad" target="_blank" class="inline-flex items-center gap-2 bg-[#0052B7] hover:bg-[#003273] text-white font-extrabold px-6 py-3.5 rounded-xl shadow-lg transition-all hover:-translate-y-0.5"><i class="fas fa-check-double text-base"></i> Consultar Garantía de Calidad</a>
+                    <a href="https://wa.me/529531190074" target="_blank" class="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20ba5a] text-white font-extrabold px-6 py-3.5 rounded-xl shadow-md transition-all hover:-translate-y-0.5"><i class="fab fa-whatsapp text-lg"></i> Contactar al Laboratorio</a>
+                </div>
+            </div>
+
+            <!-- Carrusel de Fotos de Áreas Técnicas (index.html/Calidad) -->
+            <div class="relative bg-slate-900 rounded-3xl overflow-hidden shadow-2xl border border-slate-700 h-[440px] group">
+                <div id="quality-carousel-container" class="relative w-full h-full">
+                    
+                    <!-- Slide 1 -->
+                    <div class="quality-slide absolute inset-0 transition-opacity duration-700 opacity-100 flex flex-col justify-end p-6 sm:p-8 bg-cover bg-center" style="background-image: linear-gradient(to top, rgba(15,23,42,0.60) 0%, rgba(15,23,42,0.20) 50%, rgba(0,0,0,0) 100%), url('/laesh-web-assets-uipv1a/img/area-hematologia-dos.webp');">
+                        <span class="text-xs bg-[#0052B7] text-white px-3 py-1 rounded-full font-bold w-fit mb-2">Área Técnica II</span>
+                        <h4 class="text-xl sm:text-2xl font-extrabold text-white">Área de Hematología II</h4>
+                        <p class="text-xs sm:text-sm text-slate-200 mt-1 max-w-lg">Recuentos morfológicos y frotis sanguíneo de alta precisión diagnóstica.</p>
+                    </div>
+
+                    <!-- Slide 2 -->
+                    <div class="quality-slide absolute inset-0 transition-opacity duration-700 opacity-0 pointer-events-none flex flex-col justify-end p-6 sm:p-8 bg-cover bg-center" style="background-image: linear-gradient(to top, rgba(15,23,42,0.60) 0%, rgba(15,23,42,0.20) 50%, rgba(0,0,0,0) 100%), url('/laesh-web-assets-uipv1a/img/area-quimica-clinica.webp');">
+                        <span class="text-xs bg-[#0052B7] text-white px-3 py-1 rounded-full font-bold w-fit mb-2">Química Clínica</span>
+                        <h4 class="text-xl sm:text-2xl font-extrabold text-white">Química Clínica I</h4>
+                        <p class="text-xs sm:text-sm text-slate-200 mt-1 max-w-lg">Determinación automatizada de metabolitos, enzimas y perfiles hepáticos.</p>
+                    </div>
+
+                    <!-- Slide 3 -->
+                    <div class="quality-slide absolute inset-0 transition-opacity duration-700 opacity-0 pointer-events-none flex flex-col justify-end p-6 sm:p-8 bg-cover bg-center" style="background-image: linear-gradient(to top, rgba(15,23,42,0.60) 0%, rgba(15,23,42,0.20) 50%, rgba(0,0,0,0) 100%), url('/laesh-web-assets-uipv1a/img/area-bacteriologia.webp');">
+                        <span class="text-xs bg-emerald-600 text-white px-3 py-1 rounded-full font-bold w-fit mb-2">Microbiología</span>
+                        <h4 class="text-xl sm:text-2xl font-extrabold text-white">Área de Bacteriología I</h4>
+                        <p class="text-xs sm:text-sm text-slate-200 mt-1 max-w-lg">Cultivo bacteriano, frotis y tinción de Gram para identificación de patógenos.</p>
+                    </div>
+
+                    <!-- Slide 4 -->
+                    <div class="quality-slide absolute inset-0 transition-opacity duration-700 opacity-0 pointer-events-none flex flex-col justify-end p-6 sm:p-8 bg-cover bg-center" style="background-image: linear-gradient(to top, rgba(15,23,42,0.60) 0%, rgba(15,23,42,0.20) 50%, rgba(0,0,0,0) 100%), url('/laesh-web-assets-uipv1a/img/area-coagulacion.webp');">
+                        <span class="text-xs bg-emerald-600 text-white px-3 py-1 rounded-full font-bold w-fit mb-2">Área Especializada</span>
+                        <h4 class="text-xl sm:text-2xl font-extrabold text-white">Área de Coagulación</h4>
+                        <p class="text-xs sm:text-sm text-slate-200 mt-1 max-w-lg">Evaluación de tiempos de protrombina (TP) y tromboplastina parcial activada (TTPa).</p>
+                    </div>
+
+                    <!-- Slide 5 -->
+                    <div class="quality-slide absolute inset-0 transition-opacity duration-700 opacity-0 pointer-events-none flex flex-col justify-end p-6 sm:p-8 bg-cover bg-center" style="background-image: linear-gradient(to top, rgba(15,23,42,0.60) 0%, rgba(15,23,42,0.20) 50%, rgba(0,0,0,0) 100%), url('/laesh-web-assets-uipv1a/img/area-uroanalisis.webp');">
+                        <span class="text-xs bg-[#0052B7] text-white px-3 py-1 rounded-full font-bold w-fit mb-2">Uroanálisis</span>
+                        <h4 class="text-xl sm:text-2xl font-extrabold text-white">Área de Uroanálisis</h4>
+                        <p class="text-xs sm:text-sm text-slate-200 mt-1 max-w-lg">Examen químico de tiras y análisis microscópico de sedimentos urinarios.</p>
+                    </div>
+
+                    <!-- Slide 6 -->
+                    <div class="quality-slide absolute inset-0 transition-opacity duration-700 opacity-0 pointer-events-none flex flex-col justify-end p-6 sm:p-8 bg-cover bg-center" style="background-image: linear-gradient(to top, rgba(15,23,42,0.60) 0%, rgba(15,23,42,0.20) 50%, rgba(0,0,0,0) 100%), url('/laesh-web-assets-uipv1a/img/area-estudios-especiales.webp');">
+                        <span class="text-xs bg-amber-500 text-slate-900 px-3 py-1 rounded-full font-bold w-fit mb-2">Estudios Avanzados</span>
+                        <h4 class="text-xl sm:text-2xl font-extrabold text-white">Estudios Especiales</h4>
+                        <p class="text-xs sm:text-sm text-slate-200 mt-1 max-w-lg">Hormonas, perfiles inmunológicos complejos y marcadores biológicos.</p>
+                    </div>
+
+                    <!-- Slide 7 -->
+                    <div class="quality-slide absolute inset-0 transition-opacity duration-700 opacity-0 pointer-events-none flex flex-col justify-end p-6 sm:p-8 bg-cover bg-center" style="background-image: linear-gradient(to top, rgba(15,23,42,0.60) 0%, rgba(15,23,42,0.20) 50%, rgba(0,0,0,0) 100%), url('/laesh-web-assets-uipv1a/img/area-centrifugacion.webp');">
+                        <span class="text-xs bg-emerald-600 text-white px-3 py-1 rounded-full font-bold w-fit mb-2">Pre-analítica</span>
+                        <h4 class="text-xl sm:text-2xl font-extrabold text-white">Centrifugación y Pre-analítica</h4>
+                        <p class="text-xs sm:text-sm text-slate-200 mt-1 max-w-lg">Separación de suero y plasma con control estricto de tiempos y temperaturas.</p>
+                    </div>
+                </div>
+
+                <!-- Botones de Navegación del Carrusel -->
+                <button type="button" id="btn-quality-prev" onclick="prevQualitySlide(event)" class="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-slate-900/80 hover:bg-[#0052B7] text-white flex items-center justify-center transition-all border border-white/30 z-30 cursor-pointer shadow-lg hover:scale-110">
+                    <i class="fas fa-chevron-left text-base"></i>
+                </button>
+                <button type="button" id="btn-quality-next" onclick="nextQualitySlide(event)" class="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-slate-900/80 hover:bg-[#0052B7] text-white flex items-center justify-center transition-all border border-white/30 z-30 cursor-pointer shadow-lg hover:scale-110">
+                    <i class="fas fa-chevron-right text-base"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing the User's Request**
+
+I'm currently dissecting the user's request. It seems they want adjustments to two items within the "Aseguramiento de Calidad" section, specifically altering one by +10% and the other by -10%, proportionally, without impacting other elements. I'm focusing on the "calidad" section to understand the context.
+
+
+**Refining the Grid Structure**
+
+I've been working on restructuring the grid to accommodate the user's requested proportional adjustments. The initial division was 50/50, but I've now shifted to a 40/60 split using a 12-column grid. Specifically, I'm proposing `lg:col-span-5` for the left text column and `lg:col-span-7` for the right carousel column within a `lg:grid-cols-12` structure. This aligns perfectly with the desired 10% increase for the carousel and 10% decrease for the text card.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.296144452s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 14 Aug 2026, 12:24 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index3b.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1066-1107)</summary>
+
+**Path:** `Unknown file`
+
+```
+<!-- ──── ASEGURAMIENTO DE CALIDAD Y RECONOCIMIENTOS (SECCIÓN INDEX.HTML) ──── -->
+<section id="calidad" class="py-16 bg-white border-t border-slate-200">
+    <div class="max-w-[1620px] mx-auto px-6 sm:px-12 lg:px-20">
+        <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            <!-- Ficha de Texto y Reconocimientos (Ajustada -10% -> lg:col-span-5) -->
+            <div class="lg:col-span-5">
+                <span class="text-[#0052B7] font-extrabold text-sm uppercase tracking-wider">Excelencia Analítica</span>
+                <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold text-slate-900">Aseguramiento de Calidad</h2>
+                <p class="mt-4 text-slate-600 leading-relaxed">
+                    En LAESH® implementamos controles estrictos en todas nuestras fases analíticas. Contamos con un programa diario de control interno y participamos activamente en evaluaciones de calidad externas para validar la precisión diagnóstica de cada una de nuestras áreas de trabajo.
+                </p>
+                
+                <div class="mt-6 space-y-4">
+                    <div class="flex items-start gap-4 p-4 rounded-2xl bg-emerald-50 border border-emerald-200">
+                        <div class="w-10 h-10 bg-emerald-500 text-white rounded-xl flex items-center justify-center text-lg flex-shrink-0"><i class="fas fa-award"></i></div>
+                        <div>
+                            <h4 class="font-extrabold text-slate-900 text-base">Galardón Rey PACAL</h4>
+                            <p class="text-xs text-slate-600 mt-0.5">Reconocimiento oficial a nuestro desempeño de <strong class="text-emerald-700 font-bold">EXCELENCIA</strong> en programas de evaluación externa de calidad.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4 p-4 rounded-2xl bg-blue-50 border border-blue-200">
+                        <div class="w-10 h-10 bg-[#0052B7] text-white rounded-xl flex items-center justify-center text-lg flex-shrink-0"><i class="fas fa-microscope"></i></div>
+                        <div>
+                            <h4 class="font-extrabold text-slate-900 text-base">Control Analítico Diario</h4>
+                            <p class="text-xs text-slate-600 mt-0.5">Calibración continua y validación de reactivos e instrumentos por Químicos Especialistas con estudios de posgrado.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 flex flex-wrap gap-4">
+                    <a href="https://wa.me/529531190074?text=Hola%20LAESH,%20deseo%20informacion%20sobre%20sus%20procesos%20de%20calidad" target="_blank" class="inline-flex items-center gap-2 bg-[#0052B7] hover:bg-[#003273] text-white font-extrabold px-6 py-3.5 rounded-xl shadow-lg transition-all hover:-translate-y-0.5"><i class="fas fa-check-double text-base"></i> Consultar Garantía de Calidad</a>
+                    <a href="https://wa.me/529531190074" target="_blank" class="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20ba5a] text-white font-extrabold px-6 py-3.5 rounded-xl shadow-md transition-all hover:-translate-y-0.5"><i class="fab fa-whatsapp text-lg"></i> Contactar al Laboratorio</a>
+                </div>
+            </div>
+
+            <!-- Ficha del Carrusel de Fotos de Áreas Técnicas (Ajustada +10% -> lg:col-span-7) -->
+            <div class="lg:col-span-7 relative bg-slate-900 rounded-3xl overflow-hidden shadow-2xl border border-slate-700 h-[440px] group">
+                <div id="quality-carousel-container" class="relative w-full h-full">
+                    
+                    <!-- Slide 1 -->
+                    <div class="quality-slide absolute inset-0 transition-opacity duration-700 opacity-100 flex flex-col justify-end p-6 sm:p-8 bg-cover bg-center" style="background-image: linear-gradient(to top, rgba(15,23,42,0.60) 0%, rgba(15,23,42,0.20) 50%, rgba(0,0,0,0) 100%), url('/laesh-web-assets-uipv1a/img/area-hematologia-dos.webp');">
+```
+
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+ELimina este texto:  Descuentos Especiales  Vigente 2026, que todo ese espaco lo ocupe la imagen y tome la margen superior de la ficha.
+
+---
+
+### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
+
+**Status:** Completed
+**Created:** 14 Aug 2026, 1:23 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index3b.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L489-519)</summary>
+
+**Path:** `Unknown file`
+
+```
+            <p class="mt-3 text-slate-600 font-medium">Aprovecha nuestras tarifas preferenciales y paquetes de check-ups diseñados para el cuidado integral de tu salud y la de tu familia.</p>
+        </div>
+
+        <div class="max-w-4xl mx-auto">
+            <div class="glass-card p-6 sm:p-10 rounded-3xl hover:border-[#0052B7] transition-all border border-slate-200 shadow-xl bg-white">
+                <div class="flex flex-wrap items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-100">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-amber-50 rounded-2xl flex items-center justify-center text-amber-600 text-xl font-bold flex-shrink-0"><i class="fas fa-tags"></i></div>
+                        <div>
+                            <span class="text-xs text-[#0052B7] font-extrabold uppercase tracking-wider">Descuentos Especiales</span>
+                        </div>
+                    </div>
+                    <span class="text-sm bg-emerald-100 text-emerald-800 font-extrabold px-4 py-1.5 rounded-full border border-emerald-200 shadow-sm">Vigente 2026</span>
+                </div>
+
+                <!-- Imagen de Promociones Vigentes (alto reducido con esquinas ovaladas) -->
+                <div onclick="openModal('modal-promo-zoom')" title="click para ver imagen completa" class="rounded-2xl overflow-hidden border border-slate-200 shadow-md hover:shadow-xl mb-6 cursor-pointer transition-all duration-300 max-h-[360px] sm:max-h-[400px]">
+                    <img src="/laesh-web-assets-uipv1a/img/promociones-2026.webp" alt="Promociones Vigentes LAESH 2026" title="click para ver imagen completa" class="w-full h-full max-h-[360px] sm:max-h-[400px] object-cover object-top block mx-auto rounded-2xl">
+                </div>
+
+                <div class="flex flex-wrap sm:flex-nowrap gap-4 pt-2">
+                    <a href="#analisis" class="block text-center w-full py-3.5 px-6 bg-[#0052B7] hover:bg-[#003273] text-white font-extrabold text-sm rounded-xl transition shadow-md">
+                        <i class="fas fa-list-alt mr-2"></i> Ver Catálogo Completo de Costos
+                    </a>
+                    <a href="https://wa.me/529531190074?text=Hola%20LAESH,%20deseo%20informacion%20sobre%20las%20Promociones%20Vigentes" target="_blank" class="block text-center w-full py-3.5 px-6 bg-[#25D366] hover:bg-[#20ba5a] text-white font-extrabold text-sm rounded-xl transition shadow-md">
+                        <i class="fab fa-whatsapp mr-2"></i> Consultar Promoción por WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 14 Aug 2026, 1:23 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index3b.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L489-509)</summary>
+
+**Path:** `Unknown file`
+
+```
+            <p class="mt-3 text-slate-600 font-medium">Aprovecha nuestras tarifas preferenciales y paquetes de check-ups diseñados para el cuidado integral de tu salud y la de tu familia.</p>
+        </div>
+
+        <div class="max-w-4xl mx-auto">
+            <div class="glass-card p-6 sm:p-10 rounded-3xl hover:border-[#0052B7] transition-all border border-slate-200 shadow-xl bg-white">
+                <!-- Imagen de Promociones Vigentes (ocupa el margen superior de la ficha sin barra de texto) -->
+                <div onclick="openModal('modal-promo-zoom')" title="click para ver imagen completa" class="rounded-2xl overflow-hidden border border-slate-200 shadow-md hover:shadow-xl mb-6 cursor-pointer transition-all duration-300 max-h-[420px] sm:max-h-[460px]">
+                    <img src="/laesh-web-assets-uipv1a/img/promociones-2026.webp" alt="Promociones Vigentes LAESH 2026" title="click para ver imagen completa" class="w-full h-full max-h-[420px] sm:max-h-[460px] object-cover object-top block mx-auto rounded-2xl">
+                </div>
+
+                <div class="flex flex-wrap sm:flex-nowrap gap-4 pt-2">
+                    <a href="#analisis" class="block text-center w-full py-3.5 px-6 bg-[#0052B7] hover:bg-[#003273] text-white font-extrabold text-sm rounded-xl transition shadow-md">
+                        <i class="fas fa-list-alt mr-2"></i> Ver Catálogo Completo de Costos
+                    </a>
+                    <a href="https://wa.me/529531190074?text=Hola%20LAESH,%20deseo%20informacion%20sobre%20las%20Promociones%20Vigentes" target="_blank" class="block text-center w-full py-3.5 px-6 bg-[#25D366] hover:bg-[#20ba5a] text-white font-extrabold text-sm rounded-xl transition shadow-md">
+                        <i class="fab fa-whatsapp mr-2"></i> Consultar Promoción por WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+que lo botones:  Ver Catálogo Completo de Costos y  Consultar Promoción por WhatsApp, muevan a la derecha a fuera de la ficha contenedora y ese todo el espacio recuperado lo use la imagen.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `index3b.html`
+**Language:** html
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index3b.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L484-514)</summary>
+
+**Path:** `Unknown file`
+
+```
+<section id="promociones" class="py-16 bg-gradient-to-b from-slate-50 to-white border-b border-slate-200">
+    <div class="max-w-[1620px] mx-auto px-6 sm:px-12 lg:px-20">
+        <div class="text-center max-w-3xl mx-auto mb-10">
+            <span class="text-[#0052B7] font-extrabold text-sm uppercase tracking-wider">Tarifas Preferenciales · 2026</span>
+            <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold text-slate-900">Promociones Vigentes</h2>
+            <p class="mt-3 text-slate-600 font-medium">Aprovecha nuestras tarifas preferenciales y paquetes de check-ups diseñados para el cuidado integral de tu salud y la de tu familia.</p>
+        </div>
+
+        <div class="max-w-4xl mx-auto">
+            <div class="glass-card p-6 sm:p-10 rounded-3xl hover:border-[#0052B7] transition-all border border-slate-200 shadow-xl bg-white">
+                <!-- Imagen de Promociones Vigentes (ocupa el margen superior de la ficha sin barra de texto) -->
+                <div onclick="openModal('modal-promo-zoom')" title="click para ver imagen completa" class="rounded-2xl overflow-hidden border border-slate-200 shadow-md hover:shadow-xl mb-6 cursor-pointer transition-all duration-300 max-h-[420px] sm:max-h-[460px]">
+                    <img src="/laesh-web-assets-uipv1a/img/promociones-2026.webp" alt="Promociones Vigentes LAESH 2026" title="click para ver imagen completa" class="w-full h-full max-h-[420px] sm:max-h-[460px] object-cover object-top block mx-auto rounded-2xl">
+                </div>
+
+                <div class="flex flex-wrap sm:flex-nowrap gap-4 pt-2">
+                    <a href="#analisis" class="block text-center w-full py-3.5 px-6 bg-[#0052B7] hover:bg-[#003273] text-white font-extrabold text-sm rounded-xl transition shadow-md">
+                        <i class="fas fa-list-alt mr-2"></i> Ver Catálogo Completo de Costos
+                    </a>
+                    <a href="https://wa.me/529531190074?text=Hola%20LAESH,%20deseo%20informacion%20sobre%20las%20Promociones%20Vigentes" target="_blank" class="block text-center w-full py-3.5 px-6 bg-[#25D366] hover:bg-[#20ba5a] text-white font-extrabold text-sm rounded-xl transition shadow-md">
+                        <i class="fab fa-whatsapp mr-2"></i> Consultar Promoción por WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ──── QUIÉNES SOMOS / POR QUÉ ELEGIRNOS ──── -->
+<section id="acerca-de" class="py-16 bg-white/60">
+    <div class="max-w-[1620px] mx-auto px-6 sm:px-12 lg:px-20">
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 14 Aug 2026, 1:26 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index3b.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L484-524)</summary>
+
+**Path:** `Unknown file`
+
+```
+<section id="promociones" class="py-16 bg-gradient-to-b from-slate-50 to-white border-b border-slate-200">
+    <div class="max-w-[1620px] mx-auto px-6 sm:px-12 lg:px-20">
+        <div class="text-center max-w-3xl mx-auto mb-10">
+            <span class="text-[#0052B7] font-extrabold text-sm uppercase tracking-wider">Tarifas Preferenciales · 2026</span>
+            <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold text-slate-900">Promociones Vigentes</h2>
+            <p class="mt-3 text-slate-600 font-medium">Aprovecha nuestras tarifas preferenciales y paquetes de check-ups diseñados para el cuidado integral de tu salud y la de tu familia.</p>
+        </div>
+
+        <div class="max-w-5xl mx-auto">
+            <div class="grid lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+                
+                <!-- Left Column: Ficha Contenedora de la Imagen (ocupa el 100% del espacio recuperado) -->
+                <div class="lg:col-span-8">
+                    <div onclick="openModal('modal-promo-zoom')" title="click para ver imagen completa" class="glass-card p-2 sm:p-3 rounded-3xl hover:border-[#0052B7] transition-all border border-slate-200 shadow-xl bg-white cursor-pointer overflow-hidden group">
+                        <img src="/laesh-web-assets-uipv1a/img/promociones-2026.webp" alt="Promociones Vigentes LAESH 2026" title="click para ver imagen completa" class="w-full h-auto object-cover block mx-auto rounded-2xl">
+                    </div>
+                </div>
+
+                <!-- Right Column: Botones de Acción a la Derecha (fuera de la ficha contenedora) -->
+                <div class="lg:col-span-4 flex flex-col justify-center gap-4">
+                    <a href="#analisis" class="inline-flex items-center justify-center gap-3 w-full py-4 px-6 bg-[#0052B7] hover:bg-[#003273] text-white font-extrabold text-sm sm:text-base rounded-2xl transition shadow-lg hover:-translate-y-0.5 text-center">
+                        <i class="fas fa-list-alt text-lg text-emerald-400"></i> Ver Catálogo Completo de Costos
+                    </a>
+                    <a href="https://wa.me/529531190074?text=Hola%20LAESH,%20deseo%20informacion%20sobre%20las%20Promociones%20Vigentes" target="_blank" class="inline-flex items-center justify-center gap-3 w-full py-4 px-6 bg-[#25D366] hover:bg-[#20ba5a] text-white font-extrabold text-sm sm:text-base rounded-2xl transition shadow-lg hover:-translate-y-0.5 text-center">
+                        <i class="fab fa-whatsapp text-xl"></i> Consultar Promoción por WhatsApp
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ──── QUIÉNES SOMOS / POR QUÉ ELEGIRNOS ──── -->
+<section id="acerca-de" class="py-16 bg-white/60">
+    <div class="max-w-[1620px] mx-auto px-6 sm:px-12 lg:px-20">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+            <span class="text-[#0052B7] font-extrabold text-sm uppercase tracking-wider">Quiénes Somos · LAESH®</span>
+            <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold text-slate-900">¿Por Qué Elegir LAESH?</h2>
+            <p class="mt-3 text-slate-600 font-medium">La calidad de un resultado también se mide por la confianza que genera. <strong class="text-emerald-600 font-extrabold">25 años</strong> transformando resultados en decisiones clínicas.</p>
+        </div>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+que direcorio de images y demas assets utiliza index3b.html ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `index3b.html`
+**Language:** html
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 14 Aug 2026, 2:25 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `laesh-web-assets`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 14 Aug 2026, 2:25 pm
 
 ---
 
