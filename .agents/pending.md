@@ -50,17 +50,35 @@
 - **Plan responsive.css**: guardado en `/home/carlos/.claude/plans/mutable-dreaming-scroll.md` — listo para próxima sesión
 - **Deploy pendiente**: rsync de cambios de hoy a OCI (uipv1/ + laesh-web-assets-uipv1a/)
 
-### P-LAESH-05 🔄 [LAESH Website] Deploy OCI + auditoría completa + responsive.css
-**Estado**: En progreso — sesión 0969fceb (2026-08-15)
+### P-LAESH-05 🔄 [LAESH Website] Deploy OCI + corrección 22 hallazgos nuevos
+**Estado**: En progreso — sesión 0969fceb (2026-08-15) · Batch completo aplicado
 **Descripción**:
 1. **Deploy OCI** — ⚠️ REQUIERE AUTORIZACIÓN EXPLÍCITA del usuario antes de ejecutar rsync.
-   - Archivos listos: `uipv1/` (7 HTMLs + .htaccess + robots.txt + sitemap.xml + 404.html + **sw.js nuevo**) + `laesh-web-assets-uipv1a/` (app.js + website.js + manifest.json + landing.css + style.css + **register-sw.js nuevo**)
-2. **Auditoría: 24/25 completados** — solo S1 (HTTPS/HSTS, infra OCI) pendiente:
-   - ✅ A6 (contraste): texto oscuro #0B1830 en btn-primary (8.38:1), nav hover → azul --primary-green-dark (4.6:1)
-   - ✅ SEO2 (og:image): cambiado a recepcion-de-pacientes.webp 1920×1080 + width/height/alt
-   - ✅ P1 (Service Worker): sw.js (Cache-First assets/Network-First HTML) + register-sw.js (CSP 'self' compliant) en 7 HTMLs
-   - ✅ UX3 (carrusel progress): barra scroll-driven con aria-progressbar, animación CSS, prefers-reduced-motion
-3. **Plan responsive.css** — diferido, pendiente autorización (plan en `/home/carlos/.claude/plans/mutable-dreaming-scroll.md`)
+   - Archivos listos: `uipv1/` (8 HTMLs + sitemap.xml + 404.html) + `laesh-web-assets-uipv1a/` (app.js + website.js + manifest.json + landing.css + style.css + responsive.css + medicos.js)
+2. **Auditoría R1 (25): 24/25** — S1 (HTTPS/HSTS) diferido infra OCI
+3. **Auditoría R2 (22 hallazgos): 20/22 corregidos** (2 eran falsos positivos):
+   - ✅ WCAG-1 (CSS-1a/b/c): responsive.css Tier 0 → .carousel-progress-fill + @keyframes pulse + pulse-ring suprimidos; landing.css @media movido
+   - ✅ WCAG-2: #quality-pause-btn con SVG pause/play, aria-pressed, aria-label dinámico
+   - ✅ WCAG-3: role="region" + aria-label + aria-roledescription en .hero-slides y #quality-carousel-container; aria-live polite announcer para ambos carruseles
+   - ✅ CSS-2: lang="es" → lang="es-MX" en los 8 HTMLs (7 portales + index)
+   - ✅ CSS-3: color-scheme:light en :root (style.css) + <meta name="color-scheme"> en 8 HTMLs + 404.html
+   - ✅ PERF-1: 15 quality-slides style="background-image" → data-bg + IntersectionObserver lazy-load en website.js
+   - ✅ PERF-2: preloads slides 2-4 eliminados de index.html
+   - ✅ PERF-4: font preloads cabin-latin-normal-w400.woff2 + outfit-latin-normal-w300.woff2 en index.html
+   - ✅ UX-1: touch/swipe para quality carousel (pointerdown/up + delta ≥50px)
+   - ✅ UX-2: style="padding:1rem;text-align:center;" → class="noscript-msg" (CSS en landing.css)
+   - ✅ SEO-1: sitemap.xml → URLs laesh.mx (antes caelitandem.lat)
+   - ✅ SEO-2: aviso_de_privacidad.html og:image → recepcion-de-pacientes.webp + width/height/alt + twitter:image
+   - ✅ PWA-1: manifest.json start_url → /mvps/laesh-ui/uipv1a/ (staging)
+   - ✅ CODE-1: app.js seed data → guard hostname staging/local; no corre en laesh.mx producción
+   - ✅ CODE-2: laesh_mock_orders → laesh_orders; laesh_mock_catalog → laesh_catalog (app.js + medicos.js comment)
+   - ✅ CODE-3: aviso_de_privacidad.html robots content="index, follow" + hreflang
+   - ✅ SEC-1: solicitud_dac_impr.html frame-ancestors 'self' comentado como intencional
+   - ✅ SEC-2: 404.html → CSP meta con style-src 'unsafe-inline'
+   - ✅ SEO-3: (falso positivo — hreflang ya presente en index.html:30)
+   - ✅ UX-3: (falso positivo — aria-label en nav buttons ya presente)
+   - ⏸ PERF-3: srcset specialty cards — diferido (necesita variantes 400px; imágenes actuales 1000px)
+4. **CSS versiones**: responsive.css → ?v=20260815 en todos los HTMLs
 
 ### P-02 🔲 Módulos de Caja y Administración (Fase 5/6)
 **Estado**: Pendiente
