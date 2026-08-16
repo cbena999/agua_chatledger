@@ -108,4 +108,64 @@
 
 ---
 
-*Última actualización: 2026-08-15 — LAESH P-LAESH-05: 24/25 hallazgos auditoría corregidos (A6+SEO2+P1+UX3). Deploy OCI pendiente autorización explícita — Claude Code (sesión 0969fceb)*
+---
+
+### P-LAESH-06 🔴 [LAESH medicos.html] Dos issues sin resolver — PENDIENTE PARA GEMINI
+
+**Estado**: Sin resolver al cierre de sesión 0969fceb (2026-08-16). Claude intentó ~9 variantes sin lograrlo.
+
+#### Issue A — Dropdown fichas: checkbox separado del texto
+
+**Archivos involucrados**:
+- `laesh-swbldi/website/uipv1/medicos.html` (versión actual `?v=20260816i`)
+- `laesh-web-assets-uipv1a/css/style.css` (selector `.ficha-dropdown .ficha-drop-item`)
+- `laesh-web-assets-uipv1a/css/responsive.css` (bloque ≤767px: `.ficha-dropdown`)
+
+**Comportamiento observado**: El checkbox aparece en el extremo izquierdo con gran separación del texto del estudio. El texto wrappea a múltiples líneas.
+
+**Lo que se sabe**:
+- Causa raíz conocida: `.form-group label { display:block }` (especificidad 0,1,1) overrideaba `.ficha-drop-item { display:flex }` (0,1,0). Se subió especificidad a `.ficha-dropdown .ficha-drop-item` (0,2,0) — debería estar resuelto.
+- El dropdown tiene `min-width: 300px; max-width: 420px` en desktop y `min(340px, 100vw-8px)` en móvil.
+- El texto wrappea porque los nombres de estudios son largos ("Electrolitos Séricos Na+, K+, Cl-, Ca++, P, Mg").
+- Sospecha: algún ancestro del grid `.fichas-estudios-grid` puede tener `overflow:hidden` que clipa el dropdown horizontal. Buscar en la cadena: `fichas-estudios-wrap > form-group > form > subtab-generar > card`.
+- `align-items: flex-start` (no center) ya está aplicado para que el checkbox quede junto a línea 1 del texto.
+
+**Lo que Gemini debería explorar**:
+1. Inspeccionar en DevTools qué `overflow` tienen todos los ancestros del `.ficha-wrap`.
+2. Si hay overflow:hidden en algún ancestro: agregar `overflow: visible` en ese elemento.
+3. Verificar en DevTools que el `.ficha-dropdown` efectivamente mide 300-420px al abrirse.
+
+---
+
+#### Issue B — Sexo: label e inputs radios H/M desalineados en móvil
+
+**Archivos involucrados**:
+- `medicos.html` línea ~207: ya se cambió de `<fieldset>` a `<div role="group" aria-labelledby="sexo-label">` en v20260816i
+- `responsive.css` bloque `@media (max-width: 767px)` → `.orden-patient-grid`
+
+**Comportamiento observado**: La etiqueta "Sexo" y los radios H/M aparecen más abajo que los otros inputs (Nombre, Celular, Edad) en móvil.
+
+**Lo que se sabe**:
+- El grid en móvil: `grid-template-columns: minmax(0,2fr) minmax(0,1.3fr) 36px 56px` con `align-items: end`.
+- El `<fieldset>/<legend>` fue reemplazado por `<div>/<span>` en v20260816i para eliminar quirks de browser.
+- Los 4 items del grid deberían tener altura similar (~42px: label 10px + margin 2px + input/radio 30px).
+- El `.form-legend` (span) tiene base CSS: `font-size: 0.9rem; margin-bottom: 0.5rem`. El override móvil `.orden-patient-grid .form-legend { font-size: 0.62rem; margin-bottom: 2px }` debería aplicar.
+- La misma causa raíz `.form-group label { display:block }` podría afectar los `.label-flex` (H/M) → revisado con `.d-flex-gap-row > .label-flex { display:flex }` (0,2,0) en style.css.
+
+**Lo que Gemini debería explorar**:
+1. Inspeccionar DevTools: ¿cuál es el computed height de cada item del grid en el row de Nombre/Celular/Edad/Sexo?
+2. Verificar que `.orden-patient-grid .form-legend` override aplica (font-size: 0.62rem, margin-bottom: 2px).
+3. Si la altura de la celda Sexo difiere: investigar qué propiedad la infla.
+4. Considerar hacer el grid Sexo con `align-self: end` explícito en el div del grupo.
+
+---
+
+**Versión actual de archivos**: `?v=20260816i`  
+**Ruta archivos fuente**: `/home/carlos/GitHub/caelitandem_home/restaurantb/www/`  
+- CSS: `laesh-web-assets-uipv1a/css/style.css` y `responsive.css`
+- HTML: `laesh-swbldi/website/uipv1/medicos.html`
+- JS: `laesh-web-assets-uipv1a/js/medicos.js`
+
+---
+
+*Última actualización: 2026-08-16 — LAESH P-LAESH-06: 2 issues sin resolver (dropdown + Sexo móvil). Pasa a Gemini. — Claude Code (sesión 0969fceb)*
