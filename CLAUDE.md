@@ -129,7 +129,7 @@ git push origin feature/upgrade-v2-win-xampp
 
 ---
 
-**Última actualización:** 2026-08-15 · Regla 13 LAESH CSS responsividad — mapa de bloques, R1–R7 (SFS móvil, header alignment, solicitud_dac_impr layout, sidebar-rail.js)
+**Última actualización:** 2026-08-16 · Regla 13 LAESH CSS responsividad — mapa de bloques, R1–R7 (SFS móvil, header alignment, solicitud_dac_impr layout, sidebar-rail.js)
 
 > **Nombre canónico del Ground Truth**: El conjunto `CLAUDE.md` + todo `.agents/` (rules, skills, workflows) se denomina **"el Ground Truth"** del proyecto.
 > **Nota de terminología**: Gemini denomina este mismo conjunto **"el Runbook"**. Son el mismo repositorio de conocimiento — `.agents/` es compartido. Solo difiere el nombre según el agente.
