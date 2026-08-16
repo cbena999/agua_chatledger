@@ -6,6 +6,21 @@
 
 ---
 
+## ⚠️ LAESH NO ES PWA — Es Webapp Multi-Dispositivo
+
+> **Regla permanente (2026-08-16):** El proyecto LAESH (sitio corporativo + portales) es una
+> **webapp responsive** diseñada para funcionar en todos los dispositivos ya definidos
+> (desktop/laptop, tablet, celular; Chrome/Safari/Edge; macOS/Windows/Android/iOS).
+> **NO es ni será una Progressive Web App (PWA).**
+>
+> - No implementar ni activar Service Workers para cache/offline.
+> - El archivo `sw.js` existente debe eliminarse junto con su referencia en `register-sw.js`.
+> - No referenciar `manifest.json` como PWA — si existe, es solo para metadatos de color/icono en browsers.
+> - No proponer modo offline, instalación en pantalla de inicio, ni precache de assets como mejora.
+> - La responsividad se resuelve con CSS (`responsive.css` + `targeting.css`), no con caché de SW.
+
+---
+
 ## Mapa de Bloques CSS (style.css)
 
 | Bloque | Selector de media query | Propósito | Ejemplos |
