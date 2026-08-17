@@ -77,6 +77,30 @@
 - Las 3 páginas (labadmin, medicos, gestion-web) cargan este script. **NO duplicar** la lógica del toggle inline en ninguna página.
 - Las páginas solo tienen código ESPECÍFICO de SFS (Sidebar Float Search) o breadcrumb.
 
+### R8 — Prohibición Estricta de `!important` en Hojas CSS
+- **MANDATO ESTRICTO:** Queda estrictamente prohibido usar declaraciones `!important` en los archivos CSS (`style.css`, `portal.css`, `landing.css`, `tokens.css`).
+- **Razón:** Previene contaminación visual, parches superficiales y deuda técnica en incrementos futuros. Toda invalidez o conflicto de reglas CSS debe resolverse mediante la jerarquía de especificidad de selectores nativa.
+
+### R9 — Control Sólido de Layout de Formulario del Paciente y Separadores por Dispositivo
+- **Desktop / Laptop (≥768px / ≥1025px):**
+  - **Botones de Acción (Limpiar y Crear e Imprimir Orden):** Botones rectangulares estándar con icono y texto completo visible (`.btn-imprimir-texto { display: inline }`).
+  - **Renglón 1:** `Nombre del Paciente` (máx 290px / 35+1 char), `Edad` (58px), `Sexo` (H/M), `Celular` (130px), **[Separador Vertical Reforzado de 2px `.orden-patient-vsep` empujado con `margin-left: 18px; margin-right: 16px`]** y `Diagnóstico / Motivo Clínico` (a la derecha) conviven en una única fila horizontal (`.orden-patient-row1`).
+  - **Sección Fichas:** Grilla de 18 fichas de selección por categoría (`.fichas-estudios-wrap`).
+  - **[Separador Horizontal Reforzado de 2px `border-top: 2px solid rgba(0,82,183,0.25)`]**
+  - **Otros Estudios:** `Otros Estudios — adicionales no incluidos en el listado` ubicado al final, tras las fichas (`.otros-estudios-wrapper`).
+- **Dispositivos Móviles (≤767px):**
+  - **Barra de Pestañas y Acciones:** Comportamiento estático original (`margin-bottom: 1rem`), sin anclaje sticky/fixed.
+  - **Botones de Acción (Limpiar y Crear e Imprimir Orden):** Texto 100% oculto (`.btn-imprimir-texto { display: none }`). Se aplica el selector específico `.tab-bar-btns .btn.badge-reset, .tab-bar-btns .btn.badge-reset-sm` anulando padding heredado y forzando dimensiones exactas de **`28px × 28px`** (`padding: 0`), garantizando un cuadrado 1:1 perfecto con lados iguales.
+  - **Renglón 1:** `Nombre del Paciente` (máx. 35 char), `Edad` (máx. 3 dig) y `Sexo` (H/M) en 1 solo renglón.
+  - **Renglón 2:** `Celular` (10 dig, 115px a la izquierda) y `Diagnóstico / Motivo Clínico` (a la derecha) en 1 solo renglón.
+  - **Renglón 3:** Grilla de fichas por categoría.
+  - **Renglón 4:** `Otros Estudios` en la parte inferior precedido del separador horizontal.
+
+### R10 — Sanitización NRF de Inputs en Tiempo Real (No Mask / Regex OnInput)
+- **Nombre del Paciente:** `oninput="this.value = this.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, '').slice(0,35)"`
+- **Edad:** `oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0,3)"`
+- **Celular:** `oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0,10)"`
+
 ---
 
 ## Elementos Exclusivos por Dispositivo

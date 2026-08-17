@@ -44,11 +44,13 @@ Este archivo es el punto de entrada principal para el asistente de IA (Antigravi
 ### 🩺 Reglas Específicas: Proyecto LAESH (Bloc Digital & Sitio Web)
 | Regla | Descripción | Archivo |
 | :--- | :--- | :--- |
+| **13** | **Arquitectura CSS de Responsividad y Control Limpio** | [.agents/rules/13-laesh-css-responsividad.md](file:///.agents/rules/13-laesh-css-responsividad.md) |
 | **19** | **Arquitectura Frugal y Bootstrap Global** | [.agents/rules/19-laesh-arquitectura-frugal.md](file:///.agents/rules/19-laesh-arquitectura-frugal.md) |
 | **20** | **Servidor WebSockets Swoole v6, Bridge y QoS** | [.agents/rules/20-laesh-swoole-qos-notificaciones.md](file:///.agents/rules/20-laesh-swoole-qos-notificaciones.md) |
 | **21** | **Trazabilidad SQL, Observabilidad y Logs de Dev** | [.agents/rules/21-laesh-trazabilidad-observabilidad.md](file:///.agents/rules/21-laesh-trazabilidad-observabilidad.md) |
 | **22** | **Estándares de Conectividad, BD y Persistencia** | [.agents/rules/22-laesh-mariadb-conexion-estandares.md](file:///.agents/rules/22-laesh-mariadb-conexion-estandares.md) |
 | **23** | **Supremacía de la Especificación HTML** | [.agents/rules/23-laesh-supremacia-especificacion-html.md](file:///.agents/rules/23-laesh-supremacia-especificacion-html.md) |
+| **24** | **Estándares de Estabilización UI/UX, A11y y Conversión PHP** | [.agents/rules/24-laesh-estabilizacion-ui-estandares.md](file:///.agents/rules/24-laesh-estabilizacion-ui-estandares.md) |
 
 > [!IMPORTANT]
 > **MANDATO ESTRICTO PARA PROYECTO LAESH:** Todo desarrollo, refactorización o propuesta de arquitectura debe auditarse obligatoriamente contra los documentos maestros en `laesh/et/`: `Especificacion_Tecnica.html`, `Tecnica_Modelo_Datos.html`, `Tecnica_Infraestructura_Despliegue.html` y `Memoria de Instalación Certificados Locales HTTPS.html`. Cualquier desviación técnica se considera un bug crítico.
