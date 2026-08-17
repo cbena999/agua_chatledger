@@ -26,7 +26,9 @@
     - **Renglón 1:** `Nombre del Paciente` (35+1 char, máx 290px), `Edad` (58px), `Sexo` (H/M), `Celular` (130px), **[Separador Vertical 2px empujado `margin-left: 18px; margin-right: 16px`]** y `Diagnóstico / Motivo Clínico` (a la derecha).
     - **Sección Intermedia:** Grilla de 18 fichas de selección por categoría.
     - **[Separador Horizontal 2px]**
-    - **Sección Inferior:** `Otros Estudios — adicionales no incluidos en el listado`.
+    - **Página de Inicio (`index.html`):**
+    - **Reorganización en Apilamiento Horizontal Independiente:** Se desmanteló la grilla de 2 columnas de la sección "Ubicación y Contacto". La Ficha 1 ("Datos de Contacto") se convirtió en una tarjeta horizontal superior a ancho completo (`.contact-card-horizontal`) con distribución plana (`.contact-grid-horizontal`). La Ficha 2 ("Mapa") se ubica abajo de forma independiente a ancho completo (`.map-card`), renderizando el Croquis y el Mapa Interactivo en cotas estrictas 1:1 de 400px en Desktop / 300px en Móvil. Eliminados todos los problemas de arrastre de altura y espacios en blanco.
+    - **Homologación Tipográfica:** Título H3 en `<h3 class="acerca-h3">` (`1.15rem`, `700`) y cuerpos de texto homologados a `0.92rem` (`1.55` line-height).
   - **Dispositivos Móviles (≤767px):**
     - **Header Móvil Justificado a la Izquierda:** Logotipo reducido a 36px de altura (`.logo img { height: 36px }`). Todo el contenido (`Logo` → `Campanita Móvil` → `Punto Estatus` → `Iniciales` → `Hamburguesa`) se alinea hacia la izquierda en secuencia continua con `gap: 0.45rem`, removiendo `margin-left: auto`.
     - **Campanita Móvil con Scroll Suave (`#bell-wrap-mob`):** Inyectada dinámicamente en el header superior junto al estatus en línea. Incluye badge de conteo sincronizado y respuesta a touch/clic navegando con `scrollIntoView({ behavior: 'smooth' })` directo hacia la sección de notificaciones al final de la página.

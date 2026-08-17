@@ -88,6 +88,9 @@
   - **Sección Fichas:** Grilla de 18 fichas de selección por categoría (`.fichas-estudios-wrap`).
   - **[Separador Horizontal Reforzado de 2px `border-top: 2px solid rgba(0,82,183,0.25)`]**
   - **Otros Estudios:** `Otros Estudios — adicionales no incluidos en el listado` ubicado al final, tras las fichas (`.otros-estudios-wrapper`).
+- **Página de Inicio (`index.html`):**
+  - **Independización en Apilamiento Horizontal:** Se desensambló la grilla de 2 columnas. Ficha 1 ("Datos de Contacto") se ubica como panel horizontal superior a ancho completo (`.contact-card-horizontal`). Ficha 2 ("Mapa") se posiciona abajo de forma independiente a ancho completo (`.map-card`), manteniendo al Croquis y al Mapa Interactivo en dimensiones homologadas de 400px en Desktop / 300px en Móvil. Cero interferencia de alturas y cero franjas vacías en blanco.
+  - **Homologación Tipográfica:** Título H3 en `<h3 class="acerca-h3">` (`1.15rem`, `700`, `var(--primary)`). Cuerpos de texto homologados a `0.92rem` (`1.55` line-height).
 - **Dispositivos Móviles (≤767px):**
   - **Header Justificado a la Izquierda y Logotipo Reducido:** Logotipo `.logo img` reducido a **36px** de altura. Se elimina `margin-left: auto` de los elementos del header, desplegando todo el grupo (`Logo 36px` → `Campanita Móvil 32px` → `Punto Estatus` → `Iniciales 32px` → `Hamburguesa`) justificado a la izquierda de forma continua con un gap uniforme de `0.45rem`.
   - **Campanita Móvil de Notificaciones en Header (`#bell-wrap-mob`):** Inyectada por `app.js` en `.portal-access-header` al lado del punto de estatus en línea (`#conn-status-mob`). Cuenta con badge de conteo rojo (`#badge-notif-mob`) sincronizado en tiempo real mediante `MutationObserver`. Al darle touch o clic, ejecuta scroll suave (`scrollIntoView({ behavior: 'smooth' })`) directo hacia la tarjeta de notificaciones (`#sidebar-right`) al final de la vista. Oculta en Desktop (`#bell-wrap-mob { display: none }`).
