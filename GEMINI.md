@@ -287,7 +287,12 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 *   **Fix Server-Side en Motor (`cargos.php`):** Se ajustó `calcula_recargos()` para consultar siempre la tarifa unitaria base del catálogo de la tabla `cargos` mediante la leyenda. Esto evita que el 10% de recargo se aplique sobre el acumulado de tomas múltiples o comerciales ($1,200 / $2,400), topando el recargo moratorio mensual a las tarifas oficiales de **$60.00** (Agua) y **$22.00** (Drenaje).
 *   **Paquete Fix Issue 03 (`/docs-dev/pase-a-prod/aguav2-2026/fixes/fix-issue-03/`):** Creado paquete con `01_depuracion_recargos_corruptos_monto_base.sql`, orquestadores `run_patch_host_c.sh` / `run_patch_host_c.ps1`, la suite de scripts `.ps1` sincronizados y `README.md` con las instrucciones de despliegue en sitio.
 
-**Última actualización**: 2026-08-11
+**Saneamiento Integral de Recargos Moratorios Históricos y Huérfanos - Fix Issue 04 (2026-08-19):**
+*   **Diagnóstico de Fallo Silencioso:** Se identificó que el orquestador original (`run_patch_host_c.ps1`) fallaba en Producción debido al comportamiento de `source` dentro del binario `mysql` en Windows, no retornando error y omitiendo la ejecución del SQL dinámico de recálculo (`fix-issue-03`).
+*   **Fix Integral SQL:** Se implementó un barrido directo robusto con `CASE` para sanear recargos huérfanos anteriores a 2014, sumado a las cláusulas atómicas dinámicas de `JOIN`.
+*   **Orquestador PowerShell Seguro:** El nuevo `run_patch_host_c.ps1` se reconstruyó basándose en la versión estable del Issue 02, usando `@MYSQL_ARGS` y comprobación de `$LASTEXITCODE` para asegurar inyección correcta o abortar ruidosamente. El paquete `fix-issue-04` ha sido validado exitosamente en `bdawahost-c`.
+
+**Última actualización**: 2026-08-19
 
 
 
