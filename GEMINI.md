@@ -292,7 +292,7 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 *   **Fix Integral SQL:** Se implementó un barrido directo robusto con `CASE` para sanear recargos huérfanos anteriores a 2014, sumado a las cláusulas atómicas dinámicas de `JOIN`.
 *   **Orquestador PowerShell Seguro:** El nuevo `run_patch_host_c.ps1` se reconstruyó basándose en la versión estable del Issue 02, usando `@MYSQL_ARGS` y comprobación de `$LASTEXITCODE` para asegurar inyección correcta o abortar ruidosamente. El paquete `fix-issue-04` ha sido validado exitosamente en `bdawahost-c`.
 
-**Última actualización**: 2026-08-19
+**Última actualización**: 2026-08-20
 
 
 
