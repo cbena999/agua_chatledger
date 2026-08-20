@@ -86,10 +86,29 @@
 
 ---
 
+## 🟡 PRIORIDAD MEDIA — INFRA
+
+### P-INFRA-01 🔄 [restaurantb Docker] Replicar hardening LNMP en OCI VM — PENDIENTE AUTORIZACIÓN
+**Estado**: Local Docker completado y verificado 2026-08-20. OCI VM bloqueado — **requiere autorización explícita**.
+**Descripción**: Todo el §15 del doc `Tecnica_Infraestructura_Despliegue.html` aplicado en local. Pendiente replicar en `oci-vm` (Nginx 1.18 nativo, no Docker):
+1. **Server block laesh.mx** — Runbook en §13.4 (Pasos 1-7). Ejecutar tras autorización.
+2. **Certbot Let's Encrypt** — ejecutar tras server block activo.
+3. **`http2 on`** — una línea en server block OCI.
+4. **`ssl_session_tickets off`** — una línea en server block OCI.
+5. **SSL ciphers modernos** — copiar bloque `ssl_ciphers` + `ssl_ecdh_curve` de `restaurantb.conf`.
+6. **HSTS + CSP + X-* headers** — copiar bloque `add_header` de `restaurantb.conf`. Ajustar CSP si hay CDNs externos.
+7. **PHP-FPM pool** — OCI usa PHP-FPM nativo. Crear `/etc/php/8.x/fpm/pool.d/laesh.conf`. Ajustar `pm.max_children` a RAM OCI (shape 1 GB → max_children=5-8).
+8. **Location `/fpm-status`** — añadir en server block OCI con `allow` a IP de administración real (sin Docker bridge).
+9. **MariaDB `max_statement_time`** — solo si se despliega MariaDB en OCI. Si usa MySQL/PlanetScale: equivalente `max_execution_time`.
+**Referencia**: §15.8 en `Tecnica_Infraestructura_Despliegue.html`.
+
+---
+
 ## ✅ RESUELTOS RECIENTEMENTE (referencia)
 
 | Fecha | Item | Detalle |
 |---|---|---|
+| 2026-08-20 | restaurantb — Migración Apache→Nginx + Hardening LNMP completo | Stack migrado a Nginx 1.27 + PHP-FPM 8.3 + MariaDB 11.8.8. Hardening: ssl_ciphers AEAD, HSTS, CSP, http2, ssl_session_tickets off, /swoole-status, /fpm-status. Tuning: client_max_body_size 40M, fastcgi_buffers, PHP-FPM pool (max_children=20), MariaDB max_statement_time=10s. PHP error 1969 manejado en DB.php + commons.php (HTTP 503). Docs centralizados en §15 Tecnica_Infraestructura_Despliegue.html (9 subsecciones). Verificado: HTTP/2 activo, /fpm-status respondiendo, /swoole-status OK. |
 | 2026-07-05 | Tuning Fino y Estabilización VOSK | Implementación de estrategia Cache-First en sw.js (modelo 38MB/vosk.js), persistencia Dexie (storage.persist), filtro de silencio (RMS VAD en AudioWorklet) y watchdog Kill-and-Respawn contra fugas de memoria WASM. Documentación de pruebas y arquitectura actualizada. |
 | 2026-07-05 | Alineación Fonética y Catálogo | Refactorización de seed data (IDs explícitos, Taco tripa ID 14, Refresco ID 25), corrección de setup.sh (telemetría), y precarga de versión semilla v1.0.0 publicada con delta_hash exacto. |
 | 2026-07-05 | Observabilidad y Ficha Comercial | Implementación de telemetría PWA (Heartbeat), indicadores de red/cola/cocina, bitácora de desconexión del cajero, optimización Push-to-Talk vs WakeLock, suite QA extendida y Ficha Técnica Comercial (Product Sheet). |
@@ -168,4 +187,4 @@
 
 ---
 
-*Última actualización: 2026-08-16 — LAESH P-LAESH-06: 2 issues sin resolver (dropdown + Sexo móvil). Pasa a Gemini. — Claude Code (sesión 0969fceb)*
+*Última actualización: 2026-08-20 — restaurantb migración Apache→Nginx + hardening LNMP completo (P-INFRA-01 local ✅; OCI pendiente autorización). — Claude Code*
