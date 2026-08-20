@@ -89,18 +89,30 @@
 ## 🟡 PRIORIDAD MEDIA — INFRA
 
 ### P-INFRA-01 🔄 [restaurantb Docker] Replicar hardening LNMP en OCI VM — PENDIENTE AUTORIZACIÓN
-**Estado**: Local Docker completado y verificado 2026-08-20. OCI VM bloqueado — **requiere autorización explícita**.
-**Descripción**: Todo el §15 del doc `Tecnica_Infraestructura_Despliegue.html` aplicado en local. Pendiente replicar en `oci-vm` (Nginx 1.18 nativo, no Docker):
-1. **Server block laesh.mx** — Runbook en §13.4 (Pasos 1-7). Ejecutar tras autorización.
-2. **Certbot Let's Encrypt** — ejecutar tras server block activo.
-3. **`http2 on`** — una línea en server block OCI.
-4. **`ssl_session_tickets off`** — una línea en server block OCI.
-5. **SSL ciphers modernos** — copiar bloque `ssl_ciphers` + `ssl_ecdh_curve` de `restaurantb.conf`.
-6. **HSTS + CSP + X-* headers** — copiar bloque `add_header` de `restaurantb.conf`. Ajustar CSP si hay CDNs externos.
-7. **PHP-FPM pool** — OCI usa PHP-FPM nativo. Crear `/etc/php/8.x/fpm/pool.d/laesh.conf`. Ajustar `pm.max_children` a RAM OCI (shape 1 GB → max_children=5-8).
-8. **Location `/fpm-status`** — añadir en server block OCI con `allow` a IP de administración real (sin Docker bridge).
-9. **MariaDB `max_statement_time`** — solo si se despliega MariaDB en OCI. Si usa MySQL/PlanetScale: equivalente `max_execution_time`.
-**Referencia**: §15.8 en `Tecnica_Infraestructura_Despliegue.html`.
+**Estado**: Local Docker completado y verificado 2026-08-20 (ver RESUELTOS RECIENTEMENTE). OCI VM bloqueado — **requiere autorización explícita**.
+
+**Local completado 2026-08-20 (segunda ronda):**
+- ✅ CSP: `'unsafe-inline'` eliminado de `script-src` (Nginx) — verificado en vivo
+- ✅ Swoole tuning: `worker_num=2`, `heartbeat_idle_time=600s`, buffers, TCP keepalive — contenedor recreado
+- ✅ PHP-FPM env vars LAESH: `LAESH_DB_*` + `APP_ENV` en `docker-compose.yml` — verificado `laesh_app` conecta a `laesh_db` (27 tablas)
+- ✅ Swoole log volume: `../logs/php-fpm:/var/log/php-fpm:rw` añadido al servicio `swoole`
+- ✅ Archivos PHP de app revertidos (no eran scope de infra)
+- ✅ Documentación actualizada: §15.7d + §14.3 + §15.8 en `Tecnica_Infraestructura_Despliegue.html`
+
+**Aplicado en OCI VM 2026-08-20:**
+- ✅ `http2` en listen (Nginx 1.18 syntax `listen 443 ssl http2;`)
+- ✅ HSTS + CSP (`script-src 'self'`) + Referrer-Policy headers
+- ✅ Location `/fpm-status` (allow 127.0.0.1 solo, fastcgi_params)
+- ✅ Deploy hook Certbot: `/etc/letsencrypt/renewal-hooks/deploy/restore-http2.sh` (restaura http2 post-renovación)
+- ✅ PHP-FPM `www.conf`: `pm.status_path=/fpm-status` + env vars `LAESH_DB_*` + `APP_ENV=production`
+- ✅ Verificado: HTTP/2 activo, HSTS/CSP en headers vivos, /fpm-status responde, laesh_app conecta laesh_db (27 tablas)
+- ✅ `ssl_session_tickets off` + SSL ciphers — ya aplicados por Certbot (`options-ssl-nginx.conf`) — skip
+- ✅ Documentación: §14.7 nuevo en `Tecnica_Infraestructura_Despliegue.html`
+
+**Pendiente en OCI VM (requiere DNS + autorización):**
+1. **Server block laesh.mx** — DNS apunta a `2.57.91.91`, no a OCI (`137.131.58.161`). Requiere cambio DNS primero. Runbook §13.4.
+2. **Certbot Let's Encrypt laesh.mx** — ejecutar tras DNS + server block.
+**Referencia**: §13.4 + §14.7 en `Tecnica_Infraestructura_Despliegue.html`.
 
 ---
 
@@ -187,4 +199,4 @@
 
 ---
 
-*Última actualización: 2026-08-20 — restaurantb migración Apache→Nginx + hardening LNMP completo (P-INFRA-01 local ✅; OCI pendiente autorización). — Claude Code*
+*Última actualización: 2026-08-20 — OCI hardening completo: http2, HSTS, CSP, /fpm-status, deploy hook Certbot, PHP-FPM env vars LAESH (laesh_app ✅ 27 tablas). Docs §14.7. Pendiente solo: DNS laesh.mx → OCI + Certbot. — Claude Code*

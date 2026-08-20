@@ -7,9 +7,9 @@
 | **Trajectory ID** | `544a02f2-7df2-47bf-af66-e1f61555223d` |
 | **Cascade ID** | `15605581-a6e5-40ee-8153-f5a8d1640387` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 923 |
+| **Total Steps** | 1399 |
 | **Started** | 20 Aug 2026, 8:13 am |
-| **Completed** | 20 Aug 2026, 2:35 pm |
+| **Completed** | 20 Aug 2026, 4:07 pm |
 
 ---
 
@@ -13469,6 +13469,9218 @@ cubre index.hml y todas las demas htmls ?
 
 **Status:** Completed
 **Created:** 20 Aug 2026, 2:35 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+. Que las imagenes del carrusel  superior se vea completa, algunas de ellas su parte superior aparece oculta o trunca visualmente.
+
+. QUe todos los slides de vean homologados:
+Creo algunos texto en ciertas partes de la estructructua del slider estan muy extensas, analiza todas a detalle y estandariza sus longitudes sin que los textos pierdan su semantica, algo similar para los texto de los botones blancos. La idea es estanrizar este contenido para que el usuario al actualizar tenga los lineamientos de manera completa y correcta. Dame informe. 
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `index.html`
+**Language:** html
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `hero-slide`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 2:47 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L279-329)</summary>
+
+**Path:** `Unknown file`
+
+```
+            flex-shrink: 0;
+        }@media (hover: hover) and (pointer: fine) {
+    .hero-pause-btn:hover {
+        background: rgba(0,0,0,0.58); border-color: rgba(255,255,255,0.9);
+    }
+}
+        .hero-pause-btn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+        .hero-slides  { width: 100%; height: 100%; position: relative; }
+        .hero-slide {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover; background-position: center;
+            opacity: 0; z-index: 1;
+            transition: opacity 1.2s ease-in-out;
+            display: flex; align-items: center; justify-content: center; padding: 2rem;
+        }
+        .hero-slide.active { opacity: 1; z-index: 2; }
+        .hero-glass-card {
+            background: rgba(0,82,183,0.25);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.25);
+            padding: 3rem; border-radius: 24px; max-width: 950px;
+            text-align: center; color: white;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            transform: translateY(30px); opacity: 0;
+            transition: all 0.8s cubic-bezier(0.16,1,0.3,1) 0.3s;
+        }
+        .hero-slide.active .hero-glass-card { transform: translateY(0); opacity: 1; }
+        /* CRÍTICO: solo hijos directos — evita el recuadro blanco en los <span> del H1 */
+        .hero-glass-card > span {
+            background: rgba(204,251,241,0.25); color: var(--secondary-green);
+            padding: 6px 16px; border-radius: 20px; font-weight: 700;
+            font-size: 0.85rem; letter-spacing: 0.05em; text-transform: uppercase;
+            display: inline-block; margin-bottom: 1.5rem;
+        }
+        .hero-glass-card h2,
+        .hero-glass-card h1.hero-slide1-title { font-size: 2.75rem; font-weight: 800; margin-bottom: 1rem; line-height: 1.2; color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,0.5); font-family: 'Mosquito Std Black','Arial Black',Impact,sans-serif; }
+        .hero-glass-card p  { font-size: 1.15rem; margin-bottom: 2rem; opacity: 0.95; line-height: 1.6; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
+
+        /* ── Secciones ── */
+        .section-header { text-align: center; margin: 0 0 3.5rem; padding: 0 1rem; }
+        .section-header h2 {
+            font-size: 2.25rem; color: var(--primary);
+            margin-bottom: 0.75rem; position: relative;
+            display: inline-block; padding-bottom: 0.75rem;
+        }
+        .section-header h2::after {
+            content: ''; position: absolute; bottom: 0; left: 25%; width: 50%;
+            height: 3px; background: var(--primary-green); border-radius: 2px;
+        }
+        .section-header p { color: var(--text-muted); font-size: 1.2rem; max-width: 600px; margin: 0 auto; }
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `background-position`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 2:47 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L139-309)</summary>
+
+**Path:** `Unknown file`
+
+```
+    <main id="main-content">
+
+        <!-- Spacer: ocupa el espacio del navbar fijo para que el hero no quede tapado -->
+        <div class="landing-nav-spacer"></div>
+
+        <!-- Carrusel/Slideshow de Alto Impacto con la Imagen de Fondo Muy Visible (Opacidad Verde Reducida) -->
+        <section id="inicio" class="hero-premium">
+            <div class="hero-slides" role="region" aria-label="Presentación principal" aria-roledescription="carrusel">
+                <!-- Slide 1 -->
+                <div class="hero-slide active bg-slide-1">
+                    <div class="hero-glass-card">
+                        <!-- C4: H1 identifica la entidad (nombre oficial + marca registrada). I8: símbolo ® -->
+                        <h1 class="hero-slide1-title">Bienvenido a Laboratorio de Especialidades Hematológicas.</h1>
+                        <p>Trabajamos para proporcionar información diagnóstica confiable que ayude al médico a tomar mejores decisiones y al paciente a recibir una atención oportuna y segura.</p>
+                        <div class="flex-center-15">
+                            <a href="#especialidades" class="btn btn-secondary btn-outline-white">Conoce los Servicios</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="hero-slide bg-slide-2">
+                    <div class="hero-glass-card">
+                        <span>Laboratorio de Especialidades Hematológicas</span>
+                        <h2>Un laboratorio seguro con Resultados Confiables</h2>
+                        <p>Detrás de cada resultado hay una decisión. Por eso, en LAESH<sup class="sup-sm">®</sup> la calidad no es una opción: es nuestro compromiso.</p>
+                        <div class="flex-center-15">
+                            <a href="#especialidades" class="btn btn-secondary btn-outline-white">Conoce los Servicios</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="hero-slide bg-slide-3">
+                    <div class="hero-glass-card">
+                        <span>Aprovecha nuestras ofertas</span>
+                        <h2>Promociones Vigentes</h2>
+                        <p>Aprovecha nuestras tarifas preferenciales y paquetes de check-ups diseñados para el cuidado de tu salud y la de tu familia.</p>
+                        <div class="flex-center-15">
+                            <a href="#promociones" class="btn btn-secondary btn-outline-white">Ver Promociones</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 4 (Ubicación, Contacto y Horarios) -->
+                <div class="hero-slide bg-slide-4">
+                    <div class="hero-glass-card">
+                        <span>Horarios y Ubicación</span>
+                        <h2>Nuestra Ubicación y Horarios</h2>
+                        <p>Azucenas #8, Fraccionamiento Jardines del Sur, Huajuapan de León, Oaxaca.<br>Lunes a sábado: 7:00 a.m. – 9:00 p.m. &nbsp;|&nbsp; Domingo: 7:00 a.m. – 3:00 p.m.<br>Tel: 953 688 7694</p>
+                        <div class="flex-center-15">
+                            <a href="#ubicacion" class="btn btn-secondary btn-outline-white">Ver Ubicación</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- NA-01: Indicadores de paginación del hero (dots) -->
+            <div class="hero-dots" aria-label="Navegación de diapositivas">
+                <button class="hero-dot active" data-slide="0" aria-label="Diapositiva 1 de 4" aria-pressed="true"></button>
+                <button class="hero-dot" data-slide="1" aria-label="Diapositiva 2 de 4" aria-pressed="false"></button>
+                <button class="hero-dot" data-slide="2" aria-label="Diapositiva 3 de 4" aria-pressed="false"></button>
+                <button class="hero-dot" data-slide="3" aria-label="Diapositiva 4 de 4" aria-pressed="false"></button>
+            </div>
+            <!-- A7-fix + GM-03: Botón pausa con etiqueta visible — WCAG 2.2.2 -->
+            <button type="button" id="hero-pause-btn" class="hero-pause-btn"
+                    aria-label="Pausar presentación" aria-pressed="false">
+                <svg id="hero-icon-pause" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+                <svg id="hero-icon-play"  width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="d-none"><polygon points="5,3 19,12 5,21"/></svg>
+                <span id="hero-pause-label" class="hero-pause-label">Pausar</span>
+            </button>
+            <!-- WCAG-3: Anunciador ARIA live para lectores de pantalla -->
+            <span id="hero-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></span>
+        </section>
+
+        <!-- SECCIÓN: QUIÉNES SOMOS -->
+        <section id="acerca-de" class="sec-pad-1-5 scroll-sm-top">
+            <div class="section-header animate-on-scroll">
+                <h2>Quiénes somos</h2>
+                <!-- Punto 1: concepto institucional como punto y seguido del subtítulo -->
+                <p>La calidad de un resultado también se mide por la confianza que genera. <strong class="txt-green">25 años</strong> transformando resultados en decisiones clínicas.</p>
+            </div>
+
+            <!-- Fila 1: 3 fichas en su propio grid -->
+            <div class="grid-layout grid-1-1-auto">
+
+                <!-- Ficha 1: ¿POR QUÉ CONFIAR EN LAESH? -->
+                <div class="card-premium animate-on-scroll delay-100 info-col">
+                    <h3 class="acerca-h3">🟢 ¿POR QUÉ CONFIAR EN LAESH<sup>®</sup>?</h3>
+                    <div class="acerca-flex">
+                        <p class="faq-p--muted"><strong class="txt-primary-c fw-bold">25 años</strong> de experiencia</p>
+                        <p class="faq-p--muted"><strong class="txt-primary-bold">Químicos especialistas</strong> con estudios de posgrado</p>
+                        <p class="faq-p--muted"><strong class="txt-primary-bold">Guías de práctica clínica</strong> — pruebas y perfiles actualizados</p>
+                        <p class="faq-p--muted"><strong class="txt-primary-bold">Excelencia</strong> en programas de control de calidad externo</p>
+                        <p class="faq-p--muted"><strong class="txt-primary-c">Galardón Rey PACAL</strong> — reconocimiento a nuestro desempeño</p>
+                    </div>
+                </div>
+
+                <!-- Ficha 2: MISIÓN -->
+                <div class="card-premium animate-on-scroll delay-200 info-col">
+                    <h3 class="txt-pgd-sub">🟢 MISIÓN</h3>
+                    <p class="aviso-p aviso-p--muted">
+                        Brindar resultados confiables y clínicamente relevantes que ayuden al médico a tomar mejores decisiones y al paciente a recibir una atención oportuna y segura.
+                    </p>
+                </div>
+
+                <!-- Ficha 3: VISIÓN -->
+                <div class="card-premium animate-on-scroll delay-300 info-col">
+                    <h3 class="txt-pgd-sub">🔵 VISIÓN</h3>
+                    <p class="aviso-p aviso-p--muted">
+                        Ser el laboratorio de referencia para médicos y pacientes, reconocido por la excelencia de nuestros resultados, la especialización de nuestro equipo y nuestro compromiso permanente con la calidad.
+                    </p>
+                </div>
+
+            </div><!-- /grid fila 1 -->
+
+            <!-- Fila 2: ficha ancha — mismo grid-layout para alinear márgenes -->
+            <div class="grid-layout grid-single">
+                <div class="card-premium animate-on-scroll delay-100 info-col--stretch">
+                    <h3 class="acerca-h3b">
+                        🔵 25 años de experiencia al servicio del diagnóstico
+                    </h3>
+                    <!-- Área con scroll vertical -->
+                    <div class="modal-scroll-body">
+                        <p class="faq-p--sm2">
+                            LAESH, Laboratorio de Especialidades Hematológicas, es una empresa 100% de la Región Mixteca, fundada en septiembre de 2022 en Huajuapan de León, Oaxaca, con el propósito de ofrecer servicios de laboratorio clínico confiables, especializados y de alta calidad para médicos y pacientes.
+                        </p>
+                        <p class="faq-p--sm2">
+                            Nuestra experiencia está respaldada por <strong class="txt-green">25 años</strong> de trayectoria profesional, un equipo de químicos especialistas con estudios de posgrado y especialización en Hematología Diagnóstica por Laboratorio, así como por la actualización permanente de nuestras pruebas y perfiles de acuerdo con las guías de práctica clínica y recomendaciones actuales.
+                        </p>
+                        <p class="faq-p--sm2">
+                            Contamos con un amplio catálogo de estudios, desde análisis de rutina hasta pruebas altamente especializadas, apoyados en equipos de nueva generación, procesos de calidad y personal capacitado para proporcionar resultados confiables y clínicamente relevantes.
+                        </p>
+                        <p class="faq-p--sm2">
+                            Nuestro compromiso con la calidad se refleja en nuestra participación en programas de evaluación externa, donde hemos obtenido calificaciones de <strong class="txt-primary-c">EXCELENCIA</strong>, así como en el <strong class="txt-green">Galardón Rey PACAL</strong>, reconocimiento relacionado con nuestro desempeño dentro de los laboratorios evaluados.
+                        </p>
+                        <hr class="hr-sep">
+                        <p class="txt-pgd-sm">Nuestro compromiso</p>
+                        <p class="faq-p--sm2">
+                            En LAESH trabajamos para que cada resultado sea una herramienta útil para el médico y una fuente de confianza para el paciente.
+                        </p>
+                        <hr class="hr-sep">
+                        <p class="txt-pgd-sm">Nuestro responsable sanitario</p>
+                        <p class="faq-p--text">
+                            <strong class="txt-main">Q.F.B. y E.H.D.L. Jacob Santiago Blanco</strong><br>
+                            Químico Farmacéutico Biólogo egresado de la Universidad Autónoma de Sinaloa, con especialidad en Hematología Diagnóstica por Laboratorio por el Instituto de Hematopatología.
+                        </p>
+                        <p class="faq-p--text2">
+                            Cédula Profesional: <strong class="txt-main">3609293</strong> &nbsp;|&nbsp; Cédula de Especialidad: <strong class="txt-main">8935780</strong><br>
+                            Con <strong class="txt-green">25 años</strong> de experiencia profesional, su trayectoria representa uno de los principales pilares de la calidad y especialización de LAESH.
+                        </p>
+                        <hr class="hr-sep">
+                        <p class="txt-pgd-sm">🧬 Nuestra filosofía</p>
+                        <p class="faq-p--primary">
+                            Resultados que dan confianza, decisiones que cuidan.
+                        </p>
+                        <p class="faq-p--tail">
+                            En LAESH entendemos que detrás de cada muestra existe una persona y detrás de cada resultado existe una decisión clínica. Por ello, trabajamos para ofrecer información diagnóstica confiable, oportuna y clínicamente relevante, que ayude al médico a tomar mejores decisiones y al paciente a recibir una atención adecuada.
+                        </p>
+                    </div>
+                </div>
+            </div><!-- /grid fila 2 -->
+
+        </section>
+
+        <!-- SECCIÓN: ESTUDIOS -->
+        <section id="especialidades" class="sec-pad-4-1 scroll-sm-top">
+            <div class="section-header animate-on-scroll">
+                <h2>Estudios de Rutina y Especialidades</h2>
+                <p>Servicios clínicos diseñados con rigor científico para garantizar la máxima confiabilidad en el diagnóstico médico.</p>
+            </div>
+            
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Hero Slides**
+
+I'm currently dissecting the first Hero Slide, focusing on the `<h1>` tag: "Bienvenido a Laboratorio de Especialidades Hematológicas." My goal is to determine if we can create a template for these slides, and I'm looking at potential standardization.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.045272875s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L284-294)</summary>
+
+**Path:** `Unknown file`
+
+```
+}
+        .hero-pause-btn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+        .hero-slides  { width: 100%; height: 100%; position: relative; }
+        .hero-slide {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover; background-position: center;
+            opacity: 0; z-index: 1;
+            transition: opacity 1.2s ease-in-out;
+            display: flex; align-items: center; justify-content: center; padding: 2rem;
+        }
+        .hero-slide.active { opacity: 1; z-index: 2; }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 2:47 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L379-399)</summary>
+
+**Path:** `Unknown file`
+
+```
+    .carousel-arrow-btn:hover {
+        background: var(--secondary-green); border-color: var(--primary-green);
+    }
+}
+
+        /* ── Carrusel calidad (fade) ── */
+        .quality-slide {
+            position: absolute; top:0; left:0; width:100%; height:100%;
+            display:flex; flex-direction:column; justify-content:flex-end;
+            background-size: cover; background-position: center;
+            opacity: 0; pointer-events: none; transition: opacity 0.5s ease-in-out;
+        }
+        .quality-slide.active { opacity: 1; pointer-events: auto; }
+
+        
+/* ── §5 MAPA, FLOTANTES & PRECIOS ───────────────────────────────────────────── */
+
+/* ── WhatsApp & Social flotantes ── */
+        .whatsapp-float {
+            position: fixed; bottom: 110px; right: 30px;
+            width: 60px; height: 60px; background: #25d366; color: white;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 2:47 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L144-195)</summary>
+
+**Path:** `Unknown file`
+
+```
+        <!-- Carrusel/Slideshow de Alto Impacto con la Imagen de Fondo Muy Visible (Opacidad Verde Reducida) -->
+        <section id="inicio" class="hero-premium">
+            <div class="hero-slides" role="region" aria-label="Presentación principal" aria-roledescription="carrusel">
+                <!-- Slide 1 -->
+                <div class="hero-slide active bg-slide-1">
+                    <div class="hero-glass-card">
+                        <!-- C4: H1 identifica la entidad (nombre oficial + marca registrada). I8: símbolo ® -->
+                        <h1 class="hero-slide1-title">Bienvenido a Laboratorio de Especialidades Hematológicas.</h1>
+                        <p>Trabajamos para proporcionar información diagnóstica confiable que ayude al médico a tomar mejores decisiones y al paciente a recibir una atención oportuna y segura.</p>
+                        <div class="flex-center-15">
+                            <a href="#especialidades" class="btn btn-secondary btn-outline-white">Conoce los Servicios</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="hero-slide bg-slide-2">
+                    <div class="hero-glass-card">
+                        <span>Laboratorio de Especialidades Hematológicas</span>
+                        <h2>Un laboratorio seguro con Resultados Confiables</h2>
+                        <p>Detrás de cada resultado hay una decisión. Por eso, en LAESH<sup class="sup-sm">®</sup> la calidad no es una opción: es nuestro compromiso.</p>
+                        <div class="flex-center-15">
+                            <a href="#especialidades" class="btn btn-secondary btn-outline-white">Conoce los Servicios</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="hero-slide bg-slide-3">
+                    <div class="hero-glass-card">
+                        <span>Aprovecha nuestras ofertas</span>
+                        <h2>Promociones Vigentes</h2>
+                        <p>Aprovecha nuestras tarifas preferenciales y paquetes de check-ups diseñados para el cuidado de tu salud y la de tu familia.</p>
+                        <div class="flex-center-15">
+                            <a href="#promociones" class="btn btn-secondary btn-outline-white">Ver Promociones</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 4 (Ubicación, Contacto y Horarios) -->
+                <div class="hero-slide bg-slide-4">
+                    <div class="hero-glass-card">
+                        <span>Horarios y Ubicación</span>
+                        <h2>Nuestra Ubicación y Horarios</h2>
+                        <p>Azucenas #8, Fraccionamiento Jardines del Sur, Huajuapan de León, Oaxaca.<br>Lunes a sábado: 7:00 a.m. – 9:00 p.m. &nbsp;|&nbsp; Domingo: 7:00 a.m. – 3:00 p.m.<br>Tel: 953 688 7694</p>
+                        <div class="flex-center-15">
+                            <a href="#ubicacion" class="btn btn-secondary btn-outline-white">Ver Ubicación</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- NA-01: Indicadores de paginación del hero (dots) -->
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Standardization and Balance**
+
+I'm now diving deep into the standardization and homologation structure for each of the four slides. My objective is to achieve consistent text lengths to maintain the desired glassmorphism card height and overall visual presentation. I'm focusing on ensuring visual balance across all slides.
+
+
+**Harmonizing Structure and Text**
+
+I've formulated a structure for each slide, ensuring uniformity while preserving meaning and SEO value. Each slide now includes a `<span>`, a heading (`<h1>` or `<h2>`), a `<p>`, and a CTA button. This standardized layout promotes a cohesive aesthetic. I've focused on ensuring text length balance across all elements.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.798955566s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 2:47 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 2:47 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 2:47 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+Recuerdo habia un slide con contenido de Bienvendia , ya no lo ve, localizalo en el git histori de dias pasados, recuperalo, adaptalo a los linemientos has descrito y añadelo.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `landing.css`
+**Language:** css
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 2:52 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Reviewing Historical Edits**
+
+I've been examining the initial state of Slide 1 in commit `de9db161319f252ca82f6712361e650d42c4c819` from August 12, 2026. The slide's elements were a `<span>` containing "Laboratorio de Especialidades Hematológicas," an `<h1>` titled "Bienvenido a LAESH," and a subheading. I'm noting these original components for comparison.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `hero-dot`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.076887526s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 2:52 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `website.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L89-139)</summary>
+
+**Path:** `Unknown file`
+
+```
+    // Garantizar que el primer slide (BIENVENIDO) sea siempre el activo al inicio
+    if (slides.length > 0) {
+        slides.forEach(function(s) { s.classList.remove('active'); });
+        slides[0].classList.add('active');
+    }
+
+    /* NA-01: Actualizar dots de paginación */
+    var heroDots = document.querySelectorAll('.hero-dot');
+    function updateHeroDots(index) {
+        heroDots.forEach(function(d, i) {
+            var active = i === index;
+            d.classList.toggle('active', active);
+            d.setAttribute('aria-pressed', String(active));
+        });
+    }
+    updateHeroDots(0);
+    /* NA-01: click en dot → saltar a slide */
+    heroDots.forEach(function(dot) {
+        dot.addEventListener('click', function() {
+            var target = parseInt(this.getAttribute('data-slide'), 10);
+            if (isNaN(target)) return;
+            slides[currentSlide].classList.remove('active');
+            currentSlide = target;
+            slides[currentSlide].classList.add('active');
+            updateHeroDots(currentSlide);
+            stopHeroAutoplay();
+            if (!heroPaused) startHeroAutoplay();
+        });
+    });
+
+    function nextSlide() {
+        slides[currentSlide].classList.remove('active');
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].classList.add('active');
+        updateHeroDots(currentSlide);
+        /* GM-03: actualizar label pausa */
+        /* WCAG-3: Anunciar cambio de slide a lectores de pantalla */
+        var heroAnnouncer = document.getElementById('hero-announcer');
+        if (heroAnnouncer) {
+            var heading = slides[currentSlide].querySelector('h1, h2');
+            heroAnnouncer.textContent = heading ? heading.textContent : 'Diapositiva ' + (currentSlide + 1) + ' de ' + slides.length;
+        }
+    }
+
+    /* W4: Respetar prefers-reduced-motion — sin autoplay si el usuario lo prefiere */
+    /* A7-fix: Botón pausa/reanudar — WCAG 2.2.2 (Pause, Stop, Hide) */
+    var heroInterval = null;
+    var heroPaused   = false;
+
+    function startHeroAutoplay() {
+        if (heroInterval) return;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Dynamic Queries**
+
+Okay, I'm focusing on the `website.js` file now, specifically lines 90-132. I see how `slides` is populated, a dynamic query fetching elements with the `.hero-slide` class. Adding "Bienvenido a LAESH" implies it will be included in the selection, allowing it to act as a slide.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.158953490s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L144-209)</summary>
+
+**Path:** `Unknown file`
+
+```
+        <!-- Carrusel/Slideshow de Alto Impacto con la Imagen de Fondo Muy Visible (Opacidad Verde Reducida) -->
+        <section id="inicio" class="hero-premium">
+            <div class="hero-slides" role="region" aria-label="Presentación principal" aria-roledescription="carrusel">
+                <!-- Slide 1 -->
+                <div class="hero-slide active bg-slide-1">
+                    <div class="hero-glass-card">
+                        <span>25 Años de Experiencia Clínica</span>
+                        <!-- C4: H1 identifica la entidad (nombre oficial + marca registrada). I8: símbolo ® -->
+                        <h1 class="hero-slide1-title">Laboratorio de Especialidades Hematológicas</h1>
+                        <p>Información diagnóstica confiable que auxilia al médico a tomar mejores decisiones y al paciente a recibir atención oportuna.</p>
+                        <div class="flex-center-15">
+                            <a href="#especialidades" class="btn btn-secondary btn-outline-white">Conoce los Servicios</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="hero-slide bg-slide-2">
+                    <div class="hero-glass-card">
+                        <span>Excelencia y Calidad Certificada</span>
+                        <h2>Resultados Confiables para Cuidar tu Salud</h2>
+                        <p>Detrás de cada análisis existe una decisión médica crucial. En LAESH<sup class="sup-sm">®</sup> la calidad y precisión son nuestro compromiso.</p>
+                        <div class="flex-center-15">
+                            <a href="#especialidades" class="btn btn-secondary btn-outline-white">Ver Especialidades</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="hero-slide bg-slide-3">
+                    <div class="hero-glass-card">
+                        <span>Tarifas y Paquetes Preferenciales</span>
+                        <h2>Promociones y Check-Ups Médicos 2026</h2>
+                        <p>Descubre nuestros paquetes preventivos y tarifas especiales diseñados para el cuidado integral de tu salud y la de tu familia.</p>
+                        <div class="flex-center-15">
+                            <a href="#promociones" class="btn btn-secondary btn-outline-white">Ver Promociones</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 4 (Ubicación, Contacto y Horarios) -->
+                <div class="hero-slide bg-slide-4">
+                    <div class="hero-glass-card">
+                        <span>Atención Presencial y Horarios</span>
+                        <h2>Ubicación, Horarios de Atención y Contacto</h2>
+                        <p>Azucenas #8, Fracc. Jardines del Sur, Huajuapan de León, Oax.<br>Lun a Sáb: 7:00 a.m. – 9:00 p.m. &nbsp;|&nbsp; Dom: 7:00 a.m. – 3:00 p.m. &nbsp;|&nbsp; Tel: 953 688 7694</p>
+                        <div class="flex-center-15">
+                            <a href="#ubicacion" class="btn btn-secondary btn-outline-white">Ver Ubicación</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- NA-01: Indicadores de paginación del hero (dots) -->
+            <div class="hero-dots" aria-label="Navegación de diapositivas">
+                <button class="hero-dot active" data-slide="0" aria-label="Diapositiva 1 de 4" aria-pressed="true"></button>
+                <button class="hero-dot" data-slide="1" aria-label="Diapositiva 2 de 4" aria-pressed="false"></button>
+                <button class="hero-dot" data-slide="2" aria-label="Diapositiva 3 de 4" aria-pressed="false"></button>
+                <button class="hero-dot" data-slide="3" aria-label="Diapositiva 4 de 4" aria-pressed="false"></button>
+            </div>
+            <!-- A7-fix + GM-03: Botón pausa con etiqueta visible — WCAG 2.2.2 -->
+            <button type="button" id="hero-pause-btn" class="hero-pause-btn"
+                    aria-label="Pausar presentación" aria-pressed="false">
+                <svg id="hero-icon-pause" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+                <svg id="hero-icon-play"  width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="d-none"><polygon points="5,3 19,12 5,21"/></svg>
+                <span id="hero-pause-label" class="hero-pause-label">Pausar</span>
+            </button>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 2:52 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 2:52 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 2:53 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+Crea un nuevo html tipo guia de usuario para el uso del cms  del sitio web laesj, colo calo aqui :
+/home/carlos/GitHub/caelitandem_home/portafolio-dev-2026/blocklabgd/v1.2/et/
+. Tenga  un indice con todas las secciones/subsecciones del index.html, y quiza primero homologa fielmente nombre de secciones y sub secciones de index.html hacia gestion-web.html
+. Incluye los linemientos indicados para Hero Slides Homologados.
+. Incluye todas las descripciones de guia, que ya tenga gestion-web.html; claro bajo el enfoque de mejora continua.
+. El tono del nuevo documento debe ser de tipo guia de usuarios (Persona de laboratorio quimico).
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `index.html`
+**Language:** html
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/portafolio-dev-2026/blocklabgd/v1.2/et`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>Directory: `et` (7 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/portafolio-dev-2026/blocklabgd/v1.2/et`
+
+| Name | Type | Size |
+|------|------|------|
+| `DECISIONS.md` | File | 9303 bytes |
+| `Especificacion_Tecnica.html` | File | 77268 bytes |
+| `Memoria de Instalación Certificados Locales HTTPS.html` | File | 10048 bytes |
+| `Tecnica_Infraestructura_Despliegue.html` | File | 81335 bytes |
+| `Tecnica_Modelo_Datos.html` | File | 63878 bytes |
+| `Tecnica_Seguridad_Integral.html` | File | 23646 bytes |
+| `styles.css` | File | 8963 bytes |
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Examining Technical Documentation**
+
+I'm now diving into the technical documentation for the blocklabgd project. Specifically, I'm reviewing the files within the specified directory: `Especificacion_Tecnica.html`, `Tecnica_Modelo_Datos.html`, and `Tecnica_Infraestructura_Despliegue.html`. My focus is to understand the technical specifications, data model, and deployment infrastructure of version 1.2.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.152302853s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L134-149)</summary>
+
+**Path:** `Unknown file`
+
+```
+                    <div class="operator-guide-box">
+                        <strong>📌 Indicaciones de Carga para el Banner Principal (Hero):</strong>
+                        <ul class="cms-ul">
+                            <li><strong>Sobreescritura Directa:</strong> Al subir un nuevo banner de fondo para el Slide seleccionado (1, 2 o 3), la imagen previa se <em>sobreescribe automáticamente</em> en el servidor.</li>
+                            <li><strong>Dimensiones Recomendadas:</strong> Proporción Panorámica <strong>16:9</strong> (resolución ideal: <code>1920 x 1080 px</code> Full HD).</li>
+                            <li><strong>Formatos & Peso:</strong> Formato <strong>WebP</strong> (óptimo para carga ultrarrápida), JPG o PNG. Tamaño máximo por archivo: <strong>15 MB</strong>.</li>
+                        </ul>
+                    </div>
+
+                    <div class="editor-card mb-4">
+                        <div class="editor-card-header">
+                            <div class="card-title">Configuración de Tiempos del Slider Principal</div>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <label for="input-hero-transition">Tiempo de Transición / Autoplay del Slider (segundos)</label>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L109-133)</summary>
+
+**Path:** `Unknown file`
+
+```
+                    <a href="index.html" class="btn-logout--mobile">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                        Cerrar Sesión
+                    </a>
+                </div>
+            </aside>
+
+            <!-- ============ MAIN CONTENT ============ -->
+            <main class="main-content main-content--pad" id="main-content">
+                <!-- Tabs de navegación superiores (Elevadas al Top) -->
+                <div class="cms-tabs" role="tablist" aria-label="Secciones del sitio web">
+                    <div class="cms-tab active" id="tab-hero" role="tab" aria-selected="true" aria-controls="panel-hero" tabindex="0" data-section="hero">1. Banner Principal</div>
+                    <div class="cms-tab" id="tab-quienes-somos" role="tab" aria-selected="false" aria-controls="panel-quienes-somos" tabindex="-1" data-section="quienes-somos">2. Quiénes somos</div>
+                    <div class="cms-tab" id="tab-especialidades" role="tab" aria-selected="false" aria-controls="panel-especialidades" tabindex="-1" data-section="especialidades">3. Estudios de Rutina</div>
+                    <div class="cms-tab" id="tab-promociones" role="tab" aria-selected="false" aria-controls="panel-promociones" tabindex="-1" data-section="promociones">4. Promociones Vigentes</div>
+                    <div class="cms-tab" id="tab-calidad" role="tab" aria-selected="false" aria-controls="panel-calidad" tabindex="-1" data-section="calidad">5. Calidad e Instalaciones</div>
+                    <div class="cms-tab" id="tab-ubicacion" role="tab" aria-selected="false" aria-controls="panel-ubicacion" tabindex="-1" data-section="ubicacion">6. Ubicación y Contacto</div>
+                </div>
+
+                <!-- ========================================== -->
+                <!-- PANEL 1: BANNER PRINCIPAL / HERO           -->
+                <!-- ========================================== -->
+                <div id="panel-hero" class="cms-panel active" role="tabpanel" aria-labelledby="tab-hero" tabindex="0">
+                    <h3 class="cms-h3">Edición de Banners del Carrusel Principal (#inicio)</h3>
+                    <!-- Leyenda Operativa de Ayuda para Banner Principal -->
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Tab Labels**
+
+Okay, I've got a good grasp of the tab labels now. I've categorized the six listed, understanding what each section will contain based on its label. Now, I'm ready to begin the next stage of my work, by building out the content of the UI.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.005796876s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:04 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Drafting User Guide Structure**
+
+I'm now diving into the specifics, outlining the HTML structure for the user guide. I'm focusing on the header and metadata sections first, ensuring a clean and organized start to the document. The file path is set.
+
+
+**Defining Document Parameters**
+
+I've established the document title, subtitle, and corporate color palette. Integrating print and responsive styles is underway. The "Guía de Usuario" will be the document title, "Manual Operativo para Personal de Laboratorio y Administración Clínica" will be the subtitle. Primary color is #0052B7. I'm aiming for a streamlined, branded user guide.
+
+
+
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 7.719895047s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Execution Error
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:04 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Clarifying Artifact Handling**
+
+I've zeroed in on the `write_to_file` function and how it interfaces with `ArtifactMetadata`. The key is that `TargetFile` should either be within the artifact directory when metadata is present, or the metadata itself needs to be `undefined` (or omitted) if it's a regular repository file being created within the workspace.
+
+
+
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.001268912s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:04 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:04 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:04 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+Hace rato revisaste/validaste estandares y buenas practicas en el codigo html, y web.
+Actuliza  con los nuevos hallasgos, correciones , etc:
+/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/website/uipv1/estabilizacionUI/reporte-estabilizacion-ui.html
+y posteriormente alinea GEMINI.md rules que les corresponda.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `gestion-web.html`
+**Language:** html
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `reporte-estabilizacion-ui.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte de Estabilización UI/UX, Accesibilidad y Rendimiento — LAESH</title>
+    <style>
+        :root {
+            --primary: #0052B7;
+            --primary-green: #71CA11;
+            --primary-green-dark: #0052B7;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --bg-page: #f8fafc;
+            --bg-surface: #ffffff;
+            --border: #e2e8f0;
+            --success-bg: #d1fae5;
+            --success-text: #047857;
+        }
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            margin: 0;
+            padding: 2rem 1.5rem;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--bg-surface);
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 82, 183, 0.05);
+            border: 1px solid var(--border);
+        }
+        h1 {
+            color: var(--primary);
+            font-size: 2.2rem;
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            border-bottom: 3px solid var(--primary-green);
+            padding-bottom: 0.6rem;
+            font-weight: 700;
+        }
+        .meta {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .summary-badge {
+            display: inline-block;
+            background: var(--success-bg);
+            color: var(--success-text);
+            padding: 0.4rem 1rem;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(4, 120, 87, 0.15);
+        }
+        .category-section {
+            margin-bottom: 3rem;
+        }
+        .category-header {
+            background: #f0f7ff;
+            color: #0369a1;
+            font-weight: 700;
+            font-size: 1.25rem;
+            padding: 0.8rem 1.25rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            border-left: 5px solid var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 0.5rem;
+        }
+        th, td {
+            text-align: left;
+            padding: 0.85rem 1rem;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.92rem;
+        }
+        th {
+            background: #f8fafc;
+            color: #475569;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `reporte-estabilizacion-ui.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L499-607)</summary>
+
+**Path:** `Unknown file`
+
+```
+                    <td class="num">37</td>
+                    <td><span class="badge-id">PERF-03</span></td>
+                    <td class="description-cell">Posible parpadeo de estilos FOUC por falta de preloads</td>
+                    <td><span class="badge-status">Resuelto</span></td>
+                    <td class="how-cell">Inyectados tags <code>&lt;link rel="preload" as="style"&gt;</code> para las 4 hojas de estilo críticas.</td>
+                </tr>
+                <tr>
+                    <td class="num">38</td>
+                    <td><span class="badge-id">MAINT-01</span></td>
+                    <td class="description-cell">style.css es un monolito gigante con 6+ contextos</td>
+                    <td><span class="badge-status">Resuelto</span></td>
+                    <td class="how-cell">Monolito subdividido limpiamente en tokens.css, portal.css y style.css base.</td>
+                </tr>
+                <tr>
+                    <td class="num">39</td>
+                    <td><span class="badge-id">MAINT-02</span></td>
+                    <td class="description-cell">Estilos de acordeón inútiles remanentes</td>
+                    <td><span class="badge-status">Resuelto</span></td>
+                    <td class="how-cell">Se depuró todo el CSS huérfano.</td>
+                </tr>
+                <tr>
+                    <td class="num">40</td>
+                    <td><span class="badge-id">MAINT-03</span></td>
+                    <td class="description-cell">Múltiples versiones manuales de CSS en un día</td>
+                    <td><span class="badge-status">Resuelto</span></td>
+                    <td class="how-cell">Centralizado y versionado limpiamente bajo el repositorio de Git.</td>
+                </tr>
+                <tr>
+                    <td class="num">41</td>
+                    <td><span class="badge-id">MAINT-04</span></td>
+                    <td class="description-cell">Comentarios de fixes pasados ensucian HTML</td>
+                    <td><span class="badge-status">Resuelto</span></td>
+                    <td class="how-cell">Se limpiaron comentarios tipo P5-fix y similares.</td>
+                </tr>
+                <tr>
+                    <td class="num">42</td>
+                    <td><span class="badge-id">MAINT-05</span></td>
+                    <td class="description-cell">Comentarios obsoletos y confusos en CSS</td>
+                    <td><span class="badge-status">Resuelto</span></td>
+                    <td class="how-cell">Borrados de las hojas de estilo de producción.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 🐘 SECCIÓN ADICIONAL: GAPS E INCIDENCIAS PARA MIGRACIÓN PHP -->
+    <div class="category-section" style="margin-top: 3.5rem;">
+        <div class="category-header" style="background: #fff7ed; color: #c2410c; border-left-color: #f97316;">
+            <span>🐘</span> Gaps e Incidencias a Resolver Durante / Antes de la Conversión a PHP
+        </div>
+        <p style="color: #475569; font-size: 0.95rem; margin-bottom: 1.5rem;">
+            Matriz de hallazgos de arquitectura backend y directivas de acoplamiento a considerar antes y durante la conversión de los archivos HTML hacia plantillas de Plates (<code>League\Plates</code>) y controladores en <strong>Flight PHP</strong>:
+        </p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 5%">#</th>
+                    <th style="width: 15%">Área / Componente</th>
+                    <th style="width: 35%">Situación / Gap Identificado</th>
+                    <th style="width: 15%">Prioridad</th>
+                    <th style="width: 30%">Solución / Acción en PHP</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="num">1</td>
+                    <td><span class="badge-id">RUTAS-ASSETS</span></td>
+                    <td class="description-cell">Rutas estáticas apuntan al directorio local de desarrollo <code>/laesh-web-assets-uipv1a/</code></td>
+                    <td><span class="badge-status" style="background: #fef3c7; color: #92400e; border-color: #fde68a;">Media</span></td>
+                    <td class="how-cell">En los layouts maestro de Plates (<code>layout.php</code>), parametrizar con helper: <code>&lt;?=$this-&gt;asset('/css/portal.css')?&gt;</code> o la variable global <code>/laesh-web-assets/</code>.</td>
+                </tr>
+                <tr>
+                    <td class="num">2</td>
+                    <td><span class="badge-id">CMS-MAPEO</span></td>
+                    <td class="description-cell">Nomenclatura de inputs en <code>gestion-web.html</code> debe corresponder a la tabla <code>web_contenidos</code> (§5.3.1)</td>
+                    <td><span class="badge-status" style="background: #fef3c7; color: #92400e; border-color: #fde68a;">Alta</span></td>
+                    <td class="how-cell">Estructurar los nombres de inputs en el formulario CMS como <code>name="cms[seccion][subseccion][clave]"</code> para un procesamiento <code>POST</code> atómico en Flight PHP.</td>
+                </tr>
+                <tr>
+                    <td class="num">3</td>
+                    <td><span class="badge-id">HTMX-HIPERMEDIA</span></td>
+                    <td class="description-cell">Formularios HTML estáticos con simuladores JS locales requieren atributos HTMX declarativos (§3.4)</td>
+                    <td><span class="badge-status" style="background: #fef3c7; color: #92400e; border-color: #fde68a;">Alta</span></td>
+                    <td class="how-cell">Inyectar <code>hx-post</code>, <code>hx-target</code>, <code>hx-swap</code>, <code>hx-indicator</code> y tokens ocultos de idempotencia (<code>idempotency_token</code>) en las vistas Plates.</td>
+                </tr>
+                <tr>
+                    <td class="num">4</td>
+                    <td><span class="badge-id">AUTH-SESSION</span></td>
+                    <td class="description-cell">Autenticación prototipo simulada en <code>localStorage</code> debe migrar a cookies de servidor</td>
+                    <td><span class="badge-status" style="background: #fef3c7; color: #92400e; border-color: #fde68a;">Alta</span></td>
+                    <td class="how-cell">Reemplazar validaciones JS locales por el objeto de sesión <code>Delight\Auth</code> y el middleware backend <code>\Common\RbacManager</code>.</td>
+                </tr>
+                <tr>
+                    <td class="num">5</td>
+                    <td><span class="badge-id">SEO-PRECONNECT</span></td>
+                    <td class="description-cell">Directiva de optimización de red con pre-conexión de tipografías externas (§5.3.4)</td>
+                    <td><span class="badge-status" style="background: #e0f2fe; color: #0369a1; border-color: #bae6fd;">Baja</span></td>
+                    <td class="how-cell">Incluir etiquetas <code>&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;</code> en la cabecera <code>&lt;head&gt;</code> del layout maestro.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+</body>
+</html>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing UI Stability Report**
+
+I'm now diving into the `reporte-estabilizacion-ui.html` file. Specifically, I'm integrating new findings, Hallazgo 43 to 49, into the main table. Hallazgo 43, `CSS-INLINE-PURGE`, is focusing on removing inline `style="..."` attributes.
+
+
+**Updating CSP Implementation**
+
+I've addressed Hallazgo 44 by purging all `!important` declarations. Hallazgo 45 involved adjustments for image fitting and positioning, using `object-fit: contain` and `background-position: center top` to fix image cropping issues. I've also enlarged the image capacity in the carousel as a fix for Hallazgo 46, and I created a clear button for disabling cards for Hallazgo 47.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `24-laesh-estabilizacion-ui-estandares.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.252718062s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# Regla 24 — LAESH: Estándares de Estabilización UI/UX, Accesibilidad (A11y), Rendimiento y Conversión PHP
+
+> **SSOT de Estabilización Frontend & Backend para Ecosistema LAESH**
+> Documento fuente: `laesh-swbldi/website/uipv1/estabilizacionUI/reporte-estabilizacion-ui.html`
+> Todo desarrollo, refactorización o conversión a PHP en los portales LAESH (`labadmin`, `medicos`, `gestion-web`, `solicitud_dac_impr`) debe acatarse obligatoriamente a esta regla para evitar regresiones visuales o de código.
+
+---
+
+## 🎨 1. Arquitectura CSS, Especificidad y CSP
+
+- **R24-CSS-01 (Cero Inline Styles / CSP):** Queda estrictamente prohibido usar el atributo `style="..."` en código HTML de producción. Todos los estilos deben residir en las hojas de estilo correspondientes (`tokens.css`, `portal.css`, `style.css`), garantizando una Content Security Policy (CSP) restrictiva.
+- **R24-CSS-02 (Prohibición de `!important`):** No utilizar `!important` para sobreescribir estilos. Toda regla visual debe gestionarse mediante la especificidad de selectores nativa o la arquitectura modular de capas.
+- **R24-CSS-03 (Clases de Input Específicas):** Los elementos `<input type="text">`, `<input type="tel">` y `<input type="number">` deben llevar la clase `.form-input`. Nunca aplicar estilos globales a `input` que afecten indeseadamente a `input[type="checkbox"]` o `input[type="radio"]`.
+- **R24-CSS-04 (Etiquetas Form-Label):** Las etiquetas de formulario deben llevar la clase `.form-label`. Usar `<h3 class="orden-estudios-label">` o similar para encabezados semánticos de sección sin atributo `for`.
+- **R24-CSS-05 (Tokens Corporativos):** `tokens.css` es la única fuente de verdad para colores. El botón primario `.btn-primary` mantendrá siempre el verde corporativo LAESH (`#71CA11`), reservando los tonos azules para acentos de marcas/portales.
+
+---
+
+## 📱 2. Responsividad por Dispositivo y Plataforma
+
+- **R24-RESP-01 (Prohibición de `resize: both`):** No habilitar la propiedad CSS `resize: both` en elementos de interfaz para evitar manijas inservibles o colapsos visuales en dispositivos táctiles.
+- **R24-RESP-02 (Viewport Móvil Dinámico):** Los contenedores principales del layout en dispositivos móviles deben declarar `min-height: 100dvh` para evitar recortes de viewport causados por las barras dinámicas del navegador (Chrome Mobile, Safari iOS).
+- **R24-RESP-06 (Estructura de Renglones en Formulario Paciente, Fichas y Separadores):**
+  - **Desktop / Laptop (≥768px):**
+    - **Botones de Acción:** Muestran icono + texto completo ("Limpiar" y "Crear e Imprimir Orden").
+    - **Renglón 1:** `Nombre del Paciente` (35+1 char, máx 290px), `Edad` (58px), `Sexo` (H/M), `Celular` (130px), **[Separador Vertical 2px empujado `margin-left: 18px; margin-right: 16px`]** y `Diagnóstico / Motivo Clínico` (a la derecha).
+    - **Sección Intermedia:** Grilla de 18 fichas de selección por categoría.
+    - **[Separador Horizontal 2px]**
+    - **Página de Inicio (`index.html`):**
+    - **Reorganización en Apilamiento Horizontal Independiente:** Se desmanteló la grilla de 2 columnas de la sección "Ubicación y Contacto". La Ficha 1 ("Datos de Contacto") se convirtió en una tarjeta horizontal superior a ancho completo (`.contact-card-horizontal`) con distribución plana (`.contact-grid-horizontal`). La Ficha 2 ("Mapa") se ubica abajo de forma independiente a ancho completo (`.map-card`), renderizando el Croquis y el Mapa Interactivo en cotas estrictas 1:1 de 400px en Desktop / 300px en Móvil. Eliminados todos los problemas de arrastre de altura y espacios en blanco.
+    - **Homologación Tipográfica:** Título H3 en `<h3 class="acerca-h3">` (`1.15rem`, `700`) y cuerpos de texto homologados a `0.92rem` (`1.55` line-height).
+  - **Dispositivos Móviles (≤767px):**
+    - **Header Móvil Justificado a la Izquierda:** Logotipo reducido a 36px de altura (`.logo img { height: 36px }`). Todo el contenido (`Logo` → `Campanita Móvil` → `Punto Estatus` → `Iniciales` → `Hamburguesa`) se alinea hacia la izquierda en secuencia continua con `gap: 0.45rem`, removiendo `margin-left: auto`.
+    - **Campanita Móvil con Scroll Suave (`#bell-wrap-mob`):** Inyectada dinámicamente en el header superior junto al estatus en línea. Incluye badge de conteo sincronizado y respuesta a touch/clic navegando con `scrollIntoView({ behavior: 'smooth' })` directo hacia la sección de notificaciones al final de la página.
+    - **Reordenamiento Móvil de Notificaciones y Footer (Fix de Raíz):** `.app-layout` en móvil gestiona `.main-content` (`order: 1; flex: 0 0 auto`), `.sidebar-right` / Notificaciones (`order: 2; flex: 0 0 auto`, tarjeta blanca limpia con `border-radius: 12px` y `display: block`), y `.portal-footer` (`order: 3; flex: 0 0 auto; margin-top: auto; padding: 0.75rem 1rem`), anulando cualquier deformación de altura y asegurando la posición final del footer verde al fondo de la pantalla. En Desktop/Laptop (≥768px), `portal-footer.js` mantiene el footer como hijo interno de `.main-content`, preservando la alineación limpia de 3 columnas sin alterar la vista. Aplicado en `medicos.html`, `labadmin.html` y `gestion-web.html`.
+    - **Barra de Pestañas y Acciones:** Comportamiento de flujo estático original (`margin-bottom: 1rem`), sin anclaje sticky/fixed.
+    - **Botones de Acción Cuadrados (Solo Iconos 1:1):** Selector por ID `#tab-bar-btns button, #tab-bar-btns .btn-primary, #tab-bar-btns .btn-imprimir-orden, #tab-bar-btns .badge-reset, #tab-bar-btns .badge-reset-sm` anula paddings heredados de `.btn-primary` y fija `overflow: hidden; padding: 0; width: 26px; height: 26px` eliminando cualquier desbordamiento o estiramiento vertical de texto.
+    - **Renglón 1:** `Nombre` (máx. 35 char), `Edad` (3 dig), `Sexo` (H/M) en 1 solo renglón.
+    - **Renglón 2:** `Celular` (10 dig, 115px a la izquierda) y `Diagnóstico / Motivo Clínico` (lado derecho flexible) en 1 solo renglón.
+    - **Renglón 3:** Grilla de fichas por categoría.
+    - **Renglón 4:** `Otros Estudios` precedido del separador horizontal de 2px.
+
+---
+
+## ♿ 3. Accesibilidad WCAG 2.1 SC
+
+- **R24-A11Y-01 (Modales y Dropdowns ARIA):** Todo dropdown o panel flotante interactivo debe declarar `role="dialog"` o `role="region"`, `aria-modal="true"` (si aplica), e implementar Focus Trap cíclico en JS con autoenfoque en el primer elemento activo.
+- **R24-A11Y-02 (Botones con Iconos):** Todo botón interactivo que en dispositivos móviles muestre únicamente un ícono visual DEBE declarar un atributo `aria-label="..."` descriptivo explícito (ej. `aria-label="Limpiar selección"`).
+- **R24-A11Y-03 (Ocultamiento para Lectores de Pantalla):** Los elementos visualmente ocultos que deban ser leídos por asistencias tecnológicas NUNCA deben usar `display: none` o `visibility: hidden`. Deben emplear la clase `.visually-hidden`.
+- **R24-A11Y-04 (Anuncios Dinámicos):** Las zonas donde el contenido o el estado cambie dinámicamente mediante JS o HTMX deben incluir un contenedor contenedor con `aria-live="polite"`.
+- **R24-A11Y-05 (Navegación por Teclado):** Todos los elementos interactivos personalizados deben responder a la activación mediante las teclas `Enter` y `Space`.
+- **R24-A11Y-06 (Estructura de Tablist):** Un elemento con `role="tablist"` debe contener única y exclusivamente elementos con `role="tab"`. Los botones de acción auxiliares deben colocarse fuera del tablist.
+- **R24-A11Y-07 (Skip Link):** Todo documento HTML maestro debe mantener el enlace de salto al contenido principal `<a href="#main-content" class="skip-link">Saltar al contenido principal</a>` al inicio del `<body>`.
+
+---
+
+## 🖱️ 4. Usabilidad UX y Performance
+
+- **R24-UX-01 (Confirmación Preventiva):** Las acciones que descarten información o limpien órdenes completas deben solicitar confirmación al usuario antes de ejecutar la purga de datos.
+- **R24-UX-02 (Sanitización y Teclado Móvil):** Todo campo de entrada numérico o telefónico debe incluir los atributos `inputmode="numeric"` o `inputmode="tel"`, `pattern`, `title` y la sanitización en tiempo real vía `oninput` (`replace(/[^0-9]/g, '')`).
+- **R24-UX-03 (Auto-cierre al Desplazar):** Los dropdowns activos deben cerrarse automáticamente al detectar un evento de scroll en la ventana.
+- **R24-UX-04 (Control de Peticiones Duplicadas):** Todo botón de submit o guardado debe deshabilitarse o pasar a estado de carga al ser clickeado para prevenir envíos dobles.
+- **R24-UX-05 (Ocultar Spinners Nativos):** Ocultar los incrementadores nativos de `input[type="number"]` mediante CSS cross-browser (`-webkit-appearance: none; -moz-appearance: textfield`).
+- **R24-PERF-01 (Lazy Rendering de Componentes Pesados):** Para listas o fichas extensas (ej. 67 checkboxes), inyectar los nodos en el DOM bajo demanda al interactuar con la categoría, manteniendo los datos base en estructuras JS en memoria.
+- **R24-PERF-02 (Invalidación de Caché):** Todos los recursos estáticos cargados en HTML deben llevar el parámetro de versión `?v=YYYYMMDD`.
+- **R24-PERF-03 (Preload de CSS Crítico):** Declarar `<link rel="preload" as="style">` para las hojas de estilo críticas en la cabecera `<head>`.
+
+---
+
+## 🐘 5. Gaps e Incidencias para Conversión a PHP (Flight PHP + Plates)
+
+- **R24-PHP-01 (Parametrización de Rutas de Activos):** Al migrar a plantillas de Plates (`League\Plates`), reemplazar las rutas estáticas locales por la función helper `$this->asset('/css/portal.css')` o constantes globales de activos.
+- **R24-PHP-02 (Mapeo de Nomenclatura CMS):** En `gestion-web.html`, la propiedad `name` de los campos de formulario del CMS debe estructurarse de forma jerárquica para corresponder con la tabla `web_contenidos`: `name="cms[seccion][subseccion][clave]"`, garantizando un procesamiento `POST` atómico en controladores Flight PHP.
+- **R24-PHP-03 (Atributos Declarativos HTMX):** Reemplazar los simuladores JS locales por atributos declarativos de HTMX en las vistas Plates: `hx-post="/api/ordenes/guardar"`, `hx-target="#panel-resultado"`, `hx-swap="innerHTML"`, `hx-indicator="#spinner-cargando"`, e inyectar el campo de idempotencia `<input type="hidden" name="idempotency_token" value="...">`.
+- **R24-PHP-04 (Autenticación y Sesión Servidor):** Eliminar por completo el prototipo de autenticación simulado en `localStorage`. El control de acceso debe migrar al objeto de sesión seguro de `Delight\Auth` y al middleware backend `\Common\RbacManager`.
+- **R24-PHP-05 (SEO Preconnect):** Incluir la etiqueta `<link rel="preconnect" href="https://fonts.googleapis.com">` en el bloque `<head>` del layout maestro.
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing New Findings**
+
+I'm currently focused on incorporating the new CSS rule, R24-CSS-06, regarding the complete purging of inline styles and enforcing a strict Content Security Policy. This involves identifying and eliminating all static `style="..."` attributes within the specified files, which is a key component for hardening the report and agent rule standards.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `reporte-estabilizacion-ui.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.086890195s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L499-543)</summary>
+
+**Path:** `Unknown file`
+
+```
+                    <td class="num">37</td>
+                    <td><span class="badge-id">PERF-03</span></td>
+                    <td class="description-cell">Posible parpadeo de estilos FOUC por falta de preloads</td>
+                    <td><span class="badge-status">Resuelto</span></td>
+                    <td class="how-cell">Inyectados tags <code>&lt;link rel="preload" as="style"&gt;</code> para las 4 hojas de estilo críticas.</td>
+                </tr>
+                <tr>
+                    <td class="num">38</td>
+                    <td><span class="badge-id">MAINT-01</span></td>
+                    <td class="description-cell">style.css es un monolito gigante con 6+ contextos</td>
+                    <td><span class="badge-status">Resuelto</span></td>
+                    <td class="how-cell">Monolito subdividido limpiamente en tokens.css, portal.css y style.css base.</td>
+                </tr>
+                <tr>
+                    <td class="num">39</td>
+                    <td><span class="badge-id">MAINT-02</span></td>
+                    <td class="description-cell">Estilos de acordeón inútiles remanentes</td>
+                    <td><span class="badge-status">Resuelto</span></td>
+                    <td class="how-cell">Se depuró todo el CSS huérfano.</td>
+                </tr>
+                <tr>
+                    <td class="num">40</td>
+                    <td><span class="badge-id">MAINT-03</span></td>
+                    <td class="description-cell">Múltiples versiones manuales de CSS en un día</td>
+                    <td><span class="badge-status">Resuelto</span></td>
+                    <td class="how-cell">Centralizado y versionado limpiamente bajo el repositorio de Git.</td>
+                </tr>
+                <tr>
+                    <td class="num">41</td>
+                    <td><span class="badge-id">MAINT-04</span></td>
+                    <td class="description-cell">Comentarios de fixes pasados ensucian HTML</td>
+                    <td><span class="badge-status">Resuelto</span></td>
+                    <td class="how-cell">Se limpiaron comentarios tipo P5-fix y similares.</td>
+                </tr>
+                <tr>
+                    <td class="num">42</td>
+                    <td><span class="badge-id">MAINT-05</span></td>
+                    <td class="description-cell">Comentarios obsoletos y confusos en CSS</td>
+                    <td><span class="badge-status">Resuelto</span></td>
+                    <td class="how-cell">Borrados de las hojas de estilo de producción.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:08 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `24-laesh-estabilizacion-ui-estandares.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L49-76)</summary>
+
+**Path:** `Unknown file`
+
+```
+- **R24-A11Y-04 (Anuncios Dinámicos):** Las zonas donde el contenido o el estado cambie dinámicamente mediante JS o HTMX deben incluir un contenedor contenedor con `aria-live="polite"`.
+- **R24-A11Y-05 (Navegación por Teclado):** Todos los elementos interactivos personalizados deben responder a la activación mediante las teclas `Enter` y `Space`.
+- **R24-A11Y-06 (Estructura de Tablist):** Un elemento con `role="tablist"` debe contener única y exclusivamente elementos con `role="tab"`. Los botones de acción auxiliares deben colocarse fuera del tablist.
+- **R24-A11Y-07 (Skip Link):** Todo documento HTML maestro debe mantener el enlace de salto al contenido principal `<a href="#main-content" class="skip-link">Saltar al contenido principal</a>` al inicio del `<body>`.
+
+---
+
+## 🖱️ 4. Usabilidad UX y Performance
+
+- **R24-UX-01 (Confirmación Preventiva):** Las acciones que descarten información o limpien órdenes completas deben solicitar confirmación al usuario antes de ejecutar la purga de datos.
+- **R24-UX-02 (Sanitización y Teclado Móvil):** Todo campo de entrada numérico o telefónico debe incluir los atributos `inputmode="numeric"` o `inputmode="tel"`, `pattern`, `title` y la sanitización en tiempo real vía `oninput` (`replace(/[^0-9]/g, '')`).
+- **R24-UX-03 (Auto-cierre al Desplazar):** Los dropdowns activos deben cerrarse automáticamente al detectar un evento de scroll en la ventana.
+- **R24-UX-04 (Control de Peticiones Duplicadas):** Todo botón de submit o guardado debe deshabilitarse o pasar a estado de carga al ser clickeado para prevenir envíos dobles.
+- **R24-UX-05 (Ocultar Spinners Nativos):** Ocultar los incrementadores nativos de `input[type="number"]` mediante CSS cross-browser (`-webkit-appearance: none; -moz-appearance: textfield`).
+- **R24-PERF-01 (Lazy Rendering de Componentes Pesados):** Para listas o fichas extensas (ej. 67 checkboxes), inyectar los nodos en el DOM bajo demanda al interactuar con la categoría, manteniendo los datos base en estructuras JS en memoria.
+- **R24-PERF-02 (Invalidación de Caché):** Todos los recursos estáticos cargados en HTML deben llevar el parámetro de versión `?v=YYYYMMDD`.
+- **R24-PERF-03 (Preload de CSS Crítico):** Declarar `<link rel="preload" as="style">` para las hojas de estilo críticas en la cabecera `<head>`.
+
+---
+
+## 🐘 5. Gaps e Incidencias para Conversión a PHP (Flight PHP + Plates)
+
+- **R24-PHP-01 (Parametrización de Rutas de Activos):** Al migrar a plantillas de Plates (`League\Plates`), reemplazar las rutas estáticas locales por la función helper `$this->asset('/css/portal.css')` o constantes globales de activos.
+- **R24-PHP-02 (Mapeo de Nomenclatura CMS):** En `gestion-web.html`, la propiedad `name` de los campos de formulario del CMS debe estructurarse de forma jerárquica para corresponder con la tabla `web_contenidos`: `name="cms[seccion][subseccion][clave]"`, garantizando un procesamiento `POST` atómico en controladores Flight PHP.
+- **R24-PHP-03 (Atributos Declarativos HTMX):** Reemplazar los simuladores JS locales por atributos declarativos de HTMX en las vistas Plates: `hx-post="/api/ordenes/guardar"`, `hx-target="#panel-resultado"`, `hx-swap="innerHTML"`, `hx-indicator="#spinner-cargando"`, e inyectar el campo de idempotencia `<input type="hidden" name="idempotency_token" value="...">`.
+- **R24-PHP-04 (Autenticación y Sesión Servidor):** Eliminar por completo el prototipo de autenticación simulado en `localStorage`. El control de acceso debe migrar al objeto de sesión seguro de `Delight\Auth` y al middleware backend `\Common\RbacManager`.
+- **R24-PHP-05 (SEO Preconnect):** Incluir la etiqueta `<link rel="preconnect" href="https://fonts.googleapis.com">` en el bloque `<head>` del layout maestro.
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Considering Image Standards**
+
+Okay, I'm integrating a new section, section 6, into the `.agents/rules/24-laesh-estabilizacion-ui-estandares.md` document. It is focused on CMS standards, image visibility, and slide homologation, including the initial rule R24-MEDIA-01 regarding superior image visibility with `center top`.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.257582763s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:08 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `GEMINI.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L49-79)</summary>
+
+**Path:** `Unknown file`
+
+```
+| **21** | **Trazabilidad SQL, Observabilidad y Logs de Dev** | [.agents/rules/21-laesh-trazabilidad-observabilidad.md](file:///.agents/rules/21-laesh-trazabilidad-observabilidad.md) |
+| **22** | **Estándares de Conectividad, BD y Persistencia** | [.agents/rules/22-laesh-mariadb-conexion-estandares.md](file:///.agents/rules/22-laesh-mariadb-conexion-estandares.md) |
+| **23** | **Supremacía de la Especificación HTML** | [.agents/rules/23-laesh-supremacia-especificacion-html.md](file:///.agents/rules/23-laesh-supremacia-especificacion-html.md) |
+| **24** | **Estándares de Estabilización UI/UX, A11y y Conversión PHP** | [.agents/rules/24-laesh-estabilizacion-ui-estandares.md](file:///.agents/rules/24-laesh-estabilizacion-ui-estandares.md) |
+
+> [!IMPORTANT]
+> **MANDATO ESTRICTO PARA PROYECTO LAESH:** Todo desarrollo, refactorización o propuesta de arquitectura debe auditarse obligatoriamente contra los documentos maestros en `laesh/et/`: `Especificacion_Tecnica.html`, `Tecnica_Modelo_Datos.html`, `Tecnica_Infraestructura_Despliegue.html` y `Memoria de Instalación Certificados Locales HTTPS.html`. Cualquier desviación técnica se considera un bug crítico.
+
+---
+
+## 🛠️ Skills Personalizadas (Workflows y Estándares)
+Estas habilidades definen **cómo** ejecuto las tareas técnicas:
+
+### Arquitectura Core y Backend
+- **[UI/UX Modern Refactor](file:///.agents/skills/skill-ui-modern-refactor/SKILL.md)**: Estándares de CSS/HTML para el Host C.
+- **[Dynamic UI & AJAX](file:///.agents/skills/skill-dynamic-html-ajax/SKILL.md)**: Interactividad con `paxscript.js`.
+- **[Plates Templating Patterns](file:///.agents/skills/skill-plates-templating/SKILL.md)**: Uso del motor de plantillas Views.
+- **[Flight PHP Framework](file:///.agents/skills/skill-flightphp/SKILL.md)**: Arquitectura micro-framework, routing y middleware.
+- **[PHP 8.3 Migration](file:///.agents/skills/skill-php83-migration/SKILL.md)**: Refactorización y modernización de código (7.4 → 8.3).
+- **[PHP-Migration-74](file:///.agents/skills/skill-migration-php74/SKILL.md)**: Refactorización de PHP 5.5 a 7.4.
+- **[Swoole Async Server](file:///.agents/skills/skill-swoole-async/SKILL.md)**: Servidor WebSocket persistente y anti-memory-leak.
+
+### Base de Datos e Infraestructura
+- **[MariaDB 11 Ops](file:///.agents/skills/skill-mariadb11/SKILL.md)**: Features, migraciones y modelado AI/Vectorial.
+- **[Database Evolution](file:///.agents/skills/skill-database-evolution/SKILL.md)**: Partición de `ligacargos` y migración a MariaDB.
+- **[Apache 2.4 Hardening](file:///.agents/skills/skill-apache24-hardening/SKILL.md)**: Seguridad, vhosts, PHP-FPM y configuraciones.
+- **[Delight PHP Auth](file:///.agents/skills/skill-delight-php-auth/SKILL.md)**: Autenticación nativa segura para PHP Vanilla.
+
+### Frontend Moderno y PWA
+- **[HTMX Patterns](file:///.agents/skills/skill-htmx-patterns/SKILL.md)**: Interactividad hipermedia server-driven.
+- **[Native Service Worker](file:///.agents/skills/skill-service-worker-native/SKILL.md)**: PWA offline-first, caché de app shell y red.
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:08 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:08 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+1) Estos renglones estan muy juntos:
+Límite: 16 imágenes | Dimensiones: 1200x800 px (4:3) | Formato: WebP (Óptimo), JPG, PNG | Peso máx: 15 MB
+Seleccionar Imagen del Carrusel a Actualizar (1 al 16) (Este subtitulo deberia tener otro estilo)
+2) para Banner Principal deberia estructurarse la actualización de sus partes similar a como se hace en: Estudios de Rutina  , un combo box que indique el numero - nombre del slide y lo que le corresponde.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `reporte-estabilizacion-ui.html`
+**Language:** html
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `Seleccionar Imagen del Carrusel`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:26 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L359-399)</summary>
+
+**Path:** `Unknown file`
+
+```
+                        <ul class="cms-ul">
+                            <li><strong>Sobreescritura Directa:</strong> Al publicar una nueva fotografía en el índice seleccionado (1 al 12), la imagen previa se <em>sobreescribe automáticamente</em> en el servidor.</li>
+                            <li><strong>Formato Optimizado:</strong> Se recomienda subir imágenes en formato <strong>WebP</strong> (óptimo para carga ultrarrápida), aunque se admiten archivos JPG o PNG de alta resolución.</li>
+                            <li><strong>Dimensiones Recomendadas:</strong> Proporción <strong>4:3 o 16:9</strong> (resolución ideal: <code>1200 x 800 px</code> o <code>800 x 600 px</code>). Límite de tamaño: <strong>15 MB por imagen</strong>.</li>
+                        </ul>
+                    </div>
+                    <!-- Ficha Unificada de Captura: Rutina y Especialidades -->
+                    <div class="editor-card">
+                        <div class="editor-card-header">
+                            <div class="card-title">Ficha 1: Rutina y Especialidades</div>
+                            <span class="operator-badge">Límite: 16 imágenes | Dimensiones: 1200x800 px (4:3) | Formato: WebP (Óptimo), JPG, PNG | Peso máx: 15 MB</span>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-row">
+                                <div class="field-group">
+                                    <label>Seleccionar Imagen del Carrusel a Actualizar (1 al 16)</label>
+                                    <select id="select-carrusel-rutina">
+                                        <option value="1">Imagen 1 de 16: Hematología Especializada</option>
+                                        <option value="2">Imagen 2 de 16: Química Clínica Avanzada</option>
+                                        <option value="3">Imagen 3 de 16: Microbiología y Cultivos</option>
+                                        <option value="4">Imagen 4 de 16: Uroanálisis y Sedimentos</option>
+                                        <option value="5">Imagen 5 de 16: Hemostasia y Coagulación</option>
+                                        <option value="6">Imagen 6 de 16: Pruebas Especiales</option>
+                                        <option value="7">Imagen 7 de 16: Pre-analítica</option>
+                                        <option value="8">Imagen 8 de 16: Toma de Muestras I</option>
+                                        <option value="9">Imagen 9 de 16: Toma de Muestras II</option>
+                                        <option value="10">Imagen 10 de 16: Toma Pediátrica</option>
+                                        <option value="11">Imagen 11 de 16: Toma de Cultivos</option>
+                                        <option value="12">Imagen 12 de 16: Recepción Técnica</option>
+                                        <option value="13">Imagen 13 de 16: por ESTABLECER</option>
+                                        <option value="14">Imagen 14 de 16: por ESTABLECER</option>
+                                        <option value="15">Imagen 15 de 16: por ESTABLECER</option>
+                                        <option value="16">Imagen 16 de 16: por ESTABLECER</option>
+                                    </select>
+                                </div>
+                                <div class="field-group">
+                                    <label>Subir Nueva Fotografía (Máx 15 MB)</label>
+                                    <div class="image-upload-box">
+                                        <img id="prev-esp-selected" src="/laesh-web-assets-uipv1a/img/area-hematologia-dos.webp" alt="Rutina y Especialidades" class="img-preview-esp">
+                                        <input type="file" accept="image/*" id="file-esp-selected">
+                                    </div>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Image Limits**
+
+I've been examining the image specifications within the carousel interface. Specifically, I'm focusing on lines 368-375 of the code. Line 370 clearly outlines the image limits, including the maximum quantity, dimensions, and accepted formats like WebP, JPG, and PNG, as well as the maximum file size. Line 375, found within `.editor-card-body`, refers to the label for selecting images for updates.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.036763952s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L139-299)</summary>
+
+**Path:** `Unknown file`
+
+```
+                            <li><strong>Formatos & Peso:</strong> Formato <strong>WebP</strong> (óptimo para carga ultrarrápida), JPG o PNG. Tamaño máximo por archivo: <strong>15 MB</strong>.</li>
+                        </ul>
+                    </div>
+
+                    <div class="editor-card mb-4">
+                        <div class="editor-card-header">
+                            <div class="card-title">Configuración de Tiempos del Slider Principal</div>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <label for="input-hero-transition">Tiempo de Transición / Autoplay del Slider (segundos)</label>
+                                <input type="number" name="hero_transition_time" id="input-hero-transition" min="1" max="60" value="5" step="1" required>
+                                <small class="cms-help-text">Tiempo en segundos para la transición automática entre diapositivas del carrusel principal (#inicio). Valor actual: 5 segundos.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="editor-card">
+                        <div class="editor-card-header">
+                            <div class="card-title">Slide 1: Presentación Institucional</div>
+                            <span class="operator-badge">Límite: 3 Banners | Dimensiones: 1920x1080 px (16:9) | Formato: WebP (Óptimo), JPG, PNG | Peso máx: 15 MB</span>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <label>Imagen de Fondo del Slide</label>
+                                <div class="image-upload-box">
+                                    <img id="prev-hero-1" src="/laesh-web-assets-uipv1a/img/recepcion.webp" alt="Slide 1" class="img-preview-sm">
+                                    <input type="file" accept="image/*" id="file-hero-1">
+                                </div>
+                            </div>
+                            <div class="field-group">
+                                <label>Etiqueta Superior</label>
+                                <input type="text" name="hero_slide1_etiqueta" value="Un laboratorio seguro con Resultados Confiables">
+                            </div>
+                            <div class="field-group">
+                                <label>Título Principal</label>
+                                <input type="text" name="hero_slide1_titulo" required value="Laboratorio de Especialidades Hematológicas">
+                            </div>
+                            <div class="field-group">
+                                <label>Descripción Breve</label>
+                                <textarea name="hero_slide1_desc" required>Ofrecemos servicios integrales de análisis clínicos especializados con precisión científica y calidez humana.</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================================== -->
+                <!-- PANEL 2: QUIÉNES SOMOS                     -->
+                <!-- ========================================== -->
+                <div id="panel-quienes-somos" class="cms-panel" role="tabpanel" aria-labelledby="tab-quienes-somos" tabindex="0">
+                    <h3 class="cms-h3">Edición de las 4 Fichas de Quiénes Somos (#acerca-de)</h3>
+                    <p class="cms-p">Modifica los pilares institucionales expuestos en la sección Quiénes Somos.</p>
+
+                    <div class="grid-2col">
+                        <!-- Ficha 1 -->
+                        <div class="editor-card">
+                            <div class="editor-card-header">
+                                <div class="card-title">Ficha 1: Historia y Quiénes Somos</div>
+                            </div>
+                            <div class="editor-card-body">
+                                <div class="field-group">
+                                    <label>Título de la Ficha</label>
+                                    <input type="text" name="acerca_ficha1_titulo" required value="Historia y Quiénes Somos">
+                                </div>
+                                <div class="field-group">
+                                    <label>Contenido de Historia / Trayectoria</label>
+                                    <textarea class="textarea-historia" name="acerca_ficha1_texto" required>Fundado con la misión de brindar diagnósticos hematológicos y clínicos de alta precisión en la región de la Mixteca, LAESH cuenta con tecnología automatizada y personal altamente calificado.</textarea>
+                                    <small class="cms-help-text">Puedes separar el contenido en varios párrafos utilizando un salto de renglón (Enter). Cada renglón o párrafo se renderizará distribuido holgadamente en la ficha de la página.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ficha 2 -->
+                        <div class="editor-card">
+                            <div class="editor-card-header">
+                                <div class="card-title">Ficha 2: Nuestra Misión</div>
+                            </div>
+                            <div class="editor-card-body">
+                                <div class="field-group">
+                                    <label>Título de la Ficha</label>
+                                    <input type="text" name="acerca_ficha2_titulo" required value="Nuestra Misión">
+                                </div>
+                                <div class="field-group">
+                                    <label>Declaración de Misión</label>
+                                    <textarea class="textarea-100" name="acerca_ficha2_texto">Proporcionar un servicio de análisis clínicos con resultados confiables y oportunos para auxiliar en el diagnóstico de enfermedades, sobre una base de ética profesional y alto compromiso con la calidad.</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ficha 3 -->
+                        <div class="editor-card">
+                            <div class="editor-card-header">
+                                <div class="card-title">Ficha 3: Nuestra Visión</div>
+                            </div>
+                            <div class="editor-card-body">
+                                <div class="field-group">
+                                    <label>Título de la Ficha</label>
+                                    <input type="text" name="acerca_ficha3_titulo" required value="Nuestra Visión">
+                                </div>
+                                <div class="field-group">
+                                    <label>Declaración de Visión</label>
+                                    <textarea class="textarea-100" name="acerca_ficha3_texto">Ser un Laboratorio Líder que proporcione los servicios más especializados y de alta calidad a médicos y pacientes.</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ficha 4 -->
+                        <div class="editor-card">
+                            <div class="editor-card-header">
+                                <div class="card-title">Ficha 4: Nuestros Valores</div>
+                            </div>
+                            <div class="editor-card-body">
+                                <div class="field-group">
+                                    <label>Título de la Ficha</label>
+                                    <input type="text" name="acerca_ficha4_titulo" required value="Nuestros Valores">
+                                </div>
+                                <div class="field-group">
+                                    <label>Valores Institucionales</label>
+                                    <textarea class="textarea-100" name="acerca_ficha4_texto">Rigurosidad científica, empatía y calidez en el trato, integridad ética en los diagnósticos, responsabilidad social y constante mejora de nuestros análisis.</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================================== -->
+                <!-- PANEL 3: ESTUDIOS DE RUTINA Y ESPECIALIDADES -->
+                <!-- ========================================== -->
+                <div id="panel-especialidades" class="cms-panel" role="tabpanel" aria-labelledby="tab-especialidades" tabindex="0">
+                                 <!-- Editor de los 4 Grupos / Abanicos del Catálogo 2026 -->
+                    <div class="editor-card mb-4">
+                        <div class="editor-card-header">
+                            <div class="card-title">Abanico 1: Rutina General</div>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <label>Título del Abanico 1</label>
+                                <input type="text" name="estudios_cg1_titulo" value="Rutina General — Hematología, Química Clínica, Electrolitos, Uroanálisis, Coagulación" required>
+                            </div>
+                            <div class="field-group">
+                                <label>Fichas / Categorías Internas y Estudios del Abanico 1 (Secuencia por Renglones)</label>
+                                <textarea class="textarea-110" name="estudios_cg1_fichas" required>[Hematología] Citometría Hemática, Grupo y RH, Plaquetas, Velocidad de Sedimentación Globular, Reticulocitos, Perfil de Hierro, Hierro sérico, Inducción Drepanocitos
+[Química Clínica] Química Sanguínea 3, Química Sanguínea 7, Perfil Bioquímico 15, Perfil Bioquímico 24, Perfil Bioquímico 30, Perfil Bioquímico 35, Perfil Bioquímico 45, Glucosa sérica, Creatinina sérica, Colesterol Total, Triglicéridos
+[Electrolitos Séricos] E.S. 3 Elementos, E.S. 4 Elementos, E.S. Completos, Calcio sérico, Fósforo y Magnesio sérico, Bicarbonato y CO2
+[Uroanálisis] EGO + Radio Prot/Crea, EGO Especializado, Antidoping 5 elem., Antidoping 12 elem.
+[Coagulación] Perfil de Coagulación, Tiempo de Protrombina/INR, Tiempo de Tromboplastina, Tiempos corregidos, Fibrinógeno, Dímero D, Tiempo de sangrado, Tiempo de coagulación
+[Lípidos] Perfil de Lípidos I, Perfil de Lípidos II, Perfil Aterogénico</textarea>
+                                <small class="cms-help-text">El orden de las líneas en este campo define la secuencia de despliegue de las fichas de Derecha a Izquierda por defecto. Cada línea entre corchetes <code>[Nombre Categoría]</code> genera una ficha.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="editor-card mb-4">
+                        <div class="editor-card-header">
+                            <div class="card-title">Abanico 2: Función de Órganos</div>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <label>Título del Abanico 2</label>
+                                <input type="text" name="estudios_cg2_titulo" value="Función de Órganos — Hepática, Tiroidea, Pancreática, Renal, Cardiaca, Gasometría" required>
+                            </div>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Panel 1**
+
+Okay, I've dived into Panel 1. Right now, it's showcasing the main slider's timing configuration and just Slide 1 as a card. A user's suggestion popped up, pushing me to consider structuring updates for the main banner like the "Estudios de Rutina" section. This prompts a shift in my thinking to better match the suggested structure.
+
+
+**Implementing Slide Selectors**
+
+Now, I'm integrating a combobox for slide selection, similar to the "Estudios de Rutina" section, to pick slides for the main banner. The `<select id="select-hero-slide">` combobox allows me to select from Slide 1 to 5. Then, I plan to load the corresponding fields for each slide selected, including background image, badge, title, paragraph, CTA button text, and link. I will also incorporate the proposed CSS fix, addressing the visual presentation of selectors, spacing, and subtitle style.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.656380417s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+/* gestion-web.js — lógica del portal de gestión web CMS (extraído de gestion-web.html) */
+        const panelLabelsGestion = {
+            'hero': 'Banner Principal',
+            'quienes-somos': 'Quiénes somos',
+            'especialidades': 'Estudios de Rutina',
+            'promociones': 'Promociones Vigentes',
+            'calidad': 'Calidad e Instalaciones',
+            'ubicacion': 'Ubicación y Contacto'
+        };
+
+        function showPanel(name) {
+            document.querySelectorAll('.cms-panel').forEach(p => p.classList.remove('active'));
+            const targetPanel = document.getElementById('panel-' + name);
+            if (targetPanel) targetPanel.classList.add('active');
+
+            // Sincronizar pestaña superior activa + ARIA (A-01)
+            document.querySelectorAll('.cms-tab').forEach(function(t) {
+                t.classList.remove('active');
+                t.setAttribute('aria-selected', 'false');
+                t.setAttribute('tabindex', '-1');
+            });
+            const targetTab = document.getElementById('tab-' + name);
+            if (targetTab) {
+                targetTab.classList.add('active');
+                targetTab.setAttribute('aria-selected', 'true');
+                targetTab.setAttribute('tabindex', '0');
+            }
+
+            // Actualizar breadcrumb
+            const bc = document.getElementById('header-bc-current');
+            if (bc && panelLabelsGestion[name]) bc.textContent = panelLabelsGestion[name];
+        }
+
+        function activateTab(el) {
+            document.querySelectorAll('.cms-tab').forEach(function(t) {
+                t.classList.remove('active');
+                t.setAttribute('aria-selected', 'false');
+                t.setAttribute('tabindex', '-1');
+            });
+            el.classList.add('active');
+            el.setAttribute('aria-selected', 'true');
+            el.setAttribute('tabindex', '0');
+        }
+
+        function activateNav(el) {
+            document.querySelectorAll('.sidebar .nav-item').forEach(n => n.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        
+        // Datos de imágenes de Rutina y Especialidades (12 imágenes)
+        const rutinaDatos = {
+            1: { titulo: "Hematología Especializada", desc: "Análisis morfológico de frotis sanguíneo y pruebas hematológicas de alta complejidad.", img: "/laesh-web-assets-uipv1a/img/area-hematologia-dos.webp" },
+            2: { titulo: "Química Clínica Avanzada", desc: "Determinación automatizada de electrolitos, proteínas y enzimas específicas.", img: "/laesh-web-assets-uipv1a/img/area-quimica-clinica-dos.webp" },
+            3: { titulo: "Microbiología y Cultivos", desc: "Identificación microscópica y pruebas de susceptibilidad a antimicrobianos.", img: "/laesh-web-assets-uipv1a/img/area-bacteriologia-dos.webp" },
+            4: { titulo: "Uroanálisis y Sedimentos", desc: "Examen de orina, química y microscopía para detección precoz de patologías renales.", img: "/laesh-web-assets-uipv1a/img/area-uroanalisis.webp" },
+            5: { titulo: "Hemostasia y Coagulación", desc: "Estudios de tiempos de protrombina (TP) y tromboplastina parcial activada (TTPa).", img: "/laesh-web-assets-uipv1a/img/area-coagulacion.webp" },
+            6: { titulo: "Pruebas Especiales", desc: "Hormonas, anticuerpos específicos, pruebas inmunológicas y marcadores tumorales.", img: "/laesh-web-assets-uipv1a/img/area-estudios-especiales.webp" },
+            7: { titulo: "Pre-analítica", desc: "Separación de suero y plasma con control estricto de tiempos y temperaturas.", img: "/laesh-web-assets-uipv1a/img/area-centrifugacion.webp" },
+            8: { titulo: "Toma de Muestras I", desc: "Áreas higiénicas equipadas para la extracción sanguínea convencional.", img: "/laesh-web-assets-uipv1a/img/area-toma-de-muestras.webp" },
+            9: { titulo: "Toma de Muestras II", desc: "Módulos individuales y confortables que aseguran una atención rápida.", img: "/laesh-web-assets-uipv1a/img/toma-de-muestras.webp" },
+            10: { titulo: "Toma Pediátrica", desc: "Espacio amigable y personal capacitado para el cuidado y tranquilidad de los niños.", img: "/laesh-web-assets-uipv1a/img/toma-pediatricas.webp" },
+            11: { titulo: "Toma de Cultivos", desc: "Zonas aisladas y estériles para la toma de exudados y cultivos microbiológicos.", img: "/laesh-web-assets-uipv1a/img/toma-de-cultivos.webp" },
+            12: { titulo: "Recepción Técnica", desc: "Recepción técnica de muestras e indicaciones pre-analíticas detalladas.", img: "/laesh-web-assets-uipv1a/img/recepcion-lab.webp" },
+            13: { titulo: "", desc: "", img: "" },
+            14: { titulo: "", desc: "", img: "" },
+            15: { titulo: "", desc: "", img: "" },
+            16: { titulo: "", desc: "", img: "" }
+        };
+
+        function cargarRutinaSeleccionada(val) {
+            const d = rutinaDatos[val];
+            if (d) {
+                document.getElementById('rutina-titulo-val').value = d.titulo || '';
+                document.getElementById('rutina-desc-val').value = d.desc || '';
+                const prev = document.getElementById('prev-esp-selected');
+                if (prev) {
+                    prev.src = d.img || 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="90" height="60" viewBox="0 0 90 60"><rect width="100%" height="100%" fill="%23f1f5f9"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%2394a3b8" font-size="10" font-family="sans-serif">Sin Imagen</text></svg>';
+                }
+            }
+        }
+
+        // Datos de imágenes de Calidad e Instalaciones (15 imágenes)
+        const calidadDatos = {
+            1: { titulo: "Área de Hematología I", desc: "Análisis de biometría hemática y células sanguíneas con rigor científico.", img: "/laesh-web-assets-uipv1a/img/area-hematologia-uno.webp" },
+            2: { titulo: "Área de Hematología II", desc: "Recuentos morfológicos y frotis sanguíneo de alta precisión diagnóstica.", img: "/laesh-web-assets-uipv1a/img/area-hematologia-dos.webp" },
+            3: { titulo: "Área de Coagulación", desc: "Evaluación de tiempos de protrombina (TP) y tromboplastina parcial activada (TTPa).", img: "/laesh-web-assets-uipv1a/img/area-coagulacion.webp" },
+            4: { titulo: "Química Clínica I", desc: "Determinación automatizada de metabolitos, enzimas y perfiles hepáticos.", img: "/laesh-web-assets-uipv1a/img/area-quimica-clinica.webp" },
+            5: { titulo: "Química Clínica II", desc: "Equipamientos avanzados para determinaciones clínicas complementarias.", img: "/laesh-web-assets-uipv1a/img/area-quimica-clinica-dos.webp" },
+            6: { titulo: "Área de Bacteriología I", desc: "Cultivo bacteriano, frotis y tinción de Gram para identificación de patógenos.", img: "/laesh-web-assets-uipv1a/img/area-bacteriologia.webp" },
+            7: { titulo: "Área de Bacteriología II", desc: "Aislamiento e identificación de cultivos en medios de crecimiento específicos.", img: "/laesh-web-assets-uipv1a/img/area-bacteriologia-dos.webp" },
+            8: { titulo: "Área de Uroanálisis", desc: "Examen químico de tiras y análisis microscópico de sedimentos urinarios.", img: "/laesh-web-assets-uipv1a/img/area-uroanalisis.webp" },
+            9: { titulo: "Área de Centrifugación", desc: "Procesamiento inicial y fraccionamiento adecuado de muestras biológicas.", img: "/laesh-web-assets-uipv1a/img/area-centrifugacion.webp" },
+            10: { titulo: "Estudios Especiales", desc: "Hormonas, perfiles inmunológicos complejos y marcadores biológicos.", img: "/laesh-web-assets-uipv1a/img/area-estudios-especiales.webp" },
+            11: { titulo: "Toma de Muestras", desc: "Área clínica diseñada para la extracción de muestras bajo normas de seguridad.", img: "/laesh-web-assets-uipv1a/img/area-toma-de-muestras.webp" },
+            12: { titulo: "Toma Pediátrica", desc: "Módulo infantil con personal entrenado para una experiencia tranquila.", img: "/laesh-web-assets-uipv1a/img/toma-pediatricas.webp" },
+            13: { titulo: "Toma de Cultivos", desc: "Zonas de muestreo microbiológico bajo estrictas medidas de higiene.", img: "/laesh-web-assets-uipv1a/img/toma-de-cultivos.webp" },
+            14: { titulo: "Recepción y Orientación", desc: "Gestión e ingreso de solicitudes clínicas con atención personalizada.", img: "/laesh-web-assets-uipv1a/img/recepcion-lab.webp" },
+            15: { titulo: "Toma de Muestras Clínicas", desc: "Módulos cómodos para la obtención segura de muestras biológicas.", img: "/laesh-web-assets-uipv1a/img/toma-de-muestras.webp" }
+        };
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L100-179)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+        function cargarCalidadSeleccionada(val) {
+            const d = calidadDatos[val];
+            if (d) {
+                document.getElementById('calidad-titulo-val').value = d.titulo;
+                document.getElementById('calidad-desc-val').value = d.desc;
+                document.getElementById('prev-calidad-selected').src = d.img;
+            }
+        }
+
+        function previewImage(input, previewId) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.getElementById(previewId);
+                    if (img) img.src = e.target.result;
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function simulateSave() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3500);
+        }
+
+
+/* ── P-LAESH-01 Phase3: event listeners (reemplaza onclick=/onchange= del HTML) ── */
+document.addEventListener('DOMContentLoaded', function() {
+    // Inyectar por defecto valor actual en duro (5 segundos) si no viene poblado
+    var inputHeroTrans = document.getElementById('input-hero-transition');
+    if (inputHeroTrans && !inputHeroTrans.value) {
+        inputHeroTrans.value = "5";
+    }
+
+    // Sidebar nav items con data-section → showPanel + activateNav
+    document.querySelectorAll('.sidebar .nav-item[data-section]').forEach(function(item) {
+        item.addEventListener('click', function() {
+            showPanel(this.getAttribute('data-section'));
+            activateNav(this);
+        });
+        // A-01: activación por teclado para role="button" (Enter / Espacio)
+        item.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                this.click();
+            }
+        });
+    });
+
+    // Tabs superiores con data-section → showPanel + activateTab
+    document.querySelectorAll('.cms-tab[data-section]').forEach(function(tab) {
+        tab.addEventListener('click', function() {
+            showPanel(this.getAttribute('data-section'));
+            activateTab(this);
+        });
+    });
+
+    // Botón guardar/publicar
+    var btnSave = document.getElementById('btn-cms-save-action');
+    if (btnSave) btnSave.addEventListener('click', simulateSave);
+
+    // File inputs → previewImage
+    var fileMap = {
+        'file-hero-1':           'prev-hero-1',
+        'file-banner-promos':    'prev-banner-promos',
+        'file-esp-selected':     'prev-esp-selected',
+        'file-calidad-selected': 'prev-calidad-selected',
+        'file-croquis':          'prev-croquis'
+    };
+    Object.keys(fileMap).forEach(function(inputId) {
+        var el = document.getElementById(inputId);
+        if (el) el.addEventListener('change', function() { previewImage(this, fileMap[inputId]); });
+    });
+
+    // Select carrusel rutina
+    var selRutina = document.getElementById('select-carrusel-rutina');
+    if (selRutina) selRutina.addEventListener('change', function() { cargarRutinaSeleccionada(this.value); });
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Hero Data Construction**
+
+I'm now diving into the `gestion-web.js` file, specifically the construction of the `heroDatos` object. I'm focusing on the data structure used for the hero slides, aiming to understand how the badge, title, and other attributes are defined. I'm considering the implications of this data structure on data retrieval, its construction, and how it is used on the front end.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.038067158s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L129-184)</summary>
+
+**Path:** `Unknown file`
+
+```
+                <!-- PANEL 1: BANNER PRINCIPAL / HERO           -->
+                <!-- ========================================== -->
+                <div id="panel-hero" class="cms-panel active" role="tabpanel" aria-labelledby="tab-hero" tabindex="0">
+                    <h3 class="cms-h3">Edición de Banners del Carrusel Principal (#inicio)</h3>
+                    <!-- Leyenda Operativa de Ayuda para Banner Principal -->
+                    <div class="operator-guide-box">
+                        <strong>📌 Indicaciones de Carga para el Banner Principal (Hero):</strong>
+                        <ul class="cms-ul">
+                            <li><strong>Sobreescritura Directa:</strong> Al subir un nuevo banner de fondo para el Slide seleccionado (1, 2 o 3), la imagen previa se <em>sobreescribe automáticamente</em> en el servidor.</li>
+                            <li><strong>Dimensiones Recomendadas:</strong> Proporción Panorámica <strong>16:9</strong> (resolución ideal: <code>1920 x 1080 px</code> Full HD).</li>
+                            <li><strong>Formatos & Peso:</strong> Formato <strong>WebP</strong> (óptimo para carga ultrarrápida), JPG o PNG. Tamaño máximo por archivo: <strong>15 MB</strong>.</li>
+                        </ul>
+                    </div>
+
+                    <div class="editor-card mb-4">
+                        <div class="editor-card-header">
+                            <div class="card-title">Configuración de Tiempos del Slider Principal</div>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <label for="input-hero-transition">Tiempo de Transición / Autoplay del Slider (segundos)</label>
+                                <input type="number" name="hero_transition_time" id="input-hero-transition" min="1" max="60" value="5" step="1" required>
+                                <small class="cms-help-text">Tiempo en segundos para la transición automática entre diapositivas del carrusel principal (#inicio). Valor actual: 5 segundos.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="editor-card">
+                        <div class="editor-card-header">
+                            <div class="card-title">Slide 1: Presentación Institucional</div>
+                            <span class="operator-badge">Límite: 3 Banners | Dimensiones: 1920x1080 px (16:9) | Formato: WebP (Óptimo), JPG, PNG | Peso máx: 15 MB</span>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <label>Imagen de Fondo del Slide</label>
+                                <div class="image-upload-box">
+                                    <img id="prev-hero-1" src="/laesh-web-assets-uipv1a/img/recepcion.webp" alt="Slide 1" class="img-preview-sm">
+                                    <input type="file" accept="image/*" id="file-hero-1">
+                                </div>
+                            </div>
+                            <div class="field-group">
+                                <label>Etiqueta Superior</label>
+                                <input type="text" name="hero_slide1_etiqueta" value="Un laboratorio seguro con Resultados Confiables">
+                            </div>
+                            <div class="field-group">
+                                <label>Título Principal</label>
+                                <input type="text" name="hero_slide1_titulo" required value="Laboratorio de Especialidades Hematológicas">
+                            </div>
+                            <div class="field-group">
+                                <label>Descripción Breve</label>
+                                <textarea name="hero_slide1_desc" required>Ofrecemos servicios integrales de análisis clínicos especializados con precisión científica y calidez humana.</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L364-439)</summary>
+
+**Path:** `Unknown file`
+
+```
+                    </div>
+                    <!-- Ficha Unificada de Captura: Rutina y Especialidades -->
+                    <div class="editor-card">
+                        <div class="editor-card-header">
+                            <div class="card-title">Ficha 1: Rutina y Especialidades</div>
+                            <span class="operator-badge">Límite: 16 imágenes | Dimensiones: 1200x800 px (4:3) | Formato: WebP (Óptimo), JPG, PNG | Peso máx: 15 MB</span>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-row">
+                                <div class="field-group">
+                                    <label>Seleccionar Imagen del Carrusel a Actualizar (1 al 16)</label>
+                                    <select id="select-carrusel-rutina">
+                                        <option value="1">Imagen 1 de 16: Hematología Especializada</option>
+                                        <option value="2">Imagen 2 de 16: Química Clínica Avanzada</option>
+                                        <option value="3">Imagen 3 de 16: Microbiología y Cultivos</option>
+                                        <option value="4">Imagen 4 de 16: Uroanálisis y Sedimentos</option>
+                                        <option value="5">Imagen 5 de 16: Hemostasia y Coagulación</option>
+                                        <option value="6">Imagen 6 de 16: Pruebas Especiales</option>
+                                        <option value="7">Imagen 7 de 16: Pre-analítica</option>
+                                        <option value="8">Imagen 8 de 16: Toma de Muestras I</option>
+                                        <option value="9">Imagen 9 de 16: Toma de Muestras II</option>
+                                        <option value="10">Imagen 10 de 16: Toma Pediátrica</option>
+                                        <option value="11">Imagen 11 de 16: Toma de Cultivos</option>
+                                        <option value="12">Imagen 12 de 16: Recepción Técnica</option>
+                                        <option value="13">Imagen 13 de 16: por ESTABLECER</option>
+                                        <option value="14">Imagen 14 de 16: por ESTABLECER</option>
+                                        <option value="15">Imagen 15 de 16: por ESTABLECER</option>
+                                        <option value="16">Imagen 16 de 16: por ESTABLECER</option>
+                                    </select>
+                                </div>
+                                <div class="field-group">
+                                    <label>Subir Nueva Fotografía (Máx 15 MB)</label>
+                                    <div class="image-upload-box">
+                                        <img id="prev-esp-selected" src="/laesh-web-assets-uipv1a/img/area-hematologia-dos.webp" alt="Rutina y Especialidades" class="img-preview-esp">
+                                        <input type="file" accept="image/*" id="file-esp-selected">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field-group">
+                                <label>Título de la Ficha Seleccionada</label>
+                                <input type="text" id="rutina-titulo-val" value="Hematología Especializada">
+                            </div>
+                            <div class="field-group">
+                                <label>Descripción de la Ficha Seleccionada</label>
+                                <textarea id="rutina-desc-val">Análisis morfológico de frotis sanguíneo y pruebas hematológicas de alta complejidad.</textarea>
+                                <div class="cms-action-help-bar">
+                                    <span>Si deseas desactivar esta ficha de la página de inicio, escribe <code>por ESTABLECER</code> en el título o haz clic aquí:</span>
+                                    <button type="button" id="btn-reset-rutina-establecer" class="btn-deactivate-ficha">
+                                        🚫 Desactivar Ficha
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================================== -->
+                <!-- PANEL 4: PROMOCIONES VIGENTES (IMAGEN BANNER) -->
+                <!-- ========================================== -->
+                <div id="panel-promociones" class="cms-panel" role="tabpanel" aria-labelledby="tab-promociones" tabindex="0">
+                    <h3 class="cms-h3">Actualización del Banner Promocional (#promociones)</h3>
+                                        <div class="operator-guide-box">
+                        <strong>📌 Especificaciones del Banner Promocional:</strong>
+                        <ul class="cms-ul">
+                            <li><strong>Sobreescritura:</strong> Reemplaza la imagen pública <code>PROMOCIONES 2026.webp</code>.</li>
+                            <li><strong>Dimensiones Ideales:</strong> <code>1200 x 600 px</code> o <code>1600 x 800 px</code> (Ratio horizontal 2:1).</li>
+                            <li><strong>Formatos & Peso:</strong> Formato WebP (óptimo), JPG o PNG de alta definición. Límite máximo: <strong>15 MB</strong>.</li>
+                        </ul>
+                    </div>
+
+                    
+                    <div class="editor-card">
+                        <div class="editor-card-header">
+                            <div class="card-title">Imagen del Banner Promocional 2026</div>
+                        </div>
+                        <div class="editor-card-body">
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing the Editing Tasks**
+
+I'm currently focused on the editing tasks, specifically starting with the `gestion-web.html` file. My attention is drawn to `#panel-hero`, where I'm implementing a combobox (`<select id="select-hero-slide">`) for the Banner Principal. The combobox will allow a user to choose between five slides, labeled Slide 1 to 5.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.082961780s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L199-249)</summary>
+
+**Path:** `Unknown file`
+
+```
+    }
+}
+
+/* ── Previews de imágenes ── */
+.img-preview-sm     { width: 120px; height: 65px; }
+.img-preview-esp    { width: 90px; height: 60px; object-fit: cover; }
+.img-preview-calidad{ width: 110px; height: 65px; object-fit: cover; }
+.img-preview-banner { width: 100%; max-width: 650px; height: auto; border-radius: 10px; }
+.img-preview-croquis{ width: 120px; height: 80px; }
+.img-upload-file    { margin-top: 10px; }
+.img-upload-box--col{ flex-direction: column; align-items: flex-start; }
+
+/* ── btn-logout mobile variant (sidebar-mobile-only) ── */
+.btn-logout--mobile {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #991b1b;
+    text-decoration: none;
+    background: #fee2e2;
+    padding: 9px 14px;
+    border-radius: 6px;
+    border: 1px solid #fca5a5;
+    min-height: 44px;
+}@media (hover: hover) and (pointer: fine) {
+    .btn-logout--mobile:hover {
+        background: #fca5a5;
+    color: #7f1d1d;
+    }
+}
+
+/* ── CMS Panel / Tab visibility (base rules — must be here, not in media query) ── */
+.cms-panel          { display: none; }
+.cms-panel.active   { display: block; }
+
+.cms-tabs {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 0;
+    border-bottom: 2px solid var(--border);
+    margin-bottom: 1.5rem;
+    scrollbar-width: none;
+}
+.cms-tabs::-webkit-scrollbar { display: none; }
+
+.cms-tab {
+    flex-shrink: 0;
+    padding: 0.6rem 1.1rem;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:26 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+/* gestion-web.js — lógica del portal de gestión web CMS (extraído de gestion-web.html) */
+        const panelLabelsGestion = {
+            'hero': 'Banner Principal',
+            'quienes-somos': 'Quiénes somos',
+            'especialidades': 'Estudios de Rutina',
+            'promociones': 'Promociones Vigentes',
+            'calidad': 'Calidad e Instalaciones',
+            'ubicacion': 'Ubicación y Contacto'
+        };
+
+        function showPanel(name) {
+            document.querySelectorAll('.cms-panel').forEach(p => p.classList.remove('active'));
+            const targetPanel = document.getElementById('panel-' + name);
+            if (targetPanel) targetPanel.classList.add('active');
+
+            // Sincronizar pestaña superior activa + ARIA (A-01)
+            document.querySelectorAll('.cms-tab').forEach(function(t) {
+                t.classList.remove('active');
+                t.setAttribute('aria-selected', 'false');
+                t.setAttribute('tabindex', '-1');
+            });
+            const targetTab = document.getElementById('tab-' + name);
+            if (targetTab) {
+                targetTab.classList.add('active');
+                targetTab.setAttribute('aria-selected', 'true');
+                targetTab.setAttribute('tabindex', '0');
+            }
+
+            // Actualizar breadcrumb
+            const bc = document.getElementById('header-bc-current');
+            if (bc && panelLabelsGestion[name]) bc.textContent = panelLabelsGestion[name];
+        }
+
+        function activateTab(el) {
+            document.querySelectorAll('.cms-tab').forEach(function(t) {
+                t.classList.remove('active');
+                t.setAttribute('aria-selected', 'false');
+                t.setAttribute('tabindex', '-1');
+            });
+            el.classList.add('active');
+            el.setAttribute('aria-selected', 'true');
+            el.setAttribute('tabindex', '0');
+        }
+
+        function activateNav(el) {
+            document.querySelectorAll('.sidebar .nav-item').forEach(n => n.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L159-199)</summary>
+
+**Path:** `Unknown file`
+
+```
+    // Botón guardar/publicar
+    var btnSave = document.getElementById('btn-cms-save-action');
+    if (btnSave) btnSave.addEventListener('click', simulateSave);
+
+    // File inputs → previewImage
+    var fileMap = {
+        'file-hero-1':           'prev-hero-1',
+        'file-banner-promos':    'prev-banner-promos',
+        'file-esp-selected':     'prev-esp-selected',
+        'file-calidad-selected': 'prev-calidad-selected',
+        'file-croquis':          'prev-croquis'
+    };
+    Object.keys(fileMap).forEach(function(inputId) {
+        var el = document.getElementById(inputId);
+        if (el) el.addEventListener('change', function() { previewImage(this, fileMap[inputId]); });
+    });
+
+    // Select carrusel rutina
+    var selRutina = document.getElementById('select-carrusel-rutina');
+    if (selRutina) selRutina.addEventListener('change', function() { cargarRutinaSeleccionada(this.value); });
+
+    // Botón desactivar / resetear ficha a por ESTABLECER
+    var btnResetRutina = document.getElementById('btn-reset-rutina-establecer');
+    if (btnResetRutina) {
+        btnResetRutina.addEventListener('click', function() {
+            var sel = document.getElementById('select-carrusel-rutina');
+            var val = sel ? sel.value : '1';
+            document.getElementById('rutina-titulo-val').value = 'por ESTABLECER';
+            document.getElementById('rutina-desc-val').value = '';
+            var prev = document.getElementById('prev-esp-selected');
+            if (prev) {
+                prev.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="90" height="60" viewBox="0 0 90 60"><rect width="100%" height="100%" fill="%23f1f5f9"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%2394a3b8" font-size="10" font-family="sans-serif">Sin Imagen</text></svg>';
+            }
+            if (rutinaDatos[val]) {
+                rutinaDatos[val].titulo = 'por ESTABLECER';
+                rutinaDatos[val].desc = '';
+                rutinaDatos[val].img = '';
+            }
+            if (sel && sel.options[sel.selectedIndex]) {
+                sel.options[sel.selectedIndex].text = 'Imagen ' + val + ' de 16: por ESTABLECER';
+            }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Implementing New Functions**
+
+I've decided to add `heroDatos` and `cargarHeroSlideSeleccionado(val)` to `gestion-web.js`. I'm also updating `fileMap` to reflect the new mapping: `'file-hero-selected': 'prev-hero-selected'`. Finally, I'll be using `replace_file` to edit `gestion-web.js`.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.082525787s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:26 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L184-219)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+    // File inputs → previewImage
+    var fileMap = {
+        'file-hero-1':           'prev-hero-1',
+        'file-banner-promos':    'prev-banner-promos',
+        'file-esp-selected':     'prev-esp-selected',
+        'file-calidad-selected': 'prev-calidad-selected',
+        'file-croquis':          'prev-croquis'
+    };
+    Object.keys(fileMap).forEach(function(inputId) {
+        var el = document.getElementById(inputId);
+        if (el) el.addEventListener('change', function() { previewImage(this, fileMap[inputId]); });
+    });
+
+    // Select carrusel rutina
+    var selRutina = document.getElementById('select-carrusel-rutina');
+    if (selRutina) selRutina.addEventListener('change', function() { cargarRutinaSeleccionada(this.value); });
+
+    // Botón desactivar / resetear ficha a por ESTABLECER
+    var btnResetRutina = document.getElementById('btn-reset-rutina-establecer');
+    if (btnResetRutina) {
+        btnResetRutina.addEventListener('click', function() {
+            var sel = document.getElementById('select-carrusel-rutina');
+            var val = sel ? sel.value : '1';
+            document.getElementById('rutina-titulo-val').value = 'por ESTABLECER';
+            document.getElementById('rutina-desc-val').value = '';
+            var prev = document.getElementById('prev-esp-selected');
+            if (prev) {
+                prev.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="90" height="60" viewBox="0 0 90 60"><rect width="100%" height="100%" fill="%23f1f5f9"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%2394a3b8" font-size="10" font-family="sans-serif">Sin Imagen</text></svg>';
+            }
+            if (rutinaDatos[val]) {
+                rutinaDatos[val].titulo = 'por ESTABLECER';
+                rutinaDatos[val].desc = '';
+                rutinaDatos[val].img = '';
+            }
+            if (sel && sel.options[sel.selectedIndex]) {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:26 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L149-184)</summary>
+
+**Path:** `Unknown file`
+
+```
+                                <label for="input-hero-transition">Tiempo de Transición / Autoplay del Slider (segundos)</label>
+                                <input type="number" name="hero_transition_time" id="input-hero-transition" min="1" max="60" value="5" step="1" required>
+                                <small class="cms-help-text">Tiempo en segundos para la transición automática entre diapositivas del carrusel principal (#inicio). Valor actual: 5 segundos.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="editor-card">
+                        <div class="editor-card-header">
+                            <div class="card-title">Slide 1: Presentación Institucional</div>
+                            <span class="operator-badge">Límite: 3 Banners | Dimensiones: 1920x1080 px (16:9) | Formato: WebP (Óptimo), JPG, PNG | Peso máx: 15 MB</span>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <label>Imagen de Fondo del Slide</label>
+                                <div class="image-upload-box">
+                                    <img id="prev-hero-1" src="/laesh-web-assets-uipv1a/img/recepcion.webp" alt="Slide 1" class="img-preview-sm">
+                                    <input type="file" accept="image/*" id="file-hero-1">
+                                </div>
+                            </div>
+                            <div class="field-group">
+                                <label>Etiqueta Superior</label>
+                                <input type="text" name="hero_slide1_etiqueta" value="Un laboratorio seguro con Resultados Confiables">
+                            </div>
+                            <div class="field-group">
+                                <label>Título Principal</label>
+                                <input type="text" name="hero_slide1_titulo" required value="Laboratorio de Especialidades Hematológicas">
+                            </div>
+                            <div class="field-group">
+                                <label>Descripción Breve</label>
+                                <textarea name="hero_slide1_desc" required>Ofrecemos servicios integrales de análisis clínicos especializados con precisión científica y calidez humana.</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:26 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L389-414)</summary>
+
+**Path:** `Unknown file`
+
+```
+                            <li><strong>Formato Optimizado:</strong> Se recomienda subir imágenes en formato <strong>WebP</strong> (óptimo para carga ultrarrápida), aunque se admiten archivos JPG o PNG de alta resolución.</li>
+                            <li><strong>Dimensiones Recomendadas:</strong> Proporción <strong>4:3 o 16:9</strong> (resolución ideal: <code>1200 x 800 px</code> o <code>800 x 600 px</code>). Límite de tamaño: <strong>15 MB por imagen</strong>.</li>
+                        </ul>
+                    </div>
+                    <!-- Ficha Unificada de Captura: Rutina y Especialidades -->
+                    <div class="editor-card">
+                        <div class="editor-card-header">
+                            <div class="card-title">Ficha 1: Rutina y Especialidades</div>
+                            <span class="operator-badge">Límite: 16 imágenes | Dimensiones: 1200x800 px (4:3) | Formato: WebP (Óptimo), JPG, PNG | Peso máx: 15 MB</span>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-row">
+                                <div class="field-group">
+                                    <label>Seleccionar Imagen del Carrusel a Actualizar (1 al 16)</label>
+                                    <select id="select-carrusel-rutina">
+                                        <option value="1">Imagen 1 de 16: Hematología Especializada</option>
+                                        <option value="2">Imagen 2 de 16: Química Clínica Avanzada</option>
+                                        <option value="3">Imagen 3 de 16: Microbiología y Cultivos</option>
+                                        <option value="4">Imagen 4 de 16: Uroanálisis y Sedimentos</option>
+                                        <option value="5">Imagen 5 de 16: Hemostasia y Coagulación</option>
+                                        <option value="6">Imagen 6 de 16: Pruebas Especiales</option>
+                                        <option value="7">Imagen 7 de 16: Pre-analítica</option>
+                                        <option value="8">Imagen 8 de 16: Toma de Muestras I</option>
+                                        <option value="9">Imagen 9 de 16: Toma de Muestras II</option>
+                                        <option value="10">Imagen 10 de 16: Toma Pediátrica</option>
+                                        <option value="11">Imagen 11 de 16: Toma de Cultivos</option>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:27 pm
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:27 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L479-519)</summary>
+
+**Path:** `Unknown file`
+
+```
+                                <label>Subtítulo / Mensaje Promocional</label>
+                                <input type="text" name="promo_subtitulo" value="Aprovecha nuestras tarifas preferenciales y paquetes diseñados para ti.">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================================== -->
+                <!-- PANEL 5: CALIDAD E INSTALACIONES           -->
+                <!-- ========================================== -->
+                <div id="panel-calidad" class="cms-panel" role="tabpanel" aria-labelledby="tab-calidad" tabindex="0">
+                    <h3 class="cms-h3">Galería de Fotos de Instalaciones y Calidad (#calidad)</h3>
+                    
+                                        <!-- Leyenda Operativa de Ayuda -->
+                    <div class="operator-guide-box">
+                        <strong>📌 Indicaciones de Carga para la Galería de Calidad e Instalaciones:</strong>
+                        <ul class="cms-ul">
+                            <li><strong>Sobreescritura Directa:</strong> Cada fotografía subida reemplaza directamente la foto previa en la posición elegida (1 a 15).</li>
+                            <li><strong>Formato Recomendado:</strong> Formato <strong>WebP</strong> comúnmente optimizado sin pérdida de nitidez clínica.</li>
+                            <li><strong>Dimensiones Sugeridas:</strong> <code>1200 x 800 px</code> o <code>1920 x 1080 px</code>. Tamaño máximo de archivo: <strong>15 MB</strong>.</li>
+                        </ul>
+                    </div>
+                    <!-- Ficha Unificada de Captura: Calidad -->
+                    <div class="editor-card">
+                        <div class="editor-card-header">
+                            <div class="card-title">Ficha 2: Calidad</div>
+                            <span class="operator-badge">Límite: 15 imágenes | Dimensiones: 1200x800 px (4:3) | Formato: WebP (Óptimo), JPG, PNG | Peso máx: 15 MB</span>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-row">
+                                <div class="field-group">
+                                    <label>Seleccionar Imagen de Galería a Actualizar (1 al 15)</label>
+                                    <select id="select-carrusel-calidad">
+                                        <option value="1">Imagen 1 de 15: Área de Hematología I</option>
+                                        <option value="2">Imagen 2 de 15: Área de Hematología II</option>
+                                        <option value="3">Imagen 3 de 15: Área de Coagulación</option>
+                                        <option value="4">Imagen 4 de 15: Química Clínica I</option>
+                                        <option value="5">Imagen 5 de 15: Química Clínica II</option>
+                                        <option value="6">Imagen 6 de 15: Área de Bacteriología I</option>
+                                        <option value="7">Imagen 7 de 15: Área de Bacteriología II</option>
+                                        <option value="8">Imagen 8 de 15: Área de Uroanálisis</option>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:27 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:27 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:27 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+Para todas las demas pestañas , en sus contenidos aplica la estructura, estilos de titulos, subtitulos, espacios , tipografia, etc, similar y mejorado a lo que ya aplicaste en Banner Principal.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `gestion-web.css`
+**Language:** css
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Reviewing Tab Consistency**
+
+I'm now diving into the design consistency across all six tabs, aiming to replicate and enhance the aesthetic and structural elements established in the main banner. Focusing on titling, subheadings, spacing, and typography, I'm analyzing each tab's current layout against the banner as a benchmark.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.069594217s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L184-299)</summary>
+
+**Path:** `Unknown file`
+
+```
+                                        <label>Etiqueta Superior (Badge &lt;span&gt; · 25–35 char)</label>
+                                        <input type="text" id="input-hero-badge" name="hero_slide_badge" value="Bienvenido a Nuestra Institución" maxlength="40">
+                                    </div>
+                                    <div class="field-group">
+                                        <label>Título Principal (&lt;h1&gt;/&lt;h2&gt; · 35–45 char)</label>
+                                        <input type="text" id="input-hero-title" name="hero_slide_title" required value="Bienvenido a LAESH® — Diagnósticos de Confianza" maxlength="60">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="field-group">
+                                <label>Párrafo Descriptivo (&lt;p&gt; · Homologado a 130–150 char para simetría de tarjeta)</label>
+                                <textarea id="input-hero-desc" name="hero_slide_desc" required class="textarea-100">Trabajamos para proporcionar información diagnóstica confiable que ayude al médico a tomar mejores decisiones y al paciente a recibir atención oportuna.</textarea>
+                            </div>
+
+                            <div class="field-row">
+                                <div class="field-group">
+                                    <label>Texto del Botón CTA Blanco (2–3 palabras)</label>
+                                    <input type="text" id="input-hero-btn-text" name="hero_slide_btn_text" value="Conoce los Servicios" maxlength="30">
+                                </div>
+                                <div class="field-group">
+                                    <label>Enlace del Botón CTA</label>
+                                    <input type="text" id="input-hero-btn-link" name="hero_slide_btn_link" value="#especialidades">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================================== -->
+                <!-- PANEL 2: QUIÉNES SOMOS                     -->
+                <!-- ========================================== -->
+                <div id="panel-quienes-somos" class="cms-panel" role="tabpanel" aria-labelledby="tab-quienes-somos" tabindex="0">
+                    <h3 class="cms-h3">Edición de las 4 Fichas de Quiénes Somos (#acerca-de)</h3>
+                    <p class="cms-p">Modifica los pilares institucionales expuestos en la sección Quiénes Somos.</p>
+
+                    <div class="grid-2col">
+                        <!-- Ficha 1 -->
+                        <div class="editor-card">
+                            <div class="editor-card-header">
+                                <div class="card-title">Ficha 1: Historia y Quiénes Somos</div>
+                            </div>
+                            <div class="editor-card-body">
+                                <div class="field-group">
+                                    <label>Título de la Ficha</label>
+                                    <input type="text" name="acerca_ficha1_titulo" required value="Historia y Quiénes Somos">
+                                </div>
+                                <div class="field-group">
+                                    <label>Contenido de Historia / Trayectoria</label>
+                                    <textarea class="textarea-historia" name="acerca_ficha1_texto" required>Fundado con la misión de brindar diagnósticos hematológicos y clínicos de alta precisión en la región de la Mixteca, LAESH cuenta con tecnología automatizada y personal altamente calificado.</textarea>
+                                    <small class="cms-help-text">Puedes separar el contenido en varios párrafos utilizando un salto de renglón (Enter). Cada renglón o párrafo se renderizará distribuido holgadamente en la ficha de la página.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ficha 2 -->
+                        <div class="editor-card">
+                            <div class="editor-card-header">
+                                <div class="card-title">Ficha 2: Nuestra Misión</div>
+                            </div>
+                            <div class="editor-card-body">
+                                <div class="field-group">
+                                    <label>Título de la Ficha</label>
+                                    <input type="text" name="acerca_ficha2_titulo" required value="Nuestra Misión">
+                                </div>
+                                <div class="field-group">
+                                    <label>Declaración de Misión</label>
+                                    <textarea class="textarea-100" name="acerca_ficha2_texto">Proporcionar un servicio de análisis clínicos con resultados confiables y oportunos para auxiliar en el diagnóstico de enfermedades, sobre una base de ética profesional y alto compromiso con la calidad.</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ficha 3 -->
+                        <div class="editor-card">
+                            <div class="editor-card-header">
+                                <div class="card-title">Ficha 3: Nuestra Visión</div>
+                            </div>
+                            <div class="editor-card-body">
+                                <div class="field-group">
+                                    <label>Título de la Ficha</label>
+                                    <input type="text" name="acerca_ficha3_titulo" required value="Nuestra Visión">
+                                </div>
+                                <div class="field-group">
+                                    <label>Declaración de Visión</label>
+                                    <textarea class="textarea-100" name="acerca_ficha3_texto">Ser un Laboratorio Líder que proporcione los servicios más especializados y de alta calidad a médicos y pacientes.</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ficha 4 -->
+                        <div class="editor-card">
+                            <div class="editor-card-header">
+                                <div class="card-title">Ficha 4: Nuestros Valores</div>
+                            </div>
+                            <div class="editor-card-body">
+                                <div class="field-group">
+                                    <label>Título de la Ficha</label>
+                                    <input type="text" name="acerca_ficha4_titulo" required value="Nuestros Valores">
+                                </div>
+                                <div class="field-group">
+                                    <label>Valores Institucionales</label>
+                                    <textarea class="textarea-100" name="acerca_ficha4_texto">Rigurosidad científica, empatía y calidez en el trato, integridad ética en los diagnósticos, responsabilidad social y constante mejora de nuestros análisis.</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================================== -->
+                <!-- PANEL 3: ESTUDIOS DE RUTINA Y ESPECIALIDADES -->
+                <!-- ========================================== -->
+                <div id="panel-especialidades" class="cms-panel" role="tabpanel" aria-labelledby="tab-especialidades" tabindex="0">
+                                 <!-- Editor de los 4 Grupos / Abanicos del Catálogo 2026 -->
+                    <div class="editor-card mb-4">
+                        <div class="editor-card-header">
+                            <div class="card-title">Abanico 1: Rutina General</div>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L299-479)</summary>
+
+**Path:** `Unknown file`
+
+```
+                            <div class="card-title">Abanico 1: Rutina General</div>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <label>Título del Abanico 1</label>
+                                <input type="text" name="estudios_cg1_titulo" value="Rutina General — Hematología, Química Clínica, Electrolitos, Uroanálisis, Coagulación" required>
+                            </div>
+                            <div class="field-group">
+                                <label>Fichas / Categorías Internas y Estudios del Abanico 1 (Secuencia por Renglones)</label>
+                                <textarea class="textarea-110" name="estudios_cg1_fichas" required>[Hematología] Citometría Hemática, Grupo y RH, Plaquetas, Velocidad de Sedimentación Globular, Reticulocitos, Perfil de Hierro, Hierro sérico, Inducción Drepanocitos
+[Química Clínica] Química Sanguínea 3, Química Sanguínea 7, Perfil Bioquímico 15, Perfil Bioquímico 24, Perfil Bioquímico 30, Perfil Bioquímico 35, Perfil Bioquímico 45, Glucosa sérica, Creatinina sérica, Colesterol Total, Triglicéridos
+[Electrolitos Séricos] E.S. 3 Elementos, E.S. 4 Elementos, E.S. Completos, Calcio sérico, Fósforo y Magnesio sérico, Bicarbonato y CO2
+[Uroanálisis] EGO + Radio Prot/Crea, EGO Especializado, Antidoping 5 elem., Antidoping 12 elem.
+[Coagulación] Perfil de Coagulación, Tiempo de Protrombina/INR, Tiempo de Tromboplastina, Tiempos corregidos, Fibrinógeno, Dímero D, Tiempo de sangrado, Tiempo de coagulación
+[Lípidos] Perfil de Lípidos I, Perfil de Lípidos II, Perfil Aterogénico</textarea>
+                                <small class="cms-help-text">El orden de las líneas en este campo define la secuencia de despliegue de las fichas de Derecha a Izquierda por defecto. Cada línea entre corchetes <code>[Nombre Categoría]</code> genera una ficha.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="editor-card mb-4">
+                        <div class="editor-card-header">
+                            <div class="card-title">Abanico 2: Función de Órganos</div>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <label>Título del Abanico 2</label>
+                                <input type="text" name="estudios_cg2_titulo" value="Función de Órganos — Hepática, Tiroidea, Pancreática, Renal, Cardiaca, Gasometría" required>
+                            </div>
+                            <div class="field-group">
+                                <label>Fichas / Categorías Internas y Estudios del Abanico 2 (Secuencia por Renglones)</label>
+                                <textarea class="textarea-110" name="estudios_cg2_fichas" required>[Función Hepática] PFH Básico, PFH Completo, Transaminasas séricas, Gamma Glutamil Transpeptidasa, Proteínas Totales, Albumina sérica
+[Función Tiroidea] Perfil Tiroideo I, Perfil Tiroideo II, Perfil Tiroideo III, Perfil Tiroideo IV, TSH, Ac. Anti Tiroideos I, Ac. Anti Tiroideos II, Ac. Anti Receptor de TSH, Tiroglobulina
+[Función Pancreática] Amilasa sérica, Lipasa sérica
+[Función Renal y Orina 24 h] Cistatina C, Depuración de creatinina, Proteínas totales en orina, Microalbuminuria, Calcio en orina
+[Función Cardiaca y Muscular] Triage cardiaco, Perfil cardiaco completo, Troponina I, Troponina T, NT-pro BNP, PCR-US, Mioglobina, CK-MB, CK Total
+[Gasometría Arterial y Venosa] Gasometría Arterial Completa, Gasometría Venosa Completa</textarea>
+                                <small class="cms-help-text">El orden de las líneas en este campo define la secuencia de despliegue de las fichas de Derecha a Izquierda por defecto. Cada línea entre corchetes <code>[Nombre Categoría]</code> genera una ficha.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="editor-card mb-4">
+                        <div class="editor-card-header">
+                            <div class="card-title">Abanico 3: Hormonas, Diabetes e Inmunología</div>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <label>Título del Abanico 3</label>
+                                <input type="text" name="estudios_cg3_titulo" value="Hormonas, Diabetes e Inmunología — Perfil Ginecológico, Masculino, Diabetes, Inmunología, Reumatología" required>
+                            </div>
+                            <div class="field-group">
+                                <label>Fichas / Categorías Internas y Estudios del Abanico 3 (Secuencia por Renglones)</label>
+                                <textarea class="textarea-110" name="estudios_cg3_fichas" required>[Hormonas Femeninas y Masculinas] Perfil Ginecológico I, Perfil Ginecológico II, Perfil Hormonal Masculino II, FSH, LH, PRL, PROG, TESTOSTERONA Total, TESTOSTERONA Libre, DHEA-S, E2, Cortisol, ACTH, HGC Cuantitativa, AMH, PTH-i
+[Diabetes: Diagnóstico y Control] Hemoglobina glucosilada (HB A1c), Insulina, Índice de HOMA, Péptido C, Prueba de Tolerancia a la glucosa, Test O'Sullivan
+[Inmunología] Ac. Anti HIV 1/HIV 2, V.D.R.L., Reacciones Febriles, Hepatitis A IgM, Hepatitis A IgG, Hepatitis B, Hepatitis C, Prueba de embarazo, Panel viral Respiratorio, Influenza A y B, COVID-19 Ag, Ac. SARS-CoV-2, Ac. DENGUE, Coombs Directo/Indirecto, Procalcitonina, Quantiferon TB
+[Reumatología y Autoinmunidad] Perfil Reumático, Proteína C reactiva, Factor Reumatoide, Antiestreptolisinas, CCP, Complementos C3/C4, Ac. Anti Nucleares, Ac. Anti DNA, Ac. Anti ENA, Ac. Anti SSA/Ro y SSB/La, Miositis, Esclerosis, Perfil de Inmunoglobulinas
+[Diversos] Inmunoglobulina E, Vitamina D, Somatomedina C, Papanicolaou</textarea>
+                                <small class="cms-help-text">El orden de las líneas en este campo define la secuencia de despliegue de las fichas de Derecha a Izquierda por defecto. Cada línea entre corchetes <code>[Nombre Categoría]</code> genera una ficha.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="editor-card mb-4">
+                        <div class="editor-card-header">
+                            <div class="card-title">Abanico 4: Bacteriología, Marcadores y Biología Molecular</div>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <label>Título del Abanico 4</label>
+                                <input type="text" name="estudios_cg4_titulo" value="Bacteriología, Marcadores Tumorales, Parasitología, Citroquímicos, Biología Molecular, Fertilidad" required>
+                            </div>
+                            <div class="field-group">
+                                <label>Fichas / Categorías Internas y Estudios del Abanico 4 (Secuencia por Renglones)</label>
+                                <textarea class="textarea-110" name="estudios_cg4_fichas" required>[Bacteriología] Cultivo de orina con MIC, Cultivo de Ex. Faringeo con MIC, Cultivo de Ex. Vaginal con MIC, Cultivo Uretral con MIC, Cultivo de Heces con MIC, Cultivo de Lesión con MIC, Cultivo de Expectoración con MIC, Hemocultivo con MIC, Cultivo Micológico
+[Marcadores Tumorales] PSA TOTAL, PSA LIBRE, CEA, AFP, CA-125, CA-15-3, CA-19-9, Perfil Tumoral Femenino, Perfil Tumoral Masculino, Tumoral Completo
+[Parasitología] Coproparasitoscópico 3 muestras, Coprológico completo, Coprológico Especial, Sangre Oculta en heces, Antígeno de H. Pylori, Calprotectina, Lactoferrina, Clostridium difficile
+[Citroquímicos de Líquidos] Citoquímico LCR, Citoquímico Sinovial, Citoquímico Pleural, Citoquímico Ascitis, Citoquímico Diálisis, Citoquímico Bronquial, Citoquímico Pericárdico
+[Biología Molecular (PCR)] PCR Papiloma Humano (VPH), PCR-Mycobacterium, PCR-Patógenos respiratorios, PCR-Meningitis viral, PCR SARS CoV-2
+[Fertilidad] Espermatobioscopia directa</textarea>
+                                <small class="cms-help-text">El orden de las líneas en este campo define la secuencia de despliegue de las fichas de Derecha a Izquierda por defecto. Cada línea entre corchetes <code>[Nombre Categoría]</code> genera una ficha.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                                        <!-- Leyenda Operativa de Ayuda -->
+                    <div class="operator-guide-box">
+                        <strong>📌 Indicaciones de Carga para el Operador Web:</strong>
+                        <ul class="cms-ul">
+                            <li><strong>Sobreescritura Directa:</strong> Al publicar una nueva fotografía en el índice seleccionado (1 al 12), la imagen previa se <em>sobreescribe automáticamente</em> en el servidor.</li>
+                            <li><strong>Formato Optimizado:</strong> Se recomienda subir imágenes en formato <strong>WebP</strong> (óptimo para carga ultrarrápida), aunque se admiten archivos JPG o PNG de alta resolución.</li>
+                            <li><strong>Dimensiones Recomendadas:</strong> Proporción <strong>4:3 o 16:9</strong> (resolución ideal: <code>1200 x 800 px</code> o <code>800 x 600 px</code>). Límite de tamaño: <strong>15 MB por imagen</strong>.</li>
+                        </ul>
+                    </div>
+                    <!-- Ficha Unificada de Captura: Rutina y Especialidades -->
+                    <div class="editor-card">
+                        <div class="editor-card-header editor-card-header--padded">
+                            <div class="card-title">Ficha 1: Rutina y Especialidades</div>
+                            <span class="operator-badge operator-badge-block">Límite: 16 imágenes | Dimensiones: 1200x800 px (4:3) | Formato: WebP (Óptimo), JPG, PNG | Peso máx: 15 MB</span>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Seleccionar Imagen del Carrusel a Actualizar (1 al 16)</h4>
+                                <select id="select-carrusel-rutina" class="form-input-sm form-input-sm--bg">
+                                        <option value="1">Imagen 1 de 16: Hematología Especializada</option>
+                                        <option value="2">Imagen 2 de 16: Química Clínica Avanzada</option>
+                                        <option value="3">Imagen 3 de 16: Microbiología y Cultivos</option>
+                                        <option value="4">Imagen 4 de 16: Uroanálisis y Sedimentos</option>
+                                        <option value="5">Imagen 5 de 16: Hemostasia y Coagulación</option>
+                                        <option value="6">Imagen 6 de 16: Pruebas Especiales</option>
+                                        <option value="7">Imagen 7 de 16: Pre-analítica</option>
+                                        <option value="8">Imagen 8 de 16: Toma de Muestras I</option>
+                                        <option value="9">Imagen 9 de 16: Toma de Muestras II</option>
+                                        <option value="10">Imagen 10 de 16: Toma Pediátrica</option>
+                                        <option value="11">Imagen 11 de 16: Toma de Cultivos</option>
+                                        <option value="12">Imagen 12 de 16: Recepción Técnica</option>
+                                        <option value="13">Imagen 13 de 16: por ESTABLECER</option>
+                                        <option value="14">Imagen 14 de 16: por ESTABLECER</option>
+                                        <option value="15">Imagen 15 de 16: por ESTABLECER</option>
+                                        <option value="16">Imagen 16 de 16: por ESTABLECER</option>
+                                    </select>
+                                </div>
+                                <div class="field-group">
+                                    <label>Subir Nueva Fotografía (Máx 15 MB)</label>
+                                    <div class="image-upload-box">
+                                        <img id="prev-esp-selected" src="/laesh-web-assets-uipv1a/img/area-hematologia-dos.webp" alt="Rutina y Especialidades" class="img-preview-esp">
+                                        <input type="file" accept="image/*" id="file-esp-selected">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field-group">
+                                <label>Título de la Ficha Seleccionada</label>
+                                <input type="text" id="rutina-titulo-val" value="Hematología Especializada">
+                            </div>
+                            <div class="field-group">
+                                <label>Descripción de la Ficha Seleccionada</label>
+                                <textarea id="rutina-desc-val">Análisis morfológico de frotis sanguíneo y pruebas hematológicas de alta complejidad.</textarea>
+                                <div class="cms-action-help-bar">
+                                    <span>Si deseas desactivar esta ficha de la página de inicio, escribe <code>por ESTABLECER</code> en el título o haz clic aquí:</span>
+                                    <button type="button" id="btn-reset-rutina-establecer" class="btn-deactivate-ficha">
+                                        🚫 Desactivar Ficha
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================================== -->
+                <!-- PANEL 4: PROMOCIONES VIGENTES (IMAGEN BANNER) -->
+                <!-- ========================================== -->
+                <div id="panel-promociones" class="cms-panel" role="tabpanel" aria-labelledby="tab-promociones" tabindex="0">
+                    <h3 class="cms-h3">Actualización del Banner Promocional (#promociones)</h3>
+                                        <div class="operator-guide-box">
+                        <strong>📌 Especificaciones del Banner Promocional:</strong>
+                        <ul class="cms-ul">
+                            <li><strong>Sobreescritura:</strong> Reemplaza la imagen pública <code>PROMOCIONES 2026.webp</code>.</li>
+                            <li><strong>Dimensiones Ideales:</strong> <code>1200 x 600 px</code> o <code>1600 x 800 px</code> (Ratio horizontal 2:1).</li>
+                            <li><strong>Formatos & Peso:</strong> Formato WebP (óptimo), JPG o PNG de alta definición. Límite máximo: <strong>15 MB</strong>.</li>
+                        </ul>
+                    </div>
+
+                    
+                    <div class="editor-card">
+                        <div class="editor-card-header">
+                            <div class="card-title">Imagen del Banner Promocional 2026</div>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <label>Archivo de Imagen del Banner (WEBP / PNG / JPG)</label>
+                                <div class="image-upload-box img-upload-box--col">
+                                    <img id="prev-banner-promos" src="/laesh-web-assets-uipv1a/img/promociones-2026.webp" alt="Banner Promociones" class="img-preview-banner">
+                                    <input type="file" accept="image/*" id="file-banner-promos">
+                                </div>
+                            </div>
+                            <div class="field-group">
+                                <label>Título de la Sección</label>
+                                <input type="text" name="promo_titulo" required value="Promociones Vigentes">
+                            </div>
+                            <div class="field-group">
+                                <label>Subtítulo / Mensaje Promocional</label>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L479-634)</summary>
+
+**Path:** `Unknown file`
+
+```
+                                <label>Subtítulo / Mensaje Promocional</label>
+                                <input type="text" name="promo_subtitulo" value="Aprovecha nuestras tarifas preferenciales y paquetes diseñados para ti.">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================================== -->
+                <!-- PANEL 5: CALIDAD E INSTALACIONES           -->
+                <!-- ========================================== -->
+                <div id="panel-calidad" class="cms-panel" role="tabpanel" aria-labelledby="tab-calidad" tabindex="0">
+                    <h3 class="cms-h3">Galería de Fotos de Instalaciones y Calidad (#calidad)</h3>
+                    
+                                        <!-- Leyenda Operativa de Ayuda -->
+                    <div class="operator-guide-box">
+                        <strong>📌 Indicaciones de Carga para la Galería de Calidad e Instalaciones:</strong>
+                        <ul class="cms-ul">
+                            <li><strong>Sobreescritura Directa:</strong> Cada fotografía subida reemplaza directamente la foto previa en la posición elegida (1 a 15).</li>
+                            <li><strong>Formato Recomendado:</strong> Formato <strong>WebP</strong> comúnmente optimizado sin pérdida de nitidez clínica.</li>
+                            <li><strong>Dimensiones Sugeridas:</strong> <code>1200 x 800 px</code> o <code>1920 x 1080 px</code>. Tamaño máximo de archivo: <strong>15 MB</strong>.</li>
+                        </ul>
+                    </div>
+                    <!-- Ficha Unificada de Captura: Calidad -->
+                    <div class="editor-card">
+                        <div class="editor-card-header editor-card-header--padded">
+                            <div class="card-title">Ficha 2: Calidad e Instalaciones</div>
+                            <span class="operator-badge operator-badge-block">Límite: 15 imágenes | Dimensiones: 1200x800 px (4:3) | Formato: WebP (Óptimo), JPG, PNG | Peso máx: 15 MB</span>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Seleccionar Imagen de Galería a Actualizar (1 al 15)</h4>
+                                <select id="select-carrusel-calidad" class="form-input-sm form-input-sm--bg">
+                                        <option value="1">Imagen 1 de 15: Área de Hematología I</option>
+                                        <option value="2">Imagen 2 de 15: Área de Hematología II</option>
+                                        <option value="3">Imagen 3 de 15: Área de Coagulación</option>
+                                        <option value="4">Imagen 4 de 15: Química Clínica I</option>
+                                        <option value="5">Imagen 5 de 15: Química Clínica II</option>
+                                        <option value="6">Imagen 6 de 15: Área de Bacteriología I</option>
+                                        <option value="7">Imagen 7 de 15: Área de Bacteriología II</option>
+                                        <option value="8">Imagen 8 de 15: Área de Uroanálisis</option>
+                                        <option value="9">Imagen 9 de 15: Área de Centrifugación</option>
+                                        <option value="10">Imagen 10 de 15: Estudios Especiales</option>
+                                        <option value="11">Imagen 11 de 15: Toma de Muestras</option>
+                                        <option value="12">Imagen 12 de 15: Toma Pediátrica</option>
+                                        <option value="13">Imagen 13 de 15: Toma de Cultivos</option>
+                                        <option value="14">Imagen 14 de 15: Recepción y Orientación</option>
+                                        <option value="15">Imagen 15 de 15: Toma de Muestras Clínicas</option>
+                                    </select>
+                                </div>
+                                <div class="field-group">
+                                    <label>Subir Nueva Fotografía de Instalación / Calidad (Máx 15 MB)</label>
+                                    <div class="image-upload-box">
+                                        <img id="prev-calidad-selected" src="/laesh-web-assets-uipv1a/img/recepcion.webp" alt="Foto de Instalaciones" class="img-preview-calidad">
+                                        <input type="file" accept="image/*" id="file-calidad-selected">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field-group">
+                                <label>Título de la Área / Instalación</label>
+                                <input type="text" id="calidad-titulo-val" value="Área de Hematología I">
+                            </div>
+                            <div class="field-group">
+                                <label>Descripción del Proceso / Equipo</label>
+                                <textarea id="calidad-desc-val">Análisis de biometría hemática y células sanguíneas con rigor científico.</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================================== -->
+                <!-- PANEL 6: UBICACIÓN Y CONTACTO              -->
+                <!-- ========================================== -->
+                <div id="panel-ubicacion" class="cms-panel" role="tabpanel" aria-labelledby="tab-ubicacion" tabindex="0">
+                    <h3 class="cms-h3">Datos de Ubicación, Teléfonos y Mapa (#ubicacion)</h3>
+                    
+                    <div class="editor-card">
+                        <div class="editor-card-header">
+                            <div class="card-title">Información de Contacto y Horarios</div>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <label>Dirección Física</label>
+                                <input type="text" value="Azucenas 8, Jardines del Sur, 69007 Heroica Cdad. de Huajuapan de León, Oax., México">
+                            </div>
+                            <div class="field-row">
+                                <div class="field-group">
+                                    <label>Teléfono Directo</label>
+                                    <input type="tel" value="953 6 88 76 94">
+                                </div>
+                                <div class="field-group">
+                                    <label>Correo Electrónico</label>
+                                    <input type="email" value="lab_laesh@hotmail.com">
+                                </div>
+                            </div>
+                            <div class="field-group">
+                                <label>Horario de Atención</label>
+                                <input type="text" value="Lunes a sábado: 7:00 a.m. – 9:00 p.m. | Domingo: 7:00 a.m. – 3:00 p.m.">
+                            </div>
+                            <div class="field-group">
+                                <label>Responsable Sanitario</label>
+                                <input type="text" value="Q.F.B. y E.H.D.L. Jacob Santiago Blanco. Céd. Prof. 3609293 | Céd. Esp. 8935780">
+                            </div>
+                            <div class="field-group">
+                                <label>Imagen del Croquis de Ubicación</label>
+                                <div class="image-upload-box">
+                                    <img id="prev-croquis" src="/laesh-web-assets-uipv1a/img/mapa-laesh.webp" alt="Croquis" class="img-preview-croquis">
+                                    <input type="file" accept="image/*" id="file-croquis">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+
+            <!-- Región Lateral Derecha: Notificaciones (Scope 30) -->
+            <aside class="sidebar-right" id="sidebar-right">
+                <div class="sidebar-right-toggle-row">
+                    <!-- Campana siempre visible + badge de conteo -->
+                    <div class="bell-wrap" id="bell-wrap-notif" title="Notificaciones">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                        <span class="bell-badge" id="badge-notif-cms" aria-label="Notificaciones pendientes">0</span>
+                    </div>
+                    <button type="button" class="sidebar-right-toggle" id="sidebar-right-toggle" title="Expandir / Colapsar notificaciones">
+                        <svg id="right-rail-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                    </button>
+                </div>
+                <div class="sidebar-right-content">
+                    <div class="sidebar-right-header">
+                        <h3 class="txt-main fw-600 font-mosquito notif-title">Notificaciones</h3>
+                    </div>
+                    <div class="sidebar-right-body">
+                        <!-- Contenido de notificaciones para ser utilizado posteriormente -->
+                        <p class="txt-muted notif-empty">No hay nuevas notificaciones</p>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+    <!-- Toast de confirmación -->
+    <div class="cms-toast" id="toast">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        ¡Cambios publicados exitosamente en <strong>laesh.mx</strong>!
+    </div>
+
+    <!-- app.js: inyecta nav-hamburger en portal-access-header (necesario para menú móvil) -->
+    <script src="/laesh-web-assets-uipv1a/js/app.js?v=20260817b" defer></script>
+    <!-- sidebar-rail.js: toggle colapsar/expandir + syncPad -->
+    <script src="/laesh-web-assets-uipv1a/js/portal-footer.js?v=20260817c" defer></script>
+    <script src="/laesh-web-assets-uipv1a/js/sidebar-rail.js" defer></script>
+    <script src="/laesh-web-assets-uipv1a/js/gestion-web.js?v=20260817c" defer></script>
+    <!-- P1-fix: Service Worker -->
+
+</body>
+</html>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Refactoring Needs**
+
+I'm now diving into the refactoring required for `gestion-web.html`, specifically focusing on Panel 2 (Quiénes Somos). I've noted that `.editor-card-header--padded` and `.operator-badge-block` need to be added. I'll need to go through the other panels soon.
+
+
+**Updating Panel Specifications**
+
+I've moved on to updating Panels 3 through 6 in `gestion-web.html`. I'm now working to add required classes and headings. For Panel 3, I added `.editor-card-header--padded` and cms headings, and updated ficha 1. Panels 4, 5, and 6 now have similar updates, and have also received `.operator-badge-block` where applicable. I'm focusing on consistency in grid usage and field labeling. Finally, I will execute replace file content on gestion web to update the entire file.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.202048595s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:34 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L299-394)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+                <!-- ========================================== -->
+                <!-- PANEL 3: ESTUDIOS DE RUTINA Y ESPECIALIDADES -->
+                <!-- ========================================== -->
+                <div id="panel-especialidades" class="cms-panel" role="tabpanel" aria-labelledby="tab-especialidades" tabindex="0">
+                                 <!-- Editor de los 4 Grupos / Abanicos del Catálogo 2026 -->
+                    <div class="editor-card mb-4">
+                        <div class="editor-card-header">
+                            <div class="card-title">Abanico 1: Rutina General</div>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <label>Título del Abanico 1</label>
+                                <input type="text" name="estudios_cg1_titulo" value="Rutina General — Hematología, Química Clínica, Electrolitos, Uroanálisis, Coagulación" required>
+                            </div>
+                            <div class="field-group">
+                                <label>Fichas / Categorías Internas y Estudios del Abanico 1 (Secuencia por Renglones)</label>
+                                <textarea class="textarea-110" name="estudios_cg1_fichas" required>[Hematología] Citometría Hemática, Grupo y RH, Plaquetas, Velocidad de Sedimentación Globular, Reticulocitos, Perfil de Hierro, Hierro sérico, Inducción Drepanocitos
+[Química Clínica] Química Sanguínea 3, Química Sanguínea 7, Perfil Bioquímico 15, Perfil Bioquímico 24, Perfil Bioquímico 30, Perfil Bioquímico 35, Perfil Bioquímico 45, Glucosa sérica, Creatinina sérica, Colesterol Total, Triglicéridos
+[Electrolitos Séricos] E.S. 3 Elementos, E.S. 4 Elementos, E.S. Completos, Calcio sérico, Fósforo y Magnesio sérico, Bicarbonato y CO2
+[Uroanálisis] EGO + Radio Prot/Crea, EGO Especializado, Antidoping 5 elem., Antidoping 12 elem.
+[Coagulación] Perfil de Coagulación, Tiempo de Protrombina/INR, Tiempo de Tromboplastina, Tiempos corregidos, Fibrinógeno, Dímero D, Tiempo de sangrado, Tiempo de coagulación
+[Lípidos] Perfil de Lípidos I, Perfil de Lípidos II, Perfil Aterogénico</textarea>
+                                <small class="cms-help-text">El orden de las líneas en este campo define la secuencia de despliegue de las fichas de Derecha a Izquierda por defecto. Cada línea entre corchetes <code>[Nombre Categoría]</code> genera una ficha.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="editor-card mb-4">
+                        <div class="editor-card-header">
+                            <div class="card-title">Abanico 2: Función de Órganos</div>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <label>Título del Abanico 2</label>
+                                <input type="text" name="estudios_cg2_titulo" value="Función de Órganos — Hepática, Tiroidea, Pancreática, Renal, Cardiaca, Gasometría" required>
+                            </div>
+                            <div class="field-group">
+                                <label>Fichas / Categorías Internas y Estudios del Abanico 2 (Secuencia por Renglones)</label>
+                                <textarea class="textarea-110" name="estudios_cg2_fichas" required>[Función Hepática] PFH Básico, PFH Completo, Transaminasas séricas, Gamma Glutamil Transpeptidasa, Proteínas Totales, Albumina sérica
+[Función Tiroidea] Perfil Tiroideo I, Perfil Tiroideo II, Perfil Tiroideo III, Perfil Tiroideo IV, TSH, Ac. Anti Tiroideos I, Ac. Anti Tiroideos II, Ac. Anti Receptor de TSH, Tiroglobulina
+[Función Pancreática] Amilasa sérica, Lipasa sérica
+[Función Renal y Orina 24 h] Cistatina C, Depuración de creatinina, Proteínas totales en orina, Microalbuminuria, Calcio en orina
+[Función Cardiaca y Muscular] Triage cardiaco, Perfil cardiaco completo, Troponina I, Troponina T, NT-pro BNP, PCR-US, Mioglobina, CK-MB, CK Total
+[Gasometría Arterial y Venosa] Gasometría Arterial Completa, Gasometría Venosa Completa</textarea>
+                                <small class="cms-help-text">El orden de las líneas en este campo define la secuencia de despliegue de las fichas de Derecha a Izquierda por defecto. Cada línea entre corchetes <code>[Nombre Categoría]</code> genera una ficha.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="editor-card mb-4">
+                        <div class="editor-card-header">
+                            <div class="card-title">Abanico 3: Hormonas, Diabetes e Inmunología</div>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <label>Título del Abanico 3</label>
+                                <input type="text" name="estudios_cg3_titulo" value="Hormonas, Diabetes e Inmunología — Perfil Ginecológico, Masculino, Diabetes, Inmunología, Reumatología" required>
+                            </div>
+                            <div class="field-group">
+                                <label>Fichas / Categorías Internas y Estudios del Abanico 3 (Secuencia por Renglones)</label>
+                                <textarea class="textarea-110" name="estudios_cg3_fichas" required>[Hormonas Femeninas y Masculinas] Perfil Ginecológico I, Perfil Ginecológico II, Perfil Hormonal Masculino II, FSH, LH, PRL, PROG, TESTOSTERONA Total, TESTOSTERONA Libre, DHEA-S, E2, Cortisol, ACTH, HGC Cuantitativa, AMH, PTH-i
+[Diabetes: Diagnóstico y Control] Hemoglobina glucosilada (HB A1c), Insulina, Índice de HOMA, Péptido C, Prueba de Tolerancia a la glucosa, Test O'Sullivan
+[Inmunología] Ac. Anti HIV 1/HIV 2, V.D.R.L., Reacciones Febriles, Hepatitis A IgM, Hepatitis A IgG, Hepatitis B, Hepatitis C, Prueba de embarazo, Panel viral Respiratorio, Influenza A y B, COVID-19 Ag, Ac. SARS-CoV-2, Ac. DENGUE, Coombs Directo/Indirecto, Procalcitonina, Quantiferon TB
+[Reumatología y Autoinmunidad] Perfil Reumático, Proteína C reactiva, Factor Reumatoide, Antiestreptolisinas, CCP, Complementos C3/C4, Ac. Anti Nucleares, Ac. Anti DNA, Ac. Anti ENA, Ac. Anti SSA/Ro y SSB/La, Miositis, Esclerosis, Perfil de Inmunoglobulinas
+[Diversos] Inmunoglobulina E, Vitamina D, Somatomedina C, Papanicolaou</textarea>
+                                <small class="cms-help-text">El orden de las líneas en este campo define la secuencia de despliegue de las fichas de Derecha a Izquierda por defecto. Cada línea entre corchetes <code>[Nombre Categoría]</code> genera una ficha.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="editor-card mb-4">
+                        <div class="editor-card-header">
+                            <div class="card-title">Abanico 4: Bacteriología, Marcadores y Biología Molecular</div>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <label>Título del Abanico 4</label>
+                                <input type="text" name="estudios_cg4_titulo" value="Bacteriología, Marcadores Tumorales, Parasitología, Citroquímicos, Biología Molecular, Fertilidad" required>
+                            </div>
+                            <div class="field-group">
+                                <label>Fichas / Categorías Internas y Estudios del Abanico 4 (Secuencia por Renglones)</label>
+                                <textarea class="textarea-110" name="estudios_cg4_fichas" required>[Bacteriología] Cultivo de orina con MIC, Cultivo de Ex. Faringeo con MIC, Cultivo de Ex. Vaginal con MIC, Cultivo Uretral con MIC, Cultivo de Heces con MIC, Cultivo de Lesión con MIC, Cultivo de Expectoración con MIC, Hemocultivo con MIC, Cultivo Micológico
+[Marcadores Tumorales] PSA TOTAL, PSA LIBRE, CEA, AFP, CA-125, CA-15-3, CA-19-9, Perfil Tumoral Femenino, Perfil Tumoral Masculino, Tumoral Completo
+[Parasitología] Coproparasitoscópico 3 muestras, Coprológico completo, Coprológico Especial, Sangre Oculta en heces, Antígeno de H. Pylori, Calprotectina, Lactoferrina, Clostridium difficile
+[Citroquímicos de Líquidos] Citoquímico LCR, Citoquímico Sinovial, Citoquímico Pleural, Citoquímico Ascitis, Citoquímico Diálisis, Citoquímico Bronquial, Citoquímico Pericárdico
+[Biología Molecular (PCR)] PCR Papiloma Humano (VPH), PCR-Mycobacterium, PCR-Patógenos respiratorios, PCR-Meningitis viral, PCR SARS CoV-2
+[Fertilidad] Espermatobioscopia directa</textarea>
+                                <small class="cms-help-text">El orden de las líneas en este campo define la secuencia de despliegue de las fichas de Derecha a Izquierda por defecto. Cada línea entre corchetes <code>[Nombre Categoría]</code> genera una ficha.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                                        <!-- Leyenda Operativa de Ayuda -->
+                    <div class="operator-guide-box">
+                        <strong>📌 Indicaciones de Carga para el Operador Web:</strong>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:34 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L459-599)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+                <!-- ========================================== -->
+                <!-- PANEL 4: PROMOCIONES VIGENTES (IMAGEN BANNER) -->
+                <!-- ========================================== -->
+                <div id="panel-promociones" class="cms-panel" role="tabpanel" aria-labelledby="tab-promociones" tabindex="0">
+                    <h3 class="cms-h3">Actualización del Banner Promocional (#promociones)</h3>
+                                        <div class="operator-guide-box">
+                        <strong>📌 Especificaciones del Banner Promocional:</strong>
+                        <ul class="cms-ul">
+                            <li><strong>Sobreescritura:</strong> Reemplaza la imagen pública <code>PROMOCIONES 2026.webp</code>.</li>
+                            <li><strong>Dimensiones Ideales:</strong> <code>1200 x 600 px</code> o <code>1600 x 800 px</code> (Ratio horizontal 2:1).</li>
+                            <li><strong>Formatos & Peso:</strong> Formato WebP (óptimo), JPG o PNG de alta definición. Límite máximo: <strong>15 MB</strong>.</li>
+                        </ul>
+                    </div>
+
+                    
+                    <div class="editor-card">
+                        <div class="editor-card-header">
+                            <div class="card-title">Imagen del Banner Promocional 2026</div>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <label>Archivo de Imagen del Banner (WEBP / PNG / JPG)</label>
+                                <div class="image-upload-box img-upload-box--col">
+                                    <img id="prev-banner-promos" src="/laesh-web-assets-uipv1a/img/promociones-2026.webp" alt="Banner Promociones" class="img-preview-banner">
+                                    <input type="file" accept="image/*" id="file-banner-promos">
+                                </div>
+                            </div>
+                            <div class="field-group">
+                                <label>Título de la Sección</label>
+                                <input type="text" name="promo_titulo" required value="Promociones Vigentes">
+                            </div>
+                            <div class="field-group">
+                                <label>Subtítulo / Mensaje Promocional</label>
+                                <input type="text" name="promo_subtitulo" value="Aprovecha nuestras tarifas preferenciales y paquetes diseñados para ti.">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================================== -->
+                <!-- PANEL 5: CALIDAD E INSTALACIONES           -->
+                <!-- ========================================== -->
+                <div id="panel-calidad" class="cms-panel" role="tabpanel" aria-labelledby="tab-calidad" tabindex="0">
+                    <h3 class="cms-h3">Galería de Fotos de Instalaciones y Calidad (#calidad)</h3>
+                    
+                                        <!-- Leyenda Operativa de Ayuda -->
+                    <div class="operator-guide-box">
+                        <strong>📌 Indicaciones de Carga para la Galería de Calidad e Instalaciones:</strong>
+                        <ul class="cms-ul">
+                            <li><strong>Sobreescritura Directa:</strong> Cada fotografía subida reemplaza directamente la foto previa en la posición elegida (1 a 15).</li>
+                            <li><strong>Formato Recomendado:</strong> Formato <strong>WebP</strong> comúnmente optimizado sin pérdida de nitidez clínica.</li>
+                            <li><strong>Dimensiones Sugeridas:</strong> <code>1200 x 800 px</code> o <code>1920 x 1080 px</code>. Tamaño máximo de archivo: <strong>15 MB</strong>.</li>
+                        </ul>
+                    </div>
+                    <!-- Ficha Unificada de Captura: Calidad -->
+                    <div class="editor-card">
+                        <div class="editor-card-header editor-card-header--padded">
+                            <div class="card-title">Ficha 2: Calidad e Instalaciones</div>
+                            <span class="operator-badge operator-badge-block">Límite: 15 imágenes | Dimensiones: 1200x800 px (4:3) | Formato: WebP (Óptimo), JPG, PNG | Peso máx: 15 MB</span>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Seleccionar Imagen de Galería a Actualizar (1 al 15)</h4>
+                                <select id="select-carrusel-calidad" class="form-input-sm form-input-sm--bg">
+                                        <option value="1">Imagen 1 de 15: Área de Hematología I</option>
+                                        <option value="2">Imagen 2 de 15: Área de Hematología II</option>
+                                        <option value="3">Imagen 3 de 15: Área de Coagulación</option>
+                                        <option value="4">Imagen 4 de 15: Química Clínica I</option>
+                                        <option value="5">Imagen 5 de 15: Química Clínica II</option>
+                                        <option value="6">Imagen 6 de 15: Área de Bacteriología I</option>
+                                        <option value="7">Imagen 7 de 15: Área de Bacteriología II</option>
+                                        <option value="8">Imagen 8 de 15: Área de Uroanálisis</option>
+                                        <option value="9">Imagen 9 de 15: Área de Centrifugación</option>
+                                        <option value="10">Imagen 10 de 15: Estudios Especiales</option>
+                                        <option value="11">Imagen 11 de 15: Toma de Muestras</option>
+                                        <option value="12">Imagen 12 de 15: Toma Pediátrica</option>
+                                        <option value="13">Imagen 13 de 15: Toma de Cultivos</option>
+                                        <option value="14">Imagen 14 de 15: Recepción y Orientación</option>
+                                        <option value="15">Imagen 15 de 15: Toma de Muestras Clínicas</option>
+                                    </select>
+                                </div>
+                                <div class="field-group">
+                                    <label>Subir Nueva Fotografía de Instalación / Calidad (Máx 15 MB)</label>
+                                    <div class="image-upload-box">
+                                        <img id="prev-calidad-selected" src="/laesh-web-assets-uipv1a/img/recepcion.webp" alt="Foto de Instalaciones" class="img-preview-calidad">
+                                        <input type="file" accept="image/*" id="file-calidad-selected">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field-group">
+                                <label>Título de la Área / Instalación</label>
+                                <input type="text" id="calidad-titulo-val" value="Área de Hematología I">
+                            </div>
+                            <div class="field-group">
+                                <label>Descripción del Proceso / Equipo</label>
+                                <textarea id="calidad-desc-val">Análisis de biometría hemática y células sanguíneas con rigor científico.</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================================== -->
+                <!-- PANEL 6: UBICACIÓN Y CONTACTO              -->
+                <!-- ========================================== -->
+                <div id="panel-ubicacion" class="cms-panel" role="tabpanel" aria-labelledby="tab-ubicacion" tabindex="0">
+                    <h3 class="cms-h3">Datos de Ubicación, Teléfonos y Mapa (#ubicacion)</h3>
+                    
+                    <div class="editor-card">
+                        <div class="editor-card-header">
+                            <div class="card-title">Información de Contacto y Horarios</div>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <label>Dirección Física</label>
+                                <input type="text" value="Azucenas 8, Jardines del Sur, 69007 Heroica Cdad. de Huajuapan de León, Oax., México">
+                            </div>
+                            <div class="field-row">
+                                <div class="field-group">
+                                    <label>Teléfono Directo</label>
+                                    <input type="tel" value="953 6 88 76 94">
+                                </div>
+                                <div class="field-group">
+                                    <label>Correo Electrónico</label>
+                                    <input type="email" value="lab_laesh@hotmail.com">
+                                </div>
+                            </div>
+                            <div class="field-group">
+                                <label>Horario de Atención</label>
+                                <input type="text" value="Lunes a sábado: 7:00 a.m. – 9:00 p.m. | Domingo: 7:00 a.m. – 3:00 p.m.">
+                            </div>
+                            <div class="field-group">
+                                <label>Responsable Sanitario</label>
+                                <input type="text" value="Q.F.B. y E.H.D.L. Jacob Santiago Blanco. Céd. Prof. 3609293 | Céd. Esp. 8935780">
+                            </div>
+                            <div class="field-group">
+                                <label>Imagen del Croquis de Ubicación</label>
+                                <div class="image-upload-box">
+                                    <img id="prev-croquis" src="/laesh-web-assets-uipv1a/img/mapa-laesh.webp" alt="Croquis" class="img-preview-croquis">
+                                    <input type="file" accept="image/*" id="file-croquis">
+                                </div>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:35 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L564-614)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+                <!-- ========================================== -->
+                <!-- PANEL 6: UBICACIÓN Y CONTACTO              -->
+                <!-- ========================================== -->
+                <div id="panel-ubicacion" class="cms-panel" role="tabpanel" aria-labelledby="tab-ubicacion" tabindex="0">
+                    <h3 class="cms-h3">Datos de Ubicación, Teléfonos y Mapa (#ubicacion)</h3>
+                    
+                    <div class="editor-card">
+                        <div class="editor-card-header">
+                            <div class="card-title">Información de Contacto y Horarios</div>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <label>Dirección Física</label>
+                                <input type="text" value="Azucenas 8, Jardines del Sur, 69007 Heroica Cdad. de Huajuapan de León, Oax., México">
+                            </div>
+                            <div class="field-row">
+                                <div class="field-group">
+                                    <label>Teléfono Directo</label>
+                                    <input type="tel" value="953 6 88 76 94">
+                                </div>
+                                <div class="field-group">
+                                    <label>Correo Electrónico</label>
+                                    <input type="email" value="lab_laesh@hotmail.com">
+                                </div>
+                            </div>
+                            <div class="field-group">
+                                <label>Horario de Atención</label>
+                                <input type="text" value="Lunes a sábado: 7:00 a.m. – 9:00 p.m. | Domingo: 7:00 a.m. – 3:00 p.m.">
+                            </div>
+                            <div class="field-group">
+                                <label>Responsable Sanitario</label>
+                                <input type="text" value="Q.F.B. y E.H.D.L. Jacob Santiago Blanco. Céd. Prof. 3609293 | Céd. Esp. 8935780">
+                            </div>
+                            <div class="field-group">
+                                <label>Imagen del Croquis de Ubicación</label>
+                                <div class="image-upload-box">
+                                    <img id="prev-croquis" src="/laesh-web-assets-uipv1a/img/mapa-laesh.webp" alt="Croquis" class="img-preview-croquis">
+                                    <input type="file" accept="image/*" id="file-croquis">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+
+            <!-- Región Lateral Derecha: Notificaciones (Scope 30) -->
+            <aside class="sidebar-right" id="sidebar-right">
+                <div class="sidebar-right-toggle-row">
+                    <!-- Campana siempre visible + badge de conteo -->
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:35 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:35 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:35 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+en todas las partes de todas las pestañas indicar los limites del numero de caracteres y saltos de linea, etc, para que el usuario  personal de laesh tenga presente no excederse haha y seria adecuado en la esquina superior derecha un contador de caracteres ingresados.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `gestion-web.html`
+**Language:** html
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Clarifying Character Limits**
+
+Okay, I'm working on the character limit and line break indicators. I'm focusing on making them clear and consistent across all input fields in the "gestion-web.html" tabs. I'm thinking of labels or badges that are always visible, so the LAESH staff always know the recommended limits at a glance.
+
+
+**Implementing Real-Time Counters**
+
+I've got a comprehensive plan to add real-time character counters. I'm focusing on dynamic positioning in the top-right corner, and real-time input event listeners. I'm crafting CSS for clear visual feedback—green for within limits, and amber/red for approaching or exceeding them. My plan is for this to be a universal counter, not specific.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.957077025s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L219-289)</summary>
+
+**Path:** `Unknown file`
+
+```
+    font-size: 0.8rem;
+    line-height: 1.4;
+}
+
+.editor-card-header--padded {
+    padding-bottom: 0.85rem;
+    border-bottom: 1px solid rgba(0, 82, 183, 0.1);
+    margin-bottom: 1.25rem;
+}
+
+/* ── Previews de imágenes ── */
+.img-preview-sm     { width: 120px; height: 65px; }
+.img-preview-esp    { width: 90px; height: 60px; object-fit: cover; }
+.img-preview-calidad{ width: 110px; height: 65px; object-fit: cover; }
+.img-preview-banner { width: 100%; max-width: 650px; height: auto; border-radius: 10px; }
+.img-preview-croquis{ width: 120px; height: 80px; }
+.img-upload-file    { margin-top: 10px; }
+.img-upload-box--col{ flex-direction: column; align-items: flex-start; }
+
+/* ── btn-logout mobile variant (sidebar-mobile-only) ── */
+.btn-logout--mobile {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #991b1b;
+    text-decoration: none;
+    background: #fee2e2;
+    padding: 9px 14px;
+    border-radius: 6px;
+    border: 1px solid #fca5a5;
+    min-height: 44px;
+}@media (hover: hover) and (pointer: fine) {
+    .btn-logout--mobile:hover {
+        background: #fca5a5;
+    color: #7f1d1d;
+    }
+}
+
+/* ── CMS Panel / Tab visibility (base rules — must be here, not in media query) ── */
+.cms-panel          { display: none; }
+.cms-panel.active   { display: block; }
+
+.cms-tabs {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 0;
+    border-bottom: 2px solid var(--border);
+    margin-bottom: 1.5rem;
+    scrollbar-width: none;
+}
+.cms-tabs::-webkit-scrollbar { display: none; }
+
+.cms-tab {
+    flex-shrink: 0;
+    padding: 0.6rem 1.1rem;
+    font-size: 0.83rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: color 0.15s, border-color 0.15s;
+    white-space: nowrap;
+    user-select: none;
+}@media (hover: hover) and (pointer: fine) {
+    .cms-tab:hover {
+        color: var(--primary);
+    }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:39 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L199-263)</summary>
+
+**Path:** `Unknown file`
+
+```
+    // Select hero slide (Banner Principal)
+    var selHero = document.getElementById('select-hero-slide');
+    if (selHero) selHero.addEventListener('change', function() { cargarHeroSlideSeleccionado(this.value); });
+
+    // Select carrusel rutina
+    var selRutina = document.getElementById('select-carrusel-rutina');
+    if (selRutina) selRutina.addEventListener('change', function() { cargarRutinaSeleccionada(this.value); });
+
+    // Botón desactivar / resetear ficha a por ESTABLECER
+    var btnResetRutina = document.getElementById('btn-reset-rutina-establecer');
+    if (btnResetRutina) {
+        btnResetRutina.addEventListener('click', function() {
+            var sel = document.getElementById('select-carrusel-rutina');
+            var val = sel ? sel.value : '1';
+            document.getElementById('rutina-titulo-val').value = 'por ESTABLECER';
+            document.getElementById('rutina-desc-val').value = '';
+            var prev = document.getElementById('prev-esp-selected');
+            if (prev) {
+                prev.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="90" height="60" viewBox="0 0 90 60"><rect width="100%" height="100%" fill="%23f1f5f9"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%2394a3b8" font-size="10" font-family="sans-serif">Sin Imagen</text></svg>';
+            }
+            if (rutinaDatos[val]) {
+                rutinaDatos[val].titulo = 'por ESTABLECER';
+                rutinaDatos[val].desc = '';
+                rutinaDatos[val].img = '';
+            }
+            if (sel && sel.options[sel.selectedIndex]) {
+                sel.options[sel.selectedIndex].text = 'Imagen ' + val + ' de 16: por ESTABLECER';
+            }
+        });
+    }
+
+    // Select calidad (si existe, tiene id asignado por su data-section context)
+    var selCalidad = document.getElementById('select-carrusel-calidad');
+    if (selCalidad) selCalidad.addEventListener('change', function() { cargarCalidadSeleccionada(this.value); });
+
+    // Lógica reactiva para enterarse de notificaciones de recepción (labadmin)
+    let lastRemitidosCMS = 0;
+    function refreshNotificacionesCMS() {
+        if (typeof getOrders !== 'function') return;
+        const orders = getOrders().filter(o => o.estado === 'Remitido');
+        const count = orders.length;
+        const badge = document.getElementById('badge-notif-cms');
+
+        if (badge) {
+            badge.innerText = count;
+            if (count > 0) {
+                badge.classList.add('show');
+                if (count > lastRemitidosCMS) {
+                    badge.classList.add('pulse');
+                    if (typeof playWhistle === 'function') {
+                        playWhistle();
+                    }
+                    setTimeout(() => badge.classList.remove('pulse'), 3000);
+                }
+                document.title = `(${count}) Gestión Web - LAESH`;
+            } else {
+                badge.classList.remove('show');
+                badge.classList.remove('pulse');
+                document.title = "Gestión Web - LAESH";
+            }
+        }
+        lastRemitidosCMS = count;
+    }
+
+    // Inicializar y escuchar cambios de LocalStorage
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Implementing Character Counter**
+
+I'm working on the real-time dynamic character counter logic now within `gestion-web.js`. I've started defining the `updateCharCounter` function and will soon be integrating it with the user interface elements.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.142362892s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:39 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L59-109)</summary>
+
+**Path:** `Unknown file`
+
+```
+        function cargarHeroSlideSeleccionado(val) {
+            const d = heroDatos[val];
+            if (d) {
+                if (document.getElementById('input-hero-badge')) document.getElementById('input-hero-badge').value = d.badge || '';
+                if (document.getElementById('input-hero-title')) document.getElementById('input-hero-title').value = d.title || '';
+                if (document.getElementById('input-hero-desc')) document.getElementById('input-hero-desc').value = d.desc || '';
+                if (document.getElementById('input-hero-btn-text')) document.getElementById('input-hero-btn-text').value = d.btnText || '';
+                if (document.getElementById('input-hero-btn-link')) document.getElementById('input-hero-btn-link').value = d.btnLink || '';
+                const prev = document.getElementById('prev-hero-selected');
+                if (prev) prev.src = d.img || '/laesh-web-assets-uipv1a/img/recepcion.webp';
+            }
+        }
+
+        // Datos de imágenes de Rutina y Especialidades (16 imágenes)
+        const rutinaDatos = {
+            1: { titulo: "Hematología Especializada", desc: "Análisis morfológico de frotis sanguíneo y pruebas hematológicas de alta complejidad.", img: "/laesh-web-assets-uipv1a/img/area-hematologia-dos.webp" },
+            2: { titulo: "Química Clínica Avanzada", desc: "Determinación automatizada de electrolitos, proteínas y enzimas específicas.", img: "/laesh-web-assets-uipv1a/img/area-quimica-clinica-dos.webp" },
+            3: { titulo: "Microbiología y Cultivos", desc: "Identificación microscópica y pruebas de susceptibilidad a antimicrobianos.", img: "/laesh-web-assets-uipv1a/img/area-bacteriologia-dos.webp" },
+            4: { titulo: "Uroanálisis y Sedimentos", desc: "Examen de orina, química y microscopía para detección precoz de patologías renales.", img: "/laesh-web-assets-uipv1a/img/area-uroanalisis.webp" },
+            5: { titulo: "Hemostasia y Coagulación", desc: "Estudios de tiempos de protrombina (TP) y tromboplastina parcial activada (TTPa).", img: "/laesh-web-assets-uipv1a/img/area-coagulacion.webp" },
+            6: { titulo: "Pruebas Especiales", desc: "Hormonas, anticuerpos específicos, pruebas inmunológicas y marcadores tumorales.", img: "/laesh-web-assets-uipv1a/img/area-estudios-especiales.webp" },
+            7: { titulo: "Pre-analítica", desc: "Separación de suero y plasma con control estricto de tiempos y temperaturas.", img: "/laesh-web-assets-uipv1a/img/area-centrifugacion.webp" },
+            8: { titulo: "Toma de Muestras I", desc: "Áreas higiénicas equipadas para la extracción sanguínea convencional.", img: "/laesh-web-assets-uipv1a/img/area-toma-de-muestras.webp" },
+            9: { titulo: "Toma de Muestras II", desc: "Módulos individuales y confortables que aseguran una atención rápida.", img: "/laesh-web-assets-uipv1a/img/toma-de-muestras.webp" },
+            10: { titulo: "Toma Pediátrica", desc: "Espacio amigable y personal capacitado para el cuidado y tranquilidad de los niños.", img: "/laesh-web-assets-uipv1a/img/toma-pediatricas.webp" },
+            11: { titulo: "Toma de Cultivos", desc: "Zonas aisladas y estériles para la toma de exudados y cultivos microbiológicos.", img: "/laesh-web-assets-uipv1a/img/toma-de-cultivos.webp" },
+            12: { titulo: "Recepción Técnica", desc: "Recepción técnica de muestras e indicaciones pre-analíticas detalladas.", img: "/laesh-web-assets-uipv1a/img/recepcion-lab.webp" },
+            13: { titulo: "", desc: "", img: "" },
+            14: { titulo: "", desc: "", img: "" },
+            15: { titulo: "", desc: "", img: "" },
+            16: { titulo: "", desc: "", img: "" }
+        };
+
+        function cargarRutinaSeleccionada(val) {
+            const d = rutinaDatos[val];
+            if (d) {
+                document.getElementById('rutina-titulo-val').value = d.titulo || '';
+                document.getElementById('rutina-desc-val').value = d.desc || '';
+                const prev = document.getElementById('prev-esp-selected');
+                if (prev) {
+                    prev.src = d.img || 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="90" height="60" viewBox="0 0 90 60"><rect width="100%" height="100%" fill="%23f1f5f9"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%2394a3b8" font-size="10" font-family="sans-serif">Sin Imagen</text></svg>';
+                }
+            }
+        }
+
+        // Datos de imágenes de Calidad e Instalaciones (15 imágenes)
+        const calidadDatos = {
+            1: { titulo: "Área de Hematología I", desc: "Análisis de biometría hemática y células sanguíneas con rigor científico.", img: "/laesh-web-assets-uipv1a/img/area-hematologia-uno.webp" },
+            2: { titulo: "Área de Hematología II", desc: "Recuentos morfológicos y frotis sanguíneo de alta precisión diagnóstica.", img: "/laesh-web-assets-uipv1a/img/area-hematologia-dos.webp" },
+            3: { titulo: "Área de Coagulación", desc: "Evaluación de tiempos de protrombina (TP) y tromboplastina parcial activada (TTPa).", img: "/laesh-web-assets-uipv1a/img/area-coagulacion.webp" },
+            4: { titulo: "Química Clínica I", desc: "Determinación automatizada de metabolitos, enzimas y perfiles hepáticos.", img: "/laesh-web-assets-uipv1a/img/area-quimica-clinica.webp" },
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Implementing Timeouts Now**
+
+I'm inserting `setTimeout(refreshAllCharCounters, 10);` into the three specified functions: `cargarHeroSlideSeleccionado()`, `cargarRutinaSeleccionada()`, and `cargarCalidadSeleccionada()`. Additionally, I'm using `replace_file_content` to modify `gestion-web.js` directly.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.065498380s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:40 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Adding Input Labels**
+
+I'm focusing on updating `gestion-web.html` now. My current task is adding explicit labels, character limits using `maxlength` or `data-max`, and any necessary guidelines across all input fields within the HTML file. I have begun the process with the first section, "Panel 1: Banner Principal" and am currently reviewing the `input-hero-badge` field.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.097922676s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:40 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L304-449)</summary>
+
+**Path:** `Unknown file`
+
+```
+                <!-- ========================================== -->
+                <div id="panel-especialidades" class="cms-panel" role="tabpanel" aria-labelledby="tab-especialidades" tabindex="0">
+                                 <!-- Editor de los 4 Grupos / Abanicos del Catálogo 2026 -->
+                    <!-- Editor de los 4 Grupos / Abanicos del Catálogo 2026 -->
+                    <div class="editor-card mb-4">
+                        <div class="editor-card-header editor-card-header--padded">
+                            <div class="card-title">Abanico 1: Rutina General</div>
+                            <span class="operator-badge operator-badge-block">Columna 1 | Hematología, Química Clínica, Electrolitos, Uroanálisis, Coagulación</span>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Título del Abanico 1</h4>
+                                <input type="text" name="estudios_cg1_titulo" value="Rutina General — Hematología, Química Clínica, Electrolitos, Uroanálisis, Coagulación" required>
+                            </div>
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Fichas / Categorías Internas y Estudios del Abanico 1 (Secuencia por Renglones)</h4>
+                                <textarea class="textarea-110" name="estudios_cg1_fichas" required>[Hematología] Citometría Hemática, Grupo y RH, Plaquetas, Velocidad de Sedimentación Globular, Reticulocitos, Perfil de Hierro, Hierro sérico, Inducción Drepanocitos
+[Química Clínica] Química Sanguínea 3, Química Sanguínea 7, Perfil Bioquímico 15, Perfil Bioquímico 24, Perfil Bioquímico 30, Perfil Bioquímico 35, Perfil Bioquímico 45, Glucosa sérica, Creatinina sérica, Colesterol Total, Triglicéridos
+[Electrolitos Séricos] E.S. 3 Elementos, E.S. 4 Elementos, E.S. Completos, Calcio sérico, Fósforo y Magnesio sérico, Bicarbonato y CO2
+[Uroanálisis] EGO + Radio Prot/Crea, EGO Especializado, Antidoping 5 elem., Antidoping 12 elem.
+[Coagulación] Perfil de Coagulación, Tiempo de Protrombina/INR, Tiempo de Tromboplastina, Tiempos corregidos, Fibrinógeno, Dímero D, Tiempo de sangrado, Tiempo de coagulación
+[Lípidos] Perfil de Lípidos I, Perfil de Lípidos II, Perfil Aterogénico</textarea>
+                                <small class="cms-help-text">El orden de las líneas en este campo define la secuencia de despliegue de las fichas de Derecha a Izquierda por defecto. Cada línea entre corchetes <code>[Nombre Categoría]</code> genera una ficha.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="editor-card mb-4">
+                        <div class="editor-card-header editor-card-header--padded">
+                            <div class="card-title">Abanico 2: Función de Órganos</div>
+                            <span class="operator-badge operator-badge-block">Columna 2 | Hepática, Tiroidea, Pancreática, Renal, Cardiaca, Gasometría</span>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Título del Abanico 2</h4>
+                                <input type="text" name="estudios_cg2_titulo" value="Función de Órganos — Hepática, Tiroidea, Pancreática, Renal, Cardiaca, Gasometría" required>
+                            </div>
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Fichas / Categorías Internas y Estudios del Abanico 2 (Secuencia por Renglones)</h4>
+                                <textarea class="textarea-110" name="estudios_cg2_fichas" required>[Función Hepática] PFH Básico, PFH Completo, Transaminasas séricas, Gamma Glutamil Transpeptidasa, Proteínas Totales, Albumina sérica
+[Función Tiroidea] Perfil Tiroideo I, Perfil Tiroideo II, Perfil Tiroideo III, Perfil Tiroideo IV, TSH, Ac. Anti Tiroideos I, Ac. Anti Tiroideos II, Ac. Anti Receptor de TSH, Tiroglobulina
+[Función Pancreática] Amilasa sérica, Lipasa sérica
+[Función Renal y Orina 24 h] Cistatina C, Depuración de creatinina, Proteínas totales en orina, Microalbuminuria, Calcio en orina
+[Función Cardiaca y Muscular] Triage cardiaco, Perfil cardiaco completo, Troponina I, Troponina T, NT-pro BNP, PCR-US, Mioglobina, CK-MB, CK Total
+[Gasometría Arterial y Venosa] Gasometría Arterial Completa, Gasometría Venosa Completa</textarea>
+                                <small class="cms-help-text">El orden de las líneas en este campo define la secuencia de despliegue de las fichas de Derecha a Izquierda por defecto. Cada línea entre corchetes <code>[Nombre Categoría]</code> genera una ficha.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="editor-card mb-4">
+                        <div class="editor-card-header editor-card-header--padded">
+                            <div class="card-title">Abanico 3: Hormonas, Diabetes e Inmunología</div>
+                            <span class="operator-badge operator-badge-block">Columna 3 | Perfil Ginecológico, Masculino, Diabetes, Inmunología, Reumatología</span>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Título del Abanico 3</h4>
+                                <input type="text" name="estudios_cg3_titulo" value="Hormonas, Diabetes e Inmunología — Perfil Ginecológico, Masculino, Diabetes, Inmunología, Reumatología" required>
+                            </div>
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Fichas / Categorías Internas y Estudios del Abanico 3 (Secuencia por Renglones)</h4>
+                                <textarea class="textarea-110" name="estudios_cg3_fichas" required>[Hormonas Femeninas y Masculinas] Perfil Ginecológico I, Perfil Ginecológico II, Perfil Hormonal Masculino II, FSH, LH, PRL, PROG, TESTOSTERONA Total, TESTOSTERONA Libre, DHEA-S, E2, Cortisol, ACTH, HGC Cuantitativa, AMH, PTH-i
+[Diabetes: Diagnóstico y Control] Hemoglobina glucosilada (HB A1c), Insulina, Índice de HOMA, Péptido C, Prueba de Tolerancia a la glucosa, Test O'Sullivan
+[Inmunología] Ac. Anti HIV 1/HIV 2, V.D.R.L., Reacciones Febriles, Hepatitis A IgM, Hepatitis A IgG, Hepatitis B, Hepatitis C, Prueba de embarazo, Panel viral Respiratorio, Influenza A y B, COVID-19 Ag, Ac. SARS-CoV-2, Ac. DENGUE, Coombs Directo/Indirecto, Procalcitonina, Quantiferon TB
+[Reumatología y Autoinmunidad] Perfil Reumático, Proteína C reactiva, Factor Reumatoide, Antiestreptolisinas, CCP, Complementos C3/C4, Ac. Anti Nucleares, Ac. Anti DNA, Ac. Anti ENA, Ac. Anti SSA/Ro y SSB/La, Miositis, Esclerosis, Perfil de Inmunoglobulinas
+[Diversos] Inmunoglobulina E, Vitamina D, Somatomedina C, Papanicolaou</textarea>
+                                <small class="cms-help-text">El orden de las líneas en este campo define la secuencia de despliegue de las fichas de Derecha a Izquierda por defecto. Cada línea entre corchetes <code>[Nombre Categoría]</code> genera una ficha.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="editor-card mb-4">
+                        <div class="editor-card-header editor-card-header--padded">
+                            <div class="card-title">Abanico 4: Bacteriología, Marcadores y Biología Molecular</div>
+                            <span class="operator-badge operator-badge-block">Especialidades | Cultivos, Marcadores Tumorales, PCR Biología Molecular</span>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Título del Abanico 4</h4>
+                                <input type="text" name="estudios_cg4_titulo" value="Bacteriología, Marcadores Tumorales, Parasitología, Citroquímicos, Biología Molecular, Fertilidad" required>
+                            </div>
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Fichas / Categorías Internas y Estudios del Abanico 4 (Secuencia por Renglones)</h4>
+                                <textarea class="textarea-110" name="estudios_cg4_fichas" required>[Bacteriología] Cultivo de orina con MIC, Cultivo de Ex. Faringeo con MIC, Cultivo de Ex. Vaginal con MIC, Cultivo Uretral con MIC, Cultivo de Heces con MIC, Cultivo de Lesión con MIC, Cultivo de Expectoración con MIC, Hemocultivo con MIC, Cultivo Micológico
+[Marcadores Tumorales] PSA TOTAL, PSA LIBRE, CEA, AFP, CA-125, CA-15-3, CA-19-9, Perfil Tumoral Femenino, Perfil Tumoral Masculino, Tumoral Completo
+[Parasitología] Coproparasitoscópico 3 muestras, Coprológico completo, Coprológico Especial, Sangre Oculta en heces, Antígeno de H. Pylori, Calprotectina, Lactoferrina, Clostridium difficile
+[Citroquímicos de Líquidos] Citoquímico LCR, Citoquímico Sinovial, Citoquímico Pleural, Citoquímico Ascitis, Citoquímico Diálisis, Citoquímico Bronquial, Citoquímico Pericárdico
+[Biología Molecular (PCR)] PCR Papiloma Humano (VPH), PCR-Mycobacterium, PCR-Patógenos respiratorios, PCR-Meningitis viral, PCR SARS CoV-2
+[Fertilidad] Espermatobioscopia directa</textarea>
+                                <small class="cms-help-text">El orden de las líneas en este campo define la secuencia de despliegue de las fichas de Derecha a Izquierda por defecto. Cada línea entre corchetes <code>[Nombre Categoría]</code> genera una ficha.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                                        <!-- Leyenda Operativa de Ayuda -->
+                    <div class="operator-guide-box">
+                        <strong>📌 Indicaciones de Carga para el Operador Web:</strong>
+                        <ul class="cms-ul">
+                            <li><strong>Sobreescritura Directa:</strong> Al publicar una nueva fotografía en el índice seleccionado (1 al 12), la imagen previa se <em>sobreescribe automáticamente</em> en el servidor.</li>
+                            <li><strong>Formato Optimizado:</strong> Se recomienda subir imágenes en formato <strong>WebP</strong> (óptimo para carga ultrarrápida), aunque se admiten archivos JPG o PNG de alta resolución.</li>
+                            <li><strong>Dimensiones Recomendadas:</strong> Proporción <strong>4:3 o 16:9</strong> (resolución ideal: <code>1200 x 800 px</code> o <code>800 x 600 px</code>). Límite de tamaño: <strong>15 MB por imagen</strong>.</li>
+                        </ul>
+                    </div>
+                    <!-- Ficha Unificada de Captura: Rutina y Especialidades -->
+                    <div class="editor-card">
+                        <div class="editor-card-header editor-card-header--padded">
+                            <div class="card-title">Ficha 1: Rutina y Especialidades</div>
+                            <span class="operator-badge operator-badge-block">Límite: 16 imágenes | Dimensiones: 1200x800 px (4:3) | Formato: WebP (Óptimo), JPG, PNG | Peso máx: 15 MB</span>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Seleccionar Imagen del Carrusel a Actualizar (1 al 16)</h4>
+                                <select id="select-carrusel-rutina" class="form-input-sm form-input-sm--bg">
+                                        <option value="1">Imagen 1 de 16: Hematología Especializada</option>
+                                        <option value="2">Imagen 2 de 16: Química Clínica Avanzada</option>
+                                        <option value="3">Imagen 3 de 16: Microbiología y Cultivos</option>
+                                        <option value="4">Imagen 4 de 16: Uroanálisis y Sedimentos</option>
+                                        <option value="5">Imagen 5 de 16: Hemostasia y Coagulación</option>
+                                        <option value="6">Imagen 6 de 16: Pruebas Especiales</option>
+                                        <option value="7">Imagen 7 de 16: Pre-analítica</option>
+                                        <option value="8">Imagen 8 de 16: Toma de Muestras I</option>
+                                        <option value="9">Imagen 9 de 16: Toma de Muestras II</option>
+                                        <option value="10">Imagen 10 de 16: Toma Pediátrica</option>
+                                        <option value="11">Imagen 11 de 16: Toma de Cultivos</option>
+                                        <option value="12">Imagen 12 de 16: Recepción Técnica</option>
+                                        <option value="13">Imagen 13 de 16: por ESTABLECER</option>
+                                        <option value="14">Imagen 14 de 16: por ESTABLECER</option>
+                                        <option value="15">Imagen 15 de 16: por ESTABLECER</option>
+                                        <option value="16">Imagen 16 de 16: por ESTABLECER</option>
+                                    </select>
+                                </div>
+                                <div class="field-group">
+                                    <label>Subir Nueva Fotografía (Máx 15 MB)</label>
+                                    <div class="image-upload-box">
+                                        <img id="prev-esp-selected" src="/laesh-web-assets-uipv1a/img/area-hematologia-dos.webp" alt="Rutina y Especialidades" class="img-preview-esp">
+                                        <input type="file" accept="image/*" id="file-esp-selected">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field-group">
+                                <label>Título de la Ficha Seleccionada</label>
+                                <input type="text" id="rutina-titulo-val" value="Hematología Especializada">
+                            </div>
+                            <div class="field-group">
+                                <label>Descripción de la Ficha Seleccionada</label>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:40 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L479-619)</summary>
+
+**Path:** `Unknown file`
+
+```
+                        <div class="editor-card-header editor-card-header--padded">
+                            <div class="card-title">Imagen del Banner Promocional 2026</div>
+                            <span class="operator-badge operator-badge-block">Proporción 1:1 Cuadrada | 1000x1000 px | WebP (Óptimo), JPG, PNG | Peso máx: 15 MB</span>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Archivo de Imagen del Banner Promocional (WebP / PNG / JPG)</h4>
+                                <div class="image-upload-box img-upload-box--col">
+                                    <img id="prev-banner-promos" src="/laesh-web-assets-uipv1a/img/promociones-2026.webp" alt="Banner Promociones" class="img-preview-banner">
+                                    <input type="file" accept="image/*" id="file-banner-promos">
+                                </div>
+                            </div>
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Título y Mensaje Promocional</h4>
+                                <div class="field-group">
+                                    <label>Título de la Sección</label>
+                                    <input type="text" name="promo_titulo" required value="Promociones Vigentes">
+                                </div>
+                                <div class="field-group">
+                                    <label>Subtítulo / Mensaje Promocional</label>
+                                    <input type="text" name="promo_subtitulo" value="Aprovecha nuestras tarifas preferenciales y paquetes diseñados para ti.">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================================== -->
+                <!-- PANEL 5: CALIDAD E INSTALACIONES           -->
+                <!-- ========================================== -->
+                <div id="panel-calidad" class="cms-panel" role="tabpanel" aria-labelledby="tab-calidad" tabindex="0">
+                    <h3 class="cms-h3">Galería de Fotos de Instalaciones y Calidad (#calidad)</h3>
+                    
+                                        <!-- Leyenda Operativa de Ayuda -->
+                    <div class="operator-guide-box">
+                        <strong>📌 Indicaciones de Carga para la Galería de Calidad e Instalaciones:</strong>
+                        <ul class="cms-ul">
+                            <li><strong>Sobreescritura Directa:</strong> Cada fotografía subida reemplaza directamente la foto previa en la posición elegida (1 a 15).</li>
+                            <li><strong>Formato Recomendado:</strong> Formato <strong>WebP</strong> comúnmente optimizado sin pérdida de nitidez clínica.</li>
+                            <li><strong>Dimensiones Sugeridas:</strong> <code>1200 x 800 px</code> o <code>1920 x 1080 px</code>. Tamaño máximo de archivo: <strong>15 MB</strong>.</li>
+                        </ul>
+                    </div>
+                    <!-- Ficha Unificada de Captura: Calidad -->
+                    <div class="editor-card">
+                        <div class="editor-card-header editor-card-header--padded">
+                            <div class="card-title">Ficha 2: Calidad e Instalaciones</div>
+                            <span class="operator-badge operator-badge-block">Límite: 15 imágenes | Dimensiones: 1200x800 px (4:3) | Formato: WebP (Óptimo), JPG, PNG | Peso máx: 15 MB</span>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Seleccionar Imagen de Galería a Actualizar (1 al 15)</h4>
+                                <select id="select-carrusel-calidad" class="form-input-sm form-input-sm--bg">
+                                        <option value="1">Imagen 1 de 15: Área de Hematología I</option>
+                                        <option value="2">Imagen 2 de 15: Área de Hematología II</option>
+                                        <option value="3">Imagen 3 de 15: Área de Coagulación</option>
+                                        <option value="4">Imagen 4 de 15: Química Clínica I</option>
+                                        <option value="5">Imagen 5 de 15: Química Clínica II</option>
+                                        <option value="6">Imagen 6 de 15: Área de Bacteriología I</option>
+                                        <option value="7">Imagen 7 de 15: Área de Bacteriología II</option>
+                                        <option value="8">Imagen 8 de 15: Área de Uroanálisis</option>
+                                        <option value="9">Imagen 9 de 15: Área de Centrifugación</option>
+                                        <option value="10">Imagen 10 de 15: Estudios Especiales</option>
+                                        <option value="11">Imagen 11 de 15: Toma de Muestras</option>
+                                        <option value="12">Imagen 12 de 15: Toma Pediátrica</option>
+                                        <option value="13">Imagen 13 de 15: Toma de Cultivos</option>
+                                        <option value="14">Imagen 14 de 15: Recepción y Orientación</option>
+                                        <option value="15">Imagen 15 de 15: Toma de Muestras Clínicas</option>
+                                    </select>
+                                </div>
+                                <div class="field-group">
+                                    <label>Subir Nueva Fotografía de Instalación / Calidad (Máx 15 MB)</label>
+                                    <div class="image-upload-box">
+                                        <img id="prev-calidad-selected" src="/laesh-web-assets-uipv1a/img/recepcion.webp" alt="Foto de Instalaciones" class="img-preview-calidad">
+                                        <input type="file" accept="image/*" id="file-calidad-selected">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field-group">
+                                <label>Título de la Área / Instalación</label>
+                                <input type="text" id="calidad-titulo-val" value="Área de Hematología I">
+                            </div>
+                            <div class="field-group">
+                                <label>Descripción del Proceso / Equipo</label>
+                                <textarea id="calidad-desc-val">Análisis de biometría hemática y células sanguíneas con rigor científico.</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================================== -->
+                <!-- PANEL 6: UBICACIÓN Y CONTACTO              -->
+                <!-- ========================================== -->
+                <div id="panel-ubicacion" class="cms-panel" role="tabpanel" aria-labelledby="tab-ubicacion" tabindex="0">
+                    <h3 class="cms-h3">Datos de Ubicación, Teléfonos y Mapa (#ubicacion)</h3>
+                    
+                    <div class="editor-card">
+                        <div class="editor-card-header editor-card-header--padded">
+                            <div class="card-title">Información de Contacto, Horarios y Croquis</div>
+                            <span class="operator-badge operator-badge-block">Atención Presencial, Canales de Contacto Directo y Croquis de Ubicación</span>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Información de Atención y Canales Directos</h4>
+                                <div class="field-group">
+                                    <label>Dirección Física</label>
+                                    <input type="text" value="Azucenas 8, Jardines del Sur, 69007 Heroica Cdad. de Huajuapan de León, Oax., México">
+                                </div>
+                                <div class="field-row">
+                                    <div class="field-group">
+                                        <label>Teléfono Directo</label>
+                                        <input type="tel" value="953 6 88 76 94">
+                                    </div>
+                                    <div class="field-group">
+                                        <label>Correo Electrónico</label>
+                                        <input type="email" value="lab_laesh@hotmail.com">
+                                    </div>
+                                </div>
+                                <div class="field-group">
+                                    <label>Horario de Atención</label>
+                                    <input type="text" value="Lunes a sábado: 7:00 a.m. – 9:00 p.m. | Domingo: 7:00 a.m. – 3:00 p.m.">
+                                </div>
+                                <div class="field-group">
+                                    <label>Responsable Sanitario</label>
+                                    <input type="text" value="Q.F.B. y E.H.D.L. Jacob Santiago Blanco. Céd. Prof. 3609293 | Céd. Esp. 8935780">
+                                </div>
+                            </div>
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Fotografía del Croquis de Ubicación Presencial</h4>
+                                <div class="image-upload-box">
+                                    <img id="prev-croquis" src="/laesh-web-assets-uipv1a/img/mapa-laesh.webp" alt="Croquis" class="img-preview-croquis">
+                                    <input type="file" accept="image/*" id="file-croquis">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+
+            <!-- Región Lateral Derecha: Notificaciones (Scope 30) -->
+            <aside class="sidebar-right" id="sidebar-right">
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:41 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:41 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:41 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+. En pestaña banner, estos texto estan muy juntos:
+Configuración de Tiempos del Slider Principal
+Tiempo de Transición / Autoplay del Slider (segundos); debes ir mejorando el uso y aplicacion de los estilos laesh 
+
+. Algo paso, se muestra por default la pestaña Banner PRINCIPAL, Y pero ya no muestra el contenido de las demas pestañas al darles clck en su nombre, corrije de raiz.
+
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `gestion-web.css`
+**Language:** css
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+/* gestion-web.js — lógica del portal de gestión web CMS (extraído de gestion-web.html) */
+        const panelLabelsGestion = {
+            'hero': 'Banner Principal',
+            'quienes-somos': 'Quiénes somos',
+            'especialidades': 'Estudios de Rutina',
+            'promociones': 'Promociones Vigentes',
+            'calidad': 'Calidad e Instalaciones',
+            'ubicacion': 'Ubicación y Contacto'
+        };
+
+        function showPanel(name) {
+            document.querySelectorAll('.cms-panel').forEach(p => p.classList.remove('active'));
+            const targetPanel = document.getElementById('panel-' + name);
+            if (targetPanel) targetPanel.classList.add('active');
+
+            // Sincronizar pestaña superior activa + ARIA (A-01)
+            document.querySelectorAll('.cms-tab').forEach(function(t) {
+                t.classList.remove('active');
+                t.setAttribute('aria-selected', 'false');
+                t.setAttribute('tabindex', '-1');
+            });
+            const targetTab = document.getElementById('tab-' + name);
+            if (targetTab) {
+                targetTab.classList.add('active');
+                targetTab.setAttribute('aria-selected', 'true');
+                targetTab.setAttribute('tabindex', '0');
+            }
+
+            // Actualizar breadcrumb
+            const bc = document.getElementById('header-bc-current');
+            if (bc && panelLabelsGestion[name]) bc.textContent = panelLabelsGestion[name];
+        }
+
+        function activateTab(el) {
+            document.querySelectorAll('.cms-tab').forEach(function(t) {
+                t.classList.remove('active');
+                t.setAttribute('aria-selected', 'false');
+                t.setAttribute('tabindex', '-1');
+            });
+            el.classList.add('active');
+            el.setAttribute('aria-selected', 'true');
+            el.setAttribute('tabindex', '0');
+        }
+
+        function activateNav(el) {
+            document.querySelectorAll('.sidebar .nav-item').forEach(n => n.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        
+        // Datos de los 5 Hero Slides del Banner Principal (#inicio)
+        const heroDatos = {
+            1: { badge: "Bienvenido a Nuestra Institución", title: "Bienvenido a LAESH® — Diagnósticos de Confianza", desc: "Trabajamos para proporcionar información diagnóstica confiable que ayude al médico a tomar mejores decisiones y al paciente a recibir atención oportuna.", btnText: "Conoce los Servicios", btnLink: "#especialidades", img: "/laesh-web-assets-uipv1a/img/recepcion.webp" },
+            2: { badge: "25 Años de Experiencia Clínica", title: "Laboratorio de Especialidades Hematológicas", desc: "Ofrecemos servicios de laboratorio clínico de alta especialización y rigor científico, comprometidos con la salud y tranquilidad de nuestra comunidad.", btnText: "Ver Especialidades", btnLink: "#especialidades", img: "/laesh-web-assets-uipv1a/img/area-hematologia-dos.webp" },
+            3: { badge: "Excelencia y Calidad Certificada", title: "Resultados Confiables para Cuidar tu Salud", desc: "Detrás de cada análisis existe una decisión médica crucial. En LAESH® la precisión diagnóstica es nuestro compromiso inquebrantable.", btnText: "Conocer Calidad", btnLink: "#calidad", img: "/laesh-web-assets-uipv1a/img/area-quimica-clinica-dos.webp" },
+            4: { badge: "Tarifas y Paquetes Preferenciales", title: "Promociones y Check-Ups Médicos 2026", desc: "Descubre nuestros paquetes preventivos y tarifas especiales diseñados para el cuidado integral de tu salud y la de toda tu familia.", btnText: "Ver Promociones", btnLink: "#promociones", img: "/laesh-web-assets-uipv1a/img/promociones-2026.webp" },
+            5: { badge: "Atención Presencial y Horarios", title: "Ubicación, Horarios de Atención y Contacto", desc: "Azucenas #8, Fracc. Jardines del Sur, Huajuapan de León, Oax. Lun a Sáb: 7:00 a.m. – 9:00 p.m. | Dom: 7:00 a.m. – 3:00 p.m. | Tel: 953 688 7694", btnText: "Ver Ubicación", btnLink: "#ubicacion", img: "/laesh-web-assets-uipv1a/img/recepcion-de-pacientes.webp" }
+        };
+
+        function cargarHeroSlideSeleccionado(val) {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `cms-tab`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:48 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L169-199)</summary>
+
+**Path:** `Unknown file`
+
+```
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                this.click();
+            }
+        });
+    });
+
+    // Tabs superiores con data-section → showPanel + activateTab
+    document.querySelectorAll('.cms-tab[data-section]').forEach(function(tab) {
+        tab.addEventListener('click', function() {
+            showPanel(this.getAttribute('data-section'));
+            activateTab(this);
+        });
+    });
+
+    // Botón guardar/publicar
+    var btnSave = document.getElementById('btn-cms-save-action');
+    if (btnSave) btnSave.addEventListener('click', simulateSave);
+
+    // File inputs → previewImage
+    var fileMap = {
+        'file-hero-selected':    'prev-hero-selected',
+        'file-hero-1':           'prev-hero-1',
+        'file-banner-promos':    'prev-banner-promos',
+        'file-esp-selected':     'prev-esp-selected',
+        'file-calidad-selected': 'prev-calidad-selected',
+        'file-croquis':          'prev-croquis'
+    };
+    Object.keys(fileMap).forEach(function(inputId) {
+        var el = document.getElementById(inputId);
+        if (el) el.addEventListener('change', function() { previewImage(this, fileMap[inputId]); });
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L94-134)</summary>
+
+**Path:** `Unknown file`
+
+```
+                <div class="sidebar-sep"></div>
+                <div class="sidebar-inner">
+                    <div class="publish-meta">Última publicación hace 2 días.</div>
+                    <button type="button" class="btn-cms-save btn-cms-save--full" id="btn-cms-save-action">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                        Publicar Cambios
+                    </button>
+                </div>
+
+                <!-- ── Panel móvil: user info + logout (se muestra al abrir hamburger ≤767px) -->
+                <div class="sidebar-mobile-only">
+                    <div class="user-badge--sm">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--primary-green-dark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        <span>Admin Web: <strong class="strong-primary">Administrador</strong></span>
+                    </div>
+                    <a href="index.html" class="btn-logout--mobile">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                        Cerrar Sesión
+                    </a>
+                </div>
+            </aside>
+
+            <!-- ============ MAIN CONTENT ============ -->
+            <main class="main-content main-content--pad" id="main-content">
+                <!-- Tabs de navegación superiores (Elevadas al Top) -->
+                <div class="cms-tabs" role="tablist" aria-label="Secciones del sitio web">
+                    <div class="cms-tab active" id="tab-hero" role="tab" aria-selected="true" aria-controls="panel-hero" tabindex="0" data-section="hero">1. Banner Principal (#inicio)</div>
+                    <div class="cms-tab" id="tab-quienes-somos" role="tab" aria-selected="false" aria-controls="panel-quienes-somos" tabindex="-1" data-section="quienes-somos">2. Quiénes somos (#acerca-de)</div>
+                    <div class="cms-tab" id="tab-especialidades" role="tab" aria-selected="false" aria-controls="panel-especialidades" tabindex="-1" data-section="especialidades">3. Estudios de Rutina y Especialidades (#especialidades)</div>
+                    <div class="cms-tab" id="tab-promociones" role="tab" aria-selected="false" aria-controls="panel-promociones" tabindex="-1" data-section="promociones">4. Promociones Vigentes (#promociones)</div>
+                    <div class="cms-tab" id="tab-calidad" role="tab" aria-selected="false" aria-controls="panel-calidad" tabindex="-1" data-section="calidad">5. Calidad e Instalaciones (#calidad)</div>
+                    <div class="cms-tab" id="tab-ubicacion" role="tab" aria-selected="false" aria-controls="panel-ubicacion" tabindex="-1" data-section="ubicacion">6. Ubicación y Contacto (#ubicacion)</div>
+                </div>
+
+                <!-- ========================================== -->
+                <!-- PANEL 1: BANNER PRINCIPAL / HERO           -->
+                <!-- ========================================== -->
+                <div id="panel-hero" class="cms-panel active" role="tabpanel" aria-labelledby="tab-hero" tabindex="0">
+                    <h3 class="cms-h3">Edición de Banners del Carrusel Principal (#inicio)</h3>
+                    <!-- Leyenda Operativa de Ayuda para Banner Principal -->
+                    <div class="operator-guide-box">
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L149-184)</summary>
+
+**Path:** `Unknown file`
+
+```
+            setTimeout(() => toast.classList.remove('show'), 3500);
+        }
+
+
+/* ── P-LAESH-01 Phase3: event listeners (reemplaza onclick=/onchange= del HTML) ── */
+document.addEventListener('DOMContentLoaded', function() {
+    // Inyectar por defecto valor actual en duro (5 segundos) si no viene poblado
+    var inputHeroTrans = document.getElementById('input-hero-transition');
+    if (inputHeroTrans && !inputHeroTrans.value) {
+        inputHeroTrans.value = "5";
+    }
+
+    // Sidebar nav items con data-section → showPanel + activateNav
+    document.querySelectorAll('.sidebar .nav-item[data-section]').forEach(function(item) {
+        item.addEventListener('click', function() {
+            showPanel(this.getAttribute('data-section'));
+            activateNav(this);
+        });
+        // A-01: activación por teclado para role="button" (Enter / Espacio)
+        item.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                this.click();
+            }
+        });
+    });
+
+    // Tabs superiores con data-section → showPanel + activateTab
+    document.querySelectorAll('.cms-tab[data-section]').forEach(function(tab) {
+        tab.addEventListener('click', function() {
+            showPanel(this.getAttribute('data-section'));
+            activateTab(this);
+        });
+    });
+
+    // Botón guardar/publicar
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Investigating Tab Switching**
+
+I'm currently focused on why `showPanel()` isn't correctly switching tabs or breaking when a tab is clicked. I'm examining the function's code now to pinpoint the root cause of the behavior, specifically the loop and conditional logic within.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.001890346s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L269-328)</summary>
+
+**Path:** `Unknown file`
+
+```
+                counter.classList.add('limit');
+            } else if (ratio >= 0.85) {
+                counter.classList.add('warn');
+            } else if (len > 0) {
+                counter.classList.add('ok');
+            }
+        }
+    }
+
+    function refreshAllCharCounters() {
+        document.querySelectorAll('input[type="text"], input[type="tel"], textarea').forEach(function(input) {
+            if (input.type === 'hidden' || input.type === 'file' || input.id === 'login-redirect-target') return;
+            updateCharCounter(input);
+        });
+    }
+
+    document.querySelectorAll('input[type="text"], input[type="tel"], textarea').forEach(function(input) {
+        if (input.type === 'hidden' || input.type === 'file') return;
+        input.addEventListener('input', function() { updateCharCounter(this); });
+        input.addEventListener('change', function() { updateCharCounter(this); });
+    });
+
+    // Actualizar contadores al inicio y al cambiar de slide o ficha
+    setTimeout(refreshAllCharCounters, 100);
+
+    // Lógica reactiva para enterarse de notificaciones de recepción (labadmin)
+    let lastRemitidosCMS = 0;
+    function refreshNotificacionesCMS() {
+        if (typeof getOrders !== 'function') return;
+        const orders = getOrders().filter(o => o.estado === 'Remitido');
+        const count = orders.length;
+        const badge = document.getElementById('badge-notif-cms');
+
+        if (badge) {
+            badge.innerText = count;
+            if (count > 0) {
+                badge.classList.add('show');
+                if (count > lastRemitidosCMS) {
+                    badge.classList.add('pulse');
+                    if (typeof playWhistle === 'function') {
+                        playWhistle();
+                    }
+                    setTimeout(() => badge.classList.remove('pulse'), 3000);
+                }
+                document.title = `(${count}) Gestión Web - LAESH`;
+            } else {
+                badge.classList.remove('show');
+                badge.classList.remove('pulse');
+                document.title = "Gestión Web - LAESH";
+            }
+        }
+        lastRemitidosCMS = count;
+    }
+
+    // Inicializar y escuchar cambios de LocalStorage
+    refreshNotificacionesCMS();
+    setInterval(refreshNotificacionesCMS, 4000);
+    window.addEventListener('storage', refreshNotificacionesCMS);
+
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:48 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L134-179)</summary>
+
+**Path:** `Unknown file`
+
+```
+                    <div class="operator-guide-box">
+                        <strong>📌 Indicaciones de Carga para el Banner Principal (Hero):</strong>
+                        <ul class="cms-ul">
+                            <li><strong>Sobreescritura Directa:</strong> Al subir un nuevo banner de fondo para el Slide seleccionado (1, 2 o 3), la imagen previa se <em>sobreescribe automáticamente</em> en el servidor.</li>
+                            <li><strong>Dimensiones Recomendadas:</strong> Proporción Panorámica <strong>16:9</strong> (resolución ideal: <code>1920 x 1080 px</code> Full HD).</li>
+                            <li><strong>Formatos & Peso:</strong> Formato <strong>WebP</strong> (óptimo para carga ultrarrápida), JPG o PNG. Tamaño máximo por archivo: <strong>15 MB</strong>.</li>
+                        </ul>
+                    </div>
+
+                    <div class="editor-card mb-4">
+                        <div class="editor-card-header">
+                            <div class="card-title">Configuración de Tiempos del Slider Principal</div>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <label for="input-hero-transition">Tiempo de Transición / Autoplay del Slider (segundos)</label>
+                                <input type="number" name="hero_transition_time" id="input-hero-transition" min="1" max="60" value="5" step="1" required>
+                                <small class="cms-help-text">Tiempo en segundos para la transición automática entre diapositivas del carrusel principal (#inicio). Valor actual: 5 segundos.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ficha Unificada de Captura: Slider Principal (5 Slides) -->
+                    <div class="editor-card">
+                        <div class="editor-card-header editor-card-header--padded">
+                            <div class="card-title">Edición de Diapositivas del Banner Principal (#inicio)</div>
+                            <span class="operator-badge operator-badge-block">Límite: 5 Slides | Dimensiones: 1920x1080 px (16:9) | Formato: WebP (Óptimo), JPG, PNG | Peso máx: 15 MB</span>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Seleccionar Diapositiva del Banner Principal a Actualizar (1 al 5)</h4>
+                                <select id="select-hero-slide" class="form-input-sm form-input-sm--bg">
+                                    <option value="1">Slide 1 de 5: Bienvenida a LAESH® — Diagnósticos de Confianza</option>
+                                    <option value="2">Slide 2 de 5: 25 Años de Experiencia Clínica</option>
+                                    <option value="3">Slide 3 de 5: Excelencia y Calidad Certificada</option>
+                                    <option value="4">Slide 4 de 5: Promociones y Check-Ups Médicos 2026</option>
+                                    <option value="5">Slide 5 de 5: Ubicación, Horarios de Atención y Contacto</option>
+                                </select>
+                            </div>
+
+                            <div class="field-row mt-3">
+                                <div class="field-group">
+                                    <label>Imagen de Fondo del Slide (1920x1080 px WebP/JPG/PNG)</label>
+                                    <div class="image-upload-box">
+                                        <img id="prev-hero-selected" src="/laesh-web-assets-uipv1a/img/recepcion.webp" alt="Banner Principal" class="img-preview-sm">
+                                        <input type="file" accept="image/*" id="file-hero-selected">
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing HTML Sections**
+
+I've been examining specific HTML sections, focusing on lines 144-155 of `gestion-web.html`. I'm paying close attention to the structure, particularly the `editor-card` and its nested elements. The "Configuración de Tiempos del Slider Principal" seems like a key area for investigation. I want to understand how the slider's timing is configured within this part of the code.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.105033993s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:49 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L309-328)</summary>
+
+**Path:** `Unknown file`
+
+```
+                        playWhistle();
+                    }
+                    setTimeout(() => badge.classList.remove('pulse'), 3000);
+                }
+                document.title = `(${count}) Gestión Web - LAESH`;
+            } else {
+                badge.classList.remove('show');
+                badge.classList.remove('pulse');
+                document.title = "Gestión Web - LAESH";
+            }
+        }
+        lastRemitidosCMS = count;
+    }
+
+    // Inicializar y escuchar cambios de LocalStorage
+    refreshNotificacionesCMS();
+    setInterval(refreshNotificacionesCMS, 4000);
+    window.addEventListener('storage', refreshNotificacionesCMS);
+
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:49 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:49 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:49 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:49 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+
+estas pestañas, siguen sin mostrar su contenido: Quiénes somos, Estudios de Rutina, y Ubicación y Contacto
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `gestion-web.html`
+**Language:** html
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `id="panel-`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:53 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L219-314)</summary>
+
+**Path:** `Unknown file`
+
+```
+                </div>
+
+                <!-- ========================================== -->
+                <!-- PANEL 2: QUIÉNES SOMOS                     -->
+                <!-- ========================================== -->
+                <div id="panel-quienes-somos" class="cms-panel" role="tabpanel" aria-labelledby="tab-quienes-somos" tabindex="0">
+                    <h3 class="cms-h3">Edición de las 4 Fichas de Quiénes Somos (#acerca-de)</h3>
+                    <p class="cms-p">Modifica los pilares institucionales y la trayectoria expuesta en la sección Quiénes Somos.</p>
+
+                    <div class="grid-2col">
+                        <!-- Ficha 1 -->
+                        <div class="editor-card">
+                            <div class="editor-card-header editor-card-header--padded">
+                                <div class="card-title">Ficha 1: Historia y Trayectoria (25 Años)</div>
+                                <span class="operator-badge operator-badge-block">Pilar 1 | Trayectoria, posgrados y reconocimientos</span>
+                            </div>
+                            <div class="editor-card-body">
+                                <div class="field-group">
+                                    <h4 class="cms-selector-heading">Título de la Ficha Principal (Rec 35–50 char)</h4>
+                                    <input type="text" name="acerca_ficha1_titulo" required value="25 años de experiencia al servicio del diagnóstico" data-max="60">
+                                </div>
+                                <div class="field-group">
+                                    <h4 class="cms-selector-heading">Contenido de Historia y Reseña (Salto de línea = Nuevo párrafo)</h4>
+                                    <textarea class="textarea-historia" name="acerca_ficha1_texto" required data-max="600">LAESH, Laboratorio de Especialidades Hematológicas, es una empresa 100% de la Región Mixteca, fundada en Huajuapan de León, Oaxaca, con el propósito de ofrecer servicios de laboratorio clínico confiables, especializados y de alta calidad para médicos y pacientes.
+
+Nuestra experiencia está respaldada por 25 años de trayectoria profesional, un equipo de químicos especialistas con estudios de posgrado y especialización en Hematología Diagnóstica por Laboratorio.
+
+Nuestro compromiso con la calidad se refleja en nuestra participación en programas de evaluación externa, donde hemos obtenido calificaciones de EXCELENCIA, así como en el Galardón Rey PACAL.</textarea>
+                                    <small class="cms-help-text">Puedes separar el contenido en varios párrafos utilizando un salto de renglón (Enter). Cada renglón o párrafo se renderizará distribuido holgadamente en la ficha de la página.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ficha 2 -->
+                        <div class="editor-card">
+                            <div class="editor-card-header editor-card-header--padded">
+                                <div class="card-title">Ficha 2: Nuestra Misión</div>
+                                <span class="operator-badge operator-badge-block">Pilar 2 | Compromiso clínico de atención oportuna</span>
+                            </div>
+                            <div class="editor-card-body">
+                                <div class="field-group">
+                                    <h4 class="cms-selector-heading">Título de la Misión (Rec 15–30 char)</h4>
+                                    <input type="text" name="acerca_ficha2_titulo" required value="🟢 MISIÓN" data-max="40">
+                                </div>
+                                <div class="field-group">
+                                    <h4 class="cms-selector-heading">Declaración de Misión (Rec 120–200 char)</h4>
+                                    <textarea class="textarea-100" name="acerca_ficha2_texto" data-max="250">Brindar resultados confiables y clínicamente relevantes que ayuden al médico a tomar mejores decisiones y al paciente a recibir una atención oportuna y segura.</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ficha 3 -->
+                        <div class="editor-card">
+                            <div class="editor-card-header editor-card-header--padded">
+                                <div class="card-title">Ficha 3: Nuestra Visión</div>
+                                <span class="operator-badge operator-badge-block">Pilar 3 | Laboratorio de referencia en la Mixteca</span>
+                            </div>
+                            <div class="editor-card-body">
+                                <div class="field-group">
+                                    <h4 class="cms-selector-heading">Título de la Visión (Rec 15–30 char)</h4>
+                                    <input type="text" name="acerca_ficha3_titulo" required value="🔵 VISIÓN" data-max="40">
+                                </div>
+                                <div class="field-group">
+                                    <h4 class="cms-selector-heading">Declaración de Visión (Rec 120–200 char)</h4>
+                                    <textarea class="textarea-100" name="acerca_ficha3_texto" data-max="250">Ser el laboratorio de referencia para médicos y pacientes, reconocido por la excelencia de nuestros resultados, la especialización de nuestro equipo y nuestro compromiso permanente con la calidad.</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ficha 4 -->
+                        <div class="editor-card">
+                            <div class="editor-card-header editor-card-header--padded">
+                                <div class="card-title">Ficha 4: Nuestros Valores</div>
+                                <span class="operator-badge operator-badge-block">Pilar 4 | Ética, empatía y rigor científico</span>
+                            </div>
+                            <div class="editor-card-body">
+                                <div class="field-group">
+                                    <h4 class="cms-selector-heading">Título de los Valores (Rec 20–35 char)</h4>
+                                    <input type="text" name="acerca_ficha4_titulo" required value="🟢 ¿POR QUÉ CONFIAR EN LAESH®?" data-max="45">
+                                </div>
+                                <div class="field-group">
+                                    <h4 class="cms-selector-heading">Valores e Integridad (Rec 120–200 char)</h4>
+                                    <textarea class="textarea-100" name="acerca_ficha4_texto" data-max="250">Rigurosidad científica, empatía y calidez en el trato, integridad ética en los diagnósticos, responsabilidad social y constante mejora de nuestros análisis.</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================================== -->
+                <!-- PANEL 3: ESTUDIOS DE RUTINA Y ESPECIALIDADES -->
+                <!-- ========================================== -->
+                <div id="panel-especialidades" class="cms-panel" role="tabpanel" aria-labelledby="tab-especialidades" tabindex="0">
+                                 <!-- Editor de los 4 Grupos / Abanicos del Catálogo 2026 -->
+                    <!-- Editor de los 4 Grupos / Abanicos del Catálogo 2026 -->
+                    <!-- Editor de los 4 Grupos / Abanicos del Catálogo 2026 -->
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Panel Visibility**
+
+I've been examining the `showPanel` function within `gestion-web.js`. Specifically, I'm focusing on how it manages the visibility of different panels. It seems to iterate through existing panels, removing the 'active' class from each, before attempting to activate the target panel. I'm noting the use of `querySelectorAll` and the conditional check for `targetPanel`.
+
+
+**Investigating DOM Manipulation**
+
+I'm now diving into the `updateCharCounter` function within `gestion-web.js`. I've noticed an important detail. It seems that `updateCharCounter` can be triggered multiple times, and I'm concerned about how it interacts with nested `.field-group` elements. Specifically, the line `label.parentNode.insertBefore(labelRow, label)` may lead to unintended DOM modifications. This could be problematic when `h4` or `label` elements are nested.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.831034017s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L39-89)</summary>
+
+**Path:** `Unknown file`
+
+```
+                    <span id="header-bc-current" class="txt-pgd fw-bold">Banner Principal</span>
+                </div>
+            </div>
+            <div class="portal-header-right">
+                <div class="user-badge-portal">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--primary-green-dark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    <span>Admin Web: <strong class="txt-pgd">Administrador</strong></span>
+                </div>
+                <a href="index.html" class="btn-back-primary" id="btn-logout">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                    Cerrar Sesión
+                </a>
+            </div>
+            <!-- Círculo iniciales — visible solo en móvil (≤767px), a la izq. del hamburger -->
+            <div class="portal-initials-mob portal-initials-mob--admin" aria-hidden="true">ADM</div>
+            <!-- .nav-hamburger inyectado por app.js en tablet/móvil -->
+        </nav>
+
+        <div class="app-layout">
+            <!-- ============ SIDEBAR ============ -->
+            <aside class="sidebar">
+
+                <!-- Toggle rail: colapsar / expandir sidebar (solo desktop ≥1025px) -->
+                <div class="sidebar-toggle-row">
+                    <button type="button" class="sidebar-rail-toggle" id="sidebar-rail-toggle" title="Expandir / Colapsar menú">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                    </button>
+                </div>
+
+                <div class="nav-item active" id="nav-hero" data-panel="panel-hero" data-section="hero" data-tooltip="Edición de banners y textos del carrusel principal (#inicio)" role="button" tabindex="0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+                    Banner Principal
+                </div>
+                <div class="nav-item" id="nav-quienes-somos" data-panel="panel-quienes-somos" data-section="quienes-somos" data-tooltip="Edición de Historia, Misión, Visión y Valores (#acerca-de)" role="button" tabindex="0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    Quiénes somos
+                </div>
+                <div class="nav-item" id="nav-especialidades" data-panel="panel-especialidades" data-section="especialidades" data-tooltip="Edición del carrusel y catálogo completo de estudios (#especialidades)" role="button" tabindex="0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2v6a2 2 0 0 0 .245.96l5.51 10.08A2 2 0 0 1 18 22H6a2 2 0 0 1-1.755-2.96l5.51-10.08A2 2 0 0 0 10 8V2"/></svg>
+                    Estudios de Rutina
+                </div>
+                <div class="nav-item" id="nav-promociones" data-panel="panel-promociones" data-section="promociones" data-tooltip="Subida y actualización del banner promocional (#promociones)" role="button" tabindex="0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m8.5 8.5 7 7"/></svg>
+                    Promociones Vigentes
+                </div>
+                <div class="nav-item" id="nav-calidad" data-panel="panel-calidad" data-section="calidad" data-tooltip="Galería de fotos de instalaciones y certificaciones (#calidad)" role="button" tabindex="0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                    Calidad e Instalaciones
+                </div>
+                <div class="nav-item" id="nav-ubicacion" data-panel="panel-ubicacion" data-section="ubicacion" data-tooltip="Teléfonos, dirección, croquis y Google Maps (#ubicacion)" role="button" tabindex="0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing showPanel Function**
+
+I'm now diving into the `showPanel(name)` function within `gestion-web.js`. Specifically, I'm trying to see how it toggles panels by removing the 'active' class from all, and then adds it to the target panel. I'm focusing on the logic that selects and modifies the DOM elements.
+
+
+**Investigating Character Counter Issue**
+
+I've discovered a potential issue related to character counters within specific panels, namely "Quiénes somos," "Estudios de Rutina," and "Ubicación y Contacto." My analysis suggests a bug might have emerged when handling these particular fields. Upon examining `updateCharCounter` and `refreshAllCharCounters()`, I've noticed their logic could be leading to problems within those panels.
+
+
+**Refining CharCounter Logic**
+
+I've pinpointed the root cause of the DOM corruption. The `updateCharCounter` function was incorrectly manipulating the DOM, specifically by repeatedly wrapping headings with `.label-row-between` elements. This happened in `panel-quienes-somos`, `panel-especialidades`, and `panel-ubicacion`, leading to a broken DOM structure. I'm now devising a fix to prevent any DOM alterations, ensuring stability for these panels.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.001971640s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L229-284)</summary>
+
+**Path:** `Unknown file`
+
+```
+            }
+        });
+    }
+
+    // Select calidad (si existe, tiene id asignado por su data-section context)
+    var selCalidad = document.getElementById('select-carrusel-calidad');
+    if (selCalidad) selCalidad.addEventListener('change', function() { cargarCalidadSeleccionada(this.value); });
+
+    // Contador universal de caracteres en tiempo real (esquina superior derecha)
+    function updateCharCounter(el) {
+        if (!el) return;
+        const max = parseInt(el.getAttribute('data-max') || el.getAttribute('maxlength') || '100', 10);
+        const len = el.value ? el.value.length : 0;
+        const fieldGroup = el.closest('.field-group');
+        if (!fieldGroup) return;
+
+        let counter = fieldGroup.querySelector('.char-counter');
+        if (!counter) {
+            let labelRow = fieldGroup.querySelector('.label-row-between');
+            if (!labelRow) {
+                const label = fieldGroup.querySelector('label, h4, .cms-selector-heading');
+                if (label) {
+                    labelRow = document.createElement('div');
+                    labelRow.className = 'label-row-between';
+                    label.parentNode.insertBefore(labelRow, label);
+                    labelRow.appendChild(label);
+                }
+            }
+            if (labelRow) {
+                counter = document.createElement('span');
+                counter.className = 'char-counter';
+                labelRow.appendChild(counter);
+            }
+        }
+
+        if (counter) {
+            counter.textContent = len + ' / ' + max + ' char';
+            counter.classList.remove('ok', 'warn', 'limit');
+            const ratio = len / max;
+            if (ratio > 1) {
+                counter.classList.add('limit');
+            } else if (ratio >= 0.85) {
+                counter.classList.add('warn');
+            } else if (len > 0) {
+                counter.classList.add('ok');
+            }
+        }
+    }
+
+    function refreshAllCharCounters() {
+        document.querySelectorAll('input[type="text"], input[type="tel"], textarea').forEach(function(input) {
+            if (input.type === 'hidden' || input.type === 'file' || input.id === 'login-redirect-target') return;
+            updateCharCounter(input);
+        });
+    }
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `label-row-between`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:54 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:54 pm
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:54 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L219-259)</summary>
+
+**Path:** `Unknown file`
+
+```
+    font-size: 0.8rem;
+    line-height: 1.4;
+}
+
+.editor-card-header--padded {
+    padding-bottom: 0.85rem;
+    border-bottom: 1px solid rgba(0, 82, 183, 0.1);
+    margin-bottom: 1.25rem;
+}
+
+/* ── Renglón de etiqueta con contador de caracteres en la esquina superior derecha ── */
+.label-row-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.35rem;
+}
+
+.char-counter {
+    font-size: 0.76rem;
+    font-weight: 700;
+    color: #475569;
+    background: #f1f5f9;
+    padding: 2px 8px;
+    border-radius: 12px;
+    border: 1px solid #cbd5e1;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+    margin-left: 0.5rem;
+}
+
+.char-counter.ok {
+    color: #15803d;
+    background: #dcfce7;
+    border-color: #86efac;
+}
+
+.char-counter.warn {
+    color: #b45309;
+    background: #fef3c7;
+    border-color: #fde68a;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:54 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:54 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:54 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:54 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+. ELimina estos texto tipo:  (<p> · Rec 130–150 char para simetría de tarjeta | Máx 170) y solo se quede 152 / 170 char, asi generalizalo para todos los contenidos de las pestañas que lo tengan y/o requieran.
+. continua el bug de no mostrarse contenido para: Ubicación y Contacto, Estudios de Rutina, Quiénes somos.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `gestion-web.js`
+**Language:** javascript
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `panel`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:59 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `cms-panel`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:59 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Inspecting HTML Panels**
+
+I'm now diving into `gestion-web.html`, meticulously checking the HTML syntax within the defined panels: `panel-quienes-somos`, `panel-especialidades`, and `panel-ubicacion`. I'm going line by line to verify the integrity of each of these sections. I'll make sure to get `panel-hero`, from line 132 to line 185!
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `cms-selector-heading`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.153463698s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:59 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L199-239)</summary>
+
+**Path:** `Unknown file`
+
+```
+    }
+}
+
+/* ── Estilos de Subtítulos de Selección y Espaciado de Cabeceras CMS ── */
+.cms-selector-heading {
+    font-size: 1.02rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-top: 1.25rem;
+    margin-bottom: 0.75rem;
+    padding-left: 0.65rem;
+    border-left: 3.5px solid var(--primary-green);
+    display: block;
+    line-height: 1.35;
+}
+
+.operator-badge-block {
+    display: block;
+    margin-top: 0.5rem;
+    margin-bottom: 0.2rem;
+    font-size: 0.8rem;
+    line-height: 1.4;
+}
+
+.editor-card-header--padded {
+    padding-bottom: 0.85rem;
+    border-bottom: 1px solid rgba(0, 82, 183, 0.1);
+    margin-bottom: 1.25rem;
+}
+
+/* ── Contador de caracteres en la esquina superior derecha del label ── */
+.field-group label,
+.cms-selector-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.char-counter {
+    font-size: 0.76rem;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L9-44)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+        function showPanel(name) {
+            document.querySelectorAll('.cms-panel').forEach(p => p.classList.remove('active'));
+            const targetPanel = document.getElementById('panel-' + name);
+            if (targetPanel) targetPanel.classList.add('active');
+
+            // Sincronizar pestaña superior activa + ARIA (A-01)
+            document.querySelectorAll('.cms-tab').forEach(function(t) {
+                t.classList.remove('active');
+                t.setAttribute('aria-selected', 'false');
+                t.setAttribute('tabindex', '-1');
+            });
+            const targetTab = document.getElementById('tab-' + name);
+            if (targetTab) {
+                targetTab.classList.add('active');
+                targetTab.setAttribute('aria-selected', 'true');
+                targetTab.setAttribute('tabindex', '0');
+            }
+
+            // Actualizar breadcrumb
+            const bc = document.getElementById('header-bc-current');
+            if (bc && panelLabelsGestion[name]) bc.textContent = panelLabelsGestion[name];
+        }
+
+        function activateTab(el) {
+            document.querySelectorAll('.cms-tab').forEach(function(t) {
+                t.classList.remove('active');
+                t.setAttribute('aria-selected', 'false');
+                t.setAttribute('tabindex', '-1');
+            });
+            el.classList.add('active');
+            el.setAttribute('aria-selected', 'true');
+            el.setAttribute('tabindex', '0');
+        }
+
+        function activateNav(el) {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L209-324)</summary>
+
+**Path:** `Unknown file`
+
+```
+                                    <label>Texto del Botón CTA Blanco (2–3 palabras · Rec 15–25 char)</label>
+                                    <input type="text" id="input-hero-btn-text" name="hero_slide_btn_text" value="Conoce los Servicios" maxlength="30" data-max="30">
+                                </div>
+                                <div class="field-group">
+                                    <label>Enlace del Botón CTA (Ej. #especialidades, #promociones)</label>
+                                    <input type="text" id="input-hero-btn-link" name="hero_slide_btn_link" value="#especialidades" data-max="50">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================================== -->
+                <!-- PANEL 2: QUIÉNES SOMOS                     -->
+                <!-- ========================================== -->
+                <div id="panel-quienes-somos" class="cms-panel" role="tabpanel" aria-labelledby="tab-quienes-somos" tabindex="0">
+                    <h3 class="cms-h3">Edición de las 4 Fichas de Quiénes Somos (#acerca-de)</h3>
+                    <p class="cms-p">Modifica los pilares institucionales y la trayectoria expuesta en la sección Quiénes Somos.</p>
+
+                    <div class="grid-2col">
+                        <!-- Ficha 1 -->
+                        <div class="editor-card">
+                            <div class="editor-card-header editor-card-header--padded">
+                                <div class="card-title">Ficha 1: Historia y Trayectoria (25 Años)</div>
+                                <span class="operator-badge operator-badge-block">Pilar 1 | Trayectoria, posgrados y reconocimientos</span>
+                            </div>
+                            <div class="editor-card-body">
+                                <div class="field-group">
+                                    <h4 class="cms-selector-heading">Título de la Ficha Principal (Rec 35–50 char)</h4>
+                                    <input type="text" name="acerca_ficha1_titulo" required value="25 años de experiencia al servicio del diagnóstico" data-max="60">
+                                </div>
+                                <div class="field-group">
+                                    <h4 class="cms-selector-heading">Contenido de Historia y Reseña (Salto de línea = Nuevo párrafo)</h4>
+                                    <textarea class="textarea-historia" name="acerca_ficha1_texto" required data-max="600">LAESH, Laboratorio de Especialidades Hematológicas, es una empresa 100% de la Región Mixteca, fundada en Huajuapan de León, Oaxaca, con el propósito de ofrecer servicios de laboratorio clínico confiables, especializados y de alta calidad para médicos y pacientes.
+
+Nuestra experiencia está respaldada por 25 años de trayectoria profesional, un equipo de químicos especialistas con estudios de posgrado y especialización en Hematología Diagnóstica por Laboratorio.
+
+Nuestro compromiso con la calidad se refleja en nuestra participación en programas de evaluación externa, donde hemos obtenido calificaciones de EXCELENCIA, así como en el Galardón Rey PACAL.</textarea>
+                                    <small class="cms-help-text">Puedes separar el contenido en varios párrafos utilizando un salto de renglón (Enter). Cada renglón o párrafo se renderizará distribuido holgadamente en la ficha de la página.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ficha 2 -->
+                        <div class="editor-card">
+                            <div class="editor-card-header editor-card-header--padded">
+                                <div class="card-title">Ficha 2: Nuestra Misión</div>
+                                <span class="operator-badge operator-badge-block">Pilar 2 | Compromiso clínico de atención oportuna</span>
+                            </div>
+                            <div class="editor-card-body">
+                                <div class="field-group">
+                                    <h4 class="cms-selector-heading">Título de la Misión (Rec 15–30 char)</h4>
+                                    <input type="text" name="acerca_ficha2_titulo" required value="🟢 MISIÓN" data-max="40">
+                                </div>
+                                <div class="field-group">
+                                    <h4 class="cms-selector-heading">Declaración de Misión (Rec 120–200 char)</h4>
+                                    <textarea class="textarea-100" name="acerca_ficha2_texto" data-max="250">Brindar resultados confiables y clínicamente relevantes que ayuden al médico a tomar mejores decisiones y al paciente a recibir una atención oportuna y segura.</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ficha 3 -->
+                        <div class="editor-card">
+                            <div class="editor-card-header editor-card-header--padded">
+                                <div class="card-title">Ficha 3: Nuestra Visión</div>
+                                <span class="operator-badge operator-badge-block">Pilar 3 | Laboratorio de referencia en la Mixteca</span>
+                            </div>
+                            <div class="editor-card-body">
+                                <div class="field-group">
+                                    <h4 class="cms-selector-heading">Título de la Visión (Rec 15–30 char)</h4>
+                                    <input type="text" name="acerca_ficha3_titulo" required value="🔵 VISIÓN" data-max="40">
+                                </div>
+                                <div class="field-group">
+                                    <h4 class="cms-selector-heading">Declaración de Visión (Rec 120–200 char)</h4>
+                                    <textarea class="textarea-100" name="acerca_ficha3_texto" data-max="250">Ser el laboratorio de referencia para médicos y pacientes, reconocido por la excelencia de nuestros resultados, la especialización de nuestro equipo y nuestro compromiso permanente con la calidad.</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ficha 4 -->
+                        <div class="editor-card">
+                            <div class="editor-card-header editor-card-header--padded">
+                                <div class="card-title">Ficha 4: Nuestros Valores</div>
+                                <span class="operator-badge operator-badge-block">Pilar 4 | Ética, empatía y rigor científico</span>
+                            </div>
+                            <div class="editor-card-body">
+                                <div class="field-group">
+                                    <h4 class="cms-selector-heading">Título de los Valores (Rec 20–35 char)</h4>
+                                    <input type="text" name="acerca_ficha4_titulo" required value="🟢 ¿POR QUÉ CONFIAR EN LAESH®?" data-max="45">
+                                </div>
+                                <div class="field-group">
+                                    <h4 class="cms-selector-heading">Valores e Integridad (Rec 120–200 char)</h4>
+                                    <textarea class="textarea-100" name="acerca_ficha4_texto" data-max="250">Rigurosidad científica, empatía y calidez en el trato, integridad ética en los diagnósticos, responsabilidad social y constante mejora de nuestros análisis.</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================================== -->
+                <!-- PANEL 3: ESTUDIOS DE RUTINA Y ESPECIALIDADES -->
+                <!-- ========================================== -->
+                <div id="panel-especialidades" class="cms-panel" role="tabpanel" aria-labelledby="tab-especialidades" tabindex="0">
+                                 <!-- Editor de los 4 Grupos / Abanicos del Catálogo 2026 -->
+                    <!-- Editor de los 4 Grupos / Abanicos del Catálogo 2026 -->
+                    <!-- Editor de los 4 Grupos / Abanicos del Catálogo 2026 -->
+                    <div class="editor-card mb-4">
+                        <div class="editor-card-header editor-card-header--padded">
+                            <div class="card-title">Abanico 1: Rutina General</div>
+                            <span class="operator-badge operator-badge-block">Columna 1 | Hematología, Química Clínica, Electrolitos, Uroanálisis, Coagulación</span>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Título del Abanico 1 (Rec 50–90 char)</h4>
+                                <input type="text" name="estudios_cg1_titulo" value="Rutina General — Hematología, Química Clínica, Electrolitos, Uroanálisis, Coagulación" required data-max="100">
+                            </div>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `<script`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:59 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `cms-panel`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:59 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `panel-quienes-somos`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:59 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `sidebar-rail.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+/**
+ * sidebar-rail.js — LAESH Portal
+ * Funcionalidades compartidas del sidebar colapsable en desktop (≥1025px):
+ *
+ *  1. syncPad  — mantiene .app-layout alineado bajo .portal-access-header fijo.
+ *               (app.js hace lo mismo para medicos/labadmin; para gestion-web.html
+ *               este script es el único que lo compensa.)
+ *
+ *  2. Rail toggle — botón #sidebar-rail-toggle que colapsa (65px) / expande (260px)
+ *               el sidebar; persiste en localStorage['laesh_sidebar_expanded'].
+ *               Al expandir, emite el evento 'laesh:sidebarExpand' para que el SFS
+ *               de cada página sepa que debe cerrarse.
+ *
+ * Uso: <script src="/laesh-web-assets/js/sidebar-rail.js"></script>
+ *       Incluir DESPUÉS de app.js (cuando aplique) y justo antes de </body>.
+ *
+ * API pública: window.laeshSidebarRail = { isExpanded, setExpanded }
+ */
+(function () {
+    'use strict';
+
+    /* ── 1. syncPad ────────────────────────────────────────────────────────── */
+    /* Mide el portal-access-header y escribe paddingTop en .app-layout.
+       En medicos/labadmin app.js ya hace esto; la segunda llamada es inocua
+       (mismo valor). En gestion-web.html este bloque es el único que lo hace. */
+    var hdr = document.querySelector('.portal-access-header');
+    var lay = document.querySelector('.app-layout');
+
+    if (hdr && lay) {
+        function syncPad() {
+            if (window.innerWidth >= 1025) {
+                lay.style.paddingTop = hdr.getBoundingClientRect().height + 'px';
+            }
+            /* En tablet/móvil app.js ya gestiona el offset — no sobreescribir. */
+        }
+        requestAnimationFrame(syncPad);
+        window.addEventListener('resize', syncPad);
+    }
+
+    /* ── 2. Sidebar Rail toggle ────────────────────────────────────────────── */
+    var LS_KEY    = 'laesh_sidebar_expanded';
+    var sidebar   = document.querySelector('.app-layout > .sidebar');
+    var toggleBtn = document.getElementById('sidebar-rail-toggle');
+
+    /* Si la página no tiene rail (sin botón o sin sidebar) → salir sin error */
+    if (!sidebar || !toggleBtn) return;
+
+    var SVG_RIGHT = '<polyline points="9 18 15 12 9 6"/>';  /* › expandir  */
+    var SVG_LEFT  = '<polyline points="15 18 9 12 15 6"/>'; /* ‹ colapsar  */
+    var SVG_WRAP  = 'width="14" height="14" viewBox="0 0 24 24" fill="none" '
+                  + 'stroke="currentColor" stroke-width="2.5" '
+                  + 'stroke-linecap="round" stroke-linejoin="round"';
+
+    function isExpanded() {
+        return sidebar.classList.contains('sidebar-expanded');
+    }
+
+    function setExpanded(exp) {
+        if (exp) {
+            sidebar.classList.add('sidebar-expanded');
+            toggleBtn.innerHTML = '<svg ' + SVG_WRAP + '>' + SVG_LEFT + '</svg>';
+            localStorage.setItem(LS_KEY, '1');
+            /* Notificar a los SFS inline de cada página para que se cierren */
+            document.dispatchEvent(new CustomEvent('laesh:sidebarExpand'));
+        } else {
+            sidebar.classList.remove('sidebar-expanded');
+            toggleBtn.innerHTML = '<svg ' + SVG_WRAP + '>' + SVG_RIGHT + '</svg>';
+            localStorage.setItem(LS_KEY, '0');
+        }
+    }
+
+    /* Restaurar preferencia guardada (colapsado por defecto si no hay registro) */
+    setExpanded(localStorage.getItem(LS_KEY) === '1');
+
+    toggleBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        setExpanded(!isExpanded());
+    });
+
+    /* ── 3. Sidebar Right Rail toggle ────────────────────────────────────────── */
+    var LS_KEY_RIGHT   = 'laesh_sidebar_right_expanded';
+    var sidebarRight   = document.getElementById('sidebar-right');
+    var toggleRightBtn = document.getElementById('sidebar-right-toggle');
+
+    if (sidebarRight && toggleRightBtn) {
+        var SVG_RIGHT_ARR = '<polyline points="9 18 15 12 9 6"/>';  /* › colapsar  */
+        var SVG_LEFT_ARR  = '<polyline points="15 18 9 12 15 6"/>'; /* ‹ expandir  */
+        var SVG_WRAP_ARR  = 'width="14" height="14" viewBox="0 0 24 24" fill="none" '
+                          + 'stroke="currentColor" stroke-width="2.5" '
+                          + 'stroke-linecap="round" stroke-linejoin="round"';
+
+        function isRightExpanded() {
+            return sidebarRight.classList.contains('sidebar-right-expanded');
+        }
+
+        function setRightExpanded(exp) {
+            var content = sidebarRight.querySelector('.sidebar-right-content');
+            if (exp) {
+                sidebarRight.classList.add('sidebar-right-expanded');
+                if (content) content.style.display = 'block';
+                toggleRightBtn.innerHTML = '<svg ' + SVG_WRAP_ARR + '>' + SVG_RIGHT_ARR + '</svg>';
+                localStorage.setItem(LS_KEY_RIGHT, '1');
+            } else {
+                sidebarRight.classList.remove('sidebar-right-expanded');
+                if (content) content.style.display = 'none';
+                toggleRightBtn.innerHTML = '<svg ' + SVG_WRAP_ARR + '>' + SVG_LEFT_ARR + '</svg>';
+                localStorage.setItem(LS_KEY_RIGHT, '0');
+            }
+        }
+
+        // Restore preference (collapsed by default to preserve workspace width)
+        var savedRight = localStorage.getItem(LS_KEY_RIGHT);
+        setRightExpanded(savedRight === '1');
+
+        toggleRightBtn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            setRightExpanded(!isRightExpanded());
+        });
+    }
+
+    /* Exponer API para que el SFS inline de cada página consulte el estado */
+    window.laeshSidebarRail = { 
+        isExpanded: isExpanded, 
+        setExpanded: setExpanded,
+        isRightExpanded: typeof isRightExpanded === 'function' ? isRightExpanded : null,
+        setRightExpanded: typeof setRightExpanded === 'function' ? setRightExpanded : null
+    };
+
+})();
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `showPanel`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:59 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Examining Function Behavior**
+
+Okay, I'm now drilling into the `showPanel` function located in `gestion-web.js`. It looks like it iterates through all elements with the class `cms-panel`, removing the `active` class. Then, it attempts to target a specific panel based on the provided name. I see how this function is intended to control panel visibility, but my analysis isn't yet complete.
+
+
+**Analyzing Character Counter Logic**
+
+I've shifted my focus to the character counter functionality in `gestion-web.js`. I've analyzed `updateCharCounter` and `refreshAllCharCounters`. I've found an interesting behavior where the counter is incorrectly added to a different input's label, specifically when inputs are nested within a `.field-group` and a panel is hidden. This leads to duplicate counter elements on the first input's label. This needs further evaluation.
+
+
+**Pinpointing Label Association**
+
+Now I'm focusing on the root of the label issue. I've realized that the code incorrectly assumes a direct label-input relationship, leading to multiple `.char-counter` elements crammed into the wrong labels. Specifically, the problem arises because `fieldGroup.querySelector('label, .cms-selector-heading, h4')` was grabbing the first label within a group, instead of the correct label for a specific input. This results in the visual layout breakage, overflow and collapse that I described before. I'm now verifying if every input in `gestion-web.html` has a unique label element, and if not, how to associate them accurately to remedy this.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.439189316s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L129-219)</summary>
+
+**Path:** `Unknown file`
+
+```
+                <!-- PANEL 1: BANNER PRINCIPAL / HERO           -->
+                <!-- ========================================== -->
+                <div id="panel-hero" class="cms-panel active" role="tabpanel" aria-labelledby="tab-hero" tabindex="0">
+                    <h3 class="cms-h3">Edición de Banners del Carrusel Principal (#inicio)</h3>
+                    <!-- Leyenda Operativa de Ayuda para Banner Principal -->
+                    <div class="operator-guide-box">
+                        <strong>📌 Indicaciones de Carga para el Banner Principal (Hero):</strong>
+                        <ul class="cms-ul">
+                            <li><strong>Sobreescritura Directa:</strong> Al subir un nuevo banner de fondo para el Slide seleccionado (1, 2 o 3), la imagen previa se <em>sobreescribe automáticamente</em> en el servidor.</li>
+                            <li><strong>Dimensiones Recomendadas:</strong> Proporción Panorámica <strong>16:9</strong> (resolución ideal: <code>1920 x 1080 px</code> Full HD).</li>
+                            <li><strong>Formatos & Peso:</strong> Formato <strong>WebP</strong> (óptimo para carga ultrarrápida), JPG o PNG. Tamaño máximo por archivo: <strong>15 MB</strong>.</li>
+                        </ul>
+                    </div>
+
+                    <div class="editor-card mb-4">
+                        <div class="editor-card-header editor-card-header--padded">
+                            <div class="card-title">Configuración de Tiempos del Slider Principal</div>
+                            <span class="operator-badge operator-badge-block">Frecuencia de Autoplay en Diapositivas | Rango Sugerido: 3 a 10 s (Default: 5 s)</span>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Tiempo de Transición / Autoplay del Slider (segundos)</h4>
+                                <div class="field-row">
+                                    <div class="field-group">
+                                        <label for="input-hero-transition">Frecuencia de Autoplay en Pantalla (en segundos)</label>
+                                        <input type="number" name="hero_transition_time" id="input-hero-transition" min="1" max="60" value="5" step="1" required class="form-input-sm form-input-sm--bg">
+                                    </div>
+                                </div>
+                                <small class="cms-help-text mt-2">Tiempo en segundos para la transición automática entre diapositivas del carrusel principal (#inicio). Se recomienda un intervalo de 5 segundos para permitir una lectura fluida.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ficha Unificada de Captura: Slider Principal (5 Slides) -->
+                    <div class="editor-card">
+                        <div class="editor-card-header editor-card-header--padded">
+                            <div class="card-title">Edición de Diapositivas del Banner Principal (#inicio)</div>
+                            <span class="operator-badge operator-badge-block">Límite: 5 Slides | Dimensiones: 1920x1080 px (16:9) | Formato: WebP (Óptimo), JPG, PNG | Peso máx: 15 MB</span>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Seleccionar Diapositiva del Banner Principal a Actualizar (1 al 5)</h4>
+                                <select id="select-hero-slide" class="form-input-sm form-input-sm--bg">
+                                    <option value="1">Slide 1 de 5: Bienvenida a LAESH® — Diagnósticos de Confianza</option>
+                                    <option value="2">Slide 2 de 5: 25 Años de Experiencia Clínica</option>
+                                    <option value="3">Slide 3 de 5: Excelencia y Calidad Certificada</option>
+                                    <option value="4">Slide 4 de 5: Promociones y Check-Ups Médicos 2026</option>
+                                    <option value="5">Slide 5 de 5: Ubicación, Horarios de Atención y Contacto</option>
+                                </select>
+                            </div>
+
+                            <div class="field-row mt-3">
+                                <div class="field-group">
+                                    <label>Imagen de Fondo del Slide (1920x1080 px WebP/JPG/PNG)</label>
+                                    <div class="image-upload-box">
+                                        <img id="prev-hero-selected" src="/laesh-web-assets-uipv1a/img/recepcion.webp" alt="Banner Principal" class="img-preview-sm">
+                                        <input type="file" accept="image/*" id="file-hero-selected">
+                                    </div>
+                                </div>
+                                <div class="field-group">
+                                <h4 class="cms-selector-heading">Formulario de Edición del Hero Slide Seleccionado</h4>
+                                <div class="field-row">
+                                    <div class="field-group">
+                                        <label>Etiqueta Superior (Badge &lt;span&gt; · Rec 25–35 char | Máx 40)</label>
+                                        <input type="text" id="input-hero-badge" name="hero_slide_badge" value="Bienvenido a Nuestra Institución" maxlength="40" data-max="40">
+                                    </div>
+                                    <div class="field-group">
+                                        <label>Título Principal (&lt;h1&gt;/&lt;h2&gt; · Rec 35–45 char | Máx 60)</label>
+                                        <input type="text" id="input-hero-title" name="hero_slide_title" required value="Bienvenido a LAESH® — Diagnósticos de Confianza" maxlength="60" data-max="60">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="field-group">
+                                <label>Párrafo Descriptivo (&lt;p&gt; · Rec 130–150 char para simetría de tarjeta | Máx 170)</label>
+                                <textarea id="input-hero-desc" name="hero_slide_desc" required class="textarea-100" maxlength="170" data-max="170">Trabajamos para proporcionar información diagnóstica confiable que ayude al médico a tomar mejores decisiones y al paciente a recibir atención oportuna.</textarea>
+                            </div>
+
+                            <div class="field-row">
+                                <div class="field-group">
+                                    <label>Texto del Botón CTA Blanco (2–3 palabras · Rec 15–25 char)</label>
+                                    <input type="text" id="input-hero-btn-text" name="hero_slide_btn_text" value="Conoce los Servicios" maxlength="30" data-max="30">
+                                </div>
+                                <div class="field-group">
+                                    <label>Enlace del Botón CTA (Ej. #especialidades, #promociones)</label>
+                                    <input type="text" id="input-hero-btn-link" name="hero_slide_btn_link" value="#especialidades" data-max="50">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Examining the Code**
+
+I'm currently focused on lines 189 to 216 in `gestion-web.html`. I've zoomed in on lines 189-190, specifically the `div` and `h4` tags. It looks like the section is a form for editing the selected hero slide, which includes the heading "Formulario de Edición del Hero Slide Seleccionado". I'm getting a better understanding of the form's structure.
+
+
+**Correcting the HTML**
+
+I've zeroed in on the nested `div` structure within the hero slide form. A missing closing `</div>` around line 189 caused a cascading issue, corrupting subsequent panels. After fixing the unclosed tags, I cleaned up the form's structure. I'm focusing on removing verbose labels in Panel 1, and the code appears clean now. I'm moving on to Panel 2 for further cleanup.
+
+
+**Refactoring the Labels**
+
+I'm now changing all the `<h4 class="cms-selector-heading">` tags inside the "Fichas" sections to actual `<label>` tags. This ensures a proper association between each field and its label, which makes the `.char-counter` functionality work correctly. Now, I'm verifying the same change in Panels 3, 4, 5, and 6, and I am reserving `<h4 class="cms-selector-heading">` exclusively for major headings.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 3.366387502s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:59 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L304-449)</summary>
+
+**Path:** `Unknown file`
+
+```
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================================== -->
+                <!-- PANEL 3: ESTUDIOS DE RUTINA Y ESPECIALIDADES -->
+                <!-- ========================================== -->
+                <div id="panel-especialidades" class="cms-panel" role="tabpanel" aria-labelledby="tab-especialidades" tabindex="0">
+                                 <!-- Editor de los 4 Grupos / Abanicos del Catálogo 2026 -->
+                    <!-- Editor de los 4 Grupos / Abanicos del Catálogo 2026 -->
+                    <!-- Editor de los 4 Grupos / Abanicos del Catálogo 2026 -->
+                    <div class="editor-card mb-4">
+                        <div class="editor-card-header editor-card-header--padded">
+                            <div class="card-title">Abanico 1: Rutina General</div>
+                            <span class="operator-badge operator-badge-block">Columna 1 | Hematología, Química Clínica, Electrolitos, Uroanálisis, Coagulación</span>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Título del Abanico 1 (Rec 50–90 char)</h4>
+                                <input type="text" name="estudios_cg1_titulo" value="Rutina General — Hematología, Química Clínica, Electrolitos, Uroanálisis, Coagulación" required data-max="100">
+                            </div>
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Fichas / Categorías Internas y Estudios (Salto de línea = Nueva Ficha [Categoría])</h4>
+                                <textarea class="textarea-110" name="estudios_cg1_fichas" required data-max="1200">[Hematología] Citometría Hemática, Grupo y RH, Plaquetas, Velocidad de Sedimentación Globular, Reticulocitos, Perfil de Hierro, Hierro sérico, Inducción Drepanocitos
+[Química Clínica] Química Sanguínea 3, Química Sanguínea 7, Perfil Bioquímico 15, Perfil Bioquímico 24, Perfil Bioquímico 30, Perfil Bioquímico 35, Perfil Bioquímico 45, Glucosa sérica, Creatinina sérica, Colesterol Total, Triglicéridos
+[Electrolitos Séricos] E.S. 3 Elementos, E.S. 4 Elementos, E.S. Completos, Calcio sérico, Fósforo y Magnesio sérico, Bicarbonato y CO2
+[Uroanálisis] EGO + Radio Prot/Crea, EGO Especializado, Antidoping 5 elem., Antidoping 12 elem.
+[Coagulación] Perfil de Coagulación, Tiempo de Protrombina/INR, Tiempo de Tromboplastina, Tiempos corregidos, Fibrinógeno, Dímero D, Tiempo de sangrado, Tiempo de coagulación
+[Lípidos] Perfil de Lípidos I, Perfil de Lípidos II, Perfil Aterogénico</textarea>
+                                <small class="cms-help-text">El orden de las líneas en este campo define la secuencia de despliegue de las fichas de Derecha a Izquierda por defecto. Cada línea entre corchetes <code>[Nombre Categoría]</code> genera una ficha.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="editor-card mb-4">
+                        <div class="editor-card-header editor-card-header--padded">
+                            <div class="card-title">Abanico 2: Función de Órganos</div>
+                            <span class="operator-badge operator-badge-block">Columna 2 | Hepática, Tiroidea, Pancreática, Renal, Cardiaca, Gasometría</span>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Título del Abanico 2 (Rec 50–90 char)</h4>
+                                <input type="text" name="estudios_cg2_titulo" value="Función de Órganos — Hepática, Tiroidea, Pancreática, Renal, Cardiaca, Gasometría" required data-max="100">
+                            </div>
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Fichas / Categorías Internas y Estudios (Salto de línea = Nueva Ficha [Categoría])</h4>
+                                <textarea class="textarea-110" name="estudios_cg2_fichas" required data-max="1200">[Función Hepática] PFH Básico, PFH Completo, Transaminasas séricas, Gamma Glutamil Transpeptidasa, Proteínas Totales, Albumina sérica
+[Función Tiroidea] Perfil Tiroideo I, Perfil Tiroideo II, Perfil Tiroideo III, Perfil Tiroideo IV, TSH, Ac. Anti Tiroideos I, Ac. Anti Tiroideos II, Ac. Anti Receptor de TSH, Tiroglobulina
+[Función Pancreática] Amilasa sérica, Lipasa sérica
+[Función Renal y Orina 24 h] Cistatina C, Depuración de creatinina, Proteínas totales en orina, Microalbuminuria, Calcio en orina
+[Función Cardiaca y Muscular] Triage cardiaco, Perfil cardiaco completo, Troponina I, Troponina T, NT-pro BNP, PCR-US, Mioglobina, CK-MB, CK Total
+[Gasometría Arterial y Venosa] Gasometría Arterial Completa, Gasometría Venosa Completa</textarea>
+                                <small class="cms-help-text">El orden de las líneas en este campo define la secuencia de despliegue de las fichas de Derecha a Izquierda por defecto. Cada línea entre corchetes <code>[Nombre Categoría]</code> genera una ficha.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="editor-card mb-4">
+                        <div class="editor-card-header editor-card-header--padded">
+                            <div class="card-title">Abanico 3: Hormonas, Diabetes e Inmunología</div>
+                            <span class="operator-badge operator-badge-block">Columna 3 | Perfil Ginecológico, Masculino, Diabetes, Inmunología, Reumatología</span>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Título del Abanico 3 (Rec 50–90 char)</h4>
+                                <input type="text" name="estudios_cg3_titulo" value="Hormonas, Diabetes e Inmunología — Perfil Ginecológico, Masculino, Diabetes, Inmunología, Reumatología" required data-max="100">
+                            </div>
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Fichas / Categorías Internas y Estudios (Salto de línea = Nueva Ficha [Categoría])</h4>
+                                <textarea class="textarea-110" name="estudios_cg3_fichas" required data-max="1200">[Hormonas Femeninas y Masculinas] Perfil Ginecológico I, Perfil Ginecológico II, Perfil Hormonal Masculino II, FSH, LH, PRL, PROG, TESTOSTERONA Total, TESTOSTERONA Libre, DHEA-S, E2, Cortisol, ACTH, HGC Cuantitativa, AMH, PTH-i
+[Diabetes: Diagnóstico y Control] Hemoglobina glucosilada (HB A1c), Insulina, Índice de HOMA, Péptido C, Prueba de Tolerancia a la glucosa, Test O'Sullivan
+[Inmunología] Ac. Anti HIV 1/HIV 2, V.D.R.L., Reacciones Febriles, Hepatitis A IgM, Hepatitis A IgG, Hepatitis B, Hepatitis C, Prueba de embarazo, Panel viral Respiratorio, Influenza A y B, COVID-19 Ag, Ac. SARS-CoV-2, Ac. DENGUE, Coombs Directo/Indirecto, Procalcitonina, Quantiferon TB
+[Reumatología y Autoinmunidad] Perfil Reumático, Proteína C reactiva, Factor Reumatoide, Antiestreptolisinas, CCP, Complementos C3/C4, Ac. Anti Nucleares, Ac. Anti DNA, Ac. Anti ENA, Ac. Anti SSA/Ro y SSB/La, Miositis, Esclerosis, Perfil de Inmunoglobulinas
+[Diversos] Inmunoglobulina E, Vitamina D, Somatomedina C, Papanicolaou</textarea>
+                                <small class="cms-help-text">El orden de las líneas en este campo define la secuencia de despliegue de las fichas de Derecha a Izquierda por defecto. Cada línea entre corchetes <code>[Nombre Categoría]</code> genera una ficha.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="editor-card mb-4">
+                        <div class="editor-card-header editor-card-header--padded">
+                            <div class="card-title">Abanico 4: Bacteriología, Marcadores y Biología Molecular</div>
+                            <span class="operator-badge operator-badge-block">Especialidades | Cultivos, Marcadores Tumorales, PCR Biología Molecular</span>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Título del Abanico 4 (Rec 50–90 char)</h4>
+                                <input type="text" name="estudios_cg4_titulo" value="Bacteriología, Marcadores Tumorales, Parasitología, Citroquímicos, Biología Molecular, Fertilidad" required data-max="100">
+                            </div>
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Fichas / Categorías Internas y Estudios (Salto de línea = Nueva Ficha [Categoría])</h4>
+                                <textarea class="textarea-110" name="estudios_cg4_fichas" required data-max="1200">[Bacteriología] Cultivo de orina con MIC, Cultivo de Ex. Faringeo con MIC, Cultivo de Ex. Vaginal con MIC, Cultivo Uretral con MIC, Cultivo de Heces con MIC, Cultivo de Lesión con MIC, Cultivo de Expectoración con MIC, Hemocultivo con MIC, Cultivo Micológico
+[Marcadores Tumorales] PSA TOTAL, PSA LIBRE, CEA, AFP, CA-125, CA-15-3, CA-19-9, Perfil Tumoral Femenino, Perfil Tumoral Masculino, Tumoral Completo
+[Parasitología] Coproparasitoscópico 3 muestras, Coprológico completo, Coprológico Especial, Sangre Oculta en heces, Antígeno de H. Pylori, Calprotectina, Lactoferrina, Clostridium difficile
+[Citroquímicos de Líquidos] Citoquímico LCR, Citoquímico Sinovial, Citoquímico Pleural, Citoquímico Ascitis, Citoquímico Diálisis, Citoquímico Bronquial, Citoquímico Pericárdico
+[Biología Molecular (PCR)] PCR Papiloma Humano (VPH), PCR-Mycobacterium, PCR-Patógenos respiratorios, PCR-Meningitis viral, PCR SARS CoV-2
+[Fertilidad] Espermatobioscopia directa</textarea>
+                                <small class="cms-help-text">El orden de las líneas en este campo define la secuencia de despliegue de las fichas de Derecha a Izquierda por defecto. Cada línea entre corchetes <code>[Nombre Categoría]</code> genera una ficha.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                                        <!-- Leyenda Operativa de Ayuda -->
+                    <div class="operator-guide-box">
+                        <strong>📌 Indicaciones de Carga para el Operador Web:</strong>
+                        <ul class="cms-ul">
+                            <li><strong>Sobreescritura Directa:</strong> Al publicar una nueva fotografía en el índice seleccionado (1 al 12), la imagen previa se <em>sobreescribe automáticamente</em> en el servidor.</li>
+                            <li><strong>Formato Optimizado:</strong> Se recomienda subir imágenes en formato <strong>WebP</strong> (óptimo para carga ultrarrápida), aunque se admiten archivos JPG o PNG de alta resolución.</li>
+                            <li><strong>Dimensiones Recomendadas:</strong> Proporción <strong>4:3 o 16:9</strong> (resolución ideal: <code>1200 x 800 px</code> o <code>800 x 600 px</code>). Límite de tamaño: <strong>15 MB por imagen</strong>.</li>
+                        </ul>
+                    </div>
+                    <!-- Ficha Unificada de Captura: Rutina y Especialidades -->
+                    <div class="editor-card">
+                        <div class="editor-card-header editor-card-header--padded">
+                            <div class="card-title">Ficha 1: Rutina y Especialidades</div>
+                            <span class="operator-badge operator-badge-block">Límite: 16 imágenes | Dimensiones: 1200x800 px (4:3) | Formato: WebP (Óptimo), JPG, PNG | Peso máx: 15 MB</span>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Seleccionar Imagen del Carrusel a Actualizar (1 al 16)</h4>
+                                <select id="select-carrusel-rutina" class="form-input-sm form-input-sm--bg">
+                                        <option value="1">Imagen 1 de 16: Hematología Especializada</option>
+                                        <option value="2">Imagen 2 de 16: Química Clínica Avanzada</option>
+                                        <option value="3">Imagen 3 de 16: Microbiología y Cultivos</option>
+                                        <option value="4">Imagen 4 de 16: Uroanálisis y Sedimentos</option>
+                                        <option value="5">Imagen 5 de 16: Hemostasia y Coagulación</option>
+                                        <option value="6">Imagen 6 de 16: Pruebas Especiales</option>
+                                        <option value="7">Imagen 7 de 16: Pre-analítica</option>
+                                        <option value="8">Imagen 8 de 16: Toma de Muestras I</option>
+                                        <option value="9">Imagen 9 de 16: Toma de Muestras II</option>
+                                        <option value="10">Imagen 10 de 16: Toma Pediátrica</option>
+                                        <option value="11">Imagen 11 de 16: Toma de Cultivos</option>
+                                        <option value="12">Imagen 12 de 16: Recepción Técnica</option>
+                                        <option value="13">Imagen 13 de 16: por ESTABLECER</option>
+                                        <option value="14">Imagen 14 de 16: por ESTABLECER</option>
+                                        <option value="15">Imagen 15 de 16: por ESTABLECER</option>
+                                        <option value="16">Imagen 16 de 16: por ESTABLECER</option>
+                                    </select>
+                                </div>
+                                <div class="field-group">
+                                    <label>Subir Nueva Fotografía (Máx 15 MB)</label>
+                                    <div class="image-upload-box">
+                                        <img id="prev-esp-selected" src="/laesh-web-assets-uipv1a/img/area-hematologia-dos.webp" alt="Rutina y Especialidades" class="img-preview-esp">
+                                        <input type="file" accept="image/*" id="file-esp-selected">
+                                    </div>
+                                </div>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Identifying HTML Duplicates**
+
+I've pinpointed duplicate HTML comments within `gestion-web.html`, specifically lines 313-315. There's a redundant repetition of the comment `<!-- Editor de los 4 Grupos / Abanicos del Catálogo 2026 -->`. I'm going to look for similar issues elsewhere in the file.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.434133392s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:59 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L469-619)</summary>
+
+**Path:** `Unknown file`
+
+```
+                <!-- ========================================== -->
+                <div id="panel-promociones" class="cms-panel" role="tabpanel" aria-labelledby="tab-promociones" tabindex="0">
+                    <h3 class="cms-h3">Actualización del Banner Promocional (#promociones)</h3>
+                                        <div class="operator-guide-box">
+                        <strong>📌 Especificaciones del Banner Promocional:</strong>
+                        <ul class="cms-ul">
+                            <li><strong>Sobreescritura:</strong> Reemplaza la imagen pública <code>PROMOCIONES 2026.webp</code>.</li>
+                            <li><strong>Dimensiones Ideales:</strong> <code>1200 x 600 px</code> o <code>1600 x 800 px</code> (Ratio horizontal 2:1).</li>
+                            <li><strong>Formatos & Peso:</strong> Formato WebP (óptimo), JPG o PNG de alta definición. Límite máximo: <strong>15 MB</strong>.</li>
+                        </ul>
+                    </div>
+
+                    
+                    <div class="editor-card">
+                        <div class="editor-card-header editor-card-header--padded">
+                            <div class="card-title">Imagen del Banner Promocional 2026</div>
+                            <span class="operator-badge operator-badge-block">Proporción 1:1 Cuadrada | 1000x1000 px | WebP (Óptimo), JPG, PNG | Peso máx: 15 MB</span>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Archivo de Imagen del Banner Promocional (WebP / PNG / JPG)</h4>
+                                <div class="image-upload-box img-upload-box--col">
+                                    <img id="prev-banner-promos" src="/laesh-web-assets-uipv1a/img/promociones-2026.webp" alt="Banner Promociones" class="img-preview-banner">
+                                    <input type="file" accept="image/*" id="file-banner-promos">
+                                </div>
+                            </div>
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Título y Mensaje Promocional</h4>
+                                <div class="field-group">
+                                    <label>Título de la Sección Promocional (Rec 20–50 char)</label>
+                                    <input type="text" name="promo_titulo" required value="Promociones Vigentes" data-max="50">
+                                </div>
+                                <div class="field-group">
+                                    <label>Subtítulo / Mensaje Promocional (Rec 60–120 char)</label>
+                                    <input type="text" name="promo_subtitulo" value="Aprovecha nuestras tarifas preferenciales y paquetes diseñados para ti." data-max="130">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================================== -->
+                <!-- PANEL 5: CALIDAD E INSTALACIONES           -->
+                <!-- ========================================== -->
+                <div id="panel-calidad" class="cms-panel" role="tabpanel" aria-labelledby="tab-calidad" tabindex="0">
+                    <h3 class="cms-h3">Galería de Fotos de Instalaciones y Calidad (#calidad)</h3>
+                    
+                                        <!-- Leyenda Operativa de Ayuda -->
+                    <div class="operator-guide-box">
+                        <strong>📌 Indicaciones de Carga para la Galería de Calidad e Instalaciones:</strong>
+                        <ul class="cms-ul">
+                            <li><strong>Sobreescritura Directa:</strong> Cada fotografía subida reemplaza directamente la foto previa en la posición elegida (1 a 15).</li>
+                            <li><strong>Formato Recomendado:</strong> Formato <strong>WebP</strong> comúnmente optimizado sin pérdida de nitidez clínica.</li>
+                            <li><strong>Dimensiones Sugeridas:</strong> <code>1200 x 800 px</code> o <code>1920 x 1080 px</code>. Tamaño máximo de archivo: <strong>15 MB</strong>.</li>
+                        </ul>
+                    </div>
+                    <!-- Ficha Unificada de Captura: Calidad -->
+                    <div class="editor-card">
+                        <div class="editor-card-header editor-card-header--padded">
+                            <div class="card-title">Ficha 2: Calidad e Instalaciones</div>
+                            <span class="operator-badge operator-badge-block">Límite: 15 imágenes | Dimensiones: 1200x800 px (4:3) | Formato: WebP (Óptimo), JPG, PNG | Peso máx: 15 MB</span>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Seleccionar Imagen de Galería a Actualizar (1 al 15)</h4>
+                                <select id="select-carrusel-calidad" class="form-input-sm form-input-sm--bg">
+                                        <option value="1">Imagen 1 de 15: Área de Hematología I</option>
+                                        <option value="2">Imagen 2 de 15: Área de Hematología II</option>
+                                        <option value="3">Imagen 3 de 15: Área de Coagulación</option>
+                                        <option value="4">Imagen 4 de 15: Química Clínica I</option>
+                                        <option value="5">Imagen 5 de 15: Química Clínica II</option>
+                                        <option value="6">Imagen 6 de 15: Área de Bacteriología I</option>
+                                        <option value="7">Imagen 7 de 15: Área de Bacteriología II</option>
+                                        <option value="8">Imagen 8 de 15: Área de Uroanálisis</option>
+                                        <option value="9">Imagen 9 de 15: Área de Centrifugación</option>
+                                        <option value="10">Imagen 10 de 15: Estudios Especiales</option>
+                                        <option value="11">Imagen 11 de 15: Toma de Muestras</option>
+                                        <option value="12">Imagen 12 de 15: Toma Pediátrica</option>
+                                        <option value="13">Imagen 13 de 15: Toma de Cultivos</option>
+                                        <option value="14">Imagen 14 de 15: Recepción y Orientación</option>
+                                        <option value="15">Imagen 15 de 15: Toma de Muestras Clínicas</option>
+                                    </select>
+                                </div>
+                                <div class="field-group">
+                                    <label>Subir Nueva Fotografía de Instalación / Calidad (Máx 15 MB)</label>
+                                    <div class="image-upload-box">
+                                        <img id="prev-calidad-selected" src="/laesh-web-assets-uipv1a/img/recepcion.webp" alt="Foto de Instalaciones" class="img-preview-calidad">
+                                        <input type="file" accept="image/*" id="file-calidad-selected">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field-group">
+                                <label>Título de la Área / Instalación (Rec 20–35 char)</label>
+                                <input type="text" id="calidad-titulo-val" value="Área de Hematología I" data-max="40">
+                            </div>
+                            <div class="field-group">
+                                <label>Descripción del Proceso / Equipo (Rec 60–110 char)</label>
+                                <textarea id="calidad-desc-val" data-max="120">Análisis de biometría hemática y células sanguíneas con rigor científico.</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================================== -->
+                <!-- PANEL 6: UBICACIÓN Y CONTACTO              -->
+                <!-- ========================================== -->
+                <div id="panel-ubicacion" class="cms-panel" role="tabpanel" aria-labelledby="tab-ubicacion" tabindex="0">
+                    <h3 class="cms-h3">Datos de Ubicación, Teléfonos y Mapa (#ubicacion)</h3>
+                    
+                    <div class="editor-card">
+                        <div class="editor-card-header editor-card-header--padded">
+                            <div class="card-title">Información de Contacto, Horarios y Croquis</div>
+                            <span class="operator-badge operator-badge-block">Atención Presencial, Canales de Contacto Directo y Croquis de Ubicación</span>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Información de Atención y Canales Directos</h4>
+                                <div class="field-group">
+                                    <label>Dirección Física (Rec 50–90 char)</label>
+                                    <input type="text" value="Azucenas 8, Jardines del Sur, 69007 Heroica Cdad. de Huajuapan de León, Oax., México" data-max="100">
+                                </div>
+                                <div class="field-row">
+                                    <div class="field-group">
+                                        <label>Teléfono Directo (Rec 10–18 char)</label>
+                                        <input type="tel" value="953 6 88 76 94" data-max="20">
+                                    </div>
+                                    <div class="field-group">
+                                        <label>Correo Electrónico (Rec 15–40 char)</label>
+                                        <input type="email" value="lab_laesh@hotmail.com" data-max="50">
+                                    </div>
+                                </div>
+                                <div class="field-group">
+                                    <label>Horario de Atención (Rec 40–90 char)</label>
+                                    <input type="text" value="Lunes a sábado: 7:00 a.m. – 9:00 p.m. | Domingo: 7:00 a.m. – 3:00 p.m." data-max="100">
+                                </div>
+                                <div class="field-group">
+                                    <label>Responsable Sanitario (Rec 60–110 char)</label>
+                                    <input type="text" value="Q.F.B. y E.H.D.L. Jacob Santiago Blanco. Céd. Prof. 3609293 | Céd. Esp. 8935780" data-max="120">
+                                </div>
+                            </div>
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Fotografía del Croquis de Ubicación Presencial</h4>
+                                <div class="image-upload-box">
+                                    <img id="prev-croquis" src="/laesh-web-assets-uipv1a/img/mapa-laesh.webp" alt="Croquis" class="img-preview-croquis">
+                                    <input type="file" accept="image/*" id="file-croquis">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Refining File Labels**
+
+I'm currently focused on cleaning up the labels within the `gestion-web.html` file using `replace_file_content`. Specifically, I'm working to standardize the labels within Panels 4, 5, and 6. For Panel 4, I'm adjusting the labels: 'Título de la Sección Promocional' and 'Subtítulo / Mensaje Promocional'. The process is underway, and I'll keep you posted as I adjust Panel 5 and 6.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.158136794s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 3:59 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L234-274)</summary>
+
+**Path:** `Unknown file`
+
+```
+    var selCalidad = document.getElementById('select-carrusel-calidad');
+    if (selCalidad) selCalidad.addEventListener('change', function() { cargarCalidadSeleccionada(this.value); });
+
+    // Contador universal de caracteres en tiempo real (esquina superior derecha del label)
+    function updateCharCounter(el) {
+        if (!el) return;
+        const max = parseInt(el.getAttribute('data-max') || el.getAttribute('maxlength') || '100', 10);
+        const len = el.value ? el.value.length : 0;
+        const fieldGroup = el.closest('.field-group');
+        if (!fieldGroup) return;
+
+        // Buscar el label inmediato del campo sin alterar el DOM
+        let label = el.previousElementSibling;
+        while (label && !label.matches('label, .cms-selector-heading, h4')) {
+            label = label.previousElementSibling;
+        }
+        if (!label) {
+            label = fieldGroup.querySelector('label, .cms-selector-heading, h4');
+        }
+        if (!label) return;
+
+        let counter = label.querySelector('.char-counter');
+        if (!counter) {
+            counter = document.createElement('span');
+            counter.className = 'char-counter';
+            label.appendChild(counter);
+        }
+
+        counter.textContent = len + ' / ' + max + ' char';
+        counter.classList.remove('ok', 'warn', 'limit');
+        const ratio = len / max;
+        if (ratio > 1) {
+            counter.classList.add('limit');
+        } else if (ratio >= 0.85) {
+            counter.classList.add('warn');
+        } else if (len > 0) {
+            counter.classList.add('ok');
+        }
+    }
+
+    function refreshAllCharCounters() {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 4:00 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 4:00 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 4:00 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 4:00 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+. AHun aparecen en el contenido estos tipos de textos: (<h1>/<h2>), (<p>) , eliminalos.
+. COntinua sin mostrarse los contenidos de: Promociones Vigentes, Calidad e Instalaciones y Ubicación y Contacto.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `gestion-web.html`
+**Language:** html
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+/* gestion-web.js — lógica del portal de gestión web CMS (extraído de gestion-web.html) */
+        const panelLabelsGestion = {
+            'hero': 'Banner Principal',
+            'quienes-somos': 'Quiénes somos',
+            'especialidades': 'Estudios de Rutina',
+            'promociones': 'Promociones Vigentes',
+            'calidad': 'Calidad e Instalaciones',
+            'ubicacion': 'Ubicación y Contacto'
+        };
+
+        function showPanel(name) {
+            document.querySelectorAll('.cms-panel').forEach(p => p.classList.remove('active'));
+            const targetPanel = document.getElementById('panel-' + name);
+            if (targetPanel) targetPanel.classList.add('active');
+
+            // Sincronizar pestaña superior activa + ARIA (A-01)
+            document.querySelectorAll('.cms-tab').forEach(function(t) {
+                t.classList.remove('active');
+                t.setAttribute('aria-selected', 'false');
+                t.setAttribute('tabindex', '-1');
+            });
+            const targetTab = document.getElementById('tab-' + name);
+            if (targetTab) {
+                targetTab.classList.add('active');
+                targetTab.setAttribute('aria-selected', 'true');
+                targetTab.setAttribute('tabindex', '0');
+            }
+
+            // Actualizar breadcrumb
+            const bc = document.getElementById('header-bc-current');
+            if (bc && panelLabelsGestion[name]) bc.textContent = panelLabelsGestion[name];
+        }
+
+        function activateTab(el) {
+            document.querySelectorAll('.cms-tab').forEach(function(t) {
+                t.classList.remove('active');
+                t.setAttribute('aria-selected', 'false');
+                t.setAttribute('tabindex', '-1');
+            });
+            el.classList.add('active');
+            el.setAttribute('aria-selected', 'true');
+            el.setAttribute('tabindex', '0');
+        }
+
+        function activateNav(el) {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+/* gestion-web.js — lógica del portal de gestión web CMS (extraído de gestion-web.html) */
+        const panelLabelsGestion = {
+            'hero': 'Banner Principal',
+            'quienes-somos': 'Quiénes somos',
+            'especialidades': 'Estudios de Rutina',
+            'promociones': 'Promociones Vigentes',
+            'calidad': 'Calidad e Instalaciones',
+            'ubicacion': 'Ubicación y Contacto'
+        };
+
+        function showPanel(name) {
+            document.querySelectorAll('.cms-panel').forEach(p => p.classList.remove('active'));
+            const targetPanel = document.getElementById('panel-' + name);
+            if (targetPanel) targetPanel.classList.add('active');
+
+            // Sincronizar pestaña superior activa + ARIA (A-01)
+            document.querySelectorAll('.cms-tab').forEach(function(t) {
+                t.classList.remove('active');
+                t.setAttribute('aria-selected', 'false');
+                t.setAttribute('tabindex', '-1');
+            });
+            const targetTab = document.getElementById('tab-' + name);
+            if (targetTab) {
+                targetTab.classList.add('active');
+                targetTab.setAttribute('aria-selected', 'true');
+                targetTab.setAttribute('tabindex', '0');
+            }
+
+            // Actualizar breadcrumb
+            const bc = document.getElementById('header-bc-current');
+            if (bc && panelLabelsGestion[name]) bc.textContent = panelLabelsGestion[name];
+        }
+
+        function activateTab(el) {
+            document.querySelectorAll('.cms-tab').forEach(function(t) {
+                t.classList.remove('active');
+                t.setAttribute('aria-selected', 'false');
+                t.setAttribute('tabindex', '-1');
+            });
+            el.classList.add('active');
+            el.setAttribute('aria-selected', 'true');
+            el.setAttribute('tabindex', '0');
+        }
+
+        function activateNav(el) {
+            document.querySelectorAll('.sidebar .nav-item').forEach(n => n.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        
+        // Datos de los 5 Hero Slides del Banner Principal (#inicio)
+        const heroDatos = {
+            1: { badge: "Bienvenido a Nuestra Institución", title: "Bienvenido a LAESH® — Diagnósticos de Confianza", desc: "Trabajamos para proporcionar información diagnóstica confiable que ayude al médico a tomar mejores decisiones y al paciente a recibir atención oportuna.", btnText: "Conoce los Servicios", btnLink: "#especialidades", img: "/laesh-web-assets-uipv1a/img/recepcion.webp" },
+            2: { badge: "25 Años de Experiencia Clínica", title: "Laboratorio de Especialidades Hematológicas", desc: "Ofrecemos servicios de laboratorio clínico de alta especialización y rigor científico, comprometidos con la salud y tranquilidad de nuestra comunidad.", btnText: "Ver Especialidades", btnLink: "#especialidades", img: "/laesh-web-assets-uipv1a/img/area-hematologia-dos.webp" },
+            3: { badge: "Excelencia y Calidad Certificada", title: "Resultados Confiables para Cuidar tu Salud", desc: "Detrás de cada análisis existe una decisión médica crucial. En LAESH® la precisión diagnóstica es nuestro compromiso inquebrantable.", btnText: "Conocer Calidad", btnLink: "#calidad", img: "/laesh-web-assets-uipv1a/img/area-quimica-clinica-dos.webp" },
+            4: { badge: "Tarifas y Paquetes Preferenciales", title: "Promociones y Check-Ups Médicos 2026", desc: "Descubre nuestros paquetes preventivos y tarifas especiales diseñados para el cuidado integral de tu salud y la de toda tu familia.", btnText: "Ver Promociones", btnLink: "#promociones", img: "/laesh-web-assets-uipv1a/img/promociones-2026.webp" },
+            5: { badge: "Atención Presencial y Horarios", title: "Ubicación, Horarios de Atención y Contacto", desc: "Azucenas #8, Fracc. Jardines del Sur, Huajuapan de León, Oax. Lun a Sáb: 7:00 a.m. – 9:00 p.m. | Dom: 7:00 a.m. – 3:00 p.m. | Tel: 953 688 7694", btnText: "Ver Ubicación", btnLink: "#ubicacion", img: "/laesh-web-assets-uipv1a/img/recepcion-de-pacientes.webp" }
+        };
+
+        function cargarHeroSlideSeleccionado(val) {
+            const d = heroDatos[val];
+            if (d) {
+                if (document.getElementById('input-hero-badge')) document.getElementById('input-hero-badge').value = d.badge || '';
+                if (document.getElementById('input-hero-title')) document.getElementById('input-hero-title').value = d.title || '';
+                if (document.getElementById('input-hero-desc')) document.getElementById('input-hero-desc').value = d.desc || '';
+                if (document.getElementById('input-hero-btn-text')) document.getElementById('input-hero-btn-text').value = d.btnText || '';
+                if (document.getElementById('input-hero-btn-link')) document.getElementById('input-hero-btn-link').value = d.btnLink || '';
+                const prev = document.getElementById('prev-hero-selected');
+                if (prev) prev.src = d.img || '/laesh-web-assets-uipv1a/img/recepcion.webp';
+                setTimeout(refreshAllCharCounters, 10);
+            }
+        }
+
+        // Datos de imágenes de Rutina y Especialidades (16 imágenes)
+        const rutinaDatos = {
+            1: { titulo: "Hematología Especializada", desc: "Análisis morfológico de frotis sanguíneo y pruebas hematológicas de alta complejidad.", img: "/laesh-web-assets-uipv1a/img/area-hematologia-dos.webp" },
+            2: { titulo: "Química Clínica Avanzada", desc: "Determinación automatizada de electrolitos, proteínas y enzimas específicas.", img: "/laesh-web-assets-uipv1a/img/area-quimica-clinica-dos.webp" },
+            3: { titulo: "Microbiología y Cultivos", desc: "Identificación microscópica y pruebas de susceptibilidad a antimicrobianos.", img: "/laesh-web-assets-uipv1a/img/area-bacteriologia-dos.webp" },
+            4: { titulo: "Uroanálisis y Sedimentos", desc: "Examen de orina, química y microscopía para detección precoz de patologías renales.", img: "/laesh-web-assets-uipv1a/img/area-uroanalisis.webp" },
+            5: { titulo: "Hemostasia y Coagulación", desc: "Estudios de tiempos de protrombina (TP) y tromboplastina parcial activada (TTPa).", img: "/laesh-web-assets-uipv1a/img/area-coagulacion.webp" },
+            6: { titulo: "Pruebas Especiales", desc: "Hormonas, anticuerpos específicos, pruebas inmunológicas y marcadores tumorales.", img: "/laesh-web-assets-uipv1a/img/area-estudios-especiales.webp" },
+            7: { titulo: "Pre-analítica", desc: "Separación de suero y plasma con control estricto de tiempos y temperaturas.", img: "/laesh-web-assets-uipv1a/img/area-centrifugacion.webp" },
+            8: { titulo: "Toma de Muestras I", desc: "Áreas higiénicas equipadas para la extracción sanguínea convencional.", img: "/laesh-web-assets-uipv1a/img/area-toma-de-muestras.webp" },
+            9: { titulo: "Toma de Muestras II", desc: "Módulos individuales y confortables que aseguran una atención rápida.", img: "/laesh-web-assets-uipv1a/img/toma-de-muestras.webp" },
+            10: { titulo: "Toma Pediátrica", desc: "Espacio amigable y personal capacitado para el cuidado y tranquilidad de los niños.", img: "/laesh-web-assets-uipv1a/img/toma-pediatricas.webp" },
+            11: { titulo: "Toma de Cultivos", desc: "Zonas aisladas y estériles para la toma de exudados y cultivos microbiológicos.", img: "/laesh-web-assets-uipv1a/img/toma-de-cultivos.webp" },
+            12: { titulo: "Recepción Técnica", desc: "Recepción técnica de muestras e indicaciones pre-analíticas detalladas.", img: "/laesh-web-assets-uipv1a/img/recepcion-lab.webp" },
+            13: { titulo: "", desc: "", img: "" },
+            14: { titulo: "", desc: "", img: "" },
+            15: { titulo: "", desc: "", img: "" },
+            16: { titulo: "", desc: "", img: "" }
+        };
+
+        function cargarRutinaSeleccionada(val) {
+            const d = rutinaDatos[val];
+            if (d) {
+                document.getElementById('rutina-titulo-val').value = d.titulo || '';
+                document.getElementById('rutina-desc-val').value = d.desc || '';
+                const prev = document.getElementById('prev-esp-selected');
+                if (prev) {
+                    prev.src = d.img || 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="90" height="60" viewBox="0 0 90 60"><rect width="100%" height="100%" fill="%23f1f5f9"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%2394a3b8" font-size="10" font-family="sans-serif">Sin Imagen</text></svg>';
+                }
+                setTimeout(refreshAllCharCounters, 10);
+            }
+        }
+
+        // Datos de imágenes de Calidad e Instalaciones (15 imágenes)
+        const calidadDatos = {
+            1: { titulo: "Área de Hematología I", desc: "Análisis de biometría hemática y células sanguíneas con rigor científico.", img: "/laesh-web-assets-uipv1a/img/area-hematologia-uno.webp" },
+            2: { titulo: "Área de Hematología II", desc: "Recuentos morfológicos y frotis sanguíneo de alta precisión diagnóstica.", img: "/laesh-web-assets-uipv1a/img/area-hematologia-dos.webp" },
+            3: { titulo: "Área de Coagulación", desc: "Evaluación de tiempos de protrombina (TP) y tromboplastina parcial activada (TTPa).", img: "/laesh-web-assets-uipv1a/img/area-coagulacion.webp" },
+            4: { titulo: "Química Clínica I", desc: "Determinación automatizada de metabolitos, enzimas y perfiles hepáticos.", img: "/laesh-web-assets-uipv1a/img/area-quimica-clinica.webp" },
+            5: { titulo: "Química Clínica II", desc: "Equipamientos avanzados para determinaciones clínicas complementarias.", img: "/laesh-web-assets-uipv1a/img/area-quimica-clinica-dos.webp" },
+            6: { titulo: "Área de Bacteriología I", desc: "Cultivo bacteriano, frotis y tinción de Gram para identificación de patógenos.", img: "/laesh-web-assets-uipv1a/img/area-bacteriologia.webp" },
+            7: { titulo: "Área de Bacteriología II", desc: "Aislamiento e identificación de cultivos en medios de crecimiento específicos.", img: "/laesh-web-assets-uipv1a/img/area-bacteriologia-dos.webp" },
+            8: { titulo: "Área de Uroanálisis", desc: "Examen químico de tiras y análisis microscópico de sedimentos urinarios.", img: "/laesh-web-assets-uipv1a/img/area-uroanalisis.webp" },
+            9: { titulo: "Área de Centrifugación", desc: "Procesamiento inicial y fraccionamiento adecuado de muestras biológicas.", img: "/laesh-web-assets-uipv1a/img/area-centrifugacion.webp" },
+            10: { titulo: "Estudios Especiales", desc: "Hormonas, perfiles inmunológicos complejos y marcadores biológicos.", img: "/laesh-web-assets-uipv1a/img/area-estudios-especiales.webp" },
+            11: { titulo: "Toma de Muestras", desc: "Área clínica diseñada para la extracción de muestras bajo normas de seguridad.", img: "/laesh-web-assets-uipv1a/img/area-toma-de-muestras.webp" },
+            12: { titulo: "Toma Pediátrica", desc: "Módulo infantil con personal entrenado para una experiencia tranquila.", img: "/laesh-web-assets-uipv1a/img/toma-pediatricas.webp" },
+            13: { titulo: "Toma de Cultivos", desc: "Zonas de muestreo microbiológico bajo estrictas medidas de higiene.", img: "/laesh-web-assets-uipv1a/img/toma-de-cultivos.webp" },
+            14: { titulo: "Recepción y Orientación", desc: "Gestión e ingreso de solicitudes clínicas con atención personalizada.", img: "/laesh-web-assets-uipv1a/img/recepcion-lab.webp" },
+            15: { titulo: "Toma de Muestras Clínicas", desc: "Módulos cómodos para la obtención segura de muestras biológicas.", img: "/laesh-web-assets-uipv1a/img/toma-de-muestras.webp" }
+        };
+
+        function cargarCalidadSeleccionada(val) {
+            const d = calidadDatos[val];
+            if (d) {
+                document.getElementById('calidad-titulo-val').value = d.titulo;
+                document.getElementById('calidad-desc-val').value = d.desc;
+                document.getElementById('prev-calidad-selected').src = d.img;
+                setTimeout(refreshAllCharCounters, 10);
+            }
+        }
+
+        function previewImage(input, previewId) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.getElementById(previewId);
+                    if (img) img.src = e.target.result;
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function simulateSave() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3500);
+        }
+
+
+/* ── P-LAESH-01 Phase3: event listeners (reemplaza onclick=/onchange= del HTML) ── */
+document.addEventListener('DOMContentLoaded', function() {
+    // Inyectar por defecto valor actual en duro (5 segundos) si no viene poblado
+    var inputHeroTrans = document.getElementById('input-hero-transition');
+    if (inputHeroTrans && !inputHeroTrans.value) {
+        inputHeroTrans.value = "5";
+    }
+
+    // Sidebar nav items con data-section → showPanel + activateNav
+    document.querySelectorAll('.sidebar .nav-item[data-section]').forEach(function(item) {
+        item.addEventListener('click', function() {
+            showPanel(this.getAttribute('data-section'));
+            activateNav(this);
+        });
+        // A-01: activación por teclado para role="button" (Enter / Espacio)
+        item.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L459-649)</summary>
+
+**Path:** `Unknown file`
+
+```
+                                        🚫 Desactivar Ficha
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================================== -->
+                <!-- PANEL 4: PROMOCIONES VIGENTES (IMAGEN BANNER) -->
+                <!-- ========================================== -->
+                <div id="panel-promociones" class="cms-panel" role="tabpanel" aria-labelledby="tab-promociones" tabindex="0">
+                    <h3 class="cms-h3">Actualización del Banner Promocional (#promociones)</h3>
+                                        <div class="operator-guide-box">
+                        <strong>📌 Especificaciones del Banner Promocional:</strong>
+                        <ul class="cms-ul">
+                            <li><strong>Sobreescritura:</strong> Reemplaza la imagen pública <code>PROMOCIONES 2026.webp</code>.</li>
+                            <li><strong>Dimensiones Ideales:</strong> <code>1200 x 600 px</code> o <code>1600 x 800 px</code> (Ratio horizontal 2:1).</li>
+                            <li><strong>Formatos & Peso:</strong> Formato WebP (óptimo), JPG o PNG de alta definición. Límite máximo: <strong>15 MB</strong>.</li>
+                        </ul>
+                    </div>
+
+                    
+                    <div class="editor-card">
+                        <div class="editor-card-header editor-card-header--padded">
+                            <div class="card-title">Imagen del Banner Promocional 2026</div>
+                            <span class="operator-badge operator-badge-block">Proporción 1:1 Cuadrada | 1000x1000 px | WebP (Óptimo), JPG, PNG | Peso máx: 15 MB</span>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Archivo de Imagen del Banner Promocional (WebP / PNG / JPG)</h4>
+                                <div class="image-upload-box img-upload-box--col">
+                                    <img id="prev-banner-promos" src="/laesh-web-assets-uipv1a/img/promociones-2026.webp" alt="Banner Promociones" class="img-preview-banner">
+                                    <input type="file" accept="image/*" id="file-banner-promos">
+                                </div>
+                            </div>
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Título y Mensaje Promocional</h4>
+                                <div class="field-group">
+                                    <label>Título de la Sección Promocional</label>
+                                    <input type="text" name="promo_titulo" required value="Promociones Vigentes" data-max="50">
+                                </div>
+                                <div class="field-group">
+                                    <label>Subtítulo / Mensaje Promocional</label>
+                                    <input type="text" name="promo_subtitulo" value="Aprovecha nuestras tarifas preferenciales y paquetes diseñados para ti." data-max="130">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================================== -->
+                <!-- PANEL 5: CALIDAD E INSTALACIONES           -->
+                <!-- ========================================== -->
+                <div id="panel-calidad" class="cms-panel" role="tabpanel" aria-labelledby="tab-calidad" tabindex="0">
+                    <h3 class="cms-h3">Galería de Fotos de Instalaciones y Calidad (#calidad)</h3>
+                    
+                                        <!-- Leyenda Operativa de Ayuda -->
+                    <div class="operator-guide-box">
+                        <strong>📌 Indicaciones de Carga para la Galería de Calidad e Instalaciones:</strong>
+                        <ul class="cms-ul">
+                            <li><strong>Sobreescritura Directa:</strong> Cada fotografía subida reemplaza directamente la foto previa en la posición elegida (1 a 15).</li>
+                            <li><strong>Formato Recomendado:</strong> Formato <strong>WebP</strong> comúnmente optimizado sin pérdida de nitidez clínica.</li>
+                            <li><strong>Dimensiones Sugeridas:</strong> <code>1200 x 800 px</code> o <code>1920 x 1080 px</code>. Tamaño máximo de archivo: <strong>15 MB</strong>.</li>
+                        </ul>
+                    </div>
+                    <!-- Ficha Unificada de Captura: Calidad -->
+                    <div class="editor-card">
+                        <div class="editor-card-header editor-card-header--padded">
+                            <div class="card-title">Ficha 2: Calidad e Instalaciones</div>
+                            <span class="operator-badge operator-badge-block">Límite: 15 imágenes | Dimensiones: 1200x800 px (4:3) | Formato: WebP (Óptimo), JPG, PNG | Peso máx: 15 MB</span>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Seleccionar Imagen de Galería a Actualizar (1 al 15)</h4>
+                                <select id="select-carrusel-calidad" class="form-input-sm form-input-sm--bg">
+                                        <option value="1">Imagen 1 de 15: Área de Hematología I</option>
+                                        <option value="2">Imagen 2 de 15: Área de Hematología II</option>
+                                        <option value="3">Imagen 3 de 15: Área de Coagulación</option>
+                                        <option value="4">Imagen 4 de 15: Química Clínica I</option>
+                                        <option value="5">Imagen 5 de 15: Química Clínica II</option>
+                                        <option value="6">Imagen 6 de 15: Área de Bacteriología I</option>
+                                        <option value="7">Imagen 7 de 15: Área de Bacteriología II</option>
+                                        <option value="8">Imagen 8 de 15: Área de Uroanálisis</option>
+                                        <option value="9">Imagen 9 de 15: Área de Centrifugación</option>
+                                        <option value="10">Imagen 10 de 15: Estudios Especiales</option>
+                                        <option value="11">Imagen 11 de 15: Toma de Muestras</option>
+                                        <option value="12">Imagen 12 de 15: Toma Pediátrica</option>
+                                        <option value="13">Imagen 13 de 15: Toma de Cultivos</option>
+                                        <option value="14">Imagen 14 de 15: Recepción y Orientación</option>
+                                        <option value="15">Imagen 15 de 15: Toma de Muestras Clínicas</option>
+                                    </select>
+                                </div>
+                                <div class="field-group">
+                                    <label>Subir Nueva Fotografía de Instalación / Calidad (Máx 15 MB)</label>
+                                    <div class="image-upload-box">
+                                        <img id="prev-calidad-selected" src="/laesh-web-assets-uipv1a/img/recepcion.webp" alt="Foto de Instalaciones" class="img-preview-calidad">
+                                        <input type="file" accept="image/*" id="file-calidad-selected">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field-group">
+                                <label>Título de la Área / Instalación</label>
+                                <input type="text" id="calidad-titulo-val" value="Área de Hematología I" data-max="40">
+                            </div>
+                            <div class="field-group">
+                                <label>Descripción del Proceso / Equipo</label>
+                                <textarea id="calidad-desc-val" data-max="120">Análisis de biometría hemática y células sanguíneas con rigor científico.</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================================== -->
+                <!-- PANEL 6: UBICACIÓN Y CONTACTO              -->
+                <!-- ========================================== -->
+                <div id="panel-ubicacion" class="cms-panel" role="tabpanel" aria-labelledby="tab-ubicacion" tabindex="0">
+                    <h3 class="cms-h3">Datos de Ubicación, Teléfonos y Mapa (#ubicacion)</h3>
+                    
+                    <div class="editor-card">
+                        <div class="editor-card-header editor-card-header--padded">
+                            <div class="card-title">Información de Contacto, Horarios y Croquis</div>
+                            <span class="operator-badge operator-badge-block">Atención Presencial, Canales de Contacto Directo y Croquis de Ubicación</span>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Información de Atención y Canales Directos</h4>
+                                <div class="field-group">
+                                    <label>Dirección Física</label>
+                                    <input type="text" value="Azucenas 8, Jardines del Sur, 69007 Heroica Cdad. de Huajuapan de León, Oax., México" data-max="100">
+                                </div>
+                                <div class="field-row">
+                                    <div class="field-group">
+                                        <label>Teléfono Directo</label>
+                                        <input type="tel" value="953 6 88 76 94" data-max="20">
+                                    </div>
+                                    <div class="field-group">
+                                        <label>Correo Electrónico</label>
+                                        <input type="email" value="lab_laesh@hotmail.com" data-max="50">
+                                    </div>
+                                </div>
+                                <div class="field-group">
+                                    <label>Horario de Atención</label>
+                                    <input type="text" value="Lunes a sábado: 7:00 a.m. – 9:00 p.m. | Domingo: 7:00 a.m. – 3:00 p.m." data-max="100">
+                                </div>
+                                <div class="field-group">
+                                    <label>Responsable Sanitario</label>
+                                    <input type="text" value="Q.F.B. y E.H.D.L. Jacob Santiago Blanco. Céd. Prof. 3609293 | Céd. Esp. 8935780" data-max="120">
+                                </div>
+                            </div>
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Fotografía del Croquis de Ubicación Presencial</h4>
+                                <div class="image-upload-box">
+                                    <img id="prev-croquis" src="/laesh-web-assets-uipv1a/img/mapa-laesh.webp" alt="Croquis" class="img-preview-croquis">
+                                    <input type="file" accept="image/*" id="file-croquis">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+
+            <!-- Región Lateral Derecha: Notificaciones (Scope 30) -->
+            <aside class="sidebar-right" id="sidebar-right">
+                <div class="sidebar-right-toggle-row">
+                    <!-- Campana siempre visible + badge de conteo -->
+                    <div class="bell-wrap" id="bell-wrap-notif" title="Notificaciones">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                        <span class="bell-badge" id="badge-notif-cms" aria-label="Notificaciones pendientes">0</span>
+                    </div>
+                    <button type="button" class="sidebar-right-toggle" id="sidebar-right-toggle" title="Expandir / Colapsar notificaciones">
+                        <svg id="right-rail-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                    </button>
+                </div>
+                <div class="sidebar-right-content">
+                    <div class="sidebar-right-header">
+                        <h3 class="txt-main fw-600 font-mosquito notif-title">Notificaciones</h3>
+                    </div>
+                    <div class="sidebar-right-body">
+                        <!-- Contenido de notificaciones para ser utilizado posteriormente -->
+                        <p class="txt-muted notif-empty">No hay nuevas notificaciones</p>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+    <!-- Toast de confirmación -->
+    <div class="cms-toast" id="toast">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        ¡Cambios publicados exitosamente en <strong>laesh.mx</strong>!
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Examining HTML Structure**
+
+I'm currently focused on lines 560-570 within `gestion-web.html`, specifically the "Calidad" panel. I've pinpointed the `</div>` that starts the section, the following `field-group` div and the title label and input field. I am still examining the following lines to assess their significance.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.127715563s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L309-466)</summary>
+
+**Path:** `Unknown file`
+
+```
+                <!-- PANEL 3: ESTUDIOS DE RUTINA Y ESPECIALIDADES -->
+                <!-- ========================================== -->
+                <div id="panel-especialidades" class="cms-panel" role="tabpanel" aria-labelledby="tab-especialidades" tabindex="0">
+                    <!-- Editor de los 4 Grupos / Abanicos del Catálogo 2026 -->
+                    <div class="editor-card mb-4">
+                        <div class="editor-card-header editor-card-header--padded">
+                            <div class="card-title">Abanico 1: Rutina General</div>
+                            <span class="operator-badge operator-badge-block">Columna 1 | Hematología, Química Clínica, Electrolitos, Uroanálisis, Coagulación</span>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <label>Título del Abanico 1</label>
+                                <input type="text" name="estudios_cg1_titulo" value="Rutina General — Hematología, Química Clínica, Electrolitos, Uroanálisis, Coagulación" required data-max="100">
+                            </div>
+                            <div class="field-group">
+                                <label>Fichas y Estudios del Abanico 1 (Secuencia por Renglones)</label>
+                                <textarea class="textarea-110" name="estudios_cg1_fichas" required data-max="1200">[Hematología] Citometría Hemática, Grupo y RH, Plaquetas, Velocidad de Sedimentación Globular, Reticulocitos, Perfil de Hierro, Hierro sérico, Inducción Drepanocitos
+[Química Clínica] Química Sanguínea 3, Química Sanguínea 7, Perfil Bioquímico 15, Perfil Bioquímico 24, Perfil Bioquímico 30, Perfil Bioquímico 35, Perfil Bioquímico 45, Glucosa sérica, Creatinina sérica, Colesterol Total, Triglicéridos
+[Electrolitos Séricos] E.S. 3 Elementos, E.S. 4 Elementos, E.S. Completos, Calcio sérico, Fósforo y Magnesio sérico, Bicarbonato y CO2
+[Uroanálisis] EGO + Radio Prot/Crea, EGO Especializado, Antidoping 5 elem., Antidoping 12 elem.
+[Coagulación] Perfil de Coagulación, Tiempo de Protrombina/INR, Tiempo de Tromboplastina, Tiempos corregidos, Fibrinógeno, Dímero D, Tiempo de sangrado, Tiempo de coagulación
+[Lípidos] Perfil de Lípidos I, Perfil de Lípidos II, Perfil Aterogénico</textarea>
+                                <small class="cms-help-text">El orden de las líneas en este campo define la secuencia de despliegue de las fichas de Derecha a Izquierda por defecto. Cada línea entre corchetes <code>[Nombre Categoría]</code> genera una ficha.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="editor-card mb-4">
+                        <div class="editor-card-header editor-card-header--padded">
+                            <div class="card-title">Abanico 2: Función de Órganos</div>
+                            <span class="operator-badge operator-badge-block">Columna 2 | Hepática, Tiroidea, Pancreática, Renal, Cardiaca, Gasometría</span>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <label>Título del Abanico 2</label>
+                                <input type="text" name="estudios_cg2_titulo" value="Función de Órganos — Hepática, Tiroidea, Pancreática, Renal, Cardiaca, Gasometría" required data-max="100">
+                            </div>
+                            <div class="field-group">
+                                <label>Fichas y Estudios del Abanico 2 (Secuencia por Renglones)</label>
+                                <textarea class="textarea-110" name="estudios_cg2_fichas" required data-max="1200">[Función Hepática] PFH Básico, PFH Completo, Transaminasas séricas, Gamma Glutamil Transpeptidasa, Proteínas Totales, Albumina sérica
+[Función Tiroidea] Perfil Tiroideo I, Perfil Tiroideo II, Perfil Tiroideo III, Perfil Tiroideo IV, TSH, Ac. Anti Tiroideos I, Ac. Anti Tiroideos II, Ac. Anti Receptor de TSH, Tiroglobulina
+[Función Pancreática] Amilasa sérica, Lipasa sérica
+[Función Renal y Orina 24 h] Cistatina C, Depuración de creatinina, Proteínas totales en orina, Microalbuminuria, Calcio en orina
+[Función Cardiaca y Muscular] Triage cardiaco, Perfil cardiaco completo, Troponina I, Troponina T, NT-pro BNP, PCR-US, Mioglobina, CK-MB, CK Total
+[Gasometría Arterial y Venosa] Gasometría Arterial Completa, Gasometría Venosa Completa</textarea>
+                                <small class="cms-help-text">El orden de las líneas en este campo define la secuencia de despliegue de las fichas de Derecha a Izquierda por defecto. Cada línea entre corchetes <code>[Nombre Categoría]</code> genera una ficha.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="editor-card mb-4">
+                        <div class="editor-card-header editor-card-header--padded">
+                            <div class="card-title">Abanico 3: Hormonas, Diabetes e Inmunología</div>
+                            <span class="operator-badge operator-badge-block">Columna 3 | Perfil Ginecológico, Masculino, Diabetes, Inmunología, Reumatología</span>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <label>Título del Abanico 3</label>
+                                <input type="text" name="estudios_cg3_titulo" value="Hormonas, Diabetes e Inmunología — Perfil Ginecológico, Masculino, Diabetes, Inmunología, Reumatología" required data-max="100">
+                            </div>
+                            <div class="field-group">
+                                <label>Fichas y Estudios del Abanico 3 (Secuencia por Renglones)</label>
+                                <textarea class="textarea-110" name="estudios_cg3_fichas" required data-max="1200">[Hormonas Femeninas y Masculinas] Perfil Ginecológico I, Perfil Ginecológico II, Perfil Hormonal Masculino II, FSH, LH, PRL, PROG, TESTOSTERONA Total, TESTOSTERONA Libre, DHEA-S, E2, Cortisol, ACTH, HGC Cuantitativa, AMH, PTH-i
+[Diabetes: Diagnóstico y Control] Hemoglobina glucosilada (HB A1c), Insulina, Índice de HOMA, Péptido C, Prueba de Tolerancia a la glucosa, Test O'Sullivan
+[Inmunología] Ac. Anti HIV 1/HIV 2, V.D.R.L., Reacciones Febriles, Hepatitis A IgM, Hepatitis A IgG, Hepatitis B, Hepatitis C, Prueba de embarazo, Panel viral Respiratorio, Influenza A y B, COVID-19 Ag, Ac. SARS-CoV-2, Ac. DENGUE, Coombs Directo/Indirecto, Procalcitonina, Quantiferon TB
+[Reumatología y Autoinmunidad] Perfil Reumático, Proteína C reactiva, Factor Reumatoide, Antiestreptolisinas, CCP, Complementos C3/C4, Ac. Anti Nucleares, Ac. Anti DNA, Ac. Anti ENA, Ac. Anti SSA/Ro y SSB/La, Miositis, Esclerosis, Perfil de Inmunoglobulinas
+[Diversos] Inmunoglobulina E, Vitamina D, Somatomedina C, Papanicolaou</textarea>
+                                <small class="cms-help-text">El orden de las líneas en este campo define la secuencia de despliegue de las fichas de Derecha a Izquierda por defecto. Cada línea entre corchetes <code>[Nombre Categoría]</code> genera una ficha.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="editor-card mb-4">
+                        <div class="editor-card-header editor-card-header--padded">
+                            <div class="card-title">Abanico 4: Bacteriología, Marcadores y Biología Molecular</div>
+                            <span class="operator-badge operator-badge-block">Especialidades | Cultivos, Marcadores Tumorales, PCR Biología Molecular</span>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <label>Título del Abanico 4</label>
+                                <input type="text" name="estudios_cg4_titulo" value="Bacteriología, Marcadores Tumorales, Parasitología, Citroquímicos, Biología Molecular, Fertilidad" required data-max="100">
+                            </div>
+                            <div class="field-group">
+                                <label>Fichas y Estudios del Abanico 4 (Secuencia por Renglones)</label>
+                                <textarea class="textarea-110" name="estudios_cg4_fichas" required data-max="1200">[Bacteriología] Cultivo de orina con MIC, Cultivo de Ex. Faringeo con MIC, Cultivo de Ex. Vaginal con MIC, Cultivo Uretral con MIC, Cultivo de Heces con MIC, Cultivo de Lesión con MIC, Cultivo de Expectoración con MIC, Hemocultivo con MIC, Cultivo Micológico
+[Marcadores Tumorales] PSA TOTAL, PSA LIBRE, CEA, AFP, CA-125, CA-15-3, CA-19-9, Perfil Tumoral Femenino, Perfil Tumoral Masculino, Tumoral Completo
+[Parasitología] Coproparasitoscópico 3 muestras, Coprológico completo, Coprológico Especial, Sangre Oculta en heces, Antígeno de H. Pylori, Calprotectina, Lactoferrina, Clostridium difficile
+[Citroquímicos de Líquidos] Citoquímico LCR, Citoquímico Sinovial, Citoquímico Pleural, Citoquímico Ascitis, Citoquímico Diálisis, Citoquímico Bronquial, Citoquímico Pericárdico
+[Biología Molecular (PCR)] PCR Papiloma Humano (VPH), PCR-Mycobacterium, PCR-Patógenos respiratorios, PCR-Meningitis viral, PCR SARS CoV-2
+[Fertilidad] Espermatobioscopia directa</textarea>
+                                <small class="cms-help-text">El orden de las líneas en este campo define la secuencia de despliegue de las fichas de Derecha a Izquierda por defecto. Cada línea entre corchetes <code>[Nombre Categoría]</code> genera una ficha.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                                        <!-- Leyenda Operativa de Ayuda -->
+                    <div class="operator-guide-box">
+                        <strong>📌 Indicaciones de Carga para el Operador Web:</strong>
+                        <ul class="cms-ul">
+                            <li><strong>Sobreescritura Directa:</strong> Al publicar una nueva fotografía en el índice seleccionado (1 al 12), la imagen previa se <em>sobreescribe automáticamente</em> en el servidor.</li>
+                            <li><strong>Formato Optimizado:</strong> Se recomienda subir imágenes en formato <strong>WebP</strong> (óptimo para carga ultrarrápida), aunque se admiten archivos JPG o PNG de alta resolución.</li>
+                            <li><strong>Dimensiones Recomendadas:</strong> Proporción <strong>4:3 o 16:9</strong> (resolución ideal: <code>1200 x 800 px</code> o <code>800 x 600 px</code>). Límite de tamaño: <strong>15 MB por imagen</strong>.</li>
+                        </ul>
+                    </div>
+                    <!-- Ficha Unificada de Captura: Rutina y Especialidades -->
+                    <div class="editor-card">
+                        <div class="editor-card-header editor-card-header--padded">
+                            <div class="card-title">Ficha 1: Rutina y Especialidades</div>
+                            <span class="operator-badge operator-badge-block">Límite: 16 imágenes | Dimensiones: 1200x800 px (4:3) | Formato: WebP (Óptimo), JPG, PNG | Peso máx: 15 MB</span>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Seleccionar Imagen del Carrusel a Actualizar (1 al 16)</h4>
+                                <select id="select-carrusel-rutina" class="form-input-sm form-input-sm--bg">
+                                        <option value="1">Imagen 1 de 16: Hematología Especializada</option>
+                                        <option value="2">Imagen 2 de 16: Química Clínica Avanzada</option>
+                                        <option value="3">Imagen 3 de 16: Microbiología y Cultivos</option>
+                                        <option value="4">Imagen 4 de 16: Uroanálisis y Sedimentos</option>
+                                        <option value="5">Imagen 5 de 16: Hemostasia y Coagulación</option>
+                                        <option value="6">Imagen 6 de 16: Pruebas Especiales</option>
+                                        <option value="7">Imagen 7 de 16: Pre-analítica</option>
+                                        <option value="8">Imagen 8 de 16: Toma de Muestras I</option>
+                                        <option value="9">Imagen 9 de 16: Toma de Muestras II</option>
+                                        <option value="10">Imagen 10 de 16: Toma Pediátrica</option>
+                                        <option value="11">Imagen 11 de 16: Toma de Cultivos</option>
+                                        <option value="12">Imagen 12 de 16: Recepción Técnica</option>
+                                        <option value="13">Imagen 13 de 16: por ESTABLECER</option>
+                                        <option value="14">Imagen 14 de 16: por ESTABLECER</option>
+                                        <option value="15">Imagen 15 de 16: por ESTABLECER</option>
+                                        <option value="16">Imagen 16 de 16: por ESTABLECER</option>
+                                    </select>
+                                </div>
+                                <div class="field-group">
+                                    <label>Subir Nueva Fotografía (Máx 15 MB)</label>
+                                    <div class="image-upload-box">
+                                        <img id="prev-esp-selected" src="/laesh-web-assets-uipv1a/img/area-hematologia-dos.webp" alt="Rutina y Especialidades" class="img-preview-esp">
+                                        <input type="file" accept="image/*" id="file-esp-selected">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field-group">
+                                <label>Título de la Ficha Seleccionada (Rec 20–40 char)</label>
+                                <input type="text" id="rutina-titulo-val" value="Hematología Especializada" data-max="45">
+                            </div>
+                            <div class="field-group">
+                                <label>Descripción de la Ficha Seleccionada (Rec 80–140 char)</label>
+                                <textarea id="rutina-desc-val" data-max="150">Análisis morfológico de frotis sanguíneo y pruebas hematológicas de alta complejidad.</textarea>
+                                <div class="cms-action-help-bar">
+                                    <span>Si deseas desactivar esta ficha de la página de inicio, escribe <code>por ESTABLECER</code> en el título o haz clic aquí:</span>
+                                    <button type="button" id="btn-reset-rutina-establecer" class="btn-deactivate-ficha">
+                                        🚫 Desactivar Ficha
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing the DOM Structure**
+
+Okay, I've zoomed in on the DOM structure. Specifically, I'm examining lines 420-466 of Panel 3, focusing on the `<div>` elements. I see the nested structure of `field-group` divs within an `editor-card-body`. I'm starting to get a better sense of how content is organized within the editor.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.104763201s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 4:06 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L414-474)</summary>
+
+**Path:** `Unknown file`
+
+```
+                    <div class="editor-card">
+                        <div class="editor-card-header editor-card-header--padded">
+                            <div class="card-title">Ficha 1: Rutina y Especialidades</div>
+                            <span class="operator-badge operator-badge-block">Límite: 16 imágenes | Dimensiones: 1200x800 px (4:3) | Formato: WebP (Óptimo), JPG, PNG | Peso máx: 15 MB</span>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Seleccionar Imagen del Carrusel a Actualizar (1 al 16)</h4>
+                                <select id="select-carrusel-rutina" class="form-input-sm form-input-sm--bg">
+                                        <option value="1">Imagen 1 de 16: Hematología Especializada</option>
+                                        <option value="2">Imagen 2 de 16: Química Clínica Avanzada</option>
+                                        <option value="3">Imagen 3 de 16: Microbiología y Cultivos</option>
+                                        <option value="4">Imagen 4 de 16: Uroanálisis y Sedimentos</option>
+                                        <option value="5">Imagen 5 de 16: Hemostasia y Coagulación</option>
+                                        <option value="6">Imagen 6 de 16: Pruebas Especiales</option>
+                                        <option value="7">Imagen 7 de 16: Pre-analítica</option>
+                                        <option value="8">Imagen 8 de 16: Toma de Muestras I</option>
+                                        <option value="9">Imagen 9 de 16: Toma de Muestras II</option>
+                                        <option value="10">Imagen 10 de 16: Toma Pediátrica</option>
+                                        <option value="11">Imagen 11 de 16: Toma de Cultivos</option>
+                                        <option value="12">Imagen 12 de 16: Recepción Técnica</option>
+                                        <option value="13">Imagen 13 de 16: por ESTABLECER</option>
+                                        <option value="14">Imagen 14 de 16: por ESTABLECER</option>
+                                        <option value="15">Imagen 15 de 16: por ESTABLECER</option>
+                                        <option value="16">Imagen 16 de 16: por ESTABLECER</option>
+                                    </select>
+                                </div>
+                                <div class="field-group">
+                                    <label>Subir Nueva Fotografía (Máx 15 MB)</label>
+                                    <div class="image-upload-box">
+                                        <img id="prev-esp-selected" src="/laesh-web-assets-uipv1a/img/area-hematologia-dos.webp" alt="Rutina y Especialidades" class="img-preview-esp">
+                                        <input type="file" accept="image/*" id="file-esp-selected">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field-group">
+                                <label>Título de la Ficha Seleccionada (Rec 20–40 char)</label>
+                                <input type="text" id="rutina-titulo-val" value="Hematología Especializada" data-max="45">
+                            </div>
+                            <div class="field-group">
+                                <label>Descripción de la Ficha Seleccionada (Rec 80–140 char)</label>
+                                <textarea id="rutina-desc-val" data-max="150">Análisis morfológico de frotis sanguíneo y pruebas hematológicas de alta complejidad.</textarea>
+                                <div class="cms-action-help-bar">
+                                    <span>Si deseas desactivar esta ficha de la página de inicio, escribe <code>por ESTABLECER</code> en el título o haz clic aquí:</span>
+                                    <button type="button" id="btn-reset-rutina-establecer" class="btn-deactivate-ficha">
+                                        🚫 Desactivar Ficha
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================================== -->
+                <!-- PANEL 4: PROMOCIONES VIGENTES (IMAGEN BANNER) -->
+                <!-- ========================================== -->
+                <div id="panel-promociones" class="cms-panel" role="tabpanel" aria-labelledby="tab-promociones" tabindex="0">
+                    <h3 class="cms-h3">Actualización del Banner Promocional (#promociones)</h3>
+                                        <div class="operator-guide-box">
+                        <strong>📌 Especificaciones del Banner Promocional:</strong>
+                        <ul class="cms-ul">
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 4:06 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L464-619)</summary>
+
+**Path:** `Unknown file`
+
+```
+                    </div>
+
+                <!-- ========================================== -->
+                <!-- PANEL 4: PROMOCIONES VIGENTES (IMAGEN BANNER) -->
+                <!-- ========================================== -->
+                <div id="panel-promociones" class="cms-panel" role="tabpanel" aria-labelledby="tab-promociones" tabindex="0">
+                    <h3 class="cms-h3">Actualización del Banner Promocional (#promociones)</h3>
+                                        <div class="operator-guide-box">
+                        <strong>📌 Especificaciones del Banner Promocional:</strong>
+                        <ul class="cms-ul">
+                            <li><strong>Sobreescritura:</strong> Reemplaza la imagen pública <code>PROMOCIONES 2026.webp</code>.</li>
+                            <li><strong>Dimensiones Ideales:</strong> <code>1200 x 600 px</code> o <code>1600 x 800 px</code> (Ratio horizontal 2:1).</li>
+                            <li><strong>Formatos & Peso:</strong> Formato WebP (óptimo), JPG o PNG de alta definición. Límite máximo: <strong>15 MB</strong>.</li>
+                        </ul>
+                    </div>
+
+                    
+                    <div class="editor-card">
+                        <div class="editor-card-header editor-card-header--padded">
+                            <div class="card-title">Imagen del Banner Promocional 2026</div>
+                            <span class="operator-badge operator-badge-block">Proporción 1:1 Cuadrada | 1000x1000 px | WebP (Óptimo), JPG, PNG | Peso máx: 15 MB</span>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Archivo de Imagen del Banner Promocional (WebP / PNG / JPG)</h4>
+                                <div class="image-upload-box img-upload-box--col">
+                                    <img id="prev-banner-promos" src="/laesh-web-assets-uipv1a/img/promociones-2026.webp" alt="Banner Promociones" class="img-preview-banner">
+                                    <input type="file" accept="image/*" id="file-banner-promos">
+                                </div>
+                            </div>
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Título y Mensaje Promocional</h4>
+                                <div class="field-group">
+                                    <label>Título de la Sección Promocional</label>
+                                    <input type="text" name="promo_titulo" required value="Promociones Vigentes" data-max="50">
+                                </div>
+                                <div class="field-group">
+                                    <label>Subtítulo / Mensaje Promocional</label>
+                                    <input type="text" name="promo_subtitulo" value="Aprovecha nuestras tarifas preferenciales y paquetes diseñados para ti." data-max="130">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================================== -->
+                <!-- PANEL 5: CALIDAD E INSTALACIONES           -->
+                <!-- ========================================== -->
+                <div id="panel-calidad" class="cms-panel" role="tabpanel" aria-labelledby="tab-calidad" tabindex="0">
+                    <h3 class="cms-h3">Galería de Fotos de Instalaciones y Calidad (#calidad)</h3>
+                    
+                                        <!-- Leyenda Operativa de Ayuda -->
+                    <div class="operator-guide-box">
+                        <strong>📌 Indicaciones de Carga para la Galería de Calidad e Instalaciones:</strong>
+                        <ul class="cms-ul">
+                            <li><strong>Sobreescritura Directa:</strong> Cada fotografía subida reemplaza directamente la foto previa en la posición elegida (1 a 15).</li>
+                            <li><strong>Formato Recomendado:</strong> Formato <strong>WebP</strong> comúnmente optimizado sin pérdida de nitidez clínica.</li>
+                            <li><strong>Dimensiones Sugeridas:</strong> <code>1200 x 800 px</code> o <code>1920 x 1080 px</code>. Tamaño máximo de archivo: <strong>15 MB</strong>.</li>
+                        </ul>
+                    </div>
+                    <!-- Ficha Unificada de Captura: Calidad -->
+                    <div class="editor-card">
+                        <div class="editor-card-header editor-card-header--padded">
+                            <div class="card-title">Ficha 2: Calidad e Instalaciones</div>
+                            <span class="operator-badge operator-badge-block">Límite: 15 imágenes | Dimensiones: 1200x800 px (4:3) | Formato: WebP (Óptimo), JPG, PNG | Peso máx: 15 MB</span>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Seleccionar Imagen de Galería a Actualizar (1 al 15)</h4>
+                                <select id="select-carrusel-calidad" class="form-input-sm form-input-sm--bg">
+                                        <option value="1">Imagen 1 de 15: Área de Hematología I</option>
+                                        <option value="2">Imagen 2 de 15: Área de Hematología II</option>
+                                        <option value="3">Imagen 3 de 15: Área de Coagulación</option>
+                                        <option value="4">Imagen 4 de 15: Química Clínica I</option>
+                                        <option value="5">Imagen 5 de 15: Química Clínica II</option>
+                                        <option value="6">Imagen 6 de 15: Área de Bacteriología I</option>
+                                        <option value="7">Imagen 7 de 15: Área de Bacteriología II</option>
+                                        <option value="8">Imagen 8 de 15: Área de Uroanálisis</option>
+                                        <option value="9">Imagen 9 de 15: Área de Centrifugación</option>
+                                        <option value="10">Imagen 10 de 15: Estudios Especiales</option>
+                                        <option value="11">Imagen 11 de 15: Toma de Muestras</option>
+                                        <option value="12">Imagen 12 de 15: Toma Pediátrica</option>
+                                        <option value="13">Imagen 13 de 15: Toma de Cultivos</option>
+                                        <option value="14">Imagen 14 de 15: Recepción y Orientación</option>
+                                        <option value="15">Imagen 15 de 15: Toma de Muestras Clínicas</option>
+                                    </select>
+                                </div>
+                                <div class="field-group">
+                                    <label>Subir Nueva Fotografía de Instalación / Calidad (Máx 15 MB)</label>
+                                    <div class="image-upload-box">
+                                        <img id="prev-calidad-selected" src="/laesh-web-assets-uipv1a/img/recepcion.webp" alt="Foto de Instalaciones" class="img-preview-calidad">
+                                        <input type="file" accept="image/*" id="file-calidad-selected">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field-group">
+                                <label>Título de la Área / Instalación</label>
+                                <input type="text" id="calidad-titulo-val" value="Área de Hematología I" data-max="40">
+                            </div>
+                            <div class="field-group">
+                                <label>Descripción del Proceso / Equipo</label>
+                                <textarea id="calidad-desc-val" data-max="120">Análisis de biometría hemática y células sanguíneas con rigor científico.</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================================== -->
+                <!-- PANEL 6: UBICACIÓN Y CONTACTO              -->
+                <!-- ========================================== -->
+                <div id="panel-ubicacion" class="cms-panel" role="tabpanel" aria-labelledby="tab-ubicacion" tabindex="0">
+                    <h3 class="cms-h3">Datos de Ubicación, Teléfonos y Mapa (#ubicacion)</h3>
+                    
+                    <div class="editor-card">
+                        <div class="editor-card-header editor-card-header--padded">
+                            <div class="card-title">Información de Contacto, Horarios y Croquis</div>
+                            <span class="operator-badge operator-badge-block">Atención Presencial, Canales de Contacto Directo y Croquis de Ubicación</span>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Información de Atención y Canales Directos</h4>
+                                <div class="field-group">
+                                    <label>Dirección Física</label>
+                                    <input type="text" value="Azucenas 8, Jardines del Sur, 69007 Heroica Cdad. de Huajuapan de León, Oax., México" data-max="100">
+                                </div>
+                                <div class="field-row">
+                                    <div class="field-group">
+                                        <label>Teléfono Directo</label>
+                                        <input type="tel" value="953 6 88 76 94" data-max="20">
+                                    </div>
+                                    <div class="field-group">
+                                        <label>Correo Electrónico</label>
+                                        <input type="email" value="lab_laesh@hotmail.com" data-max="50">
+                                    </div>
+                                </div>
+                                <div class="field-group">
+                                    <label>Horario de Atención</label>
+                                    <input type="text" value="Lunes a sábado: 7:00 a.m. – 9:00 p.m. | Domingo: 7:00 a.m. – 3:00 p.m." data-max="100">
+                                </div>
+                                <div class="field-group">
+                                    <label>Responsable Sanitario</label>
+                                    <input type="text" value="Q.F.B. y E.H.D.L. Jacob Santiago Blanco. Céd. Prof. 3609293 | Céd. Esp. 8935780" data-max="120">
+                                </div>
+                            </div>
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Fotografía del Croquis de Ubicación Presencial</h4>
+                                <div class="image-upload-box">
+                                    <img id="prev-croquis" src="/laesh-web-assets-uipv1a/img/mapa-laesh.webp" alt="Croquis" class="img-preview-croquis">
+                                    <input type="file" accept="image/*" id="file-croquis">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 4:06 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L467-514)</summary>
+
+**Path:** `Unknown file`
+
+```
+                <!-- PANEL 4: PROMOCIONES VIGENTES (IMAGEN BANNER) -->
+                <!-- ========================================== -->
+                <div id="panel-promociones" class="cms-panel" role="tabpanel" aria-labelledby="tab-promociones" tabindex="0">
+                    <h3 class="cms-h3">Actualización del Banner Promocional (#promociones)</h3>
+                                        <div class="operator-guide-box">
+                        <strong>📌 Especificaciones del Banner Promocional:</strong>
+                        <ul class="cms-ul">
+                            <li><strong>Sobreescritura:</strong> Reemplaza la imagen pública <code>PROMOCIONES 2026.webp</code>.</li>
+                            <li><strong>Dimensiones Ideales:</strong> <code>1200 x 600 px</code> o <code>1600 x 800 px</code> (Ratio horizontal 2:1).</li>
+                            <li><strong>Formatos & Peso:</strong> Formato WebP (óptimo), JPG o PNG de alta definición. Límite máximo: <strong>15 MB</strong>.</li>
+                        </ul>
+                    </div>
+
+                    
+                    <div class="editor-card">
+                        <div class="editor-card-header editor-card-header--padded">
+                            <div class="card-title">Imagen del Banner Promocional 2026</div>
+                            <span class="operator-badge operator-badge-block">Proporción 1:1 Cuadrada | 1000x1000 px | WebP (Óptimo), JPG, PNG | Peso máx: 15 MB</span>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Archivo de Imagen del Banner Promocional (WebP / PNG / JPG)</h4>
+                                <div class="image-upload-box img-upload-box--col">
+                                    <img id="prev-banner-promos" src="/laesh-web-assets-uipv1a/img/promociones-2026.webp" alt="Banner Promociones" class="img-preview-banner">
+                                    <input type="file" accept="image/*" id="file-banner-promos">
+                                </div>
+                            </div>
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Título y Mensaje Promocional</h4>
+                                <div class="field-group">
+                                    <label>Título de la Sección Promocional</label>
+                                    <input type="text" name="promo_titulo" required value="Promociones Vigentes" data-max="50">
+                                </div>
+                                <div class="field-group">
+                                    <label>Subtítulo / Mensaje Promocional</label>
+                                    <input type="text" name="promo_subtitulo" value="Aprovecha nuestras tarifas preferenciales y paquetes diseñados para ti." data-max="130">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================================== -->
+                <!-- PANEL 5: CALIDAD E INSTALACIONES           -->
+                <!-- ========================================== -->
+                <div id="panel-calidad" class="cms-panel" role="tabpanel" aria-labelledby="tab-calidad" tabindex="0">
+                    <h3 class="cms-h3">Galería de Fotos de Instalaciones y Calidad (#calidad)</h3>
+                    
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L569-624)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+                <!-- ========================================== -->
+                <!-- PANEL 6: UBICACIÓN Y CONTACTO              -->
+                <!-- ========================================== -->
+                <div id="panel-ubicacion" class="cms-panel" role="tabpanel" aria-labelledby="tab-ubicacion" tabindex="0">
+                    <h3 class="cms-h3">Datos de Ubicación, Teléfonos y Mapa (#ubicacion)</h3>
+                    
+                    <div class="editor-card">
+                        <div class="editor-card-header editor-card-header--padded">
+                            <div class="card-title">Información de Contacto, Horarios y Croquis</div>
+                            <span class="operator-badge operator-badge-block">Atención Presencial, Canales de Contacto Directo y Croquis de Ubicación</span>
+                        </div>
+                        <div class="editor-card-body">
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Información de Atención y Canales Directos</h4>
+                                <div class="field-group">
+                                    <label>Dirección Física</label>
+                                    <input type="text" value="Azucenas 8, Jardines del Sur, 69007 Heroica Cdad. de Huajuapan de León, Oax., México" data-max="100">
+                                </div>
+                                <div class="field-row">
+                                    <div class="field-group">
+                                        <label>Teléfono Directo</label>
+                                        <input type="tel" value="953 6 88 76 94" data-max="20">
+                                    </div>
+                                    <div class="field-group">
+                                        <label>Correo Electrónico</label>
+                                        <input type="email" value="lab_laesh@hotmail.com" data-max="50">
+                                    </div>
+                                </div>
+                                <div class="field-group">
+                                    <label>Horario de Atención</label>
+                                    <input type="text" value="Lunes a sábado: 7:00 a.m. – 9:00 p.m. | Domingo: 7:00 a.m. – 3:00 p.m." data-max="100">
+                                </div>
+                                <div class="field-group">
+                                    <label>Responsable Sanitario</label>
+                                    <input type="text" value="Q.F.B. y E.H.D.L. Jacob Santiago Blanco. Céd. Prof. 3609293 | Céd. Esp. 8935780" data-max="120">
+                                </div>
+                            </div>
+                            <div class="field-group">
+                                <h4 class="cms-selector-heading">Fotografía del Croquis de Ubicación Presencial</h4>
+                                <div class="image-upload-box">
+                                    <img id="prev-croquis" src="/laesh-web-assets-uipv1a/img/mapa-laesh.webp" alt="Croquis" class="img-preview-croquis">
+                                    <input type="file" accept="image/*" id="file-croquis">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+
+            <!-- Región Lateral Derecha: Notificaciones (Scope 30) -->
+            <aside class="sidebar-right" id="sidebar-right">
+                <div class="sidebar-right-toggle-row">
+                    <!-- Campana siempre visible + badge de conteo -->
+                    <div class="bell-wrap" id="bell-wrap-notif" title="Notificaciones">
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 4:07 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 4:07 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 4:07 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Aug 2026, 4:07 pm
 
 ---
 

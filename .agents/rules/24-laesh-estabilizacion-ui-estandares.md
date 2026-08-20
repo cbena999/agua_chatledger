@@ -74,3 +74,12 @@
 - **R24-PHP-03 (Atributos Declarativos HTMX):** Reemplazar los simuladores JS locales por atributos declarativos de HTMX en las vistas Plates: `hx-post="/api/ordenes/guardar"`, `hx-target="#panel-resultado"`, `hx-swap="innerHTML"`, `hx-indicator="#spinner-cargando"`, e inyectar el campo de idempotencia `<input type="hidden" name="idempotency_token" value="...">`.
 - **R24-PHP-04 (Autenticación y Sesión Servidor):** Eliminar por completo el prototipo de autenticación simulado en `localStorage`. El control de acceso debe migrar al objeto de sesión seguro de `Delight\Auth` y al middleware backend `\Common\RbacManager`.
 - **R24-PHP-05 (SEO Preconnect):** Incluir la etiqueta `<link rel="preconnect" href="https://fonts.googleapis.com">` en el bloque `<head>` del layout maestro.
+
+---
+
+## 📸 6. Estándares CMS, Visibilidad de Imágenes y Homologación de Slides
+
+- **R24-MEDIA-01 (Visibilidad Superior de Imágenes `center top`):** Para evitar recortes no deseados en la parte superior de las fotografías, aplicar `object-fit: contain; object-position: center top;` en contenedores de imágenes de tarjetas o productos, y `background-position: center top;` en elementos con imagen de fondo (Hero Sliders, Quality Sliders).
+- **R24-CMS-01 (Filtro por ESTABLECER y Desactivación):** Todo ítem del CMS que contenga `/ESTABLECER/i` en su título o atributo alt debe ser filtrado automáticamente en JavaScript antes de renderizarse en la portada pública. Incluir el botón `🚫 Desactivar Ficha` alineado horizontalmente en la barra de ayuda del CMS para limpiar campos y desactivar la ficha.
+- **R24-CMS-02 (Homologación de Hero Slides):** Estandarizar la longitud de los textos en los Hero Slides para garantizar tarjetas translúcidas (*glassmorphism*) de altura simétrica: Badges (`<span>`) de 25–35 char, Encabezados (`<h1>`/`<h2>`) de 35–45 char, Párrafos (`<p>`) de 130–150 char y Botones CTA Blancos de 2–3 palabras.
+- **R24-CMS-03 (Paridad 1:1 de Secciones):** Las pestañas del panel CMS (`gestion-web.html`) deben coincidir exactamente en nombre y anclas con las secciones principales de `index.html` (`#inicio`, `#acerca-de`, `#especialidades`, `#promociones`, `#calidad`, `#ubicacion`).
