@@ -109,8 +109,12 @@
 - ✅ `ssl_session_tickets off` + SSL ciphers — ya aplicados por Certbot (`options-ssl-nginx.conf`) — skip
 - ✅ Documentación: §14.7 nuevo en `Tecnica_Infraestructura_Despliegue.html`
 
-**Pendiente en OCI VM (requiere DNS + autorización):**
-1. **Server block laesh.mx** — DNS apunta a `2.57.91.91`, no a OCI (`137.131.58.161`). Requiere cambio DNS primero. Runbook §13.4.
+**Cerrado 2026-08-20:**
+- ✅ Composer install — no requerido; libs vendored en `www/restaurant/commons/libs/` (Flight, Plates, Delight-Auth); sin `composer.json`
+- ✅ §15.8 actualizada: todas las filas OCI reflejan estado real (✅ aplicado / ✅ pre-existente / pendiente DNS)
+
+**Pendiente en OCI VM (bloqueado por DNS):**
+1. **Server block laesh.mx** — `laesh.mx` apunta a `2.57.91.91`, no a OCI (`137.131.58.161`). Cambiar DNS primero. Runbook §13.4.
 2. **Certbot Let's Encrypt laesh.mx** — ejecutar tras DNS + server block.
 **Referencia**: §13.4 + §14.7 en `Tecnica_Infraestructura_Despliegue.html`.
 
@@ -199,4 +203,4 @@
 
 ---
 
-*Última actualización: 2026-08-20 — OCI hardening completo: http2, HSTS, CSP, /fpm-status, deploy hook Certbot, PHP-FPM env vars LAESH (laesh_app ✅ 27 tablas). Docs §14.7. Pendiente solo: DNS laesh.mx → OCI + Certbot. — Claude Code*
+*Última actualización: 2026-08-20 — Cierre de sesión: OCI hardening ✅, Composer N/A (libs vendored) ✅, §15.8 sincronizada ✅. Pendiente: DNS laesh.mx → OCI + git commit (usuario). — Claude Code*
