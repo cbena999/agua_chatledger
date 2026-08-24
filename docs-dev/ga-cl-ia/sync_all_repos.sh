@@ -71,12 +71,18 @@ sync_repo() {
         echo "✅ [INFO] No hay cambios locales pendientes para confirmar."
     fi
     
+    echo "📥 Sincronizando cambios remotos (git pull --rebase)..."
+    local current_branch
+    current_branch=$(git rev-parse --abbrev-ref HEAD)
+    git pull --rebase origin "$current_branch" 2>/dev/null || {
+        echo "⚠️ Advertencia: git pull --rebase no pudo aplicarse directamente. Intentando git pull normal..."
+        git pull --no-rebase origin "$current_branch" 2>/dev/null || true
+    }
+
     echo "🚀 Subiendo a GitHub (git push)..."
     # Intenta hacer push normal
     if ! git push; then
         echo "⚠️ El push normal falló. Intentando --set-upstream..."
-        local current_branch
-        current_branch=$(git rev-parse --abbrev-ref HEAD)
         git push --set-upstream origin "$current_branch"
     fi
     
