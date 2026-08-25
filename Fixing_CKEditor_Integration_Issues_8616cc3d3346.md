@@ -7,8 +7,9 @@
 | **Trajectory ID** | `1c96816e-a226-45d5-b622-45910980ebf0` |
 | **Cascade ID** | `cded5c2f-84e4-4217-8641-8616cc3d3346` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 3914 |
+| **Total Steps** | 3918 |
 | **Started** | 23 Aug 2026, 7:17 pm |
+| **Completed** | 25 Aug 2026, 9:44 am |
 
 ---
 
@@ -17544,6 +17545,78 @@ Two changes needed:
 
 **Status:** Completed
 **Created:** 25 Aug 2026, 9:03 am
+
+---
+
+## User Request
+
+continua.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `gestion-web.js`
+**Language:** javascript
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 Aug 2026, 9:44 am
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 Aug 2026, 9:44 am
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+/* gestion-web.js — lógica del portal de gestión web CMS (extraído de gestion-web.html) */
+        const panelLabelsGestion = {
+            'hero': 'Banner Principal',
+            'quienes-somos': 'Quiénes somos',
+            'especialidades': 'Estudios de Rutina',
+            'promociones': 'Promociones Vigentes',
+            'calidad': 'Calidad e Instalaciones',
+            'ubicacion': 'Ubicación y Contacto',
+            'footer': 'Pie de Página',
+            'seo': 'SEO y Metadatos',
+            'aviso-privacidad': 'Aviso de Privacidad'
+        };
+
+        function showPanel(name) {
+            document.querySelectorAll('.cms-panel').forEach(p => p.classList.remove('active'));
+            const targetPanel = document.getElementById('panel-' + name);
+            if (targetPanel) targetPanel.classList.add('active');
+
+            // Sincronizar pestaña superior activa + ARIA (A-01)
+            document.querySelectorAll('.cms-tab').forEach(function(t) {
+                t.classList.remove('active');
+                t.setAttribute('aria-selected', 'false');
+                t.setAttribute('tabindex', '-1');
+            });
+            const targetTab = document.getElementById('tab-' + name);
+            if (targetTab) {
+                targetTab.classList.add('active');
+                targetTab.setAttribute('aria-selected', 'true');
+                targetTab.setAttribute('tabindex', '0');
+            }
+
+            // Actualizar breadcrumb
+            const bc = document.getElementById('header-bc-current');
+```
+
+</details>
 
 ---
 
