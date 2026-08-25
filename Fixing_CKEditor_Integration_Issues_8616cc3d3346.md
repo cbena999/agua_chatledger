@@ -7,9 +7,8 @@
 | **Trajectory ID** | `1c96816e-a226-45d5-b622-45910980ebf0` |
 | **Cascade ID** | `cded5c2f-84e4-4217-8641-8616cc3d3346` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 3794 |
+| **Total Steps** | 3914 |
 | **Started** | 23 Aug 2026, 7:17 pm |
-| **Completed** | 24 Aug 2026, 10:45 pm |
 
 ---
 
@@ -6292,1957 +6291,457 @@
 
 ---
 
-## Agent Response
+### Terminal Command Execution
 
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
+**Status:** Reset
+**Created:** 24 Aug 2026, 5:33 pm
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 5:33 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 5:33 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 5:33 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 5:33 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 5:33 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 24 Aug 2026, 5:33 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-**Prioritizing Tool Specificity**
-
-I'm focusing intently on tool selection, always aiming for the most precise one available. Efficiency hinges on using specialized tools whenever possible, steering clear of more general-purpose options unless absolutely necessary. The goal is to minimize complexity and maximize effectiveness in every task.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.116546149s
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 5:33 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 5:34 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 5:34 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 5:34 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 5:34 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 5:34 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 5:34 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 5:34 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 5:34 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 5:34 pm
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 5:34 pm
 
 ---
 
-## Agent Response
+### Terminal Command Execution
 
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-## User Request
-
-en index.php, reduce por default el contenedor de ficha1; a un -20%
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `07_seed_catalogs.sql`
-**Language:** oracle-sql
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
+**Status:** Reset
+**Created:** 24 Aug 2026, 5:40 pm
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 5:40 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 5:40 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-**Prioritizing Tool Usage**
-
-I'm considering the best way to approach problem-solving using available tools. Specifically, I'm now focused on tool selection. My current thinking prioritizes using the most specific tool for a given task, such as a file viewer instead of a general terminal. I'm exploring how this impacts efficiency and accuracy in problem-solving.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.097908295s
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 5:40 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 5:40 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 24 Aug 2026, 5:40 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-**Considering Tool Access**
-
-I'm currently focused on evaluating the tools at my disposal. Initial thoughts revolve around the critical importance of tool access. I'm prioritizing understanding each tool's function and how it can be leveraged effectively for various tasks. I'm exploring the specific implications of having certain tools, compared to those I lack.
-
-
-**Analyzing Code Adjustments**
-
-I've been meticulously examining the CSS and HTML, specifically focusing on how to reduce the `ficha1` container by the requested 20%. I've identified the relevant classes: `.grid-single` and `.card-premium`, and I'm evaluating the optimal approach – whether to adjust the `max-width` of the `grid-single` container directly in `index.php` or to modify the CSS definitions. I am reviewing the possibility of an inline style update. I've pinpointed the relevant section in `index.php` and I'm getting closer to a viable solution.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.140212523s
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 5:40 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 5:40 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 5:40 pm
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-## User Request
-
-ahora ajusta el contenedor externo para que queden muy cercanos ambos contenedores por un margen minimo.
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `index.php`
-**Language:** php
-
-**Open Files:**
-- `index.php`
-- `landing.css`
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L647-678)</summary>
-
-**Path:** `Unknown file`
-
-```
-                    <div class="acerca-flex ck5-output">
-                        <?= safeHtml($qsMision) ?>
-                    </div>
-                </div>
-
-                <!-- Ficha 3: Visión — desde web_contenidos (quienes-somos/ficha3/texto) -->
-                <div class="card-premium animate-on-scroll delay-300 info-col">
-                    <div class="acerca-flex ck5-output">
-                        <?= safeHtml($qsVision) ?>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Ficha ancha: Historia — desde CKEditor (-20% por default) -->
-            <div class="grid-layout grid-single" style="max-width: 80%; width: 80%; margin-left: auto; margin-right: auto;">
-                <div class="card-premium animate-on-scroll delay-100 info-col--stretch" style="height: 48vh; min-height: 320px;">
-                    <div class="modal-scroll-body">
-                        <!-- Historia — HTML enriquecido desde CKEditor 5 (ficha1/texto) -->
-                        <!-- El heading del card va incluido en el HTML exportado por CKEditor -->
-                        <div class="faq-p--sm2 ck5-output"><?= safeHtml($qsHistoriaHtml) ?></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ═══════════════════════════════════════════════ ESTUDIOS ══ -->
-        <section id="especialidades" class="sec-pad-4-1 scroll-sm-top">
-            <div class="section-header animate-on-scroll">
-                <!-- h2 y subtitulo desde web_contenidos (especialidades/seccion) -->
-                <h2><?= h($catalogH2) ?></h2>
-                <p><?= h($catalogSub) ?></p>
-            </div>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 5:43 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 5:43 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 5:43 pm
 
 ---
 
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-## User Request
-
-ahora reduce unicamente en lo alto (vertical)  infeerior al contenedor que le aparece en la esquina inferior derecha el badge de autoresize manual.
-antes de hacerlo dime si lo ubicaste y es posible o tiene gaps ?
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `index.php`
-**Language:** php
-
-**Open Files:**
-- `index.php`
-- `landing.css`
-</details>
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-## User Request
-
-no esto  no lo cambies: 2. Restricción de Resize a Solo Vertical, dejalo como esta.  unicamente realiza Reducción de Alto Vertical Inicial.
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `landing.css`
-**Language:** css
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-/* ══════════════════════════════════════════════════════════════════════════════
-   landing.css — Estilos del Sitio Corporativo LAESH (uipv1/index.html)
-   Cargado después de style.css · Aplica solo a la landing page pública.
-   ══════════════════════════════════════════════════════════════════════════════
-
-   TABLA DE CONTENIDO
-   ──────────────────────────────────────────────────────────────────────────────
-   §1  BASE (~l.1)         Tokens inline, body, scroll, skip-to-content
-   §2  NAVEGACIÓN (~l.72)  Navbar fixed, dropdown acceso, hamburger, botones
-   §3  HERO (~l.198)       Hero slider, animaciones, secciones, tarjetas, grid
-   §4  CARRUSELES (~l.322) Especialidades (scroll snap) · Calidad (fade)
-   §5  MAPA & PRECIOS      Flotantes WA/social, mapa interactivo, precios
-       (~l.361)
-   §6  CATÁLOGO & CONTACTO Catálogo de estudios (acordeones), wrappers de
-       (~l.439)            sección, P-LAESH-01 cleanup, Ubicación/Contacto
-   §7  FOOTER (~l.702)     Footer principal, franja CTA, franja info, responsive
-   §8  COMPONENTES (~l.840) Acerca de, barra progreso carrusel, galería calidad,
-                            croquis, CTA promociones, cookie banner, floaters
-   §9  MEDIA QUERIES       breakpoints responsivos: ≥1920 · ≤1024 · ≤767 · ≤480
-       (~l.1019)           ≤375 · landscape · prefers-reduced-motion · @supports
-   ──────────────────────────────────────────────────────────────────────────────
-   Última actualización: 2026-08-17 · #8opt ToC + marcadores de sección
-   ══════════════════════════════════════════════════════════════════════════════ */
-
-/* ── Tipografía corporativa LAESH (Manual §2.7)
-           Mosquito Std Black — fuente oficial; archivos pendientes de entrega del cliente.
-           Fallback activo: 'Arial Black', Impact, sans-serif (definido en h1-h6 abajo).
-           Cuando el cliente entregue los .woff2/.woff, restaurar el @font-face aquí. ── */
-
-        /* ── Paleta oficial LAESH (Manual §2.5) ── */
-        :root {
-            /* Tokens canónicos — única fuente de verdad */
-            --primary:            #0052B7;  /* azul LAESH */
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Prioritizing Tool Specificity**
-
-I'm focusing intently on tool selection, always aiming for the most precise one available. Efficiency hinges on using specialized tools whenever possible, steering clear of more general-purpose options unless absolutely necessary. The goal is to minimize complexity and maximize effectiveness in every task.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.006236148s
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 5:49 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 5:49 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 5:49 pm
 
 ---
 
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-## User Request
-
-ajustalo de 32vh a 36 vh
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `landing.css`
-**Language:** css
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 5:52 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 5:52 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 5:52 pm
 
 ---
 
-## Agent Response
+### Code Edit
 
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-## User Request
-
-ajustalo a 45vh
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `landing.css`
-**Language:** css
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
+**Status:** Reset
+**Created:** 24 Aug 2026, 5:53 pm
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 5:53 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 24 Aug 2026, 5:53 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 5:53 pm
 
 ---
 
-## Agent Response
+### Code Edit
 
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-## User Request
-
-ajustalo a 43vh
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `landing.css`
-**Language:** css
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
+**Status:** Reset
+**Created:** 24 Aug 2026, 5:54 pm
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 5:54 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 24 Aug 2026, 5:54 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 5:54 pm
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-## User Request
-
-Para desktop , laptop quedo bien, y pero para mobiles que ambos contenores se ajusten proporcionalmente al tamaño de la ficha que le precede: vision. y en si se aline a la responsividad automatica de dispositivos
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `index.php`
-**Language:** php
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L621-652)</summary>
-
-**Path:** `Unknown file`
-
-```
-                <svg id="hero-icon-pause" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
-                <svg id="hero-icon-play"  width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="d-none"><polygon points="5,3 19,12 5,21"/></svg>
-                <span id="hero-pause-label" class="hero-pause-label">Pausar</span>
-            </button>
-            <span id="hero-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></span>
-        </section>
-
-        <!-- ══════════════════════════════════════════ QUIÉNES SOMOS ══ -->
-        <section id="acerca-de" class="sec-pad-1-5 scroll-sm-top">
-            <div class="section-header animate-on-scroll">
-                <!-- h2 y subtitulo desde web_contenidos (quienes-somos/seccion) -->
-                <h2><?= h($qsH2) ?></h2>
-                <p><?= $qsSub /* puede contener <strong> — generado en PHP con h() en la variable */ ?></p>
-            </div>
-
-            <div class="grid-layout grid-1-1-auto" style="margin-bottom: 0.35rem;">
-                <!-- Ficha 1: 25 años — HTML enriquecido desde CKEditor 5 (ficha4/texto) -->
-                <!-- El heading del card va incluido en el HTML exportado por CKEditor -->
-                <div class="card-premium animate-on-scroll delay-100 info-col">
-                    <div class="acerca-flex ck5-output">
-                        <?= safeHtml($qsConfianzaHtml) ?>
-                    </div>
-                </div>
-
-                <!-- Ficha 2: Misión — desde web_contenidos (quienes-somos/ficha2/texto) -->
-                <div class="card-premium animate-on-scroll delay-200 info-col">
-                    <div class="acerca-flex ck5-output">
-                        <?= safeHtml($qsMision) ?>
-                    </div>
-                </div>
-
-                <!-- Ficha 3: Visión — desde web_contenidos (quienes-somos/ficha3/texto) -->
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 5:57 pm
 
 ---
 
-## Agent Response
-
-### Thinking
-
-**Prioritizing Tool Usage**
-
-I'm considering the best way to approach problem-solving using available tools. Specifically, I'm now focused on tool selection. My current thinking prioritizes using the most specific tool for a given task, such as a file viewer instead of a general terminal. I'm exploring how this impacts efficiency and accuracy in problem-solving.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.055328447s
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 5:58 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 5:58 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 5:58 pm
 
 ---
 
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-## User Request
-
-Ya quedo bien.
-A hora un ajuste en index.php, SUBE, mueve un poco mas  toda la seccion: Estudios de Rutina y Especialidades, para este mas cercano ala sección que le precede. 
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `index.php`
-**Language:** php
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L621-652)</summary>
-
-**Path:** `Unknown file`
-
-```
-                <svg id="hero-icon-pause" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
-                <svg id="hero-icon-play"  width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="d-none"><polygon points="5,3 19,12 5,21"/></svg>
-                <span id="hero-pause-label" class="hero-pause-label">Pausar</span>
-            </button>
-            <span id="hero-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></span>
-        </section>
-
-        <!-- ══════════════════════════════════════════ QUIÉNES SOMOS ══ -->
-        <section id="acerca-de" class="sec-pad-1-5 scroll-sm-top">
-            <div class="section-header animate-on-scroll">
-                <!-- h2 y subtitulo desde web_contenidos (quienes-somos/seccion) -->
-                <h2><?= h($qsH2) ?></h2>
-                <p><?= $qsSub /* puede contener <strong> — generado en PHP con h() en la variable */ ?></p>
-            </div>
-
-            <div class="grid-layout grid-1-1-auto" style="margin-bottom: 0.35rem;">
-                <!-- Ficha 1: 25 años — HTML enriquecido desde CKEditor 5 (ficha4/texto) -->
-                <!-- El heading del card va incluido en el HTML exportado por CKEditor -->
-                <div class="card-premium animate-on-scroll delay-100 info-col">
-                    <div class="acerca-flex ck5-output">
-                        <?= safeHtml($qsConfianzaHtml) ?>
-                    </div>
-                </div>
-
-                <!-- Ficha 2: Misión — desde web_contenidos (quienes-somos/ficha2/texto) -->
-                <div class="card-premium animate-on-scroll delay-200 info-col">
-                    <div class="acerca-flex ck5-output">
-                        <?= safeHtml($qsMision) ?>
-                    </div>
-                </div>
-
-                <!-- Ficha 3: Visión — desde web_contenidos (quienes-somos/ficha3/texto) -->
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 6:01 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 6:01 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 6:01 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 6:01 pm
 
 ---
 
-## Agent Response
+### Terminal Command Execution
 
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-## User Request
-
-en desktop, laptop se ajusto bien; y pero para mobiles no , corrige de raiz sin forzar
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `index.php`
-**Language:** php
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
+**Status:** Reset
+**Created:** 24 Aug 2026, 6:03 pm
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 6:03 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 6:03 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 24 Aug 2026, 6:03 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 6:03 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 6:03 pm
 
 ---
 
-## Agent Response
+### Terminal Command Execution
 
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-## User Request
-
-todavia se muy separado
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `index.php`
-**Language:** php
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
+**Status:** Reset
+**Created:** 24 Aug 2026, 6:04 pm
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 6:04 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-**Prioritizing Specific Tools**
-
-I'm focusing on the importance of selecting the most appropriate tool for each task. The goal is to maximize efficiency. I am making an active effort to ensure that I always choose the correct approach to each problem or challenge, such as choosing a relevant 'view_file' utility where possible.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.204331111s
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 24 Aug 2026, 6:04 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-**Prioritizing Specific Tools**
-
-I'm focusing on the importance of selecting the most appropriate tool for each task. The goal is to maximize efficiency. I am making an active effort to ensure that I always choose the correct approach to each problem or challenge, such as choosing a relevant 'view_file' utility where possible.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.095511923s
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 6:04 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 6:04 pm
 
 ---
 
-## Agent Response
+### Terminal Command Execution
 
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-## User Request
-
-. en ipads mini, air y pro;  del chrome tools device:
-.. la Ficha 1 que hemos estado estabilizando,  no se autoajusta a lo ancho del body , realiza lo necesario para que lo haga.
-. para todas las ipads ;  del chrome tools device:
-.. el header menu  no aparece como amburgesa, arreglalo pues aparece como en desktop pero los items encimados.
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `index.php`
-**Language:** php
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Considering Tool Applicability**
-
-I'm currently evaluating the utility of available tools. I'm noting the specific tasks each tool is designed for, like viewing file contents, and also considering more general applications, such as terminal commands. This aims to understand their relative strengths and weaknesses.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.076506060s
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
+**Status:** Reset
+**Created:** 24 Aug 2026, 6:17 pm
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 6:17 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-**Prioritizing Tool Specificity**
-
-I'm focusing intently on tool selection, always aiming for the most precise one available. Efficiency hinges on using specialized tools whenever possible, steering clear of more general-purpose options unless absolutely necessary. The goal is to minimize complexity and maximize effectiveness in every task.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.114149276s
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 24 Aug 2026, 6:17 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 6:17 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 6:17 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 6:17 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 6:17 pm
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-## User Request
-
-se arreglo lo del menu  de amburgesa para las ipads, y pero no se arreglo lo de "Autoajuste del Ancho de Ficha 1" (ficha que contiene:  25 años de experiencia al servicio del diagnóstico ...), dale solución de raiz.
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `landing.css`
-**Language:** css
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 6:22 pm
 
 ---
 
-## Agent Response
-
-### Thinking
-
-**Prioritizing Tool Usage**
-
-I'm considering the best way to approach problem-solving using available tools. Specifically, I'm now focused on tool selection. My current thinking prioritizes using the most specific tool for a given task, such as a file viewer instead of a general terminal. I'm exploring how this impacts efficiency and accuracy in problem-solving.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.111273838s
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Aug 2026, 6:22 pm
 
 ---
@@ -16857,6 +15356,2194 @@ The cleanest fix is adding an options parameter to `init()` like `{ enableDraft:
 
 - **Model:** Claude Sonnet 4.6 (Thinking)
 </details>
+
+---
+
+## User Request
+
+Continua.
+
+---
+
+### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
+
+**Status:** Completed
+**Created:** 25 Aug 2026, 6:56 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+The user wants me to proceed with the two changes I analyzed:
+
+1. **`cms-dirty-tracker.js`** — 3 changes:
+   - Add `var _draftEnabled = true;` as module variable
+   - In `init()`: read `options.enableDraft`, skip `_restoreDraftsIfAny()` if false
+   - In `evalField()`: wrap `_saveDraft()` with `if (_draftEnabled)`
+
+2. **`gestion-web.js`** — 1 change:
+   - Add call to `CmsDirtyTracker.init([...9 panels...], { enableDraft: false })`
+   
+Let me check the current state of both files before making these precise edits.
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `cms-dirty-tracker.js`
+
+**Tool:** `view_file`
+**File:** `gestion-web.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.913996146s
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L12-114)</summary>
+
+**Path:** `Unknown file`
+
+```
+(function(window, document) {
+    'use strict';
+
+    var TRACK_SELECTOR = 'input[name]:not([type="file"]), textarea[name], select[name]';
+    var DRAFT_PREFIX   = 'cms_draft_';   // Clave en localStorage: cms_draft_{panelId}
+    var DRAFT_MAX_AGE  = 7 * 86400 * 1000; // 7 días en ms — borradores más viejos se descartan
+    var activePanelIds = ['panel-hero', 'panel-quienes-somos'];
+
+    // Bandera global: ¿hay AL MENOS UN campo sucio en cualquier panel activo?
+    var _hasDirtyFields = false;
+
+    var CmsDirtyTracker = {
+
+        // ══════════════════════════════════════════════════════════════════
+        //  INIT
+        // ══════════════════════════════════════════════════════════════════
+
+        /**
+         * Inicializa la supervisión en los paneles especificados o por defecto.
+         * @param {string[]} panelIds  IDs de paneles a monitorear
+         */
+        init: function(panelIds) {
+            if (Array.isArray(panelIds)) {
+                activePanelIds = panelIds;
+            }
+            var self = this;
+
+            // 1. Ofrecer restaurar borradores de sesiones anteriores (si existen)
+            self._restoreDraftsIfAny();
+
+            // 2. Inicializar baseline de cada panel
+            activePanelIds.forEach(function(panelId) {
+                var panel = document.getElementById(panelId);
+                if (!panel) return;
+                self.initPanelBaseline(panel);
+            });
+
+            // 3. Delegación de eventos: input/change en cualquier campo rastreable
+            document.addEventListener('input', function(e) {
+                if (self.shouldTrack(e.target)) self.evalField(e.target);
+            });
+            document.addEventListener('change', function(e) {
+                if (self.shouldTrack(e.target)) self.evalField(e.target);
+            });
+
+            // 4. Instalar guard de beforeunload
+            self._installBeforeUnloadGuard();
+        },
+
+        // ══════════════════════════════════════════════════════════════════
+        //  TRACKING
+        // ══════════════════════════════════════════════════════════════════
+
+        /** Determina si el elemento pertenece a uno de los paneles supervisados. */
+        shouldTrack: function(el) {
+            if (!el || !el.name) return false;
+            var panel = el.closest('.cms-panel');
+            if (!panel || !panel.id) return false;
+            return activePanelIds.indexOf(panel.id) !== -1;
+        },
+
+        /** Guarda el valor inicial en dataset.original para todos los campos de un panel. */
+        initPanelBaseline: function(panelEl) {
+            var self = this;
+            panelEl.querySelectorAll(TRACK_SELECTOR).forEach(function(el) {
+                if (el.dataset.original === undefined) {
+                    el.dataset.original = el.value;
+                }
+                self.evalField(el);
+            });
+        },
+
+        /**
+         * Evalúa si un campo ha cambiado respecto a su valor original.
+         * Si cambió: marca el dot rojo y guarda borrador en localStorage.
+         */
+        evalField: function(el) {
+            var original = el.dataset.original !== undefined ? el.dataset.original : '';
+            var current  = el.value !== undefined ? el.value : '';
+            var isDirty  = (current !== original);
+
+            if (isDirty) {
+                this.markField(el);
+            } else {
+                this.unmarkField(el);
+            }
+
+            var panel = el.closest('.cms-panel');
+            if (panel) {
+                this.updateBadge(panel);
+                this._saveDraft(panel);  // [v2] Persistir borrador
+            }
+
+            this._syncDirtyFlag();  // [v2] Actualizar bandera global
+            return isDirty;
+        },
+
+        /** Inyecta el indicador rojo (.cms-field-dirty-dot) en el contenedor del campo. */
+        markField: function(el) {
+            var wrapper = this.findWrapper(el);
+            if (!wrapper) return;
+            if (!wrapper.querySelector('.cms-field-dirty-dot')) {
+                var dot = document.createElement('span');
+```
+
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+/* gestion-web.js — lógica del portal de gestión web CMS (extraído de gestion-web.html) */
+        const panelLabelsGestion = {
+            'hero': 'Banner Principal',
+            'quienes-somos': 'Quiénes somos',
+            'especialidades': 'Estudios de Rutina',
+            'promociones': 'Promociones Vigentes',
+            'calidad': 'Calidad e Instalaciones',
+            'ubicacion': 'Ubicación y Contacto',
+            'footer': 'Pie de Página',
+            'seo': 'SEO y Metadatos',
+            'aviso-privacidad': 'Aviso de Privacidad'
+        };
+
+        function showPanel(name) {
+            document.querySelectorAll('.cms-panel').forEach(p => p.classList.remove('active'));
+            const targetPanel = document.getElementById('panel-' + name);
+            if (targetPanel) targetPanel.classList.add('active');
+
+            // Sincronizar pestaña superior activa + ARIA (A-01)
+            document.querySelectorAll('.cms-tab').forEach(function(t) {
+                t.classList.remove('active');
+                t.setAttribute('aria-selected', 'false');
+                t.setAttribute('tabindex', '-1');
+            });
+            const targetTab = document.getElementById('tab-' + name);
+            if (targetTab) {
+                targetTab.classList.add('active');
+                targetTab.setAttribute('aria-selected', 'true');
+                targetTab.setAttribute('tabindex', '0');
+            }
+
+            // Actualizar breadcrumb
+            const bc = document.getElementById('header-bc-current');
+            if (bc && panelLabelsGestion[name]) bc.textContent = panelLabelsGestion[name];
+        }
+
+        function activateTab(el) {
+            document.querySelectorAll('.cms-tab').forEach(function(t) {
+                t.classList.remove('active');
+                t.setAttribute('aria-selected', 'false');
+                t.setAttribute('tabindex', '-1');
+            });
+            el.classList.add('active');
+            el.setAttribute('aria-selected', 'true');
+            el.setAttribute('tabindex', '0');
+        }
+
+        function activateNav(el) {
+            document.querySelectorAll('.sidebar .nav-item').forEach(n => n.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        
+        // Datos de los 5 Hero Slides del Banner Principal (#inicio)
+        const heroDatos = {
+            1: { badge: "Bienvenido a Nuestra Institución", title: "Bienvenido a LAESH® — Diagnósticos de Confianza", desc: "Trabajamos para proporcionar información diagnóstica confiable que ayude al médico a tomar mejores decisiones y al paciente a recibir atención oportuna.", btnText: "Conoce los Servicios", btnLink: "#especialidades", img: "/laesh-web-assets-uipv1a/img/recepcion.webp" },
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `DOMContentLoaded\|addEventListener.*DOMContent\|document\.ready`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 Aug 2026, 6:56 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.js`
+
+**Tool:** `view_file`
+**File:** `gestion-web.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L549-594)</summary>
+
+**Path:** `Unknown file`
+
+```
+            }
+
+            // Insertar entre el label y el control
+            label.insertAdjacentElement('afterend', hint);
+        });
+    }
+
+    // Actualizar contadores al inicio y al cambiar de slide o ficha
+    setTimeout(refreshAllCharCounters, 100);
+    initCurrentValueLabels();
+
+    // Lógica reactiva para enterarse de notificaciones de recepción (labadmin)
+    let lastRemitidosCMS = 0;
+    function refreshNotificacionesCMS() {
+        if (typeof getOrders !== 'function') return;
+        const orders = getOrders().filter(o => o.estado === 'Remitido');
+        const count = orders.length;
+        const badge = document.getElementById('badge-notif-cms');
+
+        if (badge) {
+            badge.innerText = count;
+            if (count > 0) {
+                badge.classList.add('show');
+                if (count > lastRemitidosCMS) {
+                    badge.classList.add('pulse');
+                    if (typeof playWhistle === 'function') {
+                        playWhistle();
+                    }
+                    setTimeout(() => badge.classList.remove('pulse'), 3000);
+                }
+                document.title = `(${count}) Gestión Web - LAESH`;
+            } else {
+                badge.classList.remove('show');
+                badge.classList.remove('pulse');
+                document.title = "Gestión Web - LAESH";
+            }
+        }
+        lastRemitidosCMS = count;
+    }
+
+    // Inicializar y escuchar cambios de LocalStorage
+    refreshNotificacionesCMS();
+    setInterval(refreshNotificacionesCMS, 4000);
+    window.addEventListener('storage', refreshNotificacionesCMS);
+});
+
+```
+
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L199-229)</summary>
+
+**Path:** `Unknown file`
+
+```
+                el.dataset.original = el.value;
+            });
+            updateTabBadge(section, 0);
+        }
+
+        /**
+         * publishCmsSection — POST al backend /laesh/adrc/cms/save
+         *
+         * Lee el panel activo (.cms-panel.active), recopila todos los campos
+         * con atributo name (formato subseccion__clave), añade csrf_token y
+         * seccion, y hace fetch() al endpoint declarado en el botón publicar.
+         *
+         * En éxito muestra el toast verde; en error muestra toast rojo + log.
+         */
+        function publishCmsSection() {
+            var btn       = document.getElementById('btn-cms-save-action');
+            var panel     = document.querySelector('.cms-panel.active');
+            var toast     = document.getElementById('toast');
+
+            if (!btn || !panel) return;
+
+            var csrf     = btn.getAttribute('data-csrf') || '';
+            var endpoint = btn.getAttribute('data-endpoint') || '/laesh/adrc/cms/save';
+            var seccion  = panel.getAttribute('data-section') || panel.id.replace('panel-', '');
+
+            // Confirmación con conteo de cambios pendientes
+            var nCambios = countPanelChanges(panel);
+            var labelSec = panelLabelsGestion[seccion] || seccion;
+            if (nCambios === 0) {
+                alert('Sin cambios en «' + labelSec + '» — no hay nada que publicar.');
+                return;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L154-199)</summary>
+
+**Path:** `Unknown file`
+
+```
+        /** Cuenta campos modificados en un panel. */
+        function countPanelChanges(panelEl) {
+            var n = 0;
+            panelEl.querySelectorAll(TRACK_SELECTOR).forEach(function(el) {
+                if (el.value !== (el.dataset.original ?? '')) n++;
+            });
+            return n;
+        }
+
+        /** Actualiza (o borra) el badge rojo de la pestaña correspondiente. */
+        function updateTabBadge(section, count) {
+            var tab = document.getElementById('tab-' + section);
+            if (!tab) return;
+            var badge = tab.querySelector('.tab-change-badge');
+            if (count === 0) {
+                if (badge) badge.remove();
+                return;
+            }
+            if (!badge) {
+                badge = document.createElement('span');
+                badge.className = 'tab-change-badge';
+                tab.appendChild(badge);
+            }
+            badge.textContent = count;
+        }
+
+        /** Recalcula y muestra el badge del panel que contiene el campo editado. */
+        function onFieldChange(el) {
+            if (window.CmsDirtyTracker) {
+                window.CmsDirtyTracker.evalField(el);
+                return;
+            }
+            var panel = el.closest('.cms-panel');
+            if (!panel) return;
+            var section = panel.getAttribute('data-section') || panel.id.replace('panel-', '');
+            updateTabBadge(section, countPanelChanges(panel));
+        }
+
+        /** Resetea data-original tras publicar exitosamente y borra el badge. */
+        function resetChangeTracking(panelEl, section) {
+            if (window.CmsDirtyTracker) {
+                window.CmsDirtyTracker.resetPanel(panelEl, section);
+                return;
+            }
+            panelEl.querySelectorAll(TRACK_SELECTOR).forEach(function(el) {
+                el.dataset.original = el.value;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L129-154)</summary>
+
+**Path:** `Unknown file`
+
+```
+                reader.onload = function(e) {
+                    const img = document.getElementById(previewId);
+                    if (img) img.src = e.target.result;
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // ── Seguimiento de cambios por pestaña (module scope — usado por publishCmsSection) ──
+        /** Selector de todos los campos rastreables (con name, no file). */
+        const TRACK_SELECTOR = 'input[name]:not([type="file"]), textarea[name], select[name]';
+
+        /** Inicializa data-original en todos los campos de todos los paneles. */
+        function initChangeTracking() {
+            if (window.CmsDirtyTracker) {
+                window.CmsDirtyTracker.init(['panel-hero', 'panel-quienes-somos']);
+                return;
+            }
+            document.querySelectorAll('.cms-panel').forEach(function(panel) {
+                panel.querySelectorAll(TRACK_SELECTOR).forEach(function(el) {
+                    el.dataset.original = el.value;
+                });
+            });
+        }
+
+        /** Cuenta campos modificados en un panel. */
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `multi_replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 Aug 2026, 6:57 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 Aug 2026, 6:57 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Aug 2026, 6:57 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 Aug 2026, 6:59 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Aug 2026, 6:59 am
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 25 Aug 2026, 6:59 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Tecnica_Infraestructura_Despliegue.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1730-1945)</summary>
+
+**Path:** `Unknown file`
+
+```
+</section>
+</main>
+
+</body>
+</html>
+
+<p style="background:#fef2f2;border-left:4px solid #ef4444;padding:10px 14px;border-radius:4px;margin-bottom:12px;">
+  <strong>⚠️ DEUDA TÉCNICA ABIERTA — 2026-08-25</strong><br>
+  El módulo <code>cms-dirty-tracker.js v2</code> está escrito, validado (sin errores de sintaxis) y cargado vía <code>&lt;script defer&gt;</code> en <code>gestion_web.php</code>.
+  Sin embargo, <strong>ninguna de las 3 capacidades nuevas está activa en producción</strong> porque
+  <code>CmsDirtyTracker.init()</code> <strong>no es invocado desde ningún archivo</strong> (<code>gestion-web.js</code> no tiene esa llamada).
+  El objeto queda registrado en <code>window.CmsDirtyTracker</code> pero sus listeners no se instalan.
+</p>
+
+<h4>Estado por capacidad (2026-08-25):</h4>
+<table>
+  <thead><tr><th>Capacidad v2</th><th>Código en disco</th><th>Activo en browser</th><th>Bloqueado por</th></tr></thead>
+  <tbody>
+    <tr><td>beforeunload Guard (cierre/refresh de pestaña)</td><td>✅ Implementado</td><td>❌ No activo</td><td><code>init()</code> no invocado</td></tr>
+    <tr><td>Draft Auto-Save (localStorage en tiempo real)</td><td>✅ Implementado</td><td>❌ No activo</td><td><code>init()</code> no invocado</td></tr>
+    <tr><td>Draft Restore (banner de recuperación al cargar)</td><td>✅ Implementado</td><td>❌ No activo</td><td><code>init()</code> no invocado</td></tr>
+    <tr><td>Dot rojo + badge (funcionalidad v1)</td><td>✅ Heredado de v1</td><td>⚠️ Depende de si alguien llama a <code>init()</code></td><td>Misma causa</td></tr>
+  </tbody>
+</table>
+
+<h4>Lo que se necesita para activar todo (una sola línea de código):</h4>
+<p>En <code>gestion-web.js</code>, dentro del bloque <code>DOMContentLoaded</code>, agregar:</p>
+<pre><code>// Activar red de seguridad CMS para los 9 paneles
+CmsDirtyTracker.init([
+    'panel-hero', 'panel-quienes-somos', 'panel-especialidades',
+    'panel-promociones', 'panel-calidad', 'panel-ubicacion',
+    'panel-footer', 'panel-seo', 'panel-aviso-privacidad'
+]);</code></pre>
+<p>Esta única llamada activa simultáneamente: el beforeunload guard, el auto-save en localStorage y la detección de borradores previos al cargar.</p>
+
+<h4>Pendientes futuros (además de la activación):</h4>
+<ul>
+  <li><strong>Sentinel de Red:</strong> <code>window.addEventListener('offline')</code> para deshabilitar botones "Publicar" y "Subir Imagen" cuando la red caiga. Mostrar banner naranja informativo.</li>
+  <li><strong>Heartbeat de Sesión:</strong> <code>setInterval</code> cada 10 min que hace ping a <code>/api/auth/status</code>. Si responde 401, mostrar modal in-place de re-autenticación sin recargar la página.</li>
+  <li><strong>Garbage Collector de Assets:</strong> Separar uploads a <code>/temp-uploads/</code> y mover a definitivo solo al publicar. Cron de limpieza cada 24h.</li>
+</ul>
+<p><em>📅 Retomar en próxima sesión de desarrollo CMS. No requiere cambios en backend ni BD.</em></p>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     §18 — Deploy LAESH PHP Portales a caelitandem.lat
+     Ejecutado: 2026-08-25 | Sesión Claude Code
+     ══════════════════════════════════════════════════════════════════════ -->
+<section id="sec18">
+<h2 id="sec18">18. Deploy LAESH PHP Portales a <code>caelitandem.lat</code> (2026-08-25)</h2>
+<p>Registro del primer deploy completo de los portales PHP LAESH Bloc Digital en producción OCI. Deploy ejecutado sobre <code>caelitandem.lat</code> (no <code>laesh.mx</code> — DNS aún no apuntado). Incluye: rsync de archivos, recreación de BD, configuración Nginx, diagnóstico y corrección de seed, y suite de pruebas.</p>
+
+<h3 id="sec18-1">18.1. Decisiones previas al deploy</h3>
+<table>
+<caption>Decisiones de arquitectura tomadas antes del deploy</caption>
+<thead><tr><th>Decisión</th><th>Opción elegida</th><th>Razón</th></tr></thead>
+<tbody>
+<tr><td>Dominio de deploy</td><td><code>caelitandem.lat</code></td><td><code>laesh.mx</code> DNS apunta a <code>2.57.91.91</code> (no OCI). <code>caelitandem.lat</code> ya tiene cert Let's Encrypt válido y Nginx configurado.</td></tr>
+<tr><td>Directorio raíz OCI</td><td><code>/home/ubuntu/laesh-stack/www/</code></td><td>Separación clara del stack LAESH vs contenido legacy <code>n8n-php/</code>. Ya existía <code>laesh-stack/</code> para la BD Docker.</td></tr>
+<tr><td>Assets</td><td>Copia directa (rsync), no symlink</td><td>Rutas absolutas en Nginx <code>alias</code>; symlinks añaden complejidad sin beneficio.</td></tr>
+<tr><td>Subdirectorios excluidos</td><td><code>website/uipv0</code>, <code>website/uipv2</code></td><td>uipv0 obsoleto; uipv2 en desarrollo futuro. Sí se copian: <code>website/uipv1</code> y <code>website/login</code>.</td></tr>
+<tr><td>BD OCI</td><td>DROP + recrear desde cero</td><td>Cambios en schema; deploy limpio garantiza consistencia. No hay datos de pacientes reales — solo seed demo.</td></tr>
+<tr><td>CSP OCI</td><td>Global unificado en <code>caelitandem.lat</code></td><td>Portal ADMRC usa CKEditor (necesita <code>unsafe-inline</code> + YouTube + redes sociales). Un solo server block → un solo CSP.</td></tr>
+<tr><td>Nginx <code>fastcgi_pass</code></td><td><code>unix:/run/php/php8.1-fpm.sock</code></td><td>OCI nativo (no Docker). Socket Unix más eficiente que TCP.</td></tr>
+<tr><td><code>include fastcgi_params</code></td><td>Sí, no <code>fastcgi-php.conf</code></td><td>Las locations LAESH usan <code>alias</code> → <code>SCRIPT_FILENAME</code> debe ser manual. <code>fastcgi-php.conf</code> lo sobreescribe y rompe el ruteo.</td></tr>
+</tbody>
+</table>
+
+<h3 id="sec18-2">18.2. Runbook de Deploy — 5 Fases</h3>
+<p>Ejecutado desde host local (<code>192.168.1.71</code>) hacia OCI VM (<code>ubuntu@oci-vm</code>).</p>
+
+<h4>Fase 1 — Crear directorios en OCI</h4>
+<pre><code>ssh ubuntu@oci-vm "mkdir -p \
+  /home/ubuntu/laesh-stack/www/laesh-swbldi \
+  /home/ubuntu/laesh-stack/www/restaurant/commons \
+  /home/ubuntu/laesh-stack/www/laesh-web-assets-uipv1a"</code></pre>
+
+<h4>Fase 2 — rsync (3 transferencias)</h4>
+<pre><code>LOCAL=/home/carlos/GitHub/caelitandem_home/restaurantb/www
+
+# 2a. Portal PHP (sin uipv0, uipv2, ni logs)
+rsync -avz --progress \
+  --exclude='website/uipv0' --exclude='website/uipv2' --exclude='logs/*' \
+  "$LOCAL/laesh-swbldi/" ubuntu@oci-vm:/home/ubuntu/laesh-stack/www/laesh-swbldi/
+
+# 2b. Librerías vendored (Flight, Plates, Delight-Auth)
+rsync -avz --progress \
+  "$LOCAL/restaurant/commons/libs/" \
+  ubuntu@oci-vm:/home/ubuntu/laesh-stack/www/restaurant/commons/libs/
+
+# 2c. Web assets CSS/JS/fonts/img
+rsync -avz --progress \
+  "$LOCAL/laesh-web-assets-uipv1a/" \
+  ubuntu@oci-vm:/home/ubuntu/laesh-stack/www/laesh-web-assets-uipv1a/</code></pre>
+
+<h4>Fase 3 — Permisos en OCI</h4>
+<pre><code>ssh ubuntu@oci-vm "
+  mkdir -p /home/ubuntu/laesh-stack/www/laesh-swbldi/logs
+  sudo chown -R www-data:www-data /home/ubuntu/laesh-stack/www/laesh-swbldi/logs
+  sudo chmod -R 775 /home/ubuntu/laesh-stack/www/laesh-swbldi/logs
+  sudo chown -R ubuntu:www-data /home/ubuntu/laesh-stack/www/laesh-swbldi
+  sudo chown -R ubuntu:www-data /home/ubuntu/laesh-stack/www/restaurant
+  sudo chown -R ubuntu:www-data /home/ubuntu/laesh-stack/www/laesh-web-assets-uipv1a"</code></pre>
+
+<h4>Fase 4 — BD: recrear desde cero</h4>
+<pre><code>rsync -avz restaurantb/setup/bds/laesh/ ubuntu@oci-vm:/tmp/laesh-setup/
+
+ssh ubuntu@oci-vm "
+  cd /tmp/laesh-setup
+  MCMD='docker exec -i laesh_db mariadb -u root -plaesh_oci_root_2026'
+  \$MCMD -e 'DROP DATABASE IF EXISTS laesh_db; CREATE DATABASE laesh_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;'
+  for f in 00_database.sql 01_auth_schema.sql 02_core_schema.sql \
+            03_transactional_schema.sql 04_auth_extensions.sql \
+            05_system_tables.sql 06_indexes.sql 07_seed_catalogs.sql \
+            08_stored_procedures.sql 09_views.sql; do
+    \$MCMD laesh_db < \$f
+  done
+  LAESH_DB_HOST=127.0.0.1 LAESH_DB_PORT=6002 \
+  LAESH_DB_USER=laesh_app LAESH_DB_PASS=laesh_oci_app_2026 \
+  LAESH_DB_NAME=laesh_db APP_ENV=production \
+  php8.1 /home/ubuntu/laesh-stack/www/laesh-swbldi/commons/seed_first_users.php"</code></pre>
+<p><strong>Nota:</strong> <code>02_seed_users.sh</code> usa <code>docker exec restaurantb_phpfpm</code> — incompatible con OCI nativo. Sustituido por <code>php8.1 seed_first_users.php</code> con env vars explícitas.</p>
+
+<h4>Fase 5 — Nginx OCI: bloques LAESH + eliminar <code>/laesh-web-assets</code> old</h4>
+<p>Aplicado vía script Python. Elimina <code>location ^~ /laesh-web-assets</code> (legacy, apuntaba a <code>n8n-php/</code>) e inserta bloque LAESH completo antes de <code>location ^~ /mvps</code>.</p>
+<pre><code>sudo nginx -t &amp;&amp; sudo systemctl reload nginx</code></pre>
+
+<h3 id="sec18-3">18.3. Nginx OCI — Bloques LAESH (adaptación Docker → OCI nativo)</h3>
+<table>
+<caption>Sustituciones clave Docker Nginx 1.27 → OCI Nginx 1.18</caption>
+<thead><tr><th>Local Docker</th><th>OCI Nginx 1.18</th><th>Razón</th></tr></thead>
+<tbody>
+<tr><td><code>set $fpm php-fpm:9000; fastcgi_pass $fpm;</code></td><td><code>fastcgi_pass unix:/run/php/php8.1-fpm.sock;</code></td><td>OCI sin Docker DNS. Socket Unix.</td></tr>
+<tr><td><code>resolver 127.0.0.11</code></td><td>Eliminado</td><td>No hay red Docker en OCI</td></tr>
+<tr><td><code>http2 on;</code> (Nginx 1.25+)</td><td><code>listen 443 ssl http2;</code></td><td>Nginx 1.18 usa listen flag (ya aplicado §14.7)</td></tr>
+<tr><td><code>location /ws</code> WebSocket Swoole</td><td>Omitido</td><td>Swoole no desplegado en OCI</td></tr>
+<tr><td><code>location /restaurant/</code></td><td>Omitido</td><td>App restaurant no en OCI</td></tr>
+<tr><td><code>allow 172.19.0.0/16</code></td><td>Omitido</td><td>No red Docker bridge en OCI</td></tr>
+<tr><td>SSL block propio (self-signed)</td><td>Certbot (pre-existente)</td><td>Let's Encrypt en OCI</td></tr>
+</tbody>
+</table>
+<p><strong>Patrón invariante</strong> (<code>alias</code> + named <code>@</code> + regex PHP handler con <code>SCRIPT_FILENAME</code> manual): idéntico en Docker local y OCI. No requiere cambios de lógica.</p>
+
+<h3 id="sec18-4">18.4. Diagnóstico y Corrección: <code>web_contenidos</code> Seed vs CMS</h3>
+
+<h4>Síntoma detectado</h4>
+<p>Comparación visual inmediata post-deploy: sección "Quiénes somos" mostraba estilos y contenido distintos en OCI vs local. Ficha 4 ("¿POR QUÉ CONFIAR EN LAESH?") estructuralmente diferente.</p>
+
+<h4>Causa raíz</h4>
+<p><code>07_seed_catalogs.sql</code> usaba <code>INSERT IGNORE</code> — nunca sobreescribe filas existentes. El CMS (CKEditor 5) editó esas filas en local, generando HTML enriquecido con clases CSS propias. Al redeployar OCI con DROP+recreate, el seed restauró el HTML plano original del seed inicial.</p>
+<table>
+<caption>Comparativa: seed original vs CMS local (ficha4)</caption>
+<thead><tr><th>OCI (seed viejo)</th><th>Local CMS (correcto)</th></tr></thead>
+<tbody>
+<tr><td><code>&lt;h3&gt;🟢 ¿POR QUÉ CONFIAR...&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;25 años&lt;/li&gt;...&lt;/ul&gt;</code></td><td><code>&lt;h3 class="acerca-h3" style="..."&gt;...&lt;/h3&gt;&lt;div class="acerca-flex" style="..."&gt;&lt;p class="faq-p--muted"...&gt;</code></td></tr>
+</tbody>
+</table>
+
+<h4>Corrección aplicada</h4>
+<ol>
+<li>Exportar 160 filas actuales de <code>web_contenidos</code> desde BD local.</li>
+<li>Reemplazar en <code>07_seed_catalogs.sql</code>: 21 bloques <code>INSERT IGNORE</code> dispersos + 1 <code>UPDATE</code> → 1 bloque <code>REPLACE INTO</code> consolidado con las 160 filas.</li>
+<li>Recrear BD en OCI → contenido idéntico a local. Verificado con curl: clases <code>acerca-flex</code>, <code>faq-p--muted</code>, <code>txt-pgd-sub</code> presentes en respuesta OCI.</li>
+</ol>
+<p><strong>Invariante:</strong> <code>REPLACE INTO</code> (clave única <code>(seccion, subseccion, clave)</code>) garantiza que el seed siempre gana. Flujo de sincronización CMS→OCI: regenerar <code>07_seed_catalogs.sql</code> desde local BD → rsync → DROP+recreate.</p>
+
+<h3 id="sec18-5">18.5. Suite de Pruebas — 27/27 OK</h3>
+<p>Script: <code>test_laesh_oci.sh</code>. Ejecutar con <code>bash test_laesh_oci.sh</code> desde host local.</p>
+<table>
+<caption>Resultados suite de pruebas post-deploy 2026-08-25</caption>
+<thead><tr><th>Bloque</th><th>Checks</th><th>Resultado</th></tr></thead>
+<tbody>
+<tr><td>1. HTTP Status</td><td><code>/laesh/</code> 200; portales <code>md/ rc/ adrc/</code> 302; trailing-slash 301×3; <code>login.php</code> 200</td><td>8/8 ✅</td></tr>
+<tr><td>2. Assets Estáticos</td><td><code>portal.css</code> 200; <code>app.js</code> 200; <code>website.js</code> 200; old <code>/laesh-web-assets</code> 404</td><td>4/4 ✅</td></tr>
+<tr><td>3. CSP Headers</td><td><code>unsafe-inline</code>, <code>unpkg.com</code>, <code>youtube.com</code>, <code>openstreetmap.org</code>, <code>i.ytimg.com</code>, <code>wss:</code></td><td>6/6 ✅</td></tr>
+<tr><td>4. Seguridad</td><td>HSTS, X-Frame-Options, Referrer-Policy, X-Content-Type, HTTP/2</td><td>5/5 ✅</td></tr>
+<tr><td>5. PHP Operativo</td><td>HTML en <code>/laesh/</code>; form login; portales redirigen a login</td><td>4/4 ✅</td></tr>
+</tbody>
+</table>
+<p><strong>Total: 27/27 ✅</strong> — Deploy exitoso.</p>
+
+<h3 id="sec18-6">18.6. Estado Post-Deploy y URLs Activas</h3>
+<table>
+<caption>URLs activas en OCI tras deploy 2026-08-25</caption>
+<thead><tr><th>URL</th><th>HTTP</th><th>Directorio físico OCI</th></tr></thead>
+<tbody>
+<tr><td><code>https://caelitandem.lat/laesh/</code></td><td>200</td><td><code>laesh-stack/www/laesh-swbldi/website/</code></td></tr>
+<tr><td><code>https://caelitandem.lat/laesh/login/login.php</code></td><td>200</td><td><code>laesh-swbldi/website/login/login.php</code></td></tr>
+<tr><td><code>https://caelitandem.lat/laesh/md/</code></td><td>302 → login</td><td><code>laesh-swbldi/md/</code></td></tr>
+<tr><td><code>https://caelitandem.lat/laesh/rc/</code></td><td>302 → login</td><td><code>laesh-swbldi/rc/</code></td></tr>
+<tr><td><code>https://caelitandem.lat/laesh/adrc/</code></td><td>302 → login</td><td><code>laesh-swbldi/admrc/</code></td></tr>
+<tr><td><code>https://caelitandem.lat/laesh-web-assets-uipv1a/css/portal.css</code></td><td>200</td><td><code>laesh-stack/www/laesh-web-assets-uipv1a/</code></td></tr>
+<tr><td><code>https://caelitandem.lat/laesh-web-assets/</code> (old)</td><td>404 — eliminado</td><td>—</td></tr>
+</tbody>
+</table>
+<table>
+<caption>Credenciales demo (cambiar antes de uso real)</caption>
+<thead><tr><th>Rol</th><th>Teléfono</th><th>Contraseña</th><th>Portal</th></tr></thead>
+<tbody>
+<tr><td>ADMIN</td><td><code>9990000001</code></td><td><code>010120001!</code></td><td><code>/laesh/adrc/</code></td></tr>
+<tr><td>RECEPCIÓN</td><td><code>9990000002</code></td><td><code>010120002!</code></td><td><code>/laesh/rc/</code></td></tr>
+<tr><td>MÉDICO</td><td><code>9990000003</code></td><td><code>010120003!</code></td><td><code>/laesh/md/</code></td></tr>
+</tbody>
+</table>
+<h4>Pendientes post-deploy</h4>
+<ul>
+  <li>❌ <strong>laesh.mx DNS</strong>: apunta a <code>2.57.91.91</code>. Cuando se apunte a OCI ejecutar §13.4 (server block + Certbot).</li>
+  <li>⚠️ <strong>Contraseñas demo</strong>: cambiar antes de entregar acceso real.</li>
+  <li>⚠️ <strong>Sincronización CMS→seed</strong>: al editar contenido en CMS local y querer reflejar en OCI → regenerar <code>07_seed_catalogs.sql</code> y ejecutar DROP+recreate.</li>
+</ul>
+</section>
+
+</main>
+
+</body>
+</html>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 Aug 2026, 6:59 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Aug 2026, 6:59 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Tecnica_Infraestructura_Despliegue.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1732-1779)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+</body>
+</html>
+
+  El módulo <code>cms-dirty-tracker.js v2</code> está escrito, validado (sin errores de sintaxis) y cargado vía <code>&lt;script defer&gt;</code> en <code>gestion_web.php</code>.
+  Sin embargo, <strong>ninguna de las 3 capacidades nuevas está activa en producción</strong> porque
+  <code>CmsDirtyTracker.init()</code> <strong>no es invocado desde ningún archivo</strong> (<code>gestion-web.js</code> no tiene esa llamada).
+  El objeto queda registrado en <code>window.CmsDirtyTracker</code> pero sus listeners no se instalan.
+</p>
+
+<h4>Estado por capacidad (2026-08-25):</h4>
+<table>
+  <thead><tr><th>Capacidad v2</th><th>Código en disco</th><th>Activo en browser</th><th>Bloqueado por</th></tr></thead>
+  <tbody>
+    <tr><td>beforeunload Guard (cierre/refresh de pestaña)</td><td>✅ Implementado</td><td>❌ No activo</td><td><code>init()</code> no invocado</td></tr>
+    <tr><td>Draft Auto-Save (localStorage en tiempo real)</td><td>✅ Implementado</td><td>❌ No activo</td><td><code>init()</code> no invocado</td></tr>
+    <tr><td>Draft Restore (banner de recuperación al cargar)</td><td>✅ Implementado</td><td>❌ No activo</td><td><code>init()</code> no invocado</td></tr>
+    <tr><td>Dot rojo + badge (funcionalidad v1)</td><td>✅ Heredado de v1</td><td>⚠️ Depende de si alguien llama a <code>init()</code></td><td>Misma causa</td></tr>
+  </tbody>
+</table>
+
+<h4>Lo que se necesita para activar todo (una sola línea de código):</h4>
+<p>En <code>gestion-web.js</code>, dentro del bloque <code>DOMContentLoaded</code>, agregar:</p>
+<pre><code>// Activar red de seguridad CMS para los 9 paneles
+CmsDirtyTracker.init([
+    'panel-hero', 'panel-quienes-somos', 'panel-especialidades',
+    'panel-promociones', 'panel-calidad', 'panel-ubicacion',
+    'panel-footer', 'panel-seo', 'panel-aviso-privacidad'
+]);</code></pre>
+<p>Esta única llamada activa simultáneamente: el beforeunload guard, el auto-save en localStorage y la detección de borradores previos al cargar.</p>
+
+<h4>Pendientes futuros (además de la activación):</h4>
+<ul>
+  <li><strong>Sentinel de Red:</strong> <code>window.addEventListener('offline')</code> para deshabilitar botones "Publicar" y "Subir Imagen" cuando la red caiga. Mostrar banner naranja informativo.</li>
+  <li><strong>Heartbeat de Sesión:</strong> <code>setInterval</code> cada 10 min que hace ping a <code>/api/auth/status</code>. Si responde 401, mostrar modal in-place de re-autenticación sin recargar la página.</li>
+  <li><strong>Garbage Collector de Assets:</strong> Separar uploads a <code>/temp-uploads/</code> y mover a definitivo solo al publicar. Cron de limpieza cada 24h.</li>
+</ul>
+<p><em>📅 Retomar en próxima sesión de desarrollo CMS. No requiere cambios en backend ni BD.</em></p>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     §18 — Deploy LAESH PHP Portales a caelitandem.lat
+     Ejecutado: 2026-08-25 | Sesión Claude Code
+     ══════════════════════════════════════════════════════════════════════ -->
+<section id="sec18">
+<h2 id="sec18">18. Deploy LAESH PHP Portales a <code>caelitandem.lat</code> (2026-08-25)</h2>
+<p>Registro del primer deploy completo de los portales PHP LAESH Bloc Digital en producción OCI. Deploy ejecutado sobre <code>caelitandem.lat</code> (no <code>laesh.mx</code> — DNS aún no apuntado). Incluye: rsync de archivos, recreación de BD, configuración Nginx, diagnóstico y corrección de seed, y suite de pruebas.</p>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Aug 2026, 6:59 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Aug 2026, 7:00 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Aug 2026, 7:00 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Aug 2026, 7:00 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Aug 2026, 7:00 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Aug 2026, 7:00 am
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+## User Request
+
+esto:  Guard beforeunload quedo activo a nivel de  pagina php de cms , cierto ?
+
+---
+
+## Agent Response
+
+### Thinking
+
+The user is asking whether the beforeunload guard is active at the PHP CMS page level. Let me trace through the code to confirm exactly how it's wired.
+
+The flow is:
+1. `gestion_web.php` loads `cms-dirty-tracker.js` via `<script defer>`
+2. `gestion_web.php` also loads `gestion-web.js` via `<script defer>`
+3. In `gestion-web.js`, there's a function `initChangeTracking()` that calls `CmsDirtyTracker.init([...9 panels...], { enableDraft: false })`
+4. But `initChangeTracking()` needs to be CALLED somewhere for the guard to activate
+5. So I need to verify whether `initChangeTracking()` is actually invoked anywhere in gestion-web.js, which determines if the guard is truly active.
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `initChangeTracking`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 4.451710507s
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 Aug 2026, 7:03 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L424-444)</summary>
+
+**Path:** `Unknown file`
+
+```
+    if (btnSave) btnSave.addEventListener('click', simulateSave);
+
+    // Botón Vista Previa en la barra de tabs (único, sticky)
+    var btnPreviewTab = document.getElementById('btn-preview-tabbar');
+    if (btnPreviewTab) btnPreviewTab.addEventListener('click', previewCmsSection);
+
+    // Registrar evento en todos los campos (input + change para selects)
+    document.querySelectorAll('.cms-panel ' + TRACK_SELECTOR).forEach(function(el) {
+        el.addEventListener('input',  function() { onFieldChange(this); });
+        el.addEventListener('change', function() { onFieldChange(this); });
+    });
+
+    // Inicializar valores originales (después de que initCurrentValueLabels() ya corrió)
+    initChangeTracking();
+
+    // File inputs → previewImage
+    var fileMap = {
+        'file-hero-selected':    'prev-hero-selected',
+        'file-hero-1':           'prev-hero-1',
+        'file-banner-promos':    'prev-banner-promos',
+        'file-esp-selected':     'prev-esp-selected',
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L399-414)</summary>
+
+**Path:** `Unknown file`
+
+```
+    // Sidebar nav items con data-section → showPanel + activateNav
+    document.querySelectorAll('.sidebar .nav-item[data-section]').forEach(function(item) {
+        item.addEventListener('click', function() {
+            showPanel(this.getAttribute('data-section'));
+            activateNav(this);
+        });
+        // A-01: activación por teclado para role="button" (Enter / Espacio)
+        item.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                this.click();
+            }
+        });
+    });
+
+    // Tabs superiores con data-section → showPanel + activateTab
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L379-399)</summary>
+
+**Path:** `Unknown file`
+
+```
+    if (inputHeroTrans) {
+        if (!inputHeroTrans.value) inputHeroTrans.value = "5";
+        inputHeroTrans.addEventListener('keydown', function(e) {
+            var allowed = ['0','1','2','3','4','5','6','7','8','9','Backspace','Tab','ArrowLeft','ArrowRight','Delete','Home','End'];
+            if (e.ctrlKey || e.metaKey) return;
+            if (!allowed.includes(e.key)) {
+                e.preventDefault();
+            }
+        });
+        inputHeroTrans.addEventListener('paste', function(e) {
+            var text = (e.clipboardData || window.clipboardData).getData('text');
+            if (!/^\d+$/.test(text)) {
+                e.preventDefault();
+            }
+        });
+        inputHeroTrans.addEventListener('input', function() {
+            this.value = this.value.replace(/[^0-9]/g, '').slice(0, 3);
+        });
+    }
+
+    // Sidebar nav items con data-section → showPanel + activateNav
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** CORTEX_STEP_STATUS_ERROR
+**Created:** 25 Aug 2026, 7:03 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L344-364)</summary>
+
+**Path:** `Unknown file`
+
+```
+            fetch('/laesh/adrc/cms/preview-draft', {
+                method:      'POST',
+                credentials: 'same-origin',
+                headers:     { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body:        params.toString()
+            })
+            .then(function(resp) { return resp.json(); })
+            .then(function(data) {
+                previewBtns.forEach(function(b) { b.disabled = false; b.textContent = '👁 Vista previa'; });
+                if (data.ok && data.url) {
+                    window.open(data.url, '_blank', 'noopener');
+                } else {
+                    if (toast) {
+                        toast.textContent = data.msg || 'No se pudo abrir la vista previa.';
+                        toast.classList.add('toast--error', 'show');
+                        setTimeout(function() { toast.classList.remove('show', 'toast--error'); }, 4000);
+                    }
+                }
+            })
+            .catch(function(err) {
+                previewBtns.forEach(function(b) { b.disabled = false; b.textContent = '👁 Vista previa'; });
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `document\.addEventListener\|^\s*\});\s*$`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 Aug 2026, 7:03 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L589-599)</summary>
+
+**Path:** `Unknown file`
+
+```
+                    setTimeout(() => badge.classList.remove('pulse'), 3000);
+                }
+                document.title = `(${count}) Gestión Web - LAESH`;
+            } else {
+                badge.classList.remove('show');
+                badge.classList.remove('pulse');
+                document.title = "Gestión Web - LAESH";
+            }
+        }
+        lastRemitidosCMS = count;
+    }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `document\.addEventListener.*DOMContent\|window\.onload\|gestion-web.*inline\|initChangeTracking\|DOMContentLoaded`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 Aug 2026, 7:03 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `initChangeTracking\|DOMContentLoaded\|gestion-web`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 Aug 2026, 7:03 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `initChangeTracking\|DOMContentLoaded`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 Aug 2026, 7:04 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `initChangeTracking\|DOMContentLoaded`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 Aug 2026, 7:04 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `gestion-web.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 Aug 2026, 7:04 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1614-1628)</summary>
+
+**Path:** `Unknown file`
+
+```
+<script src="/laesh-web-assets-uipv1a/js/cms-upload.js?v=<?= time() ?>" defer></script>
+
+<script src="/laesh-web-assets-uipv1a/js/htmx.min.js"></script><!-- GAP-ARQ-01: requerido por hx-post /cms/save -->
+<script src="/laesh-web-assets-uipv1a/js/app.js?v=20260817b" defer></script>
+<script src="/laesh-web-assets-uipv1a/js/portal-footer.js?v=20260817c" defer></script>
+<script src="/laesh-web-assets-uipv1a/js/sidebar-rail.js?v=20260817b" defer></script>
+
+<!-- CKEditor 5 — servido localmente (licencia GPL, sin CDN externo) -->
+<script src="/laesh-web-assets-uipv1a/js/ckeditor5.umd.js?v=20260823"></script>
+<script src="/laesh-web-assets-uipv1a/js/ckeditor-init.js?v=20260824" defer></script>
+<script src="/laesh-web-assets-uipv1a/js/cms-dirty-tracker.js?v=<?= time() ?>" defer></script>
+<script src="/laesh-web-assets-uipv1a/js/gestion-web.js?v=20260823g" defer></script>
+</body>
+</html>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L118-139)</summary>
+
+**Path:** `Unknown file`
+
+```
+            if (d) {
+                document.getElementById('calidad-titulo-val').value = d.titulo;
+                document.getElementById('calidad-desc-val').value = d.desc;
+                document.getElementById('prev-calidad-selected').src = d.img;
+                setTimeout(refreshAllCharCounters, 10);
+            }
+        }
+
+        function previewImage(input, previewId) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.getElementById(previewId);
+                    if (img) img.src = e.target.result;
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // ── Seguimiento de cambios por pestaña (module scope — usado por publishCmsSection) ──
+        /** Selector de todos los campos rastreables (con name, no file). */
+        const TRACK_SELECTOR = 'input[name]:not([type="file"]), textarea[name], select[name]';
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L56-79)</summary>
+
+**Path:** `Unknown file`
+
+```
+            2: { badge: "25 Años de Experiencia Clínica", title: "Laboratorio de Especialidades Hematológicas", desc: "Ofrecemos servicios de laboratorio clínico de alta especialización y rigor científico, comprometidos con la salud y tranquilidad de nuestra comunidad.", btnText: "Ver Especialidades", btnLink: "#especialidades", img: "/laesh-web-assets-uipv1a/img/area-hematologia-dos.webp" },
+            3: { badge: "Excelencia y Calidad Certificada", title: "Resultados Confiables para Cuidar tu Salud", desc: "Detrás de cada análisis existe una decisión médica crucial. En LAESH® la precisión diagnóstica es nuestro compromiso inquebrantable.", btnText: "Conocer Calidad", btnLink: "#calidad", img: "/laesh-web-assets-uipv1a/img/area-quimica-clinica-dos.webp" },
+            4: { badge: "Tarifas y Paquetes Preferenciales", title: "Promociones y Check-Ups Médicos 2026", desc: "Descubre nuestros paquetes preventivos y tarifas especiales diseñados para el cuidado integral de tu salud y la de toda tu familia.", btnText: "Ver Promociones", btnLink: "#promociones", img: "/laesh-web-assets-uipv1a/img/promociones-2026.webp" },
+            5: { badge: "Atención Presencial y Horarios", title: "Ubicación, Horarios de Atención y Contacto", desc: "Azucenas #8, Fracc. Jardines del Sur, Huajuapan de León, Oax. Lun a Sáb: 7:00 a.m. – 9:00 p.m. | Dom: 7:00 a.m. – 3:00 p.m. | Tel: 953 688 7694", btnText: "Ver Ubicación", btnLink: "#ubicacion", img: "/laesh-web-assets-uipv1a/img/recepcion-de-pacientes.webp" }
+        };
+
+        function cargarHeroSlideSeleccionado(val) {
+            const d = heroDatos[val];
+            if (d) {
+                if (document.getElementById('input-hero-badge')) document.getElementById('input-hero-badge').value = d.badge || '';
+                if (document.getElementById('input-hero-title')) document.getElementById('input-hero-title').value = d.title || '';
+                if (document.getElementById('input-hero-desc')) document.getElementById('input-hero-desc').value = d.desc || '';
+                if (document.getElementById('input-hero-btn-text')) document.getElementById('input-hero-btn-text').value = d.btnText || '';
+                if (document.getElementById('input-hero-btn-link')) document.getElementById('input-hero-btn-link').value = d.btnLink || '';
+                const prev = document.getElementById('prev-hero-selected');
+                if (prev) prev.src = d.img || '/laesh-web-assets-uipv1a/img/recepcion.webp';
+                setTimeout(refreshAllCharCounters, 10);
+            }
+        }
+
+        // Datos de imágenes de Rutina y Especialidades (16 imágenes)
+        const rutinaDatos = {
+            1: { titulo: "Hematología Especializada", desc: "Análisis morfológico de frotis sanguíneo y pruebas hematológicas de alta complejidad.", img: "/laesh-web-assets-uipv1a/img/area-hematologia-dos.webp" },
+            2: { titulo: "Química Clínica Avanzada", desc: "Determinación automatizada de electrolitos, proteínas y enzimas específicas.", img: "/laesh-web-assets-uipv1a/img/area-quimica-clinica-dos.webp" },
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `^\s*\(function\|^\s*window\.addEventListener\|document\.addEventListener\|^\s*;\s*\(function`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 Aug 2026, 7:04 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `DOMContentLoaded\|window\.addEventListener.*load\|initChangeTracking`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 Aug 2026, 7:04 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `<script\|DOMContent\|document\.ready\|initChange`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 Aug 2026, 7:04 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `script`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 Aug 2026, 7:04 am
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+## User Request
+
+. si, actualice el número de versión en gestion_web.php.
+. sobre: "Mientras que cms-dirty-tracker.js usa <?= time() ?> (sin caché). Si el browser tiene gestion-web.js en caché con la versión vieja (la que solo usaba 2 paneles)", cual es la mejor solución usar ?= time()  o usar número de versión a 20260825h , describe pros y contras.
+. eso que es: Expansión de 2 paneles → 9 paneles (todos los del CMS) ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `Tecnica_Infraestructura_Despliegue.html`
+**Language:** html
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 Aug 2026, 8:03 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+The user made a clean edit themselves to the HTML doc removing the orphan duplicate block. Good. Now I need to:
+
+1. Update the version number for `gestion-web.js` in `gestion_web.php`
+2. Answer the pros/cons question about `<?= time() ?>` vs manual version numbers
+3. Explain what "Expansión de 2 paneles → 9 paneles" means
+
+Let me first do the version update, then answer the questions.
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.883194905s
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 Aug 2026, 8:15 am
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+## User Request
+
+. corrije: Necesito solo quede activo para dos primeras pestañas y cuando yo te diga se activran las demas (documentalo en Control_Proyecto.html).
+. usa time() para el cms en desarrollo; y en efecto para deploy  a produccion usar Versión manual 20260825h (documentalo en Tecnica_Infraestructura_Despliegue.html).
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `Tecnica_Infraestructura_Despliegue.html`
+**Language:** html
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The user wants me to:
+
+1. Revert gestion-web.js to only track 2 panels (panel-hero and panel-quienes-somos) - document the rest as pending in Control_Proyecto.html
+2. Document the time() vs version number strategy in Tecnica_Infraestructura_Despliegue.html
+
+Let me find where Control_Proyecto.html is first, then make all the changes.
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.152934044s
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Aug 2026, 8:36 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Aug 2026, 8:36 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Control_Proyecto.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1229-1261)</summary>
+
+**Path:** `Unknown file`
+
+```
+            <tr>
+              <td><code>D-07</code></td>
+              <td>Secciones CMS canónicas</td>
+              <td>Valores de <code>web_contenidos.seccion</code> alineados con <code>data-section</code> del HTML fuente</td>
+              <td>Merge iterativo R15.1 requiere paridad uno-a-uno</td>
+            </tr>
+            <tr>
+              <td><code>D-08</code></td>
+              <td>Badges clínicos en estudios</td>
+              <td><code>precio</code>, <code>ayuno_descripcion</code>, <code>tiempo_resultado</code> en <code>estudios</code> (no en web_contenidos)</td>
+              <td>Principio SSOT: dato clínico vive en entidad clínica</td>
+            </tr>
+            <tr>
+              <td><code>autor_rol ADMIN</code></td>
+              <td>Extensión ADMIN en notas_orden</td>
+              <td><code>notas_orden.autor_rol ENUM('MEDICO','RECEPCION','ADMIN')</code> — spec ET solo define MEDICO|RECEPCION</td>
+              <td>Soporte para notas administrativas internas</td>
+            </tr>
+            <tr>
+              <td><code>SSOT-01</code></td>
+              <td>estudio_clave como ref CMS</td>
+              <td>Promociones CMS usan <code>estudio_clave</code> (ej. HEM-01) en lugar de ID numérico para JOIN en index.php</td>
+              <td>Más legible y estable ante reordenamiento de estudios; clave es semántica</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+</div>
+</body>
+</html>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 Aug 2026, 8:37 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 Aug 2026, 8:37 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Aug 2026, 8:37 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Tecnica_Infraestructura_Despliegue.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1693-1709)</summary>
+
+**Path:** `Unknown file`
+
+```
+<h3>17.5 Archivos Modificados (v2)</h3>
+<table>
+  <thead><tr><th>Archivo</th><th>Cambio</th><th>Fecha</th></tr></thead>
+  <tbody>
+    <tr><td><code>cms-dirty-tracker.js</code></td><td>v2: +beforeunload guard, +Draft Auto-Save (_saveDraft, _clearDraft), +Draft Restore (_restoreDraftsIfAny), +bandera _hasDirtyFields, +_syncDirtyFlag()</td><td>2026-08-25</td></tr>
+    <tr><td><code>gestion-web.css</code></td><td>Dot rojo 9px→18px, posición top/right→top/left, box-shadow animado en pulso</td><td>2026-08-25</td></tr>
+    <tr><td><code>commons.php</code></td><td>session_lifetime leído dinámicamente desde BD (fallback 86400)</td><td>2026-08-25</td></tr>
+    <tr><td><code>sistema.php</code></td><td>session_lifetime en pestaña P1-Web con input numérico largo + visor seg/horas/días</td><td>2026-08-25</td></tr>
+    <tr><td><code>07_seed_catalogs.sql</code></td><td>INSERT session_lifetime = 518400 (6 días) en configuraciones</td><td>2026-08-25</td></tr>
+    <tr><td><code>Tecnica_Infraestructura_Despliegue.html</code></td><td>§16 y §17 documentados</td><td>2026-08-25</td></tr>
+  </tbody>
+</table>
+
+<h3>17.6 Deuda Técnica — Estado de Activación</h3>
+<p style="background:#fef2f2;border-left:4px solid #ef4444;padding:10px 14px;border-radius:4px;margin-bottom:12px;">
+  <strong>⚠️ DEUDA TÉCNICA PARCIAL — actualizado 2026-08-25</strong><br>
+  El <strong>beforeunload Guard + dots rojos + badges</strong> fueron activados para los <strong>9 paneles</strong> del CMS
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `multi_replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 Aug 2026, 8:38 am
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+## User Request
+
+dije: "usa time() para el cms en desarrollo", y tu informas "2.  gestion_web.php
+ — Versión bump 20260825h" , creo es contradictorio, o no ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `Tecnica_Infraestructura_Despliegue.html`
+**Language:** html
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The user is pointing out a contradiction. They said "use time() for the CMS in development" but I reported bumping gestion_web.php to version 20260825h.
+
+Let me think about this carefully:
+
+The user's instruction was: "usa time() para el cms en desarrollo" (use time() for the CMS in development).
+
+The CMS file currently in active development is `cms-dirty-tracker.js` - and it already has `<?= time() ?>`. That's correct.
+
+But the user seems to be saying that `gestion-web.js` should ALSO use `time()` since it's in development too (we just modified it). 
+Re-reading the full instruction, it actually splits into two rules: files still in development should use time(), while files being deployed to production should carry the manual version number. So the real question is which bucket gestion-web.js falls into right now — since we just modified it during this dev session, maybe it should also be using time() rather than the manual version I assigned.
+
+The user is right to flag this contradiction — I bumped gestion-web.js to 20260825h to force cache invalidation after a bug, but that conflicts with the dev-mode rule. Since we're still in development, gestion-web.js should use time() like the other dev files, with the manual version reserved only for the actual production deploy. I need to fix the script tag in gestion_web.php accordingly and update my documentation to match.
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 10.735687090s
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+## User Request
+
+si
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `Tecnica_Infraestructura_Despliegue.html`
+**Language:** html
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Two changes needed:
+1. Change gestion-web.js script tag in gestion_web.php from `?v=20260825h` to `<?= time() ?>`
+2. Update §17.5b in Tecnica_Infraestructura_Despliegue.html to reflect the corrected state
+
+### Actions
+
+**Tool:** `multi_replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 7.783558789s
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 Aug 2026, 9:03 am
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Execution Error
+
+**Status:** Completed
+**Created:** 25 Aug 2026, 9:03 am
 
 ---
 
