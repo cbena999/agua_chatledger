@@ -131,7 +131,7 @@ git push origin feature/upgrade-v2-win-xampp
 
 ---
 
-**Última actualización:** 2026-08-27 · Regla 15 LAESH Migración HTML→PHP — merge iterativo, estructura de módulos, RBAC redirect, fix UI-G02 (name attributes ubicacion)
+**Última actualización:** 2026-08-28 · Regla 15 LAESH Migración HTML→PHP — merge iterativo, estructura de módulos, RBAC redirect, fix UI-G02 (name attributes ubicacion)
 
 > **Nombre canónico del Ground Truth**: El conjunto `CLAUDE.md` + todo `.agents/` (rules, skills, workflows) se denomina **"el Ground Truth"** del proyecto.
 > **Nota de terminología**: Gemini denomina este mismo conjunto **"el Runbook"**. Son el mismo repositorio de conocimiento — `.agents/` es compartido. Solo difiere el nombre según el agente.
