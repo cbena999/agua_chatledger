@@ -7,8 +7,9 @@
 | **Trajectory ID** | `f51e7007-001e-45ca-b000-c3ebb8132ce0` |
 | **Cascade ID** | `31156cde-8540-4bb7-b98d-aae9a424fc4e` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 5302 |
+| **Total Steps** | 5311 |
 | **Started** | 4 Aug 2026, 11:40 am |
+| **Completed** | 27 Aug 2026, 8:37 pm |
 
 ---
 
@@ -6186,130 +6187,10 @@
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 23 Aug 2026, 8:18 am
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-## User Request
-
-siguen siendo Las 30 Reglas de Negocio Financieras Integral.  creo estas contando mal q no  ya las notas  no deben contabilizarse o si ?
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `03_rca_y_saneamiento_comercial.md`
-**Language:** markdown
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Clarifying The Accounting**
-
-¡Exacto! I'm on track; the notes are definitely *not* to be accounted for.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `03_rca_y_saneamiento_comercial.md`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.002451932s
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L164-209)</summary>
-
-**Path:** `Unknown file`
-
-```
-*   **Comportamiento Garantizado:** Si falta alguna anualidad en el catálogo activo, la UI despliega una alerta preventiva (`faltan_cargos`) impidiendo que el motor de paridad cree renglones incompletos o intente sincronizar sin la base tarifaria correspondiente.
-
----
-
-### 7.2 Matriz de Transición de Estados de Contrato (1, 2, 3 y 4) y Reversibilidad
-
-#### Regla 08: Estado 1 (ACTIVO) y Amnistía de Recargos (Regla C06)
-*   **Mecanismo:** Al cambiar a Estado 1, ejecuta `_sincronizaParidadFinanciera()` (restaura/genera la anualidad del año). Si proviene de Estado 2 (SUSPENSIÓN TEMPORAL), activa la **Regla C06 (Amnistía)** cancelando recargos (`estado = -1`). Si proviene de Estado 3 (SUSPENSIÓN ADMINISTRATIVA), NO aplica amnistía y conserva la deuda moratoria íntegra por tratarse de un corte sancionatorio.
-
-#### Regla 09: Estado 2 (SUSPENSIÓN TEMPORAL) y Candado Operativo de Diciembre
-*   **Mecanismo:** Congela facturación futura y cancela la anualidad vigente. Solo puede solicitarse legalmente en el mes de **Diciembre** (`susptemp_mes_permitido = 12`). Prohíbe el brinco directo entre suspensión 2 y 3 sin regularizar primero a Estado 1.
-
-#### Regla 10: Estado 3 (SUSPENSIÓN ADMINISTRATIVA) Sancionatoria
-*   **Mecanismo:** Representa un corte por falta de pago o sanción. Mantiene viva la deuda base y continúa acumulando recargos moratorios.
-
-#### Regla 11: Estado 4 (SUSPENSIÓN DEFINITIVA - SDF / Regla C05)
-*   **Mecanismo:** Estado irreversible. Cancela físicamente todas las tomas del contrato (`estado_agua=0, estado_drenaje=0`) y ejecuta depuración total (`estado = -1`) de toda la deuda pendiente viva mediante el motor de paridad.
-
-#### Regla 12: Reversión Atómica Incondicional (`REVERSAL_SNAPSHOT`)
-*   **Mecanismo:** Cada cambio de estado graba un objeto JSON en la bitácora `cambios` conteniendo los IDs creados, amnistiados y cancelados. Al invocar `revertirTransicion()`, el sistema restituye exactamente el estado físico de las tomas y des-amnistía o recancela los cargos correspondientes.
-
-#### Regla 13: Guard de Bloqueo de Mora en Cuentas Suspendidas (Estados 2 y 4)
-*   **Mecanismo:** La función `calcula_recargos()` consulta el estado del contrato (`contrato.estado`) previa evaluación de cualquier renglón de mora.
-*   **Comportamiento Garantizado:** Si el contrato se encuentra en Suspensión Temporal (`estado = 2`) o Suspensión Definitiva (`estado = 4`), el motor ejecuta un retorno inmediato (`return`), impidiendo que el motor dinámico JIT genere recargos moratorios sobre cuentas congeladas o dadas de baja.
-
-#### Regla 14: Guard de Deuda Liquidada / Saldo Cero (`pagados_cache`)
-*   **Mecanismo:** Antes de proyectar mora sobre un año específico, `calcula_recargos()` consulta el estatus del cargo principal mediante la memoria intermedia `$pagados_cache`.
-*   **Comportamiento Garantizado:** Si la anualidad base de Agua o Drenaje ya fue saldada (`estado = 1` o `monto_pendiente = 0`), el motor detiene la inserción de nuevos recargos para ese periodo, protegiendo a las cuentas al corriente de moras espurias.
-
----
-
-### 7.2.1 Notas de Auditoría Forense & Advertencias de Riesgo Operativo
-
-*   **Nota de Auditoría Forense A (Riesgo en las 29 Víctimas del Bug de Colisión):** Si a una víctima del bug se le aplicara cambio de estado antes de correr `03_limpieza_victimas_colision.sql`, la deuda fantasma ($1,694) se depuraría como "perdón personal". Se requiere ejecutar el script 03 de inmediato para mover los registros al `numcontrato = '0'` (Graveyard de Auditoría) para que la bitácora no refleje una amnistía personal indebida.
-*   **Nota de Auditoría Forense B (Preservación de Cargos Legados con Catálogo Inactivo):** En la reactivación a Estado 1, si un contrato posee cargos viejos cuyas leyendas ya no existen en la tabla de catálogo `cargos`, la rutina los clasifica como *"Cargos Legados Conservados"*, preservando su monto original inalterado.
-
----
-
-### 7.3 Reglas de Topes, Ventanas Temporales y Control de Inflación de Deuda (Límite Bomba)
-
-#### Regla 15: Periodo de Gracia y Mes de Inicio de Recargos (`recargo_mes_inicio`)
-*   **Mecanismo:** El parámetro `recargo_mes_inicio` (default: 4 / Abril) rige la ventana de exención inicial en el año fiscal corriente. Enero, Febrero y Marzo son de gracia para pago oportuno. A partir del 1 de Abril (Mes 4), el motor `calcula_recargos()` activa la mora mensual.
-
-#### Regla 16: Límite Retroactivo de Años (`paridad_anios_max_recargo`)
-*   **Mecanismo:** Controla cuántos años hacia atrás se calculará mora al reactivar un contrato o ejecutar paridad. Si vale N (ej. 5), acota la mora a los últimos N años. Si vale 0, opera sin límite de antigüedad (mora continua vitalicia).
-
-```
-
-</details>
 
 ---
 
@@ -48886,8 +48767,164 @@ I'm now focusing on explicitly listing all relevant tools before making a tool c
 
 ### Terminal Command Execution
 
-**Status:** CORTEX_STEP_STATUS_WAITING
+**Status:** Completed
 **Created:** 27 Aug 2026, 8:36 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool specificity. I've realized that using the right tool for the job is paramount. I'm actively avoiding bash commands that duplicate functionality of dedicated utilities like `cat`, `grep`, `sed`, and `ls`. I'm especially keen on employing the dedicated `grep_search` instead of `bash grep`.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.259243036s
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Aug 2026, 8:36 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `manage_task`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_GENERIC
+
+**Status:** Completed
+**Created:** 27 Aug 2026, 8:37 pm
+
+---
+
+### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
+
+**Status:** Completed
+**Created:** 27 Aug 2026, 8:37 pm
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<planning_mode>
+You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
+If the user's request warrants a plan then follow this workflow:
+1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
+2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
+3. After receiving approval, begin execution. Create and update the task artifact as you work.
+4. Verify any work that you have done.
+5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
+If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
+</planning_mode>
+<bash_command_reminder>
+CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
+CRITICAL INSTRUCTION 1: ...
+CRITICAL INSTRUCTION 2: ...'.
+</bash_command_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** planning_mode, bash_command_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.1 Pro (High)
+</details>
 
 ---
 
