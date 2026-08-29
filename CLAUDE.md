@@ -46,6 +46,7 @@ Cargado automáticamente por **Claude Code** en cada sesión.
 | **13** | **LAESH — Arquitectura CSS de Responsividad por Dispositivo** — **leer antes de editar style.css o layouts de portales LAESH** | [.agents/rules/13-laesh-css-responsividad.md](.agents/rules/13-laesh-css-responsividad.md) |
 | **14** | **LAESH — Decisiones Arquitectónicas del Modelo de Datos** — **leer antes de editar schema, DDL, auth o seguridad del Bloc Digital** | [.agents/rules/14-laesh-modelo-datos-decisiones.md](.agents/rules/14-laesh-modelo-datos-decisiones.md) |
 | **15** | **LAESH — Migración HTML → PHP Stack (Merge Iterativo)** — **leer antes de convertir cualquier HTML a PHP o modificar un PHP ya convertido** | [.agents/rules/15-html-php-migration.md](.agents/rules/15-html-php-migration.md) |
+| **25** | **LAESH — Hero / Slider: Lineamientos Desktop y Laptop** — **leer antes de editar CSS del hero/slider de index.php** | [.agents/rules/25-laesh-hero-slider-lineamientos.md](.agents/rules/25-laesh-hero-slider-lineamientos.md) |
 
 
 Estructura interna documentada en [.agents/README.md](.agents/README.md).
@@ -131,7 +132,7 @@ git push origin feature/upgrade-v2-win-xampp
 
 ---
 
-**Última actualización:** 2026-08-28 · Regla 15 LAESH Migración HTML→PHP — merge iterativo, estructura de módulos, RBAC redirect, fix UI-G02 (name attributes ubicacion)
+**Última actualización:** 2026-08-29 · Regla 25 LAESH Hero/Slider lineamientos desktop — background-size 85% auto, vh+min+max, focal points, DRY padding-bottom, sin gradientes
 
 > **Nombre canónico del Ground Truth**: El conjunto `CLAUDE.md` + todo `.agents/` (rules, skills, workflows) se denomina **"el Ground Truth"** del proyecto.
 > **Nota de terminología**: Gemini denomina este mismo conjunto **"el Runbook"**. Son el mismo repositorio de conocimiento — `.agents/` es compartido. Solo difiere el nombre según el agente.
