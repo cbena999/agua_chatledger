@@ -7,9 +7,8 @@
 | **Trajectory ID** | `cbb3065c-15ab-40b2-a551-df5474c119c2` |
 | **Cascade ID** | `33758958-5e2c-4311-ba38-6d3f32787e53` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 966 |
+| **Total Steps** | 1062 |
 | **Started** | 30 Aug 2026, 9:34 pm |
-| **Completed** | 31 Aug 2026, 5:22 pm |
 
 ---
 
@@ -18482,6 +18481,1814 @@ I'm currently restructuring the `panel-ubicacion` section within `gestion_web.ph
 
 - **Model:** Gemini 3.6 Flash (Medium)
 </details>
+
+---
+
+## User Request
+
+Hasta este momento analiza, rectifica que en las secciones/pestañas de las phps de cms, que se han modificado/actualizado, este realmente alineadas alas funcionalidades de cms: mapeo bd, sesion, previw, publicacion, rehuso, no duplicación, refresh/close browser, etc; a como se ha implementado en Banner Principal, y/o en Quiénes somos.
+Dame informe de gaps, issues.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `Tecnica_Modelo_Datos.html`
+**Language:** html
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 31 Aug 2026, 5:25 pm
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1485-1516)</summary>
+
+**Path:** `Unknown file`
+
+```
+                            <input type="text" name="_cfg_wa_texto_info"
+                                   value="<?= htmlspecialchars($config['wa_texto_info'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
+                            <small class="cms-help-text">Texto pre-escrito al abrir WhatsApp desde el botón flotante o la sección Ubicación. Ej: «Hola LAESH, necesito información».</small>
+                        </div>
+                        <div class="field-group">
+                            <label>Página de Facebook <small class="txt-muted">(URL completa)</small></label>
+                            <input type="url" name="_cfg_facebook_url"
+                                   value="<?= htmlspecialchars($config['facebook_url'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                                   placeholder="https://www.facebook.com/profile.php?id=100072263716098">
+                            <small class="cms-help-text">Se utiliza en el botón flotante (pantalla inferior derecha).</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================================================================
+             PANEL 7: PIE DE PÁGINA
+             Sección: footer | Fuente HTML: #footer
+             SSOT: contacto, horarios, dirección y responsable se leen desde configuraciones.
+               Solo son editables aquí: logo alt, nombre lab y textos legales.
+             ================================================================ -->
+        <div id="panel-footer" class="cms-panel" role="tabpanel" aria-labelledby="tab-footer" tabindex="0">
+            <div class="cms-panel-header">
+                <h3 class="cms-h3">Pie de Página — Contenido e Identidad (#footer)</h3>
+            </div>
+
+            <hr class="cms-section-sep">
+            <!-- Estilo y Color de Fondo -->
+            <div class="editor-card mb-4">
+                <div class="editor-card-header">
+                    <div class="card-title">Estilo y Color de Fondo del Pie de Página</div>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing CMS Components**
+
+I'm currently focused on auditing all modified CMS panels and PHP views. I'm taking a close look at files like `gestion_web.php`, `admrc/index.php`, `website/index.php`, and associated JavaScript components such as `ckeditor-init.js` and `cms-dirty-tracker.js`, and how they may be related.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `cms/save`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.006242366s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 31 Aug 2026, 5:35 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L69-179)</summary>
+
+**Path:** `Unknown file`
+
+```
+        'lastPub'     => $lastPub,
+    ]);
+});
+
+// ── POST /cms/save — Guardar sección CMS (HTMX o form tradicional) ───────────
+Flight::route('POST /cms/save', function () {
+    header('Content-Type: application/json; charset=utf-8');
+
+    // RBAC: Verificar permiso para guardar en CMS
+    Flight::rbac()->requirePermission('gestionar_cms', '/laesh/login/login.php?portal=admin');
+
+    // R14.12: CSRF primero
+    $submitted = $_POST['csrf_token'] ?? '';
+    if (!hash_equals($_SESSION['csrf_token'] ?? '', $submitted)) {
+        http_response_code(403);
+        Logger::log('WARN', 'Token CSRF inválido en cms/save', Flight::auth()->getUserId() ?: null);
+        echo json_encode(['ok' => false, 'msg' => 'Token de seguridad inválido.']);
+        exit;
+    }
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+
+    $db      = Flight::db();
+    $userId  = Flight::auth()->getUserId();
+    $seccion = trim($_POST['seccion'] ?? '');
+
+    // Validar sección — solo valores canónicos (D-07)
+    $seccionesValidas = ['hero','quienes-somos','especialidades','promociones','calidad','ubicacion','aviso-privacidad','privacidad','footer','seo','configuracion-general'];
+    if (!in_array($seccion, $seccionesValidas, true)) {
+        http_response_code(400);
+        echo json_encode(['ok' => false, 'msg' => 'Sección no válida.']);
+        exit;
+    }
+
+    $campos = $_POST;
+    unset($campos['csrf_token'], $campos['seccion']);
+
+    try {
+        $db->beginTransaction();
+
+        $stmt = $db->prepare(
+            "INSERT INTO web_contenidos (seccion, subseccion, clave, valor, tipo, actualizado_por)
+             VALUES (:sec, :sub, :clave, :valor, 'texto', :uid)
+             ON DUPLICATE KEY UPDATE valor = VALUES(valor), actualizado_por = VALUES(actualizado_por)"
+        );
+
+        // Configuraciones globales: campos _cfg_{clave} → tabla configuraciones (D-04)
+        // UPSERT: inserta si la clave no existe, actualiza si ya existe
+        $cfgStmt = $db->prepare(
+            "INSERT INTO configuraciones (clave, valor, descripcion) VALUES (:clave, :valor, NULL)
+             ON DUPLICATE KEY UPDATE valor = VALUES(valor)"
+        );
+
+        foreach ($campos as $fieldKey => $valor) {
+            // D-04: campos _cfg_{clave} van a configuraciones, no a web_contenidos
+            if (str_starts_with($fieldKey, '_cfg_')) {
+                $cfgClave = substr($fieldKey, 5); // quitar prefijo '_cfg_'
+                $cfgStmt->execute(['clave' => $cfgClave, 'valor' => $valor]);
+                continue;
+            }
+            // Formato estándar: {subseccion}__{clave}  ej: slide1__titulo
+            [$sub, $clave] = array_pad(explode('__', $fieldKey, 2), 2, $fieldKey);
+            $stmt->execute([
+                'sec'   => $seccion,
+                'sub'   => $sub,
+                'clave' => $clave,
+                'valor' => $valor,
+                'uid'   => $userId,
+            ]);
+        }
+
+        $db->commit();
+        unset($_SESSION['cms_draft'][$seccion]);
+        Logger::log('INFO', "CMS: sección '{$seccion}' publicada.", $userId);
+        // Devolver CSRF rotado para que el cliente actualice su data-csrf sin recargar
+        echo json_encode(['ok' => true, 'msg' => '¡Cambios publicados exitosamente!', 'csrf_token' => $_SESSION['csrf_token']]);
+
+    } catch (\PDOException $e) {
+        $db->rollBack();
+        DB::logFallback('ERROR', "INSERT web_contenidos seccion={$seccion}", $e->getMessage());
+        http_response_code(500);
+        echo json_encode(['ok' => false, 'msg' => 'Error al guardar. Intenta de nuevo.']);
+    }
+});
+
+// ── POST /cms/upload — Subida de imágenes CMS (GAP-IMG resuelto) ─────────────
+//
+// Contrato:
+//   - Content-Type: multipart/form-data  (input type="file" en el cliente)
+//   - POST body: file (el archivo), slot (nombre del slot, ej: hero-slide1), csrf_token
+//   - Respuesta JSON: {ok: bool, url: string, filename: string, msg: string}
+//
+// Seguridad:
+//   - RBAC gestionar_cms obligatorio
+//   - CSRF validado antes de procesar el archivo
+//   - MIME validado por contenido real del archivo (finfo, no solo extensión)
+//   - Extensión derivada del MIME, no del nombre original del cliente
+//   - Filename generado: {slot}-{fecha}-{random4bytes}.{ext}
+//
+// Almacenamiento Docker:
+//   - Escritura física: /var/www/html/laesh-web-assets/img/cms/
+//   - URL pública  : /laesh-web-assets-uipv1a/img/cms/{filename}
+//   - El volumen Docker comparte ese directorio entre nginx y phpfpm.
+Flight::route('POST /cms/upload', function () {
+    header('Content-Type: application/json; charset=utf-8');
+
+    // Guard RBAC
+    Flight::rbac()->requirePermission('gestionar_cms', '/laesh/login/login.php?portal=admin');
+
+    // CSRF
+    $submitted = $_POST['csrf_token'] ?? '';
+    if (!hash_equals($_SESSION['csrf_token'] ?? '', $submitted)) {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L179-329)</summary>
+
+**Path:** `Unknown file`
+
+```
+    if (!hash_equals($_SESSION['csrf_token'] ?? '', $submitted)) {
+        http_response_code(403);
+        Logger::log('WARN', 'Token CSRF inválido en cms/upload', Flight::auth()->getUserId() ?: null);
+        echo json_encode(['ok' => false, 'msg' => 'Token de seguridad inválido.']);
+        exit;
+    }
+
+    // Verificar que llegó un archivo sin errores
+    if (empty($_FILES['file']) || $_FILES['file']['error'] !== UPLOAD_ERR_OK) {
+        $errCode = $_FILES['file']['error'] ?? -1;
+        http_response_code(400);
+        echo json_encode(['ok' => false, 'msg' => "No se recibió el archivo (código: {$errCode})."]);
+        exit;
+    }
+
+    $file = $_FILES['file'];
+
+    // Validar MIME por contenido real — solo WebP (alineado con Guía CMS §5.1–§5.6)
+    $allowedMimes = ['image/webp' => 'webp'];
+    $finfo = new \finfo(FILEINFO_MIME_TYPE);
+    $mime  = $finfo->file($file['tmp_name']);
+    if (!array_key_exists($mime, $allowedMimes)) {
+        http_response_code(415);
+        echo json_encode(['ok' => false, 'msg' => 'Tipo no permitido. Solo se acepta WebP. Usa Squoosh antes de subir.']);
+        exit;
+    }
+
+    // Validar tamaño — 120 KB máximo (límite más alto entre todos los slots; el JS aplica límites por slot)
+    if ($file['size'] > 120 * 1024) {
+        $sizeKb = round($file['size'] / 1024, 1);
+        http_response_code(413);
+        echo json_encode(['ok' => false, 'msg' => "El archivo ({$sizeKb} KB) supera el límite de 120 KB. Optimiza con Squoosh."]);
+        exit;
+    }
+
+    // Nombre del slot — solo alfanumérico y guiones
+    $slot     = preg_replace('/[^a-z0-9\-]/', '', strtolower($_POST['slot'] ?? 'cms'));
+    $slot     = $slot ?: 'cms';
+    $ext      = $allowedMimes[$mime];
+    $filename = $slot . '-' . date('Ymd') . '-' . bin2hex(random_bytes(4)) . '.' . $ext;
+
+    // Directorio de destino (volumen compartido Nginx ↔ PHP-FPM)
+    $dbConfigDir = Flight::db()->query("SELECT valor FROM configuraciones WHERE clave = 'cms_upload_dir'")->fetchColumn();
+    $uploadDir = $dbConfigDir ?: '/var/www/html/laesh-web-assets-uipv1a/img/cms/';
+    
+    // Auto-fallback a entorno local si la ruta prod no existe
+    if (!is_dir($uploadDir) && strpos($uploadDir, '/var/www/html') === 0) {
+        $localDir = __DIR__ . '/../../laesh-web-assets-uipv1a/img/cms/';
+        if (is_dir(dirname($localDir))) $uploadDir = $localDir;
+    }
+
+    if (!is_dir($uploadDir) && !@mkdir($uploadDir, 0777, true)) {
+        http_response_code(500);
+        Logger::log('ERROR', "cms/upload: no se pudo crear directorio {$uploadDir}", Flight::auth()->getUserId());
+        echo json_encode(['ok' => false, 'msg' => 'Error interno: directorio de destino no disponible.']);
+        exit;
+    }
+
+    // Asegurar permisos de escritura en el directorio de destino
+    @chmod($uploadDir, 0777);
+
+    $destPath = $uploadDir . $filename;
+    if (!@move_uploaded_file($file['tmp_name'], $destPath)) {
+        http_response_code(500);
+        Logger::log('ERROR', "cms/upload: move_uploaded_file falló → {$destPath}", Flight::auth()->getUserId());
+        echo json_encode(['ok' => false, 'msg' => 'Error al guardar el archivo en el servidor (permisos de escritura en directorio).']);
+        exit;
+    }
+
+    // Permisos de lectura para Nginx / servidor web
+    @chmod($destPath, 0666);
+
+    // Rotar CSRF después de upload exitoso (misma política que /cms/save)
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+
+    Logger::log('INFO', "CMS upload OK: {$filename} (slot={$slot})", Flight::auth()->getUserId());
+    echo json_encode([
+        'ok'         => true,
+        'url'        => '/laesh-web-assets-uipv1a/img/cms/' . $filename,
+        'filename'   => $filename,
+        'msg'        => 'Imagen cargada exitosamente.',
+        'csrf_token' => $_SESSION['csrf_token'],
+    ]);
+});
+
+// ── POST /cms/preview-draft — Borrador de sesión para Vista Previa ───────────
+//
+// Almacena los campos del panel activo en $_SESSION['cms_draft'][$seccion].
+// NO escribe en web_contenidos → producción intacta.
+// Solo accesible por admin autenticado con permiso gestionar_cms.
+// El cliente abre /laesh/?_preview=1#{anchor} en pestaña nueva.
+Flight::route('POST /cms/preview-draft', function () {
+    header('Content-Type: application/json; charset=utf-8');
+
+    Flight::rbac()->requirePermission('gestionar_cms', '/laesh/login/login.php?portal=admin');
+
+    // CSRF (misma política que /cms/save)
+    $submitted = $_POST['csrf_token'] ?? '';
+    if (!hash_equals($_SESSION['csrf_token'] ?? '', $submitted)) {
+        http_response_code(403);
+        Logger::log('WARN', 'Token CSRF inválido en cms/preview-draft', Flight::auth()->getUserId() ?: null);
+        echo json_encode(['ok' => false, 'msg' => 'Token de seguridad inválido.']);
+        exit;
+    }
+
+    $seccion = trim($_POST['seccion'] ?? '');
+    $seccionesValidas = ['hero','quienes-somos','especialidades','promociones','calidad','ubicacion','aviso-privacidad','privacidad','footer','seo','configuracion-general'];
+    if (!in_array($seccion, $seccionesValidas, true)) {
+        http_response_code(400);
+        echo json_encode(['ok' => false, 'msg' => 'Sección no válida.']);
+        exit;
+    }
+
+    // Guardar borrador en sesión (sobrescribe borrador anterior de esa sección)
+    $campos = $_POST;
+    unset($campos['csrf_token'], $campos['seccion']);
+    $_SESSION['cms_draft'][$seccion] = $campos;
+
+    // Anchor por sección para abrir la pestaña en la zona correcta
+    $anchors = [
+        'hero'             => '#inicio',
+        'quienes-somos'    => '#acerca-de',
+        'especialidades'   => '#especialidades',
+        'promociones'      => '#promociones',
+        'calidad'          => '#calidad',
+        'ubicacion'        => '#ubicacion',
+        'footer'           => '#footer',
+        'seo'              => '',
+        'aviso-privacidad' => '#privacidad',
+        'privacidad'       => '#privacidad',
+    ];
+    $anchor = $anchors[$seccion] ?? '';
+
+    Logger::log('INFO', "CMS preview-draft: borrador '{$seccion}' almacenado en sesión.", Flight::auth()->getUserId());
+    echo json_encode(['ok' => true, 'url' => '/laesh/?_preview=1' . $anchor]);
+});
+
+// ── GET/POST /sistema — Panel Unificado de Sistema, Logs y Configuraciones ──
+Flight::route('GET /sistema', function () {
+    require __DIR__ . '/views/sistema.php';
+});
+
+Flight::route('POST /sistema', function () {
+    require __DIR__ . '/views/sistema.php';
+});
+
+// ── GET /logs — Redirección a Visor de Logs de Sistema ────────────────────────
+Flight::route('GET /logs', function () {
+    Flight::redirect('/laesh/adrc/sistema?tab=logs');
+});
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L59-139)</summary>
+
+**Path:** `Unknown file`
+
+```
+ *
+ * Formato esperado (una sub-categoría por línea):
+ *   [Hematología] Citometría Hemática, Grupo y RH, Plaquetas
+ *   [Química Clínica] Química Sanguínea 3, Química Sanguínea 7, ...
+ *
+ * @return list<array{cat: string, items: list<string>}>
+ */
+function parseFichas(string $text): array {
+    $groups = [];
+    foreach (explode("\n", $text) as $line) {
+        $line = trim($line);
+        if ($line === '') continue;
+        if (preg_match('/^\[(.+?)\]\s*(.+)/', $line, $m)) {
+            $items = array_values(array_filter(
+                array_map('trim', explode(',', $m[2]))
+            ));
+            if ($items) {
+                $groups[] = ['cat' => trim($m[1]), 'items' => $items];
+            }
+        }
+    }
+    return $groups;
+}
+
+// ── Conexión DB ─────────────────────────────────────────────────────────────
+$db = Flight::db();
+
+// ── 1. Cargar desde DB ──────────────────────────────────────────────────────
+$configRaw = $db->query("SELECT clave, valor FROM configuraciones")->fetchAll(\PDO::FETCH_KEY_PAIR) ?: [];
+$cms = [];
+foreach ($db->query("SELECT seccion, subseccion, clave, valor FROM web_contenidos ORDER BY id")->fetchAll(\PDO::FETCH_ASSOC) as $row) {
+    $cms[$row['seccion']][$row['subseccion']][$row['clave']] = $row['valor'];
+}
+
+// ── 2. Preview de borrador CMS (solo sesión admin activa) ──────────────────
+// IMPORTANTE: el merge debe ocurrir ANTES de definir $cfg y $c, porque las arrow
+// functions de PHP capturan variables por VALOR en el momento de su creación.
+// Delight Auth guarda el login bajo $_SESSION['auth_logged_in'] (NOT 'user_id').
+$isPreview = !empty($_GET['_preview'])
+    && !empty($_SESSION['auth_logged_in'])
+    && !empty($_SESSION['cms_draft']);
+if ($isPreview) {
+    foreach ($_SESSION['cms_draft'] as $draftSec => $campos) {
+        foreach ($campos as $rawKey => $val) {
+            // Manejar configuraciones globales (prefijos config__ y _cfg_)
+            if (str_starts_with($rawKey, 'config__')) {
+                $configRaw[substr($rawKey, 8)] = $val;
+                continue;
+            }
+            if (str_starts_with($rawKey, '_cfg_')) {
+                $configRaw[substr($rawKey, 5)] = $val;
+                continue;
+            }
+            // Manejar web_contenidos (formato {sub}__{clave})
+            [$sub, $clave] = array_pad(explode('__', $rawKey, 2), 2, $rawKey);
+            $cms[$draftSec][$sub][$clave] = $val;
+        }
+    }
+}
+
+// ── 3. Helpers y Variables Funcionales (Post-Merge) ─────────────────────────
+$cfg = fn(string $k, string $d = '') => (!isset($configRaw[$k]) || $configRaw[$k] === '') ? $d : $configRaw[$k];
+$c   = fn(string $sec, string $sub, string $k, string $d = '') => (!isset($cms[$sec][$sub][$k]) || $cms[$sec][$sub][$k] === '') ? $d : $cms[$sec][$sub][$k];
+
+// Valores frecuentes — sin fallback: el cliente DEBE tener todo en configuraciones
+$cfgNombreLab = $cfg('nombre_laboratorio');
+$cfgNombreC   = $cfg('nombre_corto');
+$cfgAnios     = $cfg('anios_experiencia');
+$cfgTel       = $cfg('telefono');
+$cfgTelDigit  = waNum($cfgTel);
+$cfgWA        = waNum($cfg('whatsapp_numero'));
+$cfgEmail     = $cfg('email_contacto');
+$cfgDir       = $cfg('direccion');
+$cfgDirCalle  = $cfg('direccion_calle');
+$cfgCiudad    = $cfg('ciudad');
+$cfgEstado    = $cfg('estado');
+$cfgCP        = $cfg('cp');
+$cfgHorSem    = $cfg('horario_semana');
+$cfgHorDom    = $cfg('horario_domingo');
+$cfgHrsOpen   = $cfg('hrs_open');
+$cfgHrsClose  = $cfg('hrs_close');
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Examining Preview Logic**
+
+I'm now focusing on the preview logic within `website/index.php`, specifically lines 98-118. I've pinpointed `$_SESSION['auth_logged_in']` as a key factor in determining if a preview is allowed. It seems this variable dictates whether the user has successfully authenticated. Further investigation will be directed toward how the auth session is established, to see if it makes the page secure.
+
+
+**Verifying Panel Data Structure**
+
+Now I'm diving deeper into `gestion_web.php`. I've confirmed that Delight Auth sets `$_SESSION['auth_logged_in']` to `true` on successful login, and that a preview is triggered using `/cms/preview-draft` via POST, setting `$_SESSION['cms_draft']`. When the preview runs, `index.php?_preview=1` merges `$_SESSION['cms_draft']` with the configurations. I'm now verifying the field names, preview support, tracking, and DB mappings for each panel within `gestion_web.php`. I've started with the hero section, examining its fields, database mapping, and dirty tracking support within `CmsDirtyTracker`. The next ones are Quemones Somos, Especialidades, Promociones, and Calidad e Instalaciones.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `modal-privacidad`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.257846180s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 31 Aug 2026, 5:35 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `website.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L514-534)</summary>
+
+**Path:** `Unknown file`
+
+```
+        }
+
+        /* "Ver Aviso de Privacidad" → abre modal de privacidad en lugar de navegar */
+        var privacyLink = document.getElementById('cookie-privacy-link');
+        if (privacyLink) {
+            privacyLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                var modal = document.getElementById('modal-privacidad');
+                if (modal) {
+                    modal.classList.add('show');
+                    document.body.classList.add('modal-open');
+                }
+            });
+        }
+
+        /* Auto-aceptar después de 2 minutos sin interacción */
+        var autoTimer = setTimeout(acceptCookies, 120000);
+
+        if (acceptBtn) {
+            acceptBtn.addEventListener('click', acceptCookies);
+        }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `location.hash`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 31 Aug 2026, 5:35 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Observing a Redirect**
+
+I've been looking into a CMS preview issue. When previsualizing "aviso-privacidad," the CMS unexpectedly redirects to `/laesh/?_preview=1#privacidad`. The page loads due to the hash, but then `#modal-privacidad` is a CSS element.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `_cfg_responsable_`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.093869925s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 31 Aug 2026, 5:35 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `wa_texto`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 31 Aug 2026, 5:35 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1374-1394)</summary>
+
+**Path:** `Unknown file`
+
+```
+                                   value="<?= htmlspecialchars($config['hrs_open'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                                   maxlength="5" placeholder="07:00">
+                        </div>
+                        <div class="field-group">
+                            <label>Cierre Lun–Sáb <small class="txt-muted">(HH:MM)</small></label>
+                            <input type="text" name="_cfg_hrs_close"
+                                   value="<?= htmlspecialchars($config['hrs_close'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                                   maxlength="5" placeholder="21:00">
+                        </div>
+                        <div class="field-group">
+                            <label>Apertura Dom <small class="txt-muted">(HH:MM)</small></label>
+                            <input type="text" name="_cfg_dom_open"
+                                   value="<?= htmlspecialchars($config['dom_open'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                                   maxlength="5" placeholder="07:00">
+                        </div>
+                        <div class="field-group">
+                            <label>Cierre Dom <small class="txt-muted">(HH:MM)</small></label>
+                            <input type="text" name="_cfg_dom_close"
+                                   value="<?= htmlspecialchars($config['dom_close'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                                   maxlength="5" placeholder="15:00">
+                        </div>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `wa_texto`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 31 Aug 2026, 5:35 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `website.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L239-259)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+
+    // ─────────────────────────────────────────────────────────────
+    // 5. Modal Aviso de Privacidad — misma arquitectura que portales
+    // ─────────────────────────────────────────────────────────────
+    (function initPrivacyModal() {
+        var modal   = document.getElementById('modal-privacidad');
+        if (!modal) return;
+
+        var content = modal.querySelector('.modal-content');
+        var header  = modal.querySelector('.modal-header');
+        var closes  = modal.querySelectorAll('.close-modal');
+
+        // Abrir — todos los links que deben abrir el modal de privacidad
+        var triggerIds = ['link-privacy', 'link-policy-footer'];
+        triggerIds.forEach(function(id) {
+            var el = document.getElementById(id);
+            if (!el) return;
+            el.addEventListener('click', function(e) {
+                e.preventDefault();
+                modal.classList.add('show');
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `website.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L259-279)</summary>
+
+**Path:** `Unknown file`
+
+```
+                modal.classList.add('show');
+                document.body.classList.add('modal-open'); /* CTA-03: ocultar botones flotantes */
+            });
+        });
+
+        // Guardia: si no hay ningún trigger en la página, salir
+        var link = document.getElementById('link-privacy') || document.getElementById('link-policy-footer');
+        if (!link) return;
+
+        // CTA-03: helper para quitar modal-open del body
+        function closePrivacyModal() {
+            modal.classList.remove('show');
+            document.body.classList.remove('modal-open');
+        }
+
+        // Cerrar — botón(es) y clic en backdrop
+        closes.forEach(function(btn) {
+            btn.addEventListener('click', closePrivacyModal);
+        });
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) closePrivacyModal();
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `website.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L279-294)</summary>
+
+**Path:** `Unknown file`
+
+```
+            if (e.target === modal) closePrivacyModal();
+        });
+
+        // Drag — idéntico a initModalDrag de app.js
+        if (content && header) {
+            var dragging = false, ox = 0, oy = 0;
+            header.addEventListener('mousedown', function(e) {
+                if (e.target.closest('button, a, input, select, textarea')) return;
+                var rect = content.getBoundingClientRect();
+                content.style.position  = 'fixed';
+                content.style.left      = rect.left + 'px';
+                content.style.top       = rect.top  + 'px';
+                content.style.margin    = '0';
+                content.style.transform = 'none';
+                modal.style.alignItems     = 'flex-start';
+                modal.style.justifyContent = 'flex-start';
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 31 Aug 2026, 5:35 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Summarizing a Key Improvement**
+
+I've just finished a critical fix. The "Vista Previa" function in Panel 9 now correctly opens the Privacy Notice modal. Specifically, clicking "Vista Previa" generates the `/laesh/?_preview=1#privacidad` URL and automatically displays the draft RTE text within the modal. I am ready to do a comprehensive summary.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.099585130s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 31 Aug 2026, 5:35 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 31 Aug 2026, 5:37 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+Revisa/analiza que haya congruencia y alineación entre lo logrado hasta ahora en las phps de cms y lo que muestran estas secciones:
+laesh/adrc/sistema?tab=comunes
+laesh/adrc/sistema?tab=p1-web
+/laesh/adrc/sistema?tab=p2-bloc
+Informa me.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `website.js`
+**Language:** javascript
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `p1-web`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 31 Aug 2026, 5:46 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `sistema.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/**
+ * Panel Unificado de Administración del Sistema & Configuraciones Globales
+ * URL:  /laesh/adrc/sistema
+ * Acceso restringido: requiere permiso 'gestionar_cms' (rol ADMIN).
+ *
+ * Módulos integrados:
+ *   1. Visor de Logs E2E (sys_logs, fallback_log, app.log, Nginx, PHP-FPM, Swoole)
+ *   2. Configuraciones Comunes (Singletons institucionales compartidos)
+ *   3. Configuraciones Proyecto 1: LAESH Sitio Web & CMS (exclusivas Web)
+ *   4. Configuraciones Proyecto 2: LAESH Bloc Digital (exclusivas Bloc Digital)
+ *   5. Todas las Configuraciones DB (tabla configuraciones completa)
+ */
+
+use Common\Logger;
+
+Flight::rbac()->requirePermission('gestionar_cms', '/laesh/login/login.php?portal=admin');
+
+$db = Flight::db();
+
+// ── Procesar actualización de configuraciones (POST) ───────────────────────
+$flashMsg = null;
+$flashErr = false;
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'save_configs') {
+    $csrf = $_POST['csrf_token'] ?? '';
+    if (!hash_equals($_SESSION['csrf_token'] ?? '', $csrf)) {
+        $flashMsg = 'Token CSRF inválido. Por favor recargue la página.';
+        $flashErr = true;
+    } else {
+        $configsToSave = $_POST['cfg'] ?? [];
+        $stmt = $db->prepare("UPDATE `configuraciones` SET `valor` = :val WHERE `clave` = :key");
+        $updatedCount = 0;
+        foreach ($configsToSave as $key => $val) {
+            $stmt->execute([':val' => trim($val), ':key' => $key]);
+            $updatedCount += $stmt->rowCount();
+        }
+        // Rotar CSRF token
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+        Logger::log('INFO', "Administración del Sistema: {$updatedCount} configuraciones actualizadas.", Flight::auth()->getUserId());
+        $flashMsg = "¡{$updatedCount} parámetros de configuración guardados correctamente!";
+    }
+}
+
+// ── Cargar todas las configuraciones de MariaDB ───────────────────────────
+$rows = $db->query("SELECT `clave`, `valor`, `descripcion` FROM `configuraciones` ORDER BY `clave` ASC")->fetchAll(PDO::FETCH_ASSOC);
+$allConfigs = [];
+foreach ($rows as $r) {
+    $allConfigs[$r['clave']] = $r;
+}
+
+// ── Clasificación ESTRICTA (0% Duplicados entre pestañas) ──────────────────
+// 1. Singletons institucionales y parámetros compartidos por Ambos Proyectos
+$keysComunes = [
+    'nombre_laboratorio',
+    'nombre_corto',
+    'direccion',
+    'direccion_calle',
+    'ciudad',
+    'estado',
+    'cp',
+    'telefono',
+    'whatsapp_numero',
+    'whatsapp_url',
+    'email_contacto',
+    'horario_semana',
+    'horario_domingo',
+    'hrs_open',
+    'hrs_close',
+    'dom_open',
+    'dom_close',
+    'responsable_nombre',
+    'responsable_cedula_prof',
+    'responsable_cedula_esp',
+    'facebook_url',
+    'maps_url',
+    'maps_embed_url',
+    'wa_texto_agendar',
+    'wa_texto_info',
+    'hero_autoplay_seg',
+    'anios_experiencia',
+];
+
+// 2. Exclusivas de Infraestructura Proyecto 1: LAESH Sitio Web & CMS
+$keysP1_Web = [
+    'cms_upload_endpoint',
+    'cms_upload_dir',
+    'session_lifetime',
+];
+
+// 3. Exclusivas de Infraestructura Proyecto 2: LAESH Bloc Digital & Recepción
+$keysP2_Bloc = [
+    'tiempo_rotacion_dias',
+    'tiempo_depuracion_pdf_meses',
+    'ruta_almacenamiento_pdf',
+];
+
+// ── Normalización de Pestaña Activa (preserva tab=logs en subpestañas) ────
+$rawTab = $_GET['tab'] ?? 'logs';
+$logSlugs = ['logs', 'syslog', 'fallback', 'applog', 'nginx-access', 'nginx-error', 'phpfpm', 'swoole'];
+
+if (in_array($rawTab, $logSlugs)) {
+    $tab = 'logs';
+} else {
+    $tab = $rawTab; // 'comunes' | 'p1-web' | 'p2-bloc' | 'todas'
+}
+
+$pageTitle = 'Administración del Sistema — LAESH';
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; script-src 'self' 'unsafe-inline'; connect-src 'self'; frame-ancestors 'none';">
+<title><?= htmlspecialchars($pageTitle) ?></title>
+<link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/tokens.css?v=20260824">
+<link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/fonts.css?v=20260814">
+<link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/style.css?v=20260817h">
+<link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/portal.css?v=20260817x">
+<link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/log-viewer.css?v=20260824">
+<style>
+.sys-dashboard { max-width: 1400px; margin: 0 auto; padding: 1.5rem 1rem; }
+.sys-header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.sys-header__title { font-size: 1.35rem; font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 0.5rem; }
+.sys-nav-tabs { display: flex; gap: 6px; border-bottom: 2px solid var(--border); margin-bottom: 1.5rem; flex-wrap: wrap; }
+.sys-nav-tab { padding: 10px 20px; font-weight: 600; font-size: 0.9rem; color: var(--text-muted); text-decoration: none; border-radius: 8px 8px 0 0; border: 1px solid transparent; border-bottom: none; transition: all 0.2s; }
+.sys-nav-tab:hover { background: var(--secondary-green); color: var(--primary); }
+.sys-nav-tab.active { background: var(--bg-surface); color: var(--primary); border-color: var(--border); border-bottom: 2px solid var(--bg-surface); margin-bottom: -2px; }
+.config-table { width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: 0.88rem; }
+.config-table th { background: var(--primary); color: #fff; text-align: left; padding: 10px 14px; font-size: 0.82rem; }
+.config-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.config-key { font-family: monospace; font-weight: 700; color: var(--primary); font-size: 0.85rem; }
+.config-desc { font-size: 0.8rem; color: var(--text-muted); margin-top: 4px; }
+.config-input { width: 100%; padding: 6px 10px; font-size: 0.88rem; border: 1px solid var(--border); border-radius: 6px; }
+.config-input:focus { border-color: var(--primary); outline: none; }
+</style>
+</head>
+<body class="bg-page">
+
+<header class="portal-header">
+    <div class="portal-header__inner">
+        <div class="portal-header__brand">
+            <span class="portal-header__icon">⚙️</span>
+            <span class="portal-header__title">Administración del Sistema</span>
+            <span class="txt-muted fs-sm">Plataforma Unificada LAESH</span>
+        </div>
+        <nav class="portal-header__nav">
+            <a href="/laesh/adrc/" class="btn btn-secondary">← CMS Admin</a>
+            <a href="/laesh/rc/" class="btn btn-secondary">Tablero Recepción</a>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `sistema.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L149-391)</summary>
+
+**Path:** `Unknown file`
+
+```
+            <a href="/laesh/rc/" class="btn btn-secondary">Tablero Recepción</a>
+            <a href="/laesh/login/logout.php" class="btn btn-secondary">Cerrar Sesión</a>
+        </nav>
+    </div>
+</header>
+
+<main class="sys-dashboard">
+
+    <?php if ($flashMsg): ?>
+    <div class="alert <?= $flashErr ? 'alert-danger' : 'alert-success' ?> mb-3" style="padding:12px 18px; border-radius:8px; background:<?= $flashErr ? '#fee2e2' : '#d1fae5' ?>; color:<?= $flashErr ? '#b91c1c' : '#047857' ?>; border:1px solid currentColor;">
+        <?= htmlspecialchars($flashMsg) ?>
+    </div>
+    <?php endif; ?>
+
+    <div class="sys-header">
+        <h1 class="sys-header__title">
+            <span>⚙️</span> Control Central de Infraestructura y Datos
+        </h1>
+        <div class="txt-muted fs-sm">
+            Sesión: <strong>Admin</strong> · Permisos: <code>gestionar_cms</code>
+        </div>
+    </div>
+
+    <!-- Navegación por pestañas principales -->
+    <nav class="sys-nav-tabs" role="tablist">
+        <a href="?tab=logs" class="sys-nav-tab <?= $tab === 'logs' ? 'active' : '' ?>">
+            📋 Visor de Logs E2E
+        </a>
+        <a href="?tab=comunes" class="sys-nav-tab <?= $tab === 'comunes' ? 'active' : '' ?>">
+            🤝 Configuraciones Comunes (Compartidas)
+        </a>
+        <a href="?tab=p1-web" class="sys-nav-tab <?= $tab === 'p1-web' ? 'active' : '' ?>">
+            🌐 Proyecto 1: LAESH Sitio Web & CMS
+        </a>
+        <a href="?tab=p2-bloc" class="sys-nav-tab <?= $tab === 'p2-bloc' ? 'active' : '' ?>">
+            🩺 Proyecto 2: LAESH Bloc Digital
+        </a>
+    </nav>
+
+    <?php if ($tab === 'logs'): ?>
+    <!-- ── SECCIÓN 1: VISOR DE LOGS E2E ── -->
+    <section id="sec-logs">
+        <?php include __DIR__ . '/log_viewer.php'; ?>
+    </section>
+
+    <?php else: ?>
+    <!-- ── SECCIÓN 2 / 3 / 4: CONFIGURACIONES DB DESARTICULADAS (0% REPETICIÓN) ── -->
+    <?php
+        $targetKeys = [];
+        $titleSec   = '';
+        if ($tab === 'p1-web') {
+            $targetKeys = $keysP1_Web;
+            $titleSec   = 'Configuraciones Exclusivas — Proyecto 1: LAESH Sitio Web & CMS';
+        } elseif ($tab === 'p2-bloc') {
+            $targetKeys = $keysP2_Bloc;
+            $titleSec   = 'Configuraciones Exclusivas — Proyecto 2: LAESH Bloc Digital & Recepción';
+        } else {
+            $tab        = 'comunes';
+            $targetKeys = $keysComunes;
+            $titleSec   = 'Configuraciones Comunes — Singletons Institucionales Compartidos (Ambos Proyectos)';
+        }
+    ?>
+    <section class="card p-4">
+        <h2 class="txt-primary-fw mb-2" style="font-size:1.15rem;"><?= htmlspecialchars($titleSec) ?></h2>
+        <p class="txt-muted fs-sm mb-3">
+            Edita los parámetros singleton almacenados en la tabla MariaDB <code>configuraciones</code>. Los cambios tienen efecto inmediato en todas las aplicaciones.
+        </p>
+
+        <form method="POST" action="?tab=<?= htmlspecialchars($tab) ?>">
+            <input type="hidden" name="action" value="save_configs">
+            <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token'] ?? '') ?>">
+
+            <div style="overflow-x:auto;">
+            <table class="config-table">
+                <thead>
+                    <tr>
+                        <th style="width:25%">Clave / Parámetro</th>
+                        <th style="width:45%">Valor Actual</th>
+                        <th style="width:30%">Descripción SSOT</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($targetKeys as $key):
+                        $item = $allConfigs[$key] ?? ['clave' => $key, 'valor' => '', 'descripcion' => 'Parámetro dinámico'];
+                    ?>
+                    <tr>
+                        <td>
+                            <div class="config-key"><?= htmlspecialchars($item['clave']) ?></div>
+                        </td>
+                        <td>
+                            <?php
+                                $isNumeric = in_array($item['clave'], ['hero_autoplay_seg', 'anios_experiencia', 'tiempo_rotacion_dias', 'tiempo_depuracion_pdf_meses', 'hrs_open', 'hrs_close', 'dom_open', 'dom_close']);
+                                $isNumericLong = ($item['clave'] === 'session_lifetime');
+                            ?>
+                            <?php if (strlen($item['valor']) > 80 || str_contains($item['valor'], "\n")): ?>
+                                <textarea name="cfg[<?= htmlspecialchars($item['clave']) ?>]" class="config-input" rows="2"><?= htmlspecialchars($item['valor']) ?></textarea>
+                            <?php elseif ($isNumericLong): ?>
+                                <input type="number" min="3600" max="2592000" step="3600" inputmode="numeric"
+                                       name="cfg[<?= htmlspecialchars($item['clave']) ?>]" value="<?= htmlspecialchars($item['valor']) ?>" class="config-input"
+                                       title="En segundos. Mínimo 3600 (1h) · 86400=24h · 518400=6 días · Máximo 2592000 (30 días)">
+                                <small style="font-size:0.77rem;color:#64748b;margin-top:4px;display:block;">
+                                    <?= htmlspecialchars($item['valor']) ?> seg ≈
+                                    <?= round((int)$item['valor'] / 3600, 1) ?> horas
+                                    (<?= round((int)$item['valor'] / 86400, 1) ?> días)
+                                </small>
+                            <?php elseif ($isNumeric): ?>
+                                <input type="number" min="0" max="999" step="1" inputmode="numeric" pattern="[0-9]{1,3}"
+                                       name="cfg[<?= htmlspecialchars($item['clave']) ?>]" value="<?= htmlspecialchars($item['valor']) ?>" class="config-input"
+                                       onkeydown="if(!['0','1','2','3','4','5','6','7','8','9','Backspace','Tab','ArrowLeft','ArrowRight','Delete'].includes(event.key) && !event.ctrlKey && !event.metaKey) event.preventDefault();"
+                                       oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,3);"
+                                       onpaste="var p=(event.clipboardData||window.clipboardData).getData('text'); if(!/^\d{1,3}$/.test(p)) event.preventDefault();">
+                            <?php else: ?>
+                                <input type="text" name="cfg[<?= htmlspecialchars($item['clave']) ?>]" value="<?= htmlspecialchars($item['valor']) ?>" class="config-input">
+                            <?php endif; ?>
+                        </td>
+                        <td>
+                            <div class="config-desc"><?= htmlspecialchars($item['descripcion'] ?? 'Sin descripción') ?></div>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+            </div>
+
+            <div class="mt-3 flex gap-2 justify-end">
+                <button type="submit" class="btn btn-primary" id="btn-save-sys-configs">
+                    💾 Guardar Cambios de Configuración
+                </button>
+            </div>
+        </form>
+    </section>
+
+    <?php if ($tab === 'p1-web'):
+        $webRows = $db->query("SELECT `seccion`, `subseccion`, `clave`, `valor`, `tipo` FROM `web_contenidos` ORDER BY `subseccion` ASC, `clave` ASC")->fetchAll(PDO::FETCH_ASSOC);
+        $rawGrouped = [];
+        foreach ($webRows as $wr) {
+            $rawGrouped[$wr['seccion']][] = $wr;
+        }
+
+        $seccionNames = [
+            'hero'             => '1. Banner Principal (Hero)',
+            'quienes-somos'    => '2. Quiénes Somos / Acerca de',
+            'especialidades'   => '3. Especialidades y Servicios',
+            'promociones'      => '4. Promociones Diarias',
+            'calidad'          => '5. Calidad y Certificaciones',
+            'ubicacion'        => '6. Ubicación y Geolocalización',
+            'footer'           => '7. Pie de Página (Footer)',
+            'seo'              => '8. SEO y Metadatos Globales',
+            'aviso-privacidad' => '9. Aviso de Privacidad',
+        ];
+
+        // Mapeo canónico de etiquetas amigable ↔ index.php
+        $labelMap = [
+            'quienes-somos/seccion/h2'        => '1. Encabezado — Título H2 ("Quiénes somos")',
+            'quienes-somos/seccion/subtitulo' => '2. Encabezado — Subtítulo / Frase de Impacto',
+            'quienes-somos/ficha4/texto'      => '3. Card 1 — ¿Por qué confiar en LAESH®? (HTML)',
+            'quienes-somos/ficha2/texto'      => '4. Card 2 — Declaración de Misión (HTML)',
+            'quienes-somos/ficha3/texto'      => '5. Card 3 — Declaración de Visión (HTML)',
+            'quienes-somos/ficha1/texto'      => '6. Card 4 — Historia y Trayectoria Institucional (HTML)',
+        ];
+
+        // Ordenamiento canónico específico para quienes-somos (1 a 6)
+        if (isset($rawGrouped['quienes-somos'])) {
+            $qsOrderMap = [
+                'seccion/h2'        => 1,
+                'seccion/subtitulo' => 2,
+                'ficha4/texto'      => 3,
+                'ficha2/texto'      => 4,
+                'ficha3/texto'      => 5,
+                'ficha1/texto'      => 6,
+            ];
+            usort($rawGrouped['quienes-somos'], function($a, $b) use ($qsOrderMap) {
+                $posA = $qsOrderMap[$a['subseccion'] . '/' . $a['clave']] ?? 99;
+                $posB = $qsOrderMap[$b['subseccion'] . '/' . $b['clave']] ?? 99;
+                return $posA <=> $posB;
+            });
+        }
+
+        // Ordenamiento estricto de abanicos del 1 al 9
+        $webGrouped = [];
+        foreach ($seccionNames as $secKey => $secLabel) {
+            if (isset($rawGrouped[$secKey])) {
+                $webGrouped[$secKey] = $rawGrouped[$secKey];
+            }
+        }
+    ?>
+    <section class="card p-4 mt-4">
+        <h2 class="txt-primary-fw mb-2" style="font-size:1.15rem;">📖 Contenidos Editoriales del Sitio Web (web_contenidos — Solo Lectura)</h2>
+        <p class="txt-muted fs-sm mb-3">
+            Abanicos desplegables con todos los registros editoriales consumidos por <code>index.php</code> desde MariaDB. Campos de <strong>solo lectura (readonly)</strong> para inspección y auditoría sin alterar el contenido live.
+        </p>
+
+        <div class="accordions-wrap">
+            <?php foreach ($webGrouped as $secKey => $items):
+                $secLabel = $seccionNames[$secKey] ?? strtoupper($secKey);
+            ?>
+            <details class="accordion-item mb-2" style="border:1px solid var(--border); border-radius:8px; overflow:hidden;">
+                <summary class="accordion-summary" style="padding:12px 16px; background:var(--secondary-green); font-weight:700; color:var(--primary); cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
+                    <span>📂 <?= htmlspecialchars($secLabel) ?></span>
+                    <span class="badge badge-info" style="font-size:0.75rem; background:var(--primary); color:#fff; padding:2px 8px; border-radius:12px;"><?= count($items) ?> registros</span>
+                </summary>
+                <div class="accordion-body p-3" style="background:#fff; border-top:1px solid var(--border);">
+                    <table class="config-table" style="margin-top:0;">
+                        <thead>
+                            <tr>
+                                <th style="width:30%">Campo / Elemento en index.php</th>
+                                <th style="width:60%">Contenido en Base de Datos (Read-Only)</th>
+                                <th style="width:10%">Tipo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($items as $item):
+                                $itemPath  = $item['seccion'] . '/' . $item['subseccion'] . '/' . $item['clave'];
+                                $displayLbl = $labelMap[$itemPath] ?? (($item['subseccion'] ? $item['subseccion'] . ' / ' : '') . $item['clave']);
+                            ?>
+                            <tr>
+                                <td>
+                                    <div class="config-key"><?= htmlspecialchars($displayLbl) ?></div>
+                                    <small class="txt-muted" style="font-size:0.75rem; font-family:monospace;"><?= htmlspecialchars($item['subseccion'] . ' → ' . $item['clave']) ?></small>
+                                </td>
+                                <td>
+                                    <textarea class="config-input" readonly rows="<?= min(max(substr_count($item['valor'], "\n") + 1, 2), 6) ?>" style="background:#f8fafc; color:#334155; font-family:monospace;"><?= htmlspecialchars($item['valor']) ?></textarea>
+                                </td>
+                                <td>
+                                    <span class="log-badge badge-debug"><?= htmlspecialchars($item['tipo'] ?? 'texto') ?></span>
+                                </td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </details>
+            <?php endforeach; ?>
+        </div>
+    </section>
+    <?php endif; ?>
+    <?php endif; ?>
+
+</main>
+
+</body>
+</html>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing System Configuration**
+
+Okay, I'm diving into `admrc/views/sistema.php`. Currently, I'm focusing on the `$keysComunes` array within the file. I'm taking notes on its structure and the specific keys defined. It looks like it's holding core lab or system configuration data, such as names, addresses, and cities. Next, I'll identify how these values are used.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.085291617s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 31 Aug 2026, 5:47 pm
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 31 Aug 2026, 5:47 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 31 Aug 2026, 5:47 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `tiempo_depuracion_pdf_meses`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 31 Aug 2026, 5:47 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `07_seed_catalogs.sql`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L19-49)</summary>
+
+**Path:** `Unknown file`
+
+```
+    (1, 'Activo',  'El médico puede crear y consultar órdenes'),
+    (2, 'Pausado', 'El médico no puede crear órdenes; su historial se conserva');
+
+-- ---------------------------------------------------------------------------
+-- CATALOGO_ESTADOS — Semilla (estados de orden)
+-- Redesign v2: campo 'valor' (era 'nombre'); 4 estados alineados con medicos.js y ET
+-- ---------------------------------------------------------------------------
+INSERT IGNORE INTO `catalogo_estados` (`id`, `valor`, `descripcion`, `color_hex`) VALUES
+    (1, 'Remitido',          'Orden creada por el médico, en espera de atención en recepción', '#F59E0B'),
+    (2, 'En Atención',       'Paciente recibido en recepción, muestras en proceso',            '#3B82F6'),
+    (3, 'Resultados Listos', 'PDF de resultados cargado, disponible para el médico',           '#10B981'),
+    (4, 'Cerrada',           'Orden finalizada y entregada',                                   '#6B7280');
+
+-- ---------------------------------------------------------------------------
+-- FOLIOS_CONTROL — Serie inicial LAESH (orden_laboratorio)
+-- ---------------------------------------------------------------------------
+INSERT IGNORE INTO `folios_control` (`tipo_documento`, `prefijo`, `longitud`, `ultimo_folio`) VALUES
+    ('orden_laboratorio', 'LAESH', 5, 0);
+
+-- ---------------------------------------------------------------------------
+-- RBAC_PERMISOS — Permisos del sistema
+-- ---------------------------------------------------------------------------
+INSERT IGNORE INTO `rbac_permisos` (`nombre`, `descripcion`) VALUES
+    ('ver_ordenes_propias',  'Médico: consultar y crear sus propias órdenes'),
+    ('ver_solicitud_digital','Médico: ver PDF de solicitud digital'),
+    ('gestionar_ordenes',    'Recepción: procesar órdenes, cambiar estados, subir PDFs'),
+    ('gestionar_medicos',    'Recepción/Admin: alta, edición y pausa de médicos'),
+    ('gestionar_cms',        'Admin: editar contenidos del sitio web (CMS)'),
+    ('gestionar_estudios',   'Admin: alta y edición del catálogo de estudios'),
+    ('ver_reportes',         'Admin/Recepción: acceso a reportes de actividad');
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `07_seed_catalogs.sql`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L49-89)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+-- ---------------------------------------------------------------------------
+-- CONFIGURACIONES — Singletons globales de instancia (clave → valor)
+-- SSOT: datos que aparecen en >1 sección del sitio viven AQUÍ.
+-- Panel CMS: Ubicación y Contacto es el editor master de estas claves.
+-- ---------------------------------------------------------------------------
+INSERT IGNORE INTO `configuraciones` (`clave`, `valor`, `descripcion`) VALUES
+    -- Identidad institucional
+    ('nombre_laboratorio',      'Laboratorio de Especialidades Hematológicas',
+                                 'Nombre oficial del laboratorio'),
+    ('nombre_corto',            'LAESH',
+                                 'Nombre corto / marca'),
+    -- Contacto y ubicación
+    ('direccion',               'Azucenas #8, Fraccionamiento Jardines del Sur, Huajuapan de León, Oaxaca.',
+                                 'Dirección física — reutilizada en Ubicación, Footer y Schema.org'),
+    ('cp',                      '69007',
+                                 'Código postal — Schema.org postalCode'),
+    ('telefono',                '953 688 7694',
+                                 'Teléfono directo — reutilizado en Ubicación, Footer y Schema.org'),
+    ('email_contacto',          'lab_laesh@hotmail.com',
+                                 'Correo de contacto público — reutilizado en Ubicación y Footer'),
+    ('whatsapp_url',            'https://wa.me/529531190074',
+                                 'Enlace de WhatsApp con código de país — D-04: vive en configuraciones'),
+    ('whatsapp_numero',         '953 119 0074',
+                                 'Número WhatsApp formato display (sin código de país) — Footer, Ubicación'),
+    -- Horarios
+    ('horario_semana',          'Lunes a sábado: 7:00 a.m. – 9:00 p.m.',
+                                 'Horario días hábiles — Footer, Ubicación, Schema.org'),
+    ('horario_domingo',         'Domingo: 7:00 a.m. – 3:00 p.m.',
+                                 'Horario domingo — Footer, Ubicación, Schema.org'),
+    ('hrs_open',                '07:00',
+                                 'Apertura Lun–Sáb HH:MM 24h — Schema.org openingHoursSpecification'),
+    ('hrs_close',               '21:00',
+                                 'Cierre Lun–Sáb HH:MM 24h — Schema.org openingHoursSpecification'),
+    ('dom_open',                '07:00',
+                                 'Apertura domingo HH:MM 24h — Schema.org openingHoursSpecification'),
+    ('dom_close',               '15:00',
+                                 'Cierre domingo HH:MM 24h — Schema.org openingHoursSpecification'),
+    -- Responsable sanitario (campos individuales — para Footer, SEO y Quiénes Somos)
+    ('responsable_nombre',      'Q.F.B. y E.H.D.L. Jacob Santiago Blanco',
+                                 'Nombre completo con grado del responsable sanitario'),
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `07_seed_catalogs.sql`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L89-129)</summary>
+
+**Path:** `Unknown file`
+
+```
+                                 'Nombre completo con grado del responsable sanitario'),
+    ('responsable_cedula_prof', '3609293',
+                                 'Cédula profesional del responsable sanitario'),
+    ('responsable_cedula_esp',  '8935780',
+                                 'Cédula de especialidad del responsable sanitario'),
+    -- Redes sociales y mapas
+    ('facebook_url',            'https://www.facebook.com/profile.php?id=100072263716098',
+                                 'URL de la página oficial de Facebook del laboratorio'),
+    ('maps_embed_url',          'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3773.7375!2d-97.7779575!3d17.8028691!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85c60141d7aa4483%3A0x730f884bc7308bee!2sLaboratorio%20de%20Especialidades%20Hematol%C3%B3gicas%20S.C.!5e0!3m2!1ses!2smx!4v1724000000000!5m2!1ses!2smx',
+                                 'Embed URL Google Maps con Place ID — iframe data-src en index.php sección #ubicacion'),
+    -- Operaciones internas
+    ('tiempo_rotacion_dias',    '90',
+                                 'Días de validez antes de solicitar cambio de contraseña (admin policy)'),
+    ('anios_experiencia',       '25',
+                                 'Años de experiencia — usado en mensajes del sitio web'),
+    -- Sesión PHP
+    ('session_lifetime',        '518400',
+                                 'Duración de sesión PHP en segundos. 86400=24h · 518400=6 días. Se aplica en commons.php al iniciar sesión. Requiere recargar la página para que el nuevo valor tenga efecto.')
+ON DUPLICATE KEY UPDATE `valor` = VALUES(`valor`), `descripcion` = VALUES(`descripcion`);
+
+-- ---------------------------------------------------------------------------
+-- CATALOGOS_UI — Universidades y Lugares de Trabajo
+-- ---------------------------------------------------------------------------
+-- Universidades (tipo=universidad)
+INSERT IGNORE INTO `catalogos_ui` (`tipo`, `valor`, `orden`, `activo`) VALUES
+    ('universidad', 'Universidad Nacional Autónoma de México (UNAM)',    1, 1),
+    ('universidad', 'Universidad Autónoma Benito Juárez de Oaxaca',      2, 1),
+    ('universidad', 'Universidad Autónoma Metropolitana (UAM)',           3, 1),
+    ('universidad', 'Instituto Politécnico Nacional (IPN)',               4, 1),
+    ('universidad', 'Universidad Autónoma de Guadalajara',               5, 1),
+    ('universidad', 'Universidad Autónoma de Puebla (BUAP)',             6, 1),
+    ('universidad', 'Universidad Veracruzana',                           7, 1),
+    ('universidad', 'Universidad Autónoma del Estado de México',         8, 1),
+    ('universidad', 'Otra universidad',                                  99, 1);
+
+-- Lugares de trabajo (tipo=lugar_trabajo)
+INSERT IGNORE INTO `catalogos_ui` (`tipo`, `valor`, `orden`, `activo`) VALUES
+    ('lugar_trabajo', 'Consultorio particular',                          1, 1),
+    ('lugar_trabajo', 'Hospital General de Huajuapan',                   2, 1),
+    ('lugar_trabajo', 'IMSS — Delegación Oaxaca',                        3, 1),
+    ('lugar_trabajo', 'ISSSTE — Unidad Huajuapan',                       4, 1),
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Adding Catalog Configuration**
+
+I've been working on updating the `07_seed_catalogs.sql` file. My current focus is adding configuration details. I'm incorporating the following values, specifically, `tiempo_depuracion_pdf_meses` set to `'12'`, `ruta_almacenamiento_pdf` set to `'/var/www/html/laesh-bloc-assets/pdf/'`, and `maps_url` set to a Google Maps link.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.058607421s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 31 Aug 2026, 5:47 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 31 Aug 2026, 5:47 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** CORTEX_STEP_STATUS_WAITING
+**Created:** 31 Aug 2026, 5:47 pm
 
 ---
 
