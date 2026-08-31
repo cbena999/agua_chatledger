@@ -132,7 +132,7 @@ git push origin feature/upgrade-v2-win-xampp
 
 ---
 
-**Última actualización:** 2026-08-30 · Regla 25 LAESH Hero/Slider lineamientos desktop — background-size 85% auto, vh+min+max, focal points, DRY padding-bottom, sin gradientes
+**Última actualización:** 2026-08-31 · Regla 25 LAESH Hero/Slider lineamientos desktop — background-size 85% auto, vh+min+max, focal points, DRY padding-bottom, sin gradientes
 
 > **Nombre canónico del Ground Truth**: El conjunto `CLAUDE.md` + todo `.agents/` (rules, skills, workflows) se denomina **"el Ground Truth"** del proyecto.
 > **Nota de terminología**: Gemini denomina este mismo conjunto **"el Runbook"**. Son el mismo repositorio de conocimiento — `.agents/` es compartido. Solo difiere el nombre según el agente.
