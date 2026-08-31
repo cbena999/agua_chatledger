@@ -80,42 +80,15 @@
    - ⏸ PERF-3: srcset specialty cards — diferido (necesita variantes 400px; imágenes actuales 1000px)
 4. **CSS versiones**: responsive.css → ?v=20260815 en todos los HTMLs
 
-### P-02 🔲 Módulos de Caja y Administración (Fase 5/6)
-**Estado**: Pendiente
-**Descripción**: Desarrollo de la UI y endpoints reales para el cierre de caja (Corte X y Corte Z), reportes analíticos de ventas por periodo, y el registro de horas del personal (Reloj Checador).
-
 ---
 
 ## 🟡 PRIORIDAD MEDIA — INFRA
 
-### P-INFRA-01 🔄 [restaurantb Docker] Replicar hardening LNMP en OCI VM — PENDIENTE AUTORIZACIÓN
-**Estado**: Local Docker completado y verificado 2026-08-20 (ver RESUELTOS RECIENTEMENTE). OCI VM bloqueado — **requiere autorización explícita**.
-
-**Local completado 2026-08-20 (segunda ronda):**
-- ✅ CSP: `'unsafe-inline'` eliminado de `script-src` (Nginx) — verificado en vivo
-- ✅ Swoole tuning: `worker_num=2`, `heartbeat_idle_time=600s`, buffers, TCP keepalive — contenedor recreado
-- ✅ PHP-FPM env vars LAESH: `LAESH_DB_*` + `APP_ENV` en `docker-compose.yml` — verificado `laesh_app` conecta a `laesh_db` (27 tablas)
-- ✅ Swoole log volume: `../logs/php-fpm:/var/log/php-fpm:rw` añadido al servicio `swoole`
-- ✅ Archivos PHP de app revertidos (no eran scope de infra)
-- ✅ Documentación actualizada: §15.7d + §14.3 + §15.8 en `Tecnica_Infraestructura_Despliegue.html`
-
-**Aplicado en OCI VM 2026-08-20:**
-- ✅ `http2` en listen (Nginx 1.18 syntax `listen 443 ssl http2;`)
-- ✅ HSTS + CSP (`script-src 'self'`) + Referrer-Policy headers
-- ✅ Location `/fpm-status` (allow 127.0.0.1 solo, fastcgi_params)
-- ✅ Deploy hook Certbot: `/etc/letsencrypt/renewal-hooks/deploy/restore-http2.sh` (restaura http2 post-renovación)
-- ✅ PHP-FPM `www.conf`: `pm.status_path=/fpm-status` + env vars `LAESH_DB_*` + `APP_ENV=production`
-- ✅ Verificado: HTTP/2 activo, HSTS/CSP en headers vivos, /fpm-status responde, laesh_app conecta laesh_db (27 tablas)
-- ✅ `ssl_session_tickets off` + SSL ciphers — ya aplicados por Certbot (`options-ssl-nginx.conf`) — skip
-- ✅ Documentación: §14.7 nuevo en `Tecnica_Infraestructura_Despliegue.html`
-
-**Cerrado 2026-08-20:**
-- ✅ Composer install — no requerido; libs vendored en `www/restaurant/commons/libs/` (Flight, Plates, Delight-Auth); sin `composer.json`
-- ✅ §15.8 actualizada: todas las filas OCI reflejan estado real (✅ aplicado / ✅ pre-existente / pendiente DNS)
-
-**Pendiente en OCI VM (bloqueado por DNS):**
-1. **Server block laesh.mx** — `laesh.mx` apunta a `2.57.91.91`, no a OCI (`137.131.58.161`). Cambiar DNS primero. Runbook §13.4.
-2. **Certbot Let's Encrypt laesh.mx** — ejecutar tras DNS + server block.
+### P-INFRA-01 🔄 [LAESH OCI] DNS laesh.mx + Certbot — BLOQUEADO POR DNS
+**Estado**: Bloqueado — hardening local y OCI completados 2026-08-20. Solo falta DNS.  
+**Pendiente**:
+1. Cambiar DNS `laesh.mx` → OCI IP `137.131.58.161` (hoy apunta a `2.57.91.91`)
+2. Tras propagación DNS: crear server block Nginx `laesh.mx` + ejecutar Certbot
 **Referencia**: §13.4 + §14.7 en `Tecnica_Infraestructura_Despliegue.html`.
 
 ---
@@ -137,70 +110,109 @@
 | 2026-07-03 | Simulador NLP y Delta Hash | Creación del panel de administración de datasets y validador en tiempo real de gramática VOSK. |
 | 2026-06-14 | Creación BD y Orquestador | Se creó `setup.sh` conectando a MCP, creando esquemas transaccionales, de auth e índices. |
 | 2026-08-15 | LAESH – Targeting, fixes CRÍTICO, deploy OCI | device-detect.js + targeting.css inyectados en 7 HTMLs; fieldset/legend Sexo (A5); focus-visible outline (C7); grid 25/75 contacto/mapa; mobile Celular+Sexo renglón único; rsync completo a OCI (uipv1a/ + laesh-web-assets-uipv1a/). Auditoría publicada: https://claude.ai/code/artifact/31b7d89b-dedd-4011-afef-d65f95b31d3f |
+| 2026-08-30 | LAESH – Limpieza de assets huérfanos `laesh-web-assets-uipv1a/` | **CSS**: `aviso-privacidad.css`, `perfil-medico.css` eliminados. **JS**: `perfil-medico.js`, `docs.js` eliminados. **img/**: `25a.webp`, `mapa-laesh.webp` eliminados (ref. en `gestion_web.php:1134` actualizada a `01mapa-laesh.webp` antes del borrado). **img/cms/**: 7 JPEGs + 16 WebP pre-20260829 + `carousel-1-20260824-a8d752fe.webp` (confirmado huérfano en BD `web_contenidos`) eliminados. Quedan 19 hero-slides 20260829 (2.2 MB). `uipv1/`, `uipv2/`, `uipv0/` — ya movidos a `portafolio-dev-2026/blocklabgd/v1.2/mockup1.0/` (sesión anterior). `commons/seed_first_users.php` y `commons/swoole_server.php` — conservados intencionalmente. |
 | 2026-08-15 | LAESH – P-LAESH-04: auditoría 19/25 hallazgos | Grid 25/75 verificado (CSS correcto). 17 hallazgos corregidos esta sesión: P4 (cache versioning 7 HTMLs), P5 (autofocus), P2 (logo dims CLS), A7 (pause button carousel), A4 (h2 sr-only), A2 (aria-live), UX1+UX2 (tel+pattern), S2 (robots.txt), SEO1 (sitemap.xml), S3 (X-Frame-Options DENY), PWA2 (standalone), PWA3 (purpose any), C1 (dead code), C3 (fallback name), C4 (crypto.randomUUID), SEO3 (schema.org URI), 404 (página branded). Reporte: https://claude.ai/code/artifact/31b7d89b-dedd-4011-afef-d65f95b31d3f |
+| 2026-08-30 | LAESH – G-CMS-01: 14 cms/ huérfanos eliminados | 14 WebP no referenciados en `web_contenidos` eliminados (1.7 MB). img/cms/ queda con 5 slides activos (448 KB). |
+| 2026-08-30 | LAESH – G-CMS-02: sección Promociones funciona sin imágenes | `promociones-2026.webp` eliminada (era solo preview UI en `gestion-web.js:60`, no usada en sitio público). `gestion-web.js:60` actualizado a `sala-de-espera.webp`. Sección promociones confirmada funcional solo con texto. |
 | 2026-08-13 | LAESH – B1 inline styles + dominio canónico OG | (ver P-LAESH-01 y P-LAESH-02) |
 | 2026-06-14 | Estrategia PWA Offline | Se descargó Dexie.js y se crearon esquemas `db.js` y `sw.js` localmente. |
 
 ---
 
+## 🟡 PRIORIDAD MEDIA — LAESH Assets (Squoosh — tarea del usuario)
+
+### G-IMG-01 🟡 Carrusel especialidades — 14 WebP sobre presupuesto
+**Spec objetivo**: 800×580 px · WebP Q75 · ≤25 KB por imagen  
+**Directorio destino**: `laesh-web-assets-uipv1a/img/`
+
+| Archivo | Actual | Δ peso |
+|---|---|---|
+| `area-bacteriologia-dos.webp` | 999×666 · 44 KB | −19 KB |
+| `area-bacteriologia.webp` | 1000×562 · 36 KB | −11 KB |
+| `area-centrifugacion.webp` | 1000×562 · 28 KB | −3 KB |
+| `area-coagulacion.webp` | 1000×1000 · 36 KB | aspect ratio + −11 KB |
+| `area-estudios-especiales.webp` | 1000×562 · 52 KB | −27 KB |
+| `area-hematologia-dos.webp` | 1000×1000 · 64 KB | aspect ratio + −39 KB |
+| `area-hematologia-uno.webp` | 1000×562 · 44 KB | −19 KB |
+| `area-quimica-clinica-dos.webp` | 1000×1000 · 68 KB | aspect ratio + −43 KB |
+| `area-quimica-clinica.webp` | 1000×562 · 84 KB | −59 KB |
+| `area-toma-de-muestras.webp` | 1000×666 · 36 KB | −11 KB |
+| `area-uroanalisis.webp` | 1000×666 · 32 KB | −7 KB |
+| `toma-de-cultivos.webp` | 1000×666 · 32 KB | −7 KB |
+| `toma-de-muestras.webp` | 1000×666 · 44 KB | −19 KB |
+| `toma-pediatricas.webp` | 1000×666 · 48 KB | −23 KB |
+
 ---
 
-### P-LAESH-06 🔴 [LAESH medicos.html] Dos issues sin resolver — PENDIENTE PARA GEMINI
+### G-IMG-02 🟡 Assets estáticos con spec incorrecta — requieren asset nuevo o Squoosh
 
-**Estado**: Sin resolver al cierre de sesión 0969fceb (2026-08-16). Claude intentó ~9 variantes sin lograrlo.
+| Archivo | Actual | Problema | Acción |
+|---|---|---|---|
+| `recepcion-lab.webp` | 1000×461 · 36 KB | ⚠️ ancho < 1280 px mínimo hero | Usuario provee imagen ≥1280 px |
+| `01mapa-laesh.webp` | 656×477 · 40 KB | ⚠️ spec: 1136×615 · Q85 · ≤90 KB | Usuario provee imagen o recorte |
+| `hero-slide5` activo (cms/) | 1152×532 · 36 KB | ⚠️ en BD pero < 1280 px mínimo | Usuario re-sube slide 5 vía CMS |
+| `sala-de-espera.webp` | 1920×1080 · **260 KB** | ⚠️ CSS bg slide 4 — peso alto | Squoosh: mismas dims · Q75 · target ≤120 KB |
+
+---
+
+## 🟡 PRIORIDAD MEDIA — LAESH Dev (código)
+
+### G-DEV-01 🟡 Modal perfil médico — no persiste en BD
+**Estado**: Feature incompleta · `labadmin.js:894` → solo `console.log`, no llama al backend  
+**Acción**: Endpoint PHP en `admrc/` + `INSERT/UPDATE perfiles_medicos`
+
+### G-DEV-02 ⏸ Cache-busting `?v=time()` — diferido a producción
+**Estado**: Diferido  
+**Problema**: `index.php` + `medicos.php` regeneran timestamp en cada request → sin cacheo de assets  
+**Fix**: `filemtime()` en lugar de `time()` para todos los `<link>`/`<script>`
+
+---
+
+## 🟡 PRIORIDAD MEDIA — LAESH Portal Médico
+
+### P-LAESH-06 🟡 [LAESH Portal Médico] Issues A y B — verificación visual pendiente
+
+**Estado**: Reevaluado 2026-08-30 (Claude Code). CSS corregido en sesiones anteriores. Pendiente solo verificación visual en browser.
+
+> ⚠️ **SSOT cambió**: El archivo de referencia ya NO es `website/uipv1/medicos.html`.  
+> **El SSOT activo del portal médico es `laesh-swbldi/md/views/medicos.php`** (Plates view, stack PHP).  
+> El HTML en `uipv1/medicos.html` es legado — tiene solo 10 fichas vs 18 en el PHP. No editar el HTML.
+
+**Archivos SSOT activos**:
+- Vista PHP: `laesh-swbldi/md/views/medicos.php`
+- CSS compartido: `laesh-web-assets-uipv1a/css/style.css` · `portal.css` · `targeting.css`
+- JS: `laesh-web-assets-uipv1a/js/medicos.js` · `medicos-a11y.js` · `app.js`
+
+---
 
 #### Issue A — Dropdown fichas: checkbox separado del texto
 
-**Archivos involucrados**:
-- `laesh-swbldi/website/uipv1/medicos.html` (versión actual `?v=20260816i`)
-- `laesh-web-assets-uipv1a/css/style.css` (selector `.ficha-dropdown .ficha-drop-item`)
-- `laesh-web-assets-uipv1a/css/responsive.css` (bloque ≤767px: `.ficha-dropdown`)
+**Estado en CSS**: ✅ Resuelto estructuralmente (sesión anterior).
+- `.ficha-dropdown` usa `position: fixed` (CSS-01) — escapa de cualquier `overflow:hidden` ancestro.
+- JS posiciona con `getBoundingClientRect()`.
+- `.ficha-dropdown .ficha-drop-item { display:flex; flex-wrap:nowrap; align-items:flex-start; gap:5px }` — especificidad (0,2,0), no hay conflicto con reglas ancestro.
+- Regla `.form-group label { display:block }` **NO existe** en el CSS cargado (`uipv1a/style.css`). Conflicto original era con archivo diferente.
 
-**Comportamiento observado**: El checkbox aparece en el extremo izquierdo con gran separación del texto del estudio. El texto wrappea a múltiples líneas.
-
-**Lo que se sabe**:
-- Causa raíz conocida: `.form-group label { display:block }` (especificidad 0,1,1) overrideaba `.ficha-drop-item { display:flex }` (0,1,0). Se subió especificidad a `.ficha-dropdown .ficha-drop-item` (0,2,0) — debería estar resuelto.
-- El dropdown tiene `min-width: 300px; max-width: 420px` en desktop y `min(340px, 100vw-8px)` en móvil.
-- El texto wrappea porque los nombres de estudios son largos ("Electrolitos Séricos Na+, K+, Cl-, Ca++, P, Mg").
-- Sospecha: algún ancestro del grid `.fichas-estudios-grid` puede tener `overflow:hidden` que clipa el dropdown horizontal. Buscar en la cadena: `fichas-estudios-wrap > form-group > form > subtab-generar > card`.
-- `align-items: flex-start` (no center) ya está aplicado para que el checkbox quede junto a línea 1 del texto.
-
-**Lo que Gemini debería explorar**:
-1. Inspeccionar en DevTools qué `overflow` tienen todos los ancestros del `.ficha-wrap`.
-2. Si hay overflow:hidden en algún ancestro: agregar `overflow: visible` en ese elemento.
-3. Verificar en DevTools que el `.ficha-dropdown` efectivamente mide 300-420px al abrirse.
+**Acción pendiente**: Abrir `medicos.php` en browser, verificar visualmente que checkbox queda junto al texto en cada ficha. Si persiste → reportar con captura de pantalla.
 
 ---
 
-#### Issue B — Sexo: label e inputs radios H/M desalineados en móvil
+#### Issue B — Sexo: radios H/M desalineados en móvil
 
-**Archivos involucrados**:
-- `medicos.html` línea ~207: ya se cambió de `<fieldset>` a `<div role="group" aria-labelledby="sexo-label">` en v20260816i
-- `responsive.css` bloque `@media (max-width: 767px)` → `.orden-patient-grid`
+**Estado en CSS**: ✅ Resuelto estructuralmente (sesión anterior).
+- Grid `orden-patient-row1` en `@media ≤767px`: `grid-template-columns: minmax(0,115px) minmax(0,1fr) 42px auto; align-items: end`.
+- `.form-legend` (Sexo) y `.form-label` (Nombre/Edad) normalizados a `font-size:0.62rem; margin-bottom:2px` en móvil.
+- `.d-flex-gap-row` → `height:38px`. `.label-flex` → `min-height:38px`. Inputs → `height:38px`. Alturas homogéneas.
 
-**Comportamiento observado**: La etiqueta "Sexo" y los radios H/M aparecen más abajo que los otros inputs (Nombre, Celular, Edad) en móvil.
-
-**Lo que se sabe**:
-- El grid en móvil: `grid-template-columns: minmax(0,2fr) minmax(0,1.3fr) 36px 56px` con `align-items: end`.
-- El `<fieldset>/<legend>` fue reemplazado por `<div>/<span>` en v20260816i para eliminar quirks de browser.
-- Los 4 items del grid deberían tener altura similar (~42px: label 10px + margin 2px + input/radio 30px).
-- El `.form-legend` (span) tiene base CSS: `font-size: 0.9rem; margin-bottom: 0.5rem`. El override móvil `.orden-patient-grid .form-legend { font-size: 0.62rem; margin-bottom: 2px }` debería aplicar.
-- La misma causa raíz `.form-group label { display:block }` podría afectar los `.label-flex` (H/M) → revisado con `.d-flex-gap-row > .label-flex { display:flex }` (0,2,0) en style.css.
-
-**Lo que Gemini debería explorar**:
-1. Inspeccionar DevTools: ¿cuál es el computed height de cada item del grid en el row de Nombre/Celular/Edad/Sexo?
-2. Verificar que `.orden-patient-grid .form-legend` override aplica (font-size: 0.62rem, margin-bottom: 2px).
-3. Si la altura de la celda Sexo difiere: investigar qué propiedad la infla.
-4. Considerar hacer el grid Sexo con `align-self: end` explícito en el div del grupo.
+**Acción pendiente**: Abrir `medicos.php` en browser a 375px de ancho, verificar visualmente que Sexo alinea con Nombre/Edad. Si persiste → DevTools → Computed height del `form-group-sexo` vs `form-group-nombre`.
 
 ---
 
-**Versión actual de archivos**: `?v=20260816i`  
-**Ruta archivos fuente**: `/home/carlos/GitHub/caelitandem_home/restaurantb/www/`  
-- CSS: `laesh-web-assets-uipv1a/css/style.css` y `responsive.css`
-- HTML: `laesh-swbldi/website/uipv1/medicos.html`
-- JS: `laesh-web-assets-uipv1a/js/medicos.js`
+**Nota adicional — fichas desactualizadas en legado**:  
+`website/uipv1/medicos.html` tiene 10 fichas y label "10 fichas principales".  
+`md/views/medicos.php` tiene **18 fichas** (8 adicionales: F. Tiroidea, Lípidos, Marc. Tumorales, Infectología, PFH, Gasometrías, Reumatología, Bacteriología).  
+El HTML legado **no necesita sincronizarse** — el PHP es el SSOT.
 
 ---
 
-*Última actualización: 2026-08-20 — Cierre de sesión: OCI hardening ✅, Composer N/A (libs vendored) ✅, §15.8 sincronizada ✅. Pendiente: DNS laesh.mx → OCI + git commit (usuario). — Claude Code*
+*Última actualización: 2026-08-30 — Realineación completa de pendientes. Activos: P-LAESH-05 (Deploy OCI), P-LAESH-06 (verificación visual medicos.php), P-INFRA-01 (DNS laesh.mx), G-IMG-01 (14 carrusel Squoosh), G-IMG-02 (recepcion-lab/mapa/slide5 asset nuevo + sala-de-espera Squoosh), G-DEV-01 (modal médico BD), G-DEV-02 (cache-busting diferido). Cerrados: G-CMS-01 (14 huérfanos cms/), G-CMS-02 (promociones solo texto OK). — Claude Code*
