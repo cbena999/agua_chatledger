@@ -195,6 +195,58 @@
 **Fix**: Cambiar a `width="800" height="580"` después de confirmar que los assets de calidad también están en 800×580  
 **Archivo**: `laesh-swbldi/website/sections/calidad.php`
 
+### PERF-01 ⏸ [LAESH Website] Minificación y bundle de CSS — 6 archivos → 1 archivo minificado
+**Estado**: Diferido — requiere tooling (Node/npm o script PHP)  
+**Impacto estimado**: ⭐⭐⭐ Alto — elimina 5 RTTs extra en HTTP/1.1 y reduce tamaño total ~30–40% vía minificación  
+**Problema**: `index.php` carga 6 `<link rel="stylesheet">` independientes que bloquean el render en serie:
+```
+tokens.css · fonts.css · style.css · style-website.css · landing.css · targeting.css
+```
+**Fix recomendado**:
+- Opción A (build step): `npx csso-cli` o similar para concatenar + minificar → `dist/laesh-bundle.min.css`; actualizar `<link>` a un solo archivo + `filemtime()`
+- Opción B (sin build): PHP en-línea con `ob_start()` + strip de comentarios/espacios + header `Content-Type: text/css` + `Cache-Control` agresivo
+- Mantener archivos fuente separados en `css/` como SSOT de edición
+**Archivos**: `laesh-web-assets-uipv1a/css/*.css` · `index.php` · `medicos.php`
+
+### PERF-02 ⏸ [LAESH Website] Minificación de JS — `device-detect.js` y demás scripts
+**Estado**: Diferido — requiere tooling  
+**Impacto estimado**: ⭐⭐ Medio — reduce peso de JS transferido ~25–35%; `device-detect.js` bloquea parser al estar en `<head>`  
+**Problema**:
+- `device-detect.js` está en `<head>` sin `defer`/`async` → bloquea render hasta que el script se descarga y ejecuta
+- JS no está minificado → comentarios, whitespace y nombres largos viajan al browser
+**Fix recomendado**:
+1. Añadir `defer` a `<script src="device-detect.js?v=...">` si el script no necesita ejecutar antes del DOM (verificar dependencias)
+2. Minificar con `npx terser` o equivalente → `dist/device-detect.min.js`
+3. Aplicar mismo criterio a otros scripts inline o archivos JS del sitio web
+**Archivo**: `laesh-web-assets-uipv1a/js/device-detect.js` · `index.php` `<head>`
+
+### PERF-04 🟡 [LAESH Website] Ficha "25 años de experiencia" no centrada/completa en iPad
+**Estado**: Reportado 2026-08-30 — reproducción en dispositivo iPad  
+**Problema**: La ficha/card/sección con el texto "25 años de experiencia al servicio del diagnóstico" en `index.php` no se muestra centrada ni completa en iPads  
+**Síntoma**: Texto/elemento recortado o desalineado en viewport tablet (~768–1024 px)  
+**Área probable**: CSS responsive en `landing.css` o `style-website.css` · breakpoint `@media (max-width: 1024px)` o `768px` · posible `overflow: hidden`, `white-space: nowrap`, o ancho fijo incorrecto  
+**Acción**: Abrir `index.php` en browser a 768–1024 px de ancho (o DevTools iPad Air/Pro), identificar el selector y corregir alineación + visibilidad completa  
+**Archivos probables**: `laesh-web-assets-uipv1a/css/landing.css` · `style-website.css` · `website/index.php` o partial de la sección "quiénes somos"
+
+### PERF-03 ⏸ [LAESH Website] Verificar y activar Gzip/Brotli en XAMPP (Host A y OCI)
+**Estado**: Diferido — verificar configuración de Apache  
+**Impacto estimado**: ⭐⭐⭐ Alto — compresión texto 60–80%; CSS/JS/HTML entregados en fracción del tamaño  
+**Problema**: No confirmado si `mod_deflate` o `mod_brotli` están activos en el XAMPP de Host A ni en el VPS OCI  
+**Fix recomendado**:
+```bash
+# Verificar en Host A
+/opt/lampp/bin/apachectl -M | grep -E 'deflate|brotli'
+curl -I -H "Accept-Encoding: gzip" http://localhost/laesh-swbldi/website/ | grep Content-Encoding
+```
+Si no está activo → agregar en `.htaccess` de `laesh-swbldi/`:
+```apache
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css application/javascript text/javascript application/json
+</IfModule>
+```
+Repetir verificación en OCI tras deploy P-LAESH-05  
+**Archivos**: `laesh-swbldi/.htaccess` · Apache conf XAMPP
+
 ---
 
 ## 🟡 PRIORIDAD MEDIA — LAESH Portal Médico
@@ -244,4 +296,4 @@ El HTML legado **no necesita sincronizarse** — el PHP es el SSOT.
 
 ---
 
-*Última actualización: 2026-08-30 — Realineación completa de pendientes. Activos: P-LAESH-05 (Deploy OCI), P-LAESH-06 (verificación visual medicos.php), P-INFRA-01 (DNS laesh.mx), G-IMG-01 (14 carrusel Squoosh), G-IMG-02 (recepcion-lab/mapa/slide5 asset nuevo + sala-de-espera Squoosh), G-DEV-01 (modal médico BD), G-DEV-02 (cache-busting diferido), P-01 (filemtime index.php), P-03 (reoptimizar area-*.webp usuario), R-02 (dims calidad.php tras P-03). Cerrados: G-CMS-01 (14 huérfanos cms/), G-CMS-02 (promociones solo texto OK). — Claude Code*
+*Última actualización: 2026-08-30 — Audit performance index.php (score 4/10). Nuevos pendientes performance: P-01 (filemtime), P-03 (reoptimizar area-*.webp usuario), R-02 (dims calidad.php), PERF-01 (bundle+minify CSS), PERF-02 (minify JS + defer device-detect), PERF-03 (Gzip/Brotli XAMPP), PERF-04 (ficha "25 años" no centrada en iPad). Activos previos: P-LAESH-05 (Deploy OCI), P-LAESH-06 (verificación visual medicos.php), P-INFRA-01 (DNS laesh.mx), G-IMG-01, G-IMG-02, G-DEV-01, G-DEV-02. — Claude Code*
