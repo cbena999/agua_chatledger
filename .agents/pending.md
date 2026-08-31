@@ -168,6 +168,35 @@
 
 ---
 
+## 🟡 PRIORIDAD MEDIA — LAESH Website Responsividad/Performance (Sesión 2026-08-30)
+
+### P-01 ⏸ [LAESH Website] Cache-busting `?v=time()` → `filemtime()` en `index.php`
+**Estado**: Diferido — aplicar en producción  
+**Problema**: 6 `<link>` CSS + 1 `<script>` en `website/index.php` usan `?v=<?= time() ?>` → browser re-descarga ~210 KB de assets en cada pageview, sin cacheo  
+**Archivos afectados** (en orden del `<head>`):
+- `device-detect.js`
+- `tokens.css`, `fonts.css`, `style.css`, `style-website.css`, `landing.css`, `targeting.css`
+**Fix**: Reemplazar `time()` por `filemtime(BASE_PATH . '/laesh-web-assets-uipv1a/...')` en cada línea  
+**Nota**: Alineado con G-DEV-02 (mismo problema en `medicos.php`); puede cerrarse junto
+
+### P-03 ⏸ [LAESH Website] Reoptimizar imágenes `area-*.webp` del carrusel de especialidades — tarea usuario
+**Estado**: Diferido — requiere acción manual del usuario en Squoosh  
+**Problema**: 14+ imágenes del carrusel exceden el presupuesto de ≤25 KB. Peores offenders:
+- `area-quimica-clinica.webp` → 80 KB
+- `area-quimica-clinica-dos.webp` → 66 KB (cuadrada, spec incorrecta)
+- `area-hematologia-dos.webp` → 63 KB (1000×1000 cuadrada)
+**Spec correcta**: exacto 800×580 px · WebP · Q75 · ≤25 KB  
+**Acción**: Usuario → Squoosh: Resize 800×580, Format WebP, Quality 75, re-exportar cada archivo  
+**Ubicación**: `laesh-web-assets-uipv1a/img/area-*.webp`
+
+### R-02 ⏸ [LAESH Website] Corregir dims HTML de imágenes en `calidad.php` tras P-03
+**Estado**: Bloqueado por P-03 (requiere que las imágenes estén re-exportadas a 800×580)  
+**Problema**: `calidad.php` tiene `width="1000" height="562"` en sus `<img>` → ratio incorrecto (16:9 vs 1.38:1 real) → posible CLS  
+**Fix**: Cambiar a `width="800" height="580"` después de confirmar que los assets de calidad también están en 800×580  
+**Archivo**: `laesh-swbldi/website/sections/calidad.php`
+
+---
+
 ## 🟡 PRIORIDAD MEDIA — LAESH Portal Médico
 
 ### P-LAESH-06 🟡 [LAESH Portal Médico] Issues A y B — verificación visual pendiente
@@ -215,4 +244,4 @@ El HTML legado **no necesita sincronizarse** — el PHP es el SSOT.
 
 ---
 
-*Última actualización: 2026-08-30 — Realineación completa de pendientes. Activos: P-LAESH-05 (Deploy OCI), P-LAESH-06 (verificación visual medicos.php), P-INFRA-01 (DNS laesh.mx), G-IMG-01 (14 carrusel Squoosh), G-IMG-02 (recepcion-lab/mapa/slide5 asset nuevo + sala-de-espera Squoosh), G-DEV-01 (modal médico BD), G-DEV-02 (cache-busting diferido). Cerrados: G-CMS-01 (14 huérfanos cms/), G-CMS-02 (promociones solo texto OK). — Claude Code*
+*Última actualización: 2026-08-30 — Realineación completa de pendientes. Activos: P-LAESH-05 (Deploy OCI), P-LAESH-06 (verificación visual medicos.php), P-INFRA-01 (DNS laesh.mx), G-IMG-01 (14 carrusel Squoosh), G-IMG-02 (recepcion-lab/mapa/slide5 asset nuevo + sala-de-espera Squoosh), G-DEV-01 (modal médico BD), G-DEV-02 (cache-busting diferido), P-01 (filemtime index.php), P-03 (reoptimizar area-*.webp usuario), R-02 (dims calidad.php tras P-03). Cerrados: G-CMS-01 (14 huérfanos cms/), G-CMS-02 (promociones solo texto OK). — Claude Code*
