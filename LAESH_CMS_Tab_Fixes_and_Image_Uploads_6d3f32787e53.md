@@ -7,9 +7,9 @@
 | **Trajectory ID** | `cbb3065c-15ab-40b2-a551-df5474c119c2` |
 | **Cascade ID** | `33758958-5e2c-4311-ba38-6d3f32787e53` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 1724 |
+| **Total Steps** | 1824 |
 | **Started** | 30 Aug 2026, 9:34 pm |
-| **Completed** | 31 Aug 2026, 9:45 pm |
+| **Completed** | 31 Aug 2026, 10:07 pm |
 
 ---
 
@@ -468,843 +468,79 @@
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `cms-img-filename-label`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 31 Aug 2026, 12:51 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 31 Aug 2026, 12:51 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `write_to_file`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 31 Aug 2026, 12:53 pm
 
 ---
 
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-## User Request
-
-. en el inputext del cms: Cédula Profesional aparece vacio, y debe ser:  3609293 asegura que vengan todos los datos de la bd y no caiga en fallbacks.
-. en el inputext del cms URL Directa de WhatsApp, aparece cortado a la derecha, hay que ampliarlo a la derecha para que se muestre todo el texto https://wa.me/529531190074
- . publique cambios y el Croquis no apare la imagen.
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `gestion_web.php`
-**Language:** php
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `responsable_cedula`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 31 Aug 2026, 1:08 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** CORTEX_STEP_STATUS_RUNNING
+**Status:** Reset
 **Created:** 31 Aug 2026, 1:08 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `configuraciones`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 31 Aug 2026, 1:08 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `responsable_`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 31 Aug 2026, 1:08 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `field-group`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 31 Aug 2026, 1:08 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion-web.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L329-369)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-/* URL inputs: texto monoespaciado y overflow controlado */
-.field-group input[type="url"] {
-    font-family: ui-monospace, 'Cascadia Code', monospace;
-    font-size: 0.84rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-/* ── Estándar de Controles HTML en CMS ── */
-.field-group {
-    margin-bottom: 1.35rem;
-}
-.field-group > label {
-    display: block;
-    font-weight: 700;
-    font-size: 0.86rem;
-    color: #1e293b;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-    margin-bottom: 0.45rem;
-}
-
-/* Inputs de texto de amplitud larga */
-.field-group input[type="text"],
-.field-group input[type="number"],
-.field-group select {
-    width: 100%;
-    box-sizing: border-box;
-    font-size: 0.95rem;
-    font-family: inherit;
-    padding: 0.75rem 1rem;
-    border: 1.5px solid #cbd5e1;
-    border-radius: 8px;
-    background: #ffffff;
-    color: #0f172a;
-    min-height: 46px;
-    transition: border-color 0.2s, box-shadow 0.2s;
-}
-.field-group input[type="text"]:focus,
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Analyzing CSS Properties**
-
-Okay, I'm digging into `gestion-web.css` now. Lines 332-338 define styles for URL input fields, using monospace font and a smaller size. I'm also checking out lines 355-359.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.002382352s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L99-159)</summary>
-
-**Path:** `Unknown file`
-
-```
-        exit;
-    }
-
-    $campos = $_POST;
-    unset($campos['csrf_token'], $campos['seccion']);
-
-    try {
-        $db->beginTransaction();
-
-        $stmt = $db->prepare(
-            "INSERT INTO web_contenidos (seccion, subseccion, clave, valor, tipo, actualizado_por)
-             VALUES (:sec, :sub, :clave, :valor, 'texto', :uid)
-             ON DUPLICATE KEY UPDATE valor = VALUES(valor), actualizado_por = VALUES(actualizado_por)"
-        );
-
-        // Configuraciones globales: campos _cfg_{clave} → tabla configuraciones (D-04)
-        // UPSERT: inserta si la clave no existe, actualiza si ya existe
-        $cfgStmt = $db->prepare(
-            "INSERT INTO configuraciones (clave, valor, descripcion) VALUES (:clave, :valor, NULL)
-             ON DUPLICATE KEY UPDATE valor = VALUES(valor)"
-        );
-
-        foreach ($campos as $fieldKey => $valor) {
-            // D-04: campos _cfg_{clave} van a configuraciones, no a web_contenidos
-            if (str_starts_with($fieldKey, '_cfg_')) {
-                $cfgClave = substr($fieldKey, 5); // quitar prefijo '_cfg_'
-                $cfgStmt->execute(['clave' => $cfgClave, 'valor' => $valor]);
-                continue;
-            }
-            // Formato estándar: {subseccion}__{clave}  ej: slide1__titulo
-            [$sub, $clave] = array_pad(explode('__', $fieldKey, 2), 2, $fieldKey);
-            $stmt->execute([
-                'sec'   => $seccion,
-                'sub'   => $sub,
-                'clave' => $clave,
-                'valor' => $valor,
-                'uid'   => $userId,
-            ]);
-        }
-
-        $db->commit();
-        unset($_SESSION['cms_draft'][$seccion]);
-        Logger::log('INFO', "CMS: sección '{$seccion}' publicada.", $userId);
-        // Devolver CSRF rotado para que el cliente actualice su data-csrf sin recargar
-        echo json_encode(['ok' => true, 'msg' => '¡Cambios publicados exitosamente!', 'csrf_token' => $_SESSION['csrf_token']]);
-
-    } catch (\PDOException $e) {
-        $db->rollBack();
-        DB::logFallback('ERROR', "INSERT web_contenidos seccion={$seccion}", $e->getMessage());
-        http_response_code(500);
-        echo json_encode(['ok' => false, 'msg' => 'Error al guardar. Intenta de nuevo.']);
-    }
-});
-
-// ── POST /cms/upload — Subida de imágenes CMS (GAP-IMG resuelto) ─────────────
-//
-// Contrato:
-//   - Content-Type: multipart/form-data  (input type="file" en el cliente)
-//   - POST body: file (el archivo), slot (nombre del slot, ej: hero-slide1), csrf_token
-//   - Respuesta JSON: {ok: bool, url: string, filename: string, msg: string}
-//
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L69-119)</summary>
-
-**Path:** `Unknown file`
-
-```
-        $line = trim($line);
-        if ($line === '') continue;
-        if (preg_match('/^\[(.+?)\]\s*(.+)/', $line, $m)) {
-            $items = array_values(array_filter(
-                array_map('trim', explode(',', $m[2]))
-            ));
-            if ($items) {
-                $groups[] = ['cat' => trim($m[1]), 'items' => $items];
-            }
-        }
-    }
-    return $groups;
-}
-
-// ── Conexión DB ─────────────────────────────────────────────────────────────
-$db = Flight::db();
-
-// ── 1. Cargar desde DB ──────────────────────────────────────────────────────
-$configRaw = $db->query("SELECT clave, valor FROM configuraciones")->fetchAll(\PDO::FETCH_KEY_PAIR) ?: [];
-$cms = [];
-foreach ($db->query("SELECT seccion, subseccion, clave, valor FROM web_contenidos ORDER BY id")->fetchAll(\PDO::FETCH_ASSOC) as $row) {
-    $cms[$row['seccion']][$row['subseccion']][$row['clave']] = $row['valor'];
-}
-
-// ── 2. Preview de borrador CMS (solo sesión admin activa) ──────────────────
-// IMPORTANTE: el merge debe ocurrir ANTES de definir $cfg y $c, porque las arrow
-// functions de PHP capturan variables por VALOR en el momento de su creación.
-// Delight Auth guarda el login bajo $_SESSION['auth_logged_in'] (NOT 'user_id').
-$isPreview = !empty($_GET['_preview'])
-    && !empty($_SESSION['auth_logged_in'])
-    && !empty($_SESSION['cms_draft']);
-if ($isPreview) {
-    foreach ($_SESSION['cms_draft'] as $draftSec => $campos) {
-        foreach ($campos as $rawKey => $val) {
-            // Manejar configuraciones globales (prefijos config__ y _cfg_)
-            if (str_starts_with($rawKey, 'config__')) {
-                $configRaw[substr($rawKey, 8)] = $val;
-                continue;
-            }
-            if (str_starts_with($rawKey, '_cfg_')) {
-                $configRaw[substr($rawKey, 5)] = $val;
-                continue;
-            }
-            // Manejar web_contenidos (formato {sub}__{clave})
-            [$sub, $clave] = array_pad(explode('__', $rawKey, 2), 2, $rawKey);
-            $cms[$draftSec][$sub][$clave] = $val;
-        }
-    }
-}
-
-// ── 3. Helpers y Variables Funcionales (Post-Merge) ─────────────────────────
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L119-139)</summary>
-
-**Path:** `Unknown file`
-
-```
-// ── 3. Helpers y Variables Funcionales (Post-Merge) ─────────────────────────
-$cfg = fn(string $k, string $d = '') => $configRaw[$k] ?? $d;
-$c   = fn(string $sec, string $sub, string $k, string $d = '') => $cms[$sec][$sub][$k] ?? $d;
-
-// Valores frecuentes — sin fallback: el cliente DEBE tener todo en configuraciones
-$cfgNombreLab = $cfg('nombre_laboratorio');
-$cfgNombreC   = $cfg('nombre_corto');
-$cfgAnios     = $cfg('anios_experiencia');
-$cfgTel       = $cfg('telefono');
-$cfgTelDigit  = waNum($cfgTel);
-$cfgWA        = waNum($cfg('whatsapp_numero'));
-$cfgEmail     = $cfg('email_contacto');
-$cfgDir       = $cfg('direccion');
-$cfgDirCalle  = $cfg('direccion_calle');
-$cfgCiudad    = $cfg('ciudad');
-$cfgEstado    = $cfg('estado');
-$cfgCP        = $cfg('cp');
-$cfgHorSem    = $cfg('horario_semana');
-$cfgHorDom    = $cfg('horario_domingo');
-$cfgHrsOpen   = $cfg('hrs_open');
-$cfgHrsClose  = $cfg('hrs_close');
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Observing Croquis Publishing**
-
-I'm now focused on the behavior triggered by the "Publicar" action within the CMS, specifically for Croquis images. I'm examining the `gestion_web.php` file, particularly the input field with `id="url-img-croquis"` and `name="croquis__imagen_url"`. My intention is to discover how this URL input is processed and utilized when the form is submitted.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.087812508s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-<!DOCTYPE html>
-<?php
-/**
- * admrc/views/gestion_web.php — Plates template (merge de gestion-web.html)
- *
- * Fuente HTML: website/uipv1/gestion-web.html  ← NUNCA BORRAR (R15.1)
- * Merge iterativo: cuando gestion-web.html reciba cambios del cliente,
- * propagar estructura/textos aquí y mantener lógica PHP.
- *
- * Variables disponibles (desde admrc/index.php):
- *   $nombreAdmin  string  — Nombre del administrador logueado
- *   $csrfToken    string  — Token CSRF para formularios POST (R14.12)
- *   $contenidos   array   — [seccion][subseccion][clave] => valor (desde web_contenidos)
- *   $lastPub      string  — Timestamp de última publicación
- *
- * Merge v2 — 2026-08-22:
- *   + Slides 2-5 del carrusel hero
- *   + Tagline navbar (hero/navbar)
- *   + Quiénes Somos: resp. sanitario + filosofía
- *   + Promociones: 6 días (lunes–sábado) + domingo alt
- *   + Calidad: título y subtítulo de sección
- *   + Ubicación: WhatsApp + embed de mapa
- *   + Panel 7: Pie de Página (footer)
- *   + Panel 8: SEO y Metadatos
- *
- * SSOT Refactor — 2026-08-22 (ver 07_seed_catalogs.sql):
- *   • D-04 RESUELTO: WhatsApp, teléfono, email, horarios, dirección, CP,
- *     responsable sanitario → configuraciones (singleton). Ya NO en web_contenidos.
- *   • Panel 6 (Ubicación) = editor master de todos los singletons institucionales.
- *   • Paneles 7 (Footer) y 8 (SEO): los datos de configuraciones son read-only en CMS.
- *   • Promociones: titulo/precio/ayuno/tiempo eliminados del CMS; se usa estudio_clave
- *     → JOIN estudios para obtener datos clínicos (SSOT desde tabla estudios).
- *   • especialidades/catalogo/lista y /titulo eliminados (redundantes con tabla estudios).
- *   • quienes-somos/resp: nombre y cédulas → configuraciones; bio permanece en web_contenidos.
- * GAP-RC-01 (deferred): labadmin.php → backend persistence + localStorage sync.
- * GAP-IMG (deferred): inputs type="file" sin name/POST — requieren ruta separada
- *   POST /cms/upload con enctype=multipart/form-data (fuera del alcance del CMS de texto).
- */
-
-// Helper: escape HTML seguro (alias de htmlspecialchars)
-function h(string $v): string {
-    return htmlspecialchars($v, ENT_QUOTES, 'UTF-8');
-}
-
-// Helper: recuperar valor de $contenidos con fallback
-function cms(array $c, string $sec, ?string $sub, string $clave, string $default = ''): string {
-    return htmlspecialchars($c[$sec][$sub ?? ''][$clave] ?? $default, ENT_QUOTES, 'UTF-8');
-}
-
-$lastPubLabel = $lastPub
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Analyzing CMS Helper**
-
-I've been examining the `cms()` helper function within `gestion_web.php`. I'm focusing on how it retrieves configuration values, specifically the logic around the section, subsection, key, and default value parameters. I'm noting the use of the null coalescing operator and the `htmlspecialchars` function.
-
-
-**Identifying the Root Cause**
-
-I've pinpointed the issue: an empty string in the database for `imagen_url` prevents the default value from being used. Both the `cms()` helper and the anonymous function `$c` in `index.php` exhibit this behavior. The empty string is not treated as null, causing the fallback to fail and the image to remain blank. I've formulated a fix, updating both functions to correctly handle empty strings.
-
-
-**Verifying Logic and Fixes**
-
-I'm verifying the fix for Request 3 regarding the croquis image. Testing the logic, if the `$croquisImgUrl` variable resolves to the default image, the HTML renders the default image as expected. This means the intended behavior for the fallback is working correctly. I'm now moving on to re-verifying Requests 1 and 2, ensuring that the changes I've made address all three requests comprehensively. I'm particularly checking the key name corrections in `gestion_web.php` and the retrieval logic to confirm no regressions.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 1.228964238s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 31 Aug 2026, 1:09 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L117-129)</summary>
-
-**Path:** `Unknown file`
-
-```
-}
-
-// ── 3. Helpers y Variables Funcionales (Post-Merge) ─────────────────────────
-$cfg = fn(string $k, string $d = '') => $configRaw[$k] ?? $d;
-$c   = fn(string $sec, string $sub, string $k, string $d = '') => $cms[$sec][$sub][$k] ?? $d;
-
-// Valores frecuentes — sin fallback: el cliente DEBE tener todo en configuraciones
-$cfgNombreLab = $cfg('nombre_laboratorio');
-$cfgNombreC   = $cfg('nombre_corto');
-$cfgAnios     = $cfg('anios_experiencia');
-$cfgTel       = $cfg('telefono');
-$cfgTelDigit  = waNum($cfgTel);
-$cfgWA        = waNum($cfg('whatsapp_numero'));
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 31 Aug 2026, 1:09 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L39-51)</summary>
-
-**Path:** `Unknown file`
-
-```
-// Helper: escape HTML seguro (alias de htmlspecialchars)
-function h(string $v): string {
-    return htmlspecialchars($v, ENT_QUOTES, 'UTF-8');
-}
-
-// Helper: recuperar valor de $contenidos con fallback
-function cms(array $c, string $sec, ?string $sub, string $clave, string $default = ''): string {
-    return htmlspecialchars($c[$sec][$sub ?? ''][$clave] ?? $default, ENT_QUOTES, 'UTF-8');
-}
-
-$lastPubLabel = $lastPub
-    ? 'Pub. ' . date('d/m H:i', strtotime($lastPub))
-    : 'Sin publicar';
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1279-1299)</summary>
-
-**Path:** `Unknown file`
-
-```
-                    <div class="field-group mt-3 pt-3 border-top">
-                        <label>Nombre del Responsable Sanitario</label>
-                        <input type="text" name="_cfg_responsable_nombre"
-                               value="<?= htmlspecialchars($config['responsable_nombre'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                    </div>
-                    <div class="field-row">
-                        <div class="field-group">
-                            <label>Cédula Profesional</label>
-                            <input type="text" name="_cfg_responsable_cedula"
-                                   value="<?= htmlspecialchars($config['responsable_cedula'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label>Cédula de Especialidad</label>
-                            <input type="text" name="_cfg_responsable_cedula_esp"
-                                   value="<?= htmlspecialchars($config['responsable_cedula_esp'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Dirección Física y Contacto Directo -->
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1469-1494)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-                            <input type="file" accept="image/webp"
-                                   id="file-croquis" class="d-none"
-                                   data-upload-slot="ubicacion-croquis"
-                                   data-preview-id="prev-croquis"
-                                   data-target-input="url-img-croquis">
-                        </div>
-                        <input type="url" id="url-img-croquis"
-                               name="croquis__imagen_url"
-                               value="<?= h($croquisImgUrl) ?>"
-                               placeholder="/laesh-web-assets-uipv1a/img/cms/ubicacion-croquis-....webp"
-                               class="cms-img-url-input" data-no-limit>
-                        <?php $croquisBasename = $croquisImgUrl ? basename($croquisImgUrl) : '01mapa-laesh.webp'; ?>
-                        <span id="lbl-img-croquis" class="cms-img-filename-label"><?= h($croquisBasename) ?></span>
-                    </div>
-                </div>
-            </div>
-            </div><!-- /grid-2col mapa+croquis -->
-        </div>
-
-        <!-- ================================================================
-             PANEL 7: PIE DE PÁGINA
-             Sección: footer | Fuente HTML: #footer
-             SSOT: contacto, horarios, dirección y responsable se leen desde configuraciones.
-               Solo son editables aquí: logo alt, nombre lab y textos legales.
-             ================================================================ -->
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 31 Aug 2026, 1:09 pm
 
 ---
@@ -25725,6 +24961,1672 @@ My analysis has shifted; I realized the tables were indeed created, specifically
 
 - **Thinking Duration:** 1.740770167s
 - **Model:** Gemini 3.1 Pro (High)
+</details>
+
+---
+
+## User Request
+
+. Segun yo todo eso ya esta , o no ? 
+.  Creo estabamos en la parte de depurar/eliminar la parte dura js de dato sy logica existia.
+. reorganizate y aclara en donde/como/estatus estamos parados.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `01_setup_catalogos.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `01_setup_catalogos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+// Script de Migración: De web_contenidos/website.js a Tablas Relacionales (MariaDB)
+require_once __DIR__ . '/../../commons/commons.php';
+
+$db = Flight::db();
+
+echo "Iniciando migración relacional...\n";
+
+// 1. Creación de Tablas
+$sql = "
+CREATE TABLE IF NOT EXISTS `catalogo_grupos` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `clave` VARCHAR(10) UNIQUE NOT NULL,
+  `titulo` VARCHAR(255) NOT NULL,
+  `orden` INT DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `catalogo_categorias` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `grupo_id` INT NOT NULL,
+  `nombre` VARCHAR(255) NOT NULL,
+  `orden` INT DEFAULT 0,
+  FOREIGN KEY (`grupo_id`) REFERENCES `catalogo_grupos`(`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `catalogo_estudios` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `categoria_id` INT NOT NULL,
+  `clave_interna` VARCHAR(20) NOT NULL,
+  `nombre` VARCHAR(255) NOT NULL,
+  `tiempo_procesamiento` VARCHAR(100) DEFAULT '',
+  `muestra_requerida` VARCHAR(255) DEFAULT '',
+  `preparacion` VARCHAR(255) DEFAULT '',
+  `detalle` TEXT,
+  `activo` TINYINT(1) DEFAULT 1,
+  FOREIGN KEY (`categoria_id`) REFERENCES `catalogo_categorias`(`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `catalogo_promociones` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `estudio_id` INT NOT NULL,
+  `dia_semana` VARCHAR(20) NOT NULL,
+  `nombre_oferta` VARCHAR(255) NOT NULL,
+  `precio_regular` DECIMAL(10,2) DEFAULT 0.00,
+  `precio_oferta` DECIMAL(10,2) DEFAULT 0.00,
+  `vigencia_inicio` DATE DEFAULT NULL,
+  `vigencia_fin` DATE DEFAULT NULL,
+  `creado_en` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `activo` TINYINT(1) DEFAULT 1,
+  FOREIGN KEY (`estudio_id`) REFERENCES `catalogo_estudios`(`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+";
+
+try {
+    $db->exec($sql);
+    echo "✔ Tablas creadas exitosamente.\n";
+} catch (PDOException $e) {
+    die("Error creando tablas: " . $e->getMessage() . "\n");
+}
+
+// Limpiar antes de insertar para ser idempotente en desarrollo
+$db->exec("SET FOREIGN_KEY_CHECKS = 0; TRUNCATE TABLE catalogo_promociones; TRUNCATE TABLE catalogo_estudios; TRUNCATE TABLE catalogo_categorias; TRUNCATE TABLE catalogo_grupos; SET FOREIGN_KEY_CHECKS = 1;");
+
+// 2. Extraer datos del diccionario JS (website.js)
+$jsContent = file_get_contents(__DIR__ . '/../../../laesh-web-assets-uipv1a/js/website.js');
+preg_match_all("/'([^']+)'\s*:\s*\[([^\]]+)\]/s", $jsContent, $matches);
+
+$dictJS = [];
+foreach ($matches[1] as $index => $key) {
+    $valString = $matches[2][$index];
+    // Extraer strings del array ['val1', 'val2', ...]
+    preg_match_all("/'([^']+)'/", $valString, $valMatches);
+    if (count($valMatches[1]) >= 4) {
+        $dictJS[mb_strtolower(trim($key))] = [
+            'clave' => $valMatches[1][0],
+            'tiempo' => $valMatches[1][1],
+            'muestra' => $valMatches[1][2],
+            'preparacion' => $valMatches[1][3]
+        ];
+    }
+}
+
+echo "✔ " . count($dictJS) . " estudios extraídos del diccionario JS.\n";
+
+// 3. Extraer estructura de web_contenidos
+$stmt = $db->query("SELECT subseccion, clave, valor FROM web_contenidos WHERE seccion = 'especialidades' AND subseccion LIKE 'cg%'");
+$contenidos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$grupos = [];
+foreach ($contenidos as $row) {
+    $cg = $row['subseccion'];
+    if (!isset($grupos[$cg])) {
+        $grupos[$cg] = ['titulo' => '', 'fichas' => ''];
+    }
+    $grupos[$cg][$row['clave']] = $row['valor'];
+}
+
+// 4. Poblar base de datos
+$orden_cg = 1;
+foreach ($grupos as $cgClave => $data) {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `01_setup_catalogos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L100-154)</summary>
+
+**Path:** `Unknown file`
+
+```
+    // Insertar Grupo
+    $stmt = $db->prepare("INSERT INTO catalogo_grupos (clave, titulo, orden) VALUES (?, ?, ?)");
+    $stmt->execute([$cgClave, $data['titulo'], $orden_cg]);
+    $grupoId = $db->lastInsertId();
+    $orden_cg++;
+
+    // Parsear Fichas
+    $fichasText = $data['fichas'];
+    $catParts = explode('[', $fichasText);
+    
+    $orden_cat = 1;
+    foreach ($catParts as $catPart) {
+        if (trim($catPart) === '') continue;
+        
+        $cParts = explode(']', $catPart);
+        if (count($cParts) !== 2) continue;
+        
+        $catName = trim($cParts[0]);
+        $estudiosStr = trim($cParts[1]);
+        
+        // Insertar Categoría
+        $stmt = $db->prepare("INSERT INTO catalogo_categorias (grupo_id, nombre, orden) VALUES (?, ?, ?)");
+        $stmt->execute([$grupoId, $catName, $orden_cat]);
+        $catId = $db->lastInsertId();
+        $orden_cat++;
+        
+        // Insertar Estudios
+        $estudiosArr = array_filter(array_map('trim', explode(',', $estudiosStr)));
+        foreach ($estudiosArr as $estNombre) {
+            $normalizedName = mb_strtolower($estNombre);
+            // Buscar en diccionario JS
+            $claveInt = '';
+            $tiempo = '';
+            $muestra = '';
+            $prep = '';
+            
+            if (isset($dictJS[$normalizedName])) {
+                $claveInt = $dictJS[$normalizedName]['clave'];
+                $tiempo = $dictJS[$normalizedName]['tiempo'];
+                $muestra = $dictJS[$normalizedName]['muestra'];
+                $prep = $dictJS[$normalizedName]['preparacion'];
+            } else {
+                // Generar clave generica
+                $claveInt = 'GEN-' . rand(1000, 9999);
+            }
+            
+            $stmt = $db->prepare("INSERT INTO catalogo_estudios (categoria_id, clave_interna, nombre, tiempo_procesamiento, muestra_requerida, preparacion) VALUES (?, ?, ?, ?, ?, ?)");
+            $stmt->execute([$catId, $claveInt, $estNombre, $tiempo, $muestra, $prep]);
+        }
+    }
+}
+
+echo "✔ Estructura insertada en la base de datos relacional.\n";
+echo "Migración completada.\n";
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 31 Aug 2026, 9:49 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. The directive to avoid `cat` for file manipulation is clear, and I'm actively integrating `grep_search` in place of `grep` whenever applicable. This shift demands a conscious change in my approach to ensure efficiency and precision.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.022193207s
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+## User Request
+
+Dale completo y correcto , con precision quirurgica.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `01_setup_catalogos.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `especialidades`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 31 Aug 2026, 9:51 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L154-199)</summary>
+
+**Path:** `Unknown file`
+
+```
+$c = fn(string $sec, string $sub, string $k, string $d = '') => $cms[$sec][$sub][$k] ?? $d;
+
+// ── 3. Catálogo de estudios — 4 abanicos desde web_contenidos ───────────────
+// Fuente SSOT: web_contenidos(especialidades, cgN, titulo/fichas)
+// Iconos SVG decorativos por grupo (inline — sin CDN)
+const GRUPO_SVGS = [
+    1 => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>',
+    2 => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>',
+    3 => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>',
+    4 => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>',
+];
+
+$cg = [];
+$grupos = $db->query("SELECT id, titulo FROM catalogo_grupos ORDER BY orden ASC LIMIT 4")->fetchAll(\PDO::FETCH_ASSOC);
+foreach ($grupos as $idx => $g) {
+    $gi = $idx + 1;
+    $cg[$gi] = [
+        'titulo' => $g['titulo'],
+        'fichas' => []
+    ];
+    $categorias = $db->prepare("SELECT id, nombre FROM catalogo_categorias WHERE grupo_id = ? ORDER BY orden ASC");
+    $categorias->execute([$g['id']]);
+    foreach ($categorias->fetchAll(\PDO::FETCH_ASSOC) as $cat) {
+        $estudiosStmt = $db->prepare("SELECT nombre FROM catalogo_estudios WHERE categoria_id = ? AND activo = 1 ORDER BY id ASC");
+        $estudiosStmt->execute([$cat['id']]);
+        $estudios = $estudiosStmt->fetchAll(\PDO::FETCH_COLUMN);
+        if (!empty($estudios)) {
+            $cg[$gi]['fichas'][] = [
+                'cat' => $cat['nombre'],
+                'items' => $estudios
+            ];
+        }
+    }
+}
+
+// ── 3b. Hero autoplay (seg) — desde web_contenidos.hero.config.transition_time
+// Alineado con gestion-web.php (POST hero_config__transition_time)
+$heroAutoplay = min(90, max(0, (int)$c('hero', 'config', 'transition_time', '5'))); // 0 = pausa indefinida
+
+// ── 3c. Quiénes somos — Ficha 4 (25 años / CKEditor 5) ───────────────────
+// Desde 2026-08-23: ficha4/texto almacena HTML enriquecido (CKEditor 5).
+// El heading del card va incluido en el HTML (primer bloque H3 del editor).
+// safeHtml() filtra antes de emitir.
+$qsConfianzaHtml = $c('quienes-somos', 'ficha4', 'texto');
+
+// ── 3d. Carrusel de especialidades y áreas — 16 tarjetas ───────────────────
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `especialidades.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L49-90)</summary>
+
+**Path:** `Unknown file`
+
+```
+                 aria-label="Navegación de especialidades" role="region"></div>
+
+            <!-- ── Catálogo de Estudios — 4 abanicos desde web_contenidos.especialidades ── -->
+            <div class="section-catalog">
+                <!-- Nota al pie del catálogo — desde web_contenidos (especialidades/catalogo/nota_pie) -->
+                <p class="section-catalog__note"><?= h($catalogNota) ?></p>
+
+                <?php foreach ($cg as $gi => $grupo): ?>
+                <?php if (empty($grupo['fichas'])) continue; ?>
+                <div class="orden-acc">
+                    <button type="button"
+                            class="orden-acc-hdr<?= $gi > 1 ? ' collapsed-btn' : '' ?>"
+                            data-acc="cg<?= $gi ?>">
+                        <span class="flex-ic-8">
+                            <?= GRUPO_SVGS[$gi] ?>
+                            <?= h($grupo['titulo']) ?>
+                        </span>
+                        <svg id="arr-cg<?= $gi ?>" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2"
+                             class="<?= $gi === 1 ? 'chevron-open' : 'chevron-arrow-svg' ?>">
+                            <polyline points="6 9 12 15 18 9"/>
+                        </svg>
+                    </button>
+                    <div id="cg<?= $gi ?>" class="orden-acc-body<?= $gi > 1 ? ' collapsed' : '' ?>">
+                        <?php foreach ($grupo['fichas'] as $subcat): ?>
+                        <div class="orden-cat">
+                            <div class="orden-cat-hdr"><?= h($subcat['cat']) ?></div>
+                            <div class="orden-cat-body">
+                                <?php foreach ($subcat['items'] as $estItem): ?>
+                                <div class="precio-cat-item">
+                                    <span class="precio-cat-nombre"><?= h($estItem) ?></span>
+                                </div>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            </div><!-- /section-catalog -->
+        </section>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `website.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L939-1079)</summary>
+
+**Path:** `Unknown file`
+
+```
+    }
+
+    /* ── §9 CAT-INFO: Botón "+" + tooltip de detalles por estudio ── */
+    (function initCatInfo() {
+        // Datos de cada estudio: [clave, tiempo_procesamiento, muestra_requerida, preparacion_paciente]
+        // Clave: código interno LAESH | las claves del objeto son el textContent.toLowerCase().trim() del span.precio-cat-nombre
+        var E = {
+            // ── Hematología ───────────────────────────────────────────────────
+            'citometría hemática':                                                                  ['HEM-01','4 Horas','Sangre total (Tubo Lila/EDTA)','Sin ayuno estricto (ideal 4 hrs)'],
+            'grupo y rh':                                                                           ['HEM-02','2 Horas','Sangre total (Tubo Rojo)','Sin ayuno'],
+            'plaquetas':                                                                            ['HEM-03','4 Horas','Sangre total (Tubo Lila/EDTA)','Sin ayuno'],
+            'velocidad de sedimentación globular':                                                  ['HEM-04','4 Horas','Sangre total (Tubo Lila/EDTA)','Sin ayuno'],
+            'reticulocitos':                                                                        ['HEM-05','6 Horas','Sangre total (Tubo Lila/EDTA)','Sin ayuno'],
+            'perfil de hierro (cinética de hierro)':                                               ['HEM-06','24 Horas','Suero (Tubo Rojo)','8–12 hrs de ayuno'],
+            'hierro sérico':                                                                        ['HEM-07','4 Horas','Suero (Tubo Rojo)','8 hrs de ayuno'],
+            'inducción drepanocitos':                                                               ['HEM-08','4 Horas','Sangre total (Tubo Lila/EDTA)','Sin ayuno'],
+            // ── Química Clínica ───────────────────────────────────────────────
+            'química sanguínea 3 (glu, urea, crea)':                                               ['QUI-01','4 Horas','Suero (Tubo Rojo)','8–12 hrs de ayuno'],
+            'química sanguínea 7 (qs3 + a.u, col, trig)':                                         ['QUI-02','4 Horas','Suero (Tubo Rojo)','8–12 hrs de ayuno'],
+            'perfil bioquímico 15 elementos':                                                       ['QUI-03','24 Horas','Suero (Tubo Rojo)','8–12 hrs de ayuno'],
+            'perfil bioquímico 24 elementos':                                                       ['QUI-04','24 Horas','Suero (Tubo Rojo)','8–12 hrs de ayuno'],
+            'perfil bioquímico 30 elementos':                                                       ['QUI-05','24 Horas','Suero (Tubo Rojo)','8–12 hrs de ayuno'],
+            'perfil bioquímico 35 elementos':                                                       ['QUI-06','24 Horas','Suero (Tubo Rojo)','8–12 hrs de ayuno'],
+            'perfil bioquímico 45 elementos':                                                       ['QUI-07','24 Horas','Suero (Tubo Rojo)','8–12 hrs de ayuno'],
+            'glucosa sérica':                                                                       ['QUI-08','2 Horas','Suero (Tubo Rojo)','8 hrs de ayuno'],
+            'creatinina sérica':                                                                    ['QUI-09','2 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            'colesterol total':                                                                     ['QUI-10','2 Horas','Suero (Tubo Rojo)','9–12 hrs de ayuno'],
+            'triglicéridos':                                                                        ['QUI-11','2 Horas','Suero (Tubo Rojo)','9–12 hrs de ayuno'],
+            // ── Electrolitos Séricos ──────────────────────────────────────────
+            'e.s. 3 elementos na+, k+, cl-':                                                       ['ELE-01','4 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            'e.s. 4 elementos na+, k+, cl-, ca++':                                                 ['ELE-02','4 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            'e.s. completos (6 elementos)':                                                         ['ELE-03','4 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            'calcio sérico ca++':                                                                   ['ELE-04','4 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            'fósforo sérico y magnesio sérico':                                                     ['ELE-05','4 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            'bicarbonato y co2':                                                                    ['ELE-06','4 Horas','Suero (Tubo Rojo o Heparinizado)','Sin ayuno'],
+            // ── Uroanálisis ───────────────────────────────────────────────────
+            'ego + radio prot/crea':                                                                ['URO-01','4 Horas','Orina de primer chorro (frasco limpio)','Sin ayuno; orina matutina preferida'],
+            'ego especializado + radio alb/crea':                                                   ['URO-02','4 Horas','Orina de primer chorro (frasco limpio)','Sin ayuno; orina matutina preferida'],
+            'antidoping 5 elementos':                                                               ['URO-03','4 Horas','Orina (frasco especial LAESH)','Sin ayuno; abstención de medicamentos indicados'],
+            'antidoping 12 elementos':                                                              ['URO-04','4 Horas','Orina (frasco especial LAESH)','Sin ayuno; abstención de medicamentos indicados'],
+            // ── Coagulación ───────────────────────────────────────────────────
+            'perfil de coagulación (tp/inr y ttp)':                                                ['COA-01','4 Horas','Plasma (Tubo Azul citrato)','Sin ayuno; no suspender anticoagulantes sin indicación médica'],
+            'tiempo de protrombina/inr (tp)':                                                      ['COA-02','2 Horas','Plasma (Tubo Azul citrato)','Sin ayuno'],
+            'tiempo de tromboplastina (ttp)':                                                      ['COA-03','2 Horas','Plasma (Tubo Azul citrato)','Sin ayuno'],
+            'tiempos corregidos (tp/inr y ttp)':                                                   ['COA-04','4 Horas','Plasma (Tubo Azul citrato)','Sin ayuno'],
+            'fibrinógeno':                                                                          ['COA-05','4 Horas','Plasma (Tubo Azul citrato)','Sin ayuno'],
+            'dímero d':                                                                             ['COA-06','4 Horas','Plasma (Tubo Azul citrato)','Sin ayuno'],
+            'tiempo de sangrado':                                                                   ['COA-07','1 Hora','Prueba in vivo (piel)','Sin ayuno; evitar aspirina 7 días antes'],
+            'tiempo de coagulación':                                                                ['COA-08','1 Hora','Sangre capilar (dedo)','Sin ayuno'],
+            // ── Lípidos ───────────────────────────────────────────────────────
+            'perfil de lípidos i (trig, col, hdl, ldl, índices)':                                  ['LIP-01','4 Horas','Suero (Tubo Rojo)','9–12 hrs de ayuno'],
+            'perfil de lípidos ii (lípidos i + pcr-us)':                                           ['LIP-02','4 Horas','Suero (Tubo Rojo)','9–12 hrs de ayuno'],
+            'perfil aterogénico (apoa, apob, trig, col)':                                          ['LIP-03','24 Horas','Suero (Tubo Rojo)','9–12 hrs de ayuno'],
+            // ── Función Hepática ──────────────────────────────────────────────
+            'pfh básico (tgo, tgp, alp, bt, bd, bi)':                                             ['HEP-01','4 Horas','Suero (Tubo Rojo)','8 hrs de ayuno (preferible)'],
+            'pfh completo (tgo, tgp, alp, bt, bd, bi, dhl, ggt, proteínas, tp/inr)':             ['HEP-02','8 Horas','Suero + Plasma (Tubo Rojo y Azul)','8 hrs de ayuno'],
+            'transaminasas séricas (tgo, tgp)':                                                    ['HEP-03','4 Horas','Suero (Tubo Rojo)','Sin ayuno estricto'],
+            'gamma glutamil transpeptidasa (ggt)':                                                  ['HEP-04','4 Horas','Suero (Tubo Rojo)','Sin ayuno estricto'],
+            'proteínas totales y rel. alb/glob':                                                   ['HEP-05','4 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            'albumina sérica':                                                                      ['HEP-06','4 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            // ── Función Tiroidea ──────────────────────────────────────────────
+            'perfil tiroideo i (tsh, t4 libre, t3 libre)':                                         ['TIR-01','24 Horas','Suero (Tubo Rojo)','Sin ayuno; tomar muestra antes del medicamento tiroideo'],
+            'perfil tiroideo ii (tsh, t4l, t3l, t4t, t3t, tu)':                                   ['TIR-02','24 Horas','Suero (Tubo Rojo)','Sin ayuno; tomar muestra antes del medicamento tiroideo'],
+            'perfil tiroideo iii (tsh, t4 total, t3 total)':                                       ['TIR-03','24 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            'perfil tiroideo iv (tsh, t4l, t3t)':                                                  ['TIR-04','24 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            'tsh (hormona estimulante de la tiroides)':                                             ['TIR-05','24 Horas','Suero (Tubo Rojo)','Sin ayuno; tomar muestra antes del medicamento tiroideo'],
+            'ac. anti tiroideos i (ac. anti tpo y anti tg)':                                       ['TIR-06','48 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            'ac. anti tiroideos ii (anti tpo, anti tg, anti trab)':                               ['TIR-07','48 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            'ac. anti receptor de tsh (anti trab)':                                                ['TIR-08','48 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            'tiroglobulina (tgb)':                                                                  ['TIR-09','24 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            // ── Función Pancreática ───────────────────────────────────────────
+            'amilasa sérica':                                                                       ['PAN-01','2 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            'lipasa sérica':                                                                        ['PAN-02','2 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            // ── Función Renal y Orina 24h ─────────────────────────────────────
+            'cistatina c':                                                                          ['REN-01','24 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            'depuración de creatinina':                                                             ['REN-02','24 Horas','Orina de 24 horas + Suero','Recolección completa de orina de 24 h; indicaciones al paciente'],
+            'proteínas totales en orina':                                                           ['REN-03','4 Horas','Orina de 24 horas','Recolección completa de orina de 24 h'],
+            'microalbuminuria':                                                                     ['REN-04','4 Horas','Orina de primer chorro o 24 h','Sin ayuno; orina matutina preferida'],
+            'calcio en orina':                                                                      ['REN-05','4 Horas','Orina de 24 horas','Recolección completa; sin lácteos el día anterior'],
+            // ── Función Cardiaca y Muscular ───────────────────────────────────
+            'triage cardiaco (troponina i y t, mioglobina, ck-mb)':                               ['CAR-01','1 Hora','Suero (Tubo Rojo)','Sin ayuno; urgencia'],
+            'perfil cardiaco completo (mioglobina, troponina, ck-mb, nt-pro bnp, dímero d)':      ['CAR-02','2 Horas','Suero + Plasma (Tubo Rojo y Azul)','Sin ayuno; urgencia'],
+            'troponina i':                                                                          ['CAR-03','1 Hora','Suero (Tubo Rojo)','Sin ayuno'],
+            'troponina t':                                                                          ['CAR-04','1 Hora','Suero (Tubo Rojo)','Sin ayuno'],
+            'nt-pro bnp (fracción n-terminal del bnp)':                                            ['CAR-05','4 Horas','Plasma (Tubo Lila/EDTA)','Sin ayuno'],
+            'pcr de alta sensibilidad (pcr-us)':                                                   ['CAR-06','4 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            'mioglobina':                                                                           ['CAR-07','1 Hora','Suero (Tubo Rojo)','Sin ayuno'],
+            'ck-mb (ck fracción mb)':                                                              ['CAR-08','2 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            'ck total (creatinfosfoquinasa)':                                                      ['CAR-09','2 Horas','Suero (Tubo Rojo)','Sin ayuno; evitar ejercicio intenso 48 h antes'],
+            // ── Gasometría ────────────────────────────────────────────────────
+            'gasometría arterial completa (ph, po2, pco2, hco3, co2, electrolitos, hb, glucosa, lactato…)':
+                                                                                                    ['GAS-01','1 Hora','Sangre arterial (jeringa heparinizada)','Sin ayuno; urgencia; procesamiento inmediato (<15 min)'],
+            'gasometría venosa completa':                                                           ['GAS-02','1 Hora','Sangre venosa (jeringa heparinizada)','Sin ayuno; procesamiento inmediato (<15 min)'],
+            // ── Hormonas ──────────────────────────────────────────────────────
+            'perfil ginecológico i (fsh, lh, prl, prog, test, e2)':                               ['HOR-01','24 Horas','Suero (Tubo Rojo)','Sin ayuno; tomar en días 2–5 del ciclo menstrual'],
+            'perfil ginecológico ii (gineco i + cortisol, estrog.)':                               ['HOR-02','24 Horas','Suero (Tubo Rojo)','Sin ayuno; tomar en días 2–5 del ciclo menstrual'],
+            'perfil hormonal masculino ii (fsh, lh, prl, test, e2)':                              ['HOR-03','24 Horas','Suero (Tubo Rojo)','Sin ayuno; muestra matutina (antes de las 10 am)'],
+            'fsh (hormona folículo estimulante)':                                                   ['HOR-04','24 Horas','Suero (Tubo Rojo)','Sin ayuno; consultar día del ciclo'],
+            'lh (hormona luteinizante)':                                                            ['HOR-05','24 Horas','Suero (Tubo Rojo)','Sin ayuno; consultar día del ciclo'],
+            'prl (prolactina)':                                                                     ['HOR-06','24 Horas','Suero (Tubo Rojo)','Sin ayuno; reposo 30 min previo a la toma'],
+            'prog (progesterona)':                                                                  ['HOR-07','24 Horas','Suero (Tubo Rojo)','Sin ayuno; consultar día del ciclo'],
+            'testosterona total':                                                                   ['HOR-08','24 Horas','Suero (Tubo Rojo)','Sin ayuno; muestra matutina (antes de las 10 am)'],
+            'testosterona libre':                                                                   ['HOR-09','24 Horas','Suero (Tubo Rojo)','Sin ayuno; muestra matutina (antes de las 10 am)'],
+            'dhea-s (dehidroepiandrosterona sulfato)':                                              ['HOR-10','24 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            'e2 (estradiol)':                                                                       ['HOR-11','24 Horas','Suero (Tubo Rojo)','Sin ayuno; consultar día del ciclo'],
+            'cortisol':                                                                             ['HOR-12','24 Horas','Suero (Tubo Rojo)','Sin ayuno; muestra matutina (8–9 am); sin estrés previo'],
+            'acth (hormona adrenocorticotrópica)':                                                  ['HOR-13','24 Horas','Plasma EDTA (Tubo Lila, en hielo)','Sin ayuno; muestra matutina (8–9 am); procesamiento rápido'],
+            'hgc cuantitativa':                                                                     ['HOR-14','4 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            'hormona anti mulleriana (amh)':                                                        ['HOR-15','24 Horas','Suero (Tubo Rojo)','Sin ayuno; cualquier día del ciclo'],
+            'pth-i (hormona paratiroidea intacta)':                                                 ['HOR-16','24 Horas','Plasma EDTA (Tubo Lila, en hielo)','Sin ayuno; muestra matutina; procesamiento rápido'],
+            // ── Diabetes ──────────────────────────────────────────────────────
+            'hemoglobina glucosilada (hb a1c)':                                                     ['DIA-01','4 Horas','Sangre total (Tubo Lila/EDTA)','Sin ayuno'],
+            'insulina':                                                                             ['DIA-02','4 Horas','Suero (Tubo Rojo)','8–12 hrs de ayuno'],
+            'índice de homa / resistencia a la insulina':                                      ['DIA-03','4 Horas','Suero (Tubo Rojo)','8–12 hrs de ayuno'],
+            'péptido c':                                                                       ['DIA-04','24 Horas','Suero (Tubo Rojo)','8 hrs de ayuno'],
+            'prueba de tolerancia a la glucosa (3m)':                                               ['DIA-05','3 Horas','Suero (Tubo Rojo) — múltiples extracciones','8–12 hrs ayuno; sin actividad física el día anterior'],
+            "test o'sullivan (diabetes gestacional)":                                           ['DIA-06','1 Hora','Suero (Tubo Rojo)','Sin ayuno estricto (carga de 50 g glucosa)'],
+            // ── Inmunología ───────────────────────────────────────────────────
+            'ac. anti hiv 1/hiv 2':                                                                ['INM-01','2 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            'v.d.r.l. (reacciones serológicas)':                                                    ['INM-02','2 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            'reacciones febriles':                                                                  ['INM-03','4 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            'hepatitis a igm':                                                                      ['INM-04','4 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            'hepatitis a igg':                                                                      ['INM-05','4 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            'hepatitis b (ag. de superficie)':                                                      ['INM-06','4 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            'hepatitis c (ac. totales)':                                                            ['INM-07','4 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            'prueba de embarazo (suero)':                                                           ['INM-08','1 Hora','Suero (Tubo Rojo)','Sin ayuno; muestra matutina preferida'],
+            'panel viral respiratorio 4 pat.':                                                      ['INM-09','4 Horas','Hisopo nasofaríngeo','Sin ayuno'],
+            'prueba de influenza a y b':                                                            ['INM-10','30 Minutos','Hisopo nasal','Sin ayuno'],
+            'prueba rápida/ag (covid-19)':                                                    ['INM-11','30 Minutos','Hisopo nasal / nasofaríngeo','Sin ayuno'],
+            'ac. sars-cov-2 (igg/igm)':                                                            ['INM-12','4 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            'ac. dengue (ns1, igg, igm)':                                                          ['INM-13','4 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            'coombs directo / indirecto':                                                           ['INM-14','4 Horas','Sangre total (Tubo Lila/EDTA)','Sin ayuno'],
+            'procalcitonina':                                                                       ['INM-15','4 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            'quantiferon tb':                                                                       ['INM-16','24 Horas','Sangre total (tubos especiales QFT)','Sin ayuno; tubos entregados por LAESH'],
+            // ── Reumatología ──────────────────────────────────────────────────
+            'perfil reumático (ccp, fr, pcr, vsg, ael, au)':                                  ['REU-01','8 Horas','Suero + Sangre (Tubo Rojo y Lila)','Sin ayuno'],
+            'proteína c reactiva':                                                             ['REU-02','2 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            'factor reumatoide cuantitativo':                                                       ['REU-03','4 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            'antiestreptolisinas':                                                                  ['REU-04','4 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            'ccp (ac. anti péptido cíclico citrulinado)':                                ['REU-05','24 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            'complementos c3 / c4':                                                                 ['REU-06','24 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `website.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1080-1232)</summary>
+
+**Path:** `Unknown file`
+
+```
+            'ac. anti nucleares por ifi':                                                           ['REU-07','48 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            'ac. anti nucleares por inmunoblot':                                                    ['REU-08','48 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            'ac. anti dna doble cadena':                                                            ['REU-09','48 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            'ac. anti ena smith / rnp':                                                             ['REU-10','48 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            'ac. anti ssa/ro y ssb/la':                                                             ['REU-11','48 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            'miositis (ac. vs ags. asociados a miositis)':                                         ['REU-12','72 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            'esclerosis (ac. vs ags. asociados a esclerosis)':                                     ['REU-13','72 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            'perfil de inmunoglobulinas (ig: g, m, a, e)':                                         ['REU-14','24 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            // ── Diversos ──────────────────────────────────────────────────────
+            'inmunoglobulina e (ige)':                                                              ['DIV-01','24 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            'vitamina d (25oh calciferol)':                                                         ['DIV-02','24 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            'somatomedina c (igf-1)':                                                               ['DIV-03','24 Horas','Suero (Tubo Rojo)','Sin ayuno; muestra matutina'],
+            'papanicolaou (cervicovaginal)':                                                        ['DIV-04','72 Horas','Raspado cervicovaginal (toma en LAESH)','Sin relaciones 48 h; sin cremas ni óvulos; fuera del período menstrual'],
+            // ── Bacteriología ─────────────────────────────────────────────────
+            'cultivo de orina con mic':                                                             ['BAC-01','72 Horas','Orina de segundo chorro (frasco estéril)','Aseo previo de genitales; chorro medio; no orinar 2 h antes'],
+            'cultivo de ex. faringeo con mic':                                                      ['BAC-02','72 Horas','Exudado faríngeo (hisopo estéril)','Sin antisépticos bucales 12 h antes'],
+            'cultivo de ex. vaginal con mic':                                                       ['BAC-03','72 Horas','Exudado vaginal (hisopo estéril)','Sin relaciones 48 h; sin óvulos/cremas 72 h; fuera del período'],
+            'cultivo uretral con mic':                                                              ['BAC-04','72 Horas','Exudado uretral (hisopo estéril)','Sin miccionar 2 h antes'],
+            'cultivo de heces con mic':                                                             ['BAC-05','72 Horas','Heces frescas (frasco estéril LAESH)','Muestra de 3 sitios del excremento; refrigerar si no se entrega de inmediato'],
+            'cultivo de lesión con mic':                                                      ['BAC-06','72 Horas','Exudado de lesión (hisopo estéril)','Toma directa en LAESH'],
+            'cultivo de expectoración con mic':                                               ['BAC-07','72 Horas','Esputo de primera expectoria (frasco estéril)','Enjuague bucal previo; expectorar fondo de vías respiratorias'],
+            'hemocultivo con mic':                                                                  ['BAC-08','5 Días','Sangre venosa (frascos de hemocultivo aerobio/anaerobio)','Sin ayuno; toma en LAESH por personal capacitado'],
+            'cultivo micológico':                                                              ['BAC-09','21 Días','Muestra según sitio (raspado, hisopo, biopsia)','Suspender antifúngicos tópicos y sistémicos 7 días antes'],
+            // ── Marcadores Tumorales ──────────────────────────────────────────
+            'psa total (antígeno prostático específico)':                           ['TUM-01','24 Horas','Suero (Tubo Rojo)','Sin eyaculación 48 h; sin masaje prostático 7 días; sin ejercicio intenso'],
+            'psa libre (antígeno prostático libre)':                                     ['TUM-02','24 Horas','Suero (Tubo Rojo)','Sin eyaculación 48 h; sin masaje prostático 7 días'],
+            'cea (antígeno carcinoembrionario)':                                               ['TUM-03','24 Horas','Suero (Tubo Rojo)','Sin ayuno; no fumar 4 h antes'],
+            'afp (alfafetoproteína)':                                                          ['TUM-04','24 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            'ca-125 (antígeno ca-125 ovario)':                                                ['TUM-05','24 Horas','Suero (Tubo Rojo)','Sin ayuno; fuera del período menstrual'],
+            'ca-15-3 (antígeno ca-15-3 mama)':                                               ['TUM-06','24 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            'ca-19-9 (antígeno ca-19-9 páncreas)':                                      ['TUM-07','24 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            'perfil tumoral femenino (cea, afp, ca125, ca 15-3)':                                  ['TUM-08','24 Horas','Suero (Tubo Rojo)','Sin ayuno; fuera del período menstrual'],
+            'perfil tumoral masculino (cea, afp, psa, hgc)':                                      ['TUM-09','24 Horas','Suero (Tubo Rojo)','Sin ayuno; sin eyaculación 48 h'],
+            'tumoral completo (cea, afp, hgc, ca-125, 15-3, 19-9)':                               ['TUM-10','24 Horas','Suero (Tubo Rojo)','Sin ayuno'],
+            // ── Parasitología ─────────────────────────────────────────────────
+            'coproparasitoscópico 3 muestras':                                                      ['PAR-01','24 Horas','Heces (3 muestras en frasco LAESH)','Muestras en días alternos; sin bario, bismuto ni antiparasitarios 3 días antes'],
+            'coprológico completo':                                                                 ['PAR-02','24 Horas','Heces frescas (frasco limpio)','Muestra fresca no mayor 2 h; sin aceite de ricino ni bario previo'],
+            'coprológico especial':                                                                 ['PAR-03','24 Horas','Heces frescas (frasco especial LAESH)','Indicaciones específicas según sospecha diagnóstica'],
+            'sangre oculta en heces (1 muestra)':                                                  ['PAR-04','4 Horas','Heces (frasco limpio)','Sin carne roja 3 días; sin AINEs/aspirina; sin vitamina C en exceso'],
+            'antígeno de h. pylori en heces':                                                 ['PAR-05','4 Horas','Heces (frasco limpio)','Sin IBP (omeprazol) 2 semanas; sin antibióticos 4 semanas; sin bismuto 4 semanas'],
+            'calprotectina en heces':                                                               ['PAR-06','24 Horas','Heces (frasco especial LAESH)','Muestra fresca; refrigerar; sin IBP si es posible'],
+            'lactoferrina en heces':                                                                ['PAR-07','24 Horas','Heces (frasco especial LAESH)','Muestra fresca; refrigerar'],
+            'clostridium difficile (gdh, tox a/b)':                                                ['PAR-08','4 Horas','Heces líquidas/blandas (frasco estéril)','Muestra de heces diarreicas; informar antibiótico si se está tomando'],
+            // ── Citroquímicos ─────────────────────────────────────────────────
+            'citoquímico de líquido lcr':                                                           ['CIT-01','2 Horas','Líquido cefalorraquídeo (punción lumbar hospitalaria)','Toma en hospital; procesamiento inmediato (<1 h)'],
+            'citoquímico de líquido sinovial':                                                      ['CIT-02','2 Horas','Líquido sinovial (jeringa estéril)','Toma por médico; refrigerar; procesamiento <2 h'],
+            'citoquímico de líquido pleural':                                                       ['CIT-03','2 Horas','Líquido pleural (frasco estéril)','Toma por médico; refrigerar; procesamiento <4 h'],
+            'citoquímico de líquido ascitis':                                                       ['CIT-04','2 Horas','Líquido ascítico (frasco estéril)','Toma por médico; refrigerar; procesamiento <4 h'],
+            'citoquímico de líquido diálisis':                                                      ['CIT-05','2 Horas','Líquido de diálisis (frasco estéril)','Toma por médico; procesamiento inmediato'],
+            'citoquímico de líquido bronquial':                                                     ['CIT-06','2 Horas','Líquido bronquial (frasco estéril)','Toma por médico; procesamiento <2 h'],
+            'citoquímico de líquido pericárdico':                                                   ['CIT-07','2 Horas','Líquido pericárdico (frasco estéril)','Toma por médico; procesamiento inmediato'],
+            // ── Biología Molecular ────────────────────────────────────────────
+            'pcr papiloma humano (vph)':                                                            ['PCR-01','48 Horas','Muestra cervicovaginal o uretral (medio especial)','Sin relaciones 48 h; toma en LAESH'],
+            'pcr-mycobacterium':                                                                    ['PCR-02','5 Días','Esputo o muestra según sitio (frasco estéril)','Consultar indicaciones según muestra'],
+            'pcr-patógenos respiratorios':                                                    ['PCR-03','24 Horas','Hisopo nasofaríngeo (medio de transporte viral)','Sin antibióticos recientes (informar al médico)'],
+            'pcr-meningitis viral':                                                                 ['PCR-04','24 Horas','Líquido cefalorraquídeo (LCR)','Toma hospitalaria; procesamiento inmediato'],
+            'pcr sars cov-2':                                                                       ['PCR-05','24 Horas','Hisopo nasofaríngeo (medio de transporte viral)','Sin descongestionantes nasales 2 h antes'],
+            // ── Fertilidad ────────────────────────────────────────────────────
+            'espermatobioscopia directa (muestra recolectada en lab.)':                            ['FER-01','2 Horas','Semen (frasco estéril LAESH)','Abstinencia sexual 3–5 días; recolección en LAESH; sin lubricantes']
+        };
+
+        // ── Tooltip singleton ─────────────────────────────────────────────────
+        var tip = document.createElement('div');
+        tip.className = 'precio-info-tooltip';
+        tip.setAttribute('role', 'tooltip');
+        tip.innerHTML =
+            '<div class="pit-hdr">' +
+                '<span class="pit-nombre"></span>' +
+                '<button type="button" class="pit-close" aria-label="Cerrar">×</button>' +
+            '</div>' +
+            '<div class="pit-body">' +
+                '<div class="pit-row"><span class="pit-lbl">Clave</span><span class="pit-val pit-clave"></span></div>' +
+                '<div class="pit-row"><span class="pit-lbl">Categoría</span><span class="pit-val pit-cat"></span></div>' +
+                '<div class="pit-row"><span class="pit-lbl">Tiempo</span><span class="pit-val pit-tiempo"></span></div>' +
+                '<div class="pit-row"><span class="pit-lbl">Muestra</span><span class="pit-val pit-muestra"></span></div>' +
+                '<div class="pit-row pit-row-prep"><span class="pit-lbl">Preparación</span><span class="pit-val pit-prep"></span></div>' +
+            '</div>';
+        document.body.appendChild(tip);
+
+        tip.querySelector('.pit-close').addEventListener('click', hideTip);
+        document.addEventListener('click', function(e) {
+            if (!tip.contains(e.target) && !e.target.classList.contains('precio-info-btn')) {
+                hideTip();
+            }
+        });
+        tip.addEventListener('mouseleave', function() { hideTip(); });
+
+        function hideTip() {
+            tip.classList.remove('pit-visible');
+        }
+
+        function posTip(btn) {
+            var r   = btn.getBoundingClientRect();
+            var tw  = tip.offsetWidth  || 300;
+            var th  = tip.offsetHeight || 200;
+            var vw  = window.innerWidth;
+            var vh  = window.innerHeight;
+            var top = (r.bottom + th + 8 < vh) ? r.bottom + 8 : Math.max(8, r.top - th - 8);
+            var lft = Math.min(Math.max(r.left, 12), vw - tw - 12);
+            tip.style.top  = top + 'px';
+            tip.style.left = lft + 'px';
+        }
+
+        function showTip(btn, nombre, categoria, d) {
+            tip.querySelector('.pit-nombre').textContent  = nombre;
+            tip.querySelector('.pit-cat').textContent     = categoria;
+            tip.querySelector('.pit-clave').textContent   = d ? d[0] : '—';
+            tip.querySelector('.pit-tiempo').textContent  = d ? d[1] : 'Consultar en LAESH';
+            tip.querySelector('.pit-muestra').textContent = d ? d[2] : 'Consultar en LAESH';
+            tip.querySelector('.pit-prep').textContent    = d ? d[3] : 'Consultar en LAESH';
+            tip.classList.add('pit-visible');
+            // rAF garantiza que el navegador refluyó el nuevo contenido antes de leer offsetHeight
+            requestAnimationFrame(function() { posTip(btn); });
+        }
+
+        // ── Inyectar botones "+" en cada renglón de catálogo ─────────────────
+        document.querySelectorAll('.precio-cat-item').forEach(function(item) {
+            var nombreEl = item.querySelector('.precio-cat-nombre');
+            if (!nombreEl) return;
+            var nombre   = nombreEl.textContent.trim();
+            var key      = nombre.toLowerCase();
+            var d        = E[key];
+
+            // Categoría: encabezado .orden-cat-hdr más cercano
+            var catEl    = item.closest('.orden-cat');
+            var categoria = catEl ? catEl.querySelector('.orden-cat-hdr').textContent.trim() : '—';
+
+            var btn = document.createElement('button');
+            btn.type      = 'button';
+            btn.className = 'precio-info-btn';
+            btn.setAttribute('aria-label', 'Detalles: ' + nombre);
+            btn.innerHTML =
+                '<svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">' +
+                    '<line x1="5" y1="1" x2="5" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>' +
+                    '<line x1="1" y1="5" x2="9" y2="5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>' +
+                '</svg>';
+            item.appendChild(btn);
+
+            // Desktop: hover
+            btn.addEventListener('mouseenter', function() { showTip(btn, nombre, categoria, d); });
+            btn.addEventListener('mouseleave', function() {
+                setTimeout(function() { if (!tip.matches(':hover')) hideTip(); }, 130);
+            });
+            // Mobile / click
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                tip.classList.contains('pit-visible') ? hideTip() : showTip(btn, nombre, categoria, d);
+            });
+        });
+    })();
+});
+
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 31 Aug 2026, 9:51 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 31 Aug 2026, 9:51 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool specificity. I've been refining my approach to avoid unnecessary detours. Specifically, I'm now making sure that I NEVER run `cat` inside a bash command to create a new file or append to an existing file. I will ALWAYS use `grep_search` instead of running `grep` inside bash.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.187459752s
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 31 Aug 2026, 9:52 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `Hematología`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 31 Aug 2026, 9:52 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L79-134)</summary>
+
+**Path:** `Unknown file`
+
+```
+                if (document.getElementById('input-hero-btn-text')) document.getElementById('input-hero-btn-text').value = d.btnText || '';
+                if (document.getElementById('input-hero-btn-link')) document.getElementById('input-hero-btn-link').value = d.btnLink || '';
+                const prev = document.getElementById('prev-hero-selected');
+                if (prev) prev.src = d.img || '/laesh-web-assets-uipv1a/img/recepcion.webp';
+                setTimeout(refreshAllCharCounters, 10);
+            }
+        }
+
+        // Datos de imágenes de Rutina y Especialidades (16 imágenes)
+        const rutinaDatos = {
+            1: { titulo: "Hematología Especializada", desc: "Análisis morfológico de frotis sanguíneo y pruebas hematológicas de alta complejidad.", img: "/laesh-web-assets-uipv1a/img/area-hematologia-dos.webp" },
+            2: { titulo: "Química Clínica Avanzada", desc: "Determinación automatizada de electrolitos, proteínas y enzimas específicas.", img: "/laesh-web-assets-uipv1a/img/area-quimica-clinica-dos.webp" },
+            3: { titulo: "Microbiología y Cultivos", desc: "Identificación microscópica y pruebas de susceptibilidad a antimicrobianos.", img: "/laesh-web-assets-uipv1a/img/area-bacteriologia-dos.webp" },
+            4: { titulo: "Uroanálisis y Sedimentos", desc: "Examen de orina, química y microscopía para detección precoz de patologías renales.", img: "/laesh-web-assets-uipv1a/img/area-uroanalisis.webp" },
+            5: { titulo: "Hemostasia y Coagulación", desc: "Estudios de tiempos de protrombina (TP) y tromboplastina parcial activada (TTPa).", img: "/laesh-web-assets-uipv1a/img/area-coagulacion.webp" },
+            6: { titulo: "Pruebas Especiales", desc: "Hormonas, anticuerpos específicos, pruebas inmunológicas y marcadores tumorales.", img: "/laesh-web-assets-uipv1a/img/area-estudios-especiales.webp" },
+            7: { titulo: "Pre-analítica", desc: "Separación de suero y plasma con control estricto de tiempos y temperaturas.", img: "/laesh-web-assets-uipv1a/img/area-centrifugacion.webp" },
+            8: { titulo: "Toma de Muestras I", desc: "Áreas higiénicas equipadas para la extracción sanguínea convencional.", img: "/laesh-web-assets-uipv1a/img/area-toma-de-muestras.webp" },
+            9: { titulo: "Toma de Muestras II", desc: "Módulos individuales y confortables que aseguran una atención rápida.", img: "/laesh-web-assets-uipv1a/img/toma-de-muestras.webp" },
+            10: { titulo: "Toma Pediátrica", desc: "Espacio amigable y personal capacitado para el cuidado y tranquilidad de los niños.", img: "/laesh-web-assets-uipv1a/img/toma-pediatricas.webp" },
+            11: { titulo: "Toma de Cultivos", desc: "Zonas aisladas y estériles para la toma de exudados y cultivos microbiológicos.", img: "/laesh-web-assets-uipv1a/img/toma-de-cultivos.webp" },
+            12: { titulo: "Recepción Técnica", desc: "Recepción técnica de muestras e indicaciones pre-analíticas detalladas.", img: "/laesh-web-assets-uipv1a/img/recepcion-lab.webp" },
+            13: { titulo: "", desc: "", img: "" },
+            14: { titulo: "", desc: "", img: "" },
+            15: { titulo: "", desc: "", img: "" },
+            16: { titulo: "", desc: "", img: "" }
+        };
+
+        function cargarRutinaSeleccionada(val) {
+            const d = rutinaDatos[val];
+            if (d) {
+                document.getElementById('rutina-titulo-val').value = d.titulo || '';
+                document.getElementById('rutina-desc-val').value = d.desc || '';
+                const prev = document.getElementById('prev-esp-selected');
+                if (prev) {
+                    prev.src = d.img || 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="90" height="60" viewBox="0 0 90 60"><rect width="100%" height="100%" fill="%23f1f5f9"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%2394a3b8" font-size="10" font-family="sans-serif">Sin Imagen</text></svg>';
+                }
+                setTimeout(refreshAllCharCounters, 10);
+            }
+        }
+
+        // Datos de las 3 Fichas Estáticas de Calidad
+        const calidadDatos = {
+            1: { titulo: "Área de Hematología", desc: "Análisis de biometría hemática y células sanguíneas con rigor científico y alta precisión.", img: "/laesh-web-assets-uipv1a/img/area-hematologia-uno.webp" },
+            2: { titulo: "Química Clínica", desc: "Determinación automatizada de metabolitos, perfil lipídico y enzimas específicas.", img: "/laesh-web-assets-uipv1a/img/area-quimica-clinica.webp" },
+            3: { titulo: "Microbiología y Cultivos", desc: "Aislamiento, tinción de Gram y pruebas de susceptibilidad a antimicrobianos.", img: "/laesh-web-assets-uipv1a/img/area-bacteriologia.webp" }
+        };
+
+        function cargarCalidadSeleccionada(val) {
+            const d = calidadDatos[val];
+            if (d) {
+                document.getElementById('calidad-titulo-val').value = d.titulo;
+                document.getElementById('calidad-desc-val').value = d.desc;
+                document.getElementById('prev-calidad-selected').src = d.img;
+                setTimeout(refreshAllCharCounters, 10);
+            }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+## User Request
+
+para medicos, como quedo la busqueda con resultados automcomplete ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `especialidades.php`
+**Language:** php
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/**
+ * sections/especialidades.php — Partial: Estudios / Catálogo
+ * Incluido desde website/index.php; hereda su scope completo.
+ * Variables esperadas: $catalogH2, $catalogSub, $carouselCards, $catalogNota, $cg, GRUPO_SVGS
+ */
+?>
+        <!-- ═══════════════════════════════════════════════ ESTUDIOS ══ -->
+        <section id="especialidades" class="sec-pad-1-5 scroll-sm-top">
+            <div class="section-header animate-on-scroll">
+                <!-- h2 y subtitulo desde web_contenidos (especialidades/seccion) -->
+                <h2><?= h($catalogH2) ?></h2>
+                <p><?= h($catalogSub) ?></p>
+            </div>
+
+            <!-- Carrusel de áreas fotográficas — imágenes fijas del laboratorio (R15.1) -->
+            <div class="map-bar">
+                <button type="button" class="carousel-arrow-btn carousel-arrow-btn--left"
+                        id="btn-carousel-prev" aria-label="Anterior">
+                    <img src="/laesh-web-assets-uipv1a/icons/chevron-left.svg" alt="" class="icon-24" loading="lazy" decoding="async">
+                </button>
+                <div class="specialties-carousel-viewport">
+                    <div id="specialties-track" class="specialties-carousel-track">
+                        <?php $ccIdx = 0; foreach ($carouselCards as $cc): $ccIdx++; ?>
+                        <div class="carousel-card">
+                            <img src="<?= h($cc['img']) ?>" alt="Área de Laboratorio LAESH"
+                                 width="800" height="580"
+                                 loading="<?= $ccIdx <= 2 ? 'eager' : 'lazy' ?>"
+                                 decoding="<?= $ccIdx <= 2 ? 'sync' : 'async' ?>">
+                            <div class="carousel-card__body ck5-output">
+                                <?= safeHtml($cc['texto']) ?>
+                            </div>
+                        </div>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L819-879)</summary>
+
+**Path:** `Unknown file`
+
+```
+        var initialCounts = new Map();
+
+        /* Catálogo completo de estudios (18 categorías) */
+        var catalogCategories = [
+            { cat: 'Hematología', items: ["Biometría Hemática Completa", "Grupo Sanguíneo y factor Rh", "Perfil de Hierro Completo"] },
+            { cat: 'Coagulación', items: ["Perfil de Coagulación (TP/INR y TTP)", "Fibrinógeno", "Dímero D"] },
+            { cat: 'Uroanálisis', items: ["EGO — Radio prU/CrU", "EGO Cribado Renal — Radio Alb/Crea"] },
+            { cat: 'Inmunología', items: ["Ac. Anti VIH", "V.D.R.L.", "Prueba de Embarazo", "Hepatitis A", "Hepatitis B", "Hepatitis C"] },
+            { cat: 'Hormonas', items: ["Perfil Ginecológico 1", "Perfil Ginecológico 2", "Perfil Hormonal Masculino", "Testosterona Libre", "Cortisol", "DHEA-S", "HGC Cuantitativa", "AMH (Hormona Anti Mülleriana)"] },
+            { cat: 'Diabetes / Met.', items: ["Hemoglobina Glicada (A1c) HPLC", "Resistencia a la Insulina (HOMA-IR)"] },
+            { cat: 'F. Hepática', items: ["Química Sanguínea 7E", "Química Sanguínea Parcial 3E", "Perfil Bioquímico 15 Elementos"] },
+            { cat: 'Electrolitos', items: ["Electrolitos Séricos Na+, K+, Cl-, Ca++, P, Mg"] },
+            { cat: 'F. Cardiaca', items: ["Perfil Cardiaco Completo", "Troponinas (I y T)", "NT-pro BNP"] },
+            { cat: 'Parasitología', items: ["Coprológico", "Coprológico Especial", "Sangre Oculta en Heces", "Calprotectina en Heces", "Lactoferrina en Heces", "Antígeno de H. Pylori en Heces"] },
+            { cat: 'F. Tiroidea', items: ["Perfil Tiroideo 1 (TSH, T4 y T3)", "Perfil Tiroideo Completo", "TSH", "T4 Libre", "Ac. Anti Tiroideos 1", "Ac. Anti Receptor de TSH (TRAb)", "Tiroglobulina"] },
+            { cat: 'Lípidos', items: ["Perfil de Lípidos I"] },
+            { cat: 'Marc. Tumorales', items: ["PSA Total", "CEA", "AFP", "CA-125", "CA-15-3", "CA-19-9"] },
+            { cat: 'Infectología', items: ["Procalcitonina", "Dengue (NS1, IgG, IgM)", "Panel Viral Respiratorio"] },
+            { cat: 'PFH', items: ["PFH Básico", "PFH Completo"] },
+            { cat: 'Gasometrías', items: ["Gasometría Arterial", "Gasometría Venosa"] },
+            { cat: 'Reumatología', items: ["Perfil Reumático", "CCP (Anti Péptido Cíclico Citrulinado)", "Ac. Anti Nucleares por IFI", "Proteína C Reactiva", "Factor Reumatoide"] },
+            { cat: 'Bacteriología', items: ["Cultivo de Orina con MIC", "Cultivo de Exudado Faríngeo", "Cultivo de Exudado Vaginal con MIC", "Hemocultivo"] }
+        ];
+
+        /* PERF-01: Extraer elementos del DOM en carga */
+        if (grid) {
+            grid.querySelectorAll('.ficha-dropdown').forEach(function(drop) {
+                var body = drop.querySelector('.ficha-dropdown__body');
+                if (body) {
+                    var cbs = body.querySelectorAll('input[type="checkbox"]');
+                    initialCounts.set(drop.id, cbs.length);
+                    lazyBodies.set(drop.id, body.innerHTML);
+                    body.innerHTML = '';
+                }
+            });
+        }
+
+        function closeDrop() {
+            if (!openDrop) return;
+            var btn = openDrop.previousElementSibling;
+            openDrop.classList.remove('open');
+            openDrop.style.top  = '';
+            openDrop.style.left = '';
+            if (btn) {
+                btn.setAttribute('aria-expanded', 'false');
+                btn.focus();
+            }
+            openDrop = null;
+        }
+
+        function _positionDrop(dropEl, btnEl) {
+            var btnRect = btnEl.getBoundingClientRect();
+            var vpW     = window.innerWidth;
+            var vpH     = window.innerHeight;
+            var maxW    = Math.min(450, vpW - 20);
+            var top  = btnRect.bottom + 5;
+            var left = btnRect.left;
+            if (left + maxW > vpW - 8) left = Math.max(4, vpW - maxW - 8);
+            var dropH = dropEl.offsetHeight;
+            if (top + dropH > vpH - 8 && btnRect.top >= dropH + 8) {
+                top = btnRect.top - dropH - 5;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `catalogCategories`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 31 Aug 2026, 9:53 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `autocomplete`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 31 Aug 2026, 9:53 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1013-1059)</summary>
+
+**Path:** `Unknown file`
+
+```
+        /* ── Autocomplete Search para las 18 Categorías ── */
+        var inputSearchFicha = document.getElementById('input-buscar-estudio-ficha');
+        var dropdownFichasRes = document.getElementById('autocomplete-results-fichas');
+
+        if (inputSearchFicha && dropdownFichasRes) {
+            let searchTimeout;
+            inputSearchFicha.addEventListener('input', function() {
+                var q = this.value.toLowerCase().trim();
+                if (q.length < 2) {
+                    dropdownFichasRes.classList.add('d-none');
+                    dropdownFichasRes.innerHTML = '';
+                    return;
+                }
+                
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(function() {
+                    fetch('/laesh/md/estudios/buscar?q=' + encodeURIComponent(q))
+                    .then(r => r.json())
+                    .then(data => {
+                        if (data.ok && data.resultados && data.resultados.length > 0) {
+                            dropdownFichasRes.innerHTML = data.resultados.map(function(m) {
+                                return '<div class="autocomplete-fichas-item" data-action="select-autocomplete-study" data-val="' + m.nombre.replace(/"/g, '&quot;') + '">' +
+                                    '<span>' + m.nombre + '</span>' +
+                                    '<span class="cat-tag">' + (m.categoria || '') + '</span>' +
+                                '</div>';
+                            }).join('');
+                            dropdownFichasRes.classList.remove('d-none');
+                        } else {
+                            dropdownFichasRes.innerHTML = '<div class="autocomplete-no-results">Sin resultados</div>';
+                            dropdownFichasRes.classList.remove('d-none');
+                        }
+                    })
+                    .catch(e => {
+                        console.error('Error al buscar estudios', e);
+                        dropdownFichasRes.innerHTML = '<div class="autocomplete-no-results">Error de conexión</div>';
+                        dropdownFichasRes.classList.remove('d-none');
+                    });
+                }, 300);
+            });
+
+            dropdownFichasRes.addEventListener('click', function(e) {
+                var itemEl = e.target.closest('[data-action="select-autocomplete-study"]');
+                if (!itemEl) return;
+                var val = itemEl.getAttribute('data-val');
+                if (!val) return;
+
+                var foundCb = Array.from(form.querySelectorAll('input[name="estudio_item"]')).find(function(cb) {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+## User Request
+
+bajo el contexto actual, Como estan los datos que se muestra abajo de la label: Selección rápida por categoría — clic para elegir estudios (18 fichas, con detalle) ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `especialidades.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `Selección rápida por categoría`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 31 Aug 2026, 9:59 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L264-319)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+                                <div class="estudios-split-container">
+                                    <!-- Columna Izquierda: Fichas de selección rápida -->
+                                    <div class="estudios-col-left">
+                                        <div class="fichas-estudios-wrap">
+                                            <span class="fichas-estudios-label">Selección rápida por categoría — clic para elegir estudios</span>
+                                    <div class="fichas-estudios-grid" id="fichas-estudios-grid">
+
+                                        <!-- 1 · Hematología -->
+                                        <div class="ficha-wrap">
+                                            <button type="button" class="ficha-cat" data-ficha="hematologia" aria-expanded="false" aria-controls="fdrop-hematologia">
+                                                <span class="ficha-cat__name">Hematología</span>
+                                                <span class="ficha-cat__sel" id="fsel-hematologia">0 de 3</span>
+                                            </button>
+                                            <div class="ficha-dropdown" id="fdrop-hematologia" role="dialog" aria-modal="true" aria-label="Estudios de Hematología">
+                                                <div class="ficha-dropdown__hdr"><span>Hematología</span><button type="button" class="ficha-drop-close" aria-label="Cerrar">×</button></div>
+                                                <div class="ficha-dropdown__body">
+                                                    <label class="ficha-drop-item"><input type="checkbox" name="estudio_item" value="Biometría Hemática Completa" data-fp="hematologia"><span>Biometría Hemática Completa</span></label>
+                                                    <label class="ficha-drop-item"><input type="checkbox" name="estudio_item" value="Grupo Sanguíneo y factor Rh" data-fp="hematologia"><span>Grupo Sanguíneo y factor Rh</span></label>
+                                                    <label class="ficha-drop-item"><input type="checkbox" name="estudio_item" value="Perfil de Hierro Completo" data-fp="hematologia"><span>Perfil de Hierro Completo</span></label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- 2 · Coagulación -->
+                                        <div class="ficha-wrap">
+                                            <button type="button" class="ficha-cat" data-ficha="coagulacion" aria-expanded="false" aria-controls="fdrop-coagulacion">
+                                                <span class="ficha-cat__name">Coagulación</span>
+                                                <span class="ficha-cat__sel" id="fsel-coagulacion">0 de 3</span>
+                                            </button>
+                                            <div class="ficha-dropdown" id="fdrop-coagulacion" role="dialog" aria-modal="true" aria-label="Estudios de Coagulación">
+                                                <div class="ficha-dropdown__hdr"><span>Coagulación</span><button type="button" class="ficha-drop-close" aria-label="Cerrar">×</button></div>
+                                                <div class="ficha-dropdown__body">
+                                                    <label class="ficha-drop-item"><input type="checkbox" name="estudio_item" value="Perfil de Coagulación (TP/INR y TTP)" data-fp="coagulacion"><span>Perfil de Coagulación (TP/INR y TTP)</span></label>
+                                                    <label class="ficha-drop-item"><input type="checkbox" name="estudio_item" value="Fibrinógeno" data-fp="coagulacion"><span>Fibrinógeno</span></label>
+                                                    <label class="ficha-drop-item"><input type="checkbox" name="estudio_item" value="Dímero D" data-fp="coagulacion"><span>Dímero D</span></label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- 3 · Uroanálisis -->
+                                        <div class="ficha-wrap">
+                                            <button type="button" class="ficha-cat" data-ficha="uroanalisis" aria-expanded="false" aria-controls="fdrop-uroanalisis">
+                                                <span class="ficha-cat__name">Uroanálisis</span>
+                                                <span class="ficha-cat__sel" id="fsel-uroanalisis">0 de 2</span>
+                                            </button>
+                                            <div class="ficha-dropdown" id="fdrop-uroanalisis" role="dialog" aria-modal="true" aria-label="Estudios de Uroanálisis">
+                                                <div class="ficha-dropdown__hdr"><span>Uroanálisis / F. Renal</span><button type="button" class="ficha-drop-close" aria-label="Cerrar">×</button></div>
+                                                <div class="ficha-dropdown__body">
+                                                    <label class="ficha-drop-item"><input type="checkbox" name="estudio_item" value="EGO — Radio prU/CrU" data-fp="uroanalisis"><span>EGO — Radio prU/CrU</span></label>
+                                                    <label class="ficha-drop-item"><input type="checkbox" name="estudio_item" value="EGO Cribado Renal — Radio Alb/Crea" data-fp="uroanalisis"><span>EGO Cribado Renal — Radio Alb/Crea</span></label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- 4 · Inmunología -->
+```
+
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+## User Request
+
+Analiza esta lista:
+1 BHC
+2 QUIMICA SANGUINEA COMPLETA (7 ELEMENTOS)
+3 EXAMEN GENERAL DE ORINA CUANTITATIVO
+4 HEMOGLOBINA GLICADA (Hb A1c)
+5 QUIMICA SANGUINEA ( 3 ELEMENTOS)
+6 ELECTROLITOS SERICOS COMPLETOS
+7 PERFIL DE COAGULACION 1 (TP, INR, TTP)
+8 GRUPO SANGUINEO y FACTOR Rh
+9 PERFIL HEPATICO (PFH)
+10 PERFIL TIROIDEO 1
+11 ELECTROLITOS SERICOS (Na, K, Cl, Ca)
+12 RESISTENCIA A LAINSULINA (HOMA-IR, %8, %S).
+13 PERFIL HEPATICO 2 (PFH 2)
+14 PERFIL DE LIPIDOS
+15 PERFIL TIROIDEO 2
+16 ELECTROLITOS SERICOS (Na, K, Cl)
+17 PERFIL BIOQUIMICO 15 ELEMENTOS
+18 GASOMETRIA ARTERIAL COMPLETA
+19 EXAMEN DE ORINA ESPECIALIZADO (Ego + Coc. Alb/Cre)
+20 AC. ANTI DENGUE (NS1, IgM, IgG)
+busca si estos elementos 20 existen en las tablas de datos recien poblaste de los datos que estaban en duro.
+Informa me.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `especialidades.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Selection**
+
+I'm focusing intently on tool selection, prioritizing the most specific utility for each task. It's become clear: direct file manipulation using `cat` is out; `grep_search` is my go-to for pattern matching within files, even when I *think* I could use `grep` in a bash command. Specificity and efficiency are paramount.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.045965816s
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 31 Aug 2026, 10:04 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 31 Aug 2026, 10:04 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 31 Aug 2026, 10:04 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 31 Aug 2026, 10:04 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Selection**
+
+I'm now focusing on tool specificity. I'm actively avoiding `cat` for file creation or appending, opting for dedicated tools to ensure the right command is used for each purpose. I will never use `grep` inside a bash command.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.037026558s
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+## User Request
+
+que mi lista sea la mandatoria, y con base a ello, actualiza la tabla/campo que corresponda , si hay gaps informa me, antes de actualizar.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `especialidades.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool selection, always opting for the most specialized function available. The core principle is clear: avoid general commands when a more specific tool is at hand. Specifically, I'm now actively eschewing the use of `cat` for file creation or modification within a bash command, and instead, I am focusing on using `grep_search`.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.120458400s
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 31 Aug 2026, 10:06 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 31 Aug 2026, 10:07 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Specificity**
+
+I'm focusing intently on tool specificity. I've internalized the instruction to favor the most direct tool for each job. I'm actively avoiding the habit of using generic commands when dedicated tools offer a superior solution. Specifically, I will always use `grep_search` instead of `grep` inside other commands, and I'll avoid `cat` to create or append to files.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.082140881s
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 31 Aug 2026, 10:07 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing Tool Selection**
+
+I'm now focusing on tool specificity. I'm actively avoiding `cat` for file creation or appending, opting for dedicated tools to ensure the right command is used for each purpose. I will never use `grep` inside a bash command.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.066961679s
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 31 Aug 2026, 10:07 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
 </details>
 
 ---
