@@ -7,9 +7,9 @@
 | **Trajectory ID** | `cbb3065c-15ab-40b2-a551-df5474c119c2` |
 | **Cascade ID** | `33758958-5e2c-4311-ba38-6d3f32787e53` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 3109 |
+| **Total Steps** | 3221 |
 | **Started** | 30 Aug 2026, 9:34 pm |
-| **Completed** | 1 Sept 2026, 5:44 pm |
+| **Completed** | 1 Sept 2026, 5:56 pm |
 
 ---
 
@@ -2654,228 +2654,21 @@
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 10:22 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `btn-view-table`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 10:22 am
-
----
-
-## Agent Response
-
-### Thinking
-
-**Verifying View Location**
-
-I've confirmed that `rc/views/labadmin.php` is the correct view for **Recepción / Catálogos de Análisis**. Now, I'm meticulously re-examining the requirements to ensure absolute accuracy and complete coverage of every detail. I'm leaving no stone unturned!
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `catalog-builder.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.168912557s
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L154-284)</summary>
-
-**Path:** `Unknown file`
-
-```
-                    <div class="estudios-container" style="display:flex; flex-direction:column; gap:0.5rem; padding-left:1rem; border-left:3px solid var(--primary-light);">
-            `;
-            
-            (c.estudios || []).forEach((e) => {
-                html += `
-                        <div class="builder-est-card" data-eid="${e.id || ''}" style="display:grid; grid-template-columns: 1fr auto; gap:0.5rem; align-items:start; background:#fafafa; padding:0.75rem; border:1px solid #eee; border-radius:4px;">
-                            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:0.5rem;">
-                                <div><label style="font-size:0.75rem; color:#666;">Nombre del Estudio</label><input type="text" class="form-input est-nombre" value="${e.nombre.replace(/"/g, '&quot;')}" placeholder="Nombre"></div>
-                                <div><label style="font-size:0.75rem; color:#666;">Clave</label><input type="text" class="form-input est-clave" value="${e.clave.replace(/"/g, '&quot;')}" placeholder="Clave"></div>
-                                <div><label style="font-size:0.75rem; color:#666;">Tiempo Proc.</label><input type="text" class="form-input est-tiempo" value="${(e.tiempo||'').replace(/"/g, '&quot;')}" placeholder="4 Horas"></div>
-                                <div><label style="font-size:0.75rem; color:#666;">Muestra</label><input type="text" class="form-input est-muestra" value="${(e.muestra||'').replace(/"/g, '&quot;')}" placeholder="Sangre"></div>
-                                <div style="grid-column: span 2;"><label style="font-size:0.75rem; color:#666;">Preparación</label><input type="text" class="form-input est-prep" value="${(e.preparacion||'').replace(/"/g, '&quot;')}" placeholder="Sin ayuno"></div>
-                                <div style="grid-column: span 2;"><label style="font-size:0.75rem; color:#666;">Detalle (Hover +)</label><input type="text" class="form-input est-detalle" value="${(e.detalle||'').replace(/"/g, '&quot;')}" placeholder="Observaciones"></div>
-                            </div>
-                            <button type="button" class="btn btn-secondary btn-sm btn-delete-est" title="Eliminar Estudio">🗑️</button>
-                        </div>
-                `;
-            });
-            
-            html += `
-                        <div style="margin-top:0.5rem;">
-                            <button type="button" class="btn btn-secondary btn-sm btn-add-estudio">+ Añadir Estudio a ${c.nombre}</button>
-                        </div>
-                    </div>
-                </details>
-            `;
-        });
-        
-        html += `
-            </div>
-            <div style="margin-top:1.5rem;">
-                <button type="button" class="btn btn-primary btn-add-categoria">+ Añadir Nueva Categoría al Grupo</button>
-            </div>
-        `;
-        
-        var content = document.getElementById('builder-content');
-        content.innerHTML = html;
-        
-        // Bind events
-        var btnDeleteGroup = document.getElementById('btn-delete-group');
-        if (btnDeleteGroup) {
-            btnDeleteGroup.onclick = () => {
-                if(confirm('¿Seguro que deseas eliminar todo este grupo (abanico) y su contenido?')) {
-                    catalogTree.splice(idx, 1);
-                    currentGroupIndex = Math.max(0, currentGroupIndex - 1);
-                    renderTabs();
-                    if(catalogTree.length > 0) {
-                        renderGroupContent(currentGroupIndex);
-                    } else {
-                        content.innerHTML = '<p style="padding:1rem;">No hay grupos. Añade uno nuevo.</p>';
-                    }
-                }
-            };
-        }
-
-        content.querySelectorAll('.btn-add-estudio').forEach(b => b.onclick = (e) => {
-            var container = e.target.closest('.estudios-container');
-            var btnDiv = e.target.parentElement;
-            var estHtml = document.createElement('div');
-            estHtml.className = 'builder-est-card';
-            estHtml.dataset.eid = '';
-            estHtml.style = 'display:grid; grid-template-columns: 1fr auto; gap:0.5rem; align-items:start; background:#fafafa; padding:0.75rem; border:1px solid #eee; border-radius:4px; margin-bottom:0.5rem;';
-            estHtml.innerHTML = `
-                            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:0.5rem;">
-                                <div><label style="font-size:0.75rem; color:#666;">Nombre del Estudio</label><input type="text" class="form-input est-nombre" value="" placeholder="Nombre"></div>
-                                <div><label style="font-size:0.75rem; color:#666;">Clave</label><input type="text" class="form-input est-clave" value="NEW" placeholder="Clave"></div>
-                                <div><label style="font-size:0.75rem; color:#666;">Tiempo Proc.</label><input type="text" class="form-input est-tiempo" value="" placeholder="4 Horas"></div>
-                                <div><label style="font-size:0.75rem; color:#666;">Muestra</label><input type="text" class="form-input est-muestra" value="" placeholder="Sangre"></div>
-                                <div style="grid-column: span 2;"><label style="font-size:0.75rem; color:#666;">Preparación</label><input type="text" class="form-input est-prep" value="" placeholder="Sin ayuno"></div>
-                                <div style="grid-column: span 2;"><label style="font-size:0.75rem; color:#666;">Detalle (Hover +)</label><input type="text" class="form-input est-detalle" value="" placeholder="Observaciones"></div>
-                            </div>
-                            <button type="button" class="btn btn-secondary btn-sm btn-delete-est" title="Eliminar Estudio">🗑️</button>
-            `;
-            estHtml.querySelector('.btn-delete-est').onclick = (ev) => {
-                ev.target.closest('.builder-est-card').remove();
-                updateCategoryCount(container);
-            };
-            container.insertBefore(estHtml, btnDiv);
-            updateCategoryCount(container);
-        });
-
-        content.querySelector('.btn-add-categoria').onclick = () => {
-            var catContainer = document.getElementById('categorias-container');
-            var catHtml = document.createElement('details');
-            catHtml.className = 'builder-cat-card';
-            catHtml.dataset.cid = '';
-            catHtml.draggable = true;
-            catHtml.style = 'border:1px solid var(--border); padding:1rem; border-radius:6px; background:#fff; cursor:move; margin-bottom:1rem;';
-            catHtml.innerHTML = `
-                    <summary style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; cursor:pointer;">
-                        <div style="display:flex; align-items:center; gap:0.5rem; width:100%;">
-                            <span style="font-weight:bold; color:var(--primary);">📁 Categoría:</span>
-                            <input type="text" class="form-input cat-nombre" value="Nueva Categoría" style="max-width:300px; padding:4px;" onclick="event.preventDefault(); event.stopPropagation();" oninput="event.preventDefault(); event.stopPropagation();">
-                            <span class="cat-count" style="color:#666; font-size:0.9rem;">(0)</span>
-                        </div>
-                        <button type="button" class="btn btn-secondary btn-sm btn-delete-cat" onclick="event.preventDefault(); event.stopPropagation();">Eliminar Categoría</button>
-                    </summary>
-                    <div class="estudios-container" style="display:flex; flex-direction:column; gap:0.5rem; padding-left:1rem; border-left:3px solid var(--primary-light);">
-                        <div style="margin-top:0.5rem;">
-                            <button type="button" class="btn btn-secondary btn-sm btn-add-estudio">+ Añadir Estudio a Nueva Categoría</button>
-                        </div>
-                    </div>
-            `;
-            catHtml.querySelector('.btn-delete-cat').onclick = (ev) => ev.target.closest('.builder-cat-card').remove();
-            catHtml.querySelector('.btn-add-estudio').onclick = (e) => {
-                var container = e.target.closest('.estudios-container');
-                var btnDiv = e.target.parentElement;
-                var estHtml = document.createElement('div');
-                estHtml.className = 'builder-est-card';
-                estHtml.style = 'display:grid; grid-template-columns: 1fr auto; gap:0.5rem; align-items:start; background:#fafafa; padding:0.75rem; border:1px solid #eee; border-radius:4px; margin-bottom:0.5rem;';
-                estHtml.innerHTML = `
-                                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:0.5rem;">
-                                    <div><label style="font-size:0.75rem; color:#666;">Nombre del Estudio</label><input type="text" class="form-input est-nombre" value="" placeholder="Nombre"></div>
-                                    <div><label style="font-size:0.75rem; color:#666;">Clave</label><input type="text" class="form-input est-clave" value="NEW" placeholder="Clave"></div>
-                                    <div><label style="font-size:0.75rem; color:#666;">Tiempo Proc.</label><input type="text" class="form-input est-tiempo" value="" placeholder="4 Horas"></div>
-                                    <div><label style="font-size:0.75rem; color:#666;">Muestra</label><input type="text" class="form-input est-muestra" value="" placeholder="Sangre"></div>
-                                    <div style="grid-column: span 2;"><label style="font-size:0.75rem; color:#666;">Preparación</label><input type="text" class="form-input est-prep" value="" placeholder="Sin ayuno"></div>
-                                    <div style="grid-column: span 2;"><label style="font-size:0.75rem; color:#666;">Detalle (Hover +)</label><input type="text" class="form-input est-detalle" value="" placeholder="Observaciones"></div>
-                                </div>
-                                <button type="button" class="btn btn-secondary btn-sm btn-delete-est" title="Eliminar Estudio">🗑️</button>
-                `;
-                estHtml.querySelector('.btn-delete-est').onclick = (ev) => {
-                    ev.target.closest('.builder-est-card').remove();
-                    updateCategoryCount(container);
-                };
-                container.insertBefore(estHtml, btnDiv);
-                updateCategoryCount(container);
-            };
-            catContainer.appendChild(catHtml);
-        };
-        
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Refining Rendering Logic**
-
-I've been working on refining the study rendering logic within `renderGroupContent()` in `catalog-builder.js`. Specifically, I am focusing on the modifications to the rendering of the individual studies, including the updates related to how the grid columns are configured. The goal is cleaner, more efficient, and more flexible output.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.185281530s
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 10:22 am
 
 ---
@@ -21269,6 +21062,1938 @@ en que pestañas de cms quedo habilitado los itens de link y media del rte ?
 ```
 
 </details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+## User Request
+
+QUita el boton superior ⚙️ Sistema & Logs y solo el icono de engrane aparezca en la barra vertical de menu derecho, unicamente para la modalidad cuando aparecen iconos, me explico ?
+
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `ckeditor-init.js`
+**Language:** javascript
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L89-139)</summary>
+
+**Path:** `Unknown file`
+
+```
+            </span>
+            <span id="header-bc-current" class="txt-pgd fw-bold">Banner Principal</span>
+        </div>
+    </div>
+    <div class="portal-header-right">
+        <span class="pub-meta-hdr"><?= htmlspecialchars($lastPubLabel, ENT_QUOTES, 'UTF-8') ?></span>
+        <button type="button" class="btn btn-primary btn-resultados-sm mr-2" id="btn-cms-save-action"
+                data-csrf="<?= htmlspecialchars($csrfToken, ENT_QUOTES, 'UTF-8') ?>"
+                data-endpoint="/laesh/adrc/cms/save">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+            Publicar
+        </button>
+        <span class="hdr-sep-v" aria-hidden="true"></span>
+        <button type="button" class="btn btn-secondary mr-2" id="btn-preview-tabbar" title="Vista previa del sitio público sin publicar">
+            👁 Vista previa
+        </button>
+        <a href="/laesh/adrc/sistema" class="btn btn-secondary mr-2" id="btn-sistema-admin" title="Administración del Sistema y Logs">
+            ⚙️ Sistema & Logs
+        </a>
+        <div class="user-badge-portal">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--primary-green-dark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <span>Admin Web: <strong class="txt-pgd"><?= htmlspecialchars($nombreAdmin, ENT_QUOTES, 'UTF-8') ?></strong></span>
+        </div>
+        <a href="/laesh/login/logout.php" class="btn-back-primary" id="btn-logout">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            Cerrar Sesión
+        </a>
+    </div>
+    <div class="portal-initials-mob portal-initials-mob--admin" aria-hidden="true">ADM</div>
+</nav>
+
+<div class="app-layout">
+    <!-- ====== SIDEBAR ====== -->
+    <aside class="sidebar">
+        <div class="sidebar-toggle-row">
+            <button type="button" class="sidebar-rail-toggle" id="sidebar-rail-toggle" title="Expandir / Colapsar menú">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+        </div>
+        <div class="nav-item active" id="nav-hero" data-panel="panel-hero" data-section="hero" data-tooltip="Banner y textos del carrusel principal (#inicio)" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+            Banner Principal
+        </div>
+        <div class="nav-item" id="nav-quienes-somos" data-panel="panel-quienes-somos" data-section="quienes-somos" data-tooltip="Historia, Misión, Visión y Valores (#acerca-de)" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Quiénes somos
+        </div>
+        <div class="nav-item" id="nav-especialidades" data-panel="panel-especialidades" data-section="especialidades" data-tooltip="Carrusel y catálogo de estudios (#especialidades)" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2v6a2 2 0 0 0 .245.96l5.51 10.08A2 2 0 0 1 18 22H6a2 2 0 0 1-1.755-2.96l5.51-10.08A2 2 0 0 0 10 8V2"/></svg>
+            Estudios de Rutina
+        </div>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L139-179)</summary>
+
+**Path:** `Unknown file`
+
+```
+        </div>
+        <div class="nav-item" id="nav-promociones" data-panel="panel-promociones" data-section="promociones" data-tooltip="Banner promocional (#promociones)" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m8.5 8.5 7 7"/></svg>
+            Promociones Vigentes
+        </div>
+        <div class="nav-item" id="nav-calidad" data-panel="panel-calidad" data-section="calidad" data-tooltip="Galería de instalaciones (#calidad)" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            Calidad e Instalaciones
+        </div>
+        <div class="nav-item" id="nav-ubicacion" data-panel="panel-ubicacion" data-section="ubicacion" data-tooltip="Teléfonos, dirección y mapa (#ubicacion)" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Ubicación y Contacto
+        </div>
+        <div class="nav-item" id="nav-footer" data-panel="panel-footer" data-section="footer" data-tooltip="Pie de página: datos, horarios y créditos (#footer)" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="13" width="18" height="8" rx="2"/><path d="M3 7h18M7 3h10"/></svg>
+            Pie de Página
+        </div>
+        <div class="nav-item" id="nav-aviso-privacidad" data-panel="panel-aviso-privacidad" data-section="aviso-privacidad" data-tooltip="Aviso de Privacidad — contenido legal completo" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Aviso de Privacidad
+        </div>
+        <div class="nav-item" id="nav-video-promo" data-panel="panel-video-promo" data-section="video-promo" data-tooltip="Video promocional con enlaces y reproductor embebido" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+            Video promo
+        </div>
+        <div class="nav-item" id="nav-configuracion-general" data-panel="panel-configuracion-general" data-section="configuracion-general" data-tooltip="Orden vertical de secciones en la página de inicio" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+            Orden de Secciones
+        </div>
+        <div class="nav-item" id="nav-seo" data-panel="panel-seo" data-section="seo" data-tooltip="Metadatos, Open Graph y Schema.org" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
+            SEO y Metadatos
+        </div>
+
+        <!-- Pub-meta y botón Publicar movidos al header nav (2026-08-27) -->
+
+        <div class="sidebar-mobile-only">
+            <div class="user-badge--sm">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--primary-green-dark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <span>Admin: <strong class="strong-primary"><?= htmlspecialchars($nombreAdmin, ENT_QUOTES, 'UTF-8') ?></strong></span>
+            </div>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `sidebar-rail-toggle`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 5:48 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `portal.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L399-449)</summary>
+
+**Path:** `Unknown file`
+
+```
+@media (min-width: 1025px) {
+    .portal-tab { font-size: 0.95rem; padding: 10px 20px; }
+    .sidebar-toggle-row {
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+            height: 30px;
+            margin-bottom: 0.25rem;
+        }
+    .sidebar-rail-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 26px; height: 26px;
+            border-radius: 50%;
+            border: 1.5px solid #e2e8f0;
+            background: var(--bg-surface);
+            color: var(--text-muted);
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: background 0.15s, color 0.15s, border-color 0.15s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+    .sidebar-rail-toggle:hover {
+            background: var(--secondary-green);
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+    .app-layout > .sidebar {
+            width: 65px;
+            padding: 0.75rem 0;
+            gap: 0.25rem;
+            overflow: visible;
+            transition: width 0.25s ease, padding 0.25s ease, gap 0.25s ease;
+        }
+    .app-layout > .sidebar:not(.sidebar-expanded) .sidebar-toggle-row { justify-content: center; }
+    .app-layout > .sidebar:not(.sidebar-expanded) .logo             { display: none; }
+    .app-layout > .sidebar:not(.sidebar-expanded) .section-label    { display: none; }
+    .app-layout > .sidebar:not(.sidebar-expanded) .sidebar-mobile-only { display: none; }
+    .app-layout > .sidebar:not(.sidebar-expanded) .sidebar-initials  { display: none; }
+    .app-layout > .sidebar:not(.sidebar-expanded) .sidebar-admin-extra { display: flex; }
+    .app-layout > .sidebar:not(.sidebar-expanded) .nav-item {
+            justify-content: center;
+            padding: 0.75rem;
+            font-size: 0;
+            gap: 0;
+        }
+    .app-layout > .sidebar:not(.sidebar-expanded) .nav-item > svg { flex-shrink: 0; }
+    .app-layout > .sidebar:not(.sidebar-expanded) .nav-item .globito {
+            font-size: 0.6rem;
+            right: 6px; top: 6px;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `portal.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L439-479)</summary>
+
+**Path:** `Unknown file`
+
+```
+    .app-layout > .sidebar:not(.sidebar-expanded) .sidebar-admin-extra { display: flex; }
+    .app-layout > .sidebar:not(.sidebar-expanded) .nav-item {
+            justify-content: center;
+            padding: 0.75rem;
+            font-size: 0;
+            gap: 0;
+        }
+    .app-layout > .sidebar:not(.sidebar-expanded) .nav-item > svg { flex-shrink: 0; }
+    .app-layout > .sidebar:not(.sidebar-expanded) .nav-item .globito {
+            font-size: 0.6rem;
+            right: 6px; top: 6px;
+            transform: none;
+            height: 16px; min-width: 16px; padding: 0 3px;
+        }
+    .app-layout > .sidebar:not(.sidebar-expanded) .sidebar-search-row {
+            justify-content: center;
+            gap: 0; margin-bottom: 0.25rem;
+        }
+    .app-layout > .sidebar:not(.sidebar-expanded) .sidebar-search-wrap { display: none; }
+    .app-layout > .sidebar:not(.sidebar-expanded) .sidebar-search-row .sidebar-search-btn {
+            display: flex;
+            width: 42px; height: 42px; border-radius: 8px;
+        }
+    .sidebar-float-search {
+            position: fixed;
+            left: 72px;
+            z-index: 950;
+            width: 290px;
+            background: #fff;
+            border: 1.5px solid var(--primary);
+            border-radius: 10px;
+            box-shadow: 0 8px 28px rgba(0,0,0,0.18);
+            padding: 8px;
+            flex-direction: column;
+            gap: 4px;
+            display: none;
+        }
+    .sidebar-float-search.sfs-open { display: flex; }
+    .sidebar-float-search .sfs-input {
+            width: 100%;
+            padding: 8px 10px;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `btn-sistema-admin`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 5:49 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `sidebar-rail.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+/**
+ * sidebar-rail.js — LAESH Portal
+ * Funcionalidades compartidas del sidebar colapsable en desktop (≥1025px):
+ *
+ *  1. syncPad  — mantiene .app-layout alineado bajo .portal-access-header fijo.
+ *               (app.js hace lo mismo para medicos/labadmin; para gestion-web.html
+ *               este script es el único que lo compensa.)
+ *
+ *  2. Rail toggle — botón #sidebar-rail-toggle que colapsa (65px) / expande (260px)
+ *               el sidebar; persiste en localStorage['laesh_sidebar_expanded'].
+ *               Al expandir, emite el evento 'laesh:sidebarExpand' para que el SFS
+ *               de cada página sepa que debe cerrarse.
+ *
+ * Uso: <script src="/laesh-web-assets/js/sidebar-rail.js"></script>
+ *       Incluir DESPUÉS de app.js (cuando aplique) y justo antes de </body>.
+ *
+ * API pública: window.laeshSidebarRail = { isExpanded, setExpanded }
+ */
+(function () {
+    'use strict';
+
+    /* ── 1. syncPad ────────────────────────────────────────────────────────── */
+    /* Mide el portal-access-header y escribe paddingTop en .app-layout.
+       En medicos/labadmin app.js ya hace esto; la segunda llamada es inocua
+       (mismo valor). En gestion-web.html este bloque es el único que lo hace. */
+    var hdr = document.querySelector('.portal-access-header');
+    var lay = document.querySelector('.app-layout');
+
+    if (hdr && lay) {
+        function syncPad() {
+            if (window.innerWidth >= 1025) {
+                lay.style.paddingTop = hdr.getBoundingClientRect().height + 'px';
+            }
+            /* En tablet/móvil app.js ya gestiona el offset — no sobreescribir. */
+        }
+        requestAnimationFrame(syncPad);
+        window.addEventListener('resize', syncPad);
+    }
+
+    /* ── 2. Sidebar Rail toggle ────────────────────────────────────────────── */
+    var LS_KEY    = 'laesh_sidebar_expanded';
+    var sidebar   = document.querySelector('.app-layout > .sidebar');
+    var toggleBtn = document.getElementById('sidebar-rail-toggle');
+
+    /* Si la página no tiene rail (sin botón o sin sidebar) → salir sin error */
+    if (!sidebar || !toggleBtn) return;
+
+    var SVG_RIGHT = '<polyline points="9 18 15 12 9 6"/>';  /* › expandir  */
+    var SVG_LEFT  = '<polyline points="15 18 9 12 15 6"/>'; /* ‹ colapsar  */
+    var SVG_WRAP  = 'width="14" height="14" viewBox="0 0 24 24" fill="none" '
+                  + 'stroke="currentColor" stroke-width="2.5" '
+                  + 'stroke-linecap="round" stroke-linejoin="round"';
+
+    function isExpanded() {
+        return sidebar.classList.contains('sidebar-expanded');
+    }
+
+    function setExpanded(exp) {
+        if (exp) {
+            sidebar.classList.add('sidebar-expanded');
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L119-174)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+<div class="app-layout">
+    <!-- ====== SIDEBAR ====== -->
+    <aside class="sidebar">
+        <div class="sidebar-toggle-row">
+            <button type="button" class="sidebar-rail-toggle" id="sidebar-rail-toggle" title="Expandir / Colapsar menú">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+        </div>
+        <div class="nav-item active" id="nav-hero" data-panel="panel-hero" data-section="hero" data-tooltip="Banner y textos del carrusel principal (#inicio)" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+            Banner Principal
+        </div>
+        <div class="nav-item" id="nav-quienes-somos" data-panel="panel-quienes-somos" data-section="quienes-somos" data-tooltip="Historia, Misión, Visión y Valores (#acerca-de)" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Quiénes somos
+        </div>
+        <div class="nav-item" id="nav-especialidades" data-panel="panel-especialidades" data-section="especialidades" data-tooltip="Carrusel y catálogo de estudios (#especialidades)" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2v6a2 2 0 0 0 .245.96l5.51 10.08A2 2 0 0 1 18 22H6a2 2 0 0 1-1.755-2.96l5.51-10.08A2 2 0 0 0 10 8V2"/></svg>
+            Estudios de Rutina
+        </div>
+        <div class="nav-item" id="nav-promociones" data-panel="panel-promociones" data-section="promociones" data-tooltip="Banner promocional (#promociones)" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m8.5 8.5 7 7"/></svg>
+            Promociones Vigentes
+        </div>
+        <div class="nav-item" id="nav-calidad" data-panel="panel-calidad" data-section="calidad" data-tooltip="Galería de instalaciones (#calidad)" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            Calidad e Instalaciones
+        </div>
+        <div class="nav-item" id="nav-ubicacion" data-panel="panel-ubicacion" data-section="ubicacion" data-tooltip="Teléfonos, dirección y mapa (#ubicacion)" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Ubicación y Contacto
+        </div>
+        <div class="nav-item" id="nav-footer" data-panel="panel-footer" data-section="footer" data-tooltip="Pie de página: datos, horarios y créditos (#footer)" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="13" width="18" height="8" rx="2"/><path d="M3 7h18M7 3h10"/></svg>
+            Pie de Página
+        </div>
+        <div class="nav-item" id="nav-aviso-privacidad" data-panel="panel-aviso-privacidad" data-section="aviso-privacidad" data-tooltip="Aviso de Privacidad — contenido legal completo" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Aviso de Privacidad
+        </div>
+        <div class="nav-item" id="nav-video-promo" data-panel="panel-video-promo" data-section="video-promo" data-tooltip="Video promocional con enlaces y reproductor embebido" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+            Video promo
+        </div>
+        <div class="nav-item" id="nav-configuracion-general" data-panel="panel-configuracion-general" data-section="configuracion-general" data-tooltip="Orden vertical de secciones en la página de inicio" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+            Orden de Secciones
+        </div>
+        <div class="nav-item" id="nav-seo" data-panel="panel-seo" data-section="seo" data-tooltip="Metadatos, Open Graph y Schema.org" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
+            SEO y Metadatos
+        </div>
+
+        <!-- Pub-meta y botón Publicar movidos al header nav (2026-08-27) -->
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `sidebar-admin-extra`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 5:49 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `labadmin.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L114-144)</summary>
+
+**Path:** `Unknown file`
+
+```
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M11 2v2" /><path d="M5 2v2" /><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1" /><path d="M8 15a6 6 0 0 0 12 0v-3" /><circle cx="20" cy="10" r="2" />
+                    </svg>
+                    Médicos
+                </div>
+
+                <!-- Solo desktop (ocultos en tira tablet/móvil) -->
+                <div class="nav-item sidebar-admin-extra" data-panel="panel-reportes" role="button" tabindex="0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2" />
+                    </svg>
+                    Reportes y Estadísticas
+                </div>
+
+                <div class="nav-item sidebar-admin-extra" data-panel="panel-catalogos" role="button" tabindex="0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M14 2v6a2 2 0 0 0 .245.96l5.51 10.08A2 2 0 0 1 18 22H6a2 2 0 0 1-1.755-2.96l5.51-10.08A2 2 0 0 0 10 8V2" /><path d="M6.453 15h11.094" /><path d="M8.5 2h7" />
+                    </svg>
+                    Catálogos de Análisis
+                </div>
+
+                <?php if (!empty($isAdmin)): ?>
+                <div class="nav-item sidebar-admin-extra cursor-p" id="nav-gestion-web" role="button" tabindex="0">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+                    Contenidos del Sitio Web
+                </div>
+                <?php endif; ?>
+
+                <!-- ⑤ Mini-panel de usuario (visible al abrir hamburger en móvil) -->
+                <div class="sidebar-mobile-only">
+                    <!-- Chip iniciales — clase mob-user-chip exclusiva móvil (style.css ≤767px) -->
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `portal.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L424-459)</summary>
+
+**Path:** `Unknown file`
+
+```
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+    .app-layout > .sidebar {
+            width: 65px;
+            padding: 0.75rem 0;
+            gap: 0.25rem;
+            overflow: visible;
+            transition: width 0.25s ease, padding 0.25s ease, gap 0.25s ease;
+        }
+    .app-layout > .sidebar:not(.sidebar-expanded) .sidebar-toggle-row { justify-content: center; }
+    .app-layout > .sidebar:not(.sidebar-expanded) .logo             { display: none; }
+    .app-layout > .sidebar:not(.sidebar-expanded) .section-label    { display: none; }
+    .app-layout > .sidebar:not(.sidebar-expanded) .sidebar-mobile-only { display: none; }
+    .app-layout > .sidebar:not(.sidebar-expanded) .sidebar-initials  { display: none; }
+    .app-layout > .sidebar:not(.sidebar-expanded) .sidebar-admin-extra { display: flex; }
+    .app-layout > .sidebar:not(.sidebar-expanded) .nav-item {
+            justify-content: center;
+            padding: 0.75rem;
+            font-size: 0;
+            gap: 0;
+        }
+    .app-layout > .sidebar:not(.sidebar-expanded) .nav-item > svg { flex-shrink: 0; }
+    .app-layout > .sidebar:not(.sidebar-expanded) .nav-item .globito {
+            font-size: 0.6rem;
+            right: 6px; top: 6px;
+            transform: none;
+            height: 16px; min-width: 16px; padding: 0 3px;
+        }
+    .app-layout > .sidebar:not(.sidebar-expanded) .sidebar-search-row {
+            justify-content: center;
+            gap: 0; margin-bottom: 0.25rem;
+        }
+    .app-layout > .sidebar:not(.sidebar-expanded) .sidebar-search-wrap { display: none; }
+    .app-layout > .sidebar:not(.sidebar-expanded) .sidebar-search-row .sidebar-search-btn {
+            display: flex;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L94-114)</summary>
+
+**Path:** `Unknown file`
+
+```
+        <span class="pub-meta-hdr"><?= htmlspecialchars($lastPubLabel, ENT_QUOTES, 'UTF-8') ?></span>
+        <button type="button" class="btn btn-primary btn-resultados-sm mr-2" id="btn-cms-save-action"
+                data-csrf="<?= htmlspecialchars($csrfToken, ENT_QUOTES, 'UTF-8') ?>"
+                data-endpoint="/laesh/adrc/cms/save">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+            Publicar
+        </button>
+        <span class="hdr-sep-v" aria-hidden="true"></span>
+        <button type="button" class="btn btn-secondary mr-2" id="btn-preview-tabbar" title="Vista previa del sitio público sin publicar">
+            👁 Vista previa
+        </button>
+        <a href="/laesh/adrc/sistema" class="btn btn-secondary mr-2" id="btn-sistema-admin" title="Administración del Sistema y Logs">
+            ⚙️ Sistema & Logs
+        </a>
+        <div class="user-badge-portal">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--primary-green-dark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <span>Admin Web: <strong class="txt-pgd"><?= htmlspecialchars($nombreAdmin, ENT_QUOTES, 'UTF-8') ?></strong></span>
+        </div>
+        <a href="/laesh/login/logout.php" class="btn-back-primary" id="btn-logout">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            Cerrar Sesión
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L164-179)</summary>
+
+**Path:** `Unknown file`
+
+```
+        <div class="nav-item" id="nav-configuracion-general" data-panel="panel-configuracion-general" data-section="configuracion-general" data-tooltip="Orden vertical de secciones en la página de inicio" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+            Orden de Secciones
+        </div>
+        <div class="nav-item" id="nav-seo" data-panel="panel-seo" data-section="seo" data-tooltip="Metadatos, Open Graph y Schema.org" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
+            SEO y Metadatos
+        </div>
+
+        <!-- Pub-meta y botón Publicar movidos al header nav (2026-08-27) -->
+
+        <div class="sidebar-mobile-only">
+            <div class="user-badge--sm">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--primary-green-dark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <span>Admin: <strong class="strong-primary"><?= htmlspecialchars($nombreAdmin, ENT_QUOTES, 'UTF-8') ?></strong></span>
+            </div>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 5:49 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+## User Request
+
+esto: Menú Expandido (con texto): Permanece oculto (display: none). no se cumplio corrige de raiz.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `gestion_web.php`
+**Language:** php
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L92-123)</summary>
+
+**Path:** `Unknown file`
+
+```
+    </div>
+    <div class="portal-header-right">
+        <span class="pub-meta-hdr"><?= htmlspecialchars($lastPubLabel, ENT_QUOTES, 'UTF-8') ?></span>
+        <button type="button" class="btn btn-primary btn-resultados-sm mr-2" id="btn-cms-save-action"
+                data-csrf="<?= htmlspecialchars($csrfToken, ENT_QUOTES, 'UTF-8') ?>"
+                data-endpoint="/laesh/adrc/cms/save">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+            Publicar
+        </button>
+        <span class="hdr-sep-v" aria-hidden="true"></span>
+        <button type="button" class="btn btn-secondary mr-2" id="btn-preview-tabbar" title="Vista previa del sitio público sin publicar">
+            👁 Vista previa
+        </button>
+        <div class="user-badge-portal">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--primary-green-dark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <span>Admin Web: <strong class="txt-pgd"><?= htmlspecialchars($nombreAdmin, ENT_QUOTES, 'UTF-8') ?></strong></span>
+        </div>
+        <a href="/laesh/login/logout.php" class="btn-back-primary" id="btn-logout">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            Cerrar Sesión
+        </a>
+    </div>
+    <div class="portal-initials-mob portal-initials-mob--admin" aria-hidden="true">ADM</div>
+</nav>
+
+<div class="app-layout">
+    <!-- ====== SIDEBAR ====== -->
+    <aside class="sidebar">
+        <div class="sidebar-toggle-row">
+            <button type="button" class="sidebar-rail-toggle" id="sidebar-rail-toggle" title="Expandir / Colapsar menú">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `sidebar-admin-extra`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 5:52 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `portal.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L519-544)</summary>
+
+**Path:** `Unknown file`
+
+```
+            font-size: 0.95rem;
+            gap: 0.75rem;
+        }
+    .app-layout > .sidebar.sidebar-expanded .nav-item .globito {
+            font-size: 0.75rem;
+            right: 12px; top: 50%;
+            transform: translateY(-50%);
+            height: 20px; min-width: 20px; padding: 0 6px;
+        }
+    .app-layout > .sidebar.sidebar-expanded .sidebar-search-row { justify-content: flex-start; gap: 8px; margin-bottom: 0; }
+    .app-layout > .sidebar.sidebar-expanded .sidebar-search-wrap { display: block; flex: 1; width: auto; }
+    .app-layout > .sidebar.sidebar-expanded .sidebar-search-row .sidebar-search-btn { display: flex; width: 38px; height: 38px; }
+    .app-layout > .sidebar.sidebar-expanded .sidebar-admin-extra { display: flex; }
+    .app-layout > .sidebar.sidebar-expanded .sidebar-float-search { display: none; }
+    .main-content { padding-top: 1rem; }
+    body { padding-top: 0; }
+    body.portal-medico-body-layout {
+            padding-left: 0;
+            padding-right: 0;
+            padding-bottom: 0;  /* elimina el gap gris inferior del body */
+            align-items: stretch;          /* hace que el app-layout estire al 100% del alto */
+            justify-content: flex-start;   /* impide centrado horizontal que deja gris a los lados */
+        }
+    body.portal-medico-body-layout .portal-access-header {
+            left: 0;
+            right: 0; /* El header cubre ambas laterales de extremo a extremo */
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `portal.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1124-1144)</summary>
+
+**Path:** `Unknown file`
+
+```
+            border-radius: 50%;
+            background: var(--primary);
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.68rem;
+            letter-spacing: 0.03em;
+            flex-shrink: 0;
+            margin-left: auto;
+            cursor: default;
+            user-select: none;
+        }
+    .app-layout > .sidebar .sidebar-admin-extra { display: none; }
+    .app-layout > .sidebar .nav-item::before,
+        .app-layout > .sidebar .nav-item::after { display: none; }
+    .sidebar-mobile-only { display: none; }
+    .app-layout { padding-top: var(--portal-content-offset, 140px); }
+}
+
+@media (max-width: 767px) {
+    .app-layout {
+            flex-direction: column;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `portal.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L429-449)</summary>
+
+**Path:** `Unknown file`
+
+```
+            padding: 0.75rem 0;
+            gap: 0.25rem;
+            overflow: visible;
+            transition: width 0.25s ease, padding 0.25s ease, gap 0.25s ease;
+        }
+    .app-layout > .sidebar:not(.sidebar-expanded) .sidebar-toggle-row { justify-content: center; }
+    .app-layout > .sidebar:not(.sidebar-expanded) .logo             { display: none; }
+    .app-layout > .sidebar:not(.sidebar-expanded) .section-label    { display: none; }
+    .app-layout > .sidebar:not(.sidebar-expanded) .sidebar-mobile-only { display: none; }
+    .app-layout > .sidebar:not(.sidebar-expanded) .sidebar-initials  { display: none; }
+    .app-layout > .sidebar:not(.sidebar-expanded) .sidebar-admin-extra { display: flex; }
+    .app-layout > .sidebar:not(.sidebar-expanded) .nav-item {
+            justify-content: center;
+            padding: 0.75rem;
+            font-size: 0;
+            gap: 0;
+        }
+    .app-layout > .sidebar:not(.sidebar-expanded) .nav-item > svg { flex-shrink: 0; }
+    .app-layout > .sidebar:not(.sidebar-expanded) .nav-item .globito {
+            font-size: 0.6rem;
+            right: 6px; top: 6px;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L164-179)</summary>
+
+**Path:** `Unknown file`
+
+```
+        </div>
+        <div class="nav-item" id="nav-seo" data-panel="panel-seo" data-section="seo" data-tooltip="Metadatos, Open Graph y Schema.org" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
+            SEO y Metadatos
+        </div>
+
+        <!-- Ícono ⚙️ Sistema & Logs: visible únicamente en el rail colapsado de íconos (.sidebar-admin-extra) -->
+        <a href="/laesh/adrc/sistema" class="nav-item sidebar-admin-extra cursor-p" id="nav-sistema-rail" data-tooltip="Administración del Sistema y Logs" role="button" tabindex="0" style="text-decoration:none;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            Sistema & Logs
+        </a>
+
+        <!-- Pub-meta y botón Publicar movidos al header nav (2026-08-27) -->
+
+        <div class="sidebar-mobile-only">
+            <div class="user-badge--sm">
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 5:52 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `portal.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L434-449)</summary>
+
+**Path:** `Unknown file`
+
+```
+    .app-layout > .sidebar:not(.sidebar-expanded) .sidebar-toggle-row { justify-content: center; }
+    .app-layout > .sidebar:not(.sidebar-expanded) .logo             { display: none; }
+    .app-layout > .sidebar:not(.sidebar-expanded) .section-label    { display: none; }
+    .app-layout > .sidebar:not(.sidebar-expanded) .sidebar-mobile-only { display: none; }
+    .app-layout > .sidebar:not(.sidebar-expanded) .sidebar-initials  { display: none; }
+    .app-layout > .sidebar:not(.sidebar-expanded) .sidebar-admin-extra { display: flex; }
+    .app-layout > .sidebar:not(.sidebar-expanded) .nav-item {
+            justify-content: center;
+            padding: 0.75rem;
+            font-size: 0;
+            gap: 0;
+        }
+    .app-layout > .sidebar:not(.sidebar-expanded) .nav-item > svg { flex-shrink: 0; }
+    .app-layout > .sidebar:not(.sidebar-expanded) .nav-item .globito {
+            font-size: 0.6rem;
+            right: 6px; top: 6px;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 5:52 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `portal.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1129-1144)</summary>
+
+**Path:** `Unknown file`
+
+```
+            font-size: 0.68rem;
+            letter-spacing: 0.03em;
+            flex-shrink: 0;
+            margin-left: auto;
+            cursor: default;
+            user-select: none;
+        }
+    .app-layout > .sidebar .sidebar-admin-extra { display: none; }
+    .app-layout > .sidebar .nav-item::before,
+        .app-layout > .sidebar .nav-item::after { display: none; }
+    .sidebar-mobile-only { display: none; }
+    .app-layout { padding-top: var(--portal-content-offset, 140px); }
+}
+
+@media (max-width: 767px) {
+    .app-layout {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 5:52 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+## User Request
+
+rENOMBRA LAS PESTañas asi:
+Estudios de Rutina por: Estudios
+Orden de Secciones: Ordenamiento
+SEO y Metadatos por: Metadatos
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `gestion_web.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L124-179)</summary>
+
+**Path:** `Unknown file`
+
+```
+        </div>
+        <div class="nav-item active" id="nav-hero" data-panel="panel-hero" data-section="hero" data-tooltip="Banner y textos del carrusel principal (#inicio)" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+            Banner Principal
+        </div>
+        <div class="nav-item" id="nav-quienes-somos" data-panel="panel-quienes-somos" data-section="quienes-somos" data-tooltip="Historia, Misión, Visión y Valores (#acerca-de)" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Quiénes somos
+        </div>
+        <div class="nav-item" id="nav-especialidades" data-panel="panel-especialidades" data-section="especialidades" data-tooltip="Carrusel y catálogo de estudios (#especialidades)" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2v6a2 2 0 0 0 .245.96l5.51 10.08A2 2 0 0 1 18 22H6a2 2 0 0 1-1.755-2.96l5.51-10.08A2 2 0 0 0 10 8V2"/></svg>
+            Estudios de Rutina
+        </div>
+        <div class="nav-item" id="nav-promociones" data-panel="panel-promociones" data-section="promociones" data-tooltip="Banner promocional (#promociones)" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m8.5 8.5 7 7"/></svg>
+            Promociones Vigentes
+        </div>
+        <div class="nav-item" id="nav-calidad" data-panel="panel-calidad" data-section="calidad" data-tooltip="Galería de instalaciones (#calidad)" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            Calidad e Instalaciones
+        </div>
+        <div class="nav-item" id="nav-ubicacion" data-panel="panel-ubicacion" data-section="ubicacion" data-tooltip="Teléfonos, dirección y mapa (#ubicacion)" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Ubicación y Contacto
+        </div>
+        <div class="nav-item" id="nav-footer" data-panel="panel-footer" data-section="footer" data-tooltip="Pie de página: datos, horarios y créditos (#footer)" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="13" width="18" height="8" rx="2"/><path d="M3 7h18M7 3h10"/></svg>
+            Pie de Página
+        </div>
+        <div class="nav-item" id="nav-aviso-privacidad" data-panel="panel-aviso-privacidad" data-section="aviso-privacidad" data-tooltip="Aviso de Privacidad — contenido legal completo" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Aviso de Privacidad
+        </div>
+        <div class="nav-item" id="nav-video-promo" data-panel="panel-video-promo" data-section="video-promo" data-tooltip="Video promocional con enlaces y reproductor embebido" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+            Video promo
+        </div>
+        <div class="nav-item" id="nav-configuracion-general" data-panel="panel-configuracion-general" data-section="configuracion-general" data-tooltip="Orden vertical de secciones en la página de inicio" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+            Orden de Secciones
+        </div>
+        <div class="nav-item" id="nav-seo" data-panel="panel-seo" data-section="seo" data-tooltip="Metadatos, Open Graph y Schema.org" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
+            SEO y Metadatos
+        </div>
+
+        <!-- Ícono ⚙️ Sistema & Logs: visible únicamente en el rail colapsado de íconos (.sidebar-rail-only) -->
+        <a href="/laesh/adrc/sistema" class="nav-item sidebar-rail-only cursor-p" id="nav-sistema-rail" data-tooltip="Administración del Sistema y Logs" role="button" tabindex="0" style="text-decoration:none;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            Sistema & Logs
+        </a>
+
+        <!-- Pub-meta y botón Publicar movidos al header nav (2026-08-27) -->
+
+        <div class="sidebar-mobile-only">
+            <div class="user-badge--sm">
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+/* Interceptor global de promesas no capturadas de extensiones de navegador (Chrome/Edge/Brave) */
+window.addEventListener('unhandledrejection', function(event) {
+    if (event && event.reason) {
+        var msg = (event.reason.message || event.reason.toString() || '');
+        if (msg.includes('Could not establish connection') || msg.includes('Receiving end does not exist')) {
+            event.preventDefault();
+        }
+    }
+});
+
+/* Helper RTE Ampliado para formateo de texto sin URL media */
+window.formatRteText = function(btn, command) {
+    var fieldGroup = btn.closest('.field-group');
+    var input = fieldGroup ? fieldGroup.querySelector('input[type="text"], textarea') : null;
+    if (!input) return;
+
+    var start = input.selectionStart;
+    var end = input.selectionEnd;
+    var selectedText = input.value.substring(start, end);
+
+    var openTag = '<' + command + '>';
+    var closeTag = '</' + command + '>';
+
+    if (!selectedText) {
+        selectedText = 'texto';
+    }
+
+    var replacement = openTag + selectedText + closeTag;
+    input.value = input.value.substring(0, start) + replacement + input.value.substring(end);
+    input.focus();
+    input.setSelectionRange(start + openTag.length, start + openTag.length + selectedText.length);
+};
+
+window.formatRteTag = function(btn, tagName, styleAttr) {
+    var fieldGroup = btn.closest('.field-group');
+    var input = fieldGroup ? fieldGroup.querySelector('input[type="text"], textarea') : null;
+    if (!input) return;
+
+    var start = input.selectionStart;
+    var end = input.selectionEnd;
+    var selectedText = input.value.substring(start, end);
+
+    var openTag = '<' + tagName + ' style="' + styleAttr + '">';
+    var closeTag = '</' + tagName + '>';
+
+    if (!selectedText) {
+        selectedText = 'texto';
+    }
+
+    var replacement = openTag + selectedText + closeTag;
+    input.value = input.value.substring(0, start) + replacement + input.value.substring(end);
+    input.focus();
+    input.setSelectionRange(start + openTag.length, start + openTag.length + selectedText.length);
+};
+
+window.formatRteBlock = function(btn, blockTag) {
+    var fieldGroup = btn.closest('.field-group');
+    var input = fieldGroup ? fieldGroup.querySelector('textarea') : null;
+    if (!input) return;
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L60-139)</summary>
+
+**Path:** `Unknown file`
+
+```
+    var start = input.selectionStart;
+    var end = input.selectionEnd;
+    var selectedText = input.value.substring(start, end);
+
+    if (!selectedText) selectedText = 'Elemento de lista';
+
+    var replacement = '<' + blockTag + '>\n  <li>' + selectedText + '</li>\n</' + blockTag + '>';
+    input.value = input.value.substring(0, start) + replacement + input.value.substring(end);
+    input.focus();
+};
+
+window.clearRteFormat = function(btn) {
+    var fieldGroup = btn.closest('.field-group');
+    var input = fieldGroup ? fieldGroup.querySelector('input[type="text"], textarea') : null;
+    if (!input) return;
+
+    var text = input.value;
+    input.value = text.replace(/<[^>]*>/g, '');
+};
+
+/* Auto-poblar datos per se desde MariaDB al cambiar de Estudio Asociado en el catálogo */
+document.addEventListener('change', function(e) {
+    if (e.target && e.target.classList.contains('promo-estudio-select')) {
+        var select = e.target;
+        var cardId = select.getAttribute('data-card-id');
+        var opt = select.options[select.selectedIndex];
+        if (!opt || !cardId) return;
+
+        var nombre    = opt.getAttribute('data-nombre') || '';
+        var categoria = opt.getAttribute('data-categoria') || '';
+        var ayuno     = opt.getAttribute('data-ayuno') || '';
+        var tiempo    = opt.getAttribute('data-tiempo') || '';
+        var detalle   = opt.getAttribute('data-detalle') || '';
+
+        var keys = [
+            { key: '_ckPromoTitle' + cardId,  dataId: 'ck-promo-title-' + cardId + '-data',  val: nombre },
+            { key: '_ckPromoSub' + cardId,    dataId: 'ck-promo-sub-' + cardId + '-data',    val: categoria },
+            { key: '_ckPromoAyuno' + cardId,  dataId: 'ck-promo-ayuno-' + cardId + '-data',  val: ayuno },
+            { key: '_ckPromoTiempo' + cardId, dataId: 'ck-promo-tiempo-' + cardId + '-data', val: tiempo },
+            { key: '_ckPromoDesc' + cardId,   dataId: 'ck-promo-desc-' + cardId + '-data',   val: detalle }
+        ];
+
+        keys.forEach(function(item) {
+            var el = document.getElementById(item.dataId);
+            if (window[item.key] && typeof window[item.key].setData === 'function') {
+                window[item.key].setData(item.val);
+            } else if (el) {
+                el.value = item.val;
+            }
+        });
+
+        // Sincronizar también la caja del buscador Autocomplete de la derecha
+        var autocompleteInput = document.getElementById('promo-autocomplete-' + cardId);
+        if (autocompleteInput) {
+            autocompleteInput.value = (opt && opt.value) ? opt.text : '';
+        }
+    }
+});
+
+/* Buscador Autocomplete Interactivo para Promociones (Segunda opción de búsqueda) */
+document.addEventListener('input', function(e) {
+    if (e.target && e.target.classList.contains('promo-autocomplete-input')) {
+        var input = e.target;
+        var cardId = input.getAttribute('data-card-id');
+        var query = input.value.trim().toLowerCase();
+        var suggestionsPanel = document.getElementById('promo-suggestions-' + cardId);
+        var select = document.getElementById('promo-select-' + cardId);
+
+        if (!suggestionsPanel || !select) return;
+
+        if (query.length === 0) {
+            suggestionsPanel.style.display = 'none';
+            suggestionsPanel.innerHTML = '';
+            return;
+        }
+
+        var matches = [];
+        for (var i = 0; i < select.options.length; i++) {
+            var opt = select.options[i];
+            if (!opt.value) continue;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L199-259)</summary>
+
+**Path:** `Unknown file`
+
+```
+            'promociones': '4. Promociones Vigentes',
+            'calidad': '5. Calidad e Instalaciones',
+            'ubicacion': '6. Ubicación y Contacto',
+            'footer': '7. Pie de Página',
+            'aviso-privacidad': '8. Aviso de Privacidad',
+            'video-promo': '9. Video promo',
+            'configuracion-general': '10. Orden de Secciones',
+            'seo': '11. SEO y Metadatos'
+        };
+
+        function showPanel(name) {
+            document.querySelectorAll('.cms-panel').forEach(p => p.classList.remove('active'));
+            const targetPanel = document.getElementById('panel-' + name);
+            if (targetPanel) targetPanel.classList.add('active');
+
+            // Sincronizar pestaña superior activa + ARIA (A-01)
+            document.querySelectorAll('.cms-tab').forEach(function(t) {
+                t.classList.remove('active');
+                t.setAttribute('aria-selected', 'false');
+                t.setAttribute('tabindex', '-1');
+            });
+            const targetTab = document.getElementById('tab-' + name);
+            if (targetTab) {
+                targetTab.classList.add('active');
+                targetTab.setAttribute('aria-selected', 'true');
+                targetTab.setAttribute('tabindex', '0');
+            }
+
+            // Actualizar breadcrumb
+            const bc = document.getElementById('header-bc-current');
+            if (bc && panelLabelsGestion[name]) bc.textContent = panelLabelsGestion[name];
+        }
+
+        function activateTab(el) {
+            document.querySelectorAll('.cms-tab').forEach(function(t) {
+                t.classList.remove('active');
+                t.setAttribute('aria-selected', 'false');
+                t.setAttribute('tabindex', '-1');
+            });
+            el.classList.add('active');
+            el.setAttribute('aria-selected', 'true');
+            el.setAttribute('tabindex', '0');
+        }
+
+        function activateNav(el) {
+            document.querySelectorAll('.sidebar .nav-item').forEach(n => n.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        
+        // Datos de los 5 Hero Slides del Banner Principal (#inicio)
+        const heroDatos = {
+            1: { badge: "Bienvenido a Nuestra Institución", title: "Bienvenido a LAESH® — Diagnósticos de Confianza", desc: "Trabajamos para proporcionar información diagnóstica confiable que ayude al médico a tomar mejores decisiones y al paciente a recibir atención oportuna.", btnText: "Conoce los Servicios", btnLink: "#especialidades", img: "/laesh-web-assets-uipv1a/img/recepcion.webp" },
+            2: { badge: "25 Años de Experiencia Clínica", title: "Laboratorio de Especialidades Hematológicas", desc: "Ofrecemos servicios de laboratorio clínico de alta especialización y rigor científico, comprometidos con la salud y tranquilidad de nuestra comunidad.", btnText: "Ver Especialidades", btnLink: "#especialidades", img: "/laesh-web-assets-uipv1a/img/area-hematologia-dos.webp" },
+            3: { badge: "Excelencia y Calidad Certificada", title: "Resultados Confiables para Cuidar tu Salud", desc: "Detrás de cada análisis existe una decisión médica crucial. En LAESH® la precisión diagnóstica es nuestro compromiso inquebrantable.", btnText: "Conocer Calidad", btnLink: "#calidad", img: "/laesh-web-assets-uipv1a/img/area-quimica-clinica-dos.webp" },
+            4: { badge: "Tarifas y Paquetes Preferenciales", title: "Promociones y Check-Ups Médicos 2026", desc: "Descubre nuestros paquetes preventivos y tarifas especiales diseñados para el cuidado integral de tu salud y la de toda tu familia.", btnText: "Ver Promociones", btnLink: "#promociones", img: "/laesh-web-assets-uipv1a/img/sala-de-espera.webp" },
+            5: { badge: "Atención Presencial y Horarios", title: "Ubicación, Horarios de Atención y Contacto", desc: "Azucenas #8, Fracc. Jardines del Sur, Huajuapan de León, Oax. Lun a Sáb: 7:00 a.m. – 9:00 p.m. | Dom: 7:00 a.m. – 3:00 p.m. | Tel: 953 688 7694", btnText: "Ver Ubicación", btnLink: "#ubicacion", img: "/laesh-web-assets-uipv1a/img/recepcion-de-pacientes.webp" }
+        };
+
+        function cargarHeroSlideSeleccionado(val) {
+            const d = heroDatos[val];
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L189-207)</summary>
+
+**Path:** `Unknown file`
+
+```
+            panel.style.display = 'none';
+        });
+    }
+});
+
+/* gestion-web.js — lógica del portal de gestión web CMS (extraído de gestion-web.html) */
+        const panelLabelsGestion = {
+            'hero': '1. Banner Principal',
+            'quienes-somos': '2. Quiénes somos',
+            'especialidades': '3. Estudios de Rutina',
+            'promociones': '4. Promociones Vigentes',
+            'calidad': '5. Calidad e Instalaciones',
+            'ubicacion': '6. Ubicación y Contacto',
+            'footer': '7. Pie de Página',
+            'aviso-privacidad': '8. Aviso de Privacidad',
+            'video-promo': '9. Video promo',
+            'configuracion-general': '10. Orden de Secciones',
+            'seo': '11. SEO y Metadatos'
+        };
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<!DOCTYPE html>
+<?php
+/**
+ * admrc/views/gestion_web.php — Plates template (merge de gestion-web.html)
+ *
+ * Fuente HTML: website/uipv1/gestion-web.html  ← NUNCA BORRAR (R15.1)
+ * Merge iterativo: cuando gestion-web.html reciba cambios del cliente,
+ * propagar estructura/textos aquí y mantener lógica PHP.
+ *
+ * Variables disponibles (desde admrc/index.php):
+ *   $nombreAdmin  string  — Nombre del administrador logueado
+ *   $csrfToken    string  — Token CSRF para formularios POST (R14.12)
+ *   $contenidos   array   — [seccion][subseccion][clave] => valor (desde web_contenidos)
+ *   $lastPub      string  — Timestamp de última publicación
+ *
+ * Merge v2 — 2026-08-22:
+ *   + Slides 2-5 del carrusel hero
+ *   + Tagline navbar (hero/navbar)
+ *   + Quiénes Somos: resp. sanitario + filosofía
+ *   + Promociones: 6 días (lunes–sábado) + domingo alt
+ *   + Calidad: título y subtítulo de sección
+ *   + Ubicación: WhatsApp + embed de mapa
+ *   + Panel 7: Pie de Página (footer)
+ *   + Panel 8: SEO y Metadatos
+ *
+ * SSOT Refactor — 2026-08-22 (ver 07_seed_catalogs.sql):
+ *   • D-04 RESUELTO: WhatsApp, teléfono, email, horarios, dirección, CP,
+ *     responsable sanitario → configuraciones (singleton). Ya NO en web_contenidos.
+ *   • Panel 6 (Ubicación) = editor master de todos los singletons institucionales.
+ *   • Paneles 7 (Footer) y 8 (SEO): los datos de configuraciones son read-only en CMS.
+ *   • Promociones: titulo/precio/ayuno/tiempo eliminados del CMS; se usa estudio_clave
+ *     → JOIN estudios para obtener datos clínicos (SSOT desde tabla estudios).
+ *   • especialidades/catalogo/lista y /titulo eliminados (redundantes con tabla estudios).
+ *   • quienes-somos/resp: nombre y cédulas → configuraciones; bio permanece en web_contenidos.
+ * GAP-RC-01 (deferred): labadmin.php → backend persistence + localStorage sync.
+ * GAP-IMG (deferred): inputs type="file" sin name/POST — requieren ruta separada
+ *   POST /cms/upload con enctype=multipart/form-data (fuera del alcance del CMS de texto).
+ */
+
+// Helper: escape HTML seguro (alias de htmlspecialchars)
+function h(string $v): string {
+    return htmlspecialchars($v, ENT_QUOTES, 'UTF-8');
+}
+
+// Helper: recuperar valor de $contenidos con fallback
+function cms(array $c, string $sec, ?string $sub, string $clave, string $default = ''): string {
+    $val = $c[$sec][$sub ?? ''][$clave] ?? '';
+    return htmlspecialchars($val !== '' ? $val : $default, ENT_QUOTES, 'UTF-8');
+}
+
+$lastPubLabel = $lastPub
+    ? 'Pub. ' . date('d/m H:i', strtotime($lastPub))
+    : 'Sin publicar';
+?>
+<html lang="es-MX">
+<head>
+    <meta charset="UTF-8">
+    <meta name="color-scheme" content="light">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L59-94)</summary>
+
+**Path:** `Unknown file`
+
+```
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0052B7">
+    <meta name="description" content="Panel CMS de gestión de contenidos — solo para administradores LAESH.">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://i.ytimg.com; frame-src 'self' https://www.youtube.com https://youtube.com; script-src 'self' 'unsafe-inline';">
+    <title>Gestión de Contenidos Web — LAESH</title>
+    <link rel="icon" type="image/svg+xml" href="/laesh-web-assets-uipv1a/img/favicon.svg">
+    <script src="/laesh-web-assets-uipv1a/js/device-detect.js?v=<?= time() ?>"></script>
+    <meta name="csrf-token" content="<?= htmlspecialchars($csrfToken, ENT_QUOTES, 'UTF-8') ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/tokens.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/fonts.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/style.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/gestion-web.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/ckeditor5.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/portal.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/targeting.css?v=<?= time() ?>">
+</head>
+<body class="portal-medico-body-layout">
+<a href="#main-content" class="skip-link">Ir al contenido principal</a>
+
+<!-- Encabezado Fijo con Breadcrumb -->
+<nav class="portal-access-header">
+    <div class="portal-header-left">
+        <a class="logo portal-access-link" href="/laesh/" target="_blank" rel="noopener">
+            <img src="/laesh-web-assets-uipv1a/img/logo-laesh.webp" alt="LAESH Logo" class="portal-logo" decoding="async" fetchpriority="high">
+        </a>
+        <div class="portal-header-divider"></div>
+        <div class="portal-breadcrumb-group">
+            <span class="txt-main fw-600 portal-h1">Admin</span>
+            <span class="header-sep-green">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            </span>
+            <span id="header-bc-current" class="txt-pgd fw-bold">Banner Principal</span>
+        </div>
+    </div>
+    <div class="portal-header-right">
+        <span class="pub-meta-hdr"><?= htmlspecialchars($lastPubLabel, ENT_QUOTES, 'UTF-8') ?></span>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L169-229)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+        <!-- Ícono ⚙️ Sistema & Logs: visible únicamente en el rail colapsado de íconos (.sidebar-rail-only) -->
+        <a href="/laesh/adrc/sistema" class="nav-item sidebar-rail-only cursor-p" id="nav-sistema-rail" data-tooltip="Administración del Sistema y Logs" role="button" tabindex="0" style="text-decoration:none;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            Sistema & Logs
+        </a>
+
+        <!-- Pub-meta y botón Publicar movidos al header nav (2026-08-27) -->
+
+        <div class="sidebar-mobile-only">
+            <div class="user-badge--sm">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--primary-green-dark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <span>Admin: <strong class="strong-primary"><?= htmlspecialchars($nombreAdmin, ENT_QUOTES, 'UTF-8') ?></strong></span>
+            </div>
+            <a href="/laesh/login/logout.php" class="btn-logout--mobile">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                Cerrar Sesión
+            </a>
+        </div>
+    </aside>
+
+    <!-- ====== MAIN + TABS (columna flex) ====== -->
+    <!--
+        Estructura: .cms-content-col (column flex) agrupa las tabs fijas arriba
+        y el área de paneles scrolleable abajo. Así las tabs NO quedan dentro del
+        scroll container y se "pegan" visualmente sin necesitar position:sticky.
+        Ver: gestion-web.css → .cms-content-col / .cms-panels-scroll
+    -->
+    <div class="cms-content-col">
+        <div class="cms-tabs" role="tablist" aria-label="Secciones del sitio web">
+            <div class="cms-tab active" id="tab-hero" role="tab" aria-selected="true" aria-controls="panel-hero" tabindex="0" data-section="hero">1. Banner Principal</div>
+            <div class="cms-tab" id="tab-quienes-somos" role="tab" aria-selected="false" aria-controls="panel-quienes-somos" tabindex="-1" data-section="quienes-somos">2. Quiénes somos</div>
+            <div class="cms-tab" id="tab-especialidades" role="tab" aria-selected="false" aria-controls="panel-especialidades" tabindex="-1" data-section="especialidades">3. Estudios de Rutina</div>
+            <div class="cms-tab" id="tab-promociones" role="tab" aria-selected="false" aria-controls="panel-promociones" tabindex="-1" data-section="promociones">4. Promociones Vigentes</div>
+            <div class="cms-tab" id="tab-calidad" role="tab" aria-selected="false" aria-controls="panel-calidad" tabindex="-1" data-section="calidad">5. Calidad e Instalaciones</div>
+            <div class="cms-tab" id="tab-ubicacion" role="tab" aria-selected="false" aria-controls="panel-ubicacion" tabindex="-1" data-section="ubicacion">6. Ubicación y Contacto</div>
+            <div class="cms-tab" id="tab-footer" role="tab" aria-selected="false" aria-controls="panel-footer" tabindex="-1" data-section="footer">7. Pie de Página</div>
+            <div class="cms-tab" id="tab-aviso-privacidad" role="tab" aria-selected="false" aria-controls="panel-aviso-privacidad" tabindex="-1" data-section="aviso-privacidad">8. Aviso de Privacidad</div>
+            <div class="cms-tab" id="tab-video-promo" role="tab" aria-selected="false" aria-controls="panel-video-promo" tabindex="-1" data-section="video-promo">9. Video promo</div>
+            <div class="cms-tab" id="tab-configuracion-general" role="tab" aria-selected="false" aria-controls="panel-configuracion-general" tabindex="-1" data-section="configuracion-general">10. Orden de Secciones</div>
+            <div class="cms-tab" id="tab-seo" role="tab" aria-selected="false" aria-controls="panel-seo" tabindex="-1" data-section="seo">11. SEO y Metadatos</div>
+            <!-- Separador visual (botón Preview movido al header nav) -->
+            <div class="cms-tabs-preview-sep" aria-hidden="true"></div>
+        </div><!-- /.cms-tabs -->
+
+        <!-- Área de paneles: esta zona scrollea; .cms-tabs queda fija arriba -->
+        <main class="cms-panels-scroll main-content--pad" id="main-content">
+
+        <!-- ================================================================
+             PANEL 1: HERO / BANNER PRINCIPAL
+             Sección: hero | Fuente HTML: #inicio
+             ================================================================ -->
+        <div id="panel-hero" class="cms-panel active" role="tabpanel" aria-labelledby="tab-hero" tabindex="0">
+            <div class="cms-panel-header">
+                <h3 class="cms-h3">Edición de Banners del Carrusel Principal (#inicio)</h3>
+            </div>
+
+            <!-- ══ INDICACIÓN RÁPIDA DE IMÁGENES ══ -->
+            <p class="cms-img-hint" role="note">
+                <strong>Indicaciones de Carga de Imágenes:</strong>
+                Sobreescritura: La imagen previa se sobreescribe automáticamente al cargar una nueva.
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 5:55 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 5:56 pm
 
 ---
 
