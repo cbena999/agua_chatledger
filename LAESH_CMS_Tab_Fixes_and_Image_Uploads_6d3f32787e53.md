@@ -7,9 +7,9 @@
 | **Trajectory ID** | `cbb3065c-15ab-40b2-a551-df5474c119c2` |
 | **Cascade ID** | `33758958-5e2c-4311-ba38-6d3f32787e53` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 3853 |
+| **Total Steps** | 4056 |
 | **Started** | 30 Aug 2026, 9:34 pm |
-| **Completed** | 1 Sept 2026, 8:13 pm |
+| **Completed** | 1 Sept 2026, 8:44 pm |
 
 ---
 
@@ -3030,3772 +3030,240 @@
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion-web.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L79-124)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-/* Auto-poblar datos per se desde MariaDB al cambiar de Estudio Asociado en el catálogo */
-document.addEventListener('change', function(e) {
-    if (e.target && e.target.classList.contains('promo-estudio-select')) {
-        var select = e.target;
-        var cardId = select.getAttribute('data-card-id');
-        var opt = select.options[select.selectedIndex];
-        if (!opt || !cardId) return;
-
-        var nombre    = opt.getAttribute('data-nombre') || '';
-        var categoria = opt.getAttribute('data-categoria') || '';
-        var ayuno     = opt.getAttribute('data-ayuno') || '';
-        var tiempo    = opt.getAttribute('data-tiempo') || '';
-        var detalle   = opt.getAttribute('data-detalle') || '';
-
-        var keys = [
-            { key: '_ckPromoTitle' + cardId,  dataId: 'ck-promo-title-' + cardId + '-data',  val: nombre },
-            { key: '_ckPromoSub' + cardId,    dataId: 'ck-promo-sub-' + cardId + '-data',    val: categoria },
-            { key: '_ckPromoAyuno' + cardId,  dataId: 'ck-promo-ayuno-' + cardId + '-data',  val: ayuno },
-            { key: '_ckPromoTiempo' + cardId, dataId: 'ck-promo-tiempo-' + cardId + '-data', val: tiempo },
-            { key: '_ckPromoDesc' + cardId,   dataId: 'ck-promo-desc-' + cardId + '-data',   val: detalle }
-        ];
-
-        keys.forEach(function(item) {
-            var el = document.getElementById(item.dataId);
-            if (window[item.key] && typeof window[item.key].setData === 'function') {
-                window[item.key].setData(item.val);
-            } else if (el) {
-                el.value = item.val;
-            }
-        });
-    }
-});
-
-/* gestion-web.js — lógica del portal de gestión web CMS (extraído de gestion-web.html) */
-        const panelLabelsGestion = {
-            'hero': 'Banner Principal',
-            'quienes-somos': 'Quiénes somos',
-            'especialidades': 'Estudios de Rutina',
-            'promociones': 'Promociones Vigentes',
-            'calidad': 'Calidad e Instalaciones',
-            'ubicacion': 'Ubicación y Contacto',
-            'footer': 'Pie de Página',
-            'seo': 'SEO y Metadatos',
-            'aviso-privacidad': 'Aviso de Privacidad',
-            'configuracion-general': 'Configuración General'
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Implementing Autocomplete Logic**
-
-I'm now integrating bi-directional autocomplete search functionality into `laesh-web-assets-uipv1a/js/gestion-web.js`. I've begun working on the event listener for changes to the associated study selection within the catalog, focusing on the logic that populates data from MariaDB.
-
-
-**Refining Input Handling**
-
-I've just added an event listener for input changes on elements with the class 'promo-autocomplete-input'. I'm parsing the input to display and filter suggestions from the associated select options, populating relevant details. I'm focusing now on updating the autocomplete suggestion panel display and handling empty input fields, and also ensuring correct synchronization of data between the autocomplete and the study selection.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.636909033s
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 12:21 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 12:21 pm
 
 ---
 
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-## User Request
-
-AL Intentar subir la imagen de fondo para una de las fichas , aparece este msg de error:
-Ancho 800 px ≠ 900 px requerido para Card de Promociones. Spec: WebP · exacto 900×486 px · ratio 13:7 · máx. 70 KB
-me resulta consufo cual es la medida 800 x 900  o 900 x 486 , deja solo una para evitar ambiguedades usa  Guia_Usuario_CMS_Sitio_Web.html, para tener las medidas correctas. 
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `gestion-web.js`
-**Language:** javascript
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-/* Interceptor global de promesas no capturadas de extensiones de navegador (Chrome/Edge/Brave) */
-window.addEventListener('unhandledrejection', function(event) {
-    if (event && event.reason) {
-        var msg = (event.reason.message || event.reason.toString() || '');
-        if (msg.includes('Could not establish connection') || msg.includes('Receiving end does not exist')) {
-            event.preventDefault();
-        }
-    }
-});
-
-/* Helper RTE Ampliado para formateo de texto sin URL media */
-window.formatRteText = function(btn, command) {
-    var fieldGroup = btn.closest('.field-group');
-    var input = fieldGroup ? fieldGroup.querySelector('input[type="text"], textarea') : null;
-    if (!input) return;
-
-    var start = input.selectionStart;
-    var end = input.selectionEnd;
-    var selectedText = input.value.substring(start, end);
-
-    var openTag = '<' + command + '>';
-    var closeTag = '</' + command + '>';
-
-    if (!selectedText) {
-        selectedText = 'texto';
-    }
-
-    var replacement = openTag + selectedText + closeTag;
-    input.value = input.value.substring(0, start) + replacement + input.value.substring(end);
-    input.focus();
-    input.setSelectionRange(start + openTag.length, start + openTag.length + selectedText.length);
-};
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `Guia_Usuario_CMS_Sitio_Web`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 12:29 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `Guia_Usuario`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 12:29 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `requerido para Card de Promociones`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 12:29 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `promo`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 12:29 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `cms-upload.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L74-114)</summary>
-
-**Path:** `Unknown file`
-
-```
-                        'Usa Squoosh → Format: WebP antes de subir.',
-                        true
-                    );
-                    this.value = '';
-                    return;
-                }
-
-                // ── Reglas por slot (alineadas con Guía CMS §5.1–§5.6) ──────────────
-                // Slots reales (data-upload-slot en gestion_web.php):
-                //   hero-{slide1…5}       → Banner Hero
-                //   carousel-{1…16}       → Carrusel Especialidades
-                //   ubicacion-croquis     → Croquis de Ubicación
-                //   promo-{lun…dom}       → Cards de Promociones
-                //   calidad-gallery{1…3}  → Galería de Calidad
-                //   (default)             → Imagen CMS genérica
-                function slotRules(s) {
-                    if (/^hero-/.test(s))              return { maxKb: 120, minW: 1280, maxW: 1920,                              landscape: true, label: 'Banner Hero',             hint: 'WebP · 1 280–1 920 px ancho · landscape · alto proporcional · máx. 120 KB' };
-                    if (/^carousel-/.test(s))          return { maxKb:  25, exactW: 800, exactH: 580,                                        label: 'Carrusel Especialidades', hint: 'WebP · exacto 800×580 px · máx. 25 KB' };
-                    if (/^ubicacion-croquis$/.test(s)) return { maxKb:  90, minW: 1136, maxW: 1186, minH: 615, maxH: 645,                  label: 'Croquis de Ubicación',    hint: 'WebP · 1 136–1 186 × 615–645 px · máx. 90 KB' };
-                    if (/^promo-/.test(s))             return { maxKb:  70, exactW: 900, exactH: 486,                                       label: 'Card de Promociones',     hint: 'WebP · exacto 900×486 px · ratio 13:7 · máx. 70 KB' };
-                    if (/^calidad-/.test(s))           return { maxKb:  25, exactW: 800, exactH: 580,                                       label: 'Galería de Calidad',      hint: 'WebP · exacto 800×580 px · máx. 25 KB' };
-                    return                                    { maxKb: 120, minW: 800,                                                        label: 'Imagen CMS',              hint: 'WebP · mín. 800 px ancho · máx. 120 KB' };
-                }
-                const rules = slotRules(slot);
-
-                // ── Validación de tamaño ─────────────────────────────────────────────
-                const sizeKb = (file.size / 1024).toFixed(1);
-                if (file.size > rules.maxKb * 1024) {
-                    showToast(
-                        `Peso ${sizeKb} KB supera el máximo de ${rules.maxKb} KB para ${rules.label}.<br>` +
-                        'Optimiza con Squoosh (baja Quality o reduce dimensiones).',
-                        true
-                    );
-                    this.value = '';
-                    return;
-                }
-
-                // ── Validación de dimensiones (requiere cargar la imagen) ────────────
-                try {
-                    const objUrl = URL.createObjectURL(file);
-                    const img    = new Image();
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `cms-upload.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L114-149)</summary>
-
-**Path:** `Unknown file`
-
-```
-                    const img    = new Image();
-                    await new Promise((res, rej) => { img.onload = res; img.onerror = rej; img.src = objUrl; });
-                    URL.revokeObjectURL(objUrl);
-                    const w = img.naturalWidth, h = img.naturalHeight;
-
-                    // Dimensiones exactas (carrusel, croquis)
-                    if (rules.exactW !== undefined && w !== rules.exactW) {
-                        showToast(`Ancho ${w} px ≠ ${rules.exactW} px requerido para ${rules.label}. Spec: ${rules.hint}`, true);
-                        this.value = ''; return;
-                    }
-                    if (rules.exactH !== undefined && h !== rules.exactH) {
-                        showToast(`Alto ${h} px ≠ ${rules.exactH} px requerido para ${rules.label}. Spec: ${rules.hint}`, true);
-                        this.value = ''; return;
-                    }
-
-                    // Rango de ancho (hero, banner, default)
-                    if (rules.minW !== undefined && w < rules.minW) {
-                        showToast(`Ancho ${w} px menor al mínimo de ${rules.minW} px para ${rules.label}. Spec: ${rules.hint}`, true);
-                        this.value = ''; return;
-                    }
-                    if (rules.maxW !== undefined && w > rules.maxW) {
-                        showToast(`Ancho ${w} px mayor al máximo de ${rules.maxW} px para ${rules.label}. Spec: ${rules.hint}`, true);
-                        this.value = ''; return;
-                    }
-
-                    // Rango de alto (hero)
-                    if (rules.minH !== undefined && h < rules.minH) {
-                        showToast(`Alto ${h} px menor al mínimo de ${rules.minH} px para ${rules.label}. Spec: ${rules.hint}`, true);
-                        this.value = ''; return;
-                    }
-                    if (rules.maxH !== undefined && h > rules.maxH) {
-                        showToast(`Alto ${h} px mayor al máximo de ${rules.maxH} px para ${rules.label}. Spec: ${rules.hint}`, true);
-                        this.value = ''; return;
-                    }
-
-                    // Orientación landscape obligatoria
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `Promociones`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 12:29 pm
 
 ---
 
 ### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 12:29 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `900`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 12:29 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `800`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 12:29 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-**Analyzing File Specifications**
-
-I've been examining the file specifications, specifically focusing on `cms-upload.js`. I've just identified line 94, which details image upload requirements. It's great to see clear constraints for "Card de Promociones," defining file type, dimensions, size, and label. This line clarifies the rules for promotional card images, which is very useful.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.067203704s
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L839-864)</summary>
-
-**Path:** `Unknown file`
-
-```
-                                                Cambiar Imagen
-                                            </label>
-                                            <input type="file" accept="image/webp,image/png,image/jpeg"
-                                                   id="file-promo-<?= $pId ?>" class="d-none"
-                                                   data-upload-slot="promo-<?= $pId ?>"
-                                                   data-preview-id="prev-promo-<?= $pId ?>"
-                                                   data-target-input="input-img-promo-<?= $pId ?>">
-                                        </div>
-                                        <input type="url" id="input-img-promo-<?= $pId ?>"
-                                               name="promo_img_<?= $pId ?>"
-                                               value="<?= h($imgUrl) ?>"
-                                               placeholder="/laesh-web-assets-uipv1a/img/cms/promo-<?= h(strtolower($p['dia_semana'])) ?>.webp"
-                                               class="cms-img-url-input" data-no-limit>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
-                    </div>
-                </div>
-            </div>
-        </div><!-- /panel-promociones -->
-
-        <!-- ================================================================
-             PANEL 5: CALIDAD E INSTALACIONES
-             Sección: calidad | Fuente HTML: #calidad
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L824-844)</summary>
-
-**Path:** `Unknown file`
-
-```
-                                            <input type="number" step="0.01" name="promo_precio_reg_<?= $pId ?>" value="<?= $p['precio_regular'] !== null ? h($p['precio_regular']) : '' ?>" placeholder="0.00" class="form-input" style="padding:4px 8px; font-size:0.85rem; height:34px; width:100%;">
-                                        </div>
-                                        <div class="field-group" style="flex:0 0 140px; min-width:120px; max-width:160px; margin-bottom:0;">
-                                            <label style="font-size:0.8rem; font-weight:600; white-space:nowrap;">Precio Oferta ($)</label>
-                                            <input type="number" step="0.01" name="promo_precio_of_<?= $pId ?>" value="<?= $p['precio_oferta'] !== null ? h($p['precio_oferta']) : '' ?>" placeholder="0.00" class="form-input" style="padding:4px 8px; font-size:0.85rem; height:34px; width:100%;">
-                                        </div>
-                                    </div>
-
-                                    <div class="field-group mb-2">
-                                        <label>Imagen de Fondo <small class="txt-muted">(Efecto Transparente / Overlay)</small></label>
-                                        <div class="image-upload-box">
-                                            <img id="prev-promo-<?= $pId ?>"
-                                                 src="<?= !empty($imgUrl) ? h($imgUrl) : 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="90" height="60" viewBox="0 0 90 60"><rect width="100%" height="100%" fill="%23f1f5f9"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%2394a3b8" font-size="10" font-family="sans-serif">Sin Imagen</text></svg>' ?>"
-                                                 alt="Promoción <?= h($diaLabel) ?>" class="img-preview-sm">
-                                            <label for="file-promo-<?= $pId ?>" class="btn btn-secondary btn-sm">
-                                                Cambiar Imagen
-                                            </label>
-                                            <input type="file" accept="image/webp,image/png,image/jpeg"
-                                                   id="file-promo-<?= $pId ?>" class="d-none"
-                                                   data-upload-slot="promo-<?= $pId ?>"
-                                                   data-preview-id="prev-promo-<?= $pId ?>"
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 12:29 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `cms-upload.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L119-134)</summary>
-
-**Path:** `Unknown file`
-
-```
-                    // Dimensiones exactas (carrusel, croquis)
-                    if (rules.exactW !== undefined && w !== rules.exactW) {
-                        showToast(`Ancho ${w} px ≠ ${rules.exactW} px requerido para ${rules.label}. Spec: ${rules.hint}`, true);
-                        this.value = ''; return;
-                    }
-                    if (rules.exactH !== undefined && h !== rules.exactH) {
-                        showToast(`Alto ${h} px ≠ ${rules.exactH} px requerido para ${rules.label}. Spec: ${rules.hint}`, true);
-                        this.value = ''; return;
-                    }
-
-                    // Rango de ancho (hero, banner, default)
-                    if (rules.minW !== undefined && w < rules.minW) {
-                        showToast(`Ancho ${w} px menor al mínimo de ${rules.minW} px para ${rules.label}. Spec: ${rules.hint}`, true);
-                        this.value = ''; return;
-                    }
-                    if (rules.maxW !== undefined && w > rules.maxW) {
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 12:30 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 12:30 pm
 
 ---
 
-## Agent Response
+### Local File Search
 
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-## User Request
-
-. sea mas preciso y consiso: creo este es redundante: Se requieren dimensiones exactas de 900×486 px para Card de Promociones , si ya aparece entre parentesis.
-. Revisa a detalle la pestaña Promociones Vigentes para asegura que funcione el conteo de cambios, preview, publicación, control de refresh/close de navegador, sesiones, seguridad, etc.
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `gestion_web.php`
-**Language:** php
-
-**Open Files:**
-- `gestion_web.php`
-- `cms-upload.js`
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L818-849)</summary>
-
-**Path:** `Unknown file`
-
-```
-                                        <textarea id="ck-promo-desc-<?= $pId ?>-data" name="promo_desc_<?= $pId ?>" class="ck5-hidden-data" rows="3"><?= h($p['descripcion']) ?></textarea>
-                                    </div>
-
-                                    <div style="display:flex; flex-wrap:wrap; gap:1rem; align-items:flex-end;" class="mb-3">
-                                        <div class="field-group" style="flex:0 0 140px; min-width:120px; max-width:160px; margin-bottom:0;">
-                                            <label style="font-size:0.8rem; font-weight:600; white-space:nowrap;">Precio Reg. ($)</label>
-                                            <input type="number" step="0.01" name="promo_precio_reg_<?= $pId ?>" value="<?= $p['precio_regular'] !== null ? h($p['precio_regular']) : '' ?>" placeholder="0.00" class="form-input" style="padding:4px 8px; font-size:0.85rem; height:34px; width:100%;">
-                                        </div>
-                                        <div class="field-group" style="flex:0 0 140px; min-width:120px; max-width:160px; margin-bottom:0;">
-                                            <label style="font-size:0.8rem; font-weight:600; white-space:nowrap;">Precio Oferta ($)</label>
-                                            <input type="number" step="0.01" name="promo_precio_of_<?= $pId ?>" value="<?= $p['precio_oferta'] !== null ? h($p['precio_oferta']) : '' ?>" placeholder="0.00" class="form-input" style="padding:4px 8px; font-size:0.85rem; height:34px; width:100%;">
-                                        </div>
-                                    </div>
-
-                                    <div class="field-group mb-2">
-                                        <label>Imagen de Fondo <small class="txt-muted">(WebP únicamente · exacto 900×486 px · ratio 13:7 · máx. 70 KB)</small></label>
-                                        <div class="image-upload-box">
-                                            <img id="prev-promo-<?= $pId ?>"
-                                                 src="<?= !empty($imgUrl) ? h($imgUrl) : 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="90" height="60" viewBox="0 0 90 60"><rect width="100%" height="100%" fill="%23f1f5f9"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%2394a3b8" font-size="10" font-family="sans-serif">Sin Imagen</text></svg>' ?>"
-                                                 alt="Promoción <?= h($diaLabel) ?>" class="img-preview-sm">
-                                            <label for="file-promo-<?= $pId ?>" class="btn btn-secondary btn-sm">
-                                                Cambiar Imagen
-                                            </label>
-                                            <input type="file" accept="image/webp,image/png,image/jpeg"
-                                                   id="file-promo-<?= $pId ?>" class="d-none"
-                                                   data-upload-slot="promo-<?= $pId ?>"
-                                                   data-preview-id="prev-promo-<?= $pId ?>"
-                                                   data-target-input="input-img-promo-<?= $pId ?>">
-                                        </div>
-                                        <input type="url" id="input-img-promo-<?= $pId ?>"
-                                               name="promo_img_<?= $pId ?>"
-                                               value="<?= h($imgUrl) ?>"
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Analyzing the Details**
-
-I'm digging into the user's request. It's about image dimensions for a promotion card. I've pinpointed the exact pixel requirements: 900x486 px. There seems to be a redundancy issue I need to address, specifically the parenthetical information. I'm focusing on ensuring clarity and conciseness in the instructions.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `syncCkeditors`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.079351100s
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
+**Status:** Reset
+**Created:** 1 Sept 2026, 12:33 pm
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 12:33 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion-web.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L414-449)</summary>
-
-**Path:** `Unknown file`
-
-```
-         * seccion, y hace fetch() al endpoint declarado en el botón publicar.
-         *
-         * En éxito muestra el toast verde; en error muestra toast rojo + log.
-         */
-        /** Sincroniza las instancias activas de CKEditor 5 con sus textareas ocultas antes de evaluar o publicar. */
-        function syncCkeditors(panel) {
-            if (!panel) return;
-            panel.querySelectorAll('textarea.ck5-hidden-data').forEach(function(ta) {
-                var mountId = ta.id.replace('-data', '');
-                var editorKey = 'ck_' + mountId.replace(/-/g, '_');
-                if (window._ckState && window._ckState[editorKey] && typeof window._ckState[editorKey].getData === 'function') {
-                    ta.value = window._ckState[editorKey].getData();
-                }
-            });
-        }
-
-        /** Publica la sección activa del CMS mediante POST a /cms/save. */
-        function publishCmsSection() {
-            var btn       = document.getElementById('btn-cms-save-action');
-            var panel     = document.querySelector('.cms-panel.active');
-            var toast     = document.getElementById('toast');
-
-            if (!btn || !panel) return;
-
-            // Sincronizar editores CKEditor antes de contar cambios o serializar
-            syncCkeditors(panel);
-
-            var csrf     = btn.getAttribute('data-csrf') || '';
-            var endpoint = btn.getAttribute('data-endpoint') || '/laesh/adrc/cms/save';
-            var seccion  = panel.getAttribute('data-section') || panel.id.replace('panel-', '');
-
-            // Confirmación con conteo de cambios pendientes
-            var nCambios = countPanelChanges(panel);
-            var labelSec = panelLabelsGestion[seccion] || seccion;
-            if (nCambios === 0) {
-                alert('Sin cambios en «' + labelSec + '» — no hay nada que publicar.');
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Examining CKEditor Init**
-
-I'm now zeroing in on the CKEditor 5 initialization within `ckeditor-init.js`. I see how instances are being registered on `window`. This seems crucial for understanding how the state is managed. My focus is still on how the `editorKey` is being used in `syncCkeditors(panel)`. Line 424 is the central point. I am now trying to fully understand how these two aspects interact and connect.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `cms-dirty-tracker.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.055157091s
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L14-59)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-    var TRACK_SELECTOR = 'input[name]:not([type="file"]), textarea[name], select[name]';
-    var DRAFT_PREFIX   = 'cms_draft_';   // Clave en localStorage: cms_draft_{panelId}
-    var DRAFT_MAX_AGE  = 7 * 86400 * 1000; // 7 días en ms — borradores más viejos se descartan
-    var activePanelIds = [
-        'panel-hero',
-        'panel-quienes-somos',
-        'panel-especialidades',
-        'panel-promociones',
-        'panel-calidad',
-        'panel-ubicacion',
-        'panel-footer',
-        'panel-seo',
-        'panel-aviso-privacidad'
-    ];
-
-    // Bandera global: ¿hay AL MENOS UN campo sucio en cualquier panel activo?
-    var _hasDirtyFields = false;
-    // Bandera de persistencia local: false = solo guard + dots/badges, sin tocar localStorage
-    var _draftEnabled   = true;
-
-    var CmsDirtyTracker = {
-
-        // ══════════════════════════════════════════════════════════════════
-        //  INIT
-        // ══════════════════════════════════════════════════════════════════
-
-        /**
-         * Inicializa la supervisión en los paneles especificados o por defecto.
-         * @param {string[]} panelIds   IDs de paneles a monitorear
-         * @param {object}   [options]  Opciones:
-         *   enableDraft {boolean} — true (default): activa Auto-Save + Restore en localStorage.
-         *                           false: solo activa guard beforeunload + dots/badges (sin localStorage).
-         */
-        init: function(panelIds, options) {
-            if (Array.isArray(panelIds)) {
-                activePanelIds = panelIds;
-            }
-            var opts = options || {};
-            _draftEnabled = (opts.enableDraft !== false); // default true; false para deshabilitar localStorage
-            var self = this;
-
-            // 1. Restaurar borradores (solo si persistencia habilitada)
-            if (_draftEnabled) {
-                self._restoreDraftsIfAny();
-            }
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `cms-dirty-tracker.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L99-149)</summary>
-
-**Path:** `Unknown file`
-
-```
-                self.evalField(el);
-            });
-        },
-
-        /**
-         * Evalúa si un campo ha cambiado respecto a su valor original.
-         * Si cambió: marca el dot rojo y guarda borrador en localStorage.
-         */
-        evalField: function(el) {
-            var original = el.dataset.original !== undefined ? el.dataset.original : '';
-            var current  = el.value !== undefined ? el.value : '';
-            var isDirty  = (current !== original);
-
-            if (isDirty) {
-                this.markField(el);
-            } else {
-                this.unmarkField(el);
-            }
-
-            var panel = el.closest('.cms-panel');
-            if (panel) {
-                this.updateBadge(panel);
-                if (_draftEnabled) this._saveDraft(panel); // [v2] Persistir borrador (si habilitado)
-            }
-
-            this._syncDirtyFlag();  // [v2] Actualizar bandera global (siempre — necesario para guard)
-            return isDirty;
-        },
-
-        /** Inyecta el indicador rojo (.cms-field-dirty-dot) en el contenedor del campo. */
-        markField: function(el) {
-            var wrapper = this.findWrapper(el);
-            if (!wrapper) return;
-            if (!wrapper.querySelector('.cms-field-dirty-dot')) {
-                var dot = document.createElement('span');
-                dot.className = 'cms-field-dirty-dot';
-                dot.title = 'Campo modificado sin publicar';
-                wrapper.appendChild(dot);
-            }
-        },
-
-        /** Remueve el indicador rojo del contenedor del campo. */
-        unmarkField: function(el) {
-            var wrapper = this.findWrapper(el);
-            if (!wrapper) return;
-            var dot = wrapper.querySelector('.cms-field-dirty-dot');
-            if (dot) dot.remove();
-        },
-
-        /** Busca el contenedor (.field-group o .image-upload-box) para anclar el punto rojo. */
-        findWrapper: function(el) {
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `cms-dirty-tracker.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L249-299)</summary>
-
-**Path:** `Unknown file`
-
-```
-                var hasDirty    = false;
-                panelEl.querySelectorAll(TRACK_SELECTOR).forEach(function(el) {
-                    var orig = el.dataset.original !== undefined ? el.dataset.original : '';
-                    if (el.value !== orig && el.name) {
-                        dirtyFields[el.name] = el.value;
-                        hasDirty = true;
-                    }
-                });
-
-                var key = DRAFT_PREFIX + panelEl.id;
-                if (hasDirty) {
-                    localStorage.setItem(key, JSON.stringify({
-                        timestamp : Date.now(),
-                        panelId   : panelEl.id,
-                        fields    : dirtyFields
-                    }));
-                } else {
-                    localStorage.removeItem(key); // Panel limpio: borrar draft previo
-                }
-            } catch(e) {
-                // localStorage no disponible (modo privado extremo, quota llena) — fail silently
-            }
-        },
-
-        /** Elimina el borrador de un panel del localStorage. */
-        _clearDraft: function(panelId) {
-            try { localStorage.removeItem(DRAFT_PREFIX + panelId); } catch(e) {}
-        },
-
-        /**
-         * Al cargar la página, revisa si existe algún borrador válido en localStorage.
-         * Si existen, muestra un banner fijo con botones "Restaurar" / "Descartar".
-         */
-        _restoreDraftsIfAny: function() {
-            var self  = this;
-            var found = [];
-
-            activePanelIds.forEach(function(panelId) {
-                try {
-                    var raw = localStorage.getItem(DRAFT_PREFIX + panelId);
-                    if (!raw) return;
-                    var draft = JSON.parse(raw);
-                    // Descartar borradores expirados (> 7 días)
-                    if (!draft || !draft.fields || (Date.now() - draft.timestamp) > DRAFT_MAX_AGE) {
-                        localStorage.removeItem(DRAFT_PREFIX + panelId);
-                        return;
-                    }
-                    found.push(draft);
-                } catch(e) {}
-            });
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `cms-dirty-tracker.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L359-401)</summary>
-
-**Path:** `Unknown file`
-
-```
-                            self.evalField(el); // Re-evaluar: marca dot rojo + badge
-                        }
-                    });
-                });
-                banner.remove();
-            });
-
-            // Botón Descartar: limpia los drafts y cierra el banner
-            document.getElementById('cms-draft-discard-btn').addEventListener('click', function() {
-                found.forEach(function(draft) { self._clearDraft(draft.panelId); });
-                banner.remove();
-            });
-        },
-
-        // ══════════════════════════════════════════════════════════════════
-        //  INTERNO — Bandera global de "hay cambios sucios"
-        // ══════════════════════════════════════════════════════════════════
-
-        /**
-         * Recalcula si existe AL MENOS UN campo sucio en cualquier panel activo.
-         * Actualiza _hasDirtyFields — usado por el beforeunload guard.
-         */
-        _syncDirtyFlag: function() {
-            var dirty = false;
-            activePanelIds.forEach(function(panelId) {
-                if (dirty) return; // Short-circuit
-                var panel = document.getElementById(panelId);
-                if (!panel) return;
-                panel.querySelectorAll(TRACK_SELECTOR).forEach(function(el) {
-                    var orig = el.dataset.original !== undefined ? el.dataset.original : '';
-                    if (el.value !== orig) dirty = true;
-                });
-            });
-            _hasDirtyFields = dirty;
-        }
-    };
-
-    window.CmsDirtyTracker = CmsDirtyTracker;
-
-})(window, document);
-
-
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `beforeunload`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 1 Sept 2026, 12:33 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-**Examining `beforeunload` Behavior**
-
-I've been digging into the `beforeunload` event within `cms-dirty-tracker.js`. I see it's linked to the `_hasDirtyFields` flag. This flag gets set when elements within `panel-promociones` have changes compared to their original data.  If there are indeed dirty fields, `beforeunload` fires a native browser confirmation dialog.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.045149697s
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 12:33 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `cms-upload.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L119-129)</summary>
-
-**Path:** `Unknown file`
-
-```
-                    // Dimensiones exactas (carrusel, croquis, promociones)
-                    if (rules.exactW !== undefined && w !== rules.exactW) {
-                        showToast(`La imagen seleccionada tiene un ancho de <strong>${w} px</strong>. Se requieren dimensiones exactas de <strong>${rules.exactW}×${rules.exactH} px</strong> para ${rules.label}.<br><small>Especificación: ${rules.hint}</small>`, true);
-                        this.value = ''; return;
-                    }
-                    if (rules.exactH !== undefined && h !== rules.exactH) {
-                        showToast(`La imagen seleccionada tiene un alto de <strong>${h} px</strong>. Se requieren dimensiones exactas de <strong>${rules.exactW}×${rules.exactH} px</strong> para ${rules.label}.<br><small>Especificación: ${rules.hint}</small>`, true);
-                        this.value = ''; return;
-                    }
-
-                    // Rango de ancho (hero, banner, default)
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Refining Code Simplification**
-
-I'm working on simplifying the code in `cms-upload.js`, specifically lines 122 and 126. My goal is to make it direct and eliminate any redundancies, ensuring it is more concise. Focusing on meeting the request of directness and precision has improved this iteration.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.061321472s
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 12:33 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 12:33 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 12:34 pm
 
 ---
 
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-## User Request
-
-. Hice cambios en Ficha ID: 1, y no se mostro el cabio en preview , ni en la publicación; Analiza de raiz la falle y corrige.
-. Revisa que todo el cms, sus: pestañas, contenidos, operaciones de edición, y de interacción con backedn este habilitada la trazabilidad end2end como se definio en la especificación y no existan gaps/issues.
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `cms-upload.js`
-**Language:** javascript
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-(function () {
-    'use strict';
-
-    // El endpoint de subida dinámico se pasa a través de una etiqueta <meta> para evitar bloqueos por CSP.
-    const metaUpload = document.querySelector('meta[name="cms-upload-url"]');
-    const UPLOAD_ENDPOINT = metaUpload ? metaUpload.content : '/laesh/adrc/cms/upload';
-
-    /** Devuelve el CSRF token vigente (<meta> o data-csrf del botón). */
-    function getCsrf() {
-        const meta = document.querySelector('meta[name="csrf-token"]');
-        if (meta && meta.content) return meta.content;
-        return document.getElementById('btn-cms-save-action')?.dataset?.csrf ?? '';
-    }
-
-    /** Actualiza el CSRF token tras cada rotación en el servidor. */
-    function refreshCsrf(newToken) {
-        if (!newToken) return;
-        const meta = document.querySelector('meta[name="csrf-token"]');
-        if (meta) meta.content = newToken;
-        const btn = document.getElementById('btn-cms-save-action');
-        if (btn) btn.dataset.csrf = newToken;
-    }
-
-    let toastTimer = null;
-
-    /** Muestra el toast CMS. Los errores (isError=true) NUNCA se cierran solos; requieren clic en la '✖'. */
-    function showToast(msg, isError) {
-        const toast = document.getElementById('toast');
-        if (!toast) return;
-
-        if (toastTimer) { clearTimeout(toastTimer); toastTimer = null; }
-
-        const iconSvg = isError
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion-web.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L429-479)</summary>
-
-**Path:** `Unknown file`
-
-```
-                }
-            });
-        }
-
-        /** Publica la sección activa del CMS mediante POST a /cms/save. */
-        function publishCmsSection() {
-            var btn       = document.getElementById('btn-cms-save-action');
-            var panel     = document.querySelector('.cms-panel.active');
-            var toast     = document.getElementById('toast');
-
-            if (!btn || !panel) return;
-
-            // Sincronizar editores CKEditor antes de contar cambios o serializar
-            syncCkeditors(panel);
-
-            var csrf     = btn.getAttribute('data-csrf') || '';
-            var endpoint = btn.getAttribute('data-endpoint') || '/laesh/adrc/cms/save';
-            var seccion  = panel.getAttribute('data-section') || panel.id.replace('panel-', '');
-
-            // Confirmación con conteo de cambios pendientes
-            var nCambios = countPanelChanges(panel);
-            var labelSec = panelLabelsGestion[seccion] || seccion;
-            if (nCambios === 0) {
-                alert('Sin cambios en «' + labelSec + '» — no hay nada que publicar.');
-                return;
-            }
-            var msgConfirm = '¿Publicar ' + nCambios + ' cambio' + (nCambios !== 1 ? 's' : '') + ' en «' + labelSec + '»?\nEsta acción actualizará el sitio en producción.';
-            if (!window.confirm(msgConfirm)) return;
-
-            // Recopilar todos los inputs/textareas con name dentro del panel activo
-            var params = new URLSearchParams();
-            params.set('csrf_token', csrf);
-            params.set('seccion', seccion);
-
-            panel.querySelectorAll('input[name], textarea[name], select[name]').forEach(function(el) {
-                if (el.type === 'file') return;  // archivos no van por este endpoint
-                params.set(el.name, el.value || '');
-            });
-
-            // Feedback visual: deshabilitar botón durante el envío
-            btn.disabled = true;
-            var originalHtml = btn.innerHTML;
-            btn.innerHTML = '<span style="display:inline-block;width:12px;height:12px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:spin 0.7s linear infinite;vertical-align:middle;margin-right:6px;"></span>Publicando…';
-
-            fetch(endpoint, {
-                method:      'POST',
-                credentials: 'same-origin',
-                headers:     { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body:        params.toString()
-            })
-            .then(function(resp) { return resp.json(); })
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L134-179)</summary>
-
-**Path:** `Unknown file`
-
-```
-            "INSERT INTO configuraciones (clave, valor, descripcion) VALUES (:clave, :valor, NULL)
-             ON DUPLICATE KEY UPDATE valor = VALUES(valor)"
-        );
-
-        // Manejo específico de catalogo_promociones en MariaDB cuando la sección es 'promociones'
-        if ($seccion === 'promociones' && isset($_POST['promo_id']) && is_array($_POST['promo_id'])) {
-            $stmtPromo = $db->prepare("
-                UPDATE catalogo_promociones SET
-                    dia_semana      = :dia_semana,
-                    estudio_id      = :estudio_id,
-                    nombre_oferta   = :nombre_oferta,
-                    subtitulo       = :subtitulo,
-                    descripcion     = :descripcion,
-                    ayuno           = :ayuno,
-                    tiempo_entrega  = :tiempo_entrega,
-                    precio_regular  = :precio_regular,
-                    precio_oferta   = :precio_oferta,
-                    imagen_fondo    = :imagen_fondo,
-                    activo          = :activo
-                WHERE id = :id
-            ");
-
-            foreach ($_POST['promo_id'] as $pId) {
-                $pIdInt = (int)$pId;
-                $diaSem = trim($_POST["promo_dia_semana_{$pIdInt}"] ?? '');
-                $estId  = !empty($_POST["promo_estudio_id_{$pIdInt}"]) ? (int)$_POST["promo_estudio_id_{$pIdInt}"] : null;
-                $tit    = trim($_POST["promo_titulo_{$pIdInt}"] ?? '');
-                $sub    = trim($_POST["promo_subtitulo_{$pIdInt}"] ?? '');
-                $desc   = trim($_POST["promo_desc_{$pIdInt}"] ?? '');
-                $ayuno  = trim($_POST["promo_ayuno_{$pIdInt}"] ?? '');
-                $tiempo = trim($_POST["promo_tiempo_{$pIdInt}"] ?? '');
-                $pReg   = (isset($_POST["promo_precio_reg_{$pIdInt}"]) && $_POST["promo_precio_reg_{$pIdInt}"] !== '') ? (float)$_POST["promo_precio_reg_{$pIdInt}"] : null;
-                $pOf    = (isset($_POST["promo_precio_of_{$pIdInt}"]) && $_POST["promo_precio_of_{$pIdInt}"] !== '') ? (float)$_POST["promo_precio_of_{$pIdInt}"] : null;
-                $img    = trim($_POST["promo_img_{$pIdInt}"] ?? '');
-                $act    = isset($_POST["promo_active_{$pIdInt}"]) ? 1 : 0;
-
-                $stmtPromo->execute([
-                    'id'             => $pIdInt,
-                    'dia_semana'     => $diaSem,
-                    'estudio_id'     => $estId,
-                    'nombre_oferta'  => $tit,
-                    'subtitulo'      => $sub,
-                    'descripcion'    => $desc,
-                    'ayuno'          => $ayuno,
-                    'tiempo_entrega' => $tiempo,
-                    'precio_regular' => $pReg,
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Analyzing the Source Code**
-
-I've zeroed in on line 140 within `admrc/index.php`. The conditional check targeting the 'promociones' section, coupled with the array check for `$_POST['promo_id']`, looks highly significant. Now I'm focused on how `publishCmsSection()` handles the form data. I'm investigating how data values are assigned with `params.set(el.name, el.value)`.
-
-
-**Uncovering the Root Cause**
-
-I've confirmed the bug's origin: the `params.set` method in JavaScript overwrites the array data from the form, resulting in `$_POST['promo_id']` being a string instead of an array. Consequently, the conditional check `is_array($_POST['promo_id'])` fails, completely skipping the intended database updates. This explains why changes weren't persisting. I'm now certain this explains the entire issue, and have verified this using several examples.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `log`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 1.076952618s
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 12:44 pm
 
 ---
 
-## Agent Response
+### Code Edit
 
-### Thinking
-
-**Tracing the Root Cause**
-
-I'm now diving into the code, specifically `laesh-web-assets-uipv1a/js/gestion-web.js`. Line 464, within `publishCmsSection()`, is where I'll begin, as that's where the failure is suspected. I need to understand how inputs, textareas, and selects are handled there. I'll focus on the data flow and how the update process works from that part of the CMS.
-
-
-**Pinpointing the Culprit**
-
-I've isolated the root cause to a mismatch in how JavaScript builds the payload and how PHP interprets it. Specifically, the JavaScript code in `gestion-web.js` uses `params.set()` repeatedly for the `promo_id[]` parameter, overwriting the value each time, resulting in only the last ID being sent. This then is received as a scalar, not an array, by PHP, causing the update block to be skipped. A fix involves changing `params.set()` to `params.append()` for array-style inputs to ensure array data is correctly sent and processed in the back end.
-
-
-**Refining the Solution**
-
-I've been refining the solution with additional considerations for array inputs, and the correct handling of checkboxes, including when they are unchecked, when posting form data using `FormData` and `URLSearchParams` in JavaScript. This will ensure PHP receives the data as an array. I'm focusing on strengthening the backend to handle the `promo_id` parameter more robustly, even if the frontend doesn't send the array properly.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 1.729222824s
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
+**Status:** Reset
+**Created:** 1 Sept 2026, 12:45 pm
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 12:45 pm
 
 ---
 
-## Agent Response
+### Terminal Command Execution
 
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion-web.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
+**Status:** Reset
+**Created:** 1 Sept 2026, 12:45 pm
 
 ---
 
-<details>
-<summary>File: `Unknown file` (L439-479)</summary>
+### Terminal Command Execution
 
-**Path:** `Unknown file`
-
-```
-            if (!btn || !panel) return;
-
-            // Sincronizar editores CKEditor antes de contar cambios o serializar
-            syncCkeditors(panel);
-
-            var csrf     = btn.getAttribute('data-csrf') || '';
-            var endpoint = btn.getAttribute('data-endpoint') || '/laesh/adrc/cms/save';
-            var seccion  = panel.getAttribute('data-section') || panel.id.replace('panel-', '');
-
-            // Confirmación con conteo de cambios pendientes
-            var nCambios = countPanelChanges(panel);
-            var labelSec = panelLabelsGestion[seccion] || seccion;
-            if (nCambios === 0) {
-                alert('Sin cambios en «' + labelSec + '» — no hay nada que publicar.');
-                return;
-            }
-            var msgConfirm = '¿Publicar ' + nCambios + ' cambio' + (nCambios !== 1 ? 's' : '') + ' en «' + labelSec + '»?\nEsta acción actualizará el sitio en producción.';
-            if (!window.confirm(msgConfirm)) return;
-
-            // Recopilar todos los inputs/textareas con name dentro del panel activo
-            var params = new URLSearchParams();
-            params.set('csrf_token', csrf);
-            params.set('seccion', seccion);
-
-            panel.querySelectorAll('input[name], textarea[name], select[name]').forEach(function(el) {
-                if (el.type === 'file') return;  // archivos no van por este endpoint
-                params.set(el.name, el.value || '');
-            });
-
-            // Feedback visual: deshabilitar botón durante el envío
-            btn.disabled = true;
-            var originalHtml = btn.innerHTML;
-            btn.innerHTML = '<span style="display:inline-block;width:12px;height:12px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:spin 0.7s linear infinite;vertical-align:middle;margin-right:6px;"></span>Publicando…';
-
-            fetch(endpoint, {
-                method:      'POST',
-                credentials: 'same-origin',
-                headers:     { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body:        params.toString()
-            })
-            .then(function(resp) { return resp.json(); })
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
+**Status:** Reset
+**Created:** 1 Sept 2026, 12:45 pm
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 12:45 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 12:45 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 12:45 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L49-89)</summary>
-
-**Path:** `Unknown file`
-
-```
- */
-function safeHtml(mixed $v): string {
-    $html = strip_tags((string)($v ?? ''), ['strong','em','b','i','br','p','ul','ol','li','a','span','table','tbody','tr','td','th','thead','hr','figure','iframe','h1','h2','h3','h4','h5','h6','u','s','blockquote','oembed','div','img']);
-    $html = preg_replace('/\s+on\w+\s*=\s*(?:"[^"]*"|\'[^\']*\'|[^\s>]*)/i', '', $html);
-    $html = preg_replace('/href\s*=\s*["\']?\s*javascript:/i', 'href="#" data-blocked=', $html);
-    return $html;
-}
-
-/**
- * Parsea el texto de fichas del CMS al array estructurado del acordeón.
- *
- * Formato esperado (una sub-categoría por línea):
- *   [Hematología] Citometría Hemática, Grupo y RH, Plaquetas
- *   [Química Clínica] Química Sanguínea 3, Química Sanguínea 7, ...
- *
- * @return list<array{cat: string, items: list<string>}>
- */
-function parseFichas(string $text): array {
-    $groups = [];
-    foreach (explode("\n", $text) as $line) {
-        $line = trim($line);
-        if ($line === '') continue;
-        if (preg_match('/^\[(.+?)\]\s*(.+)/', $line, $m)) {
-            $items = array_values(array_filter(
-                array_map('trim', explode(',', $m[2]))
-            ));
-            if ($items) {
-                $groups[] = ['cat' => trim($m[1]), 'items' => $items];
-            }
-        }
-    }
-    return $groups;
-}
-
-// ── Conexión DB ─────────────────────────────────────────────────────────────
-$db = Flight::db();
-
-// ── 1. Cargar desde DB ──────────────────────────────────────────────────────
-$configRaw = $db->query("SELECT clave, valor FROM configuraciones")->fetchAll(\PDO::FETCH_KEY_PAIR) ?: [];
-$cms = [];
-foreach ($db->query("SELECT seccion, subseccion, clave, valor FROM web_contenidos ORDER BY id")->fetchAll(\PDO::FETCH_ASSOC) as $row) {
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L89-139)</summary>
-
-**Path:** `Unknown file`
-
-```
-foreach ($db->query("SELECT seccion, subseccion, clave, valor FROM web_contenidos ORDER BY id")->fetchAll(\PDO::FETCH_ASSOC) as $row) {
-    $cms[$row['seccion']][$row['subseccion']][$row['clave']] = $row['valor'];
-}
-
-// ── 2. Preview de borrador CMS (solo sesión admin activa) ──────────────────
-// IMPORTANTE: el merge debe ocurrir ANTES de definir $cfg y $c, porque las arrow
-// functions de PHP capturan variables por VALOR en el momento de su creación.
-// Delight Auth guarda el login bajo $_SESSION['auth_logged_in'] (NOT 'user_id').
-$isPreview = !empty($_GET['_preview'])
-    && !empty($_SESSION['auth_logged_in'])
-    && !empty($_SESSION['cms_draft']);
-if ($isPreview) {
-    foreach ($_SESSION['cms_draft'] as $draftSec => $campos) {
-        foreach ($campos as $rawKey => $val) {
-            // Manejar configuraciones globales (prefijo _cfg_)
-            if (str_starts_with($rawKey, '_cfg_')) {
-                $configRaw[substr($rawKey, 5)] = $val;
-                continue;
-            }
-            // Manejar web_contenidos (formato {sub}__{clave})
-            [$sub, $clave] = array_pad(explode('__', $rawKey, 2), 2, $rawKey);
-            $cms[$draftSec][$sub][$clave] = $val;
-        }
-    }
-}
-
-// ── 3. Helpers y Variables Funcionales (Post-Merge) ─────────────────────────
-$cfg = fn(string $k, string $d = '') => (!isset($configRaw[$k]) || $configRaw[$k] === '') ? $d : $configRaw[$k];
-$c   = fn(string $sec, string $sub, string $k, string $d = '') => (!isset($cms[$sec][$sub][$k]) || $cms[$sec][$sub][$k] === '') ? $d : $cms[$sec][$sub][$k];
-
-// Valores frecuentes — sin fallback: el cliente DEBE tener todo en configuraciones
-$cfgNombreLab = $cfg('nombre_laboratorio');
-$cfgNombreC   = $cfg('nombre_corto');
-$cfgAnios     = $cfg('anios_experiencia');
-$cfgTel       = $cfg('telefono');
-$cfgTelDigit  = waNum($cfgTel);
-$cfgWA        = waNum($cfg('whatsapp_numero'));
-$cfgEmail     = $cfg('email_contacto');
-$cfgDir       = $cfg('direccion');
-$cfgDirCalle  = $cfg('direccion_calle');
-$cfgCiudad    = $cfg('ciudad');
-$cfgEstado    = $cfg('estado');
-$cfgCP        = $cfg('cp');
-$cfgHorSem    = $cfg('horario_semana');
-$cfgHorDom    = $cfg('horario_domingo');
-$cfgHrsOpen   = $cfg('hrs_open');
-$cfgHrsClose  = $cfg('hrs_close');
-$cfgDomOpen   = $cfg('dom_open');
-$cfgDomClose  = $cfg('dom_close');
-$cfgRespNom   = $cfg('responsable_nombre');
-$cfgRespProf  = $cfg('responsable_cedula_prof');
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L249-289)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-// ── 4. Promociones — MariaDB SSOT (catalogo_promociones + catalogo_estudios) ─
-$promoStmt = $db->query(
-    "SELECT 
-        cp.id,
-        cp.dia_semana,
-        cp.nombre_oferta,
-        cp.subtitulo,
-        cp.descripcion,
-        cp.precio_regular,
-        cp.precio_oferta,
-        cp.imagen_fondo,
-        cp.activo,
-        ce.clave_interna,
-        ce.muestra_requerida,
-        ce.tiempo_procesamiento,
-        ce.preparacion,
-        cc.nombre as categoria_nombre
-     FROM catalogo_promociones cp
-     LEFT JOIN catalogo_estudios ce ON cp.estudio_id = ce.id
-     LEFT JOIN catalogo_categorias cc ON ce.categoria_id = cc.id
-     WHERE cp.activo = 1
-     ORDER BY cp.orden ASC, cp.id ASC"
-);
-$promos = $promoStmt ? $promoStmt->fetchAll(\PDO::FETCH_ASSOC) : [];
-
-
-// ── 5. Lecturas agrupadas por sección ────────────────────────────────────────
-
-// Hero — navbar tagline (sin fallback)
-$navTagL1 = $c('hero', 'navbar', 'tagline_l1');
-$navTagL2 = $c('hero', 'navbar', 'tagline_l2');
-
-// Hero — contenido de slides: etiqueta, titulo, descripcion, CTA + imagen_url dinámica
-// CSS bg-slide-N es el fallback visual; imagen_url de BD permite cambiar la imagen desde el CMS.
-// Fallbacks alineados con bg-slide-N de landing.css (5 imágenes distintas — 2026-08-28)
-$slidesBgFallback = [
-    1 => '/laesh-web-assets-uipv1a/img/recepcion-de-pacientes.webp',
-    2 => '/laesh-web-assets-uipv1a/img/laesh-slider-futurista-a.webp',
-    3 => '/laesh-web-assets-uipv1a/img/laesh-slider-futurista-c.webp',
-    4 => '/laesh-web-assets-uipv1a/img/sala-de-espera.webp',
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Examining Code Structure**
-
-I'm now diving into the SQL query within `website/index.php`, specifically lines 253-267. I'm focusing on how the database fields relate to the data I'm using to generate output, paying close attention to the `precio_oferta` and `precio_regular` fields, as those are the most important for my current problem. I am looking for the table to which the query refers.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.100279835s
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 1 Sept 2026, 12:45 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
-**Created:** 1 Sept 2026, 12:45 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 1 Sept 2026, 12:45 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 12:46 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 12:46 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L94-194)</summary>
-
-**Path:** `Unknown file`
-
-```
-    // RBAC: Verificar permiso para guardar en CMS
-    Flight::rbac()->requirePermission('gestionar_cms', '/laesh/login/login.php?portal=admin');
-
-    // R14.12: CSRF primero
-    $submitted = $_POST['csrf_token'] ?? '';
-    if (!hash_equals($_SESSION['csrf_token'] ?? '', $submitted)) {
-        http_response_code(403);
-        Logger::log('WARN', 'Token CSRF inválido en cms/save', Flight::auth()->getUserId() ?: null);
-        echo json_encode(['ok' => false, 'msg' => 'Token de seguridad inválido.']);
-        exit;
-    }
-    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-
-    $db      = Flight::db();
-    $userId  = Flight::auth()->getUserId();
-    $seccion = trim($_POST['seccion'] ?? '');
-
-    // Validar sección — solo valores canónicos (D-07)
-    $seccionesValidas = ['hero','quienes-somos','especialidades','promociones','calidad','ubicacion','aviso-privacidad','privacidad','footer','seo','configuracion-general'];
-    if (!in_array($seccion, $seccionesValidas, true)) {
-        http_response_code(400);
-        echo json_encode(['ok' => false, 'msg' => 'Sección no válida.']);
-        exit;
-    }
-
-    $campos = $_POST;
-    unset($campos['csrf_token'], $campos['seccion']);
-
-    try {
-        $db->beginTransaction();
-
-        $stmt = $db->prepare(
-            "INSERT INTO web_contenidos (seccion, subseccion, clave, valor, tipo, actualizado_por)
-             VALUES (:sec, :sub, :clave, :valor, 'texto', :uid)
-             ON DUPLICATE KEY UPDATE valor = VALUES(valor), actualizado_por = VALUES(actualizado_por)"
-        );
-
-        // Configuraciones globales: campos _cfg_{clave} → tabla configuraciones (D-04)
-        // UPSERT: inserta si la clave no existe, actualiza si ya existe
-        $cfgStmt = $db->prepare(
-            "INSERT INTO configuraciones (clave, valor, descripcion) VALUES (:clave, :valor, NULL)
-             ON DUPLICATE KEY UPDATE valor = VALUES(valor)"
-        );
-
-        // Manejo específico de catalogo_promociones en MariaDB cuando la sección es 'promociones'
-        if ($seccion === 'promociones') {
-            $rawIds = $_POST['promo_id'] ?? [];
-            $promoIds = is_array($rawIds) ? $rawIds : (is_numeric($rawIds) ? [$rawIds] : []);
-
-            if (empty($promoIds)) {
-                $promoIds = $db->query("SELECT id FROM catalogo_promociones ORDER BY id ASC")->fetchAll(\PDO::FETCH_COLUMN) ?: [1, 2, 3, 4, 5, 6, 7];
-            }
-
-            $stmtPromo = $db->prepare("
-                UPDATE catalogo_promociones SET
-                    dia_semana      = :dia_semana,
-                    estudio_id      = :estudio_id,
-                    nombre_oferta   = :nombre_oferta,
-                    subtitulo       = :subtitulo,
-                    descripcion     = :descripcion,
-                    ayuno           = :ayuno,
-                    tiempo_entrega  = :tiempo_entrega,
-                    precio_regular  = :precio_regular,
-                    precio_oferta   = :precio_oferta,
-                    imagen_fondo    = :imagen_fondo,
-                    activo          = :activo
-                WHERE id = :id
-            ");
-
-            foreach ($promoIds as $pId) {
-                $pIdInt = (int)$pId;
-                if ($pIdInt <= 0) continue;
-
-                $diaSem = trim($_POST["promo_dia_semana_{$pIdInt}"] ?? '');
-                $estId  = !empty($_POST["promo_estudio_id_{$pIdInt}"]) ? (int)$_POST["promo_estudio_id_{$pIdInt}"] : null;
-                $tit    = trim($_POST["promo_titulo_{$pIdInt}"] ?? '');
-                $sub    = trim($_POST["promo_subtitulo_{$pIdInt}"] ?? '');
-                $desc   = trim($_POST["promo_desc_{$pIdInt}"] ?? '');
-                $ayuno  = trim($_POST["promo_ayuno_{$pIdInt}"] ?? '');
-                $tiempo = trim($_POST["promo_tiempo_{$pIdInt}"] ?? '');
-                $pReg   = (isset($_POST["promo_precio_reg_{$pIdInt}"]) && $_POST["promo_precio_reg_{$pIdInt}"] !== '') ? (float)$_POST["promo_precio_reg_{$pIdInt}"] : null;
-                $pOf    = (isset($_POST["promo_precio_of_{$pIdInt}"]) && $_POST["promo_precio_of_{$pIdInt}"] !== '') ? (float)$_POST["promo_precio_of_{$pIdInt}"] : null;
-                $img    = trim($_POST["promo_img_{$pIdInt}"] ?? '');
-                $act    = isset($_POST["promo_active_{$pIdInt}"]) ? 1 : 0;
-
-                $stmtPromo->execute([
-                    'id'             => $pIdInt,
-                    'dia_semana'     => $diaSem,
-                    'estudio_id'     => $estId,
-                    'nombre_oferta'  => $tit,
-                    'subtitulo'      => $sub,
-                    'descripcion'    => $desc,
-                    'ayuno'          => $ayuno,
-                    'tiempo_entrega' => $tiempo,
-                    'precio_regular' => $pReg,
-                    'precio_oferta'  => $pOf,
-                    'imagen_fondo'   => $img,
-                    'activo'         => $act,
-                ]);
-            }
-        }
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L194-239)</summary>
-
-**Path:** `Unknown file`
-
-```
-        }
-
-        foreach ($campos as $fieldKey => $valor) {
-            if (str_starts_with($fieldKey, 'promo_')) {
-                continue; // Omitir campos de catalogo_promociones de la tabla web_contenidos
-            }
-            // D-04: campos _cfg_{clave} van a configuraciones, no a web_contenidos
-            if (str_starts_with($fieldKey, '_cfg_')) {
-                $cfgClave = substr($fieldKey, 5); // quitar prefijo '_cfg_'
-                $cfgStmt->execute(['clave' => $cfgClave, 'valor' => $valor]);
-                continue;
-            }
-            // Formato estándar: {subseccion}__{clave}  ej: slide1__titulo
-            [$sub, $clave] = array_pad(explode('__', $fieldKey, 2), 2, $fieldKey);
-            $stmt->execute([
-                'sec'   => $seccion,
-                'sub'   => $sub,
-                'clave' => $clave,
-                'valor' => $valor,
-                'uid'   => $userId,
-            ]);
-        }
-
-        $db->commit();
-        unset($_SESSION['cms_draft'][$seccion]);
-        Logger::log('INFO', "CMS: sección '{$seccion}' publicada.", $userId);
-        // Devolver CSRF rotado para que el cliente actualice su data-csrf sin recargar
-        echo json_encode(['ok' => true, 'msg' => '¡Cambios publicados exitosamente!', 'csrf_token' => $_SESSION['csrf_token']]);
-
-    } catch (\PDOException $e) {
-        $db->rollBack();
-        DB::logFallback('ERROR', "INSERT web_contenidos seccion={$seccion}", $e->getMessage());
-        http_response_code(500);
-        echo json_encode(['ok' => false, 'msg' => 'Error al guardar. Intenta de nuevo.']);
-    }
-});
-
-// ── POST /cms/upload — Subida de imágenes CMS (GAP-IMG resuelto) ─────────────
-//
-// Contrato:
-//   - Content-Type: multipart/form-data  (input type="file" en el cliente)
-//   - POST body: file (el archivo), slot (nombre del slot, ej: hero-slide1), csrf_token
-//   - Respuesta JSON: {ok: bool, url: string, filename: string, msg: string}
-//
-// Seguridad:
-//   - RBAC gestionar_cms obligatorio
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 12:46 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 12:47 pm
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-## User Request
-
-. Reordena y renumera las pestañas del cms: 1 al 7 se queda igual, despues la 8 sea: AViso de privacidad, la 10 sea Orden Secciones y la 11 sea SEO y Metadatos.
-. Que la parte del cms de Orden de Secciones — Página de Inicio, LA CUAL ya funciona; que ahora su preview y publicación funcione impactando a index.php uniformemente:  previendo evitar huecos visuales, gaps, etc.
-.. EN el Orden de Secciones debe aparecer la seccion de inicio (imagenes de hero y slider)
-.. Tambien la parte del orden de los items del menu superior horizontal, debe ser impactada, 6 items (Inicio,Quiénes somos,Estudios, Promociones,Calidad,Ubicación y Contacto).
-
 
 ---
 
 ### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 4:12 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-<!DOCTYPE html>
-<?php
-/**
- * admrc/views/gestion_web.php — Plates template (merge de gestion-web.html)
- *
- * Fuente HTML: website/uipv1/gestion-web.html  ← NUNCA BORRAR (R15.1)
- * Merge iterativo: cuando gestion-web.html reciba cambios del cliente,
- * propagar estructura/textos aquí y mantener lógica PHP.
- *
- * Variables disponibles (desde admrc/index.php):
- *   $nombreAdmin  string  — Nombre del administrador logueado
- *   $csrfToken    string  — Token CSRF para formularios POST (R14.12)
- *   $contenidos   array   — [seccion][subseccion][clave] => valor (desde web_contenidos)
- *   $lastPub      string  — Timestamp de última publicación
- *
- * Merge v2 — 2026-08-22:
- *   + Slides 2-5 del carrusel hero
- *   + Tagline navbar (hero/navbar)
- *   + Quiénes Somos: resp. sanitario + filosofía
- *   + Promociones: 6 días (lunes–sábado) + domingo alt
- *   + Calidad: título y subtítulo de sección
- *   + Ubicación: WhatsApp + embed de mapa
- *   + Panel 7: Pie de Página (footer)
- *   + Panel 8: SEO y Metadatos
- *
- * SSOT Refactor — 2026-08-22 (ver 07_seed_catalogs.sql):
- *   • D-04 RESUELTO: WhatsApp, teléfono, email, horarios, dirección, CP,
- *     responsable sanitario → configuraciones (singleton). Ya NO en web_contenidos.
- *   • Panel 6 (Ubicación) = editor master de todos los singletons institucionales.
- *   • Paneles 7 (Footer) y 8 (SEO): los datos de configuraciones son read-only en CMS.
- *   • Promociones: titulo/precio/ayuno/tiempo eliminados del CMS; se usa estudio_clave
- *     → JOIN estudios para obtener datos clínicos (SSOT desde tabla estudios).
- *   • especialidades/catalogo/lista y /titulo eliminados (redundantes con tabla estudios).
- *   • quienes-somos/resp: nombre y cédulas → configuraciones; bio permanece en web_contenidos.
- * GAP-RC-01 (deferred): labadmin.php → backend persistence + localStorage sync.
- * GAP-IMG (deferred): inputs type="file" sin name/POST — requieren ruta separada
- *   POST /cms/upload con enctype=multipart/form-data (fuera del alcance del CMS de texto).
- */
-
-// Helper: escape HTML seguro (alias de htmlspecialchars)
-function h(string $v): string {
-    return htmlspecialchars($v, ENT_QUOTES, 'UTF-8');
-}
-
-// Helper: recuperar valor de $contenidos con fallback
-function cms(array $c, string $sec, ?string $sub, string $clave, string $default = ''): string {
-    $val = $c[$sec][$sub ?? ''][$clave] ?? '';
-    return htmlspecialchars($val !== '' ? $val : $default, ENT_QUOTES, 'UTF-8');
-}
-
-$lastPubLabel = $lastPub
-    ? 'Pub. ' . date('d/m H:i', strtotime($lastPub))
-    : 'Sin publicar';
-?>
-<html lang="es-MX">
-<head>
-    <meta charset="UTF-8">
-    <meta name="color-scheme" content="light">
-    <meta name="robots" content="noindex, nofollow">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#0052B7">
-    <meta name="description" content="Panel CMS de gestión de contenidos — solo para administradores LAESH.">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://i.ytimg.com; frame-src 'self' https://www.youtube.com https://youtube.com; script-src 'self' 'unsafe-inline';">
-    <title>Gestión de Contenidos Web — LAESH</title>
-    <link rel="icon" type="image/svg+xml" href="/laesh-web-assets-uipv1a/img/favicon.svg">
-    <script src="/laesh-web-assets-uipv1a/js/device-detect.js?v=<?= time() ?>"></script>
-    <meta name="csrf-token" content="<?= htmlspecialchars($csrfToken, ENT_QUOTES, 'UTF-8') ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/tokens.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/fonts.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/style.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/gestion-web.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/ckeditor5.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/portal.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/targeting.css?v=<?= time() ?>">
-</head>
-<body class="portal-medico-body-layout">
-<a href="#main-content" class="skip-link">Ir al contenido principal</a>
-
-<!-- Encabezado Fijo con Breadcrumb -->
-<nav class="portal-access-header">
-    <div class="portal-header-left">
-        <a class="logo portal-access-link" href="/laesh/" target="_blank" rel="noopener">
-            <img src="/laesh-web-assets-uipv1a/img/logo-laesh.webp" alt="LAESH Logo" class="portal-logo" decoding="async" fetchpriority="high">
-        </a>
-        <div class="portal-header-divider"></div>
-        <div class="portal-breadcrumb-group">
-            <span class="txt-main fw-600 portal-h1">Admin</span>
-            <span class="header-sep-green">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-            </span>
-            <span id="header-bc-current" class="txt-pgd fw-bold">Banner Principal</span>
-        </div>
-    </div>
-    <div class="portal-header-right">
-        <span class="pub-meta-hdr"><?= htmlspecialchars($lastPubLabel, ENT_QUOTES, 'UTF-8') ?></span>
-        <button type="button" class="btn btn-primary btn-resultados-sm mr-2" id="btn-cms-save-action"
-                data-csrf="<?= htmlspecialchars($csrfToken, ENT_QUOTES, 'UTF-8') ?>"
-                data-endpoint="/laesh/adrc/cms/save">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
-            Publicar
-        </button>
-        <span class="hdr-sep-v" aria-hidden="true"></span>
-        <button type="button" class="btn btn-secondary mr-2" id="btn-preview-tabbar" title="Vista previa del sitio público sin publicar">
-            👁 Vista previa
-        </button>
-        <a href="/laesh/adrc/sistema" class="btn btn-secondary mr-2" id="btn-sistema-admin" title="Administración del Sistema y Logs">
-            ⚙️ Sistema & Logs
-        </a>
-        <div class="user-badge-portal">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--primary-green-dark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            <span>Admin Web: <strong class="txt-pgd"><?= htmlspecialchars($nombreAdmin, ENT_QUOTES, 'UTF-8') ?></strong></span>
-        </div>
-        <a href="/laesh/login/logout.php" class="btn-back-primary" id="btn-logout">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-            Cerrar Sesión
-        </a>
-    </div>
-    <div class="portal-initials-mob portal-initials-mob--admin" aria-hidden="true">ADM</div>
-</nav>
-
-<div class="app-layout">
-    <!-- ====== SIDEBAR ====== -->
-    <aside class="sidebar">
-        <div class="sidebar-toggle-row">
-            <button type="button" class="sidebar-rail-toggle" id="sidebar-rail-toggle" title="Expandir / Colapsar menú">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-            </button>
-        </div>
-        <div class="nav-item active" id="nav-hero" data-panel="panel-hero" data-section="hero" data-tooltip="Banner y textos del carrusel principal (#inicio)" role="button" tabindex="0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
-            Banner Principal
-        </div>
-        <div class="nav-item" id="nav-quienes-somos" data-panel="panel-quienes-somos" data-section="quienes-somos" data-tooltip="Historia, Misión, Visión y Valores (#acerca-de)" role="button" tabindex="0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            Quiénes somos
-        </div>
-        <div class="nav-item" id="nav-especialidades" data-panel="panel-especialidades" data-section="especialidades" data-tooltip="Carrusel y catálogo de estudios (#especialidades)" role="button" tabindex="0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2v6a2 2 0 0 0 .245.96l5.51 10.08A2 2 0 0 1 18 22H6a2 2 0 0 1-1.755-2.96l5.51-10.08A2 2 0 0 0 10 8V2"/></svg>
-            Estudios de Rutina
-        </div>
-        <div class="nav-item" id="nav-promociones" data-panel="panel-promociones" data-section="promociones" data-tooltip="Banner promocional (#promociones)" role="button" tabindex="0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m8.5 8.5 7 7"/></svg>
-            Promociones Vigentes
-        </div>
-        <div class="nav-item" id="nav-calidad" data-panel="panel-calidad" data-section="calidad" data-tooltip="Galería de instalaciones (#calidad)" role="button" tabindex="0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-            Calidad e Instalaciones
-        </div>
-        <div class="nav-item" id="nav-ubicacion" data-panel="panel-ubicacion" data-section="ubicacion" data-tooltip="Teléfonos, dirección y mapa (#ubicacion)" role="button" tabindex="0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L150-199)</summary>
-
-**Path:** `Unknown file`
-
-```
-            Ubicación y Contacto
-        </div>
-        <div class="nav-item" id="nav-footer" data-panel="panel-footer" data-section="footer" data-tooltip="Pie de página: datos, horarios y créditos (#footer)" role="button" tabindex="0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="13" width="18" height="8" rx="2"/><path d="M3 7h18M7 3h10"/></svg>
-            Pie de Página
-        </div>
-        <div class="nav-item" id="nav-seo" data-panel="panel-seo" data-section="seo" data-tooltip="Metadatos, Open Graph y Schema.org" role="button" tabindex="0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
-            SEO y Metadatos
-        </div>
-        <div class="nav-item" id="nav-aviso-privacidad" data-panel="panel-aviso-privacidad" data-section="aviso-privacidad" data-tooltip="Aviso de Privacidad — contenido legal completo" role="button" tabindex="0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            Aviso de Privacidad
-        </div>
-        <div class="nav-item" id="nav-configuracion-general" data-panel="panel-configuracion-general" data-section="configuracion-general" data-tooltip="Orden vertical de secciones en la página de inicio" role="button" tabindex="0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
-            Orden de Secciones
-        </div>
-
-        <!-- Pub-meta y botón Publicar movidos al header nav (2026-08-27) -->
-
-        <div class="sidebar-mobile-only">
-            <div class="user-badge--sm">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--primary-green-dark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                <span>Admin: <strong class="strong-primary"><?= htmlspecialchars($nombreAdmin, ENT_QUOTES, 'UTF-8') ?></strong></span>
-            </div>
-            <a href="/laesh/login/logout.php" class="btn-logout--mobile">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-                Cerrar Sesión
-            </a>
-        </div>
-    </aside>
-
-    <!-- ====== MAIN + TABS (columna flex) ====== -->
-    <!--
-        Estructura: .cms-content-col (column flex) agrupa las tabs fijas arriba
-        y el área de paneles scrolleable abajo. Así las tabs NO quedan dentro del
-        scroll container y se "pegan" visualmente sin necesitar position:sticky.
-        Ver: gestion-web.css → .cms-content-col / .cms-panels-scroll
-    -->
-    <div class="cms-content-col">
-        <div class="cms-tabs" role="tablist" aria-label="Secciones del sitio web">
-            <div class="cms-tab active" id="tab-hero" role="tab" aria-selected="true" aria-controls="panel-hero" tabindex="0" data-section="hero">1. Banner Principal</div>
-            <div class="cms-tab" id="tab-quienes-somos" role="tab" aria-selected="false" aria-controls="panel-quienes-somos" tabindex="-1" data-section="quienes-somos">2. Quiénes somos</div>
-            <div class="cms-tab" id="tab-especialidades" role="tab" aria-selected="false" aria-controls="panel-especialidades" tabindex="-1" data-section="especialidades">3. Estudios de Rutina</div>
-            <div class="cms-tab" id="tab-promociones" role="tab" aria-selected="false" aria-controls="panel-promociones" tabindex="-1" data-section="promociones">4. Promociones Vigentes</div>
-            <div class="cms-tab" id="tab-calidad" role="tab" aria-selected="false" aria-controls="panel-calidad" tabindex="-1" data-section="calidad">5. Calidad e Instalaciones</div>
-            <div class="cms-tab" id="tab-ubicacion" role="tab" aria-selected="false" aria-controls="panel-ubicacion" tabindex="-1" data-section="ubicacion">6. Ubicación y Contacto</div>
-            <div class="cms-tab" id="tab-footer" role="tab" aria-selected="false" aria-controls="panel-footer" tabindex="-1" data-section="footer">7. Pie de Página</div>
-            <div class="cms-tab" id="tab-seo" role="tab" aria-selected="false" aria-controls="panel-seo" tabindex="-1" data-section="seo">8. SEO y Metadatos</div>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L199-219)</summary>
-
-**Path:** `Unknown file`
-
-```
-            <div class="cms-tab" id="tab-seo" role="tab" aria-selected="false" aria-controls="panel-seo" tabindex="-1" data-section="seo">8. SEO y Metadatos</div>
-            <div class="cms-tab" id="tab-aviso-privacidad" role="tab" aria-selected="false" aria-controls="panel-aviso-privacidad" tabindex="-1" data-section="aviso-privacidad">9. Aviso de Privacidad</div>
-            <div class="cms-tab" id="tab-configuracion-general" role="tab" aria-selected="false" aria-controls="panel-configuracion-general" tabindex="-1" data-section="configuracion-general">⚙ Orden de Secciones</div>
-            <!-- Separador visual (botón Preview movido al header nav) -->
-            <div class="cms-tabs-preview-sep" aria-hidden="true"></div>
-        </div><!-- /.cms-tabs -->
-
-        <!-- Área de paneles: esta zona scrollea; .cms-tabs queda fija arriba -->
-        <main class="cms-panels-scroll main-content--pad" id="main-content">
-
-        <!-- ================================================================
-             PANEL 1: HERO / BANNER PRINCIPAL
-             Sección: hero | Fuente HTML: #inicio
-             ================================================================ -->
-        <div id="panel-hero" class="cms-panel active" role="tabpanel" aria-labelledby="tab-hero" tabindex="0">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">Edición de Banners del Carrusel Principal (#inicio)</h3>
-            </div>
-
-            <!-- ══ INDICACIÓN RÁPIDA DE IMÁGENES ══ -->
-            <p class="cms-img-hint" role="note">
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1509-1559)</summary>
-
-**Path:** `Unknown file`
-
-```
-        </div>
-
-        <!-- ================================================================
-             PANEL 10: CONFIGURACIÓN GENERAL — Orden de Secciones
-             Sección: configuracion-general | Campo: _cfg_seccion_order
-             Persiste en tabla configuraciones (clave='seccion_order') vía prefijo _cfg_
-             ================================================================ -->
-        <div id="panel-configuracion-general" class="cms-panel" role="tabpanel" aria-labelledby="tab-configuracion-general" tabindex="0" data-section="configuracion-general">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">Orden de Secciones — Página de Inicio</h3>
-            </div>
-
-            <hr class="cms-section-sep">
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">Orden Vertical de Secciones (#inicio)</div>
-                </div>
-                <div class="editor-card-body">
-                    <!-- Hidden input que serializa el orden para el POST /cms/save -->
-                    <input type="hidden"
-                           id="seccion-order-input"
-                           name="_cfg_seccion_order"
-                           value="<?= h($config['seccion_order'] ?? '') ?>">
-
-                    <?php
-                    // Reconstruir orden desde BD, o usar el default si no hay valor
-                    $_secDefault = ['acerca-de','especialidades','promociones','calidad','ubicacion'];
-                    $_secLabels  = [
-                        'acerca-de'     => ['icon'=>'👥', 'label'=>'Quiénes somos',           'anchor'=>'#acerca-de'],
-                        'especialidades'=> ['icon'=>'🔬', 'label'=>'Estudios de Rutina',        'anchor'=>'#especialidades'],
-                        'promociones'   => ['icon'=>'🏷️', 'label'=>'Promociones Vigentes',      'anchor'=>'#promociones'],
-                        'calidad'       => ['icon'=>'🖼️', 'label'=>'Calidad e Instalaciones',   'anchor'=>'#calidad'],
-                        'ubicacion'     => ['icon'=>'📍', 'label'=>'Ubicación y Contacto',      'anchor'=>'#ubicacion'],
-                    ];
-                    $_rawOrder  = $config['seccion_order'] ?? '';
-                    if ($_rawOrder !== '') {
-                        $_parsed  = array_unique(array_filter(
-                            array_map('trim', explode(',', $_rawOrder)),
-                            fn($s) => in_array($s, $_secDefault, true)
-                        ));
-                        $_missing = array_diff($_secDefault, $_parsed);
-                        $_ordered = array_values(array_merge($_parsed, $_missing));
-                    } else {
-                        $_ordered = $_secDefault;
-                    }
-                    unset($_secDefault, $_rawOrder, $_parsed, $_missing);
-                    ?>
-
-                    <p class="cms-help-text mb-3">Arrastra para cambiar el orden. El cambio se aplica al publicar.</p>
-
-                    <ul id="seccion-order-list"
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L149-249)</summary>
-
-**Path:** `Unknown file`
-
-```
-$waContactUrl  = $waInfoUrl;
-
-/** Obtiene valor CMS con fallback.
- *  NOTA: debe definirse DESPUÉS del merge de preview para que capture
- *  el $cms ya actualizado (PHP arrow fn captura por valor al momento de creación). */
-$c = fn(string $sec, string $sub, string $k, string $d = '') => $cms[$sec][$sub][$k] ?? $d;
-
-// ── 3. Catálogo de estudios — 4 abanicos desde web_contenidos ───────────────
-// Fuente SSOT: web_contenidos(especialidades, cgN, titulo/fichas)
-// Iconos SVG decorativos por grupo (inline — sin CDN)
-const GRUPO_SVGS = [
-    1 => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>',
-    2 => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>',
-    3 => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>',
-    4 => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>',
-];
-
-$cg = [];
-$grupos = $db->query("SELECT id, titulo FROM catalogo_grupos ORDER BY orden ASC LIMIT 4")->fetchAll(\PDO::FETCH_ASSOC);
-foreach ($grupos as $idx => $g) {
-    $gi = $idx + 1;
-    $cg[$gi] = [
-        'titulo' => $g['titulo'],
-        'fichas' => []
-    ];
-    $categorias = $db->prepare("SELECT id, nombre FROM catalogo_categorias WHERE grupo_id = ? ORDER BY orden ASC");
-    $categorias->execute([$g['id']]);
-    foreach ($categorias->fetchAll(\PDO::FETCH_ASSOC) as $cat) {
-        $estudiosStmt = $db->prepare("SELECT clave_interna, nombre, tiempo_procesamiento, muestra_requerida, preparacion FROM catalogo_estudios WHERE categoria_id = ? AND activo = 1 ORDER BY id ASC");
-        $estudiosStmt->execute([$cat['id']]);
-        $estudios = $estudiosStmt->fetchAll(\PDO::FETCH_ASSOC);
-        if (!empty($estudios)) {
-            $cg[$gi]['fichas'][] = [
-                'cat' => $cat['nombre'],
-                'items' => $estudios
-            ];
-        }
-    }
-}
-
-// ── 3b. Hero autoplay (seg) — desde web_contenidos.hero.config.transition_time
-// Alineado con gestion-web.php (POST hero_config__transition_time)
-$heroAutoplay = min(90, max(0, (int)$c('hero', 'config', 'transition_time', '5'))); // 0 = pausa indefinida
-
-// ── 3c. Quiénes somos — Ficha 4 (25 años / CKEditor 5) ───────────────────
-// Desde 2026-08-23: ficha4/texto almacena HTML enriquecido (CKEditor 5).
-// El heading del card va incluido en el HTML (primer bloque H3 del editor).
-// safeHtml() filtra antes de emitir.
-$qsConfianzaHtml = $c('quienes-somos', 'ficha4', 'texto');
-
-// ── 3d. Carrusel de especialidades y áreas — 16 tarjetas ───────────────────
-// Imágenes: configuraciones.carouselN_img (fallback a paths estáticos).
-// Textos: dinámicos desde web_contenidos (especialidades/carouselN/texto HTML).
-$_carDef = [
-    1  => ['/laesh-web-assets-uipv1a/img/area-hematologia-dos.webp'],
-    2  => ['/laesh-web-assets-uipv1a/img/area-quimica-clinica-dos.webp'],
-    3  => ['/laesh-web-assets-uipv1a/img/area-bacteriologia-dos.webp'],
-    4  => ['/laesh-web-assets-uipv1a/img/area-uroanalisis.webp'],
-    5  => ['/laesh-web-assets-uipv1a/img/area-coagulacion.webp'],
-    6  => ['/laesh-web-assets-uipv1a/img/area-estudios-especiales.webp'],
-    7  => ['/laesh-web-assets-uipv1a/img/area-centrifugacion.webp'],
-    8  => ['/laesh-web-assets-uipv1a/img/area-toma-de-muestras.webp'],
-    9  => ['/laesh-web-assets-uipv1a/img/toma-de-muestras.webp'],
-    10 => ['/laesh-web-assets-uipv1a/img/toma-pediatricas.webp'],
-    11 => ['/laesh-web-assets-uipv1a/img/toma-de-cultivos.webp'],
-    12 => ['/laesh-web-assets-uipv1a/img/recepcion-lab.webp'],
-];
-$carouselCards = [];
-for ($ci = 1; $ci <= 16; $ci++) {
-    $cHtml = trim((string)$c('especialidades', "carousel{$ci}", 'texto'));
-    if ($cHtml === '') continue;
-    $cImg = trim((string)$c('especialidades', 'config', "carousel{$ci}_img", $cfg("carousel{$ci}_img", $_carDef[$ci][0] ?? '')));
-    if ($cImg === '') {
-        $cImg = $_carDef[$ci][0] ?? '/laesh-web-assets-uipv1a/img/area-hematologia-dos.webp';
-    }
-    $carouselCards[$ci] = [
-        'img'   => $cImg,
-        'texto' => $cHtml,
-    ];
-}
-
-// ── 3e. Calidad gallery — 3 tarjetas ────────────────────────────────────────
-$_calDef = [
-    1 => ['Área de Hematología',      'Análisis de biometría hemática y células sanguíneas con rigor científico y alta precisión.',
-          '/laesh-web-assets-uipv1a/img/area-hematologia-uno.webp'],
-    2 => ['Química Clínica',          'Determinación automatizada de metabolitos, perfil lipídico y enzimas específicas.',
-          '/laesh-web-assets-uipv1a/img/area-quimica-clinica.webp'],
-    3 => ['Microbiología y Cultivos', 'Aislamiento, tinción de Gram y pruebas de susceptibilidad a antimicrobianos.',
-          '/laesh-web-assets-uipv1a/img/area-bacteriologia.webp'],
-];
-$calidadCards = [];
-for ($qi = 1; $qi <= 3; $qi++) {
-    $calidadCards[$qi] = [
-        // imagen_url desde CMS; fallback al asset estático original (R15.1)
-        'img'    => $c('calidad', "gallery{$qi}", 'imagen_url', $_calDef[$qi][2]),
-        'alt'    => $_calDef[$qi][0],
-        'titulo' => $c('calidad', "gallery{$qi}", 'titulo',      $_calDef[$qi][0]),
-        'desc'   => $c('calidad', "gallery{$qi}", 'descripcion', $_calDef[$qi][1]),
-    ];
-}
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L294-369)</summary>
-
-**Path:** `Unknown file`
-
-```
-$slides = [];
-for ($si = 1; $si <= 5; $si++) {
-    $imgUrl = $c('hero', "slide{$si}", 'imagen_url', $slidesBgFallback[$si]);
-    $slides[$si] = [
-        'etiqueta'    => $c('hero', "slide{$si}", 'etiqueta'),
-        'titulo'      => $c('hero', "slide{$si}", 'titulo'),
-        'descripcion' => $c('hero', "slide{$si}", 'descripcion'),
-        'cta_texto'   => $c('hero', "slide{$si}", 'cta_texto'),
-        'cta_href'    => $c('hero', "slide{$si}", 'cta_href'),
-        'imagen_url'  => $imgUrl,
-        'bg_style'    => $imgUrl
-            ? 'background-image:url(' . h($imgUrl) . ');'  /* gradiente removido 2026-08-28: bandas contain deben mostrar fondo gris limpio */
-            : '',
-    ];
-}
-// Slide 5: si la descripción CMS está vacía, construirla desde configuraciones
-$slide5Desc = $slides[5]['descripcion']
-    ?: (h($cfgDirCalle ?: $cfgDir) . ', ' . h($cfgCiudad) . ', ' . h($cfgEstado) . '.<br>'
-      . h($cfgHorSem) . ' &nbsp;|&nbsp; ' . h($cfgHorDom) . ' &nbsp;|&nbsp; Tel: ' . h($cfgTel));
-
-// Quiénes somos (sin fallback)
-$qsH2         = $c('quienes-somos', 'seccion',   'h2');
-$qsSub        = $c('quienes-somos', 'seccion',   'subtitulo');
-// $qsHisTit ha sido eliminado: el título ahora se renderiza desde CKEditor (ficha1)
-$qsCompromiso = $c('quienes-somos', 'seccion',   'compromiso');
-$qsMision     = $c('quienes-somos', 'ficha2',    'texto');
-$qsVision     = $c('quienes-somos', 'ficha3',    'texto');
-// ficha1/texto: desde 2026-08-23 almacena HTML enriquecido (CKEditor 5).
-// safeHtml() filtra tags permitidos antes de emitir.
-$qsHistoriaHtml = $c('quienes-somos', 'ficha1', 'texto');
-$qsRespBio      = $c('quienes-somos', 'resp', 'bio');
-$qsRespFraseTpl = $c('quienes-somos', 'resp', 'frase_trayectoria');
-$qsRespFrase    = str_replace(
-    ['{anios}', '{lab}'],
-    ['<strong class="txt-green">' . h($cfgAnios) . ' años</strong>', h($cfgNombreC)],
-    h($qsRespFraseTpl)
-);
-$qsFiloCita   = $c('quienes-somos', 'filosofia', 'tagline');
-$qsFiloTxt    = $c('quienes-somos', 'filosofia', 'texto');
-
-// Especialidades (sin fallback)
-$catalogH2   = $c('especialidades', 'seccion',  'h2');
-$catalogSub  = $c('especialidades', 'seccion',  'subtitulo');
-$catalogNota = $c('especialidades', 'catalogo', 'nota_pie');
-
-// Promociones (sin fallback)
-$promoH2  = $c('promociones', 'banner', 'titulo');
-$promoSub = $c('promociones', 'banner', 'subtitulo');
-
-// Calidad (sin fallback)
-$calH2  = $c('calidad', 'seccion', 'h2');
-$calSub = $c('calidad', 'seccion', 'subtitulo');
-
-// Ubicación (sin fallback)
-$ubH2      = $c('ubicacion', 'seccion', 'h2');
-$ubSub     = $c('ubicacion', 'seccion', 'subtitulo');
-$mapsEmbed = $c('ubicacion', 'info', 'maps_embed');
-
-// Footer — Contenido HTML y Color de Fondo consolidado desde el CMS
-$footerHtml    = $c('footer', 'contenido', 'cuerpo_html');
-$footerBgColor = $c('footer', 'estilo', 'bg_color', '#0f172a');
-
-// Aviso de Privacidad — Contenido HTML consolidado desde el RTE del CMS
-$avisoHtml = $c('aviso-privacidad', 'contenido', 'cuerpo_html');
-
-// SEO (sin fallback)
-$schemaName  = h($c('seo', 'schema', 'schema_name'));
-$schemaType  = h($c('seo', 'schema', 'schema_type'));  // p.ej. MedicalOrganization
-$seoTitle    = $c('seo', 'meta', 'title');
-$seoDesc     = $c('seo', 'meta', 'description');
-
-// WhatsApp SVG reutilizado en cards de promo
-$waSvg = '<svg width="15" height="15" fill="#25D366" viewBox="0 0 24 24" aria-hidden="true">'
-       . '<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>'
-       . '<path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.118 1.532 5.845L0 24l6.335-1.652A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.65-.508-5.17-1.395l-.37-.22-3.76.981 1.005-3.665-.243-.382A9.944 9.944 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>'
-       . '</svg>';
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L379-449)</summary>
-
-**Path:** `Unknown file`
-
-```
-    <meta name="theme-color" content="#0052B7">
-    <?php
-    $ogTitle = $c('seo','og','og_title');
-    $ogDesc  = $c('seo','og','og_description');
-    $ogImg   = $c('seo','og','og_image');
-    ?>
-    <meta property="og:title" content="<?= h($ogTitle) ?>">
-    <meta property="og:description" content="<?= h($ogDesc) ?>">
-    <meta property="og:image" content="<?= h($ogImg) ?>">
-    <?php
-    $ogImgW = 1920; $ogImgH = 1080;
-    if ($ogImg && str_starts_with($ogImg, '/')) {
-        $imgPath = $_SERVER['DOCUMENT_ROOT'] . $ogImg;
-        if (file_exists($imgPath)) {
-            [$ogImgW, $ogImgH] = @getimagesize($imgPath) ?: [1920, 1080];
-        }
-    }
-    ?>
-    <meta property="og:image:width" content="<?= $ogImgW ?>">
-    <meta property="og:image:height" content="<?= $ogImgH ?>">
-    <meta property="og:image:alt" content="<?= h($cfgNombreC) ?> — Laboratorio Clínico <?= h($cfgCiudad) ?>">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://laesh.mx/">
-    <meta property="og:locale" content="es_MX">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="<?= h($ogTitle) ?>">
-    <meta name="twitter:description" content="<?= h($ogDesc) ?>">
-    <meta name="twitter:image" content="<?= h($ogImg) ?>">
-    <link rel="canonical" href="https://laesh.mx/">
-    <link rel="alternate" hreflang="es-MX" href="https://laesh.mx/">
-    <link rel="icon" type="image/svg+xml" href="/laesh-web-assets-uipv1a/img/favicon.svg">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https://*.ggpht.com https://*.gstatic.com https://*.google.com https://*.googleusercontent.com https://*.tile.openstreetmap.org https://*.openstreetmap.org https://i.ytimg.com; frame-src https://maps.google.com https://www.google.com https://google.com https://*.google.com https://www.openstreetmap.org https://www.youtube.com https://youtube.com https://open.spotify.com https://player.vimeo.com https://www.dailymotion.com https://www.instagram.com https://www.facebook.com https://platform.twitter.com https://twitframe.com; script-src 'self' 'unsafe-inline' https://maps.google.com https://www.google.com; connect-src 'self' https://*.google.com https://*.openstreetmap.org;">
-    <script src="/laesh-web-assets-uipv1a/js/device-detect.js?v=<?= time() ?>"></script>
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/tokens.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/fonts.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/style.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/style-website.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/landing.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/targeting.css?v=<?= time() ?>">
-    <link rel="preload" href="/laesh-web-assets-uipv1a/fonts/cabin-latin-normal-w400.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/laesh-web-assets-uipv1a/fonts/outfit-latin-normal-w300.woff2" as="font" type="font/woff2" crossorigin>
-    <!-- LCP preload: slide 1 — descarga la imagen del hero antes de que el parser la descubra vía bg_style -->
-    <link rel="preload" href="<?= h($slides[1]['imagen_url']) ?>" as="image" fetchpriority="high">
-
-    <!-- W8: Schema.org — datos dinámicos desde configuraciones + web_contenidos -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "<?= $schemaType ?: 'MedicalOrganization' ?>",
-      "name": "<?= $schemaName ?>",
-      "@id": "https://laesh.mx",
-      "url": "https://laesh.mx",
-      "logo": "https://laesh.mx/laesh-web-assets-uipv1a/img/logo-laesh.webp",
-      "image": "https://laesh.mx/laesh-web-assets-uipv1a/img/logo-laesh.webp",
-      "telephone": "+52<?= h(waNum($cfgTel)) ?>",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "<?= h($cfgDirCalle ?: $cfgDir) ?>",
-        "addressLocality": "<?= h($cfgCiudad) ?>",
-        "addressRegion": "<?= h($cfgEstado) ?>",
-        "postalCode": "<?= h($cfgCP) ?>",
-        "addressCountry": "MX"
-      },
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
-          "opens": "<?= h($cfgHrsOpen) ?>",
-          "closes": "<?= h($cfgHrsClose) ?>"
-        },
-        {
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L450-539)</summary>
-
-**Path:** `Unknown file`
-
-```
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": "Sunday",
-          "opens": "<?= h($cfgDomOpen) ?>",
-          "closes": "<?= h($cfgDomClose) ?>"
-        }
-      ],
-      "description": "<?= h($seoDesc) ?>"
-    }
-    </script>
-</head>
-<body>
-
-<?php if ($isPreview): ?>
-<!-- ── Flotante de Vista Previa (solo admin, sesión activa) ───────────────────
-     Posicionado a la derecha, apilado sobre el botón WhatsApp (bottom: 195px).
-     No invade el header ni desplaza el contenido de la página. -->
-<div id="cms-preview-badge" role="alert" aria-live="polite"
-     style="position:fixed;top:8px;right:8px;z-index:99999;
-            display:flex;flex-direction:column;align-items:center;gap:7px;
-            background:#1e40af;color:#fff;border-radius:14px;
-            font:600 0.9rem/1.3 system-ui,sans-serif;
-            padding:12px 14px;
-            box-shadow:0 6px 20px rgba(30,64,175,0.45);
-            max-width:120px;text-align:center;">
-    <span style="font-size:1.35rem;line-height:1;" aria-hidden="true">🔍</span>
-    <span style="color:#f87171;letter-spacing:0.01em;">Vista<br>Previa</span>
-    <hr style="border:none;border-top:1px solid rgba(255,255,255,0.2);width:100%;margin:2px 0;">
-    <span style="color:#f87171;font-weight:500;font-size:0.82rem;line-height:1.25;">
-        Borrador<br>sin publicar
-    </span>
-</div>
-<?php endif; ?>
-
-    <!-- TU-02: Banner de consentimiento de cookies / almacenamiento local -->
-    <div id="cookie-banner" class="cookie-banner" role="dialog" aria-label="Aviso de cookies" aria-live="polite">
-        <p class="cookie-banner__text">
-            Este sitio utiliza almacenamiento local para mejorar la experiencia de navegación.
-            <a href="#" class="cookie-banner__link" id="cookie-privacy-link">Ver Aviso de Privacidad</a>
-        </p>
-        <button type="button" id="cookie-accept" class="cookie-banner__btn">Aceptar</button>
-    </div>
-    <a href="#main-content" class="skip-link">Ir al contenido principal</a>
-
-    <!-- NAVBAR FIJO -->
-    <nav class="navbar-sticky pt-xs" id="landing-navbar" aria-label="Menú principal">
-        <a href="/laesh/" class="logo" target="_blank" rel="noopener"
-           aria-label="LAESH — Laboratorio de Especialidades Hematológicas, ir al inicio">
-            <img src="/laesh-web-assets-uipv1a/img/logo-laesh.webp"
-                 alt="LAESH — <?= h($cfgNombreLab) ?>"
-                 class="hero-logo" decoding="async" fetchpriority="high"
-                 width="2634" height="571">
-        </a>
-        <!-- Tagline dinámico desde CMS (hero/navbar/tagline_l1-2) -->
-        <span class="navbar-tagline"><?= h($navTagL1) ?><br><?= h($navTagL2) ?></span>
-        <button type="button" class="nav-hamburger" id="nav-hamburger"
-                aria-label="Abrir menú" aria-expanded="false">
-            <span></span><span></span><span></span>
-        </button>
-        <div class="nav-links" id="nav-links-mobile">
-            <a href="#inicio">Inicio</a>
-            <a href="#acerca-de">Quiénes somos</a>
-            <a href="#especialidades">Estudios</a>
-            <a href="#promociones">Promociones</a>
-            <a href="#calidad">Calidad</a>
-            <a href="#ubicacion">Ubicación y Contacto</a>
-            <a href="#" class="login-trigger btn-nav-medicos"
-               data-target="medicos" data-title="Acceso" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2v2"/><path d="M5 2v2"/><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"/><path d="M8 15a6 6 0 0 0 12 0v-3"/><circle cx="20" cy="10" r="2"/></svg>Médicos</a>
-        </div>
-    </nav>
-
-    <main id="main-content">
-
-        <div class="landing-nav-spacer"></div>
-
-        <!-- ═══════════════════════════════════════════════════════ HERO ══ -->
-        <section id="inicio" class="hero-premium">
-            <div class="hero-slides" data-autoplay="<?= $heroAutoplay ?>" role="region"
-                 aria-label="Presentación principal" aria-roledescription="carrusel">
-
-                <!-- ── Slide 1 — dinámico desde hero/slide1 ────────────────── -->
-                <div class="hero-slide active bg-slide-1"<?= $slides[1]['bg_style'] ? ' style="' . $slides[1]['bg_style'] . '"' : '' ?>>
-                    <div class="hero-glass-card">
-                        <?php if ($slides[1]['etiqueta']): ?><span><?= h($slides[1]['etiqueta']) ?></span><?php endif; ?>
-                        <h1><?= h($slides[1]['titulo']) ?></h1>
-                        <?php if ($slides[1]['descripcion']): ?>
-                        <p><?= h($slides[1]['descripcion']) ?></p>
-                        <?php endif; ?>
-                        <div class="flex-center-15">
-                            <?php if ($slides[1]['cta_texto']): ?><a href="<?= h($slides[1]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($slides[1]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L540-619)</summary>
-
-**Path:** `Unknown file`
-
-```
-                    </div>
-                </div>
-
-                <!-- ── Slide 2 — dinámico desde hero/slide2 ────────────────── -->
-                <div class="hero-slide bg-slide-2"<?= $slides[2]['bg_style'] ? ' style="' . $slides[2]['bg_style'] . '"' : '' ?>>
-                    <div class="hero-glass-card">
-                        <?php if ($slides[2]['etiqueta']): ?><span><?= h($slides[2]['etiqueta']) ?></span><?php endif; ?>
-                        <h2><?= h($slides[2]['titulo']) ?></h2>
-                        <?php if ($slides[2]['descripcion']): ?>
-                        <p><?= h($slides[2]['descripcion']) ?></p>
-                        <?php endif; ?>
-                        <div class="flex-center-15">
-                            <?php if ($slides[2]['cta_texto']): ?><a href="<?= h($slides[2]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($slides[2]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ── Slide 3 — dinámico desde hero/slide3 ────────────────── -->
-                <div class="hero-slide bg-slide-3"<?= $slides[3]['bg_style'] ? ' style="' . $slides[3]['bg_style'] . '"' : '' ?>>
-                    <div class="hero-glass-card">
-                        <?php if ($slides[3]['etiqueta']): ?><span><?= h($slides[3]['etiqueta']) ?></span><?php endif; ?>
-                        <h2><?= h($slides[3]['titulo']) ?></h2>
-                        <?php if ($slides[3]['descripcion']): ?>
-                        <p><?= h($slides[3]['descripcion']) ?></p>
-                        <?php endif; ?>
-                        <div class="flex-center-15">
-                            <?php if ($slides[3]['cta_texto']): ?><a href="<?= h($slides[3]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($slides[3]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ── Slide 4 — dinámico desde hero/slide4 ────────────────── -->
-                <div class="hero-slide bg-slide-4"<?= $slides[4]['bg_style'] ? ' style="' . $slides[4]['bg_style'] . '"' : '' ?>>
-                    <div class="hero-glass-card">
-                        <?php if ($slides[4]['etiqueta']): ?><span><?= h($slides[4]['etiqueta']) ?></span><?php endif; ?>
-                        <h2><?= h($slides[4]['titulo']) ?></h2>
-                        <?php if ($slides[4]['descripcion']): ?>
-                        <p><?= h($slides[4]['descripcion']) ?></p>
-                        <?php endif; ?>
-                        <div class="flex-center-15">
-                            <?php if ($slides[4]['cta_texto']): ?><a href="<?= h($slides[4]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($slides[4]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ── Slide 5: Ubicación — CMS + datos de configuraciones ── -->
-                <div class="hero-slide bg-slide-5"<?= $slides[5]['bg_style'] ? ' style="' . $slides[5]['bg_style'] . '"' : '' ?>>
-                    <div class="hero-glass-card">
-                        <?php if ($slides[5]['etiqueta']): ?><span><?= h($slides[5]['etiqueta']) ?></span><?php endif; ?>
-                        <h2><?= h($slides[5]['titulo']) ?></h2>
-                        <p><?= $slide5Desc ?></p>
-                        <div class="flex-center-15">
-                            <?php if ($slides[5]['cta_texto']): ?><a href="<?= h($slides[5]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($slides[5]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="hero-dots" aria-label="Navegación de diapositivas">
-                <button class="hero-dot active" data-slide="0" aria-label="Diapositiva 1 de 5" aria-pressed="true"></button>
-                <button class="hero-dot"        data-slide="1" aria-label="Diapositiva 2 de 5" aria-pressed="false"></button>
-                <button class="hero-dot"        data-slide="2" aria-label="Diapositiva 3 de 5" aria-pressed="false"></button>
-                <button class="hero-dot"        data-slide="3" aria-label="Diapositiva 4 de 5" aria-pressed="false"></button>
-                <button class="hero-dot"        data-slide="4" aria-label="Diapositiva 5 de 5" aria-pressed="false"></button>
-            </div>
-            <button type="button" id="hero-pause-btn" class="hero-pause-btn"
-                    aria-label="Pausar presentación" aria-pressed="false">
-                <svg id="hero-icon-pause" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
-                <svg id="hero-icon-play"  width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="d-none"><polygon points="5,3 19,12 5,21"/></svg>
-                <span id="hero-pause-label" class="hero-pause-label">Pausar</span>
-            </button>
-            <span id="hero-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></span>
-        </section>
-
-
-        <?php
-        // ── Orden de secciones — configurable desde el CMS (configuraciones.seccion_order) ──
-        // Secciones fijas: #inicio (hero) siempre primera, footer siempre última.
-        // Las 5 secciones intermedias pueden reordenarse desde el CMS (panel "Orden de Secciones").
-        // Valor por defecto: orden canónico del diseño original.
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L619-679)</summary>
-
-**Path:** `Unknown file`
-
-```
-        // Valor por defecto: orden canónico del diseño original.
-        $_SEC_DEFAULT = ['acerca-de','especialidades','promociones','calidad','ubicacion'];
-        $_secOrderRaw = $cfg('seccion_order');
-        if ($_secOrderRaw !== '') {
-            // Parsear y filtrar: solo valores canónicos, sin duplicados
-            $_parsed = array_unique(array_filter(
-                array_map('trim', explode(',', $_secOrderRaw)),
-                fn($s) => in_array($s, $_SEC_DEFAULT, true)
-            ));
-            // Añadir al final cualquier sección canónica que no esté en el valor guardado
-            // (previene que una sección desaparezca si se agrega una nueva en el futuro)
-            $_missing = array_diff($_SEC_DEFAULT, $_parsed);
-            $sectionOrder = array_values(array_merge($_parsed, $_missing));
-        } else {
-            $sectionOrder = $_SEC_DEFAULT;
-        }
-        unset($_SEC_DEFAULT, $_secOrderRaw, $_parsed, $_missing);
-
-        foreach ($sectionOrder as $_secId):
-            include __DIR__ . '/sections/' . $_secId . '.php';
-        endforeach;
-        unset($sectionOrder, $_secId);
-        ?>
-        <!-- ══════════════════════════════════════════════ FOOTER ══ -->
-        <footer class="footer-main" style="background: <?= h($footerBgColor) ?> !important;" role="contentinfo">
-            <?= $footerHtml ?>
-        </footer>
-    </main>
-
-    <!-- Botón WhatsApp flotante — número desde configuraciones -->
-    <a href="<?= h($waInfoUrl) ?>" class="whatsapp-float"
-       target="_blank" rel="noopener noreferrer"
-       title="Contáctanos por WhatsApp" aria-label="Contáctanos por WhatsApp">
-        <svg width="32" height="32" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984a9.96 9.96 0 0 0 1.335 4.975L2 22l5.195-1.364A9.936 9.936 0 0 0 12.006 22c5.507 0 9.991-4.479 9.992-9.986.002-2.668-1.036-5.18-2.924-7.069C17.186 3.057 14.675 2.002 12.012 2zm5.72 14.15c-.314.88-1.543 1.62-2.13 1.7-.587.08-1.173.28-4.08-.93-3.72-1.54-6.12-5.32-6.3-5.57-.18-.25-1.47-1.95-1.47-3.72 0-1.78.93-2.65 1.26-3 .33-.35.72-.44.96-.44h.69c.22 0 .52-.08.82.64.3.72 1.02 2.48 1.11 2.66.09.18.15.39.03.63-.12.24-.18.39-.36.6-.18.21-.38.47-.54.63-.18.18-.37.38-.16.73.21.35.93 1.54 2 2.49 1.38 1.23 2.54 1.61 2.9 1.79.36.18.57.15.78-.09.21-.24.9-1.05 1.14-1.41.24-.36.48-.3.8-.18.33.12 2.07 1.02 2.43 1.2.36.18.6.27.69.42.09.15.09.87-.22 1.75z"/>
-        </svg>
-    </a>
-
-    <!-- Botón Facebook flotante — URL desde configuraciones -->
-    <?php if ($cfgFB): ?>
-    <a class="social-float fb-bg" href="<?= h($cfgFB) ?>"
-       target="_blank" rel="noopener noreferrer"
-       title="Visita nuestro Facebook" aria-label="Visita nuestro Facebook">
-        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/>
-        </svg>
-    </a>
-    <?php endif; ?>
-
-    <!-- ── Modal: Aviso de Privacidad ──────────────────────────────────────── -->
-    <div id="modal-privacidad" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-privacidad-title">
-        <div class="modal-content modal-lg">
-            <div class="modal-header">
-                <h3 id="modal-privacidad-title">Aviso de Privacidad — <?= h($cfgNombreC) ?></h3>
-                <button type="button" class="close-modal" aria-label="Cerrar">&times;</button>
-            </div>
-            <div class="modal-body modal-scroll-h">
-                <!-- aviso-privacidad/contenido/cuerpo_html — dinámico desde RTE del CMS -->
-                <?= $avisoHtml ?>
-            </div>
-        </div>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion-web.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-/* Interceptor global de promesas no capturadas de extensiones de navegador (Chrome/Edge/Brave) */
-window.addEventListener('unhandledrejection', function(event) {
-    if (event && event.reason) {
-        var msg = (event.reason.message || event.reason.toString() || '');
-        if (msg.includes('Could not establish connection') || msg.includes('Receiving end does not exist')) {
-            event.preventDefault();
-        }
-    }
-});
-
-/* Helper RTE Ampliado para formateo de texto sin URL media */
-window.formatRteText = function(btn, command) {
-    var fieldGroup = btn.closest('.field-group');
-    var input = fieldGroup ? fieldGroup.querySelector('input[type="text"], textarea') : null;
-    if (!input) return;
-
-    var start = input.selectionStart;
-    var end = input.selectionEnd;
-    var selectedText = input.value.substring(start, end);
-
-    var openTag = '<' + command + '>';
-    var closeTag = '</' + command + '>';
-
-    if (!selectedText) {
-        selectedText = 'texto';
-    }
-
-    var replacement = openTag + selectedText + closeTag;
-    input.value = input.value.substring(0, start) + replacement + input.value.substring(end);
-    input.focus();
-    input.setSelectionRange(start + openTag.length, start + openTag.length + selectedText.length);
-};
-
-window.formatRteTag = function(btn, tagName, styleAttr) {
-    var fieldGroup = btn.closest('.field-group');
-    var input = fieldGroup ? fieldGroup.querySelector('input[type="text"], textarea') : null;
-    if (!input) return;
-
-    var start = input.selectionStart;
-    var end = input.selectionEnd;
-    var selectedText = input.value.substring(start, end);
-
-    var openTag = '<' + tagName + ' style="' + styleAttr + '">';
-    var closeTag = '</' + tagName + '>';
-
-    if (!selectedText) {
-        selectedText = 'texto';
-    }
-
-    var replacement = openTag + selectedText + closeTag;
-    input.value = input.value.substring(0, start) + replacement + input.value.substring(end);
-    input.focus();
-    input.setSelectionRange(start + openTag.length, start + openTag.length + selectedText.length);
-};
-
-window.formatRteBlock = function(btn, blockTag) {
-    var fieldGroup = btn.closest('.field-group');
-    var input = fieldGroup ? fieldGroup.querySelector('textarea') : null;
-    if (!input) return;
-
-    var start = input.selectionStart;
-    var end = input.selectionEnd;
-    var selectedText = input.value.substring(start, end);
-
-    if (!selectedText) selectedText = 'Elemento de lista';
-
-    var replacement = '<' + blockTag + '>\n  <li>' + selectedText + '</li>\n</' + blockTag + '>';
-    input.value = input.value.substring(0, start) + replacement + input.value.substring(end);
-    input.focus();
-};
-
-window.clearRteFormat = function(btn) {
-    var fieldGroup = btn.closest('.field-group');
-    var input = fieldGroup ? fieldGroup.querySelector('input[type="text"], textarea') : null;
-    if (!input) return;
-
-    var text = input.value;
-    input.value = text.replace(/<[^>]*>/g, '');
-};
-
-/* Auto-poblar datos per se desde MariaDB al cambiar de Estudio Asociado en el catálogo */
-document.addEventListener('change', function(e) {
-    if (e.target && e.target.classList.contains('promo-estudio-select')) {
-        var select = e.target;
-        var cardId = select.getAttribute('data-card-id');
-        var opt = select.options[select.selectedIndex];
-        if (!opt || !cardId) return;
-
-        var nombre    = opt.getAttribute('data-nombre') || '';
-        var categoria = opt.getAttribute('data-categoria') || '';
-        var ayuno     = opt.getAttribute('data-ayuno') || '';
-        var tiempo    = opt.getAttribute('data-tiempo') || '';
-        var detalle   = opt.getAttribute('data-detalle') || '';
-
-        var keys = [
-            { key: '_ckPromoTitle' + cardId,  dataId: 'ck-promo-title-' + cardId + '-data',  val: nombre },
-            { key: '_ckPromoSub' + cardId,    dataId: 'ck-promo-sub-' + cardId + '-data',    val: categoria },
-            { key: '_ckPromoAyuno' + cardId,  dataId: 'ck-promo-ayuno-' + cardId + '-data',  val: ayuno },
-            { key: '_ckPromoTiempo' + cardId, dataId: 'ck-promo-tiempo-' + cardId + '-data', val: tiempo },
-            { key: '_ckPromoDesc' + cardId,   dataId: 'ck-promo-desc-' + cardId + '-data',   val: detalle }
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion-web.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L199-249)</summary>
-
-**Path:** `Unknown file`
-
-```
-            'promociones': 'Promociones Vigentes',
-            'calidad': 'Calidad e Instalaciones',
-            'ubicacion': 'Ubicación y Contacto',
-            'footer': 'Pie de Página',
-            'seo': 'SEO y Metadatos',
-            'aviso-privacidad': 'Aviso de Privacidad',
-            'configuracion-general': 'Configuración General'
-        };
-
-        function showPanel(name) {
-            document.querySelectorAll('.cms-panel').forEach(p => p.classList.remove('active'));
-            const targetPanel = document.getElementById('panel-' + name);
-            if (targetPanel) targetPanel.classList.add('active');
-
-            // Sincronizar pestaña superior activa + ARIA (A-01)
-            document.querySelectorAll('.cms-tab').forEach(function(t) {
-                t.classList.remove('active');
-                t.setAttribute('aria-selected', 'false');
-                t.setAttribute('tabindex', '-1');
-            });
-            const targetTab = document.getElementById('tab-' + name);
-            if (targetTab) {
-                targetTab.classList.add('active');
-                targetTab.setAttribute('aria-selected', 'true');
-                targetTab.setAttribute('tabindex', '0');
-            }
-
-            // Actualizar breadcrumb
-            const bc = document.getElementById('header-bc-current');
-            if (bc && panelLabelsGestion[name]) bc.textContent = panelLabelsGestion[name];
-        }
-
-        function activateTab(el) {
-            document.querySelectorAll('.cms-tab').forEach(function(t) {
-                t.classList.remove('active');
-                t.setAttribute('aria-selected', 'false');
-                t.setAttribute('tabindex', '-1');
-            });
-            el.classList.add('active');
-            el.setAttribute('aria-selected', 'true');
-            el.setAttribute('tabindex', '0');
-        }
-
-        function activateNav(el) {
-            document.querySelectorAll('.sidebar .nav-item').forEach(n => n.classList.remove('active'));
-            el.classList.add('active');
-        }
-
-        
-        // Datos de los 5 Hero Slides del Banner Principal (#inicio)
-        const heroDatos = {
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 4:13 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1529-1559)</summary>
-
-**Path:** `Unknown file`
-
-```
-                           id="seccion-order-input"
-                           name="_cfg_seccion_order"
-                           value="<?= h($config['seccion_order'] ?? '') ?>">
-
-                    <?php
-                    // Reconstruir orden desde BD, o usar el default si no hay valor
-                    $_secDefault = ['acerca-de','especialidades','promociones','calidad','ubicacion'];
-                    $_secLabels  = [
-                        'acerca-de'     => ['icon'=>'👥', 'label'=>'Quiénes somos',           'anchor'=>'#acerca-de'],
-                        'especialidades'=> ['icon'=>'🔬', 'label'=>'Estudios de Rutina',        'anchor'=>'#especialidades'],
-                        'promociones'   => ['icon'=>'🏷️', 'label'=>'Promociones Vigentes',      'anchor'=>'#promociones'],
-                        'calidad'       => ['icon'=>'🖼️', 'label'=>'Calidad e Instalaciones',   'anchor'=>'#calidad'],
-                        'ubicacion'     => ['icon'=>'📍', 'label'=>'Ubicación y Contacto',      'anchor'=>'#ubicacion'],
-                    ];
-                    $_rawOrder  = $config['seccion_order'] ?? '';
-                    if ($_rawOrder !== '') {
-                        $_parsed  = array_unique(array_filter(
-                            array_map('trim', explode(',', $_rawOrder)),
-                            fn($s) => in_array($s, $_secDefault, true)
-                        ));
-                        $_missing = array_diff($_secDefault, $_parsed);
-                        $_ordered = array_values(array_merge($_parsed, $_missing));
-                    } else {
-                        $_ordered = $_secDefault;
-                    }
-                    unset($_secDefault, $_rawOrder, $_parsed, $_missing);
-                    ?>
-
-                    <p class="cms-help-text mb-3">Arrastra para cambiar el orden. El cambio se aplica al publicar.</p>
-
-                    <ul id="seccion-order-list"
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1560-1599)</summary>
-
-**Path:** `Unknown file`
-
-```
-                        style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.6rem">
-                        <?php foreach ($_ordered as $_sid):
-                            $meta = $_secLabels[$_sid] ?? ['icon'=>'•','label'=>$_sid,'anchor'=>''];
-                        ?>
-                        <li data-seccion-id="<?= h($_sid) ?>"
-                            draggable="true"
-                            style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1rem;border-radius:8px;border:1.5px solid var(--border-color,#d1d5db);background:var(--card-bg,#fff);cursor:grab;user-select:none;transition:box-shadow .15s,border-color .15s">
-                            <!-- Grip icon -->
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--txt-muted,#9ca3af)" stroke-width="2" stroke-linecap="round" style="flex-shrink:0">
-                                <circle cx="9" cy="5" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="19" r="1"/>
-                                <circle cx="15" cy="5" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="19" r="1"/>
-                            </svg>
-                            <span style="font-size:1.15rem;line-height:1;flex-shrink:0"><?= $meta['icon'] ?></span>
-                            <span style="flex:1;font-weight:600;color:var(--txt-main,#111)"><?= h($meta['label']) ?></span>
-                            <code style="font-size:0.78rem;color:var(--txt-muted,#6b7280);background:var(--bg-subtle,#f3f4f6);padding:2px 6px;border-radius:4px"><?= h($_sid) ?></code>
-                            <a href="/laesh/?_preview=1<?= h($meta['anchor']) ?>"
-                               target="_blank" rel="noopener noreferrer"
-                               title="Vista previa de esta sección"
-                               style="flex-shrink:0;color:var(--primary,#0052B7);text-decoration:none;font-size:0.8rem"
-                               onclick="event.stopPropagation()">↗</a>
-                        </li>
-                        <?php endforeach; unset($_ordered, $_secLabels, $_sid, $meta); ?>
-                    </ul>
-
-                    <p class="cms-help-text mt-3">
-                        Orden actual guardado:
-                        <code id="seccion-order-display"><?= h($config['seccion_order'] ?? '(predeterminado)') ?></code>
-                    </p>
-                </div>
-            </div>
-
-            <style>
-            /* DnD visual feedback — solo aplica al panel de orden de secciones */
-            #seccion-order-list [data-seccion-id].dnd-dragging {
-                opacity:.45; box-shadow:0 4px 16px rgba(0,0,0,.18); cursor:grabbing;
-            }
-            #seccion-order-list [data-seccion-id].dnd-over {
-                border-color:var(--primary,#0052B7); box-shadow:0 0 0 2px rgba(0,82,183,.18);
-            }
-            </style>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 4:13 pm
 
 ---
@@ -25619,6 +22087,2845 @@ Flight::route('GET /', function () {
 ```
 
 </details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+## User Request
+
+EN fase 1 y 2, se resolveran los Gaps / Issues Identificados para el Plan ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `solicitud-dac.js`
+**Language:** javascript
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L99-139)</summary>
+
+**Path:** `Unknown file`
+
+```
+    if (!$resultado['success']) {
+        \Common\Response::htmxError($resultado['error'] ?? 'Error al procesar la orden.');
+    }
+
+    // Emitir notificación Swoole WS a la clínica en vivo (Scope 30) tras confirmación de Stored Procedure
+    \Common\Notifier::emit('nueva_orden', [
+        'folio'    => $resultado['folio'] ?? 'LAESH-00000',
+        'orden_id' => $resultado['orden_id'] ?? 0,
+        'titulo'   => 'Nueva Orden de Recepción (' . ($resultado['folio'] ?? '') . ')',
+        'mensaje'  => 'Orden emitida para ' . htmlspecialchars($resultado['paciente'] ?? $_POST['paciente'] ?? 'Paciente', ENT_QUOTES, 'UTF-8')
+    ]);
+
+    \Common\Response::htmxSuccess($resultado['mensaje']);
+});
+
+// ── GET /api/catalogos — Obtener árbol completo de catálogos ────────────────
+Flight::route('GET /api/catalogos', function () {
+    Flight::rbac()->requirePermission('gestionar_ordenes');
+    $db = Flight::db();
+    
+    // Obtener grupos
+    $stmtG = $db->query("SELECT id, clave, titulo FROM catalogo_grupos ORDER BY orden ASC");
+    $grupos = $stmtG->fetchAll(PDO::FETCH_ASSOC);
+    
+    foreach ($grupos as &$g) {
+        // Obtener categorias
+        $stmtC = $db->prepare("SELECT id, nombre FROM catalogo_categorias WHERE grupo_id = ? ORDER BY orden ASC");
+        $stmtC->execute([$g['id']]);
+        $g['categorias'] = $stmtC->fetchAll(PDO::FETCH_ASSOC);
+        
+        foreach ($g['categorias'] as &$c) {
+            // Obtener estudios
+            $stmtE = $db->prepare("SELECT id, clave_interna as clave, nombre, tiempo_procesamiento as tiempo, muestra_requerida as muestra, preparacion, detalle FROM catalogo_estudios WHERE categoria_id = ? AND activo = 1 ORDER BY id ASC");
+            $stmtE->execute([$c['id']]);
+            $c['estudios'] = $stmtE->fetchAll(PDO::FETCH_ASSOC);
+        }
+    }
+    
+    Flight::json($grupos);
+});
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+## User Request
+
+Adelante realizalo con alta precisión y continuar la linea de homogeneiada del flujo funcional , la arquitectura del stack php y la cero duplicacion de codigo, rehuso y cero codigo duro de datos.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `solicitud-dac.js`
+**Language:** javascript
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Ordenes.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L144-188)</summary>
+
+**Path:** `Unknown file`
+
+```
+                'folio'    => $folio,
+                'orden_id' => $ordenId,
+                'paciente' => $pacienteNombre,
+                'mensaje'  => "✓ Orden de Recepción {$folio} creada correctamente."
+            ];
+
+        } catch (Throwable $e) {
+            DB::logFallback('ERROR', 'Fallo en RC\Negocio\Ordenes::crearOrden', $e->getMessage());
+            Logger::log('ERROR', 'Error al crear orden en recepción: ' . $e->getMessage(), $userId);
+            return [
+                'success' => false,
+                'error'   => 'No se pudo registrar la orden: ' . $e->getMessage()
+            ];
+        }
+    }
+
+    /**
+     * Obtiene las órdenes recientes registradas en Recepción para la vista
+     */
+    public static function obtenerOrdenesRecientes(int $limit = 20): array {
+        try {
+            $db = DB::connect();
+            $stmt = $db->prepare("
+                SELECT o.id, o.folio, o.edad_al_emitir, o.diagnostico, o.creado_en,
+                       CONCAT(p.nombre, ' ', p.apellido_paterno, ' ', COALESCE(p.apellido_materno, '')) AS paciente_nombre,
+                       p.sexo, p.telefono,
+                       CONCAT(e.nombre, ' ', e.apellidos) AS medico_nombre,
+                       c.nombre AS estado_nombre, c.color_badge
+                FROM ordenes o
+                JOIN pacientes p ON o.paciente_id = p.id
+                LEFT JOIN empleados e ON o.medico_id = e.id
+                LEFT JOIN cat_estados_medico c ON o.estado_id = c.id
+                ORDER BY o.id DESC
+                LIMIT :lim
+            ");
+            $stmt->bindValue(':lim', $limit, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Throwable $e) {
+            DB::logFallback('ERROR', 'Fallo en RC\Negocio\Ordenes::obtenerOrdenesRecientes', $e->getMessage());
+            return [];
+        }
+    }
+}
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 8:20 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 8:20 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L79-114)</summary>
+
+**Path:** `Unknown file`
+
+```
+});
+
+// ── POST /orden/crear — Procesar creación de orden de recepción (HTMX) ─────────
+Flight::route('POST /orden/crear', function () {
+    Flight::rbac()->requirePermission('gestionar_ordenes');
+
+    // Validar CSRF
+    $submittedToken = $_POST['csrf_token'] ?? '';
+    if (!hash_equals($_SESSION['csrf_token'] ?? '', $submittedToken)) {
+        Logger::log('WARN', 'Token CSRF inválido en creación de orden recepción por user_id=' . Flight::auth()->getUserId());
+        \Common\Response::htmxError('Token de seguridad inválido. Recarga la página.');
+    }
+
+    // Rotar CSRF
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+
+    // Invocar capa de negocio para creación atómica con Stored Procedure
+    $userId = (int)Flight::auth()->getUserId();
+    $resultado = \RC\Negocio\Ordenes::crearOrden($_POST, $userId);
+
+    if (!$resultado['success']) {
+        \Common\Response::htmxError($resultado['error'] ?? 'Error al procesar la orden.');
+    }
+
+    // Emitir notificación Swoole WS a la clínica en vivo (Scope 30) tras confirmación de Stored Procedure
+    \Common\Notifier::emit('nueva_orden', [
+        'folio'    => $resultado['folio'] ?? 'LAESH-00000',
+        'orden_id' => $resultado['orden_id'] ?? 0,
+        'titulo'   => 'Nueva Orden de Recepción (' . ($resultado['folio'] ?? '') . ')',
+        'mensaje'  => 'Orden emitida para ' . htmlspecialchars($resultado['paciente'] ?? $_POST['paciente'] ?? 'Paciente', ENT_QUOTES, 'UTF-8')
+    ]);
+
+    \Common\Response::htmxSuccess($resultado['mensaje']);
+});
+
+// ── GET /api/catalogos — Obtener árbol completo de catálogos ────────────────
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 8:20 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `labadmin.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L169-239)</summary>
+
+**Path:** `Unknown file`
+
+```
+                                    <th>Paciente</th>
+                                    <th>Médico Remitente</th>
+                                    <th>Especialidad</th>
+                                    <th>Estudios</th>
+                                    <th>Fecha Emisión</th>
+                                    <th>Fecha Resultado</th>
+                                    <th>Estado</th>
+                                    <th>Acción Requerida</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if (!empty($ordenesRecientes)): ?>
+                                    <?php foreach ($ordenesRecientes as $ord): ?>
+                                        <tr>
+                                            <td class="wsnowrap fw-600"><?= htmlspecialchars($ord['folio'] ?? '', ENT_QUOTES, 'UTF-8') ?></td>
+                                            <td><?= htmlspecialchars($ord['paciente_nombre'] ?? '', ENT_QUOTES, 'UTF-8') ?></td>
+                                            <td><?= htmlspecialchars($ord['medico_nombre'] ?? 'Médico General', ENT_QUOTES, 'UTF-8') ?></td>
+                                            <td>Medicina General</td>
+                                            <td><?= htmlspecialchars($ord['diagnostico'] ?? 'Estudios de Laboratorio', ENT_QUOTES, 'UTF-8') ?></td>
+                                            <td><?= htmlspecialchars(date('d/m/Y H:i', strtotime($ord['creado_en'] ?? 'now')), ENT_QUOTES, 'UTF-8') ?></td>
+                                            <td>—</td>
+                                            <td><span class="badge <?= htmlspecialchars($ord['color_badge'] ?? 'badge-listos', ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($ord['estado_nombre'] ?? 'Emitida', ENT_QUOTES, 'UTF-8') ?></span></td>
+                                            <td><span class="txt-muted-sm">En proceso</span></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Panel 2: Pacientes -->
+                <div id="panel-pacientes" class="tab-panel d-none">
+                    <div class="modal-sect-hd modal-sect-hd--plain">
+                        <h2 class="txt-pgd">Pacientes</h2>
+                        <span class="txt-muted-sm">Total Registrados: 1,409 Pacientes</span>
+                    </div>
+                    <div class="card">
+                        <table id="tabla-pacientes">
+                            <thead>
+                                <tr>
+                                    <th>Nombre del Paciente</th>
+                                    <th>Edad / Sexo</th>
+                                    <th>Teléfono</th>
+                                    <th>Última Visita</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Llenado dinámico vía JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Panel 3: Médicos — visible a RECEPCION y ADMIN; columna Operaciones solo ADMIN -->
+                <div id="panel-medicos" class="tab-panel d-none">
+                    <div class="modal-sect-hd modal-sect-hd--plain">
+                        <h2 class="txt-pgd">Médicos</h2>
+                        <button class="btn btn-primary fnt-sm" type="button"
+
+                                id="btn-abrir-modal-medico">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+                            <span class="reg-med-label">Registrar Médico</span>
+                        </button>
+                    </div>
+                    <div class="card">
+                        <table id="tabla-medicos">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Cédula Prof.</th>
+                                    <th scope="col">Nombre del Médico</th>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 8:20 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L199-279)</summary>
+
+**Path:** `Unknown file`
+
+```
+                                    aria-controls="subtab-ordenes-hoy" aria-selected="false">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                                Órdenes Hoy
+                            </button>
+                        </div>
+                        <!-- Botones Limpiar / Crear e Imprimir — separados del tablist (A11Y-06) -->
+                        <div id="tab-bar-btns" class="tab-bar-btns" role="toolbar" aria-label="Acciones de orden">
+                            <button class="btn badge-reset" type="button"
+                                    id="btn-limpiar-orden"
+                                    aria-label="Limpiar selección de estudios">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.46"/></svg>
+                                <span class="btn-imprimir-texto">Limpiar</span>
+                            </button>
+                            <button class="btn btn-primary btn-imprimir-orden badge-reset-sm" type="submit" form="form-orden"
+                                    aria-label="Crear e imprimir orden médica">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                                <span class="btn-imprimir-texto">Crear e Imprimir Orden</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- ── Sub-tab 1: Generar Orden Digital ── -->
+                    <div id="subtab-generar" class="portal-tab-panel active" role="tabpanel" aria-labelledby="tab-generar">
+                        <form id="form-orden" 
+                              hx-post="/laesh/md/orden/crear" 
+                              hx-target="#a11y-live" 
+                              hx-swap="innerHTML"
+                              hx-indicator="#loading-spinner">
+                            <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken ?? '', ENT_QUOTES, 'UTF-8') ?>">
+                            <!-- HTMX: indicador de carga (hx-indicator="#loading-spinner") -->
+                            <span id="loading-spinner" class="htmx-indicator" role="status" aria-label="Enviando solicitud…">
+                                <span class="spinner-btn"></span>
+                            </span>
+
+                            <!-- Renglón 1 (Desktop): Nombre | Edad | Sexo | Celular | [Separador Vertical] | Diagnóstico / Motivo Clínico -->
+                            <div class="orden-patient-row1">
+                                <div class="form-group mb-0 form-group-nombre">
+                                    <label class="form-label" for="paciente">Nombre del Paciente <span class="txt-danger">*</span></label>
+                                    <input type="text" id="paciente" name="paciente" class="form-input" placeholder="Nombre del paciente"
+                                           maxlength="35" pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,35}" required autofocus
+                                           title="Máximo 35 caracteres (solo letras y espacios)"
+                                           oninput="this.value = this.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, '').slice(0,35);">
+                                </div>
+                                <div class="form-group mb-0 form-group-edad">
+                                    <label class="form-label" for="edad">Edad</label>
+                                    <input type="text" id="edad" name="edad" class="form-input" placeholder="##"
+                                           maxlength="3" inputmode="numeric" pattern="[0-9]{1,3}"
+                                           title="Edad del paciente en años (máximo 3 dígitos)"
+                                           oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0,3);">
+                                </div>
+                                <div class="form-group mb-0 form-group-sexo" role="group" aria-labelledby="sexo-label">
+                                    <span class="form-legend" id="sexo-label">Sexo</span>
+                                    <div class="d-flex-gap-row">
+                                        <label class="label-flex">
+                                            <input type="radio" name="sexo" value="H" class="form-checkbox"> H
+                                        </label>
+                                        <label class="label-flex">
+                                            <input type="radio" name="sexo" value="M" class="form-checkbox"> M
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-0 form-group-celular">
+                                    <label class="form-label" for="celular">Celular <span class="txt-danger">*</span></label>
+                                    <input type="tel" id="celular" name="celular" class="form-input" placeholder="953 000 0000"
+                                           maxlength="10" required inputmode="tel" pattern="[0-9]{10}"
+                                           title="10 dígitos (ej. 9530000000)"
+                                           oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0,10);">
+                                </div>
+
+                                <!-- Separador vertical minimalista entre Celular y Diagnóstico -->
+                                <div class="orden-patient-vsep" aria-hidden="true"></div>
+
+                                <div class="form-group mb-0 form-group-diag">
+                                    <label for="diagnostico" class="form-label">Diagnóstico / Motivo Clínico</label>
+                                    <input type="text" id="diagnostico" name="diagnostico" class="form-input"
+                                           placeholder="Indicación clínica o diagnóstico presuntivo...">
+                                </div>
+                            </div>
+
+                            <!-- ── Estudios Solicitados — buscador + fichas + chips ── -->
+                            <div class="form-group mb-sm">
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L429-479)</summary>
+
+**Path:** `Unknown file`
+
+```
+                            <p class="txt-muted-4">Pacientes con órdenes emitidas a través de este portal.</p>
+                        </div>
+                        <span class="txt-muted-sm" id="pacientes-medico-total">Total: 0 Pacientes</span>
+                    </div>
+                    <div class="card">
+                        <table id="tabla-pacientes-medico">
+                            <thead>
+                                <tr>
+                                    <th>Paciente</th>
+                                    <th>Celular</th>
+                                    <th>Último Estudio</th>
+                                    <th>Fecha</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Llenado dinámico vía refreshPacientesMedico() -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Panel 4: Reportes del Médico (Scope 16) -->
+                <div class="tab-panel d-none" id="panel-reportes-medico">
+                    <div class="modal-sect-hd">
+                        <h2 class="txt-pgd mb-0">Reportes</h2>
+                        <div class="d-inline-flex-ac">
+                            <label for="filtro-periodo-medico" class="txt-muted-sm">Periodo:</label>
+                            <select id="filtro-periodo-medico" class="select-sm select-sm--bg">
+                                <option value="dia">Hoy</option>
+                                <option value="semana">Esta Semana</option>
+                                <option value="mes" selected>Este Mes</option>
+                                <option value="anio">Este Año</option>
+                                <option value="fecha">Fecha</option>
+                            </select>
+                            <span id="rango-fechas-medico" class="d-none flex-ic-8">
+                                <input type="date" id="fecha-inicio-medico" class="select-sm">
+                                <span class="txt-muted-sm">al</span>
+                                <input type="date" id="fecha-fin-medico" class="select-sm">
+                            </span>
+                        </div>
+                    </div>
+                    <div class="grid-auto-200">
+                        <div class="card mb-0 ta-center">
+                            <div id="lbl-ordenes-medico" class="txt-muted-xs">ÓRDENES EMITIDAS (MES)</div>
+                            <div id="stat-ordenes-medico" class="stat-num stat-num--pgd">34</div>
+                        </div>
+                        <div class="card mb-0 ta-center">
+                            <div class="txt-muted-xs">COMPLETADAS CON ÉXITO</div>
+                            <div id="stat-completadas-medico" class="stat-num stat-num--lst">31</div>
+                        </div>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L379-429)</summary>
+
+**Path:** `Unknown file`
+
+```
+                                </tbody>
+                            </table>
+                        </div>
+                    </div><!-- /subtab-ordenes-hoy -->
+                </div><!-- /panel-nueva-orden -->
+
+                <!-- Panel 2: Órdenes Anteriores — dinámico via localStorage (laesh_mock_orders) -->
+                <div class="tab-panel d-none" id="panel-historial-medico">
+                    <div class="modal-sect-hd">
+                        <div>
+                            <h2 class="txt-pgd mb-0">Órdenes Anteriores</h2>
+                            <p class="txt-muted-4">Consulta retroactiva de todas las solicitudes enviadas a LAESH.</p>
+                        </div>
+                        <div class="d-inline-flex-ac">
+                            <label for="filtro-periodo-historial" class="txt-muted-sm">Periodo:</label>
+                            <select id="filtro-periodo-historial" class="select-sm select-sm--bg">
+                                <option value="dia">Hoy</option>
+                                <option value="semana" selected>Esta Semana</option>
+                                <option value="mes">Este Mes</option>
+                                <option value="anio">Este Año</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <table id="tabla-historial-completo">
+                            <thead>
+                                <tr>
+                                    <th>Folio</th>
+                                    <th>Paciente</th>
+                                    <th>Estudios</th>
+                                    <th>Fecha Emisión</th>
+                                    <th>Fecha Resultado</th>
+                                    <th>Estado</th>
+                                    <th>Acción / PDF</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Llenado dinámico por refreshHistorialMedico() -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                
+
+                <!-- Panel 3: Pacientes del Médico -->
+                <div class="tab-panel d-none" id="panel-pacientes-medico">
+                    <div class="modal-sect-hd modal-sect-hd--plain">
+                        <div>
+                            <h2 class="txt-pgd">Pacientes</h2>
+                            <p class="txt-muted-4">Pacientes con órdenes emitidas a través de este portal.</p>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L349-379)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+                    <!-- ── Sub-tab 2: Mis Órdenes de Hoy ── -->
+                    <div id="subtab-ordenes-hoy" class="portal-tab-panel" role="tabpanel" aria-labelledby="tab-ordenes-hoy">
+                        <div class="card mt-0">
+                            <table id="tabla-medico">
+                                <thead>
+                                    <tr>
+                                        <th>Folio</th>
+                                        <th>Paciente</th>
+                                        <th>Estudios</th>
+                                        <th>Fecha Emisión</th>
+                                        <th>Fecha Resultado</th>
+                                        <th>Estado</th>
+                                        <th>Acción / PDF</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php if (!empty($ordenesPropias)): ?>
+                                        <?php foreach ($ordenesPropias as $ord): ?>
+                                            <tr>
+                                                <td class="wsnowrap fw-600"><?= htmlspecialchars($ord['folio'] ?? '', ENT_QUOTES, 'UTF-8') ?></td>
+                                                <td><?= htmlspecialchars($ord['paciente_nombre'] ?? '', ENT_QUOTES, 'UTF-8') ?></td>
+                                                <td><?= htmlspecialchars($ord['diagnostico'] ?? 'Solicitud Digital', ENT_QUOTES, 'UTF-8') ?></td>
+                                                <td><?= htmlspecialchars(date('d/m/Y H:i', strtotime($ord['creado_en'] ?? 'now')), ENT_QUOTES, 'UTF-8') ?></td>
+                                                <td>—</td>
+                                                <td><span class="badge <?= htmlspecialchars($ord['color_badge'] ?? 'badge-listos', ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($ord['estado_nombre'] ?? 'Emitida', ENT_QUOTES, 'UTF-8') ?></span></td>
+                                                <td><span class="txt-muted-sm">En proceso</span></td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
+                                </tbody>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 8:21 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L59-104)</summary>
+
+**Path:** `Unknown file`
+
+```
+            
+            setTimeout(function() {
+
+
+            // Para el registro interno (localStorage) se concatenan todos
+            var s = estudiosArr.join(', ') + (otros ? (estudiosArr.length ? ', Otros: ' : '') + otros : '');
+            var pacienteLabel = p + (sexo ? ' (' + sexo + ')' : '') + (edad ? ' | ' + edad + 'a' : '') + ' | Tel: ' + celular;
+            var newOrder = createOrder(pacienteLabel, s, 'Dr. Hedilberto Reyes Venegas');
+
+            // Fecha del sistema (día actual del browser)
+            var now   = new Date();
+            var fecha = now.toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' });
+
+            // Etiqueta legible del sexo
+            var sexoLabel = sexo === 'H' ? 'Masculino' : (sexo === 'M' ? 'Femenino' : '');
+
+            // Refrescar tabla "Mis Órdenes de Hoy" (formulario NO se limpia automáticamente)
+            refreshData();
+
+            // Construir URL params para solicitud_dac_impr.php
+            var params = new URLSearchParams();
+            params.set('id',          newOrder.id);
+            params.set('paciente',    p);
+            params.set('celular',     celular);
+            params.set('edad',        edad);
+            params.set('sexo',        sexoLabel);
+            params.set('fecha',       fecha);
+            params.set('estudios',    JSON.stringify(estudiosArr));   // array serializado
+            params.set('diagnostico', dx);
+            params.set('otros',       otros);
+            params.set('medico',      'Dr. Hedilberto Reyes Venegas');
+            params.set('especialidad', 'Medicina Interna');
+
+
+            _abrirSolOverlay('/laesh/rc/views/solicitud_dac_impr.php?' + params.toString());
+            
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            }
+            }, 500); // network delay simulación
+        });
+
+        // Rastreo anti-sonido-inicial (espejo de lastRemitidos en labadmin)
+        let lastResultados = 0;
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<!DOCTYPE html>
+<?php
+/**
+ * md/views/medicos.php — Plantilla Plates / View PHP del Portal Médico
+ * Fuente SSOT HTML: website/uipv1/medicos.html (R15.1)
+ */
+if (!function_exists('h')) {
+    function h($v): string {
+        return htmlspecialchars((string)($v ?? ''), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+    }
+}
+
+if (!isset($estudiosMandatorios) || empty($estudiosMandatorios)) {
+    try {
+        $dbInst = \Common\DB::connect();
+        $keysMand = ['HEM-01','QUI-02','URO-01','DIA-01','QUI-01','ELE-03','COA-01','HEM-02','HEP-01','TIR-01','ELE-02','DIA-03','HEP-02','LIP-01','TIR-02','ELE-01','QUI-03','GAS-01','URO-02','INM-13'];
+        $inSqlMand  = str_repeat('?,', count($keysMand) - 1) . '?';
+        $sqlMand = "SELECT ce.id, ce.clave_interna, ce.nombre, cc.nombre as categoria 
+                    FROM catalogo_estudios ce 
+                    JOIN catalogo_categorias cc ON ce.categoria_id = cc.id 
+                    WHERE ce.clave_interna IN ($inSqlMand) 
+                    ORDER BY ce.id ASC";
+        $stmtEstMand = $dbInst->prepare($sqlMand);
+        $stmtEstMand->execute($keysMand);
+        $estudiosMandatorios = $stmtEstMand->fetchAll(\PDO::FETCH_ASSOC);
+    } catch (\Throwable $e) {
+        $estudiosMandatorios = [];
+    }
+}
+?>
+<html lang="es-MX">
+<head>
+    <meta charset="UTF-8">
+    <meta name="color-scheme" content="light">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0052B7">
+    <meta name="description" content="Portal de médicos LAESH — consulta de órdenes, estadísticas y catálogo de estudios.">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; script-src 'self' 'unsafe-inline'; connect-src 'self';">
+    <title>Portal Médico — LAESH</title>
+    <link rel="icon" type="image/svg+xml" href="/laesh-web-assets-uipv1a/img/favicon.svg">
+
+    <!-- PERF-03: Preload de hojas de estilo críticas para evitar FOUC -->
+    <link rel="preload" href="/laesh-web-assets-uipv1a/css/tokens.css?v=<?= time() ?>" as="style">
+    <link rel="preload" href="/laesh-web-assets-uipv1a/css/fonts.css?v=<?= time() ?>" as="style">
+    <link rel="preload" href="/laesh-web-assets-uipv1a/css/style.css?v=<?= time() ?>" as="style">
+    <link rel="preload" href="/laesh-web-assets-uipv1a/css/portal.css?v=<?= time() ?>" as="style">
+
+    <script src="/laesh-web-assets-uipv1a/js/device-detect.js?v=<?= time() ?>"></script>
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/tokens.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/fonts.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/style.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/portal.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/targeting.css?v=<?= time() ?>">
+
+</head>
+<body class="portal-medico-body-layout">
+    <a href="#main-content" class="skip-link">Ir al contenido principal</a>
+    <!-- A11Y-04: Región aria-live para anuncios de acciones (tab activa, orden creada, errores) -->
+    <div id="a11y-live" class="visually-hidden" aria-live="polite" aria-atomic="true" role="status"></div>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L29-59)</summary>
+
+**Path:** `Unknown file`
+
+```
+Flight::route('GET /', function () {
+    $auth = Flight::auth();
+    $db   = Flight::db();
+
+    $userId = (int)$auth->getUserId();
+    $stmt = $db->prepare("SELECT nombre, apellidos FROM empleados WHERE user_id = ? LIMIT 1");
+    $stmt->execute([$userId]);
+    $emp = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+    $stmtMed = $db->prepare("SELECT nombre_completo FROM perfiles_medicos WHERE user_id = ? LIMIT 1");
+    $stmtMed->execute([$userId]);
+    $medProfile = $stmtMed->fetch(\PDO::FETCH_ASSOC);
+
+    if ($emp && !empty($emp['nombre'])) {
+        $nombreMedico = 'Dr(a). ' . trim($emp['nombre'] . ' ' . $emp['apellidos']);
+    } elseif ($medProfile && !empty($medProfile['nombre_completo'])) {
+        $nombreMedico = $medProfile['nombre_completo'];
+    } else {
+        $email = $auth->getEmail() ?? '';
+        $userPart = explode('@', $email)[0] ?? 'Médico';
+        $nombreMedico = 'Dr(a). ' . ucfirst($userPart);
+    }
+
+    // CSRF token (R14.12)
+    if (empty($_SESSION['csrf_token'])) {
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    }
+
+    // Obtener solicitudes médicas propias desde la Capa de Negocio (PDO)
+    $ordenesPropias = \MD\Negocio\Ordenes::obtenerOrdenesPropias($userId, 20);
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L59-84)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+    // SEC: frame-ancestors vía HTTP header real (meta tag es ignorado por browsers)
+    header('X-Frame-Options: DENY');
+    header('Content-Security-Policy: frame-ancestors \'none\'', false); // false = no reemplaza el CSP global de nginx, agrega directiva
+
+    // Plates — directorio de vistas es md/
+    Flight::view()->setDirectory(__DIR__);
+    // Obtener las 20 estudios mandatorios desde MariaDB (catalogo_estudios)
+    $keysMandatorios = ['HEM-01','QUI-02','URO-01','DIA-01','QUI-01','ELE-03','COA-01','HEM-02','HEP-01','TIR-01','ELE-02','DIA-03','HEP-02','LIP-01','TIR-02','ELE-01','QUI-03','GAS-01','URO-02','INM-13'];
+    $inSql = str_repeat('?,', count($keysMandatorios) - 1) . '?';
+    $sqlMandatorios = "SELECT ce.id, ce.clave_interna, ce.nombre, cc.nombre as categoria 
+                       FROM catalogo_estudios ce 
+                       JOIN catalogo_categorias cc ON ce.categoria_id = cc.id 
+                       WHERE ce.clave_interna IN ($inSql) 
+                       ORDER BY ce.id ASC";
+    $stmtMandatorios = $db->prepare($sqlMandatorios);
+    $stmtMandatorios->execute($keysMandatorios);
+    $estudiosMandatorios = $stmtMandatorios->fetchAll(\PDO::FETCH_ASSOC);
+
+    echo Flight::view()->render('views/medicos', [
+        'nombreMedico'        => $nombreMedico,
+        'csrfToken'           => $_SESSION['csrf_token'],
+        'ordenesPropias'      => $ordenesPropias,
+        'estudiosMandatorios' => $estudiosMandatorios
+    ]);
+});
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 8:21 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L599-633)</summary>
+
+**Path:** `Unknown file`
+
+```
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="form-label">Cédulas Profesionales <span class="req">*</span></label>
+                        <input type="text" id="med-cedulas" placeholder="Ej. Cédula Profesional 6605518" required
+                               class="form-input">
+                    </div>
+
+                    <div>
+                        <label class="form-label">Universidad <span class="req">*</span></label>
+                        <div class="form-field">
+                            <select id="med-universidad" required
+                                    class="form-input form-select">
+                                <option value="" disabled selected>Seleccione una universidad</option>
+                            </select>
+                            <span class="select-arrow"></span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="form-label">Lugar donde labora <span class="req">*</span></label>
+                        <div class="form-field">
+                            <select id="med-lugar" required
+                                    class="form-input form-select">
+                                <option value="" disabled selected>Seleccione un lugar de trabajo</option>
+                            </select>
+                            <span class="select-arrow"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-row-gap">
+                        <button type="button" class="btn btn-secondary flex-1" id="btn-limpiar-perfil-ed">Limpiar</button>
+                        <button type="button" class="btn btn-primary flex-1" id="btn-guardar-perfil-ed">Guardar Perfil</button>
+                    </div>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L629-651)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+                    <div class="form-row-gap">
+                        <button type="button" class="btn btn-secondary flex-1" id="btn-limpiar-perfil-ed">Limpiar</button>
+                        <button type="button" class="btn btn-primary flex-1" id="btn-guardar-perfil-ed">Guardar Perfil</button>
+                    </div>
+                </form>
+            </div><!-- /.modal-body -->
+        </div>
+    </div>
+
+    <!-- JS: Editar Perfil Médico ───────────────────────────────────── -->
+
+    <script src="/laesh-web-assets-uipv1a/js/htmx.min.js"></script>
+    <script src="/laesh-web-assets-uipv1a/js/app.js?v=<?= time() ?>" defer></script>
+    <script src="/laesh-web-assets-uipv1a/js/ws-client.js?v=<?= time() ?>" defer></script>
+    <script src="/laesh-web-assets-uipv1a/js/portal-footer.js?v=<?= time() ?>" defer></script>
+    <script src="/laesh-web-assets-uipv1a/js/sidebar-rail.js?v=<?= time() ?>" defer></script>
+    <script src="/laesh-web-assets-uipv1a/js/medicos.js?v=<?= time() ?>" defer></script>
+    <script src="/laesh-web-assets-uipv1a/js/medicos-a11y.js?v=<?= time() ?>" defer></script>
+
+</body>
+</html>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 8:21 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 8:21 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 8:21 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 8:21 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+## User Request
+
+QUE Sigue ? 
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `index.php`
+**Language:** php
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/**
+ * rc/index.php — Router Flight PHP para el Portal Recepción
+ *
+ * Ubicación: laesh-swbldi/rc/index.php
+ * URL:       /laesh/rc/          (Alias en restaurantb.conf → laesh-swbldi/rc/)
+ *
+ * Fuente HTML: website/uipv1/labadmin.html  ← NUNCA BORRAR (R15.1 - Merge iterativo)
+ * Capas:       View (views/labadmin.php), Negocio (RC\Negocio\Ordenes), Commons (Common\*)
+ *
+ * Rutas:
+ *   GET  /             → Panel principal Recepción (requiere permiso gestionar_ordenes)
+ *   POST /orden/crear  → Crear orden de laboratorio vía Stored Procedure (HTMX)
+ */
+
+declare(strict_types=1);
+
+require_once __DIR__ . '/../commons/commons.php';
+
+use Common\Logger;
+use Common\DB;
+
+// ── Guard RBAC: Permite acceso a RECEPCION y ADMIN (ambos tienen gestionar_ordenes) ─
+Flight::rbac()->requirePermission(
+    'gestionar_ordenes',
+    '/laesh/login/login.php?portal=labadmin'
+);
+
+// ── GET / — Panel principal Portal Recepción ──────────────────────────────────
+Flight::route('GET /', function () {
+    $auth = Flight::auth();
+    $db   = Flight::db();
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `labadmin.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L199-224)</summary>
+
+**Path:** `Unknown file`
+
+```
+                                            <td>
+                                                <?php if ($eId === 1): ?>
+                                                    <button type="button" class="btn btn-secondary btn-resultados-sm" hx-post="/laesh/rc/orden/estado" hx-vals='{"orden_id": <?= (int)$ord['id'] ?>, "nuevo_estado_id": 2}' hx-swap="none" hx-on::after-request="window.location.reload()">
+                                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> Recibir Paciente
+                                                    </button>
+                                                <?php elseif ($eId === 2): ?>
+                                                    <button type="button" class="btn btn-primary btn-resultados-sm" hx-post="/laesh/rc/orden/estado" hx-vals='{"orden_id": <?= (int)$ord['id'] ?>, "nuevo_estado_id": 3}' hx-swap="none" hx-on::after-request="window.location.reload()">
+                                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg> Concluir Resultados
+                                                    </button>
+                                                <?php elseif ($eId === 3): ?>
+                                                    <button type="button" class="btn btn-primary btn-resultados-sm" hx-post="/laesh/rc/orden/estado" hx-vals='{"orden_id": <?= (int)$ord['id'] ?>, "nuevo_estado_id": 4}' hx-swap="none" hx-on::after-request="window.location.reload()">
+                                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg> Entregar y Cerrar
+                                                    </button>
+                                                <?php else: ?>
+                                                    <span class="txt-muted-sm">Concluida</span>
+                                                <?php endif; ?>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Panel 2: Pacientes -->
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `labadmin.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L224-249)</summary>
+
+**Path:** `Unknown file`
+
+```
+                <!-- Panel 2: Pacientes -->
+                <div id="panel-pacientes" class="tab-panel d-none">
+                    <div class="modal-sect-hd modal-sect-hd--plain">
+                        <h2 class="txt-pgd">Pacientes</h2>
+                        <span class="txt-muted-sm">Total Registrados: 1,409 Pacientes</span>
+                    </div>
+                    <div class="card">
+                        <table id="tabla-pacientes">
+                            <thead>
+                                <tr>
+                                    <th>Nombre del Paciente</th>
+                                    <th>Edad / Sexo</th>
+                                    <th>Teléfono</th>
+                                    <th>Última Visita</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Llenado dinámico vía JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Panel 3: Médicos — visible a RECEPCION y ADMIN; columna Operaciones solo ADMIN -->
+                <div id="panel-medicos" class="tab-panel d-none">
+                    <div class="modal-sect-hd modal-sect-hd--plain">
+```
+
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+## User Request
+
+COntinua bajo la misma dirección de lineamientos indicada y en mejora continua.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `index.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 8:28 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Ordenes.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L179-239)</summary>
+
+**Path:** `Unknown file`
+
+```
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Throwable $e) {
+            DB::logFallback('ERROR', 'Fallo en RC\Negocio\Ordenes::obtenerOrdenesRecientes', $e->getMessage());
+            return [];
+        }
+    }
+
+    /**
+     * Cambia el estado de una orden en MariaDB e inserta la auditoría en historial_estados_orden
+     */
+    public static function cambiarEstado(int $ordenId, int $nuevoEstadoId, int $userId, string $observacion = ''): array {
+        try {
+            $db = DB::connect();
+
+            // Obtener estado actual
+            $stmtCur = $db->prepare("SELECT estado_id, folio_unico FROM ordenes WHERE id = ? LIMIT 1");
+            $stmtCur->execute([$ordenId]);
+            $current = $stmtCur->fetch(PDO::FETCH_ASSOC);
+
+            if (!$current) {
+                return ['success' => false, 'error' => 'Orden no encontrada.'];
+            }
+
+            $estadoAnteriorId = (int)$current['estado_id'];
+            $folio = $current['folio_unico'];
+
+            // Actualizar estado_id y fecha_resultado si pasa a Resultados Listos (3) o Cerrada (4)
+            if (in_array($nuevoEstadoId, [3, 4])) {
+                $stmtUpd = $db->prepare("UPDATE ordenes SET estado_id = ?, fecha_resultado = NOW() WHERE id = ?");
+                $stmtUpd->execute([$nuevoEstadoId, $ordenId]);
+            } else {
+                $stmtUpd = $db->prepare("UPDATE ordenes SET estado_id = ? WHERE id = ?");
+                $stmtUpd->execute([$nuevoEstadoId, $ordenId]);
+            }
+
+            // Registrar en historial_estados_orden
+            $stmtEmp = $db->prepare("SELECT id FROM empleados WHERE user_id = ? LIMIT 1");
+            $stmtEmp->execute([$userId]);
+            $empId = $stmtEmp->fetchColumn() ?: null;
+
+            $stmtHist = $db->prepare("
+                INSERT INTO historial_estados_orden (orden_id, estado_anterior_id, estado_nuevo_id, cambiado_por_user_id, observacion)
+                VALUES (?, ?, ?, ?, ?)
+            ");
+            $stmtHist->execute([
+                $ordenId,
+                $estadoAnteriorId,
+                $nuevoEstadoId,
+                $empId,
+                $observacion ?: "Transición de estado a {$nuevoEstadoId}"
+            ]);
+
+            Logger::log('INFO', "Orden {$folio} cambió de estado {$estadoAnteriorId} -> {$nuevoEstadoId} por user_id={$userId}", $userId);
+
+            return [
+                'success' => true,
+                'folio'   => $folio,
+                'mensaje' => "✓ Orden {$folio} actualizada exitosamente."
+            ];
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 8:28 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L49-84)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+    // Obtener catálogo de médicos reales y top 5 desde MariaDB (perfiles_medicos)
+    $medicosCatalog = $db->query(
+        "SELECT user_id, nombre_completo, cedula_profesional, especialidad, celular, total_ordenes 
+         FROM perfiles_medicos 
+         ORDER BY total_ordenes DESC"
+    )->fetchAll(\PDO::FETCH_ASSOC) ?: [];
+
+    // CSRF token (R14.12)
+    if (empty($_SESSION['csrf_token'])) {
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    }
+
+    // Obtener órdenes recientes desde la Capa de Negocio (PDO)
+    $ordenesRecientes = \RC\Negocio\Ordenes::obtenerOrdenesRecientes(20);
+
+    // SEC: frame-ancestors vía HTTP header real (meta tag es ignorado por browsers)
+    header('X-Frame-Options: DENY');
+    header('Content-Security-Policy: frame-ancestors \'none\'', false);
+
+    // Plates — directorio de vistas es rc/
+    Flight::view()->setDirectory(__DIR__);
+    echo Flight::view()->render('views/labadmin', [
+        'nombreUsuario'    => $nombreUsuario,
+        'rolUsuario'       => $authRole,
+        'isAdmin'          => $isAdmin,
+        'csrfToken'        => $_SESSION['csrf_token'],
+        'ordenesRecientes' => $ordenesRecientes,
+        'medicosCatalog'   => $medicosCatalog
+    ]);
+});
+
+// ── POST /orden/crear — Procesar creación de orden de recepción (HTMX) ─────────
+Flight::route('POST /orden/crear', function () {
+    Flight::rbac()->requirePermission('gestionar_ordenes');
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 8:29 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L139-219)</summary>
+
+**Path:** `Unknown file`
+
+```
+        'folio'    => $resultado['folio'] ?? '',
+        'orden_id' => $ordenId,
+        'estado'   => $nuevoEstadoId,
+        'titulo'   => 'Orden Actualizada (' . ($resultado['folio'] ?? '') . ')',
+        'mensaje'  => "La orden {$resultado['folio']} ha cambiado de estado."
+    ]);
+
+    \Common\Response::htmxSuccess($resultado['mensaje']);
+});
+
+// ── GET /api/catalogos — Obtener árbol completo de catálogos ────────────────
+Flight::route('GET /api/catalogos', function () {
+    Flight::rbac()->requirePermission('gestionar_ordenes');
+    $db = Flight::db();
+    
+    // Obtener grupos
+    $stmtG = $db->query("SELECT id, clave, titulo FROM catalogo_grupos ORDER BY orden ASC");
+    $grupos = $stmtG->fetchAll(PDO::FETCH_ASSOC);
+    
+    foreach ($grupos as &$g) {
+        // Obtener categorias
+        $stmtC = $db->prepare("SELECT id, nombre FROM catalogo_categorias WHERE grupo_id = ? ORDER BY orden ASC");
+        $stmtC->execute([$g['id']]);
+        $g['categorias'] = $stmtC->fetchAll(PDO::FETCH_ASSOC);
+        
+        foreach ($g['categorias'] as &$c) {
+            // Obtener estudios
+            $stmtE = $db->prepare("SELECT id, clave_interna as clave, nombre, tiempo_procesamiento as tiempo, muestra_requerida as muestra, preparacion, detalle FROM catalogo_estudios WHERE categoria_id = ? AND activo = 1 ORDER BY id ASC");
+            $stmtE->execute([$c['id']]);
+            $c['estudios'] = $stmtE->fetchAll(PDO::FETCH_ASSOC);
+        }
+    }
+    
+    Flight::json($grupos);
+});
+
+// ── POST /api/catalogos — Guardar árbol completo de catálogos ───────────────
+Flight::route('POST /api/catalogos', function () {
+    Flight::rbac()->requirePermission('gestionar_ordenes');
+    
+    // Validar CSRF
+    $submittedToken = $_SERVER['HTTP_X_CSRF_TOKEN'] ?? '';
+    if (!hash_equals($_SESSION['csrf_token'] ?? '', $submittedToken)) {
+        Flight::json(['success' => false, 'error' => 'Token CSRF inválido'], 403);
+        return;
+    }
+
+    $data = json_decode(Flight::request()->getBody(), true);
+    if (!$data) {
+        Flight::json(['success' => false, 'error' => 'JSON inválido'], 400);
+        return;
+    }
+
+    try {
+        $resultado = \RC\Negocio\Catalogos::guardarArbol($data);
+        if ($resultado['success']) {
+            Flight::json($resultado);
+        } else {
+            Flight::json($resultado, 500);
+        }
+    } catch (\Exception $e) {
+        Flight::json(['success' => false, 'error' => $e->getMessage()], 500);
+    }
+});
+
+// ── GET /api/notificaciones — Endpoint Polling Fallback ─────────────────────
+Flight::route('GET /api/notificaciones', function () {
+    $db = Flight::db();
+    $since = (int)($_GET['since'] ?? 0);
+
+    $stmt = $db->prepare(
+        "SELECT id, tipo, folio_referencia, mensaje, creado_en 
+         FROM notificaciones 
+         WHERE UNIX_TIMESTAMP(creado_en) > ? 
+         ORDER BY id DESC LIMIT 15"
+    );
+    $stmt->execute([$since]);
+    $notifs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    Flight::json([
+        'success'        => true,
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 8:29 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 8:29 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Ordenes.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L89-139)</summary>
+
+**Path:** `Unknown file`
+
+```
+            return [
+                'success'  => true,
+                'folio'    => $folio,
+                'orden_id' => $ordenId,
+                'paciente' => $pacienteNombre,
+                'mensaje'  => "✓ Solicitud Médica Digital {$folio} creada exitosamente para {$pacienteNombre}."
+            ];
+
+        } catch (Throwable $e) {
+            DB::logFallback('ERROR', 'Fallo en MD\Negocio\Ordenes::crearSolicitudDigital', $e->getMessage());
+            Logger::log('ERROR', 'Error al crear solicitud médica digital: ' . $e->getMessage(), $userId);
+            return [
+                'success' => false,
+                'error'   => 'No se pudo crear la solicitud digital: ' . $e->getMessage()
+            ];
+        }
+    }
+
+    /**
+     * Obtiene las solicitudes de órdenes emitidas por el médico logueado
+     */
+    public static function obtenerOrdenesPropias(int $userId, int $limit = 20): array {
+        try {
+            $db = DB::connect();
+            
+            $stmtEmp = $db->prepare("SELECT id FROM empleados WHERE user_id = ? LIMIT 1");
+            $stmtEmp->execute([$userId]);
+            $medicoId = $stmtEmp->fetchColumn();
+
+            if (!$medicoId) {
+                return [];
+            }
+
+            $stmt = $db->prepare("
+                SELECT o.id, o.folio, o.edad_al_emitir, o.diagnostico, o.creado_en,
+                       CONCAT(p.nombre, ' ', p.apellido_paterno, ' ', COALESCE(p.apellido_materno, '')) AS paciente_nombre,
+                       p.sexo, p.telefono,
+                       c.nombre AS estado_nombre, c.color_badge
+                FROM ordenes o
+                JOIN pacientes p ON o.paciente_id = p.id
+                LEFT JOIN cat_estados_medico c ON o.estado_id = c.id
+                WHERE o.medico_id = :medico_id
+                ORDER BY o.id DESC
+                LIMIT :lim
+            ");
+            $stmt->bindValue(':medico_id', (int)$medicoId, PDO::PARAM_INT);
+            $stmt->bindValue(':lim', $limit, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Throwable $e) {
+            DB::logFallback('ERROR', 'Fallo en MD\Negocio\Ordenes::obtenerOrdenesPropias', $e->getMessage());
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 8:29 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L54-84)</summary>
+
+**Path:** `Unknown file`
+
+```
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    }
+
+    // Obtener solicitudes médicas propias desde la Capa de Negocio (PDO)
+    $ordenesPropias = \MD\Negocio\Ordenes::obtenerOrdenesPropias($userId, 20);
+
+    // SEC: frame-ancestors vía HTTP header real (meta tag es ignorado por browsers)
+    header('X-Frame-Options: DENY');
+    header('Content-Security-Policy: frame-ancestors \'none\'', false); // false = no reemplaza el CSP global de nginx, agrega directiva
+
+    // Plates — directorio de vistas es md/
+    Flight::view()->setDirectory(__DIR__);
+    // Obtener las 20 estudios mandatorios desde MariaDB (catalogo_estudios)
+    $keysMandatorios = ['HEM-01','QUI-02','URO-01','DIA-01','QUI-01','ELE-03','COA-01','HEM-02','HEP-01','TIR-01','ELE-02','DIA-03','HEP-02','LIP-01','TIR-02','ELE-01','QUI-03','GAS-01','URO-02','INM-13'];
+    $inSql = str_repeat('?,', count($keysMandatorios) - 1) . '?';
+    $sqlMandatorios = "SELECT ce.id, ce.clave_interna, ce.nombre, cc.nombre as categoria 
+                       FROM catalogo_estudios ce 
+                       JOIN catalogo_categorias cc ON ce.categoria_id = cc.id 
+                       WHERE ce.clave_interna IN ($inSql) 
+                       ORDER BY ce.id ASC";
+    $stmtMandatorios = $db->prepare($sqlMandatorios);
+    $stmtMandatorios->execute($keysMandatorios);
+    $estudiosMandatorios = $stmtMandatorios->fetchAll(\PDO::FETCH_ASSOC);
+
+    echo Flight::view()->render('views/medicos', [
+        'nombreMedico'        => $nombreMedico,
+        'medProfile'          => $medProfile,
+        'csrfToken'           => $_SESSION['csrf_token'],
+        'ordenesPropias'      => $ordenesPropias,
+        'estudiosMandatorios' => $estudiosMandatorios
+    ]);
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 8:29 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L424-459)</summary>
+
+**Path:** `Unknown file`
+
+```
+                                    <th>Folio</th>
+                                    <th>Paciente</th>
+                                    <th>Estudios</th>
+                                    <th>Fecha Emisión</th>
+                                    <th>Fecha Resultado</th>
+                                    <th>Estado</th>
+                                    <th>Acción / PDF</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Llenado dinámico por refreshHistorialMedico() -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                
+
+                <!-- Panel 3: Pacientes del Médico -->
+                <div class="tab-panel d-none" id="panel-pacientes-medico">
+                    <div class="modal-sect-hd modal-sect-hd--plain">
+                        <div>
+                            <h2 class="txt-pgd">Pacientes</h2>
+                            <p class="txt-muted-4">Pacientes con órdenes emitidas a través de este portal.</p>
+                        </div>
+                        <span class="txt-muted-sm" id="pacientes-medico-total">Total: 0 Pacientes</span>
+                    </div>
+                    <div class="card">
+                        <table id="tabla-pacientes-medico">
+                            <thead>
+                                <tr>
+                                    <th>Paciente</th>
+                                    <th>Celular</th>
+                                    <th>Último Estudio</th>
+                                    <th>Fecha</th>
+                                    <th>Estado</th>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 8:29 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 8:29 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 8:29 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+## User Request
+
+Que sigue ahora , para dejar de utilizar codigo duro , deacuerdo al orden de dependencias y gaps ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `index.php`
+**Language:** php
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/**
+ * rc/index.php — Router Flight PHP para el Portal Recepción
+ *
+ * Ubicación: laesh-swbldi/rc/index.php
+ * URL:       /laesh/rc/          (Alias en restaurantb.conf → laesh-swbldi/rc/)
+ *
+ * Fuente HTML: website/uipv1/labadmin.html  ← NUNCA BORRAR (R15.1 - Merge iterativo)
+ * Capas:       View (views/labadmin.php), Negocio (RC\Negocio\Ordenes), Commons (Common\*)
+ *
+ * Rutas:
+ *   GET  /             → Panel principal Recepción (requiere permiso gestionar_ordenes)
+ *   POST /orden/crear  → Crear orden de laboratorio vía Stored Procedure (HTMX)
+ */
+
+declare(strict_types=1);
+
+require_once __DIR__ . '/../commons/commons.php';
+
+use Common\Logger;
+use Common\DB;
+
+// ── Guard RBAC: Permite acceso a RECEPCION y ADMIN (ambos tienen gestionar_ordenes) ─
+Flight::rbac()->requirePermission(
+    'gestionar_ordenes',
+    '/laesh/login/login.php?portal=labadmin'
+);
+
+// ── GET / — Panel principal Portal Recepción ──────────────────────────────────
+Flight::route('GET /', function () {
+    $auth = Flight::auth();
+    $db   = Flight::db();
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `labadmin.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L87-94)</summary>
+
+**Path:** `Unknown file`
+
+```
+        }
+
+        function simularSubidaPDF(id) {
+            const file = prompt("Simulador: Ingresa el nombre del PDF a subir (ej. resultados.pdf)", "resultados.pdf");
+            if(file) {
+                // GAP 5: guardar fechaResultado en el mismo paso que el cambio de estado
+                const orders = getOrders();
+                const order = orders.find(o => o.id === id);
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L384-424)</summary>
+
+**Path:** `Unknown file`
+
+```
+                                                    <?php if ($eId === 3 || $eId === 4): ?>
+                                                        <button class="btn btn-secondary btn-resultados-sm btn-ver-res" data-action="ver-resultados" data-id="<?= htmlspecialchars($ord['folio'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
+                                                            <svg class="icon-btn-left" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg> Ver Resultados
+                                                        </button>
+                                                    <?php else: ?>
+                                                        <span class="txt-muted-sm">En Proceso</span>
+                                                    <?php endif; ?>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    <?php else: ?>
+                                        <tr><td colspan="7" class="text-center txt-muted pa-4">No tiene órdenes emitidas el día de hoy.</td></tr>
+                                    <?php endif; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div><!-- /subtab-ordenes-hoy -->
+                </div><!-- /panel-nueva-orden -->
+
+                <!-- Panel 2: Órdenes Anteriores — dinámico via localStorage (laesh_mock_orders) -->
+                <div class="tab-panel d-none" id="panel-historial-medico">
+                    <div class="modal-sect-hd">
+                        <div>
+                            <h2 class="txt-pgd mb-0">Órdenes Anteriores</h2>
+                            <p class="txt-muted-4">Consulta retroactiva de todas las solicitudes enviadas a LAESH.</p>
+                        </div>
+                        <div class="d-inline-flex-ac">
+                            <label for="filtro-periodo-historial" class="txt-muted-sm">Periodo:</label>
+                            <select id="filtro-periodo-historial" class="select-sm select-sm--bg">
+                                <option value="dia">Hoy</option>
+                                <option value="semana" selected>Esta Semana</option>
+                                <option value="mes">Este Mes</option>
+                                <option value="anio">Este Año</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <table id="tabla-historial-completo">
+                            <thead>
+                                <tr>
+                                    <th>Folio</th>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+## User Request
+
+Dale con la fase 4.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `index.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 8:35 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 8:35 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Ordenes.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L239-284)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+        } catch (Throwable $e) {
+            DB::logFallback('ERROR', 'Fallo en RC\Negocio\Ordenes::cambiarEstado', $e->getMessage());
+            return ['success' => false, 'error' => 'Error al actualizar estado: ' . $e->getMessage()];
+        }
+    }
+
+    /**
+     * Obtiene el listado completo de pacientes registrados en MariaDB con su fecha de última visita
+     */
+    public static function obtenerPacientes(int $limit = 100): array {
+        try {
+            $db = DB::connect();
+            $stmt = $db->prepare("
+                SELECT p.id, p.nombre_completo, p.sexo, p.telefono, p.creado_en,
+                       MAX(o.hora_captura) AS ultima_visita,
+                       COUNT(o.id) AS total_ordenes
+                FROM pacientes p
+                LEFT JOIN ordenes o ON o.paciente_id = p.id
+                GROUP BY p.id
+                ORDER BY p.id DESC
+                LIMIT :lim
+            ");
+            $stmt->bindValue(':lim', $limit, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Throwable $e) {
+            DB::logFallback('ERROR', 'Fallo en RC\Negocio\Ordenes::obtenerPacientes', $e->getMessage());
+            return [];
+        }
+    }
+
+    /**
+     * Busca pacientes por coincidencia de nombre o teléfono para autocompletado AJAX
+     */
+    public static function buscarPacientes(string $term): array {
+        try {
+            $term = trim($term);
+            if (strlen($term) < 2) return [];
+
+            $db = DB::connect();
+            $stmt = $db->prepare("
+                SELECT id, nombre_completo, sexo, telefono
+                FROM pacientes
+                WHERE nombre_completo LIKE ? OR telefono LIKE ?
+                ORDER BY nombre_completo ASC
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 8:35 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L199-234)</summary>
+
+**Path:** `Unknown file`
+
+```
+    } catch (\Exception $e) {
+        Flight::json(['success' => false, 'error' => $e->getMessage()], 500);
+    }
+});
+
+// ── GET /api/notificaciones — Endpoint Polling Fallback ─────────────────────
+Flight::route('GET /api/notificaciones', function () {
+    $db = Flight::db();
+    $since = (int)($_GET['since'] ?? 0);
+
+    $stmt = $db->prepare(
+        "SELECT id, tipo, folio_referencia, mensaje, creado_en 
+         FROM notificaciones 
+         WHERE UNIX_TIMESTAMP(creado_en) > ? 
+         ORDER BY id DESC LIMIT 15"
+    );
+    $stmt->execute([$since]);
+    $notifs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    Flight::json([
+        'success'        => true,
+        'notificaciones' => $notifs,
+        'server_time'    => time()
+    ]);
+});
+
+// ── GET /api/pacientes/buscar — Búsqueda en vivo de pacientes para Autocomplete ───
+Flight::route('GET /api/pacientes/buscar', function () {
+    Flight::rbac()->requirePermission('gestionar_ordenes');
+    $term = trim($_GET['q'] ?? '');
+    $pacientes = \RC\Negocio\Ordenes::buscarPacientes($term);
+    Flight::json(['success' => true, 'pacientes' => $pacientes]);
+});
+
+// Iniciar router Flight
+Flight::start();
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 8:35 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `labadmin.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L199-224)</summary>
+
+**Path:** `Unknown file`
+
+```
+                                            <td>
+                                                <?php if ($eId === 1): ?>
+                                                    <button type="button" class="btn btn-secondary btn-resultados-sm" hx-post="/laesh/rc/orden/estado" hx-vals='{"orden_id": <?= (int)$ord['id'] ?>, "nuevo_estado_id": 2}' hx-swap="none" hx-on::after-request="window.location.reload()">
+                                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> Recibir Paciente
+                                                    </button>
+                                                <?php elseif ($eId === 2): ?>
+                                                    <button type="button" class="btn btn-primary btn-resultados-sm" hx-post="/laesh/rc/orden/estado" hx-vals='{"orden_id": <?= (int)$ord['id'] ?>, "nuevo_estado_id": 3}' hx-swap="none" hx-on::after-request="window.location.reload()">
+                                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg> Concluir Resultados
+                                                    </button>
+                                                <?php elseif ($eId === 3): ?>
+                                                    <button type="button" class="btn btn-primary btn-resultados-sm" hx-post="/laesh/rc/orden/estado" hx-vals='{"orden_id": <?= (int)$ord['id'] ?>, "nuevo_estado_id": 4}' hx-swap="none" hx-on::after-request="window.location.reload()">
+                                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg> Entregar y Cerrar
+                                                    </button>
+                                                <?php else: ?>
+                                                    <span class="txt-muted-sm">Concluida</span>
+                                                <?php endif; ?>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Panel 2: Pacientes -->
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 8:35 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L399-439)</summary>
+
+**Path:** `Unknown file`
+
+```
+                        </div>
+                    </div><!-- /subtab-ordenes-hoy -->
+                </div><!-- /panel-nueva-orden -->
+
+                <!-- Panel 2: Órdenes Anteriores — dinámico via localStorage (laesh_mock_orders) -->
+                <div class="tab-panel d-none" id="panel-historial-medico">
+                    <div class="modal-sect-hd">
+                        <div>
+                            <h2 class="txt-pgd mb-0">Órdenes Anteriores</h2>
+                            <p class="txt-muted-4">Consulta retroactiva de todas las solicitudes enviadas a LAESH.</p>
+                        </div>
+                        <div class="d-inline-flex-ac">
+                            <label for="filtro-periodo-historial" class="txt-muted-sm">Periodo:</label>
+                            <select id="filtro-periodo-historial" class="select-sm select-sm--bg">
+                                <option value="dia">Hoy</option>
+                                <option value="semana" selected>Esta Semana</option>
+                                <option value="mes">Este Mes</option>
+                                <option value="anio">Este Año</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <table id="tabla-historial-completo">
+                            <thead>
+                                <tr>
+                                    <th>Folio</th>
+                                    <th>Paciente</th>
+                                    <th>Estudios</th>
+                                    <th>Fecha Emisión</th>
+                                    <th>Fecha Resultado</th>
+                                    <th>Estado</th>
+                                    <th>Acción / PDF</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Llenado dinámico por refreshHistorialMedico() -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 8:35 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 8:35 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+## User Request
+
+Las transiciones de los cambios de estado en las grillas de ordenes de recepción y medico ya se estan actualizando con base a un catalogo que contiene todos los estados posibles, informa me , no hagas cambios ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `Ordenes.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 8:43 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 8:43 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 8:43 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 8:44 pm
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 8:44 pm
 
 ---
 
