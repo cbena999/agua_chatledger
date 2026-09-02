@@ -493,4 +493,7 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
 ## 📌 Pendientes Registrados en Runbook (Hitos de Continuidad)
 - [ ] **PUNTO A: Alta Rápida de Pacientes desde Recepción (`rc/views/labadmin.php`):**
   Implementar la modal de registro directo de pacientes con formulario HTMX (`POST /paciente/crear`) que inserte en la tabla `pacientes` de MariaDB antes o independientemente de la emisión de una solicitud de laboratorio.
+- [ ] **PUNTO B: Capa de Caché L2 basada en PHP (`Common\Cache`):**
+  Construir e integrar el mecanismo de caché en memoria RAM (APCu + Fallback a archivo plano serializado) para el acceso a datos estáticos de MariaDB (`configuraciones`, `catalogo_promociones`, `catalogo_estudios`), incluyendo invalidación automática tras publicaciones del CMS.
+
 
