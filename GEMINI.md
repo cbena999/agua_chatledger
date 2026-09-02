@@ -487,3 +487,10 @@ Se implementó un sistema de protección de triple capa para el Host C, blindán
    * **4. Calidad e Instalaciones (`#calidad`):** Gestión de la galería fotográfica de áreas de laboratorio y certificaciones.
    * **5. Ubicación y Contacto (`#ubicacion`):** Edición de teléfonos, dirección física, horario, responsable sanitario, WhatsApp y croquis (`mapa_laesh.webp`).
    *(Nota: Se han removido secciones obsoletas como Membresías y tarjetas individuales de promoción que no pertenecen a index.html).*
+
+---
+
+## 📌 Pendientes Registrados en Runbook (Hitos de Continuidad)
+- [ ] **PUNTO A: Alta Rápida de Pacientes desde Recepción (`rc/views/labadmin.php`):**
+  Implementar la modal de registro directo de pacientes con formulario HTMX (`POST /paciente/crear`) que inserte en la tabla `pacientes` de MariaDB antes o independientemente de la emisión de una solicitud de laboratorio.
+
