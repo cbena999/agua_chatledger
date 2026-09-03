@@ -7,9 +7,9 @@
 | **Trajectory ID** | `cbb3065c-15ab-40b2-a551-df5474c119c2` |
 | **Cascade ID** | `33758958-5e2c-4311-ba38-6d3f32787e53` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 4334 |
+| **Total Steps** | 4500 |
 | **Started** | 30 Aug 2026, 9:34 pm |
-| **Completed** | 1 Sept 2026, 9:46 pm |
+| **Completed** | 2 Sept 2026, 1:07 pm |
 
 ---
 
@@ -3324,5103 +3324,395 @@
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L479-539)</summary>
-
-**Path:** `Unknown file`
-
-```
-    </span>
-</div>
-<?php endif; ?>
-
-    <!-- TU-02: Banner de consentimiento de cookies / almacenamiento local -->
-    <div id="cookie-banner" class="cookie-banner" role="dialog" aria-label="Aviso de cookies" aria-live="polite">
-        <p class="cookie-banner__text">
-            Este sitio utiliza almacenamiento local para mejorar la experiencia de navegación.
-            <a href="#" class="cookie-banner__link" id="cookie-privacy-link">Ver Aviso de Privacidad</a>
-        </p>
-        <button type="bu        <?php
-        // ── Orden de secciones — configurable desde el CMS (configuraciones.seccion_order) ──
-        // Secciones fijas: #inicio (hero) siempre primera, footer siempre última.
-        // Las secciones intermedias pueden reordenarse desde el CMS (panel "Orden de Secciones").
-        $_SEC_DEFAULT = ['acerca-de','especialidades','promociones','calidad','ubicacion','video'];
-        $_secNavLabels = [
-            'acerca-de'     => ['label' => 'Quiénes somos',        'href' => '#acerca-de'],
-            'especialidades'=> ['label' => 'Estudios',             'href' => '#especialidades'],
-            'promociones'   => ['label' => 'Promociones',          'href' => '#promociones'],
-            'calidad'       => ['label' => 'Calidad',              'href' => '#calidad'],
-            'ubicacion'     => ['label' => 'Ubicación y Contacto', 'href' => '#ubicacion'],
-        ];
-        $isVideoActive = $cfg('video_active', '1') !== '0';
-
-        $_secOrderRaw = $cfg('seccion_order');
-        if ($_secOrderRaw !== '') {
-            $_parsed = array_unique(array_filter(
-                array_map('trim', explode(',', $_secOrderRaw)),
-                fn($s) => in_array($s, $_SEC_DEFAULT, true)
-            ));
-            $_missing = array_diff($_SEC_DEFAULT, $_parsed);
-            $sectionOrder = array_values(array_merge($_parsed, $_missing));
-        } else {
-            $sectionOrder = $_SEC_DEFAULT;
-        }
-        unset($_SEC_DEFAULT, $_secOrderRaw, $_parsed, $_missing);
-
-        // Si el video está apagado, retirarlo del orden de secciones para que no se renderice
-        if (!$isVideoActive) {
-            $sectionOrder = array_values(array_filter($sectionOrder, fn($s) => $s !== 'video'));
-        }
-        ?>
-        <div class="nav-links" id="nav-links-mobile">
-            <a href="#inicio">Inicio</a>
-            <?php foreach ($sectionOrder as $_navSec):
-                if (isset($_secNavLabels[$_navSec])):
-            ?>
-            <a href="<?= $_secNavLabels[$_navSec]['href'] ?>"><?= h($_secNavLabels[$_navSec]['label']) ?></a>
-            <?php endif; endforeach; unset($_navSec); ?>
-            <a href="#" class="login-trigger btn-nav-medicos"
-               data-target="medicos" data-title="Acceso" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2v2"/><path d="M5 2v2"/><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"/><path d="M8 15a6 6 0 0 0 12 0v-3"/><circle cx="20" cy="10" r="2"/></svg>Médicos</a>
-        </div>
-    </nav>
-
-    <main id="main-content">
-
-        <div class="landing-nav-spacer"></div>
-
-        <!-- ═══════════════════════════════════════════════════════ HERO ══ -->
-        <section id="inicio" class="hero-premium">
-            <div class="hero-slides" data-autoplay="<?= $heroAutoplay ?>" role="region"
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L619-679)</summary>
-
-**Path:** `Unknown file`
-
-```
-                    aria-label="Pausar presentación" aria-pressed="false">
-                <svg id="hero-icon-pause" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
-                <svg id="hero-icon-play"  width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="d-none"><polygon points="5,3 19,12 5,21"/></svg>
-                <span id="hero-pause-label" class="hero-pause-label">Pausar</span>
-            </button>
-            <span id="hero-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></span>
-        </section>
-
-
-        <?php
-        foreach ($sectionOrder as $_secId):
-            include __DIR__ . '/sections/' . $_secId . '.php';
-        endforeach;
-        unset($sectionOrder, $_secId, $_secNavLabels, $isVideoActive);
-        ?>      <button class="hero-dot"        data-slide="2" aria-label="Diapositiva 3 de 5" aria-pressed="false"></button>
-                <button class="hero-dot"        data-slide="3" aria-label="Diapositiva 4 de 5" aria-pressed="false"></button>
-                <button class="hero-dot"        data-slide="4" aria-label="Diapositiva 5 de 5" aria-pressed="false"></button>
-            </div>
-            <button type="button" id="hero-pause-btn" class="hero-pause-btn"
-                    aria-label="Pausar presentación" aria-pressed="false">
-                <svg id="hero-icon-pause" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
-                <svg id="hero-icon-play"  width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="d-none"><polygon points="5,3 19,12 5,21"/></svg>
-                <span id="hero-pause-label" class="hero-pause-label">Pausar</span>
-            </button>
-            <span id="hero-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></span>
-        </section>
-
-
-        <?php
-        foreach ($sectionOrder as $_secId):
-            include __DIR__ . '/sections/' . $_secId . '.php';
-        endforeach;
-        unset($sectionOrder, $_secId, $_secNavLabels);
-        ?>
-        <!-- ══════════════════════════════════════════════ FOOTER ══ -->
-        <footer class="footer-main" style="background: <?= h($footerBgColor) ?> !important;" role="contentinfo">
-            <?= $footerHtml ?>
-        </footer>
-    </main>
-
-    <!-- Botón WhatsApp flotante — número desde configuraciones -->
-    <a href="<?= h($waInfoUrl) ?>" class="whatsapp-float"
-       target="_blank" rel="noopener noreferrer"
-       title="Contáctanos por WhatsApp" aria-label="Contáctanos por WhatsApp">
-        <svg width="32" height="32" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984a9.96 9.96 0 0 0 1.335 4.975L2 22l5.195-1.364A9.936 9.936 0 0 0 12.006 22c5.507 0 9.991-4.479 9.992-9.986.002-2.668-1.036-5.18-2.924-7.069C17.186 3.057 14.675 2.002 12.012 2zm5.72 14.15c-.314.88-1.543 1.62-2.13 1.7-.587.08-1.173.28-4.08-.93-3.72-1.54-6.12-5.32-6.3-5.57-.18-.25-1.47-1.95-1.47-3.72 0-1.78.93-2.65 1.26-3 .33-.35.72-.44.96-.44h.69c.22 0 .52-.08.82.64.3.72 1.02 2.48 1.11 2.66.09.18.15.39.03.63-.12.24-.18.39-.36.6-.18.21-.38.47-.54.63-.18.18-.37.38-.16.73.21.35.93 1.54 2 2.49 1.38 1.23 2.54 1.61 2.9 1.79.36.18.57.15.78-.09.21-.24.9-1.05 1.14-1.41.24-.36.48-.3.8-.18.33.12 2.07 1.02 2.43 1.2.36.18.6.27.69.42.09.15.09.87-.22 1.75z"/>
-        </svg>
-    </a>
-
-    <!-- Botón Facebook flotante — URL desde configuraciones -->
-    <?php if ($cfgFB): ?>
-    <a class="social-float fb-bg" href="<?= h($cfgFB) ?>"
-       target="_blank" rel="noopener noreferrer"
-       title="Visita nuestro Facebook" aria-label="Visita nuestro Facebook">
-        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/>
-        </svg>
-    </a>
-    <?php endif; ?>
-
-    <!-- ── Modal: Aviso de Privacidad ──────────────────────────────────────── -->
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L469-659)</summary>
-
-**Path:** `Unknown file`
-
-```
-            background:#1e40af;color:#fff;border-radius:14px;
-            font:600 0.9rem/1.3 system-ui,sans-serif;
-            padding:12px 14px;
-            box-shadow:0 6px 20px rgba(30,64,175,0.45);
-            max-width:120px;text-align:center;">
-    <span style="font-size:1.35rem;line-height:1;" aria-hidden="true">🔍</span>
-    <span style="color:#f87171;letter-spacing:0.01em;">Vista<br>Previa</span>
-    <hr style="border:none;border-top:1px solid rgba(255,255,255,0.2);width:100%;margin:2px 0;">
-    <span style="color:#f87171;font-weight:500;font-size:0.82rem;line-height:1.25;">
-        Borrador<br>sin publicar
-    </span>
-</div>
-<?php endif; ?>
-
-    <!-- TU-02: Banner de consentimiento de cookies / almacenamiento local -->
-    <div id="cookie-banner" class="cookie-banner" role="dialog" aria-label="Aviso de cookies" aria-live="polite">
-        <p class="cookie-banner__text">
-            Este sitio utiliza almacenamiento local para mejorar la experiencia de navegación.
-            <a href="#" class="cookie-banner__link" id="cookie-privacy-link">Ver Aviso de Privacidad</a>
-        </p>
-        <button type="bu        <?php
-        // ── Orden de secciones — configurable desde el CMS (configuraciones.seccion_order) ──
-        // Secciones fijas: #inicio (hero) siempre primera, footer siempre última.
-        // Las secciones intermedias pueden reordenarse desde el CMS (panel "Orden de Secciones").
-        $_SEC_DEFAULT = ['acerca-de','especialidades','promociones','calidad','ubicacion','video'];
-        $_secNavLabels = [
-            'acerca-de'     => ['label' => 'Quiénes somos',        'href' => '#acerca-de'],
-            'especialidades'=> ['label' => 'Estudios',             'href' => '#especialidades'],
-            'promociones'   => ['label' => 'Promociones',          'href' => '#promociones'],
-            'calidad'       => ['label' => 'Calidad',              'href' => '#calidad'],
-            'ubicacion'     => ['label' => 'Ubicación y Contacto', 'href' => '#ubicacion'],
-        ];
-        $isVideoActive = $cfg('video_active', '1') !== '0';
-
-        $_secOrderRaw = $cfg('seccion_order');
-        if ($_secOrderRaw !== '') {
-            $_parsed = array_unique(array_filter(
-                array_map('trim', explode(',', $_secOrderRaw)),
-                fn($s) => in_array($s, $_SEC_DEFAULT, true)
-            ));
-            $_missing = array_diff($_SEC_DEFAULT, $_parsed);
-            $sectionOrder = array_values(array_merge($_parsed, $_missing));
-        } else {
-            $sectionOrder = $_SEC_DEFAULT;
-        }
-        unset($_SEC_DEFAULT, $_secOrderRaw, $_parsed, $_missing);
-
-        // Si el video está apagado, retirarlo del orden de secciones para que no se renderice
-        if (!$isVideoActive) {
-            $sectionOrder = array_values(array_filter($sectionOrder, fn($s) => $s !== 'video'));
-        }
-        ?>
-        <div class="nav-links" id="nav-links-mobile">
-            <a href="#inicio">Inicio</a>
-            <?php foreach ($sectionOrder as $_navSec):
-                if (isset($_secNavLabels[$_navSec])):
-            ?>
-            <a href="<?= $_secNavLabels[$_navSec]['href'] ?>"><?= h($_secNavLabels[$_navSec]['label']) ?></a>
-            <?php endif; endforeach; unset($_navSec); ?>
-            <a href="#" class="login-trigger btn-nav-medicos"
-               data-target="medicos" data-title="Acceso" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2v2"/><path d="M5 2v2"/><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"/><path d="M8 15a6 6 0 0 0 12 0v-3"/><circle cx="20" cy="10" r="2"/></svg>Médicos</a>
-        </div>
-    </nav>
-
-    <main id="main-content">
-
-        <div class="landing-nav-spacer"></div>
-
-        <!-- ═══════════════════════════════════════════════════════ HERO ══ -->
-        <section id="inicio" class="hero-premium">
-            <div class="hero-slides" data-autoplay="<?= $heroAutoplay ?>" role="region"
-                 aria-label="Presentación principal" aria-roledescription="carrusel">
-
-                <!-- ── Slide 1 — dinámico desde hero/slide1 ────────────────── -->
-                <div class="hero-slide active bg-slide-1"<?= $slides[1]['bg_style'] ? ' style="' . $slides[1]['bg_style'] . '"' : '' ?>>
-                    <div class="hero-glass-card">
-                        <?php if ($slides[1]['etiqueta']): ?><span><?= h($slides[1]['etiqueta']) ?></span><?php endif; ?>
-                        <h1><?= h($slides[1]['titulo']) ?></h1>
-                        <?php if ($slides[1]['descripcion']): ?>
-                        <p><?= h($slides[1]['descripcion']) ?></p>
-                        <?php endif; ?>
-                        <div class="flex-center-15">
-                            <?php if ($slides[1]['cta_texto']): ?><a href="<?= h($slides[1]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($slides[1]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ── Slide 2 — dinámico desde hero/slide2 ────────────────── -->
-                <div class="hero-slide bg-slide-2"<?= $slides[2]['bg_style'] ? ' style="' . $slides[2]['bg_style'] . '"' : '' ?>>
-                    <div class="hero-glass-card">
-                        <?php if ($slides[2]['etiqueta']): ?><span><?= h($slides[2]['etiqueta']) ?></span><?php endif; ?>
-                        <h2><?= h($slides[2]['titulo']) ?></h2>
-                        <?php if ($slides[2]['descripcion']): ?>
-                        <p><?= h($slides[2]['descripcion']) ?></p>
-                        <?php endif; ?>
-                        <div class="flex-center-15">
-                            <?php if ($slides[2]['cta_texto']): ?><a href="<?= h($slides[2]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($slides[2]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ── Slide 3 — dinámico desde hero/slide3 ────────────────── -->
-                <div class="hero-slide bg-slide-3"<?= $slides[3]['bg_style'] ? ' style="' . $slides[3]['bg_style'] . '"' : '' ?>>
-                    <div class="hero-glass-card">
-                        <?php if ($slides[3]['etiqueta']): ?><span><?= h($slides[3]['etiqueta']) ?></span><?php endif; ?>
-                        <h2><?= h($slides[3]['titulo']) ?></h2>
-                        <?php if ($slides[3]['descripcion']): ?>
-                        <p><?= h($slides[3]['descripcion']) ?></p>
-                        <?php endif; ?>
-                        <div class="flex-center-15">
-                            <?php if ($slides[3]['cta_texto']): ?><a href="<?= h($slides[3]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($slides[3]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ── Slide 4 — dinámico desde hero/slide4 ────────────────── -->
-                <div class="hero-slide bg-slide-4"<?= $slides[4]['bg_style'] ? ' style="' . $slides[4]['bg_style'] . '"' : '' ?>>
-                    <div class="hero-glass-card">
-                        <?php if ($slides[4]['etiqueta']): ?><span><?= h($slides[4]['etiqueta']) ?></span><?php endif; ?>
-                        <h2><?= h($slides[4]['titulo']) ?></h2>
-                        <?php if ($slides[4]['descripcion']): ?>
-                        <p><?= h($slides[4]['descripcion']) ?></p>
-                        <?php endif; ?>
-                        <div class="flex-center-15">
-                            <?php if ($slides[4]['cta_texto']): ?><a href="<?= h($slides[4]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($slides[4]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ── Slide 5: Ubicación — CMS + datos de configuraciones ── -->
-                <div class="hero-slide bg-slide-5"<?= $slides[5]['bg_style'] ? ' style="' . $slides[5]['bg_style'] . '"' : '' ?>>
-                    <div class="hero-glass-card">
-                        <?php if ($slides[5]['etiqueta']): ?><span><?= h($slides[5]['etiqueta']) ?></span><?php endif; ?>
-                        <h2><?= h($slides[5]['titulo']) ?></h2>
-                        <p><?= $slide5Desc ?></p>
-                        <div class="flex-center-15">
-                            <?php if ($slides[5]['cta_texto']): ?><a href="<?= h($slides[5]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($slides[5]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="hero-dots" aria-label="Navegación de diapositivas">
-                <button class="hero-dot active" data-slide="0" aria-label="Diapositiva 1 de 5" aria-pressed="true"></button>
-                <button class="hero-dot"        data-slide="1" aria-label="Diapositiva 2 de 5" aria-pressed="false"></button>
-                <button class="hero-dot"        data-slide="2" aria-label="Diapositiva 3 de 5" aria-pressed="false"></button>
-                <button class="hero-dot"        data-slide="4" aria-label="Diapositiva 4 de 5" aria-pressed="false"></button>
-                <button class="hero-dot"        data-slide="4" aria-label="Diapositiva 5 de 5" aria-pressed="false"></button>
-            </div>
-            <button type="button" id="hero-pause-btn" class="hero-pause-btn"
-                    aria-label="Pausar presentación" aria-pressed="false">
-                <svg id="hero-icon-pause" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
-                <svg id="hero-icon-play"  width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="d-none"><polygon points="5,3 19,12 5,21"/></svg>
-                <span id="hero-pause-label" class="hero-pause-label">Pausar</span>
-            </button>
-            <span id="hero-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></span>
-        </section>
-
-
-        <?php
-        foreach ($sectionOrder as $_secId):
-            include __DIR__ . '/sections/' . $_secId . '.php';
-        endforeach;
-        unset($sectionOrder, $_secId, $_secNavLabels, $isVideoActive);
-        ?>      <button class="hero-dot"        data-slide="2" aria-label="Diapositiva 3 de 5" aria-pressed="false"></button>
-                <button class="hero-dot"        data-slide="3" aria-label="Diapositiva 4 de 5" aria-pressed="false"></button>
-                <button class="hero-dot"        data-slide="4" aria-label="Diapositiva 5 de 5" aria-pressed="false"></button>
-            </div>
-            <button type="button" id="hero-pause-btn" class="hero-pause-btn"
-                    aria-label="Pausar presentación" aria-pressed="false">
-                <svg id="hero-icon-pause" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
-                <svg id="hero-icon-play"  width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="d-none"><polygon points="5,3 19,12 5,21"/></svg>
-                <span id="hero-pause-label" class="hero-pause-label">Pausar</span>
-            </button>
-            <span id="hero-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></span>
-        </section>
-
-
-        <?php
-        foreach ($sectionOrder as $_secId):
-            include __DIR__ . '/sections/' . $_secId . '.php';
-        endforeach;
-        unset($sectionOrder, $_secId, $_secNavLabels);
-        ?>
-        <!-- ══════════════════════════════════════════════ FOOTER ══ -->
-        <footer class="footer-main" style="background: <?= h($footerBgColor) ?> !important;" role="contentinfo">
-            <?= $footerHtml ?>
-        </footer>
-    </main>
-
-    <!-- Botón WhatsApp flotante — número desde configuraciones -->
-```
-
-</details>
-
----
-
 ### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 4:33 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L479-519)</summary>
-
-**Path:** `Unknown file`
-
-```
-    </span>
-</div>
-<?php endif; ?>
-
-    <!-- TU-02: Banner de consentimiento de cookies / almacenamiento local -->
-    <div id="cookie-banner" class="cookie-banner" role="dialog" aria-label="Aviso de cookies" aria-live="polite">
-        <p class="cookie-banner__text">
-            Este sitio utiliza almacenamiento local para mejorar la experiencia de navegación.
-            <a href="#" class="cookie-banner__link" id="cookie-privacy-link">Ver Aviso de Privacidad</a>
-        </p>
-        <button type="bu        <?php
-        // ── Orden de secciones — configurable desde el CMS (configuraciones.seccion_order) ──
-        // Secciones fijas: #inicio (hero) siempre primera, footer siempre última.
-        // Las secciones intermedias pueden reordenarse desde el CMS (panel "Orden de Secciones").
-        $_SEC_DEFAULT = ['acerca-de','especialidades','promociones','calidad','ubicacion','video'];
-        $_secNavLabels = [
-            'acerca-de'     => ['label' => 'Quiénes somos',        'href' => '#acerca-de'],
-            'especialidades'=> ['label' => 'Estudios',             'href' => '#especialidades'],
-            'promociones'   => ['label' => 'Promociones',          'href' => '#promociones'],
-            'calidad'       => ['label' => 'Calidad',              'href' => '#calidad'],
-            'ubicacion'     => ['label' => 'Ubicación y Contacto', 'href' => '#ubicacion'],
-        ];
-        $isVideoActive = $cfg('video_active', '1') !== '0';
-
-        $_secOrderRaw = $cfg('seccion_order');
-        if ($_secOrderRaw !== '') {
-            $_parsed = array_unique(array_filter(
-                array_map('trim', explode(',', $_secOrderRaw)),
-                fn($s) => in_array($s, $_SEC_DEFAULT, true)
-            ));
-            $_missing = array_diff($_SEC_DEFAULT, $_parsed);
-            $sectionOrder = array_values(array_merge($_parsed, $_missing));
-        } else {
-            $sectionOrder = $_SEC_DEFAULT;
-        }
-        unset($_SEC_DEFAULT, $_secOrderRaw, $_parsed, $_missing);
-
-        // Si el video está apagado, retirarlo del orden de secciones para que no se renderice
-        if (!$isVideoActive) {
-            $sectionOrder = array_values(array_filter($sectionOrder, fn($s) => $s !== 'video'));
-        }
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L619-659)</summary>
-
-**Path:** `Unknown file`
-
-```
-                    aria-label="Pausar presentación" aria-pressed="false">
-                <svg id="hero-icon-pause" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
-                <svg id="hero-icon-play"  width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="d-none"><polygon points="5,3 19,12 5,21"/></svg>
-                <span id="hero-pause-label" class="hero-pause-label">Pausar</span>
-            </button>
-            <span id="hero-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></span>
-        </section>
-
-
-        <?php
-        foreach ($sectionOrder as $_secId):
-            include __DIR__ . '/sections/' . $_secId . '.php';
-        endforeach;
-        unset($sectionOrder, $_secId, $_secNavLabels, $isVideoActive);
-        ?>      <button class="hero-dot"        data-slide="2" aria-label="Diapositiva 3 de 5" aria-pressed="false"></button>
-                <button class="hero-dot"        data-slide="3" aria-label="Diapositiva 4 de 5" aria-pressed="false"></button>
-                <button class="hero-dot"        data-slide="4" aria-label="Diapositiva 5 de 5" aria-pressed="false"></button>
-            </div>
-            <button type="button" id="hero-pause-btn" class="hero-pause-btn"
-                    aria-label="Pausar presentación" aria-pressed="false">
-                <svg id="hero-icon-pause" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
-                <svg id="hero-icon-play"  width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="d-none"><polygon points="5,3 19,12 5,21"/></svg>
-                <span id="hero-pause-label" class="hero-pause-label">Pausar</span>
-            </button>
-            <span id="hero-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></span>
-        </section>
-
-
-        <?php
-        foreach ($sectionOrder as $_secId):
-            include __DIR__ . '/sections/' . $_secId . '.php';
-        endforeach;
-        unset($sectionOrder, $_secId, $_secNavLabels);
-        ?>
-        <!-- ══════════════════════════════════════════════ FOOTER ══ -->
-        <footer class="footer-main" style="background: <?= h($footerBgColor) ?> !important;" role="contentinfo">
-            <?= $footerHtml ?>
-        </footer>
-    </main>
-
-    <!-- Botón WhatsApp flotante — número desde configuraciones -->
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L469-659)</summary>
-
-**Path:** `Unknown file`
-
-```
-            background:#1e40af;color:#fff;border-radius:14px;
-            font:600 0.9rem/1.3 system-ui,sans-serif;
-            padding:12px 14px;
-            box-shadow:0 6px 20px rgba(30,64,175,0.45);
-            max-width:120px;text-align:center;">
-    <span style="font-size:1.35rem;line-height:1;" aria-hidden="true">🔍</span>
-    <span style="color:#f87171;letter-spacing:0.01em;">Vista<br>Previa</span>
-    <hr style="border:none;border-top:1px solid rgba(255,255,255,0.2);width:100%;margin:2px 0;">
-    <span style="color:#f87171;font-weight:500;font-size:0.82rem;line-height:1.25;">
-        Borrador<br>sin publicar
-    </span>
-</div>
-<?php endif; ?>
-
-    <!-- TU-02: Banner de consentimiento de cookies / almacenamiento local -->
-    <div id="cookie-banner" class="cookie-banner" role="dialog" aria-label="Aviso de cookies" aria-live="polite">
-        <p class="cookie-banner__text">
-            Este sitio utiliza almacenamiento local para mejorar la experiencia de navegación.
-            <a href="#" class="cookie-banner__link" id="cookie-privacy-link">Ver Aviso de Privacidad</a>
-        </p>
-        <button type="bu        <?php
-        // ── Orden de secciones — configurable desde el CMS (configuraciones.seccion_order) ──
-        // Secciones fijas: #inicio (hero) siempre primera, footer siempre última.
-        // Las secciones intermedias pueden reordenarse desde el CMS (panel "Orden de Secciones").
-        $_SEC_DEFAULT = ['acerca-de','especialidades','promociones','calidad','ubicacion','video'];
-        $_secNavLabels = [
-            'acerca-de'     => ['label' => 'Quiénes somos',        'href' => '#acerca-de'],
-            'especialidades'=> ['label' => 'Estudios',             'href' => '#especialidades'],
-            'promociones'   => ['label' => 'Promociones',          'href' => '#promociones'],
-            'calidad'       => ['label' => 'Calidad',              'href' => '#calidad'],
-            'ubicacion'     => ['label' => 'Ubicación y Contacto', 'href' => '#ubicacion'],
-        ];
-        $isVideoActive = $cfg('video_active', '1') !== '0';
-
-        $_secOrderRaw = $cfg('seccion_order');
-        if ($_secOrderRaw !== '') {
-            $_parsed = array_unique(array_filter(
-                array_map('trim', explode(',', $_secOrderRaw)),
-                fn($s) => in_array($s, $_SEC_DEFAULT, true)
-            ));
-            $_missing = array_diff($_SEC_DEFAULT, $_parsed);
-            $sectionOrder = array_values(array_merge($_parsed, $_missing));
-        } else {
-            $sectionOrder = $_SEC_DEFAULT;
-        }
-        unset($_SEC_DEFAULT, $_secOrderRaw, $_parsed, $_missing);
-
-        // Si el video está apagado, retirarlo del orden de secciones para que no se renderice
-        if (!$isVideoActive) {
-            $sectionOrder = array_values(array_filter($sectionOrder, fn($s) => $s !== 'video'));
-        }
-        ?>
-        <div class="nav-links" id="nav-links-mobile">
-            <a href="#inicio">Inicio</a>
-            <?php foreach ($sectionOrder as $_navSec):
-                if (isset($_secNavLabels[$_navSec])):
-            ?>
-            <a href="<?= $_secNavLabels[$_navSec]['href'] ?>"><?= h($_secNavLabels[$_navSec]['label']) ?></a>
-            <?php endif; endforeach; unset($_navSec); ?>
-            <a href="#" class="login-trigger btn-nav-medicos"
-               data-target="medicos" data-title="Acceso" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2v2"/><path d="M5 2v2"/><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"/><path d="M8 15a6 6 0 0 0 12 0v-3"/><circle cx="20" cy="10" r="2"/></svg>Médicos</a>
-        </div>
-    </nav>
-
-    <main id="main-content">
-
-        <div class="landing-nav-spacer"></div>
-
-        <!-- ═══════════════════════════════════════════════════════ HERO ══ -->
-        <section id="inicio" class="hero-premium">
-            <div class="hero-slides" data-autoplay="<?= $heroAutoplay ?>" role="region"
-                 aria-label="Presentación principal" aria-roledescription="carrusel">
-
-                <!-- ── Slide 1 — dinámico desde hero/slide1 ────────────────── -->
-                <div class="hero-slide active bg-slide-1"<?= $slides[1]['bg_style'] ? ' style="' . $slides[1]['bg_style'] . '"' : '' ?>>
-                    <div class="hero-glass-card">
-                        <?php if ($slides[1]['etiqueta']): ?><span><?= h($slides[1]['etiqueta']) ?></span><?php endif; ?>
-                        <h1><?= h($slides[1]['titulo']) ?></h1>
-                        <?php if ($slides[1]['descripcion']): ?>
-                        <p><?= h($slides[1]['descripcion']) ?></p>
-                        <?php endif; ?>
-                        <div class="flex-center-15">
-                            <?php if ($slides[1]['cta_texto']): ?><a href="<?= h($slides[1]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($slides[1]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ── Slide 2 — dinámico desde hero/slide2 ────────────────── -->
-                <div class="hero-slide bg-slide-2"<?= $slides[2]['bg_style'] ? ' style="' . $slides[2]['bg_style'] . '"' : '' ?>>
-                    <div class="hero-glass-card">
-                        <?php if ($slides[2]['etiqueta']): ?><span><?= h($slides[2]['etiqueta']) ?></span><?php endif; ?>
-                        <h2><?= h($slides[2]['titulo']) ?></h2>
-                        <?php if ($slides[2]['descripcion']): ?>
-                        <p><?= h($slides[2]['descripcion']) ?></p>
-                        <?php endif; ?>
-                        <div class="flex-center-15">
-                            <?php if ($slides[2]['cta_texto']): ?><a href="<?= h($slides[2]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($slides[2]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ── Slide 3 — dinámico desde hero/slide3 ────────────────── -->
-                <div class="hero-slide bg-slide-3"<?= $slides[3]['bg_style'] ? ' style="' . $slides[3]['bg_style'] . '"' : '' ?>>
-                    <div class="hero-glass-card">
-                        <?php if ($slides[3]['etiqueta']): ?><span><?= h($slides[3]['etiqueta']) ?></span><?php endif; ?>
-                        <h2><?= h($slides[3]['titulo']) ?></h2>
-                        <?php if ($slides[3]['descripcion']): ?>
-                        <p><?= h($slides[3]['descripcion']) ?></p>
-                        <?php endif; ?>
-                        <div class="flex-center-15">
-                            <?php if ($slides[3]['cta_texto']): ?><a href="<?= h($slides[3]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($slides[3]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ── Slide 4 — dinámico desde hero/slide4 ────────────────── -->
-                <div class="hero-slide bg-slide-4"<?= $slides[4]['bg_style'] ? ' style="' . $slides[4]['bg_style'] . '"' : '' ?>>
-                    <div class="hero-glass-card">
-                        <?php if ($slides[4]['etiqueta']): ?><span><?= h($slides[4]['etiqueta']) ?></span><?php endif; ?>
-                        <h2><?= h($slides[4]['titulo']) ?></h2>
-                        <?php if ($slides[4]['descripcion']): ?>
-                        <p><?= h($slides[4]['descripcion']) ?></p>
-                        <?php endif; ?>
-                        <div class="flex-center-15">
-                            <?php if ($slides[4]['cta_texto']): ?><a href="<?= h($slides[4]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($slides[4]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ── Slide 5: Ubicación — CMS + datos de configuraciones ── -->
-                <div class="hero-slide bg-slide-5"<?= $slides[5]['bg_style'] ? ' style="' . $slides[5]['bg_style'] . '"' : '' ?>>
-                    <div class="hero-glass-card">
-                        <?php if ($slides[5]['etiqueta']): ?><span><?= h($slides[5]['etiqueta']) ?></span><?php endif; ?>
-                        <h2><?= h($slides[5]['titulo']) ?></h2>
-                        <p><?= $slide5Desc ?></p>
-                        <div class="flex-center-15">
-                            <?php if ($slides[5]['cta_texto']): ?><a href="<?= h($slides[5]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($slides[5]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="hero-dots" aria-label="Navegación de diapositivas">
-                <button class="hero-dot active" data-slide="0" aria-label="Diapositiva 1 de 5" aria-pressed="true"></button>
-                <button class="hero-dot"        data-slide="1" aria-label="Diapositiva 2 de 5" aria-pressed="false"></button>
-                <button class="hero-dot"        data-slide="2" aria-label="Diapositiva 3 de 5" aria-pressed="false"></button>
-                <button class="hero-dot"        data-slide="4" aria-label="Diapositiva 4 de 5" aria-pressed="false"></button>
-                <button class="hero-dot"        data-slide="4" aria-label="Diapositiva 5 de 5" aria-pressed="false"></button>
-            </div>
-            <button type="button" id="hero-pause-btn" class="hero-pause-btn"
-                    aria-label="Pausar presentación" aria-pressed="false">
-                <svg id="hero-icon-pause" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
-                <svg id="hero-icon-play"  width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="d-none"><polygon points="5,3 19,12 5,21"/></svg>
-                <span id="hero-pause-label" class="hero-pause-label">Pausar</span>
-            </button>
-            <span id="hero-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></span>
-        </section>
-
-
-        <?php
-        foreach ($sectionOrder as $_secId):
-            include __DIR__ . '/sections/' . $_secId . '.php';
-        endforeach;
-        unset($sectionOrder, $_secId, $_secNavLabels, $isVideoActive);
-        ?>      <button class="hero-dot"        data-slide="2" aria-label="Diapositiva 3 de 5" aria-pressed="false"></button>
-                <button class="hero-dot"        data-slide="3" aria-label="Diapositiva 4 de 5" aria-pressed="false"></button>
-                <button class="hero-dot"        data-slide="4" aria-label="Diapositiva 5 de 5" aria-pressed="false"></button>
-            </div>
-            <button type="button" id="hero-pause-btn" class="hero-pause-btn"
-                    aria-label="Pausar presentación" aria-pressed="false">
-                <svg id="hero-icon-pause" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
-                <svg id="hero-icon-play"  width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="d-none"><polygon points="5,3 19,12 5,21"/></svg>
-                <span id="hero-pause-label" class="hero-pause-label">Pausar</span>
-            </button>
-            <span id="hero-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></span>
-        </section>
-
-
-        <?php
-        foreach ($sectionOrder as $_secId):
-            include __DIR__ . '/sections/' . $_secId . '.php';
-        endforeach;
-        unset($sectionOrder, $_secId, $_secNavLabels);
-        ?>
-        <!-- ══════════════════════════════════════════════ FOOTER ══ -->
-        <footer class="footer-main" style="background: <?= h($footerBgColor) ?> !important;" role="contentinfo">
-            <?= $footerHtml ?>
-        </footer>
-    </main>
-
-    <!-- Botón WhatsApp flotante — número desde configuraciones -->
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L449-499)</summary>
-
-**Path:** `Unknown file`
-
-```
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": "Sunday",
-          "opens": "<?= h($cfgDomOpen) ?>",
-          "closes": "<?= h($cfgDomClose) ?>"
-        }
-      ],
-      "description": "<?= h($seoDesc) ?>"
-    }
-    </script>
-</head>
-<body>
-
-<?php if ($isPreview): ?>
-<!-- ── Flotante de Vista Previa (solo admin, sesión activa) ───────────────────
-     Posicionado a la derecha, apilado sobre el botón WhatsApp (bottom: 195px).
-     No invade el header ni desplaza el contenido de la página. -->
-<div id="cms-preview-badge" role="alert" aria-live="polite"
-     style="position:fixed;top:8px;right:8px;z-index:99999;
-            display:flex;flex-direction:column;align-items:center;gap:7px;
-            background:#1e40af;color:#fff;border-radius:14px;
-            font:600 0.9rem/1.3 system-ui,sans-serif;
-            padding:12px 14px;
-            box-shadow:0 6px 20px rgba(30,64,175,0.45);
-            max-width:120px;text-align:center;">
-    <span style="font-size:1.35rem;line-height:1;" aria-hidden="true">🔍</span>
-    <span style="color:#f87171;letter-spacing:0.01em;">Vista<br>Previa</span>
-    <hr style="border:none;border-top:1px solid rgba(255,255,255,0.2);width:100%;margin:2px 0;">
-    <span style="color:#f87171;font-weight:500;font-size:0.82rem;line-height:1.25;">
-        Borrador<br>sin publicar
-    </span>
-</div>
-<?php endif; ?>
-
-    <!-- TU-02: Banner de consentimiento de cookies / almacenamiento local -->
-    <div id="cookie-banner" class="cookie-banner" role="dialog" aria-label="Aviso de cookies" aria-live="polite">
-        <p class="cookie-banner__text">
-            Este sitio utiliza almacenamiento local para mejorar la experiencia de navegación.
-            <a href="#" class="cookie-banner__link" id="cookie-privacy-link">Ver Aviso de Privacidad</a>
-        </p>
-        <button type="bu        <?php
-        // ── Orden de secciones — configurable desde el CMS (configuraciones.seccion_order) ──
-        // Secciones fijas: #inicio (hero) siempre primera, footer siempre última.
-        // Las secciones intermedias pueden reordenarse desde el CMS (panel "Orden de Secciones").
-        $_SEC_DEFAULT = ['acerca-de','especialidades','promociones','calidad','ubicacion','video'];
-        $_secNavLabels = [
-            'acerca-de'     => ['label' => 'Quiénes somos',        'href' => '#acerca-de'],
-            'especialidades'=> ['label' => 'Estudios',             'href' => '#especialidades'],
-            'promociones'   => ['label' => 'Promociones',          'href' => '#promociones'],
-            'calidad'       => ['label' => 'Calidad',              'href' => '#calidad'],
-            'ubicacion'     => ['label' => 'Ubicación y Contacto', 'href' => '#ubicacion'],
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 4:33 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 4:33 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 4:33 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** CORTEX_STEP_STATUS_ERROR
+**Status:** Reset
 **Created:** 1 Sept 2026, 4:34 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 4:34 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 4:34 pm
 
 ---
 
-## Agent Response
+### Local File Search
 
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-## User Request
-
-. EN el cms de pestañas, incluye la # 9 , de acuerdo al orden actual donde se use un RTE completo para incluir links de video.
-. EN todas las pestañas , excepto la #9, se quite de la RTE toolbox la partes de insert  link y  media.
-. Depura remanentes que esten como islas al estar removiendo cosas duras de datos, logica, opciones como de RTE depuradas, etc. 
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `video.php`
-**Language:** php
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `ckeditor-init.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-/**
- * CKEditor 5 — Inicialización segura con MutationObserver
- *
- * Se remueve el parcheo frágil de `showPanel` para evitar condiciones de carrera
- * con gestion-web.js. Se utiliza MutationObserver para detectar de manera 100% fiable
- * cuando el panel "Quiénes somos" (panel-quienes-somos) obtiene la clase .active.
- * Esto evita el error de cálculo de dimensiones de CKEditor en elementos display:none.
- */
-(function () {
-    'use strict';
-
-    var _ckState = {};  // 'pending' | editor instance | null
-
-    function _createEditor(mountId, dataId, globalKey) {
-        if (_ckState[globalKey]) return;
-        _ckState[globalKey] = 'pending';
-
-        var mountEl = document.getElementById(mountId);
-        var dataEl  = document.getElementById(dataId);
-
-        if (!mountEl || !dataEl || typeof CKEDITOR === 'undefined') {
-            _ckState[globalKey] = null;
-            return;
-        }
-
-        var CK = CKEDITOR;
-        
-        var laeshColors = [
-            { color: '#0052B7', label: 'Azul LAESH Principal' },
-            { color: '#71CA11', label: 'Verde LAESH Principal' },
-            { color: '#A3C912', label: 'Verde Acento' },
-            { color: '#CCE7F5', label: 'Azul Claro (Fondo)' },
-            { color: '#0f172a', label: 'Texto Oscuro' },
-            { color: '#64748b', label: 'Texto Secundario' },
-            { color: '#ffffff', label: 'Blanco' },
-            { color: '#000000', label: 'Negro' }
-        ];
-
-        // El plugin List puede requerir el uso de ClassicEditor sin destructuración en algunos builds, 
-        // pero la instanciación es segura con los exports directos del UMD.
-        var editorConfig = {
-            licenseKey: 'GPL',
-            fontColor: { 
-                colors: laeshColors,
-                documentColors: 0 
-            },
-            fontBackgroundColor: { 
-                colors: laeshColors,
-                documentColors: 0 
-            },
-            fontFamily: {
-                options: [
-                    'default',
-                    'Cabin, sans-serif',
-                    'Gill Sans, sans-serif',
-                    'Mosquito Std Black, sans-serif'
-                ],
-                supportAllValues: true
-            },
-            style: {
-                definitions: [
-                    { name: 'Subtítulo Institucional (Azul)', element: 'h3', classes: ['acerca-h3b'] },
-                    { name: 'Texto Destacado', element: 'p', classes: ['faq-p--primary'] },
-                    { name: 'Texto Secundario', element: 'p', classes: ['faq-p--tail'] },
-                    { name: 'Texto Muted', element: 'p', classes: ['aviso-p--muted'] },
-                    { name: 'Firma / Highlight', element: 'strong', classes: ['txt-main'] }
-                ]
-            },
-            htmlSupport: {
-                allow: [
-                    {
-                        name: /.*/,
-                        attributes: true,
-                        classes: true,
-                        styles: true
-                    }
-                ]
-            },
-            mediaEmbed: {
-                previewsInData: true,
-                extraProviders: [
-                    {
-                        name: 'youtube',
-                        url: [
-                            /^(?:m\.)?youtube\.com\/watch\?v=([\w-]+)(?:&.*)?$/,
-                            /^(?:m\.)?youtube\.com\/v\/([\w-]+)(?:\?.*)?$/,
-                            /^youtube\.com\/embed\/([\w-]+)(?:\?.*)?$/,
-                            /^youtu\.be\/([\w-]+)(?:\?.*)?$/
-                        ],
-                        html: match => {
-                            const id = match[1];
-                            return (
-                                '<div style="resize: both; overflow: auto; box-sizing: border-box; padding: 0 16px 16px 0; background: #f8fafc; aspect-ratio: 16 / 9; width: 100%; max-width: 100%; min-width: 250px; min-height: 150px; border-radius: 8px;">' +
-                                '<iframe src="https://www.youtube.com/embed/' + id + '" ' +
-                                'style="width: 100%; height: 100%; display: block;" ' +
-                                'frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>' +
-                                '</iframe>' +
-                                '</div>'
-                            );
-                        }
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `ckeditor-init.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L99-249)</summary>
-
-**Path:** `Unknown file`
-
-```
-                        }
-                    },
-                    {
-                        name: 'spotify',
-                        url: [
-                            /^open\.spotify\.com\/(?:intl-\w+\/)?(artist|album|track|show|episode|playlist)\/([\w-]+)(?:\?.*)?$/
-                        ],
-                        html: match => {
-                            const type = match[1];
-                            const id = match[2];
-                            return (
-                                '<div style="resize: both; overflow: auto; box-sizing: border-box; padding: 0 16px 16px 0; background: #f8fafc; min-width: 300px; min-height: 152px; max-width: 100%; padding-bottom: 152px; position: relative; border-radius: 12px;">' +
-                                '<iframe src="https://open.spotify.com/embed/' + type + '/' + id + '?utm_source=generator" ' +
-                                'style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" ' +
-                                'frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">' +
-                                '</iframe>' +
-                                '</div>'
-                            );
-                        }
-                    },
-                    {
-                        name: 'vimeo',
-                        url: [
-                            /^vimeo\.com\/(\d+)(?:\?.*)?$/,
-                            /^vimeo\.com\/channels\/(?:\w+)\/(\d+)(?:\?.*)?$/,
-                            /^vimeo\.com\/groups\/(?:\w+)\/videos\/(\d+)(?:\?.*)?$/,
-                            /^vimeo\.com\/album\/(?:\d+)\/video\/(\d+)(?:\?.*)?$/,
-                            /^player\.vimeo\.com\/video\/(\d+)(?:\?.*)?$/
-                        ],
-                        html: match => {
-                            const id = match[1];
-                            return (
-                                '<div style="resize: both; overflow: auto; box-sizing: border-box; padding: 0 16px 16px 0; background: #f8fafc; aspect-ratio: 16 / 9; width: 100%; max-width: 100%; min-width: 250px; min-height: 150px; border-radius: 8px;">' +
-                                '<iframe src="https://player.vimeo.com/video/' + id + '" ' +
-                                'style="width: 100%; height: 100%; display: block;" ' +
-                                'frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen>' +
-                                '</iframe>' +
-                                '</div>'
-                            );
-                        }
-                    },
-                    {
-                        name: 'dailymotion',
-                        url: [ /^dailymotion\.com\/video\/(\w+)/, /^dai\.ly\/(\w+)/, /^www\.dailymotion\.com\/video\/(\w+)/ ],
-                        html: match => {
-                            const id = match[1];
-                            return (
-                                '<div style="resize: both; overflow: auto; box-sizing: border-box; padding: 0 16px 16px 0; background: #f8fafc; aspect-ratio: 16 / 9; width: 100%; max-width: 100%; min-width: 250px; min-height: 150px; border-radius: 8px;">' +
-                                '<iframe src="https://www.dailymotion.com/embed/video/' + id + '" ' +
-                                'style="width: 100%; height: 100%; display: block;" ' +
-                                'frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>' +
-                                '</iframe>' +
-                                '</div>'
-                            );
-                        }
-                    },
-                    {
-                        name: 'instagram',
-                        url: [ /^instagram\.com\/(?:p|reel)\/([\w-]+)/, /^www\.instagram\.com\/(?:p|reel)\/([\w-]+)/ ],
-                        html: match => {
-                            const id = match[1];
-                            return (
-                                '<div style="resize: both; overflow: auto; box-sizing: border-box; padding: 0 16px 16px 0; background: #f8fafc; width: 100%; max-width: 400px; min-width: 320px; aspect-ratio: 4 / 5; border-radius: 8px; background: #fff;">' +
-                                '<iframe src="https://www.instagram.com/p/' + id + '/embed" ' +
-                                'style="width: 100%; height: 100%; display: block;" ' +
-                                'frameborder="0" scrolling="no" allowtransparency="true">' +
-                                '</iframe>' +
-                                '</div>'
-                            );
-                        }
-                    },
-                    {
-                        name: 'facebook',
-                        url: [
-                            /^facebook\.com\/.*\/videos\/(?:[a-zA-Z0-9.]+\/)?(\d+)/,
-                            /^facebook\.com\/video\.php\?v=(\d+)/,
-                            /^facebook\.com\/.*\/posts\/([a-zA-Z0-9]+)/,
-                            /^facebook\.com\/watch\/\?v=(\d+)/,
-                            /^facebook\.com\/share\/v\/([a-zA-Z0-9_]+)/,
-                            /^facebook\.com\/share\/p\/([a-zA-Z0-9_]+)/,
-                            /^facebook\.com\/share\/r\/([a-zA-Z0-9_]+)/,
-                            /^facebook\.com\/reel\/(\d+)/,
-                            /^www\.facebook\.com\/.*\/videos\/(?:[a-zA-Z0-9.]+\/)?(\d+)/,
-                            /^www\.facebook\.com\/video\.php\?v=(\d+)/,
-                            /^www\.facebook\.com\/.*\/posts\/([a-zA-Z0-9]+)/,
-                            /^www\.facebook\.com\/watch\/\?v=(\d+)/,
-                            /^www\.facebook\.com\/share\/v\/([a-zA-Z0-9_]+)/,
-                            /^www\.facebook\.com\/share\/p\/([a-zA-Z0-9_]+)/,
-                            /^www\.facebook\.com\/share\/r\/([a-zA-Z0-9_]+)/,
-                            /^www\.facebook\.com\/reel\/(\d+)/
-                        ],
-                        html: match => {
-                            // Trataremos los Reels (/reel/ y /share/r/) como posts normales para que usen post.php y aspect-ratio 4/5
-                            let isVideo = match.input.indexOf('/videos/') !== -1 || match.input.indexOf('watch/?v=') !== -1 || match.input.indexOf('video.php') !== -1 || match.input.indexOf('/share/v/') !== -1;
-                            let embedUrl = isVideo 
-                                ? 'https://www.facebook.com/plugins/video.php?href=' + encodeURIComponent('https://' + match.input) + '&show_text=0'
-                                : 'https://www.facebook.com/plugins/post.php?href=' + encodeURIComponent('https://' + match.input);
-                            
-                            return (
-                                '<div style="resize: both; overflow: auto; box-sizing: border-box; padding: 0 16px 16px 0; background: #f8fafc; width: 100%; max-width: 500px; min-width: 320px; aspect-ratio: ' + (isVideo ? '16 / 9' : '4 / 5') + '; border-radius: 8px; background: #fff;">' +
-                                '<iframe src="' + embedUrl + '" ' +
-                                'style="border:none;overflow:hidden;width:100%;height:100%;" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">' +
-                                '</iframe>' +
-                                '</div>'
-                            );
-                        }
-                    },
-                    {
-                        name: 'twitter',
-                        url: [
-                            /^twitter\.com\/[a-zA-Z0-9_]+\/status\/(\d+)/,
-                            /^x\.com\/[a-zA-Z0-9_]+\/status\/(\d+)/,
-                            /^www\.twitter\.com\/[a-zA-Z0-9_]+\/status\/(\d+)/,
-                            /^www\.x\.com\/[a-zA-Z0-9_]+\/status\/(\d+)/
-                        ],
-                        html: match => {
-                            const url = 'https://' + match.input;
-                            return (
-                                '<div style="resize: both; overflow: auto; box-sizing: border-box; padding: 0 16px 16px 0; background: #f8fafc; width: 100%; max-width: 550px; min-width: 320px; min-height: 400px; border-radius: 8px;">' +
-                                '<iframe src="https://twitframe.com/show?url=' + encodeURIComponent(url) + '" ' +
-                                'style="width: 100%; height: 100%; display: block;" ' +
-                                'frameborder="0" scrolling="no" allowtransparency="true">' +
-                                '</iframe>' +
-                                '</div>'
-                            );
-                        }
-                    }
-                ]
-            },
-            plugins: [
-                CK.Essentials, CK.Paragraph, CK.Heading,
-                CK.Bold, CK.Italic, CK.Underline, CK.Strikethrough,
-                CK.Font, CK.Highlight, CK.Alignment,
-                CK.List, CK.TodoList,
-                CK.Indent, CK.IndentBlock,
-                CK.Link, CK.Table, CK.MediaEmbed, CK.HorizontalLine,
-                CK.SourceEditing, CK.GeneralHtmlSupport, CK.Style
-            ],
-            toolbar: {
-                items: [
-                    'sourceEditing', '|',
-                    'heading', 'style', '|',
-                    'bold', 'italic', 'underline', 'strikethrough', 'highlight', '|',
-                    'fontFamily', 'fontSize', 'fontColor', 'fontBackgroundColor', '|',
-                    'alignment', '|',
-                    'bulletedList', 'numberedList', 'todoList', '|',
-                    'outdent', 'indent', '|',
-                    'link', 'insertTable', 'mediaEmbed', 'horizontalLine', '|',
-                    'undo', 'redo'
-                ]
-            },
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `ckeditor-init.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L250-449)</summary>
-
-**Path:** `Unknown file`
-
-```
-            initialData: dataEl.value
-        };
-
-        CK.ClassicEditor.create(mountEl, editorConfig)
-            .then(function (editor) {
-                _ckState[globalKey] = editor;
-                window[globalKey]   = editor;
-
-                // Sincronizar con el textarea oculto para que onFieldChange() del CMS capte los cambios
-                editor.model.document.on('change:data', function () {
-                    dataEl.value = editor.getData();
-                    dataEl.dispatchEvent(new Event('input', { bubbles: true }));
-                });
-            })
-            .catch(function (err) {
-                console.error('[LAESH CMS] Falló CKEditor en ' + mountId + ':', err);
-                _ckState[globalKey] = null;
-                // Si falla, limpiar el montaje y mostrar el textarea crudo
-                mountEl.style.display = 'none';
-                dataEl.classList.remove('ck5-hidden-data');
-                dataEl.style.display  = 'block';
-            });
-    }
-
-    function _initQsEditors() {
-        // Se usa setTimeout para garantizar que el CSS de la clase .active y sus transiciones
-        // hayan sido calculados y aplicados en el DOM, asegurando dimensiones correctas.
-        setTimeout(function () {
-            _createEditor('ck-ficha4',   'ck-ficha4-data',   '_ckFicha4');
-            _createEditor('ck-historia', 'ck-historia-data', '_ckHistoria');
-            _createEditor('ck-mision',   'ck-mision-data',   '_ckMision');
-            _createEditor('ck-vision',   'ck-vision-data',   '_ckVision');
-        }, 150);
-    }
-
-    function _initEspecialidadesEditors() {
-        setTimeout(function () {
-            for (var i = 1; i <= 16; i++) {
-                var mId = 'ck-carousel-' + i;
-                var dId = 'ck-carousel-' + i + '-data';
-                if (document.getElementById(mId) && document.getElementById(dId)) {
-                    _createEditor(mId, dId, '_ckCarousel' + i);
-                }
-            }
-        }, 150);
-    }
-
-    function _initAvisoPrivacidadEditor() {
-        setTimeout(function () {
-            if (document.getElementById('ck-aviso-privacidad') && document.getElementById('ck-aviso-privacidad-data')) {
-                _createEditor('ck-aviso-privacidad', 'ck-aviso-privacidad-data', '_ckAvisoPrivacidad');
-            }
-        }, 150);
-    }
-
-    function _initFooterEditor() {
-        setTimeout(function () {
-            if (document.getElementById('ck-footer') && document.getElementById('ck-footer-data')) {
-                _createEditor('ck-footer', 'ck-footer-data', '_ckFooter');
-            }
-        }, 150);
-    }
-
-    function _lockTextContent(editor) {
-        var viewDoc = editor.editing.view.document;
-        viewDoc.on('keydown', function(evt, data) {
-            var keyCode = data.keyCode;
-            var domEvt  = data.domEvent;
-
-            // Permitir combinaciones de navegación con Ctrl/Cmd/Alt excepto V (pegar) y X (cortar)
-            if (domEvt.ctrlKey || domEvt.metaKey || domEvt.altKey) {
-                var keyChar = String.fromCharCode(keyCode).toLowerCase();
-                if (keyChar === 'v' || keyChar === 'x') {
-                    data.preventDefault();
-                    evt.stop();
-                }
-                return;
-            }
-
-            // Permitir teclas de selección y navegación (Flechas, Shift, Tab, Home, End, PageUp/Down, CapsLock)
-            var allowedKeys = [9, 16, 17, 18, 20, 33, 34, 35, 36, 37, 38, 39, 40];
-            if (allowedKeys.indexOf(keyCode) !== -1) {
-                return;
-            }
-
-            // Bloquear edición de caracteres, borrado (Backspace/Delete) y saltos de línea (Enter)
-            data.preventDefault();
-            evt.stop();
-        }, { priority: 'highest' });
-
-        editor.editing.view.document.on('clipboardInput', function(evt) {
-            evt.stop();
-        }, { priority: 'highest' });
-
-        editor.editing.view.document.on('drop', function(evt) {
-            evt.stop();
-        }, { priority: 'highest' });
-    }
-
-    function _createEditorNoMedia(mountId, dataId, globalKey, isLocked) {
-        if (_ckState[globalKey]) return;
-        _ckState[globalKey] = 'pending';
-
-        var mountEl = document.getElementById(mountId);
-        var dataEl  = document.getElementById(dataId);
-
-        if (!mountEl || !dataEl || typeof CKEDITOR === 'undefined') {
-            _ckState[globalKey] = null;
-            return;
-        }
-
-        var CK = CKEDITOR;
-        
-        var laeshColors = [
-            { color: '#0052B7', label: 'Azul LAESH Principal' },
-            { color: '#71CA11', label: 'Verde LAESH Principal' },
-            { color: '#A3C912', label: 'Verde Acento' },
-            { color: '#CCE7F5', label: 'Azul Claro (Fondo)' },
-            { color: '#0f172a', label: 'Texto Oscuro' },
-            { color: '#64748b', label: 'Texto Secundario' },
-            { color: '#ffffff', label: 'Blanco' },
-            { color: '#000000', label: 'Negro' }
-        ];
-
-        var editorConfig = {
-            licenseKey: 'GPL',
-            fontColor: { 
-                colors: laeshColors,
-                documentColors: 0 
-            },
-            fontBackgroundColor: { 
-                colors: laeshColors,
-                documentColors: 0 
-            },
-            fontFamily: {
-                options: [
-                    'default',
-                    'Cabin, sans-serif',
-                    'Gill Sans, sans-serif',
-                    'Mosquito Std Black, sans-serif'
-                ],
-                supportAllValues: true
-            },
-            style: {
-                definitions: [
-                    { name: 'Subtítulo (Azul)', element: 'h3', classes: ['acerca-h3b'] },
-                    { name: 'Texto Destacado', element: 'p', classes: ['faq-p--primary'] },
-                    { name: 'Texto Secundario', element: 'p', classes: ['faq-p--tail'] },
-                    { name: 'Texto Muted', element: 'p', classes: ['aviso-p--muted'] },
-                    { name: 'Firma / Highlight', element: 'strong', classes: ['txt-main'] }
-                ]
-            },
-            htmlSupport: {
-                allow: [
-                    {
-                        name: /.*/,
-                        attributes: true,
-                        classes: true,
-                        styles: true
-                    }
-                ]
-            },
-            plugins: [
-                CK.Essentials, CK.Paragraph, CK.Heading,
-                CK.Bold, CK.Italic, CK.Underline, CK.Strikethrough,
-                CK.Font, CK.Highlight, CK.Alignment,
-                CK.List, CK.TodoList,
-                CK.Indent, CK.IndentBlock,
-                CK.Table, CK.HorizontalLine,
-                CK.SourceEditing, CK.GeneralHtmlSupport, CK.Style
-            ],
-            toolbar: {
-                items: [
-                    'sourceEditing', '|',
-                    'heading', 'style', '|',
-                    'bold', 'italic', 'underline', 'strikethrough', 'highlight', '|',
-                    'fontFamily', 'fontSize', 'fontColor', 'fontBackgroundColor', '|',
-                    'alignment', '|',
-                    'bulletedList', 'numberedList', 'todoList', '|',
-                    'outdent', 'indent', '|',
-                    'insertTable', 'horizontalLine', '|',
-                    'undo', 'redo'
-                ]
-            },
-            initialData: dataEl.value
-        };
-
-        CK.ClassicEditor.create(mountEl, editorConfig)
-            .then(function (editor) {
-                _ckState[globalKey] = editor;
-                window[globalKey]   = editor;
-
-                if (isLocked) {
-                    _lockTextContent(editor);
-                }
-
-                editor.model.document.on('change:data', function () {
-                    dataEl.value = editor.getData();
-                    dataEl.dispatchEvent(new Event('input', { bubbles: true }));
-                });
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `ckeditor-init.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L449-534)</summary>
-
-**Path:** `Unknown file`
-
-```
-                });
-            })
-            .catch(function (err) {
-                console.error('[LAESH CMS] Falló CKEditor en ' + mountId + ':', err);
-                _ckState[globalKey] = null;
-                mountEl.style.display = 'none';
-                dataEl.classList.remove('ck5-hidden-data');
-                dataEl.style.display  = 'block';
-            });
-    }
-
-    function _initPromocionesEditors() {
-        setTimeout(function () {
-            for (var i = 1; i <= 7; i++) {
-                // 1. Título Superior de la Ficha: Editable en contenido + estilo RTE
-                var mDay = 'ck-promo-day-' + i;
-                var dDay = 'ck-promo-day-' + i + '-data';
-                if (document.getElementById(mDay) && document.getElementById(dDay)) {
-                    _createEditorNoMedia(mDay, dDay, '_ckPromoDay' + i, false);
-                }
-
-                // 2. Nombre del Estudio: Texto jalado de BD (bloqueado caracteres) + estilo RTE editable
-                var mTitle = 'ck-promo-title-' + i;
-                var dTitle = 'ck-promo-title-' + i + '-data';
-                if (document.getElementById(mTitle) && document.getElementById(dTitle)) {
-                    _createEditorNoMedia(mTitle, dTitle, '_ckPromoTitle' + i, true);
-                }
-
-                // 3. Subtítulo / Categoría: Texto jalado de BD (bloqueado caracteres) + estilo RTE editable
-                var mSub = 'ck-promo-sub-' + i;
-                var dSub = 'ck-promo-sub-' + i + '-data';
-                if (document.getElementById(mSub) && document.getElementById(dSub)) {
-                    _createEditorNoMedia(mSub, dSub, '_ckPromoSub' + i, true);
-                }
-
-                // 4. Indicaciones de Ayuno: Texto jalado de BD (bloqueado caracteres) + estilo RTE editable
-                var mAyuno = 'ck-promo-ayuno-' + i;
-                var dAyuno = 'ck-promo-ayuno-' + i + '-data';
-                if (document.getElementById(mAyuno) && document.getElementById(dAyuno)) {
-                    _createEditorNoMedia(mAyuno, dAyuno, '_ckPromoAyuno' + i, true);
-                }
-
-                // 5. Tiempo de Entrega: Texto jalado de BD (bloqueado caracteres) + estilo RTE editable
-                var mTiempo = 'ck-promo-tiempo-' + i;
-                var dTiempo = 'ck-promo-tiempo-' + i + '-data';
-                if (document.getElementById(mTiempo) && document.getElementById(dTiempo)) {
-                    _createEditorNoMedia(mTiempo, dTiempo, '_ckPromoTiempo' + i, true);
-                }
-
-                // 6. Descripción Libre / Detalle: Editable en contenido + estilo RTE
-                var mDesc = 'ck-promo-desc-' + i;
-                var dDesc = 'ck-promo-desc-' + i + '-data';
-                if (document.getElementById(mDesc) && document.getElementById(dDesc)) {
-                    _createEditorNoMedia(mDesc, dDesc, '_ckPromoDesc' + i, false);
-                }
-            }
-        }, 150);
-    }
-
-    function _observePanel(panelId, initFn) {
-        var panel = document.getElementById(panelId);
-        if (!panel) return;
-        if (panel.classList.contains('active')) {
-            initFn();
-        } else {
-            var obs = new MutationObserver(function (mutations) {
-                mutations.forEach(function (m) {
-                    if (m.attributeName === 'class' && panel.classList.contains('active')) {
-                        obs.disconnect();
-                        initFn();
-                    }
-                });
-            });
-            obs.observe(panel, { attributes: true, attributeFilter: ['class'] });
-        }
-    }
-
-    document.addEventListener('DOMContentLoaded', function () {
-        _observePanel('panel-quienes-somos', _initQsEditors);
-        _observePanel('panel-especialidades', _initEspecialidadesEditors);
-        _observePanel('panel-promociones', _initPromocionesEditors);
-        _observePanel('panel-aviso-privacidad', _initAvisoPrivacidadEditor);
-        _observePanel('panel-footer', _initFooterEditor);
-    });
-}());
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L189-209)</summary>
-
-**Path:** `Unknown file`
-
-```
-    -->
-    <div class="cms-content-col">
-        <div class="cms-tabs" role="tablist" aria-label="Secciones del sitio web">
-            <div class="cms-tab active" id="tab-hero" role="tab" aria-selected="true" aria-controls="panel-hero" tabindex="0" data-section="hero">1. Banner Principal</div>
-            <div class="cms-tab" id="tab-quienes-somos" role="tab" aria-selected="false" aria-controls="panel-quienes-somos" tabindex="-1" data-section="quienes-somos">2. Quiénes somos</div>
-            <div class="cms-tab" id="tab-especialidades" role="tab" aria-selected="false" aria-controls="panel-especialidades" tabindex="-1" data-section="especialidades">3. Estudios de Rutina</div>
-            <div class="cms-tab" id="tab-promociones" role="tab" aria-selected="false" aria-controls="panel-promociones" tabindex="-1" data-section="promociones">4. Promociones Vigentes</div>
-            <div class="cms-tab" id="tab-calidad" role="tab" aria-selected="false" aria-controls="panel-calidad" tabindex="-1" data-section="calidad">5. Calidad e Instalaciones</div>
-            <div class="cms-tab" id="tab-ubicacion" role="tab" aria-selected="false" aria-controls="panel-ubicacion" tabindex="-1" data-section="ubicacion">6. Ubicación y Contacto</div>
-            <div class="cms-tab" id="tab-footer" role="tab" aria-selected="false" aria-controls="panel-footer" tabindex="-1" data-section="footer">7. Pie de Página</div>
-            <div class="cms-tab" id="tab-aviso-privacidad" role="tab" aria-selected="false" aria-controls="panel-aviso-privacidad" tabindex="-1" data-section="aviso-privacidad">8. Aviso de Privacidad</div>
-            <div class="cms-tab" id="tab-configuracion-general" role="tab" aria-selected="false" aria-controls="panel-configuracion-general" tabindex="-1" data-section="configuracion-general">10. Orden de Secciones</div>
-            <div class="cms-tab" id="tab-seo" role="tab" aria-selected="false" aria-controls="panel-seo" tabindex="-1" data-section="seo">11. SEO y Metadatos</div>
-            <!-- Separador visual (botón Preview movido al header nav) -->
-            <div class="cms-tabs-preview-sep" aria-hidden="true"></div>
-        </div><!-- /.cms-tabs -->
-
-        <!-- Área de paneles: esta zona scrollea; .cms-tabs queda fija arriba -->
-        <main class="cms-panels-scroll main-content--pad" id="main-content">
-
-        <!-- ================================================================
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L144-169)</summary>
-
-**Path:** `Unknown file`
-
-```
-        <div class="nav-item" id="nav-calidad" data-panel="panel-calidad" data-section="calidad" data-tooltip="Galería de instalaciones (#calidad)" role="button" tabindex="0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-            Calidad e Instalaciones
-        </div>
-        <div class="nav-item" id="nav-ubicacion" data-panel="panel-ubicacion" data-section="ubicacion" data-tooltip="Teléfonos, dirección y mapa (#ubicacion)" role="button" tabindex="0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            Ubicación y Contacto
-        </div>
-        <div class="nav-item" id="nav-footer" data-panel="panel-footer" data-section="footer" data-tooltip="Pie de página: datos, horarios y créditos (#footer)" role="button" tabindex="0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="13" width="18" height="8" rx="2"/><path d="M3 7h18M7 3h10"/></svg>
-            Pie de Página
-        </div>
-        <div class="nav-item" id="nav-aviso-privacidad" data-panel="panel-aviso-privacidad" data-section="aviso-privacidad" data-tooltip="Aviso de Privacidad — contenido legal completo" role="button" tabindex="0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            Aviso de Privacidad
-        </div>
-        <div class="nav-item" id="nav-configuracion-general" data-panel="panel-configuracion-general" data-section="configuracion-general" data-tooltip="Orden vertical de secciones en la página de inicio" role="button" tabindex="0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
-            Orden de Secciones
-        </div>
-        <div class="nav-item" id="nav-seo" data-panel="panel-seo" data-section="seo" data-tooltip="Metadatos, Open Graph y Schema.org" role="button" tabindex="0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
-            SEO y Metadatos
-        </div>
-
-        <!-- Pub-meta y botón Publicar movidos al header nav (2026-08-27) -->
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `panelLabelsGestion`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
+**Status:** Reset
+**Created:** 1 Sept 2026, 4:40 pm
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 4:40 pm
 
 ---
 
-## Agent Response
+### Code Edit
 
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion-web.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
+**Status:** Reset
+**Created:** 1 Sept 2026, 4:40 pm
 
 ---
 
-<details>
-<summary>File: `Unknown file` (L189-209)</summary>
+### Code Edit
 
-**Path:** `Unknown file`
-
-```
-            panel.style.display = 'none';
-        });
-    }
-});
-
-/* gestion-web.js — lógica del portal de gestión web CMS (extraído de gestion-web.html) */
-        const panelLabelsGestion = {
-            'hero': 'Banner Principal',
-            'quienes-somos': 'Quiénes somos',
-            'especialidades': 'Estudios de Rutina',
-            'promociones': 'Promociones Vigentes',
-            'calidad': 'Calidad e Instalaciones',
-            'ubicacion': 'Ubicación y Contacto',
-            'footer': 'Pie de Página',
-            'seo': 'SEO y Metadatos',
-            'aviso-privacidad': 'Aviso de Privacidad',
-            'configuracion-general': 'Configuración General'
-        };
-
-        function showPanel(name) {
-            document.querySelectorAll('.cms-panel').forEach(p => p.classList.remove('active'));
-```
-
-</details>
+**Status:** Reset
+**Created:** 1 Sept 2026, 4:40 pm
 
 ---
 
-## Agent Response
+### Code Edit
 
-### Actions
+**Status:** Reset
+**Created:** 1 Sept 2026, 4:40 pm
 
-**Tool:** `grep_search`
-**Query:** `activePanelIds`
+---
 
-<details>
-<summary>Metadata</summary>
+### Code Edit
 
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
+**Status:** Reset
+**Created:** 1 Sept 2026, 4:40 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 1 Sept 2026, 4:41 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 1 Sept 2026, 4:41 pm
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
-**Created:** 1 Sept 2026, 4:40 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `cms-dirty-tracker.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L14-34)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-    var TRACK_SELECTOR = 'input[name]:not([type="file"]), textarea[name], select[name]';
-    var DRAFT_PREFIX   = 'cms_draft_';   // Clave en localStorage: cms_draft_{panelId}
-    var DRAFT_MAX_AGE  = 7 * 86400 * 1000; // 7 días en ms — borradores más viejos se descartan
-    var activePanelIds = [
-        'panel-hero',
-        'panel-quienes-somos',
-        'panel-especialidades',
-        'panel-promociones',
-        'panel-calidad',
-        'panel-ubicacion',
-        'panel-footer',
-        'panel-seo',
-        'panel-aviso-privacidad'
-    ];
-
-    // Bandera global: ¿hay AL MENOS UN campo sucio en cualquier panel activo?
-    var _hasDirtyFields = false;
-    // Bandera de persistencia local: false = solo guard + dots/badges, sin tocar localStorage
-    var _draftEnabled   = true;
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 1 Sept 2026, 4:40 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 1 Sept 2026, 4:40 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `ckeditor-init.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L399-439)</summary>
-
-**Path:** `Unknown file`
-
-```
-                    { name: 'Firma / Highlight', element: 'strong', classes: ['txt-main'] }
-                ]
-            },
-            htmlSupport: {
-                allow: [
-                    {
-                        name: /.*/,
-                        attributes: true,
-                        classes: true,
-                        styles: true
-                    }
-                ]
-            },
-            plugins: [
-                CK.Essentials, CK.Paragraph, CK.Heading,
-                CK.Bold, CK.Italic, CK.Underline, CK.Strikethrough,
-                CK.Font, CK.Highlight, CK.Alignment,
-                CK.List, CK.TodoList,
-                CK.Indent, CK.IndentBlock,
-                CK.Table, CK.HorizontalLine,
-                CK.SourceEditing, CK.GeneralHtmlSupport, CK.Style
-            ],
-            toolbar: {
-                items: [
-                    'sourceEditing', '|',
-                    'heading', 'style', '|',
-                    'bold', 'italic', 'underline', 'strikethrough', 'highlight', '|',
-                    'fontFamily', 'fontSize', 'fontColor', 'fontBackgroundColor', '|',
-                    'alignment', '|',
-                    'bulletedList', 'numberedList', 'todoList', '|',
-                    'outdent', 'indent', '|',
-                    'insertTable', 'horizontalLine', '|',
-                    'undo', 'redo'
-                ]
-            },
-            initialData: dataEl.value
-        };
-
-        CK.ClassicEditor.create(mountEl, editorConfig)
-            .then(function (editor) {
-                _ckState[globalKey] = editor;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `ckeditor-init.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L219-254)</summary>
-
-**Path:** `Unknown file`
-
-```
-                                'style="width: 100%; height: 100%; display: block;" ' +
-                                'frameborder="0" scrolling="no" allowtransparency="true">' +
-                                '</iframe>' +
-                                '</div>'
-                            );
-                        }
-                    }
-                ]
-            },
-            plugins: [
-                CK.Essentials, CK.Paragraph, CK.Heading,
-                CK.Bold, CK.Italic, CK.Underline, CK.Strikethrough,
-                CK.Font, CK.Highlight, CK.Alignment,
-                CK.List, CK.TodoList,
-                CK.Indent, CK.IndentBlock,
-                CK.Link, CK.Table, CK.MediaEmbed, CK.HorizontalLine,
-                CK.SourceEditing, CK.GeneralHtmlSupport, CK.Style
-            ],
-            toolbar: {
-                items: [
-                    'sourceEditing', '|',
-                    'heading', 'style', '|',
-                    'bold', 'italic', 'underline', 'strikethrough', 'highlight', '|',
-                    'fontFamily', 'fontSize', 'fontColor', 'fontBackgroundColor', '|',
-                    'alignment', '|',
-                    'bulletedList', 'numberedList', 'todoList', '|',
-                    'outdent', 'indent', '|',
-                    'link', 'insertTable', 'mediaEmbed', 'horizontalLine', '|',
-                    'undo', 'redo'
-                ]
-            },
-            initialData: dataEl.value
-        };
-
-        CK.ClassicEditor.create(mountEl, editorConfig)
-            .then(function (editor) {
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `ckeditor-init.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L269-329)</summary>
-
-**Path:** `Unknown file`
-
-```
-                dataEl.classList.remove('ck5-hidden-data');
-                dataEl.style.display  = 'block';
-            });
-    }
-
-    function _initQsEditors() {
-        // Se usa setTimeout para garantizar que el CSS de la clase .active y sus transiciones
-        // hayan sido calculados y aplicados en el DOM, asegurando dimensiones correctas.
-        setTimeout(function () {
-            _createEditor('ck-ficha4',   'ck-ficha4-data',   '_ckFicha4');
-            _createEditor('ck-historia', 'ck-historia-data', '_ckHistoria');
-            _createEditor('ck-mision',   'ck-mision-data',   '_ckMision');
-            _createEditor('ck-vision',   'ck-vision-data',   '_ckVision');
-        }, 150);
-    }
-
-    function _initEspecialidadesEditors() {
-        setTimeout(function () {
-            for (var i = 1; i <= 16; i++) {
-                var mId = 'ck-carousel-' + i;
-                var dId = 'ck-carousel-' + i + '-data';
-                if (document.getElementById(mId) && document.getElementById(dId)) {
-                    _createEditor(mId, dId, '_ckCarousel' + i);
-                }
-            }
-        }, 150);
-    }
-
-    function _initAvisoPrivacidadEditor() {
-        setTimeout(function () {
-            if (document.getElementById('ck-aviso-privacidad') && document.getElementById('ck-aviso-privacidad-data')) {
-                _createEditor('ck-aviso-privacidad', 'ck-aviso-privacidad-data', '_ckAvisoPrivacidad');
-            }
-        }, 150);
-    }
-
-    function _initFooterEditor() {
-        setTimeout(function () {
-            if (document.getElementById('ck-footer') && document.getElementById('ck-footer-data')) {
-                _createEditor('ck-footer', 'ck-footer-data', '_ckFooter');
-            }
-        }, 150);
-    }
-
-    function _lockTextContent(editor) {
-        var viewDoc = editor.editing.view.document;
-        viewDoc.on('keydown', function(evt, data) {
-            var keyCode = data.keyCode;
-            var domEvt  = data.domEvent;
-
-            // Permitir combinaciones de navegación con Ctrl/Cmd/Alt excepto V (pegar) y X (cortar)
-            if (domEvt.ctrlKey || domEvt.metaKey || domEvt.altKey) {
-                var keyChar = String.fromCharCode(keyCode).toLowerCase();
-                if (keyChar === 'v' || keyChar === 'x') {
-                    data.preventDefault();
-                    evt.stop();
-                }
-                return;
-            }
-
-            // Permitir teclas de selección y navegación (Flechas, Shift, Tab, Home, End, PageUp/Down, CapsLock)
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1509-1528)</summary>
-
-**Path:** `Unknown file`
-
-```
-        </div>
-
-        <!-- ================================================================
-             PANEL 10: CONFIGURACIÓN GENERAL — Orden de Secciones
-             Sección: configuracion-general | Campo: _cfg_seccion_order
-             Persiste en tabla configuraciones (clave='seccion_order') vía prefijo _cfg_
-             ================================================================ -->
-        <div id="panel-configuracion-general" class="cms-panel" role="tabpanel" aria-labelledby="tab-configuracion-general" tabindex="0" data-section="configuracion-general">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">Orden de Secciones — Página de Inicio</h3>
-            </div>
-
-            <hr class="cms-section-sep">
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">Orden Vertical de Secciones (#inicio)</div>
-                </div>
-                <div class="editor-card-body">
-                    <!-- Hidden input que serializa el orden para el POST /cms/save -->
-                    <input type="hidden"
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1469-1514)</summary>
-
-**Path:** `Unknown file`
-
-```
-                        </div>
-                        <div class="field-group">
-                            <label class="txt-muted">Apertura Dom</label>
-                            <input type="text" disabled value="<?= htmlspecialchars($config['dom_open'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label class="txt-muted">Cierre Dom</label>
-                            <input type="text" disabled value="<?= htmlspecialchars($config['dom_close'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div><!-- /grid-2col fila 2 -->
-        </div>
-
-        <!-- ================================================================
-             PANEL 9: AVISO DE PRIVACIDAD
-             Sección: aviso-privacidad | Fuente HTML: modal / página #privacidad
-             16 campos editoriales en web_contenidos
-             ================================================================ -->
-        <div id="panel-aviso-privacidad" class="cms-panel" role="tabpanel" aria-labelledby="tab-aviso-privacidad" tabindex="0">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">Aviso de Privacidad — Contenido Legal (#privacidad)</h3>
-            </div>
-
-            <hr class="cms-section-sep">
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">Documento Integral del Aviso de Privacidad (Editor RTE)</div>
-                </div>
-                <div class="editor-card-body">
-                    <p class="cms-p">
-                        Edita directamente el contenido completo del Aviso de Privacidad con formato enriquecido (encabezados, listas, negritas y párrafos). Los cambios se actualizarán automáticamente en la ventana modal de la página pública.
-                    </p>
-                    <div class="field-group">
-                        <div id="ck-aviso-privacidad" class="ck5-mount ck5-mount-lg"></div>
-                        <textarea id="ck-aviso-privacidad-data" name="contenido__cuerpo_html" class="ck5-hidden-data"><?= cms($contenidos, 'aviso-privacidad', 'contenido', 'cuerpo_html') ?></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ================================================================
-             PANEL 10: CONFIGURACIÓN GENERAL — Orden de Secciones
-             Sección: configuracion-general | Campo: _cfg_seccion_order
-             Persiste en tabla configuraciones (clave='seccion_order') vía prefijo _cfg_
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 1 Sept 2026, 4:40 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 1 Sept 2026, 4:40 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 4:41 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 1 Sept 2026, 4:41 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `formatRte`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 4:41 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `formatRte`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 1 Sept 2026, 4:41 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 4:41 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 4:41 pm
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-## User Request
-
-mal hecho.
-. La pestaña Aviso de Privacidad numerala como la 8 (a su rte quitalo de link y media), luego crea una nueva pestaña llamada Video promo, y esa numerala como la pestaña 10. y las que sigue renumerales.
-. Para esta nueva pestaña 10. Video promo es la que debe tener las caracteristicas mencionada en la original solicitud , lo demas hiciste mal revisa/corrige regrese a su estado anterior; algun gap, preguntame como proceder.
-
-
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `gestion-web.js`
-**Language:** javascript
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-/* Interceptor global de promesas no capturadas de extensiones de navegador (Chrome/Edge/Brave) */
-window.addEventListener('unhandledrejection', function(event) {
-    if (event && event.reason) {
-        var msg = (event.reason.message || event.reason.toString() || '');
-        if (msg.includes('Could not establish connection') || msg.includes('Receiving end does not exist')) {
-            event.preventDefault();
-        }
-    }
-});
-
-/* Helper RTE Ampliado para formateo de texto sin URL media */
-window.formatRteText = function(btn, command) {
-    var fieldGroup = btn.closest('.field-group');
-    var input = fieldGroup ? fieldGroup.querySelector('input[type="text"], textarea') : null;
-    if (!input) return;
-
-    var start = input.selectionStart;
-    var end = input.selectionEnd;
-    var selectedText = input.value.substring(start, end);
-
-    var openTag = '<' + command + '>';
-    var closeTag = '</' + command + '>';
-
-    if (!selectedText) {
-        selectedText = 'texto';
-    }
-
-    var replacement = openTag + selectedText + closeTag;
-    input.value = input.value.substring(0, start) + replacement + input.value.substring(end);
-    input.focus();
-    input.setSelectionRange(start + openTag.length, start + openTag.length + selectedText.length);
-};
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L184-209)</summary>
-
-**Path:** `Unknown file`
-
-```
-    <!--
-        Estructura: .cms-content-col (column flex) agrupa las tabs fijas arriba
-        y el área de paneles scrolleable abajo. Así las tabs NO quedan dentro del
-        scroll container y se "pegan" visualmente sin necesitar position:sticky.
-        Ver: gestion-web.css → .cms-content-col / .cms-panels-scroll
-    -->
-    <div class="cms-content-col">
-        <div class="cms-tabs" role="tablist" aria-label="Secciones del sitio web">
-            <div class="cms-tab active" id="tab-hero" role="tab" aria-selected="true" aria-controls="panel-hero" tabindex="0" data-section="hero">1. Banner Principal</div>
-            <div class="cms-tab" id="tab-quienes-somos" role="tab" aria-selected="false" aria-controls="panel-quienes-somos" tabindex="-1" data-section="quienes-somos">2. Quiénes somos</div>
-            <div class="cms-tab" id="tab-especialidades" role="tab" aria-selected="false" aria-controls="panel-especialidades" tabindex="-1" data-section="especialidades">3. Estudios de Rutina</div>
-            <div class="cms-tab" id="tab-promociones" role="tab" aria-selected="false" aria-controls="panel-promociones" tabindex="-1" data-section="promociones">4. Promociones Vigentes</div>
-            <div class="cms-tab" id="tab-calidad" role="tab" aria-selected="false" aria-controls="panel-calidad" tabindex="-1" data-section="calidad">5. Calidad e Instalaciones</div>
-            <div class="cms-tab" id="tab-ubicacion" role="tab" aria-selected="false" aria-controls="panel-ubicacion" tabindex="-1" data-section="ubicacion">6. Ubicación y Contacto</div>
-            <div class="cms-tab" id="tab-footer" role="tab" aria-selected="false" aria-controls="panel-footer" tabindex="-1" data-section="footer">7. Pie de Página</div>
-            <div class="cms-tab" id="tab-aviso-privacidad" role="tab" aria-selected="false" aria-controls="panel-aviso-privacidad" tabindex="-1" data-section="aviso-privacidad">9. Aviso de Privacidad</div>
-            <div class="cms-tab" id="tab-configuracion-general" role="tab" aria-selected="false" aria-controls="panel-configuracion-general" tabindex="-1" data-section="configuracion-general">10. Orden de Secciones</div>
-            <div class="cms-tab" id="tab-seo" role="tab" aria-selected="false" aria-controls="panel-seo" tabindex="-1" data-section="seo">11. SEO y Metadatos</div>
-            <!-- Separador visual (botón Preview movido al header nav) -->
-            <div class="cms-tabs-preview-sep" aria-hidden="true"></div>
-        </div><!-- /.cms-tabs -->
-
-        <!-- Área de paneles: esta zona scrollea; .cms-tabs queda fija arriba -->
-        <main class="cms-panels-scroll main-content--pad" id="main-content">
-
-        <!-- ================================================================
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L144-174)</summary>
-
-**Path:** `Unknown file`
-
-```
-        <div class="nav-item" id="nav-calidad" data-panel="panel-calidad" data-section="calidad" data-tooltip="Galería de instalaciones (#calidad)" role="button" tabindex="0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-            Calidad e Instalaciones
-        </div>
-        <div class="nav-item" id="nav-ubicacion" data-panel="panel-ubicacion" data-section="ubicacion" data-tooltip="Teléfonos, dirección y mapa (#ubicacion)" role="button" tabindex="0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            Ubicación y Contacto
-        </div>
-        <div class="nav-item" id="nav-footer" data-panel="panel-footer" data-section="footer" data-tooltip="Pie de página: datos, horarios y créditos (#footer)" role="button" tabindex="0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="13" width="18" height="8" rx="2"/><path d="M3 7h18M7 3h10"/></svg>
-            Pie de Página
-        </div>
-        <div class="nav-item" id="nav-aviso-privacidad" data-panel="panel-aviso-privacidad" data-section="aviso-privacidad" data-tooltip="Aviso de Privacidad — contenido legal completo" role="button" tabindex="0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            Aviso de Privacidad
-        </div>
-        <div class="nav-item" id="nav-configuracion-general" data-panel="panel-configuracion-general" data-section="configuracion-general" data-tooltip="Orden vertical de secciones en la página de inicio" role="button" tabindex="0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
-            Orden de Secciones
-        </div>
-        <div class="nav-item" id="nav-seo" data-panel="panel-seo" data-section="seo" data-tooltip="Metadatos, Open Graph y Schema.org" role="button" tabindex="0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
-            SEO y Metadatos
-        </div>
-
-        <!-- Pub-meta y botón Publicar movidos al header nav (2026-08-27) -->
-
-        <div class="sidebar-mobile-only">
-            <div class="user-badge--sm">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--primary-green-dark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                <span>Admin: <strong class="strong-primary"><?= htmlspecialchars($nombreAdmin, ENT_QUOTES, 'UTF-8') ?></strong></span>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 4:48 pm
 
 ---
 
-## Agent Response
+### Code Edit
 
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1489-1529)</summary>
-
-**Path:** `Unknown file`
-
-```
-        <!-- ================================================================
-             PANEL 9: AVISO DE PRIVACIDAD
-             Sección: aviso-privacidad | Fuente HTML: modal / página #privacidad
-             16 campos editoriales en web_contenidos
-             ================================================================ -->
-        <div id="panel-aviso-privacidad" class="cms-panel" role="tabpanel" aria-labelledby="tab-aviso-privacidad" tabindex="0">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">Aviso de Privacidad — Contenido Legal (#privacidad)</h3>
-            </div>
-
-            <hr class="cms-section-sep">
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">Documento Integral del Aviso de Privacidad (Editor RTE)</div>
-                </div>
-                <div class="editor-card-body">
-                    <p class="cms-p">
-                        Edita directamente el contenido completo del Aviso de Privacidad con formato enriquecido (encabezados, listas, negritas y párrafos). Los cambios se actualizarán automáticamente en la ventana modal de la página pública.
-                    </p>
-                    <div class="field-group">
-                        <div id="ck-aviso-privacidad" class="ck5-mount ck5-mount-lg"></div>
-                        <textarea id="ck-aviso-privacidad-data" name="contenido__cuerpo_html" class="ck5-hidden-data"><?= cms($contenidos, 'aviso-privacidad', 'contenido', 'cuerpo_html') ?></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ================================================================
-             PANEL 10: CONFIGURACIÓN GENERAL — Orden de Secciones
-             Sección: configuracion-general | Campo: _cfg_seccion_order
-             Persiste en tabla configuraciones (clave='seccion_order') vía prefijo _cfg_
-             ================================================================ -->
-        <div id="panel-configuracion-general" class="cms-panel" role="tabpanel" aria-labelledby="tab-configuracion-general" tabindex="0" data-section="configuracion-general">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">Orden de Secciones — Página de Inicio</h3>
-            </div>
-
-            <hr class="cms-section-sep">
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">Orden Vertical de Secciones (#inicio)</div>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
+**Status:** Reset
+**Created:** 1 Sept 2026, 4:49 pm
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 4:49 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `ckeditor-init.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L289-319)</summary>
-
-**Path:** `Unknown file`
-
-```
-                    _createEditorNoMedia(mId, dId, '_ckCarousel' + i, false);
-                }
-            }
-        }, 150);
-    }
-
-    function _initAvisoPrivacidadEditor() {
-        setTimeout(function () {
-            if (document.getElementById('ck-aviso-privacidad') && document.getElementById('ck-aviso-privacidad-data')) {
-                _createEditor('ck-aviso-privacidad', 'ck-aviso-privacidad-data', '_ckAvisoPrivacidad');
-            }
-        }, 150);
-    }
-
-    function _initFooterEditor() {
-        setTimeout(function () {
-            if (document.getElementById('ck-footer') && document.getElementById('ck-footer-data')) {
-                _createEditorNoMedia('ck-footer', 'ck-footer-data', '_ckFooter', false);
-            }
-        }, 150);
-    }
-
-    function _lockTextContent(editor) {
-        var viewDoc = editor.editing.view.document;
-        viewDoc.on('keydown', function(evt, data) {
-            var keyCode = data.keyCode;
-            var domEvt  = data.domEvent;
-
-            // Permitir combinaciones de navegación con Ctrl/Cmd/Alt excepto V (pegar) y X (cortar)
-            if (domEvt.ctrlKey || domEvt.metaKey || domEvt.altKey) {
-                var keyChar = String.fromCharCode(keyCode).toLowerCase();
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `ckeditor-init.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L514-532)</summary>
-
-**Path:** `Unknown file`
-
-```
-                    if (m.attributeName === 'class' && panel.classList.contains('active')) {
-                        obs.disconnect();
-                        initFn();
-                    }
-                });
-            });
-            obs.observe(panel, { attributes: true, attributeFilter: ['class'] });
-        }
-    }
-
-    document.addEventListener('DOMContentLoaded', function () {
-        _observePanel('panel-quienes-somos', _initQsEditors);
-        _observePanel('panel-especialidades', _initEspecialidadesEditors);
-        _observePanel('panel-promociones', _initPromocionesEditors);
-        _observePanel('panel-aviso-privacidad', _initAvisoPrivacidadEditor);
-        _observePanel('panel-footer', _initFooterEditor);
-    });
-}());
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 4:49 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 4:49 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 4:49 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 1 Sept 2026, 4:49 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 4:49 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 4:49 pm
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-## User Request
-
-Video promo (Con RTE completo para links/media) quedo vinculado con el include correspondiente en index.php y acciones como encendido/apagado ?
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `gestion_web.php`
-**Language:** php
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `video.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-<?php
-/**
- * sections/video.php — Partial: Video Institucional
- * Incluido dinámicamente desde website/index.php según el orden y visibilidad en CMS.
- */
-?>
-<!-- ══════════════════════════════════════ VIDEO INSTITUCIONAL ══ -->
-<section id="video" class="sec-pad-1-5 scroll-sm-top">
-    <div class="section-header animate-on-scroll">
-        <h2>Video Institucional</h2>
-        <p>Conoce nuestras instalaciones y procesos de diagnóstico clínico</p>
-    </div>
-
-    <div class="grid-layout grid-single grid-single-history">
-        <div class="card-premium animate-on-scroll delay-100 info-col--stretch">
-            <div class="modal-scroll-body">
-                <div class="faq-p--sm2 ck5-output" style="text-align:center; padding:1rem 0;">
-                    <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px; box-shadow:0 4px 16px rgba(0,0,0,0.12);">
-                        <iframe style="position:absolute; top:0; left:0; width:100%; height:100%; border:0; border-radius:12px;"
-                                src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-                                title="Video Institucional LAESH"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen></iframe>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `video.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-<?php
-/**
- * sections/video.php — Partial: Video Institucional
- * Incluido dinámicamente desde website/index.php según el orden y visibilidad en CMS.
- */
-?>
-<!-- ══════════════════════════════════════ VIDEO INSTITUCIONAL ══ -->
-<section id="video" class="sec-pad-1-5 scroll-sm-top">
-    <div class="section-header animate-on-scroll">
-        <h2>Video Institucional</h2>
-        <p>Conoce nuestras instalaciones y procesos de diagnóstico clínico</p>
-    </div>
-
-    <div class="grid-layout grid-single grid-single-history">
-        <div class="card-premium animate-on-scroll delay-100 info-col--stretch">
-            <div class="modal-scroll-body">
-                <div class="faq-p--sm2 ck5-output" style="text-align:center; padding:1rem 0;">
-                    <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px; box-shadow:0 4px 16px rgba(0,0,0,0.12);">
-                        <iframe style="position:absolute; top:0; left:0; width:100%; height:100%; border:0; border-radius:12px;"
-                                src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-                                title="Video Institucional LAESH"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen></iframe>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 4:51 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 4:51 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 4:51 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 4:51 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 4:51 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `function cms`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 4:51 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L29-59)</summary>
-
-**Path:** `Unknown file`
-
-```
-}
-
-// ── Helpers ─────────────────────────────────────────────────────────────────
-/** Escapa para salida HTML (texto y atributos). */
-function h(mixed $v): string {
-    return htmlspecialchars((string)($v ?? ''), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
-}
-/** Formatea precio MXN entero: "$1,234" o '' si no hay precio. */
-function money(mixed $v): string {
-    $n = (float)($v ?? 0);
-    return $n > 0 ? '$' . number_format($n, 0, '.', ',') : '';
-}
-/** Devuelve solo dígitos de un número de teléfono. */
-function waNum(string $raw): string {
-    return preg_replace('/\D/', '', $raw);
-}
-/**
- * Renderiza HTML de confianza generado por el RTE del CMS (admins LAESH).
- * Permite tags ricos de CKEditor 5.
- * Bloquea: <script>, atributos on*, href con javascript:
- */
-function safeHtml(mixed $v): string {
-    $html = strip_tags((string)($v ?? ''), ['strong','em','b','i','br','p','ul','ol','li','a','span','table','tbody','tr','td','th','thead','hr','figure','iframe','h1','h2','h3','h4','h5','h6','u','s','blockquote','oembed','div','img']);
-    $html = preg_replace('/\s+on\w+\s*=\s*(?:"[^"]*"|\'[^\']*\'|[^\s>]*)/i', '', $html);
-    $html = preg_replace('/href\s*=\s*["\']?\s*javascript:/i', 'href="#" data-blocked=', $html);
-    return $html;
-}
-
-/**
- * Parsea el texto de fichas del CMS al array estructurado del acordeón.
- *
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 4:51 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 4:51 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 4:52 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 4:52 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 4:52 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L239-259)</summary>
-
-**Path:** `Unknown file`
-
-```
-        'texto' => $cHtml,
-    ];
-}
-
-// ── 3e. Calidad gallery — 3 tarjetas ────────────────────────────────────────
-$_calDef = [
-    1 => ['Área de Hematología',      'Análisis de biometría hemática y células sanguíneas con rigor científico y alta precisión.',
-          '/laesh-web-assets-uipv1a/img/area-hematologia-uno.webp'],
-    2 => ['Química Clínica',          'Determinación automatizada de metabolitos, perfil lipídico y enzimas específicas.',
-          '/laesh-web-assets-uipv1a/img/area-quimica-clinica.webp'],
-    3 => ['Microbiología y Cultivos', 'Aislamiento, tinción de Gram y pruebas de susceptibilidad a antimicrobianos.',
-          '/laesh-web-assets-uipv1a/img/area-bacteriologia.webp'],
-];
-$calidadCards = [];
-for ($qi = 1; $qi <= 3; $qi++) {
-    $calidadCards[$qi] = [
-        // imagen_url desde CMS; fallback al asset estático original (R15.1)
-        'img'    => $c('calidad', "gallery{$qi}", 'imagen_url', $_calDef[$qi][2]),
-        'alt'    => $_calDef[$qi][0],
-        'titulo' => $c('calidad', "gallery{$qi}", 'titulo',      $_calDef[$qi][0]),
-        'desc'   => $c('calidad', "gallery{$qi}", 'descripcion', $_calDef[$qi][1]),
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L169-229)</summary>
-
-**Path:** `Unknown file`
-
-```
-// ── 3. Catálogo de estudios — 4 abanicos desde web_contenidos ───────────────
-// Fuente SSOT: web_contenidos(especialidades, cgN, titulo/fichas)
-// Iconos SVG decorativos por grupo (inline — sin CDN)
-const GRUPO_SVGS = [
-    1 => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>',
-    2 => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>',
-    3 => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>',
-    4 => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>',
-];
-
-$cg = [];
-$grupos = $db->query("SELECT id, titulo FROM catalogo_grupos ORDER BY orden ASC LIMIT 4")->fetchAll(\PDO::FETCH_ASSOC);
-foreach ($grupos as $idx => $g) {
-    $gi = $idx + 1;
-    $cg[$gi] = [
-        'titulo' => $g['titulo'],
-        'fichas' => []
-    ];
-    $categorias = $db->prepare("SELECT id, nombre FROM catalogo_categorias WHERE grupo_id = ? ORDER BY orden ASC");
-    $categorias->execute([$g['id']]);
-    foreach ($categorias->fetchAll(\PDO::FETCH_ASSOC) as $cat) {
-        $estudiosStmt = $db->prepare("SELECT clave_interna, nombre, tiempo_procesamiento, muestra_requerida, preparacion FROM catalogo_estudios WHERE categoria_id = ? AND activo = 1 ORDER BY id ASC");
-        $estudiosStmt->execute([$cat['id']]);
-        $estudios = $estudiosStmt->fetchAll(\PDO::FETCH_ASSOC);
-        if (!empty($estudios)) {
-            $cg[$gi]['fichas'][] = [
-                'cat' => $cat['nombre'],
-                'items' => $estudios
-            ];
-        }
-    }
-}
-
-// ── 3b. Hero autoplay (seg) — desde web_contenidos.hero.config.transition_time
-// Alineado con gestion-web.php (POST hero_config__transition_time)
-$heroAutoplay = min(90, max(0, (int)$c('hero', 'config', 'transition_time', '5'))); // 0 = pausa indefinida
-
-// ── 3c. Quiénes somos — Ficha 4 (25 años / CKEditor 5) ───────────────────
-// Desde 2026-08-23: ficha4/texto almacena HTML enriquecido (CKEditor 5).
-// El heading del card va incluido en el HTML (primer bloque H3 del editor).
-// safeHtml() filtra antes de emitir.
-$qsConfianzaHtml = $c('quienes-somos', 'ficha4', 'texto');
-
-// ── 3d. Carrusel de especialidades y áreas — 16 tarjetas ───────────────────
-// Imágenes: configuraciones.carouselN_img (fallback a paths estáticos).
-// Textos: dinámicos desde web_contenidos (especialidades/carouselN/texto HTML).
-$_carDef = [
-    1  => ['/laesh-web-assets-uipv1a/img/area-hematologia-dos.webp'],
-    2  => ['/laesh-web-assets-uipv1a/img/area-quimica-clinica-dos.webp'],
-    3  => ['/laesh-web-assets-uipv1a/img/area-bacteriologia-dos.webp'],
-    4  => ['/laesh-web-assets-uipv1a/img/area-uroanalisis.webp'],
-    5  => ['/laesh-web-assets-uipv1a/img/area-coagulacion.webp'],
-    6  => ['/laesh-web-assets-uipv1a/img/area-estudios-especiales.webp'],
-    7  => ['/laesh-web-assets-uipv1a/img/area-centrifugacion.webp'],
-    8  => ['/laesh-web-assets-uipv1a/img/area-toma-de-muestras.webp'],
-    9  => ['/laesh-web-assets-uipv1a/img/toma-de-muestras.webp'],
-    10 => ['/laesh-web-assets-uipv1a/img/toma-pediatricas.webp'],
-    11 => ['/laesh-web-assets-uipv1a/img/toma-de-cultivos.webp'],
-    12 => ['/laesh-web-assets-uipv1a/img/recepcion-lab.webp'],
-];
-$carouselCards = [];
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L99-164)</summary>
-
-**Path:** `Unknown file`
-
-```
-// ── 1. Cargar desde DB ──────────────────────────────────────────────────────
-$configRaw = $db->query("SELECT clave, valor FROM configuraciones")->fetchAll(\PDO::FETCH_KEY_PAIR) ?: [];
-$cms = [];
-foreach ($db->query("SELECT seccion, subseccion, clave, valor FROM web_contenidos ORDER BY id")->fetchAll(\PDO::FETCH_ASSOC) as $row) {
-    $cms[$row['seccion']][$row['subseccion']][$row['clave']] = $row['valor'];
-}
-
-// ── 2. Preview de borrador CMS (solo sesión admin activa) ──────────────────
-// IMPORTANTE: el merge debe ocurrir ANTES de definir $cfg y $c, porque las arrow
-// functions de PHP capturan variables por VALOR en el momento de su creación.
-// Delight Auth guarda el login bajo $_SESSION['auth_logged_in'] (NOT 'user_id').
-$isPreview = !empty($_GET['_preview'])
-    && !empty($_SESSION['auth_logged_in'])
-    && !empty($_SESSION['cms_draft']);
-if ($isPreview) {
-    foreach ($_SESSION['cms_draft'] as $draftSec => $campos) {
-        foreach ($campos as $rawKey => $val) {
-            // Manejar configuraciones globales (prefijo _cfg_)
-            if (str_starts_with($rawKey, '_cfg_')) {
-                $configRaw[substr($rawKey, 5)] = $val;
-                continue;
-            }
-            // Manejar web_contenidos (formato {sub}__{clave})
-            [$sub, $clave] = array_pad(explode('__', $rawKey, 2), 2, $rawKey);
-            $cms[$draftSec][$sub][$clave] = $val;
-        }
-    }
-}
-
-// ── 3. Helpers y Variables Funcionales (Post-Merge) ─────────────────────────
-$cfg = fn(string $k, string $d = '') => (!isset($configRaw[$k]) || $configRaw[$k] === '') ? $d : $configRaw[$k];
-$c   = fn(string $sec, string $sub, string $k, string $d = '') => (!isset($cms[$sec][$sub][$k]) || $cms[$sec][$sub][$k] === '') ? $d : $cms[$sec][$sub][$k];
-
-// Valores frecuentes — sin fallback: el cliente DEBE tener todo en configuraciones
-$cfgNombreLab = $cfg('nombre_laboratorio');
-$cfgNombreC   = $cfg('nombre_corto');
-$cfgAnios     = $cfg('anios_experiencia');
-$cfgTel       = $cfg('telefono');
-$cfgTelDigit  = waNum($cfgTel);
-$cfgWA        = waNum($cfg('whatsapp_numero'));
-$cfgEmail     = $cfg('email_contacto');
-$cfgDir       = $cfg('direccion');
-$cfgDirCalle  = $cfg('direccion_calle');
-$cfgCiudad    = $cfg('ciudad');
-$cfgEstado    = $cfg('estado');
-$cfgCP        = $cfg('cp');
-$cfgHorSem    = $cfg('horario_semana');
-$cfgHorDom    = $cfg('horario_domingo');
-$cfgHrsOpen   = $cfg('hrs_open');
-$cfgHrsClose  = $cfg('hrs_close');
-$cfgDomOpen   = $cfg('dom_open');
-$cfgDomClose  = $cfg('dom_close');
-$cfgRespNom   = $cfg('responsable_nombre');
-$cfgRespProf  = $cfg('responsable_cedula_prof');
-$cfgRespEsp   = $cfg('responsable_cedula_esp');
-$cfgFB        = $cfg('facebook_url');
-$cfgMapsUrl   = $cfg('maps_url');  // URL directa Google Maps para noscript
-
-// WhatsApp URLs — textos desde configuraciones (sin fallback)
-$waBase        = "https://wa.me/52{$cfgWA}";
-$waTextoInfo   = $cfg('wa_texto_info');    // texto botón info / flotante / ubicación
-$waTextoAg     = $cfg('wa_texto_agendar'); // texto pre-llenado en cards de promo
-$waInfoUrl     = $waBase . '?text=' . rawurlencode($waTextoInfo);
-$waContactUrl  = $waInfoUrl;
-
-/** Obtiene valor CMS con fallback.
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 4:52 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 4:52 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 4:52 pm
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-## User Request
-
-por que esta perdida la numeracion de las pestañas, corrige de raiz y renumeras comppleta y correctamente.
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `ckeditor-init.js`
-**Language:** javascript
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L298-329)</summary>
-
-**Path:** `Unknown file`
-
-```
-                _createEditorNoMedia('ck-aviso-privacidad', 'ck-aviso-privacidad-data', '_ckAvisoPrivacidad', false);
-            }
-        }, 150);
-    }
-
-    function _initVideoPromoEditor() {
-        setTimeout(function () {
-            if (document.getElementById('ck-video-promo') && document.getElementById('ck-video-promo-data')) {
-                _createEditor('ck-video-promo', 'ck-video-promo-data', '_ckVideoPromo');
-            }
-        }, 150);
-    }
-
-    function _initFooterEditor() {
-        setTimeout(function () {
-            if (document.getElementById('ck-footer') && document.getElementById('ck-footer-data')) {
-                _createEditorNoMedia('ck-footer', 'ck-footer-data', '_ckFooter', false);
-            }
-        }, 150);
-    }
-
-    function _lockTextContent(editor) {
-        var viewDoc = editor.editing.view.document;
-        viewDoc.on('keydown', function(evt, data) {
-            var keyCode = data.keyCode;
-            var domEvt  = data.domEvent;
-
-            // Permitir combinaciones de navegación con Ctrl/Cmd/Alt excepto V (pegar) y X (cortar)
-            if (domEvt.ctrlKey || domEvt.metaKey || domEvt.altKey) {
-                var keyChar = String.fromCharCode(keyCode).toLowerCase();
-                if (keyChar === 'v' || keyChar === 'x') {
-                    data.preventDefault();
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L189-209)</summary>
-
-**Path:** `Unknown file`
-
-```
-        Estructura: .cms-content-col (column flex) agrupa las tabs fijas arriba
-        y el área de paneles scrolleable abajo. Así las tabs NO quedan dentro del
-        scroll container y se "pegan" visualmente sin necesitar position:sticky.
-        Ver: gestion-web.css → .cms-content-col / .cms-panels-scroll
-    -->
-    <div class="cms-content-col">
-        <div class="cms-tabs" role="tablist" aria-label="Secciones del sitio web">
-            <div class="cms-tab active" id="tab-hero" role="tab" aria-selected="true" aria-controls="panel-hero" tabindex="0" data-section="hero">1. Banner Principal</div>
-            <div class="cms-tab" id="tab-quienes-somos" role="tab" aria-selected="false" aria-controls="panel-quienes-somos" tabindex="-1" data-section="quienes-somos">2. Quiénes somos</div>
-            <div class="cms-tab" id="tab-especialidades" role="tab" aria-selected="false" aria-controls="panel-especialidades" tabindex="-1" data-section="especialidades">3. Estudios de Rutina</div>
-            <div class="cms-tab" id="tab-promociones" role="tab" aria-selected="false" aria-controls="panel-promociones" tabindex="-1" data-section="promociones">4. Promociones Vigentes</div>
-            <div class="cms-tab" id="tab-calidad" role="tab" aria-selected="false" aria-controls="panel-calidad" tabindex="-1" data-section="calidad">5. Calidad e Instalaciones</div>
-            <div class="cms-tab" id="tab-ubicacion" role="tab" aria-selected="false" aria-controls="panel-ubicacion" tabindex="-1" data-section="ubicacion">6. Ubicación y Contacto</div>
-            <div class="cms-tab" id="tab-footer" role="tab" aria-selected="false" aria-controls="panel-footer" tabindex="-1" data-section="footer">7. Pie de Página</div>
-            <div class="cms-tab" id="tab-aviso-privacidad" role="tab" aria-selected="false" aria-controls="panel-aviso-privacidad" tabindex="-1" data-section="aviso-privacidad">8. Aviso de Privacidad</div>
-            <div class="cms-tab" id="tab-video-promo" role="tab" aria-selected="false" aria-controls="panel-video-promo" tabindex="-1" data-section="video-promo">10. Video promo</div>
-            <div class="cms-tab" id="tab-configuracion-general" role="tab" aria-selected="false" aria-controls="panel-configuracion-general" tabindex="-1" data-section="configuracion-general">11. Orden de Secciones</div>
-            <div class="cms-tab" id="tab-seo" role="tab" aria-selected="false" aria-controls="panel-seo" tabindex="-1" data-section="seo">12. SEO y Metadatos</div>
-            <!-- Separador visual (botón Preview movido al header nav) -->
-            <div class="cms-tabs-preview-sep" aria-hidden="true"></div>
-        </div><!-- /.cms-tabs -->
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 4:54 pm
 
 ---
 
-## Agent Response
+### Code Edit
 
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1509-1544)</summary>
-
-**Path:** `Unknown file`
-
-```
-                        <textarea id="ck-aviso-privacidad-data" name="contenido__cuerpo_html" class="ck5-hidden-data"><?= cms($contenidos, 'aviso-privacidad', 'contenido', 'cuerpo_html') ?></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ================================================================
-             PANEL 10: VIDEO PROMO
-             Sección: video-promo | RTE Completo con Enlaces y Medios (YouTube, Vimeo, etc.)
-             ================================================================ -->
-        <div id="panel-video-promo" class="cms-panel" role="tabpanel" aria-labelledby="tab-video-promo" tabindex="0" data-section="video-promo">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">10. Video Promo — Enlaces e Incrustación de Video (#video-promo)</h3>
-            </div>
-
-            <hr class="cms-section-sep">
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">Contenido del Video Promocional (Editor RTE Completo)</div>
-                </div>
-                <div class="editor-card-body">
-                    <p class="cms-p">
-                        Utiliza este editor con capacidades completas para insertar enlaces web e incrustar reproductores de video (YouTube, Spotify, Vimeo, etc.) para la promoción institucional.
-                    </p>
-                    <div class="field-group">
-                        <div id="ck-video-promo" class="ck5-mount ck5-mount-lg"></div>
-                        <textarea id="ck-video-promo-data" name="contenido__cuerpo_html" class="ck5-hidden-data"><?= cms($contenidos, 'video-promo', 'contenido', 'cuerpo_html') ?></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ================================================================
-             PANEL 10: CONFIGURACIÓN GENERAL — Orden de Secciones
-             Sección: configuracion-general | Campo: _cfg_seccion_order
-             Persiste en tabla configuraciones (clave='seccion_order') vía prefijo _cfg_
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
+**Status:** Reset
+**Created:** 1 Sept 2026, 4:54 pm
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 4:54 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 1 Sept 2026, 4:54 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 4:54 pm
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-## User Request
-
-Que el include de video:
-. no contenga las partes de : Video Institucional , linea verde horizontal, Conoce nuestras instalaciones y procesos de diagnóstico clínico.
-
-
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `gestion-web.js`
-**Language:** javascript
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-/* Interceptor global de promesas no capturadas de extensiones de navegador (Chrome/Edge/Brave) */
-window.addEventListener('unhandledrejection', function(event) {
-    if (event && event.reason) {
-        var msg = (event.reason.message || event.reason.toString() || '');
-        if (msg.includes('Could not establish connection') || msg.includes('Receiving end does not exist')) {
-            event.preventDefault();
-        }
-    }
-});
-
-/* Helper RTE Ampliado para formateo de texto sin URL media */
-window.formatRteText = function(btn, command) {
-    var fieldGroup = btn.closest('.field-group');
-    var input = fieldGroup ? fieldGroup.querySelector('input[type="text"], textarea') : null;
-    if (!input) return;
-
-    var start = input.selectionStart;
-    var end = input.selectionEnd;
-    var selectedText = input.value.substring(start, end);
-
-    var openTag = '<' + command + '>';
-    var closeTag = '</' + command + '>';
-
-    if (!selectedText) {
-        selectedText = 'texto';
-    }
-
-    var replacement = openTag + selectedText + closeTag;
-    input.value = input.value.substring(0, start) + replacement + input.value.substring(end);
-    input.focus();
-    input.setSelectionRange(start + openTag.length, start + openTag.length + selectedText.length);
-};
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `video.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-<?php
-/**
- * sections/video.php — Partial: Video Institucional / Promo
- * Incluido dinámicamente desde website/index.php según el orden y visibilidad en CMS.
- */
-$_videoHtml = $c('video-promo', 'contenido', 'cuerpo_html');
-if (trim($_videoHtml) === '') {
-    $_videoHtml = $c('video-promo', '', 'cuerpo_html');
-}
-if (trim($_videoHtml) === '') {
-    $_videoHtml = '<div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px; box-shadow:0 4px 16px rgba(0,0,0,0.12);">' .
-                  '<iframe style="position:absolute; top:0; left:0; width:100%; height:100%; border:0; border-radius:12px;" ' .
-                  'src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Video Institucional LAESH" ' .
-                  'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' .
-                  '</div>';
-}
-?>
-<!-- ══════════════════════════════════════ VIDEO INSTITUCIONAL ══ -->
-<section id="video" class="sec-pad-1-5 scroll-sm-top">
-    <div class="section-header animate-on-scroll">
-        <h2>Video Institucional</h2>
-        <p>Conoce nuestras instalaciones y procesos de diagnóstico clínico</p>
-    </div>
-
-    <div class="grid-layout grid-single grid-single-history">
-        <div class="card-premium animate-on-scroll delay-100 info-col--stretch">
-            <div class="modal-scroll-body">
-                <div class="faq-p--sm2 ck5-output" style="padding:1rem 0;">
-                    <?= $_videoHtml ?>
-                </div>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 4:59 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 4:59 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `Conoce nuestras instalaciones`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 4:59 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 4:59 pm
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-## User Request
-
-Hay gaps/issues:
-. En la pestaña de video promo no funciona el preview, y probablemente tampoco la publicación, pues en index.php  aparece: este video no esta disponible, y en cms si aparece imagen del video y se ve listo para iniciar el play.
-.  Que la ficha de video en index.php sea la unica que puede estar arriba de la seccion de hero/slider, hecho atravez del orden de secciones.
-.  corrige de fondo raiz y alineado al template de index.php e includes.
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `video.php`
-**Language:** php
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L489-524)</summary>
-
-**Path:** `Unknown file`
-
-```
-    <hr style="border:none;border-top:1px solid rgba(255,255,255,0.2);width:100%;margin:2px 0;">
-    <span style="color:#f87171;font-weight:500;font-size:0.82rem;line-height:1.25;">
-        Borrador<br>sin publicar
-    </span>
-</div>
-<?php endif; ?>
-
-    <!-- TU-02: Banner de consentimiento de cookies / almacenamiento local -->
-    <div id="cookie-banner" class="cookie-banner" role="dialog" aria-label="Aviso de cookies" aria-live="polite">
-        <p class="cookie-banner__text">
-            Este sitio utiliza almacenamiento local para mejorar la experiencia de navegación.
-            <a href="#" class="cookie-banner__link" id="cookie-privacy-link">Ver Aviso de Privacidad</a>
-        </p>
-        <button type="button" id="cookie-accept" class="cookie-banner__btn">Aceptar</button>
-    </div>
-    <a href="#main-content" class="skip-link">Ir al contenido principal</a>
-
-    <!-- NAVBAR FIJO -->
-    <nav class="navbar-sticky pt-xs" id="landing-navbar" aria-label="Menú principal">
-        <a href="/laesh/" class="logo" target="_blank" rel="noopener"
-           aria-label="LAESH — Laboratorio de Especialidades Hematológicas, ir al inicio">
-            <img src="/laesh-web-assets-uipv1a/img/logo-laesh.webp"
-                 alt="LAESH — <?= h($cfgNombreLab) ?>"
-                 class="hero-logo" decoding="async" fetchpriority="high"
-                 width="2634" height="571">
-        </a>
-        <!-- Tagline dinámico desde CMS (hero/navbar/tagline_l1-2) -->
-        <span class="navbar-tagline"><?= h($navTagL1) ?><br><?= h($navTagL2) ?></span>
-        <button type="button" class="nav-hamburger" id="nav-hamburger"
-                aria-label="Abrir menú" aria-expanded="false">
-            <span></span><span></span><span></span>
-        </button>
-        <?php
-        // ── Orden de secciones — configurable desde el CMS (configuraciones.seccion_order) ──
-        // Secciones fijas: #inicio (hero) siempre primera, footer siempre última.
-        // Las secciones intermedias pueden reordenarse desde el CMS (panel "Orden de Secciones").
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L519-664)</summary>
-
-**Path:** `Unknown file`
-
-```
-            <span></span><span></span><span></span>
-        </button>
-        <?php
-        // ── Orden de secciones — configurable desde el CMS (configuraciones.seccion_order) ──
-        // Secciones fijas: #inicio (hero) siempre primera, footer siempre última.
-        // Las secciones intermedias pueden reordenarse desde el CMS (panel "Orden de Secciones").
-        $_SEC_DEFAULT = ['acerca-de','especialidades','promociones','calidad','ubicacion','video'];
-        $_secNavLabels = [
-            'acerca-de'     => ['label' => 'Quiénes somos',        'href' => '#acerca-de'],
-            'especialidades'=> ['label' => 'Estudios',             'href' => '#especialidades'],
-            'promociones'   => ['label' => 'Promociones',          'href' => '#promociones'],
-            'calidad'       => ['label' => 'Calidad',              'href' => '#calidad'],
-            'ubicacion'     => ['label' => 'Ubicación y Contacto', 'href' => '#ubicacion'],
-            'video'         => ['label' => 'Video',                'href' => '#video'],
-        ];
-        $isVideoActive = $cfg('video_active', '1') !== '0';
-
-        $_secOrderRaw = $cfg('seccion_order');
-        if ($_secOrderRaw !== '') {
-            $_parsed = array_unique(array_filter(
-                array_map('trim', explode(',', $_secOrderRaw)),
-                fn($s) => in_array($s, $_SEC_DEFAULT, true)
-            ));
-            $_missing = array_diff($_SEC_DEFAULT, $_parsed);
-            $sectionOrder = array_values(array_merge($_parsed, $_missing));
-        } else {
-            $sectionOrder = $_SEC_DEFAULT;
-        }
-        unset($_SEC_DEFAULT, $_secOrderRaw, $_parsed, $_missing);
-
-        // Si el video está apagado, retirarlo del orden de secciones para que no se renderice
-        if (!$isVideoActive) {
-            $sectionOrder = array_values(array_filter($sectionOrder, fn($s) => $s !== 'video'));
-        }
-        ?>
-        <div class="nav-links" id="nav-links-mobile">
-            <a href="#inicio">Inicio</a>
-            <?php foreach ($sectionOrder as $_navSec):
-                if (isset($_secNavLabels[$_navSec])):
-            ?>
-            <a href="<?= $_secNavLabels[$_navSec]['href'] ?>"><?= h($_secNavLabels[$_navSec]['label']) ?></a>
-            <?php endif; endforeach; unset($_navSec); ?>
-            <a href="#" class="login-trigger btn-nav-medicos"
-               data-target="medicos" data-title="Acceso" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2v2"/><path d="M5 2v2"/><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"/><path d="M8 15a6 6 0 0 0 12 0v-3"/><circle cx="20" cy="10" r="2"/></svg>Médicos</a>
-        </div>
-    </nav>
-
-    <main id="main-content">
-
-        <div class="landing-nav-spacer"></div>
-
-        <!-- ═══════════════════════════════════════════════════════ HERO ══ -->
-        <section id="inicio" class="hero-premium">
-            <div class="hero-slides" data-autoplay="<?= $heroAutoplay ?>" role="region"
-                 aria-label="Presentación principal" aria-roledescription="carrusel">
-
-                <!-- ── Slide 1 — dinámico desde hero/slide1 ────────────────── -->
-                <div class="hero-slide active bg-slide-1"<?= $slides[1]['bg_style'] ? ' style="' . $slides[1]['bg_style'] . '"' : '' ?>>
-                    <div class="hero-glass-card">
-                        <?php if ($slides[1]['etiqueta']): ?><span><?= h($slides[1]['etiqueta']) ?></span><?php endif; ?>
-                        <h1><?= h($slides[1]['titulo']) ?></h1>
-                        <?php if ($slides[1]['descripcion']): ?>
-                        <p><?= h($slides[1]['descripcion']) ?></p>
-                        <?php endif; ?>
-                        <div class="flex-center-15">
-                            <?php if ($slides[1]['cta_texto']): ?><a href="<?= h($slides[1]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($slides[1]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ── Slide 2 — dinámico desde hero/slide2 ────────────────── -->
-                <div class="hero-slide bg-slide-2"<?= $slides[2]['bg_style'] ? ' style="' . $slides[2]['bg_style'] . '"' : '' ?>>
-                    <div class="hero-glass-card">
-                        <?php if ($slides[2]['etiqueta']): ?><span><?= h($slides[2]['etiqueta']) ?></span><?php endif; ?>
-                        <h2><?= h($slides[2]['titulo']) ?></h2>
-                        <?php if ($slides[2]['descripcion']): ?>
-                        <p><?= h($slides[2]['descripcion']) ?></p>
-                        <?php endif; ?>
-                        <div class="flex-center-15">
-                            <?php if ($slides[2]['cta_texto']): ?><a href="<?= h($slides[2]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($slides[2]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ── Slide 3 — dinámico desde hero/slide3 ────────────────── -->
-                <div class="hero-slide bg-slide-3"<?= $slides[3]['bg_style'] ? ' style="' . $slides[3]['bg_style'] . '"' : '' ?>>
-                    <div class="hero-glass-card">
-                        <?php if ($slides[3]['etiqueta']): ?><span><?= h($slides[3]['etiqueta']) ?></span><?php endif; ?>
-                        <h2><?= h($slides[3]['titulo']) ?></h2>
-                        <?php if ($slides[3]['descripcion']): ?>
-                        <p><?= h($slides[3]['descripcion']) ?></p>
-                        <?php endif; ?>
-                        <div class="flex-center-15">
-                            <?php if ($slides[3]['cta_texto']): ?><a href="<?= h($slides[3]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($slides[3]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ── Slide 4 — dinámico desde hero/slide4 ────────────────── -->
-                <div class="hero-slide bg-slide-4"<?= $slides[4]['bg_style'] ? ' style="' . $slides[4]['bg_style'] . '"' : '' ?>>
-                    <div class="hero-glass-card">
-                        <?php if ($slides[4]['etiqueta']): ?><span><?= h($slides[4]['etiqueta']) ?></span><?php endif; ?>
-                        <h2><?= h($slides[4]['titulo']) ?></h2>
-                        <?php if ($slides[4]['descripcion']): ?>
-                        <p><?= h($slides[4]['descripcion']) ?></p>
-                        <?php endif; ?>
-                        <div class="flex-center-15">
-                            <?php if ($slides[4]['cta_texto']): ?><a href="<?= h($slides[4]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($slides[4]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ── Slide 5: Ubicación — CMS + datos de configuraciones ── -->
-                <div class="hero-slide bg-slide-5"<?= $slides[5]['bg_style'] ? ' style="' . $slides[5]['bg_style'] . '"' : '' ?>>
-                    <div class="hero-glass-card">
-                        <?php if ($slides[5]['etiqueta']): ?><span><?= h($slides[5]['etiqueta']) ?></span><?php endif; ?>
-                        <h2><?= h($slides[5]['titulo']) ?></h2>
-                        <p><?= $slide5Desc ?></p>
-                        <div class="flex-center-15">
-                            <?php if ($slides[5]['cta_texto']): ?><a href="<?= h($slides[5]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($slides[5]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="hero-dots" aria-label="Navegación de diapositivas">
-                <button class="hero-dot active" data-slide="0" aria-label="Diapositiva 1 de 5" aria-pressed="true"></button>
-                <button class="hero-dot"        data-slide="1" aria-label="Diapositiva 2 de 5" aria-pressed="false"></button>
-                <button class="hero-dot"        data-slide="2" aria-label="Diapositiva 3 de 5" aria-pressed="false"></button>
-                <button class="hero-dot"        data-slide="3" aria-label="Diapositiva 4 de 5" aria-pressed="false"></button>
-                <button class="hero-dot"        data-slide="4" aria-label="Diapositiva 5 de 5" aria-pressed="false"></button>
-            </div>
-            <button type="button" id="hero-pause-btn" class="hero-pause-btn"
-                    aria-label="Pausar presentación" aria-pressed="false">
-                <svg id="hero-icon-pause" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
-                <svg id="hero-icon-play"  width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="d-none"><polygon points="5,3 19,12 5,21"/></svg>
-                <span id="hero-pause-label" class="hero-pause-label">Pausar</span>
-            </button>
-            <span id="hero-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></span>
-        </section>
-
-
-        <?php
-        foreach ($sectionOrder as $_secId):
-            include __DIR__ . '/sections/' . $_secId . '.php';
-        endforeach;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1539-1579)</summary>
-
-**Path:** `Unknown file`
-
-```
-        </div>
-
-        <!-- ================================================================
-             PANEL 10: CONFIGURACIÓN GENERAL — Orden de Secciones
-             Sección: configuracion-general | Campo: _cfg_seccion_order
-             Persiste en tabla configuraciones (clave='seccion_order') vía prefijo _cfg_
-             ================================================================ -->
-        <div id="panel-configuracion-general" class="cms-panel" role="tabpanel" aria-labelledby="tab-configuracion-general" tabindex="0" data-section="configuracion-general">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">Orden de Secciones — Página de Inicio</h3>
-            </div>
-
-            <hr class="cms-section-sep">
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">Orden Vertical de Secciones (#inicio)</div>
-                </div>
-                <div class="editor-card-body">
-                    <!-- Hidden input que serializa el orden para el POST /cms/save -->
-                    <input type="hidden"
-                           id="seccion-order-input"
-                           name="_cfg_seccion_order"
-                           value="<?= h($config['seccion_order'] ?? '') ?>">
-
-                    <?php
-                    // Reconstruir orden desde BD, o usar el default si no hay valor
-                    $_secDefault = ['inicio','acerca-de','especialidades','promociones','calidad','ubicacion','video'];
-                    $_secLabels  = [
-                        'inicio'        => ['icon'=>'🖼️', 'label'=>'Inicio (Banner Principal y Slider)', 'anchor'=>'#inicio',    'locked'=>true,  'toggle'=>false],
-                        'acerca-de'     => ['icon'=>'👥', 'label'=>'Quiénes somos',                       'anchor'=>'#acerca-de', 'locked'=>false, 'toggle'=>false],
-                        'especialidades'=> ['icon'=>'🔬', 'label'=>'Estudios de Rutina',                    'anchor'=>'#especialidades','locked'=>false, 'toggle'=>false],
-                        'promociones'   => ['icon'=>'🏷️', 'label'=>'Promociones Vigentes',                  'anchor'=>'#promociones','locked'=>false, 'toggle'=>false],
-                        'calidad'       => ['icon'=>'🖼️', 'label'=>'Calidad e Instalaciones',               'anchor'=>'#calidad',    'locked'=>false, 'toggle'=>false],
-                        'ubicacion'     => ['icon'=>'📍', 'label'=>'Ubicación y Contacto',                  'anchor'=>'#ubicacion',  'locked'=>false, 'toggle'=>false],
-                        'video'         => ['icon'=>'🎬', 'label'=>'Video Institucional',                   'anchor'=>'#video',      'locked'=>false, 'toggle'=>true],
-                    ];
-                    $_rawOrder  = $config['seccion_order'] ?? '';
-                    if ($_rawOrder !== '') {
-                        $_parsed  = array_unique(array_filter(
-                            array_map('trim', explode(',', $_rawOrder)),
-                            fn($s) => in_array($s, $_secDefault, true)
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1579-1624)</summary>
-
-**Path:** `Unknown file`
-
-```
-                            fn($s) => in_array($s, $_secDefault, true)
-                        ));
-                        $_missing = array_diff($_secDefault, $_parsed);
-                        $_ordered = array_values(array_merge($_parsed, $_missing));
-                    } else {
-                        $_ordered = $_secDefault;
-                    }
-                    // Asegurar que 'inicio' siempre sea la primera posición
-                    if (($_key = array_search('inicio', $_ordered, true)) !== false) {
-                        unset($_ordered[$_key]);
-                    }
-                    array_unshift($_ordered, 'inicio');
-                    unset($_secDefault, $_rawOrder, $_parsed, $_missing, $_key);
-
-                    $videoActive = ($config['video_active'] ?? '1') !== '0';
-                    ?>
-
-                    <p class="cms-help-text mb-3">Arrastra las secciones para cambiar su orden vertical. La sección <strong>Inicio</strong> se mantiene fija como cabecera. El cambio se aplica al publicar.</p>
-
-                    <ul id="seccion-order-list"
-                        style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.6rem">
-                        <?php foreach ($_ordered as $_sid):
-                            $meta = $_secLabels[$_sid] ?? ['icon'=>'•','label'=>$_sid,'anchor'=>'','locked'=>false,'toggle'=>false];
-                            $isLocked = !empty($meta['locked']);
-                            $hasToggle = !empty($meta['toggle']);
-                        ?>
-                        <li data-seccion-id="<?= h($_sid) ?>"
-                            draggable="<?= $isLocked ? 'false' : 'true' ?>"
-                            style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1rem;border-radius:8px;border:1.5px solid <?= $isLocked ? 'var(--primary-green-light,#e2e8f0)' : 'var(--border-color,#d1d5db)' ?>;background:<?= $isLocked ? '#f8fafc' : 'var(--card-bg,#fff)' ?>;cursor:<?= $isLocked ? 'not-allowed' : 'grab' ?>;user-select:none;transition:box-shadow .15s,border-color .15s">
-                            <!-- Grip icon or Lock icon -->
-                            <?php if ($isLocked): ?>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary-green-dark,#059669)" stroke-width="2" stroke-linecap="round" style="flex-shrink:0">
-                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                            </svg>
-                            <?php else: ?>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--txt-muted,#9ca3af)" stroke-width="2" stroke-linecap="round" style="flex-shrink:0">
-                                <circle cx="9" cy="5" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="19" r="1"/>
-                                <circle cx="15" cy="5" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="19" r="1"/>
-                            </svg>
-                            <?php endif; ?>
-                            <span style="font-size:1.15rem;line-height:1;flex-shrink:0"><?= $meta['icon'] ?></span>
-                            <span style="flex:1;font-weight:600;color:var(--txt-main,#111)"><?= h($meta['label']) ?> <?= $isLocked ? '<small class="txt-muted" style="font-weight:400;">(Fija en cabecera)</small>' : '' ?></span>
-                            <code style="font-size:0.78rem;color:var(--txt-muted,#6b7280);background:var(--bg-subtle,#f3f4f6);padding:2px 6px;border-radius:4px"><?= h($_sid) ?></code>
-                            <a href="/laesh/?_preview=1<?= h($meta['anchor']) ?>"
-                               target="_blank" rel="noopener noreferrer"
-                               title="Vista previa de esta sección"
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L629-669)</summary>
-
-**Path:** `Unknown file`
-
-```
-                </div>
-
-                <!-- ── Slide 5: Ubicación — CMS + datos de configuraciones ── -->
-                <div class="hero-slide bg-slide-5"<?= $slides[5]['bg_style'] ? ' style="' . $slides[5]['bg_style'] . '"' : '' ?>>
-                    <div class="hero-glass-card">
-                        <?php if ($slides[5]['etiqueta']): ?><span><?= h($slides[5]['etiqueta']) ?></span><?php endif; ?>
-                        <h2><?= h($slides[5]['titulo']) ?></h2>
-                        <p><?= $slide5Desc ?></p>
-                        <div class="flex-center-15">
-                            <?php if ($slides[5]['cta_texto']): ?><a href="<?= h($slides[5]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($slides[5]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="hero-dots" aria-label="Navegación de diapositivas">
-                <button class="hero-dot active" data-slide="0" aria-label="Diapositiva 1 de 5" aria-pressed="true"></button>
-                <button class="hero-dot"        data-slide="1" aria-label="Diapositiva 2 de 5" aria-pressed="false"></button>
-                <button class="hero-dot"        data-slide="2" aria-label="Diapositiva 3 de 5" aria-pressed="false"></button>
-                <button class="hero-dot"        data-slide="3" aria-label="Diapositiva 4 de 5" aria-pressed="false"></button>
-                <button class="hero-dot"        data-slide="4" aria-label="Diapositiva 5 de 5" aria-pressed="false"></button>
-            </div>
-            <button type="button" id="hero-pause-btn" class="hero-pause-btn"
-                    aria-label="Pausar presentación" aria-pressed="false">
-                <svg id="hero-icon-pause" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
-                <svg id="hero-icon-play"  width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="d-none"><polygon points="5,3 19,12 5,21"/></svg>
-                <span id="hero-pause-label" class="hero-pause-label">Pausar</span>
-            </button>
-            <span id="hero-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></span>
-        </section>
-
-
-        <?php
-        foreach ($sectionOrder as $_secId):
-            include __DIR__ . '/sections/' . $_secId . '.php';
-        endforeach;
-        unset($sectionOrder, $_secId, $_secNavLabels, $isVideoActive);
-        ?>
-        <!-- ══════════════════════════════════════════════ FOOTER ══ -->
-        <footer class="footer-main" style="background: <?= h($footerBgColor) ?> !important;" role="contentinfo">
-            <?= $footerHtml ?>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 5:09 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L519-667)</summary>
-
-**Path:** `Unknown file`
-
-```
-            <span></span><span></span><span></span>
-        </button>
-        <?php
-        // ── Orden de secciones — configurable desde el CMS (configuraciones.seccion_order) ──
-        // Secciones fijas: #inicio (hero) siempre primera, footer siempre última.
-        // Las secciones intermedias pueden reordenarse desde el CMS (panel "Orden de Secciones").
-        $_SEC_DEFAULT = ['acerca-de','especialidades','promociones','calidad','ubicacion','video'];
-        $_secNavLabels = [
-            'acerca-de'     => ['label' => 'Quiénes somos',        'href' => '#acerca-de'],
-            'especialidades'=> ['label' => 'Estudios',             'href' => '#especialidades'],
-            'promociones'   => ['label' => 'Promociones',          'href' => '#promociones'],
-            'calidad'       => ['label' => 'Calidad',              'href' => '#calidad'],
-            'ubicacion'     => ['label' => 'Ubicación y Contacto', 'href' => '#ubicacion'],
-            'video'         => ['label' => 'Video',                'href' => '#video'],
-        ];
-        $isVideoActive = $cfg('video_active', '1') !== '0';
-
-        $_secOrderRaw = $cfg('seccion_order');
-        if ($_secOrderRaw !== '') {
-            $_parsed = array_unique(array_filter(
-                array_map('trim', explode(',', $_secOrderRaw)),
-                fn($s) => in_array($s, $_SEC_DEFAULT, true)
-            ));
-            $_missing = array_diff($_SEC_DEFAULT, $_parsed);
-            $sectionOrder = array_values(array_merge($_parsed, $_missing));
-        } else {
-            $sectionOrder = $_SEC_DEFAULT;
-        }
-        unset($_SEC_DEFAULT, $_secOrderRaw, $_parsed, $_missing);
-
-        // Si el video está apagado, retirarlo del orden de secciones para que no se renderice
-        if (!$isVideoActive) {
-            $sectionOrder = array_values(array_filter($sectionOrder, fn($s) => $s !== 'video'));
-        }
-        ?>
-        <div class="nav-links" id="nav-links-mobile">
-            <a href="#inicio">Inicio</a>
-            <?php foreach ($sectionOrder as $_navSec):
-                if (isset($_secNavLabels[$_navSec])):
-            ?>
-            <a href="<?= $_secNavLabels[$_navSec]['href'] ?>"><?= h($_secNavLabels[$_navSec]['label']) ?></a>
-            <?php endif; endforeach; unset($_navSec); ?>
-            <a href="#" class="login-trigger btn-nav-medicos"
-               data-target="medicos" data-title="Acceso" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2v2"/><path d="M5 2v2"/><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"/><path d="M8 15a6 6 0 0 0 12 0v-3"/><circle cx="20" cy="10" r="2"/></svg>Médicos</a>
-        </div>
-    </nav>
-
-    <main id="main-content">
-
-        <div class="landing-nav-spacer"></div>
-
-        <!-- ═══════════════════════════════════════════════════════ HERO ══ -->
-        <section id="inicio" class="hero-premium">
-            <div class="hero-slides" data-autoplay="<?= $heroAutoplay ?>" role="region"
-                 aria-label="Presentación principal" aria-roledescription="carrusel">
-
-                <!-- ── Slide 1 — dinámico desde hero/slide1 ────────────────── -->
-                <div class="hero-slide active bg-slide-1"<?= $slides[1]['bg_style'] ? ' style="' . $slides[1]['bg_style'] . '"' : '' ?>>
-                    <div class="hero-glass-card">
-                        <?php if ($slides[1]['etiqueta']): ?><span><?= h($slides[1]['etiqueta']) ?></span><?php endif; ?>
-                        <h1><?= h($slides[1]['titulo']) ?></h1>
-                        <?php if ($slides[1]['descripcion']): ?>
-                        <p><?= h($slides[1]['descripcion']) ?></p>
-                        <?php endif; ?>
-                        <div class="flex-center-15">
-                            <?php if ($slides[1]['cta_texto']): ?><a href="<?= h($slides[1]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($slides[1]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ── Slide 2 — dinámico desde hero/slide2 ────────────────── -->
-                <div class="hero-slide bg-slide-2"<?= $slides[2]['bg_style'] ? ' style="' . $slides[2]['bg_style'] . '"' : '' ?>>
-                    <div class="hero-glass-card">
-                        <?php if ($slides[2]['etiqueta']): ?><span><?= h($slides[2]['etiqueta']) ?></span><?php endif; ?>
-                        <h2><?= h($slides[2]['titulo']) ?></h2>
-                        <?php if ($slides[2]['descripcion']): ?>
-                        <p><?= h($slides[2]['descripcion']) ?></p>
-                        <?php endif; ?>
-                        <div class="flex-center-15">
-                            <?php if ($slides[2]['cta_texto']): ?><a href="<?= h($slides[2]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($slides[2]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ── Slide 3 — dinámico desde hero/slide3 ────────────────── -->
-                <div class="hero-slide bg-slide-3"<?= $slides[3]['bg_style'] ? ' style="' . $slides[3]['bg_style'] . '"' : '' ?>>
-                    <div class="hero-glass-card">
-                        <?php if ($slides[3]['etiqueta']): ?><span><?= h($slides[3]['etiqueta']) ?></span><?php endif; ?>
-                        <h2><?= h($slides[3]['titulo']) ?></h2>
-                        <?php if ($slides[3]['descripcion']): ?>
-                        <p><?= h($slides[3]['descripcion']) ?></p>
-                        <?php endif; ?>
-                        <div class="flex-center-15">
-                            <?php if ($slides[3]['cta_texto']): ?><a href="<?= h($slides[3]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($slides[3]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ── Slide 4 — dinámico desde hero/slide4 ────────────────── -->
-                <div class="hero-slide bg-slide-4"<?= $slides[4]['bg_style'] ? ' style="' . $slides[4]['bg_style'] . '"' : '' ?>>
-                    <div class="hero-glass-card">
-                        <?php if ($slides[4]['etiqueta']): ?><span><?= h($slides[4]['etiqueta']) ?></span><?php endif; ?>
-                        <h2><?= h($slides[4]['titulo']) ?></h2>
-                        <?php if ($slides[4]['descripcion']): ?>
-                        <p><?= h($slides[4]['descripcion']) ?></p>
-                        <?php endif; ?>
-                        <div class="flex-center-15">
-                            <?php if ($slides[4]['cta_texto']): ?><a href="<?= h($slides[4]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($slides[4]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ── Slide 5: Ubicación — CMS + datos de configuraciones ── -->
-                <div class="hero-slide bg-slide-5"<?= $slides[5]['bg_style'] ? ' style="' . $slides[5]['bg_style'] . '"' : '' ?>>
-                    <div class="hero-glass-card">
-                        <?php if ($slides[5]['etiqueta']): ?><span><?= h($slides[5]['etiqueta']) ?></span><?php endif; ?>
-                        <h2><?= h($slides[5]['titulo']) ?></h2>
-                        <p><?= $slide5Desc ?></p>
-                        <div class="flex-center-15">
-                            <?php if ($slides[5]['cta_texto']): ?><a href="<?= h($slides[5]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($slides[5]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="hero-dots" aria-label="Navegación de diapositivas">
-                <button class="hero-dot active" data-slide="0" aria-label="Diapositiva 1 de 5" aria-pressed="true"></button>
-                <button class="hero-dot"        data-slide="1" aria-label="Diapositiva 2 de 5" aria-pressed="false"></button>
-                <button class="hero-dot"        data-slide="2" aria-label="Diapositiva 3 de 5" aria-pressed="false"></button>
-                <button class="hero-dot"        data-slide="3" aria-label="Diapositiva 4 de 5" aria-pressed="false"></button>
-                <button class="hero-dot"        data-slide="4" aria-label="Diapositiva 5 de 5" aria-pressed="false"></button>
-            </div>
-            <button type="button" id="hero-pause-btn" class="hero-pause-btn"
-                    aria-label="Pausar presentación" aria-pressed="false">
-                <svg id="hero-icon-pause" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
-                <svg id="hero-icon-play"  width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="d-none"><polygon points="5,3 19,12 5,21"/></svg>
-                <span id="hero-pause-label" class="hero-pause-label">Pausar</span>
-            </button>
-            <span id="hero-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></span>
-        </section>
-
-
-        <?php
-        foreach ($sectionOrder as $_secId):
-            include __DIR__ . '/sections/' . $_secId . '.php';
-        endforeach;
-        unset($sectionOrder, $_secId, $_secNavLabels, $isVideoActive);
-        ?>
-        <!-- ══════════════════════════════════════════════ FOOTER ══ -->
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `inicio.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Execution Error
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 5:09 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 5:09 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L649-674)</summary>
-
-**Path:** `Unknown file`
-
-```
-                <button class="hero-dot active" data-slide="0" aria-label="Diapositiva 1 de 5" aria-pressed="true"></button>
-                <button class="hero-dot"        data-slide="1" aria-label="Diapositiva 2 de 5" aria-pressed="false"></button>
-                <button class="hero-dot"        data-slide="2" aria-label="Diapositiva 3 de 5" aria-pressed="false"></button>
-                <button class="hero-dot"        data-slide="3" aria-label="Diapositiva 4 de 5" aria-pressed="false"></button>
-                <button class="hero-dot"        data-slide="4" aria-label="Diapositiva 5 de 5" aria-pressed="false"></button>
-            </div>
-            <button type="button" id="hero-pause-btn" class="hero-pause-btn"
-                    aria-label="Pausar presentación" aria-pressed="false">
-                <svg id="hero-icon-pause" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
-                <svg id="hero-icon-play"  width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="d-none"><polygon points="5,3 19,12 5,21"/></svg>
-                <span id="hero-pause-label" class="hero-pause-label">Pausar</span>
-            </button>
-            <span id="hero-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></span>
-        </section>
-        <?php
-            else:
-                include __DIR__ . '/sections/' . $_secId . '.php';
-            endif;
-        endforeach;
-        unset($sectionOrder, $_secId, $_secNavLabels, $isVideoActive);
-        ?>
-        unset($sectionOrder, $_secId, $_secNavLabels, $isVideoActive);
-        ?>
-        <!-- ══════════════════════════════════════════════ FOOTER ══ -->
-        <footer class="footer-main" style="background: <?= h($footerBgColor) ?> !important;" role="contentinfo">
-            <?= $footerHtml ?>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 5:09 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L514-529)</summary>
-
-**Path:** `Unknown file`
-
-```
-        </a>
-        <!-- Tagline dinámico desde CMS (hero/navbar/tagline_l1-2) -->
-        <span class="navbar-tagline"><?= h($navTagL1) ?><br><?= h($navTagL2) ?></span>
-        <button type="button" class="nav-hamburger" id="nav-hamburger"
-                aria-label="Abrir menú" aria-expanded="false">
-            <span></span><span></span><span></span>
-        </button>
-        <?php
-        <?php
-        // ── Orden de secciones — configurable desde el CMS (configuraciones.seccion_order) ──
-        // Secciones ordenables: inicio, acerca-de, especialidades, promociones, calidad, ubicacion, video.
-        $_SEC_DEFAULT = ['inicio','acerca-de','especialidades','promociones','calidad','ubicacion','video'];
-        $_secNavLabels = [
-            'acerca-de'     => ['label' => 'Quiénes somos',        'href' => '#acerca-de'],
-            'especialidades'=> ['label' => 'Estudios',             'href' => '#especialidades'],
-            'promociones'   => ['label' => 'Promociones',          'href' => '#promociones'],
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 5:09 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 5:09 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 1 Sept 2026, 5:09 pm
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Low)
-</details>
-
----
-
-## User Request
-
-no funciona el preview y al publicar el video continua con la falla de video no disponible.
-_
-No available adapters.
-gestion-web.js?v=1788304274:510 [LAESH CMS] Error publicando sección: Sección no válida.
-
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `index.php`
-**Language:** php
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L162-193)</summary>
-
-**Path:** `Unknown file`
-
-```
-$waContactUrl  = $waInfoUrl;
-
-/** Obtiene valor CMS con fallback.
- *  NOTA: debe definirse DESPUÉS del merge de preview para que capture
- *  el $cms ya actualizado (PHP arrow fn captura por valor al momento de creación). */
-$c = fn(string $sec, string $sub, string $k, string $d = '') => $cms[$sec][$sub][$k] ?? $d;
-
-// ── 3. Catálogo de estudios — 4 abanicos desde web_contenidos ───────────────
-// Fuente SSOT: web_contenidos(especialidades, cgN, titulo/fichas)
-// Iconos SVG decorativos por grupo (inline — sin CDN)
-const GRUPO_SVGS = [
-    1 => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>',
-    2 => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>',
-    3 => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>',
-    4 => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>',
-];
-
-$cg = [];
-$grupos = $db->query("SELECT id, titulo FROM catalogo_grupos ORDER BY orden ASC LIMIT 4")->fetchAll(\PDO::FETCH_ASSOC);
-foreach ($grupos as $idx => $g) {
-    $gi = $idx + 1;
-    $cg[$gi] = [
-        'titulo' => $g['titulo'],
-        'fichas' => []
-    ];
-    $categorias = $db->prepare("SELECT id, nombre FROM catalogo_categorias WHERE grupo_id = ? ORDER BY orden ASC");
-    $categorias->execute([$g['id']]);
-    foreach ($categorias->fetchAll(\PDO::FETCH_ASSOC) as $cat) {
-        $estudiosStmt = $db->prepare("SELECT clave_interna, nombre, tiempo_procesamiento, muestra_requerida, preparacion FROM catalogo_estudios WHERE categoria_id = ? AND activo = 1 ORDER BY id ASC");
-        $estudiosStmt->execute([$cat['id']]);
-        $estudios = $estudiosStmt->fetchAll(\PDO::FETCH_ASSOC);
-        if (!empty($estudios)) {
-```
-
-</details>
 
 ---
 
@@ -28855,6 +24147,2259 @@ Flight::route('POST /orden/crear', function () {
 <summary>Metadata</summary>
 
 - **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+. Que nos faltaria ?
+. Realiza una busqueda amplia para descartar existan todavia codigo duro de dato, logica, etc. dame informe.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `Ordenes.php`
+**Language:** php
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L449-480)</summary>
+
+**Path:** `Unknown file`
+
+```
+            $auth->admin()->changePasswordForUserById($targetUserId, $newPassword);
+            Logger::log('INFO', "Recepción/Admin user_id={$adminUserId} restableció la contraseña del médico user_id={$targetUserId}", $adminUserId);
+
+            return [
+                'success' => true,
+                'mensaje' => "✓ Contraseña del médico (ID {$targetUserId}) restablecida a '{$newPassword}' exitosamente."
+            ];
+        } catch (\Delight\Auth\UnknownIdException $e) {
+            return ['success' => false, 'error' => 'Médico no encontrado en el sistema.'];
+        } catch (\Delight\Auth\InvalidPasswordException $e) {
+            return ['success' => false, 'error' => 'La nueva contraseña/NIP no es válida (mínimo 8 dígitos).'];
+        } catch (Throwable $e) {
+            DB::logFallback('ERROR', 'Fallo en RC\Negocio\Ordenes::restablecerPasswordMedico', $e->getMessage());
+            return ['success' => false, 'error' => 'No se pudo restablecer la contraseña: ' . $e->getMessage()];
+        }
+    }
+
+    /**
+     * Cambia el estado de un médico en perfiles_medicos (1 = Activo, 2 = Pausado/Inactivo)
+     */
+    public static function cambiarEstadoMedico(int $targetUserId, int $nuevoEstadoId, int $adminUserId): array {
+        try {
+            $pdo = DB::connect();
+
+            // 1. Actualizar perfiles_medicos
+            $stmtP = $pdo->prepare("UPDATE perfiles_medicos SET estado_id = ?, actualizado_en = NOW() WHERE user_id = ?");
+            $stmtP->execute([$nuevoEstadoId, $targetUserId]);
+
+            // 2. Sincronizar en tabla empleados
+            $activoFlag = ($nuevoEstadoId === 1) ? 1 : 0;
+            $stmtE = $pdo->prepare("UPDATE empleados SET activo = ? WHERE user_id = ?");
+            $stmtE->execute([$activoFlag, $targetUserId]);
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `Dr\. Hedilberto|Reyes Venegas|34,500|128 Pacientes`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 9:51 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `Dr\. Hedilberto|Reyes Venegas`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 9:51 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `labadmin.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L44-64)</summary>
+
+**Path:** `Unknown file`
+
+```
+                } else if(o.estado === 'Cerrada') {
+                    badgeClass = 'badge-cerrada';
+                    accion = `<button class="btn btn-secondary btn-resultados-sm btn-ver-res" data-action="ver-resultados" data-id="${o.id}">
+                                <svg class="icon-btn-left" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg> Ver Resultados
+                              </button>`;
+                }
+
+                const fechaResultado = (o.estado === 'Resultados Listos' || o.estado === 'Cerrada') ? (o.fechaResultado || 'Hoy, 11:30 AM') : '-';
+                tbody.innerHTML += `
+                    <tr>
+                        <td class="td-folio-hist">
+                            <a href="#" class="lnk-folio lnk-folio-id" data-action="ver-solicitud" data-id="${o.id}">${o.id} <svg class="icon-folio-link" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></a>
+                        </td>
+                        <td>${o.paciente}</td>
+                        <td class="td-medico">${o.medico || 'Dr. Hedilberto Reyes Venegas'}</td>
+                        <td class="td-especialidad-rc">${obtenerEspecialidadMedico(o.medico)}</td>
+                        <td class="td-estudios-rc">${o.estudios || 'Estudios de Rutina'}</td>
+                        <td>${o.fecha || 'Hoy, 09:30 AM'}</td>
+                        <td class="td-fecha-resultado${o.estado === 'Resultados Listos' ? ' resultado-listo' : ''}">${fechaResultado}</td>
+                        <td><span class="badge ${badgeClass}">${o.estado}</span></td>
+                        <td>${accion}</td>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `localStorage`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 9:51 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `Reyes Venegas`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 9:51 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 9:52 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 9:52 pm
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 9:52 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+Realiza pruebas de todos los queries, endpoints, que se consumen en cada uno de los 4 portales (index, medicos, recepcion y admin), dame informe de los estatus: ok, y con falla si se cachan las fallas y se devuelve codigo/mensaje de error.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `labadmin.js`
+**Language:** javascript
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 10:03 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 10:04 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+dame Resumen ejecutivo de las pruebas
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `labadmin.js`
+**Language:** javascript
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+Analiza gaps/issue en el: modelo de datos, queries, keys, indices, pks, fpks; que puedan detonar en degradar el performance de la bd, y de la pagina index.php (deb estar super rapida es la cara en Internet del sitio web laesh).
+. Dame plan de mejoras.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `labadmin.js`
+**Language:** javascript
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 10:12 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 10:13 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+SI, dal al plan de Mejoras de Rendimiento, realizalo de manera quirurgica, cuidando no inyectar bugs, gaps.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `labadmin.js`
+**Language:** javascript
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 10:17 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 10:19 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L194-224)</summary>
+
+**Path:** `Unknown file`
+
+```
+    3 => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>',
+    4 => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>',
+];
+
+$cg = [];
+$grupos = $db->query("SELECT id, titulo FROM catalogo_grupos ORDER BY orden ASC LIMIT 4")->fetchAll(\PDO::FETCH_ASSOC);
+foreach ($grupos as $idx => $g) {
+    $gi = $idx + 1;
+    $cg[$gi] = [
+        'titulo' => $g['titulo'],
+        'fichas' => []
+    ];
+    $categorias = $db->prepare("SELECT id, nombre FROM catalogo_categorias WHERE grupo_id = ? ORDER BY orden ASC");
+    $categorias->execute([$g['id']]);
+    foreach ($categorias->fetchAll(\PDO::FETCH_ASSOC) as $cat) {
+        $estudiosStmt = $db->prepare("SELECT clave_interna, nombre, tiempo_procesamiento, muestra_requerida, preparacion FROM catalogo_estudios WHERE categoria_id = ? AND activo = 1 ORDER BY id ASC");
+        $estudiosStmt->execute([$cat['id']]);
+        $estudios = $estudiosStmt->fetchAll(\PDO::FETCH_ASSOC);
+        if (!empty($estudios)) {
+            $cg[$gi]['fichas'][] = [
+                'cat' => $cat['nombre'],
+                'items' => $estudios
+            ];
+        }
+    }
+}
+
+// ── 3b. Hero autoplay (seg) — desde web_contenidos.hero.config.transition_time
+// Alineado con gestion-web.php (POST hero_config__transition_time)
+$heroAutoplay = min(90, max(0, (int)$c('hero', 'config', 'transition_time', '5'))); // 0 = pausa indefinida
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 10:19 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/**
+ * index.php — Sitio Web Público LAESH (Phase J — Estabilización)
+ *
+ * Fuente HTML: website/uipv1/index.html  ← NUNCA BORRAR (R15.1)
+ * Merge iterativo: cambios en uipv1/index.html → propagar aquí.
+ *
+ * Todo el contenido editorial se lee desde la BD:
+ *   · configuraciones   → contacto, horarios, responsable, ubicación geográfica,
+ *                          WhatsApp, Facebook, Schema.org, años de experiencia
+ *   · web_contenidos    → hero (slides + navbar tagline), quienes-somos (fichas,
+ *                          resp, filosofía), especialidades (accordion fichas),
+ *                          promociones (banner), calidad (encabezado),
+ *                          ubicacion (maps_embed), footer, seo
+ *   · estudios (JOIN)   → SSOT para tarjetas de promociones diarias
+ *
+ * Claves configuraciones usadas:
+ *   telefono · email_contacto · whatsapp_numero · facebook_url
+ *   direccion · direccion_calle · ciudad · estado · cp
+ *   horario_semana · horario_domingo · hrs_open · hrs_close · dom_open · dom_close
+ *   responsable_nombre · responsable_cedula_prof · responsable_cedula_esp
+ *   nombre_laboratorio · nombre_corto · anios_experiencia
+ */
+declare(strict_types=1);
+require_once __DIR__ . '/../commons/commons.php';
+
+// ── CSRF para modal de login ────────────────────────────────────────────────
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
+// ── Helpers ─────────────────────────────────────────────────────────────────
+/** Escapa para salida HTML (texto y atributos). */
+function h(mixed $v): string {
+    return htmlspecialchars((string)($v ?? ''), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+}
+/** Formatea precio MXN entero: "$1,234" o '' si no hay precio. */
+function money(mixed $v): string {
+    $n = (float)($v ?? 0);
+    return $n > 0 ? '$' . number_format($n, 0, '.', ',') : '';
+}
+/** Devuelve solo dígitos de un número de teléfono. */
+function waNum(string $raw): string {
+    return preg_replace('/\D/', '', $raw);
+}
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 10:19 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 10:19 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+actualizaste/incrementaste los scripts sql y orqustador bash en /home/carlos/GitHub/caelitandem_home/restaurantb/setup/bds/laesh/ ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `index.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/docs-dev/migration-laesh`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>Directory: `migration-laesh` (2 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/docs-dev/migration-laesh`
+
+| Name | Type | Size |
+|------|------|------|
+| `01_setup_catalogos.php` | File | 5844 bytes |
+| `07_seed_catalogs.sql` | File | 5907 bytes |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>Directory: `www` (21 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www`
+
+| Name | Type | Size |
+|------|------|------|
+| `.agents` | File | 19 bytes |
+| `.chatledger` | File | 35 bytes |
+| `.claude` | File | 19 bytes |
+| `.clauderules` | File | 24 bytes |
+| `.git` | Directory | - |
+| `.gitignore` | File | 263 bytes |
+| `.mcp.json` | File | 21 bytes |
+| `CLAUDE.md` | File | 21 bytes |
+| `GEMINI.md` | File | 21 bytes |
+| `ca.crt` | File | 1736 bytes |
+| `docs-dev` | Directory | - |
+| `laesh-swbldi` | Directory | - |
+| `laesh-web-assets` | Directory | - |
+| `laesh-web-assets-uipv1a` | Directory | - |
+| `mvps` | Directory | - |
+| `panaderia` | Directory | - |
+| `purificadoraAgua` | Directory | - |
+| `restaurant` | Directory | - |
+| `test_puppeteer.js` | File | 526 bytes |
+| `tests` | Directory | - |
+| `web-assets` | Directory | - |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `setup/bds`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 10:28 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `setup.sh`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+#!/usr/bin/env bash
+# ==============================================================================
+# Setup Orchestrator — LAESH Bloc Digital Database
+#
+# Pipeline completo (idempotente):
+#   Paso 0  → bash/01_install_auth.sh    Tablas Delight-Auth (CREATE IF NOT EXISTS)
+#   Paso 01 → 00_database.sql … 09_views.sql  (10 scripts SQL)
+#   Paso 10 → bash/02_seed_users.sh      Usuarios semilla (3 perfiles)
+#
+# NOTA: 00_database.sql incluye DROP DATABASE IF EXISTS para redesign limpio en dev.
+#       Comentar esa línea antes de deploy a producción OCI.
+#
+# Variables de entorno sobreescribibles:
+#   DB_HOST, DB_PORT, DB_USER, DB_PASS   (conexión mysql directo al puerto expuesto)
+#   DB_CONTAINER  (default: restaurantb_db)   usada por bash/01_install_auth.sh
+#   WEB_CONTAINER (default: restaurantb_phpfpm) usada por bash/02_seed_users.sh
+#
+# Uso:
+#   bash setup/bds/laesh/setup.sh
+# ==============================================================================
+
+set -euo pipefail
+
+# Credenciales — conexión directa al puerto expuesto del contenedor
+DB_HOST="${DB_HOST:-127.0.0.1}"
+DB_PORT="${DB_PORT:-6002}"
+DB_USER="${DB_USER:-root}"
+DB_PASS="${DB_PASS:-comite_2026}"
+
+# Para exportar a los scripts bash hijos
+export DB_CONTAINER="${DB_CONTAINER:-restaurantb_db}"
+export WEB_CONTAINER="${WEB_CONTAINER:-restaurantb_phpfpm}"
+# Pasar credenciales también
+export DB_NAME="${DB_NAME:-laesh_db}"
+export DB_USER
+export DB_PASS
+
+# Directorio de este script (setup/bds/laesh/)
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
+MYSQL_CMD="mysql -h $DB_HOST -P $DB_PORT -u $DB_USER -p$DB_PASS"
+
+echo "=================================================================="
+echo " LAESH Bloc Digital — Setup de Base de Datos"
+echo " Host: $DB_HOST:$DB_PORT | DB: laesh_db"
+echo "=================================================================="
+
+# ── PASO 0: Tablas Delight-Auth (CREATE TABLE IF NOT EXISTS) ───────────────────
+# DDL directo — más confiable que $auth->install() en esta versión de Delight-Auth.
+echo ""
+echo "── Paso 0: Instalando tablas Delight-Auth... ──────────────────────"
+bash "${DIR}/bash/01_install_auth.sh"
+echo ""
+
+# Función para ejecutar SQL con reporte de estado
+run_sql() {
+    local script="$1"
+    local desc="$2"
+    echo "→ Ejecutando $script ($desc)..."
+    $MYSQL_CMD < "$DIR/$script"
+    echo "  ✓ OK"
+}
+
+# ── PASOS 01–09: Schema + seed SQL ───────────────────────────────────────────
+echo "── Pasos 01–09: Schema + Seed SQL (10 scripts) ────────────────────"
+run_sql "00_database.sql"             "Base de datos y usuario de app"
+run_sql "01_auth_schema.sql"          "Auth schema placeholder (tablas ya creadas en paso 0)"
+run_sql "02_core_schema.sql"          "Core: CONFIGURACIONES, WEB_CONTENIDOS, ESTUDIOS, CATALOGOS_UI"
+run_sql "03_transactional_schema.sql" "Transaccional: ORDENES, NOTIFICACIONES, HISTORIAL"
+run_sql "04_auth_extensions.sql"      "Auth Extensions: EMPLEADOS, PERFILES_MEDICOS, RBAC"
+run_sql "05_system_tables.sql"        "Sistema: SYS_LOGS, FALLBACK_LOG + Event Scheduler"
+run_sql "06_indexes.sql"              "Índices de rendimiento"
+run_sql "07_seed_catalogs.sql"        "Datos semilla: catálogos, estudios, configuraciones"
+run_sql "08_stored_procedures.sql"    "Procedimientos: CrearOrden, ProcesarPDF"
+run_sql "09_views.sql"               "Vistas: vw_ordenes_completas, vw_pacientes_historial"
+echo ""
+
+# ── PASO 10: Usuarios semilla (ADMIN, RECEPCION, MEDICO) ──────────────────────
+echo "── Paso 10: Sembrando usuarios semilla... ──────────────────────────"
+bash "${DIR}/bash/02_seed_users.sh"
+
+echo ""
+echo "=================================================================="
+echo " ✅ Setup completo: laesh_db configurada y sembrada exitosamente."
+echo ""
+echo " Credenciales de app: laesh_app / laesh_2026_dev"
+echo " (cambiar contraseña antes de deploy a producción OCI)"
+echo " Acceso: https://192.168.0.120:8443/laesh/"
+echo "=================================================================="
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/setup/bds/laesh`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>Directory: `laesh` (15 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/setup/bds/laesh`
+
+| Name | Type | Size |
+|------|------|------|
+| `00_database.sql` | File | 1423 bytes |
+| `01_auth_schema.sql` | File | 6866 bytes |
+| `02_core_schema.sql` | File | 9004 bytes |
+| `03_transactional_schema.sql` | File | 13859 bytes |
+| `04_auth_extensions.sql` | File | 6142 bytes |
+| `05_system_tables.sql` | File | 3449 bytes |
+| `06_indexes.sql` | File | 2583 bytes |
+| `07_seed_catalogs.sql` | File | 61170 bytes |
+| `08_stored_procedures.sql` | File | 5531 bytes |
+| `09_views.sql` | File | 4276 bytes |
+| `README.md` | File | 4737 bytes |
+| `bash` | Directory | - |
+| `setup.sh` | File | 4349 bytes |
+| `setup_hostinger.sh` | File | 6804 bytes |
+| `setup_oci.sh` | File | 9903 bytes |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `06_indexes.sql`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+-- =============================================================================
+-- LAESH Bloc Digital — Script 06: Índices Adicionales de Rendimiento
+-- Idempotente: DROP IF EXISTS + CREATE INDEX (evita duplicados).
+-- Nota: Los índices PRIMARY, UNIQUE y FK ya están en los scripts 02–05.
+-- Aquí solo índices de rendimiento para consultas frecuentes.
+--
+-- Redesign v2: columnas renombradas
+--   • ordenes.folio_unico (era folio)
+--   • ordenes.hora_captura (era creado_en)
+--   • pacientes.nombre_completo (era apellido_paterno + nombre)
+--   • notificaciones.user_id (era destinatario_id)
+-- =============================================================================
+
+USE `laesh_db`;
+
+-- ORDENES: Búsqueda por médico + fecha (listado de órdenes del día)
+DROP INDEX IF EXISTS `idx_ordenes_medico_fecha` ON `ordenes`;
+CREATE INDEX `idx_ordenes_medico_fecha`
+    ON `ordenes` (`medico_id`, `hora_captura`);
+
+-- ORDENES: Búsqueda por estado + fecha (cola de recepción)
+DROP INDEX IF EXISTS `idx_ordenes_estado_fecha` ON `ordenes`;
+CREATE INDEX `idx_ordenes_estado_fecha`
+    ON `ordenes` (`estado_id`, `hora_captura`);
+
+-- ORDENES: Búsqueda por folio_unico (ya tiene UNIQUE KEY — índice adicional de texto)
+-- UNIQUE KEY uq_folio_unico ya cubre búsquedas directas por folio.
+
+-- PACIENTES: FULLTEXT ya declarado en 03_transactional_schema.sql (ft_nombre_completo).
+-- Índice B-Tree adicional para ORDER BY nombre_completo en listados de recepción:
+DROP INDEX IF EXISTS `idx_pacientes_nombre_completo` ON `pacientes`;
+CREATE INDEX `idx_pacientes_nombre_completo`
+    ON `pacientes` (`nombre_completo`(50));
+
+-- NOTIFICACIONES: Poll AJAX fallback (user_id + entregado_ws + leido)
+-- El índice idx_fallback_poll ya está en 03_transactional_schema.sql.
+
+-- HISTORIAL: Consulta de tiempos por orden
+DROP INDEX IF EXISTS `idx_hist_orden_creado` ON `historial_estados_orden`;
+CREATE INDEX `idx_hist_orden_creado`
+    ON `historial_estados_orden` (`orden_id`, `creado_en`);
+
+-- WEB_CONTENIDOS: Lectura por sección (CMS render)
+-- El idx_seccion ya está en 02_core_schema.sql.
+
+-- SYS_LOGS: Consulta de eventos de seguridad por nivel (columnas en inglés — Logger.php)
+DROP INDEX IF EXISTS `idx_syslogs_level_created` ON `sys_logs`;
+CREATE INDEX `idx_syslogs_level_created`
+    ON `sys_logs` (`level`, `created_at`);
+
+-- PERFILES_MEDICOS: Búsqueda por estado para listado de médicos activos/pausados
+DROP INDEX IF EXISTS `idx_pm_estado_user` ON `perfiles_medicos`;
+CREATE INDEX `idx_pm_estado_user`
+    ON `perfiles_medicos` (`estado_id`, `user_id`);
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 10:28 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 10:31 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+ejcutalo en local
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `06_indexes.sql`
+**Language:** oracle-sql
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 10:34 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `06_indexes.sql`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L49-67)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+-- PERFILES_MEDICOS: Búsqueda por estado para listado de médicos activos/pausados
+DROP INDEX IF EXISTS `idx_pm_estado_user` ON `perfiles_medicos`;
+CREATE INDEX `idx_pm_estado_user`
+    ON `perfiles_medicos` (`estado_id`, `user_id`);
+
+-- CATALOGO_PROMOCIONES: Consulta de promociones vigentes (optimización index.php)
+DROP INDEX IF EXISTS `idx_promos_activo_orden` ON `catalogo_promociones`;
+CREATE INDEX `idx_promos_activo_orden`
+    ON `catalogo_promociones` (`activo`, `orden`, `id`);
+
+-- CATALOGO_ESTUDIOS: Covering Index para acordeón de especialidades (optimización index.php)
+DROP INDEX IF EXISTS `idx_estudios_cat_activo` ON `catalogo_estudios`;
+CREATE INDEX `idx_estudios_cat_activo`
+    ON `catalogo_estudios` (`categoria_id`, `activo`, `id`);
+
+-- WEB_CONTENIDOS: Búsqueda acelerada por sección, subsección y clave (CMS render)
+DROP INDEX IF EXISTS `idx_cms_sec_sub_clave` ON `web_contenidos`;
+CREATE INDEX `idx_cms_sec_sub_clave`
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 10:34 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 10:35 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 10:35 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+se puede considerar a index.php altamente optimizado para tiempos de respuesta a usuarios internet de forma instantanea ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `06_indexes.sql`
+**Language:** oracle-sql
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L799-847)</summary>
+
+**Path:** `Unknown file`
+
+```
+        <div class="modal-content modal-md">
+            <div class="modal-header">
+                <h3 id="modal-img-promo-title">Promoción — Imagen Completa</h3>
+                <button type="button" class="close-modal" id="btn-cerrar-img-promo" aria-label="Cerrar">&times;</button>
+            </div>
+            <div class="modal-body ta-center pa-4">
+                <img id="modal-img-promo-src" src=""
+                     class="modal-img-preview modal-img-promo-preview"
+                     alt="Imagen Completa de Promoción" loading="lazy">
+            </div>
+        </div>
+    </div>
+
+    <!-- Constantes dinámicas para website.js — inyectadas desde configuraciones/web_contenidos -->
+    <script>
+        /* Hero autoplay: web_contenidos.hero.config.transition_time (segundos) */
+        window.LAESH_HERO_AUTOPLAY = <?= $heroAutoplay ?>;
+    </script>
+    <!-- Fix C1: IntersectionObserver inline — registra el observer antes de que website.js
+         descargue. Elimina el blanco post-hero en móvil: las secciones se muestran
+         en cuanto el HTML es parseado, sin esperar DOMContentLoaded ni el JS de 84KB.
+         Flag window._laeshObserver previene registro duplicado en website.js. -->
+    <script>
+    (function(){
+        var els = document.querySelectorAll('.animate-on-scroll');
+        if (!els.length) return;
+        /* prefers-reduced-motion: muestra todo de inmediato sin animación */
+        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            els.forEach(function(el){ el.classList.add('visible'); });
+            window._laeshObserver = 'noop';
+            return;
+        }
+        if (!('IntersectionObserver' in window)) {
+            /* Fallback navegadores sin IO: mostrar todo visible */
+            els.forEach(function(el){ el.classList.add('visible'); });
+            window._laeshObserver = 'noop';
+            return;
+        }
+        /* Fix C3: rootMargin '0px' — activa en cuanto el elemento toca el viewport,
+           sin requerir 50px de penetración como hacía "-50px". */
+        var io = new IntersectionObserver(function(entries){
+            entries.forEach(function(e){
+                if (e.isIntersecting) { e.target.classList.add('visible'); }
+            });
+        }, { threshold: 0.05, rootMargin: '0px' });
+        els.forEach(function(el){ io.observe(el); });
+        window._laeshObserver = io;
+    })();
+    </script>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L844-855)</summary>
+
+**Path:** `Unknown file`
+
+```
+        els.forEach(function(el){ io.observe(el); });
+        window._laeshObserver = io;
+    })();
+    </script>
+    <!-- Fix C2: htmx se carga async + fetchpriority low — no bloquea DOMContentLoaded
+         ni compite con website.js. Solo se necesita cuando el usuario abre el modal de login. -->
+    <script src="/laesh-web-assets-uipv1a/js/htmx.min.js" async fetchpriority="low"></script>
+    <script src="/laesh-web-assets-uipv1a/js/website.js?v=<?= @filemtime(__DIR__ . '/../../laesh-web-assets-uipv1a/js/website.js') ?: time() ?>" defer></script>
+
+</body>
+</html>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+Se usa algun cache php based optimo para manejo uso en el acceso a datos de la bd mariadb ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `06_indexes.sql`
+**Language:** oracle-sql
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `DB.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+// DB.php - Clase para conexión PDO e interacción transaccional con la base de datos
+
+namespace Common;
+
+use PDO;
+use PDOException;
+
+class DB {
+    private static ?PDO $instance = null;
+
+    /**
+     * Establece la conexión PDO singleton
+     */
+    public static function connect(): PDO {
+        if (self::$instance === null) {
+            $config = require __DIR__ . '/config.php';
+            $dbConf = $config['db'];
+
+            $dsn = sprintf(
+                "mysql:host=%s;port=%d;dbname=%s;charset=%s",
+                $dbConf['host'],
+                $dbConf['port'],
+                $dbConf['name'],
+                $dbConf['charset']
+            );
+
+            try {
+                self::$instance = new PDO($dsn, $dbConf['user'], $dbConf['pass'], [
+                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                    PDO::ATTR_EMULATE_PREPARES => false,
+                    PDO::ATTR_PERSISTENT => true, // Conexión persistente (Pool a nivel PHP-FPM)
+                ]);
+                
+                // Configuración de compatibilidad e internacionalización (Español MX)
+                self::$instance->exec("SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci");
+                self::$instance->exec("SET time_zone = '-06:00'");
+                self::$instance->exec("SET lc_time_names = 'es_MX'");
+                self::$instance->exec("SET SESSION sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
+            } catch (PDOException $e) {
+                // Registrar error en el log local de emergencia
+                self::logEmergency("Error de conexión PDO: " . $e->getMessage());
+                throw $e;
+            }
+        }
+        return self::$instance;
+    }
+
+    /**
+     * Registra una traza de fallo de consulta SQL en la tabla fallback_log
+     * Adaptado del estándar Conexion.php (cbm 2026)
+     *
+     * @param string $nivel Nivel del log ('ERROR', 'FALLBACK', 'WARN')
+     * @param string $query Sentencia SQL ejecutada
+     * @param string|null $errorMsg Mensaje de error retornado por PDO
+     */
+    public static function logFallback(string $nivel, string $query, ?string $errorMsg = null): void {
+        try {
+            $pdo = self::connect();
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `DB.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L60-153)</summary>
+
+**Path:** `Unknown file`
+
+```
+            
+            // Determinar tipo de query (SELECT, INSERT, UPDATE, etc.)
+            $qTrim = ltrim($query);
+            $firstWord = strtoupper(strtok($qTrim, " \t\n\r"));
+            $typeMap = ['SELECT'=>'SELECT','INSERT'=>'INSERT','UPDATE'=>'UPDATE','DELETE'=>'DELETE','CALL'=>'CALL'];
+            $queryType = $typeMap[$firstWord] ?? 'OTHER';
+
+            // Hash CRC32 para agrupar repeticiones en auditorías
+            $queryHash = substr(dechex(crc32($query)), 0, 8);
+
+            // Obtener origen real (archivo y línea del caller) omitiendo frames internos de DB
+            $origen = 'unknown';
+            $funcion = null;
+            $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 5);
+            foreach ($backtrace as $frame) {
+                $file = $frame['file'] ?? '';
+                if ($file !== '' && strpos($file, 'DB.php') === false) {
+                    // Remover path absoluto del host para legibilidad
+                    $short = str_replace($_SERVER['DOCUMENT_ROOT'] ?? '', '', $file);
+                    $line = $frame['line'] ?? '';
+                    $origen = ltrim($short, '/') . ($line ? ":$line" : '');
+                    if (isset($frame['function'])) {
+                        $funcion = ($frame['class'] ?? '') . '::' . $frame['function'];
+                    }
+                    break;
+                }
+            }
+
+            // Inserción directa segura
+            $stmt = $pdo->prepare("
+                INSERT INTO `fallback_log` 
+                (`nivel`, `origen`, `funcion`, `query_type`, `query_hash`, `query_text`, `error_msg`, `fecha`) 
+                VALUES (:nivel, :origen, :funcion, :query_type, :query_hash, :query_text, :error_msg, NOW())
+            ");
+            $stmt->execute([
+                ':nivel' => $nivel,
+                ':origen' => substr($origen, 0, 120),
+                ':funcion' => $funcion ? substr($funcion, 0, 80) : null,
+                ':query_type' => $queryType,
+                ':query_hash' => $queryHash,
+                ':query_text' => $query,
+                ':error_msg' => $errorMsg ? substr($errorMsg, 0, 300) : null,
+            ]);
+        } catch (PDOException $e) {
+            // Si la persistencia en DB falla, registrar en el archivo de emergencia local
+            self::logEmergency("Fallo en logFallback: " . $e->getMessage() . " | Query: " . $query);
+        }
+    }
+
+    /**
+     * Clasifica y registra una PDOException; detecta específicamente el error 1969
+     * (max_statement_time excedido) para logging diferenciado y re-lanza.
+     *
+     * Uso en rutas Flight:
+     *   try { $pdo->query($sql); }
+     *   catch (PDOException $e) { DB::handleQueryException($e, $sql); }
+     *
+     * Error 1969: MariaDB aborta el statement cuando supera max_statement_time.
+     *   - SQLSTATE : HY000
+     *   - errno    : 1969
+     *   - Mensaje  : "Query execution was interrupted (max_statement_time exceeded)"
+     *
+     * @param PDOException $e   Excepción PDO capturada
+     * @param string       $sql Sentencia SQL que la generó (para traza en log)
+     * @throws PDOException     Siempre — re-lanza la excepción original
+     */
+    public static function handleQueryException(\PDOException $e, string $sql = ''): void {
+        $nativeCode = (int)($e->errorInfo[1] ?? 0);
+        $isTimeout  = ($nativeCode === 1969);
+
+        $nivel  = $isTimeout ? 'TIMEOUT' : 'ERROR';
+        $errMsg = $isTimeout
+            ? sprintf('[1969] Query abortada por max_statement_time (10s): %s', $e->getMessage())
+            : $e->getMessage();
+
+        self::logFallback($nivel, $sql, $errMsg);
+        throw $e;
+    }
+
+    /**
+     * Escribe un mensaje de emergencia directamente al archivo plano local
+     */
+    private static function logEmergency(string $message): void {
+        $config = require __DIR__ . '/config.php';
+        $logPath = $config['app']['log_path'];
+        $logDir = dirname($logPath);
+        if (!is_dir($logDir)) {
+            mkdir($logDir, 0755, true);
+        }
+        $logLine = sprintf("[%s] [EMERGENCY_DB] %s\n", date('Y-m-d H:i:s'), $message);
+        file_put_contents($logPath, $logLine, FILE_APPEND | LOCK_EX);
+    }
+}
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+NO , registralo como un tema pendiente de optimizacion en el rubook de gemini y claude.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `06_indexes.sql`
+**Language:** oracle-sql
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `GEMINI.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L479-496)</summary>
+
+**Path:** `Unknown file`
+
+```
+   En pantallas `>=1025px`, el contenedor de carruseles e imágenes expande sus paddings laterales a `4.5rem` y las tarjetas clínicas mantienen una altura de imagen de `280px` (`object-fit: cover`) con tipografías proporcionales (+3) para un look & feel de alta gama.
+
+5. **Mapeo de Secciones UI del CMS Personalizado (`gestion-web.html`):**
+   `gestion-web.html` refleja de forma exacta las 5 secciones navegables reales de `index.html`:
+   * **1. Banner Principal (`#hero` / `#inicio`):** Edición de imágenes de fondo, etiquetas, títulos y textos CTA de los 3 slides.
+   * **2. Estudios de Rutina (`#especialidades`):** Edición del carrusel de tarjetas de especialidades e imágenes de área.
+   * **3. Promociones Vigentes (`#promociones`):** Subida y reemplazo del banner gráfico oficial (`PROMOCIONES 2026.webp`) y sus títulos explicativos. (Sin tarjetas redundantes de descuento).
+   * **4. Calidad e Instalaciones (`#calidad`):** Gestión de la galería fotográfica de áreas de laboratorio y certificaciones.
+   * **5. Ubicación y Contacto (`#ubicacion`):** Edición de teléfonos, dirección física, horario, responsable sanitario, WhatsApp y croquis (`mapa_laesh.webp`).
+   *(Nota: Se han removido secciones obsoletas como Membresías y tarjetas individuales de promoción que no pertenecen a index.html).*
+
+---
+
+## 📌 Pendientes Registrados en Runbook (Hitos de Continuidad)
+- [ ] **PUNTO A: Alta Rápida de Pacientes desde Recepción (`rc/views/labadmin.php`):**
+  Implementar la modal de registro directo de pacientes con formulario HTMX (`POST /paciente/crear`) que inserte en la tabla `pacientes` de MariaDB antes o independientemente de la emisión de una solicitud de laboratorio.
+
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 1 Sept 2026, 10:40 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+Analiza e identifica las partes de contenido que en index.php se obtienen de la base de datos;  Propon un par de estrategias de Cache para evitar que cada visita interactue con   la bd mariadb, y el cache se  actualice/refresque  cada vez que el Cms lo cambie;  y tambien una vez diario 5 a.m renovar toda la cache y evitar lags de memoria. O si es viable generar archivos js de datos y cada vez haya cambios se sincronice todo o lo el incremento.
+Las que planteo son ideas legadas de cache , quiza existan otras mas eficientes, y eficaces hoy dia y con el uso de nuestro stack php.
+Analiza, DIseña , explica pros/contras y tu reocomendación final. 
+
+---
+
+## Agent Response
+
+### Thinking
+
+The user wants me to analyze what content in index.php comes from the database, and then propose and evaluate caching strategies. Let me first view the relevant parts of index.php to understand the data access patterns, then design a thorough analysis.
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 3.793892062s
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L44-199)</summary>
+
+**Path:** `Unknown file`
+
+```
+/** Formatea precio MXN entero: "$1,234" o '' si no hay precio. */
+function money(mixed $v): string {
+    $n = (float)($v ?? 0);
+    return $n > 0 ? '$' . number_format($n, 0, '.', ',') : '';
+}
+/** Devuelve solo dígitos de un número de teléfono. */
+function waNum(string $raw): string {
+    return preg_replace('/\D/', '', $raw);
+}
+/**
+ * Renderiza HTML de confianza generado por el RTE del CMS (admins LAESH).
+ * Permite tags ricos de CKEditor 5.
+ * Bloquea: <script>, atributos on*, href con javascript:
+ */
+function safeHtml(mixed $v): string {
+    $html = strip_tags((string)($v ?? ''), ['strong','em','b','i','br','p','ul','ol','li','a','span','table','tbody','tr','td','th','thead','hr','figure','iframe','h1','h2','h3','h4','h5','h6','u','s','blockquote','oembed','div','img']);
+    $html = preg_replace('/\s+on\w+\s*=\s*(?:"[^"]*"|\'[^\']*\'|[^\s>]*)/i', '', $html);
+    $html = preg_replace('/href\s*=\s*["\']?\s*javascript:/i', 'href="#" data-blocked=', $html);
+
+    // Convertir <oembed url="..."> a <iframe> para YouTube, Spotify, Vimeo si vienen etiquetas oembed crudas
+    $html = preg_replace_callback('/<oembed\s+url=["\']([^"\']+)["\']\s*>\s*<\/oembed>/i', function($matches) {
+        $url = $matches[1];
+        if (preg_match('/(?:youtube\.com\/(?:watch\?v=|embed\/|v\/)|youtu\.be\/)([\w-]+)/i', $url, $m)) {
+            $yId = $m[1];
+            return '<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,0.12);">' .
+                   '<iframe src="https://www.youtube.com/embed/' . $yId . '" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;border-radius:12px;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' .
+                   '</div>';
+        }
+        if (preg_match('/vimeo\.com\/(?:video\/)?(\d+)/i', $url, $m)) {
+            $vId = $m[1];
+            return '<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;">' .
+                   '<iframe src="https://player.vimeo.com/video/' . $vId . '" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allowfullscreen></iframe>' .
+                   '</div>';
+        }
+        return '<a href="' . htmlspecialchars($url, ENT_QUOTES, 'UTF-8') . '" target="_blank" rel="noopener">' . htmlspecialchars($url, ENT_QUOTES, 'UTF-8') . '</a>';
+    }, $html);
+
+    return $html;
+}
+
+/** Devuelve un valor de la tabla web_contenidos de manera segura */
+function cmsVal(?array $c, string $sec, ?string $sub, string $clave, string $default = ''): string {
+    if (!is_array($c)) return $default;
+    $subKey = $sub ?? '';
+    if (isset($c[$sec][$subKey][$clave])) {
+        return (string)$c[$sec][$subKey][$clave];
+    }
+    if ($subKey === '' && isset($c[$sec][''][$clave])) {
+        return (string)$c[$sec][''][$clave];
+    }
+    return $default;
+}
+
+/**
+ * Parsea el texto de fichas del CMS al array estructurado del acordeón.
+ *
+ * Formato esperado (una sub-categoría por línea):
+ *   [Hematología] Citometría Hemática, Grupo y RH, Plaquetas
+ *   [Química Clínica] Química Sanguínea 3, Química Sanguínea 7, ...
+ *
+ * @return list<array{cat: string, items: list<string>}>
+ */
+function parseFichas(string $text): array {
+    $groups = [];
+    foreach (explode("\n", $text) as $line) {
+        $line = trim($line);
+        if ($line === '') continue;
+        if (preg_match('/^\[(.+?)\]\s*(.+)/', $line, $m)) {
+            $items = array_values(array_filter(
+                array_map('trim', explode(',', $m[2]))
+            ));
+            if ($items) {
+                $groups[] = ['cat' => trim($m[1]), 'items' => $items];
+            }
+        }
+    }
+    return $groups;
+}
+
+// ── Conexión DB ─────────────────────────────────────────────────────────────
+$db = Flight::db();
+
+// ── 1. Cargar desde DB ──────────────────────────────────────────────────────
+$configRaw = $db->query("SELECT clave, valor FROM configuraciones")->fetchAll(\PDO::FETCH_KEY_PAIR) ?: [];
+$cms = [];
+foreach ($db->query("SELECT seccion, subseccion, clave, valor FROM web_contenidos ORDER BY id")->fetchAll(\PDO::FETCH_ASSOC) as $row) {
+    $cms[$row['seccion']][$row['subseccion']][$row['clave']] = $row['valor'];
+}
+
+// ── 2. Preview de borrador CMS (solo sesión admin activa) ──────────────────
+// IMPORTANTE: el merge debe ocurrir ANTES de definir $cfg y $c, porque las arrow
+// functions de PHP capturan variables por VALOR en el momento de su creación.
+// Delight Auth guarda el login bajo $_SESSION['auth_logged_in'] (NOT 'user_id').
+$isPreview = !empty($_GET['_preview'])
+    && !empty($_SESSION['auth_logged_in'])
+    && !empty($_SESSION['cms_draft']);
+if ($isPreview) {
+    foreach ($_SESSION['cms_draft'] as $draftSec => $campos) {
+        foreach ($campos as $rawKey => $val) {
+            // Manejar configuraciones globales (prefijo _cfg_)
+            if (str_starts_with($rawKey, '_cfg_')) {
+                $configRaw[substr($rawKey, 5)] = $val;
+                continue;
+            }
+            // Manejar web_contenidos (formato {sub}__{clave})
+            [$sub, $clave] = array_pad(explode('__', $rawKey, 2), 2, $rawKey);
+            $cms[$draftSec][$sub][$clave] = $val;
+        }
+    }
+}
+
+// ── 3. Helpers y Variables Funcionales (Post-Merge) ─────────────────────────
+$cfg = fn(string $k, string $d = '') => (!isset($configRaw[$k]) || $configRaw[$k] === '') ? $d : $configRaw[$k];
+$c   = fn(string $sec, string $sub, string $k, string $d = '') => (!isset($cms[$sec][$sub][$k]) || $cms[$sec][$sub][$k] === '') ? $d : $cms[$sec][$sub][$k];
+
+// Valores frecuentes — sin fallback: el cliente DEBE tener todo en configuraciones
+$cfgNombreLab = $cfg('nombre_laboratorio');
+$cfgNombreC   = $cfg('nombre_corto');
+$cfgAnios     = $cfg('anios_experiencia');
+$cfgTel       = $cfg('telefono');
+$cfgTelDigit  = waNum($cfgTel);
+$cfgWA        = waNum($cfg('whatsapp_numero'));
+$cfgEmail     = $cfg('email_contacto');
+$cfgDir       = $cfg('direccion');
+$cfgDirCalle  = $cfg('direccion_calle');
+$cfgCiudad    = $cfg('ciudad');
+$cfgEstado    = $cfg('estado');
+$cfgCP        = $cfg('cp');
+$cfgHorSem    = $cfg('horario_semana');
+$cfgHorDom    = $cfg('horario_domingo');
+$cfgHrsOpen   = $cfg('hrs_open');
+$cfgHrsClose  = $cfg('hrs_close');
+$cfgDomOpen   = $cfg('dom_open');
+$cfgDomClose  = $cfg('dom_close');
+$cfgRespNom   = $cfg('responsable_nombre');
+$cfgRespProf  = $cfg('responsable_cedula_prof');
+$cfgRespEsp   = $cfg('responsable_cedula_esp');
+$cfgFB        = $cfg('facebook_url');
+$cfgMapsUrl   = $cfg('maps_url');  // URL directa Google Maps para noscript
+
+// WhatsApp URLs — textos desde configuraciones (sin fallback)
+$waBase        = "https://wa.me/52{$cfgWA}";
+$waTextoInfo   = $cfg('wa_texto_info');    // texto botón info / flotante / ubicación
+$waTextoAg     = $cfg('wa_texto_agendar'); // texto pre-llenado en cards de promo
+$waInfoUrl     = $waBase . '?text=' . rawurlencode($waTextoInfo);
+$waContactUrl  = $waInfoUrl;
+
+/** Obtiene valor CMS con fallback.
+ *  NOTA: debe definirse DESPUÉS del merge de preview para que capture
+ *  el $cms ya actualizado (PHP arrow fn captura por valor al momento de creación). */
+$c = fn(string $sec, string $sub, string $k, string $d = '') => $cms[$sec][$sub][$k] ?? $d;
+
+// ── 3. Catálogo de estudios — 4 abanicos desde web_contenidos ───────────────
+// Fuente SSOT: web_contenidos(especialidades, cgN, titulo/fichas)
+// Iconos SVG decorativos por grupo (inline — sin CDN)
+const GRUPO_SVGS = [
+```
+
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 2 Sept 2026, 1:04 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L199-294)</summary>
+
+**Path:** `Unknown file`
+
+```
+const GRUPO_SVGS = [
+    1 => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>',
+    2 => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>',
+    3 => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>',
+    4 => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>',
+];
+
+$cg = [];
+$treeStmt = $db->query("
+    SELECT g.id as grupo_id, g.titulo as grupo_titulo, 
+           c.id as cat_id, c.nombre as cat_nombre,
+           e.clave_interna, e.nombre as estudio_nombre, e.tiempo_procesamiento, e.muestra_requerida, e.preparacion
+    FROM catalogo_grupos g
+    JOIN catalogo_categorias c ON c.grupo_id = g.id
+    JOIN catalogo_estudios e ON e.categoria_id = c.id
+    WHERE e.activo = 1
+    ORDER BY g.orden ASC, c.orden ASC, e.id ASC
+");
+$treeRows = $treeStmt ? $treeStmt->fetchAll(\PDO::FETCH_ASSOC) : [];
+
+$gMap = [];
+$gIdxMap = [];
+$currGIdx = 0;
+
+foreach ($treeRows as $r) {
+    $gid = (int)$r['grupo_id'];
+    if (!isset($gIdxMap[$gid])) {
+        $currGIdx++;
+        if ($currGIdx > 4) break; // Máximo 4 abanicos principales
+        $gIdxMap[$gid] = $currGIdx;
+        $cg[$currGIdx] = [
+            'titulo' => $r['grupo_titulo'],
+            'fichas' => []
+        ];
+    }
+    $gi = $gIdxMap[$gid];
+    $catId = (int)$r['cat_id'];
+
+    if (!isset($gMap[$gid][$catId])) {
+        $gMap[$gid][$catId] = count($cg[$gi]['fichas']);
+        $cg[$gi]['fichas'][] = [
+            'cat' => $r['cat_nombre'],
+            'items' => []
+        ];
+    }
+
+    $cPos = $gMap[$gid][$catId];
+    $cg[$gi]['fichas'][$cPos]['items'][] = [
+        'clave_interna'        => $r['clave_interna'],
+        'nombre'               => $r['estudio_nombre'],
+        'tiempo_procesamiento' => $r['tiempo_procesamiento'],
+        'muestra_requerida'    => $r['muestra_requerida'],
+        'preparacion'          => $r['preparacion']
+    ];
+}
+
+// ── 3b. Hero autoplay (seg) — desde web_contenidos.hero.config.transition_time
+// Alineado con gestion-web.php (POST hero_config__transition_time)
+$heroAutoplay = min(90, max(0, (int)$c('hero', 'config', 'transition_time', '5'))); // 0 = pausa indefinida
+
+// ── 3c. Quiénes somos — Ficha 4 (25 años / CKEditor 5) ───────────────────
+// Desde 2026-08-23: ficha4/texto almacena HTML enriquecido (CKEditor 5).
+// El heading del card va incluido en el HTML (primer bloque H3 del editor).
+// safeHtml() filtra antes de emitir.
+$qsConfianzaHtml = $c('quienes-somos', 'ficha4', 'texto');
+
+// ── 3d. Carrusel de especialidades y áreas — 16 tarjetas ───────────────────
+// Imágenes: configuraciones.carouselN_img (fallback a paths estáticos).
+// Textos: dinámicos desde web_contenidos (especialidades/carouselN/texto HTML).
+$_carDef = [
+    1  => ['/laesh-web-assets-uipv1a/img/area-hematologia-dos.webp'],
+    2  => ['/laesh-web-assets-uipv1a/img/area-quimica-clinica-dos.webp'],
+    3  => ['/laesh-web-assets-uipv1a/img/area-bacteriologia-dos.webp'],
+    4  => ['/laesh-web-assets-uipv1a/img/area-uroanalisis.webp'],
+    5  => ['/laesh-web-assets-uipv1a/img/area-coagulacion.webp'],
+    6  => ['/laesh-web-assets-uipv1a/img/area-estudios-especiales.webp'],
+    7  => ['/laesh-web-assets-uipv1a/img/area-centrifugacion.webp'],
+    8  => ['/laesh-web-assets-uipv1a/img/area-toma-de-muestras.webp'],
+    9  => ['/laesh-web-assets-uipv1a/img/toma-de-muestras.webp'],
+    10 => ['/laesh-web-assets-uipv1a/img/toma-pediatricas.webp'],
+    11 => ['/laesh-web-assets-uipv1a/img/toma-de-cultivos.webp'],
+    12 => ['/laesh-web-assets-uipv1a/img/recepcion-lab.webp'],
+];
+$carouselCards = [];
+for ($ci = 1; $ci <= 16; $ci++) {
+    $cHtml = trim((string)$c('especialidades', "carousel{$ci}", 'texto'));
+    if ($cHtml === '') continue;
+    $cImg = trim((string)$c('especialidades', 'config', "carousel{$ci}_img", $cfg("carousel{$ci}_img", $_carDef[$ci][0] ?? '')));
+    if ($cImg === '') {
+        $cImg = $_carDef[$ci][0] ?? '/laesh-web-assets-uipv1a/img/area-hematologia-dos.webp';
+    }
+    $carouselCards[$ci] = [
+        'img'   => $cImg,
+        'texto' => $cHtml,
+    ];
+}
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L294-379)</summary>
+
+**Path:** `Unknown file`
+
+```
+}
+
+// ── 3e. Calidad gallery — 3 tarjetas ────────────────────────────────────────
+$_calDef = [
+    1 => ['Área de Hematología',      'Análisis de biometría hemática y células sanguíneas con rigor científico y alta precisión.',
+          '/laesh-web-assets-uipv1a/img/area-hematologia-uno.webp'],
+    2 => ['Química Clínica',          'Determinación automatizada de metabolitos, perfil lipídico y enzimas específicas.',
+          '/laesh-web-assets-uipv1a/img/area-quimica-clinica.webp'],
+    3 => ['Microbiología y Cultivos', 'Aislamiento, tinción de Gram y pruebas de susceptibilidad a antimicrobianos.',
+          '/laesh-web-assets-uipv1a/img/area-bacteriologia.webp'],
+];
+$calidadCards = [];
+for ($qi = 1; $qi <= 3; $qi++) {
+    $calidadCards[$qi] = [
+        // imagen_url desde CMS; fallback al asset estático original (R15.1)
+        'img'    => $c('calidad', "gallery{$qi}", 'imagen_url', $_calDef[$qi][2]),
+        'alt'    => $_calDef[$qi][0],
+        'titulo' => $c('calidad', "gallery{$qi}", 'titulo',      $_calDef[$qi][0]),
+        'desc'   => $c('calidad', "gallery{$qi}", 'descripcion', $_calDef[$qi][1]),
+    ];
+}
+
+// ── 4. Promociones — MariaDB SSOT (catalogo_promociones + catalogo_estudios) ─
+$promoStmt = $db->query(
+    "SELECT 
+        cp.id,
+        cp.dia_semana,
+        cp.nombre_oferta,
+        cp.subtitulo,
+        cp.descripcion,
+        cp.ayuno,
+        cp.tiempo_entrega,
+        cp.precio_regular,
+        cp.precio_oferta,
+        cp.imagen_fondo,
+        cp.activo,
+        ce.clave_interna,
+        ce.muestra_requerida,
+        ce.tiempo_procesamiento,
+        ce.preparacion,
+        cc.nombre as categoria_nombre
+     FROM catalogo_promociones cp
+     LEFT JOIN catalogo_estudios ce ON cp.estudio_id = ce.id
+     LEFT JOIN catalogo_categorias cc ON ce.categoria_id = cc.id
+     WHERE cp.activo = 1
+     ORDER BY cp.orden ASC, cp.id ASC"
+);
+$promos = $promoStmt ? $promoStmt->fetchAll(\PDO::FETCH_ASSOC) : [];
+
+
+// ── 5. Lecturas agrupadas por sección ────────────────────────────────────────
+
+// Hero — navbar tagline (sin fallback)
+$navTagL1 = $c('hero', 'navbar', 'tagline_l1');
+$navTagL2 = $c('hero', 'navbar', 'tagline_l2');
+
+// Hero — contenido de slides: etiqueta, titulo, descripcion, CTA + imagen_url dinámica
+// CSS bg-slide-N es el fallback visual; imagen_url de BD permite cambiar la imagen desde el CMS.
+// Fallbacks alineados con bg-slide-N de landing.css (5 imágenes distintas — 2026-08-28)
+$slidesBgFallback = [
+    1 => '/laesh-web-assets-uipv1a/img/recepcion-de-pacientes.webp',
+    2 => '/laesh-web-assets-uipv1a/img/laesh-slider-futurista-a.webp',
+    3 => '/laesh-web-assets-uipv1a/img/laesh-slider-futurista-c.webp',
+    4 => '/laesh-web-assets-uipv1a/img/sala-de-espera.webp',
+    5 => '/laesh-web-assets-uipv1a/img/recepcion-lab.webp',
+];
+$slides = [];
+for ($si = 1; $si <= 5; $si++) {
+    $imgUrl = $c('hero', "slide{$si}", 'imagen_url', $slidesBgFallback[$si]);
+    $slides[$si] = [
+        'etiqueta'    => $c('hero', "slide{$si}", 'etiqueta'),
+        'titulo'      => $c('hero', "slide{$si}", 'titulo'),
+        'descripcion' => $c('hero', "slide{$si}", 'descripcion'),
+        'cta_texto'   => $c('hero', "slide{$si}", 'cta_texto'),
+        'cta_href'    => $c('hero', "slide{$si}", 'cta_href'),
+        'imagen_url'  => $imgUrl,
+        'bg_style'    => $imgUrl
+            ? 'background-image:url(' . h($imgUrl) . ');'  /* gradiente removido 2026-08-28: bandas contain deben mostrar fondo gris limpio */
+            : '',
+    ];
+}
+// Slide 5: si la descripción CMS está vacía, construirla desde configuraciones
+$slide5Desc = $slides[5]['descripcion']
+    ?: (h($cfgDirCalle ?: $cfgDir) . ', ' . h($cfgCiudad) . ', ' . h($cfgEstado) . '.<br>'
+      . h($cfgHorSem) . ' &nbsp;|&nbsp; ' . h($cfgHorDom) . ' &nbsp;|&nbsp; Tel: ' . h($cfgTel));
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `commons`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Execution Error
+
+**Status:** Completed
+**Created:** 2 Sept 2026, 1:05 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/commons`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+<details>
+<summary>Directory: `commons` (11 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/commons`
+
+| Name | Type | Size |
+|------|------|------|
+| `CsrfGuard.php` | File | 5242 bytes |
+| `DB.php` | File | 6510 bytes |
+| `Logger.php` | File | 2548 bytes |
+| `RbacManager.php` | File | 3059 bytes |
+| `Response.php` | File | 6472 bytes |
+| `autoload.php` | File | 1465 bytes |
+| `commons.php` | File | 5319 bytes |
+| `config.php` | File | 1194 bytes |
+| `notifier.php` | File | 3729 bytes |
+| `seed_first_users.php` | File | 9371 bytes |
+| `swoole_server.php` | File | 6427 bytes |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 2 Sept 2026, 1:05 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Execution Error
+
+**Status:** Completed
+**Created:** 2 Sept 2026, 1:06 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 2 Sept 2026, 1:07 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Claude Sonnet 4.6 (Thinking)
 </details>
 
 ---
