@@ -220,13 +220,10 @@ tokens.css · fonts.css · style.css · style-website.css · landing.css · targ
 3. Aplicar mismo criterio a otros scripts inline o archivos JS del sitio web
 **Archivo**: `laesh-web-assets-uipv1a/js/device-detect.js` · `index.php` `<head>`
 
-### PERF-04 🟡 [LAESH Website] Ficha "25 años de experiencia" no centrada/completa en iPad
-**Estado**: Reportado 2026-08-30 — reproducción en dispositivo iPad  
-**Problema**: La ficha/card/sección con el texto "25 años de experiencia al servicio del diagnóstico" en `index.php` no se muestra centrada ni completa en iPads  
-**Síntoma**: Texto/elemento recortado o desalineado en viewport tablet (~768–1024 px)  
-**Área probable**: CSS responsive en `landing.css` o `style-website.css` · breakpoint `@media (max-width: 1024px)` o `768px` · posible `overflow: hidden`, `white-space: nowrap`, o ancho fijo incorrecto  
-**Acción**: Abrir `index.php` en browser a 768–1024 px de ancho (o DevTools iPad Air/Pro), identificar el selector y corregir alineación + visibilidad completa  
-**Archivos probables**: `laesh-web-assets-uipv1a/css/landing.css` · `style-website.css` · `website/index.php` o partial de la sección "quiénes somos"
+### PERF-04 ✅ [LAESH Website] Ficha "25 años de experiencia" no centrada/completa en iPad — RESUELTO
+**Estado**: Cerrado 2026-09-04 — informado como corregido por el usuario  
+**Resolución**: CSS corregido (alineación y visibilidad completa en viewport tablet ~768–1024 px).  
+**Archivos afectados**: `laesh-web-assets-uipv1a/css/landing.css` · `style-website.css`
 
 ### PERF-03 ⏸ [LAESH Website] Verificar y activar Gzip/Brotli en XAMPP (Host A y OCI)
 **Estado**: Diferido — verificar configuración de Apache  
@@ -296,4 +293,4 @@ El HTML legado **no necesita sincronizarse** — el PHP es el SSOT.
 
 ---
 
-*Última actualización: 2026-08-30 — Audit performance index.php (score 4/10). Nuevos pendientes performance: P-01 (filemtime), P-03 (reoptimizar area-*.webp usuario), R-02 (dims calidad.php), PERF-01 (bundle+minify CSS), PERF-02 (minify JS + defer device-detect), PERF-03 (Gzip/Brotli XAMPP), PERF-04 (ficha "25 años" no centrada en iPad). Activos previos: P-LAESH-05 (Deploy OCI), P-LAESH-06 (verificación visual medicos.php), P-INFRA-01 (DNS laesh.mx), G-IMG-01, G-IMG-02, G-DEV-01, G-DEV-02. — Claude Code*
+*Última actualización: 2026-09-04 (sesión 2) — Pipeline KVM2 completamente cerrado y listo para ejecución real en Hostinger. Cambios: RETRY_WAIT 120→30 (monitor_services.sh); setup_hostinger.sh paso 3b least-privilege automatizado (REVOKE ALL + GRANT DML-only); BDS_DIR ruta canónica en 06_deploy_app.sh; 08_verify.sh multi-path fallback para 03_test_deploy.sh; bash/README.md defaults corregidos (php8.3, /opt/laesh/www); README.md pre-requisitos completos (4 rsync, 3 env vars, checklist, secciones monitoring/log-levels/Logger); Tecnica_Infraestructura_Despliegue.html: sec19-3 reescrita, sec19-4 actualizada, sec15-9 PrivateTmp fix, nuevas §21 monitoring, §22 log-levels, §23 Logger; Tecnica_Seguridad_Integral.html: §2 least-priv automatizado, nueva §6 SMTP/monitor; Especificacion_Tecnica.html: §6.1 Logger filtro de nivel; Tecnica_Modelo_Datos.html: notas sys_logs prod. Activos: P-LAESH-05 (Deploy OCI — requiere autorización), P-LAESH-06 (verificación visual medicos.php), P-INFRA-01 (DNS laesh.mx), G-IMG-01, G-IMG-02, G-DEV-01, G-DEV-02, P-01 (filemtime), R-02, PERF-01, PERF-02, PERF-03. — Claude Code*
