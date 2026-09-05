@@ -84,6 +84,47 @@
 
 ## 🟡 PRIORIDAD MEDIA — INFRA
 
+### P-LAESH-E2E-01 🔄 [LAESH KVM2] Trazabilidad E2E — Implementación parcial, 5 gaps críticos
+**Estado**: Detectado 2026-09-05. Logging de eventos existe y es real (sys_logs + app.log + nginx). Falta correlación entre capas.
+
+**Lo que YA funciona:**
+- `sys_logs` (MariaDB) + `app.log` (plano) — dual write con fallback
+- Eventos registrados: login exitoso/fallido, CSRF violations, órdenes creadas, cambios de estado, CMS, errores PDO
+- UI viewer en portal Admin `/adrc/` → vista `sistema.php` / `log_viewer.php`
+
+**Gaps pendientes (ordenados por impacto):**
+
+| # | Gap | Impacto | Fix estimado |
+|---|---|---|---|
+| G1 | **INFO filtrado en producción** — nivel mínimo = WARN → órdenes creadas, logins exitosos invisibles en laesh.mx | Alto — sin visibilidad de negocio | Cambiar `app-log-level.php` a INFO en prod, o hacer INFO persistente sin filtro |
+| G2 | **RBAC denials no se loguean** — `RbacManager::requirePermission()` no llama a Logger. 302 silencioso sin rastro | Alto — sin detección de acceso no autorizado | Agregar `Logger::log('WARN', ...)` en RbacManager antes del header redirect |
+| G3 | **Sin request_id correlación** — nginx genera `$request_id` → header `X-Request-ID` al browser pero NO lo pasa a PHP vía `fastcgi_param`. Imposible enlazar `access.log` con `sys_logs` | Medio — debugging prod difícil | Agregar `fastcgi_param HTTP_X_REQUEST_ID $request_id;` en todos los `@*_php` named locations; capturarlo en Logger |
+| G4 | **sys_logs sin URL ni método** — tabla solo tiene level/message/ip/user_id/created_at. No se sabe qué endpoint disparó el evento | Medio | Agregar columnas `url VARCHAR(255)` + `http_method VARCHAR(10)` + migración DDL |
+| G5 | **Sin session_id** — no se puede rastrear actividad completa de una sesión a través de múltiples requests | Bajo | Agregar `session_id CHAR(32)` en sys_logs; capturar `session_id()` en Logger |
+
+**Prerequisito antes de G3**: verificar que los named locations `@rc_php`, `@md_php`, `@adrc_php` en `nginx-laesh-domain.conf` pasen el header a PHP (ajuste de 1 línea por location).
+
+---
+
+### P-LAESH-NGINX-SYNC-01 ⚠️ [LAESH KVM2] Verificar fidelidad local == servidor tras sesión de fixes
+**Estado**: Acción requerida — se aplicaron múltiples patches a `nginx-laesh-domain.conf` y `nginx-laesh-ip.conf` en sesión 2026-09-05. El archivo local está correcto. Verificar que el servidor tiene exactamente lo mismo.
+
+**Verificación (ejecutar en el servidor):**
+```bash
+sha256sum /etc/nginx/sites-available/laesh
+sudo sed 's/__LAESH_DOMAIN__/laesh.mx/g' \
+  ~/laesh-kvm2-prod/configs/nginx-laesh-domain.conf | sha256sum
+# Los dos hashes deben coincidir
+```
+Si divergen: re-ejecutar `sync_to_hkvm2.sh` desde local + `sed | tee + nginx reload`.
+
+**Fixes aplicados en esta sesión (deben estar en el repo):**
+1. `try_files $uri @portal_php` — eliminado `$uri/` para evitar internal redirect via index directive que bypasseaba el named location
+2. `include fastcgi_params` primero en los 3 named locations (`@rc_php`, `@md_php`, `@adrc_php`) para que los params explícitos los sobreescriban
+3. `fastcgi_param SCRIPT_NAME /laesh/{rc|md|adrc}/index.php` explícito — permite a Flight calcular `base = dirname(SCRIPT_NAME) = /laesh/{rc|md|adrc}` y hacer strip correcto de REQUEST_URI
+
+---
+
 ### P-INFRA-02 ✅ [LAESH KVM2] PHP CLI hang: OPcache JIT + Swoole — RESUELTO
 **Estado**: Resuelto 2026-09-04 (sesión 3)  
 **Síntoma original**: `php8.3` CLI cuelga indefinidamente con `opcache.jit=tracing` + `opcache.enable_cli=1` + `extension=swoole.so`.  
@@ -119,6 +160,7 @@
 | 2026-07-03 | Simulador NLP y Delta Hash | Creación del panel de administración de datasets y validador en tiempo real de gramática VOSK. |
 | 2026-06-14 | Creación BD y Orquestador | Se creó `setup.sh` conectando a MCP, creando esquemas transaccionales, de auth e índices. |
 | 2026-08-15 | LAESH – Targeting, fixes CRÍTICO, deploy OCI | device-detect.js + targeting.css inyectados en 7 HTMLs; fieldset/legend Sexo (A5); focus-visible outline (C7); grid 25/75 contacto/mapa; mobile Celular+Sexo renglón único; rsync completo a OCI (uipv1a/ + laesh-web-assets-uipv1a/). Auditoría publicada: https://claude.ai/code/artifact/31b7d89b-dedd-4011-afef-d65f95b31d3f |
+| 2026-09-05 | LAESH – Portal 404 fix KVM2 (nginx SCRIPT_NAME + try_files + include order) | Causa raíz: `try_files $uri $uri/` generaba internal redirect via index directive → bypasseaba `@rc_php`/`@md_php`/`@adrc_php` → generic PHP handler sin SCRIPT_NAME correcto → Flight `dirname()` calculaba base `/rc` en vez de `/laesh/rc` → sin strip → 404. Fix: `try_files $uri @portal_php` (sin `$uri/`) + `include fastcgi_params` primero + `SCRIPT_NAME /laesh/{portal}/index.php` explícito. Verificado: ADMIN→RC 200 ✅, MEDICO→MD 200 ✅ (browser). Local: también verificado 200. |
 | 2026-08-30 | LAESH – Limpieza de assets huérfanos `laesh-web-assets-uipv1a/` | **CSS**: `aviso-privacidad.css`, `perfil-medico.css` eliminados. **JS**: `perfil-medico.js`, `docs.js` eliminados. **img/**: `25a.webp`, `mapa-laesh.webp` eliminados (ref. en `gestion_web.php:1134` actualizada a `01mapa-laesh.webp` antes del borrado). **img/cms/**: 7 JPEGs + 16 WebP pre-20260829 + `carousel-1-20260824-a8d752fe.webp` (confirmado huérfano en BD `web_contenidos`) eliminados. Quedan 19 hero-slides 20260829 (2.2 MB). `uipv1/`, `uipv2/`, `uipv0/` — ya movidos a `portafolio-dev-2026/blocklabgd/v1.2/mockup1.0/` (sesión anterior). `commons/seed_first_users.php` y `commons/swoole_server.php` — conservados intencionalmente. |
 | 2026-08-15 | LAESH – P-LAESH-04: auditoría 19/25 hallazgos | Grid 25/75 verificado (CSS correcto). 17 hallazgos corregidos esta sesión: P4 (cache versioning 7 HTMLs), P5 (autofocus), P2 (logo dims CLS), A7 (pause button carousel), A4 (h2 sr-only), A2 (aria-live), UX1+UX2 (tel+pattern), S2 (robots.txt), SEO1 (sitemap.xml), S3 (X-Frame-Options DENY), PWA2 (standalone), PWA3 (purpose any), C1 (dead code), C3 (fallback name), C4 (crypto.randomUUID), SEO3 (schema.org URI), 404 (página branded). Reporte: https://claude.ai/code/artifact/31b7d89b-dedd-4011-afef-d65f95b31d3f |
 | 2026-08-30 | LAESH – G-CMS-01: 14 cms/ huérfanos eliminados | 14 WebP no referenciados en `web_contenidos` eliminados (1.7 MB). img/cms/ queda con 5 slides activos (448 KB). |
