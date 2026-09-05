@@ -7,9 +7,9 @@
 | **Trajectory ID** | `cbb3065c-15ab-40b2-a551-df5474c119c2` |
 | **Cascade ID** | `33758958-5e2c-4311-ba38-6d3f32787e53` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 11608 |
+| **Total Steps** | 11735 |
 | **Started** | 30 Aug 2026, 9:34 pm |
-| **Completed** | 4 Sept 2026, 9:21 pm |
+| **Completed** | 5 Sept 2026, 12:01 am |
 
 ---
 
@@ -26095,6 +26095,2897 @@ I've discovered the issue is not just in the initial assignment. I need to handl
 <details>
 <summary>Metadata</summary>
 
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+Busca alguna conversacion donde se planteo el asignar dos domains a una misma IP de la oci VM, donde se tiene nginx nativo
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `gestion_web.php`
+**Language:** php
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<!DOCTYPE html>
+<?php
+/**
+ * admrc/views/gestion_web.php — Plates template (merge de gestion-web.html)
+ *
+ * Fuente HTML: website/uipv1/gestion-web.html  ← NUNCA BORRAR (R15.1)
+ * Merge iterativo: cuando gestion-web.html reciba cambios del cliente,
+ * propagar estructura/textos aquí y mantener lógica PHP.
+ *
+ * Variables disponibles (desde admrc/index.php):
+ *   $nombreAdmin  string  — Nombre del administrador logueado
+ *   $csrfToken    string  — Token CSRF para formularios POST (R14.12)
+ *   $contenidos   array   — [seccion][subseccion][clave] => valor (desde web_contenidos)
+ *   $lastPub      string  — Timestamp de última publicación
+ *
+ * Merge v2 — 2026-08-22:
+ *   + Slides 2-5 del carrusel hero
+ *   + Tagline navbar (hero/navbar)
+ *   + Quiénes Somos: resp. sanitario + filosofía
+ *   + Promociones: 6 días (lunes–sábado) + domingo alt
+ *   + Calidad: título y subtítulo de sección
+ *   + Ubicación: WhatsApp + embed de mapa
+ *   + Panel 7: Pie de Página (footer)
+ *   + Panel 8: SEO y Metadatos
+ *
+ * SSOT Refactor — 2026-08-22 (ver 07_seed_catalogs.sql):
+ *   • D-04 RESUELTO: WhatsApp, teléfono, email, horarios, dirección, CP,
+ *     responsable sanitario → configuraciones (singleton). Ya NO en web_contenidos.
+ *   • Panel 6 (Ubicación) = editor master de todos los singletons institucionales.
+ *   • Paneles 7 (Footer) y 8 (SEO): los datos de configuraciones son read-only en CMS.
+ *   • Promociones: titulo/precio/ayuno/tiempo eliminados del CMS; se usa estudio_clave
+ *     → JOIN estudios para obtener datos clínicos (SSOT desde tabla estudios).
+ *   • especialidades/catalogo/lista y /titulo eliminados (redundantes con tabla estudios).
+ *   • quienes-somos/resp: nombre y cédulas → configuraciones; bio permanece en web_contenidos.
+ * GAP-RC-01 (deferred): labadmin.php → backend persistence + localStorage sync.
+ * GAP-IMG (deferred): inputs type="file" sin name/POST — requieren ruta separada
+ *   POST /cms/upload con enctype=multipart/form-data (fuera del alcance del CMS de texto).
+ */
+
+// Helper: escape HTML seguro (alias de htmlspecialchars)
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Sept 2026, 10:42 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Sept 2026, 10:42 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Sept 2026, 10:42 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Sept 2026, 10:42 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Sept 2026, 10:42 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Sept 2026, 10:42 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `nginx-laesh-domain.conf`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# ==============================================================================
+# LAESH Bloc Digital — Nginx Site Config — MODO A (IP / Self-Signed)
+# Target: /etc/nginx/sites-available/laesh
+# server_name: _ (catch-all → responde a IP directa 83.136.219.193)
+# TLS: cert self-signed en /opt/laesh/https/
+# Sin HSTS (self-signed no es de confianza para el browser)
+# Uso: pruebas completas del stack antes de tener dominio/DNS
+# ==============================================================================
+
+# ── HTTP → HTTPS redirect ────────────────────────────────────────────────────
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    server_name _;
+    return 301 https://$host$request_uri;
+}
+
+# ── HTTPS (self-signed) ─────────────────────────────────────────────────────
+server {
+    listen 443 ssl http2 default_server;
+    listen [::]:443 ssl http2 default_server;
+    server_name _;
+
+    # ── TLS — self-signed ────────────────────────────────────────────────────
+    ssl_certificate     /opt/laesh/https/self-signed.crt;
+    ssl_certificate_key /opt/laesh/https/self-signed.key;
+
+    ssl_protocols             TLSv1.2 TLSv1.3;
+    ssl_ciphers               ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305;
+    ssl_prefer_server_ciphers off;
+    ssl_ecdh_curve            X25519:secp384r1;
+    ssl_session_cache         shared:SSL:10m;
+    ssl_session_timeout       1d;
+    ssl_session_tickets       off;
+
+    # ── Security headers ─────────────────────────────────────────────────────
+    # Sin HSTS en Modo A (self-signed no confiado por browsers)
+    add_header X-Frame-Options          "SAMEORIGIN"                        always;
+    add_header X-Content-Type-Options   "nosniff"                           always;
+    add_header Referrer-Policy          "strict-origin-when-cross-origin"   always;
+    add_header X-XSS-Protection         "1; mode=block"                     always;
+    add_header Permissions-Policy       "geolocation=(), camera=(), microphone=()" always;
+    # Correlación E2E: expone el Request ID al cliente (DevTools, Postman, soporte).
+    # Mismo valor que aparece en Nginx access log (rid=) y en app.log / sys_logs.
+    add_header X-Request-ID             $request_id                         always;
+    add_header Content-Security-Policy
+        "default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https://i.ytimg.com https://*.openstreetmap.org; frame-src 'self' https://www.youtube.com https://www.openstreetmap.org https://maps.google.com; connect-src 'self' wss:; object-src 'none'; base-uri 'self';"
+        always;
+
+    # ── Logging ──────────────────────────────────────────────────────────────
+    access_log /opt/laesh/logs/nginx-access.log main;
+    error_log  /opt/laesh/logs/nginx-error.log warn;
+
+    # ── Restricción de verbos HTTP (§1.3 Seguridad_Integral) ─────────────────
+    # Solo GET, POST y HEAD permitidos. Bloquea TRACE, OPTIONS, DELETE, PUT, etc.
+    if ($request_method !~ ^(GET|POST|HEAD)$) { return 405; }
+
+    # ── Rate limiting — protección login (§3.2 Seguridad_Integral) ───────────
+    # Definido en nginx-base.conf → limit_req_zone $binary_remote_addr zone=login:10m rate=5r/m
+    # Aplicado en location de login más abajo.
+
+    # ── PHP-FPM upstream (Unix socket) ───────────────────────────────────────
+    # Swoole bridge (loopback TCP)
+    set $swoole_up http://127.0.0.1:9502;
+
+    # ── WebSocket proxy (/ws → Swoole 9502) ──────────────────────────────────
+    location /ws {
+        proxy_pass $swoole_up;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade    $http_upgrade;
+        proxy_set_header Connection "Upgrade";
+        proxy_set_header Host       $host;
+        proxy_read_timeout  3600s;
+        proxy_send_timeout  3600s;
+    }
+
+    # ── Swoole status (solo loopback) ─────────────────────────────────────────
+    location /swoole-status {
+        proxy_pass $swoole_up/status;
+        allow 127.0.0.1;
+        deny all;
+    }
+
+    # ── PHP-FPM status (solo loopback) ────────────────────────────────────────
+    location = /fpm-status {
+        fastcgi_pass unix:/run/php/php8.3-fpm.sock;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+        allow 127.0.0.1;
+        deny all;
+    }
+
+    # ── Assets estáticos — prefijo laesh-web-assets-uipv1a ──────────────────
+    # ^~ previene que los regex ~* \.(css|js)$ y ~* \.(webp|...) intercepten
+    # estas rutas (esos regex no tienen root/alias → 404). Ver nginx-laesh-ip.conf.
+    location ^~ /laesh-web-assets-uipv1a/ {
+        alias /opt/laesh/assets/laesh-web-assets-uipv1a/;
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+        access_log off;
+    }
+
+    # ── Cache de assets estáticos por extensión (globales) ───────────────────
+    # No aplican a /laesh-web-assets-uipv1a/ (cubierto por ^~ anterior).
+    location ~* \.(webp|jpg|jpeg|png|gif|ico|svg|woff2|woff)$ {
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+        access_log off;
+    }
+    location ~* \.(css|js)$ {
+        expires 1M;
+        add_header Cache-Control "public, max-age=2592000";
+        access_log off;
+    }
+
+    # Path legado → 404 (para test bash/03 check)
+    location /laesh-web-assets/ { return 404; }
+
+    # ── solicitud_dac_impr.php — CSP frame-ancestors específica ──────────────
+    # Este archivo es la orden imprimible (DAC). Se abre en nueva pestaña.
+    # El PHP emite frame-ancestors 'none'; Nginx lo refuerza como capa extra.
+    # (Defense in depth — HTTP header gana sobre meta tag en browsers)
+    location = /laesh/rc/views/solicitud_dac_impr.php {
+        fastcgi_pass unix:/run/php/php8.3-fpm.sock;
+        fastcgi_param SCRIPT_FILENAME /opt/laesh/www/laesh-swbldi/rc/views/solicitud_dac_impr.php;
+        fastcgi_param SCRIPT_NAME     /laesh/rc/views/solicitud_dac_impr.php;
+        fastcgi_param DOCUMENT_ROOT   /opt/laesh/www/laesh-swbldi/rc;
+        fastcgi_param REQUEST_URI     $request_uri;
+        include fastcgi_params;
+        # CSP mínima: solo recursos propios — no frames externos en vista de impresión
+        add_header X-Frame-Options         "SAMEORIGIN"            always;
+        add_header Content-Security-Policy "default-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'; script-src 'self'; frame-ancestors 'self'" always;
+    }
+
+    # ── Redirect trailing-slash faltante ──────────────────────────────────────
+    location = /laesh/md   { return 301 /laesh/md/; }
+    location = /laesh/rc   { return 301 /laesh/rc/; }
+    location = /laesh/adrc { return 301 /laesh/adrc/; }
+
+    # ── PHP handlers específicos — ANTES del genérico ────────────────────────
+    # Por qué: `index index.php` genera internal-redirect (e.g. /laesh/ →
+    # /laesh/index.php) que cae en el regex genérico con $1=index.php →
+    # SCRIPT_FILENAME incorrecto (laesh-swbldi/index.php no existe).
+    # Los regex más específicos (más largo el prefix del pattern) se evalúan
+    # ANTES que el genérico cuando se declaran primero en el archivo.
+
+    # /laesh/index.php → website/index.php  (exacto: evita ambigüedad con alias)
+    location = /laesh/index.php {
+        fastcgi_pass  unix:/run/php/php8.3-fpm.sock;
+        fastcgi_param SCRIPT_FILENAME /opt/laesh/www/laesh-swbldi/website/index.php;
+        fastcgi_param DOCUMENT_ROOT   /opt/laesh/www/laesh-swbldi/website;
+        fastcgi_param REQUEST_URI     $request_uri;
+        include fastcgi_params;
+    }
+
+    # /laesh/login/*.php → website/login/ (URL ≠ dirname)
+    location ~ ^/laesh/login/(.+\.php)$ {
+        fastcgi_pass  unix:/run/php/php8.3-fpm.sock;
+        fastcgi_param SCRIPT_FILENAME /opt/laesh/www/laesh-swbldi/website/login/$1;
+        fastcgi_param DOCUMENT_ROOT   /opt/laesh/www/laesh-swbldi/website/login;
+        fastcgi_param REQUEST_URI     $request_uri;
+        include fastcgi_params;
+    }
+
+    # /laesh/adrc/*.php → admrc/ (URL usa "adrc", dirname es "admrc")
+    location ~ ^/laesh/adrc/(.+\.php)$ {
+        fastcgi_pass  unix:/run/php/php8.3-fpm.sock;
+        fastcgi_param SCRIPT_FILENAME /opt/laesh/www/laesh-swbldi/admrc/$1;
+        fastcgi_param DOCUMENT_ROOT   /opt/laesh/www/laesh-swbldi/admrc;
+        fastcgi_param REQUEST_URI     $request_uri;
+        include fastcgi_params;
+    }
+
+    # ── PHP handler genérico (md/, rc/ y otros portales URL=dirname) ──────────
+    location ~ ^/laesh/(.+\.php)$ {
+        fastcgi_pass  unix:/run/php/php8.3-fpm.sock;
+        fastcgi_param SCRIPT_FILENAME /opt/laesh/www/laesh-swbldi/$1;
+        fastcgi_param DOCUMENT_ROOT   /opt/laesh/www/laesh-swbldi;
+        fastcgi_param REQUEST_URI     $request_uri;
+        include fastcgi_params;
+    }
+
+    # ── Portal Médico (/laesh/md/) ────────────────────────────────────────────
+    location /laesh/md/ {
+        alias /opt/laesh/www/laesh-swbldi/md/;
+        index index.php;
+        try_files $uri $uri/ @md_php;
+    }
+    location @md_php {
+        fastcgi_pass  unix:/run/php/php8.3-fpm.sock;
+        fastcgi_param SCRIPT_FILENAME /opt/laesh/www/laesh-swbldi/md/index.php;
+        fastcgi_param DOCUMENT_ROOT   /opt/laesh/www/laesh-swbldi/md;
+        fastcgi_param REQUEST_URI     $request_uri;
+        include fastcgi_params;
+    }
+
+    # ── Portal Recepción (/laesh/rc/) ────────────────────────────────────────
+    location /laesh/rc/ {
+        alias /opt/laesh/www/laesh-swbldi/rc/;
+        index index.php;
+        try_files $uri $uri/ @rc_php;
+    }
+    location @rc_php {
+        fastcgi_pass  unix:/run/php/php8.3-fpm.sock;
+        fastcgi_param SCRIPT_FILENAME /opt/laesh/www/laesh-swbldi/rc/index.php;
+        fastcgi_param DOCUMENT_ROOT   /opt/laesh/www/laesh-swbldi/rc;
+        fastcgi_param REQUEST_URI     $request_uri;
+        include fastcgi_params;
+    }
+
+    # ── Portal Admin Recepción (/laesh/adrc/) ─────────────────────────────────
+    location /laesh/adrc/ {
+        alias /opt/laesh/www/laesh-swbldi/admrc/;
+        index index.php;
+        try_files $uri $uri/ @adrc_php;
+    }
+    location @adrc_php {
+        fastcgi_pass  unix:/run/php/php8.3-fpm.sock;
+        fastcgi_param SCRIPT_FILENAME /opt/laesh/www/laesh-swbldi/admrc/index.php;
+        fastcgi_param DOCUMENT_ROOT   /opt/laesh/www/laesh-swbldi/admrc;
+        fastcgi_param REQUEST_URI     $request_uri;
+        include fastcgi_params;
+    }
+
+    # ── Portal Login (/laesh/login/) ──────────────────────────────────────────
+    # Rate limit: max 5 req/min por IP → complementa throttling Delight Auth en BD
+    # PHP files son interceptados por el regex ^/laesh/login/(.+\.php)$ (más arriba).
+    # Este bloque maneja: index trigger (→ login.php) y assets estáticos de login/.
+    # try_files $uri/ no aplica con alias (bug nginx) → usar sólo $uri.
+    location /laesh/login/ {
+        limit_req zone=login burst=3 nodelay;
+        alias /opt/laesh/www/laesh-swbldi/website/login/;
+        index login.php;
+        try_files $uri =404;
+    }
+
+    # ── Website / Landing (/laesh/) ───────────────────────────────────────────
+    # try_files con alias: $uri/ no aplica correctamente (bug nginx alias+try_files).
+    # Patrón correcto: $uri @fallback — el index.php lo maneja @website_php siempre.
+    location /laesh/ {
+        alias /opt/laesh/www/laesh-swbldi/website/;
+        index index.php;
+        try_files $uri @website_php;
+    }
+    location @website_php {
+        fastcgi_pass  unix:/run/php/php8.3-fpm.sock;
+        fastcgi_param SCRIPT_FILENAME /opt/laesh/www/laesh-swbldi/website/index.php;
+        fastcgi_param DOCUMENT_ROOT   /opt/laesh/www/laesh-swbldi/website;
+        fastcgi_param REQUEST_URI     $request_uri;
+        include fastcgi_params;
+    }
+
+    # ── Uploads PDFs (protegidos) ─────────────────────────────────────────────
+    location /laesh-uploads/pdfs/ {
+        alias /opt/laesh/uploads/pdfs/;
+        # Solo acceso autenticado — controlado por PHP, no por Nginx
+        internal;
+    }
+
+    # ── Bloquear ejecución PHP en directorio de uploads (§1.3) ──────────────────
+    # Previene que un PDF malicioso enmascarado se ejecute como script PHP
+    location ~* /laesh-uploads/.*\.php$ { deny all; return 404; }
+
+    # Bloquear acceso directo a archivos sensibles
+    location ~ /\.(ht|git|env) { deny all; return 404; }
+    location ~ /commons/         { deny all; return 404; }
+}
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `nginx-laesh-ip.conf`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# ==============================================================================
+# LAESH Bloc Digital — Nginx Site Config — MODO A (IP / Self-Signed)
+# Target: /etc/nginx/sites-available/laesh
+# server_name: _ (catch-all → responde a IP directa 83.136.219.193)
+# TLS: cert self-signed en /opt/laesh/https/
+# Sin HSTS (self-signed no es de confianza para el browser)
+# Uso: pruebas completas del stack antes de tener dominio/DNS
+# ==============================================================================
+
+# ── HTTP → HTTPS redirect ────────────────────────────────────────────────────
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    server_name _;
+    return 301 https://$host$request_uri;
+}
+
+# ── HTTPS (self-signed) ─────────────────────────────────────────────────────
+server {
+    listen 443 ssl http2 default_server;
+    listen [::]:443 ssl http2 default_server;
+    server_name _;
+
+    # ── TLS — self-signed ────────────────────────────────────────────────────
+    ssl_certificate     /opt/laesh/https/self-signed.crt;
+    ssl_certificate_key /opt/laesh/https/self-signed.key;
+
+    ssl_protocols             TLSv1.2 TLSv1.3;
+    ssl_ciphers               ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305;
+    ssl_prefer_server_ciphers off;
+    ssl_ecdh_curve            X25519:secp384r1;
+    ssl_session_cache         shared:SSL:10m;
+    ssl_session_timeout       1d;
+    ssl_session_tickets       off;
+
+    # ── Security headers ─────────────────────────────────────────────────────
+    # Sin HSTS en Modo A (self-signed no confiado por browsers)
+    add_header X-Frame-Options          "SAMEORIGIN"                        always;
+    add_header X-Content-Type-Options   "nosniff"                           always;
+    add_header Referrer-Policy          "strict-origin-when-cross-origin"   always;
+    add_header X-XSS-Protection         "1; mode=block"                     always;
+    add_header Permissions-Policy       "geolocation=(), camera=(), microphone=()" always;
+    # Correlación E2E: expone el Request ID al cliente (DevTools, Postman, soporte).
+    # Mismo valor que aparece en Nginx access log (rid=) y en app.log / sys_logs.
+    add_header X-Request-ID             $request_id                         always;
+    add_header Content-Security-Policy
+        "default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https://i.ytimg.com https://*.openstreetmap.org; frame-src 'self' https://www.youtube.com https://www.openstreetmap.org https://maps.google.com; connect-src 'self' wss:; object-src 'none'; base-uri 'self';"
+        always;
+
+    # ── Logging ──────────────────────────────────────────────────────────────
+    access_log /opt/laesh/logs/nginx-access.log main;
+    error_log  /opt/laesh/logs/nginx-error.log warn;
+
+    # ── Restricción de verbos HTTP (§1.3 Seguridad_Integral) ─────────────────
+    # Solo GET, POST y HEAD permitidos. Bloquea TRACE, OPTIONS, DELETE, PUT, etc.
+    if ($request_method !~ ^(GET|POST|HEAD)$) { return 405; }
+
+    # ── Rate limiting — protección login (§3.2 Seguridad_Integral) ───────────
+    # Definido en nginx-base.conf → limit_req_zone $binary_remote_addr zone=login:10m rate=5r/m
+    # Aplicado en location de login más abajo.
+
+    # ── PHP-FPM upstream (Unix socket) ───────────────────────────────────────
+    # Swoole bridge (loopback TCP)
+    set $swoole_up http://127.0.0.1:9502;
+
+    # ── WebSocket proxy (/ws → Swoole 9502) ──────────────────────────────────
+    location /ws {
+        proxy_pass $swoole_up;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade    $http_upgrade;
+        proxy_set_header Connection "Upgrade";
+        proxy_set_header Host       $host;
+        proxy_read_timeout  3600s;
+        proxy_send_timeout  3600s;
+    }
+
+    # ── Swoole status (solo loopback) ─────────────────────────────────────────
+    location /swoole-status {
+        proxy_pass $swoole_up/status;
+        allow 127.0.0.1;
+        deny all;
+    }
+
+    # ── PHP-FPM status (solo loopback) ────────────────────────────────────────
+    location = /fpm-status {
+        fastcgi_pass unix:/run/php/php8.3-fpm.sock;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+        allow 127.0.0.1;
+        deny all;
+    }
+
+    # ── Assets estáticos — prefijo laesh-web-assets-uipv1a ──────────────────
+    # ^~ (priority prefix): previene que los regex globales ~* \.(css|js)$ y
+    # ~* \.(webp|...) intercepten estas rutas (esos regex carecen de root/alias
+    # y devuelven 404). Con ^~ nginx usa este bloque sin seguir evaluando regex.
+    location ^~ /laesh-web-assets-uipv1a/ {
+        alias /opt/laesh/assets/laesh-web-assets-uipv1a/;
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `nginx-setup-caelitandem.sh`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+#!/usr/bin/env bash
+# =============================================================================
+# nginx-setup-caelitandem.sh
+# Configura el vhost nginx para caelitandem.lat y www.caelitandem.lat
+# apuntando a /home/ubuntu/caelitandem-www-servicios/
+#
+# Target:  ubuntu@oci-vm  (ejecutar vía SSH o directamente en el VM)
+# Nginx:   1.18.0 (Ubuntu)
+# Autor:   Generado por Antigravity — 2026-05-22
+# =============================================================================
+
+set -euo pipefail
+
+# --- Colores para output ---
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+
+log()  { echo -e "${GREEN}[OK]${NC}  $*"; }
+warn() { echo -e "${YELLOW}[WARN]${NC} $*"; }
+err()  { echo -e "${RED}[ERR]${NC}  $*" >&2; exit 1; }
+
+# =============================================================================
+# VARIABLES — ajustar si cambia el entorno
+# =============================================================================
+DOMAIN="caelitandem.lat"
+WWW_DOMAIN="www.caelitandem.lat"
+WEBROOT="/home/ubuntu/caelitandem-www-servicios"
+VHOST_FILE="/etc/nginx/sites-available/${DOMAIN}"
+VHOST_LINK="/etc/nginx/sites-enabled/${DOMAIN}"
+HOME_DIR="/home/ubuntu"
+
+# =============================================================================
+# 1. Crear directorio raíz si no existe
+# =============================================================================
+echo ""
+echo "=== [1/5] Directorio raíz del sitio ==="
+if [ ! -d "${WEBROOT}" ]; then
+    mkdir -p "${WEBROOT}"
+    log "Directorio creado: ${WEBROOT}"
+else
+    warn "El directorio ya existe: ${WEBROOT}"
+fi
+
+# =============================================================================
+# 2. Permisos: nginx (www-data) necesita poder atravesar /home/ubuntu
+# =============================================================================
+echo ""
+echo "=== [2/5] Permisos de traversal para www-data ==="
+HOME_PERMS=$(stat -c "%a" "${HOME_DIR}")
+if [[ "${HOME_PERMS}" != *1 ]]; then
+    chmod o+x "${HOME_DIR}"
+    log "Permiso o+x aplicado en ${HOME_DIR} (era ${HOME_PERMS})"
+else
+    warn "El directorio ${HOME_DIR} ya tiene bit de ejecución para 'others' (${HOME_PERMS})"
+fi
+
+# =============================================================================
+# 3. Crear el vhost nginx
+# =============================================================================
+echo ""
+echo "=== [3/5] Virtual Host nginx ==="
+if [ -f "${VHOST_FILE}" ]; then
+    warn "El vhost ya existe en ${VHOST_FILE} — se sobreescribe."
+fi
+
+sudo tee "${VHOST_FILE}" > /dev/null << NGINXEOF
+server {
+    listen 80;
+    listen [::]:80;
+    server_name ${DOMAIN} ${WWW_DOMAIN};
+
+    root ${WEBROOT};
+    index index.html index.htm;
+
+    location / {
+        try_files \$uri \$uri/ =404;
+    }
+
+    # Security headers
+    add_header X-Content-Type-Options nosniff always;
+    add_header X-Frame-Options SAMEORIGIN always;
+    add_header X-XSS-Protection "1; mode=block" always;
+
+    # Gzip (text/html está habilitado por defecto en nginx — no se repite)
+    gzip on;
+    gzip_types text/css application/javascript image/svg+xml;
+    gzip_min_length 256;
+
+    # Cache de assets estáticos
+    location ~* \.(css|js|png|jpg|jpeg|gif|svg|ico|woff2?)$ {
+        expires 30d;
+        add_header Cache-Control "public, no-transform";
+    }
+
+    access_log /var/log/nginx/${DOMAIN}-access.log;
+    error_log  /var/log/nginx/${DOMAIN}-error.log;
+}
+NGINXEOF
+
+log "Vhost escrito en ${VHOST_FILE}"
+
+# =============================================================================
+# 4. Habilitar el site (symlink en sites-enabled)
+# =============================================================================
+echo ""
+echo "=== [4/5] Habilitando el site ==="
+if [ -L "${VHOST_LINK}" ]; then
+    warn "El symlink ya existe: ${VHOST_LINK}"
+else
+    sudo ln -sf "${VHOST_FILE}" "${VHOST_LINK}"
+    log "Symlink creado: ${VHOST_LINK} -> ${VHOST_FILE}"
+fi
+
+# =============================================================================
+# 5. Validar config y recargar nginx
+# =============================================================================
+echo ""
+echo "=== [5/5] Validación y recarga de nginx ==="
+sudo nginx -t || err "La configuración de nginx tiene errores. Abortando."
+sudo systemctl reload nginx
+log "nginx recargado sin errores."
+
+# =============================================================================
+# 6. Crear index.html de placeholder si el directorio está vacío
+# =============================================================================
+echo ""
+echo "=== [+] Página de placeholder ==="
+if [ ! -f "${WEBROOT}/index.html" ]; then
+    cat > "${WEBROOT}/index.html" << 'HTMLEOF'
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CaeliTandem — Próximamente</title>
+</head>
+<body>
+  <h1>CaeliTandem</h1>
+  <p>Sitio en construcción. Próximamente.</p>
+</body>
+</html>
+HTMLEOF
+    log "index.html placeholder creado en ${WEBROOT}"
+else
+    warn "index.html ya existe — no se sobreescribe."
+fi
+
+# =============================================================================
+# 7. Verificación funcional
+# =============================================================================
+echo ""
+echo "=== [✔] Verificación HTTP local ==="
+HTTP_APEX=$(curl -s -o /dev/null -w "%{http_code}" http://localhost/ -H "Host: ${DOMAIN}")
+HTTP_WWW=$( curl -s -o /dev/null -w "%{http_code}" http://localhost/ -H "Host: ${WWW_DOMAIN}")
+
+[ "${HTTP_APEX}" = "200" ] && log "http://${DOMAIN}  → HTTP ${HTTP_APEX}" \
+                           || warn "http://${DOMAIN}  → HTTP ${HTTP_APEX} (revisar)"
+
+[ "${HTTP_WWW}"  = "200" ] && log "http://${WWW_DOMAIN} → HTTP ${HTTP_WWW}" \
+                           || warn "http://${WWW_DOMAIN} → HTTP ${HTTP_WWW} (revisar)"
+
+echo ""
+echo "======================================="
+echo " CONFIGURACIÓN COMPLETADA"
+echo "======================================="
+echo " Dominio:   http://${DOMAIN}"
+echo "            http://${WWW_DOMAIN}"
+echo " Webroot:   ${WEBROOT}"
+echo " Vhost:     ${VHOST_FILE}"
+echo "---------------------------------------"
+echo " PENDIENTE (requiere DNS propagado):"
+echo "   A  ${DOMAIN}     → <IP pública OCI>"
+echo "   A  ${WWW_DOMAIN} → <IP pública OCI>"
+echo ""
+echo " OPCIONAL — HTTPS con Certbot:"
+echo "   sudo certbot --nginx -d ${DOMAIN} -d ${WWW_DOMAIN}"
+echo "======================================="
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Restoring_Nginx_HTTPS_Configuration_c44b0ab61092.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# Restoring Nginx HTTPS Configuration
+
+## Metadata
+
+| Field | Value |
+|-------|-------|
+| **Trajectory ID** | `7f4b1efd-3e61-4ca7-a2a6-149c8ab9874d` |
+| **Cascade ID** | `9df8240f-6a37-4147-b8a3-c44b0ab61092` |
+| **Type** | Agent Conversation |
+| **Total Steps** | 505 |
+| **Started** | 23 May 2026, 10:52 pm |
+| **Completed** | 28 June 2026, 12:30 pm |
+
+---
+
+## User Request
+
+https al sitio. 
+Con base a la conversacion anterior.
+Usa este acceso sftp://ubuntu@oci-vm/etc/nginx/
+Para analizar , determinar y corregir el poder habilitar http para todos los sitios web que despacha el nginx instalado y configurado; de talforma que todos los accesos seab via https.
+Usando claro Let's Encrypt; que como antecedente ya pasado como 8 meses aproximadamente se configuro para uno de los sitios, pero depronto dejo de funcionar y quedo solo disponible la via http.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `main.js`
+**Language:** javascript
+</details>
+
+---
+
+<details>
+<summary>Conversation History</summary>
+
+# Conversation History
+Here are the conversation IDs, titles, and summaries of your most recent 10 conversations, in reverse chronological order:
+
+<conversation_summaries>
+## Conversation ea5f8c74-55db-4706-b2c7-e3abd8e5448e: Agua V2 Project Documentation Finalization
+- Created: 2026-05-21T21:19:44Z
+- Last modified: 2026-05-24T04:42:32Z
+
+### USER Objective:
+Modernizing CaeliTandem Landing Page
+
+Objective: Modernize the CaeliTandem landing page with a SaaS-focused layout, refined information architecture, and modular UI consistency.
+
+Goals:
+1. Maintain a clean, professional aesthetic while updating the visual hierarchy to reflect current SaaS design standards.
+2. Integrate contact action buttons (Email/WhatsApp) into the fixed header with a compact, modern design.
+3. Consolidate core project information by reorganizing section layouts and streamlining descriptive content.
+4. Update regional infographics to reflect current coverage (Huajuapan and six key Mixteca municipalities) while preserving the original stylized vector-infographic design.
+5. Refactor technical elements and cleanup legacy styles to ensure responsiveness and improved maintainability.
+
+## Conversation af7746f8-b81d-460c-bf0e-b544940d5bde: Appending System Documentation Appendices
+- Created: 2026-05-22T19:50:44Z
+- Last modified: 2026-05-22T21:17:50Z
+
+### USER Objective:
+Appending System Documentation Appendices
+
+Main Objective:
+Update the "Entrega_Sistema_AyDV2_CM" documentation by appending the requested configuration and UI design specifications.
+
+Goals:
+1. Append the source code contents of `admin/operaciones/configuracion.php` to the project documentation to ensure transparency in system parameters.
+2. Integrate the "Paleta de Colores del Buscador de Usuarios" specifications from the `analisis_paridad_3hosts.md` file into the documentation as a formal technical appendix.
+3. Ensure the documentation reflects the current state of system operational controls and the visual feedback mechanisms implemented for contract management.
+
+## Conversation 71ba31b2-ab24-42c2-805e-0b5581ef1d7b: Configuring Nginx Web Root Access
+- Created: 2026-05-22T17:21:23Z
+- Last modified: 2026-05-22T17:38:39Z
+
+### USER Objective:
+Configuring Nginx Web Root Access
+
+Main Objective:
+Validate and establish remote access to the Nginx configuration directory on the oci-vm instance to manage the web application root.
+
+Goals:
+1. Verify connectivity and permissions for the specified VSFTP path: `vsftp://ubuntu@oci-vm/etc/nginx/`.
+2. Configure or confirm the Nginx web root settings to ensure the web application is served correctly from the intended directory.
+3. Establish a secure and efficient workflow for future Nginx configuration updates on the OCI VM.
+
+## Conversation 13a74b1c-4f0e-47a5-a1e1-389ca3638e08: Debugging Address Normalization Logic
+- Created: 2026-05-20T18:12:05Z
+- Last modified: 2026-05-22T17:11:45Z
+
+## Conversation d0c3def9-505b-40eb-89b8-44c404849d37: Installing Local AI Development Stack
+- Created: 2026-05-19T19:24:09Z
+- Last modified: 2026-05-20T04:35:13Z
+
+### USER Objective:
+Local AI Coding Environment Deployment
+
+Objective: Deploy a high-performance local AI agent environment on Ubuntu 22 for software development.
+Goals:
+1. Configure and optimize the local stack, integrating Ollama, OpenCode, and OpenChamber.
+2. Remediate dependency conflicts (Node.js versions) and resource constraints (VRAM limitations) to enable reliable agentic tool execution.
+3. Establish a library of specialized local LLMs (Qwen 2.5-Coder, DeepSeek, Codestral) and validate their code-generation and file-editing capabilities.
+4. Troubleshoot and bridge the integration gaps between model tool-calling schemas and the OpenCode/VS Code agentic interface.
+
+## Conversation 1846bc62-6c4c-4ba0-960b-214ce8b4778c: Upgrading Antigravity to 2.0.0
+- Created: 2026-05-20T03:10:58Z
+- Last modified: 2026-05-20T03:16:22Z
+
+### USER Objective:
+Upgrading Antigravity to 2.0.0
+Investigate the upgrade path and procedure for Google Antigravity from version 1.23.2 to the latest version 2.0.0, including identifying its installation details and compiling an actionable migration guide.
+
+## Conversation b3356b06-a750-4cf4-833d-b711001fa206: Finalizing Documentation and Sync
+- Created: 2026-05-19T19:05:20Z
+- Last modified: 2026-05-19T19:07:05Z
+
+### USER Objective:
+Finalizing Documentation and Sync
+
+Main Objective:
+Finalize the environment synchronization and documentation updates for the Agua V2 project to ensure repository parity and clean tracking.
+
+Goals:
+1. Update GEMINI.md and associated documentation to reflect the latest project state and recent pipeline remediations.
+2. Stage and commit all pending changes, including repository cleanups and synchronization script updates.
+3. Push all committed changes to the remote branch to maintain version control consistency and ensure production-ready synchronization.
+
+## Conversation ac94919e-b65b-4f3f-afeb-60391e47c9d0: Debugging Financial Data Discrepancy
+- Created: 2026-05-19T17:51:41Z
+- Last modified: 2026-05-19T18:56:20Z
+
+### USER Objective:
+Resolving Data Sync Truncation
+
+Objective: Audit and remediate silent data loss in the Host B to Host A pipeline caused by MySQL bulk insert truncations.
+
+Goals:
+1. Identify all contracts impacted by the 1MB `max_allowed_packet` truncation issue by comparing source database counts with the generated SQL dump.
+2. Generate a comprehensive report listing affected contracts, including user names, addresses, and current status, to quantify the migration gap.
+3. Apply the `max_allowed_packet` and `net_buffer_length` fix to the synchronization script and harden the pipeline with post-dump integrity checks.
+4. Execute a full re-synchronization to restore complete data parity across Hosts A, B, and C.
+
+## Conversation 52000199-3794-4c49-b9d4-373024a9f0b1: Ubuntu System Cleanup Optimization
+- Created: 2026-05-16T23:58:57Z
+- Last modified: 2026-05-19T14:46:52Z
+
+### USER Objective:
+Configuring Local AI Coding Environment
+
+USER Objective:
+Deploy and optimize a private, hardware-accelerated local AI development environment on Ubuntu 22, integrating Ollama-backed models with the Google Antigravity IDE for efficient code completion and architectural analysis.
+
+Goals:
+1. Complete the installation and verification of the localized AI model stack (Qwen 2.5 Coder, DeepSeek R1, Gemma 4) within the system's VRAM/RAM constraints.
+2. Finalize the integration between Ollama and the IDE (Google Antigravity) by correctly configuring API endpoints and model settings.
+3. Resolve technical connectivity errors (e.g., proposed API restrictions) to enable seamless, private AI code assistance.
+4. Validate system readiness through performance benchmarks and functional coding tests to ensure a stable, production-ready development workflow.
+
+## Conversation 34e6f5d2-d637-4436-bb0e-5708675a2807: Optimizing Listados Menu Layout
+- Created: 2026-05-18T18:45:01Z
+- Last modified: 2026-05-18T21:59:28Z
+
+### USER Objective:
+Stabilizing Agua V2 Production Environment
+
+Objective: Stabilize the Agua V2 Windows production environment on Host C by automating service security and ensuring data integrity across the database pipeline.
+
+Goals:
+1. Harden desktop security by implementing strict NTFS controls for critical management shortcuts, migrating them to a protected subdirectory to prevent accidental deletion.
+2. Finalize and validate the Full-Pipeline-Sync migration, ensuring data parity and structural consistency between Hosts A, B, and C.
+3. Optimize the infrastructure startup scripts to correctly respect UPS monitoring states, preventing false service alerts.
+4. Execute final sanitization and parity checks on the 'awa' database, verifying successful split of historic and active ledger data.
+
+</conversation_summaries>
+
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 23 May 2026, 10:52 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Prioritizing HTTPS Configuration**
+
+I'm focusing on enabling HTTPS across all sites on the `oci-vm` using Let's Encrypt, aiming for a full HTTP-to-HTTPS redirect. The main hurdle is the existing configuration from eight months ago, which stopped working. I need to get Let's Encrypt functioning again and ensure it applies universally, considering existing access paths.
+
+
+
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/opt/lampp/htdocs/agua/.agents/rules`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.230382433s
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>Directory: `rules` (12 items)</summary>
+
+**Path:** `opt/lampp/htdocs/agua/.agents/rules`
+
+| Name | Type | Size |
+|------|------|------|
+| `01-infra-hosts.md` | File | 3509 bytes |
+| `02-reglas-negocio.md` | File | 16413 bytes |
+| `03-sincronizacion-b-a.md` | File | 4854 bytes |
+| `04-arquitectura-mvc.md` | File | 2764 bytes |
+| `05-despliegue-host-c.md` | File | 11651 bytes |
+| `06-accesos-rutas.md` | File | 3353 bytes |
+| `07-git-workflow.md` | File | 6347 bytes |
+| `08-integridad-ground-truth.md` | File | 3758 bytes |
+| `09-sesion-summary.md` | File | 4941 bytes |
+| `10-limitantes-webapp.md` | File | 11832 bytes |
+| `11-estandares-codigo.md` | File | 3152 bytes |
+| `12-estandar-conexion-mysqli.md` | File | 4979 bytes |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `01-infra-hosts.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# Regla 01: Infraestructura y Hosts (A, B, C)
+
+Esta regla define los entornos operativos de **Agua** y el acceso mandatorio por Host.
+
+## 🏢 Definición de Hosts
+
+> [!IMPORTANT]
+> **SINGLE SOURCE OF TRUTH (SSOT):**
+> Las IPs, puertos, usuarios y contraseñas para los 3 Hosts se gestionan exclusivamente en `/home/carlos/GitHub/agua_chatledger/.mcp.json`. Esta es la **única fuente de verdad**; nunca uses IPs "hardcodeadas".
+
+| Host | OS | Propósito | Rama Git | MCP Access | IP:Puerto |
+|:---:|---|---|---|---|:---:|
+| **A** | Ubuntu 22 / XAMPP Linux | TRANSICIÓN (V1+) — Bridge MySQL | `main` | `bdawahost-a` | Ver `.mcp.json` |
+| **B** | Windows 7 / MySQL legado | Espejo Producción — Datos Frescos | N/A | `bdawahost-b` | Ver `.mcp.json` |
+| **C** | Windows 10 / XAMPP 7.4.33 Portable | Target V2 FINAL — MariaDB (Split Tablas) | `feature/upgrade-v2-win-xampp` | `bdawahost-c` | Ver `.mcp.json` |
+
+
+### Stack Host C (detalle)
+| Componente | Versión |
+| :--- | :--- |
+| Paquete | `xampp-portable-windows-x64-7.4.33-0` |
+| Apache | 2.4.54 |
+| MariaDB | 10.4.27 |
+| PHP | 7.4.33 |
+| phpMyAdmin | 5.2.0 |
+| Directorio XAMPP | `F:\xampp` |
+| Webapp | `F:\xampp\htdocs\agua` |
+
+## 📐 Jerarquía y Mandatos:
+1.  **Host A de Transición**: Es la **Guía Estructural Oficial (MySQL)**. Actúa como puente para transformar datos de B hacia el modelo V2. Mantiene esquema de tabla única para compatibilidad bridge.
+2.  **Host B de Datos**: Únicamente se utiliza como fuente de "Datos Frescos de Negocio" para alimentar A. Solo lectura — prohibido cambios estructurales.
+3.  **Host C Target**: Entorno para la optimización definitiva de `ligacargos` (split histórico) y uso del stack MariaDB V2. Todo cambio vía scripts versionados + rollback.
+
+---
+**Acceso Técnico**:
+- MCP `bdawahost-a` para consultas y ejecuciones en el ambiente de desarrollo.
+- MCP `bdawahost-b` exclusivamente para extracción de datos operativos (pagos, cargos).
+- MCP `bdawahost-c` para deploy y validación de scripts en Host C (Windows 10).
+
+### 📂 Rutas de Logs Host C
+| Archivo | Ruta | Propósito |
+|:---|:---|:---|
+| Slow Query Log | `F:/aguav2/logs/mysql-slow.log` | Queries > 1s + queries sin índice + SPs |
+| Error Log | `F:/aguav2/logs/mysql_error.log` | Errores y warnings de MariaDB |
+| General Log | `F:/aguav2/logs/mysql-general.log` | Todas las queries (OFF por defecto) |
+| PHP Error Log | `F:/aguav2/logs/php_error.log` | Errores PHP de la webapp |
+| PID File | `F:/aguav2/logs/mysql.pid` | PID del proceso MariaDB |
+
+- **Config MariaDB**: [optimizacion/my.ini](file:///opt/lampp/htdocs/agua/docs-dev/migration-aguav2/host-c-setup/optimizacion/my.ini)
+- **Config PHP**: [optimizacion/php.ini](file:///opt/lampp/htdocs/agua/docs-dev/migration-aguav2/host-c-setup/optimizacion/php.ini)
+- **Config Apache**: [optimizacion/httpd.conf](file:///opt/lampp/htdocs/agua/docs-dev/migration-aguav2/host-c-setup/optimizacion/httpd.conf)
+
+---
+
+## 🔌 Herramienta Preferida por Tipo de Operación (Agentes IA)
+
+| Operación | Herramienta | Razón |
+|:---|:---:|:---|
+| Diagnóstico, validación, queries ad-hoc, comparación de datos | **MCP** (`bdawahost-c`) | Resultados en contexto, paralelo, sin parseo de terminal |
+| Scripts `.sql` masivos, dumps, carga de migraciones grandes | **CLI MySQL** | Más eficiente para operaciones de volumen |
+
+**Regla**: Usar MCP para todo trabajo de diagnóstico e inspección en Host C. Recurrir a CLI MySQL solo para scripts masivos o cuando el MCP no esté disponible.
+
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `06-accesos-rutas.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# Regla 06: Accesos, Rutas y Herramientas (A/B/C)
+
+Esta regla consolida los accesos a los tres ambientes de **Agua** y define cuándo usar MCP vs CLI MySQL.
+
+---
+
+## Host A — Linux XAMPP (Desarrollo / Próximo Producción)
+
+| Recurso | Ruta / Credencial |
+|---------|-------------------|
+| **XAMPP Home** | `/opt/lampp` |
+| **PHP Bin** | `/opt/lampp/bin/php` |
+| **MySQL Bin** | `/opt/lampp/bin/mysql` |
+| **Source Code** | `/opt/lampp/htdocs/agua` |
+| **Web URL** | `http://localhost/agua/login/index2.php` |
+| **Web User / Pass** | `nancy` / `260180` |
+| **MySQL** | `127.0.0.1:3306` · user `root` · pass `comite_2026` · db `awa` |
+| **MCP** | `bdawahost-a` |
+
+## Host B — Windows 7 MySQL legado (Solo lectura — datos frescos)
+
+| Recurso | Valor |
+|---------|-------|
+| **MySQL** | `192.168.1.81:3306` · user `root` · pass `sdrastbuy` · db `awa` |
+| **MCP** | `bdawahost-b` |
+
+## Host C — Windows 10 XAMPP Portable 7.4.33 (V2 MariaDB)
+
+| Recurso | Valor |
+|---------|-------|
+| **Web URL** | `http://192.168.1.84:7001/agua` |
+| **Apache** | puerto `7001` |
+| **MariaDB** | `192.168.1.84:7002` · user `root` · pass `comite_2026` · db `awa` |
+| **MCP** | `bdawahost-c` |
+| **XAMPP dir** | `F:\xampp` · Webapp: `F:\xampp\htdocs\agua` |
+
+> **Puerto no estándar (7002):** El MCP de Host C requiere el patch de `entrypoint-patch.sh`
+> aplicado al contenedor Docker `context7-mcp-mysql`. Sin el patch, `@f4ww4z/mcp-mysql-server`
+> ignora el puerto de la URL y falla con ETIMEDOUT.
+> Ver: `docs-dev/ga-cl-ia/issue-mcp-mysql-port-no-estandar.md`
+
+---
+
+## Arquitectura MCP — Docker context7-mcp-mysql
+
+Los tres MCPs comparten **un solo contenedor Docker** con patches aplicados al arrancar:
+
+```bash
+# Estructura de cada MCP en .mcp.json
+docker exec -i context7-mcp-mysql npx -y @f4ww4z/mcp-mysql-server mysql://user:pass@host:PORT/db
+```
+
+- Contenedor: `context7-mcp-mysql` (imagen `mcp/context7:latest`)
+- Compose: `docs-dev/ga-cl-ia/docker-compose.yml`
+- Patch: `docs-dev/ga-cl-ia/entrypoint-patch.sh` (soporte puerto no estándar — idempotente)
+- Config activa: `.mcp.json` (symlink → `.chatledger/.mcp.json`)
+
+> **NUNCA eliminar `.mcp.json`** ni reemplazar `docker exec` por `npx` directo.
+> `mcp_config.json` en `.agents/` es la fuente de verdad de referencia — `.mcp.json` debe ser idéntico.
+
+---
+
+## Regla: MCP vs CLI MySQL
+
+| Operación | Herramienta | Razón |
+|:---|:---:|:---|
+| Diagnóstico, validación, queries ad-hoc, comparación entre hosts | **MCP** | Resultados en contexto, ejecutable en paralelo, sin parseo de terminal |
+| Scripts con `DELIMITER`, stored procedures, triggers | **CLI MySQL** | MCP no soporta `DELIMITER` |
+| Dumps, cargas masivas, migraciones de volumen | **CLI MySQL** | Más eficiente para operaciones de volumen |
+| MCP no disponible o contenedor Docker caído | **CLI MySQL** | Fallback |
+
+**Regla general**: Usar MCP para todo trabajo de diagnóstico e inspección. Recurrir a CLI solo cuando la operación lo requiera explícitamente.
+
+CLI Host A: `/opt/lampp/bin/mysql -u root -pcomite_2026 awa`
+CLI Host C (desde Host A): `/opt/lampp/bin/mysql -h 192.168.1.84 -P 7002 -u root -pcomite_2026 awa`
+
+---
+**Nota**: Cualquier script de automatización que requiera ejecución directa de PHP o MySQL debe referenciar los binarios en `/opt/lampp/bin/` para compatibilidad con el stack legado.
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 23 May 2026, 10:52 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 23 May 2026, 10:52 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 23 May 2026, 10:52 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 23 May 2026, 10:55 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 23 May 2026, 10:55 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 23 May 2026, 10:55 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 23 May 2026, 10:56 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 23 May 2026, 10:56 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 23 May 2026, 10:56 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 23 May 2026, 10:56 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Configurations**
+
+I'm now diving into the configurations. I've noticed a commented-out block for `oken8n.caelitandem.lat` in the `default` file, added by Certbot, which is interesting since a dedicated file for that domain also exists. It's time to figure out the significance of this.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.307457011s
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 23 May 2026, 10:56 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `command_status`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Process Monitor
+
+**Status:** Completed
+**Created:** 23 May 2026, 10:56 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 23 May 2026, 10:56 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing DNS & Nginx**
+
+Okay, so I've confirmed my initial suspicion. `caelitandem.lat` is missing the crucial DNS records. This means Let's Encrypt validation will, as predicted, fail. Interestingly, that leaves `www.caelitandem.lat` as the only feasible route for securing an SSL certificate. I am now shifting my focus to the Nginx configuration.
+
+
+**Refining Nginx Configuration**
+
+I'm now zeroing in on the Nginx setup, specifically the `caelitandem.lat` configuration file. My plan involves acquiring a certificate for `www.caelitandem.lat` and redirecting HTTP to HTTPS. Given that the apex domain doesn't resolve to this server, I have to ensure any traffic eventually gets redirected to HTTPS. I'm also reviewing the configurations for `kanboard.caelitandem.lat` and `n8n.caelitandem.lat`, which already have HTTP to HTTPS redirects, which simplifies the overall task.
+
+
+**Confirming Site Configurations**
+
+I've just confirmed my suspicion that only `caelitandem.lat` is served via HTTP without an HTTPS redirect. My thought process quickly moved from the `sites-enabled` symlinks to the `default` file to verify there wasn't an unexpected configuration. Now I'm focusing on the user's requirement to enable HTTPS across all sites, which has re-aligned with my analysis of the Nginx config.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.770518108s
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 23 May 2026, 10:57 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 23 May 2026, 10:57 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `command_status`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Process Monitor
+
+**Status:** Completed
+**Created:** 23 May 2026, 10:57 pm
+
+---
+
+## Agent Response
+
+### Actions
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Restoring_Nginx_HTTPS_Configuration_c44b0ab61092.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L639-949)</summary>
+
+**Path:** `Unknown file`
+
+```
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Configurations**
+
+I'm now diving into the configurations. I've noticed a commented-out block for `oken8n.caelitandem.lat` in the `default` file, added by Certbot, which is interesting since a dedicated file for that domain also exists. It's time to figure out the significance of this.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.307457011s
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 23 May 2026, 10:56 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `command_status`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Process Monitor
+
+**Status:** Completed
+**Created:** 23 May 2026, 10:56 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 23 May 2026, 10:56 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing DNS & Nginx**
+
+Okay, so I've confirmed my initial suspicion. `caelitandem.lat` is missing the crucial DNS records. This means Let's Encrypt validation will, as predicted, fail. Interestingly, that leaves `www.caelitandem.lat` as the only feasible route for securing an SSL certificate. I am now shifting my focus to the Nginx configuration.
+
+
+**Refining Nginx Configuration**
+
+I'm now zeroing in on the Nginx setup, specifically the `caelitandem.lat` configuration file. My plan involves acquiring a certificate for `www.caelitandem.lat` and redirecting HTTP to HTTPS. Given that the apex domain doesn't resolve to this server, I have to ensure any traffic eventually gets redirected to HTTPS. I'm also reviewing the configurations for `kanboard.caelitandem.lat` and `n8n.caelitandem.lat`, which already have HTTP to HTTPS redirects, which simplifies the overall task.
+
+
+**Confirming Site Configurations**
+
+I've just confirmed my suspicion that only `caelitandem.lat` is served via HTTP without an HTTPS redirect. My thought process quickly moved from the `sites-enabled` symlinks to the `default` file to verify there wasn't an unexpected configuration. Now I'm focusing on the user's requirement to enable HTTPS across all sites, which has re-aligned with my analysis of the Nginx config.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.770518108s
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 23 May 2026, 10:57 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 23 May 2026, 10:57 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `command_status`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Process Monitor
+
+**Status:** Completed
+**Created:** 23 May 2026, 10:57 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 23 May 2026, 10:57 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Scrutinizing the Configuration**
+
+I'm currently meticulously examining the nginx configuration, specifically focusing on the port 80 block. I've noted the redirection logic for the `www.caelitandem.lat` domain. I'm double-checking the effectiveness of this implementation and its interaction with potential Certbot management. My goal is to confirm this setup is optimal.
+
+
+**Refining the Redirection Logic**
+
+I've pinpointed a crucial flaw: the current configuration returns a 404 for HTTP access to `caelitandem.lat` (no `www.`) due to the conditional mismatch. This could become problematic if an A record for `caelitandem.lat` is added later, or if someone accesses the IP or a CNAME directly. I'm now adjusting the redirect block to ensure `http://caelitandem.lat` correctly redirects to `https://www.caelitandem.lat$request_uri`, proactively addressing this potential issue. The SSL certificate requirements for Let's Encrypt are also now understood.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.625518850s
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 23 May 2026, 10:57 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Reviewing HTTPS Redirection**
+
+I've confirmed the initial success and now I'm shifting focus to optimizing the HTTP-to-HTTPS redirect configuration within `/etc/nginx/sites-available/caelitandem.lat`. Specifically, I'm reviewing the existing code block, aiming to ensure it's the most efficient. I'm taking another look at the specific lines.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.409575885s
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 23 May 2026, 10:57 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 23 May 2026, 10:57 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.5 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 23 May 2026, 10:57 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Configuration Details**
+
+Okay, I've got a good grasp of the enabled configuration files. Specifically, `caelitandem.lat` has both SSL (443) and HTTP (80) enabled, as does `n8n.caelitandem.lat`. `kanboard.caelitandem.lat`, on the other hand, only has SSL (443) activated. I'm now cross-referencing this against the security protocols.
+
+
+**Verifying HTTP Redirects**
+
+I've confirmed HTTP-to-HTTPS redirects for `kanboard.caelitandem.lat`, `n8n.caelitandem.lat`, and `caelitandem.lat`. Now I'm reviewing `/etc/nginx/sites-available/caelitandem.lat` to see how it's currently implemented, and it looks like I need to implement a redirect there. I'm going to write a script that makes sure all HTTP traffic is redirected correctly.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Issues_Resueltos_HttpsNginx_9df8240f.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# Issues Resueltos — Sesión 2026-05-23
+**Conversación:** `9df8240f-6a37-4147-b8a3-c44b0ab61092`
+**Rama:** `main`
+
+---
+
+## Issue 1 — Habilitación HTTPS y Let's Encrypt en oci-vm
+
+### Scope Funcional
+- **Antes:** El dominio principal `www.caelitandem.lat` no contaba con certificado SSL válido / HTTPS activo, sirviendo contenido únicamente a través de HTTP (puerto 80) debido a la expiración/pérdida del certificado anterior. Las subaplicaciones (kanboard, n8n) sí contaban con redirección segura HTTPS forzada, pero el landing principal estaba desprotegido.
+- **Ahora:** Se solicitó y configuró exitosamente un nuevo certificado SSL con Let's Encrypt para `www.caelitandem.lat`. Se modificó la configuración de Nginx para redirigir todo tráfico HTTP (puerto 80) de forma incondicional a HTTPS (puerto 443) con el subdominio `www.caelitandem.lat` para evitar advertencias de seguridad, dado que el dominio raíz (apex `caelitandem.lat`) no tiene registros A DNS configurados hacia el servidor en la actualidad.
+- **Beneficio:** Tráfico web 100% cifrado para todos los sitios activos de la máquina virtual OCI, con renovación automática blindada y verificada mediante systemd timers.
+
+### Scope Técnico
+- **Certbot:** Solicitud exitosa de certificado con el plugin de Nginx para `www.caelitandem.lat`.
+- **Configuración Nginx:** Actualización del bloque de servidor en `/etc/nginx/sites-available/caelitandem.lat` con la redirección limpia permanente:
+  ```nginx
+  server {
+      listen 80;
+      listen [::]:80;
+      server_name caelitandem.lat www.caelitandem.lat;
+      return 301 https://www.caelitandem.lat$request_uri;
+  }
+  ```
+- **Certbot Timers:** Verificación de `certbot.timer` ejecutándose en segundo plano para renovar automáticamente el certificado antes de su expiración (89 días restantes).
+
+---
+
+## Issue 2 — Script y Tarea Programada (Cron) para Auto-Renovación de Certificados
+
+### Scope Funcional
+- **Antes:** Aunque Certbot implementa un timer automático por defecto, no existía un script de respaldo y auditoría local para registrar los intentos de renovación, forzar la recarga de Nginx tras cambios, ni un log unificado legible para el operador.
+- **Ahora:** Se creó un script en bash robusto de renovación automatizada y un cron job a nivel sistema (`/etc/cron.d/certbot-custom`) para ejecutar de forma recurrente las comprobaciones, renovar si restan menos de 30 días de validez, registrar logs históricos y recargar Nginx únicamente si hubo cambios exitosos.
+- **Beneficio:** Blindaje de alta disponibilidad en el ciclo de vida de los certificados SSL sin depender exclusivamente de timers de systemd, con logs listos para auditorías en `/home/ubuntu/logs/certbot-renew.log`.
+
+### Scope Técnico
+- **Ruta del Script:** `/home/ubuntu/scripts/renew-certs.sh` (ejecutable, propiedad de `ubuntu:ubuntu`).
+  * Ejecuta `certbot renew --post-hook "systemctl reload nginx"` redireccionando el stdout y stderr a `/home/ubuntu/logs/certbot-renew.log`.
+- **Ruta de Cron:** `/etc/cron.d/certbot-custom` (propiedad de `root:root`, permisos `644`).
+  * Configuración cron: `0 3 * * * root /home/ubuntu/scripts/renew-certs.sh >/dev/null 2>&1` (ejecuta diariamente a las 03:00 AM como `root`).
+
+---
+
+## Runbook — Cambios en `.agents/`
+No se requirieron cambios de reglas. Se registró el issue en el log de control de tareas `pending.md`.
+
+---
+
+## Archivos Modificados
+
+| Archivo | Repo | Tipo de cambio |
+|:---|:---:|:---|
+| `/etc/nginx/sites-available/caelitandem.lat` | N/A (OCI VM Server Config) | Modificación y activación de bloque de escucha SSL + Redirección 301 limpia. |
+| `/home/ubuntu/scripts/renew-certs.sh` | N/A (OCI VM Server Script) | Creación de script de renovación y logging. |
+| `/etc/cron.d/certbot-custom` | N/A (OCI VM Server Config) | Creación de tarea programada diaria (3:00 AM). |
+| `.agents/pending.md` | `agua_chatledger` / `agua` | Registro en tabla de resueltos recientemente. |
+
+---
+
+## Verificación
+
+| Check | Resultado |
+|:---|:---:|
+| `sudo nginx -t` en oci-vm | ✅ Exitoso |
+| `curl -I http://www.caelitandem.lat` | ✅ Redirige 301 a https://www.caelitandem.lat/ |
+| `curl -I https://www.caelitandem.lat` | ✅ Responde HTTP 200 OK |
+| `sudo certbot certificates` | ✅ Certificados válidos (www, kanboard, n8n, oken8n) |
+| `systemctl status certbot.timer` | ✅ Activo y programado |
+| Ejecución de `/home/ubuntu/scripts/renew-certs.sh` | ✅ Ejecutado manualmente con éxito (log generado correctamente) |
+| `/etc/cron.d/certbot-custom` | ✅ Creado con permisos `644` y sintaxis válida de cron |
+
+### Pruebas manuales pendientes
+Ninguna. Todas las validaciones de red locales y remotas fueron confirmadas y funcionan correctamente.
+
+---
+*Generado por Antigravity — 2026-05-23*
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Discovering Exact Evidence**
+
+I've located the original conversation and relevant documents! Specifically, I've pinpointed the exact reference conversation. Its Session/Trajectory ID is `9df8240f-6a37-4147-b8a3-c44b0ab61092` from May 23rd. This is a significant breakthrough!
+
+
+**Analyzing Server Architecture**
+
+I'm now focused on the server architecture, specifically the Nginx configuration. I've located the conversation regarding Nginx root access: `71ba31b2-ab24-42c2-805e-0b5581ef1d7b`, from May 22nd, 2026. The setup involves an OCI Virtual Machine instance (`ubuntu@oci-vm`) running native Nginx on Ubuntu 22.04 LTS. I am working on how multiple domains/subdomains are hosted on the same IP address with this configuration. I'm noting distinct vhost configurations in `/etc/nginx/sites-available/`.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.135917399s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
+
+**Status:** Completed
+**Created:** 4 Sept 2026, 10:43 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
+
+**Status:** Completed
+**Created:** 4 Sept 2026, 10:44 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+pues ya tengo un dominio actual ya apuntando a la ip de la oci vm que es www.caelitandem.lat y esta viva , ahora quiero mapear laesh.mx a la misma IP, que debemos hacer
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `gestion_web.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing the Domain Mappings**
+
+I'm currently dissecting the user's request. They have an existing domain, `www.caelitandem.lat`, already pointing to an OCI VM's IP, which is active. My immediate focus is determining the precise steps needed to successfully map `laesh.mx` to this *same* IP address. Key considerations include the DNS configuration and any potential conflicts.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.019244219s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+dame la <IP_PUBLICA_OCI_VM>
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `gestion_web.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Sept 2026, 10:52 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Sept 2026, 10:52 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Sept 2026, 10:52 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
+
+**Status:** Completed
+**Created:** 4 Sept 2026, 10:54 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+quedo asi en hostinger:
+	
+CNAME	
+www	
+0	
+laesh.mx	
+300	
+
+
+A	
+@	
+0	
+137.131.58.161	
+14400	
+
+
+A	
+@	
+0	
+2.57.91.91	
+14400	
+
+
+_
+creo 2.57.91.91 esta mal, la elimino ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `gestion_web.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+/myOADB/sudo nginx -t
+sudo systemctl reload nginx
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: [emerg] open() "/opt/laesh/logs/nginx-laesh-access.log" failed (2: No such file or directory)
+nginx: configuration file /etc/nginx/nginx.conf test failed
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `gestion_web.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+https://laesh.mx/
+502 Bad Gateway
+nginx/1.18.0 (Ubuntu)
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `gestion_web.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Investigating the Gateway**
+
+I'm now diving into the `502 Bad Gateway` error. It looks like Nginx is the culprit, unable to connect to the upstream backend. That could be PHP-FPM, Swoole, or FastCGI, but something is blocking the connection. I'll need to figure out why the upstream is refusing or unreachable.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.000851239s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+https://laesh.mx/
+File not found.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `gestion_web.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing the Error Message**
+
+I'm now zeroing in on the "File not found." message. My understanding is that this error, punctuated with a period, stems directly from PHP-FPM when it attempts execution but fails to locate the file specified via the `SCRIPT_FILENAME` directive. The key question now becomes, what triggers PHP-FPM's inability to find this specific file?
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.001739361s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+lo quiero dirigir a este dir sftp://ubuntu@oci-vm/home/ubuntu/n8n-php/mvps/whatzmeapi_tests/
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `gestion_web.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing the Requirement**
+
+Okay, I'm working on understanding the user's intent. My current focus is to decode what they are trying to achieve with the provided directory structure and domain. It seems like they want a specific subdomain to be directly linked to a particular location, but I'm trying to ensure I have the precise path mapped in my understanding. I'm focusing on the user's intended target directory for the domain.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.001171853s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+realizalo tu
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `gestion_web.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Sept 2026, 11:16 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Confirming Initial Setup**
+
+The SSH connection was successful; it's a great starting point. I've verified the active PHP-FPM socket on the OCI VM, specifically `/run/php/php8.1-fpm.sock`. I've also confirmed that the target webroot, `/home/ubuntu/n8n-php/mvps/whatzmeapi_tests/`, exists and contains the crucial `index.php` file.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.497310641s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Sept 2026, 11:16 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Sept 2026, 11:16 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Sept 2026, 11:16 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Sept 2026, 11:16 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+ya funciono la POC, ahora quiero deshacerla pero antes crees un html plenamente documentado de todo el proceso hicimos , el test final fue:
+https://laesh.mx/  mostro esto:
+WhatzMeApi Interactive Sandbox
+Leer Arquitectura y Documentación de Scripts
+Token de WhatzMeApi
+Ej: v2~abc123...
+Número de WhatsApp Destino (con código país)
+Ej: 5215500000000
+🧩 Scripts Unitarios
+Endpoints atómicos independientes para validación base.
+
+🔌 1. Sesión y QR
+Verifica estado y genera QR si no está conectado.
+
+
+Ejecutar Sesión
+👥 2. Gestión de Contactos
+Accede a tu agenda, consulta perfiles o crea un contacto nuevo interactuando paso a paso.
+
+Nombre (para crear): 
+John
+Apellido: 
+Doe
+
+1. Ver Agenda
+
+2. Info y Foto
+
+3. Mapeo LID ↔ Tel
+
+4. Crear/Guardar
+🚀 3. Archivos y Multimedia
+Sube y envía imagen/audio. Puedes eliminarlo posteriormente.
+
+Seleccionar Archivo (Imagen o Audio .ogg):
+Ningún archivo seleccionado
+Pie de foto (Caption):
+Imagen enviada desde WebApp
+
+1. Subir y Enviar
+
+2. Eliminar Multimedia
+
+y https://www.caelitandem.lat/ sigue mostrando el website original}
+
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `gestion_web.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Sept 2026, 11:23 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Sept 2026, 11:23 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Examining Documentation Resources**
+
+I'm now diving into the `../docs/` directory, specifically focusing on the HTML technical documents available, like `../docs/Memoria_Tecnica_Mapeo_MultiDominio_Nginx_OCI.html`. I'm curious if I can also create something.
+
+
+**Crafting Detailed HTML Document**
+
+I'm now outlining a detailed HTML document, complete with modern CSS tokens and a sleek dark/glassmorphism design. The title will be "Memoria Técnica — Mapeo Multi-Dominio Nginx OCI & POC WhatzMeApi Sandbox." I'm planning sections for a system overview, environment details including IP addresses, domains, web server, and PHP-FPM version. The document will also include Nginx configs and Certbot SSL steps.
+
+
+
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 6.352801642s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 4 Sept 2026, 11:23 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Sept 2026, 11:23 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Sept 2026, 11:23 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+realiza el Deshacer / Revertir la POC
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `Memoria_Tecnica_Mapeo_MultiDominio_Nginx_OCI.html`
+**Language:** html
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Sept 2026, 11:26 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 4 Sept 2026, 11:26 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+.que significa parked domain name on hostinger dns system laesh.mx .
+.. anexo config en hostinger Administrar registros DNS
+
+
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `Memoria_Tecnica_Mapeo_MultiDominio_Nginx_OCI.html`
+**Language:** html
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing the Request**
+
+Okay, I'm diving into the user's question about the parked domain name on Hostinger DNS. I'm focusing on "laesh.mx" and its DNS configuration. I need to understand what the user wants to accomplish and interpret their attached Hostinger DNS configuration. Let me break down the meaning of "parked domain," and how that impacts the DNS settings.
+
+
+**Interpreting the Settings**
+
+I've got it. The image shows `laesh.mx` configured on Hostinger with the A record pointing to `83.136.219.193`, which is Hostinger's default parked domain IP. This explains why the user sees the "Parked Domain" page. This IP, and the "Parked Domain" status, are key to understanding the issue. I am now aware that this is a typical parked domain scenario. I have the context I need.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.049038542s
 - **Model:** Gemini 3.6 Flash (Medium)
 </details>
 

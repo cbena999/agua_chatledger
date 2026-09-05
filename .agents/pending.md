@@ -84,6 +84,15 @@
 
 ## 🟡 PRIORIDAD MEDIA — INFRA
 
+### P-INFRA-02 ✅ [LAESH KVM2] PHP CLI hang: OPcache JIT + Swoole — RESUELTO
+**Estado**: Resuelto 2026-09-04 (sesión 3)  
+**Síntoma original**: `php8.3` CLI cuelga indefinidamente con `opcache.jit=tracing` + `opcache.enable_cli=1` + `extension=swoole.so`.  
+**Fix aplicado en `07_security_harden.sh`**: Se generan **dos** OPcache ini distintos:
+- FPM: `10-opcache-laesh.ini` completo con `opcache.jit=tracing` (JIT activo para requests HTTP)
+- CLI: mismo ini pero con `opcache.jit=0` + `opcache.jit_buffer_size=0M` (sin JIT, sin hang)
+
+`cache_renew.cron` (5 AM) funciona correctamente. `08_verify.sh` usa `php8.3 -n` para checks internos y `strings` para versión Swoole (sin invocar PHP). `03_install_swoole.sh` también usa `strings` para idempotencia.
+
 ### P-INFRA-01 🔄 [LAESH OCI] DNS laesh.mx + Certbot — BLOQUEADO POR DNS
 **Estado**: Bloqueado — hardening local y OCI completados 2026-08-20. Solo falta DNS.  
 **Pendiente**:
@@ -293,4 +302,4 @@ El HTML legado **no necesita sincronizarse** — el PHP es el SSOT.
 
 ---
 
-*Última actualización: 2026-09-04 (sesión 2) — Pipeline KVM2 completamente cerrado y listo para ejecución real en Hostinger. Cambios: RETRY_WAIT 120→30 (monitor_services.sh); setup_hostinger.sh paso 3b least-privilege automatizado (REVOKE ALL + GRANT DML-only); BDS_DIR ruta canónica en 06_deploy_app.sh; 08_verify.sh multi-path fallback para 03_test_deploy.sh; bash/README.md defaults corregidos (php8.3, /opt/laesh/www); README.md pre-requisitos completos (4 rsync, 3 env vars, checklist, secciones monitoring/log-levels/Logger); Tecnica_Infraestructura_Despliegue.html: sec19-3 reescrita, sec19-4 actualizada, sec15-9 PrivateTmp fix, nuevas §21 monitoring, §22 log-levels, §23 Logger; Tecnica_Seguridad_Integral.html: §2 least-priv automatizado, nueva §6 SMTP/monitor; Especificacion_Tecnica.html: §6.1 Logger filtro de nivel; Tecnica_Modelo_Datos.html: notas sys_logs prod. Activos: P-LAESH-05 (Deploy OCI — requiere autorización), P-LAESH-06 (verificación visual medicos.php), P-INFRA-01 (DNS laesh.mx), G-IMG-01, G-IMG-02, G-DEV-01, G-DEV-02, P-01 (filemtime), R-02, PERF-01, PERF-02, PERF-03. — Claude Code*
+*Última actualización: 2026-09-04 (sesión 3) — Deploy KVM2 validado y pipeline saneado por completo. Cambios sesión 3: Servidor 83.136.219.193 en estado STACK OPERATIVO (28/28 OK, 0 errores). Scripts corregidos: 01 (chmod+copy .path/.service), 02 (php8.3 -n en checks), 03 (strings para idempotencia/verify Swoole, no php -r), 05 (rutas laesh-bds→laesh-src), 07 (CLI OPcache sin JIT — P-INFRA-02 fix real), 08 (php8.3 -n, strings sort -V, Swoole 6.2.x). nginx confs: 3 handlers PHP específicos + ^~ assets. P-INFRA-02 cerrado. README.md: §Gaps G-01→G-07, §Scripts, §Configs, §Verificación corregida (28 OK, 1 HSTS esperado). ET Tecnica_Infraestructura_Despliegue.html: badge deploy validado §19.3, tabla paso-a-paso actualizada, P-INFRA-02 nota en §15.9. Activos: P-LAESH-05 (Deploy OCI — requiere autorización), P-LAESH-06 (verificación visual medicos.php), P-INFRA-01 (DNS laesh.mx — bloqueado). — Claude Code*
