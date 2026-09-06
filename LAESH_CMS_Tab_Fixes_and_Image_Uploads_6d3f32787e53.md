@@ -7,9 +7,9 @@
 | **Trajectory ID** | `cbb3065c-15ab-40b2-a551-df5474c119c2` |
 | **Cascade ID** | `33758958-5e2c-4311-ba38-6d3f32787e53` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 12072 |
+| **Total Steps** | 12180 |
 | **Started** | 30 Aug 2026, 9:34 pm |
-| **Completed** | 6 Sept 2026, 8:29 am |
+| **Completed** | 6 Sept 2026, 1:20 pm |
 
 ---
 
@@ -17009,3162 +17009,261 @@
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1434-1459)</summary>
-
-**Path:** `Unknown file`
-
-```
-            </div>
-
-            <!-- Contenido del Pie de Página (Editor RTE) -->
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">Contenido del Pie de Página <small class="txt-muted">(Texto fijo — Solo Estilos RTE)</small></div>
-                </div>
-                <div class="editor-card-body">
-                    <p class="cms-p">
-                        El texto del Pie de Página es fijo (datos institucionales, aviso legal, copyright).
-                        <strong>Solo puedes cambiar los estilos visuales</strong>: color, negritas, tamaño de fuente, alineación, etc.
-                        El teclado está bloqueado — arrastra la selección para aplicar formato.
-                    </p>
-                    <div class="cms-info-box" style="background:#fffbeb;border:1.5px solid #ca8a04;border-radius:8px;padding:0.6rem 1rem;margin-bottom:0.75rem;font-size:0.83rem;color:#92400e;display:flex;align-items:center;gap:0.5rem;">
-                        🔒 <strong>Modo Solo-Estilos:</strong> El contenido de texto no puede modificarse aquí. Edita los datos de contacto, horarios y dirección en la pestaña <em>Ubicación y Contacto</em>.
-                    </div>
-                    <div class="field-group">
-                        <div id="ck-footer" class="ck5-mount ck5-mount-lg"></div>
-                        <textarea id="ck-footer-data" name="contenido__cuerpo_html" class="ck5-hidden-data"><?= htmlspecialchars(cmsRaw($contenidos, 'footer', 'contenido', 'cuerpo_html')) ?></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- ================================================================
-```
-
-</details>
-
----
-
 ### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 9:10 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1424-1479)</summary>
-
-**Path:** `Unknown file`
-
-```
-                            </button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="var c='#003882'; document.getElementById('footer-bg-picker').value=c; var inp=document.getElementById('footer-bg-input'); inp.value=c; inp.dispatchEvent(new Event('input', {bubbles:true})); inp.dispatchEvent(new Event('change', {bubbles:true}));">
-                                <span style="display:inline-block; width:12px; height:12px; background:#003882; border-radius:50%; margin-right:4px;"></span> Azul Marino
-                            </button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="var c='#1e293b'; document.getElementById('footer-bg-picker').value=c; var inp=document.getElementById('footer-bg-input'); inp.value=c; inp.dispatchEvent(new Event('input', {bubbles:true})); inp.dispatchEvent(new Event('change', {bubbles:true}));">
-                                <span style="display:inline-block; width:12px; height:12px; background:#1e293b; border-radius:50%; margin-right:4px;"></span> Slate Oscuro
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Contenido del Pie de Página (Editor RTE) -->
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">Contenido del Pie de Página <small class="txt-muted">(Texto fijo — Solo Estilos RTE)</small></div>
-                </div>
-                <div class="editor-card-body">
-                    <p class="cms-p">
-                        El texto del Pie de Página es fijo (datos institucionales, aviso legal, copyright).
-                        <strong>Solo puedes cambiar los estilos visuales</strong>: color, negritas, tamaño de fuente, alineación, etc.
-                        El teclado está bloqueado — arrastra la selección para aplicar formato.
-                    </p>
-                    <div class="cms-info-box" style="background:#fffbeb;border:1.5px solid #ca8a04;border-radius:8px;padding:0.6rem 1rem;margin-bottom:0.75rem;font-size:0.83rem;color:#92400e;display:flex;align-items:center;gap:0.5rem;">
-                        🔒 <strong>Modo Solo-Estilos:</strong> El contenido de texto no puede modificarse aquí. Edita los datos de contacto, horarios y dirección en la pestaña <em>Ubicación y Contacto</em>.
-                    </div>
-                    <div class="field-group">
-                        <div id="ck-footer" class="ck5-mount ck5-mount-lg"></div>
-                        <textarea id="ck-footer-data" name="contenido__cuerpo_html" class="ck5-hidden-data"><?= htmlspecialchars(cmsRaw($contenidos, 'footer', 'contenido', 'cuerpo_html')) ?></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- ================================================================
-             PANEL 8: SEO Y METADATOS
-             Sección: seo | Fuente HTML: head del index.html
-             ================================================================ -->
-        <div id="panel-seo" class="cms-panel" role="tabpanel" aria-labelledby="tab-seo" tabindex="0" data-section="seo">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">Metadatos de SEO, Open Graph y Schema.org</h3>
-            </div>
-
-            <!-- Fila 1: Meta Tags + Open Graph -->
-            <hr class="cms-section-sep">
-            <div class="grid-2col mb-4">
-            <!-- Meta Tags -->
-            <div class="editor-card">
-                <div class="editor-card-header">
-                    <div class="card-title">Meta Tags del Sitio</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Meta Title <small class="txt-muted">(máx. 60 caracteres recomendado)</small></label>
-                        <input type="text" name="meta__title" maxlength="135"
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1384-1439)</summary>
-
-**Path:** `Unknown file`
-
-```
-                </div>
-            </div>
-        </div>
-
-        <!-- ================================================================
-             PANEL 7: PIE DE PÁGINA
-             Sección: footer | Fuente HTML: #footer
-             SSOT: contacto, horarios, dirección y responsable se leen desde configuraciones.
-               Solo son editables aquí: logo alt, nombre lab y textos legales.
-             ================================================================ -->
-        <div id="panel-footer" class="cms-panel" role="tabpanel" aria-labelledby="tab-footer" tabindex="0" data-section="footer">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">Pie de Página — Contenido e Identidad (#footer)</h3>
-            </div>
-
-            <hr class="cms-section-sep">
-            <!-- Estilo y Color de Fondo -->
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">Estilo y Color de Fondo del Pie de Página</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Color de Fondo de la Franja <code>&lt;footer&gt;</code></label>
-                        <?php $footerBg = cms($contenidos, 'footer', 'estilo', 'bg_color', '#0f172a'); ?>
-                        <div class="d-flex align-items-center gap-3">
-                            <input type="color" id="footer-bg-picker" value="<?= h($footerBg) ?>"
-                                   class="cms-color-picker" style="width:48px; height:38px; padding:2px; cursor:pointer; border-radius:4px; border:1px solid #cbd5e1;"
-                                   onchange="var inp=document.getElementById('footer-bg-input'); inp.value=this.value; inp.dispatchEvent(new Event('input', {bubbles:true})); inp.dispatchEvent(new Event('change', {bubbles:true}));">
-                            <input type="text" id="footer-bg-input" name="estilo__bg_color" value="<?= h($footerBg) ?>"
-                                   class="cms-color-text-input" style="width:130px;"
-                                   oninput="document.getElementById('footer-bg-picker').value = this.value;">
-                            <span class="txt-muted small">Haz clic en el cuadro o elige un color institucional:</span>
-                        </div>
-                        <div class="d-flex gap-2 mt-2">
-                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="var c='#0f172a'; document.getElementById('footer-bg-picker').value=c; var inp=document.getElementById('footer-bg-input'); inp.value=c; inp.dispatchEvent(new Event('input', {bubbles:true})); inp.dispatchEvent(new Event('change', {bubbles:true}));">
-                                <span style="display:inline-block; width:12px; height:12px; background:#0f172a; border-radius:50%; margin-right:4px;"></span> Oscuro
-                            </button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="var c='#0052b7'; document.getElementById('footer-bg-picker').value=c; var inp=document.getElementById('footer-bg-input'); inp.value=c; inp.dispatchEvent(new Event('input', {bubbles:true})); inp.dispatchEvent(new Event('change', {bubbles:true}));">
-                                <span style="display:inline-block; width:12px; height:12px; background:#0052b7; border-radius:50%; margin-right:4px;"></span> Azul LAESH
-                            </button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="var c='#003882'; document.getElementById('footer-bg-picker').value=c; var inp=document.getElementById('footer-bg-input'); inp.value=c; inp.dispatchEvent(new Event('input', {bubbles:true})); inp.dispatchEvent(new Event('change', {bubbles:true}));">
-                                <span style="display:inline-block; width:12px; height:12px; background:#003882; border-radius:50%; margin-right:4px;"></span> Azul Marino
-                            </button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="var c='#1e293b'; document.getElementById('footer-bg-picker').value=c; var inp=document.getElementById('footer-bg-input'); inp.value=c; inp.dispatchEvent(new Event('input', {bubbles:true})); inp.dispatchEvent(new Event('change', {bubbles:true}));">
-                                <span style="display:inline-block; width:12px; height:12px; background:#1e293b; border-radius:50%; margin-right:4px;"></span> Slate Oscuro
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Contenido del Pie de Página (Editor RTE) -->
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">Contenido del Pie de Página <small class="txt-muted">(Texto fijo — Solo Estilos RTE)</small></div>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `ck-footer`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 9:10 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `ck5-mount`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 9:10 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `ClassicEditor`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 9:10 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `ck5-mount`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 9:10 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1749-1805)</summary>
-
-**Path:** `Unknown file`
-
-```
-            #seccion-order-list [data-seccion-id].dnd-over {
-                border-color:var(--primary,#0052B7); box-shadow:0 0 0 2px rgba(0,82,183,.18);
-            }
-            </style>
-        </div><!-- /panel-configuracion-general -->
-
-    </main><!-- /.cms-panels-scroll -->
-    </div><!-- /.cms-content-col -->
-
-    <!-- Región Lateral Derecha: Notificaciones -->
-    <aside class="sidebar-right" id="sidebar-right">
-        <div class="sidebar-right-toggle-row">
-            <div class="bell-wrap" id="bell-wrap-notif" title="Notificaciones">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-                <span class="bell-badge" id="badge-notif-cms" aria-label="Notificaciones pendientes">0</span>
-            </div>
-            <button type="button" class="sidebar-right-toggle" id="sidebar-right-toggle" title="Expandir / Colapsar">
-                <svg id="right-rail-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-            </button>
-        </div>
-        <div class="sidebar-right-content">
-            <div class="sidebar-right-header border-bottom pb-2 mb-3">
-                <h3 class="txt-main fw-600 font-mosquito txt-pgd mb-0 fs-sm">Notificaciones</h3>
-            </div>
-            <div class="sidebar-right-body" id="notif-list">
-                <p class="txt-muted txt-center-sm txt-muted-xs mt-4">No hay nuevas notificaciones</p>
-            </div>
-        </div>
-    </aside>
-</div>
-
-<!-- Toast de confirmación -->
-<div class="cms-toast" id="toast">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-    ¡Cambios publicados exitosamente en <strong>laesh.mx</strong>!
-</div>
-
-<!-- Configuración dinámica desde BD -->
-<meta name="cms-upload-url" content="<?= h($config['cms_upload_endpoint'] ?? '/laesh/adrc/cms/upload') ?>">
-
-<!-- CMS Upload — manejo de input[type=file][data-upload-slot] vía fetch multipart -->
-<script src="/laesh-web-assets-uipv1a/js/cms-upload.js?v=<?= time() ?>" defer></script>
-
-<script src="/laesh-web-assets-uipv1a/js/htmx.min.js"></script><!-- GAP-ARQ-01: requerido por hx-post /cms/save -->
-<script src="/laesh-web-assets-uipv1a/js/app.js?v=<?= time() ?>" defer></script>
-<script src="/laesh-web-assets-uipv1a/js/ws-client.js?v=<?= time() ?>" defer></script>
-<script src="/laesh-web-assets-uipv1a/js/portal-footer.js?v=<?= time() ?>" defer></script>
-<script src="/laesh-web-assets-uipv1a/js/sidebar-rail.js?v=<?= time() ?>" defer></script>
-
-<!-- CKEditor 5 — servido localmente (licencia GPL, sin CDN externo) -->
-<script src="/laesh-web-assets-uipv1a/js/ckeditor5.umd.js?v=<?= time() ?>"></script>
-<script src="/laesh-web-assets-uipv1a/js/ckeditor-init.js?v=<?= time() ?>" defer></script>
-<script src="/laesh-web-assets-uipv1a/js/cms-dirty-tracker.js?v=<?= time() ?>" defer></script>
-<script src="/laesh-web-assets-uipv1a/js/gestion-web.js?v=<?= time() ?>" defer></script>
-</body>
-</html>
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `ckeditor-init.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-/**
- * CKEditor 5 — Inicialización segura con MutationObserver
- *
- * Se remueve el parcheo frágil de `showPanel` para evitar condiciones de carrera
- * con gestion-web.js. Se utiliza MutationObserver para detectar de manera 100% fiable
- * cuando el panel "Quiénes somos" (panel-quienes-somos) obtiene la clase .active.
- * Esto evita el error de cálculo de dimensiones de CKEditor en elementos display:none.
- */
-(function () {
-    'use strict';
-
-    var _ckState = {};  // 'pending' | editor instance | null
-
-    function _createEditor(mountId, dataId, globalKey) {
-        if (_ckState[globalKey]) return;
-        _ckState[globalKey] = 'pending';
-
-        var mountEl = document.getElementById(mountId);
-        var dataEl  = document.getElementById(dataId);
-
-        if (!mountEl || !dataEl || typeof CKEDITOR === 'undefined') {
-            _ckState[globalKey] = null;
-            return;
-        }
-
-        var CK = CKEDITOR;
-        
-        var laeshColors = [
-            { color: '#0052B7', label: 'Azul LAESH Principal' },
-            { color: '#71CA11', label: 'Verde LAESH Principal' },
-            { color: '#A3C912', label: 'Verde Acento' },
-            { color: '#CCE7F5', label: 'Azul Claro (Fondo)' },
-            { color: '#0f172a', label: 'Texto Oscuro' },
-            { color: '#64748b', label: 'Texto Secundario' },
-            { color: '#ffffff', label: 'Blanco' },
-            { color: '#000000', label: 'Negro' }
-        ];
-
-        // El plugin List puede requerir el uso de ClassicEditor sin destructuración en algunos builds, 
-        // pero la instanciación es segura con los exports directos del UMD.
-        var editorConfig = {
-            licenseKey: 'GPL',
-            fontColor: { 
-                colors: laeshColors,
-                documentColors: 0 
-            },
-            fontBackgroundColor: { 
-                colors: laeshColors,
-                documentColors: 0 
-            },
-            fontFamily: {
-                options: [
-                    'default',
-                    'Cabin, sans-serif',
-                    'Gill Sans, sans-serif',
-                    'Mosquito Std Black, sans-serif'
-                ],
-                supportAllValues: true
-            },
-            style: {
-                definitions: [
-                    { name: 'Subtítulo Institucional (Azul)', element: 'h3', classes: ['acerca-h3b'] },
-                    { name: 'Texto Destacado', element: 'p', classes: ['faq-p--primary'] },
-                    { name: 'Texto Secundario', element: 'p', classes: ['faq-p--tail'] },
-                    { name: 'Texto Muted', element: 'p', classes: ['aviso-p--muted'] },
-                    { name: 'Firma / Highlight', element: 'strong', classes: ['txt-main'] }
-                ]
-            },
-            htmlSupport: {
-                allow: [
-                    {
-                        name: /.*/,
-                        attributes: true,
-                        classes: true,
-                        styles: true
-                    }
-                ]
-            },
-            mediaEmbed: {
-                previewsInData: true
-            },
-            plugins: [
-                CK.Essentials, CK.Paragraph, CK.Heading,
-                CK.Bold, CK.Italic, CK.Underline, CK.Strikethrough,
-                CK.Font, CK.Highlight, CK.Alignment,
-                CK.List, CK.TodoList,
-                CK.Indent, CK.IndentBlock,
-                CK.Link, CK.Table, CK.MediaEmbed, CK.HorizontalLine,
-                CK.SourceEditing, CK.GeneralHtmlSupport, CK.Style
-            ],
-            toolbar: {
-                items: [
-                    'sourceEditing', '|',
-                    'heading', 'style', '|',
-                    'bold', 'italic', 'underline', 'strikethrough', 'highlight', '|',
-                    'fontFamily', 'fontSize', 'fontColor', 'fontBackgroundColor', '|',
-                    'alignment', '|',
-                    'bulletedList', 'numberedList', 'todoList', '|',
-                    'outdent', 'indent', '|',
-                    'link', 'insertTable', 'mediaEmbed', 'horizontalLine', '|',
-                    'undo', 'redo'
-                ]
-            },
-            initialData: dataEl.value
-        };
-
-        CK.ClassicEditor.create(mountEl, editorConfig)
-            .then(function (editor) {
-                _ckState[globalKey] = editor;
-                window[globalKey]   = editor;
-
-                // Sincronizar con el textarea oculto para que onFieldChange() del CMS capte los cambios
-                editor.model.document.on('change:data', function () {
-                    dataEl.value = editor.getData();
-                    dataEl.dispatchEvent(new Event('input', { bubbles: true }));
-                });
-            })
-            .catch(function (err) {
-                console.error('[LAESH CMS] Falló CKEditor en ' + mountId + ':', err);
-                _ckState[globalKey] = null;
-                // Si falla, limpiar el montaje y mostrar el textarea crudo
-                mountEl.style.display = 'none';
-                dataEl.classList.remove('ck5-hidden-data');
-                dataEl.style.display  = 'block';
-            });
-    }
-
-    function _initQsEditors() {
-        setTimeout(function () {
-            _createEditorNoMedia('ck-ficha4',   'ck-ficha4-data',   '_ckFicha4', false);
-            _createEditorNoMedia('ck-historia', 'ck-historia-data', '_ckHistoria', false);
-            _createEditorNoMedia('ck-mision',   'ck-mision-data',   '_ckMision', false);
-            _createEditorNoMedia('ck-vision',   'ck-vision-data',   '_ckVision', false);
-        }, 150);
-    }
-
-    function _initEspecialidadesEditors() {
-        setTimeout(function () {
-            for (var i = 1; i <= 16; i++) {
-                var mId = 'ck-carousel-' + i;
-                var dId = 'ck-carousel-' + i + '-data';
-                if (document.getElementById(mId) && document.getElementById(dId)) {
-                    _createEditorNoMedia(mId, dId, '_ckCarousel' + i, false);
-                }
-            }
-        }, 150);
-    }
-
-    function _initAvisoPrivacidadEditor() {
-        setTimeout(function () {
-            if (document.getElementById('ck-aviso-privacidad') && document.getElementById('ck-aviso-privacidad-data')) {
-                _createEditorNoMedia('ck-aviso-privacidad', 'ck-aviso-privacidad-data', '_ckAvisoPrivacidad', false);
-            }
-        }, 150);
-    }
-
-    function _initVideoPromoEditor() {
-        setTimeout(function () {
-            if (document.getElementById('ck-video-promo') && document.getElementById('ck-video-promo-data')) {
-                _createEditor('ck-video-promo', 'ck-video-promo-data', '_ckVideoPromo');
-            }
-        }, 150);
-    }
-
-    function _initFooterEditor() {
-        setTimeout(function () {
-            if (document.getElementById('ck-footer') && document.getElementById('ck-footer-data')) {
-                _createEditorNoMedia('ck-footer', 'ck-footer-data', '_ckFooter', true);
-            }
-        }, 150);
-    }
-
-    function _lockTextContent(editor) {
-        var viewDoc = editor.editing.view.document;
-        viewDoc.on('keydown', function(evt, data) {
-            var keyCode = data.keyCode;
-            var domEvt  = data.domEvent;
-
-            // Permitir combinaciones de navegación con Ctrl/Cmd/Alt excepto V (pegar) y X (cortar)
-            if (domEvt.ctrlKey || domEvt.metaKey || domEvt.altKey) {
-                var keyChar = String.fromCharCode(keyCode).toLowerCase();
-                if (keyChar === 'v' || keyChar === 'x') {
-                    data.preventDefault();
-                    evt.stop();
-                }
-                return;
-            }
-
-            // Permitir teclas de selección y navegación (Flechas, Shift, Tab, Home, End, PageUp/Down, CapsLock)
-            var allowedKeys = [9, 16, 17, 18, 20, 33, 34, 35, 36, 37, 38, 39, 40];
-            if (allowedKeys.indexOf(keyCode) !== -1) {
-                return;
-            }
-
-            // Bloquear edición de caracteres, borrado (Backspace/Delete) y saltos de línea (Enter)
-            data.preventDefault();
-            evt.stop();
-        }, { priority: 'highest' });
-
-        editor.editing.view.document.on('clipboardInput', function(evt) {
-            evt.stop();
-        }, { priority: 'highest' });
-
-        editor.editing.view.document.on('drop', function(evt) {
-            evt.stop();
-        }, { priority: 'highest' });
-    }
-
-    function _createEditorNoMedia(mountId, dataId, globalKey, isLocked) {
-        if (_ckState[globalKey]) return;
-        _ckState[globalKey] = 'pending';
-
-        var mountEl = document.getElementById(mountId);
-        var dataEl  = document.getElementById(dataId);
-
-        if (!mountEl || !dataEl || typeof CKEDITOR === 'undefined') {
-            _ckState[globalKey] = null;
-            return;
-        }
-
-        var CK = CKEDITOR;
-        
-        var laeshColors = [
-            { color: '#0052B7', label: 'Azul LAESH Principal' },
-            { color: '#71CA11', label: 'Verde LAESH Principal' },
-            { color: '#A3C912', label: 'Verde Acento' },
-            { color: '#CCE7F5', label: 'Azul Claro (Fondo)' },
-            { color: '#0f172a', label: 'Texto Oscuro' },
-            { color: '#64748b', label: 'Texto Secundario' },
-            { color: '#ffffff', label: 'Blanco' },
-            { color: '#000000', label: 'Negro' }
-        ];
-
-        var editorConfig = {
-            licenseKey: 'GPL',
-            fontColor: { 
-                colors: laeshColors,
-                documentColors: 0 
-            },
-            fontBackgroundColor: { 
-                colors: laeshColors,
-                documentColors: 0 
-            },
-            fontFamily: {
-                options: [
-                    'default',
-                    'Cabin, sans-serif',
-                    'Gill Sans, sans-serif',
-                    'Mosquito Std Black, sans-serif'
-                ],
-                supportAllValues: true
-            },
-            style: {
-                definitions: [
-                    { name: 'Subtítulo (Azul)', element: 'h3', classes: ['acerca-h3b'] },
-                    { name: 'Texto Destacado', element: 'p', classes: ['faq-p--primary'] },
-                    { name: 'Texto Secundario', element: 'p', classes: ['faq-p--tail'] },
-                    { name: 'Texto Muted', element: 'p', classes: ['aviso-p--muted'] },
-                    { name: 'Firma / Highlight', element: 'strong', classes: ['txt-main'] }
-                ]
-            },
-            htmlSupport: {
-                allow: [
-                    {
-                        name: /.*/,
-                        attributes: true,
-                        classes: true,
-                        styles: true
-                    }
-                ]
-            },
-            plugins: [
-                CK.Essentials, CK.Paragraph, CK.Heading,
-                CK.Bold, CK.Italic, CK.Underline, CK.Strikethrough,
-                CK.Font, CK.Highlight, CK.Alignment,
-                CK.List, CK.TodoList,
-                CK.Indent, CK.IndentBlock,
-                CK.Table, CK.HorizontalLine,
-                CK.SourceEditing, CK.GeneralHtmlSupport, CK.Style
-            ],
-            toolbar: {
-                items: [
-                    'sourceEditing', '|',
-                    'heading', 'style', '|',
-                    'bold', 'italic', 'underline', 'strikethrough', 'highlight', '|',
-                    'fontFamily', 'fontSize', 'fontColor', 'fontBackgroundColor', '|',
-                    'alignment', '|',
-                    'bulletedList', 'numberedList', 'todoList', '|',
-                    'outdent', 'indent', '|',
-                    'insertTable', 'horizontalLine', '|',
-                    'undo', 'redo'
-                ]
-            },
-            initialData: dataEl.value
-        };
-
-        CK.ClassicEditor.create(mountEl, editorConfig)
-            .then(function (editor) {
-                _ckState[globalKey] = editor;
-                window[globalKey]   = editor;
-
-                if (isLocked) {
-                    _lockTextContent(editor);
-                }
-
-                editor.model.document.on('change:data', function () {
-                    dataEl.value = editor.getData();
-                    dataEl.dispatchEvent(new Event('input', { bubbles: true }));
-                });
-            })
-            .catch(function (err) {
-                console.error('[LAESH CMS] Falló CKEditor en ' + mountId + ':', err);
-                _ckState[globalKey] = null;
-                mountEl.style.display = 'none';
-                dataEl.classList.remove('ck5-hidden-data');
-                dataEl.style.display  = 'block';
-            });
-    }
-
-    function _initPromocionesEditors() {
-        setTimeout(function () {
-            for (var i = 1; i <= 7; i++) {
-                // 1. Título Superior de la Ficha: Editable en contenido + estilo RTE
-                var mDay = 'ck-promo-day-' + i;
-                var dDay = 'ck-promo-day-' + i + '-data';
-                if (document.getElementById(mDay) && document.getElementById(dDay)) {
-                    _createEditorNoMedia(mDay, dDay, '_ckPromoDay' + i, false);
-                }
-
-                // 2. Nombre del Estudio: Texto jalado de BD (bloqueado caracteres) + estilo RTE editable
-                var mTitle = 'ck-promo-title-' + i;
-                var dTitle = 'ck-promo-title-' + i + '-data';
-                if (document.getElementById(mTitle) && document.getElementById(dTitle)) {
-                    _createEditorNoMedia(mTitle, dTitle, '_ckPromoTitle' + i, true);
-                }
-
-                // 3. Subtítulo / Categoría: Texto jalado de BD (bloqueado caracteres) + estilo RTE editable
-                var mSub = 'ck-promo-sub-' + i;
-                var dSub = 'ck-promo-sub-' + i + '-data';
-                if (document.getElementById(mSub) && document.getElementById(dSub)) {
-                    _createEditorNoMedia(mSub, dSub, '_ckPromoSub' + i, true);
-                }
-
-                // 4. Indicaciones de Ayuno: Texto jalado de BD (bloqueado caracteres) + estilo RTE editable
-                var mAyuno = 'ck-promo-ayuno-' + i;
-                var dAyuno = 'ck-promo-ayuno-' + i + '-data';
-                if (document.getElementById(mAyuno) && document.getElementById(dAyuno)) {
-                    _createEditorNoMedia(mAyuno, dAyuno, '_ckPromoAyuno' + i, true);
-                }
-
-                // 5. Tiempo de Entrega: Texto jalado de BD (bloqueado caracteres) + estilo RTE editable
-                var mTiempo = 'ck-promo-tiempo-' + i;
-                var dTiempo = 'ck-promo-tiempo-' + i + '-data';
-                if (document.getElementById(mTiempo) && document.getElementById(dTiempo)) {
-                    _createEditorNoMedia(mTiempo, dTiempo, '_ckPromoTiempo' + i, true);
-                }
-
-                // 6. Descripción Libre / Detalle: Editable en contenido + estilo RTE
-                var mDesc = 'ck-promo-desc-' + i;
-                var dDesc = 'ck-promo-desc-' + i + '-data';
-                if (document.getElementById(mDesc) && document.getElementById(dDesc)) {
-                    _createEditorNoMedia(mDesc, dDesc, '_ckPromoDesc' + i, false);
-                }
-            }
-        }, 150);
-    }
-
-    function _observePanel(panelId, initFn) {
-        var panel = document.getElementById(panelId);
-        if (!panel) return;
-        if (panel.classList.contains('active')) {
-            initFn();
-        } else {
-            var obs = new MutationObserver(function (mutations) {
-                mutations.forEach(function (m) {
-                    if (m.attributeName === 'class' && panel.classList.contains('active')) {
-                        obs.disconnect();
-                        initFn();
-                    }
-                });
-            });
-            obs.observe(panel, { attributes: true, attributeFilter: ['class'] });
-        }
-    }
-
-    document.addEventListener('DOMContentLoaded', function () {
-        _observePanel('panel-quienes-somos', _initQsEditors);
-        _observePanel('panel-especialidades', _initEspecialidadesEditors);
-        _observePanel('panel-promociones', _initPromocionesEditors);
-        _observePanel('panel-aviso-privacidad', _initAvisoPrivacidadEditor);
-        _observePanel('panel-video-promo', _initVideoPromoEditor);
-        _observePanel('panel-footer', _initFooterEditor);
-    });
-
-    // Exponer _ckState en window para que syncCkeditors (gestion-web.js) pueda
-    // accederlo de forma robusta. _ckState es el registro canónico de instancias
-    // CKEditor 5 en el CMS; window[globalKey] es el alias individual por editor.
-    window._ckState = _ckState;
-}());
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `footer`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 9:10 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion-web.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-/* Interceptor global de promesas no capturadas de extensiones de navegador (Chrome/Edge/Brave) */
-window.addEventListener('unhandledrejection', function(event) {
-    if (event && event.reason) {
-        var msg = (event.reason.message || event.reason.toString() || '');
-        if (msg.includes('Could not establish connection') || msg.includes('Receiving end does not exist')) {
-            event.preventDefault();
-        }
-    }
-});
-
-/* Helper RTE Ampliado para formateo de texto sin URL media */
-window.formatRteText = function(btn, command) {
-    var fieldGroup = btn.closest('.field-group');
-    var input = fieldGroup ? fieldGroup.querySelector('input[type="text"], textarea') : null;
-    if (!input) return;
-
-    var start = input.selectionStart;
-    var end = input.selectionEnd;
-    var selectedText = input.value.substring(start, end);
-
-    var openTag = '<' + command + '>';
-    var closeTag = '</' + command + '>';
-
-    if (!selectedText) {
-        selectedText = 'texto';
-    }
-
-    var replacement = openTag + selectedText + closeTag;
-    input.value = input.value.substring(0, start) + replacement + input.value.substring(end);
-    input.focus();
-    input.setSelectionRange(start + openTag.length, start + openTag.length + selectedText.length);
-};
-
-window.formatRteTag = function(btn, tagName, styleAttr) {
-    var fieldGroup = btn.closest('.field-group');
-    var input = fieldGroup ? fieldGroup.querySelector('input[type="text"], textarea') : null;
-    if (!input) return;
-
-    var start = input.selectionStart;
-    var end = input.selectionEnd;
-    var selectedText = input.value.substring(start, end);
-
-    var openTag = '<' + tagName + ' style="' + styleAttr + '">';
-    var closeTag = '</' + tagName + '>';
-
-    if (!selectedText) {
-        selectedText = 'texto';
-    }
-
-    var replacement = openTag + selectedText + closeTag;
-    input.value = input.value.substring(0, start) + replacement + input.value.substring(end);
-    input.focus();
-    input.setSelectionRange(start + openTag.length, start + openTag.length + selectedText.length);
-};
-
-window.formatRteBlock = function(btn, blockTag) {
-    var fieldGroup = btn.closest('.field-group');
-    var input = fieldGroup ? fieldGroup.querySelector('textarea') : null;
-    if (!input) return;
-
-    var start = input.selectionStart;
-    var end = input.selectionEnd;
-    var selectedText = input.value.substring(start, end);
-
-    if (!selectedText) selectedText = 'Elemento de lista';
-
-    var replacement = '<' + blockTag + '>\n  <li>' + selectedText + '</li>\n</' + blockTag + '>';
-    input.value = input.value.substring(0, start) + replacement + input.value.substring(end);
-    input.focus();
-};
-
-window.clearRteFormat = function(btn) {
-    var fieldGroup = btn.closest('.field-group');
-    var input = fieldGroup ? fieldGroup.querySelector('input[type="text"], textarea') : null;
-    if (!input) return;
-
-    var text = input.value;
-    input.value = text.replace(/<[^>]*>/g, '');
-};
-
-/* Auto-poblar datos per se desde MariaDB al cambiar de Estudio Asociado en el catálogo */
-document.addEventListener('change', function(e) {
-    if (e.target && e.target.classList.contains('promo-estudio-select')) {
-        var select = e.target;
-        var cardId = select.getAttribute('data-card-id');
-        var opt = select.options[select.selectedIndex];
-        if (!opt || !cardId) return;
-
-        var nombre    = opt.getAttribute('data-nombre') || '';
-        var categoria = opt.getAttribute('data-categoria') || '';
-        var ayuno     = opt.getAttribute('data-ayuno') || '';
-        var tiempo    = opt.getAttribute('data-tiempo') || '';
-        var detalle   = opt.getAttribute('data-detalle') || '';
-
-        var keys = [
-            { key: '_ckPromoTitle' + cardId,  dataId: 'ck-promo-title-' + cardId + '-data',  val: nombre },
-            { key: '_ckPromoSub' + cardId,    dataId: 'ck-promo-sub-' + cardId + '-data',    val: categoria },
-            { key: '_ckPromoAyuno' + cardId,  dataId: 'ck-promo-ayuno-' + cardId + '-data',  val: ayuno },
-            { key: '_ckPromoTiempo' + cardId, dataId: 'ck-promo-tiempo-' + cardId + '-data', val: tiempo },
-            { key: '_ckPromoDesc' + cardId,   dataId: 'ck-promo-desc-' + cardId + '-data',   val: detalle }
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `footer`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 9:10 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1434-1464)</summary>
-
-**Path:** `Unknown file`
-
-```
-            </div>
-
-            <!-- Contenido del Pie de Página (Editor RTE) -->
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">Contenido del Pie de Página <small class="txt-muted">(Texto fijo — Solo Estilos RTE)</small></div>
-                </div>
-                <div class="editor-card-body">
-                    <p class="cms-p">
-                        El texto del Pie de Página es fijo (datos institucionales, aviso legal, copyright).
-                        <strong>Solo puedes cambiar los estilos visuales</strong>: color, negritas, tamaño de fuente, alineación, etc.
-                        El teclado está bloqueado — arrastra la selección para aplicar formato.
-                    </p>
-                    <div class="cms-info-box" style="background:#fffbeb;border:1.5px solid #ca8a04;border-radius:8px;padding:0.6rem 1rem;margin-bottom:0.75rem;font-size:0.83rem;color:#92400e;display:flex;align-items:center;gap:0.5rem;">
-                        🔒 <strong>Modo Solo-Estilos:</strong> El contenido de texto no puede modificarse aquí. Edita los datos de contacto, horarios y dirección en la pestaña <em>Ubicación y Contacto</em>.
-                    </div>
-                    <div class="field-group">
-                        <div id="ck-footer" class="ck5-mount ck5-mount-lg"></div>
-                        <textarea id="ck-footer-data" name="contenido__cuerpo_html" class="ck5-hidden-data"><?= htmlspecialchars(cmsRaw($contenidos, 'footer', 'contenido', 'cuerpo_html')) ?></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- ================================================================
-             PANEL 8: SEO Y METADATOS
-             Sección: seo | Fuente HTML: head del index.html
-             ================================================================ -->
-        <div id="panel-seo" class="cms-panel" role="tabpanel" aria-labelledby="tab-seo" tabindex="0" data-section="seo">
-            <div class="cms-panel-header">
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Planning File Replacement**
-
-I'm currently focused on planning a file replacement within `laesh-swbldi/admrc/views/gestion_web.php`. I intend to replace lines 1437 to 1457 using `replace_file_content`. Right now, I'm carefully constructing the new content.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.069078490s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 9:10 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 9:10 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 9:11 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `Schema.org`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 9:11 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 9:11 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `walkthrough.md`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-# Fix: Preview y Publicación — Quiénes Somos / RTE "25 años"
-
-## Problema Reportado
-El CMS de LAESH no reflejaba los cambios editados en el RTE de CKEditor 5 en la sección "Quiénes Somos" (ficha1: "25 años de experiencia") — ni en el preview ni tras publicar.
-
-## Root Cause Analysis (3 bugs entrelazados)
-
-### Bug 1 — `window._ckState` no expuesto (Crítico)
-**Archivo:** [ckeditor-init.js](file:///home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-web-assets-uipv1a/js/ckeditor-init.js)
-
-`_ckState` (el registro canónico de instancias CKEditor 5) estaba declarado como `var` dentro de un IIFE, por lo que `window._ckState` era `undefined`. La función `syncCkeditors()` en [gestion-web.js](file:///home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-web-assets-uipv1a/js/gestion-web.js#L428-L440) intentaba leer `window._ckState[camelKey]` y fallaba silenciosamente, cayendo al fallback `window[camelKey]` (que sí existía). Sin embargo, esta dependencia del fallback era frágil.
-
-**Fix:** Se expone `window._ckState = _ckState` al final del IIFE.
-
-### Bug 2 — `<mark>` eliminado por `safeHtml()` (Crítico para estilos)
-**Archivo:** [website/index.php](file:///home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/website/index.php#L59-L60)
-
-CKEditor 5 genera `<mark class="marker-green">` cuando el usuario aplica Highlight. La función `safeHtml()` usaba `strip_tags()` con una allowlist que **no incluía `<mark>`**, eliminando todos los highlights al renderizar en el sitio público y preview.
-
-Datos reales en BD (`quienes-somos/ficha1/texto`):
-```html
-<mark class="marker-green"><strong class="txt-green">25 AÑOS</strong></mark>
-```
-→ Tras `strip_tags()` sin `mark`: `<strong class="txt-green">25 AÑOS</strong>` (highlight perdido).
-
-**Fix:** Se agrega `'mark'` a la allowlist de `strip_tags()`.
-
-### Bug 3 — Preview servido desde caché del browser
-**Archivo:** [admrc/index.php](file:///home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/admrc/index.php#L411-L413)
-
-La URL del preview (`/laesh/?_preview=1#acerca-de`) podía ser servida desde la caché del browser en solicitudes repetidas, mostrando contenido desactualizado.
-
-**Fix:** Se agrega un timestamp `_t=` como cache-buster a la URL.
-
----
-
-## Fixes Adicionales
-
-### Fix 4 — `data-section` faltante en 8 paneles del CMS
-**Archivo:** [gestion_web.php](file:///home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/admrc/views/gestion_web.php)
-
-8 de 11 paneles (`panel-hero`, `panel-quienes-somos`, `panel-especialidades`, `panel-promociones`, `panel-calidad`, `panel-ubicacion`, `panel-footer`, `panel-seo`) no tenían `data-section="..."` explícito. Aunque `publishCmsSection()` tiene un fallback via `panel.id.replace('panel-', '')`, la ausencia de `data-section` era una inconsistencia que podía causar bugs sutiles en funciones como `onFieldChange()`.
-
-**Fix:** Se agrega `data-section` a los 8 paneles faltantes.
-
-### Fix 5 — Aviso "Solo Estilos" en el Pie de Página (CKEditor footer)
-**Archivo:** [gestion_web.php](file:///home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/admrc/views/gestion_web.php#L1417-L1435)
-
-El CKEditor del Pie de Página ya tenía `isLocked = true` (teclado bloqueado, solo estilos visuales editables). Sin embargo, la UI del CMS no informaba al usuario de esta restricción. Se agrega:
-- Título actualizado: "Texto fijo — Solo Estilos RTE"
-- Instrucción clara de que el teclado está bloqueado
-- Banner `🔒 Modo Solo-Estilos` con referencia a la pestaña "Ubicación y Contacto"
-
----
-
-## Archivos Modificados
-
-| Archivo | Cambio |
-|---------|--------|
-| [ckeditor-init.js](file:///home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-web-assets-uipv1a/js/ckeditor-init.js) | Exposición de `window._ckState` |
-| [website/index.php](file:///home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/website/index.php) | `<mark>` en allowlist de `safeHtml()` |
-| [admrc/index.php](file:///home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/admrc/index.php) | Cache-bust `_t=` en URL de preview |
-| [gestion_web.php](file:///home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/admrc/views/gestion_web.php) | `data-section` en 8 paneles + aviso footer |
-
-## Verificación Recomendada
-
-1. Abrir CMS → pestaña "Quiénes Somos"
-2. Editar el texto "25 años de experiencia" en el RTE
-3. Aplicar un highlight (marker-green) a una palabra
-4. Click "Vista previa" → verificar que la nueva pestaña muestra los cambios con highlight
-5. Click "Publicar" → verificar que el sitio público refleja los cambios
-6. Ir a la pestaña "Pie de Página" → verificar el banner `🔒 Modo Solo-Estilos`
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 9:11 pm
 
 ---
 
-## Agent Response
+### Local File Search
 
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
+**Status:** Reset
+**Created:** 4 Sept 2026, 9:12 pm
 
 ---
 
-## User Request
+### Code Edit
 
-Undefined variable $cfgNombreLab (2)
-#0 /var/www/html/laesh-swbldi/admrc/views/gestion_web.php(1456): flight\Engine->handleError(2, 'Undefined varia...', '/var/www/html/l...', 1456)
-#1 /var/www/html/laesh-swbldi/libs/plates/Template/Template.php(164): include('/var/www/html/l...')
-#2 /var/www/html/laesh-swbldi/libs/plates/Engine.php(277): League\Plates\Template\Template->render(NULL)
-#3 /var/www/html/laesh-swbldi/admrc/index.php(81): League\Plates\Engine->render('views/gestion_w...', Array)
-#4 [internal function]: {closure}()
-#5 /var/www/html/laesh-swbldi/libs/flight/core/Dispatcher.php(354): call_user_func_array(Object(Closure), Array)
-#6 /var/www/html/laesh-swbldi/libs/flight/core/Dispatcher.php(287): flight\core\Dispatcher->invokeCallable(Object(Closure), Array)
-#7 /var/www/html/laesh-swbldi/libs/flight/Engine.php(544): flight\core\Dispatcher->execute(Object(Closure), Array)
-#8 [internal function]: flight\Engine->_start()
-#9 /var/www/html/laesh-swbldi/libs/flight/core/Dispatcher.php(376): call_user_func_array(Array, Array)
-#10 /var/www/html/laesh-swbldi/libs/flight/core/Dispatcher.php(287): flight\core\Dispatcher->invokeCallable(Array, Array)
-#11 /var/www/html/laesh-swbldi/libs/flight/core/Dispatcher.php(131): flight\core\Dispatcher->execute(Array, Array)
-#12 /var/www/html/laesh-swbldi/libs/flight/core/Dispatcher.php(95): flight\core\Dispatcher->runEvent('start', Array)
-#13 /var/www/html/laesh-swbldi/libs/flight/Engine.php(115): flight\core\Dispatcher->run('start', Array)
-#14 /var/www/html/laesh-swbldi/libs/flight/Flight.php(121): flight\Engine->__call('start', Array)
-#15 /var/www/html/laesh-swbldi/admrc/index.php(446): Flight::__callStatic('start', Array)
-#16 {main}
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `index.php`
-**Language:** php
-
-**Open Files:**
-- `gestion_web.php`
-- `index.php`
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-<!DOCTYPE html>
-<?php
-/**
- * admrc/views/gestion_web.php — Plates template (merge de gestion-web.html)
- *
- * Fuente HTML: website/uipv1/gestion-web.html  ← NUNCA BORRAR (R15.1)
- * Merge iterativo: cuando gestion-web.html reciba cambios del cliente,
- * propagar estructura/textos aquí y mantener lógica PHP.
- *
- * Variables disponibles (desde admrc/index.php):
- *   $nombreAdmin  string  — Nombre del administrador logueado
- *   $csrfToken    string  — Token CSRF para formularios POST (R14.12)
- *   $contenidos   array   — [seccion][subseccion][clave] => valor (desde web_contenidos)
- *   $lastPub      string  — Timestamp de última publicación
- *
- * Merge v2 — 2026-08-22:
- *   + Slides 2-5 del carrusel hero
- *   + Tagline navbar (hero/navbar)
- *   + Quiénes Somos: resp. sanitario + filosofía
- *   + Promociones: 6 días (lunes–sábado) + domingo alt
- *   + Calidad: título y subtítulo de sección
- *   + Ubicación: WhatsApp + embed de mapa
- *   + Panel 7: Pie de Página (footer)
- *   + Panel 8: SEO y Metadatos
- *
- * SSOT Refactor — 2026-08-22 (ver 07_seed_catalogs.sql):
- *   • D-04 RESUELTO: WhatsApp, teléfono, email, horarios, dirección, CP,
- *     responsable sanitario → configuraciones (singleton). Ya NO en web_contenidos.
- *   • Panel 6 (Ubicación) = editor master de todos los singletons institucionales.
- *   • Paneles 7 (Footer) y 8 (SEO): los datos de configuraciones son read-only en CMS.
- *   • Promociones: titulo/precio/ayuno/tiempo eliminados del CMS; se usa estudio_clave
- *     → JOIN estudios para obtener datos clínicos (SSOT desde tabla estudios).
- *   • especialidades/catalogo/lista y /titulo eliminados (redundantes con tabla estudios).
- *   • quienes-somos/resp: nombre y cédulas → configuraciones; bio permanece en web_contenidos.
- * GAP-RC-01 (deferred): labadmin.php → backend persistence + localStorage sync.
- * GAP-IMG (deferred): inputs type="file" sin name/POST — requieren ruta separada
- *   POST /cms/upload con enctype=multipart/form-data (fuera del alcance del CMS de texto).
- */
-
-// Helper: escape HTML seguro (alias de htmlspecialchars)
-function h(string $v): string {
-    return htmlspecialchars($v, ENT_QUOTES, 'UTF-8');
-}
-
-// Helper: recuperar valor de $contenidos con fallback
-function cms(array $c, string $sec, ?string $sub, string $clave, string $default = ''): string {
-    $val = $c[$sec][$sub ?? ''][$clave] ?? '';
-    return htmlspecialchars($val !== '' ? $val : $default, ENT_QUOTES, 'UTF-8');
-}
-
-// Helper: recuperar valor RAW de $contenidos para editores RTE (desescapa entidades codificadas para evitar doble escape en CKEditor)
-function cmsRaw(array $c, string $sec, ?string $sub, string $clave, string $default = ''): string {
-    $val = $c[$sec][$sub ?? ''][$clave] ?? '';
-    $raw = $val !== '' ? $val : $default;
-    while (str_contains($raw, '&lt;') && str_contains($raw, '&gt;')) {
-        $raw = htmlspecialchars_decode($raw, ENT_QUOTES);
-    }
-    return $raw;
-}
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `$config`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
+**Status:** Reset
+**Created:** 4 Sept 2026, 9:12 pm
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 9:12 pm
 
 ---
 
-## Agent Response
+### Terminal Command Execution
 
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
+**Status:** Reset
+**Created:** 4 Sept 2026, 9:12 pm
 
 ---
 
-<details>
-<summary>File: `Unknown file` (L1434-1479)</summary>
+### Terminal Command Execution
 
-**Path:** `Unknown file`
-
-```
-            </div>
-
-            <!-- Contenido del Pie de Página (100% Integración SSOT - Lectura) -->
-            <div class="editor-card mb-4">
-                <div class="editor-card-header d-flex justify-content-between align-items-center">
-                    <div class="card-title">Contenido del Pie de Página <span class="badge bg-success ms-2" style="font-size:0.75rem; vertical-align:middle;">100% SSOT Dinámico</span></div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="cms-info-box" style="background:#f0fdf4;border:1.5px solid #16a34a;border-radius:8px;padding:0.75rem 1rem;margin-bottom:1rem;font-size:0.85rem;color:#166534;display:flex;align-items:flex-start;gap:0.6rem;">
-                        <span style="font-size:1.2rem;">✨</span>
-                        <div>
-                            <strong>Integración 100% SSOT Activa:</strong> El contenido textual del pie de página (datos institucionales, teléfonos, WhatsApp, dirección estructurada y horarios) se genera automáticamente a partir de las fuentes únicas de verdad. En esta pestaña <strong>únicamente se administra el estilo visual (color de fondo)</strong> del pie de página.
-                        </div>
-                    </div>
-
-                    <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:1.25rem; margin-bottom:1rem;">
-                        <h4 style="font-size:0.9rem; font-weight:700; color:#334155; margin-bottom:0.75rem; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid #cbd5e1; padding-bottom:0.4rem;">
-                            📋 Resumen de Datos Alimentados al Pie de Página (SSOT)
-                        </h4>
-                        <div class="row g-3" style="font-size:0.88rem;">
-                            <div class="col-md-6">
-                                <div><strong>🏢 Laboratorio:</strong> <?= htmlspecialchars($cfgNombreLab) ?></div>
-                                <div class="mt-1"><strong>📍 Dirección SSOT:</strong> <?= htmlspecialchars($cfgDir) ?></div>
-                                <div class="mt-1"><strong>📞 Teléfono:</strong> <?= htmlspecialchars($cfgTel) ?></div>
-                            </div>
-                            <div class="col-md-6">
-                                <div><strong>💬 WhatsApp:</strong> <?= htmlspecialchars($cfgWA) ?></div>
-                                <div class="mt-1"><strong>⏰ Horario Lunes-Sábado:</strong> <?= htmlspecialchars($cfgHorSem) ?></div>
-                                <div class="mt-1"><strong>☀️ Horario Domingo:</strong> <?= htmlspecialchars($cfgHorDom) ?></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="d-flex align-items-center justify-content-between pt-2">
-                        <small class="txt-muted">Para modificar la dirección o teléfonos de contacto, dirígete a la pestaña correspondiente:</small>
-                        <button type="button" class="btn btn-sm btn-outline-primary" onclick="var t=document.querySelector('[data-panel=\'panel-contacto\']'); if(t) t.click();">
-                            📍 Ir a Pestaña 6: Ubicación y Contacto
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- ================================================================
-             PANEL 8: SEO Y METADATOS
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1384-1409)</summary>
-
-**Path:** `Unknown file`
-
-```
-                </div>
-            </div>
-        </div>
-
-        <!-- ================================================================
-             PANEL 7: PIE DE PÁGINA
-             Sección: footer | Fuente HTML: #footer
-             SSOT: contacto, horarios, dirección y responsable se leen desde configuraciones.
-               Solo son editables aquí: logo alt, nombre lab y textos legales.
-             ================================================================ -->
-        <div id="panel-footer" class="cms-panel" role="tabpanel" aria-labelledby="tab-footer" tabindex="0" data-section="footer">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">Pie de Página — Contenido e Identidad (#footer)</h3>
-            </div>
-
-            <hr class="cms-section-sep">
-            <!-- Estilo y Color de Fondo -->
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">Estilo y Color de Fondo del Pie de Página</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Color de Fondo de la Franja <code>&lt;footer&gt;</code></label>
-                        <?php $footerBg = cms($contenidos, 'footer', 'estilo', 'bg_color', '#0f172a'); ?>
-                        <div class="d-flex align-items-center gap-3">
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Defining Variables Clearly**
-
-I've decided to tackle variable definitions first. Specifically, I'm going to insert the variable definitions at the beginning of Panel 7 within the `gestion_web.php` file, ensuring clarity and organization for subsequent code. I'm focusing on defining the `$cfgNombreLab` variable as a start, employing a concise, conditional assignment to handle potential empty values.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.031447621s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
+**Status:** Reset
+**Created:** 4 Sept 2026, 9:12 pm
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 9:12 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `$cfg`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
-**Created:** 4 Sept 2026, 9:12 pm
+**Status:** Reset
+**Created:** 4 Sept 2026, 9:15 pm
 
 ---
 
-## Agent Response
+### Code Edit
 
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
+**Status:** Reset
+**Created:** 4 Sept 2026, 9:15 pm
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
-**Created:** 4 Sept 2026, 9:12 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L69-94)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-    $estudiosCatalog = $db->query("
-        SELECT e.id, e.clave_interna, e.nombre, e.preparacion, e.tiempo_procesamiento, c.nombre as categoria_nombre
-        FROM catalogo_estudios e
-        LEFT JOIN catalogo_categorias c ON e.categoria_id = c.id
-        WHERE e.activo = 1
-        ORDER BY e.nombre ASC
-    ")->fetchAll(\PDO::FETCH_ASSOC);
-
-    // Plates — directorio de vistas es el mismo directorio admrc/
-    Flight::view()->setDirectory(__DIR__);
-    echo Flight::view()->render('views/gestion_web', [
-        'nombreAdmin'     => $nombreAdmin,
-        'csrfToken'       => $_SESSION['csrf_token'],
-        'contenidos'      => $contenidos,
-        'config'          => $config,
-        'lastPub'         => $lastPub,
-        'promociones'     => $promociones,
-        'estudiosCatalog' => $estudiosCatalog,
-    ]);
-});
-
-// ── POST /cms/save — Guardar sección CMS (HTMX o form tradicional) ───────────
-Flight::route('POST /cms/save', function () {
-    header('Content-Type: application/json; charset=utf-8');
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 4 Sept 2026, 9:12 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
+**Status:** Reset
+**Created:** 4 Sept 2026, 9:15 pm
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
-**Created:** 4 Sept 2026, 9:12 pm
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-## User Request
-
-heee pero en cms, me pisaste el RTE que pasa ?
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `gestion_web.php`
-**Language:** php
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Analyzing the User's Issue**
-
-I'm focused on the user's issue, specifically the phrase "me pisaste el RTE que pasa?". It seems there's a problem with the Rich Text Editor (RTE) in a CMS context, and the user feels something has been overwritten. This builds on their prior request in request #10, where they specified a 100% footer. My goal is to understand the connection between these requests and figure out the root cause.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `cuerpo_html`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.060567455s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 9:15 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-**Examining CKEditor Init**
-
-I'm currently looking into the `ckeditor-init.js` file, specifically the `ck-footer` section. I've found an `_initFooterEditor` function that uses a `setTimeout` to initialize the footer editor. Now, I'm trying to see what the conditions are to initialize it.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.002246847s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1399-1484)</summary>
-
-**Path:** `Unknown file`
-
-```
-$cfgEstado     = !empty($config['estado']) ? $config['estado'] : 'Oaxaca';
-$cfgCP         = !empty($config['cp']) ? $config['cp'] : '69000';
-$cfgDir        = trim(implode(', ', array_filter([$cfgCalleNum, $cfgCiudad, $cfgEstado, ($cfgCP ? 'C.P. '.$cfgCP : '')])));
-$cfgTel        = !empty($config['telefono']) ? $config['telefono'] : '(953) 532-3538';
-$cfgWA         = !empty($config['whatsapp_numero']) ? $config['whatsapp_numero'] : '953 107 4338';
-$cfgHorSem     = !empty($config['horario_semana']) ? $config['horario_semana'] : '7:00 AM – 8:00 PM';
-$cfgHorDom     = !empty($config['horario_domingo']) ? $config['horario_domingo'] : '8:00 AM – 2:00 PM';
-?>
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">Pie de Página — Contenido e Identidad (#footer)</h3>
-            </div>
-
-            <hr class="cms-section-sep">
-            <!-- Estilo y Color de Fondo -->
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">Estilo y Color de Fondo del Pie de Página</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Color de Fondo de la Franja <code>&lt;footer&gt;</code></label>
-                        <?php $footerBg = cms($contenidos, 'footer', 'estilo', 'bg_color', '#0f172a'); ?>
-                        <div class="d-flex align-items-center gap-3">
-                            <input type="color" id="footer-bg-picker" value="<?= h($footerBg) ?>"
-                                   class="cms-color-picker" style="width:48px; height:38px; padding:2px; cursor:pointer; border-radius:4px; border:1px solid #cbd5e1;"
-                                   onchange="var inp=document.getElementById('footer-bg-input'); inp.value=this.value; inp.dispatchEvent(new Event('input', {bubbles:true})); inp.dispatchEvent(new Event('change', {bubbles:true}));">
-                            <input type="text" id="footer-bg-input" name="estilo__bg_color" value="<?= h($footerBg) ?>"
-                                   class="cms-color-text-input" style="width:130px;"
-                                   oninput="document.getElementById('footer-bg-picker').value = this.value;">
-                            <span class="txt-muted small">Haz clic en el cuadro o elige un color institucional:</span>
-                        </div>
-                        <div class="d-flex gap-2 mt-2">
-                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="var c='#0f172a'; document.getElementById('footer-bg-picker').value=c; var inp=document.getElementById('footer-bg-input'); inp.value=c; inp.dispatchEvent(new Event('input', {bubbles:true})); inp.dispatchEvent(new Event('change', {bubbles:true}));">
-                                <span style="display:inline-block; width:12px; height:12px; background:#0f172a; border-radius:50%; margin-right:4px;"></span> Oscuro
-                            </button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="var c='#0052b7'; document.getElementById('footer-bg-picker').value=c; var inp=document.getElementById('footer-bg-input'); inp.value=c; inp.dispatchEvent(new Event('input', {bubbles:true})); inp.dispatchEvent(new Event('change', {bubbles:true}));">
-                                <span style="display:inline-block; width:12px; height:12px; background:#0052b7; border-radius:50%; margin-right:4px;"></span> Azul LAESH
-                            </button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="var c='#003882'; document.getElementById('footer-bg-picker').value=c; var inp=document.getElementById('footer-bg-input'); inp.value=c; inp.dispatchEvent(new Event('input', {bubbles:true})); inp.dispatchEvent(new Event('change', {bubbles:true}));">
-                                <span style="display:inline-block; width:12px; height:12px; background:#003882; border-radius:50%; margin-right:4px;"></span> Azul Marino
-                            </button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="var c='#1e293b'; document.getElementById('footer-bg-picker').value=c; var inp=document.getElementById('footer-bg-input'); inp.value=c; inp.dispatchEvent(new Event('input', {bubbles:true})); inp.dispatchEvent(new Event('change', {bubbles:true}));">
-                                <span style="display:inline-block; width:12px; height:12px; background:#1e293b; border-radius:50%; margin-right:4px;"></span> Slate Oscuro
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Contenido del Pie de Página (100% Integración SSOT - Lectura) -->
-            <div class="editor-card mb-4">
-                <div class="editor-card-header d-flex justify-content-between align-items-center">
-                    <div class="card-title">Contenido del Pie de Página <span class="badge bg-success ms-2" style="font-size:0.75rem; vertical-align:middle;">100% SSOT Dinámico</span></div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="cms-info-box" style="background:#f0fdf4;border:1.5px solid #16a34a;border-radius:8px;padding:0.75rem 1rem;margin-bottom:1rem;font-size:0.85rem;color:#166534;display:flex;align-items:flex-start;gap:0.6rem;">
-                        <span style="font-size:1.2rem;">✨</span>
-                        <div>
-                            <strong>Integración 100% SSOT Activa:</strong> El contenido textual del pie de página (datos institucionales, teléfonos, WhatsApp, dirección estructurada y horarios) se genera automáticamente a partir de las fuentes únicas de verdad. En esta pestaña <strong>únicamente se administra el estilo visual (color de fondo)</strong> del pie de página.
-                        </div>
-                    </div>
-
-                    <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:1.25rem; margin-bottom:1rem;">
-                        <h4 style="font-size:0.9rem; font-weight:700; color:#334155; margin-bottom:0.75rem; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid #cbd5e1; padding-bottom:0.4rem;">
-                            📋 Resumen de Datos Alimentados al Pie de Página (SSOT)
-                        </h4>
-                        <div class="row g-3" style="font-size:0.88rem;">
-                            <div class="col-md-6">
-                                <div><strong>🏢 Laboratorio:</strong> <?= htmlspecialchars($cfgNombreLab) ?></div>
-                                <div class="mt-1"><strong>📍 Dirección SSOT:</strong> <?= htmlspecialchars($cfgDir) ?></div>
-                                <div class="mt-1"><strong>📞 Teléfono:</strong> <?= htmlspecialchars($cfgTel) ?></div>
-                            </div>
-                            <div class="col-md-6">
-                                <div><strong>💬 WhatsApp:</strong> <?= htmlspecialchars($cfgWA) ?></div>
-                                <div class="mt-1"><strong>⏰ Horario Lunes-Sábado:</strong> <?= htmlspecialchars($cfgHorSem) ?></div>
-                                <div class="mt-1"><strong>☀️ Horario Domingo:</strong> <?= htmlspecialchars($cfgHorDom) ?></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="d-flex align-items-center justify-content-between pt-2">
-                        <small class="txt-muted">Para modificar la dirección o teléfonos de contacto, dirígete a la pestaña correspondiente:</small>
-                        <button type="button" class="btn btn-sm btn-outline-primary" onclick="var t=document.querySelector('[data-panel=\'panel-contacto\']'); if(t) t.click();">
-                            📍 Ir a Pestaña 6: Ubicación y Contacto
-                        </button>
-                    </div>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Restoring the Editor**
-
-I've successfully identified the RTE editor's container within Panel 7, specifically the `ck-footer` div. I've also located the hidden textarea element, `ck-footer-data`, which holds the editor's content and its associated data attributes. Now I am assessing methods to get the data, and restore the editor.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.041047939s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
-**Created:** 4 Sept 2026, 9:15 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 4 Sept 2026, 9:15 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 4 Sept 2026, 9:15 pm
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-## User Request
-
-esto no me sirve: quitalo:
-📋 Datos SSOT Alimentados al Pie de Página:
-🏢 Lab: Laboratorio de Especialidades Hematológicas
-📍 Dirección SSOT: Azucenas #8, Fracc. Jardines del Sur, H. Cda. Huajuapan de León, Oaxaca, C.P. 69007
-📞 Tel: 953 688 7694
-💬 WhatsApp: 953 119 0074
-⏰ L-S: Lunes a sábado: 7:00 a.m. – 9:00 p.m.
-☀️ Dom: Domingo: 7:00 a.m. – 3:00 p.m.
-
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `gestion_web.php`
-**Language:** php
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1449-1484)</summary>
-
-**Path:** `Unknown file`
-
-```
-            <div class="editor-card mb-4">
-                <div class="editor-card-header d-flex justify-content-between align-items-center">
-                    <div class="card-title">Estilos de Texto del Pie de Página <small class="txt-muted">(Formato RTE — Teclado Bloqueado)</small></div>
-                    <span class="badge bg-success" style="font-size:0.75rem;">100% SSOT Vinculado</span>
-                </div>
-                <div class="editor-card-body">
-                    <p class="cms-p mb-2">
-                        El contenido del Pie de Página proviene dinámicamente de la <strong>Pestaña 6 (Ubicación y Contacto)</strong>.
-                        Usa el editor a continuación para aplicar <strong>estilos visuales</strong> (colores de fuente, negritas, alineación y resaltados) sobre la maqueta base.
-                    </p>
-                    <div class="cms-info-box" style="background:#fffbeb;border:1.5px solid #ca8a04;border-radius:8px;padding:0.65rem 1rem;margin-bottom:0.75rem;font-size:0.83rem;color:#92400e;display:flex;align-items:center;gap:0.5rem;">
-                        🔒 <strong>Modo Solo-Estilos:</strong> El texto directo no se teclea aquí. Selecciona el texto para aplicar color, tamaño o negritas. Para modificar números o dirección, edita la <a href="javascript:void(0)" onclick="var t=document.querySelector('[data-panel=\'panel-contacto\']'); if(t) t.click();" style="color:#b45309; font-weight:bold; text-decoration:underline;">Pestaña 6 (Ubicación)</a>.
-                    </div>
-
-                    <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:1rem; margin-bottom:1rem;">
-                        <h4 style="font-size:0.85rem; font-weight:700; color:#334155; margin-bottom:0.5rem; text-transform:uppercase; letter-spacing:0.5px;">
-                            📋 Datos SSOT Alimentados al Pie de Página:
-                        </h4>
-                        <div class="row g-2" style="font-size:0.84rem;">
-                            <div class="col-md-6">
-                                <div><strong>🏢 Lab:</strong> <?= htmlspecialchars($cfgNombreLab) ?></div>
-                                <div class="mt-1"><strong>📍 Dirección SSOT:</strong> <?= htmlspecialchars($cfgDir) ?></div>
-                                <div class="mt-1"><strong>📞 Tel:</strong> <?= htmlspecialchars($cfgTel) ?></div>
-                            </div>
-                            <div class="col-md-6">
-                                <div><strong>💬 WhatsApp:</strong> <?= htmlspecialchars($cfgWA) ?></div>
-                                <div class="mt-1"><strong>⏰ L-S:</strong> <?= htmlspecialchars($cfgHorSem) ?></div>
-                                <div class="mt-1"><strong>☀️ Dom:</strong> <?= htmlspecialchars($cfgHorDom) ?></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="field-group">
-                        <label class="fw-bold mb-1" style="font-size:0.85rem;">Editor RTE de Formato Visual del Footer:</label>
-                        <div id="ck-footer" class="ck5-mount ck5-mount-lg"></div>
-                        <textarea id="ck-footer-data" name="contenido__cuerpo_html" class="ck5-hidden-data"><?= htmlspecialchars(cmsRaw($contenidos, 'footer', 'contenido', 'cuerpo_html')) ?></textarea>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 9:16 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1389-1414)</summary>
-
-**Path:** `Unknown file`
-
-```
-             PANEL 7: PIE DE PÁGINA
-             Sección: footer | Fuente HTML: #footer
-             SSOT: contacto, horarios, dirección y responsable se leen desde configuraciones.
-               Solo son editables aquí: logo alt, nombre lab y textos legales.
-             ================================================================ -->
-        <div id="panel-footer" class="cms-panel" role="tabpanel" aria-labelledby="tab-footer" tabindex="0" data-section="footer">
-<?php
-$cfgNombreLab = !empty($config['nombre_laboratorio']) ? $config['nombre_laboratorio'] : cms($contenidos, 'hero', 'brand', 'nombre', 'Laboratorio de Especialidades Hematológicas');
-$cfgCalleNum   = !empty($config['direccion_calle']) ? $config['direccion_calle'] : 'Azucenas #8, Fracc. Jardines del Sur';
-$cfgCiudad     = !empty($config['ciudad']) ? $config['ciudad'] : 'Huajuapan de León';
-$cfgEstado     = !empty($config['estado']) ? $config['estado'] : 'Oaxaca';
-$cfgCP         = !empty($config['cp']) ? $config['cp'] : '69000';
-$cfgDir        = trim(implode(', ', array_filter([$cfgCalleNum, $cfgCiudad, $cfgEstado, ($cfgCP ? 'C.P. '.$cfgCP : '')])));
-$cfgTel        = !empty($config['telefono']) ? $config['telefono'] : '(953) 532-3538';
-$cfgWA         = !empty($config['whatsapp_numero']) ? $config['whatsapp_numero'] : '953 107 4338';
-$cfgHorSem     = !empty($config['horario_semana']) ? $config['horario_semana'] : '7:00 AM – 8:00 PM';
-$cfgHorDom     = !empty($config['horario_domingo']) ? $config['horario_domingo'] : '8:00 AM – 2:00 PM';
-?>
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">Pie de Página — Contenido e Identidad (#footer)</h3>
-            </div>
-
-            <hr class="cms-section-sep">
-            <!-- Estilo y Color de Fondo -->
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 9:16 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 9:16 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1429-1469)</summary>
-
-**Path:** `Unknown file`
-
-```
-                                <span style="display:inline-block; width:12px; height:12px; background:#1e293b; border-radius:50%; margin-right:4px;"></span> Slate Oscuro
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Contenido del Pie de Página (RTE — Solo Estilos Visuales / Integración SSOT) -->
-            <div class="editor-card mb-4">
-                <div class="editor-card-header d-flex justify-content-between align-items-center">
-                    <div class="card-title">Estilos de Texto del Pie de Página <small class="txt-muted">(Formato RTE — Teclado Bloqueado)</small></div>
-                    <span class="badge bg-success" style="font-size:0.75rem;">100% SSOT Vinculado</span>
-                </div>
-                <div class="editor-card-body">
-                    <p class="cms-p mb-2">
-                        El contenido del Pie de Página proviene dinámicamente de la <strong>Pestaña 6 (Ubicación y Contacto)</strong>.
-                        Usa el editor a continuación para aplicar <strong>estilos visuales</strong> (colores de fuente, negritas, alineación y resaltados) sobre la maqueta base.
-                    </p>
-                    <div class="cms-info-box" style="background:#fffbeb;border:1.5px solid #ca8a04;border-radius:8px;padding:0.65rem 1rem;margin-bottom:0.75rem;font-size:0.83rem;color:#92400e;display:flex;align-items:center;gap:0.5rem;">
-                        🔒 <strong>Modo Solo-Estilos:</strong> El texto directo no se teclea aquí. Selecciona el texto para aplicar color, tamaño o negritas. Para modificar números o dirección, edita la <a href="javascript:void(0)" onclick="var t=document.querySelector('[data-panel=\'panel-contacto\']'); if(t) t.click();" style="color:#b45309; font-weight:bold; text-decoration:underline;">Pestaña 6 (Ubicación)</a>.
-                    </div>
-
-                    <div class="field-group">
-                        <label class="fw-bold mb-1" style="font-size:0.85rem;">Editor RTE de Formato Visual del Footer:</label>
-                        <div id="ck-footer" class="ck5-mount ck5-mount-lg"></div>
-                        <textarea id="ck-footer-data" name="contenido__cuerpo_html" class="ck5-hidden-data"><?= htmlspecialchars(cmsRaw($contenidos, 'footer', 'contenido', 'cuerpo_html')) ?></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- ================================================================
-             PANEL 8: SEO Y METADATOS
-             Sección: seo | Fuente HTML: head del index.html
-             ================================================================ -->
-        <div id="panel-seo" class="cms-panel" role="tabpanel" aria-labelledby="tab-seo" tabindex="0" data-section="seo">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">Metadatos de SEO, Open Graph y Schema.org</h3>
-            </div>
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-## User Request
-
-ahora esta roto, el rte sobre el texto le pongo estilos si miran, pero no se muestran en el preview , ni en la publicacion, corrige de raiz
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `gestion_web.php`
-**Language:** php
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `footer`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 9:19 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L459-489)</summary>
-
-**Path:** `Unknown file`
-
-```
-$ubSub     = $c('ubicacion', 'seccion', 'subtitulo');
-$mapsEmbed = $c('ubicacion', 'info', 'maps_embed');
-
-// Footer — Color de Fondo desde CMS + Contenido dinámico 100% SSOT desde configuraciones
-$footerBgColor = $c('footer', 'estilo', 'bg_color', '#0f172a');
-$footerHtml    = '<div class="footer-info">'
-    . '<img src="/laesh-web-assets-uipv1a/img/logo-laesh.webp" alt="' . h($cfgNombreLab ?: $cfgNombreC) . '" class="footer-logo-img" style="max-height: 40px; width: auto;" decoding="async" loading="lazy">'
-    . '<p class="footer-text">'
-        . '<strong>' . h($cfgNombreLab ?: 'Laboratorio de Especialidades Hematológicas S.C.') . '</strong> &nbsp;|&nbsp; '
-        . h($cfgDir)
-        . ($cfgTel ? ' &nbsp;|&nbsp; Tel: <a href="tel:' . h($cfgTelDigit) . '">' . h($cfgTel) . '</a>' : '')
-        . ($cfgWA ? ' &nbsp;|&nbsp; WhatsApp: <a href="https://wa.me/52' . h($cfgWA) . '" target="_blank" rel="noopener noreferrer">' . h($cfgWA) . '</a>' : '')
-    . '</p>'
-    . '<p class="footer-text">'
-        . h($cfgHorSem ?: 'Lunes a Sábado 7:00 a 20:00 hrs')
-        . ($cfgHorDom ? ' &nbsp;·&nbsp; ' . h($cfgHorDom) : '')
-        . ' &nbsp;|&nbsp; <a href="#" id="link-privacy">Aviso de Privacidad</a> &nbsp;|&nbsp; © ' . date('Y') . ' ' . h($cfgNombreC ?: 'LAESH') . '. Todos los derechos reservados.'
-    . '</p>'
-. '</div>';
-
-// Aviso de Privacidad — Contenido HTML consolidado desde el RTE del CMS
-$avisoHtml = $c('aviso-privacidad', 'contenido', 'cuerpo_html');
-
-// SEO (sin fallback)
-$schemaName  = h($c('seo', 'schema', 'schema_name'));
-$schemaType  = h($c('seo', 'schema', 'schema_type'));  // p.ej. MedicalOrganization
-$seoTitle    = $c('seo', 'meta', 'title');
-$seoDesc     = $c('seo', 'meta', 'description');
-
-// WhatsApp SVG reutilizado en cards de promo
-$waSvg = '<svg width="15" height="15" fill="#25D366" viewBox="0 0 24 24" aria-hidden="true">'
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Pinpointing the Root Cause**
-
-Aha! I've found it. The issue appears to stem from lines 464-478 within `website/index.php`. It looks like the `$footerHtml` variable is being populated from the database via a CKEditor saved entry. The function calls reveal it's pulling the footer content from `web_contenidos` under the `footer` key. This is where the discrepancy is occurring.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.063254983s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 9:19 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `PDO`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 9:20 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-<?php
-/**
- * index.php — Sitio Web Público LAESH (Phase J — Estabilización)
- *
- * Fuente HTML: website/uipv1/index.html  ← NUNCA BORRAR (R15.1)
- * Merge iterativo: cambios en uipv1/index.html → propagar aquí.
- *
- * Todo el contenido editorial se lee desde la BD:
- *   · configuraciones   → contacto, horarios, responsable, ubicación geográfica,
- *                          WhatsApp, Facebook, Schema.org, años de experiencia
- *   · web_contenidos    → hero (slides + navbar tagline), quienes-somos (fichas,
- *                          resp, filosofía), especialidades (accordion fichas),
- *                          promociones (banner), calidad (encabezado),
- *                          ubicacion (maps_embed), footer, seo
- *   · estudios (JOIN)   → SSOT para tarjetas de promociones diarias
- *
- * Claves configuraciones usadas:
- *   telefono · email_contacto · whatsapp_numero · facebook_url
- *   direccion · direccion_calle · ciudad · estado · cp
- *   horario_semana · horario_domingo · hrs_open · hrs_close · dom_open · dom_close
- *   responsable_nombre · responsable_cedula_prof · responsable_cedula_esp
- *   nombre_laboratorio · nombre_corto · anios_experiencia
- */
-declare(strict_types=1);
-require_once __DIR__ . '/../commons/commons.php';
-
-// ── HTTP Caching & Performance Optimization Headers ───────────────────────────
-// Permite revalidación rápida y caché eficiente del navegador sin afectar sesiones
-if (empty($_SESSION['auth_logged_in'])) {
-    header('Cache-Control: public, max-age=300, must-revalidate');
-} else {
-    header('Cache-Control: no-cache, must-revalidate');
-}
-
-// ── CSRF para modal de login ────────────────────────────────────────────────
-if (empty($_SESSION['csrf_token'])) {
-    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-}
-
-// ── Helpers ─────────────────────────────────────────────────────────────────
-/** Escapa para salida HTML (texto y atributos). */
-function h(mixed $v): string {
-    return htmlspecialchars((string)($v ?? ''), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
-}
-/** Formatea precio MXN entero: "$1,234" o '' si no hay precio. */
-function money(mixed $v): string {
-    $n = (float)($v ?? 0);
-    return $n > 0 ? '$' . number_format($n, 0, '.', ',') : '';
-}
-/** Devuelve solo dígitos de un número de teléfono. */
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 9:20 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L49-99)</summary>
-
-**Path:** `Unknown file`
-
-```
-/** Devuelve solo dígitos de un número de teléfono. */
-function waNum(string $raw): string {
-    return preg_replace('/\D/', '', $raw);
-}
-/**
- * Renderiza HTML de confianza generado por el RTE del CMS (admins LAESH).
- * Permite tags ricos de CKEditor 5.
- * Bloquea: <script>, atributos on*, href con javascript:
- */
-function safeHtml(mixed $v): string {
-    $html = strip_tags((string)($v ?? ''), ['strong','em','b','i','br','p','ul','ol','li','a','span','table','tbody','tr','td','th','thead','hr','figure','iframe','h1','h2','h3','h4','h5','h6','u','s','blockquote','oembed','div','img','mark']);
-    $html = preg_replace('/\s+on\w+\s*=\s*(?:"[^"]*"|\'[^\']*\'|[^\s>]*)/i', '', $html);
-    $html = preg_replace('/href\s*=\s*["\']?\s*javascript:/i', 'href="#" data-blocked=', $html);
-
-    // Convertir <oembed url="..."> a <iframe> para YouTube, Spotify, Vimeo si vienen etiquetas oembed crudas
-    $html = preg_replace_callback('/<oembed\s+url=["\']([^"\']+)["\']\s*>\s*<\/oembed>/i', function($matches) {
-        $url = $matches[1];
-        if (preg_match('/(?:youtube\.com\/(?:watch\?v=|embed\/|v\/)|youtu\.be\/)([\w-]+)/i', $url, $m)) {
-            $yId = $m[1];
-            return '<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,0.12);">' .
-                   '<iframe src="https://www.youtube.com/embed/' . $yId . '" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;border-radius:12px;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' .
-                   '</div>';
-        }
-        if (preg_match('/vimeo\.com\/(?:video\/)?(\d+)/i', $url, $m)) {
-            $vId = $m[1];
-            return '<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;">' .
-                   '<iframe src="https://player.vimeo.com/video/' . $vId . '" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allowfullscreen></iframe>' .
-                   '</div>';
-        }
-        return '<a href="' . htmlspecialchars($url, ENT_QUOTES, 'UTF-8') . '" target="_blank" rel="noopener">' . htmlspecialchars($url, ENT_QUOTES, 'UTF-8') . '</a>';
-    }, $html);
-
-    // Limpiar párrafos vacíos redundantes al inicio y final (<p>&nbsp;</p>, <p></p>) que dejan espacios verticales masivos
-    $html = preg_replace('/^(?:\s*<p>(?:&nbsp;|\s)*<\/p>)+/i', '', $html);
-    $html = preg_replace('/(?:\s*<p>(?:&nbsp;|\s)*<\/p>)+\s*$/i', '', trim($html));
-
-    return $html;
-}
-
-/** Devuelve un valor de la tabla web_contenidos de manera segura */
-function cmsVal(?array $c, string $sec, ?string $sub, string $clave, string $default = ''): string {
-    if (!is_array($c)) return $default;
-    $subKey = $sub ?? '';
-    if (isset($c[$sec][$subKey][$clave])) {
-        return (string)$c[$sec][$subKey][$clave];
-    }
-    if ($subKey === '' && isset($c[$sec][''][$clave])) {
-        return (string)$c[$sec][''][$clave];
-    }
-    return $default;
-}
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L100-149)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-/**
- * Parsea el texto de fichas del CMS al array estructurado del acordeón.
- *
- * Formato esperado (una sub-categoría por línea):
- *   [Hematología] Citometría Hemática, Grupo y RH, Plaquetas
- *   [Química Clínica] Química Sanguínea 3, Química Sanguínea 7, ...
- *
- * @return list<array{cat: string, items: list<string>}>
- */
-function parseFichas(string $text): array {
-    $groups = [];
-    foreach (explode("\n", $text) as $line) {
-        $line = trim($line);
-        if ($line === '') continue;
-        if (preg_match('/^\[(.+?)\]\s*(.+)/', $line, $m)) {
-            $items = array_values(array_filter(
-                array_map('trim', explode(',', $m[2]))
-            ));
-            if ($items) {
-                $groups[] = ['cat' => trim($m[1]), 'items' => $items];
-            }
-        }
-    }
-    return $groups;
-}
-
-// ── Conexión DB ─────────────────────────────────────────────────────────────
-$db = Flight::db();
-
-// ── Caché L2: OPcache PHP File Store (Estrategia A — Sprint Cache 2026-09) ──
-// Inicializar una sola vez por request. Env: 'dev' en local, 'prod' en OCI/Hostinger.
-\Common\Cache::init('', defined('APP_ENV') ? APP_ENV : 'prod');
-
-if (!empty($_GET['reset_cache'])) {
-    if (function_exists('opcache_reset')) { @opcache_reset(); }
-    \Common\Cache::clear();
-}
-$_bypassCache = (!empty($_SESSION['auth_logged_in']) && !empty($_GET['_preview']) && !empty($_SESSION['cms_draft'])) || !empty($_GET['nocache']) || !empty($_GET['reset_cache']);
-
-// ── 1a. configuraciones ─────────────────────────────────────────────────────
-$configRaw = $_bypassCache ? null : \Common\Cache::get(\Common\Cache::KEY_CFG);
-if ($configRaw === null) {
-    $configRaw = $db->query("SELECT clave, valor FROM configuraciones")->fetchAll(\PDO::FETCH_KEY_PAIR) ?: [];
-    if (!$_bypassCache) \Common\Cache::set(\Common\Cache::KEY_CFG, $configRaw);
-}
-
-// ── 1b. web_contenidos → $cms ────────────────────────────────────────────────
-$_cmsRaw = $_bypassCache ? null : \Common\Cache::get(\Common\Cache::KEY_CMS);
-if ($_cmsRaw === null) {
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Analyzing Footer Rendering**
-
-Okay, I'm currently focused on how the footer is rendered within `website/index.php`. Specifically, I'm examining lines 463-480 to understand the process. The code references "$footerHtml," and I need to figure out how it is populated, especially the footer's background color which seems CMS-driven.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `_preview`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.074395487s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 9:20 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L149-179)</summary>
-
-**Path:** `Unknown file`
-
-```
-if ($_cmsRaw === null) {
-    $_cmsRaw = [];
-    foreach ($db->query("SELECT seccion, subseccion, clave, valor FROM web_contenidos ORDER BY id")->fetchAll(\PDO::FETCH_ASSOC) as $row) {
-        $_cmsRaw[$row['seccion']][$row['subseccion']][$row['clave']] = $row['valor'];
-    }
-    if (!$_bypassCache) \Common\Cache::set(\Common\Cache::KEY_CMS, $_cmsRaw);
-}
-$cms = $_cmsRaw;
-
-// ── 2. Preview de borrador CMS (solo sesión admin activa) ──────────────────
-// IMPORTANTE: el merge debe ocurrir ANTES de definir $cfg y $c, porque las arrow
-// functions de PHP capturan variables por VALOR en el momento de su creación.
-// Delight Auth guarda el login bajo $_SESSION['auth_logged_in'] (NOT 'user_id').
-$isPreview = !empty($_GET['_preview'])
-    && !empty($_SESSION['auth_logged_in'])
-    && !empty($_SESSION['cms_draft']);
-if ($isPreview) {
-    foreach ($_SESSION['cms_draft'] as $draftSec => $campos) {
-        foreach ($campos as $rawKey => $val) {
-            // Manejar configuraciones globales (prefijo _cfg_)
-            if (str_starts_with($rawKey, '_cfg_')) {
-                $configRaw[substr($rawKey, 5)] = $val;
-                continue;
-            }
-            // Manejar web_contenidos (formato {sub}__{clave})
-            [$sub, $clave] = array_pad(explode('__', $rawKey, 2), 2, $rawKey);
-            $cms[$draftSec][$sub][$clave] = $val;
-        }
-    }
-}
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L459-484)</summary>
-
-**Path:** `Unknown file`
-
-```
-$ubSub     = $c('ubicacion', 'seccion', 'subtitulo');
-$mapsEmbed = $c('ubicacion', 'info', 'maps_embed');
-
-// Footer — Color de Fondo desde CMS + Contenido dinámico 100% SSOT desde configuraciones
-$footerBgColor = $c('footer', 'estilo', 'bg_color', '#0f172a');
-$footerHtml    = '<div class="footer-info">'
-    . '<img src="/laesh-web-assets-uipv1a/img/logo-laesh.webp" alt="' . h($cfgNombreLab ?: $cfgNombreC) . '" class="footer-logo-img" style="max-height: 40px; width: auto;" decoding="async" loading="lazy">'
-    . '<p class="footer-text">'
-        . '<strong>' . h($cfgNombreLab ?: 'Laboratorio de Especialidades Hematológicas S.C.') . '</strong> &nbsp;|&nbsp; '
-        . h($cfgDir)
-        . ($cfgTel ? ' &nbsp;|&nbsp; Tel: <a href="tel:' . h($cfgTelDigit) . '">' . h($cfgTel) . '</a>' : '')
-        . ($cfgWA ? ' &nbsp;|&nbsp; WhatsApp: <a href="https://wa.me/52' . h($cfgWA) . '" target="_blank" rel="noopener noreferrer">' . h($cfgWA) . '</a>' : '')
-    . '</p>'
-    . '<p class="footer-text">'
-        . h($cfgHorSem ?: 'Lunes a Sábado 7:00 a 20:00 hrs')
-        . ($cfgHorDom ? ' &nbsp;·&nbsp; ' . h($cfgHorDom) : '')
-        . ' &nbsp;|&nbsp; <a href="#" id="link-privacy">Aviso de Privacidad</a> &nbsp;|&nbsp; © ' . date('Y') . ' ' . h($cfgNombreC ?: 'LAESH') . '. Todos los derechos reservados.'
-    . '</p>'
-. '</div>';
-
-// Aviso de Privacidad — Contenido HTML consolidado desde el RTE del CMS
-$avisoHtml = $c('aviso-privacidad', 'contenido', 'cuerpo_html');
-
-// SEO (sin fallback)
-$schemaName  = h($c('seo', 'schema', 'schema_name'));
-$schemaType  = h($c('seo', 'schema', 'schema_type'));  // p.ej. MedicalOrganization
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 9:20 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `class `
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 9:20 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `DB.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-<?php
-// DB.php - Clase para conexión PDO e interacción transaccional con la base de datos
-
-namespace Common;
-
-use PDO;
-use PDOException;
-
-class DB {
-    private static ?PDO $instance = null;
-
-    /**
-     * Establece la conexión PDO singleton
-     */
-    public static function connect(): PDO {
-        if (self::$instance === null) {
-            $config = require __DIR__ . '/config.php';
-            $dbConf = $config['db'];
-
-            $dsn = sprintf(
-                "mysql:host=%s;port=%d;dbname=%s;charset=%s",
-                $dbConf['host'],
-                $dbConf['port'],
-                $dbConf['name'],
-                $dbConf['charset']
-            );
-
-            try {
-                self::$instance = new PDO($dsn, $dbConf['user'], $dbConf['pass'], [
-                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 9:20 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-**Analyzing Code Logic**
-
-I've confirmed the MySQL service is intentionally off; that's expected. My focus has shifted to the `laesh-swbldi/website/index.php` file, specifically lines 463 to 480. I'm starting my analysis of this code block.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.001165960s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1444-1459)</summary>
-
-**Path:** `Unknown file`
-
-```
-                        El contenido del Pie de Página proviene dinámicamente de la <strong>Pestaña 6 (Ubicación y Contacto)</strong>.
-                        Usa el editor a continuación para aplicar <strong>estilos visuales</strong> (colores de fuente, negritas, alineación y resaltados) sobre la maqueta base.
-                    </p>
-                    <div class="cms-info-box" style="background:#fffbeb;border:1.5px solid #ca8a04;border-radius:8px;padding:0.65rem 1rem;margin-bottom:0.75rem;font-size:0.83rem;color:#92400e;display:flex;align-items:center;gap:0.5rem;">
-                        🔒 <strong>Modo Solo-Estilos:</strong> El texto directo no se teclea aquí. Selecciona el texto para aplicar color, tamaño o negritas. Para modificar números o dirección, edita la <a href="javascript:void(0)" onclick="var t=document.querySelector('[data-panel=\'panel-contacto\']'); if(t) t.click();" style="color:#b45309; font-weight:bold; text-decoration:underline;">Pestaña 6 (Ubicación)</a>.
-                    </div>
-
-                    <div class="field-group">
-                        <label class="fw-bold mb-1" style="font-size:0.85rem;">Editor RTE de Formato Visual del Footer:</label>
-                        <div id="ck-footer" class="ck5-mount ck5-mount-lg"></div>
-                        <textarea id="ck-footer-data" name="contenido__cuerpo_html" class="ck5-hidden-data"><?= htmlspecialchars(cmsRaw($contenidos, 'footer', 'contenido', 'cuerpo_html')) ?></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L462-479)</summary>
-
-**Path:** `Unknown file`
-
-```
-// Footer — Color de Fondo desde CMS + Contenido dinámico 100% SSOT desde configuraciones
-$footerBgColor = $c('footer', 'estilo', 'bg_color', '#0f172a');
-$footerHtml    = '<div class="footer-info">'
-    . '<img src="/laesh-web-assets-uipv1a/img/logo-laesh.webp" alt="' . h($cfgNombreLab ?: $cfgNombreC) . '" class="footer-logo-img" style="max-height: 40px; width: auto;" decoding="async" loading="lazy">'
-    . '<p class="footer-text">'
-        . '<strong>' . h($cfgNombreLab ?: 'Laboratorio de Especialidades Hematológicas S.C.') . '</strong> &nbsp;|&nbsp; '
-        . h($cfgDir)
-        . ($cfgTel ? ' &nbsp;|&nbsp; Tel: <a href="tel:' . h($cfgTelDigit) . '">' . h($cfgTel) . '</a>' : '')
-        . ($cfgWA ? ' &nbsp;|&nbsp; WhatsApp: <a href="https://wa.me/52' . h($cfgWA) . '" target="_blank" rel="noopener noreferrer">' . h($cfgWA) . '</a>' : '')
-    . '</p>'
-    . '<p class="footer-text">'
-        . h($cfgHorSem ?: 'Lunes a Sábado 7:00 a 20:00 hrs')
-        . ($cfgHorDom ? ' &nbsp;·&nbsp; ' . h($cfgHorDom) : '')
-        . ' &nbsp;|&nbsp; <a href="#" id="link-privacy">Aviso de Privacidad</a> &nbsp;|&nbsp; © ' . date('Y') . ' ' . h($cfgNombreC ?: 'LAESH') . '. Todos los derechos reservados.'
-    . '</p>'
-. '</div>';
-
-// Aviso de Privacidad — Contenido HTML consolidado desde el RTE del CMS
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Analyzing the Bug**
-
-I've pinpointed the issue in `laesh-swbldi/website/index.php`. Line 465 onwards, specifically the assignment to `$footerHtml`, was obliterating any content from the RTE, including crucial CMS-managed data. It effectively ignored `$c('footer', 'contenido', 'cuerpo_html')`. I'm devising a fix to ensure the RTE content is correctly rendered.
-
-
-**Revising Default Values**
-
-I've discovered the issue is not just in the initial assignment. I need to handle cases where the RTE content is initially empty in the database. My revised plan is to ensure `gestion_web.php` provides a default HTML structure to CKEditor via `cmsRaw()`. I'm building a `$defaultFooterRte` that mirrors the intended default footer appearance, so new users have a clean template to work with.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.185101803s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 9:20 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 9:21 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1444-1459)</summary>
-
-**Path:** `Unknown file`
-
-```
-                        El contenido del Pie de Página proviene dinámicamente de la <strong>Pestaña 6 (Ubicación y Contacto)</strong>.
-                        Usa el editor a continuación para aplicar <strong>estilos visuales</strong> (colores de fuente, negritas, alineación y resaltados) sobre la maqueta base.
-                    </p>
-                    <div class="cms-info-box" style="background:#fffbeb;border:1.5px solid #ca8a04;border-radius:8px;padding:0.65rem 1rem;margin-bottom:0.75rem;font-size:0.83rem;color:#92400e;display:flex;align-items:center;gap:0.5rem;">
-                        🔒 <strong>Modo Solo-Estilos:</strong> El texto directo no se teclea aquí. Selecciona el texto para aplicar color, tamaño o negritas. Para modificar números o dirección, edita la <a href="javascript:void(0)" onclick="var t=document.querySelector('[data-panel=\'panel-contacto\']'); if(t) t.click();" style="color:#b45309; font-weight:bold; text-decoration:underline;">Pestaña 6 (Ubicación)</a>.
-                    </div>
-
-                    <div class="field-group">
-                        <label class="fw-bold mb-1" style="font-size:0.85rem;">Editor RTE de Formato Visual del Footer:</label>
-                        <div id="ck-footer" class="ck5-mount ck5-mount-lg"></div>
-                        <textarea id="ck-footer-data" name="contenido__cuerpo_html" class="ck5-hidden-data"><?= htmlspecialchars(cmsRaw($contenidos, 'footer', 'contenido', 'cuerpo_html')) ?></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 9:21 pm
 
 ---
@@ -28357,6 +25456,2399 @@ I've completed auditing and fixing everything. Now, I'm shifting focus to crafti
 **Active File:** `gestion_web.php`
 **Language:** php
 </details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+. Similar a lo que hiciste de checbbox encendido / apagado en estudios aplicalo a hora a las 3 imagenes de 5. Calidad e Instalaciones.
+. QUe Admin/10. Ordenamiento/Video promo el control de encendido se mueva a la Admin/9. Video promo. (que se utilice el formato de checkbox y no de radio, para quede homologado)
+
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `gestion_web.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `gallery`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 8:48 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L964-1039)</summary>
+
+**Path:** `Unknown file`
+
+```
+                        <label>Subtítulo / Descripción de la Sección</label>
+                        <input type="text" name="seccion__subtitulo"
+                               value="<?= cms($contenidos, 'calidad', 'seccion', 'subtitulo', 'Conoce nuestras instalaciones equipadas con tecnología de vanguardia y un equipo comprometido con la excelencia diagnóstica.') ?>">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tarjeta 1 -->
+            <?php
+            $galImgUrl1 = cms($contenidos, 'calidad', 'gallery1', 'imagen_url');
+            $imgDef1 = '/laesh-web-assets-uipv1a/img/area-hematologia-uno.webp';
+            ?>
+            <div class="editor-card">
+                <div class="editor-card-header">
+                    <div class="card-title">Tarjeta 1 — Área de Hematología</div>
+                </div>
+                <div class="editor-card-body">
+                    <div class="field-group">
+                        <label>Imagen de Galería</label>
+                        <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px; font-size: 0.78rem;">
+                            📐 <strong>Codec:</strong> WebP únicamente &nbsp;·&nbsp;
+                            <strong>Quality:</strong> 75 &nbsp;·&nbsp;
+                            <strong>Effort:</strong> 6 &nbsp;·&nbsp;
+                            <strong>Dimensiones:</strong> 800 × 580 px (ratio ~1.38:1) &nbsp;·&nbsp;
+                            <strong>Orientación Horizontal</strong> &nbsp;·&nbsp;
+                            <strong>Peso:</strong> máx. 40 KB
+                        </p>
+                        <div class="image-upload-box">
+                            <img id="prev-calidad-gallery1"
+                                 src="<?= $galImgUrl1 ? h($galImgUrl1) : $imgDef1 ?>"
+                                 alt="Área de Hematología" class="img-preview-sm"
+                                 onerror="this.src='<?= $imgDef1 ?>'">
+                            <label for="file-calidad-gallery1" class="btn btn-secondary">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                                Cambiar Imagen
+                            </label>
+                            <input type="file" accept="image/webp"
+                                   id="file-calidad-gallery1" class="d-none"
+                                   data-upload-slot="calidad-gallery1"
+                                   data-preview-id="prev-calidad-gallery1"
+                                   data-target-input="url-calidad-gallery1">
+                        </div>
+                        <input type="url" id="url-calidad-gallery1"
+                               name="gallery1__imagen_url"
+                               value="<?= h($galImgUrl1) ?>"
+                               placeholder="<?= $imgDef1 ?>"
+                               class="cms-img-url-input" data-no-limit>
+                        <?php $imgBasename1 = $galImgUrl1 ? basename($galImgUrl1) : basename($imgDef1); ?>
+                        <span id="lbl-img-calidad-gallery1" class="cms-img-filename-label"><?= h($imgBasename1) ?></span>
+                    </div>
+                    <div class="field-group">
+                        <label>Título</label>
+                        <input type="text" name="gallery1__titulo"
+                               value="<?= cms($contenidos, 'calidad', 'gallery1', 'titulo', 'Área de Hematología') ?>">
+                    </div>
+                    <div class="field-group">
+                        <label>Descripción</label>
+                        <input type="text" name="gallery1__descripcion"
+                               value="<?= cms($contenidos, 'calidad', 'gallery1', 'descripcion', 'Análisis de biometría hemática y células sanguíneas con rigor científico y alta precisión.') ?>">
+                    </div>
+                </div>
+            </div>
+            </div><!-- /grid-2col fila 1 -->
+
+            <!-- Fila 2: Tarjeta 2 + Tarjeta 3 -->
+            <hr class="cms-section-sep">
+            <div class="grid-2col mb-4">
+            <!-- Tarjeta 2 -->
+            <?php
+            $galImgUrl2 = cms($contenidos, 'calidad', 'gallery2', 'imagen_url');
+            $imgDef2 = '/laesh-web-assets-uipv1a/img/area-quimica-clinica.webp';
+            ?>
+            <div class="editor-card">
+                <div class="editor-card-header">
+                    <div class="card-title">Tarjeta 2 — Química Clínica</div>
+                </div>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `video`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 8:49 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1639-1759)</summary>
+
+**Path:** `Unknown file`
+
+```
+             Sección: video-promo | RTE Completo con Enlaces y Medios (YouTube, Vimeo, etc.)
+             ================================================================ -->
+        <div id="panel-video-promo" class="cms-panel" role="tabpanel" aria-labelledby="tab-video-promo" tabindex="0" data-section="video-promo">
+            <div class="cms-panel-header">
+                <h3 class="cms-h3">9. Video Promo — Enlaces e Incrustación de Video (#video-promo)</h3>
+            </div>
+
+            <hr class="cms-section-sep">
+            <div class="editor-card mb-4">
+                <div class="editor-card-header">
+                    <div class="card-title">Contenido del Video Promocional (Editor RTE Completo)</div>
+                </div>
+                <div class="editor-card-body">
+                    <p class="cms-p">
+                        Utiliza este editor con capacidades completas para insertar enlaces web e incrustar reproductores de video (YouTube, Spotify, Vimeo, etc.) para la promoción institucional.
+                    </p>
+                    <div class="field-group">
+                        <div id="ck-video-promo" class="ck5-mount ck5-mount-lg"></div>
+                        <textarea id="ck-video-promo-data" name="contenido__cuerpo_html" class="ck5-hidden-data"><?= htmlspecialchars(cmsRaw($contenidos, 'video-promo', 'contenido', 'cuerpo_html')) ?></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================================================================
+             PANEL 10: CONFIGURACIÓN GENERAL — Orden de Secciones
+             Sección: configuracion-general | Campo: _cfg_seccion_order
+             Persiste en tabla configuraciones (clave='seccion_order') vía prefijo _cfg_
+             ================================================================ -->
+        <div id="panel-configuracion-general" class="cms-panel" role="tabpanel" aria-labelledby="tab-configuracion-general" tabindex="0" data-section="configuracion-general">
+            <div class="cms-panel-header">
+                <h3 class="cms-h3">Orden de Secciones — Página de Inicio</h3>
+            </div>
+
+            <hr class="cms-section-sep">
+            <div class="editor-card mb-4">
+                <div class="editor-card-header">
+                    <div class="card-title">Orden Vertical de Secciones (#inicio)</div>
+                </div>
+                <div class="editor-card-body">
+                    <!-- Hidden input que serializa el orden para el POST /cms/save -->
+                    <input type="hidden"
+                           id="seccion-order-input"
+                           name="_cfg_seccion_order"
+                           value="<?= h($config['seccion_order'] ?? '') ?>">
+
+                    <?php
+                    // Reconstruir orden desde BD, o usar el default si no hay valor
+                    $_secDefault = ['inicio','acerca-de','especialidades','promociones','calidad','ubicacion','video'];
+                    $_secLabels  = [
+                        'inicio'        => ['icon'=>'🖼️', 'label'=>'Inicio (Banner Principal y Slider)', 'anchor'=>'#inicio',    'locked'=>false, 'toggle'=>false],
+                        'acerca-de'     => ['icon'=>'👥', 'label'=>'Quiénes somos',                       'anchor'=>'#acerca-de', 'locked'=>false, 'toggle'=>false],
+                        'especialidades'=> ['icon'=>'🔬', 'label'=>'Estudios de Rutina',                    'anchor'=>'#especialidades','locked'=>false, 'toggle'=>false],
+                        'promociones'   => ['icon'=>'🏷️', 'label'=>'Promociones Vigentes',                  'anchor'=>'#promociones','locked'=>false, 'toggle'=>false],
+                        'calidad'       => ['icon'=>'🖼️', 'label'=>'Calidad e Instalaciones',               'anchor'=>'#calidad',    'locked'=>false, 'toggle'=>false],
+                        'ubicacion'     => ['icon'=>'📍', 'label'=>'Ubicación y Contacto',                  'anchor'=>'#ubicacion',  'locked'=>false, 'toggle'=>false],
+                        'video'         => ['icon'=>'🎬', 'label'=>'Video promo',                           'anchor'=>'#video',      'locked'=>false, 'toggle'=>true],
+                    ];
+                    $_rawOrder  = $config['seccion_order'] ?? '';
+                    if ($_rawOrder !== '') {
+                        $_parsed  = array_unique(array_filter(
+                            array_map('trim', explode(',', $_rawOrder)),
+                            fn($s) => in_array($s, $_secDefault, true)
+                        ));
+                        $_missing = array_diff($_secDefault, $_parsed);
+                        $_ordered = array_values(array_merge($_parsed, $_missing));
+                    } else {
+                        $_ordered = $_secDefault;
+                    }
+                    unset($_secDefault, $_rawOrder, $_parsed, $_missing);
+
+                    $videoActive = ($config['video_active'] ?? '1') !== '0';
+                    ?>
+
+                    <p class="cms-help-text mb-3">Arrastra las secciones para cambiar su orden vertical. Puedes mover la sección <strong>Video promo</strong> arriba o abajo de <strong>Inicio</strong>. El cambio se aplica al publicar o en la Vista Previa.</p>
+
+                    <ul id="seccion-order-list"
+                        style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.6rem">
+                        <?php foreach ($_ordered as $_sid):
+                            $meta = $_secLabels[$_sid] ?? ['icon'=>'•','label'=>$_sid,'anchor'=>'','locked'=>false,'toggle'=>false];
+                            $isLocked = !empty($meta['locked']);
+                            $hasToggle = !empty($meta['toggle']);
+                        ?>
+                        <li data-seccion-id="<?= h($_sid) ?>"
+                            draggable="<?= $isLocked ? 'false' : 'true' ?>"
+                            style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1rem;border-radius:8px;border:1.5px solid <?= $isLocked ? 'var(--primary-green-light,#e2e8f0)' : 'var(--border-color,#d1d5db)' ?>;background:<?= $isLocked ? '#f8fafc' : 'var(--card-bg,#fff)' ?>;cursor:<?= $isLocked ? 'not-allowed' : 'grab' ?>;user-select:none;transition:box-shadow .15s,border-color .15s">
+                            <!-- Grip icon or Lock icon -->
+                            <?php if ($isLocked): ?>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary-green-dark,#059669)" stroke-width="2" stroke-linecap="round" style="flex-shrink:0">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                            </svg>
+                            <?php else: ?>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--txt-muted,#9ca3af)" stroke-width="2" stroke-linecap="round" style="flex-shrink:0">
+                                <circle cx="9" cy="5" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="19" r="1"/>
+                                <circle cx="15" cy="5" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="19" r="1"/>
+                            </svg>
+                            <?php endif; ?>
+                            <span style="font-size:1.15rem;line-height:1;flex-shrink:0"><?= $meta['icon'] ?></span>
+                            <span style="flex:1;font-weight:600;color:var(--txt-main,#111)"><?= h($meta['label']) ?> <?= $isLocked ? '<small class="txt-muted" style="font-weight:400;">(Fija en cabecera)</small>' : '' ?></span>
+                            <code style="font-size:0.78rem;color:var(--txt-muted,#6b7280);background:var(--bg-subtle,#f3f4f6);padding:2px 6px;border-radius:4px"><?= h($_sid) ?></code>
+                            <a href="/laesh/?_preview=1<?= h($meta['anchor']) ?>"
+                               target="_blank" rel="noopener noreferrer"
+                               title="Vista previa de esta sección"
+                               style="flex-shrink:0;color:var(--primary,#0052B7);text-decoration:none;font-size:0.8rem;margin-right:<?= $hasToggle ? '4px' : '0' ?>;"
+                               onclick="event.stopPropagation()">↗</a>
+
+                            <?php if ($hasToggle): ?>
+                            <div style="display:flex;align-items:center;gap:6px;margin-left:6px;background:var(--bg-subtle,#f1f5f9);padding:3px 8px;border-radius:6px;" onclick="event.stopPropagation()">
+                                <label style="font-size:0.78rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:3px;margin:0;">
+                                    <input type="radio" name="_cfg_video_active" value="1" <?= $videoActive ? 'checked' : '' ?> style="cursor:pointer;" class="sec-toggle-radio">
+                                    <span style="color:var(--primary-green-dark,#059669);">Encendido</span>
+                                </label>
+                                <label style="font-size:0.78rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:3px;margin:0;">
+                                    <input type="radio" name="_cfg_video_active" value="0" <?= !$videoActive ? 'checked' : '' ?> style="cursor:pointer;" class="sec-toggle-radio">
+                                    <span style="color:#dc2626;">Apagado</span>
+                                </label>
+                            </div>
+                            <?php endif; ?>
+                        </li>
+                        <?php endforeach; unset($_ordered, $_secLabels, $_sid, $meta, $isLocked, $hasToggle); ?>
+                    </ul>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing User Request**
+
+I'm currently dissecting the user's request for a video promo. The core seems to be about shifting the control for the 'ignition' functionality within the "Admin/9" video. I'm focusing on the change from radio buttons to checkboxes for standardization. I believe it is about user preference.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `video_active`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.099479894s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 8:49 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L300-324)</summary>
+
+**Path:** `Unknown file`
+
+```
+}
+
+// ── 3e. Calidad gallery — 3 tarjetas (sin fallback) ────────────────────────
+$_calDef = [
+    1 => ['Área de Hematología',      'Análisis de biometría hemática y células sanguíneas con rigor científico y alta precisión.'],
+    2 => ['Química Clínica',          'Determinación automatizada de metabolitos, perfil lipídico y enzimas específicas.'],
+    3 => ['Microbiología y Cultivos', 'Aislamiento, tinción de Gram y pruebas de susceptibilidad a antimicrobianos.'],
+];
+$calidadCards = [];
+for ($qi = 1; $qi <= 3; $qi++) {
+    $calidadCards[$qi] = [
+        'img'    => $c('calidad', "gallery{$qi}", 'imagen_url', ''),
+        'alt'    => $_calDef[$qi][0],
+        'titulo' => $c('calidad', "gallery{$qi}", 'titulo',      $_calDef[$qi][0]),
+        'desc'   => $c('calidad', "gallery{$qi}", 'descripcion', $_calDef[$qi][1]),
+    ];
+}
+
+// ── 1d. Promociones vigentes → $promos ───────────────────────────────────────
+$promos = $_bypassCache ? null : \Common\Cache::get(\Common\Cache::KEY_PROMOS);
+if ($promos === null) {
+    $promoStmt = $db->query(
+        "SELECT cp.id, cp.dia_semana, cp.nombre_oferta, cp.subtitulo, cp.descripcion,
+                cp.ayuno, cp.tiempo_entrega, cp.precio_regular, cp.precio_oferta,
+                cp.imagen_fondo, cp.activo,
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L972-1149)</summary>
+
+**Path:** `Unknown file`
+
+```
+            <?php
+            $galImgUrl1 = cms($contenidos, 'calidad', 'gallery1', 'imagen_url');
+            $imgDef1 = '/laesh-web-assets-uipv1a/img/area-hematologia-uno.webp';
+            ?>
+            <div class="editor-card">
+                <div class="editor-card-header">
+                    <div class="card-title">Tarjeta 1 — Área de Hematología</div>
+                </div>
+                <div class="editor-card-body">
+                    <div class="field-group">
+                        <label>Imagen de Galería</label>
+                        <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px; font-size: 0.78rem;">
+                            📐 <strong>Codec:</strong> WebP únicamente &nbsp;·&nbsp;
+                            <strong>Quality:</strong> 75 &nbsp;·&nbsp;
+                            <strong>Effort:</strong> 6 &nbsp;·&nbsp;
+                            <strong>Dimensiones:</strong> 800 × 580 px (ratio ~1.38:1) &nbsp;·&nbsp;
+                            <strong>Orientación Horizontal</strong> &nbsp;·&nbsp;
+                            <strong>Peso:</strong> máx. 40 KB
+                        </p>
+                        <div class="image-upload-box">
+                            <img id="prev-calidad-gallery1"
+                                 src="<?= $galImgUrl1 ? h($galImgUrl1) : $imgDef1 ?>"
+                                 alt="Área de Hematología" class="img-preview-sm"
+                                 onerror="this.src='<?= $imgDef1 ?>'">
+                            <label for="file-calidad-gallery1" class="btn btn-secondary">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                                Cambiar Imagen
+                            </label>
+                            <input type="file" accept="image/webp"
+                                   id="file-calidad-gallery1" class="d-none"
+                                   data-upload-slot="calidad-gallery1"
+                                   data-preview-id="prev-calidad-gallery1"
+                                   data-target-input="url-calidad-gallery1">
+                        </div>
+                        <input type="url" id="url-calidad-gallery1"
+                               name="gallery1__imagen_url"
+                               value="<?= h($galImgUrl1) ?>"
+                               placeholder="<?= $imgDef1 ?>"
+                               class="cms-img-url-input" data-no-limit>
+                        <?php $imgBasename1 = $galImgUrl1 ? basename($galImgUrl1) : basename($imgDef1); ?>
+                        <span id="lbl-img-calidad-gallery1" class="cms-img-filename-label"><?= h($imgBasename1) ?></span>
+                    </div>
+                    <div class="field-group">
+                        <label>Título</label>
+                        <input type="text" name="gallery1__titulo"
+                               value="<?= cms($contenidos, 'calidad', 'gallery1', 'titulo', 'Área de Hematología') ?>">
+                    </div>
+                    <div class="field-group">
+                        <label>Descripción</label>
+                        <input type="text" name="gallery1__descripcion"
+                               value="<?= cms($contenidos, 'calidad', 'gallery1', 'descripcion', 'Análisis de biometría hemática y células sanguíneas con rigor científico y alta precisión.') ?>">
+                    </div>
+                </div>
+            </div>
+            </div><!-- /grid-2col fila 1 -->
+
+            <!-- Fila 2: Tarjeta 2 + Tarjeta 3 -->
+            <hr class="cms-section-sep">
+            <div class="grid-2col mb-4">
+            <!-- Tarjeta 2 -->
+            <?php
+            $galImgUrl2 = cms($contenidos, 'calidad', 'gallery2', 'imagen_url');
+            $imgDef2 = '/laesh-web-assets-uipv1a/img/area-quimica-clinica.webp';
+            ?>
+            <div class="editor-card">
+                <div class="editor-card-header">
+                    <div class="card-title">Tarjeta 2 — Química Clínica</div>
+                </div>
+                <div class="editor-card-body">
+                    <div class="field-group">
+                        <label>Imagen de Galería</label>
+                        <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px; font-size: 0.78rem;">
+                            📐 <strong>Codec:</strong> WebP únicamente &nbsp;·&nbsp;
+                            <strong>Quality:</strong> 75 &nbsp;·&nbsp;
+                            <strong>Effort:</strong> 6 &nbsp;·&nbsp;
+                            <strong>Dimensiones:</strong> 800 × 580 px (ratio ~1.38:1) &nbsp;·&nbsp;
+                            <strong>Orientación Horizontal</strong> &nbsp;·&nbsp;
+                            <strong>Peso:</strong> máx. 40 KB
+                        </p>
+                        <div class="image-upload-box">
+                            <img id="prev-calidad-gallery2"
+                                 src="<?= $galImgUrl2 ? h($galImgUrl2) : $imgDef2 ?>"
+                                 alt="Química Clínica" class="img-preview-sm"
+                                 onerror="this.src='<?= $imgDef2 ?>'">
+                            <label for="file-calidad-gallery2" class="btn btn-secondary">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                                Cambiar Imagen
+                            </label>
+                            <input type="file" accept="image/webp"
+                                   id="file-calidad-gallery2" class="d-none"
+                                   data-upload-slot="calidad-gallery2"
+                                   data-preview-id="prev-calidad-gallery2"
+                                   data-target-input="url-calidad-gallery2">
+                        </div>
+                        <input type="url" id="url-calidad-gallery2"
+                               name="gallery2__imagen_url"
+                               value="<?= h($galImgUrl2) ?>"
+                               placeholder="<?= $imgDef2 ?>"
+                               class="cms-img-url-input" data-no-limit>
+                        <?php $imgBasename2 = $galImgUrl2 ? basename($galImgUrl2) : basename($imgDef2); ?>
+                        <span id="lbl-img-calidad-gallery2" class="cms-img-filename-label"><?= h($imgBasename2) ?></span>
+                    </div>
+                    <div class="field-group">
+                        <label>Título</label>
+                        <input type="text" name="gallery2__titulo"
+                               value="<?= cms($contenidos, 'calidad', 'gallery2', 'titulo', 'Química Clínica') ?>">
+                    </div>
+                    <div class="field-group">
+                        <label>Descripción</label>
+                        <input type="text" name="gallery2__descripcion"
+                               value="<?= cms($contenidos, 'calidad', 'gallery2', 'descripcion', 'Determinación automatizada de metabolitos, perfil lipídico y enzimas específicas.') ?>">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tarjeta 3 -->
+            <?php
+            $galImgUrl3 = cms($contenidos, 'calidad', 'gallery3', 'imagen_url');
+            $imgDef3 = '/laesh-web-assets-uipv1a/img/area-bacteriologia.webp';
+            ?>
+            <div class="editor-card">
+                <div class="editor-card-header">
+                    <div class="card-title">Tarjeta 3 — Microbiología y Cultivos</div>
+                </div>
+                <div class="editor-card-body">
+                    <div class="field-group">
+                        <label>Imagen de Galería</label>
+                        <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px; font-size: 0.78rem;">
+                            📐 <strong>Codec:</strong> WebP únicamente &nbsp;·&nbsp;
+                            <strong>Quality:</strong> 75 &nbsp;·&nbsp;
+                            <strong>Effort:</strong> 6 &nbsp;·&nbsp;
+                            <strong>Dimensiones:</strong> 800 × 580 px (ratio ~1.38:1) &nbsp;·&nbsp;
+                            <strong>Orientación Horizontal</strong> &nbsp;·&nbsp;
+                            <strong>Peso:</strong> máx. 40 KB
+                        </p>
+                        <div class="image-upload-box">
+                            <img id="prev-calidad-gallery3"
+                                 src="<?= $galImgUrl3 ? h($galImgUrl3) : $imgDef3 ?>"
+                                 alt="Microbiología y Cultivos" class="img-preview-sm"
+                                 onerror="this.src='<?= $imgDef3 ?>'">
+                            <label for="file-calidad-gallery3" class="btn btn-secondary">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                                Cambiar Imagen
+                            </label>
+                            <input type="file" accept="image/webp"
+                                   id="file-calidad-gallery3" class="d-none"
+                                   data-upload-slot="calidad-gallery3"
+                                   data-preview-id="prev-calidad-gallery3"
+                                   data-target-input="url-calidad-gallery3">
+                        </div>
+                        <input type="url" id="url-calidad-gallery3"
+                               name="gallery3__imagen_url"
+                               value="<?= h($galImgUrl3) ?>"
+                               placeholder="<?= $imgDef3 ?>"
+                               class="cms-img-url-input" data-no-limit>
+                        <?php $imgBasename3 = $galImgUrl3 ? basename($galImgUrl3) : basename($imgDef3); ?>
+                        <span id="lbl-img-calidad-gallery3" class="cms-img-filename-label"><?= h($imgBasename3) ?></span>
+                    </div>
+                    <div class="field-group">
+                        <label>Título</label>
+                        <input type="text" name="gallery3__titulo"
+                               value="<?= cms($contenidos, 'calidad', 'gallery3', 'titulo', 'Microbiología y Cultivos') ?>">
+                    </div>
+                    <div class="field-group">
+                        <label>Descripción</label>
+                        <input type="text" name="gallery3__descripcion"
+                               value="<?= cms($contenidos, 'calidad', 'gallery3', 'descripcion', 'Aislamiento, tinción de Gram y pruebas de susceptibilidad a antimicrobianos.') ?>">
+                    </div>
+                </div>
+            </div>
+            </div><!-- /grid-2col fila 2 -->
+        </div>
+
+        <!-- ================================================================
+             PANEL 6: UBICACIÓN Y CONTACTO — SSOT Master
+             Sección: ubicacion | Fuente HTML: #ubicacion
+             SSOT: este panel edita configuraciones (singletons); los datos se reutilizan
+               en Footer, Quiénes Somos (responsable) y Schema.org automáticamente.
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Code Implementation**
+
+I've begun examining the PHP file `gestion_web.php`. My immediate focus is implementing quality control cards (1, 2, and 3) within the CMS admin interface. I've started by adding code that checks for the active state of each gallery, and evaluating boolean logic to represent the state.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.061733610s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 8:49 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L972-1144)</summary>
+
+**Path:** `Unknown file`
+
+```
+            <?php
+            $galImgUrl1 = cms($contenidos, 'calidad', 'gallery1', 'imagen_url');
+            $imgDef1 = '/laesh-web-assets-uipv1a/img/area-hematologia-uno.webp';
+            ?>
+            <div class="editor-card">
+                <div class="editor-card-header">
+                    <div class="card-title">Tarjeta 1 — Área de Hematología</div>
+                </div>
+                <div class="editor-card-body">
+                    <div class="field-group">
+                        <label>Imagen de Galería</label>
+                        <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px; font-size: 0.78rem;">
+                            📐 <strong>Codec:</strong> WebP únicamente &nbsp;·&nbsp;
+                            <strong>Quality:</strong> 75 &nbsp;·&nbsp;
+                            <strong>Effort:</strong> 6 &nbsp;·&nbsp;
+                            <strong>Dimensiones:</strong> 800 × 580 px (ratio ~1.38:1) &nbsp;·&nbsp;
+                            <strong>Orientación Horizontal</strong> &nbsp;·&nbsp;
+                            <strong>Peso:</strong> máx. 40 KB
+                        </p>
+                        <div class="image-upload-box">
+                            <img id="prev-calidad-gallery1"
+                                 src="<?= $galImgUrl1 ? h($galImgUrl1) : $imgDef1 ?>"
+                                 alt="Área de Hematología" class="img-preview-sm"
+                                 onerror="this.src='<?= $imgDef1 ?>'">
+                            <label for="file-calidad-gallery1" class="btn btn-secondary">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                                Cambiar Imagen
+                            </label>
+                            <input type="file" accept="image/webp"
+                                   id="file-calidad-gallery1" class="d-none"
+                                   data-upload-slot="calidad-gallery1"
+                                   data-preview-id="prev-calidad-gallery1"
+                                   data-target-input="url-calidad-gallery1">
+                        </div>
+                        <input type="url" id="url-calidad-gallery1"
+                               name="gallery1__imagen_url"
+                               value="<?= h($galImgUrl1) ?>"
+                               placeholder="<?= $imgDef1 ?>"
+                               class="cms-img-url-input" data-no-limit>
+                        <?php $imgBasename1 = $galImgUrl1 ? basename($galImgUrl1) : basename($imgDef1); ?>
+                        <span id="lbl-img-calidad-gallery1" class="cms-img-filename-label"><?= h($imgBasename1) ?></span>
+                    </div>
+                    <div class="field-group">
+                        <label>Título</label>
+                        <input type="text" name="gallery1__titulo"
+                               value="<?= cms($contenidos, 'calidad', 'gallery1', 'titulo', 'Área de Hematología') ?>">
+                    </div>
+                    <div class="field-group">
+                        <label>Descripción</label>
+                        <input type="text" name="gallery1__descripcion"
+                               value="<?= cms($contenidos, 'calidad', 'gallery1', 'descripcion', 'Análisis de biometría hemática y células sanguíneas con rigor científico y alta precisión.') ?>">
+                    </div>
+                </div>
+            </div>
+            </div><!-- /grid-2col fila 1 -->
+
+            <!-- Fila 2: Tarjeta 2 + Tarjeta 3 -->
+            <hr class="cms-section-sep">
+            <div class="grid-2col mb-4">
+            <!-- Tarjeta 2 -->
+            <?php
+            $galImgUrl2 = cms($contenidos, 'calidad', 'gallery2', 'imagen_url');
+            $imgDef2 = '/laesh-web-assets-uipv1a/img/area-quimica-clinica.webp';
+            ?>
+            <div class="editor-card">
+                <div class="editor-card-header">
+                    <div class="card-title">Tarjeta 2 — Química Clínica</div>
+                </div>
+                <div class="editor-card-body">
+                    <div class="field-group">
+                        <label>Imagen de Galería</label>
+                        <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px; font-size: 0.78rem;">
+                            📐 <strong>Codec:</strong> WebP únicamente &nbsp;·&nbsp;
+                            <strong>Quality:</strong> 75 &nbsp;·&nbsp;
+                            <strong>Effort:</strong> 6 &nbsp;·&nbsp;
+                            <strong>Dimensiones:</strong> 800 × 580 px (ratio ~1.38:1) &nbsp;·&nbsp;
+                            <strong>Orientación Horizontal</strong> &nbsp;·&nbsp;
+                            <strong>Peso:</strong> máx. 40 KB
+                        </p>
+                        <div class="image-upload-box">
+                            <img id="prev-calidad-gallery2"
+                                 src="<?= $galImgUrl2 ? h($galImgUrl2) : $imgDef2 ?>"
+                                 alt="Química Clínica" class="img-preview-sm"
+                                 onerror="this.src='<?= $imgDef2 ?>'">
+                            <label for="file-calidad-gallery2" class="btn btn-secondary">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                                Cambiar Imagen
+                            </label>
+                            <input type="file" accept="image/webp"
+                                   id="file-calidad-gallery2" class="d-none"
+                                   data-upload-slot="calidad-gallery2"
+                                   data-preview-id="prev-calidad-gallery2"
+                                   data-target-input="url-calidad-gallery2">
+                        </div>
+                        <input type="url" id="url-calidad-gallery2"
+                               name="gallery2__imagen_url"
+                               value="<?= h($galImgUrl2) ?>"
+                               placeholder="<?= $imgDef2 ?>"
+                               class="cms-img-url-input" data-no-limit>
+                        <?php $imgBasename2 = $galImgUrl2 ? basename($galImgUrl2) : basename($imgDef2); ?>
+                        <span id="lbl-img-calidad-gallery2" class="cms-img-filename-label"><?= h($imgBasename2) ?></span>
+                    </div>
+                    <div class="field-group">
+                        <label>Título</label>
+                        <input type="text" name="gallery2__titulo"
+                               value="<?= cms($contenidos, 'calidad', 'gallery2', 'titulo', 'Química Clínica') ?>">
+                    </div>
+                    <div class="field-group">
+                        <label>Descripción</label>
+                        <input type="text" name="gallery2__descripcion"
+                               value="<?= cms($contenidos, 'calidad', 'gallery2', 'descripcion', 'Determinación automatizada de metabolitos, perfil lipídico y enzimas específicas.') ?>">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tarjeta 3 -->
+            <?php
+            $galImgUrl3 = cms($contenidos, 'calidad', 'gallery3', 'imagen_url');
+            $imgDef3 = '/laesh-web-assets-uipv1a/img/area-bacteriologia.webp';
+            ?>
+            <div class="editor-card">
+                <div class="editor-card-header">
+                    <div class="card-title">Tarjeta 3 — Microbiología y Cultivos</div>
+                </div>
+                <div class="editor-card-body">
+                    <div class="field-group">
+                        <label>Imagen de Galería</label>
+                        <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px; font-size: 0.78rem;">
+                            📐 <strong>Codec:</strong> WebP únicamente &nbsp;·&nbsp;
+                            <strong>Quality:</strong> 75 &nbsp;·&nbsp;
+                            <strong>Effort:</strong> 6 &nbsp;·&nbsp;
+                            <strong>Dimensiones:</strong> 800 × 580 px (ratio ~1.38:1) &nbsp;·&nbsp;
+                            <strong>Orientación Horizontal</strong> &nbsp;·&nbsp;
+                            <strong>Peso:</strong> máx. 40 KB
+                        </p>
+                        <div class="image-upload-box">
+                            <img id="prev-calidad-gallery3"
+                                 src="<?= $galImgUrl3 ? h($galImgUrl3) : $imgDef3 ?>"
+                                 alt="Microbiología y Cultivos" class="img-preview-sm"
+                                 onerror="this.src='<?= $imgDef3 ?>'">
+                            <label for="file-calidad-gallery3" class="btn btn-secondary">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                                Cambiar Imagen
+                            </label>
+                            <input type="file" accept="image/webp"
+                                   id="file-calidad-gallery3" class="d-none"
+                                   data-upload-slot="calidad-gallery3"
+                                   data-preview-id="prev-calidad-gallery3"
+                                   data-target-input="url-calidad-gallery3">
+                        </div>
+                        <input type="url" id="url-calidad-gallery3"
+                               name="gallery3__imagen_url"
+                               value="<?= h($galImgUrl3) ?>"
+                               placeholder="<?= $imgDef3 ?>"
+                               class="cms-img-url-input" data-no-limit>
+                        <?php $imgBasename3 = $galImgUrl3 ? basename($galImgUrl3) : basename($imgDef3); ?>
+                        <span id="lbl-img-calidad-gallery3" class="cms-img-filename-label"><?= h($imgBasename3) ?></span>
+                    </div>
+                    <div class="field-group">
+                        <label>Título</label>
+                        <input type="text" name="gallery3__titulo"
+                               value="<?= cms($contenidos, 'calidad', 'gallery3', 'titulo', 'Microbiología y Cultivos') ?>">
+                    </div>
+                    <div class="field-group">
+                        <label>Descripción</label>
+                        <input type="text" name="gallery3__descripcion"
+                               value="<?= cms($contenidos, 'calidad', 'gallery3', 'descripcion', 'Aislamiento, tinción de Gram y pruebas de susceptibilidad a antimicrobianos.') ?>">
+                    </div>
+                </div>
+            </div>
+            </div><!-- /grid-2col fila 2 -->
+        </div>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1639-1759)</summary>
+
+**Path:** `Unknown file`
+
+```
+             Sección: video-promo | RTE Completo con Enlaces y Medios (YouTube, Vimeo, etc.)
+             ================================================================ -->
+        <div id="panel-video-promo" class="cms-panel" role="tabpanel" aria-labelledby="tab-video-promo" tabindex="0" data-section="video-promo">
+            <div class="cms-panel-header">
+                <h3 class="cms-h3">9. Video Promo — Enlaces e Incrustación de Video (#video-promo)</h3>
+            </div>
+
+            <hr class="cms-section-sep">
+            <div class="editor-card mb-4">
+                <div class="editor-card-header">
+                    <div class="card-title">Contenido del Video Promocional (Editor RTE Completo)</div>
+                </div>
+                <div class="editor-card-body">
+                    <p class="cms-p">
+                        Utiliza este editor con capacidades completas para insertar enlaces web e incrustar reproductores de video (YouTube, Spotify, Vimeo, etc.) para la promoción institucional.
+                    </p>
+                    <div class="field-group">
+                        <div id="ck-video-promo" class="ck5-mount ck5-mount-lg"></div>
+                        <textarea id="ck-video-promo-data" name="contenido__cuerpo_html" class="ck5-hidden-data"><?= htmlspecialchars(cmsRaw($contenidos, 'video-promo', 'contenido', 'cuerpo_html')) ?></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================================================================
+             PANEL 10: CONFIGURACIÓN GENERAL — Orden de Secciones
+             Sección: configuracion-general | Campo: _cfg_seccion_order
+             Persiste en tabla configuraciones (clave='seccion_order') vía prefijo _cfg_
+             ================================================================ -->
+        <div id="panel-configuracion-general" class="cms-panel" role="tabpanel" aria-labelledby="tab-configuracion-general" tabindex="0" data-section="configuracion-general">
+            <div class="cms-panel-header">
+                <h3 class="cms-h3">Orden de Secciones — Página de Inicio</h3>
+            </div>
+
+            <hr class="cms-section-sep">
+            <div class="editor-card mb-4">
+                <div class="editor-card-header">
+                    <div class="card-title">Orden Vertical de Secciones (#inicio)</div>
+                </div>
+                <div class="editor-card-body">
+                    <!-- Hidden input que serializa el orden para el POST /cms/save -->
+                    <input type="hidden"
+                           id="seccion-order-input"
+                           name="_cfg_seccion_order"
+                           value="<?= h($config['seccion_order'] ?? '') ?>">
+
+                    <?php
+                    // Reconstruir orden desde BD, o usar el default si no hay valor
+                    $_secDefault = ['inicio','acerca-de','especialidades','promociones','calidad','ubicacion','video'];
+                    $_secLabels  = [
+                        'inicio'        => ['icon'=>'🖼️', 'label'=>'Inicio (Banner Principal y Slider)', 'anchor'=>'#inicio',    'locked'=>false, 'toggle'=>false],
+                        'acerca-de'     => ['icon'=>'👥', 'label'=>'Quiénes somos',                       'anchor'=>'#acerca-de', 'locked'=>false, 'toggle'=>false],
+                        'especialidades'=> ['icon'=>'🔬', 'label'=>'Estudios de Rutina',                    'anchor'=>'#especialidades','locked'=>false, 'toggle'=>false],
+                        'promociones'   => ['icon'=>'🏷️', 'label'=>'Promociones Vigentes',                  'anchor'=>'#promociones','locked'=>false, 'toggle'=>false],
+                        'calidad'       => ['icon'=>'🖼️', 'label'=>'Calidad e Instalaciones',               'anchor'=>'#calidad',    'locked'=>false, 'toggle'=>false],
+                        'ubicacion'     => ['icon'=>'📍', 'label'=>'Ubicación y Contacto',                  'anchor'=>'#ubicacion',  'locked'=>false, 'toggle'=>false],
+                        'video'         => ['icon'=>'🎬', 'label'=>'Video promo',                           'anchor'=>'#video',      'locked'=>false, 'toggle'=>true],
+                    ];
+                    $_rawOrder  = $config['seccion_order'] ?? '';
+                    if ($_rawOrder !== '') {
+                        $_parsed  = array_unique(array_filter(
+                            array_map('trim', explode(',', $_rawOrder)),
+                            fn($s) => in_array($s, $_secDefault, true)
+                        ));
+                        $_missing = array_diff($_secDefault, $_parsed);
+                        $_ordered = array_values(array_merge($_parsed, $_missing));
+                    } else {
+                        $_ordered = $_secDefault;
+                    }
+                    unset($_secDefault, $_rawOrder, $_parsed, $_missing);
+
+                    $videoActive = ($config['video_active'] ?? '1') !== '0';
+                    ?>
+
+                    <p class="cms-help-text mb-3">Arrastra las secciones para cambiar su orden vertical. Puedes mover la sección <strong>Video promo</strong> arriba o abajo de <strong>Inicio</strong>. El cambio se aplica al publicar o en la Vista Previa.</p>
+
+                    <ul id="seccion-order-list"
+                        style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.6rem">
+                        <?php foreach ($_ordered as $_sid):
+                            $meta = $_secLabels[$_sid] ?? ['icon'=>'•','label'=>$_sid,'anchor'=>'','locked'=>false,'toggle'=>false];
+                            $isLocked = !empty($meta['locked']);
+                            $hasToggle = !empty($meta['toggle']);
+                        ?>
+                        <li data-seccion-id="<?= h($_sid) ?>"
+                            draggable="<?= $isLocked ? 'false' : 'true' ?>"
+                            style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1rem;border-radius:8px;border:1.5px solid <?= $isLocked ? 'var(--primary-green-light,#e2e8f0)' : 'var(--border-color,#d1d5db)' ?>;background:<?= $isLocked ? '#f8fafc' : 'var(--card-bg,#fff)' ?>;cursor:<?= $isLocked ? 'not-allowed' : 'grab' ?>;user-select:none;transition:box-shadow .15s,border-color .15s">
+                            <!-- Grip icon or Lock icon -->
+                            <?php if ($isLocked): ?>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary-green-dark,#059669)" stroke-width="2" stroke-linecap="round" style="flex-shrink:0">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                            </svg>
+                            <?php else: ?>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--txt-muted,#9ca3af)" stroke-width="2" stroke-linecap="round" style="flex-shrink:0">
+                                <circle cx="9" cy="5" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="19" r="1"/>
+                                <circle cx="15" cy="5" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="19" r="1"/>
+                            </svg>
+                            <?php endif; ?>
+                            <span style="font-size:1.15rem;line-height:1;flex-shrink:0"><?= $meta['icon'] ?></span>
+                            <span style="flex:1;font-weight:600;color:var(--txt-main,#111)"><?= h($meta['label']) ?> <?= $isLocked ? '<small class="txt-muted" style="font-weight:400;">(Fija en cabecera)</small>' : '' ?></span>
+                            <code style="font-size:0.78rem;color:var(--txt-muted,#6b7280);background:var(--bg-subtle,#f3f4f6);padding:2px 6px;border-radius:4px"><?= h($_sid) ?></code>
+                            <a href="/laesh/?_preview=1<?= h($meta['anchor']) ?>"
+                               target="_blank" rel="noopener noreferrer"
+                               title="Vista previa de esta sección"
+                               style="flex-shrink:0;color:var(--primary,#0052B7);text-decoration:none;font-size:0.8rem;margin-right:<?= $hasToggle ? '4px' : '0' ?>;"
+                               onclick="event.stopPropagation()">↗</a>
+
+                            <?php if ($hasToggle): ?>
+                            <div style="display:flex;align-items:center;gap:6px;margin-left:6px;background:var(--bg-subtle,#f1f5f9);padding:3px 8px;border-radius:6px;" onclick="event.stopPropagation()">
+                                <label style="font-size:0.78rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:3px;margin:0;">
+                                    <input type="radio" name="_cfg_video_active" value="1" <?= $videoActive ? 'checked' : '' ?> style="cursor:pointer;" class="sec-toggle-radio">
+                                    <span style="color:var(--primary-green-dark,#059669);">Encendido</span>
+                                </label>
+                                <label style="font-size:0.78rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:3px;margin:0;">
+                                    <input type="radio" name="_cfg_video_active" value="0" <?= !$videoActive ? 'checked' : '' ?> style="cursor:pointer;" class="sec-toggle-radio">
+                                    <span style="color:#dc2626;">Apagado</span>
+                                </label>
+                            </div>
+                            <?php endif; ?>
+                        </li>
+                        <?php endforeach; unset($_ordered, $_secLabels, $_sid, $meta, $isLocked, $hasToggle); ?>
+                    </ul>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Video Promo Structure**
+
+I'm currently focused on the video promo section, specifically examining the HTML structure within Panel 9. I'm taking apart lines 1642-1662. Right now, I'm noting the div elements, classes, and attributes to understand how the video promo is laid out and behaves within the CMS. It's a key part of the design flow.
+
+
+**Refining Promo Video Control**
+
+I'm now zeroing in on the video promo's control mechanism within the PHP code. I'm especially focused on the checkbox and its associated logic, along with the "Encendido/Apagado" status. I intend to examine how the video's active state is managed and displayed. Also, I've identified specific modifications to Panel 10, specifically the need to change `'toggle'=>true` to `'toggle'=>false` and remove the radio buttons section. I'll execute the `multi_replace_file_content` function for the required file.
+
+
+
+
+### Actions
+
+**Tool:** `multi_replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 9.504075419s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 8:49 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1639-1779)</summary>
+
+**Path:** `Unknown file`
+
+```
+                        </div>
+                        <div class="field-group">
+                            <label class="txt-muted">Cierre Dom</label>
+                            <input type="text" disabled value="<?= htmlspecialchars($config['dom_close'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div><!-- /grid-2col fila 2 -->
+        </div>
+
+        <!-- ================================================================
+             PANEL 8: AVISO DE PRIVACIDAD
+             Sección: aviso-privacidad | Fuente HTML: modal / página #privacidad
+             ================================================================ -->
+        <div id="panel-aviso-privacidad" class="cms-panel" role="tabpanel" aria-labelledby="tab-aviso-privacidad" tabindex="0" data-section="aviso-privacidad">
+            <div class="cms-panel-header">
+                <h3 class="cms-h3">Aviso de Privacidad — Contenido Legal (#privacidad)</h3>
+            </div>
+
+            <hr class="cms-section-sep">
+            <div class="editor-card mb-4">
+                <div class="editor-card-header">
+                    <div class="card-title">Documento Integral del Aviso de Privacidad (Editor RTE)</div>
+                </div>
+                <div class="editor-card-body">
+                    <p class="cms-p">
+                        Edita directamente el contenido completo del Aviso de Privacidad con formato enriquecido (encabezados, listas, negritas y párrafos). Los cambios se actualizarán automáticamente en la ventana modal de la página pública.
+                    </p>
+                    <div class="field-group">
+                        <div id="ck-aviso-privacidad" class="ck5-mount ck5-mount-lg"></div>
+                        <textarea id="ck-aviso-privacidad-data" name="contenido__cuerpo_html" class="ck5-hidden-data"><?= htmlspecialchars(cmsRaw($contenidos, 'aviso-privacidad', 'contenido', 'cuerpo_html')) ?></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================================================================
+             PANEL 10: VIDEO PROMO
+             Sección: video-promo | RTE Completo con Enlaces y Medios (YouTube, Vimeo, etc.)
+             ================================================================ -->
+        <div id="panel-video-promo" class="cms-panel" role="tabpanel" aria-labelledby="tab-video-promo" tabindex="0" data-section="video-promo">
+            <div class="cms-panel-header">
+                <h3 class="cms-h3">9. Video Promo — Enlaces e Incrustación de Video (#video-promo)</h3>
+            </div>
+
+            <hr class="cms-section-sep">
+            <div class="editor-card mb-4">
+                <div class="editor-card-header">
+                    <div class="card-title">Contenido del Video Promocional (Editor RTE Completo)</div>
+                </div>
+                <div class="editor-card-body">
+                    <p class="cms-p">
+                        Utiliza este editor con capacidades completas para insertar enlaces web e incrustar reproductores de video (YouTube, Spotify, Vimeo, etc.) para la promoción institucional.
+                    </p>
+                    <div class="field-group">
+                        <div id="ck-video-promo" class="ck5-mount ck5-mount-lg"></div>
+                        <textarea id="ck-video-promo-data" name="contenido__cuerpo_html" class="ck5-hidden-data"><?= htmlspecialchars(cmsRaw($contenidos, 'video-promo', 'contenido', 'cuerpo_html')) ?></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================================================================
+             PANEL 10: CONFIGURACIÓN GENERAL — Orden de Secciones
+             Sección: configuracion-general | Campo: _cfg_seccion_order
+             Persiste en tabla configuraciones (clave='seccion_order') vía prefijo _cfg_
+             ================================================================ -->
+        <div id="panel-configuracion-general" class="cms-panel" role="tabpanel" aria-labelledby="tab-configuracion-general" tabindex="0" data-section="configuracion-general">
+            <div class="cms-panel-header">
+                <h3 class="cms-h3">Orden de Secciones — Página de Inicio</h3>
+            </div>
+
+            <hr class="cms-section-sep">
+            <div class="editor-card mb-4">
+                <div class="editor-card-header">
+                    <div class="card-title">Orden Vertical de Secciones (#inicio)</div>
+                </div>
+                <div class="editor-card-body">
+                    <!-- Hidden input que serializa el orden para el POST /cms/save -->
+                    <input type="hidden"
+                           id="seccion-order-input"
+                           name="_cfg_seccion_order"
+                           value="<?= h($config['seccion_order'] ?? '') ?>">
+
+                    <?php
+                    // Reconstruir orden desde BD, o usar el default si no hay valor
+                    $_secDefault = ['inicio','acerca-de','especialidades','promociones','calidad','ubicacion','video'];
+                    $_secLabels  = [
+                        'inicio'        => ['icon'=>'🖼️', 'label'=>'Inicio (Banner Principal y Slider)', 'anchor'=>'#inicio',    'locked'=>false, 'toggle'=>false],
+                        'acerca-de'     => ['icon'=>'👥', 'label'=>'Quiénes somos',                       'anchor'=>'#acerca-de', 'locked'=>false, 'toggle'=>false],
+                        'especialidades'=> ['icon'=>'🔬', 'label'=>'Estudios de Rutina',                    'anchor'=>'#especialidades','locked'=>false, 'toggle'=>false],
+                        'promociones'   => ['icon'=>'🏷️', 'label'=>'Promociones Vigentes',                  'anchor'=>'#promociones','locked'=>false, 'toggle'=>false],
+                        'calidad'       => ['icon'=>'🖼️', 'label'=>'Calidad e Instalaciones',               'anchor'=>'#calidad',    'locked'=>false, 'toggle'=>false],
+                        'ubicacion'     => ['icon'=>'📍', 'label'=>'Ubicación y Contacto',                  'anchor'=>'#ubicacion',  'locked'=>false, 'toggle'=>false],
+                        'video'         => ['icon'=>'🎬', 'label'=>'Video promo',                           'anchor'=>'#video',      'locked'=>false, 'toggle'=>true],
+                    ];
+                    $_rawOrder  = $config['seccion_order'] ?? '';
+                    if ($_rawOrder !== '') {
+                        $_parsed  = array_unique(array_filter(
+                            array_map('trim', explode(',', $_rawOrder)),
+                            fn($s) => in_array($s, $_secDefault, true)
+                        ));
+                        $_missing = array_diff($_secDefault, $_parsed);
+                        $_ordered = array_values(array_merge($_parsed, $_missing));
+                    } else {
+                        $_ordered = $_secDefault;
+                    }
+                    unset($_secDefault, $_rawOrder, $_parsed, $_missing);
+
+                    $videoActive = ($config['video_active'] ?? '1') !== '0';
+                    ?>
+
+                    <p class="cms-help-text mb-3">Arrastra las secciones para cambiar su orden vertical. Puedes mover la sección <strong>Video promo</strong> arriba o abajo de <strong>Inicio</strong>. El cambio se aplica al publicar o en la Vista Previa.</p>
+
+                    <ul id="seccion-order-list"
+                        style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.6rem">
+                        <?php foreach ($_ordered as $_sid):
+                            $meta = $_secLabels[$_sid] ?? ['icon'=>'•','label'=>$_sid,'anchor'=>'','locked'=>false,'toggle'=>false];
+                            $isLocked = !empty($meta['locked']);
+                            $hasToggle = !empty($meta['toggle']);
+                        ?>
+                        <li data-seccion-id="<?= h($_sid) ?>"
+                            draggable="<?= $isLocked ? 'false' : 'true' ?>"
+                            style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1rem;border-radius:8px;border:1.5px solid <?= $isLocked ? 'var(--primary-green-light,#e2e8f0)' : 'var(--border-color,#d1d5db)' ?>;background:<?= $isLocked ? '#f8fafc' : 'var(--card-bg,#fff)' ?>;cursor:<?= $isLocked ? 'not-allowed' : 'grab' ?>;user-select:none;transition:box-shadow .15s,border-color .15s">
+                            <!-- Grip icon or Lock icon -->
+                            <?php if ($isLocked): ?>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary-green-dark,#059669)" stroke-width="2" stroke-linecap="round" style="flex-shrink:0">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                            </svg>
+                            <?php else: ?>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--txt-muted,#9ca3af)" stroke-width="2" stroke-linecap="round" style="flex-shrink:0">
+                                <circle cx="9" cy="5" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="19" r="1"/>
+                                <circle cx="15" cy="5" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="19" r="1"/>
+                            </svg>
+                            <?php endif; ?>
+                            <span style="font-size:1.15rem;line-height:1;flex-shrink:0"><?= $meta['icon'] ?></span>
+                            <span style="flex:1;font-weight:600;color:var(--txt-main,#111)"><?= h($meta['label']) ?> <?= $isLocked ? '<small class="txt-muted" style="font-weight:400;">(Fija en cabecera)</small>' : '' ?></span>
+                            <code style="font-size:0.78rem;color:var(--txt-muted,#6b7280);background:var(--bg-subtle,#f3f4f6);padding:2px 6px;border-radius:4px"><?= h($_sid) ?></code>
+                            <a href="/laesh/?_preview=1<?= h($meta['anchor']) ?>"
+                               target="_blank" rel="noopener noreferrer"
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 8:50 am
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+. para el cambio de video apagado checbox, NO se esta haciendo efectivo en index.php, rastrea., en preview si se oculta.
+
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `index.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L129-184)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+// ── Caché L2: OPcache PHP File Store (Estrategia A — Sprint Cache 2026-09) ──
+// Inicializar una sola vez por request. Env: 'dev' en local, 'prod' en OCI/Hostinger.
+\Common\Cache::init('', defined('APP_ENV') ? APP_ENV : 'prod');
+
+if (!empty($_GET['reset_cache'])) {
+    if (function_exists('opcache_reset')) { @opcache_reset(); }
+    \Common\Cache::clear();
+}
+$_bypassCache = (!empty($_SESSION['auth_logged_in']) && !empty($_GET['_preview']) && !empty($_SESSION['cms_draft'])) || !empty($_GET['nocache']) || !empty($_GET['reset_cache']);
+
+// ── 1a. configuraciones ─────────────────────────────────────────────────────
+$configRaw = $_bypassCache ? null : \Common\Cache::get(\Common\Cache::KEY_CFG);
+if ($configRaw === null) {
+    $configRaw = $db->query("SELECT clave, valor FROM configuraciones")->fetchAll(\PDO::FETCH_KEY_PAIR) ?: [];
+    if (!$_bypassCache) \Common\Cache::set(\Common\Cache::KEY_CFG, $configRaw);
+}
+
+// ── 1b. web_contenidos → $cms ────────────────────────────────────────────────
+$_cmsRaw = $_bypassCache ? null : \Common\Cache::get(\Common\Cache::KEY_CMS);
+if ($_cmsRaw === null) {
+    $_cmsRaw = [];
+    foreach ($db->query("SELECT seccion, subseccion, clave, valor FROM web_contenidos ORDER BY id")->fetchAll(\PDO::FETCH_ASSOC) as $row) {
+        $_cmsRaw[$row['seccion']][$row['subseccion']][$row['clave']] = $row['valor'];
+    }
+    if (!$_bypassCache) \Common\Cache::set(\Common\Cache::KEY_CMS, $_cmsRaw);
+}
+$cms = $_cmsRaw;
+
+// ── 2. Preview de borrador CMS (solo sesión admin activa) ──────────────────
+// IMPORTANTE: el merge debe ocurrir ANTES de definir $cfg y $c, porque las arrow
+// functions de PHP capturan variables por VALOR en el momento de su creación.
+// Delight Auth guarda el login bajo $_SESSION['auth_logged_in'] (NOT 'user_id').
+$isPreview = !empty($_GET['_preview'])
+    && !empty($_SESSION['auth_logged_in'])
+    && !empty($_SESSION['cms_draft']);
+if ($isPreview) {
+    foreach ($_SESSION['cms_draft'] as $draftSec => $campos) {
+        foreach ($campos as $rawKey => $val) {
+            // Manejar configuraciones globales (prefijo _cfg_)
+            if (str_starts_with($rawKey, '_cfg_')) {
+                $configRaw[substr($rawKey, 5)] = $val;
+                continue;
+            }
+            // Manejar web_contenidos (formato {sub}__{clave})
+            [$sub, $clave] = array_pad(explode('__', $rawKey, 2), 2, $rawKey);
+            $cms[$draftSec][$sub][$clave] = $val;
+        }
+    }
+}
+
+// ── 3. Helpers y Variables Funcionales (Post-Merge) ─────────────────────────
+$cfg = fn(string $k, string $d = '') => (!isset($configRaw[$k]) || $configRaw[$k] === '') ? $d : $configRaw[$k];
+$c   = fn(string $sec, string $sub, string $k, string $d = '') => (!isset($cms[$sec][$sub][$k]) || $cms[$sec][$sub][$k] === '') ? $d : $cms[$sec][$sub][$k];
+
+// Valores frecuentes — sin fallback: el cliente DEBE tener todo en configuraciones
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L219-244)</summary>
+
+**Path:** `Unknown file`
+
+```
+        unset($_SESSION['cms_draft'][$seccion]);
+        Logger::log('INFO', "CMS: sección '{$seccion}' publicada.", $userId);
+
+        // ── Invalidar caché L2 según la sección modificada ───────────────────────
+        Cache::init();
+        // promociones: afecta tanto PROMOS (datos) como CMS (títulos sección)
+        if ($seccion === 'promociones') {
+            Cache::invalidate([Cache::KEY_PROMOS, Cache::KEY_CMS]);
+        // configuracion-general: afecta las configuraciones institucionales
+        } elseif ($seccion === 'configuracion-general') {
+            Cache::invalidate([Cache::KEY_CFG, Cache::KEY_CMS]);
+        // especialidades: afecta el árbol de estudios si los grupos cambian
+        } elseif ($seccion === 'especialidades') {
+            Cache::invalidate([Cache::KEY_TREE, Cache::KEY_CMS]);
+        // cualquier otra sección CMS editorial
+        } else {
+            Cache::invalidate(Cache::KEY_CMS);
+        }
+
+        // Devolver CSRF rotado para que el cliente actualice su data-csrf sin recargar
+        echo json_encode(['ok' => true, 'msg' => '¡Cambios publicados exitosamente!', 'csrf_token' => $_SESSION['csrf_token']]);
+
+    } catch (\PDOException $e) {
+        $db->rollBack();
+        DB::logFallback('ERROR', "INSERT web_contenidos seccion={$seccion}", $e->getMessage());
+        http_response_code(500);
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Discovering the Root Cause**
+
+I've pinpointed the source! Examining `admrc/index.php`, specifically lines 224-237, reveals the issue's origin. It seems when the admin is in Panel 9 ("9. Video promo"), the form submits with `seccion = 'video-promo'` and a  `_cfg_video_active = "0"` value, which likely explains the problem.
+
+
+**Analyzing the Cache Invalidation**
+
+I've got it! The problem stems from the cache invalidation strategy. When updating the video promo section (`$seccion === 'video-promo'`), the code fails to clear the cache for `KEY_CFG`. This means the old cached value of `'1'` for `video_active` persists in `configuraciones`. The live view relies on `KEY_CFG`, while the preview correctly overrides this with a '0' via session data.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.434992262s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L649-674)</summary>
+
+**Path:** `Unknown file`
+
+```
+        <?php
+        // ── Orden de secciones — configurable desde el CMS (configuraciones.seccion_order) ──
+        // Secciones ordenables: inicio, acerca-de, especialidades, promociones, calidad, ubicacion, video.
+        $_SEC_DEFAULT = ['inicio','acerca-de','especialidades','promociones','calidad','ubicacion','video'];
+        $_secNavLabels = [
+            'acerca-de'     => ['label' => 'Quiénes somos',        'href' => '#acerca-de'],
+            'especialidades'=> ['label' => 'Estudios',             'href' => '#especialidades'],
+            'promociones'   => ['label' => 'Promociones',          'href' => '#promociones'],
+            'calidad'       => ['label' => 'Calidad',              'href' => '#calidad'],
+            'ubicacion'     => ['label' => 'Ubicación y Contacto', 'href' => '#ubicacion'],
+        ];
+        $isVideoActive = $cfg('video_active', '1') !== '0';
+
+        $_secOrderRaw = $cfg('seccion_order');
+        if ($_secOrderRaw !== '') {
+            $_parsed = array_unique(array_filter(
+                array_map('trim', explode(',', $_secOrderRaw)),
+                fn($s) => in_array($s, $_SEC_DEFAULT, true)
+            ));
+            $_missing = array_diff($_SEC_DEFAULT, $_parsed);
+            $sectionOrder = array_values(array_merge($_parsed, $_missing));
+        } else {
+            $sectionOrder = $_SEC_DEFAULT;
+        }
+        unset($_SEC_DEFAULT, $_secOrderRaw, $_parsed, $_missing);
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L675-709)</summary>
+
+**Path:** `Unknown file`
+
+```
+        // Si el video está apagado, retirarlo del orden de secciones para que no se renderice
+        if (!$isVideoActive) {
+            $sectionOrder = array_values(array_filter($sectionOrder, fn($s) => $s !== 'video'));
+        }
+        ?>
+        <div class="nav-links" id="nav-links-mobile">
+            <a href="#inicio">Inicio</a>
+            <?php foreach ($sectionOrder as $_navSec):
+                if (isset($_secNavLabels[$_navSec])):
+            ?>
+            <a href="<?= $_secNavLabels[$_navSec]['href'] ?>"><?= h($_secNavLabels[$_navSec]['label']) ?></a>
+            <?php endif; endforeach; unset($_navSec); ?>
+            <a href="#" class="login-trigger btn-nav-medicos"
+               data-target="medicos" data-title="Acceso" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2v2"/><path d="M5 2v2"/><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"/><path d="M8 15a6 6 0 0 0 12 0v-3"/><circle cx="20" cy="10" r="2"/></svg>Médicos</a>
+        </div>
+    </nav>
+
+    <main id="main-content">
+
+        <div class="landing-nav-spacer"></div>
+
+        <?php
+        foreach ($sectionOrder as $_secId):
+            if ($_secId === 'inicio'):
+        ?>
+        <!-- ═══════════════════════════════════════════════════════ HERO ══ -->
+        <section id="inicio" class="hero-premium">
+            <div class="hero-slides" data-autoplay="<?= $heroAutoplay ?>" role="region"
+                 aria-label="Presentación principal" aria-roledescription="carrusel"<?= $heroParentBgStyle ?>>
+
+                <!-- ── Slide 1 — dinámico desde hero/slide1 ────────────────── -->
+                <div class="hero-slide active <?= $heroSliderMode !== 'decoupled' ? 'bg-slide-1' : '' ?>"<?= $slides[1]['bg_style'] ? ' style="' . $slides[1]['bg_style'] . '"' : '' ?>>
+                    <div class="hero-glass-card">
+                        <?php if ($slides[1]['etiqueta']): ?><span><?= h($slides[1]['etiqueta']) ?></span><?php endif; ?>
+                        <h1><?= h($slides[1]['titulo']) ?></h1>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Video Configuration**
+
+I've been examining how video sections are handled in `website/index.php`. Specifically, I'm focused on lines 661 and 677-679. It appears that the `$isVideoActive` variable, determined by the `cfg()` function, dictates whether the video section is included in the `$sectionOrder` array. If `$isVideoActive` is false, the code filters out the 'video' entry.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.117202241s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L197-239)</summary>
+
+**Path:** `Unknown file`
+
+```
+        foreach ($campos as $fieldKey => $valor) {
+            if (str_starts_with($fieldKey, 'promo_')) {
+                continue; // Omitir campos de catalogo_promociones de la tabla web_contenidos
+            }
+            // D-04: campos _cfg_{clave} van a configuraciones, no a web_contenidos
+            if (str_starts_with($fieldKey, '_cfg_')) {
+                $cfgClave = substr($fieldKey, 5); // quitar prefijo '_cfg_'
+                $cfgStmt->execute(['clave' => $cfgClave, 'valor' => $valor]);
+                continue;
+            }
+            // Formato estándar: {subseccion}__{clave}  ej: slide1__titulo
+            [$sub, $clave] = array_pad(explode('__', $fieldKey, 2), 2, $fieldKey);
+            $stmt->execute([
+                'sec'   => $seccion,
+                'sub'   => $sub,
+                'clave' => $clave,
+                'valor' => $valor,
+                'uid'   => $userId,
+            ]);
+        }
+
+        $db->commit();
+        unset($_SESSION['cms_draft'][$seccion]);
+        Logger::log('INFO', "CMS: sección '{$seccion}' publicada.", $userId);
+
+        // ── Invalidar caché L2 según la sección modificada ───────────────────────
+        Cache::init();
+        // promociones: afecta tanto PROMOS (datos) como CMS (títulos sección)
+        if ($seccion === 'promociones') {
+            Cache::invalidate([Cache::KEY_PROMOS, Cache::KEY_CMS]);
+        // configuracion-general: afecta las configuraciones institucionales
+        } elseif ($seccion === 'configuracion-general') {
+            Cache::invalidate([Cache::KEY_CFG, Cache::KEY_CMS]);
+        // especialidades: afecta el árbol de estudios si los grupos cambian
+        } elseif ($seccion === 'especialidades') {
+            Cache::invalidate([Cache::KEY_TREE, Cache::KEY_CMS]);
+        // cualquier otra sección CMS editorial
+        } else {
+            Cache::invalidate(Cache::KEY_CMS);
+        }
+
+        // Devolver CSRF rotado para que el cliente actualice su data-csrf sin recargar
+        echo json_encode(['ok' => true, 'msg' => '¡Cambios publicados exitosamente!', 'csrf_token' => $_SESSION['csrf_token']]);
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Configuration Parameters**
+
+I'm currently focused on `admrc/index.php`. I'm going to track a flag, `$hasCfgParam`, that's initialized to `false` before the `$campos` loop. This flag will help determine if any specific configuration parameters are found within the loop's iterations. Specifically, it's about identifying if any parameters match the key "promo_".
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.122495773s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 8:55 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Confirming the Fix**
+
+I've confirmed the fix is complete. I'm now summarizing the root cause and solution in Spanish, focusing on the detail that `video_active` has the prefix `_cfg_video_active`. This helps in understanding the exact source of the issue that required a fix.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.043760056s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+que archivos cambiaste ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `index.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+EN php de cms: Recepción /  Admin / 4. Promociones Vigentes:
+. este texto resaltarlo : Gestión de las 7 Promociones Diarias (MariaDB `catalogo_promociones`) y sustituirlo por "Gestión de las 7 Promociones".
+. Acada fondo de del renglon para las 7 fichas, donde aparece estos textos: Ficha ID: 1  checbox Activa , ponerle un color de fondo  diferente a cada una con color de texto que resalte en ese fondo.
+
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `index.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `Ficha ID`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 1:06 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L734-829)</summary>
+
+**Path:** `Unknown file`
+
+```
+                                <strong style="color: #b45309;">✍️ NO provienen de la SSOT (Configuración Libre de Oferta):</strong><br>
+                                <span style="color: #475569;">• <strong>Campo #7 (Única Descripción 100% Editable)</strong>, Título Superior de Ficha, Precios e Imagen.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <style>
+                    /* Distribución uniforme a 2 columnas sin scroll horizontal en Promociones */
+                    #panel-promociones .promo-grid-2col {
+                        display: grid;
+                        grid-template-columns: repeat(2, minmax(0, 1fr));
+                        gap: 1.25rem;
+                        width: 100%;
+                        max-width: 100%;
+                        box-sizing: border-box;
+                    }
+                    @media (max-width: 992px) {
+                        #panel-promociones .promo-grid-2col {
+                            grid-template-columns: 1fr;
+                        }
+                    }
+                    #panel-promociones .promo-card-editor {
+                        width: 100%;
+                        max-width: 100%;
+                        box-sizing: border-box;
+                        overflow-x: hidden;
+                    }
+                    #panel-promociones .ck.ck-toolbar {
+                        flex-wrap: wrap !important;
+                        max-width: 100% !important;
+                        box-sizing: border-box !important;
+                    }
+                    #panel-promociones .ck.ck-editor__main {
+                        max-width: 100% !important;
+                        box-sizing: border-box !important;
+                    }
+                    #panel-promociones .ck.ck-content {
+                        word-break: break-word !important;
+                        overflow-wrap: break-word !important;
+                    }
+                    </style>
+
+                    <div class="promo-grid-2col">
+                    <?php if (!empty($promociones)): ?>
+                        <?php foreach ($promociones as $p): ?>
+                            <?php 
+                                $pId = (int)$p['id'];
+                                $diaLabel = ucfirst($p['dia_semana']);
+                                $imgUrl = $p['imagen_fondo'] ?? '';
+                            ?>
+                            <div class="editor-card promo-card-editor" style="border: 1px solid #cbd5e1; background: #fafafa;">
+                                <div class="editor-card-header" style="display:flex; justify-content:space-between; align-items:center; background:#f1f5f9; padding:8px 12px; border-bottom:1px solid #e2e8f0;">
+                                    <div class="card-title" style="font-weight:700; color:var(--primary);">
+                                        Ficha ID: <?= $pId ?>
+                                    </div>
+                                    <label style="display:flex; align-items:center; gap:6px; font-size:0.8rem; font-weight:600; cursor:pointer; color:#1e293b;">
+                                        <input type="checkbox" name="promo_active_<?= $pId ?>" value="1" <?= (!empty($p['activo'])) ? 'checked' : '' ?>>
+                                        Activa
+                                    </label>
+                                </div>
+                                <div class="editor-card-body" style="padding:12px;">
+                                    <input type="hidden" name="promo_id[]" value="<?= $pId ?>">
+
+                                    <!-- 1. Título / Etiqueta Superior (ÚNICO editable en contenido + estilo RTE) -->
+                                    <div class="field-group mb-3">
+                                        <label>✍️ Título / Etiqueta Superior de la Ficha <small class="txt-muted">(✍️ Contenido y Estilos RTE Editables)</small></label>
+                                        <div id="ck-promo-day-<?= $pId ?>" class="ck5-mount"></div>
+                                        <textarea id="ck-promo-day-<?= $pId ?>-data" name="promo_dia_semana_<?= $pId ?>" class="ck5-hidden-data" rows="2"><?= h($p['dia_semana']) ?></textarea>
+                                    </div>
+
+                                    <!-- 2. Estudio Asociado del Catálogo (Combo Desplegable + Buscador Autocomplete) -->
+                                    <div class="field-group mb-3" style="background: linear-gradient(135deg, #eff6ff 0%, #e0f2fe 100%); border: 1.5px solid #38bdf8; border-left: 4px solid #0284c7; border-radius: 8px; padding: 10px 12px; box-shadow: 0 2px 6px rgba(2, 132, 199, 0.08);">
+                                        <label style="font-weight: 700; color: #0369a1; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 4px; margin-bottom: 4px;">
+                                            <span>🎯 PASO 1: SELECCIONAR O BUSCAR ESTUDIO ASOCIADO DEL CATÁLOGO</span>
+                                            <span style="font-size: 0.72rem; background: #0284c7; color: #ffffff; padding: 2px 8px; border-radius: 12px; font-weight: 600;">⚡ Auto-pobla campos de BD</span>
+                                        </label>
+                                        <div style="font-size: 0.76rem; color: #0c4a6e; margin-bottom: 8px; line-height: 1.3;">
+                                            Elija primero el estudio base desde el combo o buscador para cargar automáticamente los datos maestros de MariaDB.
+                                        </div>
+                                        <div style="display:flex; flex-wrap:wrap; gap:0.75rem; align-items:center;" class="promo-estudio-picker-row">
+                                            <!-- Opción A: Desplegable / Combo -->
+                                            <div style="flex:1 1 220px; min-width:180px;">
+                                                <label style="font-size: 0.75rem; font-weight: 700; color: #0369a1; margin-bottom: 3px; display: block;">Opción A: Selección Directa (Combo)</label>
+                                                <select name="promo_estudio_id_<?= $pId ?>" id="promo-select-<?= $pId ?>" class="form-input promo-estudio-select" style="font-size:0.85rem; width:100%; text-overflow:ellipsis; background-color: #ffffff; border-color: #7dd3fc; font-weight: 600; color: #0f172a;" data-card-id="<?= $pId ?>">
+                                                    <option value="" data-nombre="" data-categoria="" data-ayuno="" data-tiempo="" data-detalle="">-- Sin estudio asociado --</option>
+                                                    <?php if (!empty($estudiosCatalog)): ?>
+                                                        <?php foreach ($estudiosCatalog as $est): ?>
+                                                            <?php $optText = $est['nombre'] . ' (' . $est['clave_interna'] . ')'; ?>
+                                                            <option value="<?= $est['id'] ?>"
+                                                                    data-nombre="<?= h($est['nombre']) ?>"
+                                                                    data-categoria="<?= h($est['categoria_nombre'] ?? '') ?>"
+                                                                    data-ayuno="<?= h($est['preparacion'] ?? '') ?>"
+                                                                    data-tiempo="<?= h($est['tiempo_procesamiento'] ?? '') ?>"
+                                                                    data-detalle="<?= h($est['detalle'] ?? '') ?>"
+                                                                    <?= ($p['estudio_id'] == $est['id']) ? 'selected' : '' ?>>
+                                                                <?= h($optText) ?>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L699-739)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+            <!-- Mensaje WhatsApp para Agendar Promoción -->
+            <div class="editor-card">
+                <div class="editor-card-header">
+                    <div class="card-title">Plantilla del Mensaje de WhatsApp (Agendar)</div>
+                </div>
+                <div class="editor-card-body">
+                    <div class="field-group">
+                        <label>Mensaje al Agendar Estudio <small class="txt-muted">usa <code>{estudio}</code> como marcador dinámico</small></label>
+                        <input type="text" name="_cfg_wa_texto_agendar"
+                               value="<?= htmlspecialchars($config['wa_texto_agendar'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
+                        <small class="cms-help-text">Texto pre-escrito en WhatsApp al agendar cualquier promoción del día. El comodín <code>{estudio}</code> se reemplaza dinámicamente con el nombre o clave del estudio promocionado (ej. <em>«Hola LAESH, deseo agendar {estudio}»</em> $\rightarrow$ <em>«Hola LAESH, deseo agendar Reticulocitos»</em>).</small>
+                    </div>
+                </div>
+            </div>
+            </div><!-- /grid-2col fila 1 -->
+
+            <!-- Fila 2: Promociones Relacionales (MariaDB — 7 Fichas: Lunes a Domingo) -->
+            <hr class="cms-section-sep">
+            <div class="editor-card mb-4">
+                <div class="editor-card-header">
+                    <div class="card-title">Gestión de las 7 Promociones Diarias (MariaDB `catalogo_promociones`)</div>
+                </div>
+                <div class="editor-card-body">
+                    <!-- Guía de Origen de Datos (SSOT vs. Texto Libre) -->
+                    <div class="cms-help-banner mb-3" style="background: #f8fafc; border: 1px solid #cbd5e1; border-left: 4px solid #0052B7; border-radius: 6px; padding: 10px 14px; font-size: 0.82rem; color: #1e293b; line-height: 1.5;">
+                        <div style="font-weight: 700; color: #0052B7; margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
+                            💡 Guía de Origen de Datos (SSOT del Constructor Jerárquico vs. Texto Libre de la Promoción)
+                        </div>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 6px;">
+                            <div style="flex: 1 1 280px; background: #ffffff; padding: 8px 10px; border-radius: 5px; border: 1px solid #e2e8f0;">
+                                <strong style="color: #0369a1;">🎨 SÍ provienen de la SSOT (Constructor Jerárquico):</strong><br>
+                                <span style="color: #475569;">• Nombre del Estudio, Categoría, Ayuno y Tiempo. <em style="color: #0284c7;">(Sus caracteres están protegidos para mantener la norma médica, pero SÍ se puede personalizar su estilo visual con negritas/colores).</em></span>
+                            </div>
+                            <div style="flex: 1 1 280px; background: #ffffff; padding: 8px 10px; border-radius: 5px; border: 1px solid #e2e8f0;">
+                                <strong style="color: #b45309;">✍️ NO provienen de la SSOT (Configuración Libre de Oferta):</strong><br>
+                                <span style="color: #475569;">• <strong>Campo #7 (Única Descripción 100% Editable)</strong>, Título Superior de Ficha, Precios e Imagen.</span>
+                            </div>
+                        </div>
+                    </div>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Highlighting Specific Text**
+
+I've zeroed in on line 721 within `admrc/views/gestion_web.php`. I need to isolate and emphasize the following text: "Gestión de las 7 Promociones Diarias (MariaDB `catalogo_promociones`)". The goal is to highlight this particular string.
+
+
+**Refining Design Specifications**
+
+I've decided to replace the specific text on line 721 with a highlighted badge format. For the "7 Fichas" header, I'm now crafting a color palette for each card ID (1-7), aiming for distinct and elegant backgrounds with contrasting text colors, so that each card has its own unique visual identity. The plan is to create a clear and aesthetically pleasing distinction between the cards.
+
+
+**Defining Color Palettes**
+
+I've fleshed out the color scheme for each card ID (1-7), assigning a distinct gradient background and text/accent colors. I've now defined each background color as a linear gradient. For each card, I've defined the background, text color, label text color, and checkbox accent, which I intend to map into PHP inside section 4 of `admrc/views/gestion_web.php`. I'm aiming for a visually consistent and informative display.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.587264560s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L714-795)</summary>
+
+**Path:** `Unknown file`
+
+```
+            </div><!-- /grid-2col fila 1 -->
+
+            <!-- Fila 2: Promociones Relacionales (MariaDB — 7 Fichas: Lunes a Domingo) -->
+            <hr class="cms-section-sep">
+            <div class="editor-card mb-4">
+                <div class="editor-card-header">
+                    <div class="card-title">Gestión de las 7 Promociones Diarias (MariaDB `catalogo_promociones`)</div>
+                </div>
+                <div class="editor-card-body">
+                    <!-- Guía de Origen de Datos (SSOT vs. Texto Libre) -->
+                    <div class="cms-help-banner mb-3" style="background: #f8fafc; border: 1px solid #cbd5e1; border-left: 4px solid #0052B7; border-radius: 6px; padding: 10px 14px; font-size: 0.82rem; color: #1e293b; line-height: 1.5;">
+                        <div style="font-weight: 700; color: #0052B7; margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
+                            💡 Guía de Origen de Datos (SSOT del Constructor Jerárquico vs. Texto Libre de la Promoción)
+                        </div>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 6px;">
+                            <div style="flex: 1 1 280px; background: #ffffff; padding: 8px 10px; border-radius: 5px; border: 1px solid #e2e8f0;">
+                                <strong style="color: #0369a1;">🎨 SÍ provienen de la SSOT (Constructor Jerárquico):</strong><br>
+                                <span style="color: #475569;">• Nombre del Estudio, Categoría, Ayuno y Tiempo. <em style="color: #0284c7;">(Sus caracteres están protegidos para mantener la norma médica, pero SÍ se puede personalizar su estilo visual con negritas/colores).</em></span>
+                            </div>
+                            <div style="flex: 1 1 280px; background: #ffffff; padding: 8px 10px; border-radius: 5px; border: 1px solid #e2e8f0;">
+                                <strong style="color: #b45309;">✍️ NO provienen de la SSOT (Configuración Libre de Oferta):</strong><br>
+                                <span style="color: #475569;">• <strong>Campo #7 (Única Descripción 100% Editable)</strong>, Título Superior de Ficha, Precios e Imagen.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <style>
+                    /* Distribución uniforme a 2 columnas sin scroll horizontal en Promociones */
+                    #panel-promociones .promo-grid-2col {
+                        display: grid;
+                        grid-template-columns: repeat(2, minmax(0, 1fr));
+                        gap: 1.25rem;
+                        width: 100%;
+                        max-width: 100%;
+                        box-sizing: border-box;
+                    }
+                    @media (max-width: 992px) {
+                        #panel-promociones .promo-grid-2col {
+                            grid-template-columns: 1fr;
+                        }
+                    }
+                    #panel-promociones .promo-card-editor {
+                        width: 100%;
+                        max-width: 100%;
+                        box-sizing: border-box;
+                        overflow-x: hidden;
+                    }
+                    #panel-promociones .ck.ck-toolbar {
+                        flex-wrap: wrap !important;
+                        max-width: 100% !important;
+                        box-sizing: border-box !important;
+                    }
+                    #panel-promociones .ck.ck-editor__main {
+                        max-width: 100% !important;
+                        box-sizing: border-box !important;
+                    }
+                    #panel-promociones .ck.ck-content {
+                        word-break: break-word !important;
+                        overflow-wrap: break-word !important;
+                    }
+                    </style>
+
+                    <div class="promo-grid-2col">
+                    <?php if (!empty($promociones)): ?>
+                        <?php foreach ($promociones as $p): ?>
+                            <?php 
+                                $pId = (int)$p['id'];
+                                $diaLabel = ucfirst($p['dia_semana']);
+                                $imgUrl = $p['imagen_fondo'] ?? '';
+                            ?>
+                            <div class="editor-card promo-card-editor" style="border: 1px solid #cbd5e1; background: #fafafa;">
+                                <div class="editor-card-header" style="display:flex; justify-content:space-between; align-items:center; background:#f1f5f9; padding:8px 12px; border-bottom:1px solid #e2e8f0;">
+                                    <div class="card-title" style="font-weight:700; color:var(--primary);">
+                                        Ficha ID: <?= $pId ?>
+                                    </div>
+                                    <label style="display:flex; align-items:center; gap:6px; font-size:0.8rem; font-weight:600; cursor:pointer; color:#1e293b;">
+                                        <input type="checkbox" name="promo_active_<?= $pId ?>" value="1" <?= (!empty($p['activo'])) ? 'checked' : '' ?>>
+                                        Activa
+                                    </label>
+                                </div>
+                                <div class="editor-card-body" style="padding:12px;">
+                                    <input type="hidden" name="promo_id[]" value="<?= $pId ?>">
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Refining The Code**
+
+I'm currently focused on modifying `admrc/views/gestion_web.php` with `replace_file_content`. Specifically, I'm working to replace a specific line (721) within the file. I have verified the target block and the change involves adding a style attribute to a `div` element, focusing on font weight.
+
+
+**Implementing New Styles**
+
+I've moved on to replacing lines 777-795 in `admrc/views/gestion_web.php`. My approach involves defining a new array, `$_headerStyles`, that holds styling information for promotional headers. This will allow for dynamic styling based on promotional IDs and use gradients as backgrounds. The plan includes integrating these styles into the `div` element for each promotional card to customize the appearance.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.390055108s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 1:06 pm
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 1:07 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `Gestión de las 7 Promociones`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 1:07 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L709-764)</summary>
+
+**Path:** `Unknown file`
+
+```
+                               value="<?= htmlspecialchars($config['wa_texto_agendar'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
+                        <small class="cms-help-text">Texto pre-escrito en WhatsApp al agendar cualquier promoción del día. El comodín <code>{estudio}</code> se reemplaza dinámicamente con el nombre o clave del estudio promocionado (ej. <em>«Hola LAESH, deseo agendar {estudio}»</em> $\rightarrow$ <em>«Hola LAESH, deseo agendar Reticulocitos»</em>).</small>
+                    </div>
+                </div>
+            </div>
+            </div><!-- /grid-2col fila 1 -->
+
+            <!-- Fila 2: Promociones Relacionales (MariaDB — 7 Fichas: Lunes a Domingo) -->
+            <hr class="cms-section-sep">
+            <div class="editor-card mb-4">
+                <div class="editor-card-header" style="padding:12px 16px;">
+                    <div class="card-title" style="font-weight:800; font-size:1.15rem; color:#0052B7; background:#e0f2fe; padding:6px 14px; border-radius:6px; border-left:4px solid #0284c7; display:inline-block;">Gestión de las 7 Promociones</div>
+                </div>
+                <div class="editor-card-body">
+                    <!-- Guía de Origen de Datos (SSOT vs. Texto Libre) -->
+                    <div class="cms-help-banner mb-3" style="background: #f8fafc; border: 1px solid #cbd5e1; border-left: 4px solid #0052B7; border-radius: 6px; padding: 10px 14px; font-size: 0.82rem; color: #1e293b; line-height: 1.5;">
+                        <div style="font-weight: 700; color: #0052B7; margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
+                            💡 Guía de Origen de Datos (SSOT del Constructor Jerárquico vs. Texto Libre de la Promoción)
+                        </div>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 6px;">
+                            <div style="flex: 1 1 280px; background: #ffffff; padding: 8px 10px; border-radius: 5px; border: 1px solid #e2e8f0;">
+                                <strong style="color: #0369a1;">🎨 SÍ provienen de la SSOT (Constructor Jerárquico):</strong><br>
+                                <span style="color: #475569;">• Nombre del Estudio, Categoría, Ayuno y Tiempo. <em style="color: #0284c7;">(Sus caracteres están protegidos para mantener la norma médica, pero SÍ se puede personalizar su estilo visual con negritas/colores).</em></span>
+                            </div>
+                            <div style="flex: 1 1 280px; background: #ffffff; padding: 8px 10px; border-radius: 5px; border: 1px solid #e2e8f0;">
+                                <strong style="color: #b45309;">✍️ NO provienen de la SSOT (Configuración Libre de Oferta):</strong><br>
+                                <span style="color: #475569;">• <strong>Campo #7 (Única Descripción 100% Editable)</strong>, Título Superior de Ficha, Precios e Imagen.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <style>
+                    /* Distribución uniforme a 2 columnas sin scroll horizontal en Promociones */
+                    #panel-promociones .promo-grid-2col {
+                        display: grid;
+                        grid-template-columns: repeat(2, minmax(0, 1fr));
+                        gap: 1.25rem;
+                        width: 100%;
+                        max-width: 100%;
+                        box-sizing: border-box;
+                    }
+                    @media (max-width: 992px) {
+                        #panel-promociones .promo-grid-2col {
+                            grid-template-columns: 1fr;
+                        }
+                    }
+                    #panel-promociones .promo-card-editor {
+                        width: 100%;
+                        max-width: 100%;
+                        box-sizing: border-box;
+                        overflow-x: hidden;
+                    }
+                    #panel-promociones .ck.ck-toolbar {
+                        flex-wrap: wrap !important;
+                        max-width: 100% !important;
+                        box-sizing: border-box !important;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L765-829)</summary>
+
+**Path:** `Unknown file`
+
+```
+                    }
+                    #panel-promociones .ck.ck-editor__main {
+                        max-width: 100% !important;
+                        box-sizing: border-box !important;
+                    }
+                    #panel-promociones .ck.ck-content {
+                        word-break: break-word !important;
+                        overflow-wrap: break-word !important;
+                    }
+                    </style>
+
+                    <?php
+                    $_headerStyles = [
+                        1 => ['bg' => 'linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%)', 'color' => '#ffffff', 'tag' => 'Lunes'],
+                        2 => ['bg' => 'linear-gradient(135deg, #065f46 0%, #059669 100%)', 'color' => '#ffffff', 'tag' => 'Martes'],
+                        3 => ['bg' => 'linear-gradient(135deg, #78350f 0%, #d97706 100%)', 'color' => '#ffffff', 'tag' => 'Miércoles'],
+                        4 => ['bg' => 'linear-gradient(135deg, #581c87 0%, #7c3aed 100%)', 'color' => '#ffffff', 'tag' => 'Jueves'],
+                        5 => ['bg' => 'linear-gradient(135deg, #831843 0%, #db2777 100%)', 'color' => '#ffffff', 'tag' => 'Viernes'],
+                        6 => ['bg' => 'linear-gradient(135deg, #134e4a 0%, #0d9488 100%)', 'color' => '#ffffff', 'tag' => 'Sábado'],
+                        7 => ['bg' => 'linear-gradient(135deg, #7c2d12 0%, #ea580c 100%)', 'color' => '#ffffff', 'tag' => 'Domingo'],
+                    ];
+                    ?>
+                    <div class="promo-grid-2col">
+                    <?php if (!empty($promociones)): ?>
+                        <?php foreach ($promociones as $p): ?>
+                            <?php 
+                                $pId = (int)$p['id'];
+                                $diaLabel = ucfirst($p['dia_semana']);
+                                $imgUrl = $p['imagen_fondo'] ?? '';
+                                $hStyle = $_headerStyles[$pId] ?? ['bg' => '#0f172a', 'color' => '#ffffff', 'tag' => 'Ficha'];
+                            ?>
+                            <div class="editor-card promo-card-editor" style="border: 1.5px solid #cbd5e1; background: #fafafa; border-radius: 8px; overflow: hidden;">
+                                <div class="editor-card-header" style="display:flex; justify-content:space-between; align-items:center; background: <?= $hStyle['bg'] ?>; padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.2);">
+                                    <div class="card-title" style="font-weight:800; color: <?= $hStyle['color'] ?>; font-size:0.95rem; display:flex; align-items:center; gap:8px;">
+                                        <span>Ficha ID: <?= $pId ?></span>
+                                        <span style="font-size:0.75rem; background:rgba(255,255,255,0.22); color:#ffffff; padding:2px 8px; border-radius:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px;">
+                                            <?= $hStyle['tag'] ?>
+                                        </span>
+                                    </div>
+                                    <label style="display:flex; align-items:center; gap:6px; font-size:0.85rem; font-weight:700; cursor:pointer; color: <?= $hStyle['color'] ?>; background:rgba(0,0,0,0.2); padding:4px 10px; border-radius:20px;">
+                                        <input type="checkbox" name="promo_active_<?= $pId ?>" value="1" <?= (!empty($p['activo'])) ? 'checked' : '' ?> style="width:1.05rem; height:1.05rem; cursor:pointer; accent-color:#10b981;">
+                                        <span>Activa</span>
+                                    </label>
+                                </div>
+                                <div class="editor-card-body" style="padding:12px;">
+                                    <input type="hidden" name="promo_id[]" value="<?= $pId ?>">
+
+                                    <!-- 1. Título / Etiqueta Superior (ÚNICO editable en contenido + estilo RTE) -->
+                                    <div class="field-group mb-3">
+                                        <label>✍️ Título / Etiqueta Superior de la Ficha <small class="txt-muted">(✍️ Contenido y Estilos RTE Editables)</small></label>
+                                        <div id="ck-promo-day-<?= $pId ?>" class="ck5-mount"></div>
+                                        <textarea id="ck-promo-day-<?= $pId ?>-data" name="promo_dia_semana_<?= $pId ?>" class="ck5-hidden-data" rows="2"><?= h($p['dia_semana']) ?></textarea>
+                                    </div>
+
+                                    <!-- 2. Estudio Asociado del Catálogo (Combo Desplegable + Buscador Autocomplete) -->
+                                    <div class="field-group mb-3" style="background: linear-gradient(135deg, #eff6ff 0%, #e0f2fe 100%); border: 1.5px solid #38bdf8; border-left: 4px solid #0284c7; border-radius: 8px; padding: 10px 12px; box-shadow: 0 2px 6px rgba(2, 132, 199, 0.08);">
+                                        <label style="font-weight: 700; color: #0369a1; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 4px; margin-bottom: 4px;">
+                                            <span>🎯 PASO 1: SELECCIONAR O BUSCAR ESTUDIO ASOCIADO DEL CATÁLOGO</span>
+                                            <span style="font-size: 0.72rem; background: #0284c7; color: #ffffff; padding: 2px 8px; border-radius: 12px; font-weight: 600;">⚡ Auto-pobla campos de BD</span>
+                                        </label>
+                                        <div style="font-size: 0.76rem; color: #0c4a6e; margin-bottom: 8px; line-height: 1.3;">
+                                            Elija primero el estudio base desde el combo o buscador para cargar automáticamente los datos maestros de MariaDB.
+                                        </div>
+                                        <div style="display:flex; flex-wrap:wrap; gap:0.75rem; align-items:center;" class="promo-estudio-picker-row">
+                                            <!-- Opción A: Desplegable / Combo -->
+```
+
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+QUe el contorno de cada ficha, tenga el mismo color que el del color de fondo de su encabezado, me explico ? 
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `gestion_web.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L774-809)</summary>
+
+**Path:** `Unknown file`
+
+```
+                    </style>
+
+                    <?php
+                    $_headerStyles = [
+                        1 => ['bg' => 'linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%)', 'color' => '#ffffff', 'tag' => 'Lunes'],
+                        2 => ['bg' => 'linear-gradient(135deg, #065f46 0%, #059669 100%)', 'color' => '#ffffff', 'tag' => 'Martes'],
+                        3 => ['bg' => 'linear-gradient(135deg, #78350f 0%, #d97706 100%)', 'color' => '#ffffff', 'tag' => 'Miércoles'],
+                        4 => ['bg' => 'linear-gradient(135deg, #581c87 0%, #7c3aed 100%)', 'color' => '#ffffff', 'tag' => 'Jueves'],
+                        5 => ['bg' => 'linear-gradient(135deg, #831843 0%, #db2777 100%)', 'color' => '#ffffff', 'tag' => 'Viernes'],
+                        6 => ['bg' => 'linear-gradient(135deg, #134e4a 0%, #0d9488 100%)', 'color' => '#ffffff', 'tag' => 'Sábado'],
+                        7 => ['bg' => 'linear-gradient(135deg, #7c2d12 0%, #ea580c 100%)', 'color' => '#ffffff', 'tag' => 'Domingo'],
+                    ];
+                    ?>
+                    <div class="promo-grid-2col">
+                    <?php if (!empty($promociones)): ?>
+                        <?php foreach ($promociones as $p): ?>
+                            <?php 
+                                $pId = (int)$p['id'];
+                                $diaLabel = ucfirst($p['dia_semana']);
+                                $imgUrl = $p['imagen_fondo'] ?? '';
+                                $hStyle = $_headerStyles[$pId] ?? ['bg' => '#0f172a', 'color' => '#ffffff', 'tag' => 'Ficha'];
+                            ?>
+                            <div class="editor-card promo-card-editor" style="border: 1.5px solid #cbd5e1; background: #fafafa; border-radius: 8px; overflow: hidden;">
+                                <div class="editor-card-header" style="display:flex; justify-content:space-between; align-items:center; background: <?= $hStyle['bg'] ?>; padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.2);">
+                                    <div class="card-title" style="font-weight:800; color: <?= $hStyle['color'] ?>; font-size:0.95rem; display:flex; align-items:center; gap:8px;">
+                                        <span>Ficha ID: <?= $pId ?></span>
+                                        <span style="font-size:0.75rem; background:rgba(255,255,255,0.22); color:#ffffff; padding:2px 8px; border-radius:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px;">
+                                            <?= $hStyle['tag'] ?>
+                                        </span>
+                                    </div>
+                                    <label style="display:flex; align-items:center; gap:6px; font-size:0.85rem; font-weight:700; cursor:pointer; color: <?= $hStyle['color'] ?>; background:rgba(0,0,0,0.2); padding:4px 10px; border-radius:20px;">
+                                        <input type="checkbox" name="promo_active_<?= $pId ?>" value="1" <?= (!empty($p['activo'])) ? 'checked' : '' ?> style="width:1.05rem; height:1.05rem; cursor:pointer; accent-color:#10b981;">
+                                        <span>Activa</span>
+                                    </label>
+                                </div>
+                                <div class="editor-card-body" style="padding:12px;">
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Defining the Card's Border**
+
+I'm currently focused on customizing the visual appearance of a specific card element. I'm investigating how to best implement a user-defined border. The current HTML sets a light gray border and a rounded appearance. I am evaluating ways to make the border color, style, and thickness configurable through user input, considering the `border` CSS property. I am also investigating whether a more nuanced visual style can be used beyond just the standard border.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.003616676s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 1:20 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 1:20 pm
 
 ---
 

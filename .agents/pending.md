@@ -84,44 +84,36 @@
 
 ## 🟡 PRIORIDAD MEDIA — INFRA
 
-### P-LAESH-E2E-01 🔄 [LAESH KVM2] Trazabilidad E2E — Implementación parcial, 5 gaps críticos
-**Estado**: Detectado 2026-09-05. Logging de eventos existe y es real (sys_logs + app.log + nginx). Falta correlación entre capas.
+### P-LAESH-E2E-01 ✅ [LAESH KVM2] Trazabilidad E2E — G1–G5 todos resueltos
 
-**Lo que YA funciona:**
-- `sys_logs` (MariaDB) + `app.log` (plano) — dual write con fallback
-- Eventos registrados: login exitoso/fallido, CSRF violations, órdenes creadas, cambios de estado, CMS, errores PDO
-- UI viewer en portal Admin `/adrc/` → vista `sistema.php` / `log_viewer.php`
+**Estado**: Cerrado 2026-09-06 (G2–G5) + 2026-09-06 (G1).
 
-**Gaps pendientes (ordenados por impacto):**
+**Resueltos:**
+| Gap | Fix | Verificado |
+|-----|-----|-----------|
+| G1 | `Logger::logAlways()` añadido en `commons/Logger.php` (bypass filtro nivel mín.). Call-sites actualizados: login exitoso, logout, orden recepción creada, solicitud médica creada, cambio estado orden, CMS sección publicada, médico registrado, admin cambió estado médico | ✅ 2026-09-06 (local — pendiente deploy KVM2) |
+| G2 | `RbacManager::requirePermission()` emite `Logger::log('WARN',...)` en denegaciones e `Logger::log('INFO',...)` en redirects | ✅ entry WARN en sys_logs + app.log |
+| G3 | `Logger::$requestId` estático (`bin2hex(random_bytes(8))`), columna `request_id CHAR(16)` en sys_logs | ✅ `[REQ:1068fa52d9b0b134]` en app.log |
+| G4 | Columnas `url VARCHAR(500)` + `metodo VARCHAR(10)` en sys_logs; capturadas en Logger | ✅ `[GET /laesh/md/estudios/todos]` |
+| G5 | Columna `session_id CHAR(26)` en sys_logs; capturada con `session_id()` (CLI-safe) | ✅ session_id en sys_logs row |
 
-| # | Gap | Impacto | Fix estimado |
-|---|---|---|---|
-| G1 | **INFO filtrado en producción** — nivel mínimo = WARN → órdenes creadas, logins exitosos invisibles en laesh.mx | Alto — sin visibilidad de negocio | Cambiar `app-log-level.php` a INFO en prod, o hacer INFO persistente sin filtro |
-| G2 | **RBAC denials no se loguean** — `RbacManager::requirePermission()` no llama a Logger. 302 silencioso sin rastro | Alto — sin detección de acceso no autorizado | Agregar `Logger::log('WARN', ...)` en RbacManager antes del header redirect |
-| G3 | **Sin request_id correlación** — nginx genera `$request_id` → header `X-Request-ID` al browser pero NO lo pasa a PHP vía `fastcgi_param`. Imposible enlazar `access.log` con `sys_logs` | Medio — debugging prod difícil | Agregar `fastcgi_param HTTP_X_REQUEST_ID $request_id;` en todos los `@*_php` named locations; capturarlo en Logger |
-| G4 | **sys_logs sin URL ni método** — tabla solo tiene level/message/ip/user_id/created_at. No se sabe qué endpoint disparó el evento | Medio | Agregar columnas `url VARCHAR(255)` + `http_method VARCHAR(10)` + migración DDL |
-| G5 | **Sin session_id** — no se puede rastrear actividad completa de una sesión a través de múltiples requests | Bajo | Agregar `session_id CHAR(32)` en sys_logs; capturar `session_id()` en Logger |
+**Fix adicional (2026-09-06):** `commons/commons.php` — `Flight::map('rbac',...)` movido fuera del try/catch de `DB::connect()`. Antes causaba `"rbac must be a mapped method"` cuando la BD tenía fallo transitorio.
 
-**Prerequisito antes de G3**: verificar que los named locations `@rc_php`, `@md_php`, `@adrc_php` en `nginx-laesh-domain.conf` pasen el header a PHP (ajuste de 1 línea por location).
+> ⚠️ **G1 requiere deploy a KVM2** — cambios en `Logger.php`, `login.php`, `logout.php`, `rc/negocio/Ordenes.php`, `md/negocio/Ordenes.php`, `admrc/index.php`.
 
 ---
 
-### P-LAESH-NGINX-SYNC-01 ⚠️ [LAESH KVM2] Verificar fidelidad local == servidor tras sesión de fixes
-**Estado**: Acción requerida — se aplicaron múltiples patches a `nginx-laesh-domain.conf` y `nginx-laesh-ip.conf` en sesión 2026-09-05. El archivo local está correcto. Verificar que el servidor tiene exactamente lo mismo.
+### P-LAESH-NGINX-SYNC-01 ✅ [LAESH KVM2] Nginx config verificado — local == servidor
+**Estado**: Resuelto 2026-09-06 — verificación manual confirmada.
 
-**Verificación (ejecutar en el servidor):**
-```bash
-sha256sum /etc/nginx/sites-available/laesh
-sudo sed 's/__LAESH_DOMAIN__/laesh.mx/g' \
-  ~/laesh-kvm2-prod/configs/nginx-laesh-domain.conf | sha256sum
-# Los dos hashes deben coincidir
-```
-Si divergen: re-ejecutar `sync_to_hkvm2.sh` desde local + `sed | tee + nginx reload`.
+**Nota**: `~/laesh-src/setup/deploy/` no existe en el servidor (solo se sincroniza código web), así que el diff automatizado no funcionó. Se comparó el output del diff contra el template local con sustitución `__LAESH_DOMAIN__ → laesh.mx`: **287 líneas, contenido idéntico**.
 
-**Fixes aplicados en esta sesión (deben estar en el repo):**
-1. `try_files $uri @portal_php` — eliminado `$uri/` para evitar internal redirect via index directive que bypasseaba el named location
-2. `include fastcgi_params` primero en los 3 named locations (`@rc_php`, `@md_php`, `@adrc_php`) para que los params explícitos los sobreescriban
-3. `fastcgi_param SCRIPT_NAME /laesh/{rc|md|adrc}/index.php` explícito — permite a Flight calcular `base = dirname(SCRIPT_NAME) = /laesh/{rc|md|adrc}` y hacer strip correcto de REQUEST_URI
+| Fix verificado | Estado |
+|---|---|
+| `try_files $uri @md_php` / `@rc_php` / `@adrc_php` (sin `$uri/`) | ✅ |
+| `include fastcgi_params` como primera línea en los 3 named locations | ✅ |
+| `SCRIPT_NAME /laesh/{md\|rc\|adrc}/index.php` explícito | ✅ |
+| SHA256 servidor: `6e22c74ef5132218819142f1879c5c437c02bdf52d0be74522562e866ee8e080` | ✅ |
 
 ---
 
@@ -208,9 +200,11 @@ Si divergen: re-ejecutar `sync_to_hkvm2.sh` desde local + `sed | tee + nginx rel
 
 ## 🟡 PRIORIDAD MEDIA — LAESH Dev (código)
 
-### G-DEV-01 🟡 Modal perfil médico — no persiste en BD
-**Estado**: Feature incompleta · `labadmin.js:894` → solo `console.log`, no llama al backend  
-**Acción**: Endpoint PHP en `admrc/` + `INSERT/UPDATE perfiles_medicos`
+### G-DEV-01 ✅ Modal perfil médico — resuelto 2026-09-06
+**Estado**: Cerrado.  
+**Análisis**: El backend `POST /laesh/rc/medico/crear` ya existía y estaba completo en `rc/index.php` → `RC\Negocio\Ordenes::registrarMedico()`. El stub JS (`console.log`) era código muerto — el form tenía `hx-post` y HTMX lo manejaba, pero sin validación completa de celular ni feedback de error correcto.  
+**Fix aplicado**: `labadmin.js` — reemplazado stub `console.log` con interceptor de `submit` que hace `fetch('/laesh/rc/medico/crear')`. Validación añadida: celular `^\d{10}$`. Distinción éxito/error por header `HX-Refresh: true`. Feedback correcto en ambos casos.  
+> ⚠️ **Requiere deploy a KVM2** — archivo: `laesh-web-assets-uipv1a/js/labadmin.js`
 
 ### G-DEV-02 ⏸ Cache-busting `?v=time()` — diferido a producción
 **Estado**: Diferido  
