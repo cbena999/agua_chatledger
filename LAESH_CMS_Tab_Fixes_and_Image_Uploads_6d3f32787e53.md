@@ -7,9 +7,9 @@
 | **Trajectory ID** | `cbb3065c-15ab-40b2-a551-df5474c119c2` |
 | **Cascade ID** | `33758958-5e2c-4311-ba38-6d3f32787e53` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 11738 |
+| **Total Steps** | 11969 |
 | **Started** | 30 Aug 2026, 9:34 pm |
-| **Completed** | 5 Sept 2026, 12:05 am |
+| **Completed** | 5 Sept 2026, 7:24 pm |
 
 ---
 
@@ -16575,5397 +16575,366 @@
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `banner__titulo`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 1:21 pm
 
 ---
 
 ### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 1:21 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L649-719)</summary>
-
-**Path:** `Unknown file`
-
-```
-        <!-- ================================================================
-             PANEL 4: PROMOCIONES VIGENTES
-             Sección: promociones | Fuente HTML: #promociones
-             ================================================================ -->
-        <div id="panel-promociones" class="cms-panel" role="tabpanel" aria-labelledby="tab-promociones" tabindex="0" data-section="promociones">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">Promociones Vigentes (#promociones)</h3>
-            </div>
-
-            <!-- Fila 1: Encabezado de la Sección + Mensaje WhatsApp Agendar -->
-            <hr class="cms-section-sep">
-            <div class="grid-2col mb-4">
-            <!-- Encabezado de la Sección Promociones -->
-            <div class="editor-card">
-                <div class="editor-card-header">
-                    <div class="card-title">Encabezado de la Sección (#promociones)</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Título Principal (h2)</label>
-                        <input type="text" name="banner__titulo"
-                               value="<?= cms($contenidos, 'promociones', 'banner', 'titulo', 'Promociones Vigentes') ?>">
-                    </div>
-                    <div class="field-group">
-                        <label>Subtítulo / Descripción de la Sección</label>
-                        <input type="text" name="banner__subtitulo"
-                               value="<?= cms($contenidos, 'promociones', 'banner', 'subtitulo', 'Aprovecha nuestros precios preferenciales en estudios de laboratorio seleccionados cada día de la semana.') ?>">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Mensaje WhatsApp para Agendar Promoción -->
-            <div class="editor-card">
-                <div class="editor-card-header">
-                    <div class="card-title">Plantilla del Mensaje de WhatsApp (Agendar)</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Mensaje al Agendar Estudio <small class="txt-muted">usa <code>{estudio}</code> como marcador dinámico</small></label>
-                        <input type="text" name="_cfg_wa_texto_agendar"
-                               value="<?= htmlspecialchars($config['wa_texto_agendar'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        <small class="cms-help-text">Texto pre-escrito en WhatsApp al agendar cualquier promoción del día. El comodín <code>{estudio}</code> se reemplaza dinámicamente con el nombre o clave del estudio promocionado (ej. <em>«Hola LAESH, deseo agendar {estudio}»</em> $\rightarrow$ <em>«Hola LAESH, deseo agendar Reticulocitos»</em>).</small>
-                    </div>
-                </div>
-            </div>
-            </div><!-- /grid-2col fila 1 -->
-
-            <!-- Fila 2: Promociones Relacionales (MariaDB — 7 Fichas: Lunes a Domingo) -->
-            <hr class="cms-section-sep">
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">Gestión de las 7 Promociones Diarias (MariaDB `catalogo_promociones`)</div>
-                </div>
-                <div class="editor-card-body">
-                    <style>
-                    /* Distribución uniforme a 2 columnas sin scroll horizontal en Promociones */
-                    #panel-promociones .promo-grid-2col {
-                        display: grid;
-                        grid-template-columns: repeat(2, minmax(0, 1fr));
-                        gap: 1.25rem;
-                        width: 100%;
-                        max-width: 100%;
-                        box-sizing: border-box;
-                    }
-                    @media (max-width: 992px) {
-                        #panel-promociones .promo-grid-2col {
-                            grid-template-columns: 1fr;
-                        }
-                    }
-                    #panel-promociones .promo-card-editor {
-                        width: 100%;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `promociones`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 1:21 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `cms-preview.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Execution Error
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 1:21 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `banner__titulo`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 1:21 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `list_dir`
-**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-web-assets-uipv1a/js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>Directory: `js` (18 items)</summary>
-
-**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-web-assets-uipv1a/js`
-
-| Name | Type | Size |
-|------|------|------|
-| `app.js` | File | 28474 bytes |
-| `catalog-builder.js` | File | 26299 bytes |
-| `ckeditor-init.js` | File | 16727 bytes |
-| `ckeditor5.umd.js` | File | 1431443 bytes |
-| `cms-dirty-tracker.js` | File | 21516 bytes |
-| `cms-upload.js` | File | 13057 bytes |
-| `device-detect.js` | File | 3165 bytes |
-| `gestion-web.js` | File | 46449 bytes |
-| `htmx.min.js` | File | 49082 bytes |
-| `labadmin.js` | File | 55550 bytes |
-| `log-viewer.js` | File | 3730 bytes |
-| `medicos-a11y.js` | File | 10304 bytes |
-| `medicos.js` | File | 58354 bytes |
-| `portal-footer.js` | File | 1828 bytes |
-| `sidebar-rail.js` | File | 6159 bytes |
-| `solicitud-dac.js` | File | 4036 bytes |
-| `website.js` | File | 51032 bytes |
-| `ws-client.js` | File | 13133 bytes |
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `preview`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 1:21 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion-web.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L539-619)</summary>
-
-**Path:** `Unknown file`
-
-```
-        }
-
-        /**
-         * previewCmsSection — Vista previa sin publicar (borrador de sesión)
-         *
-         * Serializa los campos del panel activo y hace POST a /cms/preview-draft.
-         * El backend almacena los datos en $_SESSION['cms_draft'][seccion].
-         * Si la respuesta es ok, abre /laesh/?_preview=1#{anchor} en pestaña nueva.
-         * La producción (visitantes públicos) no es afectada en ningún momento.
-         */
-        function previewCmsSection() {
-            var panel  = document.querySelector('.cms-panel.active');
-            var toast  = document.getElementById('toast');
-
-            // Derivar sección desde data-section del panel o desde su id (igual que publishCmsSection)
-            var seccion = panel
-                ? (panel.getAttribute('data-section') || panel.id.replace('panel-', ''))
-                : '';
-            if (!seccion || !panel) return;
-
-            // Sincronizar editores CKEditor antes de serializar
-            syncCkeditors(panel);
-
-            // Abrir pestaña en blanco de forma síncrona durante el evento de clic para evitar el bloqueo de emergentes (popup blocker)
-            var previewWin = null;
-            try {
-                previewWin = window.open('about:blank', '_blank');
-            } catch (e) {
-                console.warn('[LAESH CMS] No se pudo abrir ventana preliminar:', e);
-            }
-
-            var savBtn = document.getElementById('btn-cms-save-action');
-            var csrf   = savBtn ? savBtn.getAttribute('data-csrf') : '';
-
-            // Recopilar campos del panel activo (igual que publishCmsSection)
-            var params = new URLSearchParams();
-            params.set('csrf_token', csrf);
-            params.set('seccion', seccion);
-            panel.querySelectorAll('input[name], textarea[name], select[name]').forEach(function(el) {
-                if (el.type === 'file' || el.disabled) return;
-                if ((el.type === 'checkbox' || el.type === 'radio') && !el.checked) return;
-
-                if (el.name.endsWith('[]')) {
-                    params.append(el.name, el.value || '');
-                } else {
-                    params.set(el.name, el.value || '');
-                }
-            });
-
-            // Estado visual del botón mientras se envía
-            var previewBtns = document.querySelectorAll('.btn-cms-preview');
-            previewBtns.forEach(function(b) { b.disabled = true; b.textContent = '⏳ Preparando…'; });
-
-            fetch('/laesh/adrc/cms/preview-draft', {
-                method:      'POST',
-                credentials: 'same-origin',
-                headers:     { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body:        params.toString()
-            })
-            .then(function(resp) { return resp.json(); })
-            .then(function(data) {
-                previewBtns.forEach(function(b) { b.disabled = false; b.textContent = '👁 Vista previa'; });
-                if (data.ok && data.url) {
-                    if (previewWin && !previewWin.closed) {
-                        previewWin.location.href = data.url;
-                    } else {
-                        window.open(data.url, '_blank', 'noopener');
-                    }
-                } else {
-                    if (previewWin && !previewWin.closed) previewWin.close();
-                    if (toast) {
-                        toast.textContent = data.msg || 'No se pudo abrir la vista previa.';
-                        toast.classList.add('toast--error', 'show');
-                        setTimeout(function() { toast.classList.remove('show', 'toast--error'); }, 4000);
-                    }
-                }
-            })
-            .catch(function(err) {
-                if (previewWin && !previewWin.closed) previewWin.close();
-                previewBtns.forEach(function(b) { b.disabled = false; b.textContent = '👁 Vista previa'; });
-                console.error('[LAESH CMS] preview-draft error:', err);
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `preview-draft`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 1:21 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L359-419)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-// ── POST /cms/preview-draft — Borrador de sesión para Vista Previa ───────────
-//
-// Almacena los campos del panel activo en $_SESSION['cms_draft'][$seccion].
-// NO escribe en web_contenidos → producción intacta.
-// Solo accesible por admin autenticado con permiso gestionar_cms.
-// El cliente abre /laesh/?_preview=1#{anchor} en pestaña nueva.
-Flight::route('POST /cms/preview-draft', function () {
-    header('Content-Type: application/json; charset=utf-8');
-
-    Flight::rbac()->requirePermission('gestionar_cms', '/laesh/login/login.php?portal=admin');
-
-    // CSRF (misma política que /cms/save)
-    $submitted = $_POST['csrf_token'] ?? '';
-    if (!hash_equals($_SESSION['csrf_token'] ?? '', $submitted)) {
-        http_response_code(403);
-        Logger::log('WARN', 'Token CSRF inválido en cms/preview-draft', Flight::auth()->getUserId() ?: null);
-        echo json_encode(['ok' => false, 'msg' => 'Token de seguridad inválido.']);
-        exit;
-    }
-
-    $seccion = trim($_POST['seccion'] ?? '');
-    $seccionesValidas = ['hero','quienes-somos','especialidades','promociones','calidad','ubicacion','aviso-privacidad','privacidad','video-promo','video','footer','seo','configuracion-general'];
-    if (!in_array($seccion, $seccionesValidas, true)) {
-        http_response_code(400);
-        echo json_encode(['ok' => false, 'msg' => 'Sección no válida.']);
-        exit;
-    }
-
-    // Guardar borrador en sesión (sobrescribe borrador anterior de esa sección)
-    $campos = $_POST;
-    unset($campos['csrf_token'], $campos['seccion']);
-    $_SESSION['cms_draft'][$seccion] = $campos;
-
-    // Anchor por sección para abrir la pestaña en la zona correcta
-    $anchors = [
-        'hero'             => '#inicio',
-        'quienes-somos'    => '#acerca-de',
-        'especialidades'   => '#especialidades',
-        'promociones'      => '#promociones',
-        'calidad'          => '#calidad',
-        'ubicacion'        => '#ubicacion',
-        'video-promo'      => '#video',
-        'video'            => '#video',
-        'footer'           => '#footer',
-        'seo'              => '',
-        'aviso-privacidad' => '#privacidad',
-        'privacidad'       => '#privacidad',
-    ];
-    $anchor = $anchors[$seccion] ?? '';
-
-    Logger::log('INFO', "CMS preview-draft: borrador '{$seccion}' almacenado en sesión.", Flight::auth()->getUserId());
-    $cacheBust = time();
-    echo json_encode(['ok' => true, 'url' => '/laesh/?_preview=1&_t=' . $cacheBust . $anchor]);
-});
-
-// ── GET/POST /sistema — Panel Unificado de Sistema, Logs y Configuraciones ──
-Flight::route('GET /sistema', function () {
-    require __DIR__ . '/views/sistema.php';
-});
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L429-469)</summary>
-
-**Path:** `Unknown file`
-
-```
-$qsVision     = $c('quienes-somos', 'ficha3',    'texto');
-// ficha1/texto: desde 2026-08-23 almacena HTML enriquecido (CKEditor 5).
-// safeHtml() filtra tags permitidos antes de emitir.
-$qsHistoriaHtml = $c('quienes-somos', 'ficha1', 'texto');
-$qsRespBio      = $c('quienes-somos', 'resp', 'bio');
-$qsRespFraseTpl = $c('quienes-somos', 'resp', 'frase_trayectoria');
-$qsRespFrase    = str_replace(
-    ['{anios}', '{lab}'],
-    ['<strong class="txt-green">' . h($cfgAnios) . ' años</strong>', h($cfgNombreC)],
-    h($qsRespFraseTpl)
-);
-$qsFiloCita   = $c('quienes-somos', 'filosofia', 'tagline');
-$qsFiloTxt    = $c('quienes-somos', 'filosofia', 'texto');
-
-// Especialidades (sin fallback)
-$catalogH2   = $c('especialidades', 'seccion',  'h2');
-$catalogSub  = $c('especialidades', 'seccion',  'subtitulo');
-$catalogNota = $c('especialidades', 'catalogo', 'nota_pie');
-
-// Promociones (sin fallback)
-$promoH2  = $c('promociones', 'banner', 'titulo');
-$promoSub = $c('promociones', 'banner', 'subtitulo');
-
-// Calidad (sin fallback)
-$calH2  = $c('calidad', 'seccion', 'h2');
-$calSub = $c('calidad', 'seccion', 'subtitulo');
-
-// Ubicación (sin fallback)
-$ubH2      = $c('ubicacion', 'seccion', 'h2');
-$ubSub     = $c('ubicacion', 'seccion', 'subtitulo');
-$mapsEmbed = $c('ubicacion', 'info', 'maps_embed');
-
-// Footer — Contenido HTML y Color de Fondo consolidado desde el CMS
-$footerHtml    = $c('footer', 'contenido', 'cuerpo_html');
-$footerBgColor = $c('footer', 'estilo', 'bg_color', '#0f172a');
-
-// Aviso de Privacidad — Contenido HTML consolidado desde el RTE del CMS
-$avisoHtml = $c('aviso-privacidad', 'contenido', 'cuerpo_html');
-
-// SEO (sin fallback)
-$schemaName  = h($c('seo', 'schema', 'schema_name'));
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L329-424)</summary>
-
-**Path:** `Unknown file`
-
-```
-    );
-    $promos = $promoStmt ? $promoStmt->fetchAll(\PDO::FETCH_ASSOC) : [];
-    if (!$_bypassCache) \Common\Cache::set(\Common\Cache::KEY_PROMOS, $promos);
-}
-
-// ── Inyectar borrador de promociones si es vista previa ──────────────────
-if ($isPreview && !empty($_SESSION['cms_draft']['promociones'])) {
-    $promoDraft = $_SESSION['cms_draft']['promociones'];
-    
-    // Si la DB trajo menos de 7 (o las que sean), igual debemos iterar
-    // o al revés: iteramos sobre los 7 IDs y construimos el array
-    $draftPromos = [];
-    foreach ([1,2,3,4,5,6,7] as $pId) {
-        if (!isset($promoDraft["promo_active_{$pId}"])) continue; // Si no está activo en el draft, saltar (where activo=1)
-        
-        // Buscar si ya existía en la BD para heredar joins
-        $existingRow = null;
-        foreach ($promos as $row) {
-            if ($row['id'] == $pId) {
-                $existingRow = $row;
-                break;
-            }
-        }
-        
-        $draftRow = $existingRow ?: ['id' => $pId];
-        // Sobrescribir con draft
-        $draftRow['dia_semana']     = $promoDraft["promo_dia_semana_{$pId}"] ?? '';
-        $draftRow['nombre_oferta']  = $promoDraft["promo_titulo_{$pId}"] ?? '';
-        $draftRow['subtitulo']      = $promoDraft["promo_subtitulo_{$pId}"] ?? '';
-        $draftRow['descripcion']    = $promoDraft["promo_desc_{$pId}"] ?? '';
-        $draftRow['ayuno']          = $promoDraft["promo_ayuno_{$pId}"] ?? '';
-        $draftRow['tiempo_entrega'] = $promoDraft["promo_tiempo_{$pId}"] ?? '';
-        $draftRow['precio_regular'] = $promoDraft["promo_precio_reg_{$pId}"] ?? '';
-        $draftRow['precio_oferta']  = $promoDraft["promo_precio_of_{$pId}"] ?? '';
-        $draftRow['imagen_fondo']   = $promoDraft["promo_img_{$pId}"] ?? '';
-        $draftRow['activo']         = 1;
-        
-        $draftPromos[] = $draftRow;
-    }
-    $promos = $draftPromos;
-}
-
-
-// ── 5. Lecturas agrupadas por sección ────────────────────────────────────────
-
-// Hero — navbar tagline (sin fallback)
-$navTagL1 = $c('hero', 'navbar', 'tagline_l1');
-$navTagL2 = $c('hero', 'navbar', 'tagline_l2');
-
-// Hero — contenido de slides: etiqueta, titulo, descripcion, CTA + imagen_url dinámica (sin fallback)
-$heroSliderMode = $c('hero', 'config', 'slider_mode', 'sync');
-$heroFixedImgIdx = (int)$c('hero', 'config', 'fixed_image', '1');
-
-$slides = [];
-for ($si = 1; $si <= 5; $si++) {
-    $imgUrl = $c('hero', "slide{$si}", 'imagen_url', '');
-    $slides[$si] = [
-        'etiqueta'    => $c('hero', "slide{$si}", 'etiqueta'),
-        'titulo'      => $c('hero', "slide{$si}", 'titulo'),
-        'descripcion' => $c('hero', "slide{$si}", 'descripcion'),
-        'cta_texto'   => $c('hero', "slide{$si}", 'cta_texto'),
-        'cta_href'    => $c('hero', "slide{$si}", 'cta_href'),
-        'imagen_url'  => $imgUrl,
-        'bg_style'    => ($heroSliderMode !== 'decoupled' && $imgUrl)
-            ? 'background-image:url(' . h($imgUrl) . ');'
-            : '',
-    ];
-}
-
-// Compute the global parent background if decoupled
-$heroParentBgStyle = '';
-if ($heroSliderMode === 'decoupled') {
-    // Determine which image to use for the fixed background
-    $fixedUrl = $slides[$heroFixedImgIdx]['imagen_url'] ?? '';
-    if ($fixedUrl) {
-        $heroParentBgStyle = ' style="background-image:url(' . h($fixedUrl) . '); background-size: cover; background-position: center center; background-repeat: no-repeat;"';
-    } else {
-        // Fallbacks for the CSS default images if no custom image was uploaded
-        $defaultBgs = [
-            1 => '/laesh-web-assets-uipv1a/img/recepcion-de-pacientes.webp',
-            2 => '/laesh-web-assets-uipv1a/img/laesh-slider-futurista-a.webp',
-            3 => '/laesh-web-assets-uipv1a/img/laesh-slider-futurista-c.webp',
-            4 => '/laesh-web-assets-uipv1a/img/sala-de-espera.webp',
-            5 => '/laesh-web-assets-uipv1a/img/recepcion-lab.webp'
-        ];
-        $fallback = $defaultBgs[$heroFixedImgIdx] ?? $defaultBgs[1];
-        $heroParentBgStyle = ' style="background-image:url(' . h($fallback) . '); background-size: cover; background-position: center center; background-repeat: no-repeat;"';
-    }
-}
-// Slide 5: si la descripción CMS está vacía, construirla desde configuraciones
-$slide5Desc = $slides[5]['descripcion']
-    ?: (h($cfgDirCalle ?: $cfgDir) . ', ' . h($cfgCiudad) . ', ' . h($cfgEstado) . '.<br>'
-      . h($cfgHorSem) . ' &nbsp;|&nbsp; ' . h($cfgHorDom) . ' &nbsp;|&nbsp; Tel: ' . h($cfgTel));
-
-// Quiénes somos (sin fallback)
-$qsH2         = $c('quienes-somos', 'seccion',   'h2');
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L249-309)</summary>
-
-**Path:** `Unknown file`
-
-```
-    $currGIdx = 0;
-    foreach ($treeRows as $r) {
-        $gid = (int)$r['grupo_id'];
-        if (!isset($gIdxMap[$gid])) {
-            $currGIdx++;
-            if ($currGIdx > 4) break;
-            $gIdxMap[$gid] = $currGIdx;
-            $cg[$currGIdx] = ['titulo' => $r['grupo_titulo'], 'fichas' => []];
-        }
-        $gi    = $gIdxMap[$gid];
-        $catId = (int)$r['cat_id'];
-        if (!isset($gMap[$gid][$catId])) {
-            $gMap[$gid][$catId] = count($cg[$gi]['fichas']);
-            $cg[$gi]['fichas'][] = ['cat' => $r['cat_nombre'], 'items' => []];
-        }
-        $cPos = $gMap[$gid][$catId];
-        $cg[$gi]['fichas'][$cPos]['items'][] = [
-            'clave_interna'        => $r['clave_interna'],
-            'nombre'               => $r['estudio_nombre'],
-            'tiempo_procesamiento' => $r['tiempo_procesamiento'],
-            'muestra_requerida'    => $r['muestra_requerida'],
-            'preparacion'          => $r['preparacion'],
-        ];
-    }
-    if (!$_bypassCache) \Common\Cache::set(\Common\Cache::KEY_TREE, $cg);
-}
-
-// ── 3b. Hero autoplay (seg) — desde web_contenidos.hero.config.transition_time
-// Alineado con gestion-web.php (POST hero_config__transition_time)
-$heroAutoplay = min(90, max(0, (int)$c('hero', 'config', 'transition_time', '5'))); // 0 = pausa indefinida
-
-// ── 3c. Quiénes somos — Ficha 4 (25 años / CKEditor 5) ───────────────────
-// Desde 2026-08-23: ficha4/texto almacena HTML enriquecido (CKEditor 5).
-// El heading del card va incluido en el HTML (primer bloque H3 del editor).
-// safeHtml() filtra antes de emitir.
-$qsConfianzaHtml = $c('quienes-somos', 'ficha4', 'texto');
-
-// ── 3d. Carrusel de especialidades y áreas — 16 tarjetas (sin fallback) ───────────────────
-// Textos e imágenes dinámicos desde web_contenidos (especialidades/carouselN/texto HTML y config.carouselN_img).
-$carouselCards = [];
-for ($ci = 1; $ci <= 16; $ci++) {
-    $cHtml = trim((string)$c('especialidades', "carousel{$ci}", 'texto'));
-    if ($cHtml === '') continue;
-    $cImg = trim((string)$c('especialidades', 'config', "carousel{$ci}_img", $cfg("carousel{$ci}_img", '')));
-    $carouselCards[$ci] = [
-        'img'   => $cImg,
-        'texto' => $cHtml,
-    ];
-}
-
-// ── 3e. Calidad gallery — 3 tarjetas (sin fallback) ────────────────────────
-$_calDef = [
-    1 => ['Área de Hematología',      'Análisis de biometría hemática y células sanguíneas con rigor científico y alta precisión.'],
-    2 => ['Química Clínica',          'Determinación automatizada de metabolitos, perfil lipídico y enzimas específicas.'],
-    3 => ['Microbiología y Cultivos', 'Aislamiento, tinción de Gram y pruebas de susceptibilidad a antimicrobianos.'],
-];
-$calidadCards = [];
-for ($qi = 1; $qi <= 3; $qi++) {
-    $calidadCards[$qi] = [
-        'img'    => $c('calidad', "gallery{$qi}", 'imagen_url', ''),
-        'alt'    => $_calDef[$qi][0],
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `$c =`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 1:21 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L199-244)</summary>
-
-**Path:** `Unknown file`
-
-```
-$cfgHrsOpen   = $cfg('hrs_open');
-$cfgHrsClose  = $cfg('hrs_close');
-$cfgDomOpen   = $cfg('dom_open');
-$cfgDomClose  = $cfg('dom_close');
-$cfgRespNom   = $cfg('responsable_nombre');
-$cfgRespProf  = $cfg('responsable_cedula_prof');
-$cfgRespEsp   = $cfg('responsable_cedula_esp');
-$cfgFB        = $cfg('facebook_url');
-$cfgMapsUrl   = $cfg('maps_url');  // URL directa Google Maps para noscript
-
-// WhatsApp URLs — textos desde configuraciones (sin fallback)
-$waBase        = "https://wa.me/52{$cfgWA}";
-$waTextoInfo   = $cfg('wa_texto_info');    // texto botón info / flotante / ubicación
-$waTextoAg     = $cfg('wa_texto_agendar'); // texto pre-llenado en cards de promo
-$waInfoUrl     = $waBase . '?text=' . rawurlencode($waTextoInfo);
-$waContactUrl  = $waInfoUrl;
-
-/** Obtiene valor CMS con fallback.
- *  NOTA: debe definirse DESPUÉS del merge de preview para que capture
- *  el $cms ya actualizado (PHP arrow fn captura por valor al momento de creación). */
-$c = fn(string $sec, string $sub, string $k, string $d = '') => $cms[$sec][$sub][$k] ?? $d;
-
-// ── 3. Catálogo de estudios — 4 abanicos desde web_contenidos ───────────────
-// Fuente SSOT: web_contenidos(especialidades, cgN, titulo/fichas)
-// Iconos SVG decorativos por grupo (inline — sin CDN)
-const GRUPO_SVGS = [
-    1 => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>',
-    2 => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>',
-    3 => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>',
-    4 => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>',
-];
-
-// ── 1c. Árbol de estudios clínicos → $cg ─────────────────────────────────────
-$cg = $_bypassCache ? null : \Common\Cache::get(\Common\Cache::KEY_TREE);
-if ($cg === null) {
-    $cg = [];
-    $treeStmt = $db->query("
-        SELECT g.id as grupo_id, g.titulo as grupo_titulo,
-               c.id as cat_id, c.nombre as cat_nombre,
-               e.clave_interna, e.nombre as estudio_nombre, e.tiempo_procesamiento, e.muestra_requerida, e.preparacion
-        FROM catalogo_grupos g
-        JOIN catalogo_categorias c ON c.grupo_id = g.id
-        JOIN catalogo_estudios e ON e.categoria_id = c.id
-        WHERE e.activo = 1
-        ORDER BY g.orden ASC, c.orden ASC, e.id ASC
-    ");
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L139-194)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-// ── 1a. configuraciones ─────────────────────────────────────────────────────
-$configRaw = $_bypassCache ? null : \Common\Cache::get(\Common\Cache::KEY_CFG);
-if ($configRaw === null) {
-    $configRaw = $db->query("SELECT clave, valor FROM configuraciones")->fetchAll(\PDO::FETCH_KEY_PAIR) ?: [];
-    if (!$_bypassCache) \Common\Cache::set(\Common\Cache::KEY_CFG, $configRaw);
-}
-
-// ── 1b. web_contenidos → $cms ────────────────────────────────────────────────
-$_cmsRaw = $_bypassCache ? null : \Common\Cache::get(\Common\Cache::KEY_CMS);
-if ($_cmsRaw === null) {
-    $_cmsRaw = [];
-    foreach ($db->query("SELECT seccion, subseccion, clave, valor FROM web_contenidos ORDER BY id")->fetchAll(\PDO::FETCH_ASSOC) as $row) {
-        $_cmsRaw[$row['seccion']][$row['subseccion']][$row['clave']] = $row['valor'];
-    }
-    if (!$_bypassCache) \Common\Cache::set(\Common\Cache::KEY_CMS, $_cmsRaw);
-}
-$cms = $_cmsRaw;
-
-// ── 2. Preview de borrador CMS (solo sesión admin activa) ──────────────────
-// IMPORTANTE: el merge debe ocurrir ANTES de definir $cfg y $c, porque las arrow
-// functions de PHP capturan variables por VALOR en el momento de su creación.
-// Delight Auth guarda el login bajo $_SESSION['auth_logged_in'] (NOT 'user_id').
-$isPreview = !empty($_GET['_preview'])
-    && !empty($_SESSION['auth_logged_in'])
-    && !empty($_SESSION['cms_draft']);
-if ($isPreview) {
-    foreach ($_SESSION['cms_draft'] as $draftSec => $campos) {
-        foreach ($campos as $rawKey => $val) {
-            // Manejar configuraciones globales (prefijo _cfg_)
-            if (str_starts_with($rawKey, '_cfg_')) {
-                $configRaw[substr($rawKey, 5)] = $val;
-                continue;
-            }
-            // Manejar web_contenidos (formato {sub}__{clave})
-            [$sub, $clave] = array_pad(explode('__', $rawKey, 2), 2, $rawKey);
-            $cms[$draftSec][$sub][$clave] = $val;
-        }
-    }
-}
-
-// ── 3. Helpers y Variables Funcionales (Post-Merge) ─────────────────────────
-$cfg = fn(string $k, string $d = '') => (!isset($configRaw[$k]) || $configRaw[$k] === '') ? $d : $configRaw[$k];
-$c   = fn(string $sec, string $sub, string $k, string $d = '') => (!isset($cms[$sec][$sub][$k]) || $cms[$sec][$sub][$k] === '') ? $d : $cms[$sec][$sub][$k];
-
-// Valores frecuentes — sin fallback: el cliente DEBE tener todo en configuraciones
-$cfgNombreLab = $cfg('nombre_laboratorio');
-$cfgNombreC   = $cfg('nombre_corto');
-$cfgAnios     = $cfg('anios_experiencia');
-$cfgTel       = $cfg('telefono');
-$cfgTelDigit  = waNum($cfgTel);
-$cfgWA        = waNum($cfg('whatsapp_numero'));
-$cfgEmail     = $cfg('email_contacto');
-$cfgDir       = $cfg('direccion');
-$cfgDirCalle  = $cfg('direccion_calle');
-$cfgCiudad    = $cfg('ciudad');
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L169-219)</summary>
-
-**Path:** `Unknown file`
-
-```
-                $estId  = !empty($_POST["promo_estudio_id_{$pIdInt}"]) ? (int)$_POST["promo_estudio_id_{$pIdInt}"] : null;
-                $tit    = trim($_POST["promo_titulo_{$pIdInt}"] ?? '');
-                $sub    = trim($_POST["promo_subtitulo_{$pIdInt}"] ?? '');
-                $desc   = trim($_POST["promo_desc_{$pIdInt}"] ?? '');
-                $ayuno  = trim($_POST["promo_ayuno_{$pIdInt}"] ?? '');
-                $tiempo = trim($_POST["promo_tiempo_{$pIdInt}"] ?? '');
-                $pReg   = (isset($_POST["promo_precio_reg_{$pIdInt}"]) && $_POST["promo_precio_reg_{$pIdInt}"] !== '') ? (float)$_POST["promo_precio_reg_{$pIdInt}"] : null;
-                $pOf    = (isset($_POST["promo_precio_of_{$pIdInt}"]) && $_POST["promo_precio_of_{$pIdInt}"] !== '') ? (float)$_POST["promo_precio_of_{$pIdInt}"] : null;
-                $img    = trim($_POST["promo_img_{$pIdInt}"] ?? '');
-                $act    = isset($_POST["promo_active_{$pIdInt}"]) ? 1 : 0;
-
-                $stmtPromo->execute([
-                    'id'             => $pIdInt,
-                    'dia_semana'     => $diaSem,
-                    'estudio_id'     => $estId,
-                    'nombre_oferta'  => $tit,
-                    'subtitulo'      => $sub,
-                    'descripcion'    => $desc,
-                    'ayuno'          => $ayuno,
-                    'tiempo_entrega' => $tiempo,
-                    'precio_regular' => $pReg,
-                    'precio_oferta'  => $pOf,
-                    'imagen_fondo'   => $img,
-                    'activo'         => $act,
-                ]);
-            }
-        }
-
-        foreach ($campos as $fieldKey => $valor) {
-            if (str_starts_with($fieldKey, 'promo_')) {
-                continue; // Omitir campos de catalogo_promociones de la tabla web_contenidos
-            }
-            // D-04: campos _cfg_{clave} van a configuraciones, no a web_contenidos
-            if (str_starts_with($fieldKey, '_cfg_')) {
-                $cfgClave = substr($fieldKey, 5); // quitar prefijo '_cfg_'
-                $cfgStmt->execute(['clave' => $cfgClave, 'valor' => $valor]);
-                continue;
-            }
-            // Formato estándar: {subseccion}__{clave}  ej: slide1__titulo
-            [$sub, $clave] = array_pad(explode('__', $fieldKey, 2), 2, $fieldKey);
-            $stmt->execute([
-                'sec'   => $seccion,
-                'sub'   => $sub,
-                'clave' => $clave,
-                'valor' => $valor,
-                'uid'   => $userId,
-            ]);
-        }
-
-        $db->commit();
-        unset($_SESSION['cms_draft'][$seccion]);
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L219-239)</summary>
-
-**Path:** `Unknown file`
-
-```
-        unset($_SESSION['cms_draft'][$seccion]);
-        Logger::log('INFO', "CMS: sección '{$seccion}' publicada.", $userId);
-
-        // ── Invalidar caché L2 según la sección modificada ───────────────────────
-        Cache::init();
-        // promociones: afecta tanto PROMOS (datos) como CMS (títulos sección)
-        if ($seccion === 'promociones') {
-            Cache::invalidate([Cache::KEY_PROMOS, Cache::KEY_CMS]);
-        // configuracion-general: afecta las configuraciones institucionales
-        } elseif ($seccion === 'configuracion-general') {
-            Cache::invalidate([Cache::KEY_CFG, Cache::KEY_CMS]);
-        // especialidades: afecta el árbol de estudios si los grupos cambian
-        } elseif ($seccion === 'especialidades') {
-            Cache::invalidate([Cache::KEY_TREE, Cache::KEY_CMS]);
-        // cualquier otra sección CMS editorial
-        } else {
-            Cache::invalidate(Cache::KEY_CMS);
-        }
-
-        // Devolver CSRF rotado para que el cliente actualice su data-csrf sin recargar
-        echo json_encode(['ok' => true, 'msg' => '¡Cambios publicados exitosamente!', 'csrf_token' => $_SESSION['csrf_token']]);
-```
-
-</details>
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-## User Request
-
-ya esta coregido lo de que no publica, no preview ?
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `gestion_web.php`
-**Language:** php
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `seccion__h2`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 3:14 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `promociones.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-<?php
-/**
- * sections/promociones.php — Partial: Promociones diarias
- * Incluido desde website/index.php; hereda su scope completo.
- * Variables esperadas: $promoH2, $promoSub, $promos, $waBase, $waTextoAg, $waSvg
- */
-?>
-        <!-- ══════════════════════════════════════════ PROMOCIONES ══ -->
-        <section id="promociones" class="sec-promo scroll-sm-top">
-            <div class="section-header animate-on-scroll">
-                <h2><?= h($promoH2) ?></h2>
-                <p><?= h($promoSub) ?></p>
-            </div>
-            <div class="promo-catalog-wrap animate-on-scroll">
-                <div class="catalog-grid">
-                <?php
-                $daysLabel = [
-                    'lunes' => 'Lunes',
-                    'martes' => 'Martes',
-                    'miercoles' => 'Miércoles',
-                    'jueves' => 'Jueves',
-                    'viernes' => 'Viernes',
-                    'sabado' => 'Sábado',
-                    'domingo' => 'Domingo'
-                ];
-
-                foreach ($promos as $p):
-                    $diaNombre = !empty($p['dia_semana']) ? $p['dia_semana'] : 'Promoción';
-                    $titulo    = $p['nombre_oferta'];
-                    $subtitulo = $p['subtitulo'] ?: ($p['categoria_nombre'] ?? '');
-                    $desc      = $p['descripcion'] ?? '';
-                    $precioReg = $p['precio_regular'];
-                    $precioOf  = $p['precio_oferta'];
-                    $ayuno     = !empty($p['ayuno']) ? $p['ayuno'] : ($p['preparacion'] ?? '');
-                    $tiempo    = !empty($p['tiempo_entrega']) ? $p['tiempo_entrega'] : ($p['tiempo_procesamiento'] ?? '');
-                    $imgUrl    = $p['imagen_fondo'] ?? '';
-
-                    $waTextAg  = $waTextoAg ? str_replace('{estudio}', strip_tags($titulo), $waTextoAg) : '';
-                    $waCardUrl = $waBase . ($waTextAg ? '?text=' . rawurlencode($waTextAg) : '');
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-## User Request
-
-. QUe el valor de Precio Reg. ($) en la index.php incrementale a su estilo actual para aparezca en negritas.
-. Como se guarda el historial de los precios que se van estableciendo, se esta usando esa funcionalidad en las phps, que creo el modelo de datos provee ?
-
----
-
 ### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 4:34 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `promociones.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L34-83)</summary>
-
-**Path:** `Unknown file`
-
-```
-                    $tiempo    = !empty($p['tiempo_entrega']) ? $p['tiempo_entrega'] : ($p['tiempo_procesamiento'] ?? '');
-                    $imgUrl    = $p['imagen_fondo'] ?? '';
-
-                    $waTextAg  = $waTextoAg ? str_replace('{estudio}', strip_tags($titulo), $waTextoAg) : '';
-                    $waCardUrl = $waBase . ($waTextAg ? '?text=' . rawurlencode($waTextAg) : '');
-
-                    $bgAttr = '';
-                    if (!empty($imgUrl)) {
-                        $bgAttr = 'style="background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.84) 100%), url(' . h($imgUrl) . '); background-size: cover; background-position: center;"';
-                    }
-                ?>
-                    <div class="catalog-card <?= !empty($imgUrl) ? 'has-bg-overlay' : '' ?>" <?= $bgAttr ?> data-promo-img="<?= h($imgUrl) ?>" data-promo-title="<?= h(strip_tags($titulo)) ?>">
-                        <div class="catalog-card-day"><?= $diaNombre ?></div>
-                        <div class="catalog-card-full-hdr">
-                            <h3 class="catalog-card-title-full"><?= $titulo ?></h3>
-                        </div>
-                        <?php if ($subtitulo): ?>
-                            <div class="catalog-card-subheading"><?= $subtitulo ?></div>
-                        <?php endif; ?>
-                        <?php if ($desc): ?>
-                            <div class="catalog-card-rte-desc"><?= $desc ?></div>
-                        <?php endif; ?>
-                        <?php if ($ayuno || $tiempo): ?>
-                            <div class="catalog-card-badges">
-                                <?php if ($ayuno): ?><span class="catalog-badge badge-amber"><?= $ayuno ?></span><?php endif; ?>
-                                <?php if ($tiempo): ?><span class="catalog-badge badge-blue"><?= $tiempo ?></span><?php endif; ?>
-                            </div>
-                        <?php endif; ?>
-
-                        <div class="catalog-card-bottom-row">
-                            <div class="catalog-card-prices">
-                                <?php if ($precioReg && $precioReg > 0 && $precioOf && $precioOf < $precioReg): ?>
-                                    <span class="price-old">$<?= number_format((float)$precioReg, 2) ?></span>
-                                <?php endif; ?>
-                                <?php if ($precioOf && $precioOf > 0): ?>
-                                    <span class="price-current">$<?= number_format((float)$precioOf, 2) ?></span>
-                                <?php elseif ($precioReg && $precioReg > 0): ?>
-                                    <span class="price-current">$<?= number_format((float)$precioReg, 2) ?></span>
-                                <?php endif; ?>
-                            </div>
-                            <a href="<?= h($waCardUrl) ?>" target="_blank" rel="noopener noreferrer" class="catalog-card-btn-compact">
-                                Agendar <?= $waSvg ?>
-                            </a>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
-                </div>
-            </div>
-        </section>
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `price-old`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 4:34 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1564-1599)</summary>
-
-**Path:** `Unknown file`
-
-```
-    padding-top: 0.4rem;
-    border-top: 1px dashed #e2e8f0;
-}
-
-.catalog-card-prices {
-    display: flex;
-    align-items: baseline;
-    gap: 0.4rem;
-}
-
-.price-old {
-    font-size: 0.78rem;
-    color: #94a3b8;
-    text-decoration: line-through;
-    font-weight: 600;
-}
-
-.price-current {
-    font-size: 1.1rem;
-    font-weight: 800;
-    color: var(--primary, #0052B7);
-}
-
-/* Botón de Agendar: Reducido, vistoso, ubicado abajo a la derecha */
-.catalog-card-btn-compact {
-    align-self: flex-end;
-    margin-left: auto;
-    padding: 0.35rem 0.75rem;
-    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-    color: #ffffff !important;
-    font-weight: 800;
-    font-size: 0.72rem;
-    border-radius: 0.5rem;
-    border: none;
-    box-shadow: 0 2px 6px rgba(16, 185, 129, 0.35);
-    transition: all 0.2s ease-in-out;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `precio`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 4:34 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `especialidades.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L64-94)</summary>
-
-**Path:** `Unknown file`
-
-```
-                            <?= h($grupo['titulo']) ?>
-                        </span>
-                        <svg id="arr-cg<?= $gi ?>" width="18" height="18" viewBox="0 0 24 24" fill="none"
-                             stroke="currentColor" stroke-width="2"
-                             class="<?= $gi === 1 ? 'chevron-open' : 'chevron-arrow-svg' ?>">
-                            <polyline points="6 9 12 15 18 9"/>
-                        </svg>
-                    </button>
-                    <div id="cg<?= $gi ?>" class="orden-acc-body<?= $gi > 1 ? ' collapsed' : '' ?>">
-                        <?php foreach ($grupo['fichas'] as $subcat): ?>
-                        <div class="orden-cat">
-                            <div class="orden-cat-hdr"><?= h($subcat['cat']) ?></div>
-                            <div class="orden-cat-body">
-                                <?php foreach ($subcat['items'] as $estItem): ?>
-                                <div class="precio-cat-item"
-                                     data-clave="<?= h($estItem['clave_interna'] ?? '') ?>"
-                                     data-tiempo="<?= h($estItem['tiempo_procesamiento'] ?? '') ?>"
-                                     data-muestra="<?= h($estItem['muestra_requerida'] ?? '') ?>"
-                                     data-preparacion="<?= h($estItem['preparacion'] ?? '') ?>">
-                                    <span class="precio-cat-nombre"><?= h($estItem['nombre'] ?? '') ?></span>
-                                </div>
-                                <?php endforeach; ?>
-                            </div>
-                        </div>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
-                <?php endforeach; ?>
-            </div><!-- /section-catalog -->
-        </section>
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Analyzing Legacy Code**
-
-I've been examining the file `especialidades.php`. It presents studies, but without prices, even though the class name `precio-cat-item` suggests a history of price display. My focus now is on `website/sections/promociones.php`, where the actual pricing seems to be handled.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `price-old`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.059704097s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 4:34 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `historial`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 4:34 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `catalogo_promociones`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 4:34 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `catalogo_promociones`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 4:34 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `Modelo_Datos`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 4:34 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `list_dir`
-**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>Directory: `laesh-swbldi` (8 items)</summary>
-
-**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi`
-
-| Name | Type | Size |
-|------|------|------|
-| `admrc` | Directory | - |
-| `commons` | Directory | - |
-| `crons` | Directory | - |
-| `logs` | Directory | - |
-| `md` | Directory | - |
-| `rc` | Directory | - |
-| `test_pacientes2.php` | File | 953 bytes |
-| `website` | Directory | - |
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `CREATE TABLE`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 4:34 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L129-224)</summary>
-
-**Path:** `Unknown file`
-
-```
-             ON DUPLICATE KEY UPDATE valor = VALUES(valor), actualizado_por = VALUES(actualizado_por)"
-        );
-
-        // Configuraciones globales: campos _cfg_{clave} → tabla configuraciones (D-04)
-        // UPSERT: inserta si la clave no existe, actualiza si ya existe
-        $cfgStmt = $db->prepare(
-            "INSERT INTO configuraciones (clave, valor, descripcion) VALUES (:clave, :valor, NULL)
-             ON DUPLICATE KEY UPDATE valor = VALUES(valor)"
-        );
-
-        // Manejo específico de catalogo_promociones en MariaDB cuando la sección es 'promociones'
-        if ($seccion === 'promociones') {
-            $rawIds = $_POST['promo_id'] ?? [];
-            $promoIds = is_array($rawIds) ? $rawIds : (is_numeric($rawIds) ? [$rawIds] : []);
-
-            if (empty($promoIds)) {
-                $promoIds = $db->query("SELECT id FROM catalogo_promociones ORDER BY id ASC")->fetchAll(\PDO::FETCH_COLUMN) ?: [1, 2, 3, 4, 5, 6, 7];
-            }
-
-            $stmtPromo = $db->prepare("
-                UPDATE catalogo_promociones SET
-                    dia_semana      = :dia_semana,
-                    estudio_id      = :estudio_id,
-                    nombre_oferta   = :nombre_oferta,
-                    subtitulo       = :subtitulo,
-                    descripcion     = :descripcion,
-                    ayuno           = :ayuno,
-                    tiempo_entrega  = :tiempo_entrega,
-                    precio_regular  = :precio_regular,
-                    precio_oferta   = :precio_oferta,
-                    imagen_fondo    = :imagen_fondo,
-                    activo          = :activo
-                WHERE id = :id
-            ");
-
-            foreach ($promoIds as $pId) {
-                $pIdInt = (int)$pId;
-                if ($pIdInt <= 0) continue;
-
-                $diaSem = trim($_POST["promo_dia_semana_{$pIdInt}"] ?? '');
-                $estId  = !empty($_POST["promo_estudio_id_{$pIdInt}"]) ? (int)$_POST["promo_estudio_id_{$pIdInt}"] : null;
-                $tit    = trim($_POST["promo_titulo_{$pIdInt}"] ?? '');
-                $sub    = trim($_POST["promo_subtitulo_{$pIdInt}"] ?? '');
-                $desc   = trim($_POST["promo_desc_{$pIdInt}"] ?? '');
-                $ayuno  = trim($_POST["promo_ayuno_{$pIdInt}"] ?? '');
-                $tiempo = trim($_POST["promo_tiempo_{$pIdInt}"] ?? '');
-                $pReg   = (isset($_POST["promo_precio_reg_{$pIdInt}"]) && $_POST["promo_precio_reg_{$pIdInt}"] !== '') ? (float)$_POST["promo_precio_reg_{$pIdInt}"] : null;
-                $pOf    = (isset($_POST["promo_precio_of_{$pIdInt}"]) && $_POST["promo_precio_of_{$pIdInt}"] !== '') ? (float)$_POST["promo_precio_of_{$pIdInt}"] : null;
-                $img    = trim($_POST["promo_img_{$pIdInt}"] ?? '');
-                $act    = isset($_POST["promo_active_{$pIdInt}"]) ? 1 : 0;
-
-                $stmtPromo->execute([
-                    'id'             => $pIdInt,
-                    'dia_semana'     => $diaSem,
-                    'estudio_id'     => $estId,
-                    'nombre_oferta'  => $tit,
-                    'subtitulo'      => $sub,
-                    'descripcion'    => $desc,
-                    'ayuno'          => $ayuno,
-                    'tiempo_entrega' => $tiempo,
-                    'precio_regular' => $pReg,
-                    'precio_oferta'  => $pOf,
-                    'imagen_fondo'   => $img,
-                    'activo'         => $act,
-                ]);
-            }
-        }
-
-        foreach ($campos as $fieldKey => $valor) {
-            if (str_starts_with($fieldKey, 'promo_')) {
-                continue; // Omitir campos de catalogo_promociones de la tabla web_contenidos
-            }
-            // D-04: campos _cfg_{clave} van a configuraciones, no a web_contenidos
-            if (str_starts_with($fieldKey, '_cfg_')) {
-                $cfgClave = substr($fieldKey, 5); // quitar prefijo '_cfg_'
-                $cfgStmt->execute(['clave' => $cfgClave, 'valor' => $valor]);
-                continue;
-            }
-            // Formato estándar: {subseccion}__{clave}  ej: slide1__titulo
-            [$sub, $clave] = array_pad(explode('__', $fieldKey, 2), 2, $fieldKey);
-            $stmt->execute([
-                'sec'   => $seccion,
-                'sub'   => $sub,
-                'clave' => $clave,
-                'valor' => $valor,
-                'uid'   => $userId,
-            ]);
-        }
-
-        $db->commit();
-        unset($_SESSION['cms_draft'][$seccion]);
-        Logger::log('INFO', "CMS: sección '{$seccion}' publicada.", $userId);
-
-        // ── Invalidar caché L2 según la sección modificada ───────────────────────
-        Cache::init();
-        // promociones: afecta tanto PROMOS (datos) como CMS (títulos sección)
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1573-1586)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-.price-old {
-    font-size: 0.78rem;
-    color: #94a3b8;
-    text-decoration: line-through;
-    font-weight: 600;
-}
-
-.price-current {
-    font-size: 1.1rem;
-    font-weight: 800;
-    color: var(--primary, #0052B7);
-}
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 4:34 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-**Analyzing Price History**
-
-I'm currently delving into the specifics of price history and audit logging within the LAESH system. I'm focusing on answering question number two, looking into how price changes are stored and whether the existing PHP code is utilizing the data model's provided functionality.
-
-
-
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.054013629s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-## User Request
-
-. EN  Admin / 4. Promociones Vigentes / Para las 7 fichas,  recuerdo se tenia un campo extra para poner un texto libre , es este "Descripción / Detalle del Estudio" o ese contendio tambien viene de la bd asociado al id del estudio ?
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `landing.css`
-**Language:** css
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L699-849)</summary>
-
-**Path:** `Unknown file`
-
-```
-                <div class="editor-card-header">
-                    <div class="card-title">Gestión de las 7 Promociones Diarias (MariaDB `catalogo_promociones`)</div>
-                </div>
-                <div class="editor-card-body">
-                    <style>
-                    /* Distribución uniforme a 2 columnas sin scroll horizontal en Promociones */
-                    #panel-promociones .promo-grid-2col {
-                        display: grid;
-                        grid-template-columns: repeat(2, minmax(0, 1fr));
-                        gap: 1.25rem;
-                        width: 100%;
-                        max-width: 100%;
-                        box-sizing: border-box;
-                    }
-                    @media (max-width: 992px) {
-                        #panel-promociones .promo-grid-2col {
-                            grid-template-columns: 1fr;
-                        }
-                    }
-                    #panel-promociones .promo-card-editor {
-                        width: 100%;
-                        max-width: 100%;
-                        box-sizing: border-box;
-                        overflow-x: hidden;
-                    }
-                    #panel-promociones .ck.ck-toolbar {
-                        flex-wrap: wrap !important;
-                        max-width: 100% !important;
-                        box-sizing: border-box !important;
-                    }
-                    #panel-promociones .ck.ck-editor__main {
-                        max-width: 100% !important;
-                        box-sizing: border-box !important;
-                    }
-                    #panel-promociones .ck.ck-content {
-                        word-break: break-word !important;
-                        overflow-wrap: break-word !important;
-                    }
-                    </style>
-
-                    <div class="promo-grid-2col">
-                    <?php if (!empty($promociones)): ?>
-                        <?php foreach ($promociones as $p): ?>
-                            <?php 
-                                $pId = (int)$p['id'];
-                                $diaLabel = ucfirst($p['dia_semana']);
-                                $imgUrl = $p['imagen_fondo'] ?? '';
-                            ?>
-                            <div class="editor-card promo-card-editor" style="border: 1px solid #cbd5e1; background: #fafafa;">
-                                <div class="editor-card-header" style="display:flex; justify-content:space-between; align-items:center; background:#f1f5f9; padding:8px 12px; border-bottom:1px solid #e2e8f0;">
-                                    <div class="card-title" style="font-weight:700; color:var(--primary);">
-                                        Ficha ID: <?= $pId ?>
-                                    </div>
-                                    <label style="display:flex; align-items:center; gap:6px; font-size:0.8rem; font-weight:600; cursor:pointer; color:#1e293b;">
-                                        <input type="checkbox" name="promo_active_<?= $pId ?>" value="1" <?= (!empty($p['activo'])) ? 'checked' : '' ?>>
-                                        Activa
-                                    </label>
-                                </div>
-                                <div class="editor-card-body" style="padding:12px;">
-                                    <input type="hidden" name="promo_id[]" value="<?= $pId ?>">
-
-                                    <!-- 1. Título / Etiqueta Superior (ÚNICO editable en contenido + estilo RTE) -->
-                                    <div class="field-group mb-3">
-                                        <label>Título / Etiqueta Superior de la Ficha <small class="txt-muted">(Editable en contenido · Estilo RTE)</small></label>
-                                        <div id="ck-promo-day-<?= $pId ?>" class="ck5-mount"></div>
-                                        <textarea id="ck-promo-day-<?= $pId ?>-data" name="promo_dia_semana_<?= $pId ?>" class="ck5-hidden-data" rows="2"><?= h($p['dia_semana']) ?></textarea>
-                                    </div>
-
-                                    <!-- 2. Estudio Asociado del Catálogo (Combo Desplegable + Buscador Autocomplete) -->
-                                    <div class="field-group mb-3">
-                                        <label>Estudio Asociado del Catálogo <small class="txt-muted">(Dos opciones: Desplegable o Buscador Autocomplete)</small></label>
-                                        <div style="display:flex; flex-wrap:wrap; gap:0.75rem; align-items:center;" class="promo-estudio-picker-row">
-                                            <!-- Opción A: Desplegable / Combo -->
-                                            <div style="flex:1 1 220px; min-width:180px;">
-                                                <select name="promo_estudio_id_<?= $pId ?>" id="promo-select-<?= $pId ?>" class="form-input promo-estudio-select" style="font-size:0.85rem; width:100%; text-overflow:ellipsis;" data-card-id="<?= $pId ?>">
-                                                    <option value="" data-nombre="" data-categoria="" data-ayuno="" data-tiempo="" data-detalle="">-- Sin estudio asociado --</option>
-                                                    <?php if (!empty($estudiosCatalog)): ?>
-                                                        <?php foreach ($estudiosCatalog as $est): ?>
-                                                            <?php $optText = $est['nombre'] . ' (' . $est['clave_interna'] . ')'; ?>
-                                                            <option value="<?= $est['id'] ?>"
-                                                                    data-nombre="<?= h($est['nombre']) ?>"
-                                                                    data-categoria="<?= h($est['categoria_nombre'] ?? '') ?>"
-                                                                    data-ayuno="<?= h($est['preparacion'] ?? '') ?>"
-                                                                    data-tiempo="<?= h($est['tiempo_procesamiento'] ?? '') ?>"
-                                                                    data-detalle="<?= h($est['detalle'] ?? '') ?>"
-                                                                    <?= ($p['estudio_id'] == $est['id']) ? 'selected' : '' ?>>
-                                                                <?= h($optText) ?>
-                                                            </option>
-                                                        <?php endforeach; ?>
-                                                    <?php endif; ?>
-                                                </select>
-                                            </div>
-
-                                            <!-- Opción B: Buscador Autocomplete -->
-                                            <div style="flex:1 1 220px; min-width:180px; position:relative;">
-                                                <?php 
-                                                    $initialAutoVal = '';
-                                                    if (!empty($p['estudio_id']) && !empty($estudiosCatalog)) {
-                                                        foreach ($estudiosCatalog as $est) {
-                                                            if ($est['id'] == $p['estudio_id']) {
-                                                                $initialAutoVal = $est['nombre'] . ' (' . $est['clave_interna'] . ')';
-                                                                break;
-                                                            }
-                                                        }
-                                                    }
-                                                ?>
-                                                <input type="text"
-                                                       id="promo-autocomplete-<?= $pId ?>"
-                                                       class="form-input promo-autocomplete-input"
-                                                       value="<?= h($initialAutoVal) ?>"
-                                                       placeholder="🔍 Buscar por nombre o código..."
-                                                       style="font-size:0.85rem; width:100%;"
-                                                       data-card-id="<?= $pId ?>"
-                                                       autocomplete="off">
-                                                <div id="promo-suggestions-<?= $pId ?>" class="promo-suggestions-panel" style="display:none; position:absolute; top:100%; left:0; right:0; z-index:1000; background:#ffffff; border:1.5px solid #0052B7; border-radius:6px; max-height:220px; overflow-y:auto; box-shadow:0 4px 12px rgba(0,0,0,0.15); margin-top:2px;"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- 3. Nombre del Estudio (Datos desde MariaDB · Estilo RTE) -->
-                                    <div class="field-group mb-3">
-                                        <label>Nombre del Estudio <small class="txt-muted">(Jalado de BD · Estilo RTE Completo sin Links)</small></label>
-                                        <div id="ck-promo-title-<?= $pId ?>" class="ck5-mount"></div>
-                                        <textarea id="ck-promo-title-<?= $pId ?>-data" name="promo_titulo_<?= $pId ?>" class="ck5-hidden-data" rows="2"><?= h($p['nombre_oferta']) ?></textarea>
-                                    </div>
-
-                                    <!-- 4. Subtítulo / Categoría (Datos desde MariaDB · Estilo RTE) -->
-                                    <div class="field-group mb-3">
-                                        <label>Subtítulo / Categoría <small class="txt-muted">(Jalado de BD · Estilo RTE Completo sin Links)</small></label>
-                                        <div id="ck-promo-sub-<?= $pId ?>" class="ck5-mount"></div>
-                                        <textarea id="ck-promo-sub-<?= $pId ?>-data" name="promo_subtitulo_<?= $pId ?>" class="ck5-hidden-data" rows="2"><?= h($p['subtitulo']) ?></textarea>
-                                    </div>
-
-                                    <!-- 5. Indicaciones / Ayuno (Datos desde MariaDB · Estilo RTE) -->
-                                    <div class="field-group mb-3">
-                                        <label>Indicaciones de Ayuno <small class="txt-muted">(Jalado de BD · Estilo RTE Completo sin Links)</small></label>
-                                        <div id="ck-promo-ayuno-<?= $pId ?>" class="ck5-mount"></div>
-                                        <textarea id="ck-promo-ayuno-<?= $pId ?>-data" name="promo_ayuno_<?= $pId ?>" class="ck5-hidden-data" rows="2"><?= h($p['ayuno'] ?? '') ?></textarea>
-                                    </div>
-
-                                    <!-- 6. Tiempo de Entrega (Datos desde MariaDB · Estilo RTE) -->
-                                    <div class="field-group mb-3">
-                                        <label>Tiempo de Entrega <small class="txt-muted">(Jalado de BD · Estilo RTE Completo sin Links)</small></label>
-                                        <div id="ck-promo-tiempo-<?= $pId ?>" class="ck5-mount"></div>
-                                        <textarea id="ck-promo-tiempo-<?= $pId ?>-data" name="promo_tiempo_<?= $pId ?>" class="ck5-hidden-data" rows="2"><?= h($p['tiempo_entrega'] ?? '') ?></textarea>
-                                    </div>
-
-                                    <!-- 7. Descripción Libre / Detalle del Estudio (Datos desde MariaDB · Estilo RTE) -->
-                                    <div class="field-group mb-3">
-                                        <label>Descripción / Detalle del Estudio <small class="txt-muted">(Jalado de BD · Estilo RTE Completo sin Links)</small></label>
-                                        <div id="ck-promo-desc-<?= $pId ?>" class="ck5-mount"></div>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L847-879)</summary>
-
-**Path:** `Unknown file`
-
-```
-                                    <div class="field-group mb-3">
-                                        <label>Descripción / Detalle del Estudio <small class="txt-muted">(Jalado de BD · Estilo RTE Completo sin Links)</small></label>
-                                        <div id="ck-promo-desc-<?= $pId ?>" class="ck5-mount"></div>
-                                        <textarea id="ck-promo-desc-<?= $pId ?>-data" name="promo_desc_<?= $pId ?>" class="ck5-hidden-data" rows="3"><?= h($p['descripcion']) ?></textarea>
-                                    </div>
-
-                                    <div style="display:flex; flex-wrap:wrap; gap:1rem; align-items:flex-end;" class="mb-3">
-                                        <div class="field-group" style="flex:0 0 140px; min-width:120px; max-width:160px; margin-bottom:0;">
-                                            <label style="font-size:0.8rem; font-weight:600; white-space:nowrap;">Precio Reg. ($)</label>
-                                            <input type="number" step="0.01" name="promo_precio_reg_<?= $pId ?>" value="<?= $p['precio_regular'] !== null ? h($p['precio_regular']) : '' ?>" placeholder="0.00" class="form-input" style="padding:4px 8px; font-size:0.85rem; height:34px; width:100%;">
-                                        </div>
-                                        <div class="field-group" style="flex:0 0 140px; min-width:120px; max-width:160px; margin-bottom:0;">
-                                            <label style="font-size:0.8rem; font-weight:600; white-space:nowrap;">Precio Oferta ($)</label>
-                                            <input type="number" step="0.01" name="promo_precio_of_<?= $pId ?>" value="<?= $p['precio_oferta'] !== null ? h($p['precio_oferta']) : '' ?>" placeholder="0.00" class="form-input" style="padding:4px 8px; font-size:0.85rem; height:34px; width:100%;">
-                                        </div>
-                                    </div>
-
-                                    <div class="field-group mb-2">
-                                        <label>Imagen de Fondo</label>
-                                        <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px; font-size: 0.78rem;">
-                                            📐 <strong>Codec:</strong> WebP únicamente &nbsp;·&nbsp;
-                                            <strong>Quality:</strong> 72 &nbsp;·&nbsp;
-                                            <strong>Effort:</strong> 6 &nbsp;·&nbsp;
-                                            <strong>Dimensiones:</strong> 900 × 486 px (ratio 13:7) &nbsp;·&nbsp;
-                                            <strong>Orientación Horizontal</strong> &nbsp;·&nbsp;
-                                            <strong>Peso:</strong> máx. 85 KB
-                                        </p>
-                                        <div class="image-upload-box">
-                                            <img id="prev-promo-<?= $pId ?>"
-                                                 src="<?= !empty($imgUrl) ? h($imgUrl) : 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="90" height="60" viewBox="0 0 90 60"><rect width="100%" height="100%" fill="%23f1f5f9"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%2394a3b8" font-size="10" font-family="sans-serif">Sin Imagen</text></svg>' ?>"
-                                                 alt="Promoción <?= h($diaLabel) ?>" class="img-preview-sm">
-                                            <label for="file-promo-<?= $pId ?>" class="btn btn-secondary btn-sm">
-                                                Cambiar Imagen
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `promo-estudio-select`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 4:46 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion-web.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L74-139)</summary>
-
-**Path:** `Unknown file`
-
-```
-    if (!input) return;
-
-    var text = input.value;
-    input.value = text.replace(/<[^>]*>/g, '');
-};
-
-/* Auto-poblar datos per se desde MariaDB al cambiar de Estudio Asociado en el catálogo */
-document.addEventListener('change', function(e) {
-    if (e.target && e.target.classList.contains('promo-estudio-select')) {
-        var select = e.target;
-        var cardId = select.getAttribute('data-card-id');
-        var opt = select.options[select.selectedIndex];
-        if (!opt || !cardId) return;
-
-        var nombre    = opt.getAttribute('data-nombre') || '';
-        var categoria = opt.getAttribute('data-categoria') || '';
-        var ayuno     = opt.getAttribute('data-ayuno') || '';
-        var tiempo    = opt.getAttribute('data-tiempo') || '';
-        var detalle   = opt.getAttribute('data-detalle') || '';
-
-        var keys = [
-            { key: '_ckPromoTitle' + cardId,  dataId: 'ck-promo-title-' + cardId + '-data',  val: nombre },
-            { key: '_ckPromoSub' + cardId,    dataId: 'ck-promo-sub-' + cardId + '-data',    val: categoria },
-            { key: '_ckPromoAyuno' + cardId,  dataId: 'ck-promo-ayuno-' + cardId + '-data',  val: ayuno },
-            { key: '_ckPromoTiempo' + cardId, dataId: 'ck-promo-tiempo-' + cardId + '-data', val: tiempo },
-            { key: '_ckPromoDesc' + cardId,   dataId: 'ck-promo-desc-' + cardId + '-data',   val: detalle }
-        ];
-
-        keys.forEach(function(item) {
-            var el = document.getElementById(item.dataId);
-            if (window[item.key] && typeof window[item.key].setData === 'function') {
-                window[item.key].setData(item.val);
-            } else if (el) {
-                el.value = item.val;
-            }
-        });
-
-        // Sincronizar también la caja del buscador Autocomplete de la derecha
-        var autocompleteInput = document.getElementById('promo-autocomplete-' + cardId);
-        if (autocompleteInput) {
-            autocompleteInput.value = (opt && opt.value) ? opt.text : '';
-        }
-    }
-});
-
-/* Buscador Autocomplete Interactivo para Promociones (Segunda opción de búsqueda) */
-document.addEventListener('input', function(e) {
-    if (e.target && e.target.classList.contains('promo-autocomplete-input')) {
-        var input = e.target;
-        var cardId = input.getAttribute('data-card-id');
-        var query = input.value.trim().toLowerCase();
-        var suggestionsPanel = document.getElementById('promo-suggestions-' + cardId);
-        var select = document.getElementById('promo-select-' + cardId);
-
-        if (!suggestionsPanel || !select) return;
-
-        if (query.length === 0) {
-            suggestionsPanel.style.display = 'none';
-            suggestionsPanel.innerHTML = '';
-            return;
-        }
-
-        var matches = [];
-        for (var i = 0; i < select.options.length; i++) {
-            var opt = select.options[i];
-            if (!opt.value) continue;
-```
-
-</details>
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-## User Request
-
-osea al ditarse el texto y ser guardado, no se altera SSOT que se consulta y edita en Constructor Jerárquico ?
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `landing.css`
-**Language:** css
-</details>
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-## User Request
-
-este scopé es unicamente pára "campo #7 ("Descripción / Detalle del Estudio")" en cada una de las 7 fichas, cierto ?
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `landing.css`
-**Language:** css
-</details>
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-## User Request
-
-pero creo actualmente en cada ficha , unicamente el campo #7 (Descripción / Detalle del Estudio) , es el que se puede editar y el del precio los demas son readonly (excepto para aplicar estilos con RTE), cierto ?
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `landing.css`
-**Language:** css
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L759-864)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-                                    <!-- 1. Título / Etiqueta Superior (ÚNICO editable en contenido + estilo RTE) -->
-                                    <div class="field-group mb-3">
-                                        <label>Título / Etiqueta Superior de la Ficha <small class="txt-muted">(Editable en contenido · Estilo RTE)</small></label>
-                                        <div id="ck-promo-day-<?= $pId ?>" class="ck5-mount"></div>
-                                        <textarea id="ck-promo-day-<?= $pId ?>-data" name="promo_dia_semana_<?= $pId ?>" class="ck5-hidden-data" rows="2"><?= h($p['dia_semana']) ?></textarea>
-                                    </div>
-
-                                    <!-- 2. Estudio Asociado del Catálogo (Combo Desplegable + Buscador Autocomplete) -->
-                                    <div class="field-group mb-3">
-                                        <label>Estudio Asociado del Catálogo <small class="txt-muted">(Dos opciones: Desplegable o Buscador Autocomplete)</small></label>
-                                        <div style="display:flex; flex-wrap:wrap; gap:0.75rem; align-items:center;" class="promo-estudio-picker-row">
-                                            <!-- Opción A: Desplegable / Combo -->
-                                            <div style="flex:1 1 220px; min-width:180px;">
-                                                <select name="promo_estudio_id_<?= $pId ?>" id="promo-select-<?= $pId ?>" class="form-input promo-estudio-select" style="font-size:0.85rem; width:100%; text-overflow:ellipsis;" data-card-id="<?= $pId ?>">
-                                                    <option value="" data-nombre="" data-categoria="" data-ayuno="" data-tiempo="" data-detalle="">-- Sin estudio asociado --</option>
-                                                    <?php if (!empty($estudiosCatalog)): ?>
-                                                        <?php foreach ($estudiosCatalog as $est): ?>
-                                                            <?php $optText = $est['nombre'] . ' (' . $est['clave_interna'] . ')'; ?>
-                                                            <option value="<?= $est['id'] ?>"
-                                                                    data-nombre="<?= h($est['nombre']) ?>"
-                                                                    data-categoria="<?= h($est['categoria_nombre'] ?? '') ?>"
-                                                                    data-ayuno="<?= h($est['preparacion'] ?? '') ?>"
-                                                                    data-tiempo="<?= h($est['tiempo_procesamiento'] ?? '') ?>"
-                                                                    data-detalle="<?= h($est['detalle'] ?? '') ?>"
-                                                                    <?= ($p['estudio_id'] == $est['id']) ? 'selected' : '' ?>>
-                                                                <?= h($optText) ?>
-                                                            </option>
-                                                        <?php endforeach; ?>
-                                                    <?php endif; ?>
-                                                </select>
-                                            </div>
-
-                                            <!-- Opción B: Buscador Autocomplete -->
-                                            <div style="flex:1 1 220px; min-width:180px; position:relative;">
-                                                <?php 
-                                                    $initialAutoVal = '';
-                                                    if (!empty($p['estudio_id']) && !empty($estudiosCatalog)) {
-                                                        foreach ($estudiosCatalog as $est) {
-                                                            if ($est['id'] == $p['estudio_id']) {
-                                                                $initialAutoVal = $est['nombre'] . ' (' . $est['clave_interna'] . ')';
-                                                                break;
-                                                            }
-                                                        }
-                                                    }
-                                                ?>
-                                                <input type="text"
-                                                       id="promo-autocomplete-<?= $pId ?>"
-                                                       class="form-input promo-autocomplete-input"
-                                                       value="<?= h($initialAutoVal) ?>"
-                                                       placeholder="🔍 Buscar por nombre o código..."
-                                                       style="font-size:0.85rem; width:100%;"
-                                                       data-card-id="<?= $pId ?>"
-                                                       autocomplete="off">
-                                                <div id="promo-suggestions-<?= $pId ?>" class="promo-suggestions-panel" style="display:none; position:absolute; top:100%; left:0; right:0; z-index:1000; background:#ffffff; border:1.5px solid #0052B7; border-radius:6px; max-height:220px; overflow-y:auto; box-shadow:0 4px 12px rgba(0,0,0,0.15); margin-top:2px;"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- 3. Nombre del Estudio (Datos desde MariaDB · Estilo RTE) -->
-                                    <div class="field-group mb-3">
-                                        <label>Nombre del Estudio <small class="txt-muted">(Jalado de BD · Estilo RTE Completo sin Links)</small></label>
-                                        <div id="ck-promo-title-<?= $pId ?>" class="ck5-mount"></div>
-                                        <textarea id="ck-promo-title-<?= $pId ?>-data" name="promo_titulo_<?= $pId ?>" class="ck5-hidden-data" rows="2"><?= h($p['nombre_oferta']) ?></textarea>
-                                    </div>
-
-                                    <!-- 4. Subtítulo / Categoría (Datos desde MariaDB · Estilo RTE) -->
-                                    <div class="field-group mb-3">
-                                        <label>Subtítulo / Categoría <small class="txt-muted">(Jalado de BD · Estilo RTE Completo sin Links)</small></label>
-                                        <div id="ck-promo-sub-<?= $pId ?>" class="ck5-mount"></div>
-                                        <textarea id="ck-promo-sub-<?= $pId ?>-data" name="promo_subtitulo_<?= $pId ?>" class="ck5-hidden-data" rows="2"><?= h($p['subtitulo']) ?></textarea>
-                                    </div>
-
-                                    <!-- 5. Indicaciones / Ayuno (Datos desde MariaDB · Estilo RTE) -->
-                                    <div class="field-group mb-3">
-                                        <label>Indicaciones de Ayuno <small class="txt-muted">(Jalado de BD · Estilo RTE Completo sin Links)</small></label>
-                                        <div id="ck-promo-ayuno-<?= $pId ?>" class="ck5-mount"></div>
-                                        <textarea id="ck-promo-ayuno-<?= $pId ?>-data" name="promo_ayuno_<?= $pId ?>" class="ck5-hidden-data" rows="2"><?= h($p['ayuno'] ?? '') ?></textarea>
-                                    </div>
-
-                                    <!-- 6. Tiempo de Entrega (Datos desde MariaDB · Estilo RTE) -->
-                                    <div class="field-group mb-3">
-                                        <label>Tiempo de Entrega <small class="txt-muted">(Jalado de BD · Estilo RTE Completo sin Links)</small></label>
-                                        <div id="ck-promo-tiempo-<?= $pId ?>" class="ck5-mount"></div>
-                                        <textarea id="ck-promo-tiempo-<?= $pId ?>-data" name="promo_tiempo_<?= $pId ?>" class="ck5-hidden-data" rows="2"><?= h($p['tiempo_entrega'] ?? '') ?></textarea>
-                                    </div>
-
-                                    <!-- 7. Descripción Libre / Detalle del Estudio (Datos desde MariaDB · Estilo RTE) -->
-                                    <div class="field-group mb-3">
-                                        <label>Descripción / Detalle del Estudio <small class="txt-muted">(Jalado de BD · Estilo RTE Completo sin Links)</small></label>
-                                        <div id="ck-promo-desc-<?= $pId ?>" class="ck5-mount"></div>
-                                        <textarea id="ck-promo-desc-<?= $pId ?>-data" name="promo_desc_<?= $pId ?>" class="ck5-hidden-data" rows="3"><?= h($p['descripcion']) ?></textarea>
-                                    </div>
-
-                                    <div style="display:flex; flex-wrap:wrap; gap:1rem; align-items:flex-end;" class="mb-3">
-                                        <div class="field-group" style="flex:0 0 140px; min-width:120px; max-width:160px; margin-bottom:0;">
-                                            <label style="font-size:0.8rem; font-weight:600; white-space:nowrap;">Precio Reg. ($)</label>
-                                            <input type="number" step="0.01" name="promo_precio_reg_<?= $pId ?>" value="<?= $p['precio_regular'] !== null ? h($p['precio_regular']) : '' ?>" placeholder="0.00" class="form-input" style="padding:4px 8px; font-size:0.85rem; height:34px; width:100%;">
-                                        </div>
-                                        <div class="field-group" style="flex:0 0 140px; min-width:120px; max-width:160px; margin-bottom:0;">
-                                            <label style="font-size:0.8rem; font-weight:600; white-space:nowrap;">Precio Oferta ($)</label>
-                                            <input type="number" step="0.01" name="promo_precio_of_<?= $pId ?>" value="<?= $p['precio_oferta'] !== null ? h($p['precio_oferta']) : '' ?>" placeholder="0.00" class="form-input" style="padding:4px 8px; font-size:0.85rem; height:34px; width:100%;">
-                                        </div>
-                                    </div>
-
-                                    <div class="field-group mb-2">
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `ck-promo`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 4:57 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `ckeditor-init.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L319-369)</summary>
-
-**Path:** `Unknown file`
-
-```
-    function _initPromocionesEditors() {
-        setTimeout(function () {
-            for (var i = 1; i <= 7; i++) {
-                // 1. Título Superior de la Ficha: Editable en contenido + estilo RTE
-                var mDay = 'ck-promo-day-' + i;
-                var dDay = 'ck-promo-day-' + i + '-data';
-                if (document.getElementById(mDay) && document.getElementById(dDay)) {
-                    _createEditorNoMedia(mDay, dDay, '_ckPromoDay' + i, false);
-                }
-
-                // 2. Nombre del Estudio: Texto jalado de BD (bloqueado caracteres) + estilo RTE editable
-                var mTitle = 'ck-promo-title-' + i;
-                var dTitle = 'ck-promo-title-' + i + '-data';
-                if (document.getElementById(mTitle) && document.getElementById(dTitle)) {
-                    _createEditorNoMedia(mTitle, dTitle, '_ckPromoTitle' + i, true);
-                }
-
-                // 3. Subtítulo / Categoría: Texto jalado de BD (bloqueado caracteres) + estilo RTE editable
-                var mSub = 'ck-promo-sub-' + i;
-                var dSub = 'ck-promo-sub-' + i + '-data';
-                if (document.getElementById(mSub) && document.getElementById(dSub)) {
-                    _createEditorNoMedia(mSub, dSub, '_ckPromoSub' + i, true);
-                }
-
-                // 4. Indicaciones de Ayuno: Texto jalado de BD (bloqueado caracteres) + estilo RTE editable
-                var mAyuno = 'ck-promo-ayuno-' + i;
-                var dAyuno = 'ck-promo-ayuno-' + i + '-data';
-                if (document.getElementById(mAyuno) && document.getElementById(dAyuno)) {
-                    _createEditorNoMedia(mAyuno, dAyuno, '_ckPromoAyuno' + i, true);
-                }
-
-                // 5. Tiempo de Entrega: Texto jalado de BD (bloqueado caracteres) + estilo RTE editable
-                var mTiempo = 'ck-promo-tiempo-' + i;
-                var dTiempo = 'ck-promo-tiempo-' + i + '-data';
-                if (document.getElementById(mTiempo) && document.getElementById(dTiempo)) {
-                    _createEditorNoMedia(mTiempo, dTiempo, '_ckPromoTiempo' + i, true);
-                }
-
-                // 6. Descripción Libre / Detalle: Editable en contenido + estilo RTE
-                var mDesc = 'ck-promo-desc-' + i;
-                var dDesc = 'ck-promo-desc-' + i + '-data';
-                if (document.getElementById(mDesc) && document.getElementById(dDesc)) {
-                    _createEditorNoMedia(mDesc, dDesc, '_ckPromoDesc' + i, false);
-                }
-            }
-        }, 150);
-    }
-
-    function _observePanel(panelId, initFn) {
-        var panel = document.getElementById(panelId);
-        if (!panel) return;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Examining Code Details**
-
-Okay, I've dug into the `ckeditor-init.js` file now. I'm focusing on lines 327 and 334. The key seems to be the `false` argument passed to `_createEditorNoMedia`, which indicates fully editable content and RTE styles. I'm looking to understand how this impacts the final rendered output, and the behavior of the editor.
-
-
-
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.019432569s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-## User Request
-
-EN cada ficha (1 ala 7 ) en el campo input , que corresponda ponle  ✍️   o 🔒 para que visualmete el usuario sepa que puede hacer .
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `landing.css`
-**Language:** css
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L759-884)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-                                    <!-- 1. Título / Etiqueta Superior (ÚNICO editable en contenido + estilo RTE) -->
-                                    <div class="field-group mb-3">
-                                        <label>Título / Etiqueta Superior de la Ficha <small class="txt-muted">(Editable en contenido · Estilo RTE)</small></label>
-                                        <div id="ck-promo-day-<?= $pId ?>" class="ck5-mount"></div>
-                                        <textarea id="ck-promo-day-<?= $pId ?>-data" name="promo_dia_semana_<?= $pId ?>" class="ck5-hidden-data" rows="2"><?= h($p['dia_semana']) ?></textarea>
-                                    </div>
-
-                                    <!-- 2. Estudio Asociado del Catálogo (Combo Desplegable + Buscador Autocomplete) -->
-                                    <div class="field-group mb-3">
-                                        <label>Estudio Asociado del Catálogo <small class="txt-muted">(Dos opciones: Desplegable o Buscador Autocomplete)</small></label>
-                                        <div style="display:flex; flex-wrap:wrap; gap:0.75rem; align-items:center;" class="promo-estudio-picker-row">
-                                            <!-- Opción A: Desplegable / Combo -->
-                                            <div style="flex:1 1 220px; min-width:180px;">
-                                                <select name="promo_estudio_id_<?= $pId ?>" id="promo-select-<?= $pId ?>" class="form-input promo-estudio-select" style="font-size:0.85rem; width:100%; text-overflow:ellipsis;" data-card-id="<?= $pId ?>">
-                                                    <option value="" data-nombre="" data-categoria="" data-ayuno="" data-tiempo="" data-detalle="">-- Sin estudio asociado --</option>
-                                                    <?php if (!empty($estudiosCatalog)): ?>
-                                                        <?php foreach ($estudiosCatalog as $est): ?>
-                                                            <?php $optText = $est['nombre'] . ' (' . $est['clave_interna'] . ')'; ?>
-                                                            <option value="<?= $est['id'] ?>"
-                                                                    data-nombre="<?= h($est['nombre']) ?>"
-                                                                    data-categoria="<?= h($est['categoria_nombre'] ?? '') ?>"
-                                                                    data-ayuno="<?= h($est['preparacion'] ?? '') ?>"
-                                                                    data-tiempo="<?= h($est['tiempo_procesamiento'] ?? '') ?>"
-                                                                    data-detalle="<?= h($est['detalle'] ?? '') ?>"
-                                                                    <?= ($p['estudio_id'] == $est['id']) ? 'selected' : '' ?>>
-                                                                <?= h($optText) ?>
-                                                            </option>
-                                                        <?php endforeach; ?>
-                                                    <?php endif; ?>
-                                                </select>
-                                            </div>
-
-                                            <!-- Opción B: Buscador Autocomplete -->
-                                            <div style="flex:1 1 220px; min-width:180px; position:relative;">
-                                                <?php 
-                                                    $initialAutoVal = '';
-                                                    if (!empty($p['estudio_id']) && !empty($estudiosCatalog)) {
-                                                        foreach ($estudiosCatalog as $est) {
-                                                            if ($est['id'] == $p['estudio_id']) {
-                                                                $initialAutoVal = $est['nombre'] . ' (' . $est['clave_interna'] . ')';
-                                                                break;
-                                                            }
-                                                        }
-                                                    }
-                                                ?>
-                                                <input type="text"
-                                                       id="promo-autocomplete-<?= $pId ?>"
-                                                       class="form-input promo-autocomplete-input"
-                                                       value="<?= h($initialAutoVal) ?>"
-                                                       placeholder="🔍 Buscar por nombre o código..."
-                                                       style="font-size:0.85rem; width:100%;"
-                                                       data-card-id="<?= $pId ?>"
-                                                       autocomplete="off">
-                                                <div id="promo-suggestions-<?= $pId ?>" class="promo-suggestions-panel" style="display:none; position:absolute; top:100%; left:0; right:0; z-index:1000; background:#ffffff; border:1.5px solid #0052B7; border-radius:6px; max-height:220px; overflow-y:auto; box-shadow:0 4px 12px rgba(0,0,0,0.15); margin-top:2px;"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- 3. Nombre del Estudio (Datos desde MariaDB · Estilo RTE) -->
-                                    <div class="field-group mb-3">
-                                        <label>Nombre del Estudio <small class="txt-muted">(Jalado de BD · Estilo RTE Completo sin Links)</small></label>
-                                        <div id="ck-promo-title-<?= $pId ?>" class="ck5-mount"></div>
-                                        <textarea id="ck-promo-title-<?= $pId ?>-data" name="promo_titulo_<?= $pId ?>" class="ck5-hidden-data" rows="2"><?= h($p['nombre_oferta']) ?></textarea>
-                                    </div>
-
-                                    <!-- 4. Subtítulo / Categoría (Datos desde MariaDB · Estilo RTE) -->
-                                    <div class="field-group mb-3">
-                                        <label>Subtítulo / Categoría <small class="txt-muted">(Jalado de BD · Estilo RTE Completo sin Links)</small></label>
-                                        <div id="ck-promo-sub-<?= $pId ?>" class="ck5-mount"></div>
-                                        <textarea id="ck-promo-sub-<?= $pId ?>-data" name="promo_subtitulo_<?= $pId ?>" class="ck5-hidden-data" rows="2"><?= h($p['subtitulo']) ?></textarea>
-                                    </div>
-
-                                    <!-- 5. Indicaciones / Ayuno (Datos desde MariaDB · Estilo RTE) -->
-                                    <div class="field-group mb-3">
-                                        <label>Indicaciones de Ayuno <small class="txt-muted">(Jalado de BD · Estilo RTE Completo sin Links)</small></label>
-                                        <div id="ck-promo-ayuno-<?= $pId ?>" class="ck5-mount"></div>
-                                        <textarea id="ck-promo-ayuno-<?= $pId ?>-data" name="promo_ayuno_<?= $pId ?>" class="ck5-hidden-data" rows="2"><?= h($p['ayuno'] ?? '') ?></textarea>
-                                    </div>
-
-                                    <!-- 6. Tiempo de Entrega (Datos desde MariaDB · Estilo RTE) -->
-                                    <div class="field-group mb-3">
-                                        <label>Tiempo de Entrega <small class="txt-muted">(Jalado de BD · Estilo RTE Completo sin Links)</small></label>
-                                        <div id="ck-promo-tiempo-<?= $pId ?>" class="ck5-mount"></div>
-                                        <textarea id="ck-promo-tiempo-<?= $pId ?>-data" name="promo_tiempo_<?= $pId ?>" class="ck5-hidden-data" rows="2"><?= h($p['tiempo_entrega'] ?? '') ?></textarea>
-                                    </div>
-
-                                    <!-- 7. Descripción Libre / Detalle del Estudio (Datos desde MariaDB · Estilo RTE) -->
-                                    <div class="field-group mb-3">
-                                        <label>Descripción / Detalle del Estudio <small class="txt-muted">(Jalado de BD · Estilo RTE Completo sin Links)</small></label>
-                                        <div id="ck-promo-desc-<?= $pId ?>" class="ck5-mount"></div>
-                                        <textarea id="ck-promo-desc-<?= $pId ?>-data" name="promo_desc_<?= $pId ?>" class="ck5-hidden-data" rows="3"><?= h($p['descripcion']) ?></textarea>
-                                    </div>
-
-                                    <div style="display:flex; flex-wrap:wrap; gap:1rem; align-items:flex-end;" class="mb-3">
-                                        <div class="field-group" style="flex:0 0 140px; min-width:120px; max-width:160px; margin-bottom:0;">
-                                            <label style="font-size:0.8rem; font-weight:600; white-space:nowrap;">Precio Reg. ($)</label>
-                                            <input type="number" step="0.01" name="promo_precio_reg_<?= $pId ?>" value="<?= $p['precio_regular'] !== null ? h($p['precio_regular']) : '' ?>" placeholder="0.00" class="form-input" style="padding:4px 8px; font-size:0.85rem; height:34px; width:100%;">
-                                        </div>
-                                        <div class="field-group" style="flex:0 0 140px; min-width:120px; max-width:160px; margin-bottom:0;">
-                                            <label style="font-size:0.8rem; font-weight:600; white-space:nowrap;">Precio Oferta ($)</label>
-                                            <input type="number" step="0.01" name="promo_precio_of_<?= $pId ?>" value="<?= $p['precio_oferta'] !== null ? h($p['precio_oferta']) : '' ?>" placeholder="0.00" class="form-input" style="padding:4px 8px; font-size:0.85rem; height:34px; width:100%;">
-                                        </div>
-                                    </div>
-
-                                    <div class="field-group mb-2">
-                                        <label>Imagen de Fondo</label>
-                                        <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px; font-size: 0.78rem;">
-                                            📐 <strong>Codec:</strong> WebP únicamente &nbsp;·&nbsp;
-                                            <strong>Quality:</strong> 72 &nbsp;·&nbsp;
-                                            <strong>Effort:</strong> 6 &nbsp;·&nbsp;
-                                            <strong>Dimensiones:</strong> 900 × 486 px (ratio 13:7) &nbsp;·&nbsp;
-                                            <strong>Orientación Horizontal</strong> &nbsp;·&nbsp;
-                                            <strong>Peso:</strong> máx. 85 KB
-                                        </p>
-                                        <div class="image-upload-box">
-                                            <img id="prev-promo-<?= $pId ?>"
-                                                 src="<?= !empty($imgUrl) ? h($imgUrl) : 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="90" height="60" viewBox="0 0 90 60"><rect width="100%" height="100%" fill="%23f1f5f9"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%2394a3b8" font-size="10" font-family="sans-serif">Sin Imagen</text></svg>' ?>"
-                                                 alt="Promoción <?= h($diaLabel) ?>" class="img-preview-sm">
-                                            <label for="file-promo-<?= $pId ?>" class="btn btn-secondary btn-sm">
-                                                Cambiar Imagen
-                                            </label>
-                                            <input type="file" accept="image/webp,image/png,image/jpeg"
-                                                   id="file-promo-<?= $pId ?>" class="d-none"
-                                                   data-upload-slot="promo-<?= $pId ?>"
-                                                   data-preview-id="prev-promo-<?= $pId ?>"
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Considering Iconography for Labels**
-
-I'm currently focused on the best icons to use alongside various labels. For the "Título / Etiqueta Superior de la Ficha" label, I've selected a writing hand icon, and I'm also planning to incorporate a similar icon for editable content and styles. Still considering the best icon for the "Estudio Asociado del Catálogo" label.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.079957705s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 5:00 pm
 
 ---
 
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-## User Request
-
-. En cada ficha (7) de la  cms/promociones vigentes:
-.. La seccion de selección y/o busqueda del estudio: Estudio Asociado del Catálogo (Dos opciones: Desplegable o Buscador Autocomplete)   ponle un fondo llamativo a esos dos labels e input para que el usuario se guie que primero debe seleccionar eso .
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `gestion_web.php`
-**Language:** php
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L764-824)</summary>
-
-**Path:** `Unknown file`
-
-```
-                                        <textarea id="ck-promo-day-<?= $pId ?>-data" name="promo_dia_semana_<?= $pId ?>" class="ck5-hidden-data" rows="2"><?= h($p['dia_semana']) ?></textarea>
-                                    </div>
-
-                                    <!-- 2. Estudio Asociado del Catálogo (Combo Desplegable + Buscador Autocomplete) -->
-                                    <div class="field-group mb-3">
-                                        <label>✍️ Estudio Asociado del Catálogo <small class="txt-muted">(Dos opciones: Desplegable o Buscador Autocomplete)</small></label>
-                                        <div style="display:flex; flex-wrap:wrap; gap:0.75rem; align-items:center;" class="promo-estudio-picker-row">
-                                            <!-- Opción A: Desplegable / Combo -->
-                                            <div style="flex:1 1 220px; min-width:180px;">
-                                                <select name="promo_estudio_id_<?= $pId ?>" id="promo-select-<?= $pId ?>" class="form-input promo-estudio-select" style="font-size:0.85rem; width:100%; text-overflow:ellipsis;" data-card-id="<?= $pId ?>">
-                                                    <option value="" data-nombre="" data-categoria="" data-ayuno="" data-tiempo="" data-detalle="">-- Sin estudio asociado --</option>
-                                                    <?php if (!empty($estudiosCatalog)): ?>
-                                                        <?php foreach ($estudiosCatalog as $est): ?>
-                                                            <?php $optText = $est['nombre'] . ' (' . $est['clave_interna'] . ')'; ?>
-                                                            <option value="<?= $est['id'] ?>"
-                                                                    data-nombre="<?= h($est['nombre']) ?>"
-                                                                    data-categoria="<?= h($est['categoria_nombre'] ?? '') ?>"
-                                                                    data-ayuno="<?= h($est['preparacion'] ?? '') ?>"
-                                                                    data-tiempo="<?= h($est['tiempo_procesamiento'] ?? '') ?>"
-                                                                    data-detalle="<?= h($est['detalle'] ?? '') ?>"
-                                                                    <?= ($p['estudio_id'] == $est['id']) ? 'selected' : '' ?>>
-                                                                <?= h($optText) ?>
-                                                            </option>
-                                                        <?php endforeach; ?>
-                                                    <?php endif; ?>
-                                                </select>
-                                            </div>
-
-                                            <!-- Opción B: Buscador Autocomplete -->
-                                            <div style="flex:1 1 220px; min-width:180px; position:relative;">
-                                                <?php 
-                                                    $initialAutoVal = '';
-                                                    if (!empty($p['estudio_id']) && !empty($estudiosCatalog)) {
-                                                        foreach ($estudiosCatalog as $est) {
-                                                            if ($est['id'] == $p['estudio_id']) {
-                                                                $initialAutoVal = $est['nombre'] . ' (' . $est['clave_interna'] . ')';
-                                                                break;
-                                                            }
-                                                        }
-                                                    }
-                                                ?>
-                                                <input type="text"
-                                                       id="promo-autocomplete-<?= $pId ?>"
-                                                       class="form-input promo-autocomplete-input"
-                                                       value="<?= h($initialAutoVal) ?>"
-                                                       placeholder="🔍 Buscar por nombre o código..."
-                                                       style="font-size:0.85rem; width:100%;"
-                                                       data-card-id="<?= $pId ?>"
-                                                       autocomplete="off">
-                                                <div id="promo-suggestions-<?= $pId ?>" class="promo-suggestions-panel" style="display:none; position:absolute; top:100%; left:0; right:0; z-index:1000; background:#ffffff; border:1.5px solid #0052B7; border-radius:6px; max-height:220px; overflow-y:auto; box-shadow:0 4px 12px rgba(0,0,0,0.15); margin-top:2px;"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- 3. Nombre del Estudio (Datos desde MariaDB · Estilo RTE) -->
-                                    <div class="field-group mb-3">
-                                        <label>🔒 Nombre del Estudio <small class="txt-muted">(🔒 Texto jalado de BD · ✍️ Formato RTE Editable)</small></label>
-                                        <div id="ck-promo-title-<?= $pId ?>" class="ck5-mount"></div>
-                                        <textarea id="ck-promo-title-<?= $pId ?>-data" name="promo_titulo_<?= $pId ?>" class="ck5-hidden-data" rows="2"><?= h($p['nombre_oferta']) ?></textarea>
-                                    </div>
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Designing the Highlight**
-
-I'm focusing on the visual design of a highlight box. Right now, I'm leaning toward a modern look with a highlighted container. Thinking of using a linear gradient or a subtle light blue/amber background color to make it eye-catching, like `#eff6ff`. I believe this will enhance the "Estudio Asociado del Catálogo" section.
-
-
-**Refining the Aesthetics**
-
-I've been iterating on the visual styling. I've settled on a light background gradient, and a blue left border. Also, I'm integrating a badge or step label, like "1️⃣ PASO 1". I have some styling details ready: the label should be eye-catching, guiding the user through the workflow. I'm focusing on "Estudio Asociado del Catálogo" with Combo and Autocomplete options. The goal is a clean, modern look.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 1.569885609s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 5:25 pm
 
 ---
 
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-## User Request
-
-el dato en  Descripción / Detalle del Estudio no proviene de: Constructor Jerárquico  SSOT ?
-
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `gestion_web.php`
-**Language:** php
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L49-89)</summary>
-
-**Path:** `Unknown file`
-
-```
-        "SELECT seccion, subseccion, clave, valor FROM web_contenidos ORDER BY id"
-    )->fetchAll(\PDO::FETCH_ASSOC);
-    foreach ($rows as $row) {
-        $contenidos[$row['seccion']][$row['subseccion']][$row['clave']] = $row['valor'];
-    }
-
-    // Última actualización
-    $lastPub = $db->query("SELECT MAX(actualizado_en) FROM web_contenidos")->fetchColumn();
-
-    // Configuraciones globales (D-04: WhatsApp URL, redes sociales, etc.)
-    $config = $db->query("SELECT clave, valor FROM configuraciones")
-                 ->fetchAll(\PDO::FETCH_KEY_PAIR) ?: [];
-
-    // Promociones relacionales desde MariaDB (catalogo_promociones + catalogo_estudios)
-    $promociones = $db->query("
-        SELECT cp.*, ce.nombre as estudio_nombre_db, ce.clave_interna
-        FROM catalogo_promociones cp
-        LEFT JOIN catalogo_estudios ce ON cp.estudio_id = ce.id
-        ORDER BY cp.orden ASC, cp.id ASC
-    ")->fetchAll(\PDO::FETCH_ASSOC);
-
-    $estudiosCatalog = $db->query("
-        SELECT e.id, e.clave_interna, e.nombre, e.preparacion, e.tiempo_procesamiento, c.nombre as categoria_nombre
-        FROM catalogo_estudios e
-        LEFT JOIN catalogo_categorias c ON e.categoria_id = c.id
-        WHERE e.activo = 1
-        ORDER BY e.nombre ASC
-    ")->fetchAll(\PDO::FETCH_ASSOC);
-
-    // Plates — directorio de vistas es el mismo directorio admrc/
-    Flight::view()->setDirectory(__DIR__);
-    echo Flight::view()->render('views/gestion_web', [
-        'nombreAdmin'     => $nombreAdmin,
-        'csrfToken'       => $_SESSION['csrf_token'],
-        'contenidos'      => $contenidos,
-        'config'          => $config,
-        'lastPub'         => $lastPub,
-        'promociones'     => $promociones,
-        'estudiosCatalog' => $estudiosCatalog,
-    ]);
-});
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Examining Code Snippet**
-
-Okay, I'm currently focused on lines 71-77 within `admrc/index.php`. Specifically, I'm parsing the SQL query, aiming to understand how it fetches and structures data from the `catalogo_estudios` table. My goal is to determine the retrieved fields, along with their table origin and potential joins, which are: `e.id`, `e.clave_interna`, `e.nombre`, `e.preparacion`, `e.tiempo_procesamiento`, `c.nombre` which is aliased as `categoria_nombre`, and that this appears to be a `LEFT JOIN` on this line.
-
-
-
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.000603348s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-## User Request
-
-. Estas desc:
-Sí provienen de la SSOT: Nombre, Categoría, Ayuno y Tiempo de entrega.
-NO proviene de la SSOT (es texto libre de la promoción): El campo #7 (Descripción / Detalle) y los Precios de Oferta.
-.. adecuarlas ponerlas en las sugerencias de "Gestión de las 7 Promociones Diarias (MariaDB `catalogo_promociones`)"
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `gestion_web.php`
-**Language:** php
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L697-744)</summary>
-
-**Path:** `Unknown file`
-
-```
-            <hr class="cms-section-sep">
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">Gestión de las 7 Promociones Diarias (MariaDB `catalogo_promociones`)</div>
-                </div>
-                <div class="editor-card-body">
-                    <style>
-                    /* Distribución uniforme a 2 columnas sin scroll horizontal en Promociones */
-                    #panel-promociones .promo-grid-2col {
-                        display: grid;
-                        grid-template-columns: repeat(2, minmax(0, 1fr));
-                        gap: 1.25rem;
-                        width: 100%;
-                        max-width: 100%;
-                        box-sizing: border-box;
-                    }
-                    @media (max-width: 992px) {
-                        #panel-promociones .promo-grid-2col {
-                            grid-template-columns: 1fr;
-                        }
-                    }
-                    #panel-promociones .promo-card-editor {
-                        width: 100%;
-                        max-width: 100%;
-                        box-sizing: border-box;
-                        overflow-x: hidden;
-                    }
-                    #panel-promociones .ck.ck-toolbar {
-                        flex-wrap: wrap !important;
-                        max-width: 100% !important;
-                        box-sizing: border-box !important;
-                    }
-                    #panel-promociones .ck.ck-editor__main {
-                        max-width: 100% !important;
-                        box-sizing: border-box !important;
-                    }
-                    #panel-promociones .ck.ck-content {
-                        word-break: break-word !important;
-                        overflow-wrap: break-word !important;
-                    }
-                    </style>
-
-                    <div class="promo-grid-2col">
-                    <?php if (!empty($promociones)): ?>
-                        <?php foreach ($promociones as $p): ?>
-                            <?php 
-                                $pId = (int)$p['id'];
-                                $diaLabel = ucfirst($p['dia_semana']);
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Constructing UI Element**
-
-I'm working on a hint box design, aiming for clarity and high legibility. Currently, it's situated within the editor-card-body div, placed before the promo-grid-2col. The HTML structure is taking shape with appropriate styling for visual appeal and accessibility.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.095295656s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 5:29 pm
 
 ---
 
-## Agent Response
+### Code Edit
 
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-## User Request
-
-precision : ✍️ NO provienen de la SSOT (Texto Libre de la Promoción), poner que las no editables SI provienen (se puede cambiar su estilo), y que  unicamente hay una editable 100%  , o usar otro icono emoji que sugieres ?
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `gestion_web.php`
-**Language:** php
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Refining Banner Precision**
-
-I'm focusing now on the nuances of banner precision. I've clarified that promotional text (free text) does *not* originate from the Single Source of Truth (SSOT). However, the non-editable elements *do* originate from the SSOT, though their style is adjustable.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.013403715s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L699-724)</summary>
-
-**Path:** `Unknown file`
-
-```
-                <div class="editor-card-header">
-                    <div class="card-title">Gestión de las 7 Promociones Diarias (MariaDB `catalogo_promociones`)</div>
-                </div>
-                <div class="editor-card-body">
-                    <!-- Guía de Origen de Datos (SSOT vs. Texto Libre) -->
-                    <div class="cms-help-banner mb-3" style="background: #f8fafc; border: 1px solid #cbd5e1; border-left: 4px solid #0052B7; border-radius: 6px; padding: 10px 14px; font-size: 0.82rem; color: #1e293b; line-height: 1.5;">
-                        <div style="font-weight: 700; color: #0052B7; margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
-                            💡 Guía de Origen de Datos (SSOT del Constructor Jerárquico vs. Texto Libre de la Promoción)
-                        </div>
-                        <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 6px;">
-                            <div style="flex: 1 1 260px; background: #ffffff; padding: 8px 10px; border-radius: 5px; border: 1px solid #e2e8f0;">
-                                <strong style="color: #0369a1;">🔒 Sí provienen de la SSOT (Constructor Jerárquico):</strong><br>
-                                <span style="color: #475569;">• Nombre del Estudio, Categoría, Indicaciones de Ayuno y Tiempo de Entrega.</span>
-                            </div>
-                            <div style="flex: 1 1 260px; background: #ffffff; padding: 8px 10px; border-radius: 5px; border: 1px solid #e2e8f0;">
-                                <strong style="color: #b45309;">✍️ NO provienen de la SSOT (Texto Libre de la Promoción):</strong><br>
-                                <span style="color: #475569;">• El Campo #7 (Descripción / Detalle), Título Superior, Precios e Imagen de Fondo.</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <style>
-                    /* Distribución uniforme a 2 columnas sin scroll horizontal en Promociones */
-                    #panel-promociones .promo-grid-2col {
-                        display: grid;
-                        grid-template-columns: repeat(2, minmax(0, 1fr));
-```
-
-</details>
-
----
-
-<details>
-<summary>System Message</summary>
-
-The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
-
-<EPHEMERAL_MESSAGE>
-<browser_subagent_reminder>
-IMPORTANT: You are shown COMPLETE details of every action the browser subagent performed:
-- The subagent's final result message
-- EVERY SINGLE STEP the subagent executed (numbered sequentially)
-- For each step: the tool name, full JSON arguments, status, and any errors
-- For screenshot steps: the absolute file path where the screenshot was saved
-- For pixel click steps: the absolute file path where the click feedback screenshot was saved
-- The recording path showing all browser interactions if a recording was generated
-
-If you expected the subagent to take a specific action (e.g., capture a screenshot, click a button, navigate to a page) but you do NOT see that step type in the detailed actions list above, then the subagent did NOT perform that action. Do not assume work was done if you cannot see the corresponding step.
-CRITICAL: NEVER trust the subagent's claims. After a browser subagent completes a task, IMMEDIATELY verify the screenshot BEFORE responding to the user. Look at the actual screenshot content and describe what you see. If the screenshot doesn't show the expected result, acknowledge that the task may not have completed successfully and investigate further.
-
-- IMPORTANT: Do NOT view the webp recording. Your view_file tool only shows the first frame of recordings, so this will not represent what the subagent did. Solely rely on screenshot images.
-- If there are no screenshots, you MUST ask another subagent to take screenshots to prove the task was completed successfully.
-- The ONLY exception is if the output of any javascript executed by the subagent shows that the browser subagent successfully performed the action. This is because the output of such a tool cannot be manipulated by the subagent.
-- Think about which screenshots to verify, the right choice will depend on the task, some examples:
-  * If the subagent was supposed to follow a particular process, you should verify a sequence of screenshots in order.
-  * If the subagent was supposed to navigate to a website, you should verify the final screenshot before the subagent stopped.
-- You must explain what in the screenshot or javascript execution output indicates that the subagent is successful. Default to skepticism.
-</browser_subagent_reminder>
-</EPHEMERAL_MESSAGE>
-
-**Triggered Heuristics:** browser_subagent_reminder
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L829-864)</summary>
-
-**Path:** `Unknown file`
-
-```
-                                                ?>
-                                                <input type="text"
-                                                       id="promo-autocomplete-<?= $pId ?>"
-                                                       class="form-input promo-autocomplete-input"
-                                                       value="<?= h($initialAutoVal) ?>"
-                                                       placeholder="🔍 Escribe nombre o código..."
-                                                       style="font-size:0.85rem; width:100%; background-color: #ffffff; border-color: #7dd3fc; font-weight: 600; color: #0f172a;"
-                                                       data-card-id="<?= $pId ?>"
-                                                       autocomplete="off">
-                                                <div id="promo-suggestions-<?= $pId ?>" class="promo-suggestions-panel" style="display:none; position:absolute; top:100%; left:0; right:0; z-index:1000; background:#ffffff; border:1.5px solid #0052B7; border-radius:6px; max-height:220px; overflow-y:auto; box-shadow:0 4px 12px rgba(0,0,0,0.15); margin-top:2px;"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- 3. Nombre del Estudio (Datos desde MariaDB · Estilo RTE) -->
-                                    <div class="field-group mb-3">
-                                        <label>🔒 Nombre del Estudio <small class="txt-muted">(🔒 Texto jalado de BD · ✍️ Formato RTE Editable)</small></label>
-                                        <div id="ck-promo-title-<?= $pId ?>" class="ck5-mount"></div>
-                                        <textarea id="ck-promo-title-<?= $pId ?>-data" name="promo_titulo_<?= $pId ?>" class="ck5-hidden-data" rows="2"><?= h($p['nombre_oferta']) ?></textarea>
-                                    </div>
-
-                                    <!-- 4. Subtítulo / Categoría (Datos desde MariaDB · Estilo RTE) -->
-                                    <div class="field-group mb-3">
-                                        <label>🔒 Subtítulo / Categoría <small class="txt-muted">(🔒 Texto jalado de BD · ✍️ Formato RTE Editable)</small></label>
-                                        <div id="ck-promo-sub-<?= $pId ?>" class="ck5-mount"></div>
-                                        <textarea id="ck-promo-sub-<?= $pId ?>-data" name="promo_subtitulo_<?= $pId ?>" class="ck5-hidden-data" rows="2"><?= h($p['subtitulo']) ?></textarea>
-                                    </div>
-
-                                    <!-- 5. Indicaciones / Ayuno (Datos desde MariaDB · Estilo RTE) -->
-                                    <div class="field-group mb-3">
-                                        <label>🔒 Indicaciones de Ayuno <small class="txt-muted">(🔒 Texto jalado de BD · ✍️ Formato RTE Editable)</small></label>
-                                        <div id="ck-promo-ayuno-<?= $pId ?>" class="ck5-mount"></div>
-                                        <textarea id="ck-promo-ayuno-<?= $pId ?>-data" name="promo_ayuno_<?= $pId ?>" class="ck5-hidden-data" rows="2"><?= h($p['ayuno'] ?? '') ?></textarea>
-                                    </div>
-
-                                    <!-- 6. Tiempo de Entrega (Datos desde MariaDB · Estilo RTE) -->
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Refining The PHP Script**
-
-I'm currently updating `gestion_web.php`. I've integrated the refined emojis and precise wording within the script. Specifically, I'm focusing on the SSOT elements: Name, Category, Fasting, and Delivery Time. Their letters are database-protected to prevent clinical alterations. I still aim to allow personalization.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.074679371s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
+**Status:** Reset
+**Created:** 4 Sept 2026, 5:33 pm
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 5:33 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-**Revising Field Labels**
-
-I'm currently updating the label text within `gestion_web.php`. The focus is on replacing the "🔒" emoji with "🎨" across fields 3, 4, 5, and 6, aligning with the project's visual language. This involves editing the labels to reflect the intended visual style, using "🎨" to represent key protected database characters. The edits also reflect the new RTE personalizable fields.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.155776423s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 4 Sept 2026, 5:33 pm
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-## User Request
-
-. cms pestaña 6. Ubicación y Contacto
-.. porque los inputext de Calle y Número, Ciudad, Estado, aparecen vacios ? , se utizan en alguna parte ? , se pueden quitar de la ui  y de la bd ?
 
 ---
 
 ### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 8:33 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `ubicacion`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 8:33 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1139-1249)</summary>
-
-**Path:** `Unknown file`
-
-```
-        <div id="panel-ubicacion" class="cms-panel" role="tabpanel" aria-labelledby="tab-ubicacion" tabindex="0" data-section="ubicacion">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">Datos de Ubicación, Contacto y Horarios (#ubicacion)</h3>
-            </div>
-
-            <!-- Fila 1: Encabezado & Responsable (izq) + Dirección Física & Contacto (der) -->
-            <hr class="cms-section-sep">
-            <div class="grid-2col mb-4">
-            <!-- Encabezado de la Sección y Responsable Sanitario -->
-            <div class="editor-card">
-                <div class="editor-card-header">
-                    <div class="card-title">Encabezado y Responsable Sanitario</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Título Principal (h2)</label>
-                        <input type="text" name="seccion__h2"
-                               value="<?= cms($contenidos, 'ubicacion', 'seccion', 'h2') ?>">
-                    </div>
-                    <div class="field-group">
-                        <label>Subtítulo</label>
-                        <input type="text" name="seccion__subtitulo"
-                               value="<?= cms($contenidos, 'ubicacion', 'seccion', 'subtitulo') ?>">
-                    </div>
-                    <div class="field-group mt-3 pt-3 border-top">
-                        <label>Nombre del Responsable Sanitario</label>
-                        <input type="text" name="_cfg_responsable_nombre"
-                               value="<?= htmlspecialchars(!empty($config['responsable_nombre']) ? $config['responsable_nombre'] : 'Q.F.B. y E.H.D.L. Jacob Santiago Blanco', ENT_QUOTES, 'UTF-8') ?>">
-                    </div>
-                    <div class="field-row">
-                        <div class="field-group">
-                            <label>Cédula Profesional</label>
-                            <input type="text" name="_cfg_responsable_cedula_prof"
-                                   value="<?= htmlspecialchars(!empty($config['responsable_cedula_prof']) ? $config['responsable_cedula_prof'] : (!empty($config['responsable_cedula']) ? $config['responsable_cedula'] : '3609293'), ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label>Cédula de Especialidad</label>
-                            <input type="text" name="_cfg_responsable_cedula_esp"
-                                   value="<?= htmlspecialchars(!empty($config['responsable_cedula_esp']) ? $config['responsable_cedula_esp'] : '8935780', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Dirección Física y Contacto Directo -->
-            <div class="editor-card">
-                <div class="editor-card-header">
-                    <div class="card-title">Dirección Física y Contacto Directo</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Dirección Física (línea completa)</label>
-                        <input type="text" name="_cfg_direccion"
-                               value="<?= htmlspecialchars($config['direccion'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        <small class="cms-help-text">Línea completa para Footer y Schema.org <code>streetAddress</code>.</small>
-                    </div>
-                    <div class="field-row">
-                        <div class="field-group">
-                            <label>Calle y Número</label>
-                            <input type="text" name="_cfg_direccion_calle"
-                                   value="<?= htmlspecialchars($config['direccion_calle'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label>Ciudad</label>
-                            <input type="text" name="_cfg_ciudad"
-                                   value="<?= htmlspecialchars($config['ciudad'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label>Estado</label>
-                            <input type="text" name="_cfg_estado"
-                                   value="<?= htmlspecialchars($config['estado'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label>Código Postal</label>
-                            <input type="text" name="_cfg_cp"
-                                   value="<?= htmlspecialchars($config['cp'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
-                                   maxlength="10">
-                        </div>
-                    </div>
-                    <div class="field-row">
-                        <div class="field-group">
-                            <label>Teléfono Directo</label>
-                            <input type="tel" name="_cfg_telefono"
-                                   value="<?= htmlspecialchars($config['telefono'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label>Correo Electrónico</label>
-                            <input type="email" name="_cfg_email_contacto"
-                                   value="<?= htmlspecialchars($config['email_contacto'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div><!-- /grid-2col fila 1 -->
-
-            <!-- Fila 2: Horarios de Atención -->
-            <hr class="cms-section-sep">
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">Horarios de Atención</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-row">
-                        <div class="field-group">
-                            <label>Horario Lunes – Sábado <small class="txt-muted">(texto completo)</small></label>
-                            <input type="text" name="_cfg_horario_semana"
-                                   value="<?= htmlspecialchars($config['horario_semana'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label>Horario Domingo <small class="txt-muted">(texto completo)</small></label>
-                            <input type="text" name="_cfg_horario_domingo"
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `direccion_calle`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 8:33 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `ciudad`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 8:33 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `estado`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 8:33 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L544-569)</summary>
-
-**Path:** `Unknown file`
-
-```
-      "@type": "<?= $schemaType ?: 'MedicalOrganization' ?>",
-      "name": "<?= $schemaName ?>",
-      "@id": "https://laesh.mx",
-      "url": "https://laesh.mx",
-      "logo": "https://laesh.mx/laesh-web-assets-uipv1a/img/logo-laesh.webp",
-      "image": "https://laesh.mx/laesh-web-assets-uipv1a/img/logo-laesh.webp",
-      "telephone": "+52<?= h(waNum($cfgTel)) ?>",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "<?= h($cfgDirCalle ?: $cfgDir) ?>",
-        "addressLocality": "<?= h($cfgCiudad) ?>",
-        "addressRegion": "<?= h($cfgEstado) ?>",
-        "postalCode": "<?= h($cfgCP) ?>",
-        "addressCountry": "MX"
-      },
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
-          "opens": "<?= h($cfgHrsOpen) ?>",
-          "closes": "<?= h($cfgHrsClose) ?>"
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": "Sunday",
-          "opens": "<?= h($cfgDomOpen) ?>",
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L414-429)</summary>
-
-**Path:** `Unknown file`
-
-```
-        $fallback = $defaultBgs[$heroFixedImgIdx] ?? $defaultBgs[1];
-        $heroParentBgStyle = ' style="background-image:url(' . h($fallback) . '); background-size: cover; background-position: center center; background-repeat: no-repeat;"';
-    }
-}
-// Slide 5: si la descripción CMS está vacía, construirla desde configuraciones
-$slide5Desc = $slides[5]['descripcion']
-    ?: (h($cfgDirCalle ?: $cfgDir) . ', ' . h($cfgCiudad) . ', ' . h($cfgEstado) . '.<br>'
-      . h($cfgHorSem) . ' &nbsp;|&nbsp; ' . h($cfgHorDom) . ' &nbsp;|&nbsp; Tel: ' . h($cfgTel));
-
-// Quiénes somos (sin fallback)
-$qsH2         = $c('quienes-somos', 'seccion',   'h2');
-$qsSub        = $c('quienes-somos', 'seccion',   'subtitulo');
-// $qsHisTit ha sido eliminado: el título ahora se renderiza desde CKEditor (ficha1)
-$qsCompromiso = $c('quienes-somos', 'seccion',   'compromiso');
-$qsMision     = $c('quienes-somos', 'ficha2',    'texto');
-$qsVision     = $c('quienes-somos', 'ficha3',    'texto');
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `configuraciones`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 8:33 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `sistema.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L99-139)</summary>
-
-**Path:** `Unknown file`
-
-```
-        $flashMsg = "¡{$updatedCount} parámetros de configuración guardados correctamente!";
-    }
-}
-
-// ── Cargar todas las configuraciones de MariaDB ───────────────────────────
-$rows = $db->query("SELECT `clave`, `valor`, `descripcion` FROM `configuraciones` ORDER BY `clave` ASC")->fetchAll(PDO::FETCH_ASSOC);
-$allConfigs = [];
-foreach ($rows as $r) {
-    $allConfigs[$r['clave']] = $r;
-}
-
-// ── Clasificación ESTRICTA (0% Duplicados entre pestañas) ──────────────────
-// 1. Singletons institucionales y parámetros compartidos por Ambos Proyectos
-$keysComunes = [
-    'nombre_laboratorio',
-    'nombre_corto',
-    'direccion',
-    'direccion_calle',
-    'ciudad',
-    'estado',
-    'cp',
-    'telefono',
-    'whatsapp_numero',
-    'whatsapp_url',
-    'email_contacto',
-    'horario_semana',
-    'horario_domingo',
-    'hrs_open',
-    'hrs_close',
-    'dom_open',
-    'dom_close',
-    'responsable_nombre',
-    'responsable_cedula_prof',
-    'responsable_cedula_esp',
-    'facebook_url',
-    'maps_url',
-    'wa_texto_agendar',
-    'wa_texto_info',
-    'hero_autoplay_seg',
-    'anios_experiencia',
-];
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Tracing Address Elements**
-
-I've begun tracing the usage of `direccion_calle`, `ciudad`, `estado`, and `cp`. The initial finding focuses on `website/index.php`. It looks like these variables are integrated into the Schema.org / JSON-LD structured data elements for Google SEO, specifically on lines 554-557.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.092409094s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1189-1224)</summary>
-
-**Path:** `Unknown file`
-
-```
-                    <div class="field-group">
-                        <label>Dirección Física (línea completa)</label>
-                        <input type="text" name="_cfg_direccion"
-                               value="<?= htmlspecialchars($config['direccion'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        <small class="cms-help-text">Línea completa para Footer y Schema.org <code>streetAddress</code>.</small>
-                    </div>
-                    <div class="field-row">
-                        <div class="field-group">
-                            <label>Calle y Número</label>
-                            <input type="text" name="_cfg_direccion_calle"
-                                   value="<?= htmlspecialchars($config['direccion_calle'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label>Ciudad</label>
-                            <input type="text" name="_cfg_ciudad"
-                                   value="<?= htmlspecialchars($config['ciudad'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label>Estado</label>
-                            <input type="text" name="_cfg_estado"
-                                   value="<?= htmlspecialchars($config['estado'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label>Código Postal</label>
-                            <input type="text" name="_cfg_cp"
-                                   value="<?= htmlspecialchars($config['cp'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
-                                   maxlength="10">
-                        </div>
-                    </div>
-                    <div class="field-row">
-                        <div class="field-group">
-                            <label>Teléfono Directo</label>
-                            <input type="tel" name="_cfg_telefono"
-                                   value="<?= htmlspecialchars($config['telefono'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 8:33 pm
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-## User Request
-
-. Pero los datos para SEO ya estan en la pestaña, metadatos, hay redundancia entonces, analiza y dime como quedaria para tener linea de SSOT ?
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `gestion_web.php`
-**Language:** php
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `panel-seo`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 8:40 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1464-1569)</summary>
-
-**Path:** `Unknown file`
-
-```
-        <!-- ================================================================
-             PANEL 8: SEO Y METADATOS
-             Sección: seo | Fuente HTML: head del index.html
-             ================================================================ -->
-        <div id="panel-seo" class="cms-panel" role="tabpanel" aria-labelledby="tab-seo" tabindex="0" data-section="seo">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">Metadatos de SEO, Open Graph y Schema.org</h3>
-            </div>
-
-            <!-- Fila 1: Meta Tags + Open Graph -->
-            <hr class="cms-section-sep">
-            <div class="grid-2col mb-4">
-            <!-- Meta Tags -->
-            <div class="editor-card">
-                <div class="editor-card-header">
-                    <div class="card-title">Meta Tags del Sitio</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Meta Title <small class="txt-muted">(máx. 60 caracteres recomendado)</small></label>
-                        <input type="text" name="meta__title" maxlength="135"
-                               value="<?= cms($contenidos, 'seo', 'meta', 'title') ?>">
-                        <small class="cms-help-text">Aparece en la pestaña del navegador y en el título del resultado de búsqueda.</small>
-                    </div>
-                    <div class="field-group">
-                        <label>Meta Description <small class="txt-muted">(máx. 160 caracteres recomendado)</small></label>
-                        <textarea name="meta__description" maxlength="315" rows="3"><?= cms($contenidos, 'seo', 'meta', 'description') ?></textarea>
-                        <small class="cms-help-text">Aparece como descripción en los resultados de búsqueda.</small>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Open Graph -->
-            <div class="editor-card">
-                <div class="editor-card-header">
-                    <div class="card-title">Open Graph (Redes Sociales)</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>OG Title</label>
-                        <input type="text" name="og__og_title"
-                               value="<?= cms($contenidos, 'seo', 'og', 'og_title') ?>">
-                    </div>
-                    <div class="field-group">
-                        <label>OG Description</label>
-                        <textarea name="og__og_description" rows="3"><?= cms($contenidos, 'seo', 'og', 'og_description') ?></textarea>
-                    </div>
-                    <div class="field-group">
-                        <label>OG Image URL <small class="txt-muted">(URL absoluta, 1200×630 px ideal)</small></label>
-                        <input type="url" name="og__og_image"
-                               value="<?= cms($contenidos, 'seo', 'og', 'og_image') ?>">
-                        <small class="cms-help-text">Imagen que se muestra al compartir en redes sociales. Usar URL absoluta.</small>
-                    </div>
-                </div>
-            </div>
-            </div><!-- /grid-2col fila 1 -->
-
-            <!-- Fila 2: Schema.org Configuración + Schema.org SSOT -->
-            <hr class="cms-section-sep">
-            <div class="grid-2col mb-4">
-            <!-- Schema.org Editor -->
-            <div class="editor-card">
-                <div class="editor-card-header">
-                    <div class="card-title">Datos Estructurados Schema.org (JSON-LD)</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Nombre del Negocio</label>
-                        <input type="text" name="schema__schema_name"
-                               value="<?= cms($contenidos, 'seo', 'schema', 'schema_name') ?>">
-                    </div>
-                    <div class="field-group">
-                        <label>Tipo de Negocio <small class="txt-muted">(schema.org/@type)</small></label>
-                        <input type="text" name="schema__schema_type"
-                               value="<?= cms($contenidos, 'seo', 'schema', 'schema_type') ?>">
-                        <small class="cms-help-text">Valores comunes: MedicalLaboratory, MedicalOrganization, LocalBusiness.</small>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Schema.org SSOT read-only -->
-            <div class="editor-card">
-                <div class="editor-card-header">
-                    <div class="card-title">Dirección y Horarios Schema.org (SSOT)</div>
-                </div>
-                <div class="editor-card-body">
-                    <p class="cms-p">ℹ️ <strong>Dirección, teléfono, CP y horarios</strong> del JSON-LD se toman automáticamente desde <strong>configuraciones</strong>.</p>
-                    <div class="field-row">
-                        <div class="field-group">
-                            <label class="txt-muted">Dirección Schema</label>
-                            <input type="text" disabled value="<?= htmlspecialchars($config['direccion'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label class="txt-muted">Teléfono Schema</label>
-                            <input type="text" disabled value="<?= htmlspecialchars($config['telefono'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label class="txt-muted">CP</label>
-                            <input type="text" disabled value="<?= htmlspecialchars($config['cp'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                    </div>
-                    <div class="field-row">
-                        <div class="field-group">
-                            <label class="txt-muted">Apertura Lun–Sáb</label>
-                            <input type="text" disabled value="<?= htmlspecialchars($config['hrs_open'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Analyzing Data Fields**
-
-I've been analyzing the data fields, specifically focusing on how address, phone number, postal code, and business hours are handled within the JSON-LD structure. The information in Panel 11 seems to automatically pull these details from configurations, as evident in lines 1551-1565. I'm cross-referencing this with Panel 6, lines 1190-1218, to ensure consistency and identify any discrepancies.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.062758148s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1544-1574)</summary>
-
-**Path:** `Unknown file`
-
-```
-            <!-- Schema.org SSOT read-only -->
-            <div class="editor-card">
-                <div class="editor-card-header">
-                    <div class="card-title">Dirección y Horarios Schema.org (SSOT)</div>
-                </div>
-                <div class="editor-card-body">
-                    <p class="cms-p">ℹ️ <strong>Dirección, teléfono, CP y horarios</strong> del JSON-LD se toman automáticamente desde <strong>configuraciones</strong>.</p>
-                    <div class="field-row">
-                        <div class="field-group">
-                            <label class="txt-muted">Dirección Schema</label>
-                            <input type="text" disabled value="<?= htmlspecialchars($config['direccion'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label class="txt-muted">Teléfono Schema</label>
-                            <input type="text" disabled value="<?= htmlspecialchars($config['telefono'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label class="txt-muted">CP</label>
-                            <input type="text" disabled value="<?= htmlspecialchars($config['cp'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                    </div>
-                    <div class="field-row">
-                        <div class="field-group">
-                            <label class="txt-muted">Apertura Lun–Sáb</label>
-                            <input type="text" disabled value="<?= htmlspecialchars($config['hrs_open'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label class="txt-muted">Cierre Lun–Sáb</label>
-                            <input type="text" disabled value="<?= htmlspecialchars($config['hrs_close'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Verifying Fallback Values**
-
-I'm now cross-referencing Panel 11's read-only values with Panel 6, ensuring that the fallback values are rendering correctly. I've confirmed the expressions using the null coalescing operator, specifically `$config['direccion'] ??` and `$config['cp'] ??`, are functioning as expected to avoid undefined variables.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.016904957s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 8:40 pm
 
 ---
 
-## Agent Response
-
-### Thinking
-
-**Synthesizing Spanish Explanation**
-
-I'm now synthesizing the analysis. I'm focusing on explaining the clean SSOT line in Spanish. I've pinpointed that, within the "11. Metadatos (SEO)" tab, address and hours data *cannot* be captured or edited, as they're disabled. I plan to convey this clearly, and in a way that avoids jargon.
-
-
-
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.016814923s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-## User Request
-
-mal muy mal, Antonio de León 5-A, Col. Centro ese de donde sale, no inventes, usar el SSTO de la pestaña 11 metadatos y/o homlogala  con la aparece en pestsña 6. unicacion y contacto/Dirección Física y Contacto Directo Dirección Física (línea completa)
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `gestion_web.php`
-**Language:** php
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `Antonio de León`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 8:44 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `direccion`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 8:44 pm
 
 ---
 
-## Agent Response
+### Code Edit
 
-### Actions
-
-**Tool:** `view_file`
-**File:** `ubicacion.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-<?php
-/**
- * sections/ubicacion.php — Partial: Ubicación y Contacto
- * Incluido desde website/index.php; hereda su scope completo.
- * Variables esperadas: $ubH2, $ubSub, $cfgDir, $cfgTelDigit, $cfgTel, $cfgEmail,
- *   $waContactUrl, $cfg, $cfgHorSem, $cfgHorDom, $cfgRespNom, $cfgRespProf,
- *   $cfgRespEsp, $c, $cfgNombreC, $cfgMapsUrl, $mapsEmbed
- */
-?>
-        <!-- ══════════════════════════════════════ UBICACIÓN Y CONTACTO ══ -->
-        <section id="ubicacion" class="sec-pad-1 scroll-sm-top">
-            <div class="section-header animate-on-scroll">
-                <!-- h2 y subtitulo desde web_contenidos (ubicacion/seccion) -->
-                <h2><?= h($ubH2) ?></h2>
-                <p><?= h($ubSub) ?></p>
-            </div>
-
-            <div class="location-stack-layout">
-                <!-- Datos de contacto — todos desde configuraciones -->
-                <div class="card-premium animate-on-scroll delay-100 contact-card-horizontal">
-                    <h3 class="acerca-h3">Datos de Contacto</h3>
-                    <div class="contact-grid-horizontal">
-
-                        <div class="info-row-item">
-                            <img src="/laesh-web-assets-uipv1a/icons/map-pin.svg" alt="" class="icon-22" loading="lazy" decoding="async">
-                            <div class="txt-base-lh">
-                                <strong class="list-link-block">Dirección</strong>
-                                <?= h($cfgDir) ?>
-                            </div>
-                        </div>
-
-                        <div class="info-row-item">
-                            <img src="/laesh-web-assets-uipv1a/icons/phone.svg" alt="" class="icon-22" loading="lazy" decoding="async">
-                            <div class="txt-base-lh">
-                                <strong class="list-link-block">Teléfono Oficina</strong>
-                                <a href="tel:<?= h($cfgTelDigit) ?>" class="resp-name"><?= h($cfgTel) ?></a>
-                            </div>
-                        </div>
-
-                        <div style="display:flex;flex-direction:column;gap:0.75rem">
-                            <div class="info-row-item">
-                                <img src="/laesh-web-assets-uipv1a/icons/mail.svg" alt="" class="icon-22" loading="lazy" decoding="async">
-                                <div class="txt-base-lh">
-                                    <strong class="list-link-block">Email</strong>
-                                    <a href="mailto:<?= h($cfgEmail) ?>" class="email-link-hover"><?= h($cfgEmail) ?></a>
-                                </div>
-                            </div>
-                            <div class="info-row-item">
-                                <img src="/laesh-web-assets-uipv1a/icons/whatsapp.svg" alt="" class="icon-22" loading="lazy" decoding="async">
-                                <div class="txt-base-lh">
-                                    <strong class="list-link-block">WhatsApp</strong>
-                                    <a href="<?= h($waContactUrl) ?>" target="_blank" rel="noopener noreferrer" class="resp-name"><?= h($cfg('whatsapp_numero')) ?></a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="info-row-item">
-                            <img src="/laesh-web-assets-uipv1a/icons/clock.svg" alt="" class="icon-22" loading="lazy" decoding="async">
-                            <div class="txt-base-lh">
-                                <strong class="list-link-block">Horarios</strong>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Analyzing Configuration Retrieval**
-
-I've traced the `$cfgDir` variable's origin. It's populated in `index.php` from the database through `$cfg('direccion')`. This variable's value ultimately controls the output on line 28 of `ubicacion.php`. The crucial point is understanding the user's role in this configuration.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.078226225s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1187-1219)</summary>
-
-**Path:** `Unknown file`
-
-```
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Dirección Física (línea completa)</label>
-                        <input type="text" name="_cfg_direccion"
-                               value="<?= htmlspecialchars(!empty($config['direccion']) ? $config['direccion'] : 'Antonio de León 5-A, Centro, Heroica Cdad. de Huajuapan de León, Oax.', ENT_QUOTES, 'UTF-8') ?>">
-                        <small class="cms-help-text">Línea completa para el pie de página (Footer) y mapas.</small>
-                    </div>
-                    <div class="field-row">
-                        <div class="field-group">
-                            <label>Calle y Número</label>
-                            <input type="text" name="_cfg_direccion_calle"
-                                   value="<?= htmlspecialchars(!empty($config['direccion_calle']) ? $config['direccion_calle'] : 'Antonio de León 5-A, Col. Centro', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label>Ciudad</label>
-                            <input type="text" name="_cfg_ciudad"
-                                   value="<?= htmlspecialchars(!empty($config['ciudad']) ? $config['ciudad'] : 'Heroica Cdad. de Huajuapan de León', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label>Estado</label>
-                            <input type="text" name="_cfg_estado"
-                                   value="<?= htmlspecialchars(!empty($config['estado']) ? $config['estado'] : 'Oaxaca', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label>Código Postal</label>
-                            <input type="text" name="_cfg_cp"
-                                   value="<?= htmlspecialchars(!empty($config['cp']) ? $config['cp'] : '69000', ENT_QUOTES, 'UTF-8') ?>"
-                                   maxlength="10">
-                        </div>
-                    </div>
-                    <div class="field-row">
-                        <div class="field-group">
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
+**Status:** Reset
+**Created:** 4 Sept 2026, 8:45 pm
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 8:45 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1544-1574)</summary>
-
-**Path:** `Unknown file`
-
-```
-            <!-- Schema.org SSOT read-only -->
-            <div class="editor-card">
-                <div class="editor-card-header">
-                    <div class="card-title">Dirección y Horarios Schema.org (Lectura SSOT)</div>
-                </div>
-                <div class="editor-card-body">
-                    <p class="cms-p">ℹ️ <strong>Dirección, teléfono, CP y horarios</strong> del marcado JSON-LD se leen automáticamente desde la <strong>Pestaña 6 (Ubicación y Contacto)</strong>. No requiere doble captura.</p>
-                    <div class="field-row">
-                        <div class="field-group">
-                            <label class="txt-muted">Dirección (Pestaña 6)</label>
-                            <input type="text" disabled value="<?= htmlspecialchars(!empty($config['direccion']) ? $config['direccion'] : 'Antonio de León 5-A, Centro, Heroica Cdad. de Huajuapan de León, Oax.', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label class="txt-muted">Teléfono (Pestaña 6)</label>
-                            <input type="text" disabled value="<?= htmlspecialchars(!empty($config['telefono']) ? $config['telefono'] : '953 532 0000', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label class="txt-muted">CP (Pestaña 6)</label>
-                            <input type="text" disabled value="<?= htmlspecialchars(!empty($config['cp']) ? $config['cp'] : '69000', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                    </div>
-                    <div class="field-row">
-                        <div class="field-group">
-                            <label class="txt-muted">Apertura Lun–Sáb</label>
-                            <input type="text" disabled value="<?= htmlspecialchars($config['hrs_open'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label class="txt-muted">Cierre Lun–Sáb</label>
-                            <input type="text" disabled value="<?= htmlspecialchars($config['hrs_close'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 4 Sept 2026, 8:45 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `direccion`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 8:45 pm
 
 ---
 
-## Agent Response
+### Terminal Command Execution
 
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-## User Request
-
-pues ya esta muy batido esto: esta igual donde inciiamos en pestaña 6., Calle y Número, Ciudad, Estado aparecen vacios, que pasa.
-ya aplicate el SSOT es pestaña 11  , de ahi toma los datos para llenar esos vacios, o no ?
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `gestion_web.php`
-**Language:** php
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
+**Status:** Reset
+**Created:** 4 Sept 2026, 8:48 pm
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 8:48 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 4 Sept 2026, 8:48 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `Conexion`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 8:48 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 8:48 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `DB.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-<?php
-// DB.php - Clase para conexión PDO e interacción transaccional con la base de datos
-
-namespace Common;
-
-use PDO;
-use PDOException;
-
-class DB {
-    private static ?PDO $instance = null;
-
-    /**
-     * Establece la conexión PDO singleton
-     */
-    public static function connect(): PDO {
-        if (self::$instance === null) {
-            $config = require __DIR__ . '/config.php';
-            $dbConf = $config['db'];
-
-            $dsn = sprintf(
-                "mysql:host=%s;port=%d;dbname=%s;charset=%s",
-                $dbConf['host'],
-                $dbConf['port'],
-                $dbConf['name'],
-                $dbConf['charset']
-            );
-
-            try {
-                self::$instance = new PDO($dsn, $dbConf['user'], $dbConf['pass'], [
-                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-                    PDO::ATTR_EMULATE_PREPARES => false,
-                    PDO::ATTR_PERSISTENT => true, // Conexión persistente (Pool a nivel PHP-FPM)
-                ]);
-                
-                // Configuración de compatibilidad e internacionalización (Español MX)
-                self::$instance->exec("SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci");
-                self::$instance->exec("SET time_zone = '-06:00'");
-                self::$instance->exec("SET lc_time_names = 'es_MX'");
-                self::$instance->exec("SET SESSION sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
-            } catch (PDOException $e) {
-                // Registrar error en el log local de emergencia
-                self::logEmergency("Error de conexión PDO: " . $e->getMessage());
-                throw $e;
-            }
-        }
-        return self::$instance;
-    }
-
-    /**
-     * Registra una traza de fallo de consulta SQL en la tabla fallback_log
-     * Adaptado del estándar Conexion.php (cbm 2026)
-     *
-     * @param string $nivel Nivel del log ('ERROR', 'FALLBACK', 'WARN')
-     * @param string $query Sentencia SQL ejecutada
-     * @param string|null $errorMsg Mensaje de error retornado por PDO
-     */
-    public static function logFallback(string $nivel, string $query, ?string $errorMsg = null): void {
-        try {
-            $pdo = self::connect();
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 8:48 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1184-1224)</summary>
-
-**Path:** `Unknown file`
-
-```
-            <div class="editor-card">
-                <div class="editor-card-header">
-                    <div class="card-title">Dirección Física y Contacto Directo</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Dirección Física (línea completa · SSOT)</label>
-                        <input type="text" name="_cfg_direccion"
-                               value="<?= htmlspecialchars($config['direccion'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        <small class="cms-help-text">Dirección oficial del laboratorio. Se almacena en <code>configuraciones.direccion</code> (SSOT) y se homologa con el marcado Schema.org de Metadatos y el pie de página.</small>
-                    </div>
-                    <div class="field-row">
-                        <div class="field-group">
-                            <label>Calle y Número</label>
-                            <input type="text" name="_cfg_direccion_calle"
-                                   value="<?= htmlspecialchars($config['direccion_calle'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label>Ciudad</label>
-                            <input type="text" name="_cfg_ciudad"
-                                   value="<?= htmlspecialchars($config['ciudad'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label>Estado</label>
-                            <input type="text" name="_cfg_estado"
-                                   value="<?= htmlspecialchars($config['estado'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label>Código Postal</label>
-                            <input type="text" name="_cfg_cp"
-                                   value="<?= htmlspecialchars($config['cp'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
-                                   maxlength="10">
-                        </div>
-                    </div>
-                    <div class="field-row">
-                        <div class="field-group">
-                            <label>Teléfono Directo</label>
-                            <input type="tel" name="_cfg_telefono"
-                                   value="<?= htmlspecialchars($config['telefono'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L547-561)</summary>
-
-**Path:** `Unknown file`
-
-```
-      "url": "https://laesh.mx",
-      "logo": "https://laesh.mx/laesh-web-assets-uipv1a/img/logo-laesh.webp",
-      "image": "https://laesh.mx/laesh-web-assets-uipv1a/img/logo-laesh.webp",
-      "telephone": "+52<?= h(waNum($cfgTel)) ?>",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "<?= h($cfgDirCalle ?: $cfgDir) ?>",
-        "addressLocality": "<?= h($cfgCiudad) ?>",
-        "addressRegion": "<?= h($cfgEstado) ?>",
-        "postalCode": "<?= h($cfgCP) ?>",
-        "addressCountry": "MX"
-      },
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 8:48 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1179-1214)</summary>
-
-**Path:** `Unknown file`
-
-```
-                    </div>
-                </div>
-            </div>
-
-            <!-- Dirección Física y Contacto Directo -->
-            <div class="editor-card">
-                <div class="editor-card-header">
-                    <div class="card-title">Dirección Física y Contacto Directo</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group mb-3">
-                        <label>Dirección Física (línea completa · SSOT ÚNICA)</label>
-                        <input type="text" name="_cfg_direccion"
-                               value="<?= htmlspecialchars($config['direccion'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        <small class="cms-help-text">Dirección oficial del laboratorio. Se almacena en <code>configuraciones.direccion</code> (SSOT) y se homologa automáticamente en el pie de página, mapas y el marcado Schema.org de Metadatos.</small>
-                    </div>
-                    <div class="field-row">
-                        <div class="field-group">
-                            <label>Teléfono Directo</label>
-                            <input type="tel" name="_cfg_telefono"
-                                   value="<?= htmlspecialchars($config['telefono'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label>Correo Electrónico</label>
-                            <input type="email" name="_cfg_email_contacto"
-                                   value="<?= htmlspecialchars($config['email_contacto'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                    </div>
-                            <label>Correo Electrónico</label>
-                            <input type="email" name="_cfg_email_contacto"
-                                   value="<?= htmlspecialchars($config['email_contacto'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div><!-- /grid-2col fila 1 -->
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 8:48 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1184-1214)</summary>
-
-**Path:** `Unknown file`
-
-```
-            <div class="editor-card">
-                <div class="editor-card-header">
-                    <div class="card-title">Dirección Física y Contacto Directo</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group mb-3">
-                        <label>Dirección Física (línea completa · SSOT ÚNICA)</label>
-                        <input type="text" name="_cfg_direccion"
-                               value="<?= htmlspecialchars($config['direccion'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        <small class="cms-help-text">Dirección oficial del laboratorio. Se almacena en <code>configuraciones.direccion</code> (SSOT) y se homologa automáticamente en el pie de página, mapas y el marcado Schema.org de Metadatos.</small>
-                    </div>
-                    <div class="field-row">
-                        <div class="field-group">
-                            <label>Teléfono Directo</label>
-                            <input type="tel" name="_cfg_telefono"
-                                   value="<?= htmlspecialchars($config['telefono'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label>Correo Electrónico</label>
-                            <input type="email" name="_cfg_email_contacto"
-                                   value="<?= htmlspecialchars($config['email_contacto'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div><!-- /grid-2col fila 1 -->
-
-            <!-- Fila 2: Horarios de Atención -->
-            <hr class="cms-section-sep">
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L549-561)</summary>
-
-**Path:** `Unknown file`
-
-```
-      "image": "https://laesh.mx/laesh-web-assets-uipv1a/img/logo-laesh.webp",
-      "telephone": "+52<?= h(waNum($cfgTel)) ?>",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "<?= h($cfgDirCalle ?: $cfgDir) ?>",
-        "addressLocality": "<?= h($cfgCiudad) ?>",
-        "addressRegion": "<?= h($cfgEstado) ?>",
-        "postalCode": "<?= h($cfgCP) ?>",
-        "addressCountry": "MX"
-      },
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 8:49 pm
 
 ---
 
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-## User Request
-
-para: 11. Metadatos / Azucenas #8, Fraccionamiento Jardines del Sur, Huajuapan de León, Oaxaca.
-EL SEO no tendra issues , a poco lo acepta asi todo junto, que no debe ser en capos separados, ciudad, estado, colonia, municipio, etc ?
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `gestion_web.php`
-**Language:** php
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Analyzing the Question's Depth**
-
-I'm digging into this technical SEO query. My initial thought is the user raises a valid concern about the format of the address data. I need to assess how different search engines handle unstructured address information, and whether separating the address components will be critical. I'm exploring the implications for local SEO and data parsing algorithms.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `Azucenas`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.267842721s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 8:52 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1184-1224)</summary>
-
-**Path:** `Unknown file`
-
-```
-            <div class="editor-card">
-                <div class="editor-card-header">
-                    <div class="card-title">Dirección Física y Contacto Directo</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group mb-3">
-                        <label>Dirección Física (línea completa · SSOT ÚNICA)</label>
-                        <input type="text" name="_cfg_direccion"
-                               value="<?= htmlspecialchars($config['direccion'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        <small class="cms-help-text">Dirección oficial del laboratorio. Se almacena en <code>configuraciones.direccion</code> (SSOT) y se homologa automáticamente en el pie de página, mapas y el marcado Schema.org de Metadatos.</small>
-                    </div>
-                    <div class="field-row">
-                        <div class="field-group">
-                            <label>Teléfono Directo</label>
-                            <input type="tel" name="_cfg_telefono"
-                                   value="<?= htmlspecialchars($config['telefono'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label>Correo Electrónico</label>
-                            <input type="email" name="_cfg_email_contacto"
-                                   value="<?= htmlspecialchars($config['email_contacto'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div><!-- /grid-2col fila 1 -->
-
-            <!-- Fila 2: Horarios de Atención -->
-            <hr class="cms-section-sep">
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">Horarios de Atención</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-row">
-                        <div class="field-group">
-                            <label>Horario Lunes – Sábado <small class="txt-muted">(texto completo)</small></label>
-                            <input type="text" name="_cfg_horario_semana"
-                                   value="<?= htmlspecialchars($config['horario_semana'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Updating Panel 6**
-
-Okay, I'm working on updating Panel 6 within `gestion_web.php`. I've started integrating the new field for "Dirección Física (línea completa)" which will be linked to `_cfg_direccion`. The default value will be set to "Azucenas #8, Fraccionamiento Jardines del Sur, Huajuapan de León, Oaxaca." I'll move on to testing the integration.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.423092093s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 8:53 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L549-561)</summary>
-
-**Path:** `Unknown file`
-
-```
-      "image": "https://laesh.mx/laesh-web-assets-uipv1a/img/logo-laesh.webp",
-      "telephone": "+52<?= h(waNum($cfgTel)) ?>",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "<?= h($cfgDir) ?>",
-        "addressCountry": "MX"
-      },
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
-          "opens": "<?= h($cfgHrsOpen) ?>",
-          "closes": "<?= h($cfgHrsClose) ?>"
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 8:53 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1564-1594)</summary>
-
-**Path:** `Unknown file`
-
-```
-                    </div>
-                    <div class="field-row">
-                        <div class="field-group">
-                            <label class="txt-muted">Apertura Lun–Sáb</label>
-                            <input type="text" disabled value="<?= htmlspecialchars($config['hrs_open'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label class="txt-muted">Cierre Lun–Sáb</label>
-                            <input type="text" disabled value="<?= htmlspecialchars($config['hrs_close'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label class="txt-muted">Apertura Dom</label>
-                            <input type="text" disabled value="<?= htmlspecialchars($config['dom_open'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label class="txt-muted">Cierre Dom</label>
-                            <input type="text" disabled value="<?= htmlspecialchars($config['dom_close'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div><!-- /grid-2col fila 2 -->
-        </div>
-
-        <!-- ================================================================
-             PANEL 8: AVISO DE PRIVACIDAD
-             Sección: aviso-privacidad | Fuente HTML: modal / página #privacidad
-             ================================================================ -->
-        <div id="panel-aviso-privacidad" class="cms-panel" role="tabpanel" aria-labelledby="tab-aviso-privacidad" tabindex="0" data-section="aviso-privacidad">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">Aviso de Privacidad — Contenido Legal (#privacidad)</h3>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1544-1569)</summary>
-
-**Path:** `Unknown file`
-
-```
-            <!-- Schema.org SSOT read-only -->
-            <div class="editor-card">
-                <div class="editor-card-header">
-                    <div class="card-title">Dirección y Horarios Schema.org (Lectura SSOT)</div>
-                </div>
-                <div class="editor-card-body">
-                    <p class="cms-p">ℹ️ <strong>Dirección, teléfono, CP y horarios</strong> del marcado JSON-LD se leen automáticamente desde la <strong>Pestaña 6 (Ubicación y Contacto)</strong>. No requiere doble captura.</p>
-                    <div class="field-row">
-                        <div class="field-group">
-                            <label class="txt-muted">Dirección SSOT (Pestaña 6)</label>
-                            <input type="text" disabled value="<?= htmlspecialchars($config['direccion'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label class="txt-muted">Teléfono SSOT (Pestaña 6)</label>
-                            <input type="text" disabled value="<?= htmlspecialchars($config['telefono'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label class="txt-muted">CP SSOT (Pestaña 6)</label>
-                            <input type="text" disabled value="<?= htmlspecialchars($config['cp'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                    </div>
-                    <div class="field-row">
-                        <div class="field-group">
-                            <label class="txt-muted">Apertura Lun–Sáb</label>
-                            <input type="text" disabled value="<?= htmlspecialchars($config['hrs_open'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 8:53 pm
 
 ---
@@ -29019,6 +23988,3829 @@ Okay, so I've pinned down that `83.136.219.193` belongs to a Hostinger VM. Speci
 <summary>Metadata</summary>
 
 - **Thinking Duration:** 0.001097944s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+EN index.php del website, Que las fichas de 3 Calidad se redimensionen para que tomen la medida/tamaño de las fichas de fotos de carrusel como en Estudios de rutina y especialidades.
+
+---
+
+### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
+
+**Status:** Completed
+**Created:** 5 Sept 2026, 7:04 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `calidad`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Sept 2026, 7:04 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `calidad`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Sept 2026, 7:04 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L699-779)</summary>
+
+**Path:** `Unknown file`
+
+```
+                 aria-label="Presentación principal" aria-roledescription="carrusel"<?= $heroParentBgStyle ?>>
+
+                <!-- ── Slide 1 — dinámico desde hero/slide1 ────────────────── -->
+                <div class="hero-slide active <?= $heroSliderMode !== 'decoupled' ? 'bg-slide-1' : '' ?>"<?= $slides[1]['bg_style'] ? ' style="' . $slides[1]['bg_style'] . '"' : '' ?>>
+                    <div class="hero-glass-card">
+                        <?php if ($slides[1]['etiqueta']): ?><span><?= h($slides[1]['etiqueta']) ?></span><?php endif; ?>
+                        <h1><?= h($slides[1]['titulo']) ?></h1>
+                        <?php if ($slides[1]['descripcion']): ?>
+                        <p><?= h($slides[1]['descripcion']) ?></p>
+                        <?php endif; ?>
+                        <div class="flex-center-15">
+                            <?php if ($slides[1]['cta_texto']): ?><a href="<?= h($slides[1]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($slides[1]['cta_texto']) ?></a><?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── Slide 2 — dinámico desde hero/slide2 ────────────────── -->
+                <div class="hero-slide <?= $heroSliderMode !== 'decoupled' ? 'bg-slide-2' : '' ?>"<?= $slides[2]['bg_style'] ? ' style="' . $slides[2]['bg_style'] . '"' : '' ?>>
+                    <div class="hero-glass-card">
+                        <?php if ($slides[2]['etiqueta']): ?><span><?= h($slides[2]['etiqueta']) ?></span><?php endif; ?>
+                        <h2><?= h($slides[2]['titulo']) ?></h2>
+                        <?php if ($slides[2]['descripcion']): ?>
+                        <p><?= h($slides[2]['descripcion']) ?></p>
+                        <?php endif; ?>
+                        <div class="flex-center-15">
+                            <?php if ($slides[2]['cta_texto']): ?><a href="<?= h($slides[2]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($slides[2]['cta_texto']) ?></a><?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── Slide 3 — dinámico desde hero/slide3 ────────────────── -->
+                <div class="hero-slide <?= $heroSliderMode !== 'decoupled' ? 'bg-slide-3' : '' ?>"<?= $slides[3]['bg_style'] ? ' style="' . $slides[3]['bg_style'] . '"' : '' ?>>
+                    <div class="hero-glass-card">
+                        <?php if ($slides[3]['etiqueta']): ?><span><?= h($slides[3]['etiqueta']) ?></span><?php endif; ?>
+                        <h2><?= h($slides[3]['titulo']) ?></h2>
+                        <?php if ($slides[3]['descripcion']): ?>
+                        <p><?= h($slides[3]['descripcion']) ?></p>
+                        <?php endif; ?>
+                        <div class="flex-center-15">
+                            <?php if ($slides[3]['cta_texto']): ?><a href="<?= h($slides[3]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($slides[3]['cta_texto']) ?></a><?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── Slide 4 — dinámico desde hero/slide4 ────────────────── -->
+                <div class="hero-slide <?= $heroSliderMode !== 'decoupled' ? 'bg-slide-4' : '' ?>"<?= $slides[4]['bg_style'] ? ' style="' . $slides[4]['bg_style'] . '"' : '' ?>>
+                    <div class="hero-glass-card">
+                        <?php if ($slides[4]['etiqueta']): ?><span><?= h($slides[4]['etiqueta']) ?></span><?php endif; ?>
+                        <h2><?= h($slides[4]['titulo']) ?></h2>
+                        <?php if ($slides[4]['descripcion']): ?>
+                        <p><?= h($slides[4]['descripcion']) ?></p>
+                        <?php endif; ?>
+                        <div class="flex-center-15">
+                            <?php if ($slides[4]['cta_texto']): ?><a href="<?= h($slides[4]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($slides[4]['cta_texto']) ?></a><?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── Slide 5: Ubicación — CMS + datos de configuraciones ── -->
+                <div class="hero-slide <?= $heroSliderMode !== 'decoupled' ? 'bg-slide-5' : '' ?>"<?= $slides[5]['bg_style'] ? ' style="' . $slides[5]['bg_style'] . '"' : '' ?>>
+                    <div class="hero-glass-card">
+                        <?php if ($slides[5]['etiqueta']): ?><span><?= h($slides[5]['etiqueta']) ?></span><?php endif; ?>
+                        <h2><?= h($slides[5]['titulo']) ?></h2>
+                        <p><?= $slide5Desc ?></p>
+                        <div class="flex-center-15">
+                            <?php if ($slides[5]['cta_texto']): ?><a href="<?= h($slides[5]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($slides[5]['cta_texto']) ?></a><?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-dots" aria-label="Navegación de diapositivas">
+                <button class="hero-dot active" data-slide="0" aria-label="Diapositiva 1 de 5" aria-pressed="true"></button>
+                <button class="hero-dot"        data-slide="1" aria-label="Diapositiva 2 de 5" aria-pressed="false"></button>
+                <button class="hero-dot"        data-slide="2" aria-label="Diapositiva 3 de 5" aria-pressed="false"></button>
+                <button class="hero-dot"        data-slide="3" aria-label="Diapositiva 4 de 5" aria-pressed="false"></button>
+                <button class="hero-dot"        data-slide="4" aria-label="Diapositiva 5 de 5" aria-pressed="false"></button>
+            </div>
+            <?php if ($heroSliderMode !== 'decoupled'): ?>
+            <button type="button" id="hero-pause-btn" class="hero-pause-btn"
+                    aria-label="Pausar presentación" aria-pressed="false">
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L849-927)</summary>
+
+**Path:** `Unknown file`
+
+```
+                        <input type="text" inputmode="numeric" id="login-phone" name="telefono" required
+                               class="form-input" maxlength="10"
+                               placeholder="Número de teléfono (10 dígitos)"
+                               autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+                    </div>
+                    <div>
+                        <label class="form-label" for="login-pass">Contraseña <span class="req">*</span></label>
+                        <input type="text" id="login-pass" name="password" required
+                               class="form-input" maxlength="10"
+                               placeholder="••••••••••"
+                               autocomplete="off" autocorrect="off" autocapitalize="none"
+                               spellcheck="false"
+                    </div>
+                    <div id="login-error-msg" class="login-error-box"></div>
+                    <button type="submit" id="btn-login-submit" class="btn btn-primary">Ingresar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Modal: Vista de Imagen (Promoción Domingo) ───────────────────────── -->
+    <div id="modal-img-promo" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-img-promo-title">
+        <div class="modal-content modal-md">
+            <div class="modal-header">
+                <h3 id="modal-img-promo-title">Promoción — Imagen Completa</h3>
+                <button type="button" class="close-modal" id="btn-cerrar-img-promo" aria-label="Cerrar">&times;</button>
+            </div>
+            <div class="modal-body ta-center pa-4">
+                <img id="modal-img-promo-src" src=""
+                     class="modal-img-preview modal-img-promo-preview"
+                     alt="Imagen Completa de Promoción" loading="lazy">
+            </div>
+        </div>
+    </div>
+
+    <!-- Constantes dinámicas para website.js — inyectadas desde configuraciones/web_contenidos -->
+    <script>
+        /* Hero autoplay: web_contenidos.hero.config.transition_time (segundos) */
+        window.LAESH_HERO_AUTOPLAY = <?= $heroAutoplay ?>;
+    </script>
+    <!-- Fix C1: IntersectionObserver inline — registra el observer antes de que website.js
+         descargue. Elimina el blanco post-hero en móvil: las secciones se muestran
+         en cuanto el HTML es parseado, sin esperar DOMContentLoaded ni el JS de 84KB.
+         Flag window._laeshObserver previene registro duplicado en website.js. -->
+    <script>
+    (function(){
+        var els = document.querySelectorAll('.animate-on-scroll');
+        if (!els.length) return;
+        /* prefers-reduced-motion: muestra todo de inmediato sin animación */
+        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            els.forEach(function(el){ el.classList.add('visible'); });
+            window._laeshObserver = 'noop';
+            return;
+        }
+        if (!('IntersectionObserver' in window)) {
+            /* Fallback navegadores sin IO: mostrar todo visible */
+            els.forEach(function(el){ el.classList.add('visible'); });
+            window._laeshObserver = 'noop';
+            return;
+        }
+        /* Fix C3: rootMargin '0px' — activa en cuanto el elemento toca el viewport,
+           sin requerir 50px de penetración como hacía "-50px". */
+        var io = new IntersectionObserver(function(entries){
+            entries.forEach(function(e){
+                if (e.isIntersecting) { e.target.classList.add('visible'); }
+            });
+        }, { threshold: 0.05, rootMargin: '0px' });
+        els.forEach(function(el){ io.observe(el); });
+        window._laeshObserver = io;
+    })();
+    </script>
+    <!-- Fix C2: htmx se carga async + fetchpriority low — no bloquea DOMContentLoaded
+         ni compite con website.js. Solo se necesita cuando el usuario abre el modal de login. -->
+    <script src="/laesh-web-assets-uipv1a/js/htmx.min.js" async fetchpriority="low"></script>
+    <script src="/laesh-web-assets-uipv1a/js/website.js?v=<?= @filemtime(__DIR__ . '/../../laesh-web-assets-uipv1a/js/website.js') ?: time() ?>" defer></script>
+
+</body>
+</html>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `calidad`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Sept 2026, 7:04 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `calidadCards`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Sept 2026, 7:04 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L639-699)</summary>
+
+**Path:** `Unknown file`
+
+```
+        <!-- Tagline dinámico desde CMS (hero/navbar/tagline_l1-2) -->
+        <span class="navbar-tagline"><?= h($navTagL1) ?><br><?= h($navTagL2) ?></span>
+        <button type="button" class="nav-hamburger" id="nav-hamburger"
+                aria-label="Abrir menú" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+        <?php
+        // ── Orden de secciones — configurable desde el CMS (configuraciones.seccion_order) ──
+        // Secciones ordenables: inicio, acerca-de, especialidades, promociones, calidad, ubicacion, video.
+        $_SEC_DEFAULT = ['inicio','acerca-de','especialidades','promociones','calidad','ubicacion','video'];
+        $_secNavLabels = [
+            'acerca-de'     => ['label' => 'Quiénes somos',        'href' => '#acerca-de'],
+            'especialidades'=> ['label' => 'Estudios',             'href' => '#especialidades'],
+            'promociones'   => ['label' => 'Promociones',          'href' => '#promociones'],
+            'calidad'       => ['label' => 'Calidad',              'href' => '#calidad'],
+            'ubicacion'     => ['label' => 'Ubicación y Contacto', 'href' => '#ubicacion'],
+        ];
+        $isVideoActive = $cfg('video_active', '1') !== '0';
+
+        $_secOrderRaw = $cfg('seccion_order');
+        if ($_secOrderRaw !== '') {
+            $_parsed = array_unique(array_filter(
+                array_map('trim', explode(',', $_secOrderRaw)),
+                fn($s) => in_array($s, $_SEC_DEFAULT, true)
+            ));
+            $_missing = array_diff($_SEC_DEFAULT, $_parsed);
+            $sectionOrder = array_values(array_merge($_parsed, $_missing));
+        } else {
+            $sectionOrder = $_SEC_DEFAULT;
+        }
+        unset($_SEC_DEFAULT, $_secOrderRaw, $_parsed, $_missing);
+
+        // Si el video está apagado, retirarlo del orden de secciones para que no se renderice
+        if (!$isVideoActive) {
+            $sectionOrder = array_values(array_filter($sectionOrder, fn($s) => $s !== 'video'));
+        }
+        ?>
+        <div class="nav-links" id="nav-links-mobile">
+            <a href="#inicio">Inicio</a>
+            <?php foreach ($sectionOrder as $_navSec):
+                if (isset($_secNavLabels[$_navSec])):
+            ?>
+            <a href="<?= $_secNavLabels[$_navSec]['href'] ?>"><?= h($_secNavLabels[$_navSec]['label']) ?></a>
+            <?php endif; endforeach; unset($_navSec); ?>
+            <a href="#" class="login-trigger btn-nav-medicos"
+               data-target="medicos" data-title="Acceso" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2v2"/><path d="M5 2v2"/><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"/><path d="M8 15a6 6 0 0 0 12 0v-3"/><circle cx="20" cy="10" r="2"/></svg>Médicos</a>
+        </div>
+    </nav>
+
+    <main id="main-content">
+
+        <div class="landing-nav-spacer"></div>
+
+        <?php
+        foreach ($sectionOrder as $_secId):
+            if ($_secId === 'inicio'):
+        ?>
+        <!-- ═══════════════════════════════════════════════════════ HERO ══ -->
+        <section id="inicio" class="hero-premium">
+            <div class="hero-slides" data-autoplay="<?= $heroAutoplay ?>" role="region"
+                 aria-label="Presentación principal" aria-roledescription="carrusel"<?= $heroParentBgStyle ?>>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L784-844)</summary>
+
+**Path:** `Unknown file`
+
+```
+            <?php endif; ?>
+            <span id="hero-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></span>
+        </section>
+        <?php
+            else:
+                include __DIR__ . '/sections/' . $_secId . '.php';
+            endif;
+        endforeach;
+        unset($sectionOrder, $_secId, $_secNavLabels, $isVideoActive);
+        ?>
+        <!-- ══════════════════════════════════════════════ FOOTER ══ -->
+        <footer class="footer-main" style="background: <?= h($footerBgColor) ?> !important;" role="contentinfo">
+            <?= $footerHtml ?>
+        </footer>
+    </main>
+
+    <!-- Botón WhatsApp flotante — número desde configuraciones -->
+    <a href="<?= h($waInfoUrl) ?>" class="whatsapp-float"
+       target="_blank" rel="noopener noreferrer"
+       title="Contáctanos por WhatsApp" aria-label="Contáctanos por WhatsApp">
+        <svg width="32" height="32" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984a9.96 9.96 0 0 0 1.335 4.975L2 22l5.195-1.364A9.936 9.936 0 0 0 12.006 22c5.507 0 9.991-4.479 9.992-9.986.002-2.668-1.036-5.18-2.924-7.069C17.186 3.057 14.675 2.002 12.012 2zm5.72 14.15c-.314.88-1.543 1.62-2.13 1.7-.587.08-1.173.28-4.08-.93-3.72-1.54-6.12-5.32-6.3-5.57-.18-.25-1.47-1.95-1.47-3.72 0-1.78.93-2.65 1.26-3 .33-.35.72-.44.96-.44h.69c.22 0 .52-.08.82.64.3.72 1.02 2.48 1.11 2.66.09.18.15.39.03.63-.12.24-.18.39-.36.6-.18.21-.38.47-.54.63-.18.18-.37.38-.16.73.21.35.93 1.54 2 2.49 1.38 1.23 2.54 1.61 2.9 1.79.36.18.57.15.78-.09.21-.24.9-1.05 1.14-1.41.24-.36.48-.3.8-.18.33.12 2.07 1.02 2.43 1.2.36.18.6.27.69.42.09.15.09.87-.22 1.75z"/>
+        </svg>
+    </a>
+
+    <!-- Botón Facebook flotante — URL desde configuraciones -->
+    <?php if ($cfgFB): ?>
+    <a class="social-float fb-bg" href="<?= h($cfgFB) ?>"
+       target="_blank" rel="noopener noreferrer"
+       title="Visita nuestro Facebook" aria-label="Visita nuestro Facebook">
+        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/>
+        </svg>
+    </a>
+    <?php endif; ?>
+
+    <!-- ── Modal: Aviso de Privacidad ──────────────────────────────────────── -->
+    <div id="modal-privacidad" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-privacidad-title">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h3 id="modal-privacidad-title">Aviso de Privacidad — <?= h($cfgNombreC) ?></h3>
+                <button type="button" class="close-modal" aria-label="Cerrar">&times;</button>
+            </div>
+            <div class="modal-body modal-scroll-h">
+                <!-- aviso-privacidad/contenido/cuerpo_html — dinámico desde RTE del CMS -->
+                <?= $avisoHtml ?>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Modal: Acceso Portal (Login) ────────────────────────────────────── -->
+    <div id="modal-login" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-login-title">
+        <div class="modal-content modal-login-box">
+            <div class="modal-header">
+                <h3 id="modal-login-title">Acceso Médico</h3>
+                <button type="button" class="close-modal" id="btn-cerrar-login" aria-label="Cerrar">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="form-login-portal" class="form-col-1rem" novalidate autocomplete="off">
+                    <input type="hidden" id="login-redirect-target" value="medico">
+                    <input type="hidden" id="login-csrf-token" name="csrf_token"
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/website/sections`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>Directory: `sections` (6 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/website/sections`
+
+| Name | Type | Size |
+|------|------|------|
+| `acerca-de.php` | File | 2683 bytes |
+| `calidad.php` | File | 1457 bytes |
+| `especialidades.php` | File | 5631 bytes |
+| `promociones.php` | File | 4861 bytes |
+| `ubicacion.php` | File | 7155 bytes |
+| `video.php` | File | 1519 bytes |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `calidad.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/**
+ * sections/calidad.php — Partial: Calidad / Galería
+ * Incluido desde website/index.php; hereda su scope completo.
+ * Variables esperadas: $calH2, $calSub, $calidadCards
+ */
+?>
+        <!-- ══════════════════════════════════════════════ CALIDAD ══ -->
+        <section id="calidad" class="sec-pad-1-5 scroll-sm-top">
+            <div class="section-header animate-on-scroll">
+                <!-- h2 y subtitulo desde web_contenidos (calidad/seccion) -->
+                <h2><?= h($calH2) ?></h2>
+                <p><?= h($calSub) ?></p>
+            </div>
+            <div class="specialties-carousel-viewport animate-on-scroll">
+                <div class="calidad-cards-grid">
+                    <?php foreach ($calidadCards as $qc): ?>
+                    <div class="carousel-card">
+                        <img src="<?= h($qc['img']) ?>" alt="<?= h($qc['alt']) ?>"
+                             width="800" height="580" loading="lazy" decoding="async">
+                        <div class="carousel-card__body ck5-output">
+                            <h3><?= h($qc['titulo']) ?></h3>
+                            <?php if ($qc['desc']): ?><p><?= h($qc['desc']) ?></p><?php endif; ?>
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </section>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `especialidades.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/**
+ * sections/especialidades.php — Partial: Estudios / Catálogo
+ * Incluido desde website/index.php; hereda su scope completo.
+ * Variables esperadas: $catalogH2, $catalogSub, $carouselCards, $catalogNota, $cg, GRUPO_SVGS
+ */
+?>
+        <!-- ═══════════════════════════════════════════════ ESTUDIOS ══ -->
+        <section id="especialidades" class="sec-pad-1-5 scroll-sm-top">
+            <div class="section-header animate-on-scroll">
+                <!-- h2 y subtitulo desde web_contenidos (especialidades/seccion) -->
+                <h2><?= h($catalogH2) ?></h2>
+                <p><?= h($catalogSub) ?></p>
+            </div>
+
+            <!-- Carrusel de áreas fotográficas — imágenes fijas del laboratorio (R15.1) -->
+            <div class="map-bar">
+                <button type="button" class="carousel-arrow-btn carousel-arrow-btn--left"
+                        id="btn-carousel-prev" aria-label="Anterior">
+                    <img src="/laesh-web-assets-uipv1a/icons/chevron-left.svg" alt="" class="icon-24" loading="lazy" decoding="async">
+                </button>
+                <div class="specialties-carousel-viewport">
+                    <div id="specialties-track" class="specialties-carousel-track">
+                        <?php $ccIdx = 0; foreach ($carouselCards as $cc): $ccIdx++; ?>
+                        <div class="carousel-card">
+                            <img src="<?= h($cc['img']) ?>" alt="Área de Laboratorio LAESH"
+                                 width="800" height="580"
+                                 loading="<?= $ccIdx <= 2 ? 'eager' : 'lazy' ?>"
+                                 decoding="<?= $ccIdx <= 2 ? 'sync' : 'async' ?>">
+                            <div class="carousel-card__body ck5-output">
+                                <?= safeHtml($cc['texto']) ?>
+                            </div>
+                        </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+                <button type="button" class="carousel-arrow-btn carousel-arrow-btn--right"
+                        id="btn-carousel-next" aria-label="Siguiente">
+                    <img src="/laesh-web-assets-uipv1a/icons/chevron-right.svg" alt="" class="icon-24" loading="lazy" decoding="async">
+                </button>
+            </div>
+            <div class="carousel-progress-wrap">
+                <div id="carousel-progress" class="carousel-progress"
+                     role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
+                     aria-label="Progreso del carrusel de especialidades">
+                    <div id="carousel-progress-fill" class="carousel-progress-fill"></div>
+                </div>
+            </div>
+            <div id="specialties-dots" class="hero-dots specialties-dots"
+                 aria-label="Navegación de especialidades" role="region"></div>
+
+            <!-- ── Catálogo de Estudios — 4 abanicos desde web_contenidos.especialidades ── -->
+            <div class="section-catalog">
+                <!-- Nota al pie del catálogo — desde web_contenidos (especialidades/catalogo/nota_pie) -->
+                <p class="section-catalog__note"><?= h($catalogNota) ?></p>
+
+                <?php foreach ($cg as $gi => $grupo): ?>
+                <?php if (empty($grupo['fichas'])) continue; ?>
+                <div class="orden-acc">
+                    <button type="button"
+                            class="orden-acc-hdr<?= $gi > 1 ? ' collapsed-btn' : '' ?>"
+                            data-acc="cg<?= $gi ?>">
+                        <span class="flex-ic-8">
+                            <?= GRUPO_SVGS[$gi] ?>
+                            <?= h($grupo['titulo']) ?>
+                        </span>
+                        <svg id="arr-cg<?= $gi ?>" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2"
+                             class="<?= $gi === 1 ? 'chevron-open' : 'chevron-arrow-svg' ?>">
+                            <polyline points="6 9 12 15 18 9"/>
+                        </svg>
+                    </button>
+                    <div id="cg<?= $gi ?>" class="orden-acc-body<?= $gi > 1 ? ' collapsed' : '' ?>">
+                        <?php foreach ($grupo['fichas'] as $subcat): ?>
+                        <div class="orden-cat">
+                            <div class="orden-cat-hdr"><?= h($subcat['cat']) ?></div>
+                            <div class="orden-cat-body">
+                                <?php foreach ($subcat['items'] as $estItem): ?>
+                                <div class="precio-cat-item"
+                                     data-clave="<?= h($estItem['clave_interna'] ?? '') ?>"
+                                     data-tiempo="<?= h($estItem['tiempo_procesamiento'] ?? '') ?>"
+                                     data-muestra="<?= h($estItem['muestra_requerida'] ?? '') ?>"
+                                     data-preparacion="<?= h($estItem['preparacion'] ?? '') ?>">
+                                    <span class="precio-cat-nombre"><?= h($estItem['nombre'] ?? '') ?></span>
+                                </div>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            </div><!-- /section-catalog -->
+        </section>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `calidad-cards-grid`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Sept 2026, 7:04 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1619-1679)</summary>
+
+**Path:** `Unknown file`
+
+```
+}
+
+.catalog-card-btn-compact:hover svg {
+    transform: scale(1.15);
+}
+
+/* ==========================================================================
+   SECCIÓN CALIDAD — 3 Fichas Estáticas (Estructura Fiel Especialidades .carousel-card)
+   ========================================================================== */
+.calidad-cards-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    align-items: stretch;
+}
+
+@media (min-width: 640px) {
+    .calidad-cards-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .calidad-cards-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 2rem;
+    }
+}
+
+.calidad-cards-grid .carousel-card {
+    flex: none;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 0;
+    padding: 0 !important;
+    overflow: hidden !important;
+    border-radius: 12px !important;
+}.calidad-cards-grid .carousel-card img {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 750 / 580 !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-sizing: border-box !important;
+}
+
+
+
+.text-center-block {
+    text-align: center;
+    max-width: 900px;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `carousel-card`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Sept 2026, 7:04 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L544-569)</summary>
+
+**Path:** `Unknown file`
+
+```
+            transform: scale(1.25);
+            box-shadow: 0 0 6px rgba(0, 82, 183, 0.35);
+        }
+        /* Responsive acordeón */
+
+        /* ── P-LAESH-01: clases extraídas de inline styles ── */
+
+        /* Carrusel de Áreas — Imagen flush con esquinas superiores redondeadas (border-radius: 12px 12px 0 0) */
+        .carousel-card img { width: 100%; height: 275px; object-fit: cover; object-position: center; display: block; margin: 0; border-radius: 12px 12px 0 0; border: none; }
+        .carousel-card__body { padding: 0.35rem 0.9rem 0.45rem 0.9rem; flex-grow: 1; display: flex; flex-direction: column; justify-content: flex-start; }
+        .carousel-card h3, .carousel-card__body h3, .carousel-card__body [style*="font-size:1.2rem"] { color: var(--text-muted); margin-top: 0 !important; margin-bottom: 0.15rem !important; font-size: 0.98rem !important; font-weight: 700 !important; line-height: 1.25 !important; }
+        .carousel-card p, .carousel-card__body p, .carousel-card__body [style*="font-size:0.95rem"] { color: var(--text-muted); margin-top: 0 !important; margin-bottom: 0 !important; line-height: 1.4 !important; font-size: 0.86rem !important; }
+
+        /* Slides de calidad — caption */
+        .slide-caption { padding: 1.5rem 2rem; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+        .slide-caption h4 { margin: 0 0 0.25rem; font-size: 1.15rem; font-weight: 700; color: #fff; }
+        .slide-caption p { margin: 0; font-size: 0.88rem; color: rgba(255,255,255,0.9); line-height: 1.4; }
+
+        /* Aviso de privacidad (modal) */
+        .aviso-h4 { color: var(--primary); font-size: 0.9rem; margin: 1.25rem 0 0.35rem; }
+        .aviso-p { color: var(--text-muted); font-size: 0.88rem; line-height: 1.7; }
+        .aviso-p--sm { margin-bottom: 0.5rem; }
+        .aviso-p--md { margin-bottom: 0.75rem; }
+        .aviso-list { color: var(--text-muted); font-size: 0.88rem; line-height: 1.75; padding-left: 1.2rem; margin-bottom: 0.75rem; }
+        .aviso-list--sm { margin-bottom: 0.5rem; }
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1099-1144)</summary>
+
+**Path:** `Unknown file`
+
+```
+    /* hero-glass-card h1/h2/p: base aplica en todos los viewports — sin override en ≥1920px */
+    .grid-layout {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.75rem;
+            padding: 0 4rem;
+        }
+    .specialties-carousel-viewport { max-width: 1850px; padding: 0 1.5rem; }
+    .carousel-card { flex: 0 0 calc((100% - 4rem) / 3); }
+    .carousel-card img { height: 285px; object-fit: cover; object-position: center; border-radius: 12px 12px 0 0; border: none; }
+    .section-header h2 { font-size: 2.5rem; }
+}
+
+@media (min-width: 768px) {
+    /* Hero tablet: 60vh con piso mínimo */
+    .hero-premium { height: 60vh; min-height: 400px; }
+}
+
+@media (min-width: 1025px) {
+    /* Hero desktop: 70vh + techo 800px — evita hero gigante en QHD/4K (G-01 fix) */
+    .hero-premium { height: 70vh; min-height: 500px; max-height: 800px; }
+    .hero-slide {
+            padding-left: 8rem;
+            padding-right: 8rem;
+        }
+    /* hero-glass-card max-width: width:min(554px,82%) en base ya controla — redundante aquí */
+    .specialties-carousel-viewport {
+            max-width: 96%;
+            padding: 0 1.25rem;
+        }
+    .specialties-carousel-track {
+            gap: 1.5rem;
+            padding-bottom: 4px;
+        }
+    .carousel-card {
+            flex: 0 0 calc((100% - 3rem) / 3);
+            margin-bottom: 2px;
+        }
+    .carousel-card img {
+            height: 265px;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 12px 12px 0 0;
+            border: none;
+        }
+    .carousel-card-body h3, .carousel-card-content h3 { font-size: 1.1rem; }
+    .carousel-card-body p,  .carousel-card-content p  { font-size: 0.9rem; }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Image Styles**
+
+I've been examining image styling in "Especialidades," specifically comparing `.calidad-cards-grid .carousel-card img` to `.carousel-card img`. I've noted the `border-radius: 12px` applied to the `.carousel-card` container. The `.carousel-card img` has a specified `height: 275px`. I'm comparing the different methods of styling images in this scenario.
+
+
+**Refining Image Scaling**
+
+I'm now focusing on how images are scaled and positioned within the "Calidad" cards. I've noted the use of `object-fit: cover` and `object-position: center`. The `aspect-ratio` setting is also critical to getting the desired proportions, along with the `width` and `height` properties in the CSS. I'm seeing how these settings differ between the `Especialidades` and `Calidad` implementations. These differences are critical to the user request for the website.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `calidad-cards-grid`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.001885041s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Sept 2026, 7:05 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `style-website.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L149-184)</summary>
+
+**Path:** `Unknown file`
+
+```
+    gap: 2rem;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    padding: 1rem 0;
+}
+.specialties-carousel-track::-webkit-scrollbar { display: none; }
+.carousel-card {
+    flex: 0 0 calc((100% - 4rem) / 3);
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    /* Recorte de margen inferior vertical al mínimo */
+    margin-bottom: 2px;
+}@media (hover: hover) and (pointer: fine) {
+    .carousel-card:hover {
+        transform: translateY(-4px); box-shadow: 0 12px 20px rgba(0,0,0,0.08); border-color: var(--primary-green);
+    }
+}
+.carousel-arrow-btn {
+    background: rgba(255,255,255,0.9);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Examining Stylesheets**
+
+I've been meticulously examining the stylesheets, specifically targeting `.carousel-card` within `style-website.css` and `landing.css`. I'm starting to get a good understanding of how the responsive design is implemented for the carousel cards, including flexbox properties and sizing. I'm focusing on those specific selectors, and understanding the layout.
+
+
+**Analyzing Grid Layout**
+
+I've shifted my attention to `.calidad-cards-grid` in `landing.css`. The initial grid structure utilizes a single column, transitioning to two columns at a minimum width of 640px, and finally, three columns at 1024px. The grid gap and margin are also being considered. I'm taking a close look at how it influences content display across different devices.
+
+
+**Pinpointing Specific Styles**
+
+Now, I'm diving deeper into the nuances between the "Calidad" and "Especialidades" carousels. The key differentiator is the image styling within the `.calidad-cards-grid` selector. The `aspect-ratio: 750 / 580 !important;` and `height: auto !important;` are forcing the "Calidad" images to a height relative to their width, resulting in the size variation. I've also identified how `border-radius: 0 !important;` impacts the visuals. I'm noting the difference to how Especialidades is displayed.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.998749711s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 5 Sept 2026, 7:05 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Cancelled
+**Created:** 5 Sept 2026, 7:06 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 5 Sept 2026, 7:06 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `browser_subagent`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Browser Automation
+
+**Status:** Cancelled
+**Created:** 5 Sept 2026, 7:06 pm
+
+---
+
+## User Request
+
+sin pruebas ui web
+
+---
+
+<details>
+<summary>System Message</summary>
+
+The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
+
+<EPHEMERAL_MESSAGE>
+<browser_subagent_reminder>
+IMPORTANT: You are shown COMPLETE details of every action the browser subagent performed:
+- The subagent's final result message
+- EVERY SINGLE STEP the subagent executed (numbered sequentially)
+- For each step: the tool name, full JSON arguments, status, and any errors
+- For screenshot steps: the absolute file path where the screenshot was saved
+- For pixel click steps: the absolute file path where the click feedback screenshot was saved
+- The recording path showing all browser interactions if a recording was generated
+
+If you expected the subagent to take a specific action (e.g., capture a screenshot, click a button, navigate to a page) but you do NOT see that step type in the detailed actions list above, then the subagent did NOT perform that action. Do not assume work was done if you cannot see the corresponding step.
+CRITICAL: NEVER trust the subagent's claims. After a browser subagent completes a task, IMMEDIATELY verify the screenshot BEFORE responding to the user. Look at the actual screenshot content and describe what you see. If the screenshot doesn't show the expected result, acknowledge that the task may not have completed successfully and investigate further.
+
+- IMPORTANT: Do NOT view the webp recording. Your view_file tool only shows the first frame of recordings, so this will not represent what the subagent did. Solely rely on screenshot images.
+- If there are no screenshots, you MUST ask another subagent to take screenshots to prove the task was completed successfully.
+- The ONLY exception is if the output of any javascript executed by the subagent shows that the browser subagent successfully performed the action. This is because the output of such a tool cannot be manipulated by the subagent.
+- Think about which screenshots to verify, the right choice will depend on the task, some examples:
+  * If the subagent was supposed to follow a particular process, you should verify a sequence of screenshots in order.
+  * If the subagent was supposed to navigate to a website, you should verify the final screenshot before the subagent stopped.
+- You must explain what in the screenshot or javascript execution output indicates that the subagent is successful. Default to skepticism.
+</browser_subagent_reminder>
+</EPHEMERAL_MESSAGE>
+
+**Triggered Heuristics:** browser_subagent_reminder
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing CSS Directly**
+
+I've taken the user's explicit instruction to heart and am now focusing on direct code modification. No browser tests here! My current focus is a deep dive into the CSS rules governing `.calidad-cards-grid`.
+
+
+**Examining CSS Rules**
+
+I am now focusing on the CSS rules defined for `.carousel-card` within the `.calidad-cards-grid` structure. I'm taking another look at the specified styles in `laesh-web-assets-uipv1a/css/landing.css`, specifically lines 1626 to 1675. This allows me to see how the card will behave within the layout grid. I'm checking the responsive adjustments too.
+
+
+**Investigating Image Styles**
+
+I'm now examining how the images within the carousel are styled, particularly for the "Especialidades" and "Calidad" sections. I've focused on differences in height, and the application of `aspect-ratio` and `!important` declarations which are key. I'm noting specific lines in `landing.css`, where image dimensions are specified across different media queries, showing adjustments for varying screen sizes. The `height: auto !important;` overrides are pivotal here.
+
+
+**Revising Height Overrides**
+
+I'm now focusing on eliminating unnecessary `!important` declarations, particularly for the image height. I am considering the height, object-fit, and border-radius. Removing overrides is key, and I'll see how those settings affect `carousel-card` images in the "Calidad" section. I will then explore other files that can impact this section. I am now double-checking the associated HTML partial for the "Calidad" section, specifically checking the grid structure, and verifying the `object-fit` and `object-position` attributes.
+
+
+**Comparing HTML Structures**
+
+I've confirmed that the HTML structure for "Calidad" and "Especialidades" cards is identical. My key focus is now the CSS. The `landing.css` block, particularly lines 1652-1674, causes the differences in height and dimensions. I will replace those styles. I'm focusing on aligning the "Calidad" image styles with those used in the "Especialidades" section, so I can eliminate unnecessary overrides.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `.calidad-cards-grid`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.291203756s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Sept 2026, 7:06 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1624-1675)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+/* ==========================================================================
+   SECCIÓN CALIDAD — 3 Fichas Estáticas (Estructura Fiel Especialidades .carousel-card)
+   ========================================================================== */
+.calidad-cards-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    align-items: stretch;
+}
+
+@media (min-width: 640px) {
+    .calidad-cards-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .calidad-cards-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 2rem;
+    }
+}
+
+.calidad-cards-grid .carousel-card {
+    flex: none;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 0;
+    padding: 0 !important;
+    overflow: hidden !important;
+    border-radius: 12px !important;
+}.calidad-cards-grid .carousel-card img {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 750 / 580 !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-sizing: border-box !important;
+}
+
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Defining CSS Changes**
+
+I'm focusing on aligning the visual styles of different card types. Specifically, I plan to use `replace_file_content` on `laesh-web-assets-uipv1a/css/landing.css` to update image and card styles. The goal is consistent height, aspect ratio, border radius, and object-fit across ".calidad-cards-grid .carousel-card img" and ".calidad-cards-grid .carousel-card", matching "Especialidades" card visuals.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.064139891s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 5 Sept 2026, 7:06 pm
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 5 Sept 2026, 7:07 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `manage_task`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_GENERIC
+
+**Status:** Completed
+**Created:** 5 Sept 2026, 7:07 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `manage_task`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_GENERIC
+
+**Status:** Completed
+**Created:** 5 Sept 2026, 7:07 pm
+
+---
+
+### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
+
+**Status:** Completed
+**Created:** 5 Sept 2026, 7:07 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+. no se nota el cambio, quiza: haya colision con otro estilo y/o el opcache se requiera refrescar.
+. otro: Para desktop/laptop ,Que el video aparezca completo en tamaño sin que salga scroll vertical en su ficha contenedora. EN movil se adapta y se completo el video en la ficha.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `landing.css`
+**Language:** css
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Sept 2026, 7:10 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/**
+ * index.php — Sitio Web Público LAESH (Phase J — Estabilización)
+ *
+ * Fuente HTML: website/uipv1/index.html  ← NUNCA BORRAR (R15.1)
+ * Merge iterativo: cambios en uipv1/index.html → propagar aquí.
+ *
+ * Todo el contenido editorial se lee desde la BD:
+ *   · configuraciones   → contacto, horarios, responsable, ubicación geográfica,
+ *                          WhatsApp, Facebook, Schema.org, años de experiencia
+ *   · web_contenidos    → hero (slides + navbar tagline), quienes-somos (fichas,
+ *                          resp, filosofía), especialidades (accordion fichas),
+ *                          promociones (banner), calidad (encabezado),
+ *                          ubicacion (maps_embed), footer, seo
+ *   · estudios (JOIN)   → SSOT para tarjetas de promociones diarias
+ *
+ * Claves configuraciones usadas:
+ *   telefono · email_contacto · whatsapp_numero · facebook_url
+ *   direccion · direccion_calle · ciudad · estado · cp
+ *   horario_semana · horario_domingo · hrs_open · hrs_close · dom_open · dom_close
+ *   responsable_nombre · responsable_cedula_prof · responsable_cedula_esp
+ *   nombre_laboratorio · nombre_corto · anios_experiencia
+ */
+declare(strict_types=1);
+require_once __DIR__ . '/../commons/commons.php';
+
+// ── HTTP Caching & Performance Optimization Headers ───────────────────────────
+// Permite revalidación rápida y caché eficiente del navegador sin afectar sesiones
+if (empty($_SESSION['auth_logged_in'])) {
+    header('Cache-Control: public, max-age=300, must-revalidate');
+} else {
+    header('Cache-Control: no-cache, must-revalidate');
+}
+
+// ── CSRF para modal de login ────────────────────────────────────────────────
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
+// ── Helpers ─────────────────────────────────────────────────────────────────
+/** Escapa para salida HTML (texto y atributos). */
+function h(mixed $v): string {
+    return htmlspecialchars((string)($v ?? ''), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+}
+/** Formatea precio MXN entero: "$1,234" o '' si no hay precio. */
+function money(mixed $v): string {
+    $n = (float)($v ?? 0);
+    return $n > 0 ? '$' . number_format($n, 0, '.', ',') : '';
+}
+/** Devuelve solo dígitos de un número de teléfono. */
+function waNum(string $raw): string {
+    return preg_replace('/\D/', '', $raw);
+}
+/**
+ * Renderiza HTML de confianza generado por el RTE del CMS (admins LAESH).
+ * Permite tags ricos de CKEditor 5.
+ * Bloquea: <script>, atributos on*, href con javascript:
+ */
+function safeHtml(mixed $v): string {
+    $html = strip_tags((string)($v ?? ''), ['strong','em','b','i','br','p','ul','ol','li','a','span','table','tbody','tr','td','th','thead','hr','figure','iframe','h1','h2','h3','h4','h5','h6','u','s','blockquote','oembed','div','img','mark']);
+    $html = preg_replace('/\s+on\w+\s*=\s*(?:"[^"]*"|\'[^\']*\'|[^\s>]*)/i', '', $html);
+    $html = preg_replace('/href\s*=\s*["\']?\s*javascript:/i', 'href="#" data-blocked=', $html);
+
+    // Convertir <oembed url="..."> a <iframe> para YouTube, Spotify, Vimeo si vienen etiquetas oembed crudas
+    $html = preg_replace_callback('/<oembed\s+url=["\']([^"\']+)["\']\s*>\s*<\/oembed>/i', function($matches) {
+        $url = $matches[1];
+        if (preg_match('/(?:youtube\.com\/(?:watch\?v=|embed\/|v\/)|youtu\.be\/)([\w-]+)/i', $url, $m)) {
+            $yId = $m[1];
+            return '<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,0.12);">' .
+                   '<iframe src="https://www.youtube.com/embed/' . $yId . '" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;border-radius:12px;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' .
+                   '</div>';
+        }
+        if (preg_match('/vimeo\.com\/(?:video\/)?(\d+)/i', $url, $m)) {
+            $vId = $m[1];
+            return '<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;">' .
+                   '<iframe src="https://player.vimeo.com/video/' . $vId . '" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allowfullscreen></iframe>' .
+                   '</div>';
+        }
+        return '<a href="' . htmlspecialchars($url, ENT_QUOTES, 'UTF-8') . '" target="_blank" rel="noopener">' . htmlspecialchars($url, ENT_QUOTES, 'UTF-8') . '</a>';
+    }, $html);
+
+    // Limpiar párrafos vacíos redundantes al inicio y final (<p>&nbsp;</p>, <p></p>) que dejan espacios verticales masivos
+    $html = preg_replace('/^(?:\s*<p>(?:&nbsp;|\s)*<\/p>)+/i', '', $html);
+    $html = preg_replace('/(?:\s*<p>(?:&nbsp;|\s)*<\/p>)+\s*$/i', '', trim($html));
+
+    return $html;
+}
+
+/** Devuelve un valor de la tabla web_contenidos de manera segura */
+function cmsVal(?array $c, string $sec, ?string $sub, string $clave, string $default = ''): string {
+    if (!is_array($c)) return $default;
+    $subKey = $sub ?? '';
+    if (isset($c[$sec][$subKey][$clave])) {
+        return (string)$c[$sec][$subKey][$clave];
+    }
+    if ($subKey === '' && isset($c[$sec][''][$clave])) {
+        return (string)$c[$sec][''][$clave];
+    }
+    return $default;
+}
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L100-249)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+/**
+ * Parsea el texto de fichas del CMS al array estructurado del acordeón.
+ *
+ * Formato esperado (una sub-categoría por línea):
+ *   [Hematología] Citometría Hemática, Grupo y RH, Plaquetas
+ *   [Química Clínica] Química Sanguínea 3, Química Sanguínea 7, ...
+ *
+ * @return list<array{cat: string, items: list<string>}>
+ */
+function parseFichas(string $text): array {
+    $groups = [];
+    foreach (explode("\n", $text) as $line) {
+        $line = trim($line);
+        if ($line === '') continue;
+        if (preg_match('/^\[(.+?)\]\s*(.+)/', $line, $m)) {
+            $items = array_values(array_filter(
+                array_map('trim', explode(',', $m[2]))
+            ));
+            if ($items) {
+                $groups[] = ['cat' => trim($m[1]), 'items' => $items];
+            }
+        }
+    }
+    return $groups;
+}
+
+// ── Conexión DB ─────────────────────────────────────────────────────────────
+$db = Flight::db();
+
+// ── Caché L2: OPcache PHP File Store (Estrategia A — Sprint Cache 2026-09) ──
+// Inicializar una sola vez por request. Env: 'dev' en local, 'prod' en OCI/Hostinger.
+\Common\Cache::init('', defined('APP_ENV') ? APP_ENV : 'prod');
+
+if (!empty($_GET['reset_cache'])) {
+    if (function_exists('opcache_reset')) { @opcache_reset(); }
+    \Common\Cache::clear();
+}
+$_bypassCache = (!empty($_SESSION['auth_logged_in']) && !empty($_GET['_preview']) && !empty($_SESSION['cms_draft'])) || !empty($_GET['nocache']) || !empty($_GET['reset_cache']);
+
+// ── 1a. configuraciones ─────────────────────────────────────────────────────
+$configRaw = $_bypassCache ? null : \Common\Cache::get(\Common\Cache::KEY_CFG);
+if ($configRaw === null) {
+    $configRaw = $db->query("SELECT clave, valor FROM configuraciones")->fetchAll(\PDO::FETCH_KEY_PAIR) ?: [];
+    if (!$_bypassCache) \Common\Cache::set(\Common\Cache::KEY_CFG, $configRaw);
+}
+
+// ── 1b. web_contenidos → $cms ────────────────────────────────────────────────
+$_cmsRaw = $_bypassCache ? null : \Common\Cache::get(\Common\Cache::KEY_CMS);
+if ($_cmsRaw === null) {
+    $_cmsRaw = [];
+    foreach ($db->query("SELECT seccion, subseccion, clave, valor FROM web_contenidos ORDER BY id")->fetchAll(\PDO::FETCH_ASSOC) as $row) {
+        $_cmsRaw[$row['seccion']][$row['subseccion']][$row['clave']] = $row['valor'];
+    }
+    if (!$_bypassCache) \Common\Cache::set(\Common\Cache::KEY_CMS, $_cmsRaw);
+}
+$cms = $_cmsRaw;
+
+// ── 2. Preview de borrador CMS (solo sesión admin activa) ──────────────────
+// IMPORTANTE: el merge debe ocurrir ANTES de definir $cfg y $c, porque las arrow
+// functions de PHP capturan variables por VALOR en el momento de su creación.
+// Delight Auth guarda el login bajo $_SESSION['auth_logged_in'] (NOT 'user_id').
+$isPreview = !empty($_GET['_preview'])
+    && !empty($_SESSION['auth_logged_in'])
+    && !empty($_SESSION['cms_draft']);
+if ($isPreview) {
+    foreach ($_SESSION['cms_draft'] as $draftSec => $campos) {
+        foreach ($campos as $rawKey => $val) {
+            // Manejar configuraciones globales (prefijo _cfg_)
+            if (str_starts_with($rawKey, '_cfg_')) {
+                $configRaw[substr($rawKey, 5)] = $val;
+                continue;
+            }
+            // Manejar web_contenidos (formato {sub}__{clave})
+            [$sub, $clave] = array_pad(explode('__', $rawKey, 2), 2, $rawKey);
+            $cms[$draftSec][$sub][$clave] = $val;
+        }
+    }
+}
+
+// ── 3. Helpers y Variables Funcionales (Post-Merge) ─────────────────────────
+$cfg = fn(string $k, string $d = '') => (!isset($configRaw[$k]) || $configRaw[$k] === '') ? $d : $configRaw[$k];
+$c   = fn(string $sec, string $sub, string $k, string $d = '') => (!isset($cms[$sec][$sub][$k]) || $cms[$sec][$sub][$k] === '') ? $d : $cms[$sec][$sub][$k];
+
+// Valores frecuentes — sin fallback: el cliente DEBE tener todo en configuraciones
+$cfgNombreLab = $cfg('nombre_laboratorio');
+$cfgNombreC   = $cfg('nombre_corto');
+$cfgAnios     = $cfg('anios_experiencia');
+$cfgTel       = $cfg('telefono');
+$cfgTelDigit  = waNum($cfgTel);
+$cfgWA        = waNum($cfg('whatsapp_numero'));
+$cfgEmail     = $cfg('email_contacto');
+$cfgDirCalle  = $cfg('direccion_calle', 'Azucenas #8, Fracc. Jardines del Sur');
+$cfgCiudad    = $cfg('ciudad', 'Huajuapan de León');
+$cfgEstado    = $cfg('estado', 'Oaxaca');
+$cfgCP        = $cfg('cp', '69000');
+$cfgDirRaw    = $cfg('direccion');
+$cfgDir       = $cfgDirRaw ?: trim("{$cfgDirCalle}, {$cfgCiudad}, {$cfgEstado}" . ($cfgCP ? ". C.P. {$cfgCP}" : ""));
+$cfgHorSem    = $cfg('horario_semana');
+$cfgHorDom    = $cfg('horario_domingo');
+$cfgHrsOpen   = $cfg('hrs_open');
+$cfgHrsClose  = $cfg('hrs_close');
+$cfgDomOpen   = $cfg('dom_open');
+$cfgDomClose  = $cfg('dom_close');
+$cfgRespNom   = $cfg('responsable_nombre');
+$cfgRespProf  = $cfg('responsable_cedula_prof');
+$cfgRespEsp   = $cfg('responsable_cedula_esp');
+$cfgFB        = $cfg('facebook_url');
+$cfgMapsUrl   = $cfg('maps_url');  // URL directa Google Maps para noscript
+
+// WhatsApp URLs — textos desde configuraciones (sin fallback)
+$waBase        = "https://wa.me/52{$cfgWA}";
+$waTextoInfo   = $cfg('wa_texto_info');    // texto botón info / flotante / ubicación
+$waTextoAg     = $cfg('wa_texto_agendar'); // texto pre-llenado en cards de promo
+$waInfoUrl     = $waBase . '?text=' . rawurlencode($waTextoInfo);
+$waContactUrl  = $waInfoUrl;
+
+/** Obtiene valor CMS con fallback.
+ *  NOTA: debe definirse DESPUÉS del merge de preview para que capture
+ *  el $cms ya actualizado (PHP arrow fn captura por valor al momento de creación). */
+$c = fn(string $sec, string $sub, string $k, string $d = '') => $cms[$sec][$sub][$k] ?? $d;
+
+// ── 3. Catálogo de estudios — 4 abanicos desde web_contenidos ───────────────
+// Fuente SSOT: web_contenidos(especialidades, cgN, titulo/fichas)
+// Iconos SVG decorativos por grupo (inline — sin CDN)
+const GRUPO_SVGS = [
+    1 => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>',
+    2 => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>',
+    3 => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>',
+    4 => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>',
+];
+
+// ── 1c. Árbol de estudios clínicos → $cg ─────────────────────────────────────
+$cg = $_bypassCache ? null : \Common\Cache::get(\Common\Cache::KEY_TREE);
+if ($cg === null) {
+    $cg = [];
+    $treeStmt = $db->query("
+        SELECT g.id as grupo_id, g.titulo as grupo_titulo,
+               c.id as cat_id, c.nombre as cat_nombre,
+               e.clave_interna, e.nombre as estudio_nombre, e.tiempo_procesamiento, e.muestra_requerida, e.preparacion
+        FROM catalogo_grupos g
+        JOIN catalogo_categorias c ON c.grupo_id = g.id
+        JOIN catalogo_estudios e ON e.categoria_id = c.id
+        WHERE e.activo = 1
+        ORDER BY g.orden ASC, c.orden ASC, e.id ASC
+    ");
+    $treeRows = $treeStmt ? $treeStmt->fetchAll(\PDO::FETCH_ASSOC) : [];
+
+    $gMap = [];
+    $gIdxMap = [];
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L250-399)</summary>
+
+**Path:** `Unknown file`
+
+```
+    $currGIdx = 0;
+    foreach ($treeRows as $r) {
+        $gid = (int)$r['grupo_id'];
+        if (!isset($gIdxMap[$gid])) {
+            $currGIdx++;
+            if ($currGIdx > 4) break;
+            $gIdxMap[$gid] = $currGIdx;
+            $cg[$currGIdx] = ['titulo' => $r['grupo_titulo'], 'fichas' => []];
+        }
+        $gi    = $gIdxMap[$gid];
+        $catId = (int)$r['cat_id'];
+        if (!isset($gMap[$gid][$catId])) {
+            $gMap[$gid][$catId] = count($cg[$gi]['fichas']);
+            $cg[$gi]['fichas'][] = ['cat' => $r['cat_nombre'], 'items' => []];
+        }
+        $cPos = $gMap[$gid][$catId];
+        $cg[$gi]['fichas'][$cPos]['items'][] = [
+            'clave_interna'        => $r['clave_interna'],
+            'nombre'               => $r['estudio_nombre'],
+            'tiempo_procesamiento' => $r['tiempo_procesamiento'],
+            'muestra_requerida'    => $r['muestra_requerida'],
+            'preparacion'          => $r['preparacion'],
+        ];
+    }
+    if (!$_bypassCache) \Common\Cache::set(\Common\Cache::KEY_TREE, $cg);
+}
+
+// ── 3b. Hero autoplay (seg) — desde web_contenidos.hero.config.transition_time
+// Alineado con gestion-web.php (POST hero_config__transition_time)
+$heroAutoplay = min(90, max(0, (int)$c('hero', 'config', 'transition_time', '5'))); // 0 = pausa indefinida
+
+// ── 3c. Quiénes somos — Ficha 4 (25 años / CKEditor 5) ───────────────────
+// Desde 2026-08-23: ficha4/texto almacena HTML enriquecido (CKEditor 5).
+// El heading del card va incluido en el HTML (primer bloque H3 del editor).
+// safeHtml() filtra antes de emitir.
+$qsConfianzaHtml = $c('quienes-somos', 'ficha4', 'texto');
+
+// ── 3d. Carrusel de especialidades y áreas — 16 tarjetas (sin fallback) ───────────────────
+// Textos e imágenes dinámicos desde web_contenidos (especialidades/carouselN/texto HTML y config.carouselN_img).
+$carouselCards = [];
+for ($ci = 1; $ci <= 16; $ci++) {
+    $cHtml = trim((string)$c('especialidades', "carousel{$ci}", 'texto'));
+    if ($cHtml === '') continue;
+    $cImg = trim((string)$c('especialidades', 'config', "carousel{$ci}_img", $cfg("carousel{$ci}_img", '')));
+    $carouselCards[$ci] = [
+        'img'   => $cImg,
+        'texto' => $cHtml,
+    ];
+}
+
+// ── 3e. Calidad gallery — 3 tarjetas (sin fallback) ────────────────────────
+$_calDef = [
+    1 => ['Área de Hematología',      'Análisis de biometría hemática y células sanguíneas con rigor científico y alta precisión.'],
+    2 => ['Química Clínica',          'Determinación automatizada de metabolitos, perfil lipídico y enzimas específicas.'],
+    3 => ['Microbiología y Cultivos', 'Aislamiento, tinción de Gram y pruebas de susceptibilidad a antimicrobianos.'],
+];
+$calidadCards = [];
+for ($qi = 1; $qi <= 3; $qi++) {
+    $calidadCards[$qi] = [
+        'img'    => $c('calidad', "gallery{$qi}", 'imagen_url', ''),
+        'alt'    => $_calDef[$qi][0],
+        'titulo' => $c('calidad', "gallery{$qi}", 'titulo',      $_calDef[$qi][0]),
+        'desc'   => $c('calidad', "gallery{$qi}", 'descripcion', $_calDef[$qi][1]),
+    ];
+}
+
+// ── 1d. Promociones vigentes → $promos ───────────────────────────────────────
+$promos = $_bypassCache ? null : \Common\Cache::get(\Common\Cache::KEY_PROMOS);
+if ($promos === null) {
+    $promoStmt = $db->query(
+        "SELECT cp.id, cp.dia_semana, cp.nombre_oferta, cp.subtitulo, cp.descripcion,
+                cp.ayuno, cp.tiempo_entrega, cp.precio_regular, cp.precio_oferta,
+                cp.imagen_fondo, cp.activo,
+                ce.clave_interna, ce.muestra_requerida, ce.tiempo_procesamiento, ce.preparacion,
+                cc.nombre as categoria_nombre
+         FROM catalogo_promociones cp
+         LEFT JOIN catalogo_estudios ce ON cp.estudio_id = ce.id
+         LEFT JOIN catalogo_categorias cc ON ce.categoria_id = cc.id
+         WHERE cp.activo = 1
+         ORDER BY cp.orden ASC, cp.id ASC"
+    );
+    $promos = $promoStmt ? $promoStmt->fetchAll(\PDO::FETCH_ASSOC) : [];
+    if (!$_bypassCache) \Common\Cache::set(\Common\Cache::KEY_PROMOS, $promos);
+}
+
+// ── Inyectar borrador de promociones si es vista previa ──────────────────
+if ($isPreview && !empty($_SESSION['cms_draft']['promociones'])) {
+    $promoDraft = $_SESSION['cms_draft']['promociones'];
+    
+    // Si la DB trajo menos de 7 (o las que sean), igual debemos iterar
+    // o al revés: iteramos sobre los 7 IDs y construimos el array
+    $draftPromos = [];
+    foreach ([1,2,3,4,5,6,7] as $pId) {
+        if (!isset($promoDraft["promo_active_{$pId}"])) continue; // Si no está activo en el draft, saltar (where activo=1)
+        
+        // Buscar si ya existía en la BD para heredar joins
+        $existingRow = null;
+        foreach ($promos as $row) {
+            if ($row['id'] == $pId) {
+                $existingRow = $row;
+                break;
+            }
+        }
+        
+        $draftRow = $existingRow ?: ['id' => $pId];
+        // Sobrescribir con draft
+        $draftRow['dia_semana']     = $promoDraft["promo_dia_semana_{$pId}"] ?? '';
+        $draftRow['nombre_oferta']  = $promoDraft["promo_titulo_{$pId}"] ?? '';
+        $draftRow['subtitulo']      = $promoDraft["promo_subtitulo_{$pId}"] ?? '';
+        $draftRow['descripcion']    = $promoDraft["promo_desc_{$pId}"] ?? '';
+        $draftRow['ayuno']          = $promoDraft["promo_ayuno_{$pId}"] ?? '';
+        $draftRow['tiempo_entrega'] = $promoDraft["promo_tiempo_{$pId}"] ?? '';
+        $draftRow['precio_regular'] = $promoDraft["promo_precio_reg_{$pId}"] ?? '';
+        $draftRow['precio_oferta']  = $promoDraft["promo_precio_of_{$pId}"] ?? '';
+        $draftRow['imagen_fondo']   = $promoDraft["promo_img_{$pId}"] ?? '';
+        $draftRow['activo']         = 1;
+        
+        $draftPromos[] = $draftRow;
+    }
+    $promos = $draftPromos;
+}
+
+
+// ── 5. Lecturas agrupadas por sección ────────────────────────────────────────
+
+// Hero — navbar tagline (sin fallback)
+$navTagL1 = $c('hero', 'navbar', 'tagline_l1');
+$navTagL2 = $c('hero', 'navbar', 'tagline_l2');
+
+// Hero — contenido de slides: etiqueta, titulo, descripcion, CTA + imagen_url dinámica (sin fallback)
+$heroSliderMode = $c('hero', 'config', 'slider_mode', 'sync');
+$heroFixedImgIdx = (int)$c('hero', 'config', 'fixed_image', '1');
+
+$slides = [];
+for ($si = 1; $si <= 5; $si++) {
+    $imgUrl = $c('hero', "slide{$si}", 'imagen_url', '');
+    $slides[$si] = [
+        'etiqueta'    => $c('hero', "slide{$si}", 'etiqueta'),
+        'titulo'      => $c('hero', "slide{$si}", 'titulo'),
+        'descripcion' => $c('hero', "slide{$si}", 'descripcion'),
+        'cta_texto'   => $c('hero', "slide{$si}", 'cta_texto'),
+        'cta_href'    => $c('hero', "slide{$si}", 'cta_href'),
+        'imagen_url'  => $imgUrl,
+        'bg_style'    => ($heroSliderMode !== 'decoupled' && $imgUrl)
+            ? 'background-image:url(' . h($imgUrl) . ');'
+            : '',
+    ];
+}
+
+// Compute the global parent background if decoupled
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L400-549)</summary>
+
+**Path:** `Unknown file`
+
+```
+$heroParentBgStyle = '';
+if ($heroSliderMode === 'decoupled') {
+    // Determine which image to use for the fixed background
+    $fixedUrl = $slides[$heroFixedImgIdx]['imagen_url'] ?? '';
+    if ($fixedUrl) {
+        $heroParentBgStyle = ' style="background-image:url(' . h($fixedUrl) . '); background-size: cover; background-position: center center; background-repeat: no-repeat;"';
+    } else {
+        // Fallbacks for the CSS default images if no custom image was uploaded
+        $defaultBgs = [
+            1 => '/laesh-web-assets-uipv1a/img/recepcion-de-pacientes.webp',
+            2 => '/laesh-web-assets-uipv1a/img/laesh-slider-futurista-a.webp',
+            3 => '/laesh-web-assets-uipv1a/img/laesh-slider-futurista-c.webp',
+            4 => '/laesh-web-assets-uipv1a/img/sala-de-espera.webp',
+            5 => '/laesh-web-assets-uipv1a/img/recepcion-lab.webp'
+        ];
+        $fallback = $defaultBgs[$heroFixedImgIdx] ?? $defaultBgs[1];
+        $heroParentBgStyle = ' style="background-image:url(' . h($fallback) . '); background-size: cover; background-position: center center; background-repeat: no-repeat;"';
+    }
+}
+// Slide 5: si la descripción CMS está vacía, construirla desde configuraciones
+$slide5Desc = $slides[5]['descripcion']
+    ?: (h($cfgDirCalle ?: $cfgDir) . ', ' . h($cfgCiudad) . ', ' . h($cfgEstado) . '.<br>'
+      . h($cfgHorSem) . ' &nbsp;|&nbsp; ' . h($cfgHorDom) . ' &nbsp;|&nbsp; Tel: ' . h($cfgTel));
+
+// Quiénes somos (sin fallback)
+$qsH2         = $c('quienes-somos', 'seccion',   'h2');
+$qsSub        = $c('quienes-somos', 'seccion',   'subtitulo');
+// $qsHisTit ha sido eliminado: el título ahora se renderiza desde CKEditor (ficha1)
+$qsCompromiso = $c('quienes-somos', 'seccion',   'compromiso');
+$qsMision     = $c('quienes-somos', 'ficha2',    'texto');
+$qsVision     = $c('quienes-somos', 'ficha3',    'texto');
+// ficha1/texto: desde 2026-08-23 almacena HTML enriquecido (CKEditor 5).
+// safeHtml() filtra tags permitidos antes de emitir.
+$qsHistoriaHtml = $c('quienes-somos', 'ficha1', 'texto');
+$qsRespBio      = $c('quienes-somos', 'resp', 'bio');
+$qsRespFraseTpl = $c('quienes-somos', 'resp', 'frase_trayectoria');
+$qsRespFrase    = str_replace(
+    ['{anios}', '{lab}'],
+    ['<strong class="txt-green">' . h($cfgAnios) . ' años</strong>', h($cfgNombreC)],
+    h($qsRespFraseTpl)
+);
+$qsFiloCita   = $c('quienes-somos', 'filosofia', 'tagline');
+$qsFiloTxt    = $c('quienes-somos', 'filosofia', 'texto');
+
+// Especialidades (sin fallback)
+$catalogH2   = $c('especialidades', 'seccion',  'h2');
+$catalogSub  = $c('especialidades', 'seccion',  'subtitulo');
+$catalogNota = $c('especialidades', 'catalogo', 'nota_pie');
+
+// Promociones (sin fallback)
+$promoH2  = $c('promociones', 'banner', 'titulo');
+$promoSub = $c('promociones', 'banner', 'subtitulo');
+
+// Calidad (sin fallback)
+$calH2  = $c('calidad', 'seccion', 'h2');
+$calSub = $c('calidad', 'seccion', 'subtitulo');
+
+// Ubicación (sin fallback)
+$ubH2      = $c('ubicacion', 'seccion', 'h2');
+$ubSub     = $c('ubicacion', 'seccion', 'subtitulo');
+$mapsEmbed = $c('ubicacion', 'info', 'maps_embed');
+
+// Footer — Color de Fondo desde CMS + Contenido RTE enriquecido con estilos desde CMS ($c('footer', 'contenido', 'cuerpo_html'))
+$footerBgColor = $c('footer', 'estilo', 'bg_color', '#0f172a');
+$footerRteRaw  = trim($c('footer', 'contenido', 'cuerpo_html'));
+
+if ($footerRteRaw !== '') {
+    $footerHtml = safeHtml($footerRteRaw);
+} else {
+    $footerHtml = '<div class="footer-info">'
+        . '<img src="/laesh-web-assets-uipv1a/img/logo-laesh.webp" alt="' . h($cfgNombreLab ?: $cfgNombreC) . '" class="footer-logo-img" style="max-height: 40px; width: auto;" decoding="async" loading="lazy">'
+        . '<p class="footer-text">'
+            . '<strong>' . h($cfgNombreLab ?: 'Laboratorio de Especialidades Hematológicas S.C.') . '</strong> &nbsp;|&nbsp; '
+            . h($cfgDir)
+            . ($cfgTel ? ' &nbsp;|&nbsp; Tel: <a href="tel:' . h($cfgTelDigit) . '">' . h($cfgTel) . '</a>' : '')
+            . ($cfgWA ? ' &nbsp;|&nbsp; WhatsApp: <a href="https://wa.me/52' . h($cfgWA) . '" target="_blank" rel="noopener noreferrer">' . h($cfgWA) . '</a>' : '')
+        . '</p>'
+        . '<p class="footer-text">'
+            . h($cfgHorSem ?: 'Lunes a Sábado 7:00 a 20:00 hrs')
+            . ($cfgHorDom ? ' &nbsp;·&nbsp; ' . h($cfgHorDom) : '')
+            . ' &nbsp;|&nbsp; <a href="#" id="link-privacy">Aviso de Privacidad</a> &nbsp;|&nbsp; © ' . date('Y') . ' ' . h($cfgNombreC ?: 'LAESH') . '. Todos los derechos reservados.'
+        . '</p>'
+    . '</div>';
+}
+
+// Aviso de Privacidad — Contenido HTML consolidado desde el RTE del CMS
+$avisoHtml = $c('aviso-privacidad', 'contenido', 'cuerpo_html');
+
+// SEO (sin fallback)
+$schemaName  = h($c('seo', 'schema', 'schema_name'));
+$schemaType  = h($c('seo', 'schema', 'schema_type'));  // p.ej. MedicalOrganization
+$seoTitle    = $c('seo', 'meta', 'title');
+$seoDesc     = $c('seo', 'meta', 'description');
+
+// WhatsApp SVG reutilizado en cards de promo
+$waSvg = '<svg width="15" height="15" fill="#25D366" viewBox="0 0 24 24" aria-hidden="true">'
+       . '<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>'
+       . '<path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.118 1.532 5.845L0 24l6.335-1.652A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.65-.508-5.17-1.395l-.37-.22-3.76.981 1.005-3.665-.243-.382A9.944 9.944 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>'
+       . '</svg>';
+?>
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+    <meta charset="UTF-8">
+    <meta name="color-scheme" content="light">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?= h($seoTitle) ?></title>
+    <meta name="description" content="<?= h($seoDesc) ?>">
+    <meta name="theme-color" content="#0052B7">
+    <?php
+    $ogTitle = $c('seo','og','og_title');
+    $ogDesc  = $c('seo','og','og_description');
+    $ogImg   = $c('seo','og','og_image');
+    ?>
+    <meta property="og:title" content="<?= h($ogTitle) ?>">
+    <meta property="og:description" content="<?= h($ogDesc) ?>">
+    <meta property="og:image" content="<?= h($ogImg) ?>">
+    <?php
+    $ogImgW = 1920; $ogImgH = 1080;
+    if ($ogImg && str_starts_with($ogImg, '/')) {
+        $imgPath = $_SERVER['DOCUMENT_ROOT'] . $ogImg;
+        if (file_exists($imgPath)) {
+            [$ogImgW, $ogImgH] = @getimagesize($imgPath) ?: [1920, 1080];
+        }
+    }
+    ?>
+    <meta property="og:image:width" content="<?= $ogImgW ?>">
+    <meta property="og:image:height" content="<?= $ogImgH ?>">
+    <meta property="og:image:alt" content="<?= h($cfgNombreC) ?> — Laboratorio Clínico <?= h($cfgCiudad) ?>">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://laesh.mx/">
+    <meta property="og:locale" content="es_MX">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<?= h($ogTitle) ?>">
+    <meta name="twitter:description" content="<?= h($ogDesc) ?>">
+    <meta name="twitter:image" content="<?= h($ogImg) ?>">
+    <link rel="canonical" href="https://laesh.mx/">
+    <link rel="alternate" hreflang="es-MX" href="https://laesh.mx/">
+    <link rel="icon" type="image/svg+xml" href="/laesh-web-assets-uipv1a/img/favicon.svg">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https://*.ggpht.com https://*.gstatic.com https://*.google.com https://*.googleusercontent.com https://*.tile.openstreetmap.org https://*.openstreetmap.org https://i.ytimg.com; frame-src https://maps.google.com https://www.google.com https://google.com https://*.google.com https://www.openstreetmap.org https://www.youtube.com https://youtube.com https://open.spotify.com https://player.vimeo.com https://www.dailymotion.com https://www.instagram.com https://www.facebook.com https://platform.twitter.com https://twitframe.com; script-src 'self' 'unsafe-inline' https://maps.google.com https://www.google.com; connect-src 'self' ws: wss: https://*.google.com https://*.openstreetmap.org;">
+    <script src="/laesh-web-assets-uipv1a/js/device-detect.js?v=<?= time() ?>"></script>
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/tokens.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/fonts.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/style.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/style-website.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/landing.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/targeting.css?v=<?= time() ?>">
+    <link rel="preload" href="/laesh-web-assets-uipv1a/fonts/cabin-latin-normal-w400.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/laesh-web-assets-uipv1a/fonts/outfit-latin-normal-w300.woff2" as="font" type="font/woff2" crossorigin>
+    <!-- LCP preload: precarga la imagen del hero activa antes de que el parser la descubra vía bg_style -->
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `calidad`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Sept 2026, 7:10 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `calidad`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Sept 2026, 7:10 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `carousel-card`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Sept 2026, 7:11 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `video`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Sept 2026, 7:11 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `video.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/**
+ * sections/video.php — Partial: Video Institucional / Promo
+ * Incluido dinámicamente desde website/index.php según el orden y visibilidad en CMS.
+ */
+$_videoHtml = $c('video-promo', 'contenido', 'cuerpo_html');
+if (trim($_videoHtml) === '') {
+    $_videoHtml = $c('video-promo', '', 'cuerpo_html');
+}
+if (trim($_videoHtml) === '') {
+    $_videoHtml = '<div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px; box-shadow:0 4px 16px rgba(0,0,0,0.12);">' .
+                  '<iframe style="position:absolute; top:0; left:0; width:100%; height:100%; border:0; border-radius:12px;" ' .
+                  'src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Video Institucional LAESH" ' .
+                  'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' .
+                  '</div>';
+}
+?>
+<!-- ══════════════════════════════════════ VIDEO PROMO ══ -->
+<section id="video" class="sec-pad-1-5 scroll-sm-top">
+    <div class="grid-single-history">
+        <div class="card-premium animate-on-scroll delay-100 info-col--stretch">
+            <div class="modal-scroll-body">
+                <div class="faq-p--sm2 ck5-output" style="padding:1rem 0;">
+                    <?= safeHtml($_videoHtml) ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<?php unset($_videoHtml); ?>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `modal-scroll-body`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Sept 2026, 7:11 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1829-1864)</summary>
+
+**Path:** `Unknown file`
+
+```
+    resize: none;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.grid-single-history .card-premium {
+    overflow: auto;
+    height: 43vh; /* Alto vertical inicial de 43vh en desktop */
+    min-height: 270px;
+}
+
+.grid-single-history .card-premium .modal-scroll-body {
+    max-height: none;
+    min-height: 150px;
+}
+
+/* Responsividad en móviles, iPads y tabletas (≤1024px): Autoajuste a 1 columna al 100% de ancho del body en las 4 fichas */
+@media (max-width: 1024px) {
+    #acerca-de {
+        padding-left: 1.25rem !important;
+        padding-right: 1.25rem !important;
+        box-sizing: border-box !important;
+        width: 100% !important;
+    }
+    #acerca-de .grid-acerca-cards,
+    .grid-acerca-cards {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin-bottom: 1rem !important;
+        box-sizing: border-box !important;
+    }
+    .grid-single-history {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `#video`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Sept 2026, 7:11 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `grid-single-history`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Sept 2026, 7:11 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1814-1884)</summary>
+
+**Path:** `Unknown file`
+
+```
+    max-width: 1380px;
+    margin: 0 auto 1.25rem auto;
+}
+
+.grid-single-history {
+    display: block;
+    width: 100%;
+    max-width: 1380px;
+    margin: 0.35rem auto 1rem auto;
+    box-sizing: border-box;
+}
+
+#acerca-de .card-premium,
+.grid-acerca-cards .card-premium,
+.grid-single-history .card-premium {
+    resize: none;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.grid-single-history .card-premium {
+    overflow: auto;
+    height: 43vh; /* Alto vertical inicial de 43vh en desktop */
+    min-height: 270px;
+}
+
+.grid-single-history .card-premium .modal-scroll-body {
+    max-height: none;
+    min-height: 150px;
+}
+
+/* Responsividad en móviles, iPads y tabletas (≤1024px): Autoajuste a 1 columna al 100% de ancho del body en las 4 fichas */
+@media (max-width: 1024px) {
+    #acerca-de {
+        padding-left: 1.25rem !important;
+        padding-right: 1.25rem !important;
+        box-sizing: border-box !important;
+        width: 100% !important;
+    }
+    #acerca-de .grid-acerca-cards,
+    .grid-acerca-cards {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin-bottom: 1rem !important;
+        box-sizing: border-box !important;
+    }
+    .grid-single-history {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 0 1rem 0 !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+    }
+    #acerca-de .card-premium,
+    .grid-acerca-cards .card-premium,
+    .grid-single-history .card-premium {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        min-height: 200px;
+        box-sizing: border-box !important;
+        border-radius: 16px !important;
+        margin: 0 !important;
+    }
+    .sec-pad-1-5 {
+        padding: 0.5rem 1.25rem !important;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `grid-single-history`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Sept 2026, 7:11 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Usage Locations**
+
+I've pinpointed the usage of `grid-single-history`. It's utilized within `sections/acerca-de.php` for "Ficha 1 - Nuestra Historia," and in `sections/video.php` for the promo video! Specifically, in the former, this "Ficha" is a scrollable text card, dynamically sized to `43vh`. This detailed mapping is crucial.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.061372795s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1624-1684)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+/* ==========================================================================
+   SECCIÓN CALIDAD — 3 Fichas Estáticas (Estructura Fiel Especialidades .carousel-card)
+   ========================================================================== */
+.calidad-cards-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    align-items: stretch;
+}
+
+@media (min-width: 640px) {
+    .calidad-cards-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .calidad-cards-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 2rem;
+    }
+}
+
+.calidad-cards-grid .carousel-card {
+    flex: none;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 0;
+    padding: 0 !important;
+    overflow: hidden !important;
+    border-radius: 12px !important;
+}.calidad-cards-grid .carousel-card img {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 750 / 580 !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-sizing: border-box !important;
+}
+
+
+
+.text-center-block {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* ── §CAT-INFO: Botón "+" + Tooltip de detalles por estudio ──────────────── */
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `calidad.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/**
+ * sections/calidad.php — Partial: Calidad / Galería
+ * Incluido desde website/index.php; hereda su scope completo.
+ * Variables esperadas: $calH2, $calSub, $calidadCards
+ */
+?>
+        <!-- ══════════════════════════════════════════════ CALIDAD ══ -->
+        <section id="calidad" class="sec-pad-1-5 scroll-sm-top">
+            <div class="section-header animate-on-scroll">
+                <!-- h2 y subtitulo desde web_contenidos (calidad/seccion) -->
+                <h2><?= h($calH2) ?></h2>
+                <p><?= h($calSub) ?></p>
+            </div>
+            <div class="specialties-carousel-viewport animate-on-scroll">
+                <div class="calidad-cards-grid">
+                    <?php foreach ($calidadCards as $qc): ?>
+                    <div class="carousel-card">
+                        <img src="<?= h($qc['img']) ?>" alt="<?= h($qc['alt']) ?>"
+                             width="800" height="580" loading="lazy" decoding="async">
+                        <div class="carousel-card__body ck5-output">
+                            <h3><?= h($qc['titulo']) ?></h3>
+                            <?php if ($qc['desc']): ?><p><?= h($qc['desc']) ?></p><?php endif; ?>
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </section>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `especialidades.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/**
+ * sections/especialidades.php — Partial: Estudios / Catálogo
+ * Incluido desde website/index.php; hereda su scope completo.
+ * Variables esperadas: $catalogH2, $catalogSub, $carouselCards, $catalogNota, $cg, GRUPO_SVGS
+ */
+?>
+        <!-- ═══════════════════════════════════════════════ ESTUDIOS ══ -->
+        <section id="especialidades" class="sec-pad-1-5 scroll-sm-top">
+            <div class="section-header animate-on-scroll">
+                <!-- h2 y subtitulo desde web_contenidos (especialidades/seccion) -->
+                <h2><?= h($catalogH2) ?></h2>
+                <p><?= h($catalogSub) ?></p>
+            </div>
+
+            <!-- Carrusel de áreas fotográficas — imágenes fijas del laboratorio (R15.1) -->
+            <div class="map-bar">
+                <button type="button" class="carousel-arrow-btn carousel-arrow-btn--left"
+                        id="btn-carousel-prev" aria-label="Anterior">
+                    <img src="/laesh-web-assets-uipv1a/icons/chevron-left.svg" alt="" class="icon-24" loading="lazy" decoding="async">
+                </button>
+                <div class="specialties-carousel-viewport">
+                    <div id="specialties-track" class="specialties-carousel-track">
+                        <?php $ccIdx = 0; foreach ($carouselCards as $cc): $ccIdx++; ?>
+                        <div class="carousel-card">
+                            <img src="<?= h($cc['img']) ?>" alt="Área de Laboratorio LAESH"
+                                 width="800" height="580"
+                                 loading="<?= $ccIdx <= 2 ? 'eager' : 'lazy' ?>"
+                                 decoding="<?= $ccIdx <= 2 ? 'sync' : 'async' ?>">
+                            <div class="carousel-card__body ck5-output">
+                                <?= safeHtml($cc['texto']) ?>
+                            </div>
+                        </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+                <button type="button" class="carousel-arrow-btn carousel-arrow-btn--right"
+                        id="btn-carousel-next" aria-label="Siguiente">
+                    <img src="/laesh-web-assets-uipv1a/icons/chevron-right.svg" alt="" class="icon-24" loading="lazy" decoding="async">
+                </button>
+            </div>
+            <div class="carousel-progress-wrap">
+                <div id="carousel-progress" class="carousel-progress"
+                     role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
+                     aria-label="Progreso del carrusel de especialidades">
+                    <div id="carousel-progress-fill" class="carousel-progress-fill"></div>
+                </div>
+            </div>
+            <div id="specialties-dots" class="hero-dots specialties-dots"
+                 aria-label="Navegación de especialidades" role="region"></div>
+
+            <!-- ── Catálogo de Estudios — 4 abanicos desde web_contenidos.especialidades ── -->
+            <div class="section-catalog">
+                <!-- Nota al pie del catálogo — desde web_contenidos (especialidades/catalogo/nota_pie) -->
+                <p class="section-catalog__note"><?= h($catalogNota) ?></p>
+
+                <?php foreach ($cg as $gi => $grupo): ?>
+                <?php if (empty($grupo['fichas'])) continue; ?>
+                <div class="orden-acc">
+                    <button type="button"
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Inspecting Image Rules**
+
+I'm now diving into `landing.css` to thoroughly inspect the rules applied to `.carousel-card` and its images. Specifically, I'm focusing on the cascade and inheritance that affects those image elements within the carousel structure as defined in `especialidades.php`. This should provide a clear picture of how styles are being applied and from where.
+
+
+**Analyzing Image Overrides**
+
+I've zeroed in on the image styles within `.carousel-card` and the specific overrides within `.calidad-cards-grid`. The `!important` declarations, particularly `aspect-ratio` and `height`, were taking precedence, and I've adjusted them for inheritance, matching the styles of  `.carousel-card img` better, specifically `height: 275px !important`, and `aspect-ratio: unset !important`. This is aimed at consistent image sizing now.
+
+
+**Adjusting Video Display**
+
+I'm now focusing on the video display within the `#video` section, particularly for desktop/laptop viewing. The current CSS with `overflow: auto` and `height: 43vh` creates a vertical scrollbar that needs fixing to show the video completely. I'm reviewing `sections/video.php` and its related CSS rules to eliminate this.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.783612780s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1649-1674)</summary>
+
+**Path:** `Unknown file`
+
+```
+}
+
+.calidad-cards-grid .carousel-card {
+    flex: none;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 0;
+    padding: 0 !important;
+    overflow: hidden !important;
+    border-radius: 12px !important;
+}.calidad-cards-grid .carousel-card img {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 750 / 580 !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-sizing: border-box !important;
+}
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1834-1849)</summary>
+
+**Path:** `Unknown file`
+
+```
+.grid-single-history .card-premium {
+    overflow: auto;
+    height: 43vh; /* Alto vertical inicial de 43vh en desktop */
+    min-height: 270px;
+}
+
+.grid-single-history .card-premium .modal-scroll-body {
+    max-height: none;
+    min-height: 150px;
+}
+
+/* Responsividad en móviles, iPads y tabletas (≤1024px): Autoajuste a 1 columna al 100% de ancho del body en las 4 fichas */
+@media (max-width: 1024px) {
+    #acerca-de {
+        padding-left: 1.25rem !important;
+        padding-right: 1.25rem !important;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Verifying Multi-Replace**
+
+I'm currently focused on employing `multi_replace_file_content` to modify `landing.css`. My initial replacement target is the "Calidad cards" section within the file. Next, I need to verify that this approach accurately targets and modifies the specific section.
+
+
+
+
+### Actions
+
+**Tool:** `multi_replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.057719752s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 5 Sept 2026, 7:11 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+del video: se podria a una medida fija, y que el video se vea completo sin scrolls ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `landing.css`
+**Language:** css
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Inspecting Video Embeds**
+
+I'm currently focused on how the video is embedded within `sections/video.php`, to understand the current behavior. The goal is to determine if a fixed dimension for the video could be implemented. This would help eliminate the need for scrolling to view the whole video. I'm taking a close look at the existing code.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.038576197s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1834-1859)</summary>
+
+**Path:** `Unknown file`
+
+```
+}
+
+.grid-single-history {
+    display: block;
+    width: 100%;
+    max-width: 1380px;
+    margin: 0.35rem auto 1rem auto;
+    box-sizing: border-box;
+}
+
+#acerca-de .card-premium,
+.grid-acerca-cards .card-premium,
+.grid-single-history .card-premium {
+    resize: none;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.grid-single-history .card-premium {
+    overflow: auto;
+    height: 43vh; /* Alto vertical inicial de 43vh en desktop */
+    min-height: 270px;
+}
+
+/* Ajuste para que el video en Desktop/Laptop aparezca completo sin scroll vertical */
+#video .grid-single-history .card-premium,
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1854-1874)</summary>
+
+**Path:** `Unknown file`
+
+```
+    height: 43vh; /* Alto vertical inicial de 43vh en desktop */
+    min-height: 270px;
+}
+
+/* Ajuste para que el video en Desktop/Laptop aparezca completo sin scroll vertical */
+#video .grid-single-history .card-premium,
+#video .card-premium {
+    height: auto !important;
+    max-height: none !important;
+    min-height: unset !important;
+    overflow: visible !important;
+}
+
+.grid-single-history .card-premium .modal-scroll-body {
+    max-height: none;
+    min-height: 150px;
+}
+
+#video .modal-scroll-body {
+    max-height: none !important;
+    overflow: visible !important;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 5 Sept 2026, 7:18 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+Para desktop/laptop incrementa a un 20% a la largo horizontal y 10% a lo alto
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `landing.css`
+**Language:** css
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Calculating Width Adjustments**
+
+Okay, I've crunched the numbers on the width adjustment. My initial calculation yielded a new width of 1020px based on a 20% increase to the existing 850px `max-width`. This seems straightforward, now I need to process the height adjustment.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.001222802s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1854-1879)</summary>
+
+**Path:** `Unknown file`
+
+```
+    height: 43vh; /* Alto vertical inicial de 43vh en desktop */
+    min-height: 270px;
+}
+
+/* Medida fija centrada para el contenedor del video en Desktop/Laptop (sin scroll vertical) */
+#video .grid-single-history {
+    max-width: 850px !important;
+    margin: 0.35rem auto 1rem auto !important;
+}
+
+#video .grid-single-history .card-premium,
+#video .card-premium {
+    height: auto !important;
+    max-height: none !important;
+    min-height: unset !important;
+    overflow: hidden !important;
+}
+
+.grid-single-history .card-premium .modal-scroll-body {
+    max-height: none;
+    min-height: 150px;
+}
+
+#video .modal-scroll-body {
+    max-height: none !important;
+    overflow: visible !important;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 5 Sept 2026, 7:20 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+. Largo Horizontal a un 15% mas
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `landing.css`
+**Language:** css
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1854-1879)</summary>
+
+**Path:** `Unknown file`
+
+```
+    height: 43vh; /* Alto vertical inicial de 43vh en desktop */
+    min-height: 270px;
+}
+
+/* Medida fija centrada para el contenedor del video en Desktop/Laptop (+20% horizontal = 1020px, +10% vertical) */
+#video .grid-single-history {
+    max-width: 1020px !important;
+    margin: 0.35rem auto 1rem auto !important;
+}
+
+#video .grid-single-history .card-premium,
+#video .card-premium {
+    height: auto !important;
+    max-height: none !important;
+    min-height: unset !important;
+    overflow: hidden !important;
+    padding: 0.75rem 1.25rem !important;
+}
+
+.grid-single-history .card-premium .modal-scroll-body {
+    max-height: none;
+    min-height: 150px;
+}
+
+#video .modal-scroll-body {
+    max-height: none !important;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 5 Sept 2026, 7:21 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+con las 3 imagenes de calidad, necesito se muestre con el mismo aspecto que las 3 primeras imagenes de Estudios de rutina y especialidades , pues las actuales de Calidad, fichas/imagenes no estan proporcionales en lo horizontal 
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `landing.css`
+**Language:** css
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `specialties-carousel-track`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Sept 2026, 7:23 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L359-389)</summary>
+
+**Path:** `Unknown file`
+
+```
+        }
+
+        /* ── Carrusel especialidades ── */
+
+/* ── §4 CARRUSELES ──────────────────────────────────────────────────────────── */
+
+        .specialties-carousel-viewport { overflow: hidden; width: 100%; position: relative; padding: 0 1.5rem; }
+        .specialties-carousel-track {
+            display: flex; gap: 2rem; overflow-x: auto;
+            scroll-behavior: smooth; scrollbar-width: none; padding: 1rem 0;
+            scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+        }
+        .specialties-carousel-track::-webkit-scrollbar { display: none; }
+        .carousel-card {
+            flex: 0 0 calc((100% - 4rem) / 3);
+            display: flex; flex-direction: column; box-sizing: border-box;
+            scroll-snap-align: start; scroll-snap-stop: always;
+            background: #fff; border-radius: 12px; border: 1px solid var(--border);
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease; margin-bottom: 2px;
+        }@media (hover: hover) and (pointer: fine) {
+    .carousel-card:hover {
+        transform: translateY(-4px); box-shadow: 0 12px 20px rgba(0,0,0,0.08); border-color: var(--primary-green);
+    }
+}
+        .carousel-arrow-btn {
+            background: rgba(255,255,255,0.9); border: 1px solid var(--border);
+            border-radius: 50%; width: 44px; height: 44px;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            transition: all 0.2s ease; z-index: 10;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Examining Code Structure**
+
+I'm now diving into the code, specifically `especialidades.php`. I've located the map-bar div and I'm looking closely at the carousel implementation. I see a button, the viewport, and the track div within the carousel. I'm focusing on how these components interact to manage the display of carousel cards.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `map-bar`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.048637942s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Sept 2026, 7:23 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Map-Bar Structure**
+
+I'm currently focused on the structural layout of the `.map-bar` element within `landing.css`. Specifically, line 599 shows a relative positioning, full width, and flexbox display. I'm taking note of the `align-items: center` property, and how it impacts child elements, such as the left and right arrow buttons. This is fundamental to understanding overall behavior.
+
+
+**Verifying Width Discrepancy**
+
+I've zeroed in on the width difference between the "Calidad" and "Especialidades" card layouts. The core issue appears to be the presence of arrow buttons in "Especialidades," constricting the viewport width of the carousel. The absence of these buttons in "Calidad" allowed the cards to stretch wider. I'm now exploring methods to equalize the widths, such as applying identical padding or wrapping the "Calidad" grid in a constrained container.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `carousel-arrow-btn`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.640434147s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Sept 2026, 7:24 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L649-669)</summary>
+
+**Path:** `Unknown file`
+
+```
+.info-row         { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 1.25rem; }
+.info-col         { padding: 1rem; display: flex; flex-direction: column;
+                    justify-content: flex-start; align-self: start; }
+.info-col--stretch{ padding: 1rem; display: flex; flex-direction: column;
+                    justify-content: flex-start; align-items: stretch; }
+.txt-pgd-sub      { color: var(--primary); margin-bottom: 0.6rem; font-size: 1rem; }
+.txt-primary-c    { color: var(--primary); }
+.fb-bg            { background-color: #1877F2; box-shadow: 0 8px 24px rgba(24,119,242,0.4); }
+.pt-xs            { padding-top: 0.35rem; padding-bottom: 0.35rem; }
+
+/* ── P-LAESH-01 Phase3 — index.html final cleanup ── */
+.carousel-arrow-btn--left  { position: absolute; left: -10px; }
+.carousel-arrow-btn--right { position: absolute; right: -10px; }
+.wa-contact-btn {
+    display: inline-flex;       /* inline-flex: se dimensiona al contenido, no al padre */
+    align-items: center;
+    gap: 8px;
+    background: var(--primary-green);
+    color: #fff;
+    font-size: 0.88rem;
+    font-weight: 600;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Carousel Rendering**
+
+I'm currently looking into how the `.carousel-card` class is rendered within the Especialidades track. I've located the relevant code in `sections/especialidades.php`, specifically the `specialties-carousel-viewport` and `specialties-carousel-track` divs, which are the containers.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `especialidades`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.087619089s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Sept 2026, 7:24 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1934-1966)</summary>
+
+**Path:** `Unknown file`
+
+```
+#acerca-de {
+    padding-bottom: 0.25rem;
+}
+
+#especialidades {
+    padding-top: 0.25rem;
+}
+
+#especialidades .section-header {
+    margin-top: 0.25rem;
+}
+
+/* Fix for CKEditor media embeds covering their own resize handles.
+   Nota: inline style="resize:both" tiene prioridad máxima; !important requerido aquí (no-R8 excepción: inline-style override) */
+.ck5-output div[style*="resize: both"] {
+    box-sizing: border-box !important;
+    padding: 0 16px 16px 0 !important;
+    background-color: #f8fafc;
+}
+
+/* Fix C4 — Móvil (≤767px): transición animate-on-scroll más rápida.
+   Desktop usa 1s (efecto premium en pantalla grande + CPU rápida).
+   Móvil: 0.45s + delays comprimidos — percepción de respuesta inmediata
+   sin sacrificar el efecto visual. DRY: solo se sobreescribe la transición. */
+@media (max-width: 767px) {
+    .animate-on-scroll {
+        transition: opacity 0.45s ease-out, transform 0.45s ease-out;
+    }
+    .delay-100 { transition-delay: 0.05s; }
+    .delay-200 { transition-delay: 0.1s;  }
+    .delay-300 { transition-delay: 0.15s; }
+}
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `#calidad`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Sept 2026, 7:24 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `sec-pad-1-5`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Sept 2026, 7:24 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `max-width`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 5 Sept 2026, 7:24 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing CSS Widths**
+
+I've been examining the CSS files, specifically `landing.css`. I've noticed a media query on line 1106 adjusting the `specialties-carousel-viewport` to a `max-width` of 1850px for larger screens. I'm also cross-referencing this with `max-width` declarations on lines 694 and 761 to see how these widths are intended to interact and cascade within the layout.
+
+
+**Comparing Layouts Now**
+
+I'm now comparing the layouts of the "Calidad" and "Especialidades" sections. I've noted the wrapper differences: the "Especialidades" carousel is within a `.map-bar`, which has padding that affects viewport width. I am now exploring how adjusting the `.calidad-cards-grid`'s layout (using flexbox or matching max-widths) might replicate the consistent image aspect ratio seen in "Especialidades", resolving the horizontal disproportions.
+
+
+**Confirming Structure Parity**
+
+I've just confirmed the critical structural alignment. The CSS for `.calidad-cards-grid` perfectly replicates the flex layout of `.specialties-carousel-track`. Crucially, by wrapping the Calidad cards in a `.map-bar` and ensuring the `.specialties-carousel-viewport` is structured identically to "Especialidades," the card containers will be identical. The flexbox setup, combined with the padding of `.specialties-carousel-viewport`, now achieves consistent presentation.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.557837784s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 5 Sept 2026, 7:24 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1624-1689)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+/* ==========================================================================
+   SECCIÓN CALIDAD — 3 Fichas Estáticas (Estructura Fiel Especialidades .carousel-card)
+   ========================================================================== */
+.calidad-cards-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    align-items: stretch;
+}
+
+@media (min-width: 640px) {
+    .calidad-cards-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .calidad-cards-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 2rem;
+    }
+}
+
+.calidad-cards-grid .carousel-card {
+    flex: none;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 0;
+    padding: 0 !important;
+    overflow: hidden !important;
+    border-radius: 12px !important;
+}.calidad-cards-grid .carousel-card img {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+    height: 275px !important;
+    aspect-ratio: unset !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 12px 12px 0 0 !important;
+    box-sizing: border-box !important;
+}
+
+@media (min-width: 1920px) {
+    .calidad-cards-grid .carousel-card img {
+        height: 285px !important;
+    }
+}
+
+@media (max-width: 1024px) {
+    .calidad-cards-grid .carousel-card img {
+        height: 240px !important;
+    }
+}
+
+@media (max-width: 640px) {
+    .calidad-cards-grid .carousel-card img {
+        height: 230px !important;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Updating CSS Properties**
+
+Okay, I'm currently focused on editing the `landing.css` file within the `laesh-web-assets-uipv1a` directory. Specifically, I'm using `replace_file_content` to adjust some CSS properties within the `.calidad-cards-grid` selector. I have made a few updates to the margins and padding. The goal is to refine the layout.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.043518774s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 5 Sept 2026, 7:24 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
 - **Model:** Gemini 3.6 Flash (Medium)
 </details>
 
