@@ -7,9 +7,9 @@
 | **Trajectory ID** | `795787cc-9cb7-4094-9547-9842a03a598c` |
 | **Cascade ID** | `864d8d56-d2a8-408b-84c8-b606be90b60f` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 313 |
+| **Total Steps** | 520 |
 | **Started** | 6 Sept 2026, 1:27 pm |
-| **Completed** | 6 Sept 2026, 2:39 pm |
+| **Completed** | 6 Sept 2026, 5:10 pm |
 
 ---
 
@@ -4944,6 +4944,3063 @@ I'm now zeroing in on missing data within Schema.org. I've uncovered a crucial o
 <summary>Metadata</summary>
 
 - **Thinking Duration:** 2.256753051s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+. SI, realiza las 4 con precision ultra quirurgica. 
+. Tambien revisa corrige que la imagen de Croquis de Ubicación (Imagen),  se lea de la ruta de donde se sube las imagenes cms_upload_dir , creo actualmente 01mapa-laesh.webp se lee de img, analiza informa me antes de correguir este punto.
+
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `gestion_web.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1374-1419)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+                            <label for="file-croquis" class="btn btn-secondary">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                                Cambiar Imagen
+                            </label>
+
+                            <input type="file" accept="image/webp"
+                                   id="file-croquis" class="d-none"
+                                   data-upload-slot="ubicacion-croquis"
+                                   data-preview-id="prev-croquis"
+                                   data-target-input="url-img-croquis">
+                        </div>
+                        <input type="url" id="url-img-croquis"
+                               name="croquis__imagen_url"
+                               value="<?= h($croquisImgUrl) ?>"
+                               placeholder="/laesh-web-assets-uipv1a/cms/ubicacion-croquis-....webp"
+                               class="cms-img-url-input" data-no-limit>
+                        <?php $croquisBasename = basename($croquisImgUrl); ?>
+                        <span id="lbl-img-croquis" class="cms-img-filename-label"><?= h($croquisBasename) ?></span>
+                    </div>
+                </div>
+            </div>
+            </div><!-- /grid-2col mapa+croquis -->
+
+            <!-- Fila 4: Atención, Redes Sociales y Chat (Última Ficha) -->
+            <hr class="cms-section-sep">
+            <div class="editor-card mb-4">
+                <div class="editor-card-header">
+                    <div class="card-title">Atención, Redes Sociales y Chat vía WhatsApp / Facebook</div>
+                </div>
+                <div class="editor-card-body">
+                    <div class="field-row">
+                        <div class="field-group">
+                            <label>URL Directa de WhatsApp <small class="txt-muted">(https://wa.me/52XXXXXXXXXX)</small></label>
+                            <input type="url" name="_cfg_whatsapp_url"
+                                   value="<?= htmlspecialchars($config['whatsapp_url'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                                   placeholder="https://wa.me/529531190074">
+                            <small class="cms-help-text">URL del chat en WhatsApp. Se utiliza en el botón flotante (pantalla inferior derecha) y en el contacto de Ubicación.</small>
+                        </div>
+                        <div class="field-group">
+                            <label>Número WhatsApp para Mostrar <small class="txt-muted">(ej. 953 119 0074)</small></label>
+                            <input type="text" name="_cfg_whatsapp_numero"
+                                   value="<?= htmlspecialchars($config['whatsapp_numero'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
+                            <small class="cms-help-text">Número de teléfono en formato legible con espacios para mostrar en la tarjeta de contacto.</small>
+                        </div>
+                    </div>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1349-1374)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+            <!-- Croquis de Ubicación (Imagen) -->
+            <div class="editor-card">
+                <div class="editor-card-header">
+                    <div class="card-title">Croquis de Ubicación (Imagen)</div>
+                </div>
+                <div class="editor-card-body">
+                    <div class="field-group">
+                        <label>Imagen del Croquis</label>
+                        <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px;">
+                            📐 <strong>Codec:</strong> WebP únicamente &nbsp;·&nbsp;
+                            <strong>Quality:</strong> 85 &nbsp;·&nbsp;
+                            <strong>Effort:</strong> 6 &nbsp;·&nbsp;
+                            <strong>Ancho:</strong> 1 136–1 186 px &nbsp;·&nbsp;
+                            <strong>Alto:</strong> proporcional (auto) — 615–645 px sugerido (ratio ~1.85:1) &nbsp;·&nbsp;
+                            <strong>Orientación Horizontal</strong> &nbsp;·&nbsp;
+                            <strong>Peso:</strong> Máximo 150 KB, Óptimo 60 KB
+                        </p>
+                        <?php $croquisImgUrl = cms($contenidos, 'ubicacion', 'croquis', 'imagen_url', '/laesh-web-assets-uipv1a/img/01mapa-laesh.webp'); ?>
+                        <?php if (empty($croquisImgUrl)) $croquisImgUrl = '/laesh-web-assets-uipv1a/img/01mapa-laesh.webp'; ?>
+                        <div class="image-upload-box">
+                            <img id="prev-croquis"
+                                 src="<?= h($croquisImgUrl) ?>"
+                                 alt="Croquis" class="img-preview-croquis"
+                                 onerror="this.onerror=null;this.src='/laesh-web-assets-uipv1a/img/01mapa-laesh.webp';">
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ubicacion.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L79-114)</summary>
+
+**Path:** `Unknown file`
+
+```
+                        <button type="button" id="btn-map-static" class="map-tab-btn active">
+                            <img src="/laesh-web-assets-uipv1a/icons/eye.svg" alt="" loading="lazy" decoding="async">
+                            Croquis
+                        </button>
+                        <span class="map-sep">|</span>
+                        <button type="button" id="btn-map-interactive" class="map-tab-btn">
+                            <img src="/laesh-web-assets-uipv1a/icons/map-pin.svg" alt="" loading="lazy" decoding="async">
+                            Mapa Interactivo
+                        </button>
+                    </div>
+                    <div id="map-static" class="map-static-wrap">
+                        <div class="map-zoom-link">
+                            <?php $croquisImg = $c('ubicacion','croquis','imagen_url','/laesh-web-assets-uipv1a/img/01mapa-laesh.webp'); ?>
+                            <?php if (empty($croquisImg)) $croquisImg = '/laesh-web-assets-uipv1a/img/01mapa-laesh.webp'; ?>
+                            <img src="<?= h($croquisImg) ?>"
+                                 alt="Croquis de Ubicación <?= h($cfgNombreC) ?>"
+                                 class="map-zoom-img" width="1136" height="615"
+                                 loading="lazy" decoding="async"
+                                 onerror="this.onerror=null;this.src='/laesh-web-assets-uipv1a/img/01mapa-laesh.webp';">
+                        </div>
+                    </div>
+                    <div id="map-interactive" class="d-none map-grow">
+                        <iframe data-src="<?= h($mapsEmbed) ?>"
+                                src="" width="100%" height="100%"
+                                frameborder="0" scrolling="no" class="map-iframe" allowfullscreen=""
+                                title="Mapa de ubicación <?= h($cfgNombreC) ?> — <?= h($cfgDir) ?>">
+                        </iframe>
+                        <noscript>
+                            <p class="noscript-msg">
+                                <a href="<?= h($cfgMapsUrl) ?>"
+                                   target="_blank" rel="noopener noreferrer" class="resp-name">
+                                    Ver ubicación en Google Maps ↗
+                                </a>
+                            </p>
+                        </noscript>
+                    </div>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing the Croquis**
+
+I'm currently focused on the "Croquis de Ubicación" problem. I've pinpointed its origin to `gestion_web.php` (line 1368) and `website/sections/ubicacion.php` (line 92), specifically around the `$croquisImg` variable assignment. I need to understand how this variable is being populated and if the process is correct in either instance.
+
+
+**Investigating the Croquis**
+
+I've traced the croquis image behavior. The system defaults to a static image, but when the user uploads a new image through the CMS, `cms-upload.js` handles the upload and updates the database, saving the new image path. The issue seems to stem from cases where the user *hasn't* uploaded an image, in which case the static image path should be used, but something seems off in that process, which I need to continue to follow.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `cms-upload.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.551194457s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L92-104)</summary>
+
+**Path:** `Unknown file`
+
+```
+                //   calidad-gallery{1…3}  → Galería de Calidad
+                //   (default)             → Imagen CMS genérica
+                function slotRules(s) {
+                    if (/^hero-/.test(s))              return { maxKb: 150, minW: 1280, maxW: 1920,                              landscape: true, label: 'Banner Hero',             hint: 'WebP · Quality 72–80 · Effort 6 · 1 280–1 920 px ancho · Orientación Horizontal · alto proporcional · máx. 150 KB, óptimo 60 KB' };
+                    if (/^carousel-/.test(s))          return { maxKb: 150, exactW: 800, exactH: 580,                                        label: 'Carrusel Especialidades', hint: 'WebP · Quality 75 · Effort 6 · exacto 800×580 px · máx. 150 KB, óptimo 60 KB' };
+                    if (/^ubicacion-croquis$/.test(s)) return { maxKb: 150, minW: 1136, maxW: 1186, minH: 615, maxH: 645,                  label: 'Croquis de Ubicación',    hint: 'WebP · Quality 85 · Effort 6 · 1 136–1 186 × 615–645 px · máx. 150 KB, óptimo 60 KB' };
+                    if (/^promo-/.test(s))             return { maxKb: 150, exactW: 900, exactH: 486,                                       label: 'Card de Promociones',     hint: 'WebP · Quality 72 · Effort 6 · exacto 900×486 px · ratio 13:7 · máx. 150 KB, óptimo 60 KB' };
+                    if (/^calidad-/.test(s))           return { maxKb: 150, exactW: 800, exactH: 580,                                       label: 'Galería de Calidad',      hint: 'WebP · Quality 75 · Effort 6 · exacto 800×580 px · máx. 150 KB, óptimo 60 KB' };
+                    return                                    { maxKb: 150, minW: 800,                                                        label: 'Imagen CMS',              hint: 'WebP · mín. 800 px ancho · máx. 150 KB, óptimo 60 KB' };
+                }
+                const rules = slotRules(slot);
+
+                // ── Validación de tamaño ─────────────────────────────────────────────
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `cms-upload.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L74-87)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+                // ── Validación de formato — solo WebP para todos los slots ────────────
+                if (file.type !== 'image/webp') {
+                    showToast(
+                        `Formato no permitido (${file.type || 'desconocido'}). Solo se acepta <strong>WebP</strong>.<br>` +
+                        'Usa Squoosh → Format: WebP antes de subir.',
+                        true
+                    );
+                    this.value = '';
+                    return;
+                }
+
+                // ── Reglas por slot (alineadas con Guía CMS §5.1–§5.6) ──────────────
+                // Slots reales (data-upload-slot en gestion_web.php):
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 3:06 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1576-1599)</summary>
+
+**Path:** `Unknown file`
+
+```
+            </div><!-- /grid-2col fila 1 -->
+
+            <!-- Fila 2: Schema.org Configuración + Schema.org SSOT -->
+            <hr class="cms-section-sep">
+            <div class="grid-2col mb-4">
+            <!-- Schema.org Editor -->
+            <div class="editor-card">
+                <div class="editor-card-header">
+                    <div class="card-title">Datos Estructurados Schema.org (JSON-LD)</div>
+                </div>
+                <div class="editor-card-body">
+                    <div class="field-group">
+                        <label>Nombre del Negocio</label>
+                        <input type="text" name="schema__schema_name"
+                               value="<?= cms($contenidos, 'seo', 'schema', 'schema_name') ?>">
+                    </div>
+                    <div class="field-group">
+                        <label>Tipo de Negocio <small class="txt-muted">(schema.org/@type)</small></label>
+                        <input type="text" name="schema__schema_type"
+                               value="<?= cms($contenidos, 'seo', 'schema', 'schema_type') ?>">
+                        <small class="cms-help-text">Valores comunes: MedicalLaboratory, MedicalOrganization, LocalBusiness.</small>
+                    </div>
+                </div>
+            </div>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1549-1575)</summary>
+
+**Path:** `Unknown file`
+
+```
+                    </div>
+                </div>
+            </div>
+
+            <!-- Open Graph -->
+            <div class="editor-card">
+                <div class="editor-card-header">
+                    <div class="card-title">Open Graph (Redes Sociales)</div>
+                </div>
+                <div class="editor-card-body">
+                    <div class="field-group">
+                        <label>OG Title</label>
+                        <input type="text" name="og__og_title"
+                               value="<?= cms($contenidos, 'seo', 'og', 'og_title') ?>">
+                    </div>
+                    <div class="field-group">
+                        <label>OG Description</label>
+                        <textarea name="og__og_description" rows="3"><?= cms($contenidos, 'seo', 'og', 'og_description') ?></textarea>
+                    </div>
+                    <div class="field-group">
+                        <label>OG Image URL <small class="txt-muted">(URL absoluta, 1200×630 px ideal)</small></label>
+                        <input type="url" name="og__og_image"
+                               value="<?= cms($contenidos, 'seo', 'og', 'og_image') ?>">
+                        <small class="cms-help-text">Imagen que se muestra al compartir en redes sociales. Usar URL absoluta.</small>
+                    </div>
+                </div>
+            </div>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Upgrading OG Image**
+
+I'm working on upgrading lines 1569-1574 in `gestion_web.php`. The goal is to replace the current `og_image` input with a full CMS upload box, complete with a preview feature. This will give users a much better experience when managing social media image uploads.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.125095130s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 3:06 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L489-599)</summary>
+
+**Path:** `Unknown file`
+
+```
+// Aviso de Privacidad — Contenido HTML consolidado desde el RTE del CMS
+$avisoHtml = $c('aviso-privacidad', 'contenido', 'cuerpo_html');
+
+// SEO (sin fallback)
+$schemaName  = h($c('seo', 'schema', 'schema_name'));
+$schemaType  = h($c('seo', 'schema', 'schema_type'));  // p.ej. MedicalOrganization
+$seoTitle    = $c('seo', 'meta', 'title');
+$seoDesc     = $c('seo', 'meta', 'description');
+
+// WhatsApp SVG reutilizado en cards de promo
+$waSvg = '<svg width="15" height="15" fill="#25D366" viewBox="0 0 24 24" aria-hidden="true">'
+       . '<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>'
+       . '<path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.118 1.532 5.845L0 24l6.335-1.652A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.65-.508-5.17-1.395l-.37-.22-3.76.981 1.005-3.665-.243-.382A9.944 9.944 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>'
+       . '</svg>';
+?>
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+    <meta charset="UTF-8">
+    <meta name="color-scheme" content="light">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?= h($seoTitle) ?></title>
+    <meta name="description" content="<?= h($seoDesc) ?>">
+    <meta name="theme-color" content="#0052B7">
+    <?php
+    $ogTitle = $c('seo','og','og_title');
+    $ogDesc  = $c('seo','og','og_description');
+    $ogImg   = $c('seo','og','og_image');
+    ?>
+    <meta property="og:title" content="<?= h($ogTitle) ?>">
+    <meta property="og:description" content="<?= h($ogDesc) ?>">
+    <meta property="og:image" content="<?= h($ogImg) ?>">
+    <?php
+    $ogImgW = 1920; $ogImgH = 1080;
+    if ($ogImg && str_starts_with($ogImg, '/')) {
+        $imgPath = $_SERVER['DOCUMENT_ROOT'] . $ogImg;
+        if (file_exists($imgPath)) {
+            [$ogImgW, $ogImgH] = @getimagesize($imgPath) ?: [1920, 1080];
+        }
+    }
+    ?>
+    <meta property="og:image:width" content="<?= $ogImgW ?>">
+    <meta property="og:image:height" content="<?= $ogImgH ?>">
+    <meta property="og:image:alt" content="<?= h($cfgNombreC) ?> — Laboratorio Clínico <?= h($cfgCiudad) ?>">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://laesh.mx/">
+    <meta property="og:locale" content="es_MX">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<?= h($ogTitle) ?>">
+    <meta name="twitter:description" content="<?= h($ogDesc) ?>">
+    <meta name="twitter:image" content="<?= h($ogImg) ?>">
+    <link rel="canonical" href="https://laesh.mx/">
+    <link rel="alternate" hreflang="es-MX" href="https://laesh.mx/">
+    <link rel="icon" type="image/svg+xml" href="/laesh-web-assets-uipv1a/img/favicon.svg">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https://*.ggpht.com https://*.gstatic.com https://*.google.com https://*.googleusercontent.com https://*.tile.openstreetmap.org https://*.openstreetmap.org https://i.ytimg.com; frame-src https://maps.google.com https://www.google.com https://google.com https://*.google.com https://www.openstreetmap.org https://www.youtube.com https://youtube.com https://open.spotify.com https://player.vimeo.com https://www.dailymotion.com https://www.instagram.com https://www.facebook.com https://platform.twitter.com https://twitframe.com; script-src 'self' 'unsafe-inline' https://maps.google.com https://www.google.com; connect-src 'self' ws: wss: https://*.google.com https://*.openstreetmap.org;">
+    <script src="/laesh-web-assets-uipv1a/js/device-detect.js?v=<?= time() ?>"></script>
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/tokens.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/fonts.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/style.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/style-website.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/landing.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/targeting.css?v=<?= time() ?>">
+    <link rel="preload" href="/laesh-web-assets-uipv1a/fonts/cabin-latin-normal-w400.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/laesh-web-assets-uipv1a/fonts/outfit-latin-normal-w300.woff2" as="font" type="font/woff2" crossorigin>
+    <!-- LCP preload: precarga la imagen del hero activa antes de que el parser la descubra vía bg_style -->
+    <?php
+    $preloadImgUrl = $slides[1]['imagen_url'] ?? '';
+    if ($heroSliderMode === 'decoupled') {
+        $preloadImgUrl = $fixedUrl ?: ($fallback ?? '');
+    }
+    if ($preloadImgUrl):
+    ?>
+    <link rel="preload" href="<?= h($preloadImgUrl) ?>" as="image" fetchpriority="high">
+    <?php endif; ?>
+
+    <!-- W8: Schema.org — datos dinámicos desde configuraciones + web_contenidos -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "<?= $schemaType ?: 'MedicalOrganization' ?>",
+      "name": "<?= $schemaName ?>",
+      "@id": "https://laesh.mx",
+      "url": "https://laesh.mx",
+      "logo": "https://laesh.mx/laesh-web-assets-uipv1a/img/logo-laesh.webp",
+      "image": "https://laesh.mx/laesh-web-assets-uipv1a/img/logo-laesh.webp",
+      "telephone": "+52<?= h(waNum($cfgTel)) ?>",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "<?= h($cfgDirCalle ?: 'Azucenas #8, Fracc. Jardines del Sur') ?>",
+        "addressLocality": "<?= h($cfgCiudad ?: 'Huajuapan de León') ?>",
+        "addressRegion": "<?= h($cfgEstado ?: 'Oaxaca') ?>",
+        "postalCode": "<?= h($cfgCP ?: '69000') ?>",
+        "addressCountry": "MX"
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+          "opens": "<?= h($cfgHrsOpen) ?>",
+          "closes": "<?= h($cfgHrsClose) ?>"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Sunday",
+          "opens": "<?= h($cfgDomOpen) ?>",
+          "closes": "<?= h($cfgDomClose) ?>"
+        }
+      ],
+      "description": "<?= h($seoDesc) ?>"
+    }
+    </script>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing SEO Schema**
+
+I'm currently focused on lines 493-535 within `website/index.php`. Specifically, I'm digging into how the script is managing SEO schema and metadata, particularly looking at the fallbacks for robustness. The goal is to understand the logic for the different SEO values as well as their associated default values, for a specific organization.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.032374965s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 3:07 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 3:07 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Confirming Operational Details**
+
+I've successfully validated the PHP syntax; no errors were found! Now, my focus shifts to synthesizing a comprehensive, professional report for the user. I'm starting by addressing the "Informe sobre el Croquis de Ubicación (Diagnóstico de Ruta)," focusing initially on confirming operational details.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.159146805s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+ya puedo usar todos los campos y datos de pestaña 11, para capturalos en google searh de laesh.mx ? , que faltaria, gaps ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `cms-upload.js`
+**Language:** javascript
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Verifying Data Flow**
+
+Okay, I'm now focused on verifying the data flow from "Pestaña 11" to Google Search, specifically aiming for Google Search Console and Rich Results. The initial query raises a key question: can we fully leverage all fields from "Pestaña 11" for capture on laesh.mx's Google Search implementation? I'm assessing any potential gaps to achieve complete data utilization and search integration.
+
+
+**Validating Google Integration**
+
+I've just finished verifying the data flow for essential metadata fields: meta title/description, Open Graph tags, and basic Schema.org business details. All values are being correctly captured from "Pestaña 11" through the CMS, saved in the database, and rendered accurately in the HTML `<head>`. The fallback options are in place. Moving to the address schema, I need to ensure that it is fully implemented and correctly structured in JSON-LD.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.085644216s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+. creo estos/agunos aparecen asi en la pestaña 11 metadata:  MedicalLaboratory, GeoCoordinates (GPS) y OpeningHoursSpecification. 
+.. Es correcto o deben traducirse al español ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `cms-upload.js`
+**Language:** javascript
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1579-1664)</summary>
+
+**Path:** `Unknown file`
+
+```
+                            <img id="prev-seo-og"
+                                 src="<?= h($ogImgUrl) ?>"
+                                 alt="Preview Open Graph" class="img-preview-sm"
+                                 onerror="this.src='/laesh-web-assets-uipv1a/img/recepcion.webp'">
+                            <label for="file-seo-og" class="btn btn-secondary btn-sm">
+                                Cambiar Imagen
+                            </label>
+                            <input type="file" accept="image/webp"
+                                   id="file-seo-og" class="d-none"
+                                   data-upload-slot="seo-og"
+                                   data-preview-id="prev-seo-og"
+                                   data-target-input="url-seo-og">
+                        </div>
+                        <input type="url" id="url-seo-og"
+                               name="og__og_image"
+                               value="<?= h($ogImgUrl) ?>"
+                               placeholder="/laesh-web-assets-uipv1a/cms/seo-og-....webp"
+                               class="cms-img-url-input" data-no-limit>
+                        <?php $ogBasename = basename($ogImgUrl); ?>
+                        <span id="lbl-img-seo-og" class="cms-img-filename-label"><?= h($ogBasename) ?></span>
+                    </div>
+                </div>
+            </div>
+            </div><!-- /grid-2col fila 1 -->
+
+            <!-- Fila 2: Schema.org Configuración + Schema.org SSOT -->
+            <hr class="cms-section-sep">
+            <div class="grid-2col mb-4">
+            <!-- Schema.org Editor -->
+            <div class="editor-card">
+                <div class="editor-card-header">
+                    <div class="card-title">Datos Estructurados Schema.org (JSON-LD)</div>
+                </div>
+                <div class="editor-card-body">
+                    <div class="field-group">
+                        <label>Nombre del Negocio</label>
+                        <input type="text" name="schema__schema_name"
+                               value="<?= cms($contenidos, 'seo', 'schema', 'schema_name') ?>">
+                    </div>
+                    <div class="field-group">
+                        <label>Tipo de Negocio <small class="txt-muted">(schema.org/@type)</small></label>
+                        <input type="text" name="schema__schema_type"
+                               value="<?= cms($contenidos, 'seo', 'schema', 'schema_type') ?>">
+                        <small class="cms-help-text">Valores comunes: MedicalLaboratory, MedicalOrganization, LocalBusiness.</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Schema.org SSOT + Horarios 24h JSON-LD -->
+            <div class="editor-card">
+                <div class="editor-card-header">
+                    <div class="card-title">Dirección y Horarios Schema.org (Google JSON-LD)</div>
+                </div>
+                <div class="editor-card-body">
+                    <p class="cms-p">🤖 <strong>Horarios estructurados en 24h (HH:MM)</strong> para Google Search y Maps (Schema.org JSON-LD). La dirección física se lee automáticamente desde la <strong>Pestaña 6 (Ubicación y Contacto)</strong>.</p>
+                    <div class="field-row mb-3">
+                        <div class="field-group">
+                            <label class="txt-muted">Calle / Colonia SSOT (Pestaña 6)</label>
+                            <input type="text" disabled value="<?= htmlspecialchars(!empty($config['direccion_calle']) ? $config['direccion_calle'] : 'Azucenas #8, Fracc. Jardines del Sur', ENT_QUOTES, 'UTF-8') ?>">
+                        </div>
+                        <div class="field-group">
+                            <label class="txt-muted">Ciudad SSOT (Pestaña 6)</label>
+                            <input type="text" disabled value="<?= htmlspecialchars(!empty($config['ciudad']) ? $config['ciudad'] : 'Huajuapan de León', ENT_QUOTES, 'UTF-8') ?>">
+                        </div>
+                        <div class="field-group">
+                            <label class="txt-muted">Estado SSOT (Pestaña 6)</label>
+                            <input type="text" disabled value="<?= htmlspecialchars(!empty($config['estado']) ? $config['estado'] : 'Oaxaca', ENT_QUOTES, 'UTF-8') ?>">
+                        </div>
+                        <div class="field-group">
+                            <label class="txt-muted">CP SSOT (Pestaña 6)</label>
+                            <input type="text" disabled value="<?= htmlspecialchars(!empty($config['cp']) ? $config['cp'] : '69000', ENT_QUOTES, 'UTF-8') ?>">
+                        </div>
+                    </div>
+                    <div class="field-row">
+                        <div class="field-group">
+                            <label>Apertura Lun–Sáb <small class="txt-muted">(HH:MM 24h)</small></label>
+                            <input type="text" name="_cfg_hrs_open"
+                                   value="<?= htmlspecialchars($config['hrs_open'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                                   maxlength="5" placeholder="07:00">
+                        </div>
+                        <div class="field-group">
+                            <label>Cierre Lun–Sáb <small class="txt-muted">(HH:MM 24h)</small></label>
+                            <input type="text" name="_cfg_hrs_close"
+                                   value="<?= htmlspecialchars($config['hrs_close'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                                   maxlength="5" placeholder="21:00">
+                        </div>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing the Inquiry**
+
+I'm digging into the user's question, trying to parse the Spanish and identify the specific metadata fields they're asking about: "MedicalLaboratory," "GeoCoordinates (GPS)," and "OpeningHoursSpecification." I'm determining if a translation into Spanish is warranted, and attempting to fully understand the context for these fields.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.044034532s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+te informo que solo en Tipo de Negocio, aparece el valor MedicalLaboratory. Donde pongo las otras : GeoCoordinates, OpeningHoursSpecification y PostalAddress; y si faltan otras donde las  pongo ?
+
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `cms-upload.js`
+**Language:** javascript
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+. Que en pestaña 6 / abajo de Croquis de Ubicación (Imagen), aparezca de solo lectura las Coordenadas GPS  para de ahi las tomes.
+. en que momento se toman todos los valores de pestaña 11 y algunos de las otras pestañas para ponerse como header ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `cms-upload.js`
+**Language:** javascript
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Implementing GPS Readout**
+
+I'm working on the GPS coordinate display for panel 6, positioning it beneath the location sketch image. The requirement is for the coordinates to be read-only, ensuring easy access for copying.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.462962580s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1399-1429)</summary>
+
+**Path:** `Unknown file`
+
+```
+            <hr class="cms-section-sep">
+            <div class="editor-card mb-4">
+                <div class="editor-card-header">
+                    <div class="card-title">Atención, Redes Sociales y Chat vía WhatsApp / Facebook</div>
+                </div>
+                <div class="editor-card-body">
+                    <div class="field-row">
+                        <div class="field-group">
+                            <label>URL Directa de WhatsApp <small class="txt-muted">(https://wa.me/52XXXXXXXXXX)</small></label>
+                            <input type="url" name="_cfg_whatsapp_url"
+                                   value="<?= htmlspecialchars($config['whatsapp_url'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                                   placeholder="https://wa.me/529531190074">
+                            <small class="cms-help-text">URL del chat en WhatsApp. Se utiliza en el botón flotante (pantalla inferior derecha) y en el contacto de Ubicación.</small>
+                        </div>
+                        <div class="field-group">
+                            <label>Número WhatsApp para Mostrar <small class="txt-muted">(ej. 953 119 0074)</small></label>
+                            <input type="text" name="_cfg_whatsapp_numero"
+                                   value="<?= htmlspecialchars($config['whatsapp_numero'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
+                            <small class="cms-help-text">Número de teléfono en formato legible con espacios para mostrar en la tarjeta de contacto.</small>
+                        </div>
+                    </div>
+                    <div class="field-row">
+                        <div class="field-group">
+                            <label>Mensaje para Consulta General <small class="txt-muted">(botón flotante y contacto)</small></label>
+                            <input type="text" name="_cfg_wa_texto_info"
+                                   value="<?= htmlspecialchars($config['wa_texto_info'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
+                            <small class="cms-help-text">Texto pre-escrito al abrir WhatsApp desde el botón flotante o la sección Ubicación. Ej: «Hola LAESH, necesito información».</small>
+                        </div>
+                        <div class="field-group">
+                            <label>Página de Facebook <small class="txt-muted">(URL completa)</small></label>
+                            <input type="url" name="_cfg_facebook_url"
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1379-1399)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+                            <input type="file" accept="image/webp"
+                                   id="file-croquis" class="d-none"
+                                   data-upload-slot="ubicacion-croquis"
+                                   data-preview-id="prev-croquis"
+                                   data-target-input="url-img-croquis">
+                        </div>
+                        <input type="url" id="url-img-croquis"
+                               name="croquis__imagen_url"
+                               value="<?= h($croquisImgUrl) ?>"
+                               placeholder="/laesh-web-assets-uipv1a/cms/ubicacion-croquis-....webp"
+                               class="cms-img-url-input" data-no-limit>
+                        <?php $croquisBasename = basename($croquisImgUrl); ?>
+                        <span id="lbl-img-croquis" class="cms-img-filename-label"><?= h($croquisBasename) ?></span>
+                    </div>
+                </div>
+            </div>
+            </div><!-- /grid-2col mapa+croquis -->
+
+            <!-- Fila 4: Atención, Redes Sociales y Chat (Última Ficha) -->
+            <hr class="cms-section-sep">
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L189-214)</summary>
+
+**Path:** `Unknown file`
+
+```
+$cfgTelDigit  = waNum($cfgTel);
+$cfgWA        = waNum($cfg('whatsapp_numero'));
+$cfgEmail     = $cfg('email_contacto');
+$cfgDirCalle  = $cfg('direccion_calle', 'Azucenas #8, Fracc. Jardines del Sur');
+$cfgCiudad    = $cfg('ciudad', 'Huajuapan de León');
+$cfgEstado    = $cfg('estado', 'Oaxaca');
+$cfgCP        = $cfg('cp', '69000');
+$cfgDirRaw    = $cfg('direccion');
+$cfgDir       = $cfgDirRaw ?: trim("{$cfgDirCalle}, {$cfgCiudad}, {$cfgEstado}" . ($cfgCP ? ". C.P. {$cfgCP}" : ""));
+$cfgHorSem    = $cfg('horario_semana');
+$cfgHorDom    = $cfg('horario_domingo');
+$cfgHrsOpen   = $cfg('hrs_open');
+$cfgHrsClose  = $cfg('hrs_close');
+$cfgDomOpen   = $cfg('dom_open');
+$cfgDomClose  = $cfg('dom_close');
+$cfgRespNom   = $cfg('responsable_nombre');
+$cfgRespProf  = $cfg('responsable_cedula_prof');
+$cfgRespEsp   = $cfg('responsable_cedula_esp');
+$cfgFB        = $cfg('facebook_url');
+$cfgMapsUrl   = $cfg('maps_url');  // URL directa Google Maps para noscript
+
+// WhatsApp URLs — textos desde configuraciones (sin fallback)
+$waBase        = "https://wa.me/52{$cfgWA}";
+$waTextoInfo   = $cfg('wa_texto_info');    // texto botón info / flotante / ubicación
+$waTextoAg     = $cfg('wa_texto_agendar'); // texto pre-llenado en cards de promo
+$waInfoUrl     = $waBase . '?text=' . rawurlencode($waTextoInfo);
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L569-594)</summary>
+
+**Path:** `Unknown file`
+
+```
+      "@type": "<?= $schemaType ?>",
+      "name": "<?= $schemaName ?>",
+      "@id": "https://laesh.mx",
+      "url": "https://laesh.mx",
+      "logo": "https://laesh.mx/laesh-web-assets-uipv1a/img/logo-laesh.webp",
+      "image": "https://laesh.mx/laesh-web-assets-uipv1a/img/logo-laesh.webp",
+      "telephone": "+52<?= h(waNum($cfgTel)) ?>",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "<?= h($cfgDirCalle ?: 'Azucenas #8, Fracc. Jardines del Sur') ?>",
+        "addressLocality": "<?= h($cfgCiudad ?: 'Huajuapan de León') ?>",
+        "addressRegion": "<?= h($cfgEstado ?: 'Oaxaca') ?>",
+        "postalCode": "<?= h($cfgCP ?: '69000') ?>",
+        "addressCountry": "MX"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 17.8028691,
+        "longitude": -97.7779575
+      },
+      "sameAs": [
+        "<?= h($cfgFB ?: 'https://www.facebook.com/LAESH.Huajuapan/') ?>"
+      ],
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 4:44 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L197-211)</summary>
+
+**Path:** `Unknown file`
+
+```
+$cfgDir       = $cfgDirRaw ?: trim("{$cfgDirCalle}, {$cfgCiudad}, {$cfgEstado}" . ($cfgCP ? ". C.P. {$cfgCP}" : ""));
+$cfgHorSem    = $cfg('horario_semana');
+$cfgHorDom    = $cfg('horario_domingo');
+$cfgHrsOpen   = $cfg('hrs_open');
+$cfgHrsClose  = $cfg('hrs_close');
+$cfgDomOpen   = $cfg('dom_open');
+$cfgDomClose  = $cfg('dom_close');
+$cfgRespNom   = $cfg('responsable_nombre');
+$cfgRespProf  = $cfg('responsable_cedula_prof');
+$cfgRespEsp   = $cfg('responsable_cedula_esp');
+$cfgFB        = $cfg('facebook_url');
+$cfgMapsUrl   = $cfg('maps_url');  // URL directa Google Maps para noscript
+
+// WhatsApp URLs — textos desde configuraciones (sin fallback)
+$waBase        = "https://wa.me/52{$cfgWA}";
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L579-594)</summary>
+
+**Path:** `Unknown file`
+
+```
+        "addressLocality": "<?= h($cfgCiudad ?: 'Huajuapan de León') ?>",
+        "addressRegion": "<?= h($cfgEstado ?: 'Oaxaca') ?>",
+        "postalCode": "<?= h($cfgCP ?: '69000') ?>",
+        "addressCountry": "MX"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 17.8028691,
+        "longitude": -97.7779575
+      },
+      "sameAs": [
+        "<?= h($cfgFB ?: 'https://www.facebook.com/LAESH.Huajuapan/') ?>"
+      ],
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `multi_replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 4:44 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 4:44 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Current Code State**
+
+I've confirmed there are no PHP syntax errors; the code checks out. My next task is to carefully structure the response. I'm focusing on clearly addressing both aspects of the user's request. Specifically, I've just incorporated a SSOT box into "Tab 6 (Location and Contact)".
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.000892809s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+Añade en una nueva sección de:
+/home/carlos/GitHub/caelitandem_home/portafolio-dev-2026/blocklabgd/v1.2/et/Especificacion_Tecnica.html
+la explcaciion de: Inyección Dinámica , En qué momento se toman los valores para ponerse en el Header, Consulta inicial, Consolidación Multi-pestaña, ...Entrega Única. 🔍 Solicitar la Re-indexación en Google (Google Search Console),  Herramienta de Verificación Opcional,eetc todo lo que me sirva para publicar en google search mapa, robot, etc. url, etc.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `gestion_web.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Especificacion_Tecnica.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Especificación Técnica y de Arquitectura — LAESH</title>
+<link href="styles.css" rel="stylesheet"/>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs'; mermaid.initialize({ startOnLoad: true, theme: 'default' });</script></head>
+<body>
+<!-- ═══════════════ PORTADA ═══════════════ -->
+<header class="cover">
+<h1>Especificación Técnica y de Arquitectura</h1>
+</header>
+<!-- ═══════════════ ÍNDICE ═══════════════ -->
+<nav class="toc">
+<h2>Índice de Contenidos</h2>
+<ol>
+<li><a href="#sec1">Resumen Ejecutivo Técnico</a></li>
+<li><a href="#sec2">Arquitectura del Sistema</a>
+<ol>
+<li><a href="#sec2-1">2.1. Alcance de Dispositivos por Rol</a></li>
+<li><a href="#sec2-2">2.2. Flujo de Datos End-to-End</a></li>
+<li><a href="#sec2-3">2.3. Flujos de Procesos Operativos</a></li>
+<li><a href="#sec2-4">2.4. Flujos de Navegación e Interfaz</a></li>
+<li><a href="#sec2-5">2.5. Estructura de Directorios</a></li>
+<li><a href="#sec2-3-1-b">2.3.1.2. Hero / Slider — Lineamientos Desktop y Laptop</a></li>
+<li><a href="#sec2-3-1-c">2.3.1.3. Hero / Slider — Lineamientos Móviles: Tabletas y Teléfonos</a></li>
+<li><a href="#sec2-3-1-d">2.3.1.4. Optimización de Carga Móvil — Sitio Web Público</a></li>
+</ol>
+</li>
+<li><a href="#sec3">Stack Tecnológico</a></li>
+<li><a href="Tecnica_Modelo_Datos.html">4. Modelo de Base de Datos</a>
+<ol>
+<li><a href="Tecnica_Modelo_Datos.html#sec4-er">4.1. Diagrama Entidad-Relación (ER)</a></li>
+<li><a href="Tecnica_Modelo_Datos.html#sec4-2">4.2. Diccionario de Datos</a></li>
+<li><a href="Tecnica_Modelo_Datos.html#sec4-3">4.3. Procedimientos Almacenados y Transacciones</a></li>
+<li><a href="Tecnica_Modelo_Datos.html#sec4-4">4.4. Configuración de Base de Datos</a></li>
+<li><a href="Tecnica_Modelo_Datos.html#sec4-5">4.5. Directiva Operativa de Consulta (Indexación y Rendimiento)</a></li>
+</ol>
+</li>
+<li><a href="#sec5">API Backend y Negocio</a></li>
+<li><a href="#sec6">Observabilidad y Trazabilidad (Logs)</a></li>
+<li><a href="#sec7">7. Catálogo de Reglas de Negocio Centrales</a></li>
+<li><a href="Tecnica_Seguridad_Integral.html">8. Seguridad Integral (Arquitectura Defensiva)</a></li>
+<li><a href="#sec10">Infraestructura y Despliegue</a></li>
+<li><a href="#sec12">Glosario Técnico</a></li>
+<li><a href="Control_Proyecto.html">Control de Proyecto (ToDos, Issues, Logros)</a></li>
+<li><a href="#sec15">Anexos</a></li>
+</ol>
+</nav>
+<!-- ═══════════════ 1. RESUMEN EJECUTIVO ═══════════════ -->
+<section id="sec1">
+<h2>1. Resumen Ejecutivo Técnico</h2>
+<ul>
+<li><strong>Proyecto 1: Sitio Web Corporativo (Público):</strong> Plataforma pública con panel de administración para editar banner, servicios y promociones. Optimizado para SEO y Google Ads para captación de pacientes.</li>
+<li><strong>Proyecto 2: Bloc Digital vía Internet (Privado):</strong> Ecosistema web privado para la automatización y rastreo de solicitudes de estudio de laboratorio. Conecta a médicos tratantes (orden digital) y recepción (gestión de atención y carga de resultados PDF) con notificaciones instantáneas bidireccionales en tiempo real.</li>
+</ul>
+<h3>1.1. Flujo Funcional Core (Estados de la Orden)</h3>
+<p>El sistema se rige por un flujo de estados estricto diseñado para el control total de los estudios de laboratorio:</p>
+<table><caption>Catálogo de Estados de Solicitudes</caption><thead><tr><th>Valor (Estado)</th><th>Descripción</th></tr></thead><tbody><tr><td><strong>Remitido</strong></td><td>Estado inicial cuando el Médico crea la orden digital en su portal.</td></tr><tr><td><strong>En Atención</strong></td><td>Transición manual cuando el paciente llega físicamente y el personal de Recepción lo localiza en su sistema mediante búsqueda predictiva HTMX.</td></tr><tr><td><strong>Resultados Listos</strong></td><td>Transición automática detonada al momento que Recepción sube el archivo PDF con los resultados clínicos.</td></tr><tr><td><strong>Cerrada</strong></td><td>Estado final asignado tras la entrega física al paciente o por auto-caducidad a los 30 días.</td></tr></tbody></table>
+<div class="pillars">
+<h4>Pilares Tecnológicos del Sistema</h4>
+<ul>
+<li><strong>Autenticación y Seguridad:</strong> Delight PHP Auth, control de sesiones RBAC y protección anti-resubmit.</li>
+<li><strong>Backend:</strong> Flight PHP (micro-framework), PDO/MariaDB 11, Swoole v6 para WebSockets en tiempo real.</li>
+<li><strong>Frontend — Arquitectura CSS:</strong> Cascade Layers (<code>@layer base, website, portal-utils</code>); split físico entre landing y portales; fuentes locales WOFF2 offline-safe.</li>
+<li><strong>Frontend — Arquitectura JS:</strong> Vanilla JS + HTMX; un módulo JS por página (no bundle monolítico); <code>device-detect.js</code> + <code>medicos-a11y.js</code> para A11Y/WCAG 2.1.</li>
+<li><strong>Frugalidad del Stack:</strong> Sin frameworks CSS/JS externos (no Bootstrap, no Vue). CMS nativo en BD. Autoloader PSR-4 compartido. Cache-busting automático vía <code>bump-versions.sh</code>.</li>
+<li><strong>Notificaciones Híbridas:</strong> Persistencia SSOT en tabla <code>notificaciones</code> (slow-path) + WebSocket Swoole (fast-path) + auto-reconexión con backoff exponencial.</li>
+</ul>
+</div>
+</section>
+<!-- ═══════════════ 2. ARQUITECTURA ═══════════════ -->
+<section id="sec2">
+<h2>2. Arquitectura del Sistema</h2>
+<p>El sistema opera bajo una arquitectura de tres capas con procesamiento distribuido entre el edge (dispositivos móviles) y el servidor central.</p>
+<div class="diagram-container"><div class="mermaid">
+    graph TD
+        subgraph SG1 [Capa Cliente - Edge]
+            M[Navegador Móvil y Desktop - Médicos]
+            D[Navegador Desktop - Recepción]
+        end
+        
+        subgraph SG2 [Capa de Aplicación - Servidor VPS]
+            A[Nginx - HTTP Server + PHP-FPM]
+            F[Flight PHP - Router y API]
+            S[Swoole Server - Websockets]
+        end
+        
+        subgraph SG3 [Capa de Datos - Persistencia]
+            DB[(MariaDB 11.x)]
+            FS[File System - PDFs]
+        end
+        
+        M -->|"Peticiones HTMX (HTTPS)"| A
+        D -->|"Peticiones HTMX (HTTPS)"| A
+        M -.->|"Conexión WSS"| S
+        D -.->|"Conexión WSS"| S
+        
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `<section id="sec`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 4:50 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Especificacion_Tecnica.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1139-1243)</summary>
+
+**Path:** `Unknown file`
+
+```
+<li><strong>R2.2 (Recuperación de Contraseñas Segura):</strong> Queda prohibida la funcionalidad automatizada de restablecimiento de contraseña vía email/SMS (Olvidé mi contraseña) para los médicos. Si un médico olvida sus credenciales, el reseteo de la cuenta deberá ser ejecutado exclusivamente de forma manual e interna por el perfil <em>Administrador</em> o <em>Recepción</em>.</li>
+<li><strong>R2.3 (Búsqueda Optimizada y Mitigación de Carga):</strong> Para prevenir bloqueos de tabla y optimizar la respuesta del sistema en búsquedas difusas (LIKE), la localización por nombre del paciente en el panel de recepción exigirá una coincidencia mínima obligatoria de <strong>5 caracteres</strong> en el campo de texto (autocompletado), admitiéndose en paralelo la búsqueda rápida directa mediante folio exacto.</li>
+<li><strong>R2.4 (Retención Histórica y Parametrización):</strong> Las solicitudes médicas se mantendrán activas en los tableros de recepción según la parametrización global (por defecto caducan o se ocultan a los 30 días, configurable en BD). Tras este límite, pasan a un estado de archivo pero permanecen accesibles de manera ininterrumpida por <strong>5 años</strong> a través del motor de búsqueda histórica, garantizando la persistencia operativa.</li>
+<li><strong>R2.5 (Motor de Cambio de Estados Automático):</strong> El ciclo de vida de la solicitud no requiere que recepción presione botones manuales para marcar como "Completado". El simple acto de <strong>cargar el archivo PDF de resultados clínicos</strong> funciona como disparador unívoco y transaccional para cambiar automáticamente el estado de la orden de <em>En Atención</em> a <em>Resultados Listos</em>, detonando de manera simultánea una alerta silenciosa al panel del médico emisor de la orden.</li>
+<li><strong>R2.6 (Co-diseño de Interfaces Críticas):</strong> El diseño visual, la maquetación y la selección de campos obligatorios para el "Formato de Solicitud PDF (Descargable)" y los "Formularios de Captura de Órdenes", están condicionados a un proceso de co-diseño estrecho con el cliente, no debiendo asumirse layouts genéricos si no se ajustan a la operativa real y procesos físicos del laboratorio clínico.</li>
+</ul>
+</section>
+<!-- ═══════════════ 8. FRONTEND PWA ═══════════════ -->
+<!-- ═══════════════ 9. PANTALLA BANNER ═══════════════ -->
+<!-- ═══════════════ 10. INFRAESTRUCTURA ═══════════════ -->
+<section id="sec10">
+<h2>10. Infraestructura y Despliegue (DevOps)</h2>
+<a href="Tecnica_Infraestructura_Despliegue.html" style="display:inline-block; margin-top:10px; margin-bottom:20px; color:#2563eb; text-decoration:none; font-weight:600;">→ Ver Infraestructura y Despliegue DevOps</a>
+</section>
+<!-- ═══════════════ 12. GLOSARIO TÉCNICO ═══════════════ -->
+<section id="sec12">
+<h2>12. Glosario Técnico</h2>
+<dl>
+<dt><strong>Swoole Async Server</strong></dt><dd>Servidor asíncrono para gestionar las notificaciones en tiempo real del Bloc Digital (médico-recepción).</dd></dl>
+</section>
+<!-- Plan de Implementación migrado a Control_Proyecto.html -->
+<!-- ═══════════════ 13. REFERENCIAS ═══════════════ -->
+<!-- Backlog migrado a Control_Proyecto.html -->
+<!-- ═══════════════ 15. ANEXOS ═══════════════ -->
+<section id="sec15">
+<h2>15. Anexos</h2>
+<p>Esqueleto de integración del micro-framework Flight PHP y el puente nativo PDO (para Delight-PHP/Auth y consultas crudas):</p>
+<pre><code><?php
+// index.php - Servidor de Rutas Principal bajo Nginx + PHP-FPM
+require_once __DIR__ . '/commons/commons.php';
+
+use Delight\Auth\Auth;
+
+// Estándar de inyección de conexión de Base de Datos en Flight:
+// Se prohíbe el uso de Flight::register('db', 'PDO', ...) ya que Flight intentará instanciar la clase
+// llamando al constructor de PDO sin parámetros, arrojando excepciones runtime de PHP.
+// En su lugar, se debe mapear de forma segura la función retornando la instancia singleton de la BD:
+Flight::map('db', function() {
+    return \Common\DB::connect();
+});
+
+Flight::map('checkPermission', function($permiso) {
+    $auth = Flight::auth();
+    if (!$auth->isLoggedIn()) return false;
+    
+    // Verificación de RBAC manual o con query PDO
+    return true; // Simplificado para el ejemplo
+});
+
+Flight::route('POST /transaccion', function() {
+    $token = Flight::request()->data->idempotency_token;
+    
+    if (!isset($_SESSION['processed_tokens'][$token])) {
+        // Ejecución segura mediante Stored Procedures con PDO
+        $stmt = Flight::db()->prepare("CALL RegistrarOperacionNegocio(:user_id, :monto)");
+        $stmt->execute([
+            ":user_id" => 1,
+            ":monto" => Flight::request()->data->monto
+        ]);
+        $_SESSION['processed_tokens'][$token] = true;
+    }
+    
+    echo Flight::view()->render('partials/exito', ['mensaje' => 'Guardado exitosamente']);
+});
+
+Flight::start();
+</code></pre>
+<h3>Anexo 15.2. Prototipo Estructural B.2: Formulario Declarativo con Controladores HTMX (vistas/formulario.php)</h3>
+<p>Ejemplo de formulario web responsivo que utiliza las directivas declarativas de HTMX para deshabilitar elementos e inyectar actualizaciones fuera de banda:</p>
+<pre><code><?php $this->layout('layout', ['title' => 'Nueva Operación']) ?>
+
+<form hx-post="/transaccion" 
+      hx-target="#vista-principal" 
+      hx-indicator="#loader" 
+      hx-disabled-elt="this, #btn-enviar">
+    
+    <!-- Token de Idempotencia para evitar reenvíos duplicados -->
+    <input type="hidden" name="idempotency_token" value="<?=uniqid('token_', true)?>">
+    
+    <input type="number" name="monto" required min="1">
+    <button type="submit" id="btn-enviar">Confirmar Operación</button>
+</form>
+
+<!-- Intercambio fuera de banda (OOB) para actualizar migas de pan asíncronamente -->
+<nav id="breadcrumbs" hx-swap-oob="true">
+    <a href="/">Inicio</a> / <span>Transacciones</span>
+</nav>
+</code></pre>
+</section>
+<section id="anexo16">
+<h3>Anexo 16: Módulo CMS Uploads, Notificaciones y Panel Unificado del Sistema (Estabilización 2026-08-24)</h3>
+<ul>
+    <li><strong>Subida Asíncrona de Imágenes:</strong> Implementada en <code>cms-upload.js</code> sin inline scripts para cumplir con CSP (<code>script-src 'self'</code>). La URL del endpoint se pasa mediante <code>&lt;meta name="cms-upload-url"&gt;</code>.</li>
+    <li><strong>Manejo de Errores, Selección de Texto y Toast Persistente:</strong> Uso de <code>showToast()</code> vinculado a estilos institucionales (<code>tokens.css</code>: <code>--color-error-bg</code>, <code>--color-error-text</code>). Los mensajes de error (<code>isError: true</code>) <strong>no se ocultan automáticamente</strong>, permanecen visibles de forma indefinida con un botón de cierre explícito (<code>✖</code>) y selección de texto libre (<code>user-select: text</code>) para permitir leer, inspeccionar y copiar el detalle exacto del fallo devuelto por el servidor.</li>
+    <li><strong>Panel Unificado del Sistema y Logs (<code>/laesh/adrc/sistema</code>):</strong> Módulo accesible en <code>/laesh/adrc/sistema</code> que brinda observabilidad en tiempo real sobre <code>app.log</code>, <code>sys_logs</code>, <code>fallback_log</code>, Nginx, PHP-FPM y Swoole.</li>
+    <li><strong>Administración Paramétrica 0% Duplicación:</strong> Pestañas disjuntas para la tabla <code>configuraciones</code>: 1) Comunes (singletons institucionales compartidos), 2) Proyecto 1 (Sitio Web & CMS), y 3) Proyecto 2 (Bloc Digital & Recepción).</li>
+    <li><strong>Depuración y Mapeo Canónico de Quiénes Somos:</strong> La sección <code>quienes-somos</code> en <code>web_contenidos</code> fue depurada de 19 a <strong>6 registros canónicos estrictos</strong> (eliminando 13 filas obsoletas). En el panel de administración se ordenaron del 1 al 6. Adicionalmente, el menú de navegación fue estabilizado para colapsar en botón hamburguesa (<code>☰</code>) en todas las tabletas e iPads (<code>≤1024px</code>) evitando solapamientos; la tarjeta de <em>25 años de experiencia</em> (<code>grid-acerca-cards</code>) y la de <em>Historia</em> (<code>grid-single-history</code>) cuentan con reglas dedicadas de autoajuste al 100% de ancho del viewport.</li>
+    <li><strong>Refactorización del Carrusel de Áreas de Laboratorio (16 Tarjetas):</strong> En <code>web_contenidos</code> (sección <code>especialidades</code>) se depuraron 24 filas obsoletas separadas (<code>titulo</code> / <code>descripcion</code>) a favor de <strong>16 entradas HTML unificadas</strong> (<code>subseccion: carousel1..16</code>, <code>clave: texto</code>, <code>tipo: html</code>). Cada tarjeta en el CMS incluye editor enriquecido **CKEditor 5** y ranura de upload de imagen (<code>carousel-1</code> a <code>carousel-16</code>) reutilizando el cargador <code>cms-upload.js</code> con 0% duplicación de código. Se habilitaron las tarjetas 13 a 16 para posterior publicación/activación dinámicas.</li>
+    <li><strong>Simplificación de Promociones Vigentes (Pestaña CMS 4):</strong> Se eliminó por completo la sección obsoleta de <em>Edición del Banner Promocional</em> conservando intacta desde <strong>Fuente Única de Verdad (SSOT)</strong> hacia abajo la gestión dinámica de promociones diarias. Las fichas de <strong>Viernes</strong> (Reticulocitos con modal/lightbox de imagen) y <strong>Domingo</strong> (Servicio dominical con imagen completa <code>catalog-card-full-img</code>) quedaron fijadas en duro en <code>index.php</code> manteniendo paridad 100% estricta con la especificación visual de <code>index.html</code>.</li>
+    <li><strong>Módulo JS Reutilizable de Rastreo de Cambios e Indicador Rojo (<code>CmsDirtyTracker</code>):** Se creó el componente desacoplado <code>cms-dirty-tracker.js</code> para la detección de ediciones por campo en tiempo real. Inyecta un punto indicador rojo pulsatil (<code>.cms-field-dirty-dot</code>) en la esquina superior derecha del control modificado (inputs, textareas, uploads y **CKEditor 5**) y sincroniza la suma exacta con el contador de la pestaña (<code>.tab-change-badge</code>). En esta Fase 1 quedó habilitado para <strong>1. Banner Principal</strong> y <strong>2. Quiénes somos</strong>, con soporte nativo de reseteo post-publicación.</li>
+</ul>
+</section>
+</section></body>
+</html>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Especificacion_Tecnica.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1229-1243)</summary>
+
+**Path:** `Unknown file`
+
+```
+<h3>Anexo 16: Módulo CMS Uploads, Notificaciones y Panel Unificado del Sistema (Estabilización 2026-08-24)</h3>
+<ul>
+    <li><strong>Subida Asíncrona de Imágenes:</strong> Implementada en <code>cms-upload.js</code> sin inline scripts para cumplir con CSP (<code>script-src 'self'</code>). La URL del endpoint se pasa mediante <code>&lt;meta name="cms-upload-url"&gt;</code>.</li>
+    <li><strong>Manejo de Errores, Selección de Texto y Toast Persistente:</strong> Uso de <code>showToast()</code> vinculado a estilos institucionales (<code>tokens.css</code>: <code>--color-error-bg</code>, <code>--color-error-text</code>). Los mensajes de error (<code>isError: true</code>) <strong>no se ocultan automáticamente</strong>, permanecen visibles de forma indefinida con un botón de cierre explícito (<code>✖</code>) y selección de texto libre (<code>user-select: text</code>) para permitir leer, inspeccionar y copiar el detalle exacto del fallo devuelto por el servidor.</li>
+    <li><strong>Panel Unificado del Sistema y Logs (<code>/laesh/adrc/sistema</code>):</strong> Módulo accesible en <code>/laesh/adrc/sistema</code> que brinda observabilidad en tiempo real sobre <code>app.log</code>, <code>sys_logs</code>, <code>fallback_log</code>, Nginx, PHP-FPM y Swoole.</li>
+    <li><strong>Administración Paramétrica 0% Duplicación:</strong> Pestañas disjuntas para la tabla <code>configuraciones</code>: 1) Comunes (singletons institucionales compartidos), 2) Proyecto 1 (Sitio Web & CMS), y 3) Proyecto 2 (Bloc Digital & Recepción).</li>
+    <li><strong>Depuración y Mapeo Canónico de Quiénes Somos:</strong> La sección <code>quienes-somos</code> en <code>web_contenidos</code> fue depurada de 19 a <strong>6 registros canónicos estrictos</strong> (eliminando 13 filas obsoletas). En el panel de administración se ordenaron del 1 al 6. Adicionalmente, el menú de navegación fue estabilizado para colapsar en botón hamburguesa (<code>☰</code>) en todas las tabletas e iPads (<code>≤1024px</code>) evitando solapamientos; la tarjeta de <em>25 años de experiencia</em> (<code>grid-acerca-cards</code>) y la de <em>Historia</em> (<code>grid-single-history</code>) cuentan con reglas dedicadas de autoajuste al 100% de ancho del viewport.</li>
+    <li><strong>Refactorización del Carrusel de Áreas de Laboratorio (16 Tarjetas):</strong> En <code>web_contenidos</code> (sección <code>especialidades</code>) se depuraron 24 filas obsoletas separadas (<code>titulo</code> / <code>descripcion</code>) a favor de <strong>16 entradas HTML unificadas</strong> (<code>subseccion: carousel1..16</code>, <code>clave: texto</code>, <code>tipo: html</code>). Cada tarjeta en el CMS incluye editor enriquecido **CKEditor 5** y ranura de upload de imagen (<code>carousel-1</code> a <code>carousel-16</code>) reutilizando el cargador <code>cms-upload.js</code> con 0% duplicación de código. Se habilitaron las tarjetas 13 a 16 para posterior publicación/activación dinámicas.</li>
+    <li><strong>Simplificación de Promociones Vigentes (Pestaña CMS 4):</strong> Se eliminó por completo la sección obsoleta de <em>Edición del Banner Promocional</em> conservando intacta desde <strong>Fuente Única de Verdad (SSOT)</strong> hacia abajo la gestión dinámica de promociones diarias. Las fichas de <strong>Viernes</strong> (Reticulocitos con modal/lightbox de imagen) y <strong>Domingo</strong> (Servicio dominical con imagen completa <code>catalog-card-full-img</code>) quedaron fijadas en duro en <code>index.php</code> manteniendo paridad 100% estricta con la especificación visual de <code>index.html</code>.</li>
+    <li><strong>Módulo JS Reutilizable de Rastreo de Cambios e Indicador Rojo (<code>CmsDirtyTracker</code>):** Se creó el componente desacoplado <code>cms-dirty-tracker.js</code> para la detección de ediciones por campo en tiempo real. Inyecta un punto indicador rojo pulsatil (<code>.cms-field-dirty-dot</code>) en la esquina superior derecha del control modificado (inputs, textareas, uploads y **CKEditor 5**) y sincroniza la suma exacta con el contador de la pestaña (<code>.tab-change-badge</code>). En esta Fase 1 quedó habilitado para <strong>1. Banner Principal</strong> y <strong>2. Quiénes somos</strong>, con soporte nativo de reseteo post-publicación.</li>
+</ul>
+</section>
+</section></body>
+</html>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Detailing Annex 17**
+
+I'm deep-diving into the specifics of "Anexo 17." I'm currently focused on outlining the architecture for Dynamic Injection SEO, Schema.org JSON-LD markup, and the Google Indexing Protocol. The goal is to comprehensively document the real-time assembly mechanism. The focus is on ensuring a robust and efficient framework for enhanced SEO performance. I'm aiming for clarity in describing dynamic injection and schema implementation.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Especificacion_Tecnica.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.074149095s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L44-51)</summary>
+
+**Path:** `Unknown file`
+
+```
+<li><a href="Tecnica_Seguridad_Integral.html">8. Seguridad Integral (Arquitectura Defensiva)</a></li>
+<li><a href="#sec10">Infraestructura y Despliegue</a></li>
+<li><a href="#sec12">Glosario Técnico</a></li>
+<li><a href="Control_Proyecto.html">Control de Proyecto (ToDos, Issues, Logros)</a></li>
+<li><a href="#sec15">Anexos</a></li>
+</ol>
+</nav>
+<!-- ═══════════════ 1. RESUMEN EJECUTIVO ═══════════════ -->
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `multi_replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 4:50 pm
+
+---
+
+<details>
+<summary>Conversation History</summary>
+
+# Conversation History
+Here are the conversation IDs, titles, and summaries of your most recent 1 conversations, in reverse chronological order:
+
+<conversation_summaries>
+## Conversation 33758958-5e2c-4311-ba38-6d3f32787e53: LAESH CMS Tab Fixes and Image Uploads
+- Created: 2026-08-31T03:34:16Z
+- Last modified: 2026-09-06T19:20:25Z
+
+</conversation_summaries>
+
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 4:50 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `Anexo 17`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 4:50 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Especificacion_Tecnica.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1244-1319)</summary>
+
+**Path:** `Unknown file`
+
+```
+</ul>
+</section>
+
+<!-- ═══════════════ ANEXO 17 ═══════════════ -->
+<section id="anexo17">
+<h3>Anexo 17: Arquitectura de Inyección Dinámica SEO, Marcado Schema.org JSON-LD y Protocolo de Indexación en Google</h3>
+<p>Este anexo documenta el mecanismo de ensamblado en tiempo de ejecución de los metadatos SEO, Open Graph y datos estructurados Schema.org JSON-LD para la indexación automática en Google Search, Google Maps y Rich Snippets de búsqueda.</p>
+
+<h4>17.1. Flujo de Inyección Dinámica en el Header (Ciclo de Vida HTTP)</h4>
+<p>Cuando un visitante o el robot rastreador <strong>Googlebot</strong> efectúa una petición HTTP <code>GET https://laesh.mx/</code>, el script <code>website/index.php</code> ejecuta el siguiente ciclo de bootstrapping en milisegundos:</p>
+
+<div class="diagram-container"><div class="mermaid">
+sequenceDiagram
+    participant G as Googlebot / Visitante
+    participant PHP as PHP (website/index.php)
+    participant DB as Caché L2 / MariaDB 11
+
+    G->>PHP: Petición HTTP GET https://laesh.mx/
+    PHP->>DB: 1. Lee Pestaña 11 (Meta Title, Description, OG, Schema Name/Type, Horarios 24h)
+    PHP->>DB: 2. Lee Pestaña 6 (Dirección física, CP, Teléfono, Coordenadas GPS, Facebook)
+    PHP->>PHP: 3. Aplica Fallbacks institucionales automáticos ante campos vacíos
+    PHP->>G: 4. Entrega HTML único con &lt;head&gt; completo (Title, Meta, OG, Twitter, JSON-LD)
+</div></div>
+
+<ol>
+    <li><strong>Fase 1: Consulta Inicial (Bootstrap Backend):</strong> El motor PHP intercepta la petición HTTP y lee el almacenamiento unificado en memoria (Caché L2) o consulta las tablas <code>configuraciones</code> y <code>web_contenidos</code> en MariaDB 11.</li>
+    <li><strong>Fase 2: Consolidación Multi-Pestaña SSOT:</strong>
+        <ul>
+            <li><strong>Pestaña 11 (Metadatos SEO):</strong> Proporciona <code>meta__title</code>, <code>meta__description</code>, <code>og__og_title</code>, <code>og__og_description</code>, <code>og__og_image</code>, <code>schema__schema_name</code>, <code>schema__schema_type</code> y los 4 campos de horario 24h (<code>_cfg_hrs_open</code>, <code>_cfg_hrs_close</code>, <code>_cfg_dom_open</code>, <code>_cfg_dom_close</code>).</li>
+            <li><strong>Pestaña 6 (Ubicación y Contacto):</strong> Aporta la dirección física (<code>direccion_calle</code>, <code>ciudad</code>, <code>estado</code>, <code>cp</code>), teléfono directo, WhatsApp, Facebook y las Coordenadas GPS SSOT (<code>geo_lat: 17.8028691</code>, <code>geo_lng: -97.7779575</code>).</li>
+        </ul>
+    </li>
+    <li><strong>Fase 3: Aplicación de Fallbacks Institucionales:</strong> Si un campo en base de datos está vacío, PHP asigna valores por defecto preconfigurados (ej: Title: <code>LAESH — Laboratorio de Especialidades Hematológicas | Huajuapan</code>, Description: <code>Laboratorio de análisis clínicos...</code>, Schema Type: <code>MedicalLaboratory</code>, OG Image: <code>/laesh-web-assets-uipv1a/img/recepcion.webp</code>). De este modo se garantiza que <strong>jamás se entreguen etiquetas <code>&lt;title&gt;</code> o <code>&lt;meta&gt;</code> en blanco</strong>.</li>
+    <li><strong>Fase 4: Entrega Única:</strong> Se compila la cabecera <code>&lt;head&gt;</code> inyectando las meta-etiquetas estándar, Open Graph, Twitter Cards y el bloque JSON-LD <code>&lt;script type="application/ld+json"&gt;</code>. El documento final es enviado al cliente en una sola respuesta HTTP con 0% latencia perceptible.</li>
+</ol>
+
+<h4>17.2. Estructura del Marcado JSON-LD Schema.org Inyectado</h4>
+<p>El estándar internacional de marcado estructurado incluye las propiedades oficiales reconocidas por Google Search y Google Maps:</p>
+<pre><code>{
+  "@context": "https://schema.org",
+  "@type": "MedicalLaboratory",
+  "name": "Laboratorio de Especialidades Hematológicas S.C.",
+  "@id": "https://laesh.mx",
+  "url": "https://laesh.mx",
+  "logo": "https://laesh.mx/laesh-web-assets-uipv1a/img/logo-laesh.webp",
+  "image": "https://laesh.mx/laesh-web-assets-uipv1a/img/recepcion.webp",
+  "telephone": "+529531190074",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Azucenas #8, Fracc. Jardines del Sur",
+    "addressLocality": "Huajuapan de León",
+    "addressRegion": "Oaxaca",
+    "postalCode": "69000",
+    "addressCountry": "MX"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 17.8028691,
+    "longitude": -97.7779575
+  },
+  "sameAs": [
+    "https://www.facebook.com/LAESH.Huajuapan/"
+  ],
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+      "opens": "07:00",
+      "closes": "21:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Sunday",
+      "opens": "07:00",
+      "closes": "15:00"
+    }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Especificacion_Tecnica.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1320-1366)</summary>
+
+**Path:** `Unknown file`
+
+```
+  ],
+  "description": "Laboratorio de análisis clínicos y estudios hematológicos de alta precisión en Huajuapan de León, Oaxaca."
+}</code></pre>
+
+<h4>17.3. Protocolo de Publicación y Re-indexación en Google Search & Maps</h4>
+<p>Para asegurar que las modificaciones capturadas en el CMS se reflejen rápidamente en los resultados de búsqueda de Google y Google Maps, se debe seguir el siguiente flujo operativo:</p>
+
+<table>
+  <caption>Pasos del Protocolo de Publicación e Indexación en Google</caption>
+  <thead>
+    <tr>
+      <th>Paso</th>
+      <th>Acción / Herramienta</th>
+      <th>Descripción del Procedimiento</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>1. Publicación CMS</strong></td>
+      <td>Panel CMS (Barra Superior)</td>
+      <td>Hacer clic en el botón <strong>«Publicar Cambios»</strong> para transferir las ediciones desde el borrador temporal hacia la base de datos MariaDB e invalidar la caché L2.</td>
+    </tr>
+    <tr>
+      <td><strong>2. Despliegue a Producción</strong></td>
+      <td>Servidor KVM2 / Nginx</td>
+      <td>Sincronizar cambios de código PHP y base de datos con el servidor de producción <code>laesh.mx</code>.</td>
+    </tr>
+    <tr>
+      <td><strong>3. Re-indexación Forzada</strong></td>
+      <td><a href="https://search.google.com/search-console" target="_blank" rel="noopener">Google Search Console</a></td>
+      <td>
+        1. Ingresar a Search Console del dominio <code>laesh.mx</code>.<br>
+        2. Pegar la URL <code>https://laesh.mx/</code> en la herramienta superior de <em>Inspección de URLs</em>.<br>
+        3. Hacer clic en <strong>«Solicitar indexación»</strong>. Esto notifica inmediatamente a <strong>Googlebot</strong> para rastrear la página y actualizar los snippet de títulos, descripciones y horarios en Google Search.
+      </td>
+    </tr>
+    <tr>
+      <td><strong>4. Verificación de Rich Snippets</strong></td>
+      <td><a href="https://search.google.com/test/rich-results" target="_blank" rel="noopener">Prueba de Resultados Enriquecidos de Google</a></td>
+      <td>Introducir la URL pública para validar que las estructuras de <code>MedicalLaboratory</code>, <code>GeoCoordinates</code> y <code>OpeningHoursSpecification</code> cuenten con la aprobación de marcas verdes sin errores ni advertencias de sintaxis.</td>
+    </tr>
+  </tbody>
+</table>
+</section>
+</section></body>
+</html>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+a esta descripcion que se le debe ajustar:
+Codec: WebP únicamente  ·  Quality: 85  ·  Effort: 6  ·  Ancho: 1 136–1 186 px  ·  Alto: proporcional (auto) — 615–645 px sugerido (ratio ~1.85:1)  ·  Orientación Horizontal  ·  Peso: máx. 105 KB
+para que acepte diga que puede aceptar  images de 756(maximo ) × 577 (maximo ) 
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `Especificacion_Tecnica.html`
+**Language:** html
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `1 136`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 5:06 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `croquis`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 5:06 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1364-1404)</summary>
+
+**Path:** `Unknown file`
+
+```
+                            <strong>Orientación Horizontal</strong> &nbsp;·&nbsp;
+                            <strong>Peso:</strong> Máximo 150 KB, Óptimo 60 KB
+                        </p>
+                        <?php $croquisImgUrl = cms($contenidos, 'ubicacion', 'croquis', 'imagen_url', '/laesh-web-assets-uipv1a/img/01mapa-laesh.webp'); ?>
+                        <?php if (empty($croquisImgUrl)) $croquisImgUrl = '/laesh-web-assets-uipv1a/img/01mapa-laesh.webp'; ?>
+                        <div class="image-upload-box">
+                            <img id="prev-croquis"
+                                 src="<?= h($croquisImgUrl) ?>"
+                                 alt="Croquis" class="img-preview-croquis"
+                                 onerror="this.onerror=null;this.src='/laesh-web-assets-uipv1a/img/01mapa-laesh.webp';">
+
+                            <label for="file-croquis" class="btn btn-secondary">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                                Cambiar Imagen
+                            </label>
+
+                            <input type="file" accept="image/webp"
+                                   id="file-croquis" class="d-none"
+                                   data-upload-slot="ubicacion-croquis"
+                                   data-preview-id="prev-croquis"
+                                   data-target-input="url-img-croquis">
+                        </div>
+                        <input type="url" id="url-img-croquis"
+                               name="croquis__imagen_url"
+                               value="<?= h($croquisImgUrl) ?>"
+                               placeholder="/laesh-web-assets-uipv1a/cms/ubicacion-croquis-....webp"
+                               class="cms-img-url-input" data-no-limit>
+                        <?php $croquisBasename = basename($croquisImgUrl); ?>
+                        <span id="lbl-img-croquis" class="cms-img-filename-label"><?= h($croquisBasename) ?></span>
+                        <div class="field-group mt-3" style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:6px; padding:10px 12px; margin-top:12px;">
+                            <label style="font-size:0.8rem; font-weight:700; color:#0f172a; margin-bottom:6px; display:block;">📍 Coordenadas GPS (Lectura SSOT para Google Maps / Schema.org JSON-LD)</label>
+                            <div style="display:flex; gap:10px;">
+                                <div style="flex:1;">
+                                    <label style="font-size:0.75rem; color:#64748b; margin-bottom:2px; display:block;">Latitud</label>
+                                    <input type="text" disabled value="<?= htmlspecialchars(!empty($config['geo_lat']) ? $config['geo_lat'] : '17.8028691', ENT_QUOTES, 'UTF-8') ?>" style="font-size:0.85rem; background:#ffffff; color:#334155; font-weight:600; width:100%;">
+                                </div>
+                                <div style="flex:1;">
+                                    <label style="font-size:0.75rem; color:#64748b; margin-bottom:2px; display:block;">Longitud</label>
+                                    <input type="text" disabled value="<?= htmlspecialchars(!empty($config['geo_lng']) ? $config['geo_lng'] : '-97.7779575', ENT_QUOTES, 'UTF-8') ?>" style="font-size:0.85rem; background:#ffffff; color:#334155; font-weight:600; width:100%;">
+                                </div>
+                            </div>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1349-1366)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+            <!-- Croquis de Ubicación (Imagen) -->
+            <div class="editor-card">
+                <div class="editor-card-header">
+                    <div class="card-title">Croquis de Ubicación (Imagen)</div>
+                </div>
+                <div class="editor-card-body">
+                    <div class="field-group">
+                        <label>Imagen del Croquis</label>
+                        <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px;">
+                            📐 <strong>Codec:</strong> WebP únicamente &nbsp;·&nbsp;
+                            <strong>Quality:</strong> 85 &nbsp;·&nbsp;
+                            <strong>Effort:</strong> 6 &nbsp;·&nbsp;
+                            <strong>Ancho:</strong> 1 136–1 186 px &nbsp;·&nbsp;
+                            <strong>Alto:</strong> proporcional (auto) — 615–645 px sugerido (ratio ~1.85:1) &nbsp;·&nbsp;
+                            <strong>Orientación Horizontal</strong> &nbsp;·&nbsp;
+                            <strong>Peso:</strong> Máximo 150 KB, Óptimo 60 KB
+                        </p>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Codec Restrictions**
+
+I've just pinpointed some critical restrictions. Line 1360 in `gestion_web.php` explicitly details that only WebP format is allowed. I'm noting the implications of this codec exclusivity.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `615–645`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.082980413s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 5:06 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `Croquis`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 5:06 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Refining Descriptive Text**
+
+I'm now diving into how to refine the image description text, comparing the original with potential adjustments. I'm focusing on clarity and conciseness, specifically looking at how we can better present the technical details like codec, quality, dimensions, and effort in a way that's easily understood and directly applicable.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.064759636s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 5:06 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 5:06 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Guia_Usuario_CMS_Sitio_Web.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1109-1117)</summary>
+
+**Path:** `Unknown file`
+
+```
+                    <tr><td>Carrusel Especialidades</td><td>~400 × 290 px</td><td><strong>800 × 580 px</strong> (exacto)</td><td>2× ✅</td></tr>
+                    <tr><td>Promociones (cards lunes–dom)</td><td>~450 px ancho modal</td><td><strong>900 × 486 px</strong> (exacto, ratio 13:7)</td><td>2× ✅</td></tr>
+                    <tr><td>Calidad e Instalaciones</td><td>~400 × 290 px</td><td><strong>800 × 580 px</strong> (exacto)</td><td>2× ✅</td></tr>
+                    <tr><td>Croquis de Ubicación</td><td>~570 px desktop / ~360 px móvil</td><td><strong>1 136 px</strong> ancho (alto: auto)</td><td>2× desktop · 3× móvil ✅</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top:0.4rem;margin-bottom:0;font-size:0.85em;color:#64748b">Las dimensiones exactas (carrusel, promo, calidad) se ingresan tal cual — Squoosh no necesita "Maintain aspect ratio" cuando se especifican ambas dimensiones y el ratio ya es correcto.</p>
+        </div>
+    </section>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 5:06 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+Tambien, añade/modifica las validaciones de js y backend para acepte estas nuevas medidas
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `gestion_web.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `ubicacion-croquis`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 5:08 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `cms-upload.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L79-129)</summary>
+
+**Path:** `Unknown file`
+
+```
+                        'Usa Squoosh → Format: WebP antes de subir.',
+                        true
+                    );
+                    this.value = '';
+                    return;
+                }
+
+                // ── Reglas por slot (alineadas con Guía CMS §5.1–§5.6) ──────────────
+                // Slots reales (data-upload-slot en gestion_web.php):
+                //   hero-{slide1…5}       → Banner Hero
+                //   carousel-{1…16}       → Carrusel Especialidades
+                //   ubicacion-croquis     → Croquis de Ubicación
+                //   promo-{lun…dom}       → Cards de Promociones
+                //   calidad-gallery{1…3}  → Galería de Calidad
+                //   (default)             → Imagen CMS genérica
+                function slotRules(s) {
+                    if (/^hero-/.test(s))              return { maxKb: 150, minW: 1280, maxW: 1920,                              landscape: true, label: 'Banner Hero',             hint: 'WebP · Quality 72–80 · Effort 6 · 1 280–1 920 px ancho · Orientación Horizontal · alto proporcional · máx. 150 KB, óptimo 60 KB' };
+                    if (/^carousel-/.test(s))          return { maxKb: 150, exactW: 800, exactH: 580,                                        label: 'Carrusel Especialidades', hint: 'WebP · Quality 75 · Effort 6 · exacto 800×580 px · máx. 150 KB, óptimo 60 KB' };
+                    if (/^ubicacion-croquis$/.test(s)) return { maxKb: 150, minW: 1136, maxW: 1186, minH: 615, maxH: 645,                  label: 'Croquis de Ubicación',    hint: 'WebP · Quality 85 · Effort 6 · 1 136–1 186 × 615–645 px · máx. 150 KB, óptimo 60 KB' };
+                    if (/^promo-/.test(s))             return { maxKb: 150, exactW: 900, exactH: 486,                                       label: 'Card de Promociones',     hint: 'WebP · Quality 72 · Effort 6 · exacto 900×486 px · ratio 13:7 · máx. 150 KB, óptimo 60 KB' };
+                    if (/^calidad-/.test(s))           return { maxKb: 150, exactW: 800, exactH: 580,                                       label: 'Galería de Calidad',      hint: 'WebP · Quality 75 · Effort 6 · exacto 800×580 px · máx. 150 KB, óptimo 60 KB' };
+                    if (/^seo-og$/.test(s))            return { maxKb: 150, minW: 1200, maxW: 1920,                              landscape: true, label: 'Imagen Open Graph (SEO)', hint: 'WebP · 1 200 × 630 px recomendado (ratio 1.91:1) · Orientación Horizontal · máx. 150 KB, óptimo 60 KB' };
+                    return                                    { maxKb: 150, minW: 800,                                                        label: 'Imagen CMS',              hint: 'WebP · mín. 800 px ancho · máx. 150 KB, óptimo 60 KB' };
+                }
+                const rules = slotRules(slot);
+
+                // ── Validación de tamaño ─────────────────────────────────────────────
+                const sizeKb = (file.size / 1024).toFixed(1);
+                if (file.size > rules.maxKb * 1024) {
+                    showToast(
+                        `Peso ${sizeKb} KB supera el máximo de ${rules.maxKb} KB para ${rules.label}.<br>` +
+                        'Optimiza la imagen (baja Quality o reduce dimensiones).',
+                        true
+                    );
+                    this.value = '';
+                    return;
+                }
+
+                // ── Validación de dimensiones (requiere cargar la imagen) ────────────
+                try {
+                    const objUrl = URL.createObjectURL(file);
+                    const img    = new Image();
+                    await new Promise((res, rej) => { img.onload = res; img.onerror = rej; img.src = objUrl; });
+                    URL.revokeObjectURL(objUrl);
+                    const w = img.naturalWidth, h = img.naturalHeight;
+
+                    // Dimensiones exactas (carrusel, croquis, promociones)
+                    if (rules.exactW !== undefined && w !== rules.exactW) {
+                        showToast(`Dimensiones incorrectas (${w}×${h} px) para ${rules.label}.<br><small>Requerido: ${rules.hint}</small>`, true);
+                        this.value = ''; return;
+                    }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `cms-upload.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L124-169)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+                    // Dimensiones exactas (carrusel, croquis, promociones)
+                    if (rules.exactW !== undefined && w !== rules.exactW) {
+                        showToast(`Dimensiones incorrectas (${w}×${h} px) para ${rules.label}.<br><small>Requerido: ${rules.hint}</small>`, true);
+                        this.value = ''; return;
+                    }
+                    if (rules.exactH !== undefined && h !== rules.exactH) {
+                        showToast(`Dimensiones incorrectas (${w}×${h} px) para ${rules.label}.<br><small>Requerido: ${rules.hint}</small>`, true);
+                        this.value = ''; return;
+                    }
+
+                    // Rango de ancho (hero, banner, default)
+                    if (rules.minW !== undefined && w < rules.minW) {
+                        showToast(`Ancho ${w} px menor al mínimo de ${rules.minW} px para ${rules.label}. Spec: ${rules.hint}`, true);
+                        this.value = ''; return;
+                    }
+                    if (rules.maxW !== undefined && w > rules.maxW) {
+                        showToast(`Ancho ${w} px mayor al máximo de ${rules.maxW} px para ${rules.label}. Spec: ${rules.hint}`, true);
+                        this.value = ''; return;
+                    }
+
+                    // Rango de alto (hero)
+                    if (rules.minH !== undefined && h < rules.minH) {
+                        showToast(`Alto ${h} px menor al mínimo de ${rules.minH} px para ${rules.label}. Spec: ${rules.hint}`, true);
+                        this.value = ''; return;
+                    }
+                    if (rules.maxH !== undefined && h > rules.maxH) {
+                        showToast(`Alto ${h} px mayor al máximo de ${rules.maxH} px para ${rules.label}. Spec: ${rules.hint}`, true);
+                        this.value = ''; return;
+                    }
+
+                    // Orientación horizontal obligatoria
+                    if (rules.landscape && h >= w) {
+                        showToast(`La imagen (${w}×${h} px) debe tener Orientación Horizontal (ancho > alto). Spec: ${rules.hint}`, true);
+                        this.value = ''; return;
+                    }
+                } catch (e) {
+                    console.error('[cms-upload] Error al verificar dimensiones:', e);
+                    showToast('Error técnico al leer las dimensiones de la imagen.', true);
+                    this.value = '';
+                    return;
+                }
+
+                // Construir FormData
+                const fd = new FormData();
+                fd.append('file',       file);
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing File Specifications**
+
+I've been examining the specifications for the 'ubicacion-croquis' file type within `cms-upload.js`, specifically line 98. It appears to require WebP format with quality 85, effort 6, and dimensions between 1136x615 and 1186x645 pixels. The maximum file size is capped at 150KB.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `croquis`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.086673492s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 5:08 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `upload`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 5:08 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L274-314)</summary>
+
+**Path:** `Unknown file`
+
+```
+    if (!hash_equals($_SESSION['csrf_token'] ?? '', $submitted)) {
+        http_response_code(403);
+        Logger::log('WARN', 'Token CSRF inválido en cms/upload', Flight::auth()->getUserId() ?: null);
+        echo json_encode(['ok' => false, 'msg' => 'Token de seguridad inválido.']);
+        exit;
+    }
+
+    // Verificar que llegó un archivo sin errores
+    if (empty($_FILES['file']) || $_FILES['file']['error'] !== UPLOAD_ERR_OK) {
+        $errCode = $_FILES['file']['error'] ?? -1;
+        http_response_code(400);
+        echo json_encode(['ok' => false, 'msg' => "No se recibió el archivo (código: {$errCode})."]);
+        exit;
+    }
+
+    $file = $_FILES['file'];
+
+    // Validar MIME por contenido real — solo WebP (alineado con Guía CMS §5.1–§5.6)
+    $allowedMimes = ['image/webp' => 'webp'];
+    $finfo = new \finfo(FILEINFO_MIME_TYPE);
+    $mime  = $finfo->file($file['tmp_name']);
+    if (!array_key_exists($mime, $allowedMimes)) {
+        http_response_code(415);
+        echo json_encode(['ok' => false, 'msg' => 'Tipo no permitido. Solo se acepta WebP. Optimiza la imagen antes de subir.']);
+        exit;
+    }
+
+    // Validar tamaño — 150 KB máximo (límite homologado para todos los slots de subida)
+    if ($file['size'] > 150 * 1024) {
+        $sizeKb = round($file['size'] / 1024, 1);
+        http_response_code(413);
+        echo json_encode(['ok' => false, 'msg' => "El archivo ({$sizeKb} KB) supera el límite de 150 KB. Optimiza la imagen antes de subir."]);
+        exit;
+    }
+
+    // Nombre del slot — solo alfanumérico y guiones
+    $slot     = preg_replace('/[^a-z0-9\-]/', '', strtolower($_POST['slot'] ?? 'cms'));
+    $slot     = $slot ?: 'cms';
+    $ext      = $allowedMimes[$mime];
+    $filename = $slot . '-' . date('Ymd') . '-' . bin2hex(random_bytes(4)) . '.' . $ext;
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Backend Logic**
+
+I've been examining the `admrc/index.php` file and have identified some key validations. Specifically, the code checks for the MIME type, ensuring it's `image/webp`. Additionally, it enforces a maximum file size of 150KB. I also noted an optional server-side check for image dimensions through `getimagesize()`.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.034401262s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 5:08 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L299-317)</summary>
+
+**Path:** `Unknown file`
+
+```
+    }
+
+    // Validar tamaño — 150 KB máximo (límite homologado para todos los slots de subida)
+    if ($file['size'] > 150 * 1024) {
+        $sizeKb = round($file['size'] / 1024, 1);
+        http_response_code(413);
+        echo json_encode(['ok' => false, 'msg' => "El archivo ({$sizeKb} KB) supera el límite de 150 KB. Optimiza la imagen antes de subir."]);
+        exit;
+    }
+
+    // Nombre del slot — solo alfanumérico y guiones
+    $slot     = preg_replace('/[^a-z0-9\-]/', '', strtolower($_POST['slot'] ?? 'cms'));
+    $slot     = $slot ?: 'cms';
+    $ext      = $allowedMimes[$mime];
+    $filename = $slot . '-' . date('Ymd') . '-' . bin2hex(random_bytes(4)) . '.' . $ext;
+
+    // Directorio de destino
+    $dbConfigDir = Flight::db()->query("SELECT valor FROM configuraciones WHERE clave = 'cms_upload_dir'")->fetchColumn();
+    $uploadDir   = trim($dbConfigDir ?: '');
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 5:08 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 5:08 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+creo no funciona asi, primero valida como hacen esa validacion las otras pestañas del cms para los uploads y alineate a eso.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `cms-upload.js`
+**Language:** javascript
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `cms-upload.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L94-164)</summary>
+
+**Path:** `Unknown file`
+
+```
+                function slotRules(s) {
+                    if (/^hero-/.test(s))              return { maxKb: 150, minW: 1280, maxW: 1920,                              landscape: true, label: 'Banner Hero',             hint: 'WebP · Quality 72–80 · Effort 6 · 1 280–1 920 px ancho · Orientación Horizontal · alto proporcional · máx. 150 KB, óptimo 60 KB' };
+                    if (/^carousel-/.test(s))          return { maxKb: 150, exactW: 800, exactH: 580,                                        label: 'Carrusel Especialidades', hint: 'WebP · Quality 75 · Effort 6 · exacto 800×580 px · máx. 150 KB, óptimo 60 KB' };
+                    if (/^ubicacion-croquis$/.test(s)) return { maxKb: 150, minW: 350, maxW: 1186, maxH: 645, landscape: true,   label: 'Croquis de Ubicación',    hint: 'WebP · Quality 85 · Effort 6 · 756 px (máx) × 577 px (máx) / hasta 1 136 px ancho · máx. 150 KB, óptimo 60 KB' };
+                    if (/^promo-/.test(s))             return { maxKb: 150, exactW: 900, exactH: 486,                                       label: 'Card de Promociones',     hint: 'WebP · Quality 72 · Effort 6 · exacto 900×486 px · ratio 13:7 · máx. 150 KB, óptimo 60 KB' };
+                    if (/^calidad-/.test(s))           return { maxKb: 150, exactW: 800, exactH: 580,                                       label: 'Galería de Calidad',      hint: 'WebP · Quality 75 · Effort 6 · exacto 800×580 px · máx. 150 KB, óptimo 60 KB' };
+                    if (/^seo-og$/.test(s))            return { maxKb: 150, minW: 1200, maxW: 1920,                              landscape: true, label: 'Imagen Open Graph (SEO)', hint: 'WebP · 1 200 × 630 px recomendado (ratio 1.91:1) · Orientación Horizontal · máx. 150 KB, óptimo 60 KB' };
+                    return                                    { maxKb: 150, minW: 800,                                                        label: 'Imagen CMS',              hint: 'WebP · mín. 800 px ancho · máx. 150 KB, óptimo 60 KB' };
+                }
+                const rules = slotRules(slot);
+
+                // ── Validación de tamaño ─────────────────────────────────────────────
+                const sizeKb = (file.size / 1024).toFixed(1);
+                if (file.size > rules.maxKb * 1024) {
+                    showToast(
+                        `Peso ${sizeKb} KB supera el máximo de ${rules.maxKb} KB para ${rules.label}.<br>` +
+                        'Optimiza la imagen (baja Quality o reduce dimensiones).',
+                        true
+                    );
+                    this.value = '';
+                    return;
+                }
+
+                // ── Validación de dimensiones (requiere cargar la imagen) ────────────
+                try {
+                    const objUrl = URL.createObjectURL(file);
+                    const img    = new Image();
+                    await new Promise((res, rej) => { img.onload = res; img.onerror = rej; img.src = objUrl; });
+                    URL.revokeObjectURL(objUrl);
+                    const w = img.naturalWidth, h = img.naturalHeight;
+
+                    // Dimensiones exactas (carrusel, croquis, promociones)
+                    if (rules.exactW !== undefined && w !== rules.exactW) {
+                        showToast(`Dimensiones incorrectas (${w}×${h} px) para ${rules.label}.<br><small>Requerido: ${rules.hint}</small>`, true);
+                        this.value = ''; return;
+                    }
+                    if (rules.exactH !== undefined && h !== rules.exactH) {
+                        showToast(`Dimensiones incorrectas (${w}×${h} px) para ${rules.label}.<br><small>Requerido: ${rules.hint}</small>`, true);
+                        this.value = ''; return;
+                    }
+
+                    // Rango de ancho (hero, banner, default)
+                    if (rules.minW !== undefined && w < rules.minW) {
+                        showToast(`Ancho ${w} px menor al mínimo de ${rules.minW} px para ${rules.label}. Spec: ${rules.hint}`, true);
+                        this.value = ''; return;
+                    }
+                    if (rules.maxW !== undefined && w > rules.maxW) {
+                        showToast(`Ancho ${w} px mayor al máximo de ${rules.maxW} px para ${rules.label}. Spec: ${rules.hint}`, true);
+                        this.value = ''; return;
+                    }
+
+                    // Rango de alto (hero)
+                    if (rules.minH !== undefined && h < rules.minH) {
+                        showToast(`Alto ${h} px menor al mínimo de ${rules.minH} px para ${rules.label}. Spec: ${rules.hint}`, true);
+                        this.value = ''; return;
+                    }
+                    if (rules.maxH !== undefined && h > rules.maxH) {
+                        showToast(`Alto ${h} px mayor al máximo de ${rules.maxH} px para ${rules.label}. Spec: ${rules.hint}`, true);
+                        this.value = ''; return;
+                    }
+
+                    // Orientación horizontal obligatoria
+                    if (rules.landscape && h >= w) {
+                        showToast(`La imagen (${w}×${h} px) debe tener Orientación Horizontal (ancho > alto). Spec: ${rules.hint}`, true);
+                        this.value = ''; return;
+                    }
+                } catch (e) {
+                    console.error('[cms-upload] Error al verificar dimensiones:', e);
+                    showToast('Error técnico al leer las dimensiones de la imagen.', true);
+                    this.value = '';
+                    return;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Upload Validation**
+
+I'm currently looking into upload validation. Specifically, I'm examining how it functions in `cms-upload.js`. Initial investigation shows the JavaScript side handles file type checks before sending an AJAX request. This is the first level of defence in upload functionality.
+
+
+**Standardizing Backend Validation**
+
+I've been focusing on aligning backend upload validation. The PHP side in `admrc/index.php` is being streamlined; I'm standardizing it for all slots, removing unnecessary slot-specific checks. This aligns perfectly with the current reliance on the JavaScript client for dimension validation, specifically within `cms-upload.js`. I am also examining how the `ubicacion-croquis` slot rules should be adjusted in `cms-upload.js` to correctly accept a `756 × 577 px` image, to be consistent with client expectations.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.039855074s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L299-324)</summary>
+
+**Path:** `Unknown file`
+
+```
+    }
+
+    // Validar tamaño — 150 KB máximo (límite homologado para todos los slots de subida)
+    if ($file['size'] > 150 * 1024) {
+        $sizeKb = round($file['size'] / 1024, 1);
+        http_response_code(413);
+        echo json_encode(['ok' => false, 'msg' => "El archivo ({$sizeKb} KB) supera el límite de 150 KB. Optimiza la imagen antes de subir."]);
+        exit;
+    }
+
+    // Validar dimensiones en backend por slot
+    $imgInfo = @getimagesize($file['tmp_name']);
+    if ($imgInfo) {
+        $w = $imgInfo[0];
+        $h = $imgInfo[1];
+        $slotName = preg_replace('/[^a-z0-9\-]/', '', strtolower($_POST['slot'] ?? 'cms'));
+        if ($slotName === 'ubicacion-croquis') {
+            if ($w > 1186 || $h > 645) {
+                http_response_code(400);
+                echo json_encode(['ok' => false, 'msg' => "Las dimensiones ({$w}×{$h} px) superan el máximo permitido (1 186 × 645 px)."]);
+                exit;
+            }
+        }
+    }
+
+    // Nombre del slot — solo alfanumérico y guiones
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 5:09 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `cms-upload.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L94-103)</summary>
+
+**Path:** `Unknown file`
+
+```
+                function slotRules(s) {
+                    if (/^hero-/.test(s))              return { maxKb: 150, minW: 1280, maxW: 1920,                              landscape: true, label: 'Banner Hero',             hint: 'WebP · Quality 72–80 · Effort 6 · 1 280–1 920 px ancho · Orientación Horizontal · alto proporcional · máx. 150 KB, óptimo 60 KB' };
+                    if (/^carousel-/.test(s))          return { maxKb: 150, exactW: 800, exactH: 580,                                        label: 'Carrusel Especialidades', hint: 'WebP · Quality 75 · Effort 6 · exacto 800×580 px · máx. 150 KB, óptimo 60 KB' };
+                    if (/^ubicacion-croquis$/.test(s)) return { maxKb: 150, minW: 350, maxW: 1186, maxH: 645, landscape: true,   label: 'Croquis de Ubicación',    hint: 'WebP · Quality 85 · Effort 6 · 756 px (máx) × 577 px (máx) / hasta 1 136 px ancho · máx. 150 KB, óptimo 60 KB' };
+                    if (/^promo-/.test(s))             return { maxKb: 150, exactW: 900, exactH: 486,                                       label: 'Card de Promociones',     hint: 'WebP · Quality 72 · Effort 6 · exacto 900×486 px · ratio 13:7 · máx. 150 KB, óptimo 60 KB' };
+                    if (/^calidad-/.test(s))           return { maxKb: 150, exactW: 800, exactH: 580,                                       label: 'Galería de Calidad',      hint: 'WebP · Quality 75 · Effort 6 · exacto 800×580 px · máx. 150 KB, óptimo 60 KB' };
+                    if (/^seo-og$/.test(s))            return { maxKb: 150, minW: 1200, maxW: 1920,                              landscape: true, label: 'Imagen Open Graph (SEO)', hint: 'WebP · 1 200 × 630 px recomendado (ratio 1.91:1) · Orientación Horizontal · máx. 150 KB, óptimo 60 KB' };
+                    return                                    { maxKb: 150, minW: 800,                                                        label: 'Imagen CMS',              hint: 'WebP · mín. 800 px ancho · máx. 150 KB, óptimo 60 KB' };
+                }
+                const rules = slotRules(slot);
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Investigating File Logic**
+
+I'm now diving into `cms-upload.js`, specifically line 98. It appears there are several image "slots" defined with specific width and height requirements. I've begun to list the available slots and their corresponding dimension configurations, for comparison. The existing slots are `carousel-`, `promo-`, `calidad-`, and `hero-`. I have noted the `exactW` and `exactH` for the first three, but the `hero-` slot uses `minW` and `maxW` instead.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.005610204s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 5:10 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1357-1367)</summary>
+
+**Path:** `Unknown file`
+
+```
+                        <label>Imagen del Croquis</label>
+                        <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px;">
+                            📐 <strong>Codec:</strong> WebP únicamente &nbsp;·&nbsp;
+                            <strong>Quality:</strong> 85 &nbsp;·&nbsp;
+                            <strong>Effort:</strong> 6 &nbsp;·&nbsp;
+                            <strong>Dimensiones aceptadas:</strong> 756 px (máx) × 577 px (máx) / hasta 1 136 px ancho &nbsp;·&nbsp;
+                            <strong>Alto:</strong> proporcional (auto) &nbsp;·&nbsp;
+                            <strong>Orientación Horizontal</strong> &nbsp;·&nbsp;
+                            <strong>Peso:</strong> Máximo 150 KB, Óptimo 60 KB
+                        </p>
+                        <?php $croquisImgUrl = cms($contenidos, 'ubicacion', 'croquis', 'imagen_url', '/laesh-web-assets-uipv1a/img/01mapa-laesh.webp'); ?>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 5:10 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 5:10 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
 - **Model:** Gemini 3.6 Flash (Medium)
 </details>
 
