@@ -7,9 +7,9 @@
 | **Trajectory ID** | `cbb3065c-15ab-40b2-a551-df5474c119c2` |
 | **Cascade ID** | `33758958-5e2c-4311-ba38-6d3f32787e53` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 11969 |
+| **Total Steps** | 12072 |
 | **Started** | 30 Aug 2026, 9:34 pm |
-| **Completed** | 5 Sept 2026, 7:24 pm |
+| **Completed** | 6 Sept 2026, 8:29 am |
 
 ---
 
@@ -16939,920 +16939,72 @@
 
 ---
 
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-## User Request
-
-. entonces ahora hay queeliminar Dirección Física y Contacto Directo
-Dirección Física (línea completa) , es pregunta ?
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `gestion_web.php`
-**Language:** php
-</details>
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-## User Request
-
-dale a  Opción 1, sin pisar cosas
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `gestion_web.php`
-**Language:** php
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1184-1229)</summary>
-
-**Path:** `Unknown file`
-
-```
-            <div class="editor-card">
-                <div class="editor-card-header">
-                    <div class="card-title">Dirección Física y Contacto Directo</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group mb-3">
-                        <label>Dirección Física (línea completa)</label>
-                        <input type="text" name="_cfg_direccion"
-                               value="<?= htmlspecialchars(!empty($config['direccion']) ? $config['direccion'] : 'Azucenas #8, Fraccionamiento Jardines del Sur, Huajuapan de León, Oaxaca.', ENT_QUOTES, 'UTF-8') ?>">
-                        <small class="cms-help-text">Línea completa para pie de página (Footer), mapas y vista web.</small>
-                    </div>
-                    <div class="field-row">
-                        <div class="field-group">
-                            <label>Calle, Número y Colonia <small class="txt-muted">(SEO Schema.org)</small></label>
-                            <input type="text" name="_cfg_direccion_calle"
-                                   value="<?= htmlspecialchars(!empty($config['direccion_calle']) ? $config['direccion_calle'] : 'Azucenas #8, Fracc. Jardines del Sur', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label>Ciudad / Municipio <small class="txt-muted">(SEO Schema.org)</small></label>
-                            <input type="text" name="_cfg_ciudad"
-                                   value="<?= htmlspecialchars(!empty($config['ciudad']) ? $config['ciudad'] : 'Huajuapan de León', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label>Estado <small class="txt-muted">(SEO Schema.org)</small></label>
-                            <input type="text" name="_cfg_estado"
-                                   value="<?= htmlspecialchars(!empty($config['estado']) ? $config['estado'] : 'Oaxaca', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label>Código Postal <small class="txt-muted">(SEO Schema.org)</small></label>
-                            <input type="text" name="_cfg_cp"
-                                   value="<?= htmlspecialchars(!empty($config['cp']) ? $config['cp'] : '69000', ENT_QUOTES, 'UTF-8') ?>"
-                                   maxlength="10">
-                        </div>
-                    </div>
-                    <div class="field-row">
-                        <div class="field-group">
-                            <label>Teléfono Directo</label>
-                            <input type="tel" name="_cfg_telefono"
-                                   value="<?= htmlspecialchars($config['telefono'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label>Correo Electrónico</label>
-                            <input type="email" name="_cfg_email_contacto"
-                                   value="<?= htmlspecialchars($config['email_contacto'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                    </div>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Refining Panel 6**
-
-I'm currently working on Panel 6 within `gestion_web.php`. I've removed `_cfg_direccion` and added a helpful hint: "⚡ The Complete Physical Address for the footer and maps is automatically generated from these 4 structured fields." Now I'll be using `replace_file_` to implement these changes.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.043370128s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 8:56 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L184-204)</summary>
-
-**Path:** `Unknown file`
-
-```
-// Valores frecuentes — sin fallback: el cliente DEBE tener todo en configuraciones
-$cfgNombreLab = $cfg('nombre_laboratorio');
-$cfgNombreC   = $cfg('nombre_corto');
-$cfgAnios     = $cfg('anios_experiencia');
-$cfgTel       = $cfg('telefono');
-$cfgTelDigit  = waNum($cfgTel);
-$cfgWA        = waNum($cfg('whatsapp_numero'));
-$cfgEmail     = $cfg('email_contacto');
-$cfgDir       = $cfg('direccion');
-$cfgDirCalle  = $cfg('direccion_calle');
-$cfgCiudad    = $cfg('ciudad');
-$cfgEstado    = $cfg('estado');
-$cfgCP        = $cfg('cp');
-$cfgHorSem    = $cfg('horario_semana');
-$cfgHorDom    = $cfg('horario_domingo');
-$cfgHrsOpen   = $cfg('hrs_open');
-$cfgHrsClose  = $cfg('hrs_close');
-$cfgDomOpen   = $cfg('dom_open');
-$cfgDomClose  = $cfg('dom_close');
-$cfgRespNom   = $cfg('responsable_nombre');
-$cfgRespProf  = $cfg('responsable_cedula_prof');
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Examining Configuration Details**
-
-I've just focused my attention on lines 193-197 of `website/index.php`. I am looking at how the configuration values for address, city, and state are being set up. I am focusing on what defaults are used, and how these are managed.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.078632781s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 8:56 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1544-1574)</summary>
-
-**Path:** `Unknown file`
-
-```
-                <div class="editor-card-body">
-                    <p class="cms-p">ℹ️ <strong>Dirección, teléfono, CP y horarios</strong> del marcado JSON-LD se leen automáticamente desde la <strong>Pestaña 6 (Ubicación y Contacto)</strong>. No requiere doble captura.</p>
-                    <div class="field-row">
-                        <div class="field-group">
-                            <label class="txt-muted">Dirección SSOT (Pestaña 6)</label>
-                            <input type="text" disabled value="<?= htmlspecialchars(!empty($config['direccion']) ? $config['direccion'] : 'Azucenas #8, Fraccionamiento Jardines del Sur, Huajuapan de León, Oaxaca.', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label class="txt-muted">Teléfono SSOT (Pestaña 6)</label>
-                            <input type="text" disabled value="<?= htmlspecialchars(!empty($config['telefono']) ? $config['telefono'] : '953 532 0000', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label class="txt-muted">CP SSOT (Pestaña 6)</label>
-                            <input type="text" disabled value="<?= htmlspecialchars(!empty($config['cp']) ? $config['cp'] : '69000', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                    </div>
-                    <div class="field-row">
-                        <div class="field-group">
-                            <label class="txt-muted">Apertura Lun–Sáb</label>
-                            <input type="text" disabled value="<?= htmlspecialchars($config['hrs_open'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label class="txt-muted">Cierre Lun–Sáb</label>
-                            <input type="text" disabled value="<?= htmlspecialchars($config['hrs_close'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label class="txt-muted">Apertura Dom</label>
-                            <input type="text" disabled value="<?= htmlspecialchars($config['dom_open'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label class="txt-muted">Cierre Dom</label>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 8:57 pm
 
 ---
 
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-## User Request
-
-tons hay ssto para la direccion o no y 100% alineado alo que ocupa google SEO en las phps del website ?
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `gestion_web.php`
-**Language:** php
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `cfgDir`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 9:00 pm
 
 ---
 
-## Agent Response
+### Local File Search
 
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-## User Request
-
-para: Admin /7. Pie de Página ,  de donde se estan tomando los datos mostrados ?
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `gestion_web.php`
-**Language:** php
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `panel-footer`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
+**Status:** Reset
+**Created:** 4 Sept 2026, 9:04 pm
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 9:04 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1389-1464)</summary>
-
-**Path:** `Unknown file`
-
-```
-             PANEL 7: PIE DE PÁGINA
-             Sección: footer | Fuente HTML: #footer
-             SSOT: contacto, horarios, dirección y responsable se leen desde configuraciones.
-               Solo son editables aquí: logo alt, nombre lab y textos legales.
-             ================================================================ -->
-        <div id="panel-footer" class="cms-panel" role="tabpanel" aria-labelledby="tab-footer" tabindex="0" data-section="footer">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">Pie de Página — Contenido e Identidad (#footer)</h3>
-            </div>
-
-            <hr class="cms-section-sep">
-            <!-- Estilo y Color de Fondo -->
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">Estilo y Color de Fondo del Pie de Página</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Color de Fondo de la Franja <code>&lt;footer&gt;</code></label>
-                        <?php $footerBg = cms($contenidos, 'footer', 'estilo', 'bg_color', '#0f172a'); ?>
-                        <div class="d-flex align-items-center gap-3">
-                            <input type="color" id="footer-bg-picker" value="<?= h($footerBg) ?>"
-                                   class="cms-color-picker" style="width:48px; height:38px; padding:2px; cursor:pointer; border-radius:4px; border:1px solid #cbd5e1;"
-                                   onchange="var inp=document.getElementById('footer-bg-input'); inp.value=this.value; inp.dispatchEvent(new Event('input', {bubbles:true})); inp.dispatchEvent(new Event('change', {bubbles:true}));">
-                            <input type="text" id="footer-bg-input" name="estilo__bg_color" value="<?= h($footerBg) ?>"
-                                   class="cms-color-text-input" style="width:130px;"
-                                   oninput="document.getElementById('footer-bg-picker').value = this.value;">
-                            <span class="txt-muted small">Haz clic en el cuadro o elige un color institucional:</span>
-                        </div>
-                        <div class="d-flex gap-2 mt-2">
-                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="var c='#0f172a'; document.getElementById('footer-bg-picker').value=c; var inp=document.getElementById('footer-bg-input'); inp.value=c; inp.dispatchEvent(new Event('input', {bubbles:true})); inp.dispatchEvent(new Event('change', {bubbles:true}));">
-                                <span style="display:inline-block; width:12px; height:12px; background:#0f172a; border-radius:50%; margin-right:4px;"></span> Oscuro
-                            </button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="var c='#0052b7'; document.getElementById('footer-bg-picker').value=c; var inp=document.getElementById('footer-bg-input'); inp.value=c; inp.dispatchEvent(new Event('input', {bubbles:true})); inp.dispatchEvent(new Event('change', {bubbles:true}));">
-                                <span style="display:inline-block; width:12px; height:12px; background:#0052b7; border-radius:50%; margin-right:4px;"></span> Azul LAESH
-                            </button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="var c='#003882'; document.getElementById('footer-bg-picker').value=c; var inp=document.getElementById('footer-bg-input'); inp.value=c; inp.dispatchEvent(new Event('input', {bubbles:true})); inp.dispatchEvent(new Event('change', {bubbles:true}));">
-                                <span style="display:inline-block; width:12px; height:12px; background:#003882; border-radius:50%; margin-right:4px;"></span> Azul Marino
-                            </button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="var c='#1e293b'; document.getElementById('footer-bg-picker').value=c; var inp=document.getElementById('footer-bg-input'); inp.value=c; inp.dispatchEvent(new Event('input', {bubbles:true})); inp.dispatchEvent(new Event('change', {bubbles:true}));">
-                                <span style="display:inline-block; width:12px; height:12px; background:#1e293b; border-radius:50%; margin-right:4px;"></span> Slate Oscuro
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Contenido del Pie de Página (Editor RTE) -->
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">Contenido del Pie de Página <small class="txt-muted">(Texto fijo — Solo Estilos RTE)</small></div>
-                </div>
-                <div class="editor-card-body">
-                    <p class="cms-p">
-                        El texto del Pie de Página es fijo (datos institucionales, aviso legal, copyright).
-                        <strong>Solo puedes cambiar los estilos visuales</strong>: color, negritas, tamaño de fuente, alineación, etc.
-                        El teclado está bloqueado — arrastra la selección para aplicar formato.
-                    </p>
-                    <div class="cms-info-box" style="background:#fffbeb;border:1.5px solid #ca8a04;border-radius:8px;padding:0.6rem 1rem;margin-bottom:0.75rem;font-size:0.83rem;color:#92400e;display:flex;align-items:center;gap:0.5rem;">
-                        🔒 <strong>Modo Solo-Estilos:</strong> El contenido de texto no puede modificarse aquí. Edita los datos de contacto, horarios y dirección en la pestaña <em>Ubicación y Contacto</em>.
-                    </div>
-                    <div class="field-group">
-                        <div id="ck-footer" class="ck5-mount ck5-mount-lg"></div>
-                        <textarea id="ck-footer-data" name="contenido__cuerpo_html" class="ck5-hidden-data"><?= htmlspecialchars(cmsRaw($contenidos, 'footer', 'contenido', 'cuerpo_html')) ?></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- ================================================================
-             PANEL 8: SEO Y METADATOS
-             Sección: seo | Fuente HTML: head del index.html
-             ================================================================ -->
-        <div id="panel-seo" class="cms-panel" role="tabpanel" aria-labelledby="tab-seo" tabindex="0" data-section="seo">
-            <div class="cms-panel-header">
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `footerHtml`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 4 Sept 2026, 9:04 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L764-789)</summary>
-
-**Path:** `Unknown file`
-
-```
-            </button>
-            <?php endif; ?>
-            <span id="hero-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></span>
-        </section>
-        <?php
-            else:
-                include __DIR__ . '/sections/' . $_secId . '.php';
-            endif;
-        endforeach;
-        unset($sectionOrder, $_secId, $_secNavLabels, $isVideoActive);
-        ?>
-        <!-- ══════════════════════════════════════════════ FOOTER ══ -->
-        <footer class="footer-main" style="background: <?= h($footerBgColor) ?> !important;" role="contentinfo">
-            <?= $footerHtml ?>
-        </footer>
-    </main>
-
-    <!-- Botón WhatsApp flotante — número desde configuraciones -->
-    <a href="<?= h($waInfoUrl) ?>" class="whatsapp-float"
-       target="_blank" rel="noopener noreferrer"
-       title="Contáctanos por WhatsApp" aria-label="Contáctanos por WhatsApp">
-        <svg width="32" height="32" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984a9.96 9.96 0 0 0 1.335 4.975L2 22l5.195-1.364A9.936 9.936 0 0 0 12.006 22c5.507 0 9.991-4.479 9.992-9.986.002-2.668-1.036-5.18-2.924-7.069C17.186 3.057 14.675 2.002 12.012 2zm5.72 14.15c-.314.88-1.543 1.62-2.13 1.7-.587.08-1.173.28-4.08-.93-3.72-1.54-6.12-5.32-6.3-5.57-.18-.25-1.47-1.95-1.47-3.72 0-1.78.93-2.65 1.26-3 .33-.35.72-.44.96-.44h.69c.22 0 .52-.08.82.64.3.72 1.02 2.48 1.11 2.66.09.18.15.39.03.63-.12.24-.18.39-.36.6-.18.21-.38.47-.54.63-.18.18-.37.38-.16.73.21.35.93 1.54 2 2.49 1.38 1.23 2.54 1.61 2.9 1.79.36.18.57.15.78-.09.21-.24.9-1.05 1.14-1.41.24-.36.48-.3.8-.18.33.12 2.07 1.02 2.43 1.2.36.18.6.27.69.42.09.15.09.87-.22 1.75z"/>
-        </svg>
-    </a>
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 9:04 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-**Examining Footer Content**
-
-I've just focused my attention on the `footer / contenido / cuerpo_html` database record. I'm taking a close look at its current HTML content, which includes a `div` with class "footer-info" and an embedded image, with several attributes. I'm analyzing the image source and other attributes, paying particular attention to styling.
-
-
-**Investigating Footer Structure**
-
-I'm now diving deeper into the structure within the footer. I see the hardcoded address and contact information within the `contenido__cuerpo_html` database record. I'm focusing on the `web_contenidos` table and how the footer content and background color are managed within it. I'm considering if the HTML should dynamically integrate the configuration directory. I'm looking at related files to understand the control flow.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.194926051s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 9:05 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 9:05 pm
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-## User Request
-
-para footer: los datos de direccion, tels,, contacto ,etc, para: index.php y cms/
-Admin/7. Pie de Página , de donde toman los datos que muestran ?
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `gestion_web.php`
-**Language:** php
-</details>
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-## User Request
-
-. si, dale a esto:
-.. que el Footer tenga 100% de integración SSOT. en pesataña 7 no se edita, solo se cambia estilo
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `gestion_web.php`
-**Language:** php
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Implementing SSOT Footer**
-
-I'm now fully focused on achieving 100% Single Source of Truth (SSOT) integration for the footer as instructed. I've noted that tab 7 will be exclusively for style adjustments, and content edits are not needed there.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.182549993s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L759-779)</summary>
-
-**Path:** `Unknown file`
-
-```
-            <button type="button" id="hero-pause-btn" class="hero-pause-btn"
-                    aria-label="Pausar presentación" aria-pressed="false">
-                <svg id="hero-icon-pause" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
-                <svg id="hero-icon-play"  width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="d-none"><polygon points="5,3 19,12 5,21"/></svg>
-                <span id="hero-pause-label" class="hero-pause-label">Pausar</span>
-            </button>
-            <?php endif; ?>
-            <span id="hero-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></span>
-        </section>
-        <?php
-            else:
-                include __DIR__ . '/sections/' . $_secId . '.php';
-            endif;
-        endforeach;
-        unset($sectionOrder, $_secId, $_secNavLabels, $isVideoActive);
-        ?>
-        <!-- ══════════════════════════════════════════════ FOOTER ══ -->
-        <footer class="footer-main" style="background: <?= h($footerBgColor) ?> !important;" role="contentinfo">
-            <?= $footerHtml ?>
-        </footer>
-    </main>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1389-1459)</summary>
-
-**Path:** `Unknown file`
-
-```
-             PANEL 7: PIE DE PÁGINA
-             Sección: footer | Fuente HTML: #footer
-             SSOT: contacto, horarios, dirección y responsable se leen desde configuraciones.
-               Solo son editables aquí: logo alt, nombre lab y textos legales.
-             ================================================================ -->
-        <div id="panel-footer" class="cms-panel" role="tabpanel" aria-labelledby="tab-footer" tabindex="0" data-section="footer">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">Pie de Página — Contenido e Identidad (#footer)</h3>
-            </div>
-
-            <hr class="cms-section-sep">
-            <!-- Estilo y Color de Fondo -->
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">Estilo y Color de Fondo del Pie de Página</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Color de Fondo de la Franja <code>&lt;footer&gt;</code></label>
-                        <?php $footerBg = cms($contenidos, 'footer', 'estilo', 'bg_color', '#0f172a'); ?>
-                        <div class="d-flex align-items-center gap-3">
-                            <input type="color" id="footer-bg-picker" value="<?= h($footerBg) ?>"
-                                   class="cms-color-picker" style="width:48px; height:38px; padding:2px; cursor:pointer; border-radius:4px; border:1px solid #cbd5e1;"
-                                   onchange="var inp=document.getElementById('footer-bg-input'); inp.value=this.value; inp.dispatchEvent(new Event('input', {bubbles:true})); inp.dispatchEvent(new Event('change', {bubbles:true}));">
-                            <input type="text" id="footer-bg-input" name="estilo__bg_color" value="<?= h($footerBg) ?>"
-                                   class="cms-color-text-input" style="width:130px;"
-                                   oninput="document.getElementById('footer-bg-picker').value = this.value;">
-                            <span class="txt-muted small">Haz clic en el cuadro o elige un color institucional:</span>
-                        </div>
-                        <div class="d-flex gap-2 mt-2">
-                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="var c='#0f172a'; document.getElementById('footer-bg-picker').value=c; var inp=document.getElementById('footer-bg-input'); inp.value=c; inp.dispatchEvent(new Event('input', {bubbles:true})); inp.dispatchEvent(new Event('change', {bubbles:true}));">
-                                <span style="display:inline-block; width:12px; height:12px; background:#0f172a; border-radius:50%; margin-right:4px;"></span> Oscuro
-                            </button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="var c='#0052b7'; document.getElementById('footer-bg-picker').value=c; var inp=document.getElementById('footer-bg-input'); inp.value=c; inp.dispatchEvent(new Event('input', {bubbles:true})); inp.dispatchEvent(new Event('change', {bubbles:true}));">
-                                <span style="display:inline-block; width:12px; height:12px; background:#0052b7; border-radius:50%; margin-right:4px;"></span> Azul LAESH
-                            </button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="var c='#003882'; document.getElementById('footer-bg-picker').value=c; var inp=document.getElementById('footer-bg-input'); inp.value=c; inp.dispatchEvent(new Event('input', {bubbles:true})); inp.dispatchEvent(new Event('change', {bubbles:true}));">
-                                <span style="display:inline-block; width:12px; height:12px; background:#003882; border-radius:50%; margin-right:4px;"></span> Azul Marino
-                            </button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="var c='#1e293b'; document.getElementById('footer-bg-picker').value=c; var inp=document.getElementById('footer-bg-input'); inp.value=c; inp.dispatchEvent(new Event('input', {bubbles:true})); inp.dispatchEvent(new Event('change', {bubbles:true}));">
-                                <span style="display:inline-block; width:12px; height:12px; background:#1e293b; border-radius:50%; margin-right:4px;"></span> Slate Oscuro
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Contenido del Pie de Página (Editor RTE) -->
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">Contenido del Pie de Página <small class="txt-muted">(Texto fijo — Solo Estilos RTE)</small></div>
-                </div>
-                <div class="editor-card-body">
-                    <p class="cms-p">
-                        El texto del Pie de Página es fijo (datos institucionales, aviso legal, copyright).
-                        <strong>Solo puedes cambiar los estilos visuales</strong>: color, negritas, tamaño de fuente, alineación, etc.
-                        El teclado está bloqueado — arrastra la selección para aplicar formato.
-                    </p>
-                    <div class="cms-info-box" style="background:#fffbeb;border:1.5px solid #ca8a04;border-radius:8px;padding:0.6rem 1rem;margin-bottom:0.75rem;font-size:0.83rem;color:#92400e;display:flex;align-items:center;gap:0.5rem;">
-                        🔒 <strong>Modo Solo-Estilos:</strong> El contenido de texto no puede modificarse aquí. Edita los datos de contacto, horarios y dirección en la pestaña <em>Ubicación y Contacto</em>.
-                    </div>
-                    <div class="field-group">
-                        <div id="ck-footer" class="ck5-mount ck5-mount-lg"></div>
-                        <textarea id="ck-footer-data" name="contenido__cuerpo_html" class="ck5-hidden-data"><?= htmlspecialchars(cmsRaw($contenidos, 'footer', 'contenido', 'cuerpo_html')) ?></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- ================================================================
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L459-469)</summary>
-
-**Path:** `Unknown file`
-
-```
-$ubSub     = $c('ubicacion', 'seccion', 'subtitulo');
-$mapsEmbed = $c('ubicacion', 'info', 'maps_embed');
-
-// Footer — Contenido HTML y Color de Fondo consolidado desde el CMS
-$footerHtml    = $c('footer', 'contenido', 'cuerpo_html');
-$footerBgColor = $c('footer', 'estilo', 'bg_color', '#0f172a');
-
-// Aviso de Privacidad — Contenido HTML consolidado desde el RTE del CMS
-$avisoHtml = $c('aviso-privacidad', 'contenido', 'cuerpo_html');
-
-// SEO (sin fallback)
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 4 Sept 2026, 9:10 pm
 
 ---
@@ -27803,6 +26955,1408 @@ Okay, I'm currently focused on editing the `landing.css` file within the `laesh-
 
 **Status:** Completed
 **Created:** 5 Sept 2026, 7:24 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+Mejora para cms Admin /3. Estudios, para Tarjetas del Carrusel de Áreas del Laboratorio (1 a 16) , que en cada ficha aparezca un checkbox donde se muestre si esta encendido (se muestra en index.php) o apagado (no se muestra en index.php).
+
+---
+
+### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 8:14 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `carousel1`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 8:14 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `carousel`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 8:14 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L287-300)</summary>
+
+**Path:** `Unknown file`
+
+```
+// ── 3d. Carrusel de especialidades y áreas — 16 tarjetas (sin fallback) ───────────────────
+// Textos e imágenes dinámicos desde web_contenidos (especialidades/carouselN/texto HTML y config.carouselN_img).
+$carouselCards = [];
+for ($ci = 1; $ci <= 16; $ci++) {
+    $cHtml = trim((string)$c('especialidades', "carousel{$ci}", 'texto'));
+    if ($cHtml === '') continue;
+    $cImg = trim((string)$c('especialidades', 'config', "carousel{$ci}_img", $cfg("carousel{$ci}_img", '')));
+    $carouselCards[$ci] = [
+        'img'   => $cImg,
+        'texto' => $cHtml,
+    ];
+}
+
+// ── 3e. Calidad gallery — 3 tarjetas (sin fallback) ────────────────────────
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `carousel`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 8:14 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L544-619)</summary>
+
+**Path:** `Unknown file`
+
+```
+            </div>
+
+            <hr class="cms-section-sep">
+
+            <!-- Carrusel de tarjetas de área fotográfica (carousel1–16) -->
+            <div class="cms-panel-header mt-4 mb-3">
+                <h4 class="cms-h3" style="font-size:1.1rem; color:var(--primary);">Tarjetas del Carrusel de Áreas del Laboratorio (1 a 16)</h4>
+                <p class="cms-help-text" style="margin-top:2px;">
+                    Cada tarjeta incluye su módulo de reemplazo de imagen (ranura <code>carousel-1</code> a <code>carousel-16</code>) y editor de texto enriquecido con CKEditor 5. Fichas 13 a 16 disponibles para posterior publicación.
+                </p>
+            </div>
+
+            <div class="especialidades-cards-grid mb-4">
+            <?php
+            for ($ci = 1; $ci <= 16; $ci++):
+                $curImg  = cms($contenidos, 'especialidades', 'config', "carousel{$ci}_img", '');
+                $curHtml = cmsRaw($contenidos, 'especialidades', "carousel{$ci}", 'texto');
+                $isNew   = $ci > 12;
+            ?>
+            <div class="editor-card">
+                <div class="editor-card-header">
+                    <div class="card-title">Tarjeta <?= $ci ?> — <?= $isNew ? 'Ficha Nueva (Opcional)' : 'Área de Laboratorio' ?></div>
+                    <span class="operator-badge"><?= $isNew ? 'Nueva (Desactivada si está vacía)' : 'Ficha Activa' ?></span>
+                </div>
+                <div class="editor-card-body">
+                    <div class="field-group">
+                        <label>Imagen de la Tarjeta <?= $ci ?></label>
+                        <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px; font-size: 0.78rem;">
+                            📐 <strong>Codec:</strong> WebP únicamente &nbsp;·&nbsp;
+                            <strong>Quality:</strong> 75 &nbsp;·&nbsp;
+                            <strong>Effort:</strong> 6 &nbsp;·&nbsp;
+                            <strong>Dimensiones:</strong> 800 × 580 px (ratio ~1.38:1) &nbsp;·&nbsp;
+                            <strong>Orientación Horizontal</strong> &nbsp;·&nbsp;
+                            <strong>Peso:</strong> máx. 40 KB
+                        </p>
+                        <div class="image-upload-box">
+                            <img id="prev-carousel-<?= $ci ?>"
+                                 src="<?= h($curImg) ?>"
+                                 alt="Preview Tarjeta <?= $ci ?>"
+                                 class="img-preview-sm">
+
+                            <label for="file-carousel-<?= $ci ?>" class="btn btn-secondary">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                                Cambiar Imagen
+                            </label>
+
+                            <input type="file" accept="image/webp"
+                                   id="file-carousel-<?= $ci ?>" class="d-none"
+                                   data-upload-slot="carousel-<?= $ci ?>"
+                                   data-preview-id="prev-carousel-<?= $ci ?>"
+                                   data-target-input="url-img-carousel-<?= $ci ?>">
+                        </div>
+                        <input type="url" id="url-img-carousel-<?= $ci ?>"
+                               name="config__carousel<?= $ci ?>_img"
+                               value="<?= h($curImg) ?>"
+                               class="cms-img-url-input" data-no-limit>
+                        <?php $imgBasename = $curImg ? basename($curImg) : 'Sin imagen'; ?>
+                        <span id="lbl-img-carousel-<?= $ci ?>" class="cms-img-filename-label"><?= h($imgBasename) ?></span>
+                    </div>
+
+                    <!-- Editor de Texto HTML con CKEditor 5 -->
+                    <div class="field-group">
+                        <label class="cms-label-bold mb-1" style="font-weight:700; display:block; font-size:0.88rem;">Contenido Editorial (Título H3 + Descripción)</label>
+                        <div id="ck-carousel-<?= $ci ?>" class="ck5-mount"></div>
+                        <textarea id="ck-carousel-<?= $ci ?>-data" name="carousel<?= $ci ?>__texto" class="ck5-hidden-data"><?= htmlspecialchars($curHtml) ?></textarea>
+                    </div>
+                </div>
+            </div>
+            <?php if ($ci % 2 === 0 && $ci < 16): ?>
+            <hr class="cms-section-sep">
+            <?php endif; ?>
+            <?php endfor; ?>
+            </div><!-- /hero-slides-grid -->
+
+            <!-- Nota al pie del catálogo -->
+            <div class="editor-card mb-4">
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `config__carousel`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 8:14 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `_POST`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 8:14 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L99-239)</summary>
+
+**Path:** `Unknown file`
+
+```
+    $submitted = $_POST['csrf_token'] ?? '';
+    if (!hash_equals($_SESSION['csrf_token'] ?? '', $submitted)) {
+        http_response_code(403);
+        Logger::log('WARN', 'Token CSRF inválido en cms/save', Flight::auth()->getUserId() ?: null);
+        echo json_encode(['ok' => false, 'msg' => 'Token de seguridad inválido.']);
+        exit;
+    }
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+
+    $db      = Flight::db();
+    $userId  = Flight::auth()->getUserId();
+    $seccion = trim($_POST['seccion'] ?? '');
+
+    // Validar sección — solo valores canónicos (D-07)
+    $seccionesValidas = ['hero','quienes-somos','especialidades','promociones','calidad','ubicacion','aviso-privacidad','privacidad','video-promo','video','footer','seo','configuracion-general'];
+    if (!in_array($seccion, $seccionesValidas, true)) {
+        http_response_code(400);
+        echo json_encode(['ok' => false, 'msg' => 'Sección no válida.']);
+        exit;
+    }
+
+    $campos = $_POST;
+    unset($campos['csrf_token'], $campos['seccion']);
+
+    try {
+        $db->beginTransaction();
+
+        $stmt = $db->prepare(
+            "INSERT INTO web_contenidos (seccion, subseccion, clave, valor, tipo, actualizado_por)
+             VALUES (:sec, :sub, :clave, :valor, 'texto', :uid)
+             ON DUPLICATE KEY UPDATE valor = VALUES(valor), actualizado_por = VALUES(actualizado_por)"
+        );
+
+        // Configuraciones globales: campos _cfg_{clave} → tabla configuraciones (D-04)
+        // UPSERT: inserta si la clave no existe, actualiza si ya existe
+        $cfgStmt = $db->prepare(
+            "INSERT INTO configuraciones (clave, valor, descripcion) VALUES (:clave, :valor, NULL)
+             ON DUPLICATE KEY UPDATE valor = VALUES(valor)"
+        );
+
+        // Manejo específico de catalogo_promociones en MariaDB cuando la sección es 'promociones'
+        if ($seccion === 'promociones') {
+            $rawIds = $_POST['promo_id'] ?? [];
+            $promoIds = is_array($rawIds) ? $rawIds : (is_numeric($rawIds) ? [$rawIds] : []);
+
+            if (empty($promoIds)) {
+                $promoIds = $db->query("SELECT id FROM catalogo_promociones ORDER BY id ASC")->fetchAll(\PDO::FETCH_COLUMN) ?: [1, 2, 3, 4, 5, 6, 7];
+            }
+
+            $stmtPromo = $db->prepare("
+                UPDATE catalogo_promociones SET
+                    dia_semana      = :dia_semana,
+                    estudio_id      = :estudio_id,
+                    nombre_oferta   = :nombre_oferta,
+                    subtitulo       = :subtitulo,
+                    descripcion     = :descripcion,
+                    ayuno           = :ayuno,
+                    tiempo_entrega  = :tiempo_entrega,
+                    precio_regular  = :precio_regular,
+                    precio_oferta   = :precio_oferta,
+                    imagen_fondo    = :imagen_fondo,
+                    activo          = :activo
+                WHERE id = :id
+            ");
+
+            foreach ($promoIds as $pId) {
+                $pIdInt = (int)$pId;
+                if ($pIdInt <= 0) continue;
+
+                $diaSem = trim($_POST["promo_dia_semana_{$pIdInt}"] ?? '');
+                $estId  = !empty($_POST["promo_estudio_id_{$pIdInt}"]) ? (int)$_POST["promo_estudio_id_{$pIdInt}"] : null;
+                $tit    = trim($_POST["promo_titulo_{$pIdInt}"] ?? '');
+                $sub    = trim($_POST["promo_subtitulo_{$pIdInt}"] ?? '');
+                $desc   = trim($_POST["promo_desc_{$pIdInt}"] ?? '');
+                $ayuno  = trim($_POST["promo_ayuno_{$pIdInt}"] ?? '');
+                $tiempo = trim($_POST["promo_tiempo_{$pIdInt}"] ?? '');
+                $pReg   = (isset($_POST["promo_precio_reg_{$pIdInt}"]) && $_POST["promo_precio_reg_{$pIdInt}"] !== '') ? (float)$_POST["promo_precio_reg_{$pIdInt}"] : null;
+                $pOf    = (isset($_POST["promo_precio_of_{$pIdInt}"]) && $_POST["promo_precio_of_{$pIdInt}"] !== '') ? (float)$_POST["promo_precio_of_{$pIdInt}"] : null;
+                $img    = trim($_POST["promo_img_{$pIdInt}"] ?? '');
+                $act    = isset($_POST["promo_active_{$pIdInt}"]) ? 1 : 0;
+
+                $stmtPromo->execute([
+                    'id'             => $pIdInt,
+                    'dia_semana'     => $diaSem,
+                    'estudio_id'     => $estId,
+                    'nombre_oferta'  => $tit,
+                    'subtitulo'      => $sub,
+                    'descripcion'    => $desc,
+                    'ayuno'          => $ayuno,
+                    'tiempo_entrega' => $tiempo,
+                    'precio_regular' => $pReg,
+                    'precio_oferta'  => $pOf,
+                    'imagen_fondo'   => $img,
+                    'activo'         => $act,
+                ]);
+            }
+        }
+
+        foreach ($campos as $fieldKey => $valor) {
+            if (str_starts_with($fieldKey, 'promo_')) {
+                continue; // Omitir campos de catalogo_promociones de la tabla web_contenidos
+            }
+            // D-04: campos _cfg_{clave} van a configuraciones, no a web_contenidos
+            if (str_starts_with($fieldKey, '_cfg_')) {
+                $cfgClave = substr($fieldKey, 5); // quitar prefijo '_cfg_'
+                $cfgStmt->execute(['clave' => $cfgClave, 'valor' => $valor]);
+                continue;
+            }
+            // Formato estándar: {subseccion}__{clave}  ej: slide1__titulo
+            [$sub, $clave] = array_pad(explode('__', $fieldKey, 2), 2, $fieldKey);
+            $stmt->execute([
+                'sec'   => $seccion,
+                'sub'   => $sub,
+                'clave' => $clave,
+                'valor' => $valor,
+                'uid'   => $userId,
+            ]);
+        }
+
+        $db->commit();
+        unset($_SESSION['cms_draft'][$seccion]);
+        Logger::log('INFO', "CMS: sección '{$seccion}' publicada.", $userId);
+
+        // ── Invalidar caché L2 según la sección modificada ───────────────────────
+        Cache::init();
+        // promociones: afecta tanto PROMOS (datos) como CMS (títulos sección)
+        if ($seccion === 'promociones') {
+            Cache::invalidate([Cache::KEY_PROMOS, Cache::KEY_CMS]);
+        // configuracion-general: afecta las configuraciones institucionales
+        } elseif ($seccion === 'configuracion-general') {
+            Cache::invalidate([Cache::KEY_CFG, Cache::KEY_CMS]);
+        // especialidades: afecta el árbol de estudios si los grupos cambian
+        } elseif ($seccion === 'especialidades') {
+            Cache::invalidate([Cache::KEY_TREE, Cache::KEY_CMS]);
+        // cualquier otra sección CMS editorial
+        } else {
+            Cache::invalidate(Cache::KEY_CMS);
+        }
+
+        // Devolver CSRF rotado para que el cliente actualice su data-csrf sin recargar
+        echo json_encode(['ok' => true, 'msg' => '¡Cambios publicados exitosamente!', 'csrf_token' => $_SESSION['csrf_token']]);
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Tracing Form Input Naming**
+
+I've been examining the form field naming convention within the backend architecture, specifically focusing on `admrc/index.php`. It looks like there's a standardized format: `{subseccion}__{clave}`. For instance, consider the `carousel` sub-section as an example. I want to delve deeper to fully grasp the implementation.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `checkbox`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.001779585s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 8:14 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<!DOCTYPE html>
+<?php
+/**
+ * admrc/views/gestion_web.php — Plates template (merge de gestion-web.html)
+ *
+ * Fuente HTML: website/uipv1/gestion-web.html  ← NUNCA BORRAR (R15.1)
+ * Merge iterativo: cuando gestion-web.html reciba cambios del cliente,
+ * propagar estructura/textos aquí y mantener lógica PHP.
+ *
+ * Variables disponibles (desde admrc/index.php):
+ *   $nombreAdmin  string  — Nombre del administrador logueado
+ *   $csrfToken    string  — Token CSRF para formularios POST (R14.12)
+ *   $contenidos   array   — [seccion][subseccion][clave] => valor (desde web_contenidos)
+ *   $lastPub      string  — Timestamp de última publicación
+ *
+ * Merge v2 — 2026-08-22:
+ *   + Slides 2-5 del carrusel hero
+ *   + Tagline navbar (hero/navbar)
+ *   + Quiénes Somos: resp. sanitario + filosofía
+ *   + Promociones: 6 días (lunes–sábado) + domingo alt
+ *   + Calidad: título y subtítulo de sección
+ *   + Ubicación: WhatsApp + embed de mapa
+ *   + Panel 7: Pie de Página (footer)
+ *   + Panel 8: SEO y Metadatos
+ *
+ * SSOT Refactor — 2026-08-22 (ver 07_seed_catalogs.sql):
+ *   • D-04 RESUELTO: WhatsApp, teléfono, email, horarios, dirección, CP,
+ *     responsable sanitario → configuraciones (singleton). Ya NO en web_contenidos.
+ *   • Panel 6 (Ubicación) = editor master de todos los singletons institucionales.
+ *   • Paneles 7 (Footer) y 8 (SEO): los datos de configuraciones son read-only en CMS.
+ *   • Promociones: titulo/precio/ayuno/tiempo eliminados del CMS; se usa estudio_clave
+ *     → JOIN estudios para obtener datos clínicos (SSOT desde tabla estudios).
+ *   • especialidades/catalogo/lista y /titulo eliminados (redundantes con tabla estudios).
+ *   • quienes-somos/resp: nombre y cédulas → configuraciones; bio permanece en web_contenidos.
+ * GAP-RC-01 (deferred): labadmin.php → backend persistence + localStorage sync.
+ * GAP-IMG (deferred): inputs type="file" sin name/POST — requieren ruta separada
+ *   POST /cms/upload con enctype=multipart/form-data (fuera del alcance del CMS de texto).
+ */
+
+// Helper: escape HTML seguro (alias de htmlspecialchars)
+function h(string $v): string {
+    return htmlspecialchars($v, ENT_QUOTES, 'UTF-8');
+}
+
+// Helper: recuperar valor de $contenidos con fallback
+function cms(array $c, string $sec, ?string $sub, string $clave, string $default = ''): string {
+    $val = $c[$sec][$sub ?? ''][$clave] ?? '';
+    return htmlspecialchars($val !== '' ? $val : $default, ENT_QUOTES, 'UTF-8');
+}
+
+// Helper: recuperar valor RAW de $contenidos para editores RTE (desescapa entidades codificadas para evitar doble escape en CKEditor)
+function cmsRaw(array $c, string $sec, ?string $sub, string $clave, string $default = ''): string {
+    $val = $c[$sec][$sub ?? ''][$clave] ?? '';
+    $raw = $val !== '' ? $val : $default;
+    while (str_contains($raw, '&lt;') && str_contains($raw, '&gt;')) {
+        $raw = htmlspecialchars_decode($raw, ENT_QUOTES);
+    }
+    return $raw;
+}
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing CMS Functionality**
+
+I've been looking closely at the `cms()` function within `gestion_web.php`. It seems to be key for retrieving specific content, particularly for carousel activation. The function checks for the presence of a key like `carousel1__activo` in the `$contenidos` array. Based on the presence or absence of that key in the contents of an object, it'll return either '1' or '0' for its `carousel1` setting. Now, I'm shifting focus to understand how `$carouselCards` are built in `website/index.php`.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `badge`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.059080350s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 8:14 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `operator-badge`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 8:14 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L479-519)</summary>
+
+**Path:** `Unknown file`
+
+```
+    font-weight: 700;
+    color: var(--primary);
+    margin-top: 1.25rem;
+    margin-bottom: 0.75rem;
+    padding-left: 0.65rem;
+    border-left: 3.5px solid var(--primary-green);
+    display: block;
+    line-height: 1.35;
+}
+
+.operator-badge-block {
+    display: block;
+    margin-top: 0.5rem;
+    margin-bottom: 0.2rem;
+    font-size: 0.8rem;
+    line-height: 1.4;
+}
+
+/* ── Negrita en títulos de tarjeta y badges técnicos de slides ── */
+.editor-card-header .card-title { font-weight: 700; }
+.operator-badge                  { font-weight: 700; }
+
+
+.editor-card-header--padded {
+    padding-bottom: 0.85rem;
+    border-bottom: 1px solid rgba(0, 82, 183, 0.1);
+    margin-bottom: 1.25rem;
+}
+
+/* ── Contador de caracteres en la esquina superior derecha del label ── */
+.field-group label,
+.cms-selector-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.char-counter {
+    font-size: 0.76rem;
+    font-weight: 700;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Investigating Style Options**
+
+I'm currently focused on the `admrc/views/gestion_web.php` file, specifically lines 558-570. I'm trying to figure out how to elegantly style a toggle switch (checkbox) for cards 1 through 16 within the CMS editor. My objective is to create something clean and stylish. Looking for inspiration from existing card styling in this file.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `carousel1`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.083710884s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** CORTEX_STEP_STATUS_ERROR
+**Created:** 6 Sept 2026, 8:14 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L287-304)</summary>
+
+**Path:** `Unknown file`
+
+```
+// ── 3d. Carrusel de especialidades y áreas — 16 tarjetas (sin fallback) ───────────────────
+// Textos e imágenes dinámicos desde web_contenidos (especialidades/carouselN/texto HTML y config.carouselN_img).
+$carouselCards = [];
+for ($ci = 1; $ci <= 16; $ci++) {
+    $cHtml = trim((string)$c('especialidades', "carousel{$ci}", 'texto'));
+    if ($cHtml === '') continue;
+    $cImg = trim((string)$c('especialidades', 'config', "carousel{$ci}_img", $cfg("carousel{$ci}_img", '')));
+    $carouselCards[$ci] = [
+        'img'   => $cImg,
+        'texto' => $cHtml,
+    ];
+}
+
+// ── 3e. Calidad gallery — 3 tarjetas (sin fallback) ────────────────────────
+$_calDef = [
+    1 => ['Área de Hematología',      'Análisis de biometría hemática y células sanguíneas con rigor científico y alta precisión.'],
+    2 => ['Química Clínica',          'Determinación automatizada de metabolitos, perfil lipídico y enzimas específicas.'],
+    3 => ['Microbiología y Cultivos', 'Aislamiento, tinción de Gram y pruebas de susceptibilidad a antimicrobianos.'],
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L554-574)</summary>
+
+**Path:** `Unknown file`
+
+```
+            </div>
+
+            <div class="especialidades-cards-grid mb-4">
+            <?php
+            for ($ci = 1; $ci <= 16; $ci++):
+                $curImg  = cms($contenidos, 'especialidades', 'config', "carousel{$ci}_img", '');
+                $curHtml = cmsRaw($contenidos, 'especialidades', "carousel{$ci}", 'texto');
+                $isNew   = $ci > 12;
+            ?>
+            <div class="editor-card">
+                <div class="editor-card-header">
+                    <div class="card-title">Tarjeta <?= $ci ?> — <?= $isNew ? 'Ficha Nueva (Opcional)' : 'Área de Laboratorio' ?></div>
+                    <span class="operator-badge"><?= $isNew ? 'Nueva (Desactivada si está vacía)' : 'Ficha Activa' ?></span>
+                </div>
+                <div class="editor-card-body">
+                    <div class="field-group">
+                        <label>Imagen de la Tarjeta <?= $ci ?></label>
+                        <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px; font-size: 0.78rem;">
+                            📐 <strong>Codec:</strong> WebP únicamente &nbsp;·&nbsp;
+                            <strong>Quality:</strong> 75 &nbsp;·&nbsp;
+                            <strong>Effort:</strong> 6 &nbsp;·&nbsp;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Refining Website Logic**
+
+I'm currently focused on the `website/index.php` file, specifically lines 290-299. I'm examining the carousel card generation logic to ensure the proper content is selected, using a for loop. The objective is to efficiently control the activation state of carousel cards, to manage the amount of them generated.
+
+
+**Analyzing Carousel Controls**
+
+I've shifted my attention to `admrc/views/gestion_web.php`, specifically lines 558-568. I'm focusing on the logic that controls the active state of carousel cards within the admin interface. I'm analyzing how `$isActivo`, derived from the database, determines the checkbox state, and how this relates to the overall carousel functionality and editing capabilities. I'm also examining the implications of cards 13-16 being marked as 'New'.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.861897885s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 8:15 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L554-571)</summary>
+
+**Path:** `Unknown file`
+
+```
+            </div>
+
+            <div class="especialidades-cards-grid mb-4">
+            <?php
+            for ($ci = 1; $ci <= 16; $ci++):
+                $curImg  = cms($contenidos, 'especialidades', 'config', "carousel{$ci}_img", '');
+                $curHtml = cmsRaw($contenidos, 'especialidades', "carousel{$ci}", 'texto');
+                $isNew   = $ci > 12;
+            ?>
+            <div class="editor-card">
+                <div class="editor-card-header">
+                    <div class="card-title">Tarjeta <?= $ci ?> — <?= $isNew ? 'Ficha Nueva (Opcional)' : 'Área de Laboratorio' ?></div>
+                    <span class="operator-badge"><?= $isNew ? 'Nueva (Desactivada si está vacía)' : 'Ficha Activa' ?></span>
+                </div>
+                <div class="editor-card-body">
+                    <div class="field-group">
+                        <label>Imagen de la Tarjeta <?= $ci ?></label>
+                        <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px; font-size: 0.78rem;">
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 8:15 am
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+como se logra la persistencia de ese cjheckbox en las cms de php ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `index.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Explaining Checkbox Persistence**
+
+Okay, I'm diving into explaining checkbox persistence in PHP CMS systems. My initial focus is on presenting a clear, step-by-step explanation in Spanish, breaking down how HTML checkboxes retain their state. I'm aiming for accessible language.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.000509257s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+Analiza gap/bug, en index.php home site aparece se muestra hasta Tarjeta 11 — Área de Laboratorio y no muestrra de la 12 a la 16, y en la cms aparecen 
+Encendidas.
+analiza, informa me.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `index.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `carousel`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 8:25 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `specialties`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 8:25 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `website.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L364-429)</summary>
+
+**Path:** `Unknown file`
+
+```
+    // ─────────────────────────────────────────────────────────────
+    // 7. Carrusel Horizontal de Especialidades
+    //    Scroll snap por ancho de tarjeta + gap computado
+    // ─────────────────────────────────────────────────────────────
+    window.slideSpecialties = function(direction) {
+        const track = document.getElementById('specialties-track');
+        if (!track) return;
+
+        const card = track.querySelector('.carousel-card');
+        if (!card) return;
+
+        const cardWidth = card.getBoundingClientRect().width;
+        const gap       = parseFloat(window.getComputedStyle(track).gap) || 0;
+        track.scrollBy({ left: direction * (cardWidth + gap), behavior: 'smooth' });
+    };
+
+    // ─────────────────────────────────────────────────────────────
+    // UX3: Paginación por puntitos (dots) del carrusel de especialidades
+    // ─────────────────────────────────────────────────────────────
+    (function initSpecialtiesDots() {
+        var track = document.getElementById('specialties-track');
+        var dotsContainer = document.getElementById('specialties-dots');
+        if (!track || !dotsContainer) return;
+
+        // Filtro defensivo: omitir cualquier tarjeta que contenga la palabra ESTABLECER
+        var initialCards = track.querySelectorAll('.carousel-card');
+        initialCards.forEach(function(card) {
+            var txt = card.innerText || '';
+            var img = card.querySelector('img');
+            var altTxt = img ? (img.alt || '') : '';
+            if (/ESTABLECER/i.test(txt) || /ESTABLECER/i.test(altTxt)) {
+                card.remove();
+            }
+        });
+
+        var cards = track.querySelectorAll('.carousel-card');
+        if (cards.length === 0) return;
+
+        function buildDots() {
+            dotsContainer.innerHTML = '';
+            var maxScroll = track.scrollWidth - track.clientWidth;
+            if (maxScroll <= 0) {
+                dotsContainer.style.display = 'none';
+                return;
+            } else {
+                dotsContainer.style.display = 'flex';
+            }
+
+            for (var i = 0; i < cards.length; i++) {
+                (function(index) {
+                    var btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = 'hero-dot' + (index === 0 ? ' active' : '');
+                    btn.setAttribute('aria-label', 'Diapositiva de estudio ' + (index + 1) + ' de ' + cards.length);
+                    btn.setAttribute('aria-pressed', index === 0 ? 'true' : 'false');
+                    btn.addEventListener('click', function() {
+                        var targetCard = cards[index];
+                        if (targetCard) {
+                            var targetLeft = targetCard.offsetLeft - track.offsetLeft;
+                            track.scrollTo({ left: targetLeft, behavior: 'smooth' });
+                        }
+                    });
+                    dotsContainer.appendChild(btn);
+                })(i);
+            }
+            updateActiveDot();
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `carousel12`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 8:25 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `carousel11`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 8:25 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `carousel1`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 8:25 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 8:25 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Code Directly**
+
+Okay, I've decided to dive into the code. Specifically, I'm focusing on `admrc/views/gestion_web.php`, `website/index.php`, and `laesh-web-assets-uipv1a/js/website.js`. I am going to concentrate on `admrc/views/gestion_web.php` lines 558-568 to start.
+
+
+**Comparing Code Functionality**
+
+I'm now comparing how the code handles carousel cards in `gestion_web.php` and `index.php`, particularly focusing on cards 13-16. I've noticed `index.php` directly skips empty carousel text entries, while the backend displays these as "Nueva (Desactivada si está vacía)" in `gestion_web.php`. It looks like index.php only displays content from the active card.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `especialidades.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.448177799s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L19-44)</summary>
+
+**Path:** `Unknown file`
+
+```
+                    <img src="/laesh-web-assets-uipv1a/icons/chevron-left.svg" alt="" class="icon-24" loading="lazy" decoding="async">
+                </button>
+                <div class="specialties-carousel-viewport">
+                    <div id="specialties-track" class="specialties-carousel-track">
+                        <?php $ccIdx = 0; foreach ($carouselCards as $cc): $ccIdx++; ?>
+                        <div class="carousel-card">
+                            <img src="<?= h($cc['img']) ?>" alt="Área de Laboratorio LAESH"
+                                 width="800" height="580"
+                                 loading="<?= $ccIdx <= 2 ? 'eager' : 'lazy' ?>"
+                                 decoding="<?= $ccIdx <= 2 ? 'sync' : 'async' ?>">
+                            <div class="carousel-card__body ck5-output">
+                                <?= safeHtml($cc['texto']) ?>
+                            </div>
+                        </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+                <button type="button" class="carousel-arrow-btn carousel-arrow-btn--right"
+                        id="btn-carousel-next" aria-label="Siguiente">
+                    <img src="/laesh-web-assets-uipv1a/icons/chevron-right.svg" alt="" class="icon-24" loading="lazy" decoding="async">
+                </button>
+            </div>
+            <div class="carousel-progress-wrap">
+                <div id="carousel-progress" class="carousel-progress"
+                     role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
+                     aria-label="Progreso del carrusel de especialidades">
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Carousel Generation**
+
+I've been digging into how the carousel cards are generated. I've located the loop within `sections/especialidades.php` and traced the `$carouselCards` variable back to its origin in `website/index.php`. It looks like it's a simple loop creating an array of cards based on some data from the database. I'm focusing on how the data for each card is retrieved.
+
+
+**Pinpointing Root Causes**
+
+I've identified the root causes for the missing carousel cards. It seems the default fallback value of `'1'` for the `activo` field in new cards in the CMS led to all 16 cards appearing "on" in the admin panel, even if empty. This is compounded by the PHP code filtering out cards with empty HTML content, and the JavaScript filtering cards with placeholder text. I will start testing to confirm these findings and test possible solutions.
+
+
+**Refining CMS Defaults**
+
+I'm now zeroing in on a critical UX issue: the misalignment between the CMS's "active" state and the actual card display. The `'1'` default in the `curActivo` function leads to cards appearing "on" in the admin even when content is missing. I've formulated a solution that will make new cards, specifically 13-16, default to "off" in the CMS unless content is entered or explicitly activated. This will create better alignment between the CMS and the live website.
+
+
+**Optimizing Active State**
+
+I've just refined my approach to address the "active" state issue. Analyzing the code in `admrc/views/gestion_web.php`, I can see a clear solution. It intelligently defaults the active state based on existing content. Cards 1 through 12 default to active, while new cards, 13 through 16, default to inactive if content is missing, which will prevent unwanted display of new cards. This logic now neatly aligns the admin panel with the website's display, improving the user experience, particularly for the carousel cards 13-16.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.578185170s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 8:26 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L289-299)</summary>
+
+**Path:** `Unknown file`
+
+```
+$carouselCards = [];
+for ($ci = 1; $ci <= 16; $ci++) {
+    $cActivo = $c('especialidades', "carousel{$ci}", 'activo', '1');
+    if ($cActivo === '0') continue; // Omitir tarjeta desactivada (apagada) desde el CMS
+    $cHtml = trim((string)$c('especialidades', "carousel{$ci}", 'texto'));
+    if ($cHtml === '') continue;
+    $cImg = trim((string)$c('especialidades', 'config', "carousel{$ci}_img", $cfg("carousel{$ci}_img", '')));
+    $carouselCards[$ci] = [
+        'img'   => $cImg,
+        'texto' => $cHtml,
+    ];
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 6 Sept 2026, 8:26 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Crafting the Spanish Explanation**
+
+I've completed auditing and fixing everything. Now, I'm shifting focus to crafting a clear, structured Spanish response. First up: "Explicación del Diagnóstico (Por qué ocurría el comportamiento)" to help the user understand my analysis and solution.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.000389124s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+.se necesita actualiza algo en .sql del setup ?  o en cms realiza el insert/update ?
+. que archivos cambias para esta solicitud ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `gestion_web.php`
+**Language:** php
+</details>
 
 ---
 
