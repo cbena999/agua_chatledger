@@ -86,12 +86,12 @@
 
 ### P-LAESH-E2E-01 ✅ [LAESH KVM2] Trazabilidad E2E — G1–G5 todos resueltos
 
-**Estado**: Cerrado 2026-09-06 (G2–G5) + 2026-09-06 (G1).
+**Estado**: Cerrado 2026-09-06 (G2–G5) + 2026-09-06 (G1). **Deploy KVM2 confirmado 2026-09-06.**
 
 **Resueltos:**
 | Gap | Fix | Verificado |
 |-----|-----|-----------|
-| G1 | `Logger::logAlways()` añadido en `commons/Logger.php` (bypass filtro nivel mín.). Call-sites actualizados: login exitoso, logout, orden recepción creada, solicitud médica creada, cambio estado orden, CMS sección publicada, médico registrado, admin cambió estado médico | ✅ 2026-09-06 (local — pendiente deploy KVM2) |
+| G1 | `Logger::logAlways()` añadido en `commons/Logger.php` (bypass filtro nivel mín.). Call-sites actualizados: login exitoso, logout, orden recepción creada, solicitud médica creada, cambio estado orden, CMS sección publicada, médico registrado, admin cambió estado médico | ✅ 2026-09-06 — deploy KVM2 confirmado |
 | G2 | `RbacManager::requirePermission()` emite `Logger::log('WARN',...)` en denegaciones e `Logger::log('INFO',...)` en redirects | ✅ entry WARN en sys_logs + app.log |
 | G3 | `Logger::$requestId` estático (`bin2hex(random_bytes(8))`), columna `request_id CHAR(16)` en sys_logs | ✅ `[REQ:1068fa52d9b0b134]` en app.log |
 | G4 | Columnas `url VARCHAR(500)` + `metodo VARCHAR(10)` en sys_logs; capturadas en Logger | ✅ `[GET /laesh/md/estudios/todos]` |
@@ -201,10 +201,9 @@
 ## 🟡 PRIORIDAD MEDIA — LAESH Dev (código)
 
 ### G-DEV-01 ✅ Modal perfil médico — resuelto 2026-09-06
-**Estado**: Cerrado.  
+**Estado**: Cerrado. **Deploy KVM2 confirmado 2026-09-06.**  
 **Análisis**: El backend `POST /laesh/rc/medico/crear` ya existía y estaba completo en `rc/index.php` → `RC\Negocio\Ordenes::registrarMedico()`. El stub JS (`console.log`) era código muerto — el form tenía `hx-post` y HTMX lo manejaba, pero sin validación completa de celular ni feedback de error correcto.  
-**Fix aplicado**: `labadmin.js` — reemplazado stub `console.log` con interceptor de `submit` que hace `fetch('/laesh/rc/medico/crear')`. Validación añadida: celular `^\d{10}$`. Distinción éxito/error por header `HX-Refresh: true`. Feedback correcto en ambos casos.  
-> ⚠️ **Requiere deploy a KVM2** — archivo: `laesh-web-assets-uipv1a/js/labadmin.js`
+**Fix aplicado**: `labadmin.js` — reemplazado stub `console.log` con interceptor de `submit` que hace `fetch('/laesh/rc/medico/crear')`. Validación añadida: celular `^\d{10}$`. Distinción éxito/error por header `HX-Refresh: true`. Feedback correcto en ambos casos.
 
 ### G-DEV-02 ⏸ Cache-busting `?v=time()` — diferido a producción
 **Estado**: Diferido  
@@ -338,4 +337,4 @@ El HTML legado **no necesita sincronizarse** — el PHP es el SSOT.
 
 ---
 
-*Última actualización: 2026-09-04 (sesión 3) — Deploy KVM2 validado y pipeline saneado por completo. Cambios sesión 3: Servidor 83.136.219.193 en estado STACK OPERATIVO (28/28 OK, 0 errores). Scripts corregidos: 01 (chmod+copy .path/.service), 02 (php8.3 -n en checks), 03 (strings para idempotencia/verify Swoole, no php -r), 05 (rutas laesh-bds→laesh-src), 07 (CLI OPcache sin JIT — P-INFRA-02 fix real), 08 (php8.3 -n, strings sort -V, Swoole 6.2.x). nginx confs: 3 handlers PHP específicos + ^~ assets. P-INFRA-02 cerrado. README.md: §Gaps G-01→G-07, §Scripts, §Configs, §Verificación corregida (28 OK, 1 HSTS esperado). ET Tecnica_Infraestructura_Despliegue.html: badge deploy validado §19.3, tabla paso-a-paso actualizada, P-INFRA-02 nota en §15.9. Activos: P-LAESH-05 (Deploy OCI — requiere autorización), P-LAESH-06 (verificación visual medicos.php), P-INFRA-01 (DNS laesh.mx — bloqueado). — Claude Code*
+*Última actualización: 2026-09-06 (sesión 6) — Sesión 6 KVM2: G1 logAlways + G-DEV-01 modal médico + catálogos tabla plana fix (GET /api/estudios) + breadcrumb 🏠 Recepción admrc — todos desplegados y verificados en KVM2. BACKUP_MAX_AGE corregido 7200→90000 (cron diario 20:00). Bug de deploy identificado: ruta errónea /opt/laesh/laesh-swbldi/ vs correcta /opt/laesh/www/laesh-swbldi/ y /opt/laesh/assets/ — corregido, dir residual eliminado. Docs actualizados: laesh-kvm2-prod/README.md (árbol completo + nota rutas), Tecnica_Infraestructura_Despliegue.html (§19.3.3 nuevo árbol KVM2). SSOT scripts: 11/11 hashes idénticos local=KVM2. Pendiente: git commit sesión 6. — Claude Code*
