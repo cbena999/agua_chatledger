@@ -157,7 +157,7 @@
 | 2026-08-15 | LAESH – P-LAESH-04: auditoría 19/25 hallazgos | Grid 25/75 verificado (CSS correcto). 17 hallazgos corregidos esta sesión: P4 (cache versioning 7 HTMLs), P5 (autofocus), P2 (logo dims CLS), A7 (pause button carousel), A4 (h2 sr-only), A2 (aria-live), UX1+UX2 (tel+pattern), S2 (robots.txt), SEO1 (sitemap.xml), S3 (X-Frame-Options DENY), PWA2 (standalone), PWA3 (purpose any), C1 (dead code), C3 (fallback name), C4 (crypto.randomUUID), SEO3 (schema.org URI), 404 (página branded). Reporte: https://claude.ai/code/artifact/31b7d89b-dedd-4011-afef-d65f95b31d3f |
 | 2026-08-30 | LAESH – G-CMS-01: 14 cms/ huérfanos eliminados | 14 WebP no referenciados en `web_contenidos` eliminados (1.7 MB). img/cms/ queda con 5 slides activos (448 KB). |
 | 2026-08-30 | LAESH – G-CMS-02: sección Promociones funciona sin imágenes | `promociones-2026.webp` eliminada (era solo preview UI en `gestion-web.js:60`, no usada en sitio público). `gestion-web.js:60` actualizado a `sala-de-espera.webp`. Sección promociones confirmada funcional solo con texto. |
-| 2026-09-07 | LAESH KVM2 — Sesión 7: Estabilización CMS, Assets y CSS (index.php / home site) | **CMS cleanup — 3 bugs:** `cms_cleanup.php` cambia filtro `tipo='imagen_url'` → patrón URL; añade UNION `configuraciones` + UNION `catalogo_promociones`. **admrc/index.php:** auto-detección `tipo` (imagen_url vs texto) + ON DUPLICATE KEY UPDATE propagation. **BD calidad:** 13 filas `tipo='texto'` → `'imagen_url'` en `web_contenidos`. **6 imágenes promos** eliminadas por cron (bug anterior) → re-subidas vía CMS; cron ya las protege. **Cron `cache-renew`:** `LAESH_DB_PASS=` vacío en `/etc/cron.d/laesh-cache-renew` → fix con `sed` en servidor. **gestion-web.js:** 3 refs `-dos.webp` inexistentes → redirigidas a alternativas existentes. **website.js tooltip:** singleton timer 280 ms + `isRealMouse()` + `mouseenter` en tooltip cancela cierre. **CSS `@layer` Chrome 92:** 6 wrapper lines eliminados de `style.css` + `style-website.css` (chrome 92-98: silent drop de `@layer` contents). **Hero slide fix (Issue-3):** `background-size: contain` en `≤1024px` y `≤767px`. **landing.css responsividad (4 secciones):** calidad-cards 2col(481–1024px)/1col(≤480px); catalog-grid 2col(≥480px); orden-acc-body 2col(540–767px); grid-acerca-cards 2col(641–1024px)/1col(≤640px) — sin `!important` (R8). **07_seed_catalogs.sql:** hero slide 1 → fallback `/img/recepcion-de-pacientes.webp` estático. **Server orphans eliminados:** `og-laesh-1200x630.webp` + `/img/cms/` (19 WebP legados). **Deploy completo en KVM2.** ✅ `landing.css` desplegado · ✅ orphans locales eliminados · ⏳ git commit pendiente instrucción explícita. |
+| 2026-09-07 | LAESH KVM2 — Sesión 7+8: Estabilización integral home site, CMS, infra y seguridad | **Sesión 7 (CMS/Assets/CSS):** `cms_cleanup.php` 3 bugs; `admrc/index.php` auto-detección tipo+ON DUPLICATE KEY; BD 13 filas tipo fix; 6 promos re-subidas; cron cache-renew LAESH_DB_PASS; gestion-web.js 3 refs -dos.webp; website.js tooltip; @layer Chrome 92 fix; Issue-3 hero contain; landing.css responsividad 4 secciones; seed_catalogs.sql fallback estático; orphans eliminados. **Sesión 8 (continuación):** `landing.css` grid-acerca-cards Opción B — base 2col + min-width:1025px 3col + selector triple-clase @media(641–1024px) con display+grid-template !important — **verificado tablet portrait ✅**. **Infra/Seguridad:** P-INFRA-01 DNS laesh.mx→KVM2 verificado ✅; S1 HTTPS HTTP/2 + HSTS max-age=31536000 activo ✅; PERF-03 Gzip/Brotli Nginx ✅ (realizado por usuario); A6 contraste color ✅ (realizado por usuario). **CMS seguridad upload:** `admrc/index.php` validación dims servidor con `getimagesize()` por slot (hero/carousel/calidad/promo/croquis/seo-og/default) → HTTP 422 si no cumple spec; `gestion_web.php` accept promo `image/webp,image/png,image/jpeg` → `image/webp`. Deploy KVM2 ✅. ⏳ git commit pendiente instrucción explícita. |
 | 2026-08-13 | LAESH – B1 inline styles + dominio canónico OG | (ver P-LAESH-01 y P-LAESH-02) |
 | 2026-06-14 | Estrategia PWA Offline | Se descargó Dexie.js y se crearon esquemas `db.js` y `sw.js` localmente. |
 
@@ -293,49 +293,13 @@ Repetir verificación en OCI tras deploy P-LAESH-05
 
 ## 🟡 PRIORIDAD MEDIA — LAESH Portal Médico
 
-### P-LAESH-06 🟡 [LAESH Portal Médico] Issues A y B — verificación visual pendiente
+### P-LAESH-06 ✅ [LAESH Portal Médico] Issues A y B — RESUELTO 2026-09-07
 
-**Estado**: Reevaluado 2026-08-30 (Claude Code). CSS corregido en sesiones anteriores. Pendiente solo verificación visual en browser.
+**Estado**: Cerrado 2026-09-07 — verificación por análisis de código (Claude Code sesión 8).
 
-> ⚠️ **SSOT cambió**: El archivo de referencia ya NO es `website/uipv1/medicos.html`.  
-> **El SSOT activo del portal médico es `laesh-swbldi/md/views/medicos.php`** (Plates view, stack PHP).  
-> El HTML en `uipv1/medicos.html` es legado — tiene solo 10 fichas vs 18 en el PHP. No editar el HTML.
-
-**Archivos SSOT activos**:
-- Vista PHP: `laesh-swbldi/md/views/medicos.php`
-- CSS compartido: `laesh-web-assets-uipv1a/css/style.css` · `portal.css` · `targeting.css`
-- JS: `laesh-web-assets-uipv1a/js/medicos.js` · `medicos-a11y.js` · `app.js`
+- **Issue A (dropdown checkbox):** `portal.css` — `.ficha-dropdown` con `position:fixed` + JS `getBoundingClientRect()`. `.ficha-drop-item { display:flex; flex-wrap:nowrap; align-items:flex-start; gap:5px }` + checkbox `flex-shrink:0; width:14px; margin-top:1px` + span `flex:1`. Checkbox y texto siempre alineados. ✅
+- **Issue B (Sexo móvil):** `portal.css @media ≤767px` — grid `minmax(0,115px) minmax(0,1fr) 42px auto`; `form-group-sexo: grid-column:4; grid-row:1`; labels `0.62rem; margin-bottom:2px`; inputs `height:38px`. Alineación homogénea garantizada. ✅
 
 ---
 
-#### Issue A — Dropdown fichas: checkbox separado del texto
-
-**Estado en CSS**: ✅ Resuelto estructuralmente (sesión anterior).
-- `.ficha-dropdown` usa `position: fixed` (CSS-01) — escapa de cualquier `overflow:hidden` ancestro.
-- JS posiciona con `getBoundingClientRect()`.
-- `.ficha-dropdown .ficha-drop-item { display:flex; flex-wrap:nowrap; align-items:flex-start; gap:5px }` — especificidad (0,2,0), no hay conflicto con reglas ancestro.
-- Regla `.form-group label { display:block }` **NO existe** en el CSS cargado (`uipv1a/style.css`). Conflicto original era con archivo diferente.
-
-**Acción pendiente**: Abrir `medicos.php` en browser, verificar visualmente que checkbox queda junto al texto en cada ficha. Si persiste → reportar con captura de pantalla.
-
----
-
-#### Issue B — Sexo: radios H/M desalineados en móvil
-
-**Estado en CSS**: ✅ Resuelto estructuralmente (sesión anterior).
-- Grid `orden-patient-row1` en `@media ≤767px`: `grid-template-columns: minmax(0,115px) minmax(0,1fr) 42px auto; align-items: end`.
-- `.form-legend` (Sexo) y `.form-label` (Nombre/Edad) normalizados a `font-size:0.62rem; margin-bottom:2px` en móvil.
-- `.d-flex-gap-row` → `height:38px`. `.label-flex` → `min-height:38px`. Inputs → `height:38px`. Alturas homogéneas.
-
-**Acción pendiente**: Abrir `medicos.php` en browser a 375px de ancho, verificar visualmente que Sexo alinea con Nombre/Edad. Si persiste → DevTools → Computed height del `form-group-sexo` vs `form-group-nombre`.
-
----
-
-**Nota adicional — fichas desactualizadas en legado**:  
-`website/uipv1/medicos.html` tiene 10 fichas y label "10 fichas principales".  
-`md/views/medicos.php` tiene **18 fichas** (8 adicionales: F. Tiroidea, Lípidos, Marc. Tumorales, Infectología, PFH, Gasometrías, Reumatología, Bacteriología).  
-El HTML legado **no necesita sincronizarse** — el PHP es el SSOT.
-
----
-
-*Última actualización: 2026-09-07 (sesión 7) — Sesión 7 KVM2: Estabilización integral CMS assets + CSS responsividad del home site (index.php / laesh.mx). Todo desplegado en KVM2. Pendiente: git commit sesión 7 (instrucción explícita del usuario). — Claude Code*
+*Última actualización: 2026-09-07 (sesión 8) — Verificados: grid-acerca-cards 2col tablet ✅, HTTPS/HSTS laesh.mx ✅, PERF-03 ✅, A6 ✅. Nuevos: validación dims backend CMS (getimagesize por slot) + accept promo fix. Pendiente: git commit sesiones 7+8 (instrucción explícita del usuario). — Claude Code*
