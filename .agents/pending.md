@@ -8,7 +8,63 @@
 ---
 
 ## 🔴 PRIORIDAD ALTA
-(Ninguno - Todos los componentes clave del MVP y la integración de seguridad han sido estabilizados y validados).
+
+### P-LAESH-SEO-01 🔴 [LAESH] Presencia Google — SEO orgánico + SEM (Google Ads)
+**Estado**: En progreso — Plan elaborado 2026-09-07 (Claude Code sesión 8). Base técnica F0 completa.  
+**Artefacto de referencia**: https://claude.ai/code/artifact/dd7cc2f4-b287-48ee-88ac-5f178d18b1f9  
+**Dominio**: https://laesh.mx/
+
+#### F0 ✅ Base técnica — COMPLETA
+- HTTPS/HSTS activo ✅ · robots.txt ✅ · sitemap.xml (laesh.mx) ✅ · canonical ✅ · lang="es-MX" ✅ · og:image ✅ · hreflang ✅ · CMS Pestaña 11 metadatos ✅
+
+#### F1 🔲 Google Search Console + GA4 — Semana 1 · **Acción más urgente**
+| Tarea | Responsable | Estado |
+|---|---|---|
+| Crear propiedad en GSC: `https://laesh.mx/` (método DNS TXT recomendado) | **Usuario** | ⏳ |
+| Enviar sitemap: `https://laesh.mx/sitemap.xml` en GSC → Sitemaps | **Usuario** | ⏳ |
+| Correr PageSpeed Insights baseline (LCP, CLS, INP) | **Usuario** | ⏳ |
+| Crear propiedad GA4 → obtener Measurement ID (G-XXXXXXXX) | **Usuario** | ⏳ |
+| Agregar snippet GA4 en PHP base layout + vinculación GA4↔GSC | **Claude/Gemini** | ⏳ |
+
+#### F2 🔲 Google Business Profile — Semana 1–2
+| Tarea | Responsable | Estado |
+|---|---|---|
+| Crear/reclamar ficha GBP: "LAESH Laboratorio Clínico" | **Usuario** | ⏳ |
+| Categoría: Laboratorio de análisis clínicos + Laboratorio médico | **Usuario** | ⏳ |
+| NAP completo (dirección, teléfono, web laesh.mx, horarios) | **Usuario** | ⏳ |
+| Subir fotos: fachada, recepción, áreas de lab, personal | **Usuario** | ⏳ |
+| Agregar servicios individuales (estudios) y descripción 750 car. | **Usuario** | ⏳ |
+| Generar link de reseña corto + campaña interna de reseñas | **Usuario** | ⏳ |
+
+#### F3 🔲 Schema.org JSON-LD — Semana 2–3 · **Tarea de agente**
+| Tarea | Responsable | Estado |
+|---|---|---|
+| JSON-LD MedicalOrganization/ClinicalLaboratory en `index.php` | **Claude/Gemini** | ⏳ |
+| FAQPage: estudios frecuentes (biometría, Q.S., cultivos, etc.) administrable desde CMS | **Claude/Gemini** | ⏳ |
+| BreadcrumbList en todas las páginas/portales | **Claude/Gemini** | ⏳ |
+| Validar con Rich Results Test + verificar en GSC → Mejoras | **Usuario** | ⏳ |
+
+#### F4 🔲 Contenido CMS — Semana 3–4 · **Usuario via CMS Pestaña 11**
+- Títulos únicos por página (50–60 car.) con ciudad + propuesta de valor
+- Meta descriptions únicas (140–160 car.) con CTA en cada sección
+- og:image 1200×630 dedicada para laesh.mx (slot `seo-og` ya existe en CMS)
+
+#### F5 🔲 Google Ads — Mes 2 · Iniciar cuando F2 tenga 10+ reseñas
+- Search Ads: palabras clave locales · $150–250 MXN/día · radio 10–15 km
+- Google Maps pin promovido: $100–150 MXN/día
+- Configurar conversiones (clic tel, WhatsApp, formulario) — **Claude/Gemini** agrega tag
+- Textos de anuncio: título "LAESH Laboratorio Clínico · Resultados el mismo día"
+
+#### F6 🔁 Monitoreo continuo — mensual desde F1
+- GSC semanal: cobertura, consultas, Core Web Vitals
+- GBP: 1 post/semana, responder reseñas en 24 h
+- Google Ads mensual: CPA, keywords negativas, A/B textos
+- PageSpeed mensual: objetivo 90+ desktop · 75+ móvil
+
+#### Palabras clave objetivo principales
+`laboratorio clínico [ciudad]` · `análisis de sangre [ciudad]` · `biometría hemática [ciudad]` · `química sanguínea precio` · `estudios clínicos resultados mismo día` · `LAESH laboratorio`
+
+---
 
 ---
 
@@ -126,12 +182,8 @@
 
 `cache_renew.cron` (5 AM) funciona correctamente. `08_verify.sh` usa `php8.3 -n` para checks internos y `strings` para versión Swoole (sin invocar PHP). `03_install_swoole.sh` también usa `strings` para idempotencia.
 
-### P-INFRA-01 🔄 [LAESH OCI] DNS laesh.mx + Certbot — BLOQUEADO POR DNS
-**Estado**: Bloqueado — hardening local y OCI completados 2026-08-20. Solo falta DNS.  
-**Pendiente**:
-1. Cambiar DNS `laesh.mx` → OCI IP `137.131.58.161` (hoy apunta a `2.57.91.91`)
-2. Tras propagación DNS: crear server block Nginx `laesh.mx` + ejecutar Certbot
-**Referencia**: §13.4 + §14.7 en `Tecnica_Infraestructura_Despliegue.html`.
+### P-INFRA-01 ✅ [LAESH KVM2] DNS laesh.mx + HTTPS/HSTS — RESUELTO 2026-09-07
+**Estado**: Cerrado — DNS verificado apuntando a KVM2 `83.136.219.193`; CNAME `www→laesh.mx`; HTTPS HTTP/2 + HSTS `max-age=31536000; includeSubDomains` activo. ✅
 
 ---
 
@@ -165,37 +217,17 @@
 
 ## 🟡 PRIORIDAD MEDIA — LAESH Assets (Squoosh — tarea del usuario)
 
-### G-IMG-01 🟡 Carrusel especialidades — 14 WebP sobre presupuesto
-**Spec objetivo**: 800×580 px · WebP Q75 · ≤25 KB por imagen  
-**Directorio destino**: `laesh-web-assets-uipv1a/img/`
-
-| Archivo | Actual | Δ peso |
-|---|---|---|
-| `area-bacteriologia-dos.webp` | 999×666 · 44 KB | −19 KB |
-| `area-bacteriologia.webp` | 1000×562 · 36 KB | −11 KB |
-| `area-centrifugacion.webp` | 1000×562 · 28 KB | −3 KB |
-| `area-coagulacion.webp` | 1000×1000 · 36 KB | aspect ratio + −11 KB |
-| `area-estudios-especiales.webp` | 1000×562 · 52 KB | −27 KB |
-| `area-hematologia-dos.webp` | 1000×1000 · 64 KB | aspect ratio + −39 KB |
-| `area-hematologia-uno.webp` | 1000×562 · 44 KB | −19 KB |
-| `area-quimica-clinica-dos.webp` | 1000×1000 · 68 KB | aspect ratio + −43 KB |
-| `area-quimica-clinica.webp` | 1000×562 · 84 KB | −59 KB |
-| `area-toma-de-muestras.webp` | 1000×666 · 36 KB | −11 KB |
-| `area-uroanalisis.webp` | 1000×666 · 32 KB | −7 KB |
-| `toma-de-cultivos.webp` | 1000×666 · 32 KB | −7 KB |
-| `toma-de-muestras.webp` | 1000×666 · 44 KB | −19 KB |
-| `toma-pediatricas.webp` | 1000×666 · 48 KB | −23 KB |
+### G-IMG-01 ✅ Carrusel especialidades — RESUELTO 2026-09-07
+**Estado**: Cerrado — verificado por usuario 2026-09-07.  
+Imágenes `area-*.webp` validadas en producción (KVM2 CMS). ✅
 
 ---
 
-### G-IMG-02 🟡 Assets estáticos con spec incorrecta — requieren asset nuevo o Squoosh
-
-| Archivo | Actual | Problema | Acción |
-|---|---|---|---|
-| `recepcion-lab.webp` | 1000×461 · 36 KB | ⚠️ ancho < 1280 px mínimo hero | Usuario provee imagen ≥1280 px |
-| `01mapa-laesh.webp` | 656×477 · 40 KB | ⚠️ spec: 1136×615 · Q85 · ≤90 KB | Usuario provee imagen o recorte |
-| `hero-slide5` activo (cms/) | 1152×532 · 36 KB | ⚠️ en BD pero < 1280 px mínimo | Usuario re-sube slide 5 vía CMS |
-| `sala-de-espera.webp` | 1920×1080 · **260 KB** | ⚠️ CSS bg slide 4 — peso alto | Squoosh: mismas dims · Q75 · target ≤120 KB |
+### G-IMG-02 ✅ Assets estáticos — RESUELTO 2026-09-07
+**Estado**: Cerrado — todos los assets verificados/corregidos por usuario 2026-09-07.
+- `01mapa-laesh.webp` 656×477 — dentro de spec real 656–756×477–577px ✅
+- `sala-de-espera.webp` — seed local reemplazado con CMS hero-slide4 1600×800·101KB ✅
+- `recepcion-lab.webp` y `hero-slide5 CMS` — verificados correctos ✅
 
 ---
 
@@ -234,11 +266,8 @@
 **Acción**: Usuario → Squoosh: Resize 800×580, Format WebP, Quality 75, re-exportar cada archivo  
 **Ubicación**: `laesh-web-assets-uipv1a/img/area-*.webp`
 
-### R-02 ⏸ [LAESH Website] Corregir dims HTML de imágenes en `calidad.php` tras P-03
-**Estado**: Bloqueado por P-03 (requiere que las imágenes estén re-exportadas a 800×580)  
-**Problema**: `calidad.php` tiene `width="1000" height="562"` en sus `<img>` → ratio incorrecto (16:9 vs 1.38:1 real) → posible CLS  
-**Fix**: Cambiar a `width="800" height="580"` después de confirmar que los assets de calidad también están en 800×580  
-**Archivo**: `laesh-swbldi/website/sections/calidad.php`
+### R-02 ✅ [LAESH Website] Dims HTML imágenes `calidad.php` — RESUELTO 2026-09-07
+**Estado**: Cerrado — verificado por usuario 2026-09-07. ✅
 
 ### PERF-01 ⏸ [LAESH Website] Minificación y bundle de CSS — 6 archivos → 1 archivo minificado
 **Estado**: Diferido — requiere tooling (Node/npm o script PHP)  
@@ -302,4 +331,28 @@ Repetir verificación en OCI tras deploy P-LAESH-05
 
 ---
 
-*Última actualización: 2026-09-07 (sesión 8) — Verificados: grid-acerca-cards 2col tablet ✅, HTTPS/HSTS laesh.mx ✅, PERF-03 ✅, A6 ✅. Nuevos: validación dims backend CMS (getimagesize por slot) + accept promo fix. Pendiente: git commit sesiones 7+8 (instrucción explícita del usuario). — Claude Code*
+---
+
+## ✅ Cerrados en Sesión 9 — 2026-09-08
+
+### G-SWOOLE-01 ✅ config.php — Swoole host `0.0.0.0` → `127.0.0.1` en KVM2 nativo
+Docker-aware: `$inDocker ? '0.0.0.0' : '127.0.0.1'`. Eliminada dependencia de UFW para seguridad del bridge. Desplegado y verificado KVM2. ✅
+
+### G-SWOOLE-02 ✅ logrotate-laesh.conf — 4 correcciones
+- `systemctl kill -s USR1` → `systemctl reload` (SIGHUP, no worker-reload)
+- `backup.log` → `backup-db.log` (nombre real del script)
+- `cert-check.log` → `cert-expiry.log` (nombre real del script)
+- Añadido `cms-cleanup.log` (cron 01:00 AM). Desplegado y verificado con `--debug`. ✅
+
+### G-SWOOLE-03 ✅ swoole-laesh.service — ExecStartPost health check
+`ExecStartPost=/bin/bash -c 'sleep 3 && curl -sf http://127.0.0.1:9502/status > /dev/null'`. systemd ahora falla si Swoole no levanta correctamente. ✅
+
+### G-SWOOLE-04 ✅ swoole-laesh.service — ExecReload SIGHUP
+`ExecReload=/bin/kill -HUP $MAINPID`. logrotate postrotate ahora recibe SIGHUP real para reopen del fd del log sin desconectar clientes WS. ✅
+
+### G-SWOOLE-05 ✅ swoole_server.php — echo callbacks silenciados
+4 `echo "[WS]..."` y `echo "[Bridge]..."` → `// Logger::log(..., 'DEBUG')`. Banner de arranque usa `{$swooleHost}:{$swoolePort}` en vez de hardcoded. ✅
+
+---
+
+*Última actualización: 2026-09-08 (sesión 9) — G-SWOOLE-01..05 cerrados: estabilización integral Swoole KVM2 (config.php, logrotate, swoole-laesh.service ×2, swoole_server.php). Pendiente: git commit sesiones 7+8+9 (instrucción explícita del usuario). — Claude Code*
