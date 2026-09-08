@@ -355,4 +355,25 @@ Docker-aware: `$inDocker ? '0.0.0.0' : '127.0.0.1'`. Eliminada dependencia de UF
 
 ---
 
-*Última actualización: 2026-09-08 (sesión 9) — G-SWOOLE-01..05 cerrados: estabilización integral Swoole KVM2 (config.php, logrotate, swoole-laesh.service ×2, swoole_server.php). Pendiente: git commit sesiones 7+8+9 (instrucción explícita del usuario). — Claude Code*
+---
+
+## 🔴 PRIORIDAD ALTA — Deploy KVM2
+
+### P-DEPLOY-01 🔴 [KVM2] Rutas rsync incorrectas — erradicar de forma permanente
+**Estado**: Detectado 2026-09-08 (sesión 10). Workaround aplicado manualmente en esta sesión.  
+**Problema**: El comando de rsync para assets estáticos apuntaba a `/opt/laesh/www/laesh-web-assets-uipv1a/` pero Nginx sirve desde `/opt/laesh/assets/laesh-web-assets-uipv1a/` (ver `nginx-laesh-domain.conf` línea 127). Resultado: cambios en CSS/JS no se reflejan en producción.  
+**Rutas correctas confirmadas**:
+| Componente | Ruta destino KVM2 correcta |
+|---|---|
+| PHP webapp (`laesh-swbldi/`) | `/opt/laesh/www/laesh-swbldi/` ✅ |
+| Assets estáticos (`laesh-web-assets-uipv1a/`) | `/opt/laesh/assets/laesh-web-assets-uipv1a/` ⚠️ (era `/opt/laesh/www/...`) |
+| Scripts BD (`setup/bds/laesh/`) | `/home/sysadmin/laesh-src/setup/bds/laesh/` ✅ |
+
+**Acción requerida**:
+1. Actualizar `docs/etc-docs/setup-prod-laesh.txt` con la ruta correcta de assets
+2. Verificar si hay otros lugares (README, scripts de CI, notas) con la ruta incorrecta y corregirlos
+3. Considerar crear script `deploy.sh` canónico con las 3 rutas fijas para evitar errores futuros
+
+---
+
+*Última actualización: 2026-09-08 (sesión 10) — Deploy LAESH a KVM2 prod: m002 migración SSOT 144 estudios, fix CKEditor lista tamaños, fix gestion_web.php promo1_subtitulo, corrección rutas rsync assets. Pendiente: git commit (instrucción explícita del usuario). — Claude Code*
