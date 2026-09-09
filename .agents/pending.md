@@ -359,21 +359,75 @@ Docker-aware: `$inDocker ? '0.0.0.0' : '127.0.0.1'`. Eliminada dependencia de UF
 
 ## 🔴 PRIORIDAD ALTA — Deploy KVM2
 
-### P-DEPLOY-01 🔴 [KVM2] Rutas rsync incorrectas — erradicar de forma permanente
-**Estado**: Detectado 2026-09-08 (sesión 10). Workaround aplicado manualmente en esta sesión.  
-**Problema**: El comando de rsync para assets estáticos apuntaba a `/opt/laesh/www/laesh-web-assets-uipv1a/` pero Nginx sirve desde `/opt/laesh/assets/laesh-web-assets-uipv1a/` (ver `nginx-laesh-domain.conf` línea 127). Resultado: cambios en CSS/JS no se reflejan en producción.  
-**Rutas correctas confirmadas**:
+### P-DEPLOY-01 🔴 [KVM2] Consolidación directorios + blindaje deploy permanente
+**Estado**: Diagnóstico completo 2026-09-09 (sesión 11). `deploy.sh` canónico creado en local. Pendiente ejecutar limpieza en KVM2.
+
+**Directorios fantasma identificados en KVM2** (creados por rsyncs incorrectos previos):
+| Directorio | Problema | Acción |
+|---|---|---|
+| `/opt/laesh/laesh-web-assets-uipv1a/` | Stray — owner `sysadmin:sysadmin`, perms `777`, sep 6 | ❌ **BORRAR** — verificar cms/ primero |
+| `/opt/laesh/www/laesh-web-assets-uipv1a/` | Stray dentro de www — nunca sirve Nginx | ❌ **BORRAR** |
+| `/home/sysadmin/backups/` | 2 SQLs manuales sin comprimir sep 8 — duplicados en `/opt/laesh/backups/db/` | ❌ **BORRAR** |
+| `/home/sysadmin/laesh-kvm2-prod/` | Aparentemente idéntico a `laesh-setup/` | ❌ **BORRAR** si `diff` vacío |
+
+**Directorios canónicos a conservar**:
+| Directorio | Rol |
+|---|---|
+| `/opt/laesh/assets/laesh-web-assets-uipv1a/` | ✅ Assets Nginx (alias en nginx-laesh-domain.conf:127) |
+| `/opt/laesh/www/laesh-swbldi/` | ✅ PHP app |
+| `/opt/laesh/backups/db/` | ✅ Backups BD |
+| `/home/sysadmin/laesh-src/` | ✅ Staging setup/deploy |
+| `/home/sysadmin/laesh-setup/` | ✅ Setup scripts originales (1 copia canónica) |
+
+**Fix local listo** (pendiente de deploy):
+- `crons/cms_cleanup.php` — FIX 2026-09-09: consulta ambos prefijos (`/cms/` + `/img/cms/`) para no borrar imágenes con URL legada
+- `setup/deploy/laesh-kvm2-prod/deploy.sh` — script canónico con rutas fijas y comentario explícito de rutas INCORRECTAS
+
+**Secuencia de limpieza en KVM2** (ejecutar en este orden):
+```bash
+# 1. URGENTE: cms_cleanup a --dry-run hasta que el fix esté deployado
+sudo crontab -u www-data -e  # agregar --dry-run a la línea del cleanup
+
+# 2. Revisar si los stray tienen imágenes únicas ANTES de borrar
+sudo ls /opt/laesh/laesh-web-assets-uipv1a/cms/
+sudo find /opt/laesh/www/laesh-web-assets-uipv1a/ -type f | wc -l
+
+# 3. Borrar directorios fantasma (solo tras revisar paso 2)
+sudo rm -rf /opt/laesh/laesh-web-assets-uipv1a/
+sudo rm -rf /opt/laesh/www/laesh-web-assets-uipv1a/
+rm -rf /home/sysadmin/backups/
+
+# 4. Comparar y borrar laesh-kvm2-prod si es duplicado de laesh-setup
+diff <(ls /home/sysadmin/laesh-setup/) <(ls /home/sysadmin/laesh-kvm2-prod/)
+# Si vacío: rm -rf /home/sysadmin/laesh-kvm2-prod/
+
+# 5. Deploy del fix cms_cleanup.php con deploy.sh
+# 6. Quitar --dry-run del crontab de www-data
+```
+
+**Rutas correctas definitivas** (documentado en deploy.sh):
 | Componente | Ruta destino KVM2 correcta |
 |---|---|
 | PHP webapp (`laesh-swbldi/`) | `/opt/laesh/www/laesh-swbldi/` ✅ |
-| Assets estáticos (`laesh-web-assets-uipv1a/`) | `/opt/laesh/assets/laesh-web-assets-uipv1a/` ⚠️ (era `/opt/laesh/www/...`) |
+| Assets estáticos (`laesh-web-assets-uipv1a/`) | `/opt/laesh/assets/laesh-web-assets-uipv1a/` ✅ |
 | Scripts BD (`setup/bds/laesh/`) | `/home/sysadmin/laesh-src/setup/bds/laesh/` ✅ |
 
-**Acción requerida**:
-1. Actualizar `docs/etc-docs/setup-prod-laesh.txt` con la ruta correcta de assets
-2. Verificar si hay otros lugares (README, scripts de CI, notas) con la ruta incorrecta y corregirlos
-3. Considerar crear script `deploy.sh` canónico con las 3 rutas fijas para evitar errores futuros
+### P-DEPLOY-02 🔴 [KVM2] Fix web_contenidos — normalizar URLs `/img/cms/` → `/cms/`
+**Estado**: Pendiente — ejecutar en KVM2 tras confirmar que cms_cleanup está en --dry-run.
+```sql
+-- Verificar cuántas filas tienen el prefijo incorrecto
+SELECT COUNT(*) FROM web_contenidos WHERE valor LIKE '/laesh-web-assets-uipv1a/img/cms/%';
+-- Corregir
+UPDATE web_contenidos
+SET valor = REPLACE(valor, '/laesh-web-assets-uipv1a/img/cms/', '/laesh-web-assets-uipv1a/cms/')
+WHERE valor LIKE '/laesh-web-assets-uipv1a/img/cms/%';
+```
+Tras la corrección: quitar `--dry-run` del crontab y reactivar cleanup normal.
+
+### P-DEPLOY-03 🟡 [KVM2] Re-upload imágenes calidad gallery borradas
+**Estado**: Pendiente — calidad-gallery1/2/3 se perdieron por cms_cleanup con prefijo incorrecto.
+Acción: Usuario sube imágenes de calidad vía CMS (Pestaña 5 o equivalente). Verificar que el uploader ahora genera URLs con `/cms/` (no `/img/cms/`).
 
 ---
 
-*Última actualización: 2026-09-08 (sesión 10) — Deploy LAESH a KVM2 prod: m002 migración SSOT 144 estudios, fix CKEditor lista tamaños, fix gestion_web.php promo1_subtitulo, corrección rutas rsync assets. Pendiente: git commit (instrucción explícita del usuario). — Claude Code*
+*Última actualización: 2026-09-09 (sesión 11) — Diagnóstico directorios KVM2: 3 fantasmas confirmados, deploy.sh canónico creado, cms_cleanup fix dual-prefix aplicado en local. Pendientes: limpieza KVM2, normalización URLs BD, re-upload imágenes calidad. NO commitear hasta instrucción explícita. — Claude Code*
