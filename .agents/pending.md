@@ -159,6 +159,30 @@
 
 ---
 
+### P-LAESH-CMS-CLEANUP-01 ✅ [LAESH KVM2] Activar cms_cleanup.php en producción (quitar --dry-run)
+**Estado**: ACTIVADO sep-10 — `--dry-run` removido vía sesión interactiva Remmina. Corre en producción desde 01:00 AM sep-11.  
+**Condiciones cumplidas** ✅:
+1. Fix dual-prefijos G-CMS-01 deployado y verificado (sep-10 dry-run mostró solo 3 huérfanos genuinos).
+2. Período de pruebas terminado — usuario ordenó "activalo para revisar mañana".
+3. sudo no interactivo falla (sudoers solo cubre `systemctl reload php8.3-fpm`).
+
+**Acción requerida por usuario** (sesión interactiva SSH):
+```bash
+ssh laesh-kvm2
+sudo sed -i 's/ --dry-run//' /etc/cron.d/laesh-cms-cleanup
+cat /etc/cron.d/laesh-cms-cleanup
+# Debe quedar: 0 1 * * * www-data /usr/bin/php8.3 /opt/laesh/www/laesh-swbldi/crons/cms_cleanup.php >> ...
+```
+
+**Verificar mañana sep-11 tras las 01:00:**
+```bash
+ssh laesh-kvm2 "tail -20 /opt/laesh/logs/cms-cleanup.log"
+# Buscar: 🗑 eliminado → (los 3 candidatos promo-1 x2 + ubicacion-croquis)
+```
+**Referencia**: `setup/deploy/laesh-kvm2-prod/README.md` § CMS Cleanup cron.
+
+---
+
 ### P-LAESH-NGINX-SYNC-01 ✅ [LAESH KVM2] Nginx config verificado — local == servidor
 **Estado**: Resuelto 2026-09-06 — verificación manual confirmada.
 
