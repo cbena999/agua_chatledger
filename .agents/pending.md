@@ -383,8 +383,8 @@ Docker-aware: `$inDocker ? '0.0.0.0' : '127.0.0.1'`. Eliminada dependencia de UF
 
 ## 🔴 PRIORIDAD ALTA — Deploy KVM2
 
-### P-DEPLOY-01 🔴 [KVM2] Consolidación directorios + blindaje deploy permanente
-**Estado**: Diagnóstico completo 2026-09-09 (sesión 11). `deploy.sh` canónico creado en local. Pendiente ejecutar limpieza en KVM2.
+### P-DEPLOY-01 ✅ [KVM2] Consolidación directorios + blindaje deploy permanente
+**Estado**: Cerrado 2026-09-11 — los 3 directorios fantasma (`/opt/laesh/laesh-web-assets-uipv1a/`, `/opt/laesh/www/laesh-web-assets-uipv1a/`, `~/backups/`) ya no existen en KVM2.
 
 **Directorios fantasma identificados en KVM2** (creados por rsyncs incorrectos previos):
 | Directorio | Problema | Acción |
@@ -436,8 +436,8 @@ diff <(ls /home/sysadmin/laesh-setup/) <(ls /home/sysadmin/laesh-kvm2-prod/)
 | Assets estáticos (`laesh-web-assets-uipv1a/`) | `/opt/laesh/assets/laesh-web-assets-uipv1a/` ✅ |
 | Scripts BD (`setup/bds/laesh/`) | `/home/sysadmin/laesh-src/setup/bds/laesh/` ✅ |
 
-### P-DEPLOY-02 🔴 [KVM2] Fix web_contenidos — normalizar URLs `/img/cms/` → `/cms/`
-**Estado**: Pendiente — ejecutar en KVM2 tras confirmar que cms_cleanup está en --dry-run.
+### P-DEPLOY-02 ✅ [KVM2] Fix web_contenidos — normalizar URLs `/img/cms/` → `/cms/`
+**Estado**: Cerrado 2026-09-11 — `COUNT(*) = 0`, no hay URLs legacy en BD.
 ```sql
 -- Verificar cuántas filas tienen el prefijo incorrecto
 SELECT COUNT(*) FROM web_contenidos WHERE valor LIKE '/laesh-web-assets-uipv1a/img/cms/%';
@@ -448,9 +448,8 @@ WHERE valor LIKE '/laesh-web-assets-uipv1a/img/cms/%';
 ```
 Tras la corrección: quitar `--dry-run` del crontab y reactivar cleanup normal.
 
-### P-DEPLOY-03 🟡 [KVM2] Re-upload imágenes calidad gallery borradas
-**Estado**: Pendiente — calidad-gallery1/2/3 se perdieron por cms_cleanup con prefijo incorrecto.
-Acción: Usuario sube imágenes de calidad vía CMS (Pestaña 5 o equivalente). Verificar que el uploader ahora genera URLs con `/cms/` (no `/img/cms/`).
+### P-DEPLOY-03 ✅ [KVM2] Re-upload imágenes calidad gallery borradas
+**Estado**: Cerrado 2026-09-11 — usuario re-subió todas las imágenes vía CMS (calidad-gallery1, gallery3, seo/og, croquis).
 
 ---
 
