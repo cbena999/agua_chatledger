@@ -7,9 +7,9 @@
 | **Trajectory ID** | `abc4a225-cbc2-4de2-b597-b83e19c66e68` |
 | **Cascade ID** | `6c5cb2b3-5120-4595-9e04-fe85d3e62c21` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 2421 |
+| **Total Steps** | 2536 |
 | **Started** | 11 Sept 2026, 10:39 am |
-| **Completed** | 13 Sept 2026, 9:16 am |
+| **Completed** | 13 Sept 2026, 9:29 am |
 
 ---
 
@@ -778,361 +778,14 @@
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 6:40 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1259-1549)</summary>
-
-**Path:** `Unknown file`
-
-```
-             PANEL 6: UBICACIÓN Y CONTACTO — SSOT Master
-             Sección: ubicacion | Fuente HTML: #ubicacion
-             SSOT: este panel edita configuraciones (singletons); los datos se reutilizan
-               en Footer, Quiénes Somos (responsable) y Schema.org automáticamente.
-             Fix UI-G02: name attributes agregados aquí (no están en gestion-web.html fuente)
-             ================================================================ -->
-        <div id="panel-ubicacion" class="cms-panel" role="tabpanel" aria-labelledby="tab-ubicacion" tabindex="0" data-section="ubicacion">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">Datos de Ubicación, Contacto y Horarios (#ubicacion)</h3>
-            </div>
-
-            <!-- Fila 0: Identidad del Laboratorio (nombre, siglas, años) — SSOT footer + SEO + Schema.org -->
-            <hr class="cms-section-sep">
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">Identidad del Laboratorio</div>
-                </div>
-                <div class="editor-card-body">
-                    <p class="cms-p">🏷️ Estos valores se usan en el <strong>pie de página</strong>, en el alt del logo, en el copyright, en <strong>Schema.org</strong> (name) y como fallback del título SEO. Son la fuente única de identidad del sitio.</p>
-                    <div class="field-row">
-                        <div class="field-group" style="flex:2">
-                            <label>Nombre Completo del Laboratorio</label>
-                            <input type="text" name="_cfg_nombre_laboratorio" maxlength="120"
-                                   value="<?= htmlspecialchars($config['nombre_laboratorio'] ?? 'Laboratorio de Especialidades Hematológicas S.C.', ENT_QUOTES, 'UTF-8') ?>"
-                                   placeholder="Laboratorio de Especialidades Hematológicas S.C.">
-                            <small class="cms-help-text">Nombre legal completo — pie de página, alt del logo, Schema.org.</small>
-                        </div>
-                        <div class="field-group" style="flex:1">
-                            <label>Nombre Corto / Siglas</label>
-                            <input type="text" name="_cfg_nombre_corto" maxlength="20"
-                                   value="<?= htmlspecialchars($config['nombre_corto'] ?? 'LAESH', ENT_QUOTES, 'UTF-8') ?>"
-                                   placeholder="LAESH">
-                            <small class="cms-help-text">Sigla usada en copyright y modales.</small>
-                        </div>
-                        <div class="field-group" style="flex:0 0 120px">
-                            <label>Años de Experiencia</label>
-                            <input type="number" name="_cfg_anios_experiencia" min="1" max="99"
-                                   value="<?= htmlspecialchars($config['anios_experiencia'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
-                                   placeholder="25">
-                            <small class="cms-help-text">Sección Acerca De.</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Fila 1: Encabezado & Responsable (izq) + Dirección Física & Contacto (der) -->
-            <hr class="cms-section-sep">
-            <div class="grid-2col mb-4">
-            <!-- Encabezado de la Sección y Responsable Sanitario -->
-            <div class="editor-card">
-                <div class="editor-card-header">
-                    <div class="card-title">Encabezado y Responsable Sanitario</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Título Principal (h2)</label>
-                        <input type="text" name="seccion__h2"
-                               value="<?= cms($contenidos, 'ubicacion', 'seccion', 'h2') ?>">
-                    </div>
-                    <div class="field-group">
-                        <label>Subtítulo</label>
-                        <input type="text" name="seccion__subtitulo"
-                               value="<?= cms($contenidos, 'ubicacion', 'seccion', 'subtitulo') ?>">
-                    </div>
-                    <div class="field-group mt-3 pt-3 border-top">
-                        <label>Nombre del Responsable Sanitario</label>
-                        <input type="text" name="_cfg_responsable_nombre"
-                               value="<?= htmlspecialchars(!empty($config['responsable_nombre']) ? $config['responsable_nombre'] : 'Q.F.B. y E.H.D.L. Jacob Santiago Blanco', ENT_QUOTES, 'UTF-8') ?>">
-                    </div>
-                    <div class="field-row">
-                        <div class="field-group">
-                            <label>Cédula Profesional</label>
-                            <input type="text" name="_cfg_responsable_cedula_prof"
-                                   value="<?= htmlspecialchars(!empty($config['responsable_cedula_prof']) ? $config['responsable_cedula_prof'] : (!empty($config['responsable_cedula']) ? $config['responsable_cedula'] : '3609293'), ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label>Cédula de Especialidad</label>
-                            <input type="text" name="_cfg_responsable_cedula_esp"
-                                   value="<?= htmlspecialchars(!empty($config['responsable_cedula_esp']) ? $config['responsable_cedula_esp'] : '8935780', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Dirección Física y Contacto Directo -->
-            <div class="editor-card">
-                <div class="editor-card-header">
-                    <div class="card-title">Dirección Física y Contacto Directo</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-row">
-                        <div class="field-group">
-                            <label>Calle, Número y Colonia <small class="txt-muted">(SSOT / SEO Schema.org)</small></label>
-                            <input type="text" name="_cfg_direccion_calle"
-                                   value="<?= htmlspecialchars(!empty($config['direccion_calle']) ? $config['direccion_calle'] : 'Azucenas #8, Fracc. Jardines del Sur', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label>Ciudad / Municipio <small class="txt-muted">(SSOT / SEO Schema.org)</small></label>
-                            <input type="text" name="_cfg_ciudad"
-                                   value="<?= htmlspecialchars(!empty($config['ciudad']) ? $config['ciudad'] : 'Huajuapan de León', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label>Estado <small class="txt-muted">(SSOT / SEO Schema.org)</small></label>
-                            <input type="text" name="_cfg_estado"
-                                   value="<?= htmlspecialchars(!empty($config['estado']) ? $config['estado'] : 'Oaxaca', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label>Código Postal <small class="txt-muted">(SSOT / SEO Schema.org)</small></label>
-                            <input type="text" name="_cfg_cp"
-                                   value="<?= htmlspecialchars(!empty($config['cp']) ? $config['cp'] : '69000', ENT_QUOTES, 'UTF-8') ?>"
-                                   maxlength="10">
-                        </div>
-                    </div>
-                    <small class="cms-help-text mb-3" style="display:block; margin-top:-6px; color:#0284c7; font-weight:600;">⚡ La dirección física completa para el pie de página, mapas y SEO de Google se compone automáticamente desde estos 4 campos.</small>
-                    <div class="field-row">
-                        <div class="field-group">
-                            <label>Teléfono Directo</label>
-                            <input type="tel" name="_cfg_telefono"
-                                   value="<?= htmlspecialchars($config['telefono'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label>Correo Electrónico</label>
-                            <input type="email" name="_cfg_email_contacto"
-                                   value="<?= htmlspecialchars($config['email_contacto'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div><!-- /grid-2col fila 1 -->
-
-            <!-- Fila 2: Horarios de Atención (Texto Web para Visitantes) -->
-            <hr class="cms-section-sep">
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">Horarios de Atención en Sitio Web (Texto Público)</div>
-                </div>
-                <div class="editor-card-body">
-                    <small class="cms-help-text mb-3" style="display:block; color:#0284c7; font-weight:600;">👁️ Textos de horario que ven los clientes en la sección Ubicación de la página pública.</small>
-                    <div class="field-row">
-                        <div class="field-group">
-                            <label>Horario Lunes – Sábado <small class="txt-muted">(Texto Web)</small></label>
-                            <input type="text" name="_cfg_horario_semana"
-                                   value="<?= htmlspecialchars($config['horario_semana'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
-                                   placeholder="7:00 a.m. – 9:00 p.m.">
-                        </div>
-                        <div class="field-group">
-                            <label>Horario Domingo <small class="txt-muted">(Texto Web)</small></label>
-                            <input type="text" name="_cfg_horario_domingo"
-                                   value="<?= htmlspecialchars($config['horario_domingo'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
-                                   placeholder="7:00 a.m. – 3:00 p.m.">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Fila 3: Mapa Interactivo (izq) + Croquis de Ubicación (der) -->
-            <hr class="cms-section-sep">
-            <div class="grid-2col mb-4">
-            <!-- Mapa Interactivo de Google Maps -->
-            <div class="editor-card">
-                <div class="editor-card-header">
-                    <div class="card-title">Mapa Interactivo de Google Maps</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>URL Directa a Google Maps <small class="txt-muted">(enlace externo / noscript)</small></label>
-                        <textarea name="_cfg_maps_url" rows="3" placeholder="https://www.google.com/maps/place/Laboratorio+de+Especialidades+Hematol%C3%B3gicas+S.C./..."><?= htmlspecialchars($config['maps_url'] ?? '', ENT_QUOTES, 'UTF-8') ?></textarea>
-                        <small class="cms-help-text">Enlace directo completo para abrir la ubicación en Google Maps (pestaña externa o app móvil).</small>
-                    </div>
-                    <div class="field-group">
-                        <label>Embed del Mapa Interactivo <small class="txt-muted">(al pulsar el botón "Mapa Interactivo")</small></label>
-                        <textarea name="info__maps_embed" rows="4"><?= cms($contenidos, 'ubicacion', 'info', 'maps_embed', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3773.7375!2d-97.7779575!3d17.8028691!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85c60141d7aa4483%3A0x730f884bc7308bee!2sLaboratorio%20de%20Especialidades%20Hematol%C3%B3gicas%20S.C.!5e0!3m2!1ses!2smx!4v1724000000000!5m2!1ses!2smx') ?></textarea>
-                        <small class="cms-help-text">Esta dirección alimenta el mapa dinámico que aparece en la sección Ubicación al hacer clic en el botón <strong>"Mapa Interactivo"</strong>. Pega el atributo <code>src</code> del <code>&lt;iframe&gt;</code> generado en Google Maps (Compartir → Insertar un mapa).</small>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Croquis de Ubicación (Imagen) -->
-            <div class="editor-card">
-                <div class="editor-card-header">
-                    <div class="card-title">Croquis de Ubicación (Imagen)</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Imagen del Croquis</label>
-                        <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px;">
-                            📐 <strong>Codec:</strong> WebP únicamente &nbsp;·&nbsp;
-                            <strong>Quality:</strong> 85 &nbsp;·&nbsp;
-                            <strong>Effort:</strong> 6 &nbsp;·&nbsp;
-                            <strong>Dimensiones:</strong> 756 px (máx) × 577 px (máx) &nbsp;·&nbsp;
-                            <strong>Alto:</strong> proporcional (auto) &nbsp;·&nbsp;
-                            <strong>Orientación Horizontal</strong> &nbsp;·&nbsp;
-                            <strong>Peso:</strong> Máximo 150 KB, Óptimo 60 KB
-                        </p>
-                        <?php $croquisImgUrl = cms($contenidos, 'ubicacion', 'croquis', 'imagen_url'); ?>
-                        <div class="image-upload-box">
-                            <img id="prev-croquis"
-                                 src="<?= h($croquisImgUrl) ?>"
-                                 alt="Croquis" class="img-preview-croquis"
-                                 onerror="this.hidden=true">
-
-                            <label for="file-croquis" class="btn btn-secondary">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                                Cambiar Imagen
-                            </label>
-
-                            <input type="file" accept="image/webp"
-                                   id="file-croquis" class="d-none"
-                                   data-upload-slot="ubicacion-croquis"
-                                   data-preview-id="prev-croquis"
-                                   data-target-input="url-img-croquis">
-                        </div>
-                        <input type="url" id="url-img-croquis"
-                               name="croquis__imagen_url"
-                               value="<?= h($croquisImgUrl) ?>"
-                               placeholder="/laesh-web-assets-uipv1a/cms/ubicacion-croquis-....webp"
-                               class="cms-img-url-input" data-no-limit>
-                        <?php $croquisBasename = basename($croquisImgUrl); ?>
-                        <span id="lbl-img-croquis" class="cms-img-filename-label"><?= h($croquisBasename) ?></span>
-                        <div class="field-group mt-3" style="background:#f0f9ff; border:1.5px solid #0ea5e9; border-radius:6px; padding:10px 12px; margin-top:12px;">
-                            <label style="font-size:0.8rem; font-weight:700; color:#0f172a; margin-bottom:6px; display:block;">📍 Coordenadas GPS (SSOT → Google Maps / Schema.org JSON-LD)</label>
-                            <div style="display:flex; gap:10px;">
-                                <div style="flex:1;">
-                                    <label style="font-size:0.75rem; color:#0369a1; margin-bottom:2px; display:block;">Latitud</label>
-                                    <input type="text" name="_cfg_geo_lat"
-                                           value="<?= htmlspecialchars(!empty($config['geo_lat']) ? $config['geo_lat'] : '17.8028691', ENT_QUOTES, 'UTF-8') ?>"
-                                           placeholder="17.8028691"
-                                           style="font-size:0.85rem; background:#ffffff; color:#0f172a; font-weight:600; width:100%;">
-                                </div>
-                                <div style="flex:1;">
-                                    <label style="font-size:0.75rem; color:#0369a1; margin-bottom:2px; display:block;">Longitud</label>
-                                    <input type="text" name="_cfg_geo_lng"
-                                           value="<?= htmlspecialchars(!empty($config['geo_lng']) ? $config['geo_lng'] : '-97.7779575', ENT_QUOTES, 'UTF-8') ?>"
-                                           placeholder="-97.7779575"
-                                           style="font-size:0.85rem; background:#ffffff; color:#0f172a; font-weight:600; width:100%;">
-                                </div>
-                            </div>
-                            <small class="cms-help-text" style="margin-top:6px; display:block;">Obtén las coordenadas exactas en <strong>Google Maps → clic derecho sobre el punto → copiar lat,lng</strong>. Se usan en Schema.org GeoCoordinates e iframe de Google Maps.</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div><!-- /grid-2col mapa+croquis -->
-
-            <!-- Fila 4: Atención, Redes Sociales y Chat (Última Ficha) -->
-            <hr class="cms-section-sep">
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">Atención, Redes Sociales y Chat vía WhatsApp / Facebook</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-row">
-                        <div class="field-group">
-                            <label>URL Directa de WhatsApp <small class="txt-muted">(https://wa.me/52XXXXXXXXXX)</small></label>
-                            <input type="url" name="_cfg_whatsapp_url"
-                                   value="<?= htmlspecialchars($config['whatsapp_url'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
-                                   placeholder="https://wa.me/529531190074">
-                            <small class="cms-help-text">URL del chat en WhatsApp. Se utiliza en el botón flotante (pantalla inferior derecha) y en el contacto de Ubicación.</small>
-                        </div>
-                        <div class="field-group">
-                            <label>Número WhatsApp para Mostrar <small class="txt-muted">(ej. 953 119 0074)</small></label>
-                            <input type="text" name="_cfg_whatsapp_numero"
-                                   value="<?= htmlspecialchars($config['whatsapp_numero'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                            <small class="cms-help-text">Número de teléfono en formato legible con espacios para mostrar en la tarjeta de contacto.</small>
-                        </div>
-                    </div>
-                    <div class="field-row">
-                        <div class="field-group">
-                            <label>Mensaje para Consulta General <small class="txt-muted">(botón flotante y contacto)</small></label>
-                            <input type="text" name="_cfg_wa_texto_info"
-                                   value="<?= htmlspecialchars($config['wa_texto_info'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                            <small class="cms-help-text">Texto pre-escrito al abrir WhatsApp desde el botón flotante o la sección Ubicación. Ej: «Hola LAESH, necesito información».</small>
-                        </div>
-                        <div class="field-group">
-                            <label>Página de Facebook <small class="txt-muted">(URL completa)</small></label>
-                            <input type="url" name="_cfg_facebook_url"
-                                   value="<?= htmlspecialchars($config['facebook_url'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
-                                   placeholder="https://www.facebook.com/profile.php?id=100072263716098">
-                            <small class="cms-help-text">Se utiliza en el botón flotante (pantalla inferior derecha).</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ================================================================
-             PANEL 7: PIE DE PÁGINA
-             Sección: footer | Fuente HTML: #footer
-             SSOT: contacto, horarios, dirección y responsable se leen desde configuraciones.
-               Solo son editables aquí: logo alt, nombre lab y textos legales.
-             ================================================================ -->
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Analyzing Panel 6 Structure**
-
-I'm currently focused on structuring the edit for Panel 6, specifically the "Ubicación y Contacto" section. I've broken it down into 7 cards and am now analyzing the first card, "Identidad del Laboratorio." I am reviewing the specified border color `#0052b7` (Azul LAESH) and the header's background linear gradient.
-
-
-**Defining Card Attributes**
-
-I'm now detailing the characteristics of the "Ubicación y Contacto" section within Panel 6. Specifically, I am defining each of the seven cards. Each card, starting with "Identidad del Laboratorio," is assigned a distinct border color, header gradient, title style, and body padding. I'm focusing on "Encabezado y Responsable Sanitario," then the next five cards. These have been assigned a Teal border, an Indigo border, an Esmeralda border, a Zafiro border, and an Ámbar border, respectively, plus their respective header styles.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 6.845016088s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 6:41 pm
 
 ---
@@ -29430,6 +29083,2769 @@ I've been reviewing the recent changes, and it's clear that lines 81-229 of `ges
 
 **Status:** Completed
 **Created:** 13 Sept 2026, 9:16 am
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+## User Request
+
+Analiza todas las phps (incluidos sus assets js, css, etc.) de cms para identifica si en las 11 secciones pestañas existen remanentes de codigo y fragmentos o partes de codigo que no se ete utilizando debido a las multiples depuraciones, cambios, mejoras realizadas en los ultimos 4 dias. 
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `m004_depurate_promociones_scope.sql`
+**Language:** oracle-sql
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<!DOCTYPE html>
+<?php
+/**
+ * admrc/views/gestion_web.php — Plates template (merge de gestion-web.html)
+ *
+ * Fuente HTML: website/uipv1/gestion-web.html  ← NUNCA BORRAR (R15.1)
+ * Merge iterativo: cuando gestion-web.html reciba cambios del cliente,
+ * propagar estructura/textos aquí y mantener lógica PHP.
+ *
+ * Variables disponibles (desde admrc/index.php):
+ *   $nombreAdmin  string  — Nombre del administrador logueado
+ *   $csrfToken    string  — Token CSRF para formularios POST (R14.12)
+ *   $contenidos   array   — [seccion][subseccion][clave] => valor (desde web_contenidos)
+ *   $lastPub      string  — Timestamp de última publicación
+ *
+ * Merge v2 — 2026-08-22:
+ *   + Slides 2-5 del carrusel hero
+ *   + Tagline navbar (hero/navbar)
+ *   + Quiénes Somos: resp. sanitario + filosofía
+ *   + Promociones: 6 días (lunes–sábado) + domingo alt
+ *   + Calidad: título y subtítulo de sección
+ *   + Ubicación: WhatsApp + embed de mapa
+ *   + Panel 7: Pie de Página (footer)
+ *   + Panel 8: SEO y Metadatos
+ *
+ * SSOT Refactor — 2026-08-22 (ver 07_seed_catalogs.sql):
+ *   • D-04 RESUELTO: WhatsApp, teléfono, email, horarios, dirección, CP,
+ *     responsable sanitario → configuraciones (singleton). Ya NO en web_contenidos.
+ *   • Panel 6 (Ubicación) = editor master de todos los singletons institucionales.
+ *   • Paneles 7 (Footer) y 8 (SEO): los datos de configuraciones son read-only en CMS.
+ *   • Promociones: titulo/precio/ayuno/tiempo eliminados del CMS; se usa estudio_clave
+ *     → JOIN estudios para obtener datos clínicos (SSOT desde tabla estudios).
+ *   • especialidades/catalogo/lista y /titulo eliminados (redundantes con tabla estudios).
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Unused Code**
+
+I'm currently focused on analyzing all PHP files within the CMS, along with their associated assets (JS, CSS, etc.). My aim is to identify any remnants of unused code fragments or sections lingering within the eleven main sections. I'm paying close attention to remnants that may have been left behind due to debugging and modifications.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `function `
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.015078455s
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:23 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `(function\s+\w+|window\.\w+\s*=)`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:23 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+/* Interceptor global de promesas no capturadas de extensiones de navegador (Chrome/Edge/Brave) */
+window.addEventListener('unhandledrejection', function(event) {
+    if (event && event.reason) {
+        var msg = (event.reason.message || event.reason.toString() || '');
+        if (msg.includes('Could not establish connection') || msg.includes('Receiving end does not exist')) {
+            event.preventDefault();
+        }
+    }
+});
+
+/* Helper RTE Ampliado para formateo de texto sin URL media */
+window.formatRteText = function(btn, command) {
+    var fieldGroup = btn.closest('.field-group');
+    var input = fieldGroup ? fieldGroup.querySelector('input[type="text"], textarea') : null;
+    if (!input) return;
+
+    var start = input.selectionStart;
+    var end = input.selectionEnd;
+    var selectedText = input.value.substring(start, end);
+
+    var openTag = '<' + command + '>';
+    var closeTag = '</' + command + '>';
+
+    if (!selectedText) {
+        selectedText = 'texto';
+    }
+
+    var replacement = openTag + selectedText + closeTag;
+    input.value = input.value.substring(0, start) + replacement + input.value.substring(end);
+    input.focus();
+    input.setSelectionRange(start + openTag.length, start + openTag.length + selectedText.length);
+};
+
+window.formatRteTag = function(btn, tagName, styleAttr) {
+    var fieldGroup = btn.closest('.field-group');
+    var input = fieldGroup ? fieldGroup.querySelector('input[type="text"], textarea') : null;
+    if (!input) return;
+
+    var start = input.selectionStart;
+    var end = input.selectionEnd;
+    var selectedText = input.value.substring(start, end);
+
+    var openTag = '<' + tagName + ' style="' + styleAttr + '">';
+    var closeTag = '</' + tagName + '>';
+
+    if (!selectedText) {
+        selectedText = 'texto';
+    }
+
+    var replacement = openTag + selectedText + closeTag;
+    input.value = input.value.substring(0, start) + replacement + input.value.substring(end);
+    input.focus();
+    input.setSelectionRange(start + openTag.length, start + openTag.length + selectedText.length);
+};
+
+window.formatRteBlock = function(btn, blockTag) {
+    var fieldGroup = btn.closest('.field-group');
+    var input = fieldGroup ? fieldGroup.querySelector('textarea') : null;
+    if (!input) return;
+
+    var start = input.selectionStart;
+    var end = input.selectionEnd;
+    var selectedText = input.value.substring(start, end);
+
+    if (!selectedText) selectedText = 'Elemento de lista';
+
+    var replacement = '<' + blockTag + '>\n  <li>' + selectedText + '</li>\n</' + blockTag + '>';
+    input.value = input.value.substring(0, start) + replacement + input.value.substring(end);
+    input.focus();
+};
+
+window.clearRteFormat = function(btn) {
+    var fieldGroup = btn.closest('.field-group');
+    var input = fieldGroup ? fieldGroup.querySelector('input[type="text"], textarea') : null;
+    if (!input) return;
+
+    var text = input.value;
+    input.value = text.replace(/<[^>]*>/g, '');
+};
+
+/* gestion-web.js — lógica del portal de gestión web CMS (extraído de gestion-web.html) */
+        const panelLabelsGestion = {
+            'hero': '1. Banner Principal',
+            'quienes-somos': '2. Quiénes somos',
+            'especialidades': '3. Estudios',
+            'promociones': '4. Promociones Vigentes',
+            'calidad': '5. Calidad e Instalaciones',
+            'ubicacion': '6. Ubicación y Contacto',
+            'footer': '7. Pie de Página',
+            'aviso-privacidad': '8. Aviso de Privacidad',
+            'video-promo': '9. Video promo',
+            'configuracion-general': '10. Ordenamiento',
+            'seo': '11. Metadatos'
+        };
+
+        function showPanel(name) {
+            document.querySelectorAll('.cms-panel').forEach(p => p.classList.remove('active'));
+            const targetPanel = document.getElementById('panel-' + name);
+            if (targetPanel) targetPanel.classList.add('active');
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `formatRte`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:23 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `formatRte`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:23 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L99-299)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+            // Sincronizar pestaña superior activa + ARIA (A-01)
+            document.querySelectorAll('.cms-tab').forEach(function(t) {
+                t.classList.remove('active');
+                t.setAttribute('aria-selected', 'false');
+                t.setAttribute('tabindex', '-1');
+            });
+            const targetTab = document.getElementById('tab-' + name);
+            if (targetTab) {
+                targetTab.classList.add('active');
+                targetTab.setAttribute('aria-selected', 'true');
+                targetTab.setAttribute('tabindex', '0');
+            }
+
+            // Actualizar breadcrumb
+            const bc = document.getElementById('header-bc-current');
+            if (bc && panelLabelsGestion[name]) bc.textContent = panelLabelsGestion[name];
+        }
+
+        function activateTab(el) {
+            document.querySelectorAll('.cms-tab').forEach(function(t) {
+                t.classList.remove('active');
+                t.setAttribute('aria-selected', 'false');
+                t.setAttribute('tabindex', '-1');
+            });
+            el.classList.add('active');
+            el.setAttribute('aria-selected', 'true');
+            el.setAttribute('tabindex', '0');
+        }
+
+        function activateNav(el) {
+            document.querySelectorAll('.sidebar .nav-item').forEach(n => n.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        
+        // Datos de los 5 Hero Slides del Banner Principal (#inicio)
+        // img: '' — las previews se muestran server-side en cada tarjeta PHP; el selector JS queda vacío sin fallback
+        const heroDatos = {
+            1: { badge: "Bienvenido a Nuestra Institución", title: "Bienvenido a LAESH® — Diagnósticos de Confianza", desc: "Trabajamos para proporcionar información diagnóstica confiable que ayude al médico a tomar mejores decisiones y al paciente a recibir atención oportuna.", btnText: "Conoce los Servicios", btnLink: "#especialidades", img: '' },
+            2: { badge: "25 Años de Experiencia Clínica", title: "Laboratorio de Especialidades Hematológicas", desc: "Ofrecemos servicios de laboratorio clínico de alta especialización y rigor científico, comprometidos con la salud y tranquilidad de nuestra comunidad.", btnText: "Ver Especialidades", btnLink: "#especialidades", img: '' },
+            3: { badge: "Excelencia y Calidad Certificada", title: "Resultados Confiables para Cuidar tu Salud", desc: "Detrás de cada análisis existe una decisión médica crucial. En LAESH® la precisión diagnóstica es nuestro compromiso inquebrantable.", btnText: "Conocer Calidad", btnLink: "#calidad", img: '' },
+            4: { badge: "Tarifas y Paquetes Preferenciales", title: "Promociones y Check-Ups Médicos 2026", desc: "Descubre nuestros paquetes preventivos y tarifas especiales diseñados para el cuidado integral de tu salud y la de toda tu familia.", btnText: "Ver Promociones", btnLink: "#promociones", img: '' },
+            5: { badge: "Atención Presencial y Horarios", title: "Ubicación, Horarios de Atención y Contacto", desc: "Azucenas #8, Fracc. Jardines del Sur, Huajuapan de León, Oax. Lun a Sáb: 7:00 a.m. – 9:00 p.m. | Dom: 7:00 a.m. – 3:00 p.m. | Tel: 953 688 7694", btnText: "Ver Ubicación", btnLink: "#ubicacion", img: '' }
+        };
+
+        function cargarHeroSlideSeleccionado(val) {
+            const d = heroDatos[val];
+            if (d) {
+                if (document.getElementById('input-hero-badge')) document.getElementById('input-hero-badge').value = d.badge || '';
+                if (document.getElementById('input-hero-title')) document.getElementById('input-hero-title').value = d.title || '';
+                if (document.getElementById('input-hero-desc')) document.getElementById('input-hero-desc').value = d.desc || '';
+                if (document.getElementById('input-hero-btn-text')) document.getElementById('input-hero-btn-text').value = d.btnText || '';
+                if (document.getElementById('input-hero-btn-link')) document.getElementById('input-hero-btn-link').value = d.btnLink || '';
+                const prev = document.getElementById('prev-hero-selected');
+                if (prev) prev.src = d.img || '';
+                setTimeout(refreshAllCharCounters, 10);
+            }
+        }
+
+        // Datos de carousel 1-16 — img: '' (sin fallback; preview real en tarjeta PHP)
+        const rutinaDatos = {
+            1:  { titulo: "Hematología Especializada",    desc: "Análisis morfológico de frotis sanguíneo y pruebas hematológicas de alta complejidad.", img: '' },
+            2:  { titulo: "Química Clínica Avanzada",     desc: "Determinación automatizada de electrolitos, proteínas y enzimas específicas.", img: '' },
+            3:  { titulo: "Microbiología y Cultivos",     desc: "Identificación microscópica y pruebas de susceptibilidad a antimicrobianos.", img: '' },
+            4:  { titulo: "Uroanálisis y Sedimentos",     desc: "Examen de orina, química y microscopía para detección precoz de patologías renales.", img: '' },
+            5:  { titulo: "Hemostasia y Coagulación",     desc: "Estudios de tiempos de protrombina (TP) y tromboplastina parcial activada (TTPa).", img: '' },
+            6:  { titulo: "Pruebas Especiales",           desc: "Hormonas, anticuerpos específicos, pruebas inmunológicas y marcadores tumorales.", img: '' },
+            7:  { titulo: "Pre-analítica",                desc: "Separación de suero y plasma con control estricto de tiempos y temperaturas.", img: '' },
+            8:  { titulo: "Toma de Muestras I",           desc: "Áreas higiénicas equipadas para la extracción sanguínea convencional.", img: '' },
+            9:  { titulo: "Toma de Muestras II",          desc: "Módulos individuales y confortables que aseguran una atención rápida.", img: '' },
+            10: { titulo: "Toma Pediátrica",              desc: "Espacio amigable y personal capacitado para el cuidado y tranquilidad de los niños.", img: '' },
+            11: { titulo: "Toma de Cultivos",             desc: "Zonas aisladas y estériles para la toma de exudados y cultivos microbiológicos.", img: '' },
+            12: { titulo: "Recepción Técnica",            desc: "Recepción técnica de muestras e indicaciones pre-analíticas detalladas.", img: '' },
+            13: { titulo: "", desc: "", img: '' },
+            14: { titulo: "", desc: "", img: '' },
+            15: { titulo: "", desc: "", img: '' },
+            16: { titulo: "", desc: "", img: '' }
+        };
+
+        function cargarRutinaSeleccionada(val) {
+            const d = rutinaDatos[val];
+            if (d) {
+                document.getElementById('rutina-titulo-val').value = d.titulo || '';
+                document.getElementById('rutina-desc-val').value = d.desc || '';
+                const prev = document.getElementById('prev-esp-selected');
+                if (prev) {
+                    prev.src = d.img || 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="90" height="60" viewBox="0 0 90 60"><rect width="100%" height="100%" fill="%23f1f5f9"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%2394a3b8" font-size="10" font-family="sans-serif">Sin Imagen</text></svg>';
+                }
+                setTimeout(refreshAllCharCounters, 10);
+            }
+        }
+
+        // Datos calidad gallery — img: '' (sin fallback; preview real en tarjeta PHP)
+        const calidadDatos = {
+            1: { titulo: "Área de Hematología",      desc: "Análisis de biometría hemática y células sanguíneas con rigor científico y alta precisión.", img: '' },
+            2: { titulo: "Química Clínica",          desc: "Determinación automatizada de metabolitos, perfil lipídico y enzimas específicas.", img: '' },
+            3: { titulo: "Microbiología y Cultivos", desc: "Aislamiento, tinción de Gram y pruebas de susceptibilidad a antimicrobianos.", img: '' }
+        };
+
+        function cargarCalidadSeleccionada(val) {
+            const d = calidadDatos[val];
+            if (d) {
+                document.getElementById('calidad-titulo-val').value = d.titulo;
+                document.getElementById('calidad-desc-val').value = d.desc;
+                document.getElementById('prev-calidad-selected').src = d.img;
+                setTimeout(refreshAllCharCounters, 10);
+            }
+        }
+
+        function previewImage(input, previewId) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.getElementById(previewId);
+                    if (img) img.src = e.target.result;
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // ── Seguimiento de cambios por pestaña (module scope — usado por publishCmsSection) ──
+        /** Selector de todos los campos rastreables (con name, no file). */
+        const TRACK_SELECTOR = 'input[name]:not([type="file"]), textarea[name], select[name]';
+
+        /** Inicializa data-original en todos los campos de todos los paneles. */
+        function initChangeTracking() {
+            if (window.CmsDirtyTracker) {
+                window.CmsDirtyTracker.init([
+                    'panel-hero',
+                    'panel-quienes-somos',
+                    'panel-especialidades',
+                    'panel-promociones',
+                    'panel-calidad',
+                    'panel-ubicacion',
+                    'panel-footer',
+                    'panel-seo',
+                    'panel-aviso-privacidad'
+                ], { enableDraft: false });
+                return;
+            }
+            document.querySelectorAll('.cms-panel').forEach(function(panel) {
+                panel.querySelectorAll(TRACK_SELECTOR).forEach(function(el) {
+                    el.dataset.original = el.value;
+                });
+            });
+        }
+
+        /** Cuenta campos modificados en un panel. */
+        function countPanelChanges(panelEl) {
+            var n = 0;
+            panelEl.querySelectorAll(TRACK_SELECTOR).forEach(function(el) {
+                var orig = el.dataset.original !== undefined ? el.dataset.original : '';
+                var current;
+                if (el.type === 'checkbox' || el.type === 'radio') {
+                    current = el.checked ? '1' : '0';
+                } else {
+                    current = el.value !== undefined ? el.value : '';
+                }
+                if (current !== orig) n++;
+            });
+            return n;
+        }
+
+        /** Actualiza (o borra) el badge rojo de la pestaña correspondiente. */
+        function updateTabBadge(section, count) {
+            var tab = document.getElementById('tab-' + section);
+            if (!tab) return;
+            var badge = tab.querySelector('.tab-change-badge');
+            if (count === 0) {
+                if (badge) badge.remove();
+                return;
+            }
+            if (!badge) {
+                badge = document.createElement('span');
+                badge.className = 'tab-change-badge';
+                tab.appendChild(badge);
+            }
+            badge.textContent = count;
+        }
+
+        /** Recalcula y muestra el badge del panel que contiene el campo editado. */
+        function onFieldChange(el) {
+            if (window.CmsDirtyTracker) {
+                window.CmsDirtyTracker.evalField(el);
+                return;
+            }
+            var panel = el.closest('.cms-panel');
+            if (!panel) return;
+            var section = panel.getAttribute('data-section') || panel.id.replace('panel-', '');
+            updateTabBadge(section, countPanelChanges(panel));
+        }
+
+        /** Resetea data-original tras publicar exitosamente y borra el badge. */
+        function resetChangeTracking(panelEl, section) {
+            if (window.CmsDirtyTracker) {
+                window.CmsDirtyTracker.resetPanel(panelEl, section);
+                return;
+            }
+            panelEl.querySelectorAll(TRACK_SELECTOR).forEach(function(el) {
+                el.dataset.original = el.value;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `cargar`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:24 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `cargar`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:24 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L299-499)</summary>
+
+**Path:** `Unknown file`
+
+```
+                el.dataset.original = el.value;
+            });
+            updateTabBadge(section, 0);
+        }
+
+        /**
+         * publishCmsSection — POST al backend /laesh/adrc/cms/save
+         *
+         * Lee el panel activo (.cms-panel.active), recopila todos los campos
+         * con atributo name (formato subseccion__clave), añade csrf_token y
+         * seccion, y hace fetch() al endpoint declarado en el botón publicar.
+         *
+         * En éxito muestra el toast verde; en error muestra toast rojo + log.
+         */
+        /** Sincroniza las instancias activas de CKEditor 5 con sus textareas ocultas antes de evaluar o publicar. */
+        function syncCkeditors(panel) {
+            if (!panel) return;
+            panel.querySelectorAll('textarea.ck5-hidden-data').forEach(function(ta) {
+                var mountId  = ta.id.replace('-data', '');
+                var camelKey = '_' + mountId.replace(/-([a-z0-9])/g, function(g) { return g[1].toUpperCase(); });
+                var legacyKey= 'ck_' + mountId.replace(/-/g, '_');
+
+                var ed = (window._ckState && (window._ckState[camelKey] || window._ckState[legacyKey])) || window[camelKey] || window[legacyKey];
+                if (ed && typeof ed.getData === 'function') {
+                    ta.value = ed.getData();
+                }
+            });
+        }
+
+        /** Publica la sección activa del CMS mediante POST a /cms/save. */
+        function publishCmsSection() {
+            var btn       = document.getElementById('btn-cms-save-action');
+            var panel     = document.querySelector('.cms-panel.active');
+            var toast     = document.getElementById('toast');
+
+            if (!btn || !panel) return;
+
+            // Sincronizar editores CKEditor antes de contar cambios o serializar
+            syncCkeditors(panel);
+
+            var csrf     = btn.getAttribute('data-csrf') || '';
+            var endpoint = btn.getAttribute('data-endpoint') || '/laesh/adrc/cms/save';
+            var seccion  = panel.getAttribute('data-section') || panel.id.replace('panel-', '');
+
+            // Confirmación con conteo de cambios pendientes
+            var nCambios = countPanelChanges(panel);
+            var labelSec = panelLabelsGestion[seccion] || seccion;
+            if (nCambios === 0) {
+                alert('Sin cambios en «' + labelSec + '» — no hay nada que publicar.');
+                return;
+            }
+            var msgConfirm = '¿Publicar ' + nCambios + ' cambio' + (nCambios !== 1 ? 's' : '') + ' en «' + labelSec + '»?\nEsta acción actualizará el sitio en producción.';
+            if (!window.confirm(msgConfirm)) return;
+
+            // Recopilar todos los inputs/textareas con name dentro del panel activo
+            var params = new URLSearchParams();
+            params.set('csrf_token', csrf);
+            params.set('seccion', seccion);
+
+            panel.querySelectorAll('input[name], textarea[name], select[name]').forEach(function(el) {
+                if (el.type === 'file' || el.disabled) return;
+                if ((el.type === 'checkbox' || el.type === 'radio') && !el.checked) return;
+
+                if (el.name.endsWith('[]')) {
+                    params.append(el.name, el.value || '');
+                } else {
+                    params.set(el.name, el.value || '');
+                }
+            });
+
+            // Feedback visual: deshabilitar botón durante el envío
+            btn.disabled = true;
+            var originalHtml = btn.innerHTML;
+            btn.innerHTML = '<span style="display:inline-block;width:12px;height:12px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:spin 0.7s linear infinite;vertical-align:middle;margin-right:6px;"></span>Publicando…';
+
+            fetch(endpoint, {
+                method:      'POST',
+                credentials: 'same-origin',
+                headers:     { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body:        params.toString()
+            })
+            .then(function(resp) { return resp.json(); })
+            .then(function(data) {
+                btn.disabled = false;
+                btn.innerHTML = originalHtml;
+
+                if (data.ok) {
+                    // Actualizar data-csrf y todos los inputs csrf_token en el DOM con el token rotado
+                    if (data.csrf_token) {
+                        btn.setAttribute('data-csrf', data.csrf_token);
+                        if (typeof window.refreshCsrf === 'function') {
+                            window.refreshCsrf(data.csrf_token);
+                        }
+                    }
+                    // Resetear tracking: publicado = nuevo original, badge desaparece
+                    resetChangeTracking(panel, seccion);
+                    // Toast éxito
+                    if (toast) {
+                        toast.textContent = data.msg || '¡Cambios publicados exitosamente!';
+                        toast.classList.remove('toast--error');
+                        toast.classList.add('show');
+                        setTimeout(function() { toast.classList.remove('show'); }, 3500);
+                    }
+                } else {
+                    if (toast) {
+                        toast.textContent = data.msg || 'Error al publicar. Intenta de nuevo.';
+                        toast.classList.add('toast--error', 'show');
+                        setTimeout(function() { toast.classList.remove('show', 'toast--error'); }, 4000);
+                    }
+                    console.warn('[LAESH CMS] Error publicando sección:', data.msg);
+                }
+            })
+            .catch(function(err) {
+                btn.disabled = false;
+                btn.innerHTML = originalHtml;
+                if (toast) {
+                    toast.textContent = 'Error de conexión. Verifica tu red e intenta de nuevo.';
+                    toast.classList.add('toast--error', 'show');
+                    setTimeout(function() { toast.classList.remove('show', 'toast--error'); }, 4000);
+                }
+                console.error('[LAESH CMS] Fetch error:', err);
+            });
+        }
+
+        function simulateSave() {
+            // Mantenido como alias por compatibilidad — delega a publishCmsSection
+            publishCmsSection();
+        }
+
+        /**
+         * previewCmsSection — Vista previa sin publicar (borrador de sesión)
+         *
+         * Serializa los campos del panel activo y hace POST a /cms/preview-draft.
+         * El backend almacena los datos en $_SESSION['cms_draft'][seccion].
+         * Si la respuesta es ok, abre /laesh/?_preview=1#{anchor} en pestaña nueva.
+         * La producción (visitantes públicos) no es afectada en ningún momento.
+         */
+        function previewCmsSection() {
+            var panel  = document.querySelector('.cms-panel.active');
+            var toast  = document.getElementById('toast');
+
+            // Derivar sección desde data-section del panel o desde su id (igual que publishCmsSection)
+            var seccion = panel
+                ? (panel.getAttribute('data-section') || panel.id.replace('panel-', ''))
+                : '';
+            if (!seccion || !panel) return;
+
+            // Sincronizar editores CKEditor antes de serializar
+            syncCkeditors(panel);
+
+            // Abrir pestaña en blanco de forma síncrona durante el evento de clic para evitar el bloqueo de emergentes (popup blocker)
+            var previewWin = null;
+            try {
+                previewWin = window.open('about:blank', '_blank');
+            } catch (e) {
+                console.warn('[LAESH CMS] No se pudo abrir ventana preliminar:', e);
+            }
+
+            var savBtn = document.getElementById('btn-cms-save-action');
+            var csrf   = savBtn ? savBtn.getAttribute('data-csrf') : '';
+
+            // Recopilar campos del panel activo (igual que publishCmsSection)
+            var params = new URLSearchParams();
+            params.set('csrf_token', csrf);
+            params.set('seccion', seccion);
+            panel.querySelectorAll('input[name], textarea[name], select[name]').forEach(function(el) {
+                if (el.type === 'file' || el.disabled) return;
+                if ((el.type === 'checkbox' || el.type === 'radio') && !el.checked) return;
+
+                if (el.name.endsWith('[]')) {
+                    params.append(el.name, el.value || '');
+                } else {
+                    params.set(el.name, el.value || '');
+                }
+            });
+
+            // Estado visual del botón mientras se envía
+            var previewBtns = document.querySelectorAll('.btn-cms-preview');
+            previewBtns.forEach(function(b) { b.disabled = true; b.textContent = '⏳ Preparando…'; });
+
+            fetch('/laesh/adrc/cms/preview-draft', {
+                method:      'POST',
+                credentials: 'same-origin',
+                headers:     { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body:        params.toString()
+            })
+            .then(function(resp) { return resp.json(); })
+            .then(function(data) {
+                previewBtns.forEach(function(b) { b.disabled = false; b.textContent = '👁 Vista previa'; });
+                if (data.ok && data.url) {
+                    if (previewWin && !previewWin.closed) {
+                        previewWin.location.href = data.url;
+                    } else {
+                        window.open(data.url, '_blank', 'noopener');
+                    }
+                } else {
+                    if (previewWin && !previewWin.closed) previewWin.close();
+                    if (toast) {
+                        toast.textContent = data.msg || 'No se pudo abrir la vista previa.';
+                        toast.classList.add('toast--error', 'show');
+                        setTimeout(function() { toast.classList.remove('show', 'toast--error'); }, 4000);
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L500-831)</summary>
+
+**Path:** `Unknown file`
+
+```
+                    }
+                }
+            })
+            .catch(function(err) {
+                if (previewWin && !previewWin.closed) previewWin.close();
+                previewBtns.forEach(function(b) { b.disabled = false; b.textContent = '👁 Vista previa'; });
+                console.error('[LAESH CMS] preview-draft error:', err);
+                if (toast) {
+                    toast.textContent = 'Error de conexión al preparar la vista previa.';
+                    toast.classList.add('toast--error', 'show');
+                    setTimeout(function() { toast.classList.remove('show', 'toast--error'); }, 4000);
+                }
+            });
+        }
+
+
+/* ── P-LAESH-01 Phase3: event listeners (reemplaza onclick=/onchange= del HTML) ── */
+document.addEventListener('DOMContentLoaded', function() {
+    // Inyectar por defecto valor actual en duro (5 segundos) si no viene poblado
+    var inputHeroTrans = document.getElementById('input-hero-transition');
+    if (inputHeroTrans) {
+        if (!inputHeroTrans.value) inputHeroTrans.value = "5";
+        inputHeroTrans.addEventListener('keydown', function(e) {
+            var allowed = ['0','1','2','3','4','5','6','7','8','9','Backspace','Tab','ArrowLeft','ArrowRight','Delete','Home','End'];
+            if (e.ctrlKey || e.metaKey) return;
+            if (!allowed.includes(e.key)) {
+                e.preventDefault();
+            }
+        });
+        inputHeroTrans.addEventListener('paste', function(e) {
+            var text = (e.clipboardData || window.clipboardData).getData('text');
+            if (!/^\d+$/.test(text)) {
+                e.preventDefault();
+            }
+        });
+        inputHeroTrans.addEventListener('input', function() {
+            this.value = this.value.replace(/[^0-9]/g, '').slice(0, 3);
+        });
+    }
+
+    // Sidebar nav items con data-section → showPanel + activateNav
+    document.querySelectorAll('.sidebar .nav-item[data-section]').forEach(function(item) {
+        item.addEventListener('click', function() {
+            showPanel(this.getAttribute('data-section'));
+            activateNav(this);
+        });
+        // A-01: activación por teclado para role="button" (Enter / Espacio)
+        item.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                this.click();
+            }
+        });
+    });
+
+    // Tabs superiores con data-section → showPanel + activateTab
+    document.querySelectorAll('.cms-tab[data-section]').forEach(function(tab) {
+        tab.addEventListener('click', function() {
+            showPanel(this.getAttribute('data-section'));
+            activateTab(this);
+        });
+    });
+
+    // Botón guardar/publicar
+    var btnSave = document.getElementById('btn-cms-save-action');
+    if (btnSave) btnSave.addEventListener('click', simulateSave);
+
+    // Botón Vista Previa en la barra de tabs (único, sticky)
+    var btnPreviewTab = document.getElementById('btn-preview-tabbar');
+    if (btnPreviewTab) btnPreviewTab.addEventListener('click', previewCmsSection);
+
+    // Registrar evento en todos los campos (input + change para selects)
+    document.querySelectorAll('.cms-panel ' + TRACK_SELECTOR).forEach(function(el) {
+        el.addEventListener('input',  function() { onFieldChange(this); });
+        el.addEventListener('change', function() { onFieldChange(this); });
+    });
+
+    // Inicializar valores originales (después de que initCurrentValueLabels() ya corrió)
+    initChangeTracking();
+
+    // File inputs → previewImage
+    var fileMap = {
+        'file-hero-selected':    'prev-hero-selected',
+        'file-hero-1':           'prev-hero-1',
+        'file-banner-promos':    'prev-banner-promos',
+        'file-esp-selected':     'prev-esp-selected',
+        'file-calidad-selected': 'prev-calidad-selected',
+        'file-croquis':          'prev-croquis'
+    };
+    Object.keys(fileMap).forEach(function(inputId) {
+        var el = document.getElementById(inputId);
+        if (el) el.addEventListener('change', function() { previewImage(this, fileMap[inputId]); });
+    });
+
+    // Select hero slide (Banner Principal)
+    var selHero = document.getElementById('select-hero-slide');
+    if (selHero) selHero.addEventListener('change', function() { cargarHeroSlideSeleccionado(this.value); });
+
+    // Select calidad (si existe, tiene id asignado por su data-section context)
+    var selCalidad = document.getElementById('select-carrusel-calidad');
+    if (selCalidad) selCalidad.addEventListener('change', function() { cargarCalidadSeleccionada(this.value); });
+
+    // Piso mínimo absoluto: solo para campos vacíos (evita maxlength=0 o 1).
+    // La regla real es: valor_actual.length + 2.
+    const CHAR_FLOOR = { text: 4, tel: 4, url: 10, email: 10, textarea: 8 };
+
+    // Contador universal de caracteres en tiempo real (esquina superior derecha del label)
+    function updateCharCounter(el) {
+        if (!el) return;
+
+        // Campos marcados data-no-limit: sin contador ni restricción de maxlength.
+        if (el.hasAttribute('data-no-limit')) return;
+
+        // Si ya tiene data-max o maxlength explícito, respetarlo.
+        // Si no, calcular valor_actual.length + 2 (con piso mínimo) y escribirlo.
+        let max;
+        const explicit = el.getAttribute('data-max') || el.getAttribute('maxlength');
+        if (explicit) {
+            max = parseInt(explicit, 10);
+        } else {
+            const tag   = el.tagName.toLowerCase();
+            const type  = tag === 'textarea' ? 'textarea' : (el.getAttribute('type') || 'text');
+            const floor = CHAR_FLOOR[type] || 4;
+            max = Math.max((el.value ? el.value.length : 0) + 15, floor);
+            el.setAttribute('maxlength', max);   // ← el navegador bloquea a partir de aquí
+        }
+
+        const len = el.value ? el.value.length : 0;
+
+        // Buscar el label propio hermano anterior, o la etiqueta label dentro del field-group contenedor directo
+        let label = el.previousElementSibling;
+        while (label && label.tagName.toLowerCase() !== 'label') {
+            label = label.previousElementSibling;
+        }
+        if (!label) {
+            const fg = el.closest('.field-group');
+            if (fg) label = fg.querySelector('label');
+        }
+        if (!label) return;
+
+        let counter = label.querySelector('.char-counter');
+        if (!counter) {
+            counter = document.createElement('span');
+            counter.className = 'char-counter';
+            label.appendChild(counter);
+        }
+
+        counter.textContent = len + ' / ' + max + ' char';
+        counter.classList.remove('ok', 'warn', 'limit');
+        const ratio = len / max;
+        if (ratio > 1) {
+            counter.classList.add('limit');
+        } else if (ratio >= 0.85) {
+            counter.classList.add('warn');
+        } else if (len > 0) {
+            counter.classList.add('ok');
+        }
+    }
+
+    const CHAR_SELECTOR = 'input[type="text"], input[type="tel"], input[type="url"], input[type="email"], textarea';
+
+    function refreshAllCharCounters() {
+        document.querySelectorAll(CHAR_SELECTOR).forEach(function(input) {
+            if (input.type === 'hidden' || input.type === 'file' || input.id === 'login-redirect-target') return;
+            updateCharCounter(input);
+        });
+    }
+
+    document.querySelectorAll(CHAR_SELECTOR).forEach(function(input) {
+        if (input.type === 'hidden' || input.type === 'file') return;
+        input.addEventListener('input', function() { updateCharCounter(this); });
+        input.addEventListener('change', function() { updateCharCounter(this); });
+    });
+
+    // ── Valor publicado actual como pista bajo cada label ──────────────────────
+    // Lee el value inicial de cada campo (= valor en BD) y muestra una pista
+    // "Publicado: «…»" entre el label y el control, para referencia al editar.
+    function initCurrentValueLabels() {
+        document.querySelectorAll(CHAR_SELECTOR).forEach(function(el) {
+            if (el.type === 'hidden' || el.type === 'file') return;
+            if (el.hasAttribute('data-no-limit')) return; // URL/Ancla CTA: sin pista
+            if (el.id === 'login-redirect-target') return;
+
+            var fg = el.closest('.field-group');
+            var label = fg ? fg.querySelector('label') : null;
+            if (!label) return;
+
+            var current = (el.value || '').trim();
+
+            var hint = document.createElement('span');
+            hint.className = 'cms-field-published';
+
+            if (!current) {
+                hint.textContent = 'Publicado: (vacío)';
+                hint.classList.add('cms-field-published--empty');
+            } else if (el.tagName.toLowerCase() === 'textarea') {
+                hint.textContent = 'Publicado: ' + current.length + ' car.';
+                hint.title = current;
+            } else {
+                var display = current.length > 40 ? current.substring(0, 40) + '…' : current;
+                hint.textContent = 'Publicado: «' + display + '»';
+                hint.title = current;
+            }
+
+            // Insertar entre el label y el control
+            label.insertAdjacentElement('afterend', hint);
+        });
+    }
+
+    // Actualizar contadores al inicio y al cambiar de slide o ficha
+    setTimeout(refreshAllCharCounters, 100);
+    initCurrentValueLabels();
+
+    // Lógica reactiva para enterarse de notificaciones de recepción (labadmin)
+    let lastRemitidosCMS = 0;
+    function refreshNotificacionesCMS() {
+        if (typeof getOrders !== 'function') return;
+        const orders = getOrders().filter(o => o.estado === 'Remitido');
+        const count = orders.length;
+        const badge = document.getElementById('badge-notif-cms');
+
+        if (badge) {
+            badge.innerText = count;
+            if (count > 0) {
+                badge.classList.add('show');
+                if (count > lastRemitidosCMS) {
+                    badge.classList.add('pulse');
+                    if (typeof playWhistle === 'function') {
+                        playWhistle();
+                    }
+                    setTimeout(() => badge.classList.remove('pulse'), 3000);
+                }
+                document.title = `(${count}) Gestión Web - LAESH`;
+            } else {
+                badge.classList.remove('show');
+                badge.classList.remove('pulse');
+                document.title = "Gestión Web - LAESH";
+            }
+        }
+        lastRemitidosCMS = count;
+    }
+
+    // Inicializar y escuchar cambios de LocalStorage
+    refreshNotificacionesCMS();
+    setInterval(refreshNotificacionesCMS, 4000);
+    window.addEventListener('storage', refreshNotificacionesCMS);
+
+    // ── Drag-and-drop: Panel Orden de Secciones ───────────────────────────────
+    // Inicializa el reordenamiento HTML5 nativo en el panel configuracion-general.
+    // Solo se activa cuando el elemento #seccion-order-list existe en el DOM.
+    (function initSectionOrderDnD() {
+        var list = document.getElementById('seccion-order-list');
+        var hiddenInput = document.getElementById('seccion-order-input');
+        if (!list || !hiddenInput) return;
+
+        function serializeOrder() {
+            var ids = Array.from(list.querySelectorAll('[data-seccion-id]'))
+                          .map(function(el) { return el.getAttribute('data-seccion-id'); });
+            hiddenInput.value = ids.join(',');
+        }
+
+        var draggingEl = null;
+
+        list.addEventListener('dragstart', function(e) {
+            draggingEl = e.target.closest('[data-seccion-id]');
+            if (!draggingEl) return;
+            draggingEl.classList.add('dnd-dragging');
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/plain', draggingEl.getAttribute('data-seccion-id'));
+        });
+
+        list.addEventListener('dragend', function() {
+            if (draggingEl) {
+                draggingEl.classList.remove('dnd-dragging');
+                draggingEl = null;
+            }
+            list.querySelectorAll('.dnd-over').forEach(function(el) {
+                el.classList.remove('dnd-over');
+            });
+            serializeOrder();
+            if (window.CmsDirtyTracker && typeof window.CmsDirtyTracker.evalField === 'function') {
+                window.CmsDirtyTracker.evalField(hiddenInput);
+            }
+        });
+
+        // Trigger evalField al cambiar los radio buttons de encendido/apagado
+        list.querySelectorAll('.sec-toggle-radio').forEach(function(radio) {
+            radio.addEventListener('change', function() {
+                if (window.CmsDirtyTracker && typeof window.CmsDirtyTracker.evalField === 'function') {
+                    window.CmsDirtyTracker.evalField(radio);
+                }
+            });
+        });
+
+        list.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+            var target = e.target.closest('[data-seccion-id]');
+            if (!target || target === draggingEl) return;
+            list.querySelectorAll('.dnd-over').forEach(function(el) { el.classList.remove('dnd-over'); });
+            target.classList.add('dnd-over');
+            var rect = target.getBoundingClientRect();
+            var midY = rect.top + rect.height / 2;
+            if (e.clientY < midY) {
+                list.insertBefore(draggingEl, target);
+            } else {
+                list.insertBefore(draggingEl, target.nextSibling);
+            }
+        });
+
+        list.addEventListener('dragleave', function(e) {
+            var target = e.target.closest('[data-seccion-id]');
+            if (target) target.classList.remove('dnd-over');
+        });
+
+        list.addEventListener('drop', function(e) {
+            e.preventDefault();
+        });
+
+        // Inicializar el valor del hidden input desde el orden actual del DOM
+        serializeOrder();
+
+        // Actualizar el display de texto cada vez que se serializa
+        function updateDisplay() {
+            serializeOrder();
+            var display = document.getElementById('seccion-order-display');
+            if (display) display.textContent = hiddenInput.value || '(predeterminado)';
+        }
+        list.addEventListener('dragend', updateDisplay, true);
+    })();
+});
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing CMS Codebase**
+
+I've been meticulously examining the codebase of the CMS, specifically focusing on `laesh-web-assets-uipv1a/js/gestion-web.js`. I've uncovered several manual RTE helpers: `window.formatRteText`, `window.formatRteTag`, `window.formatRteBlock`, and `window.clearRte`. I am now investigating their functionalities.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `estudiosCatalog`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.004725694s
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:24 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/**
+ * admrc/index.php — Router Flight PHP para el Portal Admin CMS
+ *
+ * Ubicación: laesh-swbldi/admrc/index.php
+ * URL:       /laesh/adrc/          (Alias en restaurantb.conf)
+ *
+ * Fuente HTML: website/uipv1/gestion-web.html  ← NUNCA BORRAR (R15.1)
+ * Merge iterativo: cambios en gestion-web.html → propagar en views/gestion_web.php
+ *
+ * Rutas:
+ *   GET  /          → vista principal CMS (requiere permiso gestionar_cms)
+ *   POST /cms/save  → guardar sección en web_contenidos (HTMX)
+ */
+
+declare(strict_types=1);
+
+// commons/ está 1 nivel arriba de admrc/
+require_once __DIR__ . '/../commons/commons.php';
+
+use Common\Logger;
+use Common\DB;
+use Common\Cache;
+
+// ── Guard RBAC: solo ADMIN puede acceder ────────────────────────────────────
+Flight::rbac()->requirePermission(
+    'gestionar_cms',
+    '/laesh/login/login.php?portal=admin'  // Nginx location /laesh/ → laesh-swbldi/website/
+);
+
+// ── GET / — Panel principal CMS ──────────────────────────────────────────────
+Flight::route('GET /', function () {
+    $auth = Flight::auth();
+    $db   = Flight::db();
+
+    // Nombre del admin desde empleados
+    $stmt = $db->prepare("SELECT nombre, apellidos FROM empleados WHERE user_id = ? LIMIT 1");
+    $stmt->execute([$auth->getUserId()]);
+    $emp = $stmt->fetch(\PDO::FETCH_ASSOC);
+    $nombreAdmin = $emp ? trim($emp['nombre'] . ' ' . $emp['apellidos']) : 'Administrador';
+
+    // CSRF token (R14.12)
+    if (empty($_SESSION['csrf_token'])) {
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    }
+
+    // Contenidos CMS desde BD
+    $contenidos = [];
+    $rows = $db->query(
+        "SELECT seccion, subseccion, clave, valor FROM web_contenidos ORDER BY id"
+    )->fetchAll(\PDO::FETCH_ASSOC);
+    foreach ($rows as $row) {
+        $contenidos[$row['seccion']][$row['subseccion']][$row['clave']] = $row['valor'];
+    }
+
+    // Última actualización
+    $lastPub = $db->query("SELECT MAX(actualizado_en) FROM web_contenidos")->fetchColumn();
+
+    // Configuraciones globales (D-04: WhatsApp URL, redes sociales, etc.)
+    $config = $db->query("SELECT clave, valor FROM configuraciones")
+                 ->fetchAll(\PDO::FETCH_KEY_PAIR) ?: [];
+
+    // Promociones relacionales desde MariaDB (catalogo_promociones)
+    $promociones = $db->query("
+        SELECT id, dia_semana, imagen_fondo, activo, orden
+        FROM catalogo_promociones
+        ORDER BY orden ASC, id ASC
+    ")->fetchAll(\PDO::FETCH_ASSOC);
+
+    // Plates — directorio de vistas es el mismo directorio admrc/
+    Flight::view()->setDirectory(__DIR__);
+    echo Flight::view()->render('views/gestion_web', [
+        'nombreAdmin'     => $nombreAdmin,
+        'csrfToken'       => $_SESSION['csrf_token'],
+        'contenidos'      => $contenidos,
+        'config'          => $config,
+        'lastPub'         => $lastPub,
+        'promociones'     => $promociones,
+    ]);
+});
+
+// ── POST /cms/save — Guardar sección CMS (HTMX o form tradicional) ───────────
+Flight::route('POST /cms/save', function () {
+    header('Content-Type: application/json; charset=utf-8');
+
+    // RBAC: Verificar permiso para guardar en CMS
+    Flight::rbac()->requirePermission('gestionar_cms', '/laesh/login/login.php?portal=admin');
+
+    // R14.12: CSRF primero
+    $submitted = $_POST['csrf_token'] ?? '';
+    if (!hash_equals($_SESSION['csrf_token'] ?? '', $submitted)) {
+        http_response_code(403);
+        Logger::log('WARN', 'Token CSRF inválido en cms/save', Flight::auth()->getUserId() ?: null);
+        echo json_encode(['ok' => false, 'msg' => 'Token de seguridad inválido.']);
+        exit;
+    }
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+
+    $db      = Flight::db();
+    $userId  = Flight::auth()->getUserId();
+    $seccion = trim($_POST['seccion'] ?? '');
+
+    // Validar sección — solo valores canónicos (D-07)
+    $seccionesValidas = ['hero','quienes-somos','especialidades','promociones','calidad','ubicacion','aviso-privacidad','privacidad','video-promo','video','footer','seo','configuracion-general'];
+    if (!in_array($seccion, $seccionesValidas, true)) {
+        http_response_code(400);
+        echo json_encode(['ok' => false, 'msg' => 'Sección no válida.']);
+        exit;
+    }
+
+    $campos = $_POST;
+    unset($campos['csrf_token'], $campos['seccion']);
+
+    try {
+        $db->beginTransaction();
+
+        // FIX 2026-09-07: tipo se auto-detecta por patrón de URL (no hardcodeado a 'texto').
+        // El ON DUPLICATE KEY UPDATE también propaga tipo para auto-sanar registros previos.
+        $stmt = $db->prepare(
+            "INSERT INTO web_contenidos (seccion, subseccion, clave, valor, tipo, actualizado_por)
+             VALUES (:sec, :sub, :clave, :valor, :tipo, :uid)
+             ON DUPLICATE KEY UPDATE valor = VALUES(valor), tipo = VALUES(tipo), actualizado_por = VALUES(actualizado_por)"
+        );
+
+        // Configuraciones globales: campos _cfg_{clave} → tabla configuraciones (D-04)
+        // UPSERT: inserta si la clave no existe, actualiza si ya existe
+        $cfgStmt = $db->prepare(
+            "INSERT INTO configuraciones (clave, valor, descripcion) VALUES (:clave, :valor, NULL)
+             ON DUPLICATE KEY UPDATE valor = VALUES(valor)"
+        );
+
+        // Manejo específico de catalogo_promociones en MariaDB cuando la sección es 'promociones'
+        if ($seccion === 'promociones') {
+            $rawIds = $_POST['promo_id'] ?? [];
+            $promoIds = is_array($rawIds) ? $rawIds : (is_numeric($rawIds) ? [$rawIds] : []);
+
+            if (empty($promoIds)) {
+                $promoIds = $db->query("SELECT id FROM catalogo_promociones ORDER BY id ASC")->fetchAll(\PDO::FETCH_COLUMN) ?: [1, 2, 3, 4, 5, 6, 7];
+            }
+
+            $stmtPromo = $db->prepare("
+                UPDATE catalogo_promociones SET
+                    dia_semana     = :dia_semana,
+                    imagen_fondo   = :imagen_fondo,
+                    activo         = :activo
+                WHERE id = :id
+            ");
+
+            foreach ($promoIds as $pId) {
+                $pIdInt = (int)$pId;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L49-219)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+// Helper: recuperar valor RAW de $contenidos para editores RTE (desescapa entidades codificadas para evitar doble escape en CKEditor)
+function cmsRaw(array $c, string $sec, ?string $sub, string $clave, string $default = ''): string {
+    $val = $c[$sec][$sub ?? ''][$clave] ?? '';
+    $raw = $val !== '' ? $val : $default;
+    while (str_contains($raw, '&lt;') && str_contains($raw, '&gt;')) {
+        $raw = htmlspecialchars_decode($raw, ENT_QUOTES);
+    }
+    return $raw;
+}
+
+$lastPubLabel = $lastPub
+    ? 'Pub. ' . date('d/m H:i', strtotime($lastPub))
+    : 'Sin publicar';
+?>
+<html lang="es-MX">
+<head>
+    <meta charset="UTF-8">
+    <meta name="color-scheme" content="light">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0052B7">
+    <meta name="description" content="Panel CMS de gestión de contenidos — solo para administradores LAESH.">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://i.ytimg.com; frame-src 'self' https://www.youtube.com https://youtube.com; script-src 'self' 'unsafe-inline'; connect-src 'self' ws: wss:;">
+    <title>Gestión de Contenidos Web — LAESH</title>
+    <link rel="icon" type="image/svg+xml" href="/laesh-web-assets-uipv1a/img/favicon.svg">
+    <script src="/laesh-web-assets-uipv1a/js/device-detect.js?v=<?= time() ?>"></script>
+    <meta name="csrf-token" content="<?= htmlspecialchars($csrfToken, ENT_QUOTES, 'UTF-8') ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/tokens.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/fonts.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/style.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/gestion-web.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/ckeditor5.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/portal.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/targeting.css?v=<?= time() ?>">
+</head>
+<body class="portal-medico-body-layout">
+<a href="#main-content" class="skip-link">Ir al contenido principal</a>
+
+<!-- Encabezado Fijo con Breadcrumb -->
+<nav class="portal-access-header">
+    <div class="portal-header-left">
+        <a class="logo portal-access-link" href="/laesh/" target="_blank" rel="noopener">
+            <img src="/laesh-web-assets-uipv1a/img/logo-laesh.webp" alt="LAESH Logo" class="portal-logo" decoding="async" fetchpriority="high">
+        </a>
+        <div class="portal-header-divider"></div>
+        <div class="portal-breadcrumb-group">
+            <a href="/laesh/rc/" class="bc-home-link" title="Volver al Panel de Recepción">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                Recepción
+            </a>
+            <span class="header-sep-green">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            </span>
+            <span class="txt-main fw-600 portal-h1">Admin</span>
+            <span class="header-sep-green">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            </span>
+            <span id="header-bc-current" class="txt-pgd fw-bold">Banner Principal</span>
+        </div>
+    </div>
+    <div class="portal-header-right">
+        <span class="pub-meta-hdr"><?= htmlspecialchars($lastPubLabel, ENT_QUOTES, 'UTF-8') ?></span>
+        <button type="button" class="btn btn-primary btn-resultados-sm mr-2" id="btn-cms-save-action"
+                data-csrf="<?= htmlspecialchars($csrfToken, ENT_QUOTES, 'UTF-8') ?>"
+                data-endpoint="/laesh/adrc/cms/save">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+            Publicar
+        </button>
+        <span class="hdr-sep-v" aria-hidden="true"></span>
+        <button type="button" class="btn btn-secondary mr-2" id="btn-preview-tabbar" title="Vista previa del sitio público sin publicar">
+            👁 Vista previa
+        </button>
+        <div class="user-badge-portal">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--primary-green-dark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <span>Admin Web: <strong class="txt-pgd"><?= htmlspecialchars($nombreAdmin, ENT_QUOTES, 'UTF-8') ?></strong></span>
+        </div>
+        <a href="/laesh/login/logout.php" class="btn-back-primary" id="btn-logout">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            Cerrar Sesión
+        </a>
+    </div>
+    <div class="portal-initials-mob portal-initials-mob--admin" aria-hidden="true">ADM</div>
+</nav>
+
+<div class="app-layout">
+    <!-- ====== SIDEBAR ====== -->
+    <aside class="sidebar">
+        <div class="sidebar-toggle-row">
+            <button type="button" class="sidebar-rail-toggle" id="sidebar-rail-toggle" title="Expandir / Colapsar menú">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+        </div>
+        <div class="nav-item active" id="nav-hero" data-panel="panel-hero" data-section="hero" data-tooltip="Banner y textos del carrusel principal (#inicio)" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+            Banner Principal
+        </div>
+        <div class="nav-item" id="nav-quienes-somos" data-panel="panel-quienes-somos" data-section="quienes-somos" data-tooltip="Historia, Misión, Visión y Valores (#acerca-de)" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Quiénes somos
+        </div>
+        <div class="nav-item" id="nav-especialidades" data-panel="panel-especialidades" data-section="especialidades" data-tooltip="Carrusel y catálogo de estudios (#especialidades)" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2v6a2 2 0 0 0 .245.96l5.51 10.08A2 2 0 0 1 18 22H6a2 2 0 0 1-1.755-2.96l5.51-10.08A2 2 0 0 0 10 8V2"/></svg>
+            Estudios
+        </div>
+        <div class="nav-item" id="nav-promociones" data-panel="panel-promociones" data-section="promociones" data-tooltip="Banner promocional (#promociones)" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m8.5 8.5 7 7"/></svg>
+            Promociones Vigentes
+        </div>
+        <div class="nav-item" id="nav-calidad" data-panel="panel-calidad" data-section="calidad" data-tooltip="Galería de instalaciones (#calidad)" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            Calidad e Instalaciones
+        </div>
+        <div class="nav-item" id="nav-ubicacion" data-panel="panel-ubicacion" data-section="ubicacion" data-tooltip="Teléfonos, dirección y mapa (#ubicacion)" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Ubicación y Contacto
+        </div>
+        <div class="nav-item" id="nav-footer" data-panel="panel-footer" data-section="footer" data-tooltip="Pie de página: datos, horarios y créditos (#footer)" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="13" width="18" height="8" rx="2"/><path d="M3 7h18M7 3h10"/></svg>
+            Pie de Página
+        </div>
+        <div class="nav-item" id="nav-aviso-privacidad" data-panel="panel-aviso-privacidad" data-section="aviso-privacidad" data-tooltip="Aviso de Privacidad — contenido legal completo" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Aviso de Privacidad
+        </div>
+        <div class="nav-item" id="nav-video-promo" data-panel="panel-video-promo" data-section="video-promo" data-tooltip="Video promocional con enlaces y reproductor embebido" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+            Video promo
+        </div>
+        <div class="nav-item" id="nav-configuracion-general" data-panel="panel-configuracion-general" data-section="configuracion-general" data-tooltip="Orden vertical de secciones en la página de inicio" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+            Ordenamiento
+        </div>
+        <div class="nav-item" id="nav-seo" data-panel="panel-seo" data-section="seo" data-tooltip="Metadatos, Open Graph y Schema.org" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
+            Metadatos
+        </div>
+
+        <!-- Ícono ⚙️ Sistema & Logs: visible únicamente en el rail colapsado de íconos (.sidebar-rail-only) -->
+        <a href="/laesh/adrc/sistema" class="nav-item sidebar-rail-only cursor-p" id="nav-sistema-rail" data-tooltip="Administración del Sistema y Logs" role="button" tabindex="0" style="text-decoration:none;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            Sistema & Logs
+        </a>
+
+        <!-- Pub-meta y botón Publicar movidos al header nav (2026-08-27) -->
+
+        <div class="sidebar-mobile-only">
+            <div class="user-badge--sm">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--primary-green-dark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <span>Admin: <strong class="strong-primary"><?= htmlspecialchars($nombreAdmin, ENT_QUOTES, 'UTF-8') ?></strong></span>
+            </div>
+            <a href="/laesh/login/logout.php" class="btn-logout--mobile">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                Cerrar Sesión
+            </a>
+        </div>
+    </aside>
+
+    <!-- ====== MAIN + TABS (columna flex) ====== -->
+    <!--
+        Estructura: .cms-content-col (column flex) agrupa las tabs fijas arriba
+        y el área de paneles scrolleable abajo. Así las tabs NO quedan dentro del
+        scroll container y se "pegan" visualmente sin necesitar position:sticky.
+        Ver: gestion-web.css → .cms-content-col / .cms-panels-scroll
+    -->
+    <div class="cms-content-col">
+        <div class="cms-tabs" role="tablist" aria-label="Secciones del sitio web">
+            <div class="cms-tab active" id="tab-hero" role="tab" aria-selected="true" aria-controls="panel-hero" tabindex="0" data-section="hero">1. Banner Principal</div>
+            <div class="cms-tab" id="tab-quienes-somos" role="tab" aria-selected="false" aria-controls="panel-quienes-somos" tabindex="-1" data-section="quienes-somos">2. Quiénes somos</div>
+            <div class="cms-tab" id="tab-especialidades" role="tab" aria-selected="false" aria-controls="panel-especialidades" tabindex="-1" data-section="especialidades">3. Estudios</div>
+            <div class="cms-tab" id="tab-promociones" role="tab" aria-selected="false" aria-controls="panel-promociones" tabindex="-1" data-section="promociones">4. Promociones Vigentes</div>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `promo-estudio`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:24 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-web-assets-uipv1a/css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>Directory: `css` (14 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-web-assets-uipv1a/css`
+
+| Name | Type | Size |
+|------|------|------|
+| `ckeditor-content.css` | File | 6908 bytes |
+| `ckeditor5.css` | File | 213502 bytes |
+| `docs.css` | File | 14352 bytes |
+| `fonts.css` | File | 15347 bytes |
+| `gestion-web.css` | File | 25635 bytes |
+| `landing.css` | File | 84064 bytes |
+| `log-viewer.css` | File | 4744 bytes |
+| `portal.css` | File | 69493 bytes |
+| `solicitud-dac.css` | File | 7806 bytes |
+| `style-website.css` | File | 15739 bytes |
+| `style.css` | File | 33158 bytes |
+| `tablet-samsung-tabs10ultra.css` | File | 9637 bytes |
+| `targeting.css` | File | 5954 bytes |
+| `tokens.css` | File | 2419 bytes |
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing CMS Sections**
+
+Okay, I'm deep diving into the CMS, starting with the banner (`hero`) section in `gestion_web.php`. I've identified key form fields like `hero__navbar__tagline_l1` and `hero__slide1__etiqueta`, aiming to map their functionalities. I am going to analyze all 11 CMS sections.
+
+
+**Exploring Hero Slide Fields**
+
+I've moved on from the banner and am scrutinizing the hero slide fields: `hero__slide1__descripcion`, `cta_texto`, etc. I've discovered these are used in the front-end, with up to five slides. The remnants of v1's single select dropdown in `gestion-web.js` are clear.
+I'm now onto the `quienes-somos` section, noting a clean structure with CKEditor integrations, specifically for key sections.
+And then the studies section, now. I am also working to map all 11 CMS sections.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.504070794s
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+## User Request
+
+Realizalo de manera quirurgica,  cuidando NO impactar negativamente con nuevos gaps  , e issues.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `m004_depurate_promociones_scope.sql`
+**Language:** oracle-sql
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+/* Interceptor global de promesas no capturadas de extensiones de navegador (Chrome/Edge/Brave) */
+window.addEventListener('unhandledrejection', function(event) {
+    if (event && event.reason) {
+        var msg = (event.reason.message || event.reason.toString() || '');
+        if (msg.includes('Could not establish connection') || msg.includes('Receiving end does not exist')) {
+            event.preventDefault();
+        }
+    }
+});
+
+/* Helper RTE Ampliado para formateo de texto sin URL media */
+window.formatRteText = function(btn, command) {
+    var fieldGroup = btn.closest('.field-group');
+    var input = fieldGroup ? fieldGroup.querySelector('input[type="text"], textarea') : null;
+    if (!input) return;
+
+    var start = input.selectionStart;
+    var end = input.selectionEnd;
+    var selectedText = input.value.substring(start, end);
+
+    var openTag = '<' + command + '>';
+    var closeTag = '</' + command + '>';
+
+    if (!selectedText) {
+        selectedText = 'texto';
+    }
+
+    var replacement = openTag + selectedText + closeTag;
+    input.value = input.value.substring(0, start) + replacement + input.value.substring(end);
+    input.focus();
+    input.setSelectionRange(start + openTag.length, start + openTag.length + selectedText.length);
+};
+
+window.formatRteTag = function(btn, tagName, styleAttr) {
+    var fieldGroup = btn.closest('.field-group');
+    var input = fieldGroup ? fieldGroup.querySelector('input[type="text"], textarea') : null;
+    if (!input) return;
+
+    var start = input.selectionStart;
+    var end = input.selectionEnd;
+    var selectedText = input.value.substring(start, end);
+
+    var openTag = '<' + tagName + ' style="' + styleAttr + '">';
+    var closeTag = '</' + tagName + '>';
+
+    if (!selectedText) {
+        selectedText = 'texto';
+    }
+
+    var replacement = openTag + selectedText + closeTag;
+    input.value = input.value.substring(0, start) + replacement + input.value.substring(end);
+    input.focus();
+    input.setSelectionRange(start + openTag.length, start + openTag.length + selectedText.length);
+};
+
+window.formatRteBlock = function(btn, blockTag) {
+    var fieldGroup = btn.closest('.field-group');
+    var input = fieldGroup ? fieldGroup.querySelector('textarea') : null;
+    if (!input) return;
+
+    var start = input.selectionStart;
+    var end = input.selectionEnd;
+    var selectedText = input.value.substring(start, end);
+
+    if (!selectedText) selectedText = 'Elemento de lista';
+
+    var replacement = '<' + blockTag + '>\n  <li>' + selectedText + '</li>\n</' + blockTag + '>';
+    input.value = input.value.substring(0, start) + replacement + input.value.substring(end);
+    input.focus();
+};
+
+window.clearRteFormat = function(btn) {
+    var fieldGroup = btn.closest('.field-group');
+    var input = fieldGroup ? fieldGroup.querySelector('input[type="text"], textarea') : null;
+    if (!input) return;
+
+    var text = input.value;
+    input.value = text.replace(/<[^>]*>/g, '');
+};
+
+/* gestion-web.js — lógica del portal de gestión web CMS (extraído de gestion-web.html) */
+        const panelLabelsGestion = {
+            'hero': '1. Banner Principal',
+            'quienes-somos': '2. Quiénes somos',
+            'especialidades': '3. Estudios',
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L129-219)</summary>
+
+**Path:** `Unknown file`
+
+```
+        function activateNav(el) {
+            document.querySelectorAll('.sidebar .nav-item').forEach(n => n.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        
+        // Datos de los 5 Hero Slides del Banner Principal (#inicio)
+        // img: '' — las previews se muestran server-side en cada tarjeta PHP; el selector JS queda vacío sin fallback
+        const heroDatos = {
+            1: { badge: "Bienvenido a Nuestra Institución", title: "Bienvenido a LAESH® — Diagnósticos de Confianza", desc: "Trabajamos para proporcionar información diagnóstica confiable que ayude al médico a tomar mejores decisiones y al paciente a recibir atención oportuna.", btnText: "Conoce los Servicios", btnLink: "#especialidades", img: '' },
+            2: { badge: "25 Años de Experiencia Clínica", title: "Laboratorio de Especialidades Hematológicas", desc: "Ofrecemos servicios de laboratorio clínico de alta especialización y rigor científico, comprometidos con la salud y tranquilidad de nuestra comunidad.", btnText: "Ver Especialidades", btnLink: "#especialidades", img: '' },
+            3: { badge: "Excelencia y Calidad Certificada", title: "Resultados Confiables para Cuidar tu Salud", desc: "Detrás de cada análisis existe una decisión médica crucial. En LAESH® la precisión diagnóstica es nuestro compromiso inquebrantable.", btnText: "Conocer Calidad", btnLink: "#calidad", img: '' },
+            4: { badge: "Tarifas y Paquetes Preferenciales", title: "Promociones y Check-Ups Médicos 2026", desc: "Descubre nuestros paquetes preventivos y tarifas especiales diseñados para el cuidado integral de tu salud y la de toda tu familia.", btnText: "Ver Promociones", btnLink: "#promociones", img: '' },
+            5: { badge: "Atención Presencial y Horarios", title: "Ubicación, Horarios de Atención y Contacto", desc: "Azucenas #8, Fracc. Jardines del Sur, Huajuapan de León, Oax. Lun a Sáb: 7:00 a.m. – 9:00 p.m. | Dom: 7:00 a.m. – 3:00 p.m. | Tel: 953 688 7694", btnText: "Ver Ubicación", btnLink: "#ubicacion", img: '' }
+        };
+
+        function cargarHeroSlideSeleccionado(val) {
+            const d = heroDatos[val];
+            if (d) {
+                if (document.getElementById('input-hero-badge')) document.getElementById('input-hero-badge').value = d.badge || '';
+                if (document.getElementById('input-hero-title')) document.getElementById('input-hero-title').value = d.title || '';
+                if (document.getElementById('input-hero-desc')) document.getElementById('input-hero-desc').value = d.desc || '';
+                if (document.getElementById('input-hero-btn-text')) document.getElementById('input-hero-btn-text').value = d.btnText || '';
+                if (document.getElementById('input-hero-btn-link')) document.getElementById('input-hero-btn-link').value = d.btnLink || '';
+                const prev = document.getElementById('prev-hero-selected');
+                if (prev) prev.src = d.img || '';
+                setTimeout(refreshAllCharCounters, 10);
+            }
+        }
+
+        // Datos de carousel 1-16 — img: '' (sin fallback; preview real en tarjeta PHP)
+        const rutinaDatos = {
+            1:  { titulo: "Hematología Especializada",    desc: "Análisis morfológico de frotis sanguíneo y pruebas hematológicas de alta complejidad.", img: '' },
+            2:  { titulo: "Química Clínica Avanzada",     desc: "Determinación automatizada de electrolitos, proteínas y enzimas específicas.", img: '' },
+            3:  { titulo: "Microbiología y Cultivos",     desc: "Identificación microscópica y pruebas de susceptibilidad a antimicrobianos.", img: '' },
+            4:  { titulo: "Uroanálisis y Sedimentos",     desc: "Examen de orina, química y microscopía para detección precoz de patologías renales.", img: '' },
+            5:  { titulo: "Hemostasia y Coagulación",     desc: "Estudios de tiempos de protrombina (TP) y tromboplastina parcial activada (TTPa).", img: '' },
+            6:  { titulo: "Pruebas Especiales",           desc: "Hormonas, anticuerpos específicos, pruebas inmunológicas y marcadores tumorales.", img: '' },
+            7:  { titulo: "Pre-analítica",                desc: "Separación de suero y plasma con control estricto de tiempos y temperaturas.", img: '' },
+            8:  { titulo: "Toma de Muestras I",           desc: "Áreas higiénicas equipadas para la extracción sanguínea convencional.", img: '' },
+            9:  { titulo: "Toma de Muestras II",          desc: "Módulos individuales y confortables que aseguran una atención rápida.", img: '' },
+            10: { titulo: "Toma Pediátrica",              desc: "Espacio amigable y personal capacitado para el cuidado y tranquilidad de los niños.", img: '' },
+            11: { titulo: "Toma de Cultivos",             desc: "Zonas aisladas y estériles para la toma de exudados y cultivos microbiológicos.", img: '' },
+            12: { titulo: "Recepción Técnica",            desc: "Recepción técnica de muestras e indicaciones pre-analíticas detalladas.", img: '' },
+            13: { titulo: "", desc: "", img: '' },
+            14: { titulo: "", desc: "", img: '' },
+            15: { titulo: "", desc: "", img: '' },
+            16: { titulo: "", desc: "", img: '' }
+        };
+
+        function cargarRutinaSeleccionada(val) {
+            const d = rutinaDatos[val];
+            if (d) {
+                document.getElementById('rutina-titulo-val').value = d.titulo || '';
+                document.getElementById('rutina-desc-val').value = d.desc || '';
+                const prev = document.getElementById('prev-esp-selected');
+                if (prev) {
+                    prev.src = d.img || 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="90" height="60" viewBox="0 0 90 60"><rect width="100%" height="100%" fill="%23f1f5f9"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%2394a3b8" font-size="10" font-family="sans-serif">Sin Imagen</text></svg>';
+                }
+                setTimeout(refreshAllCharCounters, 10);
+            }
+        }
+
+        // Datos calidad gallery — img: '' (sin fallback; preview real en tarjeta PHP)
+        const calidadDatos = {
+            1: { titulo: "Área de Hematología",      desc: "Análisis de biometría hemática y células sanguíneas con rigor científico y alta precisión.", img: '' },
+            2: { titulo: "Química Clínica",          desc: "Determinación automatizada de metabolitos, perfil lipídico y enzimas específicas.", img: '' },
+            3: { titulo: "Microbiología y Cultivos", desc: "Aislamiento, tinción de Gram y pruebas de susceptibilidad a antimicrobianos.", img: '' }
+        };
+
+        function cargarCalidadSeleccionada(val) {
+            const d = calidadDatos[val];
+            if (d) {
+                document.getElementById('calidad-titulo-val').value = d.titulo;
+                document.getElementById('calidad-desc-val').value = d.desc;
+                document.getElementById('prev-calidad-selected').src = d.img;
+                setTimeout(refreshAllCharCounters, 10);
+            }
+        }
+
+        function previewImage(input, previewId) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.getElementById(previewId);
+                    if (img) img.src = e.target.result;
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L579-604)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+    // File inputs → previewImage
+    var fileMap = {
+        'file-hero-selected':    'prev-hero-selected',
+        'file-hero-1':           'prev-hero-1',
+        'file-banner-promos':    'prev-banner-promos',
+        'file-esp-selected':     'prev-esp-selected',
+        'file-calidad-selected': 'prev-calidad-selected',
+        'file-croquis':          'prev-croquis'
+    };
+    Object.keys(fileMap).forEach(function(inputId) {
+        var el = document.getElementById(inputId);
+        if (el) el.addEventListener('change', function() { previewImage(this, fileMap[inputId]); });
+    });
+
+    // Select hero slide (Banner Principal)
+    var selHero = document.getElementById('select-hero-slide');
+    if (selHero) selHero.addEventListener('change', function() { cargarHeroSlideSeleccionado(this.value); });
+
+    // Select calidad (si existe, tiene id asignado por su data-section context)
+    var selCalidad = document.getElementById('select-carrusel-calidad');
+    if (selCalidad) selCalidad.addEventListener('change', function() { cargarCalidadSeleccionada(this.value); });
+
+    // Piso mínimo absoluto: solo para campos vacíos (evita maxlength=0 o 1).
+    // La regla real es: valor_actual.length + 2.
+    const CHAR_FLOOR = { text: 4, tel: 4, url: 10, email: 10, textarea: 8 };
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `previewImage`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:27 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:27 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L59-159)</summary>
+
+**Path:** `Unknown file`
+
+```
+        function activateNav(el) {
+            document.querySelectorAll('.sidebar .nav-item').forEach(n => n.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        
+        // Datos de los 5 Hero Slides del Banner Principal (#inicio)
+        // img: '' — las previews se muestran server-side en cada tarjeta PHP; el selector JS queda vacío sin fallback
+        const heroDatos = {
+            1: { badge: "Bienvenido a Nuestra Institución", title: "Bienvenido a LAESH® — Diagnósticos de Confianza", desc: "Trabajamos para proporcionar información diagnóstica confiable que ayude al médico a tomar mejores decisiones y al paciente a recibir atención oportuna.", btnText: "Conoce los Servicios", btnLink: "#especialidades", img: '' },
+            2: { badge: "25 Años de Experiencia Clínica", title: "Laboratorio de Especialidades Hematológicas", desc: "Ofrecemos servicios de laboratorio clínico de alta especialización y rigor científico, comprometidos con la salud y tranquilidad de nuestra comunidad.", btnText: "Ver Especialidades", btnLink: "#especialidades", img: '' },
+            3: { badge: "Excelencia y Calidad Certificada", title: "Resultados Confiables para Cuidar tu Salud", desc: "Detrás de cada análisis existe una decisión médica crucial. En LAESH® la precisión diagnóstica es nuestro compromiso inquebrantable.", btnText: "Conocer Calidad", btnLink: "#calidad", img: '' },
+            4: { badge: "Tarifas y Paquetes Preferenciales", title: "Promociones y Check-Ups Médicos 2026", desc: "Descubre nuestros paquetes preventivos y tarifas especiales diseñados para el cuidado integral de tu salud y la de toda tu familia.", btnText: "Ver Promociones", btnLink: "#promociones", img: '' },
+            5: { badge: "Atención Presencial y Horarios", title: "Ubicación, Horarios de Atención y Contacto", desc: "Azucenas #8, Fracc. Jardines del Sur, Huajuapan de León, Oax. Lun a Sáb: 7:00 a.m. – 9:00 p.m. | Dom: 7:00 a.m. – 3:00 p.m. | Tel: 953 688 7694", btnText: "Ver Ubicación", btnLink: "#ubicacion", img: '' }
+        };
+
+        function cargarHeroSlideSeleccionado(val) {
+            const d = heroDatos[val];
+            if (d) {
+                if (document.getElementById('input-hero-badge')) document.getElementById('input-hero-badge').value = d.badge || '';
+                if (document.getElementById('input-hero-title')) document.getElementById('input-hero-title').value = d.title || '';
+                if (document.getElementById('input-hero-desc')) document.getElementById('input-hero-desc').value = d.desc || '';
+                if (document.getElementById('input-hero-btn-text')) document.getElementById('input-hero-btn-text').value = d.btnText || '';
+                if (document.getElementById('input-hero-btn-link')) document.getElementById('input-hero-btn-link').value = d.btnLink || '';
+                const prev = document.getElementById('prev-hero-selected');
+                if (prev) prev.src = d.img || '';
+                setTimeout(refreshAllCharCounters, 10);
+            }
+        }
+
+        // Datos de carousel 1-16 — img: '' (sin fallback; preview real en tarjeta PHP)
+        const rutinaDatos = {
+            1:  { titulo: "Hematología Especializada",    desc: "Análisis morfológico de frotis sanguíneo y pruebas hematológicas de alta complejidad.", img: '' },
+            2:  { titulo: "Química Clínica Avanzada",     desc: "Determinación automatizada de electrolitos, proteínas y enzimas específicas.", img: '' },
+            3:  { titulo: "Microbiología y Cultivos",     desc: "Identificación microscópica y pruebas de susceptibilidad a antimicrobianos.", img: '' },
+            4:  { titulo: "Uroanálisis y Sedimentos",     desc: "Examen de orina, química y microscopía para detección precoz de patologías renales.", img: '' },
+            5:  { titulo: "Hemostasia y Coagulación",     desc: "Estudios de tiempos de protrombina (TP) y tromboplastina parcial activada (TTPa).", img: '' },
+            6:  { titulo: "Pruebas Especiales",           desc: "Hormonas, anticuerpos específicos, pruebas inmunológicas y marcadores tumorales.", img: '' },
+            7:  { titulo: "Pre-analítica",                desc: "Separación de suero y plasma con control estricto de tiempos y temperaturas.", img: '' },
+            8:  { titulo: "Toma de Muestras I",           desc: "Áreas higiénicas equipadas para la extracción sanguínea convencional.", img: '' },
+            9:  { titulo: "Toma de Muestras II",          desc: "Módulos individuales y confortables que aseguran una atención rápida.", img: '' },
+            10: { titulo: "Toma Pediátrica",              desc: "Espacio amigable y personal capacitado para el cuidado y tranquilidad de los niños.", img: '' },
+            11: { titulo: "Toma de Cultivos",             desc: "Zonas aisladas y estériles para la toma de exudados y cultivos microbiológicos.", img: '' },
+            12: { titulo: "Recepción Técnica",            desc: "Recepción técnica de muestras e indicaciones pre-analíticas detalladas.", img: '' },
+            13: { titulo: "", desc: "", img: '' },
+            14: { titulo: "", desc: "", img: '' },
+            15: { titulo: "", desc: "", img: '' },
+            16: { titulo: "", desc: "", img: '' }
+        };
+
+        function cargarRutinaSeleccionada(val) {
+            const d = rutinaDatos[val];
+            if (d) {
+                document.getElementById('rutina-titulo-val').value = d.titulo || '';
+                document.getElementById('rutina-desc-val').value = d.desc || '';
+                const prev = document.getElementById('prev-esp-selected');
+                if (prev) {
+                    prev.src = d.img || 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="90" height="60" viewBox="0 0 90 60"><rect width="100%" height="100%" fill="%23f1f5f9"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%2394a3b8" font-size="10" font-family="sans-serif">Sin Imagen</text></svg>';
+                }
+                setTimeout(refreshAllCharCounters, 10);
+            }
+        }
+
+        // Datos calidad gallery — img: '' (sin fallback; preview real en tarjeta PHP)
+        const calidadDatos = {
+            1: { titulo: "Área de Hematología",      desc: "Análisis de biometría hemática y células sanguíneas con rigor científico y alta precisión.", img: '' },
+            2: { titulo: "Química Clínica",          desc: "Determinación automatizada de metabolitos, perfil lipídico y enzimas específicas.", img: '' },
+            3: { titulo: "Microbiología y Cultivos", desc: "Aislamiento, tinción de Gram y pruebas de susceptibilidad a antimicrobianos.", img: '' }
+        };
+
+        function cargarCalidadSeleccionada(val) {
+            const d = calidadDatos[val];
+            if (d) {
+                document.getElementById('calidad-titulo-val').value = d.titulo;
+                document.getElementById('calidad-desc-val').value = d.desc;
+                document.getElementById('prev-calidad-selected').src = d.img;
+                setTimeout(refreshAllCharCounters, 10);
+            }
+        }
+
+        function previewImage(input, previewId) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.getElementById(previewId);
+                    if (img) img.src = e.target.result;
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // ── Seguimiento de cambios por pestaña (module scope — usado por publishCmsSection) ──
+        /** Selector de todos los campos rastreables (con name, no file). */
+        const TRACK_SELECTOR = 'input[name]:not([type="file"]), textarea[name], select[name]';
+
+        /** Inicializa data-original en todos los campos de todos los paneles. */
+        function initChangeTracking() {
+            if (window.CmsDirtyTracker) {
+                window.CmsDirtyTracker.init([
+                    'panel-hero',
+                    'panel-quienes-somos',
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:27 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L489-524)</summary>
+
+**Path:** `Unknown file`
+
+```
+            label.appendChild(counter);
+        }
+
+        counter.textContent = len + ' / ' + max + ' char';
+        counter.classList.remove('ok', 'warn', 'limit');
+        const ratio = len / max;
+        if (ratio > 1) {
+            counter.classList.add('limit');
+        } else if (ratio >= 0.85) {
+            counter.classList.add('warn');
+        } else if (len > 0) {
+            counter.classList.add('ok');
+        }
+    }
+
+    const CHAR_SELECTOR = 'input[type="text"], input[type="tel"], input[type="url"], input[type="email"], textarea';
+
+    function refreshAllCharCounters() {
+        document.querySelectorAll(CHAR_SELECTOR).forEach(function(input) {
+            if (input.type === 'hidden' || input.type === 'file' || input.id === 'login-redirect-target') return;
+            updateCharCounter(input);
+        });
+    }
+
+    document.querySelectorAll(CHAR_SELECTOR).forEach(function(input) {
+        if (input.type === 'hidden' || input.type === 'file') return;
+        input.addEventListener('input', function() { updateCharCounter(this); });
+        input.addEventListener('change', function() { updateCharCounter(this); });
+    });
+
+    // ── Valor publicado actual como pista bajo cada label ──────────────────────
+    // Lee el value inicial de cada campo (= valor en BD) y muestra una pista
+    // "Publicado: «…»" entre el label y el control, para referencia al editar.
+    function initCurrentValueLabels() {
+        document.querySelectorAll(CHAR_SELECTOR).forEach(function(el) {
+            if (el.type === 'hidden' || el.type === 'file') return;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L469-499)</summary>
+
+**Path:** `Unknown file`
+
+```
+            el.setAttribute('maxlength', max);   // ← el navegador bloquea a partir de aquí
+        }
+
+        const len = el.value ? el.value.length : 0;
+
+        // Buscar el label propio hermano anterior, o la etiqueta label dentro del field-group contenedor directo
+        let label = el.previousElementSibling;
+        while (label && label.tagName.toLowerCase() !== 'label') {
+            label = label.previousElementSibling;
+        }
+        if (!label) {
+            const fg = el.closest('.field-group');
+            if (fg) label = fg.querySelector('label');
+        }
+        if (!label) return;
+
+        let counter = label.querySelector('.char-counter');
+        if (!counter) {
+            counter = document.createElement('span');
+            counter.className = 'char-counter';
+            label.appendChild(counter);
+        }
+
+        counter.textContent = len + ' / ' + max + ' char';
+        counter.classList.remove('ok', 'warn', 'limit');
+        const ratio = len / max;
+        if (ratio > 1) {
+            counter.classList.add('limit');
+        } else if (ratio >= 0.85) {
+            counter.classList.add('warn');
+        } else if (len > 0) {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L429-469)</summary>
+
+**Path:** `Unknown file`
+
+```
+        'file-banner-promos':    'prev-banner-promos',
+        'file-esp-selected':     'prev-esp-selected',
+        'file-calidad-selected': 'prev-calidad-selected',
+        'file-croquis':          'prev-croquis'
+    };
+    Object.keys(fileMap).forEach(function(inputId) {
+        var el = document.getElementById(inputId);
+        if (el) el.addEventListener('change', function() { previewImage(this, fileMap[inputId]); });
+    });
+
+    // Select hero slide (Banner Principal)
+    var selHero = document.getElementById('select-hero-slide');
+    if (selHero) selHero.addEventListener('change', function() { cargarHeroSlideSeleccionado(this.value); });
+
+    // Select calidad (si existe, tiene id asignado por su data-section context)
+    var selCalidad = document.getElementById('select-carrusel-calidad');
+    if (selCalidad) selCalidad.addEventListener('change', function() { cargarCalidadSeleccionada(this.value); });
+
+    // Piso mínimo absoluto: solo para campos vacíos (evita maxlength=0 o 1).
+    // La regla real es: valor_actual.length + 2.
+    const CHAR_FLOOR = { text: 4, tel: 4, url: 10, email: 10, textarea: 8 };
+
+    // Contador universal de caracteres en tiempo real (esquina superior derecha del label)
+    function updateCharCounter(el) {
+        if (!el) return;
+
+        // Campos marcados data-no-limit: sin contador ni restricción de maxlength.
+        if (el.hasAttribute('data-no-limit')) return;
+
+        // Si ya tiene data-max o maxlength explícito, respetarlo.
+        // Si no, calcular valor_actual.length + 2 (con piso mínimo) y escribirlo.
+        let max;
+        const explicit = el.getAttribute('data-max') || el.getAttribute('maxlength');
+        if (explicit) {
+            max = parseInt(explicit, 10);
+        } else {
+            const tag   = el.tagName.toLowerCase();
+            const type  = tag === 'textarea' ? 'textarea' : (el.getAttribute('type') || 'text');
+            const floor = CHAR_FLOOR[type] || 4;
+            max = Math.max((el.value ? el.value.length : 0) + 15, floor);
+            el.setAttribute('maxlength', max);   // ← el navegador bloquea a partir de aquí
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:27 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L97-114)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+    $db      = Flight::db();
+    $userId  = Flight::auth()->getUserId();
+    $seccion = trim($_POST['seccion'] ?? '');
+
+    // Validar sección — solo valores canónicos (D-07)
+    $seccionesValidas = ['hero','quienes-somos','especialidades','promociones','calidad','ubicacion','aviso-privacidad','privacidad','video-promo','video','footer','seo','configuracion-general'];
+    if (!in_array($seccion, $seccionesValidas, true)) {
+        http_response_code(400);
+        echo json_encode(['ok' => false, 'msg' => 'Sección no válida.']);
+        exit;
+    }
+
+    $campos = $_POST;
+    unset($campos['csrf_token'], $campos['seccion']);
+
+    try {
+        $db->beginTransaction();
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:27 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L94-109)</summary>
+
+**Path:** `Unknown file`
+
+```
+        exit;
+    }
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+
+    $db      = Flight::db();
+    $userId  = Flight::auth()->getUserId();
+    // Normalizar alias legacy a nombres canónicos (D-07)
+    $seccionMap = ['privacidad' => 'aviso-privacidad', 'video' => 'video-promo'];
+    if (isset($seccionMap[$seccion])) {
+        $seccion = $seccionMap[$seccion];
+    }
+
+    // Validar sección — solo valores canónicos (D-07)
+    $seccionesValidas = ['hero','quienes-somos','especialidades','promociones','calidad','ubicacion','aviso-privacidad','video-promo','footer','seo','configuracion-general'];
+    if (!in_array($seccion, $seccionesValidas, true)) {
+        http_response_code(400);
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:27 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:27 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:27 am
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+## User Request
+
+a nivel de css y recursos web no hubo depuracion alguna ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `gestion-web.js`
+**Language:** javascript
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `promo`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:29 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `promo`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:29 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+/* gestion-web.css — estilos específicos del portal de gestión web CMS
+   Extraídos de inline styles en gestion-web.html (P-LAESH-01, 2026-08-13) */
+
+/* ── FIX STICKY TABS (raíz estructural) ─────────────────────────────────────────
+   Problema: .main-content tiene overflow-y:auto pero la cadena de altura
+   (body → .app-layout → .main-content) no está acotada al viewport, por lo que
+   .main-content nunca genera un scroll container real; el scroll ocurre en el
+   viewport (body), y el sticky queda capturado en .main-content sin efecto.
+
+   Solución: separar tabs del área scrolleable.
+     - .cms-content-col  →  columna flex que reemplaza .main-content en el flex row
+                             de .app-layout; contiene las tabs arriba + el scroll abajo.
+     - .cms-panels-scroll → el único área que scrollea; las tabs quedan FUERA de él.
+     - La cadena de altura se aota via :has() solo en páginas con .cms-content-col.
+
+   Con esta estructura las tabs están fuera del scroll container → no necesitan
+   position:sticky; se "quedan fijas" porque el scroll pasa debajo de ellas.
+   ─────────────────────────────────────────────────────────────────────────────── */
+
+/* Cadena de altura acotada al viewport — solo en la página de CMS */
+:root:has(.cms-content-col) body {
+    height: 100dvh;
+    overflow: hidden;
+}
+:root:has(.cms-content-col) .app-layout {
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+}
+
+/* Columna flex que reemplaza .main-content como hijo de .app-layout */
+.cms-content-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 0;
+    background: var(--bg-page, #f8fafc);
+}
+
+/* Zona de paneles: la única que scrollea */
+.cms-panels-scroll {
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
+    padding: 1.5rem 2.5rem 2.5rem;
+    background: var(--bg-page, #f8fafc);
+}
+@media (max-width: 900px) {
+    .cms-panels-scroll { padding: 1rem; }
+}
+
+/* ── Botones nav compactos (header) ── */
+.btn-nav-sm { font-size: 0.8rem; margin-left: 10px; padding: 4px 8px; }
+
+/* ── Logo bar del header ── */
+.logo-bar       { display: flex; align-items: center; gap: 16px; }
+.logo-link      { display: flex; align-items: center; text-decoration: none; }
+.divider-v      { width: 1px; height: 26px; background: #cbd5e1; margin: 0 4px; }
+
+.cms-img-hint {
+    font-size: 0.8rem;
+    color: var(--text-muted, #64748b);
+    margin: 0 0 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cms-section-sep {
+    border: none;
+    border-top: 6px solid #e2e8f0;
+    width: 100%;
+    margin: 1.75rem 0;
+}
+
+/* ── Breadcrumb ── */
+.bc-nav         { display: flex; align-items: center; gap: 6px;
+                  font-size: 0.92rem; font-weight: 600; color: var(--text-muted); }
+.bc-link        { color: var(--primary); font-weight: 700; text-decoration: none; }
+.bc-sep         { color: #cbd5e1; display: flex; align-items: center; padding: 0 4px; }
+.bc-sep--plain  { color: #cbd5e1; display: flex; align-items: center; }
+.bc-item        { color: var(--text-main); font-weight: 600; }
+.bc-current     { color: var(--primary); font-weight: 700; }
+
+/* ── User / admin badge ── */
+.user-badge {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 0.85rem; font-weight: 600; color: var(--text-main);
+    background: rgba(0, 82, 183, 0.06); padding: 6px 14px;
+    border-radius: 20px; border: 1px solid rgba(0, 82, 183, 0.12);
+}
+.user-badge--sm {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 0.85rem; font-weight: 600; color: var(--text-main);
+    background: rgba(0,82,183,0.06); padding: 9px 14px;
+    border-radius: 20px; border: 1px solid rgba(0,82,183,0.12); min-height: 44px;
+}
+.strong-pgd { color: var(--primary); }
+.strong-primary { color: var(--primary); }
+
+/* ── Botón cerrar sesión ── */
+.btn-logout {
+    display: none;
+}
+
+/* ── Sidebar publish section (sidebar-inner movido al header — 2026-08-27) ── */
+.sidebar-sep    { margin: 0.6rem 0 0.5rem; border-top: 1px solid rgba(226, 232, 240, 0.9); }
+
+/* Separador vertical en el header nav entre grupo Publicar y grupo Vista Previa */
+.hdr-sep-v {
+    display: inline-block;
+    width: 1px;
+    height: 1.2rem;
+    background: rgba(0, 82, 183, 0.18);
+    margin: 0 6px;
+    vertical-align: middle;
+    flex-shrink: 0;
+}
+
+/* Texto "Pub. dd/mm HH:ii" en el header nav */
+.pub-meta-hdr {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    white-space: nowrap;
+    margin-right: 6px;
+}
+
+
+/* ── Sección principal ── */
+.main-content--pad { padding-top: 1rem; }
+
+/* ── Encabezados de sección CMS ── */
+.cms-h3 { color: var(--primary); margin-bottom: 1rem; }
+.cms-p   { color: var(--text-muted); margin-bottom: 1.5rem; }
+.cms-ul  { margin: 4px 0 0 1.2rem; padding: 0; }
+
+/* ── Grid de 2 columnas (quiénes somos) ── */
+.grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.grid-2col.mb-4 { margin-bottom: 1.5rem; }
+
+/* ── Panel Hero: zona de Indicaciones de Carga ── */
+.hero-guide-zone {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    background: #eef4ff;
+    border: 1.5px solid #b8d0f8;
+    border-left: 4px solid var(--primary);
+```
+
+</details>
 
 ---
 
