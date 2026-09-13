@@ -7,9 +7,9 @@
 | **Trajectory ID** | `abc4a225-cbc2-4de2-b597-b83e19c66e68` |
 | **Cascade ID** | `6c5cb2b3-5120-4595-9e04-fe85d3e62c21` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 1797 |
+| **Total Steps** | 2421 |
 | **Started** | 11 Sept 2026, 10:39 am |
-| **Completed** | 11 Sept 2026, 11:33 pm |
+| **Completed** | 13 Sept 2026, 9:16 am |
 
 ---
 
@@ -363,8120 +363,416 @@
 
 ---
 
-<details>
-<summary>Conversation History</summary>
-
-# Conversation History
-Here are the conversation IDs, titles, and summaries of your most recent 2 conversations, in reverse chronological order:
-
-<conversation_summaries>
-## Conversation 31156cde-8540-4bb7-b98d-aae9a424fc4e: Host C DB Connectivity Check
-- Created: 2026-08-04T17:40:08Z
-- Last modified: 2026-09-11T14:00:20Z
-
-## Conversation 96544882-d905-4769-b8c2-f15f337e791e: Fixing CMS Promotion Text Styles
-- Created: 2026-09-08T14:04:04Z
-- Last modified: 2026-09-09T15:21:21Z
-
-</conversation_summaries>
-
-</details>
-
----
-
 ### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 3:03 pm
-
----
-
-<details>
-<summary>System Message</summary>
-
-The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
-
-<EPHEMERAL_MESSAGE>
-<planning_mode>
-You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
-If the user's request warrants a plan then follow this workflow:
-1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
-2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
-3. After receiving approval, begin execution. Create and update the task artifact as you work.
-4. Verify any work that you have done.
-5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
-If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
-</planning_mode>
-<bash_command_reminder>
-CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
-CRITICAL INSTRUCTION 1: ...
-CRITICAL INSTRUCTION 2: ...'.
-</bash_command_reminder>
-</EPHEMERAL_MESSAGE>
-
-**Triggered Heuristics:** planning_mode, bash_command_reminder
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Prioritizing Specialized Tools**
-
-I'm now focusing on employing specialized tools like `view_file`, `list_dir`, and `grep_search`. I'm actively avoiding the more generic alternatives such as directly running `cat`, `ls`, or `grep` through bash. Moreover, I'm refraining from using `sed` for text replacement, instead opting for the more targeted `replace_file`. This should improve efficiency.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.033745984s
-- **Model:** Gemini 3.1 Pro (Low)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 3:03 pm
-
----
-
-<details>
-<summary>System Message</summary>
-
-The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
-
-<EPHEMERAL_MESSAGE>
-<planning_mode>
-You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
-If the user's request warrants a plan then follow this workflow:
-1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
-2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
-3. After receiving approval, begin execution. Create and update the task artifact as you work.
-4. Verify any work that you have done.
-5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
-If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
-</planning_mode>
-<bash_command_reminder>
-CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
-CRITICAL INSTRUCTION 1: ...
-CRITICAL INSTRUCTION 2: ...'.
-</bash_command_reminder>
-</EPHEMERAL_MESSAGE>
-
-**Triggered Heuristics:** planning_mode, bash_command_reminder
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Prioritizing Specialized Tools**
-
-I'm now focusing on employing specialized tools like `view_file`, `list_dir`, and `grep_search`. I'm actively avoiding the more generic alternatives such as directly running `cat`, `ls`, or `grep` through bash. Moreover, I'm refraining from using `sed` for text replacement, instead opting for the more targeted `replace_file`. This should improve efficiency.
-
-
-
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.091387192s
-- **Model:** Gemini 3.1 Pro (Low)
-</details>
-
----
-
-## User Request
-
-CRE DEBE ser un azul fuerte laesh
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `landing.css`
-**Language:** css
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1277-1308)</summary>
-
-**Path:** `Unknown file`
-
-```
-    /* ALTERNATIVA DESCARTADA — fuentes comprimidas para mostrar todo el contenido (badge+h1+p+botón≈123px):
-    .hero-glass-card h1, .hero-glass-card h2 { font-size: 0.88rem; line-height: 1.15; margin-bottom: 0.2rem; }
-    .hero-glass-card p                        { font-size: 0.6rem;  line-height: 1.25; margin-bottom: 0.25rem;
-                                                font-family: system-ui, -apple-system, sans-serif; }
-    .hero-glass-card > span                   { font-size: 0.46rem; padding: 2px 8px;  margin-bottom: 0.2rem; }
-    Descartada: fuentes resultaron demasiado pequeñas. Preferida: ocultar <p> (ver abajo). */
-
-    .hero-glass-card h1, .hero-glass-card h2 { font-size: 0.7rem; line-height: 1.15; margin-bottom: 0.25rem; }
-    /* <p> móvil: Solo se muestra si tiene <= 75 caracteres (controlado por PHP con .d-none-mobile).
-       Debe tener fuente reducida para no desbordar el hero de 200px. */
-    .hero-glass-card p                        { font-size: 0.6rem; line-height: 1.25; margin-bottom: 0.3rem; }
-    .hero-glass-card p.d-none-mobile          { display: none; }
-    .hero-glass-card > span                   { font-size: 0.5rem; padding: 2px 8px; margin-bottom: 0.25rem; }
-    /* Option 3: Ficha Clickable + Texto en línea minimalista */
-    .hero-slide .hero-glass-card .flex-center-15 {
-        display: block; text-align: center; margin-top: -2px;
-    }
-    .hero-slide .hero-glass-card .flex-center-15 .btn-outline-white {
-        padding: 0; border: none; background: transparent !important;
-        font-size: 0.6rem; font-weight: 700; color: #60a5fa; /* Azul claro / celeste sutil */
-        text-transform: uppercase; letter-spacing: 0.5px;
-        min-height: unset; display: inline-flex; align-items: center; gap: 4px;
-    }
-    .hero-slide .hero-glass-card .flex-center-15 .btn-outline-white::after {
-        content: ''; position: absolute;
-        top: 0; left: 0; right: 0; bottom: 0;
-        z-index: 10; cursor: pointer;
-    }
-    /* botón pausa en móvil: solo icono, sin texto "Pausar/Reanudar" */
-    .hero-pause-label { display: none; }
-    .hero-pause-btn   { width: 30px; padding: 0; border-radius: 50%; justify-content: center; }
-    .grid-layout {
-```
-
-</details>
-
----
-
-<details>
-<summary>System Message</summary>
-
-The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
-
-<EPHEMERAL_MESSAGE>
-<planning_mode>
-You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
-If the user's request warrants a plan then follow this workflow:
-1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
-2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
-3. After receiving approval, begin execution. Create and update the task artifact as you work.
-4. Verify any work that you have done.
-5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
-If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
-</planning_mode>
-<bash_command_reminder>
-CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
-CRITICAL INSTRUCTION 1: ...
-CRITICAL INSTRUCTION 2: ...'.
-</bash_command_reminder>
-</EPHEMERAL_MESSAGE>
-
-**Triggered Heuristics:** planning_mode, bash_command_reminder
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Prioritizing Specialized Tools**
-
-I'm now focusing on employing specialized tools like `view_file`, `list_dir`, and `grep_search`. I'm actively avoiding the use of `cat`, `ls`, and `grep` through bash. Also, I'm making a conscious effort to use the `replace_file` tool rather than relying on `sed` for text replacement tasks. I think this will improve performance.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `--primary-`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.055003150s
-- **Model:** Gemini 3.1 Pro (Low)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** CORTEX_STEP_STATUS_ERROR
+**Status:** Reset
 **Created:** 11 Sept 2026, 3:06 pm
 
 ---
 
-<details>
-<summary>System Message</summary>
-
-The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
-
-<EPHEMERAL_MESSAGE>
-<planning_mode>
-You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
-If the user's request warrants a plan then follow this workflow:
-1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
-2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
-3. After receiving approval, begin execution. Create and update the task artifact as you work.
-4. Verify any work that you have done.
-5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
-If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
-</planning_mode>
-<bash_command_reminder>
-CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
-CRITICAL INSTRUCTION 1: ...
-CRITICAL INSTRUCTION 2: ...'.
-</bash_command_reminder>
-</EPHEMERAL_MESSAGE>
-
-**Triggered Heuristics:** planning_mode, bash_command_reminder
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Prioritizing Specialized Tools**
-
-I'm now focusing on employing specialized tools like `view_file`, `list_dir`, and `grep_search`. I'm actively avoiding the more generic alternatives such as directly running `cat`, `ls`, or `grep` through bash. Moreover, I'm refraining from using `sed` for text replacement, instead opting for the more targeted `replace_file`. This should improve efficiency.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.203558556s
-- **Model:** Gemini 3.1 Pro (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-/* ══════════════════════════════════════════════════════════════════════════════
-   landing.css — Estilos del Sitio Corporativo LAESH (uipv1/index.html)
-   Cargado después de style.css · Aplica solo a la landing page pública.
-   ══════════════════════════════════════════════════════════════════════════════
-
-   TABLA DE CONTENIDO
-   ──────────────────────────────────────────────────────────────────────────────
-   §1  BASE (~l.1)         Tokens inline, body, scroll, skip-to-content
-   §2  NAVEGACIÓN (~l.72)  Navbar fixed, dropdown acceso, hamburger, botones
-   §3  HERO (~l.198)       Hero slider, animaciones, secciones, tarjetas, grid
-   §4  CARRUSELES (~l.322) Especialidades (scroll snap) · Calidad (fade)
-   §5  MAPA & PRECIOS      Flotantes WA/social, mapa interactivo, precios
-       (~l.361)
-   §6  CATÁLOGO & CONTACTO Catálogo de estudios (acordeones), wrappers de
-       (~l.439)            sección, P-LAESH-01 cleanup, Ubicación/Contacto
-   §7  FOOTER (~l.702)     Footer principal, franja CTA, franja info, responsive
-   §8  COMPONENTES (~l.840) Acerca de, barra progreso carrusel, galería calidad,
-                            croquis, CTA promociones, cookie banner, floaters
-   §9  MEDIA QUERIES       breakpoints responsivos: ≥1920 · ≤1024 · ≤767 · ≤480
-       (~l.1019)           ≤375 · landscape · prefers-reduced-motion · @supports
-   ──────────────────────────────────────────────────────────────────────────────
-   Última actualización: 2026-08-17 · #8opt ToC + marcadores de sección
-   ══════════════════════════════════════════════════════════════════════════════ */
-
-/* ── Tipografía corporativa LAESH (Manual §2.7)
-           Mosquito Std Black — fuente oficial; archivos pendientes de entrega del cliente.
-           Fallback activo: 'Arial Black', Impact, sans-serif (definido en h1-h6 abajo).
-           Cuando el cliente entregue los .woff2/.woff, restaurar el @font-face aquí. ── */
-
-        /* ── Paleta oficial LAESH (Manual §2.5) ── */
-        :root {
-            /* Tokens canónicos — única fuente de verdad */
-            --primary:            #0052B7;  /* azul LAESH */
-            --primary-green:      #71CA11;  /* verde LAESH */
-            --primary-green-light:#A3C912;  /* verde secundario */
-            --secondary-green:    #CCE7F5;  /* azul cielo / light blue */
-            --text-main:          #0f172a;
-            --text-muted:         #64748b;
-            --bg-page:            #f8fafc;
-            --bg-surface:         #ffffff;
-            --border:             #DADAD9;
-
-            /* Alias semánticos → apuntan a tokens canónicos */
-            --accent:             var(--primary-green-light);
-            --brand-blue:         var(--primary);
-            --brand-green:        var(--primary-green);
-            --brand-green-sec:    var(--primary-green-light);
-            --brand-light-blue:   var(--secondary-green);
-            --brand-gray:         var(--border);
-        }
-```
-
-</details>
-
----
-
-<details>
-<summary>System Message</summary>
-
-The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
-
-<EPHEMERAL_MESSAGE>
-<planning_mode>
-You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
-If the user's request warrants a plan then follow this workflow:
-1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
-2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
-3. After receiving approval, begin execution. Create and update the task artifact as you work.
-4. Verify any work that you have done.
-5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
-If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
-</planning_mode>
-<bash_command_reminder>
-CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
-CRITICAL INSTRUCTION 1: ...
-CRITICAL INSTRUCTION 2: ...'.
-</bash_command_reminder>
-</EPHEMERAL_MESSAGE>
-
-**Triggered Heuristics:** planning_mode, bash_command_reminder
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Prioritizing Specialized Tools**
-
-I'm now focusing on employing specialized tools like `view_file`, `list_dir`, and `grep_search`. I'm actively avoiding the more generic alternatives such as directly running `cat`, `ls`, or `grep` through bash. Moreover, I'm refraining from using `sed` for text replacement, instead opting for the more targeted `replace_file`. This should improve efficiency.
-
-
-**Refining Color Contrast**
-
-I'm now deeply concerned about color contrast. I've realized potential issues with the button and text colors against the hero slide's overlay and glass card backgrounds. I'm moving forward with caution and explicitly listing potential related tools before making color-related tool calls. I am attempting to determine whether the `rgba(0, 50, 130, 0.45)` blue background will contrast enough with the button, title, and paragraph text. I must make a tool call to determine the text color.
-
-
-**Analyzing Color Requests**
-
-Okay, I'm now wrestling with the user's color request for "azul fuerte laesh." I'm cross-referencing this against existing color variables like `--primary`, `--secondary-green`, and `--brand-blue` to ensure accuracy. I'm focusing on text and background interactions, specifically for the `.hero-glass-card` and button text. I'll change the text link color from `#60a5fa` to `var(--brand-blue)`. I'm evaluating the implication for the light blue and the strong blue to clarify the user's intent.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 3.891437227s
-- **Model:** Gemini 3.1 Pro (Low)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 3:07 pm
 
 ---
 
-<details>
-<summary>System Message</summary>
-
-The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
-
-<EPHEMERAL_MESSAGE>
-<planning_mode>
-You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
-If the user's request warrants a plan then follow this workflow:
-1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
-2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
-3. After receiving approval, begin execution. Create and update the task artifact as you work.
-4. Verify any work that you have done.
-5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
-If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
-</planning_mode>
-<bash_command_reminder>
-CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
-CRITICAL INSTRUCTION 1: ...
-CRITICAL INSTRUCTION 2: ...'.
-</bash_command_reminder>
-</EPHEMERAL_MESSAGE>
-
-**Triggered Heuristics:** planning_mode, bash_command_reminder
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Prioritizing Specialized Tools**
-
-I'm now focusing on employing specialized tools like `view_file`, `list_dir`, and `grep_search`. I'm actively avoiding the more generic alternatives such as directly running `cat`, `ls`, or `grep` through bash. Moreover, I'm refraining from using `sed` for text replacement, instead opting for the more targeted `replace_file`. This should improve efficiency.
-
-
-
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.400635240s
-- **Model:** Gemini 3.1 Pro (Low)
-</details>
-
----
-
-## User Request
-
-No resalta, quiza ponerle un marco muy sutil, 
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `landing.css`
-**Language:** css
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1281-1312)</summary>
-
-**Path:** `Unknown file`
-
-```
-    .hero-glass-card > span                   { font-size: 0.46rem; padding: 2px 8px;  margin-bottom: 0.2rem; }
-    Descartada: fuentes resultaron demasiado pequeñas. Preferida: ocultar <p> (ver abajo). */
-
-    .hero-glass-card h1, .hero-glass-card h2 { font-size: 0.7rem; line-height: 1.15; margin-bottom: 0.25rem; }
-    /* <p> móvil: Solo se muestra si tiene <= 75 caracteres (controlado por PHP con .d-none-mobile).
-       Debe tener fuente reducida para no desbordar el hero de 200px. */
-    .hero-glass-card p                        { font-size: 0.6rem; line-height: 1.25; margin-bottom: 0.3rem; }
-    .hero-glass-card p.d-none-mobile          { display: none; }
-    .hero-glass-card > span                   { font-size: 0.5rem; padding: 2px 8px; margin-bottom: 0.25rem; }
-    /* Option 3: Ficha Clickable + Texto en línea minimalista */
-    .hero-slide .hero-glass-card .flex-center-15 {
-        display: block; text-align: center; margin-top: -2px;
-    }
-    .hero-slide .hero-glass-card .flex-center-15 .btn-outline-white {
-        padding: 0; border: none; background: transparent !important;
-        font-size: 0.6rem; font-weight: 700; color: var(--primary); /* Azul fuerte LAESH */
-        text-transform: uppercase; letter-spacing: 0.5px;
-        min-height: unset; display: inline-flex; align-items: center; gap: 4px;
-    }
-    .hero-slide .hero-glass-card .flex-center-15 .btn-outline-white::after {
-        content: ''; position: absolute;
-        top: 0; left: 0; right: 0; bottom: 0;
-        z-index: 10; cursor: pointer;
-    }
-    /* botón pausa en móvil: solo icono, sin texto "Pausar/Reanudar" */
-    .hero-pause-label { display: none; }
-    .hero-pause-btn   { width: 30px; padding: 0; border-radius: 50%; justify-content: center; }
-    .grid-layout {
-            grid-template-columns: 1fr;
-            padding: 0 1rem;
-            gap: 1.25rem;
-        }
-```
-
-</details>
-
----
-
-<details>
-<summary>System Message</summary>
-
-The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
-
-<EPHEMERAL_MESSAGE>
-<planning_mode>
-You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
-If the user's request warrants a plan then follow this workflow:
-1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
-2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
-3. After receiving approval, begin execution. Create and update the task artifact as you work.
-4. Verify any work that you have done.
-5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
-If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
-</planning_mode>
-<bash_command_reminder>
-CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
-CRITICAL INSTRUCTION 1: ...
-CRITICAL INSTRUCTION 2: ...'.
-</bash_command_reminder>
-</EPHEMERAL_MESSAGE>
-
-**Triggered Heuristics:** planning_mode, bash_command_reminder
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Prioritizing Specialized Tools**
-
-I'm now focusing on employing specialized tools like `view_file`, `list_dir`, and `grep_search`. I'm actively avoiding the more generic alternatives such as directly running `cat`, `ls`, or `grep` through bash. Moreover, I'm refraining from using `sed` for text replacement, instead opting for the more targeted `replace_file`. This should improve efficiency.
-
-
-**Refining Visual Enhancements**
-
-I'm now zeroing in on UI improvements, specifically a button's visual prominence. The user wants the button to stand out better against its dark background. I'm exploring adding a subtle border to improve contrast, considering options like a thin translucent white or a subtle primary blue border. The challenge is balancing visibility with the original design intent of minimal disruption.
-
-
-**Evaluating Contrast Enhancement**
-
-I've been wrestling with how to improve button visibility against a dark background. The existing design presents a poor contrast issue, particularly with the current `.btn-outline-white` style. I am now exploring using a subtle translucent white background with the primary blue text to create a pill-like appearance, which I believe will provide excellent contrast. I'm also considering a subtle border with tiny padding to achieve a "marco muy sutil" effect. I am leaning towards the border for now.
-
-
-**Adjusting Background and Border**
-
-I've made further progress. Considering the strong blue text, a translucent white background provides excellent legibility, creating a "pill" effect. While the user mentioned a subtle border, dark blue text on a dark background is still low contrast, even with a blue border. Now, I'm proposing a translucent white background with a subtle white border, or a white text option with a blue/white border. I will make the background light to make the blue text pop.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 8.012498489s
-- **Model:** Gemini 3.1 Pro (Low)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 3:11 pm
 
 ---
 
-<details>
-<summary>System Message</summary>
-
-The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
-
-<EPHEMERAL_MESSAGE>
-<planning_mode>
-You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
-If the user's request warrants a plan then follow this workflow:
-1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
-2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
-3. After receiving approval, begin execution. Create and update the task artifact as you work.
-4. Verify any work that you have done.
-5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
-If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
-</planning_mode>
-<bash_command_reminder>
-CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
-CRITICAL INSTRUCTION 1: ...
-CRITICAL INSTRUCTION 2: ...'.
-</bash_command_reminder>
-</EPHEMERAL_MESSAGE>
-
-**Triggered Heuristics:** planning_mode, bash_command_reminder
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Prioritizing Specialized Tools**
-
-I'm now focusing on employing specialized tools like `view_file`, `list_dir`, and `grep_search`. I'm actively avoiding the use of `cat`, `ls`, and `grep` through bash. Also, I'm making a conscious effort to use the `replace_file` tool rather than relying on `sed` for text replacement tasks. I think this will improve performance.
-
-
-
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.306176744s
-- **Model:** Gemini 3.1 Pro (Low)
-</details>
-
----
-
-## User Request
-
-sin fondo, pues llegariamos a lo mismo del inicio.
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `landing.css`
-**Language:** css
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1280-1311)</summary>
-
-**Path:** `Unknown file`
-
-```
-                                                font-family: system-ui, -apple-system, sans-serif; }
-    .hero-glass-card > span                   { font-size: 0.46rem; padding: 2px 8px;  margin-bottom: 0.2rem; }
-    Descartada: fuentes resultaron demasiado pequeñas. Preferida: ocultar <p> (ver abajo). */
-
-    .hero-glass-card h1, .hero-glass-card h2 { font-size: 0.7rem; line-height: 1.15; margin-bottom: 0.25rem; }
-    /* <p> móvil: Solo se muestra si tiene <= 75 caracteres (controlado por PHP con .d-none-mobile).
-       Debe tener fuente reducida para no desbordar el hero de 200px. */
-    .hero-glass-card p                        { font-size: 0.6rem; line-height: 1.25; margin-bottom: 0.3rem; }
-    .hero-glass-card p.d-none-mobile          { display: none; }
-    .hero-glass-card > span                   { font-size: 0.5rem; padding: 2px 8px; margin-bottom: 0.25rem; }
-    /* Option 3: Ficha Clickable + Texto en línea minimalista */
-    .hero-slide .hero-glass-card .flex-center-15 {
-        display: block; text-align: center; margin-top: -2px;
-    }
-    .hero-slide .hero-glass-card .flex-center-15 .btn-outline-white {
-        padding: 2px 8px; border: 1px solid rgba(255, 255, 255, 0.5); background: rgba(255, 255, 255, 0.85) !important;
-        font-size: 0.6rem; font-weight: 700; color: var(--primary); /* Azul fuerte LAESH */
-        text-transform: uppercase; letter-spacing: 0.5px; border-radius: 4px;
-        min-height: unset; display: inline-flex; align-items: center; gap: 4px;
-    }
-    .hero-slide .hero-glass-card .flex-center-15 .btn-outline-white::after {
-        content: ''; position: absolute;
-        top: 0; left: 0; right: 0; bottom: 0;
-        z-index: 10; cursor: pointer;
-    }
-    /* botón pausa en móvil: solo icono, sin texto "Pausar/Reanudar" */
-    .hero-pause-label { display: none; }
-    .hero-pause-btn   { width: 30px; padding: 0; border-radius: 50%; justify-content: center; }
-    .grid-layout {
-            grid-template-columns: 1fr;
-            padding: 0 1rem;
-            gap: 1.25rem;
-```
-
-</details>
-
----
-
-<details>
-<summary>System Message</summary>
-
-The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
-
-<EPHEMERAL_MESSAGE>
-<planning_mode>
-You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
-If the user's request warrants a plan then follow this workflow:
-1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
-2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
-3. After receiving approval, begin execution. Create and update the task artifact as you work.
-4. Verify any work that you have done.
-5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
-If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
-</planning_mode>
-<bash_command_reminder>
-CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
-CRITICAL INSTRUCTION 1: ...
-CRITICAL INSTRUCTION 2: ...'.
-</bash_command_reminder>
-</EPHEMERAL_MESSAGE>
-
-**Triggered Heuristics:** planning_mode, bash_command_reminder
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Prioritizing Specialized Tools**
-
-I'm now focusing on employing specialized tools like `view_file`, `list_dir`, and `grep_search`. I'm actively avoiding the more generic alternatives such as directly running `cat`, `ls`, or `grep` through bash. Moreover, I'm refraining from using `sed` for text replacement, instead opting for the more targeted `replace_file`. This should improve efficiency.
-
-
-**Refining Text & Contrast**
-
-I'm now zeroing in on the contrast issue of the LAESH blue text against the dark glass card. Since the blue is fixed, I'm considering white or light blue text alternatives, or perhaps a white border. If the blue must be maintained, I'll explore text shadows or glows. I must also consider how to make tool calls and the explicit listing of related tools before execution. My next steps are clearly defined.
-
-
-**Implementing Requested Changes**
-
-I've decided to implement the requested CSS changes directly: removing the background (`background: transparent !important;`), keeping the border, and maintaining the primary blue text. If they see that the blue text has poor contrast, they can always ask me to adjust it, likely to white. I'm now adding a subtle white text-shadow to ensure legibility on the dark background without compromising the appearance or adding a rectangular background. The changes are in `landing.css`.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 5.851825295s
-- **Model:** Gemini 3.1 Pro (Low)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 3:13 pm
 
 ---
 
-<details>
-<summary>System Message</summary>
-
-The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
-
-<EPHEMERAL_MESSAGE>
-<planning_mode>
-You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
-If the user's request warrants a plan then follow this workflow:
-1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
-2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
-3. After receiving approval, begin execution. Create and update the task artifact as you work.
-4. Verify any work that you have done.
-5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
-If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
-</planning_mode>
-<bash_command_reminder>
-CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
-CRITICAL INSTRUCTION 1: ...
-CRITICAL INSTRUCTION 2: ...'.
-</bash_command_reminder>
-</EPHEMERAL_MESSAGE>
-
-**Triggered Heuristics:** planning_mode, bash_command_reminder
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Prioritizing Specialized Tools**
-
-I'm now focusing on employing specialized tools like `view_file`, `list_dir`, and `grep_search`. I'm actively avoiding the use of `cat`, `ls`, and `grep` through bash. Also, I'm making a conscious effort to use the `replace_file` tool rather than relying on `sed` for text replacement tasks. I think this will improve performance.
-
-
-
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.252098285s
-- **Model:** Gemini 3.1 Pro (Low)
-</details>
-
----
-
-## User Request
-
-Cambia el color del texto de azul fuerte LAESH a Negro
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `landing.css`
-**Language:** css
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1280-1311)</summary>
-
-**Path:** `Unknown file`
-
-```
-                                                font-family: system-ui, -apple-system, sans-serif; }
-    .hero-glass-card > span                   { font-size: 0.46rem; padding: 2px 8px;  margin-bottom: 0.2rem; }
-    Descartada: fuentes resultaron demasiado pequeñas. Preferida: ocultar <p> (ver abajo). */
-
-    .hero-glass-card h1, .hero-glass-card h2 { font-size: 0.7rem; line-height: 1.15; margin-bottom: 0.25rem; }
-    /* <p> móvil: Solo se muestra si tiene <= 75 caracteres (controlado por PHP con .d-none-mobile).
-       Debe tener fuente reducida para no desbordar el hero de 200px. */
-    .hero-glass-card p                        { font-size: 0.6rem; line-height: 1.25; margin-bottom: 0.3rem; }
-    .hero-glass-card p.d-none-mobile          { display: none; }
-    .hero-glass-card > span                   { font-size: 0.5rem; padding: 2px 8px; margin-bottom: 0.25rem; }
-    /* Option 3: Ficha Clickable + Texto en línea minimalista */
-    .hero-slide .hero-glass-card .flex-center-15 {
-        display: block; text-align: center; margin-top: -2px;
-    }
-    .hero-slide .hero-glass-card .flex-center-15 .btn-outline-white {
-        padding: 2px 8px; border: 1px solid rgba(255, 255, 255, 0.5); background: transparent !important;
-        font-size: 0.6rem; font-weight: 700; color: var(--primary); /* Azul fuerte LAESH */
-        text-shadow: 0 0 4px rgba(255,255,255,0.6); /* Halo sutil para que el azul resalte sin fondo */
-        text-transform: uppercase; letter-spacing: 0.5px; border-radius: 4px;
-        min-height: unset; display: inline-flex; align-items: center; gap: 4px;
-    }
-    .hero-slide .hero-glass-card .flex-center-15 .btn-outline-white::after {
-        content: ''; position: absolute;
-        top: 0; left: 0; right: 0; bottom: 0;
-        z-index: 10; cursor: pointer;
-    }
-    /* botón pausa en móvil: solo icono, sin texto "Pausar/Reanudar" */
-    .hero-pause-label { display: none; }
-    .hero-pause-btn   { width: 30px; padding: 0; border-radius: 50%; justify-content: center; }
-    .grid-layout {
-            grid-template-columns: 1fr;
-            padding: 0 1rem;
-```
-
-</details>
-
----
-
-<details>
-<summary>System Message</summary>
-
-The following is an <EPHEMERAL_MESSAGE> not actually sent by the user. It is provided by the system as a set of reminders and general important information to pay attention to. Do NOT respond to this message, just act accordingly.
-
-<EPHEMERAL_MESSAGE>
-<planning_mode>
-You're in planning mode. Exercise judgement on whether the user's last request warrants a plan and take action accordingly.
-If the user's request warrants a plan then follow this workflow:
-1. Research first before taking actions. Do not use your code editing tools or run modifying commands during this time.
-2. Create an implementation plan artifact with `request_feedback = true` to request approval. Include any open questions for the user directly in the implementation plan. Don't use the ask_question tool to ask these questions. Stop calling tools and allow the user to review the plan and provide feedback or approval.
-3. After receiving approval, begin execution. Create and update the task artifact as you work.
-4. Verify any work that you have done.
-5. Create a walkthrough artifact to present your work to the user. When writing artifacts, make sure to follow the artifact formatting guidelines and use github alerts to highlight critical sections.
-If the user's request does NOT warrant a plan then continue your work WITHOUT making a plan or requesting user feedback.
-</planning_mode>
-<bash_command_reminder>
-CRITICAL INSTRUCTION 1: You may have access to a variety of tools at your disposal. Some tools may be for a specific task such as 'view_file' (for viewing contents of a file). Others may be very broadly applicable such as the ability to run a command on a terminal. Always prioritize using the most specific tool you can for the task at hand. Here are some rules: (a) NEVER run cat inside a bash command to create a new file or append to an existing file. (b) ALWAYS use grep_search instead of running grep inside a bash command unless absolutely needed. (c) DO NOT use ls for listing, cat for viewing, grep for finding, sed for replacing. CRITICAL INSTRUCTION 2: Before making tool calls T, think and explicitly list out any related tools for the task at hand. You can only execute a set of tools T if all other tools in the list are either more generic or cannot be used for the task at hand. ALWAYS START your thought with recalling critical instructions 1 and 2. In particular, the format for the start of your thought block must be '...94>thought
-CRITICAL INSTRUCTION 1: ...
-CRITICAL INSTRUCTION 2: ...'.
-</bash_command_reminder>
-</EPHEMERAL_MESSAGE>
-
-**Triggered Heuristics:** planning_mode, bash_command_reminder
-
-</details>
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.1 Pro (Low)
-</details>
-
----
-
-## User Request
-
-Continua.
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `landing.css`
-**Language:** css
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1279-1319)</summary>
-
-**Path:** `Unknown file`
-
-```
-    .hero-glass-card p                        { font-size: 0.6rem;  line-height: 1.25; margin-bottom: 0.25rem;
-                                                font-family: system-ui, -apple-system, sans-serif; }
-    .hero-glass-card > span                   { font-size: 0.46rem; padding: 2px 8px;  margin-bottom: 0.2rem; }
-    Descartada: fuentes resultaron demasiado pequeñas. Preferida: ocultar <p> (ver abajo). */
-
-    .hero-glass-card h1, .hero-glass-card h2 { font-size: 0.7rem; line-height: 1.15; margin-bottom: 0.25rem; }
-    /* <p> móvil: Solo se muestra si tiene <= 75 caracteres (controlado por PHP con .d-none-mobile).
-       Debe tener fuente reducida para no desbordar el hero de 200px. */
-    .hero-glass-card p                        { font-size: 0.6rem; line-height: 1.25; margin-bottom: 0.3rem; }
-    .hero-glass-card p.d-none-mobile          { display: none; }
-    .hero-glass-card > span                   { font-size: 0.5rem; padding: 2px 8px; margin-bottom: 0.25rem; }
-    /* Option 3: Ficha Clickable + Texto en línea minimalista */
-    .hero-slide .hero-glass-card .flex-center-15 {
-        display: block; text-align: center; margin-top: -2px;
-    }
-    .hero-slide .hero-glass-card .flex-center-15 .btn-outline-white {
-        padding: 2px 8px; border: 1px solid rgba(255, 255, 255, 0.5); background: transparent !important;
-        font-size: 0.6rem; font-weight: 700; color: var(--primary); /* Azul fuerte LAESH */
-        text-shadow: 0 0 4px rgba(255,255,255,0.6); /* Halo sutil para que el azul resalte sin fondo */
-        text-transform: uppercase; letter-spacing: 0.5px; border-radius: 4px;
-        min-height: unset; display: inline-flex; align-items: center; gap: 4px;
-    }
-    .hero-slide .hero-glass-card .flex-center-15 .btn-outline-white::after {
-        content: ''; position: absolute;
-        top: 0; left: 0; right: 0; bottom: 0;
-        z-index: 10; cursor: pointer;
-    }
-    /* botón pausa en móvil: solo icono, sin texto "Pausar/Reanudar" */
-    .hero-pause-label { display: none; }
-    .hero-pause-btn   { width: 30px; padding: 0; border-radius: 50%; justify-content: center; }
-    .grid-layout {
-            grid-template-columns: 1fr;
-            padding: 0 1rem;
-            gap: 1.25rem;
-        }
-    .grid-1-2 { grid-template-columns: 1fr; }
-    #ubicacion .grid-layout, #calidad .grid-layout { grid-template-columns: 1fr; gap: 1.5rem; }
-    .orden-acc-body { grid-template-columns: 1fr; }
-    section { padding: 0.75rem 0; }
-    .section-header { margin: 1.25rem 0 0.75rem; padding: 0 1rem; }
-    .section-header h2 { font-size: 1.6rem; }
-```
-
-</details>
-
----
-
-<details>
-<summary>Conversation History</summary>
-
-# Conversation History
-Here are the conversation IDs, titles, and summaries of your most recent 2 conversations, in reverse chronological order:
-
-<conversation_summaries>
-## Conversation 31156cde-8540-4bb7-b98d-aae9a424fc4e: Host C DB Connectivity Check
-- Created: 2026-08-04T17:40:08Z
-- Last modified: 2026-09-11T14:00:20Z
-
-## Conversation 96544882-d905-4769-b8c2-f15f337e791e: Fixing CMS Promotion Text Styles
-- Created: 2026-09-08T14:04:04Z
-- Last modified: 2026-09-09T15:21:21Z
-
-</conversation_summaries>
-
-</details>
-
----
-
 ### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 5:17 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-**Analyzing Button Styles**
-
-I've been examining the CSS for button styling, specifically looking at `.hero-slide .hero-glass-card .flex-center-15 .btn-outline-white`. I'm focusing on the `padding`, `border`, `background`, `font-size`, and `font-weight` properties. It looks like the buttons use a white outline with transparent background and small font, let me see how these styles cascade through the other elements.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.027154596s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 5:17 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `walkthrough.md`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-# Resumen de Ajustes: Comportamiento del Slider Hero
-
-Se han completado todas las modificaciones solicitadas para el control del Banner Principal (Hero Slider) tanto en el panel de administración (CMS) como en el portal público de LAESH. 
-
-## Cambios en el Administrador (CMS)
-
-#### Archivo: `admrc/views/gestion_web.php`
-- **Reemplazo por Combo Box (Select):** Se ha cambiado el antiguo grupo de botones de radio por un selector desplegable (combo box) más limpio, que ahorra espacio vertical.
-- **6 Opciones Disponibles (en formato *Title Case*):**
-  1. `Animar Imágenes, Y Mantener Mensajes Animados` *(sync)*
-  2. `Imagen Fija, Y Mantener Mensajes Animados` *(decoupled)*
-  3. `Animar Imágenes, Y Ocultar Mensajes Animados` *(sync_hidden)*
-  4. `Imagen Fija, Y Ocultar Mensajes Animados` *(decoupled_hidden)*
-  5. `Imagen Fija, Y Mensaje Fijo` *(fixed_all)*
-  6. `Animar Imágenes, Y Mensaje Fijo` *(sync_fixed_msg)*
-- **Lógica de Interfaz Ajustada:** El selector secundario que antes decía "Imagen a fijar" ahora se llama **"Slide a fijar (Fondo y/o Mensaje):"**. Este segundo selector se oculta automáticamente mediante JavaScript si se elige una opción donde nada esté fijo (opciones 1 y 3).
-
-## Cambios en el Portal Público (Frontend)
-
-#### Archivo: `website/index.php`
-- **Lógica de Fondos (`$hasParentBg`):** Si la opción elegida requiere una imagen estática (opciones 2, 4 o 5), se asigna el fondo al contenedor padre y se desactivan los fondos de los slides individuales.
-- **Lógica de Mensajes Ocultos (`$hideHeroMessages`):** Si la opción elegida incluye "Ocultar Mensajes" (opciones 3 o 4), el sistema omitirá por completo la renderización del contenedor `<div class="hero-glass-card">`.
-- **Lógica de Mensajes Fijos (`$useFixedMessage`):** Si se elige "Mensaje Fijo" (opciones 5 o 6), se construyó un arreglo dinámico `$msgs` que clona los textos (Títulos, Descripciones, Etiquetas y Botones) del *Slide a fijar* en todas las demás tarjetas de la rotación. De este modo, si el carrusel avanza de imagen, el texto que se lee sigue siendo exactamente el mismo.
-- **Botón Pausa y Puntos de Navegación:** El botón de "Pausar/Reanudar" y los puntos de navegación del carrusel ahora se muestran **únicamente para las opciones que tienen una animación activa** visible (ya sea el fondo o el texto). Si se elige un modo donde todo es 100% estático (opciones 4 y 5: `decoupled_hidden` y `fixed_all`), estos controles se ocultan por completo para no confundir al usuario.
-- **Manejo Especial del Slide 5:** Se conservó intacta la lógica heredada para autocompletar la descripción de ubicación en caso de estar vacía, garantizando que el fallback siga funcionando incluso cuando el mensaje esté fijo en ese slide.
-
----
-> [!TIP]
-> **Listo para probar.** Puedes ingresar a la sección *Gestión Web* del CMS, probar las 6 combinaciones de visualización en tu Hero Slider y comprobar cómo reacciona el sitio de inmediato.
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `write_to_file`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 5:18 pm
 
 ---
 
-## Agent Response
+### Local File Search
 
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-## User Request
-
-Que el texto de la Etiqueta y su  marco de esquinas redondeadas este mas junto de la marco superior del slider, similar a como esta el boton de la parte inferior.
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `landing.css`
-**Language:** css
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1282-1313)</summary>
-
-**Path:** `Unknown file`
-
-```
-    Descartada: fuentes resultaron demasiado pequeñas. Preferida: ocultar <p> (ver abajo). */
-
-    .hero-glass-card h1, .hero-glass-card h2 { font-size: 0.7rem; line-height: 1.15; margin-bottom: 0.25rem; }
-    /* <p> móvil: Solo se muestra si tiene <= 75 caracteres (controlado por PHP con .d-none-mobile).
-       Debe tener fuente reducida para no desbordar el hero de 200px. */
-    .hero-glass-card p                        { font-size: 0.6rem; line-height: 1.25; margin-bottom: 0.3rem; }
-    .hero-glass-card p.d-none-mobile          { display: none; }
-    .hero-glass-card > span                   { font-size: 0.5rem; padding: 2px 8px; margin-bottom: 0.25rem; }
-    /* Option 3: Ficha Clickable + Texto en línea minimalista */
-    .hero-slide .hero-glass-card .flex-center-15 {
-        display: block; text-align: center; margin-top: -2px;
-    }
-    .hero-slide .hero-glass-card .flex-center-15 .btn-outline-white {
-        padding: 2px 8px; border: 1px solid rgba(255, 255, 255, 0.5); background: transparent !important;
-        font-size: 0.6rem; font-weight: 700; color: #000; /* Negro */
-        text-shadow: 0 0 4px rgba(255,255,255,0.6); /* Halo sutil blanco para resaltar texto negro sobre cristal azul */
-        text-transform: uppercase; letter-spacing: 0.5px; border-radius: 4px;
-        min-height: unset; display: inline-flex; align-items: center; gap: 4px;
-    }
-    .hero-slide .hero-glass-card .flex-center-15 .btn-outline-white::after {
-        content: ''; position: absolute;
-        top: 0; left: 0; right: 0; bottom: 0;
-        z-index: 10; cursor: pointer;
-    }
-    /* botón pausa en móvil: solo icono, sin texto "Pausar/Reanudar" */
-    .hero-pause-label { display: none; }
-    .hero-pause-btn   { width: 30px; padding: 0; border-radius: 50%; justify-content: center; }
-    .grid-layout {
-            grid-template-columns: 1fr;
-            padding: 0 1rem;
-            gap: 1.25rem;
-        }
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1259-1294)</summary>
-
-**Path:** `Unknown file`
-
-```
-    /* ── hero móvil ── imagen completa, tarjeta reducida y botón fino ────────
-       contain + 47vw: imagen landscape completa sin corte lateral.
-       padding-top: 0.75rem libera espacio para la tarjeta (era 1.5rem → overflow).
-       padding-bottom se hereda del base (1.8rem) — no se repite aquí (DRY). */
-    .hero-premium { height: 47vw; min-height: 200px; max-height: 360px; }
-    .hero-slide   { background-size: contain !important; background-position: center center !important; border-radius: 18px !important; overflow: hidden !important; padding-top: 0.75rem; padding-inline: 0.75rem; }
-    /* tarjeta: ratio ancho/alto ~1.2 (≈desktop 554/490); padding mínimo legible */
-    .hero-glass-card {
-            padding: 0.4rem 0.75rem; /* Un poco más de espacio interno para acomodar el link minimalista */
-            margin: 0 auto;
-            width: min(240px, 68%);
-            max-width: 260px;
-            border-radius: 11px;
-            background: rgba(0, 50, 130, 0.45);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            position: relative; /* Clave para el stretched-link de Option 3 */
-        }
-    /* ALTERNATIVA DESCARTADA — fuentes comprimidas para mostrar todo el contenido (badge+h1+p+botón≈123px):
-    .hero-glass-card h1, .hero-glass-card h2 { font-size: 0.88rem; line-height: 1.15; margin-bottom: 0.2rem; }
-    .hero-glass-card p                        { font-size: 0.6rem;  line-height: 1.25; margin-bottom: 0.25rem;
-                                                font-family: system-ui, -apple-system, sans-serif; }
-    .hero-glass-card > span                   { font-size: 0.46rem; padding: 2px 8px;  margin-bottom: 0.2rem; }
-    Descartada: fuentes resultaron demasiado pequeñas. Preferida: ocultar <p> (ver abajo). */
-
-    .hero-glass-card h1, .hero-glass-card h2 { font-size: 0.7rem; line-height: 1.15; margin-bottom: 0.25rem; }
-    /* <p> móvil: Solo se muestra si tiene <= 75 caracteres (controlado por PHP con .d-none-mobile).
-       Debe tener fuente reducida para no desbordar el hero de 200px. */
-    .hero-glass-card p                        { font-size: 0.6rem; line-height: 1.25; margin-bottom: 0.3rem; }
-    .hero-glass-card p.d-none-mobile          { display: none; }
-    .hero-glass-card > span                   { font-size: 0.5rem; padding: 2px 8px; margin-bottom: 0.25rem; }
-    /* Option 3: Ficha Clickable + Texto en línea minimalista */
-    .hero-slide .hero-glass-card .flex-center-15 {
-        display: block; text-align: center; margin-top: -2px;
-    }
-    .hero-slide .hero-glass-card .flex-center-15 .btn-outline-white {
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `hero-glass-card`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
+**Status:** Reset
+**Created:** 11 Sept 2026, 5:22 pm
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 5:22 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L739-759)</summary>
-
-**Path:** `Unknown file`
-
-```
-            <div class="hero-slides" data-autoplay="<?= in_array($heroSliderMode, ['decoupled_hidden', 'fixed_all']) ? 0 : $heroAutoplay ?>" role="region"
-                 aria-label="Presentación principal" aria-roledescription="carrusel"<?= $heroParentBgStyle ?>>
-
-                <!-- ── Slide 1 — dinámico desde hero/slide1 ────────────────── -->
-                <div class="hero-slide active <?= !$hasParentBg ? 'bg-slide-1' : '' ?>"<?= $slides[1]['bg_style'] ? ' style="' . $slides[1]['bg_style'] . '"' : '' ?>>
-                    <?php if (!$hideHeroMessages): ?>
-                    <div class="hero-glass-card">
-                        <?php if ($msgs[1]['etiqueta']): ?><span><?= h($msgs[1]['etiqueta']) ?></span><?php endif; ?>
-                        <h1><?= h($msgs[1]['titulo']) ?></h1>
-                        <?php if ($msgs[1]['descripcion']): ?>
-                        <p<?= $msgs[1]['p_class'] ?>><?= $msgs[1]['desc_html'] ?></p>
-                        <?php endif; ?>
-                        <div class="flex-center-15">
-                            <?php if ($msgs[1]['cta_texto']): ?><a href="<?= h($msgs[1]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($msgs[1]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-                    <?php endif; ?>
-                </div>
-
-                <!-- ── Slide 2 — dinámico desde hero/slide2 ────────────────── -->
-                <div class="hero-slide <?= !$hasParentBg ? 'bg-slide-2' : '' ?>"<?= $slides[2]['bg_style'] ? ' style="' . $slides[2]['bg_style'] . '"' : '' ?>>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Analyzing the UI Layout**
-
-I'm now zeroing in on the UI's visual hierarchy, specifically the slider and its associated label. The goal is to evaluate the spatial relationship between the label and the slider's top frame. I'm aiming for a closer proximity, akin to the bottom button's positioning.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `hero-glass-card`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.031169455s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 11 Sept 2026, 5:22 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L304-329)</summary>
-
-**Path:** `Unknown file`
-
-```
-        .hero-glass-card {
-            background: rgba(0,82,183,0.25);
-            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255,255,255,0.25);
-            padding: 1.7rem; border-radius: 14px; width: min(554px, 82%); max-width: 554px;
-            text-align: center; color: white;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
-            transform: translateY(30px); opacity: 0;
-            transition: all 0.8s cubic-bezier(0.16,1,0.3,1) 0.3s;
-        }
-        .hero-slide.active .hero-glass-card { transform: translateY(0); opacity: 1; }
-        /* CRÍTICO: solo hijos directos — evita el recuadro blanco en los <span> del H1 */
-        .hero-glass-card > span {
-            background: rgba(204,251,241,0.25); color: var(--secondary-green);
-            padding: 5px 13px; border-radius: 20px; font-weight: 700;
-            font-size: 0.8rem; letter-spacing: 0.05em; text-transform: uppercase;
-            display: inline-block; margin-bottom: 1.2rem;
-        }
-        /* Título compartido — todos los slides (h1 slide-1, h2 slides 2-5) misma definición */
-        .hero-glass-card h1,
-        .hero-glass-card h2 { font-size: 1.7rem; font-weight: 800; margin-bottom: 0.8rem; line-height: 1.2; color: #fff; text-align: center; text-shadow: 0 2px 8px rgba(0,0,0,0.5); font-family: 'Mosquito Std Black','Arial Black',Impact,sans-serif; }
-        .hero-glass-card p  { font-size: 1.31rem;margin-bottom: 1.6rem; opacity: 0.95; line-height: 1.6; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
-
-        /* ── Secciones ── */
-        .section-header { text-align: center; margin: 0 0 3.5rem; padding: 0 1rem; }
-        .section-header h2 {
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Analyzing Glass Card Styles**
-
-Okay, here's the current state of my analysis. I've pinpointed the base styles for the `.hero-glass-card > span` element, specifically `display: inline-block; margin-bottom: 1.2rem;` from lines 317-322. I've also found how this element is restyled on mobile, which appears to shrink font-size and add padding, based on the snippet at line 1290.
-
-
-**Investigating Margin Adjustments**
-
-Okay, I've dug into why the badge/span isn't as close to the top of the `.hero-glass-card` as the button is to the bottom. It looks like the card's top padding, along with the badge's default margins and `margin-bottom`, creates the space. I'm now considering adjustments on mobile to bring the badge closer to the top border, specifically using negative `margin-top` values, or reducing the top padding of the glass card, to create the desired visual closeness to the top border, like the button is. I'm now making sure I fully grasp the user's intent.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.115760061s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 5:23 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1279-1304)</summary>
-
-**Path:** `Unknown file`
-
-```
-    .hero-glass-card p                        { font-size: 0.6rem;  line-height: 1.25; margin-bottom: 0.25rem;
-                                                font-family: system-ui, -apple-system, sans-serif; }
-    .hero-glass-card > span                   { font-size: 0.46rem; padding: 2px 8px;  margin-bottom: 0.2rem; }
-    Descartada: fuentes resultaron demasiado pequeñas. Preferida: ocultar <p> (ver abajo). */
-
-    .hero-glass-card h1, .hero-glass-card h2 { font-size: 0.7rem; line-height: 1.15; margin-bottom: 0.25rem; }
-    /* <p> móvil: Solo se muestra si tiene <= 75 caracteres (controlado por PHP con .d-none-mobile).
-       Debe tener fuente reducida para no desbordar el hero de 200px. */
-    .hero-glass-card p                        { font-size: 0.6rem; line-height: 1.25; margin-bottom: 0.3rem; }
-    .hero-glass-card p.d-none-mobile          { display: none; }
-    .hero-glass-card > span                   { font-size: 0.5rem; padding: 2px 8px; margin-top: -3px; margin-bottom: 0.2rem; }
-    /* Option 3: Ficha Clickable + Texto en línea minimalista */
-    .hero-slide .hero-glass-card .flex-center-15 {
-        display: block; text-align: center; margin-top: -2px;
-    }
-    .hero-slide .hero-glass-card .flex-center-15 .btn-outline-white {
-        padding: 2px 8px; border: 1px solid rgba(255, 255, 255, 0.5); background: transparent !important;
-        font-size: 0.6rem; font-weight: 700; color: #000; /* Negro */
-        text-shadow: 0 0 4px rgba(255,255,255,0.6); /* Halo sutil blanco para resaltar texto negro sobre cristal azul */
-        text-transform: uppercase; letter-spacing: 0.5px; border-radius: 4px;
-        min-height: unset; display: inline-flex; align-items: center; gap: 4px;
-    }
-    .hero-slide .hero-glass-card .flex-center-15 .btn-outline-white::after {
-        content: ''; position: absolute;
-        top: 0; left: 0; right: 0; bottom: 0;
-        z-index: 10; cursor: pointer;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `write_to_file`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 5:23 pm
 
 ---
 
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-## User Request
-
-No se nota el cambio.  nota: COntinuamas haciendo ajustes para mobiles.
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `landing.css`
-**Language:** css
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Analyzing the Change**
-
-I'm puzzled. The adjustments for mobile aren't translating visually, specifically with that `-3px` change. The core container to examine is `.hero-glass-card`. I need to figure out why the intended effect isn't perceptible on mobile devices. I'm focusing on that container now.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.001563925s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1264-1304)</summary>
-
-**Path:** `Unknown file`
-
-```
-    .hero-slide   { background-size: contain !important; background-position: center center !important; border-radius: 18px !important; overflow: hidden !important; padding-top: 0.75rem; padding-inline: 0.75rem; }
-    /* tarjeta: ratio ancho/alto ~1.2 (≈desktop 554/490); padding mínimo legible */
-    .hero-glass-card {
-            padding: 0.4rem 0.75rem; /* Un poco más de espacio interno para acomodar el link minimalista */
-            margin: 0 auto;
-            width: min(240px, 68%);
-            max-width: 260px;
-            border-radius: 11px;
-            background: rgba(0, 50, 130, 0.45);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            position: relative; /* Clave para el stretched-link de Option 3 */
-        }
-    /* ALTERNATIVA DESCARTADA — fuentes comprimidas para mostrar todo el contenido (badge+h1+p+botón≈123px):
-    .hero-glass-card h1, .hero-glass-card h2 { font-size: 0.88rem; line-height: 1.15; margin-bottom: 0.2rem; }
-    .hero-glass-card p                        { font-size: 0.6rem;  line-height: 1.25; margin-bottom: 0.25rem;
-                                                font-family: system-ui, -apple-system, sans-serif; }
-    .hero-glass-card > span                   { font-size: 0.46rem; padding: 2px 8px;  margin-bottom: 0.2rem; }
-    Descartada: fuentes resultaron demasiado pequeñas. Preferida: ocultar <p> (ver abajo). */
-
-    .hero-glass-card h1, .hero-glass-card h2 { font-size: 0.7rem; line-height: 1.15; margin-bottom: 0.25rem; }
-    /* <p> móvil: Solo se muestra si tiene <= 75 caracteres (controlado por PHP con .d-none-mobile).
-       Debe tener fuente reducida para no desbordar el hero de 200px. */
-    .hero-glass-card p                        { font-size: 0.6rem; line-height: 1.25; margin-bottom: 0.3rem; }
-    .hero-glass-card p.d-none-mobile          { display: none; }
-    .hero-glass-card > span                   { font-size: 0.5rem; padding: 2px 8px; margin-top: -3px; margin-bottom: 0.2rem; }
-    /* Option 3: Ficha Clickable + Texto en línea minimalista */
-    .hero-slide .hero-glass-card .flex-center-15 {
-        display: block; text-align: center; margin-top: -2px;
-    }
-    .hero-slide .hero-glass-card .flex-center-15 .btn-outline-white {
-        padding: 2px 8px; border: 1px solid rgba(255, 255, 255, 0.5); background: transparent !important;
-        font-size: 0.6rem; font-weight: 700; color: #000; /* Negro */
-        text-shadow: 0 0 4px rgba(255,255,255,0.6); /* Halo sutil blanco para resaltar texto negro sobre cristal azul */
-        text-transform: uppercase; letter-spacing: 0.5px; border-radius: 4px;
-        min-height: unset; display: inline-flex; align-items: center; gap: 4px;
-    }
-    .hero-slide .hero-glass-card .flex-center-15 .btn-outline-white::after {
-        content: ''; position: absolute;
-        top: 0; left: 0; right: 0; bottom: 0;
-        z-index: 10; cursor: pointer;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Investigating a CSS issue**
-
-Okay, I've got it narrowed down. The problem seems to be with the negative margin-top value in the CSS for the hero-glass-card. I'm looking closely at line 1290 in `landing.css`, where this margin is defined. I'm trying to understand why a specific negative value isn't having the expected effect, and I think I'm making progress.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.029493358s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 5:24 pm
 
 ---
 
-## Agent Response
+### Code Edit
 
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1264-1299)</summary>
-
-**Path:** `Unknown file`
-
-```
-    .hero-slide   { background-size: contain !important; background-position: center center !important; border-radius: 18px !important; overflow: hidden !important; padding-top: 0.75rem; padding-inline: 0.75rem; }
-    /* tarjeta: ratio ancho/alto ~1.2 (≈desktop 554/490); padding mínimo legible */
-    .hero-glass-card {
-            padding: 0.4rem 0.75rem; /* Un poco más de espacio interno para acomodar el link minimalista */
-            margin: 0 auto;
-            width: min(240px, 68%);
-            max-width: 260px;
-            border-radius: 11px;
-            background: rgba(0, 50, 130, 0.45);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            position: relative; /* Clave para el stretched-link de Option 3 */
-        }
-    /* ALTERNATIVA DESCARTADA — fuentes comprimidas para mostrar todo el contenido (badge+h1+p+botón≈123px):
-    .hero-glass-card h1, .hero-glass-card h2 { font-size: 0.88rem; line-height: 1.15; margin-bottom: 0.2rem; }
-    .hero-glass-card p                        { font-size: 0.6rem;  line-height: 1.25; margin-bottom: 0.25rem;
-                                                font-family: system-ui, -apple-system, sans-serif; }
-    .hero-glass-card > span                   { font-size: 0.46rem; padding: 2px 8px;  margin-bottom: 0.2rem; }
-    Descartada: fuentes resultaron demasiado pequeñas. Preferida: ocultar <p> (ver abajo). */
-
-    .hero-glass-card h1, .hero-glass-card h2 { font-size: 0.7rem; line-height: 1.15; margin-bottom: 0.25rem; }
-    /* <p> móvil: Solo se muestra si tiene <= 75 caracteres (controlado por PHP con .d-none-mobile).
-       Debe tener fuente reducida para no desbordar el hero de 200px. */
-    .hero-glass-card p                        { font-size: 0.6rem; line-height: 1.25; margin-bottom: 0.3rem; }
-    .hero-glass-card p.d-none-mobile          { display: none; }
-    .hero-glass-card > span                   { font-size: 0.5rem; padding: 2px 8px; margin-top: -3px; margin-bottom: 0.2rem; }
-    /* Option 3: Ficha Clickable + Texto en línea minimalista */
-    .hero-slide .hero-glass-card .flex-center-15 {
-        display: block; text-align: center; margin-top: -2px;
-    }
-    .hero-slide .hero-glass-card .flex-center-15 .btn-outline-white {
-        padding: 2px 8px; border: 1px solid rgba(255, 255, 255, 0.5); background: transparent !important;
-        font-size: 0.6rem; font-weight: 700; color: #000; /* Negro */
-        text-shadow: 0 0 4px rgba(255,255,255,0.6); /* Halo sutil blanco para resaltar texto negro sobre cristal azul */
-        text-transform: uppercase; letter-spacing: 0.5px; border-radius: 4px;
-        min-height: unset; display: inline-flex; align-items: center; gap: 4px;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
+**Status:** Reset
+**Created:** 11 Sept 2026, 5:25 pm
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 5:25 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 5:25 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1264-1304)</summary>
-
-**Path:** `Unknown file`
-
-```
-    .hero-slide   { background-size: contain !important; background-position: center center !important; border-radius: 18px !important; overflow: hidden !important; padding-top: 0.75rem; padding-inline: 0.75rem; }
-    /* tarjeta: ratio ancho/alto ~1.2 (≈desktop 554/490); padding mínimo legible */
-    .hero-glass-card {
-            padding: 0.2rem 0.75rem 0.3rem; /* Padding reducido (0.2rem top) para apegar la etiqueta al borde */
-            margin: 0 auto;
-            width: min(240px, 68%);
-            max-width: 260px;
-            border-radius: 11px;
-            background: rgba(0, 50, 130, 0.45);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            position: relative; /* Clave para el stretched-link de Option 3 */
-        }
-    /* ALTERNATIVA DESCARTADA — fuentes comprimidas para mostrar todo el contenido (badge+h1+p+botón≈123px):
-    .hero-glass-card h1, .hero-glass-card h2 { font-size: 0.88rem; line-height: 1.15; margin-bottom: 0.2rem; }
-    .hero-glass-card p                        { font-size: 0.6rem;  line-height: 1.25; margin-bottom: 0.25rem;
-                                                font-family: system-ui, -apple-system, sans-serif; }
-    .hero-glass-card > span                   { font-size: 0.46rem; padding: 2px 8px;  margin-bottom: 0.2rem; }
-    Descartada: fuentes resultaron demasiado pequeñas. Preferida: ocultar <p> (ver abajo). */
-
-    .hero-glass-card h1, .hero-glass-card h2 { font-size: 0.7rem; line-height: 1.15; margin-bottom: 0.25rem; }
-    /* <p> móvil: Solo se muestra si tiene <= 75 caracteres (controlado por PHP con .d-none-mobile).
-       Debe tener fuente reducida para no desbordar el hero de 200px. */
-    .hero-glass-card p                        { font-size: 0.6rem; line-height: 1.25; margin-bottom: 0.3rem; }
-    .hero-glass-card p.d-none-mobile          { display: none; }
-    .hero-glass-card > span                   { font-size: 0.5rem; padding: 2px 8px; margin-top: -5px; margin-bottom: 0.15rem; display: inline-block; }
-    /* Option 3: Ficha Clickable + Texto en línea minimalista */
-    .hero-slide .hero-glass-card .flex-center-15 {
-        display: block; text-align: center; margin-top: -2px;
-    }
-    .hero-slide .hero-glass-card .flex-center-15 .btn-outline-white {
-        padding: 2px 8px; border: 1px solid rgba(255, 255, 255, 0.5); background: transparent !important;
-        font-size: 0.6rem; font-weight: 700; color: #000; /* Negro */
-        text-shadow: 0 0 4px rgba(255,255,255,0.6); /* Halo sutil blanco para resaltar texto negro sobre cristal azul */
-        text-transform: uppercase; letter-spacing: 0.5px; border-radius: 4px;
-        min-height: unset; display: inline-flex; align-items: center; gap: 4px;
-    }
-    .hero-slide .hero-glass-card .flex-center-15 .btn-outline-white::after {
-        content: ''; position: absolute;
-        top: 0; left: 0; right: 0; bottom: 0;
-        z-index: 10; cursor: pointer;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `write_to_file`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 11 Sept 2026, 5:25 pm
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-## User Request
-
-Toma como maximo las longitudes actuales de Slide 1  para las secciones : Etiqueta, Título,  y de Texto CTA , para con base a esas poner en cada una las 💡 Sugerencias y en particular para Descripción la directiva "...Si el texto tiene ≤ 75 caractere se mostrará en dispositivos móviles. Si es más largo, se ocultará en teléfonos para evitar que desborde la pantalla."
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `landing.css`
-**Language:** css
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1274-1305)</summary>
-
-**Path:** `Unknown file`
-
-```
-            -webkit-backdrop-filter: blur(14px);
-            position: relative; /* Clave para el stretched-link de Option 3 */
-        }
-    /* ALTERNATIVA DESCARTADA — fuentes comprimidas para mostrar todo el contenido (badge+h1+p+botón≈123px):
-    .hero-glass-card h1, .hero-glass-card h2 { font-size: 0.88rem; line-height: 1.15; margin-bottom: 0.2rem; }
-    .hero-glass-card p                        { font-size: 0.6rem;  line-height: 1.25; margin-bottom: 0.25rem;
-                                                font-family: system-ui, -apple-system, sans-serif; }
-    .hero-glass-card > span                   { font-size: 0.46rem; padding: 2px 8px;  margin-bottom: 0.2rem; }
-    Descartada: fuentes resultaron demasiado pequeñas. Preferida: ocultar <p> (ver abajo). */
-
-    .hero-glass-card h1, .hero-glass-card h2 { font-size: 0.7rem; line-height: 1.15; margin-bottom: 0.25rem; }
-    /* <p> móvil: Solo se muestra si tiene <= 75 caracteres (controlado por PHP con .d-none-mobile).
-       Debe tener fuente reducida para no desbordar el hero de 200px. */
-    .hero-glass-card p                        { font-size: 0.6rem; line-height: 1.25; margin-bottom: 0.3rem; }
-    .hero-glass-card p.d-none-mobile          { display: none; }
-    .hero-glass-card > span                   { font-size: 0.5rem; padding: 2px 8px; margin-top: -5px; margin-bottom: 0.15rem; display: inline-block; }
-    /* Option 3: Ficha Clickable + Texto en línea minimalista */
-    .hero-slide .hero-glass-card .flex-center-15 {
-        display: block; text-align: center; margin-top: -2px;
-    }
-    .hero-slide .hero-glass-card .flex-center-15 .btn-outline-white {
-        padding: 2px 8px; border: 1px solid rgba(255, 255, 255, 0.5); background: transparent !important;
-        font-size: 0.6rem; font-weight: 700; color: #000; /* Negro */
-        text-shadow: 0 0 4px rgba(255,255,255,0.6); /* Halo sutil blanco para resaltar texto negro sobre cristal azul */
-        text-transform: uppercase; letter-spacing: 0.5px; border-radius: 4px;
-        min-height: unset; display: inline-flex; align-items: center; gap: 4px;
-    }
-    .hero-slide .hero-glass-card .flex-center-15 .btn-outline-white::after {
-        content: ''; position: absolute;
-        top: 0; left: 0; right: 0; bottom: 0;
-        z-index: 10; cursor: pointer;
-    }
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `etiqueta`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 5:47 pm
 
 ---
 
-## Agent Response
+### Local File Search
 
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L379-429)</summary>
-
-**Path:** `Unknown file`
-
-```
-// ── 5. Lecturas agrupadas por sección ────────────────────────────────────────
-
-// Hero — navbar tagline (sin fallback)
-$navTagL1 = $c('hero', 'navbar', 'tagline_l1');
-$navTagL2 = $c('hero', 'navbar', 'tagline_l2');
-
-// Hero — contenido de slides: etiqueta, titulo, descripcion, CTA + imagen_url dinámica (sin fallback)
-$heroSliderMode = $c('hero', 'config', 'slider_mode', 'sync');
-$heroFixedImgIdx = (int)$c('hero', 'config', 'fixed_image', '1');
-
-$slides = [];
-for ($si = 1; $si <= 5; $si++) {
-    $imgUrl = $c('hero', "slide{$si}", 'imagen_url', '');
-    $slides[$si] = [
-        'etiqueta'    => $c('hero', "slide{$si}", 'etiqueta'),
-        'titulo'      => $c('hero', "slide{$si}", 'titulo'),
-        'descripcion' => $c('hero', "slide{$si}", 'descripcion'),
-        'cta_texto'   => $c('hero', "slide{$si}", 'cta_texto'),
-        'cta_href'    => $c('hero', "slide{$si}", 'cta_href'),
-        'imagen_url'  => $imgUrl,
-        'bg_style'    => (!in_array($heroSliderMode, ['decoupled', 'decoupled_hidden', 'fixed_all']) && $imgUrl)
-            ? 'background-image:url(' . h($imgUrl) . ');'
-            : '',
-    ];
-}
-
-// Compute the global parent background if decoupled
-$heroParentBgStyle = '';
-$hasParentBg = in_array($heroSliderMode, ['decoupled', 'decoupled_hidden', 'fixed_all']);
-if ($hasParentBg) {
-    // Determine which image to use for the fixed background
-    $fixedUrl = $slides[$heroFixedImgIdx]['imagen_url'] ?? '';
-    if ($fixedUrl) {
-        $heroParentBgStyle = ' style="background-image:url(' . h($fixedUrl) . '); background-size: cover; background-position: center center; background-repeat: no-repeat;"';
-    }
-}
-
-// Slide 5: si la descripción CMS está vacía, construirla desde configuraciones
-$slide5DescRaw = $slides[5]['descripcion'];
-$slide5DescGenerated = (h($cfgDirCalle ?: $cfgDir) . ', ' . h($cfgCiudad) . ', ' . h($cfgEstado) . '.<br>'
-      . h($cfgHorSem) . ' &nbsp;|&nbsp; ' . h($cfgHorDom) . ' &nbsp;|&nbsp; Tel: ' . h($cfgTel));
-$slide5DescHTML = $slide5DescRaw ? h($slide5DescRaw) : $slide5DescGenerated;
-
-$hideHeroMessages = in_array($heroSliderMode, ['sync_hidden', 'decoupled_hidden']);
-$useFixedMessage = in_array($heroSliderMode, ['sync_fixed_msg', 'fixed_all']);
-
-$msgs = [];
-for ($si = 1; $si <= 5; $si++) {
-    $srcIdx = $useFixedMessage ? $heroFixedImgIdx : $si;
-    $msgs[$si] = $slides[$srcIdx];
-    if ($srcIdx === 5) {
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `slide1`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
+**Status:** Reset
+**Created:** 11 Sept 2026, 5:48 pm
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 5:48 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L319-399)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-            </div><!-- /4col eslogan + autoplay + comportamiento -->
-
-            <hr class="cms-section-sep">
-
-            <!-- ══ GRID DE SLIDES — 2 columnas ══ -->
-            <div class="hero-slides-grid">
-            <?php
-            $heroSlides = [
-                ['slide1', 'Slide 1 — Presentación Institucional'],
-                ['slide2', 'Slide 2 — Experiencia Clínica'],
-                ['slide3', 'Slide 3 — Excelencia y Calidad'],
-                ['slide4', 'Slide 4 — Promociones y Check-Ups'],
-                ['slide5', 'Slide 5 — Ubicación y Horarios'],
-            ];
-            $slidesTotal = count($heroSlides);
-            foreach ($heroSlides as $idx => [$sub, $cardTitle]):
-                // Separador de fila: antes del 4º slide (inicio de 2ª fila)
-                if ($idx === 3): ?>
-            <hr class="cms-section-sep">
-            <?php endif; ?>
-            <div class="editor-card">
-                <div class="editor-card-header">
-                    <div class="card-title"><?= htmlspecialchars($cardTitle, ENT_QUOTES, 'UTF-8') ?></div>
-                    <span class="operator-badge">WebP · máx. 150 KB, óptimo 60 KB</span>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Etiqueta <small class="txt-muted">(sobre el título)</small></label>
-                        <input type="text" name="<?= $sub ?>__etiqueta"
-                               value="<?= cms($contenidos, 'hero', $sub, 'etiqueta') ?>">
-                    </div>
-                    <div class="field-group">
-                        <label>Título</label>
-                        <input type="text" name="<?= $sub ?>__titulo" required
-                               value="<?= cms($contenidos, 'hero', $sub, 'titulo') ?>">
-                    </div>
-                    <div class="field-group">
-                        <label>Descripción</label>
-                        <textarea name="<?= $sub ?>__descripcion"><?= cms($contenidos, 'hero', $sub, 'descripcion') ?></textarea>
-                        <small class="cms-help-text" style="display:block; margin-top:4px;">💡 Sugerencia: Si el texto tiene ≤ 75 caracteres, se mostrará en dispositivos móviles. Si es más largo, se ocultará en teléfonos para evitar que desborde la pantalla.</small>
-                    </div>
-                    <div class="field-group">
-                        <label>Texto CTA <small class="txt-muted">(vacío = oculta)</small></label>
-                        <input type="text" name="<?= $sub ?>__cta_texto"
-                               value="<?= cms($contenidos, 'hero', $sub, 'cta_texto') ?>"
-                               placeholder="Conoce los Servicios">
-                    </div>
-                    <div class="field-group">
-                        <label>URL / Ancla CTA</label>
-                        <input type="text" name="<?= $sub ?>__cta_href"
-                               value="<?= cms($contenidos, 'hero', $sub, 'cta_href') ?>"
-                               placeholder="#especialidades" data-no-limit>
-                    </div>
-                    <?php $heroImgUrl = cms($contenidos, 'hero', $sub, 'imagen_url'); ?>
-                    <div class="field-group">
-                        <label>Imagen de Fondo</label>
-                        <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px;">
-                            📐 <strong>Codec:</strong> WebP únicamente &nbsp;·&nbsp;
-                            <strong>Quality:</strong> 72–80 &nbsp;·&nbsp;
-                            <strong>Effort:</strong> 6 &nbsp;·&nbsp;
-                            <strong>Ancho:</strong> 1 280–1 920 px &nbsp;·&nbsp;
-                            <strong>Alto:</strong> proporcional (auto) — 890–1 080 px sugerido &nbsp;·&nbsp;
-                            <strong>Orientación Horizontal</strong> (ancho > alto) &nbsp;·&nbsp;
-                            <strong>Peso:</strong> Máximo 150 KB, Óptimo 60 KB
-                        </p>
-                        <div class="image-upload-box">
-                            <img id="prev-<?= $sub ?>"
-                                 src="<?= h($heroImgUrl) ?>"
-                                 alt="Preview <?= htmlspecialchars($sub, ENT_QUOTES, 'UTF-8') ?>"
-                                 class="img-preview-sm"
-                                 onerror="this.hidden=true">
-                            
-                            <label for="file-<?= $sub ?>" class="btn btn-secondary">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                                Cambiar Imagen
-                            </label>
-
-                            <input type="file" accept="image/webp"
-                                   id="file-<?= $sub ?>" class="d-none"
-                                   data-upload-slot="hero-<?= $sub ?>"
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `contenidos`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 5:48 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `web_contenidos`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 5:48 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `slide1__titulo`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 11 Sept 2026, 5:48 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 5:48 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 5:48 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-<?php
-/**
- * admrc/index.php — Router Flight PHP para el Portal Admin CMS
- *
- * Ubicación: laesh-swbldi/admrc/index.php
- * URL:       /laesh/adrc/          (Alias en restaurantb.conf)
- *
- * Fuente HTML: website/uipv1/gestion-web.html  ← NUNCA BORRAR (R15.1)
- * Merge iterativo: cambios en gestion-web.html → propagar en views/gestion_web.php
- *
- * Rutas:
- *   GET  /          → vista principal CMS (requiere permiso gestionar_cms)
- *   POST /cms/save  → guardar sección en web_contenidos (HTMX)
- */
-
-declare(strict_types=1);
-
-// commons/ está 1 nivel arriba de admrc/
-require_once __DIR__ . '/../commons/commons.php';
-
-use Common\Logger;
-use Common\DB;
-use Common\Cache;
-
-// ── Guard RBAC: solo ADMIN puede acceder ────────────────────────────────────
-Flight::rbac()->requirePermission(
-    'gestionar_cms',
-    '/laesh/login/login.php?portal=admin'  // Nginx location /laesh/ → laesh-swbldi/website/
-);
-
-// ── GET / — Panel principal CMS ──────────────────────────────────────────────
-Flight::route('GET /', function () {
-    $auth = Flight::auth();
-    $db   = Flight::db();
-
-    // Nombre del admin desde empleados
-    $stmt = $db->prepare("SELECT nombre, apellidos FROM empleados WHERE user_id = ? LIMIT 1");
-    $stmt->execute([$auth->getUserId()]);
-    $emp = $stmt->fetch(\PDO::FETCH_ASSOC);
-    $nombreAdmin = $emp ? trim($emp['nombre'] . ' ' . $emp['apellidos']) : 'Administrador';
-
-    // CSRF token (R14.12)
-    if (empty($_SESSION['csrf_token'])) {
-        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-    }
-
-    // Contenidos CMS desde BD
-    $contenidos = [];
-    $rows = $db->query(
-        "SELECT seccion, subseccion, clave, valor FROM web_contenidos ORDER BY id"
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 5:48 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `DB.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-<?php
-// DB.php - Clase para conexión PDO e interacción transaccional con la base de datos
-
-namespace Common;
-
-use PDO;
-use PDOException;
-
-class DB {
-    private static ?PDO $instance = null;
-
-    /**
-     * Establece la conexión PDO singleton
-     */
-    public static function connect(): PDO {
-        if (self::$instance === null) {
-            $config = require __DIR__ . '/config.php';
-            $dbConf = $config['db'];
-
-            $dsn = sprintf(
-                "mysql:host=%s;port=%d;dbname=%s;charset=%s",
-                $dbConf['host'],
-                $dbConf['port'],
-                $dbConf['name'],
-                $dbConf['charset']
-            );
-
-            try {
-                self::$instance = new PDO($dsn, $dbConf['user'], $dbConf['pass'], [
-                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-                    PDO::ATTR_EMULATE_PREPARES => false,
-                    PDO::ATTR_PERSISTENT => true, // Conexión persistente (Pool a nivel PHP-FPM)
-                ]);
-                
-                // Configuración de compatibilidad e internacionalización (Español MX)
-                self::$instance->exec("SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci");
-                self::$instance->exec("SET time_zone = '-06:00'");
-                self::$instance->exec("SET lc_time_names = 'es_MX'");
-                self::$instance->exec("SET SESSION sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
-            } catch (PDOException $e) {
-                // Registrar error en el log local de emergencia
-                self::logEmergency("Error de conexión PDO: " . $e->getMessage());
-                throw $e;
-            }
-        }
-        return self::$instance;
-    }
-
-    /**
-     * Registra una traza de fallo de consulta SQL en la tabla fallback_log
-     * Adaptado del estándar Conexion.php (cbm 2026)
-     *
-     * @param string $nivel Nivel del log ('ERROR', 'FALLBACK', 'WARN')
-     * @param string $query Sentencia SQL ejecutada
-     * @param string|null $errorMsg Mensaje de error retornado por PDO
-     */
-    public static function logFallback(string $nivel, string $query, ?string $errorMsg = null): void {
-        try {
-            $pdo = self::connect();
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 5:48 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L39-69)</summary>
-
-**Path:** `Unknown file`
-
-```
-// Helper: escape HTML seguro (alias de htmlspecialchars)
-function h(string $v): string {
-    return htmlspecialchars($v, ENT_QUOTES, 'UTF-8');
-}
-
-// Helper: recuperar valor de $contenidos con fallback
-function cms(array $c, string $sec, ?string $sub, string $clave, string $default = ''): string {
-    $val = $c[$sec][$sub ?? ''][$clave] ?? '';
-    return htmlspecialchars($val !== '' ? $val : $default, ENT_QUOTES, 'UTF-8');
-}
-
-// Helper: recuperar valor RAW de $contenidos para editores RTE (desescapa entidades codificadas para evitar doble escape en CKEditor)
-function cmsRaw(array $c, string $sec, ?string $sub, string $clave, string $default = ''): string {
-    $val = $c[$sec][$sub ?? ''][$clave] ?? '';
-    $raw = $val !== '' ? $val : $default;
-    while (str_contains($raw, '&lt;') && str_contains($raw, '&gt;')) {
-        $raw = htmlspecialchars_decode($raw, ENT_QUOTES);
-    }
-    return $raw;
-}
-
-$lastPubLabel = $lastPub
-    ? 'Pub. ' . date('d/m H:i', strtotime($lastPub))
-    : 'Sin publicar';
-?>
-<html lang="es-MX">
-<head>
-    <meta charset="UTF-8">
-    <meta name="color-scheme" content="light">
-    <meta name="robots" content="noindex, nofollow">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `Conoce los Servicios`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 5:48 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `Slide 1`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 5:48 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `web_contenidos`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 5:48 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `call_mcp_tool`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### CORTEX_STEP_TYPE_MCP_TOOL
 
-**Status:** CORTEX_STEP_STATUS_ERROR
+**Status:** Reset
 **Created:** 11 Sept 2026, 5:48 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `call_mcp_tool`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### CORTEX_STEP_TYPE_MCP_TOOL
 
-**Status:** CORTEX_STEP_STATUS_ERROR
+**Status:** Reset
 **Created:** 11 Sept 2026, 5:48 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `slide1`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 5:48 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `Presentación Institucional`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 5:48 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `hero-glass-card`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 5:48 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `hero`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 5:48 pm
 
 ---
 
-## Agent Response
+### Local File Search
 
-### Thinking
-
-**Analyzing Website Index**
-
-I'm currently focused on dissecting the `index.php` file within the website directory. My initial step involves identifying default text or sample content within the HTML structure, especially within the context of the `hero-slide` class. I've pinpointed its location within the specified lines.
-
-
-**Examining Template Variables**
-
-Now, I'm analyzing the template variables within `admrc/views/gestion_web.php` related to the hero section. I'm noting the placeholders and typical values for the label, title, description, and CTA text in Slide 1. Specifically, I'm observing character lengths for these elements, especially the description, to understand how mobile display is handled with longer content. I'm focusing on the interplay between character limits and responsive design.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `cms-help-text`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.478348917s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
+**Status:** Reset
+**Created:** 11 Sept 2026, 5:49 pm
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 5:49 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L139-159)</summary>
-
-**Path:** `Unknown file`
-
-```
-        // El ON DUPLICATE KEY UPDATE también propaga tipo para auto-sanar registros previos.
-        $stmt = $db->prepare(
-            "INSERT INTO web_contenidos (seccion, subseccion, clave, valor, tipo, actualizado_por)
-             VALUES (:sec, :sub, :clave, :valor, :tipo, :uid)
-             ON DUPLICATE KEY UPDATE valor = VALUES(valor), tipo = VALUES(tipo), actualizado_por = VALUES(actualizado_por)"
-        );
-
-        // Configuraciones globales: campos _cfg_{clave} → tabla configuraciones (D-04)
-        // UPSERT: inserta si la clave no existe, actualiza si ya existe
-        $cfgStmt = $db->prepare(
-            "INSERT INTO configuraciones (clave, valor, descripcion) VALUES (:clave, :valor, NULL)
-             ON DUPLICATE KEY UPDATE valor = VALUES(valor)"
-        );
-
-        // Manejo específico de catalogo_promociones en MariaDB cuando la sección es 'promociones'
-        if ($seccion === 'promociones') {
-            $rawIds = $_POST['promo_id'] ?? [];
-            $promoIds = is_array($rawIds) ? $rawIds : (is_numeric($rawIds) ? [$rawIds] : []);
-
-            if (empty($promoIds)) {
-                $promoIds = $db->query("SELECT id FROM catalogo_promociones ORDER BY id ASC")->fetchAll(\PDO::FETCH_COLUMN) ?: [1, 2, 3, 4, 5, 6, 7];
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `slide1`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 5:49 pm
 
 ---
 
-## Agent Response
+### Code Edit
 
-### Thinking
+**Status:** Reset
+**Created:** 11 Sept 2026, 5:49 pm
 
-**Analyzing LAESH Slide 1**
+---
 
-I've begun analyzing Slide 1's content for the LAESH presentation. I'm focusing on the standard values and default content. Specifically, I've checked the "Etiqueta" (Badge) which is confirmed as "LABORATORIO CLÍNICO Y DE ESPECIALIDADES," hitting the character count target, and the title "Diagnósticos con Máxima Precisión y Calidad."
+### Code Edit
 
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `hero-slides-grid`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.041584525s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
+**Status:** Reset
+**Created:** 11 Sept 2026, 5:49 pm
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
-**Created:** 11 Sept 2026, 5:49 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L239-324)</summary>
-
-**Path:** `Unknown file`
-
-```
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">Edición de Banners del Carrusel Principal (#inicio)</h3>
-            </div>
-
-            <!-- ══ INDICACIÓN RÁPIDA DE IMÁGENES ══ -->
-            <p class="cms-img-hint" role="note">
-                <strong>Indicaciones de Carga de Imágenes:</strong>
-                Sobreescritura: La imagen previa se sobreescribe automáticamente al cargar una nueva.
-            </p>
-
-            <hr class="cms-section-sep">
-
-            <!-- ══ 3 columnas: Eslogan L1 | Eslogan L2 | Autoplay ══ -->
-            <div class="hero-slides-grid mb-4" style="grid-template-columns: repeat(4, minmax(0, 1fr));">
-
-                <div class="editor-card">
-                    <div class="editor-card-header"><div class="card-title">Línea 1 del Eslogan</div></div>
-                    <div class="editor-card-body">
-                        <div class="field-group">
-                            <input type="text" name="navbar__tagline_l1"
-                                   value="<?= cms($contenidos, 'hero', 'navbar', 'tagline_l1') ?>">
-                            <small class="cms-help-text">Ej.: «Diagnósticos de»</small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="editor-card">
-                    <div class="editor-card-header"><div class="card-title">Línea 2 del Eslogan</div></div>
-                    <div class="editor-card-body">
-                        <div class="field-group">
-                            <input type="text" name="navbar__tagline_l2"
-                                   value="<?= cms($contenidos, 'hero', 'navbar', 'tagline_l2') ?>">
-                            <small class="cms-help-text">Ej.: «Confianza y Calidad»</small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="editor-card">
-                    <div class="editor-card-header"><div class="card-title">Tiempo de Autoplay (seg.)</div></div>
-                    <div class="editor-card-body">
-                        <div class="field-group">
-                            <input type="number" min="0" max="999" step="1" inputmode="numeric" pattern="[0-9]{1,3}"
-                                   name="config__transition_time" id="input-hero-transition"
-                                   required
-                                   onkeydown="if(!['0','1','2','3','4','5','6','7','8','9','Backspace','Tab','ArrowLeft','ArrowRight','Delete'].includes(event.key) && !event.ctrlKey && !event.metaKey) event.preventDefault();"
-                                   oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,3);"
-                                   onpaste="var p=(event.clipboardData||window.clipboardData).getData('text'); if(!/^\d{1,3}$/.test(p)) event.preventDefault();"
-                                   value="<?= cms($contenidos, 'hero', 'config', 'transition_time', '5') ?>">
-                            <small class="cms-help-text">0 = pausa fija · 1–90 s = autoplay.</small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="editor-card">
-                    <div class="editor-card-header"><div class="card-title">Comportamiento Banner: Imagenes y Anuncios</div></div>
-                    <div class="editor-card-body">
-                        <?php $sliderMode = cms($contenidos, 'hero', 'config', 'slider_mode', 'sync'); ?>
-                        <div class="field-group" style="margin-bottom: 0.75rem;">
-                            <select name="config__slider_mode" class="cms-input" style="padding:6px; font-size:0.85rem;" onchange="document.getElementById('fixed-image-selector').style.display = ['sync', 'sync_hidden'].includes(this.value) ? 'none' : 'block'; if(window.CmsDirtyTracker) CmsDirtyTracker.evalField(this);">
-                                <option value="sync" <?= $sliderMode === 'sync' ? 'selected' : '' ?>>Animar Imágenes, Y Mantener Mensajes Animados</option>
-                                <option value="decoupled" <?= $sliderMode === 'decoupled' ? 'selected' : '' ?>>Imagen Fija, Y Mantener Mensajes Animados</option>
-                                <option value="sync_hidden" <?= $sliderMode === 'sync_hidden' ? 'selected' : '' ?>>Animar Imágenes, Y Ocultar Mensajes Animados</option>
-                                <option value="decoupled_hidden" <?= $sliderMode === 'decoupled_hidden' ? 'selected' : '' ?>>Imagen Fija, Y Ocultar Mensajes Animados</option>
-                                <option value="fixed_all" <?= $sliderMode === 'fixed_all' ? 'selected' : '' ?>>Imagen Fija, Y Mensaje Fijo</option>
-                                <option value="sync_fixed_msg" <?= $sliderMode === 'sync_fixed_msg' ? 'selected' : '' ?>>Animar Imágenes, Y Mensaje Fijo</option>
-                            </select>
-                        </div>
-                        <div class="field-group" id="fixed-image-selector" style="display: <?= in_array($sliderMode, ['sync', 'sync_hidden']) ? 'none' : 'block' ?>; background:var(--bg-page); padding:0.5rem; border-radius:6px; border:1px solid var(--border);">
-                            <label class="cms-label" style="font-size:0.8rem;">Slide a fijar (Fondo y/o Mensaje):</label>
-                            <select name="config__fixed_image" class="cms-input" style="padding:4px; font-size:0.85rem; height:auto;">
-                                <?php $fixedImg = cms($contenidos, 'hero', 'config', 'fixed_image', '1'); ?>
-                                <option value="1" <?= $fixedImg == '1' ? 'selected' : '' ?>>Slide 1</option>
-                                <option value="2" <?= $fixedImg == '2' ? 'selected' : '' ?>>Slide 2</option>
-                                <option value="3" <?= $fixedImg == '3' ? 'selected' : '' ?>>Slide 3</option>
-                                <option value="4" <?= $fixedImg == '4' ? 'selected' : '' ?>>Slide 4</option>
-                                <option value="5" <?= $fixedImg == '5' ? 'selected' : '' ?>>Slide 5</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-            </div><!-- /4col eslogan + autoplay + comportamiento -->
-
-            <hr class="cms-section-sep">
-
-            <!-- ══ GRID DE SLIDES — 2 columnas ══ -->
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Examining Specific Code**
-
-I'm currently focused on lines 347 to 373 within `admrc/views/gestion_web.php`. I'm closely examining the HTML structure, specifically the field-group and input elements related to the "etiqueta" field. I'm noting the use of PHP to dynamically generate the input's name attribute using the `$sub` variable. My goal is to understand how this "etiqueta" field is handled and utilized within the broader context of this PHP file.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.042664560s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 11 Sept 2026, 5:49 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L344-379)</summary>
-
-**Path:** `Unknown file`
-
-```
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Etiqueta <small class="txt-muted">(sobre el título)</small></label>
-                        <input type="text" name="<?= $sub ?>__etiqueta"
-                               value="<?= cms($contenidos, 'hero', $sub, 'etiqueta') ?>">
-                        <small class="cms-help-text" style="display:block; margin-top:4px;">💡 Sugerencia: Máximo recomendado de 40 caracteres (basado en Slide 1) para mantener el balance visual.</small>
-                    </div>
-                    <div class="field-group">
-                        <label>Título</label>
-                        <input type="text" name="<?= $sub ?>__titulo" required
-                               value="<?= cms($contenidos, 'hero', $sub, 'titulo') ?>">
-                        <small class="cms-help-text" style="display:block; margin-top:4px;">💡 Sugerencia: Máximo recomendado de 40 caracteres (basado en Slide 1) para evitar desbordes en teléfonos.</small>
-                    </div>
-                    <div class="field-group">
-                        <label>Descripción</label>
-                        <textarea name="<?= $sub ?>__descripcion"><?= cms($contenidos, 'hero', $sub, 'descripcion') ?></textarea>
-                        <small class="cms-help-text" style="display:block; margin-top:4px;">💡 Sugerencia: Si el texto tiene ≤ 75 caracteres se mostrará en dispositivos móviles. Si es más largo, se ocultará en teléfonos para evitar que desborde la pantalla.</small>
-                    </div>
-                    <div class="field-group">
-                        <label>Texto CTA <small class="txt-muted">(vacío = oculta)</small></label>
-                        <input type="text" name="<?= $sub ?>__cta_texto"
-                               value="<?= cms($contenidos, 'hero', $sub, 'cta_texto') ?>"
-                               placeholder="Conoce los Servicios">
-                        <small class="cms-help-text" style="display:block; margin-top:4px;">💡 Sugerencia: Máximo recomendado de 20 caracteres (basado en Slide 1) para mantener el botón compacto.</small>
-                    </div>
-                    <div class="field-group">
-                        <label>URL / Ancla CTA</label>
-                        <input type="text" name="<?= $sub ?>__cta_href"
-                               value="<?= cms($contenidos, 'hero', $sub, 'cta_href') ?>"
-                               placeholder="#especialidades" data-no-limit>
-                    </div>
-                    <?php $heroImgUrl = cms($contenidos, 'hero', $sub, 'imagen_url'); ?>
-                    <div class="field-group">
-                        <label>Imagen de Fondo</label>
-                        <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px;">
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `write_to_file`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 11 Sept 2026, 5:49 pm
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-## User Request
-
-Los correctos son estos: 
-Etiqueta son 32, Título son 42, Descripción son 75, Texto CTA son 12 .
-Y todos estos limites corresponden a "...Si el texto tiene ≤ limites caracteres se mostrará en dispositivos móviles. Si es más largo, se ocultará en teléfonos para evitar que desborde la pantalla."
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `gestion_web.php`
-**Language:** php
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L344-374)</summary>
-
-**Path:** `Unknown file`
-
-```
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Etiqueta <small class="txt-muted">(sobre el título)</small></label>
-                        <input type="text" name="<?= $sub ?>__etiqueta"
-                               value="<?= cms($contenidos, 'hero', $sub, 'etiqueta') ?>">
-                        <small class="cms-help-text" style="display:block; margin-top:4px;">💡 Sugerencia: Máximo recomendado de 40 caracteres (basado en Slide 1) para mantener el balance visual.</small>
-                    </div>
-                    <div class="field-group">
-                        <label>Título</label>
-                        <input type="text" name="<?= $sub ?>__titulo" required
-                               value="<?= cms($contenidos, 'hero', $sub, 'titulo') ?>">
-                        <small class="cms-help-text" style="display:block; margin-top:4px;">💡 Sugerencia: Máximo recomendado de 40 caracteres (basado en Slide 1) para evitar desbordes en teléfonos.</small>
-                    </div>
-                    <div class="field-group">
-                        <label>Descripción</label>
-                        <textarea name="<?= $sub ?>__descripcion"><?= cms($contenidos, 'hero', $sub, 'descripcion') ?></textarea>
-                        <small class="cms-help-text" style="display:block; margin-top:4px;">💡 Sugerencia: Si el texto tiene ≤ 75 caracteres se mostrará en dispositivos móviles. Si es más largo, se ocultará en teléfonos para evitar que desborde la pantalla.</small>
-                    </div>
-                    <div class="field-group">
-                        <label>Texto CTA <small class="txt-muted">(vacío = oculta)</small></label>
-                        <input type="text" name="<?= $sub ?>__cta_texto"
-                               value="<?= cms($contenidos, 'hero', $sub, 'cta_texto') ?>"
-                               placeholder="Conoce los Servicios">
-                        <small class="cms-help-text" style="display:block; margin-top:4px;">💡 Sugerencia: Máximo recomendado de 20 caracteres (basado en Slide 1) para mantener el botón compacto.</small>
-                    </div>
-                    <div class="field-group">
-                        <label>URL / Ancla CTA</label>
-                        <input type="text" name="<?= $sub ?>__cta_href"
-                               value="<?= cms($contenidos, 'hero', $sub, 'cta_href') ?>"
-                               placeholder="#especialidades" data-no-limit>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `d-none-mobile`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 5:52 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L424-454)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-$msgs = [];
-for ($si = 1; $si <= 5; $si++) {
-    $srcIdx = $useFixedMessage ? $heroFixedImgIdx : $si;
-    $msgs[$si] = $slides[$srcIdx];
-    if ($srcIdx === 5) {
-        $msgs[$si]['desc_html'] = $slide5DescHTML;
-        $rawStr = $slide5DescRaw ? $slide5DescRaw : strip_tags($slide5DescGenerated);
-        $len = mb_strlen(trim(html_entity_decode($rawStr, ENT_QUOTES, 'UTF-8')));
-        $msgs[$si]['p_class'] = ($len > 75) ? ' class="d-none-mobile"' : '';
-    } else {
-        $msgs[$si]['desc_html'] = h($slides[$srcIdx]['descripcion']);
-        $rawStr = (string)$slides[$srcIdx]['descripcion'];
-        $len = mb_strlen(trim(html_entity_decode($rawStr, ENT_QUOTES, 'UTF-8')));
-        $msgs[$si]['p_class'] = ($len > 75) ? ' class="d-none-mobile"' : '';
-    }
-}
-
-// Quiénes somos (sin fallback)
-$qsH2         = $c('quienes-somos', 'seccion',   'h2');
-$qsSub        = $c('quienes-somos', 'seccion',   'subtitulo');
-// $qsHisTit ha sido eliminado: el título ahora se renderiza desde CKEditor (ficha1)
-$qsCompromiso = $c('quienes-somos', 'seccion',   'compromiso');
-$qsMision     = $c('quienes-somos', 'ficha2',    'texto');
-$qsVision     = $c('quienes-somos', 'ficha3',    'texto');
-// ficha1/texto: desde 2026-08-23 almacena HTML enriquecido (CKEditor 5).
-// safeHtml() filtra tags permitidos antes de emitir.
-$qsHistoriaHtml = $c('quienes-somos', 'ficha1', 'texto');
-$qsRespBio      = $c('quienes-somos', 'resp', 'bio');
-$qsRespFraseTpl = $c('quienes-somos', 'resp', 'frase_trayectoria');
-$qsRespFrase    = str_replace(
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Analyzing Mobile Display Logic**
-
-I'm currently investigating mobile display logic within `website/index.php`. The question is whether to apply `d-none-mobile` to Etiqueta, Título, and Texto CTA based on character limits (32, 42, 12, respectively). Or, are the user's instructions simply to align the CMS suggestions with the existing template behavior? I'm trying to decipher the exact intent.
-
-
-**Investigating Hero Card Logic**
-
-I'm now diving deeper into the hero glass card rendering within `website/index.php`, particularly lines 746-815. I'm focusing on Etiqueta, Título, and Texto CTA, and the application of `d-none-mobile`. I'm checking if exceeding character limits (32, 42, 12 respectively) necessitates hiding or applying the `d-none-mobile` class to these elements. I'm carefully examining the conditional logic. I'm specifically exploring around lines 430-441 of the same file.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.106210s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L744-814)</summary>
-
-**Path:** `Unknown file`
-
-```
-                    <?php if (!$hideHeroMessages): ?>
-                    <div class="hero-glass-card">
-                        <?php if ($msgs[1]['etiqueta']): ?><span><?= h($msgs[1]['etiqueta']) ?></span><?php endif; ?>
-                        <h1><?= h($msgs[1]['titulo']) ?></h1>
-                        <?php if ($msgs[1]['descripcion']): ?>
-                        <p<?= $msgs[1]['p_class'] ?>><?= $msgs[1]['desc_html'] ?></p>
-                        <?php endif; ?>
-                        <div class="flex-center-15">
-                            <?php if ($msgs[1]['cta_texto']): ?><a href="<?= h($msgs[1]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($msgs[1]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-                    <?php endif; ?>
-                </div>
-
-                <!-- ── Slide 2 — dinámico desde hero/slide2 ────────────────── -->
-                <div class="hero-slide <?= !$hasParentBg ? 'bg-slide-2' : '' ?>"<?= $slides[2]['bg_style'] ? ' style="' . $slides[2]['bg_style'] . '"' : '' ?>>
-                    <?php if (!$hideHeroMessages): ?>
-                    <div class="hero-glass-card">
-                        <?php if ($msgs[2]['etiqueta']): ?><span><?= h($msgs[2]['etiqueta']) ?></span><?php endif; ?>
-                        <h2><?= h($msgs[2]['titulo']) ?></h2>
-                        <?php if ($msgs[2]['descripcion']): ?>
-                        <p<?= $msgs[2]['p_class'] ?>><?= $msgs[2]['desc_html'] ?></p>
-                        <?php endif; ?>
-                        <div class="flex-center-15">
-                            <?php if ($msgs[2]['cta_texto']): ?><a href="<?= h($msgs[2]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($msgs[2]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-                    <?php endif; ?>
-                </div>
-
-                <!-- ── Slide 3 — dinámico desde hero/slide3 ────────────────── -->
-                <div class="hero-slide <?= !$hasParentBg ? 'bg-slide-3' : '' ?>"<?= $slides[3]['bg_style'] ? ' style="' . $slides[3]['bg_style'] . '"' : '' ?>>
-                    <?php if (!$hideHeroMessages): ?>
-                    <div class="hero-glass-card">
-                        <?php if ($msgs[3]['etiqueta']): ?><span><?= h($msgs[3]['etiqueta']) ?></span><?php endif; ?>
-                        <h2><?= h($msgs[3]['titulo']) ?></h2>
-                        <?php if ($msgs[3]['descripcion']): ?>
-                        <p<?= $msgs[3]['p_class'] ?>><?= $msgs[3]['desc_html'] ?></p>
-                        <?php endif; ?>
-                        <div class="flex-center-15">
-                            <?php if ($msgs[3]['cta_texto']): ?><a href="<?= h($msgs[3]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($msgs[3]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-                    <?php endif; ?>
-                </div>
-
-                <!-- ── Slide 4 — dinámico desde hero/slide4 ────────────────── -->
-                <div class="hero-slide <?= !$hasParentBg ? 'bg-slide-4' : '' ?>"<?= $slides[4]['bg_style'] ? ' style="' . $slides[4]['bg_style'] . '"' : '' ?>>
-                    <?php if (!$hideHeroMessages): ?>
-                    <div class="hero-glass-card">
-                        <?php if ($msgs[4]['etiqueta']): ?><span><?= h($msgs[4]['etiqueta']) ?></span><?php endif; ?>
-                        <h2><?= h($msgs[4]['titulo']) ?></h2>
-                        <?php if ($msgs[4]['descripcion']): ?>
-                        <p<?= $msgs[4]['p_class'] ?>><?= $msgs[4]['desc_html'] ?></p>
-                        <?php endif; ?>
-                        <div class="flex-center-15">
-                            <?php if ($msgs[4]['cta_texto']): ?><a href="<?= h($msgs[4]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($msgs[4]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-                    <?php endif; ?>
-                </div>
-
-                <!-- ── Slide 5: Ubicación — CMS + datos de configuraciones ── -->
-                <div class="hero-slide <?= !$hasParentBg ? 'bg-slide-5' : '' ?>"<?= $slides[5]['bg_style'] ? ' style="' . $slides[5]['bg_style'] . '"' : '' ?>>
-                    <?php if (!$hideHeroMessages): ?>
-                    <div class="hero-glass-card">
-                        <?php if ($msgs[5]['etiqueta']): ?><span><?= h($msgs[5]['etiqueta']) ?></span><?php endif; ?>
-                        <h2><?= h($msgs[5]['titulo']) ?></h2>
-                        <p<?= $msgs[5]['p_class'] ?>><?= $msgs[5]['desc_html'] ?></p>
-                        <div class="flex-center-15">
-                            <?php if ($msgs[5]['cta_texto']): ?><a href="<?= h($msgs[5]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($msgs[5]['cta_texto']) ?></a><?php endif; ?>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Analyzing Code Snippet**
-
-Okay, I've started examining the specified code block. Currently, I'm focusing on lines 426-441 within `website/index.php`. The loop iterating through `$si` and the logic for message selection based on `$useFixedMessage` are coming into focus. I'm noting the use of `$slides[$srcIdx]` and the intention of this code. Also looking into the length checks for mobile hiding functionality.
-
-
-**Refining Mobile Hiding Logic**
-
-I've zeroed in on the mobile hiding mechanism. I've noted length checks on several text elements (etiqueta, titulo, cta_texto, descripcion) and their corresponding classes. My focus is now on `landing.css` and specifically how the `.d-none-mobile` class is applied. I am proposing a specific CSS change on line 1289 to simplify and make the mobile hiding more robust, directly targeting the elements with that class.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.776500089s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 5:52 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L425-441)</summary>
-
-**Path:** `Unknown file`
-
-```
-$msgs = [];
-for ($si = 1; $si <= 5; $si++) {
-    $srcIdx = $useFixedMessage ? $heroFixedImgIdx : $si;
-    $msgs[$si] = $slides[$srcIdx];
-    if ($srcIdx === 5) {
-        $msgs[$si]['desc_html'] = $slide5DescHTML;
-        $rawStr = $slide5DescRaw ? $slide5DescRaw : strip_tags($slide5DescGenerated);
-        $len = mb_strlen(trim(html_entity_decode($rawStr, ENT_QUOTES, 'UTF-8')));
-        $msgs[$si]['p_class'] = ($len > 75) ? ' class="d-none-mobile"' : '';
-    } else {
-        $msgs[$si]['desc_html'] = h($slides[$srcIdx]['descripcion']);
-        $rawStr = (string)$slides[$srcIdx]['descripcion'];
-        $len = mb_strlen(trim(html_entity_decode($rawStr, ENT_QUOTES, 'UTF-8')));
-        $msgs[$si]['p_class'] = ($len > 75) ? ' class="d-none-mobile"' : '';
-    }
-}
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L744-816)</summary>
-
-**Path:** `Unknown file`
-
-```
-                    <?php if (!$hideHeroMessages): ?>
-                    <div class="hero-glass-card">
-                        <?php if ($msgs[1]['etiqueta']): ?><span><?= h($msgs[1]['etiqueta']) ?></span><?php endif; ?>
-                        <h1><?= h($msgs[1]['titulo']) ?></h1>
-                        <?php if ($msgs[1]['descripcion']): ?>
-                        <p<?= $msgs[1]['p_class'] ?>><?= $msgs[1]['desc_html'] ?></p>
-                        <?php endif; ?>
-                        <div class="flex-center-15">
-                            <?php if ($msgs[1]['cta_texto']): ?><a href="<?= h($msgs[1]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($msgs[1]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-                    <?php endif; ?>
-                </div>
-
-                <!-- ── Slide 2 — dinámico desde hero/slide2 ────────────────── -->
-                <div class="hero-slide <?= !$hasParentBg ? 'bg-slide-2' : '' ?>"<?= $slides[2]['bg_style'] ? ' style="' . $slides[2]['bg_style'] . '"' : '' ?>>
-                    <?php if (!$hideHeroMessages): ?>
-                    <div class="hero-glass-card">
-                        <?php if ($msgs[2]['etiqueta']): ?><span><?= h($msgs[2]['etiqueta']) ?></span><?php endif; ?>
-                        <h2><?= h($msgs[2]['titulo']) ?></h2>
-                        <?php if ($msgs[2]['descripcion']): ?>
-                        <p<?= $msgs[2]['p_class'] ?>><?= $msgs[2]['desc_html'] ?></p>
-                        <?php endif; ?>
-                        <div class="flex-center-15">
-                            <?php if ($msgs[2]['cta_texto']): ?><a href="<?= h($msgs[2]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($msgs[2]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-                    <?php endif; ?>
-                </div>
-
-                <!-- ── Slide 3 — dinámico desde hero/slide3 ────────────────── -->
-                <div class="hero-slide <?= !$hasParentBg ? 'bg-slide-3' : '' ?>"<?= $slides[3]['bg_style'] ? ' style="' . $slides[3]['bg_style'] . '"' : '' ?>>
-                    <?php if (!$hideHeroMessages): ?>
-                    <div class="hero-glass-card">
-                        <?php if ($msgs[3]['etiqueta']): ?><span><?= h($msgs[3]['etiqueta']) ?></span><?php endif; ?>
-                        <h2><?= h($msgs[3]['titulo']) ?></h2>
-                        <?php if ($msgs[3]['descripcion']): ?>
-                        <p<?= $msgs[3]['p_class'] ?>><?= $msgs[3]['desc_html'] ?></p>
-                        <?php endif; ?>
-                        <div class="flex-center-15">
-                            <?php if ($msgs[3]['cta_texto']): ?><a href="<?= h($msgs[3]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($msgs[3]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-                    <?php endif; ?>
-                </div>
-
-                <!-- ── Slide 4 — dinámico desde hero/slide4 ────────────────── -->
-                <div class="hero-slide <?= !$hasParentBg ? 'bg-slide-4' : '' ?>"<?= $slides[4]['bg_style'] ? ' style="' . $slides[4]['bg_style'] . '"' : '' ?>>
-                    <?php if (!$hideHeroMessages): ?>
-                    <div class="hero-glass-card">
-                        <?php if ($msgs[4]['etiqueta']): ?><span><?= h($msgs[4]['etiqueta']) ?></span><?php endif; ?>
-                        <h2><?= h($msgs[4]['titulo']) ?></h2>
-                        <?php if ($msgs[4]['descripcion']): ?>
-                        <p<?= $msgs[4]['p_class'] ?>><?= $msgs[4]['desc_html'] ?></p>
-                        <?php endif; ?>
-                        <div class="flex-center-15">
-                            <?php if ($msgs[4]['cta_texto']): ?><a href="<?= h($msgs[4]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($msgs[4]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-                    <?php endif; ?>
-                </div>
-
-                <!-- ── Slide 5: Ubicación — CMS + datos de configuraciones ── -->
-                <div class="hero-slide <?= !$hasParentBg ? 'bg-slide-5' : '' ?>"<?= $slides[5]['bg_style'] ? ' style="' . $slides[5]['bg_style'] . '"' : '' ?>>
-                    <?php if (!$hideHeroMessages): ?>
-                    <div class="hero-glass-card">
-                        <?php if ($msgs[5]['etiqueta']): ?><span><?= h($msgs[5]['etiqueta']) ?></span><?php endif; ?>
-                        <h2><?= h($msgs[5]['titulo']) ?></h2>
-                        <p<?= $msgs[5]['p_class'] ?>><?= $msgs[5]['desc_html'] ?></p>
-                        <div class="flex-center-15">
-                            <?php if ($msgs[5]['cta_texto']): ?><a href="<?= h($msgs[5]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($msgs[5]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Refining PHP Website Logic**
-
-I'm now focusing on implementing the conditional CSS classes within `website/index.php`. The current plan is to apply `d-none-mobile` to `span` elements when their content length exceeds 32 characters, to heading tags (`h1`/`h2`) if over 42, and to paragraph tags (`p`) when the text exceeds 75 characters. I'm aiming for a straightforward implementation.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.038501247s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 5:52 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L754-829)</summary>
-
-**Path:** `Unknown file`
-
-```
-                    <?php if (!$hideHeroMessages): ?>
-                    <div class="hero-glass-card">
-                        <?php if ($msgs[1]['etiqueta']): ?><span><?= h($msgs[1]['etiqueta']) ?></span><?php endif; ?>
-                        <h1><?= h($msgs[1]['titulo']) ?></h1>
-                        <?php if ($msgs[1]['descripcion']): ?>
-                        <p<?= $msgs[1]['p_class'] ?>><?= $msgs[1]['desc_html'] ?></p>
-                        <?php endif; ?>
-                        <div class="flex-center-15">
-                            <?php if ($msgs[1]['cta_texto']): ?><a href="<?= h($msgs[1]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($msgs[1]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-                    <?php endif; ?>
-                </div>
-
-                <!-- ── Slide 2 — dinámico desde hero/slide2 ────────────────── -->
-                <div class="hero-slide <?= !$hasParentBg ? 'bg-slide-2' : '' ?>"<?= $slides[2]['bg_style'] ? ' style="' . $slides[2]['bg_style'] . '"' : '' ?>>
-                    <?php if (!$hideHeroMessages): ?>
-                    <div class="hero-glass-card">
-                        <?php if ($msgs[2]['etiqueta']): ?><span><?= h($msgs[2]['etiqueta']) ?></span><?php endif; ?>
-                        <h2><?= h($msgs[2]['titulo']) ?></h2>
-                        <?php if ($msgs[2]['descripcion']): ?>
-                        <p<?= $msgs[2]['p_class'] ?>><?= $msgs[2]['desc_html'] ?></p>
-                        <?php endif; ?>
-                        <div class="flex-center-15">
-                            <?php if ($msgs[2]['cta_texto']): ?><a href="<?= h($msgs[2]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($msgs[2]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-                    <?php endif; ?>
-                </div>
-
-                <!-- ── Slide 3 — dinámico desde hero/slide3 ────────────────── -->
-                <div class="hero-slide <?= !$hasParentBg ? 'bg-slide-3' : '' ?>"<?= $slides[3]['bg_style'] ? ' style="' . $slides[3]['bg_style'] . '"' : '' ?>>
-                    <?php if (!$hideHeroMessages): ?>
-                    <div class="hero-glass-card">
-                        <?php if ($msgs[3]['etiqueta']): ?><span><?= h($msgs[3]['etiqueta']) ?></span><?php endif; ?>
-                        <h2><?= h($msgs[3]['titulo']) ?></h2>
-                        <?php if ($msgs[3]['descripcion']): ?>
-                        <p<?= $msgs[3]['p_class'] ?>><?= $msgs[3]['desc_html'] ?></p>
-                        <?php endif; ?>
-                        <div class="flex-center-15">
-                            <?php if ($msgs[3]['cta_texto']): ?><a href="<?= h($msgs[3]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($msgs[3]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-                    <?php endif; ?>
-                </div>
-
-                <!-- ── Slide 4 — dinámico desde hero/slide4 ────────────────── -->
-                <div class="hero-slide <?= !$hasParentBg ? 'bg-slide-4' : '' ?>"<?= $slides[4]['bg_style'] ? ' style="' . $slides[4]['bg_style'] . '"' : '' ?>>
-                    <?php if (!$hideHeroMessages): ?>
-                    <div class="hero-glass-card">
-                        <?php if ($msgs[4]['etiqueta']): ?><span><?= h($msgs[4]['etiqueta']) ?></span><?php endif; ?>
-                        <h2><?= h($msgs[4]['titulo']) ?></h2>
-                        <?php if ($msgs[4]['descripcion']): ?>
-                        <p<?= $msgs[4]['p_class'] ?>><?= $msgs[4]['desc_html'] ?></p>
-                        <?php endif; ?>
-                        <div class="flex-center-15">
-                            <?php if ($msgs[4]['cta_texto']): ?><a href="<?= h($msgs[4]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($msgs[4]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-                    <?php endif; ?>
-                </div>
-
-                <!-- ── Slide 5: Ubicación — CMS + datos de configuraciones ── -->
-                <div class="hero-slide <?= !$hasParentBg ? 'bg-slide-5' : '' ?>"<?= $slides[5]['bg_style'] ? ' style="' . $slides[5]['bg_style'] . '"' : '' ?>>
-                    <?php if (!$hideHeroMessages): ?>
-                    <div class="hero-glass-card">
-                        <?php if ($msgs[5]['etiqueta']): ?><span><?= h($msgs[5]['etiqueta']) ?></span><?php endif; ?>
-                        <h2><?= h($msgs[5]['titulo']) ?></h2>
-                        <p<?= $msgs[5]['p_class'] ?>><?= $msgs[5]['desc_html'] ?></p>
-                        <div class="flex-center-15">
-                            <?php if ($msgs[5]['cta_texto']): ?><a href="<?= h($msgs[5]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($msgs[5]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-                    <?php endif; ?>
-                </div>
-            </div>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Updating the Website**
-
-I'm focusing on incorporating dynamic classes into the `website/index.php` file. My goal is to use `replace_file_content` to update lines 755-828. I intend to include `$msgs[$si]['span_class']`, `$msgs[$si]['h_class']`, and `$msgs[$si]['cta_class']` within this section for greater flexibility and styling.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.052820089s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 5:52 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1284-1294)</summary>
-
-**Path:** `Unknown file`
-
-```
-    .hero-glass-card h1, .hero-glass-card h2 { font-size: 0.7rem; line-height: 1.15; margin-bottom: 0.25rem; }
-    /* <p> móvil: Solo se muestra si tiene <= 75 caracteres (controlado por PHP con .d-none-mobile).
-       Debe tener fuente reducida para no desbordar el hero de 200px. */
-    .hero-glass-card p                        { font-size: 0.6rem; line-height: 1.25; margin-bottom: 0.3rem; }
-    .hero-glass-card p.d-none-mobile          { display: none; }
-    .hero-glass-card > span                   { font-size: 0.5rem; padding: 2px 8px; margin-top: -5px; margin-bottom: 0.15rem; display: inline-block; }
-    /* Option 3: Ficha Clickable + Texto en línea minimalista */
-    .hero-slide .hero-glass-card .flex-center-15 {
-        display: block; text-align: center; margin-top: -2px;
-    }
-    .hero-slide .hero-glass-card .flex-center-15 .btn-outline-white {
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 5:52 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `write_to_file`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 5:53 pm
 
 ---
 
-## Agent Response
+### Code Edit
 
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-## User Request
-
-Cuando se exceden todas, se muestra una franja gris, revisar que si todas las longitudes superan los limites no se muestre nada de slider contenedor.
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `index.php`
-**Language:** php
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L635-666)</summary>
-
-**Path:** `Unknown file`
-
-```
-          "closes": "<?= h($cfgHrsClose ?: '21:00') ?>"
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": "Sunday",
-          "opens": "<?= h($cfgDomOpen ?: '07:00') ?>",
-          "closes": "<?= h($cfgDomClose ?: '15:00') ?>"
-        }
-      ],
-      "description": "<?= h($seoDesc) ?>"
-    }
-    </script>
-</head>
-<body>
-
-<?php if ($isPreview): ?>
-<!-- ── Flotante de Vista Previa (solo admin, sesión activa) ───────────────────
-     Posicionado a la derecha, apilado sobre el botón WhatsApp (bottom: 195px).
-     No invade el header ni desplaza el contenido de la página. -->
-<div id="cms-preview-badge" role="alert" aria-live="polite"
-     style="position:fixed;top:8px;right:8px;z-index:99999;
-            display:flex;flex-direction:column;align-items:center;gap:7px;
-            background:#ef4444;color:#000000;border-radius:14px;
-            font:600 0.9rem/1.3 system-ui,sans-serif;
-            padding:12px 14px;
-            box-shadow:0 6px 20px rgba(239,68,68,0.45);
-            max-width:120px;text-align:center;">
-    <span style="font-size:1.35rem;line-height:1;" aria-hidden="true">🔍</span>
-    <span style="color:#000000;letter-spacing:0.01em;font-weight:700;">Vista<br>Previa</span>
-    <hr style="border:none;border-top:1px solid rgba(0,0,0,0.2);width:100%;margin:2px 0;">
-    <span style="color:#000000;font-weight:600;font-size:0.82rem;line-height:1.25;">
-        BORRADOR<br>SIN PUBLICAR
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Analyzing the UI Logic**
-
-I'm now diving deep into the UI logic. Specifically, I am analyzing the user's request. My focus is understanding the interaction of the display rules when all lengths are exceeded, as well as if there is a limit. I'm clarifying how a gray bar appears under the current setup and how to change it.
-
-
-**Addressing the Display Issue**
-
-I've pinpointed the root cause: the `hero-glass-card` container persists even when all its child elements are hidden due to exceeding character limits. The user wants this container, the "empty box," to disappear entirely. My analysis now focuses on modifying the PHP logic within `website/index.php` to conditionally hide this container and the related CSS. I will determine how to assess and manage the container's visibility based on these length checks.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.194177039s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L424-444)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-$msgs = [];
-for ($si = 1; $si <= 5; $si++) {
-    $srcIdx = $useFixedMessage ? $heroFixedImgIdx : $si;
-    $msgs[$si] = $slides[$srcIdx];
-
-    $etiqLen = mb_strlen(trim(html_entity_decode((string)$slides[$srcIdx]['etiqueta'], ENT_QUOTES, 'UTF-8')));
-    $msgs[$si]['span_class'] = ($etiqLen > 32) ? ' class="d-none-mobile"' : '';
-
-    $titLen = mb_strlen(trim(html_entity_decode((string)$slides[$srcIdx]['titulo'], ENT_QUOTES, 'UTF-8')));
-    $msgs[$si]['h_class'] = ($titLen > 42) ? ' class="d-none-mobile"' : '';
-
-    $ctaLen = mb_strlen(trim(html_entity_decode((string)$slides[$srcIdx]['cta_texto'], ENT_QUOTES, 'UTF-8')));
-    $msgs[$si]['cta_class'] = ($ctaLen > 12) ? ' d-none-mobile' : '';
-
-    if ($srcIdx === 5) {
-        $msgs[$si]['desc_html'] = $slide5DescHTML;
-        $rawStr = $slide5DescRaw ? $slide5DescRaw : strip_tags($slide5DescGenerated);
-        $len = mb_strlen(trim(html_entity_decode($rawStr, ENT_QUOTES, 'UTF-8')));
-        $msgs[$si]['p_class'] = ($len > 75) ? ' class="d-none-mobile"' : '';
-    } else {
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L424-454)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-$msgs = [];
-for ($si = 1; $si <= 5; $si++) {
-    $srcIdx = $useFixedMessage ? $heroFixedImgIdx : $si;
-    $msgs[$si] = $slides[$srcIdx];
-
-    $etiqLen = mb_strlen(trim(html_entity_decode((string)$slides[$srcIdx]['etiqueta'], ENT_QUOTES, 'UTF-8')));
-    $msgs[$si]['span_class'] = ($etiqLen > 32) ? ' class="d-none-mobile"' : '';
-
-    $titLen = mb_strlen(trim(html_entity_decode((string)$slides[$srcIdx]['titulo'], ENT_QUOTES, 'UTF-8')));
-    $msgs[$si]['h_class'] = ($titLen > 42) ? ' class="d-none-mobile"' : '';
-
-    $ctaLen = mb_strlen(trim(html_entity_decode((string)$slides[$srcIdx]['cta_texto'], ENT_QUOTES, 'UTF-8')));
-    $msgs[$si]['cta_class'] = ($ctaLen > 12) ? ' d-none-mobile' : '';
-
-    if ($srcIdx === 5) {
-        $msgs[$si]['desc_html'] = $slide5DescHTML;
-        $rawStr = $slide5DescRaw ? $slide5DescRaw : strip_tags($slide5DescGenerated);
-        $len = mb_strlen(trim(html_entity_decode($rawStr, ENT_QUOTES, 'UTF-8')));
-        $msgs[$si]['p_class'] = ($len > 75) ? ' class="d-none-mobile"' : '';
-    } else {
-        $msgs[$si]['desc_html'] = h($slides[$srcIdx]['descripcion']);
-        $rawStr = (string)$slides[$srcIdx]['descripcion'];
-        $len = mb_strlen(trim(html_entity_decode($rawStr, ENT_QUOTES, 'UTF-8')));
-        $msgs[$si]['p_class'] = ($len > 75) ? ' class="d-none-mobile"' : '';
-    }
-}
-
-// Quiénes somos (sin fallback)
-$qsH2         = $c('quienes-somos', 'seccion',   'h2');
-$qsSub        = $c('quienes-somos', 'seccion',   'subtitulo');
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L753-829)</summary>
-
-**Path:** `Unknown file`
-
-```
-                <div class="hero-slide active <?= !$hasParentBg ? 'bg-slide-1' : '' ?>"<?= $slides[1]['bg_style'] ? ' style="' . $slides[1]['bg_style'] . '"' : '' ?>>
-                    <?php if (!$hideHeroMessages): ?>
-                    <div class="hero-glass-card">
-                        <?php if ($msgs[1]['etiqueta']): ?><span<?= $msgs[1]['span_class'] ?>><?= h($msgs[1]['etiqueta']) ?></span><?php endif; ?>
-                        <h1<?= $msgs[1]['h_class'] ?>><?= h($msgs[1]['titulo']) ?></h1>
-                        <?php if ($msgs[1]['descripcion']): ?>
-                        <p<?= $msgs[1]['p_class'] ?>><?= $msgs[1]['desc_html'] ?></p>
-                        <?php endif; ?>
-                        <div class="flex-center-15<?= $msgs[1]['cta_class'] ?>">
-                            <?php if ($msgs[1]['cta_texto']): ?><a href="<?= h($msgs[1]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($msgs[1]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-                    <?php endif; ?>
-                </div>
-
-                <!-- ── Slide 2 — dinámico desde hero/slide2 ────────────────── -->
-                <div class="hero-slide <?= !$hasParentBg ? 'bg-slide-2' : '' ?>"<?= $slides[2]['bg_style'] ? ' style="' . $slides[2]['bg_style'] . '"' : '' ?>>
-                    <?php if (!$hideHeroMessages): ?>
-                    <div class="hero-glass-card">
-                        <?php if ($msgs[2]['etiqueta']): ?><span<?= $msgs[2]['span_class'] ?>><?= h($msgs[2]['etiqueta']) ?></span><?php endif; ?>
-                        <h2<?= $msgs[2]['h_class'] ?>><?= h($msgs[2]['titulo']) ?></h2>
-                        <?php if ($msgs[2]['descripcion']): ?>
-                        <p<?= $msgs[2]['p_class'] ?>><?= $msgs[2]['desc_html'] ?></p>
-                        <?php endif; ?>
-                        <div class="flex-center-15<?= $msgs[2]['cta_class'] ?>">
-                            <?php if ($msgs[2]['cta_texto']): ?><a href="<?= h($msgs[2]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($msgs[2]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-                    <?php endif; ?>
-                </div>
-
-                <!-- ── Slide 3 — dinámico desde hero/slide3 ────────────────── -->
-                <div class="hero-slide <?= !$hasParentBg ? 'bg-slide-3' : '' ?>"<?= $slides[3]['bg_style'] ? ' style="' . $slides[3]['bg_style'] . '"' : '' ?>>
-                    <?php if (!$hideHeroMessages): ?>
-                    <div class="hero-glass-card">
-                        <?php if ($msgs[3]['etiqueta']): ?><span<?= $msgs[3]['span_class'] ?>><?= h($msgs[3]['etiqueta']) ?></span><?php endif; ?>
-                        <h2<?= $msgs[3]['h_class'] ?>><?= h($msgs[3]['titulo']) ?></h2>
-                        <?php if ($msgs[3]['descripcion']): ?>
-                        <p<?= $msgs[3]['p_class'] ?>><?= $msgs[3]['desc_html'] ?></p>
-                        <?php endif; ?>
-                        <div class="flex-center-15<?= $msgs[3]['cta_class'] ?>">
-                            <?php if ($msgs[3]['cta_texto']): ?><a href="<?= h($msgs[3]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($msgs[3]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-                    <?php endif; ?>
-                </div>
-
-                <!-- ── Slide 4 — dinámico desde hero/slide4 ────────────────── -->
-                <div class="hero-slide <?= !$hasParentBg ? 'bg-slide-4' : '' ?>"<?= $slides[4]['bg_style'] ? ' style="' . $slides[4]['bg_style'] . '"' : '' ?>>
-                    <?php if (!$hideHeroMessages): ?>
-                    <div class="hero-glass-card">
-                        <?php if ($msgs[4]['etiqueta']): ?><span<?= $msgs[4]['span_class'] ?>><?= h($msgs[4]['etiqueta']) ?></span><?php endif; ?>
-                        <h2<?= $msgs[4]['h_class'] ?>><?= h($msgs[4]['titulo']) ?></h2>
-                        <?php if ($msgs[4]['descripcion']): ?>
-                        <p<?= $msgs[4]['p_class'] ?>><?= $msgs[4]['desc_html'] ?></p>
-                        <?php endif; ?>
-                        <div class="flex-center-15<?= $msgs[4]['cta_class'] ?>">
-                            <?php if ($msgs[4]['cta_texto']): ?><a href="<?= h($msgs[4]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($msgs[4]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-                    <?php endif; ?>
-                </div>
-
-                <!-- ── Slide 5: Ubicación — CMS + datos de configuraciones ── -->
-                <div class="hero-slide <?= !$hasParentBg ? 'bg-slide-5' : '' ?>"<?= $slides[5]['bg_style'] ? ' style="' . $slides[5]['bg_style'] . '"' : '' ?>>
-                    <?php if (!$hideHeroMessages): ?>
-                    <div class="hero-glass-card">
-                        <?php if ($msgs[5]['etiqueta']): ?><span<?= $msgs[5]['span_class'] ?>><?= h($msgs[5]['etiqueta']) ?></span><?php endif; ?>
-                        <h2<?= $msgs[5]['h_class'] ?>><?= h($msgs[5]['titulo']) ?></h2>
-                        <p<?= $msgs[5]['p_class'] ?>><?= $msgs[5]['desc_html'] ?></p>
-                        <div class="flex-center-15<?= $msgs[5]['cta_class'] ?>">
-                            <?php if ($msgs[5]['cta_texto']): ?><a href="<?= h($msgs[5]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($msgs[5]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-                    <?php endif; ?>
-                </div>
-            </div>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Updating File Content**
-
-I'm currently updating `website/index.php`. The focus is now on the `$msgs` calculation. I've started working on the loop that calculates the messages and am considering how the `$srcIdx` index is derived, with fixed and dynamic message indices. This involves handling the logic for either using a fixed message or a dynamic one based on a conditional.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.046078859s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
+**Status:** Reset
+**Created:** 11 Sept 2026, 6:00 pm
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 6:00 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L759-837)</summary>
-
-**Path:** `Unknown file`
-
-```
-        <section id="inicio" class="hero-premium">
-            <div class="hero-slides" data-autoplay="<?= in_array($heroSliderMode, ['decoupled_hidden', 'fixed_all']) ? 0 : $heroAutoplay ?>" role="region"
-                 aria-label="Presentación principal" aria-roledescription="carrusel"<?= $heroParentBgStyle ?>>
-
-                <!-- ── Slide 1 — dinámico desde hero/slide1 ────────────────── -->
-                <div class="hero-slide active <?= !$hasParentBg ? 'bg-slide-1' : '' ?>"<?= $slides[1]['bg_style'] ? ' style="' . $slides[1]['bg_style'] . '"' : '' ?>>
-                    <?php if (!$hideHeroMessages): ?>
-                    <div class="hero-glass-card">
-                        <?php if ($msgs[1]['etiqueta']): ?><span<?= $msgs[1]['span_class'] ?>><?= h($msgs[1]['etiqueta']) ?></span><?php endif; ?>
-                        <h1<?= $msgs[1]['h_class'] ?>><?= h($msgs[1]['titulo']) ?></h1>
-                        <?php if ($msgs[1]['descripcion']): ?>
-                        <p<?= $msgs[1]['p_class'] ?>><?= $msgs[1]['desc_html'] ?></p>
-                        <?php endif; ?>
-                        <div class="flex-center-15<?= $msgs[1]['cta_class'] ?>">
-                            <?php if ($msgs[1]['cta_texto']): ?><a href="<?= h($msgs[1]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($msgs[1]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-                    <?php endif; ?>
-                </div>
-
-                <!-- ── Slide 2 — dinámico desde hero/slide2 ────────────────── -->
-                <div class="hero-slide <?= !$hasParentBg ? 'bg-slide-2' : '' ?>"<?= $slides[2]['bg_style'] ? ' style="' . $slides[2]['bg_style'] . '"' : '' ?>>
-                    <?php if (!$hideHeroMessages): ?>
-                    <div class="hero-glass-card">
-                        <?php if ($msgs[2]['etiqueta']): ?><span<?= $msgs[2]['span_class'] ?>><?= h($msgs[2]['etiqueta']) ?></span><?php endif; ?>
-                        <h2<?= $msgs[2]['h_class'] ?>><?= h($msgs[2]['titulo']) ?></h2>
-                        <?php if ($msgs[2]['descripcion']): ?>
-                        <p<?= $msgs[2]['p_class'] ?>><?= $msgs[2]['desc_html'] ?></p>
-                        <?php endif; ?>
-                        <div class="flex-center-15<?= $msgs[2]['cta_class'] ?>">
-                            <?php if ($msgs[2]['cta_texto']): ?><a href="<?= h($msgs[2]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($msgs[2]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-                    <?php endif; ?>
-                </div>
-
-                <!-- ── Slide 3 — dinámico desde hero/slide3 ────────────────── -->
-                <div class="hero-slide <?= !$hasParentBg ? 'bg-slide-3' : '' ?>"<?= $slides[3]['bg_style'] ? ' style="' . $slides[3]['bg_style'] . '"' : '' ?>>
-                    <?php if (!$hideHeroMessages): ?>
-                    <div class="hero-glass-card">
-                        <?php if ($msgs[3]['etiqueta']): ?><span<?= $msgs[3]['span_class'] ?>><?= h($msgs[3]['etiqueta']) ?></span><?php endif; ?>
-                        <h2<?= $msgs[3]['h_class'] ?>><?= h($msgs[3]['titulo']) ?></h2>
-                        <?php if ($msgs[3]['descripcion']): ?>
-                        <p<?= $msgs[3]['p_class'] ?>><?= $msgs[3]['desc_html'] ?></p>
-                        <?php endif; ?>
-                        <div class="flex-center-15<?= $msgs[3]['cta_class'] ?>">
-                            <?php if ($msgs[3]['cta_texto']): ?><a href="<?= h($msgs[3]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($msgs[3]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-                    <?php endif; ?>
-                </div>
-
-                <!-- ── Slide 4 — dinámico desde hero/slide4 ────────────────── -->
-                <div class="hero-slide <?= !$hasParentBg ? 'bg-slide-4' : '' ?>"<?= $slides[4]['bg_style'] ? ' style="' . $slides[4]['bg_style'] . '"' : '' ?>>
-                    <?php if (!$hideHeroMessages): ?>
-                    <div class="hero-glass-card">
-                        <?php if ($msgs[4]['etiqueta']): ?><span<?= $msgs[4]['span_class'] ?>><?= h($msgs[4]['etiqueta']) ?></span><?php endif; ?>
-                        <h2<?= $msgs[4]['h_class'] ?>><?= h($msgs[4]['titulo']) ?></h2>
-                        <?php if ($msgs[4]['descripcion']): ?>
-                        <p<?= $msgs[4]['p_class'] ?>><?= $msgs[4]['desc_html'] ?></p>
-                        <?php endif; ?>
-                        <div class="flex-center-15<?= $msgs[4]['cta_class'] ?>">
-                            <?php if ($msgs[4]['cta_texto']): ?><a href="<?= h($msgs[4]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($msgs[4]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-                    <?php endif; ?>
-                </div>
-
-                <!-- ── Slide 5: Ubicación — CMS + datos de configuraciones ── -->
-                <div class="hero-slide <?= !$hasParentBg ? 'bg-slide-5' : '' ?>"<?= $slides[5]['bg_style'] ? ' style="' . $slides[5]['bg_style'] . '"' : '' ?>>
-                    <?php if (!$hideHeroMessages): ?>
-                    <div class="hero-glass-card">
-                        <?php if ($msgs[5]['etiqueta']): ?><span<?= $msgs[5]['span_class'] ?>><?= h($msgs[5]['etiqueta']) ?></span><?php endif; ?>
-                        <h2<?= $msgs[5]['h_class'] ?>><?= h($msgs[5]['titulo']) ?></h2>
-                        <p<?= $msgs[5]['p_class'] ?>><?= $msgs[5]['desc_html'] ?></p>
-                        <div class="flex-center-15<?= $msgs[5]['cta_class'] ?>">
-                            <?php if ($msgs[5]['cta_texto']): ?><a href="<?= h($msgs[5]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($msgs[5]['cta_texto']) ?></a><?php endif; ?>
-                        </div>
-                    </div>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Updating the index.php**
-
-I'm currently focused on modifying the `website/index.php` file. My goal is to dynamically add a class to the hero glass card div. The plan is to replace lines 766-838. I will use the function `replace_file_content` to make the modification.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.051789393s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 6:00 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1284-1294)</summary>
-
-**Path:** `Unknown file`
-
-```
-    .hero-glass-card h1, .hero-glass-card h2 { font-size: 0.7rem; line-height: 1.15; margin-bottom: 0.25rem; }
-    /* <p> móvil: Solo se muestra si tiene <= 75 caracteres (controlado por PHP con .d-none-mobile).
-       Debe tener fuente reducida para no desbordar el hero de 200px. */
-    .hero-glass-card p                        { font-size: 0.6rem; line-height: 1.25; margin-bottom: 0.3rem; }
-    .hero-glass-card .d-none-mobile           { display: none !important; }
-    .hero-glass-card > span                   { font-size: 0.5rem; padding: 2px 8px; margin-top: -5px; margin-bottom: 0.15rem; display: inline-block; }
-    /* Option 3: Ficha Clickable + Texto en línea minimalista */
-    .hero-slide .hero-glass-card .flex-center-15 {
-        display: block; text-align: center; margin-top: -2px;
-    }
-    .hero-slide .hero-glass-card .flex-center-15 .btn-outline-white {
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 6:00 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1284-1294)</summary>
-
-**Path:** `Unknown file`
-
-```
-    .hero-glass-card h1, .hero-glass-card h2 { font-size: 0.7rem; line-height: 1.15; margin-bottom: 0.25rem; }
-    /* <p> móvil: Solo se muestra si tiene <= 75 caracteres (controlado por PHP con .d-none-mobile).
-       Debe tener fuente reducida para no desbordar el hero de 200px. */
-    .hero-glass-card p                        { font-size: 0.6rem; line-height: 1.25; margin-bottom: 0.3rem; }
-    .hero-glass-card.d-none-mobile,
-    .hero-glass-card .d-none-mobile           { display: none !important; }
-    .hero-glass-card:has(> .d-none-mobile):not(:has(> :not(.d-none-mobile))) { display: none !important; }
-    .hero-glass-card > span                   { font-size: 0.5rem; padding: 2px 8px; margin-top: -5px; margin-bottom: 0.15rem; display: inline-block; }
-    /* Option 3: Ficha Clickable + Texto en línea minimalista */
-    .hero-slide .hero-glass-card .flex-center-15 {
-        display: block; text-align: center; margin-top: -2px;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `write_to_file`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 11 Sept 2026, 6:00 pm
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-## User Request
-
-Aplica el estilo de poner diferentes colores y contorno degradado para las fichas como en  Promociones Vigentes , para las fichas/secciones diferentes de las pestañas: Banner Principal, Quiénes somos , y . Estudios
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `landing.css`
-**Language:** css
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1274-1305)</summary>
-
-**Path:** `Unknown file`
-
-```
-            -webkit-backdrop-filter: blur(14px);
-            position: relative; /* Clave para el stretched-link de Option 3 */
-        }
-    /* ALTERNATIVA DESCARTADA — fuentes comprimidas para mostrar todo el contenido (badge+h1+p+botón≈123px):
-    .hero-glass-card h1, .hero-glass-card h2 { font-size: 0.88rem; line-height: 1.15; margin-bottom: 0.2rem; }
-    .hero-glass-card p                        { font-size: 0.6rem;  line-height: 1.25; margin-bottom: 0.25rem;
-                                                font-family: system-ui, -apple-system, sans-serif; }
-    .hero-glass-card > span                   { font-size: 0.46rem; padding: 2px 8px;  margin-bottom: 0.2rem; }
-    Descartada: fuentes resultaron demasiado pequeñas. Preferida: ocultar <p> (ver abajo). */
-
-    .hero-glass-card h1, .hero-glass-card h2 { font-size: 0.7rem; line-height: 1.15; margin-bottom: 0.25rem; }
-    /* <p> móvil: Solo se muestra si tiene <= 75 caracteres (controlado por PHP con .d-none-mobile).
-       Debe tener fuente reducida para no desbordar el hero de 200px. */
-    .hero-glass-card p                        { font-size: 0.6rem; line-height: 1.25; margin-bottom: 0.3rem; }
-    .hero-glass-card.d-none-mobile,
-    .hero-glass-card .d-none-mobile           { display: none !important; }
-    .hero-glass-card:has(> .d-none-mobile):not(:has(> :not(.d-none-mobile))) { display: none !important; }
-    .hero-glass-card > span                   { font-size: 0.5rem; padding: 2px 8px; margin-top: -5px; margin-bottom: 0.15rem; display: inline-block; }
-    /* Option 3: Ficha Clickable + Texto en línea minimalista */
-    .hero-slide .hero-glass-card .flex-center-15 {
-        display: block; text-align: center; margin-top: -2px;
-    }
-    .hero-slide .hero-glass-card .flex-center-15 .btn-outline-white {
-        padding: 2px 8px; border: 1px solid rgba(255, 255, 255, 0.5); background: transparent !important;
-        font-size: 0.6rem; font-weight: 700; color: #000; /* Negro */
-        text-shadow: 0 0 4px rgba(255,255,255,0.6); /* Halo sutil blanco para resaltar texto negro sobre cristal azul */
-        text-transform: uppercase; letter-spacing: 0.5px; border-radius: 4px;
-        min-height: unset; display: inline-flex; align-items: center; gap: 4px;
-    }
-    .hero-slide .hero-glass-card .flex-center-15 .btn-outline-white::after {
-        content: ''; position: absolute;
-        top: 0; left: 0; right: 0; bottom: 0;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `editor-card`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 6:25 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L659-759)</summary>
-
-**Path:** `Unknown file`
-
-```
-            <div class="mb-4">
-                <div class="editor-card">
-                    <div class="editor-card-header">
-                        <div class="card-title">Grupos de Estudios (Abanicos) y Catálogo</div>
-                    </div>
-                    <div class="editor-card-body">
-                        <div class="cms-alert cms-alert--info" style="margin-top: 1rem; padding: 1rem; background: #e0f7fa; border: 1px solid #b2ebf2; border-radius: 4px;">
-                            <strong>ℹ️ El constructor de abanicos ha sido migrado al SSOT (Base de Datos).</strong>
-                            <p style="margin-top: 0.5rem; margin-bottom: 1rem;">La captura y edición de la estructura de estudios (Grupos, Categorías y Estudios) que conforman los cuatri abanicos, ahora se realiza de forma visual y estructurada en la sección <strong>Catálogos de Análisis</strong> del panel principal de Recepción. -- No hay vista de Preview.</p>
-                            <a href="/laesh/rc/?view=catalogos-builder" class="btn btn-primary" style="display: inline-block; text-decoration: none;">Ir al Panel de Recepción</a>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- /grid-1col -->
-        </div><!-- /panel-especialidades -->
-
-        <!-- ================================================================
-             PANEL 4: PROMOCIONES VIGENTES
-             Sección: promociones | Fuente HTML: #promociones
-             ================================================================ -->
-        <div id="panel-promociones" class="cms-panel" role="tabpanel" aria-labelledby="tab-promociones" tabindex="0" data-section="promociones">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">Promociones Vigentes (#promociones)</h3>
-            </div>
-
-            <!-- Fila 1: Encabezado de la Sección + Mensaje WhatsApp Agendar -->
-            <hr class="cms-section-sep">
-            <div class="grid-2col mb-4">
-            <!-- Encabezado de la Sección Promociones -->
-            <div class="editor-card">
-                <div class="editor-card-header">
-                    <div class="card-title">Encabezado de la Sección (#promociones)</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Título Principal (h2)</label>
-                        <input type="text" name="banner__titulo"
-                               value="<?= cms($contenidos, 'promociones', 'banner', 'titulo', 'Promociones Vigentes') ?>">
-                    </div>
-                    <div class="field-group">
-                        <label>Subtítulo / Descripción de la Sección</label>
-                        <input type="text" name="banner__subtitulo"
-                               value="<?= cms($contenidos, 'promociones', 'banner', 'subtitulo', 'Aprovecha nuestros precios preferenciales en estudios de laboratorio seleccionados cada día de la semana.') ?>">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Mensaje WhatsApp para Agendar Promoción -->
-            <div class="editor-card">
-                <div class="editor-card-header">
-                    <div class="card-title">Plantilla del Mensaje de WhatsApp (Agendar)</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Mensaje al Agendar Estudio <small class="txt-muted">usa <code>{estudio}</code> como marcador dinámico</small></label>
-                        <input type="text" name="_cfg_wa_texto_agendar"
-                               value="<?= htmlspecialchars($config['wa_texto_agendar'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        <small class="cms-help-text">Texto pre-escrito en WhatsApp al agendar cualquier promoción del día. El comodín <code>{estudio}</code> se reemplaza dinámicamente con el nombre o clave del estudio promocionado (ej. <em>«Hola LAESH, deseo agendar {estudio}»</em> $\rightarrow$ <em>«Hola LAESH, deseo agendar Reticulocitos»</em>).</small>
-                    </div>
-                </div>
-            </div>
-            </div><!-- /grid-2col fila 1 -->
-
-            <!-- Fila 2: Promociones Relacionales (MariaDB — 7 Fichas: Lunes a Domingo) -->
-            <hr class="cms-section-sep">
-            <div class="editor-card mb-4">
-                <div class="editor-card-header" style="padding:12px 16px;">
-                    <div class="card-title" style="font-weight:800; font-size:1.15rem; color:#0052B7; background:#e0f2fe; padding:6px 14px; border-radius:6px; border-left:4px solid #0284c7; display:inline-block;">Gestión de las 7 Promociones</div>
-                </div>
-                <div class="editor-card-body">
-                    <!-- Guía de Origen de Datos (SSOT vs. Texto Libre) -->
-                    <div class="cms-help-banner mb-3" style="background: #f8fafc; border: 1px solid #cbd5e1; border-left: 4px solid #0052B7; border-radius: 6px; padding: 10px 14px; font-size: 0.82rem; color: #1e293b; line-height: 1.5;">
-                        <div style="font-weight: 700; color: #0052B7; margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
-                            💡 Guía de Origen de Datos (SSOT del Constructor Jerárquico vs. Texto Libre de la Promoción)
-                        </div>
-                        <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 6px;">
-                            <div style="flex: 1 1 280px; background: #ffffff; padding: 8px 10px; border-radius: 5px; border: 1px solid #e2e8f0;">
-                                <strong style="color: #0369a1;">🎨 SÍ provienen de la SSOT (Constructor Jerárquico):</strong><br>
-                                <span style="color: #475569;">• Nombre del Estudio, Categoría, Ayuno y Tiempo. <em style="color: #0284c7;">(Sus caracteres están protegidos para mantener la norma médica, pero SÍ se puede personalizar su estilo visual con negritas/colores).</em></span>
-                            </div>
-                            <div style="flex: 1 1 280px; background: #ffffff; padding: 8px 10px; border-radius: 5px; border: 1px solid #e2e8f0;">
-                                <strong style="color: #b45309;">✍️ NO provienen de la SSOT (Configuración Libre de Oferta):</strong><br>
-                                <span style="color: #475569;">• <strong>Campo #7 (Única Descripción 100% Editable)</strong>, Título Superior de Ficha, Precios e Imagen.</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <style>
-                    /* Distribución uniforme a 2 columnas sin scroll horizontal en Promociones */
-                    #panel-promociones .promo-grid-2col {
-                        display: grid;
-                        grid-template-columns: repeat(2, minmax(0, 1fr));
-                        gap: 1.25rem;
-                        width: 100%;
-                        max-width: 100%;
-                        box-sizing: border-box;
-                    }
-                    @media (max-width: 992px) {
-                        #panel-promociones .promo-grid-2col {
-                            grid-template-columns: 1fr;
-                        }
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L759-859)</summary>
-
-**Path:** `Unknown file`
-
-```
-                        }
-                    }
-                    #panel-promociones .promo-card-editor {
-                        width: 100%;
-                        max-width: 100%;
-                        box-sizing: border-box;
-                        overflow-x: hidden;
-                    }
-                    #panel-promociones .ck.ck-toolbar {
-                        flex-wrap: wrap !important;
-                        max-width: 100% !important;
-                        box-sizing: border-box !important;
-                    }
-                    #panel-promociones .ck.ck-editor__main {
-                        max-width: 100% !important;
-                        box-sizing: border-box !important;
-                    }
-                    #panel-promociones .ck.ck-content {
-                        word-break: break-word !important;
-                        overflow-wrap: break-word !important;
-                    }
-                    </style>
-
-                    <?php
-                    $_headerStyles = [
-                        1 => ['bg' => 'linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%)', 'borderColor' => '#2563eb', 'color' => '#ffffff', 'tag' => 'Lunes'],
-                        2 => ['bg' => 'linear-gradient(135deg, #065f46 0%, #059669 100%)', 'borderColor' => '#059669', 'color' => '#ffffff', 'tag' => 'Martes'],
-                        3 => ['bg' => 'linear-gradient(135deg, #78350f 0%, #d97706 100%)', 'borderColor' => '#d97706', 'color' => '#ffffff', 'tag' => 'Miércoles'],
-                        4 => ['bg' => 'linear-gradient(135deg, #581c87 0%, #7c3aed 100%)', 'borderColor' => '#7c3aed', 'color' => '#ffffff', 'tag' => 'Jueves'],
-                        5 => ['bg' => 'linear-gradient(135deg, #831843 0%, #db2777 100%)', 'borderColor' => '#db2777', 'color' => '#ffffff', 'tag' => 'Viernes'],
-                        6 => ['bg' => 'linear-gradient(135deg, #134e4a 0%, #0d9488 100%)', 'borderColor' => '#0d9488', 'color' => '#ffffff', 'tag' => 'Sábado'],
-                        7 => ['bg' => 'linear-gradient(135deg, #7c2d12 0%, #ea580c 100%)', 'borderColor' => '#ea580c', 'color' => '#ffffff', 'tag' => 'Domingo'],
-                    ];
-                    ?>
-                    <div class="promo-grid-2col">
-                    <?php if (!empty($promociones)): ?>
-                        <?php foreach ($promociones as $p): ?>
-                            <?php 
-                                $pId = (int)$p['id'];
-                                $diaLabel = ucfirst(trim(strip_tags($p['dia_semana'])));
-                                $imgUrl = $p['imagen_fondo'] ?? '';
-                                $hStyle = $_headerStyles[$pId] ?? ['bg' => '#0f172a', 'borderColor' => '#334155', 'color' => '#ffffff', 'tag' => 'Ficha'];
-                            ?>
-                            <div class="editor-card promo-card-editor" style="border: 2px solid <?= $hStyle['borderColor'] ?>; background: #fafafa; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
-                                <div class="editor-card-header" style="display:flex; justify-content:space-between; align-items:center; background: <?= $hStyle['bg'] ?>; padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.2);">
-                                    <div class="card-title" style="font-weight:800; color: <?= $hStyle['color'] ?>; font-size:0.95rem; display:flex; align-items:center; gap:8px;">
-                                        <span>Ficha ID: <?= $pId ?></span>
-                                        <span style="font-size:0.75rem; background:rgba(255,255,255,0.22); color:#ffffff; padding:2px 8px; border-radius:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px;">
-                                            <?= $hStyle['tag'] ?>
-                                        </span>
-                                    </div>
-                                    <label style="display:flex; align-items:center; gap:6px; font-size:0.85rem; font-weight:700; cursor:pointer; color: <?= $hStyle['color'] ?>; background:rgba(0,0,0,0.2); padding:4px 10px; border-radius:20px;">
-                                        <input type="checkbox" name="promo_active_<?= $pId ?>" value="1" <?= (!empty($p['activo'])) ? 'checked' : '' ?> style="width:1.05rem; height:1.05rem; cursor:pointer; accent-color:#10b981;">
-                                        <span>Activa</span>
-                                    </label>
-                                </div>
-                                <div class="editor-card-body" style="padding:12px;">
-                                    <input type="hidden" name="promo_id[]" value="<?= $pId ?>">
-
-                                    <!-- 1. Título / Etiqueta Superior (ÚNICO editable en contenido + estilo RTE) -->
-                                    <div class="field-group mb-3">
-                                        <label>✍️ Título / Etiqueta Superior de la Ficha <small class="txt-muted">(✍️ Contenido y Estilos RTE Editables)</small></label>
-                                        <div id="ck-promo-day-<?= $pId ?>" class="ck5-mount"></div>
-                                        <textarea id="ck-promo-day-<?= $pId ?>-data" name="promo_dia_semana_<?= $pId ?>" class="ck5-hidden-data" rows="2"><?= h(trim($p['dia_semana'])) ?></textarea>
-                                    </div>
-
-                                    <!-- 2. Estudio Asociado del Catálogo (Combo Desplegable + Buscador Autocomplete) -->
-                                    <div class="field-group mb-3" style="background: linear-gradient(135deg, #eff6ff 0%, #e0f2fe 100%); border: 1.5px solid #38bdf8; border-left: 4px solid #0284c7; border-radius: 8px; padding: 10px 12px; box-shadow: 0 2px 6px rgba(2, 132, 199, 0.08);">
-                                        <label style="font-weight: 700; color: #0369a1; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 4px; margin-bottom: 4px;">
-                                            <span>🎯 PASO 1: SELECCIONAR O BUSCAR ESTUDIO ASOCIADO DEL CATÁLOGO</span>
-                                            <span style="font-size: 0.72rem; background: #0284c7; color: #ffffff; padding: 2px 8px; border-radius: 12px; font-weight: 600;">⚡ Auto-pobla campos de BD</span>
-                                        </label>
-                                        <div style="font-size: 0.76rem; color: #0c4a6e; margin-bottom: 8px; line-height: 1.3;">
-                                            Elija primero el estudio base desde el combo o buscador para cargar automáticamente los datos maestros de MariaDB.
-                                        </div>
-                                        <div style="display:flex; flex-wrap:wrap; gap:0.75rem; align-items:center;" class="promo-estudio-picker-row">
-                                            <!-- Opción A: Desplegable / Combo -->
-                                            <div style="flex:1 1 220px; min-width:180px;">
-                                                <label style="font-size: 0.75rem; font-weight: 700; color: #0369a1; margin-bottom: 3px; display: block;">Opción A: Selección Directa (Combo)</label>
-                                                <select name="promo_estudio_id_<?= $pId ?>" id="promo-select-<?= $pId ?>" class="form-input promo-estudio-select" style="font-size:0.85rem; width:100%; text-overflow:ellipsis; background-color: #ffffff; border-color: #7dd3fc; font-weight: 600; color: #0f172a;" data-card-id="<?= $pId ?>">
-                                                    <option value="" data-nombre="" data-categoria="" data-desc_breve="" data-ayuno="" data-tiempo="" data-detalle="">-- Sin estudio asociado --</option>
-                                                    <?php if (!empty($estudiosCatalog)): ?>
-                                                        <?php foreach ($estudiosCatalog as $est): ?>
-                                                            <?php $optText = $est['nombre'] . ' (' . $est['clave_interna'] . ')'; ?>
-                                                            <option value="<?= $est['id'] ?>"
-                                                                    data-nombre="<?= h($est['nombre']) ?>"
-                                                                    data-categoria="<?= h($est['categoria_nombre'] ?? '') ?>"
-                                                                    data-desc_breve="<?= h($est['descripcion_breve'] ?? '') ?>"
-                                                                    data-ayuno="<?= h($est['preparacion'] ?? '') ?>"
-                                                                    data-tiempo="<?= h($est['tiempo_procesamiento'] ?? '') ?>"
-                                                                    data-detalle="<?= h($est['detalle'] ?? '') ?>"
-                                                                    <?= ($p['estudio_id'] == $est['id']) ? 'selected' : '' ?>>
-                                                                <?= h($optText) ?>
-                                                            </option>
-                                                        <?php endforeach; ?>
-                                                    <?php endif; ?>
-                                                </select>
-                                            </div>
-
-                                            <!-- Opción B: Buscador Autocomplete -->
-                                            <div style="flex:1 1 220px; min-width:180px; position:relative;">
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L419-569)</summary>
-
-**Path:** `Unknown file`
-
-```
-        </div><!-- /panel-hero -->
-
-        <!-- ================================================================
-             PANEL 2: QUIÉNES SOMOS
-             Sección: quienes-somos | Fuente HTML: #acerca-de
-             ================================================================ -->
-        <div id="panel-quienes-somos" class="cms-panel" role="tabpanel" aria-labelledby="tab-quienes-somos" tabindex="0" data-section="quienes-somos">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">Edición de la Sección Quiénes Somos (#acerca-de)</h3>
-            </div>
-
-            <!-- Encabezado de la Sección — solo Subtítulo -->
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">Encabezado de la Sección</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Título de la Ficha</label>
-                        <input type="text" name="seccion__h2" maxlength="45"
-                               value="<?= cms($contenidos, 'quienes-somos', 'seccion', 'h2', 'Quiénes somos') ?>">
-                    </div>
-                    <div class="field-group">
-                        <label>Subtítulo / Descripción </label>
-                        <input type="text" name="seccion__subtitulo"
-                               value="<?= cms($contenidos, 'quienes-somos', 'seccion', 'subtitulo') ?>">
-                    </div>
-                </div>
-            </div>
-
-            <hr class="cms-section-sep">
-
-            <!-- Nuestros Valores — CKEditor 5 (ficha4/texto) -->
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">Nuestros Valores</div>
-                    
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Texto
-                            
-                        </label>
-                        <div id="ck-ficha4" class="ck5-mount"></div>
-                        <textarea id="ck-ficha4-data" name="ficha4__texto" class="ck5-hidden-data"><?= htmlspecialchars(cmsRaw($contenidos, 'quienes-somos', 'ficha4', 'texto',
-                            '<h3>Nuestros Valores — 25 años al servicio del diagnóstico</h3>'
-                          . '<ul><li>25 años de experiencia</li>'
-                          . '<li>Químicos especialistas con estudios de posgrado</li>'
-                          . '<li>Guías de práctica clínica actualizadas</li>'
-                          . '<li>Excelencia en control de calidad externo</li>'
-                          . '<li>Galardón Rey PACAL — reconocimiento a nuestro desempeño</li>'
-                          . '</ul>')) ?></textarea>
-                    </div>
-                </div>
-            </div>
-
-            <hr class="cms-section-sep">
-
-            <!-- MISIÓN -->
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">MISIÓN</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Declaración de Misión</label>
-                        <div id="ck-mision" class="ck5-mount"></div>
-                        <textarea id="ck-mision-data" name="ficha2__texto" class="ck5-hidden-data"><?= htmlspecialchars(cmsRaw($contenidos, 'quienes-somos', 'ficha2', 'texto', '<h3 class="txt-pgd-sub">🟢 MISIÓN</h3><p class="aviso-p aviso-p--muted">Brindar resultados confiables y clínicamente relevantes que ayuden al médico a tomar mejores decisiones y al paciente a recibir atención oportuna.</p>')) ?></textarea>
-                    </div>
-                </div>
-            </div>
-
-            <hr class="cms-section-sep">
-
-            <!-- VISIÓN -->
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">VISIÓN</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Declaración de Visión</label>
-                        <div id="ck-vision" class="ck5-mount"></div>
-                        <textarea id="ck-vision-data" name="ficha3__texto" class="ck5-hidden-data"><?= htmlspecialchars(cmsRaw($contenidos, 'quienes-somos', 'ficha3', 'texto', '<h3 class="txt-pgd-sub">🔵 VISIÓN</h3><p class="aviso-p aviso-p--muted">Ser el laboratorio de referencia para médicos y pacientes, reconocido por la excelencia de nuestros resultados.</p>')) ?></textarea>
-                    </div>
-                </div>
-            </div>
-
-            <hr class="cms-section-sep">
-
-            <!-- Título de la Ficha Ancha (Historia) — CKEditor 5 (ficha1/texto) -->
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">Título de la Ficha Ancha (Historia)</div>
-                    
-                </div>
-                <div class="editor-card-body">
-                    <p class="cms-p">
-                        <strong>25 años de experiencia al servicio del diagnóstico</strong> —
-                        texto institucional completo. Edita directamente en el recuadro.
-                    </p>
-                    <div class="field-group">
-                        <div id="ck-historia" class="ck5-mount"></div>
-                        <textarea id="ck-historia-data" name="ficha1__texto" class="ck5-hidden-data"><?= htmlspecialchars(cmsRaw($contenidos, 'quienes-somos', 'ficha1', 'texto',
-                            '<p>LAESH, Laboratorio de Especialidades Hematológicas, es una empresa 100% de la Región Mixteca.</p>')) ?></textarea>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- ================================================================
-             PANEL 3: ESTUDIOS DE RUTINA
-             Sección: especialidades | Fuente HTML: #especialidades
-             ================================================================ -->
-        <div id="panel-especialidades" class="cms-panel" role="tabpanel" aria-labelledby="tab-especialidades" tabindex="0" data-section="especialidades">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">Edición de Carrusel y Catálogo Completo (#especialidades)</h3>
-            </div>
-
-            <!-- Encabezado de la sección -->
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">Encabezado de la Sección</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Título Principal (h2)</label>
-                        <input type="text" name="seccion__h2"
-                               value="<?= cms($contenidos, 'especialidades', 'seccion', 'h2', 'Estudios de Rutina y Especialidades') ?>">
-                    </div>
-                    <div class="field-group">
-                        <label>Subtítulo / Descripción</label>
-                        <input type="text" name="seccion__subtitulo"
-                               value="<?= cms($contenidos, 'especialidades', 'seccion', 'subtitulo', 'Servicios clínicos diseñados con rigor científico para garantizar la máxima confiabilidad en el diagnóstico médico.') ?>">
-                    </div>
-                </div>
-            </div>
-
-            <hr class="cms-section-sep">
-
-            <!-- Carrusel de tarjetas de área fotográfica (carousel1–16) -->
-            <div class="cms-panel-header mt-4 mb-3">
-                <h4 class="cms-h3" style="font-size:1.1rem; color:var(--primary);">Tarjetas del Carrusel de Áreas del Laboratorio (1 a 16)</h4>
-                <p class="cms-help-text" style="margin-top:2px;">
-                    Cada tarjeta incluye su módulo de reemplazo de imagen (ranura <code>carousel-1</code> a <code>carousel-16</code>) y editor de texto enriquecido con CKEditor 5. Fichas 13 a 16 disponibles para posterior publicación.
-                </p>
-            </div>
-
-            <div class="especialidades-cards-grid mb-4">
-            <?php
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L569-649)</summary>
-
-**Path:** `Unknown file`
-
-```
-            <?php
-            for ($ci = 1; $ci <= 16; $ci++):
-                $curImg     = cms($contenidos, 'especialidades', 'config', "carousel{$ci}_img", '');
-                $curHtml    = cmsRaw($contenidos, 'especialidades', "carousel{$ci}", 'texto');
-                $defaultAct = ($ci <= 12 || trim($curHtml) !== '') ? '1' : '0';
-                $curActivo  = cms($contenidos, 'especialidades', "carousel{$ci}", 'activo', $defaultAct);
-                $isActivo   = ($curActivo !== '0');
-                $isNew      = $ci > 12;
-            ?>
-            <div class="editor-card">
-                <div class="editor-card-header" style="display:flex; justify-content:space-between; align-items:center;">
-                    <div class="card-title">Tarjeta <?= $ci ?> — <?= $isNew ? 'Ficha Nueva (Opcional)' : 'Área de Laboratorio' ?></div>
-                    <div style="display:flex; align-items:center; gap:0.5rem;">
-                        <label for="chk-carousel-<?= $ci ?>-activo" style="display:inline-flex; align-items:center; gap:0.45rem; cursor:pointer; margin:0; font-size:0.85rem; font-weight:700;">
-                            <input type="hidden" name="carousel<?= $ci ?>__activo" value="0">
-                            <input type="checkbox" id="chk-carousel-<?= $ci ?>-activo" name="carousel<?= $ci ?>__activo" value="1" <?= $isActivo ? 'checked' : '' ?>
-                                   style="width:1.15rem; height:1.15rem; accent-color:#16a34a; cursor:pointer;"
-                                   onchange="var badge=this.nextElementSibling; if(this.checked){ badge.style.color='#16a34a'; badge.textContent='Encendido'; } else { badge.style.color='#dc2626'; badge.textContent='Apagado'; }">
-                            <span class="operator-badge" style="color: <?= $isActivo ? '#16a34a' : '#dc2626' ?>; transition: color 0.2s ease;">
-                                <?= $isActivo ? 'Encendido' : 'Apagado' ?>
-                            </span>
-                        </label>
-                    </div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Imagen de la Tarjeta <?= $ci ?></label>
-                        <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px; font-size: 0.78rem;">
-                            📐 <strong>Codec:</strong> WebP únicamente &nbsp;·&nbsp;
-                            <strong>Quality:</strong> 75 &nbsp;·&nbsp;
-                            <strong>Effort:</strong> 6 &nbsp;·&nbsp;
-                            <strong>Dimensiones:</strong> 800 × 580 px (ratio ~1.38:1) &nbsp;·&nbsp;
-                            <strong>Orientación Horizontal</strong> &nbsp;·&nbsp;
-                            <strong>Peso:</strong> Máximo 150 KB, Óptimo 60 KB
-                        </p>
-                        <div class="image-upload-box">
-                            <img id="prev-carousel-<?= $ci ?>"
-                                 src="<?= h($curImg) ?>"
-                                 alt="Preview Tarjeta <?= $ci ?>"
-                                 class="img-preview-sm"
-                                 onerror="this.hidden=true">
-
-                            <label for="file-carousel-<?= $ci ?>" class="btn btn-secondary">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                                Cambiar Imagen
-                            </label>
-
-                            <input type="file" accept="image/webp"
-                                   id="file-carousel-<?= $ci ?>" class="d-none"
-                                   data-upload-slot="carousel-<?= $ci ?>"
-                                   data-preview-id="prev-carousel-<?= $ci ?>"
-                                   data-target-input="url-img-carousel-<?= $ci ?>">
-                        </div>
-                        <input type="url" id="url-img-carousel-<?= $ci ?>"
-                               name="config__carousel<?= $ci ?>_img"
-                               value="<?= h($curImg) ?>"
-                               class="cms-img-url-input" data-no-limit>
-                        <?php $imgBasename = $curImg ? basename($curImg) : 'Sin imagen'; ?>
-                        <span id="lbl-img-carousel-<?= $ci ?>" class="cms-img-filename-label"><?= h($imgBasename) ?></span>
-                    </div>
-
-                    <!-- Editor de Texto HTML con CKEditor 5 -->
-                    <div class="field-group">
-                        <label class="cms-label-bold mb-1" style="font-weight:700; display:block; font-size:0.88rem;">Contenido Editorial (Título H3 + Descripción)</label>
-                        <div id="ck-carousel-<?= $ci ?>" class="ck5-mount"></div>
-                        <textarea id="ck-carousel-<?= $ci ?>-data" name="carousel<?= $ci ?>__texto" class="ck5-hidden-data"><?= htmlspecialchars($curHtml) ?></textarea>
-                    </div>
-                </div>
-            </div>
-            <?php if ($ci % 2 === 0 && $ci < 16): ?>
-            <hr class="cms-section-sep">
-            <?php endif; ?>
-            <?php endfor; ?>
-            </div><!-- /hero-slides-grid -->
-
-            <!-- Nota al pie del catálogo -->
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">Nota al Pie del Catálogo</div>
-                </div>
-                <div class="editor-card-body">
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Analyzing Color Definitions**
-
-I've been looking closely at how Promociones Vigentes implements its visual style, particularly its color schemes and gradients. The code clearly uses unique color palettes with gradient headers and colored borders, along with subtle box-shadows and pill badges. It's an interesting approach to visual hierarchy and information presentation. Now I'm checking how that is implemented.
-
-
-**Defining Color Harmony**
-
-I'm now designing a vibrant, harmonized color palette system, focusing first on the banner cards. I'm assigning distinct gradient themes to the hero slides: Azul Real, Esmeralda, Violeta, Ámbar, and Tecla. I'm assigning specific gradients and border colors for the hero slides and configuration cards. I am considering applying rich, professional medical themes.
-
-
-**Refining Color Palettes**
-
-I'm now implementing the color palette for additional sections. I've defined gradient backgrounds and border colors for the "Nuestros Valores," "Misión," "Visión," and "Historia" sections. I've also established a consistent theme for "Estudios de Rutina," including a specific gradient scheme for the section header and rotating vibrant schemes for the study area cards, and created a color theme for the catalog footer. I am also checking the code structure in `gestion_web.php`.
-
-
-**Verifying Consistent Styling**
-
-I am now reviewing the code in `admrc/views/gestion_web.php`, specifically Panels 1, 2, and 3, to verify that every card consistently implements the intended styling. I'm focusing on the border, background, border-radius, overflow, and box-shadow. I've examined Panel 1 (Banner Principal) and am making sure this style is applied to the 4 top cards and 5 hero slides. I am inspecting the color codes now.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 2.143089605s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L249-349)</summary>
-
-**Path:** `Unknown file`
-
-```
-            <hr class="cms-section-sep">
-
-            <!-- ══ 3 columnas: Eslogan L1 | Eslogan L2 | Autoplay ══ -->
-            <div class="hero-slides-grid mb-4" style="grid-template-columns: repeat(4, minmax(0, 1fr));">
-
-                <div class="editor-card">
-                    <div class="editor-card-header"><div class="card-title">Línea 1 del Eslogan</div></div>
-                    <div class="editor-card-body">
-                        <div class="field-group">
-                            <input type="text" name="navbar__tagline_l1"
-                                   value="<?= cms($contenidos, 'hero', 'navbar', 'tagline_l1') ?>">
-                            <small class="cms-help-text">Ej.: «Diagnósticos de»</small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="editor-card">
-                    <div class="editor-card-header"><div class="card-title">Línea 2 del Eslogan</div></div>
-                    <div class="editor-card-body">
-                        <div class="field-group">
-                            <input type="text" name="navbar__tagline_l2"
-                                   value="<?= cms($contenidos, 'hero', 'navbar', 'tagline_l2') ?>">
-                            <small class="cms-help-text">Ej.: «Confianza y Calidad»</small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="editor-card">
-                    <div class="editor-card-header"><div class="card-title">Tiempo de Autoplay (seg.)</div></div>
-                    <div class="editor-card-body">
-                        <div class="field-group">
-                            <input type="number" min="0" max="999" step="1" inputmode="numeric" pattern="[0-9]{1,3}"
-                                   name="config__transition_time" id="input-hero-transition"
-                                   required
-                                   onkeydown="if(!['0','1','2','3','4','5','6','7','8','9','Backspace','Tab','ArrowLeft','ArrowRight','Delete'].includes(event.key) && !event.ctrlKey && !event.metaKey) event.preventDefault();"
-                                   oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,3);"
-                                   onpaste="var p=(event.clipboardData||window.clipboardData).getData('text'); if(!/^\d{1,3}$/.test(p)) event.preventDefault();"
-                                   value="<?= cms($contenidos, 'hero', 'config', 'transition_time', '5') ?>">
-                            <small class="cms-help-text">0 = pausa fija · 1–90 s = autoplay.</small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="editor-card">
-                    <div class="editor-card-header"><div class="card-title">Comportamiento Banner: Imagenes y Anuncios</div></div>
-                    <div class="editor-card-body">
-                        <?php $sliderMode = cms($contenidos, 'hero', 'config', 'slider_mode', 'sync'); ?>
-                        <div class="field-group" style="margin-bottom: 0.75rem;">
-                            <select name="config__slider_mode" class="cms-input" style="padding:6px; font-size:0.85rem;" onchange="document.getElementById('fixed-image-selector').style.display = ['sync', 'sync_hidden'].includes(this.value) ? 'none' : 'block'; if(window.CmsDirtyTracker) CmsDirtyTracker.evalField(this);">
-                                <option value="sync" <?= $sliderMode === 'sync' ? 'selected' : '' ?>>Animar Imágenes, Y Mantener Mensajes Animados</option>
-                                <option value="decoupled" <?= $sliderMode === 'decoupled' ? 'selected' : '' ?>>Imagen Fija, Y Mantener Mensajes Animados</option>
-                                <option value="sync_hidden" <?= $sliderMode === 'sync_hidden' ? 'selected' : '' ?>>Animar Imágenes, Y Ocultar Mensajes Animados</option>
-                                <option value="decoupled_hidden" <?= $sliderMode === 'decoupled_hidden' ? 'selected' : '' ?>>Imagen Fija, Y Ocultar Mensajes Animados</option>
-                                <option value="fixed_all" <?= $sliderMode === 'fixed_all' ? 'selected' : '' ?>>Imagen Fija, Y Mensaje Fijo</option>
-                                <option value="sync_fixed_msg" <?= $sliderMode === 'sync_fixed_msg' ? 'selected' : '' ?>>Animar Imágenes, Y Mensaje Fijo</option>
-                            </select>
-                        </div>
-                        <div class="field-group" id="fixed-image-selector" style="display: <?= in_array($sliderMode, ['sync', 'sync_hidden']) ? 'none' : 'block' ?>; background:var(--bg-page); padding:0.5rem; border-radius:6px; border:1px solid var(--border);">
-                            <label class="cms-label" style="font-size:0.8rem;">Slide a fijar (Fondo y/o Mensaje):</label>
-                            <select name="config__fixed_image" class="cms-input" style="padding:4px; font-size:0.85rem; height:auto;">
-                                <?php $fixedImg = cms($contenidos, 'hero', 'config', 'fixed_image', '1'); ?>
-                                <option value="1" <?= $fixedImg == '1' ? 'selected' : '' ?>>Slide 1</option>
-                                <option value="2" <?= $fixedImg == '2' ? 'selected' : '' ?>>Slide 2</option>
-                                <option value="3" <?= $fixedImg == '3' ? 'selected' : '' ?>>Slide 3</option>
-                                <option value="4" <?= $fixedImg == '4' ? 'selected' : '' ?>>Slide 4</option>
-                                <option value="5" <?= $fixedImg == '5' ? 'selected' : '' ?>>Slide 5</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-            </div><!-- /4col eslogan + autoplay + comportamiento -->
-
-            <hr class="cms-section-sep">
-
-            <!-- ══ GRID DE SLIDES — 2 columnas ══ -->
-            <div class="hero-slides-grid">
-            <?php
-            $heroSlides = [
-                ['slide1', 'Slide 1 — Presentación Institucional'],
-                ['slide2', 'Slide 2 — Experiencia Clínica'],
-                ['slide3', 'Slide 3 — Excelencia y Calidad'],
-                ['slide4', 'Slide 4 — Promociones y Check-Ups'],
-                ['slide5', 'Slide 5 — Ubicación y Horarios'],
-            ];
-            $slidesTotal = count($heroSlides);
-            foreach ($heroSlides as $idx => [$sub, $cardTitle]):
-                // Separador de fila: antes del 4º slide (inicio de 2ª fila)
-                if ($idx === 3): ?>
-            <hr class="cms-section-sep">
-            <?php endif; ?>
-            <div class="editor-card">
-                <div class="editor-card-header">
-                    <div class="card-title"><?= htmlspecialchars($cardTitle, ENT_QUOTES, 'UTF-8') ?></div>
-                    <span class="operator-badge">WebP · máx. 150 KB, óptimo 60 KB</span>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Etiqueta <small class="txt-muted">(sobre el título)</small></label>
-                        <input type="text" name="<?= $sub ?>__etiqueta"
-                               value="<?= cms($contenidos, 'hero', $sub, 'etiqueta') ?>">
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Revising Visual Elements**
-
-I'm currently focused on refining the visual presentation of Panel 1. I've decided to enhance the top four cards with colored borders and gradient headers in Azure Blue, Cyan, Indigo, and Violet. Additionally, I'm customizing the border and gradient header for each of the five hero slides, aligning them with the `$heroStyles` array.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.049225733s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 6:25 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L429-539)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-
-        </div><!-- /panel-hero -->
-
-        <!-- ================================================================
-             PANEL 2: QUIÉNES SOMOS
-             Sección: quienes-somos | Fuente HTML: #acerca-de
-             ================================================================ -->
-        <div id="panel-quienes-somos" class="cms-panel" role="tabpanel" aria-labelledby="tab-quienes-somos" tabindex="0" data-section="quienes-somos">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">Edición de la Sección Quiénes Somos (#acerca-de)</h3>
-            </div>
-
-            <!-- Encabezado de la Sección — solo Subtítulo -->
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">Encabezado de la Sección</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Título de la Ficha</label>
-                        <input type="text" name="seccion__h2" maxlength="45"
-                               value="<?= cms($contenidos, 'quienes-somos', 'seccion', 'h2', 'Quiénes somos') ?>">
-                    </div>
-                    <div class="field-group">
-                        <label>Subtítulo / Descripción </label>
-                        <input type="text" name="seccion__subtitulo"
-                               value="<?= cms($contenidos, 'quienes-somos', 'seccion', 'subtitulo') ?>">
-                    </div>
-                </div>
-            </div>
-
-            <hr class="cms-section-sep">
-
-            <!-- Nuestros Valores — CKEditor 5 (ficha4/texto) -->
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">Nuestros Valores</div>
-                    
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Texto
-                            
-                        </label>
-                        <div id="ck-ficha4" class="ck5-mount"></div>
-                        <textarea id="ck-ficha4-data" name="ficha4__texto" class="ck5-hidden-data"><?= htmlspecialchars(cmsRaw($contenidos, 'quienes-somos', 'ficha4', 'texto',
-                            '<h3>Nuestros Valores — 25 años al servicio del diagnóstico</h3>'
-                          . '<ul><li>25 años de experiencia</li>'
-                          . '<li>Químicos especialistas con estudios de posgrado</li>'
-                          . '<li>Guías de práctica clínica actualizadas</li>'
-                          . '<li>Excelencia en control de calidad externo</li>'
-                          . '<li>Galardón Rey PACAL — reconocimiento a nuestro desempeño</li>'
-                          . '</ul>')) ?></textarea>
-                    </div>
-                </div>
-            </div>
-
-            <hr class="cms-section-sep">
-
-            <!-- MISIÓN -->
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">MISIÓN</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Declaración de Misión</label>
-                        <div id="ck-mision" class="ck5-mount"></div>
-                        <textarea id="ck-mision-data" name="ficha2__texto" class="ck5-hidden-data"><?= htmlspecialchars(cmsRaw($contenidos, 'quienes-somos', 'ficha2', 'texto', '<h3 class="txt-pgd-sub">🟢 MISIÓN</h3><p class="aviso-p aviso-p--muted">Brindar resultados confiables y clínicamente relevantes que ayuden al médico a tomar mejores decisiones y al paciente a recibir atención oportuna.</p>')) ?></textarea>
-                    </div>
-                </div>
-            </div>
-
-            <hr class="cms-section-sep">
-
-            <!-- VISIÓN -->
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">VISIÓN</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Declaración de Visión</label>
-                        <div id="ck-vision" class="ck5-mount"></div>
-                        <textarea id="ck-vision-data" name="ficha3__texto" class="ck5-hidden-data"><?= htmlspecialchars(cmsRaw($contenidos, 'quienes-somos', 'ficha3', 'texto', '<h3 class="txt-pgd-sub">🔵 VISIÓN</h3><p class="aviso-p aviso-p--muted">Ser el laboratorio de referencia para médicos y pacientes, reconocido por la excelencia de nuestros resultados.</p>')) ?></textarea>
-                    </div>
-                </div>
-            </div>
-
-            <hr class="cms-section-sep">
-
-            <!-- Título de la Ficha Ancha (Historia) — CKEditor 5 (ficha1/texto) -->
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">Título de la Ficha Ancha (Historia)</div>
-                    
-                </div>
-                <div class="editor-card-body">
-                    <p class="cms-p">
-                        <strong>25 años de experiencia al servicio del diagnóstico</strong> —
-                        texto institucional completo. Edita directamente en el recuadro.
-                    </p>
-                    <div class="field-group">
-                        <div id="ck-historia" class="ck5-mount"></div>
-                        <textarea id="ck-historia-data" name="ficha1__texto" class="ck5-hidden-data"><?= htmlspecialchars(cmsRaw($contenidos, 'quienes-somos', 'ficha1', 'texto',
-                            '<p>LAESH, Laboratorio de Especialidades Hematológicas, es una empresa 100% de la Región Mixteca.</p>')) ?></textarea>
-                    </div>
-                </div>
-            </div>
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Refining Panel 2**
-
-I'm currently updating Panel 2, specifically the "Quiénes Somos" section. I've focused on using `replace_file_content` to implement new styling. The section header now incorporates a solid border and a gradient background. Moreover, the "Nuestros Valores" section is being refactored, and I am considering the use of new borders.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.056745501s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 6:26 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L529-669)</summary>
-
-**Path:** `Unknown file`
-
-```
-                        <div id="ck-historia" class="ck5-mount"></div>
-                        <textarea id="ck-historia-data" name="ficha1__texto" class="ck5-hidden-data"><?= htmlspecialchars(cmsRaw($contenidos, 'quienes-somos', 'ficha1', 'texto',
-                            '<p>LAESH, Laboratorio de Especialidades Hematológicas, es una empresa 100% de la Región Mixteca.</p>')) ?></textarea>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- ================================================================
-             PANEL 3: ESTUDIOS DE RUTINA
-             Sección: especialidades | Fuente HTML: #especialidades
-             ================================================================ -->
-        <div id="panel-especialidades" class="cms-panel" role="tabpanel" aria-labelledby="tab-especialidades" tabindex="0" data-section="especialidades">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">Edición de Carrusel y Catálogo Completo (#especialidades)</h3>
-            </div>
-
-            <!-- Encabezado de la sección -->
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">Encabezado de la Sección</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Título Principal (h2)</label>
-                        <input type="text" name="seccion__h2"
-                               value="<?= cms($contenidos, 'especialidades', 'seccion', 'h2', 'Estudios de Rutina y Especialidades') ?>">
-                    </div>
-                    <div class="field-group">
-                        <label>Subtítulo / Descripción</label>
-                        <input type="text" name="seccion__subtitulo"
-                               value="<?= cms($contenidos, 'especialidades', 'seccion', 'subtitulo', 'Servicios clínicos diseñados con rigor científico para garantizar la máxima confiabilidad en el diagnóstico médico.') ?>">
-                    </div>
-                </div>
-            </div>
-
-            <hr class="cms-section-sep">
-
-            <!-- Carrusel de tarjetas de área fotográfica (carousel1–16) -->
-            <div class="cms-panel-header mt-4 mb-3">
-                <h4 class="cms-h3" style="font-size:1.1rem; color:var(--primary);">Tarjetas del Carrusel de Áreas del Laboratorio (1 a 16)</h4>
-                <p class="cms-help-text" style="margin-top:2px;">
-                    Cada tarjeta incluye su módulo de reemplazo de imagen (ranura <code>carousel-1</code> a <code>carousel-16</code>) y editor de texto enriquecido con CKEditor 5. Fichas 13 a 16 disponibles para posterior publicación.
-                </p>
-            </div>
-
-            <div class="especialidades-cards-grid mb-4">
-            <?php
-            for ($ci = 1; $ci <= 16; $ci++):
-                $curImg     = cms($contenidos, 'especialidades', 'config', "carousel{$ci}_img", '');
-                $curHtml    = cmsRaw($contenidos, 'especialidades', "carousel{$ci}", 'texto');
-                $defaultAct = ($ci <= 12 || trim($curHtml) !== '') ? '1' : '0';
-                $curActivo  = cms($contenidos, 'especialidades', "carousel{$ci}", 'activo', $defaultAct);
-                $isActivo   = ($curActivo !== '0');
-                $isNew      = $ci > 12;
-            ?>
-            <div class="editor-card">
-                <div class="editor-card-header" style="display:flex; justify-content:space-between; align-items:center;">
-                    <div class="card-title">Tarjeta <?= $ci ?> — <?= $isNew ? 'Ficha Nueva (Opcional)' : 'Área de Laboratorio' ?></div>
-                    <div style="display:flex; align-items:center; gap:0.5rem;">
-                        <label for="chk-carousel-<?= $ci ?>-activo" style="display:inline-flex; align-items:center; gap:0.45rem; cursor:pointer; margin:0; font-size:0.85rem; font-weight:700;">
-                            <input type="hidden" name="carousel<?= $ci ?>__activo" value="0">
-                            <input type="checkbox" id="chk-carousel-<?= $ci ?>-activo" name="carousel<?= $ci ?>__activo" value="1" <?= $isActivo ? 'checked' : '' ?>
-                                   style="width:1.15rem; height:1.15rem; accent-color:#16a34a; cursor:pointer;"
-                                   onchange="var badge=this.nextElementSibling; if(this.checked){ badge.style.color='#16a34a'; badge.textContent='Encendido'; } else { badge.style.color='#dc2626'; badge.textContent='Apagado'; }">
-                            <span class="operator-badge" style="color: <?= $isActivo ? '#16a34a' : '#dc2626' ?>; transition: color 0.2s ease;">
-                                <?= $isActivo ? 'Encendido' : 'Apagado' ?>
-                            </span>
-                        </label>
-                    </div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Imagen de la Tarjeta <?= $ci ?></label>
-                        <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px; font-size: 0.78rem;">
-                            📐 <strong>Codec:</strong> WebP únicamente &nbsp;·&nbsp;
-                            <strong>Quality:</strong> 75 &nbsp;·&nbsp;
-                            <strong>Effort:</strong> 6 &nbsp;·&nbsp;
-                            <strong>Dimensiones:</strong> 800 × 580 px (ratio ~1.38:1) &nbsp;·&nbsp;
-                            <strong>Orientación Horizontal</strong> &nbsp;·&nbsp;
-                            <strong>Peso:</strong> Máximo 150 KB, Óptimo 60 KB
-                        </p>
-                        <div class="image-upload-box">
-                            <img id="prev-carousel-<?= $ci ?>"
-                                 src="<?= h($curImg) ?>"
-                                 alt="Preview Tarjeta <?= $ci ?>"
-                                 class="img-preview-sm"
-                                 onerror="this.hidden=true">
-
-                            <label for="file-carousel-<?= $ci ?>" class="btn btn-secondary">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                                Cambiar Imagen
-                            </label>
-
-                            <input type="file" accept="image/webp"
-                                   id="file-carousel-<?= $ci ?>" class="d-none"
-                                   data-upload-slot="carousel-<?= $ci ?>"
-                                   data-preview-id="prev-carousel-<?= $ci ?>"
-                                   data-target-input="url-img-carousel-<?= $ci ?>">
-                        </div>
-                        <input type="url" id="url-img-carousel-<?= $ci ?>"
-                               name="config__carousel<?= $ci ?>_img"
-                               value="<?= h($curImg) ?>"
-                               class="cms-img-url-input" data-no-limit>
-                        <?php $imgBasename = $curImg ? basename($curImg) : 'Sin imagen'; ?>
-                        <span id="lbl-img-carousel-<?= $ci ?>" class="cms-img-filename-label"><?= h($imgBasename) ?></span>
-                    </div>
-
-                    <!-- Editor de Texto HTML con CKEditor 5 -->
-                    <div class="field-group">
-                        <label class="cms-label-bold mb-1" style="font-weight:700; display:block; font-size:0.88rem;">Contenido Editorial (Título H3 + Descripción)</label>
-                        <div id="ck-carousel-<?= $ci ?>" class="ck5-mount"></div>
-                        <textarea id="ck-carousel-<?= $ci ?>-data" name="carousel<?= $ci ?>__texto" class="ck5-hidden-data"><?= htmlspecialchars($curHtml) ?></textarea>
-                    </div>
-                </div>
-            </div>
-            <?php if ($ci % 2 === 0 && $ci < 16): ?>
-            <hr class="cms-section-sep">
-            <?php endif; ?>
-            <?php endfor; ?>
-            </div><!-- /hero-slides-grid -->
-
-            <!-- Nota al pie del catálogo -->
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">Nota al Pie del Catálogo</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Texto de la nota al pie del acordeón de estudios</label>
-                        <input type="text" name="catalogo__nota_pie"
-                               value="<?= cms($contenidos, 'especialidades', 'catalogo', 'nota_pie', 'Listas de Estudios disponibles 2026 · Haz clic en cada grupo para expandir') ?>">
-                    </div>
-                </div>
-            </div>
-
-            <hr class="cms-section-sep">
-            <div class="mb-4">
-                <div class="editor-card">
-                    <div class="editor-card-header">
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Refining Panel Design**
-
-I'm currently focused on refining the design of Panel 3, specifically in `admrc/views/gestion_web.php`. I've started by examining the CSS for the section header, specifically around line 549. The goal is to update the visual style using properties like border, background, border-radius, overflow, and box-shadow. This should improve the overall look and feel of the panel.
-
-
-**Styling Panel Components**
-
-I've moved on from the header and am now delving into the styling of individual panel components. I'm focusing on the "Tarjetas de Áreas 1 a 16," which are styled within a loop in the code. I'm leveraging `$_estudiosStyles` to generate unique backgrounds, border colors and other stylistic attributes. I'm also now reviewing the styling of the footer note and banner.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 2.925760946s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 6:26 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L659-679)</summary>
-
-**Path:** `Unknown file`
-
-```
-            <?php endif; ?>
-            <?php endfor; ?>
-            </div><!-- /hero-slides-grid -->
-
-            <!-- Nota al pie del catálogo -->
-            <div class="editor-card mb-4" style="border: 2px solid #475569; background: #fafafa; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
-                <div class="editor-card-header" style="background: linear-gradient(135deg, #1e293b 0%, #475569 100%); padding: 10px 14px;">
-                    <div class="card-title" style="color: #ffffff; font-weight: 800; font-size: 0.95rem;">Nota al Pie del Catálogo</div>
-                </div>
-                <div class="editor-card-body" style="padding: 12px;">
-                    <div class="field-group">
-                        <label>Texto de la nota al pie del acordeón de estudios</label>
-                        <input type="text" name="catalogo__nota_pie"
-                               value="<?= cms($contenidos, 'especialidades', 'catalogo', 'nota_pie', 'Listas de Estudios disponibles 2026 · Haz clic en cada grupo para expandir') ?>">
-                    </div>
-                </div>
-            </div>
-
-            <hr class="cms-section-sep">
-            <div class="mb-4">
-                <div class="editor-card" style="border: 2px solid #0284c7; background: #fafafa; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L674-694)</summary>
-
-**Path:** `Unknown file`
-
-```
-                </div>
-            </div>
-
-            <hr class="cms-section-sep">
-            <div class="mb-4">
-                <div class="editor-card" style="border: 2px solid #0284c7; background: #fafafa; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
-                    <div class="editor-card-header" style="background: linear-gradient(135deg, #0369a1 0%, #0284c7 100%); padding: 10px 14px;">
-                        <div class="card-title" style="color: #ffffff; font-weight: 800; font-size: 0.95rem;">Grupos de Estudios (Abanicos) y Catálogo Maestro</div>
-                    </div>
-                        <div class="card-title">Grupos de Estudios (Abanicos) y Catálogo</div>
-                    </div>
-                    <div class="editor-card-body">
-                        <div class="cms-alert cms-alert--info" style="margin-top: 1rem; padding: 1rem; background: #e0f7fa; border: 1px solid #b2ebf2; border-radius: 4px;">
-                            <strong>ℹ️ El constructor de abanicos ha sido migrado al SSOT (Base de Datos).</strong>
-                            <p style="margin-top: 0.5rem; margin-bottom: 1rem;">La captura y edición de la estructura de estudios (Grupos, Categorías y Estudios) que conforman los cuatri abanicos, ahora se realiza de forma visual y estructurada en la sección <strong>Catálogos de Análisis</strong> del panel principal de Recepción. -- No hay vista de Preview.</p>
-                            <a href="/laesh/rc/?view=catalogos-builder" class="btn btn-primary" style="display: inline-block; text-decoration: none;">Ir al Panel de Recepción</a>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- /grid-1col -->
-        </div><!-- /panel-especialidades -->
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 6:26 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L674-694)</summary>
-
-**Path:** `Unknown file`
-
-```
-                </div>
-            </div>
-
-            <hr class="cms-section-sep">
-            <div class="mb-4">
-                <div class="editor-card" style="border: 2px solid #0284c7; background: #fafafa; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
-                    <div class="editor-card-header" style="background: linear-gradient(135deg, #0369a1 0%, #0284c7 100%); padding: 10px 14px;">
-                        <div class="card-title" style="color: #ffffff; font-weight: 800; font-size: 0.95rem;">Grupos de Estudios (Abanicos) y Catálogo Maestro</div>
-                    </div>
-                    <div class="editor-card-body" style="padding: 12px;">
-                        <div class="cms-alert cms-alert--info" style="margin-top: 1rem; padding: 1rem; background: #e0f7fa; border: 1px solid #b2ebf2; border-radius: 4px;">
-                            <strong>ℹ️ El constructor de abanicos ha sido migrado al SSOT (Base de Datos).</strong>
-                            <p style="margin-top: 0.5rem; margin-bottom: 1rem;">La captura y edición de la estructura de estudios (Grupos, Categorías y Estudios) que conforman los cuatri abanicos, ahora se realiza de forma visual y estructurada en la sección <strong>Catálogos de Análisis</strong> del panel principal de Recepción. -- No hay vista de Preview.</p>
-                            <a href="/laesh/rc/?view=catalogos-builder" class="btn btn-primary" style="display: inline-block; text-decoration: none;">Ir al Panel de Recepción</a>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- /grid-1col -->
-        </div><!-- /panel-especialidades -->
-
-        <!-- ================================================================
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Documenting UI Enhancements**
-
-I've just confirmed the UI is clean, well-formatted, and visually consistent with the existing Promociones Vigentes design. I'm now updating the `walkthrough.md` artifact to reflect these crucial design additions.
-
-
-
-
-### Actions
-
-**Tool:** `write_to_file`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.053963552s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 6:26 pm
 
 ---
 
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-## User Request
-
-EN la pestaña del cms Admin /  3. Estudios:
-Cambia:
-Nota al Pie del Catálogo por: Nota al Encabezado de Catálogo de abanicos
-elimina este: Texto de la nota al pie del acordeón de estudios
-
-
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `gestion_web.php`
-**Language:** php
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L659-679)</summary>
-
-**Path:** `Unknown file`
-
-```
-            <?php endif; ?>
-            <?php endfor; ?>
-            </div><!-- /hero-slides-grid -->
-
-            <!-- Nota al pie del catálogo -->
-            <div class="editor-card mb-4" style="border: 2px solid #475569; background: #fafafa; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
-                <div class="editor-card-header" style="background: linear-gradient(135deg, #1e293b 0%, #475569 100%); padding: 10px 14px;">
-                    <div class="card-title" style="color: #ffffff; font-weight: 800; font-size: 0.95rem;">Nota al Pie del Catálogo</div>
-                </div>
-                <div class="editor-card-body" style="padding: 12px;">
-                    <div class="field-group">
-                        <label>Texto de la nota al pie del acordeón de estudios</label>
-                        <input type="text" name="catalogo__nota_pie"
-                               value="<?= cms($contenidos, 'especialidades', 'catalogo', 'nota_pie', 'Listas de Estudios disponibles 2026 · Haz clic en cada grupo para expandir') ?>">
-                    </div>
-                </div>
-            </div>
-
-            <hr class="cms-section-sep">
-            <div class="mb-4">
-                <div class="editor-card" style="border: 2px solid #0284c7; background: #fafafa; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Analyzing the Code Snippet**
-
-Okay, I'm currently focused on lines 664-676 in `admrc/views/gestion_web.php`. I'm specifically looking at the HTML structure, particularly the "Nota al pie del catálogo" section. I'm noting the use of specific styling, like the border, background color, and border-radius. I'm assessing its potential impact on the overall visual presentation and user experience within that section.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.136590054s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 6:34 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L659-679)</summary>
-
-**Path:** `Unknown file`
-
-```
-            <?php endif; ?>
-            <?php endfor; ?>
-            </div><!-- /hero-slides-grid -->
-
-            <!-- Nota al Encabezado de Catálogo de abanicos -->
-            <div class="editor-card mb-4" style="border: 2px solid #475569; background: #fafafa; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
-                <div class="editor-card-header" style="background: linear-gradient(135deg, #1e293b 0%, #475569 100%); padding: 10px 14px;">
-                    <div class="card-title" style="color: #ffffff; font-weight: 800; font-size: 0.95rem;">Nota al Encabezado de Catálogo de abanicos</div>
-                </div>
-                <div class="editor-card-body" style="padding: 12px;">
-                    <div class="field-group">
-                        <input type="text" name="catalogo__nota_pie"
-                               value="<?= cms($contenidos, 'especialidades', 'catalogo', 'nota_pie', 'Listas de Estudios disponibles 2026 · Haz clic en cada grupo para expandir') ?>">
-                    </div>
-                </div>
-            </div>
-
-            <hr class="cms-section-sep">
-            <div class="mb-4">
-                <div class="editor-card" style="border: 2px solid #0284c7; background: #fafafa; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
-                    <div class="editor-card-header" style="background: linear-gradient(135deg, #0369a1 0%, #0284c7 100%); padding: 10px 14px;">
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `write_to_file`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 6:35 pm
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-## User Request
-
-Quedo muy bien.
-Ahora aplica ese estilo a las fichas diferentes para las pestañas:  Calidad e Instalaciones,  Ubicación y Contacto, Pie de Página,  Aviso de Privacidad , . Video promo y . Ordenamiento
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `gestion_web.php`
-**Language:** php
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L899-1099)</summary>
-
-**Path:** `Unknown file`
-
-```
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <?php
-                                    // Linearización SSOT: CMS lee estilos desde web_contenidos; SSOT de catalogo_estudios es la fuente de texto.
-                                    // El valor inicial de cada campo RTE es: estilos CMS guardados (si existen) o texto plano del SSOT.
-                                    $cmsNombre    = $contenidos['promociones']["promo{$pId}_nombre"]['texto']
-                                                    ?? ($p['estudio_nombre_db'] ?? '');
-                                    $ssotSub      = trim(($p['categoria_nombre'] ?? '') . (!empty($p['ssot_desc_breve']) ? ' · ' . $p['ssot_desc_breve'] : ''));
-                                    $cmsSubtitulo = ($contenidos['promociones']["promo{$pId}_subtitulo"]['texto'] ?? '') ?: $ssotSub;
-                                    $cmsAyuno     = $contenidos['promociones']["promo{$pId}_ayuno"]['texto']
-                                                    ?? ($p['ssot_prep'] ?? '');
-                                    $cmsTiempo    = $contenidos['promociones']["promo{$pId}_tiempo"]['texto']
-                                                    ?? ($p['ssot_tiempo'] ?? '');
-                                    $cmsDesc      = $p['descripcion'] ?: ($p['ssot_detalle'] ?? '');
-                                    ?>
-
-                                    <!-- 3. Nombre del Estudio (🔒 Texto de SSOT · Estilos RTE persistibles en CMS) -->
-                                    <div class="field-group mb-3">
-                                        <label>🎨 Nombre del Estudio <small class="txt-muted">(🔒 SSOT Catálogo · Solo estilos persistibles)</small></label>
-                                        <div id="ck-promo-title-<?= $pId ?>" class="ck5-mount"></div>
-                                        <textarea id="ck-promo-title-<?= $pId ?>-data" name="promo<?= $pId ?>_nombre__texto" class="ck5-hidden-data" rows="2"><?= h($cmsNombre) ?></textarea>
-                                    </div>
-
-                                    <!-- 4. Subtítulo / Categoría (🔒 Texto de SSOT · Estilos RTE persistibles en CMS) -->
-                                    <div class="field-group mb-3">
-                                        <label>🎨 Subtítulo / Categoría <small class="txt-muted">(🔒 SSOT Catálogo · Solo estilos persistibles)</small></label>
-                                        <div id="ck-promo-sub-<?= $pId ?>" class="ck5-mount"></div>
-                                        <textarea id="ck-promo-sub-<?= $pId ?>-data" name="promo<?= $pId ?>_subtitulo__texto" class="ck5-hidden-data" rows="2"><?= h($cmsSubtitulo) ?></textarea>
-                                    </div>
-
-                                    <!-- 5. Indicaciones / Ayuno (🔒 Texto de SSOT · Estilos RTE persistibles en CMS) -->
-                                    <div class="field-group mb-3">
-                                        <label>🎨 Indicaciones de Ayuno <small class="txt-muted">(🔒 SSOT Catálogo · Solo estilos persistibles)</small></label>
-                                        <div id="ck-promo-ayuno-<?= $pId ?>" class="ck5-mount"></div>
-                                        <textarea id="ck-promo-ayuno-<?= $pId ?>-data" name="promo<?= $pId ?>_ayuno__texto" class="ck5-hidden-data" rows="2"><?= h($cmsAyuno) ?></textarea>
-                                    </div>
-
-                                    <!-- 6. Tiempo de Entrega (🔒 Texto de SSOT · Estilos RTE persistibles en CMS) -->
-                                    <div class="field-group mb-3">
-                                        <label>🎨 Tiempo de Entrega <small class="txt-muted">(🔒 SSOT Catálogo · Solo estilos persistibles)</small></label>
-                                        <div id="ck-promo-tiempo-<?= $pId ?>" class="ck5-mount"></div>
-                                        <textarea id="ck-promo-tiempo-<?= $pId ?>-data" name="promo<?= $pId ?>_tiempo__texto" class="ck5-hidden-data" rows="2"><?= h($cmsTiempo) ?></textarea>
-                                    </div>
-
-                                    <!-- 7. Descripción / Detalle del Estudio (✍️ Único campo editable en contenido + estilos · sin impacto a SSOT) -->
-                                    <div class="field-group mb-3">
-                                        <label>✍️ Descripción / Detalle del Estudio <small class="txt-muted">(✍️ Campo #7 · 100% Editable en Contenido + Estilos · Guardado en <code>catalogo_promociones.descripcion</code>)</small></label>
-                                        <div id="ck-promo-desc-<?= $pId ?>" class="ck5-mount"></div>
-                                        <textarea id="ck-promo-desc-<?= $pId ?>-data" name="promo_desc_<?= $pId ?>" class="ck5-hidden-data" rows="3"><?= h($cmsDesc) ?></textarea>
-                                    </div>
-
-                                    <!-- 8. Muestra Requerida (CMS RTE → web_contenidos) -->
-                                    <?php
-                                    // ?? captura solo null; ?: captura null y "" (filas vacías de web_contenidos)
-                                    $muestraCms = ($contenidos['promociones']['muestra'.$pId]['texto'] ?? '')
-                                                  ?: trim($p['ssot_muestra'] ?? '');
-                                    ?>
-                                    <div class="field-group mb-3">
-                                        <label>🔬 Muestra Requerida <small class="txt-muted">(Editable · se guarda en CMS, no en BD de estudios)</small></label>
-                                        <div id="ck-muestra-<?= $pId ?>" class="ck5-mount"></div>
-                                        <textarea id="ck-muestra-<?= $pId ?>-data" name="muestra<?= $pId ?>__texto" class="ck5-hidden-data" rows="1"><?= h($muestraCms) ?></textarea>
-                                    </div>
-
-                                    <div style="display:flex; flex-wrap:wrap; gap:1rem; align-items:flex-end;" class="mb-3">
-                                        <div class="field-group" style="flex:0 0 140px; min-width:120px; max-width:160px; margin-bottom:0;">
-                                            <label style="font-size:0.8rem; font-weight:600; white-space:nowrap;">✍️ Precio Reg. ($)</label>
-                                            <input type="number" step="0.01" name="promo_precio_reg_<?= $pId ?>" value="<?= $p['precio_regular'] !== null ? h($p['precio_regular']) : '' ?>" placeholder="0.00" class="form-input" style="padding:4px 8px; font-size:0.85rem; height:34px; width:100%;">
-                                        </div>
-                                        <div class="field-group" style="flex:0 0 140px; min-width:120px; max-width:160px; margin-bottom:0;">
-                                            <label style="font-size:0.8rem; font-weight:600; white-space:nowrap;">✍️ Precio Oferta ($)</label>
-                                            <input type="number" step="0.01" name="promo_precio_of_<?= $pId ?>" value="<?= $p['precio_oferta'] !== null ? h($p['precio_oferta']) : '' ?>" placeholder="0.00" class="form-input" style="padding:4px 8px; font-size:0.85rem; height:34px; width:100%;">
-                                        </div>
-                                    </div>
-
-                                    <div class="field-group mb-2">
-                                        <label>Imagen de Fondo</label>
-                                        <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px; font-size: 0.78rem;">
-                                            📐 <strong>Codec:</strong> WebP únicamente &nbsp;·&nbsp;
-                                            <strong>Quality:</strong> 72 &nbsp;·&nbsp;
-                                            <strong>Effort:</strong> 6 &nbsp;·&nbsp;
-                                            <strong>Dimensiones:</strong> 900 × 486 px (ratio 13:7) &nbsp;·&nbsp;
-                                            <strong>Orientación Horizontal</strong> &nbsp;·&nbsp;
-                                            <strong>Peso:</strong> Máximo 150 KB, Óptimo 60 KB
-                                        </p>
-                                        <div class="image-upload-box">
-                                            <img id="prev-promo-<?= $pId ?>"
-                                                 src="<?= !empty($imgUrl) ? h($imgUrl) : 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="90" height="60" viewBox="0 0 90 60"><rect width="100%" height="100%" fill="%23f1f5f9"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%2394a3b8" font-size="10" font-family="sans-serif">Sin Imagen</text></svg>' ?>"
-                                                 alt="Promoción <?= h(trim(strip_tags($diaLabel))) ?>" class="img-preview-sm"
-                                                 onerror="this.hidden=true">
-                                            <label for="file-promo-<?= $pId ?>" class="btn btn-secondary btn-sm">
-                                                Cambiar Imagen
-                                            </label>
-                                            <input type="file" accept="image/webp"
-                                                   id="file-promo-<?= $pId ?>" class="d-none"
-                                                   data-upload-slot="promo-<?= $pId ?>"
-                                                   data-preview-id="prev-promo-<?= $pId ?>"
-                                                   data-target-input="input-img-promo-<?= $pId ?>">
-                                        </div>
-                                        <input type="url" id="input-img-promo-<?= $pId ?>"
-                                               name="promo_img_<?= $pId ?>"
-                                               value="<?= h($imgUrl) ?>"
-                                               placeholder="/laesh-web-assets-uipv1a/cms/promo-<?= h(strtolower(trim(strip_tags($p['dia_semana'])))) ?>.webp"
-                                               class="cms-img-url-input" data-no-limit>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
-                    </div>
-                </div>
-            </div>
-        </div><!-- /panel-promociones -->
-
-        <!-- ================================================================
-             PANEL 5: CALIDAD E INSTALACIONES
-             Sección: calidad | Fuente HTML: #calidad
-             ================================================================ -->
-        <div id="panel-calidad" class="cms-panel" role="tabpanel" aria-labelledby="tab-calidad" tabindex="0" data-section="calidad">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">Galería de Instalaciones y Certificaciones (#calidad)</h3>
-            </div>
-
-            <!-- Fila 1: Encabezado de la Sección + Tarjeta 1 -->
-            <hr class="cms-section-sep">
-            <div class="grid-2col mb-4">
-            <!-- Encabezado de sección -->
-            <div class="editor-card">
-                <div class="editor-card-header">
-                    <div class="card-title">Encabezado de la Sección</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Título Principal (h2)</label>
-                        <input type="text" name="seccion__h2"
-                               value="<?= cms($contenidos, 'calidad', 'seccion', 'h2', 'Calidad e Instalaciones') ?>">
-                    </div>
-                    <div class="field-group">
-                        <label>Subtítulo / Descripción de la Sección</label>
-                        <input type="text" name="seccion__subtitulo"
-                               value="<?= cms($contenidos, 'calidad', 'seccion', 'subtitulo', 'Conoce nuestras instalaciones equipadas con tecnología de vanguardia y un equipo comprometido con la excelencia diagnóstica.') ?>">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tarjeta 1 -->
-            <?php
-            $galImgUrl1 = cms($contenidos, 'calidad', 'gallery1', 'imagen_url');
-            $galActivo1 = cms($contenidos, 'calidad', 'gallery1', 'activo', '1');
-            $isActivo1  = ($galActivo1 !== '0');
-            $imgDef1    = ''; // sin fallback — imagen debe venir de CMS
-            ?>
-            <div class="editor-card">
-                <div class="editor-card-header" style="display:flex; justify-content:space-between; align-items:center;">
-                    <div class="card-title">Tarjeta 1 — Área de Hematología</div>
-                    <div style="display:flex; align-items:center; gap:0.5rem;">
-                        <label for="chk-calidad-gallery1-activo" style="display:inline-flex; align-items:center; gap:0.45rem; cursor:pointer; margin:0; font-size:0.85rem; font-weight:700;">
-                            <input type="hidden" name="gallery1__activo" value="0">
-                            <input type="checkbox" id="chk-calidad-gallery1-activo" name="gallery1__activo" value="1" <?= $isActivo1 ? 'checked' : '' ?>
-                                   style="width:1.15rem; height:1.15rem; accent-color:#16a34a; cursor:pointer;"
-                                   onchange="var badge=this.nextElementSibling; if(this.checked){ badge.style.color='#16a34a'; badge.textContent='Encendido'; } else { badge.style.color='#dc2626'; badge.textContent='Apagado'; }">
-                            <span class="operator-badge" style="color: <?= $isActivo1 ? '#16a34a' : '#dc2626' ?>; transition: color 0.2s ease;">
-                                <?= $isActivo1 ? 'Encendido' : 'Apagado' ?>
-                            </span>
-                        </label>
-                    </div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Imagen de Galería</label>
-                        <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px; font-size: 0.78rem;">
-                            📐 <strong>Codec:</strong> WebP únicamente &nbsp;·&nbsp;
-                            <strong>Quality:</strong> 75 &nbsp;·&nbsp;
-                            <strong>Effort:</strong> 6 &nbsp;·&nbsp;
-                            <strong>Dimensiones:</strong> 800 × 580 px (ratio ~1.38:1) &nbsp;·&nbsp;
-                            <strong>Orientación Horizontal</strong> &nbsp;·&nbsp;
-                            <strong>Peso:</strong> Máximo 150 KB, Óptimo 60 KB
-                        </p>
-                        <div class="image-upload-box">
-                            <img id="prev-calidad-gallery1"
-                                 src="<?= h($galImgUrl1) ?>"
-                                 alt="Área de Hematología" class="img-preview-sm"
-                                 onerror="this.hidden=true">
-                            <label for="file-calidad-gallery1" class="btn btn-secondary">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                                Cambiar Imagen
-                            </label>
-                            <input type="file" accept="image/webp"
-                                   id="file-calidad-gallery1" class="d-none"
-                                   data-upload-slot="calidad-gallery1"
-                                   data-preview-id="prev-calidad-gallery1"
-                                   data-target-input="url-calidad-gallery1">
-                        </div>
-                        <input type="url" id="url-calidad-gallery1"
-                               name="gallery1__imagen_url"
-                               value="<?= h($galImgUrl1) ?>"
-                               placeholder="<?= $imgDef1 ?>"
-                               class="cms-img-url-input" data-no-limit>
-                        <?php $imgBasename1 = $galImgUrl1 ? basename($galImgUrl1) : basename($imgDef1); ?>
-                        <span id="lbl-img-calidad-gallery1" class="cms-img-filename-label"><?= h($imgBasename1) ?></span>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1099-1399)</summary>
-
-**Path:** `Unknown file`
-
-```
-                        <span id="lbl-img-calidad-gallery1" class="cms-img-filename-label"><?= h($imgBasename1) ?></span>
-                    </div>
-                    <div class="field-group">
-                        <label>Título</label>
-                        <input type="text" name="gallery1__titulo"
-                               value="<?= cms($contenidos, 'calidad', 'gallery1', 'titulo', 'Área de Hematología') ?>">
-                    </div>
-                    <div class="field-group">
-                        <label>Descripción</label>
-                        <input type="text" name="gallery1__descripcion"
-                               value="<?= cms($contenidos, 'calidad', 'gallery1', 'descripcion', 'Análisis de biometría hemática y células sanguíneas con rigor científico y alta precisión.') ?>">
-                    </div>
-                </div>
-            </div>
-            </div><!-- /grid-2col fila 1 -->
-
-            <!-- Fila 2: Tarjeta 2 + Tarjeta 3 -->
-            <hr class="cms-section-sep">
-            <div class="grid-2col mb-4">
-            <!-- Tarjeta 2 -->
-            <?php
-            $galImgUrl2 = cms($contenidos, 'calidad', 'gallery2', 'imagen_url');
-            $galActivo2 = cms($contenidos, 'calidad', 'gallery2', 'activo', '1');
-            $isActivo2  = ($galActivo2 !== '0');
-            $imgDef2    = ''; // sin fallback — imagen debe venir de CMS
-            ?>
-            <div class="editor-card">
-                <div class="editor-card-header" style="display:flex; justify-content:space-between; align-items:center;">
-                    <div class="card-title">Tarjeta 2 — Química Clínica</div>
-                    <div style="display:flex; align-items:center; gap:0.5rem;">
-                        <label for="chk-calidad-gallery2-activo" style="display:inline-flex; align-items:center; gap:0.45rem; cursor:pointer; margin:0; font-size:0.85rem; font-weight:700;">
-                            <input type="hidden" name="gallery2__activo" value="0">
-                            <input type="checkbox" id="chk-calidad-gallery2-activo" name="gallery2__activo" value="1" <?= $isActivo2 ? 'checked' : '' ?>
-                                   style="width:1.15rem; height:1.15rem; accent-color:#16a34a; cursor:pointer;"
-                                   onchange="var badge=this.nextElementSibling; if(this.checked){ badge.style.color='#16a34a'; badge.textContent='Encendido'; } else { badge.style.color='#dc2626'; badge.textContent='Apagado'; }">
-                            <span class="operator-badge" style="color: <?= $isActivo2 ? '#16a34a' : '#dc2626' ?>; transition: color 0.2s ease;">
-                                <?= $isActivo2 ? 'Encendido' : 'Apagado' ?>
-                            </span>
-                        </label>
-                    </div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Imagen de Galería</label>
-                        <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px; font-size: 0.78rem;">
-                            📐 <strong>Codec:</strong> WebP únicamente &nbsp;·&nbsp;
-                            <strong>Quality:</strong> 75 &nbsp;·&nbsp;
-                            <strong>Effort:</strong> 6 &nbsp;·&nbsp;
-                            <strong>Dimensiones:</strong> 800 × 580 px (ratio ~1.38:1) &nbsp;·&nbsp;
-                            <strong>Orientación Horizontal</strong> &nbsp;·&nbsp;
-                            <strong>Peso:</strong> Máximo 150 KB, Óptimo 60 KB
-                        </p>
-                        <div class="image-upload-box">
-                            <img id="prev-calidad-gallery2"
-                                 src="<?= h($galImgUrl2) ?>"
-                                 alt="Química Clínica" class="img-preview-sm"
-                                 onerror="this.hidden=true">
-                            <label for="file-calidad-gallery2" class="btn btn-secondary">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                                Cambiar Imagen
-                            </label>
-                            <input type="file" accept="image/webp"
-                                   id="file-calidad-gallery2" class="d-none"
-                                   data-upload-slot="calidad-gallery2"
-                                   data-preview-id="prev-calidad-gallery2"
-                                   data-target-input="url-calidad-gallery2">
-                        </div>
-                        <input type="url" id="url-calidad-gallery2"
-                               name="gallery2__imagen_url"
-                               value="<?= h($galImgUrl2) ?>"
-                               placeholder="<?= $imgDef2 ?>"
-                               class="cms-img-url-input" data-no-limit>
-                        <?php $imgBasename2 = $galImgUrl2 ? basename($galImgUrl2) : basename($imgDef2); ?>
-                        <span id="lbl-img-calidad-gallery2" class="cms-img-filename-label"><?= h($imgBasename2) ?></span>
-                    </div>
-                    <div class="field-group">
-                        <label>Título</label>
-                        <input type="text" name="gallery2__titulo"
-                               value="<?= cms($contenidos, 'calidad', 'gallery2', 'titulo', 'Química Clínica') ?>">
-                    </div>
-                    <div class="field-group">
-                        <label>Descripción</label>
-                        <input type="text" name="gallery2__descripcion"
-                               value="<?= cms($contenidos, 'calidad', 'gallery2', 'descripcion', 'Determinación automatizada de metabolitos, perfil lipídico y enzimas específicas.') ?>">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tarjeta 3 -->
-            <?php
-            $galImgUrl3 = cms($contenidos, 'calidad', 'gallery3', 'imagen_url');
-            $galActivo3 = cms($contenidos, 'calidad', 'gallery3', 'activo', '1');
-            $isActivo3  = ($galActivo3 !== '0');
-            $imgDef3    = ''; // sin fallback — imagen debe venir de CMS
-            ?>
-            <div class="editor-card">
-                <div class="editor-card-header" style="display:flex; justify-content:space-between; align-items:center;">
-                    <div class="card-title">Tarjeta 3 — Microbiología y Cultivos</div>
-                    <div style="display:flex; align-items:center; gap:0.5rem;">
-                        <label for="chk-calidad-gallery3-activo" style="display:inline-flex; align-items:center; gap:0.45rem; cursor:pointer; margin:0; font-size:0.85rem; font-weight:700;">
-                            <input type="hidden" name="gallery3__activo" value="0">
-                            <input type="checkbox" id="chk-calidad-gallery3-activo" name="gallery3__activo" value="1" <?= $isActivo3 ? 'checked' : '' ?>
-                                   style="width:1.15rem; height:1.15rem; accent-color:#16a34a; cursor:pointer;"
-                                   onchange="var badge=this.nextElementSibling; if(this.checked){ badge.style.color='#16a34a'; badge.textContent='Encendido'; } else { badge.style.color='#dc2626'; badge.textContent='Apagado'; }">
-                            <span class="operator-badge" style="color: <?= $isActivo3 ? '#16a34a' : '#dc2626' ?>; transition: color 0.2s ease;">
-                                <?= $isActivo3 ? 'Encendido' : 'Apagado' ?>
-                            </span>
-                        </label>
-                    </div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Imagen de Galería</label>
-                        <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px; font-size: 0.78rem;">
-                            📐 <strong>Codec:</strong> WebP únicamente &nbsp;·&nbsp;
-                            <strong>Quality:</strong> 75 &nbsp;·&nbsp;
-                            <strong>Effort:</strong> 6 &nbsp;·&nbsp;
-                            <strong>Dimensiones:</strong> 800 × 580 px (ratio ~1.38:1) &nbsp;·&nbsp;
-                            <strong>Orientación Horizontal</strong> &nbsp;·&nbsp;
-                            <strong>Peso:</strong> Máximo 150 KB, Óptimo 60 KB
-                        </p>
-                        <div class="image-upload-box">
-                            <img id="prev-calidad-gallery3"
-                                 src="<?= h($galImgUrl3) ?>"
-                                 alt="Microbiología y Cultivos" class="img-preview-sm"
-                                 onerror="this.hidden=true">
-                            <label for="file-calidad-gallery3" class="btn btn-secondary">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                                Cambiar Imagen
-                            </label>
-                            <input type="file" accept="image/webp"
-                                   id="file-calidad-gallery3" class="d-none"
-                                   data-upload-slot="calidad-gallery3"
-                                   data-preview-id="prev-calidad-gallery3"
-                                   data-target-input="url-calidad-gallery3">
-                        </div>
-                        <input type="url" id="url-calidad-gallery3"
-                               name="gallery3__imagen_url"
-                               value="<?= h($galImgUrl3) ?>"
-                               placeholder="<?= $imgDef3 ?>"
-                               class="cms-img-url-input" data-no-limit>
-                        <?php $imgBasename3 = $galImgUrl3 ? basename($galImgUrl3) : basename($imgDef3); ?>
-                        <span id="lbl-img-calidad-gallery3" class="cms-img-filename-label"><?= h($imgBasename3) ?></span>
-                    </div>
-                    <div class="field-group">
-                        <label>Título</label>
-                        <input type="text" name="gallery3__titulo"
-                               value="<?= cms($contenidos, 'calidad', 'gallery3', 'titulo', 'Microbiología y Cultivos') ?>">
-                    </div>
-                    <div class="field-group">
-                        <label>Descripción</label>
-                        <input type="text" name="gallery3__descripcion"
-                               value="<?= cms($contenidos, 'calidad', 'gallery3', 'descripcion', 'Aislamiento, tinción de Gram y pruebas de susceptibilidad a antimicrobianos.') ?>">
-                    </div>
-                </div>
-            </div>
-            </div><!-- /grid-2col fila 2 -->
-        </div>
-
-        <!-- ================================================================
-             PANEL 6: UBICACIÓN Y CONTACTO — SSOT Master
-             Sección: ubicacion | Fuente HTML: #ubicacion
-             SSOT: este panel edita configuraciones (singletons); los datos se reutilizan
-               en Footer, Quiénes Somos (responsable) y Schema.org automáticamente.
-             Fix UI-G02: name attributes agregados aquí (no están en gestion-web.html fuente)
-             ================================================================ -->
-        <div id="panel-ubicacion" class="cms-panel" role="tabpanel" aria-labelledby="tab-ubicacion" tabindex="0" data-section="ubicacion">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">Datos de Ubicación, Contacto y Horarios (#ubicacion)</h3>
-            </div>
-
-            <!-- Fila 0: Identidad del Laboratorio (nombre, siglas, años) — SSOT footer + SEO + Schema.org -->
-            <hr class="cms-section-sep">
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">Identidad del Laboratorio</div>
-                </div>
-                <div class="editor-card-body">
-                    <p class="cms-p">🏷️ Estos valores se usan en el <strong>pie de página</strong>, en el alt del logo, en el copyright, en <strong>Schema.org</strong> (name) y como fallback del título SEO. Son la fuente única de identidad del sitio.</p>
-                    <div class="field-row">
-                        <div class="field-group" style="flex:2">
-                            <label>Nombre Completo del Laboratorio</label>
-                            <input type="text" name="_cfg_nombre_laboratorio" maxlength="120"
-                                   value="<?= htmlspecialchars($config['nombre_laboratorio'] ?? 'Laboratorio de Especialidades Hematológicas S.C.', ENT_QUOTES, 'UTF-8') ?>"
-                                   placeholder="Laboratorio de Especialidades Hematológicas S.C.">
-                            <small class="cms-help-text">Nombre legal completo — pie de página, alt del logo, Schema.org.</small>
-                        </div>
-                        <div class="field-group" style="flex:1">
-                            <label>Nombre Corto / Siglas</label>
-                            <input type="text" name="_cfg_nombre_corto" maxlength="20"
-                                   value="<?= htmlspecialchars($config['nombre_corto'] ?? 'LAESH', ENT_QUOTES, 'UTF-8') ?>"
-                                   placeholder="LAESH">
-                            <small class="cms-help-text">Sigla usada en copyright y modales.</small>
-                        </div>
-                        <div class="field-group" style="flex:0 0 120px">
-                            <label>Años de Experiencia</label>
-                            <input type="number" name="_cfg_anios_experiencia" min="1" max="99"
-                                   value="<?= htmlspecialchars($config['anios_experiencia'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
-                                   placeholder="25">
-                            <small class="cms-help-text">Sección Acerca De.</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Fila 1: Encabezado & Responsable (izq) + Dirección Física & Contacto (der) -->
-            <hr class="cms-section-sep">
-            <div class="grid-2col mb-4">
-            <!-- Encabezado de la Sección y Responsable Sanitario -->
-            <div class="editor-card">
-                <div class="editor-card-header">
-                    <div class="card-title">Encabezado y Responsable Sanitario</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Título Principal (h2)</label>
-                        <input type="text" name="seccion__h2"
-                               value="<?= cms($contenidos, 'ubicacion', 'seccion', 'h2') ?>">
-                    </div>
-                    <div class="field-group">
-                        <label>Subtítulo</label>
-                        <input type="text" name="seccion__subtitulo"
-                               value="<?= cms($contenidos, 'ubicacion', 'seccion', 'subtitulo') ?>">
-                    </div>
-                    <div class="field-group mt-3 pt-3 border-top">
-                        <label>Nombre del Responsable Sanitario</label>
-                        <input type="text" name="_cfg_responsable_nombre"
-                               value="<?= htmlspecialchars(!empty($config['responsable_nombre']) ? $config['responsable_nombre'] : 'Q.F.B. y E.H.D.L. Jacob Santiago Blanco', ENT_QUOTES, 'UTF-8') ?>">
-                    </div>
-                    <div class="field-row">
-                        <div class="field-group">
-                            <label>Cédula Profesional</label>
-                            <input type="text" name="_cfg_responsable_cedula_prof"
-                                   value="<?= htmlspecialchars(!empty($config['responsable_cedula_prof']) ? $config['responsable_cedula_prof'] : (!empty($config['responsable_cedula']) ? $config['responsable_cedula'] : '3609293'), ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label>Cédula de Especialidad</label>
-                            <input type="text" name="_cfg_responsable_cedula_esp"
-                                   value="<?= htmlspecialchars(!empty($config['responsable_cedula_esp']) ? $config['responsable_cedula_esp'] : '8935780', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Dirección Física y Contacto Directo -->
-            <div class="editor-card">
-                <div class="editor-card-header">
-                    <div class="card-title">Dirección Física y Contacto Directo</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-row">
-                        <div class="field-group">
-                            <label>Calle, Número y Colonia <small class="txt-muted">(SSOT / SEO Schema.org)</small></label>
-                            <input type="text" name="_cfg_direccion_calle"
-                                   value="<?= htmlspecialchars(!empty($config['direccion_calle']) ? $config['direccion_calle'] : 'Azucenas #8, Fracc. Jardines del Sur', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label>Ciudad / Municipio <small class="txt-muted">(SSOT / SEO Schema.org)</small></label>
-                            <input type="text" name="_cfg_ciudad"
-                                   value="<?= htmlspecialchars(!empty($config['ciudad']) ? $config['ciudad'] : 'Huajuapan de León', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label>Estado <small class="txt-muted">(SSOT / SEO Schema.org)</small></label>
-                            <input type="text" name="_cfg_estado"
-                                   value="<?= htmlspecialchars(!empty($config['estado']) ? $config['estado'] : 'Oaxaca', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label>Código Postal <small class="txt-muted">(SSOT / SEO Schema.org)</small></label>
-                            <input type="text" name="_cfg_cp"
-                                   value="<?= htmlspecialchars(!empty($config['cp']) ? $config['cp'] : '69000', ENT_QUOTES, 'UTF-8') ?>"
-                                   maxlength="10">
-                        </div>
-                    </div>
-                    <small class="cms-help-text mb-3" style="display:block; margin-top:-6px; color:#0284c7; font-weight:600;">⚡ La dirección física completa para el pie de página, mapas y SEO de Google se compone automáticamente desde estos 4 campos.</small>
-                    <div class="field-row">
-                        <div class="field-group">
-                            <label>Teléfono Directo</label>
-                            <input type="tel" name="_cfg_telefono"
-                                   value="<?= htmlspecialchars($config['telefono'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label>Correo Electrónico</label>
-                            <input type="email" name="_cfg_email_contacto"
-                                   value="<?= htmlspecialchars($config['email_contacto'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div><!-- /grid-2col fila 1 -->
-
-            <!-- Fila 2: Horarios de Atención (Texto Web para Visitantes) -->
-            <hr class="cms-section-sep">
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">Horarios de Atención en Sitio Web (Texto Público)</div>
-                </div>
-                <div class="editor-card-body">
-                    <small class="cms-help-text mb-3" style="display:block; color:#0284c7; font-weight:600;">👁️ Textos de horario que ven los clientes en la sección Ubicación de la página pública.</small>
-                    <div class="field-row">
-                        <div class="field-group">
-                            <label>Horario Lunes – Sábado <small class="txt-muted">(Texto Web)</small></label>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1399-1699)</summary>
-
-**Path:** `Unknown file`
-
-```
-                            <label>Horario Lunes – Sábado <small class="txt-muted">(Texto Web)</small></label>
-                            <input type="text" name="_cfg_horario_semana"
-                                   value="<?= htmlspecialchars($config['horario_semana'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
-                                   placeholder="7:00 a.m. – 9:00 p.m.">
-                        </div>
-                        <div class="field-group">
-                            <label>Horario Domingo <small class="txt-muted">(Texto Web)</small></label>
-                            <input type="text" name="_cfg_horario_domingo"
-                                   value="<?= htmlspecialchars($config['horario_domingo'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
-                                   placeholder="7:00 a.m. – 3:00 p.m.">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Fila 3: Mapa Interactivo (izq) + Croquis de Ubicación (der) -->
-            <hr class="cms-section-sep">
-            <div class="grid-2col mb-4">
-            <!-- Mapa Interactivo de Google Maps -->
-            <div class="editor-card">
-                <div class="editor-card-header">
-                    <div class="card-title">Mapa Interactivo de Google Maps</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>URL Directa a Google Maps <small class="txt-muted">(enlace externo / noscript)</small></label>
-                        <textarea name="_cfg_maps_url" rows="3" placeholder="https://www.google.com/maps/place/Laboratorio+de+Especialidades+Hematol%C3%B3gicas+S.C./..."><?= htmlspecialchars($config['maps_url'] ?? '', ENT_QUOTES, 'UTF-8') ?></textarea>
-                        <small class="cms-help-text">Enlace directo completo para abrir la ubicación en Google Maps (pestaña externa o app móvil).</small>
-                    </div>
-                    <div class="field-group">
-                        <label>Embed del Mapa Interactivo <small class="txt-muted">(al pulsar el botón "Mapa Interactivo")</small></label>
-                        <textarea name="info__maps_embed" rows="4"><?= cms($contenidos, 'ubicacion', 'info', 'maps_embed', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3773.7375!2d-97.7779575!3d17.8028691!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85c60141d7aa4483%3A0x730f884bc7308bee!2sLaboratorio%20de%20Especialidades%20Hematol%C3%B3gicas%20S.C.!5e0!3m2!1ses!2smx!4v1724000000000!5m2!1ses!2smx') ?></textarea>
-                        <small class="cms-help-text">Esta dirección alimenta el mapa dinámico que aparece en la sección Ubicación al hacer clic en el botón <strong>"Mapa Interactivo"</strong>. Pega el atributo <code>src</code> del <code>&lt;iframe&gt;</code> generado en Google Maps (Compartir → Insertar un mapa).</small>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Croquis de Ubicación (Imagen) -->
-            <div class="editor-card">
-                <div class="editor-card-header">
-                    <div class="card-title">Croquis de Ubicación (Imagen)</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Imagen del Croquis</label>
-                        <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px;">
-                            📐 <strong>Codec:</strong> WebP únicamente &nbsp;·&nbsp;
-                            <strong>Quality:</strong> 85 &nbsp;·&nbsp;
-                            <strong>Effort:</strong> 6 &nbsp;·&nbsp;
-                            <strong>Dimensiones:</strong> 756 px (máx) × 577 px (máx) &nbsp;·&nbsp;
-                            <strong>Alto:</strong> proporcional (auto) &nbsp;·&nbsp;
-                            <strong>Orientación Horizontal</strong> &nbsp;·&nbsp;
-                            <strong>Peso:</strong> Máximo 150 KB, Óptimo 60 KB
-                        </p>
-                        <?php $croquisImgUrl = cms($contenidos, 'ubicacion', 'croquis', 'imagen_url'); ?>
-                        <div class="image-upload-box">
-                            <img id="prev-croquis"
-                                 src="<?= h($croquisImgUrl) ?>"
-                                 alt="Croquis" class="img-preview-croquis"
-                                 onerror="this.hidden=true">
-
-                            <label for="file-croquis" class="btn btn-secondary">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                                Cambiar Imagen
-                            </label>
-
-                            <input type="file" accept="image/webp"
-                                   id="file-croquis" class="d-none"
-                                   data-upload-slot="ubicacion-croquis"
-                                   data-preview-id="prev-croquis"
-                                   data-target-input="url-img-croquis">
-                        </div>
-                        <input type="url" id="url-img-croquis"
-                               name="croquis__imagen_url"
-                               value="<?= h($croquisImgUrl) ?>"
-                               placeholder="/laesh-web-assets-uipv1a/cms/ubicacion-croquis-....webp"
-                               class="cms-img-url-input" data-no-limit>
-                        <?php $croquisBasename = basename($croquisImgUrl); ?>
-                        <span id="lbl-img-croquis" class="cms-img-filename-label"><?= h($croquisBasename) ?></span>
-                        <div class="field-group mt-3" style="background:#f0f9ff; border:1.5px solid #0ea5e9; border-radius:6px; padding:10px 12px; margin-top:12px;">
-                            <label style="font-size:0.8rem; font-weight:700; color:#0f172a; margin-bottom:6px; display:block;">📍 Coordenadas GPS (SSOT → Google Maps / Schema.org JSON-LD)</label>
-                            <div style="display:flex; gap:10px;">
-                                <div style="flex:1;">
-                                    <label style="font-size:0.75rem; color:#0369a1; margin-bottom:2px; display:block;">Latitud</label>
-                                    <input type="text" name="_cfg_geo_lat"
-                                           value="<?= htmlspecialchars(!empty($config['geo_lat']) ? $config['geo_lat'] : '17.8028691', ENT_QUOTES, 'UTF-8') ?>"
-                                           placeholder="17.8028691"
-                                           style="font-size:0.85rem; background:#ffffff; color:#0f172a; font-weight:600; width:100%;">
-                                </div>
-                                <div style="flex:1;">
-                                    <label style="font-size:0.75rem; color:#0369a1; margin-bottom:2px; display:block;">Longitud</label>
-                                    <input type="text" name="_cfg_geo_lng"
-                                           value="<?= htmlspecialchars(!empty($config['geo_lng']) ? $config['geo_lng'] : '-97.7779575', ENT_QUOTES, 'UTF-8') ?>"
-                                           placeholder="-97.7779575"
-                                           style="font-size:0.85rem; background:#ffffff; color:#0f172a; font-weight:600; width:100%;">
-                                </div>
-                            </div>
-                            <small class="cms-help-text" style="margin-top:6px; display:block;">Obtén las coordenadas exactas en <strong>Google Maps → clic derecho sobre el punto → copiar lat,lng</strong>. Se usan en Schema.org GeoCoordinates e iframe de Google Maps.</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div><!-- /grid-2col mapa+croquis -->
-
-            <!-- Fila 4: Atención, Redes Sociales y Chat (Última Ficha) -->
-            <hr class="cms-section-sep">
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">Atención, Redes Sociales y Chat vía WhatsApp / Facebook</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-row">
-                        <div class="field-group">
-                            <label>URL Directa de WhatsApp <small class="txt-muted">(https://wa.me/52XXXXXXXXXX)</small></label>
-                            <input type="url" name="_cfg_whatsapp_url"
-                                   value="<?= htmlspecialchars($config['whatsapp_url'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
-                                   placeholder="https://wa.me/529531190074">
-                            <small class="cms-help-text">URL del chat en WhatsApp. Se utiliza en el botón flotante (pantalla inferior derecha) y en el contacto de Ubicación.</small>
-                        </div>
-                        <div class="field-group">
-                            <label>Número WhatsApp para Mostrar <small class="txt-muted">(ej. 953 119 0074)</small></label>
-                            <input type="text" name="_cfg_whatsapp_numero"
-                                   value="<?= htmlspecialchars($config['whatsapp_numero'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                            <small class="cms-help-text">Número de teléfono en formato legible con espacios para mostrar en la tarjeta de contacto.</small>
-                        </div>
-                    </div>
-                    <div class="field-row">
-                        <div class="field-group">
-                            <label>Mensaje para Consulta General <small class="txt-muted">(botón flotante y contacto)</small></label>
-                            <input type="text" name="_cfg_wa_texto_info"
-                                   value="<?= htmlspecialchars($config['wa_texto_info'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                            <small class="cms-help-text">Texto pre-escrito al abrir WhatsApp desde el botón flotante o la sección Ubicación. Ej: «Hola LAESH, necesito información».</small>
-                        </div>
-                        <div class="field-group">
-                            <label>Página de Facebook <small class="txt-muted">(URL completa)</small></label>
-                            <input type="url" name="_cfg_facebook_url"
-                                   value="<?= htmlspecialchars($config['facebook_url'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
-                                   placeholder="https://www.facebook.com/profile.php?id=100072263716098">
-                            <small class="cms-help-text">Se utiliza en el botón flotante (pantalla inferior derecha).</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ================================================================
-             PANEL 7: PIE DE PÁGINA
-             Sección: footer | Fuente HTML: #footer
-             SSOT: contacto, horarios, dirección y responsable se leen desde configuraciones.
-               Solo son editables aquí: logo alt, nombre lab y textos legales.
-             ================================================================ -->
-        <div id="panel-footer" class="cms-panel" role="tabpanel" aria-labelledby="tab-footer" tabindex="0" data-section="footer">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">Pie de Página — Contenido e Identidad (#footer)</h3>
-            </div>
-
-            <hr class="cms-section-sep">
-            <!-- Estilo y Color de Fondo -->
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">Estilo y Color de Fondo del Pie de Página</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Color de Fondo de la Franja <code>&lt;footer&gt;</code></label>
-                        <?php $footerBg = cms($contenidos, 'footer', 'estilo', 'bg_color', '#0f172a'); ?>
-                        <div class="d-flex align-items-center gap-3">
-                            <input type="color" id="footer-bg-picker" value="<?= h($footerBg) ?>"
-                                   class="cms-color-picker" style="width:48px; height:38px; padding:2px; cursor:pointer; border-radius:4px; border:1px solid #cbd5e1;"
-                                   onchange="var inp=document.getElementById('footer-bg-input'); inp.value=this.value; inp.dispatchEvent(new Event('input', {bubbles:true})); inp.dispatchEvent(new Event('change', {bubbles:true}));">
-                            <input type="text" id="footer-bg-input" name="estilo__bg_color" value="<?= h($footerBg) ?>"
-                                   class="cms-color-text-input" style="width:130px;"
-                                   oninput="document.getElementById('footer-bg-picker').value = this.value;">
-                            <span class="txt-muted small">Haz clic en el cuadro o elige un color institucional:</span>
-                        </div>
-                        <div class="d-flex gap-2 mt-2">
-                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="var c='#0f172a'; document.getElementById('footer-bg-picker').value=c; var inp=document.getElementById('footer-bg-input'); inp.value=c; inp.dispatchEvent(new Event('input', {bubbles:true})); inp.dispatchEvent(new Event('change', {bubbles:true}));">
-                                <span style="display:inline-block; width:12px; height:12px; background:#0f172a; border-radius:50%; margin-right:4px;"></span> Oscuro
-                            </button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="var c='#0052b7'; document.getElementById('footer-bg-picker').value=c; var inp=document.getElementById('footer-bg-input'); inp.value=c; inp.dispatchEvent(new Event('input', {bubbles:true})); inp.dispatchEvent(new Event('change', {bubbles:true}));">
-                                <span style="display:inline-block; width:12px; height:12px; background:#0052b7; border-radius:50%; margin-right:4px;"></span> Azul LAESH
-                            </button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="var c='#003882'; document.getElementById('footer-bg-picker').value=c; var inp=document.getElementById('footer-bg-input'); inp.value=c; inp.dispatchEvent(new Event('input', {bubbles:true})); inp.dispatchEvent(new Event('change', {bubbles:true}));">
-                                <span style="display:inline-block; width:12px; height:12px; background:#003882; border-radius:50%; margin-right:4px;"></span> Azul Marino
-                            </button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="var c='#1e293b'; document.getElementById('footer-bg-picker').value=c; var inp=document.getElementById('footer-bg-input'); inp.value=c; inp.dispatchEvent(new Event('input', {bubbles:true})); inp.dispatchEvent(new Event('change', {bubbles:true}));">
-                                <span style="display:inline-block; width:12px; height:12px; background:#1e293b; border-radius:50%; margin-right:4px;"></span> Slate Oscuro
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Contenido del Pie de Página (RTE — Solo Estilos Visuales / Integración SSOT) -->
-            <div class="editor-card mb-4">
-                <div class="editor-card-header d-flex justify-content-between align-items-center">
-                    <div class="card-title">Estilos de Texto del Pie de Página <small class="txt-muted">(Formato RTE — Teclado Bloqueado)</small></div>
-                    <span class="badge bg-success" style="font-size:0.75rem;">100% SSOT Vinculado</span>
-                </div>
-                <div class="editor-card-body">
-                    <p class="cms-p mb-2">
-                        El contenido del Pie de Página proviene dinámicamente de la <strong>Pestaña 6 (Ubicación y Contacto)</strong>.
-                        Usa el editor a continuación para aplicar <strong>estilos visuales</strong> (colores de fuente, negritas, alineación y resaltados) sobre la maqueta base.
-                    </p>
-                    <div class="cms-info-box" style="background:#fffbeb;border:1.5px solid #ca8a04;border-radius:8px;padding:0.65rem 1rem;margin-bottom:0.75rem;font-size:0.83rem;color:#92400e;display:flex;align-items:center;gap:0.5rem;">
-                        🔒 <strong>Modo Solo-Estilos:</strong> El texto directo no se teclea aquí. Selecciona el texto para aplicar color, tamaño o negritas. Para modificar números o dirección, edita la <a href="javascript:void(0)" onclick="var t=document.querySelector('[data-panel=\'panel-contacto\']'); if(t) t.click();" style="color:#b45309; font-weight:bold; text-decoration:underline;">Pestaña 6 (Ubicación)</a>.
-                    </div>
-
-                    <div class="field-group">
-                        <label class="fw-bold mb-1" style="font-size:0.85rem;">Editor RTE de Formato Visual del Footer:</label>
-                        <div id="ck-footer" class="ck5-mount ck5-mount-lg"></div>
-                        <?php
-                        $defaultFooterHtml = '<div class="footer-info">'
-                            . '<img src="/laesh-web-assets-uipv1a/img/logo-laesh.webp" alt="LAESH" class="footer-logo-img" style="max-height: 40px; width: auto;" decoding="async" loading="lazy">'
-                            . '<p class="footer-text">'
-                                . '<strong>Laboratorio de Especialidades Hematológicas S.C.</strong> &nbsp;|&nbsp; '
-                                . 'Azucenas #8, Fracc. Jardines del Sur, Huajuapan de León, Oaxaca'
-                            . '</p>'
-                        . '</div>';
-                        ?>
-                        <textarea id="ck-footer-data" name="contenido__cuerpo_html" class="ck5-hidden-data"><?= htmlspecialchars(cmsRaw($contenidos, 'footer', 'contenido', 'cuerpo_html', $defaultFooterHtml)) ?></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- ================================================================
-             PANEL 8: SEO Y METADATOS
-             Sección: seo | Fuente HTML: head del index.html
-             ================================================================ -->
-        <div id="panel-seo" class="cms-panel" role="tabpanel" aria-labelledby="tab-seo" tabindex="0" data-section="seo">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">Metadatos de SEO, Open Graph y Schema.org</h3>
-            </div>
-
-            <!-- Fila 1: Meta Tags + Open Graph -->
-            <hr class="cms-section-sep">
-            <div class="grid-2col mb-4">
-            <!-- Meta Tags -->
-            <div class="editor-card">
-                <div class="editor-card-header">
-                    <div class="card-title">Meta Tags del Sitio</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Meta Title <small class="txt-muted">(máx. 60 caracteres recomendado)</small></label>
-                        <input type="text" name="meta__title" maxlength="135"
-                               value="<?= cms($contenidos, 'seo', 'meta', 'title') ?>">
-                        <small class="cms-help-text">Aparece en la pestaña del navegador y en el título del resultado de búsqueda.</small>
-                    </div>
-                    <div class="field-group">
-                        <label>Meta Description <small class="txt-muted">(máx. 160 caracteres recomendado)</small></label>
-                        <textarea name="meta__description" maxlength="315" rows="3"><?= cms($contenidos, 'seo', 'meta', 'description') ?></textarea>
-                        <small class="cms-help-text">Aparece como descripción en los resultados de búsqueda.</small>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Open Graph -->
-            <div class="editor-card">
-                <div class="editor-card-header">
-                    <div class="card-title">Open Graph (Redes Sociales)</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>OG Title</label>
-                        <input type="text" name="og__og_title"
-                               value="<?= cms($contenidos, 'seo', 'og', 'og_title') ?>">
-                    </div>
-                    <div class="field-group">
-                        <label>OG Description</label>
-                        <textarea name="og__og_description" rows="3"><?= cms($contenidos, 'seo', 'og', 'og_description') ?></textarea>
-                    </div>
-                    <div class="field-group">
-                        <label>OG Site Name <small class="txt-muted">(nombre del sitio en previews sociales)</small></label>
-                        <input type="text" name="og__site_name" maxlength="80"
-                               value="<?= cms($contenidos, 'seo', 'og', 'site_name') ?>"
-                               placeholder="LAESH — Laboratorio de Especialidades Hematológicas S.C.">
-                        <small class="cms-help-text">Aparece como nombre del sitio en tarjetas de Facebook, LinkedIn y Slack. Máx. 80 caracteres.</small>
-                    </div>
-                    <div class="field-group">
-                        <label>Imagen Open Graph <small class="txt-muted">(Redes Sociales / WhatsApp / Facebook)</small></label>
-                        <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px; font-size: 0.78rem;">
-                            📐 <strong>Codec:</strong> WebP únicamente &nbsp;·&nbsp;
-                            <strong>Dimensiones:</strong> 1 200 × 630 px recomendado (ratio 1.91:1) &nbsp;·&nbsp;
-                            <strong>Orientación Horizontal</strong> &nbsp;·&nbsp;
-                            <strong>Peso:</strong> Máximo 150 KB, Óptimo 60 KB
-                        </p>
-                        <?php $ogImgUrl = cms($contenidos, 'seo', 'og', 'og_image'); ?>
-                        <div class="image-upload-box">
-                            <img id="prev-seo-og"
-                                 src="<?= h($ogImgUrl) ?>"
-                                 alt="Preview Open Graph" class="img-preview-sm"
-                                 onerror="this.hidden=true">
-                            <label for="file-seo-og" class="btn btn-secondary btn-sm">
-                                Cambiar Imagen
-                            </label>
-                            <input type="file" accept="image/webp"
-                                   id="file-seo-og" class="d-none"
-                                   data-upload-slot="seo-og"
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1699-1949)</summary>
-
-**Path:** `Unknown file`
-
-```
-                                   data-upload-slot="seo-og"
-                                   data-preview-id="prev-seo-og"
-                                   data-target-input="url-seo-og">
-                        </div>
-                        <input type="url" id="url-seo-og"
-                               name="og__og_image"
-                               value="<?= h($ogImgUrl) ?>"
-                               placeholder="/laesh-web-assets-uipv1a/cms/seo-og-....webp"
-                               class="cms-img-url-input" data-no-limit>
-                        <?php $ogBasename = basename($ogImgUrl); ?>
-                        <span id="lbl-img-seo-og" class="cms-img-filename-label"><?= h($ogBasename) ?></span>
-                    </div>
-                </div>
-            </div>
-            </div><!-- /grid-2col fila 1 -->
-
-            <!-- Fila 2: Schema.org Configuración + Schema.org SSOT -->
-            <hr class="cms-section-sep">
-            <div class="grid-2col mb-4">
-            <!-- Schema.org Editor -->
-            <div class="editor-card">
-                <div class="editor-card-header">
-                    <div class="card-title">Datos Estructurados Schema.org (JSON-LD)</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Nombre del Negocio</label>
-                        <input type="text" name="schema__schema_name"
-                               value="<?= cms($contenidos, 'seo', 'schema', 'schema_name') ?>">
-                    </div>
-                    <div class="field-group">
-                        <label>Tipo de Negocio <small class="txt-muted">(schema.org/@type)</small></label>
-                        <input type="text" name="schema__schema_type"
-                               value="<?= cms($contenidos, 'seo', 'schema', 'schema_type') ?>">
-                        <small class="cms-help-text">Valores comunes: MedicalLaboratory, MedicalOrganization, LocalBusiness.</small>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Schema.org SSOT + Horarios 24h JSON-LD -->
-            <div class="editor-card">
-                <div class="editor-card-header">
-                    <div class="card-title">Dirección y Horarios Schema.org (Google JSON-LD)</div>
-                </div>
-                <div class="editor-card-body">
-                    <p class="cms-p">🤖 <strong>Horarios estructurados en 24h (HH:MM)</strong> para Google Search y Maps (Schema.org JSON-LD). La dirección física se lee automáticamente desde la <strong>Pestaña 6 (Ubicación y Contacto)</strong>.</p>
-                    <div class="field-row mb-3">
-                        <div class="field-group">
-                            <label class="txt-muted">Calle / Colonia SSOT (Pestaña 6)</label>
-                            <input type="text" disabled value="<?= htmlspecialchars(!empty($config['direccion_calle']) ? $config['direccion_calle'] : 'Azucenas #8, Fracc. Jardines del Sur', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label class="txt-muted">Ciudad SSOT (Pestaña 6)</label>
-                            <input type="text" disabled value="<?= htmlspecialchars(!empty($config['ciudad']) ? $config['ciudad'] : 'Huajuapan de León', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label class="txt-muted">Estado SSOT (Pestaña 6)</label>
-                            <input type="text" disabled value="<?= htmlspecialchars(!empty($config['estado']) ? $config['estado'] : 'Oaxaca', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label class="txt-muted">CP SSOT (Pestaña 6)</label>
-                            <input type="text" disabled value="<?= htmlspecialchars(!empty($config['cp']) ? $config['cp'] : '69000', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                    </div>
-                    <div class="field-row">
-                        <div class="field-group">
-                            <label>Apertura Lun–Sáb <small class="txt-muted">(HH:MM 24h)</small></label>
-                            <input type="text" name="_cfg_hrs_open"
-                                   value="<?= htmlspecialchars($config['hrs_open'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
-                                   maxlength="5" placeholder="07:00">
-                        </div>
-                        <div class="field-group">
-                            <label>Cierre Lun–Sáb <small class="txt-muted">(HH:MM 24h)</small></label>
-                            <input type="text" name="_cfg_hrs_close"
-                                   value="<?= htmlspecialchars($config['hrs_close'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
-                                   maxlength="5" placeholder="21:00">
-                        </div>
-                        <div class="field-group">
-                            <label>Apertura Dom <small class="txt-muted">(HH:MM 24h)</small></label>
-                            <input type="text" name="_cfg_dom_open"
-                                   value="<?= htmlspecialchars($config['dom_open'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
-                                   maxlength="5" placeholder="07:00">
-                        </div>
-                        <div class="field-group">
-                            <label>Cierre Dom <small class="txt-muted">(HH:MM 24h)</small></label>
-                            <input type="text" name="_cfg_dom_close"
-                                   value="<?= htmlspecialchars($config['dom_close'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
-                                   maxlength="5" placeholder="15:00">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div><!-- /grid-2col fila 2 -->
-        </div>
-
-        <!-- ================================================================
-             PANEL 8: AVISO DE PRIVACIDAD
-             Sección: aviso-privacidad | Fuente HTML: modal / página #privacidad
-             ================================================================ -->
-        <div id="panel-aviso-privacidad" class="cms-panel" role="tabpanel" aria-labelledby="tab-aviso-privacidad" tabindex="0" data-section="aviso-privacidad">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">Aviso de Privacidad — Contenido Legal (#privacidad)</h3>
-            </div>
-
-            <hr class="cms-section-sep">
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">Documento Integral del Aviso de Privacidad (Editor RTE)</div>
-                </div>
-                <div class="editor-card-body">
-                    <p class="cms-p">
-                        Edita directamente el contenido completo del Aviso de Privacidad con formato enriquecido (encabezados, listas, negritas y párrafos). Los cambios se actualizarán automáticamente en la ventana modal de la página pública.
-                    </p>
-                    <div class="field-group">
-                        <div id="ck-aviso-privacidad" class="ck5-mount ck5-mount-lg"></div>
-                        <textarea id="ck-aviso-privacidad-data" name="contenido__cuerpo_html" class="ck5-hidden-data"><?= htmlspecialchars(cmsRaw($contenidos, 'aviso-privacidad', 'contenido', 'cuerpo_html')) ?></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ================================================================
-             PANEL 9: VIDEO PROMO
-             Sección: video-promo | RTE Completo con Enlaces y Medios (YouTube, Vimeo, etc.)
-             ================================================================ -->
-        <div id="panel-video-promo" class="cms-panel" role="tabpanel" aria-labelledby="tab-video-promo" tabindex="0" data-section="video-promo">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">9. Video Promo — Enlaces e Incrustación de Video (#video-promo)</h3>
-            </div>
-
-            <hr class="cms-section-sep">
-            <?php
-            $videoActive = ($config['video_active'] ?? '1') !== '0';
-            ?>
-            <div class="editor-card mb-4">
-                <div class="editor-card-header" style="display:flex; justify-content:space-between; align-items:center;">
-                    <div class="card-title">Contenido del Video Promocional (Editor RTE Completo)</div>
-                    <div style="display:flex; align-items:center; gap:0.5rem;">
-                        <label for="chk-video-active" style="display:inline-flex; align-items:center; gap:0.45rem; cursor:pointer; margin:0; font-size:0.85rem; font-weight:700;">
-                            <input type="hidden" name="_cfg_video_active" value="0">
-                            <input type="checkbox" id="chk-video-active" name="_cfg_video_active" value="1" <?= $videoActive ? 'checked' : '' ?>
-                                   style="width:1.15rem; height:1.15rem; accent-color:#16a34a; cursor:pointer;"
-                                   onchange="var badge=this.nextElementSibling; if(this.checked){ badge.style.color='#16a34a'; badge.textContent='Encendido'; } else { badge.style.color='#dc2626'; badge.textContent='Apagado'; }">
-                            <span class="operator-badge" style="color: <?= $videoActive ? '#16a34a' : '#dc2626' ?>; transition: color 0.2s ease;">
-                                <?= $videoActive ? 'Encendido' : 'Apagado' ?>
-                            </span>
-                        </label>
-                    </div>
-                </div>
-                <div class="editor-card-body">
-                    <p class="cms-p">
-                        Utiliza este editor con capacidades completas para insertar enlaces web e incrustar reproductores de video (YouTube, Spotify, Vimeo, etc.) para la promoción institucional.
-                    </p>
-                    <div class="field-group">
-                        <div id="ck-video-promo" class="ck5-mount ck5-mount-lg"></div>
-                        <textarea id="ck-video-promo-data" name="contenido__cuerpo_html" class="ck5-hidden-data"><?= htmlspecialchars(cmsRaw($contenidos, 'video-promo', 'contenido', 'cuerpo_html')) ?></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ================================================================
-             PANEL 10: CONFIGURACIÓN GENERAL — Orden de Secciones
-             Sección: configuracion-general | Campo: _cfg_seccion_order
-             Persiste en tabla configuraciones (clave='seccion_order') vía prefijo _cfg_
-             ================================================================ -->
-        <div id="panel-configuracion-general" class="cms-panel" role="tabpanel" aria-labelledby="tab-configuracion-general" tabindex="0" data-section="configuracion-general">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">Orden de Secciones — Página de Inicio</h3>
-            </div>
-
-            <hr class="cms-section-sep">
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">Orden Vertical de Secciones (#inicio)</div>
-                </div>
-                <div class="editor-card-body">
-                    <!-- Hidden input que serializa el orden para el POST /cms/save -->
-                    <input type="hidden"
-                           id="seccion-order-input"
-                           name="_cfg_seccion_order"
-                           value="<?= h($config['seccion_order'] ?? '') ?>">
-
-                    <?php
-                    // Reconstruir orden desde BD, o usar el default si no hay valor
-                    $_secDefault = ['inicio','acerca-de','especialidades','promociones','calidad','ubicacion','video'];
-                    $_secLabels  = [
-                        'inicio'        => ['icon'=>'🖼️', 'label'=>'Inicio (Banner Principal y Slider)', 'anchor'=>'#inicio',    'locked'=>false],
-                        'acerca-de'     => ['icon'=>'👥', 'label'=>'Quiénes somos',                       'anchor'=>'#acerca-de', 'locked'=>false],
-                        'especialidades'=> ['icon'=>'🔬', 'label'=>'Estudios de Rutina',                    'anchor'=>'#especialidades','locked'=>false],
-                        'promociones'   => ['icon'=>'🏷️', 'label'=>'Promociones Vigentes',                  'anchor'=>'#promociones','locked'=>false],
-                        'calidad'       => ['icon'=>'🖼️', 'label'=>'Calidad e Instalaciones',               'anchor'=>'#calidad',    'locked'=>false],
-                        'ubicacion'     => ['icon'=>'📍', 'label'=>'Ubicación y Contacto',                  'anchor'=>'#ubicacion',  'locked'=>false],
-                        'video'         => ['icon'=>'🎬', 'label'=>'Video promo',                           'anchor'=>'#video',      'locked'=>false],
-                    ];
-                    $_rawOrder  = $config['seccion_order'] ?? '';
-                    if ($_rawOrder !== '') {
-                        $_parsed  = array_unique(array_filter(
-                            array_map('trim', explode(',', $_rawOrder)),
-                            fn($s) => in_array($s, $_secDefault, true)
-                        ));
-                        $_missing = array_diff($_secDefault, $_parsed);
-                        $_ordered = array_values(array_merge($_parsed, $_missing));
-                    } else {
-                        $_ordered = $_secDefault;
-                    }
-                    unset($_secDefault, $_rawOrder, $_parsed, $_missing);
-                    ?>
-
-                    <p class="cms-help-text mb-3">Arrastra las secciones para cambiar su orden vertical. Puedes mover la sección <strong>Video promo</strong> arriba o abajo de <strong>Inicio</strong>. El cambio se aplica al publicar o en la Vista Previa.</p>
-
-                    <ul id="seccion-order-list"
-                        style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.6rem">
-                        <?php foreach ($_ordered as $_sid):
-                            $meta = $_secLabels[$_sid] ?? ['icon'=>'•','label'=>$_sid,'anchor'=>'','locked'=>false];
-                            $isLocked = !empty($meta['locked']);
-                        ?>
-                        <li data-seccion-id="<?= h($_sid) ?>"
-                            draggable="<?= $isLocked ? 'false' : 'true' ?>"
-                            style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1rem;border-radius:8px;border:1.5px solid <?= $isLocked ? 'var(--primary-green-light,#e2e8f0)' : 'var(--border-color,#d1d5db)' ?>;background:<?= $isLocked ? '#f8fafc' : 'var(--card-bg,#fff)' ?>;cursor:<?= $isLocked ? 'not-allowed' : 'grab' ?>;user-select:none;transition:box-shadow .15s,border-color .15s">
-                            <!-- Grip icon or Lock icon -->
-                            <?php if ($isLocked): ?>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary-green-dark,#059669)" stroke-width="2" stroke-linecap="round" style="flex-shrink:0">
-                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                            </svg>
-                            <?php else: ?>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--txt-muted,#9ca3af)" stroke-width="2" stroke-linecap="round" style="flex-shrink:0">
-                                <circle cx="9" cy="5" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="19" r="1"/>
-                                <circle cx="15" cy="5" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="19" r="1"/>
-                            </svg>
-                            <?php endif; ?>
-                            <span style="font-size:1.15rem;line-height:1;flex-shrink:0"><?= $meta['icon'] ?></span>
-                            <span style="flex:1;font-weight:600;color:var(--txt-main,#111)"><?= h($meta['label']) ?> <?= $isLocked ? '<small class="txt-muted" style="font-weight:400;">(Fija en cabecera)</small>' : '' ?></span>
-                            <code style="font-size:0.78rem;color:var(--txt-muted,#6b7280);background:var(--bg-subtle,#f3f4f6);padding:2px 6px;border-radius:4px"><?= h($_sid) ?></code>
-                            <a href="/laesh/?_preview=1<?= h($meta['anchor']) ?>"
-                               target="_blank" rel="noopener noreferrer"
-                               title="Vista previa de esta sección"
-                               style="flex-shrink:0;color:var(--primary,#0052B7);text-decoration:none;font-size:0.8rem;"
-                               onclick="event.stopPropagation()">↗</a>
-                        </li>
-                        <?php endforeach; unset($_ordered, $_secLabels, $_sid, $meta, $isLocked); ?>
-                    </ul>
-
-                    <p class="cms-help-text mt-3">
-                        Orden actual guardado:
-                        <code id="seccion-order-display"><?= h($config['seccion_order'] ?? '(predeterminado)') ?></code>
-                    </p>
-                </div>
-            </div>
-
-            <style>
-```
-
-</details>
-
----
-
-<details>
-<summary>Conversation History</summary>
-
-# Conversation History
-Here are the conversation IDs, titles, and summaries of your most recent 2 conversations, in reverse chronological order:
-
-<conversation_summaries>
-## Conversation 31156cde-8540-4bb7-b98d-aae9a424fc4e: Host C DB Connectivity Check
-- Created: 2026-08-04T17:40:08Z
-- Last modified: 2026-09-11T14:00:20Z
-
-## Conversation 96544882-d905-4769-b8c2-f15f337e791e: Fixing CMS Promotion Text Styles
-- Created: 2026-09-08T14:04:04Z
-- Last modified: 2026-09-09T15:21:21Z
-
-</conversation_summaries>
-
-</details>
 
 ---
 
 ### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 11 Sept 2026, 6:40 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L999-1299)</summary>
-
-**Path:** `Unknown file`
-
-```
-                                        <input type="url" id="input-img-promo-<?= $pId ?>"
-                                               name="promo_img_<?= $pId ?>"
-                                               value="<?= h($imgUrl) ?>"
-                                               placeholder="/laesh-web-assets-uipv1a/cms/promo-<?= h(strtolower(trim(strip_tags($p['dia_semana'])))) ?>.webp"
-                                               class="cms-img-url-input" data-no-limit>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
-                    </div>
-                </div>
-            </div>
-        </div><!-- /panel-promociones -->
-
-        <!-- ================================================================
-             PANEL 5: CALIDAD E INSTALACIONES
-             Sección: calidad | Fuente HTML: #calidad
-             ================================================================ -->
-        <div id="panel-calidad" class="cms-panel" role="tabpanel" aria-labelledby="tab-calidad" tabindex="0" data-section="calidad">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">Galería de Instalaciones y Certificaciones (#calidad)</h3>
-            </div>
-
-            <!-- Fila 1: Encabezado de la Sección + Tarjeta 1 -->
-            <hr class="cms-section-sep">
-            <div class="grid-2col mb-4">
-            <!-- Encabezado de sección -->
-            <div class="editor-card">
-                <div class="editor-card-header">
-                    <div class="card-title">Encabezado de la Sección</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Título Principal (h2)</label>
-                        <input type="text" name="seccion__h2"
-                               value="<?= cms($contenidos, 'calidad', 'seccion', 'h2', 'Calidad e Instalaciones') ?>">
-                    </div>
-                    <div class="field-group">
-                        <label>Subtítulo / Descripción de la Sección</label>
-                        <input type="text" name="seccion__subtitulo"
-                               value="<?= cms($contenidos, 'calidad', 'seccion', 'subtitulo', 'Conoce nuestras instalaciones equipadas con tecnología de vanguardia y un equipo comprometido con la excelencia diagnóstica.') ?>">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tarjeta 1 -->
-            <?php
-            $galImgUrl1 = cms($contenidos, 'calidad', 'gallery1', 'imagen_url');
-            $galActivo1 = cms($contenidos, 'calidad', 'gallery1', 'activo', '1');
-            $isActivo1  = ($galActivo1 !== '0');
-            $imgDef1    = ''; // sin fallback — imagen debe venir de CMS
-            ?>
-            <div class="editor-card">
-                <div class="editor-card-header" style="display:flex; justify-content:space-between; align-items:center;">
-                    <div class="card-title">Tarjeta 1 — Área de Hematología</div>
-                    <div style="display:flex; align-items:center; gap:0.5rem;">
-                        <label for="chk-calidad-gallery1-activo" style="display:inline-flex; align-items:center; gap:0.45rem; cursor:pointer; margin:0; font-size:0.85rem; font-weight:700;">
-                            <input type="hidden" name="gallery1__activo" value="0">
-                            <input type="checkbox" id="chk-calidad-gallery1-activo" name="gallery1__activo" value="1" <?= $isActivo1 ? 'checked' : '' ?>
-                                   style="width:1.15rem; height:1.15rem; accent-color:#16a34a; cursor:pointer;"
-                                   onchange="var badge=this.nextElementSibling; if(this.checked){ badge.style.color='#16a34a'; badge.textContent='Encendido'; } else { badge.style.color='#dc2626'; badge.textContent='Apagado'; }">
-                            <span class="operator-badge" style="color: <?= $isActivo1 ? '#16a34a' : '#dc2626' ?>; transition: color 0.2s ease;">
-                                <?= $isActivo1 ? 'Encendido' : 'Apagado' ?>
-                            </span>
-                        </label>
-                    </div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Imagen de Galería</label>
-                        <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px; font-size: 0.78rem;">
-                            📐 <strong>Codec:</strong> WebP únicamente &nbsp;·&nbsp;
-                            <strong>Quality:</strong> 75 &nbsp;·&nbsp;
-                            <strong>Effort:</strong> 6 &nbsp;·&nbsp;
-                            <strong>Dimensiones:</strong> 800 × 580 px (ratio ~1.38:1) &nbsp;·&nbsp;
-                            <strong>Orientación Horizontal</strong> &nbsp;·&nbsp;
-                            <strong>Peso:</strong> Máximo 150 KB, Óptimo 60 KB
-                        </p>
-                        <div class="image-upload-box">
-                            <img id="prev-calidad-gallery1"
-                                 src="<?= h($galImgUrl1) ?>"
-                                 alt="Área de Hematología" class="img-preview-sm"
-                                 onerror="this.hidden=true">
-                            <label for="file-calidad-gallery1" class="btn btn-secondary">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                                Cambiar Imagen
-                            </label>
-                            <input type="file" accept="image/webp"
-                                   id="file-calidad-gallery1" class="d-none"
-                                   data-upload-slot="calidad-gallery1"
-                                   data-preview-id="prev-calidad-gallery1"
-                                   data-target-input="url-calidad-gallery1">
-                        </div>
-                        <input type="url" id="url-calidad-gallery1"
-                               name="gallery1__imagen_url"
-                               value="<?= h($galImgUrl1) ?>"
-                               placeholder="<?= $imgDef1 ?>"
-                               class="cms-img-url-input" data-no-limit>
-                        <?php $imgBasename1 = $galImgUrl1 ? basename($galImgUrl1) : basename($imgDef1); ?>
-                        <span id="lbl-img-calidad-gallery1" class="cms-img-filename-label"><?= h($imgBasename1) ?></span>
-                    </div>
-                    <div class="field-group">
-                        <label>Título</label>
-                        <input type="text" name="gallery1__titulo"
-                               value="<?= cms($contenidos, 'calidad', 'gallery1', 'titulo', 'Área de Hematología') ?>">
-                    </div>
-                    <div class="field-group">
-                        <label>Descripción</label>
-                        <input type="text" name="gallery1__descripcion"
-                               value="<?= cms($contenidos, 'calidad', 'gallery1', 'descripcion', 'Análisis de biometría hemática y células sanguíneas con rigor científico y alta precisión.') ?>">
-                    </div>
-                </div>
-            </div>
-            </div><!-- /grid-2col fila 1 -->
-
-            <!-- Fila 2: Tarjeta 2 + Tarjeta 3 -->
-            <hr class="cms-section-sep">
-            <div class="grid-2col mb-4">
-            <!-- Tarjeta 2 -->
-            <?php
-            $galImgUrl2 = cms($contenidos, 'calidad', 'gallery2', 'imagen_url');
-            $galActivo2 = cms($contenidos, 'calidad', 'gallery2', 'activo', '1');
-            $isActivo2  = ($galActivo2 !== '0');
-            $imgDef2    = ''; // sin fallback — imagen debe venir de CMS
-            ?>
-            <div class="editor-card">
-                <div class="editor-card-header" style="display:flex; justify-content:space-between; align-items:center;">
-                    <div class="card-title">Tarjeta 2 — Química Clínica</div>
-                    <div style="display:flex; align-items:center; gap:0.5rem;">
-                        <label for="chk-calidad-gallery2-activo" style="display:inline-flex; align-items:center; gap:0.45rem; cursor:pointer; margin:0; font-size:0.85rem; font-weight:700;">
-                            <input type="hidden" name="gallery2__activo" value="0">
-                            <input type="checkbox" id="chk-calidad-gallery2-activo" name="gallery2__activo" value="1" <?= $isActivo2 ? 'checked' : '' ?>
-                                   style="width:1.15rem; height:1.15rem; accent-color:#16a34a; cursor:pointer;"
-                                   onchange="var badge=this.nextElementSibling; if(this.checked){ badge.style.color='#16a34a'; badge.textContent='Encendido'; } else { badge.style.color='#dc2626'; badge.textContent='Apagado'; }">
-                            <span class="operator-badge" style="color: <?= $isActivo2 ? '#16a34a' : '#dc2626' ?>; transition: color 0.2s ease;">
-                                <?= $isActivo2 ? 'Encendido' : 'Apagado' ?>
-                            </span>
-                        </label>
-                    </div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Imagen de Galería</label>
-                        <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px; font-size: 0.78rem;">
-                            📐 <strong>Codec:</strong> WebP únicamente &nbsp;·&nbsp;
-                            <strong>Quality:</strong> 75 &nbsp;·&nbsp;
-                            <strong>Effort:</strong> 6 &nbsp;·&nbsp;
-                            <strong>Dimensiones:</strong> 800 × 580 px (ratio ~1.38:1) &nbsp;·&nbsp;
-                            <strong>Orientación Horizontal</strong> &nbsp;·&nbsp;
-                            <strong>Peso:</strong> Máximo 150 KB, Óptimo 60 KB
-                        </p>
-                        <div class="image-upload-box">
-                            <img id="prev-calidad-gallery2"
-                                 src="<?= h($galImgUrl2) ?>"
-                                 alt="Química Clínica" class="img-preview-sm"
-                                 onerror="this.hidden=true">
-                            <label for="file-calidad-gallery2" class="btn btn-secondary">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                                Cambiar Imagen
-                            </label>
-                            <input type="file" accept="image/webp"
-                                   id="file-calidad-gallery2" class="d-none"
-                                   data-upload-slot="calidad-gallery2"
-                                   data-preview-id="prev-calidad-gallery2"
-                                   data-target-input="url-calidad-gallery2">
-                        </div>
-                        <input type="url" id="url-calidad-gallery2"
-                               name="gallery2__imagen_url"
-                               value="<?= h($galImgUrl2) ?>"
-                               placeholder="<?= $imgDef2 ?>"
-                               class="cms-img-url-input" data-no-limit>
-                        <?php $imgBasename2 = $galImgUrl2 ? basename($galImgUrl2) : basename($imgDef2); ?>
-                        <span id="lbl-img-calidad-gallery2" class="cms-img-filename-label"><?= h($imgBasename2) ?></span>
-                    </div>
-                    <div class="field-group">
-                        <label>Título</label>
-                        <input type="text" name="gallery2__titulo"
-                               value="<?= cms($contenidos, 'calidad', 'gallery2', 'titulo', 'Química Clínica') ?>">
-                    </div>
-                    <div class="field-group">
-                        <label>Descripción</label>
-                        <input type="text" name="gallery2__descripcion"
-                               value="<?= cms($contenidos, 'calidad', 'gallery2', 'descripcion', 'Determinación automatizada de metabolitos, perfil lipídico y enzimas específicas.') ?>">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tarjeta 3 -->
-            <?php
-            $galImgUrl3 = cms($contenidos, 'calidad', 'gallery3', 'imagen_url');
-            $galActivo3 = cms($contenidos, 'calidad', 'gallery3', 'activo', '1');
-            $isActivo3  = ($galActivo3 !== '0');
-            $imgDef3    = ''; // sin fallback — imagen debe venir de CMS
-            ?>
-            <div class="editor-card">
-                <div class="editor-card-header" style="display:flex; justify-content:space-between; align-items:center;">
-                    <div class="card-title">Tarjeta 3 — Microbiología y Cultivos</div>
-                    <div style="display:flex; align-items:center; gap:0.5rem;">
-                        <label for="chk-calidad-gallery3-activo" style="display:inline-flex; align-items:center; gap:0.45rem; cursor:pointer; margin:0; font-size:0.85rem; font-weight:700;">
-                            <input type="hidden" name="gallery3__activo" value="0">
-                            <input type="checkbox" id="chk-calidad-gallery3-activo" name="gallery3__activo" value="1" <?= $isActivo3 ? 'checked' : '' ?>
-                                   style="width:1.15rem; height:1.15rem; accent-color:#16a34a; cursor:pointer;"
-                                   onchange="var badge=this.nextElementSibling; if(this.checked){ badge.style.color='#16a34a'; badge.textContent='Encendido'; } else { badge.style.color='#dc2626'; badge.textContent='Apagado'; }">
-                            <span class="operator-badge" style="color: <?= $isActivo3 ? '#16a34a' : '#dc2626' ?>; transition: color 0.2s ease;">
-                                <?= $isActivo3 ? 'Encendido' : 'Apagado' ?>
-                            </span>
-                        </label>
-                    </div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Imagen de Galería</label>
-                        <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px; font-size: 0.78rem;">
-                            📐 <strong>Codec:</strong> WebP únicamente &nbsp;·&nbsp;
-                            <strong>Quality:</strong> 75 &nbsp;·&nbsp;
-                            <strong>Effort:</strong> 6 &nbsp;·&nbsp;
-                            <strong>Dimensiones:</strong> 800 × 580 px (ratio ~1.38:1) &nbsp;·&nbsp;
-                            <strong>Orientación Horizontal</strong> &nbsp;·&nbsp;
-                            <strong>Peso:</strong> Máximo 150 KB, Óptimo 60 KB
-                        </p>
-                        <div class="image-upload-box">
-                            <img id="prev-calidad-gallery3"
-                                 src="<?= h($galImgUrl3) ?>"
-                                 alt="Microbiología y Cultivos" class="img-preview-sm"
-                                 onerror="this.hidden=true">
-                            <label for="file-calidad-gallery3" class="btn btn-secondary">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                                Cambiar Imagen
-                            </label>
-                            <input type="file" accept="image/webp"
-                                   id="file-calidad-gallery3" class="d-none"
-                                   data-upload-slot="calidad-gallery3"
-                                   data-preview-id="prev-calidad-gallery3"
-                                   data-target-input="url-calidad-gallery3">
-                        </div>
-                        <input type="url" id="url-calidad-gallery3"
-                               name="gallery3__imagen_url"
-                               value="<?= h($galImgUrl3) ?>"
-                               placeholder="<?= $imgDef3 ?>"
-                               class="cms-img-url-input" data-no-limit>
-                        <?php $imgBasename3 = $galImgUrl3 ? basename($galImgUrl3) : basename($imgDef3); ?>
-                        <span id="lbl-img-calidad-gallery3" class="cms-img-filename-label"><?= h($imgBasename3) ?></span>
-                    </div>
-                    <div class="field-group">
-                        <label>Título</label>
-                        <input type="text" name="gallery3__titulo"
-                               value="<?= cms($contenidos, 'calidad', 'gallery3', 'titulo', 'Microbiología y Cultivos') ?>">
-                    </div>
-                    <div class="field-group">
-                        <label>Descripción</label>
-                        <input type="text" name="gallery3__descripcion"
-                               value="<?= cms($contenidos, 'calidad', 'gallery3', 'descripcion', 'Aislamiento, tinción de Gram y pruebas de susceptibilidad a antimicrobianos.') ?>">
-                    </div>
-                </div>
-            </div>
-            </div><!-- /grid-2col fila 2 -->
-        </div>
-
-        <!-- ================================================================
-             PANEL 6: UBICACIÓN Y CONTACTO — SSOT Master
-             Sección: ubicacion | Fuente HTML: #ubicacion
-             SSOT: este panel edita configuraciones (singletons); los datos se reutilizan
-               en Footer, Quiénes Somos (responsable) y Schema.org automáticamente.
-             Fix UI-G02: name attributes agregados aquí (no están en gestion-web.html fuente)
-             ================================================================ -->
-        <div id="panel-ubicacion" class="cms-panel" role="tabpanel" aria-labelledby="tab-ubicacion" tabindex="0" data-section="ubicacion">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">Datos de Ubicación, Contacto y Horarios (#ubicacion)</h3>
-            </div>
-
-            <!-- Fila 0: Identidad del Laboratorio (nombre, siglas, años) — SSOT footer + SEO + Schema.org -->
-            <hr class="cms-section-sep">
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">Identidad del Laboratorio</div>
-                </div>
-                <div class="editor-card-body">
-                    <p class="cms-p">🏷️ Estos valores se usan en el <strong>pie de página</strong>, en el alt del logo, en el copyright, en <strong>Schema.org</strong> (name) y como fallback del título SEO. Son la fuente única de identidad del sitio.</p>
-                    <div class="field-row">
-                        <div class="field-group" style="flex:2">
-                            <label>Nombre Completo del Laboratorio</label>
-                            <input type="text" name="_cfg_nombre_laboratorio" maxlength="120"
-                                   value="<?= htmlspecialchars($config['nombre_laboratorio'] ?? 'Laboratorio de Especialidades Hematológicas S.C.', ENT_QUOTES, 'UTF-8') ?>"
-                                   placeholder="Laboratorio de Especialidades Hematológicas S.C.">
-                            <small class="cms-help-text">Nombre legal completo — pie de página, alt del logo, Schema.org.</small>
-                        </div>
-                        <div class="field-group" style="flex:1">
-                            <label>Nombre Corto / Siglas</label>
-                            <input type="text" name="_cfg_nombre_corto" maxlength="20"
-                                   value="<?= htmlspecialchars($config['nombre_corto'] ?? 'LAESH', ENT_QUOTES, 'UTF-8') ?>"
-                                   placeholder="LAESH">
-                            <small class="cms-help-text">Sigla usada en copyright y modales.</small>
-                        </div>
-                        <div class="field-group" style="flex:0 0 120px">
-                            <label>Años de Experiencia</label>
-                            <input type="number" name="_cfg_anios_experiencia" min="1" max="99"
-                                   value="<?= htmlspecialchars($config['anios_experiencia'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
-                                   placeholder="25">
-                            <small class="cms-help-text">Sección Acerca De.</small>
-                        </div>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1300-1649)</summary>
-
-**Path:** `Unknown file`
-
-```
-                    </div>
-                </div>
-            </div>
-
-            <!-- Fila 1: Encabezado & Responsable (izq) + Dirección Física & Contacto (der) -->
-            <hr class="cms-section-sep">
-            <div class="grid-2col mb-4">
-            <!-- Encabezado de la Sección y Responsable Sanitario -->
-            <div class="editor-card">
-                <div class="editor-card-header">
-                    <div class="card-title">Encabezado y Responsable Sanitario</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Título Principal (h2)</label>
-                        <input type="text" name="seccion__h2"
-                               value="<?= cms($contenidos, 'ubicacion', 'seccion', 'h2') ?>">
-                    </div>
-                    <div class="field-group">
-                        <label>Subtítulo</label>
-                        <input type="text" name="seccion__subtitulo"
-                               value="<?= cms($contenidos, 'ubicacion', 'seccion', 'subtitulo') ?>">
-                    </div>
-                    <div class="field-group mt-3 pt-3 border-top">
-                        <label>Nombre del Responsable Sanitario</label>
-                        <input type="text" name="_cfg_responsable_nombre"
-                               value="<?= htmlspecialchars(!empty($config['responsable_nombre']) ? $config['responsable_nombre'] : 'Q.F.B. y E.H.D.L. Jacob Santiago Blanco', ENT_QUOTES, 'UTF-8') ?>">
-                    </div>
-                    <div class="field-row">
-                        <div class="field-group">
-                            <label>Cédula Profesional</label>
-                            <input type="text" name="_cfg_responsable_cedula_prof"
-                                   value="<?= htmlspecialchars(!empty($config['responsable_cedula_prof']) ? $config['responsable_cedula_prof'] : (!empty($config['responsable_cedula']) ? $config['responsable_cedula'] : '3609293'), ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label>Cédula de Especialidad</label>
-                            <input type="text" name="_cfg_responsable_cedula_esp"
-                                   value="<?= htmlspecialchars(!empty($config['responsable_cedula_esp']) ? $config['responsable_cedula_esp'] : '8935780', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Dirección Física y Contacto Directo -->
-            <div class="editor-card">
-                <div class="editor-card-header">
-                    <div class="card-title">Dirección Física y Contacto Directo</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-row">
-                        <div class="field-group">
-                            <label>Calle, Número y Colonia <small class="txt-muted">(SSOT / SEO Schema.org)</small></label>
-                            <input type="text" name="_cfg_direccion_calle"
-                                   value="<?= htmlspecialchars(!empty($config['direccion_calle']) ? $config['direccion_calle'] : 'Azucenas #8, Fracc. Jardines del Sur', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label>Ciudad / Municipio <small class="txt-muted">(SSOT / SEO Schema.org)</small></label>
-                            <input type="text" name="_cfg_ciudad"
-                                   value="<?= htmlspecialchars(!empty($config['ciudad']) ? $config['ciudad'] : 'Huajuapan de León', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label>Estado <small class="txt-muted">(SSOT / SEO Schema.org)</small></label>
-                            <input type="text" name="_cfg_estado"
-                                   value="<?= htmlspecialchars(!empty($config['estado']) ? $config['estado'] : 'Oaxaca', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label>Código Postal <small class="txt-muted">(SSOT / SEO Schema.org)</small></label>
-                            <input type="text" name="_cfg_cp"
-                                   value="<?= htmlspecialchars(!empty($config['cp']) ? $config['cp'] : '69000', ENT_QUOTES, 'UTF-8') ?>"
-                                   maxlength="10">
-                        </div>
-                    </div>
-                    <small class="cms-help-text mb-3" style="display:block; margin-top:-6px; color:#0284c7; font-weight:600;">⚡ La dirección física completa para el pie de página, mapas y SEO de Google se compone automáticamente desde estos 4 campos.</small>
-                    <div class="field-row">
-                        <div class="field-group">
-                            <label>Teléfono Directo</label>
-                            <input type="tel" name="_cfg_telefono"
-                                   value="<?= htmlspecialchars($config['telefono'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                        <div class="field-group">
-                            <label>Correo Electrónico</label>
-                            <input type="email" name="_cfg_email_contacto"
-                                   value="<?= htmlspecialchars($config['email_contacto'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div><!-- /grid-2col fila 1 -->
-
-            <!-- Fila 2: Horarios de Atención (Texto Web para Visitantes) -->
-            <hr class="cms-section-sep">
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">Horarios de Atención en Sitio Web (Texto Público)</div>
-                </div>
-                <div class="editor-card-body">
-                    <small class="cms-help-text mb-3" style="display:block; color:#0284c7; font-weight:600;">👁️ Textos de horario que ven los clientes en la sección Ubicación de la página pública.</small>
-                    <div class="field-row">
-                        <div class="field-group">
-                            <label>Horario Lunes – Sábado <small class="txt-muted">(Texto Web)</small></label>
-                            <input type="text" name="_cfg_horario_semana"
-                                   value="<?= htmlspecialchars($config['horario_semana'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
-                                   placeholder="7:00 a.m. – 9:00 p.m.">
-                        </div>
-                        <div class="field-group">
-                            <label>Horario Domingo <small class="txt-muted">(Texto Web)</small></label>
-                            <input type="text" name="_cfg_horario_domingo"
-                                   value="<?= htmlspecialchars($config['horario_domingo'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
-                                   placeholder="7:00 a.m. – 3:00 p.m.">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Fila 3: Mapa Interactivo (izq) + Croquis de Ubicación (der) -->
-            <hr class="cms-section-sep">
-            <div class="grid-2col mb-4">
-            <!-- Mapa Interactivo de Google Maps -->
-            <div class="editor-card">
-                <div class="editor-card-header">
-                    <div class="card-title">Mapa Interactivo de Google Maps</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>URL Directa a Google Maps <small class="txt-muted">(enlace externo / noscript)</small></label>
-                        <textarea name="_cfg_maps_url" rows="3" placeholder="https://www.google.com/maps/place/Laboratorio+de+Especialidades+Hematol%C3%B3gicas+S.C./..."><?= htmlspecialchars($config['maps_url'] ?? '', ENT_QUOTES, 'UTF-8') ?></textarea>
-                        <small class="cms-help-text">Enlace directo completo para abrir la ubicación en Google Maps (pestaña externa o app móvil).</small>
-                    </div>
-                    <div class="field-group">
-                        <label>Embed del Mapa Interactivo <small class="txt-muted">(al pulsar el botón "Mapa Interactivo")</small></label>
-                        <textarea name="info__maps_embed" rows="4"><?= cms($contenidos, 'ubicacion', 'info', 'maps_embed', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3773.7375!2d-97.7779575!3d17.8028691!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85c60141d7aa4483%3A0x730f884bc7308bee!2sLaboratorio%20de%20Especialidades%20Hematol%C3%B3gicas%20S.C.!5e0!3m2!1ses!2smx!4v1724000000000!5m2!1ses!2smx') ?></textarea>
-                        <small class="cms-help-text">Esta dirección alimenta el mapa dinámico que aparece en la sección Ubicación al hacer clic en el botón <strong>"Mapa Interactivo"</strong>. Pega el atributo <code>src</code> del <code>&lt;iframe&gt;</code> generado en Google Maps (Compartir → Insertar un mapa).</small>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Croquis de Ubicación (Imagen) -->
-            <div class="editor-card">
-                <div class="editor-card-header">
-                    <div class="card-title">Croquis de Ubicación (Imagen)</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Imagen del Croquis</label>
-                        <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px;">
-                            📐 <strong>Codec:</strong> WebP únicamente &nbsp;·&nbsp;
-                            <strong>Quality:</strong> 85 &nbsp;·&nbsp;
-                            <strong>Effort:</strong> 6 &nbsp;·&nbsp;
-                            <strong>Dimensiones:</strong> 756 px (máx) × 577 px (máx) &nbsp;·&nbsp;
-                            <strong>Alto:</strong> proporcional (auto) &nbsp;·&nbsp;
-                            <strong>Orientación Horizontal</strong> &nbsp;·&nbsp;
-                            <strong>Peso:</strong> Máximo 150 KB, Óptimo 60 KB
-                        </p>
-                        <?php $croquisImgUrl = cms($contenidos, 'ubicacion', 'croquis', 'imagen_url'); ?>
-                        <div class="image-upload-box">
-                            <img id="prev-croquis"
-                                 src="<?= h($croquisImgUrl) ?>"
-                                 alt="Croquis" class="img-preview-croquis"
-                                 onerror="this.hidden=true">
-
-                            <label for="file-croquis" class="btn btn-secondary">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                                Cambiar Imagen
-                            </label>
-
-                            <input type="file" accept="image/webp"
-                                   id="file-croquis" class="d-none"
-                                   data-upload-slot="ubicacion-croquis"
-                                   data-preview-id="prev-croquis"
-                                   data-target-input="url-img-croquis">
-                        </div>
-                        <input type="url" id="url-img-croquis"
-                               name="croquis__imagen_url"
-                               value="<?= h($croquisImgUrl) ?>"
-                               placeholder="/laesh-web-assets-uipv1a/cms/ubicacion-croquis-....webp"
-                               class="cms-img-url-input" data-no-limit>
-                        <?php $croquisBasename = basename($croquisImgUrl); ?>
-                        <span id="lbl-img-croquis" class="cms-img-filename-label"><?= h($croquisBasename) ?></span>
-                        <div class="field-group mt-3" style="background:#f0f9ff; border:1.5px solid #0ea5e9; border-radius:6px; padding:10px 12px; margin-top:12px;">
-                            <label style="font-size:0.8rem; font-weight:700; color:#0f172a; margin-bottom:6px; display:block;">📍 Coordenadas GPS (SSOT → Google Maps / Schema.org JSON-LD)</label>
-                            <div style="display:flex; gap:10px;">
-                                <div style="flex:1;">
-                                    <label style="font-size:0.75rem; color:#0369a1; margin-bottom:2px; display:block;">Latitud</label>
-                                    <input type="text" name="_cfg_geo_lat"
-                                           value="<?= htmlspecialchars(!empty($config['geo_lat']) ? $config['geo_lat'] : '17.8028691', ENT_QUOTES, 'UTF-8') ?>"
-                                           placeholder="17.8028691"
-                                           style="font-size:0.85rem; background:#ffffff; color:#0f172a; font-weight:600; width:100%;">
-                                </div>
-                                <div style="flex:1;">
-                                    <label style="font-size:0.75rem; color:#0369a1; margin-bottom:2px; display:block;">Longitud</label>
-                                    <input type="text" name="_cfg_geo_lng"
-                                           value="<?= htmlspecialchars(!empty($config['geo_lng']) ? $config['geo_lng'] : '-97.7779575', ENT_QUOTES, 'UTF-8') ?>"
-                                           placeholder="-97.7779575"
-                                           style="font-size:0.85rem; background:#ffffff; color:#0f172a; font-weight:600; width:100%;">
-                                </div>
-                            </div>
-                            <small class="cms-help-text" style="margin-top:6px; display:block;">Obtén las coordenadas exactas en <strong>Google Maps → clic derecho sobre el punto → copiar lat,lng</strong>. Se usan en Schema.org GeoCoordinates e iframe de Google Maps.</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div><!-- /grid-2col mapa+croquis -->
-
-            <!-- Fila 4: Atención, Redes Sociales y Chat (Última Ficha) -->
-            <hr class="cms-section-sep">
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">Atención, Redes Sociales y Chat vía WhatsApp / Facebook</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-row">
-                        <div class="field-group">
-                            <label>URL Directa de WhatsApp <small class="txt-muted">(https://wa.me/52XXXXXXXXXX)</small></label>
-                            <input type="url" name="_cfg_whatsapp_url"
-                                   value="<?= htmlspecialchars($config['whatsapp_url'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
-                                   placeholder="https://wa.me/529531190074">
-                            <small class="cms-help-text">URL del chat en WhatsApp. Se utiliza en el botón flotante (pantalla inferior derecha) y en el contacto de Ubicación.</small>
-                        </div>
-                        <div class="field-group">
-                            <label>Número WhatsApp para Mostrar <small class="txt-muted">(ej. 953 119 0074)</small></label>
-                            <input type="text" name="_cfg_whatsapp_numero"
-                                   value="<?= htmlspecialchars($config['whatsapp_numero'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                            <small class="cms-help-text">Número de teléfono en formato legible con espacios para mostrar en la tarjeta de contacto.</small>
-                        </div>
-                    </div>
-                    <div class="field-row">
-                        <div class="field-group">
-                            <label>Mensaje para Consulta General <small class="txt-muted">(botón flotante y contacto)</small></label>
-                            <input type="text" name="_cfg_wa_texto_info"
-                                   value="<?= htmlspecialchars($config['wa_texto_info'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                            <small class="cms-help-text">Texto pre-escrito al abrir WhatsApp desde el botón flotante o la sección Ubicación. Ej: «Hola LAESH, necesito información».</small>
-                        </div>
-                        <div class="field-group">
-                            <label>Página de Facebook <small class="txt-muted">(URL completa)</small></label>
-                            <input type="url" name="_cfg_facebook_url"
-                                   value="<?= htmlspecialchars($config['facebook_url'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
-                                   placeholder="https://www.facebook.com/profile.php?id=100072263716098">
-                            <small class="cms-help-text">Se utiliza en el botón flotante (pantalla inferior derecha).</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ================================================================
-             PANEL 7: PIE DE PÁGINA
-             Sección: footer | Fuente HTML: #footer
-             SSOT: contacto, horarios, dirección y responsable se leen desde configuraciones.
-               Solo son editables aquí: logo alt, nombre lab y textos legales.
-             ================================================================ -->
-        <div id="panel-footer" class="cms-panel" role="tabpanel" aria-labelledby="tab-footer" tabindex="0" data-section="footer">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">Pie de Página — Contenido e Identidad (#footer)</h3>
-            </div>
-
-            <hr class="cms-section-sep">
-            <!-- Estilo y Color de Fondo -->
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">Estilo y Color de Fondo del Pie de Página</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Color de Fondo de la Franja <code>&lt;footer&gt;</code></label>
-                        <?php $footerBg = cms($contenidos, 'footer', 'estilo', 'bg_color', '#0f172a'); ?>
-                        <div class="d-flex align-items-center gap-3">
-                            <input type="color" id="footer-bg-picker" value="<?= h($footerBg) ?>"
-                                   class="cms-color-picker" style="width:48px; height:38px; padding:2px; cursor:pointer; border-radius:4px; border:1px solid #cbd5e1;"
-                                   onchange="var inp=document.getElementById('footer-bg-input'); inp.value=this.value; inp.dispatchEvent(new Event('input', {bubbles:true})); inp.dispatchEvent(new Event('change', {bubbles:true}));">
-                            <input type="text" id="footer-bg-input" name="estilo__bg_color" value="<?= h($footerBg) ?>"
-                                   class="cms-color-text-input" style="width:130px;"
-                                   oninput="document.getElementById('footer-bg-picker').value = this.value;">
-                            <span class="txt-muted small">Haz clic en el cuadro o elige un color institucional:</span>
-                        </div>
-                        <div class="d-flex gap-2 mt-2">
-                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="var c='#0f172a'; document.getElementById('footer-bg-picker').value=c; var inp=document.getElementById('footer-bg-input'); inp.value=c; inp.dispatchEvent(new Event('input', {bubbles:true})); inp.dispatchEvent(new Event('change', {bubbles:true}));">
-                                <span style="display:inline-block; width:12px; height:12px; background:#0f172a; border-radius:50%; margin-right:4px;"></span> Oscuro
-                            </button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="var c='#0052b7'; document.getElementById('footer-bg-picker').value=c; var inp=document.getElementById('footer-bg-input'); inp.value=c; inp.dispatchEvent(new Event('input', {bubbles:true})); inp.dispatchEvent(new Event('change', {bubbles:true}));">
-                                <span style="display:inline-block; width:12px; height:12px; background:#0052b7; border-radius:50%; margin-right:4px;"></span> Azul LAESH
-                            </button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="var c='#003882'; document.getElementById('footer-bg-picker').value=c; var inp=document.getElementById('footer-bg-input'); inp.value=c; inp.dispatchEvent(new Event('input', {bubbles:true})); inp.dispatchEvent(new Event('change', {bubbles:true}));">
-                                <span style="display:inline-block; width:12px; height:12px; background:#003882; border-radius:50%; margin-right:4px;"></span> Azul Marino
-                            </button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="var c='#1e293b'; document.getElementById('footer-bg-picker').value=c; var inp=document.getElementById('footer-bg-input'); inp.value=c; inp.dispatchEvent(new Event('input', {bubbles:true})); inp.dispatchEvent(new Event('change', {bubbles:true}));">
-                                <span style="display:inline-block; width:12px; height:12px; background:#1e293b; border-radius:50%; margin-right:4px;"></span> Slate Oscuro
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Contenido del Pie de Página (RTE — Solo Estilos Visuales / Integración SSOT) -->
-            <div class="editor-card mb-4">
-                <div class="editor-card-header d-flex justify-content-between align-items-center">
-                    <div class="card-title">Estilos de Texto del Pie de Página <small class="txt-muted">(Formato RTE — Teclado Bloqueado)</small></div>
-                    <span class="badge bg-success" style="font-size:0.75rem;">100% SSOT Vinculado</span>
-                </div>
-                <div class="editor-card-body">
-                    <p class="cms-p mb-2">
-                        El contenido del Pie de Página proviene dinámicamente de la <strong>Pestaña 6 (Ubicación y Contacto)</strong>.
-                        Usa el editor a continuación para aplicar <strong>estilos visuales</strong> (colores de fuente, negritas, alineación y resaltados) sobre la maqueta base.
-                    </p>
-                    <div class="cms-info-box" style="background:#fffbeb;border:1.5px solid #ca8a04;border-radius:8px;padding:0.65rem 1rem;margin-bottom:0.75rem;font-size:0.83rem;color:#92400e;display:flex;align-items:center;gap:0.5rem;">
-                        🔒 <strong>Modo Solo-Estilos:</strong> El texto directo no se teclea aquí. Selecciona el texto para aplicar color, tamaño o negritas. Para modificar números o dirección, edita la <a href="javascript:void(0)" onclick="var t=document.querySelector('[data-panel=\'panel-contacto\']'); if(t) t.click();" style="color:#b45309; font-weight:bold; text-decoration:underline;">Pestaña 6 (Ubicación)</a>.
-                    </div>
-
-                    <div class="field-group">
-                        <label class="fw-bold mb-1" style="font-size:0.85rem;">Editor RTE de Formato Visual del Footer:</label>
-                        <div id="ck-footer" class="ck5-mount ck5-mount-lg"></div>
-                        <?php
-                        $defaultFooterHtml = '<div class="footer-info">'
-                            . '<img src="/laesh-web-assets-uipv1a/img/logo-laesh.webp" alt="LAESH" class="footer-logo-img" style="max-height: 40px; width: auto;" decoding="async" loading="lazy">'
-                            . '<p class="footer-text">'
-                                . '<strong>Laboratorio de Especialidades Hematológicas S.C.</strong> &nbsp;|&nbsp; '
-                                . 'Azucenas #8, Fracc. Jardines del Sur, Huajuapan de León, Oaxaca'
-                            . '</p>'
-                        . '</div>';
-                        ?>
-                        <textarea id="ck-footer-data" name="contenido__cuerpo_html" class="ck5-hidden-data"><?= htmlspecialchars(cmsRaw($contenidos, 'footer', 'contenido', 'cuerpo_html', $defaultFooterHtml)) ?></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- ================================================================
-             PANEL 8: SEO Y METADATOS
-             Sección: seo | Fuente HTML: head del index.html
-             ================================================================ -->
-        <div id="panel-seo" class="cms-panel" role="tabpanel" aria-labelledby="tab-seo" tabindex="0" data-section="seo">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">Metadatos de SEO, Open Graph y Schema.org</h3>
-            </div>
-
-            <!-- Fila 1: Meta Tags + Open Graph -->
-            <hr class="cms-section-sep">
-            <div class="grid-2col mb-4">
-            <!-- Meta Tags -->
-            <div class="editor-card">
-                <div class="editor-card-header">
-                    <div class="card-title">Meta Tags del Sitio</div>
-                </div>
-                <div class="editor-card-body">
-                    <div class="field-group">
-                        <label>Meta Title <small class="txt-muted">(máx. 60 caracteres recomendado)</small></label>
-                        <input type="text" name="meta__title" maxlength="135"
-                               value="<?= cms($contenidos, 'seo', 'meta', 'title') ?>">
-                        <small class="cms-help-text">Aparece en la pestaña del navegador y en el título del resultado de búsqueda.</small>
-                    </div>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1789-1959)</summary>
-
-**Path:** `Unknown file`
-
-```
-                </div>
-            </div>
-            </div><!-- /grid-2col fila 2 -->
-        </div>
-
-        <!-- ================================================================
-             PANEL 8: AVISO DE PRIVACIDAD
-             Sección: aviso-privacidad | Fuente HTML: modal / página #privacidad
-             ================================================================ -->
-        <div id="panel-aviso-privacidad" class="cms-panel" role="tabpanel" aria-labelledby="tab-aviso-privacidad" tabindex="0" data-section="aviso-privacidad">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">Aviso de Privacidad — Contenido Legal (#privacidad)</h3>
-            </div>
-
-            <hr class="cms-section-sep">
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">Documento Integral del Aviso de Privacidad (Editor RTE)</div>
-                </div>
-                <div class="editor-card-body">
-                    <p class="cms-p">
-                        Edita directamente el contenido completo del Aviso de Privacidad con formato enriquecido (encabezados, listas, negritas y párrafos). Los cambios se actualizarán automáticamente en la ventana modal de la página pública.
-                    </p>
-                    <div class="field-group">
-                        <div id="ck-aviso-privacidad" class="ck5-mount ck5-mount-lg"></div>
-                        <textarea id="ck-aviso-privacidad-data" name="contenido__cuerpo_html" class="ck5-hidden-data"><?= htmlspecialchars(cmsRaw($contenidos, 'aviso-privacidad', 'contenido', 'cuerpo_html')) ?></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ================================================================
-             PANEL 9: VIDEO PROMO
-             Sección: video-promo | RTE Completo con Enlaces y Medios (YouTube, Vimeo, etc.)
-             ================================================================ -->
-        <div id="panel-video-promo" class="cms-panel" role="tabpanel" aria-labelledby="tab-video-promo" tabindex="0" data-section="video-promo">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">9. Video Promo — Enlaces e Incrustación de Video (#video-promo)</h3>
-            </div>
-
-            <hr class="cms-section-sep">
-            <?php
-            $videoActive = ($config['video_active'] ?? '1') !== '0';
-            ?>
-            <div class="editor-card mb-4">
-                <div class="editor-card-header" style="display:flex; justify-content:space-between; align-items:center;">
-                    <div class="card-title">Contenido del Video Promocional (Editor RTE Completo)</div>
-                    <div style="display:flex; align-items:center; gap:0.5rem;">
-                        <label for="chk-video-active" style="display:inline-flex; align-items:center; gap:0.45rem; cursor:pointer; margin:0; font-size:0.85rem; font-weight:700;">
-                            <input type="hidden" name="_cfg_video_active" value="0">
-                            <input type="checkbox" id="chk-video-active" name="_cfg_video_active" value="1" <?= $videoActive ? 'checked' : '' ?>
-                                   style="width:1.15rem; height:1.15rem; accent-color:#16a34a; cursor:pointer;"
-                                   onchange="var badge=this.nextElementSibling; if(this.checked){ badge.style.color='#16a34a'; badge.textContent='Encendido'; } else { badge.style.color='#dc2626'; badge.textContent='Apagado'; }">
-                            <span class="operator-badge" style="color: <?= $videoActive ? '#16a34a' : '#dc2626' ?>; transition: color 0.2s ease;">
-                                <?= $videoActive ? 'Encendido' : 'Apagado' ?>
-                            </span>
-                        </label>
-                    </div>
-                </div>
-                <div class="editor-card-body">
-                    <p class="cms-p">
-                        Utiliza este editor con capacidades completas para insertar enlaces web e incrustar reproductores de video (YouTube, Spotify, Vimeo, etc.) para la promoción institucional.
-                    </p>
-                    <div class="field-group">
-                        <div id="ck-video-promo" class="ck5-mount ck5-mount-lg"></div>
-                        <textarea id="ck-video-promo-data" name="contenido__cuerpo_html" class="ck5-hidden-data"><?= htmlspecialchars(cmsRaw($contenidos, 'video-promo', 'contenido', 'cuerpo_html')) ?></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ================================================================
-             PANEL 10: CONFIGURACIÓN GENERAL — Orden de Secciones
-             Sección: configuracion-general | Campo: _cfg_seccion_order
-             Persiste en tabla configuraciones (clave='seccion_order') vía prefijo _cfg_
-             ================================================================ -->
-        <div id="panel-configuracion-general" class="cms-panel" role="tabpanel" aria-labelledby="tab-configuracion-general" tabindex="0" data-section="configuracion-general">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">Orden de Secciones — Página de Inicio</h3>
-            </div>
-
-            <hr class="cms-section-sep">
-            <div class="editor-card mb-4">
-                <div class="editor-card-header">
-                    <div class="card-title">Orden Vertical de Secciones (#inicio)</div>
-                </div>
-                <div class="editor-card-body">
-                    <!-- Hidden input que serializa el orden para el POST /cms/save -->
-                    <input type="hidden"
-                           id="seccion-order-input"
-                           name="_cfg_seccion_order"
-                           value="<?= h($config['seccion_order'] ?? '') ?>">
-
-                    <?php
-                    // Reconstruir orden desde BD, o usar el default si no hay valor
-                    $_secDefault = ['inicio','acerca-de','especialidades','promociones','calidad','ubicacion','video'];
-                    $_secLabels  = [
-                        'inicio'        => ['icon'=>'🖼️', 'label'=>'Inicio (Banner Principal y Slider)', 'anchor'=>'#inicio',    'locked'=>false],
-                        'acerca-de'     => ['icon'=>'👥', 'label'=>'Quiénes somos',                       'anchor'=>'#acerca-de', 'locked'=>false],
-                        'especialidades'=> ['icon'=>'🔬', 'label'=>'Estudios de Rutina',                    'anchor'=>'#especialidades','locked'=>false],
-                        'promociones'   => ['icon'=>'🏷️', 'label'=>'Promociones Vigentes',                  'anchor'=>'#promociones','locked'=>false],
-                        'calidad'       => ['icon'=>'🖼️', 'label'=>'Calidad e Instalaciones',               'anchor'=>'#calidad',    'locked'=>false],
-                        'ubicacion'     => ['icon'=>'📍', 'label'=>'Ubicación y Contacto',                  'anchor'=>'#ubicacion',  'locked'=>false],
-                        'video'         => ['icon'=>'🎬', 'label'=>'Video promo',                           'anchor'=>'#video',      'locked'=>false],
-                    ];
-                    $_rawOrder  = $config['seccion_order'] ?? '';
-                    if ($_rawOrder !== '') {
-                        $_parsed  = array_unique(array_filter(
-                            array_map('trim', explode(',', $_rawOrder)),
-                            fn($s) => in_array($s, $_secDefault, true)
-                        ));
-                        $_missing = array_diff($_secDefault, $_parsed);
-                        $_ordered = array_values(array_merge($_parsed, $_missing));
-                    } else {
-                        $_ordered = $_secDefault;
-                    }
-                    unset($_secDefault, $_rawOrder, $_parsed, $_missing);
-                    ?>
-
-                    <p class="cms-help-text mb-3">Arrastra las secciones para cambiar su orden vertical. Puedes mover la sección <strong>Video promo</strong> arriba o abajo de <strong>Inicio</strong>. El cambio se aplica al publicar o en la Vista Previa.</p>
-
-                    <ul id="seccion-order-list"
-                        style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.6rem">
-                        <?php foreach ($_ordered as $_sid):
-                            $meta = $_secLabels[$_sid] ?? ['icon'=>'•','label'=>$_sid,'anchor'=>'','locked'=>false];
-                            $isLocked = !empty($meta['locked']);
-                        ?>
-                        <li data-seccion-id="<?= h($_sid) ?>"
-                            draggable="<?= $isLocked ? 'false' : 'true' ?>"
-                            style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1rem;border-radius:8px;border:1.5px solid <?= $isLocked ? 'var(--primary-green-light,#e2e8f0)' : 'var(--border-color,#d1d5db)' ?>;background:<?= $isLocked ? '#f8fafc' : 'var(--card-bg,#fff)' ?>;cursor:<?= $isLocked ? 'not-allowed' : 'grab' ?>;user-select:none;transition:box-shadow .15s,border-color .15s">
-                            <!-- Grip icon or Lock icon -->
-                            <?php if ($isLocked): ?>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary-green-dark,#059669)" stroke-width="2" stroke-linecap="round" style="flex-shrink:0">
-                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                            </svg>
-                            <?php else: ?>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--txt-muted,#9ca3af)" stroke-width="2" stroke-linecap="round" style="flex-shrink:0">
-                                <circle cx="9" cy="5" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="19" r="1"/>
-                                <circle cx="15" cy="5" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="19" r="1"/>
-                            </svg>
-                            <?php endif; ?>
-                            <span style="font-size:1.15rem;line-height:1;flex-shrink:0"><?= $meta['icon'] ?></span>
-                            <span style="flex:1;font-weight:600;color:var(--txt-main,#111)"><?= h($meta['label']) ?> <?= $isLocked ? '<small class="txt-muted" style="font-weight:400;">(Fija en cabecera)</small>' : '' ?></span>
-                            <code style="font-size:0.78rem;color:var(--txt-muted,#6b7280);background:var(--bg-subtle,#f3f4f6);padding:2px 6px;border-radius:4px"><?= h($_sid) ?></code>
-                            <a href="/laesh/?_preview=1<?= h($meta['anchor']) ?>"
-                               target="_blank" rel="noopener noreferrer"
-                               title="Vista previa de esta sección"
-                               style="flex-shrink:0;color:var(--primary,#0052B7);text-decoration:none;font-size:0.8rem;"
-                               onclick="event.stopPropagation()">↗</a>
-                        </li>
-                        <?php endforeach; unset($_ordered, $_secLabels, $_sid, $meta, $isLocked); ?>
-                    </ul>
-
-                    <p class="cms-help-text mt-3">
-                        Orden actual guardado:
-                        <code id="seccion-order-display"><?= h($config['seccion_order'] ?? '(predeterminado)') ?></code>
-                    </p>
-                </div>
-            </div>
-
-            <style>
-            /* DnD visual feedback — solo aplica al panel de orden de secciones */
-            #seccion-order-list [data-seccion-id].dnd-dragging {
-                opacity:.45; box-shadow:0 4px 16px rgba(0,0,0,.18); cursor:grabbing;
-            }
-            #seccion-order-list [data-seccion-id].dnd-over {
-                border-color:var(--primary,#0052B7); box-shadow:0 0 0 2px rgba(0,82,183,.18);
-            }
-            </style>
-        </div><!-- /panel-configuracion-general -->
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-**Analyzing Panel Requests**
-
-I've begun examining the specific panels requested. Right now, my focus is on identifying and understanding each panel by its assigned name and corresponding number. I'm taking a close look at "Calidad e Instalaciones", "Ubicación y Contacto", "Pie de Página", and "Aviso de Privacidad". I'm trying to figure out how these panels are linked together.
-
-
-**Defining Card Design**
-
-I'm now focused on establishing a consistent design pattern for the cards. I've defined the key styling elements: card container, header, title, and body, including border, background, and other styling details. I'm moving on to choosing distinct color palettes for the cards within Panels 5 through 10. I've also begun to analyze the structure of panels and their respective cards, starting with Panel 5.
-
-
-**Defining Card Elements**
-
-I've moved on to refining the design details for Panels 6, 7 and 8. I'm focusing on their visual layout and component styles. I'm analyzing the provided color themes, border styles, and header backgrounds for each card within these panels, mapping how these design choices create a cohesive look and feel. I am currently considering the application of these elements for optimal card presentation.
-
-```python
-
-```
-
-**Defining Panel Content**
-
-I've determined the design elements for Panels 8, 9, and 10. For Panel 8, the "Documento Integral del Aviso de Privacidad" card uses a Bordo/Rose Dark theme. Panel 9's "Contenido del Video Promocional" card features a Cian/Cyan Deep theme. Finally, Panel 10's "Orden Vertical de Secciones" card employs an Indigo/Cobalt theme. I am double-checking and confirming the application of the defined design components, like borders and header backgrounds, before I commit any code updates. I've also reviewed the precise modifications required for Panel 5.
-
-
-**Refining Card Styles**
-
-I'm now focusing on the visual styling of specific cards, like "Química Clínica" and "Microbiología y Cultivos", in the editor. I'm focusing on badge styling, specifically how their contrast background looks clean against the gradient headers, just as in other sections. I've been refining the logic and presentation of the active/inactive toggle within the card headers, ensuring the design is visually appealing and consistent with other panels.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 9.096627957s
-- **Model:** Gemini 3.6 Flash (Medium)
-</details>
 
 ---
 
@@ -26029,6 +18325,11121 @@ La seccion del  footer se muestra cortada, al igua que los botones flotantes de 
 
 **Status:** Completed
 **Created:** 11 Sept 2026, 11:33 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L399-439)</summary>
+
+**Path:** `Unknown file`
+
+```
+/* ── §5 MAPA, FLOTANTES & PRECIOS ───────────────────────────────────────────── */
+
+/* ── WhatsApp & Social flotantes ── */
+        .whatsapp-float {
+            position: fixed; bottom: 110px; right: 30px;
+            width: 60px; height: 60px; background: #25d366; color: white;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 8px 24px rgba(37,211,102,0.4); z-index: 1001;
+            text-decoration: none; transition: all 0.3s ease;
+        }@media (hover: hover) and (pointer: fine) {
+    .whatsapp-float:hover {
+        transform: scale(1.1);
+    }
+}
+        .whatsapp-float::before {
+            content: ''; position: absolute; width: 100%; height: 100%;
+            border-radius: 50%; background: inherit; opacity: 0.6; z-index: -1;
+            animation: pulse-ring 1.8s infinite;
+        }
+        @keyframes pulse-ring {
+            0%   { transform: scale(1);   opacity: 0.6; }
+            100% { transform: scale(1.6); opacity: 0;   }
+        }
+        .social-float {
+            position: fixed; bottom: 30px; right: 30px;
+            width: 60px; height: 60px; color: white; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            z-index: 1001; text-decoration: none; transition: all 0.3s ease;
+        }@media (hover: hover) and (pointer: fine) {
+    .social-float:hover {
+        transform: scale(1.1);
+    }
+}
+
+        /* ── Mapa — alturas de contenedores ── */
+        /* .map-bottom-bar, .map-tab-btn, .modal, .footer-row → definidos en style.css */
+        /* #map-static height → cubierta por el bloque #map-static,.map-static-wrap más abajo */
+        #map-interactive { height: 400px; min-height: 400px; }
+
+        /* ── Precios ── */
+        .precio-cat-item {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `footer-main`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 11 Sept 2026, 11:33 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L744-779)</summary>
+
+**Path:** `Unknown file`
+
+```
+/* ════════════════════════════════════════════════════════════
+   FOOTER PRINCIPAL — index.html
+   ════════════════════════════════════════════════════════════ */
+
+/* Contenedor raíz — gradiente LAESH azul */
+.footer-main {
+    background: linear-gradient(to right, #0052B7, #002252);
+    color: #fff;
+}
+
+/* ── Franja CTA superior ── */
+.footer-cta-wrap {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.footer-cta-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem;
+}
+
+/* Tarjeta gris redondeada con CTA */
+.footer-cta-card {
+    background: #DADAD9;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 1.5rem;
+    padding: 2rem 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.footer-cta-title {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L779-829)</summary>
+
+**Path:** `Unknown file`
+
+```
+.footer-cta-title {
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+    font-weight: 800;
+    color: #002252;
+    margin: 0 0 0.25rem;
+    line-height: 1.2;
+}
+
+.footer-cta-subtitle {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: rgba(0, 34, 82, 0.85);
+    margin: 0;
+}
+
+/* Grupo de botones CTA */
+.footer-cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    flex-shrink: 0;
+}
+
+/* Botón WhatsApp */
+.footer-btn-wa {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #25D366;
+    color: #fff;
+    font-weight: 800;
+    font-size: 0.875rem;
+    padding: 0.875rem 1.5rem;
+    border-radius: 0.75rem;
+    text-decoration: none;
+    transition: background 0.2s;
+    box-shadow: 0 8px 24px rgba(37, 211, 102, 0.3);
+    white-space: nowrap;
+}@media (hover: hover) and (pointer: fine) {
+    .footer-btn-wa:hover {
+        background: #20ba5a; color: #fff;
+    }
+}
+
+/* Botón Teléfono */
+.footer-btn-phone {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #0052B7;
+    color: #fff;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L879-929)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+/* ── Responsive móvil footer ── */
+
+
+/* ── §8 COMPONENTES STANDALONE ──────────────────────────────────────────────── */
+
+/* ── Sección "Acerca de" — reducir espacio inferior antes del footer ── */
+#acerca-de { padding-bottom: 0; }
+
+/* ── Ficha "25 años" — ampliar ancho solo en desktop (5rem por lateral) ── */
+
+/* ── UX3: Barra de progreso del carrusel de especialidades ──
+   Refleja scrollLeft / scrollWidth para cualquier tamaño de pantalla
+   (desktop 3 tarjetas visibles, tablet 1-2, móvil 1). ── */
+.carousel-progress-wrap {
+    padding: 0.5rem 1.5rem 0.25rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+.carousel-progress {
+    height: 3px;
+    background: rgba(0, 0, 0, 0.10);
+    border-radius: 3px;
+    overflow: hidden;
+    position: relative;
+}
+.carousel-progress-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--primary);
+    border-radius: 3px;
+    transition: width 0.15s ease-out;
+    will-change: width;
+}
+/* CSS-1a-fix: regla movimiento reducido movida a responsive.css Tier 0 */
+
+
+/* Hero slide backgrounds — imagen inyectada inline por index.php vía $slides[N]['bg_style']
+   (premisa cero fallback: imagen viene de CMS; sin imagen → fondo vacío)
+   bg-slide-N solo conserva el focal point; background-image se aplica via style="" en PHP.
+   bg-slide-N: desktop hereda background-size:cover de .hero-slide base (l.237);
+   móvil/tablet sobreescriben a contain (Issue-3 fix: l.1169 ≤1024px, l.1261 ≤767px) */
+.bg-slide-1 { background-position: center 30%; }
+.bg-slide-2 { background-position: center center; }
+.bg-slide-3 { background-position: center center; }
+.bg-slide-4 { background-position: center 40%; }
+.bg-slide-5 { background-position: center center; }
+
+/* ── GM-03: Label del botón pausa ── */
+.hero-pause-label {
+    font-size: 11px;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `tablet-samsung-tabs10ultra.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+/* ═══════════════════════════════════════════════════════════════════
+   tablet-samsung-tabs10ultra.css — LAESH Specific Tablet Responsiveness
+   ───────────────────────────────────────────────────────────────────
+   Reglas de adaptabilidad dedicadas para Samsung Galaxy Tab S10 Ultra
+   (14.6", 2960×1848 px / DPR 2.5) y tabletas de gran formato.
+   Orientación Horizontal (Landscape ~1480px) & Vertical (Portrait ~924px).
+
+   NO USAR !important (Regla 8 del proyecto LAESH).
+   Se apoya en variables CSS (--primary, --surface, etc.) de tokens.css.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────────────────────────────
+   § 0. ASSET IMMUTABILITY & ANTI-DISTORTION GUARDS (Protección de Imágenes)
+   Garantiza que todas las imágenes mantengan su proporción aspect-ratio
+   sin achatamientos ni deformaciones en pantallas AMOLED de 14.6".
+   ───────────────────────────────────────────────────────────────── */
+.hero-logo,
+.navbar-sticky .logo img {
+    height: auto;
+    max-height: 46px;
+    width: auto;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.specialties-carousel-track .carousel-card img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.map-zoom-img {
+    width: 100%;
+    height: auto;
+    max-height: 480px;
+    object-fit: contain;
+}
+
+#modal-img-promo-src,
+.modal-promo-img {
+    max-width: 100%;
+    max-height: 55vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+}
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `tablet-samsung-tabs10ultra.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L49-119)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+
+/* ─────────────────────────────────────────────────────────────────
+   § 1. TOUCH & S-PEN INTERACTION TARGETS (Orientación Global)
+   ───────────────────────────────────────────────────────────────── */
+:root[data-input="touch"] .map-tab-btn,
+:root[data-input="touch"] .carousel-nav-btn,
+:root[data-input="touch"] .btn-route-overlay {
+    min-height: 44px;
+    touch-action: manipulation;
+}
+
+
+/* ─────────────────────────────────────────────────────────────────
+   § 2. ORIENTACIÓN HORIZONTAL / LANDSCAPE (Viewport 1025px a 1600px)
+   Samsung Galaxy Tab S10 Ultra Horizontal (~1480px × 924px)
+   ───────────────────────────────────────────────────────────────── */
+@media (min-width: 1025px) and (max-width: 1600px) {
+    /* Header & Nav Pad — Tagline no recortado y espaciado uniforme de menú */
+    .navbar-tagline {
+        font-size: 0.85rem;
+        white-space: nowrap;
+        overflow: visible;
+        text-overflow: clip;
+        flex-shrink: 0;
+        padding: 0 1rem;
+        margin-left: 1rem;
+        margin-right: auto;
+    }
+
+    .navbar-sticky .nav-links {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 1.25rem;
+        margin-left: auto;
+    }
+
+    .navbar-sticky .nav-links a {
+        font-size: 0.92rem;
+        white-space: nowrap;
+        margin: 0;
+    }
+
+    /* Hero Section — Ajuste de proporción en pantalla grande de 14.6" */
+    .hero-slider-wrap {
+        min-height: 520px;
+        max-height: 680px;
+    }
+
+    .hero-slide-content h1 {
+        font-size: clamp(2rem, 3.2vw, 3rem);
+        line-height: 1.2;
+    }
+
+    .hero-slide-content p {
+        font-size: 1.1rem;
+        max-width: 680px;
+    }
+
+    /* Carrusel de Especialidades — 3 tarjetas por vista */
+    .specialties-carousel-track .carousel-card {
+        flex: 0 0 calc(33.333% - 1rem);
+        max-width: calc(33.333% - 1rem);
+    }
+
+    /* Catálogo de Promociones — 3 columnas cuadradas uniformes */
+    .catalog-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
+    }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `tablet-samsung-tabs10ultra.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L119-197)</summary>
+
+**Path:** `Unknown file`
+
+```
+    }
+
+    /* Ubicación & Contacto — Ficha horizontal */
+    .contact-grid-horizontal {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
+    }
+
+    /* Modales — Control de desbordamiento */
+    .modal-scroll-body {
+        max-height: 75vh;
+        overflow-y: auto;
+    }
+}
+
+
+/* ─────────────────────────────────────────────────────────────────
+   § 3. ORIENTACIÓN VERTICAL / PORTRAIT (Viewport 768px a 1024px)
+   Samsung Galaxy Tab S10 Ultra Vertical (~924px × 1480px)
+   ───────────────────────────────────────────────────────────────── */
+@media (min-width: 768px) and (max-width: 1024px) {
+    /* Header de Tableta Vertical */
+    .header-nav-container {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+    }
+
+    /* Hero Section — Proporción vertical optimizada */
+    .hero-slider-wrap {
+        min-height: 480px;
+        max-height: 620px;
+    }
+
+    .hero-slide-content h1 {
+        font-size: clamp(1.75rem, 3.8vw, 2.4rem);
+        line-height: 1.25;
+    }
+
+    .hero-slide-content p {
+        font-size: 1rem;
+        max-width: 100%;
+    }
+
+    /* Carrusel de Especialidades — 2 tarjetas por vista */
+    .specialties-carousel-track .carousel-card {
+        flex: 0 0 calc(50% - 0.75rem);
+        max-width: calc(50% - 0.75rem);
+    }
+
+    /* Catálogo de Promociones — 2 columnas en portrait */
+    .catalog-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    /* Ubicación & Contacto — 2 columnas balanceadas */
+    .contact-grid-horizontal {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    /* Ajuste de tarjetas de calidad y acreditación */
+    .quality-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem;
+    }
+
+    /* Modales en Tableta Vertical — 1480px de alto disponible */
+    .modal-dialog {
+        max-width: 90%;
+        margin: 2rem auto;
+    }
+
+    .modal-scroll-body {
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+}
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 11 Sept 2026, 11:33 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 11 Sept 2026, 11:33 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 11 Sept 2026, 11:33 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+. AL simular con google chrome  para telefonos moviles  el slogan superior queda muy junto del menu de amburgesa, separalo, moviendolo una poco a la izquierda sin afectar al logotipo.
+. Para tabletas aparece el boton blanco de la sección cms Texto CTA; depura ese estilo del boton con fondo blanco ya no es vigente.
+. eL texto DE la sección de Etiqueta, se ve opaco, mejoralo para resalte más.
+
+---
+
+### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:04 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `navbar-tagline`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:04 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1179-1234)</summary>
+
+**Path:** `Unknown file`
+
+```
+            flex-direction: column;
+            position: absolute;
+            top: 100%; left: 0; right: 0;
+            background: rgba(255,255,255,0.98);
+            padding: 1rem;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+    .nav-hamburger { display: flex; }
+    .dropdown { display: block; width: 100%; }
+    .navbar-tagline { display: block; font-size: 0.78rem; line-height: 1.22; white-space: nowrap; max-width: none; text-align: center; margin-left: auto; margin-right: auto; padding: 0 0.75rem; }
+    /* hero-premium: altura controlada por breakpoints vh+min+max — sin override aquí */
+    /* hero-glass-card padding: base 1.7rem aplica en tablet — sin override */
+    .hero-glass-card h1, .hero-glass-card h2 { font-size: 1.6rem; }
+    .grid-layout {
+            grid-template-columns: repeat(2, minmax(0, 1fr)); /* R-CSS-06 */
+            padding: 0 1.5rem;
+            gap: 1.5rem;
+        }
+    .grid-1-2 { grid-template-columns: 1fr; }
+    #ubicacion .grid-layout { grid-template-columns: 1fr; }
+    section { padding: 1.5rem 0; }
+    .section-header { margin: 2rem 0 1.25rem; }
+    #promociones > div:last-of-type { margin-bottom: 1.5rem; }
+    .specialties-carousel-viewport { padding: 0 0.75rem; }
+    .specialties-carousel-track { gap: 1rem; padding-bottom: 4px; }
+    .carousel-card { flex: 0 0 calc(100% - 1.5rem); margin-bottom: 2px; }
+    /* object-position:top center: en tablet el card ocupa ~100% ancho → cover escala imagen muy alta
+       → el crop central oculta la parte superior donde están los sujetos; top center los mantiene visibles */
+    .carousel-card img { height: 240px; object-fit: cover; object-position: top center; border-radius: 12px 12px 0 0; border: none; }
+    .orden-acc-body { grid-template-columns: repeat(2, minmax(0, 1fr)); } /* R-CSS-06 */
+}
+
+@media (max-width: 767px) {
+    body { padding: 0; background: var(--bg-surface); }
+    .browser-window { border-radius: 0; }
+    .navbar-sticky {
+            top: 0;
+            padding: 0.5rem 1rem;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+    .landing-nav-spacer { height: 56px; }
+    .navbar-sticky .logo img { height: 30px; width: auto; }
+    .navbar-tagline {
+            display: block;
+            font-size: 0.65rem;
+            letter-spacing: 0.01em;
+            line-height: 1.2;
+            margin-top: 2px;
+            opacity: 0.9;
+            white-space: nowrap;
+            max-width: none;
+            flex-shrink: 1;
+        }
+    .navbar-sticky > .nav-links { display: none; }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Mobile Responsiveness**
+
+I've been examining the `landing.css` file, specifically lines 1215-1234, to understand how the navigation bar is styled for smaller screens under 767px width. This section, encapsulated within the `@media` query, seems to dictate the responsive behavior of the navbar in a mobile context. I'm focusing on how the styles impact the layout and alignment of the elements.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `CTA`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.131367465s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:04 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `cta`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:05 am
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:05 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `navbar-tagline`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:05 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `btn-outline-white`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:05 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `Etiqueta`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:05 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L719-819)</summary>
+
+**Path:** `Unknown file`
+
+```
+            <?php foreach ($sectionOrder as $_navSec):
+                if (isset($_secNavLabels[$_navSec])):
+            ?>
+            <a href="<?= $_secNavLabels[$_navSec]['href'] ?>"><?= h($_secNavLabels[$_navSec]['label']) ?></a>
+            <?php endif; endforeach; unset($_navSec); ?>
+            <a href="#" class="login-trigger btn-nav-medicos"
+               data-target="medicos" data-title="Acceso" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2v2"/><path d="M5 2v2"/><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"/><path d="M8 15a6 6 0 0 0 12 0v-3"/><circle cx="20" cy="10" r="2"/></svg>Médicos</a>
+        </div>
+    </nav>
+
+    <main id="main-content">
+
+        <div class="landing-nav-spacer"></div>
+
+        <?php
+        foreach ($sectionOrder as $_secId):
+            if ($_secId === 'inicio'):
+        ?>
+        <!-- ═══════════════════════════════════════════════════════ HERO ══ -->
+        <section id="inicio" class="hero-premium">
+            <div class="hero-slides" data-autoplay="<?= in_array($heroSliderMode, ['decoupled_hidden', 'fixed_all']) ? 0 : $heroAutoplay ?>" role="region"
+                 aria-label="Presentación principal" aria-roledescription="carrusel"<?= $heroParentBgStyle ?>>
+
+                <!-- ── Slide 1 — dinámico desde hero/slide1 ────────────────── -->
+                <div class="hero-slide active <?= !$hasParentBg ? 'bg-slide-1' : '' ?>"<?= $slides[1]['bg_style'] ? ' style="' . $slides[1]['bg_style'] . '"' : '' ?>>
+                    <?php if (!$hideHeroMessages): ?>
+                    <div class="hero-glass-card<?= $msgs[1]['card_class'] ?>">
+                        <?php if ($msgs[1]['etiqueta']): ?><span<?= $msgs[1]['span_class'] ?>><?= h($msgs[1]['etiqueta']) ?></span><?php endif; ?>
+                        <h1<?= $msgs[1]['h_class'] ?>><?= h($msgs[1]['titulo']) ?></h1>
+                        <?php if ($msgs[1]['descripcion']): ?>
+                        <p<?= $msgs[1]['p_class'] ?>><?= $msgs[1]['desc_html'] ?></p>
+                        <?php endif; ?>
+                        <div class="flex-center-15<?= $msgs[1]['cta_class'] ?>">
+                            <?php if ($msgs[1]['cta_texto']): ?><a href="<?= h($msgs[1]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($msgs[1]['cta_texto']) ?></a><?php endif; ?>
+                        </div>
+                    </div>
+                    <?php endif; ?>
+                </div>
+
+                <!-- ── Slide 2 — dinámico desde hero/slide2 ────────────────── -->
+                <div class="hero-slide <?= !$hasParentBg ? 'bg-slide-2' : '' ?>"<?= $slides[2]['bg_style'] ? ' style="' . $slides[2]['bg_style'] . '"' : '' ?>>
+                    <?php if (!$hideHeroMessages): ?>
+                    <div class="hero-glass-card<?= $msgs[2]['card_class'] ?>">
+                        <?php if ($msgs[2]['etiqueta']): ?><span<?= $msgs[2]['span_class'] ?>><?= h($msgs[2]['etiqueta']) ?></span><?php endif; ?>
+                        <h2<?= $msgs[2]['h_class'] ?>><?= h($msgs[2]['titulo']) ?></h2>
+                        <?php if ($msgs[2]['descripcion']): ?>
+                        <p<?= $msgs[2]['p_class'] ?>><?= $msgs[2]['desc_html'] ?></p>
+                        <?php endif; ?>
+                        <div class="flex-center-15<?= $msgs[2]['cta_class'] ?>">
+                            <?php if ($msgs[2]['cta_texto']): ?><a href="<?= h($msgs[2]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($msgs[2]['cta_texto']) ?></a><?php endif; ?>
+                        </div>
+                    </div>
+                    <?php endif; ?>
+                </div>
+
+                <!-- ── Slide 3 — dinámico desde hero/slide3 ────────────────── -->
+                <div class="hero-slide <?= !$hasParentBg ? 'bg-slide-3' : '' ?>"<?= $slides[3]['bg_style'] ? ' style="' . $slides[3]['bg_style'] . '"' : '' ?>>
+                    <?php if (!$hideHeroMessages): ?>
+                    <div class="hero-glass-card<?= $msgs[3]['card_class'] ?>">
+                        <?php if ($msgs[3]['etiqueta']): ?><span<?= $msgs[3]['span_class'] ?>><?= h($msgs[3]['etiqueta']) ?></span><?php endif; ?>
+                        <h2<?= $msgs[3]['h_class'] ?>><?= h($msgs[3]['titulo']) ?></h2>
+                        <?php if ($msgs[3]['descripcion']): ?>
+                        <p<?= $msgs[3]['p_class'] ?>><?= $msgs[3]['desc_html'] ?></p>
+                        <?php endif; ?>
+                        <div class="flex-center-15<?= $msgs[3]['cta_class'] ?>">
+                            <?php if ($msgs[3]['cta_texto']): ?><a href="<?= h($msgs[3]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($msgs[3]['cta_texto']) ?></a><?php endif; ?>
+                        </div>
+                    </div>
+                    <?php endif; ?>
+                </div>
+
+                <!-- ── Slide 4 — dinámico desde hero/slide4 ────────────────── -->
+                <div class="hero-slide <?= !$hasParentBg ? 'bg-slide-4' : '' ?>"<?= $slides[4]['bg_style'] ? ' style="' . $slides[4]['bg_style'] . '"' : '' ?>>
+                    <?php if (!$hideHeroMessages): ?>
+                    <div class="hero-glass-card<?= $msgs[4]['card_class'] ?>">
+                        <?php if ($msgs[4]['etiqueta']): ?><span<?= $msgs[4]['span_class'] ?>><?= h($msgs[4]['etiqueta']) ?></span><?php endif; ?>
+                        <h2<?= $msgs[4]['h_class'] ?>><?= h($msgs[4]['titulo']) ?></h2>
+                        <?php if ($msgs[4]['descripcion']): ?>
+                        <p<?= $msgs[4]['p_class'] ?>><?= $msgs[4]['desc_html'] ?></p>
+                        <?php endif; ?>
+                        <div class="flex-center-15<?= $msgs[4]['cta_class'] ?>">
+                            <?php if ($msgs[4]['cta_texto']): ?><a href="<?= h($msgs[4]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($msgs[4]['cta_texto']) ?></a><?php endif; ?>
+                        </div>
+                    </div>
+                    <?php endif; ?>
+                </div>
+
+                <!-- ── Slide 5: Ubicación — CMS + datos de configuraciones ── -->
+                <div class="hero-slide <?= !$hasParentBg ? 'bg-slide-5' : '' ?>"<?= $slides[5]['bg_style'] ? ' style="' . $slides[5]['bg_style'] . '"' : '' ?>>
+                    <?php if (!$hideHeroMessages): ?>
+                    <div class="hero-glass-card<?= $msgs[5]['card_class'] ?>">
+                        <?php if ($msgs[5]['etiqueta']): ?><span<?= $msgs[5]['span_class'] ?>><?= h($msgs[5]['etiqueta']) ?></span><?php endif; ?>
+                        <h2<?= $msgs[5]['h_class'] ?>><?= h($msgs[5]['titulo']) ?></h2>
+                        <p<?= $msgs[5]['p_class'] ?>><?= $msgs[5]['desc_html'] ?></p>
+                        <div class="flex-center-15<?= $msgs[5]['cta_class'] ?>">
+                            <?php if ($msgs[5]['cta_texto']): ?><a href="<?= h($msgs[5]['cta_href']) ?>" class="btn btn-secondary btn-outline-white"><?= h($msgs[5]['cta_texto']) ?></a><?php endif; ?>
+                        </div>
+                    </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `navbar-tagline`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:05 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `navbar-tagline`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:05 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1214-1244)</summary>
+
+**Path:** `Unknown file`
+
+```
+    .navbar-sticky {
+            top: 0;
+            padding: 0.5rem 1rem;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+    .landing-nav-spacer { height: 56px; }
+    .navbar-sticky .logo img { height: 30px; width: auto; }
+    .navbar-tagline {
+            display: block;
+            font-size: 0.65rem;
+            letter-spacing: 0.01em;
+            line-height: 1.2;
+            margin-top: 2px;
+            opacity: 0.9;
+            white-space: nowrap;
+            max-width: none;
+            flex-shrink: 1;
+        }
+    .navbar-sticky > .nav-links { display: none; }
+    .navbar-sticky > .nav-links.mobile-open {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 100%; left: 0; right: 0;
+            background: rgba(255,255,255,0.98);
+            padding: 1rem;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+    .nav-hamburger { display: flex; }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L699-734)</summary>
+
+**Path:** `Unknown file`
+
+```
+        $_secOrderRaw = $cfg('seccion_order');
+        if ($_secOrderRaw !== '') {
+            $_parsed = array_unique(array_filter(
+                array_map('trim', explode(',', $_secOrderRaw)),
+                fn($s) => in_array($s, $_SEC_DEFAULT, true)
+            ));
+            $_missing = array_diff($_SEC_DEFAULT, $_parsed);
+            $sectionOrder = array_values(array_merge($_parsed, $_missing));
+        } else {
+            $sectionOrder = $_SEC_DEFAULT;
+        }
+        unset($_SEC_DEFAULT, $_secOrderRaw, $_parsed, $_missing);
+
+        // Si el video está apagado, retirarlo del orden de secciones para que no se renderice
+        if (!$isVideoActive) {
+            $sectionOrder = array_values(array_filter($sectionOrder, fn($s) => $s !== 'video'));
+        }
+        ?>
+        <div class="nav-links" id="nav-links-mobile">
+            <a href="#inicio">Inicio</a>
+            <?php foreach ($sectionOrder as $_navSec):
+                if (isset($_secNavLabels[$_navSec])):
+            ?>
+            <a href="<?= $_secNavLabels[$_navSec]['href'] ?>"><?= h($_secNavLabels[$_navSec]['label']) ?></a>
+            <?php endif; endforeach; unset($_navSec); ?>
+            <a href="#" class="login-trigger btn-nav-medicos"
+               data-target="medicos" data-title="Acceso" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2v2"/><path d="M5 2v2"/><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"/><path d="M8 15a6 6 0 0 0 12 0v-3"/><circle cx="20" cy="10" r="2"/></svg>Médicos</a>
+        </div>
+    </nav>
+
+    <main id="main-content">
+
+        <div class="landing-nav-spacer"></div>
+
+        <?php
+        foreach ($sectionOrder as $_secId):
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L669-709)</summary>
+
+**Path:** `Unknown file`
+
+```
+    <a href="#main-content" class="skip-link">Ir al contenido principal</a>
+
+    <!-- NAVBAR FIJO -->
+    <nav class="navbar-sticky pt-xs" id="landing-navbar" aria-label="Menú principal">
+        <a href="/laesh/" class="logo" target="_blank" rel="noopener"
+           aria-label="LAESH — Laboratorio de Especialidades Hematológicas, ir al inicio">
+            <img src="/laesh-web-assets-uipv1a/img/logo-laesh.webp"
+                 alt="LAESH — <?= h($cfgNombreLab) ?>"
+                 class="hero-logo" decoding="async" fetchpriority="high"
+                 width="2634" height="571">
+        </a>
+        <!-- Tagline dinámico desde CMS (hero/navbar/tagline_l1-2) -->
+        <span class="navbar-tagline"><?= h($navTagL1) ?><br><?= h($navTagL2) ?></span>
+        <button type="button" class="nav-hamburger" id="nav-hamburger"
+                aria-label="Abrir menú" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+        <?php
+        // ── Orden de secciones — configurable desde el CMS (configuraciones.seccion_order) ──
+        // Secciones ordenables: inicio, acerca-de, especialidades, promociones, calidad, ubicacion, video.
+        $_SEC_DEFAULT = ['inicio','acerca-de','especialidades','promociones','calidad','ubicacion','video'];
+        $_secNavLabels = [
+            'acerca-de'     => ['label' => 'Quiénes somos',        'href' => '#acerca-de'],
+            'especialidades'=> ['label' => 'Estudios',             'href' => '#especialidades'],
+            'promociones'   => ['label' => 'Promociones',          'href' => '#promociones'],
+            'calidad'       => ['label' => 'Calidad',              'href' => '#calidad'],
+            'ubicacion'     => ['label' => 'Ubicación y Contacto', 'href' => '#ubicacion'],
+        ];
+        $isVideoActive = $cfg('video_active', '1') !== '0';
+
+        $_secOrderRaw = $cfg('seccion_order');
+        if ($_secOrderRaw !== '') {
+            $_parsed = array_unique(array_filter(
+                array_map('trim', explode(',', $_secOrderRaw)),
+                fn($s) => in_array($s, $_SEC_DEFAULT, true)
+            ));
+            $_missing = array_diff($_SEC_DEFAULT, $_parsed);
+            $sectionOrder = array_values(array_merge($_parsed, $_missing));
+        } else {
+            $sectionOrder = $_SEC_DEFAULT;
+        }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `navbar-tagline`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:05 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `tablet-samsung-tabs10ultra.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L49-89)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+
+/* ─────────────────────────────────────────────────────────────────
+   § 1. TOUCH & S-PEN INTERACTION TARGETS (Orientación Global)
+   ───────────────────────────────────────────────────────────────── */
+:root[data-input="touch"] .map-tab-btn,
+:root[data-input="touch"] .carousel-nav-btn,
+:root[data-input="touch"] .btn-route-overlay {
+    min-height: 44px;
+    touch-action: manipulation;
+}
+
+
+/* ─────────────────────────────────────────────────────────────────
+   § 2. ORIENTACIÓN HORIZONTAL / LANDSCAPE (Viewport 1025px a 1600px)
+   Samsung Galaxy Tab S10 Ultra Horizontal (~1480px × 924px)
+   ───────────────────────────────────────────────────────────────── */
+@media (min-width: 1025px) and (max-width: 1600px) {
+    /* Header & Nav Pad — Tagline no recortado y espaciado uniforme de menú */
+    .navbar-tagline {
+        font-size: 0.85rem;
+        white-space: nowrap;
+        overflow: visible;
+        text-overflow: clip;
+        flex-shrink: 0;
+        padding: 0 1rem;
+        margin-left: 1rem;
+        margin-right: auto;
+    }
+
+    .navbar-sticky .nav-links {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 1.25rem;
+        margin-left: auto;
+    }
+
+    .navbar-sticky .nav-links a {
+        font-size: 0.92rem;
+        white-space: nowrap;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `btn-outline-white`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:05 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L574-604)</summary>
+
+**Path:** `Unknown file`
+
+```
+           Evita que la animación de cierre sea un snap — la clase .chevron-open se agrega/remueve
+           pero el transition siempre está presente vía este selector. */
+        .orden-acc-hdr > svg { flex-shrink: 0; transition: transform 0.2s; }
+        /* Estado abierto — rotación vía clase toggleada por JS */
+        .chevron-open { transform: rotate(-180deg); }
+        /* .chevron-arrow-svg no necesita regla propia — la transition la provee .orden-acc-hdr > svg */
+        .hr-sep { border: none; height: 1px; background: var(--border); margin: 0.9rem 0; }
+
+        /* Texto y botones */
+        .txt-green        { color: var(--primary-green); }
+        .txt-main         { color: var(--text-main); }
+        .txt-primary-bold { color: var(--primary); font-weight: 700; }
+        .txt-pgd-sm       { color: var(--primary); font-weight: 700; font-size: 0.87rem; margin-bottom: 0.4rem; }
+        .btn-outline-white { background: #ffffff; color: var(--primary); box-shadow: 0 4px 10px rgba(0,0,0,0.1); padding: 12px 24px; }
+        .list-link-block  { color: var(--text-main); display: block; font-size: 1.08rem; margin-bottom: 2px; }
+
+        /* Iconos inline */
+        .icon-22 { width: 22px; height: 22px; margin-top: 2px; flex-shrink: 0; opacity: 0.75; }
+        .icon-24 { width: 24px; height: 24px; }
+        .icon-20 { width: 20px; height: 20px; }
+
+
+/* UX-2: noscript map fallback — sin inline style */
+.noscript-msg { padding: 1rem; text-align: center; }
+.map-bar          { position: relative; width: 100%; display: flex; align-items: center;
+                    max-width: 1380px; margin: 0 auto; padding: 0 1rem; }
+.modal-img-preview{ max-width: 100%; max-height: 70vh; border: 1px solid #cbd5e1;
+                    border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+.modal-scroll-body{ overflow-y: auto; max-height: 320px; padding-right: 8px; }
+.modal-lg         { max-width: 680px; width: 95%; }
+.modal-md         { max-width: 760px; }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1164-1184)</summary>
+
+**Path:** `Unknown file`
+
+```
+    .browser-window { border-radius: 0; box-shadow: none; }
+    .browser-header { display: none; }
+    .navbar-sticky { top: 0; padding: 0.65rem 1.5rem; }
+    .landing-nav-spacer { height: 72px; }
+    /* hero tablet ── imagen completa sin corte lateral; tarjeta y botón escalados */
+    .hero-premium { height: 45vw; min-height: 260px; max-height: 500px; }
+    .hero-slide   { background-size: contain !important; background-position: center center !important; border-radius: 18px !important; overflow: hidden !important; }
+    /* especificidad (0,4,0) supera targeting.css :root[data-input="touch"] .btn (0,3,0)
+       min-height:unset cancela la regla de 44px de toque mínimo para botones hero */
+    .hero-slide .hero-glass-card .flex-center-15 .btn-outline-white {
+        padding: 7px 18px; font-size: 0.8rem; border-radius: 7px; min-height: unset;
+    }
+    .navbar-sticky > .nav-links { display: none; }
+    .navbar-sticky > .nav-links.mobile-open {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 100%; left: 0; right: 0;
+            background: rgba(255,255,255,0.98);
+            padding: 1rem;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1289-1319)</summary>
+
+**Path:** `Unknown file`
+
+```
+    .hero-glass-card .d-none-mobile           { display: none !important; }
+    .hero-glass-card:has(> .d-none-mobile):not(:has(> :not(.d-none-mobile))) { display: none !important; }
+    .hero-glass-card > span                   { font-size: 0.5rem; padding: 2px 8px; margin-top: -5px; margin-bottom: 0.15rem; display: inline-block; }
+    /* Option 3: Ficha Clickable + Texto en línea minimalista */
+    .hero-slide .hero-glass-card .flex-center-15 {
+        display: block; text-align: center; margin-top: -2px;
+    }
+    .hero-slide .hero-glass-card .flex-center-15 .btn-outline-white {
+        padding: 2px 8px; border: 1px solid rgba(255, 255, 255, 0.5); background: transparent !important;
+        font-size: 0.6rem; font-weight: 700; color: #000; /* Negro */
+        text-shadow: 0 0 4px rgba(255,255,255,0.6); /* Halo sutil blanco para resaltar texto negro sobre cristal azul */
+        text-transform: uppercase; letter-spacing: 0.5px; border-radius: 4px;
+        min-height: unset; display: inline-flex; align-items: center; gap: 4px;
+    }
+    .hero-slide .hero-glass-card .flex-center-15 .btn-outline-white::after {
+        content: ''; position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        z-index: 10; cursor: pointer;
+    }
+    /* botón pausa en móvil: solo icono, sin texto "Pausar/Reanudar" */
+    .hero-pause-label { display: none; }
+    .hero-pause-btn   { width: 30px; padding: 0; border-radius: 50%; justify-content: center; }
+    .grid-layout {
+            grid-template-columns: 1fr;
+            padding: 0 1rem;
+            gap: 1.25rem;
+        }
+    .grid-1-2 { grid-template-columns: 1fr; }
+    #ubicacion .grid-layout, #calidad .grid-layout { grid-template-columns: 1fr; gap: 1.5rem; }
+    .orden-acc-body { grid-template-columns: 1fr; }
+    section { padding: 0.75rem 0; }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Button Issues**
+
+I'm currently dissecting a specific button element, focusing on its appearance on tablets. The user flagged a white button within the "cms Texto CTA" section, indicating a styling issue that's no longer current. I'm deep-diving into the code, specifically line 588, to pinpoint the source of this outdated white background and formulate a fix.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `hero-glass-card`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.054413499s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:05 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L304-329)</summary>
+
+**Path:** `Unknown file`
+
+```
+        .hero-glass-card {
+            background: rgba(0,82,183,0.25);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.25);
+            padding: 1.7rem; border-radius: 14px; width: min(554px, 82%); max-width: 554px;
+            text-align: center; color: white;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            transform: translateY(30px); opacity: 0;
+            transition: all 0.8s cubic-bezier(0.16,1,0.3,1) 0.3s;
+        }
+        .hero-slide.active .hero-glass-card { transform: translateY(0); opacity: 1; }
+        /* CRÍTICO: solo hijos directos — evita el recuadro blanco en los <span> del H1 */
+        .hero-glass-card > span {
+            background: rgba(204,251,241,0.25); color: var(--secondary-green);
+            padding: 5px 13px; border-radius: 20px; font-weight: 700;
+            font-size: 0.8rem; letter-spacing: 0.05em; text-transform: uppercase;
+            display: inline-block; margin-bottom: 1.2rem;
+        }
+        /* Título compartido — todos los slides (h1 slide-1, h2 slides 2-5) misma definición */
+        .hero-glass-card h1,
+        .hero-glass-card h2 { font-size: 1.7rem; font-weight: 800; margin-bottom: 0.8rem; line-height: 1.2; color: #fff; text-align: center; text-shadow: 0 2px 8px rgba(0,0,0,0.5); font-family: 'Mosquito Std Black','Arial Black',Impact,sans-serif; }
+        .hero-glass-card p  { font-size: 1.31rem;margin-bottom: 1.6rem; opacity: 0.95; line-height: 1.6; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
+
+        /* ── Secciones ── */
+        .section-header { text-align: center; margin: 0 0 3.5rem; padding: 0 1rem; }
+        .section-header h2 {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing the Hero Element**
+
+Okay, I've zeroed in on the styling for `.hero-glass-card > span`, specifically lines 317-322. It's got a translucent green background, a secondary green text color, padding, rounded corners, and uppercase formatting. Interesting use of `rgba` for the background. It also has a weight of 700.
+
+
+**Refining the Hero Element**
+
+Okay, I'm now exploring potential style improvements for the hero section's span elements, particularly focusing on readability. The current styling uses a secondary green color on top of a translucent green background, which, over the semi-transparent layers, results in a dull appearance. I'm experimenting with bolder color combinations, like white text on a solid or semi-opaque, high-contrast background (such as `#0d9488`, `#059669`, or even white). I'm looking at strong text-shadows and crisp backgrounds too.
+
+
+**Evaluating Mobile Adjustments**
+
+I'm now focusing on mobile optimization, specifically the tagline's positioning relative to the hamburger menu. My analysis of `landing.css` (lines 1224-1234) and proposed adjustments (using `margin-left` and `margin-right: auto`) seem promising to address the proximity issue, especially on smaller screens. I'm satisfied that these changes are now well thought-out and are ready to apply and test. I also checked that the text color and opacity are contrasty enough on small screens.
+
+
+**Refining the CTA Style**
+
+I'm now overhauling the tablet button style, specifically `.btn-outline-white`. The current solid white background, as pointed out, is outmoded. I'm replacing it with a refined glassmorphism design – translucent background, white text, and a semi-transparent border, all for improved visual appeal and contrast. I've also added hover effects to enhance the user experience. The CTA style is now far more modern! I'm also ensuring the tag-line text contrast is improved.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.346247801s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L199-259)</summary>
+
+**Path:** `Unknown file`
+
+```
+$cfgHrsClose  = $cfg('hrs_close');
+$cfgDomOpen   = $cfg('dom_open');
+$cfgDomClose  = $cfg('dom_close');
+$cfgRespNom   = $cfg('responsable_nombre');
+$cfgRespProf  = $cfg('responsable_cedula_prof');
+$cfgRespEsp   = $cfg('responsable_cedula_esp');
+$cfgFB        = $cfg('facebook_url');
+$cfgMapsUrl   = $cfg('maps_url');  // URL directa Google Maps para noscript
+$cfgGeoLat    = (float)($cfg('geo_lat') ?: 17.8028691);
+$cfgGeoLng    = (float)($cfg('geo_lng') ?: -97.7779575);
+
+// WhatsApp URLs — textos desde configuraciones (sin fallback)
+$waBase        = "https://wa.me/52{$cfgWA}";
+$waTextoInfo   = $cfg('wa_texto_info');    // texto botón info / flotante / ubicación
+$waTextoAg     = $cfg('wa_texto_agendar'); // texto pre-llenado en cards de promo
+$waInfoUrl     = $waBase . '?text=' . rawurlencode($waTextoInfo);
+$waContactUrl  = $waInfoUrl;
+
+/** Obtiene valor CMS con fallback.
+ *  NOTA: debe definirse DESPUÉS del merge de preview para que capture
+ *  el $cms ya actualizado (PHP arrow fn captura por valor al momento de creación). */
+$c = fn(string $sec, string $sub, string $k, string $d = '') => $cms[$sec][$sub][$k] ?? $d;
+
+// ── 3. Catálogo de estudios — 4 abanicos desde web_contenidos ───────────────
+// Fuente SSOT: web_contenidos(especialidades, cgN, titulo/fichas)
+// Iconos SVG decorativos por grupo (inline — sin CDN)
+const GRUPO_SVGS = [
+    1 => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>',
+    2 => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>',
+    3 => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>',
+    4 => '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>',
+];
+
+// ── 1c. Árbol de estudios clínicos → $cg ─────────────────────────────────────
+$cg = $_bypassCache ? null : \Common\Cache::get(\Common\Cache::KEY_TREE);
+if ($cg === null) {
+    $cg = [];
+    $treeStmt = $db->query("
+        SELECT g.id as grupo_id, g.titulo as grupo_titulo,
+               c.id as cat_id, c.nombre as cat_nombre,
+               e.clave_interna, e.nombre as estudio_nombre, e.tiempo_procesamiento, e.muestra_requerida, e.preparacion
+        FROM catalogo_grupos g
+        JOIN catalogo_categorias c ON c.grupo_id = g.id
+        JOIN catalogo_estudios e ON e.categoria_id = c.id
+        WHERE e.activo = 1
+        ORDER BY g.orden ASC, c.orden ASC, e.id ASC
+    ");
+    $treeRows = $treeStmt ? $treeStmt->fetchAll(\PDO::FETCH_ASSOC) : [];
+
+    $gMap = [];
+    $gIdxMap = [];
+    $currGIdx = 0;
+    foreach ($treeRows as $r) {
+        $gid = (int)$r['grupo_id'];
+        if (!isset($gIdxMap[$gid])) {
+            $currGIdx++;
+            if ($currGIdx > 4) break;
+            $gIdxMap[$gid] = $currGIdx;
+            $cg[$currGIdx] = ['titulo' => $r['grupo_titulo'], 'fichas' => []];
+        }
+        $gi    = $gIdxMap[$gid];
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L289-349)</summary>
+
+**Path:** `Unknown file`
+
+```
+$carouselCards = [];
+for ($ci = 1; $ci <= 16; $ci++) {
+    $cActivo = $c('especialidades', "carousel{$ci}", 'activo', $ci <= 12 ? '1' : '0');
+    if ($cActivo === '0') continue; // Omitir tarjeta desactivada (apagada) desde el CMS
+    $cHtml = trim((string)$c('especialidades', "carousel{$ci}", 'texto'));
+    if ($cHtml === '') continue; // Omitir si no tiene texto redactado en la BD
+    $cImg = trim((string)$c('especialidades', 'config', "carousel{$ci}_img", $cfg("carousel{$ci}_img", '')));
+    $carouselCards[$ci] = [
+        'img'   => $cImg,
+        'texto' => $cHtml,
+    ];
+}
+
+// ── 3e. Calidad gallery — 3 tarjetas (sin fallback) ────────────────────────
+$_calDef = [
+    1 => ['Área de Hematología',      'Análisis de biometría hemática y células sanguíneas con rigor científico y alta precisión.'],
+    2 => ['Química Clínica',          'Determinación automatizada de metabolitos, perfil lipídico y enzimas específicas.'],
+    3 => ['Microbiología y Cultivos', 'Aislamiento, tinción de Gram y pruebas de susceptibilidad a antimicrobianos.'],
+];
+$calidadCards = [];
+for ($qi = 1; $qi <= 3; $qi++) {
+    $qActivo = $c('calidad', "gallery{$qi}", 'activo', '1');
+    if ($qActivo === '0') continue; // Omitir tarjeta desactivada (apagada) desde el CMS
+    $calidadCards[$qi] = [
+        'img'    => $c('calidad', "gallery{$qi}", 'imagen_url', ''),
+        'alt'    => $_calDef[$qi][0],
+        'titulo' => $c('calidad', "gallery{$qi}", 'titulo',      $_calDef[$qi][0]),
+        'desc'   => $c('calidad', "gallery{$qi}", 'descripcion', $_calDef[$qi][1]),
+    ];
+}
+
+// ── 1d. Promociones vigentes → $promos ───────────────────────────────────────
+$promos = $_bypassCache ? null : \Common\Cache::get(\Common\Cache::KEY_PROMOS);
+if ($promos === null) {
+    $promoStmt = $db->query(
+        "SELECT cp.id, cp.dia_semana, cp.descripcion,
+                cp.precio_regular, cp.precio_oferta,
+                cp.imagen_fondo, cp.activo,
+                ce.nombre            as ssot_nombre,
+                ce.descripcion_breve as ssot_desc_breve,
+                ce.detalle           as ssot_detalle,
+                ce.clave_interna, ce.muestra_requerida,
+                ce.tiempo_procesamiento, ce.preparacion,
+                cc.nombre as categoria_nombre
+         FROM catalogo_promociones cp
+         LEFT JOIN catalogo_estudios ce ON cp.estudio_id = ce.id
+         LEFT JOIN catalogo_categorias cc ON ce.categoria_id = cc.id
+         WHERE cp.activo = 1
+         ORDER BY cp.orden ASC, cp.id ASC"
+    );
+    $promos = $promoStmt ? $promoStmt->fetchAll(\PDO::FETCH_ASSOC) : [];
+    if (!$_bypassCache) \Common\Cache::set(\Common\Cache::KEY_PROMOS, $promos);
+}
+
+// ── Inyectar borrador de promociones si es vista previa ──────────────────
+if ($isPreview && !empty($_SESSION['cms_draft']['promociones'])) {
+    $promoDraft = $_SESSION['cms_draft']['promociones'];
+    
+    // Si la DB trajo menos de 7 (o las que sean), igual debemos iterar
+    // o al revés: iteramos sobre los 7 IDs y construimos el array
+    $draftPromos = [];
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L139-194)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+// ── 1a. configuraciones ─────────────────────────────────────────────────────
+$configRaw = $_bypassCache ? null : \Common\Cache::get(\Common\Cache::KEY_CFG);
+if ($configRaw === null) {
+    $configRaw = $db->query("SELECT clave, valor FROM configuraciones")->fetchAll(\PDO::FETCH_KEY_PAIR) ?: [];
+    if (!$_bypassCache) \Common\Cache::set(\Common\Cache::KEY_CFG, $configRaw);
+}
+
+// ── 1b. web_contenidos → $cms ────────────────────────────────────────────────
+$_cmsRaw = $_bypassCache ? null : \Common\Cache::get(\Common\Cache::KEY_CMS);
+if ($_cmsRaw === null) {
+    $_cmsRaw = [];
+    foreach ($db->query("SELECT seccion, subseccion, clave, valor FROM web_contenidos ORDER BY id")->fetchAll(\PDO::FETCH_ASSOC) as $row) {
+        $_cmsRaw[$row['seccion']][$row['subseccion']][$row['clave']] = $row['valor'];
+    }
+    if (!$_bypassCache) \Common\Cache::set(\Common\Cache::KEY_CMS, $_cmsRaw);
+}
+$cms = $_cmsRaw;
+
+// ── 2. Preview de borrador CMS (solo sesión admin activa) ──────────────────
+// IMPORTANTE: el merge debe ocurrir ANTES de definir $cfg y $c, porque las arrow
+// functions de PHP capturan variables por VALOR en el momento de su creación.
+// Delight Auth guarda el login bajo $_SESSION['auth_logged_in'] (NOT 'user_id').
+$isPreview = !empty($_GET['_preview'])
+    && !empty($_SESSION['auth_logged_in'])
+    && !empty($_SESSION['cms_draft']);
+if ($isPreview) {
+    foreach ($_SESSION['cms_draft'] as $draftSec => $campos) {
+        foreach ($campos as $rawKey => $val) {
+            // Manejar configuraciones globales (prefijo _cfg_)
+            if (str_starts_with($rawKey, '_cfg_')) {
+                $configRaw[substr($rawKey, 5)] = $val;
+                continue;
+            }
+            // Manejar web_contenidos (formato {sub}__{clave})
+            [$sub, $clave] = array_pad(explode('__', $rawKey, 2), 2, $rawKey);
+            $cms[$draftSec][$sub][$clave] = $val;
+        }
+    }
+}
+
+// ── 3. Helpers y Variables Funcionales (Post-Merge) ─────────────────────────
+$cfg = fn(string $k, string $d = '') => (!isset($configRaw[$k]) || $configRaw[$k] === '') ? $d : $configRaw[$k];
+$c   = fn(string $sec, string $sub, string $k, string $d = '') => (!isset($cms[$sec][$sub][$k]) || $cms[$sec][$sub][$k] === '') ? $d : $cms[$sec][$sub][$k];
+
+// Valores frecuentes — sin fallback: el cliente DEBE tener todo en configuraciones
+$cfgNombreLab = $cfg('nombre_laboratorio');
+$cfgNombreC   = $cfg('nombre_corto');
+$cfgTel       = $cfg('telefono');
+$cfgTelDigit  = waNum($cfgTel);
+$cfgWA        = waNum($cfg('whatsapp_numero'));
+$cfgEmail     = $cfg('email_contacto');
+$cfgDirCalle  = $cfg('direccion_calle', 'Azucenas #8, Fracc. Jardines del Sur');
+$cfgCiudad    = $cfg('ciudad', 'Huajuapan de León');
+$cfgEstado    = $cfg('estado', 'Oaxaca');
+$cfgCP        = $cfg('cp', '69000');
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L449-519)</summary>
+
+**Path:** `Unknown file`
+
+```
+    } else {
+        $msgs[$si]['desc_html'] = h($slides[$srcIdx]['descripcion']);
+        $rawStr = (string)$slides[$srcIdx]['descripcion'];
+        $descLen = mb_strlen(trim(html_entity_decode($rawStr, ENT_QUOTES, 'UTF-8')));
+        $pHidden = (trim($rawStr) === '') || ($descLen > 75);
+        $msgs[$si]['p_class'] = ($descLen > 75) ? ' class="d-none-mobile"' : '';
+    }
+
+    $allHiddenMobile = $spanHidden && $hHidden && $pHidden && $ctaHidden;
+    $msgs[$si]['card_class'] = $allHiddenMobile ? ' d-none-mobile' : '';
+}
+
+// Quiénes somos (sin fallback)
+$qsH2         = $c('quienes-somos', 'seccion',   'h2');
+$qsSub        = $c('quienes-somos', 'seccion',   'subtitulo');
+// $qsHisTit ha sido eliminado: el título ahora se renderiza desde CKEditor (ficha1)
+$qsCompromiso = $c('quienes-somos', 'seccion',   'compromiso');
+$qsMision     = $c('quienes-somos', 'ficha2',    'texto');
+$qsVision     = $c('quienes-somos', 'ficha3',    'texto');
+// ficha1/texto: desde 2026-08-23 almacena HTML enriquecido (CKEditor 5).
+// safeHtml() filtra tags permitidos antes de emitir.
+$qsHistoriaHtml = $c('quienes-somos', 'ficha1', 'texto');
+$qsRespBio      = $c('quienes-somos', 'resp', 'bio');
+$qsRespFraseTpl = $c('quienes-somos', 'resp', 'frase_trayectoria');
+$qsRespFrase    = str_replace(
+    '{lab}',
+    h($cfgNombreC),
+    h($qsRespFraseTpl)
+);
+$qsFiloCita   = $c('quienes-somos', 'filosofia', 'tagline');
+$qsFiloTxt    = $c('quienes-somos', 'filosofia', 'texto');
+
+// Especialidades (sin fallback)
+$catalogH2   = $c('especialidades', 'seccion',  'h2');
+$catalogSub  = $c('especialidades', 'seccion',  'subtitulo');
+$catalogNota = $c('especialidades', 'catalogo', 'nota_pie');
+
+// Promociones (sin fallback)
+$promoH2  = $c('promociones', 'banner', 'titulo');
+$promoSub = $c('promociones', 'banner', 'subtitulo');
+
+// Calidad (sin fallback)
+$calH2  = $c('calidad', 'seccion', 'h2');
+$calSub = $c('calidad', 'seccion', 'subtitulo');
+
+// Ubicación (sin fallback)
+$ubH2      = $c('ubicacion', 'seccion', 'h2');
+$ubSub     = $c('ubicacion', 'seccion', 'subtitulo');
+
+// Footer — Color de Fondo desde CMS + Contenido RTE enriquecido desde CMS ($c('footer', 'contenido', 'cuerpo_html'))
+$footerBgColor = $c('footer', 'estilo', 'bg_color', '#0f172a');
+$footerHtml    = safeHtml(trim($c('footer', 'contenido', 'cuerpo_html')));
+
+// Aviso de Privacidad — Contenido HTML consolidado desde el RTE del CMS
+$avisoHtml = $c('aviso-privacidad', 'contenido', 'cuerpo_html');
+
+// SEO con Fallbacks robustos (GAP 2 y GAP 4 resueltos)
+$schemaName  = h($c('seo', 'schema', 'schema_name') ?: 'Laboratorio de Especialidades Hematológicas S.C.');
+$schemaType  = h($c('seo', 'schema', 'schema_type') ?: 'MedicalLaboratory');
+$seoTitle    = $c('seo', 'meta', 'title') ?: 'LAESH — Laboratorio de Especialidades Hematológicas | Huajuapan';
+$seoDesc     = $c('seo', 'meta', 'description') ?: 'Laboratorio de análisis clínicos y estudios hematológicos de alta precisión en Huajuapan de León, Oaxaca.';
+
+// WhatsApp SVG reutilizado en cards de promo
+$waSvg = '<svg width="15" height="15" fill="#25D366" viewBox="0 0 24 24" aria-hidden="true">'
+       . '<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>'
+       . '<path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.118 1.532 5.845L0 24l6.335-1.652A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.65-.508-5.17-1.395l-.37-.22-3.76.981 1.005-3.665-.243-.382A9.944 9.944 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>'
+       . '</svg>';
+?>
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L399-449)</summary>
+
+**Path:** `Unknown file`
+
+```
+            : '',
+    ];
+}
+
+// Compute the global parent background if decoupled
+$heroParentBgStyle = '';
+$hasParentBg = in_array($heroSliderMode, ['decoupled', 'decoupled_hidden', 'fixed_all']);
+if ($hasParentBg) {
+    // Determine which image to use for the fixed background
+    $fixedUrl = $slides[$heroFixedImgIdx]['imagen_url'] ?? '';
+    if ($fixedUrl) {
+        $heroParentBgStyle = ' style="background-image:url(' . h($fixedUrl) . '); background-size: cover; background-position: center center; background-repeat: no-repeat;"';
+    }
+}
+
+// Slide 5: si la descripción CMS está vacía, construirla desde configuraciones
+$slide5DescRaw = $slides[5]['descripcion'];
+$slide5DescGenerated = (h($cfgDirCalle ?: $cfgDir) . ', ' . h($cfgCiudad) . ', ' . h($cfgEstado) . '.<br>'
+      . h($cfgHorSem) . ' &nbsp;|&nbsp; ' . h($cfgHorDom) . ' &nbsp;|&nbsp; Tel: ' . h($cfgTel));
+$slide5DescHTML = $slide5DescRaw ? h($slide5DescRaw) : $slide5DescGenerated;
+
+$hideHeroMessages = in_array($heroSliderMode, ['sync_hidden', 'decoupled_hidden']);
+$useFixedMessage = in_array($heroSliderMode, ['sync_fixed_msg', 'fixed_all']);
+
+$msgs = [];
+for ($si = 1; $si <= 5; $si++) {
+    $srcIdx = $useFixedMessage ? $heroFixedImgIdx : $si;
+    $msgs[$si] = $slides[$srcIdx];
+
+    $etiqRaw = trim((string)($slides[$srcIdx]['etiqueta'] ?? ''));
+    $etiqLen = mb_strlen(html_entity_decode($etiqRaw, ENT_QUOTES, 'UTF-8'));
+    $spanHidden = ($etiqRaw === '') || ($etiqLen > 32);
+    $msgs[$si]['span_class'] = ($etiqLen > 32) ? ' class="d-none-mobile"' : '';
+
+    $titRaw = trim((string)($slides[$srcIdx]['titulo'] ?? ''));
+    $titLen = mb_strlen(html_entity_decode($titRaw, ENT_QUOTES, 'UTF-8'));
+    $hHidden = ($titRaw === '') || ($titLen > 42);
+    $msgs[$si]['h_class'] = ($titLen > 42) ? ' class="d-none-mobile"' : '';
+
+    $ctaRaw = trim((string)($slides[$srcIdx]['cta_texto'] ?? ''));
+    $ctaLen = mb_strlen(html_entity_decode($ctaRaw, ENT_QUOTES, 'UTF-8'));
+    $ctaHidden = ($ctaRaw === '') || ($ctaLen > 12);
+    $msgs[$si]['cta_class'] = ($ctaLen > 12) ? ' d-none-mobile' : '';
+
+    if ($srcIdx === 5) {
+        $msgs[$si]['desc_html'] = $slide5DescHTML;
+        $rawStr = $slide5DescRaw ? $slide5DescRaw : strip_tags($slide5DescGenerated);
+        $descLen = mb_strlen(trim(html_entity_decode($rawStr, ENT_QUOTES, 'UTF-8')));
+        $pHidden = (trim($rawStr) === '') || ($descLen > 75);
+        $msgs[$si]['p_class'] = ($descLen > 75) ? ' class="d-none-mobile"' : '';
+    } else {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Spacing Issues**
+
+I'm currently focused on the spacing issue of the mobile header tagline. It seems the tagline is too close to the hamburger menu in Chrome on mobile devices. My task is to adjust the positioning of the tagline, moving it slightly to the left to create some visual separation. I need to make sure this adjustment looks good on mobile.
+
+
+**Adjusting Mobile Header Spacing**
+
+I've located the relevant CSS for the mobile header tagline within `landing.css` and also within `tablet-samsung-tabs10ultra.css`. I'm going to carefully modify the `margin-left`, `margin-right` and `padding-right` of the `.navbar-tagline` class to achieve a good separation on various mobile screen sizes. I also checked for the `max-width` breakpoints.
+
+**Refining Button Styles**
+
+I'm now focusing on the white CTA button style on tablets. The code for `.btn-outline-white` is in `landing.css`. It seems the white background effect on the button is not desired. I'll need to remove or modify this to align with the current design.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.527464237s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L314-324)</summary>
+
+**Path:** `Unknown file`
+
+```
+        .hero-slide.active .hero-glass-card { transform: translateY(0); opacity: 1; }
+        /* CRÍTICO: solo hijos directos — evita el recuadro blanco en los <span> del H1 */
+        .hero-glass-card > span {
+            background: rgba(204,251,241,0.25); color: var(--secondary-green);
+            padding: 5px 13px; border-radius: 20px; font-weight: 700;
+            font-size: 0.8rem; letter-spacing: 0.05em; text-transform: uppercase;
+            display: inline-block; margin-bottom: 1.2rem;
+        }
+        /* Título compartido — todos los slides (h1 slide-1, h2 slides 2-5) misma definición */
+        .hero-glass-card h1,
+        .hero-glass-card h2 { font-size: 1.7rem; font-weight: 800; margin-bottom: 0.8rem; line-height: 1.2; color: #fff; text-align: center; text-shadow: 0 2px 8px rgba(0,0,0,0.5); font-family: 'Mosquito Std Black','Arial Black',Impact,sans-serif; }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L579-594)</summary>
+
+**Path:** `Unknown file`
+
+```
+        /* .chevron-arrow-svg no necesita regla propia — la transition la provee .orden-acc-hdr > svg */
+        .hr-sep { border: none; height: 1px; background: var(--border); margin: 0.9rem 0; }
+
+        /* Texto y botones */
+        .txt-green        { color: var(--primary-green); }
+        .txt-main         { color: var(--text-main); }
+        .txt-primary-bold { color: var(--primary); font-weight: 700; }
+        .txt-pgd-sm       { color: var(--primary); font-weight: 700; font-size: 0.87rem; margin-bottom: 0.4rem; }
+        .btn-outline-white { background: #ffffff; color: var(--primary); box-shadow: 0 4px 10px rgba(0,0,0,0.1); padding: 12px 24px; }
+        .list-link-block  { color: var(--text-main); display: block; font-size: 1.08rem; margin-bottom: 2px; }
+
+        /* Iconos inline */
+        .icon-22 { width: 22px; height: 22px; margin-top: 2px; flex-shrink: 0; opacity: 0.75; }
+        .icon-24 { width: 24px; height: 24px; }
+        .icon-20 { width: 20px; height: 20px; }
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1169-1181)</summary>
+
+**Path:** `Unknown file`
+
+```
+    .hero-premium { height: 45vw; min-height: 260px; max-height: 500px; }
+    .hero-slide   { background-size: contain !important; background-position: center center !important; border-radius: 18px !important; overflow: hidden !important; }
+    /* especificidad (0,4,0) supera targeting.css :root[data-input="touch"] .btn (0,3,0)
+       min-height:unset cancela la regla de 44px de toque mínimo para botones hero */
+    .hero-slide .hero-glass-card .flex-center-15 .btn-outline-white {
+        padding: 7px 18px; font-size: 0.8rem; border-radius: 7px; min-height: unset;
+    }
+    .navbar-sticky > .nav-links { display: none; }
+    .navbar-sticky > .nav-links.mobile-open {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 100%; left: 0; right: 0;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1221-1237)</summary>
+
+**Path:** `Unknown file`
+
+```
+    .landing-nav-spacer { height: 56px; }
+    .navbar-sticky .logo img { height: 30px; width: auto; }
+    .navbar-tagline {
+            display: block;
+            font-size: 0.65rem;
+            letter-spacing: 0.01em;
+            line-height: 1.2;
+            margin-top: 2px;
+            opacity: 0.9;
+            white-space: nowrap;
+            max-width: none;
+            flex-shrink: 1;
+        }
+    .navbar-sticky > .nav-links { display: none; }
+    .navbar-sticky > .nav-links.mobile-open {
+            display: flex;
+            flex-direction: column;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `tablet-samsung-tabs10ultra.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L179-224)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+    /* Ajuste de tarjetas de calidad y acreditación */
+    .quality-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem;
+    }
+
+    /* Modales en Tableta Vertical — 1480px de alto disponible */
+    .modal-dialog {
+        max-width: 90%;
+        margin: 2rem auto;
+    }
+
+    .modal-scroll-body {
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+}
+
+
+/* ─────────────────────────────────────────────────────────────────
+   § 4. FOOTER & FLOATING ACTION BUTTONS (Elevación y Visibilidad)
+   Garantiza que el pie de página no se recorte y que los botones de
+   WhatsApp y Facebook permanezcan flotando visibles sobre el footer.
+   ───────────────────────────────────────────────────────────────── */
+.footer-main {
+    position: relative;
+    z-index: 10;
+    padding-bottom: 2.5rem;
+    overflow: visible;
+}
+
+.social-float {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 1080;
+}
+
+.whatsapp-float {
+    position: fixed;
+    bottom: 96px;
+    right: 24px;
+    z-index: 1080;
+}
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:05 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:05 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:05 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `tablet-samsung-tabs10ultra.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L64-109)</summary>
+
+**Path:** `Unknown file`
+
+```
+   Samsung Galaxy Tab S10 Ultra Horizontal (~1480px × 924px)
+   ───────────────────────────────────────────────────────────────── */
+@media (min-width: 1025px) and (max-width: 1600px) {
+    /* Header & Nav Pad — Tagline no recortado y espaciado uniforme de menú */
+    .navbar-tagline {
+        font-size: 0.85rem;
+        white-space: nowrap;
+        overflow: visible;
+        text-overflow: clip;
+        flex-shrink: 0;
+        padding: 0 1rem;
+        margin-left: 1rem;
+        margin-right: auto;
+    }
+
+    .navbar-sticky .nav-links {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 1.25rem;
+        margin-left: auto;
+    }
+
+    .navbar-sticky .nav-links a {
+        font-size: 0.92rem;
+        white-space: nowrap;
+        margin: 0;
+    }
+
+    /* Hero Section — Ajuste de proporción en pantalla grande de 14.6" */
+    .hero-slider-wrap {
+        min-height: 520px;
+        max-height: 680px;
+    }
+
+    .hero-slide-content h1 {
+        font-size: clamp(2rem, 3.2vw, 3rem);
+        line-height: 1.2;
+    }
+
+    .hero-slide-content p {
+        font-size: 1.1rem;
+        max-width: 680px;
+    }
+
+    /* Carrusel de Especialidades — 3 tarjetas por vista */
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `tablet-samsung-tabs10ultra.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L119-179)</summary>
+
+**Path:** `Unknown file`
+
+```
+    }
+
+    /* Ubicación & Contacto — Ficha horizontal */
+    .contact-grid-horizontal {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
+    }
+
+    /* Modales — Control de desbordamiento */
+    .modal-scroll-body {
+        max-height: 75vh;
+        overflow-y: auto;
+    }
+}
+
+
+/* ─────────────────────────────────────────────────────────────────
+   § 3. ORIENTACIÓN VERTICAL / PORTRAIT (Viewport 768px a 1024px)
+   Samsung Galaxy Tab S10 Ultra Vertical (~924px × 1480px)
+   ───────────────────────────────────────────────────────────────── */
+@media (min-width: 768px) and (max-width: 1024px) {
+    /* Header de Tableta Vertical */
+    .header-nav-container {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+    }
+
+    /* Hero Section — Proporción vertical optimizada */
+    .hero-slider-wrap {
+        min-height: 480px;
+        max-height: 620px;
+    }
+
+    .hero-slide-content h1 {
+        font-size: clamp(1.75rem, 3.8vw, 2.4rem);
+        line-height: 1.25;
+    }
+
+    .hero-slide-content p {
+        font-size: 1rem;
+        max-width: 100%;
+    }
+
+    /* Carrusel de Especialidades — 2 tarjetas por vista */
+    .specialties-carousel-track .carousel-card {
+        flex: 0 0 calc(50% - 0.75rem);
+        max-width: calc(50% - 0.75rem);
+    }
+
+    /* Catálogo de Promociones — 2 columnas en portrait */
+    .catalog-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    /* Ubicación & Contacto — 2 columnas balanceadas */
+    .contact-grid-horizontal {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Refining Tablet Styling**
+
+I'm currently integrating tablet overrides into `tablet-samsung-tabs10ultra.css`. I'm focusing on Section 2 (Landscape) and Section 3 (Portrait), along with a general rule. I'm prioritizing the refinement of the CTA button's style for tablet use, specifically a glassmorphic style without a white background, which is the key update.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.095624288s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:06 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:06 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Code's Output**
+
+I've verified the `index.php` code has no apparent syntax errors. Now, I'm focusing on the user-facing updates, particularly the separation of the slogan from the mobile hamburger menu. I've updated the `.navbar-tagline` within `landing.css` for smaller screens using `@media (max-width: 767px)`.
+
+
+
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.077169805s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:10 am
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+. Para: Separación del Slogan Superior en Teléfonos Móviles , considero debes reducir un poco el logotivo para si el texto del slogan se vea mejor.
+. Reduce un poquito la intensidad del fondo blanco para el estilo de  la Sección "Etiqueta" (Badge Hero).
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `tablet-samsung-tabs10ultra.css`
+**Language:** css
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+/* ═══════════════════════════════════════════════════════════════════
+   tablet-samsung-tabs10ultra.css — LAESH Specific Tablet Responsiveness
+   ───────────────────────────────────────────────────────────────────
+   Reglas de adaptabilidad dedicadas para Samsung Galaxy Tab S10 Ultra
+   (14.6", 2960×1848 px / DPR 2.5) y tabletas de gran formato.
+   Orientación Horizontal (Landscape ~1480px) & Vertical (Portrait ~924px).
+
+   NO USAR !important (Regla 8 del proyecto LAESH).
+   Se apoya en variables CSS (--primary, --surface, etc.) de tokens.css.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────────────────────────────
+   § 0. ASSET IMMUTABILITY & ANTI-DISTORTION GUARDS (Protección de Imágenes)
+   Garantiza que todas las imágenes mantengan su proporción aspect-ratio
+   sin achatamientos ni deformaciones en pantallas AMOLED de 14.6".
+   ───────────────────────────────────────────────────────────────── */
+.hero-logo,
+.navbar-sticky .logo img {
+    height: auto;
+    max-height: 46px;
+    width: auto;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.specialties-carousel-track .carousel-card img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.map-zoom-img {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `logo img`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:15 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1219-1244)</summary>
+
+**Path:** `Unknown file`
+
+```
+            padding: 0.5rem 1rem;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+    .landing-nav-spacer { height: 56px; }
+    .navbar-sticky .logo img { height: 30px; width: auto; }
+    .navbar-tagline {
+            display: block;
+            font-size: 0.65rem;
+            letter-spacing: 0.01em;
+            line-height: 1.2;
+            margin-top: 2px;
+            margin-left: 0.4rem;
+            margin-right: auto;
+            padding-right: 0.75rem;
+            text-align: left;
+            opacity: 0.95;
+            white-space: nowrap;
+            max-width: none;
+            flex-shrink: 1;
+        }
+    .navbar-sticky > .nav-links { display: none; }
+    .navbar-sticky > .nav-links.mobile-open {
+            display: flex;
+            flex-direction: column;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `hero-glass-card > span`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:15 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L314-324)</summary>
+
+**Path:** `Unknown file`
+
+```
+        .hero-slide.active .hero-glass-card { transform: translateY(0); opacity: 1; }
+        /* CRÍTICO: solo hijos directos — evita el recuadro blanco en los <span> del H1 */
+        .hero-glass-card > span {
+            background: rgba(255, 255, 255, 0.95); color: #004098;
+            border: 1px solid rgba(0, 82, 183, 0.25);
+            padding: 5px 14px; border-radius: 20px; font-weight: 800;
+            font-size: 0.82rem; letter-spacing: 0.06em; text-transform: uppercase;
+            display: inline-block; margin-bottom: 1.2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        /* Título compartido — todos los slides (h1 slide-1, h2 slides 2-5) misma definición */
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:15 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:15 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `tablet-samsung-tabs10ultra.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L244-258)</summary>
+
+**Path:** `Unknown file`
+
+```
+    color: #ffffff;
+    border-color: #ffffff;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Etiqueta / Tag Badge — fondo blanco semi-opaco y texto azul contrastante para alta legibilidad */
+.hero-glass-card > span {
+    background: rgba(255, 255, 255, 0.95);
+    color: #004098;
+    border: 1px solid rgba(0, 82, 183, 0.25);
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:15 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:15 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:17 am
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+Analiza , si para el esquema actual de seguridad en la autenticación desde la index website hacia los portales de medico, recpecion y admin se esta utilizando el mecanismo jti (JWT ID) , informa me.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `tablet-samsung-tabs10ultra.css`
+**Language:** css
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+/* ═══════════════════════════════════════════════════════════════════
+   tablet-samsung-tabs10ultra.css — LAESH Specific Tablet Responsiveness
+   ───────────────────────────────────────────────────────────────────
+   Reglas de adaptabilidad dedicadas para Samsung Galaxy Tab S10 Ultra
+   (14.6", 2960×1848 px / DPR 2.5) y tabletas de gran formato.
+   Orientación Horizontal (Landscape ~1480px) & Vertical (Portrait ~924px).
+
+   NO USAR !important (Regla 8 del proyecto LAESH).
+   Se apoya en variables CSS (--primary, --surface, etc.) de tokens.css.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────────────────────────────
+   § 0. ASSET IMMUTABILITY & ANTI-DISTORTION GUARDS (Protección de Imágenes)
+   Garantiza que todas las imágenes mantengan su proporción aspect-ratio
+   sin achatamientos ni deformaciones en pantallas AMOLED de 14.6".
+   ───────────────────────────────────────────────────────────────── */
+.hero-logo,
+.navbar-sticky .logo img {
+    height: auto;
+    max-height: 46px;
+    width: auto;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.specialties-carousel-track .carousel-card img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.map-zoom-img {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `jti`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:28 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `jwt`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:28 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `Delight\Auth`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:28 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `login.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/**
+ * login/login.php — Controlador de Autenticación LAESH
+ * Ubicación: website/login/login.php
+ * URL: /laesh/login/login.php
+ *
+ * GET  ?portal=medico|labadmin|admin → muestra formulario de acceso
+ * POST                               → autentica con Delight-Auth y redirige por rol RBAC
+ *
+ * Reglas:
+ *  R15.1 — index.html NO se modifica. Este archivo es la implementación PHP del login.
+ *  R14.12 — CSRF Guard = primer paso del controlador POST.
+ *  R14.13 — CSRF en $_SESSION, sin tabla BD.
+ *  R15.5  — Phone-as-Email: users.email = "{10digits}@laesh.local"
+ */
+
+declare(strict_types=1);
+
+// commons/ está 2 niveles arriba de login/
+require_once __DIR__ . '/../../commons/commons.php';
+
+use Delight\Auth\InvalidEmailException;
+use Delight\Auth\InvalidPasswordException;
+use Delight\Auth\EmailNotVerifiedException;
+use Delight\Auth\TooManyRequestsException;
+use Common\Logger;
+use Common\Response;
+
+// Inicializar CSRF token en sesión si no existe (R14.13)
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); // 64 hex chars
+}
+
+$error  = '';
+$portal = htmlspecialchars($_GET['portal'] ?? $_POST['portal'] ?? 'medico', ENT_QUOTES, 'UTF-8');
+
+$portalTitleMap = [
+    'medico'   => 'Acceso Médicos',
+    'laesh'    => 'Acceso LAESH',     // RBAC decide si es Recepción o Admin
+    // aliases legacy (por si hay links directos)
+    'labadmin' => 'Acceso LAESH',
+    'admin'    => 'Acceso LAESH',
+];
+$pageTitle = $portalTitleMap[$portal] ?? 'Acceso LAESH';
+
+// Redirect map rol → portal (Alias /laesh/* en restaurantb.conf)
+$redirectMap = [
+    'MEDICO'    => '/laesh/md/',
+    'RECEPCION' => '/laesh/rc/',
+    'ADMIN'     => '/laesh/rc/',   // ADMIN usa labadmin como portal principal; /laesh/adrc/ sigue accesible desde "Contenidos del Sitio Web"
+];
+
+// ── POST: Procesar credenciales ──────────────────────────────────────────────
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Si había una sesión activa diferente, cerrarla para permitir conmutar de usuario
+    if (Flight::auth()->isLoggedIn()) {
+        try {
+            Flight::auth()->logOut();
+        } catch (\Throwable $ignored) {}
+    }
+
+    // R14.12 — CSRF Guard primero, antes de cualquier llamada a Delight-Auth o PDO
+    $submittedToken = $_POST['csrf_token'] ?? '';
+    if (!hash_equals($_SESSION['csrf_token'] ?? '', $submittedToken)) {
+        Logger::log('WARN', 'Token CSRF inválido en login. IP: ' . ($_SERVER['REMOTE_ADDR'] ?? 'N/A'));
+        if (Response::isHtmx()) {
+            Response::htmxError('Token de seguridad inválido. Recarga la página e intenta de nuevo.', 403);
+        }
+        http_response_code(403);
+        die('403 Forbidden — Token de seguridad inválido. Por favor recarga la página.');
+    }
+
+    // Rotar token tras cada POST (R14.12)
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+
+    // R15.5 — Construir email virtual desde número de teléfono
+    $telefono = preg_replace('/\D/', '', trim($_POST['telefono'] ?? ''));
+    $password = $_POST['password'] ?? '';
+
+    if (strlen($telefono) !== 10) {
+        $error = 'Ingresa un número de teléfono válido de 10 dígitos.';
+        if (Response::isHtmx()) Response::htmxError($error);
+    } elseif (empty($password)) {
+        $error = 'La contraseña es requerida.';
+        if (Response::isHtmx()) Response::htmxError($error);
+    } else {
+        $emailVirtual = $telefono . '@laesh.local';
+
+        try {
+            $auth = Flight::auth();
+            $auth->login($emailVirtual, $password, 0); // 0 = sin "recordarme"
+
+            // Login exitoso — determinar redirect por rol RBAC
+            $role = Flight::rbac()->getRole();
+            $dest = $redirectMap[$role] ?? null;
+
+            if ($dest === null) {
+                $auth->logOut();
+                Logger::log('WARN', "Login sin rol asignado. user_id={$auth->getUserId()}", $auth->getUserId());
+                $error = 'Tu cuenta no tiene un rol asignado. Contacta al administrador.';
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `commons.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+// commons.php - Inicialización global de servicios, manejo de errores y dependencias para LAESH
+
+date_default_timezone_set('America/Mexico_City');
+
+// Cabeceras de seguridad
+header('X-Content-Type-Options: nosniff');
+header('X-Frame-Options: SAMEORIGIN');
+header('X-XSS-Protection: 1; mode=block');
+
+// 1. Iniciar sesión PHP con banderas de seguridad y duración dinámica desde BD
+if (session_status() === PHP_SESSION_NONE) {
+    ini_set('session.cookie_httponly', 1);
+    ini_set('session.use_only_cookies', 1);
+
+    // session_lifetime: fijo 24h — se eliminó la conexión PDO temporal que existía aquí
+    // para leer este valor desde BD antes de session_start(). Abrir una conexión extra
+    // solo para este dato añade overhead real por request (2 PDO + 3 queries por carga).
+    // Si se requiere configurabilidad futura, exponer como var de entorno SESSION_LIFETIME.
+    $sessionLifetime = (int)(getenv('SESSION_LIFETIME') ?: 86400);
+
+    ini_set('session.gc_maxlifetime', $sessionLifetime);
+    ini_set('session.cookie_lifetime', $sessionLifetime);
+    if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
+        ini_set('session.cookie_secure', 1);
+    }
+    session_start();
+}
+
+// 2. Cargar el cargador manual de librerías compartidas
+require_once __DIR__ . '/autoload.php';
+require_once __DIR__ . '/notifier.php';
+
+use Common\DB;
+use Common\Logger;
+use Delight\Auth\Auth;
+
+// 3. Manejo de Errores Globales (PSR-3)
+set_error_handler(function ($errno, $errstr, $errfile, $errline) {
+    if (!(error_reporting() & $errno)) {
+        return false;
+    }
+    $message = sprintf("Error [%d]: %s en %s:%d", $errno, $errstr, $errfile, $errline);
+    Logger::log("ERROR", $message);
+    return true;
+});
+
+set_exception_handler(function ($exception) {
+    $config  = require __DIR__ . '/config.php';
+    $isDev   = ($config['app']['env'] ?? 'production') === 'development';
+
+    // ── Error 1969: max_statement_time excedido (MariaDB KILL automático) ──
+    // Ocurre cuando una query supera max_statement_time = 10s en mariadb.cnf.
+    // El motor devuelve SQLSTATE HY000 errno 1969 como PDOException.
+    // → Respuesta 503: el usuario ve mensaje claro; admin ve traza en log.
+    if ($exception instanceof \PDOException) {
+        $nativeCode = (int)($exception->errorInfo[1] ?? 0);
+        if ($nativeCode === 1969) {
+            http_response_code(503);
+            Logger::log(
+                'TIMEOUT',
+                sprintf('[1969] max_statement_time excedido — %s en %s:%d | Trace: %s',
+                    $exception->getMessage(),
+                    $exception->getFile(),
+                    $exception->getLine(),
+                    $exception->getTraceAsString()
+                )
+            );
+            if ($isDev) {
+                echo '<h1>⏱️ Timeout de Base de Datos (503)</h1>'
+                   . '<p><strong>Error 1969:</strong> La consulta superó el límite máximo de ejecución (max_statement_time = 10s) y fue interrumpida por MariaDB.</p>'
+                   . '<pre>' . htmlspecialchars($exception->getMessage()) . "\n\n" . htmlspecialchars($exception->getTraceAsString()) . '</pre>';
+            } else {
+                echo '<h1>Servicio temporalmente no disponible</h1>'
+                   . '<p>La operación tardó demasiado y fue interrumpida automáticamente. '
+                   . 'Por favor intente de nuevo; si el error persiste, contacte al administrador.</p>';
+            }
+            exit(1);
+        }
+    }
+
+    // ── Handler genérico (500) ──────────────────────────────────────────────
+    $message = sprintf(
+        "Excepcion no capturada: %s en %s:%d\nTrace:\n%s",
+        $exception->getMessage(),
+        $exception->getFile(),
+        $exception->getLine(),
+        $exception->getTraceAsString()
+    );
+    Logger::log("CRITICAL", $message);
+
+    if ($isDev) {
+        echo "<h1>Internal Server Error (500)</h1><pre>" . htmlspecialchars($message) . "</pre>";
+    } else {
+        http_response_code(500);
+        echo "<h1>Ha ocurrido un error interno.</h1><p>Por favor contacte al administrador.</p>";
+    }
+    exit(1);
+});
+
+// 4. Inicializar Delight Auth y registrar en Flight PHP
+
+// Flight::map('rbac') se registra SIEMPRE (fuera del try/catch) porque su closure
+// es lazy: RbacManager se instancia solo cuando se llama, no al mapear.
+// Si lo dejamos dentro del try y DB::connect() falla, 'rbac' nunca queda mapeado
+// y cualquier ruta que llame Flight::rbac() recibe "rbac must be a mapped method".
+Flight::map('rbac', function () {
+    static $rbac = null;
+    if ($rbac === null) {
+        $rbac = new \Common\RbacManager(Flight::auth(), Flight::db());
+    }
+    return $rbac;
+});
+
+try {
+    $pdo = DB::connect();
+
+    // Registrar Delight Auth directamente en Flight para Inyección de Dependencias.
+    // Requiere $pdo en tiempo de registro → sigue dentro del try.
+    Flight::register('auth', 'Delight\Auth\Auth', [$pdo]);
+```
+
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+analiza a detalle como podriamos implementar jti (JWT ID) para fortalecer la seguridad actual en la authenticación, listame el plan.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `tablet-samsung-tabs10ultra.css`
+**Language:** css
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `config.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+// config.php — Configuración del ecosistema LAESH (Bloc Digital)
+//
+// Credenciales leídas desde variables de entorno (mínimo privilegio):
+//   LAESH_DB_USER / LAESH_DB_PASS / LAESH_DB_HOST / LAESH_DB_PORT / LAESH_DB_NAME
+//
+// Fallbacks por ambiente (env var siempre tiene prioridad):
+//   Docker local  (/.dockerenv existe) → host=db,        port=3306
+//   KVM2 Hostinger / OCI / nativo      → host=127.0.0.1, port=3306
+//   (En todos los entornos nativo las env vars se inyectan vía PHP-FPM pool
+//    y cache_renew.cron — el fallback no-Docker solo aplica si la inyección falla)
+// Nota: ya NO se usa root. Usuario dedicado laesh_app con privilegios mínimos en laesh_db.
+
+$inDocker = file_exists('/.dockerenv');
+
+return [
+    'db' => [
+        'host'    => getenv('LAESH_DB_HOST') ?: ($inDocker ? 'db'   : '127.0.0.1'),
+        'port'    => (int)(getenv('LAESH_DB_PORT') ?: 3306),   // 3306 en todos los entornos nativo (KVM2/OCI)
+        'user'    => getenv('LAESH_DB_USER') ?: 'laesh_app',
+        'pass'    => getenv('LAESH_DB_PASS') ?: 'laesh_2026_dev',
+        'name'    => getenv('LAESH_DB_NAME') ?: 'laesh_db',
+        'charset' => 'utf8mb4'
+    ],
+    'app' => [
+        'env'      => getenv('APP_ENV') ?: 'development',
+        // Ruta absoluta al dir de logs del stack (fuera del webroot).
+        // __DIR__ = commons/ dentro de laesh-swbldi/ — usar ruta absoluta para evitar
+        // que un deploy en subdirectorio diferente cambie la ubicación del log.
+        'log_path' => '/opt/laesh/logs/app.log'
+    ],
+    'swoole' => [
+        // FIX 2026-09-08 (G-SWOOLE-01): En KVM2/nativo Swoole escucha en 127.0.0.1 (loopback).
+        // UFW ya bloquea el puerto 9502 externo, pero si UFW se deshabilita accidentalmente,
+        // el binding a 0.0.0.0 expondría el bridge HTTP internamente.
+        // 127.0.0.1 elimina esa dependencia — Nginx /ws → proxy_pass http://127.0.0.1:9502 funciona igual.
+        // En Docker: 0.0.0.0 sigue siendo necesario para que el contenedor nginx resuelva al contenedor swoole.
+        'host' => getenv('LAESH_WS_HOST') ?: ($inDocker ? '0.0.0.0' : '127.0.0.1'),
+        'port' => (int)(getenv('LAESH_WS_PORT') ?: 9502),
+    ]
+];
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Drafting Implementation Plan**
+
+I'm now drafting the implementation plan. I'm focusing on a clear structure for the plan, starting with the architectural concept and purpose of JTI within the LAESH project. I will cover the components that require modification or creation, and I'll detail database changes in `05_jwt_jti_registry.sql`, alongside middleware specifications.
+
+
+
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.051197459s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:39 am
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+pARA rendimiento, se usara OPcache ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `tablet-samsung-tabs10ultra.css`
+**Language:** css
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `opcache`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:42 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Cache.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/**
+ * Cache.php — OPcache PHP File Store para LAESH Sitio Público
+ *
+ * Estrategia A: Caché basada en archivos PHP exportados (`return [...]`)
+ * que OPcache compila a bytecode en RAM en el primer acceso y sirve
+ * directamente desde memoria en los siguientes.
+ *
+ * Patrón: Cache-Aside
+ *   1. get($key) → hit: retorna array desde OPcache (<0.1ms)
+ *                  miss: retorna null (el caller consulta la BD y llama set())
+ *   2. set($key, $data, $ttl) → serializa y escribe archivo PHP + OPcache compila
+ *   3. invalidate($key) → unlink del archivo → siguiente request regenera
+ *   4. clear() → elimina todos los archivos del directorio caché (cron 5 AM)
+ *
+ * Claves de caché usadas en index.php:
+ *   LAESH_CFG    → tabla configuraciones            (TTL 12h)
+ *   LAESH_CMS    → tabla web_contenidos             (TTL 10min)
+ *   LAESH_TREE   → árbol catalogo_grupos+estudios   (TTL 24h)
+ *   LAESH_PROMOS → catalogo_promociones (JOIN)      (TTL 10min)
+ *
+ * @package Common
+ * @since   2026-09-02 (Sprint Cache L2)
+ */
+declare(strict_types=1);
+
+namespace Common;
+
+class Cache
+{
+    /** Directorio donde se guardan los archivos de caché PHP */
+    private static string $cacheDir = '';
+
+    /** Prefijo de entorno para evitar colisiones entre ambientes (dev/prod) */
+    private static string $envPrefix = 'prod';
+
+    // ── Constantes de TTL (en segundos) ───────────────────────────────────────
+    public const TTL_CONFIG = 43200;   // 12 horas — configuraciones institucionales
+    public const TTL_CMS    = 600;     // 10 minutos — contenido editorial CMS
+    public const TTL_TREE   = 86400;   // 24 horas — árbol de estudios clínicos
+    public const TTL_PROMOS = 600;     // 10 minutos — promociones vigentes
+
+    // ── Claves canónicas ───────────────────────────────────────────────────────
+    public const KEY_CFG    = 'LAESH_CFG';
+    public const KEY_CMS    = 'LAESH_CMS';
+    public const KEY_TREE   = 'LAESH_TREE';
+    public const KEY_PROMOS = 'LAESH_PROMOS';
+
+    /**
+     * Inicializa el sistema de caché.
+     * Debe llamarse una vez desde commons.php (o desde index.php antes del primer get/set).
+     *
+     * @param string $cacheDir  Ruta absoluta al directorio de caché (default: /tmp/laesh_cache)
+     * @param string $envPrefix Prefijo de ambiente para aislar dev/prod ('dev' | 'prod')
+     */
+    public static function init(string $cacheDir = '', string $envPrefix = 'prod'): void
+    {
+        // Prioridad: parámetro > LAESH_CACHE_DIR (env) > /tmp/laesh_cache
+        // En KVM2/producción se inyecta LAESH_CACHE_DIR=/opt/laesh/cache vía PHP-FPM pool
+        // y vía el cron, evitando el aislamiento PrivateTmp del servicio php8.3-fpm.service.
+        self::$cacheDir  = $cacheDir ?: (getenv('LAESH_CACHE_DIR') ?: sys_get_temp_dir() . '/laesh_cache');
+        self::$envPrefix = preg_replace('/[^a-z0-9_]/', '_', strtolower($envPrefix));
+
+        if (!is_dir(self::$cacheDir)) {
+            @mkdir(self::$cacheDir, 0755, true);
+        }
+    }
+
+    /**
+     * Lee un valor del caché.
+     *
+     * @param string $key Clave canónica (ej: Cache::KEY_CMS)
+     * @return mixed|null El array PHP cacheado, o null en caso de miss/expiración
+     */
+    public static function get(string $key): mixed
+    {
+        $file = self::filePath($key);
+
+        // Miss: archivo no existe
+        if (!file_exists($file)) {
+            return null;
+        }
+
+        // Miss por expiración (TTL basado en mtime del archivo)
+        $ttl = self::ttlForKey($key);
+        if ((time() - filemtime($file)) > $ttl) {
+            @unlink($file);
+            // Invalidar también la compilación OPcache del archivo expirado
+            if (function_exists('opcache_invalidate')) {
+                @opcache_invalidate($file, true);
+            }
+            return null;
+        }
+
+        // Hit: include retorna el array; OPcache sirve bytecode desde RAM
+        try {
+            $data = @include $file;
+            return (is_array($data)) ? $data : null;
+        } catch (\Throwable) {
+            // Archivo corrupto — eliminar y tratar como miss
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Cache Implementation**
+
+I've been examining the `Cache.php` file, specifically its implementation for LAESH. It appears to utilize a PHP file-based caching strategy, where data is exported as PHP code (using `return`). This approach leverages OPcache for bytecode compilation and RAM storage, which seems efficient. Further analysis into potential performance bottlenecks or optimization areas is needed, but the current design's clarity is encouraging.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.000832065s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+me referia en particular a la nota: "Rendimiento: Para evitar que la verificación del jti en BD agregue latencia excesiva en cada request, el método JwtManager::verifyToken puede incluir una caché en memoria..", analiza y realiea toda la arquitectura y componentes de la seguridad en authtenicación y autorizaciion, dame informe final , de haber gaps/issues listalos.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `tablet-samsung-tabs10ultra.css`
+**Language:** css
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Performance Implications**
+
+I'm currently focused on the note regarding performance optimization for JWT verification. Specifically, I'm analyzing the potential latency introduced by database lookups for JTI validation. I'm considering an in-memory cache within `JwtManager::verifyToken` as a solution. I'm now digging into architectural implications and component interactions to understand the trade-offs of this approach.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `CREATE TABLE`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.046399987s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:44 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `users`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:44 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `config.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L14-41)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+return [
+    'db' => [
+        'host'    => getenv('LAESH_DB_HOST') ?: ($inDocker ? 'db'   : '127.0.0.1'),
+        'port'    => (int)(getenv('LAESH_DB_PORT') ?: 3306),   // 3306 en todos los entornos nativo (KVM2/OCI)
+        'user'    => getenv('LAESH_DB_USER') ?: 'laesh_app',
+        'pass'    => getenv('LAESH_DB_PASS') ?: 'laesh_2026_dev',
+        'name'    => getenv('LAESH_DB_NAME') ?: 'laesh_db',
+        'charset' => 'utf8mb4'
+    ],
+    'app' => [
+        'env'      => getenv('APP_ENV') ?: 'development',
+        // Ruta absoluta al dir de logs del stack (fuera del webroot).
+        // __DIR__ = commons/ dentro de laesh-swbldi/ — usar ruta absoluta para evitar
+        // que un deploy en subdirectorio diferente cambie la ubicación del log.
+        'log_path' => '/opt/laesh/logs/app.log'
+    ],
+    'swoole' => [
+        // FIX 2026-09-08 (G-SWOOLE-01): En KVM2/nativo Swoole escucha en 127.0.0.1 (loopback).
+        // UFW ya bloquea el puerto 9502 externo, pero si UFW se deshabilita accidentalmente,
+        // el binding a 0.0.0.0 expondría el bridge HTTP internamente.
+        // 127.0.0.1 elimina esa dependencia — Nginx /ws → proxy_pass http://127.0.0.1:9502 funciona igual.
+        // En Docker: 0.0.0.0 sigue siendo necesario para que el contenedor nginx resuelva al contenedor swoole.
+        'host' => getenv('LAESH_WS_HOST') ?: ($inDocker ? '0.0.0.0' : '127.0.0.1'),
+        'port' => (int)(getenv('LAESH_WS_PORT') ?: 9502),
+    ]
+];
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:44 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:44 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Designing JWT Manager**
+
+I'm currently focused on constructing the `JwtManager` class within `JwtManager.php`, aiming for a JWT implementation that relies solely on native PHP functions. Specifically, I'm prioritizing HMAC SHA-256 (`HS256`) for token generation and verification. A key requirement is cryptographic safety with zero external dependencies.
+
+
+
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.134126273s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:44 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `autoload.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+// autoload.php - Autoloader para el entorno frugal LAESH (cargando librerías compartidas)
+
+$sharedLibsDir = __DIR__ . '/../libs';   // flight, plates, auth — vendored en laesh-swbldi/libs/
+
+// 1. Inicializar el autoloteador nativo de Flight PHP
+require_once $sharedLibsDir . '/flight/autoload.php';
+
+// 2. Registrar cargador PSR-4 para Plates, Delight-Auth y espacio de nombres Common\
+spl_autoload_register(function ($class) use ($sharedLibsDir) {
+    $prefixes = [
+        'League\\Plates\\' => $sharedLibsDir . '/plates/',
+        'Delight\\Auth\\' => $sharedLibsDir . '/auth/Delight/Auth/',
+        'Delight\\Cookie\\' => $sharedLibsDir . '/auth/Delight/Cookie/',
+        'Delight\\Db\\' => $sharedLibsDir . '/auth/Delight/Db/',
+        'Delight\\Base64\\' => $sharedLibsDir . '/auth/Delight/Base64/',
+        'Delight\\Http\\' => $sharedLibsDir . '/auth/Delight/Http/',
+        'Common\\' => __DIR__ . '/',
+        'RC\\Negocio\\' => __DIR__ . '/../rc/negocio/',
+        'MD\\Negocio\\' => __DIR__ . '/../md/negocio/',
+        'ADMRC\\Negocio\\' => __DIR__ . '/../admrc/negocio/',
+    ];
+
+    foreach ($prefixes as $prefix => $base_dir) {
+        $len = strlen($prefix);
+        if (strncmp($prefix, $class, $len) !== 0) {
+            continue;
+        }
+
+        $relative_class = substr($class, $len);
+        $file = $base_dir . str_replace('\\', '/', $relative_class) . '.php';
+
+        if (file_exists($file)) {
+            require_once $file;
+            return;
+        }
+    }
+});
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `commons.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L104-137)</summary>
+
+**Path:** `Unknown file`
+
+```
+// Si lo dejamos dentro del try y DB::connect() falla, 'rbac' nunca queda mapeado
+// y cualquier ruta que llame Flight::rbac() recibe "rbac must be a mapped method".
+Flight::map('rbac', function () {
+    static $rbac = null;
+    if ($rbac === null) {
+        $rbac = new \Common\RbacManager(Flight::auth(), Flight::db());
+    }
+    return $rbac;
+});
+
+try {
+    $pdo = DB::connect();
+
+    // Registrar Delight Auth directamente en Flight para Inyección de Dependencias.
+    // Requiere $pdo en tiempo de registro → sigue dentro del try.
+    Flight::register('auth', 'Delight\Auth\Auth', [$pdo]);
+} catch (\Exception $e) {
+    // Si falla, se registra en log plano de emergencia.
+    // 'rbac' ya está mapeado — fallará con un error legible al instanciar RbacManager,
+    // no con el críptico "must be a mapped method".
+    Logger::log("CRITICAL", "Fallo al inicializar Delight Auth en commons: " . $e->getMessage());
+}
+
+// 5. Configurar e Inicializar Plates (Views Engine)
+Flight::register('view', 'League\Plates\Engine', [], function($view) {
+    // Carpeta raíz de vistas (permite templates locales de módulos laesh-swbldi)
+    $view->setDirectory(__DIR__ . '/../');
+});
+
+// Registrar la conexión PDO para inyección sencilla en rutas de Flight
+Flight::map('db', function() {
+    return DB::connect();
+});
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:45 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `login.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L89-119)</summary>
+
+**Path:** `Unknown file`
+
+```
+            $auth = Flight::auth();
+            $auth->login($emailVirtual, $password, 0); // 0 = sin "recordarme"
+
+            // Login exitoso — determinar redirect por rol RBAC
+            $role = Flight::rbac()->getRole();
+            $dest = $redirectMap[$role] ?? null;
+
+            if ($dest === null) {
+                $auth->logOut();
+                Logger::log('WARN', "Login sin rol asignado. user_id={$auth->getUserId()}", $auth->getUserId());
+                $error = 'Tu cuenta no tiene un rol asignado. Contacta al administrador.';
+                if (Response::isHtmx()) Response::htmxError($error);
+            } else {
+                Logger::logAlways('INFO', "Login exitoso. rol={$role}", $auth->getUserId());
+                if (Response::isHtmx()) {
+                    // Request HTMX (modal website.js) — NO redirigir, devolver portal-url
+                    Response::htmxOpenTab($dest);
+                }
+                // Fallback no-HTMX: página intermedia con window.open
+                http_response_code(200);
+                header('Content-Type: text/html; charset=utf-8');
+                $destEsc = htmlspecialchars($dest, ENT_QUOTES, 'UTF-8');
+                echo "<!DOCTYPE html><html lang='es'><head><meta charset='UTF-8'><title>Acceso verificado</title></head>"
+                    . "<body><p>Acceso verificado. Abriendo portal...</p>"
+                    . "<script>var w=window.open('{$destEsc}','_blank');if(!w){location.href='{$destEsc}';}else{location.href='/laesh/';}<\/script>"
+                    . "</body></html>";
+                exit;
+            }
+
+        } catch (InvalidEmailException | InvalidPasswordException) {
+            // Trazabilidad: registrar intento fallido con IP (sin exponer el teléfono en log)
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:45 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `login.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L94-119)</summary>
+
+**Path:** `Unknown file`
+
+```
+            $dest = $redirectMap[$role] ?? null;
+
+            if ($dest === null) {
+                $auth->logOut();
+                Logger::log('WARN', "Login sin rol asignado. user_id={$auth->getUserId()}", $auth->getUserId());
+                $error = 'Tu cuenta no tiene un rol asignado. Contacta al administrador.';
+                if (Response::isHtmx()) Response::htmxError($error);
+            Logger::logAlways('INFO', "Login exitoso. rol={$role}", $auth->getUserId());
+
+            // Emisión de JWT con JTI único registrado en MariaDB y OPcache L2
+            $userId = (int)$auth->getUserId();
+            $ip     = $_SERVER['REMOTE_ADDR'] ?? '127.0.0.1';
+            $ua     = $_SERVER['HTTP_USER_AGENT'] ?? '';
+            $jwtToken = Flight::jwt()->createToken($userId, $role, $ip, $ua);
+            Flight::jwt()->setAuthCookie($jwtToken);
+
+            if (Response::isHtmx()) {
+                    // Request HTMX (modal website.js) — NO redirigir, devolver portal-url
+                    Response::htmxOpenTab($dest);
+                }
+                // Fallback no-HTMX: página intermedia con window.open
+                http_response_code(200);
+                header('Content-Type: text/html; charset=utf-8');
+                $destEsc = htmlspecialchars($dest, ENT_QUOTES, 'UTF-8');
+                echo "<!DOCTYPE html><html lang='es'><head><meta charset='UTF-8'><title>Acceso verificado</title></head>"
+                    . "<body><p>Acceso verificado. Abriendo portal...</p>"
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:45 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `logout.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/**
+ * login/logout.php — Cierre de Sesión LAESH
+ * Ubicación: website/login/logout.php
+ */
+
+declare(strict_types=1);
+
+require_once __DIR__ . '/../../commons/commons.php';
+
+use Common\Logger;
+
+try {
+    if (Flight::auth()->isLoggedIn()) {
+        $uid = Flight::auth()->getUserId();
+        Flight::auth()->logOut();
+        Logger::logAlways('INFO', 'Sesión cerrada.', $uid);
+    }
+} catch (\Throwable $e) {
+    Logger::log('WARN', 'Error en logout: ' . $e->getMessage());
+}
+
+// Redirigir al sitio público — Web context root: /laesh/
+header('Location: /laesh/');
+exit;
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:45 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `RbacManager.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+// RbacManager.php - Controlador de Control de Acceso Basado en Roles (RBAC) para LAESH
+
+namespace Common;
+
+use PDO;
+use Delight\Auth\Auth;
+use Flight;
+
+class RbacManager {
+    private Auth $auth;
+    private PDO $db;
+    private ?string $roleName = null;
+    private array $permissions = [];
+    private bool $loaded = false;
+
+    public function __construct(Auth $auth, PDO $db) {
+        $this->auth = $auth;
+        $this->db = $db;
+    }
+
+    /**
+     * Carga el contexto del rol y permisos del usuario desde las tablas empleados y rbac_permisos
+     */
+    private function loadContext() {
+        if ($this->loaded || !$this->auth->isLoggedIn()) {
+            return;
+        }
+
+        $userId = $this->auth->getUserId();
+
+        try {
+            // 1. Obtener Rol Operativo desde la tabla empleados
+            $stmt = $this->db->prepare("SELECT rol FROM empleados WHERE user_id = :id LIMIT 1");
+            $stmt->execute(['id' => $userId]);
+            $empleado = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($empleado) {
+                $this->roleName = $empleado['rol'];
+            }
+
+            // 2. Obtener Permisos Granulares de rbac_permisos
+            $stmtPerms = $this->db->prepare("
+                SELECT p.nombre 
+                FROM rbac_permisos p
+                JOIN rbac_permisos_usuarios pu ON p.id = pu.permiso_id
+                WHERE pu.user_id = :id
+            ");
+            $stmtPerms->execute(['id' => $userId]);
+            $this->permissions = $stmtPerms->fetchAll(PDO::FETCH_COLUMN);
+
+            $this->loaded = true;
+        } catch (\PDOException $e) {
+            // Registrar error de consulta en fallback_log
+            DB::logFallback('ERROR', "Carga contexto RBAC para user_id=$userId", $e->getMessage());
+        }
+    }
+
+    /**
+     * Obtiene el nombre del rol del usuario de sesión
+     */
+    public function getRole(): ?string {
+        $this->loadContext();
+        return $this->roleName;
+    }
+
+    /**
+     * Verifica si el usuario posee un permiso granular específico
+     */
+    public function hasPermission(string $permission): bool {
+        $this->loadContext();
+        return in_array($permission, $this->permissions, true);
+    }
+
+    /**
+     * Helper de middleware para enrutamiento en FlightPHP. Redirige si falla la autenticación
+     * o detiene la petición con HTTP 403 si carece de permisos.
+     *
+     * Nota: Se usa header() directamente en lugar de Flight::redirect() para evitar que
+     * Flight v2/v3 prepend el base URL (ej. /laesh/adrc) al path de destino,
+     * lo que generaría URLs incorrectas como /laesh/adrc/laesh/...
+     */
+    public function requirePermission(string $permission, string $redirectUrl = '/laesh/login/login.php') {
+        if (!$this->auth->isLoggedIn()) {
+            // G2: trazar redireccionamiento por sesión no autenticada
+            Logger::log(
+                'INFO',
+                "RBAC: sesión no autenticada → redirect a '{$redirectUrl}' "
+                    . "(permiso requerido: '{$permission}', "
+                    . "uri: " . ($_SERVER['REQUEST_URI'] ?? 'n/a') . ")",
+                null
+            );
+            header('Location: ' . $redirectUrl, true, 302);
+            exit;
+        }
+
+        if (!$this->hasPermission($permission)) {
+            // G2: trazar denegación de permiso con contexto del usuario y request
+            $userId = $this->auth->getUserId();
+            $role   = $this->roleName ?? 'UNKNOWN';
+            Logger::log(
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `RbacManager.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L89-110)</summary>
+
+**Path:** `Unknown file`
+
+```
+                null
+            );
+            header('Location: ' . $redirectUrl, true, 302);
+            exit;
+        }
+
+        if (!$this->hasPermission($permission)) {
+            // G2: trazar denegación de permiso con contexto del usuario y request
+            $userId = $this->auth->getUserId();
+            $role   = $this->roleName ?? 'UNKNOWN';
+            Logger::log(
+                'WARN',
+                "RBAC: denegado permiso '{$permission}' a user_id={$userId} rol={$role} "
+                    . "(uri: " . ($_SERVER['REQUEST_URI'] ?? 'n/a') . ")",
+                $userId
+            );
+            Flight::halt(403, 'Acceso Denegado: No cuenta con los privilegios requeridos.');
+            exit;
+        }
+    }
+}
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:45 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:45 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Confirming Successful Syntax**
+
+I'm pleased to report that all modified PHP files have successfully passed their syntax checks, with no errors. My focus has now shifted to updating `walkthrough.md` to comprehensively document the entire authentication and authorization architecture. This documentation will encompass the JTI and the OPcache L2 fast verification engine, along with the security guarantees offered.
+
+
+
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.071899324s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:46 am
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+Hay un cron que renueva la cache --opcache del cms todos los dias , revisa que sucede con el tema  de JTI para este tema del cache , informa me.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `05_jwt_jti_registry.sql`
+**Language:** oracle-sql
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+-- 05_jwt_jti_registry.sql — Tabla de Registro y Revocación de Tokens JWT (JTI)
+-- Ecosistema LAESH (Bloc Digital)
+-- Fecha: 2026-09-13
+
+CREATE TABLE IF NOT EXISTS jwt_jti_registry (
+    jti VARCHAR(64) NOT NULL PRIMARY KEY,
+    user_id INT UNSIGNED NOT NULL,
+    role VARCHAR(20) NOT NULL,
+    user_agent VARCHAR(255) NULL,
+    ip_address VARCHAR(45) NOT NULL,
+    issued_at INT UNSIGNED NOT NULL,
+    expires_at INT UNSIGNED NOT NULL,
+    is_revoked TINYINT(1) NOT NULL DEFAULT 0,
+    revoked_at INT UNSIGNED NULL,
+    revoked_reason VARCHAR(100) NULL,
+    INDEX idx_user_jti (user_id, is_revoked),
+    INDEX idx_expires (expires_at),
+    CONSTRAINT fk_jti_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `cache`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:52 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `cache_renew.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+#!/usr/bin/env php
+<?php
+/**
+ * cache_renew.php — Renovación Diaria de Caché L2 (OPcache PHP File Store)
+ *
+ * Ejecutado automáticamente a las 05:00 AM por cron (KVM2):
+ *   0 5 * * * www-data php8.3 /opt/laesh/www/laesh-swbldi/crons/cache_renew.php >> /opt/laesh/logs/cache_renew.log 2>&1
+ *
+ * Flujo:
+ *   1. Limpia todos los archivos de caché del directorio /opt/laesh/cache/ (PrivateTmp-safe)
+ *   2. Calienta los 4 datasets directamente desde MariaDB
+ *   3. Los compila en OPcache para que el primer request HTTP del día
+ *      sea instantáneo (warm cache, zero-latency start of day).
+ *
+ * Importante: ejecutar con el mismo usuario que PHP-FPM (www-data) para que los
+ * permisos del directorio /opt/laesh/cache/ sean consistentes.
+ */
+declare(strict_types=1);
+
+$start = microtime(true);
+
+// Bootstrap ANTES del primer echo — evita "headers already sent" en commons.php
+// commons.php llama header()/session_start(); si hay output previo, PHP emite warnings.
+define('APP_ENV', 'prod');
+ob_start();
+require_once __DIR__ . '/../commons/autoload.php';
+require_once __DIR__ . '/../commons/commons.php';
+ob_end_clean();
+
+echo "[" . date('Y-m-d H:i:s') . "] LAESH Cache Renew — Iniciando...\n";
+
+use Common\Cache;
+
+// 1. Limpiar todo el caché existente
+Cache::init('', APP_ENV);
+Cache::clear();
+echo "[" . date('H:i:s') . "] Cache L2 purgado (todos los archivos eliminados).\n";
+
+// 2. Conectar a MariaDB y calentar los 4 datasets
+$db = Flight::db();
+$errors = [];
+
+// 2a. configuraciones
+try {
+    $configRaw = $db->query("SELECT clave, valor FROM configuraciones")->fetchAll(PDO::FETCH_KEY_PAIR) ?: [];
+    Cache::set(Cache::KEY_CFG, $configRaw);
+    echo "[" . date('H:i:s') . "] ✓ KEY_CFG calentado (" . count($configRaw) . " claves).\n";
+} catch (Throwable $e) {
+    $errors[] = "KEY_CFG: " . $e->getMessage();
+    echo "[" . date('H:i:s') . "] ✗ KEY_CFG FALLÓ: " . $e->getMessage() . "\n";
+}
+
+// 2b. web_contenidos
+try {
+    $cmsRaw = [];
+    foreach ($db->query("SELECT seccion, subseccion, clave, valor FROM web_contenidos ORDER BY id")->fetchAll(PDO::FETCH_ASSOC) as $row) {
+        $cmsRaw[$row['seccion']][$row['subseccion']][$row['clave']] = $row['valor'];
+    }
+    Cache::set(Cache::KEY_CMS, $cmsRaw);
+    $totalRows = array_sum(array_map(fn($s) => array_sum(array_map('count', $s)), $cmsRaw));
+    echo "[" . date('H:i:s') . "] ✓ KEY_CMS calentado (~{$totalRows} entradas).\n";
+} catch (Throwable $e) {
+    $errors[] = "KEY_CMS: " . $e->getMessage();
+    echo "[" . date('H:i:s') . "] ✗ KEY_CMS FALLÓ: " . $e->getMessage() . "\n";
+}
+
+// 2c. Árbol de estudios clínicos
+try {
+    $cg = [];
+    $treeRows = $db->query("
+        SELECT g.id as grupo_id, g.titulo as grupo_titulo,
+               c.id as cat_id, c.nombre as cat_nombre,
+               e.clave_interna, e.nombre as estudio_nombre,
+               e.tiempo_procesamiento, e.muestra_requerida, e.preparacion
+        FROM catalogo_grupos g
+        JOIN catalogo_categorias c ON c.grupo_id = g.id
+        JOIN catalogo_estudios e ON e.categoria_id = c.id
+        WHERE e.activo = 1
+        ORDER BY g.orden ASC, c.orden ASC, e.id ASC
+    ")->fetchAll(PDO::FETCH_ASSOC);
+
+    $gMap = []; $gIdxMap = []; $currGIdx = 0;
+    foreach ($treeRows as $r) {
+        $gid = (int)$r['grupo_id'];
+        if (!isset($gIdxMap[$gid])) {
+            $currGIdx++;
+            if ($currGIdx > 4) break;
+            $gIdxMap[$gid] = $currGIdx;
+            $cg[$currGIdx] = ['titulo' => $r['grupo_titulo'], 'fichas' => []];
+        }
+        $gi = $gIdxMap[$gid]; $catId = (int)$r['cat_id'];
+        if (!isset($gMap[$gid][$catId])) {
+            $gMap[$gid][$catId] = count($cg[$gi]['fichas']);
+            $cg[$gi]['fichas'][] = ['cat' => $r['cat_nombre'], 'items' => []];
+        }
+        $cPos = $gMap[$gid][$catId];
+        $cg[$gi]['fichas'][$cPos]['items'][] = [
+            'clave_interna'        => $r['clave_interna'],
+            'nombre'               => $r['estudio_nombre'],
+            'tiempo_procesamiento' => $r['tiempo_procesamiento'],
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `cache_renew.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L100-141)</summary>
+
+**Path:** `Unknown file`
+
+```
+            'muestra_requerida'    => $r['muestra_requerida'],
+            'preparacion'          => $r['preparacion'],
+        ];
+    }
+    Cache::set(Cache::KEY_TREE, $cg);
+    echo "[" . date('H:i:s') . "] ✓ KEY_TREE calentado (" . count($treeRows) . " estudios en " . count($cg) . " abanicos).\n";
+} catch (Throwable $e) {
+    $errors[] = "KEY_TREE: " . $e->getMessage();
+    echo "[" . date('H:i:s') . "] ✗ KEY_TREE FALLÓ: " . $e->getMessage() . "\n";
+}
+
+// 2d. Promociones vigentes
+try {
+    $promos = $db->query(
+        "SELECT cp.id, cp.dia_semana, cp.nombre_oferta, cp.subtitulo, cp.descripcion,
+                cp.ayuno, cp.tiempo_entrega, cp.precio_regular, cp.precio_oferta,
+                cp.imagen_fondo, cp.activo,
+                ce.clave_interna, ce.muestra_requerida, ce.tiempo_procesamiento, ce.preparacion,
+                cc.nombre as categoria_nombre
+         FROM catalogo_promociones cp
+         LEFT JOIN catalogo_estudios ce ON cp.estudio_id = ce.id
+         LEFT JOIN catalogo_categorias cc ON ce.categoria_id = cc.id
+         WHERE cp.activo = 1
+         ORDER BY cp.orden ASC, cp.id ASC"
+    )->fetchAll(PDO::FETCH_ASSOC);
+    Cache::set(Cache::KEY_PROMOS, $promos);
+    echo "[" . date('H:i:s') . "] ✓ KEY_PROMOS calentado (" . count($promos) . " promociones activas).\n";
+} catch (Throwable $e) {
+    $errors[] = "KEY_PROMOS: " . $e->getMessage();
+    echo "[" . date('H:i:s') . "] ✗ KEY_PROMOS FALLÓ: " . $e->getMessage() . "\n";
+}
+
+// 3. Resumen
+$elapsed = round((microtime(true) - $start) * 1000, 2);
+if (empty($errors)) {
+    echo "[" . date('H:i:s') . "] ✅ Renovación completa en {$elapsed} ms. 4/4 keys calentadas.\n";
+    exit(0);
+} else {
+    echo "[" . date('H:i:s') . "] ⚠ Renovación parcial ({$elapsed} ms). Errores: " . count($errors) . "\n";
+    exit(1);
+}
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Cache Renewal**
+
+Okay, I'm digging into the daily routine of `cache_renew.php`. It looks like the script's primary function, at least based on line 36, is a complete cache wipe. Essentially, `Cache::clear()` is called, and this method removes everything from the cache directory, which is either `/opt/laesh/cache/` or `/tmp/laesh_cache/`. My immediate goal is to understand the implications of this action.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Cache.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.094779565s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L139-179)</summary>
+
+**Path:** `Unknown file`
+
+```
+        foreach ((array)$keys as $key) {
+            $file = self::filePath($key);
+            if (file_exists($file)) {
+                @unlink($file);
+                if (function_exists('opcache_invalidate')) {
+                    @opcache_invalidate($file, true);
+                }
+            }
+        }
+    }
+
+    /**
+     * Elimina TODOS los archivos de caché del directorio.
+     * Usado por el script cron de las 5 AM para renovación completa.
+     */
+    public static function clear(): void
+    {
+        if (!is_dir(self::$cacheDir)) return;
+
+        foreach (glob(self::$cacheDir . '/laesh_cache_*.php') ?: [] as $file) {
+            @unlink($file);
+            if (function_exists('opcache_invalidate')) {
+                @opcache_invalidate($file, true);
+            }
+        }
+    }
+
+    /**
+     * Retorna estadísticas del caché para el panel de sistema (admrc).
+     *
+     * @return array{key: string, exists: bool, age_sec: int|null, ttl: int, file: string}[]
+     */
+    public static function stats(): array
+    {
+        $keys = [self::KEY_CFG, self::KEY_CMS, self::KEY_TREE, self::KEY_PROMOS];
+        $stats = [];
+        foreach ($keys as $key) {
+            $file   = self::filePath($key);
+            $exists = file_exists($file);
+            $age    = $exists ? (time() - filemtime($file)) : null;
+            $stats[] = [
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:52 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:52 am
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+re-reanliza si en esta implmentación exiten  o se han generado impactos, falsos positivos, gaps, issues, listalos.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `05_jwt_jti_registry.sql`
+**Language:** oracle-sql
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing JTI Impacts**
+
+Okay, I'm deep diving into the JWT ID architecture changes. I'm focusing on the OPcache and MariaDB integration. My primary concerns center around false positives and potential gaps in security, especially with the altered code base. I'm carefully reviewing all introduced code changes for potential issues, and their dependencies, as well as considering edge cases.
+
+
+**Evaluating Cookie Integration**
+
+I'm currently focused on the impact of the new JWT integration on existing user sessions and the cookie synchronization process. The RBAC manager's cookie check is my current focus. I'm concerned about false positives for pre-existing logins. The potential for the `verifyToken` function to be called on a null value is a key concern.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Cache.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.033242539s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L99-139)</summary>
+
+**Path:** `Unknown file`
+
+```
+            // Archivo corrupto — eliminar y tratar como miss
+            @unlink($file);
+            return null;
+        }
+    }
+
+    /**
+     * Escribe un valor en el caché.
+     *
+     * @param string $key  Clave canónica
+     * @param mixed  $data Array PHP a cachear
+     */
+    public static function set(string $key, mixed $data): void
+    {
+        if (!is_array($data)) return;
+
+        $file    = self::filePath($key);
+        $content = "<?php\n// LAESH Cache — key:{$key} — generado:" . date('Y-m-d H:i:s') . "\nreturn " . var_export($data, true) . ";\n";
+
+        // Escritura atómica: escribir en tmp, luego rename (evita race conditions)
+        $tmpFile = $file . '.tmp.' . getmypid();
+        if (@file_put_contents($tmpFile, $content, LOCK_EX) !== false) {
+            @rename($tmpFile, $file);
+            // Compilar inmediatamente en OPcache para que el próximo hit sea RAM puro
+            if (function_exists('opcache_compile_file')) {
+                @opcache_compile_file($file);
+            }
+        } else {
+            @unlink($tmpFile);
+        }
+    }
+
+    /**
+     * Invalida (elimina) la entrada de caché de una clave específica.
+     * Llamar desde admrc/index.php justo después de confirmar el COMMIT de la BD.
+     *
+     * @param string $key Clave canónica o array de claves
+     */
+    public static function invalidate(string|array $keys): void
+    {
+        foreach ((array)$keys as $key) {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `JwtManager.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L189-249)</summary>
+
+**Path:** `Unknown file`
+
+```
+                SET is_revoked = 1, revoked_at = ?, revoked_reason = ? 
+                WHERE jti = ?
+            ");
+            $stmt->execute([$now, $reason, $jti]);
+        } catch (\PDOException $e) {
+            Logger::log('ERROR', "Fallo al revocar JTI en BD: " . $e->getMessage());
+            return false;
+        }
+
+        // Invalida e inyecta la marca de revocación en OPcache RAM
+        self::cacheJtiStatus($jti, true);
+
+        return true;
+    }
+
+    /**
+     * Revoca todas las sesiones activas de un usuario en todos sus dispositivos.
+     */
+    public function revokeAllUserSessions(int $userId, string $reason = 'admin_revocation'): bool
+    {
+        $now = time();
+        try {
+            $stmt = $this->pdo->prepare("
+                UPDATE jwt_jti_registry 
+                SET is_revoked = 1, revoked_at = ?, revoked_reason = ? 
+                WHERE user_id = ? AND is_revoked = 0
+            ");
+            $stmt->execute([$now, $reason, $userId]);
+        } catch (\PDOException $e) {
+            Logger::log('ERROR', "Fallo al revocar sesiones del usuario {$userId}: " . $e->getMessage());
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Inyecta la cookie de autenticación JWT segura en la respuesta.
+     */
+    public function setAuthCookie(string $token): void
+    {
+        $isHttps = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on');
+        setcookie(
+            $this->cookieName,
+            $token,
+            [
+                'expires'  => time() + $this->ttlSeconds,
+                'path'     => '/laesh/',
+                'domain'   => '',
+                'secure'   => $isHttps,
+                'httponly' => true,
+                'samesite' => 'Strict',
+            ]
+        );
+    }
+
+    /**
+     * Elimina la cookie de autenticación JWT.
+     */
+    public function clearAuthCookie(): void
+    {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `JwtManager.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L249-297)</summary>
+
+**Path:** `Unknown file`
+
+```
+    {
+        $isHttps = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on');
+        setcookie(
+            $this->cookieName,
+            '',
+            [
+                'expires'  => time() - 3600,
+                'path'     => '/laesh/',
+                'domain'   => '',
+                'secure'   => $isHttps,
+                'httponly' => true,
+                'samesite' => 'Strict',
+            ]
+        );
+    }
+
+    // ── MÉTODOS AUXILIARES DE CACHÉ Y ENCODING ───────────────────────────────
+
+    private static function cacheJtiStatus(string $jti, bool $isRevoked): void
+    {
+        if (class_exists('\Common\Cache')) {
+            Cache::init();
+            Cache::set('JTI_' . md5($jti), ['revoked' => $isRevoked], 86400);
+        }
+    }
+
+    private static function getJtiCacheStatus(string $jti): ?bool
+    {
+        if (class_exists('\Common\Cache')) {
+            Cache::init();
+            $data = Cache::get('JTI_' . md5($jti));
+            if (is_array($data) && isset($data['revoked'])) {
+                return (bool)$data['revoked'];
+            }
+        }
+        return null;
+    }
+
+    private static function base64UrlEncode(string $data): string
+    {
+        return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
+    }
+
+    private static function base64UrlDecode(string $data): string
+    {
+        return base64_decode(strtr($data, '-_', '+/') . str_repeat('=', (4 - strlen($data) % 4) % 4));
+    }
+}
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Cache.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L149-164)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+    /**
+     * Elimina TODOS los archivos de caché del directorio.
+     * Usado por el script cron de las 5 AM para renovación completa.
+     */
+    public static function clear(): void
+    {
+        if (!is_dir(self::$cacheDir)) return;
+
+        foreach (glob(self::$cacheDir . '/laesh_cache_*.php') ?: [] as $file) {
+            @unlink($file);
+            if (function_exists('opcache_invalidate')) {
+                @opcache_invalidate($file, true);
+            }
+        }
+    }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Cache.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L49-67)</summary>
+
+**Path:** `Unknown file`
+
+```
+     * Inicializa el sistema de caché.
+     * Debe llamarse una vez desde commons.php (o desde index.php antes del primer get/set).
+     *
+     * @param string $cacheDir  Ruta absoluta al directorio de caché (default: /tmp/laesh_cache)
+     * @param string $envPrefix Prefijo de ambiente para aislar dev/prod ('dev' | 'prod')
+     */
+    public static function init(string $cacheDir = '', string $envPrefix = 'prod'): void
+    {
+        // Prioridad: parámetro > LAESH_CACHE_DIR (env) > /tmp/laesh_cache
+        // En KVM2/producción se inyecta LAESH_CACHE_DIR=/opt/laesh/cache vía PHP-FPM pool
+        // y vía el cron, evitando el aislamiento PrivateTmp del servicio php8.3-fpm.service.
+        self::$cacheDir  = $cacheDir ?: (getenv('LAESH_CACHE_DIR') ?: sys_get_temp_dir() . '/laesh_cache');
+        self::$envPrefix = preg_replace('/[^a-z0-9_]/', '_', strtolower($envPrefix));
+
+        if (!is_dir(self::$cacheDir)) {
+            @mkdir(self::$cacheDir, 0755, true);
+        }
+    }
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:56 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Cache.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L74-94)</summary>
+
+**Path:** `Unknown file`
+
+```
+    public static function get(string $key): mixed
+    {
+        $file = self::filePath($key);
+
+        // Miss: archivo no existe
+        if (!file_exists($file)) {
+            return null;
+        }
+
+        // Miss por expiración (TTL basado en mtime del archivo)
+        $ttl = self::ttlForKey($key);
+        if ((time() - filemtime($file)) > $ttl) {
+            @unlink($file);
+            // Invalidar también la compilación OPcache del archivo expirado
+            if (function_exists('opcache_invalidate')) {
+                @opcache_invalidate($file, true);
+            }
+            return null;
+        }
+
+        // Hit: include retorna el array; OPcache sirve bytecode desde RAM
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Cache.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L179-209)</summary>
+
+**Path:** `Unknown file`
+
+```
+            $stats[] = [
+                'key'     => $key,
+                'exists'  => $exists,
+                'age_sec' => $age,
+                'ttl'     => self::ttlForKey($key),
+                'file'    => basename($file),
+            ];
+        }
+        return $stats;
+    }
+
+    // ── Métodos privados ──────────────────────────────────────────────────────
+
+    private static function filePath(string $key): string
+    {
+        $safeKey = preg_replace('/[^A-Z0-9_]/', '_', strtoupper($key));
+        return self::$cacheDir . '/laesh_cache_' . self::$envPrefix . '_' . $safeKey . '.php';
+    }
+
+    private static function ttlForKey(string $key): int
+    {
+        return match($key) {
+            self::KEY_CFG    => self::TTL_CONFIG,
+            self::KEY_CMS    => self::TTL_CMS,
+            self::KEY_TREE   => self::TTL_TREE,
+            self::KEY_PROMOS => self::TTL_PROMOS,
+            default          => self::TTL_CMS,
+        };
+    }
+}
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:57 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:57 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 8:57 am
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+Actualiza la documentación segun corresponda: Tecnica_Seguridad_Integral.html, Especificacion_Tecnica.html, y en Tecnica_Infraestructura_Despliegue.html , para que se contenga debidamente todo este reforzamiento de la seguridad de autenticación y/o autorización.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `05_jwt_jti_registry.sql`
+**Language:** oracle-sql
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `Tecnica_Seguridad_Integral`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:01 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `Especificacion_Tecnica`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:01 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `Tecnica_Infraestructura_Despliegue`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:01 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/portafolio-dev-2026/blocklabgd/v1.2/et`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>Directory: `et` (10 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/portafolio-dev-2026/blocklabgd/v1.2/et`
+
+| Name | Type | Size |
+|------|------|------|
+| `Control_Proyecto.html` | File | 69351 bytes |
+| `Especificacion_Tecnica.html` | File | 124268 bytes |
+| `Guia_Usuario_CMS_Sitio_Web.html` | File | 89015 bytes |
+| `Memoria de Instalación Certificados Locales HTTPS.html` | File | 10048 bytes |
+| `Tecnica_Infraestructura_Despliegue.html` | File | 270943 bytes |
+| `Tecnica_Modelo_Datos.html` | File | 97311 bytes |
+| `Tecnica_Seguridad_Integral.html` | File | 29912 bytes |
+| `bkp-bd-fisicos` | Directory | - |
+| `estabilizacionUI` | Directory | - |
+| `styles.css` | File | 8963 bytes |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `Autenticación`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:01 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Tecnica_Seguridad_Integral.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Seguridad Integral (Arquitectura Defensiva) — LAESH</title>
+    <link href="styles.css" rel="stylesheet"/>
+    <style>
+        .tag { display: inline-block; padding: 3px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: 700; color: white; margin-left: 10px; vertical-align: middle; }
+        .tag.dev { background: #0284c7; } /* Blue for Desarrollo */
+        .tag.docker { background: #059669; } /* Green for Docker Local */
+        .tag.vps { background: #7c3aed; } /* Purple for Setup Hostinger */
+        .tag.deploy { background: #ea580c; } /* Orange for Deploy */
+    </style>
+</head>
+<body>
+    <header class="cover">
+        <h1>Seguridad Integral (Arquitectura Defensiva)</h1>
+        <div class="cover-meta">
+            <div><strong>Documento:</strong> Tecnica_Seguridad_Integral</div>
+            <div><strong>Fecha:</strong> Agosto 2026</div>
+        </div>
+        <p class="cover-desc">Este documento consolida la arquitectura defensiva y el blindaje perimetral aplicable tanto al Proyecto 1 (Sitio Web) como al Proyecto 2 (Bloc Digital). El objetivo es salvaguardar los servidores y el ecosistema web contra vulnerabilidades estándar (OWASP), ataques de inyección, y suplantación de identidad.</p>
+        <p><em>Nota de Implementación: Cada directiva incluye una etiqueta que define la fase del ciclo de vida del software en la que debe ser ejecutada.</em></p>
+        <a href="Especificacion_Tecnica.html" style="display:inline-block; margin-top:20px; color:#2563eb; text-decoration:none; font-weight:600;">← Volver a la Especificación Técnica</a>
+    </header>
+
+    <nav class="toc">
+        <h2>Índice de Contenidos</h2>
+        <ol>
+            <li><a href="#sec0">Resumen: Matriz de Trazabilidad por Ambiente</a></li>
+            <li><a href="#sec1">1. Infraestructura y Servidor Web (Nginx & PHP-FPM)</a></li>
+            <li><a href="#sec2">2. Nivel Base de Datos (MariaDB)</a></li>
+            <li><a href="#sec3">3. Nivel de Aplicación (Micro-Framework)</a></li>
+            <li><a href="#sec4">4. Autenticación y Ciclo de Sesión</a></li>
+            <li><a href="#sec5">5. Defensas Contra Vectores No Típicos</a></li>
+            <li><a href="#sec6">6. Monitoreo de Servicios y Alertas SMTP <span style="font-size:.85em;color:#ea580c;">(KVM2)</span></a></li>
+        </ol>
+    </nav>
+
+    <main>
+<div style="background:var(--color-bg-secondary,#f0f9ff); border-left:4px solid #2563eb; padding:14px 18px; margin:0 0 28px 0; border-radius:4px;">
+  <strong>📋 Configuración de setup y tuning centralizada:</strong> Los detalles completos de SSL/TLS hardening, headers de seguridad (HSTS, CSP), PHP-FPM pool, MariaDB timeouts y manejo de errores están documentados en
+  <a href="Tecnica_Infraestructura_Despliegue.html#sec15"><strong>§15 — Hardening y Tuning (Tecnica_Infraestructura_Despliegue.html)</strong></a>.
+  Este documento se enfoca en la arquitectura de seguridad integral — las directivas concretas de configuración se encuentran allí.
+</div>
+        <!-- ═══════════════ RESUMEN: MATRIZ DE TRAZABILIDAD ═══════════════ -->
+        <section id="sec0">
+            <h2>Resumen: Matriz de Trazabilidad por Ambiente</h2>
+            <p>La siguiente matriz cruza las prácticas defensivas contra el ambiente en el cual deben configurarse, garantizando mayor visibilidad y que no existan brechas de implementación entre el desarrollo local y la producción.</p>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Capa / Práctica de Seguridad</th>
+                            <th>Desarrollo (Codificación)</th>
+                            <th>Docker Local (Pruebas)</th>
+                            <th>Hostinger KVM (VPS Prod)</th>
+                            <th>Despliegue Operativo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Infraestructura (Nginx/OS/SSH)</strong><br>Ocultamiento, Headers, Limits, SSH Keys</td>
+                            <td style="text-align: center; color: #94a3b8;">—</td>
+                            <td style="text-align: center; color: #059669;">✔️ Parcial</td>
+                            <td style="text-align: center; font-weight: bold; color: #16a34a;">✔️ Estricto</td>
+                            <td style="text-align: center; color: #94a3b8;">—</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Base de Datos (MariaDB)</strong><br>Bind 127.0.0.1, Least Privilege</td>
+                            <td style="text-align: center; color: #94a3b8;">—</td>
+                            <td style="text-align: center; color: #94a3b8;">—</td>
+                            <td style="text-align: center; font-weight: bold; color: #16a34a;">✔️ Server Config</td>
+                            <td style="text-align: center; color: #ea580c;">✔️ Roles DML</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Aplicación (Flight PHP / UI)</strong><br>SQLi (PDO), XSS (Plates), HTMX Redirect</td>
+                            <td style="text-align: center; font-weight: bold; color: #0284c7;">✔️ Backend</td>
+                            <td style="text-align: center; color: #94a3b8;">—</td>
+                            <td style="text-align: center; color: #94a3b8;">—</td>
+                            <td style="text-align: center; color: #94a3b8;">—</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Autenticación y Ciclo de Vida</strong><br>Bcrypt, Rate Limiting, RBAC, Multiusuario</td>
+                            <td style="text-align: center; font-weight: bold; color: #0284c7;">✔️ Lógica</td>
+                            <td style="text-align: center; color: #059669;">✔️ Session Test</td>
+                            <td style="text-align: center; color: #94a3b8;">—</td>
+                            <td style="text-align: center; color: #94a3b8;">—</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Aislamiento de Archivos Nocivos</strong><br>Magic Number, Prevención de DoS, Nginx location</td>
+                            <td style="text-align: center; color: #0284c7;">✔️ Validación</td>
+                            <td style="text-align: center; color: #94a3b8;">—</td>
+                            <td style="text-align: center; font-weight: bold; color: #16a34a;">✔️ Limites ini</td>
+                            <td style="text-align: center; color: #ea580c;">✔️ Nginx location</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ═══════════════ 1. INFRAESTRUCTURA ═══════════════ -->
+        <section id="sec1">
+            <h2>1. Nivel de Infraestructura y Servidor Web (Nginx & PHP-FPM)</h2>
+            <p>Alineado a las políticas de arquitectura frugal y al <em>Nginx Hardening</em>. El servidor web es <strong>Nginx 1.27-alpine</strong> (Docker local — desarrollo) y <strong>Nginx 1.24+</strong> (KVM2 Hostinger — producción, Ubuntu 24.04 LTS). PHP se ejecuta vía <strong>PHP-FPM 8.3</strong> como proceso separado (PPA Ondrej en KVM2).</p>
+
+            <h3>1.1. Aislamiento y Ocultamiento de Identidad</h3>
+            <ul>
+                <li><strong>Desactivar Firmas Nginx:</strong> Se debe configurar <code>server_tokens off;</code> en el bloque <code>http</code> de <code>nginx.conf</code> para evitar que escáneres identifiquen la versión del OS/Nginx. <span class="tag docker">Entorno Docker Local</span> <span class="tag vps">Setup Hostinger KVM</span></li>
+                <li><strong>Restricción de Directorios:</strong> Nginx no tiene indexación por defecto (<code>autoindex off</code>). Bloquear accesos a archivos sensibles con <code>location ~ /\.(env|git|sql|ini) { deny all; }</code>. <span class="tag docker">Entorno Docker Local</span> <span class="tag vps">Setup Hostinger KVM</span></li>
+                <li><strong>Restricción de Métodos HTTP:</strong> Limitar los verbos permitidos a <code>GET</code>, <code>POST</code> y <code>HEAD</code> con <code>if ($request_method !~ ^(GET|POST|HEAD)$) { return 405; }</code>. <span class="tag vps">Setup Hostinger KVM</span></li>
+            </ul>
+
+            <h3>1.2. Headers de Seguridad HTTP <span class="tag vps">Setup Hostinger KVM</span></h3>
+            <ul>
+                <li><code>X-Frame-Options "SAMEORIGIN"</code> (Mitiga Clickjacking en ambos portales).</li>
+                <li><code>X-XSS-Protection "1; mode=block"</code> (Defensa activa contra Cross-Site Scripting).</li>
+                <li><code>X-Content-Type-Options "nosniff"</code> (Previene escalamiento de privilegios por MIME-sniffing).</li>
+                <li><code>Strict-Transport-Security</code> (HSTS) para obligar a los navegadores a interactuar exclusivamente sobre canales seguros.</li>
+            </ul>
+
+            <h3>1.3. Entorno PHP-FPM 8.3</h3>
+            <ul>
+                <li><strong>Seguridad Base en php.ini:</strong> Uso de <code>expose_php = Off</code>, <code>display_errors = Off</code>, y <code>log_errors = On</code> para prevenir fugas de información. <span class="tag docker">Entorno Docker Local</span> <span class="tag vps">Setup Hostinger KVM</span></li>
+                <li><strong>Bloqueo de Funciones Peligrosas:</strong> Habilitar <code>disable_functions = exec, passthru, shell_exec, system, popen</code> para impedir la ejecución de comandos de terminal si el código fuese comprometido. <span class="tag vps">Setup Hostinger KVM</span></li>
+                <li><strong>Prevención de DoS (Límites de Carga):</strong> Restringir <code>upload_max_filesize</code> y <code>post_max_size</code> a un máximo de 5MB. Estos límites base se gestionarán dinámicamente desde la tabla global <code>configuraciones</code> en la base de datos, blindando el servidor contra ataques de denegación de servicio por saturación de disco o ancho de banda. <span class="tag vps">Setup Hostinger KVM</span> <span class="tag dev">Desarrollo</span></li>
+                <li><strong>Aislamiento de Uploads (Archivos PDF):</strong> El directorio de almacenamiento de PDFs de resultados estará protegido con un <code>location</code> block en Nginx que prohiba explícitamente la ejecución de cualquier script (ej. <code>location ~* /uploads/.*\.php$ { deny all; }</code>). No se usan <code>.htaccess</code> — Nginx no los procesa. <span class="tag deploy">Despliegue</span></li>
+            </ul>
+
+            <h3>1.4. Cifrado en Tránsito (HTTPS) <span class="tag vps">Setup Hostinger KVM</span></h3>
+            <ul>
+                <li>Emisión y renovación automática (cron) de certificados SSL/TLS vía <strong>Certbot (Let's Encrypt)</strong>.</li>
+                <li>Desactivación de protocolos obsoletos (SSLv3, TLS 1.0, TLS 1.1) y cifrados débiles (aNULL, MD5, 3DES). Soporte estricto para TLSv1.2 y TLSv1.3.</li>
+            </ul>
+
+            <h3>1.5. Acceso al Servidor y Sistema Operativo (SSH) <span class="tag vps">Setup Hostinger KVM</span></h3>
+            <ul>
+                <li><strong>Hardening SSH:</strong> Deshabilitar por completo el inicio de sesión del usuario <code>root</code> (<code>PermitRootLogin no</code>).</li>
+                <li><strong>Autenticación Criptográfica:</strong> Forzar el uso exclusivo de llaves SSH (ED25519/RSA), inhabilitando los inicios de sesión por contraseña plana (<code>PasswordAuthentication no</code>).</li>
+            </ul>
+        </section>
+
+        <!-- ═══════════════ 2. BASE DE DATOS ═══════════════ -->
+        <section id="sec2">
+            <h2>2. Nivel Base de Datos (MariaDB)</h2>
+            <ul>
+                <li><strong>Blindaje de Red Perimetral:</strong> El servidor MariaDB escuchará peticiones únicamente en la interfaz de loopback <code>127.0.0.1</code>. Se debe aplicar bloqueo perimetral explícito del puerto 3306 mediante el firewall <code>UFW</code>. <span class="tag vps">Setup Hostinger KVM</span></li>
+                <li><strong>Principio de Mínimos Privilegios (Least Privilege) — Automatizado:</strong> Las credenciales utilizadas por Flight PHP (<code>laesh_app</code>) tienen únicamente permisos DML: <code>SELECT, INSERT, UPDATE, DELETE ON laesh_db.*</code>. Los permisos destructivos (<code>DROP, ALTER, ALL PRIVILEGES</code>) quedan revocados. <em>Implementación:</em> <code>setup_hostinger.sh</code> paso 3b ejecuta automáticamente <code>REVOKE ALL PRIVILEGES</code> + <code>GRANT SELECT,INSERT,UPDATE,DELETE</code> después de que el schema completo (10 scripts SQL en <code>setup/</code> + 6 scripts en <code>setup/bash/</code> + migraciones en <code>setup/migrations/</code>) está instalado — garantiza que la cuenta de app nunca tenga acceso DDL en runtime de producción. <code>08_verify.sh</code> verifica que no haya <code>GRANT ALL</code> activo. <span class="tag vps">Setup Hostinger KVM</span> <span class="tag deploy">Despliegue</span></li>
+            </ul>
+        </section>
+
+        <!-- ═══════════════ 3. APLICACIÓN ═══════════════ -->
+        <section id="sec3">
+            <h2>3. Nivel de Aplicación (Micro-Framework Flight PHP)</h2>
+            
+            <h3>3.1. Prevención de Inyecciones <span class="tag dev">Desarrollo</span></h3>
+            <ul>
+                <li><strong>Inyección SQL (SQLi):</strong> Implementación obligatoria del envoltorio <code>\Common\DB::connect()</code> con Sentencias Preparadas (Prepared Statements) a través de PDO. Queda estrictamente vetada la concatenación de variables puras en strings SQL.</li>
+                <li><strong>Cross-Site Scripting (XSS):</strong> Todo output de texto dinámico en el Frontend será sanitizado y escapado empleando la función nativa del motor de plantillas League\Plates (<code>$this->e($variable)</code>), la cual abstrae de forma segura el uso de <code>htmlspecialchars</code>.</li>
+            </ul>
+
+            <h3>3.2. Protección de Formularios y APIs <span class="tag dev">Desarrollo</span></h3>
+            <ul>
+                <li><strong>Cross-Site Request Forgery (CSRF):</strong> Implementación de Tokens de Idempotencia o Tokens anti-CSRF transaccionales en operaciones críticas (ej. creación de órdenes o guardado de resultados).</li>
+                <li><strong>Mitigación de Lógica (HTMX):</strong> Las validaciones del servidor para endpoints llamados por HTMX devolverán el header especial <code>HX-Redirect: /login</code> ante fallos de autorización (401/403) para forzar redirecciones limpias y no anidar pantallas de login en los contenedores DOM.</li>
+                <li><strong>Fuerza Bruta (Rate Limiting):</strong> El login administrativo y operativo será vigilado por la tabla <code>users_throttling</code> de Delight Auth, bloqueando de manera automática las direcciones IP tras múltiples intentos de inicio de sesión fallidos.</li>
+            </ul>
+        </section>
+
+        <!-- ═══════════════ 4. AUTENTICACIÓN Y SESIÓN ═══════════════ -->
+        <section id="sec4">
+            <h2>4. Nivel Autenticación y Ciclo de Sesión (Delight Auth)</h2>
+
+            <h3>4.1. Criptografía y Reglas de Identidad <span class="tag dev">Desarrollo</span></h3>
+            <ul>
+                <li><strong>Hash Bcrypt Nativo:</strong> Siguiendo el estándar, toda contraseña (incluyendo la inicial derivada de la fecha de nacimiento <code>ddmmaaaa</code>) será empaquetada y cifrada con <em>Bcrypt</em> y <em>Salting automático</em> directamente por Delight Auth. No existirá almacenamiento plano.</li>
+                <li><strong>Identidad Única (Login):</strong> El nombre de usuario oficial del personal operativo siempre corresponderá a su <strong>Número de Teléfono Móvil (10 dígitos)</strong>.</li>
+            </ul>
+
+            <h3>4.2. Persistencia y Control Anti-Suplantación (Session Hijacking)</h3>
+            <ul>
+                <li><strong>Cookies Seguras:</strong> Toda cookie de sesión tendrá adheridas las banderas <code>HttpOnly</code> (blindando accesos vía JS) y <code>Secure</code> (exigiendo canal HTTPS). <span class="tag docker">Entorno Docker Local</span> <span class="tag deploy">Despliegue</span></li>
+                <li><strong>Fijación de Sesión (Session Fixation):</strong> Tras un login exitoso, el sistema disparará un <code>session_regenerate_id()</code> para invalidar el token anterior y prevenir el robo de sesión preestablecido. <span class="tag dev">Desarrollo</span></li>
+                <li><strong>Modelo Multiusuario Atómico:</strong> Al compartir un equipo físico (Recepción), la introducción de nuevas credenciales debe buscar y destruir activamente cualquier token persistente de <em>Remember Me</em> del usuario anterior en <code>users_remembered</code>, aislando los datos por completo. <span class="tag dev">Desarrollo</span></li>
+                <li><strong>Ciclo Dual (24h / 28d):</strong> Configuración de sesión de servidor limitada a 24 horas (`gc_maxlifetime`). Se activará el uso de la cookie <em>Remember Me</em> a 28 días para resistir el cierre imprevisto por suspensión de red (Doze) en dispositivos móviles. <span class="tag dev">Desarrollo</span> <span class="tag vps">Setup Hostinger KVM</span></li>
+            </ul>
+
+            <h3>4.3. Arquitectura de Blindaje en 3 Niveles (index.php y Modal de Acceso) <span class="tag dev">Desarrollo</span></h3>
+            <p>Para prevenir colisiones de sesión en navegadores multi-pestaña y evitar la suplantación de identidad entre roles (Médico, Recepción, Administrador), se implementó un modelo de protección tripartito:</p>
+            <ul>
+                <li><strong>Nivel 1 — Navegación de Sesión Unirepresentativa (Frontend):</strong> El envío del formulario modal de login efectúa la navegación en la <strong>misma pestaña</strong> (<code>window.location.href = portalUrl</code>). Esto impide que queden pestañas "huérfanas" abiertas con la sesión de un rol anterior mientras se interactúa con una sesión nueva.</li>
+                <li><strong>Nivel 2 — Guardias de Verificación RBAC en Servidor (Backend):</strong> Tanto los routers de entrada (<code>/laesh/adrc/</code>, <code>/laesh/rc/</code>, <code>/laesh/md/</code>) como las APIs operativas (<code>POST /cms/save</code>) ejecutan una consulta estricta a <code>Flight::rbac()->requirePermission('permiso')</code>. Peticiones no autorizadas son interceptadas con <code>HTTP 302/403</code> antes de renderizar vistas o procesar DML.</li>
+                <li><strong>Nivel 3 — Destrucción Atómica de Sesión y CSRF Rotativo:</strong> Al procesar un <code>POST</code> de inicio de sesión, el servidor invoca explícitamente <code>Flight::auth()->logOut()</code> antes de autenticar al nuevo usuario, purgando cookies y tokens pasados para garantizar un aislamiento del 100%. Adicionalmente, el token CSRF transaccional es validado y rotado mediante <code>hash_equals()</code>.</li>
+            </ul>
+
+            <h3>4.4. Buenas Prácticas de Manipulación DOM y Cumplimiento CSP <span class="tag dev">Desarrollo</span></h3>
+            <ul>
+                <li><strong>Prohibición Estricta de Parches Inline:</strong> Queda strictly vetado el uso de atributos de eventos incrustados en HTML (ej. <code>onclick="..."</code>, <code>onchange="..."</code>). Las políticas defensivas del servidor mediante <code>Content-Security-Policy: script-src 'self'</code> bloquean la ejecución de código embebido por seguridad contra vectores XSS.</li>
+                <li><strong>Delegación Global de Eventos (JS Centralizado):</strong> La interacción de apertura de logotipos corporativos y navegación a nueva pestaña (<code>target="_blank"</code>) se resolvió mediante delegación de eventos centralizada en la fase de captura (<code>useCapture: true</code>) dentro de <code>app.js</code>:
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `Autenticación`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:02 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `<h2`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:02 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Especificacion_Tecnica.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L79-139)</summary>
+
+**Path:** `Unknown file`
+
+```
+<section id="sec2">
+<h2>2. Arquitectura del Sistema</h2>
+<p>El sistema opera bajo una arquitectura de tres capas con procesamiento distribuido entre el edge (dispositivos móviles) y el servidor central.</p>
+<div class="diagram-container"><div class="mermaid">
+    graph TD
+        subgraph SG1 [Capa Cliente - Edge]
+            M[Navegador Móvil y Desktop - Médicos]
+            D[Navegador Desktop - Recepción]
+        end
+        
+        subgraph SG2 [Capa de Aplicación - Servidor VPS]
+            A[Nginx - HTTP Server + PHP-FPM]
+            F[Flight PHP - Router y API]
+            S[Swoole Server - Websockets]
+        end
+        
+        subgraph SG3 [Capa de Datos - Persistencia]
+            DB[(MariaDB 11.x)]
+            FS[File System - PDFs]
+        end
+        
+        M -->|"Peticiones HTMX (HTTPS)"| A
+        D -->|"Peticiones HTMX (HTTPS)"| A
+        M -.->|"Conexión WSS"| S
+        D -.->|"Conexión WSS"| S
+        
+        A --> F
+        F --> DB
+        F --> FS
+        F -->|"Dispara Eventos (ZMQ/TCP)"| S
+        S -->|"Push Notificaciones"| D
+        S -->|"Push Notificaciones"| M
+        </div></div>
+<p>Los componentes principales son:</p>
+<ul>
+<li><strong>Capa Cliente (Edge):</strong> Interfaz renderizada por el servidor impulsada por HTMX y Vanilla JS. Evita la sobrecarga de Single Page Applications (SPAs) delegando el estado lógico al backend, pero manteniendo una experiencia fluida. Incluye un <strong>Buscador Inteligente</strong> unificado (autocompletado desde 5 caracteres por nombre o folio) y manejo de notificaciones visuales/sonoras en el navegador.</li>
+<li><strong>Capa de Aplicación (Flight PHP & Swoole):</strong> Flight PHP actúa como orquestador, despachando rutas y validando seguridad (RBAC). Swoole Server mantiene conexiones WebSocket abiertas para <strong>Notificaciones Instantáneas Bidireccionales</strong>: alertas con sonido (silbato) para recepción al crear órdenes, y notificaciones silenciosas para médicos al cargar resultados, ambas con enlaces directos. Además, expone un <strong>Panel de Administración</strong> (CMS frugal) para gestionar el contenido de la web pública (promociones, paquetes, banners).</li>
+<li><strong>Capa de Datos:</strong> MariaDB como motor relacional transaccional (con retención de historial de 5 años), asegurando integridad mediante catálogos (ej. Catálogo de Estados, Catálogo de Estudios cargado vía Excel). El File System gestiona el almacenamiento seguro y persistente de los archivos PDF (órdenes clínicas y resultados).</li>
+</ul>
+
+<h3 id="sec2-1">2.1. Alcance de Dispositivos por Rol</h3>
+<p>Para garantizar una correcta adopción y rendimiento del ecosistema WebApp, se define el soporte y diseño primordial (UI/UX) por cada tipo de usuario de acuerdo a la siguiente matriz operativa:</p>
+<table style="margin-bottom: 2rem;">
+  <caption>Garantía de Compatibilidad OS/Navegador</caption>
+  <thead>
+    <tr>
+      <th>Factor de Forma</th>
+      <th>Sistemas Operativos (OS)</th>
+      <th>Navegadores Soportados</th>
+      <th>Resolución Efectiva</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Computadoras (Desktop/Laptop)</strong></td>
+      <td>Windows 10/11, macOS 12+</td>
+      <td>Safari 17+, Chrome 115+, Edge 115+</td>
+      <td>1280px hasta Monitores 4K</td>
+    </tr>
+    <tr>
+      <td><strong>Teléfonos Móviles</strong></td>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `opcache`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:02 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Tecnica_Infraestructura_Despliegue.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1734-1784)</summary>
+
+**Path:** `Unknown file`
+
+```
+</tbody>
+</table>
+
+<h4>15.9.10. Invalidación Granular en Publicaciones CMS y Purga Total vía URL (2026-09-03)</h4>
+<p>Para garantizar consistencia inmediata entre las publicaciones del CMS y el portal público <code>index.php</code> sin afectar el rendimiento global del servidor, se establecen dos mecanismos complementarios de gestión de memoria:</p>
+
+<ul>
+  <li>
+    <strong>Invalidación Granular Automática (CMS POST /cms/save):</strong>
+    <p>Al confirmar una publicación en el CMS (<code>admrc/index.php</code>), el servidor no reinicia toda la memoria del sistema. Ejecuta <code>Cache::invalidate($keys)</code> especificando las claves canónicas afectadas según la sección modificada:</p>
+    <ul>
+      <li><code>promociones</code> → <code>Cache::invalidate([Cache::KEY_PROMOS, Cache::KEY_CMS])</code></li>
+      <li><code>configuracion-general</code> → <code>Cache::invalidate([Cache::KEY_CFG, Cache::KEY_CMS])</code></li>
+      <li><code>especialidades</code> → <code>Cache::invalidate([Cache::KEY_TREE, Cache::KEY_CMS])</code></li>
+      <li><em>Cualquier otra sección CMS</em> → <code>Cache::invalidate(Cache::KEY_CMS)</code></li>
+    </ul>
+    <p>Técnicamente, <code>Cache::invalidate($key)</code> elimina el archivo serializado en <code>/tmp/laesh_cache/</code> e invoca la función nativa de PHP <code>opcache_invalidate($file, true)</code>, forzando la expulsión de la RAM únicamente para ese archivo de dataset, conservando los demás datasets intactos a velocidad &lt;0.1 ms.</p>
+  </li>
+  <li>
+    <strong>Purga Total e Inmediata vía URL (<code>?reset_cache=1</code> / <code>?nocache=1</code>):</strong>
+    <p>En situaciones de diagnóstico, migración o despliegue en caliente, el portal <code>website/index.php</code> detecta los parámetros GET de purga:</p>
+    <ul>
+      <li>Invoca <code>opcache_reset()</code> para limpiar la totalidad del bytecode PHP en la RAM del proceso PHP-FPM worker.</li>
+      <li>Invoca <code>Cache::clear()</code> eliminando todos los archivos cacheados en <code>/tmp/laesh_cache/</code>.</li>
+      <li>Activa <code>$_bypassCache = true</code> forzando la re-consulta directa de todos los datasets desde MariaDB y regenerando la página completa.</li>
+    </ul>
+  </li>
+</ul>
+</section>
+
+
+<section id="sec16">
+<h2 id="sec-16--resiliencia-cms">16. Resiliencia del CMS — Gaps de Sesión, Red y Persistencia Local</h2>
+<p>Análisis de los escenarios de fallo identificados cuando un usuario CMS edita paneles del sitio web en tiempos desfasados (pausa de 2–4 horas entre ediciones), con red inestable o en sesiones largas. Se documenta el gap, el riesgo, la solución adoptada y la conclusión final.</p>
+
+<h3>16.1 Gap 1 — Volatilidad de Datos (El riesgo del Refresh)</h3>
+<p><strong>Escenario:</strong> El usuario modifica 3 paneles durante la mañana. Pausa la edición por 3 horas. Al regresar, cierra la pestaña accidentalmente, el navegador suspende la pestaña por ahorro de RAM (comportamiento estándar de Chrome/Edge), o recarga la página.</p>
+<p><strong>Problema:</strong> Toda la información reside exclusivamente en el DOM (<code>value</code> de inputs y memoria interna de CKEditor 5). Al recargar o cerrar, el 100% del trabajo no publicado se pierde sin posibilidad de recuperación.</p>
+<p><strong>Solución — Draft Auto-Save (LocalStorage):</strong></p>
+<ol>
+  <li><strong>Interceptar Cambios:</strong> Extender el módulo <code>CmsDirtyTracker</code>. Cada vez que detecte un cambio (<code>markField</code>), serializa el contenido del panel activo y lo guarda en <code>localStorage</code> (ej. clave: <code>cms_draft_panel-hero</code>).</li>
+  <li><strong>Recuperación al Cargar:</strong> Al cargar <code>gestion_web.php</code>, un script revisa si existen drafts en <code>localStorage</code>. Si existen, inyecta los valores en los campos, marca los puntos rojos (<code>.cms-field-dirty-dot</code>) y muestra una alerta: <em>"Tienes cambios locales sin publicar en X pestañas. ¿Deseas restaurarlos o descartarlos?"</em></li>
+  <li><strong>Limpieza:</strong> Al ejecutar <code>publishCmsSection()</code> con éxito, se elimina la key correspondiente del <code>localStorage</code>.</li>
+</ol>
+
+<h3>16.2 Gap 2 — Expiración de Sesión y CSRF</h3>
+<p><strong>Escenario:</strong> El usuario deja la ventana abierta 4+ horas. El token CSRF puede haber caducado, rotado, o el servidor puede haber reiniciado los workers de PHP-FPM, perdiendo el estado de sesión.</p>
+<p><strong>Problema:</strong> El usuario regresa y da clic en "Publicar". El <code>fetch()</code> hace el POST, pero el backend lo rechaza con <code>403 Forbidden</code> (CSRF inválido) o <code>401 Unauthorized</code>. El usuario se topa con un muro y no sabe cómo guardar sus datos antes de tener que recargar y perder todo.</p>
+<p><strong>Cobertura por Gap 1:</strong> Si el Draft Auto-Save está implementado, la consecuencia fatal (pérdida de datos) queda neutralizada. El usuario recarga, vuelve a autenticarse, y sus borradores se restauran automáticamente. El único costo restante es la fricción de UX (paso extra de login).</p>
+<p><strong>Solución Complementaria — session_lifetime dinámico en BD:</strong> La duración de sesión PHP ya no está hardcodeada en <code>commons.php</code>. Se lee desde la tabla <code>configuraciones</code> (clave: <code>session_lifetime</code>), editable en la UI de Administración del Sistema (pestaña "Proyecto 1: LAESH Sitio Web &amp; CMS"). Valor actual: <strong>518,400 seg = 6 días</strong>. Rango permitido en UI: 3,600 (1h) a 2,592,000 (30 días).</p>
+<table>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Reviewing Document Preparation**
+
+Okay, I'm diving into the update strategy for the three HTML documentation files. Right now, I'm focusing on `Tecnica_Seguridad_Integral.html`. I'm starting by reviewing its path, and prepping to outline the specific updates required before moving on to the content.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Tecnica_Seguridad_Integral.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.073414016s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L27-44)</summary>
+
+**Path:** `Unknown file`
+
+```
+    <nav class="toc">
+        <h2>Índice de Contenidos</h2>
+        <ol>
+            <li><a href="#sec0">Resumen: Matriz de Trazabilidad por Ambiente</a></li>
+            <li><a href="#sec1">1. Infraestructura y Servidor Web (Nginx & PHP-FPM)</a></li>
+            <li><a href="#sec2">2. Nivel Base de Datos (MariaDB)</a></li>
+            <li><a href="#sec3">3. Nivel de Aplicación (Micro-Framework)</a></li>
+            <li><a href="#sec4">4. Autenticación y Ciclo de Sesión</a></li>
+            <li><a href="#sec5">5. Defensas Contra Vectores No Típicos</a></li>
+            <li><a href="#sec6">6. Monitoreo de Servicios y Alertas SMTP <span style="font-size:.85em;color:#ea580c;">(KVM2)</span></a></li>
+        </ol>
+    </nav>
+
+    <main>
+<div style="background:var(--color-bg-secondary,#f0f9ff); border-left:4px solid #2563eb; padding:14px 18px; margin:0 0 28px 0; border-radius:4px;">
+  <strong>📋 Configuración de setup y tuning centralizada:</strong> Los detalles completos de SSL/TLS hardening, headers de seguridad (HSTS, CSP), PHP-FPM pool, MariaDB timeouts y manejo de errores están documentados en
+  <a href="Tecnica_Infraestructura_Despliegue.html#sec15"><strong>§15 — Hardening y Tuning (Tecnica_Infraestructura_Despliegue.html)</strong></a>.
+  Este documento se enfoca en la arquitectura de seguridad integral — las directivas concretas de configuración se encuentran allí.
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Tecnica_Seguridad_Integral.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L199-239)</summary>
+
+**Path:** `Unknown file`
+
+```
+                <li><strong>Delegación Global de Eventos (JS Centralizado):</strong> La interacción de apertura de logotipos corporativos y navegación a nueva pestaña (<code>target="_blank"</code>) se resolvió mediante delegación de eventos centralizada en la fase de captura (<code>useCapture: true</code>) dentro de <code>app.js</code>:
+                    <pre><code>document.addEventListener('click', function(e) {
+    var a = e.target.closest('a.logo, a.portal-access-link');
+    if (a &amp;&amp; a.getAttribute('target') === '_blank') {
+        e.stopPropagation();
+    }
+}, true);</code></pre>
+                    Esta arquitectura garantiza que el navegador procese la acción sin interferencias de scripts locales de la interfaz privada y respetando el estándar <em>User Activation</em>.
+                </li>
+            </ul>
+
+            <h3>4.5. Segmentación Granular RBAC en Interfaces de Usuario (Portales /laesh/rc/, /laesh/md/ y /laesh/adrc/) <span class="tag dev">Desarrollo</span></h3>
+            <p>Para garantizar que el principio de mínimos privilegios se extienda al renderizado DOM en las vistas Plates PHP de los portales privados, se aplican reglas de ocultamiento dinámico server-side:</p>
+            <ul>
+                <li><strong>Aislamiento de la CMS Admin (<code>/laesh/adrc/</code>):</strong> Acceso exclusivo para el perfil <code>ADMIN</code> mediante la guardia RBAC <code>Flight::rbac()->requirePermission('gestionar_cms')</code>. El enlace de navegación <em>Contenidos del Sitio Web</em> (<code>#nav-gestion-web</code>) en la barra lateral de Recepción está envuelto en <code>&lt;?php if (!empty($isAdmin)): ?&gt;</code> y no se expone a los usuarios de rol <code>RECEPCION</code>.</li>
+                <li><strong>Ocultamiento de Módulo Médicos y Operaciones en Recepción (<code>/laesh/rc/</code>):</strong> El ítem de menú <em>Médicos</em> (<code>nav-item</code>), el panel de control <code>#panel-medicos</code> y la columna <code>Operaciones</code> de gestión de credenciales se encuentran condicionados por <code>&lt;?php if (!empty($isAdmin)): ?&gt;</code>. Para el personal de Recepción estándar, estos nodos quedan 100% excluidos del renderizado HTML por el servidor.</li>
+                <li><strong>Aislamiento del Portal Médico (<code>/laesh/md/</code>):</strong> Acceso restringido al perfil <code>MEDICO</code> o usuarios con permiso <code>ver_ordenes_propias</code>, asegurando que los profesionales médicos interactúen únicamente con su catálogo de solicitudes digitales sin visibilidad sobre las operaciones globales del laboratorio.</li>
+            </ul>
+        </section>
+
+        <!-- ═══════════════ 5. DEFENSAS LÓGICAS ═══════════════ -->
+        <section id="sec5">
+            <h2>5. Defensas Contra Vectores No Típicos (Logic Flaws) <span class="tag dev">Desarrollo</span></h2>
+            <ul>
+                <li><strong>Inyección de Archivos Nocivos (PDF Uploads):</strong> Al adjuntar resultados, el sistema backend validará no solo la extensión, sino la firma binaria real (<em>Magic Number</em> <code>%PDF-</code>) mediante la extensión <code>finfo</code>. Si el archivo es un script malicioso enmascarado, será rechazado y eliminado instantáneamente.</li>
+                <li><strong>Inseguridad de Referencias Directas (IDOR) y Suplantación Médica:</strong> Todas las descargas de PDFs e historiales médicos ejecutarán una validación cruzada. El controlador en Flight PHP verificará que el <code>orden_id</code> solicitado coincida exactamente con el <code>medico_id</code> de la sesión de Delight Auth. Intentos de acceso a folios de otros profesionales dispararán un <code>403 Forbidden</code> y un log de alerta a <code>sys_logs</code>.</li>
+                <li><strong>Autorización de Recursos (RBAC):</strong> Cada ruta ejecutará una validación obligatoria contra <code>\Common\RbacManager</code> asegurando que Recepción, Médicos y Administración interactúen estrictamente en su perímetro funcional.</li>
+                <li><strong>Protección del Panel de Sistema y Logs (<code>/laesh/adrc/sistema</code>):</strong> La administración de configuraciones y la visualización de logs de aplicación (<code>sys_logs</code>, <code>fallback_log</code>, <code>app.log</code>, Nginx y PHP-FPM) están restringidas por la guardia RBAC <code>gestionar_cms</code> para el rol <code>ADMIN</code>. Se previene Path Traversal restringiendo la lectura de archivos planos a la lista blanca de rutas conocidas.</li>
+                <li><strong>Validación Rigurosa de Binarios en CMS Upload:</strong> La subida de imágenes analiza el tipo MIME real mediante <code>\finfo</code> (MIME Types permitidos: WebP, JPEG, PNG). Se aplica sanitización al nombre del slot (alfanumérico y guiones únicamente) y rotación dinámica del token CSRF tras cada subida.</li>
+                <li><strong>Protección de Bypass de Caché L2 (DoS Prevention):</strong> La estrategia de Caché OPcache File Store soporta un parámetro de derivación (<code>?_preview=1</code>) para la previsualización del CMS. Este vector está severamente protegido en <code>index.php</code>: se requiere una sesión activa con rol de <code>ADMIN</code>, que existan datos en el borrador temporal de la sesión (<code>cms_draft</code>), y validación estricta de variables. Si no se cumplen estas precondiciones, el motor ignora el parámetro y sirve el contenido desde la RAM, bloqueando ataques de agotamiento de caché (Denegación de Servicio).</li>
+            </ul>
+        </section>
+
+        <!-- ═══════════════ 6. MONITOREO Y ALERTAS SMTP ═══════════════ -->
+        <section id="sec6">
+            <h2>6. Monitoreo de Servicios y Alertas SMTP <span class="tag vps">Setup Hostinger KVM</span></h2>
+            <p>El pipeline KVM2 incluye infraestructura de monitoreo activo con alertas via correo electrónico. Su relevancia de seguridad es directa: detecta caídas de servicios críticos antes de que se conviertan en incidentes, y protege las credenciales SMTP con controles estrictos.</p>
+
+            <h3>6.1. Seguridad de Credenciales SMTP (swaks)</h3>
+            <ul>
+                <li><strong>Nunca hardcodeadas en el repositorio:</strong> La contraseña de la cuenta de alertas usa el placeholder <code>__SMTP_PASS__</code> en el archivo fuente (<code>configs/swaks.conf</code>). El valor real se inyecta en tiempo de deploy desde la variable de entorno <code>LAESH_SMTP_PASS</code> por <code>07_security_harden.sh</code>, que usa <code>sed</code> con sustitución en memoria — la contraseña nunca toca el disco en texto claro en el repo.</li>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Adding Security Enhancements**
+
+I'm currently focused on incorporating a new section, 4.6, into `Tecnica_Seguridad_Integral.html`. This section will detail the strengthening of authentication with JWT tokens, utilizing a unique JTI (JWT ID) and L2 RAM cache (OPcache). The documentation will also cover the architectural flow and signature validation, specifically HMAC-SHA256, alongside a new `jwt_jti_registry` table.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.095617844s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:02 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Tecnica_Seguridad_Integral.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L29-39)</summary>
+
+**Path:** `Unknown file`
+
+```
+        <ol>
+            <li><a href="#sec0">Resumen: Matriz de Trazabilidad por Ambiente</a></li>
+            <li><a href="#sec1">1. Infraestructura y Servidor Web (Nginx & PHP-FPM)</a></li>
+            <li><a href="#sec2">2. Nivel Base de Datos (MariaDB)</a></li>
+            <li><a href="#sec3">3. Nivel de Aplicación (Micro-Framework)</a></li>
+            <li><a href="#sec4">4. Autenticación y Ciclo de Sesión</a></li>
+            <li><a href="#sec5">5. Defensas Contra Vectores No Típicos</a></li>
+            <li><a href="#sec6">6. Monitoreo de Servicios y Alertas SMTP <span style="font-size:.85em;color:#ea580c;">(KVM2)</span></a></li>
+        </ol>
+    </nav>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Especificacion_Tecnica.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L834-864)</summary>
+
+**Path:** `Unknown file`
+
+```
+<section id="sec4"><h2>4. Modelo de Base de Datos</h2><a href="Tecnica_Modelo_Datos.html" style="display:inline-block; margin-top:10px; margin-bottom:20px; color:#2563eb; text-decoration:none; font-weight:600;">→ Ver Modelo de Datos y Base de Datos (ER y DDL)</a></section>
+<!-- ═══════════════ 5. API BACKEND Y NEGOCIO ═══════════════ -->
+<section id="sec5">
+<h2>5. API Backend y Reglas de Negocio</h2>
+<a href="Tecnica_API_Backend.html" style="display:inline-block; margin-top:10px; margin-bottom:20px; color:#2563eb; text-decoration:none; font-weight:600;">→ Ver API Backend (Endpoints y Middleware)</a>
+
+<h3>5.1. Generación Dinámica de Solicitudes Digitales en PDF (On-The-Fly)</h3>
+<p>Para maximizar la frugalidad de almacenamiento en el servidor local de la clínica, las solicitudes de laboratorio expedidas digitalmente por el médico hacia el paciente <strong>no se guardan como archivos PDF físicos en disco</strong>. En su lugar:</p>
+<ul>
+<li><strong>Descarga Directa en Formato PDF al Vuelo:</strong> Al acceder al enlace web de la solicitud (ej. <code>/solicitud/pdf/{folio}</code>), el controlador en Flight PHP consulta las tablas <code>ordenes</code> y <code>detalle_ordenes</code>, procesa la plantilla en tiempo real y transmite directamente la respuesta binaria con cabeceras HTTP <code>Content-Type: application/pdf</code> y <code>Content-Disposition: attachment; filename="Solicitud_{folio}.pdf"</code> (o visualización/impresión directa en visor PDF nativo). Esto permite al usuario <strong>descargar la solicitud directamente en formato PDF</strong> sin generar ningún consumo de almacenamiento estático en el servidor.</li>
+<li><strong>Ventajas del Modelo:</strong> Garantiza que cualquier cambio posterior en los datos del paciente o en el catálogo de estudios se refleje inmediatamente en el documento descargado, evitando la acumulación de archivos obsoletos.</li>
+</ul>
+
+<h3>5.2. Gestión Paramétrica y Depuración de PDFs de Resultados (Retención de 8 Meses)</h3>
+<p>A diferencia de las solicitudes dinámicas, los archivos PDF de resultados adjuntos por el personal de laboratorio sí se almacenan en el sistema de archivos del servidor bajo un esquema paramétrico y con políticas de rotación estrictas:</p>
+<ul>
+<li><strong>Metadatos en BD (<code>resultados_pdf</code>):</strong> La tabla almacena el <code>nombre_archivo</code> original o normalizado (ej. <code>Resultado_LAESH-00001.pdf</code>) y la <code>fecha_subida</code>.</li>
+<li><strong>Ruta Base Paramétrica (<code>configuraciones</code>):</strong> La ruta absoluta donde se guardan físicamente los archivos se lee dinámicamente de la tabla <code>configuraciones</code> (<code>clave = 'ruta_almacenamiento_pdf'</code>).</li>
+<li><strong>Politica de Depuración Automática (8 Meses):</strong> El parámetro de retención se configura en la tabla <code>configuraciones</code> (<code>clave = 'tiempo_depuracion_pdf_meses'</code> con valor por defecto de <code>8</code>). Un proceso cron de mantenimiento programado ejecutará mensualmente el purgado físico de los archivos cuya <code>fecha_subida</code> supere los 8 meses, eliminando también su registro correspondiente en <code>resultados_pdf</code>.</li>
+</ul>
+
+<h3>5.3. CMS Frugal y Gestión del Sitio Web (Proyecto 1)</h3>
+<p>Bajo la directiva de arquitectura frugal, la administración del sitio web corporativo <strong>descarta la integración de librerías o frameworks CMS de terceros</strong> (como Pico CMS o Bludit) para evitar la duplicidad de stacks tecnológicos y conflictos de sesión. En su lugar, el ecosistema utiliza un enfoque nativo basado en base de datos ("Custom DB"):</p>
+<ul>
+<li><strong>Endpoints Genéricos (Flight PHP):</strong> Se construirán rutas REST ligeras (<code>GET</code> y <code>POST</code>) en el micro-framework para extraer y persistir el contenido estructurado directamente desde la tabla <code>web_contenidos</code>.</li>
+<li><strong>Integración Directa con Delight Auth y RBAC:</strong> Al residir en la misma base de código que el Bloc Digital, el panel de administración del sitio web (dashboard en <code>admrc/views/gestion_web.php</code>) está protegido de forma nativa por la sesión segura de <strong>Delight Auth</strong> y validado mediante el middleware <code>\Common\RbacManager</code>. Esto garantiza que solo los perfiles administrativos autorizados puedan alterar el portal público sin requerir un login secundario o sincronizaciones complejas.</li>
+<li><strong>Motor de Vistas (Plates):</strong> El contenido traído de la base de datos se inyecta de forma plana al motor <code>League\Plates</code> para un renderizado inmediato y con nula huella de memoria.</li>
+</ul>
+
+<h4 id="sec5-3-1">5.3.1. Esquema de la Tabla <code>web_contenidos</code></h4>
+<p>La tabla central del CMS almacena el contenido editable del sitio público bajo un modelo de clave/valor segmentado por sección. La estructura mínima obligatoria es:</p>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Especificacion_Tecnica.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L979-1019)</summary>
+
+**Path:** `Unknown file`
+
+```
+    <li><strong>Gaps/Fixes (MediaEmbed y CSP):</strong> 
+        <ul>
+            <li><strong>Fix CSP YouTube y Redimensionamiento Libre:</strong> Por defecto, CKEditor intentaba incrustar URLs directas (<code>/watch?v=</code>), lo que provocaba que YouTube bloqueara el contenido con <code>X-Frame-Options: SAMEORIGIN</code>. Se configuró un provider en <code>mediaEmbed.extraProviders</code> para interceptar enlaces de YouTube y generar un <code>&lt;iframe&gt;</code> que emplea <code>aspect-ratio: 16/9</code> junto con <code>resize: both</code>, permitiendo al usuario redimensionar libremente el video en frontend sin el bloqueo de altura del hack tradicional de padding.</li>
+            <li><strong>Fix Workarounds para Redes Sociales (Iframes vs Scripts):</strong> Por defecto, CKEditor utiliza el SDK de JavaScript nativo para renderizar contenido de Facebook, Instagram y Twitter. Dado que la función <code>safeHtml()</code> del backend bloquea cualquier etiqueta <code>&lt;script&gt;</code> por seguridad XSS, estas incrustaciones resultaban en contenedores vacíos en el frontend. Para solucionarlo, se inyectaron proveedores personalizados en <code>extraProviders</code> para <strong>todas</strong> estas redes, obligando a CKEditor a utilizar <code>&lt;iframe&gt;</code> nativos (los cuales sí están permitidos).
+                <br><strong>Proveedores Habilitados (Estado a Agosto 2026):</strong> El sistema soporta la incrustación nativa de las siguientes plataformas (todas adaptadas a iframes y contenedores resizables/flexibles):
+                <ul>
+                    <li><strong>Videos:</strong> YouTube, Vimeo, Dailymotion.</li>
+                    <li><strong>Audio/Música:</strong> Spotify.</li>
+                    <li><strong>Redes Sociales:</strong> 
+                        <ul>
+                            <li><strong>Instagram:</strong> Soportado para Posts (<code>/p/</code>) y Reels (<code>/reel/</code>). <em>Stories bloqueadas nativamente.</em></li>
+                            <li><strong>Facebook:</strong> Soportado para Posts, Videos (<code>/watch</code>, <code>/videos/</code>), Reels (<code>/reel/</code>), y enlaces cortos de compartir (<code>/share/v/</code>, <code>/share/p/</code>, <code>/share/r/</code>). <em>Stories (<code>/stories/</code>) estrictamente bloqueadas por arquitectura de privacidad de Meta.</em></li>
+                            <li><strong>X/Twitter:</strong> Soportado vía puente <code>twitframe.com</code>.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Otros:</strong> Google Maps, Flickr.</li>
+                </ul>
+            </li>
+            <li><strong>Fix CSP Nginx Global (Redes Sociales):</strong> Se inyectaron excepciones a nivel servidor (Nginx) para <code>frame-src</code> y <code>img-src</code> (youtube.com, i.ytimg.com, open.spotify.com, player.vimeo.com, dailymotion.com, instagram.com, facebook.com, platform.twitter.com) para autorizar las miniaturas e iframes incrustados sin debilitar el <code>default-src 'self'</code>. Estos mismos permisos se homologaron en las metaetiquetas inline de la web pública.</li>
+            <li><strong>Fix Sanitización:</strong> La función PHP <code>safeHtml()</code> que renderiza los borradores en la web pública fue actualizada para tolerar las etiquetas <code>&lt;div&gt;</code> e <code>&lt;iframe&gt;</code> inyectadas por el MediaEmbed de CKEditor, previniendo la corrupción del markup.</li>
+        </ul>
+    </li>
+</ul>
+</section>
+<!-- ═══════════════ 6. OBSERVABILIDAD Y TRAZABILIDAD ═══════════════ -->
+<section id="sec6">
+<h2>6. Observabilidad y Trazabilidad de Fallos (Logs y Auditoría)</h2>
+<p>Siguiendo la directiva de robustez y resiliencia en entornos de red y base de datos locales inestables, el ecosistema LAESH cuenta con dos clases helper dentro del espacio de nombres <code>\Common</code> para el registro de auditoría, trazabilidad SQL y telemetría:</p>
+
+<h3>6.1. Log General del Sistema (Common\Logger)</h3>
+<p>La clase <code>\Common\Logger</code> gestiona la ingesta de alertas generales de la aplicación mediante una arquitectura de persistencia redundante (Dual‑Path) con filtrado de nivel mínimo configurable en caliente:</p>
+<ul>
+<li><strong>Ruta de Base de Datos (sys_logs):</strong> Guarda el nivel de severidad, mensaje, marca temporal y la IP del cliente. Asocia opcionalmente el <code>user_id</code> de Delight Auth para rastreo del operador.</li>
+<li><strong>Ruta Fallback Física (logs/app.log):</strong> Si la BD está offline, el log se redirige al archivo plano local para prevenir pérdida de eventos.</li>
+<li><strong>Filtro de Nivel Mínimo (producción):</strong> <code>Logger::log()</code> evalúa el nivel del mensaje contra el mínimo configurado antes de hacer ningún I/O. Implementado con <code>LEVEL_ORDER</code> (constante privada) y caché por request en <code>$minLevel</code> (propiedad estática):
+<pre><code>DEBUG(0) → INFO(1) → WARN(2) → ERROR(3) → CRITICAL(4) → FATAL(5) → OFF(∞)
+
+// En producción, nivel mínimo por defecto: WARN
+// Logger::log('DEBUG', ...) y Logger::log('INFO', ...) → return temprano (sin BD, sin disco)
+// Logger::log('WARN', ...)  → escribe en sys_logs + app.log
+// Logger::log('ERROR', ...) → escribe en sys_logs + app.log
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Adding Authentication Specs**
+
+Okay, I'm integrating section 5.4, "Cryptographic Authentication and Authorization Architecture," into the `Especificacion_Tecnica.html` file. The focus is on a hybrid approach incorporating Delight Auth, JWT, JTI, and OPcache RAM. I'm actively documenting this combination, aiming for clarity in its cryptographic authentication and authorization strategy.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.260293568s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:02 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Tecnica_Infraestructura_Despliegue.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1739-1764)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+<ul>
+  <li>
+    <strong>Invalidación Granular Automática (CMS POST /cms/save):</strong>
+    <p>Al confirmar una publicación en el CMS (<code>admrc/index.php</code>), el servidor no reinicia toda la memoria del sistema. Ejecuta <code>Cache::invalidate($keys)</code> especificando las claves canónicas afectadas según la sección modificada:</p>
+    <ul>
+      <li><code>promociones</code> → <code>Cache::invalidate([Cache::KEY_PROMOS, Cache::KEY_CMS])</code></li>
+      <li><code>configuracion-general</code> → <code>Cache::invalidate([Cache::KEY_CFG, Cache::KEY_CMS])</code></li>
+      <li><code>especialidades</code> → <code>Cache::invalidate([Cache::KEY_TREE, Cache::KEY_CMS])</code></li>
+      <li><em>Cualquier otra sección CMS</em> → <code>Cache::invalidate(Cache::KEY_CMS)</code></li>
+    </ul>
+    <p>Técnicamente, <code>Cache::invalidate($key)</code> elimina el archivo serializado en <code>/tmp/laesh_cache/</code> e invoca la función nativa de PHP <code>opcache_invalidate($file, true)</code>, forzando la expulsión de la RAM únicamente para ese archivo de dataset, conservando los demás datasets intactos a velocidad &lt;0.1 ms.</p>
+  </li>
+  <li>
+    <strong>Purga Total e Inmediata vía URL (<code>?reset_cache=1</code> / <code>?nocache=1</code>):</strong>
+    <p>En situaciones de diagnóstico, migración o despliegue en caliente, el portal <code>website/index.php</code> detecta los parámetros GET de purga:</p>
+    <ul>
+      <li>Invoca <code>opcache_reset()</code> para limpiar la totalidad del bytecode PHP en la RAM del proceso PHP-FPM worker.</li>
+      <li>Invoca <code>Cache::clear()</code> eliminando todos los archivos cacheados en <code>/tmp/laesh_cache/</code>.</li>
+      <li>Activa <code>$_bypassCache = true</code> forzando la re-consulta directa de todos los datasets desde MariaDB y regenerando la página completa.</li>
+    </ul>
+  </li>
+</ul>
+</section>
+
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:02 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Verifying HTML Validity**
+
+I'm now cross-checking the updated HTML files for adherence to proper formatting and HTML validity. Specifically, I'm examining `Tecnica_Seguridad_Integral.html`, `Especificacion_Tecnica.html`, and `Tecnica_Infraestructura_Despliegue.html` to guarantee they are all correctly structured. Next, I'll update `walkthrough.md`.
+
+
+
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.107358784s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:02 am
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+Asegurate de haber incluido el diagrama Arquitectura Implementada y Componentes Construidos e Integrados
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `cache_renew.php`
+**Language:** php
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+#!/usr/bin/env php
+<?php
+/**
+ * cache_renew.php — Renovación Diaria de Caché L2 (OPcache PHP File Store)
+ *
+ * Ejecutado automáticamente a las 05:00 AM por cron (KVM2):
+ *   0 5 * * * www-data php8.3 /opt/laesh/www/laesh-swbldi/crons/cache_renew.php >> /opt/laesh/logs/cache_renew.log 2>&1
+ *
+ * Flujo:
+ *   1. Limpia todos los archivos de caché del directorio /opt/laesh/cache/ (PrivateTmp-safe)
+ *   2. Calienta los 4 datasets directamente desde MariaDB
+ *   3. Los compila en OPcache para que el primer request HTTP del día
+ *      sea instantáneo (warm cache, zero-latency start of day).
+ *
+ * Importante: ejecutar con el mismo usuario que PHP-FPM (www-data) para que los
+ * permisos del directorio /opt/laesh/cache/ sean consistentes.
+ */
+declare(strict_types=1);
+
+$start = microtime(true);
+
+// Bootstrap ANTES del primer echo — evita "headers already sent" en commons.php
+// commons.php llama header()/session_start(); si hay output previo, PHP emite warnings.
+define('APP_ENV', 'prod');
+ob_start();
+require_once __DIR__ . '/../commons/autoload.php';
+require_once __DIR__ . '/../commons/commons.php';
+ob_end_clean();
+
+echo "[" . date('Y-m-d H:i:s') . "] LAESH Cache Renew — Iniciando...\n";
+
+use Common\Cache;
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Confirming Visual Aids**
+
+I'm making sure the "Arquitectura Implementada" diagram and the "Componentes Construidos e Integrados" list are definitely included. My focus is on ensuring these are present and correctly integrated.
+
+
+**Verifying Mermaid Diagrams**
+
+I've confirmed the `Tecnica_Seguridad_Integral.html` and `Especificacion_Tecnica.html` files contain the correct Mermaid diagram or HTML diagram structure for the JTI + OPcache L2 architecture. Specifically, line 83-112 in `Especificacion_Tecnica.html` has a proper implementation. I'm now verifying the exact format within these files and will make sure the component lists are well-represented.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Tecnica_Seguridad_Integral.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.919619069s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L209-254)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+            <h3>4.5. Segmentación Granular RBAC en Interfaces de Usuario (Portales /laesh/rc/, /laesh/md/ y /laesh/adrc/) <span class="tag dev">Desarrollo</span></h3>
+            <p>Para garantizar que el principio de mínimos privilegios se extienda al renderizado DOM en las vistas Plates PHP de los portales privados, se aplican reglas de ocultamiento dinámico server-side:</p>
+            <ul>
+                <li><strong>Aislamiento de la CMS Admin (<code>/laesh/adrc/</code>):</strong> Acceso exclusivo para el perfil <code>ADMIN</code> mediante la guardia RBAC <code>Flight::rbac()->requirePermission('gestionar_cms')</code>. El enlace de navegación <em>Contenidos del Sitio Web</em> (<code>#nav-gestion-web</code>) en la barra lateral de Recepción está envuelto en <code>&lt;?php if (!empty($isAdmin)): ?&gt;</code> y no se expone a los usuarios de rol <code>RECEPCION</code>.</li>
+                <li><strong>Ocultamiento de Módulo Médicos y Operaciones en Recepción (<code>/laesh/rc/</code>):</strong> El ítem de menú <em>Médicos</em> (<code>nav-item</code>), el panel de control <code>#panel-medicos</code> y la columna <code>Operaciones</code> de gestión de credenciales se encuentran condicionados por <code>&lt;?php if (!empty($isAdmin)): ?&gt;</code>. Para el personal de Recepción estándar, estos nodos quedan 100% excluidos del renderizado HTML por el servidor.</li>
+                <li><strong>Aislamiento del Portal Médico (<code>/laesh/md/</code>):</strong> Acceso restringido al perfil <code>MEDICO</code> o usuarios con permiso <code>ver_ordenes_propias</code>, asegurando que los profesionales médicos interactúen únicamente con su catálogo de solicitudes digitales sin visibilidad sobre las operaciones globales del laboratorio.</li>
+            </ul>
+
+            <h3>4.6. Reforzamiento con Tokens JWT, Identificador JTI (JWT ID) Único y Caché L2 en RAM (OPcache) <span class="tag dev">Desarrollo</span> <span class="tag vps">Setup Hostinger KVM</span></h3>
+            <p>Para elevar la seguridad en la autenticación entre el sitio web público (<code>index.php</code>) y los portales privados (<code>/laesh/md/</code>, <code>/laesh/rc/</code>, <code>/laesh/adrc/</code>), se implementó un modelo híbrido de <strong>Tokens Criptográficos JWT respaldados por JTI (JWT ID) y Caché en Memoria RAM de OPcache (L2)</strong>:</p>
+            <ul>
+                <li><strong>Emisión y Firma Criptográfica (HMAC-SHA256):</strong> Al autenticar credenciales en <code>website/login/login.php</code> vía Delight Auth, la clase <code>\Common\JwtManager</code> genera un JWT firmado nativamente (algoritmo <code>HS256</code>) utilizando una clave secreta (<code>LAESH_JWT_SECRET</code>). El token se transmite al navegador mediante la cookie segura <code>laesh_jwt_token</code> (banderas <code>HttpOnly</code>, <code>SameSite=Strict</code> y <code>Secure</code> bajo HTTPS).</li>
+                <li><strong>Identificador Único JTI (UUID v4) &amp; Persistencia en MariaDB:</strong> Cada token contiene un atributo <code>jti</code> único (UUID v4 de 256 bits). Este identificador se registra en la tabla MariaDB <code>jwt_jti_registry</code> junto con la IP del cliente, el User-Agent y los sellos de emisión (<code>issued_at</code>) y expiración (<code>expires_at</code>).</li>
+                <li><strong>Verificación Utra-Rápida en OPcache RAM (&lt;0.1 ms):** El middleware de autorización <code>\Common\RbacManager::requirePermission()</code> extrae la cookie <code>laesh_jwt_token</code> en cada petición sensible y consulta la validez del <code>jti</code> primero en la caché en memoria de OPcache (<code>Cache::get('JTI_' . md5($jti))</code>). Si la entrada está en RAM y no está revocada, la petición se valida a velocidad &lt;0.1 ms sin consultas SQL adicionales a MariaDB. Si no está en RAM (miss), consulta MariaDB (SSOT) y re-calienta la memoria automáticamente.</li>
+                <li><strong>Revocación Atómica / Force Logout Inmediato:</strong> Al cerrar sesión (<code>logout.php</code>) o mediante acciones de administración, se invoca <code>JwtManager::revokeJti($jti)</code> o <code>JwtManager::revokeAllUserSessions($userId)</code>. Esto actualiza <code>is_revoked = 1</code> en MariaDB e invalida atómicamente la entrada en la memoria RAM de OPcache (<code>opcache_invalidate</code>), provocando el cierre inmediato de la sesión en todos los dispositivos del usuario sin esperar a que el token expire.</li>
+                <li><strong>Mantenimiento Autónomo por Cron (05:00 AM):</strong> El script de mantenimiento diario de la caché (<code>crons/cache_renew.php</code>) ejecuta automáticamente la purga de tokens expirados en MariaDB (<code>DELETE FROM jwt_jti_registry WHERE expires_at &lt; UNIX_TIMESTAMP()</code>), manteniendo la tabla optimizada sin intervención manual.</li>
+            </ul>
+        </section>
+
+        <!-- ═══════════════ 5. DEFENSAS LÓGICAS ═══════════════ -->
+        <section id="sec5">
+            <h2>5. Defensas Contra Vectores No Típicos (Logic Flaws) <span class="tag dev">Desarrollo</span></h2>
+            <ul>
+                <li><strong>Inyección de Archivos Nocivos (PDF Uploads):</strong> Al adjuntar resultados, el sistema backend validará no solo la extensión, sino la firma binaria real (<em>Magic Number</em> <code>%PDF-</code>) mediante la extensión <code>finfo</code>. Si el archivo es un script malicioso enmascarado, será rechazado y eliminado instantáneamente.</li>
+                <li><strong>Inseguridad de Referencias Directas (IDOR) y Suplantación Médica:</strong> Todas las descargas de PDFs e historiales médicos ejecutarán una validación cruzada. El controlador en Flight PHP verificará que el <code>orden_id</code> solicitado coincida exactamente con el <code>medico_id</code> de la sesión de Delight Auth. Intentos de acceso a folios de otros profesionales dispararán un <code>403 Forbidden</code> y un log de alerta a <code>sys_logs</code>.</li>
+                <li><strong>Autorización de Recursos (RBAC):</strong> Cada ruta ejecutará una validación obligatoria contra <code>\Common\RbacManager</code> asegurando que Recepción, Médicos y Administración interactúen estrictamente en su perímetro funcional.</li>
+                <li><strong>Protección del Panel de Sistema y Logs (<code>/laesh/adrc/sistema</code>):</strong> La administración de configuraciones y la visualización de logs de aplicación (<code>sys_logs</code>, <code>fallback_log</code>, <code>app.log</code>, Nginx y PHP-FPM) están restringidas por la guardia RBAC <code>gestionar_cms</code> para el rol <code>ADMIN</code>. Se previene Path Traversal restringiendo la lectura de archivos planos a la lista blanca de rutas conocidas.</li>
+                <li><strong>Validación Rigurosa de Binarios en CMS Upload:</strong> La subida de imágenes analiza el tipo MIME real mediante <code>\finfo</code> (MIME Types permitidos: WebP, JPEG, PNG). Se aplica sanitización al nombre del slot (alfanumérico y guiones únicamente) y rotación dinámica del token CSRF tras cada subida.</li>
+                <li><strong>Protección de Bypass de Caché L2 (DoS Prevention):</strong> La estrategia de Caché OPcache File Store soporta un parámetro de derivación (<code>?_preview=1</code>) para la previsualización del CMS. Este vector está severamente protegido en <code>index.php</code>: se requiere una sesión activa con rol de <code>ADMIN</code>, que existan datos en el borrador temporal de la sesión (<code>cms_draft</code>), y validación estricta de variables. Si no se cumplen estas precondiciones, el motor ignora el parámetro y sirve el contenido desde la RAM, bloqueando ataques de agotamiento de caché (Denegación de Servicio).</li>
+            </ul>
+        </section>
+
+        <!-- ═══════════════ 6. MONITOREO Y ALERTAS SMTP ═══════════════ -->
+        <section id="sec6">
+            <h2>6. Monitoreo de Servicios y Alertas SMTP <span class="tag vps">Setup Hostinger KVM</span></h2>
+            <p>El pipeline KVM2 incluye infraestructura de monitoreo activo con alertas via correo electrónico. Su relevancia de seguridad es directa: detecta caídas de servicios críticos antes de que se conviertan en incidentes, y protege las credenciales SMTP con controles estrictos.</p>
+
+            <h3>6.1. Seguridad de Credenciales SMTP (swaks)</h3>
+            <ul>
+                <li><strong>Nunca hardcodeadas en el repositorio:</strong> La contraseña de la cuenta de alertas usa el placeholder <code>__SMTP_PASS__</code> en el archivo fuente (<code>configs/swaks.conf</code>). El valor real se inyecta en tiempo de deploy desde la variable de entorno <code>LAESH_SMTP_PASS</code> por <code>07_security_harden.sh</code>, que usa <code>sed</code> con sustitución en memoria — la contraseña nunca toca el disco en texto claro en el repo.</li>
+                <li><strong>Archivo con permisos mínimos:</strong> <code>/opt/laesh/configs/swaks.conf</code> se despliega con <code>chmod 600 root:root</code>. Solo root puede leerlo; el proceso de alerta (<code>monitor_services.sh</code>) corre como root via cron, por lo que es el único que necesita acceso.</li>
+                <li><strong>Protocolo seguro:</strong> Yahoo SMTP en puerto 587 con STARTTLS + autenticación LOGIN. No se usa SMTP sin cifrar (puerto 25) ni autenticación en claro.</li>
+                <li><strong>Smoke test post-deploy:</strong> <code>scripts/test_smtp.sh</code> verifica en 4 pasos que no quede el placeholder sin sustituir antes de declarar el deploy exitoso. Retorna exit code clasificado (1=preflight, 2=conexión/auth, 3=envío) para diagnóstico preciso.</li>
+            </ul>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Implementing Diagram and Block**
+
+I'm now integrating the Mermaid diagram and the "Componentes Construidos e Integrados" block into `Tecnica_Seguridad_Integral.html`, specifically under Section 4.6. The plan is to use `replace_file_content` to streamline the update process for `Tecnica_Seguridad_Integral`. I'm confident this method will be efficient.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.058811121s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:06 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Confirming Document Integration**
+
+I'm currently focused on verifying the successful embedding of the Mermaid architecture diagram and the detailed Component List table within the HTML master documentation files, specifically by updating the `walkthrough.md` artifact. This ensures the comprehensive integration of all visual and textual elements within the final documentation.
+
+
+
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.082335947s
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:06 am
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+Para promociones Vigentes (Gestión de las 7 Promociones) en cms:
+Se va a rediseñar el scope, por lo que la implementación actual. Por lo que el primer paso es depurar/eliminar la implementacion (php, bd, seed da datos, etc.) en cada ficha para estas caracteristicas:
+.  PASO 1: SELECCIONAR O BUSCAR ESTUDIO ASOCIADO DEL CATÁLOGO, Nombre del Estudio, Subtítulo / Categoría, Indicaciones de Ayuno,  Tiempo de Entrega,  Descripción / Detalle del Estudio, Muestra Requerida,  Precio Reg.  y Precio Oferta .
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `Tecnica_Seguridad_Integral.html`
+**Language:** html
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `catalogo_promociones`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:12 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `promociones`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:12 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Current Implementations**
+
+I'm now diving into the user's instructions. I'm focusing on the "Para promociones Vigentes" section, specifically the need to redesign and clean up the current implementation within the CMS. The initial step is clear: purge the existing PHP, database, and seed data related to the current implementation.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.002182258s
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L699-859)</summary>
+
+**Path:** `Unknown file`
+
+```
+        <div id="panel-promociones" class="cms-panel" role="tabpanel" aria-labelledby="tab-promociones" tabindex="0" data-section="promociones">
+            <div class="cms-panel-header">
+                <h3 class="cms-h3">Promociones Vigentes (#promociones)</h3>
+            </div>
+
+            <!-- Fila 1: Encabezado de la Sección + Mensaje WhatsApp Agendar -->
+            <hr class="cms-section-sep">
+            <div class="grid-2col mb-4">
+            <!-- Encabezado de la Sección Promociones -->
+            <div class="editor-card">
+                <div class="editor-card-header">
+                    <div class="card-title">Encabezado de la Sección (#promociones)</div>
+                </div>
+                <div class="editor-card-body">
+                    <div class="field-group">
+                        <label>Título Principal (h2)</label>
+                        <input type="text" name="banner__titulo"
+                               value="<?= cms($contenidos, 'promociones', 'banner', 'titulo', 'Promociones Vigentes') ?>">
+                    </div>
+                    <div class="field-group">
+                        <label>Subtítulo / Descripción de la Sección</label>
+                        <input type="text" name="banner__subtitulo"
+                               value="<?= cms($contenidos, 'promociones', 'banner', 'subtitulo', 'Aprovecha nuestros precios preferenciales en estudios de laboratorio seleccionados cada día de la semana.') ?>">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mensaje WhatsApp para Agendar Promoción -->
+            <div class="editor-card">
+                <div class="editor-card-header">
+                    <div class="card-title">Plantilla del Mensaje de WhatsApp (Agendar)</div>
+                </div>
+                <div class="editor-card-body">
+                    <div class="field-group">
+                        <label>Mensaje al Agendar Estudio <small class="txt-muted">usa <code>{estudio}</code> como marcador dinámico</small></label>
+                        <input type="text" name="_cfg_wa_texto_agendar"
+                               value="<?= htmlspecialchars($config['wa_texto_agendar'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
+                        <small class="cms-help-text">Texto pre-escrito en WhatsApp al agendar cualquier promoción del día. El comodín <code>{estudio}</code> se reemplaza dinámicamente con el nombre o clave del estudio promocionado (ej. <em>«Hola LAESH, deseo agendar {estudio}»</em> $\rightarrow$ <em>«Hola LAESH, deseo agendar Reticulocitos»</em>).</small>
+                    </div>
+                </div>
+            </div>
+            </div><!-- /grid-2col fila 1 -->
+
+            <!-- Fila 2: Promociones Relacionales (MariaDB — 7 Fichas: Lunes a Domingo) -->
+            <hr class="cms-section-sep">
+            <div class="editor-card mb-4">
+                <div class="editor-card-header" style="padding:12px 16px;">
+                    <div class="card-title" style="font-weight:800; font-size:1.15rem; color:#0052B7; background:#e0f2fe; padding:6px 14px; border-radius:6px; border-left:4px solid #0284c7; display:inline-block;">Gestión de las 7 Promociones</div>
+                </div>
+                <div class="editor-card-body">
+                    <!-- Guía de Origen de Datos (SSOT vs. Texto Libre) -->
+                    <div class="cms-help-banner mb-3" style="background: #f8fafc; border: 1px solid #cbd5e1; border-left: 4px solid #0052B7; border-radius: 6px; padding: 10px 14px; font-size: 0.82rem; color: #1e293b; line-height: 1.5;">
+                        <div style="font-weight: 700; color: #0052B7; margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
+                            💡 Guía de Origen de Datos (SSOT del Constructor Jerárquico vs. Texto Libre de la Promoción)
+                        </div>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 6px;">
+                            <div style="flex: 1 1 280px; background: #ffffff; padding: 8px 10px; border-radius: 5px; border: 1px solid #e2e8f0;">
+                                <strong style="color: #0369a1;">🎨 SÍ provienen de la SSOT (Constructor Jerárquico):</strong><br>
+                                <span style="color: #475569;">• Nombre del Estudio, Categoría, Ayuno y Tiempo. <em style="color: #0284c7;">(Sus caracteres están protegidos para mantener la norma médica, pero SÍ se puede personalizar su estilo visual con negritas/colores).</em></span>
+                            </div>
+                            <div style="flex: 1 1 280px; background: #ffffff; padding: 8px 10px; border-radius: 5px; border: 1px solid #e2e8f0;">
+                                <strong style="color: #b45309;">✍️ NO provienen de la SSOT (Configuración Libre de Oferta):</strong><br>
+                                <span style="color: #475569;">• <strong>Campo #7 (Única Descripción 100% Editable)</strong>, Título Superior de Ficha, Precios e Imagen.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <style>
+                    /* Distribución uniforme a 2 columnas sin scroll horizontal en Promociones */
+                    #panel-promociones .promo-grid-2col {
+                        display: grid;
+                        grid-template-columns: repeat(2, minmax(0, 1fr));
+                        gap: 1.25rem;
+                        width: 100%;
+                        max-width: 100%;
+                        box-sizing: border-box;
+                    }
+                    @media (max-width: 992px) {
+                        #panel-promociones .promo-grid-2col {
+                            grid-template-columns: 1fr;
+                        }
+                    }
+                    #panel-promociones .promo-card-editor {
+                        width: 100%;
+                        max-width: 100%;
+                        box-sizing: border-box;
+                        overflow-x: hidden;
+                    }
+                    #panel-promociones .ck.ck-toolbar {
+                        flex-wrap: wrap !important;
+                        max-width: 100% !important;
+                        box-sizing: border-box !important;
+                    }
+                    #panel-promociones .ck.ck-editor__main {
+                        max-width: 100% !important;
+                        box-sizing: border-box !important;
+                    }
+                    #panel-promociones .ck.ck-content {
+                        word-break: break-word !important;
+                        overflow-wrap: break-word !important;
+                    }
+                    </style>
+
+                    <?php
+                    $_headerStyles = [
+                        1 => ['bg' => 'linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%)', 'borderColor' => '#2563eb', 'color' => '#ffffff', 'tag' => 'Lunes'],
+                        2 => ['bg' => 'linear-gradient(135deg, #065f46 0%, #059669 100%)', 'borderColor' => '#059669', 'color' => '#ffffff', 'tag' => 'Martes'],
+                        3 => ['bg' => 'linear-gradient(135deg, #78350f 0%, #d97706 100%)', 'borderColor' => '#d97706', 'color' => '#ffffff', 'tag' => 'Miércoles'],
+                        4 => ['bg' => 'linear-gradient(135deg, #581c87 0%, #7c3aed 100%)', 'borderColor' => '#7c3aed', 'color' => '#ffffff', 'tag' => 'Jueves'],
+                        5 => ['bg' => 'linear-gradient(135deg, #831843 0%, #db2777 100%)', 'borderColor' => '#db2777', 'color' => '#ffffff', 'tag' => 'Viernes'],
+                        6 => ['bg' => 'linear-gradient(135deg, #134e4a 0%, #0d9488 100%)', 'borderColor' => '#0d9488', 'color' => '#ffffff', 'tag' => 'Sábado'],
+                        7 => ['bg' => 'linear-gradient(135deg, #7c2d12 0%, #ea580c 100%)', 'borderColor' => '#ea580c', 'color' => '#ffffff', 'tag' => 'Domingo'],
+                    ];
+                    ?>
+                    <div class="promo-grid-2col">
+                    <?php if (!empty($promociones)): ?>
+                        <?php foreach ($promociones as $p): ?>
+                            <?php 
+                                $pId = (int)$p['id'];
+                                $diaLabel = ucfirst(trim(strip_tags($p['dia_semana'])));
+                                $imgUrl = $p['imagen_fondo'] ?? '';
+                                $hStyle = $_headerStyles[$pId] ?? ['bg' => '#0f172a', 'borderColor' => '#334155', 'color' => '#ffffff', 'tag' => 'Ficha'];
+                            ?>
+                            <div class="editor-card promo-card-editor" style="border: 2px solid <?= $hStyle['borderColor'] ?>; background: #fafafa; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+                                <div class="editor-card-header" style="display:flex; justify-content:space-between; align-items:center; background: <?= $hStyle['bg'] ?>; padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.2);">
+                                    <div class="card-title" style="font-weight:800; color: <?= $hStyle['color'] ?>; font-size:0.95rem; display:flex; align-items:center; gap:8px;">
+                                        <span>Ficha ID: <?= $pId ?></span>
+                                        <span style="font-size:0.75rem; background:rgba(255,255,255,0.22); color:#ffffff; padding:2px 8px; border-radius:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px;">
+                                            <?= $hStyle['tag'] ?>
+                                        </span>
+                                    </div>
+                                    <label style="display:flex; align-items:center; gap:6px; font-size:0.85rem; font-weight:700; cursor:pointer; color: <?= $hStyle['color'] ?>; background:rgba(0,0,0,0.2); padding:4px 10px; border-radius:20px;">
+                                        <input type="checkbox" name="promo_active_<?= $pId ?>" value="1" <?= (!empty($p['activo'])) ? 'checked' : '' ?> style="width:1.05rem; height:1.05rem; cursor:pointer; accent-color:#10b981;">
+                                        <span>Activa</span>
+                                    </label>
+                                </div>
+                                <div class="editor-card-body" style="padding:12px;">
+                                    <input type="hidden" name="promo_id[]" value="<?= $pId ?>">
+
+                                    <!-- 1. Título / Etiqueta Superior (ÚNICO editable en contenido + estilo RTE) -->
+                                    <div class="field-group mb-3">
+                                        <label>✍️ Título / Etiqueta Superior de la Ficha <small class="txt-muted">(✍️ Contenido y Estilos RTE Editables)</small></label>
+                                        <div id="ck-promo-day-<?= $pId ?>" class="ck5-mount"></div>
+                                        <textarea id="ck-promo-day-<?= $pId ?>-data" name="promo_dia_semana_<?= $pId ?>" class="ck5-hidden-data" rows="2"><?= h(trim($p['dia_semana'])) ?></textarea>
+                                    </div>
+
+                                    <!-- 2. Estudio Asociado del Catálogo (Combo Desplegable + Buscador Autocomplete) -->
+                                    <div class="field-group mb-3" style="background: linear-gradient(135deg, #eff6ff 0%, #e0f2fe 100%); border: 1.5px solid #38bdf8; border-left: 4px solid #0284c7; border-radius: 8px; padding: 10px 12px; box-shadow: 0 2px 6px rgba(2, 132, 199, 0.08);">
+                                        <label style="font-weight: 700; color: #0369a1; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 4px; margin-bottom: 4px;">
+                                            <span>🎯 PASO 1: SELECCIONAR O BUSCAR ESTUDIO ASOCIADO DEL CATÁLOGO</span>
+                                            <span style="font-size: 0.72rem; background: #0284c7; color: #ffffff; padding: 2px 8px; border-radius: 12px; font-weight: 600;">⚡ Auto-pobla campos de BD</span>
+                                        </label>
+                                        <div style="font-size: 0.76rem; color: #0c4a6e; margin-bottom: 8px; line-height: 1.3;">
+                                            Elija primero el estudio base desde el combo o buscador para cargar automáticamente los datos maestros de MariaDB.
+                                        </div>
+                                        <div style="display:flex; flex-wrap:wrap; gap:0.75rem; align-items:center;" class="promo-estudio-picker-row">
+                                            <!-- Opción A: Desplegable / Combo -->
+                                            <div style="flex:1 1 220px; min-width:180px;">
+                                                <label style="font-size: 0.75rem; font-weight: 700; color: #0369a1; margin-bottom: 3px; display: block;">Opción A: Selección Directa (Combo)</label>
+                                                <select name="promo_estudio_id_<?= $pId ?>" id="promo-select-<?= $pId ?>" class="form-input promo-estudio-select" style="font-size:0.85rem; width:100%; text-overflow:ellipsis; background-color: #ffffff; border-color: #7dd3fc; font-weight: 600; color: #0f172a;" data-card-id="<?= $pId ?>">
+                                                    <option value="" data-nombre="" data-categoria="" data-desc_breve="" data-ayuno="" data-tiempo="" data-detalle="">-- Sin estudio asociado --</option>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L860-959)</summary>
+
+**Path:** `Unknown file`
+
+```
+                                                    <?php if (!empty($estudiosCatalog)): ?>
+                                                        <?php foreach ($estudiosCatalog as $est): ?>
+                                                            <?php $optText = $est['nombre'] . ' (' . $est['clave_interna'] . ')'; ?>
+                                                            <option value="<?= $est['id'] ?>"
+                                                                    data-nombre="<?= h($est['nombre']) ?>"
+                                                                    data-categoria="<?= h($est['categoria_nombre'] ?? '') ?>"
+                                                                    data-desc_breve="<?= h($est['descripcion_breve'] ?? '') ?>"
+                                                                    data-ayuno="<?= h($est['preparacion'] ?? '') ?>"
+                                                                    data-tiempo="<?= h($est['tiempo_procesamiento'] ?? '') ?>"
+                                                                    data-detalle="<?= h($est['detalle'] ?? '') ?>"
+                                                                    <?= ($p['estudio_id'] == $est['id']) ? 'selected' : '' ?>>
+                                                                <?= h($optText) ?>
+                                                            </option>
+                                                        <?php endforeach; ?>
+                                                    <?php endif; ?>
+                                                </select>
+                                            </div>
+
+                                            <!-- Opción B: Buscador Autocomplete -->
+                                            <div style="flex:1 1 220px; min-width:180px; position:relative;">
+                                                <label style="font-size: 0.75rem; font-weight: 700; color: #0369a1; margin-bottom: 3px; display: block;">Opción B: Buscador Rápido (Autocomplete)</label>
+                                                <?php 
+                                                    $initialAutoVal = '';
+                                                    if (!empty($p['estudio_id']) && !empty($estudiosCatalog)) {
+                                                        foreach ($estudiosCatalog as $est) {
+                                                            if ($est['id'] == $p['estudio_id']) {
+                                                                $initialAutoVal = $est['nombre'] . ' (' . $est['clave_interna'] . ')';
+                                                                break;
+                                                            }
+                                                        }
+                                                    }
+                                                ?>
+                                                <input type="text"
+                                                       id="promo-autocomplete-<?= $pId ?>"
+                                                       class="form-input promo-autocomplete-input"
+                                                       value="<?= h($initialAutoVal) ?>"
+                                                       placeholder="🔍 Escribe nombre o código..."
+                                                       style="font-size:0.85rem; width:100%; background-color: #ffffff; border-color: #7dd3fc; font-weight: 600; color: #0f172a;"
+                                                       data-card-id="<?= $pId ?>"
+                                                       autocomplete="off">
+                                                <div id="promo-suggestions-<?= $pId ?>" class="promo-suggestions-panel" style="display:none; position:absolute; top:100%; left:0; right:0; z-index:1000; background:#ffffff; border:1.5px solid #0052B7; border-radius:6px; max-height:220px; overflow-y:auto; box-shadow:0 4px 12px rgba(0,0,0,0.15); margin-top:2px;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <?php
+                                    // Linearización SSOT: CMS lee estilos desde web_contenidos; SSOT de catalogo_estudios es la fuente de texto.
+                                    // El valor inicial de cada campo RTE es: estilos CMS guardados (si existen) o texto plano del SSOT.
+                                    $cmsNombre    = $contenidos['promociones']["promo{$pId}_nombre"]['texto']
+                                                    ?? ($p['estudio_nombre_db'] ?? '');
+                                    $ssotSub      = trim(($p['categoria_nombre'] ?? '') . (!empty($p['ssot_desc_breve']) ? ' · ' . $p['ssot_desc_breve'] : ''));
+                                    $cmsSubtitulo = ($contenidos['promociones']["promo{$pId}_subtitulo"]['texto'] ?? '') ?: $ssotSub;
+                                    $cmsAyuno     = $contenidos['promociones']["promo{$pId}_ayuno"]['texto']
+                                                    ?? ($p['ssot_prep'] ?? '');
+                                    $cmsTiempo    = $contenidos['promociones']["promo{$pId}_tiempo"]['texto']
+                                                    ?? ($p['ssot_tiempo'] ?? '');
+                                    $cmsDesc      = $p['descripcion'] ?: ($p['ssot_detalle'] ?? '');
+                                    ?>
+
+                                    <!-- 3. Nombre del Estudio (🔒 Texto de SSOT · Estilos RTE persistibles en CMS) -->
+                                    <div class="field-group mb-3">
+                                        <label>🎨 Nombre del Estudio <small class="txt-muted">(🔒 SSOT Catálogo · Solo estilos persistibles)</small></label>
+                                        <div id="ck-promo-title-<?= $pId ?>" class="ck5-mount"></div>
+                                        <textarea id="ck-promo-title-<?= $pId ?>-data" name="promo<?= $pId ?>_nombre__texto" class="ck5-hidden-data" rows="2"><?= h($cmsNombre) ?></textarea>
+                                    </div>
+
+                                    <!-- 4. Subtítulo / Categoría (🔒 Texto de SSOT · Estilos RTE persistibles en CMS) -->
+                                    <div class="field-group mb-3">
+                                        <label>🎨 Subtítulo / Categoría <small class="txt-muted">(🔒 SSOT Catálogo · Solo estilos persistibles)</small></label>
+                                        <div id="ck-promo-sub-<?= $pId ?>" class="ck5-mount"></div>
+                                        <textarea id="ck-promo-sub-<?= $pId ?>-data" name="promo<?= $pId ?>_subtitulo__texto" class="ck5-hidden-data" rows="2"><?= h($cmsSubtitulo) ?></textarea>
+                                    </div>
+
+                                    <!-- 5. Indicaciones / Ayuno (🔒 Texto de SSOT · Estilos RTE persistibles en CMS) -->
+                                    <div class="field-group mb-3">
+                                        <label>🎨 Indicaciones de Ayuno <small class="txt-muted">(🔒 SSOT Catálogo · Solo estilos persistibles)</small></label>
+                                        <div id="ck-promo-ayuno-<?= $pId ?>" class="ck5-mount"></div>
+                                        <textarea id="ck-promo-ayuno-<?= $pId ?>-data" name="promo<?= $pId ?>_ayuno__texto" class="ck5-hidden-data" rows="2"><?= h($cmsAyuno) ?></textarea>
+                                    </div>
+
+                                    <!-- 6. Tiempo de Entrega (🔒 Texto de SSOT · Estilos RTE persistibles en CMS) -->
+                                    <div class="field-group mb-3">
+                                        <label>🎨 Tiempo de Entrega <small class="txt-muted">(🔒 SSOT Catálogo · Solo estilos persistibles)</small></label>
+                                        <div id="ck-promo-tiempo-<?= $pId ?>" class="ck5-mount"></div>
+                                        <textarea id="ck-promo-tiempo-<?= $pId ?>-data" name="promo<?= $pId ?>_tiempo__texto" class="ck5-hidden-data" rows="2"><?= h($cmsTiempo) ?></textarea>
+                                    </div>
+
+                                    <!-- 7. Descripción / Detalle del Estudio (✍️ Único campo editable en contenido + estilos · sin impacto a SSOT) -->
+                                    <div class="field-group mb-3">
+                                        <label>✍️ Descripción / Detalle del Estudio <small class="txt-muted">(✍️ Campo #7 · 100% Editable en Contenido + Estilos · Guardado en <code>catalogo_promociones.descripcion</code>)</small></label>
+                                        <div id="ck-promo-desc-<?= $pId ?>" class="ck5-mount"></div>
+                                        <textarea id="ck-promo-desc-<?= $pId ?>-data" name="promo_desc_<?= $pId ?>" class="ck5-hidden-data" rows="3"><?= h($cmsDesc) ?></textarea>
+                                    </div>
+
+                                    <!-- 8. Muestra Requerida (CMS RTE → web_contenidos) -->
+                                    <?php
+                                    // ?? captura solo null; ?: captura null y "" (filas vacías de web_contenidos)
+                                    $muestraCms = ($contenidos['promociones']['muestra'.$pId]['texto'] ?? '')
+                                                  ?: trim($p['ssot_muestra'] ?? '');
+                                    ?>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L960-1019)</summary>
+
+**Path:** `Unknown file`
+
+```
+                                    <div class="field-group mb-3">
+                                        <label>🔬 Muestra Requerida <small class="txt-muted">(Editable · se guarda en CMS, no en BD de estudios)</small></label>
+                                        <div id="ck-muestra-<?= $pId ?>" class="ck5-mount"></div>
+                                        <textarea id="ck-muestra-<?= $pId ?>-data" name="muestra<?= $pId ?>__texto" class="ck5-hidden-data" rows="1"><?= h($muestraCms) ?></textarea>
+                                    </div>
+
+                                    <div style="display:flex; flex-wrap:wrap; gap:1rem; align-items:flex-end;" class="mb-3">
+                                        <div class="field-group" style="flex:0 0 140px; min-width:120px; max-width:160px; margin-bottom:0;">
+                                            <label style="font-size:0.8rem; font-weight:600; white-space:nowrap;">✍️ Precio Reg. ($)</label>
+                                            <input type="number" step="0.01" name="promo_precio_reg_<?= $pId ?>" value="<?= $p['precio_regular'] !== null ? h($p['precio_regular']) : '' ?>" placeholder="0.00" class="form-input" style="padding:4px 8px; font-size:0.85rem; height:34px; width:100%;">
+                                        </div>
+                                        <div class="field-group" style="flex:0 0 140px; min-width:120px; max-width:160px; margin-bottom:0;">
+                                            <label style="font-size:0.8rem; font-weight:600; white-space:nowrap;">✍️ Precio Oferta ($)</label>
+                                            <input type="number" step="0.01" name="promo_precio_of_<?= $pId ?>" value="<?= $p['precio_oferta'] !== null ? h($p['precio_oferta']) : '' ?>" placeholder="0.00" class="form-input" style="padding:4px 8px; font-size:0.85rem; height:34px; width:100%;">
+                                        </div>
+                                    </div>
+
+                                    <div class="field-group mb-2">
+                                        <label>Imagen de Fondo</label>
+                                        <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px; font-size: 0.78rem;">
+                                            📐 <strong>Codec:</strong> WebP únicamente &nbsp;·&nbsp;
+                                            <strong>Quality:</strong> 72 &nbsp;·&nbsp;
+                                            <strong>Effort:</strong> 6 &nbsp;·&nbsp;
+                                            <strong>Dimensiones:</strong> 900 × 486 px (ratio 13:7) &nbsp;·&nbsp;
+                                            <strong>Orientación Horizontal</strong> &nbsp;·&nbsp;
+                                            <strong>Peso:</strong> Máximo 150 KB, Óptimo 60 KB
+                                        </p>
+                                        <div class="image-upload-box">
+                                            <img id="prev-promo-<?= $pId ?>"
+                                                 src="<?= !empty($imgUrl) ? h($imgUrl) : 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="90" height="60" viewBox="0 0 90 60"><rect width="100%" height="100%" fill="%23f1f5f9"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%2394a3b8" font-size="10" font-family="sans-serif">Sin Imagen</text></svg>' ?>"
+                                                 alt="Promoción <?= h(trim(strip_tags($diaLabel))) ?>" class="img-preview-sm"
+                                                 onerror="this.hidden=true">
+                                            <label for="file-promo-<?= $pId ?>" class="btn btn-secondary btn-sm">
+                                                Cambiar Imagen
+                                            </label>
+                                            <input type="file" accept="image/webp"
+                                                   id="file-promo-<?= $pId ?>" class="d-none"
+                                                   data-upload-slot="promo-<?= $pId ?>"
+                                                   data-preview-id="prev-promo-<?= $pId ?>"
+                                                   data-target-input="input-img-promo-<?= $pId ?>">
+                                        </div>
+                                        <input type="url" id="input-img-promo-<?= $pId ?>"
+                                               name="promo_img_<?= $pId ?>"
+                                               value="<?= h($imgUrl) ?>"
+                                               placeholder="/laesh-web-assets-uipv1a/cms/promo-<?= h(strtolower(trim(strip_tags($p['dia_semana'])))) ?>.webp"
+                                               class="cms-img-url-input" data-no-limit>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /panel-promociones -->
+
+        <!-- ================================================================
+             PANEL 5: CALIDAD E INSTALACIONES
+             Sección: calidad | Fuente HTML: #calidad
+             ================================================================ -->
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `promociones.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/**
+ * sections/promociones.php — Partial: Promociones diarias
+ * Incluido desde website/index.php; hereda su scope completo.
+ * Variables esperadas: $promoH2, $promoSub, $promos, $waBase, $waTextoAg, $waSvg
+ *
+ * Mejoras 2026-09-08:
+ *   · Badge "HOY" — derecha, violeta, detectado por dia() ISO-8601
+ *   · Precios en el mismo renglón que badges (derecha)
+ *   · "Ahorras $X" bajo precios cuando hay descuento
+ *   · Badge de muestra requerida (💉 / ☕ / 🔬 según texto)
+ *   · Descripción expandible si es larga (>220 chars)
+ *   · Overlay de imagen más visible (opacidad reducida)
+ *   · Mensaje WA incluye precio de oferta
+ */
+?>
+        <!-- ══════════════════════════════════════════ PROMOCIONES ══ -->
+        <section id="promociones" class="sec-promo scroll-sm-top">
+            <div class="section-header animate-on-scroll">
+                <h2><?= h($promoH2) ?></h2>
+                <p><?= h($promoSub) ?></p>
+            </div>
+            <div class="promo-catalog-wrap animate-on-scroll">
+                <div class="catalog-grid">
+                <?php
+                // Día actual para badge "HOY" (ISO-8601: 1=lunes … 7=domingo)
+                $todayMap = [1=>'lunes',2=>'martes',3=>'miercoles',4=>'jueves',5=>'viernes',6=>'sabado',7=>'domingo'];
+                $todayKey = $todayMap[(int)date('N')] ?? '';
+
+                // Iconos SVG inline reutilizables (estilo laboratorio, Lucide-style)
+                $_icoAyuno = '<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline-block;vertical-align:-1px;flex-shrink:0"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>';
+                $_icoTiempo = '<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline-block;vertical-align:-1px;flex-shrink:0"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg>';
+
+                /**
+                 * Normaliza un nombre de día eliminando acentos y espacios para comparación HOY.
+                 * Permite que "Miércoles" y "Sábado" (con acento) coincidan con las claves del mapa.
+                 */
+                function _normalizeDay(string $s): string {
+                    return strtr(strtolower(trim($s)),
+                        ['á'=>'a','é'=>'e','í'=>'i','ó'=>'o','ú'=>'u','ü'=>'u','ñ'=>'n']);
+                }
+
+                /**
+                 * Linearización SSOT: devuelve $cmsHtml si su texto plano coincide con $ssotText
+                 * (el SSOT vivo del Constructor Jerárquico). De lo contrario, el SSOT gana.
+                 *
+                 * Permite que el CMS persista estilos visuales (negritas, colores) sobre datos
+                 * clínicos sin riesgo de mostrar contenido stale en el sitio público.
+                 *
+                 * @param string $cmsHtml  HTML almacenado en catalogo_promociones (puede incluir markup CKEditor)
+                 * @param string $ssotText Texto plano del SSOT (catalogo_estudios o catalogo_categorias)
+                 * @return string          HTML listo para emitir
+                 */
+                function _ssotBind(string $cmsHtml, string $ssotText): string {
+                    if ($ssotText === '') return $cmsHtml;                          // Sin vínculo SSOT: confiar en CMS
+                    if (trim(strip_tags($cmsHtml)) === trim($ssotText)) return $cmsHtml; // Texto coincide: usar versión estilizada
+                    return htmlspecialchars($ssotText, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'); // Diverge: SSOT gana
+                }
+
+                // Ícono de muestra requerida según texto
+                function _muestraIcon(string $txt): string {
+                    $t = strtolower($txt);
+                    if (str_contains($t, 'sangre') || str_contains($t, 'venosa') || str_contains($t, 'capilar')) return '💉';
+                    if (str_contains($t, 'orina') || str_contains($t, 'urina'))  return '🧪';
+                    if (str_contains($t, 'heces') || str_contains($t, 'copr'))   return '🧬';
+                    if (str_contains($t, 'ayuno') || str_contains($t, 'café'))   return '☕';
+                    return '🔬';
+                }
+
+                foreach ($promos as $p):
+                    // FIX 2026-09-08: dia_semana puede contener HTML de CKEditor → strip_tags para comparación
+                    // FIX 2026-09-08b: normalizar acentos → HOY funciona en miércoles y sábado
+                    $diaRaw    = $p['dia_semana'] ?? '';
+                    $diaKey    = _normalizeDay(strip_tags($diaRaw));
+                    $diaNombre = !empty($diaRaw) ? trim($diaRaw) : 'Promoción';
+                    $isHoy     = ($diaKey === $todayKey);
+
+                    // Linearización SSOT → sitio público (2026-09-08):
+                    // _ssotBind(): el texto plano del CMS (web_contenidos) debe coincidir con el SSOT vivo
+                    // para que el markup de estilos CMS se aplique. Si diverge (dato stale), el SSOT gana.
+                    $pId       = (int)($p['id'] ?? 0);
+                    $titulo    = _ssotBind($c('promociones', "promo{$pId}_nombre",    'texto'), $p['ssot_nombre']      ?? '');
+                    $ssotSub   = trim(($p['categoria_nombre'] ?? '') . (!empty($p['ssot_desc_breve']) ? ' · ' . $p['ssot_desc_breve'] : ''));
+                    $subtitulo = _ssotBind($c('promociones', "promo{$pId}_subtitulo", 'texto'), $ssotSub);
+                    $ayuno     = _ssotBind($c('promociones', "promo{$pId}_ayuno",     'texto'), $p['preparacion']          ?? '');
+                    $tiempo    = _ssotBind($c('promociones', "promo{$pId}_tiempo",    'texto'), $p['tiempo_procesamiento'] ?? '');
+                    $desc      = $p['descripcion'] ?: ($p['ssot_detalle'] ?? '');  // campo 7: CMS dueño; SSOT solo como valor inicial
+                    $precioReg = (float)($p['precio_regular'] ?? 0);
+                    $precioOf  = (float)($p['precio_oferta']  ?? 0);
+                    $muestra   = trim(strip_tags($p['muestra_requerida'] ?? ''));
+                    $imgUrl    = $p['imagen_fondo'] ?? '';
+
+                    // Monto de ahorro para mostrar bajo precios (Mejora A)
+                    $ahorroMonto = '';
+                    if ($precioReg > 0 && $precioOf > 0 && $precioOf < $precioReg) {
+                        $ahorroMonto = '$' . number_format($precioReg - $precioOf, 2);
+                    }
+
+                    // Mensaje WA con precio de oferta (Mejora E)
+                    $tituloPlain = strip_tags($titulo);
+                    $waPrecioTxt = '';
+                    if ($precioOf > 0) {
+                        $waPrecioTxt = ' — Precio Especial $' . number_format($precioOf, 2);
+                    } elseif ($precioReg > 0) {
+                        $waPrecioTxt = ' — Precio $' . number_format($precioReg, 2);
+                    }
+                    $waTextFull = $waTextoAg
+                        ? str_replace('{estudio}', $tituloPlain . $waPrecioTxt, $waTextoAg)
+                        : '';
+                    $waCardUrl  = $waBase . ($waTextFull ? '?text=' . rawurlencode($waTextFull) : '');
+
+                    // Overlay (Mejora D): opacidad reducida para imagen más visible
+                    $bgAttr = '';
+                    if (!empty($imgUrl)) {
+                        $bgAttr = 'style="background-image: linear-gradient(135deg, rgba(255,255,255,0.82) 0%, rgba(255,255,255,0.70) 100%), url(' . h($imgUrl) . '); background-size: cover; background-position: center;"';
+                    }
+
+                    // Descripción expandible (Mejora C): si >220 chars de texto plano
+                    $descExpandible = (mb_strlen(strip_tags($desc)) > 220);
+                ?>
+                    <div class="catalog-card <?= !empty($imgUrl) ? 'has-bg-overlay' : '' ?><?= $isHoy ? ' catalog-card--hoy' : '' ?>" <?= $bgAttr ?> data-promo-img="<?= h($imgUrl) ?>" data-promo-title="<?= h($tituloPlain) ?>">
+
+                        <!-- Día + badge HOY a la derecha -->
+                        <div class="catalog-card-day-row">
+                            <div class="catalog-card-day"><?= $diaNombre ?></div>
+                            <?php if ($isHoy): ?>
+                                <span class="catalog-badge badge-hoy">● HOY</span>
+                            <?php endif; ?>
+                        </div>
+
+                        <!-- Título y subtítulo -->
+                        <div class="catalog-card-full-hdr">
+                            <h3 class="catalog-card-title-full"><?= $titulo ?></h3>
+                        </div>
+                        <?php if ($subtitulo): ?>
+                            <div class="catalog-card-subheading"><?= $subtitulo ?></div>
+                        <?php endif; ?>
+
+                        <!-- Descripción (expandible si es larga) -->
+                        <?php if ($desc): ?>
+                            <div class="catalog-card-rte-desc<?= $descExpandible ? ' rte-desc--expandable' : '' ?>"
+                                 <?= $descExpandible ? 'data-expandable="1"' : '' ?>>
+                                <?= $desc ?>
+                            </div>
+                            <?php if ($descExpandible): ?>
+                                <button class="btn-rte-expand" aria-expanded="false">Ver más ↓</button>
+                            <?php endif; ?>
+                        <?php endif; ?>
+
+                        <!-- Renglón de badges: ayuno · tiempo · muestra (mismo renglón) -->
+                        <?php
+                        // FIX: usar $c() / $cms (scope de index.php), NO $contenidos (solo existe en admin)
+                        $muestraHtml = trim($c('promociones', 'muestra'.$p['id'], 'texto'));
+                        if (!$muestraHtml && $muestra) {
+                            $muestraHtml = _muestraIcon($muestra) . ' ' . h($muestra);
+                        }
+                        $hayBadges = $ayuno || $tiempo || $muestraHtml;
+                        ?>
+                        <?php if ($hayBadges): ?>
+                        <div class="catalog-card-badges">
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing the Request**
+
+Okay, I'm now zeroing in on the core of the request. My focus is entirely on breaking down the user's initial prompt. I need to fully understand what they're after before I move forward, especially the implications of "rediseñar el scope." It appears I must prepare for a significant overhaul of the current implementation.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.154827899s
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L59-99)</summary>
+
+**Path:** `Unknown file`
+
+```
+    $config = $db->query("SELECT clave, valor FROM configuraciones")
+                 ->fetchAll(\PDO::FETCH_KEY_PAIR) ?: [];
+
+    // Promociones relacionales desde MariaDB (catalogo_promociones + catalogo_estudios + catalogo_categorias)
+    $promociones = $db->query("
+        SELECT cp.id, cp.dia_semana, cp.descripcion, cp.estudio_id, cp.precio_regular,
+               cp.precio_oferta, cp.imagen_fondo, cp.activo, cp.orden,
+               ce.nombre            as estudio_nombre_db,
+               ce.clave_interna,
+               ce.descripcion_breve as ssot_desc_breve,
+               ce.preparacion       as ssot_prep,
+               ce.tiempo_procesamiento as ssot_tiempo,
+               ce.muestra_requerida as ssot_muestra,
+               ce.detalle           as ssot_detalle,
+               cc.nombre            as categoria_nombre
+        FROM catalogo_promociones cp
+        LEFT JOIN catalogo_estudios ce ON cp.estudio_id = ce.id
+        LEFT JOIN catalogo_categorias cc ON ce.categoria_id = cc.id
+        ORDER BY cp.orden ASC, cp.id ASC
+    ")->fetchAll(\PDO::FETCH_ASSOC);
+
+    $estudiosCatalog = $db->query("
+        SELECT e.id, e.clave_interna, e.nombre, e.descripcion_breve, e.detalle,
+               e.preparacion, e.tiempo_procesamiento, e.muestra_requerida,
+               c.nombre as categoria_nombre
+        FROM catalogo_estudios e
+        LEFT JOIN catalogo_categorias c ON e.categoria_id = c.id
+        WHERE e.activo = 1
+        ORDER BY e.nombre ASC
+    ")->fetchAll(\PDO::FETCH_ASSOC);
+
+    // Plates — directorio de vistas es el mismo directorio admrc/
+    Flight::view()->setDirectory(__DIR__);
+    echo Flight::view()->render('views/gestion_web', [
+        'nombreAdmin'     => $nombreAdmin,
+        'csrfToken'       => $_SESSION['csrf_token'],
+        'contenidos'      => $contenidos,
+        'config'          => $config,
+        'lastPub'         => $lastPub,
+        'promociones'     => $promociones,
+        'estudiosCatalog' => $estudiosCatalog,
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L149-269)</summary>
+
+**Path:** `Unknown file`
+
+```
+            "INSERT INTO configuraciones (clave, valor, descripcion) VALUES (:clave, :valor, NULL)
+             ON DUPLICATE KEY UPDATE valor = VALUES(valor)"
+        );
+
+        // Manejo específico de catalogo_promociones en MariaDB cuando la sección es 'promociones'
+        if ($seccion === 'promociones') {
+            $rawIds = $_POST['promo_id'] ?? [];
+            $promoIds = is_array($rawIds) ? $rawIds : (is_numeric($rawIds) ? [$rawIds] : []);
+
+            if (empty($promoIds)) {
+                $promoIds = $db->query("SELECT id FROM catalogo_promociones ORDER BY id ASC")->fetchAll(\PDO::FETCH_COLUMN) ?: [1, 2, 3, 4, 5, 6, 7];
+            }
+
+            $stmtPromo = $db->prepare("
+                UPDATE catalogo_promociones SET
+                    dia_semana     = :dia_semana,
+                    estudio_id     = :estudio_id,
+                    descripcion    = :descripcion,
+                    precio_regular = :precio_regular,
+                    precio_oferta  = :precio_oferta,
+                    imagen_fondo   = :imagen_fondo,
+                    activo         = :activo
+                WHERE id = :id
+            ");
+
+            foreach ($promoIds as $pId) {
+                $pIdInt = (int)$pId;
+                if ($pIdInt <= 0) continue;
+
+                // 2026-09-08: Linearización SSOT — nombre_oferta, subtitulo, ayuno, tiempo_entrega
+                // han sido eliminados de la tabla; los estilos viven en web_contenidos (promo{N}_*__texto).
+                // CMS solo escribe: dia_semana, estudio_id, descripcion, precios, imagen_fondo, activo.
+                $diaSem = trim($_POST["promo_dia_semana_{$pIdInt}"] ?? '');
+                $estId  = !empty($_POST["promo_estudio_id_{$pIdInt}"]) ? (int)$_POST["promo_estudio_id_{$pIdInt}"] : null;
+                $desc   = trim($_POST["promo_desc_{$pIdInt}"] ?? '');
+                $pReg   = (isset($_POST["promo_precio_reg_{$pIdInt}"]) && $_POST["promo_precio_reg_{$pIdInt}"] !== '') ? (float)$_POST["promo_precio_reg_{$pIdInt}"] : null;
+                $pOf    = (isset($_POST["promo_precio_of_{$pIdInt}"]) && $_POST["promo_precio_of_{$pIdInt}"] !== '') ? (float)$_POST["promo_precio_of_{$pIdInt}"] : null;
+                $img    = trim($_POST["promo_img_{$pIdInt}"] ?? '');
+                $act    = isset($_POST["promo_active_{$pIdInt}"]) ? 1 : 0;
+
+                $stmtPromo->execute([
+                    'id'            => $pIdInt,
+                    'dia_semana'    => $diaSem,
+                    'estudio_id'    => $estId,
+                    'descripcion'   => $desc,
+                    'precio_regular'=> $pReg,
+                    'precio_oferta' => $pOf,
+                    'imagen_fondo'  => $img,
+                    'activo'        => $act,
+                ]);
+            }
+        }
+
+        // Cambio C (2026-09-08): pre-cargar mapa promo_id → muestra_requerida del SSOT
+        // Evita crear overrides silenciosos en web_contenidos cuando el admin publica
+        // sin editar el campo 8 (Muestra Requerida) — el SSOT sigue siendo la fuente viva.
+        $_ssotMuestraMap = [];
+        if ($seccion === 'promociones') {
+            foreach ($db->query(
+                "SELECT cp.id, ce.muestra_requerida
+                 FROM catalogo_promociones cp
+                 LEFT JOIN catalogo_estudios ce ON cp.estudio_id = ce.id"
+            )->fetchAll(\PDO::FETCH_ASSOC) as $_r) {
+                $_ssotMuestraMap[(int)$_r['id']] = trim($_r['muestra_requerida'] ?? '');
+            }
+        }
+
+        $hasCfgParam = false;
+        foreach ($campos as $fieldKey => $valor) {
+            if (str_starts_with($fieldKey, 'promo_')) {
+                continue; // Omitir campos de catalogo_promociones de la tabla web_contenidos
+            }
+            // D-04: campos _cfg_{clave} van a configuraciones, no a web_contenidos
+            if (str_starts_with($fieldKey, '_cfg_')) {
+                $hasCfgParam = true;
+                $cfgClave = substr($fieldKey, 5); // quitar prefijo '_cfg_'
+                $cfgStmt->execute(['clave' => $cfgClave, 'valor' => $valor]);
+                continue;
+            }
+            // Formato estándar: {subseccion}__{clave}  ej: slide1__titulo
+            [$sub, $clave] = array_pad(explode('__', $fieldKey, 2), 2, $fieldKey);
+
+            // Cambio C: muestra{N}__texto — no escribir si el texto del RTE coincide con SSOT
+            // Así el SSOT sigue siendo fuente primaria si el admin no editó el campo.
+            if ($seccion === 'promociones' && $clave === 'texto'
+                && preg_match('/^muestra(\d+)$/', $sub, $_m)) {
+                $pid     = (int)$_m[1];
+                $ssotVal = $_ssotMuestraMap[$pid] ?? '';
+                if ($ssotVal !== '' && trim(strip_tags($valor)) === $ssotVal) {
+                    continue; // Sin cambio real: preservar SSOT como fuente viva
+                }
+            }
+            // Auto-detectar tipo: CMS URL → imagen_url; todo lo demás → texto
+            $tipoValor = str_starts_with((string)$valor, '/laesh-web-assets-uipv1a/cms/')
+                ? 'imagen_url'
+                : 'texto';
+            $stmt->execute([
+                'sec'   => $seccion,
+                'sub'   => $sub,
+                'clave' => $clave,
+                'valor' => $valor,
+                'tipo'  => $tipoValor,
+                'uid'   => $userId,
+            ]);
+        }
+
+        $db->commit();
+        unset($_SESSION['cms_draft'][$seccion]);
+        Logger::logAlways('INFO', "CMS: sección '{$seccion}' publicada.", $userId);
+
+        // ── Invalidar caché L2 según la sección y parámetros modificados ───────────
+        Cache::init();
+        $keysToInvalidate = [Cache::KEY_CMS];
+        if ($seccion === 'promociones') {
+            $keysToInvalidate[] = Cache::KEY_PROMOS;
+        } elseif ($seccion === 'especialidades') {
+            $keysToInvalidate[] = Cache::KEY_TREE;
+        }
+        if ($hasCfgParam || $seccion === 'configuracion-general') {
+            $keysToInvalidate[] = Cache::KEY_CFG;
+        }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Defining Step 1 Scope**
+
+I'm now zeroing in on defining the precise parameters of Step 1. My focus is on refining the task description for maximum clarity and streamlining the process. I've broken it down into actionable components: selecting a study, entering the study name, subtitle, and associated fasting instructions. This initial assessment aims to make Step 1 efficient, clear, and comprehensive.
+
+
+**Refining UI Component Updates**
+
+I'm now diving into the specifics of UI component removal and modifications. I've pinpointed the exact fields to keep and discard within the CMS interface (`admrc/views/gestion_web.php`) for each card. Simultaneously, I'm adjusting the backend logic (`admrc/index.php`) to reflect these UI changes, streamlining the `promociones` SELECT query by removing unnecessary joins and fields, and updating the UPDATE statement accordingly.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `promo-autocomplete`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.224347080s
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:13 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `promo-select`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:13 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `ck-promo-`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:13 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `promo-day`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:13 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1699-1849)</summary>
+
+**Path:** `Unknown file`
+
+```
+                <div class="editor-card-header" style="background: linear-gradient(135deg, #059669 0%, #047857 100%); padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.2);">
+                    <div class="card-title" style="color: #ffffff; font-weight: 800; font-size: 0.95rem;">Datos Estructurados Schema.org (JSON-LD)</div>
+                </div>
+                <div class="editor-card-body" style="padding: 12px;">
+                    <div class="field-group">
+                        <label>Nombre del Negocio</label>
+                        <input type="text" name="schema__schema_name"
+                               value="<?= cms($contenidos, 'seo', 'schema', 'schema_name') ?>">
+                    </div>
+                    <div class="field-group">
+                        <label>Tipo de Negocio <small class="txt-muted">(schema.org/@type)</small></label>
+                        <input type="text" name="schema__schema_type"
+                               value="<?= cms($contenidos, 'seo', 'schema', 'schema_type') ?>">
+                        <small class="cms-help-text">Valores comunes: MedicalLaboratory, MedicalOrganization, LocalBusiness.</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Schema.org SSOT + Horarios 24h JSON-LD -->
+            <div class="editor-card" style="border: 2px solid #d97706; background: #fafafa; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+                <div class="editor-card-header" style="background: linear-gradient(135deg, #d97706 0%, #b45309 100%); padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.2);">
+                    <div class="card-title" style="color: #ffffff; font-weight: 800; font-size: 0.95rem;">Dirección y Horarios Schema.org (Google JSON-LD)</div>
+                </div>
+                <div class="editor-card-body" style="padding: 12px;">
+                    <p class="cms-p">🤖 <strong>Horarios estructurados en 24h (HH:MM)</strong> para Google Search y Maps (Schema.org JSON-LD). La dirección física se lee automáticamente desde la <strong>Pestaña 6 (Ubicación y Contacto)</strong>.</p>
+                    <div class="field-row mb-3">
+                        <div class="field-group">
+                            <label class="txt-muted">Calle / Colonia SSOT (Pestaña 6)</label>
+                            <input type="text" disabled value="<?= htmlspecialchars(!empty($config['direccion_calle']) ? $config['direccion_calle'] : 'Azucenas #8, Fracc. Jardines del Sur', ENT_QUOTES, 'UTF-8') ?>">
+                        </div>
+                        <div class="field-group">
+                            <label class="txt-muted">Ciudad SSOT (Pestaña 6)</label>
+                            <input type="text" disabled value="<?= htmlspecialchars(!empty($config['ciudad']) ? $config['ciudad'] : 'Huajuapan de León', ENT_QUOTES, 'UTF-8') ?>">
+                        </div>
+                        <div class="field-group">
+                            <label class="txt-muted">Estado SSOT (Pestaña 6)</label>
+                            <input type="text" disabled value="<?= htmlspecialchars(!empty($config['estado']) ? $config['estado'] : 'Oaxaca', ENT_QUOTES, 'UTF-8') ?>">
+                        </div>
+                        <div class="field-group">
+                            <label class="txt-muted">CP SSOT (Pestaña 6)</label>
+                            <input type="text" disabled value="<?= htmlspecialchars(!empty($config['cp']) ? $config['cp'] : '69000', ENT_QUOTES, 'UTF-8') ?>">
+                        </div>
+                    </div>
+                    <div class="field-row">
+                        <div class="field-group">
+                            <label>Apertura Lun–Sáb <small class="txt-muted">(HH:MM 24h)</small></label>
+                            <input type="text" name="_cfg_hrs_open"
+                                   value="<?= htmlspecialchars($config['hrs_open'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                                   maxlength="5" placeholder="07:00">
+                        </div>
+                        <div class="field-group">
+                            <label>Cierre Lun–Sáb <small class="txt-muted">(HH:MM 24h)</small></label>
+                            <input type="text" name="_cfg_hrs_close"
+                                   value="<?= htmlspecialchars($config['hrs_close'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                                   maxlength="5" placeholder="21:00">
+                        </div>
+                        <div class="field-group">
+                            <label>Apertura Dom <small class="txt-muted">(HH:MM 24h)</small></label>
+                            <input type="text" name="_cfg_dom_open"
+                                   value="<?= htmlspecialchars($config['dom_open'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                                   maxlength="5" placeholder="07:00">
+                        </div>
+                        <div class="field-group">
+                            <label>Cierre Dom <small class="txt-muted">(HH:MM 24h)</small></label>
+                            <input type="text" name="_cfg_dom_close"
+                                   value="<?= htmlspecialchars($config['dom_close'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                                   maxlength="5" placeholder="15:00">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div><!-- /grid-2col fila 2 -->
+        </div>
+
+        <!-- ================================================================
+             PANEL 8: AVISO DE PRIVACIDAD
+             Sección: aviso-privacidad | Fuente HTML: modal / página #privacidad
+             ================================================================ -->
+        <div id="panel-aviso-privacidad" class="cms-panel" role="tabpanel" aria-labelledby="tab-aviso-privacidad" tabindex="0" data-section="aviso-privacidad">
+            <div class="cms-panel-header">
+                <h3 class="cms-h3">Aviso de Privacidad — Contenido Legal (#privacidad)</h3>
+            </div>
+
+            <hr class="cms-section-sep">
+            <div class="editor-card mb-4" style="border: 2px solid #e11d48; background: #fafafa; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+                <div class="editor-card-header" style="background: linear-gradient(135deg, #e11d48 0%, #be123c 100%); padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.2);">
+                    <div class="card-title" style="color: #ffffff; font-weight: 800; font-size: 0.95rem;">Documento Integral del Aviso de Privacidad (Editor RTE)</div>
+                </div>
+                <div class="editor-card-body" style="padding: 12px;">
+                    <p class="cms-p">
+                        Edita directamente el contenido completo del Aviso de Privacidad con formato enriquecido (encabezados, listas, negritas y párrafos). Los cambios se actualizarán automáticamente en la ventana modal de la página pública.
+                    </p>
+                    <div class="field-group">
+                        <div id="ck-aviso-privacidad" class="ck5-mount ck5-mount-lg"></div>
+                        <textarea id="ck-aviso-privacidad-data" name="contenido__cuerpo_html" class="ck5-hidden-data"><?= htmlspecialchars(cmsRaw($contenidos, 'aviso-privacidad', 'contenido', 'cuerpo_html')) ?></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================================================================
+             PANEL 9: VIDEO PROMO
+             Sección: video-promo | RTE Completo con Enlaces y Medios (YouTube, Vimeo, etc.)
+             ================================================================ -->
+        <div id="panel-video-promo" class="cms-panel" role="tabpanel" aria-labelledby="tab-video-promo" tabindex="0" data-section="video-promo">
+            <div class="cms-panel-header">
+                <h3 class="cms-h3">9. Video Promo — Enlaces e Incrustación de Video (#video-promo)</h3>
+            </div>
+
+            <hr class="cms-section-sep">
+            <?php
+            $videoActive = ($config['video_active'] ?? '1') !== '0';
+            ?>
+            <div class="editor-card mb-4" style="border: 2px solid #0891b2; background: #fafafa; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+                <div class="editor-card-header" style="background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%); padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.2); display:flex; justify-content:space-between; align-items:center;">
+                    <div class="card-title" style="color: #ffffff; font-weight: 800; font-size: 0.95rem;">Contenido del Video Promocional (Editor RTE Completo)</div>
+                    <div style="display:flex; align-items:center; gap:0.5rem;">
+                        <label for="chk-video-active" style="display:inline-flex; align-items:center; gap:0.45rem; cursor:pointer; margin:0; font-size:0.85rem; font-weight:700;">
+                            <input type="hidden" name="_cfg_video_active" value="0">
+                            <input type="checkbox" id="chk-video-active" name="_cfg_video_active" value="1" <?= $videoActive ? 'checked' : '' ?>
+                                   style="width:1.15rem; height:1.15rem; accent-color:#ffffff; cursor:pointer;"
+                                   onchange="var badge=this.nextElementSibling; if(this.checked){ badge.style.background='rgba(255,255,255,0.25)'; badge.style.color='#ffffff'; badge.textContent='Encendido'; } else { badge.style.background='#dc2626'; badge.style.color='#ffffff'; badge.textContent='Apagado'; }">
+                            <span class="operator-badge" style="background: <?= $videoActive ? 'rgba(255,255,255,0.25)' : '#dc2626' ?>; color: #ffffff; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; transition: all 0.2s ease;">
+                                <?= $videoActive ? 'Encendido' : 'Apagado' ?>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+                <div class="editor-card-body" style="padding: 12px;">
+                    <p class="cms-p">
+                        Utiliza este editor con capacidades completas para insertar enlaces web e incrustar reproductores de video (YouTube, Spotify, Vimeo, etc.) para la promoción institucional.
+                    </p>
+                    <div class="field-group">
+                        <div id="ck-video-promo" class="ck5-mount ck5-mount-lg"></div>
+                        <textarea id="ck-video-promo-data" name="contenido__cuerpo_html" class="ck5-hidden-data"><?= htmlspecialchars(cmsRaw($contenidos, 'video-promo', 'contenido', 'cuerpo_html')) ?></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================================================================
+             PANEL 10: CONFIGURACIÓN GENERAL — Orden de Secciones
+             Sección: configuracion-general | Campo: _cfg_seccion_order
+             Persiste en tabla configuraciones (clave='seccion_order') vía prefijo _cfg_
+             ================================================================ -->
+        <div id="panel-configuracion-general" class="cms-panel" role="tabpanel" aria-labelledby="tab-configuracion-general" tabindex="0" data-section="configuracion-general">
+            <div class="cms-panel-header">
+                <h3 class="cms-h3">Orden de Secciones — Página de Inicio</h3>
+            </div>
+
+            <hr class="cms-section-sep">
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `ck5-mount`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:13 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `ck5-mount`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:13 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `ck-promo`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:13 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1899-1991)</summary>
+
+**Path:** `Unknown file`
+
+```
+                            <?php if ($isLocked): ?>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary-green-dark,#059669)" stroke-width="2" stroke-linecap="round" style="flex-shrink:0">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                            </svg>
+                            <?php else: ?>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--txt-muted,#9ca3af)" stroke-width="2" stroke-linecap="round" style="flex-shrink:0">
+                                <circle cx="9" cy="5" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="19" r="1"/>
+                                <circle cx="15" cy="5" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="19" r="1"/>
+                            </svg>
+                            <?php endif; ?>
+                            <span style="font-size:1.15rem;line-height:1;flex-shrink:0"><?= $meta['icon'] ?></span>
+                            <span style="flex:1;font-weight:600;color:var(--txt-main,#111)"><?= h($meta['label']) ?> <?= $isLocked ? '<small class="txt-muted" style="font-weight:400;">(Fija en cabecera)</small>' : '' ?></span>
+                            <code style="font-size:0.78rem;color:var(--txt-muted,#6b7280);background:var(--bg-subtle,#f3f4f6);padding:2px 6px;border-radius:4px"><?= h($_sid) ?></code>
+                            <a href="/laesh/?_preview=1<?= h($meta['anchor']) ?>"
+                               target="_blank" rel="noopener noreferrer"
+                               title="Vista previa de esta sección"
+                               style="flex-shrink:0;color:var(--primary,#0052B7);text-decoration:none;font-size:0.8rem;"
+                               onclick="event.stopPropagation()">↗</a>
+                        </li>
+                        <?php endforeach; unset($_ordered, $_secLabels, $_sid, $meta, $isLocked); ?>
+                    </ul>
+
+                    <p class="cms-help-text mt-3">
+                        Orden actual guardado:
+                        <code id="seccion-order-display"><?= h($config['seccion_order'] ?? '(predeterminado)') ?></code>
+                    </p>
+                </div>
+            </div>
+
+            <style>
+            /* DnD visual feedback — solo aplica al panel de orden de secciones */
+            #seccion-order-list [data-seccion-id].dnd-dragging {
+                opacity:.45; box-shadow:0 4px 16px rgba(0,0,0,.18); cursor:grabbing;
+            }
+            #seccion-order-list [data-seccion-id].dnd-over {
+                border-color:var(--primary,#0052B7); box-shadow:0 0 0 2px rgba(0,82,183,.18);
+            }
+            </style>
+        </div><!-- /panel-configuracion-general -->
+
+    </main><!-- /.cms-panels-scroll -->
+    </div><!-- /.cms-content-col -->
+
+    <!-- Región Lateral Derecha: Notificaciones -->
+    <aside class="sidebar-right" id="sidebar-right">
+        <div class="sidebar-right-toggle-row">
+            <div class="bell-wrap" id="bell-wrap-notif" title="Notificaciones">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                <span class="bell-badge" id="badge-notif-cms" aria-label="Notificaciones pendientes">0</span>
+            </div>
+            <button type="button" class="sidebar-right-toggle" id="sidebar-right-toggle" title="Expandir / Colapsar">
+                <svg id="right-rail-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+        </div>
+        <div class="sidebar-right-content">
+            <div class="sidebar-right-header border-bottom pb-2 mb-3">
+                <h3 class="txt-main fw-600 font-mosquito txt-pgd mb-0 fs-sm">Notificaciones</h3>
+            </div>
+            <div class="sidebar-right-body" id="notif-list">
+                <p class="txt-muted txt-center-sm txt-muted-xs mt-4">No hay nuevas notificaciones</p>
+            </div>
+        </div>
+    </aside>
+</div>
+
+<!-- Toast de confirmación -->
+<div class="cms-toast" id="toast">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+    ¡Cambios publicados exitosamente en <strong>laesh.mx</strong>!
+</div>
+
+<!-- Configuración dinámica desde BD -->
+<meta name="cms-upload-url" content="<?= h($config['cms_upload_endpoint'] ?? '/laesh/adrc/cms/upload') ?>">
+
+<!-- CMS Upload — manejo de input[type=file][data-upload-slot] vía fetch multipart -->
+<script src="/laesh-web-assets-uipv1a/js/cms-upload.js?v=<?= time() ?>" defer></script>
+
+<script src="/laesh-web-assets-uipv1a/js/htmx.min.js"></script><!-- GAP-ARQ-01: requerido por hx-post /cms/save -->
+<script src="/laesh-web-assets-uipv1a/js/app.js?v=<?= time() ?>" defer></script>
+<script src="/laesh-web-assets-uipv1a/js/ws-client.js?v=<?= time() ?>" defer></script>
+<script src="/laesh-web-assets-uipv1a/js/portal-footer.js?v=<?= time() ?>" defer></script>
+<script src="/laesh-web-assets-uipv1a/js/sidebar-rail.js?v=<?= time() ?>" defer></script>
+
+<!-- CKEditor 5 — servido localmente (licencia GPL, sin CDN externo) -->
+<script src="/laesh-web-assets-uipv1a/js/ckeditor5.umd.js?v=<?= time() ?>"></script>
+<script src="/laesh-web-assets-uipv1a/js/ckeditor-init.js?v=<?= time() ?>" defer></script>
+<script src="/laesh-web-assets-uipv1a/js/cms-dirty-tracker.js?v=<?= time() ?>" defer></script>
+
+
+<script src="/laesh-web-assets-uipv1a/js/gestion-web.js?v=<?= time() ?>" defer></script>
+</body>
+</html>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `promo`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:13 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `promo`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:13 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Defining the Foundation**
+
+I've pinpointed the key aspects. Now, I'm summarizing PASO 1. This involves the "Database Migration Script" file, specifically `06_depurate_promociones_scope.sql`. I will drop the outdated columns: `estudio_id` and `descripcion` from `catalogo_promociones`.
+
+
+**Refining the Interface**
+
+I'm now focusing on the CMS and public website. I'm streamlining the `gestion_web.php` view, ensuring the `promociones` panel displays only essential elements like `Ficha ID`, `Día`, and an 'Activa' checkbox. I'm removing inputs and labels related to the obsolete fields and cleaning up the SQL queries in both the backend PHP and the public website. The data now flows cleaner.
+
+
+
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.231357500s
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:14 am
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:14 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `catalogo_promociones`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:14 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `promociones`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:14 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:14 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:14 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `promo`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:14 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `ck-promo-day`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:14 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `catalogo_promociones`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:14 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/portafolio-dev-2026/blocklabgd/v1.2`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>Directory: `v1.2` (28 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/portafolio-dev-2026/blocklabgd/v1.2`
+
+| Name | Type | Size |
+|------|------|------|
+| `Acta_Aceptacion_Adenda_Sitio_Web.md` | File | 2817 bytes |
+| `Anexo_A_Bloc_Digital.md` | File | 8572 bytes |
+| `Anexo_A_Sitio_Web.md` | File | 5342 bytes |
+| `Anexo_Visual_Flujos_Operativos.md` | File | 3677 bytes |
+| `Anexo_Visual_Flujos_Operativos.pdf` | File | 146262 bytes |
+| `Anexo_Visual_Flujos_Operativos_v4.pdf` | File | 146262 bytes |
+| `Carta_Presentacion.md` | File | 2309 bytes |
+| `Carta_Presentacion.pdf` | File | 140637 bytes |
+| `Carta_Presentacion_v4.pdf` | File | 140637 bytes |
+| `Contrato_Base_Desarrollo.md` | File | 6248 bytes |
+| `Cuadro_Comparativo.pdf` | File | 289581 bytes |
+| `Cuadro_Comparativo_v4.pdf` | File | 290282 bytes |
+| `Guia_Exposicion_Diagramas.md` | File | 1332 bytes |
+| `Guia_Exposicion_Diagramas.pdf` | File | 148154 bytes |
+| `Guia_Exposicion_Diagramas_v4.pdf` | File | 148154 bytes |
+| `Resumen_Oferta_Servicios.md` | File | 27110 bytes |
+| `Resumen_Oferta_Servicios.pdf` | File | 320392 bytes |
+| `Resumen_Oferta_Servicios_v4.pdf` | File | 320392 bytes |
+| `__pycache__` | Directory | - |
+| `build_docs.sh` | File | 1071 bytes |
+| `build_pdf.py` | File | 18847 bytes |
+| `contrato` | Directory | - |
+| `diagramas` | Directory | - |
+| `ef` | Directory | - |
+| `et` | Directory | - |
+| `generate_contracts.py` | File | 2074 bytes |
+| `insumos-laesh` | Directory | - |
+| `mockup1.0` | Directory | - |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>Directory: `caelitandem_home` (16 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home`
+
+| Name | Type | Size |
+|------|------|------|
+| `.agents` | File | 19 bytes |
+| `.chatledger` | File | 35 bytes |
+| `.claude` | File | 19 bytes |
+| `.clauderules` | File | 24 bytes |
+| `.git` | Directory | - |
+| `.gitignore` | File | 236 bytes |
+| `.mcp.json` | File | 21 bytes |
+| `.vscode` | Directory | - |
+| `CLAUDE.md` | File | 21 bytes |
+| `GEMINI.md` | File | 21 bytes |
+| `docs-dev` | Directory | - |
+| `landingagev1` | Directory | - |
+| `landingagev2` | Directory | - |
+| `portafolio-dev-2026` | Directory | - |
+| `restaurantb` | Directory | - |
+| `test_ck.js` | File | 361 bytes |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>Directory: `www` (21 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www`
+
+| Name | Type | Size |
+|------|------|------|
+| `.agents` | File | 19 bytes |
+| `.chatledger` | File | 35 bytes |
+| `.claude` | File | 19 bytes |
+| `.clauderules` | File | 24 bytes |
+| `.git` | Directory | - |
+| `.gitignore` | File | 263 bytes |
+| `.mcp.json` | File | 21 bytes |
+| `CLAUDE.md` | File | 21 bytes |
+| `GEMINI.md` | File | 21 bytes |
+| `ca.crt` | File | 1736 bytes |
+| `docs-dev` | Directory | - |
+| `laesh-swbldi` | Directory | - |
+| `laesh-web-assets` | Directory | - |
+| `laesh-web-assets-uipv1a` | Directory | - |
+| `mvps` | Directory | - |
+| `panaderia` | Directory | - |
+| `purificadoraAgua` | Directory | - |
+| `restaurant` | Directory | - |
+| `test_puppeteer.js` | File | 526 bytes |
+| `tests` | Directory | - |
+| `web-assets` | Directory | - |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/admrc/views`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>Directory: `views` (3 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/admrc/views`
+
+| Name | Type | Size |
+|------|------|------|
+| `gestion_web.php` | File | 162507 bytes |
+| `log_viewer.php` | File | 12344 bytes |
+| `sistema.php` | File | 34626 bytes |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/setup/bds/laesh/migrations`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>Directory: `migrations` (4 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/setup/bds/laesh/migrations`
+
+| Name | Type | Size |
+|------|------|------|
+| `README.md` | File | 2274 bytes |
+| `m001_sys_logs_traceability.sql` | File | 1604 bytes |
+| `m002_ssot_content_population.sql` | File | 74424 bytes |
+| `m003_cms_url_and_diasemana_fix.sql` | File | 2909 bytes |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:14 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L699-1019)</summary>
+
+**Path:** `Unknown file`
+
+```
+        <div id="panel-promociones" class="cms-panel" role="tabpanel" aria-labelledby="tab-promociones" tabindex="0" data-section="promociones">
+            <div class="cms-panel-header">
+                <h3 class="cms-h3">Promociones Vigentes (#promociones)</h3>
+            </div>
+
+            <!-- Fila 1: Encabezado de la Sección + Mensaje WhatsApp Agendar -->
+            <hr class="cms-section-sep">
+            <div class="grid-2col mb-4">
+            <!-- Encabezado de la Sección Promociones -->
+            <div class="editor-card">
+                <div class="editor-card-header">
+                    <div class="card-title">Encabezado de la Sección (#promociones)</div>
+                </div>
+                <div class="editor-card-body">
+                    <div class="field-group">
+                        <label>Título Principal (h2)</label>
+                        <input type="text" name="banner__titulo"
+                               value="<?= cms($contenidos, 'promociones', 'banner', 'titulo', 'Promociones Vigentes') ?>">
+                    </div>
+                    <div class="field-group">
+                        <label>Subtítulo / Descripción de la Sección</label>
+                        <input type="text" name="banner__subtitulo"
+                               value="<?= cms($contenidos, 'promociones', 'banner', 'subtitulo', 'Aprovecha nuestros precios preferenciales en estudios de laboratorio seleccionados cada día de la semana.') ?>">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mensaje WhatsApp para Agendar Promoción -->
+            <div class="editor-card">
+                <div class="editor-card-header">
+                    <div class="card-title">Plantilla del Mensaje de WhatsApp (Agendar)</div>
+                </div>
+                <div class="editor-card-body">
+                    <div class="field-group">
+                        <label>Mensaje al Agendar Estudio <small class="txt-muted">usa <code>{estudio}</code> como marcador dinámico</small></label>
+                        <input type="text" name="_cfg_wa_texto_agendar"
+                               value="<?= htmlspecialchars($config['wa_texto_agendar'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
+                        <small class="cms-help-text">Texto pre-escrito en WhatsApp al agendar cualquier promoción del día. El comodín <code>{estudio}</code> se reemplaza dinámicamente con el nombre o clave del estudio promocionado (ej. <em>«Hola LAESH, deseo agendar {estudio}»</em> $\rightarrow$ <em>«Hola LAESH, deseo agendar Reticulocitos»</em>).</small>
+                    </div>
+                </div>
+            </div>
+            </div><!-- /grid-2col fila 1 -->
+
+            <!-- Fila 2: Promociones Relacionales (MariaDB — 7 Fichas: Lunes a Domingo) -->
+            <hr class="cms-section-sep">
+            <div class="editor-card mb-4">
+                <div class="editor-card-header" style="padding:12px 16px;">
+                    <div class="card-title" style="font-weight:800; font-size:1.15rem; color:#0052B7; background:#e0f2fe; padding:6px 14px; border-radius:6px; border-left:4px solid #0284c7; display:inline-block;">Gestión de las 7 Promociones</div>
+                </div>
+                <div class="editor-card-body">
+                    <!-- Guía de Origen de Datos (SSOT vs. Texto Libre) -->
+                    <div class="cms-help-banner mb-3" style="background: #f8fafc; border: 1px solid #cbd5e1; border-left: 4px solid #0052B7; border-radius: 6px; padding: 10px 14px; font-size: 0.82rem; color: #1e293b; line-height: 1.5;">
+                        <div style="font-weight: 700; color: #0052B7; margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
+                            💡 Guía de Origen de Datos (SSOT del Constructor Jerárquico vs. Texto Libre de la Promoción)
+                        </div>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 6px;">
+                            <div style="flex: 1 1 280px; background: #ffffff; padding: 8px 10px; border-radius: 5px; border: 1px solid #e2e8f0;">
+                                <strong style="color: #0369a1;">🎨 SÍ provienen de la SSOT (Constructor Jerárquico):</strong><br>
+                                <span style="color: #475569;">• Nombre del Estudio, Categoría, Ayuno y Tiempo. <em style="color: #0284c7;">(Sus caracteres están protegidos para mantener la norma médica, pero SÍ se puede personalizar su estilo visual con negritas/colores).</em></span>
+                            </div>
+                            <div style="flex: 1 1 280px; background: #ffffff; padding: 8px 10px; border-radius: 5px; border: 1px solid #e2e8f0;">
+                                <strong style="color: #b45309;">✍️ NO provienen de la SSOT (Configuración Libre de Oferta):</strong><br>
+                                <span style="color: #475569;">• <strong>Campo #7 (Única Descripción 100% Editable)</strong>, Título Superior de Ficha, Precios e Imagen.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <style>
+                    /* Distribución uniforme a 2 columnas sin scroll horizontal en Promociones */
+                    #panel-promociones .promo-grid-2col {
+                        display: grid;
+                        grid-template-columns: repeat(2, minmax(0, 1fr));
+                        gap: 1.25rem;
+                        width: 100%;
+                        max-width: 100%;
+                        box-sizing: border-box;
+                    }
+                    @media (max-width: 992px) {
+                        #panel-promociones .promo-grid-2col {
+                            grid-template-columns: 1fr;
+                        }
+                    }
+                    #panel-promociones .promo-card-editor {
+                        width: 100%;
+                        max-width: 100%;
+                        box-sizing: border-box;
+                        overflow-x: hidden;
+                    }
+                    #panel-promociones .ck.ck-toolbar {
+                        flex-wrap: wrap !important;
+                        max-width: 100% !important;
+                        box-sizing: border-box !important;
+                    }
+                    #panel-promociones .ck.ck-editor__main {
+                        max-width: 100% !important;
+                        box-sizing: border-box !important;
+                    }
+                    #panel-promociones .ck.ck-content {
+                        word-break: break-word !important;
+                        overflow-wrap: break-word !important;
+                    }
+                    </style>
+
+                    <?php
+                    $_headerStyles = [
+                        1 => ['bg' => 'linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%)', 'borderColor' => '#2563eb', 'color' => '#ffffff', 'tag' => 'Lunes'],
+                        2 => ['bg' => 'linear-gradient(135deg, #065f46 0%, #059669 100%)', 'borderColor' => '#059669', 'color' => '#ffffff', 'tag' => 'Martes'],
+                        3 => ['bg' => 'linear-gradient(135deg, #78350f 0%, #d97706 100%)', 'borderColor' => '#d97706', 'color' => '#ffffff', 'tag' => 'Miércoles'],
+                        4 => ['bg' => 'linear-gradient(135deg, #581c87 0%, #7c3aed 100%)', 'borderColor' => '#7c3aed', 'color' => '#ffffff', 'tag' => 'Jueves'],
+                        5 => ['bg' => 'linear-gradient(135deg, #831843 0%, #db2777 100%)', 'borderColor' => '#db2777', 'color' => '#ffffff', 'tag' => 'Viernes'],
+                        6 => ['bg' => 'linear-gradient(135deg, #134e4a 0%, #0d9488 100%)', 'borderColor' => '#0d9488', 'color' => '#ffffff', 'tag' => 'Sábado'],
+                        7 => ['bg' => 'linear-gradient(135deg, #7c2d12 0%, #ea580c 100%)', 'borderColor' => '#ea580c', 'color' => '#ffffff', 'tag' => 'Domingo'],
+                    ];
+                    ?>
+                    <div class="promo-grid-2col">
+                    <?php if (!empty($promociones)): ?>
+                        <?php foreach ($promociones as $p): ?>
+                            <?php 
+                                $pId = (int)$p['id'];
+                                $diaLabel = ucfirst(trim(strip_tags($p['dia_semana'])));
+                                $imgUrl = $p['imagen_fondo'] ?? '';
+                                $hStyle = $_headerStyles[$pId] ?? ['bg' => '#0f172a', 'borderColor' => '#334155', 'color' => '#ffffff', 'tag' => 'Ficha'];
+                            ?>
+                            <div class="editor-card promo-card-editor" style="border: 2px solid <?= $hStyle['borderColor'] ?>; background: #fafafa; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+                                <div class="editor-card-header" style="display:flex; justify-content:space-between; align-items:center; background: <?= $hStyle['bg'] ?>; padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.2);">
+                                    <div class="card-title" style="font-weight:800; color: <?= $hStyle['color'] ?>; font-size:0.95rem; display:flex; align-items:center; gap:8px;">
+                                        <span>Ficha ID: <?= $pId ?></span>
+                                        <span style="font-size:0.75rem; background:rgba(255,255,255,0.22); color:#ffffff; padding:2px 8px; border-radius:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px;">
+                                            <?= $hStyle['tag'] ?>
+                                        </span>
+                                    </div>
+                                    <label style="display:flex; align-items:center; gap:6px; font-size:0.85rem; font-weight:700; cursor:pointer; color: <?= $hStyle['color'] ?>; background:rgba(0,0,0,0.2); padding:4px 10px; border-radius:20px;">
+                                        <input type="checkbox" name="promo_active_<?= $pId ?>" value="1" <?= (!empty($p['activo'])) ? 'checked' : '' ?> style="width:1.05rem; height:1.05rem; cursor:pointer; accent-color:#10b981;">
+                                        <span>Activa</span>
+                                    </label>
+                                </div>
+                                <div class="editor-card-body" style="padding:12px;">
+                                    <input type="hidden" name="promo_id[]" value="<?= $pId ?>">
+
+                                    <!-- 1. Título / Etiqueta Superior (ÚNICO editable en contenido + estilo RTE) -->
+                                    <div class="field-group mb-3">
+                                        <label>✍️ Título / Etiqueta Superior de la Ficha <small class="txt-muted">(✍️ Contenido y Estilos RTE Editables)</small></label>
+                                        <div id="ck-promo-day-<?= $pId ?>" class="ck5-mount"></div>
+                                        <textarea id="ck-promo-day-<?= $pId ?>-data" name="promo_dia_semana_<?= $pId ?>" class="ck5-hidden-data" rows="2"><?= h(trim($p['dia_semana'])) ?></textarea>
+                                    </div>
+
+                                    <!-- 2. Estudio Asociado del Catálogo (Combo Desplegable + Buscador Autocomplete) -->
+                                    <div class="field-group mb-3" style="background: linear-gradient(135deg, #eff6ff 0%, #e0f2fe 100%); border: 1.5px solid #38bdf8; border-left: 4px solid #0284c7; border-radius: 8px; padding: 10px 12px; box-shadow: 0 2px 6px rgba(2, 132, 199, 0.08);">
+                                        <label style="font-weight: 700; color: #0369a1; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 4px; margin-bottom: 4px;">
+                                            <span>🎯 PASO 1: SELECCIONAR O BUSCAR ESTUDIO ASOCIADO DEL CATÁLOGO</span>
+                                            <span style="font-size: 0.72rem; background: #0284c7; color: #ffffff; padding: 2px 8px; border-radius: 12px; font-weight: 600;">⚡ Auto-pobla campos de BD</span>
+                                        </label>
+                                        <div style="font-size: 0.76rem; color: #0c4a6e; margin-bottom: 8px; line-height: 1.3;">
+                                            Elija primero el estudio base desde el combo o buscador para cargar automáticamente los datos maestros de MariaDB.
+                                        </div>
+                                        <div style="display:flex; flex-wrap:wrap; gap:0.75rem; align-items:center;" class="promo-estudio-picker-row">
+                                            <!-- Opción A: Desplegable / Combo -->
+                                            <div style="flex:1 1 220px; min-width:180px;">
+                                                <label style="font-size: 0.75rem; font-weight: 700; color: #0369a1; margin-bottom: 3px; display: block;">Opción A: Selección Directa (Combo)</label>
+                                                <select name="promo_estudio_id_<?= $pId ?>" id="promo-select-<?= $pId ?>" class="form-input promo-estudio-select" style="font-size:0.85rem; width:100%; text-overflow:ellipsis; background-color: #ffffff; border-color: #7dd3fc; font-weight: 600; color: #0f172a;" data-card-id="<?= $pId ?>">
+                                                    <option value="" data-nombre="" data-categoria="" data-desc_breve="" data-ayuno="" data-tiempo="" data-detalle="">-- Sin estudio asociado --</option>
+                                                    <?php if (!empty($estudiosCatalog)): ?>
+                                                        <?php foreach ($estudiosCatalog as $est): ?>
+                                                            <?php $optText = $est['nombre'] . ' (' . $est['clave_interna'] . ')'; ?>
+                                                            <option value="<?= $est['id'] ?>"
+                                                                    data-nombre="<?= h($est['nombre']) ?>"
+                                                                    data-categoria="<?= h($est['categoria_nombre'] ?? '') ?>"
+                                                                    data-desc_breve="<?= h($est['descripcion_breve'] ?? '') ?>"
+                                                                    data-ayuno="<?= h($est['preparacion'] ?? '') ?>"
+                                                                    data-tiempo="<?= h($est['tiempo_procesamiento'] ?? '') ?>"
+                                                                    data-detalle="<?= h($est['detalle'] ?? '') ?>"
+                                                                    <?= ($p['estudio_id'] == $est['id']) ? 'selected' : '' ?>>
+                                                                <?= h($optText) ?>
+                                                            </option>
+                                                        <?php endforeach; ?>
+                                                    <?php endif; ?>
+                                                </select>
+                                            </div>
+
+                                            <!-- Opción B: Buscador Autocomplete -->
+                                            <div style="flex:1 1 220px; min-width:180px; position:relative;">
+                                                <label style="font-size: 0.75rem; font-weight: 700; color: #0369a1; margin-bottom: 3px; display: block;">Opción B: Buscador Rápido (Autocomplete)</label>
+                                                <?php 
+                                                    $initialAutoVal = '';
+                                                    if (!empty($p['estudio_id']) && !empty($estudiosCatalog)) {
+                                                        foreach ($estudiosCatalog as $est) {
+                                                            if ($est['id'] == $p['estudio_id']) {
+                                                                $initialAutoVal = $est['nombre'] . ' (' . $est['clave_interna'] . ')';
+                                                                break;
+                                                            }
+                                                        }
+                                                    }
+                                                ?>
+                                                <input type="text"
+                                                       id="promo-autocomplete-<?= $pId ?>"
+                                                       class="form-input promo-autocomplete-input"
+                                                       value="<?= h($initialAutoVal) ?>"
+                                                       placeholder="🔍 Escribe nombre o código..."
+                                                       style="font-size:0.85rem; width:100%; background-color: #ffffff; border-color: #7dd3fc; font-weight: 600; color: #0f172a;"
+                                                       data-card-id="<?= $pId ?>"
+                                                       autocomplete="off">
+                                                <div id="promo-suggestions-<?= $pId ?>" class="promo-suggestions-panel" style="display:none; position:absolute; top:100%; left:0; right:0; z-index:1000; background:#ffffff; border:1.5px solid #0052B7; border-radius:6px; max-height:220px; overflow-y:auto; box-shadow:0 4px 12px rgba(0,0,0,0.15); margin-top:2px;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <?php
+                                    // Linearización SSOT: CMS lee estilos desde web_contenidos; SSOT de catalogo_estudios es la fuente de texto.
+                                    // El valor inicial de cada campo RTE es: estilos CMS guardados (si existen) o texto plano del SSOT.
+                                    $cmsNombre    = $contenidos['promociones']["promo{$pId}_nombre"]['texto']
+                                                    ?? ($p['estudio_nombre_db'] ?? '');
+                                    $ssotSub      = trim(($p['categoria_nombre'] ?? '') . (!empty($p['ssot_desc_breve']) ? ' · ' . $p['ssot_desc_breve'] : ''));
+                                    $cmsSubtitulo = ($contenidos['promociones']["promo{$pId}_subtitulo"]['texto'] ?? '') ?: $ssotSub;
+                                    $cmsAyuno     = $contenidos['promociones']["promo{$pId}_ayuno"]['texto']
+                                                    ?? ($p['ssot_prep'] ?? '');
+                                    $cmsTiempo    = $contenidos['promociones']["promo{$pId}_tiempo"]['texto']
+                                                    ?? ($p['ssot_tiempo'] ?? '');
+                                    $cmsDesc      = $p['descripcion'] ?: ($p['ssot_detalle'] ?? '');
+                                    ?>
+
+                                    <!-- 3. Nombre del Estudio (🔒 Texto de SSOT · Estilos RTE persistibles en CMS) -->
+                                    <div class="field-group mb-3">
+                                        <label>🎨 Nombre del Estudio <small class="txt-muted">(🔒 SSOT Catálogo · Solo estilos persistibles)</small></label>
+                                        <div id="ck-promo-title-<?= $pId ?>" class="ck5-mount"></div>
+                                        <textarea id="ck-promo-title-<?= $pId ?>-data" name="promo<?= $pId ?>_nombre__texto" class="ck5-hidden-data" rows="2"><?= h($cmsNombre) ?></textarea>
+                                    </div>
+
+                                    <!-- 4. Subtítulo / Categoría (🔒 Texto de SSOT · Estilos RTE persistibles en CMS) -->
+                                    <div class="field-group mb-3">
+                                        <label>🎨 Subtítulo / Categoría <small class="txt-muted">(🔒 SSOT Catálogo · Solo estilos persistibles)</small></label>
+                                        <div id="ck-promo-sub-<?= $pId ?>" class="ck5-mount"></div>
+                                        <textarea id="ck-promo-sub-<?= $pId ?>-data" name="promo<?= $pId ?>_subtitulo__texto" class="ck5-hidden-data" rows="2"><?= h($cmsSubtitulo) ?></textarea>
+                                    </div>
+
+                                    <!-- 5. Indicaciones / Ayuno (🔒 Texto de SSOT · Estilos RTE persistibles en CMS) -->
+                                    <div class="field-group mb-3">
+                                        <label>🎨 Indicaciones de Ayuno <small class="txt-muted">(🔒 SSOT Catálogo · Solo estilos persistibles)</small></label>
+                                        <div id="ck-promo-ayuno-<?= $pId ?>" class="ck5-mount"></div>
+                                        <textarea id="ck-promo-ayuno-<?= $pId ?>-data" name="promo<?= $pId ?>_ayuno__texto" class="ck5-hidden-data" rows="2"><?= h($cmsAyuno) ?></textarea>
+                                    </div>
+
+                                    <!-- 6. Tiempo de Entrega (🔒 Texto de SSOT · Estilos RTE persistibles en CMS) -->
+                                    <div class="field-group mb-3">
+                                        <label>🎨 Tiempo de Entrega <small class="txt-muted">(🔒 SSOT Catálogo · Solo estilos persistibles)</small></label>
+                                        <div id="ck-promo-tiempo-<?= $pId ?>" class="ck5-mount"></div>
+                                        <textarea id="ck-promo-tiempo-<?= $pId ?>-data" name="promo<?= $pId ?>_tiempo__texto" class="ck5-hidden-data" rows="2"><?= h($cmsTiempo) ?></textarea>
+                                    </div>
+
+                                    <!-- 7. Descripción / Detalle del Estudio (✍️ Único campo editable en contenido + estilos · sin impacto a SSOT) -->
+                                    <div class="field-group mb-3">
+                                        <label>✍️ Descripción / Detalle del Estudio <small class="txt-muted">(✍️ Campo #7 · 100% Editable en Contenido + Estilos · Guardado en <code>catalogo_promociones.descripcion</code>)</small></label>
+                                        <div id="ck-promo-desc-<?= $pId ?>" class="ck5-mount"></div>
+                                        <textarea id="ck-promo-desc-<?= $pId ?>-data" name="promo_desc_<?= $pId ?>" class="ck5-hidden-data" rows="3"><?= h($cmsDesc) ?></textarea>
+                                    </div>
+
+                                    <!-- 8. Muestra Requerida (CMS RTE → web_contenidos) -->
+                                    <?php
+                                    // ?? captura solo null; ?: captura null y "" (filas vacías de web_contenidos)
+                                    $muestraCms = ($contenidos['promociones']['muestra'.$pId]['texto'] ?? '')
+                                                  ?: trim($p['ssot_muestra'] ?? '');
+                                    ?>
+                                    <div class="field-group mb-3">
+                                        <label>🔬 Muestra Requerida <small class="txt-muted">(Editable · se guarda en CMS, no en BD de estudios)</small></label>
+                                        <div id="ck-muestra-<?= $pId ?>" class="ck5-mount"></div>
+                                        <textarea id="ck-muestra-<?= $pId ?>-data" name="muestra<?= $pId ?>__texto" class="ck5-hidden-data" rows="1"><?= h($muestraCms) ?></textarea>
+                                    </div>
+
+                                    <div style="display:flex; flex-wrap:wrap; gap:1rem; align-items:flex-end;" class="mb-3">
+                                        <div class="field-group" style="flex:0 0 140px; min-width:120px; max-width:160px; margin-bottom:0;">
+                                            <label style="font-size:0.8rem; font-weight:600; white-space:nowrap;">✍️ Precio Reg. ($)</label>
+                                            <input type="number" step="0.01" name="promo_precio_reg_<?= $pId ?>" value="<?= $p['precio_regular'] !== null ? h($p['precio_regular']) : '' ?>" placeholder="0.00" class="form-input" style="padding:4px 8px; font-size:0.85rem; height:34px; width:100%;">
+                                        </div>
+                                        <div class="field-group" style="flex:0 0 140px; min-width:120px; max-width:160px; margin-bottom:0;">
+                                            <label style="font-size:0.8rem; font-weight:600; white-space:nowrap;">✍️ Precio Oferta ($)</label>
+                                            <input type="number" step="0.01" name="promo_precio_of_<?= $pId ?>" value="<?= $p['precio_oferta'] !== null ? h($p['precio_oferta']) : '' ?>" placeholder="0.00" class="form-input" style="padding:4px 8px; font-size:0.85rem; height:34px; width:100%;">
+                                        </div>
+                                    </div>
+
+                                    <div class="field-group mb-2">
+                                        <label>Imagen de Fondo</label>
+                                        <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px; font-size: 0.78rem;">
+                                            📐 <strong>Codec:</strong> WebP únicamente &nbsp;·&nbsp;
+                                            <strong>Quality:</strong> 72 &nbsp;·&nbsp;
+                                            <strong>Effort:</strong> 6 &nbsp;·&nbsp;
+                                            <strong>Dimensiones:</strong> 900 × 486 px (ratio 13:7) &nbsp;·&nbsp;
+                                            <strong>Orientación Horizontal</strong> &nbsp;·&nbsp;
+                                            <strong>Peso:</strong> Máximo 150 KB, Óptimo 60 KB
+                                        </p>
+                                        <div class="image-upload-box">
+                                            <img id="prev-promo-<?= $pId ?>"
+                                                 src="<?= !empty($imgUrl) ? h($imgUrl) : 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="90" height="60" viewBox="0 0 90 60"><rect width="100%" height="100%" fill="%23f1f5f9"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%2394a3b8" font-size="10" font-family="sans-serif">Sin Imagen</text></svg>' ?>"
+                                                 alt="Promoción <?= h(trim(strip_tags($diaLabel))) ?>" class="img-preview-sm"
+                                                 onerror="this.hidden=true">
+                                            <label for="file-promo-<?= $pId ?>" class="btn btn-secondary btn-sm">
+                                                Cambiar Imagen
+                                            </label>
+                                            <input type="file" accept="image/webp"
+                                                   id="file-promo-<?= $pId ?>" class="d-none"
+                                                   data-upload-slot="promo-<?= $pId ?>"
+                                                   data-preview-id="prev-promo-<?= $pId ?>"
+                                                   data-target-input="input-img-promo-<?= $pId ?>">
+                                        </div>
+                                        <input type="url" id="input-img-promo-<?= $pId ?>"
+                                               name="promo_img_<?= $pId ?>"
+                                               value="<?= h($imgUrl) ?>"
+                                               placeholder="/laesh-web-assets-uipv1a/cms/promo-<?= h(strtolower(trim(strip_tags($p['dia_semana'])))) ?>.webp"
+                                               class="cms-img-url-input" data-no-limit>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /panel-promociones -->
+
+        <!-- ================================================================
+             PANEL 5: CALIDAD E INSTALACIONES
+             Sección: calidad | Fuente HTML: #calidad
+             ================================================================ -->
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Code Clarity**
+
+I've zeroed in on the `gestion_web.php` file, specifically lines 744-1015. My focus is now on dissecting the promotion card's components, starting with its header elements. I need to understand what variables are at play. I'm looking at things like the Ficha ID, the Tag, and the `Activa` checkbox, to determine if they need to stay in this section of the code.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.299216602s
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:14 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L59-269)</summary>
+
+**Path:** `Unknown file`
+
+```
+    $config = $db->query("SELECT clave, valor FROM configuraciones")
+                 ->fetchAll(\PDO::FETCH_KEY_PAIR) ?: [];
+
+    // Promociones relacionales desde MariaDB (catalogo_promociones + catalogo_estudios + catalogo_categorias)
+    $promociones = $db->query("
+        SELECT cp.id, cp.dia_semana, cp.descripcion, cp.estudio_id, cp.precio_regular,
+               cp.precio_oferta, cp.imagen_fondo, cp.activo, cp.orden,
+               ce.nombre            as estudio_nombre_db,
+               ce.clave_interna,
+               ce.descripcion_breve as ssot_desc_breve,
+               ce.preparacion       as ssot_prep,
+               ce.tiempo_procesamiento as ssot_tiempo,
+               ce.muestra_requerida as ssot_muestra,
+               ce.detalle           as ssot_detalle,
+               cc.nombre            as categoria_nombre
+        FROM catalogo_promociones cp
+        LEFT JOIN catalogo_estudios ce ON cp.estudio_id = ce.id
+        LEFT JOIN catalogo_categorias cc ON ce.categoria_id = cc.id
+        ORDER BY cp.orden ASC, cp.id ASC
+    ")->fetchAll(\PDO::FETCH_ASSOC);
+
+    $estudiosCatalog = $db->query("
+        SELECT e.id, e.clave_interna, e.nombre, e.descripcion_breve, e.detalle,
+               e.preparacion, e.tiempo_procesamiento, e.muestra_requerida,
+               c.nombre as categoria_nombre
+        FROM catalogo_estudios e
+        LEFT JOIN catalogo_categorias c ON e.categoria_id = c.id
+        WHERE e.activo = 1
+        ORDER BY e.nombre ASC
+    ")->fetchAll(\PDO::FETCH_ASSOC);
+
+    // Plates — directorio de vistas es el mismo directorio admrc/
+    Flight::view()->setDirectory(__DIR__);
+    echo Flight::view()->render('views/gestion_web', [
+        'nombreAdmin'     => $nombreAdmin,
+        'csrfToken'       => $_SESSION['csrf_token'],
+        'contenidos'      => $contenidos,
+        'config'          => $config,
+        'lastPub'         => $lastPub,
+        'promociones'     => $promociones,
+        'estudiosCatalog' => $estudiosCatalog,
+    ]);
+});
+
+// ── POST /cms/save — Guardar sección CMS (HTMX o form tradicional) ───────────
+Flight::route('POST /cms/save', function () {
+    header('Content-Type: application/json; charset=utf-8');
+
+    // RBAC: Verificar permiso para guardar en CMS
+    Flight::rbac()->requirePermission('gestionar_cms', '/laesh/login/login.php?portal=admin');
+
+    // R14.12: CSRF primero
+    $submitted = $_POST['csrf_token'] ?? '';
+    if (!hash_equals($_SESSION['csrf_token'] ?? '', $submitted)) {
+        http_response_code(403);
+        Logger::log('WARN', 'Token CSRF inválido en cms/save', Flight::auth()->getUserId() ?: null);
+        echo json_encode(['ok' => false, 'msg' => 'Token de seguridad inválido.']);
+        exit;
+    }
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+
+    $db      = Flight::db();
+    $userId  = Flight::auth()->getUserId();
+    $seccion = trim($_POST['seccion'] ?? '');
+
+    // Validar sección — solo valores canónicos (D-07)
+    $seccionesValidas = ['hero','quienes-somos','especialidades','promociones','calidad','ubicacion','aviso-privacidad','privacidad','video-promo','video','footer','seo','configuracion-general'];
+    if (!in_array($seccion, $seccionesValidas, true)) {
+        http_response_code(400);
+        echo json_encode(['ok' => false, 'msg' => 'Sección no válida.']);
+        exit;
+    }
+
+    $campos = $_POST;
+    unset($campos['csrf_token'], $campos['seccion']);
+
+    try {
+        $db->beginTransaction();
+
+        // FIX 2026-09-07: tipo se auto-detecta por patrón de URL (no hardcodeado a 'texto').
+        // El ON DUPLICATE KEY UPDATE también propaga tipo para auto-sanar registros previos.
+        $stmt = $db->prepare(
+            "INSERT INTO web_contenidos (seccion, subseccion, clave, valor, tipo, actualizado_por)
+             VALUES (:sec, :sub, :clave, :valor, :tipo, :uid)
+             ON DUPLICATE KEY UPDATE valor = VALUES(valor), tipo = VALUES(tipo), actualizado_por = VALUES(actualizado_por)"
+        );
+
+        // Configuraciones globales: campos _cfg_{clave} → tabla configuraciones (D-04)
+        // UPSERT: inserta si la clave no existe, actualiza si ya existe
+        $cfgStmt = $db->prepare(
+            "INSERT INTO configuraciones (clave, valor, descripcion) VALUES (:clave, :valor, NULL)
+             ON DUPLICATE KEY UPDATE valor = VALUES(valor)"
+        );
+
+        // Manejo específico de catalogo_promociones en MariaDB cuando la sección es 'promociones'
+        if ($seccion === 'promociones') {
+            $rawIds = $_POST['promo_id'] ?? [];
+            $promoIds = is_array($rawIds) ? $rawIds : (is_numeric($rawIds) ? [$rawIds] : []);
+
+            if (empty($promoIds)) {
+                $promoIds = $db->query("SELECT id FROM catalogo_promociones ORDER BY id ASC")->fetchAll(\PDO::FETCH_COLUMN) ?: [1, 2, 3, 4, 5, 6, 7];
+            }
+
+            $stmtPromo = $db->prepare("
+                UPDATE catalogo_promociones SET
+                    dia_semana     = :dia_semana,
+                    estudio_id     = :estudio_id,
+                    descripcion    = :descripcion,
+                    precio_regular = :precio_regular,
+                    precio_oferta  = :precio_oferta,
+                    imagen_fondo   = :imagen_fondo,
+                    activo         = :activo
+                WHERE id = :id
+            ");
+
+            foreach ($promoIds as $pId) {
+                $pIdInt = (int)$pId;
+                if ($pIdInt <= 0) continue;
+
+                // 2026-09-08: Linearización SSOT — nombre_oferta, subtitulo, ayuno, tiempo_entrega
+                // han sido eliminados de la tabla; los estilos viven en web_contenidos (promo{N}_*__texto).
+                // CMS solo escribe: dia_semana, estudio_id, descripcion, precios, imagen_fondo, activo.
+                $diaSem = trim($_POST["promo_dia_semana_{$pIdInt}"] ?? '');
+                $estId  = !empty($_POST["promo_estudio_id_{$pIdInt}"]) ? (int)$_POST["promo_estudio_id_{$pIdInt}"] : null;
+                $desc   = trim($_POST["promo_desc_{$pIdInt}"] ?? '');
+                $pReg   = (isset($_POST["promo_precio_reg_{$pIdInt}"]) && $_POST["promo_precio_reg_{$pIdInt}"] !== '') ? (float)$_POST["promo_precio_reg_{$pIdInt}"] : null;
+                $pOf    = (isset($_POST["promo_precio_of_{$pIdInt}"]) && $_POST["promo_precio_of_{$pIdInt}"] !== '') ? (float)$_POST["promo_precio_of_{$pIdInt}"] : null;
+                $img    = trim($_POST["promo_img_{$pIdInt}"] ?? '');
+                $act    = isset($_POST["promo_active_{$pIdInt}"]) ? 1 : 0;
+
+                $stmtPromo->execute([
+                    'id'            => $pIdInt,
+                    'dia_semana'    => $diaSem,
+                    'estudio_id'    => $estId,
+                    'descripcion'   => $desc,
+                    'precio_regular'=> $pReg,
+                    'precio_oferta' => $pOf,
+                    'imagen_fondo'  => $img,
+                    'activo'        => $act,
+                ]);
+            }
+        }
+
+        // Cambio C (2026-09-08): pre-cargar mapa promo_id → muestra_requerida del SSOT
+        // Evita crear overrides silenciosos en web_contenidos cuando el admin publica
+        // sin editar el campo 8 (Muestra Requerida) — el SSOT sigue siendo la fuente viva.
+        $_ssotMuestraMap = [];
+        if ($seccion === 'promociones') {
+            foreach ($db->query(
+                "SELECT cp.id, ce.muestra_requerida
+                 FROM catalogo_promociones cp
+                 LEFT JOIN catalogo_estudios ce ON cp.estudio_id = ce.id"
+            )->fetchAll(\PDO::FETCH_ASSOC) as $_r) {
+                $_ssotMuestraMap[(int)$_r['id']] = trim($_r['muestra_requerida'] ?? '');
+            }
+        }
+
+        $hasCfgParam = false;
+        foreach ($campos as $fieldKey => $valor) {
+            if (str_starts_with($fieldKey, 'promo_')) {
+                continue; // Omitir campos de catalogo_promociones de la tabla web_contenidos
+            }
+            // D-04: campos _cfg_{clave} van a configuraciones, no a web_contenidos
+            if (str_starts_with($fieldKey, '_cfg_')) {
+                $hasCfgParam = true;
+                $cfgClave = substr($fieldKey, 5); // quitar prefijo '_cfg_'
+                $cfgStmt->execute(['clave' => $cfgClave, 'valor' => $valor]);
+                continue;
+            }
+            // Formato estándar: {subseccion}__{clave}  ej: slide1__titulo
+            [$sub, $clave] = array_pad(explode('__', $fieldKey, 2), 2, $fieldKey);
+
+            // Cambio C: muestra{N}__texto — no escribir si el texto del RTE coincide con SSOT
+            // Así el SSOT sigue siendo fuente primaria si el admin no editó el campo.
+            if ($seccion === 'promociones' && $clave === 'texto'
+                && preg_match('/^muestra(\d+)$/', $sub, $_m)) {
+                $pid     = (int)$_m[1];
+                $ssotVal = $_ssotMuestraMap[$pid] ?? '';
+                if ($ssotVal !== '' && trim(strip_tags($valor)) === $ssotVal) {
+                    continue; // Sin cambio real: preservar SSOT como fuente viva
+                }
+            }
+            // Auto-detectar tipo: CMS URL → imagen_url; todo lo demás → texto
+            $tipoValor = str_starts_with((string)$valor, '/laesh-web-assets-uipv1a/cms/')
+                ? 'imagen_url'
+                : 'texto';
+            $stmt->execute([
+                'sec'   => $seccion,
+                'sub'   => $sub,
+                'clave' => $clave,
+                'valor' => $valor,
+                'tipo'  => $tipoValor,
+                'uid'   => $userId,
+            ]);
+        }
+
+        $db->commit();
+        unset($_SESSION['cms_draft'][$seccion]);
+        Logger::logAlways('INFO', "CMS: sección '{$seccion}' publicada.", $userId);
+
+        // ── Invalidar caché L2 según la sección y parámetros modificados ───────────
+        Cache::init();
+        $keysToInvalidate = [Cache::KEY_CMS];
+        if ($seccion === 'promociones') {
+            $keysToInvalidate[] = Cache::KEY_PROMOS;
+        } elseif ($seccion === 'especialidades') {
+            $keysToInvalidate[] = Cache::KEY_TREE;
+        }
+        if ($hasCfgParam || $seccion === 'configuracion-general') {
+            $keysToInvalidate[] = Cache::KEY_CFG;
+        }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `estudiosCatalog`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:15 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Refining Query Logic**
+
+I've zeroed in on the use of `$estudiosCatalog`. It turns out it's only relevant to the promotions study dropdown within `gestion_web.php`. Therefore, I'm removing the `$estudiosCatalog` query and replacing its usage with either an empty array `[]` or omitting it altogether, streamlining the code's structure.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.001639578s
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:15 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L119-179)</summary>
+
+**Path:** `Unknown file`
+
+```
+            if ($items) {
+                $groups[] = ['cat' => trim($m[1]), 'items' => $items];
+            }
+        }
+    }
+    return $groups;
+}
+
+// ── Conexión DB ─────────────────────────────────────────────────────────────
+$db = Flight::db();
+
+// ── Caché L2: OPcache PHP File Store (Estrategia A — Sprint Cache 2026-09) ──
+// Inicializar una sola vez por request. Env: 'dev' en local, 'prod' en OCI/Hostinger.
+\Common\Cache::init('', defined('APP_ENV') ? APP_ENV : 'prod');
+
+if (!empty($_GET['reset_cache'])) {
+    if (function_exists('opcache_reset')) { @opcache_reset(); }
+    \Common\Cache::clear();
+}
+$_bypassCache = (!empty($_SESSION['auth_logged_in']) && !empty($_GET['_preview']) && !empty($_SESSION['cms_draft'])) || !empty($_GET['nocache']) || !empty($_GET['reset_cache']);
+
+// ── 1a. configuraciones ─────────────────────────────────────────────────────
+$configRaw = $_bypassCache ? null : \Common\Cache::get(\Common\Cache::KEY_CFG);
+if ($configRaw === null) {
+    $configRaw = $db->query("SELECT clave, valor FROM configuraciones")->fetchAll(\PDO::FETCH_KEY_PAIR) ?: [];
+    if (!$_bypassCache) \Common\Cache::set(\Common\Cache::KEY_CFG, $configRaw);
+}
+
+// ── 1b. web_contenidos → $cms ────────────────────────────────────────────────
+$_cmsRaw = $_bypassCache ? null : \Common\Cache::get(\Common\Cache::KEY_CMS);
+if ($_cmsRaw === null) {
+    $_cmsRaw = [];
+    foreach ($db->query("SELECT seccion, subseccion, clave, valor FROM web_contenidos ORDER BY id")->fetchAll(\PDO::FETCH_ASSOC) as $row) {
+        $_cmsRaw[$row['seccion']][$row['subseccion']][$row['clave']] = $row['valor'];
+    }
+    if (!$_bypassCache) \Common\Cache::set(\Common\Cache::KEY_CMS, $_cmsRaw);
+}
+$cms = $_cmsRaw;
+
+// ── 2. Preview de borrador CMS (solo sesión admin activa) ──────────────────
+// IMPORTANTE: el merge debe ocurrir ANTES de definir $cfg y $c, porque las arrow
+// functions de PHP capturan variables por VALOR en el momento de su creación.
+// Delight Auth guarda el login bajo $_SESSION['auth_logged_in'] (NOT 'user_id').
+$isPreview = !empty($_GET['_preview'])
+    && !empty($_SESSION['auth_logged_in'])
+    && !empty($_SESSION['cms_draft']);
+if ($isPreview) {
+    foreach ($_SESSION['cms_draft'] as $draftSec => $campos) {
+        foreach ($campos as $rawKey => $val) {
+            // Manejar configuraciones globales (prefijo _cfg_)
+            if (str_starts_with($rawKey, '_cfg_')) {
+                $configRaw[substr($rawKey, 5)] = $val;
+                continue;
+            }
+            // Manejar web_contenidos (formato {sub}__{clave})
+            [$sub, $clave] = array_pad(explode('__', $rawKey, 2), 2, $rawKey);
+            $cms[$draftSec][$sub][$clave] = $val;
+        }
+    }
+}
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L180-219)</summary>
+
+**Path:** `Unknown file`
+
+```
+// ── 3. Helpers y Variables Funcionales (Post-Merge) ─────────────────────────
+$cfg = fn(string $k, string $d = '') => (!isset($configRaw[$k]) || $configRaw[$k] === '') ? $d : $configRaw[$k];
+$c   = fn(string $sec, string $sub, string $k, string $d = '') => (!isset($cms[$sec][$sub][$k]) || $cms[$sec][$sub][$k] === '') ? $d : $cms[$sec][$sub][$k];
+
+// Valores frecuentes — sin fallback: el cliente DEBE tener todo en configuraciones
+$cfgNombreLab = $cfg('nombre_laboratorio');
+$cfgNombreC   = $cfg('nombre_corto');
+$cfgTel       = $cfg('telefono');
+$cfgTelDigit  = waNum($cfgTel);
+$cfgWA        = waNum($cfg('whatsapp_numero'));
+$cfgEmail     = $cfg('email_contacto');
+$cfgDirCalle  = $cfg('direccion_calle', 'Azucenas #8, Fracc. Jardines del Sur');
+$cfgCiudad    = $cfg('ciudad', 'Huajuapan de León');
+$cfgEstado    = $cfg('estado', 'Oaxaca');
+$cfgCP        = $cfg('cp', '69000');
+$cfgDir       = trim("{$cfgDirCalle}, {$cfgCiudad}, {$cfgEstado}" . ($cfgCP ? ". C.P. {$cfgCP}" : ""));
+$cfgHorSem    = $cfg('horario_semana');
+$cfgHorDom    = $cfg('horario_domingo');
+$cfgHrsOpen   = $cfg('hrs_open');
+$cfgHrsClose  = $cfg('hrs_close');
+$cfgDomOpen   = $cfg('dom_open');
+$cfgDomClose  = $cfg('dom_close');
+$cfgRespNom   = $cfg('responsable_nombre');
+$cfgRespProf  = $cfg('responsable_cedula_prof');
+$cfgRespEsp   = $cfg('responsable_cedula_esp');
+$cfgFB        = $cfg('facebook_url');
+$cfgMapsUrl   = $cfg('maps_url');  // URL directa Google Maps para noscript
+$cfgGeoLat    = (float)($cfg('geo_lat') ?: 17.8028691);
+$cfgGeoLng    = (float)($cfg('geo_lng') ?: -97.7779575);
+
+// WhatsApp URLs — textos desde configuraciones (sin fallback)
+$waBase        = "https://wa.me/52{$cfgWA}";
+$waTextoInfo   = $cfg('wa_texto_info');    // texto botón info / flotante / ubicación
+$waTextoAg     = $cfg('wa_texto_agendar'); // texto pre-llenado en cards de promo
+$waInfoUrl     = $waBase . '?text=' . rawurlencode($waTextoInfo);
+$waContactUrl  = $waInfoUrl;
+
+/** Obtiene valor CMS con fallback.
+ *  NOTA: debe definirse DESPUÉS del merge de preview para que capture
+ *  el $cms ya actualizado (PHP arrow fn captura por valor al momento de creación). */
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L239-269)</summary>
+
+**Path:** `Unknown file`
+
+```
+               e.clave_interna, e.nombre as estudio_nombre, e.tiempo_procesamiento, e.muestra_requerida, e.preparacion
+        FROM catalogo_grupos g
+        JOIN catalogo_categorias c ON c.grupo_id = g.id
+        JOIN catalogo_estudios e ON e.categoria_id = c.id
+        WHERE e.activo = 1
+        ORDER BY g.orden ASC, c.orden ASC, e.id ASC
+    ");
+    $treeRows = $treeStmt ? $treeStmt->fetchAll(\PDO::FETCH_ASSOC) : [];
+
+    $gMap = [];
+    $gIdxMap = [];
+    $currGIdx = 0;
+    foreach ($treeRows as $r) {
+        $gid = (int)$r['grupo_id'];
+        if (!isset($gIdxMap[$gid])) {
+            $currGIdx++;
+            if ($currGIdx > 4) break;
+            $gIdxMap[$gid] = $currGIdx;
+            $cg[$currGIdx] = ['titulo' => $r['grupo_titulo'], 'fichas' => []];
+        }
+        $gi    = $gIdxMap[$gid];
+        $catId = (int)$r['cat_id'];
+        if (!isset($gMap[$gid][$catId])) {
+            $gMap[$gid][$catId] = count($cg[$gi]['fichas']);
+            $cg[$gi]['fichas'][] = ['cat' => $r['cat_nombre'], 'items' => []];
+        }
+        $cPos = $gMap[$gid][$catId];
+        $cg[$gi]['fichas'][$cPos]['items'][] = [
+            'clave_interna'        => $r['clave_interna'],
+            'nombre'               => $r['estudio_nombre'],
+            'tiempo_procesamiento' => $r['tiempo_procesamiento'],
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `promos`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:15 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L289-329)</summary>
+
+**Path:** `Unknown file`
+
+```
+$carouselCards = [];
+for ($ci = 1; $ci <= 16; $ci++) {
+    $cActivo = $c('especialidades', "carousel{$ci}", 'activo', $ci <= 12 ? '1' : '0');
+    if ($cActivo === '0') continue; // Omitir tarjeta desactivada (apagada) desde el CMS
+    $cHtml = trim((string)$c('especialidades', "carousel{$ci}", 'texto'));
+    if ($cHtml === '') continue; // Omitir si no tiene texto redactado en la BD
+    $cImg = trim((string)$c('especialidades', 'config', "carousel{$ci}_img", $cfg("carousel{$ci}_img", '')));
+    $carouselCards[$ci] = [
+        'img'   => $cImg,
+        'texto' => $cHtml,
+    ];
+}
+
+// ── 3e. Calidad gallery — 3 tarjetas (sin fallback) ────────────────────────
+$_calDef = [
+    1 => ['Área de Hematología',      'Análisis de biometría hemática y células sanguíneas con rigor científico y alta precisión.'],
+    2 => ['Química Clínica',          'Determinación automatizada de metabolitos, perfil lipídico y enzimas específicas.'],
+    3 => ['Microbiología y Cultivos', 'Aislamiento, tinción de Gram y pruebas de susceptibilidad a antimicrobianos.'],
+];
+$calidadCards = [];
+for ($qi = 1; $qi <= 3; $qi++) {
+    $qActivo = $c('calidad', "gallery{$qi}", 'activo', '1');
+    if ($qActivo === '0') continue; // Omitir tarjeta desactivada (apagada) desde el CMS
+    $calidadCards[$qi] = [
+        'img'    => $c('calidad', "gallery{$qi}", 'imagen_url', ''),
+        'alt'    => $_calDef[$qi][0],
+        'titulo' => $c('calidad', "gallery{$qi}", 'titulo',      $_calDef[$qi][0]),
+        'desc'   => $c('calidad', "gallery{$qi}", 'descripcion', $_calDef[$qi][1]),
+    ];
+}
+
+// ── 1d. Promociones vigentes → $promos ───────────────────────────────────────
+$promos = $_bypassCache ? null : \Common\Cache::get(\Common\Cache::KEY_PROMOS);
+if ($promos === null) {
+    $promoStmt = $db->query(
+        "SELECT cp.id, cp.dia_semana, cp.descripcion,
+                cp.precio_regular, cp.precio_oferta,
+                cp.imagen_fondo, cp.activo,
+                ce.nombre            as ssot_nombre,
+                ce.descripcion_breve as ssot_desc_breve,
+                ce.detalle           as ssot_detalle,
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L319-359)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+// ── 1d. Promociones vigentes → $promos ───────────────────────────────────────
+$promos = $_bypassCache ? null : \Common\Cache::get(\Common\Cache::KEY_PROMOS);
+if ($promos === null) {
+    $promoStmt = $db->query(
+        "SELECT cp.id, cp.dia_semana, cp.descripcion,
+                cp.precio_regular, cp.precio_oferta,
+                cp.imagen_fondo, cp.activo,
+                ce.nombre            as ssot_nombre,
+                ce.descripcion_breve as ssot_desc_breve,
+                ce.detalle           as ssot_detalle,
+                ce.clave_interna, ce.muestra_requerida,
+                ce.tiempo_procesamiento, ce.preparacion,
+                cc.nombre as categoria_nombre
+         FROM catalogo_promociones cp
+         LEFT JOIN catalogo_estudios ce ON cp.estudio_id = ce.id
+         LEFT JOIN catalogo_categorias cc ON ce.categoria_id = cc.id
+         WHERE cp.activo = 1
+         ORDER BY cp.orden ASC, cp.id ASC"
+    );
+    $promos = $promoStmt ? $promoStmt->fetchAll(\PDO::FETCH_ASSOC) : [];
+    if (!$_bypassCache) \Common\Cache::set(\Common\Cache::KEY_PROMOS, $promos);
+}
+
+// ── Inyectar borrador de promociones si es vista previa ──────────────────
+if ($isPreview && !empty($_SESSION['cms_draft']['promociones'])) {
+    $promoDraft = $_SESSION['cms_draft']['promociones'];
+    
+    // Si la DB trajo menos de 7 (o las que sean), igual debemos iterar
+    // o al revés: iteramos sobre los 7 IDs y construimos el array
+    $draftPromos = [];
+    foreach ([1,2,3,4,5,6,7] as $pId) {
+        if (!isset($promoDraft["promo_active_{$pId}"])) continue; // Si no está activo en el draft, saltar (where activo=1)
+        
+        // Buscar si ya existía en la BD para heredar joins
+        $existingRow = null;
+        foreach ($promos as $row) {
+            if ($row['id'] == $pId) {
+                $existingRow = $row;
+                break;
+            }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L359-394)</summary>
+
+**Path:** `Unknown file`
+
+```
+            }
+        }
+        
+        $draftRow = $existingRow ?: ['id' => $pId];
+        // Sobrescribir con draft
+        $draftRow['dia_semana']     = $promoDraft["promo_dia_semana_{$pId}"] ?? '';
+        $draftRow['descripcion']    = $promoDraft["promo_desc_{$pId}"] ?? '';
+        $draftRow['precio_regular'] = $promoDraft["promo_precio_reg_{$pId}"] ?? '';
+        $draftRow['precio_oferta']  = $promoDraft["promo_precio_of_{$pId}"] ?? '';
+        $draftRow['imagen_fondo']   = $promoDraft["promo_img_{$pId}"] ?? '';
+        $draftRow['activo']         = 1;
+        
+        $draftPromos[] = $draftRow;
+    }
+    $promos = $draftPromos;
+}
+
+
+// ── 5. Lecturas agrupadas por sección ────────────────────────────────────────
+
+// Hero — navbar tagline (sin fallback)
+$navTagL1 = $c('hero', 'navbar', 'tagline_l1');
+$navTagL2 = $c('hero', 'navbar', 'tagline_l2');
+
+// Hero — contenido de slides: etiqueta, titulo, descripcion, CTA + imagen_url dinámica (sin fallback)
+$heroSliderMode = $c('hero', 'config', 'slider_mode', 'sync');
+$heroFixedImgIdx = (int)$c('hero', 'config', 'fixed_image', '1');
+
+$slides = [];
+for ($si = 1; $si <= 5; $si++) {
+    $imgUrl = $c('hero', "slide{$si}", 'imagen_url', '');
+    $slides[$si] = [
+        'etiqueta'    => $c('hero', "slide{$si}", 'etiqueta'),
+        'titulo'      => $c('hero', "slide{$si}", 'titulo'),
+        'descripcion' => $c('hero', "slide{$si}", 'descripcion'),
+        'cta_texto'   => $c('hero', "slide{$si}", 'cta_texto'),
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Refining Promo Queries**
+
+I've been looking at simplifying the promo query in `website/index.php`. Specifically, lines 324-340. I've considered simplifying the SQL query itself, aiming for better readability and performance. I believe I can get rid of some of the complexity in the existing query. My thinking is to improve the database call with a simpler query that accomplishes the same result.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.129537526s
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:15 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `promociones.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/**
+ * sections/promociones.php — Partial: Promociones diarias
+ * Incluido desde website/index.php; hereda su scope completo.
+ * Variables esperadas: $promoH2, $promoSub, $promos, $waBase, $waTextoAg, $waSvg
+ *
+ * Mejoras 2026-09-08:
+ *   · Badge "HOY" — derecha, violeta, detectado por dia() ISO-8601
+ *   · Precios en el mismo renglón que badges (derecha)
+ *   · "Ahorras $X" bajo precios cuando hay descuento
+ *   · Badge de muestra requerida (💉 / ☕ / 🔬 según texto)
+ *   · Descripción expandible si es larga (>220 chars)
+ *   · Overlay de imagen más visible (opacidad reducida)
+ *   · Mensaje WA incluye precio de oferta
+ */
+?>
+        <!-- ══════════════════════════════════════════ PROMOCIONES ══ -->
+        <section id="promociones" class="sec-promo scroll-sm-top">
+            <div class="section-header animate-on-scroll">
+                <h2><?= h($promoH2) ?></h2>
+                <p><?= h($promoSub) ?></p>
+            </div>
+            <div class="promo-catalog-wrap animate-on-scroll">
+                <div class="catalog-grid">
+                <?php
+                // Día actual para badge "HOY" (ISO-8601: 1=lunes … 7=domingo)
+                $todayMap = [1=>'lunes',2=>'martes',3=>'miercoles',4=>'jueves',5=>'viernes',6=>'sabado',7=>'domingo'];
+                $todayKey = $todayMap[(int)date('N')] ?? '';
+
+                // Iconos SVG inline reutilizables (estilo laboratorio, Lucide-style)
+                $_icoAyuno = '<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline-block;vertical-align:-1px;flex-shrink:0"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>';
+                $_icoTiempo = '<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline-block;vertical-align:-1px;flex-shrink:0"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg>';
+
+                /**
+                 * Normaliza un nombre de día eliminando acentos y espacios para comparación HOY.
+                 * Permite que "Miércoles" y "Sábado" (con acento) coincidan con las claves del mapa.
+                 */
+                function _normalizeDay(string $s): string {
+                    return strtr(strtolower(trim($s)),
+                        ['á'=>'a','é'=>'e','í'=>'i','ó'=>'o','ú'=>'u','ü'=>'u','ñ'=>'n']);
+                }
+
+                /**
+                 * Linearización SSOT: devuelve $cmsHtml si su texto plano coincide con $ssotText
+                 * (el SSOT vivo del Constructor Jerárquico). De lo contrario, el SSOT gana.
+                 *
+                 * Permite que el CMS persista estilos visuales (negritas, colores) sobre datos
+                 * clínicos sin riesgo de mostrar contenido stale en el sitio público.
+                 *
+                 * @param string $cmsHtml  HTML almacenado en catalogo_promociones (puede incluir markup CKEditor)
+                 * @param string $ssotText Texto plano del SSOT (catalogo_estudios o catalogo_categorias)
+                 * @return string          HTML listo para emitir
+                 */
+                function _ssotBind(string $cmsHtml, string $ssotText): string {
+                    if ($ssotText === '') return $cmsHtml;                          // Sin vínculo SSOT: confiar en CMS
+                    if (trim(strip_tags($cmsHtml)) === trim($ssotText)) return $cmsHtml; // Texto coincide: usar versión estilizada
+                    return htmlspecialchars($ssotText, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'); // Diverge: SSOT gana
+                }
+
+                // Ícono de muestra requerida según texto
+                function _muestraIcon(string $txt): string {
+                    $t = strtolower($txt);
+                    if (str_contains($t, 'sangre') || str_contains($t, 'venosa') || str_contains($t, 'capilar')) return '💉';
+                    if (str_contains($t, 'orina') || str_contains($t, 'urina'))  return '🧪';
+                    if (str_contains($t, 'heces') || str_contains($t, 'copr'))   return '🧬';
+                    if (str_contains($t, 'ayuno') || str_contains($t, 'café'))   return '☕';
+                    return '🔬';
+                }
+
+                foreach ($promos as $p):
+                    // FIX 2026-09-08: dia_semana puede contener HTML de CKEditor → strip_tags para comparación
+                    // FIX 2026-09-08b: normalizar acentos → HOY funciona en miércoles y sábado
+                    $diaRaw    = $p['dia_semana'] ?? '';
+                    $diaKey    = _normalizeDay(strip_tags($diaRaw));
+                    $diaNombre = !empty($diaRaw) ? trim($diaRaw) : 'Promoción';
+                    $isHoy     = ($diaKey === $todayKey);
+
+                    // Linearización SSOT → sitio público (2026-09-08):
+                    // _ssotBind(): el texto plano del CMS (web_contenidos) debe coincidir con el SSOT vivo
+                    // para que el markup de estilos CMS se aplique. Si diverge (dato stale), el SSOT gana.
+                    $pId       = (int)($p['id'] ?? 0);
+                    $titulo    = _ssotBind($c('promociones', "promo{$pId}_nombre",    'texto'), $p['ssot_nombre']      ?? '');
+                    $ssotSub   = trim(($p['categoria_nombre'] ?? '') . (!empty($p['ssot_desc_breve']) ? ' · ' . $p['ssot_desc_breve'] : ''));
+                    $subtitulo = _ssotBind($c('promociones', "promo{$pId}_subtitulo", 'texto'), $ssotSub);
+                    $ayuno     = _ssotBind($c('promociones', "promo{$pId}_ayuno",     'texto'), $p['preparacion']          ?? '');
+                    $tiempo    = _ssotBind($c('promociones', "promo{$pId}_tiempo",    'texto'), $p['tiempo_procesamiento'] ?? '');
+                    $desc      = $p['descripcion'] ?: ($p['ssot_detalle'] ?? '');  // campo 7: CMS dueño; SSOT solo como valor inicial
+                    $precioReg = (float)($p['precio_regular'] ?? 0);
+                    $precioOf  = (float)($p['precio_oferta']  ?? 0);
+                    $muestra   = trim(strip_tags($p['muestra_requerida'] ?? ''));
+                    $imgUrl    = $p['imagen_fondo'] ?? '';
+
+                    // Monto de ahorro para mostrar bajo precios (Mejora A)
+                    $ahorroMonto = '';
+                    if ($precioReg > 0 && $precioOf > 0 && $precioOf < $precioReg) {
+                        $ahorroMonto = '$' . number_format($precioReg - $precioOf, 2);
+                    }
+
+                    // Mensaje WA con precio de oferta (Mejora E)
+                    $tituloPlain = strip_tags($titulo);
+                    $waPrecioTxt = '';
+                    if ($precioOf > 0) {
+                        $waPrecioTxt = ' — Precio Especial $' . number_format($precioOf, 2);
+                    } elseif ($precioReg > 0) {
+                        $waPrecioTxt = ' — Precio $' . number_format($precioReg, 2);
+                    }
+                    $waTextFull = $waTextoAg
+                        ? str_replace('{estudio}', $tituloPlain . $waPrecioTxt, $waTextoAg)
+                        : '';
+                    $waCardUrl  = $waBase . ($waTextFull ? '?text=' . rawurlencode($waTextFull) : '');
+
+                    // Overlay (Mejora D): opacidad reducida para imagen más visible
+                    $bgAttr = '';
+                    if (!empty($imgUrl)) {
+                        $bgAttr = 'style="background-image: linear-gradient(135deg, rgba(255,255,255,0.82) 0%, rgba(255,255,255,0.70) 100%), url(' . h($imgUrl) . '); background-size: cover; background-position: center;"';
+                    }
+
+                    // Descripción expandible (Mejora C): si >220 chars de texto plano
+                    $descExpandible = (mb_strlen(strip_tags($desc)) > 220);
+                ?>
+                    <div class="catalog-card <?= !empty($imgUrl) ? 'has-bg-overlay' : '' ?><?= $isHoy ? ' catalog-card--hoy' : '' ?>" <?= $bgAttr ?> data-promo-img="<?= h($imgUrl) ?>" data-promo-title="<?= h($tituloPlain) ?>">
+
+                        <!-- Día + badge HOY a la derecha -->
+                        <div class="catalog-card-day-row">
+                            <div class="catalog-card-day"><?= $diaNombre ?></div>
+                            <?php if ($isHoy): ?>
+                                <span class="catalog-badge badge-hoy">● HOY</span>
+                            <?php endif; ?>
+                        </div>
+
+                        <!-- Título y subtítulo -->
+                        <div class="catalog-card-full-hdr">
+                            <h3 class="catalog-card-title-full"><?= $titulo ?></h3>
+                        </div>
+                        <?php if ($subtitulo): ?>
+                            <div class="catalog-card-subheading"><?= $subtitulo ?></div>
+                        <?php endif; ?>
+
+                        <!-- Descripción (expandible si es larga) -->
+                        <?php if ($desc): ?>
+                            <div class="catalog-card-rte-desc<?= $descExpandible ? ' rte-desc--expandable' : '' ?>"
+                                 <?= $descExpandible ? 'data-expandable="1"' : '' ?>>
+                                <?= $desc ?>
+                            </div>
+                            <?php if ($descExpandible): ?>
+                                <button class="btn-rte-expand" aria-expanded="false">Ver más ↓</button>
+                            <?php endif; ?>
+                        <?php endif; ?>
+
+                        <!-- Renglón de badges: ayuno · tiempo · muestra (mismo renglón) -->
+                        <?php
+                        // FIX: usar $c() / $cms (scope de index.php), NO $contenidos (solo existe en admin)
+                        $muestraHtml = trim($c('promociones', 'muestra'.$p['id'], 'texto'));
+                        if (!$muestraHtml && $muestra) {
+                            $muestraHtml = _muestraIcon($muestra) . ' ' . h($muestra);
+                        }
+                        $hayBadges = $ayuno || $tiempo || $muestraHtml;
+                        ?>
+                        <?php if ($hayBadges): ?>
+                        <div class="catalog-card-badges">
+                            <?php if ($ayuno): ?>
+                                <span class="catalog-badge badge-amber"><?= $_icoAyuno ?>&nbsp;<?= $ayuno ?></span>
+                            <?php endif; ?>
+                            <?php if ($tiempo): ?>
+                                <span class="catalog-badge badge-blue"><?= $_icoTiempo ?>&nbsp;<?= $tiempo ?></span>
+                            <?php endif; ?>
+                            <?php if ($muestraHtml): ?>
+                                <span class="catalog-badge badge-muestra"><?= $muestraHtml ?></span>
+                            <?php endif; ?>
+                        </div>
+                        <?php endif; ?>
+
+                        <!-- Renglón inferior: precios (izq.) + botón Agendar (der.) -->
+                        <div class="catalog-card-bottom-row">
+                            <?php if ($precioReg > 0 || $precioOf > 0): ?>
+                            <div class="catalog-card-pricing">
+                                <div class="catalog-card-prices">
+                                    <?php if ($precioReg > 0 && $precioOf > 0 && $precioOf < $precioReg): ?>
+                                        <span class="price-old">$<?= number_format($precioReg, 2) ?></span>
+                                    <?php endif; ?>
+                                    <?php if ($precioOf > 0): ?>
+                                        <span class="price-current">$<?= number_format($precioOf, 2) ?></span>
+                                    <?php elseif ($precioReg > 0): ?>
+                                        <span class="price-current">$<?= number_format($precioReg, 2) ?></span>
+                                    <?php endif; ?>
+                                </div>
+                                <?php if ($ahorroMonto): ?>
+                                    <span class="price-savings-label">Ahorras <?= $ahorroMonto ?></span>
+                                <?php endif; ?>
+                            </div>
+                            <?php endif; ?>
+                            <a href="<?= h($waCardUrl) ?>" target="_blank" rel="noopener noreferrer" class="catalog-card-btn-compact">
+                                Agendar <?= $waSvg ?>
+                            </a>
+                        </div>
+
+                    </div>
+                <?php endforeach; ?>
+                </div>
+            </div>
+        </section>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Promotion Card Structure**
+
+Okay, I've started analyzing the structure of `laesh-swbldi/website/sections/promociones.php`. I've isolated the promotion card's core components after the first depuration step, so I now see it's down to just the day of the week label and background image.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.106716756s
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:15 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `cache_renew.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+#!/usr/bin/env php
+<?php
+/**
+ * cache_renew.php — Renovación Diaria de Caché L2 (OPcache PHP File Store)
+ *
+ * Ejecutado automáticamente a las 05:00 AM por cron (KVM2):
+ *   0 5 * * * www-data php8.3 /opt/laesh/www/laesh-swbldi/crons/cache_renew.php >> /opt/laesh/logs/cache_renew.log 2>&1
+ *
+ * Flujo:
+ *   1. Limpia todos los archivos de caché del directorio /opt/laesh/cache/ (PrivateTmp-safe)
+ *   2. Calienta los 4 datasets directamente desde MariaDB
+ *   3. Los compila en OPcache para que el primer request HTTP del día
+ *      sea instantáneo (warm cache, zero-latency start of day).
+ *
+ * Importante: ejecutar con el mismo usuario que PHP-FPM (www-data) para que los
+ * permisos del directorio /opt/laesh/cache/ sean consistentes.
+ */
+declare(strict_types=1);
+
+$start = microtime(true);
+
+// Bootstrap ANTES del primer echo — evita "headers already sent" en commons.php
+// commons.php llama header()/session_start(); si hay output previo, PHP emite warnings.
+define('APP_ENV', 'prod');
+ob_start();
+require_once __DIR__ . '/../commons/autoload.php';
+require_once __DIR__ . '/../commons/commons.php';
+ob_end_clean();
+
+echo "[" . date('Y-m-d H:i:s') . "] LAESH Cache Renew — Iniciando...\n";
+
+use Common\Cache;
+
+// 1. Limpiar todo el caché existente
+Cache::init('', APP_ENV);
+Cache::clear();
+echo "[" . date('H:i:s') . "] Cache L2 purgado (todos los archivos eliminados).\n";
+
+// 2. Conectar a MariaDB, depurar JTIs expirados y calentar los 4 datasets
+$db = Flight::db();
+$errors = [];
+
+// 20. Depuración de JTIs expirados en MariaDB (mantenimiento diario de tokens)
+try {
+    $deletedJtis = $db->exec("DELETE FROM jwt_jti_registry WHERE expires_at < UNIX_TIMESTAMP()");
+    echo "[" . date('H:i:s') . "] ✓ Purga de JTIs expirados en BD ({$deletedJtis} registros eliminados).\n";
+} catch (Throwable $e) {
+    echo "[" . date('H:i:s') . "] ⚠ Purga de JTIs expirados omitida/falló: " . $e->getMessage() . "\n";
+}
+
+// 2a. configuraciones
+try {
+    $configRaw = $db->query("SELECT clave, valor FROM configuraciones")->fetchAll(PDO::FETCH_KEY_PAIR) ?: [];
+    Cache::set(Cache::KEY_CFG, $configRaw);
+    echo "[" . date('H:i:s') . "] ✓ KEY_CFG calentado (" . count($configRaw) . " claves).\n";
+} catch (Throwable $e) {
+    $errors[] = "KEY_CFG: " . $e->getMessage();
+    echo "[" . date('H:i:s') . "] ✗ KEY_CFG FALLÓ: " . $e->getMessage() . "\n";
+}
+
+// 2b. web_contenidos
+try {
+    $cmsRaw = [];
+    foreach ($db->query("SELECT seccion, subseccion, clave, valor FROM web_contenidos ORDER BY id")->fetchAll(PDO::FETCH_ASSOC) as $row) {
+        $cmsRaw[$row['seccion']][$row['subseccion']][$row['clave']] = $row['valor'];
+    }
+    Cache::set(Cache::KEY_CMS, $cmsRaw);
+    $totalRows = array_sum(array_map(fn($s) => array_sum(array_map('count', $s)), $cmsRaw));
+    echo "[" . date('H:i:s') . "] ✓ KEY_CMS calentado (~{$totalRows} entradas).\n";
+} catch (Throwable $e) {
+    $errors[] = "KEY_CMS: " . $e->getMessage();
+    echo "[" . date('H:i:s') . "] ✗ KEY_CMS FALLÓ: " . $e->getMessage() . "\n";
+}
+
+// 2c. Árbol de estudios clínicos
+try {
+    $cg = [];
+    $treeRows = $db->query("
+        SELECT g.id as grupo_id, g.titulo as grupo_titulo,
+               c.id as cat_id, c.nombre as cat_nombre,
+               e.clave_interna, e.nombre as estudio_nombre,
+               e.tiempo_procesamiento, e.muestra_requerida, e.preparacion
+        FROM catalogo_grupos g
+        JOIN catalogo_categorias c ON c.grupo_id = g.id
+        JOIN catalogo_estudios e ON e.categoria_id = c.id
+        WHERE e.activo = 1
+        ORDER BY g.orden ASC, c.orden ASC, e.id ASC
+    ")->fetchAll(PDO::FETCH_ASSOC);
+
+    $gMap = []; $gIdxMap = []; $currGIdx = 0;
+    foreach ($treeRows as $r) {
+        $gid = (int)$r['grupo_id'];
+        if (!isset($gIdxMap[$gid])) {
+            $currGIdx++;
+            if ($currGIdx > 4) break;
+            $gIdxMap[$gid] = $currGIdx;
+            $cg[$currGIdx] = ['titulo' => $r['grupo_titulo'], 'fichas' => []];
+        }
+        $gi = $gIdxMap[$gid]; $catId = (int)$r['cat_id'];
+        if (!isset($gMap[$gid][$catId])) {
+            $gMap[$gid][$catId] = count($cg[$gi]['fichas']);
+            $cg[$gi]['fichas'][] = ['cat' => $r['cat_nombre'], 'items' => []];
+        }
+        $cPos = $gMap[$gid][$catId];
+        $cg[$gi]['fichas'][$cPos]['items'][] = [
+            'clave_interna'        => $r['clave_interna'],
+            'nombre'               => $r['estudio_nombre'],
+            'tiempo_procesamiento' => $r['tiempo_procesamiento'],
+            'muestra_requerida'    => $r['muestra_requerida'],
+            'preparacion'          => $r['preparacion'],
+        ];
+    }
+    Cache::set(Cache::KEY_TREE, $cg);
+    echo "[" . date('H:i:s') . "] ✓ KEY_TREE calentado (" . count($treeRows) . " estudios en " . count($cg) . " abanicos).\n";
+} catch (Throwable $e) {
+    $errors[] = "KEY_TREE: " . $e->getMessage();
+    echo "[" . date('H:i:s') . "] ✗ KEY_TREE FALLÓ: " . $e->getMessage() . "\n";
+}
+
+// 2d. Promociones vigentes
+try {
+    $promos = $db->query(
+        "SELECT cp.id, cp.dia_semana, cp.nombre_oferta, cp.subtitulo, cp.descripcion,
+                cp.ayuno, cp.tiempo_entrega, cp.precio_regular, cp.precio_oferta,
+                cp.imagen_fondo, cp.activo,
+                ce.clave_interna, ce.muestra_requerida, ce.tiempo_procesamiento, ce.preparacion,
+                cc.nombre as categoria_nombre
+         FROM catalogo_promociones cp
+         LEFT JOIN catalogo_estudios ce ON cp.estudio_id = ce.id
+         LEFT JOIN catalogo_categorias cc ON ce.categoria_id = cc.id
+         WHERE cp.activo = 1
+         ORDER BY cp.orden ASC, cp.id ASC"
+    )->fetchAll(PDO::FETCH_ASSOC);
+    Cache::set(Cache::KEY_PROMOS, $promos);
+    echo "[" . date('H:i:s') . "] ✓ KEY_PROMOS calentado (" . count($promos) . " promociones activas).\n";
+} catch (Throwable $e) {
+    $errors[] = "KEY_PROMOS: " . $e->getMessage();
+    echo "[" . date('H:i:s') . "] ✗ KEY_PROMOS FALLÓ: " . $e->getMessage() . "\n";
+}
+
+// 3. Resumen
+$elapsed = round((microtime(true) - $start) * 1000, 2);
+if (empty($errors)) {
+    echo "[" . date('H:i:s') . "] ✅ Renovación completa en {$elapsed} ms. 4/4 keys calentadas.\n";
+    exit(0);
+} else {
+    echo "[" . date('H:i:s') . "] ⚠ Renovación parcial ({$elapsed} ms). Errores: " . count($errors) . "\n";
+    exit(1);
+}
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:15 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `promo`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:15 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ckeditor-init.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L99-219)</summary>
+
+**Path:** `Unknown file`
+
+```
+                CK.List, CK.TodoList,
+                CK.Indent, CK.IndentBlock,
+                CK.Link, CK.Table, CK.MediaEmbed, CK.HorizontalLine,
+                CK.SourceEditing, CK.GeneralHtmlSupport, CK.Style
+            ],
+            toolbar: {
+                items: [
+                    'sourceEditing', '|',
+                    'heading', 'style', '|',
+                    'bold', 'italic', 'underline', 'strikethrough', 'highlight', '|',
+                    'fontFamily', 'fontSize', 'fontColor', 'fontBackgroundColor', '|',
+                    'alignment', '|',
+                    'bulletedList', 'numberedList', 'todoList', '|',
+                    'outdent', 'indent', '|',
+                    'link', 'insertTable', 'mediaEmbed', 'horizontalLine', '|',
+                    'undo', 'redo'
+                ]
+            },
+            initialData: dataEl.value
+        };
+
+        CK.ClassicEditor.create(mountEl, editorConfig)
+            .then(function (editor) {
+                _ckState[globalKey] = editor;
+                window[globalKey]   = editor;
+
+                // Sincronizar con el textarea oculto para que onFieldChange() del CMS capte los cambios
+                editor.model.document.on('change:data', function () {
+                    dataEl.value = editor.getData();
+                    dataEl.dispatchEvent(new Event('input', { bubbles: true }));
+                });
+            })
+            .catch(function (err) {
+                console.error('[LAESH CMS] Falló CKEditor en ' + mountId + ':', err);
+                _ckState[globalKey] = null;
+                // Si falla, limpiar el montaje y mostrar el textarea crudo
+                mountEl.style.display = 'none';
+                dataEl.classList.remove('ck5-hidden-data');
+                dataEl.style.display  = 'block';
+            });
+    }
+
+    function _initQsEditors() {
+        setTimeout(function () {
+            _createEditorNoMedia('ck-ficha4',   'ck-ficha4-data',   '_ckFicha4', false);
+            _createEditorNoMedia('ck-historia', 'ck-historia-data', '_ckHistoria', false);
+            _createEditorNoMedia('ck-mision',   'ck-mision-data',   '_ckMision', false);
+            _createEditorNoMedia('ck-vision',   'ck-vision-data',   '_ckVision', false);
+        }, 150);
+    }
+
+    function _initEspecialidadesEditors() {
+        setTimeout(function () {
+            for (var i = 1; i <= 16; i++) {
+                var mId = 'ck-carousel-' + i;
+                var dId = 'ck-carousel-' + i + '-data';
+                if (document.getElementById(mId) && document.getElementById(dId)) {
+                    _createEditorNoMedia(mId, dId, '_ckCarousel' + i, false);
+                }
+            }
+        }, 150);
+    }
+
+    function _initAvisoPrivacidadEditor() {
+        setTimeout(function () {
+            if (document.getElementById('ck-aviso-privacidad') && document.getElementById('ck-aviso-privacidad-data')) {
+                _createEditorNoMedia('ck-aviso-privacidad', 'ck-aviso-privacidad-data', '_ckAvisoPrivacidad', false);
+            }
+        }, 150);
+    }
+
+    function _initVideoPromoEditor() {
+        setTimeout(function () {
+            if (document.getElementById('ck-video-promo') && document.getElementById('ck-video-promo-data')) {
+                _createEditor('ck-video-promo', 'ck-video-promo-data', '_ckVideoPromo');
+            }
+        }, 150);
+    }
+
+    function _initFooterEditor() {
+        setTimeout(function () {
+            if (document.getElementById('ck-footer') && document.getElementById('ck-footer-data')) {
+                _createEditorNoMedia('ck-footer', 'ck-footer-data', '_ckFooter', false);
+            }
+        }, 150);
+    }
+
+    function _lockTextContent(editor) {
+        var viewDoc = editor.editing.view.document;
+        viewDoc.on('keydown', function(evt, data) {
+            var keyCode = data.keyCode;
+            var domEvt  = data.domEvent;
+
+            // Permitir combinaciones de navegación con Ctrl/Cmd/Alt excepto V (pegar) y X (cortar)
+            if (domEvt.ctrlKey || domEvt.metaKey || domEvt.altKey) {
+                var keyChar = String.fromCharCode(keyCode).toLowerCase();
+                if (keyChar === 'v' || keyChar === 'x') {
+                    data.preventDefault();
+                    evt.stop();
+                }
+                return;
+            }
+
+            // Permitir teclas de selección y navegación (Flechas, Shift, Tab, Home, End, PageUp/Down, CapsLock)
+            var allowedKeys = [9, 16, 17, 18, 20, 33, 34, 35, 36, 37, 38, 39, 40];
+            if (allowedKeys.indexOf(keyCode) !== -1) {
+                return;
+            }
+
+            // Bloquear edición de caracteres, borrado (Backspace/Delete) y saltos de línea (Enter)
+            data.preventDefault();
+            evt.stop();
+        }, { priority: 'highest' });
+
+        editor.editing.view.document.on('clipboardInput', function(evt) {
+            evt.stop();
+        }, { priority: 'highest' });
+
+        editor.editing.view.document.on('drop', function(evt) {
+            evt.stop();
+        }, { priority: 'highest' });
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ckeditor-init.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L219-279)</summary>
+
+**Path:** `Unknown file`
+
+```
+        }, { priority: 'highest' });
+    }
+
+    function _createEditorNoMedia(mountId, dataId, globalKey, isLocked) {
+        if (_ckState[globalKey]) return;
+        _ckState[globalKey] = 'pending';
+
+        var mountEl = document.getElementById(mountId);
+        var dataEl  = document.getElementById(dataId);
+
+        if (!mountEl || !dataEl || typeof CKEDITOR === 'undefined') {
+            _ckState[globalKey] = null;
+            return;
+        }
+
+        var CK = CKEDITOR;
+        
+        var laeshColors = [
+            { color: '#0052B7', label: 'Azul LAESH Principal' },
+            { color: '#71CA11', label: 'Verde LAESH Principal' },
+            { color: '#A3C912', label: 'Verde Acento' },
+            { color: '#CCE7F5', label: 'Azul Claro (Fondo)' },
+            { color: '#0f172a', label: 'Texto Oscuro' },
+            { color: '#64748b', label: 'Texto Secundario' },
+            { color: '#ffffff', label: 'Blanco' },
+            { color: '#000000', label: 'Negro' }
+        ];
+
+        var editorConfig = {
+            licenseKey: 'GPL',
+            fontColor: { 
+                colors: laeshColors,
+                documentColors: 0 
+            },
+            fontBackgroundColor: { 
+                colors: laeshColors,
+                documentColors: 0 
+            },
+            fontFamily: {
+                options: [
+                    'default',
+                    'Arial, Helvetica, sans-serif',
+                    'Cabin, sans-serif',
+                    'Courier New, Courier, monospace',
+                    'Georgia, serif',
+                    'Gill Sans, sans-serif',
+                    'Mosquito Std Black, sans-serif',
+                    'Tahoma, Geneva, sans-serif',
+                    'Times New Roman, Times, serif',
+                    'Trebuchet MS, Helvetica, sans-serif',
+                    'Verdana, Geneva, sans-serif'
+                ],
+                supportAllValues: true
+            },
+            fontSize: {
+                options: [
+                    'default',
+                    9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 24, 28, 32, 36
+                ],
+                supportAllValues: true
+            },
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ckeditor-init.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L280-349)</summary>
+
+**Path:** `Unknown file`
+
+```
+            style: {
+                definitions: [
+                    { name: 'Subtítulo (Azul)', element: 'h3', classes: ['acerca-h3b'] },
+                    { name: 'Texto Destacado', element: 'p', classes: ['faq-p--primary'] },
+                    { name: 'Texto Secundario', element: 'p', classes: ['faq-p--tail'] },
+                    { name: 'Texto Muted', element: 'p', classes: ['aviso-p--muted'] },
+                    { name: 'Firma / Highlight', element: 'strong', classes: ['txt-main'] }
+                ]
+            },
+            htmlSupport: {
+                allow: [
+                    {
+                        name: /.*/,
+                        attributes: true,
+                        classes: true,
+                        styles: true
+                    }
+                ]
+            },
+            plugins: [
+                CK.Essentials, CK.Paragraph, CK.Heading,
+                CK.Bold, CK.Italic, CK.Underline, CK.Strikethrough,
+                CK.Font, CK.Highlight, CK.Alignment,
+                CK.List, CK.TodoList,
+                CK.Indent, CK.IndentBlock,
+                CK.Table, CK.HorizontalLine,
+                CK.SourceEditing, CK.GeneralHtmlSupport, CK.Style
+            ],
+            toolbar: {
+                items: [
+                    'sourceEditing', '|',
+                    'heading', 'style', '|',
+                    'bold', 'italic', 'underline', 'strikethrough', 'highlight', '|',
+                    'fontFamily', 'fontSize', 'fontColor', 'fontBackgroundColor', '|',
+                    'alignment', '|',
+                    'bulletedList', 'numberedList', 'todoList', '|',
+                    'outdent', 'indent', '|',
+                    'insertTable', 'horizontalLine', '|',
+                    'undo', 'redo'
+                ]
+            },
+            initialData: dataEl.value
+        };
+
+        CK.ClassicEditor.create(mountEl, editorConfig)
+            .then(function (editor) {
+                _ckState[globalKey] = editor;
+                window[globalKey]   = editor;
+
+                if (isLocked) {
+                    _lockTextContent(editor);
+                }
+
+                editor.model.document.on('change:data', function () {
+                    dataEl.value = editor.getData();
+                    dataEl.dispatchEvent(new Event('input', { bubbles: true }));
+                });
+            })
+            .catch(function (err) {
+                console.error('[LAESH CMS] Falló CKEditor en ' + mountId + ':', err);
+                _ckState[globalKey] = null;
+                mountEl.style.display = 'none';
+                dataEl.classList.remove('ck5-hidden-data');
+                dataEl.style.display  = 'block';
+            });
+    }
+
+    function _initPromocionesEditors() {
+        setTimeout(function () {
+            for (var i = 1; i <= 7; i++) {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ckeditor-init.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L349-409)</summary>
+
+**Path:** `Unknown file`
+
+```
+            for (var i = 1; i <= 7; i++) {
+                // 1. Título Superior de la Ficha: Editable en contenido + estilo RTE
+                var mDay = 'ck-promo-day-' + i;
+                var dDay = 'ck-promo-day-' + i + '-data';
+                if (document.getElementById(mDay) && document.getElementById(dDay)) {
+                    _createEditorNoMedia(mDay, dDay, '_ckPromoDay' + i, false);
+                }
+
+                // 2. Nombre del Estudio: Texto jalado de BD (bloqueado caracteres) + estilo RTE editable
+                var mTitle = 'ck-promo-title-' + i;
+                var dTitle = 'ck-promo-title-' + i + '-data';
+                if (document.getElementById(mTitle) && document.getElementById(dTitle)) {
+                    _createEditorNoMedia(mTitle, dTitle, '_ckPromoTitle' + i, true);
+                }
+
+                // 3. Subtítulo / Categoría: Texto jalado de BD (bloqueado caracteres) + estilo RTE editable
+                var mSub = 'ck-promo-sub-' + i;
+                var dSub = 'ck-promo-sub-' + i + '-data';
+                if (document.getElementById(mSub) && document.getElementById(dSub)) {
+                    _createEditorNoMedia(mSub, dSub, '_ckPromoSub' + i, true);
+                }
+
+                // 4. Indicaciones de Ayuno: Texto jalado de BD (bloqueado caracteres) + estilo RTE editable
+                var mAyuno = 'ck-promo-ayuno-' + i;
+                var dAyuno = 'ck-promo-ayuno-' + i + '-data';
+                if (document.getElementById(mAyuno) && document.getElementById(dAyuno)) {
+                    _createEditorNoMedia(mAyuno, dAyuno, '_ckPromoAyuno' + i, true);
+                }
+
+                // 5. Tiempo de Entrega: Texto jalado de BD (bloqueado caracteres) + estilo RTE editable
+                var mTiempo = 'ck-promo-tiempo-' + i;
+                var dTiempo = 'ck-promo-tiempo-' + i + '-data';
+                if (document.getElementById(mTiempo) && document.getElementById(dTiempo)) {
+                    _createEditorNoMedia(mTiempo, dTiempo, '_ckPromoTiempo' + i, true);
+                }
+
+                // 6. Descripción Libre / Detalle: Editable en contenido + estilo RTE
+                var mDesc = 'ck-promo-desc-' + i;
+                var dDesc = 'ck-promo-desc-' + i + '-data';
+                if (document.getElementById(mDesc) && document.getElementById(dDesc)) {
+                    _createEditorNoMedia(mDesc, dDesc, '_ckPromoDesc' + i, false);
+                }
+
+                // 8. Muestra Requerida: editable · guarda en web_contenidos vía muestra{N}__texto
+                var mMuestra = 'ck-muestra-' + i;
+                var dMuestra = 'ck-muestra-' + i + '-data';
+                if (document.getElementById(mMuestra) && document.getElementById(dMuestra)) {
+                    _createEditorNoMedia(mMuestra, dMuestra, '_ckMuestra' + i, false);
+                }
+            }
+        }, 150);
+    }
+
+    function _observePanel(panelId, initFn) {
+        var panel = document.getElementById(panelId);
+        if (!panel) return;
+        if (panel.classList.contains('active')) {
+            initFn();
+        } else {
+            var obs = new MutationObserver(function (mutations) {
+                mutations.forEach(function (m) {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Editor Initialization**
+
+I've been examining the editor initialization within `ckeditor-init.js`. I've noted that `_initPromocionesEditors` currently creates seven editors per card: `ck-promo-day-X`, `ck-promo-title-X`, `ck-promo-sub-X`, `ck-promo-ayuno-X`, `ck-promo-tiempo-X`, `ck-promo-desc-X`, and `ck-muestra-X`. I'm now focused on how to reduce this number.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.078177742s
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:15 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `promo`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:15 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L149-299)</summary>
+
+**Path:** `Unknown file`
+
+```
+        if (autocompleteInput) {
+            autocompleteInput.value = (opt && opt.value) ? opt.text : '';
+        }
+    }
+});
+
+/* Buscador Autocomplete Interactivo para Promociones (Segunda opción de búsqueda) */
+document.addEventListener('input', function(e) {
+    if (e.target && e.target.classList.contains('promo-autocomplete-input')) {
+        var input = e.target;
+        var cardId = input.getAttribute('data-card-id');
+        var query = input.value.trim().toLowerCase();
+        var suggestionsPanel = document.getElementById('promo-suggestions-' + cardId);
+        var select = document.getElementById('promo-select-' + cardId);
+
+        if (!suggestionsPanel || !select) return;
+
+        if (query.length === 0) {
+            suggestionsPanel.style.display = 'none';
+            suggestionsPanel.innerHTML = '';
+            return;
+        }
+
+        var matches = [];
+        for (var i = 0; i < select.options.length; i++) {
+            var opt = select.options[i];
+            if (!opt.value) continue;
+            var text = opt.text.toLowerCase();
+            var nombre = (opt.getAttribute('data-nombre') || '').toLowerCase();
+
+            if (text.indexOf(query) !== -1 || nombre.indexOf(query) !== -1) {
+                matches.push({
+                    val: opt.value,
+                    text: opt.text,
+                    categoria: opt.getAttribute('data-categoria') || ''
+                });
+            }
+        }
+
+        if (matches.length === 0) {
+            suggestionsPanel.innerHTML = '<div style="padding:8px 12px; font-size:0.8rem; color:#64748b; font-style:italic;">No se encontraron estudios coincidentes</div>';
+            suggestionsPanel.style.display = 'block';
+            return;
+        }
+
+        var html = '';
+        matches.forEach(function(m) {
+            html += '<div class="promo-suggestion-item" data-val="' + m.val + '" data-card-id="' + cardId + '" style="padding:8px 12px; font-size:0.82rem; cursor:pointer; border-bottom:1px solid #f1f5f9; transition:background 0.15s;">' +
+                    '<strong style="color:#0052B7;">' + m.text + '</strong>' +
+                    (m.categoria ? '<br><small style="color:#64748b;">' + m.categoria + '</small>' : '') +
+                    '</div>';
+        });
+
+        suggestionsPanel.innerHTML = html;
+        suggestionsPanel.style.display = 'block';
+    }
+});
+
+document.addEventListener('click', function(e) {
+    var item = e.target.closest('.promo-suggestion-item');
+    if (item) {
+        var val = item.getAttribute('data-val');
+        var cardId = item.getAttribute('data-card-id');
+        var select = document.getElementById('promo-select-' + cardId);
+        var suggestionsPanel = document.getElementById('promo-suggestions-' + cardId);
+
+        if (select && val) {
+            select.value = val;
+            select.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+
+        if (suggestionsPanel) {
+            suggestionsPanel.style.display = 'none';
+        }
+    } else if (!e.target.closest('.promo-autocomplete-input')) {
+        document.querySelectorAll('.promo-suggestions-panel').forEach(function(panel) {
+            panel.style.display = 'none';
+        });
+    }
+});
+
+/* gestion-web.js — lógica del portal de gestión web CMS (extraído de gestion-web.html) */
+        const panelLabelsGestion = {
+            'hero': '1. Banner Principal',
+            'quienes-somos': '2. Quiénes somos',
+            'especialidades': '3. Estudios',
+            'promociones': '4. Promociones Vigentes',
+            'calidad': '5. Calidad e Instalaciones',
+            'ubicacion': '6. Ubicación y Contacto',
+            'footer': '7. Pie de Página',
+            'aviso-privacidad': '8. Aviso de Privacidad',
+            'video-promo': '9. Video promo',
+            'configuracion-general': '10. Ordenamiento',
+            'seo': '11. Metadatos'
+        };
+
+        function showPanel(name) {
+            document.querySelectorAll('.cms-panel').forEach(p => p.classList.remove('active'));
+            const targetPanel = document.getElementById('panel-' + name);
+            if (targetPanel) targetPanel.classList.add('active');
+
+            // Sincronizar pestaña superior activa + ARIA (A-01)
+            document.querySelectorAll('.cms-tab').forEach(function(t) {
+                t.classList.remove('active');
+                t.setAttribute('aria-selected', 'false');
+                t.setAttribute('tabindex', '-1');
+            });
+            const targetTab = document.getElementById('tab-' + name);
+            if (targetTab) {
+                targetTab.classList.add('active');
+                targetTab.setAttribute('aria-selected', 'true');
+                targetTab.setAttribute('tabindex', '0');
+            }
+
+            // Actualizar breadcrumb
+            const bc = document.getElementById('header-bc-current');
+            if (bc && panelLabelsGestion[name]) bc.textContent = panelLabelsGestion[name];
+        }
+
+        function activateTab(el) {
+            document.querySelectorAll('.cms-tab').forEach(function(t) {
+                t.classList.remove('active');
+                t.setAttribute('aria-selected', 'false');
+                t.setAttribute('tabindex', '-1');
+            });
+            el.classList.add('active');
+            el.setAttribute('aria-selected', 'true');
+            el.setAttribute('tabindex', '0');
+        }
+
+        function activateNav(el) {
+            document.querySelectorAll('.sidebar .nav-item').forEach(n => n.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        
+        // Datos de los 5 Hero Slides del Banner Principal (#inicio)
+        // img: '' — las previews se muestran server-side en cada tarjeta PHP; el selector JS queda vacío sin fallback
+        const heroDatos = {
+            1: { badge: "Bienvenido a Nuestra Institución", title: "Bienvenido a LAESH® — Diagnósticos de Confianza", desc: "Trabajamos para proporcionar información diagnóstica confiable que ayude al médico a tomar mejores decisiones y al paciente a recibir atención oportuna.", btnText: "Conoce los Servicios", btnLink: "#especialidades", img: '' },
+            2: { badge: "25 Años de Experiencia Clínica", title: "Laboratorio de Especialidades Hematológicas", desc: "Ofrecemos servicios de laboratorio clínico de alta especialización y rigor científico, comprometidos con la salud y tranquilidad de nuestra comunidad.", btnText: "Ver Especialidades", btnLink: "#especialidades", img: '' },
+            3: { badge: "Excelencia y Calidad Certificada", title: "Resultados Confiables para Cuidar tu Salud", desc: "Detrás de cada análisis existe una decisión médica crucial. En LAESH® la precisión diagnóstica es nuestro compromiso inquebrantable.", btnText: "Conocer Calidad", btnLink: "#calidad", img: '' },
+            4: { badge: "Tarifas y Paquetes Preferenciales", title: "Promociones y Check-Ups Médicos 2026", desc: "Descubre nuestros paquetes preventivos y tarifas especiales diseñados para el cuidado integral de tu salud y la de toda tu familia.", btnText: "Ver Promociones", btnLink: "#promociones", img: '' },
+            5: { badge: "Atención Presencial y Horarios", title: "Ubicación, Horarios de Atención y Contacto", desc: "Azucenas #8, Fracc. Jardines del Sur, Huajuapan de León, Oax. Lun a Sáb: 7:00 a.m. – 9:00 p.m. | Dom: 7:00 a.m. – 3:00 p.m. | Tel: 953 688 7694", btnText: "Ver Ubicación", btnLink: "#ubicacion", img: '' }
+        };
+
+        function cargarHeroSlideSeleccionado(val) {
+            const d = heroDatos[val];
+            if (d) {
+                if (document.getElementById('input-hero-badge')) document.getElementById('input-hero-badge').value = d.badge || '';
+                if (document.getElementById('input-hero-title')) document.getElementById('input-hero-title').value = d.title || '';
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L99-153)</summary>
+
+**Path:** `Unknown file`
+
+```
+            { key: '_ckPromoAyuno' + cardId,  dataId: 'ck-promo-ayuno-' + cardId + '-data',  val: ayuno },
+            { key: '_ckPromoTiempo' + cardId, dataId: 'ck-promo-tiempo-' + cardId + '-data', val: tiempo },
+            { key: '_ckPromoDesc' + cardId,   dataId: 'ck-promo-desc-' + cardId + '-data',   val: detalle }
+        ];
+
+        keys.forEach(function(item) {
+            var el = document.getElementById(item.dataId);
+            if (window[item.key] && typeof window[item.key].setData === 'function') {
+                var oldHtml = window[item.key].getData();
+                var newHtml = item.val;
+                
+                if (oldHtml && item.val) {
+                    var temp = document.createElement('div');
+                    temp.innerHTML = oldHtml;
+                    
+                    var tagsOpen = '';
+                    var tagsClose = '';
+                    var curr = temp;
+                    
+                    while (curr.firstElementChild && curr.childElementCount === 1) {
+                        curr = curr.firstElementChild;
+                        var clone = curr.cloneNode(false);
+                        var outer = clone.outerHTML;
+                        var tagName = curr.nodeName.toLowerCase();
+                        
+                        var voidElements = ['area','base','br','col','embed','hr','img','input','link','meta','param','source','track','wbr'];
+                        if (voidElements.indexOf(tagName) !== -1) break;
+                        
+                        var closeTag = '</' + tagName + '>';
+                        if (outer.endsWith(closeTag)) {
+                            tagsOpen += outer.substring(0, outer.length - closeTag.length);
+                        } else {
+                            tagsOpen += outer.replace(new RegExp('</' + tagName + '>$', 'i'), '');
+                        }
+                        tagsClose = closeTag + tagsClose;
+                    }
+                    
+                    if (tagsOpen || tagsClose) {
+                        newHtml = tagsOpen + item.val + tagsClose;
+                    }
+                }
+                
+                window[item.key].setData(newHtml);
+            } else if (el) {
+                el.value = item.val;
+            }
+        });
+
+        // Sincronizar también la caja del buscador Autocomplete de la derecha
+        var autocompleteInput = document.getElementById('promo-autocomplete-' + cardId);
+        if (autocompleteInput) {
+            autocompleteInput.value = (opt && opt.value) ? opt.text : '';
+        }
+    }
+});
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion-web.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L49-104)</summary>
+
+**Path:** `Unknown file`
+
+```
+    var replacement = openTag + selectedText + closeTag;
+    input.value = input.value.substring(0, start) + replacement + input.value.substring(end);
+    input.focus();
+    input.setSelectionRange(start + openTag.length, start + openTag.length + selectedText.length);
+};
+
+window.formatRteBlock = function(btn, blockTag) {
+    var fieldGroup = btn.closest('.field-group');
+    var input = fieldGroup ? fieldGroup.querySelector('textarea') : null;
+    if (!input) return;
+
+    var start = input.selectionStart;
+    var end = input.selectionEnd;
+    var selectedText = input.value.substring(start, end);
+
+    if (!selectedText) selectedText = 'Elemento de lista';
+
+    var replacement = '<' + blockTag + '>\n  <li>' + selectedText + '</li>\n</' + blockTag + '>';
+    input.value = input.value.substring(0, start) + replacement + input.value.substring(end);
+    input.focus();
+};
+
+window.clearRteFormat = function(btn) {
+    var fieldGroup = btn.closest('.field-group');
+    var input = fieldGroup ? fieldGroup.querySelector('input[type="text"], textarea') : null;
+    if (!input) return;
+
+    var text = input.value;
+    input.value = text.replace(/<[^>]*>/g, '');
+};
+
+/* Auto-poblar datos per se desde MariaDB al cambiar de Estudio Asociado en el catálogo */
+document.addEventListener('change', function(e) {
+    if (e.target && e.target.classList.contains('promo-estudio-select')) {
+        var select = e.target;
+        var cardId = select.getAttribute('data-card-id');
+        var opt = select.options[select.selectedIndex];
+        if (!opt || !cardId) return;
+
+        var nombre    = opt.getAttribute('data-nombre') || '';
+        var categoria = opt.getAttribute('data-categoria') || '';
+        var descBreve = opt.getAttribute('data-desc_breve') || '';
+        var subtitulo = categoria + (descBreve ? ' · ' + descBreve : '');
+        var ayuno     = opt.getAttribute('data-ayuno') || '';
+        var tiempo    = opt.getAttribute('data-tiempo') || '';
+        var detalle   = opt.getAttribute('data-detalle') || '';
+
+        var keys = [
+            { key: '_ckPromoTitle' + cardId,  dataId: 'ck-promo-title-' + cardId + '-data',  val: nombre },
+            { key: '_ckPromoSub' + cardId,    dataId: 'ck-promo-sub-' + cardId + '-data',    val: subtitulo },
+            { key: '_ckPromoAyuno' + cardId,  dataId: 'ck-promo-ayuno-' + cardId + '-data',  val: ayuno },
+            { key: '_ckPromoTiempo' + cardId, dataId: 'ck-promo-tiempo-' + cardId + '-data', val: tiempo },
+            { key: '_ckPromoDesc' + cardId,   dataId: 'ck-promo-desc-' + cardId + '-data',   val: detalle }
+        ];
+
+        keys.forEach(function(item) {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Event Listener Changes**
+
+I've been reviewing the recent changes, and it's clear that lines 81-229 of `gestion-web.js` were all dedicated to event listeners, specifically for the auto-population of `.promo-estudio-select` and autocomplete suggestions with `.promo-autocomplete-input`. As these elements are no longer in `gestion_web.php`, this section is now obsolete and I need to review removing these lines.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.105272245s
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:16 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:16 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 13 Sept 2026, 9:16 am
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (Low)
+</details>
 
 ---
 
