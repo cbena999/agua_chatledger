@@ -75,4 +75,16 @@ Para la gestión de múltiples localidades o clientes en producción:
 *   **Mandato:** Cada cliente webapp utilizará su propia base de datos aislada (One Database per Client) y se mantendrá una rama Git independiente por cliente (ej. `main` para desarrollo base y `aguad_ac_oferta` para el despliegue del Tenant Tlapa en Host C). Esto garantiza aislamiento completo y simplifica el procedimiento de respaldo y restauración financiera.
 
 ---
-**Nota para Gemini/Claude**: El incumplimiento de estas normas de escapado, encapsulamiento y estándares visuales se considera una deuda técnica crítica que debe corregirse proactivamente en cada refactorización.
+---
+
+## ⚡ 9. Ejecución Limpia de Herramientas y Consola (Cero Scripts Inline en Terminal)
+
+Para evitar que los diálogos de seguridad y confirmación de permisos del IDE se desborden con bloques gigantescos e ilegibles de código:
+
+*   **Edición Nativa Obligatoria:** Todas las modificaciones de archivos y código **DEBEN** realizarse a través de las herramientas nativas del asistente (`replace_file_content`, `multi_replace_file_content` o `write_to_file`).
+*   **Prohibición de Parcheo Inline por Terminal:** Queda **estrictamente prohibido** utilizar `run_command` para inyectar scripts inline mediante bloques `cat << 'EOF'`, `sed/awk` complejos o comandos de una sola línea con código embebido (`python3 -c "..."` o `node -e "..."`).
+*   **Separación de Scripts y Ejecución:** Si se requiere ejecutar un script de procesamiento, migración o diagnóstico complejo, se debe escribir primero como un archivo físico en disco (ej. en `scratch/nombre_script.py` o `.sh`) usando `write_to_file`, y luego invocarlo en la terminal con una sola línea limpia (ej. `python3 scratch/nombre_script.py`).
+*   **Comandos Atómicos y Breves:** Toda orden de terminal debe ser concisa, legible y autoexplicativa para facilitar la auditoría instantánea por parte del desarrollador en los modales del IDE.
+
+---
+**Nota para Gemini/Claude**: El incumplimiento de estas normas de escapado, encapsulamiento, estándares visuales y ejecución limpia en consola se considera una deuda técnica crítica que debe corregirse proactivamente en cada refactorización.

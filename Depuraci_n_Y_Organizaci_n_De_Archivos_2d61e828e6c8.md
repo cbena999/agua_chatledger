@@ -7,9 +7,9 @@
 | **Trajectory ID** | `3c8e7b91-f965-47b8-a9cf-d86ede466b60` |
 | **Cascade ID** | `051b99a6-0c2d-4903-b643-2d61e828e6c8` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 122 |
+| **Total Steps** | 145 |
 | **Started** | 16 Sept 2026, 8:31 am |
-| **Completed** | 16 Sept 2026, 9:28 am |
+| **Completed** | 16 Sept 2026, 9:34 pm |
 
 ---
 
@@ -1753,6 +1753,393 @@ node /home/carlos/tools/pdf-renderer/pdf_render.js &lt;input.html&gt; &lt;output
 <section id="sec4"><h2>4. Modelo de Base de Datos</h2><a href="Tecnica_Modelo_Datos.html" style="display:inline-block; margin-top:10px; margin-bottom:20px; color:#2563eb; text-decoration:none; font-weight:600;">→ Ver Modelo de Datos y Base de Datos (ER y DDL)</a></section>
 <!-- ═══════════════ 5. API BACKEND Y NEGOCIO ═══════════════ -->
 <section id="sec5">
+```
+
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+como evitar que salgan tan enormes contenidos en las preguntas/confirmaciones me das tu , anexo imagen 
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `index.php`
+**Language:** php
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
+
+**Status:** Completed
+**Created:** 16 Sept 2026, 9:31 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+The interface displays a large text block because the agent attempted to execute a command that generated extensive output, likely a script or file creation command. The user is requesting a method to prevent these verbose confirmations from appearing.
+
+
+Using native file editing tools like `replace_file_content` and `write_to_file` is the primary solution to avoid large confirmation modals, since they generate clean visual diffs instead of terminal output. For complex scripts, writing the script to a temporary file using `write_to_file` and then executing it via `run_command` with a simple invocation (e.g., `python3 script.py`) is the preferred method. Avoid directly incorporating large code blocks into `run_command` calls.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.558757807s
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+añadela
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `index.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 16 Sept 2026, 9:33 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 16 Sept 2026, 9:33 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `11-estandares-codigo.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# Regla 11: Estándares de Código y Seguridad (Data Hardening)
+
+Esta regla define los estándares mandatorios para la escritura de código PHP y la interacción con la base de datos en el sistema **Agua**, garantizando la seguridad (anti-SQLi) y la portabilidad entre hosts (Host A / Host C).
+
+---
+
+## 🛡️ 1. Escapado Mandatorio de Variables
+
+Toda variable dinámica, externa o proveniente de sesión que sea concatenada dentro de una sentencia SQL **DEBE** ser escapada para prevenir inyecciones SQL y fallos de sintaxis por caracteres especiales (como apóstrofes).
+
+- **Mandato**: Utilizar siempre `$y->real_escape_string($variable)`.
+- **Ejemplo Correcto**:
+  ```php
+  $descripcion_esc = $y->real_escape_string($descripcion);
+  $sql = "INSERT INTO cambios (descripcion) VALUES ('$descripcion_esc')";
+  $y->q($sql);
+  ```
+- **Prohibido**: Concatenar variables directamente sin escape, incluso si provienen de fuentes internas, para evitar fallos en bitácoras de cambios.
+
+---
+
+## 🏗️ 2. Encapsulamiento de Base de Datos (Clase Conexion)
+
+Para asegurar la portabilidad del sistema (especialmente debido a las diferencias de puerto y configuración entre el Host A y el Host C/MariaDB), se prohíbe el uso de métodos directos de `mysqli_`.
+
+- **Mandato**: Toda interacción con la base de datos debe realizarse a través de los métodos de la clase **`config/Conexion.php`**.
+- **Métodos permitidos en lógica de negocio**:
+    - `$y->q($query)`: Ejecución de consultas.
+    - `$y->fetch_array($res)` / `$y->fetch_assoc($res)`: Recuperación de datos.
+    - `$y->num_rows($res)`: Conteo de resultados.
+    - `$y->real_escape_string($string)`: Escapado de datos.
+    - `$y->error()`: Recuperación de mensajes de error del motor.
+    - `$y->insert_id()`: Obtención del último ID generado.
+
+---
+
+## 🚨 3. Manejo de Errores y API Legacy
+
+El sistema Agua V2 en Host C utiliza PHP 7.4.33, lo que invalida el uso de funciones `mysql_*` antiguas.
+
+- **Mandato**: Reemplazar cualquier instancia de `mysql_error()` por **`$y->error()`**.
+- **Contexto**: `mysql_error()` provoca un error fatal en PHP 7+. El método `$y->error()` está mapeado internamente a `mysqli_error($this->link)`, lo que garantiza compatibilidad y registro en los logs de error del servidor.
+
+---
+
+## 📊 4. Auditoría de Cambios (Tabla `cambios`)
+
+Cada vez que se realice una inserción en la tabla de auditoría `cambios`, se debe asegurar que tanto el "antes" como el "después" estén escapados, ya que suelen contener textos descriptivos largos generados dinámicamente.
+
+- **Regla de Oro**: Si el `INSERT INTO cambios` falla, se debe revisar si el mensaje de error está siendo capturado por el Monitor de Fallbacks (`admin/saneamiento/monitor_fallbacks.php`).
+
+## 🎨 6. Centralización de Estilos (Cero CSS/JS Embebidos)
+
+Para preservar la limpieza de las vistas y habilitar la correcta caché de archivos estáticos en el navegador, queda estrictamente prohibido incrustar bloques de estilos `<style>` o reglas CSS en línea (`inline styles`) complejas en las vistas (`views/*.php`) o reportes.
+
+*   **Mandato:** Todo estilo visual nuevo o refactorizado debe alojarse en la hoja de estilos centralizada `/web-assets/css/paxstyle2.css`.
+*   **Versionamiento (Cache-Busting):** Los enlaces de assets estáticos en el layout principal (`index2.php`) deben utilizar marcas de tiempo o versiones para forzar la recarga ante cambios.
+
+---
+
+## 📐 7. Jerarquía Visual y Densidad de Elementos de Formulario
+
+El diseño visual del sistema debe alinearse a la estética **Glassmorphism Híbrido** de Agua V2:
+*   **Densidad y Tamaño:** Mantener labels, inputs y la distribución general de los formularios de manera compacta y legible (heredados de la rama `main`). Los labels agrupadores de sección no deben parecer botones gigantes.
+*   **Alineación de Botones:** En las fichas de información y opciones de pago, los botones de acción principal (como *Pagar* y *Cancelar*) deben alinearse consistentemente (ej. a la izquierda en la sección de Montos/Opciones).
+*   **Iconografía e Iconos SVG:** Se deben evitar emojis tradicionales en favor de iconos limpios o SVG, asegurando que el color de contraste del icono destaque del color de fondo del botón para evitar invisibilidad visual (ej. iconos claros sobre botones de color oscuro y viceversa).
+*   **Marcas de Agua y Contraste:** Las marcas de agua visuales (ej. `tl1.jpg` para el fondo) no deben entorpecer la lectura de la interfaz. Deben limitarse a una opacidad adecuada (ej. 0.35) y cargarse mediante clases CSS dedicadas (`.card-watermark`).
+
+---
+
+## 🗄️ 8. Arquitectura Multi-Cliente (Bases de Datos Aisladas)
+
+Para la gestión de múltiples localidades o clientes en producción:
+*   **Decisión Estratégica:** Se descarta el uso de esquemas con columnas de tipo `tenant_id` sobre una sola base de datos compartida.
+*   **Mandato:** Cada cliente webapp utilizará su propia base de datos aislada (One Database per Client) y se mantendrá una rama Git independiente por cliente (ej. `main` para desarrollo base y `aguad_ac_oferta` para el despliegue del Tenant Tlapa en Host C). Esto garantiza aislamiento completo y simplifica el procedimiento de respaldo y restauración financiera.
+
+---
+**Nota para Gemini/Claude**: El incumplimiento de estas normas de escapado, encapsulamiento y estándares visuales se considera una deuda técnica crítica que debe corregirse proactivamente en cada refactorización.
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Planning to add a new section to the specified markdown file, titled "Clean Tool Execution and Console Usage." This addition emphasizes the mandatory use of native IDE tools for code modifications, explicitly prohibiting inline terminal scripts.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.002293163s
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** CORTEX_STEP_STATUS_ERROR
+**Created:** 16 Sept 2026, 9:33 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+System policy restricts edits to active workspaces. Identified two valid workspaces. The target file resides within a workspace, specifically accessible via a symbolic link. Therefore, the edit can proceed through the symlinked path.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.060746623s
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** CORTEX_STEP_STATUS_ERROR
+**Created:** 16 Sept 2026, 9:33 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 16 Sept 2026, 9:33 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 16 Sept 2026, 9:33 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 16 Sept 2026, 9:33 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `11-estandares-codigo.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L64-90)</summary>
+
+**Path:** `Unknown file`
+
+```
+*   **Alineación de Botones:** En las fichas de información y opciones de pago, los botones de acción principal (como *Pagar* y *Cancelar*) deben alinearse consistentemente (ej. a la izquierda en la sección de Montos/Opciones).
+*   **Iconografía e Iconos SVG:** Se deben evitar emojis tradicionales en favor de iconos limpios o SVG, asegurando que el color de contraste del icono destaque del color de fondo del botón para evitar invisibilidad visual (ej. iconos claros sobre botones de color oscuro y viceversa).
+*   **Marcas de Agua y Contraste:** Las marcas de agua visuales (ej. `tl1.jpg` para el fondo) no deben entorpecer la lectura de la interfaz. Deben limitarse a una opacidad adecuada (ej. 0.35) y cargarse mediante clases CSS dedicadas (`.card-watermark`).
+
+---
+
+## 🗄️ 8. Arquitectura Multi-Cliente (Bases de Datos Aisladas)
+
+Para la gestión de múltiples localidades o clientes en producción:
+*   **Decisión Estratégica:** Se descarta el uso de esquemas con columnas de tipo `tenant_id` sobre una sola base de datos compartida.
+*   **Mandato:** Cada cliente webapp utilizará su propia base de datos aislada (One Database per Client) y se mantendrá una rama Git independiente por cliente (ej. `main` para desarrollo base y `aguad_ac_oferta` para el despliegue del Tenant Tlapa en Host C). Esto garantiza aislamiento completo y simplifica el procedimiento de respaldo y restauración financiera.
+
+---
+---
+
+## ⚡ 9. Ejecución Limpia de Herramientas y Consola (Cero Scripts Inline en Terminal)
+
+Para evitar que los diálogos de seguridad y confirmación de permisos del IDE se desborden con bloques gigantescos e ilegibles de código:
+
+*   **Edición Nativa Obligatoria:** Todas las modificaciones de archivos y código **DEBEN** realizarse a través de las herramientas nativas del asistente (`replace_file_content`, `multi_replace_file_content` o `write_to_file`).
+*   **Prohibición de Parcheo Inline por Terminal:** Queda **estrictamente prohibido** utilizar `run_command` para inyectar scripts inline mediante bloques `cat << 'EOF'`, `sed/awk` complejos o comandos de una sola línea con código embebido (`python3 -c "..."` o `node -e "..."`).
+*   **Separación de Scripts y Ejecución:** Si se requiere ejecutar un script de procesamiento, migración o diagnóstico complejo, se debe escribir primero como un archivo físico en disco (ej. en `scratch/nombre_script.py` o `.sh`) usando `write_to_file`, y luego invocarlo en la terminal con una sola línea limpia (ej. `python3 scratch/nombre_script.py`).
+*   **Comandos Atómicos y Breves:** Toda orden de terminal debe ser concisa, legible y autoexplicativa para facilitar la auditoría instantánea por parte del desarrollador en los modales del IDE.
+
+---
+**Nota para Gemini/Claude**: El incumplimiento de estas normas de escapado, encapsulamiento, estándares visuales y ejecución limpia en consola se considera una deuda técnica crítica que debe corregirse proactivamente en cada refactorización.
+
 ```
 
 </details>
