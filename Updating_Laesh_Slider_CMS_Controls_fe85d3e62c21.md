@@ -7,9 +7,9 @@
 | **Trajectory ID** | `0d8eacd7-d4a8-4cd7-9ef7-2386edbb331c` |
 | **Cascade ID** | `6c5cb2b3-5120-4595-9e04-fe85d3e62c21` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 11581 |
+| **Total Steps** | 11720 |
 | **Started** | 11 Sept 2026, 10:39 am |
-| **Completed** | 17 Sept 2026, 10:24 am |
+| **Completed** | 17 Sept 2026, 11:23 am |
 
 ---
 
@@ -15602,441 +15602,80 @@
 
 ---
 
-## Agent Response
-
-### Thinking
-
-The user is frustrated. The spasm continues despite my fixes. Let me take a completely different approach.
-
-Key insight from user: "despues del espasmo si me da resultados el search autocomplete" - AFTER the spasm, autocomplete DOES give results.
-
-This tells me the spasm is happening AT THE SAME TIME as the autocomplete fetch fires. Let me think about this:
-
-1. User types 2+ chars in `input-buscar-estudio-ficha`
-2. After 300ms debounce, fetch fires to `/laesh/md/estudios/buscar?q=...`
-3. **Spasm occurs**
-4. Results appear in dropdown
-5. The timing points to the spasm coinciding with the dropdown becoming visible right as its content gets populated, which suggests something reacts to that DOM change — possibly the MutationObserver in `medicos-a11y.js` mistakenly treating the dropdown like a modal and trying to trap focus on it.
-
-I really need to actually read the contents of `medicos-a11y.js` rather than guessing, since the user has rejected both prior fixes and I need a new angle — ruling out the storage event loop and the WS htmx trigger as causes.
-
-The user's description that results still appear after the spasm suggests the glitch happens specifically inside `#input-buscar-estudio-ficha` while the autocomplete fetch is running, not in the other patient form fields. That points me toward examining how htmx handles that input during the fetch cycle.
-
-I notice `#form-orden` has an `hx-post` attribute, meaning htmx intercepts its submission, but that shouldn't normally affect plain input events unless htmx's boosting behavior is also active on the page. I should check whether `hx-boost` is set anywhere that could cause it to intercept the autocomplete input unexpectedly.
-
-That search input has no HTMX attributes at all, so HTMX shouldn't be interfering with it directly. I'm wondering if the form's `hx-post` submission is somehow involved, but that doesn't match the spasm behavior. I think I need to actually read `medicos-a11y.js` in full and examine the autocomplete dropdown's HTML structure to figure this out, maybe even approaching it from a live browser debugging angle.
-
-Rather than guessing further, I should try actually visiting the page to observe the focus behavior directly, adding console logging if needed to trace what triggers the spasm. It might help to revisit the screenshots the user shared to better understand what "espasmo/bloqueo" actually looks like on screen, since I've been reasoning abstractly without confirming the visual symptom.
-
-I actually haven't fully read `medicos-a11y.js` yet in this context, so I should go through it properly, along with the complete CSS for the autocomplete, before ruling anything out.
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `medicos-a11y.js`
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 35.252669541s
-- **Model:** Claude Sonnet 4.6 (Thinking)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-/**
- * medicos-a11y.js — Sprint D: Accesibilidad y UX para Portal Médico
- * Corrige: A11Y-01 (focus trap modales), A11Y-05 (keydown nav-items),
- *           UX-01 (confirm dialog), UX-03 (scroll-close dropdowns),
- *           RESP-02 (alinear dropdown al viewport).
- *
- * Depende de: medicos.js (app.js) ya cargado antes de este script.
- * No modifica el DOM principal — solo añade listeners de accesibilidad.
- */
-
-'use strict';
-
-/* ────────────────────────────────────────────────────────────────────────
-   A. Utilidad: Anuncio aria-live (A11Y-04)
-   ──────────────────────────────────────────────────────────────────────── */
-const a11yLive = document.getElementById('a11y-live');
-function announce(msg) {
-    if (!a11yLive) return;
-    /* Reset → assign garantiza que lectores de pantalla relean el mismo texto */
-    a11yLive.textContent = '';
-    requestAnimationFrame(() => { a11yLive.textContent = msg; });
-}
-
-/* ────────────────────────────────────────────────────────────────────────
-   B. A11Y-05 — Enter / Space activan nav-items que usan role="button"
-   ──────────────────────────────────────────────────────────────────────── */
-document.querySelectorAll('[role="button"]').forEach(el => {
-    el.addEventListener('keydown', e => {
-        if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            el.click();
-        }
-    });
-});
-
-/* ────────────────────────────────────────────────────────────────────────
-   C. A11Y-01 — Focus Trap en modales y dropdowns abiertos
-   ──────────────────────────────────────────────────────────────────────── */
-const FOCUSABLE = [
-    'a[href]', 'button:not([disabled])', 'input:not([disabled])',
-    'select:not([disabled])', 'textarea:not([disabled])',
-    '[tabindex]:not([tabindex="-1"])'
-].join(', ');
-
-/**
- * Activa un focus-trap dentro de `container`.
- * Devuelve la función de limpieza que el llamador debe invocar al cerrar.
- * @param {HTMLElement} container
- * @returns {() => void} cleanup
- */
-function trapFocus(container) {
-    const focusables = () => [...container.querySelectorAll(FOCUSABLE)].filter(
-        el => !el.closest('[hidden]') && getComputedStyle(el).display !== 'none'
-    );
-
-    function onKeyDown(e) {
-        if (e.key !== 'Tab') return;
-        const els = focusables();
-        if (!els.length) return;
-        const first = els[0], last = els[els.length - 1];
-        if (e.shiftKey) {
-            if (document.activeElement === first) { e.preventDefault(); last.focus(); }
-        } else {
-            if (document.activeElement === last)  { e.preventDefault(); first.focus(); }
-        }
-    }
-    container.addEventListener('keydown', onKeyDown);
-
-    /* Mover foco al primer checkbox si existe (A11Y-01), si no, al primer enfocable */
-    const checkboxes = container.querySelectorAll('input[type="checkbox"]');
-    if (checkboxes.length) {
-        checkboxes[0].focus();
-    } else {
-        const initials = focusables();
-        if (initials.length) initials[0].focus();
-    }
-
-    return () => container.removeEventListener('keydown', onKeyDown);
-}
-
-/* Observar modales con clase .modal-overlay para activar/desactivar trap */
-const modalRegistry = new Map();   // modal → cleanup fn
-
-function bindModalTrap(modal) {
-    /* A11Y-01: Asegurar atributo aria-modal="true" en diálogos y dropdowns */
-    modal.setAttribute('aria-modal', 'true');
-
-    const observer = new MutationObserver(() => {
-        const isOpen = modal.classList.contains('open') ||
-                       modal.getAttribute('aria-hidden') === 'false' ||
-                       modal.style.display === 'flex' ||
-                       modal.style.display === 'block';
-        if (isOpen && !modalRegistry.has(modal)) {
-            const cleanup = trapFocus(modal);
-            modalRegistry.set(modal, cleanup);
-        } else if (!isOpen && modalRegistry.has(modal)) {
-            modalRegistry.get(modal)();
-            modalRegistry.delete(modal);
-        }
-    });
-    observer.observe(modal, { attributes: true, attributeFilter: ['class', 'style', 'aria-hidden'] });
-}
-
-/* Adjuntar a todos los modales existentes en el portal */
-document.querySelectorAll('.modal-overlay, [role="dialog"]').forEach(bindModalTrap);
-
-/* ────────────────────────────────────────────────────────────────────────
-   D. UX-03 — Scroll-close: cerrar .ficha-dropdown al hacer scroll
-   ──────────────────────────────────────────────────────────────────────── */
-let scrollCloseScheduled = false;
-
-function closeAllFichaDropdowns() {
-    document.querySelectorAll('.ficha-dropdown.open').forEach(dd => {
-        dd.classList.remove('open');
-        /* Devolver aria-expanded al botón disparador si existe */
-        const btn = dd.previousElementSibling || dd.parentElement?.querySelector('[aria-expanded]');
-        if (btn) btn.setAttribute('aria-expanded', 'false');
-    });
-}
-
-document.addEventListener('scroll', () => {
-    if (!scrollCloseScheduled) {
-        scrollCloseScheduled = true;
-        requestAnimationFrame(() => {
-            closeAllFichaDropdowns();
-            scrollCloseScheduled = false;
-        });
-    }
-}, { passive: true, capture: true });
-
-/* ────────────────────────────────────────────────────────────────────────
-   E. RESP-02 — Alinear dropdown al viewport: si el dropdown sobresale
-      por la derecha, aplicar align-right para que quede dentro.
-   ──────────────────────────────────────────────────────────────────────── */
-function alignDropdownToViewport(dropdown) {
-    /* Reset antes de medir */
-    dropdown.classList.remove('align-right');
-    const rect = dropdown.getBoundingClientRect();
-    if (rect.right > (window.innerWidth - 12)) {   /* 12px de margen de seguridad */
-        dropdown.classList.add('align-right');
-    }
-}
-
-/* Interceptar apertura de .ficha-dropdown: reusar el evento que el app principal emite */
-document.addEventListener('click', e => {
-    /* Si el clic fue en/dentro de un .ficha-card-btn o similar que abre un dropdown */
-    const toggle = e.target.closest('[data-ficha-toggle], .ficha-card-btn');
-    if (!toggle) return;
-
-    const dropdown = toggle.closest('.ficha-card-wrap')?.querySelector('.ficha-dropdown')
-                  || document.getElementById(toggle.dataset.fichaTarget || '');
-    if (!dropdown) return;
-
-    /* Pequeño delay para que el dropdown ya esté visible antes de medir */
-    requestAnimationFrame(() => alignDropdownToViewport(dropdown));
-}, { passive: true });
-
-/* ────────────────────────────────────────────────────────────────────────
-   F. UX-01 — Confirm dialog antes de limpiar / borrar destructivo
-   ──────────────────────────────────────────────────────────────────────── */
-const btnLimpiar = document.getElementById('btn-limpiar-orden');
-if (btnLimpiar) {
-    /* Guardar handler original registrado en medicos.js (si existe) */
-    const _originalClick = btnLimpiar.onclick;
-
-    btnLimpiar.addEventListener('click', e => {
-        /* Solo preguntar si hay al menos 1 estudio seleccionado */
-        const selCount = document.querySelectorAll('.ficha-card.selected, [data-estudio].selected').length;
-        if (selCount === 0) return;   /* sin selección → limpia directo sin preguntar */
-
-        e.stopImmediatePropagation();   /* prevenir el handler de medicos.js */
-
-        const confirmed = window.confirm(
-            `¿Deseas limpiar la selección actual?\n\n` +
-            `Se perderán los ${selCount} estudio(s) seleccionados.`
-        );
-        if (confirmed) {
-            /* Emitir click real al handler original del app */
-            if (typeof _originalClick === 'function') _originalClick.call(btnLimpiar, e);
-            else btnLimpiar.dispatchEvent(new MouseEvent('click-confirm'));   /* señal custom */
-            announce('Selección limpiada.');
-        }
-    });
-}
-
-/* ────────────────────────────────────────────────────────────────────────
-   G. A11Y-05 Extensión — Anunciar cambio de panel activo al lector
-   ──────────────────────────────────────────────────────────────────────── */
-document.querySelectorAll('[data-panel]').forEach(navItem => {
-    navItem.addEventListener('click', () => {
-        const label = navItem.getAttribute('aria-label') || navItem.textContent.trim();
-        announce(`Panel activo: ${label}`);
-    });
-});
-
-```
-
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 17 Sept 2026, 8:24 am
 
 ---
 
 ### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
 
-**Status:** Completed
-**Created:** 17 Sept 2026, 8:24 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Claude Sonnet 4.6 (Thinking)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
+**Status:** Reset
 **Created:** 17 Sept 2026, 8:24 am
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
-**Created:** 17 Sept 2026, 8:24 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Claude Sonnet 4.6 (Thinking)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 17 Sept 2026, 8:24 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Claude Sonnet 4.6 (Thinking)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
+**Status:** Reset
 **Created:** 17 Sept 2026, 8:24 am
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
-**Created:** 17 Sept 2026, 8:24 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Claude Sonnet 4.6 (Thinking)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 17 Sept 2026, 8:24 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Claude Sonnet 4.6 (Thinking)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
+**Status:** Reset
 **Created:** 17 Sept 2026, 8:24 am
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 17 Sept 2026, 8:24 am
 
 ---
 
-## Agent Response
+### Terminal Command Execution
 
-### Actions
+**Status:** Reset
+**Created:** 17 Sept 2026, 8:24 am
 
-**Tool:** `browser_subagent`
+---
 
-<details>
-<summary>Metadata</summary>
+### Terminal Command Execution
 
-- **Model:** Claude Sonnet 4.6 (Thinking)
-</details>
+**Status:** Reset
+**Created:** 17 Sept 2026, 8:24 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 17 Sept 2026, 8:24 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 17 Sept 2026, 8:24 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 17 Sept 2026, 8:24 am
 
 ---
 
 ### Browser Automation
 
-**Status:** Cancelled
+**Status:** Reset
 **Created:** 17 Sept 2026, 8:25 am
-
----
-
-## User Request
-
-Prueba tu,
-accede a  https://192.168.1.71:8443/laesh/?reset_cache=1
-usa para autenticarte como medico:
-user: 9990000003
-pdw: 04041982
-AL llegar  ala pagina Portal Médico Nueva Orden, el focus se pone en Nombre del Paciente , intenta escribir y esta bloqueadisimo y el cpu se va al cielo.
-hazlo, monitorea , analiza y encuentra la causa raiz.
-
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `ws-client.js`
-**Language:** javascript
-</details>
 
 ---
 
@@ -22589,6 +22228,3775 @@ Okay, I'm integrating section 7, "Diagnóstico de Espasmos/UI y Lecciones de Ren
 
 **Status:** CORTEX_STEP_STATUS_ERROR
 **Created:** 17 Sept 2026, 10:24 am
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+## User Request
+
+Ahora, en la misma pantalla pestaña nuevba orden ahora:
+QUe no se use el enpoint para la busqueda de autocomplte, en su lugar se use el catalogo js compilado y la parte de ws este activa para refrescar ese js cuando cmabien datos editados por el admin recepcion en sus pantallas pegandole a mariadb y lueg generando el nuevo js de dato compilado, esta es la arquitectura que habiamos definida como la mejor, lo recuerdas ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `medicos.js`
+**Language:** javascript
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Refining Autocomplete Logic**
+
+Okay, I'm focusing on optimizing the autocomplete search. The key change is to ditch the endpoint for autocomplete lookups. I'm aiming to use the compiled JS catalog instead, while integrating the web services element for the required components. This should make the system considerably more efficient and faster.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `catalog-compiled`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.141586950s
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 17 Sept 2026, 10:35 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `CatalogBuilder.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+// commons/CatalogBuilder.php - Generador de JS Estático SSOT para LAESH
+declare(strict_types=1);
+
+namespace Common;
+
+use PDO;
+use Exception;
+use Common\DB;
+
+class CatalogBuilder {
+    
+    /**
+     * Construye el archivo catalog-compiled.js leyendo de MariaDB
+     */
+    public static function build(): bool {
+        $db = DB::connect();
+        
+        try {
+            // 1. Cargar Categorías
+            $stmtC = $db->query("SELECT id, nombre FROM cat_categorias ORDER BY orden ASC");
+            $categoriasMap = [];
+            while ($cat = $stmtC->fetch(PDO::FETCH_ASSOC)) {
+                $categoriasMap[$cat['id']] = [
+                    'id' => (int)$cat['id'],
+                    'nombre' => $cat['nombre'],
+                    'estudios' => []
+                ];
+            }
+
+            // 2. Cargar Estudios
+            $stmtE = $db->query("SELECT id, clave, nombre, muestra, contenedor, tiempo, categoria_id, preparacion, pruebas_incluidas FROM cat_estudios ORDER BY id ASC");
+            $flatCatalog = [];
+            
+            while ($est = $stmtE->fetch(PDO::FETCH_ASSOC)) {
+                // Parse pruebas_incluidas
+                $pruebas = [];
+                if (!empty($est['pruebas_incluidas'])) {
+                    // Split por saltos de línea para el JS
+                    $pruebas = array_filter(array_map('trim', explode("\n", $est['pruebas_incluidas'])));
+                }
+
+                $estNode = [
+                    'id' => (int)$est['id'],
+                    'clave' => $est['clave'] ?? '',
+                    'nombre' => $est['nombre'],
+                    'muestra' => $est['muestra'] ?? '',
+                    'contenedor' => $est['contenedor'] ?? '',
+                    'tiempo' => $est['tiempo'] ?? '',
+                    'preparacion' => $est['preparacion'] ?? '',
+                    'pruebas_incluidas' => array_values($pruebas)
+                ];
+
+                $catId = (int)$est['categoria_id'];
+                if (isset($categoriasMap[$catId])) {
+                    $categoriasMap[$catId]['estudios'][] = $estNode;
+                }
+
+                // Añadir el nombre de la categoría para el FlatCatalog
+                $estNode['categoriaNombre'] = $categoriasMap[$catId]['nombre'] ?? '';
+                $flatCatalog[] = $estNode;
+            }
+
+            // El Tree Principal
+            $catalogData = [
+                [
+                    'id' => 1,
+                    'clave' => 'G1',
+                    'titulo' => 'Catálogo General 2026',
+                    'categorias' => array_values($categoriasMap)
+                ]
+            ];
+
+            // 3. Top 20 Est.Med
+            $top20EstMed = [];
+            $stmtTop20 = $db->query("
+                SELECT ce.id, ce.clave, ce.nombre, cc.nombre AS categoria 
+                FROM cat_estudios ce 
+                LEFT JOIN cat_categorias cc ON ce.categoria_id = cc.id 
+                WHERE ce.top20_orden IS NOT NULL 
+                ORDER BY ce.top20_orden ASC
+            ");
+            while ($t20 = $stmtTop20->fetch(PDO::FETCH_ASSOC)) {
+                $top20EstMed[] = [
+                    'id' => (int)$t20['id'],
+                    'clave' => $t20['clave'] ?? '',
+                    'nombre' => $t20['nombre'],
+                    'categoria' => $t20['categoria'] ?? ''
+                ];
+            }
+
+            // 4. Gabinetes, Subgabinetes e I. Gabinetes
+            $stmtG = $db->query("SELECT id, nombre, orden FROM cat_gabinetes ORDER BY orden ASC, id ASC");
+            $gabinetes = $stmtG->fetchAll(PDO::FETCH_ASSOC) ?: [];
+
+            $stmtSG = $db->query("SELECT id, gabinete_id, nombre, orden FROM cat_subgabinetes ORDER BY gabinete_id ASC, orden ASC, id ASC");
+            $subgabinetes = $stmtSG->fetchAll(PDO::FETCH_ASSOC) ?: [];
+
+            $stmtIG = $db->query("SELECT id, nombre, orden FROM cat_igabinetes ORDER BY orden ASC, id ASC");
+            $igabinetes = $stmtIG->fetchAll(PDO::FETCH_ASSOC) ?: [];
+
+            $stmtEG = $db->query("SELECT estudio_id, gabinete_id, subgabinete_id FROM rel_estudio_gabinete");
+            $estudioGabinete = $stmtEG->fetchAll(PDO::FETCH_ASSOC) ?: [];
+
+            $stmtIGV = $db->query("SELECT igabinete_id, gabinete_id, subgabinete_id FROM rel_igabinete_vinculos");
+            $igabineteVinculos = $stmtIGV->fetchAll(PDO::FETCH_ASSOC) ?: [];
+
+            // 5. Serializar a JS y escribir
+            $jsContent = "// GENERADO AUTOMÁTICAMENTE (SSOT MariaDB) - NO EDITAR MANUALMENTE\n\n";
+            $jsContent .= "window.laeshCatalogData = " . json_encode($catalogData, JSON_UNESCAPED_UNICODE) . ";\n\n";
+            $jsContent .= "window.laeshFlatCatalog = " . json_encode($flatCatalog, JSON_UNESCAPED_UNICODE) . ";\n\n";
+            $jsContent .= "window.laeshTop20EstMed = " . json_encode($top20EstMed, JSON_UNESCAPED_UNICODE) . ";\n\n";
+            $jsContent .= "window.laeshGabinetes = " . json_encode($gabinetes, JSON_UNESCAPED_UNICODE) . ";\n\n";
+            $jsContent .= "window.laeshSubgabinetes = " . json_encode($subgabinetes, JSON_UNESCAPED_UNICODE) . ";\n\n";
+            $jsContent .= "window.laeshIGabinetes = " . json_encode($igabinetes, JSON_UNESCAPED_UNICODE) . ";\n\n";
+            $jsContent .= "window.laeshEstudioGabinete = " . json_encode($estudioGabinete, JSON_UNESCAPED_UNICODE) . ";\n\n";
+            $jsContent .= "window.laeshIGabineteVinculos = " . json_encode($igabineteVinculos, JSON_UNESCAPED_UNICODE) . ";\n";
+
+            $targetPath = __DIR__ . '/../../laesh-web-assets-uipv1a/js/catalog-compiled.js';
+            $res1 = @file_put_contents($targetPath, $jsContent);
+
+            // Mantener catalog-data.js sincronizado como alias legado para evitar desalineación
+            $legacyPath = __DIR__ . '/../../laesh-web-assets-uipv1a/js/catalog-data.js';
+            $res2 = @file_put_contents($legacyPath, $jsContent);
+
+            if ($res1 === false || $res2 === false) {
+                Logger::log('WARN', 'CatalogBuilder::build falló al escribir en archivo JS por permisos, pero la base de datos se actualizó correctamente.');
+            }
+
+            // 5. Actualizar versión Hash, invalidar caché L2 y registrar trazabilidad
+            self::updateVersion();
+            if (class_exists('\Common\Cache')) {
+                Cache::invalidate(Cache::KEY_TREE);
+            }
+            Logger::log('INFO', 'Catálogo recompilado exitosamente (catalog-compiled.js y catalog-data.js)');
+            
+            return true;
+        } catch (Exception $e) {
+            Logger::log('ERROR', 'Error en CatalogBuilder::build -> ' . $e->getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Actualiza el hash de versión en sys_catalog_version
+     */
+    private static function updateVersion(): void {
+        $db = DB::connect();
+        $stmt = $db->prepare("UPDATE sys_catalog_version SET version_hash = ? WHERE id = 1");
+        $stmt->execute([time()]);
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L719-732)</summary>
+
+**Path:** `Unknown file`
+
+```
+        };
+    </script>
+
+    <script src="/laesh-web-assets-uipv1a/js/htmx.min.js"></script>
+    <script src="/laesh-web-assets-uipv1a/js/app.js?v=<?= time() ?>" defer></script>
+    <script src="/laesh-web-assets-uipv1a/js/ws-client.js?v=<?= time() ?>" defer></script>
+    <script src="/laesh-web-assets-uipv1a/js/portal-footer.js?v=<?= time() ?>" defer></script>
+    <script src="/laesh-web-assets-uipv1a/js/sidebar-rail.js?v=<?= time() ?>" defer></script>
+    <script src="/laesh-web-assets-uipv1a/js/medicos.js?v=<?= time() ?>" defer></script>
+    <script src="/laesh-web-assets-uipv1a/js/medicos-a11y.js?v=<?= time() ?>" defer></script>
+
+</body>
+</html>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `CatalogBuilder::build`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 17 Sept 2026, 10:36 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 17 Sept 2026, 10:36 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1049-1089)</summary>
+
+**Path:** `Unknown file`
+
+```
+            celularInput.addEventListener('input', function() {
+                sanitizeInputPreserveSelection(this, /[^0-9]/g, 10);
+            });
+        }
+
+        /* ── Autocomplete Search para las 18 Categorías ── */
+        var inputSearchFicha = document.getElementById('input-buscar-estudio-ficha');
+        var dropdownFichasRes = document.getElementById('autocomplete-results-fichas');
+
+        if (inputSearchFicha && dropdownFichasRes) {
+            let searchTimeout;
+            inputSearchFicha.addEventListener('input', function() {
+                var q = this.value.toLowerCase().trim();
+                if (q.length < 2) {
+                    dropdownFichasRes.classList.add('d-none');
+                    dropdownFichasRes.innerHTML = '';
+                    return;
+                }
+                
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(function() {
+                    fetch('/laesh/md/estudios/buscar?q=' + encodeURIComponent(q))
+                    .then(r => r.json())
+                    .then(data => {
+                        if (data.ok && data.resultados && data.resultados.length > 0) {
+                            dropdownFichasRes.innerHTML = data.resultados.map(function(m) {
+                                return '<div class="autocomplete-fichas-item" data-action="select-autocomplete-study" data-val="' + m.nombre.replace(/"/g, '&quot;') + '">' +
+                                    '<span>' + m.nombre + '</span>' +
+                                    '<span class="cat-tag">' + (m.categoria || '') + '</span>' +
+                                '</div>';
+                            }).join('');
+                            dropdownFichasRes.classList.remove('d-none');
+                        } else {
+                            dropdownFichasRes.innerHTML = '<div class="autocomplete-no-results">Sin resultados</div>';
+                            dropdownFichasRes.classList.remove('d-none');
+                        }
+                    })
+                    .catch(e => {
+                        console.error('Error al buscar estudios', e);
+                        dropdownFichasRes.innerHTML = '<div class="autocomplete-no-results">Error de conexión</div>';
+                        dropdownFichasRes.classList.remove('d-none');
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 17 Sept 2026, 10:37 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1054-1094)</summary>
+
+**Path:** `Unknown file`
+
+```
+        /* ── Autocomplete Search In-Memory SSOT (catalog-compiled.js / Offline-First) ── */
+        var inputSearchFicha = document.getElementById('input-buscar-estudio-ficha');
+        var dropdownFichasRes = document.getElementById('autocomplete-results-fichas');
+
+        if (inputSearchFicha && dropdownFichasRes) {
+            inputSearchFicha.addEventListener('input', function() {
+                var q = this.value.toLowerCase().trim();
+                if (q.length < 2) {
+                    dropdownFichasRes.classList.add('d-none');
+                    dropdownFichasRes.innerHTML = '';
+                    return;
+                }
+                
+                        dropdownFichasRes.classList.remove('d-none');
+                    });
+                }, 300);
+            });
+
+            dropdownFichasRes.addEventListener('click', function(e) {
+                var itemEl = e.target.closest('[data-action="select-autocomplete-study"]');
+                if (!itemEl) return;
+                var val = itemEl.getAttribute('data-val');
+                if (!val) return;
+
+                var foundCb = Array.from(form.querySelectorAll('input[name="estudio_item"]')).find(function(cb) {
+                    return cb.value === val;
+                });
+
+                if (foundCb) {
+                    foundCb.checked = true;
+                    var fpKey = foundCb.getAttribute('data-fp');
+                    if (fpKey && grid) {
+                        var fBtn = grid.querySelector('.ficha-cat[data-ficha="' + fpKey + '"]');
+                        if (fBtn) updateFichaCount(fBtn);
+                    }
+                } else {
+                    var hiddenCb = document.createElement('input');
+                    hiddenCb.type = 'checkbox';
+                    hiddenCb.name = 'estudio_item';
+                    hiddenCb.value = val;
+                    hiddenCb.checked = true;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 17 Sept 2026, 10:38 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `CatalogBuilder.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L124-144)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+            if ($res1 === false || $res2 === false) {
+                Logger::log('WARN', 'CatalogBuilder::build falló al escribir en archivo JS por permisos, pero la base de datos se actualizó correctamente.');
+            }
+
+            // 5. Actualizar versión Hash, invalidar caché L2 y registrar trazabilidad
+            self::updateVersion();
+            if (class_exists('\Common\Cache')) {
+                Cache::invalidate(Cache::KEY_TREE);
+            }
+            Logger::log('INFO', 'Catálogo recompilado exitosamente (catalog-compiled.js y catalog-data.js)');
+            
+            return true;
+        } catch (Exception $e) {
+            Logger::log('ERROR', 'Error en CatalogBuilder::build -> ' . $e->getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Actualiza el hash de versión en sys_catalog_version
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 17 Sept 2026, 10:38 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ws-client.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L234-254)</summary>
+
+**Path:** `Unknown file`
+
+```
+            if (cntBadge) {
+                cntBadge.textContent = targetBody.children.length;
+            }
+        });
+
+        // Refrescar automáticamente la tabla de recepción o médicos
+        if (data.event === 'nueva_orden' || data.event === 'orden_actualizada' || data.event === 'resultado_disponible') {
+            var tablaRecepcion = document.getElementById('tabla-recepcion');
+            var tablaMedico = document.getElementById('tabla-medico');
+
+            if (tablaRecepcion && typeof htmx !== 'undefined') {
+                htmx.trigger(tablaRecepcion, 'refresh');
+            } else if (tablaRecepcion) {
+                var btnRefreshR = document.getElementById('btn-refrescar-tabla');
+                if (btnRefreshR) btnRefreshR.click();
+            }
+
+            // FIX-SPASM: Si el médico tiene foco en el form de nueva orden,
+            // diferir el swap de tabla-medico para no robar el cursor del input activo.
+            if (tablaMedico) {
+                var formOrden = document.getElementById('form-orden');
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 17 Sept 2026, 10:39 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L719-729)</summary>
+
+**Path:** `Unknown file`
+
+```
+        };
+    </script>
+
+    <script src="/laesh-web-assets-uipv1a/js/htmx.min.js"></script>
+    <script src="/laesh-web-assets-uipv1a/js/catalog-compiled.js?v=<?= time() ?>"></script>
+    <script src="/laesh-web-assets-uipv1a/js/app.js?v=<?= time() ?>" defer></script>
+    <script src="/laesh-web-assets-uipv1a/js/ws-client.js?v=<?= time() ?>" defer></script>
+    <script src="/laesh-web-assets-uipv1a/js/portal-footer.js?v=<?= time() ?>" defer></script>
+    <script src="/laesh-web-assets-uipv1a/js/sidebar-rail.js?v=<?= time() ?>" defer></script>
+    <script src="/laesh-web-assets-uipv1a/js/medicos.js?v=<?= time() ?>" defer></script>
+    <script src="/laesh-web-assets-uipv1a/js/medicos-a11y.js?v=<?= time() ?>" defer></script>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 17 Sept 2026, 10:39 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 17 Sept 2026, 10:39 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 17 Sept 2026, 10:40 am
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+## User Request
+
+Ya no hay remanentes de consultas en linea con endpoint en la pagina del medico nueva ordenm cierto ?, pero otra pestañas/item menu del medico creo si, cuales son ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `medicos.php`
+**Language:** php
+
+**Open Files:**
+- `medicos.php`
+- `medicos.js`
+- `ws-client.js`
+- `CatalogBuilder.php`
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Verifying Endpoint Usage**
+
+Okay, I'm currently focused on systematically checking for any remaining online consultation endpoints within the new "medico" order page. I need to ensure the user is correct, as requested. I've expanded my scope to include all tabs and menu items within `views/medicos.php` and `medicos.js` to ensure nothing is missed. I'm cross-referencing all data fetching and endpoint calls.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.193691995s
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L429-464)</summary>
+
+**Path:** `Unknown file`
+
+```
+            tbody.innerHTML = '<tr><td colspan="4">Cargando catálogo...</td></tr>';
+            
+            fetch('/laesh/md/estudios/todos')
+                .then(r => r.json())
+                .then(data => {
+                    if (data.ok && data.catalog) {
+                        tbody.innerHTML = data.catalog.map(item => `
+                            <tr>
+                                <td class="td-clave">${item.clave || ''}</td>
+                                <td class="td-nombre-estudio">${item.nombre} <br><small class="text-muted">${item.categoria || ''}</small></td>
+                                <td>${item.preparacion || ''}</td>
+                                <td>${item.tiempo || ''}</td>
+                            </tr>
+                        `).join('');
+                    } else {
+                        tbody.innerHTML = '<tr><td colspan="4">Error al cargar el catálogo.</td></tr>';
+                    }
+                })
+                .catch(err => {
+                    console.error('Error refreshCatalog', err);
+                    tbody.innerHTML = '<tr><td colspan="4">Error de conexión.</td></tr>';
+                });
+        }
+
+        // Cambiar Paneles / Tabs en Portal Médico (Rock-Solid)
+        const panelLabels = {
+            'panel-nueva-orden':       'Nueva Orden',
+            'panel-historial-medico':  'Órdenes Anteriores',
+            'panel-pacientes-medico':  'Pacientes',
+            'panel-reportes-medico':   'Reportes',
+            'panel-catalogo-medico':   'Catálogo de Estudios'
+        };
+        function cambiarTabMedico(panelId, el) {
+            document.querySelectorAll('.sidebar .nav-item').forEach(i => i.classList.remove('active'));
+            if (el) el.classList.add('active');
+            document.querySelectorAll('.tab-panel').forEach(p => p.style.display = 'none');
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Considering Catalog Optimization**
+
+I'm focusing on optimizing the catalog refresh process. I've re-examined `refreshCatalog()` in `medicos.js`. The current implementation fetches data from `/laesh/md/estudios/todos`. Now, I'm thinking of making `refreshCatalog()` use the in-memory `window.laeshFlatCatalog` as the Single Source of Truth (SSOT). If that's available, it'll populate the catalog.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.140596780s
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 17 Sept 2026, 10:44 am
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 17 Sept 2026, 10:45 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `fetch`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 17 Sept 2026, 10:45 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `hx-`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 17 Sept 2026, 10:45 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<!DOCTYPE html>
+<?php
+/**
+ * md/views/medicos.php — Plantilla Plates / View PHP del Portal Médico
+ * Fuente SSOT HTML: website/uipv1/medicos.html (R15.1)
+ */
+if (!function_exists('h')) {
+    function h($v): string {
+        return htmlspecialchars((string)($v ?? ''), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+    }
+}
+
+if (!isset($estudiosMandatorios) || empty($estudiosMandatorios)) {
+    try {
+        $dbInst = \Common\DB::connect();
+        $keysMand = ['HEM-01','QUI-02','URO-01','DIA-01','QUI-01','ELE-03','COA-01','HEM-02','HEP-01','TIR-01','ELE-02','DIA-03','HEP-02','LIP-01','TIR-02','ELE-01','QUI-03','GAS-01','URO-02','INM-13'];
+        $inSqlMand  = str_repeat('?,', count($keysMand) - 1) . '?';
+        $sqlMand = "SELECT ce.id, ce.clave_interna, ce.nombre, cc.nombre as categoria 
+                    FROM catalogo_estudios ce 
+                    JOIN catalogo_categorias cc ON ce.categoria_id = cc.id 
+                    WHERE ce.clave_interna IN ($inSqlMand) 
+                    ORDER BY ce.id ASC";
+        $stmtEstMand = $dbInst->prepare($sqlMand);
+        $stmtEstMand->execute($keysMand);
+        $estudiosMandatorios = $stmtEstMand->fetchAll(\PDO::FETCH_ASSOC);
+    } catch (\Throwable $e) {
+        $estudiosMandatorios = [];
+    }
+}
+?>
+<html lang="es-MX">
+<head>
+    <meta charset="UTF-8">
+    <meta name="color-scheme" content="light">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0052B7">
+    <meta name="description" content="Portal de médicos LAESH — consulta de órdenes, estadísticas y catálogo de estudios.">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; script-src 'self' 'unsafe-inline'; connect-src 'self' ws: wss:;">
+    <title>Portal Médico — LAESH</title>
+    <link rel="icon" type="image/svg+xml" href="/laesh-web-assets-uipv1a/img/favicon.svg">
+
+    <!-- PERF-03: Preload de hojas de estilo críticas para evitar FOUC -->
+    <link rel="preload" href="/laesh-web-assets-uipv1a/css/tokens.css?v=<?= time() ?>" as="style">
+    <link rel="preload" href="/laesh-web-assets-uipv1a/css/fonts.css?v=<?= time() ?>" as="style">
+    <link rel="preload" href="/laesh-web-assets-uipv1a/css/style.css?v=<?= time() ?>" as="style">
+    <link rel="preload" href="/laesh-web-assets-uipv1a/css/portal.css?v=<?= time() ?>" as="style">
+
+    <script src="/laesh-web-assets-uipv1a/js/device-detect.js?v=<?= time() ?>"></script>
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/tokens.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/fonts.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/style.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/portal.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/targeting.css?v=<?= time() ?>">
+
+</head>
+<body class="portal-medico-body-layout">
+    <a href="#main-content" class="skip-link">Ir al contenido principal</a>
+    <!-- A11Y-04: Región aria-live para anuncios de acciones (tab activa, orden creada, errores) -->
+    <div id="a11y-live" class="visually-hidden" aria-live="polite" aria-atomic="true" role="status"></div>
+    <!-- Encabezado Fijo — Portal Médico -->
+        <nav class="portal-access-header portal-medico">
+            <div class="portal-header-left">
+                <a class="logo portal-access-link" href="/laesh/" target="_blank" rel="noopener">
+                    <img src="/laesh-web-assets-uipv1a/img/logo-laesh.webp" alt="LAESH Logo" class="portal-logo" decoding="async" fetchpriority="high">
+                </a>
+                <div class="portal-header-divider"></div>
+                <div class="portal-breadcrumb-group">
+                    <h1 class="txt-main fw-600 portal-h1">Portal Médico</h1>
+                    <span class="header-sep-green" aria-hidden="true">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                    </span>
+                    <span id="header-bc-current" class="txt-primary-fw">Nueva Orden</span>
+                </div>
+            </div>
+            <div class="portal-header-right">
+                <div class="user-badge-portal">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--primary-green-dark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    <span><strong class="txt-primary-c"><?= htmlspecialchars($nombreMedico ?? 'Médico Demo', ENT_QUOTES, 'UTF-8') ?></strong></span>
+                </div>
+                <a href="/laesh/login/logout.php" class="btn-back-primary">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                    Cerrar Sesión
+                </a>
+            </div>
+            <!-- Círculo iniciales — visible solo en móvil (≤767px), a la izq. del hamburger -->
+            <?php
+                $_cleanMedName = preg_replace('/^(Dr\(a\)\.|Dr\.|Dra\.)\s*/i', '', $nombreMedico ?? 'Médico Demo');
+                $_medWords = array_values(array_filter(explode(' ', $_cleanMedName)));
+                $_medInitials = strtoupper(
+                    (isset($_medWords[0]) ? substr($_medWords[0], 0, 1) : 'M') .
+                    (isset($_medWords[1]) ? substr($_medWords[1], 0, 1) : 'D')
+                );
+            ?>
+            <div class="portal-initials-mob" aria-hidden="true"><?= htmlspecialchars($_medInitials, ENT_QUOTES, 'UTF-8') ?></div>
+            <!-- .nav-hamburger inyectado por app.js en tablet/móvil -->
+        </nav>
+
+        <div class="app-layout">
+            <aside class="sidebar">
+
+                <!-- ⓪ Toggle rail: colapsar / expandir sidebar (solo desktop) -->
+                <div class="sidebar-toggle-row">
+                    <button type="button" class="sidebar-rail-toggle" id="sidebar-rail-toggle" title="Expandir / Colapsar menú">
+                        <!-- Ícono: ›  (colapsar→expandir) o ‹ (expandir→colapsar). Cambiado por JS -->
+                        <svg id="rail-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                    </button>
+                </div>
+
+                <!-- ① Fila lupita+input: en desktop ambos visibles en la misma línea;
+                         en tablet/móvil display:contents los expone como ítems directos de la tira -->
+                <div class="sidebar-search-row">
+                    <button type="button" class="sidebar-search-btn" id="sidebar-search-btn" aria-label="Buscar orden o paciente">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        Buscar
+                    </button>
+                    <div class="sidebar-search-wrap form-field">
+                        <input type="text" id="input-buscador-medico" placeholder="Búsqueda (folio o 5+ letras)..." class="form-input-ta" autocomplete="off"><!-- autofocus removido para evitar abrir el teclado en iOS durante la carga -->
+                        <div id="autocomplete-list-medico" class="sfs-dropdown">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Popup flotante de búsqueda (visible solo en modo colapsado, abre al click de lupita) -->
+                <div class="sidebar-float-search" id="float-search-medico">
+                    <input class="sfs-input" id="sfs-input-medico" type="text" maxlength="30"
+                           placeholder="Buscar paciente o folio…" autocomplete="off">
+                    <div class="sfs-results" id="sfs-results-medico"></div>
+                </div>
+
+                <!-- ③ Ítems de navegación — role=button + tabindex para navegación por teclado -->
+                <!-- A11Y-05: Enter/Space activado vía JS (app.js) con listener 'keydown' -->
+                <div class="nav-item active" data-panel="panel-nueva-orden" role="button" tabindex="0" aria-label="Nueva Orden">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M11 2v2" /><path d="M5 2v2" />
+                      <path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1" />
+                      <path d="M8 15a6 6 0 0 0 12 0v-3" /><circle cx="20" cy="10" r="2" />
+                    </svg>
+                    Nueva Orden
+                </div>
+                <div class="nav-item" data-panel="panel-historial-medico" role="button" tabindex="0" aria-label="Órdenes Anteriores">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    Órdenes Anteriores
+                </div>
+                <div class="nav-item" data-panel="panel-pacientes-medico" role="button" tabindex="0" aria-label="Pacientes">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    Pacientes
+                </div>
+                <div class="nav-item" data-panel="panel-reportes-medico" role="button" tabindex="0" aria-label="Reportes">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                    Reportes
+                </div>
+                <div class="nav-item" data-panel="panel-catalogo-medico" role="button" tabindex="0" aria-label="Catálogo de Estudios">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M14 2v6a2 2 0 0 0 .245.96l5.51 10.08A2 2 0 0 1 18 22H6a2 2 0 0 1-1.755-2.96l5.51-10.08A2 2 0 0 0 10 8V2" />
+                        <path d="M6.453 15h11.094" /><path d="M8.5 2h7" />
+                    </svg>
+                    Catálogo de Estudios
+                </div>
+
+                <div class="nav-item" data-panel="panel-cambiar-password" role="button" tabindex="0" aria-label="Cambiar Contraseña / NIP">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                    Cambiar Contraseña
+                </div>
+
+                <!-- ④ Editar Perfil — nav-item que abre modal-perfil-medico -->
+                <div class="nav-item cursor-p" id="nav-perfil-btn" role="button" tabindex="0" aria-label="Editar perfil médico">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+                        <path d="M21 10.5a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-3a.5.5 0 0 1 .5-.5z" class="d-none"/>
+                        <path d="m16 3 4 4" stroke-width="2"/><path d="M13.5 5.5 18 10" stroke-width="2"/>
+                    </svg>
+                    Editar Perfil
+                </div>
+
+                <!-- ⑥ Mini-panel de usuario (visible al abrir hamburger en móvil) -->
+                <div class="sidebar-mobile-only">
+                    <!-- Chip iniciales — clase mob-user-chip exclusiva móvil (style.css ≤767px) -->
+                    <div class="mob-user-chip">
+                        <span class="mob-user-chip__avatar">HRV</span>
+                        <span class="mob-user-chip__label">Dr. H. Reyes</span>
+                    </div>
+                    <a href="/laesh/login/logout.php" class="mob-logout-btn">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                        Cerrar Sesión
+                    </a>
+                </div>
+            </aside>
+
+            <main class="main-content" id="main-content">
+                <!-- Panel 1: Nueva Orden -->
+                <div id="panel-nueva-orden" class="tab-panel">
+                    <h2 class="panel-nueva-orden-title">Nueva Orden</h2>
+
+                    <!-- ── Barra de tabs interna: Generar Orden / Mis Órdenes ── -->
+                    <!-- A11Y-06: tab-bar-btns movido FUERA del role=tablist para no confundir AT -->
+                    <div class="portal-tab-bar tab-bar-ac">
+                        <div class="portal-tab-list" role="tablist" aria-label="Secciones de nueva orden">
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/**
+ * md/index.php — Router Flight PHP para el Portal Médico
+ *
+ * Ubicación: laesh-swbldi/md/index.php
+ * URL:       /laesh/md/          (Alias en restaurantb.conf → laesh-swbldi/md/)
+ *
+ * Fuente HTML: website/uipv1/medicos.html  ← NUNCA BORRAR (R15.1 - Merge iterativo)
+ * Capas:       View (views/medicos.php), Negocio (MD\Negocio\Ordenes), Commons (Common\*)
+ *
+ * Rutas:
+ *   GET  /             → Panel principal Médico (requiere permiso ver_ordenes_propias)
+ *   POST /orden/crear  → Solicitud Médica Digital vía Stored Procedure (HTMX)
+ */
+
+declare(strict_types=1);
+
+require_once __DIR__ . '/../commons/commons.php';
+
+use Common\Logger;
+use Common\DB;
+
+// ── Guard RBAC: solo MEDICO puede acceder (o permiso ver_ordenes_propias) ──────
+Flight::rbac()->requirePermission(
+    'ver_ordenes_propias',
+    '/laesh/login/login.php?portal=medico'
+);
+
+// ── GET / — Panel principal Portal Médico ──────────────────────────────────────
+Flight::route('GET /', function () {
+    $auth = Flight::auth();
+    $db   = Flight::db();
+
+    $userId = (int)$auth->getUserId();
+    $stmt = $db->prepare("SELECT nombre, apellidos FROM empleados WHERE user_id = ? LIMIT 1");
+    $stmt->execute([$userId]);
+    $emp = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+    $stmtMed = $db->prepare("SELECT nombre_completo, especialidad, cedula_profesional FROM perfiles_medicos WHERE user_id = ? LIMIT 1");
+    $stmtMed->execute([$userId]);
+    $medProfile = $stmtMed->fetch(\PDO::FETCH_ASSOC) ?: [];
+
+    if ($emp && !empty($emp['nombre'])) {
+        $nombreMedico = 'Dr(a). ' . trim($emp['nombre'] . ' ' . $emp['apellidos']);
+    } elseif (!empty($medProfile['nombre_completo'])) {
+        $nombreMedico = $medProfile['nombre_completo'];
+    } else {
+        $email = $auth->getEmail() ?? '';
+        $userPart = explode('@', $email)[0] ?? 'Médico';
+        $nombreMedico = 'Dr(a). ' . ucfirst($userPart);
+    }
+
+    // CSRF token (R14.12)
+    if (empty($_SESSION['csrf_token'])) {
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    }
+
+    // Obtener solicitudes médicas propias (hoy y anteriores) y pacientes del médico desde la Capa de Negocio (PDO)
+    $ordenesPropias    = \MD\Negocio\Ordenes::obtenerOrdenesPropias($userId, 50);
+    $ordenesAnteriores = \MD\Negocio\Ordenes::obtenerOrdenesAnterioresMedico($userId, 100);
+    $pacientesMedico   = \MD\Negocio\Ordenes::obtenerPacientesMedico($userId);
+
+    // SEC: frame-ancestors vía HTTP header real (meta tag es ignorado por browsers)
+    header('X-Frame-Options: DENY');
+    header('Content-Security-Policy: frame-ancestors \'none\'', false); // false = no reemplaza el CSP global de nginx, agrega directiva
+
+    // Plates — directorio de vistas es md/
+    Flight::view()->setDirectory(__DIR__);
+    
+    echo Flight::view()->render('views/medicos', [
+        'nombreMedico'         => $nombreMedico,
+        'medProfile'           => $medProfile,
+        'csrfToken'            => $_SESSION['csrf_token'],
+        'ordenesPropias'       => $ordenesPropias,
+        'ordenesAnteriores'    => $ordenesAnteriores,
+        'pacientesMedico'      => $pacientesMedico,
+        'totalPacientesMedico' => count($pacientesMedico)
+    ]);
+});
+
+// ── GET /tabla-ordenes — Partial HTMX ultraligero de la tabla de órdenes de hoy ─────
+Flight::route('GET /tabla-ordenes', function () {
+    header('Content-Type: text/html; charset=utf-8');
+    $userId = (int)Flight::auth()->getUserId();
+    $ordenesPropias = \MD\Negocio\Ordenes::obtenerOrdenesPropias($userId, 50);
+
+    echo '<tbody>';
+    if (!empty($ordenesPropias)) {
+        foreach ($ordenesPropias as $ord) {
+            $eId = (int)($ord['estado_id'] ?? 1);
+            $badgeClass = 'badge-remitido';
+            if ($eId === 2) $badgeClass = 'badge-atencion';
+            elseif ($eId === 3) $badgeClass = 'badge-listos';
+            elseif ($eId === 4) $badgeClass = 'badge-cerrada';
+
+            $folio = htmlspecialchars($ord['folio'] ?? '', ENT_QUOTES, 'UTF-8');
+            $paciente = htmlspecialchars($ord['paciente_nombre'] ?? '', ENT_QUOTES, 'UTF-8');
+            $diag = htmlspecialchars($ord['diagnostico'] ?? 'Solicitud Digital', ENT_QUOTES, 'UTF-8');
+            $fEmis = htmlspecialchars(date('d/m/Y H:i', strtotime($ord['creado_en'] ?? 'now')), ENT_QUOTES, 'UTF-8');
+            $fRes = !empty($ord['fecha_resultado']) ? htmlspecialchars(date('d/m/Y H:i', strtotime($ord['fecha_resultado'])), ENT_QUOTES, 'UTF-8') : '—';
+            $estado = htmlspecialchars($ord['estado_nombre'] ?? 'Emitida', ENT_QUOTES, 'UTF-8');
+
+            $btnAccion = ($eId === 3 || $eId === 4)
+                ? '<button class="btn btn-secondary btn-resultados-sm btn-ver-res" data-action="ver-resultados" data-id="' . $folio . '">'
+                . '<svg class="icon-btn-left" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg> Ver Resultados'
+                . '</button>'
+                : '<span class="txt-muted-sm">En Proceso</span>';
+
+            echo '<tr>'
+               . '<td class="td-folio-hist"><a href="#" class="lnk-folio lnk-folio-id" data-action="ver-solicitud" data-id="' . $folio . '">' . $folio . ' <svg class="icon-folio-link" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></a></td>'
+               . '<td>' . $paciente . '</td>'
+               . '<td class="td-estudios-rc">' . $diag . '</td>'
+               . '<td>' . $fEmis . '</td>'
+               . '<td class="td-fecha-resultado">' . $fRes . '</td>'
+               . '<td><span class="badge ' . $badgeClass . '">' . $estado . '</span></td>'
+               . '<td>' . $btnAccion . '</td>'
+               . '</tr>';
+        }
+    } else {
+        echo '<tr><td colspan="7" class="text-center txt-muted pa-4">No tiene órdenes emitidas el día de hoy.</td></tr>';
+    }
+    echo '</tbody>';
+});
+
+// ── POST /orden/crear — Procesar creación de orden médica (HTMX) ───────────────
+Flight::route('POST /orden/crear', function () {
+    Flight::rbac()->requirePermission('ver_solicitud_digital');
+
+    // Validar CSRF
+    $submittedToken = $_POST['csrf_token'] ?? '';
+    if (!hash_equals($_SESSION['csrf_token'] ?? '', $submittedToken)) {
+        Logger::log('WARN', 'Token CSRF inválido en creación de orden médica por user_id=' . Flight::auth()->getUserId());
+        \Common\Response::htmxError('Token de seguridad inválido. Recarga la página.');
+    }
+
+    // CSRF rotation removed to support seamless HTMX AJAX sequential requests
+
+    // Invocar capa de negocio para creación atómica con Stored Procedure
+    $userId = (int)Flight::auth()->getUserId();
+    $resultado = \MD\Negocio\Ordenes::crearSolicitudDigital($_POST, $userId);
+
+    if (!$resultado['success']) {
+        \Common\Response::htmxError($resultado['error'] ?? 'Error al emitir la solicitud digital.');
+    }
+
+    // Emitir notificación Swoole WS a la clínica en vivo (Scope 30) tras confirmación de Stored Procedure
+    \Common\Notifier::emit('nueva_orden', [
+        'folio'    => $resultado['folio'] ?? 'LAESH-00000',
+        'orden_id' => $resultado['orden_id'] ?? 0,
+        'titulo'   => 'Nueva Solicitud Médica Digital (' . ($resultado['folio'] ?? '') . ')',
+        'mensaje'  => 'Solicitud enviada para ' . htmlspecialchars($resultado['paciente'] ?? $_POST['paciente'] ?? 'Paciente', ENT_QUOTES, 'UTF-8')
+    ]);
+
+    // Comunicar el folio real al frontend (JS) para abrir el modal de impresión sin recargar
+    header('HX-Trigger: ' . json_encode([
+        'ordenCreada' => [
+            'folio' => $resultado['folio'] ?? 'LAESH-00000'
+        ]
+    ]));
+
+    \Common\Response::htmxSuccess($resultado['mensaje']);
+});
+
+// ── GET /estudios/buscar — Autocomplete FULLTEXT (HTMX / fetch) ───────────────
+// Alimenta: input#input-buscar-estudio-ficha en views/medicos.php
+// D-14: usa FULLTEXT KEY ft_nombre sobre estudios.nombre
+// Requiere sesión activa — RBAC ya fue verificado en el guard superior.
+// No muta datos → sin CSRF.
+Flight::route('GET /estudios/buscar', function () {
+    header('Content-Type: application/json; charset=utf-8');
+
+    // Delight-Auth: sesión activa verificada por el guard global; doble check ligero
+    if (!Flight::auth()->isLoggedIn()) {
+        http_response_code(401);
+        echo json_encode(['ok' => false, 'msg' => 'No autenticado.']);
+        return;
+    }
+
+    $q = trim($_GET['q'] ?? '');
+
+    // Sin query o muy corta → respuesta vacía (evita FULLTEXT con <2 chars)
+    if (mb_strlen($q) < 2) {
+        echo json_encode(['ok' => true, 'resultados' => []]);
+        return;
+    }
+
+    // Sanitizar para Boolean Mode: escapar chars especiales FULLTEXT
+    // Prefijo * → busca por prefijo; envuelto en comillas → frase exacta si tiene espacios
+    $qSafe = preg_replace('/[+\-><\(\)~*"@]+/', ' ', $q);
+    $qSafe = trim($qSafe);
+
+    try {
+        $db = Flight::db();
+
+        // MATCH...AGAINST con FULLTEXT KEY ft_nombre
+        $stmt = $db->prepare(
+            "SELECT e.id, e.nombre, c.nombre as categoria, e.preparacion as ayuno_descripcion, e.tiempo as tiempo_resultado
+             FROM cat_estudios e
+             LEFT JOIN cat_categorias c ON e.categoria_id = c.id
+             WHERE e.nombre LIKE :like
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L199-310)</summary>
+
+**Path:** `Unknown file`
+
+```
+             WHERE e.nombre LIKE :like
+             ORDER BY e.nombre ASC
+             LIMIT 12"
+        );
+        $stmt->execute([':like' => '%' . $q . '%']);
+        $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        echo json_encode(['ok' => true, 'resultados' => $rows]);
+
+    } catch (\PDOException $e) {
+        Logger::log('ERROR', 'estudios/buscar PDO: ' . $e->getMessage());
+        http_response_code(500);
+        echo json_encode(['ok' => false, 'msg' => 'Error al buscar estudios.']);
+    }
+});
+
+// ── GET /estudios/todos — Obtener catálogo plano para tabla de catálogo ─────
+Flight::route('GET /estudios/todos', function () {
+    header('Content-Type: application/json; charset=utf-8');
+    if (!Flight::auth()->isLoggedIn()) {
+        http_response_code(401);
+        echo json_encode(['ok' => false, 'msg' => 'No autenticado.']);
+        return;
+    }
+    try {
+        $db = Flight::db();
+        $stmt = $db->query(
+            "SELECT e.clave, e.nombre, c.nombre as categoria, e.tiempo, e.muestra, e.preparacion
+             FROM cat_estudios e
+             LEFT JOIN cat_categorias c ON e.categoria_id = c.id
+             ORDER BY e.nombre ASC"
+        );
+        $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        echo json_encode(['ok' => true, 'catalog' => $rows]);
+    } catch (\PDOException $e) {
+        http_response_code(500);
+        echo json_encode(['ok' => false, 'msg' => 'Error al cargar catálogo.']);
+    }
+});
+
+// ── GET /api/notificaciones — Endpoint Polling Fallback ─────────────────────
+Flight::route('GET /api/notificaciones', function () {
+    $db = Flight::db();
+    $userId = (int)Flight::auth()->getUserId();
+    $since  = (int)($_GET['since'] ?? 0);
+
+    if ($since <= 0) {
+        $stmt = $db->prepare(
+            "SELECT id, tipo, folio_referencia, mensaje, creado_en 
+             FROM notificaciones 
+             WHERE user_id = :user_id AND leido = 0
+             ORDER BY id DESC LIMIT 15"
+        );
+        $stmt->execute(['user_id' => $userId]);
+    } else {
+        $stmt = $db->prepare(
+            "SELECT id, tipo, folio_referencia, mensaje, creado_en 
+             FROM notificaciones 
+             WHERE user_id = :user_id AND (UNIX_TIMESTAMP(creado_en) > :since OR leido = 0)
+             ORDER BY id DESC LIMIT 15"
+        );
+        $stmt->execute(['user_id' => $userId, 'since' => $since]);
+    }
+    $notifs = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+    Flight::json([
+        'success'        => true,
+        'notificaciones' => $notifs,
+        'timestamp'      => time(),
+        'server_time'    => time()
+    ]);
+});
+
+// ── POST /perfil/cambiar-password — Cambio autónomo de contraseña del médico (HTMX) ──
+Flight::route('POST /perfil/cambiar-password', function () {
+    Flight::rbac()->requirePermission('ver_ordenes_propias');
+
+    // Validar CSRF
+    $submittedToken = $_POST['csrf_token'] ?? '';
+    if (!hash_equals($_SESSION['csrf_token'] ?? '', $submittedToken)) {
+        \Common\Response::htmxError('Token de seguridad inválido. Recarga la página.');
+    }
+
+    $oldPassword = $_POST['old_password'] ?? '';
+    $newPassword = $_POST['new_password'] ?? '';
+    $confirmPass = $_POST['confirm_password'] ?? '';
+    $userId      = (int)Flight::auth()->getUserId();
+
+    if (empty($oldPassword) || empty($newPassword)) {
+        \Common\Response::htmxError('Todos los campos de contraseña son obligatorios.');
+    }
+
+    if ($newPassword !== $confirmPass) {
+        \Common\Response::htmxError('La nueva contraseña y su confirmación no coinciden.');
+    }
+
+    if (strlen($newPassword) < 8) {
+        \Common\Response::htmxError('La nueva contraseña debe tener al menos 8 dígitos.');
+    }
+
+    $resultado = \MD\Negocio\Ordenes::cambiarPasswordPropia($oldPassword, $newPassword, $userId);
+
+    if (!$resultado['success']) {
+        \Common\Response::htmxError($resultado['error'] ?? 'Error al cambiar la contraseña.');
+    }
+
+    \Common\Response::htmxSuccess($resultado['mensaje']);
+});
+
+// Iniciar router Flight
+Flight::start();
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Doctor Portal Tabs**
+
+Okay, I'm currently focused on dissecting the doctor portal's side menu and tabs. I've begun to catalogue each item, starting with "Nueva Orden" which is linked to `data-panel="panel-nueva-orden"`. The next phase involves cross-referencing these menu items against the codebase, specifically `medicos.php` and `medicos.js`. This should reveal their functionality.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.034622327s
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L419-499)</summary>
+
+**Path:** `Unknown file`
+
+```
+        }
+
+        function filtrarHistorialMedico() {
+            // Filtro por periodo — en esta versión muestra todos; filtrado real al conectar backend
+            refreshHistorialMedico();
+        }
+
+        function refreshCatalog() {
+            const tbody = document.querySelector('#tabla-catalogo-medico tbody');
+            if (!tbody) return;
+
+            if (window.laeshFlatCatalog && window.laeshFlatCatalog.length > 0) {
+                tbody.innerHTML = window.laeshFlatCatalog.map(item => `
+                    <tr>
+                        <td class="td-clave">${item.clave || ''}</td>
+                        <td class="td-nombre-estudio">${item.nombre} <br><small class="text-muted">${item.categoriaNombre || item.categoria || ''}</small></td>
+                        <td>${item.preparacion || ''}</td>
+                        <td>${item.tiempo || ''}</td>
+                    </tr>
+                `).join('');
+                return;
+            }
+
+            tbody.innerHTML = '<tr><td colspan="4">Cargando catálogo...</td></tr>';
+            
+            fetch('/laesh/md/estudios/todos')
+                .then(r => r.json())
+                .then(data => {
+                    if (data.ok && data.catalog) {
+                        tbody.innerHTML = data.catalog.map(item => `
+                            <tr>
+                                <td class="td-clave">${item.clave || ''}</td>
+                                <td class="td-nombre-estudio">${item.nombre} <br><small class="text-muted">${item.categoria || ''}</small></td>
+                                <td>${item.preparacion || ''}</td>
+                                <td>${item.tiempo || ''}</td>
+                            </tr>
+                        `).join('');
+                    } else {
+                        tbody.innerHTML = '<tr><td colspan="4">Error al cargar el catálogo.</td></tr>';
+                    }
+                })
+                .catch(err => {
+                    console.error('Error refreshCatalog', err);
+                    tbody.innerHTML = '<tr><td colspan="4">Error de conexión.</td></tr>';
+                });
+        }
+
+        // Cambiar Paneles / Tabs en Portal Médico (Rock-Solid)
+        const panelLabels = {
+            'panel-nueva-orden':       'Nueva Orden',
+            'panel-historial-medico':  'Órdenes Anteriores',
+            'panel-pacientes-medico':  'Pacientes',
+            'panel-reportes-medico':   'Reportes',
+            'panel-catalogo-medico':   'Catálogo de Estudios'
+        };
+        function cambiarTabMedico(panelId, el) {
+            document.querySelectorAll('.sidebar .nav-item').forEach(i => i.classList.remove('active'));
+            if (el) el.classList.add('active');
+            document.querySelectorAll('.tab-panel').forEach(p => p.style.display = 'none');
+            const target = document.getElementById(panelId);
+            if (target) target.style.display = 'block';
+            const bc = document.getElementById('header-bc-current');
+            if (bc && panelLabels[panelId]) bc.textContent = panelLabels[panelId];
+
+            if (panelId === 'panel-historial-medico')  refreshHistorialMedico();
+            if (panelId === 'panel-pacientes-medico')  refreshPacientesMedico();
+            if (panelId === 'panel-catalogo-medico')   refreshCatalog();
+        }
+
+        function refreshPacientesMedico() {
+            var orders = getOrders();
+            var tbody  = document.querySelector('#tabla-pacientes-medico tbody');
+            if (!tbody) return;
+
+            // Deduplicar por nombre; conservar la orden más reciente por paciente
+            var mapa = {};
+            orders.forEach(function(o) {
+                var prev = mapa[o.paciente];
+                if (!prev || new Date(o.fecha) > new Date(prev.fecha)) {
+                    mapa[o.paciente] = o;
+                }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `/laesh/md/`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 17 Sept 2026, 10:46 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `fetch(`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 17 Sept 2026, 10:46 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Portal Médico Details**
+
+I'm now diving deep into the Portal Médico's structure, specifically the `/laesh/md/` section. My current focus is a detailed tab-by-tab analysis. I'm taking a methodical approach to ensure every element, every menu item, and every data point is thoroughly examined. I will double-check each section and provide a comprehensive response to the user's questions to the best of my current ability.
+
+
+**Detailing Endpoint Interactions**
+
+My analysis indicates significant optimizations in the "Nueva Orden" tab. The study search autocomplete now uses `window.laeshFlatCatalog` for instant responses, eliminating any backend requests. The daily order table refreshes via a lightweight HTMX partial, triggered by events or new order submissions. The only active request is the "Generar Orden" button's HTMX POST for database saving. I'm now turning to other tabs, starting with a review of the "Catalogo de Estudios" endpoint.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.614858138s
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+## User Request
+
+para medicos:
+. Órdenes Anteriores, "Sus filtros de fecha y búsqueda por folio/paciente operan 100% en el cliente sobre el DOM", pero cuando va al servidor para traerse ese historico ?
+.  item menu: Catálogo de Estudios, que no tenga Fallback, deberia leer siempre de catalog-compiled
+ . para  Órdenes Hoy, de donde y como obtiene datos ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `medicos.php`
+**Language:** php
+
+**Open Files:**
+- `ws-client.js`
+- `CatalogBuilder.php`
+- `medicos.php`
+- `medicos.js`
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `historial-medico`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 17 Sept 2026, 10:55 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L389-429)</summary>
+
+**Path:** `Unknown file`
+
+```
+                if (o.estado === 'Resultados Listos') badgeClass = 'badge-listos';
+                if (o.estado === 'Cerrada')           badgeClass = 'badge-cerrada';
+
+                const fechaResultado = (o.estado === 'Resultados Listos' || o.estado === 'Cerrada')
+                    ? `<span class="span-fecha-lista">${o.fechaResultado || 'Hoy, 11:30 AM'}</span>`
+                    : `<span class="span-en-proceso">En proceso</span>`;
+
+                let accionBtn = '<span class="text-pendiente">Pendiente</span>';
+                if (o.estado === 'Resultados Listos' || o.estado === 'Cerrada') {
+                    accionBtn = `<button class="btn btn-primary btn-resultados-sm" data-action="ver-resultados" data-id="${o.id}">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Ver PDF
+                    </button>`;
+                }
+
+                const docIcon = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-folio-link"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>`;
+
+                return `
+                    <tr>
+                        <td class="td-folio-hist">
+                            <a href="#" class="lnk-folio lnk-folio-id" data-action="ver-solicitud" data-id="${o.id}">${o.id} ${docIcon}</a>
+                        </td>
+                        <td>${o.paciente}</td>
+                        <td>${o.estudios || 'Estudios de Rutina'}</td>
+                        <td>${o.fecha}</td>
+                        <td>${fechaResultado}</td>
+                        <td><span class="badge ${badgeClass}">${o.estado}</span></td>
+                        <td>${accionBtn}</td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function filtrarHistorialMedico() {
+            // Filtro por periodo — en esta versión muestra todos; filtrado real al conectar backend
+            refreshHistorialMedico();
+        }
+
+        function refreshCatalog() {
+            const tbody = document.querySelector('#tabla-catalogo-medico tbody');
+            if (!tbody) return;
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L369-429)</summary>
+
+**Path:** `Unknown file`
+
+```
+                                <tbody>
+                                    <?php if (!empty($ordenesPropias)): ?>
+                                        <?php foreach ($ordenesPropias as $ord): 
+                                            $eId = (int)($ord['estado_id'] ?? 1);
+                                            $badgeClass = 'badge-remitido';
+                                            if ($eId === 2) $badgeClass = 'badge-atencion';
+                                            elseif ($eId === 3) $badgeClass = 'badge-listos';
+                                            elseif ($eId === 4) $badgeClass = 'badge-cerrada';
+                                        ?>
+                                            <tr>
+                                                <td class="td-folio-hist">
+                                                    <a href="#" class="lnk-folio lnk-folio-id" data-action="ver-solicitud" data-id="<?= htmlspecialchars($ord['folio'] ?? '', ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($ord['folio'] ?? '', ENT_QUOTES, 'UTF-8') ?> <svg class="icon-folio-link" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></a>
+                                                </td>
+                                                <td><?= htmlspecialchars($ord['paciente_nombre'] ?? '', ENT_QUOTES, 'UTF-8') ?></td>
+                                                <td class="td-estudios-rc"><?= htmlspecialchars($ord['diagnostico'] ?? 'Solicitud Digital', ENT_QUOTES, 'UTF-8') ?></td>
+                                                <td><?= htmlspecialchars(date('d/m/Y H:i', strtotime($ord['creado_en'] ?? 'now')), ENT_QUOTES, 'UTF-8') ?></td>
+                                                <td class="td-fecha-resultado"><?= !empty($ord['fecha_resultado']) ? htmlspecialchars(date('d/m/Y H:i', strtotime($ord['fecha_resultado'])), ENT_QUOTES, 'UTF-8') : '—' ?></td>
+                                                <td><span class="badge <?= $badgeClass ?>"><?= htmlspecialchars($ord['estado_nombre'] ?? 'Emitida', ENT_QUOTES, 'UTF-8') ?></span></td>
+                                                <td>
+                                                    <?php if ($eId === 3 || $eId === 4): ?>
+                                                        <button class="btn btn-secondary btn-resultados-sm btn-ver-res" data-action="ver-resultados" data-id="<?= htmlspecialchars($ord['folio'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
+                                                            <svg class="icon-btn-left" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg> Ver Resultados
+                                                        </button>
+                                                    <?php else: ?>
+                                                        <span class="txt-muted-sm">En Proceso</span>
+                                                    <?php endif; ?>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    <?php else: ?>
+                                        <tr><td colspan="7" class="text-center txt-muted pa-4">No tiene órdenes emitidas el día de hoy.</td></tr>
+                                    <?php endif; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div><!-- /subtab-ordenes-hoy -->
+                </div><!-- /panel-nueva-orden -->
+
+                <!-- Panel 2: Órdenes Anteriores — Consulta retroactiva desde MariaDB -->
+                <div class="tab-panel d-none" id="panel-historial-medico">
+                    <div class="modal-sect-hd">
+                        <div>
+                            <h2 class="txt-pgd mb-0">Órdenes Anteriores</h2>
+                            <p class="txt-muted-4">Consulta retroactiva de todas las solicitudes enviadas a LAESH.</p>
+                        </div>
+                        <div class="d-inline-flex-ac">
+                            <label for="filtro-periodo-historial" class="txt-muted-sm">Periodo:</label>
+                            <select id="filtro-periodo-historial" class="select-sm select-sm--bg">
+                                <option value="dia">Hoy</option>
+                                <option value="semana" selected>Esta Semana</option>
+                                <option value="mes">Este Mes</option>
+                                <option value="anio">Este Año</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <table id="tabla-historial-completo">
+                            <thead>
+                                <tr>
+                                    <th>Folio</th>
+                                    <th>Paciente</th>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L429-464)</summary>
+
+**Path:** `Unknown file`
+
+```
+                                    <th>Paciente</th>
+                                    <th>Estudios</th>
+                                    <th>Fecha Emisión</th>
+                                    <th>Fecha Resultado</th>
+                                    <th>Estado</th>
+                                    <th>Acción / PDF</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if (!empty($ordenesAnteriores)): ?>
+                                    <?php foreach ($ordenesAnteriores as $ord): 
+                                        $eId = (int)($ord['estado_id'] ?? 1);
+                                        $badgeClass = 'badge-remitido';
+                                        if ($eId === 2) $badgeClass = 'badge-atencion';
+                                        elseif ($eId === 3) $badgeClass = 'badge-listos';
+                                        elseif ($eId === 4) $badgeClass = 'badge-cerrada';
+                                    ?>
+                                        <tr>
+                                            <td class="td-folio-hist">
+                                                <a href="#" class="lnk-folio lnk-folio-id" data-action="ver-solicitud" data-id="<?= htmlspecialchars($ord['folio'] ?? '', ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($ord['folio'] ?? '', ENT_QUOTES, 'UTF-8') ?> <svg class="icon-folio-link" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></a>
+                                            </td>
+                                            <td><?= htmlspecialchars($ord['paciente_nombre'] ?? '', ENT_QUOTES, 'UTF-8') ?></td>
+                                            <td class="td-estudios-rc"><?= htmlspecialchars($ord['diagnostico'] ?? 'Solicitud Digital', ENT_QUOTES, 'UTF-8') ?></td>
+                                            <td><?= htmlspecialchars(date('d/m/Y H:i', strtotime($ord['creado_en'] ?? 'now')), ENT_QUOTES, 'UTF-8') ?></td>
+                                            <td class="td-fecha-resultado"><?= !empty($ord['fecha_resultado']) ? htmlspecialchars(date('d/m/Y H:i', strtotime($ord['fecha_resultado'])), ENT_QUOTES, 'UTF-8') : '—' ?></td>
+                                            <td><span class="badge <?= $badgeClass ?>"><?= htmlspecialchars($ord['estado_nombre'] ?? 'Emitida', ENT_QUOTES, 'UTF-8') ?></span></td>
+                                            <td>
+                                                <?php if ($eId === 3 || $eId === 4): ?>
+                                                    <a href="/laesh/rc/orden/pdf?id=<?= (int)$ord['id'] ?>" target="_blank" class="btn btn-secondary btn-resultados-sm btn-ver-res">
+                                                        <svg class="icon-btn-left" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg> Ver PDF
+                                                    </a>
+                                                <?php else: ?>
+                                                    <span class="txt-muted-sm">En Proceso</span>
+                                                <?php endif; ?>
+                                            </td>
+                                        </tr>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Pinpointing Initial Load**
+
+I've just pinpointed the exact moment the server is accessed for historical orders. It happens during the initial page load, specifically with the `GET /laesh/md/` request in `laesh-swbldi/md/`. This confirms the timing of retrieving the historical order data, directly aligning it with the first interaction.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.063157489s
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L426-465)</summary>
+
+**Path:** `Unknown file`
+
+```
+        function refreshCatalog() {
+            const tbody = document.querySelector('#tabla-catalogo-medico tbody');
+            if (!tbody) return;
+
+            if (window.laeshFlatCatalog && window.laeshFlatCatalog.length > 0) {
+                tbody.innerHTML = window.laeshFlatCatalog.map(item => `
+                    <tr>
+                        <td class="td-clave">${item.clave || ''}</td>
+                        <td class="td-nombre-estudio">${item.nombre} <br><small class="text-muted">${item.categoriaNombre || item.categoria || ''}</small></td>
+                        <td>${item.preparacion || ''}</td>
+                        <td>${item.tiempo || ''}</td>
+                    </tr>
+                `).join('');
+                return;
+            }
+
+            tbody.innerHTML = '<tr><td colspan="4">Cargando catálogo...</td></tr>';
+            
+            fetch('/laesh/md/estudios/todos')
+                .then(r => r.json())
+                .then(data => {
+                    if (data.ok && data.catalog) {
+                        tbody.innerHTML = data.catalog.map(item => `
+                            <tr>
+                                <td class="td-clave">${item.clave || ''}</td>
+                                <td class="td-nombre-estudio">${item.nombre} <br><small class="text-muted">${item.categoria || ''}</small></td>
+                                <td>${item.preparacion || ''}</td>
+                                <td>${item.tiempo || ''}</td>
+                            </tr>
+                        `).join('');
+                    } else {
+                        tbody.innerHTML = '<tr><td colspan="4">Error al cargar el catálogo.</td></tr>';
+                    }
+                })
+                .catch(err => {
+                    console.error('Error refreshCatalog', err);
+                    tbody.innerHTML = '<tr><td colspan="4">Error de conexión.</td></tr>';
+                });
+        }
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Refactoring Catalog Retrieval**
+
+Okay, I'm currently working on refactoring the `refreshCatalog()` function within `medicos.js`. The goal is to eliminate the external API call and exclusively source data from `window.laeshFlatCatalog`. This will involve a `replace_file_content` operation to modify the `fetch` call and point the function to the local catalog data.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.055343899s
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 17 Sept 2026, 10:57 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Tracing Data Acquisition**
+
+Okay, I'm now verifying Question 3 about where "Órdenes Hoy" gets its data. I'm focusing on tracing this element, specifically `#tabla-medico`. I'm starting by looking at the initial server-side rendering, how it's loaded when the doctor first accesses the portal. My approach will drill down into this server-side process in detail.
+
+
+**Pinpointing Data Flow**
+
+I've traced the data flow for "Órdenes Hoy" and identified that the initial load for `#tabla-medico` is server-side rendered.  `MD\Negocio\Ordenes::obtenerOrdenesPropias` fetches the orders.  HTMX updates are also key, triggered by the `ordenCreada` event. The endpoint `/laesh/md/tabla-ordenes` fetches a small HTML fragment for the `<tbody>` via MariaDB, ensuring real-time updates without full page reloads. I'm focusing on clarifying how older orders are handled in particular.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.086068162s
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+## User Request
+
+. Órdenes Anteriores: ¿Cuándo va al servidor a traerse ese histórico? , se mejoro como lazyloading, cuando se arrelo el bug de espasmo ?
+.  Órdenes Hoy, tambien se debe estar refrescando cuando en recepción van cambiando los estados de la solicitud con los datos en las columnas que corresponda de acuerdo a la transicion de estado y asset asociado (pdf), esta logica y flujo esta programado ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `medicos.js`
+**Language:** javascript
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L459-499)</summary>
+
+**Path:** `Unknown file`
+
+```
+            if (bc && panelLabels[panelId]) bc.textContent = panelLabels[panelId];
+
+            if (panelId === 'panel-historial-medico')  refreshHistorialMedico();
+            if (panelId === 'panel-pacientes-medico')  refreshPacientesMedico();
+            if (panelId === 'panel-catalogo-medico')   refreshCatalog();
+        }
+
+        function refreshPacientesMedico() {
+            var orders = getOrders();
+            var tbody  = document.querySelector('#tabla-pacientes-medico tbody');
+            if (!tbody) return;
+
+            // Deduplicar por nombre; conservar la orden más reciente por paciente
+            var mapa = {};
+            orders.forEach(function(o) {
+                var prev = mapa[o.paciente];
+                if (!prev || new Date(o.fecha) > new Date(prev.fecha)) {
+                    mapa[o.paciente] = o;
+                }
+            });
+
+            var unicos = Object.values(mapa).sort(function(a, b) {
+                return new Date(b.fecha) - new Date(a.fecha);
+            });
+
+            var spanTotal = document.getElementById('pacientes-medico-total');
+            if (spanTotal) {
+                spanTotal.textContent = 'Total: ' + unicos.length +
+                    (unicos.length === 1 ? ' Paciente' : ' Pacientes');
+            }
+
+            if (unicos.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" class="tbl-empty-cell">Sin pacientes registrados aún.</td></tr>';
+                return;
+            }
+
+            var badgeMap = {
+                'En Atención':      'badge-atencion',
+                'Resultados Listos': 'badge-listos',
+                'Cerrada':          'badge-cerrada'
+            };
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Refresh Functions**
+
+Okay, I'm now diving into the workings of `refreshHistorialMedico()`, `refreshPacientesMedico()`, and `refreshCatalog()`. My focus is on how they handle historical data retrieval, specifically considering lazy loading and the bug fix related to the 'espasmo' issue. This is how I am approaching Question 1.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `orden`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.061884626s
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 17 Sept 2026, 11:02 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ws-client.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L239-284)</summary>
+
+**Path:** `Unknown file`
+
+```
+        // Refrescar el catálogo compilado en memoria (catalog-compiled.js) cuando el Admin / Recepción modifica MariaDB
+        if (data.event === 'catalogo_actualizado') {
+            var oldScript = document.getElementById('script-catalog-compiled');
+            if (oldScript) oldScript.remove();
+            var s = document.createElement('script');
+            s.id = 'script-catalog-compiled';
+            s.src = '/laesh-web-assets-uipv1a/js/catalog-compiled.js?v=' + Date.now();
+            document.head.appendChild(s);
+            console.info('[LAESH Notif] Catálogo compilado sincronizado en memoria (catalog-compiled.js)');
+        }
+
+        // Refrescar automáticamente la tabla de recepción o médicos
+        if (data.event === 'nueva_orden' || data.event === 'orden_actualizada' || data.event === 'resultado_disponible') {
+            var tablaRecepcion = document.getElementById('tabla-recepcion');
+            var tablaMedico = document.getElementById('tabla-medico');
+
+            if (tablaRecepcion && typeof htmx !== 'undefined') {
+                htmx.trigger(tablaRecepcion, 'refresh');
+            } else if (tablaRecepcion) {
+                var btnRefreshR = document.getElementById('btn-refrescar-tabla');
+                if (btnRefreshR) btnRefreshR.click();
+            }
+
+            // FIX-SPASM: Si el médico tiene foco en el form de nueva orden,
+            // diferir el swap de tabla-medico para no robar el cursor del input activo.
+            if (tablaMedico) {
+                var formOrden = document.getElementById('form-orden');
+                var activeEl  = document.activeElement;
+                var userIsTyping = formOrden && activeEl &&
+                    (activeEl.tagName === 'INPUT' || activeEl.tagName === 'TEXTAREA') &&
+                    formOrden.contains(activeEl);
+
+                var doRefreshMedico = function() {
+                    if (typeof htmx !== 'undefined') {
+                        htmx.trigger(tablaMedico, 'refresh');
+                    } else {
+                        var btnRefreshM = document.getElementById('btn-refrescar-tabla');
+                        if (btnRefreshM) btnRefreshM.click();
+                    }
+                };
+
+                if (userIsTyping) {
+                    if (!activeEl._hasPendingRefresh) {
+                        activeEl._hasPendingRefresh = true;
+                        var _onBlur = function() {
+                            activeEl._hasPendingRefresh = false;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ws-client.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L274-309)</summary>
+
+**Path:** `Unknown file`
+
+```
+                    } else {
+                        var btnRefreshM = document.getElementById('btn-refrescar-tabla');
+                        if (btnRefreshM) btnRefreshM.click();
+                    }
+                };
+
+                if (userIsTyping) {
+                    if (!activeEl._hasPendingRefresh) {
+                        activeEl._hasPendingRefresh = true;
+                        var _onBlur = function() {
+                            activeEl._hasPendingRefresh = false;
+                            activeEl.removeEventListener('blur', _onBlur);
+                            doRefreshMedico();
+                        };
+                        activeEl.addEventListener('blur', _onBlur);
+                    }
+                } else {
+                    doRefreshMedico();
+                }
+            }
+        }
+
+        // Feedback auditivo (solo si ya existió interacción de usuario)
+        playChime();
+    }
+
+    function playChime() {
+        if (!hasUserGesture || !sharedAudioCtx) return;
+        try {
+            if (sharedAudioCtx.state === 'suspended') {
+                var p = sharedAudioCtx.resume();
+                if (p && typeof p.then === 'function') {
+                    p.then(function() { triggerTone(sharedAudioCtx); }).catch(function() {});
+                }
+            } else {
+                triggerTone(sharedAudioCtx);
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Questions Meticulously**
+
+I'm diving deep into the questions, starting with "Órdenes Anteriores". My focus is on dissecting each query, paying close attention to the nuances and implications of terms like "lazyloading" and "bug de espasmo." I want to ensure my response is precise and comprehensively addresses all aspects of the user's inquiry. I'm taking the opportunity to compare this to other previous similar examples.
+
+
+**Clarifying Technical Improvements**
+
+I've clarified the technical improvements. Lazy loading is now implemented, deferring the heavy functions until a user explicitly clicks a menu item. Furthermore, I optimized the DOM rendering by switching from iterative HTML concatenation to a single atomic operation, minimizing reflows. I am also moving to question 2.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.256526888s
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+## User Request
+
+. tambien debe aplicar los refresg y notificaciones para ordenes anteriores pues el laboratorio podra actualizar las transciones en mismo dia o >  a un dia, ajusta lo necesario, dime si hay gaps, issues.
+. y enforma reciproca los estados realiza el medico a la orden como transición inicial "creacion de orden" hacia el portal ordenes para recepción le debe aparecer al instante con su respectiva notificacion.
+analiza, realiza e informa me
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `medicos.js`
+**Language:** javascript
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `tabla-historial-completo`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 17 Sept 2026, 11:10 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L419-444)</summary>
+
+**Path:** `Unknown file`
+
+```
+                                <option value="mes">Este Mes</option>
+                                <option value="anio">Este Año</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <table id="tabla-historial-completo">
+                            <thead>
+                                <tr>
+                                    <th>Folio</th>
+                                    <th>Paciente</th>
+                                    <th>Estudios</th>
+                                    <th>Fecha Emisión</th>
+                                    <th>Fecha Resultado</th>
+                                    <th>Estado</th>
+                                    <th>Acción / PDF</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if (!empty($ordenesAnteriores)): ?>
+                                    <?php foreach ($ordenesAnteriores as $ord): 
+                                        $eId = (int)($ord['estado_id'] ?? 1);
+                                        $badgeClass = 'badge-remitido';
+                                        if ($eId === 2) $badgeClass = 'badge-atencion';
+                                        elseif ($eId === 3) $badgeClass = 'badge-listos';
+                                        elseif ($eId === 4) $badgeClass = 'badge-cerrada';
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `tabla-recepcion`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 17 Sept 2026, 11:10 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ws-client.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L249-294)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+        // Refrescar automáticamente la tabla de recepción o médicos
+        if (data.event === 'nueva_orden' || data.event === 'orden_actualizada' || data.event === 'resultado_disponible') {
+            var tablaRecepcion = document.getElementById('tabla-recepcion');
+            var tablaMedico = document.getElementById('tabla-medico');
+
+            if (tablaRecepcion && typeof htmx !== 'undefined') {
+                htmx.trigger(tablaRecepcion, 'refresh');
+            } else if (tablaRecepcion) {
+                var btnRefreshR = document.getElementById('btn-refrescar-tabla');
+                if (btnRefreshR) btnRefreshR.click();
+            }
+
+            // FIX-SPASM: Si el médico tiene foco en el form de nueva orden,
+            // diferir el swap de tabla-medico para no robar el cursor del input activo.
+            if (tablaMedico) {
+                var formOrden = document.getElementById('form-orden');
+                var activeEl  = document.activeElement;
+                var userIsTyping = formOrden && activeEl &&
+                    (activeEl.tagName === 'INPUT' || activeEl.tagName === 'TEXTAREA') &&
+                    formOrden.contains(activeEl);
+
+                var doRefreshMedico = function() {
+                    if (typeof htmx !== 'undefined') {
+                        htmx.trigger(tablaMedico, 'refresh');
+                    } else {
+                        var btnRefreshM = document.getElementById('btn-refrescar-tabla');
+                        if (btnRefreshM) btnRefreshM.click();
+                    }
+                };
+
+                if (userIsTyping) {
+                    if (!activeEl._hasPendingRefresh) {
+                        activeEl._hasPendingRefresh = true;
+                        var _onBlur = function() {
+                            activeEl._hasPendingRefresh = false;
+                            activeEl.removeEventListener('blur', _onBlur);
+                            doRefreshMedico();
+                        };
+                        activeEl.addEventListener('blur', _onBlur);
+                    }
+                } else {
+                    doRefreshMedico();
+                }
+            }
+        }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Tracing the Order Flow**
+
+I'm now tracing the order flow. I'm focusing on the first direction: when a doctor submits a new digital order. I'm looking at how the system handles the `POST /laesh/md/orden` endpoint. The goal is to fully understand the actions in the backend after the `Médico` generates an order, and the `Recepción` gets notified with the refreshed table.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `route`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.062571845s
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 17 Sept 2026, 11:11 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L179-217)</summary>
+
+**Path:** `Unknown file`
+
+```
+    ]);
+
+    \Common\Response::htmxSuccess($resultado['mensaje']);
+});
+
+// ── POST /orden/estado — Cambiar estado de una orden (HTMX) ─────────────────
+Flight::route('POST /orden/estado', function () {
+    Flight::rbac()->requirePermission('gestionar_ordenes');
+
+    $ordenId       = (int)($_POST['orden_id'] ?? 0);
+    $nuevoEstadoId = (int)($_POST['nuevo_estado_id'] ?? 0);
+    $observacion   = trim($_POST['observacion'] ?? '');
+    $userId        = (int)Flight::auth()->getUserId();
+
+    if ($ordenId <= 0 || $nuevoEstadoId <= 0) {
+        \Common\Response::htmxError('Parámetros de orden no válidos.');
+    }
+
+    $resultado = \RC\Negocio\Ordenes::cambiarEstado($ordenId, $nuevoEstadoId, $userId, $observacion);
+
+    if (!$resultado['success']) {
+        \Common\Response::htmxError($resultado['error'] ?? 'Error al actualizar el estado.');
+    }
+
+    // Emitir notificación Swoole WS de cambio de estado
+    \Common\Notifier::emit('orden_actualizada', [
+        'folio'    => $resultado['folio'] ?? '',
+        'orden_id' => $ordenId,
+        'estado'   => $nuevoEstadoId,
+        'titulo'   => 'Orden Actualizada (' . ($resultado['folio'] ?? '') . ')',
+        'mensaje'  => "La orden {$resultado['folio']} ha cambiado de estado."
+    ]);
+
+    \Common\Response::htmxSuccess($resultado['mensaje']);
+});
+
+// ── GET /api/estudios — Catálogo plano para tabla "Catálogos de Análisis" (panel RC/Admin) ──
+// Corrección de raíz: antes apuntaba a /laesh/md/estudios/todos que tiene guard RBAC
+// 'ver_ordenes_propias' (solo médicos) → usuarios recepción/admin veían tabla vacía.
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L634-684)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+// ── POST /orden/subir-pdf — Carga física de archivo PDF de resultados ──────────────
+Flight::route('POST /orden/subir-pdf', function () {
+    Flight::rbac()->requirePermission('gestionar_ordenes');
+
+    $ordenId = (int)($_POST['orden_id'] ?? 0);
+    $userId  = (int)Flight::auth()->getUserId();
+
+    if ($ordenId <= 0 || empty($_FILES['pdf_file']['name'])) {
+        \Common\Response::htmxError('Debe seleccionar una orden y un archivo PDF válido.');
+    }
+
+    $file = $_FILES['pdf_file'];
+    $ext  = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+    if ($ext !== 'pdf') {
+        \Common\Response::htmxError('El archivo debe ser un documento PDF (.pdf).');
+    }
+
+    // Directorio de almacenamiento de uploads — FUERA del webroot (protegido por nginx internal)
+    // Nginx sirve vía X-Accel-Redirect /laesh-uploads/pdfs/ → /opt/laesh/uploads/pdfs/
+    $uploadDir = '/opt/laesh/uploads/pdfs/';
+    if (!is_dir($uploadDir)) {
+        mkdir($uploadDir, 0750, true);
+    }
+
+    $filename    = 'resultado_ord_' . $ordenId . '_' . time() . '.pdf';
+    $targetPath  = $uploadDir . $filename;
+    $relativeUrl = '/laesh-uploads/pdfs/' . $filename;
+
+    if (!move_uploaded_file($file['tmp_name'], $targetPath)) {
+        \Common\Response::htmxError('Error al guardar el archivo PDF en el servidor.');
+    }
+
+    $resultado = \RC\Negocio\Ordenes::guardarResultadoPDF($ordenId, $file['name'], $relativeUrl, $userId);
+
+    if (!$resultado['success']) {
+        \Common\Response::htmxError($resultado['error'] ?? 'Error al asociar el PDF con la orden.');
+    }
+
+    // Emitir notificación WS
+    \Common\Notifier::emit('resultado_disponible', [
+        'folio'    => $resultado['folio'] ?? '',
+        'orden_id' => $ordenId,
+        'pdf_url'  => $relativeUrl,
+        'titulo'   => 'Resultados Listos (' . ($resultado['folio'] ?? '') . ')',
+        'mensaje'  => "Los resultados PDF de la orden {$resultado['folio']} ya están disponibles."
+    ]);
+
+    header('HX-Refresh: true');
+    \Common\Response::htmxSuccess("✓ PDF cargado correctamente para la orden {$resultado['folio']}.");
+});
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Notifications**
+
+I'm currently dissecting the implications of the user's request, specifically focusing on how to integrate refreshes and notifications. I see that `/orden/subir-pdf` emits `resultado_disponible` and `/orden/estado` emits `orden_actualizada`. I need to figure out how these existing events relate to the desired refreshes and notifications the user mentioned. The user wants the implementation to be "también debe aplicar los refresg y notificaciones".
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `tabla-recepcion-anteriores`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.074694228s
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 17 Sept 2026, 11:11 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `labadmin.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L239-264)</summary>
+
+**Path:** `Unknown file`
+
+```
+                        <div>
+                            <h2 class="txt-pgd mb-0">Órdenes Anteriores</h2>
+                            <p class="txt-muted-4">Histórico de órdenes registradas en días anteriores.</p>
+                        </div>
+                    </div>
+                    <div class="card" aria-live="polite">
+                        <table id="tabla-recepcion-anteriores">
+                            <thead>
+                                <tr>
+                                    <th class="wsnowrap">Folio</th>
+                                    <th>Paciente</th>
+                                    <th>Estudios / Diagnóstico</th>
+                                    <th>Médico Remitente</th>
+                                    <th>Hora Captura</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if (!empty($ordenesAnteriores)): ?>
+                                    <?php foreach ($ordenesAnteriores as $ord): 
+                                        $eId = (int)($ord['estado_id'] ?? 1);
+                                        $badgeClass = 'badge-remitido';
+                                        if ($eId === 2) $badgeClass = 'badge-atencion';
+                                        elseif ($eId === 3) $badgeClass = 'badge-listos';
+                                        elseif ($eId === 4) $badgeClass = 'badge-cerrada';
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Verifying System Notifications**
+
+Okay, I'm now delving into how the "Recepción" component receives and processes new orders. Specifically, I'm concentrating on the instant notification aspect, ensuring that the system delivers this timely update to the receiving end, as specified, and verifying how the transition should occur. I am focused on the "creación de orden" transition into the system.
+
+
+**Optimizing Recepción Refresh**
+
+I've determined the "Recepción" component's refresh mechanism is inefficient, as it currently loads an entire page for updates. I've designed a solution that will create a dedicated partial endpoint, `/laesh/rc/tabla-ordenes`, to serve only the relevant `<tbody>` content. This should drastically improve performance and make the update sub-millisecond and ultra-fast. I'm also now analyzing the need to refresh other components such as historical orders.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.504914232s
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L79-124)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+// ── GET /tabla-ordenes — Partial HTMX ultraligero de la tabla de órdenes de hoy ─────
+Flight::route('GET /tabla-ordenes', function () {
+    header('Content-Type: text/html; charset=utf-8');
+    $userId = (int)Flight::auth()->getUserId();
+    $ordenesPropias = \MD\Negocio\Ordenes::obtenerOrdenesPropias($userId, 50);
+
+    echo '<tbody>';
+    if (!empty($ordenesPropias)) {
+        foreach ($ordenesPropias as $ord) {
+            $eId = (int)($ord['estado_id'] ?? 1);
+            $badgeClass = 'badge-remitido';
+            if ($eId === 2) $badgeClass = 'badge-atencion';
+            elseif ($eId === 3) $badgeClass = 'badge-listos';
+            elseif ($eId === 4) $badgeClass = 'badge-cerrada';
+
+            $folio = htmlspecialchars($ord['folio'] ?? '', ENT_QUOTES, 'UTF-8');
+            $paciente = htmlspecialchars($ord['paciente_nombre'] ?? '', ENT_QUOTES, 'UTF-8');
+            $diag = htmlspecialchars($ord['diagnostico'] ?? 'Solicitud Digital', ENT_QUOTES, 'UTF-8');
+            $fEmis = htmlspecialchars(date('d/m/Y H:i', strtotime($ord['creado_en'] ?? 'now')), ENT_QUOTES, 'UTF-8');
+            $fRes = !empty($ord['fecha_resultado']) ? htmlspecialchars(date('d/m/Y H:i', strtotime($ord['fecha_resultado'])), ENT_QUOTES, 'UTF-8') : '—';
+            $estado = htmlspecialchars($ord['estado_nombre'] ?? 'Emitida', ENT_QUOTES, 'UTF-8');
+
+            $btnAccion = ($eId === 3 || $eId === 4)
+                ? '<button class="btn btn-secondary btn-resultados-sm btn-ver-res" data-action="ver-resultados" data-id="' . $folio . '">'
+                . '<svg class="icon-btn-left" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg> Ver Resultados'
+                . '</button>'
+                : '<span class="txt-muted-sm">En Proceso</span>';
+
+            echo '<tr>'
+               . '<td class="td-folio-hist"><a href="#" class="lnk-folio lnk-folio-id" data-action="ver-solicitud" data-id="' . $folio . '">' . $folio . ' <svg class="icon-folio-link" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></a></td>'
+               . '<td>' . $paciente . '</td>'
+               . '<td class="td-estudios-rc">' . $diag . '</td>'
+               . '<td>' . $fEmis . '</td>'
+               . '<td class="td-fecha-resultado">' . $fRes . '</td>'
+               . '<td><span class="badge ' . $badgeClass . '">' . $estado . '</span></td>'
+               . '<td>' . $btnAccion . '</td>'
+               . '</tr>';
+        }
+    } else {
+        echo '<tr><td colspan="7" class="text-center txt-muted pa-4">No tiene órdenes emitidas el día de hoy.</td></tr>';
+    }
+    echo '</tbody>';
+});
+
+// ── POST /orden/crear — Procesar creación de orden médica (HTMX) ───────────────
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Adding New Endpoint**
+
+I've decided to incorporate a new endpoint, specifically `GET /tabla-ordenes-anteriores`, into the `laesh-swbldi/md/index.php` file, right after the existing `GET /tabla-ordenes`. My approach involves using `replace_file_content` to ensure this addition occurs seamlessly.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.093914155s
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 17 Sept 2026, 11:12 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L419-429)</summary>
+
+**Path:** `Unknown file`
+
+```
+                                <option value="mes">Este Mes</option>
+                                <option value="anio">Este Año</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <table id="tabla-historial-completo">
+                            <thead>
+                                <tr>
+                                    <th>Folio</th>
+                                    <th>Paciente</th>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 17 Sept 2026, 11:12 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L64-94)</summary>
+
+**Path:** `Unknown file`
+
+```
+    $ordenesAnteriores   = \RC\Negocio\Ordenes::obtenerOrdenesAnteriores(100);
+    $pacientesCatalog    = \RC\Negocio\Ordenes::obtenerPacientes(100);
+    $totalPacientes      = count($pacientesCatalog);
+    $catalogosUI         = \RC\Negocio\Ordenes::obtenerCatalogosUI();
+    $estadisticasGeneral = \RC\Negocio\Ordenes::obtenerEstadisticasGeneral();
+
+    // SEC: frame-ancestors vía HTTP header real (meta tag es ignorado por browsers)
+    header('X-Frame-Options: DENY');
+    header('Content-Security-Policy: frame-ancestors \'none\'', false);
+
+    // Plates — directorio de vistas es rc/
+    Flight::view()->setDirectory(__DIR__);
+    echo Flight::view()->render('views/labadmin', [
+        'nombreUsuario'       => $nombreUsuario,
+        'rolUsuario'          => $authRole,
+        'isAdmin'             => $isAdmin,
+        'csrfToken'           => $_SESSION['csrf_token'],
+        'ordenesRecientes'    => $ordenesRecientes,
+        'ordenesAnteriores'   => $ordenesAnteriores,
+        'medicosCatalog'      => $medicosCatalog,
+        'pacientesCatalog'    => $pacientesCatalog,
+        'totalPacientes'      => $totalPacientes,
+        'catalogosUI'         => $catalogosUI,
+        'estadisticasGeneral' => $estadisticasGeneral
+    ]);
+});
+
+// ── POST /medico/crear — Registrar perfil médico completo en MariaDB (HTMX) ──────
+Flight::route('POST /medico/crear', function () {
+    Flight::rbac()->requirePermission('gestionar_medicos');
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `labadmin.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L164-269)</summary>
+
+**Path:** `Unknown file`
+
+```
+                    <!-- A2-fix: aria-live notifica a screen readers cuando JS actualiza la tabla de órdenes -->
+                    <div class="card" aria-live="polite" aria-relevant="additions text" aria-atomic="false">
+                        <table id="tabla-recepcion" hx-get="/laesh/rc/" hx-select="#tabla-recepcion tbody" hx-target="#tabla-recepcion tbody" hx-swap="outerHTML" hx-trigger="refresh, ordenCreada from:body">
+                            <thead>
+                                <tr>
+                                    <th class="wsnowrap">Folio</th>
+                                    <th>Paciente</th>
+                                    <th>Médico Remitente</th>
+                                    <th>Especialidad</th>
+                                    <th>Estudios</th>
+                                    <th>Fecha Emisión</th>
+                                    <th>Fecha Resultado</th>
+                                    <th>Estado</th>
+                                    <th>Acción Requerida</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if (!empty($ordenesRecientes)): ?>
+                                    <?php foreach ($ordenesRecientes as $ord): 
+                                        $eId = (int)($ord['estado_id'] ?? 1);
+                                        $badgeClass = 'badge-remitido';
+                                        if ($eId === 2) $badgeClass = 'badge-atencion';
+                                        elseif ($eId === 3) $badgeClass = 'badge-listos';
+                                        elseif ($eId === 4) $badgeClass = 'badge-cerrada';
+                                    ?>
+                                        <tr>
+                                            <td class="td-folio-hist">
+                                                <a href="#" class="lnk-folio lnk-folio-id" data-action="ver-solicitud" data-id="<?= htmlspecialchars($ord['folio'] ?? '', ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($ord['folio'] ?? '', ENT_QUOTES, 'UTF-8') ?> <svg class="icon-folio-link" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></a>
+                                            </td>
+                                            <td><?= htmlspecialchars($ord['paciente_nombre'] ?? '', ENT_QUOTES, 'UTF-8') ?></td>
+                                            <td class="td-medico"><?= htmlspecialchars($ord['medico_nombre'] ?? 'Médico General', ENT_QUOTES, 'UTF-8') ?></td>
+                                            <td class="td-especialidad-rc"><?= htmlspecialchars($ord['medico_especialidad'] ?? 'Medicina General', ENT_QUOTES, 'UTF-8') ?></td>
+                                            <td class="td-estudios-rc"><?= htmlspecialchars($ord['diagnostico'] ?? 'Estudios de Laboratorio', ENT_QUOTES, 'UTF-8') ?></td>
+                                            <td><?= htmlspecialchars(date('d/m/Y H:i', strtotime($ord['creado_en'] ?? 'now')), ENT_QUOTES, 'UTF-8') ?></td>
+                                            <td class="td-fecha-resultado"><?= !empty($ord['fecha_resultado']) ? htmlspecialchars(date('d/m/Y H:i', strtotime($ord['fecha_resultado'])), ENT_QUOTES, 'UTF-8') : '—' ?></td>
+                                            <td><span class="badge <?= $badgeClass ?>"><?= htmlspecialchars($ord['estado_nombre'] ?? 'Emitida', ENT_QUOTES, 'UTF-8') ?></span></td>
+                                             <td>
+                                                <?php if ($eId === 1): ?>
+                                                    <button type="button" class="btn btn-secondary btn-resultados-sm" hx-post="/laesh/rc/orden/estado" hx-vals='{"orden_id": <?= (int)$ord['id'] ?>, "nuevo_estado_id": 2}' hx-swap="none">
+                                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> Recibir Paciente
+                                                    </button>
+                                                <?php elseif ($eId === 2): ?>
+                                                    <button type="button" class="btn btn-primary btn-resultados-sm" data-action="subir-pdf" data-id="<?= (int)$ord['id'] ?>" onclick="document.getElementById('pdf-upload-input-<?= (int)$ord['id'] ?>').click()">
+                                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg> Subir Resultados PDF
+                                                    </button>
+                                                    <form id="form-pdf-<?= (int)$ord['id'] ?>" hx-post="/laesh/rc/orden/subir-pdf" hx-encoding="multipart/form-data" hx-swap="none" class="d-none">
+                                                        <input type="hidden" name="orden_id" value="<?= (int)$ord['id'] ?>">
+                                                        <input type="file" id="pdf-upload-input-<?= (int)$ord['id'] ?>" name="pdf_file" accept=".pdf" onchange="this.form.requestSubmit()">
+                                                    </form>
+                                                <?php elseif ($eId === 3 || $eId === 4): ?>
+                                                    <div class="btn-group-inline">
+                                                        <a href="/laesh/rc/orden/pdf?id=<?= (int)$ord['id'] ?>" target="_blank" class="btn btn-secondary btn-resultados-sm btn-ver-res">
+                                                            <svg class="icon-btn-left" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg> Ver PDF
+                                                        </a>
+                                                        <?php if ($eId === 3): ?>
+                                                            <button type="button" class="btn btn-primary btn-resultados-sm" hx-post="/laesh/rc/orden/estado" hx-vals='{"orden_id": <?= (int)$ord['id'] ?>, "nuevo_estado_id": 4}' hx-swap="none">
+                                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg> Entregar y Cerrar
+                                                            </button>
+                                                        <?php endif; ?>
+                                                    </div>
+                                                <?php else: ?>
+                                                    <span class="txt-muted-sm">Concluida</span>
+                                                <?php endif; ?>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Panel 1.5: Órdenes Anteriores -->
+                <div id="panel-ordenes-anteriores" class="tab-panel d-none">
+                    <div class="modal-sect-hd modal-sect-hd--plain">
+                        <div>
+                            <h2 class="txt-pgd mb-0">Órdenes Anteriores</h2>
+                            <p class="txt-muted-4">Histórico de órdenes registradas en días anteriores.</p>
+                        </div>
+                    </div>
+                    <div class="card" aria-live="polite">
+                        <table id="tabla-recepcion-anteriores">
+                            <thead>
+                                <tr>
+                                    <th class="wsnowrap">Folio</th>
+                                    <th>Paciente</th>
+                                    <th>Estudios / Diagnóstico</th>
+                                    <th>Médico Remitente</th>
+                                    <th>Hora Captura</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if (!empty($ordenesAnteriores)): ?>
+                                    <?php foreach ($ordenesAnteriores as $ord): 
+                                        $eId = (int)($ord['estado_id'] ?? 1);
+                                        $badgeClass = 'badge-remitido';
+                                        if ($eId === 2) $badgeClass = 'badge-atencion';
+                                        elseif ($eId === 3) $badgeClass = 'badge-listos';
+                                        elseif ($eId === 4) $badgeClass = 'badge-cerrada';
+                                    ?>
+                                        <tr>
+                                            <td class="td-folio-hist">
+                                                <a href="#" class="lnk-folio lnk-folio-id" data-action="ver-solicitud" data-id="<?= htmlspecialchars($ord['folio'] ?? '', ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($ord['folio'] ?? '', ENT_QUOTES, 'UTF-8') ?> <svg class="icon-folio-link" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></a>
+                                            </td>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L84-94)</summary>
+
+**Path:** `Unknown file`
+
+```
+        'pacientesCatalog'    => $pacientesCatalog,
+        'totalPacientes'      => $totalPacientes,
+        'catalogosUI'         => $catalogosUI,
+        'estadisticasGeneral' => $estadisticasGeneral
+    ]);
+});
+
+// ── POST /medico/crear — Registrar perfil médico completo en MariaDB (HTMX) ──────
+Flight::route('POST /medico/crear', function () {
+    Flight::rbac()->requirePermission('gestionar_medicos');
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 17 Sept 2026, 11:13 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `labadmin.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L164-249)</summary>
+
+**Path:** `Unknown file`
+
+```
+                    <!-- A2-fix: aria-live notifica a screen readers cuando JS actualiza la tabla de órdenes -->
+                    <div class="card" aria-live="polite" aria-relevant="additions text" aria-atomic="false">
+                        <table id="tabla-recepcion" hx-get="/laesh/rc/" hx-select="#tabla-recepcion tbody" hx-target="#tabla-recepcion tbody" hx-swap="outerHTML" hx-trigger="refresh, ordenCreada from:body">
+                            <thead>
+                                <tr>
+                                    <th class="wsnowrap">Folio</th>
+                                    <th>Paciente</th>
+                                    <th>Médico Remitente</th>
+                                    <th>Especialidad</th>
+                                    <th>Estudios</th>
+                                    <th>Fecha Emisión</th>
+                                    <th>Fecha Resultado</th>
+                                    <th>Estado</th>
+                                    <th>Acción Requerida</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if (!empty($ordenesRecientes)): ?>
+                                    <?php foreach ($ordenesRecientes as $ord): 
+                                        $eId = (int)($ord['estado_id'] ?? 1);
+                                        $badgeClass = 'badge-remitido';
+                                        if ($eId === 2) $badgeClass = 'badge-atencion';
+                                        elseif ($eId === 3) $badgeClass = 'badge-listos';
+                                        elseif ($eId === 4) $badgeClass = 'badge-cerrada';
+                                    ?>
+                                        <tr>
+                                            <td class="td-folio-hist">
+                                                <a href="#" class="lnk-folio lnk-folio-id" data-action="ver-solicitud" data-id="<?= htmlspecialchars($ord['folio'] ?? '', ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($ord['folio'] ?? '', ENT_QUOTES, 'UTF-8') ?> <svg class="icon-folio-link" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></a>
+                                            </td>
+                                            <td><?= htmlspecialchars($ord['paciente_nombre'] ?? '', ENT_QUOTES, 'UTF-8') ?></td>
+                                            <td class="td-medico"><?= htmlspecialchars($ord['medico_nombre'] ?? 'Médico General', ENT_QUOTES, 'UTF-8') ?></td>
+                                            <td class="td-especialidad-rc"><?= htmlspecialchars($ord['medico_especialidad'] ?? 'Medicina General', ENT_QUOTES, 'UTF-8') ?></td>
+                                            <td class="td-estudios-rc"><?= htmlspecialchars($ord['diagnostico'] ?? 'Estudios de Laboratorio', ENT_QUOTES, 'UTF-8') ?></td>
+                                            <td><?= htmlspecialchars(date('d/m/Y H:i', strtotime($ord['creado_en'] ?? 'now')), ENT_QUOTES, 'UTF-8') ?></td>
+                                            <td class="td-fecha-resultado"><?= !empty($ord['fecha_resultado']) ? htmlspecialchars(date('d/m/Y H:i', strtotime($ord['fecha_resultado'])), ENT_QUOTES, 'UTF-8') : '—' ?></td>
+                                            <td><span class="badge <?= $badgeClass ?>"><?= htmlspecialchars($ord['estado_nombre'] ?? 'Emitida', ENT_QUOTES, 'UTF-8') ?></span></td>
+                                             <td>
+                                                <?php if ($eId === 1): ?>
+                                                    <button type="button" class="btn btn-secondary btn-resultados-sm" hx-post="/laesh/rc/orden/estado" hx-vals='{"orden_id": <?= (int)$ord['id'] ?>, "nuevo_estado_id": 2}' hx-swap="none">
+                                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> Recibir Paciente
+                                                    </button>
+                                                <?php elseif ($eId === 2): ?>
+                                                    <button type="button" class="btn btn-primary btn-resultados-sm" data-action="subir-pdf" data-id="<?= (int)$ord['id'] ?>" onclick="document.getElementById('pdf-upload-input-<?= (int)$ord['id'] ?>').click()">
+                                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg> Subir Resultados PDF
+                                                    </button>
+                                                    <form id="form-pdf-<?= (int)$ord['id'] ?>" hx-post="/laesh/rc/orden/subir-pdf" hx-encoding="multipart/form-data" hx-swap="none" class="d-none">
+                                                        <input type="hidden" name="orden_id" value="<?= (int)$ord['id'] ?>">
+                                                        <input type="file" id="pdf-upload-input-<?= (int)$ord['id'] ?>" name="pdf_file" accept=".pdf" onchange="this.form.requestSubmit()">
+                                                    </form>
+                                                <?php elseif ($eId === 3 || $eId === 4): ?>
+                                                    <div class="btn-group-inline">
+                                                        <a href="/laesh/rc/orden/pdf?id=<?= (int)$ord['id'] ?>" target="_blank" class="btn btn-secondary btn-resultados-sm btn-ver-res">
+                                                            <svg class="icon-btn-left" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg> Ver PDF
+                                                        </a>
+                                                        <?php if ($eId === 3): ?>
+                                                            <button type="button" class="btn btn-primary btn-resultados-sm" hx-post="/laesh/rc/orden/estado" hx-vals='{"orden_id": <?= (int)$ord['id'] ?>, "nuevo_estado_id": 4}' hx-swap="none">
+                                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg> Entregar y Cerrar
+                                                            </button>
+                                                        <?php endif; ?>
+                                                    </div>
+                                                <?php else: ?>
+                                                    <span class="txt-muted-sm">Concluida</span>
+                                                <?php endif; ?>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Panel 1.5: Órdenes Anteriores -->
+                <div id="panel-ordenes-anteriores" class="tab-panel d-none">
+                    <div class="modal-sect-hd modal-sect-hd--plain">
+                        <div>
+                            <h2 class="txt-pgd mb-0">Órdenes Anteriores</h2>
+                            <p class="txt-muted-4">Histórico de órdenes registradas en días anteriores.</p>
+                        </div>
+                    </div>
+                    <div class="card" aria-live="polite">
+                        <table id="tabla-recepcion-anteriores">
+                            <thead>
+                                <tr>
+                                    <th class="wsnowrap">Folio</th>
+                                    <th>Paciente</th>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Refining Labadmin.php**
+
+I've just made some adjustments to `labadmin.php`. Specifically, I updated line 167. I modified the `hx-get` attribute to point to a new endpoint and set the `hx-target` to the tbody of the table. I'm also changing the `hx-swap` to `outerHTML` and `hx-trigger` with `refresh` and `ordenCreada` from the body. Now I'm moving on to line 246...
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.239737328s
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 17 Sept 2026, 11:13 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ws-client.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L249-294)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+        // Refrescar automáticamente la tabla de recepción o médicos
+        if (data.event === 'nueva_orden' || data.event === 'orden_actualizada' || data.event === 'resultado_disponible') {
+            var tablaRecepcion = document.getElementById('tabla-recepcion');
+            var tablaMedico = document.getElementById('tabla-medico');
+
+            if (tablaRecepcion && typeof htmx !== 'undefined') {
+                htmx.trigger(tablaRecepcion, 'refresh');
+            } else if (tablaRecepcion) {
+                var btnRefreshR = document.getElementById('btn-refrescar-tabla');
+                if (btnRefreshR) btnRefreshR.click();
+            }
+
+            // FIX-SPASM: Si el médico tiene foco en el form de nueva orden,
+            // diferir el swap de tabla-medico para no robar el cursor del input activo.
+            if (tablaMedico) {
+                var formOrden = document.getElementById('form-orden');
+                var activeEl  = document.activeElement;
+                var userIsTyping = formOrden && activeEl &&
+                    (activeEl.tagName === 'INPUT' || activeEl.tagName === 'TEXTAREA') &&
+                    formOrden.contains(activeEl);
+
+                var doRefreshMedico = function() {
+                    if (typeof htmx !== 'undefined') {
+                        htmx.trigger(tablaMedico, 'refresh');
+                    } else {
+                        var btnRefreshM = document.getElementById('btn-refrescar-tabla');
+                        if (btnRefreshM) btnRefreshM.click();
+                    }
+                };
+
+                if (userIsTyping) {
+                    if (!activeEl._hasPendingRefresh) {
+                        activeEl._hasPendingRefresh = true;
+                        var _onBlur = function() {
+                            activeEl._hasPendingRefresh = false;
+                            activeEl.removeEventListener('blur', _onBlur);
+                            doRefreshMedico();
+                        };
+                        activeEl.addEventListener('blur', _onBlur);
+                    }
+                } else {
+                    doRefreshMedico();
+                }
+            }
+        }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Refactoring DOM Updates**
+
+I'm currently working on updating `ws-client.js`. Specifically, I'm focusing on refreshing the `tablaRecepcionAnteriores` table if it exists and ensuring `tablaHistorialMedico` is refreshed inside the `doRefreshMedico()` function. The goal is to keep these tables up-to-date with the latest data.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.090394059s
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 17 Sept 2026, 11:14 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Reviewing Completed Work**
+
+I'm now diving into a thorough review of the completed analyses, implementations, and verifications. My main focus is on the "Órdenes Anteriores (Historial)" section. I've noted a critical issue: the `#tabla-historial-completo` in the Doctor's Portal is static. This creates a problem because the view is not updated when the lab changes the status or uploads a PDF.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.000320634s
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+## User Request
+
+sobre: la alerta visual en pantalla , espero te refieras a uso del panel de Notificaciones campanita, para los roles y pantallas de: medico, recepcion y admin; y no sea un nuevo toaster ; como lo implementaste ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `index.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `notificacion`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 17 Sept 2026, 11:17 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ws-client.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L99-239)</summary>
+
+**Path:** `Unknown file`
+
+```
+                    handleWsEvent(data);
+                } catch (e) {
+                    console.warn('[LAESH WS] Payload no JSON:', evt.data);
+                }
+            };
+
+            ws.onerror = function() {
+                startPollingFallback();
+            };
+
+            ws.onclose = function() {
+                if (reconnectAttempts < maxReconnects) {
+                    reconnectAttempts++;
+                    setTimeout(initWebSocket, reconnectInterval);
+                } else {
+                    startPollingFallback();
+                }
+            };
+        } catch (e) {
+            startPollingFallback();
+        }
+    }
+
+    function updateTitleCounter() {
+        if (unreadCount > 0) {
+            document.title = '(' + unreadCount + ') ' + originalTitle;
+        } else {
+            document.title = originalTitle;
+        }
+    }
+
+    function resetNotifBadges() {
+        unreadCount = 0;
+        updateTitleCounter();
+        var badges = document.querySelectorAll('#badge-recepcion, #badge-resultados, #badge-notif-cms, .bell-badge');
+        badges.forEach(function(b) {
+            b.textContent = '0';
+            b.classList.remove('show', 'pulse');
+            b.style.opacity = '0';
+        });
+    }
+
+    // Asegurar estructura visual de abanicos en la barra lateral de notificaciones
+    function ensureAccordionStructure(container) {
+        if (container.querySelector('.notif-accordion-group')) return;
+
+        container.innerHTML = 
+            '<div class="notif-accordion-group" style="display:flex; flex-direction:column; gap:8px;">' +
+                '<!-- Abanico Hoy -->' +
+                '<div class="notif-header-hoy" style="display:flex; align-items:center; justify-content:space-between; cursor:pointer; background:#eff6ff; padding:8px 12px; border-radius:6px; border-left:4px solid #0052b7;">' +
+                    '<span style="font-weight:600; font-size:0.85rem; color:#1e3a8a;">📅 Hoy</span>' +
+                    '<span class="badge-cnt-hoy" style="background:#0052b7; color:#fff; font-size:0.75rem; padding:2px 8px; border-radius:12px; font-weight:600;">0</span>' +
+                '</div>' +
+                '<div class="notif-body-hoy" style="display:flex; flex-direction:column; gap:6px;"></div>' +
+
+                '<!-- Abanico Ayer y Anteriores -->' +
+                '<div class="notif-header-anteriores" style="display:flex; align-items:center; justify-content:space-between; cursor:pointer; background:#f8fafc; padding:8px 12px; border-radius:6px; border-left:4px solid #64748b; margin-top:8px;">' +
+                    '<span style="font-weight:600; font-size:0.85rem; color:#475569;">🕒 Ayer y Anteriores</span>' +
+                    '<span class="badge-cnt-anteriores" style="background:#64748b; color:#fff; font-size:0.75rem; padding:2px 8px; border-radius:12px; font-weight:600;">0</span>' +
+                '</div>' +
+                '<div class="notif-body-anteriores" style="display:flex; flex-direction:column; gap:6px;"></div>' +
+            '</div>';
+
+        var headHoy = container.querySelector('.notif-header-hoy');
+        var bodyHoy = container.querySelector('.notif-body-hoy');
+        var headAnt = container.querySelector('.notif-header-anteriores');
+        var bodyAnt = container.querySelector('.notif-body-anteriores');
+
+        if (headHoy && bodyHoy) {
+            headHoy.addEventListener('click', function() {
+                bodyHoy.style.display = (bodyHoy.style.display === 'none') ? 'flex' : 'none';
+            });
+        }
+        if (headAnt && bodyAnt) {
+            headAnt.addEventListener('click', function() {
+                bodyAnt.style.display = (bodyAnt.style.display === 'none') ? 'flex' : 'none';
+            });
+        }
+    }
+
+    function isCreatedToday(dateStr) {
+        if (!dateStr) return true; // notificaciones en vivo
+        var notifDate = new Date(dateStr);
+        if (isNaN(notifDate.getTime())) return true;
+        var today = new Date();
+        return notifDate.getFullYear() === today.getFullYear() &&
+               notifDate.getMonth() === today.getMonth() &&
+               notifDate.getDate() === today.getDate();
+    }
+
+    function handleWsEvent(data) {
+        if (!data || !data.event) return;
+
+        // Incrementar contador de pestaña
+        unreadCount++;
+        updateTitleCounter();
+
+        // Actualizar globitos rojos de notificación con animación
+        var badges = document.querySelectorAll('#badge-recepcion, #badge-resultados, #badge-notif-cms, .bell-badge');
+        badges.forEach(function(b) {
+            var count = parseInt(b.textContent || '0', 10) + 1;
+            b.textContent = count;
+            b.classList.add('show', 'pulse');
+            b.style.display = 'inline-flex';
+            b.style.opacity = '1';
+        });
+
+        // Inyectar ítem visual en los abanicos del panel lateral
+        var notifLists = document.querySelectorAll('.sidebar-right-body, .sidebar-right .sidebar-right-body, .sidebar-right .modal-body, #sidebar-right .sidebar-right-body, #sidebar-right .modal-body');
+        notifLists.forEach(function(container) {
+            ensureAccordionStructure(container);
+
+            var isToday = isCreatedToday(data.creado_en);
+            var targetBody = isToday ? container.querySelector('.notif-body-hoy') : container.querySelector('.notif-body-anteriores');
+            var cntBadge   = isToday ? container.querySelector('.badge-cnt-hoy') : container.querySelector('.badge-cnt-anteriores');
+
+            if (!targetBody) return;
+
+            var item = document.createElement('div');
+            item.className = 'card card-sm border-left-primary';
+            item.style.padding = '8px 12px';
+            item.style.fontSize = '0.82rem';
+            item.style.background = isToday ? '#ffffff' : '#f8fafc';
+            item.style.borderLeft = isToday ? '3px solid #0052b7' : '3px solid #94a3b8';
+            item.style.borderRadius = '6px';
+            item.style.boxShadow = '0 1px 3px rgba(0,0,0,0.05)';
+
+            var timeStr = data.creado_en ? new Date(data.creado_en).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            item.innerHTML = '<strong style="color: #0f172a;">' + (data.titulo || 'Nueva Notificación') + '</strong><br>' +
+                             '<span class="txt-muted-sm" style="color: #475569; font-size: 0.78rem;">' + (data.mensaje || 'Se ha registrado una nueva actividad.') + '</span>' +
+                             '<div style="font-size:0.7rem; color:#94a3b8; margin-top:2px;">' + timeStr + '</div>';
+
+            // Inserción en orden descendente (más nueva arriba)
+            targetBody.insertBefore(item, targetBody.firstChild);
+
+            if (cntBadge) {
+                cntBadge.textContent = targetBody.children.length;
+            }
+        });
+
+        // Refrescar el catálogo compilado en memoria (catalog-compiled.js) cuando el Admin / Recepción modifica MariaDB
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `bell`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 17 Sept 2026, 11:17 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Notification Elements**
+
+I've been analyzing notification elements in `medicos.php` and `labadmin.php`. I've found an identical structure: a `bell-wrap` div with the ID `bell-wrap-notif` and a `bell-badge` span, also an ID and role set. I'm focusing on their functions in these specific files.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.021494941s
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+## User Request
+
+cuando lleguen las notificaciones en el panel, el usuario al dar click en alguna de los mensajes lo redirija ala pestaña correspondiente (Órdenes Hoy, Órdenes Anteriores) , y se resalte  el renglon correspondiente.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `medicos.php`
+**Language:** php
+</details>
 
 ---
 
