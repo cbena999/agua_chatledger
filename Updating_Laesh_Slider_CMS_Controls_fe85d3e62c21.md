@@ -7,9 +7,9 @@
 | **Trajectory ID** | `0d8eacd7-d4a8-4cd7-9ef7-2386edbb331c` |
 | **Cascade ID** | `6c5cb2b3-5120-4595-9e04-fe85d3e62c21` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 11529 |
+| **Total Steps** | 11581 |
 | **Started** | 11 Sept 2026, 10:39 am |
-| **Completed** | 17 Sept 2026, 10:02 am |
+| **Completed** | 17 Sept 2026, 10:24 am |
 
 ---
 
@@ -21486,6 +21486,1109 @@ vaya porfin quedoo!!!
 **Active File:** `medicos.js`
 **Language:** javascript
 </details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+## User Request
+
+1) El bucle destructivo tbody.innerHTML +=: Para armar la tabla del catálogo, el script recorría cientos de elementos ejecutando tbody.innerHTML += ... dentro de un bucle forEach,.. este cuando se inyecto/agrego pues en kvm2 no creo lo tenga o por que en kvm2 no tiene este bug de espasmo ?
+2) Analiza  a detalle que remanentes quedaron de soluciones de hoy y ayer estuvimos intentado en la desesperacion , sospecho hay codigo muerto, islas, y ademas cambiaste cosas en websocets y otras js, que no eran el problemas raiz, evalua y dame informe.
+
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `medicos.js`
+**Language:** javascript
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 17 Sept 2026, 10:09 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 17 Sept 2026, 10:09 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Inspecting Code Changes**
+
+I'm diving into the code now, focusing on the changes related to the table generation. I'm taking a close look at the use of `tbody.innerHTML +=` within the loop, aiming to pinpoint when this specific method was introduced/added to the script. I am currently deep in this section, and evaluating the logic within.
+
+
+**Tracing the Root Cause**
+
+I've traced the `forEach` loop with the `tbody.innerHTML +=` to the original static HTML template, `medicos.html`, which was then integrated into `medicos.js`. This function, `refreshCatalog()`, initially read from a mocked `localStorage`. Connecting to the local MariaDB exposed the performance issue. The move from a few items to hundreds of studies caused the `+=` to become an $O(N^2)$ nightmare. I'm now exploring why the spasm wasn't as severe in KVM2.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `app.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.159015695s
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L24-49)</summary>
+
+**Path:** `Unknown file`
+
+```
+}
+
+function getOrders() {
+    const data = localStorage.getItem(STORAGE_KEY);
+    return data ? JSON.parse(data) : [];
+}
+
+function saveOrders(orders) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(orders));
+    // NOTA: El evento nativo 'storage' de localStorage solo se dispara en OTRAS pestañas.
+    // NO disparar manualmente — causaba loop de re-render + espasmo en el input activo.
+}
+
+function getCatalog() {
+    const data = localStorage.getItem(CATALOG_KEY);
+    return data ? JSON.parse(data) : [];
+}
+
+function saveCatalog(catalog) {
+    localStorage.setItem(CATALOG_KEY, JSON.stringify(catalog));
+    // NOTA: Mismo fix — no disparar 'storage' sintético en la misma pestaña.
+}
+
+function createOrder(paciente, estudios, medico) {
+    const orders = getOrders();
+    const newOrder = {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ws-client.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L239-284)</summary>
+
+**Path:** `Unknown file`
+
+```
+        // Refrescar automáticamente la tabla de recepción o médicos
+        if (data.event === 'nueva_orden' || data.event === 'orden_actualizada' || data.event === 'resultado_disponible') {
+            var tablaRecepcion = document.getElementById('tabla-recepcion');
+            var tablaMedico = document.getElementById('tabla-medico');
+
+            if (tablaRecepcion && typeof htmx !== 'undefined') {
+                htmx.trigger(tablaRecepcion, 'refresh');
+            } else if (tablaRecepcion) {
+                var btnRefreshR = document.getElementById('btn-refrescar-tabla');
+                if (btnRefreshR) btnRefreshR.click();
+            }
+
+            // FIX-SPASM: Si el médico tiene foco en el form de nueva orden,
+            // diferir el swap de tabla-medico para no robar el cursor del input activo.
+            if (tablaMedico) {
+                var formOrden = document.getElementById('form-orden');
+                var activeEl  = document.activeElement;
+                var userIsTyping = formOrden && activeEl &&
+                    (activeEl.tagName === 'INPUT' || activeEl.tagName === 'TEXTAREA') &&
+                    formOrden.contains(activeEl);
+
+                var doRefreshMedico = function() {
+                    if (typeof htmx !== 'undefined') {
+                        htmx.trigger(tablaMedico, 'refresh');
+                    } else {
+                        var btnRefreshM = document.getElementById('btn-refrescar-tabla');
+                        if (btnRefreshM) btnRefreshM.click();
+                    }
+                };
+
+                if (userIsTyping) {
+                    if (!activeEl._hasPendingRefresh) {
+                        activeEl._hasPendingRefresh = true;
+                        var _onBlur = function() {
+                            activeEl._hasPendingRefresh = false;
+                            activeEl.removeEventListener('blur', _onBlur);
+                            doRefreshMedico();
+                        };
+                        activeEl.addEventListener('blur', _onBlur);
+                    }
+                } else {
+                    doRefreshMedico();
+                }
+            }
+        }
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1009-1054)</summary>
+
+**Path:** `Unknown file`
+
+```
+        function sanitizeInputPreserveSelection(el, regex, maxLen) {
+            var val = el.value;
+            var clean = val.replace(regex, '');
+            if (maxLen && clean.length > maxLen) {
+                clean = clean.slice(0, maxLen);
+            }
+            if (val !== clean) {
+                var start = el.selectionStart;
+                var end = el.selectionEnd;
+                el.value = clean;
+                if (start !== null && end !== null) {
+                    el.setSelectionRange(Math.min(start, clean.length), Math.min(end, clean.length));
+                }
+            }
+        }
+
+        var pacienteInput = document.getElementById('paciente');
+        var edadInput     = document.getElementById('edad');
+        var celularInput  = document.getElementById('celular');
+        var pageLoadTimestamp = performance.now();
+
+        if (pacienteInput) {
+            // Auto-focus al cargar la página para que el médico pueda escribir inmediatamente
+            setTimeout(function() {
+                if (document.activeElement !== pacienteInput) {
+                    try { pacienteInput.focus(); } catch(e) {}
+                }
+            }, 50);
+
+            pacienteInput.addEventListener('focus', function() {
+                var elapsed = (performance.now() - pageLoadTimestamp).toFixed(2);
+                console.info('[TIME_TRACKING] Focus en Nombre del Paciente en ' + elapsed + 'ms desde carga de página');
+            }, { once: true });
+
+            pacienteInput.addEventListener('input', function() {
+                sanitizeInputPreserveSelection(this, /[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, 35);
+            });
+        }
+
+        if (edadInput) {
+            edadInput.addEventListener('input', function() {
+                sanitizeInputPreserveSelection(this, /[^0-9]/g, 3);
+            });
+        }
+
+        if (celularInput) {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+## User Request
+
+. que devuelve esto: La nueva ruta ultraligera GET /tabla-ordenes que devuelve únicamente los 5 renglones  ?
+. [TIME_TRACKING] retiralo,y  añade al runbok de gemini y claude,  para que en adelante se use este mecanismo TIME_TRACKING en lugar de ui test browser pues eso no resulta apropiado para monitorear/diagnosticar espasmos por los propios delays de tu ui test; tambien añade cual fue la causa raz de bug (exponencialidad) y cual su solución.
+. si,  Retirar las líneas error_log($logMsg); de seguimiento de milisegundos.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `medicos.js`
+**Language:** javascript
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing the Query**
+
+I'm currently focused on dissecting the Spanish query. I am working to translate the question asking what the `GET /tabla-ordenes` endpoint provides when it retrieves the first 5 rows. I'm aiming to provide a concise and precise explanation.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.020738503s
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L64-84)</summary>
+
+**Path:** `Unknown file`
+
+```
+    header('X-Frame-Options: DENY');
+    header('Content-Security-Policy: frame-ancestors \'none\'', false); // false = no reemplaza el CSP global de nginx, agrega directiva
+
+    // Plates — directorio de vistas es md/
+    Flight::view()->setDirectory(__DIR__);
+    
+    $durationMs = number_format((microtime(true) - $tStart) * 1000, 2);
+    $logMsg = "[TIME_TRACKING] GET / (Portal Médico) completado en {$durationMs}ms para userId={$userId}";
+    Logger::logAlways('INFO', $logMsg);
+    error_log($logMsg);
+
+    echo Flight::view()->render('views/medicos', [
+        'nombreMedico'         => $nombreMedico,
+        'medProfile'           => $medProfile,
+        'csrfToken'            => $_SESSION['csrf_token'],
+        'ordenesPropias'       => $ordenesPropias,
+        'ordenesAnteriores'    => $ordenesAnteriores,
+        'pacientesMedico'      => $pacientesMedico,
+        'totalPacientesMedico' => count($pacientesMedico)
+    ]);
+});
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L164-184)</summary>
+
+**Path:** `Unknown file`
+
+```
+    ]));
+
+    \Common\Response::htmxSuccess($resultado['mensaje']);
+});
+
+// ── GET /estudios/buscar — Autocomplete FULLTEXT (HTMX / fetch) ───────────────
+// Alimenta: input#input-buscar-estudio-ficha en views/medicos.php
+// D-14: usa FULLTEXT KEY ft_nombre sobre estudios.nombre
+// Requiere sesión activa — RBAC ya fue verificado en el guard superior.
+// No muta datos → sin CSRF.
+Flight::route('GET /estudios/buscar', function () {
+    $tStart = microtime(true);
+    header('Content-Type: application/json; charset=utf-8');
+
+    // Delight-Auth: sesión activa verificada por el guard global; doble check ligero
+    if (!Flight::auth()->isLoggedIn()) {
+        http_response_code(401);
+        echo json_encode(['ok' => false, 'msg' => 'No autenticado.']);
+        return;
+    }
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L204-219)</summary>
+
+**Path:** `Unknown file`
+
+```
+             FROM cat_estudios e
+             LEFT JOIN cat_categorias c ON e.categoria_id = c.id
+             WHERE e.nombre LIKE :like
+             ORDER BY e.nombre ASC
+             LIMIT 12"
+        );
+        $stmt->execute([':like' => '%' . $q . '%']);
+        $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        $durationMs = number_format((microtime(true) - $tStart) * 1000, 2);
+        $logMsg = "[TIME_TRACKING] GET /estudios/buscar q='{$q}' duration={$durationMs}ms results=" . count($rows);
+        Logger::logAlways('INFO', $logMsg);
+        error_log($logMsg);
+
+        echo json_encode(['ok' => true, 'resultados' => $rows, 'elapsed_ms' => (float)$durationMs]);
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 17 Sept 2026, 10:21 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 17 Sept 2026, 10:21 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 17 Sept 2026, 10:22 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 17 Sept 2026, 10:22 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1029-1064)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+        if (pacienteInput) {
+            // Auto-focus al cargar la página para que el médico pueda escribir inmediatamente
+            setTimeout(function() {
+                if (document.activeElement !== pacienteInput) {
+                    try { pacienteInput.focus(); } catch(e) {}
+                }
+            }, 50);
+
+            pacienteInput.addEventListener('focus', function() {
+                var elapsed = (performance.now() - pageLoadTimestamp).toFixed(2);
+                console.info('[TIME_TRACKING] Focus en Nombre del Paciente en ' + elapsed + 'ms desde carga de página');
+            }, { once: true });
+
+            pacienteInput.addEventListener('input', function() {
+                sanitizeInputPreserveSelection(this, /[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, 35);
+            });
+        }
+
+        if (edadInput) {
+            edadInput.addEventListener('input', function() {
+                sanitizeInputPreserveSelection(this, /[^0-9]/g, 3);
+            });
+        }
+
+        if (celularInput) {
+            celularInput.addEventListener('input', function() {
+                sanitizeInputPreserveSelection(this, /[^0-9]/g, 10);
+            });
+        }
+
+        /* ── Autocomplete Search para las 18 Categorías ── */
+        var inputSearchFicha = document.getElementById('input-buscar-estudio-ficha');
+        var dropdownFichasRes = document.getElementById('autocomplete-results-fichas');
+
+        if (inputSearchFicha && dropdownFichasRes) {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1064-1089)</summary>
+
+**Path:** `Unknown file`
+
+```
+        if (inputSearchFicha && dropdownFichasRes) {
+            let searchTimeout;
+            inputSearchFicha.addEventListener('input', function() {
+                var q = this.value.toLowerCase().trim();
+                var tInput = performance.now();
+                if (q.length < 2) {
+                    dropdownFichasRes.classList.add('d-none');
+                    dropdownFichasRes.innerHTML = '';
+                    return;
+                }
+                
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(function() {
+                    var tFetchStart = performance.now();
+                    fetch('/laesh/md/estudios/buscar?q=' + encodeURIComponent(q))
+                    .then(r => r.json())
+                    .then(data => {
+                        var tFetchEnd = performance.now();
+                        var networkMs = (tFetchEnd - tFetchStart).toFixed(2);
+                        console.info('[TIME_TRACKING] GET /estudios/buscar?q=' + q + ' respondió en ' + networkMs + 'ms (servidor: ' + (data.elapsed_ms || '?') + 'ms)');
+                        if (data.ok && data.resultados && data.resultados.length > 0) {
+                            dropdownFichasRes.innerHTML = data.resultados.map(function(m) {
+                                return '<div class="autocomplete-fichas-item" data-action="select-autocomplete-study" data-val="' + m.nombre.replace(/"/g, '&quot;') + '">' +
+                                    '<span>' + m.nombre + '</span>' +
+                                    '<span class="cat-tag">' + (m.categoria || '') + '</span>' +
+                                '</div>';
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 17 Sept 2026, 10:22 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1024-1034)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+        var pacienteInput = document.getElementById('paciente');
+        var edadInput     = document.getElementById('edad');
+        var celularInput  = document.getElementById('celular');
+        var pageLoadTimestamp = performance.now();
+
+        if (pacienteInput) {
+            // Auto-focus al cargar la página para que el médico pueda escribir inmediatamente
+            setTimeout(function() {
+                if (document.activeElement !== pacienteInput) {
+                    try { pacienteInput.focus(); } catch(e) {}
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 17 Sept 2026, 10:23 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/.agents/rules`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>Directory: `rules` (28 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/.agents/rules`
+
+| Name | Type | Size |
+|------|------|------|
+| `01-infra-hosts.md` | File | 3507 bytes |
+| `02-reglas-negocio.md` | File | 16413 bytes |
+| `03-sincronizacion-b-a.md` | File | 4854 bytes |
+| `04-arquitectura-mvc.md` | File | 2764 bytes |
+| `05-despliegue-host-c.md` | File | 14947 bytes |
+| `06-accesos-rutas.md` | File | 4003 bytes |
+| `07-git-workflow.md` | File | 7239 bytes |
+| `08-integridad-ground-truth.md` | File | 3520 bytes |
+| `09-sesion-summary.md` | File | 6700 bytes |
+| `10-limitantes-webapp.md` | File | 11832 bytes |
+| `11-estandares-codigo.md` | File | 6810 bytes |
+| `12-estandar-conexion-mysqli.md` | File | 4991 bytes |
+| `13-idioma-espanol.md` | File | 1371 bytes |
+| `13-laesh-css-responsividad.md` | File | 14350 bytes |
+| `14-laesh-modelo-datos-decisiones.md` | File | 5809 bytes |
+| `14-restaurant-arquitectura-pwa.md` | File | 7104 bytes |
+| `15-html-php-migration.md` | File | 5589 bytes |
+| `15-restaurant-htmx-estandares.md` | File | 3179 bytes |
+| `16-restaurant-scaffolding-especificacion.md` | File | 3399 bytes |
+| `17-restaurant-delight-auth-rbac.md` | File | 3617 bytes |
+| `18-supremacia-especificacion-html.md` | File | 1439 bytes |
+| `19-laesh-arquitectura-frugal.md` | File | 1917 bytes |
+| `20-laesh-swoole-qos-notificaciones.md` | File | 2048 bytes |
+| `21-laesh-trazabilidad-observabilidad.md` | File | 1727 bytes |
+| `22-laesh-mariadb-conexion-estandares.md` | File | 2604 bytes |
+| `23-laesh-supremacia-especificacion-html.md` | File | 1366 bytes |
+| `24-laesh-estabilizacion-ui-estandares.md` | File | 12106 bytes |
+| `25-laesh-hero-slider-lineamientos.md` | File | 5976 bytes |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `24-laesh-estabilizacion-ui-estandares.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# Regla 24 — LAESH: Estándares de Estabilización UI/UX, Accesibilidad (A11y), Rendimiento y Conversión PHP
+
+> **SSOT de Estabilización Frontend & Backend para Ecosistema LAESH**
+> Documento fuente: `laesh-swbldi/website/uipv1/estabilizacionUI/reporte-estabilizacion-ui.html`
+> Todo desarrollo, refactorización o conversión a PHP en los portales LAESH (`labadmin`, `medicos`, `gestion-web`, `solicitud_dac_impr`) debe acatarse obligatoriamente a esta regla para evitar regresiones visuales o de código.
+
+---
+
+## 🎨 1. Arquitectura CSS, Especificidad y CSP
+
+- **R24-CSS-01 (Cero Inline Styles / CSP):** Queda estrictamente prohibido usar el atributo `style="..."` en código HTML de producción. Todos los estilos deben residir en las hojas de estilo correspondientes (`tokens.css`, `portal.css`, `style.css`), garantizando una Content Security Policy (CSP) restrictiva.
+- **R24-CSS-02 (Prohibición de `!important`):** No utilizar `!important` para sobreescribir estilos. Toda regla visual debe gestionarse mediante la especificidad de selectores nativa o la arquitectura modular de capas.
+- **R24-CSS-03 (Clases de Input Específicas):** Los elementos `<input type="text">`, `<input type="tel">` y `<input type="number">` deben llevar la clase `.form-input`. Nunca aplicar estilos globales a `input` que afecten indeseadamente a `input[type="checkbox"]` o `input[type="radio"]`.
+- **R24-CSS-04 (Etiquetas Form-Label):** Las etiquetas de formulario deben llevar la clase `.form-label`. Usar `<h3 class="orden-estudios-label">` o similar para encabezados semánticos de sección sin atributo `for`.
+- **R24-CSS-05 (Tokens Corporativos):** `tokens.css` es la única fuente de verdad para colores. El botón primario `.btn-primary` mantendrá siempre el verde corporativo LAESH (`#71CA11`), reservando los tonos azules para acentos de marcas/portales.
+
+---
+
+## 📱 2. Responsividad por Dispositivo y Plataforma
+
+- **R24-RESP-01 (Prohibición de `resize: both`):** No habilitar la propiedad CSS `resize: both` en elementos de interfaz para evitar manijas inservibles o colapsos visuales en dispositivos táctiles.
+- **R24-RESP-02 (Viewport Móvil Dinámico):** Los contenedores principales del layout en dispositivos móviles deben declarar `min-height: 100dvh` para evitar recortes de viewport causados por las barras dinámicas del navegador (Chrome Mobile, Safari iOS).
+- **R24-RESP-06 (Estructura de Renglones en Formulario Paciente, Fichas y Separadores):**
+  - **Desktop / Laptop (≥768px):**
+    - **Botones de Acción:** Muestran icono + texto completo ("Limpiar" y "Crear e Imprimir Orden").
+    - **Renglón 1:** `Nombre del Paciente` (35+1 char, máx 290px), `Edad` (58px), `Sexo` (H/M), `Celular` (130px), **[Separador Vertical 2px empujado `margin-left: 18px; margin-right: 16px`]** y `Diagnóstico / Motivo Clínico` (a la derecha).
+    - **Sección Intermedia:** Grilla de 18 fichas de selección por categoría.
+    - **[Separador Horizontal 2px]**
+    - **Página de Inicio (`index.html`):**
+    - **Reorganización en Apilamiento Horizontal Independiente:** Se desmanteló la grilla de 2 columnas de la sección "Ubicación y Contacto". La Ficha 1 ("Datos de Contacto") se convirtió en una tarjeta horizontal superior a ancho completo (`.contact-card-horizontal`) con distribución plana (`.contact-grid-horizontal`). La Ficha 2 ("Mapa") se ubica abajo de forma independiente a ancho completo (`.map-card`), renderizando el Croquis y el Mapa Interactivo en cotas estrictas 1:1 de 400px en Desktop / 300px en Móvil. Eliminados todos los problemas de arrastre de altura y espacios en blanco.
+    - **Homologación Tipográfica:** Título H3 en `<h3 class="acerca-h3">` (`1.15rem`, `700`) y cuerpos de texto homologados a `0.92rem` (`1.55` line-height).
+  - **Dispositivos Móviles (≤767px):**
+    - **Header Móvil Justificado a la Izquierda:** Logotipo reducido a 36px de altura (`.logo img { height: 36px }`). Todo el contenido (`Logo` → `Campanita Móvil` → `Punto Estatus` → `Iniciales` → `Hamburguesa`) se alinea hacia la izquierda en secuencia continua con `gap: 0.45rem`, removiendo `margin-left: auto`.
+    - **Campanita Móvil con Scroll Suave (`#bell-wrap-mob`):** Inyectada dinámicamente en el header superior junto al estatus en línea. Incluye badge de conteo sincronizado y respuesta a touch/clic navegando con `scrollIntoView({ behavior: 'smooth' })` directo hacia la sección de notificaciones al final de la página.
+    - **Reordenamiento Móvil de Notificaciones y Footer (Fix de Raíz):** `.app-layout` en móvil gestiona `.main-content` (`order: 1; flex: 0 0 auto`), `.sidebar-right` / Notificaciones (`order: 2; flex: 0 0 auto`, tarjeta blanca limpia con `border-radius: 12px` y `display: block`), y `.portal-footer` (`order: 3; flex: 0 0 auto; margin-top: auto; padding: 0.75rem 1rem`), anulando cualquier deformación de altura y asegurando la posición final del footer verde al fondo de la pantalla. En Desktop/Laptop (≥768px), `portal-footer.js` mantiene el footer como hijo interno de `.main-content`, preservando la alineación limpia de 3 columnas sin alterar la vista. Aplicado en `medicos.html`, `labadmin.html` y `gestion-web.html`.
+    - **Barra de Pestañas y Acciones:** Comportamiento de flujo estático original (`margin-bottom: 1rem`), sin anclaje sticky/fixed.
+    - **Botones de Acción Cuadrados (Solo Iconos 1:1):** Selector por ID `#tab-bar-btns button, #tab-bar-btns .btn-primary, #tab-bar-btns .btn-imprimir-orden, #tab-bar-btns .badge-reset, #tab-bar-btns .badge-reset-sm` anula paddings heredados de `.btn-primary` y fija `overflow: hidden; padding: 0; width: 26px; height: 26px` eliminando cualquier desbordamiento o estiramiento vertical de texto.
+    - **Renglón 1:** `Nombre` (máx. 35 char), `Edad` (3 dig), `Sexo` (H/M) en 1 solo renglón.
+    - **Renglón 2:** `Celular` (10 dig, 115px a la izquierda) y `Diagnóstico / Motivo Clínico` (lado derecho flexible) en 1 solo renglón.
+    - **Renglón 3:** Grilla de fichas por categoría.
+    - **Renglón 4:** `Otros Estudios` precedido del separador horizontal de 2px.
+
+---
+
+## ♿ 3. Accesibilidad WCAG 2.1 SC
+
+- **R24-A11Y-01 (Modales y Dropdowns ARIA):** Todo dropdown o panel flotante interactivo debe declarar `role="dialog"` o `role="region"`, `aria-modal="true"` (si aplica), e implementar Focus Trap cíclico en JS con autoenfoque en el primer elemento activo.
+- **R24-A11Y-02 (Botones con Iconos):** Todo botón interactivo que en dispositivos móviles muestre únicamente un ícono visual DEBE declarar un atributo `aria-label="..."` descriptivo explícito (ej. `aria-label="Limpiar selección"`).
+- **R24-A11Y-03 (Ocultamiento para Lectores de Pantalla):** Los elementos visualmente ocultos que deban ser leídos por asistencias tecnológicas NUNCA deben usar `display: none` o `visibility: hidden`. Deben emplear la clase `.visually-hidden`.
+- **R24-A11Y-04 (Anuncios Dinámicos):** Las zonas donde el contenido o el estado cambie dinámicamente mediante JS o HTMX deben incluir un contenedor contenedor con `aria-live="polite"`.
+- **R24-A11Y-05 (Navegación por Teclado):** Todos los elementos interactivos personalizados deben responder a la activación mediante las teclas `Enter` y `Space`.
+- **R24-A11Y-06 (Estructura de Tablist):** Un elemento con `role="tablist"` debe contener única y exclusivamente elementos con `role="tab"`. Los botones de acción auxiliares deben colocarse fuera del tablist.
+- **R24-A11Y-07 (Skip Link):** Todo documento HTML maestro debe mantener el enlace de salto al contenido principal `<a href="#main-content" class="skip-link">Saltar al contenido principal</a>` al inicio del `<body>`.
+
+---
+
+## 🖱️ 4. Usabilidad UX y Performance
+
+- **R24-UX-01 (Confirmación Preventiva):** Las acciones que descarten información o limpien órdenes completas deben solicitar confirmación al usuario antes de ejecutar la purga de datos.
+- **R24-UX-02 (Sanitización y Teclado Móvil):** Todo campo de entrada numérico o telefónico debe incluir los atributos `inputmode="numeric"` o `inputmode="tel"`, `pattern`, `title` y la sanitización en tiempo real vía `oninput` (`replace(/[^0-9]/g, '')`).
+- **R24-UX-03 (Auto-cierre al Desplazar):** Los dropdowns activos deben cerrarse automáticamente al detectar un evento de scroll en la ventana.
+- **R24-UX-04 (Control de Peticiones Duplicadas):** Todo botón de submit o guardado debe deshabilitarse o pasar a estado de carga al ser clickeado para prevenir envíos dobles.
+- **R24-UX-05 (Ocultar Spinners Nativos):** Ocultar los incrementadores nativos de `input[type="number"]` mediante CSS cross-browser (`-webkit-appearance: none; -moz-appearance: textfield`).
+- **R24-PERF-01 (Lazy Rendering de Componentes Pesados):** Para listas o fichas extensas (ej. 67 checkboxes), inyectar los nodos en el DOM bajo demanda al interactuar con la categoría, manteniendo los datos base en estructuras JS en memoria.
+- **R24-PERF-02 (Invalidación de Caché):** Todos los recursos estáticos cargados en HTML deben llevar el parámetro de versión `?v=YYYYMMDD`.
+- **R24-PERF-03 (Preload de CSS Crítico):** Declarar `<link rel="preload" as="style">` para las hojas de estilo críticas en la cabecera `<head>`.
+
+---
+
+## 🐘 5. Gaps e Incidencias para Conversión a PHP (Flight PHP + Plates)
+
+- **R24-PHP-01 (Parametrización de Rutas de Activos):** Al migrar a plantillas de Plates (`League\Plates`), reemplazar las rutas estáticas locales por la función helper `$this->asset('/css/portal.css')` o constantes globales de activos.
+- **R24-PHP-02 (Mapeo de Nomenclatura CMS):** En `gestion-web.html`, la propiedad `name` de los campos de formulario del CMS debe estructurarse de forma jerárquica para corresponder con la tabla `web_contenidos`: `name="cms[seccion][subseccion][clave]"`, garantizando un procesamiento `POST` atómico en controladores Flight PHP.
+- **R24-PHP-03 (Atributos Declarativos HTMX):** Reemplazar los simuladores JS locales por atributos declarativos de HTMX en las vistas Plates: `hx-post="/api/ordenes/guardar"`, `hx-target="#panel-resultado"`, `hx-swap="innerHTML"`, `hx-indicator="#spinner-cargando"`, e inyectar el campo de idempotencia `<input type="hidden" name="idempotency_token" value="...">`.
+- **R24-PHP-04 (Autenticación y Sesión Servidor):** Eliminar por completo el prototipo de autenticación simulado en `localStorage`. El control de acceso debe migrar al objeto de sesión seguro de `Delight\Auth` y al middleware backend `\Common\RbacManager`.
+- **R24-PHP-05 (SEO Preconnect):** Incluir la etiqueta `<link rel="preconnect" href="https://fonts.googleapis.com">` en el bloque `<head>` del layout maestro.
+
+---
+
+## 📸 6. Estándares CMS, Visibilidad de Imágenes y Homologación de Slides
+
+- **R24-MEDIA-01 (Visibilidad Superior de Imágenes `center top`):** Para evitar recortes no deseados en la parte superior de las fotografías, aplicar `object-fit: contain; object-position: center top;` en contenedores de imágenes de tarjetas o productos, y `background-position: center top;` en elementos con imagen de fondo (Hero Sliders, Quality Sliders).
+- **R24-CMS-01 (Filtro por ESTABLECER y Desactivación):** Todo ítem del CMS que contenga `/ESTABLECER/i` en su título o atributo alt debe ser filtrado automáticamente en JavaScript antes de renderizarse en la portada pública. Incluir el botón `🚫 Desactivar Ficha` alineado horizontalmente en la barra de ayuda del CMS para limpiar campos y desactivar la ficha.
+- **R24-CMS-02 (Homologación de Hero Slides):** Estandarizar la longitud de los textos en los Hero Slides para garantizar tarjetas translúcidas (*glassmorphism*) de altura simétrica: Badges (`<span>`) de 25–35 char, Encabezados (`<h1>`/`<h2>`) de 35–45 char, Párrafos (`<p>`) de 130–150 char y Botones CTA Blancos de 2–3 palabras.
+- **R24-CMS-03 (Paridad 1:1 de Secciones):** Las pestañas del panel CMS (`gestion-web.html`) deben coincidir exactamente en nombre y anclas con las secciones principales de `index.html` (`#inicio`, `#acerca-de`, `#especialidades`, `#promociones`, `#calidad`, `#ubicacion`).
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `21-laesh-trazabilidad-observabilidad.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# Regla 21: Trazabilidad SQL, Observabilidad y Logs de Desarrollo (Proyecto LAESH)
+
+## 1. Observabilidad Dual-Path del Sistema (\Common\Logger)
+- **Log General:** Se utiliza `\Common\Logger::log($level, $message, $userId)` para ingestar eventos generales (`INFO`, `WARN`, `ERROR`, `FATAL`).
+- **Ruta Principal (DB):** Persiste los registros en la tabla `sys_logs` capturando nivel, mensaje, IP del cliente, ID del operador y marca temporal.
+- **Ruta Redundante (File):** Si MariaDB no está disponible, escribe automáticamente en el archivo físico de emergencia local: `laesh-swbldi/logs/app.log`.
+
+## 2. Telemetría y Fallback Log de Consultas SQL (\Common\DB::logFallback)
+- **Indagación de Origen (Debug Backtrace):** `DB::logFallback()` utiliza `debug_backtrace()` para aislar el archivo y línea exacta de código fuente que detonó la falla de consulta SQL.
+- **Agrupamiento por Hash CRC32:** Calcula un hash de 8 caracteres sobre el texto del query para agrupar fallas repetitivas en reportes de auditoría.
+- **Persistencia en `fallback_log`:** Almacena el tipo de consulta (`SELECT`, `INSERT`, etc.), el texto completo del query SQL, y el mensaje de error arrojado por el driver PDO.
+
+## 3. Estándares de Trazas para Desarrollo y Testing
+- **Alternativa 1 (Logger del Proyecto):** Para pruebas de integración y volcado de variables complejas:
+  `\Common\Logger::log('DEBUG', 'Arreglo: ' . print_r($data, true));`
+  Monitoreo en vivo vía consola: `tail -f laesh-swbldi/logs/app.log`.
+- **Alternativa 2 (error_log nativo):** Para depuración ligera en caliente:
+  `error_log("DEBUG: Valor temporal token: " . $token);`
+  Monitoreo en vivo vía consola: `docker compose logs -f laesh_swoole` (o `restaurantb_web`).
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `24-laesh-estabilizacion-ui-estandares.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L59-85)</summary>
+
+**Path:** `Unknown file`
+
+```
+- **R24-UX-02 (Sanitización y Teclado Móvil):** Todo campo de entrada numérico o telefónico debe incluir los atributos `inputmode="numeric"` o `inputmode="tel"`, `pattern`, `title` y la sanitización en tiempo real vía `oninput` (`replace(/[^0-9]/g, '')`).
+- **R24-UX-03 (Auto-cierre al Desplazar):** Los dropdowns activos deben cerrarse automáticamente al detectar un evento de scroll en la ventana.
+- **R24-UX-04 (Control de Peticiones Duplicadas):** Todo botón de submit o guardado debe deshabilitarse o pasar a estado de carga al ser clickeado para prevenir envíos dobles.
+- **R24-UX-05 (Ocultar Spinners Nativos):** Ocultar los incrementadores nativos de `input[type="number"]` mediante CSS cross-browser (`-webkit-appearance: none; -moz-appearance: textfield`).
+- **R24-PERF-01 (Lazy Rendering de Componentes Pesados):** Para listas o fichas extensas (ej. 67 checkboxes), inyectar los nodos en el DOM bajo demanda al interactuar con la categoría, manteniendo los datos base en estructuras JS en memoria.
+- **R24-PERF-02 (Invalidación de Caché):** Todos los recursos estáticos cargados en HTML deben llevar el parámetro de versión `?v=YYYYMMDD`.
+- **R24-PERF-03 (Preload de CSS Crítico):** Declarar `<link rel="preload" as="style">` para las hojas de estilo críticas en la cabecera `<head>`.
+
+---
+
+## 🐘 5. Gaps e Incidencias para Conversión a PHP (Flight PHP + Plates)
+
+- **R24-PHP-01 (Parametrización de Rutas de Activos):** Al migrar a plantillas de Plates (`League\Plates`), reemplazar las rutas estáticas locales por la función helper `$this->asset('/css/portal.css')` o constantes globales de activos.
+- **R24-PHP-02 (Mapeo de Nomenclatura CMS):** En `gestion-web.html`, la propiedad `name` de los campos de formulario del CMS debe estructurarse de forma jerárquica para corresponder con la tabla `web_contenidos`: `name="cms[seccion][subseccion][clave]"`, garantizando un procesamiento `POST` atómico en controladores Flight PHP.
+- **R24-PHP-03 (Atributos Declarativos HTMX):** Reemplazar los simuladores JS locales por atributos declarativos de HTMX en las vistas Plates: `hx-post="/api/ordenes/guardar"`, `hx-target="#panel-resultado"`, `hx-swap="innerHTML"`, `hx-indicator="#spinner-cargando"`, e inyectar el campo de idempotencia `<input type="hidden" name="idempotency_token" value="...">`.
+- **R24-PHP-04 (Autenticación y Sesión Servidor):** Eliminar por completo el prototipo de autenticación simulado en `localStorage`. El control de acceso debe migrar al objeto de sesión seguro de `Delight\Auth` y al middleware backend `\Common\RbacManager`.
+- **R24-PHP-05 (SEO Preconnect):** Incluir la etiqueta `<link rel="preconnect" href="https://fonts.googleapis.com">` en el bloque `<head>` del layout maestro.
+
+---
+
+## 📸 6. Estándares CMS, Visibilidad de Imágenes y Homologación de Slides
+
+- **R24-MEDIA-01 (Visibilidad Superior de Imágenes `center top`):** Para evitar recortes no deseados en la parte superior de las fotografías, aplicar `object-fit: contain; object-position: center top;` en contenedores de imágenes de tarjetas o productos, y `background-position: center top;` en elementos con imagen de fondo (Hero Sliders, Quality Sliders).
+- **R24-CMS-01 (Filtro por ESTABLECER y Desactivación):** Todo ítem del CMS que contenga `/ESTABLECER/i` en su título o atributo alt debe ser filtrado automáticamente en JavaScript antes de renderizarse en la portada pública. Incluir el botón `🚫 Desactivar Ficha` alineado horizontalmente en la barra de ayuda del CMS para limpiar campos y desactivar la ficha.
+- **R24-CMS-02 (Homologación de Hero Slides):** Estandarizar la longitud de los textos en los Hero Slides para garantizar tarjetas translúcidas (*glassmorphism*) de altura simétrica: Badges (`<span>`) de 25–35 char, Encabezados (`<h1>`/`<h2>`) de 35–45 char, Párrafos (`<p>`) de 130–150 char y Botones CTA Blancos de 2–3 palabras.
+- **R24-CMS-03 (Paridad 1:1 de Secciones):** Las pestañas del panel CMS (`gestion-web.html`) deben coincidir exactamente en nombre y anclas con las secciones principales de `index.html` (`#inicio`, `#acerca-de`, `#especialidades`, `#promociones`, `#calidad`, `#ubicacion`).
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Adding Mandatory Section**
+
+Okay, I'm integrating section 7, "Diagnóstico de Espasmos/UI y Lecciones de Rendimiento (MANDATO OBLIGATORIO IA)" into the ruleset file, `.agents/rules/24-laesh-estabilizacion-ui-estandares.md`. I'm employing `replace_file_content` to ensure a clean integration of this mandatory AI component into Rule 24. This action is pivotal.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.099078870s
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 17 Sept 2026, 10:24 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `21-laesh-trazabilidad-observabilidad.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# Regla 21: Trazabilidad SQL, Observabilidad y Logs de Desarrollo (Proyecto LAESH)
+
+## 1. Observabilidad Dual-Path del Sistema (\Common\Logger)
+- **Log General:** Se utiliza `\Common\Logger::log($level, $message, $userId)` para ingestar eventos generales (`INFO`, `WARN`, `ERROR`, `FATAL`).
+- **Ruta Principal (DB):** Persiste los registros en la tabla `sys_logs` capturando nivel, mensaje, IP del cliente, ID del operador y marca temporal.
+- **Ruta Redundante (File):** Si MariaDB no está disponible, escribe automáticamente en el archivo físico de emergencia local: `laesh-swbldi/logs/app.log`.
+
+## 2. Telemetría y Fallback Log de Consultas SQL (\Common\DB::logFallback)
+- **Indagación de Origen (Debug Backtrace):** `DB::logFallback()` utiliza `debug_backtrace()` para aislar el archivo y línea exacta de código fuente que detonó la falla de consulta SQL.
+- **Agrupamiento por Hash CRC32:** Calcula un hash de 8 caracteres sobre el texto del query para agrupar fallas repetitivas en reportes de auditoría.
+- **Persistencia en `fallback_log`:** Almacena el tipo de consulta (`SELECT`, `INSERT`, etc.), el texto completo del query SQL, y el mensaje de error arrojado por el driver PDO.
+
+## 3. Estándares de Trazas para Desarrollo y Testing
+- **Alternativa 1 (Logger del Proyecto):** Para pruebas de integración y volcado de variables complejas:
+  `\Common\Logger::log('DEBUG', 'Arreglo: ' . print_r($data, true));`
+  Monitoreo en vivo vía consola: `tail -f laesh-swbldi/logs/app.log`.
+- **Alternativa 2 (error_log nativo):** Para depuración ligera en caliente:
+  `error_log("DEBUG: Valor temporal token: " . $token);`
+  Monitoreo en vivo vía consola: `docker compose logs -f laesh_swoole` (o `restaurantb_web`).
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** CORTEX_STEP_STATUS_ERROR
+**Created:** 17 Sept 2026, 10:24 am
 
 ---
 
