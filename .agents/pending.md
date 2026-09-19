@@ -36,6 +36,28 @@
 
 ## 🔴 PRIORIDAD ALTA
 
+### P-LAESH-CRON-JWT-01 🔴 [LAESH KVM2] Incidente real — cache_renew.php y cms_cleanup.php fallando en silencio desde 2026-09-19
+**Estado**: Root cause encontrado y arreglado en repo 2026-09-19 (Claude Code). **Pendiente aplicar a KVM2** — requiere autorización explícita antes de tocar `/etc/cron.d/` en producción o re-correr el pipeline de setup.
+
+**Incidente**: ambos crons (`cache_renew.php` 5AM, `cms_cleanup.php` 1AM) corrían según `journalctl`/`cron` pero dejaban sus logs en 0 bytes — ni éxito ni error. `cache_renew.php` no regeneró `LAESH_CFG`/`LAESH_TREE` desde el 2026-09-18. Mitigado manualmente corriendo `cache_renew.php` una vez a mano (cache ya está al día).
+
+**Causa raíz**: el fix de Gap 1 (`config.php` lanza `RuntimeException` fail-loud si `LAESH_JWT_SECRET` falta en el entorno, deployado ~2026-09-18) rompió estos dos crons — sus `cron.d` nunca exportaban esa variable, solo las de BD. Con `display_errors=Off` en CLI de producción, el fatal error nunca llegaba a stdout (solo a `php-fpm-error.log`), dejando los logs de cron completamente vacíos y sin pista.
+
+**Cadena de gaps encontrados y corregidos** (los 3 puntos de entrada del pipeline nunca propagaban `LAESH_JWT_SECRET` hasta los crons, aunque sí llegaba al pool FPM/swoole):
+| Archivo | Gap | Fix |
+|---|---|---|
+| `crones/cache_renew.cron`, `crones/cms-cleanup.cron` | Sin línea `LAESH_JWT_SECRET=` | Agregado placeholder `__LAESH_JWT_SECRET__` |
+| `07_security_harden.sh` | `sed` solo sustituía `__LAESH_APP_PASS__` | Ahora sustituye ambos placeholders (+ fallbacks inline) |
+| `kvm2_setup.sh` | Leía `LAESH_APP_PASS` de `.env` pero nunca `LAESH_JWT_SECRET`; no la pasaba a `07_security_harden.sh` | Ahora la lee y la propaga |
+| `00_run_all.sh` | Nunca exportaba `LAESH_JWT_SECRET` (afectaba también al pool FPM del paso 4, gap preexistente) | Ahora la exporta |
+| `crons/cache_renew.php`, `crons/cms_cleanup.php` | `ob_end_clean()` en el bootstrap + `display_errors=Off` = fallo 100% silencioso | try/catch explícito alrededor del bootstrap, echo del error real — verificado que ahora SÍ aparece en el log con `exit(1)` |
+
+**Verificado end-to-end en local Docker**: reproducido el incidente exacto (env sin `LAESH_JWT_SECRET`) en ambos scripts → error visible + exit 1. Camino normal (con la variable) → éxito limpio, sin cambios de comportamiento.
+
+**Siguiente paso**: aplicar a KVM2 — opción rápida (agregar la línea `LAESH_JWT_SECRET=...` directo a los 2 archivos en `/etc/cron.d/`) o re-correr `07_security_harden.sh`/`kvm2_setup.sh` completo. Requiere autorización explícita del usuario.
+
+---
+
 ### P-LAESH-SEO-01 🔴 [LAESH] Presencia Google — SEO orgánico + SEM (Google Ads)
 **Estado**: En progreso — Plan elaborado 2026-09-07 (Claude Code sesión 8). Base técnica F0 completa.  
 **Artefacto de referencia**: https://claude.ai/code/artifact/dd7cc2f4-b287-48ee-88ac-5f178d18b1f9  
