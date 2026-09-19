@@ -7,6 +7,33 @@
 
 ---
 
+## 🟢 PRIORIDAD BAJA
+
+### P-LAESH-WS-QOS-01 🟢 [LAESH KVM2] QoS de `notificaciones` — `leido` sigue sin marcarse; estadísticas de fallback ✅ implementadas
+**Estado**: Parcial — detectado 2026-09-18 durante cierre de Gap 9. Estadísticas estructuradas de fallback implementadas y **verificadas end-to-end en local Docker 2026-09-19**. Deploy a KVM2 pendiente de autorización explícita del usuario.
+
+**Implementado (local, verificado):**
+| Componente | Ubicación | Función |
+|---|---|---|
+| Columna `notificaciones.fallback_reason` | `setup/bds/laesh/03_transactional_schema.sql` — `ALTER TABLE ... ADD COLUMN IF NOT EXISTS` | Motivo corto del fallo cuando `entregado_ws=0`: `timeout`, `curl_error_N`, `http_error_NNN`, `response_invalid`, `stream_error` |
+| Vista `vw_ws_fallback_stats` | mismo archivo — `CREATE OR REPLACE VIEW` | Agregación por `tipo`+día: total, fallbacks, `pct_fallback`. Solo lectura sobre `notificaciones` — no es una tabla de log nueva, evita segunda vía de escritura en el hot path |
+| Captura de `$fallbackReason` | `commons/notifier.php::emit()` | En la rama cURL y en la rama `stream_context` — distingue timeout, error de conexión (`curl_errno`), HTTP≠200 y respuesta JSON inválida |
+| Pestaña "📊 Estadísticas WS" | `admrc/views/log_viewer.php` (+ `sistema.php` — `$logSlugs`) | Tabla agregada (vista) + tabla de motivos más frecuentes (30 días). Reusa el panel de logs ya existente en `/laesh/adrc/sistema?tab=logs` — no es una pantalla nueva |
+
+**Verificación real (no solo código), en Docker local:**
+- `laesh_swoole` detenido → `Notifier::emit()` real → fila con `entregado_ws=0`, `fallback_reason='curl_error_7'` (CURLE_COULDNT_CONNECT, correcto) ✅
+- `laesh_swoole` restaurado → mismo evento → `entregado_ws=1`, `fallback_reason=NULL` ✅
+- Login real vía curl (usuario ADMIN de prueba, creado y eliminado en la misma sesión) → `GET /laesh/adrc/sistema?tab=logs&log_tab=ws-stats` → HTTP 200, ambas tablas renderizan con datos reales, sin errores PHP ✅
+- `php -l` limpio en los 3 archivos tocados ✅
+
+**Pendiente real, sin resolver:** `leido` sigue sin marcarse en ningún flujo (ver hallazgo original). Fix mínimo propuesto: `PATCH/POST /api/notificaciones/:id/leido` en los 3 routers (`md/index.php`, `rc/index.php`, `admrc/index.php`).
+
+**Fix adicional 2026-09-19 — `sent_to_clients` (hallazgo del análisis de gaps post Gap 9):** `/publish` en `swoole_server.php` respondía `status=success` con `sent_to_clients=0` cuando el destinatario no estaba conectado en ese instante (no es error de bridge, pero tampoco es entrega real). `notifier.php` solo revisaba `status`, nunca `sent_to_clients` — inflaba `vw_ws_fallback_stats` mostrando 0% de fallback en escenarios que sí lo eran. **Corregido**: si `swooleSuccess` es true pero `sent_to_clients===0`, ahora se trata como fallback con `fallback_reason='no_recipients_connected'`. Verificado en local con Swoole real arriba y 0 clientes conectados → `entregado_ws=0`, `fallback_reason='no_recipients_connected'` confirmado en BD. El camino positivo (`sent_to_clients>0`, código no tocado por este fix) no se pudo probar con cliente WS real local por la limitación de caché Docker ya documentada — requiere KVM2.
+
+**Siguiente paso:** deploy a KVM2 (`deploy.sh` + aplicar ALTER/VIEW vía `.mariadb-root.cnf`) — requiere autorización explícita del usuario antes de ejecutar. Incluye ahora también el fix de `sent_to_clients` en `notifier.php`.
+
+---
+
 ## 🔴 PRIORIDAD ALTA
 
 ### P-LAESH-SEO-01 🔴 [LAESH] Presencia Google — SEO orgánico + SEM (Google Ads)
