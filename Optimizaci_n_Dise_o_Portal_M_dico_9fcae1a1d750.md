@@ -7,9 +7,8 @@
 | **Trajectory ID** | `922ed24b-da0b-4291-87ce-1bfa4280f77c` |
 | **Cascade ID** | `6bb73e25-727a-4589-849d-9fcae1a1d750` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 1298 |
+| **Total Steps** | 1384 |
 | **Started** | 18 Sept 2026, 12:20 pm |
-| **Completed** | 18 Sept 2026, 10:29 pm |
 
 ---
 
@@ -32372,6 +32371,2669 @@ I'm now diving into the user's latest request. My focus is understanding "minima
 <summary>Metadata</summary>
 
 - **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+## User Request
+
+. Para Portal Médico / Pacientes 
+.. remueve la actual vista ,y qUE  se muestren todos los datos que en la solicitud digital se capturan que le corresponde a cada paciente.
+
+---
+
+### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
+
+**Status:** Completed
+**Created:** 19 Sept 2026, 10:10 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `tabla-pacientes-medico`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 19 Sept 2026, 10:11 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L449-519)</summary>
+
+**Path:** `Unknown file`
+
+```
+                                                    </a>
+                                                <?php else: ?>
+                                                    <span class="txt-muted-sm">En Proceso</span>
+                                                <?php endif; ?>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <tr><td colspan="7" class="text-center txt-muted pa-4">No tiene órdenes registradas de días anteriores.</td></tr>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                
+
+                <!-- Panel 3: Pacientes del Médico -->
+                <div class="tab-panel d-none" id="panel-pacientes-medico">
+                    <div class="modal-sect-hd modal-sect-hd--plain">
+                        <div>
+                            <h2 class="txt-pgd">Pacientes</h2>
+                            <p class="txt-muted-4">Pacientes con órdenes emitidas a través de este portal.</p>
+                        </div>
+                        <span class="txt-muted-sm" id="pacientes-medico-total">Total: <?= (int)($totalPacientesMedico ?? 0) ?> Pacientes</span>
+                    </div>
+                    <div class="card">
+                        <table id="tabla-pacientes-medico">
+                            <thead>
+                                <tr>
+                                    <th>Paciente</th>
+                                    <th>Celular</th>
+                                    <th>Último Estudio</th>
+                                    <th>Fecha</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if (!empty($pacientesMedico)): ?>
+                                    <?php foreach ($pacientesMedico as $pm): ?>
+                                        <tr>
+                                            <td class="fw-600"><?= htmlspecialchars($pm['nombre_completo'] ?? '', ENT_QUOTES, 'UTF-8') ?></td>
+                                            <td><?= htmlspecialchars($pm['telefono'] ?? '—', ENT_QUOTES, 'UTF-8') ?></td>
+                                            <td><?= htmlspecialchars($pm['ultimo_estudio'] ?? 'Solicitud Médica', ENT_QUOTES, 'UTF-8') ?></td>
+                                            <td><?= !empty($pm['ultima_visita']) ? htmlspecialchars(date('d/m/Y H:i', strtotime($pm['ultima_visita'])), ENT_QUOTES, 'UTF-8') : '—' ?></td>
+                                            <td><span class="badge badge-remitido"><?= htmlspecialchars($pm['ultimo_estado'] ?? 'Remitido', ENT_QUOTES, 'UTF-8') ?></span></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <tr><td colspan="5" class="text-center txt-muted pa-4">No ha emitido solicitudes para pacientes aún.</td></tr>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Panel 4: Reportes del Médico (Scope 16) -->
+                <div class="tab-panel d-none" id="panel-reportes-medico">
+                    <div class="modal-sect-hd">
+                        <h2 class="txt-pgd mb-0">Reportes</h2>
+                        <div class="d-inline-flex-ac">
+                            <label for="filtro-periodo-medico" class="txt-muted-sm">Periodo:</label>
+                            <select id="filtro-periodo-medico" class="select-sm select-sm--bg">
+                                <option value="dia">Hoy</option>
+                                <option value="semana">Esta Semana</option>
+                                <option value="mes" selected>Este Mes</option>
+                                <option value="anio">Este Año</option>
+                                <option value="fecha">Fecha</option>
+                            </select>
+                            <span id="rango-fechas-medico" class="d-none flex-ic-8">
+                                <input type="date" id="fecha-inicio-medico" class="select-sm">
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L669-739)</summary>
+
+**Path:** `Unknown file`
+
+```
+            if (panelId === 'panel-pacientes-medico')  refreshPacientesMedico();
+            if (panelId === 'panel-catalogo-medico')   refreshCatalog();
+        }
+
+        function refreshPacientesMedico() {
+            var orders = getOrders();
+            var tbody  = document.querySelector('#tabla-pacientes-medico tbody');
+            if (!tbody) return;
+
+            // Deduplicar por nombre; conservar la orden más reciente por paciente
+            var mapa = {};
+            orders.forEach(function(o) {
+                var prev = mapa[o.paciente];
+                if (!prev || new Date(o.fecha) > new Date(prev.fecha)) {
+                    mapa[o.paciente] = o;
+                }
+            });
+
+            var unicos = Object.values(mapa).sort(function(a, b) {
+                return new Date(b.fecha) - new Date(a.fecha);
+            });
+
+            var spanTotal = document.getElementById('pacientes-medico-total');
+            if (spanTotal) {
+                spanTotal.textContent = 'Total: ' + unicos.length +
+                    (unicos.length === 1 ? ' Paciente' : ' Pacientes');
+            }
+
+            if (unicos.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" class="tbl-empty-cell">Sin pacientes registrados aún.</td></tr>';
+                return;
+            }
+
+            var badgeMap = {
+                'En Atención':      'badge-atencion',
+                'Resultados Listos': 'badge-listos',
+                'Cerrada':          'badge-cerrada'
+            };
+            tbody.innerHTML = unicos.map(function(o) {
+                var bCls = badgeMap[o.estado] || 'badge-remitido';
+                var estudios = '';
+                try {
+                    var arr = JSON.parse(o.estudios);
+                    estudios = Array.isArray(arr) && arr.length ? arr[0] + (arr.length > 1 ? ' +' + (arr.length - 1) : '') : (o.estudios || '—');
+                } catch(e) { estudios = o.estudios || '—'; }
+                return '<tr>' +
+                    '<td class="fw-bold">' + o.paciente + '</td>' +
+                    '<td>' + (o.celular || '—') + '</td>' +
+                    '<td class="txt-sm">' + estudios + '</td>' +
+                    '<td class="txt-sm">' + o.fecha + '</td>' +
+                    '<td><span class="badge ' + bCls + '">' + o.estado + '</span></td>' +
+                '</tr>';
+            }).join('');
+        }
+
+        // Refrescar tablas y badge cuando labadmin u otro tab actualiza localStorage
+        window.addEventListener('storage', function() {
+            refreshData();                                                          // actualiza tabla "Órdenes de Hoy" + badge-resultados
+            if (typeof refreshHistorialMedico === 'function') refreshHistorialMedico(); // actualiza historial completo
+        });
+
+        // ── Floating Search (SFS) — medicos ─────────────────────────────────────
+        // Toggle rail extraído a sidebar-rail.js (compartido con labadmin/gestion-web).
+        // Este bloque maneja solo la búsqueda flotante específica del Portal Médico.
+        (function() {
+            var floatEl  = document.getElementById('float-search-medico');
+            var sfsInput = document.getElementById('sfs-input-medico');
+            var sfsRes   = document.getElementById('sfs-results-medico');
+            var lupita   = document.getElementById('sidebar-search-btn');
+
+            function closeSFS() {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `panel-nueva-orden`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 19 Sept 2026, 10:12 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L191-359)</summary>
+
+**Path:** `Unknown file`
+
+```
+                <div id="panel-nueva-orden" class="tab-panel">
+                    <h2 class="panel-nueva-orden-title">Nueva Orden</h2>
+
+                    <!-- ── Barra de tabs interna: Generar Orden / Mis Órdenes ── -->
+                    <!-- A11Y-06: tab-bar-btns movido FUERA del role=tablist para no confundir AT -->
+                    <div class="portal-tab-bar tab-bar-ac">
+                        <div class="portal-tab-list" role="tablist" aria-label="Secciones de nueva orden">
+                            <button type="button" class="portal-tab active" role="tab" id="tab-generar"
+                                    aria-controls="subtab-generar" aria-selected="true">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 2v2"/><path d="M5 2v2"/><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"/><path d="M8 15a6 6 0 0 0 12 0v-3"/><circle cx="20" cy="10" r="2"/></svg>
+                                <span id="tab-generar-text">Orden</span>
+                            </button>
+                            <button type="button" class="portal-tab" role="tab" id="tab-ordenes-hoy"
+                                    aria-controls="subtab-ordenes-hoy" aria-selected="false">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                                Órdenes Hoy
+                            </button>
+                        </div>
+                        <!-- Botones Limpiar / Crear e Imprimir — separados del tablist (A11Y-06) -->
+                        <div id="tab-bar-btns" class="tab-bar-btns" role="toolbar" aria-label="Acciones de orden">
+                            <button class="btn badge-reset" type="button"
+                                    id="btn-limpiar-orden"
+                                    aria-label="Limpiar selección de estudios">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.46"/></svg>
+                                <span class="btn-imprimir-texto">Limpiar</span>
+                            </button>
+                            <span class="btn-vsep-divider" aria-hidden="true"></span>
+                            <button class="btn btn-primary btn-imprimir-orden badge-reset-sm" type="submit" form="form-orden"
+                                    aria-label="Crear e imprimir orden médica">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                                <span class="btn-imprimir-texto">Crear e Imprimir Orden</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- ── Sub-tab 1: Generar Orden Digital ── -->
+                    <div id="subtab-generar" class="portal-tab-panel active" role="tabpanel" aria-labelledby="tab-generar">
+                        <form id="form-orden" 
+                              hx-post="/laesh/md/orden/crear" 
+                              hx-target="#a11y-live" 
+                              hx-swap="innerHTML"
+                              hx-indicator="#loading-spinner">
+                            <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken ?? '', ENT_QUOTES, 'UTF-8') ?>">
+                            <!-- HTMX: indicador de carga (hx-indicator="#loading-spinner") -->
+                            <span id="loading-spinner" class="htmx-indicator" role="status" aria-label="Enviando solicitud…">
+                                <span class="spinner-btn"></span>
+                            </span>
+
+                            <!-- Renglón 1 (Desktop): Nombre | Edad | Sexo | Celular | [Separador Vertical] | Diagnóstico / Motivo Clínico -->
+                            <div class="orden-patient-row1">
+                                <div class="form-group mb-0 form-group-nombre">
+                                    <label class="form-label" for="paciente">Nombre del Paciente <span class="txt-danger">*</span></label>
+                                    <input type="text" id="paciente" name="paciente" class="form-input" placeholder="Nombre del paciente"
+                                           maxlength="35" pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,35}" required autofocus
+                                           title="Máximo 35 caracteres (solo letras y espacios)">
+                                </div>
+                                <div class="form-group mb-0 form-group-edad">
+                                    <label class="form-label" for="edad">Edad</label>
+                                    <input type="text" id="edad" name="edad" class="form-input" placeholder="##"
+                                           maxlength="3" inputmode="numeric" pattern="[0-9]{1,3}"
+                                           title="Edad del paciente en años (máximo 3 dígitos)">
+                                </div>
+                                <div class="form-group mb-0 form-group-sexo" role="group" aria-labelledby="sexo-label">
+                                    <span class="form-legend" id="sexo-label">Sexo</span>
+                                    <div class="d-flex-gap-row">
+                                        <label class="label-flex">
+                                            <input type="radio" name="sexo" value="H" class="form-checkbox"> H
+                                        </label>
+                                        <label class="label-flex">
+                                            <input type="radio" name="sexo" value="M" class="form-checkbox"> M
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-0 form-group-celular">
+                                    <label class="form-label" for="celular">Celular <span class="txt-danger">*</span></label>
+                                    <input type="tel" id="celular" name="celular" class="form-input" placeholder="953 000 0000"
+                                           maxlength="10" required inputmode="tel" pattern="[0-9]{10}"
+                                           title="10 dígitos (ej. 9530000000)">
+                                </div>
+
+                                <!-- Separador vertical minimalista entre Celular y Diagnóstico -->
+                                <div class="orden-patient-vsep" aria-hidden="true"></div>
+
+                                <div class="form-group mb-0 form-group-diag">
+                                    <label for="diagnostico" class="form-label">Diagnóstico / Motivo Clínico</label>
+                                    <input type="text" id="diagnostico" name="diagnostico" class="form-input"
+                                           placeholder="Indicación clínica o diagnóstico presuntivo...">
+                                </div>
+                            </div>
+
+                            <!-- ── Estudios Solicitados — buscador + fichas + chips ── -->
+                            <div class="form-group mb-sm">
+                                <div class="orden-estudios-header-row">
+                                    <div class="estudios-header-left">
+                                        <!-- HTML-02: era <label> sin for; ahora <h3> semántico correcto -->
+                                        <h3 class="orden-estudios-label">Estudios Solicitados — Busca o selecciona los requeridos</h3>
+                                    </div>
+                                    <div class="estudios-header-right">
+                                        <div class="estudios-autocomplete-wrap">
+                                            <div class="estudios-search-box">
+                                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="search-icon-outside" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                                                <input type="text" id="input-buscar-estudio-ficha" class="form-input search-input-highlight" placeholder="Buscar estudio (ej. Tiroides, Lípidos...)" autocomplete="off">
+                                            </div>
+                                            <div id="autocomplete-results-fichas" class="autocomplete-fichas-dropdown d-none" role="listbox"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="estudios-split-container">
+                                    <!-- Columna Izquierda: Grilla de selección de los 20 estudios mandatorios -->
+                                    <div class="estudios-col-left">
+                                        <div class="fichas-estudios-wrap">
+                                            <span class="fichas-estudios-label">Selección rápida de estudios principales — clic para elegir</span>
+                                            <div class="fichas-estudios-grid estudios-mandatory-grid" id="fichas-estudios-grid">
+                                                <!-- Poblado client-side por medicos.js:populateMandatoryGrid()
+                                                     desde window.laeshTop20EstMed (catalog-compiled.js) -->
+                                            </div><!-- /fichas-estudios-grid -->
+                                        </div><!-- /fichas-estudios-wrap -->
+                                    </div><!-- /estudios-col-left -->
+
+                                    <!-- Columna Derecha: Chips de estudios seleccionados -->
+                                    <div class="estudios-col-right">
+                                        <div class="contenedor-dinamico-card">
+                                            <div class="contenedor-dinamico-hdr">
+                                                <span class="contenedor-dinamico-title">
+                                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                                                    Estudios Seleccionados
+                                                </span>
+                                                <span id="cnt-estudios-chips-num" class="cnt-chips-badge">0 seleccionados</span>
+                                            </div>
+                                            <div id="contenedor-estudios-dinamico" class="contenedor-dinamico-body">
+                                                <div id="estudios-chips-empty" class="chips-empty-msg">
+                                                    No se han seleccionado estudios aún. Elige de la izquierda o busca arriba.
+                                                </div>
+                                                <div id="estudios-chips-list" class="chips-flex-wrap"></div>
+                                            </div>
+                                        </div>
+                                    </div><!-- /estudios-col-right -->
+                                </div><!-- /estudios-split-container -->
+
+                                <!-- Otros Estudios (Ubicado al final de las 18 fichas, precedido de un separador horizontal) -->
+                                <div class="otros-estudios-wrapper">
+                                    <div class="otros-estudios-header">
+                                        <h3 class="orden-estudios-label" id="label-otros-estudios">Otros Estudios — adicionales no incluidos en el listado</h3>
+                                    </div>
+                                    <input type="text" id="otros-estudios" name="otros_estudios" class="form-input"
+                                           placeholder="Escribe estudios adicionales..." aria-labelledby="label-otros-estudios">
+                                </div>
+                            </div><!-- /form-group estudios -->
+
+                        </form>
+                    </div><!-- /subtab-generar -->
+
+                    <!-- ── Sub-tab 2: Mis Órdenes de Hoy ── -->
+                    <div id="subtab-ordenes-hoy" class="portal-tab-panel" role="tabpanel" aria-labelledby="tab-ordenes-hoy">
+                        <div class="card mt-0">
+                            <table id="tabla-medico" hx-get="/laesh/md/tabla-ordenes" hx-target="#tabla-medico tbody" hx-swap="outerHTML" hx-trigger="refresh, ordenCreada from:body">
+                                <thead>
+                                    <tr>
+                                        <th>Folio</th>
+                                        <th>Paciente</th>
+                                        <th>Estudios</th>
+                                        <th>Fecha Emisión</th>
+                                        <th>Fecha Resultado</th>
+                                        <th>Estado</th>
+                                        <th>Acción / PDF</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `getOrders`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 19 Sept 2026, 10:12 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L129-199)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+            // Limpiar automáticamente el formulario tras crear la orden exitosamente sin disparar el window.confirm()
+            var form = document.getElementById('form-orden');
+            if (form) {
+                form.reset();
+                var checkboxes = form.querySelectorAll('input[type="checkbox"]');
+                checkboxes.forEach(function(cb) {
+                    cb.checked = false;
+                    cb.dispatchEvent(new Event('change', { bubbles: true }));
+                });
+            }
+        });
+
+
+        // Rastreo anti-sonido-inicial (espejo de lastRemitidos en labadmin)
+        let lastResultados = 0;
+
+        function refreshData() {
+            // GAP 1: grilla activa muestra solo órdenes en curso (excluye Cerradas)
+            const orders = getOrders().reverse().filter(o => o.estado !== 'Cerrada');
+            const tbody = document.querySelector('#tabla-medico tbody');
+            tbody.innerHTML = '';
+
+            let countResultados = 0;
+
+            orders.forEach(o => {
+                let badgeClass = 'badge-remitido';
+                if(o.estado === 'En Atención') badgeClass = 'badge-atencion';
+                if(o.estado === 'Resultados Listos') {
+                    badgeClass = 'badge-listos';
+                    countResultados++;
+                }
+                if(o.estado === 'Cerrada') badgeClass = 'badge-cerrada';
+
+                let pdfBtn = '<span class="text-pendiente">Pendiente</span>';
+                if(o.estado === 'Resultados Listos' || o.estado === 'Cerrada') {
+                    pdfBtn = `<button class="btn btn-primary btn-resultados-sm" data-action="ver-resultados" data-id="${o.id}">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Ver Resultados
+                              </button>`;
+                }
+
+                const fechaResultado = (o.estado === 'Resultados Listos' || o.estado === 'Cerrada') ? (o.fechaResultado || 'Hoy, 11:30 AM') : '-';
+                tbody.innerHTML += `
+                    <tr>
+                        <td class="td-folio">
+                            <a href="#" class="lnk-folio lnk-folio-id" data-action="ver-solicitud" data-id="${o.id}">${o.id} <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-folio-link"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></a>
+                        </td>
+                        <td>${o.paciente}</td>
+                        <td>${o.estudios || 'Estudios de Rutina'}</td>
+                        <td>${o.fecha}</td>
+                        <td class="td-fecha-resultado${o.estado === 'Resultados Listos' ? ' resultado-listo' : ''}">${fechaResultado}</td>
+                        <td><span class="badge ${badgeClass}">${o.estado}</span></td>
+                        <td>${pdfBtn}</td>
+                    </tr>
+                `;
+            });
+
+            // Actualizar globito de resultados con pulso + sonido al llegar nuevos
+            const badge = document.getElementById('badge-resultados');
+            if(countResultados > 0) {
+                badge.innerText = countResultados;
+                badge.classList.add('show');
+                if (countResultados > lastResultados) {
+                    badge.classList.add('pulse');
+                    playResultadosDing();
+                    setTimeout(() => badge.classList.remove('pulse'), 3000);
+                }
+                document.title = `(${countResultados}) Portal Médico - LAESH`;
+            } else {
+                badge.classList.remove('show');
+                badge.classList.remove('pulse');
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `getOrders`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 19 Sept 2026, 10:13 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `function getOrders`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 19 Sept 2026, 10:13 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `function getOrders`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 19 Sept 2026, 10:13 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `app.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L19-99)</summary>
+
+**Path:** `Unknown file`
+
+```
+        oscillator.start();
+        oscillator.stop(audioCtx.currentTime + 0.3);
+    } catch(e) {
+        console.log("Audio no soportado");
+    }
+}
+
+function getOrders() {
+    const data = localStorage.getItem(STORAGE_KEY);
+    return data ? JSON.parse(data) : [];
+}
+
+function saveOrders(orders) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(orders));
+    // NOTA: El evento nativo 'storage' de localStorage solo se dispara en OTRAS pestañas.
+    // NO disparar manualmente — causaba loop de re-render + espasmo en el input activo.
+}
+
+function getCatalog() {
+    const data = localStorage.getItem(CATALOG_KEY);
+    return data ? JSON.parse(data) : [];
+}
+
+function saveCatalog(catalog) {
+    localStorage.setItem(CATALOG_KEY, JSON.stringify(catalog));
+    // NOTA: Mismo fix — no disparar 'storage' sintético en la misma pestaña.
+}
+
+function createOrder(paciente, estudios, medico) {
+    const orders = getOrders();
+    const newOrder = {
+        id: 'LSH-' + (crypto.randomUUID?.() ?? Date.now().toString(36)).split('-')[0].toUpperCase(), // C4-fix: sin colisión
+        paciente: paciente,
+        estudios: estudios,
+        medico: medico || '', /* C3-fix: TODO producción → obtener de session/auth; no hardcodear nombre real */
+        estado: 'Remitido',
+        fecha: new Date().toLocaleString()
+    };
+    orders.push(newOrder);
+    saveOrders(orders);
+    return newOrder;
+}
+
+function updateOrderStatus(id, newStatus) {
+    const orders = getOrders();
+    const order = orders.find(o => o.id === id);
+    if (order) {
+        order.estado = newStatus;
+        saveOrders(orders);
+    }
+}
+
+// CODE-1: Seed data de demostración — solo en entornos de desarrollo/staging
+// En producción (laesh.mx) no se inyectan órdenes falsas al visitante
+var _devHost = location.hostname;
+var _isStagingOrLocal = (
+    _devHost === 'localhost' ||
+    _devHost === '127.0.0.1' ||
+    _devHost.includes('caelitandem') ||
+    _devHost.includes('192.168.')
+);
+// No mock orders injected (SSOT MariaDB real backend)
+
+// Escuchar cambios en LocalStorage (simula WebSockets/Notificaciones)
+window.addEventListener('storage', () => {
+    if (typeof refreshData === 'function') {
+        refreshData();
+    }
+    if (typeof refreshCatalog === 'function') {
+        refreshCatalog();
+    }
+});
+
+// ─────────────────────────────────────────────────────────────
+// Portal Header + Nav‑Strip — labadmin.html, medicos.html
+//
+// En tablet/móvil (≤1024px) el header y la tira de iconos son
+// position:fixed, por eso el app-layout necesita padding-top igual
+// a la suma de ambas alturas. app.js mide y publica dos CSS vars:
+//   --portal-header-h        → altura real del nav header
+//   --portal-content-offset  → header + tira (padding-top del layout)
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `form-orden`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 19 Sept 2026, 10:13 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L24-124)</summary>
+
+**Path:** `Unknown file`
+
+```
+        }
+
+        // ── Formulario: Crear e Imprimir Orden ──────────────────────
+        document.getElementById('form-orden').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var p      = document.getElementById('paciente').value.trim();
+            var celular = document.getElementById('celular').value.trim();
+            var edadEl  = document.getElementById('edad');
+            var edad    = edadEl ? edadEl.value.trim() : '';
+            var sexoEl = document.querySelector('input[name="sexo"]:checked');
+            var sexo   = sexoEl ? sexoEl.value : '';
+            var dx     = document.getElementById('diagnostico').value.trim();
+            var otros  = document.getElementById('otros-estudios').value.trim();
+
+            if (!p)      { if(typeof window.showToast==='function') showToast('El nombre del paciente es obligatorio.', 'error'); else alert('El nombre del paciente es obligatorio.'); return; }
+            if (!celular) { if(typeof window.showToast==='function') showToast('El celular es obligatorio.', 'error'); else alert('El celular es obligatorio.'); return; }
+
+            // Recolectar estudios seleccionados y deduplicar (fichas + acordeones pueden solaparse)
+            var checkedBoxes = document.querySelectorAll('input[name="estudio_item"]:checked');
+            var estudiosArr  = Array.from(checkedBoxes).map(function(cb) { return cb.value; });
+            estudiosArr = estudiosArr.filter(function(v, i, a) { return a.indexOf(v) === i; });
+
+            if (estudiosArr.length === 0 && !otros.trim()) {
+                if(typeof window.showToast==='function') showToast('Por favor, selecciona al menos un estudio o indica adicionales.', 'warning');
+                else alert('Por favor, selecciona al menos un estudio o indica estudios adicionales.');
+                return;
+            }
+            
+            // Preservar datos capturados del paciente antes de cualquier reseteo del formulario
+            window.__LAST_SUBMITTED_ORDER__ = {
+                paciente: p,
+                celular: celular,
+                edad: edad,
+                sexo: sexo,
+                dx: dx,
+                otros: otros,
+                estudios: estudiosArr
+            };
+            
+            // G-1: Prevención de doble envío
+            var submitBtn = document.querySelector('#form-orden button[type="submit"]');
+            var originalText = submitBtn ? submitBtn.innerHTML : '';
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<span class="spinner-btn"></span> Procesando...';
+            }
+            
+            // HTMX se encargará del request. No abrimos el modal aquí.
+        });
+
+        // ── Escuchar evento HX-Trigger desde el backend cuando la orden se crea exitosamente
+        document.body.addEventListener('ordenCreada', function(e) {
+            var folioReal = e.detail.folio || '1';
+            var lastData  = window.__LAST_SUBMITTED_ORDER__ || {};
+            
+            // Recuperar datos del formulario para el PDF (con fallback a la orden resguardada)
+            var p       = e.detail.paciente || lastData.paciente || (document.getElementById('paciente') ? document.getElementById('paciente').value.trim() : '—');
+            var celular = e.detail.celular  || lastData.celular  || (document.getElementById('celular')  ? document.getElementById('celular').value.trim()  : '—');
+            var edad    = e.detail.edad     || (lastData.edad !== undefined && lastData.edad !== '' ? lastData.edad : (document.getElementById('edad') ? document.getElementById('edad').value.trim() : ''));
+            var sexo    = e.detail.sexo     || lastData.sexo     || (document.querySelector('input[name="sexo"]:checked') ? document.querySelector('input[name="sexo"]:checked').value : '');
+            var dx      = lastData.dx       || (document.getElementById('diagnostico') ? document.getElementById('diagnostico').value.trim() : '');
+            var otros   = lastData.otros    || (document.getElementById('otros-estudios') ? document.getElementById('otros-estudios').value.trim() : '');
+
+            var estudiosArr = lastData.estudios || [];
+            if (!estudiosArr.length) {
+                var checkedBoxes = document.querySelectorAll('input[name="estudio_item"]:checked');
+                estudiosArr  = Array.from(checkedBoxes).map(function(cb) { return cb.value; });
+                estudiosArr = estudiosArr.filter(function(v, i, a) { return a.indexOf(v) === i; });
+            }
+
+            var medProf   = window.__MEDICO_PROFILE__ || {};
+            var nombreMed = medProf.nombre || 'Dr. Hedilberto Reyes Venegas';
+            var especMed  = medProf.especialidad || 'Med. Interna';
+            var cedMed    = medProf.cedula || 'Cédula Especialidad 9456189.   Cédula Profesional 6605518';
+            var univMed   = medProf.universidad || 'Universidad Autónoma Benito Juárez de Oaxaca';
+            var lugarMed  = medProf.lugar || 'Centro de Especialidades "Torre Azul"';
+
+            var sexoLabel = sexo === 'H' ? 'Masculino' : (sexo === 'M' ? 'Femenino' : sexo);
+            var now   = new Date();
+            var fecha = now.toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' });
+
+            var params = new URLSearchParams();
+            params.set('id',          folioReal);
+            params.set('paciente',    p);
+            params.set('celular',     celular);
+            params.set('edad',        edad);
+            params.set('sexo',        sexoLabel);
+            params.set('fecha',       fecha);
+            params.set('estudios',    JSON.stringify(estudiosArr));
+            params.set('diagnostico', dx);
+            params.set('otros',       otros);
+            params.set('medico',      nombreMed);
+            params.set('especialidad', especMed);
+            params.set('cedula',      cedMed);
+            params.set('universidad',  univMed);
+            params.set('lugar',        lugarMed);
+
+            _abrirSolOverlay('/laesh/rc/views/solicitud_dac_impr.php?' + params.toString());
+            
+            // Restablecer botón
+            var submitBtn = document.querySelector('#form-orden button[type="submit"]');
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Order Data**
+
+Okay, I'm currently focused on the structure of order records. I'm noting key data points like patient name, contact info (cell phone), age (in a format like "35" or "35 years"), and gender, coded as either "H," "M," or "Mas." I'm working through parsing and interpreting these fields now.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `pacientesMedico`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.099378174s
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 19 Sept 2026, 10:14 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `obtenerPacientesMedico`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 19 Sept 2026, 10:14 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Ordenes.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L159-199)</summary>
+
+**Path:** `Unknown file`
+
+```
+    /**
+     * Obtiene el listado de pacientes con solicitudes emitidas por el médico logueado
+     */
+    public static function obtenerPacientesMedico(int $userId): array {
+        try {
+            $db = DB::connect();
+
+            $medicoId = $userId;
+
+            if (!$medicoId) {
+                return [];
+            }
+
+            $stmt = $db->prepare("
+                SELECT p.id, p.nombre_completo, p.sexo, p.telefono,
+                       MAX(o.hora_captura) AS ultima_visita,
+                       COUNT(o.id) AS total_solicitudes,
+                       (SELECT o2.diagnostico FROM ordenes o2 WHERE o2.paciente_id = p.id AND o2.medico_id = :mid1 ORDER BY o2.id DESC LIMIT 1) AS ultimo_estudio,
+                       (SELECT c.valor FROM ordenes o3 JOIN catalogo_estados c ON o3.estado_id = c.id WHERE o3.paciente_id = p.id AND o3.medico_id = :mid2 ORDER BY o3.id DESC LIMIT 1) AS ultimo_estado
+                FROM pacientes p
+                JOIN ordenes o ON o.paciente_id = p.id
+                WHERE o.medico_id = :mid3
+                GROUP BY p.id
+                ORDER BY ultima_visita DESC
+            ");
+            $stmt->bindValue(':mid1', (int)$medicoId, PDO::PARAM_INT);
+            $stmt->bindValue(':mid2', (int)$medicoId, PDO::PARAM_INT);
+            $stmt->bindValue(':mid3', (int)$medicoId, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Throwable $e) {
+            DB::logFallback('ERROR', 'Fallo en MD\Negocio\Ordenes::obtenerPacientesMedico', $e->getMessage());
+            return [];
+        }
+    }
+
+    /**
+     * Cambia la contraseña del médico autenticado utilizando Delight Auth
+     */
+    public static function cambiarPasswordPropia(string $oldPassword, string $newPassword, int $userId): array {
+        try {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Patient Data Flow**
+
+Okay, I'm currently focused on tracing the data flow. Specifically, I'm digging into `Ordenes::obtenerPacientesMedico` in PHP and how `medicos.js` interacts with the Pacientes tab. I've pinpointed the key function, `refreshPacientesMedico()`, called when the doctor navigates to the `panel-pacientes-medico` tab, via `cambiarTabMedico`. This is where the refresh is initiated.
+
+
+**Verifying Data Integrity**
+
+I'm now cross-referencing the data presented server-side versus client-side. The goal is to ensure that both the initial PHP-rendered HTML and the client-side JavaScript, particularly `refreshPacientesMedico()`, display precisely the same complete set of digital request fields. I've compiled a detailed list of all relevant request form fields, including Folio, Paciente, Edad, Diagnóstico, and more. Now I'm tracing the action triggered when a user clicks "Ver Ficha" or the Folio link which activates the Ficha Digital modal. Currently, I'm analyzing the table columns in `panel-pacientes-medico`, particularly the "Folio" column and related data fields.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `ver-solicitud`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.636225897s
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 19 Sept 2026, 10:15 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `verSolicitudDigital`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 19 Sept 2026, 10:15 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L239-279)</summary>
+
+**Path:** `Unknown file`
+
+```
+        function verSolicitudDigital(id, paciente, estudios, fecha) {
+            var medProf   = window.__MEDICO_PROFILE__ || {};
+            var nombreMed = medProf.nombre || 'Dr. Hedilberto Reyes Venegas';
+            var especMed  = medProf.especialidad || 'Med. Interna';
+            var cedMed    = medProf.cedula || 'Cédula Especialidad 9456189.   Cédula Profesional 6605518';
+            var univMed   = medProf.universidad || 'Universidad Autónoma Benito Juárez de Oaxaca';
+            var lugarMed  = medProf.lugar || 'Centro de Especialidades "Torre Azul"';
+
+            var p = new URLSearchParams();
+            p.set('id', id || '1');
+            p.set('paciente', paciente || '—');
+            p.set('fecha', fecha || new Date().toLocaleString());
+            p.set('medico',       nombreMed);
+            p.set('especialidad', especMed);
+            p.set('cedula',       cedMed);
+            p.set('universidad',  univMed);
+            p.set('lugar',        lugarMed);
+
+            // estudios puede ser string simple o JSON-array string — normalizar
+            var arr;
+            try { arr = JSON.parse(estudios); if (!Array.isArray(arr)) throw ''; }
+            catch(e) { arr = estudios ? [estudios] : []; }
+            p.set('estudios', JSON.stringify(arr));
+            _abrirSolOverlay('/laesh/rc/views/solicitud_dac_impr.php?' + p.toString());
+        }
+
+        function verResultados(id, paciente) {
+            const modalFolio = document.getElementById('modal-folio');
+            const modalPaciente = document.getElementById('modal-paciente-nombre');
+            if (id && modalFolio) modalFolio.innerText = 'FOLIO: ' + id;
+            if (paciente && modalPaciente) modalPaciente.innerText = paciente;
+            document.getElementById('modal-resultados').classList.add('show');
+        }
+
+        function cerrarModal() {
+            document.getElementById('modal-resultados').classList.remove('show');
+        }
+
+        function filtrarEstadisticasMedico() {
+            const select = document.getElementById('filtro-periodo-medico');
+            const val = select.value;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L673-724)</summary>
+
+**Path:** `Unknown file`
+
+```
+        function refreshPacientesMedico() {
+            var orders = getOrders();
+            var tbody  = document.querySelector('#tabla-pacientes-medico tbody');
+            if (!tbody) return;
+
+            // Deduplicar por nombre; conservar la orden más reciente por paciente
+            var mapa = {};
+            orders.forEach(function(o) {
+                var prev = mapa[o.paciente];
+                if (!prev || new Date(o.fecha) > new Date(prev.fecha)) {
+                    mapa[o.paciente] = o;
+                }
+            });
+
+            var unicos = Object.values(mapa).sort(function(a, b) {
+                return new Date(b.fecha) - new Date(a.fecha);
+            });
+
+            var spanTotal = document.getElementById('pacientes-medico-total');
+            if (spanTotal) {
+                spanTotal.textContent = 'Total: ' + unicos.length +
+                    (unicos.length === 1 ? ' Paciente' : ' Pacientes');
+            }
+
+            if (unicos.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" class="tbl-empty-cell">Sin pacientes registrados aún.</td></tr>';
+                return;
+            }
+
+            var badgeMap = {
+                'En Atención':      'badge-atencion',
+                'Resultados Listos': 'badge-listos',
+                'Cerrada':          'badge-cerrada'
+            };
+            tbody.innerHTML = unicos.map(function(o) {
+                var bCls = badgeMap[o.estado] || 'badge-remitido';
+                var estudios = '';
+                try {
+                    var arr = JSON.parse(o.estudios);
+                    estudios = Array.isArray(arr) && arr.length ? arr[0] + (arr.length > 1 ? ' +' + (arr.length - 1) : '') : (o.estudios || '—');
+                } catch(e) { estudios = o.estudios || '—'; }
+                return '<tr>' +
+                    '<td class="fw-bold">' + o.paciente + '</td>' +
+                    '<td>' + (o.celular || '—') + '</td>' +
+                    '<td class="txt-sm">' + estudios + '</td>' +
+                    '<td class="txt-sm">' + o.fecha + '</td>' +
+                    '<td><span class="badge ' + bCls + '">' + o.estado + '</span></td>' +
+                '</tr>';
+            }).join('');
+        }
+
+        // Refrescar tablas y badge cuando labadmin u otro tab actualiza localStorage
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Analyzing Refresh Functionality**
+
+I'm currently dissecting the `refreshPacientesMedico` function. It seems the prior version was rather basic, displaying just five columns: Paciente, Celular, Último Estudio, Fecha, and Estado. Now I need to figure out how to incorporate the user's explicit request to render this information for a medical portal / patient interface.
+
+
+**Revising Patient Data Display**
+
+I'm now overhauling the patient display. The plan is to replace the old 5-column view entirely. I'll need to create a complete, detailed list or grid, taking ALL data points from the digital request. This includes folio (clickable link), patient name (bolded), age/sex, cell phone, diagnosis/clinical reason, complete list of requested studies, other studies, issue date, status badge, and an action button to view the digital file/results. I'm also adding a real-time search input for filtering.
+
+
+**Implementing Patient Data Display**
+
+I'm now fully immersed in the UI implementation. The patient data grid structure is almost finalized. I'm focusing on incorporating a complete, detailed display, which includes folio, patient info (name, age, sex), contact details, diagnosis, studies, and status. I'm also adding a search bar, as well as the design elements.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.902543404s
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L464-504)</summary>
+
+**Path:** `Unknown file`
+
+```
+                
+
+                <!-- Panel 3: Pacientes del Médico -->
+                <div class="tab-panel d-none" id="panel-pacientes-medico">
+                    <div class="modal-sect-hd modal-sect-hd--plain">
+                        <div>
+                            <h2 class="txt-pgd">Pacientes</h2>
+                            <p class="txt-muted-4">Pacientes con órdenes emitidas a través de este portal.</p>
+                        </div>
+                        <span class="txt-muted-sm" id="pacientes-medico-total">Total: <?= (int)($totalPacientesMedico ?? 0) ?> Pacientes</span>
+                    </div>
+                    <div class="card">
+                        <table id="tabla-pacientes-medico">
+                            <thead>
+                                <tr>
+                                    <th>Paciente</th>
+                                    <th>Celular</th>
+                                    <th>Último Estudio</th>
+                                    <th>Fecha</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if (!empty($pacientesMedico)): ?>
+                                    <?php foreach ($pacientesMedico as $pm): ?>
+                                        <tr>
+                                            <td class="fw-600"><?= htmlspecialchars($pm['nombre_completo'] ?? '', ENT_QUOTES, 'UTF-8') ?></td>
+                                            <td><?= htmlspecialchars($pm['telefono'] ?? '—', ENT_QUOTES, 'UTF-8') ?></td>
+                                            <td><?= htmlspecialchars($pm['ultimo_estudio'] ?? 'Solicitud Médica', ENT_QUOTES, 'UTF-8') ?></td>
+                                            <td><?= !empty($pm['ultima_visita']) ? htmlspecialchars(date('d/m/Y H:i', strtotime($pm['ultima_visita'])), ENT_QUOTES, 'UTF-8') : '—' ?></td>
+                                            <td><span class="badge badge-remitido"><?= htmlspecialchars($pm['ultimo_estado'] ?? 'Remitido', ENT_QUOTES, 'UTF-8') ?></span></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <tr><td colspan="5" class="text-center txt-muted pa-4">No ha emitido solicitudes para pacientes aún.</td></tr>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 19 Sept 2026, 10:16 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L669-729)</summary>
+
+**Path:** `Unknown file`
+
+```
+            if (panelId === 'panel-pacientes-medico')  refreshPacientesMedico();
+            if (panelId === 'panel-catalogo-medico')   refreshCatalog();
+        }
+
+        function refreshPacientesMedico() {
+            var orders = getOrders();
+            var tbody  = document.querySelector('#tabla-pacientes-medico tbody');
+            if (!tbody) return;
+
+            // Deduplicar por nombre; conservar la orden más reciente por paciente
+            var mapa = {};
+            orders.forEach(function(o) {
+                var prev = mapa[o.paciente];
+                if (!prev || new Date(o.fecha) > new Date(prev.fecha)) {
+                    mapa[o.paciente] = o;
+                }
+            });
+
+            var unicos = Object.values(mapa).sort(function(a, b) {
+                return new Date(b.fecha) - new Date(a.fecha);
+            });
+
+            var spanTotal = document.getElementById('pacientes-medico-total');
+            if (spanTotal) {
+                spanTotal.textContent = 'Total: ' + unicos.length +
+                    (unicos.length === 1 ? ' Paciente' : ' Pacientes');
+            }
+
+            if (unicos.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" class="tbl-empty-cell">Sin pacientes registrados aún.</td></tr>';
+                return;
+            }
+
+            var badgeMap = {
+                'En Atención':      'badge-atencion',
+                'Resultados Listos': 'badge-listos',
+                'Cerrada':          'badge-cerrada'
+            };
+            tbody.innerHTML = unicos.map(function(o) {
+                var bCls = badgeMap[o.estado] || 'badge-remitido';
+                var estudios = '';
+                try {
+                    var arr = JSON.parse(o.estudios);
+                    estudios = Array.isArray(arr) && arr.length ? arr[0] + (arr.length > 1 ? ' +' + (arr.length - 1) : '') : (o.estudios || '—');
+                } catch(e) { estudios = o.estudios || '—'; }
+                return '<tr>' +
+                    '<td class="fw-bold">' + o.paciente + '</td>' +
+                    '<td>' + (o.celular || '—') + '</td>' +
+                    '<td class="txt-sm">' + estudios + '</td>' +
+                    '<td class="txt-sm">' + o.fecha + '</td>' +
+                    '<td><span class="badge ' + bCls + '">' + o.estado + '</span></td>' +
+                '</tr>';
+            }).join('');
+        }
+
+        // Refrescar tablas y badge cuando labadmin u otro tab actualiza localStorage
+        window.addEventListener('storage', function() {
+            refreshData();                                                          // actualiza tabla "Órdenes de Hoy" + badge-resultados
+            if (typeof refreshHistorialMedico === 'function') refreshHistorialMedico(); // actualiza historial completo
+        });
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L629-674)</summary>
+
+**Path:** `Unknown file`
+
+```
+                container.appendChild(btnNext);
+            }
+
+            buildPaginationControls(paginationWrap);
+            buildPaginationControls(paginationWrapBottom);
+        }
+
+        function refreshCatalog() {
+            renderMedicoCatalogTable(1);
+        }
+
+        // Listener del buscador autocomplete en tiempo real
+        document.addEventListener('DOMContentLoaded', function() {
+            var inputSearchCat = document.getElementById('input-buscar-catalogo-medico');
+            if (inputSearchCat) {
+                inputSearchCat.addEventListener('input', function() {
+                    medicoCatalogSearchQuery = this.value;
+                    renderMedicoCatalogTable(1);
+                });
+            }
+        });
+
+        // Cambiar Paneles / Tabs en Portal Médico (Rock-Solid)
+        const panelLabels = {
+            'panel-nueva-orden':       'Nueva Orden',
+            'panel-historial-medico':  'Órdenes Anteriores',
+            'panel-pacientes-medico':  'Pacientes',
+            'panel-reportes-medico':   'Reportes',
+            'panel-catalogo-medico':   'Catálogo de Estudios'
+        };
+        function cambiarTabMedico(panelId, el) {
+            document.querySelectorAll('.sidebar .nav-item').forEach(i => i.classList.remove('active'));
+            if (el) el.classList.add('active');
+            document.querySelectorAll('.tab-panel').forEach(p => p.style.display = 'none');
+            const target = document.getElementById(panelId);
+            if (target) target.style.display = 'block';
+            const bc = document.getElementById('header-bc-current');
+            if (bc && panelLabels[panelId]) bc.textContent = panelLabels[panelId];
+
+            if (panelId === 'panel-historial-medico')  refreshHistorialMedico();
+            if (panelId === 'panel-pacientes-medico')  refreshPacientesMedico();
+            if (panelId === 'panel-catalogo-medico')   refreshCatalog();
+        }
+
+        function refreshPacientesMedico() {
+            var orders = getOrders();
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 19 Sept 2026, 10:17 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 19 Sept 2026, 10:17 am
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+## User Request
+
+Asegurate este consultando los datos usando endpoints hacia la bd mariadb
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `medicos.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `obtenerPacientesMedico`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 19 Sept 2026, 10:20 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/**
+ * md/index.php — Router Flight PHP para el Portal Médico
+ *
+ * Ubicación: laesh-swbldi/md/index.php
+ * URL:       /laesh/md/          (Alias en restaurantb.conf → laesh-swbldi/md/)
+ *
+ * Fuente HTML: website/uipv1/medicos.html  ← NUNCA BORRAR (R15.1 - Merge iterativo)
+ * Capas:       View (views/medicos.php), Negocio (MD\Negocio\Ordenes), Commons (Common\*)
+ *
+ * Rutas:
+ *   GET  /             → Panel principal Médico (requiere permiso ver_ordenes_propias)
+ *   POST /orden/crear  → Solicitud Médica Digital vía Stored Procedure (HTMX)
+ */
+
+declare(strict_types=1);
+
+require_once __DIR__ . '/../commons/commons.php';
+
+use Common\Logger;
+use Common\DB;
+
+// ── Guard RBAC: solo MEDICO puede acceder (o permiso ver_ordenes_propias) ──────
+Flight::rbac()->requirePermission(
+    'ver_ordenes_propias',
+    '/laesh/login/login.php?portal=medico'
+);
+
+// ── GET / — Panel principal Portal Médico ──────────────────────────────────────
+Flight::route('GET /', function () {
+    $auth = Flight::auth();
+    $db   = Flight::db();
+
+    $userId = (int)$auth->getUserId();
+    $stmt = $db->prepare("SELECT nombre, apellidos FROM empleados WHERE user_id = ? LIMIT 1");
+    $stmt->execute([$userId]);
+    $emp = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+    $stmtMed = $db->prepare("SELECT nombre_completo, especialidad, cedula_profesional, celular, telefono_consultorio, direccion_consultorio FROM perfiles_medicos WHERE user_id = ? LIMIT 1");
+    $stmtMed->execute([$userId]);
+    $medProfile = $stmtMed->fetch(\PDO::FETCH_ASSOC) ?: [];
+
+    if (!empty($medProfile['nombre_completo'])) {
+        $nombreMedico = trim($medProfile['nombre_completo']);
+    } elseif ($emp && !empty($emp['nombre'])) {
+        $nombreMedico = trim($emp['nombre'] . ' ' . $emp['apellidos']);
+    } else {
+        $email = $auth->getEmail() ?? '';
+        $userPart = explode('@', $email)[0] ?? '';
+        $nombreMedico = $userPart ? ucfirst($userPart) : '';
+    }
+
+    if ($nombreMedico) {
+        $nombreMedico = preg_replace('/^(?:Dr\(a\)\.|\bDr\.\b|\bDra\.\b|\bDr\b)\s*(?:Dr\(a\)\.|\bDr\.\b|\bDra\.\b|\bDr\b\s*)*/i', 'Dr(a). ', $nombreMedico);
+        $nombreMedico = trim($nombreMedico);
+    }
+
+    // CSRF token (R14.12)
+    if (empty($_SESSION['csrf_token'])) {
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    }
+
+    // Obtener solicitudes médicas propias (hoy y anteriores), pacientes y los 20 estudios principales desde MariaDB
+    $ordenesPropias      = \MD\Negocio\Ordenes::obtenerOrdenesPropias($userId, 50);
+    $ordenesAnteriores   = \MD\Negocio\Ordenes::obtenerOrdenesAnterioresMedico($userId, 100);
+    $pacientesMedico     = \MD\Negocio\Ordenes::obtenerPacientesMedico($userId);
+    
+    $stmtMand = $db->query("SELECT e.id, e.clave as clave_interna, e.nombre, COALESCE(c.nombre, 'General') as categoria FROM cat_estudios e LEFT JOIN cat_categorias c ON e.categoria_id = c.id ORDER BY (e.top20_orden IS NOT NULL AND e.top20_orden > 0) DESC, e.top20_orden ASC, e.id ASC LIMIT 20");
+    $estudiosMandatorios = $stmtMand ? $stmtMand->fetchAll(\PDO::FETCH_ASSOC) : [];
+
+    // SEC: frame-ancestors vía HTTP header real (meta tag es ignorado por browsers)
+    header('X-Frame-Options: DENY');
+    header('Content-Security-Policy: frame-ancestors \'none\'', false); // false = no reemplaza el CSP global de nginx, agrega directiva
+
+    // Plates — directorio de vistas es md/
+    Flight::view()->setDirectory(__DIR__);
+    
+    echo Flight::view()->render('views/medicos', [
+        'nombreMedico'         => $nombreMedico,
+        'medProfile'           => $medProfile,
+        'csrfToken'            => $_SESSION['csrf_token'],
+        'ordenesPropias'       => $ordenesPropias,
+        'ordenesAnteriores'    => $ordenesAnteriores,
+        'pacientesMedico'      => $pacientesMedico,
+        'totalPacientesMedico' => count($pacientesMedico),
+        'estudiosMandatorios'  => $estudiosMandatorios
+    ]);
+});
+
+// ── GET /tabla-ordenes — Partial HTMX ultraligero de la tabla de órdenes de hoy ─────
+Flight::route('GET /tabla-ordenes', function () {
+    header('Content-Type: text/html; charset=utf-8');
+    $userId = (int)Flight::auth()->getUserId();
+    $ordenesPropias = \MD\Negocio\Ordenes::obtenerOrdenesPropias($userId, 50);
+
+    echo '<tbody>';
+    if (!empty($ordenesPropias)) {
+        foreach ($ordenesPropias as $ord) {
+            $eId = (int)($ord['estado_id'] ?? 1);
+            $badgeClass = 'badge-remitido';
+            if ($eId === 2) $badgeClass = 'badge-atencion';
+            elseif ($eId === 3) $badgeClass = 'badge-listos';
+            elseif ($eId === 4) $badgeClass = 'badge-cerrada';
+
+            $folio = htmlspecialchars($ord['folio'] ?? '', ENT_QUOTES, 'UTF-8');
+            $paciente = htmlspecialchars($ord['paciente_nombre'] ?? '', ENT_QUOTES, 'UTF-8');
+            $diag = htmlspecialchars($ord['diagnostico'] ?? 'Solicitud Digital', ENT_QUOTES, 'UTF-8');
+            $fEmis = htmlspecialchars(date('d/m/Y H:i', strtotime($ord['creado_en'] ?? 'now')), ENT_QUOTES, 'UTF-8');
+            $fRes = !empty($ord['fecha_resultado']) ? htmlspecialchars(date('d/m/Y H:i', strtotime($ord['fecha_resultado'])), ENT_QUOTES, 'UTF-8') : '—';
+            $estado = htmlspecialchars($ord['estado_nombre'] ?? 'Emitida', ENT_QUOTES, 'UTF-8');
+
+            $btnAccion = ($eId === 3 || $eId === 4)
+                ? '<button class="btn btn-secondary btn-resultados-sm btn-ver-res" data-action="ver-resultados" data-id="' . $folio . '">'
+                . '<svg class="icon-btn-left" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg> Ver Resultados'
+                . '</button>'
+                : '<span class="txt-muted-sm">En Proceso</span>';
+
+            echo '<tr>'
+               . '<td class="td-folio-hist"><a href="#" class="lnk-folio lnk-folio-id" data-action="ver-solicitud" data-id="' . $folio . '">' . $folio . ' <svg class="icon-folio-link" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></a></td>'
+               . '<td>' . $paciente . '</td>'
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L119-298)</summary>
+
+**Path:** `Unknown file`
+
+```
+               . '<td>' . $paciente . '</td>'
+               . '<td class="td-estudios-rc">' . $diag . '</td>'
+               . '<td>' . $fEmis . '</td>'
+               . '<td class="td-fecha-resultado">' . $fRes . '</td>'
+               . '<td><span class="badge ' . $badgeClass . '">' . $estado . '</span></td>'
+               . '<td>' . $btnAccion . '</td>'
+               . '</tr>';
+        }
+    } else {
+        echo '<tr><td colspan="7" class="text-center txt-muted pa-4">No tiene órdenes emitidas el día de hoy.</td></tr>';
+    }
+    echo '</tbody>';
+});
+
+// ── GET /tabla-ordenes-anteriores — Partial HTMX ultraligero de órdenes anteriores ────
+Flight::route('GET /tabla-ordenes-anteriores', function () {
+    header('Content-Type: text/html; charset=utf-8');
+    $userId = (int)Flight::auth()->getUserId();
+    $ordenesAnteriores = \MD\Negocio\Ordenes::obtenerOrdenesAnterioresMedico($userId, 100);
+
+    echo '<tbody>';
+    if (!empty($ordenesAnteriores)) {
+        foreach ($ordenesAnteriores as $ord) {
+            $eId = (int)($ord['estado_id'] ?? 1);
+            $badgeClass = 'badge-remitido';
+            if ($eId === 2) $badgeClass = 'badge-atencion';
+            elseif ($eId === 3) $badgeClass = 'badge-listos';
+            elseif ($eId === 4) $badgeClass = 'badge-cerrada';
+
+            $ordId = (int)($ord['id'] ?? 0);
+            $folio = htmlspecialchars($ord['folio'] ?? '', ENT_QUOTES, 'UTF-8');
+            $paciente = htmlspecialchars($ord['paciente_nombre'] ?? '', ENT_QUOTES, 'UTF-8');
+            $diag = htmlspecialchars($ord['diagnostico'] ?? 'Solicitud Digital', ENT_QUOTES, 'UTF-8');
+            $fEmis = htmlspecialchars(date('d/m/Y H:i', strtotime($ord['creado_en'] ?? 'now')), ENT_QUOTES, 'UTF-8');
+            $fRes = !empty($ord['fecha_resultado']) ? htmlspecialchars(date('d/m/Y H:i', strtotime($ord['fecha_resultado'])), ENT_QUOTES, 'UTF-8') : '—';
+            $estado = htmlspecialchars($ord['estado_nombre'] ?? 'Emitida', ENT_QUOTES, 'UTF-8');
+
+            $btnAccion = ($eId === 3 || $eId === 4)
+                ? '<a href="/laesh/rc/orden/pdf?id=' . $ordId . '" target="_blank" class="btn btn-secondary btn-resultados-sm btn-ver-res">'
+                . '<svg class="icon-btn-left" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg> Ver PDF'
+                . '</a>'
+                : '<span class="txt-muted-sm">En Proceso</span>';
+
+            echo '<tr>'
+               . '<td class="td-folio-hist"><a href="#" class="lnk-folio lnk-folio-id" data-action="ver-solicitud" data-id="' . $folio . '">' . $folio . ' <svg class="icon-folio-link" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></a></td>'
+               . '<td>' . $paciente . '</td>'
+               . '<td class="td-estudios-rc">' . $diag . '</td>'
+               . '<td>' . $fEmis . '</td>'
+               . '<td class="td-fecha-resultado">' . $fRes . '</td>'
+               . '<td><span class="badge ' . $badgeClass . '">' . $estado . '</span></td>'
+               . '<td>' . $btnAccion . '</td>'
+               . '</tr>';
+        }
+    } else {
+        echo '<tr><td colspan="7" class="text-center txt-muted pa-4">No hay órdenes anteriores registradas.</td></tr>';
+    }
+    echo '</tbody>';
+});
+
+// ── POST /orden/crear — Procesar creación de orden médica (HTMX) ───────────────
+Flight::route('POST /orden/crear', function () {
+    Flight::rbac()->requirePermission('ver_solicitud_digital');
+
+    // Validar CSRF
+    $submittedToken = $_POST['csrf_token'] ?? '';
+    if (!hash_equals($_SESSION['csrf_token'] ?? '', $submittedToken)) {
+        Logger::log('WARN', 'Token CSRF inválido en creación de orden médica por user_id=' . Flight::auth()->getUserId());
+        \Common\Response::htmxError('Token de seguridad inválido. Recarga la página.');
+    }
+
+    // CSRF rotation removed to support seamless HTMX AJAX sequential requests
+
+    // Invocar capa de negocio para creación atómica con Stored Procedure
+    $userId = (int)Flight::auth()->getUserId();
+    $resultado = \MD\Negocio\Ordenes::crearSolicitudDigital($_POST, $userId);
+
+    if (!$resultado['success']) {
+        \Common\Response::htmxError($resultado['error'] ?? 'Error al emitir la solicitud digital.');
+    }
+
+    // Emitir notificación Swoole WS a la clínica en vivo (Scope 30) tras confirmación de Stored Procedure
+    \Common\Notifier::emit('nueva_orden', [
+        'folio'    => $resultado['folio'] ?? '1',
+        'orden_id' => $resultado['orden_id'] ?? 0,
+        'titulo'   => 'Nueva Solicitud Médica Digital (' . ($resultado['folio'] ?? '1') . ')',
+        'mensaje'  => 'Solicitud enviada para ' . htmlspecialchars($resultado['paciente'] ?? $_POST['paciente'] ?? 'Paciente', ENT_QUOTES, 'UTF-8')
+    ]);
+
+    // Comunicar el folio real y datos del paciente al frontend (JS) para abrir el modal de impresión sin recargar
+    header('HX-Trigger: ' . json_encode([
+        'ordenCreada' => [
+            'folio'    => $resultado['folio'] ?? '1',
+            'paciente' => trim($_POST['paciente'] ?? ''),
+            'celular'  => trim($_POST['celular'] ?? ''),
+            'edad'     => trim($_POST['edad'] ?? ''),
+            'sexo'     => trim($_POST['sexo'] ?? '')
+        ]
+    ]));
+
+    \Common\Response::htmxSuccess($resultado['mensaje']);
+});
+
+// ── /estudios/buscar y /estudios/todos ELIMINADOS (2026-09-18) ──────────────
+// Portal Médico usa EXCLUSIVAMENTE catalog-compiled.js (window.laeshFlatCatalog)
+// para búsqueda de estudios — sin endpoints live. Ver input-buscar-estudio-ficha
+// en views/medicos.php + medicos.js:1042 (filtro in-memory, sin fetch).
+// Confirmado sin callers antes de eliminar (grep global sobre www/).
+
+// ── GET /api/notificaciones — Endpoint Polling Fallback ─────────────────────
+Flight::route('GET /api/notificaciones', function () {
+    $db = Flight::db();
+    $userId = (int)Flight::auth()->getUserId();
+    $since  = (int)($_GET['since'] ?? 0);
+
+    if ($since <= 0) {
+        $stmt = $db->prepare(
+            "SELECT id, tipo, folio_referencia, mensaje, creado_en 
+             FROM notificaciones 
+             WHERE user_id = :user_id AND leido = 0
+             ORDER BY id DESC LIMIT 15"
+        );
+        $stmt->execute(['user_id' => $userId]);
+    } else {
+        $stmt = $db->prepare(
+            "SELECT id, tipo, folio_referencia, mensaje, creado_en 
+             FROM notificaciones 
+             WHERE user_id = :user_id AND (UNIX_TIMESTAMP(creado_en) > :since OR leido = 0)
+             ORDER BY id DESC LIMIT 15"
+        );
+        $stmt->execute(['user_id' => $userId, 'since' => $since]);
+    }
+    $notifs = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+    Flight::json([
+        'success'        => true,
+        'notificaciones' => $notifs,
+        'timestamp'      => time(),
+        'server_time'    => time()
+    ]);
+});
+
+// ── POST /perfil/cambiar-password — Cambio autónomo de contraseña del médico (HTMX) ──
+Flight::route('POST /perfil/cambiar-password', function () {
+    Flight::rbac()->requirePermission('ver_ordenes_propias');
+
+    // Validar CSRF
+    $submittedToken = $_POST['csrf_token'] ?? '';
+    if (!hash_equals($_SESSION['csrf_token'] ?? '', $submittedToken)) {
+        \Common\Response::htmxError('Token de seguridad inválido. Recarga la página.');
+    }
+
+    $oldPassword = $_POST['old_password'] ?? '';
+    $newPassword = $_POST['new_password'] ?? '';
+    $confirmPass = $_POST['confirm_password'] ?? '';
+    $userId      = (int)Flight::auth()->getUserId();
+
+    if (empty($oldPassword) || empty($newPassword)) {
+        \Common\Response::htmxError('Todos los campos de contraseña son obligatorios.');
+    }
+
+    if ($newPassword !== $confirmPass) {
+        \Common\Response::htmxError('La nueva contraseña y su confirmación no coinciden.');
+    }
+
+    if (strlen($newPassword) < 8) {
+        \Common\Response::htmxError('La nueva contraseña debe tener al menos 8 dígitos.');
+    }
+
+    $resultado = \MD\Negocio\Ordenes::cambiarPasswordPropia($oldPassword, $newPassword, $userId);
+
+    if (!$resultado['success']) {
+        \Common\Response::htmxError($resultado['error'] ?? 'Error al cambiar la contraseña.');
+    }
+
+    \Common\Response::htmxSuccess($resultado['mensaje']);
+});
+
+// Iniciar router Flight
+Flight::start();
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Ordenes.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/**
+ * md/negocio/ordenes.php — Capa de Negocio para Solicitudes Médicas Digitales (Médicos)
+ *
+ * Maneja la emisión de solicitudes digitales, persistencia PDO, Stored Procedures
+ * (laesh_db.CrearOrdenLaboratorio), trazabilidad y auditoría.
+ */
+
+namespace MD\Negocio;
+
+use Common\DB;
+use Common\Logger;
+use PDO;
+use Throwable;
+
+class Ordenes {
+
+    /**
+     * Emite una solicitud médica digital desde el portal de médicos
+     */
+    public static function crearSolicitudDigital(array $datos, int $userId): array {
+        $db = DB::connect();
+
+        try {
+            // 1. Buscar o crear el paciente en pacientes
+            $pacienteId = \RC\Negocio\Ordenes::buscarOCrearPaciente($datos);
+
+            // 2. El id del médico (medico_id) corresponde a su user_id según el esquema
+            $medicoId = $userId;
+
+            $edad          = intval($datos['edad'] ?? 0);
+            $diagnostico   = trim($datos['diagnostico'] ?? '');
+            $otrosEstudios = trim($datos['otros_estudios'] ?? '');
+            $estudiosArray = $datos['estudios'] ?? [];
+            $estudiosJson  = is_array($estudiosArray) ? json_encode($estudiosArray, JSON_UNESCAPED_UNICODE) : $estudiosArray;
+
+            // 3. Ejecutar Stored Procedure CrearOrdenLaboratorio
+            $stmtProc = $db->prepare("
+                CALL laesh_db.CrearOrdenLaboratorio(
+                    :paciente_id,
+                    :medico_id,
+                    :recepcion_id,
+                    :edad_al_emitir,
+                    :diagnostico,
+                    :otros_estudios,
+                    :estudios_json,
+                    @p_folio
+                )
+            ");
+
+            $stmtProc->execute([
+                'paciente_id'    => $pacienteId,
+                'medico_id'      => $medicoId,
+                'recepcion_id'   => null, // Emitida por médico digitalmente
+                'edad_al_emitir' => $edad,
+                'diagnostico'    => $diagnostico,
+                'otros_estudios' => $otrosEstudios,
+                'estudios_json'  => $estudiosJson
+            ]);
+
+            // Obtener el folio generado por el Stored Procedure
+            $folioRow = $db->query("SELECT @p_folio AS folio")->fetch(PDO::FETCH_ASSOC);
+            $folio = $folioRow['folio'] ?? '1';
+
+            // Obtener la orden recién creada para responder con orden_id
+            $stmtOrd = $db->prepare("SELECT id FROM ordenes WHERE folio_unico = ? LIMIT 1");
+            $stmtOrd->execute([$folio]);
+            $ordenId = (int)$stmtOrd->fetchColumn();
+
+            // 4. Inserción en detalle_ordenes si se enviaron IDs
+            if (is_array($estudiosArray)) {
+                $stmtDet = $db->prepare("INSERT INTO detalle_ordenes (orden_id, estudio_id) VALUES (?, ?)");
+                foreach ($estudiosArray as $estudioId) {
+                    if (is_numeric($estudioId)) {
+                        $stmtDet->execute([$ordenId, $estudioId]);
+                    }
+                }
+            }
+
+            // 5. Actualizar contador de órdenes del médico en perfiles_medicos (GAP-03)
+            $db->prepare("UPDATE perfiles_medicos SET total_ordenes = total_ordenes + 1 WHERE user_id = ?")
+               ->execute([$medicoId]);
+
+            // 6. Logger y Auditoría
+            $pacienteNombre = trim(($datos['paciente_nombre'] ?? $datos['paciente'] ?? 'Paciente'));
+            Logger::logAlways('INFO', "Solicitud Médica Digital {$folio} creada para {$pacienteNombre} por médico user_id={$userId}", $userId);
+
+            return [
+                'success'  => true,
+                'folio'    => $folio,
+                'orden_id' => $ordenId,
+                'paciente' => $pacienteNombre,
+                'mensaje'  => "✓ Solicitud Médica Digital {$folio} creada exitosamente para {$pacienteNombre}."
+            ];
+
+        } catch (Throwable $e) {
+            DB::logFallback('ERROR', 'Fallo en MD\Negocio\Ordenes::crearSolicitudDigital', $e->getMessage());
+            Logger::log('ERROR', 'Error al crear solicitud médica digital: ' . $e->getMessage(), $userId);
+            return [
+                'success' => false,
+                'error'   => 'No se pudo crear la solicitud digital: ' . $e->getMessage()
+            ];
+        }
+    }
+
+    /**
+     * Obtiene las solicitudes de órdenes emitidas HOY (día natural) por el médico logueado
+     */
+    public static function obtenerOrdenesPropias(int $userId, int $limit = 50): array {
+        try {
+            $db = DB::connect();
+
+            $stmt = $db->prepare("
+                SELECT orden_id as id, folio_unico as folio, hora_captura as creado_en, fecha_resultado,
+                       diagnostico, estudios_json as estudios, edad_al_emitir,
+                       paciente_nombre, paciente_sexo, paciente_telefono as telefono,
+                       estado_id, estado_valor AS estado_nombre, estado_color AS color_badge
+                FROM vw_ordenes_completas
+                WHERE medico_user_id = :user_id AND DATE(hora_captura) = CURDATE()
+                ORDER BY orden_id DESC
+                LIMIT :lim
+            ");
+            $stmt->bindValue(':user_id', (int)$userId, PDO::PARAM_INT);
+            $stmt->bindValue(':lim', (int)$limit, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Throwable $e) {
+            DB::logFallback('ERROR', 'Fallo en MD\Negocio\Ordenes::obtenerOrdenesPropias', $e->getMessage());
+            return [];
+        }
+    }
+
+    /**
+     * Obtiene las solicitudes de órdenes de DÍAS ANTERIORES emitidas por el médico logueado
+     */
+    public static function obtenerOrdenesAnterioresMedico(int $userId, int $limit = 100): array {
+        try {
+            $db = DB::connect();
+
+            $stmt = $db->prepare("
+                SELECT orden_id as id, folio_unico as folio, hora_captura as creado_en, fecha_resultado,
+                       diagnostico, estudios_json as estudios, edad_al_emitir,
+                       paciente_nombre, paciente_sexo, paciente_telefono as telefono,
+                       estado_id, estado_valor AS estado_nombre, estado_color AS color_badge
+                FROM vw_ordenes_completas
+                WHERE medico_user_id = :user_id AND DATE(hora_captura) < CURDATE()
+                ORDER BY orden_id DESC
+                LIMIT :lim
+            ");
+            $stmt->bindValue(':user_id', (int)$userId, PDO::PARAM_INT);
+            $stmt->bindValue(':lim', (int)$limit, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Throwable $e) {
+            DB::logFallback('ERROR', 'Fallo en MD\Negocio\Ordenes::obtenerOrdenesAnterioresMedico', $e->getMessage());
+            return [];
+        }
+    }
+
+    /**
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Examining Key Functions**
+
+I'm now diving into `Ordenes.php`, specifically focusing on `vw_ordenes_completas` and the `obtenerPacientesMedico` function. I've re-examined `obtenerPacientesMedico`, particularly lines 163 to 195, as a starting point.
+
+
+**Analyzing Data Sources**
+
+I've shifted my attention to `vw_ordenes_completas` to understand its data structure, and the `obtenerPacientesMedico` function. I'm focusing on how it retrieves comprehensive patient information from MariaDB, specifically the returned fields. I'm considering a dedicated SQL query that can fetch all digital request records to get all data. The goal is to provide a complete data set including `folio`, `diagnostico`, and other crucial fields.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.983395664s
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L474-539)</summary>
+
+**Path:** `Unknown file`
+
+```
+                        <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; justify-content: flex-end; width: 100%; max-width: 100%;">
+                            <!-- Buscador de Pacientes -->
+                            <div style="display: flex; gap: 0.5rem; align-items: center; position: relative; flex: 1 1 240px; max-width: 380px;">
+                                <input type="text" id="input-buscar-paciente-medico" class="form-input form-input--bg" autocomplete="off" spellcheck="false" placeholder="🔍 Buscar por paciente, celular, diagnóstico..." style="width: 100%; font-size: 0.88rem;">
+                            </div>
+                            
+                            <span class="txt-muted-sm" id="pacientes-medico-total" style="font-weight: 600; font-size: 0.88rem; color: var(--text-muted);">Total: <?= (int)($totalPacientesMedico ?? 0) ?> Pacientes</span>
+                        </div>
+                    </div>
+
+                    <!-- Grilla Completa de Pacientes (Todos los datos de la Solicitud Digital) -->
+                    <div class="card" style="padding: 0; overflow: hidden; border: 1px solid var(--border); border-radius: 8px;">
+                        <div class="table-responsive" style="max-height: calc(100vh - 250px); overflow-y: auto; overflow-x: auto; -webkit-overflow-scrolling: touch; width: 100%;">
+                            <table class="table" id="tabla-pacientes-medico" style="margin-bottom: 0; width: 100%; min-width: 1120px; white-space: nowrap;">
+                                <thead>
+                                    <tr style="position: sticky; top: 0; background: #e0f2fe; color: #003e8c; z-index: 10; font-size: 0.88rem;">
+                                        <th style="width: 110px;">Folio</th>
+                                        <th style="min-width: 190px; white-space: normal;">Paciente</th>
+                                        <th style="width: 110px;">Edad / Sexo</th>
+                                        <th style="width: 120px;">Celular</th>
+                                        <th style="min-width: 200px; white-space: normal;">Diagnóstico / Motivo Clínico</th>
+                                        <th style="min-width: 240px; white-space: normal;">Estudios Solicitados</th>
+                                        <th style="min-width: 180px; white-space: normal;">Otros Estudios</th>
+                                        <th style="width: 140px;">Fecha Emisión</th>
+                                        <th style="width: 120px;">Estado</th>
+                                        <th style="width: 110px; text-align: center;">Acción</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php if (!empty($pacientesMedico)): ?>
+                                        <?php foreach ($pacientesMedico as $pm): ?>
+                                            <tr style="border-bottom: 1px solid #f1f5f9;">
+                                                <td class="td-folio">
+                                                    <span class="lnk-folio lnk-folio-id"><?= htmlspecialchars($pm['id'] ?? '—', ENT_QUOTES, 'UTF-8') ?></span>
+                                                </td>
+                                                <td style="white-space: normal; font-weight: 700; color: #0f172a; font-size: 0.88rem;"><?= htmlspecialchars($pm['nombre_completo'] ?? '', ENT_QUOTES, 'UTF-8') ?></td>
+                                                <td style="color: #334155; font-size: 0.85rem;"><?= htmlspecialchars($pm['edad'] ?? '—', ENT_QUOTES, 'UTF-8') ?> <?= !empty($pm['sexo']) ? '(' . htmlspecialchars($pm['sexo'], ENT_QUOTES, 'UTF-8') . ')' : '' ?></td>
+                                                <td style="font-weight: 600; color: #334155; font-size: 0.85rem;"><?= htmlspecialchars($pm['telefono'] ?? '—', ENT_QUOTES, 'UTF-8') ?></td>
+                                                <td style="white-space: normal; color: #1e293b; font-size: 0.85rem;"><?= htmlspecialchars($pm['diagnostico'] ?? $pm['ultimo_estudio'] ?? '—', ENT_QUOTES, 'UTF-8') ?></td>
+                                                <td style="white-space: normal; font-size: 0.85rem;"><?= htmlspecialchars($pm['estudios'] ?? '—', ENT_QUOTES, 'UTF-8') ?></td>
+                                                <td style="white-space: normal; color: #475569; font-size: 0.85rem;"><?= htmlspecialchars($pm['otros'] ?? 'Ninguno', ENT_QUOTES, 'UTF-8') ?></td>
+                                                <td style="color: #475569; font-size: 0.84rem;"><?= !empty($pm['ultima_visita']) ? htmlspecialchars(date('d/m/Y H:i', strtotime($pm['ultima_visita'])), ENT_QUOTES, 'UTF-8') : '—' ?></td>
+                                                <td><span class="badge badge-remitido"><?= htmlspecialchars($pm['ultimo_estado'] ?? 'Remitido', ENT_QUOTES, 'UTF-8') ?></span></td>
+                                                <td style="text-align: center;"><span class="txt-muted-sm">—</span></td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    <?php else: ?>
+                                        <tr><td colspan="10" style="text-align:center; padding: 2rem; color: #94a3b8; font-weight: 500;">No ha emitido solicitudes para pacientes aún.</td></tr>
+                                    <?php endif; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panel 4: Reportes del Médico (Scope 16) -->
+                <div class="tab-panel d-none" id="panel-reportes-medico">
+                    <div class="modal-sect-hd">
+                        <h2 class="txt-pgd mb-0">Reportes</h2>
+                        <div class="d-inline-flex-ac">
+                            <label for="filtro-periodo-medico" class="txt-muted-sm">Periodo:</label>
+                            <select id="filtro-periodo-medico" class="select-sm select-sm--bg">
+                                <option value="dia">Hoy</option>
+                                <option value="semana">Esta Semana</option>
+                                <option value="mes" selected>Este Mes</option>
+                                <option value="anio">Este Año</option>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Ordenes.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L159-194)</summary>
+
+**Path:** `Unknown file`
+
+```
+    /**
+     * Obtiene el listado de pacientes con solicitudes emitidas por el médico logueado
+     */
+    public static function obtenerPacientesMedico(int $userId): array {
+        try {
+            $db = DB::connect();
+
+            $medicoId = $userId;
+
+            if (!$medicoId) {
+                return [];
+            }
+
+            $stmt = $db->prepare("
+                SELECT p.id, p.nombre_completo, p.sexo, p.telefono,
+                       MAX(o.hora_captura) AS ultima_visita,
+                       COUNT(o.id) AS total_solicitudes,
+                       (SELECT o2.diagnostico FROM ordenes o2 WHERE o2.paciente_id = p.id AND o2.medico_id = :mid1 ORDER BY o2.id DESC LIMIT 1) AS ultimo_estudio,
+                       (SELECT c.valor FROM ordenes o3 JOIN catalogo_estados c ON o3.estado_id = c.id WHERE o3.paciente_id = p.id AND o3.medico_id = :mid2 ORDER BY o3.id DESC LIMIT 1) AS ultimo_estado
+                FROM pacientes p
+                JOIN ordenes o ON o.paciente_id = p.id
+                WHERE o.medico_id = :mid3
+                GROUP BY p.id
+                ORDER BY ultima_visita DESC
+            ");
+            $stmt->bindValue(':mid1', (int)$medicoId, PDO::PARAM_INT);
+            $stmt->bindValue(':mid2', (int)$medicoId, PDO::PARAM_INT);
+            $stmt->bindValue(':mid3', (int)$medicoId, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Throwable $e) {
+            DB::logFallback('ERROR', 'Fallo en MD\Negocio\Ordenes::obtenerPacientesMedico', $e->getMessage());
+            return [];
+        }
+    }
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 19 Sept 2026, 10:22 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L169-184)</summary>
+
+**Path:** `Unknown file`
+
+```
+               . '<td>' . $btnAccion . '</td>'
+               . '</tr>';
+        }
+    } else {
+        echo '<tr><td colspan="7" class="text-center txt-muted pa-4">No hay órdenes anteriores registradas.</td></tr>';
+    }
+    echo '</tbody>';
+});
+
+// ── POST /orden/crear — Procesar creación de orden médica (HTMX) ───────────────
+Flight::route('POST /orden/crear', function () {
+    Flight::rbac()->requirePermission('ver_solicitud_digital');
+
+    // Validar CSRF
+    $submittedToken = $_POST['csrf_token'] ?? '';
+    if (!hash_equals($_SESSION['csrf_token'] ?? '', $submittedToken)) {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 19 Sept 2026, 10:22 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L479-534)</summary>
+
+**Path:** `Unknown file`
+
+```
+                            
+                            <span class="txt-muted-sm" id="pacientes-medico-total" style="font-weight: 600; font-size: 0.88rem; color: var(--text-muted);">Total: <?= (int)($totalPacientesMedico ?? 0) ?> Pacientes</span>
+                        </div>
+                    </div>
+
+                    <!-- Grilla Completa de Pacientes (Todos los datos de la Solicitud Digital) -->
+                    <div class="card" style="padding: 0; overflow: hidden; border: 1px solid var(--border); border-radius: 8px;">
+                        <div class="table-responsive" style="max-height: calc(100vh - 250px); overflow-y: auto; overflow-x: auto; -webkit-overflow-scrolling: touch; width: 100%;">
+                            <table class="table" id="tabla-pacientes-medico" style="margin-bottom: 0; width: 100%; min-width: 1120px; white-space: nowrap;">
+                                <thead>
+                                    <tr style="position: sticky; top: 0; background: #e0f2fe; color: #003e8c; z-index: 10; font-size: 0.88rem;">
+                                        <th style="width: 110px;">Folio</th>
+                                        <th style="min-width: 190px; white-space: normal;">Paciente</th>
+                                        <th style="width: 110px;">Edad / Sexo</th>
+                                        <th style="width: 120px;">Celular</th>
+                                        <th style="min-width: 200px; white-space: normal;">Diagnóstico / Motivo Clínico</th>
+                                        <th style="min-width: 240px; white-space: normal;">Estudios Solicitados</th>
+                                        <th style="min-width: 180px; white-space: normal;">Otros Estudios</th>
+                                        <th style="width: 140px;">Fecha Emisión</th>
+                                        <th style="width: 120px;">Estado</th>
+                                        <th style="width: 110px; text-align: center;">Acción</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php if (!empty($pacientesMedico)): ?>
+                                        <?php foreach ($pacientesMedico as $pm): ?>
+                                            <tr style="border-bottom: 1px solid #f1f5f9;">
+                                                <td class="td-folio">
+                                                    <span class="lnk-folio lnk-folio-id"><?= htmlspecialchars($pm['id'] ?? '—', ENT_QUOTES, 'UTF-8') ?></span>
+                                                </td>
+                                                <td style="white-space: normal; font-weight: 700; color: #0f172a; font-size: 0.88rem;"><?= htmlspecialchars($pm['nombre_completo'] ?? '', ENT_QUOTES, 'UTF-8') ?></td>
+                                                <td style="color: #334155; font-size: 0.85rem;"><?= htmlspecialchars($pm['edad'] ?? '—', ENT_QUOTES, 'UTF-8') ?> <?= !empty($pm['sexo']) ? '(' . htmlspecialchars($pm['sexo'], ENT_QUOTES, 'UTF-8') . ')' : '' ?></td>
+                                                <td style="font-weight: 600; color: #334155; font-size: 0.85rem;"><?= htmlspecialchars($pm['telefono'] ?? '—', ENT_QUOTES, 'UTF-8') ?></td>
+                                                <td style="white-space: normal; color: #1e293b; font-size: 0.85rem;"><?= htmlspecialchars($pm['diagnostico'] ?? $pm['ultimo_estudio'] ?? '—', ENT_QUOTES, 'UTF-8') ?></td>
+                                                <td style="white-space: normal; font-size: 0.85rem;"><?= htmlspecialchars($pm['estudios'] ?? '—', ENT_QUOTES, 'UTF-8') ?></td>
+                                                <td style="white-space: normal; color: #475569; font-size: 0.85rem;"><?= htmlspecialchars($pm['otros'] ?? 'Ninguno', ENT_QUOTES, 'UTF-8') ?></td>
+                                                <td style="color: #475569; font-size: 0.84rem;"><?= !empty($pm['ultima_visita']) ? htmlspecialchars(date('d/m/Y H:i', strtotime($pm['ultima_visita'])), ENT_QUOTES, 'UTF-8') : '—' ?></td>
+                                                <td><span class="badge badge-remitido"><?= htmlspecialchars($pm['ultimo_estado'] ?? 'Remitido', ENT_QUOTES, 'UTF-8') ?></span></td>
+                                                <td style="text-align: center;"><span class="txt-muted-sm">—</span></td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    <?php else: ?>
+                                        <tr><td colspan="10" style="text-align:center; padding: 2rem; color: #94a3b8; font-weight: 500;">No ha emitido solicitudes para pacientes aún.</td></tr>
+                                    <?php endif; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panel 4: Reportes del Médico (Scope 16) -->
+                <div class="tab-panel d-none" id="panel-reportes-medico">
+                    <div class="modal-sect-hd">
+                        <h2 class="txt-pgd mb-0">Reportes</h2>
+                        <div class="d-inline-flex-ac">
+                            <label for="filtro-periodo-medico" class="txt-muted-sm">Periodo:</label>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Updating HTMX Attributes**
+
+I'm currently focused on employing `replace_file_content` to dynamically add HTMX attributes to the `#tabla-pacientes-medico` element in `views/medicos.php`. The goal is to set up an HTMX endpoint that will populate the table body. Specifically, I'm integrating `hx-get="/laesh/md/tabla-pacientes"`, `hx-target="#tabla-pacientes-medico tbody"`, and `hx-swap="outerHTML"`. This should allow for streamlined updates of the patient table content via HTMX.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.147131067s
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 19 Sept 2026, 10:23 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L669-739)</summary>
+
+**Path:** `Unknown file`
+
+```
+        function cambiarTabMedico(panelId, el) {
+            document.querySelectorAll('.sidebar .nav-item').forEach(i => i.classList.remove('active'));
+            if (el) el.classList.add('active');
+            document.querySelectorAll('.tab-panel').forEach(p => p.style.display = 'none');
+            const target = document.getElementById(panelId);
+            if (target) target.style.display = 'block';
+            const bc = document.getElementById('header-bc-current');
+            if (bc && panelLabels[panelId]) bc.textContent = panelLabels[panelId];
+
+            if (panelId === 'panel-historial-medico')  refreshHistorialMedico();
+            if (panelId === 'panel-pacientes-medico')  refreshPacientesMedico();
+            if (panelId === 'panel-catalogo-medico')   refreshCatalog();
+        }
+
+        function refreshPacientesMedico() {
+            var orders = getOrders();
+            var tbody  = document.querySelector('#tabla-pacientes-medico tbody');
+            if (!tbody) return;
+
+            // Ordenar solicitudes por fecha de más reciente a más antigua
+            var sortedOrders = orders.slice().sort(function(a, b) {
+                return new Date(b.fecha || 0) - new Date(a.fecha || 0);
+            });
+
+            // Filtrado multicampo por búsqueda
+            var q = (pacienteMedicoSearchQuery || '').trim().toLowerCase();
+            var filtered = sortedOrders;
+            if (q) {
+                filtered = sortedOrders.filter(function(o) {
+                    var pName = (o.paciente || '').toLowerCase();
+                    var cel   = (o.celular || '').toLowerCase();
+                    var dx    = (o.diagnostico || o.dx || '').toLowerCase();
+                    var fol   = (o.id || '').toLowerCase();
+                    var ot    = (o.otros || o.otros_estudios || '').toLowerCase();
+                    var est   = Array.isArray(o.estudios) ? o.estudios.join(' ').toLowerCase() : (o.estudios || '').toLowerCase();
+                    return pName.includes(q) || cel.includes(q) || dx.includes(q) || fol.includes(q) || ot.includes(q) || est.includes(q);
+                });
+            }
+
+            var spanTotal = document.getElementById('pacientes-medico-total');
+            if (spanTotal) {
+                spanTotal.textContent = 'Total: ' + filtered.length +
+                    (filtered.length === 1 ? ' Solicitud' : ' Solicitudes');
+            }
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="10" style="text-align:center; padding: 2rem; color: #94a3b8; font-weight: 500;">No se encontraron registros de pacientes que coincidan.</td></tr>';
+                return;
+            }
+
+            var badgeMap = {
+                'En Atención':       'badge-atencion',
+                'Resultados Listos': 'badge-listos',
+                'Cerrada':           'badge-cerrada'
+            };
+
+            tbody.innerHTML = filtered.map(function(o, idx) {
+                var bCls = badgeMap[o.estado] || 'badge-remitido';
+                
+                // Formato Edad y Sexo
+                var edadVal = (o.edad !== undefined && o.edad !== null && String(o.edad).trim() !== '') ? String(o.edad).trim() + ' años' : '—';
+                var sexoVal = o.sexo === 'H' ? 'Masc' : (o.sexo === 'M' ? 'Fem' : (o.sexo || ''));
+                var edadSexoStr = edadVal + (sexoVal ? ' <span style="color:#64748b; font-size:0.82rem;">(' + sexoVal + ')</span>' : '');
+
+                // Formato Diagnóstico
+                var dxVal = (o.diagnostico || o.dx || '').trim();
+                var dxStr = dxVal ? dxVal : '<span style="color:#94a3b8; font-style:italic;">Sin indicación</span>';
+
+                // Formato Otros Estudios
+                var otrosVal = (o.otros || o.otros_estudios || '').trim();
+                var otrosStr = otrosVal ? otrosVal : '<span style="color:#94a3b8; font-style:italic;">Ninguno</span>';
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+**Considering HTMX Integration**
+
+I'm currently focused on integrating HTMX into the `refreshPacientesMedico()` function. The objective is to make it react to HTMX triggers if they're available. If HTMX is not active, I plan to fetch patient data directly from the MariaDB backend via the `/laesh/md/api/pacientes` endpoint. Specifically, I'm working to make the function trigger `htmx.trigger` when HTMX is used.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.116661917s
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 19 Sept 2026, 10:23 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 19 Sept 2026, 10:24 am
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.6 Flash (High)
+</details>
+
+---
+
+## User Request
+
+Limpia codigo muertos, js, php, css para todo Portal de medicos
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `Ordenes.php`
+**Language:** php
 </details>
 
 ---

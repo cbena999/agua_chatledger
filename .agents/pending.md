@@ -9,8 +9,8 @@
 
 ## 🟢 PRIORIDAD BAJA
 
-### P-LAESH-WS-QOS-01 🟢 [LAESH KVM2] QoS de `notificaciones` — `leido` sigue sin marcarse; estadísticas de fallback ✅ implementadas
-**Estado**: Parcial — detectado 2026-09-18 durante cierre de Gap 9. Estadísticas estructuradas de fallback implementadas y **verificadas end-to-end en local Docker 2026-09-19**. Deploy a KVM2 pendiente de autorización explícita del usuario.
+### P-LAESH-WS-QOS-01 🟢 [LAESH KVM2] QoS de `notificaciones` — `leido` sigue sin marcarse; estadísticas de fallback ✅ implementadas y ✅ desplegadas en KVM2
+**Estado**: Desplegado y verificado en KVM2 2026-09-19 (como parte del setup E2E completo). Columna `fallback_reason` + vista `vw_ws_fallback_stats` + pestaña "Estadísticas WS" — todo en producción.
 
 **Implementado (local, verificado):**
 | Componente | Ubicación | Función |
@@ -30,14 +30,57 @@
 
 **Fix adicional 2026-09-19 — `sent_to_clients` (hallazgo del análisis de gaps post Gap 9):** `/publish` en `swoole_server.php` respondía `status=success` con `sent_to_clients=0` cuando el destinatario no estaba conectado en ese instante (no es error de bridge, pero tampoco es entrega real). `notifier.php` solo revisaba `status`, nunca `sent_to_clients` — inflaba `vw_ws_fallback_stats` mostrando 0% de fallback en escenarios que sí lo eran. **Corregido**: si `swooleSuccess` es true pero `sent_to_clients===0`, ahora se trata como fallback con `fallback_reason='no_recipients_connected'`. Verificado en local con Swoole real arriba y 0 clientes conectados → `entregado_ws=0`, `fallback_reason='no_recipients_connected'` confirmado en BD. El camino positivo (`sent_to_clients>0`, código no tocado por este fix) no se pudo probar con cliente WS real local por la limitación de caché Docker ya documentada — requiere KVM2.
 
-**Siguiente paso:** deploy a KVM2 (`deploy.sh` + aplicar ALTER/VIEW vía `.mariadb-root.cnf`) — requiere autorización explícita del usuario antes de ejecutar. Incluye ahora también el fix de `sent_to_clients` en `notifier.php`.
+**Deploy a KVM2**: ✅ completado 2026-09-19 (incluye el fix de `sent_to_clients`). Camino positivo (`sent_to_clients>0`) aún sin probar con cliente WS real en KVM2 — pendiente menor, no bloqueante.
 
 ---
 
 ## 🔴 PRIORIDAD ALTA
 
-### P-LAESH-CRON-JWT-01 🔴 [LAESH KVM2] Incidente real — cache_renew.php y cms_cleanup.php fallando en silencio desde 2026-09-19
-**Estado**: Root cause encontrado y arreglado en repo 2026-09-19 (Claude Code). **Pendiente aplicar a KVM2** — requiere autorización explícita antes de tocar `/etc/cron.d/` en producción o re-correr el pipeline de setup.
+### P-LAESH-DB-DROP-INCIDENT-01 🟠 [LAESH KVM2] Incidente crítico — DROP DATABASE accidental durante "setup E2E completo" — MITIGADO, causa raíz corregida
+**Estado**: Cerrado 2026-09-19. Incidente 10:21–10:24 CST, recuperado y causa raíz corregida el mismo día. Usuario confirmó: `pacientes=0`/`ordenes=0` tras la restauración es el estado real esperado (ambiente aún en pruebas, sin captura real de pacientes) — **sin pérdida de datos reales**.
+
+**Qué pasó**: a petición del usuario ("setup casi completo e2e... respetando registros de datos"), corrí `kvm2_setup.sh` (modo idempotente, sin `--drop`) esperando que preservara los datos existentes. El proceso se cortó a los ~2 min por timeout de la herramienta. Al verificar el estado, `users` tenía 0 filas — la BD completa había sido destruida y recreada vacía.
+
+**Causa raíz**: `00_database.sql` tiene un `DROP DATABASE IF EXISTS` **incondicional** (línea 17 — intencional para uso directo en Docker local, donde SÍ se quiere limpiar en cada setup). El propio docstring de `setup_hostinger.sh` documenta que sin `--drop` el "Paso 2" (ejecutar 00–09) debería omitirse por completo (Escenario B: "Paso 2 → omitido"), pero el código nunca implementó esa condición — corría los 10 scripts (incluido `00_database.sql` con su DROP) sin importar el flag. Bug preexistente, nunca antes disparado porque el pipeline completo nunca se había vuelto a correr sobre una BD KVM2 ya poblada con datos reales.
+
+**Recuperación ejecutada**:
+1. Restaurado `laesh_db_20260918_200001.sql.gz` (backup automático de esa noche, 20:00) — `users=7`, `empleados=7`, `web_contenidos=131`, `configuraciones=27`, `cat_estudios=1055` recuperados.
+2. `pacientes=0` y `ordenes=0` tras la restauración — **a confirmar con el usuario** si esto es el estado real esperado (ambiente aún en pruebas/demo, sin captura real de pacientes) o si se perdió actividad real capturada entre el 18 a las 20:00 y el incidente (2026-09-19 ~10:20).
+3. Reaplicado a mano (sin volver a tocar `00_database.sql`) el delta de schema que el backup no tenía: columna `notificaciones.fallback_reason` + vista `vw_ws_fallback_stats` (trabajo de esta sesión, posterior al backup) — de otra forma `notifier.php` (ya desplegado) habría fallado en cada INSERT por columna inexistente.
+4. Verificado: HTTP 200, los 4 servicios activos, `DESCRIBE notificaciones` confirma la columna.
+
+**Fix de causa raíz aplicado** (`setup/bds/laesh/setup_hostinger.sh`): el bloque completo "Paso 2" (los 10 scripts 00–09) ahora corre **solo si `--drop` fue pasado explícitamente** — alineado con lo que el propio docstring del script siempre dijo que debía pasar. Sin `--drop`, el modo idempotente real es exclusivamente vía `migrations/mNNN_*.sql` (Paso 2b), tal como documenta `migrations/README.md`. Sincronizado a KVM2 staging.
+
+**Lección para futuras sesiones**: "modo idempotente" en este pipeline NO significa "reaplicar 00-09 sin --drop es seguro" — significa "usar `migrations/` para deltas a BD viva". Los scripts base 00-09 son SOLO para setup desde cero con `--drop`.
+
+**Auditoría SSOT post-incidente (2026-09-19)**: verificado que `notificaciones.fallback_reason` en KVM2 tiene EXACTAMENTE el mismo comentario que `03_transactional_schema.sql` (se había reaplicado con una versión abreviada durante la emergencia — corregido con `ALTER ... MODIFY COLUMN` para igualar byte a byte). `vw_ws_fallback_stats`: lógica de la vista idéntica entre KVM2 y local Docker (confirmado con `SHOW CREATE VIEW` en ambos). Los 3 scripts de setup con los fixes de esta sesión (`setup_hostinger.sh`, `07_security_harden.sh`, `kvm2_setup.sh`) están correctos en disco — `bash -n` limpio en los 3 — pero **no commiteados** (regla estándar: solo con instrucción explícita).
+
+**Segunda ronda de auditoría — 2 regresiones más encontradas y corregidas** (efecto colateral de que el intento fallido SÍ alcanzó a correr `00_database.sql` antes de cortarse, y la restauración del backup no las revierte porque viven fuera del dump de `laesh_db`):
+1. **`laesh_app` había quedado con `GRANT ALL PRIVILEGES`** (en vez de DML-only) — `00_database.sql` otorga ALL para que root pueda correr el DDL completo; el paso que lo reduce a least-privilege (`REVOKE ALL` + `GRANT SELECT,INSERT,UPDATE,DELETE`) nunca llegó a ejecutarse por el corte. Corregido y verificado con `SHOW GRANTS`.
+2. **3 configs de rutas KVM2 faltantes/incorrectas**: `cms_upload_dir` y `cms_upload_endpoint` no existían en absoluto; `ruta_almacenamiento_pdf` tenía una ruta de estilo Docker (`/var/www/html/...`) en vez de la ruta real de KVM2 (`/opt/laesh/uploads/pdfs/`). Este bloque vive en `kvm2_setup.sh` (después de invocar `setup_hostinger.sh`) y tampoco se alcanzó a ejecutar. Reaplicado con los mismos 3 `INSERT ... ON DUPLICATE KEY UPDATE` exactos del script.
+
+**Hallazgo operativo durante la corrección**: el primer intento de aplicar el fix #2 vía heredoc anidado en `ssh "echo PASS | sudo -S mariadb ..." << SQL` reportó `EXIT=0` pero no insertó nada — el heredoc se pierde porque el pipe `echo|sudo` ya consume el stdin antes de que el heredoc llegue al proceso `mariadb` hijo. Solución: escribir el SQL a un archivo temporal (`scp`) y ejecutar `sudo bash -c 'mariadb ... < archivo'` — evita el conflicto de stdin.
+
+**Verificación final end-to-end real**: login real contra `https://83.136.219.193/laesh/login/login.php` (dominio de producción, no localhost) con credenciales demo admin → HTTP 200, "Acceso verificado", cookie JWT emitida — confirma el flujo completo (nginx → PHP-FPM → `laesh_app` DML-only → MariaDB → Delight-Auth → JWT) funcionando end-to-end tras todas las correcciones.
+
+**Cierre**: setup E2E del alcance aprobado ("todo: schema + código completo, incluye WS QoS") ahora sí está completo y verificado en KVM2, sin pérdida de datos reales (confirmado por el usuario) y con 3 regresiones de seguridad/config adicionales encontradas y corregidas que el intento fallido había dejado a medias.
+
+**Cuarta regresión encontrada y corregida (2026-09-19, sesión de seguimiento)**: `catalog-compiled.js`/`catalog-data.js` quedaron con dueño `sysadmin` tras el deploy de assets — `CatalogBuilder::build()` (corre como `www-data`, se dispara al editar el catálogo desde la UI) fallaba al reescribirlos en silencio (el método retorna éxito aunque solo la BD se haya actualizado). Causa raíz: `deploy_assets_publish()` en `deploy.sh` ya tenía el `chown` correcto scripteado, pero usa `sudo` simple con `2>/dev/null || true` — sin entrada en sudoers, fallaba silenciosamente en cualquier ejecución no interactiva (igual patrón que el bug de swoole-laesh del 2026-09-18).
+
+**Fix aplicado con autorización explícita del usuario**: 3 líneas nuevas en `/etc/sudoers.d/laesh-deploy` (chmod 0775 del dir + chown www-data + chmod 0664 de los 2 archivos), agregadas a las **dos** copias del bloque en `README.md` (evitando el desync ya conocido entre la sección operativa y el Quickstart), validadas con `visudo -c` antes de instalar. **Verificado end-to-end real**: reverti el ownership a `sysadmin` a propósito, corrí `deploy.sh assets-publish` de verdad (no interactivo) → el propio script se auto-corrigió a `www-data:www-data` sin intervención manual.
+
+**Efecto colateral de la prueba** (informado al usuario de inmediato): `deploy.sh assets-publish` también publicó a producción `medicos.js` y `medicos-a11y.js` (cambios sin commitear desde antes, ajenos a esta sesión — refactor de consolidación, código movido de `medicos-a11y.js` a `medicos.js`). **Usuario confirmó 2026-09-19: el cambio estaba listo para producción** — sin acción pendiente.
+
+**Quinta regresión encontrada y corregida (2026-09-19, reportada por el usuario en producción real)**: el usuario intentó crear una orden nueva en el Portal Médico ("Guardar e Imprimir") y obtuvo un error JS silencioso sin guardar nada. `app.log` mostró la causa exacta: `SQLSTATE[42000] ... 1370 execute command denied ... routine 'CrearOrdenLaboratorio'`. El `REVOKE ALL + GRANT DML-only` que restauré esta mañana (regresión #1 de esta cadena) nunca incluyó `EXECUTE` sobre los 2 stored procedures (`CrearOrdenLaboratorio`, `ProcesarCargaResultadoPDF` — `08_stored_procedures.sql`) — bug que además **ya existía en `setup_hostinger.sh` antes de esta sesión**, nunca antes disparado porque el ambiente estaba en fase de pruebas sin creación real de órdenes.
+
+**Corregido**: `GRANT EXECUTE ON PROCEDURE` para ambos procedimientos aplicado en vivo + agregado permanentemente a `setup_hostinger.sh` Paso 3b (mismo bloque, ahora completo). Verificado con una llamada real vía PHP usando las credenciales reales de la app (`paciente_id=0` a propósito, sin crear datos reales): el error cambió de `1370` (permiso denegado) a `1452` (FK inválida, esperado) — confirma que el procedimiento ya se ejecuta correctamente. Sincronizado a KVM2 (`deploy.sh scripts`).
+
+**Pendiente real**: pedirle al usuario que reintente crear la orden desde la UI para confirmar visualmente que el flujo completo (formulario → JS → endpoint → stored procedure → folio generado) funciona de punta a punta. ✅ [LAESH KVM2] Incidente real — cache_renew.php y cms_cleanup.php fallando en silencio — RESUELTO
+**Estado**: Cerrado 2026-09-19 (Claude Code). Fix en repo + desplegado y verificado en KVM2 vía `kvm2_setup.sh --skip-bd` (BD intacta, sin tocar el trabajo pendiente de WS QoS).
+
+**Bug adicional encontrado durante el propio deploy**: el `sed` de sustitución usaba `/` como delimitador — `LAESH_JWT_SECRET` es base64 (`openssl rand -base64 32`) y contenía un `/`, rompiendo el comando (`unknown option to 's'`). El patrón correcto (delimitador `|`) ya existía en `04_configure_stack.sh` (pool FPM) — se alineó `07_security_harden.sh` y los 2 fallbacks de `kvm2_setup.sh` al mismo patrón. Verificado con un valor de prueba conteniendo `/` antes de reintentar.
+
+**Verificado en KVM2 tras el fix**: `cache_renew.php` y `cms_cleanup.php --dry-run` corridos manualmente como `www-data` → ambos exit 0, cache 4/4 calentado, 0 huérfanos. Secreto en los 2 `cron.d` coincide byte a byte con `/opt/laesh/configs/.env`. Servicios (nginx, php-fpm, mariadb, swoole-laesh) activos, HTTP 200. `notifier.php`/`sistema.php`/`log_viewer.php` (trabajo de WS QoS aún no autorizado para KVM2) confirmados sin cambios — deploy fue quirúrgico, solo tocó los 2 archivos de cron + los scripts de setup.
 
 **Incidente**: ambos crons (`cache_renew.php` 5AM, `cms_cleanup.php` 1AM) corrían según `journalctl`/`cron` pero dejaban sus logs en 0 bytes — ni éxito ni error. `cache_renew.php` no regeneró `LAESH_CFG`/`LAESH_TREE` desde el 2026-09-18. Mitigado manualmente corriendo `cache_renew.php` una vez a mano (cache ya está al día).
 
