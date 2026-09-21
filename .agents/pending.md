@@ -7,6 +7,35 @@
 
 ---
 
+## 🔵 EN ESPERA DE DEFINICIÓN DE NEGOCIO
+
+### P-LAESH-RESULTADOS-PARCIALES-01 🔵 [LAESH Bloc Digital] Resultados por estudio cuando una orden tiene múltiples estudios — bloqueado, esperando confirmación operativa del usuario
+**Estado**: Análisis completo (2026-09-20, Claude Code). **NO implementar** hasta que el usuario confirme el dato de negocio que decide si esto hace falta.
+
+**Pregunta bloqueante que el usuario debe responder primero**: ¿los resultados de una misma orden con varios estudios llegan del laboratorio en momentos distintos (por estudio), o siempre se entrega un informe/PDF único consolidado? Si es lo segundo, este plan completo no aplica — bastaría un botón manual "Marcar resultados completos" sin tracking por estudio, mucho más simple.
+
+**Contexto del gap encontrado**: hoy `guardarResultadoPDF()` (`rc/negocio/Ordenes.php:709`) transiciona **toda la orden** a estado 3 (Resultados Listos) en cuanto se sube el **primer** PDF, sin importar cuántos estudios tenga `detalle_ordenes`. Confirmado en BD que ya existen órdenes con 2+ estudios en `detalle_ordenes`, así que no es un caso hipotético — pero también confirmado que ninguna orden en estado 3/4 tiene hoy más de 1 estudio, así que el gap aún no se ha disparado en producción.
+
+**Solución recomendada si se confirma que sí llegan por separado** (sin agregar estados nuevos a `catalogo_estados`/`CambiarEstadoOrden` — la matriz de 5 estados ya validada esta sesión se mantiene intacta):
+- `resultados_pdf`: agregar columna `estudio_id INT UNSIGNED NULL` + FK a `cat_estudios` (`NULL` = el PDF cubre todos los estudios de la orden = comportamiento actual sin cambio).
+- Form de subida: checkboxes de estudios de `detalle_ordenes`, premarcados "todos" — para órdenes de 1 estudio no cambia nada visualmente.
+- `guardarResultadoPDF()`: transiciona a estado 3 solo cuando `% completado = 100%` (todos los estudios tienen al menos un PDF que los cubre); si no, pasa/permanece en estado 2.
+- Grilla Órdenes Hoy/Anteriores: pill de progreso ("2/4 resultados") + anotación ✓/○ en la lista de estudios expandible.
+
+**Gaps/impactos identificados que hay que resolver como parte de la implementación (no opcionales)**:
+1. 4 puntos de código asumen hoy "1 PDF = toda la orden": la subquery `MAX(id)` en `obtenerOrdenesRecientes()`, `GET /orden/pdf` en `rc/index.php` y `md/index.php` (sirven un solo archivo), y `obtenerResultadoPDFPropio()` — los 4 requieren rediseño de cómo se sirve/enlaza el PDF cuando hay varios.
+2. `Notifier::persist('resultado_disponible', ...)` se dispara en cada subida — sin ajuste, el médico recibiría N notificaciones de "Resultados Listos" por cada carga parcial. Hay que suprimirla en parciales o crear un tipo de notificación distinto.
+3. **Race condition real**: dos subidas concurrentes de estudios distintos de la misma orden pueden ambas leer "no está al 100%" antes de que la otra confirme, dejando la orden atascada en estado 2 para siempre aunque juntas sí la completen. Requiere `SELECT ... FOR UPDATE` sobre la fila de `ordenes` (mismo patrón de lock ya usado esta sesión para dedup de pacientes) — no es opcional.
+4. `ordenes.otros_estudios` (texto libre, fuera de `detalle_ordenes`) no tiene ninguna forma de marcarse "completo" — el cálculo de % completado lo ignoraría por completo, pudiendo marcar una orden como lista sin que el estudio de texto libre tenga resultado.
+5. Validar server-side que los `estudio_id` que llegan del form de subida realmente pertenecen a `detalle_ordenes` de esa orden (si no, riesgo de IDOR/corrupción del cálculo de completitud).
+6. Nombre de archivo de subida (`resultado_ord_{id}_{time()}.pdf`, resolución de segundo, sin `estudio_id`) puede colisionar si se suben varios PDFs de la misma orden en el mismo segundo — agregar `estudio_id` o sufijo al nombre.
+7. Cualquier métrica futura que use estado 2 como "sin resultados" perdería precisión (mezclaría "nada subido" con "80% listo") — a documentar si se construye un reporte de tiempos de entrega.
+8. `guardarResultadoPDF()` ya está cubierto por transacciones + outbox de notificaciones (H3/H4/H6) verificados en vivo esta sesión — cualquier cambio a su lógica de transición obliga a re-probar esa parte también, no es un cambio aislado.
+
+**Próximo paso**: cuando el usuario confirme el flujo real de entrega de resultados del laboratorio, retomar este pendiente — o cerrarlo como "no aplica" si los resultados siempre llegan consolidados en un solo informe.
+
+---
+
 ## 🟢 PRIORIDAD BAJA
 
 ### P-LAESH-WS-QOS-01 🟢 [LAESH KVM2] QoS de `notificaciones` — `leido` sigue sin marcarse; estadísticas de fallback ✅ implementadas y ✅ desplegadas en KVM2
