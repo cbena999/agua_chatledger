@@ -38,6 +38,24 @@
 
 ## 🟢 PRIORIDAD BAJA
 
+### P-LAESH-CSS-INVENTORY-01 🟢 [LAESH Bloc Digital] Inspección e inventario de Archivos CSS — pendiente, mismo tratamiento que ya se hizo para JS
+**Estado**: No iniciado (2026-09-21, Claude Code).
+
+**Contexto**: el 2026-09-21 se auditó el inventario completo de `laesh-web-assets-uipv1a/js/` (18 archivos) — se confirmó que todos se cargan desde alguna vista PHP (0 islas a nivel de carga), se detectó y eliminó código muerto real dentro de `catalog-builder.js` (~19% del archivo, el "Constructor de Abanicos", inalcanzable desde la UI — causaba además una advertencia de accesibilidad por controles interactivos anidados en `<summary>`), y se documentó todo en `Especificacion_Tecnica.html` §2.3.1.1, reemplazando una tabla desactualizada que listaba 3 archivos ya inexistentes (`medicos-a11y.js`, `perfil-medico.js`, `docs.js`) y omitía 9 archivos reales.
+
+**Pendiente**: hacer el mismo ejercicio para `laesh-web-assets-uipv1a/css/` — la tabla "Inventario de Archivos CSS" en `Especificacion_Tecnica.html` (justo arriba de la de JS, §2.3.1.1) tiene el mismo patrón de sospecha: lista `perfil-medico.css`, `docs.css` y `aviso-privacidad.css`, que podrían ser remanentes de la misma era pre-migración PHP (nombres de `.html` legacy) — **no verificado aún si esos 3 archivos siguen existiendo en el filesystem**, ni si el resto de la lista coincide con los archivos CSS reales actuales.
+
+**Alcance del trabajo** (mismo método que se usó para JS):
+1. Listar los archivos reales en `laesh-web-assets-uipv1a/css/` (`ls`).
+2. Confirmar cuáles se cargan desde algún `<link rel="stylesheet">` en las vistas PHP actuales (no las `.html` legacy).
+3. Para los que sí cargan, evaluar si tienen reglas muertas internas (selectores que ya no matchean nada en el HTML actual) — no solo "¿se carga el archivo?", sino "¿se usa el contenido?".
+4. Corregir/actualizar la tabla "Inventario de Archivos CSS" en `Especificacion_Tecnica.html` §2.3.1.1 con el resultado real.
+5. Si se encuentra código muerto real (como pasó con `catalog-builder.js`), consultar con el usuario antes de eliminarlo — no eliminar unilateralmente.
+
+**Próximo paso**: retomar cuando el usuario lo pida explícitamente — no es bloqueante para ningún otro trabajo en curso.
+
+---
+
 ### P-LAESH-WS-QOS-01 🟢 [LAESH KVM2] QoS de `notificaciones` — `leido` sigue sin marcarse; estadísticas de fallback ✅ implementadas y ✅ desplegadas en KVM2
 **Estado**: Desplegado y verificado en KVM2 2026-09-19 (como parte del setup E2E completo). Columna `fallback_reason` + vista `vw_ws_fallback_stats` + pestaña "Estadísticas WS" — todo en producción.
 

@@ -7,9 +7,9 @@
 | **Trajectory ID** | `04f20c84-5a3b-4e4e-b5de-8302f1d3fcb9` |
 | **Cascade ID** | `6bb73e25-727a-4589-849d-9fcae1a1d750` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 6623 |
+| **Total Steps** | 7170 |
 | **Started** | 18 Sept 2026, 12:20 pm |
-| **Completed** | 20 Sept 2026, 9:25 pm |
+| **Completed** | 21 Sept 2026, 10:17 am |
 
 ---
 
@@ -11115,439 +11115,719 @@
 
 ---
 
-## User Request
-
-de los botones de la collumna estado que todos no tenga color de fondo, unicamente de sus contornos
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `labadmin.js`
-**Language:** javascript
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `portal.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1734-1764)</summary>
-
-**Path:** `Unknown file`
-
-```
-   Clases portal-only relocalizadas al archivo que corresponde.
-   ══════════════════════════════════════════════════════════════════════════════ */
-
-/* State Badges */
-.badge {
-    padding: 0.375rem 0.75rem;
-    border-radius: 9999px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    line-height: 1;
-    border: 1.5px solid transparent;
-    box-sizing: border-box;
-}
-.badge-remitido { background: #ffffff; color: var(--state-remitido-text, #0369a1); border-color: var(--state-remitido-text, #0369a1); }
-.badge-atencion { background: var(--state-atencion-bg); color: var(--state-atencion-text); }
-.badge-listos { background: var(--state-listos-bg); color: var(--state-listos-text); }
-.badge-cerrada { background: var(--state-cerrada-bg); color: var(--state-cerrada-text); }
-.badge-cancelada { background: var(--state-cancelada-bg); color: var(--state-cancelada-text); }
-
-/* ── Sidebar nav-item ── */
-/* Notifications */
-.nav-item {
-    position: relative;
-    padding: 0.85rem 1rem;
-    border-radius: 8px;
-    cursor: pointer;
-    display: flex;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Analyzing the request to remove background color from the state badges, focusing on the button's appearance solely through its borders. Examining each badge's style definition to locate and isolate the background property. Initial assessment suggests the background is explicitly set to white in the default styles.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `badge-atencion`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.076263383s
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 20 Sept 2026, 6:58 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `portal.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1739-1759)</summary>
-
-**Path:** `Unknown file`
-
-```
-    padding: 0.375rem 0.75rem;
-    border-radius: 9999px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    line-height: 1;
-    border: 1.5px solid transparent;
-    box-sizing: border-box;
-}
-.badge-remitido { background: #ffffff; color: var(--state-remitido-text, #0369a1); border-color: var(--state-remitido-text, #0369a1); }
-.badge-atencion { background: var(--state-atencion-bg); color: var(--state-atencion-text); }
-.badge-listos { background: var(--state-listos-bg); color: var(--state-listos-text); }
-.badge-cerrada { background: var(--state-cerrada-bg); color: var(--state-cerrada-text); }
-.badge-cancelada { background: var(--state-cancelada-bg); color: var(--state-cancelada-text); }
-
-/* ── Sidebar nav-item ── */
-/* Notifications */
-.nav-item {
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The goal is to modify the styling of state badges within `portal.css`. The approach involves setting a white background for the badges and outlining them with the color corresponding to their respective state text. This change will affect the visual representation of state badges on the interface.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.015888597s
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 20 Sept 2026, 6:58 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `.badge-`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 20 Sept 2026, 6:58 pm
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-## User Request
-
-que los contornos sean con diferentes colores, que la de cancelada quede en rojo
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `portal.css`
-**Language:** css
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The request involves different colored contours, specifically "cancelada" in red. Initial investigation targets the CSS files to understand how colors are defined and managed, focusing on `tokens.css` first. Examination of the file reveals color variable definitions for several states, potentially providing the necessary customization points.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `portal.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.101383309s
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1734-1764)</summary>
-
-**Path:** `Unknown file`
-
-```
-   Clases portal-only relocalizadas al archivo que corresponde.
-   ══════════════════════════════════════════════════════════════════════════════ */
-
-/* State Badges — Outlined Style (Fondo blanco y contornos temáticos) */
-.badge {
-    padding: 0.375rem 0.75rem;
-    border-radius: 9999px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    line-height: 1;
-    background: #ffffff;
-    border: 1.5px solid transparent;
-    box-sizing: border-box;
-}
-.badge-remitido { background: #ffffff; color: var(--state-remitido-text, #0369a1); border-color: var(--state-remitido-text, #0369a1); }
-.badge-atencion { background: #ffffff; color: var(--state-atencion-text, #b45309); border-color: var(--state-atencion-text, #b45309); }
-.badge-listos { background: #ffffff; color: var(--state-listos-text, #047857); border-color: var(--state-listos-text, #047857); }
-.badge-cerrada { background: #ffffff; color: var(--state-cerrada-text, #475569); border-color: var(--state-cerrada-text, #475569); }
-.badge-cancelada { background: #ffffff; color: var(--state-cancelada-text, #b91c1c); border-color: var(--state-cancelada-text, #b91c1c); }
-
-/* ── Sidebar nav-item ── */
-/* Notifications */
-.nav-item {
-    position: relative;
-    padding: 0.85rem 1rem;
-    border-radius: 8px;
-    cursor: pointer;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Each badge requires a distinctive visual representation; specific border and text colors will be assigned. Determined that `.badge-remitido` will use a vibrant blue, and `.badge-atencion` will be amber/orange. Implementing these style changes within the relevant CSS file.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.004759354s
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 20 Sept 2026, 6:59 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `tokens.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L19-34)</summary>
-
-**Path:** `Unknown file`
-
-```
-    --border: #DADAD9;             /* Gris LAESH para Bordes */
-
-    /* ── Colores de Estado (Órdenes y Diagnósticos) ── */
-    --state-remitido-bg: #e0f2fe;  /* Azul Claro */
-    --state-remitido-text: #0369a1;
-    --state-atencion-bg: #fef3c7;  /* Amarillo Claro */
-    --state-atencion-text: #b45309;
-    --state-listos-bg: #d1fae5;    /* Verde Claro */
-    --state-listos-text: #047857;
-    --state-cerrada-bg: #f1f5f9;   /* Gris Claro */
-    --state-cerrada-text: #475569;
-    --state-cancelada-bg: #fee2e2; /* Rojo Claro */
-    --state-cancelada-text: #b91c1c;
-
-    /* ── Colores de Feedback (Toast / Alertas / Validaciones) ── */
-    --color-success-bg: #d1fae5;    /* Verde Claro — Operación exitosa */
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 20 Sept 2026, 7:00 pm
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-## User Request
-
-EN  Recepción / Médicos 
-añade dos pestañas que se llamen: Universidades  y Centros de trabajo, en las cuales tengan el formato grilla identico al de la pestaña Médicos para editar registros , añadir un nuevo registro de la entidad, Total: 1057 , | 1 2 3 4  5 >>  y busqueda autocompletada, notificaciones, endpoints de consusta y sync correspondiente , decide en backedn si es pdo sql o  procedure
-
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `portal.css`
-**Language:** css
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `universidad`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 20 Sept 2026, 8:44 pm
 
 ---
 
 ### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 20 Sept 2026, 8:44 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 8:44 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 8:44 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 8:44 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 8:44 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 8:45 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 8:45 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 8:45 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 8:45 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 8:45 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 8:45 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 8:45 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 8:45 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 8:45 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 8:45 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 8:47 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 8:47 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 8:48 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 8:48 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 8:48 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 8:48 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 8:48 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 8:48 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 8:49 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 8:49 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 8:49 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 8:49 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 8:49 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 8:49 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 8:49 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 8:50 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 8:50 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 8:50 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 8:50 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 8:50 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 8:56 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 8:56 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 8:56 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 8:56 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 8:56 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 8:57 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 8:57 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:15 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:16 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:16 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:17 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:17 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:17 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:22 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:22 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:23 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:23 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:23 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:23 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:23 pm
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:24 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:24 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:24 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:24 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:24 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:25 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:25 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:25 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:25 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:25 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:31 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:31 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:31 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:31 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:31 pm
+
+---
+
+### Execution Error
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:31 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:31 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:31 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:32 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:32 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:32 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:32 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:32 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:32 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:36 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:38 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:38 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:38 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:41 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:42 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:42 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:42 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:44 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:45 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:45 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 20 Sept 2026, 9:45 pm
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 20 Sept 2026, 9:45 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+The request is to comprehensively review and document all security aspects addressed within the web application's scope. The goal is to update the specified documentation file, `Tecnica_Seguridad_Integral.html`, with the consolidated and aligned security information. Previous steps involved code modifications, indicating existing context for this documentation update.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `4.12`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.041764074s
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 20 Sept 2026, 9:45 pm
 
 ---
 
@@ -11555,7 +11835,8 @@ añade dos pestañas que se llamen: Universidades  y Centros de trabajo, en las 
 
 ### Actions
 
-**Tool:** `run_command`
+**Tool:** `view_file`
+**File:** `Tecnica_Seguridad_Integral.html`
 
 <details>
 <summary>Metadata</summary>
@@ -11565,10 +11846,351 @@ añade dos pestañas que se llamen: Universidades  y Centros de trabajo, en las 
 
 ---
 
-### Terminal Command Execution
+<details>
+<summary>File: `Unknown file` (L579-649)</summary>
 
-**Status:** Completed
-**Created:** 20 Sept 2026, 8:44 pm
+**Path:** `Unknown file`
+
+```
+                <li><strong>Hallazgo adyacente cerrado en el mismo cambio — dedup WS↔polling no funcionaba (auditoría de flujos, mismo día):</strong> el payload de <code>push()</code> nunca incluía el <code>id</code> de la fila en <code>notificaciones</code>, así que el dedup del cliente (<code>ws-client.js</code>, <code>seenNotifIds</code>) solo protegía el camino de polling — una notificación reintentada por <code>crons/notificaciones_retry.php</code> tras un fallo de push inicial podía llegar duplicada. Como un solo broadcast de Swoole llega a varios <code>$fd</code> a la vez, se construye un mapa <code>notif_ids_by_user</code> (mismo orden que <code>target_user_ids</code>, llenados en el mismo <code>foreach</code> de <code>Notifier::persist()</code>) para que <code>swoole_server.php</code> inyecte el <code>id</code> correcto a cada conexión antes de reenviar — nunca el mismo <code>id</code> a dos usuarios distintos.</li>
+                <li><strong>"ACK QoS Nivel 2" eliminado, no completado:</strong> el cliente WS tenía código para enviar un ACK a Swoole al recibir un mensaje con <code>id</code>, pero <code>swoole_server.php</code> nunca procesó ese ACK (su <code>on('message')</code> es y sigue siendo un no-op intencional — Swoole no tiene conexión a BD por diseño, ver §4.7/§4.9). Implementar la confirmación real habría requerido un puente HTTP inverso Swoole→PHP-FPM nuevo — eso es una feature nueva, no un fix de código muerto, así que se retiró el envío del lado cliente en vez de dejarlo a medias ahora que sí sería alcanzable (post fix de <code>notif_ids_by_user</code>).</li>
+                <li><strong>Consistencia de Caché L2 en la revocación de JTI:</strong> <code>Cache::invalidate()</code> siempre llamaba <code>opcache_invalidate()</code> antes de tocar el archivo; <code>Cache::set()</code> —usado por <code>JwtManager::cacheJtiStatus()</code> para voltear <code>revoked</code> de <code>false</code> a <code>true</code> sobre la misma clave/archivo— solo recompilaba, sin invalidar primero. Alineado al mismo patrón: invalidar incondicionalmente antes de recompilar, cerrando una ventana teórica de bytecode desactualizado dependiente de <code>opcache.validate_timestamps</code>/<code>revalidate_freq</code>.</li>
+            </ul>
+
+            <!-- ═══════════════ 4.12 SEGURIDAD CRIPTOGRÁFICA EN 5 CAPAS ═══════════════ -->
+            <section id="sec4-12">
+                <h3>4.12. Arquitectura de Seguridad Criptográfica en 5 Capas para Gestión de Contraseñas y NIPs <span class="tag dev">Desarrollo</span> <span class="tag docker">Entorno Docker Local</span> <span class="tag vps">Setup Hostinger KVM</span></h3>
+                <p>Para la asignación administrativa y el cambio autónomo de contraseñas/NIPs (en los portales de Recepción <code>/laesh/rc/</code> y Médico <code>/laesh/md/</code>), se implementó un modelo de <strong>5 capas de blindaje criptográfico e infraestructura</strong>:</p>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Capa</th>
+                                <th>Mecanismo Criptográfico</th>
+                                <th>Implementación Técnica</th>
+                                <th>Mitigación de Amenaza</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>1. Hashing con Pepper</strong></td>
+                                <td>Bcrypt (<code>$2y$</code>) + Pre-hash HMAC-SHA-512</td>
+                                <td><code>libs/auth/Delight/Auth/PasswordHash.php</code> (<code>hash_hmac('sha512', $pass, PEPPER)</code>)</td>
+                                <td>Elimina el truncamiento de 72 bytes de Bcrypt, neutraliza inyección de <code>NULL</code> bytes e inutiliza tablas Rainbow ante filtración aislada de BD.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>2. Salting Dinámico</strong></td>
+                                <td>Salt CSPRNG aleatorio de 128 bits</td>
+                                <td>Generado automáticamente por el motor criptográfico en cada hash</td>
+                                <td>Impide que contraseñas/NIPs idénticos generen cadenas repetidas en <code>users.password</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>3. Cero Texto Plano</strong></td>
+                                <td>Sanitización en BD, Vistas y Logs</td>
+                                <td><code>sys_logs</code>, <code>app.log</code> y <code>fallback_log</code> omiten credenciales; inputs con <code>type="password"</code></td>
+                                <td>Previene fugas en archivos de log de depuración y ataques de observación local.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>4. Anti-Fuerza Bruta</strong></td>
+                                <td>Rate Limiting Token Bucket + Password Actual</td>
+                                <td><code>users_throttling</code> en login + validación estricta de <code>old_password</code> en cambio de clave propio</td>
+                                <td>Bloquea ataques automatizados de adivinación de NIPs/passwords por diccionario o fuerza bruta.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>5. Revocación en Cascada</strong></td>
+                                <td>Force Logout + Purga JWT L2 + Cierre WS</td>
+                                <td><code>users.force_logout++</code>, <code>DELETE users_remembered</code>, <code>JwtManager::revokeAllUserTokens()</code></td>
+                                <td>Invalida inmediatamente todas las sesiones y sockets activos en otros dispositivos tras cambiar la clave.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <ul>
+                    <li><strong>Transporte Cifrado HTTPS / TLS (1.3/1.2):</strong> Todo el intercambio de credenciales viaja protegido bajo el túnel TLS. Las cookies de autenticación (<code>laesh_jwt_token</code>, <code>PHPSESSID</code>) viajan estrictamente con banderas <code>Secure</code>, <code>HttpOnly</code> y <code>SameSite=Strict</code>.</li>
+                    <li><strong>Longitud y Complejidad Controlada:</strong> Se exige un mínimo estricto de 8 caracteres tanto en el cliente (validación HTML5/JS) como en el backend mediante <code>strlen($pass) &gt;= 8</code> y <code>\Delight\Auth\InvalidPasswordException</code>.</li>
+                </ul>
+            </section>
+
+            <!-- ═══════════════ 4.13 GESTIÓN DE ESTADOS MÉDICOS Y TRAZABILIDAD ═══════════════ -->
+            <section id="sec4-13">
+                <h3>4.13. Protocolo de Gestión de Estados Médicos (Pausar / Reactivar) y Trazabilidad Dual-Path <span class="tag dev">Desarrollo</span> <span class="tag docker">Entorno Docker Local</span></h3>
+                <p>En el módulo de gestión de médicos de Recepción (<code>#panel-medicos</code> en <code>/laesh/rc/</code>), las acciones operativas de pausado y reactivación ejecutan una sincronización transaccional en cascada con observabilidad completa:</p>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Acción</th>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Tecnica_Seguridad_Integral.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L649-699)</summary>
+
+**Path:** `Unknown file`
+
+```
+                                <th>Acción</th>
+                                <th>Entidades Afectadas</th>
+                                <th>Efecto Operativo y de Seguridad</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Pausar Médico (Estado 2)</strong></td>
+                                <td><code>perfiles_medicos</code> (2), <code>empleados</code> (activo=0), <code>users</code> (status=2 / SUSPENDED), <code>users_remembered</code> (DELETE), <code>jwt_jti_registry</code> (revocado), Swoole WS</td>
+                                <td>Inhabilita al médico de forma inmediata: se desactiva su perfil, se bloquea su login en Delight Auth, se incrementa <code>force_logout</code>, se revocan todos sus tokens JWT en OPcache RAM L2 y se cierran activamente sus conexiones WebSocket vía <code>Notifier::revokeSession()</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Reactivar Médico (Estado 1)</strong></td>
+                                <td><code>perfiles_medicos</code> (1), <code>empleados</code> (activo=1), <code>users</code> (status=0 / NORMAL), <code>users_throttling</code> (DELETE)</td>
+                                <td>Restaura el acceso del médico al portal <code>/laesh/md/</code> y limpia penalizaciones por intentos de acceso previos en <code>users_throttling</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Trazabilidad Dual-Path</strong></td>
+                                <td><code>sys_logs</code> (MariaDB) + <code>laesh-swbldi/logs/app.log</code> (File)</td>
+                                <td>Registro obligatorio mediante <code>\Common\Logger::logAlways('INFO', ...)</code> capturando el ID del operador, ID del médico y marca temporal.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Fallback Log de Excepciones</strong></td>
+                                <td><code>fallback_log</code> (MariaDB) + <code>debug_backtrace</code></td>
+                                <td>Captura estructurada mediante <code>\Common\DB::logFallback('ERROR', ...)</code> ante cualquier fallo inesperado (<code>\Throwable</code>) con query, hash CRC32 y origen exacto.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Confirmación con ACK y Toaster</strong></td>
+                                <td>Frontend <code>labadmin.js</code> + Toaster UI</td>
+                                <td>Respuestas JSON con <code>ack: true</code> que disparan notificaciones Toast contextuales (<code>success</code>, <code>warning</code>, <code>error</code>) y resalte visual temporal de 10s (<code>row-saved-highlight</code>).</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </section>
+
+        <!-- ═══════════════ 5. DEFENSAS LÓGICAS ═══════════════ -->
+        <section id="sec5">
+            <h2>5. Defensas Contra Vectores No Típicos (Logic Flaws) <span class="tag dev">Desarrollo</span></h2>
+            <ul>
+                <li><strong>Inyección de Archivos Nocivos (PDF Uploads):</strong> Al adjuntar resultados, el sistema backend validará no solo la extensión, sino la firma binaria real (<em>Magic Number</em> <code>%PDF-</code>) mediante la extensión <code>finfo</code>. Si el archivo es un script malicioso enmascarado, será rechazado y eliminado instantáneamente.</li>
+                <li><strong>Inseguridad de Referencias Directas (IDOR) y Suplantación Médica:</strong> Todas las descargas de PDFs e historiales médicos ejecutarán una validación cruzada. El controlador en Flight PHP verificará que el <code>orden_id</code> solicitado coincida exactamente con el <code>medico_id</code> de la sesión de Delight Auth. Intentos de acceso a folios de otros profesionales dispararán un <code>403 Forbidden</code> y un log de alerta a <code>sys_logs</code>.</li>
+                <li><strong>Autorización de Recursos (RBAC):</strong> Cada ruta ejecutará una validación obligatoria contra <code>\Common\RbacManager</code> asegurando que Recepción, Médicos y Administración interactúen estrictamente en su perímetro funcional.</li>
+                <li><strong>Protección del Panel de Sistema y Logs (<code>/laesh/adrc/sistema</code>):</strong> La administración de configuraciones y la visualización de logs de aplicación (<code>sys_logs</code>, <code>fallback_log</code>, <code>app.log</code>, Nginx y PHP-FPM) están restringidas por la guardia RBAC <code>gestionar_cms</code> para el rol <code>ADMIN</code>. Se previene Path Traversal restringiendo la lectura de archivos planos a la lista blanca de rutas conocidas.</li>
+                <li><strong>Validación Rigurosa de Binarios en CMS Upload:</strong> La subida de imágenes analiza el tipo MIME real mediante <code>\finfo</code> (MIME Types permitidos: WebP, JPEG, PNG). Se aplica sanitización al nombre del slot (alfanumérico y guiones únicamente) y validación CSRF vía <code>\Common\CsrfGuard::isValid()</code> (§3.3) — sin rotación de token tras la subida, por diseño, para no invalidar subidas subsecuentes en la misma sesión de edición del CMS.</li>
+                <li><strong>Protección de Bypass de Caché L2 (DoS Prevention):</strong> La estrategia de Caché OPcache File Store soporta un parámetro de derivación (<code>?_preview=1</code>) para la previsualización del CMS. Este vector está severamente protegido en <code>index.php</code>: se requiere una sesión activa con rol de <code>ADMIN</code>, que existan datos en el borrador temporal de la sesión (<code>cms_draft</code>), y validación estricta de variables. Si no se cumplen estas precondiciones, el motor ignora el parámetro y sirve el contenido desde la RAM, bloqueando ataques de agotamiento de caché (Denegación de Servicio).</li>
+            </ul>
+        </section>
+
+        <!-- ═══════════════ 7. FIREWALL Y ANTI-ESCANEO ═══════════════ -->
+```
+
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+Analiza todo el codigo fuente js, php, css, sql, etc, para identificar codigo muerto, aislado, obsoleto, legacy ; y duplicado o redundante, candidato a ser eliminado. Dame informe.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `Tecnica_Seguridad_Integral.html`
+**Language:** html
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Initiating a comprehensive codebase analysis, focusing on identifying dead, isolated, obsolete, legacy, and duplicated code within the specified projects (LAESH). The analysis will cover JS, PHP, CSS, SQL scripts, views, controllers, and styles. Will adhere to the established planning rules to ensure a rigorous and effective evaluation.
+
+
+
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.070009462s
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>Directory: `laesh-swbldi` (9 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi`
+
+| Name | Type | Size |
+|------|------|------|
+| `admrc` | Directory | - |
+| `commons` | Directory | - |
+| `crons` | Directory | - |
+| `libs` | Directory | - |
+| `logs` | Directory | - |
+| `md` | Directory | - |
+| `rc` | Directory | - |
+| `uploads` | Directory | - |
+| `website` | Directory | - |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-web-assets-uipv1a`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>Directory: `laesh-web-assets-uipv1a` (6 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-web-assets-uipv1a`
+
+| Name | Type | Size |
+|------|------|------|
+| `cms` | Directory | - |
+| `css` | Directory | - |
+| `fonts` | Directory | - |
+| `icons` | Directory | - |
+| `img` | Directory | - |
+| `js` | Directory | - |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-web-assets-uipv1a/js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>Directory: `js` (19 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-web-assets-uipv1a/js`
+
+| Name | Type | Size |
+|------|------|------|
+| `app.js` | File | 26534 bytes |
+| `catalog-builder.js` | File | 153440 bytes |
+| `catalog-compiled.js` | File | 456722 bytes |
+| `ckeditor-init.js` | File | 15893 bytes |
+| `ckeditor5.umd.js` | File | 1431443 bytes |
+| `cms-dirty-tracker.js` | File | 21516 bytes |
+| `cms-upload.js` | File | 13459 bytes |
+| `device-detect.js` | File | 3165 bytes |
+| `gestion-web.js` | File | 29950 bytes |
+| `htmx.min.js` | File | 49082 bytes |
+| `labadmin.js` | File | 115270 bytes |
+| `log-viewer.js` | File | 3730 bytes |
+| `medicos-a11y.js` | File | 3207 bytes |
+| `medicos.js` | File | 82175 bytes |
+| `portal-footer.js` | File | 1828 bytes |
+| `sidebar-rail.js` | File | 6363 bytes |
+| `solicitud-dac.js` | File | 7962 bytes |
+| `website.js` | File | 55103 bytes |
+| `ws-client.js` | File | 21957 bytes |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-web-assets-uipv1a/css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>Directory: `css` (14 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-web-assets-uipv1a/css`
+
+| Name | Type | Size |
+|------|------|------|
+| `ckeditor-content.css` | File | 6908 bytes |
+| `ckeditor5.css` | File | 213502 bytes |
+| `docs.css` | File | 10172 bytes |
+| `fonts.css` | File | 15347 bytes |
+| `gestion-web.css` | File | 25635 bytes |
+| `landing.css` | File | 90888 bytes |
+| `log-viewer.css` | File | 4702 bytes |
+| `portal.css` | File | 74093 bytes |
+| `solicitud-dac.css` | File | 20300 bytes |
+| `style-website.css` | File | 15739 bytes |
+| `style.css` | File | 33922 bytes |
+| `tablet-samsung-tabs10ultra.css` | File | 9837 bytes |
+| `targeting.css` | File | 5954 bytes |
+| `tokens.css` | File | 2508 bytes |
+
+</details>
 
 ---
 
@@ -11594,7 +12216,7 @@ añade dos pestañas que se llamen: Universidades  y Centros de trabajo, en las 
 
 | Name | Type | Size |
 |------|------|------|
-| `index.php` | File | 74008 bytes |
+| `index.php` | File | 80429 bytes |
 | `negocio` | Directory | - |
 | `views` | Directory | - |
 
@@ -11606,8 +12228,8 @@ añade dos pestañas que se llamen: Universidades  y Centros de trabajo, en las 
 
 ### Actions
 
-**Tool:** `view_file`
-**File:** `test_db.php`
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/rc/negocio`
 
 <details>
 <summary>Metadata</summary>
@@ -11618,21 +12240,14 @@ añade dos pestañas que se llamen: Universidades  y Centros de trabajo, en las 
 ---
 
 <details>
-<summary>File: `Unknown file`</summary>
+<summary>Directory: `negocio` (2 items)</summary>
 
-**Path:** `Unknown file`
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/rc/negocio`
 
-```
-<?php
-require_once __DIR__ . '/libs/autoload.php';
-$db = \Common\DB::connect();
-$stmt = $db->query("DESCRIBE vw_estudios_catalogo");
-print_r($stmt->fetchAll(\PDO::FETCH_ASSOC));
-
-$stmt = $db->query("DESCRIBE vw_ordenes_completas");
-print_r($stmt->fetchAll(\PDO::FETCH_ASSOC));
-
-```
+| Name | Type | Size |
+|------|------|------|
+| `Catalogos.php` | File | 7602 bytes |
+| `Ordenes.php` | File | 61667 bytes |
 
 </details>
 
@@ -11642,7 +12257,8 @@ print_r($stmt->fetchAll(\PDO::FETCH_ASSOC));
 
 ### Actions
 
-**Tool:** `run_command`
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/rc/views`
 
 <details>
 <summary>Metadata</summary>
@@ -11652,10 +12268,339 @@ print_r($stmt->fetchAll(\PDO::FETCH_ASSOC));
 
 ---
 
-### Terminal Command Execution
+<details>
+<summary>Directory: `views` (2 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/rc/views`
+
+| Name | Type | Size |
+|------|------|------|
+| `labadmin.php` | File | 93764 bytes |
+| `solicitud_dac_impr.php` | File | 9785 bytes |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>Directory: `md` (3 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/md`
+
+| Name | Type | Size |
+|------|------|------|
+| `index.php` | File | 30499 bytes |
+| `negocio` | Directory | - |
+| `views` | Directory | - |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/md/negocio`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>Directory: `negocio` (1 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/md/negocio`
+
+| Name | Type | Size |
+|------|------|------|
+| `Ordenes.php` | File | 23995 bytes |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/md/views`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>Directory: `views` (1 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/md/views`
+
+| Name | Type | Size |
+|------|------|------|
+| `medicos.php` | File | 73197 bytes |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/admrc`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>Directory: `admrc` (2 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/admrc`
+
+| Name | Type | Size |
+|------|------|------|
+| `index.php` | File | 22397 bytes |
+| `views` | Directory | - |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/admrc/views`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>Directory: `views` (3 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/admrc/views`
+
+| Name | Type | Size |
+|------|------|------|
+| `gestion_web.php` | File | 146309 bytes |
+| `log_viewer.php` | File | 17041 bytes |
+| `sistema.php` | File | 36543 bytes |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/website`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>Directory: `website` (5 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/website`
+
+| Name | Type | Size |
+|------|------|------|
+| `index.php` | File | 59408 bytes |
+| `login` | Directory | - |
+| `robots.txt` | File | 1604 bytes |
+| `sections` | Directory | - |
+| `sitemap.xml` | File | 604 bytes |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/commons`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>Directory: `commons` (15 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/commons`
+
+| Name | Type | Size |
+|------|------|------|
+| `Cache.php` | File | 8317 bytes |
+| `CatalogBuilder.php` | File | 7277 bytes |
+| `CsrfGuard.php` | File | 6916 bytes |
+| `DB.php` | File | 5264 bytes |
+| `JwtManager.php` | File | 12125 bytes |
+| `Logger.php` | File | 8620 bytes |
+| `RbacManager.php` | File | 4147 bytes |
+| `Response.php` | File | 4479 bytes |
+| `autoload.php` | File | 1504 bytes |
+| `commons.php` | File | 6126 bytes |
+| `config.php` | File | 3403 bytes |
+| `notifier.php` | File | 18962 bytes |
+| `seed_first_users.php` | File | 10140 bytes |
+| `swoole_server.php` | File | 21482 bytes |
+| `ws_audit_receiver.php` | File | 2724 bytes |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/crons`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>Directory: `crons` (3 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/crons`
+
+| Name | Type | Size |
+|------|------|------|
+| `cache_renew.php` | File | 6881 bytes |
+| `cms_cleanup.php` | File | 10248 bytes |
+| `notificaciones_retry.php` | File | 8439 bytes |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/setup/bds/laesh`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>Directory: `laesh` (16 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/setup/bds/laesh`
+
+| Name | Type | Size |
+|------|------|------|
+| `00_database.sql` | File | 1423 bytes |
+| `01_auth_schema.sql` | File | 6866 bytes |
+| `02_core_schema.sql` | File | 8431 bytes |
+| `03_transactional_schema.sql` | File | 16378 bytes |
+| `04_auth_extensions.sql` | File | 8170 bytes |
+| `05_system_tables.sql` | File | 4475 bytes |
+| `06_indexes.sql` | File | 3248 bytes |
+| `07_seed_catalogs.sql` | File | 173348 bytes |
+| `08_stored_procedures.sql` | File | 14624 bytes |
+| `09_views.sql` | File | 12155 bytes |
+| `README.md` | File | 11754 bytes |
+| `bash` | Directory | - |
+| `migrations` | Directory | - |
+| `setup.sh` | File | 5275 bytes |
+| `setup_hostinger.sh` | File | 13477 bytes |
+| `setup_oci.sh` | File | 9886 bytes |
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Focus will be on identifying unused JavaScript and CSS files within the specified directories. Need to determine which files are actually included in the views across the different view directories. Specific files like `catalog-builder.js` and others will be scrutinized for their usage.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `catalog-compiled.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.062812352s
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
 
 **Status:** Completed
-**Created:** 20 Sept 2026, 8:44 pm
+**Created:** 20 Sept 2026, 9:52 pm
 
 ---
 
@@ -11664,7 +12609,7 @@ print_r($stmt->fetchAll(\PDO::FETCH_ASSOC));
 ### Actions
 
 **Tool:** `grep_search`
-**Query:** `class DB`
+**Query:** `app.js`
 
 <details>
 <summary>Metadata</summary>
@@ -11677,7 +12622,4592 @@ print_r($stmt->fetchAll(\PDO::FETCH_ASSOC));
 ### Local File Search
 
 **Status:** Completed
-**Created:** 20 Sept 2026, 8:44 pm
+**Created:** 20 Sept 2026, 9:52 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `app.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+// Audio helper de notificaciones (Web Audio API oscillator)
+function playWhistle() {
+    try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const oscillator = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+        oscillator.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+        oscillator.type = 'sine';
+        oscillator.frequency.setValueAtTime(1200, audioCtx.currentTime);
+        oscillator.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.3);
+        gainNode.gain.setValueAtTime(0.5, audioCtx.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+        oscillator.start();
+        oscillator.stop(audioCtx.currentTime + 0.3);
+    } catch(e) {
+        console.log("Audio no soportado");
+    }
+}
+
+// MariaDB SSOT — Descontinuado el uso de LocalStorage para datos de negocio
+function getOrders() { return []; }
+function saveOrders(orders) {}
+function getCatalog() { return window.laeshTop20EstMed || []; }
+function saveCatalog(catalog) {}
+function createOrder(paciente, estudios, medico) { return null; }
+function updateOrderStatus(id, newStatus) {}
+
+// ─────────────────────────────────────────────────────────────
+// Portal Header + Nav‑Strip — labadmin.html, medicos.html
+//
+// En tablet/móvil (≤1024px) el header y la tira de iconos son
+// position:fixed, por eso el app-layout necesita padding-top igual
+// a la suma de ambas alturas. app.js mide y publica dos CSS vars:
+//   --portal-header-h        → altura real del nav header
+//   --portal-content-offset  → header + tira (padding-top del layout)
+//
+// En móvil (≤767px) aparece el hamburger (CSS display:flex).
+// Al pulsarlo se muestra .sidebar-mobile-only como mini-panel
+// anclado a la derecha del viewport (usuario + Cerrar Sesión).
+// ─────────────────────────────────────────────────────────────
+(function initPortalHamburger() {
+    var header    = document.querySelector('.portal-access-header');
+    var sidebar   = document.querySelector('.app-layout > .sidebar');
+    var appLayout = document.querySelector('.app-layout');
+    if (!header || !sidebar) return;
+
+    var btn = null;
+
+    // Medir y publicar alturas; ajustar padding-top del layout.
+    // portal-access-header es position:fixed en TODOS los viewports →
+    // siempre se necesita al menos headerH de padding-top en app-layout.
+    // En tablet/móvil (≤1024px) la tira de iconos también es fixed →
+    // se suma sidebarH adicionalmente.
+    function syncHeights() {
+        var headerH  = header.getBoundingClientRect().height;
+        var sidebarH = (window.innerWidth <= 1024)
+                       ? sidebar.getBoundingClientRect().height
+                       : 0;
+        var offset = headerH + sidebarH;
+        document.documentElement.style.setProperty('--portal-header-h',       headerH + 'px');
+        document.documentElement.style.setProperty('--portal-content-offset', offset  + 'px');
+        if (appLayout) appLayout.style.paddingTop = offset + 'px';
+    }
+
+    // Primera medición tras render de la tira
+    requestAnimationFrame(syncHeights);
+    window.addEventListener('resize', function() {
+        syncHeights();
+        // Cerrar mini-panel si se cambia el tamaño
+        if (header.classList.contains('portal-user-open') && btn) {
+            header.classList.remove('portal-user-open');
+            btn.classList.remove('open');
+            btn.setAttribute('aria-expanded', 'false');
+        }
+    });
+
+    // Inyectar hamburger en el header.
+    // CSS lo hace visible solo en ≤767px (.portal-access-header .nav-hamburger { display:flex })
+    btn = document.createElement('button');
+    btn.className = 'nav-hamburger';
+    btn.setAttribute('aria-label', 'Menú usuario');
+    btn.setAttribute('aria-expanded', 'false');
+    btn.innerHTML = '<span></span><span></span><span></span>';
+    header.appendChild(btn);
+
+    function closeUserMenu() {
+        header.classList.remove('portal-user-open');
+        btn.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+    }
+    function openUserMenu() {
+        syncHeights();
+        header.classList.add('portal-user-open');
+        btn.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+    }
+
+    btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `app.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L100-249)</summary>
+
+**Path:** `Unknown file`
+
+```
+        header.classList.contains('portal-user-open') ? closeUserMenu() : openUserMenu();
+    });
+    // Cerrar al hacer clic fuera del header
+    document.addEventListener('click', function(e) {
+        if (!header.contains(e.target)) closeUserMenu();
+    });
+})();
+
+// ── Portal Search Toggle — lupita en tira tablet/móvil ────────
+// Alterna .sidebar-search-open en .app-layout para mostrar el
+// panel de búsqueda fijo debajo de la tira de iconos.
+// ─────────────────────────────────────────────────────────────
+(function initPortalSearch() {
+    var searchBtn = document.getElementById('sidebar-search-btn');
+    var appLayout = document.querySelector('.app-layout');
+    if (!searchBtn || !appLayout) return;
+
+    var inputEl = document.querySelector('.sidebar-search-wrap input');
+
+    function closeSearch() {
+        appLayout.classList.remove('sidebar-search-open');
+        searchBtn.classList.remove('active');
+        searchBtn.setAttribute('aria-expanded', 'false');
+    }
+    function openSearch() {
+        appLayout.classList.add('sidebar-search-open');
+        searchBtn.classList.add('active');
+        searchBtn.setAttribute('aria-expanded', 'true');
+        if (inputEl) { setTimeout(function() { inputEl.focus(); }, 50); }
+    }
+
+    searchBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        appLayout.classList.contains('sidebar-search-open') ? closeSearch() : openSearch();
+    });
+
+    // Cerrar con Escape o clic fuera del panel y del botón
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeSearch(); });
+    document.addEventListener('click', function(e) {
+        var wrap = document.querySelector('.sidebar-search-wrap');
+        if (!wrap) return;
+        if (!wrap.contains(e.target) && !searchBtn.contains(e.target)) closeSearch();
+    });
+})();
+
+// ── Ventanas emergentes LAESH — Drag + Resize ─────────────────
+// Hace que TODAS las .modal sean movibles (arrastrar cabecera)
+// y redimensionables (resize nativo CSS en esquina inf. derecha).
+// Compatible con cualquier HTML que use .modal > .modal-content > .modal-header.
+// ─────────────────────────────────────────────────────────────
+(function initModalDrag() {
+    'use strict';
+
+    function enableDrag(modal) {
+        var content = modal.querySelector('.modal-content');
+        var header  = modal.querySelector('.modal-header');
+        if (!content || !header) return;
+
+        var dragging = false, ox = 0, oy = 0;
+
+        function getCX(ev) { return ev.touches ? ev.touches[0].clientX : ev.clientX; }
+        function getCY(ev) { return ev.touches ? ev.touches[0].clientY : ev.clientY; }
+
+        function onStart(e) {
+            if (e.target.closest('button, a, input, select, textarea')) return;
+            var rect = content.getBoundingClientRect();
+            content.style.position = 'fixed';
+            content.style.left     = rect.left + 'px';
+            content.style.top      = rect.top  + 'px';
+            content.style.margin   = '0';
+            content.style.transform = 'none';
+            modal.style.alignItems     = 'flex-start';
+            modal.style.justifyContent = 'flex-start';
+            dragging = true;
+            ox = getCX(e) - rect.left;
+            oy = getCY(e) - rect.top;
+            header.style.cursor = 'grabbing';
+            document.body.style.userSelect = 'none';
+            if (e.type === 'mousedown') e.preventDefault();
+        }
+
+        function onMove(e) {
+            if (!dragging) return;
+            var cx = getCX(e), cy = getCY(e);
+            var nl = Math.max(0, Math.min(window.innerWidth  - content.offsetWidth,  cx - ox));
+            var nt = Math.max(0, Math.min(window.innerHeight - content.offsetHeight, cy - oy));
+            content.style.left = nl + 'px';
+            content.style.top  = nt + 'px';
+            if (e.type === 'touchmove') e.preventDefault();
+        }
+
+        function onEnd() {
+            if (!dragging) return;
+            dragging = false;
+            header.style.cursor = 'grab';
+            document.body.style.userSelect = '';
+        }
+
+        header.addEventListener('mousedown', onStart);
+        header.addEventListener('touchstart', onStart, {passive: false});
+        document.addEventListener('mousemove', onMove);
+        document.addEventListener('touchmove', onMove, {passive: false});
+        document.addEventListener('mouseup', onEnd);
+        document.addEventListener('touchend', onEnd);
+
+        /* Restablecer posición cuando el modal se cierra */
+        var obs = new MutationObserver(function() {
+            if (!modal.classList.contains('show')) {
+                content.style.position  = '';
+                content.style.left      = '';
+                content.style.top       = '';
+                content.style.margin    = '';
+                content.style.transform = '';
+                modal.style.alignItems     = '';
+                modal.style.justifyContent = '';
+            }
+        });
+        obs.observe(modal, { attributes: true, attributeFilter: ['class'] });
+    }
+
+    /* Esperar al DOM y aplicar a todos los .modal presentes */
+    function run() { document.querySelectorAll('.modal').forEach(enableDrag); }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', run);
+    } else {
+        run();
+    }
+})();
+
+// ── Portal Médico — Acordeón "Generar Orden Digital" ─────────
+// Igual que "Mis Órdenes de Hoy" (collapsible-header / collapsible-content)
+(function initOrdenAccordion() {
+    var ordenHeader  = document.getElementById('orden-digital-header');
+    var ordenContent = document.getElementById('orden-digital-content');
+    var ordenArrow   = document.getElementById('orden-digital-arrow');
+    if (!ordenHeader || !ordenContent) return;
+
+    ordenHeader.addEventListener('click', function() {
+        var isOpen = ordenContent.style.maxHeight !== '0px';
+        ordenContent.style.maxHeight = isOpen ? '0px' : '2000px';
+        if (ordenArrow) ordenArrow.style.transform = isOpen ? 'rotate(-90deg)' : 'rotate(0deg)';
+    });
+})();
+
+// ── Sistema de Notificaciones Toast (Reemplazo de alert) ─────────
+// Cumple con WCAG 4.1.3 Status Messages (aria-live)
+(function initToastSystem() {
+    var container = document.getElementById('toast-container');
+    if (!container) {
+        container = document.createElement('div');
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `app.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L250-399)</summary>
+
+**Path:** `Unknown file`
+
+```
+        container.id = 'toast-container';
+        container.setAttribute('aria-live', 'polite');
+        container.setAttribute('aria-atomic', 'true');
+        // Estilos base para el contenedor (fijo en la esquina inferior derecha o arriba)
+        Object.assign(container.style, {
+            position: 'fixed',
+            bottom: '20px',
+            right: '20px',
+            zIndex: '9999',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '10px',
+            pointerEvents: 'none'
+        });
+        document.body.appendChild(container);
+    }
+
+    window.showToast = function(message, type = 'info', duration = 4000) {
+        var toast = document.createElement('div');
+        toast.className = 'laesh-toast laesh-toast-' + type;
+        toast.textContent = message;
+        
+        // Estilos del toast
+        Object.assign(toast.style, {
+            background: type === 'error' ? '#ef4444' : (type === 'success' ? '#10b981' : '#334155'),
+            color: '#ffffff',
+            padding: '12px 20px',
+            borderRadius: '8px',
+            boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+            fontFamily: 'inherit',
+            fontSize: '0.9rem',
+            fontWeight: '500',
+            opacity: '0',
+            transform: 'translateY(20px)',
+            transition: 'opacity 0.3s ease, transform 0.3s ease',
+            pointerEvents: 'auto'
+        });
+
+        container.appendChild(toast);
+
+        // Animación de entrada
+        requestAnimationFrame(function() {
+            toast.style.opacity = '1';
+            toast.style.transform = 'translateY(0)';
+        });
+
+        // Animación de salida y remoción
+        setTimeout(function() {
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateY(10px)';
+            toast.addEventListener('transitionend', function() {
+                if (toast.parentNode) toast.parentNode.removeChild(toast);
+            });
+        }, duration);
+    };
+})();
+
+// ── G-2 y G-7: Modal Accessibility (Focus Trap, Escape Key, ARIA Roles) ──
+(function initModalAccessibility() {
+    // 1. Inyectar ARIA roles a todos los modales existentes
+    document.querySelectorAll('.modal').forEach(function(modal) {
+        if (!modal.hasAttribute('role')) modal.setAttribute('role', 'dialog');
+        if (!modal.hasAttribute('aria-modal')) modal.setAttribute('aria-modal', 'true');
+    });
+
+    // 2. Manejo global de teclado para modales activos
+    document.addEventListener('keydown', function(e) {
+        var activeModal = document.querySelector('.modal.show');
+        if (!activeModal) return;
+
+        // Escape para cerrar
+        if (e.key === 'Escape') {
+            activeModal.classList.remove('show');
+            return;
+        }
+
+        // Focus Trap con Tab
+        if (e.key === 'Tab') {
+            // Buscar elementos enfocables dentro del modal
+            var focusableElements = activeModal.querySelectorAll(
+                'a[href], button:not([disabled]), textarea:not([disabled]), input[type="text"]:not([disabled]), ' +
+                'input[type="radio"]:not([disabled]), input[type="checkbox"]:not([disabled]), select:not([disabled]), ' +
+                '[tabindex]:not([tabindex="-1"])'
+            );
+            var firstElement = focusableElements[0];
+            var lastElement = focusableElements[focusableElements.length - 1];
+
+            if (e.shiftKey) { // Shift + Tab
+                if (document.activeElement === firstElement) {
+                    if (lastElement) lastElement.focus();
+                    e.preventDefault();
+                }
+            } else { // Solo Tab
+                if (document.activeElement === lastElement) {
+                    if (firstElement) firstElement.focus();
+                    e.preventDefault();
+                }
+            }
+        }
+    });
+})();
+
+// ── G-6: Atributos aria-label automáticos ──
+(function initAccessibilityAttributes() {
+    document.querySelectorAll('input[placeholder]:not([aria-label])').forEach(function(el) {
+        el.setAttribute('aria-label', el.getAttribute('placeholder'));
+    });
+    document.querySelectorAll('button[title]:not([aria-label])').forEach(function(el) {
+        el.setAttribute('aria-label', el.getAttribute('title'));
+    });
+})();
+
+// ── Dropdown Draggable ──
+(function initFichaDropdownDrag() {
+    'use strict';
+    function enableDrag(dropdown) {
+        var header = dropdown.querySelector('.ficha-dropdown__hdr');
+        if (!header) return;
+        var dragging = false, ox = 0, oy = 0;
+        function getCX(ev) { return ev.touches ? ev.touches[0].clientX : ev.clientX; }
+        function getCY(ev) { return ev.touches ? ev.touches[0].clientY : ev.clientY; }
+
+        function onStart(e) {
+            if (e.target.closest('button, a, input, select, textarea')) return;
+            var rect = dropdown.getBoundingClientRect();
+            dropdown.style.position = 'fixed';
+            dropdown.style.left     = rect.left + 'px';
+            dropdown.style.top      = rect.top  + 'px';
+            dropdown.style.margin   = '0';
+            dropdown.style.transform = 'none';
+            dragging = true;
+            ox = getCX(e) - rect.left;
+            oy = getCY(e) - rect.top;
+            header.style.cursor = 'grabbing';
+            document.body.style.userSelect = 'none';
+            if (e.type === 'mousedown') e.preventDefault();
+        }
+
+        function onMove(e) {
+            if (!dragging) return;
+            var cx = getCX(e), cy = getCY(e);
+            var nl = Math.max(0, Math.min(window.innerWidth  - dropdown.offsetWidth,  cx - ox));
+            var nt = Math.max(0, Math.min(window.innerHeight - dropdown.offsetHeight, cy - oy));
+            dropdown.style.left = nl + 'px';
+            dropdown.style.top  = nt + 'px';
+            if (e.type === 'touchmove') e.preventDefault();
+        }
+
+        function onEnd() {
+            if (!dragging) return;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `app.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L400-613)</summary>
+
+**Path:** `Unknown file`
+
+```
+            dragging = false;
+            header.style.cursor = 'grab';
+            document.body.style.userSelect = '';
+        }
+
+        header.addEventListener('mousedown', onStart);
+        header.addEventListener('touchstart', onStart, {passive: false});
+        document.addEventListener('mousemove', onMove);
+        document.addEventListener('touchmove', onMove, {passive: false});
+        document.addEventListener('mouseup', onEnd);
+        document.addEventListener('touchend', onEnd);
+        var obs = new MutationObserver(function() {
+            if (!dropdown.classList.contains('open')) {
+                dropdown.style.position  = '';
+                dropdown.style.left      = '';
+                dropdown.style.top       = '';
+                dropdown.style.margin    = '';
+                dropdown.style.transform = '';
+            }
+        });
+        obs.observe(dropdown, { attributes: true, attributeFilter: ['class'] });
+    }
+    function hideDecorativeSVGs() {
+        document.querySelectorAll('svg').forEach(function (svg) {
+            if (!svg.getAttribute('aria-label') && 
+                !svg.getAttribute('aria-labelledby') && 
+                !svg.getAttribute('title') && 
+                svg.getAttribute('role') !== 'img') {
+                svg.setAttribute('aria-hidden', 'true');
+                svg.setAttribute('focusable', 'false');
+            }
+        });
+    }
+    function run() { 
+        document.querySelectorAll('.ficha-dropdown').forEach(enableDrag); 
+        hideDecorativeSVGs();
+    }
+    if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', run); } else { run(); }
+})();
+
+// ── Connection Status Indicator (online / offline) ────────────────
+(function () {
+    'use strict';
+    function updateConnectionStatus() {
+        var isOnline = navigator.onLine;
+        document.querySelectorAll('.status-dot').forEach(function(dot) {
+            if (isOnline) {
+                dot.className = 'status-dot online';
+                dot.parentElement.title = 'Conexión: En Línea';
+            } else {
+                dot.className = 'status-dot offline';
+                dot.parentElement.title = 'Conexión: Fuera de Línea';
+            }
+        });
+    }
+
+    function initConnectionStatus() {
+        var headerRight = document.querySelector('.portal-header-right');
+        var userBadge = document.querySelector('.user-badge-portal');
+        if (headerRight && userBadge && !document.getElementById('conn-status-desktop')) {
+            var connDiv = document.createElement('div');
+            connDiv.className = 'connection-status';
+            connDiv.id = 'conn-status-desktop';
+            connDiv.innerHTML = '<span class="status-dot"></span>';
+            headerRight.insertBefore(connDiv, userBadge);
+        }
+
+        var initialsMob = document.querySelector('.portal-initials-mob');
+        var header = document.querySelector('.portal-access-header');
+        if (initialsMob && header && !document.getElementById('conn-status-mob')) {
+            var connDivMob = document.createElement('div');
+            connDivMob.className = 'connection-status-mob';
+            connDivMob.id = 'conn-status-mob';
+            connDivMob.innerHTML = '<span class="status-dot"></span>';
+            header.insertBefore(connDivMob, initialsMob);
+        }
+
+        /* Mobile Notification Bell Icon next to online status dot */
+        if (initialsMob && header && !document.getElementById('bell-wrap-mob')) {
+            var bellMob = document.createElement('div');
+            bellMob.className = 'bell-wrap-mob';
+            bellMob.id = 'bell-wrap-mob';
+            bellMob.title = 'Ver Notificaciones';
+            bellMob.setAttribute('role', 'button');
+            bellMob.setAttribute('tabindex', '0');
+            bellMob.setAttribute('aria-label', 'Ver Notificaciones');
+            bellMob.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span class="bell-badge" id="badge-notif-mob">0</span>';
+
+            var connMob = document.getElementById('conn-status-mob');
+            if (connMob) {
+                header.insertBefore(bellMob, connMob);
+            } else {
+                header.insertBefore(bellMob, initialsMob);
+            }
+
+            var isScrolling = false;
+            function scrollToNotif(e) {
+                if (isScrolling) return;
+                isScrolling = true;
+                e.preventDefault();
+                var targetNotif = document.getElementById('sidebar-right') || document.querySelector('.sidebar-right');
+                if (targetNotif) {
+                    targetNotif.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                setTimeout(function() { isScrolling = false; }, 400);
+            }
+
+            bellMob.addEventListener('click', scrollToNotif);
+            bellMob.addEventListener('touchend', scrollToNotif);
+
+            /* Sync notification badge count */
+            var existingBadge = document.getElementById('badge-resultados') || document.getElementById('badge-recepcion') || document.getElementById('badge-notif-cms');
+            var mobBadge = document.getElementById('badge-notif-mob');
+            if (existingBadge && mobBadge) {
+                mobBadge.textContent = existingBadge.textContent;
+                if (window.MutationObserver) {
+                    var observer = new MutationObserver(function() {
+                        mobBadge.textContent = existingBadge.textContent;
+                    });
+                    observer.observe(existingBadge, { childList: true, characterData: true, subtree: true });
+                }
+            }
+        }
+
+        updateConnectionStatus();
+    }
+
+    window.addEventListener('online', updateConnectionStatus);
+    window.addEventListener('offline', updateConnectionStatus);
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initConnectionStatus);
+    } else {
+        initConnectionStatus();
+    }
+})();
+
+// ── Generic Modal Accessibility (Focus Trap & Escape Close) ──────
+(function () {
+    'use strict';
+    document.addEventListener('keydown', function (e) {
+        var activeModal = document.querySelector('.modal.show');
+        if (!activeModal) return;
+
+        if (e.key === 'Escape') {
+            var closeBtn = activeModal.querySelector('.close-modal') || activeModal.querySelector('.btn-overlay-sm');
+            if (closeBtn) {
+                closeBtn.click();
+            } else {
+                activeModal.classList.remove('show');
+                document.body.classList.remove('modal-open');
+            }
+            return;
+        }
+
+        if (e.key === 'Tab') {
+            var focusables = activeModal.querySelectorAll('button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])');
+            if (focusables.length === 0) {
+                e.preventDefault();
+                return;
+            }
+            var first = focusables[0];
+            var last = focusables[focusables.length - 1];
+
+            if (e.shiftKey) { // Shift + Tab
+                if (document.activeElement === first) {
+                    last.focus();
+                    e.preventDefault();
+                }
+            } else { // Tab
+                if (document.activeElement === last) {
+                    first.focus();
+                    e.preventDefault();
+                }
+            }
+        }
+    });
+
+    var modalObserver = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
+            if (mutation.attributeName === 'class') {
+                var target = mutation.target;
+                if (target.classList.contains('show')) {
+                    var firstInput = target.querySelector('input, select, textarea, button');
+                    if (firstInput) {
+                        setTimeout(function() { firstInput.focus(); }, 100);
+                    }
+                }
+            }
+        });
+    });
+
+    // Observer starts after page loads
+    function runObserver() {
+        document.querySelectorAll('.modal').forEach(function (modal) {
+            modalObserver.observe(modal, { attributes: true, attributeFilter: ['class'] });
+        });
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', runObserver);
+    } else {
+        runObserver();
+    }
+
+    // Manejador global estandarizado para apertura del Logo LAESH en nueva pestaña
+    document.addEventListener('click', function(e) {
+        var a = e.target.closest('a.logo, a.portal-access-link');
+        if (a && a.getAttribute('target') === '_blank') {
+            e.stopPropagation();
+        }
+    }, true);
+})();
+
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `playWhistle`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 20 Sept 2026, 9:52 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `playWhistle`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 20 Sept 2026, 9:52 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `playAudio`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 20 Sept 2026, 9:52 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `AudioContext`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 20 Sept 2026, 9:53 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L179-214)</summary>
+
+**Path:** `Unknown file`
+
+```
+            } else {
+                badge.classList.remove('show');
+                badge.classList.remove('pulse');
+                document.title = "Portal Médico - LAESH";
+            }
+            lastResultados = countResultados;
+        }
+
+        // Sonido distintivo para resultados listos (tono ascendente suave — distinto del silbato de recepción)
+        function playResultadosDing() {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                [880, 1100].forEach(function(freq, i) {
+                    const osc  = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.type = 'sine';
+                    osc.frequency.value = freq;
+                    const t0 = ctx.currentTime + i * 0.2;
+                    gain.gain.setValueAtTime(0, t0);
+                    gain.gain.linearRampToValueAtTime(0.25, t0 + 0.02);
+                    gain.gain.exponentialRampToValueAtTime(0.001, t0 + 0.28);
+                    osc.start(t0);
+                    osc.stop(t0 + 0.28);
+                });
+            } catch(e) { /* Audio no soportado */ }
+        }
+
+        // Overlay iframe compartido — definido aquí para labadmin y medicos (Cierre EXCLUSIVO vía botón Cerrar)
+        function _abrirSolOverlay(url) {
+            var prev = document.getElementById('sol-overlay');
+            if (prev) prev.remove();
+            var overlay = document.createElement('div');
+            overlay.id = 'sol-overlay';
+            overlay.className = 'sol-overlay';
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `_abrirSolOverlay`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 20 Sept 2026, 9:53 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `<script`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 20 Sept 2026, 9:53 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `stylesheet`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 20 Sept 2026, 9:53 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Analyzing CSS and JS files to identify active, dead, or duplicate code. Focusing initially on CSS; the following files are loaded in specific views: `tokens.css`, `fonts.css`, `style.css` (all views), `portal.css` (medical portal, reception, admrc), `targeting.css` (website, dac, labadmin, gestion_web, medicos), and `style-website.css` (website).
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `style-website.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.001370311s
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+/* ══════════════════════════════════════════════════════════════════════════════
+   style-website.css — Estilos exclusivos del Sitio Corporativo LAESH
+   (index.php — landing page pública)
+
+   Cargado SOLO por index.php, después de style.css.
+   Los portales (md/, rc/, adrc/) NO cargan este archivo.
+
+   Orden de cascade: style.css §BASE → este archivo → style.css §PORTAL-UTILS
+   → landing.css (cargado al final, mayor prioridad de hoja de estilo).
+
+   Creado: 2026-08-17 · MAINT-01 L3 physical split
+   2026-09-07: Eliminado @layer website — compatibilidad Chrome 49+.
+   ══════════════════════════════════════════════════════════════════════════════ */
+
+/* ============================================================
+   WEBSITE PÚBLICO — Sitio Corporativo LAESH (uipv1/index.html)
+   Estilos específicos del landing page público — BASE (no responsive)
+   Migrados desde index.html inline <style> — G-ARC-02 fix.
+   ============================================================ */
+
+/* Navbar landing page — definido en landing.css (no duplicar aquí) */
+
+/* WhatsApp flotante */
+.whatsapp-float {
+    position: fixed;
+    bottom: 110px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background-color: #25d366;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4);
+    z-index: 1001;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}@media (hover: hover) and (pointer: fine) {
+    .whatsapp-float:hover {
+        transform: scale(1.1); box-shadow: 0 12px 30px rgba(37, 211, 102, 0.6);
+    }
+}
+.whatsapp-float::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: inherit;
+    opacity: 0.6;
+    z-index: -1;
+    animation: pulse-ring 1.8s infinite;
+}
+@keyframes pulse-ring {
+    0%   { transform: scale(1);   opacity: 0.6; }
+    100% { transform: scale(1.6); opacity: 0;   }
+}
+
+/* Animaciones por Scroll (Intersection Observer) */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
+.delay-100 { transition-delay: 0.15s; }
+.delay-200 { transition-delay: 0.3s;  }
+.delay-300 { transition-delay: 0.45s; }
+.delay-400 { transition-delay: 0.6s;  }
+
+/* Hero Slider / Carrusel Premium — ELIMINADO 2026-08-29 (R-CSS-03)
+   Reglas muertas: todas sobreescritas por landing.css (sin @layer, mayor prioridad).
+   SSOT del hero: landing.css §3 HERO & ANIMACIONES. */
+
+/* Encabezados de Sección */
+.section-header { text-align: center; margin: 0 0 3.5rem; padding: 0 1rem; }
+.section-header h2 {
+    font-size: 2.25rem;
+    color: var(--primary);
+    margin-bottom: 0.75rem;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 0.75rem;
+}
+.section-header h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 25%;
+    width: 50%;
+    height: 3px;
+    background: var(--primary-green);
+    border-radius: 2px;
+}
+.section-header p { color: var(--text-muted); font-size: 1.2rem; max-width: 600px; margin: 0 auto; }
+
+/* Tarjetas Premium */
+.card-premium {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `seed_first_users.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 20 Sept 2026, 9:53 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `seed_first_users.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/**
+ * commons/seed_first_users.php — Semilla inicial de usuarios LAESH
+ *
+ * Invocado automáticamente por setup/bds/laesh/setup.sh (paso 10).
+ * Uso directo: php laesh-swbldi/commons/seed_first_users.php
+ *
+ * Permisos RBAC por rol:
+ *   ADMIN     → gestionar_cms, gestionar_estudios, gestionar_medicos, ver_reportes
+ *   RECEPCION → gestionar_ordenes, gestionar_medicos, ver_reportes
+ *   MEDICO    → ver_ordenes_propias, ver_solicitud_digital
+ */
+
+declare(strict_types=1);
+
+if (PHP_SAPI !== 'cli') {
+    http_response_code(403);
+    exit("Forbidden: CLI execution only.\n");
+}
+
+// Reside en commons/ — autoload en el mismo directorio
+require_once __DIR__ . '/autoload.php';
+
+$config = require __DIR__ . '/config.php';
+
+// ── Conexión PDO directa (no Flight, no sesión) ──────────────────────────────
+$dsn = sprintf(
+    'mysql:host=%s;port=%d;dbname=%s;charset=utf8mb4',
+    $config['db']['host'],
+    $config['db']['port'],
+    $config['db']['name']
+);
+
+try {
+    $pdo = new \PDO($dsn, $config['db']['user'], $config['db']['pass'], [
+        \PDO::ATTR_ERRMODE            => \PDO::ERRMODE_EXCEPTION,
+        \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC,
+    ]);
+    $pdo->exec("SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci");
+    $pdo->exec("SET time_zone = '-06:00'");
+} catch (\PDOException $e) {
+    echo "[ERROR] Conexión BD: " . $e->getMessage() . "\n";
+    exit(1);
+}
+
+$auth = new \Delight\Auth\Auth($pdo);
+
+// ── Definición de usuarios semilla (Credenciales Homologadas) ─────────────────
+$usuarios = [
+    [
+        'telefono'  => '9990000001',
+        'password'  => '04041980',
+        'nombre'    => 'Admin',
+        'apellidos' => 'LAESH',
+        'rol'       => 'ADMIN',
+        'permisos'  => ['gestionar_ordenes', 'gestionar_cms', 'gestionar_estudios', 'gestionar_medicos', 'ver_reportes'],
+    ],
+    [
+        'telefono'  => '9990000002',
+        'password'  => '04041981',
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `ws_audit_receiver`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 20 Sept 2026, 9:53 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ws_audit_receiver.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/**
+ * ws_audit_receiver.php — Gap 9 (auditoría WS 2026-09-18, §2.4c/§4.9)
+ *
+ * Receptor del puente HTTP EN DIRECCIÓN INVERSA a /publish: aquí Swoole
+ * (on('open')/on('close')) avisa a PHP-FPM, no al revés. Swoole nunca toca
+ * MariaDB directamente — mismo principio que evitó PDOPool para el Gap 6.
+ *
+ * Script standalone, fuera del router Flight (igual que rc/views/solicitud_dac_impr.php)
+ * — es tráfico máquina-a-máquina, no una vista de usuario. Protegido a nivel nginx
+ * (allow 127.0.0.1; deny all;) — ver configs/nginx-laesh-domain.conf, mismo patrón
+ * que /swoole-status y /fpm-status. Sin esa capa, cualquiera en internet podría
+ * inyectar filas falsas de "conexión" — la defensa vive en la capa de red, no aquí.
+ */
+declare(strict_types=1);
+
+require_once __DIR__ . '/autoload.php';
+
+header('Content-Type: application/json; charset=utf-8');
+
+$raw  = file_get_contents('php://input');
+$data = json_decode($raw, true);
+
+if (!is_array($data) || empty($data['event']) || empty($data['jti']) || empty($data['user_id'])) {
+    http_response_code(400);
+    echo json_encode(['error' => 'event, jti y user_id son requeridos']);
+    exit;
+}
+
+try {
+    $db = \Common\DB::connect();
+
+    if ($data['event'] === 'connect') {
+        $stmt = $db->prepare(
+            "INSERT INTO ws_conexiones_log (user_id, jti, role, ip, conectado_en)
+             VALUES (?, ?, ?, ?, NOW())"
+        );
+        $stmt->execute([
+            (int)$data['user_id'],
+            (string)$data['jti'],
+            isset($data['role']) ? (string)$data['role'] : null,
+            isset($data['ip']) ? (string)$data['ip'] : null,
+        ]);
+        echo json_encode(['status' => 'success', 'action' => 'connect']);
+
+    } elseif ($data['event'] === 'disconnect') {
+        // Cierra la fila abierta más reciente de ese jti — normalmente hay una sola,
+        // pero WHERE + ORDER BY + LIMIT 1 protege ante una doble notificación de open
+        // (edge case improbable, ej. reconexión rapidísima) sin dejar ambiguedad.
+        $stmt = $db->prepare(
+            "UPDATE ws_conexiones_log
+             SET desconectado_en = NOW()
+             WHERE jti = ? AND desconectado_en IS NULL
+             ORDER BY id DESC LIMIT 1"
+        );
+        $stmt->execute([(string)$data['jti']]);
+        echo json_encode(['status' => 'success', 'action' => 'disconnect', 'rows' => $stmt->rowCount()]);
+
+    } else {
+        http_response_code(400);
+        echo json_encode(['error' => "event debe ser 'connect' o 'disconnect'"]);
+    }
+} catch (\Throwable $e) {
+    \Common\Logger::log('ERROR', 'ws_audit_receiver: ' . $e->getMessage());
+    http_response_code(500);
+    echo json_encode(['error' => 'internal']);
+}
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `deprecated|TODO|FIXME|legacy|obsoleto|descontinuado`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 20 Sept 2026, 9:53 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `deprecated|TODO|FIXME|legacy|obsoleto|descontinuado`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 20 Sept 2026, 9:53 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+The JavaScript files, starting with `app.js`, show several areas of concern. Specifically, lines 21-28 contain unused code related to local storage functions. Also, there's redundant accessibility implementation within modal interactions, specifically in duplicate modal accessibility functions. This warrants further investigation to identify the purpose of both functions and consolidate them if possible.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos-a11y.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.072597153s
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+/**
+ * medicos-a11y.js — Sprint D: Accesibilidad y UX para Portal Médico
+ * Corrige: A11Y-05 (keydown nav-items),
+ *           UX-01 (confirm dialog), UX-03 (scroll-close dropdowns).
+ *
+ * Depende de: medicos.js (app.js) ya cargado antes de este script.
+ * No modifica el DOM principal — solo añade listeners de accesibilidad.
+ */
+
+'use strict';
+
+/* ────────────────────────────────────────────────────────────────────────
+   A. Utilidad: Anuncio aria-live (A11Y-04)
+   ──────────────────────────────────────────────────────────────────────── */
+const a11yLive = document.getElementById('a11y-live');
+function announce(msg) {
+    if (!a11yLive) return;
+    /* Reset → assign garantiza que lectores de pantalla relean el mismo texto */
+    a11yLive.textContent = '';
+    requestAnimationFrame(() => { a11yLive.textContent = msg; });
+}
+
+/* (Sección B unificada en medicos.js) */
+
+/* ────────────────────────────────────────────────────────────────────────
+   D. UX-03 — Scroll-close: cerrar .ficha-dropdown al hacer scroll
+   ──────────────────────────────────────────────────────────────────────── */
+let scrollCloseScheduled = false;
+
+function closeAllFichaDropdowns() {
+    document.querySelectorAll('.ficha-dropdown.open').forEach(dd => {
+        dd.classList.remove('open');
+        /* Devolver aria-expanded al botón disparador si existe */
+        const btn = dd.previousElementSibling || dd.parentElement?.querySelector('[aria-expanded]');
+        if (btn) btn.setAttribute('aria-expanded', 'false');
+    });
+}
+
+document.addEventListener('scroll', () => {
+    if (!scrollCloseScheduled) {
+        scrollCloseScheduled = true;
+        requestAnimationFrame(() => {
+            closeAllFichaDropdowns();
+            scrollCloseScheduled = false;
+        });
+    }
+}, { passive: true, capture: true });
+
+/* (Sección F unificada en medicos.js) */
+
+
+/* ────────────────────────────────────────────────────────────────────────
+   G. A11Y-05 Extensión — Anunciar cambio de panel activo al lector
+   ──────────────────────────────────────────────────────────────────────── */
+document.querySelectorAll('[data-panel]').forEach(navItem => {
+    navItem.addEventListener('click', () => {
+        const label = navItem.getAttribute('aria-label') || navItem.textContent.trim();
+        announce(`Panel activo: ${label}`);
+    });
+});
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `catalog-builder.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+/* ── MÓDULO CONSTRUCTOR DE CATÁLOGOS (Abanicos Jerárquicos) ── */
+document.addEventListener('DOMContentLoaded', function() {
+    // Fallback de showToast si no está definido en el entorno principal
+    if (typeof window.showToast !== 'function') {
+        window.showToast = function(msg, type) {
+            alert((type === 'error' || type === 'warn' ? '⚠️ ' : '✅ ') + msg);
+        };
+    }
+
+    var btnViewTable = document.getElementById('btn-view-table');
+    var btnViewBuilder = document.getElementById('btn-view-builder');
+    var btnViewSettings = document.getElementById('btn-view-settings');
+    var viewBuilder = document.getElementById('view-catalog-builder');
+    var viewSettings = document.getElementById('view-catalog-settings');
+    var viewTable = document.getElementById('view-catalog-table');
+    var btnSaveFull = document.getElementById('btn-guardar-catalogo-full');
+    var btnAddEstudio = document.getElementById('btn-agregar-estudio');
+    
+    // Panel base
+    var panelCatalogos = document.getElementById('panel-catalogos');
+    if (!viewBuilder && !viewTable && !panelCatalogos) return;
+
+    var builderSearchContainer = document.getElementById('builder-search-container');
+    var flatSearchContainer = document.getElementById('flat-search-container');
+    var settingsMenuContainer = document.getElementById('settings-menu-container');
+    var flatPagination = document.getElementById('flat-pagination');
+    
+    function resetActiveButtons() {
+        if (btnViewTable) btnViewTable.classList.remove('active');
+        if (btnViewBuilder) btnViewBuilder.classList.remove('active');
+        if (btnViewSettings) btnViewSettings.classList.remove('active');
+        if (menuGabinetes) menuGabinetes.classList.remove('active');
+        if (menuIGabinetes) menuIGabinetes.classList.remove('active');
+        if (menu20EstMed) menu20EstMed.classList.remove('active');
+    }
+
+    function hideAllViews() {
+        if (viewBuilder) viewBuilder.classList.add('d-none');
+        if (viewTable) viewTable.classList.add('d-none');
+        if (viewSettings) viewSettings.classList.add('d-none');
+        
+        if (builderSearchContainer) builderSearchContainer.style.display = 'none';
+        if (flatSearchContainer) flatSearchContainer.style.display = 'none';
+        if (settingsMenuContainer) settingsMenuContainer.style.display = 'none';
+        if (flatPagination) flatPagination.style.display = 'none';
+        var flatPagWrap = document.getElementById('flat-pagination-wrap');
+        if (flatPagWrap) flatPagWrap.style.display = 'none';
+        
+        if (btnSaveFull) btnSaveFull.style.display = 'none';
+        if (btnAddEstudio) btnAddEstudio.style.display = 'none';
+    }
+
+    if (btnViewTable) {
+        btnViewTable.addEventListener('click', function() {
+            hideAllViews();
+            resetActiveButtons();
+            if (viewTable) viewTable.classList.remove('d-none');
+            btnViewTable.classList.add('active');
+            
+            if (flatSearchContainer) flatSearchContainer.style.display = 'flex';
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `panel-catalogos`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 20 Sept 2026, 9:53 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `sidebar-rail.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+/**
+ * sidebar-rail.js — LAESH Portal
+ * Funcionalidades compartidas del sidebar colapsable en desktop (≥1025px):
+ *
+ *  1. syncPad  — mantiene .app-layout alineado bajo .portal-access-header fijo.
+ *               (app.js hace lo mismo para medicos/labadmin; para gestion-web.html
+ *               este script es el único que lo compensa.)
+ *
+ *  2. Rail toggle — botón #sidebar-rail-toggle que colapsa (65px) / expande (260px)
+ *               el sidebar; persiste en localStorage['laesh_sidebar_expanded'].
+ *               Al expandir, emite el evento 'laesh:sidebarExpand' para que el SFS
+ *               de cada página sepa que debe cerrarse.
+ *
+ * Uso: <script src="/laesh-web-assets/js/sidebar-rail.js"></script>
+ *       Incluir DESPUÉS de app.js (cuando aplique) y justo antes de </body>.
+ *
+ * API pública: window.laeshSidebarRail = { isExpanded, setExpanded }
+ */
+(function () {
+    'use strict';
+
+    /* ── 1. syncPad ────────────────────────────────────────────────────────── */
+    /* Mide el portal-access-header y escribe paddingTop en .app-layout.
+       En medicos/labadmin app.js ya hace esto; la segunda llamada es inocua
+       (mismo valor). En gestion-web.html este bloque es el único que lo hace. */
+    var hdr = document.querySelector('.portal-access-header');
+    var lay = document.querySelector('.app-layout');
+
+    if (hdr && lay) {
+        function syncPad() {
+            if (window.innerWidth >= 1025) {
+                lay.style.paddingTop = hdr.getBoundingClientRect().height + 'px';
+            }
+            /* En tablet/móvil app.js ya gestiona el offset — no sobreescribir. */
+        }
+        requestAnimationFrame(syncPad);
+        window.addEventListener('resize', syncPad);
+    }
+
+    /* ── 2. Sidebar Rail toggle ────────────────────────────────────────────── */
+    var LS_KEY    = 'laesh_sidebar_expanded';
+    var sidebar   = document.querySelector('.app-layout > .sidebar');
+    var toggleBtn = document.getElementById('sidebar-rail-toggle');
+
+    /* Si la página no tiene rail (sin botón o sin sidebar) → salir sin error */
+    if (!sidebar || !toggleBtn) return;
+
+    var SVG_RIGHT = '<polyline points="9 18 15 12 9 6"/>';  /* › expandir  */
+    var SVG_LEFT  = '<polyline points="15 18 9 12 15 6"/>'; /* ‹ colapsar  */
+    var SVG_WRAP  = 'width="14" height="14" viewBox="0 0 24 24" fill="none" '
+                  + 'stroke="currentColor" stroke-width="2.5" '
+                  + 'stroke-linecap="round" stroke-linejoin="round"';
+
+    function isExpanded() {
+        return sidebar.classList.contains('sidebar-expanded');
+    }
+
+    function setExpanded(exp) {
+        if (exp) {
+            sidebar.classList.add('sidebar-expanded');
+            toggleBtn.innerHTML = '<svg ' + SVG_WRAP + '>' + SVG_LEFT + '</svg>';
+            try { sessionStorage.setItem(LS_KEY, '1'); } catch(e){}
+            /* Notificar a los SFS inline de cada página para que se cierren */
+            document.dispatchEvent(new CustomEvent('laesh:sidebarExpand'));
+        } else {
+            sidebar.classList.remove('sidebar-expanded');
+            toggleBtn.innerHTML = '<svg ' + SVG_WRAP + '>' + SVG_RIGHT + '</svg>';
+            try { sessionStorage.setItem(LS_KEY, '0'); } catch(e){}
+        }
+    }
+
+    /* Restaurar preferencia guardada (colapsado por defecto si no hay registro) */
+    var savedLeft = '0';
+    try { savedLeft = sessionStorage.getItem(LS_KEY); } catch(e){}
+    setExpanded(savedLeft === '1');
+
+    toggleBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        setExpanded(!isExpanded());
+    });
+
+    /* ── 3. Sidebar Right Rail toggle ────────────────────────────────────────── */
+    var LS_KEY_RIGHT   = 'laesh_sidebar_right_expanded';
+    var sidebarRight   = document.getElementById('sidebar-right');
+    var toggleRightBtn = document.getElementById('sidebar-right-toggle');
+
+    if (sidebarRight && toggleRightBtn) {
+        var SVG_RIGHT_ARR = '<polyline points="9 18 15 12 9 6"/>';  /* › colapsar  */
+        var SVG_LEFT_ARR  = '<polyline points="15 18 9 12 15 6"/>'; /* ‹ expandir  */
+        var SVG_WRAP_ARR  = 'width="14" height="14" viewBox="0 0 24 24" fill="none" '
+                          + 'stroke="currentColor" stroke-width="2.5" '
+                          + 'stroke-linecap="round" stroke-linejoin="round"';
+
+        function isRightExpanded() {
+            return sidebarRight.classList.contains('sidebar-right-expanded');
+        }
+
+        function setRightExpanded(exp) {
+            var content = sidebarRight.querySelector('.sidebar-right-content');
+            if (exp) {
+                sidebarRight.classList.add('sidebar-right-expanded');
+                if (content) content.style.display = 'block';
+                toggleRightBtn.innerHTML = '<svg ' + SVG_WRAP_ARR + '>' + SVG_RIGHT_ARR + '</svg>';
+                try { sessionStorage.setItem(LS_KEY_RIGHT, '1'); } catch(e){}
+            } else {
+                sidebarRight.classList.remove('sidebar-right-expanded');
+                if (content) content.style.display = 'none';
+                toggleRightBtn.innerHTML = '<svg ' + SVG_WRAP_ARR + '>' + SVG_LEFT_ARR + '</svg>';
+                try { sessionStorage.setItem(LS_KEY_RIGHT, '0'); } catch(e){}
+            }
+        }
+
+        // Restore preference (collapsed by default to preserve workspace width)
+        var savedRight = '0';
+        try { savedRight = sessionStorage.getItem(LS_KEY_RIGHT); } catch(e){}
+        setRightExpanded(savedRight === '1');
+
+        toggleRightBtn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            setRightExpanded(!isRightExpanded());
+        });
+    }
+
+    /* Exponer API para que el SFS inline de cada página consulte el estado */
+    window.laeshSidebarRail = { 
+        isExpanded: isExpanded, 
+        setExpanded: setExpanded,
+        isRightExpanded: typeof isRightExpanded === 'function' ? isRightExpanded : null,
+        setRightExpanded: typeof setRightExpanded === 'function' ? setRightExpanded : null
+    };
+
+})();
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `portal-footer.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+/**
+ * portal-footer.js — LAESH Portal Footer (Single Source)
+ * Inyecta el footer común al final de .main-content en todos los portales.
+ * Ningún HTML repite la estructura; este archivo es la única fuente.
+ *
+ * Dependencia: cargarse con defer DESPUÉS de app.js y sidebar-rail.js
+ */
+(function () {
+  'use strict';
+
+  const year = new Date().getFullYear();
+
+  const footer = document.createElement('footer');
+  footer.className = 'portal-footer';
+  footer.setAttribute('role', 'contentinfo');
+  footer.innerHTML = `
+    <div class="portal-footer-inner">
+      <div class="portal-footer-row portal-footer-row--1">
+        <span class="portal-footer-brand">LAESH</span>
+        <span class="portal-footer-sep" aria-hidden="true">·</span>
+        <span class="portal-footer-tagline">Resultados que dan confianza, decisiones que cuidan</span>
+      </div>
+      <span class="portal-footer-rows-sep" aria-hidden="true">·</span>
+      <div class="portal-footer-row portal-footer-row--2">
+        <span class="portal-footer-copy">© ${year} Todos los derechos reservados</span>
+      </div>
+    </div>
+  `;
+
+  function positionFooter() {
+    const mainContent = document.querySelector('.main-content');
+    const appLayout = document.querySelector('.app-layout');
+    if (!mainContent) {
+      if (!footer.parentElement) document.body.appendChild(footer);
+      return;
+    }
+    if (window.innerWidth <= 767 && appLayout) {
+      if (footer.parentElement !== appLayout || appLayout.lastElementChild !== footer) {
+        appLayout.appendChild(footer);
+      }
+    } else {
+      if (footer.parentElement !== mainContent || mainContent.lastElementChild !== footer) {
+        mainContent.appendChild(footer);
+      }
+    }
+  }
+
+  positionFooter();
+  window.addEventListener('resize', positionFooter, { passive: true });
+})();
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Catalogos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+declare(strict_types=1);
+
+namespace RC\Negocio;
+
+use Common\DB;
+use Common\Logger;
+use PDO;
+use Throwable;
+
+/**
+ * Catalogos.php — Capa de Negocio para administración de Catálogos UI
+ * Gestiona Universidades y Centros de Trabajo (catalogos_ui).
+ */
+class Catalogos {
+
+    /**
+     * Obtiene el listado completo de Universidades con el total de médicos asignados.
+     */
+    public static function obtenerUniversidades(bool $soloActivas = false): array {
+        try {
+            $db = DB::connect();
+            $sql = "
+                SELECT 
+                    c.id, 
+                    c.tipo, 
+                    c.valor AS nombre, 
+                    c.orden, 
+                    c.activo, 
+                    COUNT(p.user_id) AS total_medicos
+                FROM catalogos_ui c
+                LEFT JOIN perfiles_medicos p ON c.id = p.universidad_id
+                WHERE c.tipo = 'universidad'
+            ";
+            if ($soloActivas) {
+                $sql .= " AND c.activo = 1";
+            }
+            $sql .= " GROUP BY c.id, c.tipo, c.valor, c.orden, c.activo ORDER BY c.orden ASC, c.valor ASC";
+
+            $stmt = $db->query($sql);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
+        } catch (Throwable $e) {
+            DB::logFallback('ERROR', 'Fallo en RC\Negocio\Catalogos::obtenerUniversidades', $e->getMessage());
+            return [];
+        }
+    }
+
+    /**
+     * Guarda o actualiza una Universidad.
+     */
+    public static function guardarUniversidad(array $data, int $adminUserId): array {
+        $id = !empty($data['id']) ? (int)$data['id'] : null;
+        $nombre = trim($data['nombre'] ?? $data['valor'] ?? '');
+        $orden = isset($data['orden']) ? (int)$data['orden'] : 0;
+        $activo = isset($data['activo']) ? ((int)$data['activo'] ? 1 : 0) : 1;
+
+        if ($nombre === '') {
+            return ['success' => false, 'error' => 'El nombre de la universidad es obligatorio.'];
+        }
+
+        $db = DB::connect();
+        $db->beginTransaction();
+
+        try {
+            if ($id && $id > 0) {
+                // Actualizar existente
+                $stmt = $db->prepare("
+                    UPDATE catalogos_ui 
+                    SET valor = :nombre, orden = :orden, activo = :activo 
+                    WHERE id = :id AND tipo = 'universidad'
+                ");
+                $stmt->execute([
+                    ':nombre' => $nombre,
+                    ':orden'  => $orden,
+                    ':activo' => $activo,
+                    ':id'     => $id
+                ]);
+
+                Logger::logAlways('INFO', "Universidad ID {$id} actualizada: '{$nombre}' (Orden: {$orden}, Activo: {$activo})", $adminUserId);
+                $db->commit();
+                return ['success' => true, 'id' => $id, 'mensaje' => '✓ Universidad actualizada con éxito.'];
+            } else {
+                // Insertar nueva
+                $stmt = $db->prepare("
+                    INSERT INTO catalogos_ui (tipo, valor, orden, activo) 
+                    VALUES ('universidad', :nombre, :orden, :activo)
+                ");
+                $stmt->execute([
+                    ':nombre' => $nombre,
+                    ':orden'  => $orden,
+                    ':activo' => $activo
+                ]);
+                $newId = (int)$db->lastInsertId();
+
+                Logger::logAlways('INFO', "Nueva Universidad registrada ID {$newId}: '{$nombre}'", $adminUserId);
+                $db->commit();
+                return ['success' => true, 'id' => $newId, 'mensaje' => '✓ Universidad registrada con éxito.'];
+            }
+        } catch (Throwable $e) {
+            $db->rollBack();
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Ordenes.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/**
+ * md/negocio/ordenes.php — Capa de Negocio para Solicitudes Médicas Digitales (Médicos)
+ *
+ * Maneja la emisión de solicitudes digitales, persistencia PDO, Stored Procedures
+ * (laesh_db.CrearOrdenLaboratorio), trazabilidad y auditoría.
+ */
+
+namespace MD\Negocio;
+
+use Common\DB;
+use Common\Logger;
+use PDO;
+use Throwable;
+
+class Ordenes {
+
+    /**
+     * Emite una solicitud médica digital desde el portal de médicos
+     *
+     * H3/H4/H6 (auditoría 2026-09-20): mismo tratamiento que
+     * RC\Negocio\Ordenes::crearOrden() — todo el flujo en una transacción (evita
+     * la ventana de carrera del folio y una orden a medias si detalle_ordenes
+     * falla), y la notificación 'nueva_orden' se persiste (outbox) dentro de la
+     * misma transacción, con el push por WS después del commit.
+     */
+    public static function crearSolicitudDigital(array $datos, int $userId, int $intento = 1): array {
+        $db = DB::connect();
+        $db->beginTransaction();
+
+        try {
+            // 1. Buscar o crear el paciente en pacientes
+            $pacienteId = \RC\Negocio\Ordenes::buscarOCrearPaciente($datos);
+
+            // 2. El id del médico (medico_id) corresponde a su user_id según el esquema
+            $medicoId = $userId;
+
+            $edad          = intval($datos['edad'] ?? 0);
+            $diagnostico   = trim($datos['diagnostico'] ?? '');
+            $otrosEstudios = trim($datos['otros_estudios'] ?? '');
+            $estudiosArray = $datos['estudios'] ?? [];
+            $estudiosJson  = is_array($estudiosArray) ? json_encode($estudiosArray, JSON_UNESCAPED_UNICODE) : $estudiosArray;
+
+            // M4 (auditoría 2026-09-20): mismo tratamiento que RC\Negocio\Ordenes::
+            // crearOrden() — validar edad y existencia de estudio_id ANTES de tocar
+            // el SP/FK, para no exponer errores SQL crudos al médico.
+            if ($edad < 0 || $edad > 120) {
+                throw new \InvalidArgumentException("La edad ({$edad}) debe estar entre 0 y 120 años.");
+            }
+            if (is_array($estudiosArray) && !empty($estudiosArray)) {
+                $idsNumericos = array_values(array_filter($estudiosArray, 'is_numeric'));
+                if (!empty($idsNumericos)) {
+                    $placeholders = implode(',', array_fill(0, count($idsNumericos), '?'));
+                    $stmtCheck = $db->prepare("SELECT id FROM cat_estudios WHERE id IN ({$placeholders})");
+                    $stmtCheck->execute($idsNumericos);
+                    $idsExistentes = array_map('intval', $stmtCheck->fetchAll(PDO::FETCH_COLUMN));
+                    $idsFaltantes = array_diff(array_map('intval', $idsNumericos), $idsExistentes);
+                    if (!empty($idsFaltantes)) {
+                        throw new \InvalidArgumentException('Uno o más estudios seleccionados ya no existen en el catálogo (id: ' . implode(', ', $idsFaltantes) . '). Recargue la página e intente de nuevo.');
+                    }
+                }
+            }
+
+            // 3. Ejecutar Stored Procedure CrearOrdenLaboratorio
+            // Auditoría E2E (2026-09-20): quitado el prefijo 'laesh_db.' hardcodeado
+            // — ver comentario detallado en RC\Negocio\Ordenes::crearOrden().
+            $stmtProc = $db->prepare("
+                CALL CrearOrdenLaboratorio(
+                    :paciente_id,
+                    :medico_id,
+                    :recepcion_id,
+                    :edad_al_emitir,
+                    :diagnostico,
+                    :otros_estudios,
+                    :estudios_json,
+                    @p_folio
+                )
+            ");
+
+            $stmtProc->execute([
+                'paciente_id'    => $pacienteId,
+                'medico_id'      => $medicoId,
+                'recepcion_id'   => null, // Emitida por médico digitalmente
+                'edad_al_emitir' => $edad,
+                'diagnostico'    => $diagnostico,
+                'otros_estudios' => $otrosEstudios,
+                'estudios_json'  => $estudiosJson
+            ]);
+
+            // Obtener el folio generado por el Stored Procedure
+            $folioRow = $db->query("SELECT @p_folio AS folio")->fetch(PDO::FETCH_ASSOC);
+            $folio = $folioRow['folio'] ?? '1';
+
+            // Obtener la orden recién creada para responder con orden_id
+            $stmtOrd = $db->prepare("SELECT id FROM ordenes WHERE folio_unico = ? LIMIT 1");
+            $stmtOrd->execute([$folio]);
+            $ordenId = (int)$stmtOrd->fetchColumn();
+
+            // 4. Inserción en detalle_ordenes si se enviaron IDs
+            if (is_array($estudiosArray)) {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `public static function`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 20 Sept 2026, 9:53 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `Flight::route`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 20 Sept 2026, 9:53 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L549-604)</summary>
+
+**Path:** `Unknown file`
+
+```
+});
+
+// ── POST /medico/restablecer-password — Restablecer NIP de un médico (HTMX) ──────
+Flight::route('POST /medico/restablecer-password', function () {
+    Flight::rbac()->requirePermission('gestionar_medicos');
+
+    if (!\Common\CsrfGuard::isValid(rotate: false)) {
+        \Common\Response::htmxError('Token de seguridad CSRF inválido o expirado. Recarga la página.');
+    }
+
+    $targetUserId = (int)($_POST['target_user_id'] ?? 0);
+    $newPassword  = trim($_POST['new_password'] ?? '04041974'); // NIP homologado por defecto
+    $adminUserId  = (int)Flight::auth()->getUserId();
+
+    if ($targetUserId <= 0) {
+        \Common\Response::htmxError('ID de médico no válido.');
+    }
+
+    $resultado = \RC\Negocio\Ordenes::restablecerPasswordMedico($targetUserId, $newPassword, $adminUserId);
+
+    if (!$resultado['success']) {
+        \Common\Response::htmxError($resultado['error'] ?? 'Error al restablecer la contraseña.');
+    }
+
+    header('HX-Refresh: true');
+    \Common\Response::htmxSuccess($resultado['mensaje']);
+});
+
+// ── POST /medico/estado — Pausar, Reactivar o Eliminar perfil médico (HTMX) ──────
+// Exclusivo para Perfil ADMIN LAESH (requiere permiso gestionar_cms)
+Flight::route('POST /medico/estado', function () {
+    Flight::rbac()->requirePermission('gestionar_cms', '/laesh/login/login.php?portal=admin');
+
+    if (!\Common\CsrfGuard::isValid(rotate: false)) {
+        \Common\Response::htmxError('Token de seguridad CSRF inválido o expirado. Recarga la página.');
+    }
+
+    $targetUserId  = (int)($_POST['target_user_id'] ?? 0);
+    $nuevoEstadoId = (int)($_POST['nuevo_estado_id'] ?? 1); // 1 = Activo, 2 = Inactivo/Pausado
+    $adminUserId   = (int)Flight::auth()->getUserId();
+
+    if ($targetUserId <= 0) {
+        \Common\Response::htmxError('ID de médico no válido.');
+    }
+
+    $resultado = \RC\Negocio\Ordenes::cambiarEstadoMedico($targetUserId, $nuevoEstadoId, $adminUserId);
+
+    if (!$resultado['success']) {
+        \Common\Response::htmxError($resultado['error'] ?? 'Error al cambiar el estado del médico.');
+    }
+
+    header('HX-Refresh: true');
+    \Common\Response::htmxSuccess($resultado['mensaje']);
+});
+
+// ── GET /api/estadisticas — Estadísticas de Dashboard por Rango ─────────
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `/medico/restablecer-password|/medico/estado`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 20 Sept 2026, 9:53 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L529-554)</summary>
+
+**Path:** `Unknown file`
+
+```
+        echo '<button type="button" class="btn btn-secondary btn-sm" hx-get="/laesh/rc/tabla-pacientes?page=' . $nextPage . $qParam . '&sort=' . $sort . '&dir=' . $dir . '&per_page=' . $perPage . '" hx-target="#tabla-pacientes" hx-swap="outerHTML">Siguiente ›</button>';
+    } else {
+        echo '<button type="button" class="btn btn-secondary btn-sm" disabled style="opacity:0.5;">Siguiente ›</button>';
+    }
+    echo '</div>';
+});
+
+// ── POST /medico/crear — Registrar perfil médico completo en MariaDB (HTMX) ──────
+Flight::route('POST /medico/crear', function () {
+    Flight::rbac()->requirePermission('gestionar_medicos');
+
+    $creatorUserId = (int)Flight::auth()->getUserId();
+    $resultado = \RC\Negocio\Ordenes::registrarMedico($_POST, $creatorUserId);
+
+    if (!$resultado['success']) {
+        \Common\Response::htmxError($resultado['error'] ?? 'Error al registrar el perfil médico.');
+    }
+
+    header('HX-Refresh: true');
+    \Common\Response::htmxSuccess($resultado['mensaje']);
+});
+
+// ── POST /medico/restablecer-password — Restablecer NIP de un médico (HTMX) ──────
+Flight::route('POST /medico/restablecer-password', function () {
+    Flight::rbac()->requirePermission('gestionar_medicos');
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `/medico/crear`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 20 Sept 2026, 9:53 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Ordenes.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L874-919)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+    /**
+     * Registra un nuevo médico completo en MariaDB (Delight Auth + Empleados + RBAC + Perfil Médico)
+     */
+    public static function registrarMedico(array $datos, int $creatorUserId): array {
+        $pdo = DB::connect();
+        $alreadyInTx = $pdo->inTransaction();
+        if (!$alreadyInTx) {
+            $pdo->beginTransaction();
+        }
+        try {
+            $auth = \Flight::auth();
+
+            $nombre = trim($datos['nombre'] ?? '');
+            $especialidad = trim($datos['especialidad'] ?? 'Medicina General');
+            $cedulaProf = trim($datos['cedula_profesional'] ?? $datos['cedulas'] ?? '');
+            $cedulaEsp = trim($datos['cedula_especialidad'] ?? '');
+            $celular = trim($datos['celular'] ?? '9990000000');
+            $univId = !empty($datos['universidad_id']) ? (int)$datos['universidad_id'] : null;
+            $lugarId = !empty($datos['lugar_trabajo_id']) ? (int)$datos['lugar_trabajo_id'] : null;
+
+            if (empty($nombre)) {
+                return ['success' => false, 'error' => 'El nombre del médico es obligatorio.'];
+            }
+
+            // Generar teléfono sintético único para login si no se proporcionó
+            $telefonoLogin = !empty($datos['telefono']) ? trim($datos['telefono']) : '999' . str_pad((string)rand(100000, 999999), 7, '0', STR_PAD_LEFT);
+            $emailFake = $telefonoLogin . '@laesh.local';
+            $nipPass = !empty($datos['password']) ? trim($datos['password']) : '04041974'; // NIP homologado
+
+            // 1. Crear usuario en Delight Auth
+            $newUserId = $auth->registerWithUniqueUsername($emailFake, $nipPass, $telefonoLogin);
+
+            // 2. Invocación al Stored Procedure RegistrarPerfilMedico (Empleado + RBAC + Perfil Médico)
+            $stmtSP = $pdo->prepare("CALL RegistrarPerfilMedico(?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmtSP->execute([
+                $newUserId,
+                $nombre,
+                $especialidad,
+                $cedulaProf,
+                $cedulaEsp,
+                $celular,
+                $univId,
+                $lugarId
+            ]);
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Ordenes.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1134-1179)</summary>
+
+**Path:** `Unknown file`
+
+```
+    /**
+     * Sincroniza múltiples médicos desde la grilla JS (SPA).
+     */
+    public static function sincronizarMedicos(array $payload, int $adminUserId): array {
+        $db = DB::connect();
+        $db->beginTransaction();
+
+        try {
+            $stmtUpdateEmp = $db->prepare("UPDATE empleados SET nombre = ?, apellidos = '' WHERE user_id = ?");
+            $stmtUpdatePerf = $db->prepare("UPDATE perfiles_medicos SET nombre_completo = ?, especialidad = ?, cedula_profesional = ?, cedula_especialidad = ?, celular = ?, universidad_id = ?, lugar_trabajo_id = ? WHERE user_id = ?");
+
+            $procesados = 0;
+            $lastUserId = null;
+
+            foreach ($payload as $med) {
+                if (!empty($med['is_new'])) {
+                    // Es un médico nuevo
+                    $datosRegistro = [
+                        'nombre' => $med['nombre_completo'] ?? '',
+                        'especialidad' => $med['especialidad'] ?? 'Medicina General',
+                        'cedula_profesional' => $med['cedula_profesional'] ?? $med['cedulas'] ?? '',
+                        'cedula_especialidad' => $med['cedula_especialidad'] ?? '',
+                        'celular' => $med['celular'] ?? '',
+                        'universidad_id' => !empty($med['universidad_id']) ? (int)$med['universidad_id'] : null,
+                        'lugar_trabajo_id' => !empty($med['lugar_trabajo_id']) ? (int)$med['lugar_trabajo_id'] : null
+                    ];
+                    $res = self::registrarMedico($datosRegistro, $adminUserId);
+                    if (!$res['success']) {
+                        throw new \Exception("Error al registrar médico nuevo: " . ($res['error'] ?? ''));
+                    }
+                    $lastUserId = $res['user_id'] ?? null;
+                    $procesados++;
+                } elseif (!empty($med['is_modified']) && !empty($med['user_id'])) {
+                    // Es una actualización
+                    $userId = (int)$med['user_id'];
+                    $nombre = trim($med['nombre_completo'] ?? '');
+                    $especialidad = trim($med['especialidad'] ?? '');
+                    $cedulaProf = trim($med['cedula_profesional'] ?? $med['cedulas'] ?? '');
+                    $cedulaEsp = trim($med['cedula_especialidad'] ?? '');
+                    $celular = trim($med['celular'] ?? '');
+                    $univId = !empty($med['universidad_id']) ? (int)$med['universidad_id'] : null;
+                    $lugarId = !empty($med['lugar_trabajo_id']) ? (int)$med['lugar_trabajo_id'] : null;
+
+                    $stmtUpdateEmp->execute([$nombre, $userId]);
+                    $stmtUpdatePerf->execute([$nombre, $especialidad, $cedulaProf, $cedulaEsp, $celular, $univId, $lugarId, $userId]);
+                    $lastUserId = $userId;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `Flight::route`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 20 Sept 2026, 9:54 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L459-474)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+// ── GET/POST /sistema — Panel Unificado de Sistema, Logs y Configuraciones ──
+Flight::route('GET /sistema', function () {
+    require __DIR__ . '/views/sistema.php';
+});
+
+Flight::route('POST /sistema', function () {
+    require __DIR__ . '/views/sistema.php';
+});
+
+// ── GET /api/notificaciones — Endpoint Polling Fallback ─────────────────────
+Flight::route('GET /api/notificaciones', function () {
+    $db = Flight::db();
+    $since = (int)($_GET['since'] ?? 0);
+
+    if ($since <= 0) {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `log_viewer.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 20 Sept 2026, 9:54 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `log_viewer.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 20 Sept 2026, 9:54 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `08_stored_procedures.sql`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+-- =============================================================================
+-- LAESH Bloc Digital — Script 08: Procedimientos Almacenados
+-- Procedimientos: CrearOrdenLaboratorio, ProcesarCargaResultadoPDF
+-- Idempotente: DROP PROCEDURE IF EXISTS + CREATE PROCEDURE.
+--
+-- Redesign v2 — alineado con Tecnica_Modelo_Datos.html:
+--   • folios_control: tipo_documento (era serie), ultimo_folio (era ultimo_numero),
+--                     prefijo + longitud para formato del folio
+--   • ordenes: folio_unico (era folio), hora_captura (era creado_en)
+--   • historial_estados_orden: estado_anterior_id, estado_nuevo_id, cambiado_por_user_id
+--   • notificaciones: user_id (era destinatario_id)
+--   • catalogo_estados: 1=Remitido, 2=En Atención, 3=Resultados Listos, 4=Cerrada
+-- =============================================================================
+
+USE `laesh_db`;
+
+DELIMITER //
+
+-- ---------------------------------------------------------------------------
+-- CrearOrdenLaboratorio
+-- Crea una orden con folio atómico usando folios_control.tipo_documento='orden_laboratorio'.
+-- Formato: CONCAT(prefijo, '-', LPAD(ultimo_folio, longitud, '0')) → LAESH-00001
+-- Retorna el folio_unico generado vía parámetro OUT.
+-- Estado inicial: 1 = Remitido
+-- ---------------------------------------------------------------------------
+DROP PROCEDURE IF EXISTS `CrearOrdenLaboratorio` //
+
+CREATE PROCEDURE `CrearOrdenLaboratorio`(
+    IN  p_paciente_id     INT UNSIGNED,
+    IN  p_medico_id       INT UNSIGNED,
+    IN  p_recepcion_id    INT UNSIGNED,
+    IN  p_edad_al_emitir  TINYINT UNSIGNED,
+    IN  p_diagnostico     VARCHAR(200),   -- alineado con ordenes.diagnostico VARCHAR(200) — spec ET
+    IN  p_otros_estudios  TEXT,            -- alineado con ordenes.otros_estudios TEXT — spec ET
+    IN  p_estudios_json   TEXT,
+    OUT p_folio_unico     VARCHAR(20)
+)
+BEGIN
+    DECLARE v_ultimo   INT UNSIGNED DEFAULT 0;
+    DECLARE v_prefijo  VARCHAR(10) DEFAULT 'LAESH';
+    DECLARE v_longitud TINYINT UNSIGNED DEFAULT 5;
+    DECLARE v_orden_id INT UNSIGNED;
+
+    -- 1. Obtener siguiente número de folio de forma atómica
+    UPDATE `folios_control`
+       SET `ultimo_folio` = `ultimo_folio` + 1
+     WHERE `tipo_documento` = 'orden_laboratorio';
+
+    SELECT `ultimo_folio`, `prefijo`, `longitud`
+      INTO v_ultimo, v_prefijo, v_longitud
+      FROM `folios_control`
+     WHERE `tipo_documento` = 'orden_laboratorio'
+     LIMIT 1;
+
+    -- 2. Formatear folio: LAESH-00001
+    SET p_folio_unico = CONCAT(v_prefijo, '-', LPAD(v_ultimo, v_longitud, '0'));
+
+    -- 3. Insertar la orden (estado inicial: 1=Remitido)
+    INSERT INTO `ordenes` (
+        `folio_unico`, `paciente_id`, `medico_id`, `recepcion_id`,
+        `estado_id`, `edad_al_emitir`, `diagnostico`, `otros_estudios`, `estudios`
+    ) VALUES (
+        p_folio_unico, p_paciente_id, p_medico_id, p_recepcion_id,
+        1, p_edad_al_emitir, p_diagnostico, p_otros_estudios, p_estudios_json
+    );
+
+    SET v_orden_id = LAST_INSERT_ID();
+
+    -- 4. Registrar primer movimiento de estado (creación: NULL → Remitido)
+    --    GAP-04 fix: actor = recepcion_id si viene de Recepción; medico_id si es Solicitud Digital
+    INSERT INTO `historial_estados_orden`
+        (`orden_id`, `estado_anterior_id`, `estado_nuevo_id`, `cambiado_por_user_id`, `observacion`)
+    VALUES
+        (v_orden_id, NULL, 1,
+         COALESCE(p_recepcion_id, p_medico_id),
+         CASE WHEN p_recepcion_id IS NOT NULL
+              THEN 'Orden creada en Recepción — estado inicial: Remitido'
+              ELSE 'Solicitud Digital emitida por médico — estado inicial: Remitido'
+         END);
+
+END //
+
+-- ---------------------------------------------------------------------------
+-- ProcesarCargaResultadoPDF — ELIMINADO (H5, auditoría 2026-09-20)
+-- Código muerto: ningún PHP lo invocaba (confirmado por grep sobre todo el
+-- repo). La ruta real (rc/negocio/Ordenes.php::guardarResultadoPDF) hacía el
+-- INSERT a resultados_pdf y el cambio de estado en pasos sueltos, perdiendo la
+-- guarda "no reabrir una orden Cerrada" que sí tenía este SP. Esa guarda queda
+-- cubierta de forma genérica (para TODAS las transiciones, no solo PDF) por la
+-- máquina de estados agregada a CambiarEstadoOrden abajo — guardarResultadoPDF
+-- ya pasa por ahí. El DROP se conserva (sin CREATE) para limpiar el SP huérfano
+-- en cualquier BD donde ya exista.
+-- ---------------------------------------------------------------------------
+DROP PROCEDURE IF EXISTS `ProcesarCargaResultadoPDF` //
+
+-- ---------------------------------------------------------------------------
+-- CambiarEstadoOrden
+-- Transición atómica de estado de una orden con registro en historial.
+--
+-- H1 (auditoría 2026-09-20): antes aceptaba cualquier nuevo_estado_id sin
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `09_views.sql`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+-- =============================================================================
+-- LAESH Bloc Digital — Script 09: Vistas (Views)
+-- Vistas: vw_ordenes_completas
+-- Idempotente: CREATE OR REPLACE VIEW.
+-- Fuente: Tecnica_Modelo_Datos.html — sección Vistas y Consultas frecuentes
+-- =============================================================================
+
+USE `laesh_db`;
+
+-- ---------------------------------------------------------------------------
+-- vw_ordenes_completas
+-- Vista desnormalizada para listados de recepción, médicos y reportes.
+-- Junta: ordenes + pacientes + catalogo_estados + empleados (médico) + perfiles_medicos + empleados (recepción)
+-- ---------------------------------------------------------------------------
+CREATE OR REPLACE VIEW `vw_ordenes_completas` AS
+SELECT
+    o.id                                                          AS orden_id,
+    o.folio_unico,
+    o.hora_captura,
+    o.fecha_resultado,
+    o.diagnostico,
+    o.otros_estudios,
+    o.estudios                                                    AS estudios_json,
+    o.edad_al_emitir,
+
+    -- Paciente
+    p.id                                                          AS paciente_id,
+    p.nombre_completo                                             AS paciente_nombre,
+    p.sexo                                                        AS paciente_sexo,
+    p.fecha_nacimiento                                            AS paciente_fecha_nac,
+    p.telefono                                                    AS paciente_telefono,
+
+    -- Estado de la orden
+    ce.id                                                         AS estado_id,
+    ce.valor                                                      AS estado_valor,
+    ce.color_hex                                                  AS estado_color,
+
+    -- Motivo de cancelación (si la orden fue cancelada)
+    h_canc.observacion                                            AS motivo_cancelacion,
+
+    -- Médico que emitió la orden (user_id directo + empleado_id + perfil)
+    o.medico_id                                                   AS medico_user_id,
+    em.id                                                         AS medico_empleado_id,
+    em.nombre                                                     AS medico_nombre,
+    em.apellidos                                                  AS medico_apellidos,
+    COALESCE(pm.nombre_completo, NULLIF(CONCAT(IFNULL(em.nombre,''), ' ', IFNULL(em.apellidos,'')), ' '), 'Médico General') AS medico_nombre_completo,
+    COALESCE(pm.especialidad, 'Medicina General')                AS medico_especialidad,
+    COALESCE(pm.cedula_profesional, 'CED-N/A')                   AS medico_cedula,
+
+    -- Recepcionista que capturó (nullable)
+    o.recepcion_id                                                AS recepcion_user_id,
+    er.nombre                                                     AS recepcion_nombre,
+    er.apellidos                                                  AS recepcion_apellidos,
+
+    o.actualizado_en
+
+FROM `ordenes` o
+JOIN `pacientes`        p   ON p.id  = o.paciente_id
+JOIN `catalogo_estados` ce  ON ce.id = o.estado_id
+LEFT JOIN (
+    SELECT h1.orden_id, h1.observacion
+    FROM historial_estados_orden h1
+    INNER JOIN (
+        SELECT orden_id, MAX(id) AS max_id
+        FROM historial_estados_orden
+        WHERE estado_nuevo_id = 5
+        GROUP BY orden_id
+    ) h2 ON h1.id = h2.max_id
+) h_canc ON h_canc.orden_id = o.id
+LEFT JOIN `empleados`   em  ON em.user_id  = o.medico_id
+LEFT JOIN `perfiles_medicos` pm ON pm.user_id  = o.medico_id
+LEFT JOIN `empleados`   er  ON er.user_id  = o.recepcion_id;
+
+-- ---------------------------------------------------------------------------
+-- vw_ws_fallback_stats — Deuda QoS-01 (2026-09-18)
+-- Estadísticas agregadas de fallback WS por flujo/día, consumidas por
+-- admrc/views/log_viewer.php (pestaña "Estadísticas WS" en /laesh/adrc/sistema).
+-- Deliberadamente una VIEW de solo lectura sobre notificaciones, no una tabla de
+-- log nueva: el dato crudo (entregado_ws, tipo, creado_en) ya existe por fila
+-- desde el diseño original de QoS; esto solo lo agrega — evita una segunda vía
+-- de escritura en el hot path de commons/notifier.php::emit().
+-- Depende de notificaciones.fallback_reason (columna agregada en
+-- 03_transactional_schema.sql — debe correr antes que este script).
+-- ---------------------------------------------------------------------------
+CREATE OR REPLACE VIEW `vw_ws_fallback_stats` AS
+SELECT
+    `tipo`,
+    DATE(`creado_en`)                                              AS `dia`,
+    COUNT(*)                                                       AS `total`,
+    SUM(`entregado_ws` = 0)                                        AS `fallbacks`,
+    ROUND(SUM(`entregado_ws` = 0) / COUNT(*) * 100, 1)             AS `pct_fallback`
+FROM `notificaciones`
+GROUP BY `tipo`, DATE(`creado_en`)
+ORDER BY `dia` DESC, `tipo` ASC;
+
+-- ---------------------------------------------------------------------------
+-- vw_estudios_catalogo
+-- Catálogo general desnormalizado de estudios de laboratorio con su categoría.
+-- ---------------------------------------------------------------------------
+CREATE OR REPLACE VIEW `vw_estudios_catalogo` AS
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `09_views.sql`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L100-255)</summary>
+
+**Path:** `Unknown file`
+
+```
+SELECT
+    e.id,
+    e.categoria_id,
+    e.clave,
+    e.nombre,
+    COALESCE(c.nombre, 'General') AS categoria,
+    e.descripcion_breve,
+    e.tiempo,
+    e.muestra,
+    e.contenedor,
+    e.preparacion,
+    e.top20_orden,
+    e.activo
+FROM `cat_estudios` e
+LEFT JOIN `cat_categorias` c ON e.categoria_id = c.id;
+
+-- ---------------------------------------------------------------------------
+-- vw_top20_estudios
+-- Estudios destacados Top 20 para la grilla del portal médico y recepción.
+-- ---------------------------------------------------------------------------
+CREATE OR REPLACE VIEW `vw_top20_estudios` AS
+SELECT
+    e.id,
+    e.clave,
+    e.nombre,
+    e.categoria,
+    e.top20_orden
+FROM `vw_estudios_catalogo` e
+WHERE e.top20_orden IS NOT NULL AND e.top20_orden > 0
+ORDER BY e.top20_orden ASC;
+
+-- ---------------------------------------------------------------------------
+-- vw_rbac_permisos_usuarios
+-- Mapeo relacional de permisos asignados por usuario (RBAC).
+-- ---------------------------------------------------------------------------
+CREATE OR REPLACE VIEW `vw_rbac_permisos_usuarios` AS
+SELECT
+    pu.user_id,
+    p.id          AS permiso_id,
+    p.nombre      AS permiso_nombre,
+    p.descripcion AS permiso_descripcion
+FROM `rbac_permisos` p
+JOIN `rbac_permisos_usuarios` pu ON p.id = pu.permiso_id;
+
+-- ---------------------------------------------------------------------------
+-- vw_empleados_usuarios
+-- Unión relacional entre la cuenta de usuario (users) y el perfil operativo de empleado.
+-- ---------------------------------------------------------------------------
+CREATE OR REPLACE VIEW `vw_empleados_usuarios` AS
+SELECT
+    e.id                                AS empleado_id,
+    e.user_id,
+    e.nombre,
+    e.apellidos,
+    CONCAT(e.nombre, ' ', e.apellidos) AS nombre_completo,
+    e.rol,
+    e.activo,
+    e.creado_en,
+    u.email,
+    u.username
+FROM `empleados` e
+JOIN `users` u ON e.user_id = u.id;
+
+-- ---------------------------------------------------------------------------
+-- vw_website_arbol_estudios
+-- Jerarquía multinivel (iGabinetes → Gabinetes / Subgabinetes → Estudios) para la web pública.
+-- ---------------------------------------------------------------------------
+CREATE OR REPLACE VIEW `vw_website_arbol_estudios` AS
+SELECT
+    ig.id                                                                               AS grupo_id,
+    ig.nombre                                                                           AS grupo_titulo,
+    ig.orden                                                                            AS grupo_orden,
+    CASE WHEN sg.id IS NOT NULL THEN CONCAT('s_', sg.id) ELSE CONCAT('g_', gab.id) END AS cat_id,
+    COALESCE(sg.nombre, gab.nombre)                                                     AS cat_nombre,
+    COALESCE(sg.orden, gab.orden)                                                      AS cat_orden,
+    e.id                                                                                AS estudio_id,
+    e.clave                                                                            AS clave_interna,
+    e.nombre                                                                            AS estudio_nombre,
+    e.tiempo                                                                            AS tiempo_procesamiento,
+    e.muestra                                                                           AS muestra_requerida,
+    e.preparacion,
+    e.contenedor,
+    e.pruebas_incluidas
+FROM `cat_igabinetes` ig
+JOIN `rel_igabinete_vinculos` riv ON riv.igabinete_id = ig.id
+LEFT JOIN `cat_gabinetes` gab     ON gab.id = riv.gabinete_id
+LEFT JOIN `cat_subgabinetes` sg   ON sg.id = riv.subgabinete_id
+JOIN `rel_estudio_gabinete` reg   ON (
+    (riv.subgabinete_id IS NOT NULL AND reg.subgabinete_id = riv.subgabinete_id) OR
+    (riv.subgabinete_id IS NULL AND riv.gabinete_id IS NOT NULL AND reg.gabinete_id = riv.gabinete_id AND reg.subgabinete_id IS NULL)
+)
+JOIN `cat_estudios` e             ON e.id = reg.estudio_id;
+
+-- ---------------------------------------------------------------------------
+-- vw_medicos_completos
+-- Vista consolidada del directorio de médicos enlazando perfiles, estado y catálogos UI.
+-- ---------------------------------------------------------------------------
+CREATE OR REPLACE VIEW `vw_medicos_completos` AS
+SELECT
+    pm.user_id,
+    pm.nombre_completo,
+    pm.especialidad,
+    pm.cedula_profesional,
+    pm.cedula_especialidad,
+    pm.celular,
+    pm.telefono_consultorio,
+    pm.direccion_consultorio,
+    pm.universidad_id,
+    c_u.valor                                                            AS universidad_nombre,
+    pm.lugar_trabajo_id,
+    c_l.valor                                                            AS lugar_trabajo_nombre,
+    pm.estado_id,
+    COALESCE(cem.nombre, 'Activo')                                        AS estado_nombre,
+    pm.total_ordenes,
+    pm.creado_en
+FROM `perfiles_medicos` pm
+LEFT JOIN `cat_estados_medico` cem ON cem.id = pm.estado_id
+LEFT JOIN `catalogos_ui` c_u       ON c_u.id = pm.universidad_id
+LEFT JOIN `catalogos_ui` c_l       ON c_l.id = pm.lugar_trabajo_id;
+
+-- ---------------------------------------------------------------------------
+-- vw_notificaciones_pendientes
+-- Vista desnormalizada de notificaciones no leídas para polling fallback.
+-- ---------------------------------------------------------------------------
+CREATE OR REPLACE VIEW `vw_notificaciones_pendientes` AS
+SELECT
+    n.id,
+    n.user_id,
+    n.tipo,
+    n.folio_referencia,
+    n.mensaje,
+    n.leido,
+    n.entregado_ws,
+    n.creado_en
+FROM `notificaciones` n
+WHERE n.leido = 0;
+
+-- ---------------------------------------------------------------------------
+-- vw_ordenes_estadisticas
+-- Vista consolidada de totales por estado, pacientes y médicos para el dashboard.
+-- ---------------------------------------------------------------------------
+-- H8 (2026-09-20): agregado 'canceladas' (estado_id=5) para no contaminar el
+-- conteo de 'cerradas' con órdenes canceladas (motivo original del hallazgo).
+CREATE OR REPLACE VIEW `vw_ordenes_estadisticas` AS
+SELECT
+    (SELECT COUNT(*) FROM `ordenes`)                                      AS total_ordenes,
+    (SELECT COUNT(*) FROM `ordenes` WHERE `estado_id` = 1)                AS remitidas,
+    (SELECT COUNT(*) FROM `ordenes` WHERE `estado_id` = 2)                AS en_atencion,
+    (SELECT COUNT(*) FROM `ordenes` WHERE `estado_id` = 3)                AS resultados_listos,
+    (SELECT COUNT(*) FROM `ordenes` WHERE `estado_id` = 4)                AS cerradas,
+    (SELECT COUNT(*) FROM `ordenes` WHERE `estado_id` = 5)                AS canceladas,
+    (SELECT COUNT(*) FROM `pacientes`)                                    AS total_pacientes,
+    (SELECT COUNT(*) FROM `perfiles_medicos` WHERE `estado_id` = 1)       AS total_medicos;
+
+
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/setup/bds/laesh/migrations`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>Directory: `migrations` (3 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/setup/bds/laesh/migrations`
+
+| Name | Type | Size |
+|------|------|------|
+| `README.md` | File | 2654 bytes |
+| `doc_import_ssot.html` | File | 3633 bytes |
+| `generate_import_sql.py` | File | 2976 bytes |
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Identified dead code within `app.js`, specifically empty `LocalStorage` functions, redundant modal event listeners, and an orphaned accordion element. Code duplication was found between `labadmin.js` and `medicos.js` with the identical implementation of the `_abrirSolOverlay(url)` function. These findings suggest opportunities for cleanup and refactoring.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `RbacManager.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.067519470s
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+// RbacManager.php - Controlador de Control de Acceso Basado en Roles (RBAC) para LAESH
+
+namespace Common;
+
+use PDO;
+use Delight\Auth\Auth;
+use Flight;
+
+class RbacManager {
+    private Auth $auth;
+    private PDO $db;
+    private ?string $roleName = null;
+    private array $permissions = [];
+    private bool $loaded = false;
+
+    public function __construct(Auth $auth, PDO $db) {
+        $this->auth = $auth;
+        $this->db = $db;
+    }
+
+    /**
+     * Carga el contexto del rol y permisos del usuario desde las tablas empleados y rbac_permisos
+     */
+    private function loadContext() {
+        if ($this->loaded || !$this->auth->isLoggedIn()) {
+            return;
+        }
+
+        $userId = $this->auth->getUserId();
+
+        try {
+            // 1. Obtener Rol Operativo desde la tabla empleados
+            $stmt = $this->db->prepare("SELECT rol FROM empleados WHERE user_id = :id LIMIT 1");
+            $stmt->execute(['id' => $userId]);
+            $empleado = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($empleado) {
+                $this->roleName = $empleado['rol'];
+            }
+
+            // 2. Obtener Permisos Granulares de rbac_permisos
+            $stmtPerms = $this->db->prepare("
+                SELECT permiso_nombre 
+                FROM vw_rbac_permisos_usuarios
+                WHERE user_id = :id
+            ");
+            $stmtPerms->execute(['id' => $userId]);
+            $this->permissions = $stmtPerms->fetchAll(PDO::FETCH_COLUMN);
+
+            $this->loaded = true;
+        } catch (\PDOException $e) {
+            // Registrar error de consulta en fallback_log
+            DB::logFallback('ERROR', "Carga contexto RBAC para user_id=$userId", $e->getMessage());
+        }
+    }
+
+    /**
+     * Obtiene el nombre del rol del usuario de sesión
+     */
+    public function getRole(): ?string {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+procede con todas  la eliminacion de partes y residuales indicadas, excepto este no: 2.2. Procedimiento Almacenado ProcesarCargaResultadoPDF en BD.
+Realizalo de manera quirurgica.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `Tecnica_Seguridad_Integral.html`
+**Language:** html
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The task involves surgically removing code, specifically HTMX routes, from `rc/index.php`, excluding a stored procedure from a database. Identifying the code to remove requires pinpointing the specified lines within the file.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.046938446s
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L529-609)</summary>
+
+**Path:** `Unknown file`
+
+```
+        echo '<button type="button" class="btn btn-secondary btn-sm" hx-get="/laesh/rc/tabla-pacientes?page=' . $nextPage . $qParam . '&sort=' . $sort . '&dir=' . $dir . '&per_page=' . $perPage . '" hx-target="#tabla-pacientes" hx-swap="outerHTML">Siguiente ›</button>';
+    } else {
+        echo '<button type="button" class="btn btn-secondary btn-sm" disabled style="opacity:0.5;">Siguiente ›</button>';
+    }
+    echo '</div>';
+});
+
+// ── POST /medico/crear — Registrar perfil médico completo en MariaDB (HTMX) ──────
+Flight::route('POST /medico/crear', function () {
+    Flight::rbac()->requirePermission('gestionar_medicos');
+
+    $creatorUserId = (int)Flight::auth()->getUserId();
+    $resultado = \RC\Negocio\Ordenes::registrarMedico($_POST, $creatorUserId);
+
+    if (!$resultado['success']) {
+        \Common\Response::htmxError($resultado['error'] ?? 'Error al registrar el perfil médico.');
+    }
+
+    header('HX-Refresh: true');
+    \Common\Response::htmxSuccess($resultado['mensaje']);
+});
+
+// ── POST /medico/restablecer-password — Restablecer NIP de un médico (HTMX) ──────
+Flight::route('POST /medico/restablecer-password', function () {
+    Flight::rbac()->requirePermission('gestionar_medicos');
+
+    if (!\Common\CsrfGuard::isValid(rotate: false)) {
+        \Common\Response::htmxError('Token de seguridad CSRF inválido o expirado. Recarga la página.');
+    }
+
+    $targetUserId = (int)($_POST['target_user_id'] ?? 0);
+    $newPassword  = trim($_POST['new_password'] ?? '04041974'); // NIP homologado por defecto
+    $adminUserId  = (int)Flight::auth()->getUserId();
+
+    if ($targetUserId <= 0) {
+        \Common\Response::htmxError('ID de médico no válido.');
+    }
+
+    $resultado = \RC\Negocio\Ordenes::restablecerPasswordMedico($targetUserId, $newPassword, $adminUserId);
+
+    if (!$resultado['success']) {
+        \Common\Response::htmxError($resultado['error'] ?? 'Error al restablecer la contraseña.');
+    }
+
+    header('HX-Refresh: true');
+    \Common\Response::htmxSuccess($resultado['mensaje']);
+});
+
+// ── POST /medico/estado — Pausar, Reactivar o Eliminar perfil médico (HTMX) ──────
+// Exclusivo para Perfil ADMIN LAESH (requiere permiso gestionar_cms)
+Flight::route('POST /medico/estado', function () {
+    Flight::rbac()->requirePermission('gestionar_cms', '/laesh/login/login.php?portal=admin');
+
+    if (!\Common\CsrfGuard::isValid(rotate: false)) {
+        \Common\Response::htmxError('Token de seguridad CSRF inválido o expirado. Recarga la página.');
+    }
+
+    $targetUserId  = (int)($_POST['target_user_id'] ?? 0);
+    $nuevoEstadoId = (int)($_POST['nuevo_estado_id'] ?? 1); // 1 = Activo, 2 = Inactivo/Pausado
+    $adminUserId   = (int)Flight::auth()->getUserId();
+
+    if ($targetUserId <= 0) {
+        \Common\Response::htmxError('ID de médico no válido.');
+    }
+
+    $resultado = \RC\Negocio\Ordenes::cambiarEstadoMedico($targetUserId, $nuevoEstadoId, $adminUserId);
+
+    if (!$resultado['success']) {
+        \Common\Response::htmxError($resultado['error'] ?? 'Error al cambiar el estado del médico.');
+    }
+
+    header('HX-Refresh: true');
+    \Common\Response::htmxSuccess($resultado['mensaje']);
+});
+
+// ── GET /api/estadisticas — Estadísticas de Dashboard por Rango ─────────
+Flight::route('GET /api/estadisticas', function () {
+    header('Content-Type: application/json; charset=utf-8');
+    Flight::rbac()->requirePermission('gestionar_ordenes'); // o la que aplique para dashboard
+    
+    $rango = $_GET['rango'] ?? 'dia';
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Sept 2026, 10:00 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `app.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+// Audio helper de notificaciones (Web Audio API oscillator)
+function playWhistle() {
+    try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const oscillator = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+        oscillator.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+        oscillator.type = 'sine';
+        oscillator.frequency.setValueAtTime(1200, audioCtx.currentTime);
+        oscillator.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.3);
+        gainNode.gain.setValueAtTime(0.5, audioCtx.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+        oscillator.start();
+        oscillator.stop(audioCtx.currentTime + 0.3);
+    } catch(e) {
+        console.log("Audio no soportado");
+    }
+}
+
+// MariaDB SSOT — Descontinuado el uso de LocalStorage para datos de negocio
+function getOrders() { return []; }
+function saveOrders(orders) {}
+function getCatalog() { return window.laeshTop20EstMed || []; }
+function saveCatalog(catalog) {}
+function createOrder(paciente, estudios, medico) { return null; }
+function updateOrderStatus(id, newStatus) {}
+
+// ─────────────────────────────────────────────────────────────
+// Portal Header + Nav‑Strip — labadmin.html, medicos.html
+//
+// En tablet/móvil (≤1024px) el header y la tira de iconos son
+// position:fixed, por eso el app-layout necesita padding-top igual
+// a la suma de ambas alturas. app.js mide y publica dos CSS vars:
+//   --portal-header-h        → altura real del nav header
+//   --portal-content-offset  → header + tira (padding-top del layout)
+//
+// En móvil (≤767px) aparece el hamburger (CSS display:flex).
+// Al pulsarlo se muestra .sidebar-mobile-only como mini-panel
+// anclado a la derecha del viewport (usuario + Cerrar Sesión).
+// ─────────────────────────────────────────────────────────────
+(function initPortalHamburger() {
+    var header    = document.querySelector('.portal-access-header');
+    var sidebar   = document.querySelector('.app-layout > .sidebar');
+    var appLayout = document.querySelector('.app-layout');
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `app.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L529-613)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initConnectionStatus);
+    } else {
+        initConnectionStatus();
+    }
+})();
+
+// ── Generic Modal Accessibility (Focus Trap & Escape Close) ──────
+(function () {
+    'use strict';
+    document.addEventListener('keydown', function (e) {
+        var activeModal = document.querySelector('.modal.show');
+        if (!activeModal) return;
+
+        if (e.key === 'Escape') {
+            var closeBtn = activeModal.querySelector('.close-modal') || activeModal.querySelector('.btn-overlay-sm');
+            if (closeBtn) {
+                closeBtn.click();
+            } else {
+                activeModal.classList.remove('show');
+                document.body.classList.remove('modal-open');
+            }
+            return;
+        }
+
+        if (e.key === 'Tab') {
+            var focusables = activeModal.querySelectorAll('button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])');
+            if (focusables.length === 0) {
+                e.preventDefault();
+                return;
+            }
+            var first = focusables[0];
+            var last = focusables[focusables.length - 1];
+
+            if (e.shiftKey) { // Shift + Tab
+                if (document.activeElement === first) {
+                    last.focus();
+                    e.preventDefault();
+                }
+            } else { // Tab
+                if (document.activeElement === last) {
+                    first.focus();
+                    e.preventDefault();
+                }
+            }
+        }
+    });
+
+    var modalObserver = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
+            if (mutation.attributeName === 'class') {
+                var target = mutation.target;
+                if (target.classList.contains('show')) {
+                    var firstInput = target.querySelector('input, select, textarea, button');
+                    if (firstInput) {
+                        setTimeout(function() { firstInput.focus(); }, 100);
+                    }
+                }
+            }
+        });
+    });
+
+    // Observer starts after page loads
+    function runObserver() {
+        document.querySelectorAll('.modal').forEach(function (modal) {
+            modalObserver.observe(modal, { attributes: true, attributeFilter: ['class'] });
+        });
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', runObserver);
+    } else {
+        runObserver();
+    }
+
+    // Manejador global estandarizado para apertura del Logo LAESH en nueva pestaña
+    document.addEventListener('click', function(e) {
+        var a = e.target.closest('a.logo, a.portal-access-link');
+        if (a && a.getAttribute('target') === '_blank') {
+            e.stopPropagation();
+        }
+    }, true);
+})();
+
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L207-244)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+        // Overlay iframe compartido — definido aquí para labadmin y medicos (Cierre EXCLUSIVO vía botón Cerrar)
+        function _abrirSolOverlay(url) {
+            var prev = document.getElementById('sol-overlay');
+            if (prev) prev.remove();
+            var overlay = document.createElement('div');
+            overlay.id = 'sol-overlay';
+            overlay.className = 'sol-overlay';
+            var iframe = document.createElement('iframe');
+            iframe.src = url;
+            iframe.title = 'Solicitud Digital de Análisis Clínicos';
+            overlay.appendChild(iframe);
+            document.body.appendChild(overlay);
+        }
+        function verSolicitudDigital(id, paciente, estudios, fecha) {
+            var medProf   = window.__MEDICO_PROFILE__ || {};
+            var nombreMed = medProf.nombre || 'Dr. Hedilberto Reyes Venegas';
+            var especMed  = medProf.especialidad || 'Med. Interna';
+            var cedMed    = (typeof formatCedulasMedico === 'function')
+                            ? formatCedulasMedico(medProf)
+                            : ((medProf.cedula_profesional ? ('Cédula Profesional ' + medProf.cedula_profesional + (medProf.cedula_especialidad ? '.   Cédula Especialidad ' + medProf.cedula_especialidad : '')) : 'Cédula Profesional 6605518.   Cédula Especialidad 9456189'));
+            var univMed   = medProf.universidad || 'Universidad Autónoma Benito Juárez de Oaxaca';
+            var lugarMed  = medProf.lugar || 'Centro de Especialidades "Torre Azul"';
+
+            var p = new URLSearchParams();
+            p.set('id', id || '1');
+            p.set('paciente', paciente || '—');
+            p.set('fecha', fecha || new Date().toLocaleString());
+            p.set('medico',       nombreMed);
+            p.set('especialidad', especMed);
+            p.set('cedula',       cedMed);
+            p.set('universidad',  univMed);
+            p.set('lugar',        lugarMed);
+
+            // estudios puede ser string simple o JSON-array string — normalizar
+            var arr;
+            try { arr = JSON.parse(estudios); if (!Array.isArray(arr)) throw ''; }
+            catch(e) { arr = estudios ? [estudios] : []; }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `labadmin.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L269-304)</summary>
+
+**Path:** `Unknown file`
+
+```
+                filtrarEstadisticasAdmin();
+            }
+        }
+
+        // GAP 3: abre solicitud_dac_impr.php en overlay iframe (Cierre EXCLUSIVO vía botón Cerrar)
+        function _abrirSolOverlay(url) {
+            var prev = document.getElementById('sol-overlay');
+            if (prev) prev.remove();
+            var overlay = document.createElement('div');
+            overlay.id = 'sol-overlay';
+            overlay.className = 'sol-overlay';
+            var iframe = document.createElement('iframe');
+            iframe.src = url;
+            iframe.title = 'Solicitud Digital de Análisis Clínicos';
+            overlay.appendChild(iframe);
+            document.body.appendChild(overlay);
+        }
+        function verSolicitudDigital(id, paciente, estudios, fecha) {
+            var p = new URLSearchParams();
+            p.set('id', id || '1');
+            p.set('paciente', paciente || '—');
+            p.set('fecha', fecha || new Date().toLocaleString());
+            var arr;
+            try { arr = JSON.parse(estudios); if (!Array.isArray(arr)) throw ''; }
+            catch(e) { arr = estudios ? [estudios] : []; }
+            p.set('estudios', JSON.stringify(arr));
+            _abrirSolOverlay('/laesh/rc/views/solicitud_dac_impr.php?' + p.toString());
+        }
+
+        function verResultados(id, paciente) {
+            document.getElementById('modal-resultados').classList.add('show');
+        }
+
+        function cerrarModal() {
+            document.getElementById('modal-resultados').classList.remove('show');
+        }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Reviewing `medicos-a11y.js` to understand its functionalities and how to integrate them into `medicos.js`. This script addresses accessibility (A11Y-05) and UX issues (UX-01, UX-03) and relies on `medicos.js` being loaded beforehand. The approach involves adding event listeners without directly modifying the main DOM.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.072127744s
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1549-1595)</summary>
+
+**Path:** `Unknown file`
+
+```
+                }
+                updateChipsContainer();
+            }, 50);
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!openDrop) return;
+            if (!e.target.closest('.ficha-wrap')) closeDrop();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (!openDrop) return;
+            if (e.key === 'Escape') { closeDrop(); return; }
+            if (e.key === 'Tab') {
+                var focusable = Array.from(openDrop.querySelectorAll(
+                    'button:not([disabled]), input[type="checkbox"]:not([disabled]), [tabindex]:not([tabindex="-1"])'
+                ));
+                if (focusable.length === 0) return;
+                var first = focusable[0];
+                var last  = focusable[focusable.length - 1];
+                if (e.shiftKey && document.activeElement === first) {
+                    e.preventDefault(); last.focus();
+                } else if (!e.shiftKey && document.activeElement === last) {
+                    e.preventDefault(); first.focus();
+                }
+            }
+        });
+
+        var _mainContent = document.querySelector('.main-content');
+        if (_mainContent) {
+            _mainContent.addEventListener('scroll', function() {
+                if (openDrop) closeDrop();
+            }, { passive: true });
+        }
+
+        window.addEventListener('resize', function() {
+            if (openDrop) closeDrop();
+        }, { passive: true });
+
+        if (grid) {
+            var fichas = grid.querySelectorAll('.ficha-cat');
+            fichas.forEach(updateFichaCount);
+        }
+        updateChipsContainer();
+    })();
+});
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `app.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+// Audio helper de notificaciones (Web Audio API oscillator)
+function playWhistle() {
+    try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const oscillator = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+        oscillator.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+        oscillator.type = 'sine';
+        oscillator.frequency.setValueAtTime(1200, audioCtx.currentTime);
+        oscillator.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.3);
+        gainNode.gain.setValueAtTime(0.5, audioCtx.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+        oscillator.start();
+        oscillator.stop(audioCtx.currentTime + 0.3);
+    } catch(e) {
+        console.log("Audio no soportado");
+    }
+}
+
+// MariaDB SSOT — Descontinuado el uso de LocalStorage para datos de negocio
+function getOrders() { return []; }
+function saveOrders(orders) {}
+function getCatalog() { return window.laeshTop20EstMed || []; }
+function saveCatalog(catalog) {}
+function createOrder(paciente, estudios, medico) { return null; }
+function updateOrderStatus(id, newStatus) {}
+
+// ─────────────────────────────────────────────────────────────
+// Portal Header + Nav‑Strip — labadmin.html, medicos.html
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `app.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L534-613)</summary>
+
+**Path:** `Unknown file`
+
+```
+    }
+})();
+
+// ── Generic Modal Accessibility (Focus Trap & Escape Close) ──────
+(function () {
+    'use strict';
+    document.addEventListener('keydown', function (e) {
+        var activeModal = document.querySelector('.modal.show');
+        if (!activeModal) return;
+
+        if (e.key === 'Escape') {
+            var closeBtn = activeModal.querySelector('.close-modal') || activeModal.querySelector('.btn-overlay-sm');
+            if (closeBtn) {
+                closeBtn.click();
+            } else {
+                activeModal.classList.remove('show');
+                document.body.classList.remove('modal-open');
+            }
+            return;
+        }
+
+        if (e.key === 'Tab') {
+            var focusables = activeModal.querySelectorAll('button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])');
+            if (focusables.length === 0) {
+                e.preventDefault();
+                return;
+            }
+            var first = focusables[0];
+            var last = focusables[focusables.length - 1];
+
+            if (e.shiftKey) { // Shift + Tab
+                if (document.activeElement === first) {
+                    last.focus();
+                    e.preventDefault();
+                }
+            } else { // Tab
+                if (document.activeElement === last) {
+                    first.focus();
+                    e.preventDefault();
+                }
+            }
+        }
+    });
+
+    var modalObserver = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
+            if (mutation.attributeName === 'class') {
+                var target = mutation.target;
+                if (target.classList.contains('show')) {
+                    var firstInput = target.querySelector('input, select, textarea, button');
+                    if (firstInput) {
+                        setTimeout(function() { firstInput.focus(); }, 100);
+                    }
+                }
+            }
+        });
+    });
+
+    // Observer starts after page loads
+    function runObserver() {
+        document.querySelectorAll('.modal').forEach(function (modal) {
+            modalObserver.observe(modal, { attributes: true, attributeFilter: ['class'] });
+        });
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', runObserver);
+    } else {
+        runObserver();
+    }
+
+    // Manejador global estandarizado para apertura del Logo LAESH en nueva pestaña
+    document.addEventListener('click', function(e) {
+        var a = e.target.closest('a.logo, a.portal-access-link');
+        if (a && a.getAttribute('target') === '_blank') {
+            e.stopPropagation();
+        }
+    }, true);
+})();
+
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `app.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L304-354)</summary>
+
+**Path:** `Unknown file`
+
+```
+    };
+})();
+
+// ── G-2 y G-7: Modal Accessibility (Focus Trap, Escape Key, ARIA Roles) ──
+(function initModalAccessibility() {
+    // 1. Inyectar ARIA roles a todos los modales existentes
+    document.querySelectorAll('.modal').forEach(function(modal) {
+        if (!modal.hasAttribute('role')) modal.setAttribute('role', 'dialog');
+        if (!modal.hasAttribute('aria-modal')) modal.setAttribute('aria-modal', 'true');
+    });
+
+    // 2. Manejo global de teclado para modales activos
+    document.addEventListener('keydown', function(e) {
+        var activeModal = document.querySelector('.modal.show');
+        if (!activeModal) return;
+
+        // Escape para cerrar
+        if (e.key === 'Escape') {
+            activeModal.classList.remove('show');
+            return;
+        }
+
+        // Focus Trap con Tab
+        if (e.key === 'Tab') {
+            // Buscar elementos enfocables dentro del modal
+            var focusableElements = activeModal.querySelectorAll(
+                'a[href], button:not([disabled]), textarea:not([disabled]), input[type="text"]:not([disabled]), ' +
+                'input[type="radio"]:not([disabled]), input[type="checkbox"]:not([disabled]), select:not([disabled]), ' +
+                '[tabindex]:not([tabindex="-1"])'
+            );
+            var firstElement = focusableElements[0];
+            var lastElement = focusableElements[focusableElements.length - 1];
+
+            if (e.shiftKey) { // Shift + Tab
+                if (document.activeElement === firstElement) {
+                    if (lastElement) lastElement.focus();
+                    e.preventDefault();
+                }
+            } else { // Solo Tab
+                if (document.activeElement === lastElement) {
+                    if (firstElement) firstElement.focus();
+                    e.preventDefault();
+                }
+            }
+        }
+    });
+})();
+
+// ── G-6: Atributos aria-label automáticos ──
+(function initAccessibilityAttributes() {
+    document.querySelectorAll('input[placeholder]:not([aria-label])').forEach(function(el) {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Sept 2026, 10:01 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `app.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L539-619)</summary>
+
+**Path:** `Unknown file`
+
+```
+    } else {
+        initConnectionStatus();
+    }
+})();
+
+// ── Generic Modal Accessibility (Focus Trap & Escape Close) ──────
+(function () {
+    'use strict';
+    document.addEventListener('keydown', function (e) {
+        var activeModal = document.querySelector('.modal.show');
+        if (!activeModal) return;
+
+        if (e.key === 'Escape') {
+            var closeBtn = activeModal.querySelector('.close-modal') || activeModal.querySelector('.btn-overlay-sm');
+            if (closeBtn) {
+                closeBtn.click();
+            } else {
+                activeModal.classList.remove('show');
+                document.body.classList.remove('modal-open');
+            }
+            return;
+        }
+
+        if (e.key === 'Tab') {
+            var focusables = activeModal.querySelectorAll('button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])');
+            if (focusables.length === 0) {
+                e.preventDefault();
+                return;
+            }
+            var first = focusables[0];
+            var last = focusables[focusables.length - 1];
+
+            if (e.shiftKey) { // Shift + Tab
+                if (document.activeElement === first) {
+                    last.focus();
+                    e.preventDefault();
+                }
+            } else { // Tab
+                if (document.activeElement === last) {
+                    first.focus();
+                    e.preventDefault();
+                }
+            }
+        }
+    });
+
+    var modalObserver = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
+            if (mutation.attributeName === 'class') {
+                var target = mutation.target;
+                if (target.classList.contains('show')) {
+                    var firstInput = target.querySelector('input, select, textarea, button');
+                    if (firstInput) {
+                        setTimeout(function() { firstInput.focus(); }, 100);
+                    }
+                }
+            }
+        });
+    });
+
+    // Observer starts after page loads
+    function runObserver() {
+        document.querySelectorAll('.modal').forEach(function (modal) {
+            modalObserver.observe(modal, { attributes: true, attributeFilter: ['class'] });
+        });
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', runObserver);
+    } else {
+        runObserver();
+    }
+
+    // Manejador global estandarizado para apertura del Logo LAESH en nueva pestaña
+    document.addEventListener('click', function(e) {
+        var a = e.target.closest('a.logo, a.portal-access-link');
+        if (a && a.getAttribute('target') === '_blank') {
+            e.stopPropagation();
+        }
+    }, true);
+})();
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `app.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L309-359)</summary>
+
+**Path:** `Unknown file`
+
+```
+            });
+        }, duration);
+    };
+})();
+
+// ── G-2 y G-7: Modal Accessibility (Focus Trap, Escape Key, ARIA Roles) ──
+(function initModalAccessibility() {
+    // 1. Inyectar ARIA roles a todos los modales existentes
+    document.querySelectorAll('.modal').forEach(function(modal) {
+        if (!modal.hasAttribute('role')) modal.setAttribute('role', 'dialog');
+        if (!modal.hasAttribute('aria-modal')) modal.setAttribute('aria-modal', 'true');
+    });
+
+    // 2. Manejo global de teclado para modales activos
+    document.addEventListener('keydown', function(e) {
+        var activeModal = document.querySelector('.modal.show');
+        if (!activeModal) return;
+
+        // Escape para cerrar
+        if (e.key === 'Escape') {
+            activeModal.classList.remove('show');
+            return;
+        }
+
+        // Focus Trap con Tab
+        if (e.key === 'Tab') {
+            // Buscar elementos enfocables dentro del modal
+            var focusableElements = activeModal.querySelectorAll(
+                'a[href], button:not([disabled]), textarea:not([disabled]), input[type="text"]:not([disabled]), ' +
+                'input[type="radio"]:not([disabled]), input[type="checkbox"]:not([disabled]), select:not([disabled]), ' +
+                '[tabindex]:not([tabindex="-1"])'
+            );
+            var firstElement = focusableElements[0];
+            var lastElement = focusableElements[focusableElements.length - 1];
+
+            if (e.shiftKey) { // Shift + Tab
+                if (document.activeElement === firstElement) {
+                    if (lastElement) lastElement.focus();
+                    e.preventDefault();
+                }
+            } else { // Solo Tab
+                if (document.activeElement === lastElement) {
+                    if (firstElement) firstElement.focus();
+                    e.preventDefault();
+                }
+            }
+        }
+    });
+})();
+
+// ── G-6: Atributos aria-label automáticos ──
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Sept 2026, 10:01 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `app.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L539-624)</summary>
+
+**Path:** `Unknown file`
+
+```
+        }
+
+        updateConnectionStatus();
+    }
+
+    window.addEventListener('online', updateConnectionStatus);
+    window.addEventListener('offline', updateConnectionStatus);
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initConnectionStatus);
+    } else {
+        initConnectionStatus();
+    }
+})();
+
+// ── Generic Modal Accessibility (Focus Trap & Escape Close) ──────
+(function () {
+    'use strict';
+    document.addEventListener('keydown', function (e) {
+        var activeModal = document.querySelector('.modal.show');
+        if (!activeModal) return;
+
+        if (e.key === 'Escape') {
+            var closeBtn = activeModal.querySelector('.close-modal') || activeModal.querySelector('.btn-overlay-sm');
+            if (closeBtn) {
+                closeBtn.click();
+            } else {
+                activeModal.classList.remove('show');
+                document.body.classList.remove('modal-open');
+            }
+            return;
+        }
+
+        if (e.key === 'Tab') {
+            var focusables = activeModal.querySelectorAll('button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])');
+            if (focusables.length === 0) {
+                e.preventDefault();
+                return;
+            }
+            var first = focusables[0];
+            var last = focusables[focusables.length - 1];
+
+            if (e.shiftKey) { // Shift + Tab
+                if (document.activeElement === first) {
+                    last.focus();
+                    e.preventDefault();
+                }
+            } else { // Tab
+                if (document.activeElement === last) {
+                    first.focus();
+                    e.preventDefault();
+                }
+            }
+        }
+    });
+
+    var modalObserver = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
+            if (mutation.attributeName === 'class') {
+                var target = mutation.target;
+                if (target.classList.contains('show')) {
+                    var firstInput = target.querySelector('input, select, textarea, button');
+                    if (firstInput) {
+                        setTimeout(function() { firstInput.focus(); }, 100);
+                    }
+                }
+            }
+        });
+    });
+
+    // Observer starts after page loads
+    function runObserver() {
+        document.querySelectorAll('.modal').forEach(function (modal) {
+            modalObserver.observe(modal, { attributes: true, attributeFilter: ['class'] });
+        });
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', runObserver);
+    } else {
+        runObserver();
+    }
+
+    // Manejador global estandarizado para apertura del Logo LAESH en nueva pestaña
+    document.addEventListener('click', function(e) {
+        var a = e.target.closest('a.logo, a.portal-access-link');
+        if (a && a.getAttribute('target') === '_blank') {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Sept 2026, 10:01 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `labadmin.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L269-299)</summary>
+
+**Path:** `Unknown file`
+
+```
+                filtrarEstadisticasAdmin();
+            }
+        }
+
+        // GAP 3: abre solicitud_dac_impr.php en overlay iframe (Cierre EXCLUSIVO vía botón Cerrar)
+        function _abrirSolOverlay(url) {
+            var prev = document.getElementById('sol-overlay');
+            if (prev) prev.remove();
+            var overlay = document.createElement('div');
+            overlay.id = 'sol-overlay';
+            overlay.className = 'sol-overlay';
+            var iframe = document.createElement('iframe');
+            iframe.src = url;
+            iframe.title = 'Solicitud Digital de Análisis Clínicos';
+            overlay.appendChild(iframe);
+            document.body.appendChild(overlay);
+        }
+        function verSolicitudDigital(id, paciente, estudios, fecha) {
+            var p = new URLSearchParams();
+            p.set('id', id || '1');
+            p.set('paciente', paciente || '—');
+            p.set('fecha', fecha || new Date().toLocaleString());
+            var arr;
+            try { arr = JSON.parse(estudios); if (!Array.isArray(arr)) throw ''; }
+            catch(e) { arr = estudios ? [estudios] : []; }
+            p.set('estudios', JSON.stringify(arr));
+            _abrirSolOverlay('/laesh/rc/views/solicitud_dac_impr.php?' + p.toString());
+        }
+
+        function verResultados(id, paciente) {
+            document.getElementById('modal-resultados').classList.add('show');
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Sept 2026, 10:01 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L204-224)</summary>
+
+**Path:** `Unknown file`
+
+```
+                });
+            } catch(e) { /* Audio no soportado */ }
+        }
+
+        // Overlay iframe compartido — definido aquí para labadmin y medicos (Cierre EXCLUSIVO vía botón Cerrar)
+        function _abrirSolOverlay(url) {
+            var prev = document.getElementById('sol-overlay');
+            if (prev) prev.remove();
+            var overlay = document.createElement('div');
+            overlay.id = 'sol-overlay';
+            overlay.className = 'sol-overlay';
+            var iframe = document.createElement('iframe');
+            iframe.src = url;
+            iframe.title = 'Solicitud Digital de Análisis Clínicos';
+            overlay.appendChild(iframe);
+            document.body.appendChild(overlay);
+        }
+        function verSolicitudDigital(id, paciente, estudios, fecha) {
+            var medProf   = window.__MEDICO_PROFILE__ || {};
+            var nombreMed = medProf.nombre || 'Dr. Hedilberto Reyes Venegas';
+            var especMed  = medProf.especialidad || 'Med. Interna';
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1574-1595)</summary>
+
+**Path:** `Unknown file`
+
+```
+            }
+        });
+
+        var _mainContent = document.querySelector('.main-content');
+        if (_mainContent) {
+            _mainContent.addEventListener('scroll', function() {
+                if (openDrop) closeDrop();
+            }, { passive: true });
+        }
+
+        window.addEventListener('resize', function() {
+            if (openDrop) closeDrop();
+        }, { passive: true });
+
+        if (grid) {
+            var fichas = grid.querySelectorAll('.ficha-cat');
+            fichas.forEach(updateFichaCount);
+        }
+        updateChipsContainer();
+    })();
+});
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Sept 2026, 10:01 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1584-1595)</summary>
+
+**Path:** `Unknown file`
+
+```
+        window.addEventListener('resize', function() {
+            if (openDrop) closeDrop();
+        }, { passive: true });
+
+        if (grid) {
+            var fichas = grid.querySelectorAll('.ficha-cat');
+            fichas.forEach(updateFichaCount);
+        }
+        updateChipsContainer();
+    })();
+});
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Sept 2026, 10:02 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L844-860)</summary>
+
+**Path:** `Unknown file`
+
+```
+            cedula_profesional: <?= json_encode($medProfile['cedula_profesional'] ?? '') ?>,
+            cedula_especialidad: <?= json_encode($medProfile['cedula_especialidad'] ?? '') ?>
+        };
+    </script>
+
+    <script src="/laesh-web-assets-uipv1a/js/htmx.min.js"></script>
+    <script id="script-catalog-compiled" src="/laesh-web-assets-uipv1a/js/catalog-compiled.js?v=<?= time() ?>"></script>
+    <script src="/laesh-web-assets-uipv1a/js/app.js?v=<?= time() ?>" defer></script>
+    <script src="/laesh-web-assets-uipv1a/js/ws-client.js?v=<?= time() ?>" defer></script>
+    <script src="/laesh-web-assets-uipv1a/js/portal-footer.js?v=<?= time() ?>" defer></script>
+    <script src="/laesh-web-assets-uipv1a/js/sidebar-rail.js?v=<?= time() ?>" defer></script>
+    <script src="/laesh-web-assets-uipv1a/js/medicos.js?v=<?= time() ?>" defer></script>
+    <script src="/laesh-web-assets-uipv1a/js/medicos-a11y.js?v=<?= time() ?>" defer></script>
+
+</body>
+</html>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Sept 2026, 10:02 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `medicos-a11y.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 20 Sept 2026, 10:02 pm
 
 ---
 
@@ -11698,7 +17228,7 @@ print_r($stmt->fetchAll(\PDO::FETCH_ASSOC));
 ### Terminal Command Execution
 
 **Status:** Completed
-**Created:** 20 Sept 2026, 8:44 pm
+**Created:** 20 Sept 2026, 10:02 pm
 
 ---
 
@@ -11707,7 +17237,7 @@ print_r($stmt->fetchAll(\PDO::FETCH_ASSOC));
 ### Actions
 
 **Tool:** `view_file`
-**File:** `DB.php`
+**File:** `catalog-builder.js`
 
 <details>
 <summary>Metadata</summary>
@@ -11723,133 +17253,2853 @@ print_r($stmt->fetchAll(\PDO::FETCH_ASSOC));
 **Path:** `Unknown file`
 
 ```
-<?php
-// DB.php - Clase para conexión PDO e interacción transaccional con la base de datos
-
-namespace Common;
-
-use PDO;
-use PDOException;
-
-class DB {
-    private static ?PDO $instance = null;
-
-    /**
-     * Establece la conexión PDO singleton
-     */
-    public static function connect(): PDO {
-        if (self::$instance === null) {
-            $config = require __DIR__ . '/config.php';
-            $dbConf = $config['db'];
-
-            $dsn = sprintf(
-                "mysql:host=%s;port=%d;dbname=%s;charset=%s",
-                $dbConf['host'],
-                $dbConf['port'],
-                $dbConf['name'],
-                $dbConf['charset']
-            );
-
-            try {
-                self::$instance = new PDO($dsn, $dbConf['user'], $dbConf['pass'], [
-                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-                    PDO::ATTR_EMULATE_PREPARES => false,
-                    PDO::ATTR_PERSISTENT => true, // Conexión persistente (Pool a nivel PHP-FPM)
-                ]);
-                
-                // Configuración de compatibilidad e internacionalización (Español MX)
-                self::$instance->exec("SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci");
-                self::$instance->exec("SET time_zone = '-06:00'");
-                self::$instance->exec("SET lc_time_names = 'es_MX'");
-                self::$instance->exec("SET SESSION sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
-            } catch (PDOException $e) {
-                // Registrar error en el log local de emergencia
-                self::logEmergency("Error de conexión PDO: " . $e->getMessage());
-                throw $e;
-            }
-        }
-        return self::$instance;
+/* ── MÓDULO CONSTRUCTOR DE CATÁLOGOS (Abanicos Jerárquicos) ── */
+document.addEventListener('DOMContentLoaded', function() {
+    // Fallback de showToast si no está definido en el entorno principal
+    if (typeof window.showToast !== 'function') {
+        window.showToast = function(msg, type) {
+            alert((type === 'error' || type === 'warn' ? '⚠️ ' : '✅ ') + msg);
+        };
     }
 
-    /**
-     * Registra una traza de fallo de consulta SQL en la tabla fallback_log
-     * Adaptado del estándar Conexion.php (cbm 2026)
-     *
-     * @param string $nivel Nivel del log ('ERROR', 'FALLBACK', 'WARN')
-     * @param string $query Sentencia SQL ejecutada
-     * @param string|null $errorMsg Mensaje de error retornado por PDO
-     */
-    public static function logFallback(string $nivel, string $query, ?string $errorMsg = null): void {
-        try {
-            $pdo = self::connect();
-            
-            // Determinar tipo de query (SELECT, INSERT, UPDATE, etc.)
-            $qTrim = ltrim($query);
-            $firstWord = strtoupper(strtok($qTrim, " \t\n\r"));
-            $typeMap = ['SELECT'=>'SELECT','INSERT'=>'INSERT','UPDATE'=>'UPDATE','DELETE'=>'DELETE','CALL'=>'CALL'];
-            $queryType = $typeMap[$firstWord] ?? 'OTHER';
+    var btnViewTable = document.getElementById('btn-view-table');
+    var btnViewBuilder = document.getElementById('btn-view-builder');
+    var btnViewSettings = document.getElementById('btn-view-settings');
+    var viewBuilder = document.getElementById('view-catalog-builder');
+    var viewSettings = document.getElementById('view-catalog-settings');
+    var viewTable = document.getElementById('view-catalog-table');
+    var btnSaveFull = document.getElementById('btn-guardar-catalogo-full');
+    var btnAddEstudio = document.getElementById('btn-agregar-estudio');
+    
+    // Panel base
+    var panelCatalogos = document.getElementById('panel-catalogos');
+    if (!viewBuilder && !viewTable && !panelCatalogos) return;
 
-            // Hash CRC32 para agrupar repeticiones en auditorías
-            $queryHash = substr(dechex(crc32($query)), 0, 8);
+    var builderSearchContainer = document.getElementById('builder-search-container');
+    var flatSearchContainer = document.getElementById('flat-search-container');
+    var settingsMenuContainer = document.getElementById('settings-menu-container');
+```
 
-            // Obtener origen real (archivo y línea del caller) omitiendo frames internos de DB
-            $origen = 'unknown';
-            $funcion = null;
-            $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 5);
-            foreach ($backtrace as $frame) {
-                $file = $frame['file'] ?? '';
-                if ($file !== '' && strpos($file, 'DB.php') === false) {
-                    // Remover path absoluto del host para legibilidad
-                    $short = str_replace($_SERVER['DOCUMENT_ROOT'] ?? '', '', $file);
-                    $line = $frame['line'] ?? '';
-                    $origen = ltrim($short, '/') . ($line ? ":$line" : '');
-                    if (isset($frame['function'])) {
-                        $funcion = ($frame['class'] ?? '') . '::' . $frame['function'];
-                    }
-                    break;
-                }
-            }
+</details>
 
-            // Inserción directa segura
-            $stmt = $pdo->prepare("
-                INSERT INTO `fallback_log` 
-                (`nivel`, `origen`, `funcion`, `query_type`, `query_hash`, `query_text`, `error_msg`, `fecha`) 
-                VALUES (:nivel, :origen, :funcion, :query_type, :query_hash, :query_text, :error_msg, NOW())
-            ");
-            $stmt->execute([
-                ':nivel' => $nivel,
-                ':origen' => substr($origen, 0, 120),
-                ':funcion' => $funcion ? substr($funcion, 0, 80) : null,
-                ':query_type' => $queryType,
-                ':query_hash' => $queryHash,
-                ':query_text' => $query,
-                ':error_msg' => $errorMsg ? substr($errorMsg, 0, 300) : null,
-            ]);
-        } catch (PDOException $e) {
-            // Si la persistencia en DB falla, registrar en el archivo de emergencia local
-            self::logEmergency("Fallo en logFallback: " . $e->getMessage() . " | Query: " . $query);
-        }
-    }
+---
 
-    /**
-     * Escribe un mensaje de emergencia directamente al archivo plano local
-     */
-    private static function logEmergency(string $message): void {
-        $config = require __DIR__ . '/config.php';
-        $logPath = $config['app']['log_path'];
-        $logDir = dirname($logPath);
-        if (!is_dir($logDir)) {
-            @mkdir($logDir, 0755, true);
-        }
-        $logLine = sprintf("[%s] [EMERGENCY_DB] %s\n", date('Y-m-d H:i:s'), $message);
-        @file_put_contents($logPath, $logLine, FILE_APPEND | LOCK_EX);
-    }
-}
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Sept 2026, 10:02 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 20 Sept 2026, 10:02 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `walkthrough.md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# Walkthrough: Consolidación Documental en `Tecnica_Seguridad_Integral.html`
+
+Se ha realizado el recuento y la actualización exhaustiva del documento maestro [Tecnica_Seguridad_Integral.html](file:///home/carlos/GitHub/caelitandem_home/portafolio-dev-2026/blocklabgd/v1.2/et/Tecnica_Seguridad_Integral.html) para consolidar todas las capas de seguridad revisitadas e implementadas en el ecosistema LAESH Bloc Digital.
+
+---
+
+## 📑 Secciones Actualizadas e Incorporadas
+
+### 1. Índice y Matriz de Trazabilidad (§sec0)
+- Inclusión de las subsecciones **§4.12** y **§4.13** en el índice de contenidos.
+- Actualización de la **Matriz de Trazabilidad por Ambiente**, integrando:
+  - *Criptografía en 5 Capas (Contraseñas / NIPs)*.
+  - *Autenticación, Sesión y Revocación Atómica en Cascada*.
+  - *Protección Anti-CSRF Multimodal*.
+
+### 2. Centralización Anti-CSRF Multimodal (§3.3)
+- Documentación de la cobertura ampliada de `\Common\CsrfGuard::isValid(rotate: false, submittedToken: $csrf)` a **24 sitios y endpoints** de mutación (`rc/index.php`, `md/index.php`, `admrc/index.php`, `sistema.php`, `login.php` y APIs REST).
+- Soporte estandarizado para formularios HTMX, llamadas AJAX, payloads JSON crudos (`php://input`) y encabezados `X-CSRF-Token`.
+
+### 3. Nueva Subsección: §4.12 — Arquitectura Criptográfica en 5 Capas
+Detalla el modelo de defensa en profundidad para la gestión y cifrado de contraseñas:
+1. **Hashing con Pepper:** Bcrypt (`$2y$`) + Pre-hash HMAC-SHA-512 en `PasswordHash.php` (neutraliza truncamiento de 72 bytes, bytes nulos y tablas Rainbow).
+2. **Salting Dinámico:** Salt CSPRNG aleatorio de 128 bits único por usuario.
+3. **Cero Texto Plano:** Sanitización en base de datos, vistas y archivos de log (`sys_logs`, `app.log`, `fallback_log`).
+4. **Anti-Fuerza Bruta:** Rate Limiting por Token Bucket en `users_throttling` + validación de clave actual en cambio propio.
+5. **Revocación en Cascada:** Force Logout inmediato (`users.force_logout++`), purga de `users_remembered`, revocación de tokens JWT en OPcache RAM L2 y desconexión activa de WebSockets.
+- **Canal de Transporte:** Cifrado HTTPS / TLS (1.3/1.2) con cookies blindadas (`Secure`, `HttpOnly`, `SameSite=Strict`) y cabeceras HSTS/CSP.
+
+### 4. Nueva Subsección: §4.13 — Protocolo de Estados Médicos y Trazabilidad Dual-Path
+- **Pausar Médico:** `CALL CambiarEstadoMedico(?, 2)` + `users.status = 2 (SUSPENDED)` + `users.force_logout++` + `DELETE users_remembered` + `JwtManager::revokeAllUserTokens()` + cierre de WebSockets vía `Notifier::revokeSession()`.
+- **Reactivar Médico:** `CALL CambiarEstadoMedico(?, 1)` + `users.status = 0 (NORMAL)` + limpieza de `users_throttling`.
+- **Trazabilidad y Observabilidad:** Registro dual en `sys_logs` y `app.log` con `Logger::logAlways` + persistencia de excepciones en `fallback_log` con `DB::logFallback` (query, hash CRC32 y debug backtrace).
+- **Retroalimentación UI:** Respuestas JSON estructuradas con `ack: true` vinculadas al Toaster de recepción y resalte temporal de filas (`row-saved-highlight`).
 
 ```
 
 </details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 20 Sept 2026, 10:02 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<!DOCTYPE html>
+<?php
+/**
+ * md/views/medicos.php — Plantilla Plates / View PHP del Portal Médico
+ * Fuente SSOT HTML: website/uipv1/medicos.html (R15.1)
+ */
+if (!function_exists('h')) {
+    function h($v): string {
+        return htmlspecialchars((string)($v ?? ''), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+    }
+}
+
+// SQL directo ELIMINADO (2026-09-18): la grilla "20 Est.Med" ahora se puebla
+// EXCLUSIVAMENTE client-side desde window.laeshTop20EstMed (catalog-compiled.js),
+// igual que la búsqueda de estudios (medicos.js: populateMandatoryGrid()).
+// Fuente única de verdad = catalog-compiled.js, refrescado vía WS al guardar en admin.
+?>
+<html lang="es-MX">
+<head>
+    <meta charset="UTF-8">
+    <meta name="color-scheme" content="light">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0052B7">
+    <meta name="description" content="Portal de médicos LAESH — consulta de órdenes, estadísticas y catálogo de estudios.">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; script-src 'self' 'unsafe-inline'; connect-src 'self' ws: wss:;">
+    <title>Portal Médico — LAESH</title>
+    <link rel="icon" type="image/svg+xml" href="/laesh-web-assets-uipv1a/img/favicon.svg">
+
+    <!-- PERF-03: Preload de hojas de estilo críticas para evitar FOUC -->
+    <link rel="preload" href="/laesh-web-assets-uipv1a/css/tokens.css?v=<?= time() ?>" as="style">
+    <link rel="preload" href="/laesh-web-assets-uipv1a/css/fonts.css?v=<?= time() ?>" as="style">
+```
+
+</details>
+
+---
+
+## User Request
+
+auto auditate, para identificar inyeccion de bugs, gaos, impactos negativos, fricciones,etc
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `medicos.php`
+**Language:** php
+
+**Open Files:**
+- `app.js`
+- `labadmin.js`
+- `medicos.js`
+- `medicos.php`
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+A comprehensive self-audit will be performed, focusing on recent code modifications. The first step involves a meticulous review of the specified files to identify potential bugs, gaps, negative impacts, and points of friction.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `a11y-live`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.079297573s
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 20 Sept 2026, 10:04 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1584-1609)</summary>
+
+**Path:** `Unknown file`
+
+```
+        window.addEventListener('resize', function() {
+            if (openDrop) closeDrop();
+        }, { passive: true });
+
+        if (grid) {
+            var fichas = grid.querySelectorAll('.ficha-cat');
+            fichas.forEach(updateFichaCount);
+        }
+        updateChipsContainer();
+
+        /* ── Accesibilidad A11Y: Anuncios aria-live y cambio de panel ── */
+        var a11yLive = document.getElementById('a11y-live');
+        function announceA11y(msg) {
+            if (!a11yLive) return;
+            a11yLive.textContent = '';
+            requestAnimationFrame(function() { a11yLive.textContent = msg; });
+        }
+        document.querySelectorAll('[data-panel]').forEach(function(navItem) {
+            navItem.addEventListener('click', function() {
+                var label = navItem.getAttribute('aria-label') || navItem.textContent.trim();
+                announceA11y('Panel activo: ' + label);
+            });
+        });
+    })();
+});
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Reviewing `medicos-a11y.js` to see if additional relevant code exists. Recalling the `scrollCloseScheduled` variable and the `closeAllFichaDropdowns` function. The function iterates through open dropdowns, removing the `open` class and resetting the `aria-expanded` attribute on the trigger button if it exists.
+
+
+The existing `medicos.js` code handles dropdown closure on the main content's scroll; however, adding a `capture: true` listener to `document` addresses potential scroll events in other viewports. This provides a more robust solution for closing dropdowns. Analyzing the usage of `_abrirSolOverlay` function in `app.js` and `labadmin.js` is next.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `app.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.206619151s
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L314-359)</summary>
+
+**Path:** `Unknown file`
+
+```
+// ── G-2 y G-7: Modal Accessibility (Focus Trap, Escape Key, ARIA Roles) ──
+(function initModalAccessibility() {
+    // 1. Inyectar ARIA roles a todos los modales existentes
+    document.querySelectorAll('.modal').forEach(function(modal) {
+        if (!modal.hasAttribute('role')) modal.setAttribute('role', 'dialog');
+        if (!modal.hasAttribute('aria-modal')) modal.setAttribute('aria-modal', 'true');
+    });
+
+    // 2. Manejo global de teclado para modales activos
+    document.addEventListener('keydown', function(e) {
+        var activeModal = document.querySelector('.modal.show');
+        if (!activeModal) return;
+
+        // Escape para cerrar
+        if (e.key === 'Escape') {
+            var closeBtn = activeModal.querySelector('.close-modal') || activeModal.querySelector('.btn-overlay-sm');
+            if (closeBtn) {
+                closeBtn.click();
+            } else {
+                activeModal.classList.remove('show');
+                document.body.classList.remove('modal-open');
+            }
+            return;
+        }
+
+        // Focus Trap con Tab
+        if (e.key === 'Tab') {
+            // Buscar elementos enfocables dentro del modal
+            var focusableElements = activeModal.querySelectorAll(
+                'a[href], button:not([disabled]), textarea:not([disabled]), input[type="text"]:not([disabled]), ' +
+                'input[type="radio"]:not([disabled]), input[type="checkbox"]:not([disabled]), select:not([disabled]), ' +
+                '[tabindex]:not([tabindex="-1"])'
+            );
+            if (focusableElements.length === 0) {
+                e.preventDefault();
+                return;
+            }
+            var firstElement = focusableElements[0];
+            var lastElement = focusableElements[focusableElements.length - 1];
+
+            if (e.shiftKey) { // Shift + Tab
+                if (document.activeElement === firstElement) {
+                    if (lastElement) lastElement.focus();
+                    e.preventDefault();
+                }
+            } else { // Solo Tab
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+`initModalAccessibility()` calls `document.querySelectorAll('.modal')` when `app.js` loads. This raises a question: what happens if modals are added dynamically after the initial load, or if `app.js` runs before the DOM is ready? However, `app.js` loads with `defer`, ensuring the initial HTML DOM is parsed first. The query is safe.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `Flight::route`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.047624304s
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 20 Sept 2026, 10:04 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `Flight::route`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 20 Sept 2026, 10:04 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `verSolicitudDigital`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 20 Sept 2026, 10:04 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1569-1609)</summary>
+
+**Path:** `Unknown file`
+
+```
+                if (e.shiftKey && document.activeElement === first) {
+                    e.preventDefault(); last.focus();
+                } else if (!e.shiftKey && document.activeElement === last) {
+                    e.preventDefault(); first.focus();
+                }
+            }
+        });
+
+        var _mainContent = document.querySelector('.main-content');
+        if (_mainContent) {
+            _mainContent.addEventListener('scroll', function() {
+                if (openDrop) closeDrop();
+            }, { passive: true });
+        }
+
+        window.addEventListener('resize', function() {
+            if (openDrop) closeDrop();
+        }, { passive: true });
+
+        if (grid) {
+            var fichas = grid.querySelectorAll('.ficha-cat');
+            fichas.forEach(updateFichaCount);
+        }
+        updateChipsContainer();
+
+        /* ── Accesibilidad A11Y: Anuncios aria-live y cambio de panel ── */
+        var a11yLive = document.getElementById('a11y-live');
+        function announceA11y(msg) {
+            if (!a11yLive) return;
+            a11yLive.textContent = '';
+            requestAnimationFrame(function() { a11yLive.textContent = msg; });
+        }
+        document.querySelectorAll('[data-panel]').forEach(function(navItem) {
+            navItem.addEventListener('click', function() {
+                var label = navItem.getAttribute('aria-label') || navItem.textContent.trim();
+                announceA11y('Panel activo: ' + label);
+            });
+        });
+    })();
+});
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Syntactical analysis of PHP and JS code revealed no errors; return types, arguments, and function calls are synchronized. Confirmed the existence and correct linkage of the `#a11y-live` element in `medicos.php`. Additionally, verified that the deleted routes in a particular file were completely orphaned HTMX endpoints, with no references in templates.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.158439792s
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+Me ha salido este msg de error:﻿
+labadmin.js?v=1789997574:254 Uncaught TypeError: Cannot set properties of null (setting 'innerText')
+    at filtrarEstadisticasAdmin (labadmin.js?v=1789997574:254:70)
+    at HTMLDocument.<anonymous> (labadmin.js?v=1789997574:892:57)
+
+---
+
+### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
+
+**Status:** Completed
+**Created:** 21 Sept 2026, 7:29 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `labadmin.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L234-274)</summary>
+
+**Path:** `Unknown file`
+
+```
+                                <div class="progress-label">
+                                    <span>${med.nombre}</span>
+                                    <span>${pct}% (${med.conteo} órdenes)</span>
+                                </div>
+                                <div class="progress-track">
+                                    <div class="bar-fill ${color}" style="width: ${pct}%;"></div>
+                                </div>
+                            </div>`;
+                        });
+                        medContainer.innerHTML = medHtml;
+                    }
+                }
+                
+            } catch (err) {
+                console.error('Error fetching estadísticas:', err);
+                document.getElementById('stat-solicitudes-admin').innerText = 'Error';
+                if (statCanceladasEl) statCanceladasEl.innerText = 'Error';
+                if (catContainer) catContainer.innerHTML = '<div class="text-center" style="color:var(--color-danger); padding:2rem;">Error al cargar</div>';
+                if (medContainer) medContainer.innerHTML = '<div class="text-center" style="color:var(--color-danger); padding:2rem;">Error al cargar</div>';
+            }
+        }
+
+        function manejarCambioFiltroAdmin() {
+            const select = document.getElementById('filtro-periodo-admin');
+            const rangeContainer = document.getElementById('rango-fechas-admin');
+            if (select.value === 'fecha') {
+                rangeContainer.style.display = 'inline-flex';
+                const inputInicio = document.getElementById('fecha-inicio-admin');
+                try {
+                    inputInicio.showPicker();
+                } catch (e) {
+                    inputInicio.click();
+                }
+            } else {
+                rangeContainer.style.display = 'none';
+                filtrarEstadisticasAdmin();
+            }
+        }
+
+        // GAP 3: abre solicitud_dac_impr.php en overlay iframe (centralizado en app.js)
+        var _abrirSolOverlay = window._abrirSolOverlay || function(url) {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `labadmin.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L159-239)</summary>
+
+**Path:** `Unknown file`
+
+```
+                const fInicio = inicio.split('-').reverse().join('/');
+                const fFin = fin.split('-').reverse().join('/');
+                lblText = `${fInicio} al ${fFin}`;
+            }
+            
+            // Set loading states
+            document.getElementById('stat-solicitudes-admin').innerText = '...';
+            document.getElementById('stat-atencion-admin').innerText = '...';
+            document.getElementById('stat-listos-admin').innerText = '...';
+            document.getElementById('stat-cerradas-admin').innerText = '...';
+            const statCanceladasEl = document.getElementById('stat-canceladas-admin');
+            if (statCanceladasEl) statCanceladasEl.innerText = '...';
+            document.getElementById('lbl-solicitudes-admin').innerText = `TOTAL SOLICITUDES (${lblText})`;
+            
+            const catContainer = document.getElementById('container-categorias-stats');
+            const medContainer = document.getElementById('container-medicos-stats');
+            
+            if (catContainer) catContainer.innerHTML = '<div class="text-center txt-muted" style="padding:2rem;">Cargando categorías...</div>';
+            if (medContainer) medContainer.innerHTML = '<div class="text-center txt-muted" style="padding:2rem;">Cargando médicos...</div>';
+            
+            try {
+                const response = await fetch(`/laesh/rc/api/estadisticas?rango=${val}&inicio=${inicio}&fin=${fin}`);
+                if (!response.ok) throw new Error('Error en API de estadísticas');
+                
+                const data = await response.json();
+                if (!data.success) throw new Error(data.error || 'Error interno');
+                
+                // Totals
+                document.getElementById('stat-solicitudes-admin').innerText = data.totales.solicitudes.toLocaleString();
+                document.getElementById('stat-atencion-admin').innerText = data.totales.atencion.toLocaleString();
+                document.getElementById('stat-listos-admin').innerText = data.totales.listos.toLocaleString();
+                document.getElementById('stat-cerradas-admin').innerText = data.totales.cerradas.toLocaleString();
+                if (statCanceladasEl) statCanceladasEl.innerText = (data.totales.canceladas ?? 0).toLocaleString();
+
+                // Categories
+                if (catContainer) {
+                    if (!data.categorias || data.categorias.length === 0) {
+                        catContainer.innerHTML = '<div class="text-center txt-muted" style="padding:2rem;">No hay estudios en este periodo</div>';
+                    } else {
+                        let catHtml = '';
+                        const catColors = ['bar-color-green', 'bar-color-blue', 'bar-color-amber'];
+                        const totalCats = data.categorias.reduce((sum, c) => sum + parseInt(c.conteo, 10), 0) || 1;
+                        
+                        data.categorias.forEach((cat, idx) => {
+                            const pct = Math.round((parseInt(cat.conteo, 10) / totalCats) * 100);
+                            const color = catColors[idx % catColors.length];
+                            catHtml += `
+                            <div>
+                                <div class="progress-label">
+                                    <span>${cat.nombre}</span>
+                                    <span>${pct}% (${cat.conteo} estudios)</span>
+                                </div>
+                                <div class="progress-track">
+                                    <div class="bar-fill ${color}" style="width: ${pct}%;"></div>
+                                </div>
+                            </div>`;
+                        });
+                        catContainer.innerHTML = catHtml;
+                    }
+                }
+                
+                // Medicos
+                if (medContainer) {
+                    if (!data.medicos || data.medicos.length === 0) {
+                        medContainer.innerHTML = '<div class="text-center txt-muted" style="padding:2rem;">No hay órdenes en este periodo</div>';
+                    } else {
+                        let medHtml = '';
+                        const medColors = ['bar-color-green', 'bar-color-blue', 'bar-color-amber', 'bar-color-purple', 'bar-color-red'];
+                        const totalMeds = data.medicos.reduce((sum, m) => sum + parseInt(m.conteo, 10), 0) || 1;
+                        
+                        data.medicos.forEach((med, idx) => {
+                            const pct = Math.round((parseInt(med.conteo, 10) / totalMeds) * 100);
+                            const color = medColors[idx % medColors.length];
+                            medHtml += `
+                            <div>
+                                <div class="progress-label">
+                                    <span>${med.nombre}</span>
+                                    <span>${pct}% (${med.conteo} órdenes)</span>
+                                </div>
+                                <div class="progress-track">
+                                    <div class="bar-fill ${color}" style="width: ${pct}%;"></div>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `labadmin.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L879-909)</summary>
+
+**Path:** `Unknown file`
+
+```
+                    fecha: cells[4] ? cells[4].textContent.trim() : ''
+                };
+            }
+        }
+
+        if (action === 'ver-resultados')     { verResultados(id, order ? order.paciente : ''); }
+        else if (action === 'ver-solicitud')  {
+            verSolicitudDigital(
+                id,
+                order ? order.paciente : '',
+                order ? order.estudios : [],
+                order ? order.fecha : ''
+            );
+        }
+    }
+
+    // Delegación a nivel documento para clicks de acciones (folio, resultados, etc.) resistente a swaps HTMX
+    document.addEventListener('click', function(e) {
+        var el = e.target.closest('#tabla-recepcion [data-action], #tabla-recepcion-anteriores [data-action]');
+        if (!el) return;
+        var action = el.getAttribute('data-action');
+        if (action === 'ver-solicitud' || action === 'ver-resultados') {
+            e.preventDefault();
+            _orderAction(action, el.getAttribute('data-id'), el);
+        }
+    });
+
+    // Tabla Plana eliminada, no hay listener para tabla-catalogo-admin
+    // Inicializar barras de reportes vía CSSOM (CSP-safe: evita inline style en HTML)
+    if (typeof filtrarEstadisticasAdmin === 'function') filtrarEstadisticasAdmin();
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The code handles an error during the fetching of "estadísticas." It logs the error to the console and updates the text of several HTML elements to "Error," suggesting a problem retrieving data related to statistics. This error handling ensures the UI reflects the failure to obtain the data.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `stat-solicitudes-admin`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.084620387s
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 21 Sept 2026, 7:29 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `labadmin.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L134-179)</summary>
+
+**Path:** `Unknown file`
+
+```
+            const q = String(filterQuery).toLowerCase();
+            rows.forEach(r => {
+                const text = r.innerText.toLowerCase();
+                if (!q || text.includes(q)) {
+                    r.style.display = '';
+                } else {
+                    r.style.display = 'none';
+                }
+            });
+        }
+
+        async function filtrarEstadisticasAdmin() {
+            const select = document.getElementById('filtro-periodo-admin');
+            const val = select.value;
+            
+            let lblText = val.toUpperCase();
+            let inicio = '';
+            let fin = '';
+            
+            if (val === 'fecha') {
+                inicio = document.getElementById('fecha-inicio-admin').value;
+                fin = document.getElementById('fecha-fin-admin').value;
+                
+                if (!inicio || !fin) return; // Wait for both dates
+                
+                const fInicio = inicio.split('-').reverse().join('/');
+                const fFin = fin.split('-').reverse().join('/');
+                lblText = `${fInicio} al ${fFin}`;
+            }
+            
+            // Set loading states
+            document.getElementById('stat-solicitudes-admin').innerText = '...';
+            document.getElementById('stat-atencion-admin').innerText = '...';
+            document.getElementById('stat-listos-admin').innerText = '...';
+            document.getElementById('stat-cerradas-admin').innerText = '...';
+            const statCanceladasEl = document.getElementById('stat-canceladas-admin');
+            if (statCanceladasEl) statCanceladasEl.innerText = '...';
+            document.getElementById('lbl-solicitudes-admin').innerText = `TOTAL SOLICITUDES (${lblText})`;
+            
+            const catContainer = document.getElementById('container-categorias-stats');
+            const medContainer = document.getElementById('container-medicos-stats');
+            
+            if (catContainer) catContainer.innerHTML = '<div class="text-center txt-muted" style="padding:2rem;">Cargando categorías...</div>';
+            if (medContainer) medContainer.innerHTML = '<div class="text-center txt-muted" style="padding:2rem;">Cargando médicos...</div>';
+            
+            try {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `labadmin.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 21 Sept 2026, 7:29 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `labadmin.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L889-929)</summary>
+
+**Path:** `Unknown file`
+
+```
+                order ? order.estudios : [],
+                order ? order.fecha : ''
+            );
+        }
+    }
+
+    // Delegación a nivel documento para clicks de acciones (folio, resultados, etc.) resistente a swaps HTMX
+    document.addEventListener('click', function(e) {
+        var el = e.target.closest('#tabla-recepcion [data-action], #tabla-recepcion-anteriores [data-action]');
+        if (!el) return;
+        var action = el.getAttribute('data-action');
+        if (action === 'ver-solicitud' || action === 'ver-resultados') {
+            e.preventDefault();
+            _orderAction(action, el.getAttribute('data-id'), el);
+        }
+    });
+
+    // Tabla Plana eliminada, no hay listener para tabla-catalogo-admin
+    // Inicializar barras de reportes vía CSSOM (CSP-safe: evita inline style en HTML)
+    if (typeof filtrarEstadisticasAdmin === 'function') filtrarEstadisticasAdmin();
+
+    // autocomplete buscador admin (MariaDB SSOT)
+    var autoBoxAdmin = document.getElementById('autocomplete-list');
+    if (autoBoxAdmin) autoBoxAdmin.addEventListener('click', function(e) {
+        var el = e.target.closest('[data-action="search-select-admin"]');
+        if (!el) return;
+        var mId = el.getAttribute('data-id');
+        var order = window.__RC_SEARCH_RESULTS__ ? window.__RC_SEARCH_RESULTS__[mId] : null;
+        if (order) {
+            handleSearchSelectAdmin(order.id, order.paciente, order.estudios, order.fecha, order.estado, order.folio);
+        } else {
+            handleSearchSelectAdmin(mId, mId, '', '', 'Emitida', mId);
+        }
+    });
+
+    // ─────────────────────────────────────────────────────────────
+    // Operations Dropdown Menu in Doctors Table
+    // ─────────────────────────────────────────────────────────────
+    (function initDoctorsOperations() {
+        var table = document.getElementById('tabla-medicos');
+        if (!table) return;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `filtro-periodo-admin|stat-solicitudes-admin|stat-atencion-admin|stat-listos-admin|stat-cerradas-admin|lbl-solicitudes-admin`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 21 Sept 2026, 7:30 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `id="stat|panel-reportes|id="filtro`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 21 Sept 2026, 7:30 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `reportes`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 21 Sept 2026, 7:30 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `labadmin.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L479-559)</summary>
+
+**Path:** `Unknown file`
+
+```
+                     y ESTA copia real, con contenedores dinámicos id=container-*
+                     que sí llena filtrarEstadisticasAdmin(), nunca llegaba a
+                     mostrarse. La copia vieja (y un contenedor id panel-catalogos
+                     huérfano que había quedado abierto junto a ella) se eliminó completa. -->
+                <div id="panel-reportes" class="tab-panel d-none">
+                    <div class="modal-sect-hd">
+                        <h2 class="txt-pgd mb-0">Reportes y Estadísticas</h2>
+                        <div class="d-inline-flex-ac">
+                            <label for="filtro-periodo-admin" class="txt-muted-sm">Periodo:</label>
+                            <select id="filtro-periodo-admin" class="select-sm select-sm--bg">
+                                <option value="dia">Hoy</option>
+                                <option value="semana">Esta Semana</option>
+                                <option value="mes" selected>Este Mes</option>
+                                <option value="anio">Este Año</option>
+                                <option value="fecha">Fecha</option>
+                            </select>
+                            <span id="rango-fechas-admin" class="d-none flex-ic-8">
+                                <input type="date" id="fecha-inicio-admin" class="select-sm" onchange="filtrarEstadisticasAdmin()">
+                                <span class="txt-muted-sm">al</span>
+                                <input type="date" id="fecha-fin-admin" class="select-sm" onchange="filtrarEstadisticasAdmin()">
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="grid-auto-200mb">
+                        <div class="card mb-0 ta-center pa-5">
+                            <div id="lbl-solicitudes-admin" class="txt-muted-xs-upper">Total Solicitudes Emitidas</div>
+                            <div id="stat-solicitudes-admin" class="stat-num stat-num--pgd">-</div>
+                        </div>
+                        <div class="card mb-0 ta-center pa-5">
+                            <div class="txt-muted-xs-upper">En Atención</div>
+                            <div id="stat-atencion-admin" class="stat-num stat-num--atn">-</div>
+                        </div>
+                        <div class="card mb-0 ta-center pa-5">
+                            <div class="txt-muted-xs-upper">Resultados Listos</div>
+                            <div id="stat-listos-admin" class="stat-num stat-num--lst">-</div>
+                        </div>
+                        <div class="card mb-0 ta-center pa-5">
+                            <div class="txt-muted-xs-upper">Cerradas Con Éxito</div>
+                            <div id="stat-cerradas-admin" class="stat-num stat-num--main">-</div>
+                        </div>
+                        <div class="card mb-0 ta-center pa-5">
+                            <div class="txt-muted-xs-upper">Canceladas</div>
+                            <div id="stat-canceladas-admin" class="stat-num stat-num--danger">-</div>
+                        </div>
+                    </div>
+
+                    <div class="grid-auto-400">
+                        <!-- Distribución por Categorías -->
+                        <div class="card mb-0">
+                            <h3 class="txt-pgd-lg">Distribución de Estudios por Categoría</h3>
+                            <div class="col-group" id="container-categorias-stats">
+                                <div class="text-center txt-muted" style="padding:2rem;">Cargando categorías...</div>
+                            </div>
+                        </div>
+
+                        <!-- Top 5 Médicos con más Órdenes Remitidas -->
+                        <div class="card mb-0">
+                            <h3 class="txt-pgd-lg">Top 5 Médicos con más Órdenes Remitidas</h3>
+                            <div class="col-group" id="container-medicos-stats">
+                                <div class="text-center txt-muted" style="padding:2rem;">Cargando médicos...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panel 5: Catálogos (Scope 14) -->
+                <div id="panel-catalogos" class="tab-panel d-none">
+                    <!-- Fila 1: Pestañas superiores (100% Idénticas a gestion_web.php) -->
+                    <div class="cms-tabs" id="toggle-catalog-view" role="tablist" aria-label="Secciones de Catálogos de Análisis">
+                        <button type="button" class="cms-tab active" data-view="table" id="btn-view-table">1. Tabla</button>
+                        <button type="button" class="cms-tab" id="menu-gabinetes">2. Areas</button>
+                        <button type="button" class="cms-tab" id="menu-igabinetes">3. I.Areas</button>
+                        <button type="button" class="cms-tab" id="menu-20estmed">4. 20 Est.Med</button>
+                    </div>
+
+                    <!-- Fila 2: Título de Sección y Controles (Total, Buscador, + Añadir) en un solo renglón -->
+                    <div class="cms-panel-header" style="margin-top: 1rem; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                        <h3 class="cms-h3" style="margin: 0; font-size: 1.35rem; font-weight: 800; color: #0052B7;">Catálogos de Análisis</h3>
+                        
+                        <div style="display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; justify-content: flex-end;">
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The error "Cannot set properties of null" on line 254 within `filtrarEstadisticasAdmin` suggests a DOM element is not found where expected. Investigating lines 146-254 of `labadmin.js`, specifically the `filtrarEstadisticasAdmin` function, aims to identify the specific element with `innerText` being targeted. The `document.getElementById` calls are likely sources of the null value.
+
+
+A conditional statement determines the text to be displayed and initiates loading states within the UI elements. Specifically, the code checks if a date range is selected, then formats and displays the chosen date range label. Several DOM elements are then targeted by their IDs to update their content with loading indicators; this ensures the user is informed of the ongoing process while data is fetched. Finally, content containers for category and medical statistics are initialized with a "loading" message.
+
+
+The code attempts to fetch statistical data and update several DOM elements with the results or an error message if the fetch fails. A conditional check `if (statSolEl)` now guards the `innerText` assignment, preventing the "null" error.  The same null-check pattern has been applied to other potentially null DOM elements (`statAtnEl`, `statLstEl`, etc.) to prevent similar errors. Finally, error handling updates UI elements if the API call fails.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `labadmin.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.309751857s
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L144-255)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+        async function filtrarEstadisticasAdmin() {
+            const select = document.getElementById('filtro-periodo-admin');
+            const val = select.value;
+            
+            let lblText = val.toUpperCase();
+            let inicio = '';
+            let fin = '';
+            
+            if (val === 'fecha') {
+                inicio = document.getElementById('fecha-inicio-admin').value;
+                fin = document.getElementById('fecha-fin-admin').value;
+                
+                if (!inicio || !fin) return; // Wait for both dates
+                
+                const fInicio = inicio.split('-').reverse().join('/');
+                const fFin = fin.split('-').reverse().join('/');
+                lblText = `${fInicio} al ${fFin}`;
+            }
+            
+            // Set loading states
+            document.getElementById('stat-solicitudes-admin').innerText = '...';
+            document.getElementById('stat-atencion-admin').innerText = '...';
+            document.getElementById('stat-listos-admin').innerText = '...';
+            document.getElementById('stat-cerradas-admin').innerText = '...';
+            const statCanceladasEl = document.getElementById('stat-canceladas-admin');
+            if (statCanceladasEl) statCanceladasEl.innerText = '...';
+            document.getElementById('lbl-solicitudes-admin').innerText = `TOTAL SOLICITUDES (${lblText})`;
+            
+            const catContainer = document.getElementById('container-categorias-stats');
+            const medContainer = document.getElementById('container-medicos-stats');
+            
+            if (catContainer) catContainer.innerHTML = '<div class="text-center txt-muted" style="padding:2rem;">Cargando categorías...</div>';
+            if (medContainer) medContainer.innerHTML = '<div class="text-center txt-muted" style="padding:2rem;">Cargando médicos...</div>';
+            
+            try {
+                const response = await fetch(`/laesh/rc/api/estadisticas?rango=${val}&inicio=${inicio}&fin=${fin}`);
+                if (!response.ok) throw new Error('Error en API de estadísticas');
+                
+                const data = await response.json();
+                if (!data.success) throw new Error(data.error || 'Error interno');
+                
+                // Totals
+                document.getElementById('stat-solicitudes-admin').innerText = data.totales.solicitudes.toLocaleString();
+                document.getElementById('stat-atencion-admin').innerText = data.totales.atencion.toLocaleString();
+                document.getElementById('stat-listos-admin').innerText = data.totales.listos.toLocaleString();
+                document.getElementById('stat-cerradas-admin').innerText = data.totales.cerradas.toLocaleString();
+                if (statCanceladasEl) statCanceladasEl.innerText = (data.totales.canceladas ?? 0).toLocaleString();
+
+                // Categories
+                if (catContainer) {
+                    if (!data.categorias || data.categorias.length === 0) {
+                        catContainer.innerHTML = '<div class="text-center txt-muted" style="padding:2rem;">No hay estudios en este periodo</div>';
+                    } else {
+                        let catHtml = '';
+                        const catColors = ['bar-color-green', 'bar-color-blue', 'bar-color-amber'];
+                        const totalCats = data.categorias.reduce((sum, c) => sum + parseInt(c.conteo, 10), 0) || 1;
+                        
+                        data.categorias.forEach((cat, idx) => {
+                            const pct = Math.round((parseInt(cat.conteo, 10) / totalCats) * 100);
+                            const color = catColors[idx % catColors.length];
+                            catHtml += `
+                            <div>
+                                <div class="progress-label">
+                                    <span>${cat.nombre}</span>
+                                    <span>${pct}% (${cat.conteo} estudios)</span>
+                                </div>
+                                <div class="progress-track">
+                                    <div class="bar-fill ${color}" style="width: ${pct}%;"></div>
+                                </div>
+                            </div>`;
+                        });
+                        catContainer.innerHTML = catHtml;
+                    }
+                }
+                
+                // Medicos
+                if (medContainer) {
+                    if (!data.medicos || data.medicos.length === 0) {
+                        medContainer.innerHTML = '<div class="text-center txt-muted" style="padding:2rem;">No hay órdenes en este periodo</div>';
+                    } else {
+                        let medHtml = '';
+                        const medColors = ['bar-color-green', 'bar-color-blue', 'bar-color-amber', 'bar-color-purple', 'bar-color-red'];
+                        const totalMeds = data.medicos.reduce((sum, m) => sum + parseInt(m.conteo, 10), 0) || 1;
+                        
+                        data.medicos.forEach((med, idx) => {
+                            const pct = Math.round((parseInt(med.conteo, 10) / totalMeds) * 100);
+                            const color = medColors[idx % medColors.length];
+                            medHtml += `
+                            <div>
+                                <div class="progress-label">
+                                    <span>${med.nombre}</span>
+                                    <span>${pct}% (${med.conteo} órdenes)</span>
+                                </div>
+                                <div class="progress-track">
+                                    <div class="bar-fill ${color}" style="width: ${pct}%;"></div>
+                                </div>
+                            </div>`;
+                        });
+                        medContainer.innerHTML = medHtml;
+                    }
+                }
+                
+            } catch (err) {
+                console.error('Error fetching estadísticas:', err);
+                document.getElementById('stat-solicitudes-admin').innerText = 'Error';
+                if (statCanceladasEl) statCanceladasEl.innerText = 'Error';
+                if (catContainer) catContainer.innerHTML = '<div class="text-center" style="color:var(--color-danger); padding:2rem;">Error al cargar</div>';
+                if (medContainer) medContainer.innerHTML = '<div class="text-center" style="color:var(--color-danger); padding:2rem;">Error al cargar</div>';
+            }
+        }
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `filtrarEstadisticasAdmin`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 21 Sept 2026, 7:30 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+`filtrarEstadisticasAdmin()` requires a check for element existence before proceeding to avoid errors, specifically `filtro-periodo-admin`. This safeguards against the function running in views where the relevant elements are absent, allowing for early, safe exit. The element's value needs to be retrieved only if the element exists.
+
+
+If a date filter is selected, retrieve start and end dates from the input elements, formatting them for display. Display a loading indicator while fetching the statistics. Update the total requests label with the formatted date range.
+
+
+Categories and medical staff data retrieval are initiated after a successful API call. A check is implemented for both the existence of the returned data and whether categories have data, displaying informative messages as appropriate, and updating category and medical staff containers. Numerical totals are displayed on the totals labels, formatted appropriately.
+
+
+Data processing for categories involves calculating percentages based on the total count, applying a cyclical color scheme to each category's progress bar. The generated HTML dynamically updates the container element.
+
+For the medical staff section, if data is missing or empty, a 'no orders' message is displayed; otherwise, data is formatted into HTML, ensuring appropriate container updates.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `document.getElementById\([^)]+\)\.`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.813551892s
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 21 Sept 2026, 7:30 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `document\.getElementById\([^)]+\)\.[a-zA-Z]+`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 21 Sept 2026, 7:30 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `labadmin.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L144-274)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+        async function filtrarEstadisticasAdmin() {
+            const select = document.getElementById('filtro-periodo-admin');
+            const val = select.value;
+            
+            let lblText = val.toUpperCase();
+            let inicio = '';
+            let fin = '';
+            
+            if (val === 'fecha') {
+                inicio = document.getElementById('fecha-inicio-admin').value;
+                fin = document.getElementById('fecha-fin-admin').value;
+                
+                if (!inicio || !fin) return; // Wait for both dates
+                
+                const fInicio = inicio.split('-').reverse().join('/');
+                const fFin = fin.split('-').reverse().join('/');
+                lblText = `${fInicio} al ${fFin}`;
+            }
+            
+            // Set loading states
+            document.getElementById('stat-solicitudes-admin').innerText = '...';
+            document.getElementById('stat-atencion-admin').innerText = '...';
+            document.getElementById('stat-listos-admin').innerText = '...';
+            document.getElementById('stat-cerradas-admin').innerText = '...';
+            const statCanceladasEl = document.getElementById('stat-canceladas-admin');
+            if (statCanceladasEl) statCanceladasEl.innerText = '...';
+            document.getElementById('lbl-solicitudes-admin').innerText = `TOTAL SOLICITUDES (${lblText})`;
+            
+            const catContainer = document.getElementById('container-categorias-stats');
+            const medContainer = document.getElementById('container-medicos-stats');
+            
+            if (catContainer) catContainer.innerHTML = '<div class="text-center txt-muted" style="padding:2rem;">Cargando categorías...</div>';
+            if (medContainer) medContainer.innerHTML = '<div class="text-center txt-muted" style="padding:2rem;">Cargando médicos...</div>';
+            
+            try {
+                const response = await fetch(`/laesh/rc/api/estadisticas?rango=${val}&inicio=${inicio}&fin=${fin}`);
+                if (!response.ok) throw new Error('Error en API de estadísticas');
+                
+                const data = await response.json();
+                if (!data.success) throw new Error(data.error || 'Error interno');
+                
+                // Totals
+                document.getElementById('stat-solicitudes-admin').innerText = data.totales.solicitudes.toLocaleString();
+                document.getElementById('stat-atencion-admin').innerText = data.totales.atencion.toLocaleString();
+                document.getElementById('stat-listos-admin').innerText = data.totales.listos.toLocaleString();
+                document.getElementById('stat-cerradas-admin').innerText = data.totales.cerradas.toLocaleString();
+                if (statCanceladasEl) statCanceladasEl.innerText = (data.totales.canceladas ?? 0).toLocaleString();
+
+                // Categories
+                if (catContainer) {
+                    if (!data.categorias || data.categorias.length === 0) {
+                        catContainer.innerHTML = '<div class="text-center txt-muted" style="padding:2rem;">No hay estudios en este periodo</div>';
+                    } else {
+                        let catHtml = '';
+                        const catColors = ['bar-color-green', 'bar-color-blue', 'bar-color-amber'];
+                        const totalCats = data.categorias.reduce((sum, c) => sum + parseInt(c.conteo, 10), 0) || 1;
+                        
+                        data.categorias.forEach((cat, idx) => {
+                            const pct = Math.round((parseInt(cat.conteo, 10) / totalCats) * 100);
+                            const color = catColors[idx % catColors.length];
+                            catHtml += `
+                            <div>
+                                <div class="progress-label">
+                                    <span>${cat.nombre}</span>
+                                    <span>${pct}% (${cat.conteo} estudios)</span>
+                                </div>
+                                <div class="progress-track">
+                                    <div class="bar-fill ${color}" style="width: ${pct}%;"></div>
+                                </div>
+                            </div>`;
+                        });
+                        catContainer.innerHTML = catHtml;
+                    }
+                }
+                
+                // Medicos
+                if (medContainer) {
+                    if (!data.medicos || data.medicos.length === 0) {
+                        medContainer.innerHTML = '<div class="text-center txt-muted" style="padding:2rem;">No hay órdenes en este periodo</div>';
+                    } else {
+                        let medHtml = '';
+                        const medColors = ['bar-color-green', 'bar-color-blue', 'bar-color-amber', 'bar-color-purple', 'bar-color-red'];
+                        const totalMeds = data.medicos.reduce((sum, m) => sum + parseInt(m.conteo, 10), 0) || 1;
+                        
+                        data.medicos.forEach((med, idx) => {
+                            const pct = Math.round((parseInt(med.conteo, 10) / totalMeds) * 100);
+                            const color = medColors[idx % medColors.length];
+                            medHtml += `
+                            <div>
+                                <div class="progress-label">
+                                    <span>${med.nombre}</span>
+                                    <span>${pct}% (${med.conteo} órdenes)</span>
+                                </div>
+                                <div class="progress-track">
+                                    <div class="bar-fill ${color}" style="width: ${pct}%;"></div>
+                                </div>
+                            </div>`;
+                        });
+                        medContainer.innerHTML = medHtml;
+                    }
+                }
+                
+            } catch (err) {
+                console.error('Error fetching estadísticas:', err);
+                document.getElementById('stat-solicitudes-admin').innerText = 'Error';
+                if (statCanceladasEl) statCanceladasEl.innerText = 'Error';
+                if (catContainer) catContainer.innerHTML = '<div class="text-center" style="color:var(--color-danger); padding:2rem;">Error al cargar</div>';
+                if (medContainer) medContainer.innerHTML = '<div class="text-center" style="color:var(--color-danger); padding:2rem;">Error al cargar</div>';
+            }
+        }
+
+        function manejarCambioFiltroAdmin() {
+            const select = document.getElementById('filtro-periodo-admin');
+            const rangeContainer = document.getElementById('rango-fechas-admin');
+            if (select.value === 'fecha') {
+                rangeContainer.style.display = 'inline-flex';
+                const inputInicio = document.getElementById('fecha-inicio-admin');
+                try {
+                    inputInicio.showPicker();
+                } catch (e) {
+                    inputInicio.click();
+                }
+            } else {
+                rangeContainer.style.display = 'none';
+                filtrarEstadisticasAdmin();
+            }
+        }
+
+        // GAP 3: abre solicitud_dac_impr.php en overlay iframe (centralizado en app.js)
+        var _abrirSolOverlay = window._abrirSolOverlay || function(url) {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 21 Sept 2026, 7:30 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 21 Sept 2026, 7:30 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `document\.getElementById\([^)]+\)\.innerText\s*=`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 21 Sept 2026, 7:31 am
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+
+labadmin.js?v=1789997574:254 Uncaught TypeError: Cannot set properties of null (setting 'innerText')
+    at filtrarEstadisticasAdmin (labadmin.js?v=1789997574:254:70)
+    at manejarCambioFiltroAdmin (labadmin.js?v=1789997574:292:17)
+    at HTMLSelectElement.filtroSelects (labadmin.js?v=1789997574:807:123)
+
+labadmin.js?v=1789997574:254 Uncaught TypeError: Cannot set properties of null (setting 'innerText')
+    at filtrarEstadisticasAdmin (labadmin.js?v=1789997574:254:70)
+    at manejarCambioFiltroAdmin (labadmin.js?v=1789997574:292:17)
+    at HTMLSelectElement.filtroSelects (labadmin.js?v=1789997574:807:123)
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `labadmin.js`
+**Language:** javascript
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `labadmin.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L794-824)</summary>
+
+**Path:** `Unknown file`
+
+```
+                window.cambiarTabAdmin(this.getAttribute('data-panel'), this);
+        });
+    });
+
+    // Sidebar nav → gestion-web
+    var navGestionWeb = document.getElementById('nav-gestion-web');
+    if (navGestionWeb) navGestionWeb.addEventListener('click', function(e) {
+        if (window.location.pathname.endsWith('.html') || window.location.protocol === 'file:' || window.location.pathname.includes('/uipv1a/')) {
+            e.preventDefault();
+            window.location.href = 'gestion-web.html';
+        } else {
+            window.location.href = '/laesh/adrc/';
+        }
+    });
+
+    // Botón abrir modal médico
+    var btnAbrirMedico = document.getElementById('btn-abrir-modal-medico');
+    if (btnAbrirMedico) btnAbrirMedico.addEventListener('click', function() {
+        if (typeof window.abrirModalMedico === 'function') window.abrirModalMedico();
+    });
+
+    // Botón agregar estudio
+    var btnAgregarEstudio = document.getElementById('btn-agregar-estudio');
+    if (btnAgregarEstudio) {
+        btnAgregarEstudio.addEventListener('click', function() {
+            if (window.showToast) showToast('Agregar Estudio desde el Constructor en proceso...', 'info');
+        });
+    } 
+    
+    // Filtros — IDs corregidos para coincidir con los elements reales del HTML
+    var filtroSelects = [
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `labadmin.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L819-859)</summary>
+
+**Path:** `Unknown file`
+
+```
+            if (window.showToast) showToast('Agregar Estudio desde el Constructor en proceso...', 'info');
+        });
+    } 
+    
+    // Filtros — IDs corregidos para coincidir con los elements reales del HTML
+    var filtroSelects = [
+        ['filtro-periodo-admin',           function() { if (typeof window.manejarCambioFiltroAdmin === 'function') window.manejarCambioFiltroAdmin(); }],
+        ['filtro-periodo-historial-admin', function() { if (typeof window.filtrarHistorialAdmin === 'function') window.filtrarHistorialAdmin(); }]
+    ];
+    filtroSelects.forEach(function(pair) {
+        var el = document.getElementById(pair[0]);
+        if (el) el.addEventListener('change', pair[1]);
+    });
+
+    // Modal overlays (cerrar al click en backdrop — excluye modal-medico para requerir clic en cruz de cerrar)
+    var modals = [
+        ['modal-resultados-admin', 'cerrarModal']
+    ];
+    modals.forEach(function(pair) {
+        var m = document.getElementById(pair[0]);
+        if (m) m.addEventListener('click', function(e) {
+            if (e.target === this && typeof window[pair[1]] === 'function') window[pair[1]]();
+        });
+    });
+
+    // Modal solicitud-preview overlay + close
+    var modalSolPrev = document.getElementById('modal-solicitud-preview');
+    var btnCerrarSol = document.getElementById('btn-cerrar-solicitud');
+    if (modalSolPrev) modalSolPrev.addEventListener('click', function(e) {
+        if (e.target === this) this.classList.remove('show');
+    });
+    if (btnCerrarSol) btnCerrarSol.addEventListener('click', function() {
+        if (modalSolPrev) modalSolPrev.classList.remove('show');
+    });
+
+    // Close buttons
+    var closeMap = [
+        ['btn-cerrar-medico',          'cerrarModalMedico'],
+        ['btn-cerrar-resultados-admin','cerrarModal']
+    ];
+    closeMap.forEach(function(pair) {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `manejarCambioFiltroAdmin`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 21 Sept 2026, 7:32 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `labadmin.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+/* labadmin.js — lógica del portal de recepción (extraído de labadmin.html) */
+        function obtenerEspecialidadMedico(medicoNombre) {
+            if (!medicoNombre) return 'Medicina General';
+            if (medicoNombre.includes('Elena')) return 'Ginecología y Obstetricia';
+            if (medicoNombre.includes('Hedilberto') || medicoNombre.includes('Reyes')) return 'Medicina Interna';
+            if (medicoNombre.includes('Santiago') || medicoNombre.includes('Blanco')) return 'Hematología Especializada';
+            if (medicoNombre.includes('Martínez') || medicoNombre.includes('Carlos')) return 'Pediatría y Patología';
+            return 'Medicina General';
+        }
+        let lastRemitidos = 0;
+
+        function refreshData() {
+            // Deshabilitado: La tabla '#tabla-recepcion' ya es generada por PHP (labadmin.php) 
+            // e incluye atributos HTMX funcionales. La inyección de mocks desde localStorage rompía la UI y borraba
+            // los folios reales emitidos por la Base de Datos.
+        }
+
+
+        // Carga inicial (MariaDB SSOT)
+        fetch('/laesh/rc/api/notificaciones')
+            .then(res => res.json())
+            .then(data => {
+                if (data && data.success) {
+                    lastRemitidos = data.emitidas || 0;
+                }
+            })
+            .catch(() => {});
+        refreshData();
+        refreshHistorialAdmin();
+        
+        // Lógica de Autocompletado en Vivo MariaDB (por Folio, Paciente, Médico o Diagnóstico)
+        const inputBuscador = document.getElementById('input-buscador');
+        const autoBox = document.getElementById('autocomplete-list');
+        window.__RC_SEARCH_RESULTS__ = window.__RC_SEARCH_RESULTS__ || {};
+
+        if (inputBuscador && autoBox) {
+            function posicionarAutocompleteAdmin() {
+                const rect = inputBuscador.getBoundingClientRect();
+                autoBox.style.top   = (rect.bottom + 4) + 'px';
+                autoBox.style.left  = rect.left + 'px';
+                autoBox.style.width = Math.max(rect.width, 260) + 'px';
+            }
+
+            let searchTimerAdmin = null;
+
+            inputBuscador.addEventListener('input', function() {
+                const query = this.value.trim();
+                if (searchTimerAdmin) clearTimeout(searchTimerAdmin);
+
+                if (query.length < 1) {
+                    autoBox.style.display = 'none';
+                    autoBox.innerHTML = '';
+                    return;
+                }
+
+                searchTimerAdmin = setTimeout(function() {
+                    fetch('/laesh/rc/api/buscar-ordenes?q=' + encodeURIComponent(query))
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.success && Array.isArray(data.ordenes) && data.ordenes.length > 0) {
+                                window.__RC_SEARCH_RESULTS__ = {};
+                                autoBox.innerHTML = data.ordenes.map(m => {
+                                    const folVal = m.folio || ('LSH-' + m.id);
+                                    window.__RC_SEARCH_RESULTS__[folVal] = m;
+                                    window.__RC_SEARCH_RESULTS__[m.id] = m;
+                                    const estVal = m.estado || 'Emitida';
+                                    const medStr = m.medico ? `<span style="color:#64748b; font-size:0.8rem;"> (${m.medico})</span>` : '';
+                                    return `
+                                        <div class="autocomplete-item-medico"
+                                             data-action="search-select-admin" data-id="${folVal}">
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `window\.filtrar|window\.manejar`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 21 Sept 2026, 7:32 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `labadmin.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L269-319)</summary>
+
+**Path:** `Unknown file`
+
+```
+            const rangeContainer = document.getElementById('rango-fechas-admin');
+            if (select.value === 'fecha') {
+                if (rangeContainer) rangeContainer.style.display = 'inline-flex';
+                const inputInicio = document.getElementById('fecha-inicio-admin');
+                if (inputInicio) {
+                    try {
+                        inputInicio.showPicker();
+                    } catch (e) {
+                        inputInicio.click();
+                    }
+                }
+            } else {
+                if (rangeContainer) rangeContainer.style.display = 'none';
+                filtrarEstadisticasAdmin();
+            }
+        }
+
+        // GAP 3: abre solicitud_dac_impr.php en overlay iframe (centralizado en app.js)
+        var _abrirSolOverlay = window._abrirSolOverlay || function(url) {
+            var prev = document.getElementById('sol-overlay');
+            if (prev) prev.remove();
+            var overlay = document.createElement('div');
+            overlay.id = 'sol-overlay';
+            overlay.className = 'sol-overlay';
+            var iframe = document.createElement('iframe');
+            iframe.src = url;
+            iframe.title = 'Solicitud Digital de Análisis Clínicos';
+            overlay.appendChild(iframe);
+            document.body.appendChild(overlay);
+        };
+        function verSolicitudDigital(id, paciente, estudios, fecha) {
+            var p = new URLSearchParams();
+            p.set('id', id || '1');
+            p.set('paciente', paciente || '—');
+            p.set('fecha', fecha || new Date().toLocaleString());
+            var arr;
+            try { arr = JSON.parse(estudios); if (!Array.isArray(arr)) throw ''; }
+            catch(e) { arr = estudios ? [estudios] : []; }
+            p.set('estudios', JSON.stringify(arr));
+            _abrirSolOverlay('/laesh/rc/views/solicitud_dac_impr.php?' + p.toString());
+        }
+
+        function verResultados(id, paciente) {
+            document.getElementById('modal-resultados').classList.add('show');
+        }
+
+        function cerrarModal() {
+            document.getElementById('modal-resultados').classList.remove('show');
+        }
+
+        // Cambiar Paneles / Tabs en Labadmin con actualización de Breadcrumb
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Date input fields with `filtrarEstadisticasAdmin()` as the `onchange` handler are present in the PHP file. This function likely filters statistics based on the selected date range. Examining the JavaScript file is necessary to understand how the filtering occurs.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `filtrarHistorialAdmin`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.124874912s
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 21 Sept 2026, 7:32 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `labadmin.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L379-419)</summary>
+
+**Path:** `Unknown file`
+
+```
+        });
+
+        // A-01: activación por teclado (Enter/Espacio) para role="button" en nav-items
+        // El listener de CLICK está en DOMContentLoaded (líneas P-LAESH-01) — no duplicar aquí.
+        document.querySelectorAll('.sidebar .nav-item').forEach(function(item) {
+            item.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.click();
+                }
+            });
+        });
+
+        
+        function filtrarHistorialAdmin() {
+            // Lógica de filtro por periodo (simulada)
+            console.log("Filtrando historial de recepción por periodo:", document.getElementById('filtro-periodo-historial-admin').value);
+        }
+
+        // ── Directorio de Pacientes ────────────────────────────────────────────
+        function refreshPacientes() {
+            // Renderizado mantenido server-side desde MariaDB en labadmin.php / HTMX
+            return;
+        }
+
+        function refreshHistorialAdmin() {
+            // Renderizado mantenido server-side desde MariaDB en labadmin.php / HTMX
+            return;
+        }
+
+    
+    // Las funciones de Tabla Plana (refreshCatalogRender, refreshCatalog, abrirModalEstudio, guardarEstudio, eliminarEstudio)
+    // han sido depuradas y eliminadas.
+
+    
+        // Foco automático por default en el buscador de la recepción + Listeners HTMX Toast/Refresh
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputBuscador = document.getElementById('input-buscador');
+            if (inputBuscador) {
+                setTimeout(function() {
+                    inputBuscador.focus();
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `labadmin.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L274-294)</summary>
+
+**Path:** `Unknown file`
+
+```
+                    try {
+                        inputInicio.showPicker();
+                    } catch (e) {
+                        inputInicio.click();
+                    }
+                }
+            } else {
+                if (rangeContainer) rangeContainer.style.display = 'none';
+                filtrarEstadisticasAdmin();
+            }
+        }
+
+        // GAP 3: abre solicitud_dac_impr.php en overlay iframe (centralizado en app.js)
+        var _abrirSolOverlay = window._abrirSolOverlay || function(url) {
+            var prev = document.getElementById('sol-overlay');
+            if (prev) prev.remove();
+            var overlay = document.createElement('div');
+            overlay.id = 'sol-overlay';
+            overlay.className = 'sol-overlay';
+            var iframe = document.createElement('iframe');
+            iframe.src = url;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 21 Sept 2026, 7:32 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `labadmin.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L389-404)</summary>
+
+**Path:** `Unknown file`
+
+```
+                    this.click();
+                }
+            });
+        });
+
+        
+        function filtrarHistorialAdmin() {
+            // Lógica de filtro por periodo (simulada)
+            console.log("Filtrando historial de recepción por periodo:", document.getElementById('filtro-periodo-historial-admin').value);
+        }
+
+        // ── Directorio de Pacientes ────────────────────────────────────────────
+        function refreshPacientes() {
+            // Renderizado mantenido server-side desde MariaDB en labadmin.php / HTMX
+            return;
+        }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 21 Sept 2026, 7:32 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 21 Sept 2026, 7:32 am
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+Analiza por en la tabla grilla de  Recepción / Médicos , no se  estan mostrando los datos de: Universidad , 	Lugar de Trabajo, Cédula Prof.	, Cédula Esp. de los 5 medicos  existentes.
+Informa me.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `labadmin.js`
+**Language:** javascript
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `renderMedicosFlatTable`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 21 Sept 2026, 7:40 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `labadmin.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1143-1249)</summary>
+
+**Path:** `Unknown file`
+
+```
+function renderMedicosFlatTable(page, targetUserId) {
+    currentMedicosPage = page || 1;
+    var tbody = document.querySelector('#flat-medicos-table tbody');
+    if (!tbody) return;
+
+    var totalRecordsEl = document.getElementById('flat-medicos-total-records');
+    if (totalRecordsEl) {
+        totalRecordsEl.textContent = 'Total: ' + medicosFilteredData.length;
+    }
+
+    if (medicosFilteredData.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="8" class="text-center txt-muted py-4">No se encontraron médicos.</td></tr>';
+        renderMedicosPagination(0, 1);
+        return;
+    }
+
+    var totalPages = Math.ceil(medicosFilteredData.length / medicosItemsPerPage);
+    if (currentMedicosPage > totalPages) currentMedicosPage = totalPages;
+
+    var startIdx = (currentMedicosPage - 1) * medicosItemsPerPage;
+    var pageItems = medicosFilteredData.slice(startIdx, startIdx + medicosItemsPerPage);
+
+    var html = '';
+    pageItems.forEach(function(item, idx) {
+        var rowNum = startIdx + idx + 1;
+        var rowId = item.user_id ? item.user_id : (item._tempId || idx);
+        var cedulaProf = item.cedula_profesional || '';
+        var cedulaEsp = item.cedula_especialidad || '';
+        var nombre = item.nombre_completo || '';
+        var especialidad = item.especialidad || '';
+        var universidad = item.universidad_nombre || '';
+        var lugar = item.lugar_trabajo_nombre || '';
+        var ordenes = item.total_ordenes || 0;
+
+        var estadoId = parseInt(item.estado_id || 1, 10);
+        var esPausado = (estadoId === 2);
+        var pausarTitle = esPausado ? 'Reactivar' : 'Pausar';
+        var pausarColor = esPausado ? '#16a34a' : '#d97706';
+        var pausarSvg = esPausado 
+            ? '<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;"><polygon points="5 3 19 12 5 21 5 3"/></svg>'
+            : '<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>';
+
+        var accionesHtml = '<div style="display: inline-flex; align-items: center; justify-content: center; gap: 4px;">' +
+            '<button type="button" class="btn-action-icon btn-medico-pausar" data-user-id="' + rowId + '" data-estado="' + estadoId + '" data-nombre="' + escapeAttrVal(nombre) + '" title="' + pausarTitle + '" style="background: transparent; border: none; cursor: pointer; padding: 4px 6px; border-radius: 4px; color: ' + pausarColor + '; display: inline-flex; align-items: center; justify-content: center; transition: transform 0.15s ease;" onmouseover="this.style.transform=\'scale(1.18)\'" onmouseout="this.style.transform=\'scale(1)\'">' +
+                pausarSvg +
+            '</button>' +
+            '<span style="color: #cbd5e1; user-select: none; font-size: 0.9rem; font-weight: 300; margin: 0 2px;">|</span>' +
+            '<button type="button" class="btn-action-icon btn-medico-password" data-user-id="' + rowId + '" data-nombre="' + escapeAttrVal(nombre) + '" data-celular="' + escapeAttrVal(item.celular || '') + '" title="Asignar contraseña" style="background: transparent; border: none; cursor: pointer; padding: 4px 6px; border-radius: 4px; color: #0284c7; display: inline-flex; align-items: center; justify-content: center; transition: transform 0.15s ease;" onmouseover="this.style.transform=\'scale(1.18)\'" onmouseout="this.style.transform=\'scale(1)\'">' +
+                '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;"><circle cx="7.5" cy="15.5" r="4.5"/><path d="m21 3-9.5 9.5"/><path d="m15.5 7.5 3 3"/><path d="m18 5 2 2"/></svg>' +
+            '</button>' +
+        '</div>';
+
+        var rowStyle = esPausado ? 'background: #fafafa; opacity: 0.78;' : '';
+
+        html += '<tr data-row-id="' + rowId + '" tabindex="0" style="cursor: pointer; ' + rowStyle + '" class="medico-row-item' + (esPausado ? ' medico-pausado' : '') + '">' +
+            '<td style="text-align: center;">' +
+                '<a href="#" class="med-link-edit" data-user-id="' + rowId + '" style="font-weight: 700; color: var(--primary); text-decoration: underline; font-size: 0.88rem;" onclick="event.preventDefault(); abrirEditarMedicoModal(' + rowId + ');">' + rowNum + '</a>' +
+            '</td>' +
+            '<td style="font-weight: 600; color: #475569;">' + escapeAttrVal(cedulaProf) + '</td>' +
+            '<td style="color: #475569; font-size: 0.85rem;">' + escapeAttrVal(cedulaEsp) + '</td>' +
+            '<td style="font-weight: 700; color: #1e293b;">' + escapeAttrVal(nombre) + (esPausado ? ' <span class="badge badge-subtle" style="background:#fef3c7; color:#92400e; font-size:0.7rem; font-weight:600; padding:1px 5px; margin-left:4px;">Pausado</span>' : '') + '</td>' +
+            '<td>' + (especialidad ? '<span class="badge badge-subtle" style="background:#f1f5f9; color:#334155; font-weight:500;">' + escapeAttrVal(especialidad) + '</span>' : '') + '</td>' +
+            '<td style="color: #475569; font-size: 0.85rem;">' + escapeAttrVal(universidad) + '</td>' +
+            '<td style="color: #475569; font-size: 0.85rem;">' + escapeAttrVal(lugar) + '</td>' +
+            '<td style="text-align: center;"><span class="badge badge-listos" style="font-size: 0.8rem; font-weight: 600;">' + ordenes + ' Órdenes</span></td>' +
+            '<td style="text-align: center;">' + accionesHtml + '</td>' +
+        '</tr>';
+    });
+
+    tbody.innerHTML = html;
+    renderMedicosPagination(totalPages, currentMedicosPage);
+    bindMedicosTableEvents();
+
+    if (targetUserId) {
+        setTimeout(function() {
+            var targetRow = tbody.querySelector('tr[data-row-id="' + targetUserId + '"]');
+            if (targetRow) {
+                targetRow.classList.add('row-saved-highlight');
+                targetRow.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+                var editLink = targetRow.querySelector('.med-link-edit');
+                if (editLink) {
+                    editLink.focus();
+                } else {
+                    targetRow.focus();
+                }
+            }
+        }, 120);
+    }
+}
+
+function escapeAttrVal(str) {
+    if (!str) return '';
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+}
+
+function bindMedicosTableEvents() {
+    var tbody = document.querySelector('#flat-medicos-table tbody');
+    if (!tbody) return;
+
+    var editLinks = tbody.querySelectorAll('.med-link-edit');
+    editLinks.forEach(function(link) {
+        link.addEventListener('click', function(e) {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `/api/medicos`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 21 Sept 2026, 7:41 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L549-569)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+// ── GET /api/medicos — Devuelve catálogo de médicos en JSON ─────────
+Flight::route('GET /api/medicos', function () {
+    header('Content-Type: application/json; charset=utf-8');
+    try {
+        $db = \Common\DB::connect();
+        $medicosCatalog = $db->query(
+            "SELECT user_id, nombre_completo, cedula_profesional, cedula_especialidad, especialidad, celular, 
+                    universidad_id, universidad_nombre, lugar_trabajo_id, lugar_trabajo_nombre, total_ordenes,
+                    estado_id, estado_nombre 
+             FROM vw_medicos_completos 
+             ORDER BY total_ordenes DESC"
+        )->fetchAll(\PDO::FETCH_ASSOC) ?: [];
+        echo json_encode(['success' => true, 'data' => $medicosCatalog], JSON_UNESCAPED_UNICODE);
+    } catch (\Throwable $e) {
+        echo json_encode(['success' => false, 'error' => $e->getMessage()]);
+    }
+});
+
+// ── POST /api/medicos/cambiar-estado — Pausar o Reactivar perfil médico ─────────
+Flight::route('POST /api/medicos/cambiar-estado', function () {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `perfiles_medicos`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 21 Sept 2026, 7:41 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `seed_first_users.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L49-139)</summary>
+
+**Path:** `Unknown file`
+
+```
+} catch (\PDOException $e) {
+    echo "[ERROR] Conexión BD: " . $e->getMessage() . "\n";
+    exit(1);
+}
+
+$auth = new \Delight\Auth\Auth($pdo);
+
+// ── Definición de usuarios semilla (Credenciales Homologadas) ─────────────────
+$usuarios = [
+    [
+        'telefono'  => '9990000001',
+        'password'  => '04041980',
+        'nombre'    => 'Admin',
+        'apellidos' => 'LAESH',
+        'rol'       => 'ADMIN',
+        'permisos'  => ['gestionar_ordenes', 'gestionar_cms', 'gestionar_estudios', 'gestionar_medicos', 'ver_reportes'],
+    ],
+    [
+        'telefono'  => '9990000002',
+        'password'  => '04041981',
+        'nombre'    => 'Recepcion',
+        'apellidos' => 'Demo',
+        'rol'       => 'RECEPCION',
+        'permisos'  => ['gestionar_ordenes', 'gestionar_medicos', 'ver_reportes'],
+    ],
+    [
+        'telefono'  => '9990000003',
+        'password'  => '04041982',
+        'nombre'    => 'Hedilberto',
+        'apellidos' => 'Reyes Venegas',
+        'rol'       => 'MEDICO',
+        'permisos'  => ['ver_ordenes_propias', 'ver_solicitud_digital'],
+        'especialidad' => 'Med. Interna'
+    ],
+    [
+        'telefono'  => '9990000004',
+        'password'  => '04041983',
+        'nombre'    => 'Elena',
+        'apellidos' => 'Torres Vance',
+        'rol'       => 'MEDICO',
+        'permisos'  => ['ver_ordenes_propias', 'ver_solicitud_digital'],
+        'especialidad' => 'Ginecología'
+    ],
+    [
+        'telefono'  => '9990000005',
+        'password'  => '04041984',
+        'nombre'    => 'Carlos',
+        'apellidos' => 'Fuentes Morales',
+        'rol'       => 'MEDICO',
+        'permisos'  => ['ver_ordenes_propias', 'ver_solicitud_digital'],
+        'especialidad' => 'Pediatría'
+    ],
+    [
+        'telefono'  => '9990000006',
+        'password'  => '04041985',
+        'nombre'    => 'Sofía',
+        'apellidos' => 'Medina Ortiz',
+        'rol'       => 'MEDICO',
+        'permisos'  => ['ver_ordenes_propias', 'ver_solicitud_digital'],
+        'especialidad' => 'Cardiología'
+    ],
+    [
+        'telefono'  => '9990000007',
+        'password'  => '04041986',
+        'nombre'    => 'Roberto',
+        'apellidos' => 'Mendoza Silva',
+        'rol'       => 'MEDICO',
+        'permisos'  => ['ver_ordenes_propias', 'ver_solicitud_digital'],
+        'especialidad' => 'Med. General'
+    ],
+];
+
+// ── Precargar IDs de permisos (para no hacer N queries en el loop) ────────────
+$stmtPerms = $pdo->query("SELECT id, nombre FROM rbac_permisos");
+$permisoMap = []; // nombre → id
+foreach ($stmtPerms->fetchAll() as $row) {
+    $permisoMap[$row['nombre']] = (int) $row['id'];
+}
+
+// ── Crear cada usuario ────────────────────────────────────────────────────────
+$stmtEmpleado = $pdo->prepare(
+    "INSERT INTO empleados (user_id, nombre, apellidos, rol, activo, creado_en)
+     VALUES (:uid, :nombre, :apellidos, :rol, 1, NOW())
+     ON DUPLICATE KEY UPDATE nombre = VALUES(nombre), rol = VALUES(rol)"
+);
+
+$stmtPermUser = $pdo->prepare(
+    "INSERT IGNORE INTO rbac_permisos_usuarios (user_id, permiso_id, otorgado_en)
+     VALUES (:uid, :pid, NOW())"
+);
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `seed_first_users.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L139-199)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+echo "\n══════════════════════════════════════════════\n";
+echo "  Semilla de Usuarios LAESH\n";
+echo "══════════════════════════════════════════════\n\n";
+
+foreach ($usuarios as $u) {
+    $email    = $u['telefono'] . '@laesh.local';
+    $username = $u['telefono'];
+
+    echo "→ Creando [{$u['rol']}] {$u['nombre']} {$u['apellidos']} ({$u['telefono']})...\n";
+
+    try {
+        // Crear usuario verificado vía admin API (R14.9 — bypass email verification)
+        $userId = $auth->admin()->createUser($email, $u['password'], $username);
+        echo "  ✓ Delight-Auth user_id={$userId}\n";
+
+    } catch (\Delight\Auth\UserAlreadyExistsException) {
+        // Si ya existe, obtener su ID y resetear contraseña al valor del seed
+        $row = $pdo->prepare("SELECT id FROM users WHERE email = ? LIMIT 1");
+        $row->execute([$email]);
+        $existing = $row->fetch();
+        if (!$existing) {
+            echo "  ✗ Usuario ya existe pero no se pudo obtener su ID. Saltando.\n\n";
+            continue;
+        }
+        $userId = (int) $existing['id'];
+        echo "  ~ Ya existía. user_id={$userId} — reseteando contraseña y actualizando datos.\n";
+        // Resetear contraseña al valor actual del seed (idempotente)
+        try {
+            $auth->admin()->changePasswordForUserById($userId, $u['password']);
+            echo "  ✓ Contraseña reseteada\n";
+        } catch (\Throwable $ep) {
+            echo "  ✗ Error al resetear contraseña: " . $ep->getMessage() . "\n";
+        }
+    } catch (\Delight\Auth\InvalidEmailException) {
+        echo "  ✗ Email inválido: {$email}\n\n";
+        continue;
+    } catch (\Delight\Auth\InvalidPasswordException) {
+        echo "  ✗ Contraseña inválida. Mínimo 1 carácter requerido.\n\n";
+        continue;
+    } catch (\Throwable $e) {
+        echo "  ✗ Error inesperado: " . $e->getMessage() . "\n\n";
+        continue;
+    }
+
+    // Insertar / actualizar fila en empleados
+    try {
+        $stmtEmpleado->execute([
+            ':uid'       => $userId,
+            ':nombre'    => $u['nombre'],
+            ':apellidos' => $u['apellidos'],
+            ':rol'       => $u['rol'],
+        ]);
+        echo "  ✓ empleados.rol={$u['rol']}\n";
+    } catch (\PDOException $e) {
+        echo "  ✗ Error en empleados: " . $e->getMessage() . "\n";
+    }
+
+    // Asignar permisos RBAC
+    $permisosOk = [];
+    $permisosErr = [];
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `seed_first_users.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L200-254)</summary>
+
+**Path:** `Unknown file`
+
+```
+    foreach ($u['permisos'] as $nombrePerm) {
+        if (!isset($permisoMap[$nombrePerm])) {
+            $permisosErr[] = $nombrePerm . ' (no encontrado en rbac_permisos)';
+            continue;
+        }
+        try {
+            $stmtPermUser->execute([':uid' => $userId, ':pid' => $permisoMap[$nombrePerm]]);
+            $permisosOk[] = $nombrePerm;
+        } catch (\PDOException $e) {
+            $permisosErr[] = $nombrePerm . ' (' . $e->getMessage() . ')';
+        }
+    }
+    if ($permisosOk)  echo "  ✓ Permisos: " . implode(', ', $permisosOk) . "\n";
+    if ($permisosErr) echo "  ✗ Permisos con error: " . implode(', ', $permisosErr) . "\n";
+
+    if ($u['rol'] === 'MEDICO') {
+        try {
+            $stmtPerfil = $pdo->prepare(
+                "INSERT INTO perfiles_medicos (user_id, nombre_completo, especialidad, estado_id, celular)
+                 VALUES (:uid, :nom, :esp, 1, :cel)
+                 ON DUPLICATE KEY UPDATE nombre_completo = VALUES(nombre_completo), especialidad = VALUES(especialidad)"
+            );
+            $stmtPerfil->execute([
+                ':uid' => $userId,
+                ':nom' => 'Dr(a). ' . trim($u['nombre'] . ' ' . $u['apellidos']),
+                ':esp' => $u['especialidad'] ?? 'Med. General',
+                ':cel' => $u['telefono']
+            ]);
+            echo "  ✓ perfiles_medicos\n";
+        } catch (\PDOException $e) {
+            echo "  ✗ Error en perfiles_medicos: " . $e->getMessage() . "\n";
+        }
+    }
+
+    echo "\n";
+}
+
+// ── Resumen final ─────────────────────────────────────────────────────────────
+echo "══════════════════════════════════════════════\n";
+echo "  Credenciales de acceso (CAMBIAR EN PRODUCCIÓN)\n";
+echo "══════════════════════════════════════════════\n";
+printf("  %-12s %-15s %-15s\n", 'Rol', 'Teléfono', 'Contraseña');
+printf("  %-12s %-15s %-15s\n", '────────────', '───────────────', '───────────────');
+foreach ($usuarios as $u) {
+    printf("  %-12s %-15s %-15s\n", $u['rol'], $u['telefono'], $u['password']);
+}
+echo "\n  Redirigir en login:\n";
+echo "    ADMIN     → /laesh/rc/   (labadmin; 'Contenidos del Sitio Web' navega a /laesh/adrc/)\n";
+echo "    RECEPCION → /laesh/rc/\n";
+echo "    MEDICO    → /laesh/md/\n";
+echo "\n  ⚠  Ejecuta solo UNA VEZ. Para resetear:\n";
+echo "     DELETE FROM rbac_permisos_usuarios; DELETE FROM empleados;\n";
+echo "     DELETE FROM users WHERE email LIKE '%@laesh.local';\n";
+echo "     Luego volver a ejecutar este script.\n\n";
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Analyzing the provided code snippet reveals an attempt to insert or update medical profile data. The SQL query uses `ON DUPLICATE KEY UPDATE` to handle potential conflicts, updating existing records instead of creating duplicates. It appears the code aims to either create a new profile entry or update an existing one based on the `user_id`.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.082659554s
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 21 Sept 2026, 7:41 am
 
 ---
 
@@ -11934,13 +20184,6 @@ return [
     ],
     'jwt' => [
         'secret'      => $jwtSecret,
-        'algo'        => 'HS256',
-        'issuer'      => 'laesh.local',
-        'ttl_seconds' => 86400, // 24 horas
-        'cookie_name' => 'laesh_jwt_token',
-    ]
-];
-
 ```
 
 </details>
@@ -11964,7 +20207,7 @@ return [
 ### Terminal Command Execution
 
 **Status:** Completed
-**Created:** 20 Sept 2026, 8:45 pm
+**Created:** 21 Sept 2026, 7:41 am
 
 ---
 
@@ -11985,70 +20228,7 @@ return [
 ### Terminal Command Execution
 
 **Status:** Completed
-**Created:** 20 Sept 2026, 8:45 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 8:45 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 8:45 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 8:45 pm
+**Created:** 21 Sept 2026, 7:41 am
 
 ---
 
@@ -12057,7 +20237,7 @@ return [
 ### Actions
 
 **Tool:** `grep_search`
-**Query:** `panel-medicos`
+**Query:** `medicosRawData`
 
 <details>
 <summary>Metadata</summary>
@@ -12070,145 +20250,7 @@ return [
 ### Local File Search
 
 **Status:** Completed
-**Created:** 20 Sept 2026, 8:45 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L319-429)</summary>
-
-**Path:** `Unknown file`
-
-```
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Panel 3: Médicos -->
-                <div id="panel-medicos" class="tab-panel d-none">
-                    <!-- Fila 1: Pestañas superiores -->
-                    <div class="cms-tabs" id="toggle-medicos-view" role="tablist">
-                        <button type="button" class="cms-tab active" data-view="table" id="btn-view-medicos-table">1. Registro Medicos</button>
-                    </div>
-
-                    <!-- Fila 2: Título de Sección y Controles -->
-                    <div class="cms-panel-header" style="margin-top: 1rem; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-                        <h3 class="cms-h3" style="margin: 0; font-size: 1.35rem; font-weight: 800; color: #0052B7;">Médicos</h3>
-                        
-                        <div style="display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; justify-content: flex-end;">
-                            <!-- Paginador y Total -->
-                            <div id="flat-medicos-pagination-wrap" style="display: flex; align-items: center; gap: 0.5rem;">
-                                <span id="flat-medicos-total-records" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">Total: 0</span>
-                                <span style="color: #cbd5e1; display: inline;">|</span>
-                                <div id="flat-medicos-pagination" style="display: flex; gap: 0.25rem; align-items: center;"></div>
-                            </div>
-
-                            <!-- Buscador -->
-                            <div id="flat-search-medicos-container" style="display: flex; gap: 0.5rem; align-items: center; position:relative; z-index: 100;">
-                                <input type="text" id="flat-search-medicos-input" class="form-input form-input--bg" autocomplete="new-password" spellcheck="false" autocorrect="off" autocapitalize="none" placeholder="🔍 Buscar médico..." style="width: 220px;">
-                            </div>
-
-                            <!-- Botones Acción -->
-                            <div id="flat-medicos-actions" style="display: flex; align-items: center; gap: 0.5rem;">
-                                <button type="button" class="btn btn-secondary fnt-cursor" id="btn-guardar-medicos" style="display:none; padding: 6px 14px; font-size: 0.88rem; font-weight: 500;">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:4px; vertical-align:middle;"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
-                                    Guardar Cambios
-                                </button>
-                                <button type="button" class="btn btn-primary fnt-cursor" id="btn-add-medico-row" style="padding: 6px 14px; font-size: 0.88rem; font-weight: 500;">+ Añadir Médico</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- VISTA TABLA PLANA -->
-                    <div id="view-medicos-table" style="margin-top: 0.5rem; margin-bottom: 2.5rem;">
-                        <div class="table-responsive" style="max-height: calc(100vh - 240px); overflow-y: auto; overflow-x: auto; border: 1px solid var(--border); border-radius: 4px;">
-                            <table class="table" id="flat-medicos-table" style="margin-bottom: 0; min-width: 1200px; white-space: nowrap;">
-                                <thead>
-                                    <tr>
-                                        <th style="position: sticky; top: 0; background: #e0f2fe; color: var(--primary-dark); z-index: 10; width: 60px; text-align: center;">#</th>
-                                        <th style="position: sticky; top: 0; background: #e0f2fe; color: var(--primary-dark); z-index: 10; cursor: pointer; width: 130px;" id="flat-medicos-sort-cedula" data-order="none">Cédula Prof. <span class="sort-icon"></span></th>
-                                        <th style="position: sticky; top: 0; background: #e0f2fe; color: var(--primary-dark); z-index: 10; width: 130px;">Cédula Esp.</th>
-                                        <th style="position: sticky; top: 0; background: #e0f2fe; color: var(--primary-dark); z-index: 10; cursor: pointer; width: 260px;" id="flat-medicos-sort-nombre" data-order="asc">Nombre del Médico <span class="sort-icon">▲</span></th>
-                                        <th style="position: sticky; top: 0; background: #e0f2fe; color: var(--primary-dark); z-index: 10; width: 180px;">Especialidad</th>
-                                        <th style="position: sticky; top: 0; background: #e0f2fe; color: var(--primary-dark); z-index: 10; width: 220px;">Universidad</th>
-                                        <th style="position: sticky; top: 0; background: #e0f2fe; color: var(--primary-dark); z-index: 10; width: 220px;">Lugar de Trabajo</th>
-                                        <th style="position: sticky; top: 0; background: #e0f2fe; color: var(--primary-dark); z-index: 10; width: 120px; text-align: center;">Órdenes (Mes)</th>
-                                        <th style="position: sticky; top: 0; background: #e0f2fe; color: var(--primary-dark); z-index: 10; width: 100px; text-align: center;">Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- Dinámico JS -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Panel 4: Reportes (Scope 16) -->
-                <!-- 2026-09-20: existía una copia anterior de este panel (mismo id
-                     panel-reportes, datos estáticos hardcodeados) antes de esta,
-                     dejada por una edición anterior sin limpiar. getElementById()
-                     siempre devuelve el PRIMER elemento con un id duplicado, así que
-                     el sidebar (data-panel=panel-reportes) mostraba esa copia vieja
-                     y ESTA copia real, con contenedores dinámicos id=container-*
-                     que sí llena filtrarEstadisticasAdmin(), nunca llegaba a
-                     mostrarse. La copia vieja (y un contenedor id panel-catalogos
-                     huérfano que había quedado abierto junto a ella) se eliminó completa. -->
-                <div id="panel-reportes" class="tab-panel d-none">
-                    <div class="modal-sect-hd">
-                        <h2 class="txt-pgd mb-0">Reportes y Estadísticas</h2>
-                        <div class="d-inline-flex-ac">
-                            <label for="filtro-periodo-admin" class="txt-muted-sm">Periodo:</label>
-                            <select id="filtro-periodo-admin" class="select-sm select-sm--bg">
-                                <option value="dia">Hoy</option>
-                                <option value="semana">Esta Semana</option>
-                                <option value="mes" selected>Este Mes</option>
-                                <option value="anio">Este Año</option>
-                                <option value="fecha">Fecha</option>
-                            </select>
-                            <span id="rango-fechas-admin" class="d-none flex-ic-8">
-                                <input type="date" id="fecha-inicio-admin" class="select-sm" onchange="filtrarEstadisticasAdmin()">
-                                <span class="txt-muted-sm">al</span>
-                                <input type="date" id="fecha-fin-admin" class="select-sm" onchange="filtrarEstadisticasAdmin()">
-                            </span>
-                        </div>
-                    </div>
-                    
-                    <div class="grid-auto-200mb">
-                        <div class="card mb-0 ta-center pa-5">
-                            <div id="lbl-solicitudes-admin" class="txt-muted-xs-upper">Total Solicitudes Emitidas</div>
-                            <div id="stat-solicitudes-admin" class="stat-num stat-num--pgd">-</div>
-                        </div>
-                        <div class="card mb-0 ta-center pa-5">
-                            <div class="txt-muted-xs-upper">En Atención</div>
-                            <div id="stat-atencion-admin" class="stat-num stat-num--atn">-</div>
-                        </div>
-                        <div class="card mb-0 ta-center pa-5">
-                            <div class="txt-muted-xs-upper">Resultados Listos</div>
-                            <div id="stat-listos-admin" class="stat-num stat-num--lst">-</div>
-                        </div>
-                        <div class="card mb-0 ta-center pa-5">
-                            <div class="txt-muted-xs-upper">Cerradas Con Éxito</div>
-                            <div id="stat-cerradas-admin" class="stat-num stat-num--main">-</div>
-```
-
-</details>
+**Created:** 21 Sept 2026, 7:41 am
 
 ---
 
@@ -12217,7 +20259,7 @@ return [
 ### Actions
 
 **Tool:** `grep_search`
-**Query:** `flat-medicos`
+**Query:** `medicosFilteredData`
 
 <details>
 <summary>Metadata</summary>
@@ -12230,7 +20272,7 @@ return [
 ### Local File Search
 
 **Status:** Completed
-**Created:** 20 Sept 2026, 8:45 pm
+**Created:** 21 Sept 2026, 7:41 am
 
 ---
 
@@ -12250,27 +20292,11 @@ return [
 ---
 
 <details>
-<summary>File: `Unknown file` (L999-1388)</summary>
+<summary>File: `Unknown file` (L1039-1139)</summary>
 
 **Path:** `Unknown file`
 
 ```
-                            window.showToast(docName + ' ha sido eliminado de la lista.', 'info');
-                        }
-                    }
-                }
-            }
-        });
-
-        // Close dropdown when clicking anywhere else
-        document.addEventListener('click', function() {
-            document.querySelectorAll('.ops-dropdown-menu.open').forEach(function(m) {
-                m.classList.remove('open');
-                m.previousElementSibling.setAttribute('aria-expanded', 'false');
-            });
-        });
-    })();
-});
 
 /* ── MÓDULO GESTIÓN DE MÉDICOS (Grilla Plana SPA con Modales) ── */
 var medicosCatalogData = [];
@@ -12372,519 +20398,6 @@ function applyMedicosFilterAndSort() {
         return 0;
     });
 
-    updateMedicosSortIcons();
-}
-
-function renderMedicosFlatTable(page, targetUserId) {
-    currentMedicosPage = page || 1;
-    var tbody = document.querySelector('#flat-medicos-table tbody');
-    if (!tbody) return;
-
-    var totalRecordsEl = document.getElementById('flat-medicos-total-records');
-    if (totalRecordsEl) {
-        totalRecordsEl.textContent = 'Total: ' + medicosFilteredData.length;
-    }
-
-    if (medicosFilteredData.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="8" class="text-center txt-muted py-4">No se encontraron médicos.</td></tr>';
-        renderMedicosPagination(0, 1);
-        return;
-    }
-
-    var totalPages = Math.ceil(medicosFilteredData.length / medicosItemsPerPage);
-    if (currentMedicosPage > totalPages) currentMedicosPage = totalPages;
-
-    var startIdx = (currentMedicosPage - 1) * medicosItemsPerPage;
-    var pageItems = medicosFilteredData.slice(startIdx, startIdx + medicosItemsPerPage);
-
-    var html = '';
-    pageItems.forEach(function(item, idx) {
-        var rowNum = startIdx + idx + 1;
-        var rowId = item.user_id ? item.user_id : (item._tempId || idx);
-        var cedulaProf = item.cedula_profesional || '';
-        var cedulaEsp = item.cedula_especialidad || '';
-        var nombre = item.nombre_completo || '';
-        var especialidad = item.especialidad || '';
-        var universidad = item.universidad_nombre || '';
-        var lugar = item.lugar_trabajo_nombre || '';
-        var ordenes = item.total_ordenes || 0;
-
-        html += '<tr data-row-id="' + rowId + '" tabindex="0" style="cursor: pointer;" class="medico-row-item">' +
-            '<td style="text-align: center;">' +
-                '<a href="#" class="med-link-edit" data-user-id="' + rowId + '" style="font-weight: 700; color: var(--primary); text-decoration: underline; font-size: 0.88rem;" onclick="event.preventDefault(); abrirEditarMedicoModal(' + rowId + ');">' + rowNum + '</a>' +
-            '</td>' +
-            '<td style="font-weight: 600; color: #475569;">' + escapeAttrVal(cedulaProf) + '</td>' +
-            '<td style="color: #475569; font-size: 0.85rem;">' + escapeAttrVal(cedulaEsp) + '</td>' +
-            '<td style="font-weight: 700; color: #1e293b;">' + escapeAttrVal(nombre) + '</td>' +
-            '<td>' + (especialidad ? '<span class="badge badge-subtle" style="background:#f1f5f9; color:#334155; font-weight:500;">' + escapeAttrVal(especialidad) + '</span>' : '') + '</td>' +
-            '<td style="color: #475569; font-size: 0.85rem;">' + escapeAttrVal(universidad) + '</td>' +
-            '<td style="color: #475569; font-size: 0.85rem;">' + escapeAttrVal(lugar) + '</td>' +
-            '<td style="text-align: center;"><span class="badge badge-listos" style="font-size: 0.8rem; font-weight: 600;">' + ordenes + ' Órdenes</span></td>' +
-            '<td style="text-align: center; color: #94a3b8; font-size: 0.8rem;">—</td>' +
-        '</tr>';
-    });
-
-    tbody.innerHTML = html;
-    renderMedicosPagination(totalPages, currentMedicosPage);
-    bindMedicosTableEvents();
-
-    if (targetUserId) {
-        setTimeout(function() {
-            var targetRow = tbody.querySelector('tr[data-row-id="' + targetUserId + '"]');
-            if (targetRow) {
-                targetRow.classList.add('row-saved-highlight');
-                targetRow.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-                var editLink = targetRow.querySelector('.med-link-edit');
-                if (editLink) {
-                    editLink.focus();
-                } else {
-                    targetRow.focus();
-                }
-            }
-        }, 120);
-    }
-}
-
-function escapeAttrVal(str) {
-    if (!str) return '';
-    return String(str)
-        .replace(/&/g, '&amp;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#39;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;');
-}
-
-function bindMedicosTableEvents() {
-    var tbody = document.querySelector('#flat-medicos-table tbody');
-    if (!tbody) return;
-
-    var editLinks = tbody.querySelectorAll('.med-link-edit');
-    editLinks.forEach(function(link) {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            var userId = this.getAttribute('data-user-id');
-            abrirEditarMedicoModal(userId);
-        });
-    });
-
-    var rows = tbody.querySelectorAll('.medico-row-item');
-    rows.forEach(function(row) {
-        row.addEventListener('dblclick', function() {
-            var userId = this.getAttribute('data-row-id');
-            abrirEditarMedicoModal(userId);
-        });
-    });
-}
-
-function abrirNuevoMedicoModal() {
-    var form = document.getElementById('form-perfil-medico');
-    if (form) form.reset();
-
-    var userIdInput = document.getElementById('pm-user-id');
-    if (userIdInput) userIdInput.value = '';
-
-    var title = document.getElementById('modal-medico-title');
-    if (title) title.textContent = 'Registro de Perfil Médico';
-
-    var btnSave = document.getElementById('btn-guardar-medico');
-    if (btnSave) btnSave.textContent = 'Guardar Perfil';
-
-    if (typeof window.abrirModalMedico === 'function') {
-        window.abrirModalMedico();
-    } else {
-        var m = document.getElementById('modal-medico');
-        if (m) m.classList.add('show');
-    }
-}
-window.abrirNuevoMedicoModal = abrirNuevoMedicoModal;
-
-function abrirEditarMedicoModal(userId) {
-    var item = medicosCatalogData.find(function(m) {
-        return String(m.user_id) === String(userId);
-    });
-
-    if (!item) return;
-
-    var userIdInput = document.getElementById('pm-user-id');
-    if (userIdInput) userIdInput.value = item.user_id;
-
-    var nombreInput = document.getElementById('pm-nombre');
-    if (nombreInput) nombreInput.value = item.nombre_completo || '';
-
-    var espSelect = document.getElementById('pm-especialidad');
-    if (espSelect) {
-        espSelect.value = item.especialidad || 'Medicina General';
-        if (espSelect.selectedIndex === -1 && espSelect.options.length > 0) {
-            espSelect.selectedIndex = 0;
-        }
-    }
-
-    var cedProfInput = document.getElementById('pm-cedula-profesional');
-    if (cedProfInput) cedProfInput.value = item.cedula_profesional || '';
-
-    var cedEspInput = document.getElementById('pm-cedula-especialidad');
-    if (cedEspInput) cedEspInput.value = item.cedula_especialidad || '';
-
-    var celularInput = document.getElementById('pm-celular');
-    if (celularInput) celularInput.value = item.celular || '';
-
-    var univSelect = document.getElementById('pm-universidad');
-    if (univSelect) {
-        if (item.universidad_id) {
-            univSelect.value = item.universidad_id;
-        } else if (item.universidad_nombre) {
-            for (var i = 0; i < univSelect.options.length; i++) {
-                if (univSelect.options[i].text.trim() === item.universidad_nombre.trim()) {
-                    univSelect.selectedIndex = i;
-                    break;
-                }
-            }
-        }
-    }
-
-    var lugarSelect = document.getElementById('pm-lugar');
-    if (lugarSelect) {
-        if (item.lugar_trabajo_id) {
-            lugarSelect.value = item.lugar_trabajo_id;
-        } else if (item.lugar_trabajo_nombre) {
-            for (var j = 0; j < lugarSelect.options.length; j++) {
-                if (lugarSelect.options[j].text.trim() === item.lugar_trabajo_nombre.trim()) {
-                    lugarSelect.selectedIndex = j;
-                    break;
-                }
-            }
-        }
-    }
-
-    var title = document.getElementById('modal-medico-title');
-    if (title) title.textContent = 'Editar Perfil Médico';
-
-    var btnSave = document.getElementById('btn-guardar-medico');
-    if (btnSave) btnSave.textContent = 'Actualizar Perfil';
-
-    if (typeof window.abrirModalMedico === 'function') {
-        window.abrirModalMedico();
-    } else {
-        var m = document.getElementById('modal-medico');
-        if (m) m.classList.add('show');
-    }
-}
-window.abrirEditarMedicoModal = abrirEditarMedicoModal;
-
-function renderMedicosPagination(totalPages, currentPage) {
-    var container = document.getElementById('flat-medicos-pagination');
-    if (!container) return;
-
-    if (totalPages <= 1) {
-        container.innerHTML = '';
-        return;
-    }
-
-    var html = '';
-    for (var i = 1; i <= totalPages; i++) {
-        var activeClass = i === currentPage ? 'btn-primary' : 'btn-secondary';
-        html += '<button type="button" class="btn ' + activeClass + ' btn-sm med-page-btn" data-page="' + i + '" style="padding: 2px 8px; font-size: 0.8rem;">' + i + '</button>';
-    }
-    container.innerHTML = html;
-
-    container.querySelectorAll('.med-page-btn').forEach(function(btn) {
-        btn.addEventListener('click', function() {
-            var page = parseInt(this.getAttribute('data-page'), 10);
-            renderMedicosFlatTable(page);
-        });
-    });
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    var searchInput = document.getElementById('flat-search-medicos-input');
-    if (searchInput) {
-        searchInput.addEventListener('input', function() {
-            applyMedicosFilterAndSort();
-            renderMedicosFlatTable(1);
-        });
-    }
-
-    var btnAdd = document.getElementById('btn-add-medico-row');
-    if (btnAdd) {
-        btnAdd.addEventListener('click', abrirNuevoMedicoModal);
-    }
-
-    var sortCedula = document.getElementById('flat-medicos-sort-cedula');
-    if (sortCedula) {
-        sortCedula.addEventListener('click', function() {
-            if (medicosSortCol === 'cedula_profesional') {
-                medicosSortOrder = medicosSortOrder === 'asc' ? 'desc' : 'asc';
-            } else {
-                medicosSortCol = 'cedula_profesional';
-                medicosSortOrder = 'asc';
-            }
-            applyMedicosFilterAndSort();
-            renderMedicosFlatTable(1);
-        });
-    }
-
-    var sortNombre = document.getElementById('flat-medicos-sort-nombre');
-    if (sortNombre) {
-        sortNombre.addEventListener('click', function() {
-            if (medicosSortCol === 'nombre_completo') {
-                medicosSortOrder = medicosSortOrder === 'asc' ? 'desc' : 'asc';
-            } else {
-                medicosSortCol = 'nombre_completo';
-                medicosSortOrder = 'asc';
-            }
-            applyMedicosFilterAndSort();
-            renderMedicosFlatTable(1);
-        });
-    }
-
-    var panelMed = document.getElementById('panel-medicos');
-    if (panelMed && window.getComputedStyle(panelMed).display !== 'none' && !panelMed.classList.contains('d-none')) {
-        initMedicosFlatGrid();
-    }
-});
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `api/medicos`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 8:45 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L604-669)</summary>
-
-**Path:** `Unknown file`
-
-```
-    
-    $datos = \RC\Negocio\Ordenes::obtenerEstadisticasRango($rango, $inicio, $fin);
-    echo json_encode($datos, JSON_UNESCAPED_UNICODE);
-});
-
-// ── GET /api/medicos — Devuelve catálogo de médicos en JSON ─────────
-Flight::route('GET /api/medicos', function () {
-    header('Content-Type: application/json; charset=utf-8');
-    try {
-        $db = \Common\DB::connect();
-        $medicosCatalog = $db->query(
-            "SELECT user_id, nombre_completo, cedula_profesional, cedula_especialidad, especialidad, celular, 
-                    universidad_id, universidad_nombre, lugar_trabajo_id, lugar_trabajo_nombre, total_ordenes 
-             FROM vw_medicos_completos 
-             ORDER BY total_ordenes DESC"
-        )->fetchAll(\PDO::FETCH_ASSOC) ?: [];
-        echo json_encode(['success' => true, 'data' => $medicosCatalog], JSON_UNESCAPED_UNICODE);
-    } catch (\Throwable $e) {
-        echo json_encode(['success' => false, 'error' => $e->getMessage()]);
-    }
-});
-
-// ── POST /api/medicos/sync — Sincronizar médicos (JS SPA) ─────────
-Flight::route('POST /api/medicos/sync', function () {
-    Flight::rbac()->requirePermission('gestionar_medicos');
-    header('Content-Type: application/json; charset=utf-8');
-    
-    $payload = json_decode(file_get_contents('php://input'), true);
-    if (empty($payload['medicos']) || !is_array($payload['medicos'])) {
-        echo json_encode(['success' => false, 'error' => 'Payload inválido']);
-        return;
-    }
-
-    $adminUserId = (int)Flight::auth()->getUserId();
-    $resultado = \RC\Negocio\Ordenes::sincronizarMedicos($payload['medicos'], $adminUserId);
-    
-    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
-});
-
-// ── POST /orden/crear — Procesar creación de orden de recepción (HTMX) ─────────
-Flight::route('POST /orden/crear', function () {
-    Flight::rbac()->requirePermission('gestionar_ordenes');
-
-    // Validar CSRF
-    if (!\Common\CsrfGuard::isValid()) {
-        Logger::log('WARN', 'Token CSRF inválido en creación de orden recepción por user_id=' . Flight::auth()->getUserId());
-        \Common\Response::htmxError('Token de seguridad inválido. Recarga la página.');
-    }
-
-    // Invocar capa de negocio para creación atómica con Stored Procedure
-    $userId = (int)Flight::auth()->getUserId();
-    $resultado = \RC\Negocio\Ordenes::crearOrden($_POST, $userId);
-
-    if (!$resultado['success']) {
-        \Common\Response::htmxError($resultado['error'] ?? 'Error al procesar la orden.');
-    }
-
-    // H6 (auditoría 2026-09-20): la notificación 'nueva_orden' ya se persiste y
-    // empuja por WS dentro de RC\Negocio\Ordenes::crearOrden() (outbox transaccional
-    // — se garantiza en la misma transacción que la orden, no se pierde en silencio).
-
-    \Common\Response::htmxSuccess($resultado['mensaje']);
-});
-
-// ── POST /orden/estado — Cambiar estado de una orden (HTMX) ─────────────────
-// H2 (auditoría 2026-09-20): antes sin validación CSRF — mismo patrón que
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `sincronizarMedicos`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 8:45 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `Ordenes.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1039-1114)</summary>
-
-**Path:** `Unknown file`
-
-```
-                'total_pacientes' => 0,
-                'total_medicos'   => 0
-            ];
-        }
-    }
-
-    /**
-     * Sincroniza múltiples médicos desde la grilla JS (SPA).
-     */
-    public static function sincronizarMedicos(array $payload, int $adminUserId): array {
-        $db = DB::connect();
-        $db->beginTransaction();
-
-        try {
-            $stmtUpdateEmp = $db->prepare("UPDATE empleados SET nombre = ?, apellidos = '' WHERE user_id = ?");
-            $stmtUpdatePerf = $db->prepare("UPDATE perfiles_medicos SET nombre_completo = ?, especialidad = ?, cedula_profesional = ?, cedula_especialidad = ?, celular = ?, universidad_id = ?, lugar_trabajo_id = ? WHERE user_id = ?");
-
-            $procesados = 0;
-            $lastUserId = null;
-
-            foreach ($payload as $med) {
-                if (!empty($med['is_new'])) {
-                    // Es un médico nuevo
-                    $datosRegistro = [
-                        'nombre' => $med['nombre_completo'] ?? '',
-                        'especialidad' => $med['especialidad'] ?? 'Medicina General',
-                        'cedula_profesional' => $med['cedula_profesional'] ?? $med['cedulas'] ?? '',
-                        'cedula_especialidad' => $med['cedula_especialidad'] ?? '',
-                        'celular' => $med['celular'] ?? '',
-                        'universidad_id' => !empty($med['universidad_id']) ? (int)$med['universidad_id'] : null,
-                        'lugar_trabajo_id' => !empty($med['lugar_trabajo_id']) ? (int)$med['lugar_trabajo_id'] : null
-                    ];
-                    $res = self::registrarMedico($datosRegistro, $adminUserId);
-                    if (!$res['success']) {
-                        throw new \Exception("Error al registrar médico nuevo: " . ($res['error'] ?? ''));
-                    }
-                    $lastUserId = $res['user_id'] ?? null;
-                    $procesados++;
-                } elseif (!empty($med['is_modified']) && !empty($med['user_id'])) {
-                    // Es una actualización
-                    $userId = (int)$med['user_id'];
-                    $nombre = trim($med['nombre_completo'] ?? '');
-                    $especialidad = trim($med['especialidad'] ?? '');
-                    $cedulaProf = trim($med['cedula_profesional'] ?? $med['cedulas'] ?? '');
-                    $cedulaEsp = trim($med['cedula_especialidad'] ?? '');
-                    $celular = trim($med['celular'] ?? '');
-                    $univId = !empty($med['universidad_id']) ? (int)$med['universidad_id'] : null;
-                    $lugarId = !empty($med['lugar_trabajo_id']) ? (int)$med['lugar_trabajo_id'] : null;
-
-                    $stmtUpdateEmp->execute([$nombre, $userId]);
-                    $stmtUpdatePerf->execute([$nombre, $especialidad, $cedulaProf, $cedulaEsp, $celular, $univId, $lugarId, $userId]);
-                    $lastUserId = $userId;
-                    $procesados++;
-                }
-            }
-
-            $db->commit();
-            
-            if ($procesados > 0) {
-                Logger::logAlways('INFO', "Se sincronizaron {$procesados} médicos desde la grilla SPA", $adminUserId);
-            }
-
-            return ['success' => true, 'user_id' => $lastUserId, 'mensaje' => "✓ {$procesados} médicos sincronizados correctamente."];
-
-        } catch (\Throwable $e) {
-            $db->rollBack();
-            DB::logFallback('ERROR', 'Fallo en RC\Negocio\Ordenes::sincronizarMedicos', $e->getMessage());
-            return ['success' => false, 'error' => $e->getMessage()];
-        }
-    }
-
-    /**
-     * Obtiene estadísticas dinámicas por rango de fechas (Dashboard SPA)
-     */
-    public static function obtenerEstadisticasRango(string $rango, string $inicio = '', string $fin = ''): array {
-        try {
 ```
 
 </details>
@@ -12895,5311 +20408,10 @@ Flight::route('POST /orden/crear', function () {
 
 ### Thinking
 
-The request involves adding two new grid-formatted tabs (Universidades, Centros de trabajo) mirroring the existing "Médicos" tab, including edit functionality, new record creation, pagination, autocomplete search, and notification features. Database implementation (PDO SQL or stored procedures) needs to be decided in the backend. These new tabs will require backend endpoints for data retrieval and synchronization.
+Investigating the `renderMedicosFlatTable` function within `labadmin.js` to understand how data is presented in the table. The code iterates through items, assigning row numbers and IDs, and extracts relevant data like professional and specialty credentials. It appears to be preparing data for display in the flat table.
 
 
-The existing tab structure needs modification to include new tabs for "Universidades" and "Centros de Trabajo," adding corresponding buttons within the existing container. The new tabs' content will need to follow the same grid structure as the "Médicos" tab, ensuring a consistent user experience and similar interactive components such as paginators and search functions. Each tab's data view will dynamically update to reflect the selected content.
 
-
-The data structure for "Universidades" and "Centros de Trabajo" mirrors the existing "Médicos" tab, encompassing details like ID, name, order, status, assigned doctors count, and actions. This structure resides within a canonical `catalogos_ui` table, differentiating entries by `tipo`. Static methods will be created in `RC\Negocio\Catalogos` (or `RC\Negocio\Ordenes`) to handle data retrieval and synchronization, including a join to `perfiles_medicos` for the doctor count.
-
-
-Database interaction will be handled through a `catalogos_ui` table, utilizing PDO with prepared statements for data integrity and transactional control, adhering to established best practices for data consistency and auditability. The existing data access pattern in the `Ordenes` class will be followed for consistency. RESTful endpoints will be created to manage Universities and Work Centers via JSON, offering retrieval, creation, and synchronization capabilities.
-
-
-
-
-### Actions
-
-**Tool:** `write_to_file`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 7.367229220s
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 8:45 pm
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-## User Request
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `portal.css`
-**Language:** css
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `list_dir`
-**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/rc/negocio`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>Directory: `negocio` (1 items)</summary>
-
-**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/rc/negocio`
-
-| Name | Type | Size |
-|------|------|------|
-| `Ordenes.php` | File | 57120 bytes |
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-<?php
-/**
- * rc/index.php — Router Flight PHP para el Portal Recepción
- *
- * Ubicación: laesh-swbldi/rc/index.php
- * URL:       /laesh/rc/          (Alias en restaurantb.conf → laesh-swbldi/rc/)
- *
- * Fuente HTML: website/uipv1/labadmin.html  ← NUNCA BORRAR (R15.1 - Merge iterativo)
- * Capas:       View (views/labadmin.php), Negocio (RC\Negocio\Ordenes), Commons (Common\*)
- *
- * Rutas:
- *   GET  /             → Panel principal Recepción (requiere permiso gestionar_ordenes)
- *   POST /orden/crear  → Crear orden de laboratorio vía Stored Procedure (HTMX)
- */
-
-declare(strict_types=1);
-
-require_once __DIR__ . '/../commons/commons.php';
-
-use Common\Logger;
-use Common\DB;
-
-// ── Guard RBAC: Permite acceso a RECEPCION y ADMIN (ambos tienen gestionar_ordenes) ─
-Flight::rbac()->requirePermission(
-    'gestionar_ordenes',
-    '/laesh/login/login.php?portal=labadmin'
-);
-
-// ── GET / — Panel principal Portal Recepción ──────────────────────────────────
-Flight::route('GET /', function () {
-    $auth = Flight::auth();
-    $db   = Flight::db();
-
-    $userId   = (int)$auth->getUserId();
-    $authRole = Flight::rbac()->getRole() ?? 'RECEPCION';
-    $isAdmin  = ($authRole === 'ADMIN' || Flight::rbac()->hasPermission('gestionar_cms'));
-
-    // Obtener datos del empleado/usuario logueado
-    $stmt = $db->prepare("SELECT nombre, apellidos FROM empleados WHERE user_id = ? LIMIT 1");
-    $stmt->execute([$userId]);
-    $emp = $stmt->fetch(\PDO::FETCH_ASSOC);
-
-    if ($emp && !empty($emp['nombre'])) {
-        $nombreUsuario = trim($emp['nombre'] . ' ' . $emp['apellidos']);
-    } else {
-        $email = $auth->getEmail() ?? '';
-        $userPart = explode('@', $email)[0] ?? 'Usuario';
-        $nombreUsuario = ($authRole === 'ADMIN') ? 'Administrador' : ucfirst($userPart);
-    }
-
-
-
-
-    // CSRF token (R14.12)
-    if (empty($_SESSION['csrf_token'])) {
-        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-    }
-
-    // Obtener órdenes recientes (hoy), órdenes anteriores, catálogo de pacientes, catálogos UI y KPIs reales desde la Capa de Negocio (PDO)
-    $ordenesRecientes        = \RC\Negocio\Ordenes::obtenerOrdenesRecientes(25, 0, '', 'fecha', 'DESC');
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `commons.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-<?php
-// commons.php - Inicialización global de servicios, manejo de errores y dependencias para LAESH
-
-date_default_timezone_set('America/Mexico_City');
-
-// Cabeceras de seguridad
-header('X-Content-Type-Options: nosniff');
-header('X-Frame-Options: SAMEORIGIN');
-header('X-XSS-Protection: 1; mode=block');
-
-// 1. Iniciar sesión PHP con banderas de seguridad y duración dinámica desde BD
-if (session_status() === PHP_SESSION_NONE) {
-    ini_set('session.cookie_httponly', 1);
-    ini_set('session.use_only_cookies', 1);
-
-    // session_lifetime: fijo 24h — se eliminó la conexión PDO temporal que existía aquí
-    // para leer este valor desde BD antes de session_start(). Abrir una conexión extra
-    // solo para este dato añade overhead real por request (2 PDO + 3 queries por carga).
-    // Si se requiere configurabilidad futura, exponer como var de entorno SESSION_LIFETIME.
-    $sessionLifetime = (int)(getenv('SESSION_LIFETIME') ?: 86400);
-
-    ini_set('session.gc_maxlifetime', $sessionLifetime);
-    ini_set('session.cookie_lifetime', $sessionLifetime);
-    if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
-        ini_set('session.cookie_secure', 1);
-    }
-    session_start();
-}
-
-// 2. Cargar el cargador manual de librerías compartidas
-require_once __DIR__ . '/autoload.php';
-require_once __DIR__ . '/notifier.php';
-
-use Common\DB;
-use Common\Logger;
-use Delight\Auth\Auth;
-
-// 3. Manejo de Errores Globales (PSR-3)
-set_error_handler(function ($errno, $errstr, $errfile, $errline) {
-    if (!(error_reporting() & $errno)) {
-        return false;
-    }
-    $message = sprintf("Error [%d]: %s en %s:%d", $errno, $errstr, $errfile, $errline);
-    Logger::log("ERROR", $message);
-    return true;
-});
-
-set_exception_handler(function ($exception) {
-    $config  = require __DIR__ . '/config.php';
-    $isDev   = ($config['app']['env'] ?? 'production') === 'development';
-
-    // ── Error 1969: max_statement_time excedido (MariaDB KILL automático) ──
-    // Ocurre cuando una query supera max_statement_time = 10s en mariadb.cnf.
-    // El motor devuelve SQLSTATE HY000 errno 1969 como PDOException.
-    // → Respuesta 503: el usuario ve mensaje claro; admin ve traza en log.
-    if ($exception instanceof \PDOException) {
-        $nativeCode = (int)($exception->errorInfo[1] ?? 0);
-        if ($nativeCode === 1969) {
-            http_response_code(503);
-            Logger::log(
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `autoload.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-<?php
-// autoload.php - Autoloader para el entorno frugal LAESH (cargando librerías compartidas)
-
-$sharedLibsDir = __DIR__ . '/../libs';   // flight, plates, auth — vendored en laesh-swbldi/libs/
-
-// 1. Inicializar el autoloteador nativo de Flight PHP
-require_once $sharedLibsDir . '/flight/autoload.php';
-
-// 2. Registrar cargador PSR-4 para Plates, Delight-Auth y espacio de nombres Common\
-spl_autoload_register(function ($class) use ($sharedLibsDir) {
-    $prefixes = [
-        'League\\Plates\\' => $sharedLibsDir . '/plates/',
-        'Delight\\Auth\\' => $sharedLibsDir . '/auth/Delight/Auth/',
-        'Delight\\Cookie\\' => $sharedLibsDir . '/auth/Delight/Cookie/',
-        'Delight\\Db\\' => $sharedLibsDir . '/auth/Delight/Db/',
-        'Delight\\Base64\\' => $sharedLibsDir . '/auth/Delight/Base64/',
-        'Delight\\Http\\' => $sharedLibsDir . '/auth/Delight/Http/',
-        'Common\\' => __DIR__ . '/',
-        'RC\\Negocio\\' => __DIR__ . '/../rc/negocio/',
-        'MD\\Negocio\\' => __DIR__ . '/../md/negocio/',
-        'ADMRC\\Negocio\\' => __DIR__ . '/../admrc/negocio/',
-    ];
-
-    foreach ($prefixes as $prefix => $base_dir) {
-        $len = strlen($prefix);
-        if (strncmp($prefix, $class, $len) !== 0) {
-            continue;
-        }
-
-        $relative_class = substr($class, $len);
-        $file = $base_dir . str_replace('\\', '/', $relative_class) . '.php';
-
-        if (file_exists($file)) {
-            require_once $file;
-            return;
-        }
-    }
-});
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The PSR-4 autoloader maps the namespace `RC\Negocio\` to a specific directory, thus allowing the creation of a `Catalogos` class within that namespace at the corresponding file path. Implementation will focus on adding methods for Universidades and Centros de Trabajo within the `Catalogos.php` file, starting with the `obtenerUniversidades()` method that will involve a database query.
-
-
-
-
-### Actions
-
-**Tool:** `write_to_file`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.071282149s
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 8:47 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 8:47 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L609-644)</summary>
-
-**Path:** `Unknown file`
-
-```
-// ── GET /api/medicos — Devuelve catálogo de médicos en JSON ─────────
-Flight::route('GET /api/medicos', function () {
-    header('Content-Type: application/json; charset=utf-8');
-    try {
-        $db = \Common\DB::connect();
-        $medicosCatalog = $db->query(
-            "SELECT user_id, nombre_completo, cedula_profesional, cedula_especialidad, especialidad, celular, 
-                    universidad_id, universidad_nombre, lugar_trabajo_id, lugar_trabajo_nombre, total_ordenes 
-             FROM vw_medicos_completos 
-             ORDER BY total_ordenes DESC"
-        )->fetchAll(\PDO::FETCH_ASSOC) ?: [];
-        echo json_encode(['success' => true, 'data' => $medicosCatalog], JSON_UNESCAPED_UNICODE);
-    } catch (\Throwable $e) {
-        echo json_encode(['success' => false, 'error' => $e->getMessage()]);
-    }
-});
-
-// ── POST /api/medicos/sync — Sincronizar médicos (JS SPA) ─────────
-Flight::route('POST /api/medicos/sync', function () {
-    Flight::rbac()->requirePermission('gestionar_medicos');
-    header('Content-Type: application/json; charset=utf-8');
-    
-    $payload = json_decode(file_get_contents('php://input'), true);
-    if (empty($payload['medicos']) || !is_array($payload['medicos'])) {
-        echo json_encode(['success' => false, 'error' => 'Payload inválido']);
-        return;
-    }
-
-    $adminUserId = (int)Flight::auth()->getUserId();
-    $resultado = \RC\Negocio\Ordenes::sincronizarMedicos($payload['medicos'], $adminUserId);
-    
-    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
-});
-
-// ── POST /orden/crear — Procesar creación de orden de recepción (HTMX) ─────────
-Flight::route('POST /orden/crear', function () {
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 8:48 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 8:48 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L324-384)</summary>
-
-**Path:** `Unknown file`
-
-```
-                <!-- Panel 3: Médicos -->
-                <div id="panel-medicos" class="tab-panel d-none">
-                    <!-- Fila 1: Pestañas superiores -->
-                    <div class="cms-tabs" id="toggle-medicos-view" role="tablist">
-                        <button type="button" class="cms-tab active" data-view="table" id="btn-view-medicos-table">1. Registro Medicos</button>
-                    </div>
-
-                    <!-- Fila 2: Título de Sección y Controles -->
-                    <div class="cms-panel-header" style="margin-top: 1rem; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-                        <h3 class="cms-h3" style="margin: 0; font-size: 1.35rem; font-weight: 800; color: #0052B7;">Médicos</h3>
-                        
-                        <div style="display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; justify-content: flex-end;">
-                            <!-- Paginador y Total -->
-                            <div id="flat-medicos-pagination-wrap" style="display: flex; align-items: center; gap: 0.5rem;">
-                                <span id="flat-medicos-total-records" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">Total: 0</span>
-                                <span style="color: #cbd5e1; display: inline;">|</span>
-                                <div id="flat-medicos-pagination" style="display: flex; gap: 0.25rem; align-items: center;"></div>
-                            </div>
-
-                            <!-- Buscador -->
-                            <div id="flat-search-medicos-container" style="display: flex; gap: 0.5rem; align-items: center; position:relative; z-index: 100;">
-                                <input type="text" id="flat-search-medicos-input" class="form-input form-input--bg" autocomplete="new-password" spellcheck="false" autocorrect="off" autocapitalize="none" placeholder="🔍 Buscar médico..." style="width: 220px;">
-                            </div>
-
-                            <!-- Botones Acción -->
-                            <div id="flat-medicos-actions" style="display: flex; align-items: center; gap: 0.5rem;">
-                                <button type="button" class="btn btn-secondary fnt-cursor" id="btn-guardar-medicos" style="display:none; padding: 6px 14px; font-size: 0.88rem; font-weight: 500;">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:4px; vertical-align:middle;"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
-                                    Guardar Cambios
-                                </button>
-                                <button type="button" class="btn btn-primary fnt-cursor" id="btn-add-medico-row" style="padding: 6px 14px; font-size: 0.88rem; font-weight: 500;">+ Añadir Médico</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- VISTA TABLA PLANA -->
-                    <div id="view-medicos-table" style="margin-top: 0.5rem; margin-bottom: 2.5rem;">
-                        <div class="table-responsive" style="max-height: calc(100vh - 240px); overflow-y: auto; overflow-x: auto; border: 1px solid var(--border); border-radius: 4px;">
-                            <table class="table" id="flat-medicos-table" style="margin-bottom: 0; min-width: 1200px; white-space: nowrap;">
-                                <thead>
-                                    <tr>
-                                        <th style="position: sticky; top: 0; background: #e0f2fe; color: var(--primary-dark); z-index: 10; width: 60px; text-align: center;">#</th>
-                                        <th style="position: sticky; top: 0; background: #e0f2fe; color: var(--primary-dark); z-index: 10; cursor: pointer; width: 130px;" id="flat-medicos-sort-cedula" data-order="none">Cédula Prof. <span class="sort-icon"></span></th>
-                                        <th style="position: sticky; top: 0; background: #e0f2fe; color: var(--primary-dark); z-index: 10; width: 130px;">Cédula Esp.</th>
-                                        <th style="position: sticky; top: 0; background: #e0f2fe; color: var(--primary-dark); z-index: 10; cursor: pointer; width: 260px;" id="flat-medicos-sort-nombre" data-order="asc">Nombre del Médico <span class="sort-icon">▲</span></th>
-                                        <th style="position: sticky; top: 0; background: #e0f2fe; color: var(--primary-dark); z-index: 10; width: 180px;">Especialidad</th>
-                                        <th style="position: sticky; top: 0; background: #e0f2fe; color: var(--primary-dark); z-index: 10; width: 220px;">Universidad</th>
-                                        <th style="position: sticky; top: 0; background: #e0f2fe; color: var(--primary-dark); z-index: 10; width: 220px;">Lugar de Trabajo</th>
-                                        <th style="position: sticky; top: 0; background: #e0f2fe; color: var(--primary-dark); z-index: 10; width: 120px; text-align: center;">Órdenes (Mes)</th>
-                                        <th style="position: sticky; top: 0; background: #e0f2fe; color: var(--primary-dark); z-index: 10; width: 100px; text-align: center;">Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- Dinámico JS -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Panel 4: Reportes (Scope 16) -->
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `modal-medico`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 8:48 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L784-879)</summary>
-
-**Path:** `Unknown file`
-
-```
-        </div>
-    </div>
-
-    <!-- Modal de Resultados -->
-    <!-- ── Modal: Registro de Perfil Médico ────────────────────────── -->
-    <div id="modal-medico" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-medico-title">
-        <div class="modal-content modal-sm">
-
-            <!-- Cabecera LAESH homologada (arrastrable via app.js initModalDrag) -->
-            <div class="modal-header">
-                <h3 id="modal-medico-title">Registro de Perfil Médico</h3>
-                <button type="button" class="close-modal" id="btn-cerrar-medico" aria-label="Cerrar">&times;</button>
-            </div>
-            <div class="modal-body">
-
-            <!-- Formulario -->
-            <form id="form-perfil-medico" class="d-flex-col-gap1">
-                <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                <input type="hidden" id="pm-user-id" name="user_id" value="">
-
-                <!-- Nombre completo -->
-                <div class="form-group mb-0">
-                    <label for="pm-nombre" class="form-label">
-                        Nombre completo <span class="req">*</span>
-                    </label>
-                    <input type="text" id="pm-nombre" name="nombre"
-                           placeholder="Ej. Dr. Hedilberto Reyes Venegas" required
-                           class="form-input form-input--bg">
-                </div>
-
-                <!-- Especialidad -->
-                <div class="form-group mb-0">
-                    <label for="pm-especialidad" class="form-label">
-                        Especialidad <span class="req">*</span>
-                    </label>
-                    <div class="form-field">
-                        <select id="pm-especialidad" name="especialidad" required
-                                class="form-input form-input--bg form-select">
-                            <option value="" disabled selected>Seleccione una especialidad</option>
-                            <option value="Medicina Interna">Medicina Interna</option>
-                            <option value="Ginecología y Obstetricia">Ginecología y Obstetricia</option>
-                            <option value="Pediatría y Patología">Pediatría y Patología</option>
-                            <option value="Hematología Especializada">Hematología Especializada</option>
-                            <option value="Medicina General">Medicina General</option>
-                            <option value="Cardiología">Cardiología</option>
-                            <option value="Cirugía General">Cirugía General</option>
-                        </select>
-                        <span class="select-arrow"></span>
-                    </div>
-                </div>
-
-                <!-- Cédula Profesional -->
-                <div class="form-group mb-0">
-                    <label for="pm-cedula-profesional" class="form-label">
-                        Cédula Profesional <span class="req">*</span>
-                    </label>
-                    <input type="text" id="pm-cedula-profesional" name="cedula_profesional"
-                           placeholder="Ej. 6605518" required
-                           class="form-input form-input--bg">
-                </div>
-
-                <!-- Cédula Especialidad -->
-                <div class="form-group mb-0">
-                    <label for="pm-cedula-especialidad" class="form-label">
-                        Cédula Especialidad
-                    </label>
-                    <input type="text" id="pm-cedula-especialidad" name="cedula_especialidad"
-                           placeholder="Ej. 9456189"
-                           class="form-input form-input--bg">
-                </div>
-
-                <!-- Teléfono Celular -->
-                <div class="form-group mb-0">
-                    <label for="pm-celular" class="form-label">
-                        Teléfono Celular <span class="req">*</span>
-                    </label>
-                    <input type="tel" id="pm-celular" name="celular" maxlength="10"
-                           placeholder="Ej. 9531234567" required inputmode="tel"
-                           class="form-input form-input--bg">
-                </div>
-
-                <!-- Universidad (MariaDB catalogos_ui) -->
-                <div class="form-group mb-0">
-                    <label for="pm-universidad" class="form-label">
-                        Universidad <span class="req">*</span>
-                    </label>
-                    <div class="form-field">
-                        <select id="pm-universidad" name="universidad_id" required
-                                class="form-input form-input--bg form-select">
-                            <option value="" disabled selected>Seleccione una universidad</option>
-                            <?php if (!empty($catalogosUI['universidades'])): ?>
-                                <?php foreach ($catalogosUI['universidades'] as $u): ?>
-                                    <option value="<?= (int)$u['id'] ?>"><?= htmlspecialchars($u['valor'], ENT_QUOTES, 'UTF-8') ?></option>
-                                <?php endforeach; ?>
-                            <?php endif; ?>
-                        </select>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Focus is now on structuring the `labadmin.php` components and views, starting with sub-tabs within the `#panel-medicos` section. The HTML structure will define these tabs, with distinct buttons for different views: "Registro Médicos" (table view) and "Universidades". This setup establishes the basis for switching between distinct data representations.
-
-
-The structure defines three distinct views: "Médicos", "Universidades", and "Centros de Trabajo," each associated with a unique HTML element.  Headers for "Universidades" and "Centros de Trabajo" include title, pagination, search, and a "Add" button, with corresponding flat tables for data display. "Médicos" likely uses a similar structure, and its details are being confirmed by associating the existing components.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 10.757245163s
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 8:48 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L879-919)</summary>
-
-**Path:** `Unknown file`
-
-```
-        </div>
-    </div>
-
-    <!-- Modal de Resultados -->
-    <!-- ── Modal: Registro de Perfil Médico ────────────────────────── -->
-    <div id="modal-medico" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-medico-title">
-        <div class="modal-content modal-sm">
-
-            <!-- Cabecera LAESH homologada (arrastrable via app.js initModalDrag) -->
-            <div class="modal-header">
-                <h3 id="modal-medico-title">Registro de Perfil Médico</h3>
-                <button type="button" class="close-modal" id="btn-cerrar-medico" aria-label="Cerrar">&times;</button>
-            </div>
-            <div class="modal-body">
-
-            <!-- Formulario -->
-            <form id="form-perfil-medico" class="d-flex-col-gap1">
-                <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                <input type="hidden" id="pm-user-id" name="user_id" value="">
-
-                <!-- Nombre completo -->
-                <div class="form-group mb-0">
-                    <label for="pm-nombre" class="form-label">
-                        Nombre completo <span class="req">*</span>
-                    </label>
-                    <input type="text" id="pm-nombre" name="nombre"
-                           placeholder="Ej. Dr. Hedilberto Reyes Venegas" required
-                           class="form-input form-input--bg">
-                </div>
-
-                <!-- Especialidad -->
-                <div class="form-group mb-0">
-                    <label for="pm-especialidad" class="form-label">
-                        Especialidad <span class="req">*</span>
-                    </label>
-                    <div class="form-field">
-                        <select id="pm-especialidad" name="especialidad" required
-                                class="form-input form-input--bg form-select">
-                            <option value="" disabled selected>Seleccione una especialidad</option>
-                            <option value="Medicina Interna">Medicina Interna</option>
-                            <option value="Ginecología y Obstetricia">Ginecología y Obstetricia</option>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L949-999)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-                <!-- Teléfono Celular -->
-                <div class="form-group mb-0">
-                    <label for="pm-celular" class="form-label">
-                        Teléfono Celular <span class="req">*</span>
-                    </label>
-                    <input type="tel" id="pm-celular" name="celular" maxlength="10"
-                           placeholder="Ej. 9531234567" required inputmode="tel"
-                           class="form-input form-input--bg">
-                </div>
-
-                <!-- Universidad (MariaDB catalogos_ui) -->
-                <div class="form-group mb-0">
-                    <label for="pm-universidad" class="form-label">
-                        Universidad <span class="req">*</span>
-                    </label>
-                    <div class="form-field">
-                        <select id="pm-universidad" name="universidad_id" required
-                                class="form-input form-input--bg form-select">
-                            <option value="" disabled selected>Seleccione una universidad</option>
-                            <?php if (!empty($catalogosUI['universidades'])): ?>
-                                <?php foreach ($catalogosUI['universidades'] as $u): ?>
-                                    <option value="<?= (int)$u['id'] ?>"><?= htmlspecialchars($u['valor'], ENT_QUOTES, 'UTF-8') ?></option>
-                                <?php endforeach; ?>
-                            <?php endif; ?>
-                        </select>
-                        <span class="select-arrow"></span>
-                    </div>
-                </div>
-
-                <!-- Lugar donde labora (MariaDB catalogos_ui) -->
-                <div class="form-group mb-0">
-                    <label for="pm-lugar" class="form-label">
-                        Lugar donde labora <span class="req">*</span>
-                    </label>
-                    <div class="form-field">
-                        <select id="pm-lugar" name="lugar_trabajo_id" required
-                                class="form-input form-input--bg form-select">
-                            <option value="" disabled selected>Seleccione un lugar de trabajo</option>
-                            <?php if (!empty($catalogosUI['lugares_trabajo'])): ?>
-                                <?php foreach ($catalogosUI['lugares_trabajo'] as $lt): ?>
-                                    <option value="<?= (int)$lt['id'] ?>"><?= htmlspecialchars($lt['valor'], ENT_QUOTES, 'UTF-8') ?></option>
-                                <?php endforeach; ?>
-                            <?php endif; ?>
-                        </select>
-                        <span class="select-arrow"></span>
-                    </div>
-                </div>
-
-                <!-- Botones -->
-                <div class="form-row-gap">
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L999-1039)</summary>
-
-**Path:** `Unknown file`
-
-```
-                <div class="form-row-gap">
-                    <button type="button" class="btn btn-secondary flex-1" id="btn-limpiar-medico" onclick="document.getElementById('form-perfil-medico').reset()">Limpiar</button>
-                    <button type="submit" class="btn btn-primary flex-1" id="btn-guardar-medico">Guardar Perfil</button>
-                </div>
-
-            </form>
-            </div><!-- /.modal-body -->
-        </div>
-    </div>
-
-    <div id="modal-resultados" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-resultados-title">
-        <div class="modal-content modal-md">
-            <div class="modal-header">
-                <h3 id="modal-resultados-title">Reporte de Resultados Clínicos</h3>
-                <button type="button" class="close-modal" id="btn-cerrar-resultados-admin" aria-label="Cerrar">&times;</button>
-            </div>
-            <div class="modal-body ta-center pa-5">
-                <img src="/laesh-web-assets-uipv1a/img/resultado.webp?v=3.5" class="modal-img-preview" alt="Resultado" loading="lazy" decoding="async">
-            </div>
-        </div>
-    </div>
-    <!-- Modal de Formulario de Estudio (Crear/Modificar) -->
-    <div id="modal-estudio" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-estudio-titulo">
-        <div class="modal-content" style="max-width: 760px; width: 92%;">
-            <div class="modal-header">
-                <h3 id="modal-estudio-titulo">Editar Estudio Clínico</h3>
-                <button type="button" class="close-modal" id="btn-cerrar-estudio" aria-label="Cerrar">&times;</button>
-            </div>
-            <div class="modal-body">
-            <form id="form-estudio" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                <input type="hidden" id="estudio-id-original">
-
-                <!-- 1. Clave -->
-                <div>
-                    <label class="form-label--sm">Clave del Estudio</label>
-                    <input type="text" id="estudio-clave" required class="form-input-sm" style="width: 100%;">
-                </div>
-
-                <!-- 2. Nombre -->
-                <div>
-                    <label class="form-label--sm">Nombre del Estudio</label>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 8:48 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 8:48 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-Analyzing existing "Doctors" functions within the specified JavaScript file to establish a consistent design pattern for "Universities" and "Work Centers". Need to implement sub-tab switching logic within the provided container element. Specifically, focusing on activating the 'active' class when the table view button is clicked.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.068066352s
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1329-1388)</summary>
-
-**Path:** `Unknown file`
-
-```
-        html += '<button type="button" class="btn ' + activeClass + ' btn-sm med-page-btn" data-page="' + i + '" style="padding: 2px 8px; font-size: 0.8rem;">' + i + '</button>';
-    }
-    container.innerHTML = html;
-
-    container.querySelectorAll('.med-page-btn').forEach(function(btn) {
-        btn.addEventListener('click', function() {
-            var page = parseInt(this.getAttribute('data-page'), 10);
-            renderMedicosFlatTable(page);
-        });
-    });
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    var searchInput = document.getElementById('flat-search-medicos-input');
-    if (searchInput) {
-        searchInput.addEventListener('input', function() {
-            applyMedicosFilterAndSort();
-            renderMedicosFlatTable(1);
-        });
-    }
-
-    var btnAdd = document.getElementById('btn-add-medico-row');
-    if (btnAdd) {
-        btnAdd.addEventListener('click', abrirNuevoMedicoModal);
-    }
-
-    var sortCedula = document.getElementById('flat-medicos-sort-cedula');
-    if (sortCedula) {
-        sortCedula.addEventListener('click', function() {
-            if (medicosSortCol === 'cedula_profesional') {
-                medicosSortOrder = medicosSortOrder === 'asc' ? 'desc' : 'asc';
-            } else {
-                medicosSortCol = 'cedula_profesional';
-                medicosSortOrder = 'asc';
-            }
-            applyMedicosFilterAndSort();
-            renderMedicosFlatTable(1);
-        });
-    }
-
-    var sortNombre = document.getElementById('flat-medicos-sort-nombre');
-    if (sortNombre) {
-        sortNombre.addEventListener('click', function() {
-            if (medicosSortCol === 'nombre_completo') {
-                medicosSortOrder = medicosSortOrder === 'asc' ? 'desc' : 'asc';
-            } else {
-                medicosSortCol = 'nombre_completo';
-                medicosSortOrder = 'asc';
-            }
-            applyMedicosFilterAndSort();
-            renderMedicosFlatTable(1);
-        });
-    }
-
-    var panelMed = document.getElementById('panel-medicos');
-    if (panelMed && window.getComputedStyle(panelMed).display !== 'none' && !panelMed.classList.contains('d-none')) {
-        initMedicosFlatGrid();
-    }
-});
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `close-modal`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 8:49 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `modal-medico`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 8:49 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L644-674)</summary>
-
-**Path:** `Unknown file`
-
-```
-                opt.textContent = item;
-                sel.appendChild(opt);
-            });
-        }
-
-        // ── Abrir modal ──────────────────────────────────────────────
-        window.abrirModalMedico = function() {
-            window.lastActiveElementBeforeModal = document.activeElement;
-            var m = document.getElementById('modal-medico');
-            if (m) m.classList.add('show');
-            document.body.style.overflow = 'hidden';
-            var firstInput = document.getElementById('pm-nombre');
-            if (firstInput) {
-                setTimeout(function() { firstInput.focus(); }, 100);
-            }
-        };
-
-        // ── Cerrar modal ─────────────────────────────────────────────
-        window.cerrarModalMedico = function(skipRestoreFocus) {
-            var m = document.getElementById('modal-medico');
-            if (m) m.classList.remove('show');
-            document.body.style.overflow = '';
-            if (!skipRestoreFocus && window.lastActiveElementBeforeModal && typeof window.lastActiveElementBeforeModal.focus === 'function') {
-                window.lastActiveElementBeforeModal.focus();
-            }
-        };
-
-        // ── Limpiar formulario ───────────────────────────────────────
-        window.limpiarFormMedico = function() {
-            document.getElementById('form-perfil-medico').reset();
-        };
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `form-perfil-medico`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 8:49 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L674-734)</summary>
-
-**Path:** `Unknown file`
-
-```
-        };
-
-        // ── Guardar/Editar perfil médico ──────────────────────────────
-        var formMedico = document.getElementById('form-perfil-medico');
-        if (formMedico) {
-            formMedico.addEventListener('submit', function(e) {
-                e.preventDefault();
-
-                var userId   = (document.getElementById('pm-user-id') ? document.getElementById('pm-user-id').value : '').trim();
-                var nombre   = (document.getElementById('pm-nombre').value || '').trim();
-                var esp      = document.getElementById('pm-especialidad').value;
-                var cedProf  = (document.getElementById('pm-cedula-profesional') ? document.getElementById('pm-cedula-profesional').value : '').trim();
-                var cedEsp   = (document.getElementById('pm-cedula-especialidad') ? document.getElementById('pm-cedula-especialidad').value : '').trim();
-                var celular  = (document.getElementById('pm-celular').value || '').trim();
-                var univEl   = document.getElementById('pm-universidad');
-                var lugarEl  = document.getElementById('pm-lugar');
-                var univId   = univEl && univEl.value ? parseInt(univEl.value, 10) : null;
-                var lugarId  = lugarEl && lugarEl.value ? parseInt(lugarEl.value, 10) : null;
-
-                if (!nombre || !esp || !cedProf || !celular || !univId || !lugarId) {
-                    alert('Por favor complete todos los campos requeridos (incluyendo Cédula Profesional, Universidad y Lugar donde labora).');
-                    return;
-                }
-                if (!/^\d{10}$/.test(celular)) {
-                    alert('El celular debe tener exactamente 10 dígitos.');
-                    return;
-                }
-
-                var btnGuardar = document.getElementById('btn-guardar-medico');
-                if (btnGuardar) {
-                    btnGuardar.disabled = true;
-                    btnGuardar.textContent = 'Guardando…';
-                }
-
-                var payloadItem = {
-                    nombre_completo: nombre,
-                    especialidad: esp,
-                    cedula_profesional: cedProf,
-                    cedula_especialidad: cedEsp,
-                    celular: celular,
-                    universidad_id: univId,
-                    lugar_trabajo_id: lugarId
-                };
-
-                if (userId) {
-                    payloadItem.user_id = parseInt(userId, 10);
-                    payloadItem.is_modified = true;
-                } else {
-                    payloadItem.is_new = true;
-                }
-
-                fetch('/laesh/rc/api/medicos/sync', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ medicos: [payloadItem] })
-                })
-                .then(function(res) { return res.json(); })
-                .then(function(data) {
-                    if (btnGuardar) {
-                        btnGuardar.disabled = false;
-                        btnGuardar.textContent = userId ? 'Actualizar Perfil' : 'Guardar Perfil';
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L734-789)</summary>
-
-**Path:** `Unknown file`
-
-```
-                        btnGuardar.textContent = userId ? 'Actualizar Perfil' : 'Guardar Perfil';
-                    }
-                    if (data && data.success) {
-                        var savedUserId = data.user_id || (userId ? parseInt(userId, 10) : null);
-                        if (typeof window.cerrarModalMedico === 'function') {
-                            window.cerrarModalMedico(true); // skipRestoreFocus as fetchMedicosData will handle target row focus
-                        }
-                        formMedico.reset();
-                        if (document.getElementById('pm-user-id')) {
-                            document.getElementById('pm-user-id').value = '';
-                        }
-                        if (typeof window.showToast === 'function') {
-                            window.showToast(data.mensaje || 'Perfil médico guardado correctamente.', 'success');
-                        } else {
-                            alert('✅ ' + (data.mensaje || 'Perfil médico guardado correctamente.'));
-                        }
-                        if (typeof fetchMedicosData === 'function') {
-                            fetchMedicosData(savedUserId);
-                        }
-                    } else {
-                        alert('⚠️ Error: ' + (data.error || 'No se pudo guardar el médico.'));
-                    }
-                })
-                .catch(function(err) {
-                    console.error('Error guardando médico:', err);
-                    if (btnGuardar) {
-                        btnGuardar.disabled = false;
-                        btnGuardar.textContent = userId ? 'Actualizar Perfil' : 'Guardar Perfil';
-                    }
-                    alert('⚠️ Error de conexión al guardar médico.');
-                });
-            });
-        }
-    })();
-
-/* ── P-LAESH-01 Phase3: event listeners (reemplaza onclick=/onchange= del HTML) ── */
-document.addEventListener('DOMContentLoaded', function() {
-    // Nav items → cambiarTabAdmin delegation
-    document.querySelectorAll('.nav-item[data-panel]').forEach(function(item) {
-        item.addEventListener('click', function() {
-            if (typeof window.cambiarTabAdmin === 'function')
-                window.cambiarTabAdmin(this.getAttribute('data-panel'), this);
-        });
-    });
-
-    // Sidebar nav → gestion-web
-    var navGestionWeb = document.getElementById('nav-gestion-web');
-    if (navGestionWeb) navGestionWeb.addEventListener('click', function(e) {
-        if (window.location.pathname.endsWith('.html') || window.location.protocol === 'file:' || window.location.pathname.includes('/uipv1a/')) {
-            e.preventDefault();
-            window.location.href = 'gestion-web.html';
-        } else {
-            window.location.href = '/laesh/adrc/';
-        }
-    });
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `toggle-medicos-view`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 8:49 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-Planning to implement the Universities and Work Centers module within the specified JavaScript file, including tab switching functionality. Initializing variables to manage university data, filtering, and pagination, preparing for data handling and display.
-
-
-Setting up data structures and functions for handling University and Work Center data. Considering pagination, filtering, sorting, modal interactions (new, edit, close), and data submission with success feedback and UI updates. Implementing logic for tab switching based on button click events.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `cambiarTabAdmin`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.384127556s
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 8:49 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L314-359)</summary>
-
-**Path:** `Unknown file`
-
-```
-            'panel-catalogos':          'Catálogos de Análisis'
-        };
-
-        function cambiarTabAdmin(panelId, el) {
-            document.querySelectorAll('.sidebar .nav-item').forEach(i => i.classList.remove('active'));
-            if (el) {
-                el.classList.add('active');
-            } else {
-                const navItem = document.querySelector(`.sidebar .nav-item[data-panel="${panelId}"]`);
-                if (navItem) navItem.classList.add('active');
-            }
-            document.querySelectorAll('.tab-panel').forEach(p => {
-                p.style.display = 'none';
-                p.classList.add('d-none');
-            });
-            const target = document.getElementById(panelId);
-            if (target) {
-                target.classList.remove('d-none');
-                target.style.display = 'block';
-            }
-
-            const bc = document.getElementById('header-bc-current');
-            if (bc && panelLabelsAdmin[panelId]) {
-                bc.textContent = panelLabelsAdmin[panelId];
-            }
-            if (panelId === 'panel-catalogos') {
-                if (typeof window.loadCatalogTree === 'function') {
-                    window.loadCatalogTree();
-                }
-                const btnViewTable = document.getElementById('btn-view-table');
-                if (btnViewTable) {
-                    btnViewTable.click();
-                }
-            }
-            if (panelId === 'panel-medicos') {
-                if (typeof initMedicosFlatGrid === 'function') {
-                    initMedicosFlatGrid();
-                }
-            }
-        }
-        window.cambiarTabAdmin = cambiarTabAdmin;
-
-        // Refrescar tablas, badge y silbato cuando médico u otro tab actualiza localStorage
-        window.addEventListener('storage', function() {
-            refreshData();                                                           // actualiza tabla-recepcion + badge-recepcion + silbato si hay nuevas órdenes
-            if (typeof refreshHistorialAdmin === 'function') refreshHistorialAdmin(); // actualiza historial de Órdenes Anteriores
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Focus is on the 'panel-medicos' conditional block within the code. The objective is to determine the active sub-tab and its associated view type. It appears there's a conditional execution path where, if the `viewType` is "universidades", and a specific function is defined, it will trigger that function.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.001944852s
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1339-1388)</summary>
-
-**Path:** `Unknown file`
-
-```
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    var searchInput = document.getElementById('flat-search-medicos-input');
-    if (searchInput) {
-        searchInput.addEventListener('input', function() {
-            applyMedicosFilterAndSort();
-            renderMedicosFlatTable(1);
-        });
-    }
-
-    var btnAdd = document.getElementById('btn-add-medico-row');
-    if (btnAdd) {
-        btnAdd.addEventListener('click', abrirNuevoMedicoModal);
-    }
-
-    var sortCedula = document.getElementById('flat-medicos-sort-cedula');
-    if (sortCedula) {
-        sortCedula.addEventListener('click', function() {
-            if (medicosSortCol === 'cedula_profesional') {
-                medicosSortOrder = medicosSortOrder === 'asc' ? 'desc' : 'asc';
-            } else {
-                medicosSortCol = 'cedula_profesional';
-                medicosSortOrder = 'asc';
-            }
-            applyMedicosFilterAndSort();
-            renderMedicosFlatTable(1);
-        });
-    }
-
-    var sortNombre = document.getElementById('flat-medicos-sort-nombre');
-    if (sortNombre) {
-        sortNombre.addEventListener('click', function() {
-            if (medicosSortCol === 'nombre_completo') {
-                medicosSortOrder = medicosSortOrder === 'asc' ? 'desc' : 'asc';
-            } else {
-                medicosSortCol = 'nombre_completo';
-                medicosSortOrder = 'asc';
-            }
-            applyMedicosFilterAndSort();
-            renderMedicosFlatTable(1);
-        });
-    }
-
-    var panelMed = document.getElementById('panel-medicos');
-    if (panelMed && window.getComputedStyle(panelMed).display !== 'none' && !panelMed.classList.contains('d-none')) {
-        initMedicosFlatGrid();
-    }
-});
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 8:49 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1339-1394)</summary>
-
-**Path:** `Unknown file`
-
-```
-    container.querySelectorAll('.med-page-btn').forEach(function(btn) {
-        btn.addEventListener('click', function() {
-            var page = parseInt(this.getAttribute('data-page'), 10);
-            renderMedicosFlatTable(page);
-        });
-    });
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    var searchInput = document.getElementById('flat-search-medicos-input');
-    if (searchInput) {
-        searchInput.addEventListener('input', function() {
-            applyMedicosFilterAndSort();
-            renderMedicosFlatTable(1);
-        });
-    }
-
-    var btnAdd = document.getElementById('btn-add-medico-row');
-    if (btnAdd) {
-        btnAdd.addEventListener('click', abrirNuevoMedicoModal);
-    }
-
-    var sortCedula = document.getElementById('flat-medicos-sort-cedula');
-    if (sortCedula) {
-        sortCedula.addEventListener('click', function() {
-            if (medicosSortCol === 'cedula_profesional') {
-                medicosSortOrder = medicosSortOrder === 'asc' ? 'desc' : 'asc';
-            } else {
-                medicosSortCol = 'cedula_profesional';
-                medicosSortOrder = 'asc';
-            }
-            applyMedicosFilterAndSort();
-            renderMedicosFlatTable(1);
-        });
-    }
-
-    var sortNombre = document.getElementById('flat-medicos-sort-nombre');
-    if (sortNombre) {
-        sortNombre.addEventListener('click', function() {
-            if (medicosSortCol === 'nombre_completo') {
-                medicosSortOrder = medicosSortOrder === 'asc' ? 'desc' : 'asc';
-            } else {
-                medicosSortCol = 'nombre_completo';
-                medicosSortOrder = 'asc';
-            }
-            applyMedicosFilterAndSort();
-            renderMedicosFlatTable(1);
-        });
-    }
-
-    var panelMed = document.getElementById('panel-medicos');
-    if (panelMed && window.getComputedStyle(panelMed).display !== 'none' && !panelMed.classList.contains('d-none')) {
-        initMedicosFlatGrid();
-    }
-});
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Planning the structure for the "Universidades y Centros de Trabajo" section, focusing on sub-tabs for different views. Will implement event listeners on tab elements within a specific container. The first tab, triggered by a designated button, will display a specific table and initialize a corresponding grid. The second tab, also triggered by a designated button, will display a different table and hide other views.
-
-
-Now implementing the display logic for the tables and their initialization based on button clicks, ensuring the correct views are shown and grids initialized. Each table will include pagination, a reactive search input, sortable headers, and render rows with specific data and actions. Saving functionality will involve AJAX calls, toast notifications, row highlighting, and dynamic updates of select elements in other modals.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 18.960813033s
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 8:49 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `row-saved-highlight`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 8:50 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `portal.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L2239-2259)</summary>
-
-**Path:** `Unknown file`
-
-```
-    50% { background-color: rgba(113, 202, 17, 0.15) !important; }
-    100% { background-color: transparent !important; }
-}
-.row-saved-highlight {
-    animation: rowSavedHighlight 2.5s ease-in-out forwards;
-}
-
-/* Resalte de 10 segundos al accionar un registro de la grilla */
-@keyframes rowActionHighlight {
-    0% { 
-        background-color: #fef08a !important; 
-        box-shadow: inset 0 0 0 2px #eab308, 0 0 14px rgba(234, 179, 8, 0.4); 
-    }
-    15% { 
-        background-color: #fef9c3 !important; 
-        box-shadow: inset 0 0 0 2px #ca8a04, 0 0 8px rgba(202, 138, 4, 0.25); 
-    }
-    80% { 
-        background-color: #fef9c3 !important; 
-        box-shadow: inset 0 0 0 1.5px rgba(202, 138, 4, 0.35); 
-    }
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 8:50 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 8:50 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 8:50 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `write_to_file`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 8:50 pm
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-## User Request
-
-oye ya analiza bien, ten el contexto adecuado, busca en la bd las tablas de catalogos para universidades y . Centros de Trabajo ya existen y tiene datos; si creaste cosas nuevas de tablas desechalas, porfvor ponte las pilas
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `Catalogos.php`
-**Language:** php
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Reviewing the instructions, the focus shifts to locating pre-existing catalog tables for universities and work centers within the database systems. The search will encompass all MariaDB/MySQL databases, including any dedicated tables within `laesh_db` or similar databases named with `cat_` prefixes and possible relevant data files. Any recently created tables or modifications are to be discarded in favor of existing data.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.140441787s
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 8:56 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 8:56 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 8:56 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 8:56 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `universidad`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 8:56 pm
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-## User Request
-
-aqui estan los scripts de la bd /home/carlos/GitHub/caelitandem_home/restaurantb/setup/bds/laesh/
-y usa mcp o sqlcliente
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `Catalogos.php`
-**Language:** php
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `list_dir`
-**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/setup/bds/laesh`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>Directory: `laesh` (16 items)</summary>
-
-**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/setup/bds/laesh`
-
-| Name | Type | Size |
-|------|------|------|
-| `00_database.sql` | File | 1423 bytes |
-| `01_auth_schema.sql` | File | 6866 bytes |
-| `02_core_schema.sql` | File | 8431 bytes |
-| `03_transactional_schema.sql` | File | 16378 bytes |
-| `04_auth_extensions.sql` | File | 8170 bytes |
-| `05_system_tables.sql` | File | 4475 bytes |
-| `06_indexes.sql` | File | 3248 bytes |
-| `07_seed_catalogs.sql` | File | 173348 bytes |
-| `08_stored_procedures.sql` | File | 14624 bytes |
-| `09_views.sql` | File | 12155 bytes |
-| `README.md` | File | 11754 bytes |
-| `bash` | Directory | - |
-| `migrations` | Directory | - |
-| `setup.sh` | File | 5275 bytes |
-| `setup_hostinger.sh` | File | 13477 bytes |
-| `setup_oci.sh` | File | 9886 bytes |
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `universidad`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 8:57 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `07_seed_catalogs.sql`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L114-159)</summary>
-
-**Path:** `Unknown file`
-
-```
-                                 'Meses de retención de archivos PDF generados antes de la depuración automática'),
-    ('ruta_almacenamiento_pdf', '/var/www/html/laesh-bloc-assets/pdf/',
-                                 'Ruta física de almacenamiento seguro de PDFs de recibos'),
-    ('anios_experiencia',       '25',
-                                 'Años de experiencia — usado en mensajes del sitio web'),
-    -- Sesión PHP
-    ('session_lifetime',        '518400',
-                                 'Duración de sesión PHP en segundos. 86400=24h · 518400=6 días. Se aplica en commons.php al iniciar sesión. Requiere recargar la página para que el nuevo valor tenga efecto.')
-ON DUPLICATE KEY UPDATE `valor` = VALUES(`valor`), `descripcion` = VALUES(`descripcion`);
-
--- ---------------------------------------------------------------------------
--- CATALOGOS_UI — Universidades y Lugares de Trabajo
--- ---------------------------------------------------------------------------
--- Universidades (tipo=universidad)
-INSERT IGNORE INTO `catalogos_ui` (`tipo`, `valor`, `orden`, `activo`) VALUES
-    ('universidad', 'Universidad Nacional Autónoma de México (UNAM)',    1, 1),
-    ('universidad', 'Universidad Autónoma Benito Juárez de Oaxaca',      2, 1),
-    ('universidad', 'Universidad Autónoma Metropolitana (UAM)',           3, 1),
-    ('universidad', 'Instituto Politécnico Nacional (IPN)',               4, 1),
-    ('universidad', 'Universidad Autónoma de Guadalajara',               5, 1),
-    ('universidad', 'Universidad Autónoma de Puebla (BUAP)',             6, 1),
-    ('universidad', 'Universidad Veracruzana',                           7, 1),
-    ('universidad', 'Universidad Autónoma del Estado de México',         8, 1),
-    ('universidad', 'Otra universidad',                                  99, 1);
-
--- Lugares de trabajo (tipo=lugar_trabajo)
-INSERT IGNORE INTO `catalogos_ui` (`tipo`, `valor`, `orden`, `activo`) VALUES
-    ('lugar_trabajo', 'Consultorio particular',                          1, 1),
-    ('lugar_trabajo', 'Hospital General de Huajuapan',                   2, 1),
-    ('lugar_trabajo', 'IMSS — Delegación Oaxaca',                        3, 1),
-    ('lugar_trabajo', 'ISSSTE — Unidad Huajuapan',                       4, 1),
-    ('lugar_trabajo', 'Clínica privada',                                  5, 1),
-    ('lugar_trabajo', 'Hospital Regional de la Mixteca',                  6, 1),
-    ('lugar_trabajo', 'Otro',                                            99, 1);
-
--- ---------------------------------------------------------------------------
--- CATALOGOS RELACIONALES — Datos exportados de BD local (SSOT: LISTA 2026 PAGINA BUENAS.xlsx)
--- Última exportación: 2026-09-17
--- ---------------------------------------------------------------------------
-LOCK TABLES `cat_categorias` WRITE;
-INSERT IGNORE INTO `cat_categorias` (`id`, `nombre`, `orden`) VALUES
-(1,'Referencia orthin',1),
-(2,'Referencia LCP',2),
-(3,'Serología',3),
-(4,'Química Sanguínea',4),
-(5,'Referencia QUEST',5),
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `02_core_schema.sql`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L44-69)</summary>
-
-**Path:** `Unknown file`
-
-```
-    UNIQUE KEY `uq_sec_subsec_clave` (`seccion`, `subseccion`, `clave`),
-    KEY `idx_seccion` (`seccion`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
-  COMMENT='Contenido editable del sitio web LAESH por sección CMS';
-
--- ---------------------------------------------------------------------------
--- CATALOGOS_UI — Catálogos polimórficos para selects dinámicos
--- D-03: universidad_id y lugar_trabajo_id son FK → aquí, no VARCHAR libre.
--- ---------------------------------------------------------------------------
-CREATE TABLE IF NOT EXISTS `catalogos_ui` (
-    `id`     INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    `tipo`   VARCHAR(50) COLLATE utf8mb4_unicode_ci NOT NULL
-               COMMENT 'universidad|lugar_trabajo — discriminador de tipo',
-    `valor`  VARCHAR(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-    `orden`  TINYINT UNSIGNED NOT NULL DEFAULT 0,
-    `activo` TINYINT(1) NOT NULL DEFAULT 1,
-    PRIMARY KEY (`id`),
-    KEY `idx_tipo_activo` (`tipo`, `activo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
-  COMMENT='Catálogos polimórficos para selects dinámicos de UI (universidad, lugar_trabajo)';
-
--- ---------------------------------------------------------------------------
--- CAT_ESTADOS_MEDICO — Estado operativo del médico (Activo / Pausado)
--- D-05: No reemplaza empleados.activo TINYINT para personal no-médico.
--- ---------------------------------------------------------------------------
-CREATE TABLE IF NOT EXISTS `cat_estados_medico` (
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 8:57 pm
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-## User Request
-
-DUda, para edit y/o nuevo aplica tener un combo de las universidades, cierto en ambos casos debe ser inputtext para edicion o nuevo ?
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `Catalogos.php`
-**Language:** php
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The user's question necessitates clarification regarding data input methods for both editing and creating entries within "Universidades" and "Centros de Trabajo" catalogs. The primary concern seems to be whether a combo box is appropriate in both scenarios. We must differentiate between the catalog administration context. This needs to be communicated clearly.
-
-
-
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.007373730s
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-## User Request
-
-. Elimina las columnas 	Orden y Estado que no aparezcan y la columna ACCIONES.
-. Pon unas reglas de validacion de compracion de cadenas para evitar la captura de duplicados, suceda cuando le de guardar , en un dialogo alert le diga al usuario que ya existe una texto de la entidad que podria ser igual, si esta de acuerdo con guardar el registro y lo que decida se realice.
-
-
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `Catalogos.php`
-**Language:** php
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The request involves removing specific columns from two tables: Universidades and Centros de Trabajo. The columns to remove are 'Orden', 'Estado', and 'ACCIONES'. The remaining columns should be: '#', 'ID', the appropriate name column ('Nombre de la Universidad' or 'Nombre del Centro de Trabajo'), and 'Médicos Asign'. The '#' column will act as a clickable link.
-
-
-Considering string comparison for duplicate detection, the plan is to normalize the input strings by lowercasing, removing accents and punctuation, and potentially handling irrelevant words. Various similarity algorithms such as Levenshtein distance, Jaro-Winkler, substring match or token set match will be assessed to determine potential duplicates during the save action. A confirmation dialog will be presented to the user before saving if a potential duplicate is detected based on similarity thresholds.
-
-
-The focus shifts to specific file modifications. The HTML structure of the tables and modals needs adjustment to remove the specified columns and fields. Javascript functions for table rendering and modal handling require simplification to reflect the updated data model. Duplicate detection implementation is now part of the plan.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 1.406335586s
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L379-474)</summary>
-
-**Path:** `Unknown file`
-
-```
-                                <tbody>
-                                    <!-- Dinámico JS -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <!-- ════════ VISTA 2: UNIVERSIDADES ════════ -->
-                    <div id="view-universidades-table" class="medicos-subview d-none" style="margin-top: 1rem; margin-bottom: 2.5rem;">
-                        <div class="cms-panel-header" style="margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-                            <h3 class="cms-h3" style="margin: 0; font-size: 1.35rem; font-weight: 800; color: #0052B7;">Universidades</h3>
-                            
-                            <div style="display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; justify-content: flex-end;">
-                                <!-- Paginador y Total -->
-                                <div id="flat-universidades-pagination-wrap" style="display: flex; align-items: center; gap: 0.5rem;">
-                                    <span id="flat-universidades-total-records" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">Total: 0</span>
-                                    <span style="color: #cbd5e1; display: inline;">|</span>
-                                    <div id="flat-universidades-pagination" style="display: flex; gap: 0.25rem; align-items: center;"></div>
-                                </div>
-
-                                <!-- Buscador -->
-                                <div id="flat-search-universidades-container" style="display: flex; gap: 0.5rem; align-items: center; position:relative; z-index: 100;">
-                                    <input type="text" id="flat-search-universidades-input" class="form-input form-input--bg" autocomplete="new-password" spellcheck="false" autocorrect="off" autocapitalize="none" placeholder="🔍 Buscar universidad..." style="width: 220px;">
-                                </div>
-
-                                <!-- Botón Acción -->
-                                <div id="flat-universidades-actions" style="display: flex; align-items: center; gap: 0.5rem;">
-                                    <button type="button" class="btn btn-primary fnt-cursor" id="btn-add-universidad-row" style="padding: 6px 14px; font-size: 0.88rem; font-weight: 500;">+ Añadir Universidad</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- TABLA PLANA UNIVERSIDADES -->
-                        <div class="table-responsive" style="max-height: calc(100vh - 240px); overflow-y: auto; overflow-x: auto; border: 1px solid var(--border); border-radius: 4px;">
-                            <table class="table" id="flat-universidades-table" style="margin-bottom: 0; min-width: 800px; white-space: nowrap;">
-                                <thead>
-                                    <tr>
-                                        <th style="position: sticky; top: 0; background: #e0f2fe; color: var(--primary-dark); z-index: 10; width: 60px; text-align: center;">#</th>
-                                        <th style="position: sticky; top: 0; background: #e0f2fe; color: var(--primary-dark); z-index: 10; width: 80px; text-align: center;">ID</th>
-                                        <th style="position: sticky; top: 0; background: #e0f2fe; color: var(--primary-dark); z-index: 10; cursor: pointer;" id="flat-universidades-sort-nombre" data-order="asc">Nombre de la Universidad <span class="sort-icon">▲</span></th>
-                                        <th style="position: sticky; top: 0; background: #e0f2fe; color: var(--primary-dark); z-index: 10; width: 100px; text-align: center; cursor: pointer;" id="flat-universidades-sort-orden" data-order="none">Orden <span class="sort-icon"></span></th>
-                                        <th style="position: sticky; top: 0; background: #e0f2fe; color: var(--primary-dark); z-index: 10; width: 120px; text-align: center;">Estado</th>
-                                        <th style="position: sticky; top: 0; background: #e0f2fe; color: var(--primary-dark); z-index: 10; width: 150px; text-align: center;">Médicos Asignados</th>
-                                        <th style="position: sticky; top: 0; background: #e0f2fe; color: var(--primary-dark); z-index: 10; width: 110px; text-align: center;">Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- Dinámico JS -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <!-- ════════ VISTA 3: CENTROS DE TRABAJO ════════ -->
-                    <div id="view-centros-trabajo-table" class="medicos-subview d-none" style="margin-top: 1rem; margin-bottom: 2.5rem;">
-                        <div class="cms-panel-header" style="margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-                            <h3 class="cms-h3" style="margin: 0; font-size: 1.35rem; font-weight: 800; color: #0052B7;">Centros de Trabajo</h3>
-                            
-                            <div style="display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; justify-content: flex-end;">
-                                <!-- Paginador y Total -->
-                                <div id="flat-centros-pagination-wrap" style="display: flex; align-items: center; gap: 0.5rem;">
-                                    <span id="flat-centros-total-records" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">Total: 0</span>
-                                    <span style="color: #cbd5e1; display: inline;">|</span>
-                                    <div id="flat-centros-pagination" style="display: flex; gap: 0.25rem; align-items: center;"></div>
-                                </div>
-
-                                <!-- Buscador -->
-                                <div id="flat-search-centros-container" style="display: flex; gap: 0.5rem; align-items: center; position:relative; z-index: 100;">
-                                    <input type="text" id="flat-search-centros-input" class="form-input form-input--bg" autocomplete="new-password" spellcheck="false" autocorrect="off" autocapitalize="none" placeholder="🔍 Buscar centro de trabajo..." style="width: 220px;">
-                                </div>
-
-                                <!-- Botón Acción -->
-                                <div id="flat-centros-actions" style="display: flex; align-items: center; gap: 0.5rem;">
-                                    <button type="button" class="btn btn-primary fnt-cursor" id="btn-add-centro-row" style="padding: 6px 14px; font-size: 0.88rem; font-weight: 500;">+ Añadir Centro de Trabajo</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- TABLA PLANA CENTROS DE TRABAJO -->
-                        <div class="table-responsive" style="max-height: calc(100vh - 240px); overflow-y: auto; overflow-x: auto; border: 1px solid var(--border); border-radius: 4px;">
-                            <table class="table" id="flat-centros-table" style="margin-bottom: 0; min-width: 800px; white-space: nowrap;">
-                                <thead>
-                                    <tr>
-                                        <th style="position: sticky; top: 0; background: #e0f2fe; color: var(--primary-dark); z-index: 10; width: 60px; text-align: center;">#</th>
-                                        <th style="position: sticky; top: 0; background: #e0f2fe; color: var(--primary-dark); z-index: 10; width: 80px; text-align: center;">ID</th>
-                                        <th style="position: sticky; top: 0; background: #e0f2fe; color: var(--primary-dark); z-index: 10; cursor: pointer;" id="flat-centros-sort-nombre" data-order="asc">Nombre del Centro de Trabajo <span class="sort-icon">▲</span></th>
-                                        <th style="position: sticky; top: 0; background: #e0f2fe; color: var(--primary-dark); z-index: 10; width: 100px; text-align: center; cursor: pointer;" id="flat-centros-sort-orden" data-order="none">Orden <span class="sort-icon"></span></th>
-                                        <th style="position: sticky; top: 0; background: #e0f2fe; color: var(--primary-dark); z-index: 10; width: 120px; text-align: center;">Estado</th>
-                                        <th style="position: sticky; top: 0; background: #e0f2fe; color: var(--primary-dark); z-index: 10; width: 150px; text-align: center;">Médicos Asignados</th>
-                                        <th style="position: sticky; top: 0; background: #e0f2fe; color: var(--primary-dark); z-index: 10; width: 110px; text-align: center;">Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- Dinámico JS -->
-                                </tbody>
-                            </table>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1004-1129)</summary>
-
-**Path:** `Unknown file`
-
-```
-            </form>
-            </div><!-- /.modal-body -->
-        </div>
-    </div>
-
-    <!-- ── Modal: Registro / Edición de Universidad ────────────────────────── -->
-    <div id="modal-universidad" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-universidad-title">
-        <div class="modal-content modal-sm">
-            <div class="modal-header">
-                <h3 id="modal-universidad-title">Registro de Universidad</h3>
-                <button type="button" class="close-modal" id="btn-cerrar-universidad" aria-label="Cerrar">&times;</button>
-            </div>
-            <div class="modal-body">
-                <form id="form-universidad" class="d-flex-col-gap1">
-                    <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                    <input type="hidden" id="univ-id" name="id" value="">
-
-                    <!-- Nombre -->
-                    <div class="form-group mb-0">
-                        <label for="univ-nombre" class="form-label">
-                            Nombre de la Universidad <span class="req">*</span>
-                        </label>
-                        <input type="text" id="univ-nombre" name="nombre"
-                               placeholder="Ej. Universidad Nacional Autónoma de México (UNAM)" required
-                               class="form-input form-input--bg">
-                    </div>
-
-                    <!-- Orden -->
-                    <div class="form-group mb-0">
-                        <label for="univ-orden" class="form-label">
-                            Orden de visualización
-                        </label>
-                        <input type="number" id="univ-orden" name="orden" value="1" min="0" max="999"
-                               class="form-input form-input--bg">
-                    </div>
-
-                    <!-- Estado Activo -->
-                    <div class="form-group mb-0">
-                        <label for="univ-activo" class="form-label">
-                            Estado
-                        </label>
-                        <div class="form-field">
-                            <select id="univ-activo" name="activo" class="form-input form-input--bg form-select">
-                                <option value="1" selected>Activo</option>
-                                <option value="0">Inactivo</option>
-                            </select>
-                            <span class="select-arrow"></span>
-                        </div>
-                    </div>
-
-                    <!-- Botones -->
-                    <div class="form-row-gap" style="margin-top: 0.5rem;">
-                        <button type="button" class="btn btn-secondary flex-1" id="btn-cancelar-universidad">Cancelar</button>
-                        <button type="submit" class="btn btn-primary flex-1" id="btn-guardar-universidad">Guardar Universidad</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- ── Modal: Registro / Edición de Centro de Trabajo ─────────────────── -->
-    <div id="modal-centro-trabajo" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-centro-title">
-        <div class="modal-content modal-sm">
-            <div class="modal-header">
-                <h3 id="modal-centro-title">Registro de Centro de Trabajo</h3>
-                <button type="button" class="close-modal" id="btn-cerrar-centro" aria-label="Cerrar">&times;</button>
-            </div>
-            <div class="modal-body">
-                <form id="form-centro-trabajo" class="d-flex-col-gap1">
-                    <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                    <input type="hidden" id="centro-id" name="id" value="">
-
-                    <!-- Nombre -->
-                    <div class="form-group mb-0">
-                        <label for="centro-nombre" class="form-label">
-                            Nombre del Centro / Lugar de Trabajo <span class="req">*</span>
-                        </label>
-                        <input type="text" id="centro-nombre" name="nombre"
-                               placeholder="Ej. Hospital General de Huajuapan" required
-                               class="form-input form-input--bg">
-                    </div>
-
-                    <!-- Orden -->
-                    <div class="form-group mb-0">
-                        <label for="centro-orden" class="form-label">
-                            Orden de visualización
-                        </label>
-                        <input type="number" id="centro-orden" name="orden" value="1" min="0" max="999"
-                               class="form-input form-input--bg">
-                    </div>
-
-                    <!-- Estado Activo -->
-                    <div class="form-group mb-0">
-                        <label for="centro-activo" class="form-label">
-                            Estado
-                        </label>
-                        <div class="form-field">
-                            <select id="centro-activo" name="activo" class="form-input form-input--bg form-select">
-                                <option value="1" selected>Activo</option>
-                                <option value="0">Inactivo</option>
-                            </select>
-                            <span class="select-arrow"></span>
-                        </div>
-                    </div>
-
-                    <!-- Botones -->
-                    <div class="form-row-gap" style="margin-top: 0.5rem;">
-                        <button type="button" class="btn btn-secondary flex-1" id="btn-cancelar-centro">Cancelar</button>
-                        <button type="submit" class="btn btn-primary flex-1" id="btn-guardar-centro">Guardar Centro</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-
-    <div id="modal-resultados" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-resultados-title">
-        <div class="modal-content modal-md">
-            <div class="modal-header">
-                <h3 id="modal-resultados-title">Reporte de Resultados Clínicos</h3>
-                <button type="button" class="close-modal" id="btn-cerrar-resultados-admin" aria-label="Cerrar">&times;</button>
-            </div>
-            <div class="modal-body ta-center pa-5">
-                <img src="/laesh-web-assets-uipv1a/img/resultado.webp?v=3.5" class="modal-img-preview" alt="Resultado" loading="lazy" decoding="async">
-            </div>
-        </div>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The task involves modifying the `labadmin.php` file within the `rc/views/` directory. The tables displaying universities and work centers require column reduction to keep only ID, a numerical reference, the name, and assigned physicians. Similarly, the modals for university and work center entries will be simplified by removing order and status inputs, retaining only the name input. The updated `rc/views/` must reflect these modifications.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.127788095s
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 9:15 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 9:16 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 9:16 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-The task involves updating a JavaScript file to modify two tables. The first table, "Universidades," needs specific columns removed, leaving only the ID, name, and assigned doctors, along with an adjusted loading/no-records message. The second table, "Centros," requires the same column removal and remaining columns.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.019665536s
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1344-1649)</summary>
-
-**Path:** `Unknown file`
-
-```
-    });
-}
-
-/* ── MÓDULO GESTIÓN DE UNIVERSIDADES ── */
-var universidadesCatalogData = [];
-var universidadesFilteredData = [];
-var currentUniversidadesPage = 1;
-var universidadesItemsPerPage = 50;
-var universidadesSortCol = 'nombre';
-var universidadesSortOrder = 'asc';
-
-function initUniversidadesFlatGrid(forceFetch) {
-    var table = document.getElementById('flat-universidades-table');
-    if (!table) return;
-
-    if (forceFetch || universidadesCatalogData.length === 0) {
-        fetchUniversidadesData();
-    } else {
-        renderUniversidadesFlatTable(currentUniversidadesPage);
-    }
-}
-window.initUniversidadesFlatGrid = initUniversidadesFlatGrid;
-window.fetchUniversidadesData = fetchUniversidadesData;
-
-function fetchUniversidadesData(targetId) {
-    var tbody = document.querySelector('#flat-universidades-table tbody');
-    if (tbody) {
-        tbody.innerHTML = '<tr><td colspan="7" class="text-center txt-muted py-4">⏳ Cargando catálogo de universidades...</td></tr>';
-    }
-
-    fetch('/laesh/rc/api/universidades')
-        .then(function(res) { return res.json(); })
-        .then(function(data) {
-            if (data && data.success && Array.isArray(data.data)) {
-                universidadesCatalogData = data.data;
-                applyUniversidadesFilterAndSort();
-
-                var targetPage = 1;
-                if (targetId) {
-                    var targetIdx = universidadesFilteredData.findIndex(function(u) {
-                        return String(u.id) === String(targetId);
-                    });
-                    if (targetIdx !== -1) {
-                        targetPage = Math.floor(targetIdx / universidadesItemsPerPage) + 1;
-                    }
-                }
-
-                renderUniversidadesFlatTable(targetPage, targetId);
-                sincronizarSelectUniversidadesUI(universidadesCatalogData);
-            } else {
-                if (tbody) {
-                    tbody.innerHTML = '<tr><td colspan="7" class="text-center txt-danger py-4">⚠️ Error al cargar universidades: ' + (data.error || 'Respuesta inválida') + '</td></tr>';
-                }
-            }
-        })
-        .catch(function(err) {
-            console.error('Error fetching /api/universidades:', err);
-            if (tbody) {
-                tbody.innerHTML = '<tr><td colspan="7" class="text-center txt-danger py-4">⚠️ Error de conexión al cargar universidades</td></tr>';
-            }
-        });
-}
-
-function updateUniversidadesSortIcons() {
-    var headerNombre = document.getElementById('flat-universidades-sort-nombre');
-    var headerOrden = document.getElementById('flat-universidades-sort-orden');
-
-    if (headerNombre) {
-        var iconN = headerNombre.querySelector('.sort-icon');
-        var isCurN = (universidadesSortCol === 'nombre');
-        headerNombre.setAttribute('data-order', isCurN ? universidadesSortOrder : 'none');
-        if (iconN) iconN.textContent = isCurN ? (universidadesSortOrder === 'asc' ? ' ▲' : ' ▼') : '';
-    }
-    if (headerOrden) {
-        var iconO = headerOrden.querySelector('.sort-icon');
-        var isCurO = (universidadesSortCol === 'orden');
-        headerOrden.setAttribute('data-order', isCurO ? universidadesSortOrder : 'none');
-        if (iconO) iconO.textContent = isCurO ? (universidadesSortOrder === 'asc' ? ' ▲' : ' ▼') : '';
-    }
-}
-
-function applyUniversidadesFilterAndSort() {
-    var searchInput = document.getElementById('flat-search-universidades-input');
-    var query = searchInput ? searchInput.value.trim().toLowerCase() : '';
-
-    universidadesFilteredData = universidadesCatalogData.filter(function(item) {
-        if (!query) return true;
-        var nom = (item.nombre || item.valor || '').toLowerCase();
-        var idStr = String(item.id || '');
-        return nom.includes(query) || idStr.includes(query);
-    });
-
-    universidadesFilteredData.sort(function(a, b) {
-        if (universidadesSortCol === 'orden' || universidadesSortCol === 'id') {
-            var numA = parseInt(a[universidadesSortCol] || 0, 10);
-            var numB = parseInt(b[universidadesSortCol] || 0, 10);
-            return universidadesSortOrder === 'asc' ? numA - numB : numB - numA;
-        }
-        var valA = (a[universidadesSortCol] || '').toString().toLowerCase();
-        var valB = (b[universidadesSortCol] || '').toString().toLowerCase();
-        if (valA < valB) return universidadesSortOrder === 'asc' ? -1 : 1;
-        if (valA > valB) return universidadesSortOrder === 'asc' ? 1 : -1;
-        return 0;
-    });
-
-    updateUniversidadesSortIcons();
-}
-
-function renderUniversidadesFlatTable(page, targetId) {
-    currentUniversidadesPage = page || 1;
-    var tbody = document.querySelector('#flat-universidades-table tbody');
-    if (!tbody) return;
-
-    var totalRecordsEl = document.getElementById('flat-universidades-total-records');
-    if (totalRecordsEl) {
-        totalRecordsEl.textContent = 'Total: ' + universidadesFilteredData.length;
-    }
-
-    if (universidadesFilteredData.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="7" class="text-center txt-muted py-4">No se encontraron universidades.</td></tr>';
-        renderUniversidadesPagination(0, 1);
-        return;
-    }
-
-    var totalPages = Math.ceil(universidadesFilteredData.length / universidadesItemsPerPage);
-    if (currentUniversidadesPage > totalPages) currentUniversidadesPage = totalPages;
-
-    var startIdx = (currentUniversidadesPage - 1) * universidadesItemsPerPage;
-    var pageItems = universidadesFilteredData.slice(startIdx, startIdx + universidadesItemsPerPage);
-
-    var html = '';
-    pageItems.forEach(function(item, idx) {
-        var rowNum = startIdx + idx + 1;
-        var rowId = item.id;
-        var nombre = item.nombre || item.valor || '';
-        var orden = item.orden !== undefined ? item.orden : 0;
-        var activo = parseInt(item.activo, 10) === 1;
-        var totalMedicos = item.total_medicos || 0;
-
-        var estadoBadge = activo 
-            ? '<span class="badge" style="background:#e6fffa; color:#0d9488; border:1px solid #99f6e4; font-weight:600;">Activo</span>' 
-            : '<span class="badge" style="background:#f1f5f9; color:#64748b; border:1px solid #cbd5e1; font-weight:500;">Inactivo</span>';
-
-        html += '<tr data-row-id="' + rowId + '" tabindex="0" style="cursor: pointer;" class="universidad-row-item">' +
-            '<td style="text-align: center;">' +
-                '<a href="#" class="univ-link-edit" data-id="' + rowId + '" style="font-weight: 700; color: var(--primary); text-decoration: underline; font-size: 0.88rem;">' + rowNum + '</a>' +
-            '</td>' +
-            '<td style="text-align: center; color: #64748b; font-weight: 600;">' + rowId + '</td>' +
-            '<td style="font-weight: 700; color: #1e293b;">' + escapeAttrVal(nombre) + '</td>' +
-            '<td style="text-align: center; color: #475569;">' + orden + '</td>' +
-            '<td style="text-align: center;">' + estadoBadge + '</td>' +
-            '<td style="text-align: center;"><span class="badge badge-listos" style="font-size: 0.8rem; font-weight: 600;">' + totalMedicos + ' Médicos</span></td>' +
-            '<td style="text-align: center;">' +
-                '<button type="button" class="btn btn-secondary btn-sm btn-edit-univ" data-id="' + rowId + '" style="padding: 3px 8px; font-size: 0.8rem;">Editar</button>' +
-            '</td>' +
-        '</tr>';
-    });
-
-    tbody.innerHTML = html;
-    renderUniversidadesPagination(totalPages, currentUniversidadesPage);
-    bindUniversidadesTableEvents();
-
-    if (targetId) {
-        setTimeout(function() {
-            var targetRow = tbody.querySelector('tr[data-row-id="' + targetId + '"]');
-            if (targetRow) {
-                targetRow.classList.add('row-saved-highlight');
-                targetRow.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-                var editLink = targetRow.querySelector('.univ-link-edit');
-                if (editLink) editLink.focus();
-            }
-        }, 120);
-    }
-}
-
-function renderUniversidadesPagination(totalPages, currentPage) {
-    var container = document.getElementById('flat-universidades-pagination');
-    if (!container) return;
-
-    if (totalPages <= 1) {
-        container.innerHTML = '';
-        return;
-    }
-
-    var html = '';
-    for (var i = 1; i <= totalPages; i++) {
-        var activeClass = i === currentPage ? 'btn-primary' : 'btn-secondary';
-        html += '<button type="button" class="btn ' + activeClass + ' btn-sm univ-page-btn" data-page="' + i + '" style="padding: 2px 8px; font-size: 0.8rem;">' + i + '</button>';
-    }
-    container.innerHTML = html;
-
-    container.querySelectorAll('.univ-page-btn').forEach(function(btn) {
-        btn.addEventListener('click', function() {
-            var page = parseInt(this.getAttribute('data-page'), 10);
-            renderUniversidadesFlatTable(page);
-        });
-    });
-}
-
-function bindUniversidadesTableEvents() {
-    var tbody = document.querySelector('#flat-universidades-table tbody');
-    if (!tbody) return;
-
-    tbody.querySelectorAll('.univ-link-edit, .btn-edit-univ').forEach(function(el) {
-        el.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            var id = this.getAttribute('data-id');
-            abrirEditarUniversidadModal(id);
-        });
-    });
-
-    tbody.querySelectorAll('.universidad-row-item').forEach(function(row) {
-        row.addEventListener('dblclick', function() {
-            var id = this.getAttribute('data-row-id');
-            abrirEditarUniversidadModal(id);
-        });
-    });
-}
-
-function abrirNuevaUniversidadModal() {
-    var form = document.getElementById('form-universidad');
-    if (form) form.reset();
-
-    var idInput = document.getElementById('univ-id');
-    if (idInput) idInput.value = '';
-
-    var ordenInput = document.getElementById('univ-orden');
-    if (ordenInput) ordenInput.value = universidadesCatalogData.length + 1;
-
-    var activoSelect = document.getElementById('univ-activo');
-    if (activoSelect) activoSelect.value = '1';
-
-    var title = document.getElementById('modal-universidad-title');
-    if (title) title.textContent = 'Registro de Universidad';
-
-    var btnSave = document.getElementById('btn-guardar-universidad');
-    if (btnSave) btnSave.textContent = 'Guardar Universidad';
-
-    var m = document.getElementById('modal-universidad');
-    if (m) m.classList.add('show');
-    document.body.style.overflow = 'hidden';
-
-    var firstInput = document.getElementById('univ-nombre');
-    if (firstInput) setTimeout(function() { firstInput.focus(); }, 100);
-}
-window.abrirNuevaUniversidadModal = abrirNuevaUniversidadModal;
-
-function abrirEditarUniversidadModal(id) {
-    var item = universidadesCatalogData.find(function(u) {
-        return String(u.id) === String(id);
-    });
-    if (!item) return;
-
-    var idInput = document.getElementById('univ-id');
-    if (idInput) idInput.value = item.id;
-
-    var nombreInput = document.getElementById('univ-nombre');
-    if (nombreInput) nombreInput.value = item.nombre || item.valor || '';
-
-    var ordenInput = document.getElementById('univ-orden');
-    if (ordenInput) ordenInput.value = item.orden !== undefined ? item.orden : 0;
-
-    var activoSelect = document.getElementById('univ-activo');
-    if (activoSelect) activoSelect.value = item.activo ? '1' : '0';
-
-    var title = document.getElementById('modal-universidad-title');
-    if (title) title.textContent = 'Editar Universidad';
-
-    var btnSave = document.getElementById('btn-guardar-universidad');
-    if (btnSave) btnSave.textContent = 'Actualizar Universidad';
-
-    var m = document.getElementById('modal-universidad');
-    if (m) m.classList.add('show');
-    document.body.style.overflow = 'hidden';
-
-    var firstInput = document.getElementById('univ-nombre');
-    if (firstInput) setTimeout(function() { firstInput.focus(); }, 100);
-}
-window.abrirEditarUniversidadModal = abrirEditarUniversidadModal;
-
-function cerrarModalUniversidad() {
-    var m = document.getElementById('modal-universidad');
-    if (m) m.classList.remove('show');
-    document.body.style.overflow = '';
-}
-window.cerrarModalUniversidad = cerrarModalUniversidad;
-
-function sincronizarSelectUniversidadesUI(universidadesList) {
-    var select = document.getElementById('pm-universidad');
-    if (!select) return;
-    var currentVal = select.value;
-    select.innerHTML = '<option value="" disabled selected>Seleccione una universidad</option>';
-    universidadesList.forEach(function(u) {
-        if (parseInt(u.activo, 10) === 1) {
-            var opt = document.createElement('option');
-            opt.value = u.id;
-            opt.textContent = u.nombre || u.valor || '';
-            if (String(u.id) === String(currentVal)) {
-                opt.selected = true;
-            }
-            select.appendChild(opt);
-        }
-    });
-}
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1649-1949)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-
-/* ── MÓDULO GESTIÓN DE CENTROS DE TRABAJO ── */
-var centrosTrabajoCatalogData = [];
-var centrosTrabajoFilteredData = [];
-var currentCentrosPage = 1;
-var centrosItemsPerPage = 50;
-var centrosSortCol = 'nombre';
-var centrosSortOrder = 'asc';
-
-function initCentrosTrabajoFlatGrid(forceFetch) {
-    var table = document.getElementById('flat-centros-table');
-    if (!table) return;
-
-    if (forceFetch || centrosTrabajoCatalogData.length === 0) {
-        fetchCentrosTrabajoData();
-    } else {
-        renderCentrosFlatTable(currentCentrosPage);
-    }
-}
-window.initCentrosTrabajoFlatGrid = initCentrosTrabajoFlatGrid;
-window.fetchCentrosTrabajoData = fetchCentrosTrabajoData;
-
-function fetchCentrosTrabajoData(targetId) {
-    var tbody = document.querySelector('#flat-centros-table tbody');
-    if (tbody) {
-        tbody.innerHTML = '<tr><td colspan="7" class="text-center txt-muted py-4">⏳ Cargando centros de trabajo...</td></tr>';
-    }
-
-    fetch('/laesh/rc/api/centros-trabajo')
-        .then(function(res) { return res.json(); })
-        .then(function(data) {
-            if (data && data.success && Array.isArray(data.data)) {
-                centrosTrabajoCatalogData = data.data;
-                applyCentrosFilterAndSort();
-
-                var targetPage = 1;
-                if (targetId) {
-                    var targetIdx = centrosTrabajoFilteredData.findIndex(function(c) {
-                        return String(c.id) === String(targetId);
-                    });
-                    if (targetIdx !== -1) {
-                        targetPage = Math.floor(targetIdx / centrosItemsPerPage) + 1;
-                    }
-                }
-
-                renderCentrosFlatTable(targetPage, targetId);
-                sincronizarSelectCentrosUI(centrosTrabajoCatalogData);
-            } else {
-                if (tbody) {
-                    tbody.innerHTML = '<tr><td colspan="7" class="text-center txt-danger py-4">⚠️ Error al cargar centros de trabajo: ' + (data.error || 'Respuesta inválida') + '</td></tr>';
-                }
-            }
-        })
-        .catch(function(err) {
-            console.error('Error fetching /api/centros-trabajo:', err);
-            if (tbody) {
-                tbody.innerHTML = '<tr><td colspan="7" class="text-center txt-danger py-4">⚠️ Error de conexión al cargar centros de trabajo</td></tr>';
-            }
-        });
-}
-
-function updateCentrosSortIcons() {
-    var headerNombre = document.getElementById('flat-centros-sort-nombre');
-    var headerOrden = document.getElementById('flat-centros-sort-orden');
-
-    if (headerNombre) {
-        var iconN = headerNombre.querySelector('.sort-icon');
-        var isCurN = (centrosSortCol === 'nombre');
-        headerNombre.setAttribute('data-order', isCurN ? centrosSortOrder : 'none');
-        if (iconN) iconN.textContent = isCurN ? (centrosSortOrder === 'asc' ? ' ▲' : ' ▼') : '';
-    }
-    if (headerOrden) {
-        var iconO = headerOrden.querySelector('.sort-icon');
-        var isCurO = (centrosSortCol === 'orden');
-        headerOrden.setAttribute('data-order', isCurO ? centrosSortOrder : 'none');
-        if (iconO) iconO.textContent = isCurO ? (centrosSortOrder === 'asc' ? ' ▲' : ' ▼') : '';
-    }
-}
-
-function applyCentrosFilterAndSort() {
-    var searchInput = document.getElementById('flat-search-centros-input');
-    var query = searchInput ? searchInput.value.trim().toLowerCase() : '';
-
-    centrosTrabajoFilteredData = centrosTrabajoCatalogData.filter(function(item) {
-        if (!query) return true;
-        var nom = (item.nombre || item.valor || '').toLowerCase();
-        var idStr = String(item.id || '');
-        return nom.includes(query) || idStr.includes(query);
-    });
-
-    centrosTrabajoFilteredData.sort(function(a, b) {
-        if (centrosSortCol === 'orden' || centrosSortCol === 'id') {
-            var numA = parseInt(a[centrosSortCol] || 0, 10);
-            var numB = parseInt(b[centrosSortCol] || 0, 10);
-            return centrosSortOrder === 'asc' ? numA - numB : numB - numA;
-        }
-        var valA = (a[centrosSortCol] || '').toString().toLowerCase();
-        var valB = (b[centrosSortCol] || '').toString().toLowerCase();
-        if (valA < valB) return centrosSortOrder === 'asc' ? -1 : 1;
-        if (valA > valB) return centrosSortOrder === 'asc' ? 1 : -1;
-        return 0;
-    });
-
-    updateCentrosSortIcons();
-}
-
-function renderCentrosFlatTable(page, targetId) {
-    currentCentrosPage = page || 1;
-    var tbody = document.querySelector('#flat-centros-table tbody');
-    if (!tbody) return;
-
-    var totalRecordsEl = document.getElementById('flat-centros-total-records');
-    if (totalRecordsEl) {
-        totalRecordsEl.textContent = 'Total: ' + centrosTrabajoFilteredData.length;
-    }
-
-    if (centrosTrabajoFilteredData.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="7" class="text-center txt-muted py-4">No se encontraron centros de trabajo.</td></tr>';
-        renderCentrosPagination(0, 1);
-        return;
-    }
-
-    var totalPages = Math.ceil(centrosTrabajoFilteredData.length / centrosItemsPerPage);
-    if (currentCentrosPage > totalPages) currentCentrosPage = totalPages;
-
-    var startIdx = (currentCentrosPage - 1) * centrosItemsPerPage;
-    var pageItems = centrosTrabajoFilteredData.slice(startIdx, startIdx + centrosItemsPerPage);
-
-    var html = '';
-    pageItems.forEach(function(item, idx) {
-        var rowNum = startIdx + idx + 1;
-        var rowId = item.id;
-        var nombre = item.nombre || item.valor || '';
-        var orden = item.orden !== undefined ? item.orden : 0;
-        var activo = parseInt(item.activo, 10) === 1;
-        var totalMedicos = item.total_medicos || 0;
-
-        var estadoBadge = activo 
-            ? '<span class="badge" style="background:#e6fffa; color:#0d9488; border:1px solid #99f6e4; font-weight:600;">Activo</span>' 
-            : '<span class="badge" style="background:#f1f5f9; color:#64748b; border:1px solid #cbd5e1; font-weight:500;">Inactivo</span>';
-
-        html += '<tr data-row-id="' + rowId + '" tabindex="0" style="cursor: pointer;" class="centro-row-item">' +
-            '<td style="text-align: center;">' +
-                '<a href="#" class="centro-link-edit" data-id="' + rowId + '" style="font-weight: 700; color: var(--primary); text-decoration: underline; font-size: 0.88rem;">' + rowNum + '</a>' +
-            '</td>' +
-            '<td style="text-align: center; color: #64748b; font-weight: 600;">' + rowId + '</td>' +
-            '<td style="font-weight: 700; color: #1e293b;">' + escapeAttrVal(nombre) + '</td>' +
-            '<td style="text-align: center; color: #475569;">' + orden + '</td>' +
-            '<td style="text-align: center;">' + estadoBadge + '</td>' +
-            '<td style="text-align: center;"><span class="badge badge-listos" style="font-size: 0.8rem; font-weight: 600;">' + totalMedicos + ' Médicos</span></td>' +
-            '<td style="text-align: center;">' +
-                '<button type="button" class="btn btn-secondary btn-sm btn-edit-centro" data-id="' + rowId + '" style="padding: 3px 8px; font-size: 0.8rem;">Editar</button>' +
-            '</td>' +
-        '</tr>';
-    });
-
-    tbody.innerHTML = html;
-    renderCentrosPagination(totalPages, currentCentrosPage);
-    bindCentrosTableEvents();
-
-    if (targetId) {
-        setTimeout(function() {
-            var targetRow = tbody.querySelector('tr[data-row-id="' + targetId + '"]');
-            if (targetRow) {
-                targetRow.classList.add('row-saved-highlight');
-                targetRow.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-                var editLink = targetRow.querySelector('.centro-link-edit');
-                if (editLink) editLink.focus();
-            }
-        }, 120);
-    }
-}
-
-function renderCentrosPagination(totalPages, currentPage) {
-    var container = document.getElementById('flat-centros-pagination');
-    if (!container) return;
-
-    if (totalPages <= 1) {
-        container.innerHTML = '';
-        return;
-    }
-
-    var html = '';
-    for (var i = 1; i <= totalPages; i++) {
-        var activeClass = i === currentPage ? 'btn-primary' : 'btn-secondary';
-        html += '<button type="button" class="btn ' + activeClass + ' btn-sm centro-page-btn" data-page="' + i + '" style="padding: 2px 8px; font-size: 0.8rem;">' + i + '</button>';
-    }
-    container.innerHTML = html;
-
-    container.querySelectorAll('.centro-page-btn').forEach(function(btn) {
-        btn.addEventListener('click', function() {
-            var page = parseInt(this.getAttribute('data-page'), 10);
-            renderCentrosFlatTable(page);
-        });
-    });
-}
-
-function bindCentrosTableEvents() {
-    var tbody = document.querySelector('#flat-centros-table tbody');
-    if (!tbody) return;
-
-    tbody.querySelectorAll('.centro-link-edit, .btn-edit-centro').forEach(function(el) {
-        el.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            var id = this.getAttribute('data-id');
-            abrirEditarCentroModal(id);
-        });
-    });
-
-    tbody.querySelectorAll('.centro-row-item').forEach(function(row) {
-        row.addEventListener('dblclick', function() {
-            var id = this.getAttribute('data-row-id');
-            abrirEditarCentroModal(id);
-        });
-    });
-}
-
-function abrirNuevoCentroModal() {
-    var form = document.getElementById('form-centro-trabajo');
-    if (form) form.reset();
-
-    var idInput = document.getElementById('centro-id');
-    if (idInput) idInput.value = '';
-
-    var ordenInput = document.getElementById('centro-orden');
-    if (ordenInput) ordenInput.value = centrosTrabajoCatalogData.length + 1;
-
-    var activoSelect = document.getElementById('centro-activo');
-    if (activoSelect) activoSelect.value = '1';
-
-    var title = document.getElementById('modal-centro-title');
-    if (title) title.textContent = 'Registro de Centro de Trabajo';
-
-    var btnSave = document.getElementById('btn-guardar-centro');
-    if (btnSave) btnSave.textContent = 'Guardar Centro';
-
-    var m = document.getElementById('modal-centro-trabajo');
-    if (m) m.classList.add('show');
-    document.body.style.overflow = 'hidden';
-
-    var firstInput = document.getElementById('centro-nombre');
-    if (firstInput) setTimeout(function() { firstInput.focus(); }, 100);
-}
-window.abrirNuevoCentroModal = abrirNuevoCentroModal;
-
-function abrirEditarCentroModal(id) {
-    var item = centrosTrabajoCatalogData.find(function(c) {
-        return String(c.id) === String(id);
-    });
-    if (!item) return;
-
-    var idInput = document.getElementById('centro-id');
-    if (idInput) idInput.value = item.id;
-
-    var nombreInput = document.getElementById('centro-nombre');
-    if (nombreInput) nombreInput.value = item.nombre || item.valor || '';
-
-    var ordenInput = document.getElementById('centro-orden');
-    if (ordenInput) ordenInput.value = item.orden !== undefined ? item.orden : 0;
-
-    var activoSelect = document.getElementById('centro-activo');
-    if (activoSelect) activoSelect.value = item.activo ? '1' : '0';
-
-    var title = document.getElementById('modal-centro-title');
-    if (title) title.textContent = 'Editar Centro de Trabajo';
-
-    var btnSave = document.getElementById('btn-guardar-centro');
-    if (btnSave) btnSave.textContent = 'Actualizar Centro';
-
-    var m = document.getElementById('modal-centro-trabajo');
-    if (m) m.classList.add('show');
-    document.body.style.overflow = 'hidden';
-
-    var firstInput = document.getElementById('centro-nombre');
-    if (firstInput) setTimeout(function() { firstInput.focus(); }, 100);
-}
-window.abrirEditarCentroModal = abrirEditarCentroModal;
-
-function cerrarModalCentro() {
-    var m = document.getElementById('modal-centro-trabajo');
-    if (m) m.classList.remove('show');
-    document.body.style.overflow = '';
-}
-window.cerrarModalCentro = cerrarModalCentro;
-
-function sincronizarSelectCentrosUI(centrosList) {
-    var select = document.getElementById('pm-lugar');
-    if (!select) return;
-    var currentVal = select.value;
-    select.innerHTML = '<option value="" disabled selected>Seleccione un lugar de trabajo</option>';
-    centrosList.forEach(function(c) {
-        if (parseInt(c.activo, 10) === 1) {
-            var opt = document.createElement('option');
-            opt.value = c.id;
-            opt.textContent = c.nombre || c.valor || '';
-            if (String(c.id) === String(currentVal)) {
-                opt.selected = true;
-            }
-            select.appendChild(opt);
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1949-2149)</summary>
-
-**Path:** `Unknown file`
-
-```
-            select.appendChild(opt);
-        }
-    });
-}
-
-
-/* ── DOMContentLoaded INICIALIZACIÓN GLOBAL DE SUBPESTAÑAS Y EVENTOS ── */
-document.addEventListener('DOMContentLoaded', function() {
-    // 1. Subpestañas en Médicos (Médicos / Universidades / Centros de Trabajo)
-    var toggleMedicosView = document.getElementById('toggle-medicos-view');
-    if (toggleMedicosView) {
-        toggleMedicosView.querySelectorAll('.cms-tab').forEach(function(tabBtn) {
-            tabBtn.addEventListener('click', function() {
-                var view = this.getAttribute('data-view');
-                toggleMedicosView.querySelectorAll('.cms-tab').forEach(function(b) { b.classList.remove('active'); });
-                this.classList.add('active');
-
-                var vMed = document.getElementById('view-medicos-table');
-                var vUni = document.getElementById('view-universidades-table');
-                var vCen = document.getElementById('view-centros-trabajo-table');
-
-                if (vMed) vMed.classList.add('d-none');
-                if (vUni) vUni.classList.add('d-none');
-                if (vCen) vCen.classList.add('d-none');
-
-                if (view === 'universidades') {
-                    if (vUni) vUni.classList.remove('d-none');
-                    initUniversidadesFlatGrid();
-                } else if (view === 'centros-trabajo') {
-                    if (vCen) vCen.classList.remove('d-none');
-                    initCentrosTrabajoFlatGrid();
-                } else {
-                    if (vMed) vMed.classList.remove('d-none');
-                    initMedicosFlatGrid();
-                }
-            });
-        });
-    }
-
-    // 2. Buscadores y Ordenamientos Médicos
-    var searchInputMed = document.getElementById('flat-search-medicos-input');
-    if (searchInputMed) {
-        searchInputMed.addEventListener('input', function() {
-            applyMedicosFilterAndSort();
-            renderMedicosFlatTable(1);
-        });
-    }
-
-    var btnAddMed = document.getElementById('btn-add-medico-row');
-    if (btnAddMed) {
-        btnAddMed.addEventListener('click', abrirNuevoMedicoModal);
-    }
-
-    var sortCedula = document.getElementById('flat-medicos-sort-cedula');
-    if (sortCedula) {
-        sortCedula.addEventListener('click', function() {
-            medicosSortCol = 'cedula_profesional';
-            medicosSortOrder = (medicosSortOrder === 'asc') ? 'desc' : 'asc';
-            applyMedicosFilterAndSort();
-            renderMedicosFlatTable(1);
-        });
-    }
-
-    var sortNombre = document.getElementById('flat-medicos-sort-nombre');
-    if (sortNombre) {
-        sortNombre.addEventListener('click', function() {
-            medicosSortCol = 'nombre_completo';
-            medicosSortOrder = (medicosSortOrder === 'asc') ? 'desc' : 'asc';
-            applyMedicosFilterAndSort();
-            renderMedicosFlatTable(1);
-        });
-    }
-
-    // 3. Eventos Universidades
-    var searchInputUni = document.getElementById('flat-search-universidades-input');
-    if (searchInputUni) {
-        searchInputUni.addEventListener('input', function() {
-            applyUniversidadesFilterAndSort();
-            renderUniversidadesFlatTable(1);
-        });
-    }
-
-    var btnAddUni = document.getElementById('btn-add-universidad-row');
-    if (btnAddUni) {
-        btnAddUni.addEventListener('click', abrirNuevaUniversidadModal);
-    }
-
-    var sortUniNombre = document.getElementById('flat-universidades-sort-nombre');
-    if (sortUniNombre) {
-        sortUniNombre.addEventListener('click', function() {
-            universidadesSortCol = 'nombre';
-            universidadesSortOrder = (universidadesSortOrder === 'asc') ? 'desc' : 'asc';
-            applyUniversidadesFilterAndSort();
-            renderUniversidadesFlatTable(1);
-        });
-    }
-
-    var sortUniOrden = document.getElementById('flat-universidades-sort-orden');
-    if (sortUniOrden) {
-        sortUniOrden.addEventListener('click', function() {
-            universidadesSortCol = 'orden';
-            universidadesSortOrder = (universidadesSortOrder === 'asc') ? 'desc' : 'asc';
-            applyUniversidadesFilterAndSort();
-            renderUniversidadesFlatTable(1);
-        });
-    }
-
-    var btnCerrarUni = document.getElementById('btn-cerrar-universidad');
-    if (btnCerrarUni) btnCerrarUni.addEventListener('click', cerrarModalUniversidad);
-    var btnCancUni = document.getElementById('btn-cancelar-universidad');
-    if (btnCancUni) btnCancUni.addEventListener('click', cerrarModalUniversidad);
-
-    var formUni = document.getElementById('form-universidad');
-    if (formUni) {
-        formUni.addEventListener('submit', function(e) {
-            e.preventDefault();
-            var id = (document.getElementById('univ-id') ? document.getElementById('univ-id').value : '').trim();
-            var nombre = (document.getElementById('univ-nombre') ? document.getElementById('univ-nombre').value : '').trim();
-            var orden = (document.getElementById('univ-orden') ? document.getElementById('univ-orden').value : '0').trim();
-            var activo = (document.getElementById('univ-activo') ? document.getElementById('univ-activo').value : '1');
-
-            if (!nombre) {
-                alert('El nombre de la universidad es obligatorio.');
-                return;
-            }
-
-            var btnSave = document.getElementById('btn-guardar-universidad');
-            if (btnSave) {
-                btnSave.disabled = true;
-                btnSave.textContent = 'Guardando...';
-            }
-
-            fetch('/laesh/rc/api/universidades/guardar', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    id: id ? parseInt(id, 10) : null,
-                    nombre: nombre,
-                    orden: parseInt(orden, 10) || 0,
-                    activo: parseInt(activo, 10)
-                })
-            })
-            .then(function(res) { return res.json(); })
-            .then(function(data) {
-                if (btnSave) {
-                    btnSave.disabled = false;
-                    btnSave.textContent = id ? 'Actualizar Universidad' : 'Guardar Universidad';
-                }
-                if (data && data.success) {
-                    cerrarModalUniversidad();
-                    if (typeof window.showToast === 'function') {
-                        window.showToast(data.mensaje || 'Universidad guardada con éxito.', 'success');
-                    } else {
-                        alert('✅ ' + (data.mensaje || 'Universidad guardada con éxito.'));
-                    }
-                    fetchUniversidadesData(data.id || id);
-                } else {
-                    alert('⚠️ Error: ' + (data.error || 'No se pudo guardar la universidad.'));
-                }
-            })
-            .catch(function(err) {
-                console.error('Error guardando universidad:', err);
-                if (btnSave) {
-                    btnSave.disabled = false;
-                    btnSave.textContent = id ? 'Actualizar Universidad' : 'Guardar Universidad';
-                }
-                alert('⚠️ Error de red al guardar la universidad.');
-            });
-        });
-    }
-
-    // 4. Eventos Centros de Trabajo
-    var searchInputCen = document.getElementById('flat-search-centros-input');
-    if (searchInputCen) {
-        searchInputCen.addEventListener('input', function() {
-            applyCentrosFilterAndSort();
-            renderCentrosFlatTable(1);
-        });
-    }
-
-    var btnAddCen = document.getElementById('btn-add-centro-row');
-    if (btnAddCen) {
-        btnAddCen.addEventListener('click', abrirNuevoCentroModal);
-    }
-
-    var sortCenNombre = document.getElementById('flat-centros-sort-nombre');
-    if (sortCenNombre) {
-        sortCenNombre.addEventListener('click', function() {
-            centrosSortCol = 'nombre';
-            centrosSortOrder = (centrosSortOrder === 'asc') ? 'desc' : 'asc';
-            applyCentrosFilterAndSort();
-            renderCentrosFlatTable(1);
-        });
-    }
-
-    var sortCenOrden = document.getElementById('flat-centros-sort-orden');
-    if (sortCenOrden) {
-        sortCenOrden.addEventListener('click', function() {
-            centrosSortCol = 'orden';
-            centrosSortOrder = (centrosSortOrder === 'asc') ? 'desc' : 'asc';
-            applyCentrosFilterAndSort();
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Levenshtein distance algorithm seems like a good starting point for string similarity. The core idea is constructing a matrix to track edit distances between substrings. This approach accounts for insertions, deletions, and substitutions to calculate the minimum number of edits required to transform one string into another.
-
-
-Now considering how to implement Levenshtein distance efficiently.  A text normalization step is needed, standardizing the search strings by lowercasing, removing diacritics and punctuation, and trimming whitespace. This will improve the accuracy of the similarity check.  I also need to ensure the current record being edited is excluded from the potential duplicate search.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 39.027230648s
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 9:17 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 9:17 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `write_to_file`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 9:17 pm
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-## User Request
-
-Para Recepción / Médicos , columna Acciones añade dos iconos con su tootip:   Pausar  , y el otro despues de separador sea Asignar contraseña
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `labadmin.php`
-**Language:** php
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `renderMedicosFlatTable`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 9:22 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1124-1209)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-function renderMedicosFlatTable(page, targetUserId) {
-    currentMedicosPage = page || 1;
-    var tbody = document.querySelector('#flat-medicos-table tbody');
-    if (!tbody) return;
-
-    var totalRecordsEl = document.getElementById('flat-medicos-total-records');
-    if (totalRecordsEl) {
-        totalRecordsEl.textContent = 'Total: ' + medicosFilteredData.length;
-    }
-
-    if (medicosFilteredData.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="8" class="text-center txt-muted py-4">No se encontraron médicos.</td></tr>';
-        renderMedicosPagination(0, 1);
-        return;
-    }
-
-    var totalPages = Math.ceil(medicosFilteredData.length / medicosItemsPerPage);
-    if (currentMedicosPage > totalPages) currentMedicosPage = totalPages;
-
-    var startIdx = (currentMedicosPage - 1) * medicosItemsPerPage;
-    var pageItems = medicosFilteredData.slice(startIdx, startIdx + medicosItemsPerPage);
-
-    var html = '';
-    pageItems.forEach(function(item, idx) {
-        var rowNum = startIdx + idx + 1;
-        var rowId = item.user_id ? item.user_id : (item._tempId || idx);
-        var cedulaProf = item.cedula_profesional || '';
-        var cedulaEsp = item.cedula_especialidad || '';
-        var nombre = item.nombre_completo || '';
-        var especialidad = item.especialidad || '';
-        var universidad = item.universidad_nombre || '';
-        var lugar = item.lugar_trabajo_nombre || '';
-        var ordenes = item.total_ordenes || 0;
-
-        html += '<tr data-row-id="' + rowId + '" tabindex="0" style="cursor: pointer;" class="medico-row-item">' +
-            '<td style="text-align: center;">' +
-                '<a href="#" class="med-link-edit" data-user-id="' + rowId + '" style="font-weight: 700; color: var(--primary); text-decoration: underline; font-size: 0.88rem;" onclick="event.preventDefault(); abrirEditarMedicoModal(' + rowId + ');">' + rowNum + '</a>' +
-            '</td>' +
-            '<td style="font-weight: 600; color: #475569;">' + escapeAttrVal(cedulaProf) + '</td>' +
-            '<td style="color: #475569; font-size: 0.85rem;">' + escapeAttrVal(cedulaEsp) + '</td>' +
-            '<td style="font-weight: 700; color: #1e293b;">' + escapeAttrVal(nombre) + '</td>' +
-            '<td>' + (especialidad ? '<span class="badge badge-subtle" style="background:#f1f5f9; color:#334155; font-weight:500;">' + escapeAttrVal(especialidad) + '</span>' : '') + '</td>' +
-            '<td style="color: #475569; font-size: 0.85rem;">' + escapeAttrVal(universidad) + '</td>' +
-            '<td style="color: #475569; font-size: 0.85rem;">' + escapeAttrVal(lugar) + '</td>' +
-            '<td style="text-align: center;"><span class="badge badge-listos" style="font-size: 0.8rem; font-weight: 600;">' + ordenes + ' Órdenes</span></td>' +
-            '<td style="text-align: center; color: #94a3b8; font-size: 0.8rem;">—</td>' +
-        '</tr>';
-    });
-
-    tbody.innerHTML = html;
-    renderMedicosPagination(totalPages, currentMedicosPage);
-    bindMedicosTableEvents();
-
-    if (targetUserId) {
-        setTimeout(function() {
-            var targetRow = tbody.querySelector('tr[data-row-id="' + targetUserId + '"]');
-            if (targetRow) {
-                targetRow.classList.add('row-saved-highlight');
-                targetRow.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-                var editLink = targetRow.querySelector('.med-link-edit');
-                if (editLink) {
-                    editLink.focus();
-                } else {
-                    targetRow.focus();
-                }
-            }
-        }, 120);
-    }
-}
-
-function escapeAttrVal(str) {
-    if (!str) return '';
-    return String(str)
-        .replace(/&/g, '&amp;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#39;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;');
-}
-
-function bindMedicosTableEvents() {
-    var tbody = document.querySelector('#flat-medicos-table tbody');
-    if (!tbody) return;
-
-    var editLinks = tbody.querySelectorAll('.med-link-edit');
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Initial investigation involves inspecting the current data returned by a specific API endpoint. This focuses on understanding the available fields from the relevant view. The next step will query this view directly.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.109744974s
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 9:22 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-The `vw_medicos_completos` view contains doctor information, including their status (`estado_id` and `estado_nombre`). The `GET /api/medicos` route in `rc/index.php` retrieves data from this view, ordering results by `total_`.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `password`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.077064762s
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 9:23 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L539-584)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-    $creatorUserId = (int)Flight::auth()->getUserId();
-    $resultado = \RC\Negocio\Ordenes::registrarMedico($_POST, $creatorUserId);
-
-    if (!$resultado['success']) {
-        \Common\Response::htmxError($resultado['error'] ?? 'Error al registrar el perfil médico.');
-    }
-
-    header('HX-Refresh: true');
-    \Common\Response::htmxSuccess($resultado['mensaje']);
-});
-
-// ── POST /medico/restablecer-password — Restablecer NIP de un médico (HTMX) ──────
-Flight::route('POST /medico/restablecer-password', function () {
-    Flight::rbac()->requirePermission('gestionar_medicos');
-
-    $targetUserId = (int)($_POST['target_user_id'] ?? 0);
-    $newPassword  = trim($_POST['new_password'] ?? '04041974'); // NIP homologado por defecto
-    $adminUserId  = (int)Flight::auth()->getUserId();
-
-    if ($targetUserId <= 0) {
-        \Common\Response::htmxError('ID de médico no válido.');
-    }
-
-    $resultado = \RC\Negocio\Ordenes::restablecerPasswordMedico($targetUserId, $newPassword, $adminUserId);
-
-    if (!$resultado['success']) {
-        \Common\Response::htmxError($resultado['error'] ?? 'Error al restablecer la contraseña.');
-    }
-
-    header('HX-Refresh: true');
-    \Common\Response::htmxSuccess($resultado['mensaje']);
-});
-
-// ── POST /medico/estado — Pausar, Reactivar o Eliminar perfil médico (HTMX) ──────
-// Exclusivo para Perfil ADMIN LAESH (requiere permiso gestionar_cms)
-Flight::route('POST /medico/estado', function () {
-    Flight::rbac()->requirePermission('gestionar_cms', '/laesh/login/login.php?portal=admin');
-
-    $targetUserId  = (int)($_POST['target_user_id'] ?? 0);
-    $nuevoEstadoId = (int)($_POST['nuevo_estado_id'] ?? 1); // 1 = Activo, 2 = Inactivo/Pausado
-    $adminUserId   = (int)Flight::auth()->getUserId();
-
-    if ($targetUserId <= 0) {
-        \Common\Response::htmxError('ID de médico no válido.');
-    }
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L659-699)</summary>
-
-**Path:** `Unknown file`
-
-```
-    $rawInput = file_get_contents('php://input');
-    $payload = json_decode($rawInput, true);
-    if (!is_array($payload)) {
-        $payload = $_POST;
-    }
-
-    $adminUserId = (int)Flight::auth()->getUserId();
-    $resultado = \RC\Negocio\Catalogos::guardarUniversidad($payload, $adminUserId);
-    
-    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
-});
-
-// ── GET /api/centros-trabajo — Listado de centros de trabajo con total de médicos ─────────
-Flight::route('GET /api/centros-trabajo', function () {
-    header('Content-Type: application/json; charset=utf-8');
-    try {
-        $centros = \RC\Negocio\Catalogos::obtenerCentrosTrabajo();
-        echo json_encode(['success' => true, 'data' => $centros], JSON_UNESCAPED_UNICODE);
-    } catch (\Throwable $e) {
-        echo json_encode(['success' => false, 'error' => $e->getMessage()]);
-    }
-});
-
-// ── POST /api/centros-trabajo/guardar — Guardar/Actualizar centro de trabajo ─────────
-Flight::route('POST /api/centros-trabajo/guardar', function () {
-    Flight::rbac()->requirePermission('gestionar_ordenes');
-    header('Content-Type: application/json; charset=utf-8');
-    
-    $rawInput = file_get_contents('php://input');
-    $payload = json_decode($rawInput, true);
-    if (!is_array($payload)) {
-        $payload = $_POST;
-    }
-
-    $adminUserId = (int)Flight::auth()->getUserId();
-    $resultado = \RC\Negocio\Catalogos::guardarCentroTrabajo($payload, $adminUserId);
-    
-    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
-});
-
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L599-639)</summary>
-
-**Path:** `Unknown file`
-
-```
-    Flight::rbac()->requirePermission('gestionar_ordenes'); // o la que aplique para dashboard
-    
-    $rango = $_GET['rango'] ?? 'dia';
-    $inicio = $_GET['inicio'] ?? '';
-    $fin = $_GET['fin'] ?? '';
-    
-    $datos = \RC\Negocio\Ordenes::obtenerEstadisticasRango($rango, $inicio, $fin);
-    echo json_encode($datos, JSON_UNESCAPED_UNICODE);
-});
-
-// ── GET /api/medicos — Devuelve catálogo de médicos en JSON ─────────
-Flight::route('GET /api/medicos', function () {
-    header('Content-Type: application/json; charset=utf-8');
-    try {
-        $db = \Common\DB::connect();
-        $medicosCatalog = $db->query(
-            "SELECT user_id, nombre_completo, cedula_profesional, cedula_especialidad, especialidad, celular, 
-                    universidad_id, universidad_nombre, lugar_trabajo_id, lugar_trabajo_nombre, total_ordenes 
-             FROM vw_medicos_completos 
-             ORDER BY total_ordenes DESC"
-        )->fetchAll(\PDO::FETCH_ASSOC) ?: [];
-        echo json_encode(['success' => true, 'data' => $medicosCatalog], JSON_UNESCAPED_UNICODE);
-    } catch (\Throwable $e) {
-        echo json_encode(['success' => false, 'error' => $e->getMessage()]);
-    }
-});
-
-// ── POST /api/medicos/sync — Sincronizar médicos (JS SPA) ─────────
-Flight::route('POST /api/medicos/sync', function () {
-    Flight::rbac()->requirePermission('gestionar_medicos');
-    header('Content-Type: application/json; charset=utf-8');
-    
-    $payload = json_decode(file_get_contents('php://input'), true);
-    if (empty($payload['medicos']) || !is_array($payload['medicos'])) {
-        echo json_encode(['success' => false, 'error' => 'Payload inválido']);
-        return;
-    }
-
-    $adminUserId = (int)Flight::auth()->getUserId();
-    $resultado = \RC\Negocio\Ordenes::sincronizarMedicos($payload['medicos'], $adminUserId);
-    
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `restablecerPasswordMedico`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 9:23 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `Ordenes.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L959-1039)</summary>
-
-**Path:** `Unknown file`
-
-```
-            if (!$alreadyInTx && $pdo->inTransaction()) {
-                $pdo->rollBack();
-            }
-            DB::logFallback('ERROR', 'Fallo en RC\Negocio\Ordenes::registrarMedico', $e->getMessage());
-            return ['success' => false, 'error' => 'Error al registrar médico: ' . ($e->getMessage() ?: get_class($e))];
-        }
-    }
-
-    /**
-     * Restablece la contraseña de un médico a un nuevo NIP utilizando Delight Auth Admin
-     */
-    public static function restablecerPasswordMedico(int $targetUserId, string $newPassword, int $adminUserId): array {
-        try {
-            $auth = \Flight::auth();
-            $auth->admin()->changePasswordForUserById($targetUserId, $newPassword);
-            Logger::log('INFO', "Recepción/Admin user_id={$adminUserId} restableció la contraseña del médico user_id={$targetUserId}", $adminUserId);
-
-            return [
-                'success' => true,
-                'mensaje' => "✓ Contraseña del médico (ID {$targetUserId}) restablecida a '{$newPassword}' exitosamente."
-            ];
-        } catch (\Delight\Auth\UnknownIdException $e) {
-            return ['success' => false, 'error' => 'Médico no encontrado en el sistema.'];
-        } catch (\Delight\Auth\InvalidPasswordException $e) {
-            return ['success' => false, 'error' => 'La nueva contraseña/NIP no es válida (mínimo 8 dígitos).'];
-        } catch (Throwable $e) {
-            DB::logFallback('ERROR', 'Fallo en RC\Negocio\Ordenes::restablecerPasswordMedico', $e->getMessage());
-            return ['success' => false, 'error' => 'No se pudo restablecer la contraseña: ' . $e->getMessage()];
-        }
-    }
-
-    /**
-     * Cambia el estado de un médico en perfiles_medicos (1 = Activo, 2 = Pausado/Inactivo)
-     */
-    public static function cambiarEstadoMedico(int $targetUserId, int $nuevoEstadoId, int $adminUserId): array {
-        try {
-            $pdo = DB::connect();
-
-            // Invocación al Stored Procedure CambiarEstadoMedico (Sincronización perfiles_medicos + empleados)
-            $stmtSP = $pdo->prepare("CALL CambiarEstadoMedico(?, ?)");
-            $stmtSP->execute([$targetUserId, $nuevoEstadoId]);
-
-            $labelEstado = ($nuevoEstadoId === 1) ? 'Reactivado' : 'Pausado/Inactivado';
-            Logger::logAlways('INFO', "Admin user_id={$adminUserId} cambió el estado del médico user_id={$targetUserId} a '{$labelEstado}'", $adminUserId);
-
-            return [
-                'success' => true,
-                'mensaje' => "✓ Perfil del médico (ID {$targetUserId}) fue {$labelEstado} exitosamente."
-            ];
-        } catch (Throwable $e) {
-            DB::logFallback('ERROR', 'Fallo en RC\Negocio\Ordenes::cambiarEstadoMedico', $e->getMessage());
-            return ['success' => false, 'error' => 'No se pudo cambiar el estado del médico: ' . $e->getMessage()];
-        }
-    }
-
-    /**
-     * Obtiene el resumen consolidado de estadísticas y KPIs reales desde MariaDB
-     */
-    public static function obtenerEstadisticasGeneral(): array {
-        try {
-            $db = DB::connect();
-            $row = $db->query("SELECT * FROM vw_ordenes_estadisticas LIMIT 1")->fetch(PDO::FETCH_ASSOC);
-
-            return [
-                'total_ordenes'     => (int)($row['total_ordenes'] ?? 0),
-                'remitidas'         => (int)($row['remitidas'] ?? 0),
-                'en_atencion'       => (int)($row['en_atencion'] ?? 0),
-                'resultados_listos' => (int)($row['resultados_listos'] ?? 0),
-                'cerradas'          => (int)($row['cerradas'] ?? 0),
-                'total_pacientes'   => (int)($row['total_pacientes'] ?? 0),
-                'total_medicos'     => (int)($row['total_medicos'] ?? 0)
-            ];
-        } catch (Throwable $e) {
-            DB::logFallback('ERROR', 'Fallo en RC\Negocio\Ordenes::obtenerEstadisticasGeneral', $e->getMessage());
-            return [
-                'total_ordenes'   => 0,
-                'remitidas'       => 0,
-                'en_atencion'     => 0,
-                'resultados_listos' => 0,
-                'cerradas'        => 0,
-                'total_pacientes' => 0,
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-`Orders::cambiarEstadoMedico` and `Orders::restablecerPasswordMedico` are confirmed within the business logic layer. The next step is to examine endpoints within a specific file.
-
-The analysis focuses on `POST /api/medicos/cambiar-estado` (or `POST /medico/estado`). The existing route requires a specific permission. The approach will allow the route to respond as a JSON API, focusing on supporting the new endpoint.
-
-
-Now examining the second endpoint for password reset, expecting a JSON payload containing user ID and new password, triggering a specific function within the business logic layer. The function call returns a success status and a message. Next, the design focuses on action icons within a grid for physicians, specifically "Pause" and "Reset Password" icons. The "Pause" icon needs conditional SVG rendering based on a physician's active/paused state, and user interaction to confirm a pause action.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.655619159s
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L604-634)</summary>
-
-**Path:** `Unknown file`
-
-```
-    
-    $datos = \RC\Negocio\Ordenes::obtenerEstadisticasRango($rango, $inicio, $fin);
-    echo json_encode($datos, JSON_UNESCAPED_UNICODE);
-});
-
-// ── GET /api/medicos — Devuelve catálogo de médicos en JSON ─────────
-Flight::route('GET /api/medicos', function () {
-    header('Content-Type: application/json; charset=utf-8');
-    try {
-        $db = \Common\DB::connect();
-        $medicosCatalog = $db->query(
-            "SELECT user_id, nombre_completo, cedula_profesional, cedula_especialidad, especialidad, celular, 
-                    universidad_id, universidad_nombre, lugar_trabajo_id, lugar_trabajo_nombre, total_ordenes 
-             FROM vw_medicos_completos 
-             ORDER BY total_ordenes DESC"
-        )->fetchAll(\PDO::FETCH_ASSOC) ?: [];
-        echo json_encode(['success' => true, 'data' => $medicosCatalog], JSON_UNESCAPED_UNICODE);
-    } catch (\Throwable $e) {
-        echo json_encode(['success' => false, 'error' => $e->getMessage()]);
-    }
-});
-
-// ── POST /api/medicos/sync — Sincronizar médicos (JS SPA) ─────────
-Flight::route('POST /api/medicos/sync', function () {
-    Flight::rbac()->requirePermission('gestionar_medicos');
-    header('Content-Type: application/json; charset=utf-8');
-    
-    $payload = json_decode(file_get_contents('php://input'), true);
-    if (empty($payload['medicos']) || !is_array($payload['medicos'])) {
-        echo json_encode(['success' => false, 'error' => 'Payload inválido']);
-        return;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The task involves updating the API to include doctor status information in the `GET /api/medicos` response, adding two new REST endpoints for changing doctor status and password. The plan is to modify `rc/index.php` to include the required `SELECT` fields and implement the new endpoints, focusing on lines 610-645 for the modifications.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.086745064s
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 9:23 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 9:23 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1049-1099)</summary>
-
-**Path:** `Unknown file`
-
-```
-                        <label for="centro-nombre" class="form-label">
-                            Nombre del Centro / Lugar de Trabajo <span class="req">*</span>
-                        </label>
-                        <input type="text" id="centro-nombre" name="nombre"
-                               placeholder="Ej. Hospital General de Huajuapan" required
-                               class="form-input form-input--bg">
-                    </div>
-
-                    <!-- Botones -->
-                    <div class="form-row-gap" style="margin-top: 1rem;">
-                        <button type="button" class="btn btn-secondary flex-1" id="btn-cancelar-centro">Cancelar</button>
-                        <button type="submit" class="btn btn-primary flex-1" id="btn-guardar-centro">Guardar Centro</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-
-    <div id="modal-resultados" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-resultados-title">
-        <div class="modal-content modal-md">
-            <div class="modal-header">
-                <h3 id="modal-resultados-title">Reporte de Resultados Clínicos</h3>
-                <button type="button" class="close-modal" id="btn-cerrar-resultados-admin" aria-label="Cerrar">&times;</button>
-            </div>
-            <div class="modal-body ta-center pa-5">
-                <img src="/laesh-web-assets-uipv1a/img/resultado.webp?v=3.5" class="modal-img-preview" alt="Resultado" loading="lazy" decoding="async">
-            </div>
-        </div>
-    </div>
-    <!-- Modal de Formulario de Estudio (Crear/Modificar) -->
-    <div id="modal-estudio" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-estudio-titulo">
-        <div class="modal-content" style="max-width: 760px; width: 92%;">
-            <div class="modal-header">
-                <h3 id="modal-estudio-titulo">Editar Estudio Clínico</h3>
-                <button type="button" class="close-modal" id="btn-cerrar-estudio" aria-label="Cerrar">&times;</button>
-            </div>
-            <div class="modal-body">
-            <form id="form-estudio" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                <input type="hidden" id="estudio-id-original">
-
-                <!-- 1. Clave -->
-                <div>
-                    <label class="form-label--sm">Clave del Estudio</label>
-                    <input type="text" id="estudio-clave" required class="form-input-sm" style="width: 100%;">
-                </div>
-
-                <!-- 2. Nombre -->
-                <div>
-                    <label class="form-label--sm">Nombre del Estudio</label>
-                    <input type="text" id="estudio-nombre" required placeholder="Ej. Biometría Hemática Completa" class="form-input-sm" style="width: 100%;">
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 9:23 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-The task involves building two icons within the `renderMedicosFlatTable` function. The first icon will either pause or reactivate a doctor based on their current status. An active doctor (where `estado_id` is not equal to 2) will have a "Pausar" button.
-
-
-The first icon's logic determines the button text and action based on the `estado_id`. If active, it presents a "Pausar" button; if paused, a "Reactivar" button is shown instead. A visual separator is then inserted. The second icon always triggers the password assignment functionality.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.466670229s
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1144-1239)</summary>
-
-**Path:** `Unknown file`
-
-```
-    var startIdx = (currentMedicosPage - 1) * medicosItemsPerPage;
-    var pageItems = medicosFilteredData.slice(startIdx, startIdx + medicosItemsPerPage);
-
-    var html = '';
-    pageItems.forEach(function(item, idx) {
-        var rowNum = startIdx + idx + 1;
-        var rowId = item.user_id ? item.user_id : (item._tempId || idx);
-        var cedulaProf = item.cedula_profesional || '';
-        var cedulaEsp = item.cedula_especialidad || '';
-        var nombre = item.nombre_completo || '';
-        var especialidad = item.especialidad || '';
-        var universidad = item.universidad_nombre || '';
-        var lugar = item.lugar_trabajo_nombre || '';
-        var ordenes = item.total_ordenes || 0;
-
-        html += '<tr data-row-id="' + rowId + '" tabindex="0" style="cursor: pointer;" class="medico-row-item">' +
-            '<td style="text-align: center;">' +
-                '<a href="#" class="med-link-edit" data-user-id="' + rowId + '" style="font-weight: 700; color: var(--primary); text-decoration: underline; font-size: 0.88rem;" onclick="event.preventDefault(); abrirEditarMedicoModal(' + rowId + ');">' + rowNum + '</a>' +
-            '</td>' +
-            '<td style="font-weight: 600; color: #475569;">' + escapeAttrVal(cedulaProf) + '</td>' +
-            '<td style="color: #475569; font-size: 0.85rem;">' + escapeAttrVal(cedulaEsp) + '</td>' +
-            '<td style="font-weight: 700; color: #1e293b;">' + escapeAttrVal(nombre) + '</td>' +
-            '<td>' + (especialidad ? '<span class="badge badge-subtle" style="background:#f1f5f9; color:#334155; font-weight:500;">' + escapeAttrVal(especialidad) + '</span>' : '') + '</td>' +
-            '<td style="color: #475569; font-size: 0.85rem;">' + escapeAttrVal(universidad) + '</td>' +
-            '<td style="color: #475569; font-size: 0.85rem;">' + escapeAttrVal(lugar) + '</td>' +
-            '<td style="text-align: center;"><span class="badge badge-listos" style="font-size: 0.8rem; font-weight: 600;">' + ordenes + ' Órdenes</span></td>' +
-            '<td style="text-align: center; color: #94a3b8; font-size: 0.8rem;">—</td>' +
-        '</tr>';
-    });
-
-    tbody.innerHTML = html;
-    renderMedicosPagination(totalPages, currentMedicosPage);
-    bindMedicosTableEvents();
-
-    if (targetUserId) {
-        setTimeout(function() {
-            var targetRow = tbody.querySelector('tr[data-row-id="' + targetUserId + '"]');
-            if (targetRow) {
-                targetRow.classList.add('row-saved-highlight');
-                targetRow.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-                var editLink = targetRow.querySelector('.med-link-edit');
-                if (editLink) {
-                    editLink.focus();
-                } else {
-                    targetRow.focus();
-                }
-            }
-        }, 120);
-    }
-}
-
-function escapeAttrVal(str) {
-    if (!str) return '';
-    return String(str)
-        .replace(/&/g, '&amp;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#39;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;');
-}
-
-function bindMedicosTableEvents() {
-    var tbody = document.querySelector('#flat-medicos-table tbody');
-    if (!tbody) return;
-
-    var editLinks = tbody.querySelectorAll('.med-link-edit');
-    editLinks.forEach(function(link) {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            var userId = this.getAttribute('data-user-id');
-            abrirEditarMedicoModal(userId);
-        });
-    });
-
-    var rows = tbody.querySelectorAll('.medico-row-item');
-    rows.forEach(function(row) {
-        row.addEventListener('dblclick', function() {
-            var userId = this.getAttribute('data-row-id');
-            abrirEditarMedicoModal(userId);
-        });
-    });
-}
-
-function abrirNuevoMedicoModal() {
-    var form = document.getElementById('form-perfil-medico');
-    if (form) form.reset();
-
-    var userIdInput = document.getElementById('pm-user-id');
-    if (userIdInput) userIdInput.value = '';
-
-    var title = document.getElementById('modal-medico-title');
-    if (title) title.textContent = 'Registro de Perfil Médico';
-
-    var btnSave = document.getElementById('btn-guardar-medico');
-    if (btnSave) btnSave.textContent = 'Guardar Perfil';
-```
-
-</details>
-
----
-
-### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 9:24 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1139-1249)</summary>
-
-**Path:** `Unknown file`
-
-```
-    }
-
-    var totalPages = Math.ceil(medicosFilteredData.length / medicosItemsPerPage);
-    if (currentMedicosPage > totalPages) currentMedicosPage = totalPages;
-
-    var startIdx = (currentMedicosPage - 1) * medicosItemsPerPage;
-    var pageItems = medicosFilteredData.slice(startIdx, startIdx + medicosItemsPerPage);
-
-    var html = '';
-    pageItems.forEach(function(item, idx) {
-        var rowNum = startIdx + idx + 1;
-        var rowId = item.user_id ? item.user_id : (item._tempId || idx);
-        var cedulaProf = item.cedula_profesional || '';
-        var cedulaEsp = item.cedula_especialidad || '';
-        var nombre = item.nombre_completo || '';
-        var especialidad = item.especialidad || '';
-        var universidad = item.universidad_nombre || '';
-        var lugar = item.lugar_trabajo_nombre || '';
-        var ordenes = item.total_ordenes || 0;
-
-        html += '<tr data-row-id="' + rowId + '" tabindex="0" style="cursor: pointer;" class="medico-row-item">' +
-            '<td style="text-align: center;">' +
-                '<a href="#" class="med-link-edit" data-user-id="' + rowId + '" style="font-weight: 700; color: var(--primary); text-decoration: underline; font-size: 0.88rem;" onclick="event.preventDefault(); abrirEditarMedicoModal(' + rowId + ');">' + rowNum + '</a>' +
-            '</td>' +
-            '<td style="font-weight: 600; color: #475569;">' + escapeAttrVal(cedulaProf) + '</td>' +
-            '<td style="color: #475569; font-size: 0.85rem;">' + escapeAttrVal(cedulaEsp) + '</td>' +
-            '<td style="font-weight: 700; color: #1e293b;">' + escapeAttrVal(nombre) + '</td>' +
-            '<td>' + (especialidad ? '<span class="badge badge-subtle" style="background:#f1f5f9; color:#334155; font-weight:500;">' + escapeAttrVal(especialidad) + '</span>' : '') + '</td>' +
-            '<td style="color: #475569; font-size: 0.85rem;">' + escapeAttrVal(universidad) + '</td>' +
-            '<td style="color: #475569; font-size: 0.85rem;">' + escapeAttrVal(lugar) + '</td>' +
-            '<td style="text-align: center;"><span class="badge badge-listos" style="font-size: 0.8rem; font-weight: 600;">' + ordenes + ' Órdenes</span></td>' +
-            '<td style="text-align: center; color: #94a3b8; font-size: 0.8rem;">—</td>' +
-        '</tr>';
-    });
-
-    tbody.innerHTML = html;
-    renderMedicosPagination(totalPages, currentMedicosPage);
-    bindMedicosTableEvents();
-
-    if (targetUserId) {
-        setTimeout(function() {
-            var targetRow = tbody.querySelector('tr[data-row-id="' + targetUserId + '"]');
-            if (targetRow) {
-                targetRow.classList.add('row-saved-highlight');
-                targetRow.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-                var editLink = targetRow.querySelector('.med-link-edit');
-                if (editLink) {
-                    editLink.focus();
-                } else {
-                    targetRow.focus();
-                }
-            }
-        }, 120);
-    }
-}
-
-function escapeAttrVal(str) {
-    if (!str) return '';
-    return String(str)
-        .replace(/&/g, '&amp;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#39;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;');
-}
-
-function bindMedicosTableEvents() {
-    var tbody = document.querySelector('#flat-medicos-table tbody');
-    if (!tbody) return;
-
-    var editLinks = tbody.querySelectorAll('.med-link-edit');
-    editLinks.forEach(function(link) {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            var userId = this.getAttribute('data-user-id');
-            abrirEditarMedicoModal(userId);
-        });
-    });
-
-    var rows = tbody.querySelectorAll('.medico-row-item');
-    rows.forEach(function(row) {
-        row.addEventListener('dblclick', function() {
-            var userId = this.getAttribute('data-row-id');
-            abrirEditarMedicoModal(userId);
-        });
-    });
-}
-
-function abrirNuevoMedicoModal() {
-    var form = document.getElementById('form-perfil-medico');
-    if (form) form.reset();
-
-    var userIdInput = document.getElementById('pm-user-id');
-    if (userIdInput) userIdInput.value = '';
-
-    var title = document.getElementById('modal-medico-title');
-    if (title) title.textContent = 'Registro de Perfil Médico';
-
-    var btnSave = document.getElementById('btn-guardar-medico');
-    if (btnSave) btnSave.textContent = 'Guardar Perfil';
-
-    if (typeof window.abrirModalMedico === 'function') {
-        window.abrirModalMedico();
-    } else {
-        var m = document.getElementById('modal-medico');
-        if (m) m.classList.add('show');
-    }
-}
-window.abrirNuevoMedicoModal = abrirNuevoMedicoModal;
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Examining the `renderMedicosFlatTable` function to locate where actions are defined; specifically, line 1171, which currently displays a dash, likely represents the actions column. The user requested two icons: "Pausar" (Pause) with a tooltip, and another icon, separated, for "Asignar contraseña" (Assign Password).  The "Pausar" icon's tooltip should dynamically change to "Reactivar" (Reactivate) if already paused.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.088348879s
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1064-1119)</summary>
-
-**Path:** `Unknown file`
-
-```
-        </div>
-    </div>
-
-    <!-- ── Modal: Asignar / Cambiar Contraseña de Médico ──────────────────── -->
-    <div id="modal-asignar-password-medico" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-pass-medico-title">
-        <div class="modal-content modal-sm">
-            <div class="modal-header">
-                <h3 id="modal-pass-medico-title">Asignar Contraseña a Médico</h3>
-                <button type="button" class="close-modal" id="btn-cerrar-pass-medico" aria-label="Cerrar">&times;</button>
-            </div>
-            <div class="modal-body">
-                <form id="form-asignar-password-medico" class="d-flex-col-gap1">
-                    <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                    <input type="hidden" id="pass-medico-user-id" name="target_user_id" value="">
-
-                    <!-- Médico seleccionado -->
-                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 10px 12px;">
-                        <div id="pass-medico-nombre" style="font-weight: 700; color: #1e293b; font-size: 0.95rem;">-</div>
-                        <div id="pass-medico-celular" style="font-size: 0.82rem; color: #64748b; margin-top: 2px;">Tel: -</div>
-                    </div>
-
-                    <!-- Nueva Contraseña -->
-                    <div class="form-group mb-0">
-                        <label for="pass-medico-input" class="form-label">
-                            Nueva Contraseña / NIP <span class="req">*</span>
-                        </label>
-                        <div style="position: relative; display: flex; align-items: center;">
-                            <input type="password" id="pass-medico-input" name="new_password" required minlength="8"
-                                   placeholder="Mínimo 8 caracteres"
-                                   class="form-input form-input--bg" style="padding-right: 40px; width: 100%;">
-                            <button type="button" id="btn-toggle-view-pass" style="position: absolute; right: 8px; background: transparent; border: none; cursor: pointer; color: #64748b; padding: 4px;" title="Ver/Ocultar contraseña">
-                                👁️
-                            </button>
-                        </div>
-                        <span style="font-size: 0.78rem; color: var(--text-muted); display: block; margin-top: 4px;">El médico usará esta clave junto a su número celular para iniciar sesión.</span>
-                    </div>
-
-                    <!-- Botones -->
-                    <div class="form-row-gap" style="margin-top: 0.8rem;">
-                        <button type="button" class="btn btn-secondary flex-1" id="btn-cancelar-pass-medico">Cancelar</button>
-                        <button type="submit" class="btn btn-primary flex-1" id="btn-guardar-pass-medico">Guardar Contraseña</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-
-    <div id="modal-resultados" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-resultados-title">
-        <div class="modal-content modal-md">
-            <div class="modal-header">
-                <h3 id="modal-resultados-title">Reporte de Resultados Clínicos</h3>
-                <button type="button" class="close-modal" id="btn-cerrar-resultados-admin" aria-label="Cerrar">&times;</button>
-            </div>
-            <div class="modal-body ta-center pa-5">
-                <img src="/laesh-web-assets-uipv1a/img/resultado.webp?v=3.5" class="modal-img-preview" alt="Resultado" loading="lazy" decoding="async">
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1299-1449)</summary>
-
-**Path:** `Unknown file`
-
-```
-            for (var j = 0; j < lugarSelect.options.length; j++) {
-                if (lugarSelect.options[j].text.trim() === item.lugar_trabajo_nombre.trim()) {
-                    lugarSelect.selectedIndex = j;
-                    break;
-                }
-            }
-        }
-    }
-
-    var title = document.getElementById('modal-medico-title');
-    if (title) title.textContent = 'Editar Perfil Médico';
-
-    var btnSave = document.getElementById('btn-guardar-medico');
-    if (btnSave) btnSave.textContent = 'Actualizar Perfil';
-
-    if (typeof window.abrirModalMedico === 'function') {
-        window.abrirModalMedico();
-    } else {
-        var m = document.getElementById('modal-medico');
-        if (m) m.classList.add('show');
-    }
-}
-window.abrirEditarMedicoModal = abrirEditarMedicoModal;
-
-function renderMedicosPagination(totalPages, currentPage) {
-    var container = document.getElementById('flat-medicos-pagination');
-    if (!container) return;
-
-    if (totalPages <= 1) {
-        container.innerHTML = '';
-        return;
-    }
-
-    var html = '';
-    for (var i = 1; i <= totalPages; i++) {
-        var activeClass = i === currentPage ? 'btn-primary' : 'btn-secondary';
-        html += '<button type="button" class="btn ' + activeClass + ' btn-sm med-page-btn" data-page="' + i + '" style="padding: 2px 8px; font-size: 0.8rem;">' + i + '</button>';
-    }
-    container.innerHTML = html;
-
-    container.querySelectorAll('.med-page-btn').forEach(function(btn) {
-        btn.addEventListener('click', function() {
-            var page = parseInt(this.getAttribute('data-page'), 10);
-            renderMedicosFlatTable(page);
-        });
-    });
-}
-
-/* ── MÓDULO GESTIÓN DE UNIVERSIDADES ── */
-var universidadesCatalogData = [];
-var universidadesFilteredData = [];
-var currentUniversidadesPage = 1;
-var universidadesItemsPerPage = 50;
-var universidadesSortCol = 'nombre';
-var universidadesSortOrder = 'asc';
-
-function initUniversidadesFlatGrid(forceFetch) {
-    var table = document.getElementById('flat-universidades-table');
-    if (!table) return;
-
-    if (forceFetch || universidadesCatalogData.length === 0) {
-        fetchUniversidadesData();
-    } else {
-        renderUniversidadesFlatTable(currentUniversidadesPage);
-    }
-}
-window.initUniversidadesFlatGrid = initUniversidadesFlatGrid;
-window.fetchUniversidadesData = fetchUniversidadesData;
-
-function fetchUniversidadesData(targetId) {
-    var tbody = document.querySelector('#flat-universidades-table tbody');
-    if (tbody) {
-        tbody.innerHTML = '<tr><td colspan="4" class="text-center txt-muted py-4">⏳ Cargando catálogo de universidades...</td></tr>';
-    }
-
-    fetch('/laesh/rc/api/universidades')
-        .then(function(res) { return res.json(); })
-        .then(function(data) {
-            if (data && data.success && Array.isArray(data.data)) {
-                universidadesCatalogData = data.data;
-                applyUniversidadesFilterAndSort();
-
-                var targetPage = 1;
-                if (targetId) {
-                    var targetIdx = universidadesFilteredData.findIndex(function(u) {
-                        return String(u.id) === String(targetId);
-                    });
-                    if (targetIdx !== -1) {
-                        targetPage = Math.floor(targetIdx / universidadesItemsPerPage) + 1;
-                    }
-                }
-
-                renderUniversidadesFlatTable(targetPage, targetId);
-                sincronizarSelectUniversidadesUI(universidadesCatalogData);
-            } else {
-                if (tbody) {
-                    tbody.innerHTML = '<tr><td colspan="4" class="text-center txt-danger py-4">⚠️ Error al cargar universidades: ' + (data.error || 'Respuesta inválida') + '</td></tr>';
-                }
-            }
-        })
-        .catch(function(err) {
-            console.error('Error fetching /api/universidades:', err);
-            if (tbody) {
-                tbody.innerHTML = '<tr><td colspan="4" class="text-center txt-danger py-4">⚠️ Error de conexión al cargar universidades</td></tr>';
-            }
-        });
-}
-
-function updateUniversidadesSortIcons() {
-    var headerNombre = document.getElementById('flat-universidades-sort-nombre');
-    if (headerNombre) {
-        var iconN = headerNombre.querySelector('.sort-icon');
-        var isCurN = (universidadesSortCol === 'nombre');
-        headerNombre.setAttribute('data-order', isCurN ? universidadesSortOrder : 'none');
-        if (iconN) iconN.textContent = isCurN ? (universidadesSortOrder === 'asc' ? ' ▲' : ' ▼') : '';
-    }
-}
-
-function applyUniversidadesFilterAndSort() {
-    var searchInput = document.getElementById('flat-search-universidades-input');
-    var query = searchInput ? searchInput.value.trim().toLowerCase() : '';
-
-    universidadesFilteredData = universidadesCatalogData.filter(function(item) {
-        if (!query) return true;
-        var nom = (item.nombre || item.valor || '').toLowerCase();
-        var idStr = String(item.id || '');
-        return nom.includes(query) || idStr.includes(query);
-    });
-
-    universidadesFilteredData.sort(function(a, b) {
-        if (universidadesSortCol === 'id') {
-            var numA = parseInt(a.id || 0, 10);
-            var numB = parseInt(b.id || 0, 10);
-            return universidadesSortOrder === 'asc' ? numA - numB : numB - numA;
-        }
-        var valA = (a[universidadesSortCol] || '').toString().toLowerCase();
-        var valB = (b[universidadesSortCol] || '').toString().toLowerCase();
-        if (valA < valB) return universidadesSortOrder === 'asc' ? -1 : 1;
-        if (valA > valB) return universidadesSortOrder === 'asc' ? 1 : -1;
-        return 0;
-    });
-
-    updateUniversidadesSortIcons();
-}
-
-function renderUniversidadesFlatTable(page, targetId) {
-    currentUniversidadesPage = page || 1;
-    var tbody = document.querySelector('#flat-universidades-table tbody');
-    if (!tbody) return;
-
-    var totalRecordsEl = document.getElementById('flat-universidades-total-records');
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `toast`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 9:24 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L954-1019)</summary>
-
-**Path:** `Unknown file`
-
-```
-                e.stopPropagation();
-                var action = option.getAttribute('data-action');
-                var row = option.closest('tr');
-                var docName = row ? row.cells[1].textContent.trim() : 'el médico';
-                
-                // Close menu
-                var menu = option.closest('.ops-dropdown-menu');
-                if (menu) {
-                    menu.classList.remove('open');
-                    menu.previousElementSibling.setAttribute('aria-expanded', 'false');
-                }
-
-                if (action === 'restablecer') {
-                    if (confirm('¿Está seguro de que desea restablecer la contraseña para ' + docName + '?')) {
-                        if (typeof window.showToast === 'function') {
-                            window.showToast('Contraseña restablecida con éxito para ' + docName, 'success');
-                        } else {
-                            alert('Contraseña restablecida con éxito para ' + docName);
-                        }
-                    }
-                } else if (action === 'pausar') {
-                    var isPaused = option.textContent.trim().toLowerCase() === 'activar';
-                    var confirmMsg = isPaused 
-                        ? '¿Está seguro de que desea activar la cuenta de ' + docName + '?'
-                        : '¿Está seguro de que desea pausar la cuenta de ' + docName + '?';
-                    
-                    if (confirm(confirmMsg)) {
-                        if (isPaused) {
-                            option.textContent = 'Pausar';
-                            if (row) row.style.opacity = '1';
-                            if (typeof window.showToast === 'function') {
-                                window.showToast('Cuenta de ' + docName + ' activada', 'success');
-                            }
-                        } else {
-                            option.textContent = 'Activar';
-                            if (row) row.style.opacity = '0.5';
-                            if (typeof window.showToast === 'function') {
-                                window.showToast('Cuenta de ' + docName + ' pausada', 'warning');
-                            }
-                        }
-                    }
-                } else if (action === 'eliminar') {
-                    if (confirm('¿Está seguro de que desea eliminar a ' + docName + '? Esta acción no se puede deshacer.')) {
-                        if (row) {
-                            row.style.transition = 'opacity 0.2s';
-                            row.style.opacity = '0';
-                            setTimeout(function() {
-                                row.remove();
-                            }, 200);
-                        }
-                        if (typeof window.showToast === 'function') {
-                            window.showToast(docName + ' ha sido eliminado de la lista.', 'info');
-                        }
-                    }
-                }
-            }
-        });
-
-        // Close dropdown when clicking anywhere else
-        document.addEventListener('click', function() {
-            document.querySelectorAll('.ops-dropdown-menu.open').forEach(function(m) {
-                m.classList.remove('open');
-                m.previousElementSibling.setAttribute('aria-expanded', 'false');
-            });
-        });
-    })();
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1049-1144)</summary>
-
-**Path:** `Unknown file`
-
-```
-    fetch('/laesh/rc/api/medicos')
-        .then(function(res) { return res.json(); })
-        .then(function(data) {
-            if (data && data.success && Array.isArray(data.data)) {
-                medicosCatalogData = data.data;
-                applyMedicosFilterAndSort();
-
-                var targetPage = 1;
-                if (targetUserId) {
-                    var targetIdx = medicosFilteredData.findIndex(function(m) {
-                        return String(m.user_id) === String(targetUserId);
-                    });
-                    if (targetIdx !== -1) {
-                        targetPage = Math.floor(targetIdx / medicosItemsPerPage) + 1;
-                    }
-                }
-
-                renderMedicosFlatTable(targetPage, targetUserId);
-            } else {
-                if (tbody) {
-                    tbody.innerHTML = '<tr><td colspan="8" class="text-center txt-danger py-4">⚠️ Error al cargar médicos: ' + (data.error || 'Respuesta inválida') + '</td></tr>';
-                }
-            }
-        })
-        .catch(function(err) {
-            console.error('Error fetching /api/medicos:', err);
-            if (tbody) {
-                tbody.innerHTML = '<tr><td colspan="8" class="text-center txt-danger py-4">⚠️ Error de conexión al cargar catálogo de médicos</td></tr>';
-            }
-        });
-}
-
-function updateMedicosSortIcons() {
-    var headerNombre = document.getElementById('flat-medicos-sort-nombre');
-    var headerCedula = document.getElementById('flat-medicos-sort-cedula');
-
-    if (headerNombre) {
-        var iconN = headerNombre.querySelector('.sort-icon');
-        var isCurN = (medicosSortCol === 'nombre_completo');
-        headerNombre.setAttribute('data-order', isCurN ? medicosSortOrder : 'none');
-        if (iconN) iconN.textContent = isCurN ? (medicosSortOrder === 'asc' ? ' ▲' : ' ▼') : '';
-    }
-    if (headerCedula) {
-        var iconC = headerCedula.querySelector('.sort-icon');
-        var isCurC = (medicosSortCol === 'cedula_profesional');
-        headerCedula.setAttribute('data-order', isCurC ? medicosSortOrder : 'none');
-        if (iconC) iconC.textContent = isCurC ? (medicosSortOrder === 'asc' ? ' ▲' : ' ▼') : '';
-    }
-}
-
-function applyMedicosFilterAndSort() {
-    var searchInput = document.getElementById('flat-search-medicos-input');
-    var query = searchInput ? searchInput.value.trim().toLowerCase() : '';
-
-    medicosFilteredData = medicosCatalogData.filter(function(item) {
-        if (!query) return true;
-        var nom = (item.nombre_completo || '').toLowerCase();
-        var ced = (item.cedula_profesional || '').toLowerCase();
-        var esp = (item.especialidad || '').toLowerCase();
-        var cel = (item.celular || '').toLowerCase();
-        var uni = (item.universidad_nombre || '').toLowerCase();
-        var lug = (item.lugar_trabajo_nombre || '').toLowerCase();
-        return nom.includes(query) || ced.includes(query) || esp.includes(query) || cel.includes(query) || uni.includes(query) || lug.includes(query);
-    });
-
-    medicosFilteredData.sort(function(a, b) {
-        var valA = (a[medicosSortCol] || '').toString().toLowerCase();
-        var valB = (b[medicosSortCol] || '').toString().toLowerCase();
-        if (valA < valB) return medicosSortOrder === 'asc' ? -1 : 1;
-        if (valA > valB) return medicosSortOrder === 'asc' ? 1 : -1;
-        return 0;
-    });
-
-    updateMedicosSortIcons();
-}
-
-function renderMedicosFlatTable(page, targetUserId) {
-    currentMedicosPage = page || 1;
-    var tbody = document.querySelector('#flat-medicos-table tbody');
-    if (!tbody) return;
-
-    var totalRecordsEl = document.getElementById('flat-medicos-total-records');
-    if (totalRecordsEl) {
-        totalRecordsEl.textContent = 'Total: ' + medicosFilteredData.length;
-    }
-
-    if (medicosFilteredData.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="8" class="text-center txt-muted py-4">No se encontraron médicos.</td></tr>';
-        renderMedicosPagination(0, 1);
-        return;
-    }
-
-    var totalPages = Math.ceil(medicosFilteredData.length / medicosItemsPerPage);
-    if (currentMedicosPage > totalPages) currentMedicosPage = totalPages;
-
-    var startIdx = (currentMedicosPage - 1) * medicosItemsPerPage;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L479-539)</summary>
-
-**Path:** `Unknown file`
-
-```
-                     y ESTA copia real, con contenedores dinámicos id=container-*
-                     que sí llena filtrarEstadisticasAdmin(), nunca llegaba a
-                     mostrarse. La copia vieja (y un contenedor id panel-catalogos
-                     huérfano que había quedado abierto junto a ella) se eliminó completa. -->
-                <div id="panel-reportes" class="tab-panel d-none">
-                    <div class="modal-sect-hd">
-                        <h2 class="txt-pgd mb-0">Reportes y Estadísticas</h2>
-                        <div class="d-inline-flex-ac">
-                            <label for="filtro-periodo-admin" class="txt-muted-sm">Periodo:</label>
-                            <select id="filtro-periodo-admin" class="select-sm select-sm--bg">
-                                <option value="dia">Hoy</option>
-                                <option value="semana">Esta Semana</option>
-                                <option value="mes" selected>Este Mes</option>
-                                <option value="anio">Este Año</option>
-                                <option value="fecha">Fecha</option>
-                            </select>
-                            <span id="rango-fechas-admin" class="d-none flex-ic-8">
-                                <input type="date" id="fecha-inicio-admin" class="select-sm" onchange="filtrarEstadisticasAdmin()">
-                                <span class="txt-muted-sm">al</span>
-                                <input type="date" id="fecha-fin-admin" class="select-sm" onchange="filtrarEstadisticasAdmin()">
-                            </span>
-                        </div>
-                    </div>
-                    
-                    <div class="grid-auto-200mb">
-                        <div class="card mb-0 ta-center pa-5">
-                            <div id="lbl-solicitudes-admin" class="txt-muted-xs-upper">Total Solicitudes Emitidas</div>
-                            <div id="stat-solicitudes-admin" class="stat-num stat-num--pgd">-</div>
-                        </div>
-                        <div class="card mb-0 ta-center pa-5">
-                            <div class="txt-muted-xs-upper">En Atención</div>
-                            <div id="stat-atencion-admin" class="stat-num stat-num--atn">-</div>
-                        </div>
-                        <div class="card mb-0 ta-center pa-5">
-                            <div class="txt-muted-xs-upper">Resultados Listos</div>
-                            <div id="stat-listos-admin" class="stat-num stat-num--lst">-</div>
-                        </div>
-                        <div class="card mb-0 ta-center pa-5">
-                            <div class="txt-muted-xs-upper">Cerradas Con Éxito</div>
-                            <div id="stat-cerradas-admin" class="stat-num stat-num--main">-</div>
-                        </div>
-                        <div class="card mb-0 ta-center pa-5">
-                            <div class="txt-muted-xs-upper">Canceladas</div>
-                            <div id="stat-canceladas-admin" class="stat-num stat-num--danger">-</div>
-                        </div>
-                    </div>
-
-                    <div class="grid-auto-400">
-                        <!-- Distribución por Categorías -->
-                        <div class="card mb-0">
-                            <h3 class="txt-pgd-lg">Distribución de Estudios por Categoría</h3>
-                            <div class="col-group" id="container-categorias-stats">
-                                <div class="text-center txt-muted" style="padding:2rem;">Cargando categorías...</div>
-                            </div>
-                        </div>
-
-                        <!-- Top 5 Médicos con más Órdenes Remitidas -->
-                        <div class="card mb-0">
-                            <h3 class="txt-pgd-lg">Top 5 Médicos con más Órdenes Remitidas</h3>
-                            <div class="col-group" id="container-medicos-stats">
-                                <div class="text-center txt-muted" style="padding:2rem;">Cargando médicos...</div>
-```
-
-</details>
-
----
-
-## Agent Response
 
 ### Actions
 
@@ -18209,6 +20421,7 @@ function renderMedicosFlatTable(page, targetUserId) {
 <details>
 <summary>Metadata</summary>
 
+- **Thinking Duration:** 0.119921718s
 - **Model:** Gemini 3.7 Flash (Medium)
 </details>
 
@@ -18217,7 +20430,7 @@ function renderMedicosFlatTable(page, targetUserId) {
 ### Local File Search
 
 **Status:** Completed
-**Created:** 20 Sept 2026, 9:24 pm
+**Created:** 21 Sept 2026, 7:41 am
 
 ---
 
@@ -18237,7 +20450,7 @@ function renderMedicosFlatTable(page, targetUserId) {
 ---
 
 <details>
-<summary>File: `Unknown file` (L349-389)</summary>
+<summary>File: `Unknown file` (L349-394)</summary>
 
 **Path:** `Unknown file`
 
@@ -18283,6 +20496,11 @@ function renderMedicosFlatTable(page, targetUserId) {
                     <div id="view-universidades-table" class="medicos-subview d-none" style="margin-top: 1rem; margin-bottom: 2.5rem;">
                         <div class="cms-panel-header" style="margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
                             <h3 class="cms-h3" style="margin: 0; font-size: 1.35rem; font-weight: 800; color: #0052B7;">Universidades</h3>
+                            
+                            <div style="display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; justify-content: flex-end;">
+                                <!-- Paginador y Total -->
+                                <div id="flat-universidades-pagination-wrap" style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <span id="flat-universidades-total-records" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">Total: 0</span>
 ```
 
 </details>
@@ -18291,198 +20509,52 @@ function renderMedicosFlatTable(page, targetUserId) {
 
 ## Agent Response
 
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 21 Sept 2026, 7:42 am
+
+---
+
+## Agent Response
+
 ### Thinking
 
-The table `flat-medicos-table` is structured with 9 columns. Any empty or error state should use a `colspan` of 9 to maintain the table's integrity. Focus now is on the "Acciones" column, specifically for the "Recepción / Médicos" context, where two icons with tooltips are required.
-
-
-First icon requires conditional SVG rendering based on an internal state variable to display "pause" or "play".  The tooltip and style also adapt to reflect the state, showing "Pausar" or "Reactivar".
-
-The second icon's functionality is to assign a password, after the separator. Icon will be designed as a separate element with relevant attributes.
-
-
-Analyzing the provided HTML, I need to implement the "Asignar contraseña" icon with the specified attributes and SVG.  I will now examine the associated JavaScript code to understand how to link the click event to the password assignment functionality. The goal is to connect the icon's click to the password modal's display.
-
-
-Examining the associated JavaScript, I identified the code that handles state changes and password assignment. The state change logic includes confirmation prompts and API calls to update the doctor's account status, incorporating error handling and local data updates on success. The password assignment process involves retrieving user details and populating a modal form. I will now integrate the state change functionality with the first icon click event, and the password assignment modal display with the second icon click event.
+Analyzing the `perfiles_medicos` data reveals IDs 3, 4, 5, 6, and 7. Observing the data, noticed that user 3's information includes Lugar 13 and user 4's information includes Lugar 14. This is unexpected because no IDs with 13 and 14 exist. The doctor ID mapping is inconsistent.
 
 
 
 
 ### Actions
 
-**Tool:** `view_file`
-**File:** `labadmin.js`
+**Tool:** `grep_search`
+**Query:** `tabla-medicos`
 
 <details>
 <summary>Metadata</summary>
 
-- **Thinking Duration:** 3.755993579s
+- **Thinking Duration:** 0.108963549s
 - **Model:** Gemini 3.7 Flash (Medium)
 </details>
 
 ---
 
-<details>
-<summary>File: `Unknown file` (L1199-1349)</summary>
+### Local File Search
 
-**Path:** `Unknown file`
-
-```
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#39;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;');
-}
-
-function bindMedicosTableEvents() {
-    var tbody = document.querySelector('#flat-medicos-table tbody');
-    if (!tbody) return;
-
-    var editLinks = tbody.querySelectorAll('.med-link-edit');
-    editLinks.forEach(function(link) {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            var userId = this.getAttribute('data-user-id');
-            abrirEditarMedicoModal(userId);
-        });
-    });
-
-    var rows = tbody.querySelectorAll('.medico-row-item');
-    rows.forEach(function(row) {
-        row.addEventListener('dblclick', function() {
-            var userId = this.getAttribute('data-row-id');
-            abrirEditarMedicoModal(userId);
-        });
-    });
-}
-
-function abrirNuevoMedicoModal() {
-    var form = document.getElementById('form-perfil-medico');
-    if (form) form.reset();
-
-    var userIdInput = document.getElementById('pm-user-id');
-    if (userIdInput) userIdInput.value = '';
-
-    var title = document.getElementById('modal-medico-title');
-    if (title) title.textContent = 'Registro de Perfil Médico';
-
-    var btnSave = document.getElementById('btn-guardar-medico');
-    if (btnSave) btnSave.textContent = 'Guardar Perfil';
-
-    if (typeof window.abrirModalMedico === 'function') {
-        window.abrirModalMedico();
-    } else {
-        var m = document.getElementById('modal-medico');
-        if (m) m.classList.add('show');
-    }
-}
-window.abrirNuevoMedicoModal = abrirNuevoMedicoModal;
-
-function abrirEditarMedicoModal(userId) {
-    var item = medicosCatalogData.find(function(m) {
-        return String(m.user_id) === String(userId);
-    });
-
-    if (!item) return;
-
-    var userIdInput = document.getElementById('pm-user-id');
-    if (userIdInput) userIdInput.value = item.user_id;
-
-    var nombreInput = document.getElementById('pm-nombre');
-    if (nombreInput) nombreInput.value = item.nombre_completo || '';
-
-    var espSelect = document.getElementById('pm-especialidad');
-    if (espSelect) {
-        espSelect.value = item.especialidad || 'Medicina General';
-        if (espSelect.selectedIndex === -1 && espSelect.options.length > 0) {
-            espSelect.selectedIndex = 0;
-        }
-    }
-
-    var cedProfInput = document.getElementById('pm-cedula-profesional');
-    if (cedProfInput) cedProfInput.value = item.cedula_profesional || '';
-
-    var cedEspInput = document.getElementById('pm-cedula-especialidad');
-    if (cedEspInput) cedEspInput.value = item.cedula_especialidad || '';
-
-    var celularInput = document.getElementById('pm-celular');
-    if (celularInput) celularInput.value = item.celular || '';
-
-    var univSelect = document.getElementById('pm-universidad');
-    if (univSelect) {
-        if (item.universidad_id) {
-            univSelect.value = item.universidad_id;
-        } else if (item.universidad_nombre) {
-            for (var i = 0; i < univSelect.options.length; i++) {
-                if (univSelect.options[i].text.trim() === item.universidad_nombre.trim()) {
-                    univSelect.selectedIndex = i;
-                    break;
-                }
-            }
-        }
-    }
-
-    var lugarSelect = document.getElementById('pm-lugar');
-    if (lugarSelect) {
-        if (item.lugar_trabajo_id) {
-            lugarSelect.value = item.lugar_trabajo_id;
-        } else if (item.lugar_trabajo_nombre) {
-            for (var j = 0; j < lugarSelect.options.length; j++) {
-                if (lugarSelect.options[j].text.trim() === item.lugar_trabajo_nombre.trim()) {
-                    lugarSelect.selectedIndex = j;
-                    break;
-                }
-            }
-        }
-    }
-
-    var title = document.getElementById('modal-medico-title');
-    if (title) title.textContent = 'Editar Perfil Médico';
-
-    var btnSave = document.getElementById('btn-guardar-medico');
-    if (btnSave) btnSave.textContent = 'Actualizar Perfil';
-
-    if (typeof window.abrirModalMedico === 'function') {
-        window.abrirModalMedico();
-    } else {
-        var m = document.getElementById('modal-medico');
-        if (m) m.classList.add('show');
-    }
-}
-window.abrirEditarMedicoModal = abrirEditarMedicoModal;
-
-function renderMedicosPagination(totalPages, currentPage) {
-    var container = document.getElementById('flat-medicos-pagination');
-    if (!container) return;
-
-    if (totalPages <= 1) {
-        container.innerHTML = '';
-        return;
-    }
-
-    var html = '';
-    for (var i = 1; i <= totalPages; i++) {
-        var activeClass = i === currentPage ? 'btn-primary' : 'btn-secondary';
-        html += '<button type="button" class="btn ' + activeClass + ' btn-sm med-page-btn" data-page="' + i + '" style="padding: 2px 8px; font-size: 0.8rem;">' + i + '</button>';
-    }
-    container.innerHTML = html;
-
-    container.querySelectorAll('.med-page-btn').forEach(function(btn) {
-        btn.addEventListener('click', function() {
-            var page = parseInt(this.getAttribute('data-page'), 10);
-            renderMedicosFlatTable(page);
-        });
-    });
-}
-
-/* ── MÓDULO GESTIÓN DE UNIVERSIDADES ── */
-var universidadesCatalogData = [];
-var universidadesFilteredData = [];
-```
-
-</details>
+**Status:** Completed
+**Created:** 21 Sept 2026, 7:43 am
 
 ---
 
@@ -18491,7 +20563,7 @@ var universidadesFilteredData = [];
 ### Actions
 
 **Tool:** `grep_search`
-**Query:** `DOMContentLoaded`
+**Query:** `perfiles_medicos`
 
 <details>
 <summary>Metadata</summary>
@@ -18504,7 +20576,74 @@ var universidadesFilteredData = [];
 ### Local File Search
 
 **Status:** Completed
-**Created:** 20 Sept 2026, 9:24 pm
+**Created:** 21 Sept 2026, 7:43 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+Examining the setup directory, I'm trying to determine the origin of initial user data. The `setup.sh` script appears to invoke a PHP script for seeding. The PHP script `seed_first_users.php` seems to contain an array of user data. This is where I'll find the initial user accounts.
+
+
+The script iterates through a user data array, likely creating or updating user profiles. It constructs SQL queries to insert or update entries in a `perfiles_medicos` table, using provided user information and defaulting the status. Each user record is processed with their `nombre`, `apellidos`, and potentially `especialidad` details for the profile.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.120597509s
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 21 Sept 2026, 7:43 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+Investigation reveals the initial seeding script (`seed_first_users.php`) populated only a limited set of doctor profile fields. Consequently, crucial medical profile details (`cedula_profesional`, `cedula_especialidad`, `universidad_id`, `lugar_trabajo_id`) remain unpopulated for doctors not updated via the user interface. This incomplete data stems directly from the seed script's limited scope, leaving gaps in these specific columns for the initial doctor entries.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.081735961s
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+analiza , complementa y alinea el contenido de estos archivos:
+/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/website/robots.txt, /home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/website/sitemap.xml
+Con base al website laesh.mx , publicare en google search.
+dame dignostico y mejoras.
+
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `labadmin.js`
+**Language:** javascript
+</details>
 
 ---
 
@@ -18513,7 +20652,7 @@ var universidadesFilteredData = [];
 ### Actions
 
 **Tool:** `view_file`
-**File:** `labadmin.js`
+**File:** `robots.txt`
 
 <details>
 <summary>Metadata</summary>
@@ -18524,102 +20663,229 @@ var universidadesFilteredData = [];
 ---
 
 <details>
-<summary>File: `Unknown file` (L1959-2049)</summary>
+<summary>File: `Unknown file`</summary>
 
 **Path:** `Unknown file`
 
 ```
-    }
-    return null;
+# robots.txt — LAESH Bloc Digital (laesh.mx)
+# Actualizado: 2026-09-06
+# Docs: https://developers.google.com/search/docs/crawling-indexing/robots/intro
+
+# ── Crawlers generales ───────────────────────────────────────────────────────
+User-agent: *
+
+# Páginas públicas indexables (raíz)
+Allow: /$
+Allow: /index.php
+
+# Portales internos: no indexar
+Disallow: /adrc/
+Disallow: /rc/
+Disallow: /md/
+Disallow: /login/
+
+# Assets y uploads: no indexar
+Disallow: /laesh-web-assets-uipv1a/
+Disallow: /laesh-uploads/
+
+# Archivos de sistema y configuración
+Disallow: /commons/
+Disallow: /.env
+Disallow: /.git/
+
+# ── Googlebot: configuración explícita ──────────────────────────────────────
+User-agent: Googlebot
+
+Allow: /$
+Allow: /index.php
+Disallow: /adrc/
+Disallow: /rc/
+Disallow: /md/
+Disallow: /login/
+Disallow: /laesh-web-assets-uipv1a/
+Disallow: /laesh-uploads/
+
+# ── Googlebot-Image ──────────────────────────────────────────────────────────
+User-agent: Googlebot-Image
+Allow: /laesh-web-assets-uipv1a/img/
+Disallow: /laesh-uploads/
+
+# ── Sitemap ──────────────────────────────────────────────────────────────────
+Sitemap: https://laesh.mx/sitemap.xml
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `sitemap.xml`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- sitemap.xml — LAESH Bloc Digital (laesh.mx) -->
+<!-- Actualizado: 2026-09-06                      -->
+<!-- Docs: https://sitemaps.org/protocol.html     -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Página principal — landing corporativa -->
+  <url>
+    <loc>https://laesh.mx/</loc>
+    <lastmod>2026-09-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="es-MX" href="https://laesh.mx/"/>
+  </url>
+
+</urlset>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/**
+ * index.php — Sitio Web Público LAESH (Phase J — Estabilización)
+ *
+ * Fuente HTML: website/uipv1/index.html  ← NUNCA BORRAR (R15.1)
+ * Merge iterativo: cambios en uipv1/index.html → propagar aquí.
+ *
+ * Todo el contenido editorial se lee desde la BD:
+ *   · configuraciones   → contacto, horarios, responsable, ubicación geográfica,
+ *                          WhatsApp, Facebook, Schema.org, años de experiencia
+ *   · web_contenidos    → hero (slides + navbar tagline), quienes-somos (fichas,
+ *                          resp, filosofía), especialidades (accordion fichas),
+ *                          promociones (banner), calidad (encabezado),
+ *                          ubicacion (maps_embed), footer, seo
+ *   · estudios (JOIN)   → SSOT para tarjetas de promociones diarias
+ *
+ * Claves configuraciones usadas:
+ *   telefono · email_contacto · whatsapp_numero · facebook_url
+ *   direccion · direccion_calle · ciudad · estado · cp
+ *   horario_semana · horario_domingo · hrs_open · hrs_close · dom_open · dom_close
+ *   responsable_nombre · responsable_cedula_prof · responsable_cedula_esp
+ *   nombre_laboratorio · nombre_corto
+ */
+declare(strict_types=1);
+require_once __DIR__ . '/../commons/commons.php';
+
+// ── HTTP Caching & Performance Optimization Headers ───────────────────────────
+// Permite revalidación rápida y caché eficiente del navegador sin afectar sesiones
+if (empty($_SESSION['auth_logged_in'])) {
+    header('Cache-Control: public, max-age=300, must-revalidate');
+} else {
+    header('Cache-Control: no-cache, must-revalidate');
 }
 
+// ── CSRF para modal de login ────────────────────────────────────────────────
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
 
-/* ── DOMContentLoaded INICIALIZACIÓN GLOBAL DE SUBPESTAÑAS Y EVENTOS ── */
-document.addEventListener('DOMContentLoaded', function() {
-    // 1. Subpestañas en Médicos (Médicos / Universidades / Centros de Trabajo)
-    var toggleMedicosView = document.getElementById('toggle-medicos-view');
-    if (toggleMedicosView) {
-        toggleMedicosView.querySelectorAll('.cms-tab').forEach(function(tabBtn) {
-            tabBtn.addEventListener('click', function() {
-                var view = this.getAttribute('data-view');
-                toggleMedicosView.querySelectorAll('.cms-tab').forEach(function(b) { b.classList.remove('active'); });
-                this.classList.add('active');
+// ── Helpers ─────────────────────────────────────────────────────────────────
+/** Escapa para salida HTML (texto y atributos). */
+function h(mixed $v): string {
+    return htmlspecialchars((string)($v ?? ''), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+}
+/** Devuelve solo dígitos de un número de teléfono. */
+function waNum(string $raw): string {
+    return preg_replace('/\D/', '', $raw);
+}
+/**
+ * Renderiza HTML de confianza generado por el RTE del CMS (admins LAESH).
+ * Permite tags ricos de CKEditor 5.
+ * Bloquea: <script>, atributos on*, href con javascript:
+ */
+function safeHtml(mixed $v): string {
+    $html = strip_tags((string)($v ?? ''), ['strong','em','b','i','br','p','ul','ol','li','a','span','table','tbody','tr','td','th','thead','hr','figure','iframe','h1','h2','h3','h4','h5','h6','u','s','blockquote','oembed','div','img','mark']);
+    $html = preg_replace('/\s+on\w+\s*=\s*(?:"[^"]*"|\'[^\']*\'|[^\s>]*)/i', '', $html);
+    $html = preg_replace('/href\s*=\s*["\']?\s*javascript:/i', 'href="#" data-blocked=', $html);
 
-                var vMed = document.getElementById('view-medicos-table');
-                var vUni = document.getElementById('view-universidades-table');
-                var vCen = document.getElementById('view-centros-trabajo-table');
+    // Convertir <oembed url="..."> a <iframe> para YouTube, Spotify, Vimeo si vienen etiquetas oembed crudas
+    $html = preg_replace_callback('/<oembed\s+url=["\']([^"\']+)["\']\s*>\s*<\/oembed>/i', function($matches) {
+        $url = $matches[1];
+        if (preg_match('/(?:youtube\.com\/(?:watch\?v=|embed\/|v\/)|youtu\.be\/)([\w-]+)/i', $url, $m)) {
+            $yId = $m[1];
+            return '<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,0.12);">' .
+                   '<iframe src="https://www.youtube.com/embed/' . $yId . '" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;border-radius:12px;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' .
+                   '</div>';
+        }
+        if (preg_match('/vimeo\.com\/(?:video\/)?(\d+)/i', $url, $m)) {
+            $vId = $m[1];
+            return '<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;">' .
+                   '<iframe src="https://player.vimeo.com/video/' . $vId . '" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allowfullscreen></iframe>' .
+                   '</div>';
+        }
+        return '<a href="' . htmlspecialchars($url, ENT_QUOTES, 'UTF-8') . '" target="_blank" rel="noopener">' . htmlspecialchars($url, ENT_QUOTES, 'UTF-8') . '</a>';
+    }, $html);
 
-                if (vMed) vMed.classList.add('d-none');
-                if (vUni) vUni.classList.add('d-none');
-                if (vCen) vCen.classList.add('d-none');
+    // Limpiar párrafos vacíos redundantes al inicio y final (<p>&nbsp;</p>, <p></p>) que dejan espacios verticales masivos
+    $html = preg_replace('/^(?:\s*<p>(?:&nbsp;|\s)*<\/p>)+/i', '', $html);
+    $html = preg_replace('/(?:\s*<p>(?:&nbsp;|\s)*<\/p>)+\s*$/i', '', trim($html));
 
-                if (view === 'universidades') {
-                    if (vUni) vUni.classList.remove('d-none');
-                    initUniversidadesFlatGrid();
-                } else if (view === 'centros-trabajo') {
-                    if (vCen) vCen.classList.remove('d-none');
-                    initCentrosTrabajoFlatGrid();
-                } else {
-                    if (vMed) vMed.classList.remove('d-none');
-                    initMedicosFlatGrid();
-                }
-            });
-        });
+    return $html;
+}
+
+/** Devuelve un valor de la tabla web_contenidos de manera segura */
+function cmsVal(?array $c, string $sec, ?string $sub, string $clave, string $default = ''): string {
+    if (!is_array($c)) return $default;
+    $subKey = $sub ?? '';
+    if (isset($c[$sec][$subKey][$clave])) {
+        return (string)$c[$sec][$subKey][$clave];
     }
-
-    // 2. Buscadores y Ordenamientos Médicos
-    var searchInputMed = document.getElementById('flat-search-medicos-input');
-    if (searchInputMed) {
-        searchInputMed.addEventListener('input', function() {
-            applyMedicosFilterAndSort();
-            renderMedicosFlatTable(1);
-        });
+    if ($subKey === '' && isset($c[$sec][''][$clave])) {
+        return (string)$c[$sec][''][$clave];
     }
+    return $default;
+}
 
-    var btnAddMed = document.getElementById('btn-add-medico-row');
-    if (btnAddMed) {
-        btnAddMed.addEventListener('click', abrirNuevoMedicoModal);
-    }
-
-    var sortCedula = document.getElementById('flat-medicos-sort-cedula');
-    if (sortCedula) {
-        sortCedula.addEventListener('click', function() {
-            medicosSortCol = 'cedula_profesional';
-            medicosSortOrder = (medicosSortOrder === 'asc') ? 'desc' : 'asc';
-            applyMedicosFilterAndSort();
-            renderMedicosFlatTable(1);
-        });
-    }
-
-    var sortNombre = document.getElementById('flat-medicos-sort-nombre');
-    if (sortNombre) {
-        sortNombre.addEventListener('click', function() {
-            medicosSortCol = 'nombre_completo';
-            medicosSortOrder = (medicosSortOrder === 'asc') ? 'desc' : 'asc';
-            applyMedicosFilterAndSort();
-            renderMedicosFlatTable(1);
-        });
-    }
-
-    // 3. Eventos Universidades
-    var searchInputUni = document.getElementById('flat-search-universidades-input');
-    if (searchInputUni) {
-        searchInputUni.addEventListener('input', function() {
-            applyUniversidadesFilterAndSort();
-            renderUniversidadesFlatTable(1);
-        });
-    }
-
-    var btnAddUni = document.getElementById('btn-add-universidad-row');
-    if (btnAddUni) {
-        btnAddUni.addEventListener('click', abrirNuevaUniversidadModal);
-    }
-
-    var sortUniNombre = document.getElementById('flat-universidades-sort-nombre');
-    if (sortUniNombre) {
-        sortUniNombre.addEventListener('click', function() {
-            universidadesSortCol = 'nombre';
-            universidadesSortOrder = (universidadesSortOrder === 'asc') ? 'desc' : 'asc';
+/**
+ * Parsea el texto de fichas del CMS al array estructurado del acordeón.
+ *
+ * Formato esperado (una sub-categoría por línea):
 ```
 
 </details>
@@ -18631,7 +20897,7 @@ document.addEventListener('DOMContentLoaded', function() {
 ### Actions
 
 **Tool:** `view_file`
-**File:** `labadmin.js`
+**File:** `index.php`
 
 <details>
 <summary>Metadata</summary>
@@ -18642,74 +20908,92 @@ document.addEventListener('DOMContentLoaded', function() {
 ---
 
 <details>
-<summary>File: `Unknown file` (L2179-2241)</summary>
+<summary>File: `Unknown file` (L529-609)</summary>
 
 **Path:** `Unknown file`
 
 ```
-                                     '¿Estás de acuerdo con guardar este registro?';
-                if (!window.confirm(mensajeConfirm)) {
-                    // El usuario canceló
-                    var inputNom = document.getElementById('centro-nombre');
-                    if (inputNom) inputNom.focus();
-                    return;
-                }
-            }
-
-            var btnSave = document.getElementById('btn-guardar-centro');
-            if (btnSave) {
-                btnSave.disabled = true;
-                btnSave.textContent = 'Guardando...';
-            }
-
-            fetch('/laesh/rc/api/centros-trabajo/guardar', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    id: id ? parseInt(id, 10) : null,
-                    nombre: nombre,
-                    orden: 0,
-                    activo: 1
-                })
-            })
-            .then(function(res) { return res.json(); })
-            .then(function(data) {
-                if (btnSave) {
-                    btnSave.disabled = false;
-                    btnSave.textContent = id ? 'Actualizar Centro' : 'Guardar Centro';
-                }
-                if (data && data.success) {
-                    cerrarModalCentro();
-                    if (typeof window.showToast === 'function') {
-                        window.showToast(data.mensaje || 'Centro de trabajo guardado con éxito.', 'success');
-                    } else {
-                        alert('✅ ' + (data.mensaje || 'Centro de trabajo guardado con éxito.'));
-                    }
-                    fetchCentrosTrabajoData(data.id || id);
-                } else {
-                    alert('⚠️ Error: ' + (data.error || 'No se pudo guardar el centro de trabajo.'));
-                }
-            })
-            .catch(function(err) {
-                console.error('Error guardando centro de trabajo:', err);
-                if (btnSave) {
-                    btnSave.disabled = false;
-                    btnSave.textContent = id ? 'Actualizar Centro' : 'Guardar Centro';
-                }
-                alert('⚠️ Error de red al guardar el centro de trabajo.');
-            });
-        });
+        default       => 'image/webp',
+    };
+    ?>
+    <meta property="og:title" content="<?= h($ogTitle) ?>">
+    <meta property="og:description" content="<?= h($ogDesc) ?>">
+    <meta property="og:site_name" content="<?= h($ogSiteName) ?>">
+    <meta property="og:image" content="<?= h($ogImg) ?>">
+    <?php
+    $ogImgW = 1200; $ogImgH = 630;
+    if ($ogImgRaw && str_starts_with($ogImgRaw, '/')) {
+        $imgPath = $_SERVER['DOCUMENT_ROOT'] . $ogImgRaw;
+        if (file_exists($imgPath)) {
+            [$ogImgW, $ogImgH] = @getimagesize($imgPath) ?: [1200, 630];
+        }
     }
-
-    // 5. Inicialización si panel-medicos está abierto al cargar
-    var panelMed = document.getElementById('panel-medicos');
-    if (panelMed && window.getComputedStyle(panelMed).display !== 'none' && !panelMed.classList.contains('d-none')) {
-        initMedicosFlatGrid();
+    ?>
+    <meta property="og:image:width" content="<?= $ogImgW ?>">
+    <meta property="og:image:height" content="<?= $ogImgH ?>">
+    <meta property="og:image:type" content="<?= $ogImgMime ?>">
+    <meta property="og:image:alt" content="<?= h($cfgNombreC) ?> — Laboratorio Clínico <?= h($cfgCiudad) ?>">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://laesh.mx/">
+    <meta property="og:locale" content="es_MX">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<?= h($ogTitle) ?>">
+    <meta name="twitter:description" content="<?= h($ogDesc) ?>">
+    <meta name="twitter:image" content="<?= h($ogImg) ?>">
+    <link rel="canonical" href="https://laesh.mx/">
+    <link rel="alternate" hreflang="es-MX" href="https://laesh.mx/">
+    <link rel="icon" type="image/svg+xml" href="/laesh-web-assets-uipv1a/img/favicon.svg">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https://*.ggpht.com https://*.gstatic.com https://*.google.com https://*.googleusercontent.com https://*.tile.openstreetmap.org https://*.openstreetmap.org https://i.ytimg.com; frame-src https://maps.google.com https://www.google.com https://google.com https://*.google.com https://www.openstreetmap.org https://www.youtube.com https://youtube.com https://open.spotify.com https://player.vimeo.com https://www.dailymotion.com https://www.instagram.com https://www.facebook.com https://platform.twitter.com https://twitframe.com; script-src 'self' 'unsafe-inline' https://maps.google.com https://www.google.com; connect-src 'self' ws: wss: https://*.google.com https://*.openstreetmap.org;">
+    <script src="/laesh-web-assets-uipv1a/js/device-detect.js?v=<?= time() ?>"></script>
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/tokens.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/fonts.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/style.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/style-website.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/landing.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/ckeditor-content.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/targeting.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/tablet-samsung-tabs10ultra.css?v=<?= time() ?>">
+    <link rel="preload" href="/laesh-web-assets-uipv1a/fonts/cabin-latin-normal-w400.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/laesh-web-assets-uipv1a/fonts/outfit-latin-normal-w300.woff2" as="font" type="font/woff2" crossorigin>
+    <!-- LCP preload: precarga la imagen del hero activa antes de que el parser la descubra vía bg_style -->
+    <?php
+    $preloadImgUrl = $slides[1]['imagen_url'] ?? '';
+    if ($hasParentBg) {
+        $preloadImgUrl = $fixedUrl ?: ($fallback ?? '');
     }
-});
+    if ($preloadImgUrl):
+    ?>
+    <link rel="preload" href="<?= h($preloadImgUrl) ?>" as="image" fetchpriority="high">
+    <?php endif; ?>
 
-
-
+    <!-- W8: Schema.org — datos dinámicos desde configuraciones + web_contenidos (GAP 3 resuelto: GeoCoordinates + sameAs) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "<?= $schemaType ?>",
+      "name": "<?= $schemaName ?>",
+      "@id": "https://laesh.mx",
+      "url": "https://laesh.mx",
+      "logo": "https://laesh.mx/laesh-web-assets-uipv1a/img/logo-laesh.webp",
+      "image": "https://laesh.mx/laesh-web-assets-uipv1a/img/logo-laesh.webp",
+      "telephone": "+52<?= h(waNum($cfgTel)) ?>",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "<?= h($cfgDirCalle) ?>",
+        "addressLocality": "<?= h($cfgCiudad) ?>",
+        "addressRegion": "<?= h($cfgEstado) ?>",
+        "postalCode": "<?= h($cfgCP) ?>",
+        "addressCountry": "MX"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": <?= $cfgGeoLat ?>,
+        "longitude": <?= $cfgGeoLng ?>
+      },
+      "sameAs": [
+        "<?= h($cfgFB ?: 'https://www.facebook.com/LAESH.Huajuapan/') ?>"
+      ],
+      "openingHoursSpecification": [
 ```
 
 </details>
@@ -18720,45 +21004,29 @@ document.addEventListener('DOMContentLoaded', function() {
 
 ### Thinking
 
-Focus is on the `renderMedicosFlatTable` function within `labadmin.js`.  The objective is to determine the state of each doctor row. The code checks `estado_id` to determine if a doctor is paused or active.
-Based on the paused state, the appropriate button text, icon color, and SVG icon will be rendered.  The condition uses an integer representation of a state id to determine if the paused state matches a particular value.
-
-
-The code dynamically generates HTML for actions based on the doctor's state. It uses inline styles for button appearance, including color and hover effects.  It constructs a "pause" button whose appearance is determined by a conditional that evaluates the doctor's status based on estadoId. I need to be sure that the integer representation of the state id are consistent.
-
-```javascript
-```
-
-The pause button's HTML is constructed based on the doctor's `estado_id`, rendering different text, colors, and SVG icons. A conditional will determine this. If paused, I should consider subtly dimming the row or adding a visual badge to improve UI clarity.
-
-Event listeners are being added to pause and password buttons. The code retrieves user ID, current state, and doctor's name from data attributes upon click to then call the appropriate action.
-
-
-The provided code includes functions for changing a doctor's state (pause/activate) and resetting their password, triggered by button clicks. The `cambiarEstadoMedicoAction` function uses a confirm dialog to verify the action before making a POST request to an API endpoint to update the doctor's status based on the selected state (1 or 2). CSRF token handling is included for security.  The `abrirModalAsignarPasswordMedico` function is triggered to handle the password reset process.
-
-
-The `cambiarEstadoMedicoAction` function updates a doctor's state via an API call and refreshes the data. Error handling includes alerts for both API and network issues. The `abrirModalAsignarPasswordMedico` function populates a modal with doctor details and initializes the password input field. This also includes the handling of display of the modal.
+Analyzing the `robots.txt` file, lines 18-20 and 36-37 allow general crawlers to index the root directory and the `/index` path. This suggests that the website permits indexing of the main page and the index file.
 
 
 
 
 ### Actions
 
-**Tool:** `replace_file_content`
+**Tool:** `grep_search`
+**Query:** `robots.txt`
 
 <details>
 <summary>Metadata</summary>
 
-- **Thinking Duration:** 10.235674845s
+- **Thinking Duration:** 0.127170084s
 - **Model:** Gemini 3.7 Flash (Medium)
 </details>
 
 ---
 
-### Code Edit
+### Local File Search
 
 **Status:** Completed
-**Created:** 20 Sept 2026, 9:24 pm
+**Created:** 21 Sept 2026, 10:02 am
 
 ---
 
@@ -18766,8 +21034,8 @@ The `cambiarEstadoMedicoAction` function updates a doctor's state via an API cal
 
 ### Actions
 
-**Tool:** `view_file`
-**File:** `labadmin.js`
+**Tool:** `grep_search`
+**Query:** `sitemap`
 
 <details>
 <summary>Metadata</summary>
@@ -18777,261 +21045,10 @@ The `cambiarEstadoMedicoAction` function updates a doctor's state via an API cal
 
 ---
 
-<details>
-<summary>File: `Unknown file` (L1339-1389)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-    var lugarSelect = document.getElementById('pm-lugar');
-    if (lugarSelect) {
-        if (item.lugar_trabajo_id) {
-            lugarSelect.value = item.lugar_trabajo_id;
-        } else if (item.lugar_trabajo_nombre) {
-            for (var j = 0; j < lugarSelect.options.length; j++) {
-                if (lugarSelect.options[j].text.trim() === item.lugar_trabajo_nombre.trim()) {
-                    lugarSelect.selectedIndex = j;
-                    break;
-                }
-            }
-        }
-    }
-
-    var title = document.getElementById('modal-medico-title');
-    if (title) title.textContent = 'Editar Perfil Médico';
-
-    var btnSave = document.getElementById('btn-guardar-medico');
-    if (btnSave) btnSave.textContent = 'Actualizar Perfil';
-
-    if (typeof window.abrirModalMedico === 'function') {
-        window.abrirModalMedico();
-    } else {
-        var m = document.getElementById('modal-medico');
-        if (m) m.classList.add('show');
-    }
-}
-window.abrirEditarMedicoModal = abrirEditarMedicoModal;
-
-function renderMedicosPagination(totalPages, currentPage) {
-    var container = document.getElementById('flat-medicos-pagination');
-    if (!container) return;
-
-    if (totalPages <= 1) {
-        container.innerHTML = '';
-        return;
-    }
-
-    var html = '';
-    for (var i = 1; i <= totalPages; i++) {
-        var activeClass = i === currentPage ? 'btn-primary' : 'btn-secondary';
-        html += '<button type="button" class="btn ' + activeClass + ' btn-sm med-page-btn" data-page="' + i + '" style="padding: 2px 8px; font-size: 0.8rem;">' + i + '</button>';
-    }
-    container.innerHTML = html;
-
-    container.querySelectorAll('.med-page-btn').forEach(function(btn) {
-        btn.addEventListener('click', function() {
-            var page = parseInt(this.getAttribute('data-page'), 10);
-            renderMedicosFlatTable(page);
-        });
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1379-1409)</summary>
-
-**Path:** `Unknown file`
-
-```
-    for (var i = 1; i <= totalPages; i++) {
-        var activeClass = i === currentPage ? 'btn-primary' : 'btn-secondary';
-        html += '<button type="button" class="btn ' + activeClass + ' btn-sm med-page-btn" data-page="' + i + '" style="padding: 2px 8px; font-size: 0.8rem;">' + i + '</button>';
-    }
-    container.innerHTML = html;
-
-    container.querySelectorAll('.med-page-btn').forEach(function(btn) {
-        btn.addEventListener('click', function() {
-            var page = parseInt(this.getAttribute('data-page'), 10);
-            renderMedicosFlatTable(page);
-        });
-    });
-}
-
-/* ── MÓDULO GESTIÓN DE UNIVERSIDADES ── */
-var universidadesCatalogData = [];
-var universidadesFilteredData = [];
-var currentUniversidadesPage = 1;
-var universidadesItemsPerPage = 50;
-var universidadesSortCol = 'nombre';
-var universidadesSortOrder = 'asc';
-
-function initUniversidadesFlatGrid(forceFetch) {
-    var table = document.getElementById('flat-universidades-table');
-    if (!table) return;
-
-    if (forceFetch || universidadesCatalogData.length === 0) {
-        fetchUniversidadesData();
-    } else {
-        renderUniversidadesFlatTable(currentUniversidadesPage);
-    }
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L2199-2287)</summary>
-
-**Path:** `Unknown file`
-
-```
-        });
-    }
-
-    var btnCerrarCen = document.getElementById('btn-cerrar-centro');
-    if (btnCerrarCen) btnCerrarCen.addEventListener('click', cerrarModalCentro);
-    var btnCancCen = document.getElementById('btn-cancelar-centro');
-    if (btnCancCen) btnCancCen.addEventListener('click', cerrarModalCentro);
-
-    var formCen = document.getElementById('form-centro-trabajo');
-    if (formCen) {
-        formCen.addEventListener('submit', function(e) {
-            e.preventDefault();
-            var id = (document.getElementById('centro-id') ? document.getElementById('centro-id').value : '').trim();
-            var nombre = (document.getElementById('centro-nombre') ? document.getElementById('centro-nombre').value : '').trim();
-
-            if (!nombre) {
-                alert('El nombre del centro de trabajo es obligatorio.');
-                return;
-            }
-
-            // Regla de comparación y detección de duplicados
-            var posibleDuplicado = buscarPosibleDuplicado(nombre, centrosTrabajoCatalogData, id);
-            if (posibleDuplicado) {
-                var mensajeConfirm = '⚠️ ATENCIÓN: Se detectó un posible duplicado en el catálogo.\n\n' +
-                                     'Ya existe un Centro de Trabajo registrado con texto similar:\n' +
-                                     '«' + posibleDuplicado.nombre + '»\n\n' +
-                                     '¿Estás de acuerdo con guardar este registro?';
-                if (!window.confirm(mensajeConfirm)) {
-                    // El usuario canceló
-                    var inputNom = document.getElementById('centro-nombre');
-                    if (inputNom) inputNom.focus();
-                    return;
-                }
-            }
-
-            var btnSave = document.getElementById('btn-guardar-centro');
-            if (btnSave) {
-                btnSave.disabled = true;
-                btnSave.textContent = 'Guardando...';
-            }
-
-            fetch('/laesh/rc/api/centros-trabajo/guardar', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    id: id ? parseInt(id, 10) : null,
-                    nombre: nombre,
-                    orden: 0,
-                    activo: 1
-                })
-            })
-            .then(function(res) { return res.json(); })
-            .then(function(data) {
-                if (btnSave) {
-                    btnSave.disabled = false;
-                    btnSave.textContent = id ? 'Actualizar Centro' : 'Guardar Centro';
-                }
-                if (data && data.success) {
-                    cerrarModalCentro();
-                    if (typeof window.showToast === 'function') {
-                        window.showToast(data.mensaje || 'Centro de trabajo guardado con éxito.', 'success');
-                    } else {
-                        alert('✅ ' + (data.mensaje || 'Centro de trabajo guardado con éxito.'));
-                    }
-                    fetchCentrosTrabajoData(data.id || id);
-                } else {
-                    alert('⚠️ Error: ' + (data.error || 'No se pudo guardar el centro de trabajo.'));
-                }
-            })
-            .catch(function(err) {
-                console.error('Error guardando centro de trabajo:', err);
-                if (btnSave) {
-                    btnSave.disabled = false;
-                    btnSave.textContent = id ? 'Actualizar Centro' : 'Guardar Centro';
-                }
-                alert('⚠️ Error de red al guardar el centro de trabajo.');
-            });
-        });
-    }
-
-    // 5. Inicialización si panel-medicos está abierto al cargar
-    var panelMed = document.getElementById('panel-medicos');
-    if (panelMed && window.getComputedStyle(panelMed).display !== 'none' && !panelMed.classList.contains('d-none')) {
-        initMedicosFlatGrid();
-    }
-});
-
-
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.7 Flash (Medium)
-</details>
-
----
-
-### Code Edit
+### Local File Search
 
 **Status:** Completed
-**Created:** 20 Sept 2026, 9:25 pm
+**Created:** 21 Sept 2026, 10:03 am
 
 ---
 
@@ -19039,8 +21056,8 @@ function initUniversidadesFlatGrid(forceFetch) {
 
 ### Actions
 
-**Tool:** `view_file`
-**File:** `labadmin.js`
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/website`
 
 <details>
 <summary>Metadata</summary>
@@ -19051,41 +21068,17 @@ function initUniversidadesFlatGrid(forceFetch) {
 ---
 
 <details>
-<summary>File: `Unknown file` (L2334-2362)</summary>
+<summary>Directory: `website` (5 items)</summary>
 
-**Path:** `Unknown file`
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/website`
 
-```
-                        window.showToast(data.mensaje || 'Centro de trabajo guardado con éxito.', 'success');
-                    } else {
-                        alert('✅ ' + (data.mensaje || 'Centro de trabajo guardado con éxito.'));
-                    }
-                    fetchCentrosTrabajoData(data.id || id);
-                } else {
-                    alert('⚠️ Error: ' + (data.error || 'No se pudo guardar el centro de trabajo.'));
-                }
-            })
-            .catch(function(err) {
-                console.error('Error guardando centro de trabajo:', err);
-                if (btnSave) {
-                    btnSave.disabled = false;
-                    btnSave.textContent = id ? 'Actualizar Centro' : 'Guardar Centro';
-                }
-                alert('⚠️ Error de red al guardar el centro de trabajo.');
-            });
-        });
-    }
-
-    // 5. Inicialización si panel-medicos está abierto al cargar
-    var panelMed = document.getElementById('panel-medicos');
-    if (panelMed && window.getComputedStyle(panelMed).display !== 'none' && !panelMed.classList.contains('d-none')) {
-        initMedicosFlatGrid();
-    }
-});
-
-
-
-```
+| Name | Type | Size |
+|------|------|------|
+| `index.php` | File | 59408 bytes |
+| `login` | Directory | - |
+| `robots.txt` | File | 1604 bytes |
+| `sections` | Directory | - |
+| `sitemap.xml` | File | 604 bytes |
 
 </details>
 
@@ -19095,7 +21088,8 @@ function initUniversidadesFlatGrid(forceFetch) {
 
 ### Actions
 
-**Tool:** `replace_file_content`
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/uploads`
 
 <details>
 <summary>Metadata</summary>
@@ -19105,10 +21099,56 @@ function initUniversidadesFlatGrid(forceFetch) {
 
 ---
 
-### Code Edit
+<details>
+<summary>Directory: `uploads` (1 items)</summary>
 
-**Status:** Completed
-**Created:** 20 Sept 2026, 9:25 pm
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/uploads`
+
+| Name | Type | Size |
+|------|------|------|
+| `pdfs` | Directory | - |
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The file structure reveals CMS-uploaded images reside within the web assets. Private order PDFs are located in a separate uploads directory. Investigating how the `robots.txt` should be formatted to control access to these assets is next.
+
+
+
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-web-assets-uipv1a/img`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.119854411s
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>Directory: `img` (5 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-web-assets-uipv1a/img`
+
+| Name | Type | Size |
+|------|------|------|
+| `favicon.svg` | File | 376 bytes |
+| `logo-laesh.webp` | File | 41796 bytes |
+| `logo-laesh@2x.webp` | File | 47188 bytes |
+| `logo-solicitud.jpeg` | File | 30968 bytes |
+| `resultado.webp` | File | 20938 bytes |
+
+</details>
 
 ---
 
@@ -19116,7 +21156,8 @@ function initUniversidadesFlatGrid(forceFetch) {
 
 ### Actions
 
-**Tool:** `run_command`
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-web-assets-uipv1a/cms`
 
 <details>
 <summary>Metadata</summary>
@@ -19126,31 +21167,68 @@ function initUniversidadesFlatGrid(forceFetch) {
 
 ---
 
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 9:25 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
 <details>
-<summary>Metadata</summary>
+<summary>Directory: `cms` (53 items)</summary>
 
-- **Model:** Gemini 3.7 Flash (Medium)
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-web-assets-uipv1a/cms`
+
+| Name | Type | Size |
+|------|------|------|
+| `.gitkeep` | File | 26 bytes |
+| `calidad-gallery1-20260908-fb15d164.webp` | File | 36808 bytes |
+| `calidad-gallery1-20260913-153fe798.webp` | File | 36186 bytes |
+| `calidad-gallery2-20260913-8a291279.webp` | File | 36186 bytes |
+| `calidad-gallery2-20260913-9d7a6baf.webp` | File | 39130 bytes |
+| `calidad-gallery3-20260913-a20bc539.webp` | File | 25322 bytes |
+| `calidad-gallery3-20260913-ba5be5a1.webp` | File | 39130 bytes |
+| `carousel-1-20260908-24451fbd.webp` | File | 27368 bytes |
+| `carousel-1-20260913-3812b189.webp` | File | 21754 bytes |
+| `carousel-10-20260913-dd2455d0.webp` | File | 23828 bytes |
+| `carousel-2-20260913-d7792cf6.webp` | File | 27358 bytes |
+| `carousel-2-20260913-f77dc001.webp` | File | 21754 bytes |
+| `carousel-3-20260913-45b622da.webp` | File | 13944 bytes |
+| `carousel-3-20260913-91e11374.webp` | File | 27358 bytes |
+| `carousel-4-20260913-086b1d2f.webp` | File | 13944 bytes |
+| `carousel-4-20260913-6575c21d.webp` | File | 26684 bytes |
+| `carousel-5-20260913-b0cd5825.webp` | File | 26684 bytes |
+| `carousel-5-20260913-f6fd1e35.webp` | File | 16032 bytes |
+| `carousel-6-20260913-27547b50.webp` | File | 18738 bytes |
+| `carousel-6-20260913-a7fa0966.webp` | File | 16032 bytes |
+| `carousel-7-20260913-ba912813.webp` | File | 26594 bytes |
+| `carousel-7-20260913-d98129cb.webp` | File | 18738 bytes |
+| `carousel-8-20260913-1680e772.webp` | File | 26594 bytes |
+| `carousel-8-20260913-9c329782.webp` | File | 26508 bytes |
+| `carousel-9-20260913-4fa2ebaa.webp` | File | 23828 bytes |
+| `carousel-9-20260913-ecee8bd9.webp` | File | 26508 bytes |
+| `hero-slide1-20260908-dea5dbb9.webp` | File | 116118 bytes |
+| `hero-slide1-20260913-df21da66.webp` | File | 112060 bytes |
+| `hero-slide1-20260916-93b86153.webp` | File | 112060 bytes |
+| `hero-slide2-20260911-a6aeff20.webp` | File | 112060 bytes |
+| `hero-slide2-20260911-cf6f5977.webp` | File | 112060 bytes |
+| `hero-slide2-20260913-aeb9f22d.webp` | File | 103656 bytes |
+| `hero-slide3-20260911-2d3017b7.webp` | File | 66482 bytes |
+| `hero-slide3-20260911-89d3ca17.webp` | File | 66482 bytes |
+| `hero-slide3-20260913-240ddec0.webp` | File | 120842 bytes |
+| `hero-slide4-20260911-2474146e.webp` | File | 120842 bytes |
+| `hero-slide4-20260911-682b0355.webp` | File | 120842 bytes |
+| `hero-slide4-20260913-60baaecb.webp` | File | 66482 bytes |
+| `hero-slide5-20260911-099acf20.webp` | File | 103656 bytes |
+| `hero-slide5-20260911-342eed0c.webp` | File | 72812 bytes |
+| `hero-slide5-20260913-615eeaf9.webp` | File | 120842 bytes |
+| `promo-1-20260906-146b4e91.webp` | File | 33932 bytes |
+| `promo-1-20260908-fc504acb.webp` | File | 69264 bytes |
+| `promo-1-20260913-27600325.webp` | File | 39242 bytes |
+| `promo-2-20260908-c6d8da72.webp` | File | 66880 bytes |
+| `promo-2-20260913-36fd13bd.webp` | File | 68572 bytes |
+| `promo-3-20260908-5d445a28.webp` | File | 33932 bytes |
+| `seo-og-20260908-31c938f2.webp` | File | 101292 bytes |
+| `seo-og-20260913-1ab2c531.webp` | File | 119822 bytes |
+| `ubicacion-croquis-20260906-50dab5c6.webp` | File | 38702 bytes |
+| `ubicacion-croquis-20260906-a0192514.webp` | File | 38702 bytes |
+| `ubicacion-croquis-20260908-2fb77c27.webp` | File | 46972 bytes |
+| `ubicacion-croquis-20260913-0a4f3643.webp` | File | 38702 bytes |
+
 </details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 20 Sept 2026, 9:25 pm
 
 ---
 
@@ -19171,7 +21249,417 @@ function initUniversidadesFlatGrid(forceFetch) {
 ### Code Edit
 
 **Status:** Completed
-**Created:** 20 Sept 2026, 9:25 pm
+**Created:** 21 Sept 2026, 10:03 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 21 Sept 2026, 10:03 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L549-569)</summary>
+
+**Path:** `Unknown file`
+
+```
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://laesh.mx/">
+    <meta property="og:locale" content="es_MX">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<?= h($ogTitle) ?>">
+    <meta name="twitter:description" content="<?= h($ogDesc) ?>">
+    <meta name="twitter:image" content="<?= h($ogImg) ?>">
+    <link rel="canonical" href="https://laesh.mx/">
+    <link rel="alternate" hreflang="es-MX" href="https://laesh.mx/">
+    <link rel="icon" type="image/svg+xml" href="/laesh-web-assets-uipv1a/img/favicon.svg">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https://*.ggpht.com https://*.gstatic.com https://*.google.com https://*.googleusercontent.com https://*.tile.openstreetmap.org https://*.openstreetmap.org https://i.ytimg.com; frame-src https://maps.google.com https://www.google.com https://google.com https://*.google.com https://www.openstreetmap.org https://www.youtube.com https://youtube.com https://open.spotify.com https://player.vimeo.com https://www.dailymotion.com https://www.instagram.com https://www.facebook.com https://platform.twitter.com https://twitframe.com; script-src 'self' 'unsafe-inline' https://maps.google.com https://www.google.com; connect-src 'self' ws: wss: https://*.google.com https://*.openstreetmap.org;">
+    <script src="/laesh-web-assets-uipv1a/js/device-detect.js?v=<?= time() ?>"></script>
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/tokens.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/fonts.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/style.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/style-website.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/landing.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/ckeditor-content.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/targeting.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/tablet-samsung-tabs10ultra.css?v=<?= time() ?>">
+    <link rel="preload" href="/laesh-web-assets-uipv1a/fonts/cabin-latin-normal-w400.woff2" as="font" type="font/woff2" crossorigin>
+```
+
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 21 Sept 2026, 10:03 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `robots.txt`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# robots.txt — LAESH Bloc Digital (https://laesh.mx)
+# Actualizado: 2026-09-21
+# Estándar oficial Google Search & Protocolo Robots Exclusion
+# Docs: https://developers.google.com/search/docs/crawling-indexing/robots/intro
+
+# ── Crawlers generales ───────────────────────────────────────────────────────
+User-agent: *
+
+# Páginas públicas indexables
+Allow: /$
+Allow: /index.php
+
+# Recursos estáticos requeridos para el renderizado fiel en Googlebot (CSS, JS, Fuentes, Imágenes)
+Allow: /laesh-web-assets-uipv1a/css/
+Allow: /laesh-web-assets-uipv1a/js/
+Allow: /laesh-web-assets-uipv1a/fonts/
+Allow: /laesh-web-assets-uipv1a/img/
+Allow: /laesh-web-assets-uipv1a/cms/
+Allow: /laesh-web-assets-uipv1a/icons/
+
+# Portales y áreas privadas / administrativas: no indexar
+Disallow: /adrc/
+Disallow: /rc/
+Disallow: /md/
+Disallow: /login/
+Disallow: /laesh/adrc/
+Disallow: /laesh/rc/
+Disallow: /laesh/md/
+Disallow: /laesh/login/
+
+# Almacenamiento confidencial (PDFs clínicos, órdenes y resultados médicos de pacientes)
+Disallow: /laesh-uploads/
+Disallow: /uploads/
+
+# Código fuente, dependencias del sistema y logs
+Disallow: /commons/
+Disallow: /crons/
+Disallow: /libs/
+Disallow: /logs/
+Disallow: /swoole/
+Disallow: /.env
+Disallow: /.git/
+
+# ── Googlebot: Renderizado completo y Mobile Usability ───────────────────────
+User-agent: Googlebot
+Allow: /$
+Allow: /index.php
+Allow: /laesh-web-assets-uipv1a/css/
+Allow: /laesh-web-assets-uipv1a/js/
+Allow: /laesh-web-assets-uipv1a/fonts/
+Allow: /laesh-web-assets-uipv1a/img/
+Allow: /laesh-web-assets-uipv1a/cms/
+Allow: /laesh-web-assets-uipv1a/icons/
+Disallow: /adrc/
+Disallow: /rc/
+Disallow: /md/
+Disallow: /login/
+Disallow: /laesh/adrc/
+Disallow: /laesh/rc/
+Disallow: /laesh/md/
+Disallow: /laesh/login/
+Disallow: /laesh-uploads/
+Disallow: /uploads/
+Disallow: /commons/
+Disallow: /crons/
+Disallow: /libs/
+Disallow: /logs/
+Disallow: /swoole/
+
+# ── Googlebot-Image: Indexación de Imágenes Públicas y Catálogo ──────────────
+User-agent: Googlebot-Image
+Allow: /laesh-web-assets-uipv1a/img/
+Allow: /laesh-web-assets-uipv1a/cms/
+Allow: /laesh-web-assets-uipv1a/icons/
+Disallow: /laesh-uploads/
+Disallow: /uploads/
+
+# ── Sitemap Oficial ──────────────────────────────────────────────────────────
+Sitemap: https://laesh.mx/sitemap.xml
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `sitemap.xml`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- sitemap.xml — LAESH Bloc Digital (https://laesh.mx) -->
+<!-- Actualizado: 2026-09-21                             -->
+<!-- Protocolo oficial Sitemaps.org + Extensiones Google -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <!-- Página principal — Landing Corporativa y Catálogo Clínico -->
+  <url>
+    <loc>https://laesh.mx/</loc>
+    <lastmod>2026-09-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="es-MX" href="https://laesh.mx/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://laesh.mx/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://laesh.mx/"/>
+
+    <!-- Imagen de Marca e Identidad Corporativa -->
+    <image:image>
+      <image:loc>https://laesh.mx/laesh-web-assets-uipv1a/img/logo-laesh.webp</image:loc>
+      <image:title>LAESH — Laboratorio de Análisis Clínicos y Especialidades</image:title>
+      <image:caption>Resultados que dan confianza, decisiones que cuidan. Laboratorio clínico en Huajuapan de León, Oaxaca.</image:caption>
+    </image:image>
+
+    <!-- Imagen OpenGraph / Redes Sociales -->
+    <image:image>
+      <image:loc>https://laesh.mx/laesh-web-assets-uipv1a/cms/seo-og-20260913-1ab2c531.webp</image:loc>
+      <image:title>LAESH — Especialidades y Análisis Clínicos</image:title>
+      <image:caption>Laboratorio Clínico LAESH en Huajuapan de León, Oaxaca — Catálogo de estudios, perfiles diagnósticos y atención especializada.</image:caption>
+    </image:image>
+  </url>
+
+</urlset>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/website`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>Directory: `website` (5 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/website`
+
+| Name | Type | Size |
+|------|------|------|
+| `index.php` | File | 59408 bytes |
+| `login` | Directory | - |
+| `robots.txt` | File | 2590 bytes |
+| `sections` | Directory | - |
+| `sitemap.xml` | File | 1728 bytes |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/website/sections`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>Directory: `sections` (6 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/website/sections`
+
+| Name | Type | Size |
+|------|------|------|
+| `acerca-de.php` | File | 2629 bytes |
+| `calidad.php` | File | 1566 bytes |
+| `especialidades.php` | File | 5840 bytes |
+| `promociones.php` | File | 4890 bytes |
+| `ubicacion.php` | File | 6179 bytes |
+| `video.php` | File | 1519 bytes |
+
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+# robots.txt — LAESH Bloc Digital (https://laesh.mx)
+# Actualizado: 2026-09-21
+# Estándar oficial Google Search & Protocolo Robots Exclusion
+# Docs: https://developers.google.com/search/docs/crawling-indexing/robots/intro
+
+# ── Crawlers generales ───────────────────────────────────────────────────────
+User-agent: *
+
+# Páginas públicas indexables
+Allow: /$
+Allow: /index.php
+
+# Recursos estáticos requeridos para el renderizado fiel en Googlebot (CSS, JS, Fuentes, Imágenes)
+Allow: /laesh-web-assets-uipv1a/css/
+Allow: /laesh-web-assets-uipv1a/js/
+Allow: /laesh-web-assets-uipv1a/fonts/
+Allow: /laesh-web-assets-uipv1a/img/
+Allow: /laesh-web-assets-uipv1a/cms/
+Allow: /laesh-web-assets-uipv1a/icons/
+
+# Portales y áreas privadas / administrativas: no indexar
+Disallow: /adrc/
+Disallow: /rc/
+Disallow: /md/
+Disallow: /login/
+Disallow: /laesh/adrc/
+Disallow: /laesh/rc/
+Disallow: /laesh/md/
+Disallow: /laesh/login/
+
+# Almacenamiento confidencial (PDFs clínicos, órdenes y resultados médicos de pacientes)
+Disallow: /laesh-uploads/
+Disallow: /uploads/
+```
+
+</details>
+
+---
+
+## User Request
+
+qeu hago con esos archivos ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `robots.txt`
+**Language:** plaintext
+
+**Open Files:**
+- `robots.txt`
+- `sitemap.xml`
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.7 Flash (Medium)
+</details>
+
+---
+
+## User Request
+
+Se ha solicitado la indexación
+Se ha añadido la URL a una cola de rastreo prioritaria. El hecho de enviar una página varias veces no implicará ningún cambio en su posición dentro de la cola ni en su prioridad. [Más información](https://support.google.com/webmasters/answer/6065812)
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `robots.txt`
+**Language:** plaintext
+
+**Open Files:**
+- `robots.txt`
+- `sitemap.xml`
+</details>
 
 ---
 
