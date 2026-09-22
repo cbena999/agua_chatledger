@@ -91,6 +91,8 @@
 > [!IMPORTANT]
 > **PROHIBICIÓN DE NAVEGADOR AUTOMATIZADO PARA ESPASMOS Y PREDICHO DE LATENCIA:**
 > Gemini y Claude **NO DEBEN** utilizar el agente de navegador automatizado (`browser_subagent`) para diagnosticar espasmos de la UI, latencias de teclado o picos de CPU. Los subagentes de navegador introducen retardos sintéticos (capturas, clics por coordenadas, latencias de motor) que distorsionan y ocultan el rendimiento real del usuario.
+>
+> **Alcance de esta prohibición — no aplica a verificación de renderizado/DOM.** Esta prohibición cubre exclusivamente diagnóstico de *rendimiento/latencia*. Para confirmar o descartar bugs de layout, CSS o anidamiento de DOM (ej. un elemento con `display:block` correcto pero invisible o mal posicionado) — algo que **jsdom no puede detectar porque no calcula layout real** — sí está permitido y es el método recomendado usar `puppeteer-core` con Chrome del sistema y la sesión real del usuario. Ver [skill-puppeteer-verification](../skills/skill-puppeteer-verification/SKILL.md) (caso real: div sin cerrar en `medicos.php` que sacaba 5 paneles fuera de `#main-content`, invisible para jsdom, confirmado solo con Chrome real).
 
 ### R24-DIAG-01 (Mecanismo Obligatorio `TIME_TRACKING` / Telemetría Interna)
 - **Backend (PHP):** Usar marcas `microtime(true)` al inicio/fin del request y registrar los milisegundos reales en `sys_logs` o `Logger::log` para aislar si la latencia proviene de MariaDB/Flight PHP.

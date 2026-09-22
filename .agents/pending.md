@@ -413,6 +413,22 @@ Imágenes `area-*.webp` validadas en producción (KVM2 CMS). ✅
 **Problema**: `index.php` + `medicos.php` regeneran timestamp en cada request → sin cacheo de assets  
 **Fix**: `filemtime()` en lugar de `time()` para todos los `<link>`/`<script>`
 
+### G-DEV-03 ⏸ [LAESH Bloc Digital] WS Swoole — causa raíz de fallo intermitente de validación JWT/JTI sin resolver (síntoma ya mitigado)
+**Estado**: Síntoma corregido y desplegado (2026-09-22, Claude Code) — **causa raíz aún sin diagnosticar**.
+
+**Contexto**: durante prueba real en producción (Recepción no recibía notificaciones en vivo de una orden nueva, requería refresh manual), se encontró y corrigió un bug real en `ws-client.js`: el contador `reconnectAttempts` se reseteaba en cada `onopen`, incluso cuando el servidor cerraba la conexión casi de inmediato (`swoole_server.php` → `on('open')` → `verifyWsJwt()` falla → `$server->close($request->fd)`) — esto generaba un loop infinito de reconexión (1247 reconexiones confirmadas en logs de una sola sesión) que **nunca** alcanzaba `maxReconnects` y por lo tanto **nunca** activaba el fallback de polling HTTP (`startPollingFallback()`, diseñado para entregar notificaciones cada 4s si WS falla). Resultado: cero actualizaciones en vivo hasta refresh manual.
+
+**Fix desplegado** (mitiga el síntoma, no la causa): una conexión que dura menos de `MIN_STABLE_MS=2000` ya no resetea el contador y activa el polling de inmediato, en paralelo a seguir reintentando WS. Verificado con simulación jsdom reproduciendo el patrón exacto observado (open→close casi instantáneo repetido) — el polling se activa en el primer flap. Checksums verificados en KVM2.
+
+**Lo que queda sin resolver — por qué `verifyWsJwt()` rechazaba la conexión de Recepción repetidamente**, pese a que:
+- El archivo de caché del JTI de esa sesión existía en `/opt/laesh/cache/laesh_cache_prod_JTI_*.php` con `'revoked' => false` (verificado directamente en KVM2).
+- `LAESH_CACHE_DIR=/opt/laesh/cache` coincide entre el pool PHP-FPM y el unit systemd de `swoole-laesh` (descartado el mismatch de directorio que motivó el comentario existente en el `.service`).
+- El directorio de caché es accesible (permisos `www-data:www-data 750`, swoole corre como root según su unit, sin restricción de lectura).
+
+**Hipótesis no confirmada**: posible condición de carrera entre la emisión/rotación del JWT (nuevo `jti` en cada request o en algún punto del flujo de Recepción) y el momento en que ese `jti` queda escrito+visible en caché para que Swoole lo valide al abrir el socket — el segundo archivo de caché encontrado se generó exactamente en el mismo segundo del refresh manual del usuario, sugiriendo que el `jti` activo cambió durante la sesión. No se confirmó el mecanismo exacto de rotación ni se implementó fix — **requiere instrumentación temporal (log DEBUG en `verifyWsJwt()`) durante una sesión real para capturar el JTI recibido vs. el cacheado en el momento exacto del rechazo.**
+
+**Impacto actual**: bajo — el fix de `ws-client.js` ya evita que esto afecte al usuario (máx. ~4-7s de retraso vía polling en vez de indefinido). Se documenta para retomar cuando haya oportunidad de instrumentar/diagnosticar en vivo.
+
 ---
 
 ## 🟡 PRIORIDAD MEDIA — LAESH Website Responsividad/Performance (Sesión 2026-08-30)
