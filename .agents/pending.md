@@ -408,10 +408,41 @@ Imágenes `area-*.webp` validadas en producción (KVM2 CMS). ✅
 **Análisis**: El backend `POST /laesh/rc/medico/crear` ya existía y estaba completo en `rc/index.php` → `RC\Negocio\Ordenes::registrarMedico()`. El stub JS (`console.log`) era código muerto — el form tenía `hx-post` y HTMX lo manejaba, pero sin validación completa de celular ni feedback de error correcto.  
 **Fix aplicado**: `labadmin.js` — reemplazado stub `console.log` con interceptor de `submit` que hace `fetch('/laesh/rc/medico/crear')`. Validación añadida: celular `^\d{10}$`. Distinción éxito/error por header `HX-Refresh: true`. Feedback correcto en ambos casos.
 
-### G-DEV-02 ⏸ Cache-busting `?v=time()` — diferido a producción
-**Estado**: Diferido  
-**Problema**: `index.php` + `medicos.php` regeneran timestamp en cada request → sin cacheo de assets  
-**Fix**: `filemtime()` en lugar de `time()` para todos los `<link>`/`<script>`
+### G-DEV-02 🔄 Cache-busting `?v=time()` — 1/6 archivos resuelto, ver GAP-PERF-DAC-01
+**Estado (2026-09-24)**: En progreso — ya no "diferido". Primer archivo resuelto como caso de referencia; quedan 5. Detalle completo, patrón a replicar y lista exacta de archivos en **GAP-PERF-DAC-01** (abajo).  
+**Problema original**: `index.php` + `medicos.php` regeneran timestamp en cada request → sin cacheo de assets  
+**Fix**: `filemtime()` en lugar de `time()` para todos los `<link>`/`<script>` — con detección Docker/KVM2 para resolver la ruta física real de los assets (ver GAP-PERF-DAC-01)
+
+### GAP-PERF-DAC-01 🔄 [LAESH Bloc Digital] Cache-busting `filemtime()` — 1/6 vistas PHP del proyecto migradas
+**Estado (2026-09-24)**: `rc/views/solicitud_dac_impr.php` resuelto y verificado (local Docker + KVM2, checksums OK). Quedan 5 vistas más con el mismo patrón `?v=<?= time() ?>` — mismo fix, sin implementar aún.
+
+**Origen**: reporte de usuario (23-sep, pruebas en Android/Chrome vía datos móviles) — la ventana de "Ver Solicitud Digital" se veía en blanco varios segundos antes de pintar todo de golpe. Analizado: no es la query SQL (folio indexado, milisegundos) — son 3 causas de carga en el navegador, la más grande siendo que `?v=<?= time() ?>` cambia en cada request, así que esta ventana (que se abre repetidamente por sesión, a diferencia del resto del portal que carga una vez por login) nunca se beneficiaba de caché — redescargaba ~89KB de CSS + 2 JS desde cero en cada clic a un folio.
+
+**Fix aplicado en `solicitud_dac_impr.php`** (patrón a replicar en los 5 restantes):
+```php
+function laeshAssetVer(string $relPath): string {
+    static $base = null;
+    if ($base === null) {
+        $base = file_exists('/.dockerenv')
+            ? __DIR__ . '/../../../laesh-web-assets-uipv1a'   // Docker local: hermano bajo www/
+            : '/opt/laesh/assets/laesh-web-assets-uipv1a';     // KVM2 producción: ruta absoluta fija
+    }
+    $mtime = @filemtime($base . $relPath);
+    return (string)($mtime !== false ? $mtime : time()); // fallback si el archivo no existe
+}
+```
+**Hallazgo importante para replicar correctamente**: en KVM2, el webapp (`/opt/laesh/www/laesh-swbldi/`) y los assets (`/opt/laesh/assets/laesh-web-assets-uipv1a/`) **NO son carpetas hermanas** como sí lo son en Docker local (montaje único bajo `www/`) — una ruta relativa simple falla en producción. La detección `file_exists('/.dockerenv')` (mismo patrón ya usado en `commons/config.php`) resuelve la ruta física correcta en ambos entornos. Como `deploy.sh` usa `rsync -a` (preserva mtime del origen), el cache-busting se actualiza solo en cada deploy, sin pasos manuales extra — verificado con requests reales antes/después del deploy (mismo mtime en local y KVM2).
+
+**Cuidado al replicar — `device-detect.js`**: en `solicitud_dac_impr.php` este script va ANTES del CSS y sin `defer` **a propósito** (estampa `data-os`/`data-browser`/`data-input` en `<html>` para que `targeting.css` los use en selectores `[data-os="ios"]` desde el primer pintado — moverlo causa parpadeo de estilo). Verificar en cada archivo si tiene el mismo patrón antes de reordenar nada — solo cambiar el cache-busting, no el orden de carga, salvo que se confirme que ese archivo específico no depende del orden.
+
+**Los 5 archivos restantes** (mismo `?v=<?= time() ?>` en `<link>`/`<script>`, confirmar CSS/JS exactos de cada uno antes de tocar):
+- `rc/views/labadmin.php` — Portal Recepción (carga una vez por sesión, impacto menor que solicitud_dac_impr.php pero sigue sin cachear entre logins)
+- `md/views/medicos.php` — Portal Médico (idem)
+- `admrc/views/gestion_web.php` — CMS "Gestión Web"
+- `admrc/views/log_viewer.php` — Visor de logs (admin)
+- `website/index.php` — Sitio público (mayor impacto potencial — tráfico de visitantes reales, no solo personal interno; alineado con P-01 de la sección Website Performance más abajo, cerrar ambos juntos)
+
+**Próximo paso**: replicar `laeshAssetVer()` (o extraerlo a un helper compartido si aparece en 3+ archivos) en los 5 restantes, verificando cada uno con Puppeteer/curl antes de desplegar, igual que se hizo con `solicitud_dac_impr.php`.
 
 ### G-DEV-03 ⏸ [LAESH Bloc Digital] WS Swoole — causa raíz de fallo intermitente de validación JWT/JTI sin resolver (síntoma ya mitigado, auditoría permanente ya desplegada)
 **Estado (2026-09-23)**: Síntoma corregido (2026-09-22). Hipótesis original de causa raíz **descartada con evidencia de logs**. Encontrado y corregido un bug real independiente (`Cache::clear()`). Desplegada auditoría permanente (`ws_rechazos_log`) para capturar la próxima ocurrencia con el motivo exacto — **causa raíz definitiva sigue sin confirmar, ahora instrumentada para cazarla sin reproducir en vivo a ciegas**.
@@ -446,8 +477,8 @@ Lo que se creyó sin resolver en su momento — por qué `verifyWsJwt()` rechaza
 **Archivos afectados** (en orden del `<head>`):
 - `device-detect.js`
 - `tokens.css`, `fonts.css`, `style.css`, `style-website.css`, `landing.css`, `targeting.css`
-**Fix**: Reemplazar `time()` por `filemtime(BASE_PATH . '/laesh-web-assets-uipv1a/...')` en cada línea  
-**Nota**: Alineado con G-DEV-02 (mismo problema en `medicos.php`); puede cerrarse junto
+**Fix**: Reemplazar `time()` por `filemtime()` — patrón exacto (con detección Docker/KVM2, ruta de assets NO es hermana del webapp en producción) ya implementado y verificado en `rc/views/solicitud_dac_impr.php` (2026-09-24), ver **GAP-PERF-DAC-01**  
+**Nota**: Alineado con G-DEV-02/GAP-PERF-DAC-01 (mismo problema en `medicos.php`, `labadmin.php`, `gestion_web.php`, `log_viewer.php`); cerrar los 5 juntos usando el mismo helper
 
 ### P-03 ⏸ [LAESH Website] Reoptimizar imágenes `area-*.webp` del carrusel de especialidades — tarea usuario
 **Estado**: Diferido — requiere acción manual del usuario en Squoosh  
