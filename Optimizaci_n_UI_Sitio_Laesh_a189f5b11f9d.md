@@ -4,12 +4,12 @@
 
 | Field | Value |
 |-------|-------|
-| **Trajectory ID** | `aa27873b-73b2-40ff-b8fd-953f98e5cc37` |
+| **Trajectory ID** | `6e357b7e-c91b-4705-961b-75dfa5c7e94c` |
 | **Cascade ID** | `707376e8-5501-46d1-bf86-a189f5b11f9d` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 8169 |
+| **Total Steps** | 9780 |
 | **Started** | 21 Sept 2026, 3:55 pm |
-| **Completed** | 26 Sept 2026, 7:30 pm |
+| **Completed** | 27 Sept 2026, 12:05 pm |
 
 ---
 
@@ -8240,7570 +8240,3076 @@
 
 ### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 11:54 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 11:54 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `acerca-de`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 11:54 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L109-189)</summary>
-
-**Path:** `Unknown file`
-
-```
-           navbar y body no necesitan ser el mismo color). */
-        .navbar-sticky {
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            z-index: 1050;
-            background: var(--secondary-green);
-            box-shadow: 0 2px 16px rgba(15,23,42,0.10);
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            padding: 0.35rem calc(max(1.5rem, (100vw - (725px + 50vw)) / 2 + 1.5rem)) 0.5rem 1.25rem;
-            transition: box-shadow 0.3s ease;
-        }
-        .landing-nav-spacer { height: 92px; flex-shrink: 0; }
-        .navbar-sticky .logo {
-            display: flex; align-items: center; gap: 12px;
-            font-weight: 700; font-size: 1.6rem;
-            color: var(--primary); text-decoration: none;
-            margin-top: 0.15rem;
-        }
-        .navbar-sticky .nav-links {
-            margin-left: 0; margin-right: 0;
-            display: flex; gap: 1.25rem; align-items: flex-start;
-            margin-top: 0;
-        }
-        .navbar-sticky .nav-links a {
-            text-decoration: none; color: var(--text-main);
-            font-weight: 600; font-size: 1.10rem;
-            text-transform: uppercase; letter-spacing: 0.05em;
-            position: relative; padding: 0.15rem 0 0.3rem 0;
-            line-height: 1.2;
-            transition: color 0.2s ease;
-        }
-        .navbar-sticky .nav-links a.nav-item-multiline {
-            text-align: center;
-            line-height: 1.12;
-            display: inline-block;
-        }@media (hover: hover) and (pointer: fine) {
-    .navbar-sticky .nav-links a:hover,
-        .navbar-sticky .nav-links a.active {
-        color: var(--primary);
-    }
-} /* A6-fix: blue WCAG AA on white */
-        .navbar-sticky .nav-links a::after {
-            content: ''; position: absolute; bottom: 0; left: 50%;
-            transform: translateX(-50%); width: 0; height: 2px;
-            background: var(--primary-green);
-            transition: width 0.3s cubic-bezier(0.16,1,0.3,1);
-        }@media (hover: hover) and (pointer: fine) {
-    .navbar-sticky .nav-links a:hover::after,
-        .navbar-sticky .nav-links a.active::after {
-        width: 100%;
-    }
-}
-
-        /* ── Dropdown Acceso ── */
-        .dropdown { position: relative; display: inline-block; }
-        .dropdown-trigger { cursor: pointer; }
-        .dropdown-menu {
-            display: none; position: absolute; top: 100%; left: 50%;
-            transform: translateX(-50%); background: #fff;
-            min-width: 220px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            border-radius: 8px; border: 1px solid var(--border);
-            padding: 0.5rem 0; z-index: 1002; margin-top: 0.5rem;
-        }
-        /* Dropdown links: especificidad elevada (.navbar-sticky .dropdown-menu a = 0,3,1)
-           para ganar sobre .navbar-sticky .nav-links a (0,2,1) sin !important — R8 */
-        .navbar-sticky .dropdown-menu a {
-            color: var(--text-main); padding: 0.75rem 1.25rem;
-            text-decoration: none; display: block;
-            font-size: 0.9rem; font-weight: 500;
-            text-transform: none; letter-spacing: normal;
-            transition: background 0.2s, color 0.2s; text-align: left;
-        }@media (hover: hover) and (pointer: fine) {
-    .navbar-sticky .dropdown-menu a:hover {
-        background: var(--secondary-green); color: var(--primary);
-    }
-}@media (hover: hover) and (pointer: fine) {
-    .dropdown:hover .dropdown-menu {
-        display: block;
-    }
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L2719-2754)</summary>
-
-**Path:** `Unknown file`
-
-```
-}
-.header-search-wrap--mobile .header-search-clear {
-    font-size: 0.95rem;
-}
-.header-search-wrap--mobile .header-search-results {
-    right: 0;
-    left: auto;
-    transform: none;
-    width: 280px;
-    max-width: 82vw;
-}
-
-/* Reglas de visibilidad desktop vs mobile */
-@media (min-width: 768px) {
-    .header-search-wrap--mobile {
-        display: none !important;
-    }
-    .navbar-center-block {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: flex-start;
-        margin-left: 0.5rem;
-        margin-right: auto;
-    }
-}
-@media (max-width: 767px) {
-    .header-search-wrap--desktop {
-        display: none !important;
-    }
-}
-
-/* ── Dropdown Flotante de Resultados de Búsqueda ── */
-.header-search-results {
-    position: absolute;
-    top: calc(100% + 5px);
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L489-519)</summary>
-
-**Path:** `Unknown file`
-
-```
-    }
-}
-
-        /* ── Responsive ≥1025px (desktop) ── */
-
-        /* ── Responsive ≤1024px (tablet) ── */
-
-        /* ── Tagline navbar ── */
-        /* flex: 0 1 auto + max-width limita el ancho del tagline para que margin-left:auto
-           del nav-links tenga espacio y los ítems queden bien separados a la derecha. */
-        .navbar-tagline { font-style: italic; color: var(--brand-green); font-size: 1.01rem; font-weight: 600; letter-spacing: 0.01em; white-space: nowrap; overflow: visible; line-height: 1.25; flex: 0 0 auto; min-width: 0; max-width: none; text-align: left; margin-left: 1rem; margin-right: auto; padding: 0 1rem; }
-
-        /* ── Responsive ≤768px (móvil) ── */
-
-        /* ── Landscape compacto ── */
-
-        /* ── ≤480px — wrapping en footer y mapa ── */
-
-        /* ── Móvil muy pequeño ≤375px ── */
-
-        
-/* ── §6 CATÁLOGO, WRAPPERS DE SECCIÓN & CONTACTO ───────────────────────────── */
-
-/* ── Catálogo de Estudios — acordeones por grupo (migrado de style.css) ── */
-        .orden-acc { margin-bottom: 10px; border: 1.5px solid #e2e8f0; border-radius: 10px; overflow: hidden; }
-        .orden-acc-hdr {
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 11px 16px; background: #f1f5f9; cursor: pointer;
-            font-weight: 700; font-size: 0.88rem; color: var(--primary);
-            border: none; width: 100%; text-align: left; gap: 8px; user-select: none;
-            transition: background 0.15s;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L649-689)</summary>
-
-**Path:** `Unknown file`
-
-```
-            <div class="header-search-wrap header-search-wrap--mobile" id="header-search-wrap-mob">
-                <div class="header-search-box">
-                    <svg class="header-search-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                    <input type="text" class="header-search-input" id="input-buscar-estudio-mob" placeholder="Buscar estudio..." autocomplete="off" spellcheck="false" aria-label="Buscar estudio clínico">
-                    <button type="button" class="header-search-clear" aria-label="Borrar búsqueda" style="display:none;">&times;</button>
-                </div>
-                <div class="header-search-results" id="search-results-mob" role="listbox" style="display:none;"></div>
-            </div>
-        </div>
-        <button type="button" class="nav-hamburger" id="nav-hamburger"
-                aria-label="Abrir menú" aria-expanded="false">
-            <span></span><span></span><span></span>
-        </button>
-        <?php
-        // ── Orden de secciones — configurable desde el CMS (configuraciones.seccion_order) ──
-        // Secciones ordenables: inicio, acerca-de, especialidades, promociones, calidad, ubicacion, video.
-        $_SEC_DEFAULT = ['inicio','acerca-de','especialidades','promociones','calidad','ubicacion','video'];
-        $_secNavLabels = [
-            'acerca-de'     => ['label' => 'Quiénes somos',          'href' => '#acerca-de'],
-            'especialidades'=> ['label' => 'Estudios',               'href' => '#especialidades'],
-            'promociones'   => ['label' => 'Promociones',            'href' => '#promociones'],
-            'calidad'       => ['label' => 'Calidad',                'href' => '#calidad'],
-            'ubicacion'     => ['label' => 'Ubicación y<br>Contacto', 'href' => '#ubicacion', 'multiline' => true],
-        ];
-        $isVideoActive = $cfg('video_active', '1') !== '0';
-
-        $_secOrderRaw = $cfg('seccion_order');
-        if ($_secOrderRaw !== '') {
-            $_parsed = array_unique(array_filter(
-                array_map('trim', explode(',', $_secOrderRaw)),
-                fn($s) => in_array($s, $_SEC_DEFAULT, true)
-            ));
-            $_missing = array_diff($_SEC_DEFAULT, $_parsed);
-            $sectionOrder = array_values(array_merge($_parsed, $_missing));
-        } else {
-            $sectionOrder = $_SEC_DEFAULT;
-        }
-        unset($_SEC_DEFAULT, $_secOrderRaw, $_parsed, $_missing);
-
-        // Si el video está apagado, retirarlo del orden de secciones para que no se renderice
-        if (!$isVideoActive) {
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L689-729)</summary>
-
-**Path:** `Unknown file`
-
-```
-        if (!$isVideoActive) {
-            $sectionOrder = array_values(array_filter($sectionOrder, fn($s) => $s !== 'video'));
-        }
-        ?>
-        <div class="nav-links" id="nav-links-mobile">
-            <a href="#inicio">Inicio</a>
-            <?php foreach ($sectionOrder as $_navSec):
-                if (isset($_secNavLabels[$_navSec])):
-                    $_isMulti = !empty($_secNavLabels[$_navSec]['multiline']);
-            ?>
-            <a href="<?= $_secNavLabels[$_navSec]['href'] ?>"<?= $_isMulti ? ' class="nav-item-multiline"' : '' ?>><?= $_isMulti ? $_secNavLabels[$_navSec]['label'] : h($_secNavLabels[$_navSec]['label']) ?></a>
-            <?php endif; endforeach; unset($_navSec, $_isMulti); ?>
-            <div class="header-search-wrap header-search-wrap--desktop" id="header-search-wrap-desk">
-                <div class="header-search-box">
-                    <svg class="header-search-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                    <input type="text" class="header-search-input" id="input-buscar-estudio-desk" placeholder="Buscar estudio..." autocomplete="off" spellcheck="false" aria-label="Buscar estudio en catálogo">
-                    <button type="button" class="header-search-clear" aria-label="Borrar búsqueda" style="display:none;">&times;</button>
-                </div>
-                <div class="header-search-results" id="search-results-desk" role="listbox" style="display:none;"></div>
-            </div>
-            <a href="#" class="login-trigger btn-nav-medicos"
-               data-target="medicos" data-title="Acceso" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2v2"/><path d="M5 2v2"/><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"/><path d="M8 15a6 6 0 0 0 12 0v-3"/><circle cx="20" cy="10" r="2"/></svg>Médicos</a>
-        </div>
-    </nav>
-
-    <main id="main-content">
-
-        <div class="landing-nav-spacer"></div>
-
-        <?php
-        foreach ($sectionOrder as $_secId):
-            if ($_secId === 'inicio'):
-        ?>
-        <!-- ═══════════════════════════════════════════════════════ HERO ══ -->
-        <section id="inicio" class="hero-premium">
-            <h1 class="sr-only"><?= h($cfgNombreLab) ?> — <?= h($navTagL1 ? "{$navTagL1} {$navTagL2}" : 'Laboratorio de Especialidades Hematológicas') ?></h1>
-            <div class="hero-slides" data-autoplay="<?= in_array($heroSliderMode, ['decoupled', 'decoupled_hidden', 'fixed_all']) ? 0 : $heroAutoplay ?>" role="region"
-                 aria-label="Presentación principal" aria-roledescription="carrusel"<?= $heroParentBgStyle ?>>
-
-                <!-- ── Slide 1 — dinámico desde hero/slide1 ────────────────── -->
-                <div class="hero-slide active <?= !$hasParentBg ? 'bg-slide-1' : '' ?>"<?= $slides[1]['bg_style'] ? ' style="' . $slides[1]['bg_style'] . '"' : '' ?>></div>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 11:55 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `nav-links`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 11:55 am
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `tablet-samsung-tabs10ultra.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L64-99)</summary>
-
-**Path:** `Unknown file`
-
-```
-        flex-shrink: 0;
-        padding: 0 1rem;
-        margin-left: 1rem;
-        margin-right: auto;
-    }
-
-    .navbar-sticky .nav-links {
-        display: flex;
-        align-items: flex-start;
-        justify-content: flex-end;
-        gap: 1.25rem;
-        margin-left: auto;
-    }
-
-    .navbar-sticky .nav-links a:not(.nav-item-multiline):not(.btn-nav-medicos) {
-        font-size: 1.06rem;
-        white-space: nowrap;
-        margin: 0;
-    }
-    .navbar-sticky .nav-links a.nav-item-multiline {
-        font-size: 1.06rem;
-        white-space: normal;
-        margin: 0;
-    }
-
-    /* Hero Section — Ajuste de proporción en pantalla grande de 14.6" */
-    .hero-slider-wrap {
-        min-height: 520px;
-        max-height: 680px;
-    }
-
-    .hero-slide-content h1 {
-        font-size: clamp(2rem, 3.2vw, 3rem);
-        line-height: 1.2;
-    }
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1124-1149)</summary>
-
-**Path:** `Unknown file`
-
-```
-    .hero-glass-card   { opacity: 1; transform: none; }
-}
-
-@media (min-width: 1920px) {
-    body { padding: env(safe-area-inset-top, 3rem) env(safe-area-inset-right, 2rem) env(safe-area-inset-bottom, 3rem) env(safe-area-inset-left, 2rem); font-size: 1.05rem; }
-    .browser-window { max-width: 1780px; }
-    .navbar-sticky { padding: 1.25rem calc(max(2rem, (100vw - (725px + 50vw)) / 2 + 2rem)) 1.25rem 1.5rem; }
-    .navbar-sticky .nav-links { gap: 2.5rem; }
-    .navbar-sticky .nav-links a { font-size: 1.0rem; }
-    /* hero-premium: max-height:800px ya aplicado por el bloque ≥1025px — sin override adicional */
-    /* hero-glass-card h1/h2/p: base aplica en todos los viewports — sin override en ≥1920px */
-    .grid-layout {
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2.75rem;
-            padding: 0 4rem;
-        }
-    .specialties-carousel-viewport { max-width: 1850px; padding: 0 1.5rem; }
-    .carousel-card { flex: 0 0 calc((100% - 4rem) / 3); }
-    .carousel-card img { height: 285px; object-fit: cover; object-position: center; border-radius: 12px 12px 0 0; border: none; }
-    .section-header h2 { font-size: 2.5rem; }
-}
-
-@media (min-width: 768px) {
-    /* Hero tablet: proporción natural de imagen sin recorte */
-    .hero-premium { aspect-ratio: 1882 / 876; height: auto; min-height: 320px; }
-}
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L2729-2779)</summary>
-
-**Path:** `Unknown file`
-
-```
-}
-
-/* Reglas de visibilidad desktop vs mobile */
-@media (min-width: 768px) {
-    .header-search-wrap--mobile {
-        display: none !important;
-    }
-    .navbar-center-block {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: flex-start;
-        margin-left: 0.5rem;
-        margin-right: auto;
-    }
-}
-@media (max-width: 767px) {
-    .header-search-wrap--desktop {
-        display: none !important;
-    }
-}
-
-/* ── Dropdown Flotante de Resultados de Búsqueda ── */
-.header-search-results {
-    position: absolute;
-    top: calc(100% + 5px);
-    left: 50%;
-    transform: translateX(-50%);
-    width: 320px;
-    max-width: 90vw;
-    max-height: 340px;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    background: #ffffff;
-    border: 1.5px solid #cbd5e1;
-    border-radius: 10px;
-    box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.18), 0 4px 6px -2px rgba(0, 0, 0, 0.08);
-    z-index: 2000;
-    padding: 4px 0;
-}
-.header-search-wrap--desktop .header-search-results {
-    right: 0;
-    left: auto;
-    transform: none;
-}
-.header-search-results::-webkit-scrollbar {
-    width: 6px;
-}
-.header-search-results::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
-    border-radius: 4px;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L2639-2679)</summary>
-
-**Path:** `Unknown file`
-
-```
-    color: #0f172a;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    text-align: left;
-}
-.header-search-input::placeholder {
-    color: #64748b;
-    font-size: 1.05rem;
-    font-weight: 400;
-}
-
-/* Botón de limpiar "x" */
-.header-search-clear {
-    background: transparent;
-    border: none;
-    color: #64748b;
-    font-size: 1.3rem;
-    line-height: 1;
-    cursor: pointer;
-    padding: 0 4px;
-    margin-left: 4px;
-    border-radius: 50%;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-.header-search-clear:hover {
-    color: #ef4444;
-}
-
-/* ── Ajustes específicos DESKTOP ── */
-.header-search-wrap--desktop {
-    width: 310px;
-    flex-shrink: 0;
-}
-.header-search-wrap--desktop .header-search-box {
-    height: 38px;
-    padding: 3px 12px;
-    border-radius: 22px;
-}
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L114-144)</summary>
-
-**Path:** `Unknown file`
-
-```
-            background: var(--secondary-green);
-            box-shadow: 0 2px 16px rgba(15,23,42,0.10);
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            padding: 0.35rem calc(max(1.5rem, (100vw - (725px + 50vw)) / 2 + 1.5rem)) 0.5rem 1.25rem;
-            transition: box-shadow 0.3s ease;
-        }
-        .landing-nav-spacer { height: 92px; flex-shrink: 0; }
-        .navbar-sticky .logo {
-            display: flex; align-items: center; gap: 12px;
-            font-weight: 700; font-size: 1.6rem;
-            color: var(--primary); text-decoration: none;
-            margin-top: 0.15rem;
-        }
-        .navbar-sticky .nav-links {
-            margin-left: 0; margin-right: 0;
-            display: flex; gap: 1.25rem; align-items: flex-start;
-            margin-top: 0;
-        }
-        .navbar-sticky .nav-links a {
-            text-decoration: none; color: var(--text-main);
-            font-weight: 600; font-size: 1.10rem;
-            text-transform: uppercase; letter-spacing: 0.05em;
-            position: relative; padding: 0.15rem 0 0.3rem 0;
-            line-height: 1.2;
-            transition: color 0.2s ease;
-        }
-        .navbar-sticky .nav-links a.nav-item-multiline {
-            text-align: center;
-            line-height: 1.12;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L2779-2849)</summary>
-
-**Path:** `Unknown file`
-
-```
-    border-radius: 4px;
-}
-
-/* Ítem de resultado */
-.header-search-item {
-    display: flex;
-    flex-direction: column;
-    padding: 7px 12px;
-    cursor: pointer;
-    border-bottom: 1px solid #f1f5f9;
-    transition: background 0.15s ease;
-    text-align: left;
-}
-.header-search-item:last-child {
-    border-bottom: none;
-}
-.header-search-item:hover,
-.header-search-item.is-selected {
-    background: #e0f2fe;
-}
-.header-search-item-nombre {
-    font-size: 0.82rem;
-    font-weight: 700;
-    color: #0f172a;
-    line-height: 1.25;
-}
-.header-search-item-meta {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.7rem;
-    color: #64748b;
-    margin-top: 2px;
-}
-.header-search-item-clave {
-    font-weight: 600;
-    color: #0052b7;
-    background: #e2e8f0;
-    padding: 1px 5px;
-    border-radius: 4px;
-}
-.header-search-item-muestra {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-.header-search-empty {
-    padding: 12px;
-    font-size: 0.78rem;
-    color: #64748b;
-    text-align: center;
-}
-
-/* ── Abanico Dinámico: Mis Resultados de Búsqueda ── */
-.orden-acc--search-results {
-    border: 2px solid var(--primary-green);
-    box-shadow: 0 4px 14px rgba(113, 202, 17, 0.18);
-    margin-bottom: 14px;
-    animation: fadeInSlideDown 0.35s ease-out;
-}
-.orden-acc--search-results .orden-acc-hdr {
-    background: #f0fdf4;
-    color: #065f46;
-}
-.orden-acc--search-results .orden-acc-hdr:hover {
-    background: #dcfce7;
-}
-@keyframes fadeInSlideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-8px);
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L2850-2903)</summary>
-
-**Path:** `Unknown file`
-
-```
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-/* ── Resalte luminoso y contorno de 5 segundos (lila claro) para estudio seleccionado en búsqueda ── */
-@keyframes estudioBuscadoOutline {
-    0% {
-        outline: 2.5px solid #a855f7;
-        outline-offset: 2px;
-        background-color: #faf5ff !important;
-        box-shadow: 0 0 16px rgba(168, 85, 247, 0.45);
-        border-radius: 6px;
-    }
-    15% {
-        outline: 2.5px solid #c084fc;
-        outline-offset: 2px;
-        background-color: #f3e8ff !important;
-        box-shadow: 0 0 18px rgba(192, 132, 252, 0.50);
-        border-radius: 6px;
-    }
-    30% {
-        outline: 2.5px solid #a855f7;
-        outline-offset: 2px;
-        background-color: #f3e8ff !important;
-        box-shadow: 0 0 16px rgba(168, 85, 247, 0.45);
-        border-radius: 6px;
-    }
-    75% {
-        outline: 2px solid rgba(192, 132, 252, 0.85);
-        outline-offset: 2px;
-        background-color: #faf5ff !important;
-        box-shadow: 0 0 12px rgba(192, 132, 252, 0.30);
-        border-radius: 6px;
-    }
-    100% {
-        outline: 2px solid transparent;
-        outline-offset: 0;
-        background-color: transparent !important;
-        box-shadow: none;
-        border-radius: 0;
-    }
-}
-
-.estudio-buscado-highlight {
-    animation: estudioBuscadoOutline 5s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
-    position: relative;
-    z-index: 5;
-    transition: background-color 0.3s;
-}
-
-
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L129-164)</summary>
-
-**Path:** `Unknown file`
-
-```
-        .navbar-sticky .nav-links {
-            margin-left: 0; margin-right: 0;
-            display: flex; gap: 1.25rem; align-items: flex-start;
-            margin-top: 0;
-        }
-        .navbar-sticky .nav-links a {
-            text-decoration: none; color: var(--text-main);
-            font-weight: 600; font-size: 1.10rem;
-            text-transform: uppercase; letter-spacing: 0.05em;
-            position: relative; padding: 0.15rem 0 0.3rem 0;
-            line-height: 1.2;
-            transition: color 0.2s ease;
-        }
-        .navbar-sticky .nav-links a.nav-item-multiline {
-            text-align: center;
-            line-height: 1.12;
-            display: inline-block;
-        }@media (hover: hover) and (pointer: fine) {
-    .navbar-sticky .nav-links a:hover,
-        .navbar-sticky .nav-links a.active {
-        color: var(--primary);
-    }
-} /* A6-fix: blue WCAG AA on white */
-        .navbar-sticky .nav-links a::after {
-            content: ''; position: absolute; bottom: 0; left: 50%;
-            transform: translateX(-50%); width: 0; height: 2px;
-            background: var(--primary-green);
-            transition: width 0.3s cubic-bezier(0.16,1,0.3,1);
-        }@media (hover: hover) and (pointer: fine) {
-    .navbar-sticky .nav-links a:hover::after,
-        .navbar-sticky .nav-links a.active::after {
-        width: 100%;
-    }
-}
-
-        /* ── Dropdown Acceso ── */
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 11:55 am
 
 ---
 
-## Agent Response
+### Terminal Command Execution
 
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
+**Status:** Reset
+**Created:** 25 Sept 2026, 11:56 am
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 11:56 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L133-145)</summary>
-
-**Path:** `Unknown file`
-
-```
-        }
-        .navbar-sticky .nav-links a {
-            text-decoration: none; color: var(--text-main);
-            font-weight: 600; font-size: 1.10rem;
-            text-transform: uppercase; letter-spacing: 0.05em;
-            position: relative; padding: 0.15rem 0 0.3rem 0;
-            line-height: 1.2;
-            transition: color 0.2s ease;
-        }
-        .navbar-sticky .nav-links a.nav-item-multiline {
-            text-align: center;
-            line-height: 1.12;
-            display: inline-block;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 11:56 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `tablet-samsung-tabs10ultra.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L69-94)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-    .navbar-sticky .nav-links {
-        display: flex;
-        align-items: flex-start;
-        justify-content: flex-end;
-        gap: 1.25rem;
-        margin-left: auto;
-    }
-
-    .navbar-sticky .nav-links a:not(.nav-item-multiline):not(.btn-nav-medicos) {
-        font-size: 1.06rem;
-        white-space: nowrap;
-        margin: 0;
-    }
-    .navbar-sticky .nav-links a.nav-item-multiline {
-        font-size: 1.06rem;
-        white-space: normal;
-        margin: 0;
-    }
-
-    /* Hero Section — Ajuste de proporción en pantalla grande de 14.6" */
-    .hero-slider-wrap {
-        min-height: 520px;
-        max-height: 680px;
-    }
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `tablet-samsung-tabs10ultra.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-/* ═══════════════════════════════════════════════════════════════════
-   tablet-samsung-tabs10ultra.css — LAESH Specific Tablet Responsiveness
-   ───────────────────────────────────────────────────────────────────
-   Reglas de adaptabilidad dedicadas para Samsung Galaxy Tab S10 Ultra
-   (14.6", 2960×1848 px / DPR 2.5) y tabletas de gran formato.
-   Orientación Horizontal (Landscape ~1480px) & Vertical (Portrait ~924px).
-
-   NO USAR !important (Regla 8 del proyecto LAESH).
-   Se apoya en variables CSS (--primary, --surface, etc.) de tokens.css.
-   ═══════════════════════════════════════════════════════════════════ */
-
-/* ─────────────────────────────────────────────────────────────────
-   § 0. ASSET IMMUTABILITY & ANTI-DISTORTION GUARDS (Protección de Imágenes)
-   Garantiza que todas las imágenes mantengan su proporción aspect-ratio
-   sin achatamientos ni deformaciones en pantallas AMOLED de 14.6".
-   ───────────────────────────────────────────────────────────────── */
-@media (min-width: 768px) and (max-width: 1600px) {
-    .hero-logo,
-    .navbar-sticky .logo img {
-        height: auto;
-        max-height: 46px;
-        width: auto;
-        object-fit: contain;
-        flex-shrink: 0;
-    }
-
-    .specialties-carousel-track .carousel-card img {
-        width: 100%;
-        height: 240px;
-        object-fit: cover;
-        object-position: center;
-    }
-
-    .map-zoom-img {
-        width: 100%;
-        height: auto;
-        max-height: 480px;
-        object-fit: contain;
-    }
-}
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `tablet-samsung-tabs10ultra.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L40-79)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-
-/* ─────────────────────────────────────────────────────────────────
-   § 1. TOUCH & S-PEN INTERACTION TARGETS (Orientación Global)
-   ───────────────────────────────────────────────────────────────── */
-:root[data-input="touch"] .map-tab-btn,
-:root[data-input="touch"] .carousel-nav-btn,
-:root[data-input="touch"] .btn-route-overlay {
-    min-height: 44px;
-    touch-action: manipulation;
-}
-
-
-/* ─────────────────────────────────────────────────────────────────
-   § 2. ORIENTACIÓN HORIZONTAL / LANDSCAPE (Viewport 1025px a 1600px)
-   Samsung Galaxy Tab S10 Ultra Horizontal (~1480px × 924px)
-   ───────────────────────────────────────────────────────────────── */
-@media (min-width: 1025px) and (max-width: 1600px) {
-    /* Header & Nav Pad — Tagline no recortado y espaciado uniforme de menú */
-    .navbar-tagline {
-        font-size: 0.98rem;
-        white-space: nowrap;
-        overflow: visible;
-        text-overflow: clip;
-        flex-shrink: 0;
-        padding: 0 1rem;
-        margin-left: 1rem;
-        margin-right: auto;
-    }
-
-    .navbar-sticky .nav-links {
-        display: flex;
-        align-items: flex-start;
-        justify-content: flex-end;
-        gap: 1.25rem;
-        margin-left: auto;
-    }
-
-    .navbar-sticky .nav-links a:not(.nav-item-multiline):not(.btn-nav-medicos) {
-        font-size: 1.06rem;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `tablet-samsung-tabs10ultra.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L94-139)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-    .hero-slide-content h1 {
-        font-size: clamp(2rem, 3.2vw, 3rem);
-        line-height: 1.2;
-    }
-
-    .hero-slide-content p {
-        font-size: 1.1rem;
-        max-width: 680px;
-    }
-
-    /* Carrusel de Especialidades — 3 tarjetas por vista */
-    .specialties-carousel-track .carousel-card {
-        flex: 0 0 calc(33.333% - 1rem);
-        max-width: calc(33.333% - 1rem);
-    }
-
-    /* Catálogo de Promociones — 3 columnas cuadradas uniformes */
-    .catalog-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.25rem;
-    }
-
-    /* Ubicación & Contacto — Ficha horizontal */
-    .contact-grid-horizontal {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.25rem;
-    }
-
-    /* Modales — Control de desbordamiento */
-    .modal-scroll-body {
-        max-height: 75vh;
-        overflow-y: auto;
-    }
-}
-
-
-/* ─────────────────────────────────────────────────────────────────
-   § 3. ORIENTACIÓN VERTICAL / PORTRAIT (Viewport 768px a 1024px)
-   Samsung Galaxy Tab S10 Ultra Vertical (~924px × 1480px)
-   ───────────────────────────────────────────────────────────────── */
-@media (min-width: 768px) and (max-width: 1024px) {
-    /* Header de Tableta Vertical */
-    .header-nav-container {
-        padding-left: 1.25rem;
-        padding-right: 1.25rem;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L2729-2754)</summary>
-
-**Path:** `Unknown file`
-
-```
-}
-
-/* Reglas de visibilidad desktop vs mobile */
-@media (min-width: 768px) {
-    .header-search-wrap--mobile {
-        display: none !important;
-    }
-    .navbar-center-block {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: flex-start;
-        margin-left: 0.5rem;
-        margin-right: auto;
-    }
-}
-@media (max-width: 767px) {
-    .header-search-wrap--desktop {
-        display: none !important;
-    }
-}
-
-/* ── Dropdown Flotante de Resultados de Búsqueda ── */
-.header-search-results {
-    position: absolute;
-    top: calc(100% + 5px);
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L2669-2714)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-/* ── Ajustes específicos DESKTOP ── */
-.header-search-wrap--desktop {
-    width: 310px;
-    flex-shrink: 0;
-}
-.header-search-wrap--desktop .header-search-box {
-    height: 38px;
-    padding: 3px 12px;
-    border-radius: 22px;
-}
-.header-search-wrap--desktop .header-search-icon {
-    width: 18px;
-    height: 18px;
-}
-.header-search-wrap--desktop .header-search-box input.header-search-input {
-    font-size: 1.45rem;
-    text-align: left;
-}
-.header-search-wrap--desktop .header-search-results {
-    right: 0;
-    left: auto;
-    transform: none;
-}
-
-/* ── Ajustes específicos MOBILE ── */
-.header-search-wrap--mobile {
-    width: 100%;
-    max-width: 185px;
-    margin-top: 2px;
-    align-self: flex-end;
-}
-.header-search-wrap--mobile .header-search-box {
-    height: 25px;
-    padding: 1px 7px;
-    border-radius: 14px;
-    background: rgba(255, 255, 255, 0.95);
-    justify-content: flex-start;
-}
-.header-search-wrap--mobile .header-search-icon {
-    width: 12px;
-    height: 12px;
-    margin-right: 4px;
-}
-.header-search-wrap--mobile .header-search-box input.header-search-input {
-    font-size: 0.74rem;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L2731-2749)</summary>
-
-**Path:** `Unknown file`
-
-```
-/* Reglas de visibilidad desktop vs mobile */
-@media (min-width: 768px) {
-    .header-search-wrap--mobile {
-        display: none !important;
-    }
-    .navbar-center-block {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: flex-start;
-        margin-left: 0.5rem;
-        margin-right: auto;
-    }
-}
-@media (max-width: 767px) {
-    .header-search-wrap--desktop {
-        display: none !important;
-    }
-}
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `tablet-samsung-tabs10ultra.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L54-84)</summary>
-
-**Path:** `Unknown file`
-
-```
-   § 2. ORIENTACIÓN HORIZONTAL / LANDSCAPE (Viewport 1025px a 1600px)
-   Samsung Galaxy Tab S10 Ultra Horizontal (~1480px × 924px)
-   ───────────────────────────────────────────────────────────────── */
-@media (min-width: 1025px) and (max-width: 1600px) {
-    /* Header & Nav Pad — Tagline no recortado y espaciado uniforme de menú */
-    .navbar-tagline {
-        font-size: 0.98rem;
-        white-space: nowrap;
-        overflow: visible;
-        text-overflow: clip;
-        flex-shrink: 0;
-        padding: 0 1rem;
-        margin-left: 1rem;
-        margin-right: auto;
-    }
-
-    .navbar-sticky .nav-links {
-        display: flex;
-        align-items: flex-start;
-        justify-content: flex-end;
-        gap: 1.25rem;
-        margin-left: auto;
-    }
-
-    .navbar-sticky .nav-links a:not(.nav-item-multiline):not(.btn-nav-medicos) {
-        font-size: 1.06rem;
-        white-space: nowrap;
-        margin: 0;
-    }
-    .navbar-sticky .nav-links a.nav-item-multiline {
-        font-size: 1.06rem;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `tablet-samsung-tabs10ultra.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L239-258)</summary>
-
-**Path:** `Unknown file`
-
-```
-    .hero-glass-card .btn-outline-white:hover {
-        background: rgba(255, 255, 255, 0.35);
-        color: #ffffff;
-        border-color: #ffffff;
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-    }
-
-    /* Etiqueta / Tag Badge — fondo blanco suavizado semi-transparente y texto azul de alta legibilidad */
-    .hero-glass-card > span {
-        background: rgba(255, 255, 255, 0.78);
-        color: #003680;
-        border: 1px solid rgba(255, 255, 255, 0.4);
-        backdrop-filter: blur(6px);
-        -webkit-backdrop-filter: blur(6px);
-        font-weight: 800;
-        letter-spacing: 0.06em;
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
-    }
-}
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L129-145)</summary>
-
-**Path:** `Unknown file`
-
-```
-        .navbar-sticky .nav-links {
-            margin-left: 0; margin-right: 0;
-            display: flex; gap: 1.25rem; align-items: flex-start;
-            margin-top: 0;
-        }
-        .navbar-sticky .nav-links a {
-            text-decoration: none; color: var(--text-main);
-            font-weight: 600; font-size: 1.10rem;
-            text-transform: uppercase; letter-spacing: 0.05em;
-            position: relative; padding: 0.15rem 0 0.3rem 0;
-            line-height: 1.2;
-            transition: color 0.2s ease;
-        }
-        .navbar-sticky .nav-links a.nav-item-multiline {
-            text-align: center;
-            line-height: 1.12;
-            display: inline-block;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 11:57 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `tablet-samsung-tabs10ultra.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L64-84)</summary>
-
-**Path:** `Unknown file`
-
-```
-        flex-shrink: 0;
-        padding: 0 1rem;
-        margin-left: 1rem;
-        margin-right: auto;
-    }
-
-    .navbar-sticky .nav-links {
-        display: flex;
-        align-items: flex-start;
-        justify-content: flex-end;
-        gap: 1.25rem;
-        margin-left: auto;
-    }
-
-    .navbar-sticky .nav-links a:not(.nav-item-multiline):not(.btn-nav-medicos) {
-        font-size: 1.06rem;
-        white-space: nowrap;
-        margin: 0;
-    }
-    .navbar-sticky .nav-links a.nav-item-multiline {
-        font-size: 1.06rem;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L659-697)</summary>
-
-**Path:** `Unknown file`
-
-```
-                aria-label="Abrir menú" aria-expanded="false">
-            <span></span><span></span><span></span>
-        </button>
-        <?php
-        // ── Orden de secciones — configurable desde el CMS (configuraciones.seccion_order) ──
-        // Secciones ordenables: inicio, acerca-de, especialidades, promociones, calidad, ubicacion, video.
-        $_SEC_DEFAULT = ['inicio','acerca-de','especialidades','promociones','calidad','ubicacion','video'];
-        $_secNavLabels = [
-            'acerca-de'     => ['label' => 'Quiénes somos',          'href' => '#acerca-de'],
-            'especialidades'=> ['label' => 'Estudios',               'href' => '#especialidades'],
-            'promociones'   => ['label' => 'Promociones',            'href' => '#promociones'],
-            'calidad'       => ['label' => 'Calidad',                'href' => '#calidad'],
-            'ubicacion'     => ['label' => 'Ubicación y<br>Contacto', 'href' => '#ubicacion', 'multiline' => true],
-        ];
-        $isVideoActive = $cfg('video_active', '1') !== '0';
-
-        $_secOrderRaw = $cfg('seccion_order');
-        if ($_secOrderRaw !== '') {
-            $_parsed = array_unique(array_filter(
-                array_map('trim', explode(',', $_secOrderRaw)),
-                fn($s) => in_array($s, $_SEC_DEFAULT, true)
-            ));
-            $_missing = array_diff($_SEC_DEFAULT, $_parsed);
-            $sectionOrder = array_values(array_merge($_parsed, $_missing));
-        } else {
-            $sectionOrder = $_SEC_DEFAULT;
-        }
-        unset($_SEC_DEFAULT, $_secOrderRaw, $_parsed, $_missing);
-
-        // Si el video está apagado, retirarlo del orden de secciones para que no se renderice
-        if (!$isVideoActive) {
-            $sectionOrder = array_values(array_filter($sectionOrder, fn($s) => $s !== 'video'));
-        }
-        ?>
-        <div class="nav-links" id="nav-links-mobile">
-            <a href="#inicio">Inicio</a>
-            <?php foreach ($sectionOrder as $_navSec):
-                if (isset($_secNavLabels[$_navSec])):
-                    $_isMulti = !empty($_secNavLabels[$_navSec]['multiline']);
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L133-145)</summary>
-
-**Path:** `Unknown file`
-
-```
-        }
-        .navbar-sticky .nav-links a {
-            text-decoration: none; color: var(--text-main);
-            font-weight: 600; font-size: 1.10rem;
-            text-transform: uppercase; letter-spacing: 0.05em;
-            position: relative; padding: 0.15rem 0 0.3rem 0;
-            line-height: 1.2;
-            transition: color 0.2s ease;
-        }
-        .navbar-sticky .nav-links a.nav-item-multiline {
-            text-align: center;
-            line-height: 1.12;
-            display: inline-block;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `tablet-samsung-tabs10ultra.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L69-84)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-    .navbar-sticky .nav-links {
-        display: flex;
-        align-items: flex-start;
-        justify-content: flex-end;
-        gap: 1.25rem;
-        margin-left: auto;
-    }
-
-    .navbar-sticky .nav-links a:not(.nav-item-multiline):not(.btn-nav-medicos) {
-        font-size: 1.06rem;
-        white-space: nowrap;
-        margin: 0;
-    }
-    .navbar-sticky .nav-links a.nav-item-multiline {
-        font-size: 1.06rem;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 11:57 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 11:57 am
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-## User Request
-
-Investiga, analiza y crea una propuesta de solucion para que el portal web de Medicos pueda contar con estas caracteristicas:
-Evitar/advertir que el usuario ya autenticado como medico, recepción , admin se "salga" de sus paginas accidentalmente. 
-Accidentes de eventos identificados:
-1) Desktop: Cuando se oprime: F5, CTrl F5, Cierre de pestaña o navegador, botones de atras|adelante propias del navegador. 
-2) Mobile: Cuando el usuario hace scroll vertical pero con touch fuerte de arrastrar que hace se recargue la pagina; cuando se da touch al boton atras <,  de control del dispositivo.
-3) Indicame otros eventos aparte de los que liste, para tambien considerarlos en la solución, para desktop y  mobiles.
-4) Las solución debe tener alcance completo/correcto:
-. con fallback para cierto casos de ser requeridos. 
-. DEBE Ser portable/compatible para/con iOS/Android y web browsers: Android, y Safari
-
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `landing.css`
-**Language:** css
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The primary objective is to prevent unintentional page navigation that could lead to data loss or workflow disruption for authenticated users within the medical web portal. The focus is on identifying and mitigating accidental actions originating from desktop interactions, including browser refresh commands and navigation.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `portal medicos`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.109269303s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 12:58 pm
 
 ---
 
-## Agent Response
+### Local File Search
 
-### Actions
-
-**Tool:** `list_dir`
-**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>Directory: `www` (20 items)</summary>
-
-**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www`
-
-| Name | Type | Size |
-|------|------|------|
-| `.agents` | File | 19 bytes |
-| `.chatledger` | File | 35 bytes |
-| `.claude` | File | 19 bytes |
-| `.clauderules` | File | 24 bytes |
-| `.git` | Directory | - |
-| `.gitignore` | File | 263 bytes |
-| `.mcp.json` | File | 21 bytes |
-| `CLAUDE.md` | File | 21 bytes |
-| `GEMINI.md` | File | 21 bytes |
-| `ca.crt` | File | 1736 bytes |
-| `docs-dev` | Directory | - |
-| `laesh-swbldi` | Directory | - |
-| `laesh-web-assets-uipv1a` | Directory | - |
-| `mvps` | Directory | - |
-| `panaderia` | Directory | - |
-| `purificadoraAgua` | Directory | - |
-| `restaurant` | Directory | - |
-| `test_puppeteer.js` | File | 526 bytes |
-| `tests` | Directory | - |
-| `web-assets` | Directory | - |
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `list_dir`
-**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>Directory: `laesh-swbldi` (9 items)</summary>
-
-**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi`
-
-| Name | Type | Size |
-|------|------|------|
-| `admrc` | Directory | - |
-| `commons` | Directory | - |
-| `crons` | Directory | - |
-| `libs` | Directory | - |
-| `logs` | Directory | - |
-| `md` | Directory | - |
-| `rc` | Directory | - |
-| `uploads` | Directory | - |
-| `website` | Directory | - |
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `list_dir`
-**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/md`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>Directory: `md` (3 items)</summary>
-
-**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/md`
-
-| Name | Type | Size |
-|------|------|------|
-| `index.php` | File | 55055 bytes |
-| `negocio` | Directory | - |
-| `views` | Directory | - |
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `list_dir`
-**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/admrc`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>Directory: `admrc` (2 items)</summary>
-
-**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/admrc`
-
-| Name | Type | Size |
-|------|------|------|
-| `index.php` | File | 23044 bytes |
-| `views` | Directory | - |
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `list_dir`
-**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-web-assets-uipv1a/js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>Directory: `js` (18 items)</summary>
-
-**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-web-assets-uipv1a/js`
-
-| Name | Type | Size |
-|------|------|------|
-| `app.js` | File | 36831 bytes |
-| `catalog-builder.js` | File | 126153 bytes |
-| `catalog-compiled.js` | File | 456796 bytes |
-| `ckeditor-init.js` | File | 15893 bytes |
-| `ckeditor5.umd.js` | File | 1431443 bytes |
-| `cms-dirty-tracker.js` | File | 21516 bytes |
-| `cms-upload.js` | File | 13459 bytes |
-| `device-detect.js` | File | 3165 bytes |
-| `gestion-web.js` | File | 27980 bytes |
-| `htmx.min.js` | File | 49082 bytes |
-| `labadmin.js` | File | 122855 bytes |
-| `log-viewer.js` | File | 3730 bytes |
-| `medicos.js` | File | 87649 bytes |
-| `portal-footer.js` | File | 1828 bytes |
-| `sidebar-rail.js` | File | 6363 bytes |
-| `solicitud-dac.js` | File | 16005 bytes |
-| `website.js` | File | 82313 bytes |
-| `ws-client.js` | File | 39515 bytes |
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `beforeunload`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
+**Status:** Reset
+**Created:** 25 Sept 2026, 12:59 pm
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 12:59 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `list_dir`
-**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/md/views`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>Directory: `views` (1 items)</summary>
-
-**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/md/views`
-
-| Name | Type | Size |
-|------|------|------|
-| `medicos.php` | File | 64309 bytes |
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `list_dir`
-**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/admrc/views`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>Directory: `views` (3 items)</summary>
-
-**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/admrc/views`
-
-| Name | Type | Size |
-|------|------|------|
-| `gestion_web.php` | File | 141469 bytes |
-| `log_viewer.php` | File | 17041 bytes |
-| `sistema.php` | File | 36543 bytes |
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `list_dir`
-**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/rc`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>Directory: `rc` (3 items)</summary>
-
-**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/rc`
-
-| Name | Type | Size |
-|------|------|------|
-| `index.php` | File | 90352 bytes |
-| `negocio` | Directory | - |
-| `views` | Directory | - |
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `list_dir`
-**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/rc/views`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>Directory: `views` (2 items)</summary>
-
-**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/rc/views`
-
-| Name | Type | Size |
-|------|------|------|
-| `labadmin.php` | File | 92336 bytes |
-| `solicitud_dac_impr.php` | File | 12291 bytes |
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `<script`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 12:59 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `<script`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 12:59 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `app.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-// Audio helper de notificaciones (Web Audio API oscillator)
-function playWhistle() {
-    try {
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        const oscillator = audioCtx.createOscillator();
-        const gainNode = audioCtx.createGain();
-        oscillator.connect(gainNode);
-        gainNode.connect(audioCtx.destination);
-        oscillator.type = 'sine';
-        oscillator.frequency.setValueAtTime(1200, audioCtx.currentTime);
-        oscillator.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.3);
-        gainNode.gain.setValueAtTime(0.5, audioCtx.currentTime);
-        gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
-        oscillator.start();
-        oscillator.stop(audioCtx.currentTime + 0.3);
-    } catch(e) {
-        console.log("Audio no soportado");
-    }
-}
-
-// Overlay iframe compartido para visualización/impresión de Solicitud DAC
-// GAP-PERF-DAC-01 (2026-09-24): el cache-busting por filemtime ya resuelto
-// para los 8 assets de solicitud_dac_impr.php no elimina la pantalla en
-// blanco reportada en dispositivo real — la causa que quedaba es que el
-// documento consulta sus datos vía fetch() (GET /laesh/{portal}/api/orden,
-// GAP-RC-01) DESPUÉS de que el iframe ya cargó su HTML/CSS, y hasta que esa
-// respuesta llega, el iframe se ve blanco (su fondo es #fff) con los campos
-// en "—". Se agrega un spinner en el overlay padre, visible de inmediato al
-// dar clic (antes incluso de que el iframe empiece a cargar), y el iframe
-// permanece con opacity:0 hasta que solicitud-dac.js confirma que ya
-// pobló el documento con datos reales (ver solicitud-dac.js, clase
-// "sol-ready" en #sol-overlay). Sustituye "blanco → todo de golpe" por
-// "spinner → aparece ya listo".
-// Autoauditoría 2026-09-24 (mismo día del fix): el único botón para cerrar
-// esta ventana ("X", btn-dac-close) vive DENTRO del documento del iframe —
-// antes del fix de arriba ya era el único mecanismo (gap preexistente, no
-// introducido hoy), pero con el iframe ahora en opacity:0 mientras carga,
-// ese botón queda además invisible e inalcanzable — si el fetch de la orden
-// se cuelga (no hay timeout en el fetch de solicitud-dac.js), el usuario
-// queda atrapado viendo el spinner sin ninguna salida. Se agrega cierre por
-// click en el fondo oscuro y por tecla Escape, a nivel del overlay padre —
-// funciona sin importar si el iframe ya cargó o no. _solOverlayEscHandler
-// es una función nombrada estable (no una closure nueva en cada llamada) —
-// remove+add previene apilar listeners de keydown en aperturas repetidas.
-function _solOverlayEscHandler(e) {
-    if (e.key === 'Escape') {
-        var ovl = document.getElementById('sol-overlay');
-        if (ovl) ovl.remove();
-    }
-}
-function _abrirSolOverlay(url) {
-    var prev = document.getElementById('sol-overlay');
-    if (prev) prev.remove();
-    var overlay = document.createElement('div');
-    overlay.id = 'sol-overlay';
-    overlay.className = 'sol-overlay';
-    // Cerrar al tocar el fondo oscuro (fuera del documento) — el iframe es un
-    // elemento hijo distinto, un click sobre él nunca deja e.target === overlay.
-    overlay.addEventListener('click', function(e) {
-        if (e.target === overlay) overlay.remove();
-    });
-    var spinner = document.createElement('div');
-    spinner.className = 'sol-overlay-spinner';
-    spinner.setAttribute('role', 'status');
-    spinner.setAttribute('aria-label', 'Cargando solicitud…');
-    overlay.appendChild(spinner);
-    var iframe = document.createElement('iframe');
-    iframe.src = url;
-    iframe.title = 'Solicitud Digital de Análisis Clínicos';
-    overlay.appendChild(iframe);
-    document.body.appendChild(overlay);
-    document.removeEventListener('keydown', _solOverlayEscHandler);
-    document.addEventListener('keydown', _solOverlayEscHandler);
-}
-window._abrirSolOverlay = _abrirSolOverlay;
-
-// ─────────────────────────────────────────────────────────────
-// Portal Header + Nav‑Strip — labadmin.html, medicos.html
-//
-// En tablet/móvil (≤1024px) el header y la tira de iconos son
-// position:fixed, por eso el app-layout necesita padding-top igual
-// a la suma de ambas alturas. app.js mide y publica dos CSS vars:
-//   --portal-header-h        → altura real del nav header
-//   --portal-content-offset  → header + tira (padding-top del layout)
-//
-// En móvil (≤767px) aparece el hamburger (CSS display:flex).
-// Al pulsarlo se muestra .sidebar-mobile-only como mini-panel
-// anclado a la derecha del viewport (usuario + Cerrar Sesión).
-// ─────────────────────────────────────────────────────────────
-(function initPortalHamburger() {
-    var header    = document.querySelector('.portal-access-header');
-    var sidebar   = document.querySelector('.app-layout > .sidebar');
-    var appLayout = document.querySelector('.app-layout');
-    if (!header || !sidebar) return;
-
-    var btn = null;
-
-    // Medir y publicar alturas; ajustar padding-top del layout.
-    // portal-access-header es position:fixed en TODOS los viewports →
-    // siempre se necesita al menos headerH de padding-top en app-layout.
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The request focuses on preventing authenticated users from unintentionally navigating away from the medical web portal's pages, specifically addressing desktop accidental events like refresh (F5, Ctrl+F5) and browser closure. The core problem is preserving the user's session and preventing data loss or disruption caused by unintended page exits. Developing a solution will necessitate a comprehensive understanding of how these events are handled within the application's current architecture.
-
-
-Considering additional events, the solution must comprehensively address page reloads, browser navigations (back/forward), and tab/window closures on desktop. Mobile scenarios introduce vertical swipe reloads and device back button presses. A broad solution requires identifying all events potentially leading to page unload, not only those explicitly listed. The solution will need to be cross-platform compatible and include fallback mechanisms.
-
-
-Identifying all potential navigation triggers requires a complete inventory of browser interactions, including keyboard shortcuts, mouse buttons, and touch gestures across both desktop and mobile platforms. The solution must account for subtle interactions such as the Backspace key outside input fields and the edge swipe on mobile devices, which can easily trigger unintended navigation. Comprehensive testing on various browsers and devices is necessary to ensure complete coverage.
-
-
-Analyzing mobile browser interactions, focusing on swipe gestures, form submissions, and touch events to identify potential navigation triggers. The solution must account for app switching, memory management issues that lead to tab reloads, and PWA behaviors. Examining platform-specific browser security models and API restrictions will provide a more comprehensive approach.
-
-
-The browser's `beforeunload` event is the standard mechanism to warn about leaving, but modern browsers restrict custom messages and require user interaction to trigger the warning. Desktop keypress events for refresh (F5, Ctrl+R, Ctrl+F5) can be intercepted and handled, but not more aggressive shortcuts or UI button clicks. Mouse back/forward button presses can also be intercepted.
-
-
-Preventing back navigation will use a `popstate` and `history.pushState` trap to detect back button/swipe attempts, immediately re-push the current state, and prompt the user to confirm leaving. Mobile "pull-to-refresh" can be disabled using a CSS property on the `html` and `body` elements, with JavaScript fallbacks for older iOS versions.  Edge-swipe back on iOS Safari can be blocked using `overscroll-behavior-x: none` to prevent the browser's default behavior, coupled with the `popstate` trap.
-
-
-The `popstate` handler is crucial; it needs to detect back button and swipe navigation attempts. The generated history entry allows the user to stay on the same page. The next critical question is session resilience, including handling tab suspension, browser closure, and battery failure.
-
-Session and draft persistence are necessary for a comprehensive solution.  Form dirty tracking, auto-saving drafts, and token persistence will enable a seamless recovery of the user's state upon re-opening the browser. This will prevent data loss.
-
-
-Considering additional desktop and mobile event triggers: mouse side buttons, accidental drag-and-drop, pull-to-refresh, system back buttons, edge swipes, app suspension/purging, accidental double-taps/zooms, and uncontrolled form submissions. Modern browser security policies and standards restrict preventing tab closure, requiring user interaction. The solution must adopt a multi-layered approach to maximize effectiveness.
-
-The initial layer will use CSS to disable pull-to-refresh and overscroll behaviors, providing a basic preventative measure. This CSS layer will address vertical overscroll and horizontal edge swipe navigation attempts. The next layers will involve the history trap and native dialog boxes.
-
-
-
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 10.795521783s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-## User Request
-
-Genera un documento html que contenga todo lo que describiste en "A continuación se presenta la investigación, análisis técnico y propuesta de solución arquitectónica para blindar los portales web de Médicos, Recepción y Administración contra salidas o recargas accidentales, con compatibilidad total en Desktop, Android e iOS (Safari / Chrome).".
-. Ponlo aqui /home/carlos/GitHub/caelitandem_home/portafolio-dev-2026/blocklabgd/v1.2/et/estabilizacionUI/
-. EN estas dos secciones : Capa 5: Resiliencia de Sesión y Datos (Fallback Definitivo), Inclusión en las Vistas de los Portales: Vincular el script en: laesh-swbldi/admrc/views/gestion_web.php  y sistema.php  (Admin)  , añade una nota en cada una que diga no incluir en la implementación , dejarlo para una fase 2.
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `landing.css`
-**Language:** css
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Initial assessment: The objective is to create an HTML document summarizing protection strategies against unintended web portal reloads/exits on various platforms. The target directory is specified for output. The prior message's details provide the necessary content scope.
-
-
-
-
-### Actions
-
-**Tool:** `list_dir`
-**Path:** `/home/carlos/GitHub/caelitandem_home/portafolio-dev-2026/blocklabgd/v1.2/et`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.054232065s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>Directory: `et` (9 items)</summary>
-
-**Path:** `home/carlos/GitHub/caelitandem_home/portafolio-dev-2026/blocklabgd/v1.2/et`
-
-| Name | Type | Size |
-|------|------|------|
-| `Control_Proyecto.html` | File | 69480 bytes |
-| `Especificacion_Tecnica.html` | File | 174920 bytes |
-| `Guia_Usuario_CMS_Sitio_Web.html` | File | 89015 bytes |
-| `Memoria de Instalación Certificados Locales HTTPS.html` | File | 10048 bytes |
-| `Tecnica_Infraestructura_Despliegue.html` | File | 302815 bytes |
-| `Tecnica_Modelo_Datos.html` | File | 108489 bytes |
-| `Tecnica_Seguridad_Integral.html` | File | 97703 bytes |
-| `estabilizacionUI` | Directory | - |
-| `styles.css` | File | 8963 bytes |
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `list_dir`
-**Path:** `/home/carlos/GitHub/caelitandem_home/portafolio-dev-2026/blocklabgd/v1.2/et/estabilizacionUI`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>Directory: `estabilizacionUI` (5 items)</summary>
-
-**Path:** `home/carlos/GitHub/caelitandem_home/portafolio-dev-2026/blocklabgd/v1.2/et/estabilizacionUI`
-
-| Name | Type | Size |
-|------|------|------|
-| `DECISIONS.md` | File | 9303 bytes |
-| `audit-laesh-medicos-20260816.html` | File | 46755 bytes |
-| `checkpoint_runbook_20260818.md` | File | 12780 bytes |
-| `notas_septiembre_laesh.md` | File | 13417 bytes |
-| `reporte-estabilizacion-ui.html` | File | 86409 bytes |
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `reporte-estabilizacion-ui.html`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-<!DOCTYPE html>
-<html lang="es-MX">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bitácora de Estabilización LAESH</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;700&display=swap">
-    <style>
-        /* ── TOKENS LIGHT (default) ── */
-        :root {
-            --primary:            #0052B7;
-            --primary-dark:       #003d8a;
-            --primary-green:      #5faa00;
-            --primary-green-bg:   #e8f9d4;
-            --primary-green-hdr:  #3d7300;
-
-            --text-main:          #0c1a2e;
-            --text-muted:         #4a637a;
-            --text-code:          #234975;
-
-            --bg-page:            #eef3fb;
-            --bg-surface:         #ffffff;
-            --bg-table-head:      #f0f5ff;
-            --bg-row-hover:       #f7faff;
-            --bg-num:             #f0f5ff;
-
-            --border:             #c8d9f0;
-            --border-light:       #dce9f9;
-
-            --success-bg:         #d1fae5;
-            --success-text:       #047857;
-            --success-border:     rgba(4, 120, 87, 0.20);
-
-            --warn-bg:            #fffbeb;
-            --warn-text:          #92400e;
-            --warn-border:        #fde68a;
-
-            --info-bg:            #e0f2fe;
-            --info-text:          #0369a1;
-            --info-border:        #bae6fd;
-
-            --orange-hdr-bg:      #fff7ed;
-            --orange-hdr-text:    #c2410c;
-            --orange-hdr-border:  #f97316;
-
-            --rule-chip-bg:       #f0f5ff;
-            --rule-chip-border:   #c8d9f0;
-            --rule-chip-code:     #003d8a;
-
-            --feat-bg:            #ecfeff;
-            --feat-text:          #0e7490;
-            --feat-border:        rgba(14, 116, 144, 0.18);
-
-            --shadow:             0 8px 24px rgba(0, 82, 183, 0.07);
-        }
-
-        /* ── TOKENS DARK ── */
-        @media (prefers-color-scheme: dark) {
-            :root:not([data-theme="light"]) {
-                --primary:            #5a9ef5;
-                --primary-dark:       #7ab4ff;
-                --primary-green:      #71CA11;
-                --primary-green-bg:   #1a2f06;
-                --primary-green-hdr:  #a0e040;
-
-                --text-main:          #dde8f5;
-                --text-muted:         #809ab8;
-                --text-code:          #93bef5;
-
-                --bg-page:            #0b1220;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The file appears to be a UI stabilization report. Considering the content, "UI-Estabilizacion-LAESH" or "LAESH-UI-Reporte-Estabilizacion" seem like appropriate filenames. The goal is to choose a filename that clearly reflects its content and context within the LAESH project.
-
-
-Considering several filenames, settled on `propuesta-blindaje-salidas-portales.html` to align with the directory structure and content. Identified specific user requirements: creating an HTML document with the architectural solution, placing it in the specified directory, and including specific notes related to implementation phasing. The document needs a clear title reflecting the solution's purpose.
-
-
-Analyzing the document, it proposes a multi-layered approach to prevent accidental navigation away from the application across various platforms. The analysis identifies browser security limitations preventing silent exit blocking, requiring user interaction for exit confirmation. The strategy combines in-app pre-event handling, native dialogs, and gesture control, alongside local data saving. A detailed table inventories potential accidental exit events on both desktop and mobile, categorizing them by risk level and possible interception mechanisms.
-
-
-A multi-layered architectural solution is proposed to mitigate accidental exits, focusing on mobile, tablet, and desktop. The design anticipates events like pull-to-refresh, history navigation, keyboard input, mouse button presses, and page unload. The solution will include a CSS and Javascript implementation, an in-app modal, key and mouse event interception, and a standard browser unload handler.
-
-Session data resilience and autosaving are explicitly deferred to a later phase. A detailed flowchart will visually represent the decision-making process within the protection module.
-
-
-The implementation plan calls for a unified module and in-app modal integration, targeting specific portal views in a phased approach, excluding the admin views initially. The plan outlines verification testing across several device configurations. The directory path is validated along with the existing files to confirm the new file's placement. The existing file style should be verified.
-
-
-
-
-### Actions
-
-**Tool:** `write_to_file`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 34.950132565s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** CORTEX_STEP_STATUS_ERROR
+**Status:** Reset
 **Created:** 25 Sept 2026, 1:39 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-The file write operation failed due to a permission error, specifically triggered by the default system policy. The user's information reveals multiple workspaces, potentially leading to policy conflicts regarding file access rights across different URIs. Determining the specific workspace policy impacting the target file location is necessary to resolve this access issue.
-
-
-
-
-### Actions
-
-**Tool:** `write_to_file`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.297545552s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 1:39 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 1:39 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-File creation and copy are confirmed. Verification of required notes within the generated HTML is now necessary. One note indicates a feature for a later phase; the second concerns portal view integration.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `propuesta-blindaje-salidas-portales.html`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.066726293s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L429-479)</summary>
-
-**Path:** `Unknown file`
-
-```
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .layer-desc {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-bottom: 0.75rem;
-        }
-
-        /* ── Footer ── */
-        .doc-footer {
-            text-align: center;
-            padding-top: 2rem;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            border-top: 1px solid var(--border);
-            margin-top: 3rem;
-        }
-    </style>
-</head>
-<body>
-
-<div class="container">
-
-    <!-- ═══════════════════════════════════════════════════════ HEADER ══ -->
-    <header class="doc-header">
-        <div class="doc-badge">Especificación Técnica &middot; Arquitectura Frontend</div>
-        <h1 class="doc-title">Propuesta Técnica: Blindaje contra Salidas y Recargas Accidentales en Portales Web LAESH</h1>
-        <p class="doc-subtitle">Investigación, análisis de riesgos de navegación en navegadores modernos y propuesta de solución arquitectónica multicapa portable (Desktop, Android, iOS Safari / Chrome) para los portales de Médicos, Recepción y Administración.</p>
-        
-        <div class="meta-grid">
-            <div class="meta-item">
-                <span class="meta-label">Versión</span>
-                <span class="meta-value">v1.2 &middot; Fase 1 / Fase 2</span>
-            </div>
-            <div class="meta-item">
-                <span class="meta-label">Fecha</span>
-                <span class="meta-value">Septiembre 2026</span>
-            </div>
-            <div class="meta-item">
-                <span class="meta-label">Sistemas Afectados</span>
-                <span class="meta-value">Médicos (md) &middot; Recepción (rc) &middot; Admin (admrc)</span>
-            </div>
-            <div class="meta-item">
-                <span class="meta-label">Compatibilidad</span>
-                <span class="meta-value">Desktop &middot; Android &middot; iOS Safari &middot; Chrome</span>
-            </div>
-        </div>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `propuesta-blindaje-salidas-portales.html`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L679-729)</summary>
-
-**Path:** `Unknown file`
-
-```
-history.pushState({ portalGuard: true }, document.title, window.location.href);</code></pre>
-            <p>2. Al dispararse el evento <code>popstate</code> (cuando el usuario pulsa Atrás o desliza el borde), el centinela vuelve a empujarse inmediatamente para reponer la página actual, y se levanta un modal estilizado con el diseño de LAESH:</p>
-            <pre><code>window.addEventListener('popstate', function(e) {
-    // Restaurar inmediatamente el centinela en la pila de historial
-    history.pushState({ portalGuard: true }, document.title, window.location.href);
-
-    // Desplegar Modal UI LAESH
-    PortalGuard.showConfirmModal({
-        titulo: '¿Deseas salir del portal?',
-        mensaje: 'Tienes una sesión de trabajo activa. Para salir de manera segura, utiliza el botón "Cerrar Sesión".',
-        btnQuedarse: 'Permanecer en el portal',
-        btnSalir: 'Salir de todos modos',
-        onConfirmSalir: function() {
-            PortalGuard.desactivar();
-            window.location.href = '/laesh/?logout=1';
-        }
-    });
-});</code></pre>
-        </div>
-
-        <!-- Capa 3 -->
-        <div class="layer-box">
-            <div class="layer-title">Capa 3: Interceptor de Teclado y Hardware de Ratón (Desktop)</div>
-            <div class="layer-desc">Neutraliza las combinaciones comunes de recarga de página y los clics erráticos en botones laterales de ratones ergonómicos.</div>
-            <ul>
-                <li><strong>Captura de F5, Ctrl+R, Cmd+R:</strong> Interceptados en la fase de captura del evento <code>keydown</code> mediante <code>e.preventDefault()</code>, solicitando confirmación con el modal in-app antes de recargar.</li>
-                <li><strong>Bloqueo de botones laterales de ratón (Botón 3 y 4):</strong> Los ratones de oficina con botones de navegación lateral en el pulgar son capturados en los eventos <code>pointerdown</code> y <code>mouseup</code> cuando <code>e.button === 3 || e.button === 4</code>, anulando la acción de retroceso del hardware.</li>
-                <li><strong>Bloqueo de Backspace huérfano:</strong> Se verifica que la tecla Backspace solo funcione cuando el foco activo (<code>document.activeElement</code>) sea un elemento editable (<code>input</code>, <code>textarea</code>, <code>contenteditable</code>).</li>
-            </ul>
-        </div>
-
-        <!-- Capa 4 -->
-        <div class="layer-box">
-            <div class="layer-title">Capa 4: Guard Universal de Descarga (<code>beforeunload</code> estándar W3C)</div>
-            <div class="layer-desc">El mecanismo de protección para el cierre de pestañas (Ctrl+W), clic en la "X" del navegador o ingreso de una nueva URL.</div>
-            <p>Se implementa bajo dos modalidades configurables:</p>
-            <ul>
-                <li><strong>Modo Continuo (Sesión Activa):</strong> Protege permanentemente las vistas de trabajo mientras el médico o recepcionista esté autenticado.</li>
-                <li><strong>Modo Formulario Sucio (Dirty Form Tracker):</strong> Se activa dinámicamente cuando el operador introduce cambios en un formulario y aún no los ha enviado al servidor, complementando el tracker existente en el sistema.</li>
-            </ul>
-            <pre><code>window.addEventListener('beforeunload', function(e) {
-    if (PortalGuard.debeAdvertir()) {
-        e.preventDefault();
-        e.returnValue = ''; // Requerido por la especificación W3C para forzar el diálogo nativo
-        return '';
-    }
-});</code></pre>
-        </div>
-
-        <!-- Capa 5 -->
-        <div class="layer-box phase2-layer">
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `propuesta-blindaje-salidas-portales.html`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L729-829)</summary>
-
-**Path:** `Unknown file`
-
-```
-        <div class="layer-box phase2-layer">
-            <div class="layer-title">Capa 5: Resiliencia de Sesión y Datos (Fallback Definitivo) <span class="chip chip-phase2">Fase 2</span></div>
-            <div class="layer-desc">Mecanismo de recuperación automática en caso de cierre forzoso, corte de energía o purgado de memoria RAM por el sistema operativo en móviles.</div>
-            
-            <div class="alert alert-phase2">
-                No incluir en la implementación, dejarlo para una fase 2.
-            </div>
-
-            <p>Alcance técnico planificado para la Fase 2:</p>
-            <ul>
-                <li><strong>Auto-Guardado Local en Tiempo Real (Drafts):</strong> Almacenamiento continuo del estado de las órdenes y campos de texto en <code>sessionStorage</code> o <code>localStorage</code> conforme el usuario teclea.</li>
-                <li><strong>Banner de Restauración Automática:</strong> Al reingresar tras una recarga forzada o crash de memoria, el sistema detecta el borrador huérfano y muestra: <em>"Se detectaron datos no guardados de tu sesión previa. [Restaurar información] [Descartar]"</em>.</li>
-                <li><strong>Reconexión Silenciosa de WebSockets:</strong> Restauración transparente de la sesión de Swoole v6 sin necesidad de recargar la página completa.</li>
-            </ul>
-        </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════════════════ §4 MATRIZ DE PORTABILIDAD ══ -->
-    <section class="section-card">
-        <h2 class="section-title"><span class="section-num">4</span> Matriz de Compatibilidad y Portabilidad</h2>
-        <p>Evaluación técnica de los mecanismos en todos los motores de renderizado objetivo (Blink/Chromium, WebKit y Gecko):</p>
-
-        <div class="table-responsive">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Mecanismo Técnico</th>
-                        <th>Chrome / Edge (Desktop)</th>
-                        <th>Safari (macOS)</th>
-                        <th>Chrome (Android)</th>
-                        <th>Safari (iOS 15-18+)</th>
-                        <th>Comportamiento / Fallback</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Anti Pull-to-Refresh</strong></td>
-                        <td><span class="chip chip-success">Compatible</span> (CSS)</td>
-                        <td><span class="chip chip-success">Compatible</span> (CSS)</td>
-                        <td><span class="chip chip-success">Compatible</span> (CSS)</td>
-                        <td><span class="chip chip-success">Compatible</span> (CSS iOS 16+)</td>
-                        <td>En iOS &le; 15 opera el fallback condicional de <code>touchmove</code>.</td>
-                    </tr>
-                    <tr>
-                        <td><strong>History Guard (Atrás / Swipe)</strong></td>
-                        <td><span class="chip chip-success">Compatible</span></td>
-                        <td><span class="chip chip-success">Compatible</span></td>
-                        <td><span class="chip chip-success">Compatible</span></td>
-                        <td><span class="chip chip-success">Compatible</span></td>
-                        <td>Captura el botón Atrás de Android y el deslizamiento lateral en iOS.</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Atajos de Teclado (F5, Ctrl+R)</strong></td>
-                        <td><span class="chip chip-success">Compatible</span></td>
-                        <td><span class="chip chip-success">Compatible</span></td>
-                        <td><span class="chip chip-warn">N/A</span></td>
-                        <td><span class="chip chip-warn">N/A</span></td>
-                        <td>En móviles los navegadores no disponen de atajos físicos directos.</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Botones Laterales de Ratón</strong></td>
-                        <td><span class="chip chip-success">Compatible</span></td>
-                        <td><span class="chip chip-success">Compatible</span></td>
-                        <td><span class="chip chip-warn">N/A</span></td>
-                        <td><span class="chip chip-warn">N/A</span></td>
-                        <td>Aplica para estaciones fijas de recepción y consultorios.</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Cierre de Pestaña (beforeunload)</strong></td>
-                        <td><span class="chip chip-success">Compatible</span></td>
-                        <td><span class="chip chip-success">Compatible</span></td>
-                        <td><span class="chip chip-success">Compatible</span></td>
-                        <td><span class="chip chip-success">Compatible</span></td>
-                        <td>Requiere que el usuario haya hecho al menos 1 interacción previa.</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Resiliencia de Datos (Drafts)</strong></td>
-                        <td><span class="chip chip-phase2">Fase 2</span></td>
-                        <td><span class="chip chip-phase2">Fase 2</span></td>
-                        <td><span class="chip chip-phase2">Fase 2</span></td>
-                        <td><span class="chip chip-phase2">Fase 2</span></td>
-                        <td>Almacenamiento en <code>sessionStorage</code> agnóstico a la plataforma.</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════════════════ §5 PLAN DE IMPLEMENTACIÓN ══ -->
-    <section class="section-card">
-        <h2 class="section-title"><span class="section-num">5</span> Plan de Implementación y Fases de Despliegue</h2>
-
-        <h3 style="font-size: 1.1rem; color: var(--primary-dark); margin-bottom: 0.5rem;">Fase 1: Implementación Inmediata (Médicos y Recepción)</h3>
-        <p>Despliegue de los controles defensivos activos (Capas 1 a 4) en los dos portales de mayor transaccionalidad clínica:</p>
-
-        <ol>
-            <li><strong>Creación del activo centralizado:</strong><br>
-                Desarrollo de <code>/laesh-web-assets-uipv1a/js/portal-guard.js</code> (peso menor a 6 KB, sin librerías externas ni dependencias complejas).
-            </li>
-            <li><strong>Inclusión del Modal UI In-App:</strong><br>
-                Estructura HTML/CSS reutilizable dentro del DOM del portal para desplegar el diálogo de confirmación ante pulsaciones de F5 o retroceso de historial, respetando la paleta oficial (azul clínico <code>#0052B7</code> y verde marca <code>#71CA11</code>).
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `propuesta-blindaje-salidas-portales.html`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L829-864)</summary>
-
-**Path:** `Unknown file`
-
-```
-                Estructura HTML/CSS reutilizable dentro del DOM del portal para desplegar el diálogo de confirmación ante pulsaciones de F5 o retroceso de historial, respetando la paleta oficial (azul clínico <code>#0052B7</code> y verde marca <code>#71CA11</code>).
-            </li>
-            <li><strong>Inclusión en las Vistas de los Portales (Alcance Fase 1):</strong>
-                <ul>
-                    <li><code>laesh-swbldi/md/views/medicos.php</code> &mdash; Portal de Médicos <span class="chip chip-success">Fase 1</span></li>
-                    <li><code>laesh-swbldi/rc/views/labadmin.php</code> &mdash; Portal de Recepción / Laboratorio <span class="chip chip-success">Fase 1</span></li>
-                </ul>
-            </li>
-            <li><strong>Adición de Clases CSS en Contenedores Raíz:</strong><br>
-                Inyección de <code>overscroll-behavior-y: contain;</code> y <code>overscroll-behavior-x: none;</code> en las hojas de estilo del portal (<code>landing.css</code> / <code>tablet-samsung-tabs10ultra.css</code>).
-            </li>
-        </ol>
-
-        <div class="alert alert-phase2" style="margin-top: 1.5rem;">
-            No incluir en la implementación, dejarlo para una fase 2:<br>
-            <strong>Vincular el script en: <code>laesh-swbldi/admrc/views/gestion_web.php</code> y <code>sistema.php</code> (Admin).</strong>
-        </div>
-
-        <h3 style="font-size: 1.1rem; color: var(--primary-dark); margin: 1.5rem 0 0.5rem 0;">Fase 2: Expansión y Resiliencia Avanzada (Futuro)</h3>
-        <ul>
-            <li>Integración del módulo <code>portal-guard.js</code> en las vistas administrativas del CMS (<code>gestion_web.php</code> y <code>sistema.php</code>).</li>
-            <li>Implementación de la <strong>Capa 5 (Resiliencia de Sesión y Datos)</strong> con auto-guardado local de formularios en <code>sessionStorage</code> y restauración de borrador.</li>
-            <li>Auditoría de reconexión transparente del WebSocket de Swoole v6 ante cambios prolongados de segundo plano en móviles.</li>
-        </ul>
-    </section>
-
-    <!-- ═══════════════════════════════════════════════════════ §6 ESQUELETO TÉCNICO ══ -->
-    <section class="section-card">
-        <h2 class="section-title"><span class="section-num">6</span> Especificación de Código: Módulo <code>portal-guard.js</code></h2>
-        <p>Estructura base del script autocontenido que se integrará en el ecosistema de assets de LAESH:</p>
-
-        <pre><code>/**
- * ═══════════════════════════════════════════════════════════════════
- * portal-guard.js — LAESH Navigation & Accidental Unload Shield
- * ───────────────────────────────────────────────────────────────────
- * Blindaje multicapa contra salidas o recargas accidentales en
-```
-
-</details>
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-## User Request
-
-Analiza esta imagen con base a su tamaño actual /home/carlos/GitHub/caelitandem_home/portafolio-dev-2026/blocklabgd/v1.2/insumos-laesh/22sep/promociones diarias/CROQUIS ACTUAL LAESH 2026.png , y determina cual es el tamaño optimo a redimensionar para que se vea correcto/completo (para laptops/desktop y todos los mobviles) en la pagina index del website correspondiente a la sección/ficha contenedora : Ubicación y Contacto / Croquis ?
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `landing.css`
-**Language:** css
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Analyzing the image to determine the current dimensions and aspect ratio is the first step. The goal is to identify an optimal resizing strategy that ensures the image displays correctly on various devices without distortion or excessive file size. Determining the current file weight is also relevant, as the target is to keep it optimal, so I will take that into account to ensure responsiveness.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.141567728s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 2:44 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `croquis`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 2:44 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `#ubicacion`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 2:45 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L869-971)</summary>
-
-**Path:** `Unknown file`
-
-```
-            if (promoTitle) promoTitle.innerHTML = title || 'Promoción — Imagen Completa';
-
-            promoModal.classList.add('show');
-            document.body.classList.add('modal-open');
-        };
-
-        window.closePromoModal = function() {
-            var promoModal = document.getElementById('modal-img-promo');
-            if (promoModal) {
-                promoModal.classList.remove('show');
-                document.body.classList.remove('modal-open');
-            }
-        };
-
-        // Delegación global de clics y eventos táctiles para capturar cualquier tarjeta o imagen de promoción
-        document.addEventListener('click', function(e) {
-            var btn = e.target.closest('.catalog-card-btn') || e.target.closest('.catalog-card-btn-overlay') || e.target.closest('a');
-            if (btn) return;
-
-            var card = e.target.closest('.catalog-card') || e.target.closest('[data-promo-img]');
-            if (!card) return;
-
-            var imgSrc = card.getAttribute('data-promo-img');
-            if (!imgSrc || imgSrc.trim() === '') {
-                var imgEl = card.querySelector('.catalog-card-img') || card.querySelector('img');
-                if (imgEl) imgSrc = imgEl.getAttribute('src');
-            }
-            if (!imgSrc || imgSrc.trim() === '') return;
-
-            var title = card.getAttribute('data-promo-title-html') || card.getAttribute('data-promo-title') || 'Promoción — Imagen Completa';
-            if (typeof window.openPromoModal === 'function') {
-                window.openPromoModal(imgSrc, title);
-            }
-        });
-
-        // Cierre al presionar la tecla Escape en cualquier dispositivo con teclado
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' || e.keyCode === 27) {
-                if (typeof window.closePromoModal === 'function') window.closePromoModal();
-            }
-        });
-
-        // Eventos de cierre sobre el modal mismo
-        document.addEventListener('DOMContentLoaded', function() {
-            var promoModal = document.getElementById('modal-img-promo');
-            if (promoModal) {
-                var closeBtn = promoModal.querySelector('.close-modal');
-                if (closeBtn) {
-                    closeBtn.addEventListener('click', function() {
-                        if (typeof window.closePromoModal === 'function') window.closePromoModal();
-                    });
-                }
-                promoModal.addEventListener('click', function(e) {
-                    if (e.target === promoModal) {
-                        if (typeof window.closePromoModal === 'function') window.closePromoModal();
-                    }
-                });
-            }
-        });
-    </script>
-    <!-- Fix C1: IntersectionObserver inline — registra el observer antes de que website.js
-         descargue. Elimina el blanco post-hero en móvil: las secciones se muestran
-         en cuanto el HTML es parseado, sin esperar DOMContentLoaded ni el JS de 84KB.
-         Flag window._laeshObserver previene registro duplicado en website.js. -->
-    <script>
-    (function(){
-        var els = document.querySelectorAll('.animate-on-scroll');
-        if (!els.length) return;
-        /* prefers-reduced-motion: muestra todo de inmediato sin animación */
-        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            els.forEach(function(el){ el.classList.add('visible'); });
-            window._laeshObserver = 'noop';
-            return;
-        }
-        if (!('IntersectionObserver' in window)) {
-            /* Fallback navegadores sin IO: mostrar todo visible */
-            els.forEach(function(el){ el.classList.add('visible'); });
-            window._laeshObserver = 'noop';
-            return;
-        }
-        /* Fix C3: rootMargin '0px' — activa en cuanto el elemento toca el viewport,
-           sin requerir 50px de penetración como hacía "-50px". */
-        var io = new IntersectionObserver(function(entries){
-            entries.forEach(function(e){
-                if (e.isIntersecting) { e.target.classList.add('visible'); }
-            });
-        }, { threshold: 0.05, rootMargin: '0px' });
-        els.forEach(function(el){ io.observe(el); });
-        window._laeshObserver = io;
-    })();
-    </script>
-    <!-- Catálogo compacto de estudios (OPcache L2) para autocompletado en memoria RAM local (0ms lag) -->
-    <script>
-        window.__LAESH_ESTUDIOS__ = <?= $estudiosSearchJson ?: '[]' ?>;
-    </script>
-    <!-- Fix C2: htmx se carga async + fetchpriority low — no bloquea DOMContentLoaded
-         ni compite con website.js. Solo se necesita cuando el usuario abre el modal de login. -->
-    <script src="/laesh-web-assets-uipv1a/js/htmx.min.js" async fetchpriority="low"></script>
-    <script src="/laesh-web-assets-uipv1a/js/website.js?v=<?= @filemtime(__DIR__ . '/../../laesh-web-assets-uipv1a/js/website.js') ?: @filemtime('/var/www/html/laesh-web-assets-uipv1a/js/website.js') ?: time() ?>" defer></script>
-
-</body>
-</html>
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `id="ubicacion"`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 2:45 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `ubicacion`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 2:45 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L459-519)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-// Ubicación (sin fallback)
-$ubH2      = $c('ubicacion', 'seccion', 'h2');
-$ubSub     = $c('ubicacion', 'seccion', 'subtitulo');
-
-// Footer — Color de Fondo desde CMS + Contenido RTE enriquecido desde CMS ($c('footer', 'contenido', 'cuerpo_html'))
-$footerBgColor = $c('footer', 'estilo', 'bg_color', '#0f172a');
-$footerHtml    = safeHtml(trim($c('footer', 'contenido', 'cuerpo_html')));
-
-// Aviso de Privacidad — Contenido HTML consolidado desde el RTE del CMS
-$avisoHtml = $c('aviso-privacidad', 'contenido', 'cuerpo_html');
-
-// SEO con Fallbacks robustos (GAP 2 y GAP 4 resueltos)
-$schemaName  = h($c('seo', 'schema', 'schema_name') ?: 'Laboratorio de Especialidades Hematológicas S.C.');
-$schemaType  = h($c('seo', 'schema', 'schema_type') ?: 'MedicalLaboratory');
-$seoTitle    = $c('seo', 'meta', 'title') ?: 'LAESH — Laboratorio de Especialidades Hematológicas | Huajuapan';
-$seoDesc     = $c('seo', 'meta', 'description') ?: 'Laboratorio de análisis clínicos y estudios hematológicos de alta precisión en Huajuapan de León, Oaxaca.';
-
-// WhatsApp SVG reutilizado en cards de promo
-$waSvg = '<svg width="15" height="15" fill="#25D366" viewBox="0 0 24 24" aria-hidden="true">'
-       . '<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>'
-       . '<path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.118 1.532 5.845L0 24l6.335-1.652A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.65-.508-5.17-1.395l-.37-.22-3.76.981 1.005-3.665-.243-.382A9.944 9.944 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>'
-       . '</svg>';
-?>
-<!DOCTYPE html>
-<html lang="es-MX">
-<head>
-    <meta charset="UTF-8">
-    <meta name="color-scheme" content="light">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= h($seoTitle) ?></title>
-    <meta name="description" content="<?= h($seoDesc) ?>">
-    <meta name="theme-color" content="#71CA11">
-    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-    <?php
-    $ogTitle    = $c('seo','og','og_title') ?: $seoTitle;
-    $ogDesc     = $c('seo','og','og_description') ?: $seoDesc;
-    $ogSiteName = $c('seo','og','site_name') ?: 'LAESH — Laboratorio de Especialidades Hematológicas S.C.';
-    // Sin fallback: imagen OG viene de CMS; meta tags presentes aunque estén vacíos
-    // (configuración manual posterior vía admrc CMS)
-    $ogImgRaw  = $c('seo','og','og_image');
-    $ogImg     = ($ogImgRaw && str_starts_with($ogImgRaw, '/')) ? 'https://laesh.mx' . $ogImgRaw : $ogImgRaw;
-    $ogImgExt  = strtolower(pathinfo($ogImgRaw, PATHINFO_EXTENSION));
-    $ogImgMime = match($ogImgExt) {
-        'jpg', 'jpeg' => 'image/jpeg',
-        'png'         => 'image/png',
-        'webp'        => 'image/webp',
-        default       => 'image/webp',
-    };
-    ?>
-    <meta property="og:title" content="<?= h($ogTitle) ?>">
-    <meta property="og:description" content="<?= h($ogDesc) ?>">
-    <meta property="og:site_name" content="<?= h($ogSiteName) ?>">
-    <meta property="og:image" content="<?= h($ogImg) ?>">
-    <?php
-    $ogImgW = 1200; $ogImgH = 630;
-    if ($ogImgRaw && str_starts_with($ogImgRaw, '/')) {
-        $imgPath = $_SERVER['DOCUMENT_ROOT'] . $ogImgRaw;
-        if (file_exists($imgPath)) {
-            [$ogImgW, $ogImgH] = @getimagesize($imgPath) ?: [1200, 630];
-        }
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `$ubH2`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 2:45 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `sectionOrder`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 2:45 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L714-769)</summary>
-
-**Path:** `Unknown file`
-
-```
-        <div class="landing-nav-spacer"></div>
-
-        <?php
-        foreach ($sectionOrder as $_secId):
-            if ($_secId === 'inicio'):
-        ?>
-        <!-- ═══════════════════════════════════════════════════════ HERO ══ -->
-        <section id="inicio" class="hero-premium">
-            <h1 class="sr-only"><?= h($cfgNombreLab) ?> — <?= h($navTagL1 ? "{$navTagL1} {$navTagL2}" : 'Laboratorio de Especialidades Hematológicas') ?></h1>
-            <div class="hero-slides" data-autoplay="<?= in_array($heroSliderMode, ['decoupled', 'decoupled_hidden', 'fixed_all']) ? 0 : $heroAutoplay ?>" role="region"
-                 aria-label="Presentación principal" aria-roledescription="carrusel"<?= $heroParentBgStyle ?>>
-
-                <!-- ── Slide 1 — dinámico desde hero/slide1 ────────────────── -->
-                <div class="hero-slide active <?= !$hasParentBg ? 'bg-slide-1' : '' ?>"<?= $slides[1]['bg_style'] ? ' style="' . $slides[1]['bg_style'] . '"' : '' ?>></div>
-
-                <!-- ── Slide 2 — dinámico desde hero/slide2 ────────────────── -->
-                <div class="hero-slide <?= !$hasParentBg ? 'bg-slide-2' : '' ?>"<?= $slides[2]['bg_style'] ? ' style="' . $slides[2]['bg_style'] . '"' : '' ?>></div>
-
-                <!-- ── Slide 3 — dinámico desde hero/slide3 ────────────────── -->
-                <div class="hero-slide <?= !$hasParentBg ? 'bg-slide-3' : '' ?>"<?= $slides[3]['bg_style'] ? ' style="' . $slides[3]['bg_style'] . '"' : '' ?>></div>
-
-                <!-- ── Slide 4 — dinámico desde hero/slide4 ────────────────── -->
-                <div class="hero-slide <?= !$hasParentBg ? 'bg-slide-4' : '' ?>"<?= $slides[4]['bg_style'] ? ' style="' . $slides[4]['bg_style'] . '"' : '' ?>></div>
-
-                <!-- ── Slide 5 — dinámico desde hero/slide5 ────────────────── -->
-                <div class="hero-slide <?= !$hasParentBg ? 'bg-slide-5' : '' ?>"<?= $slides[5]['bg_style'] ? ' style="' . $slides[5]['bg_style'] . '"' : '' ?>></div>
-            </div>
-
-            <?php if (!in_array($heroSliderMode, ['decoupled', 'decoupled_hidden', 'fixed_all'])): ?>
-            <div class="hero-dots" aria-label="Navegación de diapositivas">
-                <button class="hero-dot active" data-slide="0" aria-label="Diapositiva 1 de 5" aria-pressed="true"></button>
-                <button class="hero-dot"        data-slide="1" aria-label="Diapositiva 2 de 5" aria-pressed="false"></button>
-                <button class="hero-dot"        data-slide="2" aria-label="Diapositiva 3 de 5" aria-pressed="false"></button>
-                <button class="hero-dot"        data-slide="3" aria-label="Diapositiva 4 de 5" aria-pressed="false"></button>
-                <button class="hero-dot"        data-slide="4" aria-label="Diapositiva 5 de 5" aria-pressed="false"></button>
-            </div>
-            <button type="button" id="hero-pause-btn" class="hero-pause-btn"
-                    aria-label="Pausar presentación" aria-pressed="false">
-                <svg id="hero-icon-pause" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
-                <svg id="hero-icon-play"  width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="d-none"><polygon points="5,3 19,12 5,21"/></svg>
-                <span id="hero-pause-label" class="hero-pause-label">Pausar</span>
-            </button>
-            <?php endif; ?>
-            <span id="hero-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></span>
-        </section>
-        <?php
-            else:
-                include __DIR__ . '/sections/' . $_secId . '.php';
-            endif;
-        endforeach;
-        unset($sectionOrder, $_secId, $_secNavLabels, $isVideoActive);
-        ?>
-        <!-- ══════════════════════════════════════════════ FOOTER ══ -->
-        <footer class="footer-main" style="background: <?= h($footerBgColor) ?> !important;" role="contentinfo">
-            <?= $footerHtml ?>
-        </footer>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `list_dir`
-**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/website/sections`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>Directory: `sections` (6 items)</summary>
-
-**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/website/sections`
-
-| Name | Type | Size |
-|------|------|------|
-| `acerca-de.php` | File | 2629 bytes |
-| `calidad.php` | File | 1566 bytes |
-| `especialidades.php` | File | 5754 bytes |
-| `promociones.php` | File | 4890 bytes |
-| `ubicacion.php` | File | 6179 bytes |
-| `video.php` | File | 1519 bytes |
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `ubicacion.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-<?php
-/**
- * sections/ubicacion.php — Partial: Ubicación y Contacto
- * Incluido desde website/index.php; hereda su scope completo.
- * Variables esperadas: $ubH2, $ubSub, $cfgDir, $cfgTelDigit, $cfgTel, $cfgEmail,
- *   $waContactUrl, $cfg, $cfgHorSem, $cfgHorDom, $cfgRespNom, $cfgRespProf,
- *   $cfgRespEsp, $c, $cfgNombreC, $cfgMapsUrl, $mapsEmbed
- */
-?>
-        <!-- ══════════════════════════════════════ UBICACIÓN Y CONTACTO ══ -->
-        <section id="ubicacion" class="sec-pad-1 scroll-sm-top">
-            <div class="section-header animate-on-scroll">
-                <!-- h2 y subtitulo desde web_contenidos (ubicacion/seccion) -->
-                <h2><?= h($ubH2) ?></h2>
-                <p><?= h($ubSub) ?></p>
-            </div>
-
-            <div class="location-stack-layout">
-                <!-- Datos de contacto — todos desde configuraciones -->
-                <div class="card-premium animate-on-scroll delay-100 contact-card-horizontal">
-                    <h3 class="acerca-h3">Datos de Contacto</h3>
-                    <div class="contact-grid-horizontal">
-
-                        <div class="info-row-item">
-                            <img src="/laesh-web-assets-uipv1a/icons/map-pin.svg" alt="" class="icon-22" loading="lazy" decoding="async">
-                            <div class="txt-base-lh">
-                                <strong class="list-link-block">Dirección</strong>
-                                <?= h($cfgDir) ?>
-                            </div>
-                        </div>
-
-                        <div class="info-row-item">
-                            <img src="/laesh-web-assets-uipv1a/icons/phone.svg" alt="" class="icon-22" loading="lazy" decoding="async">
-                            <div class="txt-base-lh">
-                                <strong class="list-link-block">Teléfono Oficina</strong>
-                                <a href="tel:<?= h($cfgTelDigit) ?>" class="resp-name"><?= h($cfgTel) ?></a>
-                            </div>
-                        </div>
-
-                        <div class="contact-col-gap">
-                            <div class="info-row-item">
-                                <img src="/laesh-web-assets-uipv1a/icons/mail.svg" alt="" class="icon-22" loading="lazy" decoding="async">
-                                <div class="txt-base-lh">
-                                    <strong class="list-link-block">Email</strong>
-                                    <a href="mailto:<?= h($cfgEmail) ?>" class="email-link-hover"><?= h($cfgEmail) ?></a>
-                                </div>
-                            </div>
-                            <div class="info-row-item">
-                                <img src="/laesh-web-assets-uipv1a/icons/whatsapp.svg" alt="" class="icon-22" loading="lazy" decoding="async">
-                                <div class="txt-base-lh">
-                                    <strong class="list-link-block">WhatsApp</strong>
-                                    <a href="<?= h($waContactUrl) ?>" target="_blank" rel="noopener noreferrer" class="resp-name"><?= h($cfg('whatsapp_numero')) ?></a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="info-row-item">
-                            <img src="/laesh-web-assets-uipv1a/icons/clock.svg" alt="" class="icon-22" loading="lazy" decoding="async">
-                            <div class="txt-base-lh">
-                                <strong class="list-link-block">Horarios</strong>
-                                <?= h($cfgHorSem) ?><br><?= h($cfgHorDom) ?>
-                            </div>
-                        </div>
-
-                        <div class="info-row-item">
-                            <img src="/laesh-web-assets-uipv1a/icons/user.svg" alt="" class="icon-22" loading="lazy" decoding="async">
-                            <div class="contact-resp-body">
-                                <strong class="resp-title">Responsable Sanitario</strong>
-                                <span class="resp-name"><?= h($cfgRespNom) ?>.</span><br>
-                                Céd. Prof. <?= h($cfgRespProf) ?> | Céd. Esp. <?= h($cfgRespEsp) ?>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- Mapa — Croquis de ubicación con botón a Mapa Interactivo externo -->
-                <div class="card-premium animate-on-scroll delay-200 map-card">
-                    <div class="map-bottom-bar">
-                        <button type="button" id="btn-map-static" class="map-tab-btn active cursor-default">
-                            <img src="/laesh-web-assets-uipv1a/icons/eye.svg" alt="" loading="lazy" decoding="async">
-                            Croquis
-                        </button>
-                        <span class="map-sep">|</span>
-                        <a href="<?= h($cfgMapsUrl) ?>"
-                           target="_blank" rel="noopener noreferrer"
-                           id="btn-map-interactive" class="map-tab-btn map-link-flex">
-                            <img src="/laesh-web-assets-uipv1a/icons/map-pin.svg" alt="" loading="lazy" decoding="async">
-                            Mapa Interactivo ↗
-                        </a>
-                    </div>
-                    <div id="map-static" class="map-static-wrap">
-                        <div class="map-zoom-link">
-                            <?php $croquisImg = $c('ubicacion','croquis','imagen_url'); ?>
-                            <?php if (!empty($croquisImg)): ?>
-                            <img src="<?= h($croquisImg) ?>"
-                                 alt="Croquis de Ubicación <?= h($cfgNombreC) ?>"
-                                 class="map-zoom-img" width="1136" height="615"
-                                 loading="lazy" decoding="async">
-                            <?php endif; ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Initial focus is on the map section within the `ubicacion.php` file, specifically the "Mapa — Croquis de ubicación" component. The presence of a static map image and a button suggesting an external interactive map is confirmed, implying the design aims to present both a simplified visual and a more detailed, interactive map option. The element with id "btn-map-static" suggests a potential default static map behavior, likely with an "eye" icon as visual indicator.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `map-zoom-img`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.039165390s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 2:45 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L989-1039)</summary>
-
-**Path:** `Unknown file`
-
-```
-    flex: 1;                /* ocupa el espacio restante de .map-card flex */
-    min-height: 0;
-    position: relative;
-    overflow: hidden;
-    background: #f0f2f4;
-}
-.map-zoom-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    position: relative;
-    border-radius: inherit;
-    background: transparent;
-}
-.map-zoom-img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;    /* imagen completa, sin recorte, escala al área */
-    border-radius: 4px;
-}
-.map-zoom-badge {
-    position: absolute;
-    bottom: 0.5rem;
-    right: 0.5rem;
-    background: rgba(0,0,0,0.55);
-    color: #fff;
-    font-size: 11px;
-    font-weight: 700;
-    padding: 0.25rem 0.6rem;
-    border-radius: 20px;
-    pointer-events: none;
-    transition: background 0.15s;
-}
-.map-zoom-link:hover .map-zoom-badge { background: rgba(0,0,0,0.75); }
-
-/* ── PR-02: CTA fila bajo imagen de promociones ── */
-.promo-cta-row {
-    display: flex;
-    justify-content: center;
-    margin-top: 1.25rem;
-}
-.promo-wa-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: #0052B7;       /* azul oficial LAESH */
-    color: #fff;
-    border: none;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L959-994)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-/* ── GM-03: Label del botón pausa ── */
-.hero-pause-label {
-    font-size: 11px;
-    font-weight: 600;
-    color: #fff;
-    white-space: nowrap;
-    letter-spacing: 0.02em;
-}
-
-/* ── GM-01: Barra de progreso de galería de calidad (mismo estilo que catalog progress) ── */
-.quality-progress-wrap {
-    padding: 0.45rem 0.5rem 0.1rem;
-    width: 100%;
-}
-.quality-progress-fill {
-    height: 3px;
-    background: #0052B7;       /* azul LAESH */
-    border-radius: 3px;
-    transition: width 0.25s ease-out;
-    will-change: width;
-}
-
-/* ── GM-02: Croquis — imagen completa (contain) dentro de tarjeta fija ── */
-#map-static,
-.map-static-wrap {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    flex: 1;                /* ocupa el espacio restante de .map-card flex */
-    min-height: 0;
-    position: relative;
-    overflow: hidden;
-    background: #f0f2f4;
-}
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `.map-card`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 2:46 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L744-769)</summary>
-
-**Path:** `Unknown file`
-
-```
-.contact-action-item {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-}
-
-.map-card {
-    padding: 0;
-    overflow: hidden;
-    border: none;
-    height: 580px;
-    min-height: 580px;
-    display: flex;
-    flex-direction: column;
-    background: #fff;
-    border-radius: 12px;
-}
-.info-row-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-}
-#ubicacion .acerca-h3 {
-    margin-bottom: 0.75rem;
-}
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1399-1469)</summary>
-
-**Path:** `Unknown file`
-
-```
-    .specialties-carousel-viewport { padding: 0 0.5rem; }
-    .specialties-carousel-track { gap: 0.75rem; padding-bottom: 4px; }
-    .carousel-card { flex: 0 0 calc(100% - 1rem); min-width: unset; margin-bottom: 2px; }
-    .carousel-card img { height: 230px; object-fit: cover; object-position: top center; }
-    .carousel-card-body, .carousel-card-content { padding: 0.85rem; }
-    .carousel-card-body h3, .carousel-card-content h3 { font-size: 1rem; }
-    .carousel-card-body p,  .carousel-card-content p  { font-size: 0.85rem; }
-    /* .map-card height: auto removida — regla muerta sobreescrita por la de 340px a continuación */
-    .browser-window { border-radius: 0px; box-shadow: none; }
-    #privacy-view { padding: 1rem; }
-    .map-bottom-bar { gap: 10px; padding: 0.75rem 0.5rem; }
-    .map-tab-btn { font-size: 0.82rem; padding: 0.5rem 0.25rem 0.25rem; gap: 4px; }
-    .map-tab-btn img, .map-ext-link img { width: 15px; height: 15px; }
-    .map-ext-link { font-size: 0.82rem; gap: 4px; }
-    .map-sep { font-size: 1.0rem; }
-    #ubicacion .card-premium:last-child { min-height: auto; }
-    #map-interactive, #map-interactive iframe { height: 300px; min-height: 300px; }
-    .map-card { height: 340px; min-height: 340px; }
-    .footer-row { gap: 8px; padding: 1rem 0.5rem; }
-    .footer-item, .footer-link { font-size: 0.72rem; }
-    .footer-sep { font-size: 0.85rem; }
-    .footer-cta-card {
-            flex-direction: column;
-            align-items: flex-start;
-            padding: 1.5rem 1.25rem;
-            border-radius: 1rem;
-        }
-    .footer-cta-actions { width: 100%; }
-    .footer-btn-wa, .footer-btn-phone { flex: 1; justify-content: center; }
-    .footer-info { padding: 1rem 3.5rem 1.5rem 1rem !important; }
-    .footer-text { font-size: 0.72rem; }
-    .social-float   { width: 44px; height: 44px; bottom: 38px; right: 10px; }
-    .social-float svg { width: 20px; height: 20px; }
-    .whatsapp-float { width: 44px; height: 44px; bottom: 90px; right: 10px; }
-    .whatsapp-float svg { width: 24px; height: 24px; }
-    @supports (padding: env(safe-area-inset-bottom)) {
-            .social-float   { bottom: calc(38px + env(safe-area-inset-bottom)); }
-            .whatsapp-float { bottom: calc(90px + env(safe-area-inset-bottom)); }
-        }
-}
-
-/* R-MOB: .orden-acc-body → 2 cols en landscape phone (540px–767px);
-   el bloque max-width:767px de arriba ya establece 1fr para <540px */
-@media (min-width: 540px) and (max-width: 767px) {
-    .orden-acc-body { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-
-@media (max-width: 480px) {
-    .footer-row    { flex-wrap: wrap; justify-content: center; }
-    .footer-sep    { display: none; }
-    .map-bottom-bar { flex-wrap: wrap; justify-content: center; gap: 6px; }
-    .map-tab-btn { font-size: 0.75rem; }
-    .map-ext-link { font-size: 0.75rem; }
-    .map-sep { font-size: 0.8rem; }
-    #map-interactive { height: 250px; min-height: 250px; }
-    #map-interactive iframe { min-height: 250px; }
-    .map-card { height: 290px; min-height: 290px; }
-    .footer-cta-actions { flex-direction: column; }
-    .footer-btn-wa, .footer-btn-phone { flex: unset; width: 100%; justify-content: center; }
-    .social-float   { width: 40px; height: 40px; bottom: 36px; right: 10px; }
-    .social-float svg { width: 18px; height: 18px; }
-    .whatsapp-float { width: 40px; height: 40px; bottom: 84px; right: 10px; }
-    .whatsapp-float svg { width: 22px; height: 22px; }
-    @supports (padding: env(safe-area-inset-bottom)) {
-            .social-float   { bottom: calc(36px + env(safe-area-inset-bottom)); }
-            .whatsapp-float { bottom: calc(84px + env(safe-area-inset-bottom)); }
-        }
-}
-
-@media (max-width: 375px) {
-    .footer-row  { gap: 5px; }
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 2:46 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 2:46 pm
 
 ---
 
-## Agent Response
+### Terminal Command Execution
 
-### Actions
+**Status:** Reset
+**Created:** 25 Sept 2026, 2:47 pm
 
-**Tool:** `run_command`
+---
 
-<details>
-<summary>Metadata</summary>
+### Local File Search
 
-- **Model:** Gemini 3.8 Flash (High)
-</details>
+**Status:** Reset
+**Created:** 25 Sept 2026, 2:47 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 2:47 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 2:47 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 2:47 pm
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 2:47 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `location-stack-layout`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 2:47 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L714-754)</summary>
-
-**Path:** `Unknown file`
-
-```
-.map-grow  { flex-grow: 1; }
-.map-iframe { border: 0; display: block; }
-
-/* ── Ubicación: Datos de Contacto estrecho / Mapa ancho ─────
-   Selector con ID para ganar en especificidad sobre cualquier
-/* ── Ubicación y Contacto — Stack Horizontal ── */
-.location-stack-layout {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    max-width: 1380px;
-    margin: 0 auto;
-    padding: 0 1rem;
-}
-
-.contact-card-horizontal {
-    padding: 1.25rem 1.5rem;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.06);
-}
-
-.contact-grid-horizontal {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1.25rem;
-    align-items: center;
-    margin-top: 0.85rem;
-}
-
-.contact-action-item {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-}
-
-.map-card {
-    padding: 0;
-    overflow: hidden;
-    border: none;
-    height: 580px;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L974-1019)</summary>
-
-**Path:** `Unknown file`
-
-```
-.quality-progress-fill {
-    height: 3px;
-    background: #0052B7;       /* azul LAESH */
-    border-radius: 3px;
-    transition: width 0.25s ease-out;
-    will-change: width;
-}
-
-/* ── GM-02: Croquis — imagen completa (contain) dentro de tarjeta fija ── */
-#map-static,
-.map-static-wrap {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    flex: 1;                /* ocupa el espacio restante de .map-card flex */
-    min-height: 0;
-    position: relative;
-    overflow: hidden;
-    background: #f0f2f4;
-}
-.map-zoom-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    position: relative;
-    border-radius: inherit;
-    background: transparent;
-}
-.map-zoom-img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;    /* imagen completa, sin recorte, escala al área */
-    border-radius: 4px;
-}
-.map-zoom-badge {
-    position: absolute;
-    bottom: 0.5rem;
-    right: 0.5rem;
-    background: rgba(0,0,0,0.55);
-    color: #fff;
-    font-size: 11px;
-    font-weight: 700;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `map-bottom-bar`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 2:47 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `map-bottom-bar`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 2:47 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `map-bottom-bar`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 2:47 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `style-website.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L249-284)</summary>
-
-**Path:** `Unknown file`
-
-```
-        transform: scale(1.1);
-    }
-}
-
-/* Pestañas del Mapa */
-.map-bottom-bar {
-    padding: 1rem;
-    border-top: 1px solid var(--border);
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    background: #ffffff;
-    align-items: center;
-    flex-wrap: nowrap;
-    white-space: nowrap;
-    overflow: visible;
-}
-.map-tab-btn {
-    background: none;
-    border: none;
-    padding: 0.5rem 0.5rem 0.25rem;
-    font-family: inherit;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    color: var(--text-muted);
-    font-weight: 700;
-    font-size: 0.95rem;
-    transition: all 0.2s;
-    border-bottom: 2px solid transparent;
-}@media (hover: hover) and (pointer: fine) {
-    .map-tab-btn:hover {
-        color: var(--primary);
-    }
-}
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `CROQUIS ACTUAL LAESH 2026.png`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The image appears to be a map or a diagram, possibly a hand-drawn sketch (Croquis) due to the listed streets and landmarks. The presence of a north compass arrow suggests it's intended to convey spatial relationships. Image dimensions indicate it's a moderately sized graphic suitable for display or printing.
-
-
-Considering image dimensions and website layout, the map will be displayed with a maximum height of approximately 528px on desktop viewports. Given the image's aspect ratio of roughly 1.42:1 and the `object-fit: contain` property, the map's width will be constrained by the available height. I'll need to further analyze how it scales in smaller viewports.
-
-
-Desktop display will be centered with light gray pillarboxes due to height constraint. The image's soft blue background could clash with the container's gray background, potentially making box edges visible. Mobile viewports have different constraints.
-
-On mobile, the image will fit horizontally at full width, with a letterbox, as the height required is lower than the available height. Analysis of different screen sizes will define the rendering on mobile and desktop.
-
-
-Calculations confirm the map image fits within the maximum height constraints across various mobile devices and tablets, based on their respective screen widths and CSS rules. Small text elements within the image require careful consideration of Device Pixel Ratio (DPR) to ensure legibility on different devices, especially mobile screens. I'll need to account for higher DPR values found on modern mobile devices to determine scaling factors that retain sufficient detail.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 5.845083438s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
-**Created:** 25 Sept 2026, 2:47 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 2:48 pm
 
 ---
 
-## Agent Response
+### Local File Search
 
-### Thinking
-
-The original image is significantly large, but WebP encoding offers substantial size reduction with negligible quality loss. Examination of the HTML and CSS will reveal how the image is being displayed; this will inform optimal sizing to balance visual fidelity and loading speed. Inspecting the container dimensions will determine appropriate target dimensions for the optimized WebP image.
-
-
-The image's intended display dimensions are 1136x615 (1.85:1 aspect ratio), but the current image is a different ratio and size.  The `.map-card` container is 580px high, and the top bar takes approximately 50px, leaving 530px available for the map image. The container centers the image within it. The image's actual aspect ratio and the container's height constraint will determine the final displayed size.
-
-
-The image's `object-fit: contain` property and the container's constraints guarantee the image scales proportionally within the box without distortion. The display size varies with screen width. On a desktop (1920px screen), the inner width is 1348px and the image, with a calculated width of 754.5px at the available height of 530px, will be centered. The image display dimensions will remain relatively consistent across different desktop/laptop screen sizes due to the `object-fit: contain` property.
-
-
-Analysis indicates the image's displayed size varies based on the device and screen dimensions due to the responsive CSS and `object-fit: contain`.  Calculations consider multiple scenarios, from desktop to mobile, accounting for padding and available height within the container.  Device Pixel Ratio (DPR) is crucial for balancing resolution and legibility across different device densities. A resized image must accommodate various screen sizes to maintain visual quality.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `map-zoom`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 4.463703025s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
+**Status:** Reset
+**Created:** 25 Sept 2026, 2:48 pm
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 2:48 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `btn-map-static`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 2:48 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 2:48 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 2:48 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-The image dimensions were initially noted as 656x477, likely due to a resize during a prior upload. The legibility of this size versus larger options (e.g., 1284x902 or 1200x843) needs evaluation. On a mobile device with a 390px width and 3x device pixel ratio, the image would be stretched by 1.78x, resulting in blurred text.
-
-
-The native image dimensions are 1284x902 pixels; its crisp vector text suggests it will render well even at various display densities. Initial assessment of the containing element's CSS properties is critical to determine optimal display scaling. The image's current file size is large, indicating opportunities for significant optimization.
-
-
-Analyzing the CSS, desktop and laptop displays render the image within a 530px height, resulting in a rendered width of 754.5px due to the aspect ratio. On tablets, a `max-height` of 480px limits rendering to 683.3px wide. Standard mobile devices are constrained to a viewport of roughly 358px wide, so the height and aspect ratio will determine the best display.
-
-
-Mobile rendering calculations show the image fits comfortably within the constrained heights of various devices, maintaining the aspect ratio. Pixel density presents a critical factor; resizing the image for smaller displays at higher DPRs results in significant scaling, potentially causing text blur. The optimal size needs to balance visual clarity at different resolutions, especially for small text elements in the croquis.
-
-
-Considering image optimization, a WebP conversion at 85% quality drastically reduces file size from 1.04MB to 57KB, a 94.6% reduction, without sacrificing resolution. Retaining the native `1284x902` dimension maintains vector detail and typography integrity, avoiding resampling artifacts. This size also offers complete coverage across various screen densities, ensuring sharp rendering on both desktops/laptops and mobile devices.
-
-
-
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 6.342452945s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-## User Request
-
-en tonces solo lo convierto a webp y haces los ajustes al template  sections/ubicacion.php y en 
-landing.css , cierto ?
-
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `landing.css`
-**Language:** css
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The user is asking if converting the image to webp and adjusting the specified files (`ubicacion.php`, `landing.css`) is the correct next step. This suggests an image optimization workflow and potential template modification. The context requires understanding the image's location within the project.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.022740999s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 2:58 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `list_dir`
-**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/commons`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>Directory: `commons` (16 items)</summary>
-
-**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/commons`
-
-| Name | Type | Size |
-|------|------|------|
-| `Cache.php` | File | 10397 bytes |
-| `CatalogBuilder.php` | File | 8332 bytes |
-| `CsrfGuard.php` | File | 6916 bytes |
-| `DB.php` | File | 5264 bytes |
-| `JwtManager.php` | File | 12125 bytes |
-| `Logger.php` | File | 10011 bytes |
-| `PortalMap.php` | File | 1008 bytes |
-| `RbacManager.php` | File | 5193 bytes |
-| `Response.php` | File | 4479 bytes |
-| `autoload.php` | File | 1504 bytes |
-| `commons.php` | File | 6126 bytes |
-| `config.php` | File | 3403 bytes |
-| `notifier.php` | File | 20881 bytes |
-| `seed_first_users.php` | File | 13668 bytes |
-| `swoole_server.php` | File | 24601 bytes |
-| `ws_audit_receiver.php` | File | 3761 bytes |
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-<?php
-/**
- * index.php — Sitio Web Público LAESH (Phase J — Estabilización)
- *
- * Fuente HTML: website/uipv1/index.html  ← NUNCA BORRAR (R15.1)
- * Merge iterativo: cambios en uipv1/index.html → propagar aquí.
- *
- * Todo el contenido editorial se lee desde la BD:
- *   · configuraciones   → contacto, horarios, responsable, ubicación geográfica,
- *                          WhatsApp, Facebook, Schema.org, años de experiencia
- *   · web_contenidos    → hero (slides + navbar tagline), quienes-somos (fichas,
- *                          resp, filosofía), especialidades (accordion fichas),
- *                          promociones (banner), calidad (encabezado),
- *                          ubicacion (maps_embed), footer, seo
- *   · estudios (JOIN)   → SSOT para tarjetas de promociones diarias
- *
- * Claves configuraciones usadas:
- *   telefono · email_contacto · whatsapp_numero · facebook_url
- *   direccion · direccion_calle · ciudad · estado · cp
- *   horario_semana · horario_domingo · hrs_open · hrs_close · dom_open · dom_close
- *   responsable_nombre · responsable_cedula_prof · responsable_cedula_esp
- *   nombre_laboratorio · nombre_corto
- */
-declare(strict_types=1);
-require_once __DIR__ . '/../commons/commons.php';
-
-// ── HTTP Caching & Performance Optimization Headers ───────────────────────────
-// Permite revalidación rápida y caché eficiente del navegador sin afectar sesiones
-if (empty($_SESSION['auth_logged_in'])) {
-    header('Cache-Control: public, max-age=300, must-revalidate');
-} else {
-    header('Cache-Control: no-cache, must-revalidate');
-}
-
-// ── CSRF para modal de login ────────────────────────────────────────────────
-if (empty($_SESSION['csrf_token'])) {
-    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-}
-
-// ── Helpers ─────────────────────────────────────────────────────────────────
-/** Escapa para salida HTML (texto y atributos). */
-function h(mixed $v): string {
-    return htmlspecialchars((string)($v ?? ''), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
-}
-/** Devuelve solo dígitos de un número de teléfono. */
-function waNum(string $raw): string {
-    return preg_replace('/\D/', '', $raw);
-}
-/**
- * Renderiza HTML de confianza generado por el RTE del CMS (admins LAESH).
- * Permite tags ricos de CKEditor 5.
- * Bloquea: <script>, atributos on*, href con javascript:
- */
-function safeHtml(mixed $v): string {
-    $html = strip_tags((string)($v ?? ''), ['strong','em','b','i','br','p','ul','ol','li','a','span','table','tbody','tr','td','th','thead','hr','figure','iframe','h1','h2','h3','h4','h5','h6','u','s','blockquote','oembed','div','img','mark']);
-    $html = preg_replace('/\s+on\w+\s*=\s*(?:"[^"]*"|\'[^\']*\'|[^\s>]*)/i', '', $html);
-    $html = preg_replace('/href\s*=\s*["\']?\s*javascript:/i', 'href="#" data-blocked=', $html);
-
-    // Convertir <oembed url="..."> a <iframe> para YouTube, Spotify, Vimeo si vienen etiquetas oembed crudas
-    $html = preg_replace_callback('/<oembed\s+url=["\']([^"\']+)["\']\s*>\s*<\/oembed>/i', function($matches) {
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `$c =`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 2:58 pm
 
 ---
 
-## Agent Response
+### Local File Search
 
-### Thinking
+**Status:** Reset
+**Created:** 25 Sept 2026, 2:59 pm
 
-The user's request appears to confirm the previous steps: image conversion to a specific format and subsequent template and style adjustments. Verify that the image location is correct in the database table and confirm the file format, and if correct proceed to modify template and CSS as indicated. I must cross-reference the image path in the database to the file itself to prevent mismatches.
+---
 
+### Terminal Command Execution
 
+**Status:** Reset
+**Created:** 25 Sept 2026, 2:59 pm
 
+---
 
-### Actions
+### Terminal Command Execution
 
-**Tool:** `grep_search`
-**Query:** `ubicacion-croquis`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.159318307s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
+**Status:** Reset
+**Created:** 25 Sept 2026, 3:06 pm
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
-**Created:** 25 Sept 2026, 2:59 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L309-329)</summary>
-
-**Path:** `Unknown file`
-
-```
-            $dimError = "Banner Hero: orientación debe ser Horizontal (ancho > alto). Recibido: {$imgW}×{$imgH}.";
-    } elseif (preg_match('/^carousel-/', $slot)) {
-        if ($imgW !== 800 || $imgH !== 580)
-            $dimError = "Carrusel Especialidades: se requiere exacto 800×580 px. Recibido: {$imgW}×{$imgH}.";
-    } elseif ($slot === 'ubicacion-croquis') {
-        if ($imgW > 756 || $imgH > 577)
-            $dimError = "Croquis de Ubicación: máximo 756×577 px. Recibido: {$imgW}×{$imgH}.";
-        elseif ($imgH >= $imgW)
-            $dimError = "Croquis de Ubicación: orientación debe ser Horizontal (ancho > alto). Recibido: {$imgW}×{$imgH}.";
-    } elseif (preg_match('/^promo-/', $slot)) {
-        if ($imgW !== 1200)
-            $dimError = "Card de Promociones: se requiere exacto 1200 px de ancho. Recibido: {$imgW}×{$imgH}.";
-        elseif ($imgH < 600 || $imgH > 675)
-            $dimError = "Card de Promociones: alto {$imgH} px fuera del rango 600–675 px. Recibido: {$imgW}×{$imgH}.";
-    } elseif (preg_match('/^calidad-/', $slot)) {
-        if ($imgW !== 800 || $imgH !== 580)
-            $dimError = "Galería de Calidad: se requiere exacto 800×580 px. Recibido: {$imgW}×{$imgH}.";
-    } elseif ($slot === 'seo-og') {
-        if ($imgW < 1200 || $imgW > 1920)
-            $dimError = "Open Graph (SEO): ancho {$imgW} px fuera del rango 1\u{202F}200–1\u{202F}920 px.";
-        elseif ($imgH >= $imgW)
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1259-1289)</summary>
-
-**Path:** `Unknown file`
-
-```
-                            <label for="file-croquis" class="btn btn-secondary">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                                Cambiar Imagen
-                            </label>
-
-                            <input type="file" accept="image/webp"
-                                   id="file-croquis" class="d-none"
-                                   data-upload-slot="ubicacion-croquis"
-                                   data-preview-id="prev-croquis"
-                                   data-target-input="url-img-croquis">
-                        </div>
-                        <input type="url" id="url-img-croquis"
-                               name="croquis__imagen_url"
-                               value="<?= h($croquisImgUrl) ?>"
-                               placeholder="/laesh-web-assets-uipv1a/cms/ubicacion-croquis-....webp"
-                               class="cms-img-url-input" data-no-limit>
-                        <?php $croquisBasename = basename($croquisImgUrl); ?>
-                        <span id="lbl-img-croquis" class="cms-img-filename-label"><?= h($croquisBasename) ?></span>
-                        <div class="field-group mt-3" style="background:#f0f9ff; border:1.5px solid #0ea5e9; border-radius:6px; padding:10px 12px; margin-top:12px;">
-                            <label style="font-size:0.8rem; font-weight:700; color:#0f172a; margin-bottom:6px; display:block;">📍 Coordenadas GPS (SSOT → Google Maps / Schema.org JSON-LD)</label>
-                            <div style="display:flex; gap:10px;">
-                                <div style="flex:1;">
-                                    <label style="font-size:0.75rem; color:#0369a1; margin-bottom:2px; display:block;">Latitud</label>
-                                    <input type="text" name="_cfg_geo_lat"
-                                           value="<?= htmlspecialchars(!empty($config['geo_lat']) ? $config['geo_lat'] : '17.8028691', ENT_QUOTES, 'UTF-8') ?>"
-                                           placeholder="17.8028691"
-                                           style="font-size:0.85rem; background:#ffffff; color:#0f172a; font-weight:600; width:100%;">
-                                </div>
-                                <div style="flex:1;">
-                                    <label style="font-size:0.75rem; color:#0369a1; margin-bottom:2px; display:block;">Longitud</label>
-                                    <input type="text" name="_cfg_geo_lng"
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1229-1259)</summary>
-
-**Path:** `Unknown file`
-
-```
-                        <textarea name="_cfg_maps_url" rows="3" placeholder="https://www.google.com/maps/dir/?api=1&destination=..."><?= htmlspecialchars($config['maps_url'] ?? '', ENT_QUOTES, 'UTF-8') ?></textarea>
-                        <small class="cms-help-text">Enlace directo completo utilizado al hacer clic en el botón <strong>"Mapa Interactivo ↗"</strong> para abrir la ruta en Google Maps (pestaña externa o app móvil).</small>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Croquis de Ubicación (Imagen) -->
-            <div class="editor-card" style="border: 2px solid #d97706; background: #fafafa; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
-                <div class="editor-card-header" style="background: linear-gradient(135deg, #d97706 0%, #b45309 100%); padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.2);">
-                    <div class="card-title" style="color: #ffffff; font-weight: 800; font-size: 0.95rem;">Croquis de Ubicación (Imagen)</div>
-                </div>
-                <div class="editor-card-body" style="padding: 12px;">
-                    <div class="field-group">
-                        <label>Imagen del Croquis</label>
-                        <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px;">
-                            📐 <strong>Codec:</strong> WebP únicamente &nbsp;·&nbsp;
-                            <strong>Quality:</strong> 85 &nbsp;·&nbsp;
-                            <strong>Effort:</strong> 6 &nbsp;·&nbsp;
-                            <strong>Dimensiones:</strong> 756 px (máx) × 577 px (máx) &nbsp;·&nbsp;
-                            <strong>Alto:</strong> proporcional (auto) &nbsp;·&nbsp;
-                            <strong>Orientación Horizontal</strong> &nbsp;·&nbsp;
-                            <strong>Peso:</strong> Máximo 150 KB, Óptimo 60 KB
-                        </p>
-                        <?php $croquisImgUrl = cms($contenidos, 'ubicacion', 'croquis', 'imagen_url'); ?>
-                        <div class="image-upload-box">
-                            <img id="prev-croquis"
-                                 src="<?= h($croquisImgUrl) ?>"
-                                 alt="Croquis" class="img-preview-croquis"
-                                 onerror="this.hidden=true">
-
-                            <label for="file-croquis" class="btn btn-secondary">
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The code specifies image dimensions and quality constraints for 'ubicacion-croquis'. Specifically, the maximum dimensions are 756x577 pixels, WebP format with quality 85. The `admrc/index.php` file validates these dimensions. The system flags images exceeding those dimensions.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.060599974s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 2:59 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-Initial assessment focuses on image dimension limits within the content management system, noting a conflict between current validation constraints and the needs of high-DPI displays. Retaining the existing dimensions maintains compatibility but risks suboptimal display on modern devices. Expanding the dimensions requires updating the validation code, which would enable better resolution on high-DPI screens.
-
-
-The image dimensions validation logic must be updated within the system's core to reflect the desired maximum of 1284x902 pixels. This involves modifying a specific conditional statement and updating the image upload validation message within the content management system. These updates ensure that the CMS correctly validates images according to the established size constraints. Also, the user should be advised that the CMS currently has a limit of 756x577 px for the location sketch.
-
-
-
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.290507625s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-## User Request
-
- . Actualiza el validador del CMS
-. ya la converti a webp, no toque su tamaño, revisala /home/carlos/Downloads/CROQUIS ACTUAL LAESH 2026.webp yo la subire via el cms.
- 
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `landing.css`
-**Language:** css
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 3:06 pm
 
 ---
 
-## Agent Response
+### Code Edit
 
-### Thinking
-
-The WebP file's dimensions (1284x902) exceed the CMS validator's specified maximum size for the 'ubicacion-croquis' slot (756x577). Examining the PHP code in `laesh-swbldi/admrc/index.php` at lines 314-319 will verify the validator's logic and determine how to update it to accommodate the image's dimensions. The file size is very good, this should be an easy update.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `ubicacion-croquis`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.006354558s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 3:06 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `cms-upload.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L84-109)</summary>
-
-**Path:** `Unknown file`
-
-```
-                }
-
-                // ── Reglas por slot (alineadas con Guía CMS §5.1–§5.6) ──────────────
-                // Slots reales (data-upload-slot en gestion_web.php):
-                //   hero-{slide1…5}       → Banner Hero
-                //   carousel-{1…16}       → Carrusel Especialidades
-                //   ubicacion-croquis     → Croquis de Ubicación
-                //   promo-{lun…dom}       → Cards de Promociones
-                //   calidad-gallery{1…3}  → Galería de Calidad
-                //   (default)             → Imagen CMS genérica
-                function slotRules(s) {
-                    if (/^hero-/.test(s))              return { maxKb: 150, minW: 1280, maxW: 1920,                              landscape: true, label: 'Banner Hero',             hint: 'WebP · Quality 72–80 · Effort 6 · 1 280–1 920 px ancho · Orientación Horizontal · alto proporcional · máx. 150 KB, óptimo 60 KB' };
-                    if (/^carousel-/.test(s))          return { maxKb: 150, exactW: 800, exactH: 580,                                        label: 'Carrusel Especialidades', hint: 'WebP · Quality 75 · Effort 6 · exacto 800×580 px · máx. 150 KB, óptimo 60 KB' };
-                    if (/^ubicacion-croquis$/.test(s)) return { maxKb: 150, maxW: 756, maxH: 577, landscape: true,      label: 'Croquis de Ubicación',    hint: 'WebP · Quality 85 · Effort 6 · 756 × 577 px (máx) · Orientación Horizontal · máx. 150 KB, óptimo 60 KB' };
-                    if (/^promo-/.test(s))             return { maxKb: 150, exactW: 1200, minH: 600, maxH: 675,                              label: 'Card de Promociones',     hint: 'WebP · Quality 72 · Effort 6 · exacto 1200 px ancho · alto 600–675 px · máx. 150 KB, óptimo 60 KB' };
-                    if (/^calidad-/.test(s))           return { maxKb: 150, exactW: 800, exactH: 580,                                       label: 'Galería de Calidad',      hint: 'WebP · Quality 75 · Effort 6 · exacto 800×580 px · máx. 150 KB, óptimo 60 KB' };
-                    if (/^seo-og$/.test(s))            return { maxKb: 150, minW: 1200, maxW: 1920,                              landscape: true, label: 'Imagen Open Graph (SEO)', hint: 'WebP · 1 200 × 630 px recomendado (ratio 1.91:1) · Orientación Horizontal · máx. 150 KB, óptimo 60 KB' };
-                    return                                    { maxKb: 150, minW: 800,                                                        label: 'Imagen CMS',              hint: 'WebP · mín. 800 px ancho · máx. 150 KB, óptimo 60 KB' };
-                }
-                const rules = slotRules(slot);
-
-                // ── Validación de tamaño ─────────────────────────────────────────────
-                const sizeKb = (file.size / 1024).toFixed(1);
-                if (file.size > rules.maxKb * 1024) {
-                    showToast(
-                        `Peso ${sizeKb} KB supera el máximo de ${rules.maxKb} KB para ${rules.label}.<br>` +
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `cms-upload.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L109-149)</summary>
-
-**Path:** `Unknown file`
-
-```
-                        `Peso ${sizeKb} KB supera el máximo de ${rules.maxKb} KB para ${rules.label}.<br>` +
-                        'Optimiza la imagen (baja Quality o reduce dimensiones).',
-                        true
-                    );
-                    this.value = '';
-                    return;
-                }
-
-                // ── Validación de dimensiones (requiere cargar la imagen) ────────────
-                try {
-                    const objUrl = URL.createObjectURL(file);
-                    const img    = new Image();
-                    await new Promise((res, rej) => { img.onload = res; img.onerror = rej; img.src = objUrl; });
-                    URL.revokeObjectURL(objUrl);
-                    const w = img.naturalWidth, h = img.naturalHeight;
-
-                    // Dimensiones exactas (carrusel, croquis, promociones)
-                    if (rules.exactW !== undefined && w !== rules.exactW) {
-                        showToast(`Dimensiones incorrectas (${w}×${h} px) para ${rules.label}.<br><small>Requerido: ${rules.hint}</small>`, true);
-                        this.value = ''; return;
-                    }
-                    if (rules.exactH !== undefined && h !== rules.exactH) {
-                        showToast(`Dimensiones incorrectas (${w}×${h} px) para ${rules.label}.<br><small>Requerido: ${rules.hint}</small>`, true);
-                        this.value = ''; return;
-                    }
-
-                    // Rango de ancho (hero, banner, default)
-                    if (rules.minW !== undefined && w < rules.minW) {
-                        showToast(`Ancho ${w} px menor al mínimo de ${rules.minW} px para ${rules.label}. Spec: ${rules.hint}`, true);
-                        this.value = ''; return;
-                    }
-                    if (rules.maxW !== undefined && w > rules.maxW) {
-                        showToast(`Ancho ${w} px mayor al máximo de ${rules.maxW} px para ${rules.label}. Spec: ${rules.hint}`, true);
-                        this.value = ''; return;
-                    }
-
-                    // Rango de alto (hero)
-                    if (rules.minH !== undefined && h < rules.minH) {
-                        showToast(`Alto ${h} px menor al mínimo de ${rules.minH} px para ${rules.label}. Spec: ${rules.hint}`, true);
-                        this.value = ''; return;
-                    }
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Both the client-side and server-side image upload validation check maximum width (`maxW`) and height (`maxH`). The decision is to update both locations. The initial update will target the client-side script's conditional block specifically for 'ubicacion-croquis'.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.114090885s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Code Edit
 
-**Status:** Completed
-**Created:** 25 Sept 2026, 3:06 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 3:07 pm
 
 ---
 
-## Agent Response
+### Code Edit
 
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
+**Status:** Reset
+**Created:** 25 Sept 2026, 3:07 pm
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 3:07 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 3:07 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L979-1004)</summary>
-
-**Path:** `Unknown file`
-
-```
-    will-change: width;
-}
-
-/* ── GM-02: Croquis — imagen completa (contain) dentro de tarjeta fija ── */
-#map-static,
-.map-static-wrap {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    flex: 1;                /* ocupa el espacio restante de .map-card flex */
-    min-height: 0;
-    position: relative;
-    overflow: hidden;
-    background: #f0f2f4;
-}
-.map-zoom-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    position: relative;
-    border-radius: inherit;
-    background: transparent;
-}
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 3:07 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 3:07 pm
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-<!DOCTYPE html>
-<?php
-/**
- * admrc/views/gestion_web.php — Plates template (merge de gestion-web.html)
- *
- * Fuente HTML: website/uipv1/gestion-web.html  ← NUNCA BORRAR (R15.1)
- * Merge iterativo: cuando gestion-web.html reciba cambios del cliente,
- * propagar estructura/textos aquí y mantener lógica PHP.
- *
- * Variables disponibles (desde admrc/index.php):
- *   $nombreAdmin  string  — Nombre del administrador logueado
- *   $csrfToken    string  — Token CSRF para formularios POST (R14.12)
- *   $contenidos   array   — [seccion][subseccion][clave] => valor (desde web_contenidos)
- *   $lastPub      string  — Timestamp de última publicación
- *
- * Merge v2 — 2026-08-22:
- *   + Slides 2-5 del carrusel hero
- *   + Tagline navbar (hero/navbar)
- *   + Quiénes Somos: resp. sanitario + filosofía
- *   + Promociones: 6 días (lunes–sábado) + domingo alt
- *   + Calidad: título y subtítulo de sección
- *   + Ubicación: WhatsApp + embed de mapa
- *   + Panel 7: Pie de Página (footer)
- *   + Panel 8: SEO y Metadatos
- *
- * SSOT Refactor — 2026-08-22 (ver 07_seed_catalogs.sql):
- *   • D-04 RESUELTO: WhatsApp, teléfono, email, horarios, dirección, CP,
- *     responsable sanitario → configuraciones (singleton). Ya NO en web_contenidos.
- *   • Panel 6 (Ubicación) = editor master de todos los singletons institucionales.
- *   • Paneles 7 (Footer) y 8 (SEO): los datos de configuraciones son read-only en CMS.
- *   • Promociones: titulo/precio/ayuno/tiempo eliminados del CMS; se usa estudio_clave
- *     → JOIN estudios para obtener datos clínicos (SSOT desde tabla estudios).
- *   • especialidades/catalogo/lista y /titulo eliminados (redundantes con tabla estudios).
- *   • quienes-somos/resp: nombre y cédulas → configuraciones; bio permanece en web_contenidos.
- * GAP-RC-01 (deferred): labadmin.php → backend persistence + localStorage sync.
- * GAP-IMG (deferred): inputs type="file" sin name/POST — requieren ruta separada
- *   POST /cms/upload con enctype=multipart/form-data (fuera del alcance del CMS de texto).
- */
-
-// Helper: escape HTML seguro (alias de htmlspecialchars)
-```
-
-</details>
-
----
-
-## User Request
-
-la sugerencia/restricción quedo en cms :
-"Codec: WebP únicamente  ·  Quality: 85  ·  Effort: 6  ·  Dimensiones: 1284 px (máx) × 902 px (máx)  ·  Alto: proporcional (auto)  ·  Orientación Horizontal  ·  Peso: Máximo 150 KB, Óptimo 60 KB". signfica que no hay limite inferior para alto y ancho ?
-
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `gestion_web.php`
-**Language:** php
-
-**Open Files:**
-- `gestion_web.php`
-- `cms-upload.js`
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The provided constraints specify *maximum* dimensions for width and height (1284px and 902px respectively). The "proportional (auto)" height setting, in conjunction with the maximum width constraint, implies the height will be automatically calculated to maintain aspect ratio, but only up to the maximum height limit. Because only the maximum dimensions are given, there are no *explicit* minimum dimensions defined.
-
-
-Investigating the handling of image uploads, specifically "ubicacion-croquis," revealed the absence of minimum width/height constraints, despite the presence of maximum dimensions. This could lead to poor visual quality if the uploaded image is too small. Considering usability, it is necessary to determine if adding minimum dimension validation is warranted.
-
-
-
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.764813191s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-## User Request
-
-similar alo realizado para imagen croquis  ,, realiza el mism analisis para todas las imagenes en /home/carlos/GitHub/caelitandem_home/portafolio-dev-2026/blocklabgd/v1.2/insumos-laesh/22sep/promociones diarias/
-donde las que se llamen de lunes a viernes van en la seccion:    y las que se llamne: galardonxx,diplomaxx, van en la seccion de  Calidad e Instalaciones
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `gestion_web.php`
-**Language:** php
-
-**Open Files:**
-- `cms-upload.js`
-- `gestion_web.php`
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Initial hypothesis: This image analysis mirrors a prior task involving detailed examination. The objective centers on rigorous image categorization within a specified directory. The approach requires identifying images based on naming conventions to direct them to appropriate sections.
-
-
-
-
-### Actions
-
-**Tool:** `list_dir`
-**Path:** `/home/carlos/GitHub/caelitandem_home/portafolio-dev-2026/blocklabgd/v1.2/insumos-laesh/22sep/promociones diarias`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.225266188s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>Directory: `promociones%20diarias` (11 items)</summary>
-
-**Path:** `home/carlos/GitHub/caelitandem_home/portafolio-dev-2026/blocklabgd/v1.2/insumos-laesh/22sep/promociones%20diarias`
-
-| Name | Type | Size |
-|------|------|------|
-| `diploma b.jpg` | File | 190532 bytes |
-| `diploma.jpg` | File | 300262 bytes |
-| `domingo.jpg` | File | 173550 bytes |
-| `galardon b.jpg` | File | 148663 bytes |
-| `galardon.jpg` | File | 210931 bytes |
-| `jueves.jpg` | File | 180243 bytes |
-| `lunes.jpg` | File | 158890 bytes |
-| `martes.jpg` | File | 184253 bytes |
-| `miercoles.jpg` | File | 180797 bytes |
-| `sabado.jpg` | File | 145554 bytes |
-| `viernes.jpg` | File | 155549 bytes |
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 3:22 pm
 
 ---
 
-## Agent Response
-
-### Thinking
-
-Analyzing image files associated with daily promotions, noting consistent aspect ratios across all images. Examining file sizes to determine if any significant differences exist.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `promociones.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.070699834s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-<?php
-/**
- * sections/promociones.php — Partial: Promociones diarias
- * Incluido desde website/index.php; hereda su scope completo.
- * Variables esperadas: $promoH2, $promoSub, $promos, $waBase, $waTextoAg, $waSvg
- *
- * Mejoras 2026-09-08:
- *   · Badge "HOY" — derecha, violeta, detectado por dia() ISO-8601
- *   · Precios en el mismo renglón que badges (derecha)
- *   · "Ahorras $X" bajo precios cuando hay descuento
- *   · Badge de muestra requerida (💉 / ☕ / 🔬 según texto)
- *   · Descripción expandible si es larga (>220 chars)
- *   · Overlay de imagen más visible (opacidad reducida)
- *   · Mensaje WA incluye precio de oferta
- */
-?>
-        <!-- ══════════════════════════════════════════ PROMOCIONES ══ -->
-        <section id="promociones" class="sec-promo scroll-sm-top">
-            <div class="section-header animate-on-scroll">
-                <h2><?= h($promoH2) ?></h2>
-                <p><?= h($promoSub) ?></p>
-            </div>
-            <div class="promo-catalog-wrap animate-on-scroll">
-                <div class="catalog-grid">
-                <?php
-                // Día actual para badge "HOY" (ISO-8601: 1=lunes … 7=domingo)
-                $todayMap = [1=>'lunes',2=>'martes',3=>'miercoles',4=>'jueves',5=>'viernes',6=>'sabado',7=>'domingo'];
-                $todayKey = $todayMap[(int)date('N')] ?? '';
-
-                /**
-                 * Normaliza un nombre de día eliminando acentos y espacios para comparación HOY.
-                 * Permite que "Miércoles" y "Sábado" (con acento) coincidan con las claves del mapa.
-                 */
-                function _normalizeDay(string $s): string {
-                    return strtr(strtolower(trim($s)),
-                        ['á'=>'a','é'=>'e','í'=>'i','ó'=>'o','ú'=>'u','ü'=>'u','ñ'=>'n']);
-                }
-
-                foreach ($promos as $p):
-                    // dia_semana contiene el Título / Etiqueta Superior de la Ficha
-                    $diaRaw    = $p['dia_semana'] ?? '';
-                    $diaKey    = _normalizeDay(strip_tags($diaRaw));
-                    $diaNombre = !empty($diaRaw) ? trim($diaRaw) : 'Promoción';
-                    $isHoy     = ($diaKey === $todayKey);
-                    $imgUrl    = $p['imagen_fondo'] ?? '';
-
-                    $diaPlain   = strip_tags($diaNombre);
-                    $waTextFull = $waTextoAg
-                        ? str_replace('{estudio}', $diaPlain, $waTextoAg)
-                        : '';
-                    $waCardUrl  = $waBase . ($waTextFull ? '?text=' . rawurlencode($waTextFull) : '');
-                ?>
-                    <div class="catalog-card <?= $isHoy ? 'catalog-card--hoy' : '' ?>"
-                         data-promo-img="<?= h($imgUrl) ?>"
-                         data-promo-title="<?= h($diaPlain) ?>"
-                         data-promo-title-html="<?= h($diaNombre) ?>"
-                         onclick="if(!event.target.closest('a')){ if(typeof window.openPromoModal==='function') window.openPromoModal('<?= h($imgUrl) ?>', this.getAttribute('data-promo-title-html')); }">
-
-                        <!-- Día / Título + badge HOY a la derecha -->
-                        <div class="catalog-card-day-row">
-                            <div class="catalog-card-day"><?= $diaNombre ?></div>
-                            <?php if ($isHoy): ?>
-                                <span class="catalog-badge badge-hoy">● HOY</span>
-                            <?php endif; ?>
-                        </div>
-
-                        <!-- Imagen rectangular completa horizontal con botón Agendar superpuesto transparente -->
-                        <?php if (!empty($imgUrl)): ?>
-                            <div class="catalog-card-img-wrap">
-                                <img src="<?= h($imgUrl) ?>" alt="<?= h($diaPlain) ?>" class="catalog-card-img" loading="lazy" decoding="async" width="400" height="200">
-                                <a href="<?= h($waCardUrl) ?>" target="_blank" rel="noopener noreferrer" class="catalog-card-btn-overlay" onclick="event.stopPropagation();">
-                                    Agendar <?= $waSvg ?>
-                                </a>
-                            </div>
-                        <?php else: ?>
-                            <div class="catalog-card-bottom-row" style="margin-top: auto;">
-                                <a href="<?= h($waCardUrl) ?>" target="_blank" rel="noopener noreferrer" class="catalog-card-btn-compact">
-                                    Agendar <?= $waSvg ?>
-                                </a>
-                            </div>
-                        <?php endif; ?>
-
-                    </div>
-                <?php endforeach; ?>
-                </div>
-            </div>
-        </section>
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Analyzing code block, specifically lines 68-75 within `sections/promociones.php`, which appears to handle image display with an optional booking button overlay.  Hypothesis: This section likely renders a catalog card image if `imgUrl` is populated. The presence of the `loading="lazy"` attribute suggests optimization for image loading.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `catalog-card-img`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.107297928s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 3:23 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1579-1629)</summary>
-
-**Path:** `Unknown file`
-
-```
-    max-width: 100%;
-    overflow: hidden;
-    box-sizing: border-box;
-    position: relative;
-}
-
-.catalog-card.has-bg-overlay {
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-}
-
-/* Contenedores de imagen de promoción horizontal — ocupa el 100% del espacio libre vertical restante */
-.catalog-card-img-wrap {
-    width: 100%;
-    flex: 1 1 auto;
-    min-height: 160px;
-    margin: 0;
-    border-radius: 0;
-    overflow: hidden;
-    background-color: #f1f5f9;
-    position: relative;
-}
-
-.catalog-card-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    display: block;
-    border: none;
-}
-
-/* Botón Agendar superpuesto semitransparente (Glassmorphism) sobre la imagen */
-.catalog-card-btn-overlay {
-    position: absolute;
-    bottom: 8px;
-    right: 8px;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 6px 14px;
-    border-radius: 20px;
-    background: rgba(15, 23, 42, 0.35);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    color: #ffffff;
-    font-size: 0.78rem;
-    font-weight: 700;
-    text-decoration: none;
-    border: 1px solid rgba(255, 255, 255, 0.45);
-    transition: all 0.25s ease;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `.catalog-grid`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 3:23 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1529-1574)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-/* ==========================================================================
-   SECCIÓN PROMOCIONES / CATÁLOGO (Estilo Fiel uipv2)
-   ========================================================================== */
-.promo-catalog-wrap {
-    max-width: 1380px;
-    margin: 0 auto;
-    padding: 0 1rem;
-}
-
-.catalog-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr); /* minmax(0,1fr) evita que el track crezca por min-content de hijos */
-    gap: 1.5rem;
-    margin-top: 2rem;
-    align-items: stretch;
-}
-
-/* R-MOB: 2 cols desde 480px (antes solo desde 640px) */
-@media (min-width: 480px) {
-    .catalog-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-}
-
-@media (min-width: 1024px) {
-    .catalog-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-}
-
-/* PR-MOB-02 (actualizado): solo forzar 1 col en móvil muy estrecho (≤479px);
-   480-767px ahora muestra 2 cols, ganando area util en landscape/tablet */
-@media (max-width: 479px) {
-    .catalog-grid { grid-template-columns: minmax(0, 1fr); }
-}
-
-/* ── Refined Minimal Rectangular Promo Cards ── */
-.catalog-card {
-    background-color: var(--bg-surface);
-    border-radius: 0.625rem; /* Rectangular con esquinas suaves */
-    border: 1px solid #cbd5e1;
-    padding: 0;   /* Padding cero para permitir que la imagen ocupe todo el espacio */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    display: flex;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `modal-img-promo`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 3:23 pm
 
 ---
 
-## Agent Response
-
-### Thinking
-
-Investigating the dimensions required for the `promo-` slots within the CMS. Found a dimension check in the `index.php` file, specifically for slots starting with `promo-`. The dimensions are constrained to a width of 1200px and a height between 600-675px.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.124385969s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L989-1019)</summary>
-
-**Path:** `Unknown file`
-
-```
-                               class="cms-img-url-input" data-no-limit>
-                        <?php $imgBasename2 = $galImgUrl2 ? basename($galImgUrl2) : basename($imgDef2); ?>
-                        <span id="lbl-img-calidad-gallery2" class="cms-img-filename-label"><?= h($imgBasename2) ?></span>
-                    </div>
-                    <div class="field-group">
-                        <label>Título</label>
-                        <input type="text" name="gallery2__titulo"
-                               value="<?= cms($contenidos, 'calidad', 'gallery2', 'titulo', 'Química Clínica') ?>">
-                    </div>
-                    <div class="field-group">
-                        <label>Descripción</label>
-                        <input type="text" name="gallery2__descripcion"
-                               value="<?= cms($contenidos, 'calidad', 'gallery2', 'descripcion', 'Determinación automatizada de metabolitos, perfil lipídico y enzimas específicas.') ?>">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tarjeta 3 -->
-            <?php
-            $galImgUrl3 = cms($contenidos, 'calidad', 'gallery3', 'imagen_url');
-            $galActivo3 = cms($contenidos, 'calidad', 'gallery3', 'activo', '1');
-            $isActivo3  = ($galActivo3 !== '0');
-            $imgDef3    = ''; // sin fallback — imagen debe venir de CMS
-            ?>
-            <div class="editor-card" style="border: 2px solid #d97706; background: #fafafa; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
-                <div class="editor-card-header" style="background: linear-gradient(135deg, #d97706 0%, #b45309 100%); padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.2); display:flex; justify-content:space-between; align-items:center;">
-                    <div class="card-title" style="color: #ffffff; font-weight: 800; font-size: 0.95rem;">Tarjeta 3 — Microbiología y Cultivos</div>
-                    <div style="display:flex; align-items:center; gap:0.5rem;">
-                        <label for="chk-calidad-gallery3-activo" style="display:inline-flex; align-items:center; gap:0.45rem; cursor:pointer; margin:0; font-size:0.85rem; font-weight:700;">
-                            <input type="hidden" name="gallery3__activo" value="0">
-                            <input type="checkbox" id="chk-calidad-gallery3-activo" name="gallery3__activo" value="1" <?= $isActivo3 ? 'checked' : '' ?>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `promo-lunes`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 3:23 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `data-upload-slot="promo`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 3:24 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L789-829)</summary>
-
-**Path:** `Unknown file`
-
-```
-                                    <!-- Título / Etiqueta Superior -->
-                                    <div class="field-group mb-3">
-                                        <label>✍️ Título / Etiqueta Superior de la Ficha <small class="txt-muted">(✍️ Contenido y Estilos RTE Editables)</small></label>
-                                        <div id="ck-promo-day-<?= $pId ?>" class="ck5-mount"></div>
-                                        <textarea id="ck-promo-day-<?= $pId ?>-data" name="promo_dia_semana_<?= $pId ?>" class="ck5-hidden-data" rows="2"><?= h(trim($p['dia_semana'])) ?></textarea>
-                                    </div>
-
-                                    <!-- Imagen de Fondo -->
-                                    <div class="field-group mb-2">
-                                        <label>Imagen de Fondo</label>
-                                        <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px; font-size: 0.78rem;">
-                                            📐 <strong>Dimensiones:</strong> 1200 px de ancho × (Rango de alto: 600 a 675 px) &nbsp;·&nbsp;
-                                            <strong>Codec:</strong> WebP únicamente &nbsp;·&nbsp;
-                                            <strong>Peso:</strong> Máximo 150 KB, Óptimo 60 KB
-                                        </p>
-                                        <div class="image-upload-box">
-                                            <img id="prev-promo-<?= $pId ?>"
-                                                 src="<?= !empty($imgUrl) ? h($imgUrl) : 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="90" height="60" viewBox="0 0 90 60"><rect width="100%" height="100%" fill="%23f1f5f9"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%2394a3b8" font-size="10" font-family="sans-serif">Sin Imagen</text></svg>' ?>"
-                                                 alt="Promoción <?= h(trim(strip_tags($diaLabel))) ?>" class="img-preview-sm"
-                                                 onerror="this.hidden=true">
-                                            <label for="file-promo-<?= $pId ?>" class="btn btn-secondary btn-sm">
-                                                Cambiar Imagen
-                                            </label>
-                                            <input type="file" accept="image/webp"
-                                                   id="file-promo-<?= $pId ?>" class="d-none"
-                                                   data-upload-slot="promo-<?= $pId ?>"
-                                                   data-preview-id="prev-promo-<?= $pId ?>"
-                                                   data-target-input="input-img-promo-<?= $pId ?>">
-                                        </div>
-                                        <input type="url" id="input-img-promo-<?= $pId ?>"
-                                               name="promo_img_<?= $pId ?>"
-                                               value="<?= h($imgUrl) ?>"
-                                               placeholder="/laesh-web-assets-uipv1a/cms/promo-<?= h(strtolower(trim(strip_tags($p['dia_semana'])))) ?>.webp"
-                                               class="cms-img-url-input" data-no-limit>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
-                    </div>
-                </div>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `calidad.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-<?php
-/**
- * sections/calidad.php — Partial: Calidad / Galería
- * Incluido desde website/index.php; hereda su scope completo.
- * Variables esperadas: $calH2, $calSub, $calidadCards
- */
-?>
-        <!-- ══════════════════════════════════════════════ CALIDAD ══ -->
-        <section id="calidad" class="sec-pad-1-5 scroll-sm-top">
-            <div class="section-header animate-on-scroll">
-                <!-- h2 y subtitulo desde web_contenidos (calidad/seccion) -->
-                <h2><?= h($calH2) ?></h2>
-                <p><?= h($calSub) ?></p>
-            </div>
-            <div class="map-bar">
-                <div class="specialties-carousel-viewport animate-on-scroll">
-                    <div class="calidad-cards-grid">
-                        <?php foreach ($calidadCards as $qc): ?>
-                        <div class="carousel-card">
-                            <img src="<?= h($qc['img']) ?>" alt="<?= h($qc['alt']) ?>"
-                                 width="800" height="580" loading="lazy" decoding="async">
-                            <div class="carousel-card__body ck5-output">
-                                <h3><?= h($qc['titulo']) ?></h3>
-                                <?php if ($qc['desc']): ?><p><?= h($qc['desc']) ?></p><?php endif; ?>
-                            </div>
-                        </div>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `calidad-cards-grid`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 3:24 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1914-1954)</summary>
-
-**Path:** `Unknown file`
-
-```
-   SECCIÓN CALIDAD — 3 Fichas Estáticas (Estructura Fiel Especialidades .carousel-card)
-   ========================================================================== */
-.calidad-cards-grid {
-    display: flex;
-    flex-wrap: wrap; /* R-MOB: permite 2 col en tablet sin romper 3 col en desktop */
-    gap: 2rem;
-    padding: 1rem 0;
-    margin-top: 0;
-    margin-bottom: 2rem;
-    width: 100%;
-    align-items: stretch;
-    box-sizing: border-box;
-}
-
-.calidad-cards-grid .carousel-card {
-    flex: 0 0 calc((100% - 4rem) / 3);
-    width: calc((100% - 4rem) / 3);
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
-    background: #fff;
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
-    overflow: hidden;
-    margin-bottom: 2px;
-}
-
-.calidad-cards-grid .carousel-card img {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 100% !important;
-    height: 275px !important;
-    aspect-ratio: unset !important;
-    object-fit: cover !important;
-    object-position: center !important;
-    display: block !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    border: 0 !important;
-    border-radius: 12px 12px 0 0 !important;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1954-2004)</summary>
-
-**Path:** `Unknown file`
-
-```
-    border-radius: 12px 12px 0 0 !important;
-    box-sizing: border-box !important;
-}
-
-@media (min-width: 1920px) {
-    .calidad-cards-grid .carousel-card {
-        flex: 0 0 calc((100% - 4rem) / 3);
-    }
-    .calidad-cards-grid .carousel-card img {
-        height: 285px !important;
-    }
-}
-
-/* R-MOB: tablet/paisaje → 2 columnas (481px–1024px) */
-@media (max-width: 1024px) {
-    .calidad-cards-grid {
-        gap: 1rem;
-    }
-    .calidad-cards-grid .carousel-card {
-        flex: 0 0 calc(50% - 0.5rem);
-        width: calc(50% - 0.5rem);
-    }
-    .calidad-cards-grid .carousel-card img {
-        height: 230px !important;
-        /* object-position top center: la base tiene center !important → cover crops center
-           → top de imágenes de calidad se pierde; top center ancla el sujeto visible */
-        object-position: top center !important;
-    }
-}
-
-/* R-MOB: móvil retrato estrecho → 1 columna (≤480px) */
-@media (max-width: 480px) {
-    .calidad-cards-grid .carousel-card {
-        flex: 0 0 100%;
-        width: 100%;
-    }
-    .calidad-cards-grid .carousel-card img {
-        height: 210px !important;
-        object-position: top center !important;
-    }
-}
-
-
-
-.text-center-block {
-    text-align: center;
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-/* ── §CAT-INFO: Botón "+" + Tooltip de detalles por estudio ──────────────── */
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Initial examination involves detailed visual checks and dimensional analysis across image groups. Starting with the first group, named "PROMOCIONES DIARIAS," the image files from `lunes.jpg` through `viernes.jpg` require review. The initial step is a basic structural review.
-
-
-Image dimensions are consistent across all seven files at 1024x687px, an aspect ratio close to 3:2. Analysis of the container structure reveals responsive design with three columns on desktop, scaling down to one column on mobile, with specific width constraints for each card size depending on the device. When clicked, the modal displays the image at its full resolution, up to 80vh, suggesting the images are optimized for high-resolution display within the constraints of the responsive design.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 1.176102633s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 3:25 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `lunes.jpg`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-This image appears to be an advertisement for a hematological laboratory offering prenatal health checkups. It details required blood samples, fasting duration, and same-day results, alongside a list of included medical tests. The call to action is to schedule an appointment.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `galardon.jpg`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.105865737s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `galardon b.jpg`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `diploma.jpg`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `diploma b.jpg`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Observed two image pairs, each with a square and a landscape variant. Suspect the website's "Calidad" section might handle image display differently based on these aspect ratios. Need to examine the HTML code within `sections/calidad.php` to understand how images are rendered.
-
-
-The HTML iterates through image data, rendering each image with `width="800"` and `height="580"`. CSS overrides, however, force a fixed height and `object-fit: cover`, cropping images. This suggests the display is independent of the original aspect ratio and the CMS slot's recommended size.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 1.165558576s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 3:26 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 3:26 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 3:26 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 3:26 pm
 
 ---
 
-## Agent Response
-
-### Thinking
-
-Analyzing image dimensions: `promo-2-20260913-36fd13bd.webp` is 16:9, while `promo-1-20260913-27600325.webp` has a 1.85:1 aspect ratio. Examining the newly provided image `lunes.jpg` with a resolution of 1024x687.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.139964125s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 3:27 pm
 
 ---
 
-## Agent Response
+### Terminal Command Execution
 
-### Thinking
-
-Promo images are within the CMS size limit. Examining the dimensions and aspect ratio, the existing CMS rules need comparison. The current image ratio is different from the accepted ratios. Considering a 1200px width, the implications of scaling are to be assessed.
-
-
-The current CMS validator will reject the existing promo images due to the strict width requirement. Adapting images to the required size would involve undesirable padding. Modifying the validation rules to accept the original dimensions, or a defined range with an acceptable aspect ratio, appears to be the most sensible solution to preserve image integrity.
-
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.728360999s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
+**Status:** Reset
+**Created:** 25 Sept 2026, 3:27 pm
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 3:27 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-Image aspect ratios must be considered. Observed image dimensions deviate significantly from the expected CMS slot dimensions. Square images will be distorted to fit the required aspect ratio.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.088534006s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 3:27 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-Investigating the design choices behind `galardon b.jpg` and `diploma b.jpg`, observing the differing aspect ratios and cropping between image sizes. Noted the extra black background in the larger square versions and tighter horizontal cropping in the 1024x863 versions.
-
-Checking the `calidad.php` section to understand if it relates to these image design variations.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.107419885s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L329-369)</summary>
-
-**Path:** `Unknown file`
-
-```
-        'texto' => $cHtml,
-    ];
-}
-
-// ── 3e. Calidad gallery — 3 tarjetas (sin fallback) ────────────────────────
-$_calDef = [
-    1 => ['Área de Hematología',      'Análisis de biometría hemática y células sanguíneas con rigor científico y alta precisión.'],
-    2 => ['Química Clínica',          'Determinación automatizada de metabolitos, perfil lipídico y enzimas específicas.'],
-    3 => ['Microbiología y Cultivos', 'Aislamiento, tinción de Gram y pruebas de susceptibilidad a antimicrobianos.'],
-];
-$calidadCards = [];
-for ($qi = 1; $qi <= 3; $qi++) {
-    $qActivo = $c('calidad', "gallery{$qi}", 'activo', '1');
-    if ($qActivo === '0') continue; // Omitir tarjeta desactivada (apagada) desde el CMS
-    $calidadCards[$qi] = [
-        'img'    => $c('calidad', "gallery{$qi}", 'imagen_url', ''),
-        'alt'    => $_calDef[$qi][0],
-        'titulo' => $c('calidad', "gallery{$qi}", 'titulo',      $_calDef[$qi][0]),
-        'desc'   => $c('calidad', "gallery{$qi}", 'descripcion', $_calDef[$qi][1]),
-    ];
-}
-
-// ── 1d. Promociones vigentes → $promos ───────────────────────────────────────
-$promos = $_bypassCache ? null : \Common\Cache::get(\Common\Cache::KEY_PROMOS);
-if ($promos === null) {
-    $promoStmt = $db->query(
-        "SELECT id, dia_semana, imagen_fondo, activo
-         FROM catalogo_promociones
-         WHERE activo = 1
-         ORDER BY orden ASC, id ASC"
-    );
-    $promos = $promoStmt ? $promoStmt->fetchAll(\PDO::FETCH_ASSOC) : [];
-    if (!$_bypassCache) \Common\Cache::set(\Common\Cache::KEY_PROMOS, $promos);
-}
-
-// ── Inyectar borrador de promociones si es vista previa ──────────────────
-if ($isPreview && !empty($_SESSION['cms_draft']['promociones'])) {
-    $promoDraft = $_SESSION['cms_draft']['promociones'];
-    
-    // Si la DB trajo menos de 7 (o las que sean), igual debemos iterar
-    // o al revés: iteramos sobre los 7 IDs y construimos el array
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `calidad-gallery`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
 
 ---
 
 ### Local File Search
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 3:28 pm
 
 ---
 
-## Agent Response
-
-### Thinking
-
-`gestion_web.php` defines three slots for "Calidad" images, each with specific requirements: WebP format, quality 75, effort 6, 800x580 pixels, maximum 150 KB, and optimal 60 KB. Currently available images include `galardon.jpg` (1600x1600), `galardon b.jpg` (1024x863), `diploma.jpg` (1600x1600) and `diploma b.jpg` (1024x863). The system will now consider `galardon b.jpg` for potential use.
-
-
-The existing image styling (`object-fit: cover` with a fixed height) will cause significant cropping of the available images, especially the square ones, and will cut off vital information like logos and addresses. `galardon b.jpg` will also suffer from significant vertical cropping due to aspect ratio mismatch, though less than square images. The preferred solution involves either compositing the images onto an 800x580 canvas with a matching background or modifying the CSS to use `object-fit: contain` to preserve the image content. The optimal solution will require testing either of these alternatives.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.980989418s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 3:29 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 3:30 pm
 
 ---
 
-## Agent Response
+### Terminal Command Execution
 
-### Thinking
-
-The request involves applying a similar analysis to multiple images within a specified directory. The key is to segregate the images based on their naming convention, specifically distinguishing those named with weekday references. It seems the analysis results must be organized into sections corresponding to these weekday and weekend groupings.
-
-
-Initial investigation reveals image sets categorized as "Daily Promotions" and "Quality & Installations", distinguished by filename patterns. Daily promotions show uniform dimensions, aspect ratio, and potential for file size reduction via WebP encoding. Existing CMS validation rules conflict with the observed image dimensions and display behavior across different screen sizes. The files starting with "galardon" or "diploma" will go into the Calidad e Instalaciones section.
-
-
-CMS validation rejects the "Daily Promotions" images due to width discrepancies. It seems adjusting the CMS validation rules to accept the native aspect ratio (1024x687px) is the preferred solution, avoiding image cropping or the need for manual resizing. An alternative is adapting the images to fit CMS dimensions.
-
-Analysis of the "Quality & Installations" images reveals two file versions: square (1600x1600px) and horizontal.
-
-
-The "Quality & Installations" image display has a critical conflict: the fixed-height, `object-fit: cover` CSS will crop square or near-square images, losing vital visual information like the PACAL logo or contact details. The CMS validation requires a different aspect ratio than the available images.
-
-The best solution seems to be compositing the horizontal images (like `galardon b.jpg`) onto an `800x580px` canvas with a solid background, ensuring complete visibility and CMS compatibility. This requires calculating the optimal margins to fit the images within the required dimensions.
-
-
-
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 3.388855611s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
+**Status:** Reset
+**Created:** 25 Sept 2026, 3:45 pm
 
 ---
 
-## User Request
+### Code Edit
 
-analiza es correcto esto:  para Promociones, entonces se queda tamaño nativo , conviertelas a webp, y has los ajustes de php,etc. ?
-
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `gestion_web.php`
-**Language:** php
-
-**Open Files:**
-- `gestion_web.php`
-- `cms-upload.js`
-</details>
+**Status:** Reset
+**Created:** 25 Sept 2026, 3:45 pm
 
 ---
 
-## Agent Response
+### Code Edit
 
-### Thinking
-
-The request concerns image optimization for "Promociones". The core question is whether to preserve the native image dimensions (1024x687px). Conversion to WebP format is also explicitly requested. Finally, the user asks about necessary adjustments to PHP, CMS validators, templates, and styles.
-
-
-Native image dimensions (1024x687px) are confirmed as optimal because they prevent distortion or clipping of critical information, maintain lightweight file sizes within CMS limits, ensure sharp rendering on both mobile and desktop, and preserve aspect ratio consistency across all seven images. The investigation shifts to pinpoint required adjustments in the codebase, starting with the CMS backend validator, specifically checking for instances where `promo-` slots and dimensions are handled, to address potential conflicts with the existing validation logic, where width is expected to be 1200px.
-
-
-The backend PHP validator and the CMS client-side validator both require adjustment to accommodate the optimal image dimensions and flexible width/height ranges, recognizing the previous 1200px constraint. Examining the PHP validation logic, alternative dimension checks are explored, including specific pixel values and ranges to determine the best approach. The analysis also extended to the client-side JavaScript validator to confirm that any implemented change is reflected within it.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 3.597689421s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
+**Status:** Reset
+**Created:** 25 Sept 2026, 3:46 pm
 
 ---
 
-<details>
-<summary>File: `Unknown file` (L1584-1619)</summary>
+### Code Edit
 
-**Path:** `Unknown file`
-
-```
-
-.catalog-card.has-bg-overlay {
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-}
-
-/* Contenedores de imagen de promoción horizontal — ocupa el 100% del espacio libre vertical restante */
-.catalog-card-img-wrap {
-    width: 100%;
-    flex: 1 1 auto;
-    min-height: 160px;
-    margin: 0;
-    border-radius: 0;
-    overflow: hidden;
-    background-color: #f1f5f9;
-    position: relative;
-}
-
-.catalog-card-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    display: block;
-    border: none;
-}
-
-/* Botón Agendar superpuesto semitransparente (Glassmorphism) sobre la imagen */
-.catalog-card-btn-overlay {
-    position: absolute;
-    bottom: 8px;
-    right: 8px;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 6px 14px;
-```
-
-</details>
+**Status:** Reset
+**Created:** 25 Sept 2026, 3:46 pm
 
 ---
 
-## Agent Response
+### Code Edit
 
-### Thinking
+**Status:** Reset
+**Created:** 25 Sept 2026, 3:47 pm
 
-The CSS defines an `aspect-ratio` for the image container. This aspect ratio, determined to be approximately 1.4905, dictates the proportional dimensions of each image. If this is the case, then all the images within the grid will have uniform proportions.
+---
 
+### Code Edit
 
-The existing aspect ratio and `object-fit: cover` will ensure images display without cropping. Analyzing the modal's CSS reveals it uses `object-fit: contain`, displaying images legibly within 80vh. The existing PHP code validates image dimensions. Updating the validation logic will permit a wider range of image sizes, including the native optimal dimensions.
-
-
-The PHP code requires adjustment to allow for a wider range of image sizes, specifically for promotional cards. The current validation is too restrictive, as it only accepts precise dimensions and fails to accept an acceptable width/height ratio. The javascript code also has size constraints that should be considered. Revised logic should consider size range and orientation.
-
-
-`cms-upload.js` contains built-in dimension and orientation validation; leveraging its existing capabilities is the most straightforward approach. The promotional card's native optimal dimensions and hints need to be considered in order to fully determine applicable range. The `gestion_web.php` file provides some additional dimension info as well. The next step is to examine `sections/promociones.php`.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 3.832890256s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
+**Status:** Reset
+**Created:** 25 Sept 2026, 3:47 pm
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
-**Created:** 25 Sept 2026, 3:45 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L314-329)</summary>
-
-**Path:** `Unknown file`
-
-```
-        if ($imgW > 1284 || $imgH > 902)
-            $dimError = "Croquis de Ubicación: máximo 1284×902 px. Recibido: {$imgW}×{$imgH}.";
-        elseif ($imgH >= $imgW)
-            $dimError = "Croquis de Ubicación: orientación debe ser Horizontal (ancho > alto). Recibido: {$imgW}×{$imgH}.";
-    } elseif (preg_match('/^promo-/', $slot)) {
-        if ($imgW !== 1200)
-            $dimError = "Card de Promociones: se requiere exacto 1200 px de ancho. Recibido: {$imgW}×{$imgH}.";
-        elseif ($imgH < 600 || $imgH > 675)
-            $dimError = "Card de Promociones: alto {$imgH} px fuera del rango 600–675 px. Recibido: {$imgW}×{$imgH}.";
-    } elseif (preg_match('/^calidad-/', $slot)) {
-        if ($imgW !== 800 || $imgH !== 580)
-            $dimError = "Galería de Calidad: se requiere exacto 800×580 px. Recibido: {$imgW}×{$imgH}.";
-    } elseif ($slot === 'seo-og') {
-        if ($imgW < 1200 || $imgW > 1920)
-            $dimError = "Open Graph (SEO): ancho {$imgW} px fuera del rango 1\u{202F}200–1\u{202F}920 px.";
-        elseif ($imgH >= $imgW)
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 3:45 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `cms-upload.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L94-104)</summary>
-
-**Path:** `Unknown file`
-
-```
-                function slotRules(s) {
-                    if (/^hero-/.test(s))              return { maxKb: 150, minW: 1280, maxW: 1920,                              landscape: true, label: 'Banner Hero',             hint: 'WebP · Quality 72–80 · Effort 6 · 1 280–1 920 px ancho · Orientación Horizontal · alto proporcional · máx. 150 KB, óptimo 60 KB' };
-                    if (/^carousel-/.test(s))          return { maxKb: 150, exactW: 800, exactH: 580,                                        label: 'Carrusel Especialidades', hint: 'WebP · Quality 75 · Effort 6 · exacto 800×580 px · máx. 150 KB, óptimo 60 KB' };
-                    if (/^ubicacion-croquis$/.test(s)) return { maxKb: 150, maxW: 1284, maxH: 902, landscape: true,      label: 'Croquis de Ubicación',    hint: 'WebP · Quality 85 · Effort 6 · 1 284 × 902 px (máx) · Orientación Horizontal · máx. 150 KB, óptimo 60 KB' };
-                    if (/^promo-/.test(s))             return { maxKb: 150, exactW: 1200, minH: 600, maxH: 675,                              label: 'Card de Promociones',     hint: 'WebP · Quality 72 · Effort 6 · exacto 1200 px ancho · alto 600–675 px · máx. 150 KB, óptimo 60 KB' };
-                    if (/^calidad-/.test(s))           return { maxKb: 150, exactW: 800, exactH: 580,                                       label: 'Galería de Calidad',      hint: 'WebP · Quality 75 · Effort 6 · exacto 800×580 px · máx. 150 KB, óptimo 60 KB' };
-                    if (/^seo-og$/.test(s))            return { maxKb: 150, minW: 1200, maxW: 1920,                              landscape: true, label: 'Imagen Open Graph (SEO)', hint: 'WebP · 1 200 × 630 px recomendado (ratio 1.91:1) · Orientación Horizontal · máx. 150 KB, óptimo 60 KB' };
-                    return                                    { maxKb: 150, minW: 800,                                                        label: 'Imagen CMS',              hint: 'WebP · mín. 800 px ancho · máx. 150 KB, óptimo 60 KB' };
-                }
-                const rules = slotRules(slot);
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 3:46 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L797-807)</summary>
-
-**Path:** `Unknown file`
-
-```
-                                    <div class="field-group mb-2">
-                                        <label>Imagen de Fondo</label>
-                                        <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px; font-size: 0.78rem;">
-                                            📐 <strong>Dimensiones:</strong> 1200 px de ancho × (Rango de alto: 600 a 675 px) &nbsp;·&nbsp;
-                                            <strong>Codec:</strong> WebP únicamente &nbsp;·&nbsp;
-                                            <strong>Peso:</strong> Máximo 150 KB, Óptimo 60 KB
-                                        </p>
-                                        <div class="image-upload-box">
-                                            <img id="prev-promo-<?= $pId ?>"
-                                                 src="<?= !empty($imgUrl) ? h($imgUrl) : 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="90" height="60" viewBox="0 0 90 60"><rect width="100%" height="100%" fill="%23f1f5f9"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%2394a3b8" font-size="10" font-family="sans-serif">Sin Imagen</text></svg>' ?>"
-                                                 alt="Promoción <?= h(trim(strip_tags($diaLabel))) ?>" class="img-preview-sm"
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 3:46 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `promociones.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L64-75)</summary>
-
-**Path:** `Unknown file`
-
-```
-                        </div>
-
-                        <!-- Imagen rectangular completa horizontal con botón Agendar superpuesto transparente -->
-                        <?php if (!empty($imgUrl)): ?>
-                            <div class="catalog-card-img-wrap">
-                                <img src="<?= h($imgUrl) ?>" alt="<?= h($diaPlain) ?>" class="catalog-card-img" loading="lazy" decoding="async" width="400" height="200">
-                                <a href="<?= h($waCardUrl) ?>" target="_blank" rel="noopener noreferrer" class="catalog-card-btn-overlay" onclick="event.stopPropagation();">
-                                    Agendar <?= $waSvg ?>
-                                </a>
-                            </div>
-                        <?php else: ?>
-                            <div class="catalog-card-bottom-row" style="margin-top: auto;">
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
+**Status:** Reset
 **Created:** 25 Sept 2026, 3:47 pm
 
 ---
 
-## Agent Response
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
 
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1589-1611)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-/* Contenedores de imagen de promoción horizontal — ocupa el 100% del espacio libre vertical restante */
-.catalog-card-img-wrap {
-    width: 100%;
-    flex: 1 1 auto;
-    min-height: 160px;
-    margin: 0;
-    border-radius: 0;
-    overflow: hidden;
-    background-color: #f1f5f9;
-    position: relative;
-}
-
-.catalog-card-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    display: block;
-    border: none;
-}
-
-/* Botón Agendar superpuesto semitransparente (Glassmorphism) sobre la imagen */
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The CSS for the image container, specifically `.catalog-card-img-wrap`, includes `aspect-ratio: 1024 / 687`. This is being set to ensure the container maintains a precise ratio (approximately 1.4905:1). This aspect ratio ensures the image display is correct.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.177730306s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 3:47 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
+**Status:** Reset
+**Created:** 25 Sept 2026, 3:52 pm
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
-**Created:** 25 Sept 2026, 3:47 pm
+**Status:** Reset
+**Created:** 25 Sept 2026, 3:52 pm
 
 ---
 
-## Agent Response
+### Terminal Command Execution
 
-### Thinking
-
-Image processing completed, generating WebP files at the specified dimensions and quality. Confirmed successful conversion of seven images, each resulting in a file size between 71KB and 109KB. Two locations contain the output files: one for immediate use in the CMS, the other for project archival.
-
-
-
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.063094290s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
+**Status:** Reset
+**Created:** 25 Sept 2026, 3:52 pm
 
 ---
 
-## User Request
+### Local File Search
 
-. para  (galardon y diploma),  dame resumen de q se debe hacer
+**Status:** Reset
+**Created:** 25 Sept 2026, 3:52 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 3:52 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 3:53 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 3:59 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 3:59 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 3:59 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 4:14 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 4:15 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 4:15 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 4:15 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 4:15 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 4:15 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 4:15 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 4:15 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 4:16 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 4:16 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 4:17 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 4:17 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 4:17 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 4:17 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 4:17 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 4:18 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 4:18 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 4:18 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 4:18 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 4:19 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 4:19 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 4:19 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 4:19 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 4:19 pm
+
+---
+
+### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 7:28 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 7:28 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 7:28 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 7:28 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 7:28 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 7:28 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 7:28 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 7:28 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 7:28 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 7:29 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 7:29 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 7:29 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 7:29 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 7:29 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 7:31 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 7:31 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 7:31 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 7:32 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 7:56 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 7:56 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 7:58 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 7:58 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 7:58 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 7:58 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 7:59 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 7:59 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:01 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:01 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:02 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:02 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:02 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:02 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:03 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:03 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:14 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:14 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:14 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:15 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:15 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:15 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:15 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:15 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:15 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:15 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:16 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:16 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:16 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:16 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:16 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:16 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:17 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:17 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:17 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:18 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:18 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:18 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:18 pm
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:22 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:22 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:22 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:23 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:23 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:23 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:23 pm
+
+---
+
+### CORTEX_STEP_TYPE_GENERIC
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:23 pm
+
+---
+
+### CORTEX_STEP_TYPE_GENERIC
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:23 pm
+
+---
+
+### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:23 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:23 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:23 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:23 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:24 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:24 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:24 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:25 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:25 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:26 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:26 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:26 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:27 pm
+
+---
+
+### CORTEX_STEP_TYPE_GENERIC
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:27 pm
+
+---
+
+### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:27 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:27 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:27 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:27 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:27 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:27 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:27 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:29 pm
+
+---
+
+### CORTEX_STEP_TYPE_GENERIC
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:29 pm
+
+---
+
+### CORTEX_STEP_TYPE_GENERIC
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:29 pm
+
+---
+
+### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:29 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:29 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:30 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:30 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:30 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:36 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:36 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:36 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:36 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:36 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:36 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:37 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:37 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:37 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:38 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:38 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:38 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:39 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:40 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:40 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:40 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:40 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:40 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:40 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:40 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:40 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:40 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:41 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:43 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:43 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:44 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:44 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:44 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:44 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:44 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:44 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:44 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:44 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:45 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:45 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:45 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:45 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:45 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:45 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:45 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:46 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:46 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:48 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:48 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:48 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:49 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:49 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:50 pm
+
+---
+
+### CORTEX_STEP_TYPE_GENERIC
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:50 pm
+
+---
+
+### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:50 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:50 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:51 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:59 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:59 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:59 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:59 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 8:59 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 9:00 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 9:00 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 9:00 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 9:00 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 9:00 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 9:01 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 9:01 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 9:02 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 9:02 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 9:02 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 9:02 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 9:03 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 9:03 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 9:03 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 9:03 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 9:04 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 9:04 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 9:08 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 9:08 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 9:08 pm
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 9:22 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 9:22 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 9:22 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 9:22 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 9:22 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 9:22 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 9:22 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 9:40 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 9:40 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 9:40 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 9:43 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 9:59 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 9:59 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 10:10 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 10:16 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 10:16 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 10:23 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 10:23 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 10:23 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 10:23 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 10:23 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 10:23 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 10:23 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 10:24 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 10:30 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 10:54 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 10:57 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 10:57 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 10:57 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 10:57 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 10:58 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 10:58 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 10:58 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 10:59 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 10:59 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 10:59 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:00 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:00 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:00 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:00 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:00 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:01 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:01 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:01 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:02 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:02 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:02 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:03 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:03 pm
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:03 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:03 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:03 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:04 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:04 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:04 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:04 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:04 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:04 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:04 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:05 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:05 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:05 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:05 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:05 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:05 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:05 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:05 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:06 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:06 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:06 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:17 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:18 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:18 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:18 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:18 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:18 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:18 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:18 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:18 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:18 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:19 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:19 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:20 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:20 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:20 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:21 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:21 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:21 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:21 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:22 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:22 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:23 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:23 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:23 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:24 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:24 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:24 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:24 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:24 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:24 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:28 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:28 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:28 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:28 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:29 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:29 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:36 pm
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:37 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:37 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:37 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:37 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:37 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:38 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:38 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:38 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:39 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:39 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:39 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:39 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:39 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:39 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:40 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:48 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:48 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:48 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:52 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:52 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:52 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:52 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:52 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:53 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:53 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:53 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:53 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:53 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:53 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:53 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:54 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:54 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:54 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 26 Sept 2026, 11:55 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:08 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:08 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:08 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:09 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:10 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:10 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:10 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:10 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:11 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:11 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:11 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:11 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 27 Sept 2026, 12:12 am
+
+---
 
 <details>
-<summary>Context</summary>
+<summary>Conversation History</summary>
 
-**Active File:** `gestion_web.php`
-**Language:** php
+# Conversation History
+Here are the conversation IDs, titles, and summaries of your most recent 2 conversations, in reverse chronological order:
 
-**Open Files:**
-- `cms-upload.js`
-- `gestion_web.php`
+<conversation_summaries>
+## Conversation a2281d84-95f3-4fa5-9da6-a6c9d7e38d1a: Pruebas WhatzMeApi Caelitandem 2026
+- Created: 2026-09-18T13:54:47Z
+- Last modified: 2026-09-27T00:34:38Z
+
+## Conversation 7e9d2ff0-deb9-465a-9e04-fdb13823ced4: Consultar Estados Solicitudes Digitales
+- Created: 2026-09-24T15:13:22Z
+- Last modified: 2026-09-25T23:14:40Z
+
+### USER Objective:
+Consultar Estados Solicitudes Digitales
+
+</conversation_summaries>
+
 </details>
 
 ---
@@ -15811,7 +11317,7 @@ Image processing completed, generating WebP files at the specified dimensions an
 ### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
 
 **Status:** Completed
-**Created:** 25 Sept 2026, 3:52 pm
+**Created:** 27 Sept 2026, 12:12 am
 
 ---
 
@@ -15819,84 +11325,20 @@ Image processing completed, generating WebP files at the specified dimensions an
 
 ### Thinking
 
-Considering "galardon y diploma," the task requires a concise action plan. The previous processing of "Promociones" offers a template: keep native size, convert to WebP, and adjust the relevant PHP configurations. This structure should be applied to the new task.
+The previous request concerns the behavior when selecting a notification related to an order updated today, but initially placed the prior day, while a grid with a date-based search and autocomplete text is active.
 
 
 
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.117695075s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 3:52 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 3:52 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `calidad-`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 3:52 pm
-
----
-
-## Agent Response
 
 ### Actions
 
 **Tool:** `view_file`
-**File:** `calidad.php`
+**File:** `ws-client.js`
 
 <details>
 <summary>Metadata</summary>
 
+- **Thinking Duration:** 0.071538457s
 - **Model:** Gemini 3.8 Flash (High)
 </details>
 
@@ -15908,38 +11350,206 @@ Considering "galardon y diploma," the task requires a concise action plan. The p
 **Path:** `Unknown file`
 
 ```
-<?php
 /**
- * sections/calidad.php — Partial: Calidad / Galería
- * Incluido desde website/index.php; hereda su scope completo.
- * Variables esperadas: $calH2, $calSub, $calidadCards
+ * ws-client.js — Cliente WebSocket Swoole v6 + Fallback Polling para Notificaciones en Vivo (LAESH)
+ * 
+ * Funcionalidades:
+ * 1. Agrupación en abanicos descendentes: "📅 Hoy" y "🕒 Ayer y Anteriores".
+ * 2. Globito rojo visible (bell-badge con .show .pulse y opacity:1) y contador en título (N) Recepción.
+ * 3. Supresión de advertencias Autoplay/AudioContext inicializando audio exclusivamente tras gesto de usuario.
  */
-?>
-        <!-- ══════════════════════════════════════════════ CALIDAD ══ -->
-        <section id="calidad" class="sec-pad-1-5 scroll-sm-top">
-            <div class="section-header animate-on-scroll">
-                <!-- h2 y subtitulo desde web_contenidos (calidad/seccion) -->
-                <h2><?= h($calH2) ?></h2>
-                <p><?= h($calSub) ?></p>
-            </div>
-            <div class="map-bar">
-                <div class="specialties-carousel-viewport animate-on-scroll">
-                    <div class="calidad-cards-grid">
-                        <?php foreach ($calidadCards as $qc): ?>
-                        <div class="carousel-card">
-                            <img src="<?= h($qc['img']) ?>" alt="<?= h($qc['alt']) ?>"
-                                 width="800" height="580" loading="lazy" decoding="async">
-                            <div class="carousel-card__body ck5-output">
-                                <h3><?= h($qc['titulo']) ?></h3>
-                                <?php if ($qc['desc']): ?><p><?= h($qc['desc']) ?></p><?php endif; ?>
-                            </div>
-                        </div>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
-            </div>
-        </section>
+(function() {
+    'use strict';
 
+    var ws = null;
+    var reconnectInterval = 3000;
+    var maxReconnects = 3;
+    var reconnectAttempts = 0;
+    var pollingTimer = null;
+    var lastTimestamp = 0;
+    var seenNotifIds = {};
+    var unreadCount = 0;
+    var originalTitle = document.title;
+
+    // Control de AudioContext seguro (cero advertencias Autoplay)
+    var hasUserGesture = false;
+    var sharedAudioCtx = null;
+
+    function registerUserGesture() {
+        if (hasUserGesture) return;
+        hasUserGesture = true;
+        try {
+            var AudioCtx = window.AudioContext || window.webkitAudioContext;
+            if (AudioCtx && !sharedAudioCtx) {
+                sharedAudioCtx = new AudioCtx();
+            }
+        } catch (e) {}
+    }
+
+    ['click', 'keydown', 'touchstart', 'pointerdown'].forEach(function(evtName) {
+        document.addEventListener(evtName, registerUserGesture, { once: true, capture: true });
+    });
+
+    function getWsUrl() {
+        var host = window.location.hostname || 'localhost';
+        var protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+        return protocol + '//' + host + (window.location.port ? ':' + window.location.port : '') + '/ws/';
+    }
+
+    function getApiBaseDir() {
+        return window.location.pathname.replace(/\/index\.php\/?$/, '').replace(/\/+$/, '');
+    }
+
+    function pollNotifications() {
+        var endpoint = getApiBaseDir() + '/api/notificaciones?since=' + lastTimestamp;
+        fetch(endpoint, { cache: 'no-store' })
+            .then(function(res) { return res.json(); })
+            .then(function(data) {
+                if (data && data.success && Array.isArray(data.notificaciones)) {
+                    var newTs = data.timestamp || data.server_time;
+                    if (newTs) lastTimestamp = newTs;
+
+                    /* Servidor devuelve DESC (más reciente primero); invertir para que
+                       el prepend secuencial deje el más nuevo arriba al terminar. */
+                    data.notificaciones.slice().reverse().forEach(function(n) {
+                        if (n.id && seenNotifIds[n.id]) return;
+                        if (n.id) seenNotifIds[n.id] = true;
+
+                        handleWsEvent({
+                            id: n.id,
+                            event: n.tipo,
+                            folio: n.folio_referencia || '',
+                            folio_referencia: n.folio_referencia || '',
+                            orden_id: n.orden_id || null,
+                            titulo: (n.tipo === 'nueva_orden') ? 'Nueva Solicitud Médica Digital (' + (n.folio_referencia || '') + ')' : 'Actualización de Solicitud',
+                            mensaje: n.mensaje,
+                            creado_en: n.creado_en,
+                            // 2026-09-25: estado_id ACTUAL de la orden (LEFT JOIN en
+                            // GET /api/notificaciones) — sin esto, el fallback de
+                            // navegarYResaltarOrden() (PDF de resultados vs solicitud
+                            // digital) asumía siempre "sin PDF" para cualquier
+                            // notificación entregada por este camino de polling.
+                            estado: n.estado,
+                            // 2026-09-24: ya no se filtra por leido en el backend (ver
+                            // GET /api/notificaciones) — se pasa el estado para que el
+                            // panel distinga visualmente leída/no leída en vez de
+                            // ocultar por completo lo ya leído.
+                            leido: (n.leido === undefined || n.leido === null) ? 0 : n.leido
+                        });
+                    });
+                }
+            })
+            .catch(function(err) {});
+    }
+
+    function startPollingFallback() {
+        if (pollingTimer) return;
+        console.info('[LAESH Notif] Swoole WS no disponible. Polling HTTP activo cada 4s (MariaDB)');
+        pollingTimer = setInterval(pollNotifications, 4000);
+        pollNotifications();
+    }
+
+    // Corrección 2026-09-22: bug real encontrado en producción (RC no recibía
+    // notificaciones en vivo, requería refresh manual). El servidor cierra la
+    // conexión de inmediato si falla la validación del JWT/JTI al abrir (ver
+    // swoole_server.php on('open')) — pero onopen SIEMPRE se dispara primero
+    // (el handshake WS ya se completó) y reseteaba reconnectAttempts a 0 antes
+    // de que llegara el close casi instantáneo. Resultado: reconexión infinita
+    // cada 3s sin jamás alcanzar maxReconnects, así que startPollingFallback()
+    // nunca se activaba — cero actualizaciones en vivo ni por WS ni por polling.
+    // Se distingue una conexión "flapping" (cerrada casi de inmediato) de una
+    // estable: solo una conexión que duró >= MIN_STABLE_MS resetea el contador;
+    // una que "flapea" activa el polling de inmediato (no espera a agotar
+    // maxReconnects) mientras sigue reintentando WS en segundo plano.
+    var MIN_STABLE_MS = 2000;
+    var wsOpenedAt = 0;
+
+    function initWebSocket() {
+        if (ws && (ws.readyState === WebSocket.OPEN || ws.readyState === WebSocket.CONNECTING)) {
+            return;
+        }
+
+        try {
+            ws = new WebSocket(getWsUrl());
+
+            ws.onopen = function() {
+                wsOpenedAt = Date.now();
+                reconnectAttempts = 0;
+                if (pollingTimer) {
+                    clearInterval(pollingTimer);
+                    pollingTimer = null;
+                }
+                console.log('[LAESH WS] Conectado al servidor Swoole v6');
+            };
+
+            ws.onmessage = function(evt) {
+                try {
+                    var data = JSON.parse(evt.data);
+                    // "ACK QoS Nivel 2" (auditoría 2026-09-20): eliminado — el servidor
+                    // (swoole_server.php on('message')) nunca procesó este ack desde que
+                    // se escribió; la condición para dispararlo tampoco se cumplía nunca
+                    // hasta el fix de A5 (el payload no llevaba 'id'). Con A5 ya sí se
+                    // cumpliría, pero el servidor lo seguiría descartando en silencio —
+                    // tráfico sin ningún efecto. Implementar la confirmación real
+                    // requeriría un puente HTTP inverso Swoole→PHP-FPM (Swoole no tiene
+                    // conexión a BD por diseño, ver Notifier — comentarios Gap 6/§4.7 de
+                    // Tecnica_Seguridad_Integral.html); eso es una feature nueva, no un
+                    // fix de este código muerto. Se quita en vez de dejarlo a medias.
+                    handleWsEvent(data);
+                } catch (e) {
+                    console.warn('[LAESH WS] Payload no JSON:', evt.data);
+                }
+            };
+
+            ws.onerror = function() {
+                startPollingFallback();
+            };
+
+            ws.onclose = function() {
+                var wasStable = wsOpenedAt && (Date.now() - wsOpenedAt) >= MIN_STABLE_MS;
+                wsOpenedAt = 0;
+                if (!wasStable) {
+                    // Conexión "flapping" — el servidor la cerró casi de inmediato
+                    // (típicamente falla de autenticación WS). No cuenta como
+                    // reintento sano; activa el respaldo de polling ya mismo.
+                    startPollingFallback();
+                }
+                if (reconnectAttempts < maxReconnects) {
+                    reconnectAttempts++;
+                    setTimeout(initWebSocket, reconnectInterval);
+                } else {
+                    startPollingFallback();
+                }
+            };
+        } catch (e) {
+            startPollingFallback();
+        }
+    }
+
+    function updateTitleCounter() {
+        if (unreadCount > 0) {
+            document.title = '(' + unreadCount + ') ' + originalTitle;
+        } else {
+            document.title = originalTitle;
+        }
+    }
+
+    // Asegurar estructura visual de abanicos en la barra lateral de notificaciones.
+    // 2026-09-24 (pedido explícito del usuario): el Portal Médico tenía un 3er
+    // abanico dedicado "Catálogo Actualizado" (2026-09-21) — se elimina por
+    // completo, junto con todo el código que lo creaba/enrutaba/renderizaba
+    // (ver handleWsEvent más abajo). catalogo_actualizado deja de generar
+    // CUALQUIER notificación visible para médico — RC/Admin no se tocan,
+    // conservan su comportamiento original (catalogo_actualizado dentro de
+    // Hoy/Ayer). El refresco silencioso de catalog-compiled.js que este mismo
+    // evento dispara (ver más abajo, fuera de este bloque) NO se toca — sigue
+    // aplicando para médico, es lo que mantiene sincronizada su lista de
+    // estudios en "Nueva Orden"; no es parte de la notificación que se quita.
+    function ensureAccordionStructure(container) {
+        if (container.querySelector('.notif-accordion-group')) return;
+
+        container.innerHTML =
+            '<div class="notif-accordion-group" style="display:flex; flex-direction:column; gap:8px;">' +
 ```
 
 </details>
@@ -15951,7 +11561,7 @@ Considering "galardon y diploma," the task requires a concise action plan. The p
 ### Actions
 
 **Tool:** `view_file`
-**File:** `landing.css`
+**File:** `ws-client.js`
 
 <details>
 <summary>Metadata</summary>
@@ -15962,1208 +11572,703 @@ Considering "galardon y diploma," the task requires a concise action plan. The p
 ---
 
 <details>
-<summary>File: `Unknown file` (L1914-2004)</summary>
+<summary>File: `Unknown file` (L699-1072)</summary>
 
 **Path:** `Unknown file`
 
 ```
-/* ==========================================================================
-   SECCIÓN CALIDAD — 3 Fichas Estáticas (Estructura Fiel Especialidades .carousel-card)
-   ========================================================================== */
-.calidad-cards-grid {
-    display: flex;
-    flex-wrap: wrap; /* R-MOB: permite 2 col en tablet sin romper 3 col en desktop */
-    gap: 2rem;
-    padding: 1rem 0;
-    margin-top: 0;
-    margin-bottom: 2rem;
-    width: 100%;
-    align-items: stretch;
-    box-sizing: border-box;
-}
-
-.calidad-cards-grid .carousel-card {
-    flex: 0 0 calc((100% - 4rem) / 3);
-    width: calc((100% - 4rem) / 3);
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
-    background: #fff;
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
-    overflow: hidden;
-    margin-bottom: 2px;
-}
-
-.calidad-cards-grid .carousel-card img {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 100% !important;
-    height: 275px !important;
-    aspect-ratio: unset !important;
-    object-fit: cover !important;
-    object-position: center !important;
-    display: block !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    border: 0 !important;
-    border-radius: 12px 12px 0 0 !important;
-    box-sizing: border-box !important;
-}
-
-@media (min-width: 1920px) {
-    .calidad-cards-grid .carousel-card {
-        flex: 0 0 calc((100% - 4rem) / 3);
-    }
-    .calidad-cards-grid .carousel-card img {
-        height: 285px !important;
-    }
-}
-
-/* R-MOB: tablet/paisaje → 2 columnas (481px–1024px) */
-@media (max-width: 1024px) {
-    .calidad-cards-grid {
-        gap: 1rem;
-    }
-    .calidad-cards-grid .carousel-card {
-        flex: 0 0 calc(50% - 0.5rem);
-        width: calc(50% - 0.5rem);
-    }
-    .calidad-cards-grid .carousel-card img {
-        height: 230px !important;
-        /* object-position top center: la base tiene center !important → cover crops center
-           → top de imágenes de calidad se pierde; top center ancla el sujeto visible */
-        object-position: top center !important;
-    }
-}
-
-/* R-MOB: móvil retrato estrecho → 1 columna (≤480px) */
-@media (max-width: 480px) {
-    .calidad-cards-grid .carousel-card {
-        flex: 0 0 100%;
-        width: 100%;
-    }
-    .calidad-cards-grid .carousel-card img {
-        height: 210px !important;
-        object-position: top center !important;
-    }
-}
-
-
-
-.text-center-block {
-    text-align: center;
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L319-339)</summary>
-
-**Path:** `Unknown file`
-
-```
-        if ($imgH >= $imgW)
-            $dimError = "Card de Promociones: orientación debe ser Horizontal (ancho > alto). Recibido: {$imgW}×{$imgH}.";
-        elseif ($imgW < 1000 || $imgW > 1200 || $imgH < 600 || $imgH > 800)
-            $dimError = "Card de Promociones: dimensiones requeridas 1024×687 px (óptimo nativo) o 1200×(600–675) px. Recibido: {$imgW}×{$imgH}.";
-    } elseif (preg_match('/^calidad-/', $slot)) {
-        if ($imgW !== 800 || $imgH !== 580)
-            $dimError = "Galería de Calidad: se requiere exacto 800×580 px. Recibido: {$imgW}×{$imgH}.";
-    } elseif ($slot === 'seo-og') {
-        if ($imgW < 1200 || $imgW > 1920)
-            $dimError = "Open Graph (SEO): ancho {$imgW} px fuera del rango 1\u{202F}200–1\u{202F}920 px.";
-        elseif ($imgH >= $imgW)
-            $dimError = "Open Graph (SEO): orientación debe ser Horizontal (ancho > alto). Recibido: {$imgW}×{$imgH}.";
-    } else {
-        if ($imgW < 800)
-            $dimError = "Imagen CMS genérica: ancho mínimo 800 px. Recibido: {$imgW} px.";
-    }
-    if ($dimError !== null) {
-        http_response_code(422);
-        echo json_encode(['ok' => false, 'msg' => $dimError]);
-        exit;
-    }
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L859-909)</summary>
-
-**Path:** `Unknown file`
-
-```
-                               value="<?= cms($contenidos, 'calidad', 'seccion', 'subtitulo', 'Conoce nuestras instalaciones equipadas con tecnología de vanguardia y un equipo comprometido con la excelencia diagnóstica.') ?>">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tarjeta 1 -->
-            <?php
-            $galImgUrl1 = cms($contenidos, 'calidad', 'gallery1', 'imagen_url');
-            $galActivo1 = cms($contenidos, 'calidad', 'gallery1', 'activo', '1');
-            $isActivo1  = ($galActivo1 !== '0');
-            $imgDef1    = ''; // sin fallback — imagen debe venir de CMS
-            ?>
-            <div class="editor-card" style="border: 2px solid #059669; background: #fafafa; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
-                <div class="editor-card-header" style="background: linear-gradient(135deg, #059669 0%, #047857 100%); padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.2); display:flex; justify-content:space-between; align-items:center;">
-                    <div class="card-title" style="color: #ffffff; font-weight: 800; font-size: 0.95rem;">Tarjeta 1 — Área de Hematología</div>
-                    <div style="display:flex; align-items:center; gap:0.5rem;">
-                        <label for="chk-calidad-gallery1-activo" style="display:inline-flex; align-items:center; gap:0.45rem; cursor:pointer; margin:0; font-size:0.85rem; font-weight:700;">
-                            <input type="hidden" name="gallery1__activo" value="0">
-                            <input type="checkbox" id="chk-calidad-gallery1-activo" name="gallery1__activo" value="1" <?= $isActivo1 ? 'checked' : '' ?>
-                                   style="width:1.15rem; height:1.15rem; accent-color:#ffffff; cursor:pointer;"
-                                   onchange="var badge=this.nextElementSibling; if(this.checked){ badge.style.background='rgba(255,255,255,0.25)'; badge.style.color='#ffffff'; badge.textContent='Encendido'; } else { badge.style.background='#dc2626'; badge.style.color='#ffffff'; badge.textContent='Apagado'; }">
-                            <span class="operator-badge" style="background: <?= $isActivo1 ? 'rgba(255,255,255,0.25)' : '#dc2626' ?>; color: #ffffff; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; transition: all 0.2s ease;">
-                                <?= $isActivo1 ? 'Encendido' : 'Apagado' ?>
-                            </span>
-                        </label>
-                    </div>
-                </div>
-                <div class="editor-card-body" style="padding: 12px;">
-                    <div class="field-group">
-                        <label>Imagen de Galería</label>
-                        <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px; font-size: 0.78rem;">
-                            📐 <strong>Codec:</strong> WebP únicamente &nbsp;·&nbsp;
-                            <strong>Quality:</strong> 75 &nbsp;·&nbsp;
-                            <strong>Effort:</strong> 6 &nbsp;·&nbsp;
-                            <strong>Dimensiones:</strong> 800 × 580 px (ratio ~1.38:1) &nbsp;·&nbsp;
-                            <strong>Orientación Horizontal</strong> &nbsp;·&nbsp;
-                            <strong>Peso:</strong> Máximo 150 KB, Óptimo 60 KB
-                        </p>
-                        <div class="image-upload-box">
-                            <img id="prev-calidad-gallery1"
-                                 src="<?= h($galImgUrl1) ?>"
-                                 alt="Área de Hematología" class="img-preview-sm"
-                                 onerror="this.hidden=true">
-                            <label for="file-calidad-gallery1" class="btn btn-secondary">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                                Cambiar Imagen
-                            </label>
-                            <input type="file" accept="image/webp"
-                                   id="file-calidad-gallery1" class="d-none"
-                                   data-upload-slot="calidad-gallery1"
-                                   data-preview-id="prev-calidad-gallery1"
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Investigating the user's request for a summary related to "galardon" and "diploma." Observed two versions of each image file exist, differing in dimensions and aspect ratio, located within a specific directory. The analysis requires clarifying the desired action based on these file variations. Considering the available options and the implied intent of summary.
-
-
-The website's image container has a fixed aspect ratio that conflicts with the required CMS image dimensions, leading to potential cropping of key visual elements. Employing a canvas-based approach allows fitting the original image within the necessary 800x580 dimensions without altering the CSS or code, preventing information loss. This involves placing the original image on a colored background that complements the existing image borders, preserving the integrity of logos and signatures.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 1.387244659s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 3:52 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 3:53 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-The images, "galardon b.jpg" and "diploma b.jpg," are intended for the "Calidad e Instalaciones" section. This section features three fixed cards. The image background colors differ; "galardon b.jpg" has a black background, while "diploma b.jpg" has a light blue one.
-
-
-Analysis indicates that cropping or resizing original images to the required 800x580 px format would truncate critical visual elements. The best approach involves creating an 800x580 canvas.  Scaling the "b" version of the images to a 580 px height and centering them on a canvas with a matching background color will avoid content loss and maintain the desired aspect ratio. The resulting images will be converted to WebP for optimization.
-
-
-
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.978256647s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-## User Request
-
-DUda: los cambios realizados para Promociones Vigentes y los planeados para  Galardón y Diploma, se considero el q se mustren bien en dispositivos mobiles, vertical --telefono y tabletas ?
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `gestion_web.php`
-**Language:** php
-
-**Open Files:**
-- `cms-upload.js`
-- `gestion_web.php`
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `catalog-card`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 3:59 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1564-1624)</summary>
-
-**Path:** `Unknown file`
-
-```
-}
-
-/* ── Refined Minimal Rectangular Promo Cards ── */
-.catalog-card {
-    background-color: var(--bg-surface);
-    border-radius: 0.625rem; /* Rectangular con esquinas suaves */
-    border: 1px solid #cbd5e1;
-    padding: 0;   /* Padding cero para permitir que la imagen ocupe todo el espacio */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    min-height: 220px;
-    min-width: 0;
-    max-width: 100%;
-    overflow: hidden;
-    box-sizing: border-box;
-    position: relative;
-}
-
-.catalog-card.has-bg-overlay {
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-}
-
-/* Contenedores de imagen de promoción horizontal — ocupa el 100% del espacio libre vertical restante */
-.catalog-card-img-wrap {
-    width: 100%;
-    flex: 1 1 auto;
-    min-height: 160px;
-    aspect-ratio: 1024 / 687;
-    margin: 0;
-    border-radius: 0;
-    overflow: hidden;
-    background-color: #f1f5f9;
-    position: relative;
-}
-
-.catalog-card-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    display: block;
-    border: none;
-}
-
-/* Botón Agendar superpuesto semitransparente (Glassmorphism) sobre la imagen */
-.catalog-card-btn-overlay {
-    position: absolute;
-    bottom: 8px;
-    right: 8px;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 6px 14px;
-    border-radius: 20px;
-    background: rgba(15, 23, 42, 0.35);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `promociones.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-<?php
-/**
- * sections/promociones.php — Partial: Promociones diarias
- * Incluido desde website/index.php; hereda su scope completo.
- * Variables esperadas: $promoH2, $promoSub, $promos, $waBase, $waTextoAg, $waSvg
- *
- * Mejoras 2026-09-08:
- *   · Badge "HOY" — derecha, violeta, detectado por dia() ISO-8601
- *   · Precios en el mismo renglón que badges (derecha)
- *   · "Ahorras $X" bajo precios cuando hay descuento
- *   · Badge de muestra requerida (💉 / ☕ / 🔬 según texto)
- *   · Descripción expandible si es larga (>220 chars)
- *   · Overlay de imagen más visible (opacidad reducida)
- *   · Mensaje WA incluye precio de oferta
- */
-?>
-        <!-- ══════════════════════════════════════════ PROMOCIONES ══ -->
-        <section id="promociones" class="sec-promo scroll-sm-top">
-            <div class="section-header animate-on-scroll">
-                <h2><?= h($promoH2) ?></h2>
-                <p><?= h($promoSub) ?></p>
-            </div>
-            <div class="promo-catalog-wrap animate-on-scroll">
-                <div class="catalog-grid">
-                <?php
-                // Día actual para badge "HOY" (ISO-8601: 1=lunes … 7=domingo)
-                $todayMap = [1=>'lunes',2=>'martes',3=>'miercoles',4=>'jueves',5=>'viernes',6=>'sabado',7=>'domingo'];
-                $todayKey = $todayMap[(int)date('N')] ?? '';
-
-                /**
-                 * Normaliza un nombre de día eliminando acentos y espacios para comparación HOY.
-                 * Permite que "Miércoles" y "Sábado" (con acento) coincidan con las claves del mapa.
-                 */
-                function _normalizeDay(string $s): string {
-                    return strtr(strtolower(trim($s)),
-                        ['á'=>'a','é'=>'e','í'=>'i','ó'=>'o','ú'=>'u','ü'=>'u','ñ'=>'n']);
+        }
+
+        /* Dedup path WS: el path polling ya añade a seenNotifIds antes de llamar handleWsEvent.
+           El path WS llama handleWsEvent directo (ws.onmessage) sin pasar por ese check,
+           así que se duplicaría si la misma notificación ya llegó por polling.
+           Swoole inyecta data.id por conexión (A5 auditoría 2026-09-20). */
+        if (data.id) {
+            if (seenNotifIds[data.id]) return;
+            seenNotifIds[data.id] = true;
+        }
+
+        var isMedicoPortal = !!document.getElementById('tabla-medico');
+        var isCatalogoEvent = (data.event === 'catalogo_actualizado');
+        // 2026-09-24: catalogo_actualizado ya no genera NINGUNA notificación
+        // visible en el Portal Médico (pedido explícito del usuario, elimina
+        // el abanico dedicado que existía desde 2026-09-21). RC/Admin no se
+        // tocan. El refresco de catalog-compiled.js (más abajo) sigue
+        // aplicando para médico independientemente de este flag.
+        var skipNotifItem = (isMedicoPortal && isCatalogoEvent);
+
+        // GAP-NOTIF-01 (2026-09-22): catalogo_actualizado es sincronización
+        // administrativa en segundo plano ("no requiere acción suya", ver
+        // comentario de ensureAccordionStructure) — se sigue registrando en
+        // su propio abanico para trazabilidad, pero YA NO enciende la
+        // campanita/globito rojo ni el contador de pestaña. Diagnóstico real
+        // (2026-09-22): médicos/recepción reportaban una "alerta falsa" en
+        // cada login — el badge se encendía por un catalogo_actualizado
+        // genuinamente sin leer (acumulado de ediciones de catálogo de
+        // otros usuarios), pero como cae en un abanico colapsado por
+        // defecto y no en Hoy/Ayer (lo que el usuario revisa primero),
+        // percibía la alerta como "sin mensajes". Ver también el fix de
+        // actor_user_id en CatalogBuilder::build() — evita que Recepción/
+        // Admin se autonotifique al editar el catálogo.
+        // 2026-09-24: desde que el panel deja de filtrar por leido=0, este
+        // handler también recibe ítems que YA estaban marcados leídos (ej. se
+        // abrió el panel en otra pestaña, o se marcó "leer todo" antes de este
+        // poll) — esos no deben volver a sumar al contador de no-leídos.
+        var yaLeidoParaContador = !!(data.leido && Number(data.leido) === 1);
+        if (!isCatalogoEvent && !yaLeidoParaContador) {
+            // Incrementar contador de pestaña
+            unreadCount++;
+            updateTitleCounter();
+
+            // Actualizar globitos rojos de notificación con animación
+            var badges = document.querySelectorAll('#badge-recepcion, #badge-resultados, .bell-badge');
+            badges.forEach(function(b) {
+                var count = parseInt(b.textContent || '0', 10) + 1;
+                b.textContent = count;
+                b.classList.add('show', 'pulse');
+                b.style.display = 'inline-flex';
+                b.style.opacity = '1';
+            });
+        }
+
+        // Inyectar ítem visual en los abanicos del panel lateral — se omite
+        // por completo para catalogo_actualizado en médico (skipNotifItem).
+        var notifLists = skipNotifItem ? [] : document.querySelectorAll('.sidebar-right-body, .sidebar-right .sidebar-right-body, .sidebar-right .modal-body, #sidebar-right .sidebar-right-body, #sidebar-right .modal-body');
+        notifLists.forEach(function(container) {
+            ensureAccordionStructure(container);
+
+            var isToday = isCreatedToday(data.creado_en);
+            var targetBody = isToday ? container.querySelector('.notif-body-hoy') : container.querySelector('.notif-body-anteriores');
+            var cntBadge   = isToday ? container.querySelector('.badge-cnt-hoy') : container.querySelector('.badge-cnt-anteriores');
+
+            if (!targetBody) return;
+
+            var yaLeido = !!(data.leido && Number(data.leido) === 1);
+
+            var item = document.createElement('div');
+            item.className = 'card card-sm border-left-primary notif-item-clickable' + (yaLeido ? ' notif-leido' : '');
+            if (data.id) {
+                item.dataset.notifId = data.id;
+            }
+            item.style.padding = '8px 12px';
+            item.style.fontSize = '0.82rem';
+            item.style.background = isToday ? '#ffffff' : '#f8fafc';
+            item.style.borderLeft = isToday ? '3px solid #0052b7' : '3px solid #94a3b8';
+            item.style.borderRadius = '6px';
+            item.style.boxShadow = '0 1px 3px rgba(0,0,0,0.05)';
+            item.style.cursor = 'pointer';
+            item.style.transition = 'transform 0.15s ease, box-shadow 0.15s ease';
+            // 2026-09-24: si ya llega marcada leída (ej. se abrió el panel y se
+            // marcó todo, o se leyó en otra pestaña/dispositivo), se muestra
+            // atenuada desde el inicio en vez de a full opacidad — mismo
+            // tratamiento visual que al hacer clic (ver abajo), pero sin
+            // ocultarla ni tratarla como "nunca pasó".
+            if (yaLeido) item.style.opacity = '0.55';
+
+            var folioRef = data.folio || data.folio_referencia || '';
+            if (folioRef) {
+                item.title = 'Haz clic para ir a la solicitud ' + folioRef + (yaLeido ? ' (leído)' : '');
+            }
+
+            var timeStr = data.creado_en ? new Date(data.creado_en).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            item.innerHTML = '<strong style="color: #0f172a;">' + escapeHtml(data.titulo || 'Nueva Notificación') + '</strong><br>' +
+                             '<span class="txt-muted-sm" style="color: #475569; font-size: 0.78rem;">' + escapeHtml(data.mensaje || 'Se ha registrado una nueva actividad.') + '</span>' +
+                             '<div style="font-size:0.7rem; color:#94a3b8; margin-top:2px;">' + timeStr + '</div>';
+
+            // Hover UX
+            item.addEventListener('mouseenter', function() {
+                item.style.transform = 'translateY(-1px)';
+                item.style.boxShadow = '0 3px 6px rgba(0,0,0,0.1)';
+            });
+            item.addEventListener('mouseleave', function() {
+                item.style.transform = 'none';
+                item.style.boxShadow = '0 1px 3px rgba(0,0,0,0.05)';
+            });
+
+            // Click Handler: Navegar a la pestaña (Hoy / Anteriores) y resaltar el renglón correspondiente.
+            // 2026-09-24: la rama "isMedicoPortal && isCatalogoEvent" que colapsaba
+            // el panel sin navegar se eliminó — ese combo ya no llega aquí, el ítem
+            // ni siquiera se crea para médico (ver skipNotifItem arriba).
+            item.addEventListener('click', function() {
+                // 2026-09-21 (corrección del usuario): el ítem NO se elimina del
+                // abanico — se queda visible como historial, pero se marca "leído"
+                // (visualmente atenuado) y deja de contar como no-leído. El contador
+                // de la sección (Hoy / Ayer y Anteriores) y el globito de la
+                // campanita reflejan solo los no-leídos. Idempotente: un segundo
+                // clic sobre el mismo ítem ya leído no vuelve a decrementar.
+                if (!item.classList.contains('notif-leido')) {
+                    item.classList.add('notif-leido');
+                    item.style.opacity = '0.55';
+                    item.title = (item.title || '') + ' (leído)';
+
+                    if (cntBadge) {
+                        cntBadge.textContent = Math.max(0, parseInt(cntBadge.textContent || '0', 10) - 1);
+                    }
+
+                    // catalogo_actualizado (Recepción/Admin — médico ya no llega
+                    // aquí) nunca incrementó unreadCount/campanita (ver GAP-NOTIF-01
+                    // arriba) — decrementarlos aquí restaría de cuenta real de otros
+                    // eventos sí-contados. Solo el contador de sección (cntBadge,
+                    // arriba) aplica para este tipo de ítem.
+                    if (!isCatalogoEvent) {
+                        unreadCount = Math.max(0, unreadCount - 1);
+                        updateTitleCounter();
+
+                        var bellBadges = document.querySelectorAll('#badge-recepcion, #badge-resultados, .bell-badge');
+                        bellBadges.forEach(function(b) {
+                            var nuevo = Math.max(0, parseInt(b.textContent || '0', 10) - 1);
+                            b.textContent = nuevo;
+                            if (nuevo === 0) {
+                                b.classList.remove('show', 'pulse');
+                                b.style.opacity = '0';
+                            }
+                        });
+                    }
+
+                    // Sincronización SSOT en MariaDB: persistir marcado de lectura
+                    var notifId = item.dataset.notifId || data.id;
+                    var payload = {};
+                    if (notifId) payload.id = parseInt(notifId, 10);
+                    if (folioRef) payload.folio = folioRef;
+
+                    if (payload.id || payload.folio) {
+                        fetch(getApiBaseDir() + '/api/notificaciones/marcar-leida', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        }).catch(function(err) {
+                            console.warn('[LAESH Notif] Error al persistir lectura:', err);
+                        });
+                    }
                 }
 
-                foreach ($promos as $p):
-                    // dia_semana contiene el Título / Etiqueta Superior de la Ficha
-                    $diaRaw    = $p['dia_semana'] ?? '';
-                    $diaKey    = _normalizeDay(strip_tags($diaRaw));
-                    $diaNombre = !empty($diaRaw) ? trim($diaRaw) : 'Promoción';
-                    $isHoy     = ($diaKey === $todayKey);
-                    $imgUrl    = $p['imagen_fondo'] ?? '';
-
-                    $diaPlain   = strip_tags($diaNombre);
-                    $waTextFull = $waTextoAg
-                        ? str_replace('{estudio}', $diaPlain, $waTextoAg)
-                        : '';
-                    $waCardUrl  = $waBase . ($waTextFull ? '?text=' . rawurlencode($waTextFull) : '');
-                ?>
-                    <div class="catalog-card <?= $isHoy ? 'catalog-card--hoy' : '' ?>"
-                         data-promo-img="<?= h($imgUrl) ?>"
-                         data-promo-title="<?= h($diaPlain) ?>"
-                         data-promo-title-html="<?= h($diaNombre) ?>"
-                         onclick="if(!event.target.closest('a')){ if(typeof window.openPromoModal==='function') window.openPromoModal('<?= h($imgUrl) ?>', this.getAttribute('data-promo-title-html')); }">
-
-                        <!-- Día / Título + badge HOY a la derecha -->
-                        <div class="catalog-card-day-row">
-                            <div class="catalog-card-day"><?= $diaNombre ?></div>
-                            <?php if ($isHoy): ?>
-                                <span class="catalog-badge badge-hoy">● HOY</span>
-                            <?php endif; ?>
-                        </div>
-
-                        <!-- Imagen rectangular completa horizontal con botón Agendar superpuesto transparente -->
-                        <?php if (!empty($imgUrl)): ?>
-                            <div class="catalog-card-img-wrap">
-                                <img src="<?= h($imgUrl) ?>" alt="<?= h($diaPlain) ?>" class="catalog-card-img" loading="lazy" decoding="async" width="1024" height="687">
-                                <a href="<?= h($waCardUrl) ?>" target="_blank" rel="noopener noreferrer" class="catalog-card-btn-overlay" onclick="event.stopPropagation();">
-                                    Agendar <?= $waSvg ?>
-                                </a>
-                            </div>
-                        <?php else: ?>
-                            <div class="catalog-card-bottom-row" style="margin-top: auto;">
-                                <a href="<?= h($waCardUrl) ?>" target="_blank" rel="noopener noreferrer" class="catalog-card-btn-compact">
-                                    Agendar <?= $waSvg ?>
-                                </a>
-                            </div>
-                        <?php endif; ?>
-
-                    </div>
-                <?php endforeach; ?>
-                </div>
-            </div>
-        </section>
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `.catalog-grid`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 3:59 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1534-1569)</summary>
-
-**Path:** `Unknown file`
-
-```
-    max-width: 1380px;
-    margin: 0 auto;
-    padding: 0 1rem;
-}
-
-.catalog-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr); /* minmax(0,1fr) evita que el track crezca por min-content de hijos */
-    gap: 1.5rem;
-    margin-top: 2rem;
-    align-items: stretch;
-}
-
-/* R-MOB: 2 cols desde 480px (antes solo desde 640px) */
-@media (min-width: 480px) {
-    .catalog-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-}
-
-@media (min-width: 1024px) {
-    .catalog-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-}
-
-/* PR-MOB-02 (actualizado): solo forzar 1 col en móvil muy estrecho (≤479px);
-   480-767px ahora muestra 2 cols, ganando area util en landscape/tablet */
-@media (max-width: 479px) {
-    .catalog-grid { grid-template-columns: minmax(0, 1fr); }
-}
-
-/* ── Refined Minimal Rectangular Promo Cards ── */
-.catalog-card {
-    background-color: var(--bg-surface);
-    border-radius: 0.625rem; /* Rectangular con esquinas suaves */
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Promociones display is governed by media queries, adjusting the catalog grid's column count based on screen width. Mobile view utilizes a single column, tablet/mobile landscape employs two columns, and desktop/large tablet displays three. The function of `.catalog-card-` remains to be determined.
-
-
-The `.catalog-card-img-wrap`'s aspect ratio matches the image, ensuring `object-fit: cover` renders the image perfectly across all screen sizes without cropping. On tap or click, `openPromoModal` displays the high-res image. Examining `landing.css` next, specifically the `.calidad-cards-grid` for layout behaviors.
-
-
-The `.calidad-cards-grid` uses a flexbox layout with media queries to adjust the number of columns based on screen width, similar to the `Promociones` grid. Desktop view uses a three-column layout, while tablet/landscape employs two, and mobile uses one. Each card's dimensions are calculated to ensure consistent spacing and responsiveness.
-
-
-Fixed image height combined with a varying card width across devices leads to inconsistent aspect ratios, which could result in cropping with `object-fit: cover`. The design likely aims for consistent image presentation regardless of device size, but this implementation appears flawed. The mobile `height: 210px` declaration necessitates further investigation for potential visual discrepancies.
-
-
-
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `openPromoModal`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 2.605715063s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 3:59 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L919-959)</summary>
-
-**Path:** `Unknown file`
-
-```
-        modalObserver.observe(modal, { attributes: true, attributeFilter: ['class'] });
-    });
-
-    // Delegación global de clics y eventos táctiles para capturar cualquier tarjeta o imagen de promoción
-    function handlePromoCardInteraction(e) {
-        var btn = e.target.closest('.catalog-card-btn') || e.target.closest('.catalog-card-btn-overlay') || e.target.closest('a');
-        if (btn) return; // Permitir interacción normal en botones
-
-        var card = e.target.closest('.catalog-card') || e.target.closest('[data-promo-img]');
-        if (!card) return;
-
-        var imgSrc = card.getAttribute('data-promo-img');
-        if (!imgSrc || imgSrc.trim() === '') {
-            var imgEl = card.querySelector('.catalog-card-img') || card.querySelector('img');
-            if (imgEl) imgSrc = imgEl.getAttribute('src');
+                var folioTarget  = folioRef;
+                if (!folioTarget && data.titulo) {
+                    var m = data.titulo.match(/\(([^)]+)\)/);
+                    if (m && m[1]) folioTarget = m[1].trim();
+                }
+
+                // 2026-09-25: lógica de navegar+resaltar extraída a
+                // navegarYResaltarOrden() (arriba en este mismo archivo),
+                // reutilizada aquí y desde la lupita. Gap cerrado (retomado
+                // tras validar el enfoque con la lupita): se agrega
+                // filtrarBusquedaPrimero para que una notificación de una
+                // orden que no esté en la página actualmente cargada
+                // (paginación) también se ubique — antes esto se quedaba en
+                // silencio tras 6 intentos. Sin onNoEncontrado explícito —
+                // usa el respaldo por defecto de la función (abre el
+                // documento correcto según el estado real de la orden), no
+                // hace falta repetirlo aquí. data.estado viaja en
+                // orden_actualizada y resultado_disponible (2026-09-25); si
+                // el evento no lo trae (ej. nueva_orden), queda undefined y
+                // el respaldo por defecto asume "sin PDF" — correcto también
+                // en ese caso.
+                if (folioTarget) {
+                    navegarYResaltarOrden(folioTarget, isToday, { filtrarBusquedaPrimero: true, estadoId: data.estado });
+                }
+            });
+
+            // Inserción en orden descendente (más nueva arriba)
+            targetBody.insertBefore(item, targetBody.firstChild);
+
+            // El badge de sección cuenta NO-LEÍDOS, no el total de ítems del
+            // historial — se incrementa desde su valor actual, no se recalcula
+            // desde targetBody.children.length (eso incluiría los ya leídos).
+            // 2026-09-24: tampoco cuenta ítems que ya llegan marcados leídos.
+            if (cntBadge && !yaLeido) {
+                cntBadge.textContent = parseInt(cntBadge.textContent || '0', 10) + 1;
+            }
+        });
+
+        // Refrescar el catálogo compilado en memoria (catalog-compiled.js) cuando el Admin / Recepción modifica MariaDB
+        if (data.event === 'catalogo_actualizado') {
+            var oldScript = document.getElementById('script-catalog-compiled');
+            if (oldScript) oldScript.remove();
+            var s = document.createElement('script');
+            s.id = 'script-catalog-compiled';
+            s.src = '/laesh-web-assets-uipv1a/js/catalog-compiled.js?v=' + Date.now();
+            s.onload = function() {
+                // Portal Médico: re-poblar grilla "20 Est.Med" con los datos frescos
+                if (typeof window.populateMandatoryGrid === 'function') window.populateMandatoryGrid();
+            };
+            document.head.appendChild(s);
+            console.info('[LAESH Notif] Catálogo compilado sincronizado en memoria (catalog-compiled.js)');
         }
-        if (!imgSrc || imgSrc.trim() === '') return;
 
-        var title = card.getAttribute('data-promo-title') || 'Promoción — Imagen Completa';
-        if (typeof window.openPromoModal === 'function') {
-            window.openPromoModal(imgSrc, title);
+        // Refrescar automáticamente la tabla de recepción o médicos (Hoy y Anteriores)
+        // Gap 4 (auditoría 2026-09-18): 'resultados_listos' es el nombre real del `tipo`
+        // en BD (commons/notifier.php) — cuando la notificación llega vía polling fallback
+        // (no WS en vivo), n.tipo trae ese valor, no 'resultado_disponible'. Sin esta rama,
+        // el badge/panel sí aparecía pero la tabla de resultados no se refrescaba sola.
+        if (data.event === 'nueva_orden' || data.event === 'orden_actualizada' || data.event === 'resultado_disponible' || data.event === 'resultados_listos') {
+            // FIX-SPASM (generalizado 2026-09-23): un refresh de tabla por WS en
+            // vivo (llega de la acción de OTRO usuario, no de esta pestaña) no debe
+            // robar el cursor/texto de un input activo — ni el form de Nueva Orden
+            // ni el motivo de cancelación inline (que vive DENTRO de la fila de la
+            // tabla misma). Antes esta protección solo cubría #form-orden en
+            // médico; recepción no tenía ninguna, y ninguno de los 2 cubría su
+            // propio input de motivo de cancelación (vive fuera de #form-orden).
+            // Ahora: si el foco activo está dentro de LA TABLA que se va a
+            // refrescar, o dentro del formulario de creación de orden del mismo
+            // portal, se difiere el refresh hasta que el usuario suelte el campo.
+            // 2026-09-25 (gap reportado por el usuario: "a veces muestra el
+            // registro único y a veces varios"): tabla.id → id del campo de
+            // búsqueda que la filtra. htmx.trigger(tabla, 'refresh') dispara
+            // el hx-get BASE de la tabla — SIN el parámetro de filtro, porque
+            // ese hx-get vive en la TABLA, no en el input (el que sí incluye
+            // el valor vía su propio hx-get). Si llega OTRA notificación
+            // mientras el usuario tiene un filtro activo (por haber llegado
+            // desde una notificación o desde la lupita), este refresh
+            // automático deshacía el filtro sin que el usuario hiciera nada
+            // — mostraba todos los registros de golpe. Ahora, si el campo de
+            // búsqueda asociado tiene un valor, el refresh se dispara EN EL
+            // INPUT (mismo "search" que ya usa filtrarBusquedaPrimero) para
+            // que la petición SIGA incluyendo el filtro — datos al día sin
+            // perder lo que el usuario estaba viendo.
+            var TABLA_A_BUSCADOR = {
+                'tabla-recepcion':           'input-buscar-orden-rc',
+                'tabla-recepcion-anteriores':'input-buscar-orden-anteriores-rc',
+                'tabla-medico':              'input-buscar-orden-hoy-md',
+                'tabla-historial-completo':  'input-buscar-orden-anteriores-md'
+            };
+
+            var refreshDeferrable = function(tabla, formOrdenId) {
+                if (!tabla) return;
+                var activeEl = document.activeElement;
+                var formOrden = formOrdenId ? document.getElementById(formOrdenId) : null;
+                var userIsTyping = activeEl &&
+                    (activeEl.tagName === 'INPUT' || activeEl.tagName === 'TEXTAREA') &&
+                    (tabla.contains(activeEl) || (formOrden && formOrden.contains(activeEl)));
+
+                var doRefresh = function() {
+                    var searchId = TABLA_A_BUSCADOR[tabla.id];
+                    var searchInput = searchId ? document.getElementById(searchId) : null;
+                    if (searchInput && searchInput.value.trim() !== '') {
+                        searchInput.dispatchEvent(new Event('search', { bubbles: true }));
+                        return;
+                    }
+                    if (typeof htmx !== 'undefined') {
+                        htmx.trigger(tabla, 'refresh');
+                    } else {
+                        var btnRefresh = document.getElementById('btn-refrescar-tabla');
+                        if (btnRefresh) btnRefresh.click();
+                    }
+                };
+
+                if (userIsTyping) {
+                    if (!activeEl._hasPendingRefresh) {
+                        activeEl._hasPendingRefresh = true;
+                        var _onBlur = function() {
+                            activeEl._hasPendingRefresh = false;
+                            activeEl.removeEventListener('blur', _onBlur);
+                            doRefresh();
+                        };
+                        activeEl.addEventListener('blur', _onBlur);
+                    }
+                } else {
+                    doRefresh();
+                }
+            };
+
+            refreshDeferrable(document.getElementById('tabla-recepcion'), null);
+            refreshDeferrable(document.getElementById('tabla-recepcion-anteriores'), null);
+            refreshDeferrable(document.getElementById('tabla-medico'), 'form-orden');
+            refreshDeferrable(document.getElementById('tabla-historial-completo'), 'form-orden');
         }
+
+        // Feedback auditivo (solo si ya existió interacción de usuario) —
+        // catalogo_actualizado no suena, mismo criterio que el badge arriba.
+        if (!isCatalogoEvent && !isMedicoPortal) playChime();
     }
 
-    document.addEventListener('click', handlePromoCardInteraction);
+    function playChime() {
+        if (!hasUserGesture || !sharedAudioCtx) return;
+        try {
+            if (sharedAudioCtx.state === 'suspended') {
+                var p = sharedAudioCtx.resume();
+                if (p && typeof p.then === 'function') {
+                    p.then(function() { triggerTone(sharedAudioCtx); }).catch(function() {});
+                }
+            } else {
+                triggerTone(sharedAudioCtx);
+            }
+        } catch (e) {}
+    }
 
-    // Cierre al presionar la tecla Escape en cualquier dispositivo con teclado
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' || e.keyCode === 27) {
-            window.closePromoModal();
+    function triggerTone(audioCtx) {
+        try {
+            var osc = audioCtx.createOscillator();
+            var gain = audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(587.33, audioCtx.currentTime);
+            gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.15);
+        } catch (e) {}
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        pollNotifications();
+        initWebSocket();
+
+        // 2026-09-25 (corrección reportada por el usuario, dos síntomas del
+        // mismo gap): antes, CUALQUIER clic en la campana superior
+        // (#bell-wrap-notif) o en el toggle "<" del panel
+        // (#sidebar-right-toggle) marcaba TODAS las notificaciones como
+        // leídas de inmediato (resetNotifBadges) — sin abrir ni mostrar el
+        // panel en ningún momento. Por eso la campana superior "no hacía
+        // nada visible" (no llevaba al panel) mientras que cualquier
+        // interacción con el panel (incluido solo colapsarlo/expandirlo)
+        // marcaba todo leído sin que el usuario lo pidiera. Ahora la campana
+        // SOLO abre/muestra el panel — desktop: expande el rail derecho vía
+        // sidebar-rail.js (window.laeshSidebarRail.setRightExpanded); móvil:
+        // scroll hacia #sidebar-right, igual que ya hacía #bell-wrap-mob
+        // (app.js) — y el marcado de leído queda exclusivamente a cargo del
+        // clic individual en cada notificación (ya implementado en el
+        // listener de cada .notif-item-clickable, más abajo en este mismo
+        // archivo). #sidebar-right-toggle conserva su propio manejador de
+        // expandir/colapsar en sidebar-rail.js — aquí solo se le quita el
+        // marcado-leído-automático que tenía de más.
+        function abrirPanelNotificaciones() {
+            var sidebarRight = document.getElementById('sidebar-right') || document.querySelector('.sidebar-right');
+            if (!sidebarRight) return;
+            if (window.laeshSidebarRail && typeof window.laeshSidebarRail.setRightExpanded === 'function') {
+                window.laeshSidebarRail.setRightExpanded(true);
+            }
+            sidebarRight.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        var bellTop = document.getElementById('bell-wrap-notif');
+        if (bellTop) {
+            bellTop.addEventListener('click', abrirPanelNotificaciones);
+            bellTop.addEventListener('touchend', function(e) {
+                if (e.cancelable) e.preventDefault();
+                abrirPanelNotificaciones();
+            });
         }
     });
+})();
 
-    var promoModal = document.getElementById('modal-img-promo');
-    if (promoModal) {
-        var closeBtn = promoModal.querySelector('.close-modal');
-        if (closeBtn) {
-            closeBtn.addEventListener('click', window.closePromoModal);
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `navegarYResaltarOrden`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 12:13 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ws-client.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L439-704)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+                if (inpAntRc) {
+                    inpAntRc.value = snap.textoAnt;
+                    inpAntRc.dispatchEvent(new Event('search', { bubbles: true }));
+                    inpAntRc.dispatchEvent(new Event('keyup', { bubbles: true }));
+                }
+            }
         }
-        promoModal.addEventListener('click', function(e) {
-            if (e.target === promoModal) {
+    }
+
+    // ── Navegar a la pestaña correcta y resaltar un renglón por folio ──────────
+    function navegarYResaltarOrden(folioTarget, esHoy, opciones) {
+        opciones = opciones || {};
+        var cleanTarget = String(folioTarget || '').trim();
+        if (!cleanTarget) return;
+
+        // 1. Ocultar o colapsar el panel lateral de notificaciones (si está abierto)
+        var sidebarRight = document.querySelector('.sidebar-right, #sidebar-right');
+        if (sidebarRight) {
+            sidebarRight.classList.remove('active', 'show', 'open');
+        }
+
+        // 2. Identificar portal
+        var isMedicoPortal   = !!document.getElementById('tabla-medico') || !!document.getElementById('panel-nueva-orden');
+        var isRecepcionAdmin = !!document.getElementById('tabla-recepcion') || !!document.getElementById('panel-ordenes');
+
+        // Capturar instantánea de la búsqueda en curso si el operador estaba trabajando en una
+        capturarEstadoBusquedaPrevia(isMedicoPortal);
+
+        function resolverDestino(paraHoy) {
+            if (isMedicoPortal) {
+                return paraHoy ? {
+                    panelFn: function() {
+                        if (typeof window.cambiarTabMedico === 'function') window.cambiarTabMedico('panel-nueva-orden');
+                        if (typeof window.switchSubTab === 'function') window.switchSubTab('ordenes-hoy');
+                    },
+                    tableId: 'tabla-medico',
+                    searchId: 'input-buscar-orden-hoy-md'
+                } : {
+                    panelFn: function() {
+                        if (typeof window.cambiarTabMedico === 'function') window.cambiarTabMedico('panel-historial-medico');
+                    },
+                    tableId: 'tabla-historial-completo',
+                    searchId: 'input-buscar-orden-anteriores-md'
+                };
+            } else if (isRecepcionAdmin) {
+                return paraHoy ? {
+                    panelFn: function() {
+                        if (typeof window.cambiarTabAdmin === 'function') window.cambiarTabAdmin('panel-ordenes');
+                    },
+                    tableId: 'tabla-recepcion',
+                    searchId: 'input-buscar-orden-rc'
+                } : {
+                    panelFn: function() {
+                        if (typeof window.cambiarTabAdmin === 'function') window.cambiarTabAdmin('panel-ordenes-anteriores');
+                    },
+                    tableId: 'tabla-recepcion-anteriores',
+                    searchId: 'input-buscar-orden-anteriores-rc'
+                };
+            }
+            return null;
+        }
+
+        var destinoInicial = resolverDestino(esHoy);
+        if (!destinoInicial) return;
+
+        // 2026-09-27 (pedido explícito del usuario): NO abrir de forma forzada
+        // la Solicitud Digital ni el PDF de Resultados en overlay para no interrumpir
+        // ni ocultar la pantalla de trabajo del operador. En su lugar, un aviso no intrusivo.
+        var onNoEncontrado = opciones.onNoEncontrado || function() {
+            console.log('[LAESH Notif] Solicitud #' + cleanTarget + ' no localizada en grilla.');
+        };
+
+        // 3-4. Intenta localizar y resaltar el renglón en un destino dado
+        // (Hoy o Anteriores). Si agota los reintentos sin encontrarlo Y aún
+        // no se probó la pestaña opuesta, cambia a esa pestaña y reintenta
+        // ahí antes de rendirse al fallback — ver nota de "corrección de
+        // raíz" arriba de resolverDestino().
+        function intentarEn(destino, yaProboOpuesta) {
+            destino.panelFn();
+
+            if (opciones.filtrarBusquedaPrimero && destino.searchId) {
+                var searchInput = document.getElementById(destino.searchId);
+                if (searchInput) {
+                    searchInput.value = cleanTarget;
+                    // Trigger "search" nombrado explícito en el hx-trigger de estos
+                    // inputs (aparte de "keyup changed delay:250ms") — dispara la
+                    // búsqueda HTMX de inmediato, sin depender de comparar contra un
+                    // valor anterior ni esperar el delay de 250ms del keyup.
+                    searchInput.dispatchEvent(new Event('search', { bubbles: true }));
+                    // 2026-09-25 (gap reportado por el usuario): fijar .value
+                    // directamente y disparar solo "search" deja el rastreo
+                    // interno de HTMX para el modificador "changed" (del
+                    // trigger "keyup changed") desincronizado — HTMX solo
+                    // actualiza ese último valor conocido al procesar un
+                    // "keyup" real, nunca al disparar "search". Si luego el
+                    // usuario borra el campo a mano, el valor final ("") suele
+                    // coincidir con ese último valor desactualizado (vacío,
+                    // de antes de este filtro) y HTMX concluye "no cambió" —
+                    // omite la petición y la grilla se queda con el filtro
+                    // aplicado hasta que se recarga toda la página. Se
+                    // sincroniza disparando también un "keyup" real — HTMX lo
+                    // usa para registrar el valor actual como conocido, sin
+                    // el cual cualquier edición manual posterior del usuario
+                    // vuelve a comparar contra un estado obsoleto.
+                    searchInput.dispatchEvent(new Event('keyup', { bubbles: true }));
+                }
+            }
+
+            // Busca el renglón dentro de `table` y, si lo encuentra, le aplica
+            // el resaltado. Devuelve el <tr> encontrado o null — extraído a su
+            // propia función para poder reutilizarlo también desde el listener
+            // de re-sincronización de abajo (ver "GAP: swap redundante").
+            function buscarYResaltarEn(table) {
+                var foundRow = null;
+
+                // Prioridad 1: selector data-folio en tr
+                foundRow = table.querySelector('tbody tr[data-folio="' + cleanTarget + '"]');
+
+                // Prioridad 2: selector de enlace de folio data-id
+                if (!foundRow) {
+                    var linkFolio = table.querySelector('tbody td.td-folio-hist a[data-id="' + cleanTarget + '"], tbody a.lnk-folio[data-id="' + cleanTarget + '"]');
+                    if (linkFolio) {
+                        foundRow = linkFolio.closest('tr');
+                    }
+                }
+
+                // Prioridad 3: coincidencia exacta en celda td.td-folio-hist
+                if (!foundRow) {
+                    var tdFolios = table.querySelectorAll('tbody td.td-folio-hist');
+                    for (var i = 0; i < tdFolios.length; i++) {
+                        var txt = (tdFolios[i].textContent || '').replace(/[^\w-]/g, '').trim();
+                        if (txt === cleanTarget) {
+                            foundRow = tdFolios[i].closest('tr');
+                            break;
+                        }
+                    }
+                }
+
+                // Prioridad 4: selector id si es numérico (anclado con sufijo exacto para evitar falsos positivos con folios de pocos dígitos ej: "1")
+                if (!foundRow && /^\d+$/.test(cleanTarget)) {
+                    foundRow = table.querySelector('tbody tr[id="row-orden-' + cleanTarget + '"], tbody tr[id="row-orden-ant-' + cleanTarget + '"], tbody tr[id="orden-row-' + cleanTarget + '"], tbody tr[id="orden-row-ant-' + cleanTarget + '"], tbody tr[id$="-' + cleanTarget + '"]');
+                }
+
+                if (foundRow) {
+                    foundRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    try { foundRow.focus(); } catch (e) {}
+                    foundRow.classList.remove('row-notif-highlight');
+                    void foundRow.offsetWidth; // Forzar reflow CSS para reiniciar la animación
+                    foundRow.classList.add('row-notif-highlight');
+                    setTimeout(function() {
+                        foundRow.classList.remove('row-notif-highlight');
+                    }, 3500);
+                }
+                return foundRow;
+            }
+
+            // GAP (reportado por el usuario, 2026-09-25 — diagnosticado con
+            // instrumentación real, no por inferencia): cualquier refresh
+            // posterior de esta tabla (el "keyup" sintético de arriba con su
+            // propio delay:250ms, o una notificación concurrente real vía WS
+            // o polling) hace outerHTML swap de la MISMA tabla poco después
+            // de que este código ya la encontró y resaltó. La causa raíz NO
+            // era solo "el swap reemplaza el <tr>" — el <tr> con el MISMO id
+            // (ej. "orden-row-ant-102") sí persiste entre swaps, pero HTMX
+            // tiene una fase de "settle" (htmx:afterSettle, ~20ms después del
+            // swap por defecto) donde, para elementos que casa por id entre
+            // el HTML viejo y el nuevo, RESTAURA el atributo "class" al valor
+            // del HTML recién llegado del servidor (attributesToSettle
+            // incluye "class" — mecanismo de HTMX pensado para permitir
+            // transiciones CSS, no para preservar clases añadidas por JS).
+            // Aplicar la clase en "htmx:afterSwap" (como se hacía antes)
+            // pierde la carrera: HTMX la sobrescribe ~20ms después durante su
+            // propio settle. La corrección es aplicar el resaltado en
+            // "htmx:afterSettle" — que se dispara DESPUÉS de que HTMX termina
+            // de restaurar esos atributos, así que ya no hay nada que lo
+            // vuelva a pisar. Se escucha dentro de una ventana breve tras
+            // resaltar y NO se desengancha tras el primer resync — dentro de
+            // la ventana pueden llegar varios refreshes concurrentes (el
+            // "keyup" propio Y una notificación real casi al mismo tiempo) y
+            // cada uno debe volver a resaltar el renglón en el DOM nuevo.
+            var resyncWindowMs = 4500;
+            var resyncDeadline = 0;
+            function onAfterSettle(evt) {
+                if (!evt || !evt.target || evt.target.id !== destino.tableId) return;
+                if (Date.now() > resyncDeadline) {
+                    document.removeEventListener('htmx:afterSettle', onAfterSettle);
+                    return;
+                }
+                var freshTable = document.getElementById(destino.tableId);
+                if (freshTable) buscarYResaltarEn(freshTable);
+            }
+
+            var attempts = 0;
+            var maxAttempts = 6;
+            var highlightRow = function() {
+                attempts++;
+                var table = document.getElementById(destino.tableId);
+                if (!table && attempts < maxAttempts) {
+                    setTimeout(highlightRow, 150);
+                    return;
+                }
+                if (!table) {
+                    agotado();
+                    return;
+                }
+
+                var foundRow = buscarYResaltarEn(table);
+
+                if (foundRow) {
+                    mostrarBarraRetorno(cleanTarget);
+                    if (opciones.filtrarBusquedaPrimero) {
+                        resyncDeadline = Date.now() + resyncWindowMs;
+                        document.addEventListener('htmx:afterSettle', onAfterSettle);
+                        // Limpieza de respaldo — si nunca llega otro swap en
+                        // esta tabla tras el deadline, el listener igual se
+                        // desengancha (evita acumular listeners indefinidos).
+                        setTimeout(function() {
+                            document.removeEventListener('htmx:afterSettle', onAfterSettle);
+                        }, resyncWindowMs + 200);
+                    }
+                } else if (attempts < maxAttempts) {
+                    // Reintentar si la tabla aún se está refrescando/renderizando por HTMX
+                    setTimeout(highlightRow, 200 * attempts);
+                } else {
+                    agotado();
+                }
+            };
+
+            function agotado() {
+                if (!yaProboOpuesta) {
+                    var destinoOpuesto = resolverDestino(!esHoy);
+                    if (destinoOpuesto) {
+                        intentarEn(destinoOpuesto, true);
+                        return;
+                    }
+                }
+                onNoEncontrado();
+            }
+
+            // Ejecutar de inmediato y con reintentos escalonados para absorber
+            // asincronía de pestañas y HTMX. Con filtro proactivo, se da un poco
+            // más de margen inicial (300ms vs 50ms) porque ahora hay una petición
+            // HTMX real de por medio antes del primer intento útil.
+            setTimeout(highlightRow, opciones.filtrarBusquedaPrimero ? 300 : 50);
+        }
+
+        intentarEn(destinoInicial, false);
+    }
+    window.laeshNavegarYResaltarOrden = navegarYResaltarOrden;
+
+    function handleWsEvent(data) {
+        if (!data || !data.event) return;
+
+        // Regla de retención: Notificaciones con antigüedad > 30 días no se procesan ni muestran
+        if (data.creado_en) {
+            var notifTime = new Date(data.creado_en).getTime();
+            if (!isNaN(notifTime) && (Date.now() - notifTime) > (30 * 24 * 60 * 60 * 1000)) {
+                return;
+            }
+        }
+
+        /* Dedup path WS: el path polling ya añade a seenNotifIds antes de llamar handleWsEvent.
+           El path WS llama handleWsEvent directo (ws.onmessage) sin pasar por ese check,
+           así que se duplicaría si la misma notificación ya llegó por polling.
+           Swoole inyecta data.id por conexión (A5 auditoría 2026-09-20). */
 ```
 
 </details>
-
----
-
-## Agent Response
-
-### Thinking
-
-`handlePromoCardInteraction` in `website.js` appears to manage interactions for promotional cards, targeting elements with the `.catalog-card` class and those using the `[data-promo-img]` attribute. The PHP code in `calidad.php` iterates through `$calidadCards`, displaying images and titles within a `carousel-card` structure. Comparing these suggests a potential connection between promotional elements and a carousel-style display.
-
-
-Promotional cards in vertical mobile view utilize a single-column grid, ensuring each card occupies 100% of the screen width. The `aspect-ratio` maintains image proportions, guaranteeing a complete display of card content without cropping. This layout automatically calculates the height of the image, resizing it proportionally based on the defined aspect ratio.
-
-
-The promotional cards' responsiveness is guaranteed by the `aspect-ratio` property, ensuring proper scaling across various devices. On vertical mobiles, the modal opens upon card interaction for detailed viewing. Vertical tablets utilize a two-column grid, while horizontal tablets/desktops display a three-column layout.
-
-
-The CSS defines a responsive layout for promotional cards, adapting to different screen sizes with a grid system and image height adjustments. A key concern is potential image cropping on mobile devices due to the `object-fit: cover` property and the specified image height. This is particularly relevant for images containing important content near the bottom, such as signatures or base details of a trophy. The calculation reveals that a significant portion of the image's bottom might be cropped in mobile view.
-
-
-The current CSS utilizes fixed heights that lead to image cropping, especially on mobile. The solution involves applying `aspect-ratio` to the image containers. Setting `aspect-ratio` to the intended image dimensions (`800 / 580`) ensures responsive scaling across devices. To address this issue, images need to be prepared with appropriate margins to prevent content from touching the edges and getting cut off.
-
-
-The initial CSS, with fixed heights, was likely suitable for the original images (hospital rooms), where cropping was acceptable. This is NOT ideal for documents/awards containing text, as the fixed height would likely crop content on various screen sizes. Changing the height to `auto` and applying `aspect-ratio` is the correct approach for diploma/award cards to avoid critical information being cropped. The change to `height: auto !important; aspect-ratio: 800 / 580 !important;` will be tested.
-
-
-The calculated card heights across different screen sizes (desktop, tablet, mobile) preserve the intended aspect ratio of 800:580. This eliminates image clipping and ensures the card scales smoothly without requiring complex media query adjustments. Applying `aspect-ratio` guarantees that image content, including signatures on awards, remains fully visible across all devices.
-
-
-
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 7.828340809s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-## User Request
-
-a diferencia de lo hecho para promosiones,q fue una sola version de la imagen fisica y css; para 3. La Solución para que Galardón sera versiones diferentes de imagenes y de css ?
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `gestion_web.php`
-**Language:** php
-
-**Open Files:**
-- `cms-upload.js`
-- `gestion_web.php`
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-The question clarifies whether "Galardón" and "Diploma" will require multiple image and CSS versions, unlike "promosiones" which used a single version. The implied need is likely for responsive design and different visual presentations based on the display context. Therefore, the hypothesis is different versions are needed.
-
-
-A single WebP image and a corresponding CSS rule (`aspect-ratio`, `width: 100%`, `height: auto`) will suffice for "Galardón" and "Diploma," just like "Promociones." This approach leverages the browser's ability to fluidly scale a single image across different screen sizes. The chosen image dimensions (800x580 px) and WebP format provide an optimized balance of file size and visual quality. The CMS will manage only one file per card.
-
-
-
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.121602214s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-## User Request
-
-realiza todos los cambios y ajustes de forma precisa, sin regresaiones, o impactos negativos
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `gestion_web.php`
-**Language:** php
-
-**Open Files:**
-- `cms-upload.js`
-- `gestion_web.php`
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Preparing WebP image files for "Galardón" and "Diploma" is the initial step, requiring sourcing from the specified directory. Potential image files will be located to ensure correct format conversion.
-
-
-Comparing image variants to determine the best source for generating 800x580 WebP files, considering aspect ratio and potential padding. Specified file destinations identified to ensure correct storage of output WebP files.
-
-CSS will be adjusted to guarantee consistent image display within the defined dimensions, including `aspect-ratio` and `object-fit: cover` to prevent unintended cropping. Investigating media queries for conflicting height overrides and potential enhancements to the `carousel-card`'s interaction, such as a lightbox or modal, is the next focus.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.816989812s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 4:14 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 4:15 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 4:15 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 4:15 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 4:15 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 4:15 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-Determining the scaling factor needed to fit the image `galardon b.jpg` (1024x863 px) within a target size of 800x580 px, focusing on height first. The scaling factor is calculated as 580/863, resulting in a scale of approximately 0.67207. Applying this scaling factor, the new width becomes approximately 688 px, and the new height is 580 px.
-
-The image dimensions after scaling will be 688x580 px and is centered horizontally within the 800x580 px canvas. Padding is calculated as (800 - 688) / 2 = 56 px on both the left and right sides, with no top or bottom padding.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 1.136847304s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 4:15 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 4:15 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-All edge colors share soft sky blue tones. It's potentially viable to generate a background canvas matching or blending with this sky blue, or alternatively, feather/blur the border to integrate it more naturally.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.061688104s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 4:16 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-Assessing the visual characteristics of the input image is necessary. Generating test images involves resizing a specific input file to defined dimensions and centering it on a black canvas to test edge blending. Examining the input file's edges shows they are almost pure black, suggesting seamless blending should be achievable on a black background.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.044568608s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 4:16 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-Examining image variations to understand edge treatment options, specifically blur versus solid rendering, and considering the edge gradient. The hypothesis emerged to replicate the edge pixels for seamless background extension. This involves mirroring the leftmost and rightmost columns, blurring the seam to achieve a smooth gradient at the borders for a zero-seam effect.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.077331919s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 4:17 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 4:17 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 4:17 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-Verifying image sizes confirms they are within acceptable limits. The next step is examining a specific image for potential seam issues at the left and right border transition, focusing pixel inspection around defined `offset_x` values. This border inspection will focus on a black image.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.002234814s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 4:17 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-Examining pixel values reveals a near-black transition in `galardon`. Hypothesis: a 3px horizontal feather/blend applied to the edges, combined with pixel replication, could create a seamless transition to black. Further testing shows edge replication plus smooth blending yields a completely seamless image for both `galardon` and `diploma`. Now the destination paths require examination.
-
-
-
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.065495229s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 4:17 pm
 
 ---
 
@@ -17172,7 +12277,7 @@ Examining pixel values reveals a near-black transition in `galardon`. Hypothesis
 ### Actions
 
 **Tool:** `view_file`
-**File:** `landing.css`
+**File:** `ws-client.js`
 
 <details>
 <summary>Metadata</summary>
@@ -17183,97 +12288,354 @@ Examining pixel values reveals a near-black transition in `galardon`. Hypothesis
 ---
 
 <details>
-<summary>File: `Unknown file` (L1919-2004)</summary>
+<summary>File: `Unknown file` (L339-449)</summary>
 
 **Path:** `Unknown file`
 
 ```
-    flex-wrap: wrap; /* R-MOB: permite 2 col en tablet sin romper 3 col en desktop */
-    gap: 2rem;
-    padding: 1rem 0;
-    margin-top: 0;
-    margin-bottom: 2rem;
-    width: 100%;
-    align-items: stretch;
-    box-sizing: border-box;
-}
+            '</div>' +
+            '<div style="display: flex; align-items: center; gap: 6px;">' +
+                '<button type="button" id="btn-volver-busqueda-notif" style="padding: 4px 12px; font-size: 0.8rem; font-weight: 600; color: #ffffff; background: #0052b7; border: 1px solid #004394; border-radius: 5px; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.08);">' +
+                    '<span>⬅ Volver a mi búsqueda (' + escapeHtml(resumenTexto) + ')</span>' +
+                '</button>' +
+                '<button type="button" id="btn-cerrar-banner-notif" title="Descartar aviso" style="background: transparent; border: none; font-size: 1rem; color: #64748b; cursor: pointer; line-height: 1; padding: 2px 6px;">✕</button>' +
+            '</div>';
 
-.calidad-cards-grid .carousel-card {
-    flex: 0 0 calc((100% - 4rem) / 3);
-    width: calc((100% - 4rem) / 3);
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
-    background: #fff;
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
-    overflow: hidden;
-    margin-bottom: 2px;
-}
+        var targetCard = null;
+        if (snap.isMedico) {
+            targetCard = document.querySelector('#subtab-ordenes-hoy .card, #panel-historial-medico .card');
+        } else {
+            targetCard = document.querySelector('#panel-ordenes .card, #panel-ordenes-anteriores .card');
+        }
 
-.calidad-cards-grid .carousel-card img {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 100% !important;
-    height: 275px !important;
-    aspect-ratio: unset !important;
-    object-fit: cover !important;
-    object-position: center !important;
-    display: block !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    border: 0 !important;
-    border-radius: 12px 12px 0 0 !important;
-    box-sizing: border-box !important;
-}
+        if (targetCard && targetCard.parentNode) {
+            targetCard.parentNode.insertBefore(bar, targetCard);
+        } else {
+            var header = document.querySelector('.cms-panel-header');
+            if (header && header.parentNode) {
+                header.parentNode.insertBefore(bar, header.nextSibling);
+            }
+        }
 
-@media (min-width: 1920px) {
-    .calidad-cards-grid .carousel-card {
-        flex: 0 0 calc((100% - 4rem) / 3);
+        var btnVolver = document.getElementById('btn-volver-busqueda-notif');
+        if (btnVolver) {
+            btnVolver.addEventListener('click', function(e) {
+                e.preventDefault();
+                restaurarEstadoBusquedaPrevia();
+            });
+        }
+        var btnCerrar = document.getElementById('btn-cerrar-banner-notif');
+        if (btnCerrar) {
+            btnCerrar.addEventListener('click', function(e) {
+                e.preventDefault();
+                _busquedaPreviaSnapshot = null;
+                bar.remove();
+            });
+        }
     }
-    .calidad-cards-grid .carousel-card img {
-        height: 285px !important;
-    }
-}
 
-/* R-MOB: tablet/paisaje → 2 columnas (481px–1024px) */
-@media (max-width: 1024px) {
-    .calidad-cards-grid {
-        gap: 1rem;
-    }
-    .calidad-cards-grid .carousel-card {
-        flex: 0 0 calc(50% - 0.5rem);
-        width: calc(50% - 0.5rem);
-    }
-    .calidad-cards-grid .carousel-card img {
-        height: 230px !important;
-        /* object-position top center: la base tiene center !important → cover crops center
-           → top de imágenes de calidad se pierde; top center ancla el sujeto visible */
-        object-position: top center !important;
-    }
-}
+    function restaurarEstadoBusquedaPrevia() {
+        if (!_busquedaPreviaSnapshot) return;
+        var snap = _busquedaPreviaSnapshot;
+        _busquedaPreviaSnapshot = null;
 
-/* R-MOB: móvil retrato estrecho → 1 columna (≤480px) */
-@media (max-width: 480px) {
-    .calidad-cards-grid .carousel-card {
-        flex: 0 0 100%;
-        width: 100%;
+        var bar = document.getElementById('laesh-notif-return-bar');
+        if (bar) bar.remove();
+
+        var isMed = snap.isMedico;
+        if (snap.tabActiva === 'hoy') {
+            if (isMed) {
+                if (typeof window.cambiarTabMedico === 'function') window.cambiarTabMedico('panel-nueva-orden');
+                if (typeof window.switchSubTab === 'function') window.switchSubTab('ordenes-hoy');
+                var inpHoy = document.getElementById('input-buscar-orden-hoy-md');
+                if (inpHoy) {
+                    inpHoy.value = snap.textoHoy;
+                    inpHoy.dispatchEvent(new Event('search', { bubbles: true }));
+                    inpHoy.dispatchEvent(new Event('keyup', { bubbles: true }));
+                }
+            } else {
+                if (typeof window.cambiarTabAdmin === 'function') window.cambiarTabAdmin('panel-ordenes');
+                var inpHoyRc = document.getElementById('input-buscar-orden-rc');
+                if (inpHoyRc) {
+                    inpHoyRc.value = snap.textoHoy;
+                    inpHoyRc.dispatchEvent(new Event('search', { bubbles: true }));
+                    inpHoyRc.dispatchEvent(new Event('keyup', { bubbles: true }));
+                }
+            }
+        } else {
+            if (isMed) {
+                if (typeof window.cambiarTabMedico === 'function') window.cambiarTabMedico('panel-historial-medico');
+                var selMed = document.getElementById('select-periodo-anteriores-md');
+                var iniMed = document.getElementById('fecha-inicio-anteriores-md');
+                var finMed = document.getElementById('fecha-fin-anteriores-md');
+                var ranMed = document.getElementById('rango-fechas-anteriores-md');
+                var inpAntMed = document.getElementById('input-buscar-orden-anteriores-md');
+
+                if (selMed) selMed.value = snap.periodoVal;
+                if (iniMed) iniMed.value = snap.iniVal;
+                if (finMed) finMed.value = snap.finVal;
+                if (ranMed) ranMed.style.display = snap.rangoVisible ? 'inline-flex' : 'none';
+
+                if (inpAntMed) {
+                    inpAntMed.value = snap.textoAnt;
+                    inpAntMed.dispatchEvent(new Event('search', { bubbles: true }));
+                    inpAntMed.dispatchEvent(new Event('keyup', { bubbles: true }));
+                }
+            } else {
+                if (typeof window.cambiarTabAdmin === 'function') window.cambiarTabAdmin('panel-ordenes-anteriores');
+                var selRc = document.getElementById('select-periodo-anteriores-rc');
+                var iniRc = document.getElementById('fecha-inicio-anteriores-rc');
+                var finRc = document.getElementById('fecha-fin-anteriores-rc');
+                var ranRc = document.getElementById('rango-fechas-anteriores-rc');
+                var inpAntRc = document.getElementById('input-buscar-orden-anteriores-rc');
+
+                if (selRc) selRc.value = snap.periodoVal;
+                if (iniRc) iniRc.value = snap.iniVal;
+                if (finRc) finRc.value = snap.finVal;
+                if (ranRc) ranRc.style.display = snap.rangoVisible ? 'inline-flex' : 'none';
+
+                if (inpAntRc) {
+                    inpAntRc.value = snap.textoAnt;
+                    inpAntRc.dispatchEvent(new Event('search', { bubbles: true }));
+                    inpAntRc.dispatchEvent(new Event('keyup', { bubbles: true }));
+                }
+            }
+        }
     }
-    .calidad-cards-grid .carousel-card img {
-        height: 210px !important;
-        object-position: top center !important;
+
+    // ── Navegar a la pestaña correcta y resaltar un renglón por folio ──────────
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ws-client.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L269-344)</summary>
+
+**Path:** `Unknown file`
+
+```
+        var fechaIniId         = isMedicoPortal ? 'fecha-inicio-anteriores-md'      : 'fecha-inicio-anteriores-rc';
+        var fechaFinId         = isMedicoPortal ? 'fecha-fin-anteriores-md'         : 'fecha-fin-anteriores-rc';
+        var rangoContainerId   = isMedicoPortal ? 'rango-fechas-anteriores-md'      : 'rango-fechas-anteriores-rc';
+
+        var inputAnt    = document.getElementById(searchAnterioresId);
+        var inputHoy    = document.getElementById(searchHoyId);
+        var selPeriodo  = document.getElementById(selectPeriodoId);
+        var inputIni    = document.getElementById(fechaIniId);
+        var inputFin    = document.getElementById(fechaFinId);
+        var rangoElem   = document.getElementById(rangoContainerId);
+
+        var textoAnt   = inputAnt ? (inputAnt.value || '').trim() : '';
+        var textoHoy   = inputHoy ? (inputHoy.value || '').trim() : '';
+        var periodoVal = selPeriodo ? selPeriodo.value : '90d';
+        var iniVal     = inputIni ? (inputIni.value || '') : '';
+        var finVal     = inputFin ? (inputFin.value || '') : '';
+
+        var tieneBusquedaActiva = (textoAnt !== '' || textoHoy !== '' || periodoVal === 'fecha' || iniVal !== '' || finVal !== '' || (periodoVal !== '90d' && periodoVal !== ''));
+        if (!tieneBusquedaActiva) return;
+
+        var tabActiva = 'anteriores';
+        if (isMedicoPortal) {
+            var subHoy = document.getElementById('subtab-ordenes-hoy');
+            if (subHoy && subHoy.classList.contains('active')) tabActiva = 'hoy';
+        } else {
+            var panelHoy = document.getElementById('panel-ordenes');
+            if (panelHoy && !panelHoy.classList.contains('d-none')) tabActiva = 'hoy';
+        }
+
+        _busquedaPreviaSnapshot = {
+            isMedico: isMedicoPortal,
+            tabActiva: tabActiva,
+            textoAnt: textoAnt,
+            textoHoy: textoHoy,
+            periodoVal: periodoVal,
+            iniVal: iniVal,
+            finVal: finVal,
+            rangoVisible: rangoElem ? (rangoElem.style.display !== 'none') : false
+        };
     }
-}
 
+    function mostrarBarraRetorno(cleanTarget) {
+        if (!_busquedaPreviaSnapshot) return;
 
+        var snap = _busquedaPreviaSnapshot;
+        var resumen = [];
+        if (snap.tabActiva === 'hoy') {
+            if (snap.textoHoy) resumen.push('"' + snap.textoHoy + '"');
+            resumen.push('Órdenes de Hoy');
+        } else {
+            if (snap.textoAnt) resumen.push('"' + snap.textoAnt + '"');
+            if (snap.periodoVal === 'fecha' && (snap.iniVal || snap.finVal)) {
+                resumen.push((snap.iniVal || '') + ' al ' + (snap.finVal || ''));
+            } else if (snap.periodoVal && snap.periodoVal !== '90d') {
+                resumen.push(snap.periodoVal);
+            }
+        }
+        var resumenTexto = resumen.length > 0 ? resumen.join(' · ') : 'Búsqueda en curso';
 
-.text-center-block {
-    text-align: center;
-    max-width: 900px;
-    margin: 0 auto;
-}
+        var existingBar = document.getElementById('laesh-notif-return-bar');
+        if (existingBar) existingBar.remove();
 
+        var bar = document.createElement('div');
+        bar.id = 'laesh-notif-return-bar';
+        bar.style.cssText = 'background: #eff6ff; border: 1px solid #bfdbfe; border-left: 4px solid #0052b7; border-radius: 6px; padding: 7px 12px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; gap: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);';
+
+        bar.innerHTML = 
+            '<div style="font-size: 0.82rem; color: #1e3a8a; display: flex; align-items: center; gap: 6px;">' +
+                '<span style="font-size: 0.95rem;">🔔</span>' +
+                '<span>Revisando orden de notificación: <strong style="color: #0052b7;">#' + escapeHtml(cleanTarget) + '</strong></span>' +
+            '</div>' +
+            '<div style="display: flex; align-items: center; gap: 6px;">' +
+                '<button type="button" id="btn-volver-busqueda-notif" style="padding: 4px 12px; font-size: 0.8rem; font-weight: 600; color: #ffffff; background: #0052b7; border: 1px solid #004394; border-radius: 5px; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.08);">' +
+                    '<span>⬅ Volver a mi búsqueda (' + escapeHtml(resumenTexto) + ')</span>' +
+                '</button>' +
+                '<button type="button" id="btn-cerrar-banner-notif" title="Descartar aviso" style="background: transparent; border: none; font-size: 1rem; color: #64748b; cursor: pointer; line-height: 1; padding: 2px 6px;">✕</button>' +
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 12:13 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 12:13 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ws-client.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L249-308)</summary>
+
+**Path:** `Unknown file`
+
+```
+        if (isNaN(notifDate.getTime())) return true;
+        var today = new Date();
+        return notifDate.getFullYear() === today.getFullYear() &&
+               notifDate.getMonth() === today.getMonth() &&
+               notifDate.getDate() === today.getDate();
+    }
+    // 2026-09-25: expuesto para que labadmin.js/medicos.js calculen "¿es de
+    // hoy?" con el mismo criterio exacto que ya usa el flujo de
+    // notificaciones — ver navegarYResaltarOrden más abajo.
+    window.laeshIsCreatedToday = isCreatedToday;
+
+    // ── Instantánea y Restauración de Búsqueda Previa (Flujo Poka-Yoke Notificaciones) ──
+    var _busquedaPreviaSnapshot = null;
+
+    function capturarEstadoBusquedaPrevia(isMedicoPortal) {
+        if (_busquedaPreviaSnapshot) return; // Si ya hay una activa sin restaurar, mantenerla
+
+        var searchAnterioresId = isMedicoPortal ? 'input-buscar-orden-anteriores-md' : 'input-buscar-orden-anteriores-rc';
+        var searchHoyId        = isMedicoPortal ? 'input-buscar-orden-hoy-md'        : 'input-buscar-orden-rc';
+        var selectPeriodoId    = isMedicoPortal ? 'select-periodo-anteriores-md'    : 'select-periodo-anteriores-rc';
+        var fechaIniId         = isMedicoPortal ? 'fecha-inicio-anteriores-md'      : 'fecha-inicio-anteriores-rc';
+        var fechaFinId         = isMedicoPortal ? 'fecha-fin-anteriores-md'         : 'fecha-fin-anteriores-rc';
+        var rangoContainerId   = isMedicoPortal ? 'rango-fechas-anteriores-md'      : 'rango-fechas-anteriores-rc';
+
+        var inputAnt    = document.getElementById(searchAnterioresId);
+        var inputHoy    = document.getElementById(searchHoyId);
+        var selPeriodo  = document.getElementById(selectPeriodoId);
+        var inputIni    = document.getElementById(fechaIniId);
+        var inputFin    = document.getElementById(fechaFinId);
+        var rangoElem   = document.getElementById(rangoContainerId);
+
+        var textoAnt   = inputAnt ? (inputAnt.value || '').trim() : '';
+        var textoHoy   = inputHoy ? (inputHoy.value || '').trim() : '';
+        var periodoVal = selPeriodo ? selPeriodo.value : '90d';
+        var iniVal     = inputIni ? (inputIni.value || '') : '';
+        var finVal     = inputFin ? (inputFin.value || '') : '';
+
+        var tieneBusquedaActiva = (textoAnt !== '' || textoHoy !== '' || periodoVal === 'fecha' || iniVal !== '' || finVal !== '' || (periodoVal !== '90d' && periodoVal !== ''));
+        if (!tieneBusquedaActiva) return;
+
+        var tabActiva = 'anteriores';
+        if (isMedicoPortal) {
+            var subHoy = document.getElementById('subtab-ordenes-hoy');
+            if (subHoy && subHoy.classList.contains('active')) tabActiva = 'hoy';
+        } else {
+            var panelHoy = document.getElementById('panel-ordenes');
+            if (panelHoy && !panelHoy.classList.contains('d-none')) tabActiva = 'hoy';
+        }
+
+        _busquedaPreviaSnapshot = {
+            isMedico: isMedicoPortal,
+            tabActiva: tabActiva,
+            textoAnt: textoAnt,
+            textoHoy: textoHoy,
+            periodoVal: periodoVal,
+            iniVal: iniVal,
+            finVal: finVal,
+            rangoVisible: rangoElem ? (rangoElem.style.display !== 'none') : false
+        };
+    }
 ```
 
 </details>
@@ -17284,13 +12646,7 @@ Examining pixel values reveals a near-black transition in `galardon`. Hypothesis
 
 ### Thinking
 
-The image style definitions in `landing.css` for `.calidad-cards-grid .carousel-card img` currently use `width: 100% !important`, `max-width: 100% !important`, `min-width: 100% !important`, and `height: 275px !important`. This might be causing rendering issues. Investigating the interaction of these properties is key to understanding image display behavior.
-
-
-The initial approach with fixed width and height combined with `!important` declarations creates potential rendering conflicts, potentially causing unexpected image behavior across different screen sizes. Switching to `width: 100%`, `max-width: 100%`, `min-width: 100%`, `height: auto`, and setting a fixed `aspect-ratio` with `object-fit: cover` should provide better control over image display while maintaining aspect ratio and responsiveness, by ensuring the image always fills its container while maintaining its proportions. The updated styles should override previous ones, but testing is needed to ensure correct behavior.
-
-
-Adjusting the existing CSS, ensuring `object-position: center`, `display: block`, removing margins, padding and borders, and adding `border-radius` and `box-sizing: border-box` will improve visual consistency and layout control. Applying `aspect-ratio: 800 / 580` ensures the image dimensions are respected, allowing the image to scale proportionally with the container.  Calculating the expected image heights for desktop, tablet, and mobile reveals the necessity of adjusting the height settings in the media queries.
+The notification click activates a specific navigation and highlighting routine. The provided date range and search term (`Perez`) are the operator's current filters. The order creation date (2026-09-20) falls outside of the operator's specified date range (2026-06-01 to 2026-06-15). Therefore, the system should determine if this outside-range order is relevant. The system logic needs to evaluate how the click interacts with these conflicting parameters (date range vs notification).
 
 
 
@@ -17298,12 +12654,12 @@ Adjusting the existing CSS, ensuring `object-position: center`, `display: block`
 ### Actions
 
 **Tool:** `grep_search`
-**Query:** `carousel-card__body`
+**Query:** `input-buscar-orden-anteriores-rc`
 
 <details>
 <summary>Metadata</summary>
 
-- **Thinking Duration:** 1.798170097s
+- **Thinking Duration:** 0.081098218s
 - **Model:** Gemini 3.8 Flash (High)
 </details>
 
@@ -17312,7 +12668,155 @@ Adjusting the existing CSS, ensuring `object-position: center`, `display: block`
 ### Local File Search
 
 **Status:** Completed
-**Created:** 25 Sept 2026, 4:18 pm
+**Created:** 27 Sept 2026, 12:13 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Ordenes.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L479-599)</summary>
+
+**Path:** `Unknown file`
+
+```
+                    $params[':q_fol_clean'] = $mFolio[1];
+                    $params[':q_fol_unpad'] = (string)$rawNum;
+                    $params[':q_fol_full']  = 'laesh-' . $pad5;
+                    $params[':q_fol_like']  = '%' . $pad5 . '%';
+                } else {
+                    $whereSql = "WHERE ({$filtroPeriodo}) AND (LOWER(o.paciente_nombre) LIKE :q1 OR LOWER(o.medico_nombre_completo) LIKE :q2 OR LOWER(o.paciente_telefono) LIKE :q3 OR LOWER(o.diagnostico) LIKE :q4 OR LOWER(o.folio_unico) LIKE :q5) ";
+                    $qVal = '%' . $search . '%';
+                    $params[':q1'] = $qVal;
+                    $params[':q2'] = $qVal;
+                    $params[':q3'] = $qVal;
+                    $params[':q4'] = $qVal;
+                    $params[':q5'] = $qVal;
+                }
+            } else {
+                $whereSql = "WHERE " . $filtroPeriodo;
+            }
+
+            $limInt = max(1, $limit);
+            $offInt = max(0, $offset);
+
+            $sql = "
+                SELECT o.orden_id as id, o.folio_unico as folio, o.hora_captura as creado_en, o.fecha_resultado,
+                       o.diagnostico, o.otros_estudios, o.estudios_json as estudios, o.edad_al_emitir,
+                       o.paciente_nombre, o.paciente_sexo, o.paciente_telefono as telefono,
+                       COALESCE(o.medico_nombre_completo, 'Médico General') AS medico_nombre,
+                       COALESCE(o.medico_especialidad, 'Medicina General') AS medico_especialidad,
+                       COALESCE(o.medico_cedula, 'CED-N/A') AS medico_cedula,
+                       o.estado_id, o.estado_valor AS estado_nombre, o.estado_color AS color_badge,
+                       o.motivo_cancelacion,
+                       pdf.nombre_archivo AS pdf_nombre,
+                       pdf.folio_extraido,
+                       parc.parciales_fechas
+                FROM vw_ordenes_completas o
+                LEFT JOIN (
+                    SELECT p1.orden_id, p1.nombre_archivo, p1.folio_extraido
+                    FROM resultados_pdf p1
+                    INNER JOIN (
+                        SELECT orden_id, MAX(id) AS max_id
+                        FROM resultados_pdf
+                        GROUP BY orden_id
+                    ) p2 ON p1.id = p2.max_id
+                ) pdf ON pdf.orden_id = o.orden_id
+                LEFT JOIN (
+                    SELECT orden_id, GROUP_CONCAT(creado_en ORDER BY id ASC SEPARATOR '|') AS parciales_fechas
+                    FROM resultados_pdf
+                    WHERE tipo_entrega = 'parcial'
+                    GROUP BY orden_id
+                ) parc ON parc.orden_id = o.orden_id
+                {$whereSql}
+                ORDER BY {$sortCol} {$dir}
+                LIMIT {$limInt} OFFSET {$offInt}
+            ";
+
+            $stmt = $db->prepare($sql);
+            foreach ($params as $k => $v) {
+                $stmt->bindValue($k, $v, PDO::PARAM_STR);
+            }
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Throwable $e) {
+            DB::logFallback('ERROR', 'Fallo en RC\Negocio\Ordenes::obtenerOrdenesAnteriores', $e->getMessage());
+            return [];
+        }
+    }
+
+    /**
+     * Cuenta el total de órdenes de DÍAS ANTERIORES según filtro de búsqueda y período
+     */
+    public static function contarOrdenesAnteriores(string $search = '', string $periodo = '90d', string $fechaInicio = '', string $fechaFin = ''): int {
+        try {
+            $db = DB::connect();
+            $params = [];
+            $search = trim(mb_strtolower($search, 'UTF-8'));
+
+            // Opción B (Filtro Combinado): El filtro de período/calendario siempre se aplica como base
+            $filtroPeriodo = self::construirFiltroPeriodoAnteriores($periodo, '', $fechaInicio, $fechaFin, $params);
+
+            if ($search !== '') {
+                if (preg_match('/^(?:laesh-?|lsh-?|#)?(\d{1,8})$/i', $search, $mFolio)) {
+                    $rawNum = (int)$mFolio[1];
+                    $pad5   = sprintf('%05d', $rawNum);
+                    $whereSql = "WHERE DATE(hora_captura) < CURDATE() AND (LOWER(folio_unico) = :q_fol_raw OR LOWER(folio_unico) = :q_fol_clean OR LOWER(folio_unico) = :q_fol_unpad OR LOWER(folio_unico) = :q_fol_full OR LOWER(folio_unico) LIKE :q_fol_like) ";
+                    $params[':q_fol_raw']   = $search;
+                    $params[':q_fol_clean'] = $mFolio[1];
+                    $params[':q_fol_unpad'] = (string)$rawNum;
+                    $params[':q_fol_full']  = 'laesh-' . $pad5;
+                    $params[':q_fol_like']  = '%' . $pad5 . '%';
+                } else {
+                    $whereSql = "WHERE ({$filtroPeriodo}) AND (LOWER(paciente_nombre) LIKE :q1 OR LOWER(medico_nombre_completo) LIKE :q2 OR LOWER(paciente_telefono) LIKE :q3 OR LOWER(diagnostico) LIKE :q4 OR LOWER(folio_unico) LIKE :q5) ";
+                    $qVal = '%' . $search . '%';
+                    $params[':q1'] = $qVal;
+                    $params[':q2'] = $qVal;
+                    $params[':q3'] = $qVal;
+                    $params[':q4'] = $qVal;
+                    $params[':q5'] = $qVal;
+                }
+            } else {
+                $whereSql = "WHERE " . $filtroPeriodo;
+            }
+
+            $stmt = $db->prepare("SELECT COUNT(*) FROM vw_ordenes_completas {$whereSql}");
+            $stmt->execute($params);
+            return (int)$stmt->fetchColumn();
+        } catch (Throwable $e) {
+            DB::logFallback('ERROR', 'Fallo en RC\Negocio\Ordenes::contarOrdenesAnteriores', $e->getMessage());
+            return 0;
+        }
+    }
+
+    /**
+     * Cambia el estado de una orden en MariaDB e inserta la auditoría en historial_estados_orden
+     *
+     * H1/H7 (auditoría 2026-09-20): $estadoEsperado es opcional — si se pasa (el
+     * estado que el caller vio al renderizar el botón), CambiarEstadoOrden lo usa
+     * como optimistic lock: si alguien más ya movió la orden mientras tanto, la
+     * transición se rechaza con 'conflicto'=true en vez de aplicarse a ciegas
+     * sobre datos obsoletos. La máquina de estados (transición inválida, ej.
+     * saltar de Remitido a Cerrada) se valida siempre dentro del SP.
+     */
+    public static function cambiarEstado(int $ordenId, int $nuevoEstadoId, int $userId, string $observacion = '', ?int $estadoEsperado = null): array {
+        try {
+```
+
+</details>
 
 ---
 
@@ -17320,7 +12824,347 @@ Adjusting the existing CSS, ensuring `object-position: center`, `display: block`
 
 ### Thinking
 
-Clicking the card should open the modal; investigating the "calidad.php" section to confirm the expected behavior. The relevant code iterates through cards and renders their content; verification requires observing if the click interaction triggers modal display as intended.
+The code snippet includes a regular expression designed to extract a numerical identifier from a search string, potentially prefixed with "laesh-", "lsh-", or "#". It appears the code intends to use this extracted number to query a database for orders. Further analysis is required to understand the full context of this query and its potential vulnerabilities.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Ordenes.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.088877880s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L379-479)</summary>
+
+**Path:** `Unknown file`
+
+```
+                return implode(' AND ', $conds);
+            case '90d':
+            default:
+                return "{$alias}hora_captura >= DATE_SUB(CURDATE(), INTERVAL 90 DAY) AND DATE({$alias}hora_captura) < CURDATE()";
+        }
+    }
+
+    /**
+     * Obtiene las solicitudes de órdenes de DÍAS ANTERIORES emitidas por el médico logueado,
+     * con ordenamiento, búsqueda, paginación y filtro de período (default: 90 días, o calendario por rango de fechas).
+     * Precedencia del buscador: si $search tiene contenido, busca en todo el historial (< hoy).
+     */
+    public static function obtenerOrdenesAnterioresMedico(int $userId, int $limit = 25, int $offset = 0, string $search = '', string $orderBy = 'fecha', string $orderDir = 'DESC', string $periodo = '90d', string $fechaInicio = '', string $fechaFin = ''): array {
+        try {
+            $db = DB::connect();
+
+            $allowedSorts = [
+                'folio'           => 'CAST(o.folio_unico AS UNSIGNED)',
+                'paciente'        => 'o.paciente_nombre',
+                'fecha'           => 'o.hora_captura',
+                'fecha_resultado' => 'o.fecha_resultado',
+                'estado'          => 'o.estado_id',
+                'id'              => 'o.orden_id'
+            ];
+            $sortCol = $allowedSorts[$orderBy] ?? 'o.orden_id';
+            $dir = strtoupper($orderDir) === 'ASC' ? 'ASC' : 'DESC';
+
+            $params = [':user_id' => $userId];
+            $search = trim(mb_strtolower($search, 'UTF-8'));
+
+            // Opción B (Filtro Combinado): El filtro de período/calendario siempre se aplica como base
+            $filtroPeriodo = self::construirFiltroPeriodoAnterioresMedico($periodo, 'o.', $fechaInicio, $fechaFin, $params);
+
+            if ($search !== '') {
+                if (preg_match('/^(?:laesh-?|lsh-?|#)?(\d{1,8})$/i', $search, $mFolio)) {
+                    $rawNum = (int)$mFolio[1];
+                    $pad5   = sprintf('%05d', $rawNum);
+                    $whereSql = "WHERE o.medico_user_id = :user_id AND DATE(o.hora_captura) < CURDATE() AND (LOWER(o.folio_unico) = :q_fol_raw OR LOWER(o.folio_unico) = :q_fol_clean OR LOWER(o.folio_unico) = :q_fol_unpad OR LOWER(o.folio_unico) = :q_fol_full OR LOWER(o.folio_unico) LIKE :q_fol_like) ";
+                    $params[':q_fol_raw']   = $search;
+                    $params[':q_fol_clean'] = $mFolio[1];
+                    $params[':q_fol_unpad'] = (string)$rawNum;
+                    $params[':q_fol_full']  = 'laesh-' . $pad5;
+                    $params[':q_fol_like']  = '%' . $pad5 . '%';
+                } else {
+                    $whereSql = "WHERE o.medico_user_id = :user_id AND ({$filtroPeriodo}) AND (LOWER(o.paciente_nombre) LIKE :q1 OR LOWER(o.paciente_telefono) LIKE :q2 OR LOWER(o.diagnostico) LIKE :q3 OR LOWER(o.folio_unico) LIKE :q4) ";
+                    $qVal = '%' . $search . '%';
+                    $params[':q1'] = $qVal;
+                    $params[':q2'] = $qVal;
+                    $params[':q3'] = $qVal;
+                    $params[':q4'] = $qVal;
+                }
+            } else {
+                $whereSql = "WHERE o.medico_user_id = :user_id AND " . $filtroPeriodo;
+            }
+
+            $limInt = max(1, $limit);
+            $offInt = max(0, $offset);
+
+            $sql = "
+                SELECT o.orden_id as id, o.folio_unico as folio, o.hora_captura as creado_en, o.fecha_resultado,
+                       o.diagnostico, o.otros_estudios, o.estudios_json as estudios, o.edad_al_emitir,
+                       o.paciente_nombre, o.paciente_sexo, o.paciente_telefono as telefono,
+                       o.estado_id, o.estado_valor AS estado_nombre, o.estado_color AS color_badge,
+                       o.motivo_cancelacion,
+                       parc.parciales_fechas
+                FROM vw_ordenes_completas o
+                LEFT JOIN (
+                    SELECT orden_id, GROUP_CONCAT(creado_en ORDER BY id ASC SEPARATOR '|') AS parciales_fechas
+                    FROM resultados_pdf
+                    WHERE tipo_entrega = 'parcial'
+                    GROUP BY orden_id
+                ) parc ON parc.orden_id = o.orden_id
+                {$whereSql}
+                ORDER BY {$sortCol} {$dir}
+                LIMIT {$limInt} OFFSET {$offInt}
+            ";
+
+            $stmt = $db->prepare($sql);
+            foreach ($params as $k => $v) {
+                if ($k === ':user_id') {
+                    $stmt->bindValue($k, (int)$v, PDO::PARAM_INT);
+                } else {
+                    $stmt->bindValue($k, $v, PDO::PARAM_STR);
+                }
+            }
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Throwable $e) {
+            DB::logFallback('ERROR', 'Fallo en MD\Negocio\Ordenes::obtenerOrdenesAnterioresMedico', $e->getMessage());
+            return [];
+        }
+    }
+
+    /**
+     * Cuenta el total de órdenes de DÍAS ANTERIORES del médico según filtro de búsqueda y período
+     */
+    public static function contarOrdenesAnterioresMedico(int $userId, string $search = '', string $periodo = '90d', string $fechaInicio = '', string $fechaFin = ''): int {
+        try {
+            $db = DB::connect();
+            $params = [':user_id' => $userId];
+            $search = trim(mb_strtolower($search, 'UTF-8'));
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Ordenes.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L479-519)</summary>
+
+**Path:** `Unknown file`
+
+```
+            $search = trim(mb_strtolower($search, 'UTF-8'));
+
+            // Opción B (Filtro Combinado): El filtro de período/calendario siempre se aplica como base
+            $filtroPeriodo = self::construirFiltroPeriodoAnterioresMedico($periodo, '', $fechaInicio, $fechaFin, $params);
+
+            if ($search !== '') {
+                if (preg_match('/^(?:laesh-?|lsh-?|#)?(\d{1,8})$/i', $search, $mFolio)) {
+                    $rawNum = (int)$mFolio[1];
+                    $pad5   = sprintf('%05d', $rawNum);
+                    $whereSql = "WHERE medico_user_id = :user_id AND DATE(hora_captura) < CURDATE() AND (LOWER(folio_unico) = :q_fol_raw OR LOWER(folio_unico) = :q_fol_clean OR LOWER(folio_unico) = :q_fol_unpad OR LOWER(folio_unico) = :q_fol_full OR LOWER(folio_unico) LIKE :q_fol_like) ";
+                    $params[':q_fol_raw']   = $search;
+                    $params[':q_fol_clean'] = $mFolio[1];
+                    $params[':q_fol_unpad'] = (string)$rawNum;
+                    $params[':q_fol_full']  = 'laesh-' . $pad5;
+                    $params[':q_fol_like']  = '%' . $pad5 . '%';
+                } else {
+                    $whereSql = "WHERE medico_user_id = :user_id AND ({$filtroPeriodo}) AND (LOWER(paciente_nombre) LIKE :q1 OR LOWER(paciente_telefono) LIKE :q2 OR LOWER(diagnostico) LIKE :q3 OR LOWER(folio_unico) LIKE :q4) ";
+                    $qVal = '%' . $search . '%';
+                    $params[':q1'] = $qVal;
+                    $params[':q2'] = $qVal;
+                    $params[':q3'] = $qVal;
+                    $params[':q4'] = $qVal;
+                }
+            } else {
+                $whereSql = "WHERE medico_user_id = :user_id AND " . $filtroPeriodo;
+            }
+
+            $stmt = $db->prepare("SELECT COUNT(*) FROM vw_ordenes_completas {$whereSql}");
+            foreach ($params as $k => $v) {
+                if ($k === ':user_id') {
+                    $stmt->bindValue($k, (int)$v, PDO::PARAM_INT);
+                } else {
+                    $stmt->bindValue($k, $v, PDO::PARAM_STR);
+                }
+            }
+            $stmt->execute();
+            return (int)$stmt->fetchColumn();
+        } catch (Throwable $e) {
+            DB::logFallback('ERROR', 'Fallo en MD\Negocio\Ordenes::contarOrdenesAnterioresMedico', $e->getMessage());
+            return 0;
+        }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 12:13 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 12:13 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 12:13 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 12:14 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+The focus shifts to a specific scenario involving a user in the "Anteriores" view with active search filters, receiving and clicking a notification. The `ws-client.js` file and its click listener are the central point of investigation. The code's behavior when a notification click interacts with existing search context needs careful examination.
+
+
+The notification click appears to extract a folio target from the notification data's title using a regular expression. This extracted folio is then used to navigate and highlight a specific order. The `navegarYResaltarOrden` function is likely responsible for this navigation and highlighting. It calls `capturarEstadoBusquedaPrevia`.
+
+The `capturarEstadoBusquedaPrevia` function seems to capture the current search state before navigating, to avoid data loss. It checks if there's an active search snapshot. If not, it retrieves specific input elements from the DOM related to search filters and date ranges, potentially storing the values.
+
+
+The code's logic initializes search parameters from the DOM, checking if any search criteria are active. A critical scenario arises if a user is in the "Anteriores" tab with the default 90-day view (no explicit search criteria) and then clicks a notification. The extracted folio is placed in the 'inputAnt' field, potentially overriding the default view.
+
+If the user had an active date search or text search prior to the notification click, it is important the existing search context is captured. If no search filter is active the code returns early. The previous search context is stored for restoration. User requests 8 and 9 highlight the importance of restoring the prior search or behavior.
+
+
+When a notification is clicked, the code might overwrite the search input with a new value. If `filtrarBusquedaPrimero` is true, the `cleanTarget` is written to the search input. This raises concern: Does the calendar's date selection get cleared?
+
+Analysis of the `capturarEstadoBusquedaPrevia` function shows it saves the date range, but the calendar inputs are not explicitly cleared in the DOM. The HTMX request triggered by the search input change needs closer scrutiny, potentially overriding existing searches.
+
+
+The backend code uses a regular expression to validate the search input as a folio. When a folio format is matched, the query's `WHERE` clause is constructed to prioritize folio matching, effectively ignoring the date range filters that were previously selected. This means that the date filters are bypassed if a valid folio is entered. The same behavior is observed in another function.
+
+
+The notification click's handler modifies the user interface to show a notification banner with a return-to-search link, highlighting the target row in the grid, and storing the previous search state. The return-to-search action restores the previous search filters and refreshes the grid, removing the banner. Clicking the dismiss button on the notification bar clears the snapshot.
+
+Crucially, the code prevents the loss of the original search by preserving the snapshot if another notification is clicked before restoring the previous search context, preventing an override and maintaining the context even with multiple interactions.
+
+
+If a user is on the "Anteriores" tab with an active search and clicks a "Hoy" notification, the code correctly captures the "Anteriores" tab and search context before navigating to "Hoy".  The original search is restored when the user clicks the return-to-search link.
+
+The reverse scenario, starting on the "Hoy" tab and clicking an "Anteriores" notification, also appears to correctly capture and restore the "Hoy" search context after navigating and returning. The code switches tabs, applies the folio search, highlights the target, and provides a return link. When clicked, the prior tab and search are correctly restored.
+
+
+The analysis now extends to scenarios where the notification's target folio is not found. Specifically, investigating the `ws-client.js` file to determine the error-handling behavior when a folio isn't present in the displayed results. The code's response to a missing order in the "Anteriores" tab with active search needs confirmation.
+
+
+The code's "onNoEncontrado" function only logs a message to the console; no direct visual feedback is given to the user when a notification target isn't found. This means the user would only see the standard "No se encontraron órdenes" message if the folio isn't present in the search results after the notification click. The search input is updated and a query is issued, but the original search context is not explicitly restored. The code retries the highlighting through `setTimeout` if HTMX is still loading. The missing `foundRow` means that the return-to-search functionality won't be triggered, potentially leaving the user in an unexpected state.
+
+
+The current implementation lacks a mechanism to return to the original search if the notification-targeted order isn't found. When `agotado()` is called after several attempts and `foundRow` remains false, the code fails to display the return-to-search button. A user will be left in a state where only the folio from the notification is shown in the search box.
+
+The `agotado()` function should be modified to display a notification banner with a "Volver a mi búsqueda" button, even if the order isn't located. This is critical for restoring the prior search context. The existing `onNoEncontrado()` function needs revision to incorporate this banner/toast functionality and check for the previous search snapshot.
+
+
+The `mostrarBarraRetorno` function needs to be augmented to show a "not found" state, along with the "return to search" button when a notification target is not found. The suggested message for this state includes a warning icon and a relevant text.
+
+The system will now include this banner, along with the return button to restore the user's previous search state when a notification folio isn't located. This fulfills user request 9, retaining the search filters and returning to the original search.
+
+When there isn't a prior active search, the logic proceeds correctly, it now addresses the scenario where `tieneBusquedaActiva` is false, and the default "90d" period is used without input.
+
+
+If no search is active, the notification click sets the search input to the target folio, overriding the default 90-day view.  The lack of a search snapshot means no "return" bar appears. Capturing a snapshot on notification clicks, especially in the "Anteriores" tab, would provide a crucial "return to orders" functionality. The user's input highlights the need to retain and restore search filters when navigating from notifications. The code needs to handle cases with and without active searches.
+
+
+The logic now covers scenarios where a user's initial search is empty or uses the default 90-day view, confirming `tieneBusquedaActiva` capture. Clicking "volver" restores the view, clearing the input and refreshing the table.  The code in `ws-client.js` is reviewed to confirm it captures the search state. Even when starting with an empty search, the state is still captured before the navigation.
 
 
 
@@ -17328,12 +13172,12 @@ Clicking the card should open the modal; investigating the "calidad.php" section
 ### Actions
 
 **Tool:** `grep_search`
-**Query:** `modal-img-promo`
+**Query:** `panel-ordenes`
 
 <details>
 <summary>Metadata</summary>
 
-- **Thinking Duration:** 0.080619983s
+- **Thinking Duration:** 13.804546415s
 - **Model:** Gemini 3.8 Flash (High)
 </details>
 
@@ -17342,474 +13186,7 @@ Clicking the card should open the modal; investigating the "calidad.php" section
 ### Local File Search
 
 **Status:** Completed
-**Created:** 25 Sept 2026, 4:18 pm
-
----
-
-## Agent Response
-
-### Thinking
-
-The global availability of `modal-img-promo` suggests a potential solution: applying `data-promo-img` to the `.carousel-card` element within `sections/calidad.php`. Examining lines 15-28 of `sections/calidad.php` will clarify the current structure. This will help determine if the attribute addition is possible. The aim is to make the diploma image fully viewable.
-
-
-
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.021877348s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1939-1999)</summary>
-
-**Path:** `Unknown file`
-
-```
-    overflow: hidden;
-    margin-bottom: 2px;
-}
-
-.calidad-cards-grid .carousel-card img {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 100% !important;
-    height: 275px !important;
-    aspect-ratio: unset !important;
-    object-fit: cover !important;
-    object-position: center !important;
-    display: block !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    border: 0 !important;
-    border-radius: 12px 12px 0 0 !important;
-    box-sizing: border-box !important;
-}
-
-@media (min-width: 1920px) {
-    .calidad-cards-grid .carousel-card {
-        flex: 0 0 calc((100% - 4rem) / 3);
-    }
-    .calidad-cards-grid .carousel-card img {
-        height: 285px !important;
-    }
-}
-
-/* R-MOB: tablet/paisaje → 2 columnas (481px–1024px) */
-@media (max-width: 1024px) {
-    .calidad-cards-grid {
-        gap: 1rem;
-    }
-    .calidad-cards-grid .carousel-card {
-        flex: 0 0 calc(50% - 0.5rem);
-        width: calc(50% - 0.5rem);
-    }
-    .calidad-cards-grid .carousel-card img {
-        height: 230px !important;
-        /* object-position top center: la base tiene center !important → cover crops center
-           → top de imágenes de calidad se pierde; top center ancla el sujeto visible */
-        object-position: top center !important;
-    }
-}
-
-/* R-MOB: móvil retrato estrecho → 1 columna (≤480px) */
-@media (max-width: 480px) {
-    .calidad-cards-grid .carousel-card {
-        flex: 0 0 100%;
-        width: 100%;
-    }
-    .calidad-cards-grid .carousel-card img {
-        height: 210px !important;
-        object-position: top center !important;
-    }
-}
-
-
-
-.text-center-block {
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Examining the image display within the carousel cards, the current styling is preventing proper aspect ratio and consistent sizing. The goal is to ensure the images fill the available space while maintaining correct proportions. Modifying the `landing.css` file involves applying `width`, `height`, `aspect-ratio`, and `object-fit` properties to the image elements. This should resolve the image display issues.
-
-
-The CSS defines responsiveness for the carousel card grid, adjusting column counts and image aspect ratios across different screen sizes. Examining the styles, there isn't a transition or hover effect explicitly defined for the carousel card, which might be a good addition for a premium feel. Now, I will check the `landing.css` file more thoroughly to make sure.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 2.460073070s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 4:18 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `calidad.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L14-29)</summary>
-
-**Path:** `Unknown file`
-
-```
-            <div class="map-bar">
-                <div class="specialties-carousel-viewport animate-on-scroll">
-                    <div class="calidad-cards-grid">
-                        <?php foreach ($calidadCards as $qc): ?>
-                        <div class="carousel-card">
-                            <img src="<?= h($qc['img']) ?>" alt="<?= h($qc['alt']) ?>"
-                                 width="800" height="580" loading="lazy" decoding="async">
-                            <div class="carousel-card__body ck5-output">
-                                <h3><?= h($qc['titulo']) ?></h3>
-                                <?php if ($qc['desc']): ?><p><?= h($qc['desc']) ?></p><?php endif; ?>
-                            </div>
-                        </div>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
-            </div>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Thinking
-
-Hypothesis: Adding the `carousel-card` class and relevant data attributes to the HTML element in `calidad.php`, along with a `cursor: pointer` style, should make the card clickable. The click should then trigger the `handlePromoCardInteraction` function. Verification involves examining `website.js` to confirm how the click event is handled, specifically how the `card` variable is determined.
-
-
-
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Thinking Duration:** 0.067025162s
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 4:18 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L884-909)</summary>
-
-**Path:** `Unknown file`
-
-```
-                    </div>
-                </div>
-                <div class="editor-card-body" style="padding: 12px;">
-                    <div class="field-group">
-                        <label>Imagen de Galería</label>
-                        <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px; font-size: 0.78rem;">
-                            📐 <strong>Codec:</strong> WebP únicamente &nbsp;·&nbsp;
-                            <strong>Quality:</strong> 75 &nbsp;·&nbsp;
-                            <strong>Effort:</strong> 6 &nbsp;·&nbsp;
-                            <strong>Dimensiones:</strong> 800 × 580 px (ratio ~1.38:1) &nbsp;·&nbsp;
-                            <strong>Orientación Horizontal</strong> &nbsp;·&nbsp;
-                            <strong>Peso:</strong> Máximo 150 KB, Óptimo 60 KB
-                        </p>
-                        <div class="image-upload-box">
-                            <img id="prev-calidad-gallery1"
-                                 src="<?= h($galImgUrl1) ?>"
-                                 alt="Área de Hematología" class="img-preview-sm"
-                                 onerror="this.hidden=true">
-                            <label for="file-calidad-gallery1" class="btn btn-secondary">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                                Cambiar Imagen
-                            </label>
-                            <input type="file" accept="image/webp"
-                                   id="file-calidad-gallery1" class="d-none"
-                                   data-upload-slot="calidad-gallery1"
-                                   data-preview-id="prev-calidad-gallery1"
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 4:19 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 4:19 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 4:19 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 4:19 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 4:19 pm
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-## User Request
-
-Analiza la php de Reportes y Estadísticas de /rc/ ,  funciona correctamente la funcionalidad de calendario desplegable y por captura  Periodo: Fecha  dd/mm/aaaa  al  dd/mm/aaaa ; identica gaps, issues,etc.
-
-
----
-
-### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
-
-**Status:** Completed
-**Created:** 26 Sept 2026, 7:28 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 26 Sept 2026, 7:28 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 26 Sept 2026, 7:28 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 26 Sept 2026, 7:28 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `Reportes y Estadísticas`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 26 Sept 2026, 7:28 pm
+**Created:** 27 Sept 2026, 12:14 am
 
 ---
 
@@ -17829,117 +13206,45 @@ Analiza la php de Reportes y Estadísticas de /rc/ ,  funciona correctamente la 
 ---
 
 <details>
-<summary>File: `Unknown file` (L479-559)</summary>
+<summary>File: `Unknown file` (L209-239)</summary>
 
 **Path:** `Unknown file`
 
 ```
-                     dejada por una edición anterior sin limpiar. getElementById()
-                     siempre devuelve el PRIMER elemento con un id duplicado, así que
-                     el sidebar (data-panel=panel-reportes) mostraba esa copia vieja
-                     y ESTA copia real, con contenedores dinámicos id=container-*
-                     que sí llena filtrarEstadisticasAdmin(), nunca llegaba a
-                     mostrarse. La copia vieja (y un contenedor id panel-catalogos
-                     huérfano que había quedado abierto junto a ella) se eliminó completa. -->
-                <div id="panel-reportes" class="tab-panel d-none">
-                    <div class="modal-sect-hd">
-                        <h2 class="txt-pgd mb-0">Reportes y Estadísticas</h2>
-                        <div class="d-inline-flex-ac">
-                            <label for="filtro-periodo-admin" class="txt-muted-sm">Periodo:</label>
-                            <select id="filtro-periodo-admin" class="select-sm select-sm--bg">
-                                <option value="dia">Hoy</option>
-                                <option value="semana">Esta Semana</option>
-                                <option value="mes" selected>Este Mes</option>
-                                <option value="anio">Este Año</option>
-                                <option value="fecha">Fecha</option>
-                            </select>
-                            <span id="rango-fechas-admin" class="d-none flex-ic-8">
-                                <input type="date" id="fecha-inicio-admin" class="select-sm" onchange="filtrarEstadisticasAdmin()">
-                                <span class="txt-muted-sm">al</span>
-                                <input type="date" id="fecha-fin-admin" class="select-sm" onchange="filtrarEstadisticasAdmin()">
-                            </span>
-                        </div>
-                    </div>
-                    
-                    <div class="grid-auto-200mb">
-                        <div class="card mb-0 ta-center pa-5">
-                            <div id="lbl-solicitudes-admin" class="txt-muted-xs-upper">Total Solicitudes Emitidas</div>
-                            <div id="stat-solicitudes-admin" class="stat-num stat-num--pgd">-</div>
-                        </div>
-                        <div class="card mb-0 ta-center pa-5">
-                            <div class="txt-muted-xs-upper">En Atención</div>
-                            <div id="stat-atencion-admin" class="stat-num stat-num--atn">-</div>
-                        </div>
-                        <div class="card mb-0 ta-center pa-5">
-                            <div class="txt-muted-xs-upper">Resultados Listos</div>
-                            <div id="stat-listos-admin" class="stat-num stat-num--lst">-</div>
-                        </div>
-                        <div class="card mb-0 ta-center pa-5">
-                            <div class="txt-muted-xs-upper">Cerradas Con Éxito</div>
-                            <div id="stat-cerradas-admin" class="stat-num stat-num--main">-</div>
-                        </div>
-                        <div class="card mb-0 ta-center pa-5">
-                            <div class="txt-muted-xs-upper">Canceladas</div>
-                            <div id="stat-canceladas-admin" class="stat-num stat-num--danger">-</div>
-                        </div>
-                    </div>
-
-                    <div class="grid-auto-400">
-                        <!-- Distribución por Categorías -->
-                        <div class="card mb-0">
-                            <h3 class="txt-pgd-lg">Distribución de Estudios por Categoría</h3>
-                            <div class="col-group" id="container-categorias-stats">
-                                <div class="text-center txt-muted" style="padding:2rem;">Cargando categorías...</div>
-                            </div>
-                        </div>
-
-                        <!-- Top 5 Médicos con más Solicitudes Remitidas -->
-                        <div class="card mb-0">
-                            <h3 class="txt-pgd-lg">Top 5 Médicos con más Solicitudes Remitidas</h3>
-                            <div class="col-group" id="container-medicos-stats">
-                                <div class="text-center txt-muted" style="padding:2rem;">Cargando médicos...</div>
-                            </div>
+                            </table>
                         </div>
                     </div>
                 </div>
 
-                <!-- Panel 5: Catálogos (Scope 14) -->
-                <div id="panel-catalogos" class="tab-panel d-none">
-                    <!-- Fila 1: Pestañas superiores (100% Idénticas a gestion_web.php) -->
-                    <div class="cms-tabs" id="toggle-catalog-view" role="tablist" aria-label="Secciones de Catálogos de Análisis">
-                        <button type="button" class="cms-tab active" data-view="table" id="btn-view-table">1. Tabla</button>
-                        <button type="button" class="cms-tab" id="menu-gabinetes">2. Areas</button>
-                        <button type="button" class="cms-tab" id="menu-igabinetes">3. I.Areas</button>
-                        <button type="button" class="cms-tab" id="menu-20estmed">4. 20 Est.Med</button>
-                    </div>
-
-                    <!-- Fila 2: Título de Sección y Controles (Total, Buscador, + Añadir) en un solo renglón -->
+                <!-- Panel 1.5: Solicitudes Anteriores -->
+                <div id="panel-ordenes-anteriores" class="tab-panel d-none">
+                    <!-- Fila: Título de Sección y Controles (Total, Paginación, Buscador) alineados con el estándar cms-panel-header -->
                     <div class="cms-panel-header" style="margin-top: 1rem; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                        <div>
+                            <h3 class="cms-h3" style="margin: 0; font-size: 1.35rem; font-weight: 800; color: #0052B7;">Solicitudes Anteriores</h3>
+                            <p class="txt-muted-4" style="margin: 0.2rem 0 0 0; font-size: 0.85rem;">Histórico de solicitudes registradas en días anteriores.</p>
+                        </div>
+                        
+                        <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; justify-content: flex-end; margin-left: auto;">
+                            <!-- Paginador y Total -->
+                            <div id="ordenes-anteriores-pagination-wrap" style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span id="ordenes-anteriores-total-records" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">Total: <?= (int)($totalOrdenesAnteriores ?? 0) ?></span>
+                                <span style="color: #cbd5e1; display: inline;">|</span>
+                                <div id="ordenes-anteriores-pagination" style="display: flex; gap: 0.25rem; align-items: center;">
+                                    <?php 
+                                        $totPgsAnt = max(1, (int)ceil(($totalOrdenesAnteriores ?? 0) / 25));
+                                    ?>
+                                    <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">‹ Anterior</button>
+                                    <span style="font-size:0.82rem; font-weight:600; color:var(--text-muted); padding: 0 4px;">1 / <?= $totPgsAnt ?></span>
+                                    <?php if ($totPgsAnt > 1): ?>
+                                        <button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/rc/tabla-ordenes-anteriores?page=2&periodo=90d" hx-target="#tabla-recepcion-anteriores" hx-swap="outerHTML" hx-include="#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc">Siguiente ›</button>
+                                    <?php else: ?>
+                                        <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">Siguiente ›</button>
+                                    <?php endif; ?>
+                                </div>
 ```
 
 </details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `filtrarEstadisticasAdmin`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 26 Sept 2026, 7:28 pm
 
 ---
 
@@ -17948,7 +13253,7 @@ Analiza la php de Reportes y Estadísticas de /rc/ ,  funciona correctamente la 
 ### Actions
 
 **Tool:** `view_file`
-**File:** `labadmin.js`
+**File:** `labadmin.php`
 
 <details>
 <summary>Metadata</summary>
@@ -17959,192 +13264,40 @@ Analiza la php de Reportes y Estadísticas de /rc/ ,  funciona correctamente la 
 ---
 
 <details>
-<summary>File: `Unknown file` (L169-324)</summary>
+<summary>File: `Unknown file` (L274-299)</summary>
 
 **Path:** `Unknown file`
 
 ```
-                // Respaldo si ws-client.js no cargó por algún motivo — mismo
-                // comportamiento que tenía esta función antes de hoy.
-                verSolicitudDigital(targetFolio);
-            }
-        }
+                            <!-- Buscador en tiempo real -->
+                            <div id="ordenes-anteriores-search-container" style="display: flex; gap: 0.5rem; align-items: center; position:relative; z-index: 100;">
+                                <input type="text" id="input-buscar-orden-anteriores-rc" name="q" class="form-input form-input--bg" autocomplete="off" spellcheck="false" placeholder="🔍 Buscar por nombre..." style="width: 220px;" hx-get="/laesh/rc/tabla-ordenes-anteriores" hx-target="#tabla-recepcion-anteriores" hx-swap="outerHTML" hx-include="#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc" hx-trigger="keyup changed delay:250ms, search">
+                            </div>
+                        </div>
+                    </div>
 
-        async function filtrarEstadisticasAdmin() {
-            const select = document.getElementById('filtro-periodo-admin');
-            if (!select) return; // Salida segura si el panel de estadísticas no está presente en el DOM
-            
-            const val = select.value || 'mes';
-            
-            let lblText = val.toUpperCase();
-            let inicio = '';
-            let fin = '';
-            
-            if (val === 'fecha') {
-                const inputInicio = document.getElementById('fecha-inicio-admin');
-                const inputFin = document.getElementById('fecha-fin-admin');
-                inicio = inputInicio ? inputInicio.value : '';
-                fin = inputFin ? inputFin.value : '';
-                
-                if (!inicio || !fin) return; // Esperar a que ambas fechas estén seleccionadas
-                
-                const fInicio = inicio.split('-').reverse().join('/');
-                const fFin = fin.split('-').reverse().join('/');
-                lblText = `${fInicio} al ${fFin}`;
-            }
-            
-            // Set loading states con guardas defensivas
-            const statSolEl = document.getElementById('stat-solicitudes-admin');
-            const statAtnEl = document.getElementById('stat-atencion-admin');
-            const statLstEl = document.getElementById('stat-listos-admin');
-            const statCerEl = document.getElementById('stat-cerradas-admin');
-            const statCanEl = document.getElementById('stat-canceladas-admin');
-            const lblSolEl  = document.getElementById('lbl-solicitudes-admin');
-            
-            if (statSolEl) statSolEl.innerText = '...';
-            if (statAtnEl) statAtnEl.innerText = '...';
-            if (statLstEl) statLstEl.innerText = '...';
-            if (statCerEl) statCerEl.innerText = '...';
-            if (statCanEl) statCanEl.innerText = '...';
-            if (lblSolEl)  lblSolEl.innerText = `TOTAL SOLICITUDES (${lblText})`;
-            
-            const catContainer = document.getElementById('container-categorias-stats');
-            const medContainer = document.getElementById('container-medicos-stats');
-            
-            if (catContainer) catContainer.innerHTML = '<div class="text-center txt-muted" style="padding:2rem;">Cargando categorías...</div>';
-            if (medContainer) medContainer.innerHTML = '<div class="text-center txt-muted" style="padding:2rem;">Cargando médicos...</div>';
-            
-            try {
-                const response = await fetch(`/laesh/rc/api/estadisticas?rango=${encodeURIComponent(val)}&inicio=${encodeURIComponent(inicio)}&fin=${encodeURIComponent(fin)}`);
-                if (!response.ok) throw new Error('Error en API de estadísticas');
-                
-                const data = await response.json();
-                if (!data.success) throw new Error(data.error || 'Error interno');
-                
-                // Totals
-                if (statSolEl) statSolEl.innerText = (data.totales?.solicitudes ?? 0).toLocaleString();
-                if (statAtnEl) statAtnEl.innerText = (data.totales?.atencion ?? 0).toLocaleString();
-                if (statLstEl) statLstEl.innerText = (data.totales?.listos ?? 0).toLocaleString();
-                if (statCerEl) statCerEl.innerText = (data.totales?.cerradas ?? 0).toLocaleString();
-                if (statCanEl) statCanEl.innerText = (data.totales?.canceladas ?? 0).toLocaleString();
-
-                // Categories
-                if (catContainer) {
-                    if (!data.categorias || data.categorias.length === 0) {
-                        catContainer.innerHTML = '<div class="text-center txt-muted" style="padding:2rem;">No hay estudios en este periodo</div>';
-                    } else {
-                        let catHtml = '';
-                        const catColors = ['bar-color-green', 'bar-color-blue', 'bar-color-amber'];
-                        const totalCats = data.categorias.reduce((sum, c) => sum + parseInt(c.conteo, 10), 0) || 1;
-                        
-                        data.categorias.forEach((cat, idx) => {
-                            const pct = Math.round((parseInt(cat.conteo, 10) / totalCats) * 100);
-                            const color = catColors[idx % catColors.length];
-                            catHtml += `
-                            <div>
-                                <div class="progress-label">
-                                    <span>${cat.nombre}</span>
-                                    <span>${pct}% (${cat.conteo} estudios)</span>
-                                </div>
-                                <div class="progress-track">
-                                    <div class="bar-fill ${color}" style="width: ${pct}%;"></div>
-                                </div>
-                            </div>`;
-                        });
-                        catContainer.innerHTML = catHtml;
-                    }
-                }
-                
-                // Medicos
-                if (medContainer) {
-                    if (!data.medicos || data.medicos.length === 0) {
-                        medContainer.innerHTML = '<div class="text-center txt-muted" style="padding:2rem;">No hay solicitudes en este periodo</div>';
-                    } else {
-                        let medHtml = '';
-                        const medColors = ['bar-color-green', 'bar-color-blue', 'bar-color-amber', 'bar-color-purple', 'bar-color-red'];
-                        const totalMeds = data.medicos.reduce((sum, m) => sum + parseInt(m.conteo, 10), 0) || 1;
-                        
-                        data.medicos.forEach((med, idx) => {
-                            const pct = Math.round((parseInt(med.conteo, 10) / totalMeds) * 100);
-                            const color = medColors[idx % medColors.length];
-                            medHtml += `
-                            <div>
-                                <div class="progress-label">
-                                    <span>${med.nombre}</span>
-                                    <span>${pct}% (${med.conteo} solicitudes)</span>
-                                </div>
-                                <div class="progress-track">
-                                    <div class="bar-fill ${color}" style="width: ${pct}%;"></div>
-                                </div>
-                            </div>`;
-                        });
-                        medContainer.innerHTML = medHtml;
-                    }
-                }
-                
-            } catch (err) {
-                console.error('Error fetching estadísticas:', err);
-                if (statSolEl) statSolEl.innerText = 'Error';
-                if (statCanEl) statCanEl.innerText = 'Error';
-                if (catContainer) catContainer.innerHTML = '<div class="text-center" style="color:var(--color-danger); padding:2rem;">Error al cargar</div>';
-                if (medContainer) medContainer.innerHTML = '<div class="text-center" style="color:var(--color-danger); padding:2rem;">Error al cargar</div>';
-            }
-        }
-
-        function manejarCambioFiltroAdmin() {
-            const select = document.getElementById('filtro-periodo-admin');
-            if (!select) return;
-            const rangeContainer = document.getElementById('rango-fechas-admin');
-            if (select.value === 'fecha') {
-                if (rangeContainer) rangeContainer.style.display = 'inline-flex';
-                const inputInicio = document.getElementById('fecha-inicio-admin');
-                if (inputInicio) {
-                    try {
-                        inputInicio.showPicker();
-                    } catch (e) {
-                        inputInicio.click();
-                    }
-                }
-            } else {
-                if (rangeContainer) rangeContainer.style.display = 'none';
-                filtrarEstadisticasAdmin();
-            }
-        }
-        window.filtrarEstadisticasAdmin = filtrarEstadisticasAdmin;
-        window.manejarCambioFiltroAdmin = manejarCambioFiltroAdmin;
-
-        // GAP 3: abre solicitud_dac_impr.php en overlay iframe (centralizado en app.js)
-        var _abrirSolOverlay = window._abrirSolOverlay || function(url) {
-            var prev = document.getElementById('sol-overlay');
-            if (prev) prev.remove();
-            var overlay = document.createElement('div');
-            overlay.id = 'sol-overlay';
-            overlay.className = 'sol-overlay';
+                    <div class="card" aria-live="polite" style="padding: 0; overflow: hidden; border: 1px solid var(--border); border-radius: 8px;">
+                        <div class="table-responsive" style="max-height: calc(100vh - 250px); overflow-y: auto; overflow-x: auto; -webkit-overflow-scrolling: touch; width: 100%;">
+                            <table class="table" id="tabla-recepcion-anteriores" hx-get="/laesh/rc/tabla-ordenes-anteriores" hx-target="#tabla-recepcion-anteriores" hx-swap="outerHTML" hx-include="#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc" hx-trigger="refresh, ordenActualizada from:body" style="margin-bottom: 0; width: 100%; min-width: 1665px; table-layout: fixed; border-collapse: collapse;">
+                                <colgroup>
+                                    <col style="width: 130px;">
+                                    <col style="width: 210px;">
+                                    <col style="width: 180px;">
+                                    <col style="width: 200px;">
+                                    <col style="width: 125px;">
+                                    <col style="width: 125px;">
+                                    <col style="width: 190px;">
+                                    <col style="width: 260px;">
+                                    <col style="width: 220px;">
+                                </colgroup>
+                                <thead>
+                                    <?= rcRenderOrdenesTablaHeader('fecha', 'desc', '', '/laesh/rc/tabla-ordenes-anteriores', '#tabla-recepcion-anteriores', '#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc') ?>
+                                </thead>
+                                <?= rcRenderOrdenesTablaBody($ordenesAnteriores ?? [], $csrfToken ?? '', '-ant') ?>
+                            </table>
 ```
 
 </details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `manejarCambioFiltroAdmin`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 26 Sept 2026, 7:28 pm
 
 ---
 
@@ -18152,7 +13305,303 @@ Analiza la php de Reportes y Estadísticas de /rc/ ,  funciona correctamente la 
 
 ### Thinking
 
-Examining the HTML snippet, it appears to define a filter selection for a date range within an administrative interface. The default selected period is "Este Mes". Considering the context of "labadmin," it is likely that this filter affects the display of data related to lab activities or reporting within the administrative view.
+The code attempts to select a card element using a combined selector, but the DOM order causes an unexpected match. When within a specific panel, the selector will incorrectly prioritize a card from another panel due to the DOM structure. Examination of related client-side code lines is needed.
+
+
+Crucially, the current implementation selects the wrong card when navigating between panels, as the shared selector picks an invisible card. The intended behavior requires inserting the element into the *visible* panel. Determined the target container is based on whether the user is in the medical or reception section and which tab is active (Hoy or Anteriores).
+
+
+The logic now correctly identifies the target container by checking visibility across medical and reception sections, including 'Hoy' and 'Anteriores' tabs. Successful insertion will place the element immediately before the content card, providing optimal visibility. If the order isn't found, defined behavior is executed, including calling `agotado()` and `onNoEncontrado()`. The insertion will be limited to when the order is successfully found.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `panel-historial-medico`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.743101011s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 12:14 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L389-414)</summary>
+
+**Path:** `Unknown file`
+
+```
+                 y se adopta el mismo patrón de grilla HTMX con ordenamiento/búsqueda/paginación
+                 server-side ya usado por Recepción / Órdenes Anteriores (ver rc/views/labadmin.php). -->
+            <div class="tab-panel d-none" id="panel-historial-medico">
+                <!-- 2026-09-25 (pedido del usuario): título propio de vuelta — antes se
+                     había quitado (ver historial abajo) confiando solo en el breadcrumb,
+                     pero el usuario pidió un título reducido visible aquí. Reutiliza
+                     .panel-nueva-orden-title (mismo estilo compacto que el panel Nueva
+                     Solicitud) para no duplicar CSS. En móvil, la paginación de abajo
+                     (#ordenes-anteriores-md-pagination-wrap) ahora se oculta — ver
+                     portal.css @media(max-width:767px) — así que ya no compite por
+                     espacio con este título en la misma fila.
+                     2026-09-24 (histórico): header homologado 1:1 con #ordenes-hoy-md-header
+                     (mismo patrón que ya usan mdRenderOrdenesTablaHeader/Body para la
+                     grilla) — antes traía un <h2>+<p> propio que "Hoy" no tenía, rompiendo
+                     la simetría pedida y desbordando en móvil (el título no cabía junto a
+                     paginación+buscador en flex-wrap:nowrap). -->
+                <h2 class="panel-nueva-orden-title">Solicitudes Digitales Anteriores</h2>
+                <div class="cms-panel-header" id="ordenes-anteriores-md-header" style="margin-bottom: 1rem; display: flex; justify-content: flex-end; align-items: center; flex-wrap: wrap; gap: 0.75rem; margin-left: auto;">
+                    <div id="ordenes-anteriores-md-pagination-wrap" style="display: flex; align-items: center; gap: 0.5rem;">
+                        <span id="ordenes-anteriores-md-total-records" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">Total: <?= (int)($totalOrdenesAnteriores ?? 0) ?></span>
+                        <span style="color: #cbd5e1; display: inline;">|</span>
+                        <div style="display: flex; gap: 0.25rem; align-items: center;">
+                            <?php $totPgsAntMd = max(1, (int)ceil(($totalOrdenesAnteriores ?? 0) / 25)); ?>
+                            <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">‹ <span class="pag-label-text">Anterior</span></button>
+                            <span style="font-size:0.82rem; font-weight:600; color:var(--text-muted); padding: 0 4px;">1 / <?= $totPgsAntMd ?></span>
+                            <?php if ($totPgsAntMd > 1): ?>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L454-474)</summary>
+
+**Path:** `Unknown file`
+
+```
+                    <div id="ordenes-anteriores-md-search-wrap" style="display: flex; gap: 0.5rem; align-items: center;">
+                        <input type="text" id="input-buscar-orden-anteriores-md" name="q" class="form-input form-input--bg" autocomplete="off" spellcheck="false" placeholder="🔍 Buscar por folio, paciente..." style="width: 220px;" hx-get="/laesh/md/tabla-ordenes-anteriores" hx-target="#tabla-historial-completo" hx-swap="outerHTML" hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md" hx-trigger="keyup changed delay:250ms, search">
+                    </div>
+                </div>
+                <div class="card" style="padding: 0; overflow: hidden; border: 1px solid var(--border); border-radius: 8px;">
+                    <div class="table-responsive" style="max-height: calc(100vh - 250px); overflow-y: auto; overflow-x: auto; -webkit-overflow-scrolling: touch; width: 100%;">
+                        <table id="tabla-historial-completo" hx-get="/laesh/md/tabla-ordenes-anteriores" hx-target="#tabla-historial-completo" hx-swap="outerHTML" hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md" hx-trigger="refresh, ordenCreada from:body, ordenActualizada from:body">
+                            <thead>
+                                <?= mdRenderOrdenesTablaHeader('fecha', 'desc', '', '/laesh/md/tabla-ordenes-anteriores', '#tabla-historial-completo', '#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md') ?>
+                            </thead>
+                            <?= mdRenderOrdenesTablaBody($ordenesAnteriores ?? [], $csrfToken ?? '', '-ant') ?>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+                <!-- Panel 3: Pacientes del Médico (Mis Pacientes) -->
+                <div class="tab-panel d-none" id="panel-pacientes-medico">
+                    <div class="cms-panel-header" style="margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                        <div>
+                            <h2 class="txt-pgd" style="margin: 0; font-size: 1.35rem; font-weight: 800; color: #0052B7;">Mis Pacientes</h2>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L199-239)</summary>
+
+**Path:** `Unknown file`
+
+```
+                            <!-- 2026-09-25 (pedido del usuario): se elimina el clon compacto de
+                                 paginación (GAP-MD-08) que vivía aquí, pegado a la pestaña — se
+                                 veía duplicado con la paginación real de abajo
+                                 (#ordenes-hoy-md-pagination-wrap) bajo zoom de navegador >100%.
+                                 Ahora Órdenes Hoy usa el MISMO tratamiento compacto ya probado en
+                                 Órdenes Anteriores (una sola paginación, siempre junto al
+                                 buscador, sin duplicado) — ver #ordenes-hoy-md-header en
+                                 portal.css @media(max-width:767px). -->
+                        </div>
+                        <!-- Botones Limpiar / Crear e Imprimir — separados del tablist (A11Y-06) -->
+                        <div id="tab-bar-btns" class="tab-bar-btns" role="toolbar" aria-label="Acciones de solicitud">
+                            <button class="btn badge-reset" type="button"
+                                    id="btn-limpiar-orden"
+                                    aria-label="Limpiar selección de estudios">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.46"/></svg>
+                                <span class="btn-imprimir-texto">Limpiar</span>
+                            </button>
+                            <span class="btn-vsep-divider" aria-hidden="true"></span>
+                            <button class="btn btn-primary btn-imprimir-orden badge-reset-sm" type="submit" form="form-orden"
+                                    aria-label="Crear e imprimir solicitud médica">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                                <span class="btn-imprimir-texto">Crear e Imprimir Solicitud</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- ── Sub-tab 1: Generar Orden Digital ── -->
+                    <div id="subtab-generar" class="portal-tab-panel active" role="tabpanel" aria-labelledby="tab-generar">
+                        <form id="form-orden" 
+                              hx-post="/laesh/md/orden/crear" 
+                              hx-target="#a11y-live" 
+                              hx-swap="innerHTML"
+                              hx-indicator="#loading-spinner">
+                            <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken ?? '', ENT_QUOTES, 'UTF-8') ?>">
+                            <!-- HTMX: indicador de carga (hx-indicator="#loading-spinner") -->
+                            <span id="loading-spinner" class="htmx-indicator" role="status" aria-label="Enviando solicitud…">
+                                <span class="spinner-btn"></span>
+                            </span>
+
+                            <!-- Renglón 1 (Desktop): Nombre | Edad | Sexo | Celular | [Separador Vertical] | Diagnóstico / Motivo Clínico -->
+                            <div class="orden-patient-row1">
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `subtab-ordenes-hoy`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 12:14 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L354-384)</summary>
+
+**Path:** `Unknown file`
+
+```
+                    <div id="subtab-ordenes-hoy" class="portal-tab-panel" role="tabpanel" aria-labelledby="tab-ordenes-hoy">
+                        <div class="cms-panel-header" id="ordenes-hoy-md-header" style="margin-bottom: 1rem; display: flex; justify-content: flex-end; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                            <div id="ordenes-hoy-md-pagination-wrap" style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span id="ordenes-hoy-md-total-records" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">Total: <?= (int)($totalOrdenesPropias ?? 0) ?></span>
+                                <span style="color: #cbd5e1; display: inline;">|</span>
+                                <div style="display: flex; gap: 0.25rem; align-items: center;">
+                                    <?php $totPgsHoyMd = max(1, (int)ceil(($totalOrdenesPropias ?? 0) / 25)); ?>
+                                    <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">‹ <span class="pag-label-text">Anterior</span></button>
+                                    <span style="font-size:0.82rem; font-weight:600; color:var(--text-muted); padding: 0 4px;">1 / <?= $totPgsHoyMd ?></span>
+                                    <?php if ($totPgsHoyMd > 1): ?>
+                                        <button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/md/tabla-ordenes?page=2" hx-target="#tabla-medico" hx-swap="outerHTML" hx-include="#input-buscar-orden-hoy-md"><span class="pag-label-text">Siguiente</span> ›</button>
+                                    <?php else: ?>
+                                        <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;"><span class="pag-label-text">Siguiente</span> ›</button>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                            <div id="ordenes-hoy-md-search-wrap" style="display: flex; gap: 0.5rem; align-items: center;">
+                                <input type="text" id="input-buscar-orden-hoy-md" name="q" class="form-input form-input--bg" autocomplete="off" spellcheck="false" placeholder="🔍 Buscar por folio, paciente..." style="width: 220px;" hx-get="/laesh/md/tabla-ordenes" hx-target="#tabla-medico" hx-swap="outerHTML" hx-trigger="keyup changed delay:250ms, search">
+                            </div>
+                        </div>
+                        <div class="card mt-0" style="padding: 0; overflow: hidden; border: 1px solid var(--border); border-radius: 8px;">
+                            <div class="table-responsive" style="max-height: calc(100vh - 250px); overflow-y: auto; overflow-x: auto; -webkit-overflow-scrolling: touch; width: 100%;">
+                                <table id="tabla-medico" hx-get="/laesh/md/tabla-ordenes" hx-target="#tabla-medico" hx-swap="outerHTML" hx-trigger="refresh, ordenCreada from:body, ordenActualizada from:body">
+                                    <thead>
+                                        <?= mdRenderOrdenesTablaHeader('fecha', 'desc', '', '/laesh/md/tabla-ordenes', '#tabla-medico', '#input-buscar-orden-hoy-md') ?>
+                                    </thead>
+                                    <?= mdRenderOrdenesTablaBody($ordenesPropias ?? [], $csrfToken ?? '', '') ?>
+                                </table>
+                            </div>
+                        </div>
+                    </div><!-- /subtab-ordenes-hoy -->
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The code selects a `targetCard` based on a condition related to `snap.isMedico`, using specific CSS selectors. The current selection logic might not be precise, potentially retrieving elements from inactive/hidden containers. A refinement is needed to pinpoint the actively displayed container to improve the element targeting.
+
+
+The selection logic aims to find a `targetCard` element within different sections based on the `snap.isMedico` flag, prioritizing visible elements. The initial checks for `d-none` class and `offsetParent` seem designed to exclude hidden elements. A default fallback selector is used if no visible card is found in the prioritized sections.
+```javascript
+        ) into an authentic, concise stream of consciousness that reveals how the agent is thinking. Ensure your output is still detailed but different from the raw thoughts in a meaningful way.
+
+
+The search state check `tieneBusquedaActiva` might always return true under specific conditions. Specifically, when viewing the "anteriores" tab with a 90-day period and an empty search box, it appears the search is considered active. This is because the comparison logic in `capturarEstadoBusquedaPrevia` seems to evaluate the 90d period as an active search. Therefore, pressing the return button resets the search.
+
+
+The system handles "90d" period searches by dispatching a search action, immediately reloading the 90-day order list. The "Volver" button resets the search field, triggering another search and reload for the current orders. The displayed summary text dynamically adapts based on the active tab and the presence of a search term.
 
 
 
@@ -18160,74 +13609,3286 @@ Examining the HTML snippet, it appears to define a filter selection for a date r
 ### Actions
 
 **Tool:** `view_file`
-**File:** `labadmin.js`
+**File:** `ws-client.js`
 
 <details>
 <summary>Metadata</summary>
 
-- **Thinking Duration:** 0.080890526s
+- **Thinking Duration:** 2.046715815s
 - **Model:** Gemini 3.8 Flash (High)
 </details>
 
 ---
 
 <details>
-<summary>File: `Unknown file` (L859-909)</summary>
+<summary>File: `Unknown file` (L259-379)</summary>
 
 **Path:** `Unknown file`
 
 ```
 
-    // Botón abrir modal médico
-    var btnAbrirMedico = document.getElementById('btn-abrir-modal-medico');
-    if (btnAbrirMedico) btnAbrirMedico.addEventListener('click', function() {
-        if (typeof window.abrirModalMedico === 'function') window.abrirModalMedico();
-    });
+    // ── Instantánea y Restauración de Búsqueda Previa (Flujo Poka-Yoke Notificaciones) ──
+    var _busquedaPreviaSnapshot = null;
 
-    // Botón agregar estudio
-    var btnAgregarEstudio = document.getElementById('btn-agregar-estudio');
-    if (btnAgregarEstudio) {
-        btnAgregarEstudio.addEventListener('click', function() {
-            if (window.showToast) showToast('Agregar Estudio desde el Constructor en proceso...', 'info');
+    function capturarEstadoBusquedaPrevia(isMedicoPortal) {
+        if (_busquedaPreviaSnapshot) return; // Si ya hay una activa sin restaurar, mantenerla
+
+        var searchAnterioresId = isMedicoPortal ? 'input-buscar-orden-anteriores-md' : 'input-buscar-orden-anteriores-rc';
+        var searchHoyId        = isMedicoPortal ? 'input-buscar-orden-hoy-md'        : 'input-buscar-orden-rc';
+        var selectPeriodoId    = isMedicoPortal ? 'select-periodo-anteriores-md'    : 'select-periodo-anteriores-rc';
+        var fechaIniId         = isMedicoPortal ? 'fecha-inicio-anteriores-md'      : 'fecha-inicio-anteriores-rc';
+        var fechaFinId         = isMedicoPortal ? 'fecha-fin-anteriores-md'         : 'fecha-fin-anteriores-rc';
+        var rangoContainerId   = isMedicoPortal ? 'rango-fechas-anteriores-md'      : 'rango-fechas-anteriores-rc';
+
+        var inputAnt    = document.getElementById(searchAnterioresId);
+        var inputHoy    = document.getElementById(searchHoyId);
+        var selPeriodo  = document.getElementById(selectPeriodoId);
+        var inputIni    = document.getElementById(fechaIniId);
+        var inputFin    = document.getElementById(fechaFinId);
+        var rangoElem   = document.getElementById(rangoContainerId);
+
+        var textoAnt   = inputAnt ? (inputAnt.value || '').trim() : '';
+        var textoHoy   = inputHoy ? (inputHoy.value || '').trim() : '';
+        var periodoVal = selPeriodo ? selPeriodo.value : '90d';
+        var iniVal     = inputIni ? (inputIni.value || '') : '';
+        var finVal     = inputFin ? (inputFin.value || '') : '';
+
+        var tieneBusquedaActiva = (textoAnt !== '' || textoHoy !== '' || periodoVal === 'fecha' || iniVal !== '' || finVal !== '' || (periodoVal !== '90d' && periodoVal !== ''));
+        if (!tieneBusquedaActiva) return;
+
+        var tabActiva = 'anteriores';
+        if (isMedicoPortal) {
+            var subHoy = document.getElementById('subtab-ordenes-hoy');
+            if (subHoy && subHoy.classList.contains('active')) tabActiva = 'hoy';
+        } else {
+            var panelHoy = document.getElementById('panel-ordenes');
+            if (panelHoy && !panelHoy.classList.contains('d-none')) tabActiva = 'hoy';
+        }
+
+        _busquedaPreviaSnapshot = {
+            isMedico: isMedicoPortal,
+            tabActiva: tabActiva,
+            textoAnt: textoAnt,
+            textoHoy: textoHoy,
+            periodoVal: periodoVal,
+            iniVal: iniVal,
+            finVal: finVal,
+            rangoVisible: rangoElem ? (rangoElem.style.display !== 'none') : false
+        };
+    }
+
+    function mostrarBarraRetorno(cleanTarget) {
+        if (!_busquedaPreviaSnapshot) return;
+
+        var snap = _busquedaPreviaSnapshot;
+        var resumen = [];
+        if (snap.tabActiva === 'hoy') {
+            if (snap.textoHoy) resumen.push('"' + snap.textoHoy + '"');
+            resumen.push('Órdenes de Hoy');
+        } else {
+            if (snap.textoAnt) resumen.push('"' + snap.textoAnt + '"');
+            if (snap.periodoVal === 'fecha' && (snap.iniVal || snap.finVal)) {
+                resumen.push((snap.iniVal || '') + ' al ' + (snap.finVal || ''));
+            } else if (snap.periodoVal && snap.periodoVal !== '90d') {
+                resumen.push(snap.periodoVal);
+            }
+        }
+        var resumenTexto = resumen.length > 0 ? resumen.join(' · ') : 'Búsqueda en curso';
+
+        var existingBar = document.getElementById('laesh-notif-return-bar');
+        if (existingBar) existingBar.remove();
+
+        var bar = document.createElement('div');
+        bar.id = 'laesh-notif-return-bar';
+        bar.style.cssText = 'background: #eff6ff; border: 1px solid #bfdbfe; border-left: 4px solid #0052b7; border-radius: 6px; padding: 7px 12px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; gap: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);';
+
+        bar.innerHTML = 
+            '<div style="font-size: 0.82rem; color: #1e3a8a; display: flex; align-items: center; gap: 6px;">' +
+                '<span style="font-size: 0.95rem;">🔔</span>' +
+                '<span>Revisando orden de notificación: <strong style="color: #0052b7;">#' + escapeHtml(cleanTarget) + '</strong></span>' +
+            '</div>' +
+            '<div style="display: flex; align-items: center; gap: 6px;">' +
+                '<button type="button" id="btn-volver-busqueda-notif" style="padding: 4px 12px; font-size: 0.8rem; font-weight: 600; color: #ffffff; background: #0052b7; border: 1px solid #004394; border-radius: 5px; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.08);">' +
+                    '<span>⬅ Volver a mi búsqueda (' + escapeHtml(resumenTexto) + ')</span>' +
+                '</button>' +
+                '<button type="button" id="btn-cerrar-banner-notif" title="Descartar aviso" style="background: transparent; border: none; font-size: 1rem; color: #64748b; cursor: pointer; line-height: 1; padding: 2px 6px;">✕</button>' +
+            '</div>';
+
+        var targetCard = null;
+        if (snap.isMedico) {
+            targetCard = document.querySelector('#subtab-ordenes-hoy .card, #panel-historial-medico .card');
+        } else {
+            targetCard = document.querySelector('#panel-ordenes .card, #panel-ordenes-anteriores .card');
+        }
+
+        if (targetCard && targetCard.parentNode) {
+            targetCard.parentNode.insertBefore(bar, targetCard);
+        } else {
+            var header = document.querySelector('.cms-panel-header');
+            if (header && header.parentNode) {
+                header.parentNode.insertBefore(bar, header.nextSibling);
+            }
+        }
+
+        var btnVolver = document.getElementById('btn-volver-busqueda-notif');
+        if (btnVolver) {
+            btnVolver.addEventListener('click', function(e) {
+                e.preventDefault();
+                restaurarEstadoBusquedaPrevia();
+            });
+        }
+        var btnCerrar = document.getElementById('btn-cerrar-banner-notif');
+        if (btnCerrar) {
+            btnCerrar.addEventListener('click', function(e) {
+                e.preventDefault();
+                _busquedaPreviaSnapshot = null;
+                bar.remove();
+            });
+        }
+    }
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The search state snapshot should be captured universally whenever an active tab or filter is present. This ensures a consistent one-click return to the complete list, regardless of the search query or lack thereof, when triggered by notifications. If a return target is not found, the UI should indicate this with a light red or amber background.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ws-client.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.086756944s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L499-519)</summary>
+
+**Path:** `Unknown file`
+
+```
+            return null;
+        }
+
+        var destinoInicial = resolverDestino(esHoy);
+        if (!destinoInicial) return;
+
+        // 2026-09-27 (pedido explícito del usuario): NO abrir de forma forzada
+        // la Solicitud Digital ni el PDF de Resultados en overlay para no interrumpir
+        // ni ocultar la pantalla de trabajo del operador. En su lugar, un aviso no intrusivo.
+        var onNoEncontrado = opciones.onNoEncontrado || function() {
+            console.log('[LAESH Notif] Solicitud #' + cleanTarget + ' no localizada en grilla.');
+        };
+
+        // 3-4. Intenta localizar y resaltar el renglón en un destino dado
+        // (Hoy o Anteriores). Si agota los reintentos sin encontrarlo Y aún
+        // no se probó la pestaña opuesta, cambia a esa pestaña y reintenta
+        // ahí antes de rendirse al fallback — ver nota de "corrección de
+        // raíz" arriba de resolverDestino().
+        function intentarEn(destino, yaProboOpuesta) {
+            destino.panelFn();
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ws-client.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L644-659)</summary>
+
+**Path:** `Unknown file`
+
+```
+                }
+
+                var foundRow = buscarYResaltarEn(table);
+
+                if (foundRow) {
+                    mostrarBarraRetorno(cleanTarget);
+                    if (opciones.filtrarBusquedaPrimero) {
+                        resyncDeadline = Date.now() + resyncWindowMs;
+                        document.addEventListener('htmx:afterSettle', onAfterSettle);
+                        // Limpieza de respaldo — si nunca llega otro swap en
+                        // esta tabla tras el deadline, el listener igual se
+                        // desengancha (evita acumular listeners indefinidos).
+                        setTimeout(function() {
+                            document.removeEventListener('htmx:afterSettle', onAfterSettle);
+                        }, resyncWindowMs + 200);
+                    }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Examining the provided code snippet, the focus is on refining search state capture, return bar display, and "not found" handling within `ws-client.js`. The lines between 260 and 380, particularly the `capturarEstadoBusquedaPrevia` function, require close inspection. The function's initial logic prevents redundant snapshot creation if one already exists.
+
+
+Focus shifts to parsing and extracting search parameters based on the UI context, specifically whether the "MedicoPortal" flag is active. Different element IDs are selected based on this flag to retrieve user input for search criteria. Initial values are set for various search fields, including search terms, date ranges, and a default period. The active tab ("hoy" or "anteriores") is determined using conditional checks on DOM elements, reflecting the user's current view.
+
+
+The code captures the current search state into a snapshot object, including active tab, search terms, and date range, determining visibility of a date range element, and checking a medical portal flag.  It then uses this snapshot to construct a summary string for display based on the search criteria used, classifying searches as either custom or default. The summary string considers both the presence of search terms and the selected date range.
+
+
+Focusing on the "not found" scenario, the code constructs a notification bar informing the user about the missing order and a button to return to the search.  The bar's appearance changes based on the search context (personal or list), including the text of the return button, constructed from the stored search state summary.  The code includes an HTML escape function to prevent potential injection vulnerabilities.
+
+
+The code dynamically constructs a notification bar and button based on whether the search is for a list or a personal order. The text of the return button is derived from a stored summary of the search criteria. This approach offers tailored feedback.
+
+
+The logic for locating the target card element within the DOM is conditional, varying with the 'MedicoPortal' flag. If the flag is active, it checks for elements within medical history or today's orders tabs. Otherwise, it targets older or current order panels. Initial hypothesis: the code is checking for specific tabs and elements, but the logic could be simplified.
+
+If no specific card is found, the code attempts to find a card element within a potentially active panel; this fallback mechanism might be crucial. The code snippet dynamically constructs a notification bar for display, if the target card is not found. The choice of which panel to search for cards appears correct, now analyzing how the banner looks like.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 12.404912529s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 12:15 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ws-client.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L534-554)</summary>
+
+**Path:** `Unknown file`
+
+```
+                } : {
+                    panelFn: function() {
+                        if (typeof window.cambiarTabAdmin === 'function') window.cambiarTabAdmin('panel-ordenes-anteriores');
+                    },
+                    tableId: 'tabla-recepcion-anteriores',
+                    searchId: 'input-buscar-orden-anteriores-rc'
+                };
+            }
+            return null;
+        }
+
+        var destinoInicial = resolverDestino(esHoy);
+        if (!destinoInicial) return;
+
+        // 2026-09-27 (pedido explícito del usuario): NO abrir de forma forzada
+        // la Solicitud Digital ni el PDF de Resultados en overlay para no interrumpir
+        // ni ocultar la pantalla de trabajo del operador. En su lugar, un aviso no intrusivo.
+        var onNoEncontrado = opciones.onNoEncontrado || function() {
+            console.log('[LAESH Notif] Solicitud #' + cleanTarget + ' no localizada en grilla.');
+        };
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ws-client.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L679-709)</summary>
+
+**Path:** `Unknown file`
+
+```
+                var table = document.getElementById(destino.tableId);
+                if (!table && attempts < maxAttempts) {
+                    setTimeout(highlightRow, 150);
+                    return;
+                }
+                if (!table) {
+                    agotado();
+                    return;
+                }
+
+                var foundRow = buscarYResaltarEn(table);
+
+                if (foundRow) {
+                    mostrarBarraRetorno(cleanTarget);
+                    if (opciones.filtrarBusquedaPrimero) {
+                        resyncDeadline = Date.now() + resyncWindowMs;
+                        document.addEventListener('htmx:afterSettle', onAfterSettle);
+                        // Limpieza de respaldo — si nunca llega otro swap en
+                        // esta tabla tras el deadline, el listener igual se
+                        // desengancha (evita acumular listeners indefinidos).
+                        setTimeout(function() {
+                            document.removeEventListener('htmx:afterSettle', onAfterSettle);
+                        }, resyncWindowMs + 200);
+                    }
+                } else if (attempts < maxAttempts) {
+                    // Reintentar si la tabla aún se está refrescando/renderizando por HTMX
+                    setTimeout(highlightRow, 200 * attempts);
+                } else {
+                    agotado();
+                }
+            };
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The code defines a function for handling requests not found in a grid, logging a message and calling a status update function with a `false` status. The second code block calls the status update function with a `true` status. This suggests that the status update function's behavior needs adjustment based on whether a request is found.
+I'm thinking through how to approach this.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.000746606s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 12:16 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ws-client.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L689-704)</summary>
+
+**Path:** `Unknown file`
+
+```
+                }
+
+                var foundRow = buscarYResaltarEn(table);
+
+                if (foundRow) {
+                    mostrarBarraRetorno(cleanTarget);
+                    if (opciones.filtrarBusquedaPrimero) {
+                        resyncDeadline = Date.now() + resyncWindowMs;
+                        document.addEventListener('htmx:afterSettle', onAfterSettle);
+                        // Limpieza de respaldo — si nunca llega otro swap en
+                        // esta tabla tras el deadline, el listener igual se
+                        // desengancha (evita acumular listeners indefinidos).
+                        setTimeout(function() {
+                            document.removeEventListener('htmx:afterSettle', onAfterSettle);
+                        }, resyncWindowMs + 200);
+                    }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 12:16 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 12:16 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+Double-checking calendar date input functionality. Confirmed that both start and end dates are captured, with usability checks implemented. Specifically, the end date input's minimum value dynamically updates to ensure it doesn't precede the start date, preventing errors. The case where both dates are the same is handled.
+
+
+Calendar functionality is confirmed, including the date range logic and UI adjustments. The default date range is now clarified as the past 90 days. Backend queries were updated to integrate text filtering with the selected calendar period and pagination reflects these selections. Specifically, folio searches were modified to include historical dates.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.422372453s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 12:16 am
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+## User Request
+
+y para medico , si esta en su pantalla de captura de orden, que sucera ?  solo analiza e informa.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `ws-client.js`
+**Language:** javascript
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The request concerns the doctor's order capture screen. The focus is to determine the state of that screen, given certain conditions, rather than to modify anything. Therefore, the task requires analyzing the behavior on the screen.
+
+
+Initial investigation focuses on `ws-client.js` to understand how notifications interact with the order form (`#form-orden`). The code checks if the user is typing within the form before attempting to refresh the data, using `document.activeElement`. The `userIsTyping` condition suggests a mechanism to prevent interruption of the doctor's input. The `refreshDeferrable` function appears to defer the update if the user is currently typing.
+
+
+The code strategically delays table refreshes within the order form (`#form-orden`) if the doctor is actively typing in an input field. This prevents focus stealing and keystroke disruption. Further analysis reveals a silenced chime for doctor portal notifications, ensuring no audio interruption during order entry.
+
+Crucially, clicking a notification does *not* reload, clear, or change the doctor's order form; instead, the notification displays in the sidebar. This means the doctor can continue filling out the order uninterrupted.
+
+
+The Doctor Portal contains tabs for order creation, today's orders, order history, and patients, with the order creation tab further divided into sub-tabs. The function executed upon notification click checks for a Doctor Portal context based on specific HTML elements. If in the Doctor Portal, the function resolves the navigation target; specifically, if the order is for today, it switches to the "today's orders" sub-tab and highlights that order.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `switchSubTab`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.144810237s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 12:19 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L14-59)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+        // ── Tabs internos del panel Nueva Orden ─────────────────────
+        function switchSubTab(id, btn) {
+            document.querySelectorAll('#panel-nueva-orden .portal-tab-panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('#panel-nueva-orden .portal-tab').forEach(b => {
+                b.classList.remove('active');
+                b.setAttribute('aria-selected', 'false');
+            });
+            var panel = document.getElementById('subtab-' + id);
+            if (panel) panel.classList.add('active');
+            if (btn) {
+                btn.classList.add('active');
+                btn.setAttribute('aria-selected', 'true');
+            } else {
+                var targetBtn = document.getElementById(id === 'generar' ? 'tab-generar' : 'tab-ordenes-hoy');
+                if (targetBtn) {
+                    targetBtn.classList.add('active');
+                    targetBtn.setAttribute('aria-selected', 'true');
+                }
+            }
+            // Mostrar botones solo cuando el tab activo es Generar Orden Digital
+            var tabBtns = document.getElementById('tab-bar-btns');
+            if (tabBtns) tabBtns.style.display = (id === 'generar') ? 'flex' : 'none';
+
+            updateSidebarActionGroupVisibility();
+        }
+        window.switchSubTab = switchSubTab;
+
+        // 2026-09-25 (pedido del usuario): el grupo de íconos móviles
+        // Limpiar/Crear e Imprimir (#sidebar-action-group, tira superior)
+        // solo debe verse en la pestaña "Solicitud" (subtab-generar, donde
+        // vive el formulario) — antes se veía en cualquier panel/pestaña
+        // del portal (Mis Pacientes, Solicitudes Anteriores, Catálogo...)
+        // porque su CSS móvil lo mostraba siempre. Se evalúan las 2
+        // condiciones (panel Y sub-tab activos) porque cambiarTabMedico()
+        // y switchSubTab() cambian independientemente uno del otro.
+        function updateSidebarActionGroupVisibility() {
+            var group = document.getElementById('sidebar-action-group');
+            if (!group) return;
+            var panelActivo = document.getElementById('panel-nueva-orden');
+            var esPanelSolicitud = !!(panelActivo && !panelActivo.classList.contains('d-none'));
+            var tabGenerarBtn = document.getElementById('tab-generar');
+            var esSubtabSolicitud = !!(tabGenerarBtn && tabGenerarBtn.classList.contains('active'));
+            group.classList.toggle('sidebar-action-group--hidden', !(esPanelSolicitud && esSubtabSolicitud));
+        }
+        window.updateSidebarActionGroupVisibility = updateSidebarActionGroupVisibility;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `cambiarTabMedico`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 12:19 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L779-814)</summary>
+
+**Path:** `Unknown file`
+
+```
+            'panel-catalogo-medico':   'Catálogo de Estudios'
+        };
+        function cambiarTabMedico(panelId, el) {
+            document.querySelectorAll('.sidebar .nav-item').forEach(i => i.classList.remove('active'));
+            if (el) {
+                el.classList.add('active');
+            } else {
+                const navItem = document.querySelector(`.sidebar .nav-item[data-panel="${panelId}"]`);
+                if (navItem) navItem.classList.add('active');
+            }
+            document.querySelectorAll('.tab-panel').forEach(p => {
+                p.style.display = 'none';
+                p.classList.add('d-none');
+            });
+            const target = document.getElementById(panelId);
+            if (target) {
+                target.classList.remove('d-none');
+                target.style.display = 'block';
+            }
+            const bc = document.getElementById('header-bc-current');
+            if (bc && panelLabels[panelId]) bc.textContent = panelLabels[panelId];
+
+            if (panelId === 'panel-catalogo-medico')   refreshCatalog();
+
+            updateSidebarActionGroupVisibility();
+        }
+        window.cambiarTabMedico = cambiarTabMedico;
+
+        // Refrescar badge cuando la pestaña cambia
+        window.addEventListener('storage', function() {
+            refreshData();
         });
-    } 
-    
-    // Filtros — IDs corregidos para coincidir con los elements reales del HTML
-    var filtroSelects = [
-        ['filtro-periodo-admin',           function() { if (typeof window.manejarCambioFiltroAdmin === 'function') window.manejarCambioFiltroAdmin(); }],
-        ['filtro-periodo-historial-admin', function() { if (typeof window.filtrarHistorialAdmin === 'function') window.filtrarHistorialAdmin(); }]
-    ];
-    filtroSelects.forEach(function(pair) {
-        var el = document.getElementById(pair[0]);
-        if (el) el.addEventListener('change', pair[1]);
+
+        // ── Floating Search (SFS) — medicos ─────────────────────────────────────
+        // Toggle rail extraído a sidebar-rail.js (compartido con labadmin/gestion-web).
+        // Este bloque maneja solo la búsqueda flotante específica del Portal Médico.
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The notification click while on `subtab-generar` triggers an action within the websocket client. It's crucial to understand how this action interacts with the existing form data. The `cambiarTabMedico` function only affects display styles, ensuring the form data in the hidden tab remains unchanged. Therefore, the form data for generating a new order is preserved and ready.
+
+
+Analyzing `capturarEstadoBusquedaPrevia` function in the websocket client code, specifically lines 264-309, to understand how previous search criteria are handled. The function appears to capture search input values from various HTML elements conditionally, based on a portal identifier. It checks for an existing snapshot before proceeding, suggesting a mechanism for preserving search states. The objective is to determine how the current search context is maintained and potentially restored.
+
+
+Considering a conditional statement within the code, I initially hypothesized that the active tab might be "hoy" (today). Investigating further, I found the "hoy" sub-tab's visibility is controlled by CSS, not a `d-none` class. This implied the condition within the code would evaluate to true. Therefore, the variable `tabActiva` should be set to "hoy" even though the subtab is visually hidden.
+
+
+Reviewing the code, specifically the `restaurarEstadoBusquedaPrevia` function, reveals that clicking "volver" incorrectly navigates to "ordenes-hoy" when the previous tab was "hoy". This occurs because the function always assumes a "hoy" tab, regardless of the original context. It appears `restaurarEstadoBusquedaPrevia` doesn't currently handle returning to the correct tab. I need to determine how it determines the original tab and make it return to the correct subtab, which is the order generation screen in this scenario.
+
+
+Examining the scenario where a notification arrives during form entry, the deferred refresh mechanism ensures the form data remains unaffected. The refresh procedure will not interfere with the user's input because it's designed to not steal focus or alter field values, while audio alerts are disabled in the medical portal. The notification's arrival leaves the form data untouched, only illuminating the notification badge.
+
+
+The code defers table refreshes if the user is typing in a form field to prevent interruption; focus isn't stolen, and audio alerts are disabled in the medical portal to avoid disturbance. The notification badge illuminates discreetly.
+
+Clicking a notification calls `navegarYResaltarOrden()`, which changes the displayed tab to show the relevant order grid. This tab change targets the "Hoy" or "Anteriores" subtabs depending on the notification source.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 5.767682683s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L179-234)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+            <main class="main-content" id="main-content">
+                <!-- Panel 1: Nueva Solicitud -->
+                <div id="panel-nueva-orden" class="tab-panel">
+                    <h2 class="panel-nueva-orden-title">Solicitudes Digitales</h2>
+
+                    <!-- ── Barra de tabs interna: Generar Orden / Mis Órdenes ── -->
+                    <!-- A11Y-06: tab-bar-btns movido FUERA del role=tablist para no confundir AT -->
+                    <div class="portal-tab-bar tab-bar-ac">
+                        <div class="portal-tab-list" role="tablist" aria-label="Secciones de nueva solicitud">
+                            <button type="button" class="portal-tab active" role="tab" id="tab-generar"
+                                    aria-controls="subtab-generar" aria-selected="true">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 2v2"/><path d="M5 2v2"/><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"/><path d="M8 15a6 6 0 0 0 12 0v-3"/><circle cx="20" cy="10" r="2"/></svg>
+                                <span id="tab-generar-text">Solicitud Nueva</span>
+                            </button>
+                            <button type="button" class="portal-tab" role="tab" id="tab-ordenes-hoy"
+                                    aria-controls="subtab-ordenes-hoy" aria-selected="false">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                                Solicitudes Hoy
+                            </button>
+                            <!-- 2026-09-25 (pedido del usuario): se elimina el clon compacto de
+                                 paginación (GAP-MD-08) que vivía aquí, pegado a la pestaña — se
+                                 veía duplicado con la paginación real de abajo
+                                 (#ordenes-hoy-md-pagination-wrap) bajo zoom de navegador >100%.
+                                 Ahora Órdenes Hoy usa el MISMO tratamiento compacto ya probado en
+                                 Órdenes Anteriores (una sola paginación, siempre junto al
+                                 buscador, sin duplicado) — ver #ordenes-hoy-md-header en
+                                 portal.css @media(max-width:767px). -->
+                        </div>
+                        <!-- Botones Limpiar / Crear e Imprimir — separados del tablist (A11Y-06) -->
+                        <div id="tab-bar-btns" class="tab-bar-btns" role="toolbar" aria-label="Acciones de solicitud">
+                            <button class="btn badge-reset" type="button"
+                                    id="btn-limpiar-orden"
+                                    aria-label="Limpiar selección de estudios">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.46"/></svg>
+                                <span class="btn-imprimir-texto">Limpiar</span>
+                            </button>
+                            <span class="btn-vsep-divider" aria-hidden="true"></span>
+                            <button class="btn btn-primary btn-imprimir-orden badge-reset-sm" type="submit" form="form-orden"
+                                    aria-label="Crear e imprimir solicitud médica">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                                <span class="btn-imprimir-texto">Crear e Imprimir Solicitud</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- ── Sub-tab 1: Generar Orden Digital ── -->
+                    <div id="subtab-generar" class="portal-tab-panel active" role="tabpanel" aria-labelledby="tab-generar">
+                        <form id="form-orden" 
+                              hx-post="/laesh/md/orden/crear" 
+                              hx-target="#a11y-live" 
+                              hx-swap="innerHTML"
+                              hx-indicator="#loading-spinner">
+                            <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken ?? '', ENT_QUOTES, 'UTF-8') ?>">
+                            <!-- HTMX: indicador de carga (hx-indicator="#loading-spinner") -->
+                            <span id="loading-spinner" class="htmx-indicator" role="status" aria-label="Enviando solicitud…">
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Analyzing the structure of the "nueva-orden" panel reveals two tabs: "generar" (active by default) and "ordenes-hoy," each linked to corresponding subtabs. The "nueva-orden" panel itself is visible when the doctor is in the capture screen, indicating its relevance to this state. This suggests the "generar" tab is the initial view within the capture screen.
+
+
+If a notification arrives while the doctor is actively inputting data in the form (Scenario A), background refreshes are postponed, preventing data loss or cursor movement; sound alerts are suppressed in the medical portal, and only a visual cue is updated.
+
+If the doctor clicks the notification during data entry (Scenario B), the entered data within the form, residing in the active subtab, is preserved and not lost.
+
+
+The functions used to change views, toggle CSS visibility classes without resetting the form. This ensures the data entered in the form remains intact in the DOM. Clicking a notification from "Hoy" moves the view to the "Solicitudes Hoy" subtab, while "Anteriores" goes to the "Solicitudes Anteriores" tab. The doctor returns to the form by clicking the "Nueva Solicitud" tab, with the data preserved. A potential improvement is identified in the return button's logic within a specific script.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.674722105s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+## User Request
+
+Esto:  "Vía Barra de Retorno (Oportunidad de afinación Poka-Yoke)" , solo es una mejora visual cierto ?
+
+---
+
+### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 10:54 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+"Via Return Bar (Poka-Yoke tuning opportunity)" suggests a potential for preventing errors through design. Considering "Poka-Yoke," the question likely centers on whether this implementation affects usability and/or navigation, and not simply aesthetics. The focus is error prevention.
+
+
+Without the tuning, clicking the "Return" button navigates away from the form capture, requiring an extra click to return; the button label also mismatches the current context. The tuning ensures a single click returns to the form due to the `switchSubTab('generar')` action and better label. This change focuses on improving usability, as data persistence is unaffected in either scenario.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.942414316s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+## User Request
+
+. realizala pues.
+. pero y para cuando el medico esta en la pantalla de ordenes anteriores haciendo un filtro de busqueda cmo esta implementado justo ahora ?
+
+---
+
+## Agent Response
+
+### Thinking
+
+The first request focuses on implementing the Poka-Yoke adjustment for returning to capture within the Doctor portal. The second question raises a concern about how this affects the existing search filter functionality when a doctor is viewing prior orders.
+
+I'm thinking through how to approach this.
+
+
+The focus is on integrating the doctor's "capture" state into the navigation. Specifically, when the doctor is in the capture screen and then moves to previous orders and utilizes a search filter.
+
+I'm verifying how to maintain the doctor's "capture" state so the doctor can return. If the doctor uses the previous order filter, I need to make sure that the doctor's capture state is restored.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ws-client.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.934915202s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L274-449)</summary>
+
+**Path:** `Unknown file`
+
+```
+        var inputHoy    = document.getElementById(searchHoyId);
+        var selPeriodo  = document.getElementById(selectPeriodoId);
+        var inputIni    = document.getElementById(fechaIniId);
+        var inputFin    = document.getElementById(fechaFinId);
+        var rangoElem   = document.getElementById(rangoContainerId);
+
+        var textoAnt   = inputAnt ? (inputAnt.value || '').trim() : '';
+        var textoHoy   = inputHoy ? (inputHoy.value || '').trim() : '';
+        var periodoVal = selPeriodo ? selPeriodo.value : '90d';
+        var iniVal     = inputIni ? (inputIni.value || '') : '';
+        var finVal     = inputFin ? (inputFin.value || '') : '';
+
+        var tabActiva = 'anteriores';
+        if (isMedicoPortal) {
+            var subHoy = document.getElementById('subtab-ordenes-hoy');
+            if (subHoy && (subHoy.classList.contains('active') || !subHoy.classList.contains('d-none'))) tabActiva = 'hoy';
+        } else {
+            var panelHoy = document.getElementById('panel-ordenes');
+            if (panelHoy && !panelHoy.classList.contains('d-none')) tabActiva = 'hoy';
+        }
+
+        _busquedaPreviaSnapshot = {
+            isMedico: isMedicoPortal,
+            tabActiva: tabActiva,
+            textoAnt: textoAnt,
+            textoHoy: textoHoy,
+            periodoVal: periodoVal,
+            iniVal: iniVal,
+            finVal: finVal,
+            rangoVisible: rangoElem ? (rangoElem.style.display !== 'none') : false
+        };
+    }
+
+    function mostrarBarraRetorno(cleanTarget, localizada) {
+        if (!_busquedaPreviaSnapshot) return;
+
+        var snap = _busquedaPreviaSnapshot;
+        var resumen = [];
+        var esBusquedaPersonalizada = false;
+        if (snap.tabActiva === 'hoy') {
+            if (snap.textoHoy) {
+                resumen.push('"' + snap.textoHoy + '"');
+                esBusquedaPersonalizada = true;
+            } else {
+                resumen.push('Órdenes de Hoy');
+            }
+        } else {
+            if (snap.textoAnt) {
+                resumen.push('"' + snap.textoAnt + '"');
+                esBusquedaPersonalizada = true;
+            }
+            if (snap.periodoVal === 'fecha' && (snap.iniVal || snap.finVal)) {
+                resumen.push((snap.iniVal || '') + ' al ' + (snap.finVal || ''));
+                esBusquedaPersonalizada = true;
+            } else if (snap.periodoVal && snap.periodoVal !== '90d') {
+                resumen.push(snap.periodoVal);
+                esBusquedaPersonalizada = true;
+            } else if (!snap.textoAnt) {
+                resumen.push('Últimos 90 días');
+            }
+        }
+        var resumenTexto = resumen.length > 0 ? resumen.join(' · ') : 'Búsqueda previa';
+        var labelBoton = esBusquedaPersonalizada ? ('⬅ Volver a mi búsqueda (' + resumenTexto + ')') : ('⬅ Volver a la lista (' + resumenTexto + ')');
+
+        var existingBar = document.getElementById('laesh-notif-return-bar');
+        if (existingBar) existingBar.remove();
+
+        var esNoEncontrada = (localizada === false);
+        var bar = document.createElement('div');
+        bar.id = 'laesh-notif-return-bar';
+        if (esNoEncontrada) {
+            bar.style.cssText = 'background: #fef2f2; border: 1px solid #fecaca; border-left: 4px solid #ef4444; border-radius: 6px; padding: 7px 12px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; gap: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);';
+            bar.innerHTML = 
+                '<div style="font-size: 0.82rem; color: #991b1b; display: flex; align-items: center; gap: 6px;">' +
+                    '<span style="font-size: 0.95rem;">⚠️</span>' +
+                    '<span>No se localizó en la lista la orden de notificación: <strong style="color: #b91c1c;">#' + escapeHtml(cleanTarget) + '</strong></span>' +
+                '</div>' +
+                '<div style="display: flex; align-items: center; gap: 6px;">' +
+                    '<button type="button" id="btn-volver-busqueda-notif" style="padding: 4px 12px; font-size: 0.8rem; font-weight: 600; color: #ffffff; background: #0052b7; border: 1px solid #004394; border-radius: 5px; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.08);">' +
+                        '<span>' + escapeHtml(labelBoton) + '</span>' +
+                    '</button>' +
+                    '<button type="button" id="btn-cerrar-banner-notif" title="Descartar aviso" style="background: transparent; border: none; font-size: 1rem; color: #64748b; cursor: pointer; line-height: 1; padding: 2px 6px;">✕</button>' +
+                '</div>';
+        } else {
+            bar.style.cssText = 'background: #eff6ff; border: 1px solid #bfdbfe; border-left: 4px solid #0052b7; border-radius: 6px; padding: 7px 12px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; gap: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);';
+            bar.innerHTML = 
+                '<div style="font-size: 0.82rem; color: #1e3a8a; display: flex; align-items: center; gap: 6px;">' +
+                    '<span style="font-size: 0.95rem;">🔔</span>' +
+                    '<span>Revisando orden de notificación: <strong style="color: #0052b7;">#' + escapeHtml(cleanTarget) + '</strong></span>' +
+                '</div>' +
+                '<div style="display: flex; align-items: center; gap: 6px;">' +
+                    '<button type="button" id="btn-volver-busqueda-notif" style="padding: 4px 12px; font-size: 0.8rem; font-weight: 600; color: #ffffff; background: #0052b7; border: 1px solid #004394; border-radius: 5px; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.08);">' +
+                        '<span>' + escapeHtml(labelBoton) + '</span>' +
+                    '</button>' +
+                    '<button type="button" id="btn-cerrar-banner-notif" title="Descartar aviso" style="background: transparent; border: none; font-size: 1rem; color: #64748b; cursor: pointer; line-height: 1; padding: 2px 6px;">✕</button>' +
+                '</div>';
+        }
+
+        var targetCard = null;
+        if (snap.isMedico) {
+            var medHist = document.getElementById('panel-historial-medico');
+            var medHoy = document.getElementById('subtab-ordenes-hoy');
+            if (medHist && !medHist.classList.contains('d-none')) {
+                targetCard = medHist.querySelector('.card');
+            } else if (medHoy && (medHoy.classList.contains('active') || !medHoy.classList.contains('d-none'))) {
+                targetCard = medHoy.querySelector('.card');
+            }
+            if (!targetCard) {
+                targetCard = document.querySelector('#panel-historial-medico:not(.d-none) .card, #subtab-ordenes-hoy.active .card, #panel-historial-medico .card, #subtab-ordenes-hoy .card');
+            }
+        } else {
+            var rcAnt = document.getElementById('panel-ordenes-anteriores');
+            var rcHoy = document.getElementById('panel-ordenes');
+            if (rcAnt && !rcAnt.classList.contains('d-none')) {
+                targetCard = rcAnt.querySelector('.card');
+            } else if (rcHoy && !rcHoy.classList.contains('d-none')) {
+                targetCard = rcHoy.querySelector('.card');
+            }
+            if (!targetCard) {
+                targetCard = document.querySelector('#panel-ordenes-anteriores:not(.d-none) .card, #panel-ordenes:not(.d-none) .card, #panel-ordenes-anteriores .card, #panel-ordenes .card');
+            }
+        }
+
+        if (targetCard && targetCard.parentNode) {
+            targetCard.parentNode.insertBefore(bar, targetCard);
+        } else {
+            var header = document.querySelector('.cms-panel-header');
+            if (header && header.parentNode) {
+                header.parentNode.insertBefore(bar, header.nextSibling);
+            }
+        }
+
+        var btnVolver = document.getElementById('btn-volver-busqueda-notif');
+        if (btnVolver) {
+            btnVolver.addEventListener('click', function(e) {
+                e.preventDefault();
+                restaurarEstadoBusquedaPrevia();
+            });
+        }
+        var btnCerrar = document.getElementById('btn-cerrar-banner-notif');
+        if (btnCerrar) {
+            btnCerrar.addEventListener('click', function(e) {
+                e.preventDefault();
+                _busquedaPreviaSnapshot = null;
+                bar.remove();
+            });
+        }
+    }
+
+    function restaurarEstadoBusquedaPrevia() {
+        if (!_busquedaPreviaSnapshot) return;
+        var snap = _busquedaPreviaSnapshot;
+        _busquedaPreviaSnapshot = null;
+
+        var bar = document.getElementById('laesh-notif-return-bar');
+        if (bar) bar.remove();
+
+        var isMed = snap.isMedico;
+        if (snap.tabActiva === 'hoy') {
+            if (isMed) {
+                if (typeof window.cambiarTabMedico === 'function') window.cambiarTabMedico('panel-nueva-orden');
+                if (typeof window.switchSubTab === 'function') window.switchSubTab('ordenes-hoy');
+                var inpHoy = document.getElementById('input-buscar-orden-hoy-md');
+                if (inpHoy) {
+                    inpHoy.value = snap.textoHoy;
+                    inpHoy.dispatchEvent(new Event('search', { bubbles: true }));
+                    inpHoy.dispatchEvent(new Event('keyup', { bubbles: true }));
+                }
+            } else {
+                if (typeof window.cambiarTabAdmin === 'function') window.cambiarTabAdmin('panel-ordenes');
+                var inpHoyRc = document.getElementById('input-buscar-orden-rc');
+                if (inpHoyRc) {
+                    inpHoyRc.value = snap.textoHoy;
+                    inpHoyRc.dispatchEvent(new Event('search', { bubbles: true }));
+                    inpHoyRc.dispatchEvent(new Event('keyup', { bubbles: true }));
+                }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Currently examining the `capturarEstadoBusquedaPrevia` function. Initializing `tabActiva` to 'anteriores'. Conditional check determines if it is the MedicoPortal, and then checks if a specific panel is visible.
+
+
+Conditional logic now updates `tabActiva` based on active elements, using defaults if no active state is detected. The `mostrarBarraRetorno` function uses `tabActiva` to determine a search's context. The `labelBoton` variable dynamically updates its label based on `tabActiva` and a custom search flag. Finally, `restaurarEstadoBusquedaPrevia` restores the search state based on the value of `tabActiva`.
+
+
+When a notification arrives, the `capturarEstadoBusquedaPrevia` function is called to store the current search state within the doctor's portal. This function checks if the doctor is in the portal, determines if the relevant panel is active, and then updates the `tabActiva` variable to 'anteriores'. The function then captures search criteria (text, period, start, and end dates) and stores them for later restoration. In Case A, if the order is from today, it navigates to the 'hoy' tab, and in other scenarios, remains on the 'anteriores' tab, but the previous search filters should still apply.
+
+
+The system either stays on or switches to the "hoy" or "anteriores" tab depending on whether it is a current or previous order. The search folio is injected and triggers a search of the relevant table. For older orders, the backend bypasses date restrictions on the folio search. The return bar displays the search context.
+
+Clicking "[ ⬅ Volver a mi búsqueda ]" triggers the `restaurarEstadoBusquedaPrevia` function. It retrieves the stored search state based on the active tab, likely "anteriores."
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ws-client.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.991036181s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L279-309)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+        var textoAnt   = inputAnt ? (inputAnt.value || '').trim() : '';
+        var textoHoy   = inputHoy ? (inputHoy.value || '').trim() : '';
+        var periodoVal = selPeriodo ? selPeriodo.value : '90d';
+        var iniVal     = inputIni ? (inputIni.value || '') : '';
+        var finVal     = inputFin ? (inputFin.value || '') : '';
+
+        var tabActiva = 'anteriores';
+        if (isMedicoPortal) {
+            var subHoy = document.getElementById('subtab-ordenes-hoy');
+            if (subHoy && (subHoy.classList.contains('active') || !subHoy.classList.contains('d-none'))) tabActiva = 'hoy';
+        } else {
+            var panelHoy = document.getElementById('panel-ordenes');
+            if (panelHoy && !panelHoy.classList.contains('d-none')) tabActiva = 'hoy';
+        }
+
+        _busquedaPreviaSnapshot = {
+            isMedico: isMedicoPortal,
+            tabActiva: tabActiva,
+            textoAnt: textoAnt,
+            textoHoy: textoHoy,
+            periodoVal: periodoVal,
+            iniVal: iniVal,
+            finVal: finVal,
+            rangoVisible: rangoElem ? (rangoElem.style.display !== 'none') : false
+        };
+    }
+
+    function mostrarBarraRetorno(cleanTarget, localizada) {
+        if (!_busquedaPreviaSnapshot) return;
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ws-client.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L309-359)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+        var snap = _busquedaPreviaSnapshot;
+        var resumen = [];
+        var esBusquedaPersonalizada = false;
+        if (snap.tabActiva === 'hoy') {
+            if (snap.textoHoy) {
+                resumen.push('"' + snap.textoHoy + '"');
+                esBusquedaPersonalizada = true;
+            } else {
+                resumen.push('Órdenes de Hoy');
+            }
+        } else {
+            if (snap.textoAnt) {
+                resumen.push('"' + snap.textoAnt + '"');
+                esBusquedaPersonalizada = true;
+            }
+            if (snap.periodoVal === 'fecha' && (snap.iniVal || snap.finVal)) {
+                resumen.push((snap.iniVal || '') + ' al ' + (snap.finVal || ''));
+                esBusquedaPersonalizada = true;
+            } else if (snap.periodoVal && snap.periodoVal !== '90d') {
+                resumen.push(snap.periodoVal);
+                esBusquedaPersonalizada = true;
+            } else if (!snap.textoAnt) {
+                resumen.push('Últimos 90 días');
+            }
+        }
+        var resumenTexto = resumen.length > 0 ? resumen.join(' · ') : 'Búsqueda previa';
+        var labelBoton = esBusquedaPersonalizada ? ('⬅ Volver a mi búsqueda (' + resumenTexto + ')') : ('⬅ Volver a la lista (' + resumenTexto + ')');
+
+        var existingBar = document.getElementById('laesh-notif-return-bar');
+        if (existingBar) existingBar.remove();
+
+        var esNoEncontrada = (localizada === false);
+        var bar = document.createElement('div');
+        bar.id = 'laesh-notif-return-bar';
+        if (esNoEncontrada) {
+            bar.style.cssText = 'background: #fef2f2; border: 1px solid #fecaca; border-left: 4px solid #ef4444; border-radius: 6px; padding: 7px 12px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; gap: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);';
+            bar.innerHTML = 
+                '<div style="font-size: 0.82rem; color: #991b1b; display: flex; align-items: center; gap: 6px;">' +
+                    '<span style="font-size: 0.95rem;">⚠️</span>' +
+                    '<span>No se localizó en la lista la orden de notificación: <strong style="color: #b91c1c;">#' + escapeHtml(cleanTarget) + '</strong></span>' +
+                '</div>' +
+                '<div style="display: flex; align-items: center; gap: 6px;">' +
+                    '<button type="button" id="btn-volver-busqueda-notif" style="padding: 4px 12px; font-size: 0.8rem; font-weight: 600; color: #ffffff; background: #0052b7; border: 1px solid #004394; border-radius: 5px; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.08);">' +
+                        '<span>' + escapeHtml(labelBoton) + '</span>' +
+                    '</button>' +
+                    '<button type="button" id="btn-cerrar-banner-notif" title="Descartar aviso" style="background: transparent; border: none; font-size: 1rem; color: #64748b; cursor: pointer; line-height: 1; padding: 2px 6px;">✕</button>' +
+                '</div>';
+        } else {
+            bar.style.cssText = 'background: #eff6ff; border: 1px solid #bfdbfe; border-left: 4px solid #0052b7; border-radius: 6px; padding: 7px 12px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; gap: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);';
+            bar.innerHTML = 
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ws-client.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L419-459)</summary>
+
+**Path:** `Unknown file`
+
+```
+            });
+        }
+    }
+
+    function restaurarEstadoBusquedaPrevia() {
+        if (!_busquedaPreviaSnapshot) return;
+        var snap = _busquedaPreviaSnapshot;
+        _busquedaPreviaSnapshot = null;
+
+        var bar = document.getElementById('laesh-notif-return-bar');
+        if (bar) bar.remove();
+
+        var isMed = snap.isMedico;
+        if (snap.tabActiva === 'hoy') {
+            if (isMed) {
+                if (typeof window.cambiarTabMedico === 'function') window.cambiarTabMedico('panel-nueva-orden');
+                if (typeof window.switchSubTab === 'function') window.switchSubTab('ordenes-hoy');
+                var inpHoy = document.getElementById('input-buscar-orden-hoy-md');
+                if (inpHoy) {
+                    inpHoy.value = snap.textoHoy;
+                    inpHoy.dispatchEvent(new Event('search', { bubbles: true }));
+                    inpHoy.dispatchEvent(new Event('keyup', { bubbles: true }));
+                }
+            } else {
+                if (typeof window.cambiarTabAdmin === 'function') window.cambiarTabAdmin('panel-ordenes');
+                var inpHoyRc = document.getElementById('input-buscar-orden-rc');
+                if (inpHoyRc) {
+                    inpHoyRc.value = snap.textoHoy;
+                    inpHoyRc.dispatchEvent(new Event('search', { bubbles: true }));
+                    inpHoyRc.dispatchEvent(new Event('keyup', { bubbles: true }));
+                }
+            }
+        } else {
+            if (isMed) {
+                if (typeof window.cambiarTabMedico === 'function') window.cambiarTabMedico('panel-historial-medico');
+                var selMed = document.getElementById('select-periodo-anteriores-md');
+                var iniMed = document.getElementById('fecha-inicio-anteriores-md');
+                var finMed = document.getElementById('fecha-fin-anteriores-md');
+                var ranMed = document.getElementById('rango-fechas-anteriores-md');
+                var inpAntMed = document.getElementById('input-buscar-orden-anteriores-md');
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+If the active tab is 'captura' and the context is medical, functions to change the medical tab and switch the sub-tab are potentially called. Otherwise, if the active tab is 'hoy', different actions are likely triggered. This suggests a conditional state restoration based on the active tab and context.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ws-client.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.099142869s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L284-454)</summary>
+
+**Path:** `Unknown file`
+
+```
+        var finVal     = inputFin ? (inputFin.value || '') : '';
+
+        var tabActiva = 'anteriores';
+        if (isMedicoPortal) {
+            var subHoy = document.getElementById('subtab-ordenes-hoy');
+            if (subHoy && (subHoy.classList.contains('active') || !subHoy.classList.contains('d-none'))) tabActiva = 'hoy';
+        } else {
+            var panelHoy = document.getElementById('panel-ordenes');
+            if (panelHoy && !panelHoy.classList.contains('d-none')) tabActiva = 'hoy';
+        }
+
+        _busquedaPreviaSnapshot = {
+            isMedico: isMedicoPortal,
+            tabActiva: tabActiva,
+            textoAnt: textoAnt,
+            textoHoy: textoHoy,
+            periodoVal: periodoVal,
+            iniVal: iniVal,
+            finVal: finVal,
+            rangoVisible: rangoElem ? (rangoElem.style.display !== 'none') : false
+        };
+    }
+
+    function mostrarBarraRetorno(cleanTarget, localizada) {
+        if (!_busquedaPreviaSnapshot) return;
+
+        var snap = _busquedaPreviaSnapshot;
+        var resumen = [];
+        var esBusquedaPersonalizada = false;
+        if (snap.tabActiva === 'hoy') {
+            if (snap.textoHoy) {
+                resumen.push('"' + snap.textoHoy + '"');
+                esBusquedaPersonalizada = true;
+            } else {
+                resumen.push('Órdenes de Hoy');
+            }
+        } else {
+            if (snap.textoAnt) {
+                resumen.push('"' + snap.textoAnt + '"');
+                esBusquedaPersonalizada = true;
+            }
+            if (snap.periodoVal === 'fecha' && (snap.iniVal || snap.finVal)) {
+                resumen.push((snap.iniVal || '') + ' al ' + (snap.finVal || ''));
+                esBusquedaPersonalizada = true;
+            } else if (snap.periodoVal && snap.periodoVal !== '90d') {
+                resumen.push(snap.periodoVal);
+                esBusquedaPersonalizada = true;
+            } else if (!snap.textoAnt) {
+                resumen.push('Últimos 90 días');
+            }
+        }
+        var resumenTexto = resumen.length > 0 ? resumen.join(' · ') : 'Búsqueda previa';
+        var labelBoton = esBusquedaPersonalizada ? ('⬅ Volver a mi búsqueda (' + resumenTexto + ')') : ('⬅ Volver a la lista (' + resumenTexto + ')');
+
+        var existingBar = document.getElementById('laesh-notif-return-bar');
+        if (existingBar) existingBar.remove();
+
+        var esNoEncontrada = (localizada === false);
+        var bar = document.createElement('div');
+        bar.id = 'laesh-notif-return-bar';
+        if (esNoEncontrada) {
+            bar.style.cssText = 'background: #fef2f2; border: 1px solid #fecaca; border-left: 4px solid #ef4444; border-radius: 6px; padding: 7px 12px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; gap: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);';
+            bar.innerHTML = 
+                '<div style="font-size: 0.82rem; color: #991b1b; display: flex; align-items: center; gap: 6px;">' +
+                    '<span style="font-size: 0.95rem;">⚠️</span>' +
+                    '<span>No se localizó en la lista la orden de notificación: <strong style="color: #b91c1c;">#' + escapeHtml(cleanTarget) + '</strong></span>' +
+                '</div>' +
+                '<div style="display: flex; align-items: center; gap: 6px;">' +
+                    '<button type="button" id="btn-volver-busqueda-notif" style="padding: 4px 12px; font-size: 0.8rem; font-weight: 600; color: #ffffff; background: #0052b7; border: 1px solid #004394; border-radius: 5px; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.08);">' +
+                        '<span>' + escapeHtml(labelBoton) + '</span>' +
+                    '</button>' +
+                    '<button type="button" id="btn-cerrar-banner-notif" title="Descartar aviso" style="background: transparent; border: none; font-size: 1rem; color: #64748b; cursor: pointer; line-height: 1; padding: 2px 6px;">✕</button>' +
+                '</div>';
+        } else {
+            bar.style.cssText = 'background: #eff6ff; border: 1px solid #bfdbfe; border-left: 4px solid #0052b7; border-radius: 6px; padding: 7px 12px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; gap: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);';
+            bar.innerHTML = 
+                '<div style="font-size: 0.82rem; color: #1e3a8a; display: flex; align-items: center; gap: 6px;">' +
+                    '<span style="font-size: 0.95rem;">🔔</span>' +
+                    '<span>Revisando orden de notificación: <strong style="color: #0052b7;">#' + escapeHtml(cleanTarget) + '</strong></span>' +
+                '</div>' +
+                '<div style="display: flex; align-items: center; gap: 6px;">' +
+                    '<button type="button" id="btn-volver-busqueda-notif" style="padding: 4px 12px; font-size: 0.8rem; font-weight: 600; color: #ffffff; background: #0052b7; border: 1px solid #004394; border-radius: 5px; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.08);">' +
+                        '<span>' + escapeHtml(labelBoton) + '</span>' +
+                    '</button>' +
+                    '<button type="button" id="btn-cerrar-banner-notif" title="Descartar aviso" style="background: transparent; border: none; font-size: 1rem; color: #64748b; cursor: pointer; line-height: 1; padding: 2px 6px;">✕</button>' +
+                '</div>';
+        }
+
+        var targetCard = null;
+        if (snap.isMedico) {
+            var medHist = document.getElementById('panel-historial-medico');
+            var medHoy = document.getElementById('subtab-ordenes-hoy');
+            if (medHist && !medHist.classList.contains('d-none')) {
+                targetCard = medHist.querySelector('.card');
+            } else if (medHoy && (medHoy.classList.contains('active') || !medHoy.classList.contains('d-none'))) {
+                targetCard = medHoy.querySelector('.card');
+            }
+            if (!targetCard) {
+                targetCard = document.querySelector('#panel-historial-medico:not(.d-none) .card, #subtab-ordenes-hoy.active .card, #panel-historial-medico .card, #subtab-ordenes-hoy .card');
+            }
+        } else {
+            var rcAnt = document.getElementById('panel-ordenes-anteriores');
+            var rcHoy = document.getElementById('panel-ordenes');
+            if (rcAnt && !rcAnt.classList.contains('d-none')) {
+                targetCard = rcAnt.querySelector('.card');
+            } else if (rcHoy && !rcHoy.classList.contains('d-none')) {
+                targetCard = rcHoy.querySelector('.card');
+            }
+            if (!targetCard) {
+                targetCard = document.querySelector('#panel-ordenes-anteriores:not(.d-none) .card, #panel-ordenes:not(.d-none) .card, #panel-ordenes-anteriores .card, #panel-ordenes .card');
+            }
+        }
+
+        if (targetCard && targetCard.parentNode) {
+            targetCard.parentNode.insertBefore(bar, targetCard);
+        } else {
+            var header = document.querySelector('.cms-panel-header');
+            if (header && header.parentNode) {
+                header.parentNode.insertBefore(bar, header.nextSibling);
+            }
+        }
+
+        var btnVolver = document.getElementById('btn-volver-busqueda-notif');
+        if (btnVolver) {
+            btnVolver.addEventListener('click', function(e) {
+                e.preventDefault();
+                restaurarEstadoBusquedaPrevia();
+            });
+        }
+        var btnCerrar = document.getElementById('btn-cerrar-banner-notif');
+        if (btnCerrar) {
+            btnCerrar.addEventListener('click', function(e) {
+                e.preventDefault();
+                _busquedaPreviaSnapshot = null;
+                bar.remove();
+            });
+        }
+    }
+
+    function restaurarEstadoBusquedaPrevia() {
+        if (!_busquedaPreviaSnapshot) return;
+        var snap = _busquedaPreviaSnapshot;
+        _busquedaPreviaSnapshot = null;
+
+        var bar = document.getElementById('laesh-notif-return-bar');
+        if (bar) bar.remove();
+
+        var isMed = snap.isMedico;
+        if (snap.tabActiva === 'hoy') {
+            if (isMed) {
+                if (typeof window.cambiarTabMedico === 'function') window.cambiarTabMedico('panel-nueva-orden');
+                if (typeof window.switchSubTab === 'function') window.switchSubTab('ordenes-hoy');
+                var inpHoy = document.getElementById('input-buscar-orden-hoy-md');
+                if (inpHoy) {
+                    inpHoy.value = snap.textoHoy;
+                    inpHoy.dispatchEvent(new Event('search', { bubbles: true }));
+                    inpHoy.dispatchEvent(new Event('keyup', { bubbles: true }));
+                }
+            } else {
+                if (typeof window.cambiarTabAdmin === 'function') window.cambiarTabAdmin('panel-ordenes');
+                var inpHoyRc = document.getElementById('input-buscar-orden-rc');
+                if (inpHoyRc) {
+                    inpHoyRc.value = snap.textoHoy;
+                    inpHoyRc.dispatchEvent(new Event('search', { bubbles: true }));
+                    inpHoyRc.dispatchEvent(new Event('keyup', { bubbles: true }));
+                }
+            }
+        } else {
+            if (isMed) {
+                if (typeof window.cambiarTabMedico === 'function') window.cambiarTabMedico('panel-historial-medico');
+                var selMed = document.getElementById('select-periodo-anteriores-md');
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Examining `capturarEstadoBusquedaPrevia` within `ws-client.js` reveals conditional logic tied to a medical portal context, specifically managing UI state. The code checks for the existence and visibility of elements related to order generation and today's orders. This suggests the function's purpose is to preserve and restore the search or view context based on user interface state.
+
+
+The code determines the active tab ("captura", "hoy", or "anteriores") based on UI element visibility and state, seemingly reflecting the user's current view. The `mostrarBarraRetorno` function constructs a summary string for the return bar, indicating the active search or display context. It determines if the search is personalized by examining the active tab and associated search parameters.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 11.069673867s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 10:57 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 10:57 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 10:57 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+The user is currently interacting with the "Solicitudes Anteriores" (Previous Requests) tab. This means the focus is on a search filter within this specific section. The goal is to clarify how this functionality is implemented.
+
+
+Upon notification click, the current search context, including the active tab, search text, date range or preset period, and date visibility, is immediately stored. The system then determines the notification's date.
+If the notification relates to today's requests, the display shifts to the "Today" view, locating and highlighting the relevant folio. Otherwise, the system remains within the "Previous Requests" section, leveraging a database lookup to find the correct entry.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.399097161s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+## User Request
+
+sobre: El sistema resguarda en memoria Instantánea Automática (_busquedaPreviaSnapshot), es memoria ram o persistencia en el lado del webrowser ?
+
+
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `ws-client.js`
+**Language:** javascript
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The query concerns the storage location of the "Automatic Snapshot" data. Initial hypothesis: the system utilizes either RAM (volatile) or browser-side persistence (e.g., local storage, cookies). The question implies a difference between RAM and browser storage. Further analysis requires identifying how "_busquedaPreviaSnapshot" is managed within the system.
+
+
+The code reveals that `_busquedaPreviaSnapshot` is a JavaScript variable initialized within an Immediately Invoked Function Expression (IIFE) in `ws-client.js`. This declaration confines the snapshot to RAM (browser JavaScript heap), ruling out persistent storage options like `localStorage`. Its RAM-based storage indicates rapid access, minimal disk footprint, and automatic cleanup upon tab closure or navigation away.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.180199440s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+## User Request
+
+rectifica que _busquedaPreviaSnapshot tegna ciclo correcto y completo para evitar conflictos, retrocesos de datos, mezclas entre busquedas, etc, informa me.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `ws-client.js`
+**Language:** javascript
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Initial concern centers on the lifecycle integrity of `_busquedaPreviaSnapshot` to prevent data corruption and search inconsistencies. The objective is to verify its completeness and correctness. Identifying potential areas where conflicts or data regression could arise is critical.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ws-client.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.090791313s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L259-479)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+    // ── Instantánea y Restauración de Búsqueda Previa (Flujo Poka-Yoke Notificaciones) ──
+    var _busquedaPreviaSnapshot = null;
+
+    function capturarEstadoBusquedaPrevia(isMedicoPortal) {
+        if (_busquedaPreviaSnapshot) return; // Si ya hay una activa sin restaurar, mantenerla
+
+        var searchAnterioresId = isMedicoPortal ? 'input-buscar-orden-anteriores-md' : 'input-buscar-orden-anteriores-rc';
+        var searchHoyId        = isMedicoPortal ? 'input-buscar-orden-hoy-md'        : 'input-buscar-orden-rc';
+        var selectPeriodoId    = isMedicoPortal ? 'select-periodo-anteriores-md'    : 'select-periodo-anteriores-rc';
+        var fechaIniId         = isMedicoPortal ? 'fecha-inicio-anteriores-md'      : 'fecha-inicio-anteriores-rc';
+        var fechaFinId         = isMedicoPortal ? 'fecha-fin-anteriores-md'         : 'fecha-fin-anteriores-rc';
+        var rangoContainerId   = isMedicoPortal ? 'rango-fechas-anteriores-md'      : 'rango-fechas-anteriores-rc';
+
+        var inputAnt    = document.getElementById(searchAnterioresId);
+        var inputHoy    = document.getElementById(searchHoyId);
+        var selPeriodo  = document.getElementById(selectPeriodoId);
+        var inputIni    = document.getElementById(fechaIniId);
+        var inputFin    = document.getElementById(fechaFinId);
+        var rangoElem   = document.getElementById(rangoContainerId);
+
+        var textoAnt   = inputAnt ? (inputAnt.value || '').trim() : '';
+        var textoHoy   = inputHoy ? (inputHoy.value || '').trim() : '';
+        var periodoVal = selPeriodo ? selPeriodo.value : '90d';
+        var iniVal     = inputIni ? (inputIni.value || '') : '';
+        var finVal     = inputFin ? (inputFin.value || '') : '';
+
+        var tabActiva = 'anteriores';
+        if (isMedicoPortal) {
+            var panelNueva = document.getElementById('panel-nueva-orden');
+            var subGenerar = document.getElementById('subtab-generar');
+            var subHoy = document.getElementById('subtab-ordenes-hoy');
+            if (panelNueva && !panelNueva.classList.contains('d-none')) {
+                if (subGenerar && subGenerar.classList.contains('active')) {
+                    tabActiva = 'captura';
+                } else if (subHoy && subHoy.classList.contains('active')) {
+                    tabActiva = 'hoy';
+                } else {
+                    tabActiva = 'captura';
+                }
+            } else {
+                tabActiva = 'anteriores';
+            }
+        } else {
+            var panelHoy = document.getElementById('panel-ordenes');
+            if (panelHoy && !panelHoy.classList.contains('d-none')) tabActiva = 'hoy';
+        }
+
+        _busquedaPreviaSnapshot = {
+            isMedico: isMedicoPortal,
+            tabActiva: tabActiva,
+            textoAnt: textoAnt,
+            textoHoy: textoHoy,
+            periodoVal: periodoVal,
+            iniVal: iniVal,
+            finVal: finVal,
+            rangoVisible: rangoElem ? (rangoElem.style.display !== 'none') : false
+        };
+    }
+
+    function mostrarBarraRetorno(cleanTarget, localizada) {
+        if (!_busquedaPreviaSnapshot) return;
+
+        var snap = _busquedaPreviaSnapshot;
+        var resumen = [];
+        var esBusquedaPersonalizada = false;
+        if (snap.tabActiva === 'captura') {
+            resumen.push('Captura de Solicitud');
+            esBusquedaPersonalizada = true;
+        } else if (snap.tabActiva === 'hoy') {
+            if (snap.textoHoy) {
+                resumen.push('"' + snap.textoHoy + '"');
+                esBusquedaPersonalizada = true;
+            } else {
+                resumen.push('Órdenes de Hoy');
+            }
+        } else {
+            if (snap.textoAnt) {
+                resumen.push('"' + snap.textoAnt + '"');
+                esBusquedaPersonalizada = true;
+            }
+            if (snap.periodoVal === 'fecha' && (snap.iniVal || snap.finVal)) {
+                resumen.push((snap.iniVal || '') + ' al ' + (snap.finVal || ''));
+                esBusquedaPersonalizada = true;
+            } else if (snap.periodoVal && snap.periodoVal !== '90d') {
+                resumen.push(snap.periodoVal);
+                esBusquedaPersonalizada = true;
+            } else if (!snap.textoAnt) {
+                resumen.push('Últimos 90 días');
+            }
+        }
+        var resumenTexto = resumen.length > 0 ? resumen.join(' · ') : 'Búsqueda previa';
+        var labelBoton = '';
+        if (snap.tabActiva === 'captura') {
+            labelBoton = '⬅ Volver a mi captura de orden';
+        } else if (esBusquedaPersonalizada) {
+            labelBoton = '⬅ Volver a mi búsqueda (' + resumenTexto + ')';
+        } else {
+            labelBoton = '⬅ Volver a la lista (' + resumenTexto + ')';
+        }
+
+        var existingBar = document.getElementById('laesh-notif-return-bar');
+        if (existingBar) existingBar.remove();
+
+        var esNoEncontrada = (localizada === false);
+        var bar = document.createElement('div');
+        bar.id = 'laesh-notif-return-bar';
+        if (esNoEncontrada) {
+            bar.style.cssText = 'background: #fef2f2; border: 1px solid #fecaca; border-left: 4px solid #ef4444; border-radius: 6px; padding: 7px 12px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; gap: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);';
+            bar.innerHTML = 
+                '<div style="font-size: 0.82rem; color: #991b1b; display: flex; align-items: center; gap: 6px;">' +
+                    '<span style="font-size: 0.95rem;">⚠️</span>' +
+                    '<span>No se localizó en la lista la orden de notificación: <strong style="color: #b91c1c;">#' + escapeHtml(cleanTarget) + '</strong></span>' +
+                '</div>' +
+                '<div style="display: flex; align-items: center; gap: 6px;">' +
+                    '<button type="button" id="btn-volver-busqueda-notif" style="padding: 4px 12px; font-size: 0.8rem; font-weight: 600; color: #ffffff; background: #0052b7; border: 1px solid #004394; border-radius: 5px; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.08);">' +
+                        '<span>' + escapeHtml(labelBoton) + '</span>' +
+                    '</button>' +
+                    '<button type="button" id="btn-cerrar-banner-notif" title="Descartar aviso" style="background: transparent; border: none; font-size: 1rem; color: #64748b; cursor: pointer; line-height: 1; padding: 2px 6px;">✕</button>' +
+                '</div>';
+        } else {
+            bar.style.cssText = 'background: #eff6ff; border: 1px solid #bfdbfe; border-left: 4px solid #0052b7; border-radius: 6px; padding: 7px 12px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; gap: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);';
+            bar.innerHTML = 
+                '<div style="font-size: 0.82rem; color: #1e3a8a; display: flex; align-items: center; gap: 6px;">' +
+                    '<span style="font-size: 0.95rem;">🔔</span>' +
+                    '<span>Revisando orden de notificación: <strong style="color: #0052b7;">#' + escapeHtml(cleanTarget) + '</strong></span>' +
+                '</div>' +
+                '<div style="display: flex; align-items: center; gap: 6px;">' +
+                    '<button type="button" id="btn-volver-busqueda-notif" style="padding: 4px 12px; font-size: 0.8rem; font-weight: 600; color: #ffffff; background: #0052b7; border: 1px solid #004394; border-radius: 5px; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.08);">' +
+                        '<span>' + escapeHtml(labelBoton) + '</span>' +
+                    '</button>' +
+                    '<button type="button" id="btn-cerrar-banner-notif" title="Descartar aviso" style="background: transparent; border: none; font-size: 1rem; color: #64748b; cursor: pointer; line-height: 1; padding: 2px 6px;">✕</button>' +
+                '</div>';
+        }
+
+        var targetCard = null;
+        if (snap.isMedico) {
+            var medHist = document.getElementById('panel-historial-medico');
+            var medHoy = document.getElementById('subtab-ordenes-hoy');
+            if (medHist && !medHist.classList.contains('d-none')) {
+                targetCard = medHist.querySelector('.card');
+            } else if (medHoy && (medHoy.classList.contains('active') || !medHoy.classList.contains('d-none'))) {
+                targetCard = medHoy.querySelector('.card');
+            }
+            if (!targetCard) {
+                targetCard = document.querySelector('#panel-historial-medico:not(.d-none) .card, #subtab-ordenes-hoy.active .card, #panel-historial-medico .card, #subtab-ordenes-hoy .card');
+            }
+        } else {
+            var rcAnt = document.getElementById('panel-ordenes-anteriores');
+            var rcHoy = document.getElementById('panel-ordenes');
+            if (rcAnt && !rcAnt.classList.contains('d-none')) {
+                targetCard = rcAnt.querySelector('.card');
+            } else if (rcHoy && !rcHoy.classList.contains('d-none')) {
+                targetCard = rcHoy.querySelector('.card');
+            }
+            if (!targetCard) {
+                targetCard = document.querySelector('#panel-ordenes-anteriores:not(.d-none) .card, #panel-ordenes:not(.d-none) .card, #panel-ordenes-anteriores .card, #panel-ordenes .card');
+            }
+        }
+
+        if (targetCard && targetCard.parentNode) {
+            targetCard.parentNode.insertBefore(bar, targetCard);
+        } else {
+            var header = document.querySelector('.cms-panel-header');
+            if (header && header.parentNode) {
+                header.parentNode.insertBefore(bar, header.nextSibling);
+            }
+        }
+
+        var btnVolver = document.getElementById('btn-volver-busqueda-notif');
+        if (btnVolver) {
+            btnVolver.addEventListener('click', function(e) {
+                e.preventDefault();
+                restaurarEstadoBusquedaPrevia();
+            });
+        }
+        var btnCerrar = document.getElementById('btn-cerrar-banner-notif');
+        if (btnCerrar) {
+            btnCerrar.addEventListener('click', function(e) {
+                e.preventDefault();
+                _busquedaPreviaSnapshot = null;
+                bar.remove();
+            });
+        }
+    }
+
+    function restaurarEstadoBusquedaPrevia() {
+        if (!_busquedaPreviaSnapshot) return;
+        var snap = _busquedaPreviaSnapshot;
+        _busquedaPreviaSnapshot = null;
+
+        var bar = document.getElementById('laesh-notif-return-bar');
+        if (bar) bar.remove();
+
+        var isMed = snap.isMedico;
+        if (snap.tabActiva === 'captura') {
+            if (isMed) {
+                if (typeof window.cambiarTabMedico === 'function') window.cambiarTabMedico('panel-nueva-orden');
+                if (typeof window.switchSubTab === 'function') window.switchSubTab('generar');
+            }
+        } else if (snap.tabActiva === 'hoy') {
+            if (isMed) {
+                if (typeof window.cambiarTabMedico === 'function') window.cambiarTabMedico('panel-nueva-orden');
+                if (typeof window.switchSubTab === 'function') window.switchSubTab('ordenes-hoy');
+                var inpHoy = document.getElementById('input-buscar-orden-hoy-md');
+                if (inpHoy) {
+                    inpHoy.value = snap.textoHoy;
+                    inpHoy.dispatchEvent(new Event('search', { bubbles: true }));
+                    inpHoy.dispatchEvent(new Event('keyup', { bubbles: true }));
+                }
+            } else {
+                if (typeof window.cambiarTabAdmin === 'function') window.cambiarTabAdmin('panel-ordenes');
+                var inpHoyRc = document.getElementById('input-buscar-orden-rc');
+                if (inpHoyRc) {
+                    inpHoyRc.value = snap.textoHoy;
+                    inpHoyRc.dispatchEvent(new Event('search', { bubbles: true }));
+                    inpHoyRc.dispatchEvent(new Event('keyup', { bubbles: true }));
+                }
+            }
+        } else {
+            if (isMed) {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The `_busquedaPreviaSnapshot` lifecycle needs thorough examination to understand its behavior in scenarios involving multiple notifications. The initial code block suggests the system might prevent a new snapshot if one already exists, potentially leading to undesired behavior when multiple notifications arrive in rapid succession. The interaction with existing snapshots and the handling of subsequent notifications requires careful consideration.
+
+
+The system correctly preserves the initial search ("Gómez") when a notification is selected, as intended. Upon restoring the previous search state, the snapshot is immediately nulled, and the return bar is removed. Explicit dismissal also clears the snapshot. The critical question is what happens if manual UI interaction begins *without* explicitly returning or dismissing the notification.
+
+
+If a user manually interacts with the UI (search input, date selection, or menu navigation) without explicitly dismissing the notification, the previous search snapshot remains active, creating potential inconsistencies. The current implementation does not invalidate the snapshot on manual action. Therefore, the snapshot needs to be removed upon any manual interaction to prevent the previous search from overriding the user's intent.
+
+
+If a notification arrives while the user is already reviewing a previous search snapshot, periodic refreshes should not disrupt the user's current interaction. A new snapshot should only appear on explicit return or dismiss, and not interfere with ongoing actions.
+
+To ensure a clean slate for manual searches, the system needs to listen for user interactions in search inputs, date selectors, and navigation tabs. Any user-initiated interaction (typing in the search input, changing the period selector, or navigating to a new tab) must invalidate the snapshot and remove the return bar, ensuring the previous context is discarded. This should be implemented as a Poka-Yoke principle to guarantee the snapshot and return bar are exclusively tied to notification review.
+
+
+The DOM lifecycle examination confirms the system removes any existing return bar before creating a new one, preventing duplication. The snapshot is explicitly nulled and the bar removed upon manual user actions like input or tab selection. No DOM node references exist in the snapshot, eliminating potential memory leaks. This confirms the snapshot is cleared and the bar removed immediately on any user-initiated search action, as intended.
+
+
+The auto-cleanup function's purpose is to discard the snapshot and remove the return bar when a user manually interacts with the search inputs, period selectors, date pickers, or navigation elements. The function's logic first checks if a snapshot exists; if it does, the function nulls it and removes the return bar element. The function needs to be triggered by `input` events on search inputs, change events on period selects/date pickers, and click events on navigation items and tabs.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ws-client.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 6.273321047s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1029-1099)</summary>
+
+**Path:** `Unknown file`
+
+```
+                var formOrden = formOrdenId ? document.getElementById(formOrdenId) : null;
+                var userIsTyping = activeEl &&
+                    (activeEl.tagName === 'INPUT' || activeEl.tagName === 'TEXTAREA') &&
+                    (tabla.contains(activeEl) || (formOrden && formOrden.contains(activeEl)));
+
+                var doRefresh = function() {
+                    var searchId = TABLA_A_BUSCADOR[tabla.id];
+                    var searchInput = searchId ? document.getElementById(searchId) : null;
+                    if (searchInput && searchInput.value.trim() !== '') {
+                        searchInput.dispatchEvent(new Event('search', { bubbles: true }));
+                        return;
+                    }
+                    if (typeof htmx !== 'undefined') {
+                        htmx.trigger(tabla, 'refresh');
+                    } else {
+                        var btnRefresh = document.getElementById('btn-refrescar-tabla');
+                        if (btnRefresh) btnRefresh.click();
+                    }
+                };
+
+                if (userIsTyping) {
+                    if (!activeEl._hasPendingRefresh) {
+                        activeEl._hasPendingRefresh = true;
+                        var _onBlur = function() {
+                            activeEl._hasPendingRefresh = false;
+                            activeEl.removeEventListener('blur', _onBlur);
+                            doRefresh();
+                        };
+                        activeEl.addEventListener('blur', _onBlur);
+                    }
+                } else {
+                    doRefresh();
+                }
+            };
+
+            refreshDeferrable(document.getElementById('tabla-recepcion'), null);
+            refreshDeferrable(document.getElementById('tabla-recepcion-anteriores'), null);
+            refreshDeferrable(document.getElementById('tabla-medico'), 'form-orden');
+            refreshDeferrable(document.getElementById('tabla-historial-completo'), 'form-orden');
+        }
+
+        // Feedback auditivo (solo si ya existió interacción de usuario) —
+        // catalogo_actualizado no suena, mismo criterio que el badge arriba.
+        if (!isCatalogoEvent && !isMedicoPortal) playChime();
+    }
+
+    function playChime() {
+        if (!hasUserGesture || !sharedAudioCtx) return;
+        try {
+            if (sharedAudioCtx.state === 'suspended') {
+                var p = sharedAudioCtx.resume();
+                if (p && typeof p.then === 'function') {
+                    p.then(function() { triggerTone(sharedAudioCtx); }).catch(function() {});
+                }
+            } else {
+                triggerTone(sharedAudioCtx);
+            }
+        } catch (e) {}
+    }
+
+    function triggerTone(audioCtx) {
+        try {
+            var osc = audioCtx.createOscillator();
+            var gain = audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(587.33, audioCtx.currentTime);
+            gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.15);
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ws-client.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1099-1144)</summary>
+
+**Path:** `Unknown file`
+
+```
+            osc.stop(audioCtx.currentTime + 0.15);
+        } catch (e) {}
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        pollNotifications();
+        initWebSocket();
+
+        // 2026-09-25 (corrección reportada por el usuario, dos síntomas del
+        // mismo gap): antes, CUALQUIER clic en la campana superior
+        // (#bell-wrap-notif) o en el toggle "<" del panel
+        // (#sidebar-right-toggle) marcaba TODAS las notificaciones como
+        // leídas de inmediato (resetNotifBadges) — sin abrir ni mostrar el
+        // panel en ningún momento. Por eso la campana superior "no hacía
+        // nada visible" (no llevaba al panel) mientras que cualquier
+        // interacción con el panel (incluido solo colapsarlo/expandirlo)
+        // marcaba todo leído sin que el usuario lo pidiera. Ahora la campana
+        // SOLO abre/muestra el panel — desktop: expande el rail derecho vía
+        // sidebar-rail.js (window.laeshSidebarRail.setRightExpanded); móvil:
+        // scroll hacia #sidebar-right, igual que ya hacía #bell-wrap-mob
+        // (app.js) — y el marcado de leído queda exclusivamente a cargo del
+        // clic individual en cada notificación (ya implementado en el
+        // listener de cada .notif-item-clickable, más abajo en este mismo
+        // archivo). #sidebar-right-toggle conserva su propio manejador de
+        // expandir/colapsar en sidebar-rail.js — aquí solo se le quita el
+        // marcado-leído-automático que tenía de más.
+        function abrirPanelNotificaciones() {
+            var sidebarRight = document.getElementById('sidebar-right') || document.querySelector('.sidebar-right');
+            if (!sidebarRight) return;
+            if (window.laeshSidebarRail && typeof window.laeshSidebarRail.setRightExpanded === 'function') {
+                window.laeshSidebarRail.setRightExpanded(true);
+            }
+            sidebarRight.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        var bellTop = document.getElementById('bell-wrap-notif');
+        if (bellTop) {
+            bellTop.addEventListener('click', abrirPanelNotificaciones);
+            bellTop.addEventListener('touchend', function(e) {
+                if (e.cancelable) e.preventDefault();
+                abrirPanelNotificaciones();
+            });
+        }
     });
+})();
 
-    // Modal overlays (cerrar al click en backdrop — excluye modal-medico para requerir clic en cruz de cerrar)
-    var modals = [];
-    modals.forEach(function(pair) {
-        var m = document.getElementById(pair[0]);
-        if (m) m.addEventListener('click', function(e) {
-            if (e.target === this && typeof window[pair[1]] === 'function') window[pair[1]]();
-        });
-    });
+```
 
-    // Close buttons
-    var closeMap = [
-        ['btn-cerrar-medico',          'cerrarModalMedico']
-    ];
-    closeMap.forEach(function(pair) {
-        var btn = document.getElementById(pair[0]);
-        if (btn) btn.addEventListener('click', function() {
-            if (typeof window[pair[1]] === 'function') window[pair[1]]();
-        });
-    });
+</details>
 
-    // Form buttons médico
-    var btnLimpiarMedico  = document.getElementById('btn-limpiar-medico');
-    var btnGuardarMedico  = document.getElementById('btn-guardar-medico');
-    if (btnLimpiarMedico)   btnLimpiarMedico.addEventListener('click',  function() { if (typeof window.limpiarFormMedico === 'function') window.limpiarFormMedico(); });
-    if (btnGuardarMedico)   btnGuardarMedico.addEventListener('click',  function() { if (typeof window.guardarPerfilMedico === 'function') window.guardarPerfilMedico(); });
+---
 
+## Agent Response
+
+### Thinking
+
+Examining `ws-client.js` to determine the appropriate placement for the interaction-triggered snapshot discard function. The `_busquedaPreviaSnapshot` handling around line 440 seems like a suitable location. It needs to listen for user interactions to determine when to call the discard function.
+
+
+User interactions triggering the snapshot discard require careful examination to ensure comprehensive coverage.  Focusing on trusted browser events like input, change, click, and submit events appears necessary. Special attention is needed for events originating within the notification return bar as that's an exception to the click handling.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ws-client.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.180575518s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L429-489)</summary>
+
+**Path:** `Unknown file`
+
+```
+        if (btnVolver) {
+            btnVolver.addEventListener('click', function(e) {
+                e.preventDefault();
+                restaurarEstadoBusquedaPrevia();
+            });
+        }
+        var btnCerrar = document.getElementById('btn-cerrar-banner-notif');
+        if (btnCerrar) {
+            btnCerrar.addEventListener('click', function(e) {
+                e.preventDefault();
+                _busquedaPreviaSnapshot = null;
+                bar.remove();
+            });
+        }
+    }
+
+    function restaurarEstadoBusquedaPrevia() {
+        if (!_busquedaPreviaSnapshot) return;
+        var snap = _busquedaPreviaSnapshot;
+        _busquedaPreviaSnapshot = null;
+
+        var bar = document.getElementById('laesh-notif-return-bar');
+        if (bar) bar.remove();
+
+        var isMed = snap.isMedico;
+        if (snap.tabActiva === 'captura') {
+            if (isMed) {
+                if (typeof window.cambiarTabMedico === 'function') window.cambiarTabMedico('panel-nueva-orden');
+                if (typeof window.switchSubTab === 'function') window.switchSubTab('generar');
+            }
+        } else if (snap.tabActiva === 'hoy') {
+            if (isMed) {
+                if (typeof window.cambiarTabMedico === 'function') window.cambiarTabMedico('panel-nueva-orden');
+                if (typeof window.switchSubTab === 'function') window.switchSubTab('ordenes-hoy');
+                var inpHoy = document.getElementById('input-buscar-orden-hoy-md');
+                if (inpHoy) {
+                    inpHoy.value = snap.textoHoy;
+                    inpHoy.dispatchEvent(new Event('search', { bubbles: true }));
+                    inpHoy.dispatchEvent(new Event('keyup', { bubbles: true }));
+                }
+            } else {
+                if (typeof window.cambiarTabAdmin === 'function') window.cambiarTabAdmin('panel-ordenes');
+                var inpHoyRc = document.getElementById('input-buscar-orden-rc');
+                if (inpHoyRc) {
+                    inpHoyRc.value = snap.textoHoy;
+                    inpHoyRc.dispatchEvent(new Event('search', { bubbles: true }));
+                    inpHoyRc.dispatchEvent(new Event('keyup', { bubbles: true }));
+                }
+            }
+        } else {
+            if (isMed) {
+                if (typeof window.cambiarTabMedico === 'function') window.cambiarTabMedico('panel-historial-medico');
+                var selMed = document.getElementById('select-periodo-anteriores-md');
+                var iniMed = document.getElementById('fecha-inicio-anteriores-md');
+                var finMed = document.getElementById('fecha-fin-anteriores-md');
+                var ranMed = document.getElementById('rango-fechas-anteriores-md');
+                var inpAntMed = document.getElementById('input-buscar-orden-anteriores-md');
+
+                if (selMed) selMed.value = snap.periodoVal;
+                if (iniMed) iniMed.value = snap.iniVal;
+                if (finMed) finMed.value = snap.finVal;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ws-client.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L489-534)</summary>
+
+**Path:** `Unknown file`
+
+```
+                if (finMed) finMed.value = snap.finVal;
+                if (ranMed) ranMed.style.display = snap.rangoVisible ? 'inline-flex' : 'none';
+
+                if (inpAntMed) {
+                    inpAntMed.value = snap.textoAnt;
+                    inpAntMed.dispatchEvent(new Event('search', { bubbles: true }));
+                    inpAntMed.dispatchEvent(new Event('keyup', { bubbles: true }));
+                }
+            } else {
+                if (typeof window.cambiarTabAdmin === 'function') window.cambiarTabAdmin('panel-ordenes-anteriores');
+                var selRc = document.getElementById('select-periodo-anteriores-rc');
+                var iniRc = document.getElementById('fecha-inicio-anteriores-rc');
+                var finRc = document.getElementById('fecha-fin-anteriores-rc');
+                var ranRc = document.getElementById('rango-fechas-anteriores-rc');
+                var inpAntRc = document.getElementById('input-buscar-orden-anteriores-rc');
+
+                if (selRc) selRc.value = snap.periodoVal;
+                if (iniRc) iniRc.value = snap.iniVal;
+                if (finRc) finRc.value = snap.finVal;
+                if (ranRc) ranRc.style.display = snap.rangoVisible ? 'inline-flex' : 'none';
+
+                if (inpAntRc) {
+                    inpAntRc.value = snap.textoAnt;
+                    inpAntRc.dispatchEvent(new Event('search', { bubbles: true }));
+                    inpAntRc.dispatchEvent(new Event('keyup', { bubbles: true }));
+                }
+            }
+        }
+    }
+
+    // ── Navegar a la pestaña correcta y resaltar un renglón por folio ──────────
+    function navegarYResaltarOrden(folioTarget, esHoy, opciones) {
+        opciones = opciones || {};
+        var cleanTarget = String(folioTarget || '').trim();
+        if (!cleanTarget) return;
+
+        // 1. Ocultar o colapsar el panel lateral de notificaciones (si está abierto)
+        var sidebarRight = document.querySelector('.sidebar-right, #sidebar-right');
+        if (sidebarRight) {
+            sidebarRight.classList.remove('active', 'show', 'open');
+        }
+
+        // 2. Identificar portal
+        var isMedicoPortal   = !!document.getElementById('tabla-medico') || !!document.getElementById('panel-nueva-orden');
+        var isRecepcionAdmin = !!document.getElementById('tabla-recepcion') || !!document.getElementById('panel-ordenes');
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Adding a function to discard the previous snapshot when the user interacts with the interface is necessary. The function will check if a previous snapshot exists, nullify it, and remove a notification bar if present. This ensures that only relevant results are displayed.
+
+
+A series of event listeners are being set up to automatically invalidate a previous search snapshot. The listeners monitor for user interaction via input, change, and click events. If specific input fields, date pickers, or navigation elements are modified, the snapshot is discarded. This is designed to prevent stale data from being displayed when the user triggers a new search or navigation. The code explicitly ignores clicks originating from a specific return bar element, which might represent a direct "back" action.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ws-client.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.580464769s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L509-524)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+                if (inpAntRc) {
+                    inpAntRc.value = snap.textoAnt;
+                    inpAntRc.dispatchEvent(new Event('search', { bubbles: true }));
+                    inpAntRc.dispatchEvent(new Event('keyup', { bubbles: true }));
+                }
+            }
+        }
+    }
+
+    // ── Navegar a la pestaña correcta y resaltar un renglón por folio ──────────
+    function navegarYResaltarOrden(folioTarget, esHoy, opciones) {
+        opciones = opciones || {};
+        var cleanTarget = String(folioTarget || '').trim();
+        if (!cleanTarget) return;
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:02 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:03 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:03 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:03 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:03 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+The focus is on ensuring the `_busquedaPreviaSnapshot` operation completes its cycle correctly to prevent data conflicts. Potential issues include data rollback and intermingling across searches. Addressing these points requires verifying the completeness and integrity of the search lifecycle.
+
+
+The snapshot mechanism captures specific primitive data from the search interface only upon notification click, ensuring isolation from potential DOM-related issues. The system strictly preserves the original snapshot if another notification is clicked before returning, preventing overwrites. Upon return to the search, the snapshot is transferred, the global variable is cleared, DOM elements are removed, and values are reinjected into the inputs to cleanly restore the search state.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.246118408s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+## User Request
+
+Consdero pertinente: analisis y creees un dataset (simular 2 años de operacion) de pruebas  y sea repetible  (script create/clean) para probar todos los escenarios posibles de las features, mejoras hechas ayer y hoy, sobre las funcionalidades de: busqueda lupita, ordenes hoy|ordenes anteriores para grilla, filtro periodo, busqueda autocompletada, notificaciones, etc; me explico ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `ws-client.js`
+**Language:** javascript
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Analyzing the request, the core requirement is generating a repeatable dataset simulating two years of operation, including comprehensive testing of "Búsqueda lupita" and recently implemented features. The scripts, `create` and `clean`, suggest a need for dataset seeding and teardown capabilities. Initial approach will focus on identifying the key operational parameters for generating a realistic, yet testable, dataset.
+
+
+Analyzing order search and filtering parameters reveals several key data dimensions: date ranges (including edge cases), search types (autocomplete, combined), user roles, and notification states. The database schema (`ordenes`, `pacientes`, `usuarios`) will be examined to confirm data availability and structure for these factors. The goal is to generate orders across different periods, including leap years, diverse statuses, and doctors, so that each filter is triggered correctly during testing.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.136209594s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:09 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `class DB`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:09 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:09 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `DB.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+// DB.php - Clase para conexión PDO e interacción transaccional con la base de datos
+
+namespace Common;
+
+use PDO;
+use PDOException;
+
+class DB {
+    private static ?PDO $instance = null;
+
+    /**
+     * Establece la conexión PDO singleton
+     */
+    public static function connect(): PDO {
+        if (self::$instance === null) {
+            $config = require __DIR__ . '/config.php';
+            $dbConf = $config['db'];
+
+            $dsn = sprintf(
+                "mysql:host=%s;port=%d;dbname=%s;charset=%s",
+                $dbConf['host'],
+                $dbConf['port'],
+                $dbConf['name'],
+                $dbConf['charset']
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:11 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:12 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `config.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+// config.php — Configuración del ecosistema LAESH (Bloc Digital)
+//
+// Credenciales leídas desde variables de entorno (mínimo privilegio):
+//   LAESH_DB_USER / LAESH_DB_PASS / LAESH_DB_HOST / LAESH_DB_PORT / LAESH_DB_NAME
+//
+// Fallbacks por ambiente (env var siempre tiene prioridad):
+//   Docker local  (/.dockerenv existe) → host=db,        port=3306
+//   KVM2 Hostinger / OCI / nativo      → host=127.0.0.1, port=3306
+//   (En todos los entornos nativo las env vars se inyectan vía PHP-FPM pool
+//    y cache_renew.cron — el fallback no-Docker solo aplica si la inyección falla)
+// Nota: ya NO se usa root. Usuario dedicado laesh_app con privilegios mínimos en laesh_db.
+
+$inDocker = file_exists('/.dockerenv');
+
+// ── JWT Secret: falla explícita en producción si no se inyectó vía entorno ──
+// Hallazgo 2026-09-18: el secreto vivía hardcodeado como fallback silencioso,
+// visible en el código fuente — invalidaba la garantía de firma HMAC para los
+// 3 portales (md/rc/admrc). Producción NUNCA debe operar con un secreto conocido.
+$appEnv = getenv('APP_ENV') ?: 'development';
+$jwtSecret = getenv('LAESH_JWT_SECRET') ?: '';
+if ($jwtSecret === '') {
+    if ($appEnv === 'production') {
+        throw new \RuntimeException(
+            'LAESH_JWT_SECRET no está definida en el entorno. ' .
+            'Producción no puede operar con un secreto JWT hardcodeado/conocido. ' .
+            'Verificar env[LAESH_JWT_SECRET] en php-fpm-laesh.conf / EnvironmentFile de swoole-laesh.service.'
+        );
+    }
+    // Solo desarrollo local: valor fijo y claramente marcado como no apto para producción.
+    $jwtSecret = 'DEV_ONLY_INSECURE_SECRET_never_use_in_prod_2026';
+}
+
+return [
+    'db' => [
+        'host'    => getenv('LAESH_DB_HOST') ?: ($inDocker ? 'db'   : '127.0.0.1'),
+        'port'    => (int)(getenv('LAESH_DB_PORT') ?: 3306),   // 3306 en todos los entornos nativo (KVM2/OCI)
+        'user'    => getenv('LAESH_DB_USER') ?: 'laesh_app',
+        'pass'    => getenv('LAESH_DB_PASS') ?: 'laesh_2026_dev',
+        'name'    => getenv('LAESH_DB_NAME') ?: 'laesh_db',
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:12 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:12 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:12 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:12 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+Current dataset size is insufficient for comprehensive feature testing; only 27 records exist across a limited timeframe. The user's request necessitates generating a larger, simulated dataset representative of two years of operation. Implementing a repeatable script for dataset creation and cleanup will enable thorough testing of all defined functionalities and recent improvements across different scenarios.
+
+
+The dataset generation requires specific date ranges centered around the current date to validate filtering logic. These include "today," "yesterday," and rolling windows of 15, 30, and 90 days, including boundary conditions. Additionally, testing should include deep historical data with arbitrary date ranges for comprehensive calendar and search functionality validation. Different statuses of the orders should be generated to cover a variety of test cases.
+
+
+Testing requires a variety of data permutations for robust search validation, especially concerning folio searches exceeding the 90-day limit. Generating data will involve diverse patient names with accents, varied phone numbers, and a wide array of medical diagnoses to test search insensitivity to case and character variations. Multiple doctors and shared patients with historical records are needed for the system's access control and historical view validation, respectively.
+Order status diversity, including pending, in-process, results-ready (with PDF presence), delivered, and cancelled states, will ensure comprehensive testing of all order lifecycle functionalities and edge cases. The folio data needs to have several testing scenarios. These scenarios include complete folios, folios without prefixes and in lowercase, and search by the "lupita" function.
+
+
+To ensure comprehensive testing of notifications, I need to generate data for "Today", "Yesterday", older notifications (10 and 25 days ago), and variations based on read status (read/unread).  A critical test scenario requires an order created six months ago, but updated today, which needs to be added into the dataset.
+
+The creation of a repeatable script with create and clean functionality is explicitly required. This will be achieved using a dedicated dataset marked with a consistent identifier to enable easy removal without affecting existing production data. Several identifiers are being considered for this purpose.
+
+
+A consistent folio prefix will allow for targeted dataset deletion, ensuring a clean testing environment without interfering with existing data.  The chosen prefix must be compatible with existing system regular expressions for folio validation. A "clean" script will delete simulated orders, patients, and related data through a single, transactional operation. A dataset size of 1500-2000 orders (2-3 orders per day over two years) is appropriate for pagination and indexing tests.
+
+
+A script will be created to generate test data covering various date ranges, including today, 15, 30, and 90-day windows, alongside historical data up to two years.  The script's creation and cleanup functionality necessitates the use of a unique prefix to manage and easily delete the generated test dataset. Data generation must also create different order states (pending, ready, etc.) and varied patient data (names, accents, etc.) to ensure thorough testing of all features, including searching.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 7.484770098s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+
+/* GAP-MD-05 (2026-09-22): "Crear e Imprimir Orden" no debe verse verde
+   (listo para imprimir) hasta que el formulario esté correctamente
+   capturado — paciente + celular válidos y al menos un estudio. Estado
+   gris por defecto; medicos.js alterna .is-ready según isOrdenFormReady().
+   Aplica a todos los dispositivos: desktop/tablet (.btn-imprimir-orden,
+   texto) y móvil (#btn-imprimir-mob, solo ícono — override específico
+   más abajo dentro de @media max-width:767px). */
+.btn-imprimir-orden {
+    background: #94a3b8 !important;
+    color: #ffffff !important;
+    box-shadow: none !important;
+}
+.btn-imprimir-orden.is-ready {
+    background: var(--primary-green) !important;
+    color: #0B1830 !important;
+    box-shadow: 0 4px 10px rgba(113, 202, 17, 0.3) !important;
+}
+@media (hover: hover) and (pointer: fine) {
+    .btn-imprimir-orden:hover {
+        background: #64748b !important;
+    }
+    .btn-imprimir-orden.is-ready:hover {
+        background: var(--primary) !important;
+        color: #fff !important;
+    }
+}
+
+/* Private App Layout */
+.app-layout {
+    display: flex;
+    flex: 1;
+    min-height: 750px;
+}
+
+```
+
+</details>
+
+---
+
+## User Request
+
+antes, de los combos de Período, elimina la funcioanlida de: ultimos 7 dias, tambien cambia que el default sea 30 dias y aparezca seleccionada por default; y mejoras en nombres de lo items quede asi nombre y orden: 30d, 15  y Fechas
+
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `portal.css`
+**Language:** css
+
+**Open Files:**
+- `portal.css`
+- `labadmin.php`
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The request involves modifying a "Period" selection component. Initial focus is on removing the "Últimos 7 días" option, which corresponds to the `value="7d"` attribute. This should be followed by setting "30 días" as the default selection, ensuring it's selected on initial display, and renaming and reordering the remaining options to "30d", "15", and "Fechas".
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `labadmin.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.201157691s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L239-264)</summary>
+
+**Path:** `Unknown file`
+
+```
+                                </div>
+                            </div>
+
+                            <!-- Combo List de Período y Rango de Fechas (Calendario) -->
+                            <div id="ordenes-anteriores-periodo-container" style="display: inline-flex; align-items: center; gap: 0.35rem; flex-wrap: nowrap;">
+                                <label for="select-periodo-anteriores-rc" style="font-size: 0.82rem; font-weight: 600; color: var(--text-muted); white-space: nowrap;">Período:</label>
+                                <select id="select-periodo-anteriores-rc" name="periodo" class="form-select select-sm" style="padding: 4px 10px; font-size: 0.82rem; border-radius: 6px; border: 1px solid var(--border); background: #ffffff; color: var(--text-dark); cursor: pointer;"
+                                        hx-get="/laesh/rc/tabla-ordenes-anteriores"
+                                        hx-target="#tabla-recepcion-anteriores"
+                                        hx-swap="outerHTML"
+                                        hx-include="#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc"
+                                        hx-trigger="change">
+                                    <option value="7d">Últimos 7 días</option>
+                                    <option value="15d">Últimos 15 días</option>
+                                    <option value="30d">Últimos 30 días</option>
+                                    <option value="90d" selected>Últimos 90 días (Default)</option>
+                                    <option value="fecha">Calendario</option>
+                                </select>
+                                <span id="rango-fechas-anteriores-rc" class="d-none" style="display: none; align-items: center; gap: 0.35rem; white-space: nowrap;">
+                                    <input type="date" id="fecha-inicio-anteriores-rc" name="fecha_inicio" class="select-sm form-input" style="padding: 3px 6px; font-size: 0.8rem; border-radius: 6px; border: 1px solid var(--border); width: 130px;" max="<?= date('Y-m-d', strtotime('-1 day')) ?>" title="Fecha inicial" aria-label="Fecha inicial"
+                                           hx-get="/laesh/rc/tabla-ordenes-anteriores"
+                                           hx-target="#tabla-recepcion-anteriores"
+                                           hx-swap="outerHTML"
+                                           hx-include="#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc"
+                                           hx-trigger="change">
+                                    <span class="txt-muted-sm" style="font-size: 0.78rem; color: var(--text-muted);">al</span>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L419-444)</summary>
+
+**Path:** `Unknown file`
+
+```
+                        </div>
+                    </div>
+
+                    <!-- Combo List de Período y Rango de Fechas (Calendario) -->
+                    <div id="ordenes-anteriores-md-periodo-container" style="display: inline-flex; align-items: center; gap: 0.35rem; flex-wrap: nowrap;">
+                        <label for="select-periodo-anteriores-md" style="font-size: 0.82rem; font-weight: 600; color: var(--text-muted); white-space: nowrap;">Período:</label>
+                        <select id="select-periodo-anteriores-md" name="periodo" class="form-select select-sm" style="padding: 4px 10px; font-size: 0.82rem; border-radius: 6px; border: 1px solid var(--border); background: #ffffff; color: var(--text-dark); cursor: pointer;"
+                                hx-get="/laesh/md/tabla-ordenes-anteriores"
+                                hx-target="#tabla-historial-completo"
+                                hx-swap="outerHTML"
+                                hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md"
+                                hx-trigger="change">
+                            <option value="7d">Últimos 7 días</option>
+                            <option value="15d">Últimos 15 días</option>
+                            <option value="30d">Últimos 30 días</option>
+                            <option value="90d" selected>Últimos 90 días (Default)</option>
+                            <option value="fecha">Calendario</option>
+                        </select>
+                        <span id="rango-fechas-anteriores-md" class="d-none" style="display: none; align-items: center; gap: 0.35rem; white-space: nowrap;">
+                            <input type="date" id="fecha-inicio-anteriores-md" name="fecha_inicio" class="select-sm form-input" style="padding: 3px 6px; font-size: 0.8rem; border-radius: 6px; border: 1px solid var(--border); width: 130px;" max="<?= date('Y-m-d', strtotime('-1 day')) ?>" title="Fecha inicial" aria-label="Fecha inicial"
+                                   hx-get="/laesh/md/tabla-ordenes-anteriores"
+                                   hx-target="#tabla-historial-completo"
+                                   hx-swap="outerHTML"
+                                   hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md"
+                                   hx-trigger="change">
+                            <span class="txt-muted-sm" style="font-size: 0.78rem; color: var(--text-muted);">al</span>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Examining the provided code snippets in `labadmin.php` and `medicos.php` reveals identical HTML `select` elements with the ID `select-periodo-anteriores-rc`, offering date range options (7, 15, 30, 90 days, and a calendar). The "Últimos 90 días" option is the default selection. The user prompt appears to be incomplete, potentially referencing these date range selection *combos*.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `periodo`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.066996235s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:28 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+Examining the `construirFiltroPeriodoAnteriores` function to understand how date ranges for order filtering are constructed. The code utilizes a `switch` statement based on a `$periodo` parameter. Initial focus is on the logic for the '7d' case, which seems to generate a SQL WHERE clause using `DATE_SUB` and `CURDATE()` to define a 7-day lookback window, but the full picture is not yet clear. Need to check what are the other cases.
+
+
+Analyzing the `construirFiltroPeriodoAnteriores` functions across multiple files, the code constructs SQL date range filters using a `switch` statement based on a period string. The '7d' case, corresponding to "últimos 7 días", is identified for removal. Removing the '7d' case from the switch would eliminate the functionality. Then I need to determine if any other location depends on that filter.
+
+
+Adjusting the default period to `30d` necessitates modifications across controller, model, and view files, including default parameter values and selected HTML options. The dropdown options require updating to: `30d` (selected by default), `15d`, and "Fechas". I need to verify that `15d` is the intended label for the second option as per the user's instructions "30d, 15 y Fechas".
+
+
+The instructions specify "30d, 15 y Fechas," leading to ambiguity for the second option.  A double space exists in the text. Given that "30d" and "15d" (or "15") are easily understood in Spanish as "30 days" and "15 days", there's likely an omission.  The second option's value should likely be "15d", but the text could be either "15d" or "15" based on whether the "d" was dropped in the prompt.
+
+
+Analyzing user instructions regarding dropdown labels, the desired order is "30d", then "15", then "Fechas", however the instructions could refer to "15d". Considering that "30d" includes "d", and "15" does not, this inconsistency might be a typo. It is necessary to consider both "15" and "15d" as potentially valid options for the second dropdown entry. Re-reading the prompt, it could be either 15 or 15d.
+
+
+The "7d" filter is removed, and the default period is set to "30d". Backend compatibility with a "90d" period needs verification, ensuring fallback to "30d" for safety. The controller, view, and model defaults must be updated to "30d".
+
+The correct label for the second dropdown option remains ambiguous; the phrasing "30d, 15 y Fechas" suggests "15", although "15d" could be intended, and needs further assessment. Dropping the "d" unit might cause confusion when reading or selecting an option.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 7.626975079s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L494-544)</summary>
+
+**Path:** `Unknown file`
+
+```
+    $csrfToken = $_SESSION['csrf_token'] ?? '';
+
+    $q           = trim($_GET['q'] ?? '');
+    $periodo     = trim($_GET['periodo'] ?? '90d');
+    $fechaInicio = trim($_GET['fecha_inicio'] ?? '');
+    $fechaFin    = trim($_GET['fecha_fin'] ?? '');
+    $sort        = trim($_GET['sort'] ?? 'fecha');
+    $dir         = trim($_GET['dir'] ?? 'desc');
+    $page        = max(1, (int)($_GET['page'] ?? 1));
+    $perPage     = max(5, min(100, (int)($_GET['per_page'] ?? 25)));
+    $offset      = ($page - 1) * $perPage;
+
+    $ordenesAnteriores = \RC\Negocio\Ordenes::obtenerOrdenesAnteriores($perPage, $offset, $q, $sort, $dir, $periodo, $fechaInicio, $fechaFin);
+    $totalReg          = \RC\Negocio\Ordenes::contarOrdenesAnteriores($q, $periodo, $fechaInicio, $fechaFin);
+    $totalPages        = max(1, (int)ceil($totalReg / $perPage));
+
+    $includeAnt = '#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc';
+
+    echo '<table class="table" id="tabla-recepcion-anteriores" hx-get="/laesh/rc/tabla-ordenes-anteriores" hx-target="#tabla-recepcion-anteriores" hx-swap="outerHTML" hx-include="' . $includeAnt . '" hx-trigger="refresh, ordenActualizada from:body" style="margin-bottom: 0; width: 100%; min-width: 1665px; table-layout: fixed; border-collapse: collapse;">'
+       . '<colgroup>'
+       . '<col style="width: 130px;">'
+       . '<col style="width: 210px;">'
+       . '<col style="width: 180px;">'
+       . '<col style="width: 200px;">'
+       . '<col style="width: 125px;">'
+       . '<col style="width: 125px;">'
+       . '<col style="width: 190px;">'
+       . '<col style="width: 260px;">'
+       . '<col style="width: 220px;">'
+       . '</colgroup>'
+       . '<thead>'
+       . rcRenderOrdenesTablaHeader($sort, $dir, $q, '/laesh/rc/tabla-ordenes-anteriores', '#tabla-recepcion-anteriores', $includeAnt)
+       . '</thead>'
+       . rcRenderOrdenesTablaBody($ordenesAnteriores, $csrfToken, '-ant')
+       . '</table>';
+
+    $qParam = !empty($q) ? '&q=' . urlencode($q) : '';
+    $pParam = '&periodo=' . urlencode($periodo);
+    if ($periodo === 'fecha') {
+        if (!empty($fechaInicio)) $pParam .= '&fecha_inicio=' . urlencode($fechaInicio);
+        if (!empty($fechaFin)) $pParam .= '&fecha_fin=' . urlencode($fechaFin);
+    }
+    echo '<div id="ordenes-anteriores-pagination-wrap" hx-swap-oob="outerHTML" style="display: flex; align-items: center; gap: 0.5rem;">'
+       . '<span id="ordenes-anteriores-total-records" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">Total: ' . $totalReg . '</span>'
+       . '<span style="color: #cbd5e1; display: inline;">|</span>'
+       . '<div id="ordenes-anteriores-pagination" style="display: flex; gap: 0.25rem; align-items: center;">';
+    if ($page > 1) {
+        $prevPage = $page - 1;
+        echo '<button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/rc/tabla-ordenes-anteriores?page=' . $prevPage . $qParam . $pParam . '&sort=' . $sort . '&dir=' . $dir . '&per_page=' . $perPage . '" hx-target="#tabla-recepcion-anteriores" hx-swap="outerHTML" hx-include="' . $includeAnt . '">‹ Anterior</button>';
+    } else {
+        echo '<button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">‹ Anterior</button>';
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `obtenerOrdenesAnteriores`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:29 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L54-74)</summary>
+
+**Path:** `Unknown file`
+
+```
+    if (empty($_SESSION['csrf_token'])) {
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    }
+
+    // Obtener órdenes recientes (hoy), órdenes anteriores, catálogo de pacientes, catálogos UI y KPIs reales desde la Capa de Negocio (PDO)
+    $ordenesRecientes        = \RC\Negocio\Ordenes::obtenerOrdenesRecientes(25, 0, '', 'fecha', 'DESC');
+    $totalOrdenesRecientes   = \RC\Negocio\Ordenes::contarOrdenesRecientes('');
+    $ordenesAnteriores       = \RC\Negocio\Ordenes::obtenerOrdenesAnteriores(25, 0, '', 'fecha', 'DESC');
+    $totalOrdenesAnteriores  = \RC\Negocio\Ordenes::contarOrdenesAnteriores('');
+    $pacientesCatalog        = \RC\Negocio\Ordenes::obtenerPacientes(25, 0, '', 'fecha', 'DESC');
+    $totalPacientes          = \RC\Negocio\Ordenes::contarPacientes('');
+    $catalogosUI             = \RC\Negocio\Ordenes::obtenerCatalogosUI();
+
+    // Obtener catálogo de médicos reales y top 5 desde MariaDB (vw_medicos_completos)
+    $medicosCatalog = \Common\DB::connect()->query(
+        "SELECT user_id, nombre_completo, cedula_profesional, especialidad, celular, total_ordenes 
+         FROM vw_medicos_completos 
+         ORDER BY total_ordenes DESC"
+    )->fetchAll(\PDO::FETCH_ASSOC) ?: [];
+
+    // SEC: frame-ancestors vía HTTP header real (meta tag es ignorado por browsers)
 ```
 
 </details>
@@ -18250,6 +16911,3334 @@ Examining the HTML snippet, it appears to define a filter selection for a date r
 ---
 
 <details>
+<summary>File: `Unknown file` (L49-89)</summary>
+
+**Path:** `Unknown file`
+
+```
+                $medProfile = $stmtMed->fetch(\PDO::FETCH_ASSOC) ?: [];
+            } catch (\Throwable $ex) {
+                // Fallback sin columna cedula_especialidad si DDL no tiene permisos
+                $stmtMed = $db->prepare("SELECT nombre_completo, especialidad, cedula_profesional, celular, telefono_consultorio, direccion_consultorio, universidad_id, lugar_trabajo_id FROM perfiles_medicos WHERE user_id = ? LIMIT 1");
+                $stmtMed->execute([$userId]);
+                $medProfile = $stmtMed->fetch(\PDO::FETCH_ASSOC) ?: [];
+                $medProfile['cedula_especialidad'] = '';
+            }
+        } else {
+            $medProfile = [];
+        }
+    }
+
+    // Cargar catálogos relacionales de UI (universidades y lugares de trabajo)
+    $catalogosUI = \RC\Negocio\Ordenes::obtenerCatalogosUI();
+
+    if (!empty($medProfile['nombre_completo'])) {
+        $nombreMedico = trim($medProfile['nombre_completo']);
+    } elseif ($emp && !empty($emp['nombre'])) {
+        $nombreMedico = trim($emp['nombre'] . ' ' . $emp['apellidos']);
+    } else {
+        $email = $auth->getEmail() ?? '';
+        $userPart = explode('@', $email)[0] ?? '';
+        $nombreMedico = $userPart ? ucfirst($userPart) : '';
+    }
+
+    if ($nombreMedico) {
+        $nombreMedico = preg_replace('/^(?:Dr\(a\)\.|\bDr\.\b|\bDra\.\b|\bDr\b)\s*(?:Dr\(a\)\.|\bDr\.\b|\bDra\.\b|\bDr\b\s*)*/i', 'Dr(a). ', $nombreMedico);
+        $nombreMedico = trim($nombreMedico);
+    }
+
+    // CSRF token (R14.12)
+    if (empty($_SESSION['csrf_token'])) {
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    }
+
+    // Obtener solicitudes médicas propias (hoy), y página 1 de Órdenes Anteriores /
+    // Pacientes (mismo patrón de paginación/búsqueda/orden que Recepción — GAP-MD-01)
+    $ordenesPropias      = \MD\Negocio\Ordenes::obtenerOrdenesPropias($userId, 25, 0, '', 'fecha', 'DESC');
+    $totalOrdenesPropias = \MD\Negocio\Ordenes::contarOrdenesPropias($userId, '');
+    $ordenesAnteriores   = \MD\Negocio\Ordenes::obtenerOrdenesAnterioresMedico($userId, 25, 0, '', 'fecha', 'DESC');
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L369-419)</summary>
+
+**Path:** `Unknown file`
+
+```
+Flight::route('GET /tabla-ordenes-anteriores', function () {
+    header('Content-Type: text/html; charset=utf-8');
+    $userId = (int)Flight::auth()->getUserId();
+    $csrfToken = $_SESSION['csrf_token'] ?? '';
+
+    $q           = trim($_GET['q'] ?? '');
+    $periodo     = trim($_GET['periodo'] ?? '90d');
+    $fechaInicio = trim($_GET['fecha_inicio'] ?? '');
+    $fechaFin    = trim($_GET['fecha_fin'] ?? '');
+    $sort        = trim($_GET['sort'] ?? 'fecha');
+    $dir         = trim($_GET['dir'] ?? 'desc');
+    $page        = max(1, (int)($_GET['page'] ?? 1));
+    $perPage     = max(5, min(100, (int)($_GET['per_page'] ?? 25)));
+    $offset      = ($page - 1) * $perPage;
+
+    $ordenesAnteriores = \MD\Negocio\Ordenes::obtenerOrdenesAnterioresMedico($userId, $perPage, $offset, $q, $sort, $dir, $periodo, $fechaInicio, $fechaFin);
+    $totalReg          = \MD\Negocio\Ordenes::contarOrdenesAnterioresMedico($userId, $q, $periodo, $fechaInicio, $fechaFin);
+    $totalPages        = max(1, (int)ceil($totalReg / $perPage));
+
+    $includeAntMd = '#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md';
+
+    echo '<table id="tabla-historial-completo" hx-get="/laesh/md/tabla-ordenes-anteriores" hx-target="#tabla-historial-completo" hx-swap="outerHTML" hx-include="' . $includeAntMd . '" hx-trigger="refresh, ordenCreada from:body, ordenActualizada from:body">'
+       . '<thead>'
+       . mdRenderOrdenesTablaHeader($sort, $dir, $q, '/laesh/md/tabla-ordenes-anteriores', '#tabla-historial-completo', $includeAntMd)
+       . '</thead>'
+       . mdRenderOrdenesTablaBody($ordenesAnteriores, $csrfToken, '-ant')
+       . '</table>';
+
+    $qParam = !empty($q) ? '&q=' . urlencode($q) : '';
+    $pParam = '&periodo=' . urlencode($periodo);
+    if ($periodo === 'fecha') {
+        if (!empty($fechaInicio)) $pParam .= '&fecha_inicio=' . urlencode($fechaInicio);
+        if (!empty($fechaFin)) $pParam .= '&fecha_fin=' . urlencode($fechaFin);
+    }
+    echo '<div id="ordenes-anteriores-md-pagination-wrap" hx-swap-oob="outerHTML" style="display: flex; align-items: center; gap: 0.5rem;">'
+       . '<span id="ordenes-anteriores-md-total-records" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">Total: ' . $totalReg . '</span>'
+       . '<span style="color: #cbd5e1; display: inline;">|</span>'
+       . '<div style="display: flex; gap: 0.25rem; align-items: center;">';
+    if ($page > 1) {
+        $prevPage = $page - 1;
+        echo '<button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/md/tabla-ordenes-anteriores?page=' . $prevPage . $qParam . $pParam . '&sort=' . $sort . '&dir=' . $dir . '&per_page=' . $perPage . '" hx-target="#tabla-historial-completo" hx-swap="outerHTML" hx-include="' . $includeAntMd . '">‹ <span class="pag-label-text">Anterior</span></button>';
+    } else {
+        echo '<button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">‹ <span class="pag-label-text">Anterior</span></button>';
+    }
+    echo '<span style="font-size:0.82rem; font-weight:600; color:var(--text-muted); padding: 0 4px;">' . $page . ' / ' . $totalPages . '</span>';
+    if ($page < $totalPages) {
+        $nextPage = $page + 1;
+        echo '<button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/md/tabla-ordenes-anteriores?page=' . $nextPage . $qParam . $pParam . '&sort=' . $sort . '&dir=' . $dir . '&per_page=' . $perPage . '" hx-target="#tabla-historial-completo" hx-swap="outerHTML" hx-include="' . $includeAntMd . '"><span class="pag-label-text">Siguiente</span> ›</button>';
+    } else {
+        echo '<button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;"><span class="pag-label-text">Siguiente</span> ›</button>';
+    }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `90d`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:29 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `select-periodo-anteriores`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:29 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `labadmin.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L469-529)</summary>
+
+**Path:** `Unknown file`
+
+```
+            var select = document.getElementById('select-periodo-anteriores-rc');
+            var rango = document.getElementById('rango-fechas-anteriores-rc');
+            var inputIni = document.getElementById('fecha-inicio-anteriores-rc');
+            var inputFin = document.getElementById('fecha-fin-anteriores-rc');
+            if (!select || !rango || !inputIni || !inputFin) return;
+
+            var ayer = new Date();
+            ayer.setDate(ayer.getDate() - 1);
+            var ayerStr = ayer.toISOString().split('T')[0];
+
+            inputIni.max = ayerStr;
+            inputFin.max = ayerStr;
+
+            function manejarCambio() {
+                if (select.value === 'fecha') {
+                    rango.style.display = 'inline-flex';
+                    rango.classList.remove('d-none');
+
+                    if (!inputFin.value) {
+                        inputFin.value = ayerStr;
+                    }
+                    if (!inputIni.value) {
+                        var dIni = new Date(ayer);
+                        dIni.setDate(dIni.getDate() - 90);
+                        inputIni.value = dIni.toISOString().split('T')[0];
+                    }
+                    inputFin.min = inputIni.value;
+                } else {
+                    rango.style.display = 'none';
+                    rango.classList.add('d-none');
+                    inputIni.value = '';
+                    inputFin.value = '';
+                }
+            }
+
+            select.addEventListener('change', manejarCambio);
+
+            // Poka-Yoke: Al cambiar Fecha Inicio
+            inputIni.addEventListener('change', function() {
+                if (this.value) {
+                    // Si fin está vacío o es menor a inicio, sincronizar al mismo día
+                    if (!inputFin.value || inputFin.value < this.value) {
+                        inputFin.value = this.value;
+                    }
+                    inputFin.min = this.value;
+                }
+            });
+
+            // Poka-Yoke: Al cambiar Fecha Fin
+            inputFin.addEventListener('change', function() {
+                if (this.value) {
+                    // Si inicio es mayor a fin, ajustar inicio al mismo día
+                    if (inputIni.value && inputIni.value > this.value) {
+                        inputIni.value = this.value;
+                    }
+                    inputFin.min = inputIni.value || '';
+                }
+            });
+        }
+
+        window.filtrarEstadisticasAdmin = filtrarEstadisticasAdmin;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L339-379)</summary>
+
+**Path:** `Unknown file`
+
+```
+            var inputFin = document.getElementById('fecha-fin-anteriores-md');
+            if (!select || !rango || !inputIni || !inputFin) return;
+
+            var ayer = new Date();
+            ayer.setDate(ayer.getDate() - 1);
+            var ayerStr = ayer.toISOString().split('T')[0];
+
+            inputIni.max = ayerStr;
+            inputFin.max = ayerStr;
+
+            function manejarCambio() {
+                if (select.value === 'fecha') {
+                    rango.style.display = 'inline-flex';
+                    rango.classList.remove('d-none');
+
+                    if (!inputFin.value) {
+                        inputFin.value = ayerStr;
+                    }
+                    if (!inputIni.value) {
+                        var dIni = new Date(ayer);
+                        dIni.setDate(dIni.getDate() - 90);
+                        inputIni.value = dIni.toISOString().split('T')[0];
+                    }
+                    inputFin.min = inputIni.value;
+                } else {
+                    rango.style.display = 'none';
+                    rango.classList.add('d-none');
+                    inputIni.value = '';
+                    inputFin.value = '';
+                }
+            }
+
+            select.addEventListener('change', manejarCambio);
+
+            // Poka-Yoke: Al cambiar Fecha Inicio
+            inputIni.addEventListener('change', function() {
+                if (this.value) {
+                    // Si fin está vacío o es menor a inicio, sincronizar al mismo día
+                    if (!inputFin.value || inputFin.value < this.value) {
+                        inputFin.value = this.value;
+                    }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The date calculation requires adjusting from 90 days to 30 days in the specified file. The user's request necessitates removing the "últimos 7 días" option from the period combos, changing the default selection to "30 días," and updating the item names and order to "30d," "15," and "Fechas."
+
+
+Analyzing whether the second item should be "15" or "15d," considering the user's phrasing "30d, 15 y Fechas". Investigating if the user intended "15" literally, or if "15d" was implied, noting the potential for a typo (missing "d") given the keyboard layout and spacing in the user's input. The goal is to determine the correct HTML option value.
+
+
+Examining the historical HTML options, it's clear the previous format was consistently using the "Xd" pattern (e.g., "15d", "30d"). The user's input, with the double space and the specific phrasing "15 y Fechas," suggests that "15" is likely intentional and represents a simplified version. The UI presentation will be verified to match the updated options.
+
+
+Analyzing how the dropdown should look, the user wants the display as "30d", "15", and "Fechas". Observing that the backend expects the value to be "15d" (sent as `periodo=15d`), it is important the backend still receives "15d", regardless of what is displayed as a label. Confirming that, the HTML should be `<option value="15d">15</option>`. I'll consider how to inform the user about this.
+
+
+Examining the codebase, the backend logic handles both "15" and "15d," and "30" and "30d" interchangeably, which simplifies the UI updates. The existing "fecha" value must be retained for the "Fechas" option to ensure compatibility with dependent scripts. The default backend period needs to be changed from "90d" to "30d" for consistency. The default value should be set in the default cases.
+
+
+The date range filtering logic consistently uses a switch statement based on the input period. The previous "7d" option is now removed, with "30d" becoming the default. The "90d" option remains for backwards compatibility.
+
+In the second code block, the same switch-case logic is used for constructing date filters.  The cases for "15," "15d," "30," "30d," "90," and "90d" are present in both code blocks, with "30" or "30d" as the default. The values are generated via date math to construct the WHERE conditions.
+
+
+Examining the default values and query parameter usages, the period defaults to "30d" across multiple files and backend calls. The HTML select options and associated `hx-get` calls in both the lab and medical sections reflect this consistent "30d" default. The HTML select should maintain a "30d" default in the UI.
+
+Analyzing the HTML, the option values and display text need updating to align with user requests for the period selections. The initial observed HTML does not yet reflect the requested order and items. Both `rc/views/labadmin.php` and `md/views/medicos.php` need the HTML updated to the specified format. The `hx-get` parameter should be checked to be "30d".
+
+
+Considering the user's explicit preference for "15," the HTML should use `<option value="15d">15</option>` to match the displayed text, while ensuring the underlying value is "15d". Confirmed the value in `ws-client.js` is used to build the SQL date selection.
+
+The code in `ws-client.js` needs verifying to ensure the selection is correct. Reviewing the surrounding logic for any specific uses of the selected value. The user's requested order and default selection ("30d") are verified to match the HTML code.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `7d`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 8.635024506s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:29 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `90d`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:29 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+Initial focus is on identifying the exact files requiring modification. The provided list details potential areas within the application's view, business logic, and front-end JavaScript components across two distinct modules. Further analysis is required to determine the specific code changes needed in each file to address the described requirement.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `labadmin.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.159456441s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L229-264)</summary>
+
+**Path:** `Unknown file`
+
+```
+                                    <?php 
+                                        $totPgsAnt = max(1, (int)ceil(($totalOrdenesAnteriores ?? 0) / 25));
+                                    ?>
+                                    <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">‹ Anterior</button>
+                                    <span style="font-size:0.82rem; font-weight:600; color:var(--text-muted); padding: 0 4px;">1 / <?= $totPgsAnt ?></span>
+                                    <?php if ($totPgsAnt > 1): ?>
+                                        <button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/rc/tabla-ordenes-anteriores?page=2&periodo=90d" hx-target="#tabla-recepcion-anteriores" hx-swap="outerHTML" hx-include="#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc">Siguiente ›</button>
+                                    <?php else: ?>
+                                        <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">Siguiente ›</button>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+
+                            <!-- Combo List de Período y Rango de Fechas (Calendario) -->
+                            <div id="ordenes-anteriores-periodo-container" style="display: inline-flex; align-items: center; gap: 0.35rem; flex-wrap: nowrap;">
+                                <label for="select-periodo-anteriores-rc" style="font-size: 0.82rem; font-weight: 600; color: var(--text-muted); white-space: nowrap;">Período:</label>
+                                <select id="select-periodo-anteriores-rc" name="periodo" class="form-select select-sm" style="padding: 4px 10px; font-size: 0.82rem; border-radius: 6px; border: 1px solid var(--border); background: #ffffff; color: var(--text-dark); cursor: pointer;"
+                                        hx-get="/laesh/rc/tabla-ordenes-anteriores"
+                                        hx-target="#tabla-recepcion-anteriores"
+                                        hx-swap="outerHTML"
+                                        hx-include="#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc"
+                                        hx-trigger="change">
+                                    <option value="7d">Últimos 7 días</option>
+                                    <option value="15d">Últimos 15 días</option>
+                                    <option value="30d">Últimos 30 días</option>
+                                    <option value="90d" selected>Últimos 90 días (Default)</option>
+                                    <option value="fecha">Calendario</option>
+                                </select>
+                                <span id="rango-fechas-anteriores-rc" class="d-none" style="display: none; align-items: center; gap: 0.35rem; white-space: nowrap;">
+                                    <input type="date" id="fecha-inicio-anteriores-rc" name="fecha_inicio" class="select-sm form-input" style="padding: 3px 6px; font-size: 0.8rem; border-radius: 6px; border: 1px solid var(--border); width: 130px;" max="<?= date('Y-m-d', strtotime('-1 day')) ?>" title="Fecha inicial" aria-label="Fecha inicial"
+                                           hx-get="/laesh/rc/tabla-ordenes-anteriores"
+                                           hx-target="#tabla-recepcion-anteriores"
+                                           hx-swap="outerHTML"
+                                           hx-include="#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc"
+                                           hx-trigger="change">
+                                    <span class="txt-muted-sm" style="font-size: 0.78rem; color: var(--text-muted);">al</span>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:30 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L409-444)</summary>
+
+**Path:** `Unknown file`
+
+```
+                        <span style="color: #cbd5e1; display: inline;">|</span>
+                        <div style="display: flex; gap: 0.25rem; align-items: center;">
+                            <?php $totPgsAntMd = max(1, (int)ceil(($totalOrdenesAnteriores ?? 0) / 25)); ?>
+                            <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">‹ <span class="pag-label-text">Anterior</span></button>
+                            <span style="font-size:0.82rem; font-weight:600; color:var(--text-muted); padding: 0 4px;">1 / <?= $totPgsAntMd ?></span>
+                            <?php if ($totPgsAntMd > 1): ?>
+                                <button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/md/tabla-ordenes-anteriores?page=2&periodo=90d" hx-target="#tabla-historial-completo" hx-swap="outerHTML" hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md"><span class="pag-label-text">Siguiente</span> ›</button>
+                            <?php else: ?>
+                                <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;"><span class="pag-label-text">Siguiente</span> ›</button>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+
+                    <!-- Combo List de Período y Rango de Fechas (Calendario) -->
+                    <div id="ordenes-anteriores-md-periodo-container" style="display: inline-flex; align-items: center; gap: 0.35rem; flex-wrap: nowrap;">
+                        <label for="select-periodo-anteriores-md" style="font-size: 0.82rem; font-weight: 600; color: var(--text-muted); white-space: nowrap;">Período:</label>
+                        <select id="select-periodo-anteriores-md" name="periodo" class="form-select select-sm" style="padding: 4px 10px; font-size: 0.82rem; border-radius: 6px; border: 1px solid var(--border); background: #ffffff; color: var(--text-dark); cursor: pointer;"
+                                hx-get="/laesh/md/tabla-ordenes-anteriores"
+                                hx-target="#tabla-historial-completo"
+                                hx-swap="outerHTML"
+                                hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md"
+                                hx-trigger="change">
+                            <option value="7d">Últimos 7 días</option>
+                            <option value="15d">Últimos 15 días</option>
+                            <option value="30d">Últimos 30 días</option>
+                            <option value="90d" selected>Últimos 90 días (Default)</option>
+                            <option value="fecha">Calendario</option>
+                        </select>
+                        <span id="rango-fechas-anteriores-md" class="d-none" style="display: none; align-items: center; gap: 0.35rem; white-space: nowrap;">
+                            <input type="date" id="fecha-inicio-anteriores-md" name="fecha_inicio" class="select-sm form-input" style="padding: 3px 6px; font-size: 0.8rem; border-radius: 6px; border: 1px solid var(--border); width: 130px;" max="<?= date('Y-m-d', strtotime('-1 day')) ?>" title="Fecha inicial" aria-label="Fecha inicial"
+                                   hx-get="/laesh/md/tabla-ordenes-anteriores"
+                                   hx-target="#tabla-historial-completo"
+                                   hx-swap="outerHTML"
+                                   hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md"
+                                   hx-trigger="change">
+                            <span class="txt-muted-sm" style="font-size: 0.78rem; color: var(--text-muted);">al</span>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:30 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Ordenes.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L394-454)</summary>
+
+**Path:** `Unknown file`
+
+```
+    /**
+     * Obtiene las órdenes de DÍAS ANTERIORES para la vista de Historial en Recepción con paginación, búsqueda y ordenamiento
+     */
+    private static function construirFiltroPeriodoAnteriores(string $periodo, string $alias = 'o.', string $fechaInicio = '', string $fechaFin = '', array &$params = []): string {
+        switch ($periodo) {
+            case '7d':
+                return "{$alias}hora_captura >= DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND DATE({$alias}hora_captura) < CURDATE()";
+            case '15d':
+                return "{$alias}hora_captura >= DATE_SUB(CURDATE(), INTERVAL 15 DAY) AND DATE({$alias}hora_captura) < CURDATE()";
+            case '30d':
+                return "{$alias}hora_captura >= DATE_SUB(CURDATE(), INTERVAL 30 DAY) AND DATE({$alias}hora_captura) < CURDATE()";
+            case 'fecha':
+                $conds = ["DATE({$alias}hora_captura) < CURDATE()"];
+                $valIni = (!empty($fechaInicio) && preg_match('/^\d{4}-\d{2}-\d{2}$/', $fechaInicio)) ? $fechaInicio : null;
+                $valFin = (!empty($fechaFin) && preg_match('/^\d{4}-\d{2}-\d{2}$/', $fechaFin)) ? $fechaFin : null;
+
+                // Poka-Yoke: Si el usuario solo capturó una fecha, se asume ese mismo día exacto
+                if ($valIni !== null && $valFin === null) {
+                    $valFin = $valIni;
+                } elseif ($valIni === null && $valFin !== null) {
+                    $valIni = $valFin;
+                }
+
+                // Poka-Yoke: Si las fechas vienen invertidas (inicio > fin), se auto-corrigen
+                if ($valIni !== null && $valFin !== null && $valIni > $valFin) {
+                    $tmp = $valIni;
+                    $valIni = $valFin;
+                    $valFin = $tmp;
+                }
+
+                if ($valIni !== null) {
+                    $pIni = ':f_ini_' . str_replace('.', '', $alias);
+                    $conds[] = "DATE({$alias}hora_captura) >= {$pIni}";
+                    $params[$pIni] = $valIni;
+                }
+                if ($valFin !== null) {
+                    $pFin = ':f_fin_' . str_replace('.', '', $alias);
+                    $conds[] = "DATE({$alias}hora_captura) <= {$pFin}";
+                    $params[$pFin] = $valFin;
+                }
+                if ($valIni === null && $valFin === null) {
+                    return "{$alias}hora_captura >= DATE_SUB(CURDATE(), INTERVAL 90 DAY) AND DATE({$alias}hora_captura) < CURDATE()";
+                }
+                return implode(' AND ', $conds);
+            case '90d':
+            default:
+                return "{$alias}hora_captura >= DATE_SUB(CURDATE(), INTERVAL 90 DAY) AND DATE({$alias}hora_captura) < CURDATE()";
+        }
+    }
+
+    /**
+     * Obtiene las solicitudes de órdenes de DÍAS ANTERIORES con ordenamiento, búsqueda,
+     * paginación y filtro de período (default: 90 días, o calendario por rango de fechas).
+     * Precedencia del buscador: si $search tiene contenido, busca en todo el historial (< hoy).
+     */
+    public static function obtenerOrdenesAnteriores(int $limit = 25, int $offset = 0, string $search = '', string $orderBy = 'fecha', string $orderDir = 'DESC', string $periodo = '90d', string $fechaInicio = '', string $fechaFin = ''): array {
+        try {
+            $db = DB::connect();
+
+            $allowedSorts = [
+                'folio'           => 'CAST(o.folio_unico AS UNSIGNED)',
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Ordenes.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L544-559)</summary>
+
+**Path:** `Unknown file`
+
+```
+    /**
+     * Cuenta el total de órdenes de DÍAS ANTERIORES según filtro de búsqueda y período
+     */
+    public static function contarOrdenesAnteriores(string $search = '', string $periodo = '90d', string $fechaInicio = '', string $fechaFin = ''): int {
+        try {
+            $db = DB::connect();
+            $params = [];
+            $search = trim(mb_strtolower($search, 'UTF-8'));
+
+            // Opción B (Filtro Combinado): El filtro de período/calendario siempre se aplica como base
+            $filtroPeriodo = self::construirFiltroPeriodoAnteriores($periodo, '', $fechaInicio, $fechaFin, $params);
+
+            if ($search !== '') {
+                if (preg_match('/^(?:laesh-?|lsh-?|#)?(\d{1,8})$/i', $search, $mFolio)) {
+                    $rawNum = (int)$mFolio[1];
+                    $pad5   = sprintf('%05d', $rawNum);
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:30 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Ordenes.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L544-554)</summary>
+
+**Path:** `Unknown file`
+
+```
+    }
+
+    /**
+     * Cuenta el total de órdenes de DÍAS ANTERIORES según filtro de búsqueda y período
+     */
+    public static function contarOrdenesAnteriores(string $search = '', string $periodo = '90d', string $fechaInicio = '', string $fechaFin = ''): int {
+        try {
+            $db = DB::connect();
+            $params = [];
+            $search = trim(mb_strtolower($search, 'UTF-8'));
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:31 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Ordenes.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L334-399)</summary>
+
+**Path:** `Unknown file`
+
+```
+            DB::logFallback('ERROR', 'Fallo en MD\Negocio\Ordenes::obtenerResultadoPDFPropio', $e->getMessage());
+            return ['success' => false, 'error' => 'No se pudo obtener el PDF: ' . $e->getMessage()];
+        }
+    }
+
+    private static function construirFiltroPeriodoAnterioresMedico(string $periodo, string $alias = 'o.', string $fechaInicio = '', string $fechaFin = '', array &$params = []): string {
+        switch ($periodo) {
+            case '7d':
+                return "{$alias}hora_captura >= DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND DATE({$alias}hora_captura) < CURDATE()";
+            case '15d':
+                return "{$alias}hora_captura >= DATE_SUB(CURDATE(), INTERVAL 15 DAY) AND DATE({$alias}hora_captura) < CURDATE()";
+            case '30d':
+                return "{$alias}hora_captura >= DATE_SUB(CURDATE(), INTERVAL 30 DAY) AND DATE({$alias}hora_captura) < CURDATE()";
+            case 'fecha':
+                $conds = ["DATE({$alias}hora_captura) < CURDATE()"];
+                $valIni = (!empty($fechaInicio) && preg_match('/^\d{4}-\d{2}-\d{2}$/', $fechaInicio)) ? $fechaInicio : null;
+                $valFin = (!empty($fechaFin) && preg_match('/^\d{4}-\d{2}-\d{2}$/', $fechaFin)) ? $fechaFin : null;
+
+                // Poka-Yoke: Si el usuario solo capturó una fecha, se asume ese mismo día exacto
+                if ($valIni !== null && $valFin === null) {
+                    $valFin = $valIni;
+                } elseif ($valIni === null && $valFin !== null) {
+                    $valIni = $valFin;
+                }
+
+                // Poka-Yoke: Si las fechas vienen invertidas (inicio > fin), se auto-corrigen
+                if ($valIni !== null && $valFin !== null && $valIni > $valFin) {
+                    $tmp = $valIni;
+                    $valIni = $valFin;
+                    $valFin = $tmp;
+                }
+
+                if ($valIni !== null) {
+                    $pIni = ':f_ini_' . str_replace('.', '', $alias);
+                    $conds[] = "DATE({$alias}hora_captura) >= {$pIni}";
+                    $params[$pIni] = $valIni;
+                }
+                if ($valFin !== null) {
+                    $pFin = ':f_fin_' . str_replace('.', '', $alias);
+                    $conds[] = "DATE({$alias}hora_captura) <= {$pFin}";
+                    $params[$pFin] = $valFin;
+                }
+                if ($valIni === null && $valFin === null) {
+                    return "{$alias}hora_captura >= DATE_SUB(CURDATE(), INTERVAL 90 DAY) AND DATE({$alias}hora_captura) < CURDATE()";
+                }
+                return implode(' AND ', $conds);
+            case '90d':
+            default:
+                return "{$alias}hora_captura >= DATE_SUB(CURDATE(), INTERVAL 90 DAY) AND DATE({$alias}hora_captura) < CURDATE()";
+        }
+    }
+
+    /**
+     * Obtiene las solicitudes de órdenes de DÍAS ANTERIORES emitidas por el médico logueado,
+     * con ordenamiento, búsqueda, paginación y filtro de período (default: 90 días, o calendario por rango de fechas).
+     * Precedencia del buscador: si $search tiene contenido, busca en todo el historial (< hoy).
+     */
+    public static function obtenerOrdenesAnterioresMedico(int $userId, int $limit = 25, int $offset = 0, string $search = '', string $orderBy = 'fecha', string $orderDir = 'DESC', string $periodo = '90d', string $fechaInicio = '', string $fechaFin = ''): array {
+        try {
+            $db = DB::connect();
+
+            $allowedSorts = [
+                'folio'           => 'CAST(o.folio_unico AS UNSIGNED)',
+                'paciente'        => 'o.paciente_nombre',
+                'fecha'           => 'o.hora_captura',
+                'fecha_resultado' => 'o.fecha_resultado',
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Ordenes.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L469-484)</summary>
+
+**Path:** `Unknown file`
+
+```
+        }
+    }
+
+    /**
+     * Cuenta el total de órdenes de DÍAS ANTERIORES del médico según filtro de búsqueda y período
+     */
+    public static function contarOrdenesAnterioresMedico(int $userId, string $search = '', string $periodo = '90d', string $fechaInicio = '', string $fechaFin = ''): int {
+        try {
+            $db = DB::connect();
+            $params = [':user_id' => $userId];
+            $search = trim(mb_strtolower($search, 'UTF-8'));
+
+            // Opción B (Filtro Combinado): El filtro de período/calendario siempre se aplica como base
+            $filtroPeriodo = self::construirFiltroPeriodoAnterioresMedico($periodo, '', $fechaInicio, $fechaFin, $params);
+
+            if ($search !== '') {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Modifying the date range filter for historical medical orders requires updating the logic to include 15-day, 90-day, and flexible date range options while removing the 7-day option. The default period should now be set to 30 days. These changes involve adjusting the filter construction and ensuring the default period value is correctly implemented within the relevant functions.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.109816320s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:31 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Ordenes.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L471-481)</summary>
+
+**Path:** `Unknown file`
+
+```
+        }
+    }
+
+    /**
+     * Cuenta el total de órdenes de DÍAS ANTERIORES del médico según filtro de búsqueda y período
+     */
+    public static function contarOrdenesAnterioresMedico(int $userId, string $search = '', string $periodo = '90d', string $fechaInicio = '', string $fechaFin = ''): int {
+        try {
+            $db = DB::connect();
+            $params = [':user_id' => $userId];
+            $search = trim(mb_strtolower($search, 'UTF-8'));
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:31 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L494-504)</summary>
+
+**Path:** `Unknown file`
+
+```
+    $csrfToken = $_SESSION['csrf_token'] ?? '';
+
+    $q           = trim($_GET['q'] ?? '');
+    $periodo     = trim($_GET['periodo'] ?? '90d');
+    $fechaInicio = trim($_GET['fecha_inicio'] ?? '');
+    $fechaFin    = trim($_GET['fecha_fin'] ?? '');
+    $sort        = trim($_GET['sort'] ?? 'fecha');
+    $dir         = trim($_GET['dir'] ?? 'desc');
+    $page        = max(1, (int)($_GET['page'] ?? 1));
+    $perPage     = max(5, min(100, (int)($_GET['per_page'] ?? 25)));
+    $offset      = ($page - 1) * $perPage;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:31 am
+
+---
+
+<details>
+<summary>Conversation History</summary>
+
+# Conversation History
+Here are the conversation IDs, titles, and summaries of your most recent 1 conversations, in reverse chronological order:
+
+<conversation_summaries>
+## Conversation b05a5b41-a7c7-4d90-9813-7abd9e8e85cf: Limpieza De Código PTR
+- Created: 2026-09-27T17:17:20Z
+- Last modified: 2026-09-27T17:32:03Z
+
+### USER Objective:
+Limpieza De Código PTR
+
+</conversation_summaries>
+
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:32 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+Examining the code, the request involves modifying the period selection within the administration view. Identified the file requiring edits. The task involves removing the "últimos 7 días" option, setting "30 días" as the default selection, and adjusting the order and labeling of the period options to "30d", "15", and "Fechas". The existing default pagination value is also being modified.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.074649202s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:32 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:32 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:32 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L364-389)</summary>
+
+**Path:** `Unknown file`
+
+```
+// GAP-MD-01/03 (2026-09-21/22): usa las mismas mdRenderOrdenesTablaHeader/Body que
+// Órdenes Hoy — antes el combo "Período" con filtrado client-side, y luego un par
+// de funciones de render casi idénticas por sub-tab, permitieron que Hoy y
+// Anteriores divergieran en columnas/rótulos. Con una sola función para ambas,
+// la única diferencia real es el rango de fechas que consulta el backend.
+Flight::route('GET /tabla-ordenes-anteriores', function () {
+    header('Content-Type: text/html; charset=utf-8');
+    $userId = (int)Flight::auth()->getUserId();
+    $csrfToken = $_SESSION['csrf_token'] ?? '';
+
+    $q           = trim($_GET['q'] ?? '');
+    $periodo     = trim($_GET['periodo'] ?? '90d');
+    $fechaInicio = trim($_GET['fecha_inicio'] ?? '');
+    $fechaFin    = trim($_GET['fecha_fin'] ?? '');
+    $sort        = trim($_GET['sort'] ?? 'fecha');
+    $dir         = trim($_GET['dir'] ?? 'desc');
+    $page        = max(1, (int)($_GET['page'] ?? 1));
+    $perPage     = max(5, min(100, (int)($_GET['per_page'] ?? 25)));
+    $offset      = ($page - 1) * $perPage;
+
+    $ordenesAnteriores = \MD\Negocio\Ordenes::obtenerOrdenesAnterioresMedico($userId, $perPage, $offset, $q, $sort, $dir, $periodo, $fechaInicio, $fechaFin);
+    $totalReg          = \MD\Negocio\Ordenes::contarOrdenesAnterioresMedico($userId, $q, $periodo, $fechaInicio, $fechaFin);
+    $totalPages        = max(1, (int)ceil($totalReg / $perPage));
+
+    $includeAntMd = '#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md';
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `90d`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:32 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `7d`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:32 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:32 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `90d`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:32 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `7d`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:32 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `labadmin.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L469-519)</summary>
+
+**Path:** `Unknown file`
+
+```
+            var select = document.getElementById('select-periodo-anteriores-rc');
+            var rango = document.getElementById('rango-fechas-anteriores-rc');
+            var inputIni = document.getElementById('fecha-inicio-anteriores-rc');
+            var inputFin = document.getElementById('fecha-fin-anteriores-rc');
+            if (!select || !rango || !inputIni || !inputFin) return;
+
+            var ayer = new Date();
+            ayer.setDate(ayer.getDate() - 1);
+            var ayerStr = ayer.toISOString().split('T')[0];
+
+            inputIni.max = ayerStr;
+            inputFin.max = ayerStr;
+
+            function manejarCambio() {
+                if (select.value === 'fecha') {
+                    rango.style.display = 'inline-flex';
+                    rango.classList.remove('d-none');
+
+                    if (!inputFin.value) {
+                        inputFin.value = ayerStr;
+                    }
+                    if (!inputIni.value) {
+                        var dIni = new Date(ayer);
+                        dIni.setDate(dIni.getDate() - 90);
+                        inputIni.value = dIni.toISOString().split('T')[0];
+                    }
+                    inputFin.min = inputIni.value;
+                } else {
+                    rango.style.display = 'none';
+                    rango.classList.add('d-none');
+                    inputIni.value = '';
+                    inputFin.value = '';
+                }
+            }
+
+            select.addEventListener('change', manejarCambio);
+
+            // Poka-Yoke: Al cambiar Fecha Inicio
+            inputIni.addEventListener('change', function() {
+                if (this.value) {
+                    // Si fin está vacío o es menor a inicio, sincronizar al mismo día
+                    if (!inputFin.value || inputFin.value < this.value) {
+                        inputFin.value = this.value;
+                    }
+                    inputFin.min = this.value;
+                }
+            });
+
+            // Poka-Yoke: Al cambiar Fecha Fin
+            inputFin.addEventListener('change', function() {
+                if (this.value) {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L339-379)</summary>
+
+**Path:** `Unknown file`
+
+```
+            var inputFin = document.getElementById('fecha-fin-anteriores-md');
+            if (!select || !rango || !inputIni || !inputFin) return;
+
+            var ayer = new Date();
+            ayer.setDate(ayer.getDate() - 1);
+            var ayerStr = ayer.toISOString().split('T')[0];
+
+            inputIni.max = ayerStr;
+            inputFin.max = ayerStr;
+
+            function manejarCambio() {
+                if (select.value === 'fecha') {
+                    rango.style.display = 'inline-flex';
+                    rango.classList.remove('d-none');
+
+                    if (!inputFin.value) {
+                        inputFin.value = ayerStr;
+                    }
+                    if (!inputIni.value) {
+                        var dIni = new Date(ayer);
+                        dIni.setDate(dIni.getDate() - 90);
+                        inputIni.value = dIni.toISOString().split('T')[0];
+                    }
+                    inputFin.min = inputIni.value;
+                } else {
+                    rango.style.display = 'none';
+                    rango.classList.add('d-none');
+                    inputIni.value = '';
+                    inputFin.value = '';
+                }
+            }
+
+            select.addEventListener('change', manejarCambio);
+
+            // Poka-Yoke: Al cambiar Fecha Inicio
+            inputIni.addEventListener('change', function() {
+                if (this.value) {
+                    // Si fin está vacío o es menor a inicio, sincronizar al mismo día
+                    if (!inputFin.value || inputFin.value < this.value) {
+                        inputFin.value = this.value;
+                    }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ws-client.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L269-364)</summary>
+
+**Path:** `Unknown file`
+
+```
+        var fechaIniId         = isMedicoPortal ? 'fecha-inicio-anteriores-md'      : 'fecha-inicio-anteriores-rc';
+        var fechaFinId         = isMedicoPortal ? 'fecha-fin-anteriores-md'         : 'fecha-fin-anteriores-rc';
+        var rangoContainerId   = isMedicoPortal ? 'rango-fechas-anteriores-md'      : 'rango-fechas-anteriores-rc';
+
+        var inputAnt    = document.getElementById(searchAnterioresId);
+        var inputHoy    = document.getElementById(searchHoyId);
+        var selPeriodo  = document.getElementById(selectPeriodoId);
+        var inputIni    = document.getElementById(fechaIniId);
+        var inputFin    = document.getElementById(fechaFinId);
+        var rangoElem   = document.getElementById(rangoContainerId);
+
+        var textoAnt   = inputAnt ? (inputAnt.value || '').trim() : '';
+        var textoHoy   = inputHoy ? (inputHoy.value || '').trim() : '';
+        var periodoVal = selPeriodo ? selPeriodo.value : '90d';
+        var iniVal     = inputIni ? (inputIni.value || '') : '';
+        var finVal     = inputFin ? (inputFin.value || '') : '';
+
+        var tabActiva = 'anteriores';
+        if (isMedicoPortal) {
+            var panelNueva = document.getElementById('panel-nueva-orden');
+            var subGenerar = document.getElementById('subtab-generar');
+            var subHoy = document.getElementById('subtab-ordenes-hoy');
+            if (panelNueva && !panelNueva.classList.contains('d-none')) {
+                if (subGenerar && subGenerar.classList.contains('active')) {
+                    tabActiva = 'captura';
+                } else if (subHoy && subHoy.classList.contains('active')) {
+                    tabActiva = 'hoy';
+                } else {
+                    tabActiva = 'captura';
+                }
+            } else {
+                tabActiva = 'anteriores';
+            }
+        } else {
+            var panelHoy = document.getElementById('panel-ordenes');
+            if (panelHoy && !panelHoy.classList.contains('d-none')) tabActiva = 'hoy';
+        }
+
+        _busquedaPreviaSnapshot = {
+            isMedico: isMedicoPortal,
+            tabActiva: tabActiva,
+            textoAnt: textoAnt,
+            textoHoy: textoHoy,
+            periodoVal: periodoVal,
+            iniVal: iniVal,
+            finVal: finVal,
+            rangoVisible: rangoElem ? (rangoElem.style.display !== 'none') : false
+        };
+    }
+
+    function mostrarBarraRetorno(cleanTarget, localizada) {
+        if (!_busquedaPreviaSnapshot) return;
+
+        var snap = _busquedaPreviaSnapshot;
+        var resumen = [];
+        var esBusquedaPersonalizada = false;
+        if (snap.tabActiva === 'captura') {
+            resumen.push('Captura de Solicitud');
+            esBusquedaPersonalizada = true;
+        } else if (snap.tabActiva === 'hoy') {
+            if (snap.textoHoy) {
+                resumen.push('"' + snap.textoHoy + '"');
+                esBusquedaPersonalizada = true;
+            } else {
+                resumen.push('Órdenes de Hoy');
+            }
+        } else {
+            if (snap.textoAnt) {
+                resumen.push('"' + snap.textoAnt + '"');
+                esBusquedaPersonalizada = true;
+            }
+            if (snap.periodoVal === 'fecha' && (snap.iniVal || snap.finVal)) {
+                resumen.push((snap.iniVal || '') + ' al ' + (snap.finVal || ''));
+                esBusquedaPersonalizada = true;
+            } else if (snap.periodoVal && snap.periodoVal !== '90d') {
+                resumen.push(snap.periodoVal);
+                esBusquedaPersonalizada = true;
+            } else if (!snap.textoAnt) {
+                resumen.push('Últimos 90 días');
+            }
+        }
+        var resumenTexto = resumen.length > 0 ? resumen.join(' · ') : 'Búsqueda previa';
+        var labelBoton = '';
+        if (snap.tabActiva === 'captura') {
+            labelBoton = '⬅ Volver a mi captura de orden';
+        } else if (esBusquedaPersonalizada) {
+            labelBoton = '⬅ Volver a mi búsqueda (' + resumenTexto + ')';
+        } else {
+            labelBoton = '⬅ Volver a la lista (' + resumenTexto + ')';
+        }
+
+        var existingBar = document.getElementById('laesh-notif-return-bar');
+        if (existingBar) existingBar.remove();
+
+        var esNoEncontrada = (localizada === false);
+        var bar = document.createElement('div');
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `periodo`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:32 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L264-284)</summary>
+
+**Path:** `Unknown file`
+
+```
+            if (esNueva) p.set('nueva', '1');
+            _abrirSolOverlay('/laesh/rc/views/solicitud_dac_impr.php?' + p.toString());
+        }
+
+
+        function filtrarEstadisticasMedico() {
+            const select = document.getElementById('filtro-periodo-medico');
+            const val = select.value;
+            
+            let ordenes = 34;
+            let completadas = 31;
+            let tiempo = "4.5 hrs";
+            let lblText = '';
+            
+            if (val === 'dia') {
+                ordenes = 2;
+                completadas = 2;
+                tiempo = "3.8 hrs";
+                lblText = 'HOY';
+            } else if (val === 'semana') {
+                ordenes = 12;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The request targets the period selection within the administrative panel. The "últimos 7 días" option needs removal from the available periods. The default period should shift to 30 days and become the pre-selected option. Item names require adjustment and reordering to "30d", "15", and "Fechas".
+
+I will modify the period selection options within `labadmin.php` to reflect these changes. Ensuring the default period is set appropriately and the specific periods are correctly labeled and ordered is the priority.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.052293733s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:32 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:33 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ws-client.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L279-354)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+        var textoAnt   = inputAnt ? (inputAnt.value || '').trim() : '';
+        var textoHoy   = inputHoy ? (inputHoy.value || '').trim() : '';
+        var periodoVal = selPeriodo ? selPeriodo.value : '90d';
+        var iniVal     = inputIni ? (inputIni.value || '') : '';
+        var finVal     = inputFin ? (inputFin.value || '') : '';
+
+        var tabActiva = 'anteriores';
+        if (isMedicoPortal) {
+            var panelNueva = document.getElementById('panel-nueva-orden');
+            var subGenerar = document.getElementById('subtab-generar');
+            var subHoy = document.getElementById('subtab-ordenes-hoy');
+            if (panelNueva && !panelNueva.classList.contains('d-none')) {
+                if (subGenerar && subGenerar.classList.contains('active')) {
+                    tabActiva = 'captura';
+                } else if (subHoy && subHoy.classList.contains('active')) {
+                    tabActiva = 'hoy';
+                } else {
+                    tabActiva = 'captura';
+                }
+            } else {
+                tabActiva = 'anteriores';
+            }
+        } else {
+            var panelHoy = document.getElementById('panel-ordenes');
+            if (panelHoy && !panelHoy.classList.contains('d-none')) tabActiva = 'hoy';
+        }
+
+        _busquedaPreviaSnapshot = {
+            isMedico: isMedicoPortal,
+            tabActiva: tabActiva,
+            textoAnt: textoAnt,
+            textoHoy: textoHoy,
+            periodoVal: periodoVal,
+            iniVal: iniVal,
+            finVal: finVal,
+            rangoVisible: rangoElem ? (rangoElem.style.display !== 'none') : false
+        };
+    }
+
+    function mostrarBarraRetorno(cleanTarget, localizada) {
+        if (!_busquedaPreviaSnapshot) return;
+
+        var snap = _busquedaPreviaSnapshot;
+        var resumen = [];
+        var esBusquedaPersonalizada = false;
+        if (snap.tabActiva === 'captura') {
+            resumen.push('Captura de Solicitud');
+            esBusquedaPersonalizada = true;
+        } else if (snap.tabActiva === 'hoy') {
+            if (snap.textoHoy) {
+                resumen.push('"' + snap.textoHoy + '"');
+                esBusquedaPersonalizada = true;
+            } else {
+                resumen.push('Órdenes de Hoy');
+            }
+        } else {
+            if (snap.textoAnt) {
+                resumen.push('"' + snap.textoAnt + '"');
+                esBusquedaPersonalizada = true;
+            }
+            if (snap.periodoVal === 'fecha' && (snap.iniVal || snap.finVal)) {
+                resumen.push((snap.iniVal || '') + ' al ' + (snap.finVal || ''));
+                esBusquedaPersonalizada = true;
+            } else if (snap.periodoVal && snap.periodoVal !== '90d') {
+                resumen.push(snap.periodoVal);
+                esBusquedaPersonalizada = true;
+            } else if (!snap.textoAnt) {
+                resumen.push('Últimos 90 días');
+            }
+        }
+        var resumenTexto = resumen.length > 0 ? resumen.join(' · ') : 'Búsqueda previa';
+        var labelBoton = '';
+        if (snap.tabActiva === 'captura') {
+            labelBoton = '⬅ Volver a mi captura de orden';
+        } else if (esBusquedaPersonalizada) {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:33 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:33 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:33 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+A successful initial check indicates the environment is stable for the next steps. The focus now shifts to crafting a comprehensive, repeatable test dataset simulating two years of operational data. This dataset will validate recently implemented features and enhancements across search, order display, period filtering, and search functionalities.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.080462276s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:33 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `class DB`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:34 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:34 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `DB.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+// DB.php - Clase para conexión PDO e interacción transaccional con la base de datos
+
+namespace Common;
+
+use PDO;
+use PDOException;
+
+class DB {
+    private static ?PDO $instance = null;
+
+    /**
+     * Establece la conexión PDO singleton
+     */
+    public static function connect(): PDO {
+        if (self::$instance === null) {
+            $config = require __DIR__ . '/config.php';
+            $dbConf = $config['db'];
+
+            $dsn = sprintf(
+                "mysql:host=%s;port=%d;dbname=%s;charset=%s",
+                $dbConf['host'],
+                $dbConf['port'],
+                $dbConf['name'],
+                $dbConf['charset']
+            );
+
+            try {
+                self::$instance = new PDO($dsn, $dbConf['user'], $dbConf['pass'], [
+                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                    PDO::ATTR_EMULATE_PREPARES => false,
+                    PDO::ATTR_PERSISTENT => true, // Conexión persistente (Pool a nivel PHP-FPM)
+                ]);
+                
+                // Configuración de compatibilidad e internacionalización (Español MX)
+                self::$instance->exec("SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci");
+                self::$instance->exec("SET time_zone = '-06:00'");
+                self::$instance->exec("SET lc_time_names = 'es_MX'");
+                self::$instance->exec("SET SESSION sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:34 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:34 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:34 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:34 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:34 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:35 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:35 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+Examining the order database reveals a small sample size. Evaluating user requests 9 and 10 is necessary to understand the desired scope of the test data and its relation to specified features. It's crucial to understand what kind of test data is required for the requested feature testing before proceeding.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.016494841s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:35 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+The "Período" dropdown now excludes the 7-day option. The default selection is set to 30 days (`30d`) in both the user interface and the backend logic. The dropdown items are arranged in the precise order: `30d`, `15`, and `Fechas`. Furthermore, both the frontend and backend implementations are synchronized to ensure consistency.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.057088648s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+## User Request
+
+ya replaneaste lo necesario considerando la elimnacion de 7d y el default nuevo ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `index.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Considering the removal of the specific time window and the new default, a thorough re-evaluation of the 2-year simulation dataset is required. Need to identify all areas impacted by this change, and how the new default and available options (the exact new default and an alternative time window, and dates) should be incorporated to validate that the changes operate as expected. The testing must confirm the dataset's integrity and accuracy, particularly with the varied time windows.
+
+
+The dataset requires specific boundary tests for time windows: "Hoy" (Today), "15d", "30d", and custom date ranges. It's crucial to ensure orders from yesterday, 14/15 days ago, 16 days ago, 29/30 days ago, and 31 days ago are correctly displayed/hidden in the respective tabs and filters. These boundary conditions are central to validating the time-based filtering logic.
+
+
+When a search term is present, the code bypasses the date filter and searches the entire history. Conversely, without a search term, the date filter is applied correctly. This "search overrides time filter" behavior is a core design principle. Search functionality, specifically by folio, was reviewed to understand how it interacts with the date filtering mechanism.
+
+
+Focusing on the search functionality, it's critical to verify the autocomplete dropdown behaves as expected for both patient name and diagnosis searches. Specifically, confirming that clearing the search term correctly reverts the display to the active date-filtered order grid is crucial. The logic of segregating "Today's Orders" and "Previous Orders" using `CURDATE()` needs validation against the test dataset.
+
+The state transitions (PENDIENTE to CANCELADA) should be thoroughly tested, confirming each state's correct display and behavior within the interface. These states directly impact how users interact with orders.
+
+
+The notification system necessitates testing with various order types and the "return bar" functionality to restore searches. The multi-doctor setup requires verifying order distribution and appropriate filtering in doctor and reception portals. Ensuring the simulation dataset can be cleaned without data corruption is critical, demanding the deterministic tagging of all simulated records. A realistic simulation requires 1,500-2,000 orders to adequately test pagination and the user interface.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 5.879500789s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+## User Request
+
+SI, realizalo de manera ultra quirurgica.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `index.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:40 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:40 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Ordenes.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L29-99)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+        try {
+            // 1. Buscar o crear el paciente en pacientes
+            $pacienteId = \RC\Negocio\Ordenes::buscarOCrearPaciente($datos);
+
+            // 2. El id del médico (medico_id) corresponde a su user_id según el esquema
+            $medicoId = $userId;
+
+            $edad          = intval($datos['edad'] ?? 0);
+            $diagnostico   = trim($datos['diagnostico'] ?? '');
+            $otrosEstudios = trim($datos['otros_estudios'] ?? '');
+            $estudiosArray = $datos['estudios'] ?? [];
+            $estudiosJson  = is_array($estudiosArray) ? json_encode($estudiosArray, JSON_UNESCAPED_UNICODE) : $estudiosArray;
+
+            // Validar edad obligatoria (1-120 años) ANTES de tocar el SP/FK
+            if ($edad <= 0 || $edad > 120) {
+                throw new \InvalidArgumentException("La edad es obligatoria y debe estar entre 1 y 120 años.");
+            }
+            if (is_array($estudiosArray) && !empty($estudiosArray)) {
+                $idsNumericos = array_values(array_filter($estudiosArray, 'is_numeric'));
+                if (!empty($idsNumericos)) {
+                    $placeholders = implode(',', array_fill(0, count($idsNumericos), '?'));
+                    $stmtCheck = $db->prepare("SELECT id FROM cat_estudios WHERE id IN ({$placeholders})");
+                    $stmtCheck->execute($idsNumericos);
+                    $idsExistentes = array_map('intval', $stmtCheck->fetchAll(PDO::FETCH_COLUMN));
+                    $idsFaltantes = array_diff(array_map('intval', $idsNumericos), $idsExistentes);
+                    if (!empty($idsFaltantes)) {
+                        throw new \InvalidArgumentException('Uno o más estudios seleccionados ya no existen en el catálogo (id: ' . implode(', ', $idsFaltantes) . '). Recargue la página e intente de nuevo.');
+                    }
+                }
+            }
+
+            // 3. Ejecutar Stored Procedure CrearOrdenLaboratorio
+            // Auditoría E2E (2026-09-20): quitado el prefijo 'laesh_db.' hardcodeado
+            // — ver comentario detallado en RC\Negocio\Ordenes::crearOrden().
+            $stmtProc = $db->prepare("
+                CALL CrearOrdenLaboratorio(
+                    :paciente_id,
+                    :medico_id,
+                    :recepcion_id,
+                    :edad_al_emitir,
+                    :diagnostico,
+                    :otros_estudios,
+                    :estudios_json,
+                    @p_folio
+                )
+            ");
+
+            $stmtProc->execute([
+                'paciente_id'    => $pacienteId,
+                'medico_id'      => $medicoId,
+                'recepcion_id'   => null, // Emitida por médico digitalmente
+                'edad_al_emitir' => $edad,
+                'diagnostico'    => $diagnostico,
+                'otros_estudios' => $otrosEstudios,
+                'estudios_json'  => $estudiosJson
+            ]);
+
+            // Obtener el folio generado por el Stored Procedure
+            $folioRow = $db->query("SELECT @p_folio AS folio")->fetch(PDO::FETCH_ASSOC);
+            $folio = $folioRow['folio'] ?? '1';
+
+            // Obtener la orden recién creada para responder con orden_id
+            $stmtOrd = $db->prepare("SELECT id FROM ordenes WHERE folio_unico = ? LIMIT 1");
+            $stmtOrd->execute([$folio]);
+            $ordenId = (int)$stmtOrd->fetchColumn();
+
+            // 4. Inserción en detalle_ordenes si se enviaron IDs
+            if (is_array($estudiosArray)) {
+                $stmtDet = $db->prepare("INSERT INTO detalle_ordenes (orden_id, estudio_id) VALUES (?, ?)");
+                foreach ($estudiosArray as $estudioId) {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:41 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:41 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:41 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+`S2Y-`-prefixed folios offer a robust, easily identifiable method for simulated data, fitting within the `VARCHAR(20)` constraint and enabling efficient deletion via a `LIKE` clause. This approach avoids conflicts with existing folio patterns. The `pacientes` table's `nombre_completo` field, with its `VARCHAR(200)` limit, is being examined in the context of simulated patient data.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.081592438s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:41 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:41 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+Initial investigation reveals that `vw_ordenes_completas` directly interacts with the `ordenes` table. Further, the use of `obtenerOrdenesAnteriores` is being examined in the context of two distinct PHP files, `rc/negocio/Ordenes.php` and `md/negocio/Ordenes.php`. The PHP code from the `rc` version is showing a selection of fields including `id`, `folio_unico`, and patient details from the database.
+
+
+Examining the query reveals a join across multiple tables including `ordenes`, `pacientes`, and several catalogs. The presence of `[SIM2Y]` suggests a data seeding or simulation context, likely for testing purposes. Investigating `tests/seed_dataset_2years.php` reveals checks for existing simulated data and mechanisms for cleanup.
+
+The script appears to populate data related to medical orders, patients, and their associated details, including medical professionals and study types. It utilizes a list of active medical user IDs and looks to generate realistic patient information including names, ages, sexes, and diagnoses.
+
+
+Determining the number of orders required across different time periods is essential.  Generating ~1,512 orders is the target, distributed across zones based on specified date ranges and counts. Each order will consist of 1-4 studies, populated from a study catalog. The folio structure will be `S2Y-00001` to `S2Y-01512`. The `estudios` field will contain the corresponding studies as a JSON object.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `config.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 3.137004289s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+// config.php — Configuración del ecosistema LAESH (Bloc Digital)
+//
+// Credenciales leídas desde variables de entorno (mínimo privilegio):
+//   LAESH_DB_USER / LAESH_DB_PASS / LAESH_DB_HOST / LAESH_DB_PORT / LAESH_DB_NAME
+//
+// Fallbacks por ambiente (env var siempre tiene prioridad):
+//   Docker local  (/.dockerenv existe) → host=db,        port=3306
+//   KVM2 Hostinger / OCI / nativo      → host=127.0.0.1, port=3306
+//   (En todos los entornos nativo las env vars se inyectan vía PHP-FPM pool
+//    y cache_renew.cron — el fallback no-Docker solo aplica si la inyección falla)
+// Nota: ya NO se usa root. Usuario dedicado laesh_app con privilegios mínimos en laesh_db.
+
+$inDocker = file_exists('/.dockerenv');
+
+// ── JWT Secret: falla explícita en producción si no se inyectó vía entorno ──
+// Hallazgo 2026-09-18: el secreto vivía hardcodeado como fallback silencioso,
+// visible en el código fuente — invalidaba la garantía de firma HMAC para los
+// 3 portales (md/rc/admrc). Producción NUNCA debe operar con un secreto conocido.
+$appEnv = getenv('APP_ENV') ?: 'development';
+$jwtSecret = getenv('LAESH_JWT_SECRET') ?: '';
+if ($jwtSecret === '') {
+    if ($appEnv === 'production') {
+        throw new \RuntimeException(
+            'LAESH_JWT_SECRET no está definida en el entorno. ' .
+            'Producción no puede operar con un secreto JWT hardcodeado/conocido. ' .
+            'Verificar env[LAESH_JWT_SECRET] en php-fpm-laesh.conf / EnvironmentFile de swoole-laesh.service.'
+        );
+    }
+    // Solo desarrollo local: valor fijo y claramente marcado como no apto para producción.
+    $jwtSecret = 'DEV_ONLY_INSECURE_SECRET_never_use_in_prod_2026';
+}
+
+return [
+    'db' => [
+        'host'    => getenv('LAESH_DB_HOST') ?: ($inDocker ? 'db'   : '127.0.0.1'),
+        'port'    => (int)(getenv('LAESH_DB_PORT') ?: 3306),   // 3306 en todos los entornos nativo (KVM2/OCI)
+        'user'    => getenv('LAESH_DB_USER') ?: 'laesh_app',
+        'pass'    => getenv('LAESH_DB_PASS') ?: 'laesh_2026_dev',
+        'name'    => getenv('LAESH_DB_NAME') ?: 'laesh_db',
+        'charset' => 'utf8mb4'
+    ],
+    'app' => [
+        'env'      => getenv('APP_ENV') ?: 'development',
+        // Ruta absoluta al dir de logs del stack (fuera del webroot).
+        // __DIR__ = commons/ dentro de laesh-swbldi/ — usar ruta absoluta para evitar
+        // que un deploy en subdirectorio diferente cambie la ubicación del log.
+        'log_path' => '/opt/laesh/logs/app.log'
+    ],
+    'swoole' => [
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The configuration file includes support for a specific database port variable. The command-line interface script can define a default port if the environment variable is not set. A code snippet confirms the script defaults to port `6002` if the environment variable is undefined, ensuring local development uses the expected port without explicit configuration.
+
+
+
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.056273974s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:42 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:42 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+Database connection and inspection were successful, yielding no existing records. The next step involves designing `tests/seed_dataset_2years.php`, specifically focusing on seeding doctor data. The script must query for active doctors, retrieving their `user_id` and `nombre_completo` from `users` joined with `perfiles_medicos` and/or `empleados` tables where `rol = 'MEDICO'`.
+
+If no doctors are found via query, the script will fallback to seeding users with hardcoded IDs 3 to 7 as doctors.
+
+
+Focus is now on generating a dataset for testing the order management system. The dataset will include ~300 unique patients with varied demographics and multiple orders over a two-year period, simulating real-world patient interactions. Order distribution is critical, with specific counts and states planned across three time zones: "Today", "Last 15 days", and "Days 16-30" to thoroughly test filtering capabilities.
+
+
+The focus shifts to detailed order generation for the test dataset, specifically the "Historical 2 Years" time zone.  A distribution of approximately 1,400 orders across various intervals within the 2-year range will be generated to test date-based filtering, with key test cases designed around visibility in specific date ranges (30 days, 15 days) and text-based searches. Each order will include unique folio, patient, doctor, state, age, diagnosis, studies in JSON format, capture and result timestamps, linked study details, and state history with logical timestamps.
+
+
+
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 20.349132581s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:43 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:43 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:43 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+Dataset generation completed successfully; now initiating automated tests to validate backend function outputs against expected results. The first test will check that a specific function returns the correct number of orders from a designated zone.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.107025549s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:44 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `public static function obtener`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:47 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:47 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:48 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:48 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Ordenes.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L449-489)</summary>
+
+**Path:** `Unknown file`
+
+```
+     * Precedencia del buscador: si $search tiene contenido, busca en todo el historial (< hoy).
+     */
+    public static function obtenerOrdenesAnteriores(int $limit = 25, int $offset = 0, string $search = '', string $orderBy = 'fecha', string $orderDir = 'DESC', string $periodo = '30d', string $fechaInicio = '', string $fechaFin = ''): array {
+        try {
+            $db = DB::connect();
+
+            $allowedSorts = [
+                'folio'           => 'CAST(o.folio_unico AS UNSIGNED)',
+                'paciente'        => 'o.paciente_nombre',
+                'medico'          => 'COALESCE(o.medico_nombre_completo, \'Médico General\')',
+                'fecha'           => 'o.hora_captura',
+                'fecha_resultado' => 'o.fecha_resultado',
+                'estado'          => 'o.estado_id',
+                'id'              => 'o.orden_id'
+            ];
+            $sortCol = $allowedSorts[$orderBy] ?? 'o.orden_id';
+            $dir = strtoupper($orderDir) === 'ASC' ? 'ASC' : 'DESC';
+
+            $params = [];
+            $search = trim(mb_strtolower($search, 'UTF-8'));
+
+            // Opción B (Filtro Combinado): El filtro de período/calendario siempre se aplica como base
+            $filtroPeriodo = self::construirFiltroPeriodoAnteriores($periodo, 'o.', $fechaInicio, $fechaFin, $params);
+
+            if ($search !== '') {
+                // Si la búsqueda es un folio específico (ej: LAESH-00098, LSH-1025, #98, 98), se permite localizar
+                // esa orden directamente sin importar la fecha histórica (para notificaciones o búsqueda directa de folio)
+                if (preg_match('/^(?:laesh-?|lsh-?|#)?(\d{1,8})$/i', $search, $mFolio)) {
+                    $rawNum = (int)$mFolio[1];
+                    $pad5   = sprintf('%05d', $rawNum);
+                    $whereSql = "WHERE DATE(o.hora_captura) < CURDATE() AND (LOWER(o.folio_unico) = :q_fol_raw OR LOWER(o.folio_unico) = :q_fol_clean OR LOWER(o.folio_unico) = :q_fol_unpad OR LOWER(o.folio_unico) = :q_fol_full OR LOWER(o.folio_unico) LIKE :q_fol_like) ";
+                    $params[':q_fol_raw']   = $search;
+                    $params[':q_fol_clean'] = $mFolio[1];
+                    $params[':q_fol_unpad'] = (string)$rawNum;
+                    $params[':q_fol_full']  = 'laesh-' . $pad5;
+                    $params[':q_fol_like']  = '%' . $pad5 . '%';
+                } else {
+                    $whereSql = "WHERE ({$filtroPeriodo}) AND (LOWER(o.paciente_nombre) LIKE :q1 OR LOWER(o.medico_nombre_completo) LIKE :q2 OR LOWER(o.paciente_telefono) LIKE :q3 OR LOWER(o.diagnostico) LIKE :q4 OR LOWER(o.folio_unico) LIKE :q5) ";
+                    $qVal = '%' . $search . '%';
+                    $params[':q1'] = $qVal;
+                    $params[':q2'] = $qVal;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+A specific folio search is being implemented. The code checks if the search query matches a folio pattern (e.g., LAESH-00098, LSH-1025, #98, or 98). This suggests allowing direct folio lookup regardless of date for notifications or direct folio retrieval.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `preg_match('/^(?:laesh-?`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.088652449s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:49 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+The folio search regex needs modification to include the `s2y` prefix. This will allow the system to recognize and directly search for folios starting with "s2y". The change applies to two different code locations, suggesting a consistent search pattern is employed throughout the codebase. The updated regex should broaden the search capabilities.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.039512704s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:49 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:49 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Ordenes.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L409-429)</summary>
+
+**Path:** `Unknown file`
+
+```
+            $search = trim(mb_strtolower($search, 'UTF-8'));
+
+            // Opción B (Filtro Combinado): El filtro de período/calendario siempre se aplica como base
+            $filtroPeriodo = self::construirFiltroPeriodoAnterioresMedico($periodo, 'o.', $fechaInicio, $fechaFin, $params);
+
+            if ($search !== '') {
+                if (preg_match('/^(?:laesh-?|lsh-?|#)?(\d{1,8})$/i', $search, $mFolio)) {
+                    $rawNum = (int)$mFolio[1];
+                    $pad5   = sprintf('%05d', $rawNum);
+                    $whereSql = "WHERE o.medico_user_id = :user_id AND DATE(o.hora_captura) < CURDATE() AND (LOWER(o.folio_unico) = :q_fol_raw OR LOWER(o.folio_unico) = :q_fol_clean OR LOWER(o.folio_unico) = :q_fol_unpad OR LOWER(o.folio_unico) = :q_fol_full OR LOWER(o.folio_unico) LIKE :q_fol_like) ";
+                    $params[':q_fol_raw']   = $search;
+                    $params[':q_fol_clean'] = $mFolio[1];
+                    $params[':q_fol_unpad'] = (string)$rawNum;
+                    $params[':q_fol_full']  = 'laesh-' . $pad5;
+                    $params[':q_fol_like']  = '%' . $pad5 . '%';
+                } else {
+                    $whereSql = "WHERE o.medico_user_id = :user_id AND ({$filtroPeriodo}) AND (LOWER(o.paciente_nombre) LIKE :q1 OR LOWER(o.paciente_telefono) LIKE :q2 OR LOWER(o.diagnostico) LIKE :q3 OR LOWER(o.folio_unico) LIKE :q4) ";
+                    $qVal = '%' . $search . '%';
+                    $params[':q1'] = $qVal;
+                    $params[':q2'] = $qVal;
+                    $params[':q3'] = $qVal;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:49 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `Ordenes.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L479-499)</summary>
+
+**Path:** `Unknown file`
+
+```
+            $db = DB::connect();
+            $params = [':user_id' => $userId];
+            $search = trim(mb_strtolower($search, 'UTF-8'));
+
+            // Opción B (Filtro Combinado): El filtro de período/calendario siempre se aplica como base
+            $filtroPeriodo = self::construirFiltroPeriodoAnterioresMedico($periodo, '', $fechaInicio, $fechaFin, $params);
+
+            if ($search !== '') {
+                if (preg_match('/^(?:laesh-?|lsh-?|#)?(\d{1,8})$/i', $search, $mFolio)) {
+                    $rawNum = (int)$mFolio[1];
+                    $pad5   = sprintf('%05d', $rawNum);
+                    $whereSql = "WHERE medico_user_id = :user_id AND DATE(hora_captura) < CURDATE() AND (LOWER(folio_unico) = :q_fol_raw OR LOWER(folio_unico) = :q_fol_clean OR LOWER(folio_unico) = :q_fol_unpad OR LOWER(folio_unico) = :q_fol_full OR LOWER(folio_unico) LIKE :q_fol_like) ";
+                    $params[':q_fol_raw']   = $search;
+                    $params[':q_fol_clean'] = $mFolio[1];
+                    $params[':q_fol_unpad'] = (string)$rawNum;
+                    $params[':q_fol_full']  = 'laesh-' . $pad5;
+                    $params[':q_fol_like']  = '%' . $pad5 . '%';
+                } else {
+                    $whereSql = "WHERE medico_user_id = :user_id AND ({$filtroPeriodo}) AND (LOWER(paciente_nombre) LIKE :q1 OR LOWER(paciente_telefono) LIKE :q2 OR LOWER(diagnostico) LIKE :q3 OR LOWER(folio_unico) LIKE :q4) ";
+                    $qVal = '%' . $search . '%';
+                    $params[':q1'] = $qVal;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:49 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:50 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:51 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:52 am
+
+---
+
+## Agent Response
+
+### Thinking
+
+Analyzing data structure to understand the response format; confirming the availability of key fields like folio, creation timestamp, patient name, and doctor name. Hypothesis: Patient name search will function accurately across different search contexts (date-based or general). The search will be initiated for "Ana Paula Jiménez" with a 15-day active period.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.095792545s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:52 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:52 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:52 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:52 am
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
 <summary>File: `Unknown file`</summary>
 
 **Path:** `Unknown file`
@@ -18257,68 +20246,401 @@ Examining the HTML snippet, it appears to define a filter selection for a date r
 ```
 <?php
 /**
- * rc/index.php — Router Flight PHP para el Portal Recepción
+ * clean_dataset_2years.php — Limpieza Ultra-Quirúrgica de Dataset Simulado (SIM2Y)
  *
- * Ubicación: laesh-swbldi/rc/index.php
- * URL:       /laesh/rc/          (Alias en restaurantb.conf → laesh-swbldi/rc/)
+ * Elimina de forma atómica y en cascada controlada todos los registros generados
+ * por seed_dataset_2years.php (prefijo S2Y- / [SIM2Y]), sin tocar ningún registro
+ * real ni modificar la estructura de la base de datos.
  *
- * Fuente HTML: website/uipv1/labadmin.html  ← NUNCA BORRAR (R15.1 - Merge iterativo)
- * Capas:       View (views/labadmin.php), Negocio (RC\Negocio\Ordenes), Commons (Common\*)
- *
- * Rutas:
- *   GET  /             → Panel principal Recepción (requiere permiso gestionar_ordenes)
- *   POST /orden/crear  → Crear orden de laboratorio vía Stored Procedure (HTMX)
+ * Uso:
+ *   php tests/clean_dataset_2years.php
+ *   php tests/clean_dataset_2years.php --dry-run
+ *   LAESH_DB_PORT=6002 php tests/clean_dataset_2years.php
  */
 
 declare(strict_types=1);
 
-require_once __DIR__ . '/../commons/commons.php';
+if (!getenv('LAESH_DB_PORT') && !file_exists('/.dockerenv')) {
+    putenv('LAESH_DB_PORT=6002');
+}
 
-use Common\Logger;
-use Common\DB;
+require_once __DIR__ . '/../laesh-swbldi/commons/DB.php';
 
-// ── Guard RBAC: Permite acceso a RECEPCION y ADMIN (ambos tienen gestionar_ordenes) ─
-Flight::rbac()->requirePermission(
-    'gestionar_ordenes',
-    '/laesh/login/login.php?portal=labadmin'
-);
+$isDryRun = in_array('--dry-run', $argv, true);
 
-// ── GET / — Panel principal Portal Recepción ──────────────────────────────────
-Flight::route('GET /', function () {
-    $auth = Flight::auth();
-    $db   = Flight::db();
+echo "\n" . str_repeat('=', 70) . "\n";
+echo "  🧹 LAESH — LIMPIEZA ATÓMICA DE DATASET SIMULADO [SIM2Y]\n";
+echo str_repeat('=', 70) . "\n";
 
-    $userId   = (int)$auth->getUserId();
-    $authRole = Flight::rbac()->getRole() ?? 'RECEPCION';
-    $isAdmin  = ($authRole === 'ADMIN' || Flight::rbac()->hasPermission('gestionar_cms'));
+try {
+    $db = \Common\DB::connect();
+    echo "✓ Conectado a la base de datos: " . $db->query("SELECT DATABASE()")->fetchColumn() . "\n";
 
-    // Obtener datos del empleado/usuario logueado
-    $stmt = $db->prepare("SELECT nombre, apellidos FROM empleados WHERE user_id = ? LIMIT 1");
-    $stmt->execute([$userId]);
-    $emp = $stmt->fetch(\PDO::FETCH_ASSOC);
+    // 1. Conteo previo de elementos a eliminar
+    $cntNotif = (int)$db->query("SELECT COUNT(*) FROM notificaciones WHERE folio_referencia LIKE 'S2Y-%' OR mensaje LIKE '%[SIM2Y]%'")->fetchColumn();
+    $cntPdf   = (int)$db->query("SELECT COUNT(*) FROM resultados_pdf WHERE folio_extraido LIKE 'S2Y-%' OR ruta_storage LIKE '%SIM2Y%' OR orden_id IN (SELECT id FROM ordenes WHERE folio_unico LIKE 'S2Y-%')")->fetchColumn();
+    $cntDet   = (int)$db->query("SELECT COUNT(*) FROM detalle_ordenes WHERE orden_id IN (SELECT id FROM ordenes WHERE folio_unico LIKE 'S2Y-%')")->fetchColumn();
+    $cntHist  = (int)$db->query("SELECT COUNT(*) FROM historial_estados_orden WHERE orden_id IN (SELECT id FROM ordenes WHERE folio_unico LIKE 'S2Y-%')")->fetchColumn();
+    $cntOrd   = (int)$db->query("SELECT COUNT(*) FROM ordenes WHERE folio_unico LIKE 'S2Y-%'")->fetchColumn();
+    $cntPac   = (int)$db->query("SELECT COUNT(*) FROM pacientes WHERE nombre_completo LIKE '%[SIM2Y]%'")->fetchColumn();
 
-    if ($emp && !empty($emp['nombre'])) {
-        $nombreUsuario = trim($emp['nombre'] . ' ' . $emp['apellidos']);
+    $totalRegistros = $cntNotif + $cntPdf + $cntDet + $cntHist + $cntOrd + $cntPac;
+
+    echo "\n  Registros identificados con etiqueta [SIM2Y]:\n";
+    echo "  - Notificaciones:           " . number_format($cntNotif) . "\n";
+    echo "  - Resultados PDF:           " . number_format($cntPdf) . "\n";
+    echo "  - Detalle de Órdenes:       " . number_format($cntDet) . "\n";
+    echo "  - Historial de Estados:     " . number_format($cntHist) . "\n";
+    echo "  - Órdenes:                  " . number_format($cntOrd) . "\n";
+    echo "  - Pacientes simulados:      " . number_format($cntPac) . "\n";
+    echo "  " . str_repeat('-', 40) . "\n";
+```
+
+</details>
+
+---
+
+## User Request
+
+500 Internal Server Error
+Array to string conversion (2)
+#0 /var/www/html/laesh-swbldi/rc/index.php(408): flight\Engine->handleError(2, 'Array to string...', '/var/www/html/l...', 408)
+#1 [internal function]: {closure}(Array)
+#2 /var/www/html/laesh-swbldi/rc/index.php(407): array_map(Object(Closure), Array)
+#3 /var/www/html/laesh-swbldi/rc/views/labadmin.php(352): rcRenderPacientesTablaBody(Array, 0)
+#4 /var/www/html/laesh-swbldi/libs/plates/Template/Template.php(164): include('/var/www/html/l...')
+#5 /var/www/html/laesh-swbldi/libs/plates/Engine.php(277): League\Plates\Template\Template->render(NULL)
+#6 /var/www/html/laesh-swbldi/rc/index.php(81): League\Plates\Engine->render('views/labadmin', Array)
+#7 [internal function]: {closure}()
+#8 /var/www/html/laesh-swbldi/libs/flight/core/Dispatcher.php(354): call_user_func_array(Object(Closure), Array)
+#9 /var/www/html/laesh-swbldi/libs/flight/core/Dispatcher.php(287): flight\core\Dispatcher->invokeCallable(Object(Closure), Array)
+#10 /var/www/html/laesh-swbldi/libs/flight/Engine.php(544): flight\core\Dispatcher->execute(Object(Closure), Array)
+#11 [internal function]: flight\Engine->_start()
+#12 /var/www/html/laesh-swbldi/libs/flight/core/Dispatcher.php(376): call_user_func_array(Array, Array)
+#13 /var/www/html/laesh-swbldi/libs/flight/core/Dispatcher.php(287): flight\core\Dispatcher->invokeCallable(Array, Array)
+#14 /var/www/html/laesh-swbldi/libs/flight/core/Dispatcher.php(131): flight\core\Dispatcher->execute(Array, Array)
+#15 /var/www/html/laesh-swbldi/libs/flight/core/Dispatcher.php(95): flight\core\Dispatcher->runEvent('start', Array)
+#16 /var/www/html/laesh-swbldi/libs/flight/Engine.php(115): flight\core\Dispatcher->run('start', Array)
+#17 /var/www/html/laesh-swbldi/libs/flight/Flight.php(121): flight\Engine->__call('start', Array)
+#18 /var/www/html/laesh-swbldi/rc/index.php(1667): Flight::__callStatic('start', Array)
+#19 {main}
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `clean_dataset_2years.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L394-429)</summary>
+
+**Path:** `Unknown file`
+
+```
+            $estudiosStr = '<span style="color:#94a3b8; font-style:italic;">Sin estudios</span>';
+            $arrEst = [];
+            if (!empty($p['estudios'])) {
+                if (is_array($p['estudios'])) {
+                    $arrEst = $p['estudios'];
+                } else {
+                    $jsonDec = json_decode($p['estudios'], true);
+                    if (is_array($jsonDec)) $arrEst = $jsonDec;
+                    else $arrEst = [$p['estudios']];
+                }
+            }
+            if (!empty($arrEst)) {
+                $itemsLi = array_map(function($e) {
+                    return '<li style="margin-bottom:2px;">' . htmlspecialchars((string)$e, ENT_QUOTES, 'UTF-8') . '</li>';
+                }, $arrEst);
+                $estudiosStr = '<ul style="margin:0; padding-left:1.1rem; font-size:0.85rem; color:#334155;">' . implode('', $itemsLi) . '</ul>';
+            }
+
+            $bgColor = ($index % 2 === 0) ? 'background-color: #f1f5f9;' : '';
+
+            $html .= '<tr style="' . $bgColor . '">'
+                   . '<td class="fw-600" style="white-space: normal; overflow-wrap: break-word; vertical-align: top; color: var(--text-muted);">' . $index . '</td>'
+                   . '<td class="fw-600" style="white-space: normal; overflow-wrap: break-word; vertical-align: top;">' . $paciente . '</td>'
+                   . '<td style="white-space: normal; overflow-wrap: break-word; vertical-align: top;">' . $medicoStr . '</td>'
+                   . '<td style="white-space: normal; overflow-wrap: break-word; vertical-align: top;">' . $fEmis . '</td>'
+                   . '<td style="white-space: normal; overflow-wrap: break-word; vertical-align: top;">' . $edadSexoStr . '</td>'
+                   . '<td style="white-space: normal; overflow-wrap: break-word; vertical-align: top;">' . $celular . '</td>'
+                   . '<td style="white-space: normal; overflow-wrap: break-word; font-size: 0.88rem; vertical-align: top;">' . $diag . '</td>'
+                   . '<td style="white-space: normal; overflow-wrap: break-word; vertical-align: top;">' . $estudiosStr . '</td>'
+                   . '<td style="white-space: normal; overflow-wrap: break-word; font-size: 0.88rem; vertical-align: top;">' . $otros . '</td>'
+                   . '</tr>';
+                   
+            $index++;
+        }
     } else {
-        $email = $auth->getEmail() ?? '';
-        $userPart = explode('@', $email)[0] ?? 'Usuario';
-        $nombreUsuario = ($authRole === 'ADMIN') ? 'Administrador' : ucfirst($userPart);
-    }
+        $html .= '<tr><td colspan="8" class="text-center txt-muted pa-4">No se encontraron pacientes que coincidan con la búsqueda.</td></tr>';
+```
 
+</details>
 
+---
 
+## Agent Response
 
-    // CSRF token (R14.12)
-    if (empty($_SESSION['csrf_token'])) {
-        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-    }
+### Actions
 
-    // Obtener órdenes recientes (hoy), órdenes anteriores, catálogo de pacientes, catálogos UI y KPIs reales desde la Capa de Negocio (PDO)
-    $ordenesRecientes        = \RC\Negocio\Ordenes::obtenerOrdenesRecientes(25, 0, '', 'fecha', 'DESC');
-    $totalOrdenesRecientes   = \RC\Negocio\Ordenes::contarOrdenesRecientes('');
-    $ordenesAnteriores       = \RC\Negocio\Ordenes::obtenerOrdenesAnteriores(25, 0, '', 'fecha', 'DESC');
-    $totalOrdenesAnteriores  = \RC\Negocio\Ordenes::contarOrdenesAnteriores('');
-    $pacientesCatalog        = \RC\Negocio\Ordenes::obtenerPacientes(25, 0, '', 'fecha', 'DESC');
+**Tool:** `grep_search`
+**Query:** `$e['nombre']`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:56 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `$estudiosStr`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:56 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L479-504)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+            $estudiosStr = '<span style="color:#94a3b8; font-style:italic;">Sin estudios</span>';
+            $arrEst = [];
+            if (!empty($pm['estudios'])) {
+                if (is_array($pm['estudios'])) {
+                    $arrEst = $pm['estudios'];
+                } else {
+                    $jsonDec = json_decode($pm['estudios'], true);
+                    if (is_array($jsonDec)) $arrEst = $jsonDec;
+                    else $arrEst = [$pm['estudios']];
+                }
+            }
+            if (!empty($arrEst)) {
+                $estudiosStr = '<ul style="margin:0; padding-left:1.1rem; font-size:0.84rem; color:#1e293b;">';
+                foreach ($arrEst as $sItem) {
+                    $estudiosStr .= '<li>' . htmlspecialchars((string)$sItem, ENT_QUOTES, 'UTF-8') . '</li>';
+                }
+                $estudiosStr .= '</ul>';
+            }
+
+            $bgColor = ($index % 2 === 0) ? 'background-color: #f1f5f9;' : '';
+
+            $html .= '<tr style="' . $bgColor . ' border-bottom: 1px solid #f1f5f9;">'
+               . '<td class="fw-600" style="white-space: normal; overflow-wrap: break-word; vertical-align: top; color: var(--text-muted);">' . $index . '</td>'
+               . '<td class="td-trunc-md" title="' . $paciente . '" style="white-space: normal; min-width: 190px; font-weight: 700; color: #0f172a; font-size: 0.88rem;">' . $paciente . '</td>'
+               . '<td style="color: #334155; font-size: 0.85rem;">' . $edadSexoStr . '</td>'
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `estudios_json`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:56 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `function rcRenderOrdenesTablaBody`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:56 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L225-279)</summary>
+
+**Path:** `Unknown file`
+
+```
+function rcRenderOrdenesTablaBody(array $ordenes, string $csrfToken, string $sufijoId = ''): string {
+    $html = '<tbody>';
+    if (!empty($ordenes)) {
+        foreach ($ordenes as $ord) {
+            $eId = (int)($ord['estado_id'] ?? 1);
+            $badgeClass = 'badge-remitido';
+            if ($eId === 2) $badgeClass = 'badge-atencion';
+            elseif ($eId === 3) $badgeClass = 'badge-listos';
+            elseif ($eId === 4) $badgeClass = 'badge-cerrada';
+            elseif ($eId === 5) $badgeClass = 'badge-cancelada';
+
+            $ordId = (int)($ord['id'] ?? 0);
+            $folio = htmlspecialchars($ord['folio'] ?? '', ENT_QUOTES, 'UTF-8');
+            // P-LAESH-FOLIO-EXTRAIDO-01 (2026-09-24): folio del equipo/software de
+            // laboratorio (PxLab), extraído del PDF más reciente subido — a la
+            // derecha del icono de documento, solo cuando existe.
+            $folioExtraidoHtml = '';
+            if (!empty($ord['folio_extraido'])) {
+                $folioExtraidoHtml = ' <span class="folio-extraido-chip" title="Folio del equipo/software de laboratorio">'
+                                    . htmlspecialchars($ord['folio_extraido'], ENT_QUOTES, 'UTF-8') . '</span>';
+            }
+            $paciente = htmlspecialchars($ord['paciente_nombre'] ?? '', ENT_QUOTES, 'UTF-8');
+            $medicoStr = htmlspecialchars($ord['medico_nombre'] ?? 'Médico General', ENT_QUOTES, 'UTF-8');
+            if (!empty($ord['medico_especialidad']) && $ord['medico_especialidad'] !== 'Medicina General') {
+                $medicoStr .= ' <span style="color:#64748b; font-size:0.82rem;">(' . htmlspecialchars($ord['medico_especialidad'], ENT_QUOTES, 'UTF-8') . ')</span>';
+            }
+
+            // Corrección 2026-09-22: Diagnóstico ahora tiene su propia columna —
+            // Observaciones conserva solo el motivo de cancelación y el enlace
+            // al PDF de resultado ("otros estudios" ya no se muestra aquí).
+            $diagRaw = trim($ord['diagnostico'] ?? '');
+            if ($diagRaw === 'Estudios de Laboratorio' || $diagRaw === '') {
+                $diagDescr = '<span style="color:#94a3b8; font-style:italic;">—</span>';
+            } else {
+                $diagDescr = htmlspecialchars($diagRaw, ENT_QUOTES, 'UTF-8');
+            }
+
+            if ($eId === 5) {
+                $motivoRaw = !empty($ord['motivo_cancelacion']) ? trim($ord['motivo_cancelacion']) : 'Solicitud cancelada';
+                // Si el motivo ya trae "Médico: " o "Laesh: ", estructurar formato armónico
+                if (preg_match('/^(Médico|Laesh):\s*(.*)$/iu', $motivoRaw, $mMatches)) {
+                    $origen = $mMatches[1];
+                    $resto  = $mMatches[2];
+                    $motivoHtml = 'Cancelación de "<strong style="color:#7f1d1d;">' . htmlspecialchars($origen, ENT_QUOTES, 'UTF-8') . ':</strong> ' . htmlspecialchars($resto, ENT_QUOTES, 'UTF-8') . '"';
+                } else {
+                    $motivoHtml = '<span style="color:#991b1b; font-weight:700;">Cancelación:</span> ' . htmlspecialchars($motivoRaw, ENT_QUOTES, 'UTF-8');
+                }
+                $observacionesDescr = '<div class="motivo-cancelacion-box" style="color:#b91c1c; font-size:0.85rem; font-weight:600; line-height:1.35;">'
+                                    . $motivoHtml
+                                    . '</div>';
+            } else {
+                // Corrección 2026-09-22: "otros estudios" ya no se muestra en
+                // Observaciones (esa columna es solo para motivo de cancelación
+                // y el enlace al PDF de resultado).
+                // 2026-09-23: Observaciones ya NO muestra nombre/link de archivos
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L64-89)</summary>
+
+**Path:** `Unknown file`
+
+```
     $totalPacientes          = \RC\Negocio\Ordenes::contarPacientes('');
     $catalogosUI             = \RC\Negocio\Ordenes::obtenerCatalogosUI();
 
@@ -18345,216 +20667,9 @@ Flight::route('GET /', function () {
         'ordenesAnteriores'       => $ordenesAnteriores,
         'totalOrdenesAnteriores'  => $totalOrdenesAnteriores,
         'pacientesCatalog'        => $pacientesCatalog,
-        'totalPacientes'          => $totalPacientes,
-        'catalogosUI'             => $catalogosUI,
-        'medicosCatalog'          => $medicosCatalog
-    ]);
-});
-
-// ── Helper: botones de acción de una orden (H1/H2/H7/H8, auditoría 2026-09-20) ──
-// Compartido entre /tabla-ordenes (hoy) y /tabla-ordenes-anteriores — antes cada
-// tabla duplicaba este bloque; ahora que se agrega csrf_token + estado_actual_id
-// + botón Cancelar a ambas, se centraliza para no repetir la misma lógica dos veces.
 ```
 
 </details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `api/estadisticas`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 26 Sept 2026, 7:28 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L604-729)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-
-// ── GET /api/estadisticas — Estadísticas de Dashboard por Rango ─────────
-Flight::route('GET /api/estadisticas', function () {
-    header('Content-Type: application/json; charset=utf-8');
-    Flight::rbac()->requirePermission('gestionar_ordenes'); // o la que aplique para dashboard
-    
-    $rango = $_GET['rango'] ?? 'dia';
-    $inicio = $_GET['inicio'] ?? '';
-    $fin = $_GET['fin'] ?? '';
-    
-    $datos = \RC\Negocio\Ordenes::obtenerEstadisticasRango($rango, $inicio, $fin);
-    echo json_encode($datos, JSON_UNESCAPED_UNICODE);
-});
-
-// ── GET /api/medicos — Devuelve catálogo de médicos en JSON ─────────
-Flight::route('GET /api/medicos', function () {
-    header('Content-Type: application/json; charset=utf-8');
-    try {
-        $db = \Common\DB::connect();
-        $medicosCatalog = $db->query(
-            "SELECT user_id, nombre_completo, cedula_profesional, cedula_especialidad, especialidad, celular, 
-                    universidad_id, universidad_nombre, lugar_trabajo_id, lugar_trabajo_nombre, total_ordenes,
-                    estado_id, estado_nombre 
-             FROM vw_medicos_completos 
-             ORDER BY total_ordenes DESC"
-        )->fetchAll(\PDO::FETCH_ASSOC) ?: [];
-        echo json_encode(['success' => true, 'data' => $medicosCatalog], JSON_UNESCAPED_UNICODE);
-    } catch (\Throwable $e) {
-        echo json_encode(['success' => false, 'error' => $e->getMessage()]);
-    }
-});
-
-// ── POST /api/medicos/cambiar-estado — Pausar o Reactivar perfil médico ─────────
-Flight::route('POST /api/medicos/cambiar-estado', function () {
-    Flight::rbac()->requirePermission('gestionar_ordenes');
-    header('Content-Type: application/json; charset=utf-8');
-
-    $rawInput = file_get_contents('php://input');
-    $payload = json_decode($rawInput, true);
-    if (!is_array($payload)) {
-        $payload = $_POST;
-    }
-
-    $submittedCsrf = $payload['csrf_token'] ?? null;
-    if (!\Common\CsrfGuard::isValid(rotate: false, submittedToken: $submittedCsrf)) {
-        // GAP-CSRF-02 (2026-09-23): estas 5 rutas devolvían el error CSRF con
-        // HTTP 200 (sin http_response_code) y sin Logger::log — invisible
-        // tanto en nginx-access.log como en app.log, imposible de auditar.
-        // Se homologa al patrón ya usado en /orden/estado y las rutas con
-        // Flight::json([...], 403) del resto del archivo.
-        Logger::log('WARN', 'Token CSRF inválido en ' . ($_SERVER['REQUEST_URI'] ?? 'ruta desconocida') . ' por user_id=' . Flight::auth()->getUserId());
-        http_response_code(403);
-        echo json_encode(['success' => false, 'error' => 'Token de seguridad CSRF inválido o expirado. Recarga la página.'], JSON_UNESCAPED_UNICODE);
-        return;
-    }
-
-    $targetUserId  = (int)($payload['target_user_id'] ?? 0);
-    $nuevoEstadoId = (int)($payload['nuevo_estado_id'] ?? 1); // 1 = Activo, 2 = Pausado
-    $adminUserId   = (int)Flight::auth()->getUserId();
-
-    if ($targetUserId <= 0) {
-        echo json_encode(['success' => false, 'error' => 'ID de médico inválido']);
-        return;
-    }
-
-    $resultado = \RC\Negocio\Ordenes::cambiarEstadoMedico($targetUserId, $nuevoEstadoId, $adminUserId);
-    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
-});
-
-// ── POST /api/medicos/asignar-password — Asignar/Cambiar contraseña de médico ─────────
-Flight::route('POST /api/medicos/asignar-password', function () {
-    Flight::rbac()->requirePermission('gestionar_ordenes');
-    header('Content-Type: application/json; charset=utf-8');
-
-    $rawInput = file_get_contents('php://input');
-    $payload = json_decode($rawInput, true);
-    if (!is_array($payload)) {
-        $payload = $_POST;
-    }
-
-    $submittedCsrf = $payload['csrf_token'] ?? null;
-    if (!\Common\CsrfGuard::isValid(rotate: false, submittedToken: $submittedCsrf)) {
-        // GAP-CSRF-02 (2026-09-23): estas 5 rutas devolvían el error CSRF con
-        // HTTP 200 (sin http_response_code) y sin Logger::log — invisible
-        // tanto en nginx-access.log como en app.log, imposible de auditar.
-        // Se homologa al patrón ya usado en /orden/estado y las rutas con
-        // Flight::json([...], 403) del resto del archivo.
-        Logger::log('WARN', 'Token CSRF inválido en ' . ($_SERVER['REQUEST_URI'] ?? 'ruta desconocida') . ' por user_id=' . Flight::auth()->getUserId());
-        http_response_code(403);
-        echo json_encode(['success' => false, 'error' => 'Token de seguridad CSRF inválido o expirado. Recarga la página.'], JSON_UNESCAPED_UNICODE);
-        return;
-    }
-
-    $targetUserId = (int)($payload['target_user_id'] ?? 0);
-    $newPassword  = trim($payload['new_password'] ?? '');
-    $adminUserId  = (int)Flight::auth()->getUserId();
-
-    if ($targetUserId <= 0) {
-        echo json_encode(['success' => false, 'error' => 'ID de médico inválido']);
-        return;
-    }
-
-    if (strlen($newPassword) < 8) {
-        echo json_encode(['success' => false, 'error' => 'La contraseña/NIP debe tener al menos 8 caracteres.']);
-        return;
-    }
-
-    $resultado = \RC\Negocio\Ordenes::restablecerPasswordMedico($targetUserId, $newPassword, $adminUserId);
-    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
-});
-
-// ── POST /api/medicos/sync — Sincronizar médicos (JS SPA) ─────────
-Flight::route('POST /api/medicos/sync', function () {
-    Flight::rbac()->requirePermission('gestionar_medicos');
-    header('Content-Type: application/json; charset=utf-8');
-    
-    $payload = json_decode(file_get_contents('php://input'), true) ?: [];
-    $submittedCsrf = $payload['csrf_token'] ?? null;
-    if (!\Common\CsrfGuard::isValid(rotate: false, submittedToken: $submittedCsrf)) {
-        // GAP-CSRF-02 (2026-09-23): estas 5 rutas devolvían el error CSRF con
-        // HTTP 200 (sin http_response_code) y sin Logger::log — invisible
-        // tanto en nginx-access.log como en app.log, imposible de auditar.
-        // Se homologa al patrón ya usado en /orden/estado y las rutas con
-        // Flight::json([...], 403) del resto del archivo.
-        Logger::log('WARN', 'Token CSRF inválido en ' . ($_SERVER['REQUEST_URI'] ?? 'ruta desconocida') . ' por user_id=' . Flight::auth()->getUserId());
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `obtenerEstadisticasRango`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 26 Sept 2026, 7:28 pm
 
 ---
 
@@ -18574,112 +20689,42 @@ Flight::route('POST /api/medicos/sync', function () {
 ---
 
 <details>
-<summary>File: `Unknown file` (L1379-1479)</summary>
+<summary>File: `Unknown file` (L679-709)</summary>
 
 **Path:** `Unknown file`
 
 ```
-    }
 
-    /**
-     * Obtiene estadísticas dinámicas por rango de fechas (Dashboard SPA)
-     */
-    public static function obtenerEstadisticasRango(string $rango, string $inicio = '', string $fin = ''): array {
-        try {
-            $db = DB::connect();
-            
-            $whereSql = "";
-            $params = [];
-            
-            if ($rango === 'dia') {
-                $whereSql = "WHERE DATE(hora_captura) = CURDATE()";
-            } elseif ($rango === 'semana') {
-                $whereSql = "WHERE YEARWEEK(hora_captura, 1) = YEARWEEK(CURDATE(), 1)";
-            } elseif ($rango === 'mes') {
-                $whereSql = "WHERE YEAR(hora_captura) = YEAR(CURDATE()) AND MONTH(hora_captura) = MONTH(CURDATE())";
-            } elseif ($rango === 'anio') {
-                $whereSql = "WHERE YEAR(hora_captura) = YEAR(CURDATE())";
-            } elseif ($rango === 'fecha' && $inicio && $fin) {
-                $whereSql = "WHERE DATE(hora_captura) BETWEEN :inicio AND :fin";
-                $params[':inicio'] = $inicio;
-                $params[':fin'] = $fin;
-            } else {
-                $whereSql = "WHERE 1=1"; // fallback seguro
-            }
+            $sql = "
+                SELECT 
+                    orden_id AS id,
+                    orden_id AS orden_id,
+                    folio_unico AS folio,
+                    hora_captura AS fecha,
+                    hora_captura AS ultima_visita,
+                    hora_captura AS creado_en,
+                    diagnostico,
+                    otros_estudios AS otros,
+                    estudios_json AS estudios,
+                    edad_al_emitir AS edad,
+                    paciente_nombre AS paciente,
+                    paciente_nombre AS nombre_completo,
+                    paciente_sexo AS sexo,
+                    paciente_telefono AS celular,
+                    paciente_telefono AS telefono,
+                    COALESCE(medico_nombre_completo, 'Médico General') AS medico_nombre,
+                    COALESCE(medico_especialidad, 'Medicina General') AS medico_especialidad,
+                    COALESCE(estado_valor, 'Remitido') AS estado,
+                    estado_id
+                FROM vw_ordenes_completas
+                {$whereSql}
+                ORDER BY {$sortCol} {$dir}
+                LIMIT {$limInt} OFFSET {$offInt}
+            ";
 
-            // 1. Totales de Órdenes
-            // H8 (auditoría 2026-09-20): agregado 'canceladas' (estado_id=5) — antes
-            // 'solicitudes' (COUNT total) las incluía pero ninguna columna las
-            // desglosaba, así que atencion+listos+cerradas no cuadraba con el total
-            // en cuanto existiera al menos una orden cancelada.
-            $stmtTotales = $db->prepare("
-                SELECT COUNT(*) as solicitudes,
-                       SUM(IF(estado_id=2,1,0)) as atencion,
-                       SUM(IF(estado_id=3,1,0)) as listos,
-                       SUM(IF(estado_id=4,1,0)) as cerradas,
-                       SUM(IF(estado_id=5,1,0)) as canceladas
-                FROM vw_ordenes_completas $whereSql
-            ");
-            $stmtTotales->execute($params);
-            $totales = $stmtTotales->fetch(PDO::FETCH_ASSOC) ?: ['solicitudes' => 0, 'atencion' => 0, 'listos' => 0, 'cerradas' => 0, 'canceladas' => 0];
-
-            // 2. Top 5 Médicos
-            $stmtMedicos = $db->prepare("
-                SELECT COALESCE(medico_nombre_completo, 'Médico General') as nombre, COUNT(*) as conteo 
-                FROM vw_ordenes_completas $whereSql 
-                GROUP BY nombre ORDER BY conteo DESC LIMIT 5
-            ");
-            $stmtMedicos->execute($params);
-            $medicos = $stmtMedicos->fetchAll(PDO::FETCH_ASSOC) ?: [];
-
-            // 3. Top 3 Categorías
-            // Requerimos usar detalle_ordenes y vw_ordenes_completas
-            $whereCatSql = str_replace('hora_captura', 'o.hora_captura', $whereSql);
-            $stmtCategorias = $db->prepare("
-                SELECT cat.categoria as nombre, COUNT(oe.estudio_id) as conteo 
-                FROM detalle_ordenes oe 
-                JOIN vw_estudios_catalogo cat ON cat.id = oe.estudio_id 
-                JOIN vw_ordenes_completas o ON o.orden_id = oe.orden_id
-                $whereCatSql
-                GROUP BY cat.categoria ORDER BY conteo DESC LIMIT 3
-            ");
-            $stmtCategorias->execute($params);
-            $categorias = $stmtCategorias->fetchAll(PDO::FETCH_ASSOC) ?: [];
-
-            return [
-                'success' => true,
-                'totales' => [
-                    'solicitudes' => (int)($totales['solicitudes'] ?? 0),
-                    'atencion'    => (int)($totales['atencion'] ?? 0),
-                    'listos'      => (int)($totales['listos'] ?? 0),
-                    'cerradas'    => (int)($totales['cerradas'] ?? 0),
-                    'canceladas'  => (int)($totales['canceladas'] ?? 0)
-                ],
-                'medicos' => $medicos,
-                'categorias' => $categorias
-            ];
-
-        } catch (Throwable $e) {
-            DB::logFallback('ERROR', 'Fallo en RC\Negocio\Ordenes::obtenerEstadisticasRango', $e->getMessage());
-            return ['success' => false, 'error' => $e->getMessage()];
-        }
-    }
-
-    /**
-     * GAP-RC-01 (cerrado 2026-09-21): fuente única de verdad para la ventana de
-     * impresión de la Solicitud Digital — reemplaza el mecanismo anterior donde
-     * cada portal (Médico/Recepción) reconstruía manualmente los datos de la
-     * orden vía querystring, leyendo texto de celdas de tabla por índice
-     * (cells[N]) o atributos data-* que había que mantener sincronizados a mano
-     * en 3 archivos distintos. Ese diseño causó 4 bugs reales encontrados el
-     * mismo día por un médico probando en producción: grilla de estudios rota,
-     * diagnóstico perdido al reabrir, la fecha de la orden confundida con un
-     * estudio, y celular/edad/sexo faltantes — todos por el mismo patrón
-     * estructural (lógica duplicada entre medicos.js/labadmin.js + plumbing
-     * frágil de datos). Consultar la orden real por folio, una sola vez, desde
-     * un único método, elimina esa clase de bug de raíz.
-     *
-     * $medicoIdRestriccion: si se pasa, exige que la orden pertenezca a ese
+            $stmt = $db->prepare($sql);
+            foreach ($params as $k => $v) {
+                $stmt->bindValue($k, $v, PDO::PARAM_STR);
 ```
 
 </details>
@@ -18690,12 +20735,7 @@ Flight::route('POST /api/medicos/sync', function () {
 
 ### Thinking
 
-Focusing on the `labadmin.php` file within the `/rc/views/` directory, specifically the "#panel-reportes" section, lines 487-54. The user wants to check the calendar functionality and date input feature. This analysis aims to identify any gaps or issues within this specific report generation module.
-
-
-The HTML structure in `labadmin.php` reveals a dropdown for selecting the reporting period, with options like "Hoy," "Semana," "Mes," "Año," and "Fecha." The "Fecha" option triggers the display of date input fields for manual date range selection; the `rango-fechas-admin` span is hidden by default and becomes visible when the "Fecha" option is selected.
-The date inputs utilize the `type="date"` attribute, and any change triggers the `filtrarEstadisticasAdmin()` function.
-Focusing on how the date inputs are handled is crucial, because any issues will impact date range reports.
+Examining the legacy records suggests 'estudios' was initially a JSON-encoded array of strings. Decoding produced a simple string array, where casting to string likely caused no issues. However, the current schema and seed data store 'estudios' differently. This discrepancy needs further investigation.
 
 
 
@@ -18703,12 +20743,12 @@ Focusing on how the date inputs are handled is crucial, because any issues will 
 ### Actions
 
 **Tool:** `grep_search`
-**Query:** `.d-none`
+**Query:** `htmlspecialchars((string)`
 
 <details>
 <summary>Metadata</summary>
 
-- **Thinking Duration:** 0.882927291s
+- **Thinking Duration:** 0.089114320s
 - **Model:** Gemini 3.8 Flash (High)
 </details>
 
@@ -18717,7 +20757,7 @@ Focusing on how the date inputs are handled is crucial, because any issues will 
 ### Local File Search
 
 **Status:** Completed
-**Created:** 26 Sept 2026, 7:29 pm
+**Created:** 27 Sept 2026, 11:56 am
 
 ---
 
@@ -18725,13 +20765,7 @@ Focusing on how the date inputs are handled is crucial, because any issues will 
 
 ### Thinking
 
-The CSS defines a `.d-none` class which sets `display: none`.  However, JavaScript in `labadmin.js` conditionally sets `rangeContainer`'s style to `display: inline-flex` if the selected value is "fecha". This directly overrides any existing CSS rules. The JavaScript does *not* remove the `.d-none` class. Therefore, selecting "Fecha" will set `rangeContainer` to display `inline-flex` even if `.d-none` is present.
-
-
-`manejarCambioFiltroAdmin` initializes the date range picker but doesn't trigger the filtering directly; it only opens the date picker.  Selecting a start date fires `filtrarEstadisticasAdmin`, which checks for *both* start and end dates before proceeding.  The UI appears to require the user to explicitly select both dates, as the function returns if either is empty.
-
-
-The single-date selection requirement isn't automatically handled; the end date input remains empty.  The prompt explicitly requests a date range, despite the UI's "Fecha" label, indicating an expectation of a range. The date input's `onchange` event only triggers upon complete date entry and blur, not during typing. Consideration is needed for invalid date ranges (start after end).
+The code iterates through an array, extracts a name or study identifier, and constructs HTML list items. It handles both array and scalar input, defaulting to JSON encoding if neither 'nombre' nor 'estudio' keys exist within an array element. The extracted values are HTML-encoded for safe display.
 
 
 
@@ -18739,12 +20773,12 @@ The single-date selection requirement isn't automatically handled; the end date 
 ### Actions
 
 **Tool:** `grep_search`
-**Query:** `vw_ordenes_completas`
+**Query:** `['estudios']`
 
 <details>
 <summary>Metadata</summary>
 
-- **Thinking Duration:** 2.480903178s
+- **Thinking Duration:** 0.083251810s
 - **Model:** Gemini 3.8 Flash (High)
 </details>
 
@@ -18753,29 +20787,7 @@ The single-date selection requirement isn't automatically handled; the end date 
 ### Local File Search
 
 **Status:** Completed
-**Created:** 26 Sept 2026, 7:29 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `hora_captura`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 26 Sept 2026, 7:29 pm
+**Created:** 27 Sept 2026, 11:56 am
 
 ---
 
@@ -18783,29 +20795,286 @@ The single-date selection requirement isn't automatically handled; the end date 
 
 ### Thinking
 
-Analyzing the provided PHP code snippet, the logic suggests date-based filtering. The code constructs a SQL `WHERE` clause to filter by `hora_captura` (capture time) within a specified date range, which aligns with the user's description of a date-picker functionality. This suggests the date range input is used to filter reports.
+The observation is that the relevant code exists only in the Pacientes grid render function within specified files. Examining `rc/index.php`, the `$ord['estudios']` data, which is a JSON string, undergoes `htmlspecialchars` cleanly. It is now necessary to examine and potentially fix the code within `laesh-swbldi/rc/index.php` where data handling is occurring.
 
 
 
 
 ### Actions
 
-**Tool:** `grep_search`
-**Query:** `panel-reportes`
+**Tool:** `replace_file_content`
 
 <details>
 <summary>Metadata</summary>
 
-- **Thinking Duration:** 0.051168397s
+- **Thinking Duration:** 0.165787297s
 - **Model:** Gemini 3.8 Flash (High)
 </details>
 
 ---
 
-### Local File Search
+### Code Edit
 
 **Status:** Completed
-**Created:** 26 Sept 2026, 7:29 pm
+**Created:** 27 Sept 2026, 11:56 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:57 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:57 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:57 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:57 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:57 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 11:57 am
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/**
+ * md/index.php — Router Flight PHP para el Portal Médico
+ *
+ * Ubicación: laesh-swbldi/md/index.php
+ * URL:       /laesh/md/          (Alias en restaurantb.conf → laesh-swbldi/md/)
+ *
+ * Fuente HTML: website/uipv1/medicos.html  ← NUNCA BORRAR (R15.1 - Merge iterativo)
+ * Capas:       View (views/medicos.php), Negocio (MD\Negocio\Ordenes), Commons (Common\*)
+ *
+ * Rutas:
+ *   GET  /             → Panel principal Médico (requiere permiso ver_ordenes_propias)
+ *   POST /orden/crear  → Solicitud Médica Digital vía Stored Procedure (HTMX)
+ */
+
+declare(strict_types=1);
+
+require_once __DIR__ . '/../commons/commons.php';
+
+use Common\Logger;
+use Common\DB;
+
+// ── Guard RBAC: solo MEDICO puede acceder (o permiso ver_ordenes_propias) ──────
+Flight::rbac()->requirePermission(
+    'ver_ordenes_propias',
+    '/laesh/login/login.php?portal=medico'
+);
+
+// ── GET / — Panel principal Portal Médico ──────────────────────────────────────
+Flight::route('GET /', function () {
+    $auth = Flight::auth();
+    $db   = Flight::db();
+
+    $userId = (int)$auth->getUserId();
+    $stmt = $db->prepare("SELECT nombre, apellidos FROM empleados WHERE user_id = ? LIMIT 1");
+    $stmt->execute([$userId]);
+    $emp = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+    // Obtener perfil extendido del médico (con auto-migración tolerante a fallos si la columna no existe en MariaDB)
+    try {
+        $stmtMed = $db->prepare("SELECT nombre_completo, especialidad, cedula_profesional, cedula_especialidad, celular, telefono_consultorio, direccion_consultorio, universidad_id, lugar_trabajo_id FROM perfiles_medicos WHERE user_id = ? LIMIT 1");
+```
+
+</details>
+
+---
+
+## User Request
+
+Mjeoras texto de items combo Periodo:  a 15 ponlo como: 15 d y a: 30d a: 30 d
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `index.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Focusing on the "Período" combo box, the task is to modify specific display texts: replacing "15" with "15 d" and "30d" with "30 d". Need to check the `ws-client.js` file to see if any similar outputs will also require modification.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `labadmin.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.214691003s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L244-264)</summary>
+
+**Path:** `Unknown file`
+
+```
+                                <label for="select-periodo-anteriores-rc" style="font-size: 0.82rem; font-weight: 600; color: var(--text-muted); white-space: nowrap;">Período:</label>
+                                <select id="select-periodo-anteriores-rc" name="periodo" class="form-select select-sm" style="padding: 4px 10px; font-size: 0.82rem; border-radius: 6px; border: 1px solid var(--border); background: #ffffff; color: var(--text-dark); cursor: pointer;"
+                                        hx-get="/laesh/rc/tabla-ordenes-anteriores"
+                                        hx-target="#tabla-recepcion-anteriores"
+                                        hx-swap="outerHTML"
+                                        hx-include="#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc"
+                                        hx-trigger="change">
+                                    <option value="30d" selected>30d</option>
+                                    <option value="15d">15</option>
+                                    <option value="fecha">Fechas</option>
+                                </select>
+                                <span id="rango-fechas-anteriores-rc" class="d-none" style="display: none; align-items: center; gap: 0.35rem; white-space: nowrap;">
+                                    <input type="date" id="fecha-inicio-anteriores-rc" name="fecha_inicio" class="select-sm form-input" style="padding: 3px 6px; font-size: 0.8rem; border-radius: 6px; border: 1px solid var(--border); width: 130px;" max="<?= date('Y-m-d', strtotime('-1 day')) ?>" title="Fecha inicial" aria-label="Fecha inicial"
+                                           hx-get="/laesh/rc/tabla-ordenes-anteriores"
+                                           hx-target="#tabla-recepcion-anteriores"
+                                           hx-swap="outerHTML"
+                                           hx-include="#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc"
+                                           hx-trigger="change">
+                                    <span class="txt-muted-sm" style="font-size: 0.78rem; color: var(--text-muted);">al</span>
+                                    <input type="date" id="fecha-fin-anteriores-rc" name="fecha_fin" class="select-sm form-input" style="padding: 3px 6px; font-size: 0.8rem; border-radius: 6px; border: 1px solid var(--border); width: 130px;" max="<?= date('Y-m-d', strtotime('-1 day')) ?>" title="Fecha final" aria-label="Fecha final"
+                                           hx-get="/laesh/rc/tabla-ordenes-anteriores"
+```
+
+</details>
 
 ---
 
@@ -18814,7 +21083,7 @@ Analyzing the provided PHP code snippet, the logic suggests date-based filtering
 ### Actions
 
 **Tool:** `view_file`
-**File:** `labadmin.js`
+**File:** `medicos.php`
 
 <details>
 <summary>Metadata</summary>
@@ -18825,125 +21094,32 @@ Analyzing the provided PHP code snippet, the logic suggests date-based filtering
 ---
 
 <details>
-<summary>File: `Unknown file` (L344-394)</summary>
+<summary>File: `Unknown file` (L424-444)</summary>
 
 **Path:** `Unknown file`
 
 ```
-            // consistente con medicos.js por si a futuro recepción también crea.
-            if (esNueva) p.set('nueva', '1');
-            _abrirSolOverlay('/laesh/rc/views/solicitud_dac_impr.php?' + p.toString());
-        }
-
-
-        // Cambiar Paneles / Tabs en Labadmin con actualización de Breadcrumb
-        // FUENTE DE VERDAD: textos deben ser idénticos a los del menú lateral izquierdo
-        const panelLabelsAdmin = {
-            'panel-ordenes':            'Solicitudes Hoy',
-            'panel-ordenes-anteriores': 'Solicitudes Anteriores',
-            'panel-pacientes':          'Pacientes',
-            'panel-medicos':            'Médicos',
-            'panel-reportes':           'Reportes y Estadísticas',
-            'panel-catalogos':          'Catálogos de Análisis'
-        };
-
-        function cambiarTabAdmin(panelId, el) {
-            document.querySelectorAll('.sidebar .nav-item').forEach(i => i.classList.remove('active'));
-            if (el) {
-                el.classList.add('active');
-            } else {
-                const navItem = document.querySelector(`.sidebar .nav-item[data-panel="${panelId}"]`);
-                if (navItem) navItem.classList.add('active');
-            }
-            document.querySelectorAll('.tab-panel').forEach(p => {
-                p.style.display = 'none';
-                p.classList.add('d-none');
-            });
-            const target = document.getElementById(panelId);
-            if (target) {
-                target.classList.remove('d-none');
-                target.style.display = 'block';
-            }
-
-            const bc = document.getElementById('header-bc-current');
-            if (bc && panelLabelsAdmin[panelId]) {
-                bc.textContent = panelLabelsAdmin[panelId];
-            }
-            if (panelId === 'panel-catalogos') {
-                if (typeof window.loadCatalogTree === 'function') {
-                    window.loadCatalogTree();
-                }
-                const btnViewTable = document.getElementById('btn-view-table');
-                if (btnViewTable) {
-                    btnViewTable.click();
-                }
-            }
-            if (panelId === 'panel-medicos') {
-                var activeSubTab = document.querySelector('#toggle-medicos-view .cms-tab.active');
-                var viewType = activeSubTab ? activeSubTab.getAttribute('data-view') : 'table';
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `labadmin.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (High)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L394-429)</summary>
-
-**Path:** `Unknown file`
-
-```
-                var viewType = activeSubTab ? activeSubTab.getAttribute('data-view') : 'table';
-                if (viewType === 'universidades' && typeof window.initUniversidadesFlatGrid === 'function') {
-                    window.initUniversidadesFlatGrid();
-                } else if (viewType === 'centros-trabajo' && typeof window.initCentrosTrabajoFlatGrid === 'function') {
-                    window.initCentrosTrabajoFlatGrid();
-                } else if (typeof window.initMedicosFlatGrid === 'function') {
-                    window.initMedicosFlatGrid();
-                }
-            }
-        }
-        window.cambiarTabAdmin = cambiarTabAdmin;
-
-        // Refrescar tablas, badge y silbato cuando médico u otro tab actualiza localStorage
-        window.addEventListener('storage', function() {
-            refreshData();                                                           // actualiza tabla-recepcion + badge-recepcion + silbato si hay nuevas órdenes
-            if (typeof refreshHistorialAdmin === 'function') refreshHistorialAdmin(); // actualiza historial de Órdenes Anteriores
-        });
-
-        // A-01: activación por teclado (Enter/Espacio) para role="button" en nav-items
-        // El listener de CLICK está en DOMContentLoaded (líneas P-LAESH-01) — no duplicar aquí.
-        document.querySelectorAll('.sidebar .nav-item').forEach(function(item) {
-            item.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    this.click();
-                }
-            });
-        });
-
-        
-        function filtrarHistorialAdmin() {
-            var el = document.getElementById('filtro-periodo-historial-admin');
-            if (el) {
-                console.log("Filtrando historial de recepción por periodo:", el.value);
-            }
-        }
+                        <label for="select-periodo-anteriores-md" style="font-size: 0.82rem; font-weight: 600; color: var(--text-muted); white-space: nowrap;">Período:</label>
+                        <select id="select-periodo-anteriores-md" name="periodo" class="form-select select-sm" style="padding: 4px 10px; font-size: 0.82rem; border-radius: 6px; border: 1px solid var(--border); background: #ffffff; color: var(--text-dark); cursor: pointer;"
+                                hx-get="/laesh/md/tabla-ordenes-anteriores"
+                                hx-target="#tabla-historial-completo"
+                                hx-swap="outerHTML"
+                                hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md"
+                                hx-trigger="change">
+                            <option value="30d" selected>30d</option>
+                            <option value="15d">15</option>
+                            <option value="fecha">Fechas</option>
+                        </select>
+                        <span id="rango-fechas-anteriores-md" class="d-none" style="display: none; align-items: center; gap: 0.35rem; white-space: nowrap;">
+                            <input type="date" id="fecha-inicio-anteriores-md" name="fecha_inicio" class="select-sm form-input" style="padding: 3px 6px; font-size: 0.8rem; border-radius: 6px; border: 1px solid var(--border); width: 130px;" max="<?= date('Y-m-d', strtotime('-1 day')) ?>" title="Fecha inicial" aria-label="Fecha inicial"
+                                   hx-get="/laesh/md/tabla-ordenes-anteriores"
+                                   hx-target="#tabla-historial-completo"
+                                   hx-swap="outerHTML"
+                                   hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md"
+                                   hx-trigger="change">
+                            <span class="txt-muted-sm" style="font-size: 0.78rem; color: var(--text-muted);">al</span>
+                            <input type="date" id="fecha-fin-anteriores-md" name="fecha_fin" class="select-sm form-input" style="padding: 3px 6px; font-size: 0.8rem; border-radius: 6px; border: 1px solid var(--border); width: 130px;" max="<?= date('Y-m-d', strtotime('-1 day')) ?>" title="Fecha final" aria-label="Fecha final"
+                                   hx-get="/laesh/md/tabla-ordenes-anteriores"
 ```
 
 </details>
@@ -18954,55 +21130,28 @@ Analyzing the provided PHP code snippet, the logic suggests date-based filtering
 
 ### Thinking
 
-The code lacks a condition to handle the 'panel-reportes' panel within the `cambiarTabAdmin` function. Investigating the call to `filtrarEstadisticasAdmin` revealed it is only executed once during the initial page load.
-
-
-On page load, the initial period filter is "mes," triggering a background statistics update. Clicking the sidebar link displays the report panel, but it doesn't refresh data, indicating a missing event listener. The period dropdown and date inputs, specifically their `onchange` events, call a function which appears to be responsible for data refreshing. This seems crucial to ensure the statistics update accordingly.
-
-
-`manejarCambioFiltroAdmin` controls the visibility of the date range input based on the selected filter. If the "fecha" option is chosen, the date range becomes visible and an attempt to show the date picker is made. If not "fecha", the date range is hidden, and `filtrarEstadisticasAdmin` is executed. The `filtrarEstadisticasAdmin` function checks for valid start and end dates before proceeding. The issue might be that `manejarCambioFiltroAdmin` isn't triggered on panel display.
-
-
-The date selection's label ("Fecha") is misleading since it requires a date *range*, not a single date. The code forces two dates to be selected. The system should either default the end date to the start date if only one is chosen or change the label to accurately represent its functionality. The calendar picker's `showPicker()` call directly triggers the `onchange` event, leading to a possible usability issue and unexpected behavior since its function's purpose is not yet fully understood.
-
-
-The date picker for the end date doesn't automatically open after selecting the start date, requiring an explicit click, which creates a poor user experience.  The desired behavior is to automatically focus on the second date input and potentially pre-fill it with the start date for suggestion. Using `onchange` events on date inputs presents a problem, as these events do not fire while the user is typing, which is how a user might naturally input a date range. This inconsistency between keyboard input and event triggering needs to be addressed for the date filter.
-
-
-The date input change event isn't triggered by typing; using the `input` event or handling Enter is necessary for keyboard input. The system doesn't validate if the start date is later than the end date, leading to incorrect results, with the backend returning a "success" response even with inverted dates, masking data retrieval errors.
-
-The current SQL `BETWEEN` clause doesn't handle the inverted date range, which causes the database to return no results for an inverted period. To resolve this, input date validation must be added. The start/end date inputs need constraints to prevent inverted ranges or an automated correction upon detection of inversion.
-
-
-The SQL query needs to handle inverted date ranges by using `LEAST` and `GREATEST` in the `BETWEEN` clause, or by swapping the date variables. Date input fields lack the `max` attribute, allowing users to select future dates; implementing `max="<?= date('Y-m-d') ?>"` restricts the calendar to current or past dates. The usage of `showPicker()` within the code has usability and compatibility issues. The function requires user activation and the current implementation is not universally functional.
-
-
-The date formatting in the statistics header currently displays redundant information when the start and end dates are the same. Need to implement a conditional check to display only the single date in such cases. The initial state of the date range inputs when the "Fecha" filter is selected is blank, hindering usability. A sensible default date range (e.g., current month) is necessary for better user experience.
-
-
-There's a discrepancy: the "Reportes" panel uses `filtro-periodo-admin` while "Solicitudes Anteriores" uses `filtro-periodo-historial-admin`. The `filtrarHistorialAdmin()` function is incomplete, logging the selected period but not actually filtering the data. This needs to be completed.
+Observed identical HTML snippets in two distinct view files, suggesting a duplicated configuration element. A third, related file exhibits similar functionality at a specific line. This pattern warrants further investigation to determine if a shared component or a configuration inconsistency is at play.
 
 
 
 
 ### Actions
 
-**Tool:** `grep_search`
-**Query:** `rango-fechas`
+**Tool:** `replace_file_content`
 
 <details>
 <summary>Metadata</summary>
 
-- **Thinking Duration:** 10.458479955s
+- **Thinking Duration:** 0.194488217s
 - **Model:** Gemini 3.8 Flash (High)
 </details>
 
 ---
 
-### Local File Search
+### Code Edit
 
 **Status:** Completed
-**Created:** 26 Sept 2026, 7:29 pm
+**Created:** 27 Sept 2026, 12:05 pm
 
 ---
 
@@ -19010,8 +21159,7 @@ There's a discrepancy: the "Reportes" panel uses `filtro-periodo-admin` while "S
 
 ### Actions
 
-**Tool:** `view_file`
-**File:** `medicos.js`
+**Tool:** `replace_file_content`
 
 <details>
 <summary>Metadata</summary>
@@ -19021,63 +21169,81 @@ There's a discrepancy: the "Reportes" panel uses `filtro-periodo-admin` while "S
 
 ---
 
-<details>
-<summary>File: `Unknown file` (L314-339)</summary>
+### Code Edit
 
-**Path:** `Unknown file`
-
-```
-            if (elTiempo) elTiempo.innerText = tiempo;
-            if (document.getElementById('lbl-ordenes-medico')) document.getElementById('lbl-ordenes-medico').innerText = `ÓRDENES EMITIDAS (${lblText})`;
-        }
-
-        function manejarCambioFiltroMedico() {
-            const select = document.getElementById('filtro-periodo-medico');
-            const rangeContainer = document.getElementById('rango-fechas-medico');
-            if (select.value === 'fecha') {
-                rangeContainer.style.display = 'inline-flex';
-                const inputInicio = document.getElementById('fecha-inicio-medico');
-                try {
-                    inputInicio.showPicker();
-                } catch (e) {
-                    inputInicio.click();
-                }
-            } else {
-                rangeContainer.style.display = 'none';
-                filtrarEstadisticasMedico();
-            }
-        }
-
-        // Carga inicial — poblar cache de MariaDB y verificar notificaciones
-        refreshData();
-
-        // P-LAESH-FOLIO-EXTRAIDO-01 (2026-09-24): formatea m.fecha ("YYYY-MM-DD HH:mm:ss",
-        // MariaDB sin TZ) como "dd/mm HH:mm" para la fecha de solicitud en resultados de
-```
-
-</details>
+**Status:** Completed
+**Created:** 27 Sept 2026, 12:05 pm
 
 ---
 
 ## Agent Response
 
-### Thinking
+### Actions
 
-Functionality appears rudimentary. Initial tests suggest the date range input and calendar interaction work, although a deeper dive is required to identify edge cases and potential vulnerabilities. It's likely the system lacks robust input validation or error handling.
-
-
-Analyzing the architecture reveals the view, client-side logic, API controller, and business logic components involved in date range selection. There are usability gaps in the date picker's flow, specifically that after selecting a start date, the end date picker doesn't automatically appear. The lack of intelligent pre-filling for date ranges also impacts user experience.
-
-
-The date selection has ambiguous labeling; a single "Fecha" option requires two date inputs for a date range, potentially confusing users who expect to view a single day. Input capture via keyboard is flawed, requiring the `change` event to fire on `blur` or Enter. This means updates aren't triggered immediately during typing. There is no validation for inverted date ranges and lacks an upper limit on the input dates.
-
-
-
+**Tool:** `replace_file_content`
 
 <details>
 <summary>Metadata</summary>
 
-- **Thinking Duration:** 1.636519153s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 12:05 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 12:05 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 12:05 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
 - **Model:** Gemini 3.8 Flash (High)
 </details>
 
