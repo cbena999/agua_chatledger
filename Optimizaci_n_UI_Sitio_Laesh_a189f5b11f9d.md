@@ -7,9 +7,9 @@
 | **Trajectory ID** | `6e357b7e-c91b-4705-961b-75dfa5c7e94c` |
 | **Cascade ID** | `707376e8-5501-46d1-bf86-a189f5b11f9d` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 9780 |
+| **Total Steps** | 9845 |
 | **Started** | 21 Sept 2026, 3:55 pm |
-| **Completed** | 27 Sept 2026, 12:05 pm |
+| **Completed** | 27 Sept 2026, 12:14 pm |
 
 ---
 
@@ -21244,6 +21244,1759 @@ Observed identical HTML snippets in two distinct view files, suggesting a duplic
 <details>
 <summary>Metadata</summary>
 
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<!DOCTYPE html>
+<?php
+/**
+ * md/views/medicos.php — Plantilla Plates / View PHP del Portal Médico
+ * Fuente SSOT HTML: website/uipv1/medicos.html (R15.1)
+ */
+if (!function_exists('h')) {
+    function h($v): string {
+        return htmlspecialchars((string)($v ?? ''), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+    }
+}
+
+// SQL directo ELIMINADO (2026-09-18): la grilla "20 Est.Med" ahora se puebla
+// EXCLUSIVAMENTE client-side desde window.laeshTop20EstMed (catalog-compiled.js),
+// igual que la búsqueda de estudios (medicos.js: populateMandatoryGrid()).
+// Fuente única de verdad = catalog-compiled.js, refrescado vía WS al guardar en admin.
+?>
+<html lang="es-MX">
+<head>
+    <meta charset="UTF-8">
+    <meta name="color-scheme" content="light">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#71CA11">
+    <meta name="description" content="Portal de médicos LAESH — consulta de solicitudes, estadísticas y catálogo de estudios.">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; script-src 'self' 'unsafe-inline'; connect-src 'self' ws: wss:;">
+    <meta name="htmx-config" content='{"historyEnabled":false}'>
+    <title>Portal Médico — LAESH</title>
+    <link rel="icon" type="image/svg+xml" href="/laesh-web-assets-uipv1a/img/favicon.svg">
+
+    <!-- PERF-03: Preload de hojas de estilo críticas para evitar FOUC -->
+    <link rel="preload" href="/laesh-web-assets-uipv1a/css/tokens.css?v=<?= time() ?>" as="style">
+    <link rel="preload" href="/laesh-web-assets-uipv1a/css/fonts.css?v=<?= time() ?>" as="style">
+    <link rel="preload" href="/laesh-web-assets-uipv1a/css/style.css?v=<?= time() ?>" as="style">
+    <link rel="preload" href="/laesh-web-assets-uipv1a/css/portal.css?v=<?= time() ?>" as="style">
+
+    <script src="/laesh-web-assets-uipv1a/js/device-detect.js?v=<?= time() ?>"></script>
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/tokens.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/fonts.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/style.css?v=<?= time() ?>">
+```
+
+</details>
+
+---
+
+## User Request
+
+Para laptop/desktop mejora esto para medicos y recepcion, anexo imagen 
+. poner separadores donde se marco, poner algun agrupados tenue para cuando este seleccinado fechas (pertencia), etc.  mejora pues visualmente esas partes, usando quiza la parte libre de espacio existe a la izquierda.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `medicos.php`
+**Language:** php
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Initial assessment of the image focuses on the "Solicitudes Anteriores" header and its associated controls. Observed "Total: 127" and pagination controls ("Anterior", "Siguiente") suggest a large dataset. Examining the "Periodo" control, specifically the date selection element, aims to understand the filtering capabilities.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `labadmin.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.144607039s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L209-279)</summary>
+
+**Path:** `Unknown file`
+
+```
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panel 1.5: Solicitudes Anteriores -->
+                <div id="panel-ordenes-anteriores" class="tab-panel d-none">
+                    <!-- Fila: Título de Sección y Controles (Total, Paginación, Buscador) alineados con el estándar cms-panel-header -->
+                    <div class="cms-panel-header" style="margin-top: 1rem; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                        <div>
+                            <h3 class="cms-h3" style="margin: 0; font-size: 1.35rem; font-weight: 800; color: #0052B7;">Solicitudes Anteriores</h3>
+                            <p class="txt-muted-4" style="margin: 0.2rem 0 0 0; font-size: 0.85rem;">Histórico de solicitudes registradas en días anteriores.</p>
+                        </div>
+                        
+                        <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; justify-content: flex-end; margin-left: auto;">
+                            <!-- Paginador y Total -->
+                            <div id="ordenes-anteriores-pagination-wrap" style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span id="ordenes-anteriores-total-records" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">Total: <?= (int)($totalOrdenesAnteriores ?? 0) ?></span>
+                                <span style="color: #cbd5e1; display: inline;">|</span>
+                                <div id="ordenes-anteriores-pagination" style="display: flex; gap: 0.25rem; align-items: center;">
+                                    <?php 
+                                        $totPgsAnt = max(1, (int)ceil(($totalOrdenesAnteriores ?? 0) / 25));
+                                    ?>
+                                    <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">‹ Anterior</button>
+                                    <span style="font-size:0.82rem; font-weight:600; color:var(--text-muted); padding: 0 4px;">1 / <?= $totPgsAnt ?></span>
+                                    <?php if ($totPgsAnt > 1): ?>
+                                        <button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/rc/tabla-ordenes-anteriores?page=2&periodo=30d" hx-target="#tabla-recepcion-anteriores" hx-swap="outerHTML" hx-include="#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc">Siguiente ›</button>
+                                    <?php else: ?>
+                                        <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">Siguiente ›</button>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+
+                            <!-- Combo List de Período y Rango de Fechas (Calendario) -->
+                            <div id="ordenes-anteriores-periodo-container" style="display: inline-flex; align-items: center; gap: 0.35rem; flex-wrap: nowrap;">
+                                <label for="select-periodo-anteriores-rc" style="font-size: 0.82rem; font-weight: 600; color: var(--text-muted); white-space: nowrap;">Período:</label>
+                                <select id="select-periodo-anteriores-rc" name="periodo" class="form-select select-sm" style="padding: 4px 10px; font-size: 0.82rem; border-radius: 6px; border: 1px solid var(--border); background: #ffffff; color: var(--text-dark); cursor: pointer;"
+                                        hx-get="/laesh/rc/tabla-ordenes-anteriores"
+                                        hx-target="#tabla-recepcion-anteriores"
+                                        hx-swap="outerHTML"
+                                        hx-include="#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc"
+                                        hx-trigger="change">
+                                    <option value="30d" selected>30 d</option>
+                                    <option value="15d">15 d</option>
+                                    <option value="fecha">Fechas</option>
+                                </select>
+                                <span id="rango-fechas-anteriores-rc" class="d-none" style="display: none; align-items: center; gap: 0.35rem; white-space: nowrap;">
+                                    <input type="date" id="fecha-inicio-anteriores-rc" name="fecha_inicio" class="select-sm form-input" style="padding: 3px 6px; font-size: 0.8rem; border-radius: 6px; border: 1px solid var(--border); width: 130px;" max="<?= date('Y-m-d', strtotime('-1 day')) ?>" title="Fecha inicial" aria-label="Fecha inicial"
+                                           hx-get="/laesh/rc/tabla-ordenes-anteriores"
+                                           hx-target="#tabla-recepcion-anteriores"
+                                           hx-swap="outerHTML"
+                                           hx-include="#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc"
+                                           hx-trigger="change">
+                                    <span class="txt-muted-sm" style="font-size: 0.78rem; color: var(--text-muted);">al</span>
+                                    <input type="date" id="fecha-fin-anteriores-rc" name="fecha_fin" class="select-sm form-input" style="padding: 3px 6px; font-size: 0.8rem; border-radius: 6px; border: 1px solid var(--border); width: 130px;" max="<?= date('Y-m-d', strtotime('-1 day')) ?>" title="Fecha final" aria-label="Fecha final"
+                                           hx-get="/laesh/rc/tabla-ordenes-anteriores"
+                                           hx-target="#tabla-recepcion-anteriores"
+                                           hx-swap="outerHTML"
+                                           hx-include="#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc"
+                                           hx-trigger="change">
+                                </span>
+                            </div>
+
+                            <!-- Buscador en tiempo real -->
+                            <div id="ordenes-anteriores-search-container" style="display: flex; gap: 0.5rem; align-items: center; position:relative; z-index: 100;">
+                                <input type="text" id="input-buscar-orden-anteriores-rc" name="q" class="form-input form-input--bg" autocomplete="off" spellcheck="false" placeholder="🔍 Buscar por nombre..." style="width: 220px;" hx-get="/laesh/rc/tabla-ordenes-anteriores" hx-target="#tabla-recepcion-anteriores" hx-swap="outerHTML" hx-include="#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc" hx-trigger="keyup changed delay:250ms, search">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card" aria-live="polite" style="padding: 0; overflow: hidden; border: 1px solid var(--border); border-radius: 8px;">
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L394-464)</summary>
+
+**Path:** `Unknown file`
+
+```
+                     pero el usuario pidió un título reducido visible aquí. Reutiliza
+                     .panel-nueva-orden-title (mismo estilo compacto que el panel Nueva
+                     Solicitud) para no duplicar CSS. En móvil, la paginación de abajo
+                     (#ordenes-anteriores-md-pagination-wrap) ahora se oculta — ver
+                     portal.css @media(max-width:767px) — así que ya no compite por
+                     espacio con este título en la misma fila.
+                     2026-09-24 (histórico): header homologado 1:1 con #ordenes-hoy-md-header
+                     (mismo patrón que ya usan mdRenderOrdenesTablaHeader/Body para la
+                     grilla) — antes traía un <h2>+<p> propio que "Hoy" no tenía, rompiendo
+                     la simetría pedida y desbordando en móvil (el título no cabía junto a
+                     paginación+buscador en flex-wrap:nowrap). -->
+                <h2 class="panel-nueva-orden-title">Solicitudes Digitales Anteriores</h2>
+                <div class="cms-panel-header" id="ordenes-anteriores-md-header" style="margin-bottom: 1rem; display: flex; justify-content: flex-end; align-items: center; flex-wrap: wrap; gap: 0.75rem; margin-left: auto;">
+                    <div id="ordenes-anteriores-md-pagination-wrap" style="display: flex; align-items: center; gap: 0.5rem;">
+                        <span id="ordenes-anteriores-md-total-records" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">Total: <?= (int)($totalOrdenesAnteriores ?? 0) ?></span>
+                        <span style="color: #cbd5e1; display: inline;">|</span>
+                        <div style="display: flex; gap: 0.25rem; align-items: center;">
+                            <?php $totPgsAntMd = max(1, (int)ceil(($totalOrdenesAnteriores ?? 0) / 25)); ?>
+                            <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">‹ <span class="pag-label-text">Anterior</span></button>
+                            <span style="font-size:0.82rem; font-weight:600; color:var(--text-muted); padding: 0 4px;">1 / <?= $totPgsAntMd ?></span>
+                            <?php if ($totPgsAntMd > 1): ?>
+                                <button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/md/tabla-ordenes-anteriores?page=2&periodo=30d" hx-target="#tabla-historial-completo" hx-swap="outerHTML" hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md"><span class="pag-label-text">Siguiente</span> ›</button>
+                            <?php else: ?>
+                                <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;"><span class="pag-label-text">Siguiente</span> ›</button>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+
+                    <!-- Combo List de Período y Rango de Fechas (Calendario) -->
+                    <div id="ordenes-anteriores-md-periodo-container" style="display: inline-flex; align-items: center; gap: 0.35rem; flex-wrap: nowrap;">
+                        <label for="select-periodo-anteriores-md" style="font-size: 0.82rem; font-weight: 600; color: var(--text-muted); white-space: nowrap;">Período:</label>
+                        <select id="select-periodo-anteriores-md" name="periodo" class="form-select select-sm" style="padding: 4px 10px; font-size: 0.82rem; border-radius: 6px; border: 1px solid var(--border); background: #ffffff; color: var(--text-dark); cursor: pointer;"
+                                hx-get="/laesh/md/tabla-ordenes-anteriores"
+                                hx-target="#tabla-historial-completo"
+                                hx-swap="outerHTML"
+                                hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md"
+                                hx-trigger="change">
+                            <option value="30d" selected>30 d</option>
+                            <option value="15d">15 d</option>
+                            <option value="fecha">Fechas</option>
+                        </select>
+                        <span id="rango-fechas-anteriores-md" class="d-none" style="display: none; align-items: center; gap: 0.35rem; white-space: nowrap;">
+                            <input type="date" id="fecha-inicio-anteriores-md" name="fecha_inicio" class="select-sm form-input" style="padding: 3px 6px; font-size: 0.8rem; border-radius: 6px; border: 1px solid var(--border); width: 130px;" max="<?= date('Y-m-d', strtotime('-1 day')) ?>" title="Fecha inicial" aria-label="Fecha inicial"
+                                   hx-get="/laesh/md/tabla-ordenes-anteriores"
+                                   hx-target="#tabla-historial-completo"
+                                   hx-swap="outerHTML"
+                                   hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md"
+                                   hx-trigger="change">
+                            <span class="txt-muted-sm" style="font-size: 0.78rem; color: var(--text-muted);">al</span>
+                            <input type="date" id="fecha-fin-anteriores-md" name="fecha_fin" class="select-sm form-input" style="padding: 3px 6px; font-size: 0.8rem; border-radius: 6px; border: 1px solid var(--border); width: 130px;" max="<?= date('Y-m-d', strtotime('-1 day')) ?>" title="Fecha final" aria-label="Fecha final"
+                                   hx-get="/laesh/md/tabla-ordenes-anteriores"
+                                   hx-target="#tabla-historial-completo"
+                                   hx-swap="outerHTML"
+                                   hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md"
+                                   hx-trigger="change">
+                        </span>
+                    </div>
+
+                    <div id="ordenes-anteriores-md-search-wrap" style="display: flex; gap: 0.5rem; align-items: center;">
+                        <input type="text" id="input-buscar-orden-anteriores-md" name="q" class="form-input form-input--bg" autocomplete="off" spellcheck="false" placeholder="🔍 Buscar por folio, paciente..." style="width: 220px;" hx-get="/laesh/md/tabla-ordenes-anteriores" hx-target="#tabla-historial-completo" hx-swap="outerHTML" hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md" hx-trigger="keyup changed delay:250ms, search">
+                    </div>
+                </div>
+                <div class="card" style="padding: 0; overflow: hidden; border: 1px solid var(--border); border-radius: 8px;">
+                    <div class="table-responsive" style="max-height: calc(100vh - 250px); overflow-y: auto; overflow-x: auto; -webkit-overflow-scrolling: touch; width: 100%;">
+                        <table id="tabla-historial-completo" hx-get="/laesh/md/tabla-ordenes-anteriores" hx-target="#tabla-historial-completo" hx-swap="outerHTML" hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md" hx-trigger="refresh, ordenCreada from:body, ordenActualizada from:body">
+                            <thead>
+                                <?= mdRenderOrdenesTablaHeader('fecha', 'desc', '', '/laesh/md/tabla-ordenes-anteriores', '#tabla-historial-completo', '#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md') ?>
+                            </thead>
+                            <?= mdRenderOrdenesTablaBody($ordenesAnteriores ?? [], $csrfToken ?? '', '-ant') ?>
+                        </table>
+                    </div>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Examining the user's prompt, the objective is to improve the visual presentation for medical and reception staff on laptop/desktop screens. The user wants visual separators where indicated in the attached image and some subtle grouping for selected dates. Also, the user mentions utilizing the available space on the left to enhance these sections.
+
+
+Visual enhancements require inserting separators between the paginator, period selector, and search input within the toolbar. Subtle visual grouping, like a pill or cardlet style, will be applied to the period selector and date range when "Fechas" is selected to enhance visual cohesion. Initial focus will be on the available space on the left to determine how to integrate these elements effectively. Investigation into `labadmin.php`'s `cms-panel-header` may be needed for layout modifications.
+
+
+The current layout utilizes `margin-left: auto` which creates excessive whitespace. Investigating options for distributing elements across available space on larger screens begins with examining alternative header layouts. Potential solutions include moving pagination closer to the title or employing a dedicated toolbar with flexbox for better spacing.
+
+
+The current layout pushes all elements to the right using `justify-content: flex-end` and `margin-left: auto`, leaving the left side unused. Replacing these with alternative flexbox arrangements can distribute the elements more evenly across the available space. The page structure needs modification so the title and the toolbar with the controls are more aligned.
+
+Implementing visual separators requires inserting them between the pagination block, period selector, and the search input. Grouping the period selector and date range when selected will involve applying a visual style.
+
+
+Visual separators will be implemented using a divider element between the specified blocks. A visual grouping for the date range will be created when the "Fechas" option is selected in the period selector, applying a subtle background, border, and rounded corners. A CSS class will be added to visually group the date selection with the date inputs.
+
+
+The current layout's right-aligned elements create wasted space; a more balanced approach is needed.  I should test placing the pagination and information block on the left with search and filters on the right, using `justify-content: space-between`.  This layout would allow a date range selector to expand without overlapping.  Alternatively, if the title and controls are on the same line, the title can stay left and the controls can utilize the right side.
+
+
+Analyzing the HTML in `labadmin.php`, the `margin-left: auto` on the control container is confirmed as the cause of the right-alignment and wasted space. This forces the controls to the right, leaving a large gap to the left of the "Solicitudes Anteriores" heading. The container uses flexbox to arrange its children with a gap between them.
+
+
+The user's annotations in the screenshot highlight the need for two separators and a visual grouping for the "Fechas" section. Reviewing the HTML reveals the title block occupies the left side. I will evaluate options for spreading toolbar elements across the available space by adjusting spacing, padding, and applying flexbox layouts. Removing the right-aligning style can distribute controls more effectively.
+
+
+Investigating the existing layouts, the current arrangement in `Medico` places the control bar below the title, leading to inefficient space usage.  Two alternative approaches are considered: positioning pagination on the left and the other controls on the right, or integrating the pagination directly into a shared toolbar alongside the title.  The user's comment regarding space on the left prompts a re-evaluation of the screenshot to determine the exact intent. The space between the title and the controls confirms the potential for left-aligned elements.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `labadmin.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 9.465847805s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L64-114)</summary>
+
+**Path:** `Unknown file`
+
+```
+        </nav>
+
+        <div class="app-layout">
+            <aside class="sidebar">
+
+                <!-- ⓪ Toggle rail: colapsar / expandir sidebar (solo desktop) -->
+                <div class="sidebar-toggle-row">
+                    <button type="button" class="sidebar-rail-toggle" id="sidebar-rail-toggle" title="Expandir / Colapsar menú">
+                        <svg id="rail-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                    </button>
+                </div>
+
+                <!-- ① Fila lupita+input: en desktop ambos visibles en la misma línea;
+                         en tablet/móvil display:contents los expone como ítems directos de la tira -->
+                <div class="sidebar-search-row">
+                    <button type="button" class="sidebar-search-btn" id="sidebar-search-btn" aria-label="Buscar paciente o solicitud">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        Buscar
+                    </button>
+                    <div class="sidebar-search-wrap form-field">
+                        <input type="text" id="input-buscador" placeholder="Búsqueda (folio o 5+ letras)..." class="form-input-ta" autocomplete="off"><!-- P5-fix: autofocus removido -->
+                        <div id="autocomplete-list" class="sfs-dropdown">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Popup flotante de búsqueda (visible solo en modo colapsado) -->
+                <div class="sidebar-float-search" id="float-search-admin">
+                    <input class="sfs-input" id="sfs-input-admin" type="text" maxlength="30"
+                           placeholder="Buscar paciente o folio…" autocomplete="off">
+                    <div class="sfs-results" id="sfs-results-admin"></div>
+                </div>
+
+                <!-- ③ Ítems de navegación (en tablet/móvil: iconos en la tira) -->
+                <div class="nav-item active" data-panel="panel-ordenes" role="button" tabindex="0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M6 18h8" /><path d="M3 22h18" /><path d="M14 22a7 7 0 1 0 0-14h-1" /><path d="M9 14h2" /><path d="M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2Z" /><path d="M12 6V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3" />
+                    </svg>
+                    Solicitudes Hoy
+                </div>
+
+                <div class="nav-item" data-panel="panel-ordenes-anteriores" role="button" tabindex="0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    Solicitudes Anteriores
+                </div>
+
+                <div class="nav-item" data-panel="panel-pacientes" role="button" tabindex="0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    Pacientes
+                </div>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `labadmin.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L134-174)</summary>
+
+**Path:** `Unknown file`
+
+```
+                    Catálogos de Análisis
+                </div>
+
+                <?php if (!empty($isAdmin)): ?>
+                <div class="nav-item sidebar-admin-extra cursor-p" id="nav-gestion-web" role="button" tabindex="0">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+                    Contenidos del Sitio Web
+                </div>
+                <?php endif; ?>
+
+                <!-- ⑤ Mini-panel de usuario (visible al abrir hamburger en móvil) -->
+                <div class="sidebar-mobile-only">
+                    <!-- Chip iniciales — clase mob-user-chip exclusiva móvil (style.css ≤767px) -->
+                    <div class="mob-user-chip">
+                        <span class="mob-user-chip__avatar mob-user-chip__avatar--admin"><?= htmlspecialchars(strtoupper(substr($nombreUsuario ?? 'CAR', 0, 3)), ENT_QUOTES, 'UTF-8') ?></span>
+                        <span class="mob-user-chip__label txt-pgd"><?= htmlspecialchars($rolUsuario ?? 'Recepción', ENT_QUOTES, 'UTF-8') ?></span>
+                    </div>
+                    <a href="/laesh/login/logout.php" class="mob-logout-btn">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                        Cerrar Sesión
+                    </a>
+                </div>
+            </aside>
+
+            <main class="main-content" id="main-content">
+                <!-- Panel 1: Órdenes (Default) -->
+                <div id="panel-ordenes" class="tab-panel">
+                    <!-- Fila: Título de Sección y Controles (Total, Paginación, Buscador) alineados con el estándar cms-panel-header -->
+                    <div class="cms-panel-header" style="margin-top: 1rem; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                        <h3 class="cms-h3" style="margin: 0; font-size: 1.35rem; font-weight: 800; color: #0052B7;">Solicitudes Hoy</h3>
+                        
+                        <div style="display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; justify-content: flex-end;">
+                            <!-- Paginador y Total -->
+                            <div id="ordenes-pagination-wrap" style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span id="ordenes-total-records" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">Total: <?= (int)($totalOrdenesRecientes ?? 0) ?></span>
+                                <span style="color: #cbd5e1; display: inline;">|</span>
+                                <div id="ordenes-pagination" style="display: flex; gap: 0.25rem; align-items: center;">
+                                    <?php 
+                                        $totPgsOrd = max(1, (int)ceil(($totalOrdenesRecientes ?? 0) / 25));
+                                    ?>
+                                    <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">‹ Anterior</button>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Analyzing the "Solicitudes Hoy" section for relevant information. This appears to be a header element containing a title and potentially some filtering controls, but the specifics require further parsing of the surrounding structure to determine its function. The key lies in understanding the context of "Solicitudes Hoy."
+
+
+In "Solicitudes Hoy," a simplified layout with only pagination/search exists due to the implicit "today" filter, unlike the more complex "Solicitudes Anteriores." Activating the "Fechas" filter in "Solicitudes Anteriores" introduces a significant width increase from date range inputs, disrupting the existing layout by pushing UI elements to the right without visual grouping. The current structure lacks clear visual distinction between filter controls and search, potentially creating usability issues.
+
+
+The "Solicitudes Anteriores" header has unused space on the left, causing the pagination, period selector, and search to be unseparated on the right. The requested changes involve adding separators between these elements and applying a visual grouping to the period selector when "Fechas" is active. Implementing these changes will improve readability and clarity in this section.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `labadmin.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.998711900s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L479-505)</summary>
+
+**Path:** `Unknown file`
+
+```
+            inputIni.max = ayerStr;
+            inputFin.max = ayerStr;
+
+            function manejarCambio() {
+                if (select.value === 'fecha') {
+                    rango.style.display = 'inline-flex';
+                    rango.classList.remove('d-none');
+
+                    if (!inputFin.value) {
+                        inputFin.value = ayerStr;
+                    }
+                    if (!inputIni.value) {
+                        var dIni = new Date(ayer);
+                        dIni.setDate(dIni.getDate() - 30);
+                        inputIni.value = dIni.toISOString().split('T')[0];
+                    }
+                    inputFin.min = inputIni.value;
+                } else {
+                    rango.style.display = 'none';
+                    rango.classList.add('d-none');
+                    inputIni.value = '';
+                    inputFin.value = '';
+                }
+            }
+
+            select.addEventListener('change', manejarCambio);
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L344-374)</summary>
+
+**Path:** `Unknown file`
+
+```
+            var ayerStr = ayer.toISOString().split('T')[0];
+
+            inputIni.max = ayerStr;
+            inputFin.max = ayerStr;
+
+            function manejarCambio() {
+                if (select.value === 'fecha') {
+                    rango.style.display = 'inline-flex';
+                    rango.classList.remove('d-none');
+
+                    if (!inputFin.value) {
+                        inputFin.value = ayerStr;
+                    }
+                    if (!inputIni.value) {
+                        var dIni = new Date(ayer);
+                        dIni.setDate(dIni.getDate() - 30);
+                        inputIni.value = dIni.toISOString().split('T')[0];
+                    }
+                    inputFin.min = inputIni.value;
+                } else {
+                    rango.style.display = 'none';
+                    rango.classList.add('d-none');
+                    inputIni.value = '';
+                    inputFin.value = '';
+                }
+            }
+
+            select.addEventListener('change', manejarCambio);
+
+            // Poka-Yoke: Al cambiar Fecha Inicio
+            inputIni.addEventListener('change', function() {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The `.periodo-fechas-activo` style should implement a subtle visual grouping when the "Fechas" option is active. This can be achieved using a subdued background color or a subtle border, providing a clear visual cue for the selected state. This will improve clarity of date range selection for the user.
+
+
+Applying visual styling to the date range filter when active, including background, border, padding, and subtle shadow, to highlight it as a distinct section. The date input fields within this section will also receive specific styling. Created separators between the pagination and period containers, and also between the period and search containers, using a thin vertical line with a subtle color.
+
+
+Examining the layout, the intention is to leverage the ample left-side whitespace on larger screens. The current `justify-content: flex-end` is pushing all controls to the right. The structure can be improved to split the header into left-aligned title/subtitle and a right-aligned control section. This would better utilize the available space.
+
+
+Investigating the existing layout structure, the controls are all right-aligned due to `margin-left: auto`.  Removing this pushes controls away from the right, potentially improving the use of whitespace. Considering rearranging the title and pagination controls to be on the left and the toolbar controls taking advantage of the now free space. Increased spacing between the controls should improve readability, particularly for the search input.
+
+
+Examining the layout of `medicos.php` reveals an opportunity to implement a balanced layout using `space-between` to separate pagination and filters effectively, taking advantage of the available horizontal space. The `labadmin.php` structure is now under review.
+
+
+Observing the screen layout, a significant amount of horizontal space exists unused, particularly to the right of the title and subtitle. Adjusting the gap between controls and applying `flex: 1; justify-content: flex-end;` to the control container can help to distribute controls better. Considering moving the pagination closer to the title, or allowing controls to spread out to use the available space.
+
+
+Considering the user's annotation, the goal is to improve the utilization of horizontal space, moving elements away from the right edge. Specifically, the pagination block and control toolbar layouts require adjustment. For "Medicos" and "Recepcion," the layout must be adjusted to allow controls more breathing room, leveraging the unused space on the left side of the screen. The existing right-alignment approach needs reevaluation.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `ordenes-anteriores-total-records`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 7.946797421s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 12:10 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L524-564)</summary>
+
+**Path:** `Unknown file`
+
+```
+       . '</colgroup>'
+       . '<thead>'
+       . rcRenderOrdenesTablaHeader($sort, $dir, $q, '/laesh/rc/tabla-ordenes-anteriores', '#tabla-recepcion-anteriores', $includeAnt)
+       . '</thead>'
+       . rcRenderOrdenesTablaBody($ordenesAnteriores, $csrfToken, '-ant')
+       . '</table>';
+
+    $qParam = !empty($q) ? '&q=' . urlencode($q) : '';
+    $pParam = '&periodo=' . urlencode($periodo);
+    if ($periodo === 'fecha') {
+        if (!empty($fechaInicio)) $pParam .= '&fecha_inicio=' . urlencode($fechaInicio);
+        if (!empty($fechaFin)) $pParam .= '&fecha_fin=' . urlencode($fechaFin);
+    }
+    echo '<div id="ordenes-anteriores-pagination-wrap" hx-swap-oob="outerHTML" style="display: flex; align-items: center; gap: 0.5rem;">'
+       . '<span id="ordenes-anteriores-total-records" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">Total: ' . $totalReg . '</span>'
+       . '<span style="color: #cbd5e1; display: inline;">|</span>'
+       . '<div id="ordenes-anteriores-pagination" style="display: flex; gap: 0.25rem; align-items: center;">';
+    if ($page > 1) {
+        $prevPage = $page - 1;
+        echo '<button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/rc/tabla-ordenes-anteriores?page=' . $prevPage . $qParam . $pParam . '&sort=' . $sort . '&dir=' . $dir . '&per_page=' . $perPage . '" hx-target="#tabla-recepcion-anteriores" hx-swap="outerHTML" hx-include="' . $includeAnt . '">‹ Anterior</button>';
+    } else {
+        echo '<button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">‹ Anterior</button>';
+    }
+    echo '<span style="font-size:0.82rem; font-weight:600; color:var(--text-muted); padding: 0 4px;">' . $page . ' / ' . $totalPages . '</span>';
+    if ($page < $totalPages) {
+        $nextPage = $page + 1;
+        echo '<button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/rc/tabla-ordenes-anteriores?page=' . $nextPage . $qParam . $pParam . '&sort=' . $sort . '&dir=' . $dir . '&per_page=' . $perPage . '" hx-target="#tabla-recepcion-anteriores" hx-swap="outerHTML" hx-include="' . $includeAnt . '">Siguiente ›</button>';
+    } else {
+        echo '<button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">Siguiente ›</button>';
+    }
+    echo '</div></div>';
+});
+
+// ── GET /tabla-pacientes — Partial HTMX de la grilla de Pacientes (Recepción) ─────
+Flight::route('GET /tabla-pacientes', function () {
+    header('Content-Type: text/html; charset=utf-8');
+
+    $q       = trim($_GET['q'] ?? '');
+    $sort    = trim($_GET['sort'] ?? 'fecha');
+    $dir     = trim($_GET['dir'] ?? 'desc');
+    $page    = max(1, (int)($_GET['page'] ?? 1));
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L409-444)</summary>
+
+**Path:** `Unknown file`
+
+```
+        echo '<button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/md/tabla-ordenes-anteriores?page=' . $prevPage . $qParam . $pParam . '&sort=' . $sort . '&dir=' . $dir . '&per_page=' . $perPage . '" hx-target="#tabla-historial-completo" hx-swap="outerHTML" hx-include="' . $includeAntMd . '">‹ <span class="pag-label-text">Anterior</span></button>';
+    } else {
+        echo '<button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">‹ <span class="pag-label-text">Anterior</span></button>';
+    }
+    echo '<span style="font-size:0.82rem; font-weight:600; color:var(--text-muted); padding: 0 4px;">' . $page . ' / ' . $totalPages . '</span>';
+    if ($page < $totalPages) {
+        $nextPage = $page + 1;
+        echo '<button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/md/tabla-ordenes-anteriores?page=' . $nextPage . $qParam . $pParam . '&sort=' . $sort . '&dir=' . $dir . '&per_page=' . $perPage . '" hx-target="#tabla-historial-completo" hx-swap="outerHTML" hx-include="' . $includeAntMd . '"><span class="pag-label-text">Siguiente</span> ›</button>';
+    } else {
+        echo '<button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;"><span class="pag-label-text">Siguiente</span> ›</button>';
+    }
+    echo '</div></div>';
+});
+
+/**
+ * Helper SSOT: Renderiza el <thead> de Mis Pacientes del médico con ordenamiento dinámico
+ * (mismo patrón/columnas que rcRenderPacientesTablaHeader, incluida la columna "#").
+ */
+function mdRenderPacientesTablaHeader(string $sort = 'fecha', string $dir = 'desc', string $q = ''): string {
+    $qParam = !empty($q) ? '&q=' . urlencode($q) : '';
+
+    $nextDirPaciente = ($sort === 'paciente' && strtolower($dir) === 'asc') ? 'desc' : 'asc';
+    $iconPaciente    = ($sort === 'paciente') ? (strtolower($dir) === 'asc' ? ' ▲' : ' ▼') : '';
+
+    $nextDirFecha    = ($sort === 'fecha' && strtolower($dir) === 'desc') ? 'asc' : 'desc';
+    $iconFecha       = ($sort === 'fecha') ? (strtolower($dir) === 'asc' ? ' ▲' : ' ▼') : '';
+
+    $endpoint = '/laesh/md/tabla-pacientes';
+    $target   = '#tabla-pacientes-medico';
+    $inputId  = '#input-buscar-paciente-medico';
+
+    $thBase = 'position: sticky; top: 0; background: #e0f2fe; color: #003e8c; z-index: 10; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.85rem; font-weight: 700; border-bottom: 1px solid #cbd5e1;';
+
+    return '<tr style="font-size: 0.88rem;">'
+         . '<th style="' . $thBase . ' white-space: normal;">#</th>'
+         . '<th style="' . $thBase . ' cursor: pointer; white-space: normal;" hx-get="' . $endpoint . '?sort=paciente&dir=' . $nextDirPaciente . $qParam . '" hx-target="' . $target . '" hx-swap="outerHTML" hx-include="' . $inputId . '">Paciente <span class="sort-icon">' . $iconPaciente . '</span></th>'
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The `ordenes-anteriores-md-pagination-wrap` ID in the MD file corresponds to `#ordenes-anteriores-pagination-wrap` in RC, indicating that the OOB swap is correctly handled. Now, shifting focus to the structures of `labadmin.php` and `medicos.php` to understand their respective architectures. Initial examination begins with the `labadmin.php` file.
+
+
+Considering laptop/desktop layout, the significant whitespace between the title/subtitle and control elements suggests an opportunity for visual enhancements.  The user's feedback indicates that separators and subtle groupings for selected dates could improve visual clarity, leveraging this unused space. The design needs to be adapted to better utilize the available screen real estate.
+
+
+In the Médico view, the proposed layout organizes controls with the pagination and total on the left, and period grouping, a separator, and search on the right, utilizing available horizontal space effectively. The Recepción screenshot shows the need to integrate pagination and total, along with period controls and search, leveraging the left-hand side's whitespace. The user's marked visual cues emphasize the need for separators and groupings in Recepción.
+
+
+The current layout's right alignment of controls is due to `margin-left: auto; justify-content: flex-end;`. Removing `margin-left: auto` allows the container to breathe or distribute. Two layout options exist: a widened toolbar or a flexible controls container using `flex: 1; justify-content: flex-end;`. Additionally, the paginator's placement and the need for separators are considered for improved visual structure.
+
+
+Examining the "period" control, the desired style includes a grouped appearance with a specific background, border, and padding. The control's expanded form includes date inputs; a compact view is desired for specific selections. Separator elements are present between controls, and their CSS reveals a responsive design for different screen sizes.
+
+The user's comment, "using perhaps the free space on the left", prompts a review of the left-hand layout in larger screen sizes to determine if improved grouping and visual separation are possible within available space. The title elements are observed within a container. The "panel-header-title-wrap" is observed.
+
+
+Examining `labadmin.php` proposes styling for the control container, search input, and pagination wrapper to create a more polished appearance.  Considered is a flexbox layout with specific widths, padding, and subtle visual cues to enhance the control elements. The styling of `.periodo-fechas-activo` is also analyzed for consistency.
+
+The layout in `medicos.php` is noted to allow for a full-width toolbar, due to the `h2` title being on its own row. A `display: flex` with `space-between` and `align-items: center` is proposed for the laptop/desktop view. This arrangement opens potential control layouts on the left.
+
+
+Pagination will anchor to the left side and controls to the right to achieve visual balance and full-width utilization in the Médico view. Considering Recepción, `labadmin.php`, the title's placement can be adapted for large screens; either top or left. The `cms-panel-header`'s layout with and without `margin-left: auto;` or `justify-content: flex-end;` is being considered for the controls container. The separation and spacing requirements for the controls are being determined for various desktop screen resolutions.
+
+
+Analyzing control widths and available screen real estate, a layout calculation reveals the total control width is approximately 880px, with a title width of 260px, totaling 1140px on a 1400px+ screen. This identifies 260px of potential left-hand space for controls. The `margin-left: auto` setting currently pushes controls to the right.
+
+Considering user feedback, the current layout is being reevaluated to incorporate: vertical separators, subtle groupings for selected dates using `.periodo-fechas-activo`, capsule-like containers for pagination and active periods, a comfortable search bar width, and comfortable gaps to leverage the left-hand whitespace. A more robust, flexible layout solution is required, to allow moving the controls to the left. The user's prompt emphasizes utilizing left-hand space for visual improvements in both Médico and Recepción views.
+
+I'm thinking through how to approach this.
+
+
+The user's annotations suggest a layout adjustment prioritizing the left-hand space for controls.  Visual cues imply separators between "Pagination" and "Period", and between "Period" and "Search".  The "Period" section should have a visual indication.
+
+Examining the HTML, the separation is achieved with `<div class="toolbar-separator">` elements. CSS styling is already in place. The `#ordenes-anteriores-pagination-wrap` and `#ordenes-anteriores-md-pagination-wrap` wrapper provides some capsule-like style.
+
+The goal is to increase the space between the controls, potentially moving them to the left to avoid being crammed against the right border.
+
+
+The CSS for grouping and visual separation is being analyzed to implement the suggested visual improvements. The `.periodo-fechas-activo` style, including its background, border, and visual connection to date inputs, is confirmed as the key element for grouping. The `toolbar-separator` class is being leveraged for separating the controls.
+
+
+The search input's width and styling are confirmed for desktop displays. The intention is to utilize flexbox for arranging controls to the left, which can be done by removing the right alignment and leveraging the available space on larger screens in `labadmin.php`. The flexible `medicos.php` header, with `justify-content: space-between` and `width: 100%`, is confirmed as the design's base for utilizing space on the left side. The goal is to move the pagination, total, periods (with dates), separator, and search controls to the left. The Médico approach is preferred.
+
+
+Examining `labadmin.js`, the `manejarCambio()` function handles the date range display based on a select element. The initial page load scenario where the default value is '30d' needs investigation. The function might not be called on initial page load if the default value isn't 'fecha'.
+
+If the default value is not 'fecha', `.periodo-fechas-activo` may not be initialized. The date range should be initialized on page load for the selected default value, or by calling `manejarCambio()` on page load if the initial value is 'fecha'.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `cms-panel-header`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 14.378169974s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 12:11 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `portal.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L2609-2644)</summary>
+
+**Path:** `Unknown file`
+
+```
+.td-center { text-align: center; }
+
+/* Grupo de botones centrado en tabla (línea 580) */
+.btn-group-center { display: flex; gap: 6px; justify-content: center; }
+
+/* Efecto de resaltado para autocompletado en constructor jerárquico */
+@keyframes highlight-flash {
+    0% { background-color: #e0f2fe; box-shadow: 0 0 0 4px #bae6fd; }
+    50% { background-color: #bae6fd; box-shadow: 0 0 0 8px #7dd3fc; }
+    100% { background-color: transparent; box-shadow: 0 0 0 0 transparent; }
+}
+.highlight-flash {
+    animation: highlight-flash 2.5s ease-out forwards;
+}
+
+/* Resalte luminoso al hacer clic en notificaciones */
+@keyframes rowNotifHighlight {
+    0% { background-color: #fef08a !important; box-shadow: inset 0 0 0 2px #eab308, 0 0 12px rgba(234, 179, 8, 0.4); }
+    50% { background-color: #fde047 !important; box-shadow: inset 0 0 0 2px #ca8a04, 0 0 16px rgba(202, 138, 4, 0.6); }
+    100% { background-color: transparent !important; box-shadow: none; }
+}
+.row-notif-highlight {
+    animation: rowNotifHighlight 2.5s ease-in-out forwards;
+    position: relative;
+    z-index: 5;
+}
+
+@keyframes rowSavedHighlight {
+    0% { background-color: #fef08a !important; box-shadow: inset 0 0 0 2px #eab308, 0 0 14px rgba(234, 179, 8, 0.4); }
+    15% { background-color: #fef9c3 !important; box-shadow: inset 0 0 0 2px #ca8a04, 0 0 8px rgba(202, 138, 4, 0.25); }
+    80% { background-color: #fef9c3 !important; box-shadow: inset 0 0 0 1.5px rgba(202, 138, 4, 0.35); }
+    100% { background-color: transparent !important; box-shadow: none; }
+}
+.row-saved-highlight {
+    animation: rowSavedHighlight 10s ease-in-out forwards;
+}
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `portal.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L2739-2775)</summary>
+
+**Path:** `Unknown file`
+
+```
+#tabla-recepcion-anteriores tbody tr:nth-child(even),
+#tabla-pacientes tbody tr:nth-child(even),
+#flat-catalog-table tbody tr:nth-child(even) {
+    background-color: #f1f5f9 !important;
+}
+
+table tbody tr:nth-child(odd),
+.table tbody tr:nth-child(odd),
+#tabla-medico tbody tr:nth-child(odd),
+#tabla-historial-completo tbody tr:nth-child(odd),
+#tabla-pacientes-medico tbody tr:nth-child(odd),
+#tabla-catalogo-medico tbody tr:nth-child(odd),
+#tabla-recepcion tbody tr:nth-child(odd),
+#tabla-recepcion-anteriores tbody tr:nth-child(odd),
+#tabla-pacientes tbody tr:nth-child(odd),
+#flat-catalog-table tbody tr:nth-child(odd) {
+    background-color: #ffffff !important;
+}
+
+/* Encabezados de grilla homologados basados en Catálogo de Estudios */
+#tabla-medico th,
+#tabla-historial-completo th,
+#tabla-pacientes-medico th,
+#tabla-catalogo-medico th,
+#tabla-recepcion th,
+#tabla-recepcion-anteriores th,
+#tabla-pacientes th,
+#flat-catalog-table th {
+    position: sticky;
+    top: 0;
+    background-color: #e0f2fe !important;
+    color: #003e8c !important;
+    font-weight: 700 !important;
+    font-size: 0.85rem !important;
+    border-bottom: 1px solid #cbd5e1 !important;
+}
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The existing CSS is well-organized, prompting the design of classes for a new toolbar feature. Initial structure will utilize a flexbox layout, adjusting the gap between elements and enabling wrapping based on screen size for responsiveness. A media query will be implemented to increase the gap on larger screens, adjusting the layout for improved readability.
+
+
+Classes for pagination and total count are being defined within a container utilizing inline-flex for alignment and spacing. A subtle visual style, including a rounded capsule, light background, and border, will visually group pagination elements. Vertical separators will be included, hidden on smaller screens via a media query.
+
+A separate container handles date-related controls, allowing for an "active" state with a distinct background and border. Within this container, a nested group styles the date range for better visual association using a dashed border.
+
+
+A search input field is being designed for the toolbar, implementing responsive width adjustments based on screen size using media queries. The design includes a transition effect for a smoother visual experience when the width changes. A careful examination of the existing toolbar's design suggests vertical separators and an active state styling for date-related elements. The use of space is being reviewed.
+
+
+Ensuring the pagination wrapper receives the defined class in both initial rendering and HTMX swaps maintains consistency. The existing code suggests modifications in various files, specifically `rc/index.php` and `md/index.php`, where the class is added to the wrapper element used for pagination. It is crucial to examine associated JavaScript files (`labadmin.js` and `medicos.js`) to verify the correct class handling during initial page load and user interactions. This will ensure proper styling is applied across all states.
+
+
+Analyzing JavaScript code in `labadmin.js` and `medicos.js` reveals identical event handlers that manage the display of date range input fields based on a selection.  The function dynamically sets default start and end dates if the input fields are initially empty, calculating the start date as 30 days prior to today and ensuring the end date's minimum is the start date.  The presence of functionally similar code suggests the need for refactoring into a shared utility function to reduce redundancy.
+
+
+Analyzing the provided HTML snippet, the pagination structure includes total record count, a separator, and pagination controls. The number of pages is being calculated based on a division and `ceil` function. A button for the previous page is present, disabled initially. The current page number is displayed with the total pages. A "next" button is conditionally shown depending on the number of total pages.
+
+
+The HTML snippet describes a pagination control with "previous" and "next" buttons, conditional display, and AJAX calls for navigation. The presence of a "period" selector suggests filtering capabilities based on date ranges. This confirms the toolbar's use for navigating and filtering order data.
+
+
+The HTML snippet includes a period selector for filtering, using options for 30 days, 15 days, or a custom date range. Date range inputs are hidden initially and displayed based on the selector's value. AJAX calls are triggered on change of the selector or date inputs, suggesting dynamic updates to the order data table.
+
+
+A date input field for the "end date" is present, utilizing an AJAX call to update the order table. A real-time search input is included, also triggering an AJAX call on input change to update the table dynamically based on user input. The AJAX calls incorporate various filter parameters.
+
+
+The code snippet within `medicos.php` defines a toolbar for previous digital requests, including a total count, pagination controls (previous, current page/total, next), and separators. The pagination logic calculates the total pages and conditionally displays the "next" button. A toolbar-specific class is applied, indicating a distinct visual style for this component.
+
+
+The code implements pagination with "previous" and "next" buttons, styled differently based on availability, indicating navigation through a data set. The presence of AJAX calls suggests dynamic table updates upon pagination actions, triggering new content fetches. The "period" selection suggests filtering by a predetermined time range.
+
+
+The HTML includes a period selector for filtering order data using predefined options (30 days, 15 days) or a custom date range. The `hx-trigger="change"` attribute on the selector triggers AJAX requests to dynamically update the order table. The "Fechas" option reveals date input fields, which also trigger AJAX requests on change, implementing the custom date filtering. This setup indicates a system for dynamically updating a data table via AJAX calls.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `ordenes-anteriores-md-header`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 9.573654798s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 12:11 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `portal.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1609-1634)</summary>
+
+**Path:** `Unknown file`
+
+```
+       muestra ningún control de paginación (Total | ‹1/1›) — mismo criterio
+       ya aplicado a Solicitudes Hoy. El título propio volvió (título reducido
+       "Solicitudes Digitales Anteriores", ver .panel-nueva-orden-title arriba
+       en este mismo archivo) — ya no compite por espacio con la paginación,
+       así que el header queda con solo el buscador, a todo el ancho.
+       Histórico (GAP-MD-12, 2026-09-22/24): el <h2>+<p> original de este
+       header se había quitado por desbordar el viewport junto a paginación+
+       buscador bajo flex-wrap:nowrap — ya no aplica, ver arriba. */
+    #ordenes-anteriores-md-header {
+        flex-wrap: nowrap !important;
+        margin-bottom: 0.5rem !important;
+    }
+    #ordenes-anteriores-md-pagination-wrap {
+        display: none !important;
+    }
+    #ordenes-anteriores-md-search-wrap {
+        flex: 1 1 auto !important;
+        min-width: 0 !important;
+        justify-content: flex-end !important;
+    }
+    #input-buscar-orden-anteriores-md {
+        width: 100% !important;
+        min-width: 0 !important;
+    }
+    /* GAP-MD-11 (2026-09-22, ajustado 2026-09-24): filas de Órdenes Hoy/
+       Anteriores lo más compactas posible para maximizar renglones visibles
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `ordenes-anteriores-pagination-wrap`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 12:11 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Inspecting the code reveals the pagination wrap is set up for out-of-band (OOB) swapping in both `rc/index.php` and `md/index.php` using HTMX. The HTML structures seem to be the targets for the OOB updates. This suggests a mechanism for dynamically updating the pagination controls without full page reloads.
+
+
+The HTMX swap of the pagination wrap preserves the capsule style due to the class being on the replaced div, and the separator is stable because it's outside the wrap. The next step is to examine the JavaScript files to understand how to toggle the `.periodo-fechas-activo` class, specifically starting with `labadmin.js`. The observed code snippet shows a function that modifies display and a class based on a selection, and needs to be analyzed further.
+
+
+Analysis shows that the `.periodo-fechas-activo` class is managed by JavaScript in both `labadmin.js` and `medicos.js`, specifically within a function responding to a selection change. This function controls the display of a date range input and the toggling of the target class. It appears that `ws-client.js` does *not* interact with this class directly. The selection triggers date range visibility and the target class's state.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `portal.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.656289247s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L2759-2775)</summary>
+
+**Path:** `Unknown file`
+
+```
+#tabla-medico th,
+#tabla-historial-completo th,
+#tabla-pacientes-medico th,
+#tabla-catalogo-medico th,
+#tabla-recepcion th,
+#tabla-recepcion-anteriores th,
+#tabla-pacientes th,
+#flat-catalog-table th {
+    position: sticky;
+    top: 0;
+    background-color: #e0f2fe !important;
+    color: #003e8c !important;
+    font-weight: 700 !important;
+    font-size: 0.85rem !important;
+    border-bottom: 1px solid #cbd5e1 !important;
+}
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 12:12 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `labadmin.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L219-279)</summary>
+
+**Path:** `Unknown file`
+
+```
+                            <h3 class="cms-h3" style="margin: 0; font-size: 1.35rem; font-weight: 800; color: #0052B7;">Solicitudes Anteriores</h3>
+                            <p class="txt-muted-4" style="margin: 0.2rem 0 0 0; font-size: 0.85rem;">Histórico de solicitudes registradas en días anteriores.</p>
+                        </div>
+                        
+                        <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; justify-content: flex-end; margin-left: auto;">
+                            <!-- Paginador y Total -->
+                            <div id="ordenes-anteriores-pagination-wrap" style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span id="ordenes-anteriores-total-records" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">Total: <?= (int)($totalOrdenesAnteriores ?? 0) ?></span>
+                                <span style="color: #cbd5e1; display: inline;">|</span>
+                                <div id="ordenes-anteriores-pagination" style="display: flex; gap: 0.25rem; align-items: center;">
+                                    <?php 
+                                        $totPgsAnt = max(1, (int)ceil(($totalOrdenesAnteriores ?? 0) / 25));
+                                    ?>
+                                    <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">‹ Anterior</button>
+                                    <span style="font-size:0.82rem; font-weight:600; color:var(--text-muted); padding: 0 4px;">1 / <?= $totPgsAnt ?></span>
+                                    <?php if ($totPgsAnt > 1): ?>
+                                        <button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/rc/tabla-ordenes-anteriores?page=2&periodo=30d" hx-target="#tabla-recepcion-anteriores" hx-swap="outerHTML" hx-include="#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc">Siguiente ›</button>
+                                    <?php else: ?>
+                                        <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">Siguiente ›</button>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+
+                            <!-- Combo List de Período y Rango de Fechas (Calendario) -->
+                            <div id="ordenes-anteriores-periodo-container" style="display: inline-flex; align-items: center; gap: 0.35rem; flex-wrap: nowrap;">
+                                <label for="select-periodo-anteriores-rc" style="font-size: 0.82rem; font-weight: 600; color: var(--text-muted); white-space: nowrap;">Período:</label>
+                                <select id="select-periodo-anteriores-rc" name="periodo" class="form-select select-sm" style="padding: 4px 10px; font-size: 0.82rem; border-radius: 6px; border: 1px solid var(--border); background: #ffffff; color: var(--text-dark); cursor: pointer;"
+                                        hx-get="/laesh/rc/tabla-ordenes-anteriores"
+                                        hx-target="#tabla-recepcion-anteriores"
+                                        hx-swap="outerHTML"
+                                        hx-include="#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc"
+                                        hx-trigger="change">
+                                    <option value="30d" selected>30 d</option>
+                                    <option value="15d">15 d</option>
+                                    <option value="fecha">Fechas</option>
+                                </select>
+                                <span id="rango-fechas-anteriores-rc" class="d-none" style="display: none; align-items: center; gap: 0.35rem; white-space: nowrap;">
+                                    <input type="date" id="fecha-inicio-anteriores-rc" name="fecha_inicio" class="select-sm form-input" style="padding: 3px 6px; font-size: 0.8rem; border-radius: 6px; border: 1px solid var(--border); width: 130px;" max="<?= date('Y-m-d', strtotime('-1 day')) ?>" title="Fecha inicial" aria-label="Fecha inicial"
+                                           hx-get="/laesh/rc/tabla-ordenes-anteriores"
+                                           hx-target="#tabla-recepcion-anteriores"
+                                           hx-swap="outerHTML"
+                                           hx-include="#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc"
+                                           hx-trigger="change">
+                                    <span class="txt-muted-sm" style="font-size: 0.78rem; color: var(--text-muted);">al</span>
+                                    <input type="date" id="fecha-fin-anteriores-rc" name="fecha_fin" class="select-sm form-input" style="padding: 3px 6px; font-size: 0.8rem; border-radius: 6px; border: 1px solid var(--border); width: 130px;" max="<?= date('Y-m-d', strtotime('-1 day')) ?>" title="Fecha final" aria-label="Fecha final"
+                                           hx-get="/laesh/rc/tabla-ordenes-anteriores"
+                                           hx-target="#tabla-recepcion-anteriores"
+                                           hx-swap="outerHTML"
+                                           hx-include="#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc"
+                                           hx-trigger="change">
+                                </span>
+                            </div>
+
+                            <!-- Buscador en tiempo real -->
+                            <div id="ordenes-anteriores-search-container" style="display: flex; gap: 0.5rem; align-items: center; position:relative; z-index: 100;">
+                                <input type="text" id="input-buscar-orden-anteriores-rc" name="q" class="form-input form-input--bg" autocomplete="off" spellcheck="false" placeholder="🔍 Buscar por nombre..." style="width: 220px;" hx-get="/laesh/rc/tabla-ordenes-anteriores" hx-target="#tabla-recepcion-anteriores" hx-swap="outerHTML" hx-include="#input-buscar-orden-anteriores-rc, #select-periodo-anteriores-rc, #fecha-inicio-anteriores-rc, #fecha-fin-anteriores-rc" hx-trigger="keyup changed delay:250ms, search">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card" aria-live="polite" style="padding: 0; overflow: hidden; border: 1px solid var(--border); border-radius: 8px;">
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The plan is to modify `laesh-swbldi/rc/views/labadmin.php`. Specific UI elements will be added: a wrapper for "anteriores" toolbar items, a pagination capsule, separators, a "periodo" container with a date range group, another separator, and a wider search input. Executing this code modification should incorporate the new UI components.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.131974511s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 12:12 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L404-459)</summary>
+
+**Path:** `Unknown file`
+
+```
+                     paginación+buscador en flex-wrap:nowrap). -->
+                <h2 class="panel-nueva-orden-title">Solicitudes Digitales Anteriores</h2>
+                <div class="cms-panel-header" id="ordenes-anteriores-md-header" style="margin-bottom: 1rem; display: flex; justify-content: flex-end; align-items: center; flex-wrap: wrap; gap: 0.75rem; margin-left: auto;">
+                    <div id="ordenes-anteriores-md-pagination-wrap" style="display: flex; align-items: center; gap: 0.5rem;">
+                        <span id="ordenes-anteriores-md-total-records" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">Total: <?= (int)($totalOrdenesAnteriores ?? 0) ?></span>
+                        <span style="color: #cbd5e1; display: inline;">|</span>
+                        <div style="display: flex; gap: 0.25rem; align-items: center;">
+                            <?php $totPgsAntMd = max(1, (int)ceil(($totalOrdenesAnteriores ?? 0) / 25)); ?>
+                            <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;">‹ <span class="pag-label-text">Anterior</span></button>
+                            <span style="font-size:0.82rem; font-weight:600; color:var(--text-muted); padding: 0 4px;">1 / <?= $totPgsAntMd ?></span>
+                            <?php if ($totPgsAntMd > 1): ?>
+                                <button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/md/tabla-ordenes-anteriores?page=2&periodo=30d" hx-target="#tabla-historial-completo" hx-swap="outerHTML" hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md"><span class="pag-label-text">Siguiente</span> ›</button>
+                            <?php else: ?>
+                                <button type="button" class="btn btn-secondary btn-sm" disabled style="padding: 2px 8px; font-size: 0.8rem; opacity:0.4;"><span class="pag-label-text">Siguiente</span> ›</button>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+
+                    <!-- Combo List de Período y Rango de Fechas (Calendario) -->
+                    <div id="ordenes-anteriores-md-periodo-container" style="display: inline-flex; align-items: center; gap: 0.35rem; flex-wrap: nowrap;">
+                        <label for="select-periodo-anteriores-md" style="font-size: 0.82rem; font-weight: 600; color: var(--text-muted); white-space: nowrap;">Período:</label>
+                        <select id="select-periodo-anteriores-md" name="periodo" class="form-select select-sm" style="padding: 4px 10px; font-size: 0.82rem; border-radius: 6px; border: 1px solid var(--border); background: #ffffff; color: var(--text-dark); cursor: pointer;"
+                                hx-get="/laesh/md/tabla-ordenes-anteriores"
+                                hx-target="#tabla-historial-completo"
+                                hx-swap="outerHTML"
+                                hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md"
+                                hx-trigger="change">
+                            <option value="30d" selected>30 d</option>
+                            <option value="15d">15 d</option>
+                            <option value="fecha">Fechas</option>
+                        </select>
+                        <span id="rango-fechas-anteriores-md" class="d-none" style="display: none; align-items: center; gap: 0.35rem; white-space: nowrap;">
+                            <input type="date" id="fecha-inicio-anteriores-md" name="fecha_inicio" class="select-sm form-input" style="padding: 3px 6px; font-size: 0.8rem; border-radius: 6px; border: 1px solid var(--border); width: 130px;" max="<?= date('Y-m-d', strtotime('-1 day')) ?>" title="Fecha inicial" aria-label="Fecha inicial"
+                                   hx-get="/laesh/md/tabla-ordenes-anteriores"
+                                   hx-target="#tabla-historial-completo"
+                                   hx-swap="outerHTML"
+                                   hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md"
+                                   hx-trigger="change">
+                            <span class="txt-muted-sm" style="font-size: 0.78rem; color: var(--text-muted);">al</span>
+                            <input type="date" id="fecha-fin-anteriores-md" name="fecha_fin" class="select-sm form-input" style="padding: 3px 6px; font-size: 0.8rem; border-radius: 6px; border: 1px solid var(--border); width: 130px;" max="<?= date('Y-m-d', strtotime('-1 day')) ?>" title="Fecha final" aria-label="Fecha final"
+                                   hx-get="/laesh/md/tabla-ordenes-anteriores"
+                                   hx-target="#tabla-historial-completo"
+                                   hx-swap="outerHTML"
+                                   hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md"
+                                   hx-trigger="change">
+                        </span>
+                    </div>
+
+                    <div id="ordenes-anteriores-md-search-wrap" style="display: flex; gap: 0.5rem; align-items: center;">
+                        <input type="text" id="input-buscar-orden-anteriores-md" name="q" class="form-input form-input--bg" autocomplete="off" spellcheck="false" placeholder="🔍 Buscar por folio, paciente..." style="width: 220px;" hx-get="/laesh/md/tabla-ordenes-anteriores" hx-target="#tabla-historial-completo" hx-swap="outerHTML" hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md" hx-trigger="keyup changed delay:250ms, search">
+                    </div>
+                </div>
+                <div class="card" style="padding: 0; overflow: hidden; border: 1px solid var(--border); border-radius: 8px;">
+                    <div class="table-responsive" style="max-height: calc(100vh - 250px); overflow-y: auto; overflow-x: auto; -webkit-overflow-scrolling: touch; width: 100%;">
+                        <table id="tabla-historial-completo" hx-get="/laesh/md/tabla-ordenes-anteriores" hx-target="#tabla-historial-completo" hx-swap="outerHTML" hx-include="#input-buscar-orden-anteriores-md, #select-periodo-anteriores-md, #fecha-inicio-anteriores-md, #fecha-fin-anteriores-md" hx-trigger="refresh, ordenCreada from:body, ordenActualizada from:body">
+                            <thead>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Planning to modify `medicos.php` to enhance the "ordenes anteriores" toolbar on medium-sized screens. The goal is to implement a responsive layout using `ordenes-anteriores-toolbar-md` for horizontal spacing. Additionally, a styled pagination element (`toolbar-pagination-capsule`) will be applied. The right-hand controls will be encapsulated within a flex container.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.186079979s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 12:12 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L534-544)</summary>
+
+**Path:** `Unknown file`
+
+```
+        if (!empty($fechaInicio)) $pParam .= '&fecha_inicio=' . urlencode($fechaInicio);
+        if (!empty($fechaFin)) $pParam .= '&fecha_fin=' . urlencode($fechaFin);
+    }
+    echo '<div id="ordenes-anteriores-pagination-wrap" hx-swap-oob="outerHTML" style="display: flex; align-items: center; gap: 0.5rem;">'
+       . '<span id="ordenes-anteriores-total-records" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">Total: ' . $totalReg . '</span>'
+       . '<span style="color: #cbd5e1; display: inline;">|</span>'
+       . '<div id="ordenes-anteriores-pagination" style="display: flex; gap: 0.25rem; align-items: center;">';
+    if ($page > 1) {
+        $prevPage = $page - 1;
+        echo '<button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/rc/tabla-ordenes-anteriores?page=' . $prevPage . $qParam . $pParam . '&sort=' . $sort . '&dir=' . $dir . '&per_page=' . $perPage . '" hx-target="#tabla-recepcion-anteriores" hx-swap="outerHTML" hx-include="' . $includeAnt . '">‹ Anterior</button>';
+    } else {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 12:13 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L399-409)</summary>
+
+**Path:** `Unknown file`
+
+```
+    if ($periodo === 'fecha') {
+        if (!empty($fechaInicio)) $pParam .= '&fecha_inicio=' . urlencode($fechaInicio);
+        if (!empty($fechaFin)) $pParam .= '&fecha_fin=' . urlencode($fechaFin);
+    }
+    echo '<div id="ordenes-anteriores-md-pagination-wrap" hx-swap-oob="outerHTML" style="display: flex; align-items: center; gap: 0.5rem;">'
+       . '<span id="ordenes-anteriores-md-total-records" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">Total: ' . $totalReg . '</span>'
+       . '<span style="color: #cbd5e1; display: inline;">|</span>'
+       . '<div style="display: flex; gap: 0.25rem; align-items: center;">';
+    if ($page > 1) {
+        $prevPage = $page - 1;
+        echo '<button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.8rem;" hx-get="/laesh/md/tabla-ordenes-anteriores?page=' . $prevPage . $qParam . $pParam . '&sort=' . $sort . '&dir=' . $dir . '&per_page=' . $perPage . '" hx-target="#tabla-historial-completo" hx-swap="outerHTML" hx-include="' . $includeAntMd . '">‹ <span class="pag-label-text">Anterior</span></button>';
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 12:13 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `labadmin.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L479-514)</summary>
+
+**Path:** `Unknown file`
+
+```
+            inputIni.max = ayerStr;
+            inputFin.max = ayerStr;
+
+            function manejarCambio() {
+                if (select.value === 'fecha') {
+                    rango.style.display = 'inline-flex';
+                    rango.classList.remove('d-none');
+
+                    if (!inputFin.value) {
+                        inputFin.value = ayerStr;
+                    }
+                    if (!inputIni.value) {
+                        var dIni = new Date(ayer);
+                        dIni.setDate(dIni.getDate() - 30);
+                        inputIni.value = dIni.toISOString().split('T')[0];
+                    }
+                    inputFin.min = inputIni.value;
+                } else {
+                    rango.style.display = 'none';
+                    rango.classList.add('d-none');
+                    inputIni.value = '';
+                    inputFin.value = '';
+                }
+            }
+
+            select.addEventListener('change', manejarCambio);
+
+            // Poka-Yoke: Al cambiar Fecha Inicio
+            inputIni.addEventListener('change', function() {
+                if (this.value) {
+                    // Si fin está vacío o es menor a inicio, sincronizar al mismo día
+                    if (!inputFin.value || inputFin.value < this.value) {
+                        inputFin.value = this.value;
+                    }
+                    inputFin.min = this.value;
+                }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Initial assessment suggests the need to modify a JavaScript file related to administrative functions within a web asset. The goal appears to be dynamically controlling the visibility of a date-range selection based on a user's choice. Adding a container variable, and conditionally modifying its class based on the selected value will provide the needed dynamic visibility. Adding an initial trigger ensures the correct state upon page load.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.190357967s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 12:13 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `medicos.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L347-374)</summary>
+
+**Path:** `Unknown file`
+
+```
+            inputFin.max = ayerStr;
+
+            function manejarCambio() {
+                if (select.value === 'fecha') {
+                    rango.style.display = 'inline-flex';
+                    rango.classList.remove('d-none');
+
+                    if (!inputFin.value) {
+                        inputFin.value = ayerStr;
+                    }
+                    if (!inputIni.value) {
+                        var dIni = new Date(ayer);
+                        dIni.setDate(dIni.getDate() - 30);
+                        inputIni.value = dIni.toISOString().split('T')[0];
+                    }
+                    inputFin.min = inputIni.value;
+                } else {
+                    rango.style.display = 'none';
+                    rango.classList.add('d-none');
+                    inputIni.value = '';
+                    inputFin.value = '';
+                }
+            }
+
+            select.addEventListener('change', manejarCambio);
+
+            // Poka-Yoke: Al cambiar Fecha Inicio
+            inputIni.addEventListener('change', function() {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 12:13 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 12:13 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 27 Sept 2026, 12:14 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Added elegant vertical separators to the toolbar. These separators, denoted by the `.toolbar-separator` class, are strategically placed between the Paginador/Total capsule and the Período container, and also between the Período container and the Buscador. The separators are hidden on smaller screens (<=767px) to optimize the layout where controls stack.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.087249065s
 - **Model:** Gemini 3.8 Flash (High)
 </details>
 
