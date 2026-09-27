@@ -7,9 +7,9 @@
 | **Trajectory ID** | `aa27873b-73b2-40ff-b8fd-953f98e5cc37` |
 | **Cascade ID** | `707376e8-5501-46d1-bf86-a189f5b11f9d` |
 | **Type** | Agent Conversation |
-| **Total Steps** | 5916 |
+| **Total Steps** | 8169 |
 | **Started** | 21 Sept 2026, 3:55 pm |
-| **Completed** | 25 Sept 2026, 7:57 am |
+| **Completed** | 26 Sept 2026, 7:30 pm |
 
 ---
 
@@ -6889,3034 +6889,1362 @@
 
 ### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Sept 2026, 4:07 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
 
 ---
 
 ### Execution Error
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Sept 2026, 4:07 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Sept 2026, 4:07 pm
 
 ---
 
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Sept 2026, 4:07 pm
 
 ---
 
-## Agent Response
+### Code Edit
 
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1329-1489)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-    // Acción al seleccionar un estudio
-    function selectEstudio(estudio) {
-        if (!estudio) return;
-
-        // Cerrar dropdowns de resultados
-        document.querySelectorAll('.header-search-results').forEach(function(r) {
-            r.style.display = 'none';
-            r.innerHTML = '';
-        });
-
-        // 1. Desplazarse a la sección #especialidades
-        var secEspecialidades = document.getElementById('especialidades');
-        if (secEspecialidades) {
-            var navHeight = 90;
-            var secTop = secEspecialidades.getBoundingClientRect().top + window.pageYOffset - navHeight;
-            window.scrollTo({ top: secTop, behavior: 'smooth' });
-        }
-
-        // 2. Buscar si el estudio ya está en alguno de los abanicos del DOM
-        var targetItem = null;
-        var claveTarget = String(estudio.c || '').trim();
-        var nombreTarget = normalizeStr(estudio.n || '');
-
-        if (claveTarget) {
-            targetItem = document.querySelector('.precio-cat-item[data-clave="' + claveTarget + '"]');
-        }
-
-        if (!targetItem && nombreTarget) {
-            var items = document.querySelectorAll('.precio-cat-item');
-            for (var i = 0; i < items.length; i++) {
-                var nomEl = items[i].querySelector('.precio-cat-nombre');
-                if (nomEl && normalizeStr(nomEl.textContent) === nombreTarget) {
-                    targetItem = items[i];
-                    break;
-                }
-            }
-        }
-
-        if (targetItem) {
-            // 3a. El estudio YA ESTÁ en los abanicos publicados:
-            // Abrir el acordeón que lo contiene si está cerrado
-            var parentBody = targetItem.closest('.orden-acc-body');
-            if (parentBody && parentBody.classList.contains('collapsed')) {
-                parentBody.classList.remove('collapsed');
-                var accId = parentBody.getAttribute('id');
-                if (accId) {
-                    var chevron = document.getElementById('arr-' + accId);
-                    if (chevron) chevron.classList.add('chevron-open');
-                }
-            }
-
-            // Scroll suave centrado hacia el estudio, animación luminosa y apertura automática de detalle
-            setTimeout(function() {
-                targetItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                targetItem.classList.remove('row-notif-highlight');
-                void targetItem.offsetWidth; // Forzar reflow CSS
-                targetItem.classList.add('row-notif-highlight');
-
-                // Abrir automáticamente la ventana de detalle del estudio
-                setTimeout(function() {
-                    var plusBtn = targetItem.querySelector('.precio-info-btn');
-                    if (plusBtn) plusBtn.click();
-                }, 400);
-
-                setTimeout(function() {
-                    targetItem.classList.remove('row-notif-highlight');
-                }, 3500);
-            }, 350);
-        } else {
-            // 3b. El estudio NO está en los abanicos publicados:
-            // Insertar abanico "Mis resultados de búsqueda" al inicio de la sección
-            var accResultados = getOrCreateSearchResultsAccordion();
-            if (!accResultados) return;
-
-            var accBody = accResultados.querySelector('.orden-acc-body');
-            if (!accBody) return;
-
-            // Asegurar que el abanico "Mis resultados de búsqueda" esté abierto
-            accBody.classList.remove('collapsed');
-            var accChevron = document.getElementById('arr-cg-mis-resultados');
-            if (accChevron) accChevron.classList.add('chevron-open');
-
-            // Determinar categoría para agrupar o mostrar en la ficha
-            var catNombre = (estudio.cat || 'Estudios de Laboratorio').trim();
-
-            // Buscar si ya existe una ficha (.orden-cat) para esta categoría dentro de este abanico
-            var catCards = accBody.querySelectorAll('.orden-cat');
-            var targetCatCard = null;
-            for (var c = 0; c < catCards.length; c++) {
-                var hdr = catCards[c].querySelector('.orden-cat-hdr');
-                if (hdr && hdr.textContent.trim().toLowerCase() === catNombre.toLowerCase()) {
-                    targetCatCard = catCards[c];
-                    break;
-                }
-            }
-
-            if (!targetCatCard) {
-                targetCatCard = document.createElement('div');
-                targetCatCard.className = 'orden-cat';
-                targetCatCard.innerHTML =
-                    '<div class="orden-cat-hdr">' + escapeHtml(catNombre) + '</div>' +
-                    '<div class="orden-cat-body"></div>';
-                accBody.appendChild(targetCatCard);
-            }
-
-            var cardBody = targetCatCard.querySelector('.orden-cat-body');
-
-            // Crear el elemento de la ficha .precio-cat-item con todas las propiedades
-            var nuevoItem = document.createElement('div');
-            nuevoItem.className = 'precio-cat-item';
-            nuevoItem.setAttribute('data-clave', estudio.c || '');
-            nuevoItem.setAttribute('data-tiempo', estudio.t || '');
-            nuevoItem.setAttribute('data-muestra', estudio.m || '');
-            nuevoItem.setAttribute('data-contenedor', estudio.con || '');
-            nuevoItem.setAttribute('data-pruebas', estudio.pi || '');
-            nuevoItem.setAttribute('data-preparacion', estudio.p || '');
-
-            var nombreSpan = document.createElement('span');
-            nombreSpan.className = 'precio-cat-nombre';
-            nombreSpan.textContent = estudio.n || '';
-            nuevoItem.appendChild(nombreSpan);
-
-            cardBody.appendChild(nuevoItem);
-
-            // Inyectar el botón "+" y vincular el modal de detalle
-            if (typeof window._laeshAttachInfoButton === 'function') {
-                window._laeshAttachInfoButton(nuevoItem);
-            }
-
-            // Scroll suave hacia la nueva ficha, resaltado luminoso y apertura automática de detalle
-            setTimeout(function() {
-                nuevoItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                nuevoItem.classList.remove('row-notif-highlight');
-                void nuevoItem.offsetWidth;
-                nuevoItem.classList.add('row-notif-highlight');
-
-                // Abrir automáticamente la ventana de detalle del estudio
-                setTimeout(function() {
-                    var plusBtn = nuevoItem.querySelector('.precio-info-btn');
-                    if (plusBtn) plusBtn.click();
-                }, 400);
-
-                setTimeout(function() {
-                    nuevoItem.classList.remove('row-notif-highlight');
-                }, 3500);
-            }, 350);
-        }
-    }
-
-    // Vincular instancia de input con su caja de resultados
-    function bindSearchBox(inputId, resultsId, clearBtn) {
-        var input = document.getElementById(inputId);
-        var resultsBox = document.getElementById(resultsId);
-        if (!input || !resultsBox) return;
-
-        var currentResults = [];
-        var activeIndex = -1;
-
-        function renderResults(list) {
-            currentResults = list;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1019-1169)</summary>
-
-**Path:** `Unknown file`
-
-```
-            tip.style.top  = top + 'px';
-            tip.style.left = lft + 'px';
-        }
-
-        function showTip(btn, nombre, categoria, d) {
-            cancelClose();
-            lastTipOpenMs = Date.now();
-            tip.querySelector('.pit-nombre').textContent = nombre;
-
-            var renderBoxValue = function(val) {
-                var cleanVal = (val || '').toString().trim();
-                if (!cleanVal || cleanVal === '—') cleanVal = 'Consultar en LAESH';
-                return '<div class="pit-prueba-item">' + cleanVal + '</div>';
-            };
-
-            // 1. Pruebas Incluidas
-            var pruebas = d ? (d[5] || '').toString().trim() : '';
-            var pruebasEl = tip.querySelector('.pit-pruebas');
-            var pruebasSec = tip.querySelector('.pit-sec-pruebas');
-            var esNA = /^n\/?a$/i.test(pruebas);
-
-            if (esNA) {
-                // Si trae NA o N/A, ocultar ambos renglones (label y valor)
-                if (pruebasSec) pruebasSec.style.display = 'none';
-                if (pruebasEl) pruebasEl.innerHTML = '';
-            } else if (pruebas !== '') {
-                var items = pruebas.split(/[,;\n]+/).map(p => p.trim()).filter(p => p);
-                if (items.length > 1) {
-                    pruebasEl.classList.add('pit-pruebas--grid');
-                    pruebasEl.innerHTML = items.map(p => '<div class="pit-prueba-item">' + p + '</div>').join('');
-                } else if (items.length === 1) {
-                    pruebasEl.classList.remove('pit-pruebas--grid');
-                    pruebasEl.innerHTML = '<div class="pit-prueba-item">' + items[0] + '</div>';
-                } else {
-                    pruebasEl.classList.remove('pit-pruebas--grid');
-                    pruebasEl.innerHTML = renderBoxValue(pruebas);
-                }
-                if (pruebasSec) pruebasSec.style.display = 'flex';
-            } else {
-                pruebasEl.classList.remove('pit-pruebas--grid');
-                pruebasEl.innerHTML = renderBoxValue('Consultar en LAESH');
-                if (pruebasSec) pruebasSec.style.display = 'flex';
-            }
-
-            // 2. Indicaciones (Preparación)
-            tip.querySelector('.pit-prep').innerHTML       = renderBoxValue(d ? d[3] : '');
-
-            // 3. Tipo de Muestra
-            tip.querySelector('.pit-muestra').innerHTML    = renderBoxValue(d ? d[2] : '');
-
-            // 4. Contenedor
-            tip.querySelector('.pit-contenedor').innerHTML = renderBoxValue(d ? d[4] : '');
-
-            // 5. Tiempo de Entrega
-            tip.querySelector('.pit-tiempo').innerHTML     = renderBoxValue(d ? d[1] : '');
-
-            // 6. Clave
-            tip.querySelector('.pit-clave').innerHTML      = renderBoxValue(d ? d[0] : '');
-
-            // 7. Área de Proceso (Categoría)
-            tip.querySelector('.pit-cat').innerHTML        = renderBoxValue(categoria);
-
-            tip._activeBtn = btn;
-            tip.classList.add('pit-visible');
-            requestAnimationFrame(function() { posTip(btn); });
-        }
-
-        // ── Eventos del tooltip ───────────────────────────────────────────────
-        function handleCloseClick(e) {
-            e.stopPropagation();
-            if (e.cancelable) e.preventDefault();
-            hideTip();
-        }
-        var closeBtn = tip.querySelector('.pit-close');
-        closeBtn.addEventListener('click', handleCloseClick);
-        closeBtn.addEventListener('touchend', handleCloseClick);
-
-        // Desktop: mantener abierto mientras el cursor esté sobre el tooltip
-        tip.addEventListener('mouseenter', function() { if (isRealMouse()) cancelClose(); });
-        tip.addEventListener('mouseleave', function() { if (isRealMouse()) scheduleClose(); });
-
-        // Cerrar al tocar/hacer clic fuera (desktop y mobile: compatible con iOS Safari y Chrome)
-        function handleOutsideClick(e) {
-            if (tip.classList.contains('pit-visible')) {
-                // Guard: Si se acaba de abrir (hace menos de 450ms), no cerrar por eventos residuales de tap/click
-                if (Date.now() - lastTipOpenMs < 450) return;
-                if (!tip.contains(e.target) && !e.target.closest('.precio-info-btn')) {
-                    hideTip();
-                }
-            }
-        }
-        document.addEventListener('click', handleOutsideClick);
-        document.addEventListener('touchend', handleOutsideClick);
-
-            // Exponer función de inyección de botón "+" para items estáticos y dinámicos
-            function attachInfoButton(item) {
-                if (!item || item.querySelector('.precio-info-btn')) return;
-                var nombreEl = item.querySelector('.precio-cat-nombre');
-                if (!nombreEl) return;
-                var nombre   = nombreEl.textContent.trim();
-
-                var d = [
-                    item.getAttribute('data-clave') || '—',
-                    item.getAttribute('data-tiempo') || 'Consultar en LAESH',
-                    item.getAttribute('data-muestra') || 'Consultar en LAESH',
-                    item.getAttribute('data-preparacion') || 'Consultar en LAESH',
-                    item.getAttribute('data-contenedor') || '',
-                    item.getAttribute('data-pruebas') || ''
-                ];
-
-                // Categoría: encabezado .orden-cat-hdr más cercano
-                var catEl    = item.closest('.orden-cat');
-                var categoria = catEl ? (catEl.querySelector('.orden-cat-hdr') ? catEl.querySelector('.orden-cat-hdr').textContent.trim() : '—') : '—';
-
-                var btn = document.createElement('button');
-                btn.type      = 'button';
-                btn.className = 'precio-info-btn';
-                btn.setAttribute('aria-label', 'Detalles: ' + nombre);
-                btn.innerHTML =
-                    '<svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">' +
-                        '<line x1="5" y1="1" x2="5" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>' +
-                        '<line x1="1" y1="5" x2="9" y2="5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>' +
-                    '</svg>';
-                item.appendChild(btn);
-
-                // Desktop (mouse real): hover abre/cierra con margen de tiempo
-                btn.addEventListener('mouseenter', function() {
-                    if (!isRealMouse()) return;
-                    showTip(btn, nombre, categoria, d);
-                });
-                btn.addEventListener('mouseleave', function() {
-                    if (!isRealMouse()) return;
-                    scheduleClose();   // da 280 ms para cruzar el gap hacia el tooltip
-                });
-
-                // Click (desktop y mobile): abrir/togglear tooltip
-                btn.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    if (tip.classList.contains('pit-visible') && tip._activeBtn === btn) {
-                        hideTip();
-                    } else {
-                        showTip(btn, nombre, categoria, d);
-                    }
-                });
-            }
-
-            window._laeshAttachInfoButton = attachInfoButton;
-            window._laeshShowEstudioTip   = showTip;
-
-            // Inyectar en elementos estáticos ya presentes en el DOM
-            document.querySelectorAll('.precio-cat-item').forEach(function(item) {
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L974-1024)</summary>
-
-**Path:** `Unknown file`
-
-```
-            return window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-        }
-
-        var lastTipOpenMs = 0;
-        function cancelClose() { clearTimeout(closeTimer); }
-        function scheduleClose() {
-            if (!isRealMouse()) return; // En móviles/táctiles NUNCA cerrar por timeout
-            cancelClose();
-            closeTimer = setTimeout(hideTip, CLOSE_DELAY);
-        }
-
-        function hideTip() {
-            cancelClose();
-            tip.classList.remove('pit-visible');
-            tip._activeBtn = null;
-        }
-
-        function posTip(btn) {
-            var r   = btn.getBoundingClientRect();
-            var tw  = tip.offsetWidth  || 320;
-            var th  = tip.offsetHeight || 250;
-            var vw  = window.innerWidth;
-            var vh  = window.innerHeight;
-
-            var top;
-            if (vw <= 640) {
-                // En móviles: si cabe debajo del botón lo pone debajo, de lo contrario arriba, o centrado si no cabe
-                if (r.bottom + th + 10 < vh) {
-                    top = r.bottom + 10;
-                } else if (r.top - th - 10 > 70) {
-                    top = r.top - th - 10;
-                } else {
-                    top = Math.max(75, Math.round((vh - th) / 2));
-                }
-            } else {
-                top = (r.bottom + th + 8 < vh) ? r.bottom + 8 : Math.max(12, r.top - th - 8);
-            }
-
-            var lft;
-            if (vw <= 640) {
-                // En móviles: centrar en el viewport horizontal
-                lft = Math.max(10, Math.round((vw - tw) / 2));
-            } else {
-                lft = Math.min(Math.max(r.left, 12), vw - tw - 12);
-            }
-            tip.style.top  = top + 'px';
-            tip.style.left = lft + 'px';
-        }
-
-        function showTip(btn, nombre, categoria, d) {
-            cancelClose();
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L2019-2079)</summary>
-
-**Path:** `Unknown file`
-
-```
-/* Tooltip flotante */
-.precio-info-tooltip {
-    position: fixed;
-    z-index: 1500; /* por debajo del modal (2000 en style.css) y por encima de navbar (1050) */
-    width: 340px;
-    max-width: calc(100vw - 24px);
-    background: #fff;
-    border: 1.5px solid var(--primary-green);
-    border-radius: 12px;
-    box-shadow: 0 8px 30px rgba(0, 82, 183, 0.18);
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(6px);
-    transition: opacity 0.15s, transform 0.15s;
-    overflow: hidden;
-    font-family: inherit;
-}
-.precio-info-tooltip.pit-visible {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateY(0);
-}
-
-/* Barra de título (verde LAESH) */
-.pit-hdr {
-    background: var(--primary-green);
-    color: #0B1830;
-    padding: 8px 12px 8px 12px;
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 8px;
-}
-.pit-nombre {
-    flex: 1;
-    min-width: 0;
-    font-weight: 700;
-    font-size: 0.78rem;
-    line-height: 1.32;
-    word-break: break-word;
-}
-.pit-close {
-    flex-shrink: 0;
-    background: transparent;
-    border: none;
-    color: #0B1830;
-    font-size: 1.15rem;
-    font-weight: 700;
-    cursor: pointer;
-    line-height: 1;
-    padding: 4px 6px;
-    min-width: 32px;
-    min-height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0.75;
-    margin-top: 1px;
-    transition: opacity 0.1s;
-    touch-action: manipulation;
-    -webkit-tap-highlight-color: transparent;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1479-1549)</summary>
-
-**Path:** `Unknown file`
-
-```
-    // Vincular instancia de input con su caja de resultados
-    function bindSearchBox(inputId, resultsId, clearBtn) {
-        var input = document.getElementById(inputId);
-        var resultsBox = document.getElementById(resultsId);
-        if (!input || !resultsBox) return;
-
-        var currentResults = [];
-        var activeIndex = -1;
-
-        function renderResults(list) {
-            currentResults = list;
-            activeIndex = -1;
-            resultsBox.innerHTML = '';
-
-            if (list.length === 0) {
-                var empty = document.createElement('div');
-                empty.className = 'header-search-empty';
-                empty.textContent = 'No se encontraron estudios coincidentes.';
-                resultsBox.appendChild(empty);
-                resultsBox.style.display = 'block';
-                return;
-            }
-
-            list.forEach(function(est, idx) {
-                var itemEl = document.createElement('div');
-                itemEl.className = 'header-search-item';
-                itemEl.setAttribute('role', 'option');
-                itemEl.setAttribute('data-index', idx);
-
-                var nomEl = document.createElement('div');
-                nomEl.className = 'header-search-item-nombre';
-                nomEl.textContent = est.n;
-                itemEl.appendChild(nomEl);
-
-                var metaEl = document.createElement('div');
-                metaEl.className = 'header-search-item-meta';
-
-                if (est.c) {
-                    var claveSpan = document.createElement('span');
-                    claveSpan.className = 'header-search-item-clave';
-                    claveSpan.textContent = 'Clave: ' + est.c;
-                    metaEl.appendChild(claveSpan);
-                }
-
-                if (est.m) {
-                    var muestraSpan = document.createElement('span');
-                    muestraSpan.className = 'header-search-item-muestra';
-                    muestraSpan.textContent = 'Muestra: ' + est.m;
-                    metaEl.appendChild(muestraSpan);
-                }
-
-                itemEl.appendChild(metaEl);
-
-                itemEl.addEventListener('click', function() {
-                    input.value = est.n;
-                    if (clearBtn) clearBtn.style.display = 'inline-flex';
-                    selectEstudio(est);
-                });
-
-                resultsBox.appendChild(itemEl);
-            });
-
-            resultsBox.style.display = 'block';
-        }
-
-        // Listener de teclado / escritura instantánea
-        input.addEventListener('input', function() {
-            var val = this.value;
-            if (clearBtn) {
-                clearBtn.style.display = val.length > 0 ? 'inline-flex' : 'none';
-            }
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1549-1619)</summary>
-
-**Path:** `Unknown file`
-
-```
-            }
-            if (val.trim().length === 0) {
-                resultsBox.style.display = 'none';
-                resultsBox.innerHTML = '';
-                currentResults = [];
-                return;
-            }
-            var matches = filterEstudios(val);
-            renderResults(matches);
-        });
-
-        // Foco
-        input.addEventListener('focus', function() {
-            if (this.value.trim().length > 0 && currentResults.length > 0) {
-                resultsBox.style.display = 'block';
-            }
-        });
-
-        // Navegación por teclado (Flechas, Enter, Escape)
-        input.addEventListener('keydown', function(e) {
-            var items = resultsBox.querySelectorAll('.header-search-item');
-            if (e.key === 'ArrowDown') {
-                e.preventDefault();
-                if (items.length === 0) return;
-                activeIndex = (activeIndex + 1) % items.length;
-                updateActiveItem(items);
-            } else if (e.key === 'ArrowUp') {
-                e.preventDefault();
-                if (items.length === 0) return;
-                activeIndex = (activeIndex - 1 + items.length) % items.length;
-                updateActiveItem(items);
-            } else if (e.key === 'Enter') {
-                e.preventDefault();
-                if (activeIndex >= 0 && activeIndex < currentResults.length) {
-                    input.value = currentResults[activeIndex].n;
-                    selectEstudio(currentResults[activeIndex]);
-                } else if (currentResults.length > 0) {
-                    input.value = currentResults[0].n;
-                    selectEstudio(currentResults[0]);
-                }
-            } else if (e.key === 'Escape') {
-                resultsBox.style.display = 'none';
-            }
-        });
-
-        function updateActiveItem(items) {
-            items.forEach(function(el, i) {
-                if (i === activeIndex) {
-                    el.classList.add('is-selected');
-                    el.scrollIntoView({ block: 'nearest' });
-                } else {
-                    el.classList.remove('is-selected');
-                }
-            });
-        }
-
-        if (clearBtn) {
-            clearBtn.addEventListener('click', function() {
-                input.value = '';
-                this.style.display = 'none';
-                resultsBox.style.display = 'none';
-                resultsBox.innerHTML = '';
-                input.focus();
-            });
-        }
-    }
-
-    // Inicializar desktop y mobile
-    var clearDesk = document.querySelector('#header-search-wrap-desk .header-search-clear');
-    bindSearchBox('input-buscar-estudio-desk', 'search-results-desk', clearDesk);
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1614-1635)</summary>
-
-**Path:** `Unknown file`
-
-```
-    }
-
-    // Inicializar desktop y mobile
-    var clearDesk = document.querySelector('#header-search-wrap-desk .header-search-clear');
-    bindSearchBox('input-buscar-estudio-desk', 'search-results-desk', clearDesk);
-
-    var clearMob = document.querySelector('#header-search-wrap-mob .header-search-clear');
-    bindSearchBox('input-buscar-estudio-mob', 'search-results-mob', clearMob);
-
-    // Cerrar al tocar o hacer clic fuera
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('.header-search-wrap')) {
-            document.querySelectorAll('.header-search-results').forEach(function(r) {
-                r.style.display = 'none';
-            });
-        }
-    });
-})();
-
-
-
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1279-1329)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-        acc = document.createElement('div');
-        acc.id = 'acc-mis-resultados';
-        acc.className = 'orden-acc orden-acc--search-results';
-
-        acc.innerHTML =
-            '<button type="button" class="orden-acc-hdr" data-acc="cg-mis-resultados">' +
-                '<span class="flex-ic-8">' +
-                    '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">' +
-                        '<circle cx="11" cy="11" r="8"></circle>' +
-                        '<line x1="21" y1="21" x2="16.65" y2="16.65"></line>' +
-                    '</svg>' +
-                    'Mis resultados de búsqueda' +
-                '</span>' +
-                '<svg id="arr-cg-mis-resultados" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="chevron-open">' +
-                    '<polyline points="6 9 12 15 18 9"></polyline>' +
-                '</svg>' +
-            '</button>' +
-            '<div id="cg-mis-resultados" class="orden-acc-body">' +
-            '</div>';
-
-        // Insertar inmediatamente debajo de la nota ("Listas de Estudios disponibles 2026...")
-        // o antes del primer abanico publicado existente
-        if (note && note.nextSibling) {
-            catalogSec.insertBefore(acc, note.nextSibling);
-        } else if (firstAcc) {
-            catalogSec.insertBefore(acc, firstAcc);
-        } else {
-            catalogSec.appendChild(acc);
-        }
-
-        // Vincular toggle del botón del acordeón
-        var hdrBtn = acc.querySelector('.orden-acc-hdr');
-        if (hdrBtn) {
-            hdrBtn.addEventListener('click', function() {
-                if (typeof window._laeshToggleCatAcc === 'function') {
-                    window._laeshToggleCatAcc('cg-mis-resultados');
-                } else {
-                    var body = document.getElementById('cg-mis-resultados');
-                    var chev = document.getElementById('arr-cg-mis-resultados');
-                    if (body) {
-                        var isCol = body.classList.toggle('collapsed');
-                        if (chev) chev.classList.toggle('chevron-open', !isCol);
-                    }
-                }
-            });
-        }
-
-        return acc;
-    }
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L989-1024)</summary>
-
-**Path:** `Unknown file`
-
-```
-        }
-
-        function posTip(btn) {
-            var r   = btn.getBoundingClientRect();
-            var tw  = tip.offsetWidth  || 320;
-            var th  = tip.offsetHeight || 250;
-            var vw  = window.innerWidth;
-            var vh  = window.innerHeight;
-
-            var top;
-            if (vw <= 640) {
-                // En móviles: si cabe debajo del botón lo pone debajo, de lo contrario arriba, o centrado si no cabe
-                if (r.bottom + th + 10 < vh) {
-                    top = r.bottom + 10;
-                } else if (r.top - th - 10 > 70) {
-                    top = r.top - th - 10;
-                } else {
-                    top = Math.max(75, Math.round((vh - th) / 2));
-                }
-            } else {
-                top = (r.bottom + th + 8 < vh) ? r.bottom + 8 : Math.max(12, r.top - th - 8);
-            }
-
-            var lft;
-            if (vw <= 640) {
-                // En móviles: centrar en el viewport horizontal
-                lft = Math.max(10, Math.round((vw - tw) / 2));
-            } else {
-                lft = Math.min(Math.max(r.left, 12), vw - tw - 12);
-            }
-            tip.style.top  = top + 'px';
-            tip.style.left = lft + 'px';
-        }
-
-        function showTip(btn, nombre, categoria, d) {
-            cancelClose();
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1084-1114)</summary>
-
-**Path:** `Unknown file`
-
-```
-        }
-
-        // ── Eventos del tooltip ───────────────────────────────────────────────
-        function handleCloseClick(e) {
-            e.stopPropagation();
-            if (e.cancelable) e.preventDefault();
-            hideTip();
-        }
-        var closeBtn = tip.querySelector('.pit-close');
-        closeBtn.addEventListener('click', handleCloseClick);
-        closeBtn.addEventListener('touchend', handleCloseClick);
-
-        // Desktop: mantener abierto mientras el cursor esté sobre el tooltip
-        tip.addEventListener('mouseenter', function() { if (isRealMouse()) cancelClose(); });
-        tip.addEventListener('mouseleave', function() { if (isRealMouse()) scheduleClose(); });
-
-        // Cerrar al tocar/hacer clic fuera (desktop y mobile: compatible con iOS Safari y Chrome)
-        function handleOutsideClick(e) {
-            if (tip.classList.contains('pit-visible')) {
-                // Guard: Si se acaba de abrir (hace menos de 450ms), no cerrar por eventos residuales de tap/click
-                if (Date.now() - lastTipOpenMs < 450) return;
-                if (!tip.contains(e.target) && !e.target.closest('.precio-info-btn')) {
-                    hideTip();
-                }
-            }
-        }
-        document.addEventListener('click', handleOutsideClick);
-        document.addEventListener('touchend', handleOutsideClick);
-
-            // Exponer función de inyección de botón "+" para items estáticos y dinámicos
-            function attachInfoButton(item) {
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1329-1477)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-    // Acción al seleccionar un estudio
-    function selectEstudio(estudio) {
-        if (!estudio) return;
-
-        // Cerrar dropdowns de resultados
-        document.querySelectorAll('.header-search-results').forEach(function(r) {
-            r.style.display = 'none';
-            r.innerHTML = '';
-        });
-
-        // 1. Desplazarse a la sección #especialidades
-        var secEspecialidades = document.getElementById('especialidades');
-        if (secEspecialidades) {
-            var navHeight = 90;
-            var secTop = secEspecialidades.getBoundingClientRect().top + window.pageYOffset - navHeight;
-            window.scrollTo({ top: secTop, behavior: 'smooth' });
-        }
-
-        // 2. Buscar si el estudio ya está en alguno de los abanicos del DOM
-        var targetItem = null;
-        var claveTarget = String(estudio.c || '').trim();
-        var nombreTarget = normalizeStr(estudio.n || '');
-
-        if (claveTarget) {
-            targetItem = document.querySelector('.precio-cat-item[data-clave="' + claveTarget + '"]');
-        }
-
-        if (!targetItem && nombreTarget) {
-            var items = document.querySelectorAll('.precio-cat-item');
-            for (var i = 0; i < items.length; i++) {
-                var nomEl = items[i].querySelector('.precio-cat-nombre');
-                if (nomEl && normalizeStr(nomEl.textContent) === nombreTarget) {
-                    targetItem = items[i];
-                    break;
-                }
-            }
-        }
-
-        if (targetItem) {
-            // 3a. El estudio YA ESTÁ en los abanicos publicados:
-            // Abrir el acordeón que lo contiene si está cerrado
-            var parentBody = targetItem.closest('.orden-acc-body');
-            if (parentBody && parentBody.classList.contains('collapsed')) {
-                parentBody.classList.remove('collapsed');
-                var accId = parentBody.getAttribute('id');
-                if (accId) {
-                    var chevron = document.getElementById('arr-' + accId);
-                    if (chevron) chevron.classList.add('chevron-open');
-                }
-            }
-
-            // Scroll suave centrado hacia el estudio, animación luminosa y apertura automática de detalle
-            setTimeout(function() {
-                targetItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                targetItem.classList.remove('row-notif-highlight');
-                void targetItem.offsetWidth; // Forzar reflow CSS
-                targetItem.classList.add('row-notif-highlight');
-
-                // Abrir automáticamente la ventana de detalle del estudio
-                setTimeout(function() {
-                    var plusBtn = targetItem.querySelector('.precio-info-btn');
-                    if (plusBtn) plusBtn.click();
-                }, 400);
-
-                setTimeout(function() {
-                    targetItem.classList.remove('row-notif-highlight');
-                }, 3500);
-            }, 350);
-        } else {
-            // 3b. El estudio NO está en los abanicos publicados:
-            // Insertar abanico "Mis resultados de búsqueda" al inicio de la sección
-            var accResultados = getOrCreateSearchResultsAccordion();
-            if (!accResultados) return;
-
-            var accBody = accResultados.querySelector('.orden-acc-body');
-            if (!accBody) return;
-
-            // Asegurar que el abanico "Mis resultados de búsqueda" esté abierto
-            accBody.classList.remove('collapsed');
-            var accChevron = document.getElementById('arr-cg-mis-resultados');
-            if (accChevron) accChevron.classList.add('chevron-open');
-
-            // Determinar categoría para agrupar o mostrar en la ficha
-            var catNombre = (estudio.cat || 'Estudios de Laboratorio').trim();
-
-            // Buscar si ya existe una ficha (.orden-cat) para esta categoría dentro de este abanico
-            var catCards = accBody.querySelectorAll('.orden-cat');
-            var targetCatCard = null;
-            for (var c = 0; c < catCards.length; c++) {
-                var hdr = catCards[c].querySelector('.orden-cat-hdr');
-                if (hdr && hdr.textContent.trim().toLowerCase() === catNombre.toLowerCase()) {
-                    targetCatCard = catCards[c];
-                    break;
-                }
-            }
-
-            if (!targetCatCard) {
-                targetCatCard = document.createElement('div');
-                targetCatCard.className = 'orden-cat';
-                targetCatCard.innerHTML =
-                    '<div class="orden-cat-hdr">' + escapeHtml(catNombre) + '</div>' +
-                    '<div class="orden-cat-body"></div>';
-                accBody.appendChild(targetCatCard);
-            }
-
-            var cardBody = targetCatCard.querySelector('.orden-cat-body');
-
-            // Crear el elemento de la ficha .precio-cat-item con todas las propiedades
-            var nuevoItem = document.createElement('div');
-            nuevoItem.className = 'precio-cat-item';
-            nuevoItem.setAttribute('data-clave', estudio.c || '');
-            nuevoItem.setAttribute('data-tiempo', estudio.t || '');
-            nuevoItem.setAttribute('data-muestra', estudio.m || '');
-            nuevoItem.setAttribute('data-contenedor', estudio.con || '');
-            nuevoItem.setAttribute('data-pruebas', estudio.pi || '');
-            nuevoItem.setAttribute('data-preparacion', estudio.p || '');
-
-            var nombreSpan = document.createElement('span');
-            nombreSpan.className = 'precio-cat-nombre';
-            nombreSpan.textContent = estudio.n || '';
-            nuevoItem.appendChild(nombreSpan);
-
-            cardBody.appendChild(nuevoItem);
-
-            // Inyectar el botón "+" y vincular el modal de detalle
-            if (typeof window._laeshAttachInfoButton === 'function') {
-                window._laeshAttachInfoButton(nuevoItem);
-            }
-
-            // Scroll suave hacia la nueva ficha, resaltado luminoso y apertura automática de detalle
-            setTimeout(function() {
-                nuevoItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                nuevoItem.classList.remove('row-notif-highlight');
-                void nuevoItem.offsetWidth;
-                nuevoItem.classList.add('row-notif-highlight');
-
-                // Abrir automáticamente la ventana de detalle del estudio
-                setTimeout(function() {
-                    var plusBtn = nuevoItem.querySelector('.precio-info-btn');
-                    if (plusBtn) plusBtn.click();
-                }, 400);
-
-                setTimeout(function() {
-                    nuevoItem.classList.remove('row-notif-highlight');
-                }, 3500);
-            }, 350);
-        }
-    }
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1154-1189)</summary>
-
-**Path:** `Unknown file`
-
-```
-                // Click (desktop y mobile): abrir/togglear tooltip
-                btn.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    if (tip.classList.contains('pit-visible') && tip._activeBtn === btn) {
-                        hideTip();
-                    } else {
-                        showTip(btn, nombre, categoria, d);
-                    }
-                });
-            }
-
-            window._laeshAttachInfoButton = attachInfoButton;
-            window._laeshShowEstudioTip   = showTip;
-
-            // Inyectar en elementos estáticos ya presentes en el DOM
-            document.querySelectorAll('.precio-cat-item').forEach(function(item) {
-                attachInfoButton(item);
-            });
-        })();
-    });
-
-
-// ── Descripción expandible en tarjetas de promoción (Mejora C 2026-09-08) ──
-(function () {
-    document.addEventListener('click', function (e) {
-        var btn = e.target.closest('.btn-rte-expand');
-        if (!btn) return;
-        var desc = btn.previousElementSibling;
-        if (!desc || !desc.classList.contains('rte-desc--expandable')) return;
-        var expanded = desc.classList.toggle('is-expanded');
-        btn.setAttribute('aria-expanded', expanded);
-        btn.textContent = expanded ? 'Ver menos ↑' : 'Ver más ↓';
-    });
-}());
-
-// ══════════════════════════════════════════════════════════════════════════
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L954-999)</summary>
-
-**Path:** `Unknown file`
-
-```
-                    '<div class="pit-sec-title">➤ Clave</div>' +
-                    '<div class="pit-sec-box pit-clave"></div>' +
-                '</div>' +
-                '<div class="pit-sec pit-sec-tiempo">' +
-                    '<div class="pit-sec-title">➤ Tiempo de entrega</div>' +
-                    '<div class="pit-sec-box pit-tiempo"></div>' +
-                '</div>' +
-                '<div class="pit-sec pit-sec-cat">' +
-                    '<div class="pit-sec-title">➤ Área de proceso</div>' +
-                    '<div class="pit-sec-box pit-cat"></div>' +
-                '</div>' +
-            '</div>';
-        document.body.appendChild(tip);
-
-        // ── Timer compartido de cierre ─────────────────────────────────────────
-        var closeTimer  = null;
-        var CLOSE_DELAY = 280;
-
-        // Detección robusta de ratón físico vs pantalla táctil
-        function isRealMouse() {
-            return window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-        }
-
-        var lastTipOpenMs = 0;
-        function cancelClose() { clearTimeout(closeTimer); }
-        function scheduleClose() {
-            if (!isRealMouse()) return; // En móviles/táctiles NUNCA cerrar por timeout
-            cancelClose();
-            closeTimer = setTimeout(hideTip, CLOSE_DELAY);
-        }
-
-        function hideTip() {
-            cancelClose();
-            tip.classList.remove('pit-visible');
-            tip._activeBtn = null;
-        }
-
-        function posTip(btn) {
-            var r   = btn.getBoundingClientRect();
-            var tw  = tip.offsetWidth  || 320;
-            var th  = tip.offsetHeight || 250;
-            var vw  = window.innerWidth;
-            var vh  = window.innerHeight;
-
-            var top;
-            if (vw <= 640) {
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1009-1039)</summary>
-
-**Path:** `Unknown file`
-
-```
-                top = (r.bottom + th + 8 < vh) ? r.bottom + 8 : Math.max(12, r.top - th - 8);
-            }
-
-            var lft;
-            if (vw <= 640) {
-                // En móviles: centrar en el viewport horizontal
-                lft = Math.max(10, Math.round((vw - tw) / 2));
-            } else {
-                lft = Math.min(Math.max(r.left, 12), vw - tw - 12);
-            }
-            tip.style.top  = top + 'px';
-            tip.style.left = lft + 'px';
-        }
-
-        function showTip(btn, nombre, categoria, d) {
-            cancelClose();
-            lastTipOpenMs = Date.now();
-            tip.querySelector('.pit-nombre').textContent = nombre;
-
-            var renderBoxValue = function(val) {
-                var cleanVal = (val || '').toString().trim();
-                if (!cleanVal || cleanVal === '—') cleanVal = 'Consultar en LAESH';
-                return '<div class="pit-prueba-item">' + cleanVal + '</div>';
-            };
-
-            // 1. Pruebas Incluidas
-            var pruebas = d ? (d[5] || '').toString().trim() : '';
-            var pruebasEl = tip.querySelector('.pit-pruebas');
-            var pruebasSec = tip.querySelector('.pit-sec-pruebas');
-            var esNA = /^n\/?a$/i.test(pruebas);
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L2079-2159)</summary>
-
-**Path:** `Unknown file`
-
-```
-    -webkit-tap-highlight-color: transparent;
-}
-.pit-close:hover { opacity: 1; }
-
-/* Cuerpo del tooltip — Rejilla Híbrida Global (Desktop & Mobile) */
-.pit-body {
-    padding: 7px 11px 9px;
-    background: #ffffff;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 10px;
-    row-gap: 3px;
-    max-height: min(72vh, 420px);
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-}
-
-/* Secciones a ancho completo */
-.pit-sec {
-    grid-column: 1 / -1;
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
-}
-
-/* Secciones emparejadas en 2 columnas */
-.pit-sec-muestra {
-    grid-column: 1 / 2;
-    align-self: start;
-}
-.pit-sec-contenedor {
-    grid-column: 2 / 3;
-    align-self: start;
-}
-.pit-sec-clave {
-    grid-column: 1 / 2;
-    align-self: start;
-}
-.pit-sec-tiempo {
-    grid-column: 2 / 3;
-    align-self: start;
-}
-
-.pit-sec-title {
-    font-size: 0.73rem;
-    font-weight: 700;
-    color: #1e293b;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    margin: 0;
-    line-height: 1.25;
-}
-
-.pit-sec-box {
-    background: transparent;
-    border: none;
-    border-radius: 0;
-    padding: 0 0 0 10px;
-    margin: 0;
-    font-size: 0.71rem;
-    color: #0052B7;
-    line-height: 1.25;
-}
-
-/* Sub-grid de 2 columnas para múltiples pruebas incluidas */
-.pit-pruebas--grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: 8px;
-    row-gap: 2px;
-    padding-left: 10px;
-}
-
-.pit-prueba-item {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    color: #0052B7;
-    font-size: 0.71rem;
-    font-weight: 500;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L2159-2209)</summary>
-
-**Path:** `Unknown file`
-
-```
-    font-weight: 500;
-    line-height: 1.25;
-    word-break: break-word;
-}
-
-.pit-prueba-item::before {
-    content: '•';
-    display: inline-block;
-    color: #0052B7;
-    font-size: 0.85rem;
-    font-weight: 700;
-    flex-shrink: 0;
-}
-
-/* ── Ajustes Ergonómicos Específicos para Móviles (≤ 640px) ── */
-@media (max-width: 640px) {
-    .precio-info-tooltip {
-        width: calc(100vw - 32px);
-        max-width: 375px;
-        box-shadow: 0 8px 30px rgba(0, 82, 183, 0.22);
-    }
-    .pit-hdr {
-        padding: 7px 10px 7px 12px;
-    }
-    .pit-nombre {
-        font-size: 0.76rem;
-        line-height: 1.28;
-    }
-    .pit-body {
-        padding: 6px 10px 8px;
-        column-gap: 8px;
-        row-gap: 2px;
-        max-height: min(72vh, 410px);
-    }
-    .pit-sec {
-        gap: 0;
-        margin-bottom: 1px;
-    }
-    .pit-sec-title {
-        font-size: 0.72rem;
-        line-height: 1.2;
-    }
-    .pit-sec-box {
-        font-size: 0.70rem;
-        padding-left: 10px;
-        line-height: 1.2;
-    }
-    .pit-prueba-item {
-        font-size: 0.70rem;
-        line-height: 1.2;
-    }
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1369-1414)</summary>
-
-**Path:** `Unknown file`
-
-```
-            // 3a. El estudio YA ESTÁ en los abanicos publicados:
-            // Abrir el acordeón que lo contiene si está cerrado
-            var parentBody = targetItem.closest('.orden-acc-body');
-            if (parentBody && parentBody.classList.contains('collapsed')) {
-                parentBody.classList.remove('collapsed');
-                var accId = parentBody.getAttribute('id');
-                if (accId) {
-                    var chevron = document.getElementById('arr-' + accId);
-                    if (chevron) chevron.classList.add('chevron-open');
-                }
-            }
-
-            // Scroll suave centrado hacia el estudio, animación luminosa y apertura automática de detalle
-            setTimeout(function() {
-                targetItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                targetItem.classList.remove('row-notif-highlight');
-                void targetItem.offsetWidth; // Forzar reflow CSS
-                targetItem.classList.add('row-notif-highlight');
-
-                // Abrir automáticamente la ventana de detalle del estudio
-                setTimeout(function() {
-                    var plusBtn = targetItem.querySelector('.precio-info-btn');
-                    if (plusBtn) plusBtn.click();
-                }, 400);
-
-                setTimeout(function() {
-                    targetItem.classList.remove('row-notif-highlight');
-                }, 3500);
-            }, 350);
-        } else {
-            // 3b. El estudio NO está en los abanicos publicados:
-            // Insertar abanico "Mis resultados de búsqueda" al inicio de la sección
-            var accResultados = getOrCreateSearchResultsAccordion();
-            if (!accResultados) return;
-
-            var accBody = accResultados.querySelector('.orden-acc-body');
-            if (!accBody) return;
-
-            // Asegurar que el abanico "Mis resultados de búsqueda" esté abierto
-            accBody.classList.remove('collapsed');
-            var accChevron = document.getElementById('arr-cg-mis-resultados');
-            if (accChevron) accChevron.classList.add('chevron-open');
-
-            // Determinar categoría para agrupar o mostrar en la ficha
-            var catNombre = (estudio.cat || 'Estudios de Laboratorio').trim();
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1414-1477)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-            // Buscar si ya existe una ficha (.orden-cat) para esta categoría dentro de este abanico
-            var catCards = accBody.querySelectorAll('.orden-cat');
-            var targetCatCard = null;
-            for (var c = 0; c < catCards.length; c++) {
-                var hdr = catCards[c].querySelector('.orden-cat-hdr');
-                if (hdr && hdr.textContent.trim().toLowerCase() === catNombre.toLowerCase()) {
-                    targetCatCard = catCards[c];
-                    break;
-                }
-            }
-
-            if (!targetCatCard) {
-                targetCatCard = document.createElement('div');
-                targetCatCard.className = 'orden-cat';
-                targetCatCard.innerHTML =
-                    '<div class="orden-cat-hdr">' + escapeHtml(catNombre) + '</div>' +
-                    '<div class="orden-cat-body"></div>';
-                accBody.appendChild(targetCatCard);
-            }
-
-            var cardBody = targetCatCard.querySelector('.orden-cat-body');
-
-            // Crear el elemento de la ficha .precio-cat-item con todas las propiedades
-            var nuevoItem = document.createElement('div');
-            nuevoItem.className = 'precio-cat-item';
-            nuevoItem.setAttribute('data-clave', estudio.c || '');
-            nuevoItem.setAttribute('data-tiempo', estudio.t || '');
-            nuevoItem.setAttribute('data-muestra', estudio.m || '');
-            nuevoItem.setAttribute('data-contenedor', estudio.con || '');
-            nuevoItem.setAttribute('data-pruebas', estudio.pi || '');
-            nuevoItem.setAttribute('data-preparacion', estudio.p || '');
-
-            var nombreSpan = document.createElement('span');
-            nombreSpan.className = 'precio-cat-nombre';
-            nombreSpan.textContent = estudio.n || '';
-            nuevoItem.appendChild(nombreSpan);
-
-            cardBody.appendChild(nuevoItem);
-
-            // Inyectar el botón "+" y vincular el modal de detalle
-            if (typeof window._laeshAttachInfoButton === 'function') {
-                window._laeshAttachInfoButton(nuevoItem);
-            }
-
-            // Scroll suave hacia la nueva ficha, resaltado luminoso y apertura automática de detalle
-            setTimeout(function() {
-                nuevoItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                nuevoItem.classList.remove('row-notif-highlight');
-                void nuevoItem.offsetWidth;
-                nuevoItem.classList.add('row-notif-highlight');
-
-                // Abrir automáticamente la ventana de detalle del estudio
-                setTimeout(function() {
-                    var plusBtn = nuevoItem.querySelector('.precio-info-btn');
-                    if (plusBtn) plusBtn.click();
-                }, 400);
-
-                setTimeout(function() {
-                    nuevoItem.classList.remove('row-notif-highlight');
-                }, 3500);
-            }, 350);
-        }
-    }
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1129-1174)</summary>
-
-**Path:** `Unknown file`
-
-```
-                // Categoría: encabezado .orden-cat-hdr más cercano
-                var catEl    = item.closest('.orden-cat');
-                var categoria = catEl ? (catEl.querySelector('.orden-cat-hdr') ? catEl.querySelector('.orden-cat-hdr').textContent.trim() : '—') : '—';
-
-                var btn = document.createElement('button');
-                btn.type      = 'button';
-                btn.className = 'precio-info-btn';
-                btn.setAttribute('aria-label', 'Detalles: ' + nombre);
-                btn.innerHTML =
-                    '<svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">' +
-                        '<line x1="5" y1="1" x2="5" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>' +
-                        '<line x1="1" y1="5" x2="9" y2="5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>' +
-                    '</svg>';
-                item.appendChild(btn);
-
-                // Desktop (mouse real): hover abre/cierra con margen de tiempo
-                btn.addEventListener('mouseenter', function() {
-                    if (!isRealMouse()) return;
-                    showTip(btn, nombre, categoria, d);
-                });
-                btn.addEventListener('mouseleave', function() {
-                    if (!isRealMouse()) return;
-                    scheduleClose();   // da 280 ms para cruzar el gap hacia el tooltip
-                });
-
-                // Click (desktop y mobile): abrir/togglear tooltip
-                btn.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    if (tip.classList.contains('pit-visible') && tip._activeBtn === btn) {
-                        hideTip();
-                    } else {
-                        showTip(btn, nombre, categoria, d);
-                    }
-                });
-            }
-
-            window._laeshAttachInfoButton = attachInfoButton;
-            window._laeshShowEstudioTip   = showTip;
-
-            // Inyectar en elementos estáticos ya presentes en el DOM
-            document.querySelectorAll('.precio-cat-item').forEach(function(item) {
-                attachInfoButton(item);
-            });
-        })();
-    });
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L989-1039)</summary>
-
-**Path:** `Unknown file`
-
-```
-        }
-
-        function posTip(btn) {
-            var r   = btn.getBoundingClientRect();
-            var tw  = tip.offsetWidth  || 320;
-            var th  = tip.offsetHeight || 250;
-            var vw  = window.innerWidth;
-            var vh  = window.innerHeight;
-
-            var top;
-            if (vw <= 640) {
-                // En móviles: si cabe debajo del botón lo pone debajo, de lo contrario arriba, o centrado si no cabe
-                if (r.bottom + th + 10 < vh) {
-                    top = r.bottom + 10;
-                } else if (r.top - th - 10 > 70) {
-                    top = r.top - th - 10;
-                } else {
-                    top = Math.max(75, Math.round((vh - th) / 2));
-                }
-            } else {
-                top = (r.bottom + th + 8 < vh) ? r.bottom + 8 : Math.max(12, r.top - th - 8);
-            }
-
-            var lft;
-            if (vw <= 640) {
-                // En móviles: centrar en el viewport horizontal
-                lft = Math.max(10, Math.round((vw - tw) / 2));
-            } else {
-                lft = Math.min(Math.max(r.left, 12), vw - tw - 12);
-            }
-            tip.style.top  = top + 'px';
-            tip.style.left = lft + 'px';
-        }
-
-        function showTip(btn, nombre, categoria, d) {
-            cancelClose();
-            lastTipOpenMs = Date.now();
-            tip.querySelector('.pit-nombre').textContent = nombre;
-
-            var renderBoxValue = function(val) {
-                var cleanVal = (val || '').toString().trim();
-                if (!cleanVal || cleanVal === '—') cleanVal = 'Consultar en LAESH';
-                return '<div class="pit-prueba-item">' + cleanVal + '</div>';
-            };
-
-            // 1. Pruebas Incluidas
-            var pruebas = d ? (d[5] || '').toString().trim() : '';
-            var pruebasEl = tip.querySelector('.pit-pruebas');
-            var pruebasSec = tip.querySelector('.pit-sec-pruebas');
-            var esNA = /^n\/?a$/i.test(pruebas);
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1329-1414)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-    // Acción al seleccionar un estudio
-    function selectEstudio(estudio) {
-        if (!estudio) return;
-
-        // Cerrar dropdowns de resultados
-        document.querySelectorAll('.header-search-results').forEach(function(r) {
-            r.style.display = 'none';
-            r.innerHTML = '';
-        });
-
-        // 1. Desplazarse a la sección #especialidades
-        var secEspecialidades = document.getElementById('especialidades');
-        if (secEspecialidades) {
-            var navHeight = 90;
-            var secTop = secEspecialidades.getBoundingClientRect().top + window.pageYOffset - navHeight;
-            window.scrollTo({ top: secTop, behavior: 'smooth' });
-        }
-
-        // 2. Buscar si el estudio ya está en alguno de los abanicos del DOM
-        var targetItem = null;
-        var claveTarget = String(estudio.c || '').trim();
-        var nombreTarget = normalizeStr(estudio.n || '');
-
-        if (claveTarget) {
-            targetItem = document.querySelector('.precio-cat-item[data-clave="' + claveTarget + '"]');
-        }
-
-        if (!targetItem && nombreTarget) {
-            var items = document.querySelectorAll('.precio-cat-item');
-            for (var i = 0; i < items.length; i++) {
-                var nomEl = items[i].querySelector('.precio-cat-nombre');
-                if (nomEl && normalizeStr(nomEl.textContent) === nombreTarget) {
-                    targetItem = items[i];
-                    break;
-                }
-            }
-        }
-
-        if (targetItem) {
-            // 3a. El estudio YA ESTÁ en los abanicos publicados:
-            // Abrir el acordeón que lo contiene si está cerrado
-            var parentBody = targetItem.closest('.orden-acc-body');
-            if (parentBody && parentBody.classList.contains('collapsed')) {
-                parentBody.classList.remove('collapsed');
-                var accId = parentBody.getAttribute('id');
-                if (accId) {
-                    var chevron = document.getElementById('arr-' + accId);
-                    if (chevron) chevron.classList.add('chevron-open');
-                }
-            }
-
-            // Scroll suave centrado hacia el estudio, animación luminosa y apertura automática de detalle
-            setTimeout(function() {
-                targetItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                targetItem.classList.remove('row-notif-highlight');
-                void targetItem.offsetWidth; // Forzar reflow CSS
-                targetItem.classList.add('row-notif-highlight');
-
-                // Abrir automáticamente la ventana de detalle del estudio
-                setTimeout(function() {
-                    var plusBtn = targetItem.querySelector('.precio-info-btn');
-                    if (plusBtn) plusBtn.click();
-                }, 400);
-
-                setTimeout(function() {
-                    targetItem.classList.remove('row-notif-highlight');
-                }, 3500);
-            }, 350);
-        } else {
-            // 3b. El estudio NO está en los abanicos publicados:
-            // Insertar abanico "Mis resultados de búsqueda" al inicio de la sección
-            var accResultados = getOrCreateSearchResultsAccordion();
-            if (!accResultados) return;
-
-            var accBody = accResultados.querySelector('.orden-acc-body');
-            if (!accBody) return;
-
-            // Asegurar que el abanico "Mis resultados de búsqueda" esté abierto
-            accBody.classList.remove('collapsed');
-            var accChevron = document.getElementById('arr-cg-mis-resultados');
-            if (accChevron) accChevron.classList.add('chevron-open');
-
-            // Determinar categoría para agrupar o mostrar en la ficha
-            var catNombre = (estudio.cat || 'Estudios de Laboratorio').trim();
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1094-1119)</summary>
-
-**Path:** `Unknown file`
-
-```
-        closeBtn.addEventListener('touchend', handleCloseClick);
-
-        // Desktop: mantener abierto mientras el cursor esté sobre el tooltip
-        tip.addEventListener('mouseenter', function() { if (isRealMouse()) cancelClose(); });
-        tip.addEventListener('mouseleave', function() { if (isRealMouse()) scheduleClose(); });
-
-        // Cerrar al tocar/hacer clic fuera (desktop y mobile: compatible con iOS Safari y Chrome)
-        function handleOutsideClick(e) {
-            if (tip.classList.contains('pit-visible')) {
-                // Guard: Si se acaba de abrir (hace menos de 450ms), no cerrar por eventos residuales de tap/click
-                if (Date.now() - lastTipOpenMs < 450) return;
-                if (!tip.contains(e.target) && !e.target.closest('.precio-info-btn')) {
-                    hideTip();
-                }
-            }
-        }
-        document.addEventListener('click', handleOutsideClick);
-        document.addEventListener('touchend', handleOutsideClick);
-
-            // Exponer función de inyección de botón "+" para items estáticos y dinámicos
-            function attachInfoButton(item) {
-                if (!item || item.querySelector('.precio-info-btn')) return;
-                var nombreEl = item.querySelector('.precio-cat-nombre');
-                if (!nombreEl) return;
-                var nombre   = nombreEl.textContent.trim();
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1329-1477)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-    // Acción al seleccionar un estudio
-    function selectEstudio(estudio) {
-        if (!estudio) return;
-
-        // Cerrar dropdowns de resultados
-        document.querySelectorAll('.header-search-results').forEach(function(r) {
-            r.style.display = 'none';
-            r.innerHTML = '';
-        });
-
-        // 1. Desplazarse a la sección #especialidades
-        var secEspecialidades = document.getElementById('especialidades');
-        if (secEspecialidades) {
-            var navHeight = 90;
-            var secTop = secEspecialidades.getBoundingClientRect().top + window.pageYOffset - navHeight;
-            window.scrollTo({ top: secTop, behavior: 'smooth' });
-        }
-
-        // 2. Buscar si el estudio ya está en alguno de los abanicos del DOM
-        var targetItem = null;
-        var claveTarget = String(estudio.c || '').trim();
-        var nombreTarget = normalizeStr(estudio.n || '');
-
-        if (claveTarget) {
-            targetItem = document.querySelector('.precio-cat-item[data-clave="' + claveTarget + '"]');
-        }
-
-        if (!targetItem && nombreTarget) {
-            var items = document.querySelectorAll('.precio-cat-item');
-            for (var i = 0; i < items.length; i++) {
-                var nomEl = items[i].querySelector('.precio-cat-nombre');
-                if (nomEl && normalizeStr(nomEl.textContent) === nombreTarget) {
-                    targetItem = items[i];
-                    break;
-                }
-            }
-        }
-
-        if (targetItem) {
-            // 3a. El estudio YA ESTÁ en los abanicos publicados:
-            // Abrir el acordeón que lo contiene si está cerrado
-            var parentBody = targetItem.closest('.orden-acc-body');
-            if (parentBody && parentBody.classList.contains('collapsed')) {
-                parentBody.classList.remove('collapsed');
-                var accId = parentBody.getAttribute('id');
-                if (accId) {
-                    var chevron = document.getElementById('arr-' + accId);
-                    if (chevron) chevron.classList.add('chevron-open');
-                }
-            }
-
-            // Scroll suave centrado hacia el estudio, animación luminosa y apertura automática de detalle
-            setTimeout(function() {
-                targetItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                targetItem.classList.remove('row-notif-highlight');
-                void targetItem.offsetWidth; // Forzar reflow CSS
-                targetItem.classList.add('row-notif-highlight');
-
-                // Abrir automáticamente la ventana de detalle del estudio
-                setTimeout(function() {
-                    var plusBtn = targetItem.querySelector('.precio-info-btn');
-                    if (plusBtn) plusBtn.click();
-                }, 400);
-
-                setTimeout(function() {
-                    targetItem.classList.remove('row-notif-highlight');
-                }, 3500);
-            }, 350);
-        } else {
-            // 3b. El estudio NO está en los abanicos publicados:
-            // Insertar abanico "Mis resultados de búsqueda" al inicio de la sección
-            var accResultados = getOrCreateSearchResultsAccordion();
-            if (!accResultados) return;
-
-            var accBody = accResultados.querySelector('.orden-acc-body');
-            if (!accBody) return;
-
-            // Asegurar que el abanico "Mis resultados de búsqueda" esté abierto
-            accBody.classList.remove('collapsed');
-            var accChevron = document.getElementById('arr-cg-mis-resultados');
-            if (accChevron) accChevron.classList.add('chevron-open');
-
-            // Determinar categoría para agrupar o mostrar en la ficha
-            var catNombre = (estudio.cat || 'Estudios de Laboratorio').trim();
-
-            // Buscar si ya existe una ficha (.orden-cat) para esta categoría dentro de este abanico
-            var catCards = accBody.querySelectorAll('.orden-cat');
-            var targetCatCard = null;
-            for (var c = 0; c < catCards.length; c++) {
-                var hdr = catCards[c].querySelector('.orden-cat-hdr');
-                if (hdr && hdr.textContent.trim().toLowerCase() === catNombre.toLowerCase()) {
-                    targetCatCard = catCards[c];
-                    break;
-                }
-            }
-
-            if (!targetCatCard) {
-                targetCatCard = document.createElement('div');
-                targetCatCard.className = 'orden-cat';
-                targetCatCard.innerHTML =
-                    '<div class="orden-cat-hdr">' + escapeHtml(catNombre) + '</div>' +
-                    '<div class="orden-cat-body"></div>';
-                accBody.appendChild(targetCatCard);
-            }
-
-            var cardBody = targetCatCard.querySelector('.orden-cat-body');
-
-            // Crear el elemento de la ficha .precio-cat-item con todas las propiedades
-            var nuevoItem = document.createElement('div');
-            nuevoItem.className = 'precio-cat-item';
-            nuevoItem.setAttribute('data-clave', estudio.c || '');
-            nuevoItem.setAttribute('data-tiempo', estudio.t || '');
-            nuevoItem.setAttribute('data-muestra', estudio.m || '');
-            nuevoItem.setAttribute('data-contenedor', estudio.con || '');
-            nuevoItem.setAttribute('data-pruebas', estudio.pi || '');
-            nuevoItem.setAttribute('data-preparacion', estudio.p || '');
-
-            var nombreSpan = document.createElement('span');
-            nombreSpan.className = 'precio-cat-nombre';
-            nombreSpan.textContent = estudio.n || '';
-            nuevoItem.appendChild(nombreSpan);
-
-            cardBody.appendChild(nuevoItem);
-
-            // Inyectar el botón "+" y vincular el modal de detalle
-            if (typeof window._laeshAttachInfoButton === 'function') {
-                window._laeshAttachInfoButton(nuevoItem);
-            }
-
-            // Scroll suave hacia la nueva ficha, resaltado luminoso y apertura automática de detalle
-            setTimeout(function() {
-                nuevoItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                nuevoItem.classList.remove('row-notif-highlight');
-                void nuevoItem.offsetWidth;
-                nuevoItem.classList.add('row-notif-highlight');
-
-                // Abrir automáticamente la ventana de detalle del estudio
-                setTimeout(function() {
-                    var plusBtn = nuevoItem.querySelector('.precio-info-btn');
-                    if (plusBtn) plusBtn.click();
-                }, 400);
-
-                setTimeout(function() {
-                    nuevoItem.classList.remove('row-notif-highlight');
-                }, 3500);
-            }, 350);
-        }
-    }
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:09 pm
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Sept 2026, 4:09 pm
 
 ---
 
-## Agent Response
+### Terminal Command Execution
 
-### Actions
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:09 pm
 
-**Tool:** `replace_file_content`
+---
 
-<details>
-<summary>Metadata</summary>
+### Terminal Command Execution
 
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:09 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:09 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:09 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:09 pm
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
-**Created:** 24 Sept 2026, 4:09 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L989-1029)</summary>
-
-**Path:** `Unknown file`
-
-```
-        }
-
-        function posTip(btn) {
-            var r   = btn.getBoundingClientRect();
-            var tw  = tip.offsetWidth  || 320;
-            var th  = tip.offsetHeight || 250;
-            var vw  = window.innerWidth;
-            var vh  = window.innerHeight;
-
-            var top;
-            if (vw <= 640) {
-                // En móviles: si cabe debajo del botón lo pone debajo, de lo contrario arriba, o centrado si no cabe
-                if (r.bottom + th + 10 < vh) {
-                    top = r.bottom + 10;
-                } else if (r.top - th - 10 > 70) {
-                    top = r.top - th - 10;
-                } else {
-                    top = Math.max(75, Math.round((vh - th) / 2));
-                }
-            } else {
-                top = (r.bottom + th + 8 < vh) ? r.bottom + 8 : Math.max(12, r.top - th - 8);
-            }
-
-            var lft;
-            if (vw <= 640) {
-                // En móviles: centrar en el viewport horizontal
-                lft = Math.max(10, Math.round((vw - tw) / 2));
-            } else {
-                lft = Math.min(Math.max(r.left, 12), vw - tw - 12);
-            }
-            tip.style.top  = top + 'px';
-            tip.style.left = lft + 'px';
-        }
-
-        function showTip(btn, nombre, categoria, d) {
-            cancelClose();
-            lastTipOpenMs = Date.now();
-            tip.querySelector('.pit-nombre').textContent = nombre;
-
-            var renderBoxValue = function(val) {
-                var cleanVal = (val || '').toString().trim();
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:10 pm
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
-**Created:** 24 Sept 2026, 4:09 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:10 pm
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
-**Created:** 24 Sept 2026, 4:09 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 24 Sept 2026, 4:09 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 24 Sept 2026, 4:09 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 24 Sept 2026, 4:09 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `write_to_file`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:10 pm
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Sept 2026, 4:10 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
 
 ---
 
 ### Terminal Command Execution
 
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Sept 2026, 4:10 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L909-949)</summary>
-
-**Path:** `Unknown file`
-
-```
-        }
-    });
-
-    var promoModal = document.getElementById('modal-img-promo');
-    if (promoModal) {
-        var closeBtn = promoModal.querySelector('.close-modal');
-        if (closeBtn) {
-            closeBtn.addEventListener('click', window.closePromoModal);
-        }
-        promoModal.addEventListener('click', function(e) {
-            if (e.target === promoModal) {
-                window.closePromoModal();
-            }
-        });
-    }
-
-    /* ── §9 CAT-INFO: Botón "+" + tooltip de detalles por estudio ── */
-    (function initCatInfo() {
-        // ── Tooltip singleton ─────────────────────────────────────────────────
-        var tip = document.createElement('div');
-        tip.className = 'precio-info-tooltip';
-        tip.setAttribute('role', 'tooltip');
-        tip.innerHTML =
-            '<div class="pit-hdr">' +
-                '<span class="pit-nombre"></span>' +
-                '<button type="button" class="pit-close" aria-label="Cerrar">×</button>' +
-            '</div>' +
-            '<div class="pit-body">' +
-                '<div class="pit-sec pit-sec-pruebas">' +
-                    '<div class="pit-sec-title">➤ Pruebas incluidas</div>' +
-                    '<div class="pit-sec-box pit-pruebas"></div>' +
-                '</div>' +
-                '<div class="pit-sec pit-sec-prep">' +
-                    '<div class="pit-sec-title">➤ Indicaciones</div>' +
-                    '<div class="pit-sec-box pit-prep"></div>' +
-                '</div>' +
-                '<div class="pit-sec pit-sec-muestra">' +
-                    '<div class="pit-sec-title">➤ Tipo de muestra</div>' +
-                    '<div class="pit-sec-box pit-muestra"></div>' +
-                '</div>' +
-                '<div class="pit-sec pit-sec-contenedor">' +
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L879-914)</summary>
-
-**Path:** `Unknown file`
-
-```
-        modalObserver.observe(modal, { attributes: true, attributeFilter: ['class'] });
-    });
-
-    // Delegación global de clics y eventos táctiles para capturar cualquier tarjeta o imagen de promoción
-    function handlePromoCardInteraction(e) {
-        var btn = e.target.closest('.catalog-card-btn') || e.target.closest('.catalog-card-btn-overlay') || e.target.closest('a');
-        if (btn) return; // Permitir interacción normal en botones
-
-        var card = e.target.closest('.catalog-card') || e.target.closest('[data-promo-img]');
-        if (!card) return;
-
-        var imgSrc = card.getAttribute('data-promo-img');
-        if (!imgSrc || imgSrc.trim() === '') {
-            var imgEl = card.querySelector('.catalog-card-img') || card.querySelector('img');
-            if (imgEl) imgSrc = imgEl.getAttribute('src');
-        }
-        if (!imgSrc || imgSrc.trim() === '') return;
-
-        var title = card.getAttribute('data-promo-title') || 'Promoción — Imagen Completa';
-        if (typeof window.openPromoModal === 'function') {
-            window.openPromoModal(imgSrc, title);
-        }
-    }
-
-    document.addEventListener('click', handlePromoCardInteraction);
-
-    // Cierre al presionar la tecla Escape en cualquier dispositivo con teclado
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' || e.keyCode === 27) {
-            window.closePromoModal();
-        }
-    });
-
-    var promoModal = document.getElementById('modal-img-promo');
-    if (promoModal) {
-        var closeBtn = promoModal.querySelector('.close-modal');
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L924-934)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-    /* ── §9 CAT-INFO: Botón "+" + tooltip de detalles por estudio ── */
-    (function initCatInfo() {
-        // ── Tooltip singleton ─────────────────────────────────────────────────
-        var tip = document.createElement('div');
-        tip.className = 'precio-info-tooltip';
-        tip.setAttribute('role', 'tooltip');
-        tip.innerHTML =
-            '<div class="pit-hdr">' +
-                '<span class="pit-nombre"></span>' +
-                '<button type="button" class="pit-close" aria-label="Cerrar">×</button>' +
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L959-974)</summary>
-
-**Path:** `Unknown file`
-
-```
-                    '<div class="pit-sec-box pit-tiempo"></div>' +
-                '</div>' +
-                '<div class="pit-sec pit-sec-cat">' +
-                    '<div class="pit-sec-title">➤ Área de proceso</div>' +
-                    '<div class="pit-sec-box pit-cat"></div>' +
-                '</div>' +
-            '</div>';
-        document.body.appendChild(tip);
-
-        // ── Timer compartido de cierre ─────────────────────────────────────────
-        var closeTimer  = null;
-        var CLOSE_DELAY = 280;
-
-        // Detección robusta de ratón físico vs pantalla táctil
-        function isRealMouse() {
-            return window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 24 Sept 2026, 4:10 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L924-939)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-    /* ── §9 CAT-INFO: Botón "+" + tooltip de detalles por estudio ── */
-    (function initCatInfo() {
-        // ── Tooltip singleton ─────────────────────────────────────────────────
-        var tip = document.createElement('div');
-        tip.className = 'precio-info-tooltip';
-        tip.setAttribute('role', 'tooltip');
-        tip.innerHTML =
-            '<div class="pit-hdr">' +
-                '<span class="pit-nombre"></span>' +
-                '<button type="button" class="pit-close" aria-label="Cerrar">×</button>' +
-            '</div>' +
-            '<div class="pit-body">' +
-                '<div class="pit-sec pit-sec-pruebas">' +
-                    '<div class="pit-sec-title">➤ Pruebas incluidas</div>' +
-                    '<div class="pit-sec-box pit-pruebas"></div>' +
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
 
 ---
 
 ### Code Edit
 
-**Status:** Completed
-**Created:** 24 Sept 2026, 4:10 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 24 Sept 2026, 4:10 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L989-1029)</summary>
-
-**Path:** `Unknown file`
-
-```
-            tip._activeBtn = null;
-        }
-
-        function posTip(btn) {
-            var r   = btn.getBoundingClientRect();
-            var tw  = tip.offsetWidth  || 320;
-            var th  = tip.offsetHeight || 250;
-            var vw  = window.innerWidth;
-            var vh  = window.innerHeight;
-
-            var top;
-            if (vw <= 640) {
-                // En móviles: si cabe debajo del botón lo pone debajo, de lo contrario arriba, o centrado si no cabe
-                if (r.bottom + th + 10 < vh) {
-                    top = r.bottom + 10;
-                } else if (r.top - th - 10 > 70) {
-                    top = r.top - th - 10;
-                } else {
-                    top = Math.max(75, Math.round((vh - th) / 2));
-                }
-            } else {
-                top = (r.bottom + th + 8 < vh) ? r.bottom + 8 : Math.max(12, r.top - th - 8);
-            }
-
-            var lft;
-            if (vw <= 640) {
-                // En móviles: centrar en el viewport horizontal
-                lft = Math.max(10, Math.round((vw - tw) / 2));
-            } else {
-                lft = Math.min(Math.max(r.left, 12), vw - tw - 12);
-            }
-            tip.style.top  = top + 'px';
-            tip.style.left = lft + 'px';
-        }
-
-        function showTip(btn, nombre, categoria, d) {
-            cancelClose();
-            lastTipOpenMs = Date.now();
-            tip.querySelector('.pit-nombre').textContent = nombre;
-
-            var renderBoxValue = function(val) {
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1074-1094)</summary>
-
-**Path:** `Unknown file`
-
-```
-            tip.querySelector('.pit-tiempo').innerHTML     = renderBoxValue(d ? d[1] : '');
-
-            // 6. Clave
-            tip.querySelector('.pit-clave').innerHTML      = renderBoxValue(d ? d[0] : '');
-
-            // 7. Área de Proceso (Categoría)
-            tip.querySelector('.pit-cat').innerHTML        = renderBoxValue(categoria);
-
-            tip._activeBtn = btn;
-            tip.classList.add('pit-visible');
-            requestAnimationFrame(function() { posTip(btn); });
-        }
-
-        // ── Eventos del tooltip ───────────────────────────────────────────────
-        function handleCloseClick(e) {
-            e.stopPropagation();
-            if (e.cancelable) e.preventDefault();
-            hideTip();
-        }
-        var closeBtn = tip.querySelector('.pit-close');
-        closeBtn.addEventListener('click', handleCloseClick);
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L2019-2049)</summary>
-
-**Path:** `Unknown file`
-
-```
-/* Tooltip flotante */
-.precio-info-tooltip {
-    position: fixed;
-    z-index: 1500; /* por debajo del modal (2000 en style.css) y por encima de navbar (1050) */
-    width: 340px;
-    max-width: calc(100vw - 24px);
-    background: #fff;
-    border: 1.5px solid var(--primary-green);
-    border-radius: 12px;
-    box-shadow: 0 8px 30px rgba(0, 82, 183, 0.18);
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(6px);
-    transition: opacity 0.15s, transform 0.15s;
-    overflow: hidden;
-    font-family: inherit;
-}
-.precio-info-tooltip.pit-visible {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateY(0);
-}
-
-/* Barra de título (verde LAESH) */
-.pit-hdr {
-    background: var(--primary-green);
-    color: #0B1830;
-    padding: 8px 12px 8px 12px;
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
+**Status:** Reset
 **Created:** 24 Sept 2026, 4:11 pm
 
 ---
 
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:11 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:11 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:14 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:14 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:15 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:15 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:15 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:15 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:15 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:16 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:16 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:16 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:16 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:16 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:16 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:17 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:17 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:17 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:26 pm
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:27 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:27 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:27 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:27 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:28 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:28 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:28 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:28 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:32 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:33 pm
+
+---
+
+### Execution Error
+
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:34 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:34 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:34 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:34 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:34 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:38 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:38 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:39 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:39 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:39 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:39 pm
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:44 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:44 pm
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 24 Sept 2026, 4:45 pm
+
+---
+
+### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 7:31 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 7:31 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 7:32 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 7:32 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 7:32 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 7:32 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 7:32 am
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 7:33 am
+
+---
+
+### Execution Error
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 7:33 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 7:33 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 7:34 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 7:34 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 7:34 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 7:34 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 7:34 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 7:35 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 7:35 am
+
+---
+
+### Execution Error
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 7:36 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 7:36 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 7:36 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 7:37 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 7:37 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 7:37 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 7:37 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 7:38 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 7:38 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 7:38 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 7:38 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 7:38 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 7:38 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 7:38 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 7:54 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 7:55 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 7:55 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 7:55 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 7:55 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 7:55 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 7:56 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 7:56 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 7:56 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 7:56 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 7:56 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 7:57 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 7:57 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 7:58 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 8:01 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 8:02 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 8:02 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 8:02 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 8:02 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 8:02 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 8:03 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 8:03 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 8:03 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 8:03 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 8:09 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 8:10 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 8:10 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 8:15 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 8:15 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 8:16 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 8:16 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 8:16 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 8:16 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 8:17 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 8:17 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 8:17 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 9:18 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 9:18 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 9:20 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 9:20 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 9:20 am
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 10:07 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 10:08 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 10:08 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 10:08 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 10:09 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 10:10 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 10:10 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 10:11 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 10:11 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 10:12 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 10:12 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 10:12 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 10:13 am
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 10:29 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 10:31 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 10:33 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 10:33 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 10:34 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 10:34 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 10:34 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 10:34 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 10:34 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 10:34 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 10:35 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 10:35 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 10:35 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 10:36 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 10:36 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 10:36 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 10:36 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 10:37 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 10:37 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 10:37 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 10:37 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 10:37 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 10:38 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 10:38 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 10:38 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 10:38 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 10:38 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 11:00 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 11:00 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 11:01 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 11:01 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 11:01 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 11:01 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 11:01 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 11:01 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 11:12 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 11:13 am
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 11:17 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 11:18 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 11:19 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 11:22 am
+
+---
+
+### Code Edit
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 11:22 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 11:22 am
+
+---
+
+### Terminal Command Execution
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 11:22 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 11:30 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 11:30 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 11:31 am
+
+---
+
+### Local File Search
+
+**Status:** Reset
+**Created:** 25 Sept 2026, 11:31 am
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 11:54 am
+
+---
+
 ## Agent Response
 
 ### Actions
@@ -9934,7 +8262,7 @@
 ### Terminal Command Execution
 
 **Status:** Completed
-**Created:** 24 Sept 2026, 4:11 pm
+**Created:** 25 Sept 2026, 11:54 am
 
 ---
 
@@ -9942,7 +8270,8 @@
 
 ### Actions
 
-**Tool:** `run_command`
+**Tool:** `grep_search`
+**Query:** `acerca-de`
 
 <details>
 <summary>Metadata</summary>
@@ -9952,15 +8281,20 @@
 
 ---
 
-### Terminal Command Execution
+### Local File Search
 
 **Status:** Completed
-**Created:** 24 Sept 2026, 4:11 pm
+**Created:** 25 Sept 2026, 11:54 am
 
 ---
 
 ## Agent Response
 
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
 <details>
 <summary>Metadata</summary>
 
@@ -9969,20 +8303,216 @@
 
 ---
 
-## User Request
+<details>
+<summary>File: `Unknown file` (L109-189)</summary>
 
-1) QUe todos los abanicos inicien por default cerrado para index website.
+**Path:** `Unknown file`
 
-2) Analiza esta auditoria:
-selectEstudio() en website.js construye un selector CSS por concatenación ('[data-clave="' + claveTarget + '"]') — si algún clave tuviera comillas, querySelector lanzaría error. Los valores de clave actuales no las tienen, pero no hay sanitización explícita.
-La consulta que arma window.__LAESH_ESTUDIOS__ no tiene LIMIT — sin problema al tamaño actual del catálogo, pero crecerá el HTML inline si el catálogo se expande mucho.
-diagnostica y corrige de raiz,evitando regresiones, impactos negativos.
+```
+           navbar y body no necesitan ser el mismo color). */
+        .navbar-sticky {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1050;
+            background: var(--secondary-green);
+            box-shadow: 0 2px 16px rgba(15,23,42,0.10);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 0.35rem calc(max(1.5rem, (100vw - (725px + 50vw)) / 2 + 1.5rem)) 0.5rem 1.25rem;
+            transition: box-shadow 0.3s ease;
+        }
+        .landing-nav-spacer { height: 92px; flex-shrink: 0; }
+        .navbar-sticky .logo {
+            display: flex; align-items: center; gap: 12px;
+            font-weight: 700; font-size: 1.6rem;
+            color: var(--primary); text-decoration: none;
+            margin-top: 0.15rem;
+        }
+        .navbar-sticky .nav-links {
+            margin-left: 0; margin-right: 0;
+            display: flex; gap: 1.25rem; align-items: flex-start;
+            margin-top: 0;
+        }
+        .navbar-sticky .nav-links a {
+            text-decoration: none; color: var(--text-main);
+            font-weight: 600; font-size: 1.10rem;
+            text-transform: uppercase; letter-spacing: 0.05em;
+            position: relative; padding: 0.15rem 0 0.3rem 0;
+            line-height: 1.2;
+            transition: color 0.2s ease;
+        }
+        .navbar-sticky .nav-links a.nav-item-multiline {
+            text-align: center;
+            line-height: 1.12;
+            display: inline-block;
+        }@media (hover: hover) and (pointer: fine) {
+    .navbar-sticky .nav-links a:hover,
+        .navbar-sticky .nav-links a.active {
+        color: var(--primary);
+    }
+} /* A6-fix: blue WCAG AA on white */
+        .navbar-sticky .nav-links a::after {
+            content: ''; position: absolute; bottom: 0; left: 50%;
+            transform: translateX(-50%); width: 0; height: 2px;
+            background: var(--primary-green);
+            transition: width 0.3s cubic-bezier(0.16,1,0.3,1);
+        }@media (hover: hover) and (pointer: fine) {
+    .navbar-sticky .nav-links a:hover::after,
+        .navbar-sticky .nav-links a.active::after {
+        width: 100%;
+    }
+}
+
+        /* ── Dropdown Acceso ── */
+        .dropdown { position: relative; display: inline-block; }
+        .dropdown-trigger { cursor: pointer; }
+        .dropdown-menu {
+            display: none; position: absolute; top: 100%; left: 50%;
+            transform: translateX(-50%); background: #fff;
+            min-width: 220px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-radius: 8px; border: 1px solid var(--border);
+            padding: 0.5rem 0; z-index: 1002; margin-top: 0.5rem;
+        }
+        /* Dropdown links: especificidad elevada (.navbar-sticky .dropdown-menu a = 0,3,1)
+           para ganar sobre .navbar-sticky .nav-links a (0,2,1) sin !important — R8 */
+        .navbar-sticky .dropdown-menu a {
+            color: var(--text-main); padding: 0.75rem 1.25rem;
+            text-decoration: none; display: block;
+            font-size: 0.9rem; font-weight: 500;
+            text-transform: none; letter-spacing: normal;
+            transition: background 0.2s, color 0.2s; text-align: left;
+        }@media (hover: hover) and (pointer: fine) {
+    .navbar-sticky .dropdown-menu a:hover {
+        background: var(--secondary-green); color: var(--primary);
+    }
+}@media (hover: hover) and (pointer: fine) {
+    .dropdown:hover .dropdown-menu {
+        display: block;
+    }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
 
 <details>
-<summary>Context</summary>
+<summary>Metadata</summary>
 
-**Active File:** `website.js`
-**Language:** javascript
+- **Model:** Gemini 3.8 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L2719-2754)</summary>
+
+**Path:** `Unknown file`
+
+```
+}
+.header-search-wrap--mobile .header-search-clear {
+    font-size: 0.95rem;
+}
+.header-search-wrap--mobile .header-search-results {
+    right: 0;
+    left: auto;
+    transform: none;
+    width: 280px;
+    max-width: 82vw;
+}
+
+/* Reglas de visibilidad desktop vs mobile */
+@media (min-width: 768px) {
+    .header-search-wrap--mobile {
+        display: none !important;
+    }
+    .navbar-center-block {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        margin-left: 0.5rem;
+        margin-right: auto;
+    }
+}
+@media (max-width: 767px) {
+    .header-search-wrap--desktop {
+        display: none !important;
+    }
+}
+
+/* ── Dropdown Flotante de Resultados de Búsqueda ── */
+.header-search-results {
+    position: absolute;
+    top: calc(100% + 5px);
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L489-519)</summary>
+
+**Path:** `Unknown file`
+
+```
+    }
+}
+
+        /* ── Responsive ≥1025px (desktop) ── */
+
+        /* ── Responsive ≤1024px (tablet) ── */
+
+        /* ── Tagline navbar ── */
+        /* flex: 0 1 auto + max-width limita el ancho del tagline para que margin-left:auto
+           del nav-links tenga espacio y los ítems queden bien separados a la derecha. */
+        .navbar-tagline { font-style: italic; color: var(--brand-green); font-size: 1.01rem; font-weight: 600; letter-spacing: 0.01em; white-space: nowrap; overflow: visible; line-height: 1.25; flex: 0 0 auto; min-width: 0; max-width: none; text-align: left; margin-left: 1rem; margin-right: auto; padding: 0 1rem; }
+
+        /* ── Responsive ≤768px (móvil) ── */
+
+        /* ── Landscape compacto ── */
+
+        /* ── ≤480px — wrapping en footer y mapa ── */
+
+        /* ── Móvil muy pequeño ≤375px ── */
+
+        
+/* ── §6 CATÁLOGO, WRAPPERS DE SECCIÓN & CONTACTO ───────────────────────────── */
+
+/* ── Catálogo de Estudios — acordeones por grupo (migrado de style.css) ── */
+        .orden-acc { margin-bottom: 10px; border: 1.5px solid #e2e8f0; border-radius: 10px; overflow: hidden; }
+        .orden-acc-hdr {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 11px 16px; background: #f1f5f9; cursor: pointer;
+            font-weight: 700; font-size: 0.88rem; color: var(--primary);
+            border: none; width: 100%; text-align: left; gap: 8px; user-select: none;
+            transition: background 0.15s;
+```
+
 </details>
 
 ---
@@ -10003,21 +8533,3204 @@ diagnostica y corrige de raiz,evitando regresiones, impactos negativos.
 ---
 
 <details>
-<summary>File: `Unknown file` (L449-599)</summary>
+<summary>File: `Unknown file` (L649-689)</summary>
 
 **Path:** `Unknown file`
 
 ```
-$catalogSub  = $c('especialidades', 'seccion',  'subtitulo');
-$catalogNota = $c('especialidades', 'catalogo', 'nota_pie');
+            <div class="header-search-wrap header-search-wrap--mobile" id="header-search-wrap-mob">
+                <div class="header-search-box">
+                    <svg class="header-search-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <input type="text" class="header-search-input" id="input-buscar-estudio-mob" placeholder="Buscar estudio..." autocomplete="off" spellcheck="false" aria-label="Buscar estudio clínico">
+                    <button type="button" class="header-search-clear" aria-label="Borrar búsqueda" style="display:none;">&times;</button>
+                </div>
+                <div class="header-search-results" id="search-results-mob" role="listbox" style="display:none;"></div>
+            </div>
+        </div>
+        <button type="button" class="nav-hamburger" id="nav-hamburger"
+                aria-label="Abrir menú" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+        <?php
+        // ── Orden de secciones — configurable desde el CMS (configuraciones.seccion_order) ──
+        // Secciones ordenables: inicio, acerca-de, especialidades, promociones, calidad, ubicacion, video.
+        $_SEC_DEFAULT = ['inicio','acerca-de','especialidades','promociones','calidad','ubicacion','video'];
+        $_secNavLabels = [
+            'acerca-de'     => ['label' => 'Quiénes somos',          'href' => '#acerca-de'],
+            'especialidades'=> ['label' => 'Estudios',               'href' => '#especialidades'],
+            'promociones'   => ['label' => 'Promociones',            'href' => '#promociones'],
+            'calidad'       => ['label' => 'Calidad',                'href' => '#calidad'],
+            'ubicacion'     => ['label' => 'Ubicación y<br>Contacto', 'href' => '#ubicacion', 'multiline' => true],
+        ];
+        $isVideoActive = $cfg('video_active', '1') !== '0';
 
-// Promociones (sin fallback)
-$promoH2  = $c('promociones', 'banner', 'titulo');
-$promoSub = $c('promociones', 'banner', 'subtitulo');
+        $_secOrderRaw = $cfg('seccion_order');
+        if ($_secOrderRaw !== '') {
+            $_parsed = array_unique(array_filter(
+                array_map('trim', explode(',', $_secOrderRaw)),
+                fn($s) => in_array($s, $_SEC_DEFAULT, true)
+            ));
+            $_missing = array_diff($_SEC_DEFAULT, $_parsed);
+            $sectionOrder = array_values(array_merge($_parsed, $_missing));
+        } else {
+            $sectionOrder = $_SEC_DEFAULT;
+        }
+        unset($_SEC_DEFAULT, $_secOrderRaw, $_parsed, $_missing);
 
-// Calidad (sin fallback)
-$calH2  = $c('calidad', 'seccion', 'h2');
-$calSub = $c('calidad', 'seccion', 'subtitulo');
+        // Si el video está apagado, retirarlo del orden de secciones para que no se renderice
+        if (!$isVideoActive) {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L689-729)</summary>
+
+**Path:** `Unknown file`
+
+```
+        if (!$isVideoActive) {
+            $sectionOrder = array_values(array_filter($sectionOrder, fn($s) => $s !== 'video'));
+        }
+        ?>
+        <div class="nav-links" id="nav-links-mobile">
+            <a href="#inicio">Inicio</a>
+            <?php foreach ($sectionOrder as $_navSec):
+                if (isset($_secNavLabels[$_navSec])):
+                    $_isMulti = !empty($_secNavLabels[$_navSec]['multiline']);
+            ?>
+            <a href="<?= $_secNavLabels[$_navSec]['href'] ?>"<?= $_isMulti ? ' class="nav-item-multiline"' : '' ?>><?= $_isMulti ? $_secNavLabels[$_navSec]['label'] : h($_secNavLabels[$_navSec]['label']) ?></a>
+            <?php endif; endforeach; unset($_navSec, $_isMulti); ?>
+            <div class="header-search-wrap header-search-wrap--desktop" id="header-search-wrap-desk">
+                <div class="header-search-box">
+                    <svg class="header-search-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <input type="text" class="header-search-input" id="input-buscar-estudio-desk" placeholder="Buscar estudio..." autocomplete="off" spellcheck="false" aria-label="Buscar estudio en catálogo">
+                    <button type="button" class="header-search-clear" aria-label="Borrar búsqueda" style="display:none;">&times;</button>
+                </div>
+                <div class="header-search-results" id="search-results-desk" role="listbox" style="display:none;"></div>
+            </div>
+            <a href="#" class="login-trigger btn-nav-medicos"
+               data-target="medicos" data-title="Acceso" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2v2"/><path d="M5 2v2"/><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"/><path d="M8 15a6 6 0 0 0 12 0v-3"/><circle cx="20" cy="10" r="2"/></svg>Médicos</a>
+        </div>
+    </nav>
+
+    <main id="main-content">
+
+        <div class="landing-nav-spacer"></div>
+
+        <?php
+        foreach ($sectionOrder as $_secId):
+            if ($_secId === 'inicio'):
+        ?>
+        <!-- ═══════════════════════════════════════════════════════ HERO ══ -->
+        <section id="inicio" class="hero-premium">
+            <h1 class="sr-only"><?= h($cfgNombreLab) ?> — <?= h($navTagL1 ? "{$navTagL1} {$navTagL2}" : 'Laboratorio de Especialidades Hematológicas') ?></h1>
+            <div class="hero-slides" data-autoplay="<?= in_array($heroSliderMode, ['decoupled', 'decoupled_hidden', 'fixed_all']) ? 0 : $heroAutoplay ?>" role="region"
+                 aria-label="Presentación principal" aria-roledescription="carrusel"<?= $heroParentBgStyle ?>>
+
+                <!-- ── Slide 1 — dinámico desde hero/slide1 ────────────────── -->
+                <div class="hero-slide active <?= !$hasParentBg ? 'bg-slide-1' : '' ?>"<?= $slides[1]['bg_style'] ? ' style="' . $slides[1]['bg_style'] . '"' : '' ?>></div>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 11:55 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `nav-links`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Low)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 11:55 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `tablet-samsung-tabs10ultra.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L64-99)</summary>
+
+**Path:** `Unknown file`
+
+```
+        flex-shrink: 0;
+        padding: 0 1rem;
+        margin-left: 1rem;
+        margin-right: auto;
+    }
+
+    .navbar-sticky .nav-links {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-end;
+        gap: 1.25rem;
+        margin-left: auto;
+    }
+
+    .navbar-sticky .nav-links a:not(.nav-item-multiline):not(.btn-nav-medicos) {
+        font-size: 1.06rem;
+        white-space: nowrap;
+        margin: 0;
+    }
+    .navbar-sticky .nav-links a.nav-item-multiline {
+        font-size: 1.06rem;
+        white-space: normal;
+        margin: 0;
+    }
+
+    /* Hero Section — Ajuste de proporción en pantalla grande de 14.6" */
+    .hero-slider-wrap {
+        min-height: 520px;
+        max-height: 680px;
+    }
+
+    .hero-slide-content h1 {
+        font-size: clamp(2rem, 3.2vw, 3rem);
+        line-height: 1.2;
+    }
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1124-1149)</summary>
+
+**Path:** `Unknown file`
+
+```
+    .hero-glass-card   { opacity: 1; transform: none; }
+}
+
+@media (min-width: 1920px) {
+    body { padding: env(safe-area-inset-top, 3rem) env(safe-area-inset-right, 2rem) env(safe-area-inset-bottom, 3rem) env(safe-area-inset-left, 2rem); font-size: 1.05rem; }
+    .browser-window { max-width: 1780px; }
+    .navbar-sticky { padding: 1.25rem calc(max(2rem, (100vw - (725px + 50vw)) / 2 + 2rem)) 1.25rem 1.5rem; }
+    .navbar-sticky .nav-links { gap: 2.5rem; }
+    .navbar-sticky .nav-links a { font-size: 1.0rem; }
+    /* hero-premium: max-height:800px ya aplicado por el bloque ≥1025px — sin override adicional */
+    /* hero-glass-card h1/h2/p: base aplica en todos los viewports — sin override en ≥1920px */
+    .grid-layout {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.75rem;
+            padding: 0 4rem;
+        }
+    .specialties-carousel-viewport { max-width: 1850px; padding: 0 1.5rem; }
+    .carousel-card { flex: 0 0 calc((100% - 4rem) / 3); }
+    .carousel-card img { height: 285px; object-fit: cover; object-position: center; border-radius: 12px 12px 0 0; border: none; }
+    .section-header h2 { font-size: 2.5rem; }
+}
+
+@media (min-width: 768px) {
+    /* Hero tablet: proporción natural de imagen sin recorte */
+    .hero-premium { aspect-ratio: 1882 / 876; height: auto; min-height: 320px; }
+}
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L2729-2779)</summary>
+
+**Path:** `Unknown file`
+
+```
+}
+
+/* Reglas de visibilidad desktop vs mobile */
+@media (min-width: 768px) {
+    .header-search-wrap--mobile {
+        display: none !important;
+    }
+    .navbar-center-block {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        margin-left: 0.5rem;
+        margin-right: auto;
+    }
+}
+@media (max-width: 767px) {
+    .header-search-wrap--desktop {
+        display: none !important;
+    }
+}
+
+/* ── Dropdown Flotante de Resultados de Búsqueda ── */
+.header-search-results {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 320px;
+    max-width: 90vw;
+    max-height: 340px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    background: #ffffff;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.18), 0 4px 6px -2px rgba(0, 0, 0, 0.08);
+    z-index: 2000;
+    padding: 4px 0;
+}
+.header-search-wrap--desktop .header-search-results {
+    right: 0;
+    left: auto;
+    transform: none;
+}
+.header-search-results::-webkit-scrollbar {
+    width: 6px;
+}
+.header-search-results::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L2639-2679)</summary>
+
+**Path:** `Unknown file`
+
+```
+    color: #0f172a;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    text-align: left;
+}
+.header-search-input::placeholder {
+    color: #64748b;
+    font-size: 1.05rem;
+    font-weight: 400;
+}
+
+/* Botón de limpiar "x" */
+.header-search-clear {
+    background: transparent;
+    border: none;
+    color: #64748b;
+    font-size: 1.3rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0 4px;
+    margin-left: 4px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.header-search-clear:hover {
+    color: #ef4444;
+}
+
+/* ── Ajustes específicos DESKTOP ── */
+.header-search-wrap--desktop {
+    width: 310px;
+    flex-shrink: 0;
+}
+.header-search-wrap--desktop .header-search-box {
+    height: 38px;
+    padding: 3px 12px;
+    border-radius: 22px;
+}
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L114-144)</summary>
+
+**Path:** `Unknown file`
+
+```
+            background: var(--secondary-green);
+            box-shadow: 0 2px 16px rgba(15,23,42,0.10);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 0.35rem calc(max(1.5rem, (100vw - (725px + 50vw)) / 2 + 1.5rem)) 0.5rem 1.25rem;
+            transition: box-shadow 0.3s ease;
+        }
+        .landing-nav-spacer { height: 92px; flex-shrink: 0; }
+        .navbar-sticky .logo {
+            display: flex; align-items: center; gap: 12px;
+            font-weight: 700; font-size: 1.6rem;
+            color: var(--primary); text-decoration: none;
+            margin-top: 0.15rem;
+        }
+        .navbar-sticky .nav-links {
+            margin-left: 0; margin-right: 0;
+            display: flex; gap: 1.25rem; align-items: flex-start;
+            margin-top: 0;
+        }
+        .navbar-sticky .nav-links a {
+            text-decoration: none; color: var(--text-main);
+            font-weight: 600; font-size: 1.10rem;
+            text-transform: uppercase; letter-spacing: 0.05em;
+            position: relative; padding: 0.15rem 0 0.3rem 0;
+            line-height: 1.2;
+            transition: color 0.2s ease;
+        }
+        .navbar-sticky .nav-links a.nav-item-multiline {
+            text-align: center;
+            line-height: 1.12;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L2779-2849)</summary>
+
+**Path:** `Unknown file`
+
+```
+    border-radius: 4px;
+}
+
+/* Ítem de resultado */
+.header-search-item {
+    display: flex;
+    flex-direction: column;
+    padding: 7px 12px;
+    cursor: pointer;
+    border-bottom: 1px solid #f1f5f9;
+    transition: background 0.15s ease;
+    text-align: left;
+}
+.header-search-item:last-child {
+    border-bottom: none;
+}
+.header-search-item:hover,
+.header-search-item.is-selected {
+    background: #e0f2fe;
+}
+.header-search-item-nombre {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #0f172a;
+    line-height: 1.25;
+}
+.header-search-item-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.7rem;
+    color: #64748b;
+    margin-top: 2px;
+}
+.header-search-item-clave {
+    font-weight: 600;
+    color: #0052b7;
+    background: #e2e8f0;
+    padding: 1px 5px;
+    border-radius: 4px;
+}
+.header-search-item-muestra {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.header-search-empty {
+    padding: 12px;
+    font-size: 0.78rem;
+    color: #64748b;
+    text-align: center;
+}
+
+/* ── Abanico Dinámico: Mis Resultados de Búsqueda ── */
+.orden-acc--search-results {
+    border: 2px solid var(--primary-green);
+    box-shadow: 0 4px 14px rgba(113, 202, 17, 0.18);
+    margin-bottom: 14px;
+    animation: fadeInSlideDown 0.35s ease-out;
+}
+.orden-acc--search-results .orden-acc-hdr {
+    background: #f0fdf4;
+    color: #065f46;
+}
+.orden-acc--search-results .orden-acc-hdr:hover {
+    background: #dcfce7;
+}
+@keyframes fadeInSlideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L2850-2903)</summary>
+
+**Path:** `Unknown file`
+
+```
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* ── Resalte luminoso y contorno de 5 segundos (lila claro) para estudio seleccionado en búsqueda ── */
+@keyframes estudioBuscadoOutline {
+    0% {
+        outline: 2.5px solid #a855f7;
+        outline-offset: 2px;
+        background-color: #faf5ff !important;
+        box-shadow: 0 0 16px rgba(168, 85, 247, 0.45);
+        border-radius: 6px;
+    }
+    15% {
+        outline: 2.5px solid #c084fc;
+        outline-offset: 2px;
+        background-color: #f3e8ff !important;
+        box-shadow: 0 0 18px rgba(192, 132, 252, 0.50);
+        border-radius: 6px;
+    }
+    30% {
+        outline: 2.5px solid #a855f7;
+        outline-offset: 2px;
+        background-color: #f3e8ff !important;
+        box-shadow: 0 0 16px rgba(168, 85, 247, 0.45);
+        border-radius: 6px;
+    }
+    75% {
+        outline: 2px solid rgba(192, 132, 252, 0.85);
+        outline-offset: 2px;
+        background-color: #faf5ff !important;
+        box-shadow: 0 0 12px rgba(192, 132, 252, 0.30);
+        border-radius: 6px;
+    }
+    100% {
+        outline: 2px solid transparent;
+        outline-offset: 0;
+        background-color: transparent !important;
+        box-shadow: none;
+        border-radius: 0;
+    }
+}
+
+.estudio-buscado-highlight {
+    animation: estudioBuscadoOutline 5s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
+    position: relative;
+    z-index: 5;
+    transition: background-color 0.3s;
+}
+
+
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L129-164)</summary>
+
+**Path:** `Unknown file`
+
+```
+        .navbar-sticky .nav-links {
+            margin-left: 0; margin-right: 0;
+            display: flex; gap: 1.25rem; align-items: flex-start;
+            margin-top: 0;
+        }
+        .navbar-sticky .nav-links a {
+            text-decoration: none; color: var(--text-main);
+            font-weight: 600; font-size: 1.10rem;
+            text-transform: uppercase; letter-spacing: 0.05em;
+            position: relative; padding: 0.15rem 0 0.3rem 0;
+            line-height: 1.2;
+            transition: color 0.2s ease;
+        }
+        .navbar-sticky .nav-links a.nav-item-multiline {
+            text-align: center;
+            line-height: 1.12;
+            display: inline-block;
+        }@media (hover: hover) and (pointer: fine) {
+    .navbar-sticky .nav-links a:hover,
+        .navbar-sticky .nav-links a.active {
+        color: var(--primary);
+    }
+} /* A6-fix: blue WCAG AA on white */
+        .navbar-sticky .nav-links a::after {
+            content: ''; position: absolute; bottom: 0; left: 50%;
+            transform: translateX(-50%); width: 0; height: 2px;
+            background: var(--primary-green);
+            transition: width 0.3s cubic-bezier(0.16,1,0.3,1);
+        }@media (hover: hover) and (pointer: fine) {
+    .navbar-sticky .nav-links a:hover::after,
+        .navbar-sticky .nav-links a.active::after {
+        width: 100%;
+    }
+}
+
+        /* ── Dropdown Acceso ── */
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 11:55 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 11:56 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L133-145)</summary>
+
+**Path:** `Unknown file`
+
+```
+        }
+        .navbar-sticky .nav-links a {
+            text-decoration: none; color: var(--text-main);
+            font-weight: 600; font-size: 1.10rem;
+            text-transform: uppercase; letter-spacing: 0.05em;
+            position: relative; padding: 0.15rem 0 0.3rem 0;
+            line-height: 1.2;
+            transition: color 0.2s ease;
+        }
+        .navbar-sticky .nav-links a.nav-item-multiline {
+            text-align: center;
+            line-height: 1.12;
+            display: inline-block;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 11:56 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `tablet-samsung-tabs10ultra.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L69-94)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+    .navbar-sticky .nav-links {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-end;
+        gap: 1.25rem;
+        margin-left: auto;
+    }
+
+    .navbar-sticky .nav-links a:not(.nav-item-multiline):not(.btn-nav-medicos) {
+        font-size: 1.06rem;
+        white-space: nowrap;
+        margin: 0;
+    }
+    .navbar-sticky .nav-links a.nav-item-multiline {
+        font-size: 1.06rem;
+        white-space: normal;
+        margin: 0;
+    }
+
+    /* Hero Section — Ajuste de proporción en pantalla grande de 14.6" */
+    .hero-slider-wrap {
+        min-height: 520px;
+        max-height: 680px;
+    }
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `tablet-samsung-tabs10ultra.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+/* ═══════════════════════════════════════════════════════════════════
+   tablet-samsung-tabs10ultra.css — LAESH Specific Tablet Responsiveness
+   ───────────────────────────────────────────────────────────────────
+   Reglas de adaptabilidad dedicadas para Samsung Galaxy Tab S10 Ultra
+   (14.6", 2960×1848 px / DPR 2.5) y tabletas de gran formato.
+   Orientación Horizontal (Landscape ~1480px) & Vertical (Portrait ~924px).
+
+   NO USAR !important (Regla 8 del proyecto LAESH).
+   Se apoya en variables CSS (--primary, --surface, etc.) de tokens.css.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────────────────────────────
+   § 0. ASSET IMMUTABILITY & ANTI-DISTORTION GUARDS (Protección de Imágenes)
+   Garantiza que todas las imágenes mantengan su proporción aspect-ratio
+   sin achatamientos ni deformaciones en pantallas AMOLED de 14.6".
+   ───────────────────────────────────────────────────────────────── */
+@media (min-width: 768px) and (max-width: 1600px) {
+    .hero-logo,
+    .navbar-sticky .logo img {
+        height: auto;
+        max-height: 46px;
+        width: auto;
+        object-fit: contain;
+        flex-shrink: 0;
+    }
+
+    .specialties-carousel-track .carousel-card img {
+        width: 100%;
+        height: 240px;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .map-zoom-img {
+        width: 100%;
+        height: auto;
+        max-height: 480px;
+        object-fit: contain;
+    }
+}
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `tablet-samsung-tabs10ultra.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L40-79)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+
+/* ─────────────────────────────────────────────────────────────────
+   § 1. TOUCH & S-PEN INTERACTION TARGETS (Orientación Global)
+   ───────────────────────────────────────────────────────────────── */
+:root[data-input="touch"] .map-tab-btn,
+:root[data-input="touch"] .carousel-nav-btn,
+:root[data-input="touch"] .btn-route-overlay {
+    min-height: 44px;
+    touch-action: manipulation;
+}
+
+
+/* ─────────────────────────────────────────────────────────────────
+   § 2. ORIENTACIÓN HORIZONTAL / LANDSCAPE (Viewport 1025px a 1600px)
+   Samsung Galaxy Tab S10 Ultra Horizontal (~1480px × 924px)
+   ───────────────────────────────────────────────────────────────── */
+@media (min-width: 1025px) and (max-width: 1600px) {
+    /* Header & Nav Pad — Tagline no recortado y espaciado uniforme de menú */
+    .navbar-tagline {
+        font-size: 0.98rem;
+        white-space: nowrap;
+        overflow: visible;
+        text-overflow: clip;
+        flex-shrink: 0;
+        padding: 0 1rem;
+        margin-left: 1rem;
+        margin-right: auto;
+    }
+
+    .navbar-sticky .nav-links {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-end;
+        gap: 1.25rem;
+        margin-left: auto;
+    }
+
+    .navbar-sticky .nav-links a:not(.nav-item-multiline):not(.btn-nav-medicos) {
+        font-size: 1.06rem;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `tablet-samsung-tabs10ultra.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L94-139)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+    .hero-slide-content h1 {
+        font-size: clamp(2rem, 3.2vw, 3rem);
+        line-height: 1.2;
+    }
+
+    .hero-slide-content p {
+        font-size: 1.1rem;
+        max-width: 680px;
+    }
+
+    /* Carrusel de Especialidades — 3 tarjetas por vista */
+    .specialties-carousel-track .carousel-card {
+        flex: 0 0 calc(33.333% - 1rem);
+        max-width: calc(33.333% - 1rem);
+    }
+
+    /* Catálogo de Promociones — 3 columnas cuadradas uniformes */
+    .catalog-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
+    }
+
+    /* Ubicación & Contacto — Ficha horizontal */
+    .contact-grid-horizontal {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
+    }
+
+    /* Modales — Control de desbordamiento */
+    .modal-scroll-body {
+        max-height: 75vh;
+        overflow-y: auto;
+    }
+}
+
+
+/* ─────────────────────────────────────────────────────────────────
+   § 3. ORIENTACIÓN VERTICAL / PORTRAIT (Viewport 768px a 1024px)
+   Samsung Galaxy Tab S10 Ultra Vertical (~924px × 1480px)
+   ───────────────────────────────────────────────────────────────── */
+@media (min-width: 768px) and (max-width: 1024px) {
+    /* Header de Tableta Vertical */
+    .header-nav-container {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L2729-2754)</summary>
+
+**Path:** `Unknown file`
+
+```
+}
+
+/* Reglas de visibilidad desktop vs mobile */
+@media (min-width: 768px) {
+    .header-search-wrap--mobile {
+        display: none !important;
+    }
+    .navbar-center-block {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        margin-left: 0.5rem;
+        margin-right: auto;
+    }
+}
+@media (max-width: 767px) {
+    .header-search-wrap--desktop {
+        display: none !important;
+    }
+}
+
+/* ── Dropdown Flotante de Resultados de Búsqueda ── */
+.header-search-results {
+    position: absolute;
+    top: calc(100% + 5px);
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L2669-2714)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+/* ── Ajustes específicos DESKTOP ── */
+.header-search-wrap--desktop {
+    width: 310px;
+    flex-shrink: 0;
+}
+.header-search-wrap--desktop .header-search-box {
+    height: 38px;
+    padding: 3px 12px;
+    border-radius: 22px;
+}
+.header-search-wrap--desktop .header-search-icon {
+    width: 18px;
+    height: 18px;
+}
+.header-search-wrap--desktop .header-search-box input.header-search-input {
+    font-size: 1.45rem;
+    text-align: left;
+}
+.header-search-wrap--desktop .header-search-results {
+    right: 0;
+    left: auto;
+    transform: none;
+}
+
+/* ── Ajustes específicos MOBILE ── */
+.header-search-wrap--mobile {
+    width: 100%;
+    max-width: 185px;
+    margin-top: 2px;
+    align-self: flex-end;
+}
+.header-search-wrap--mobile .header-search-box {
+    height: 25px;
+    padding: 1px 7px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.95);
+    justify-content: flex-start;
+}
+.header-search-wrap--mobile .header-search-icon {
+    width: 12px;
+    height: 12px;
+    margin-right: 4px;
+}
+.header-search-wrap--mobile .header-search-box input.header-search-input {
+    font-size: 0.74rem;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L2731-2749)</summary>
+
+**Path:** `Unknown file`
+
+```
+/* Reglas de visibilidad desktop vs mobile */
+@media (min-width: 768px) {
+    .header-search-wrap--mobile {
+        display: none !important;
+    }
+    .navbar-center-block {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        margin-left: 0.5rem;
+        margin-right: auto;
+    }
+}
+@media (max-width: 767px) {
+    .header-search-wrap--desktop {
+        display: none !important;
+    }
+}
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `tablet-samsung-tabs10ultra.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L54-84)</summary>
+
+**Path:** `Unknown file`
+
+```
+   § 2. ORIENTACIÓN HORIZONTAL / LANDSCAPE (Viewport 1025px a 1600px)
+   Samsung Galaxy Tab S10 Ultra Horizontal (~1480px × 924px)
+   ───────────────────────────────────────────────────────────────── */
+@media (min-width: 1025px) and (max-width: 1600px) {
+    /* Header & Nav Pad — Tagline no recortado y espaciado uniforme de menú */
+    .navbar-tagline {
+        font-size: 0.98rem;
+        white-space: nowrap;
+        overflow: visible;
+        text-overflow: clip;
+        flex-shrink: 0;
+        padding: 0 1rem;
+        margin-left: 1rem;
+        margin-right: auto;
+    }
+
+    .navbar-sticky .nav-links {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-end;
+        gap: 1.25rem;
+        margin-left: auto;
+    }
+
+    .navbar-sticky .nav-links a:not(.nav-item-multiline):not(.btn-nav-medicos) {
+        font-size: 1.06rem;
+        white-space: nowrap;
+        margin: 0;
+    }
+    .navbar-sticky .nav-links a.nav-item-multiline {
+        font-size: 1.06rem;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `tablet-samsung-tabs10ultra.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L239-258)</summary>
+
+**Path:** `Unknown file`
+
+```
+    .hero-glass-card .btn-outline-white:hover {
+        background: rgba(255, 255, 255, 0.35);
+        color: #ffffff;
+        border-color: #ffffff;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Etiqueta / Tag Badge — fondo blanco suavizado semi-transparente y texto azul de alta legibilidad */
+    .hero-glass-card > span {
+        background: rgba(255, 255, 255, 0.78);
+        color: #003680;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        font-weight: 800;
+        letter-spacing: 0.06em;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    }
+}
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L129-145)</summary>
+
+**Path:** `Unknown file`
+
+```
+        .navbar-sticky .nav-links {
+            margin-left: 0; margin-right: 0;
+            display: flex; gap: 1.25rem; align-items: flex-start;
+            margin-top: 0;
+        }
+        .navbar-sticky .nav-links a {
+            text-decoration: none; color: var(--text-main);
+            font-weight: 600; font-size: 1.10rem;
+            text-transform: uppercase; letter-spacing: 0.05em;
+            position: relative; padding: 0.15rem 0 0.3rem 0;
+            line-height: 1.2;
+            transition: color 0.2s ease;
+        }
+        .navbar-sticky .nav-links a.nav-item-multiline {
+            text-align: center;
+            line-height: 1.12;
+            display: inline-block;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 11:57 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `tablet-samsung-tabs10ultra.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L64-84)</summary>
+
+**Path:** `Unknown file`
+
+```
+        flex-shrink: 0;
+        padding: 0 1rem;
+        margin-left: 1rem;
+        margin-right: auto;
+    }
+
+    .navbar-sticky .nav-links {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-end;
+        gap: 1.25rem;
+        margin-left: auto;
+    }
+
+    .navbar-sticky .nav-links a:not(.nav-item-multiline):not(.btn-nav-medicos) {
+        font-size: 1.06rem;
+        white-space: nowrap;
+        margin: 0;
+    }
+    .navbar-sticky .nav-links a.nav-item-multiline {
+        font-size: 1.06rem;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L659-697)</summary>
+
+**Path:** `Unknown file`
+
+```
+                aria-label="Abrir menú" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+        <?php
+        // ── Orden de secciones — configurable desde el CMS (configuraciones.seccion_order) ──
+        // Secciones ordenables: inicio, acerca-de, especialidades, promociones, calidad, ubicacion, video.
+        $_SEC_DEFAULT = ['inicio','acerca-de','especialidades','promociones','calidad','ubicacion','video'];
+        $_secNavLabels = [
+            'acerca-de'     => ['label' => 'Quiénes somos',          'href' => '#acerca-de'],
+            'especialidades'=> ['label' => 'Estudios',               'href' => '#especialidades'],
+            'promociones'   => ['label' => 'Promociones',            'href' => '#promociones'],
+            'calidad'       => ['label' => 'Calidad',                'href' => '#calidad'],
+            'ubicacion'     => ['label' => 'Ubicación y<br>Contacto', 'href' => '#ubicacion', 'multiline' => true],
+        ];
+        $isVideoActive = $cfg('video_active', '1') !== '0';
+
+        $_secOrderRaw = $cfg('seccion_order');
+        if ($_secOrderRaw !== '') {
+            $_parsed = array_unique(array_filter(
+                array_map('trim', explode(',', $_secOrderRaw)),
+                fn($s) => in_array($s, $_SEC_DEFAULT, true)
+            ));
+            $_missing = array_diff($_SEC_DEFAULT, $_parsed);
+            $sectionOrder = array_values(array_merge($_parsed, $_missing));
+        } else {
+            $sectionOrder = $_SEC_DEFAULT;
+        }
+        unset($_SEC_DEFAULT, $_secOrderRaw, $_parsed, $_missing);
+
+        // Si el video está apagado, retirarlo del orden de secciones para que no se renderice
+        if (!$isVideoActive) {
+            $sectionOrder = array_values(array_filter($sectionOrder, fn($s) => $s !== 'video'));
+        }
+        ?>
+        <div class="nav-links" id="nav-links-mobile">
+            <a href="#inicio">Inicio</a>
+            <?php foreach ($sectionOrder as $_navSec):
+                if (isset($_secNavLabels[$_navSec])):
+                    $_isMulti = !empty($_secNavLabels[$_navSec]['multiline']);
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L133-145)</summary>
+
+**Path:** `Unknown file`
+
+```
+        }
+        .navbar-sticky .nav-links a {
+            text-decoration: none; color: var(--text-main);
+            font-weight: 600; font-size: 1.10rem;
+            text-transform: uppercase; letter-spacing: 0.05em;
+            position: relative; padding: 0.15rem 0 0.3rem 0;
+            line-height: 1.2;
+            transition: color 0.2s ease;
+        }
+        .navbar-sticky .nav-links a.nav-item-multiline {
+            text-align: center;
+            line-height: 1.12;
+            display: inline-block;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `tablet-samsung-tabs10ultra.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Low)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L69-84)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+    .navbar-sticky .nav-links {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-end;
+        gap: 1.25rem;
+        margin-left: auto;
+    }
+
+    .navbar-sticky .nav-links a:not(.nav-item-multiline):not(.btn-nav-medicos) {
+        font-size: 1.06rem;
+        white-space: nowrap;
+        margin: 0;
+    }
+    .navbar-sticky .nav-links a.nav-item-multiline {
+        font-size: 1.06rem;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Low)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 11:57 am
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Low)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 11:57 am
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (Low)
+</details>
+
+---
+
+## User Request
+
+Investiga, analiza y crea una propuesta de solucion para que el portal web de Medicos pueda contar con estas caracteristicas:
+Evitar/advertir que el usuario ya autenticado como medico, recepción , admin se "salga" de sus paginas accidentalmente. 
+Accidentes de eventos identificados:
+1) Desktop: Cuando se oprime: F5, CTrl F5, Cierre de pestaña o navegador, botones de atras|adelante propias del navegador. 
+2) Mobile: Cuando el usuario hace scroll vertical pero con touch fuerte de arrastrar que hace se recargue la pagina; cuando se da touch al boton atras <,  de control del dispositivo.
+3) Indicame otros eventos aparte de los que liste, para tambien considerarlos en la solución, para desktop y  mobiles.
+4) Las solución debe tener alcance completo/correcto:
+. con fallback para cierto casos de ser requeridos. 
+. DEBE Ser portable/compatible para/con iOS/Android y web browsers: Android, y Safari
+
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `landing.css`
+**Language:** css
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The primary objective is to prevent unintentional page navigation that could lead to data loss or workflow disruption for authenticated users within the medical web portal. The focus is on identifying and mitigating accidental actions originating from desktop interactions, including browser refresh commands and navigation.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `portal medicos`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.109269303s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 12:58 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>Directory: `www` (20 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www`
+
+| Name | Type | Size |
+|------|------|------|
+| `.agents` | File | 19 bytes |
+| `.chatledger` | File | 35 bytes |
+| `.claude` | File | 19 bytes |
+| `.clauderules` | File | 24 bytes |
+| `.git` | Directory | - |
+| `.gitignore` | File | 263 bytes |
+| `.mcp.json` | File | 21 bytes |
+| `CLAUDE.md` | File | 21 bytes |
+| `GEMINI.md` | File | 21 bytes |
+| `ca.crt` | File | 1736 bytes |
+| `docs-dev` | Directory | - |
+| `laesh-swbldi` | Directory | - |
+| `laesh-web-assets-uipv1a` | Directory | - |
+| `mvps` | Directory | - |
+| `panaderia` | Directory | - |
+| `purificadoraAgua` | Directory | - |
+| `restaurant` | Directory | - |
+| `test_puppeteer.js` | File | 526 bytes |
+| `tests` | Directory | - |
+| `web-assets` | Directory | - |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>Directory: `laesh-swbldi` (9 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi`
+
+| Name | Type | Size |
+|------|------|------|
+| `admrc` | Directory | - |
+| `commons` | Directory | - |
+| `crons` | Directory | - |
+| `libs` | Directory | - |
+| `logs` | Directory | - |
+| `md` | Directory | - |
+| `rc` | Directory | - |
+| `uploads` | Directory | - |
+| `website` | Directory | - |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/md`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>Directory: `md` (3 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/md`
+
+| Name | Type | Size |
+|------|------|------|
+| `index.php` | File | 55055 bytes |
+| `negocio` | Directory | - |
+| `views` | Directory | - |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/admrc`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>Directory: `admrc` (2 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/admrc`
+
+| Name | Type | Size |
+|------|------|------|
+| `index.php` | File | 23044 bytes |
+| `views` | Directory | - |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-web-assets-uipv1a/js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>Directory: `js` (18 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-web-assets-uipv1a/js`
+
+| Name | Type | Size |
+|------|------|------|
+| `app.js` | File | 36831 bytes |
+| `catalog-builder.js` | File | 126153 bytes |
+| `catalog-compiled.js` | File | 456796 bytes |
+| `ckeditor-init.js` | File | 15893 bytes |
+| `ckeditor5.umd.js` | File | 1431443 bytes |
+| `cms-dirty-tracker.js` | File | 21516 bytes |
+| `cms-upload.js` | File | 13459 bytes |
+| `device-detect.js` | File | 3165 bytes |
+| `gestion-web.js` | File | 27980 bytes |
+| `htmx.min.js` | File | 49082 bytes |
+| `labadmin.js` | File | 122855 bytes |
+| `log-viewer.js` | File | 3730 bytes |
+| `medicos.js` | File | 87649 bytes |
+| `portal-footer.js` | File | 1828 bytes |
+| `sidebar-rail.js` | File | 6363 bytes |
+| `solicitud-dac.js` | File | 16005 bytes |
+| `website.js` | File | 82313 bytes |
+| `ws-client.js` | File | 39515 bytes |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `beforeunload`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 12:59 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/md/views`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>Directory: `views` (1 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/md/views`
+
+| Name | Type | Size |
+|------|------|------|
+| `medicos.php` | File | 64309 bytes |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/admrc/views`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>Directory: `views` (3 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/admrc/views`
+
+| Name | Type | Size |
+|------|------|------|
+| `gestion_web.php` | File | 141469 bytes |
+| `log_viewer.php` | File | 17041 bytes |
+| `sistema.php` | File | 36543 bytes |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/rc`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>Directory: `rc` (3 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/rc`
+
+| Name | Type | Size |
+|------|------|------|
+| `index.php` | File | 90352 bytes |
+| `negocio` | Directory | - |
+| `views` | Directory | - |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/rc/views`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>Directory: `views` (2 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/rc/views`
+
+| Name | Type | Size |
+|------|------|------|
+| `labadmin.php` | File | 92336 bytes |
+| `solicitud_dac_impr.php` | File | 12291 bytes |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `<script`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 12:59 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `<script`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 12:59 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `app.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+// Audio helper de notificaciones (Web Audio API oscillator)
+function playWhistle() {
+    try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const oscillator = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+        oscillator.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+        oscillator.type = 'sine';
+        oscillator.frequency.setValueAtTime(1200, audioCtx.currentTime);
+        oscillator.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.3);
+        gainNode.gain.setValueAtTime(0.5, audioCtx.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+        oscillator.start();
+        oscillator.stop(audioCtx.currentTime + 0.3);
+    } catch(e) {
+        console.log("Audio no soportado");
+    }
+}
+
+// Overlay iframe compartido para visualización/impresión de Solicitud DAC
+// GAP-PERF-DAC-01 (2026-09-24): el cache-busting por filemtime ya resuelto
+// para los 8 assets de solicitud_dac_impr.php no elimina la pantalla en
+// blanco reportada en dispositivo real — la causa que quedaba es que el
+// documento consulta sus datos vía fetch() (GET /laesh/{portal}/api/orden,
+// GAP-RC-01) DESPUÉS de que el iframe ya cargó su HTML/CSS, y hasta que esa
+// respuesta llega, el iframe se ve blanco (su fondo es #fff) con los campos
+// en "—". Se agrega un spinner en el overlay padre, visible de inmediato al
+// dar clic (antes incluso de que el iframe empiece a cargar), y el iframe
+// permanece con opacity:0 hasta que solicitud-dac.js confirma que ya
+// pobló el documento con datos reales (ver solicitud-dac.js, clase
+// "sol-ready" en #sol-overlay). Sustituye "blanco → todo de golpe" por
+// "spinner → aparece ya listo".
+// Autoauditoría 2026-09-24 (mismo día del fix): el único botón para cerrar
+// esta ventana ("X", btn-dac-close) vive DENTRO del documento del iframe —
+// antes del fix de arriba ya era el único mecanismo (gap preexistente, no
+// introducido hoy), pero con el iframe ahora en opacity:0 mientras carga,
+// ese botón queda además invisible e inalcanzable — si el fetch de la orden
+// se cuelga (no hay timeout en el fetch de solicitud-dac.js), el usuario
+// queda atrapado viendo el spinner sin ninguna salida. Se agrega cierre por
+// click en el fondo oscuro y por tecla Escape, a nivel del overlay padre —
+// funciona sin importar si el iframe ya cargó o no. _solOverlayEscHandler
+// es una función nombrada estable (no una closure nueva en cada llamada) —
+// remove+add previene apilar listeners de keydown en aperturas repetidas.
+function _solOverlayEscHandler(e) {
+    if (e.key === 'Escape') {
+        var ovl = document.getElementById('sol-overlay');
+        if (ovl) ovl.remove();
+    }
+}
+function _abrirSolOverlay(url) {
+    var prev = document.getElementById('sol-overlay');
+    if (prev) prev.remove();
+    var overlay = document.createElement('div');
+    overlay.id = 'sol-overlay';
+    overlay.className = 'sol-overlay';
+    // Cerrar al tocar el fondo oscuro (fuera del documento) — el iframe es un
+    // elemento hijo distinto, un click sobre él nunca deja e.target === overlay.
+    overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) overlay.remove();
+    });
+    var spinner = document.createElement('div');
+    spinner.className = 'sol-overlay-spinner';
+    spinner.setAttribute('role', 'status');
+    spinner.setAttribute('aria-label', 'Cargando solicitud…');
+    overlay.appendChild(spinner);
+    var iframe = document.createElement('iframe');
+    iframe.src = url;
+    iframe.title = 'Solicitud Digital de Análisis Clínicos';
+    overlay.appendChild(iframe);
+    document.body.appendChild(overlay);
+    document.removeEventListener('keydown', _solOverlayEscHandler);
+    document.addEventListener('keydown', _solOverlayEscHandler);
+}
+window._abrirSolOverlay = _abrirSolOverlay;
+
+// ─────────────────────────────────────────────────────────────
+// Portal Header + Nav‑Strip — labadmin.html, medicos.html
+//
+// En tablet/móvil (≤1024px) el header y la tira de iconos son
+// position:fixed, por eso el app-layout necesita padding-top igual
+// a la suma de ambas alturas. app.js mide y publica dos CSS vars:
+//   --portal-header-h        → altura real del nav header
+//   --portal-content-offset  → header + tira (padding-top del layout)
+//
+// En móvil (≤767px) aparece el hamburger (CSS display:flex).
+// Al pulsarlo se muestra .sidebar-mobile-only como mini-panel
+// anclado a la derecha del viewport (usuario + Cerrar Sesión).
+// ─────────────────────────────────────────────────────────────
+(function initPortalHamburger() {
+    var header    = document.querySelector('.portal-access-header');
+    var sidebar   = document.querySelector('.app-layout > .sidebar');
+    var appLayout = document.querySelector('.app-layout');
+    if (!header || !sidebar) return;
+
+    var btn = null;
+
+    // Medir y publicar alturas; ajustar padding-top del layout.
+    // portal-access-header es position:fixed en TODOS los viewports →
+    // siempre se necesita al menos headerH de padding-top en app-layout.
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The request focuses on preventing authenticated users from unintentionally navigating away from the medical web portal's pages, specifically addressing desktop accidental events like refresh (F5, Ctrl+F5) and browser closure. The core problem is preserving the user's session and preventing data loss or disruption caused by unintended page exits. Developing a solution will necessitate a comprehensive understanding of how these events are handled within the application's current architecture.
+
+
+Considering additional events, the solution must comprehensively address page reloads, browser navigations (back/forward), and tab/window closures on desktop. Mobile scenarios introduce vertical swipe reloads and device back button presses. A broad solution requires identifying all events potentially leading to page unload, not only those explicitly listed. The solution will need to be cross-platform compatible and include fallback mechanisms.
+
+
+Identifying all potential navigation triggers requires a complete inventory of browser interactions, including keyboard shortcuts, mouse buttons, and touch gestures across both desktop and mobile platforms. The solution must account for subtle interactions such as the Backspace key outside input fields and the edge swipe on mobile devices, which can easily trigger unintended navigation. Comprehensive testing on various browsers and devices is necessary to ensure complete coverage.
+
+
+Analyzing mobile browser interactions, focusing on swipe gestures, form submissions, and touch events to identify potential navigation triggers. The solution must account for app switching, memory management issues that lead to tab reloads, and PWA behaviors. Examining platform-specific browser security models and API restrictions will provide a more comprehensive approach.
+
+
+The browser's `beforeunload` event is the standard mechanism to warn about leaving, but modern browsers restrict custom messages and require user interaction to trigger the warning. Desktop keypress events for refresh (F5, Ctrl+R, Ctrl+F5) can be intercepted and handled, but not more aggressive shortcuts or UI button clicks. Mouse back/forward button presses can also be intercepted.
+
+
+Preventing back navigation will use a `popstate` and `history.pushState` trap to detect back button/swipe attempts, immediately re-push the current state, and prompt the user to confirm leaving. Mobile "pull-to-refresh" can be disabled using a CSS property on the `html` and `body` elements, with JavaScript fallbacks for older iOS versions.  Edge-swipe back on iOS Safari can be blocked using `overscroll-behavior-x: none` to prevent the browser's default behavior, coupled with the `popstate` trap.
+
+
+The `popstate` handler is crucial; it needs to detect back button and swipe navigation attempts. The generated history entry allows the user to stay on the same page. The next critical question is session resilience, including handling tab suspension, browser closure, and battery failure.
+
+Session and draft persistence are necessary for a comprehensive solution.  Form dirty tracking, auto-saving drafts, and token persistence will enable a seamless recovery of the user's state upon re-opening the browser. This will prevent data loss.
+
+
+Considering additional desktop and mobile event triggers: mouse side buttons, accidental drag-and-drop, pull-to-refresh, system back buttons, edge swipes, app suspension/purging, accidental double-taps/zooms, and uncontrolled form submissions. Modern browser security policies and standards restrict preventing tab closure, requiring user interaction. The solution must adopt a multi-layered approach to maximize effectiveness.
+
+The initial layer will use CSS to disable pull-to-refresh and overscroll behaviors, providing a basic preventative measure. This CSS layer will address vertical overscroll and horizontal edge swipe navigation attempts. The next layers will involve the history trap and native dialog boxes.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 10.795521783s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+## User Request
+
+Genera un documento html que contenga todo lo que describiste en "A continuación se presenta la investigación, análisis técnico y propuesta de solución arquitectónica para blindar los portales web de Médicos, Recepción y Administración contra salidas o recargas accidentales, con compatibilidad total en Desktop, Android e iOS (Safari / Chrome).".
+. Ponlo aqui /home/carlos/GitHub/caelitandem_home/portafolio-dev-2026/blocklabgd/v1.2/et/estabilizacionUI/
+. EN estas dos secciones : Capa 5: Resiliencia de Sesión y Datos (Fallback Definitivo), Inclusión en las Vistas de los Portales: Vincular el script en: laesh-swbldi/admrc/views/gestion_web.php  y sistema.php  (Admin)  , añade una nota en cada una que diga no incluir en la implementación , dejarlo para una fase 2.
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `landing.css`
+**Language:** css
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Initial assessment: The objective is to create an HTML document summarizing protection strategies against unintended web portal reloads/exits on various platforms. The target directory is specified for output. The prior message's details provide the necessary content scope.
+
+
+
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/portafolio-dev-2026/blocklabgd/v1.2/et`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.054232065s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>Directory: `et` (9 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/portafolio-dev-2026/blocklabgd/v1.2/et`
+
+| Name | Type | Size |
+|------|------|------|
+| `Control_Proyecto.html` | File | 69480 bytes |
+| `Especificacion_Tecnica.html` | File | 174920 bytes |
+| `Guia_Usuario_CMS_Sitio_Web.html` | File | 89015 bytes |
+| `Memoria de Instalación Certificados Locales HTTPS.html` | File | 10048 bytes |
+| `Tecnica_Infraestructura_Despliegue.html` | File | 302815 bytes |
+| `Tecnica_Modelo_Datos.html` | File | 108489 bytes |
+| `Tecnica_Seguridad_Integral.html` | File | 97703 bytes |
+| `estabilizacionUI` | Directory | - |
+| `styles.css` | File | 8963 bytes |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/portafolio-dev-2026/blocklabgd/v1.2/et/estabilizacionUI`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>Directory: `estabilizacionUI` (5 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/portafolio-dev-2026/blocklabgd/v1.2/et/estabilizacionUI`
+
+| Name | Type | Size |
+|------|------|------|
+| `DECISIONS.md` | File | 9303 bytes |
+| `audit-laesh-medicos-20260816.html` | File | 46755 bytes |
+| `checkpoint_runbook_20260818.md` | File | 12780 bytes |
+| `notas_septiembre_laesh.md` | File | 13417 bytes |
+| `reporte-estabilizacion-ui.html` | File | 86409 bytes |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `reporte-estabilizacion-ui.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitácora de Estabilización LAESH</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;700&display=swap">
+    <style>
+        /* ── TOKENS LIGHT (default) ── */
+        :root {
+            --primary:            #0052B7;
+            --primary-dark:       #003d8a;
+            --primary-green:      #5faa00;
+            --primary-green-bg:   #e8f9d4;
+            --primary-green-hdr:  #3d7300;
+
+            --text-main:          #0c1a2e;
+            --text-muted:         #4a637a;
+            --text-code:          #234975;
+
+            --bg-page:            #eef3fb;
+            --bg-surface:         #ffffff;
+            --bg-table-head:      #f0f5ff;
+            --bg-row-hover:       #f7faff;
+            --bg-num:             #f0f5ff;
+
+            --border:             #c8d9f0;
+            --border-light:       #dce9f9;
+
+            --success-bg:         #d1fae5;
+            --success-text:       #047857;
+            --success-border:     rgba(4, 120, 87, 0.20);
+
+            --warn-bg:            #fffbeb;
+            --warn-text:          #92400e;
+            --warn-border:        #fde68a;
+
+            --info-bg:            #e0f2fe;
+            --info-text:          #0369a1;
+            --info-border:        #bae6fd;
+
+            --orange-hdr-bg:      #fff7ed;
+            --orange-hdr-text:    #c2410c;
+            --orange-hdr-border:  #f97316;
+
+            --rule-chip-bg:       #f0f5ff;
+            --rule-chip-border:   #c8d9f0;
+            --rule-chip-code:     #003d8a;
+
+            --feat-bg:            #ecfeff;
+            --feat-text:          #0e7490;
+            --feat-border:        rgba(14, 116, 144, 0.18);
+
+            --shadow:             0 8px 24px rgba(0, 82, 183, 0.07);
+        }
+
+        /* ── TOKENS DARK ── */
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --primary:            #5a9ef5;
+                --primary-dark:       #7ab4ff;
+                --primary-green:      #71CA11;
+                --primary-green-bg:   #1a2f06;
+                --primary-green-hdr:  #a0e040;
+
+                --text-main:          #dde8f5;
+                --text-muted:         #809ab8;
+                --text-code:          #93bef5;
+
+                --bg-page:            #0b1220;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The file appears to be a UI stabilization report. Considering the content, "UI-Estabilizacion-LAESH" or "LAESH-UI-Reporte-Estabilizacion" seem like appropriate filenames. The goal is to choose a filename that clearly reflects its content and context within the LAESH project.
+
+
+Considering several filenames, settled on `propuesta-blindaje-salidas-portales.html` to align with the directory structure and content. Identified specific user requirements: creating an HTML document with the architectural solution, placing it in the specified directory, and including specific notes related to implementation phasing. The document needs a clear title reflecting the solution's purpose.
+
+
+Analyzing the document, it proposes a multi-layered approach to prevent accidental navigation away from the application across various platforms. The analysis identifies browser security limitations preventing silent exit blocking, requiring user interaction for exit confirmation. The strategy combines in-app pre-event handling, native dialogs, and gesture control, alongside local data saving. A detailed table inventories potential accidental exit events on both desktop and mobile, categorizing them by risk level and possible interception mechanisms.
+
+
+A multi-layered architectural solution is proposed to mitigate accidental exits, focusing on mobile, tablet, and desktop. The design anticipates events like pull-to-refresh, history navigation, keyboard input, mouse button presses, and page unload. The solution will include a CSS and Javascript implementation, an in-app modal, key and mouse event interception, and a standard browser unload handler.
+
+Session data resilience and autosaving are explicitly deferred to a later phase. A detailed flowchart will visually represent the decision-making process within the protection module.
+
+
+The implementation plan calls for a unified module and in-app modal integration, targeting specific portal views in a phased approach, excluding the admin views initially. The plan outlines verification testing across several device configurations. The directory path is validated along with the existing files to confirm the new file's placement. The existing file style should be verified.
+
+
+
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 34.950132565s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** CORTEX_STEP_STATUS_ERROR
+**Created:** 25 Sept 2026, 1:39 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+The file write operation failed due to a permission error, specifically triggered by the default system policy. The user's information reveals multiple workspaces, potentially leading to policy conflicts regarding file access rights across different URIs. Determining the specific workspace policy impacting the target file location is necessary to resolve this access issue.
+
+
+
+
+### Actions
+
+**Tool:** `write_to_file`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.297545552s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 1:39 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 1:39 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+File creation and copy are confirmed. Verification of required notes within the generated HTML is now necessary. One note indicates a feature for a later phase; the second concerns portal view integration.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `propuesta-blindaje-salidas-portales.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.066726293s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L429-479)</summary>
+
+**Path:** `Unknown file`
+
+```
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .layer-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+        }
+
+        /* ── Footer ── */
+        .doc-footer {
+            text-align: center;
+            padding-top: 2rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- ═══════════════════════════════════════════════════════ HEADER ══ -->
+    <header class="doc-header">
+        <div class="doc-badge">Especificación Técnica &middot; Arquitectura Frontend</div>
+        <h1 class="doc-title">Propuesta Técnica: Blindaje contra Salidas y Recargas Accidentales en Portales Web LAESH</h1>
+        <p class="doc-subtitle">Investigación, análisis de riesgos de navegación en navegadores modernos y propuesta de solución arquitectónica multicapa portable (Desktop, Android, iOS Safari / Chrome) para los portales de Médicos, Recepción y Administración.</p>
+        
+        <div class="meta-grid">
+            <div class="meta-item">
+                <span class="meta-label">Versión</span>
+                <span class="meta-value">v1.2 &middot; Fase 1 / Fase 2</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Fecha</span>
+                <span class="meta-value">Septiembre 2026</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Sistemas Afectados</span>
+                <span class="meta-value">Médicos (md) &middot; Recepción (rc) &middot; Admin (admrc)</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Compatibilidad</span>
+                <span class="meta-value">Desktop &middot; Android &middot; iOS Safari &middot; Chrome</span>
+            </div>
+        </div>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `propuesta-blindaje-salidas-portales.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L679-729)</summary>
+
+**Path:** `Unknown file`
+
+```
+history.pushState({ portalGuard: true }, document.title, window.location.href);</code></pre>
+            <p>2. Al dispararse el evento <code>popstate</code> (cuando el usuario pulsa Atrás o desliza el borde), el centinela vuelve a empujarse inmediatamente para reponer la página actual, y se levanta un modal estilizado con el diseño de LAESH:</p>
+            <pre><code>window.addEventListener('popstate', function(e) {
+    // Restaurar inmediatamente el centinela en la pila de historial
+    history.pushState({ portalGuard: true }, document.title, window.location.href);
+
+    // Desplegar Modal UI LAESH
+    PortalGuard.showConfirmModal({
+        titulo: '¿Deseas salir del portal?',
+        mensaje: 'Tienes una sesión de trabajo activa. Para salir de manera segura, utiliza el botón "Cerrar Sesión".',
+        btnQuedarse: 'Permanecer en el portal',
+        btnSalir: 'Salir de todos modos',
+        onConfirmSalir: function() {
+            PortalGuard.desactivar();
+            window.location.href = '/laesh/?logout=1';
+        }
+    });
+});</code></pre>
+        </div>
+
+        <!-- Capa 3 -->
+        <div class="layer-box">
+            <div class="layer-title">Capa 3: Interceptor de Teclado y Hardware de Ratón (Desktop)</div>
+            <div class="layer-desc">Neutraliza las combinaciones comunes de recarga de página y los clics erráticos en botones laterales de ratones ergonómicos.</div>
+            <ul>
+                <li><strong>Captura de F5, Ctrl+R, Cmd+R:</strong> Interceptados en la fase de captura del evento <code>keydown</code> mediante <code>e.preventDefault()</code>, solicitando confirmación con el modal in-app antes de recargar.</li>
+                <li><strong>Bloqueo de botones laterales de ratón (Botón 3 y 4):</strong> Los ratones de oficina con botones de navegación lateral en el pulgar son capturados en los eventos <code>pointerdown</code> y <code>mouseup</code> cuando <code>e.button === 3 || e.button === 4</code>, anulando la acción de retroceso del hardware.</li>
+                <li><strong>Bloqueo de Backspace huérfano:</strong> Se verifica que la tecla Backspace solo funcione cuando el foco activo (<code>document.activeElement</code>) sea un elemento editable (<code>input</code>, <code>textarea</code>, <code>contenteditable</code>).</li>
+            </ul>
+        </div>
+
+        <!-- Capa 4 -->
+        <div class="layer-box">
+            <div class="layer-title">Capa 4: Guard Universal de Descarga (<code>beforeunload</code> estándar W3C)</div>
+            <div class="layer-desc">El mecanismo de protección para el cierre de pestañas (Ctrl+W), clic en la "X" del navegador o ingreso de una nueva URL.</div>
+            <p>Se implementa bajo dos modalidades configurables:</p>
+            <ul>
+                <li><strong>Modo Continuo (Sesión Activa):</strong> Protege permanentemente las vistas de trabajo mientras el médico o recepcionista esté autenticado.</li>
+                <li><strong>Modo Formulario Sucio (Dirty Form Tracker):</strong> Se activa dinámicamente cuando el operador introduce cambios en un formulario y aún no los ha enviado al servidor, complementando el tracker existente en el sistema.</li>
+            </ul>
+            <pre><code>window.addEventListener('beforeunload', function(e) {
+    if (PortalGuard.debeAdvertir()) {
+        e.preventDefault();
+        e.returnValue = ''; // Requerido por la especificación W3C para forzar el diálogo nativo
+        return '';
+    }
+});</code></pre>
+        </div>
+
+        <!-- Capa 5 -->
+        <div class="layer-box phase2-layer">
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `propuesta-blindaje-salidas-portales.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L729-829)</summary>
+
+**Path:** `Unknown file`
+
+```
+        <div class="layer-box phase2-layer">
+            <div class="layer-title">Capa 5: Resiliencia de Sesión y Datos (Fallback Definitivo) <span class="chip chip-phase2">Fase 2</span></div>
+            <div class="layer-desc">Mecanismo de recuperación automática en caso de cierre forzoso, corte de energía o purgado de memoria RAM por el sistema operativo en móviles.</div>
+            
+            <div class="alert alert-phase2">
+                No incluir en la implementación, dejarlo para una fase 2.
+            </div>
+
+            <p>Alcance técnico planificado para la Fase 2:</p>
+            <ul>
+                <li><strong>Auto-Guardado Local en Tiempo Real (Drafts):</strong> Almacenamiento continuo del estado de las órdenes y campos de texto en <code>sessionStorage</code> o <code>localStorage</code> conforme el usuario teclea.</li>
+                <li><strong>Banner de Restauración Automática:</strong> Al reingresar tras una recarga forzada o crash de memoria, el sistema detecta el borrador huérfano y muestra: <em>"Se detectaron datos no guardados de tu sesión previa. [Restaurar información] [Descartar]"</em>.</li>
+                <li><strong>Reconexión Silenciosa de WebSockets:</strong> Restauración transparente de la sesión de Swoole v6 sin necesidad de recargar la página completa.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════ §4 MATRIZ DE PORTABILIDAD ══ -->
+    <section class="section-card">
+        <h2 class="section-title"><span class="section-num">4</span> Matriz de Compatibilidad y Portabilidad</h2>
+        <p>Evaluación técnica de los mecanismos en todos los motores de renderizado objetivo (Blink/Chromium, WebKit y Gecko):</p>
+
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mecanismo Técnico</th>
+                        <th>Chrome / Edge (Desktop)</th>
+                        <th>Safari (macOS)</th>
+                        <th>Chrome (Android)</th>
+                        <th>Safari (iOS 15-18+)</th>
+                        <th>Comportamiento / Fallback</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Anti Pull-to-Refresh</strong></td>
+                        <td><span class="chip chip-success">Compatible</span> (CSS)</td>
+                        <td><span class="chip chip-success">Compatible</span> (CSS)</td>
+                        <td><span class="chip chip-success">Compatible</span> (CSS)</td>
+                        <td><span class="chip chip-success">Compatible</span> (CSS iOS 16+)</td>
+                        <td>En iOS &le; 15 opera el fallback condicional de <code>touchmove</code>.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>History Guard (Atrás / Swipe)</strong></td>
+                        <td><span class="chip chip-success">Compatible</span></td>
+                        <td><span class="chip chip-success">Compatible</span></td>
+                        <td><span class="chip chip-success">Compatible</span></td>
+                        <td><span class="chip chip-success">Compatible</span></td>
+                        <td>Captura el botón Atrás de Android y el deslizamiento lateral en iOS.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Atajos de Teclado (F5, Ctrl+R)</strong></td>
+                        <td><span class="chip chip-success">Compatible</span></td>
+                        <td><span class="chip chip-success">Compatible</span></td>
+                        <td><span class="chip chip-warn">N/A</span></td>
+                        <td><span class="chip chip-warn">N/A</span></td>
+                        <td>En móviles los navegadores no disponen de atajos físicos directos.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Botones Laterales de Ratón</strong></td>
+                        <td><span class="chip chip-success">Compatible</span></td>
+                        <td><span class="chip chip-success">Compatible</span></td>
+                        <td><span class="chip chip-warn">N/A</span></td>
+                        <td><span class="chip chip-warn">N/A</span></td>
+                        <td>Aplica para estaciones fijas de recepción y consultorios.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cierre de Pestaña (beforeunload)</strong></td>
+                        <td><span class="chip chip-success">Compatible</span></td>
+                        <td><span class="chip chip-success">Compatible</span></td>
+                        <td><span class="chip chip-success">Compatible</span></td>
+                        <td><span class="chip chip-success">Compatible</span></td>
+                        <td>Requiere que el usuario haya hecho al menos 1 interacción previa.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Resiliencia de Datos (Drafts)</strong></td>
+                        <td><span class="chip chip-phase2">Fase 2</span></td>
+                        <td><span class="chip chip-phase2">Fase 2</span></td>
+                        <td><span class="chip chip-phase2">Fase 2</span></td>
+                        <td><span class="chip chip-phase2">Fase 2</span></td>
+                        <td>Almacenamiento en <code>sessionStorage</code> agnóstico a la plataforma.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════ §5 PLAN DE IMPLEMENTACIÓN ══ -->
+    <section class="section-card">
+        <h2 class="section-title"><span class="section-num">5</span> Plan de Implementación y Fases de Despliegue</h2>
+
+        <h3 style="font-size: 1.1rem; color: var(--primary-dark); margin-bottom: 0.5rem;">Fase 1: Implementación Inmediata (Médicos y Recepción)</h3>
+        <p>Despliegue de los controles defensivos activos (Capas 1 a 4) en los dos portales de mayor transaccionalidad clínica:</p>
+
+        <ol>
+            <li><strong>Creación del activo centralizado:</strong><br>
+                Desarrollo de <code>/laesh-web-assets-uipv1a/js/portal-guard.js</code> (peso menor a 6 KB, sin librerías externas ni dependencias complejas).
+            </li>
+            <li><strong>Inclusión del Modal UI In-App:</strong><br>
+                Estructura HTML/CSS reutilizable dentro del DOM del portal para desplegar el diálogo de confirmación ante pulsaciones de F5 o retroceso de historial, respetando la paleta oficial (azul clínico <code>#0052B7</code> y verde marca <code>#71CA11</code>).
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `propuesta-blindaje-salidas-portales.html`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L829-864)</summary>
+
+**Path:** `Unknown file`
+
+```
+                Estructura HTML/CSS reutilizable dentro del DOM del portal para desplegar el diálogo de confirmación ante pulsaciones de F5 o retroceso de historial, respetando la paleta oficial (azul clínico <code>#0052B7</code> y verde marca <code>#71CA11</code>).
+            </li>
+            <li><strong>Inclusión en las Vistas de los Portales (Alcance Fase 1):</strong>
+                <ul>
+                    <li><code>laesh-swbldi/md/views/medicos.php</code> &mdash; Portal de Médicos <span class="chip chip-success">Fase 1</span></li>
+                    <li><code>laesh-swbldi/rc/views/labadmin.php</code> &mdash; Portal de Recepción / Laboratorio <span class="chip chip-success">Fase 1</span></li>
+                </ul>
+            </li>
+            <li><strong>Adición de Clases CSS en Contenedores Raíz:</strong><br>
+                Inyección de <code>overscroll-behavior-y: contain;</code> y <code>overscroll-behavior-x: none;</code> en las hojas de estilo del portal (<code>landing.css</code> / <code>tablet-samsung-tabs10ultra.css</code>).
+            </li>
+        </ol>
+
+        <div class="alert alert-phase2" style="margin-top: 1.5rem;">
+            No incluir en la implementación, dejarlo para una fase 2:<br>
+            <strong>Vincular el script en: <code>laesh-swbldi/admrc/views/gestion_web.php</code> y <code>sistema.php</code> (Admin).</strong>
+        </div>
+
+        <h3 style="font-size: 1.1rem; color: var(--primary-dark); margin: 1.5rem 0 0.5rem 0;">Fase 2: Expansión y Resiliencia Avanzada (Futuro)</h3>
+        <ul>
+            <li>Integración del módulo <code>portal-guard.js</code> en las vistas administrativas del CMS (<code>gestion_web.php</code> y <code>sistema.php</code>).</li>
+            <li>Implementación de la <strong>Capa 5 (Resiliencia de Sesión y Datos)</strong> con auto-guardado local de formularios en <code>sessionStorage</code> y restauración de borrador.</li>
+            <li>Auditoría de reconexión transparente del WebSocket de Swoole v6 ante cambios prolongados de segundo plano en móviles.</li>
+        </ul>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════ §6 ESQUELETO TÉCNICO ══ -->
+    <section class="section-card">
+        <h2 class="section-title"><span class="section-num">6</span> Especificación de Código: Módulo <code>portal-guard.js</code></h2>
+        <p>Estructura base del script autocontenido que se integrará en el ecosistema de assets de LAESH:</p>
+
+        <pre><code>/**
+ * ═══════════════════════════════════════════════════════════════════
+ * portal-guard.js — LAESH Navigation & Accidental Unload Shield
+ * ───────────────────────────────────────────────────────────────────
+ * Blindaje multicapa contra salidas o recargas accidentales en
+```
+
+</details>
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+## User Request
+
+Analiza esta imagen con base a su tamaño actual /home/carlos/GitHub/caelitandem_home/portafolio-dev-2026/blocklabgd/v1.2/insumos-laesh/22sep/promociones diarias/CROQUIS ACTUAL LAESH 2026.png , y determina cual es el tamaño optimo a redimensionar para que se vea correcto/completo (para laptops/desktop y todos los mobviles) en la pagina index del website correspondiente a la sección/ficha contenedora : Ubicación y Contacto / Croquis ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `landing.css`
+**Language:** css
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Analyzing the image to determine the current dimensions and aspect ratio is the first step. The goal is to identify an optimal resizing strategy that ensures the image displays correctly on various devices without distortion or excessive file size. Determining the current file weight is also relevant, as the target is to keep it optimal, so I will take that into account to ensure responsiveness.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.141567728s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 2:44 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `croquis`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 2:44 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `#ubicacion`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 2:45 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L869-971)</summary>
+
+**Path:** `Unknown file`
+
+```
+            if (promoTitle) promoTitle.innerHTML = title || 'Promoción — Imagen Completa';
+
+            promoModal.classList.add('show');
+            document.body.classList.add('modal-open');
+        };
+
+        window.closePromoModal = function() {
+            var promoModal = document.getElementById('modal-img-promo');
+            if (promoModal) {
+                promoModal.classList.remove('show');
+                document.body.classList.remove('modal-open');
+            }
+        };
+
+        // Delegación global de clics y eventos táctiles para capturar cualquier tarjeta o imagen de promoción
+        document.addEventListener('click', function(e) {
+            var btn = e.target.closest('.catalog-card-btn') || e.target.closest('.catalog-card-btn-overlay') || e.target.closest('a');
+            if (btn) return;
+
+            var card = e.target.closest('.catalog-card') || e.target.closest('[data-promo-img]');
+            if (!card) return;
+
+            var imgSrc = card.getAttribute('data-promo-img');
+            if (!imgSrc || imgSrc.trim() === '') {
+                var imgEl = card.querySelector('.catalog-card-img') || card.querySelector('img');
+                if (imgEl) imgSrc = imgEl.getAttribute('src');
+            }
+            if (!imgSrc || imgSrc.trim() === '') return;
+
+            var title = card.getAttribute('data-promo-title-html') || card.getAttribute('data-promo-title') || 'Promoción — Imagen Completa';
+            if (typeof window.openPromoModal === 'function') {
+                window.openPromoModal(imgSrc, title);
+            }
+        });
+
+        // Cierre al presionar la tecla Escape en cualquier dispositivo con teclado
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' || e.keyCode === 27) {
+                if (typeof window.closePromoModal === 'function') window.closePromoModal();
+            }
+        });
+
+        // Eventos de cierre sobre el modal mismo
+        document.addEventListener('DOMContentLoaded', function() {
+            var promoModal = document.getElementById('modal-img-promo');
+            if (promoModal) {
+                var closeBtn = promoModal.querySelector('.close-modal');
+                if (closeBtn) {
+                    closeBtn.addEventListener('click', function() {
+                        if (typeof window.closePromoModal === 'function') window.closePromoModal();
+                    });
+                }
+                promoModal.addEventListener('click', function(e) {
+                    if (e.target === promoModal) {
+                        if (typeof window.closePromoModal === 'function') window.closePromoModal();
+                    }
+                });
+            }
+        });
+    </script>
+    <!-- Fix C1: IntersectionObserver inline — registra el observer antes de que website.js
+         descargue. Elimina el blanco post-hero en móvil: las secciones se muestran
+         en cuanto el HTML es parseado, sin esperar DOMContentLoaded ni el JS de 84KB.
+         Flag window._laeshObserver previene registro duplicado en website.js. -->
+    <script>
+    (function(){
+        var els = document.querySelectorAll('.animate-on-scroll');
+        if (!els.length) return;
+        /* prefers-reduced-motion: muestra todo de inmediato sin animación */
+        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            els.forEach(function(el){ el.classList.add('visible'); });
+            window._laeshObserver = 'noop';
+            return;
+        }
+        if (!('IntersectionObserver' in window)) {
+            /* Fallback navegadores sin IO: mostrar todo visible */
+            els.forEach(function(el){ el.classList.add('visible'); });
+            window._laeshObserver = 'noop';
+            return;
+        }
+        /* Fix C3: rootMargin '0px' — activa en cuanto el elemento toca el viewport,
+           sin requerir 50px de penetración como hacía "-50px". */
+        var io = new IntersectionObserver(function(entries){
+            entries.forEach(function(e){
+                if (e.isIntersecting) { e.target.classList.add('visible'); }
+            });
+        }, { threshold: 0.05, rootMargin: '0px' });
+        els.forEach(function(el){ io.observe(el); });
+        window._laeshObserver = io;
+    })();
+    </script>
+    <!-- Catálogo compacto de estudios (OPcache L2) para autocompletado en memoria RAM local (0ms lag) -->
+    <script>
+        window.__LAESH_ESTUDIOS__ = <?= $estudiosSearchJson ?: '[]' ?>;
+    </script>
+    <!-- Fix C2: htmx se carga async + fetchpriority low — no bloquea DOMContentLoaded
+         ni compite con website.js. Solo se necesita cuando el usuario abre el modal de login. -->
+    <script src="/laesh-web-assets-uipv1a/js/htmx.min.js" async fetchpriority="low"></script>
+    <script src="/laesh-web-assets-uipv1a/js/website.js?v=<?= @filemtime(__DIR__ . '/../../laesh-web-assets-uipv1a/js/website.js') ?: @filemtime('/var/www/html/laesh-web-assets-uipv1a/js/website.js') ?: time() ?>" defer></script>
+
+</body>
+</html>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `id="ubicacion"`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 2:45 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `ubicacion`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 2:45 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L459-519)</summary>
+
+**Path:** `Unknown file`
+
+```
 
 // Ubicación (sin fallback)
 $ubH2      = $c('ubicacion', 'seccion', 'h2');
@@ -10079,89 +11792,53 @@ $waSvg = '<svg width="15" height="15" fill="#25D366" viewBox="0 0 24 24" aria-hi
         if (file_exists($imgPath)) {
             [$ogImgW, $ogImgH] = @getimagesize($imgPath) ?: [1200, 630];
         }
-    }
-    ?>
-    <meta property="og:image:width" content="<?= $ogImgW ?>">
-    <meta property="og:image:height" content="<?= $ogImgH ?>">
-    <meta property="og:image:type" content="<?= $ogImgMime ?>">
-    <meta property="og:image:alt" content="<?= h($cfgNombreC) ?> — Laboratorio Clínico <?= h($cfgCiudad) ?>">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://laesh.mx/">
-    <meta property="og:locale" content="es_MX">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="<?= h($ogTitle) ?>">
-    <meta name="twitter:description" content="<?= h($ogDesc) ?>">
-    <meta name="twitter:image" content="<?= h($ogImg) ?>">
-    <link rel="canonical" href="https://laesh.mx/">
-    <link rel="alternate" hreflang="es-MX" href="https://laesh.mx/">
-    <link rel="icon" type="image/svg+xml" href="/laesh-web-assets-uipv1a/img/favicon.svg">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https://*.ggpht.com https://*.gstatic.com https://*.google.com https://*.googleusercontent.com https://*.tile.openstreetmap.org https://*.openstreetmap.org https://i.ytimg.com; frame-src https://maps.google.com https://www.google.com https://google.com https://*.google.com https://www.openstreetmap.org https://www.youtube.com https://youtube.com https://open.spotify.com https://player.vimeo.com https://www.dailymotion.com https://www.instagram.com https://www.facebook.com https://platform.twitter.com https://twitframe.com; script-src 'self' 'unsafe-inline' https://maps.google.com https://www.google.com; connect-src 'self' ws: wss: https://*.google.com https://*.openstreetmap.org;">
-    <script src="/laesh-web-assets-uipv1a/js/device-detect.js?v=<?= time() ?>"></script>
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/tokens.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/fonts.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/style.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/style-website.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/landing.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/ckeditor-content.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/targeting.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/tablet-samsung-tabs10ultra.css?v=<?= time() ?>">
-    <link rel="preload" href="/laesh-web-assets-uipv1a/fonts/cabin-latin-normal-w400.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/laesh-web-assets-uipv1a/fonts/outfit-latin-normal-w300.woff2" as="font" type="font/woff2" crossorigin>
-    <!-- LCP preload: precarga la imagen del hero activa antes de que el parser la descubra vía bg_style -->
-    <?php
-    $preloadImgUrl = $slides[1]['imagen_url'] ?? '';
-    if ($hasParentBg) {
-        $preloadImgUrl = $fixedUrl ?: ($fallback ?? '');
-    }
-    if ($preloadImgUrl):
-    ?>
-    <link rel="preload" href="<?= h($preloadImgUrl) ?>" as="image" fetchpriority="high">
-    <?php endif; ?>
-
-    <!-- W8: Schema.org — datos dinámicos desde configuraciones + web_contenidos (GAP 3 resuelto: GeoCoordinates + sameAs) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "<?= $schemaType ?>",
-      "name": "<?= $schemaName ?>",
-      "@id": "https://laesh.mx",
-      "url": "https://laesh.mx",
-      "logo": "https://laesh.mx/laesh-web-assets-uipv1a/img/logo-laesh.webp",
-      "image": "https://laesh.mx/laesh-web-assets-uipv1a/img/logo-laesh.webp",
-      "telephone": "+52<?= h(waNum($cfgTel)) ?>",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "<?= h($cfgDirCalle) ?>",
-        "addressLocality": "<?= h($cfgCiudad) ?>",
-        "addressRegion": "<?= h($cfgEstado) ?>",
-        "postalCode": "<?= h($cfgCP) ?>",
-        "addressCountry": "MX"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": <?= $cfgGeoLat ?>,
-        "longitude": <?= $cfgGeoLng ?>
-      },
-      "sameAs": [
-        "<?= h($cfgFB ?: 'https://www.facebook.com/LAESH.Huajuapan/') ?>"
-      ],
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
-          "opens": "<?= h($cfgHrsOpen ?: '07:00') ?>",
-          "closes": "<?= h($cfgHrsClose ?: '21:00') ?>"
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": "Sunday",
-          "opens": "<?= h($cfgDomOpen ?: '07:00') ?>",
-          "closes": "<?= h($cfgDomClose ?: '15:00') ?>"
-        }
-      ],
 ```
 
 </details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `$ubH2`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 2:45 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `sectionOrder`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 2:45 pm
 
 ---
 
@@ -10175,17 +11852,20 @@ $waSvg = '<svg width="15" height="15" fill="#25D366" viewBox="0 0 24 24" aria-hi
 <details>
 <summary>Metadata</summary>
 
-- **Model:** Gemini 3.8 Flash (Low)
+- **Model:** Gemini 3.8 Flash (High)
 </details>
 
 ---
 
 <details>
-<summary>File: `Unknown file` (L719-789)</summary>
+<summary>File: `Unknown file` (L714-769)</summary>
 
 **Path:** `Unknown file`
 
 ```
+        <div class="landing-nav-spacer"></div>
+
+        <?php
         foreach ($sectionOrder as $_secId):
             if ($_secId === 'inicio'):
         ?>
@@ -10239,24 +11919,6 @@ $waSvg = '<svg width="15" height="15" fill="#25D366" viewBox="0 0 24 24" aria-hi
         <footer class="footer-main" style="background: <?= h($footerBgColor) ?> !important;" role="contentinfo">
             <?= $footerHtml ?>
         </footer>
-    </main>
-
-    <!-- Botón WhatsApp flotante — número desde configuraciones -->
-    <a href="<?= h($waInfoUrl) ?>" class="whatsapp-float"
-       target="_blank" rel="noopener noreferrer"
-       title="Contáctanos por WhatsApp" aria-label="Contáctanos por WhatsApp">
-        <svg width="32" height="32" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984a9.96 9.96 0 0 0 1.335 4.975L2 22l5.195-1.364A9.936 9.936 0 0 0 12.006 22c5.507 0 9.991-4.479 9.992-9.986.002-2.668-1.036-5.18-2.924-7.069C17.186 3.057 14.675 2.002 12.012 2zm5.72 14.15c-.314.88-1.543 1.62-2.13 1.7-.587.08-1.173.28-4.08-.93-3.72-1.54-6.12-5.32-6.3-5.57-.18-.25-1.47-1.95-1.47-3.72 0-1.78.93-2.65 1.26-3 .33-.35.72-.44.96-.44h.69c.22 0 .52-.08.82.64.3.72 1.02 2.48 1.11 2.66.09.18.15.39.03.63-.12.24-.18.39-.36.6-.18.21-.38.47-.54.63-.18.18-.37.38-.16.73.21.35.93 1.54 2 2.49 1.38 1.23 2.54 1.61 2.9 1.79.36.18.57.15.78-.09.21-.24.9-1.05 1.14-1.41.24-.36.48-.3.8-.18.33.12 2.07 1.02 2.43 1.2.36.18.6.27.69.42.09.15.09.87-.22 1.75z"/>
-        </svg>
-    </a>
-
-    <!-- Botón Facebook flotante — URL desde configuraciones -->
-    <?php if ($cfgFB): ?>
-    <a class="social-float fb-bg" href="<?= h($cfgFB) ?>"
-       target="_blank" rel="noopener noreferrer"
-       title="Visita nuestro Facebook" aria-label="Visita nuestro Facebook">
-        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/>
 ```
 
 </details>
@@ -10267,13 +11929,46 @@ $waSvg = '<svg width="15" height="15" fill="#25D366" viewBox="0 0 24 24" aria-hi
 
 ### Actions
 
-**Tool:** `view_file`
-**File:** `especialidades.php`
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/website/sections`
 
 <details>
 <summary>Metadata</summary>
 
-- **Model:** Gemini 3.8 Flash (Low)
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>Directory: `sections` (6 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/website/sections`
+
+| Name | Type | Size |
+|------|------|------|
+| `acerca-de.php` | File | 2629 bytes |
+| `calidad.php` | File | 1566 bytes |
+| `especialidades.php` | File | 5754 bytes |
+| `promociones.php` | File | 4890 bytes |
+| `ubicacion.php` | File | 6179 bytes |
+| `video.php` | File | 1519 bytes |
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `ubicacion.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
 </details>
 
 ---
@@ -10286,99 +11981,108 @@ $waSvg = '<svg width="15" height="15" fill="#25D366" viewBox="0 0 24 24" aria-hi
 ```
 <?php
 /**
- * sections/especialidades.php — Partial: Estudios / Catálogo
+ * sections/ubicacion.php — Partial: Ubicación y Contacto
  * Incluido desde website/index.php; hereda su scope completo.
- * Variables esperadas: $catalogH2, $catalogSub, $carouselCards, $catalogNota, $cg, GRUPO_SVGS
+ * Variables esperadas: $ubH2, $ubSub, $cfgDir, $cfgTelDigit, $cfgTel, $cfgEmail,
+ *   $waContactUrl, $cfg, $cfgHorSem, $cfgHorDom, $cfgRespNom, $cfgRespProf,
+ *   $cfgRespEsp, $c, $cfgNombreC, $cfgMapsUrl, $mapsEmbed
  */
 ?>
-        <!-- ═══════════════════════════════════════════════ ESTUDIOS ══ -->
-        <section id="especialidades" class="sec-pad-1-5 scroll-sm-top">
+        <!-- ══════════════════════════════════════ UBICACIÓN Y CONTACTO ══ -->
+        <section id="ubicacion" class="sec-pad-1 scroll-sm-top">
             <div class="section-header animate-on-scroll">
-                <!-- h2 y subtitulo desde web_contenidos (especialidades/seccion) -->
-                <h2><?= h($catalogH2) ?></h2>
-                <p><?= h($catalogSub) ?></p>
+                <!-- h2 y subtitulo desde web_contenidos (ubicacion/seccion) -->
+                <h2><?= h($ubH2) ?></h2>
+                <p><?= h($ubSub) ?></p>
             </div>
 
-            <!-- Carrusel de áreas fotográficas — imágenes fijas del laboratorio (R15.1) -->
-            <div class="map-bar">
-                <button type="button" class="carousel-arrow-btn carousel-arrow-btn--left"
-                        id="btn-carousel-prev" aria-label="Anterior">
-                    <img src="/laesh-web-assets-uipv1a/icons/chevron-left.svg" alt="" class="icon-24" loading="lazy" decoding="async">
-                </button>
-                <div class="specialties-carousel-viewport">
-                    <div id="specialties-track" class="specialties-carousel-track">
-                        <?php $ccIdx = 0; foreach ($carouselCards as $cc): $ccIdx++; ?>
-                        <div class="carousel-card">
-                            <img src="<?= h($cc['img']) ?>" alt="Área de Laboratorio LAESH"
-                                 width="800" height="580"
-                                 loading="<?= $ccIdx <= 2 ? 'eager' : 'lazy' ?>"
-                                 decoding="<?= $ccIdx <= 2 ? 'sync' : 'async' ?>">
-                            <div class="carousel-card__body ck5-output">
-                                <?= safeHtml($cc['texto']) ?>
+            <div class="location-stack-layout">
+                <!-- Datos de contacto — todos desde configuraciones -->
+                <div class="card-premium animate-on-scroll delay-100 contact-card-horizontal">
+                    <h3 class="acerca-h3">Datos de Contacto</h3>
+                    <div class="contact-grid-horizontal">
+
+                        <div class="info-row-item">
+                            <img src="/laesh-web-assets-uipv1a/icons/map-pin.svg" alt="" class="icon-22" loading="lazy" decoding="async">
+                            <div class="txt-base-lh">
+                                <strong class="list-link-block">Dirección</strong>
+                                <?= h($cfgDir) ?>
                             </div>
                         </div>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
-                <button type="button" class="carousel-arrow-btn carousel-arrow-btn--right"
-                        id="btn-carousel-next" aria-label="Siguiente">
-                    <img src="/laesh-web-assets-uipv1a/icons/chevron-right.svg" alt="" class="icon-24" loading="lazy" decoding="async">
-                </button>
-            </div>
-            <div class="carousel-progress-wrap">
-                <div id="carousel-progress" class="carousel-progress"
-                     role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
-                     aria-label="Progreso del carrusel de especialidades">
-                    <div id="carousel-progress-fill" class="carousel-progress-fill"></div>
-                </div>
-            </div>
-            <div id="specialties-dots" class="hero-dots specialties-dots"
-                 aria-label="Navegación de especialidades" role="region"></div>
 
-            <!-- ── Catálogo de Estudios — 4 abanicos desde web_contenidos.especialidades ── -->
-            <div class="section-catalog">
-                <!-- Nota al pie del catálogo — desde web_contenidos (especialidades/catalogo/nota_pie) -->
-                <p class="section-catalog__note"><?= h($catalogNota) ?></p>
+                        <div class="info-row-item">
+                            <img src="/laesh-web-assets-uipv1a/icons/phone.svg" alt="" class="icon-22" loading="lazy" decoding="async">
+                            <div class="txt-base-lh">
+                                <strong class="list-link-block">Teléfono Oficina</strong>
+                                <a href="tel:<?= h($cfgTelDigit) ?>" class="resp-name"><?= h($cfgTel) ?></a>
+                            </div>
+                        </div>
 
-                <?php foreach ($cg as $gi => $grupo): ?>
-                <?php if (empty($grupo['fichas'])) continue; ?>
-                <div class="orden-acc">
-                    <button type="button"
-                            class="orden-acc-hdr<?= $gi > 1 ? ' collapsed-btn' : '' ?>"
-                            data-acc="cg<?= $gi ?>">
-                        <span class="flex-ic-8">
-                            <?= GRUPO_SVGS[$gi] ?? GRUPO_SVGS[1] ?>
-                            <?= h($grupo['titulo']) ?>
-                        </span>
-                        <svg id="arr-cg<?= $gi ?>" width="18" height="18" viewBox="0 0 24 24" fill="none"
-                             stroke="currentColor" stroke-width="2"
-                             class="<?= $gi === 1 ? 'chevron-open' : 'chevron-arrow-svg' ?>">
-                            <polyline points="6 9 12 15 18 9"/>
-                        </svg>
-                    </button>
-                    <div id="cg<?= $gi ?>" class="orden-acc-body<?= $gi > 1 ? ' collapsed' : '' ?>">
-                        <?php foreach ($grupo['fichas'] as $subcat): ?>
-                        <div class="orden-cat">
-                            <div class="orden-cat-hdr"><?= h($subcat['cat']) ?></div>
-                            <div class="orden-cat-body">
-                                <?php foreach ($subcat['items'] as $estItem): ?>
-                                <div class="precio-cat-item"
-                                     data-clave="<?= h($estItem['clave_interna'] ?? '') ?>"
-                                     data-tiempo="<?= h($estItem['tiempo_procesamiento'] ?? '') ?>"
-                                     data-muestra="<?= h($estItem['muestra_requerida'] ?? '') ?>"
-                                     data-contenedor="<?= h($estItem['contenedor'] ?? '') ?>"
-                                     data-pruebas="<?= h($estItem['pruebas_incluidas'] ?? '') ?>"
-                                     data-preparacion="<?= h($estItem['preparacion'] ?? '') ?>">
-                                    <span class="precio-cat-nombre"><?= h($estItem['nombre'] ?? '') ?></span>
+                        <div class="contact-col-gap">
+                            <div class="info-row-item">
+                                <img src="/laesh-web-assets-uipv1a/icons/mail.svg" alt="" class="icon-22" loading="lazy" decoding="async">
+                                <div class="txt-base-lh">
+                                    <strong class="list-link-block">Email</strong>
+                                    <a href="mailto:<?= h($cfgEmail) ?>" class="email-link-hover"><?= h($cfgEmail) ?></a>
                                 </div>
-                                <?php endforeach; ?>
+                            </div>
+                            <div class="info-row-item">
+                                <img src="/laesh-web-assets-uipv1a/icons/whatsapp.svg" alt="" class="icon-22" loading="lazy" decoding="async">
+                                <div class="txt-base-lh">
+                                    <strong class="list-link-block">WhatsApp</strong>
+                                    <a href="<?= h($waContactUrl) ?>" target="_blank" rel="noopener noreferrer" class="resp-name"><?= h($cfg('whatsapp_numero')) ?></a>
+                                </div>
                             </div>
                         </div>
-                        <?php endforeach; ?>
+
+                        <div class="info-row-item">
+                            <img src="/laesh-web-assets-uipv1a/icons/clock.svg" alt="" class="icon-22" loading="lazy" decoding="async">
+                            <div class="txt-base-lh">
+                                <strong class="list-link-block">Horarios</strong>
+                                <?= h($cfgHorSem) ?><br><?= h($cfgHorDom) ?>
+                            </div>
+                        </div>
+
+                        <div class="info-row-item">
+                            <img src="/laesh-web-assets-uipv1a/icons/user.svg" alt="" class="icon-22" loading="lazy" decoding="async">
+                            <div class="contact-resp-body">
+                                <strong class="resp-title">Responsable Sanitario</strong>
+                                <span class="resp-name"><?= h($cfgRespNom) ?>.</span><br>
+                                Céd. Prof. <?= h($cfgRespProf) ?> | Céd. Esp. <?= h($cfgRespEsp) ?>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-                <?php endforeach; ?>
-            </div><!-- /section-catalog -->
+
+                <!-- Mapa — Croquis de ubicación con botón a Mapa Interactivo externo -->
+                <div class="card-premium animate-on-scroll delay-200 map-card">
+                    <div class="map-bottom-bar">
+                        <button type="button" id="btn-map-static" class="map-tab-btn active cursor-default">
+                            <img src="/laesh-web-assets-uipv1a/icons/eye.svg" alt="" loading="lazy" decoding="async">
+                            Croquis
+                        </button>
+                        <span class="map-sep">|</span>
+                        <a href="<?= h($cfgMapsUrl) ?>"
+                           target="_blank" rel="noopener noreferrer"
+                           id="btn-map-interactive" class="map-tab-btn map-link-flex">
+                            <img src="/laesh-web-assets-uipv1a/icons/map-pin.svg" alt="" loading="lazy" decoding="async">
+                            Mapa Interactivo ↗
+                        </a>
+                    </div>
+                    <div id="map-static" class="map-static-wrap">
+                        <div class="map-zoom-link">
+                            <?php $croquisImg = $c('ubicacion','croquis','imagen_url'); ?>
+                            <?php if (!empty($croquisImg)): ?>
+                            <img src="<?= h($croquisImg) ?>"
+                                 alt="Croquis de Ubicación <?= h($cfgNombreC) ?>"
+                                 class="map-zoom-img" width="1136" height="615"
+                                 loading="lazy" decoding="async">
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
 ```
@@ -10389,211 +12093,23 @@ $waSvg = '<svg width="15" height="15" fill="#25D366" viewBox="0 0 24 24" aria-hi
 
 ## Agent Response
 
-### Actions
+### Thinking
 
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L839-909)</summary>
-
-**Path:** `Unknown file`
-
-```
-            return;
-        }
-
-        if (e.key === 'Tab') {
-            var focusables = activeModal.querySelectorAll('button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])');
-            if (focusables.length === 0) {
-                e.preventDefault();
-                return;
-            }
-            var first = focusables[0];
-            var last = focusables[focusables.length - 1];
-
-            if (e.shiftKey) { // Shift + Tab
-                if (document.activeElement === first) {
-                    last.focus();
-                    e.preventDefault();
-                }
-            } else { // Tab
-                if (document.activeElement === last) {
-                    first.focus();
-                    e.preventDefault();
-                }
-            }
-        }
-    });
-
-    var modalObserver = new MutationObserver(function (mutations) {
-        mutations.forEach(function (mutation) {
-            if (mutation.attributeName === 'class') {
-                var target = mutation.target;
-                if (target.classList.contains('show')) {
-                    var firstInput = target.querySelector('input, select, textarea, button');
-                    if (firstInput) {
-                        setTimeout(function() { firstInput.focus(); }, 100);
-                    }
-                }
-            }
-        });
-    });
-    document.querySelectorAll('.modal').forEach(function (modal) {
-        modalObserver.observe(modal, { attributes: true, attributeFilter: ['class'] });
-    });
-
-    // Delegación global de clics y eventos táctiles para capturar cualquier tarjeta o imagen de promoción
-    function handlePromoCardInteraction(e) {
-        var btn = e.target.closest('.catalog-card-btn') || e.target.closest('.catalog-card-btn-overlay') || e.target.closest('a');
-        if (btn) return; // Permitir interacción normal en botones
-
-        var card = e.target.closest('.catalog-card') || e.target.closest('[data-promo-img]');
-        if (!card) return;
-
-        var imgSrc = card.getAttribute('data-promo-img');
-        if (!imgSrc || imgSrc.trim() === '') {
-            var imgEl = card.querySelector('.catalog-card-img') || card.querySelector('img');
-            if (imgEl) imgSrc = imgEl.getAttribute('src');
-        }
-        if (!imgSrc || imgSrc.trim() === '') return;
-
-        var title = card.getAttribute('data-promo-title') || 'Promoción — Imagen Completa';
-        if (typeof window.openPromoModal === 'function') {
-            window.openPromoModal(imgSrc, title);
-        }
-    }
-
-    document.addEventListener('click', handlePromoCardInteraction);
-
-    // Cierre al presionar la tecla Escape en cualquier dispositivo con teclado
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' || e.keyCode === 27) {
-            window.closePromoModal();
-        }
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L179-249)</summary>
-
-**Path:** `Unknown file`
-
-```
-                if (iconPlay)  iconPlay.classList.toggle('d-none', !heroPaused);
-                heroPaused ? stopHeroAutoplay() : startHeroAutoplay();
-            });
-        }
-    }
-
-    /* NA-02: Navegación del hero con teclado (← →) */
-    document.addEventListener('keydown', function(e) {
-        if (slides.length < 2) return;
-        if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
-            var direction = e.key === 'ArrowLeft' ? -1 : 1;
-            slides[currentSlide].classList.remove('active');
-            currentSlide = (currentSlide + direction + slides.length) % slides.length;
-            slides[currentSlide].classList.add('active');
-            updateHeroDots(currentSlide);
-            stopHeroAutoplay();
-            if (!heroPaused) startHeroAutoplay();
-            var heroAnnouncer2 = document.getElementById('hero-announcer');
-            if (heroAnnouncer2) {
-                var h2 = slides[currentSlide].querySelector('h1, h2');
-                heroAnnouncer2.textContent = h2 ? h2.textContent : 'Diapositiva ' + (currentSlide + 1) + ' de ' + slides.length;
-            }
-        }
-    });
+Initial focus is on the map section within the `ubicacion.php` file, specifically the "Mapa — Croquis de ubicación" component. The presence of a static map image and a button suggesting an external interactive map is confirmed, implying the design aims to present both a simplified visual and a more detailed, interactive map option. The element with id "btn-map-static" suggests a potential default static map behavior, likely with an "eye" icon as visual indicator.
 
 
-    // ─────────────────────────────────────────────────────────────
-    // 4. Menú Hamburguesa — Móvil ≤768px
-    //    Crea el botón dinámicamente si no existe en el DOM
-    // ─────────────────────────────────────────────────────────────
-    const navbar     = document.querySelector('.navbar-sticky');
-    const navLinksEl = document.querySelector('.navbar-sticky .nav-links');
 
-    if (navbar && navLinksEl) {
-        // Reusar .nav-hamburger ya presente en el HTML (evita botón doble)
-        const existingBtn = navbar.querySelector('.nav-hamburger');
-        const activeBtn   = existingBtn || (!document.querySelector('.hamburger-btn')
-            ? (() => {
-                const b = document.createElement('button');
-                b.className = 'hamburger-btn';
-                b.setAttribute('aria-label', 'Abrir menú');
-                b.innerHTML = '<span></span><span></span><span></span>';
-                navbar.insertBefore(b, navLinksEl);
-                return b;
-              })()
-            : null);
-
-        if (activeBtn) {
-            activeBtn.addEventListener('click', () => {
-                const isOpen = navLinksEl.classList.toggle('mobile-open');
-                activeBtn.setAttribute('aria-expanded', String(isOpen));
-            });
-            navLinksEl.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    navLinksEl.classList.remove('mobile-open');
-                    activeBtn.setAttribute('aria-expanded', 'false');
-                });
-            });
-        }
-    }
-
-
-    // ─────────────────────────────────────────────────────────────
-    // 5. Modal Aviso de Privacidad — misma arquitectura que portales
-    // ─────────────────────────────────────────────────────────────
-    (function initPrivacyModal() {
-        var modal   = document.getElementById('modal-privacidad');
-        if (!modal) return;
-
-        var content = modal.querySelector('.modal-content');
-        var header  = modal.querySelector('.modal-header');
-```
-
-</details>
-
----
-
-## Agent Response
 
 ### Actions
 
 **Tool:** `grep_search`
-**Query:** `_laeshToggleCatAcc`
+**Query:** `map-zoom-img`
 
 <details>
 <summary>Metadata</summary>
 
-- **Model:** Gemini 3.8 Flash (Low)
+- **Thinking Duration:** 0.039165390s
+- **Model:** Gemini 3.8 Flash (High)
 </details>
 
 ---
@@ -10601,123 +12117,7 @@ $waSvg = '<svg width="15" height="15" fill="#25D366" viewBox="0 0 24 24" aria-hi
 ### Local File Search
 
 **Status:** Completed
-**Created:** 24 Sept 2026, 4:14 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L439-479)</summary>
-
-**Path:** `Unknown file`
-
-```
-    // Map tabs / Direct external map trigger
-    var btnMapInteractive = document.getElementById('btn-map-interactive');
-    if (btnMapInteractive) {
-        btnMapInteractive.addEventListener('click', function(e) {
-            e.preventDefault();
-            openGoogleMapsRoute();
-        });
-    }
-
-    // ─────────────────────────────────────────────────────────────
-    // CAT-ACC: Accordion del catálogo de estudios
-    // Alterna clase 'collapsed' en el body y rota el chevron del header.
-    // HTML: button[data-acc="cg1"] → #cg1 (body) · #arr-cg1 (chevron SVG)
-    // CSS:  .orden-acc-body.collapsed { max-height: 0 }
-    //       .chevron-open            { transform: rotate(-180deg) }
-    // ─────────────────────────────────────────────────────────────
-    function toggleCatAcc(id) {
-        var body    = document.getElementById(id);
-        var chevron = document.getElementById('arr-' + id);
-        if (!body) return;
-        var isCollapsed = body.classList.toggle('collapsed');
-        if (chevron) {
-            chevron.classList.toggle('chevron-open', !isCollapsed);
-        }
-    }
-    window._laeshToggleCatAcc = toggleCatAcc;
-
-    // Accordion catálogo — delegación por data-acc
-    document.querySelectorAll('[data-acc]').forEach(function(btn) {
-        btn.addEventListener('click', function() {
-            toggleCatAcc(this.getAttribute('data-acc'));
-        });
-    });
-
-    // ─────────────────────────────────────────────────────────────
-    // TU-02: Banner de cookies (LFPDPPP)
-    // ─────────────────────────────────────────────────────────────
-    (function initCookieBanner() {
-        var banner    = document.getElementById('cookie-banner');
-        var acceptBtn = document.getElementById('cookie-accept');
-        if (!banner) return;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `especialidades.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L54-74)</summary>
-
-**Path:** `Unknown file`
-
-```
-                <p class="section-catalog__note"><?= h($catalogNota) ?></p>
-
-                <?php foreach ($cg as $gi => $grupo): ?>
-                <?php if (empty($grupo['fichas'])) continue; ?>
-                <div class="orden-acc">
-                    <button type="button"
-                            class="orden-acc-hdr<?= $gi > 1 ? ' collapsed-btn' : '' ?>"
-                            data-acc="cg<?= $gi ?>">
-                        <span class="flex-ic-8">
-                            <?= GRUPO_SVGS[$gi] ?? GRUPO_SVGS[1] ?>
-                            <?= h($grupo['titulo']) ?>
-                        </span>
-                        <svg id="arr-cg<?= $gi ?>" width="18" height="18" viewBox="0 0 24 24" fill="none"
-                             stroke="currentColor" stroke-width="2"
-                             class="<?= $gi === 1 ? 'chevron-open' : 'chevron-arrow-svg' ?>">
-                            <polyline points="6 9 12 15 18 9"/>
-                        </svg>
-                    </button>
-                    <div id="cg<?= $gi ?>" class="orden-acc-body<?= $gi > 1 ? ' collapsed' : '' ?>">
-                        <?php foreach ($grupo['fichas'] as $subcat): ?>
-                        <div class="orden-cat">
-```
-
-</details>
+**Created:** 25 Sept 2026, 2:45 pm
 
 ---
 
@@ -10731,1865 +12131,131 @@ $waSvg = '<svg width="15" height="15" fill="#25D366" viewBox="0 0 24 24" aria-hi
 <details>
 <summary>Metadata</summary>
 
-- **Model:** Gemini 3.8 Flash (Low)
+- **Model:** Gemini 3.8 Flash (High)
 </details>
 
 ---
 
 <details>
-<summary>File: `Unknown file` (L1939-1999)</summary>
+<summary>File: `Unknown file` (L989-1039)</summary>
 
 **Path:** `Unknown file`
 
 ```
-    border: 0 !important;
-    border-radius: 12px 12px 0 0 !important;
-    box-sizing: border-box !important;
+    flex: 1;                /* ocupa el espacio restante de .map-card flex */
+    min-height: 0;
+    position: relative;
+    overflow: hidden;
+    background: #f0f2f4;
 }
-
-@media (min-width: 1920px) {
-    .calidad-cards-grid .carousel-card {
-        flex: 0 0 calc((100% - 4rem) / 3);
-    }
-    .calidad-cards-grid .carousel-card img {
-        height: 285px !important;
-    }
-}
-
-/* R-MOB: tablet/paisaje → 2 columnas (481px–1024px) */
-@media (max-width: 1024px) {
-    .calidad-cards-grid {
-        gap: 1rem;
-    }
-    .calidad-cards-grid .carousel-card {
-        flex: 0 0 calc(50% - 0.5rem);
-        width: calc(50% - 0.5rem);
-    }
-    .calidad-cards-grid .carousel-card img {
-        height: 230px !important;
-        /* object-position top center: la base tiene center !important → cover crops center
-           → top de imágenes de calidad se pierde; top center ancla el sujeto visible */
-        object-position: top center !important;
-    }
-}
-
-/* R-MOB: móvil retrato estrecho → 1 columna (≤480px) */
-@media (max-width: 480px) {
-    .calidad-cards-grid .carousel-card {
-        flex: 0 0 100%;
-        width: 100%;
-    }
-    .calidad-cards-grid .carousel-card img {
-        height: 210px !important;
-        object-position: top center !important;
-    }
-}
-
-
-
-.text-center-block {
-    text-align: center;
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-/* ── §CAT-INFO: Botón "+" + Tooltip de detalles por estudio ──────────────── */
-
-/* Botón circular "+" en cada renglón */
-.precio-info-btn {
-    flex-shrink: 0;
-    align-self: center;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    border: 1.5px solid var(--primary-green);
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1729-1799)</summary>
-
-**Path:** `Unknown file`
-
-```
-/* Renglón inferior: precios izq. · botón der. */
-.catalog-card-bottom-row {
-    margin-top: auto;
+.map-zoom-link {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 0.5rem;
-    padding-top: 0.45rem;
-    border-top: 1px dashed #e2e8f0;
-}
-
-/* Bloque de precios: ocupa el espacio disponible y centra su contenido */
-.catalog-card-pricing {
-    flex: 1 1 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.15rem;
-}
-
-/* Precios en línea centrados */
-.catalog-card-prices {
-    display: flex;
-    align-items: baseline;
     justify-content: center;
-    gap: 0.85rem;
-    white-space: nowrap;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border-radius: inherit;
+    background: transparent;
 }
-
-.price-old {
-    font-size: 1.05rem;
-    color: #94a3b8;
-    text-decoration: line-through;
-    font-weight: 700;
-}
-
-.price-current {
-    font-size: 1.45rem;
-    font-weight: 800;
-    color: var(--primary, #0052B7);
-    letter-spacing: -0.01em;
-}
-
-/* Badge HOY — derecha, violeta claro, pulso */
-.badge-hoy {
-    background-color: #ede9fe;
-    color: #5b21b6;
-    border: 1px solid #c4b5fd;
-    font-size: 9.5px;
-    letter-spacing: 0.07em;
-    font-weight: 700;
-    animation: pulse-hoy 2.4s ease-in-out infinite;
-    margin-left: auto;   /* empuja al extremo derecho del flex row */
-    flex-shrink: 0;
-}
-
-@keyframes pulse-hoy {
-    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(167, 139, 250, 0); }
-    50%       { opacity: 0.85; box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.35); }
-}
-
-/* Tarjeta del día actual: borde violeta sutil */
-.catalog-card--hoy {
-    border: 1.5px solid #a78bfa;
-    box-shadow: 0 4px 16px rgba(124, 58, 237, 0.10);
-}
-
-/* Renglón día + badge HOY */
-.catalog-card-day-row {
-    display: flex;
-    align-items: center;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `orden-acc`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 24 Sept 2026, 4:14 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L509-544)</summary>
-
-**Path:** `Unknown file`
-
-```
-        
-/* ── §6 CATÁLOGO, WRAPPERS DE SECCIÓN & CONTACTO ───────────────────────────── */
-
-/* ── Catálogo de Estudios — acordeones por grupo (migrado de style.css) ── */
-        .orden-acc { margin-bottom: 10px; border: 1.5px solid #e2e8f0; border-radius: 10px; overflow: hidden; }
-        .orden-acc-hdr {
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 11px 16px; background: #f1f5f9; cursor: pointer;
-            font-weight: 700; font-size: 0.88rem; color: var(--primary);
-            border: none; width: 100%; text-align: left; gap: 8px; user-select: none;
-            transition: background 0.15s;
-        }@media (hover: hover) and (pointer: fine) {
-    .orden-acc-hdr:hover {
-        background: #e2e8f0;
-    }
-}
-        .orden-acc-body {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr)); /* R-CSS-06 */
-            gap: 12px; padding: 14px; background: var(--bg-surface);
-            overflow: hidden; max-height: 9999px; transition: max-height 0.35s ease, padding 0.3s;
-        }
-        /* R8: sin !important — .orden-acc-body.collapsed tiene especificidad (0,2,0) > (0,1,0) base */
-        .orden-acc-body.collapsed { max-height: 0; padding-top: 0; padding-bottom: 0; }
-        .orden-cat { border: 1.5px solid #e2e8f0; border-radius: 8px; overflow: hidden; transition: box-shadow 0.2s; }@media (hover: hover) and (pointer: fine) {
-    .orden-cat:hover {
-        box-shadow: 0 2px 10px rgba(0,82,183,0.10);
-    }
-}
-        .orden-cat-hdr {
-            background: var(--primary); color: #fff;
-            font-size: 0.76rem; font-weight: 700; padding: 7px 12px;
-            text-transform: uppercase; letter-spacing: 0.04em;
-            font-family: 'Arial Black', Impact, sans-serif;
-        }
-        .orden-cat-body { padding: 8px 10px; background: var(--bg-surface); }
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L599-614)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-        /* Helpers de layout */
-        .flex-ic-8  { display: flex; align-items: center; gap: 8px; }
-        .flex-center-15 { display: flex; gap: 15px; justify-content: center; }
-        /* Transición permanente en el SVG directo del acordeón (selector estable, nunca toggled)
-           Evita que la animación de cierre sea un snap — la clase .chevron-open se agrega/remueve
-           pero el transition siempre está presente vía este selector. */
-        .orden-acc-hdr > svg { flex-shrink: 0; transition: transform 0.2s; }
-        /* Estado abierto — rotación vía clase toggleada por JS */
-        .chevron-open { transform: rotate(-180deg); }
-        /* .chevron-arrow-svg no necesita regla propia — la transition la provee .orden-acc-hdr > svg */
-        .hr-sep { border: none; height: 1px; background: var(--border); margin: 0.9rem 0; }
-
-        /* Texto y botones */
-        .txt-green        { color: var(--primary-green); }
-        .txt-main         { color: var(--text-main); }
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `__LAESH_ESTUDIOS__`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 24 Sept 2026, 4:15 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L944-973)</summary>
-
-**Path:** `Unknown file`
-
-```
-        }
-        if (!('IntersectionObserver' in window)) {
-            /* Fallback navegadores sin IO: mostrar todo visible */
-            els.forEach(function(el){ el.classList.add('visible'); });
-            window._laeshObserver = 'noop';
-            return;
-        }
-        /* Fix C3: rootMargin '0px' — activa en cuanto el elemento toca el viewport,
-           sin requerir 50px de penetración como hacía "-50px". */
-        var io = new IntersectionObserver(function(entries){
-            entries.forEach(function(e){
-                if (e.isIntersecting) { e.target.classList.add('visible'); }
-            });
-        }, { threshold: 0.05, rootMargin: '0px' });
-        els.forEach(function(el){ io.observe(el); });
-        window._laeshObserver = io;
-    })();
-    </script>
-    <!-- Catálogo compacto de estudios (OPcache L2) para autocompletado en memoria RAM local (0ms lag) -->
-    <script>
-        window.__LAESH_ESTUDIOS__ = <?= $estudiosSearchJson ?: '[]' ?>;
-    </script>
-    <!-- Fix C2: htmx se carga async + fetchpriority low — no bloquea DOMContentLoaded
-         ni compite con website.js. Solo se necesita cuando el usuario abre el modal de login. -->
-    <script src="/laesh-web-assets-uipv1a/js/htmx.min.js" async fetchpriority="low"></script>
-    <script src="/laesh-web-assets-uipv1a/js/website.js?v=<?= @filemtime(__DIR__ . '/../../laesh-web-assets-uipv1a/js/website.js') ?: time() ?>" defer></script>
-
-</body>
-</html>
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `$estudiosSearchJson`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 24 Sept 2026, 4:15 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L274-319)</summary>
-
-**Path:** `Unknown file`
-
-```
-        ];
-    }
-    if (!$_bypassCache) \Common\Cache::set(\Common\Cache::KEY_TREE, $cg);
-}
-
-// ── 1d. Índice de búsqueda de estudios para autocompletado en memoria (OPcache) ──
-$estudiosSearchData = $_bypassCache ? null : \Common\Cache::get(\Common\Cache::KEY_CATALOG_SEARCH);
-if ($estudiosSearchData === null) {
-    $searchStmt = $db->query("
-        SELECT e.clave, e.nombre, e.muestra, e.preparacion, e.tiempo, e.contenedor, e.pruebas_incluidas, c.nombre AS categoria_nombre
-        FROM cat_estudios e
-        LEFT JOIN cat_categorias c ON e.categoria_id = c.id
-        WHERE e.activo = 1
-        ORDER BY e.nombre ASC
-    ");
-    $estudiosSearchData = [];
-    if ($searchStmt) {
-        while ($row = $searchStmt->fetch(\PDO::FETCH_ASSOC)) {
-            $estudiosSearchData[] = [
-                'c'   => (string)($row['clave'] ?? ''),
-                'n'   => (string)($row['nombre'] ?? ''),
-                'm'   => (string)($row['muestra'] ?? ''),
-                'p'   => (string)($row['preparacion'] ?? ''),
-                't'   => (string)($row['tiempo'] ?? ''),
-                'con' => (string)($row['contenedor'] ?? ''),
-                'pi'  => (string)($row['pruebas_incluidas'] ?? ''),
-                'cat' => (string)($row['categoria_nombre'] ?? ''),
-            ];
-        }
-    }
-    if (!$_bypassCache) \Common\Cache::set(\Common\Cache::KEY_CATALOG_SEARCH, $estudiosSearchData);
-}
-$estudiosSearchJson = json_encode($estudiosSearchData, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT);
-
-// ── 3b. Hero autoplay (seg) — desde web_contenidos.hero.config.transition_time
-// Alineado con gestion-web.php (POST hero_config__transition_time)
-$heroAutoplay = min(90, max(0, (int)$c('hero', 'config', 'transition_time', '5'))); // 0 = pausa indefinida
-
-// ── 3c. Quiénes somos — Ficha 4 (25 años / CKEditor 5) ───────────────────
-// Desde 2026-08-23: ficha4/texto almacena HTML enriquecido (CKEditor 5).
-// El heading del card va incluido en el HTML (primer bloque H3 del editor).
-// safeHtml() filtra antes de emitir.
-$qsConfianzaHtml = $c('quienes-somos', 'ficha4', 'texto');
-
-// ── 3d. Carrusel de especialidades y áreas — 16 tarjetas (sin fallback) ───────────────────
-// Textos e imágenes dinámicos desde web_contenidos (especialidades/carouselN/texto HTML y config.carouselN_img).
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1339-1379)</summary>
-
-**Path:** `Unknown file`
-
-```
-        if (typeof window._laeshShowEstudioTip === 'function' && btn) {
-            var nombreEl = itemEl.querySelector('.precio-cat-nombre');
-            var nombre   = nombreEl ? nombreEl.textContent.trim() : '';
-            var catEl    = itemEl.closest('.orden-cat');
-            var categoria = catEl ? (catEl.querySelector('.orden-cat-hdr') ? catEl.querySelector('.orden-cat-hdr').textContent.trim() : '—') : '—';
-            var d = [
-                itemEl.getAttribute('data-clave') || '—',
-                itemEl.getAttribute('data-tiempo') || 'Consultar en LAESH',
-                itemEl.getAttribute('data-muestra') || 'Consultar en LAESH',
-                itemEl.getAttribute('data-preparacion') || 'Consultar en LAESH',
-                itemEl.getAttribute('data-contenedor') || '',
-                itemEl.getAttribute('data-pruebas') || ''
-            ];
-            window._laeshShowEstudioTip(btn, nombre, categoria, d);
-        } else if (btn) {
-            btn.click();
-        }
-    }
-
-    // Acción al seleccionar un estudio
-    function selectEstudio(estudio) {
-        if (!estudio) return;
-
-        // Ocultar teclado virtual en móviles de inmediato
-        if (document.activeElement && typeof document.activeElement.blur === 'function') {
-            document.activeElement.blur();
-        }
-        var searchInputs = document.querySelectorAll('.header-search-input');
-        searchInputs.forEach(function(inp) { inp.blur(); });
-
-        // Cerrar dropdowns de resultados
-        document.querySelectorAll('.header-search-results').forEach(function(r) {
-            r.style.display = 'none';
-            r.innerHTML = '';
-        });
-
-        // 1. Buscar si el estudio ya está en alguno de los abanicos del DOM
-        var targetItem = null;
-        var claveTarget = String(estudio.c || '').trim();
-        var nombreTarget = normalizeStr(estudio.n || '');
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1379-1479)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-        if (claveTarget) {
-            targetItem = document.querySelector('.precio-cat-item[data-clave="' + claveTarget + '"]');
-        }
-
-        if (!targetItem && nombreTarget) {
-            var items = document.querySelectorAll('.precio-cat-item');
-            for (var i = 0; i < items.length; i++) {
-                var nomEl = items[i].querySelector('.precio-cat-nombre');
-                if (nomEl && normalizeStr(nomEl.textContent) === nombreTarget) {
-                    targetItem = items[i];
-                    break;
-                }
-            }
-        }
-
-        if (targetItem) {
-            // 3a. El estudio YA ESTÁ en los abanicos publicados:
-            // Abrir el acordeón que lo contiene si está cerrado
-            var parentBody = targetItem.closest('.orden-acc-body');
-            if (parentBody && parentBody.classList.contains('collapsed')) {
-                parentBody.classList.remove('collapsed');
-                var accId = parentBody.getAttribute('id');
-                if (accId) {
-                    var chevron = document.getElementById('arr-' + accId);
-                    if (chevron) chevron.classList.add('chevron-open');
-                }
-            }
-
-            // Esperar que el teclado virtual termine de retraerse en móviles (200ms) antes de scrollear y abrir
-            setTimeout(function() {
-                targetItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                targetItem.classList.remove('row-notif-highlight');
-                void targetItem.offsetWidth; // Forzar reflow CSS
-                targetItem.classList.add('row-notif-highlight');
-
-                // Abrir directamente la ventana de detalle flotante
-                setTimeout(function() {
-                    openEstudioDetalle(targetItem);
-                }, 300);
-
-                setTimeout(function() {
-                    targetItem.classList.remove('row-notif-highlight');
-                }, 3500);
-            }, 200);
-        } else {
-            // 3b. El estudio NO está en los abanicos publicados:
-            // Insertar o reutilizar el abanico "Mis resultados de búsqueda" al inicio de la sección
-            var accResultados = getOrCreateSearchResultsAccordion();
-            if (!accResultados) return;
-
-            var accBody = accResultados.querySelector('.orden-acc-body');
-            if (!accBody) return;
-
-            // Asegurar que el abanico "Mis resultados de búsqueda" esté abierto
-            accBody.classList.remove('collapsed');
-            var accChevron = document.getElementById('arr-cg-mis-resultados');
-            if (accChevron) accChevron.classList.add('chevron-open');
-
-            // Determinar categoría para agrupar o mostrar en la ficha
-            var catNombre = (estudio.cat || 'Estudios de Laboratorio').trim();
-
-            // Buscar si ya existe una ficha (.orden-cat) para esta categoría dentro de este abanico
-            var catCards = accBody.querySelectorAll('.orden-cat');
-            var targetCatCard = null;
-            for (var c = 0; c < catCards.length; c++) {
-                var hdr = catCards[c].querySelector('.orden-cat-hdr');
-                if (hdr && hdr.textContent.trim().toLowerCase() === catNombre.toLowerCase()) {
-                    targetCatCard = catCards[c];
-                    break;
-                }
-            }
-
-            if (!targetCatCard) {
-                targetCatCard = document.createElement('div');
-                targetCatCard.className = 'orden-cat';
-                targetCatCard.innerHTML =
-                    '<div class="orden-cat-hdr">' + escapeHtml(catNombre) + '</div>' +
-                    '<div class="orden-cat-body"></div>';
-                accBody.appendChild(targetCatCard);
-            }
-
-            var cardBody = targetCatCard.querySelector('.orden-cat-body');
-
-            // Verificar si dentro de esta categoría ya existe la ficha creada previamente
-            var itemExistente = null;
-            if (claveTarget) {
-                itemExistente = cardBody.querySelector('.precio-cat-item[data-clave="' + claveTarget + '"]');
-            }
-            if (!itemExistente && nombreTarget) {
-                var existItems = cardBody.querySelectorAll('.precio-cat-item');
-                for (var j = 0; j < existItems.length; j++) {
-                    var nEl = existItems[j].querySelector('.precio-cat-nombre');
-                    if (nEl && normalizeStr(nEl.textContent) === nombreTarget) {
-                        itemExistente = existItems[j];
-                        break;
-                    }
-                }
-            }
-
-            var itemFinal = itemExistente;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `especialidades.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L54-74)</summary>
-
-**Path:** `Unknown file`
-
-```
-                <p class="section-catalog__note"><?= h($catalogNota) ?></p>
-
-                <?php foreach ($cg as $gi => $grupo): ?>
-                <?php if (empty($grupo['fichas'])) continue; ?>
-                <div class="orden-acc">
-                    <button type="button"
-                            class="orden-acc-hdr<?= $gi > 1 ? ' collapsed-btn' : '' ?>"
-                            data-acc="cg<?= $gi ?>">
-                        <span class="flex-ic-8">
-                            <?= GRUPO_SVGS[$gi] ?? GRUPO_SVGS[1] ?>
-                            <?= h($grupo['titulo']) ?>
-                        </span>
-                        <svg id="arr-cg<?= $gi ?>" width="18" height="18" viewBox="0 0 24 24" fill="none"
-                             stroke="currentColor" stroke-width="2"
-                             class="<?= $gi === 1 ? 'chevron-open' : 'chevron-arrow-svg' ?>">
-                            <polyline points="6 9 12 15 18 9"/>
-                        </svg>
-                    </button>
-                    <div id="cg<?= $gi ?>" class="orden-acc-body<?= $gi > 1 ? ' collapsed' : '' ?>">
-                        <?php foreach ($grupo['fichas'] as $subcat): ?>
-                        <div class="orden-cat">
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 24 Sept 2026, 4:15 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1369-1484)</summary>
-
-**Path:** `Unknown file`
-
-```
-        // Cerrar dropdowns de resultados
-        document.querySelectorAll('.header-search-results').forEach(function(r) {
-            r.style.display = 'none';
-            r.innerHTML = '';
-        });
-
-        // 1. Buscar si el estudio ya está en alguno de los abanicos del DOM
-        var targetItem = null;
-        var claveTarget = String(estudio.c || '').trim();
-        var nombreTarget = normalizeStr(estudio.n || '');
-
-        if (claveTarget) {
-            targetItem = document.querySelector('.precio-cat-item[data-clave="' + claveTarget + '"]');
-        }
-
-        if (!targetItem && nombreTarget) {
-            var items = document.querySelectorAll('.precio-cat-item');
-            for (var i = 0; i < items.length; i++) {
-                var nomEl = items[i].querySelector('.precio-cat-nombre');
-                if (nomEl && normalizeStr(nomEl.textContent) === nombreTarget) {
-                    targetItem = items[i];
-                    break;
-                }
-            }
-        }
-
-        if (targetItem) {
-            // 3a. El estudio YA ESTÁ en los abanicos publicados:
-            // Abrir el acordeón que lo contiene si está cerrado
-            var parentBody = targetItem.closest('.orden-acc-body');
-            if (parentBody && parentBody.classList.contains('collapsed')) {
-                parentBody.classList.remove('collapsed');
-                var accId = parentBody.getAttribute('id');
-                if (accId) {
-                    var chevron = document.getElementById('arr-' + accId);
-                    if (chevron) chevron.classList.add('chevron-open');
-                }
-            }
-
-            // Esperar que el teclado virtual termine de retraerse en móviles (200ms) antes de scrollear y abrir
-            setTimeout(function() {
-                targetItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                targetItem.classList.remove('row-notif-highlight');
-                void targetItem.offsetWidth; // Forzar reflow CSS
-                targetItem.classList.add('row-notif-highlight');
-
-                // Abrir directamente la ventana de detalle flotante
-                setTimeout(function() {
-                    openEstudioDetalle(targetItem);
-                }, 300);
-
-                setTimeout(function() {
-                    targetItem.classList.remove('row-notif-highlight');
-                }, 3500);
-            }, 200);
-        } else {
-            // 3b. El estudio NO está en los abanicos publicados:
-            // Insertar o reutilizar el abanico "Mis resultados de búsqueda" al inicio de la sección
-            var accResultados = getOrCreateSearchResultsAccordion();
-            if (!accResultados) return;
-
-            var accBody = accResultados.querySelector('.orden-acc-body');
-            if (!accBody) return;
-
-            // Asegurar que el abanico "Mis resultados de búsqueda" esté abierto
-            accBody.classList.remove('collapsed');
-            var accChevron = document.getElementById('arr-cg-mis-resultados');
-            if (accChevron) accChevron.classList.add('chevron-open');
-
-            // Determinar categoría para agrupar o mostrar en la ficha
-            var catNombre = (estudio.cat || 'Estudios de Laboratorio').trim();
-
-            // Buscar si ya existe una ficha (.orden-cat) para esta categoría dentro de este abanico
-            var catCards = accBody.querySelectorAll('.orden-cat');
-            var targetCatCard = null;
-            for (var c = 0; c < catCards.length; c++) {
-                var hdr = catCards[c].querySelector('.orden-cat-hdr');
-                if (hdr && hdr.textContent.trim().toLowerCase() === catNombre.toLowerCase()) {
-                    targetCatCard = catCards[c];
-                    break;
-                }
-            }
-
-            if (!targetCatCard) {
-                targetCatCard = document.createElement('div');
-                targetCatCard.className = 'orden-cat';
-                targetCatCard.innerHTML =
-                    '<div class="orden-cat-hdr">' + escapeHtml(catNombre) + '</div>' +
-                    '<div class="orden-cat-body"></div>';
-                accBody.appendChild(targetCatCard);
-            }
-
-            var cardBody = targetCatCard.querySelector('.orden-cat-body');
-
-            // Verificar si dentro de esta categoría ya existe la ficha creada previamente
-            var itemExistente = null;
-            if (claveTarget) {
-                itemExistente = cardBody.querySelector('.precio-cat-item[data-clave="' + claveTarget + '"]');
-            }
-            if (!itemExistente && nombreTarget) {
-                var existItems = cardBody.querySelectorAll('.precio-cat-item');
-                for (var j = 0; j < existItems.length; j++) {
-                    var nEl = existItems[j].querySelector('.precio-cat-nombre');
-                    if (nEl && normalizeStr(nEl.textContent) === nombreTarget) {
-                        itemExistente = existItems[j];
-                        break;
-                    }
-                }
-            }
-
-            var itemFinal = itemExistente;
-            if (!itemFinal) {
-                // Crear el elemento de la ficha .precio-cat-item con todas las propiedades
-                itemFinal = document.createElement('div');
-                itemFinal.className = 'precio-cat-item';
-                itemFinal.setAttribute('data-clave', estudio.c || '');
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L279-307)</summary>
-
-**Path:** `Unknown file`
-
-```
-// ── 1d. Índice de búsqueda de estudios para autocompletado en memoria (OPcache) ──
-$estudiosSearchData = $_bypassCache ? null : \Common\Cache::get(\Common\Cache::KEY_CATALOG_SEARCH);
-if ($estudiosSearchData === null) {
-    $searchStmt = $db->query("
-        SELECT e.clave, e.nombre, e.muestra, e.preparacion, e.tiempo, e.contenedor, e.pruebas_incluidas, c.nombre AS categoria_nombre
-        FROM cat_estudios e
-        LEFT JOIN cat_categorias c ON e.categoria_id = c.id
-        WHERE e.activo = 1
-        ORDER BY e.nombre ASC
-    ");
-    $estudiosSearchData = [];
-    if ($searchStmt) {
-        while ($row = $searchStmt->fetch(\PDO::FETCH_ASSOC)) {
-            $estudiosSearchData[] = [
-                'c'   => (string)($row['clave'] ?? ''),
-                'n'   => (string)($row['nombre'] ?? ''),
-                'm'   => (string)($row['muestra'] ?? ''),
-                'p'   => (string)($row['preparacion'] ?? ''),
-                't'   => (string)($row['tiempo'] ?? ''),
-                'con' => (string)($row['contenedor'] ?? ''),
-                'pi'  => (string)($row['pruebas_incluidas'] ?? ''),
-                'cat' => (string)($row['categoria_nombre'] ?? ''),
-            ];
-        }
-    }
-    if (!$_bypassCache) \Common\Cache::set(\Common\Cache::KEY_CATALOG_SEARCH, $estudiosSearchData);
-}
-$estudiosSearchJson = json_encode($estudiosSearchData, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT);
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 24 Sept 2026, 4:15 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-<?php
-/**
- * index.php — Sitio Web Público LAESH (Phase J — Estabilización)
- *
- * Fuente HTML: website/uipv1/index.html  ← NUNCA BORRAR (R15.1)
- * Merge iterativo: cambios en uipv1/index.html → propagar aquí.
- *
- * Todo el contenido editorial se lee desde la BD:
- *   · configuraciones   → contacto, horarios, responsable, ubicación geográfica,
- *                          WhatsApp, Facebook, Schema.org, años de experiencia
- *   · web_contenidos    → hero (slides + navbar tagline), quienes-somos (fichas,
- *                          resp, filosofía), especialidades (accordion fichas),
- *                          promociones (banner), calidad (encabezado),
- *                          ubicacion (maps_embed), footer, seo
- *   · estudios (JOIN)   → SSOT para tarjetas de promociones diarias
- *
- * Claves configuraciones usadas:
- *   telefono · email_contacto · whatsapp_numero · facebook_url
- *   direccion · direccion_calle · ciudad · estado · cp
- *   horario_semana · horario_domingo · hrs_open · hrs_close · dom_open · dom_close
- *   responsable_nombre · responsable_cedula_prof · responsable_cedula_esp
- *   nombre_laboratorio · nombre_corto
- */
-declare(strict_types=1);
-require_once __DIR__ . '/../commons/commons.php';
-
-// ── HTTP Caching & Performance Optimization Headers ───────────────────────────
-// Permite revalidación rápida y caché eficiente del navegador sin afectar sesiones
-if (empty($_SESSION['auth_logged_in'])) {
-    header('Cache-Control: public, max-age=300, must-revalidate');
-} else {
-    header('Cache-Control: no-cache, must-revalidate');
-}
-
-// ── CSRF para modal de login ────────────────────────────────────────────────
-if (empty($_SESSION['csrf_token'])) {
-    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-}
-
-// ── Helpers ─────────────────────────────────────────────────────────────────
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 24 Sept 2026, 4:15 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `commons.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-<?php
-// commons.php - Inicialización global de servicios, manejo de errores y dependencias para LAESH
-
-date_default_timezone_set('America/Mexico_City');
-
-// Cabeceras de seguridad
-header('X-Content-Type-Options: nosniff');
-header('X-Frame-Options: SAMEORIGIN');
-header('X-XSS-Protection: 1; mode=block');
-
-// 1. Iniciar sesión PHP con banderas de seguridad y duración dinámica desde BD
-if (session_status() === PHP_SESSION_NONE) {
-    ini_set('session.cookie_httponly', 1);
-    ini_set('session.use_only_cookies', 1);
-
-    // session_lifetime: fijo 24h — se eliminó la conexión PDO temporal que existía aquí
-    // para leer este valor desde BD antes de session_start(). Abrir una conexión extra
-    // solo para este dato añade overhead real por request (2 PDO + 3 queries por carga).
-    // Si se requiere configurabilidad futura, exponer como var de entorno SESSION_LIFETIME.
-    $sessionLifetime = (int)(getenv('SESSION_LIFETIME') ?: 86400);
-
-    ini_set('session.gc_maxlifetime', $sessionLifetime);
-    ini_set('session.cookie_lifetime', $sessionLifetime);
-    if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
-        ini_set('session.cookie_secure', 1);
-    }
-    session_start();
-}
-
-// 2. Cargar el cargador manual de librerías compartidas
-require_once __DIR__ . '/autoload.php';
-require_once __DIR__ . '/notifier.php';
-
-use Common\DB;
-use Common\Logger;
-use Delight\Auth\Auth;
-
-// 3. Manejo de Errores Globales (PSR-3)
-set_error_handler(function ($errno, $errstr, $errfile, $errline) {
-    if (!(error_reporting() & $errno)) {
-        return false;
-    }
-    $message = sprintf("Error [%d]: %s en %s:%d", $errno, $errstr, $errfile, $errline);
-    Logger::log("ERROR", $message);
-    return true;
-});
-
-set_exception_handler(function ($exception) {
-    $config  = require __DIR__ . '/config.php';
-    $isDev   = ($config['app']['env'] ?? 'production') === 'development';
-
-    // ── Error 1969: max_statement_time excedido (MariaDB KILL automático) ──
-    // Ocurre cuando una query supera max_statement_time = 10s en mariadb.cnf.
-    // El motor devuelve SQLSTATE HY000 errno 1969 como PDOException.
-    // → Respuesta 503: el usuario ve mensaje claro; admin ve traza en log.
-    if ($exception instanceof \PDOException) {
-        $nativeCode = (int)($exception->errorInfo[1] ?? 0);
-        if ($nativeCode === 1969) {
-            http_response_code(503);
-            Logger::log(
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 24 Sept 2026, 4:16 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `commons.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L99-148)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-// 4. Inicializar Delight Auth y registrar en Flight PHP
-
-// Flight::map('rbac') se registra SIEMPRE (fuera del try/catch) porque su closure
-// es lazy: RbacManager se instancia solo cuando se llama, no al mapear.
-// Si lo dejamos dentro del try y DB::connect() falla, 'rbac' nunca queda mapeado
-// y cualquier ruta que llame Flight::rbac() recibe "rbac must be a mapped method".
-Flight::map('rbac', function () {
-    static $rbac = null;
-    if ($rbac === null) {
-        $rbac = new \Common\RbacManager(Flight::auth(), Flight::db());
-    }
-    return $rbac;
-});
-
-// Registrar JwtManager en Flight PHP para Inyección de Dependencias y Control JTI
-Flight::map('jwt', function () {
-    static $jwt = null;
-    if ($jwt === null) {
-        $config = require __DIR__ . '/config.php';
-        $jwtConfig = $config['jwt'] ?? [];
-        $jwt = new \Common\JwtManager(DB::connect(), $jwtConfig);
-    }
-    return $jwt;
-});
-
-try {
-    $pdo = DB::connect();
-
-    // Registrar Delight Auth directamente en Flight para Inyección de Dependencias.
-    // Requiere $pdo en tiempo de registro → sigue dentro del try.
-    Flight::register('auth', 'Delight\Auth\Auth', [$pdo]);
-} catch (\Exception $e) {
-    // Si falla, se registra en log plano de emergencia.
-    // 'rbac' ya está mapeado — fallará con un error legible al instanciar RbacManager,
-    // no con el críptico "must be a mapped method".
-    Logger::log("CRITICAL", "Fallo al inicializar Delight Auth en commons: " . $e->getMessage());
-}
-
-// 5. Configurar e Inicializar Plates (Views Engine)
-Flight::register('view', 'League\Plates\Engine', [], function($view) {
-    // Carpeta raíz de vistas (permite templates locales de módulos laesh-swbldi)
-    $view->setDirectory(__DIR__ . '/../');
-});
-
-// Registrar la conexión PDO para inyección sencilla en rutas de Flight
-Flight::map('db', function() {
-    return DB::connect();
-});
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 24 Sept 2026, 4:16 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 24 Sept 2026, 4:16 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 24 Sept 2026, 4:16 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 24 Sept 2026, 4:16 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1369-1489)</summary>
-
-**Path:** `Unknown file`
-
-```
-        // Cerrar dropdowns de resultados
-        document.querySelectorAll('.header-search-results').forEach(function(r) {
-            r.style.display = 'none';
-            r.innerHTML = '';
-        });
-
-        // 1. Buscar si el estudio ya está en alguno de los abanicos del DOM
-        var targetItem = null;
-        var claveTarget = String(estudio.c || '').trim();
-        var nombreTarget = normalizeStr(estudio.n || '');
-
-        if (claveTarget) {
-            targetItem = document.querySelector('.precio-cat-item[data-clave="' + claveTarget + '"]');
-        }
-
-        if (!targetItem && nombreTarget) {
-            var items = document.querySelectorAll('.precio-cat-item');
-            for (var i = 0; i < items.length; i++) {
-                var nomEl = items[i].querySelector('.precio-cat-nombre');
-                if (nomEl && normalizeStr(nomEl.textContent) === nombreTarget) {
-                    targetItem = items[i];
-                    break;
-                }
-            }
-        }
-
-        if (targetItem) {
-            // 3a. El estudio YA ESTÁ en los abanicos publicados:
-            // Abrir el acordeón que lo contiene si está cerrado
-            var parentBody = targetItem.closest('.orden-acc-body');
-            if (parentBody && parentBody.classList.contains('collapsed')) {
-                parentBody.classList.remove('collapsed');
-                var accId = parentBody.getAttribute('id');
-                if (accId) {
-                    var chevron = document.getElementById('arr-' + accId);
-                    if (chevron) chevron.classList.add('chevron-open');
-                }
-            }
-
-            // Esperar que el teclado virtual termine de retraerse en móviles (200ms) antes de scrollear y abrir
-            setTimeout(function() {
-                targetItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                targetItem.classList.remove('row-notif-highlight');
-                void targetItem.offsetWidth; // Forzar reflow CSS
-                targetItem.classList.add('row-notif-highlight');
-
-                // Abrir directamente la ventana de detalle flotante
-                setTimeout(function() {
-                    openEstudioDetalle(targetItem);
-                }, 300);
-
-                setTimeout(function() {
-                    targetItem.classList.remove('row-notif-highlight');
-                }, 3500);
-            }, 200);
-        } else {
-            // 3b. El estudio NO está en los abanicos publicados:
-            // Insertar o reutilizar el abanico "Mis resultados de búsqueda" al inicio de la sección
-            var accResultados = getOrCreateSearchResultsAccordion();
-            if (!accResultados) return;
-
-            var accBody = accResultados.querySelector('.orden-acc-body');
-            if (!accBody) return;
-
-            // Asegurar que el abanico "Mis resultados de búsqueda" esté abierto
-            accBody.classList.remove('collapsed');
-            var accChevron = document.getElementById('arr-cg-mis-resultados');
-            if (accChevron) accChevron.classList.add('chevron-open');
-
-            // Determinar categoría para agrupar o mostrar en la ficha
-            var catNombre = (estudio.cat || 'Estudios de Laboratorio').trim();
-
-            // Buscar si ya existe una ficha (.orden-cat) para esta categoría dentro de este abanico
-            var catCards = accBody.querySelectorAll('.orden-cat');
-            var targetCatCard = null;
-            for (var c = 0; c < catCards.length; c++) {
-                var hdr = catCards[c].querySelector('.orden-cat-hdr');
-                if (hdr && hdr.textContent.trim().toLowerCase() === catNombre.toLowerCase()) {
-                    targetCatCard = catCards[c];
-                    break;
-                }
-            }
-
-            if (!targetCatCard) {
-                targetCatCard = document.createElement('div');
-                targetCatCard.className = 'orden-cat';
-                targetCatCard.innerHTML =
-                    '<div class="orden-cat-hdr">' + escapeHtml(catNombre) + '</div>' +
-                    '<div class="orden-cat-body"></div>';
-                accBody.appendChild(targetCatCard);
-            }
-
-            var cardBody = targetCatCard.querySelector('.orden-cat-body');
-
-            // Verificar si dentro de esta categoría ya existe la ficha creada previamente
-            var itemExistente = null;
-            if (claveTarget) {
-                itemExistente = cardBody.querySelector('.precio-cat-item[data-clave="' + claveTarget + '"]');
-            }
-            if (!itemExistente && nombreTarget) {
-                var existItems = cardBody.querySelectorAll('.precio-cat-item');
-                for (var j = 0; j < existItems.length; j++) {
-                    var nEl = existItems[j].querySelector('.precio-cat-nombre');
-                    if (nEl && normalizeStr(nEl.textContent) === nombreTarget) {
-                        itemExistente = existItems[j];
-                        break;
-                    }
-                }
-            }
-
-            var itemFinal = itemExistente;
-            if (!itemFinal) {
-                // Crear el elemento de la ficha .precio-cat-item con todas las propiedades
-                itemFinal = document.createElement('div');
-                itemFinal.className = 'precio-cat-item';
-                itemFinal.setAttribute('data-clave', estudio.c || '');
-                itemFinal.setAttribute('data-tiempo', estudio.t || '');
-                itemFinal.setAttribute('data-muestra', estudio.m || '');
-                itemFinal.setAttribute('data-contenedor', estudio.con || '');
-                itemFinal.setAttribute('data-pruebas', estudio.pi || '');
-                itemFinal.setAttribute('data-preparacion', estudio.p || '');
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 24 Sept 2026, 4:16 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 24 Sept 2026, 4:17 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 24 Sept 2026, 4:17 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 24 Sept 2026, 4:17 pm
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-## User Request
-
-sigue sin funciona en mobiles lo de mostrar la ventana flotante del detalle del estudio,  para resultado de busqueda existente en abanicos , ni tampoco para nuevas, entonces has esto:
-. que ya no se haga eso , en su lugar unicamente se ponga el foco al renglon y se resalte el contorno del estudio por unos 5 segundos, que te parece se podria logra esto en mobiles y compatibilidad con ios/android navegadores.
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `website.js`
-**Language:** javascript
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L2749-2809)</summary>
-
-**Path:** `Unknown file`
-
-```
-    background: #e0f2fe;
-}
-.header-search-item-nombre {
-    font-size: 0.82rem;
-    font-weight: 700;
-    color: #0f172a;
-    line-height: 1.25;
-}
-.header-search-item-meta {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.7rem;
-    color: #64748b;
-    margin-top: 2px;
-}
-.header-search-item-clave {
-    font-weight: 600;
-    color: #0052b7;
-    background: #e2e8f0;
-    padding: 1px 5px;
+.map-zoom-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;    /* imagen completa, sin recorte, escala al área */
     border-radius: 4px;
 }
-.header-search-item-muestra {
+.map-zoom-badge {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    background: rgba(0,0,0,0.55);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 0.25rem 0.6rem;
+    border-radius: 20px;
+    pointer-events: none;
+    transition: background 0.15s;
+}
+.map-zoom-link:hover .map-zoom-badge { background: rgba(0,0,0,0.75); }
+
+/* ── PR-02: CTA fila bajo imagen de promociones ── */
+.promo-cta-row {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.25rem;
+}
+.promo-wa-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #0052B7;       /* azul oficial LAESH */
+    color: #fff;
+    border: none;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L959-994)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+/* ── GM-03: Label del botón pausa ── */
+.hero-pause-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #fff;
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-.header-search-empty {
-    padding: 12px;
-    font-size: 0.78rem;
-    color: #64748b;
-    text-align: center;
+    letter-spacing: 0.02em;
 }
 
-/* ── Abanico Dinámico: Mis Resultados de Búsqueda ── */
-.orden-acc--search-results {
-    border: 2px solid var(--primary-green);
-    box-shadow: 0 4px 14px rgba(113, 202, 17, 0.18);
-    margin-bottom: 14px;
-    animation: fadeInSlideDown 0.35s ease-out;
+/* ── GM-01: Barra de progreso de galería de calidad (mismo estilo que catalog progress) ── */
+.quality-progress-wrap {
+    padding: 0.45rem 0.5rem 0.1rem;
+    width: 100%;
 }
-.orden-acc--search-results .orden-acc-hdr {
-    background: #f0fdf4;
-    color: #065f46;
-}
-.orden-acc--search-results .orden-acc-hdr:hover {
-    background: #dcfce7;
-}
-@keyframes fadeInSlideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-8px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.quality-progress-fill {
+    height: 3px;
+    background: #0052B7;       /* azul LAESH */
+    border-radius: 3px;
+    transition: width 0.25s ease-out;
+    will-change: width;
 }
 
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `row-notif-highlight`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 24 Sept 2026, 4:26 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `portal.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L2634-2659)</summary>
-
-**Path:** `Unknown file`
-
-```
-@keyframes rowNotifHighlight {
-    0% { background-color: #fef08a !important; box-shadow: inset 0 0 0 2px #eab308, 0 0 12px rgba(234, 179, 8, 0.4); }
-    50% { background-color: #fde047 !important; box-shadow: inset 0 0 0 2px #ca8a04, 0 0 16px rgba(202, 138, 4, 0.6); }
-    100% { background-color: transparent !important; box-shadow: none; }
-}
-.row-notif-highlight {
-    animation: rowNotifHighlight 2.5s ease-in-out forwards;
+/* ── GM-02: Croquis — imagen completa (contain) dentro de tarjeta fija ── */
+#map-static,
+.map-static-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    flex: 1;                /* ocupa el espacio restante de .map-card flex */
+    min-height: 0;
     position: relative;
-    z-index: 5;
+    overflow: hidden;
+    background: #f0f2f4;
 }
-
-@keyframes rowSavedHighlight {
-    0% { background-color: #fef08a !important; box-shadow: inset 0 0 0 2px #eab308, 0 0 14px rgba(234, 179, 8, 0.4); }
-    15% { background-color: #fef9c3 !important; box-shadow: inset 0 0 0 2px #ca8a04, 0 0 8px rgba(202, 138, 4, 0.25); }
-    80% { background-color: #fef9c3 !important; box-shadow: inset 0 0 0 1.5px rgba(202, 138, 4, 0.35); }
-    100% { background-color: transparent !important; box-shadow: none; }
-}
-.row-saved-highlight {
-    animation: rowSavedHighlight 10s ease-in-out forwards;
-}
-
-/* Resalte de 10 segundos al accionar un registro de la grilla */
-@keyframes rowActionHighlight {
-    0% { 
-        background-color: #fef08a !important; 
-        box-shadow: inset 0 0 0 2px #eab308, 0 0 14px rgba(234, 179, 8, 0.4); 
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L2779-2809)</summary>
-
-**Path:** `Unknown file`
-
-```
-    font-size: 0.78rem;
-    color: #64748b;
-    text-align: center;
-}
-
-/* ── Abanico Dinámico: Mis Resultados de Búsqueda ── */
-.orden-acc--search-results {
-    border: 2px solid var(--primary-green);
-    box-shadow: 0 4px 14px rgba(113, 202, 17, 0.18);
-    margin-bottom: 14px;
-    animation: fadeInSlideDown 0.35s ease-out;
-}
-.orden-acc--search-results .orden-acc-hdr {
-    background: #f0fdf4;
-    color: #065f46;
-}
-.orden-acc--search-results .orden-acc-hdr:hover {
-    background: #dcfce7;
-}
-@keyframes fadeInSlideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-8px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L539-579)</summary>
-
-**Path:** `Unknown file`
-
-```
-            background: var(--primary); color: #fff;
-            font-size: 0.76rem; font-weight: 700; padding: 7px 12px;
-            text-transform: uppercase; letter-spacing: 0.04em;
-            font-family: 'Arial Black', Impact, sans-serif;
-        }
-        .orden-cat-body { padding: 8px 10px; background: var(--bg-surface); }
-        .orden-cat-item {
-            display: flex; align-items: flex-start; gap: 7px;
-            padding: 5px 0; font-size: 0.80rem; line-height: 1.35;
-            border-bottom: 1px dashed #e2e8f0; color: var(--text-main);
-        }
-        .orden-cat-item:last-child { border-bottom: none; }
-
-        /* Dots paginación del carrusel de especialidades */
-        .specialties-dots {
-            position: relative;
-            bottom: auto;
-            left: auto;
-            transform: none;
-            justify-content: center;
-            margin-top: 1.25rem;
-            margin-bottom: 0.5rem;
-            display: flex;
-            gap: 0.65rem;
-            align-items: center;
-        }
-        .specialties-dots .hero-dot {
-            background: #cbd5e1;
-            border: 1.5px solid #94a3b8;
-            width: 11px;
-            height: 11px;
-        }
-        .specialties-dots .hero-dot.active {
-            background: var(--primary);
-            border-color: var(--primary);
-            transform: scale(1.25);
-            box-shadow: 0 0 6px rgba(0, 82, 183, 0.35);
-        }
-        /* Responsive acordeón */
-
-        /* ── P-LAESH-01: clases extraídas de inline styles ── */
 ```
 
 </details>
@@ -12601,12 +12267,12 @@ sigue sin funciona en mobiles lo de mostrar la ventana flotante del detalle del 
 ### Actions
 
 **Tool:** `grep_search`
-**Query:** `precio-cat-item`
+**Query:** `.map-card`
 
 <details>
 <summary>Metadata</summary>
 
-- **Model:** Gemini 3.8 Flash (Low)
+- **Model:** Gemini 3.8 Flash (High)
 </details>
 
 ---
@@ -12614,7 +12280,7 @@ sigue sin funciona en mobiles lo de mostrar la ventana flotante del detalle del 
 ### Local File Search
 
 **Status:** Completed
-**Created:** 24 Sept 2026, 4:27 pm
+**Created:** 25 Sept 2026, 2:46 pm
 
 ---
 
@@ -12628,174 +12294,43 @@ sigue sin funciona en mobiles lo de mostrar la ventana flotante del detalle del 
 <details>
 <summary>Metadata</summary>
 
-- **Model:** Gemini 3.8 Flash (Low)
+- **Model:** Gemini 3.8 Flash (High)
 </details>
 
 ---
 
 <details>
-<summary>File: `Unknown file` (L464-484)</summary>
+<summary>File: `Unknown file` (L744-769)</summary>
 
 **Path:** `Unknown file`
 
 ```
-        /* .map-bottom-bar, .map-tab-btn, .modal, .footer-row → definidos en style.css */
-        /* #map-static height → cubierta por el bloque #map-static,.map-static-wrap más abajo */
-        #map-interactive { height: 400px; min-height: 400px; }
-
-        /* ── Precios ── */
-        .precio-cat-item {
-            display: flex; justify-content: space-between; align-items: baseline;
-            padding: 6px 10px; border-bottom: 1px solid #f1f5f9; font-size: 0.88rem;
-        }
-        .precio-cat-item:last-child { border-bottom: none; }
-        .precio-cat-nombre { color: var(--text-main); flex: 1; padding-right: 8px; }
-        .precio-cat-valor  { color: var(--primary); font-weight: 700; white-space: nowrap; }@media (hover: hover) and (pointer: fine) {
-    /* ── Hover via CSS (reemplaza onmouseover/onmouseout inline) ── */
-        .wa-contact-btn:hover {
-        transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(113,202,17,0.45);
-    }
+.contact-action-item {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
-        .email-link-hover { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }@media (hover: hover) and (pointer: fine) {
-    .email-link-hover:hover {
-        color: var(--primary-green);
-```
 
-</details>
+.map-card {
+    padding: 0;
+    overflow: hidden;
+    border: none;
+    height: 580px;
+    min-height: 580px;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border-radius: 12px;
+}
+.info-row-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+#ubicacion .acerca-h3 {
+    margin-bottom: 0.75rem;
+}
 
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1394-1434)</summary>
-
-**Path:** `Unknown file`
-
-```
-                    targetItem = allItems[i];
-                    break;
-                }
-            }
-        }
-
-        if (targetItem) {
-            // 3a. El estudio YA ESTÁ en los abanicos publicados:
-            // Abrir el acordeón que lo contiene si está cerrado
-            var parentBody = targetItem.closest('.orden-acc-body');
-            if (parentBody && parentBody.classList.contains('collapsed')) {
-                parentBody.classList.remove('collapsed');
-                var accId = parentBody.getAttribute('id');
-                if (accId) {
-                    var chevron = document.getElementById('arr-' + accId);
-                    if (chevron) chevron.classList.add('chevron-open');
-                }
-            }
-
-            // Esperar que el teclado virtual termine de retraerse en móviles (200ms) antes de scrollear y abrir
-            setTimeout(function() {
-                targetItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                targetItem.classList.remove('row-notif-highlight');
-                void targetItem.offsetWidth; // Forzar reflow CSS
-                targetItem.classList.add('row-notif-highlight');
-
-                // Abrir directamente la ventana de detalle flotante
-                setTimeout(function() {
-                    openEstudioDetalle(targetItem);
-                }, 300);
-
-                setTimeout(function() {
-                    targetItem.classList.remove('row-notif-highlight');
-                }, 3500);
-            }, 200);
-        } else {
-            // 3b. El estudio NO está en los abanicos publicados:
-            // Insertar o reutilizar el abanico "Mis resultados de búsqueda" al inicio de la sección
-            var accResultados = getOrCreateSearchResultsAccordion();
-            if (!accResultados) return;
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1504-1544)</summary>
-
-**Path:** `Unknown file`
-
-```
-                itemFinal.appendChild(nombreSpan);
-
-                cardBody.appendChild(itemFinal);
-
-                // Inyectar el botón "+" y vincular el modal de detalle
-                if (typeof window._laeshAttachInfoButton === 'function') {
-                    window._laeshAttachInfoButton(itemFinal);
-                }
-            }
-
-            // Scroll suave hacia la ficha, resaltado luminoso y apertura directa de detalle
-            setTimeout(function() {
-                itemFinal.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                itemFinal.classList.remove('row-notif-highlight');
-                void itemFinal.offsetWidth;
-                itemFinal.classList.add('row-notif-highlight');
-
-                // Abrir directamente la ventana de detalle flotante
-                setTimeout(function() {
-                    openEstudioDetalle(itemFinal);
-                }, 300);
-
-                setTimeout(function() {
-                    itemFinal.classList.remove('row-notif-highlight');
-                }, 3500);
-            }, 200);
-        }
-    }
-
-    // Vincular instancia de input con su caja de resultados
-    function bindSearchBox(inputId, resultsId, clearBtn) {
-        var input = document.getElementById(inputId);
-        var resultsBox = document.getElementById(resultsId);
-        if (!input || !resultsBox) return;
-
-        var currentResults = [];
-        var activeIndex = -1;
-
-        function renderResults(list) {
-            currentResults = list;
-            activeIndex = -1;
 ```
 
 </details>
@@ -12812,318 +12347,91 @@ sigue sin funciona en mobiles lo de mostrar la ventana flotante del detalle del 
 <details>
 <summary>Metadata</summary>
 
-- **Model:** Gemini 3.8 Flash (Low)
+- **Model:** Gemini 3.8 Flash (High)
 </details>
 
 ---
 
 <details>
-<summary>File: `Unknown file` (L2784-2809)</summary>
+<summary>File: `Unknown file` (L1399-1469)</summary>
 
 **Path:** `Unknown file`
 
 ```
-/* ── Abanico Dinámico: Mis Resultados de Búsqueda ── */
-.orden-acc--search-results {
-    border: 2px solid var(--primary-green);
-    box-shadow: 0 4px 14px rgba(113, 202, 17, 0.18);
-    margin-bottom: 14px;
-    animation: fadeInSlideDown 0.35s ease-out;
-}
-.orden-acc--search-results .orden-acc-hdr {
-    background: #f0fdf4;
-    color: #065f46;
-}
-.orden-acc--search-results .orden-acc-hdr:hover {
-    background: #dcfce7;
-}
-@keyframes fadeInSlideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-8px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 24 Sept 2026, 4:27 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1399-1439)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-        if (targetItem) {
-            // 3a. El estudio YA ESTÁ en los abanicos publicados:
-            // Abrir el acordeón que lo contiene si está cerrado
-            var parentBody = targetItem.closest('.orden-acc-body');
-            if (parentBody && parentBody.classList.contains('collapsed')) {
-                parentBody.classList.remove('collapsed');
-                var accId = parentBody.getAttribute('id');
-                if (accId) {
-                    var chevron = document.getElementById('arr-' + accId);
-                    if (chevron) chevron.classList.add('chevron-open');
-                }
-            }
-
-            // Esperar que el teclado virtual termine de retraerse en móviles (200ms) antes de scrollear y abrir
-            setTimeout(function() {
-                targetItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                targetItem.classList.remove('row-notif-highlight');
-                void targetItem.offsetWidth; // Forzar reflow CSS
-                targetItem.classList.add('row-notif-highlight');
-
-                // Abrir directamente la ventana de detalle flotante
-                setTimeout(function() {
-                    openEstudioDetalle(targetItem);
-                }, 300);
-
-                setTimeout(function() {
-                    targetItem.classList.remove('row-notif-highlight');
-                }, 3500);
-            }, 200);
-        } else {
-            // 3b. El estudio NO está en los abanicos publicados:
-            // Insertar o reutilizar el abanico "Mis resultados de búsqueda" al inicio de la sección
-            var accResultados = getOrCreateSearchResultsAccordion();
-            if (!accResultados) return;
-
-            var accBody = accResultados.querySelector('.orden-acc-body');
-            if (!accBody) return;
-
-            // Asegurar que el abanico "Mis resultados de búsqueda" esté abierto
-            accBody.classList.remove('collapsed');
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1504-1544)</summary>
-
-**Path:** `Unknown file`
-
-```
-                itemFinal.appendChild(nombreSpan);
-
-                cardBody.appendChild(itemFinal);
-
-                // Inyectar el botón "+" y vincular el modal de detalle
-                if (typeof window._laeshAttachInfoButton === 'function') {
-                    window._laeshAttachInfoButton(itemFinal);
-                }
-            }
-
-            // Scroll suave hacia la ficha, resaltado luminoso y apertura directa de detalle
-            setTimeout(function() {
-                itemFinal.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                itemFinal.classList.remove('row-notif-highlight');
-                void itemFinal.offsetWidth;
-                itemFinal.classList.add('row-notif-highlight');
-
-                // Abrir directamente la ventana de detalle flotante
-                setTimeout(function() {
-                    openEstudioDetalle(itemFinal);
-                }, 300);
-
-                setTimeout(function() {
-                    itemFinal.classList.remove('row-notif-highlight');
-                }, 3500);
-            }, 200);
+    .specialties-carousel-viewport { padding: 0 0.5rem; }
+    .specialties-carousel-track { gap: 0.75rem; padding-bottom: 4px; }
+    .carousel-card { flex: 0 0 calc(100% - 1rem); min-width: unset; margin-bottom: 2px; }
+    .carousel-card img { height: 230px; object-fit: cover; object-position: top center; }
+    .carousel-card-body, .carousel-card-content { padding: 0.85rem; }
+    .carousel-card-body h3, .carousel-card-content h3 { font-size: 1rem; }
+    .carousel-card-body p,  .carousel-card-content p  { font-size: 0.85rem; }
+    /* .map-card height: auto removida — regla muerta sobreescrita por la de 340px a continuación */
+    .browser-window { border-radius: 0px; box-shadow: none; }
+    #privacy-view { padding: 1rem; }
+    .map-bottom-bar { gap: 10px; padding: 0.75rem 0.5rem; }
+    .map-tab-btn { font-size: 0.82rem; padding: 0.5rem 0.25rem 0.25rem; gap: 4px; }
+    .map-tab-btn img, .map-ext-link img { width: 15px; height: 15px; }
+    .map-ext-link { font-size: 0.82rem; gap: 4px; }
+    .map-sep { font-size: 1.0rem; }
+    #ubicacion .card-premium:last-child { min-height: auto; }
+    #map-interactive, #map-interactive iframe { height: 300px; min-height: 300px; }
+    .map-card { height: 340px; min-height: 340px; }
+    .footer-row { gap: 8px; padding: 1rem 0.5rem; }
+    .footer-item, .footer-link { font-size: 0.72rem; }
+    .footer-sep { font-size: 0.85rem; }
+    .footer-cta-card {
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 1.5rem 1.25rem;
+            border-radius: 1rem;
         }
-    }
+    .footer-cta-actions { width: 100%; }
+    .footer-btn-wa, .footer-btn-phone { flex: 1; justify-content: center; }
+    .footer-info { padding: 1rem 3.5rem 1.5rem 1rem !important; }
+    .footer-text { font-size: 0.72rem; }
+    .social-float   { width: 44px; height: 44px; bottom: 38px; right: 10px; }
+    .social-float svg { width: 20px; height: 20px; }
+    .whatsapp-float { width: 44px; height: 44px; bottom: 90px; right: 10px; }
+    .whatsapp-float svg { width: 24px; height: 24px; }
+    @supports (padding: env(safe-area-inset-bottom)) {
+            .social-float   { bottom: calc(38px + env(safe-area-inset-bottom)); }
+            .whatsapp-float { bottom: calc(90px + env(safe-area-inset-bottom)); }
+        }
+}
 
-    // Vincular instancia de input con su caja de resultados
-    function bindSearchBox(inputId, resultsId, clearBtn) {
-        var input = document.getElementById(inputId);
-        var resultsBox = document.getElementById(resultsId);
-        if (!input || !resultsBox) return;
+/* R-MOB: .orden-acc-body → 2 cols en landscape phone (540px–767px);
+   el bloque max-width:767px de arriba ya establece 1fr para <540px */
+@media (min-width: 540px) and (max-width: 767px) {
+    .orden-acc-body { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
 
-        var currentResults = [];
-        var activeIndex = -1;
+@media (max-width: 480px) {
+    .footer-row    { flex-wrap: wrap; justify-content: center; }
+    .footer-sep    { display: none; }
+    .map-bottom-bar { flex-wrap: wrap; justify-content: center; gap: 6px; }
+    .map-tab-btn { font-size: 0.75rem; }
+    .map-ext-link { font-size: 0.75rem; }
+    .map-sep { font-size: 0.8rem; }
+    #map-interactive { height: 250px; min-height: 250px; }
+    #map-interactive iframe { min-height: 250px; }
+    .map-card { height: 290px; min-height: 290px; }
+    .footer-cta-actions { flex-direction: column; }
+    .footer-btn-wa, .footer-btn-phone { flex: unset; width: 100%; justify-content: center; }
+    .social-float   { width: 40px; height: 40px; bottom: 36px; right: 10px; }
+    .social-float svg { width: 18px; height: 18px; }
+    .whatsapp-float { width: 40px; height: 40px; bottom: 84px; right: 10px; }
+    .whatsapp-float svg { width: 22px; height: 22px; }
+    @supports (padding: env(safe-area-inset-bottom)) {
+            .social-float   { bottom: calc(36px + env(safe-area-inset-bottom)); }
+            .whatsapp-float { bottom: calc(84px + env(safe-area-inset-bottom)); }
+        }
+}
 
-        function renderResults(list) {
-            currentResults = list;
-            activeIndex = -1;
+@media (max-width: 375px) {
+    .footer-row  { gap: 5px; }
 ```
 
 </details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1324-1369)</summary>
-
-**Path:** `Unknown file`
-
-```
-                    if (body) {
-                        var isCol = body.classList.toggle('collapsed');
-                        if (chev) chev.classList.toggle('chevron-open', !isCol);
-                    }
-                }
-            });
-        }
-
-        return acc;
-    }
-
-    // Función auxiliar para abrir la ventana de detalle de un elemento garantizando scroll y visibilidad
-    function openEstudioDetalle(itemEl) {
-        if (!itemEl) return;
-        var btn = itemEl.querySelector('.precio-info-btn');
-        if (typeof window._laeshShowEstudioTip === 'function' && btn) {
-            var nombreEl = itemEl.querySelector('.precio-cat-nombre');
-            var nombre   = nombreEl ? nombreEl.textContent.trim() : '';
-            var catEl    = itemEl.closest('.orden-cat');
-            var categoria = catEl ? (catEl.querySelector('.orden-cat-hdr') ? catEl.querySelector('.orden-cat-hdr').textContent.trim() : '—') : '—';
-            var d = [
-                itemEl.getAttribute('data-clave') || '—',
-                itemEl.getAttribute('data-tiempo') || 'Consultar en LAESH',
-                itemEl.getAttribute('data-muestra') || 'Consultar en LAESH',
-                itemEl.getAttribute('data-preparacion') || 'Consultar en LAESH',
-                itemEl.getAttribute('data-contenedor') || '',
-                itemEl.getAttribute('data-pruebas') || ''
-            ];
-            window._laeshShowEstudioTip(btn, nombre, categoria, d);
-        } else if (btn) {
-            btn.click();
-        }
-    }
-
-    // Acción al seleccionar un estudio
-    function selectEstudio(estudio) {
-        if (!estudio) return;
-
-        // Ocultar teclado virtual en móviles de inmediato
-        if (document.activeElement && typeof document.activeElement.blur === 'function') {
-            document.activeElement.blur();
-        }
-        var searchInputs = document.querySelectorAll('.header-search-input');
-        searchInputs.forEach(function(inp) { inp.blur(); });
-
-        // Cerrar dropdowns de resultados
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 24 Sept 2026, 4:27 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `write_to_file`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 24 Sept 2026, 4:27 pm
 
 ---
 
@@ -13136,7 +12444,7 @@ sigue sin funciona en mobiles lo de mostrar la ventana flotante del detalle del 
 <details>
 <summary>Metadata</summary>
 
-- **Model:** Gemini 3.8 Flash (Low)
+- **Model:** Gemini 3.8 Flash (High)
 </details>
 
 ---
@@ -13144,134 +12452,7 @@ sigue sin funciona en mobiles lo de mostrar la ventana flotante del detalle del 
 ### Terminal Command Execution
 
 **Status:** Completed
-**Created:** 24 Sept 2026, 4:28 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1409-1434)</summary>
-
-**Path:** `Unknown file`
-
-```
-                    if (chevron) chevron.classList.add('chevron-open');
-                }
-            }
-
-            // Esperar que el teclado virtual termine de retraerse en móviles (200ms) antes de centrar y resaltar
-            setTimeout(function() {
-                targetItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-                // Poner foco de accesibilidad al renglón
-                if (!targetItem.hasAttribute('tabindex')) {
-                    targetItem.setAttribute('tabindex', '-1');
-                }
-                targetItem.focus({ preventScroll: true });
-
-                // Activar resalte de contorno luminoso durante 5 segundos
-                targetItem.classList.remove('estudio-buscado-highlight');
-                void targetItem.offsetWidth; // Forzar reflow CSS
-                targetItem.classList.add('estudio-buscado-highlight');
-
-                setTimeout(function() {
-                    targetItem.classList.remove('estudio-buscado-highlight');
-                }, 5200);
-            }, 200);
-        } else {
-            // 3b. El estudio NO está en los abanicos publicados:
-            // Insertar o reutilizar el abanico "Mis resultados de búsqueda" al inicio de la sección
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1359-1384)</summary>
-
-**Path:** `Unknown file`
-
-```
-    function selectEstudio(estudio) {
-        if (!estudio) return;
-
-        // Ocultar teclado virtual en móviles de inmediato
-        if (document.activeElement && typeof document.activeElement.blur === 'function') {
-            document.activeElement.blur();
-        }
-        var searchInputs = document.querySelectorAll('.header-search-input');
-        searchInputs.forEach(function(inp) { inp.blur(); });
-
-        // Cerrar dropdowns de resultados
-        document.querySelectorAll('.header-search-results').forEach(function(r) {
-            r.style.display = 'none';
-            r.innerHTML = '';
-        });
-
-        // 1. Buscar si el estudio ya está en alguno de los abanicos del DOM de forma segura (sin fallos por caracteres especiales en selectores)
-        var targetItem = null;
-        var claveTarget = String(estudio.c || '').trim();
-        var nombreTarget = normalizeStr(estudio.n || '');
-
-        var allItems = document.querySelectorAll('.precio-cat-item');
-        if (claveTarget) {
-            for (var i = 0; i < allItems.length; i++) {
-                if (allItems[i].getAttribute('data-clave') === claveTarget) {
-                    targetItem = allItems[i];
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 24 Sept 2026, 4:28 pm
+**Created:** 25 Sept 2026, 2:46 pm
 
 ---
 
@@ -13284,7 +12465,7 @@ sigue sin funciona en mobiles lo de mostrar la ventana flotante del detalle del 
 <details>
 <summary>Metadata</summary>
 
-- **Model:** Gemini 3.8 Flash (Low)
+- **Model:** Gemini 3.8 Flash (High)
 </details>
 
 ---
@@ -13292,7 +12473,7 @@ sigue sin funciona en mobiles lo de mostrar la ventana flotante del detalle del 
 ### Terminal Command Execution
 
 **Status:** Completed
-**Created:** 24 Sept 2026, 4:28 pm
+**Created:** 25 Sept 2026, 2:46 pm
 
 ---
 
@@ -13305,7 +12486,7 @@ sigue sin funciona en mobiles lo de mostrar la ventana flotante del detalle del 
 <details>
 <summary>Metadata</summary>
 
-- **Model:** Gemini 3.8 Flash (Low)
+- **Model:** Gemini 3.8 Flash (High)
 </details>
 
 ---
@@ -13313,23 +12494,526 @@ sigue sin funciona en mobiles lo de mostrar la ventana flotante del detalle del 
 ### Terminal Command Execution
 
 **Status:** Completed
-**Created:** 24 Sept 2026, 4:28 pm
+**Created:** 25 Sept 2026, 2:47 pm
 
 ---
 
 ## Agent Response
 
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `location-stack-layout`
+
 <details>
 <summary>Metadata</summary>
 
-- **Model:** Gemini 3.8 Flash (Low)
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 2:47 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L714-754)</summary>
+
+**Path:** `Unknown file`
+
+```
+.map-grow  { flex-grow: 1; }
+.map-iframe { border: 0; display: block; }
+
+/* ── Ubicación: Datos de Contacto estrecho / Mapa ancho ─────
+   Selector con ID para ganar en especificidad sobre cualquier
+/* ── Ubicación y Contacto — Stack Horizontal ── */
+.location-stack-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 1380px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.contact-card-horizontal {
+    padding: 1.25rem 1.5rem;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+}
+
+.contact-grid-horizontal {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.25rem;
+    align-items: center;
+    margin-top: 0.85rem;
+}
+
+.contact-action-item {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.map-card {
+    padding: 0;
+    overflow: hidden;
+    border: none;
+    height: 580px;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L974-1019)</summary>
+
+**Path:** `Unknown file`
+
+```
+.quality-progress-fill {
+    height: 3px;
+    background: #0052B7;       /* azul LAESH */
+    border-radius: 3px;
+    transition: width 0.25s ease-out;
+    will-change: width;
+}
+
+/* ── GM-02: Croquis — imagen completa (contain) dentro de tarjeta fija ── */
+#map-static,
+.map-static-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    flex: 1;                /* ocupa el espacio restante de .map-card flex */
+    min-height: 0;
+    position: relative;
+    overflow: hidden;
+    background: #f0f2f4;
+}
+.map-zoom-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border-radius: inherit;
+    background: transparent;
+}
+.map-zoom-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;    /* imagen completa, sin recorte, escala al área */
+    border-radius: 4px;
+}
+.map-zoom-badge {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    background: rgba(0,0,0,0.55);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `map-bottom-bar`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 2:47 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `map-bottom-bar`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 2:47 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `map-bottom-bar`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 2:47 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `style-website.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L249-284)</summary>
+
+**Path:** `Unknown file`
+
+```
+        transform: scale(1.1);
+    }
+}
+
+/* Pestañas del Mapa */
+.map-bottom-bar {
+    padding: 1rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    background: #ffffff;
+    align-items: center;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    overflow: visible;
+}
+.map-tab-btn {
+    background: none;
+    border: none;
+    padding: 0.5rem 0.5rem 0.25rem;
+    font-family: inherit;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-muted);
+    font-weight: 700;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+    border-bottom: 2px solid transparent;
+}@media (hover: hover) and (pointer: fine) {
+    .map-tab-btn:hover {
+        color: var(--primary);
+    }
+}
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `CROQUIS ACTUAL LAESH 2026.png`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The image appears to be a map or a diagram, possibly a hand-drawn sketch (Croquis) due to the listed streets and landmarks. The presence of a north compass arrow suggests it's intended to convey spatial relationships. Image dimensions indicate it's a moderately sized graphic suitable for display or printing.
+
+
+Considering image dimensions and website layout, the map will be displayed with a maximum height of approximately 528px on desktop viewports. Given the image's aspect ratio of roughly 1.42:1 and the `object-fit: contain` property, the map's width will be constrained by the available height. I'll need to further analyze how it scales in smaller viewports.
+
+
+Desktop display will be centered with light gray pillarboxes due to height constraint. The image's soft blue background could clash with the container's gray background, potentially making box edges visible. Mobile viewports have different constraints.
+
+On mobile, the image will fit horizontally at full width, with a letterbox, as the height required is lower than the available height. Analysis of different screen sizes will define the rendering on mobile and desktop.
+
+
+Calculations confirm the map image fits within the maximum height constraints across various mobile devices and tablets, based on their respective screen widths and CSS rules. Small text elements within the image require careful consideration of Device Pixel Ratio (DPR) to ensure legibility on different devices, especially mobile screens. I'll need to account for higher DPR values found on modern mobile devices to determine scaling factors that retain sufficient detail.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 5.845083438s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 2:47 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 2:48 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+The original image is significantly large, but WebP encoding offers substantial size reduction with negligible quality loss. Examination of the HTML and CSS will reveal how the image is being displayed; this will inform optimal sizing to balance visual fidelity and loading speed. Inspecting the container dimensions will determine appropriate target dimensions for the optimized WebP image.
+
+
+The image's intended display dimensions are 1136x615 (1.85:1 aspect ratio), but the current image is a different ratio and size.  The `.map-card` container is 580px high, and the top bar takes approximately 50px, leaving 530px available for the map image. The container centers the image within it. The image's actual aspect ratio and the container's height constraint will determine the final displayed size.
+
+
+The image's `object-fit: contain` property and the container's constraints guarantee the image scales proportionally within the box without distortion. The display size varies with screen width. On a desktop (1920px screen), the inner width is 1348px and the image, with a calculated width of 754.5px at the available height of 530px, will be centered. The image display dimensions will remain relatively consistent across different desktop/laptop screen sizes due to the `object-fit: contain` property.
+
+
+Analysis indicates the image's displayed size varies based on the device and screen dimensions due to the responsive CSS and `object-fit: contain`.  Calculations consider multiple scenarios, from desktop to mobile, accounting for padding and available height within the container.  Device Pixel Ratio (DPR) is crucial for balancing resolution and legibility across different device densities. A resized image must accommodate various screen sizes to maintain visual quality.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `map-zoom`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 4.463703025s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 2:48 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `btn-map-static`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 2:48 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 2:48 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 2:48 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+The image dimensions were initially noted as 656x477, likely due to a resize during a prior upload. The legibility of this size versus larger options (e.g., 1284x902 or 1200x843) needs evaluation. On a mobile device with a 390px width and 3x device pixel ratio, the image would be stretched by 1.78x, resulting in blurred text.
+
+
+The native image dimensions are 1284x902 pixels; its crisp vector text suggests it will render well even at various display densities. Initial assessment of the containing element's CSS properties is critical to determine optimal display scaling. The image's current file size is large, indicating opportunities for significant optimization.
+
+
+Analyzing the CSS, desktop and laptop displays render the image within a 530px height, resulting in a rendered width of 754.5px due to the aspect ratio. On tablets, a `max-height` of 480px limits rendering to 683.3px wide. Standard mobile devices are constrained to a viewport of roughly 358px wide, so the height and aspect ratio will determine the best display.
+
+
+Mobile rendering calculations show the image fits comfortably within the constrained heights of various devices, maintaining the aspect ratio. Pixel density presents a critical factor; resizing the image for smaller displays at higher DPRs results in significant scaling, potentially causing text blur. The optimal size needs to balance visual clarity at different resolutions, especially for small text elements in the croquis.
+
+
+Considering image optimization, a WebP conversion at 85% quality drastically reduces file size from 1.04MB to 57KB, a 94.6% reduction, without sacrificing resolution. Retaining the native `1284x902` dimension maintains vector detail and typography integrity, avoiding resampling artifacts. This size also offers complete coverage across various screen densities, ensuring sharp rendering on both desktops/laptops and mobile devices.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 6.342452945s
+- **Model:** Gemini 3.8 Flash (High)
 </details>
 
 ---
 
 ## User Request
 
-oppps .pues no sigue sin funcionar, sera algun gap de cache ?
+en tonces solo lo convierto a webp y haces los ajustes al template  sections/ubicacion.php y en 
+landing.css , cierto ?
+
 
 <details>
 <summary>Context</summary>
@@ -13342,90 +13026,12 @@ oppps .pues no sigue sin funcionar, sera algun gap de cache ?
 
 ## Agent Response
 
-### Actions
+### Thinking
 
-**Tool:** `view_file`
-**File:** `index.php`
+The user is asking if converting the image to webp and adjusting the specified files (`ubicacion.php`, `landing.css`) is the correct next step. This suggests an image optimization workflow and potential template modification. The context requires understanding the image's location within the project.
 
-<details>
-<summary>Metadata</summary>
 
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
 
----
-
-<details>
-<summary>File: `Unknown file` (L534-549)</summary>
-
-**Path:** `Unknown file`
-
-```
-    <link rel="alternate" hreflang="es-MX" href="https://laesh.mx/">
-    <link rel="icon" type="image/svg+xml" href="/laesh-web-assets-uipv1a/img/favicon.svg">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https://*.ggpht.com https://*.gstatic.com https://*.google.com https://*.googleusercontent.com https://*.tile.openstreetmap.org https://*.openstreetmap.org https://i.ytimg.com; frame-src https://maps.google.com https://www.google.com https://google.com https://*.google.com https://www.openstreetmap.org https://www.youtube.com https://youtube.com https://open.spotify.com https://player.vimeo.com https://www.dailymotion.com https://www.instagram.com https://www.facebook.com https://platform.twitter.com https://twitframe.com; script-src 'self' 'unsafe-inline' https://maps.google.com https://www.google.com; connect-src 'self' ws: wss: https://*.google.com https://*.openstreetmap.org;">
-    <script src="/laesh-web-assets-uipv1a/js/device-detect.js?v=<?= time() ?>"></script>
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/tokens.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/fonts.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/style.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/style-website.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/landing.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/ckeditor-content.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/targeting.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/tablet-samsung-tabs10ultra.css?v=<?= time() ?>">
-    <link rel="preload" href="/laesh-web-assets-uipv1a/fonts/cabin-latin-normal-w400.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/laesh-web-assets-uipv1a/fonts/outfit-latin-normal-w300.woff2" as="font" type="font/woff2" crossorigin>
-    <!-- LCP preload: precarga la imagen del hero activa antes de que el parser la descubra vía bg_style -->
-    <?php
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L959-973)</summary>
-
-**Path:** `Unknown file`
-
-```
-        window._laeshObserver = io;
-    })();
-    </script>
-    <!-- Catálogo compacto de estudios (OPcache L2) para autocompletado en memoria RAM local (0ms lag) -->
-    <script>
-        window.__LAESH_ESTUDIOS__ = <?= $estudiosSearchJson ?: '[]' ?>;
-    </script>
-    <!-- Fix C2: htmx se carga async + fetchpriority low — no bloquea DOMContentLoaded
-         ni compite con website.js. Solo se necesita cuando el usuario abre el modal de login. -->
-    <script src="/laesh-web-assets-uipv1a/js/htmx.min.js" async fetchpriority="low"></script>
-    <script src="/laesh-web-assets-uipv1a/js/website.js?v=<?= @filemtime(__DIR__ . '/../../laesh-web-assets-uipv1a/js/website.js') ?: time() ?>" defer></script>
-
-</body>
-</html>
-
-```
-
-</details>
-
----
-
-## Agent Response
 
 ### Actions
 
@@ -13434,7 +13040,8 @@ oppps .pues no sigue sin funcionar, sera algun gap de cache ?
 <details>
 <summary>Metadata</summary>
 
-- **Model:** Gemini 3.8 Flash (Low)
+- **Thinking Duration:** 0.022740999s
+- **Model:** Gemini 3.8 Flash (High)
 </details>
 
 ---
@@ -13442,7 +13049,7 @@ oppps .pues no sigue sin funcionar, sera algun gap de cache ?
 ### Terminal Command Execution
 
 **Status:** Completed
-**Created:** 24 Sept 2026, 4:32 pm
+**Created:** 25 Sept 2026, 2:58 pm
 
 ---
 
@@ -13450,55 +13057,40 @@ oppps .pues no sigue sin funcionar, sera algun gap de cache ?
 
 ### Actions
 
-**Tool:** `run_command`
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/commons`
 
 <details>
 <summary>Metadata</summary>
 
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 24 Sept 2026, 4:33 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
+- **Model:** Gemini 3.8 Flash (High)
 </details>
 
 ---
 
 <details>
-<summary>File: `Unknown file` (L964-973)</summary>
+<summary>Directory: `commons` (16 items)</summary>
 
-**Path:** `Unknown file`
+**Path:** `home/carlos/GitHub/caelitandem_home/restaurantb/www/laesh-swbldi/commons`
 
-```
-        window.__LAESH_ESTUDIOS__ = <?= $estudiosSearchJson ?: '[]' ?>;
-    </script>
-    <!-- Fix C2: htmx se carga async + fetchpriority low — no bloquea DOMContentLoaded
-         ni compite con website.js. Solo se necesita cuando el usuario abre el modal de login. -->
-    <script src="/laesh-web-assets-uipv1a/js/htmx.min.js" async fetchpriority="low"></script>
-    <script src="/laesh-web-assets-uipv1a/js/website.js?v=<?= @filemtime(__DIR__ . '/../../laesh-web-assets-uipv1a/js/website.js') ?: time() ?>" defer></script>
-
-</body>
-</html>
-
-```
+| Name | Type | Size |
+|------|------|------|
+| `Cache.php` | File | 10397 bytes |
+| `CatalogBuilder.php` | File | 8332 bytes |
+| `CsrfGuard.php` | File | 6916 bytes |
+| `DB.php` | File | 5264 bytes |
+| `JwtManager.php` | File | 12125 bytes |
+| `Logger.php` | File | 10011 bytes |
+| `PortalMap.php` | File | 1008 bytes |
+| `RbacManager.php` | File | 5193 bytes |
+| `Response.php` | File | 4479 bytes |
+| `autoload.php` | File | 1504 bytes |
+| `commons.php` | File | 6126 bytes |
+| `config.php` | File | 3403 bytes |
+| `notifier.php` | File | 20881 bytes |
+| `seed_first_users.php` | File | 13668 bytes |
+| `swoole_server.php` | File | 24601 bytes |
+| `ws_audit_receiver.php` | File | 3761 bytes |
 
 </details>
 
@@ -13514,3095 +13106,7 @@ oppps .pues no sigue sin funcionar, sera algun gap de cache ?
 <details>
 <summary>Metadata</summary>
 
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L536-545)</summary>
-
-**Path:** `Unknown file`
-
-```
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https://*.ggpht.com https://*.gstatic.com https://*.google.com https://*.googleusercontent.com https://*.tile.openstreetmap.org https://*.openstreetmap.org https://i.ytimg.com; frame-src https://maps.google.com https://www.google.com https://google.com https://*.google.com https://www.openstreetmap.org https://www.youtube.com https://youtube.com https://open.spotify.com https://player.vimeo.com https://www.dailymotion.com https://www.instagram.com https://www.facebook.com https://platform.twitter.com https://twitframe.com; script-src 'self' 'unsafe-inline' https://maps.google.com https://www.google.com; connect-src 'self' ws: wss: https://*.google.com https://*.openstreetmap.org;">
-    <script src="/laesh-web-assets-uipv1a/js/device-detect.js?v=<?= time() ?>"></script>
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/tokens.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/fonts.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/style.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/style-website.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/landing.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/ckeditor-content.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/targeting.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/tablet-samsung-tabs10ultra.css?v=<?= time() ?>">
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L24-34)</summary>
-
-**Path:** `Unknown file`
-
-```
-require_once __DIR__ . '/../commons/commons.php';
-
-// ── HTTP Caching & Performance Optimization Headers ───────────────────────────
-// Permite revalidación rápida y caché eficiente del navegador sin afectar sesiones
-if (empty($_SESSION['auth_logged_in'])) {
-    header('Cache-Control: public, max-age=300, must-revalidate');
-} else {
-    header('Cache-Control: no-cache, must-revalidate');
-}
-
-// ── CSRF para modal de login ────────────────────────────────────────────────
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `nginx.conf`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Execution Error
-
-**Status:** Completed
-**Created:** 24 Sept 2026, 4:34 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 24 Sept 2026, 4:34 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `restaurantb.conf`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-# ============================================================
-#  restaurantb.conf — Server blocks Nginx
-#  Reemplaza: ssl-vhost.conf + apache-restaurantb.conf (Apache)
-#
-#  Proyectos servidos:
-#    /restaurant/  →  /var/www/html/restaurant/        (Flight PHP)
-#    /laesh/       →  laesh-swbldi/website/            (Flight PHP)
-#    /laesh/md/    →  laesh-swbldi/md/                 (Flight PHP)
-#    /laesh/rc/    →  laesh-swbldi/rc/                 (Flight PHP)
-#    /laesh/adrc/  →  laesh-swbldi/admrc/              (Flight PHP)
-#    /ws           →  swoole:9502                       (WebSocket proxy)
-#
-#  .htaccess eliminados — reglas traducidas a location blocks:
-#    restaurant/.htaccess      → try_files + location ~ \.php$
-#    laesh-swbldi/*/.htaccess  → named locations + regex PHP
-#    web-assets/pwa/.htaccess  → add_header Service-Worker-Allowed
-#    website/uipv1/.htaccess   → headers + cache en server block
-#
-#  Autor: cbm 2026-08-19
-# ============================================================
-
-# ── HTTP → HTTPS redirect ────────────────────────────────────
-server {
-    listen 80;
-    server_name localhost;
-    return 301 https://$host$request_uri;
-}
-
-# ── HTTPS principal ──────────────────────────────────────────
-server {
-    listen 443 ssl;
-    http2  on;  # Nginx 1.25+: directiva separada (listen … http2 deprecated)
-    server_name localhost;
-
-    root  /var/www/html;
-    index index.php index.html;
-
-    # ── Resolver DNS Docker — resolución lazy de upstreams ──
-    # Evita [emerg] host not found al arrancar antes que los containers.
-    # 127.0.0.11 = DNS interno de Docker (siempre disponible).
-    # Variables $fpm y $swoole_up → resolución diferida al primer request.
-    resolver 127.0.0.11 valid=10s ipv6=off;
-    set $fpm       php-fpm:9000;
-
-    # ── SSL ─────────────────────────────────────────────────
-    # Cert del volumen ../ssl/ (server.crt + server.key)
-    ssl_certificate      /etc/nginx/ssl/server.crt;
-    ssl_certificate_key  /etc/nginx/ssl/server.key;
-    ssl_protocols        TLSv1.2 TLSv1.3;
-    # Suite moderna: solo AEAD ciphers (GCM + ChaCha20). Elimina AES-CBC legacy.
-    ssl_ciphers          ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256;
-    ssl_prefer_server_ciphers on;
-    ssl_ecdh_curve       X25519:prime256v1:secp384r1;
-    ssl_session_cache    shared:SSL:10m;
-    ssl_session_timeout  10m;
-    ssl_session_tickets  off;  # deshabilita session tickets → mejora forward secrecy
-
-    # ── Headers de seguridad globales ───────────────────────
-    # Headers de seguridad (equivalente a <IfModule mod_headers.c> en Apache)
-    add_header X-Content-Type-Options   "nosniff"                          always;
-    add_header X-Frame-Options          "SAMEORIGIN"                       always;
-    add_header X-XSS-Protection         "1; mode=block"                    always;
-    add_header Referrer-Policy          "strict-origin-when-cross-origin"  always;
-    # HSTS: fuerza HTTPS en futuras visitas (max-age=1 año). Solo local/dev.
-    # En producción con cert válido añadir: preload; en HSTS Preload List.
-    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
-    # CSP: política base para LAESH + restaurant.
-    # script-src: 'unsafe-inline' eliminado — todos los <script> son externos (src=).
-    # style-src:  'unsafe-inline' retenido — style= attrs en vistas PHP (app team).
-    # frame-src:  OpenStreetMap (mapa interactivo embed) + Google Maps (Abrir en Maps).
-    #             CRÍTICO: HTTP header gana sobre <meta http-equiv="CSP"> del HTML.
-    #             Sin este header, el browser bloquea el iframe OSM con "contenido bloqueado".
-    # img-src:    Tiles OSM + assets Google Maps (streetview, etc.)
-    # connect-src: OSM tile API + wss (WebSocket Swoole)
-    add_header Content-Security-Policy  "default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https://*.tile.openstreetmap.org https://*.openstreetmap.org https://*.gstatic.com https://*.ggpht.com https://*.google.com https://*.googleusercontent.com https://unpkg.com https://i.ytimg.com; frame-src 'self' https://www.openstreetmap.org https://maps.google.com https://www.google.com https://*.google.com https://www.youtube.com https://youtube.com https://open.spotify.com https://player.vimeo.com https://www.dailymotion.com https://www.instagram.com https://www.facebook.com https://platform.twitter.com https://twitframe.com; connect-src 'self' wss: https://*.openstreetmap.org; frame-ancestors 'self'; base-uri 'self'; form-action 'self'" always;
-
-    # ── Logs ────────────────────────────────────────────────
-    access_log  /var/log/nginx/restaurantb_access.log  main;
-    error_log   /var/log/nginx/restaurantb_error.log;
-
-    # ── Caché de assets estáticos ────────────────────────────
-    # Equivalente a mod_expires en website/uipv1/.htaccess
-    location ~* \.(webp|jpg|jpeg|png|gif|ico|svg|woff2|woff)$ {
-        expires 1y;
-        add_header Cache-Control "public, immutable";
-        access_log off;
-    }
-    location ~* \.(css|js)$ {
-        expires 1M;
-        add_header Cache-Control "public, max-age=2592000";
-        access_log off;
-    }
-
-    # ── PHP-FPM Status — endpoint de monitoreo interno ──────
-    # pm.status_path = /fpm-status definido en php-fpm-pool.conf.
-    # Acceso restringido: solo localhost y red Docker interna.
-    # Uso: curl -sk https://localhost:8443/fpm-status?full
-    location = /fpm-status {
-        allow  127.0.0.1;
-        allow  172.19.0.0/16;   # red interna Docker (host gateway + contenedores)
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `restaurantb.conf`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L79-139)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-    # ── Caché de assets estáticos ────────────────────────────
-    # Equivalente a mod_expires en website/uipv1/.htaccess
-    location ~* \.(webp|jpg|jpeg|png|gif|ico|svg|woff2|woff)$ {
-        expires 1y;
-        add_header Cache-Control "public, immutable";
-        access_log off;
-    }
-    location ~* \.(css|js)$ {
-        expires 1M;
-        add_header Cache-Control "public, max-age=2592000";
-        access_log off;
-    }
-
-    # ── PHP-FPM Status — endpoint de monitoreo interno ──────
-    # pm.status_path = /fpm-status definido en php-fpm-pool.conf.
-    # Acceso restringido: solo localhost y red Docker interna.
-    # Uso: curl -sk https://localhost:8443/fpm-status?full
-    location = /fpm-status {
-        allow  127.0.0.1;
-        allow  172.19.0.0/16;   # red interna Docker (host gateway + contenedores)
-        deny   all;
-        fastcgi_pass  $fpm;
-        include       /etc/nginx/fastcgi_params;
-        fastcgi_param SCRIPT_FILENAME $document_root/fpm-status;
-        access_log    off;
-    }
-
-    # ── Denegar acceso a archivos .ht* ───────────────────────
-    location ~ /\.ht { deny all; }
-
-    # ================================================================
-    #  WebSocket Proxy → Swoole (LAESH QoS Fast-Path)
-    #  Reemplaza:  ProxyPass /ws ws://swoole:9502/ (Apache)
-    #
-    #  IMPORTANTE: Nginx resuelve upstream hostnames en arranque.
-    #  Si 'swoole' no está en DNS todavía → [emerg] host not found.
-    #  Fix: resolver DNS interno Docker (127.0.0.11) + variable en
-    #  proxy_pass → resolución diferida al primer request, no en startup.
-    # ================================================================
-    location /ws {
-        resolver               127.0.0.11 valid=10s;  # DNS interno Docker
-        set $swoole_up         http://swoole:9502;
-        proxy_pass             $swoole_up;
-        proxy_http_version     1.1;
-        proxy_set_header       Upgrade    $http_upgrade;
-        proxy_set_header       Connection "upgrade";
-        proxy_set_header       Host       $host;
-        proxy_read_timeout     3600s;   # conexión WS persistente
-        proxy_send_timeout     3600s;
-        proxy_connect_timeout  10s;
-    }
-
-    # ================================================================
-    #  Swoole Status — endpoint de monitoreo interno
-    #  Proxy a GET http://swoole:9502/status
-    #  Restringido a localhost (no expuesto a la LAN).
-    #  Responde: {"status":"online","clients_connected":N}
-    # ================================================================
-    location = /swoole-status {
-        resolver               127.0.0.11 valid=10s;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L534-546)</summary>
-
-**Path:** `Unknown file`
-
-```
-    <link rel="alternate" hreflang="es-MX" href="https://laesh.mx/">
-    <link rel="icon" type="image/svg+xml" href="/laesh-web-assets-uipv1a/img/favicon.svg">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https://*.ggpht.com https://*.gstatic.com https://*.google.com https://*.googleusercontent.com https://*.tile.openstreetmap.org https://*.openstreetmap.org https://i.ytimg.com; frame-src https://maps.google.com https://www.google.com https://google.com https://*.google.com https://www.openstreetmap.org https://www.youtube.com https://youtube.com https://open.spotify.com https://player.vimeo.com https://www.dailymotion.com https://www.instagram.com https://www.facebook.com https://platform.twitter.com https://twitframe.com; script-src 'self' 'unsafe-inline' https://maps.google.com https://www.google.com; connect-src 'self' ws: wss: https://*.google.com https://*.openstreetmap.org;">
-    <script src="/laesh-web-assets-uipv1a/js/device-detect.js?v=<?= time() ?>"></script>
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/tokens.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/fonts.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/style.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/style-website.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/landing.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/ckeditor-content.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/targeting.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/tablet-samsung-tabs10ultra.css?v=<?= time() ?>">
-    <link rel="preload" href="/laesh-web-assets-uipv1a/fonts/cabin-latin-normal-w400.woff2" as="font" type="font/woff2" crossorigin>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L964-973)</summary>
-
-**Path:** `Unknown file`
-
-```
-        window.__LAESH_ESTUDIOS__ = <?= $estudiosSearchJson ?: '[]' ?>;
-    </script>
-    <!-- Fix C2: htmx se carga async + fetchpriority low — no bloquea DOMContentLoaded
-         ni compite con website.js. Solo se necesita cuando el usuario abre el modal de login. -->
-    <script src="/laesh-web-assets-uipv1a/js/htmx.min.js" async fetchpriority="low"></script>
-    <script src="/laesh-web-assets-uipv1a/js/website.js?v=<?= @filemtime(__DIR__ . '/../../laesh-web-assets-uipv1a/js/website.js') ?: time() ?>" defer></script>
-
-</body>
-</html>
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L534-546)</summary>
-
-**Path:** `Unknown file`
-
-```
-    <link rel="alternate" hreflang="es-MX" href="https://laesh.mx/">
-    <link rel="icon" type="image/svg+xml" href="/laesh-web-assets-uipv1a/img/favicon.svg">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https://*.ggpht.com https://*.gstatic.com https://*.google.com https://*.googleusercontent.com https://*.tile.openstreetmap.org https://*.openstreetmap.org https://i.ytimg.com; frame-src https://maps.google.com https://www.google.com https://google.com https://*.google.com https://www.openstreetmap.org https://www.youtube.com https://youtube.com https://open.spotify.com https://player.vimeo.com https://www.dailymotion.com https://www.instagram.com https://www.facebook.com https://platform.twitter.com https://twitframe.com; script-src 'self' 'unsafe-inline' https://maps.google.com https://www.google.com; connect-src 'self' ws: wss: https://*.google.com https://*.openstreetmap.org;">
-    <script src="/laesh-web-assets-uipv1a/js/device-detect.js?v=<?= time() ?>"></script>
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/tokens.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/fonts.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/style.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/style-website.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/landing.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/ckeditor-content.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/targeting.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/tablet-samsung-tabs10ultra.css?v=<?= time() ?>">
-    <link rel="preload" href="/laesh-web-assets-uipv1a/fonts/cabin-latin-normal-w400.woff2" as="font" type="font/woff2" crossorigin>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 24 Sept 2026, 4:34 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 24 Sept 2026, 4:34 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 24 Sept 2026, 4:34 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1519-1579)</summary>
-
-**Path:** `Unknown file`
-
-```
-                }
-            }
-
-            // Scroll suave hacia la ficha, foco y resalte de contorno durante 5 segundos
-            setTimeout(function() {
-                itemFinal.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-                // Poner foco de accesibilidad al renglón
-                if (!itemFinal.hasAttribute('tabindex')) {
-                    itemFinal.setAttribute('tabindex', '-1');
-                }
-                itemFinal.focus({ preventScroll: true });
-
-                // Activar resalte de contorno luminoso durante 5 segundos
-                itemFinal.classList.remove('estudio-buscado-highlight');
-                void itemFinal.offsetWidth;
-                itemFinal.classList.add('estudio-buscado-highlight');
-
-                setTimeout(function() {
-                    itemFinal.classList.remove('estudio-buscado-highlight');
-                }, 5200);
-            }, 200);
-        }
-    }
-
-    // Vincular instancia de input con su caja de resultados
-    function bindSearchBox(inputId, resultsId, clearBtn) {
-        var input = document.getElementById(inputId);
-        var resultsBox = document.getElementById(resultsId);
-        if (!input || !resultsBox) return;
-
-        var currentResults = [];
-        var activeIndex = -1;
-
-        function renderResults(list) {
-            currentResults = list;
-            activeIndex = -1;
-            resultsBox.innerHTML = '';
-
-            if (list.length === 0) {
-                var empty = document.createElement('div');
-                empty.className = 'header-search-empty';
-                empty.textContent = 'No se encontraron estudios coincidentes.';
-                resultsBox.appendChild(empty);
-                resultsBox.style.display = 'block';
-                return;
-            }
-
-            list.forEach(function(est, idx) {
-                var itemEl = document.createElement('div');
-                itemEl.className = 'header-search-item';
-                itemEl.setAttribute('role', 'option');
-                itemEl.setAttribute('data-index', idx);
-
-                var nomEl = document.createElement('div');
-                nomEl.className = 'header-search-item-nombre';
-                nomEl.textContent = est.n;
-                itemEl.appendChild(nomEl);
-
-                var metaEl = document.createElement('div');
-                metaEl.className = 'header-search-item-meta';
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1579-1624)</summary>
-
-**Path:** `Unknown file`
-
-```
-                metaEl.className = 'header-search-item-meta';
-
-                if (est.c) {
-                    var claveSpan = document.createElement('span');
-                    claveSpan.className = 'header-search-item-clave';
-                    claveSpan.textContent = 'Clave: ' + est.c;
-                    metaEl.appendChild(claveSpan);
-                }
-
-                if (est.m) {
-                    var muestraSpan = document.createElement('span');
-                    muestraSpan.className = 'header-search-item-muestra';
-                    muestraSpan.textContent = 'Muestra: ' + est.m;
-                    metaEl.appendChild(muestraSpan);
-                }
-
-                itemEl.appendChild(metaEl);
-
-                itemEl.addEventListener('click', function() {
-                    input.value = est.n;
-                    if (clearBtn) clearBtn.style.display = 'inline-flex';
-                    selectEstudio(est);
-                });
-
-                resultsBox.appendChild(itemEl);
-            });
-
-            resultsBox.style.display = 'block';
-        }
-
-        // Listener de teclado / escritura instantánea
-        input.addEventListener('input', function() {
-            var val = this.value;
-            if (clearBtn) {
-                clearBtn.style.display = val.length > 0 ? 'inline-flex' : 'none';
-            }
-            if (val.trim().length === 0) {
-                resultsBox.style.display = 'none';
-                resultsBox.innerHTML = '';
-                currentResults = [];
-                return;
-            }
-            var matches = filterEstudios(val);
-            renderResults(matches);
-        });
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1629-1679)</summary>
-
-**Path:** `Unknown file`
-
-```
-            }
-        });
-
-        // Navegación por teclado (Flechas, Enter, Escape)
-        input.addEventListener('keydown', function(e) {
-            var items = resultsBox.querySelectorAll('.header-search-item');
-            if (e.key === 'ArrowDown') {
-                e.preventDefault();
-                if (items.length === 0) return;
-                activeIndex = (activeIndex + 1) % items.length;
-                updateActiveItem(items);
-            } else if (e.key === 'ArrowUp') {
-                e.preventDefault();
-                if (items.length === 0) return;
-                activeIndex = (activeIndex - 1 + items.length) % items.length;
-                updateActiveItem(items);
-            } else if (e.key === 'Enter') {
-                e.preventDefault();
-                if (activeIndex >= 0 && activeIndex < currentResults.length) {
-                    input.value = currentResults[activeIndex].n;
-                    selectEstudio(currentResults[activeIndex]);
-                } else if (currentResults.length > 0) {
-                    input.value = currentResults[0].n;
-                    selectEstudio(currentResults[0]);
-                }
-            } else if (e.key === 'Escape') {
-                resultsBox.style.display = 'none';
-            }
-        });
-
-        function updateActiveItem(items) {
-            items.forEach(function(el, i) {
-                if (i === activeIndex) {
-                    el.classList.add('is-selected');
-                    el.scrollIntoView({ block: 'nearest' });
-                } else {
-                    el.classList.remove('is-selected');
-                }
-            });
-        }
-
-        if (clearBtn) {
-            clearBtn.addEventListener('click', function() {
-                input.value = '';
-                this.style.display = 'none';
-                resultsBox.style.display = 'none';
-                resultsBox.innerHTML = '';
-                input.focus();
-            });
-        }
-    }
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1674-1700)</summary>
-
-**Path:** `Unknown file`
-
-```
-                resultsBox.style.display = 'none';
-                resultsBox.innerHTML = '';
-                input.focus();
-            });
-        }
-    }
-
-    // Inicializar desktop y mobile
-    var clearDesk = document.querySelector('#header-search-wrap-desk .header-search-clear');
-    bindSearchBox('input-buscar-estudio-desk', 'search-results-desk', clearDesk);
-
-    var clearMob = document.querySelector('#header-search-wrap-mob .header-search-clear');
-    bindSearchBox('input-buscar-estudio-mob', 'search-results-mob', clearMob);
-
-    // Cerrar al tocar o hacer clic fuera
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('.header-search-wrap')) {
-            document.querySelectorAll('.header-search-results').forEach(function(r) {
-                r.style.display = 'none';
-            });
-        }
-    });
-})();
-
-
-
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L2699-2754)</summary>
-
-**Path:** `Unknown file`
-
-```
-        display: none !important;
-    }
-}
-
-/* ── Dropdown Flotante de Resultados de Búsqueda ── */
-.header-search-results {
-    position: absolute;
-    top: calc(100% + 5px);
-    left: 50%;
-    transform: translateX(-50%);
-    width: 320px;
-    max-width: 90vw;
-    max-height: 340px;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    background: #ffffff;
-    border: 1.5px solid #cbd5e1;
-    border-radius: 10px;
-    box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.18), 0 4px 6px -2px rgba(0, 0, 0, 0.08);
-    z-index: 2000;
-    padding: 4px 0;
-}
-.header-search-wrap--desktop .header-search-results {
-    right: 0;
-    left: auto;
-    transform: none;
-}
-.header-search-results::-webkit-scrollbar {
-    width: 6px;
-}
-.header-search-results::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
-    border-radius: 4px;
-}
-
-/* Ítem de resultado */
-.header-search-item {
-    display: flex;
-    flex-direction: column;
-    padding: 7px 12px;
-    cursor: pointer;
-    border-bottom: 1px solid #f1f5f9;
-    transition: background 0.15s ease;
-    text-align: left;
-}
-.header-search-item:last-child {
-    border-bottom: none;
-}
-.header-search-item:hover,
-.header-search-item.is-selected {
-    background: #e0f2fe;
-}
-.header-search-item-nombre {
-    font-size: 0.82rem;
-    font-weight: 700;
-    color: #0f172a;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1589-1609)</summary>
-
-**Path:** `Unknown file`
-
-```
-                    var muestraSpan = document.createElement('span');
-                    muestraSpan.className = 'header-search-item-muestra';
-                    muestraSpan.textContent = 'Muestra: ' + est.m;
-                    metaEl.appendChild(muestraSpan);
-                }
-
-                itemEl.appendChild(metaEl);
-
-                itemEl.addEventListener('click', function() {
-                    input.value = est.n;
-                    if (clearBtn) clearBtn.style.display = 'inline-flex';
-                    selectEstudio(est);
-                });
-
-                resultsBox.appendChild(itemEl);
-            });
-
-            resultsBox.style.display = 'block';
-        }
-
-        // Listener de teclado / escritura instantánea
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1679-1696)</summary>
-
-**Path:** `Unknown file`
-
-```
-    }
-
-    // Inicializar desktop y mobile
-    var clearDesk = document.querySelector('#header-search-wrap-desk .header-search-clear');
-    bindSearchBox('input-buscar-estudio-desk', 'search-results-desk', clearDesk);
-
-    var clearMob = document.querySelector('#header-search-wrap-mob .header-search-clear');
-    bindSearchBox('input-buscar-estudio-mob', 'search-results-mob', clearMob);
-
-    // Cerrar al tocar o hacer clic fuera
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('.header-search-wrap')) {
-            document.querySelectorAll('.header-search-results').forEach(function(r) {
-                r.style.display = 'none';
-            });
-        }
-    });
-})();
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1589-1619)</summary>
-
-**Path:** `Unknown file`
-
-```
-                    var muestraSpan = document.createElement('span');
-                    muestraSpan.className = 'header-search-item-muestra';
-                    muestraSpan.textContent = 'Muestra: ' + est.m;
-                    metaEl.appendChild(muestraSpan);
-                }
-
-                itemEl.appendChild(metaEl);
-
-                itemEl.addEventListener('click', function() {
-                    input.value = est.n;
-                    if (clearBtn) clearBtn.style.display = 'inline-flex';
-                    selectEstudio(est);
-                });
-
-                resultsBox.appendChild(itemEl);
-            });
-
-            resultsBox.style.display = 'block';
-        }
-
-        // Listener de teclado / escritura instantánea
-        input.addEventListener('input', function() {
-            var val = this.value;
-            if (clearBtn) {
-                clearBtn.style.display = val.length > 0 ? 'inline-flex' : 'none';
-            }
-            if (val.trim().length === 0) {
-                resultsBox.style.display = 'none';
-                resultsBox.innerHTML = '';
-                currentResults = [];
-                return;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1369-1439)</summary>
-
-**Path:** `Unknown file`
-
-```
-        // Cerrar dropdowns de resultados
-        document.querySelectorAll('.header-search-results').forEach(function(r) {
-            r.style.display = 'none';
-            r.innerHTML = '';
-        });
-
-        // Limpiar cualquier resalte previo de estudios anteriores
-        document.querySelectorAll('.estudio-buscado-highlight').forEach(function(el) {
-            el.classList.remove('estudio-buscado-highlight');
-        });
-
-        // 1. Buscar si el estudio ya está en alguno de los abanicos del DOM de forma segura (sin fallos por caracteres especiales en selectores)
-        var targetItem = null;
-        var claveTarget = String(estudio.c || '').trim();
-        var nombreTarget = normalizeStr(estudio.n || '');
-
-        var allItems = document.querySelectorAll('.precio-cat-item');
-        if (claveTarget) {
-            for (var i = 0; i < allItems.length; i++) {
-                if (allItems[i].getAttribute('data-clave') === claveTarget) {
-                    targetItem = allItems[i];
-                    break;
-                }
-            }
-        }
-
-        if (!targetItem && nombreTarget) {
-            for (var i = 0; i < allItems.length; i++) {
-                var nomEl = allItems[i].querySelector('.precio-cat-nombre');
-                if (nomEl && normalizeStr(nomEl.textContent) === nombreTarget) {
-                    targetItem = allItems[i];
-                    break;
-                }
-            }
-        }
-
-        if (targetItem) {
-            // 3a. El estudio YA ESTÁ en los abanicos publicados:
-            // Abrir el acordeón que lo contiene si está cerrado
-            var parentBody = targetItem.closest('.orden-acc-body');
-            if (parentBody && parentBody.classList.contains('collapsed')) {
-                parentBody.classList.remove('collapsed');
-                var accId = parentBody.getAttribute('id');
-                if (accId) {
-                    var chevron = document.getElementById('arr-' + accId);
-                    if (chevron) chevron.classList.add('chevron-open');
-                }
-            }
-
-            // Esperar que el teclado virtual termine de retraerse en móviles (200ms) antes de centrar y resaltar
-            setTimeout(function() {
-                targetItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-                // Poner foco de accesibilidad al renglón
-                if (!targetItem.hasAttribute('tabindex')) {
-                    targetItem.setAttribute('tabindex', '-1');
-                }
-                targetItem.focus({ preventScroll: true });
-
-                // Activar resalte de contorno luminoso durante 5 segundos
-                targetItem.classList.remove('estudio-buscado-highlight');
-                void targetItem.offsetWidth; // Forzar reflow CSS
-                targetItem.classList.add('estudio-buscado-highlight');
-
-                setTimeout(function() {
-                    targetItem.classList.remove('estudio-buscado-highlight');
-                }, 5200);
-            }, 200);
-        } else {
-            // 3b. El estudio NO está en los abanicos publicados:
-            // Insertar o reutilizar el abanico "Mis resultados de búsqueda" al inicio de la sección
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1589-1609)</summary>
-
-**Path:** `Unknown file`
-
-```
-                    var muestraSpan = document.createElement('span');
-                    muestraSpan.className = 'header-search-item-muestra';
-                    muestraSpan.textContent = 'Muestra: ' + est.m;
-                    metaEl.appendChild(muestraSpan);
-                }
-
-                itemEl.appendChild(metaEl);
-
-                itemEl.addEventListener('click', function() {
-                    input.value = est.n;
-                    if (clearBtn) clearBtn.style.display = 'inline-flex';
-                    selectEstudio(est);
-                });
-
-                resultsBox.appendChild(itemEl);
-            });
-
-            resultsBox.style.display = 'block';
-        }
-
-        // Listener de teclado / escritura instantánea
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1679-1696)</summary>
-
-**Path:** `Unknown file`
-
-```
-    }
-
-    // Inicializar desktop y mobile
-    var clearDesk = document.querySelector('#header-search-wrap-desk .header-search-clear');
-    bindSearchBox('input-buscar-estudio-desk', 'search-results-desk', clearDesk);
-
-    var clearMob = document.querySelector('#header-search-wrap-mob .header-search-clear');
-    bindSearchBox('input-buscar-estudio-mob', 'search-results-mob', clearMob);
-
-    // Cerrar al tocar o hacer clic fuera
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('.header-search-wrap')) {
-            document.querySelectorAll('.header-search-results').forEach(function(r) {
-                r.style.display = 'none';
-            });
-        }
-    });
-})();
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L2699-2724)</summary>
-
-**Path:** `Unknown file`
-
-```
-        display: none !important;
-    }
-}
-
-/* ── Dropdown Flotante de Resultados de Búsqueda ── */
-.header-search-results {
-    position: absolute;
-    top: calc(100% + 5px);
-    left: 50%;
-    transform: translateX(-50%);
-    width: 320px;
-    max-width: 90vw;
-    max-height: 340px;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    background: #ffffff;
-    border: 1.5px solid #cbd5e1;
-    border-radius: 10px;
-    box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.18), 0 4px 6px -2px rgba(0, 0, 0, 0.08);
-    z-index: 2000;
-    padding: 4px 0;
-}
-.header-search-wrap--desktop .header-search-results {
-    right: 0;
-    left: auto;
-    transform: none;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1594-1619)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-                itemEl.appendChild(metaEl);
-
-                itemEl.addEventListener('click', function() {
-                    input.value = est.n;
-                    if (clearBtn) clearBtn.style.display = 'inline-flex';
-                    selectEstudio(est);
-                });
-
-                resultsBox.appendChild(itemEl);
-            });
-
-            resultsBox.style.display = 'block';
-        }
-
-        // Listener de teclado / escritura instantánea
-        input.addEventListener('input', function() {
-            var val = this.value;
-            if (clearBtn) {
-                clearBtn.style.display = val.length > 0 ? 'inline-flex' : 'none';
-            }
-            if (val.trim().length === 0) {
-                resultsBox.style.display = 'none';
-                resultsBox.innerHTML = '';
-                currentResults = [];
-                return;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1679-1696)</summary>
-
-**Path:** `Unknown file`
-
-```
-    }
-
-    // Inicializar desktop y mobile
-    var clearDesk = document.querySelector('#header-search-wrap-desk .header-search-clear');
-    bindSearchBox('input-buscar-estudio-desk', 'search-results-desk', clearDesk);
-
-    var clearMob = document.querySelector('#header-search-wrap-mob .header-search-clear');
-    bindSearchBox('input-buscar-estudio-mob', 'search-results-mob', clearMob);
-
-    // Cerrar al tocar o hacer clic fuera
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('.header-search-wrap')) {
-            document.querySelectorAll('.header-search-results').forEach(function(r) {
-                r.style.display = 'none';
-            });
-        }
-    });
-})();
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1594-1604)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-                itemEl.appendChild(metaEl);
-
-                itemEl.addEventListener('click', function() {
-                    input.value = est.n;
-                    if (clearBtn) clearBtn.style.display = 'inline-flex';
-                    selectEstudio(est);
-                });
-
-                resultsBox.appendChild(itemEl);
-            });
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L2804-2853)</summary>
-
-**Path:** `Unknown file`
-
-```
-        opacity: 1;
-        transform: translateY(0);
-    }
-/* ── Resalte luminoso y contorno de 5 segundos para estudio seleccionado en búsqueda ── */
-@keyframes estudioBuscadoOutline {
-    0% {
-        outline: 2.5px solid #71CA11;
-        outline-offset: 2px;
-        background-color: #f7fee7 !important;
-        box-shadow: 0 0 16px rgba(113, 202, 17, 0.45);
-        border-radius: 6px;
-    }
-    15% {
-        outline: 2.5px solid #0052B7;
-        outline-offset: 2px;
-        background-color: #eff6ff !important;
-        box-shadow: 0 0 18px rgba(0, 82, 183, 0.45);
-        border-radius: 6px;
-    }
-    30% {
-        outline: 2.5px solid #71CA11;
-        outline-offset: 2px;
-        background-color: #f7fee7 !important;
-        box-shadow: 0 0 16px rgba(113, 202, 17, 0.45);
-        border-radius: 6px;
-    }
-    75% {
-        outline: 2px solid rgba(113, 202, 17, 0.8);
-        outline-offset: 2px;
-        background-color: #f7fee7 !important;
-        box-shadow: 0 0 12px rgba(113, 202, 17, 0.25);
-        border-radius: 6px;
-    }
-    100% {
-        outline: 2px solid transparent;
-        outline-offset: 0;
-        background-color: transparent !important;
-        box-shadow: none;
-        border-radius: 0;
-    }
-}
-
-.estudio-buscado-highlight {
-    animation: estudioBuscadoOutline 5s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
-    position: relative;
-    z-index: 5;
-    transition: background-color 0.3s;
-}
-
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L519-539)</summary>
-
-**Path:** `Unknown file`
-
-```
-            transition: background 0.15s;
-        }@media (hover: hover) and (pointer: fine) {
-    .orden-acc-hdr:hover {
-        background: #e2e8f0;
-    }
-}
-        .orden-acc-body {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr)); /* R-CSS-06 */
-            gap: 12px; padding: 14px; background: var(--bg-surface);
-            overflow: hidden; max-height: 9999px; transition: max-height 0.35s ease, padding 0.3s;
-        }
-        /* R8: sin !important — .orden-acc-body.collapsed tiene especificidad (0,2,0) > (0,1,0) base */
-        .orden-acc-body.collapsed { max-height: 0; padding-top: 0; padding-bottom: 0; }
-        .orden-cat { border: 1.5px solid #e2e8f0; border-radius: 8px; overflow: hidden; transition: box-shadow 0.2s; }@media (hover: hover) and (pointer: fine) {
-    .orden-cat:hover {
-        box-shadow: 0 2px 10px rgba(0,82,183,0.10);
-    }
-}
-        .orden-cat-hdr {
-            background: var(--primary); color: #fff;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1399-1439)</summary>
-
-**Path:** `Unknown file`
-
-```
-                    targetItem = allItems[i];
-                    break;
-                }
-            }
-        }
-
-        if (targetItem) {
-            // 3a. El estudio YA ESTÁ en los abanicos publicados:
-            // Abrir el acordeón que lo contiene si está cerrado
-            var parentBody = targetItem.closest('.orden-acc-body');
-            if (parentBody && parentBody.classList.contains('collapsed')) {
-                parentBody.classList.remove('collapsed');
-                var accId = parentBody.getAttribute('id');
-                if (accId) {
-                    var chevron = document.getElementById('arr-' + accId);
-                    if (chevron) chevron.classList.add('chevron-open');
-                }
-            }
-
-            // Esperar que el teclado virtual termine de retraerse en móviles (200ms) antes de centrar y resaltar
-            setTimeout(function() {
-                targetItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-                // Poner foco de accesibilidad al renglón
-                if (!targetItem.hasAttribute('tabindex')) {
-                    targetItem.setAttribute('tabindex', '-1');
-                }
-                targetItem.focus({ preventScroll: true });
-
-                // Activar resalte de contorno luminoso durante 5 segundos
-                targetItem.classList.remove('estudio-buscado-highlight');
-                void targetItem.offsetWidth; // Forzar reflow CSS
-                targetItem.classList.add('estudio-buscado-highlight');
-
-                setTimeout(function() {
-                    targetItem.classList.remove('estudio-buscado-highlight');
-                }, 5200);
-            }, 200);
-        } else {
-            // 3b. El estudio NO está en los abanicos publicados:
-            // Insertar o reutilizar el abanico "Mis resultados de búsqueda" al inicio de la sección
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1589-1609)</summary>
-
-**Path:** `Unknown file`
-
-```
-                    var muestraSpan = document.createElement('span');
-                    muestraSpan.className = 'header-search-item-muestra';
-                    muestraSpan.textContent = 'Muestra: ' + est.m;
-                    metaEl.appendChild(muestraSpan);
-                }
-
-                itemEl.appendChild(metaEl);
-
-                itemEl.addEventListener('click', function() {
-                    input.value = est.n;
-                    if (clearBtn) clearBtn.style.display = 'inline-flex';
-                    selectEstudio(est);
-                });
-
-                resultsBox.appendChild(itemEl);
-            });
-
-            resultsBox.style.display = 'block';
-        }
-
-        // Listener de teclado / escritura instantánea
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1604-1639)</summary>
-
-**Path:** `Unknown file`
-
-```
-            });
-
-            resultsBox.style.display = 'block';
-        }
-
-        // Listener de teclado / escritura instantánea
-        input.addEventListener('input', function() {
-            var val = this.value;
-            if (clearBtn) {
-                clearBtn.style.display = val.length > 0 ? 'inline-flex' : 'none';
-            }
-            if (val.trim().length === 0) {
-                resultsBox.style.display = 'none';
-                resultsBox.innerHTML = '';
-                currentResults = [];
-                return;
-            }
-            var matches = filterEstudios(val);
-            renderResults(matches);
-        });
-
-        // Foco
-        input.addEventListener('focus', function() {
-            if (this.value.trim().length > 0 && currentResults.length > 0) {
-                resultsBox.style.display = 'block';
-            }
-        });
-
-        // Navegación por teclado (Flechas, Enter, Escape)
-        input.addEventListener('keydown', function(e) {
-            var items = resultsBox.querySelectorAll('.header-search-item');
-            if (e.key === 'ArrowDown') {
-                e.preventDefault();
-                if (items.length === 0) return;
-                activeIndex = (activeIndex + 1) % items.length;
-                updateActiveItem(items);
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1679-1696)</summary>
-
-**Path:** `Unknown file`
-
-```
-    }
-
-    // Inicializar desktop y mobile
-    var clearDesk = document.querySelector('#header-search-wrap-desk .header-search-clear');
-    bindSearchBox('input-buscar-estudio-desk', 'search-results-desk', clearDesk);
-
-    var clearMob = document.querySelector('#header-search-wrap-mob .header-search-clear');
-    bindSearchBox('input-buscar-estudio-mob', 'search-results-mob', clearMob);
-
-    // Cerrar al tocar o hacer clic fuera
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('.header-search-wrap')) {
-            document.querySelectorAll('.header-search-results').forEach(function(r) {
-                r.style.display = 'none';
-            });
-        }
-    });
-})();
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1589-1609)</summary>
-
-**Path:** `Unknown file`
-
-```
-                    var muestraSpan = document.createElement('span');
-                    muestraSpan.className = 'header-search-item-muestra';
-                    muestraSpan.textContent = 'Muestra: ' + est.m;
-                    metaEl.appendChild(muestraSpan);
-                }
-
-                itemEl.appendChild(metaEl);
-
-                itemEl.addEventListener('click', function() {
-                    input.value = est.n;
-                    if (clearBtn) clearBtn.style.display = 'inline-flex';
-                    selectEstudio(est);
-                });
-
-                resultsBox.appendChild(itemEl);
-            });
-
-            resultsBox.style.display = 'block';
-        }
-
-        // Listener de teclado / escritura instantánea
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1679-1696)</summary>
-
-**Path:** `Unknown file`
-
-```
-    }
-
-    // Inicializar desktop y mobile
-    var clearDesk = document.querySelector('#header-search-wrap-desk .header-search-clear');
-    bindSearchBox('input-buscar-estudio-desk', 'search-results-desk', clearDesk);
-
-    var clearMob = document.querySelector('#header-search-wrap-mob .header-search-clear');
-    bindSearchBox('input-buscar-estudio-mob', 'search-results-mob', clearMob);
-
-    // Cerrar al tocar o hacer clic fuera
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('.header-search-wrap')) {
-            document.querySelectorAll('.header-search-results').forEach(function(r) {
-                r.style.display = 'none';
-            });
-        }
-    });
-})();
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L2699-2724)</summary>
-
-**Path:** `Unknown file`
-
-```
-        display: none !important;
-    }
-}
-
-/* ── Dropdown Flotante de Resultados de Búsqueda ── */
-.header-search-results {
-    position: absolute;
-    top: calc(100% + 5px);
-    left: 50%;
-    transform: translateX(-50%);
-    width: 320px;
-    max-width: 90vw;
-    max-height: 340px;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    background: #ffffff;
-    border: 1.5px solid #cbd5e1;
-    border-radius: 10px;
-    box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.18), 0 4px 6px -2px rgba(0, 0, 0, 0.08);
-    z-index: 2000;
-    padding: 4px 0;
-}
-.header-search-wrap--desktop .header-search-results {
-    right: 0;
-    left: auto;
-    transform: none;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1594-1604)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-                itemEl.appendChild(metaEl);
-
-                itemEl.addEventListener('click', function() {
-                    input.value = est.n;
-                    if (clearBtn) clearBtn.style.display = 'inline-flex';
-                    selectEstudio(est);
-                });
-
-                resultsBox.appendChild(itemEl);
-            });
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1679-1696)</summary>
-
-**Path:** `Unknown file`
-
-```
-    }
-
-    // Inicializar desktop y mobile
-    var clearDesk = document.querySelector('#header-search-wrap-desk .header-search-clear');
-    bindSearchBox('input-buscar-estudio-desk', 'search-results-desk', clearDesk);
-
-    var clearMob = document.querySelector('#header-search-wrap-mob .header-search-clear');
-    bindSearchBox('input-buscar-estudio-mob', 'search-results-mob', clearMob);
-
-    // Cerrar al tocar o hacer clic fuera
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('.header-search-wrap')) {
-            document.querySelectorAll('.header-search-results').forEach(function(r) {
-                r.style.display = 'none';
-            });
-        }
-    });
-})();
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1594-1604)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-                itemEl.appendChild(metaEl);
-
-                itemEl.addEventListener('click', function() {
-                    input.value = est.n;
-                    if (clearBtn) clearBtn.style.display = 'inline-flex';
-                    selectEstudio(est);
-                });
-
-                resultsBox.appendChild(itemEl);
-            });
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1619-1674)</summary>
-
-**Path:** `Unknown file`
-
-```
-                return;
-            }
-            var matches = filterEstudios(val);
-            renderResults(matches);
-        });
-
-        // Foco
-        input.addEventListener('focus', function() {
-            if (this.value.trim().length > 0 && currentResults.length > 0) {
-                resultsBox.style.display = 'block';
-            }
-        });
-
-        // Navegación por teclado (Flechas, Enter, Escape)
-        input.addEventListener('keydown', function(e) {
-            var items = resultsBox.querySelectorAll('.header-search-item');
-            if (e.key === 'ArrowDown') {
-                e.preventDefault();
-                if (items.length === 0) return;
-                activeIndex = (activeIndex + 1) % items.length;
-                updateActiveItem(items);
-            } else if (e.key === 'ArrowUp') {
-                e.preventDefault();
-                if (items.length === 0) return;
-                activeIndex = (activeIndex - 1 + items.length) % items.length;
-                updateActiveItem(items);
-            } else if (e.key === 'Enter') {
-                e.preventDefault();
-                if (activeIndex >= 0 && activeIndex < currentResults.length) {
-                    input.value = currentResults[activeIndex].n;
-                    selectEstudio(currentResults[activeIndex]);
-                } else if (currentResults.length > 0) {
-                    input.value = currentResults[0].n;
-                    selectEstudio(currentResults[0]);
-                }
-            } else if (e.key === 'Escape') {
-                resultsBox.style.display = 'none';
-            }
-        });
-
-        function updateActiveItem(items) {
-            items.forEach(function(el, i) {
-                if (i === activeIndex) {
-                    el.classList.add('is-selected');
-                    el.scrollIntoView({ block: 'nearest' });
-                } else {
-                    el.classList.remove('is-selected');
-                }
-            });
-        }
-
-        if (clearBtn) {
-            clearBtn.addEventListener('click', function() {
-                input.value = '';
-                this.style.display = 'none';
-                resultsBox.style.display = 'none';
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1679-1696)</summary>
-
-**Path:** `Unknown file`
-
-```
-    }
-
-    // Inicializar desktop y mobile
-    var clearDesk = document.querySelector('#header-search-wrap-desk .header-search-clear');
-    bindSearchBox('input-buscar-estudio-desk', 'search-results-desk', clearDesk);
-
-    var clearMob = document.querySelector('#header-search-wrap-mob .header-search-clear');
-    bindSearchBox('input-buscar-estudio-mob', 'search-results-mob', clearMob);
-
-    // Cerrar al tocar o hacer clic fuera
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('.header-search-wrap')) {
-            document.querySelectorAll('.header-search-results').forEach(function(r) {
-                r.style.display = 'none';
-            });
-        }
-    });
-})();
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1594-1604)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-                itemEl.appendChild(metaEl);
-
-                itemEl.addEventListener('click', function() {
-                    input.value = est.n;
-                    if (clearBtn) clearBtn.style.display = 'inline-flex';
-                    selectEstudio(est);
-                });
-
-                resultsBox.appendChild(itemEl);
-            });
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L2699-2724)</summary>
-
-**Path:** `Unknown file`
-
-```
-        display: none !important;
-    }
-}
-
-/* ── Dropdown Flotante de Resultados de Búsqueda ── */
-.header-search-results {
-    position: absolute;
-    top: calc(100% + 5px);
-    left: 50%;
-    transform: translateX(-50%);
-    width: 320px;
-    max-width: 90vw;
-    max-height: 340px;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    background: #ffffff;
-    border: 1.5px solid #cbd5e1;
-    border-radius: 10px;
-    box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.18), 0 4px 6px -2px rgba(0, 0, 0, 0.08);
-    z-index: 2000;
-    padding: 4px 0;
-}
-.header-search-wrap--desktop .header-search-results {
-    right: 0;
-    left: auto;
-    transform: none;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1594-1604)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-                itemEl.appendChild(metaEl);
-
-                itemEl.addEventListener('click', function() {
-                    input.value = est.n;
-                    if (clearBtn) clearBtn.style.display = 'inline-flex';
-                    selectEstudio(est);
-                });
-
-                resultsBox.appendChild(itemEl);
-            });
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1679-1696)</summary>
-
-**Path:** `Unknown file`
-
-```
-    }
-
-    // Inicializar desktop y mobile
-    var clearDesk = document.querySelector('#header-search-wrap-desk .header-search-clear');
-    bindSearchBox('input-buscar-estudio-desk', 'search-results-desk', clearDesk);
-
-    var clearMob = document.querySelector('#header-search-wrap-mob .header-search-clear');
-    bindSearchBox('input-buscar-estudio-mob', 'search-results-mob', clearMob);
-
-    // Cerrar al tocar o hacer clic fuera
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('.header-search-wrap')) {
-            document.querySelectorAll('.header-search-results').forEach(function(r) {
-                r.style.display = 'none';
-            });
-        }
-    });
-})();
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1594-1604)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-                itemEl.appendChild(metaEl);
-
-                itemEl.addEventListener('click', function() {
-                    input.value = est.n;
-                    if (clearBtn) clearBtn.style.display = 'inline-flex';
-                    selectEstudio(est);
-                });
-
-                resultsBox.appendChild(itemEl);
-            });
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `landing.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L2729-2784)</summary>
-
-**Path:** `Unknown file`
-
-```
-.header-search-results::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
-    border-radius: 4px;
-}
-
-/* Ítem de resultado */
-.header-search-item {
-    display: flex;
-    flex-direction: column;
-    padding: 7px 12px;
-    cursor: pointer;
-    border-bottom: 1px solid #f1f5f9;
-    transition: background 0.15s ease;
-    text-align: left;
-}
-.header-search-item:last-child {
-    border-bottom: none;
-}
-.header-search-item:hover,
-.header-search-item.is-selected {
-    background: #e0f2fe;
-}
-.header-search-item-nombre {
-    font-size: 0.82rem;
-    font-weight: 700;
-    color: #0f172a;
-    line-height: 1.25;
-}
-.header-search-item-meta {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.7rem;
-    color: #64748b;
-    margin-top: 2px;
-}
-.header-search-item-clave {
-    font-weight: 600;
-    color: #0052b7;
-    background: #e2e8f0;
-    padding: 1px 5px;
-    border-radius: 4px;
-}
-.header-search-item-muestra {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-.header-search-empty {
-    padding: 12px;
-    font-size: 0.78rem;
-    color: #64748b;
-    text-align: center;
-}
-
-/* ── Abanico Dinámico: Mis Resultados de Búsqueda ── */
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1594-1619)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-                itemEl.appendChild(metaEl);
-
-                itemEl.addEventListener('click', function() {
-                    input.value = est.n;
-                    if (clearBtn) clearBtn.style.display = 'inline-flex';
-                    selectEstudio(est);
-                });
-
-                resultsBox.appendChild(itemEl);
-            });
-
-            resultsBox.style.display = 'block';
-        }
-
-        // Listener de teclado / escritura instantánea
-        input.addEventListener('input', function() {
-            var val = this.value;
-            if (clearBtn) {
-                clearBtn.style.display = val.length > 0 ? 'inline-flex' : 'none';
-            }
-            if (val.trim().length === 0) {
-                resultsBox.style.display = 'none';
-                resultsBox.innerHTML = '';
-                currentResults = [];
-                return;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1679-1696)</summary>
-
-**Path:** `Unknown file`
-
-```
-    }
-
-    // Inicializar desktop y mobile
-    var clearDesk = document.querySelector('#header-search-wrap-desk .header-search-clear');
-    bindSearchBox('input-buscar-estudio-desk', 'search-results-desk', clearDesk);
-
-    var clearMob = document.querySelector('#header-search-wrap-mob .header-search-clear');
-    bindSearchBox('input-buscar-estudio-mob', 'search-results-mob', clearMob);
-
-    // Cerrar al tocar o hacer clic fuera
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('.header-search-wrap')) {
-            document.querySelectorAll('.header-search-results').forEach(function(r) {
-                r.style.display = 'none';
-            });
-        }
-    });
-})();
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1594-1604)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-                itemEl.appendChild(metaEl);
-
-                itemEl.addEventListener('click', function() {
-                    input.value = est.n;
-                    if (clearBtn) clearBtn.style.display = 'inline-flex';
-                    selectEstudio(est);
-                });
-
-                resultsBox.appendChild(itemEl);
-            });
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1679-1696)</summary>
-
-**Path:** `Unknown file`
-
-```
-    }
-
-    // Inicializar desktop y mobile
-    var clearDesk = document.querySelector('#header-search-wrap-desk .header-search-clear');
-    bindSearchBox('input-buscar-estudio-desk', 'search-results-desk', clearDesk);
-
-    var clearMob = document.querySelector('#header-search-wrap-mob .header-search-clear');
-    bindSearchBox('input-buscar-estudio-mob', 'search-results-mob', clearMob);
-
-    // Cerrar al tocar o hacer clic fuera
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('.header-search-wrap')) {
-            document.querySelectorAll('.header-search-results').forEach(function(r) {
-                r.style.display = 'none';
-            });
-        }
-    });
-})();
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1594-1604)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-                itemEl.appendChild(metaEl);
-
-                itemEl.addEventListener('click', function() {
-                    input.value = est.n;
-                    if (clearBtn) clearBtn.style.display = 'inline-flex';
-                    selectEstudio(est);
-                });
-
-                resultsBox.appendChild(itemEl);
-            });
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1679-1696)</summary>
-
-**Path:** `Unknown file`
-
-```
-    }
-
-    // Inicializar desktop y mobile
-    var clearDesk = document.querySelector('#header-search-wrap-desk .header-search-clear');
-    bindSearchBox('input-buscar-estudio-desk', 'search-results-desk', clearDesk);
-
-    var clearMob = document.querySelector('#header-search-wrap-mob .header-search-clear');
-    bindSearchBox('input-buscar-estudio-mob', 'search-results-mob', clearMob);
-
-    // Cerrar al tocar o hacer clic fuera
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('.header-search-wrap')) {
-            document.querySelectorAll('.header-search-results').forEach(function(r) {
-                r.style.display = 'none';
-            });
-        }
-    });
-})();
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1594-1604)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-                itemEl.appendChild(metaEl);
-
-                itemEl.addEventListener('click', function() {
-                    input.value = est.n;
-                    if (clearBtn) clearBtn.style.display = 'inline-flex';
-                    selectEstudio(est);
-                });
-
-                resultsBox.appendChild(itemEl);
-            });
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1619-1679)</summary>
-
-**Path:** `Unknown file`
-
-```
-                return;
-            }
-            var matches = filterEstudios(val);
-            renderResults(matches);
-        });
-
-        // Foco
-        input.addEventListener('focus', function() {
-            if (this.value.trim().length > 0 && currentResults.length > 0) {
-                resultsBox.style.display = 'block';
-            }
-        });
-
-        // Navegación por teclado (Flechas, Enter, Escape)
-        input.addEventListener('keydown', function(e) {
-            var items = resultsBox.querySelectorAll('.header-search-item');
-            if (e.key === 'ArrowDown') {
-                e.preventDefault();
-                if (items.length === 0) return;
-                activeIndex = (activeIndex + 1) % items.length;
-                updateActiveItem(items);
-            } else if (e.key === 'ArrowUp') {
-                e.preventDefault();
-                if (items.length === 0) return;
-                activeIndex = (activeIndex - 1 + items.length) % items.length;
-                updateActiveItem(items);
-            } else if (e.key === 'Enter') {
-                e.preventDefault();
-                if (activeIndex >= 0 && activeIndex < currentResults.length) {
-                    input.value = currentResults[activeIndex].n;
-                    selectEstudio(currentResults[activeIndex]);
-                } else if (currentResults.length > 0) {
-                    input.value = currentResults[0].n;
-                    selectEstudio(currentResults[0]);
-                }
-            } else if (e.key === 'Escape') {
-                resultsBox.style.display = 'none';
-            }
-        });
-
-        function updateActiveItem(items) {
-            items.forEach(function(el, i) {
-                if (i === activeIndex) {
-                    el.classList.add('is-selected');
-                    el.scrollIntoView({ block: 'nearest' });
-                } else {
-                    el.classList.remove('is-selected');
-                }
-            });
-        }
-
-        if (clearBtn) {
-            clearBtn.addEventListener('click', function() {
-                input.value = '';
-                this.style.display = 'none';
-                resultsBox.style.display = 'none';
-                resultsBox.innerHTML = '';
-                input.focus();
-            });
-        }
-    }
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `website.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1594-1607)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-                itemEl.appendChild(metaEl);
-
-                itemEl.addEventListener('click', function() {
-                    input.value = est.n;
-                    if (clearBtn) clearBtn.style.display = 'inline-flex';
-                    selectEstudio(est);
-                });
-
-                resultsBox.appendChild(itemEl);
-            });
-
-            resultsBox.style.display = 'block';
-        }
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 24 Sept 2026, 4:38 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L534-546)</summary>
-
-**Path:** `Unknown file`
-
-```
-    <link rel="alternate" hreflang="es-MX" href="https://laesh.mx/">
-    <link rel="icon" type="image/svg+xml" href="/laesh-web-assets-uipv1a/img/favicon.svg">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https://*.ggpht.com https://*.gstatic.com https://*.google.com https://*.googleusercontent.com https://*.tile.openstreetmap.org https://*.openstreetmap.org https://i.ytimg.com; frame-src https://maps.google.com https://www.google.com https://google.com https://*.google.com https://www.openstreetmap.org https://www.youtube.com https://youtube.com https://open.spotify.com https://player.vimeo.com https://www.dailymotion.com https://www.instagram.com https://www.facebook.com https://platform.twitter.com https://twitframe.com; script-src 'self' 'unsafe-inline' https://maps.google.com https://www.google.com; connect-src 'self' ws: wss: https://*.google.com https://*.openstreetmap.org;">
-    <script src="/laesh-web-assets-uipv1a/js/device-detect.js?v=<?= time() ?>"></script>
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/tokens.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/fonts.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/style.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/style-website.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/landing.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/ckeditor-content.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/targeting.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/tablet-samsung-tabs10ultra.css?v=<?= time() ?>">
-    <link rel="preload" href="/laesh-web-assets-uipv1a/fonts/cabin-latin-normal-w400.woff2" as="font" type="font/woff2" crossorigin>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L964-973)</summary>
-
-**Path:** `Unknown file`
-
-```
-        window.__LAESH_ESTUDIOS__ = <?= $estudiosSearchJson ?: '[]' ?>;
-    </script>
-    <!-- Fix C2: htmx se carga async + fetchpriority low — no bloquea DOMContentLoaded
-         ni compite con website.js. Solo se necesita cuando el usuario abre el modal de login. -->
-    <script src="/laesh-web-assets-uipv1a/js/htmx.min.js" async fetchpriority="low"></script>
-    <script src="/laesh-web-assets-uipv1a/js/website.js?v=<?= @filemtime(__DIR__ . '/../../laesh-web-assets-uipv1a/js/website.js') ?: time() ?>" defer></script>
-
-</body>
-</html>
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 24 Sept 2026, 4:38 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 24 Sept 2026, 4:39 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 24 Sept 2026, 4:39 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 24 Sept 2026, 4:39 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 24 Sept 2026, 4:39 pm
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
+- **Model:** Gemini 3.8 Flash (High)
 </details>
 
 ---
@@ -16662,22 +13166,565 @@ function waNum(string $raw): string {
     return preg_replace('/\D/', '', $raw);
 }
 /**
+ * Renderiza HTML de confianza generado por el RTE del CMS (admins LAESH).
+ * Permite tags ricos de CKEditor 5.
+ * Bloquea: <script>, atributos on*, href con javascript:
+ */
+function safeHtml(mixed $v): string {
+    $html = strip_tags((string)($v ?? ''), ['strong','em','b','i','br','p','ul','ol','li','a','span','table','tbody','tr','td','th','thead','hr','figure','iframe','h1','h2','h3','h4','h5','h6','u','s','blockquote','oembed','div','img','mark']);
+    $html = preg_replace('/\s+on\w+\s*=\s*(?:"[^"]*"|\'[^\']*\'|[^\s>]*)/i', '', $html);
+    $html = preg_replace('/href\s*=\s*["\']?\s*javascript:/i', 'href="#" data-blocked=', $html);
+
+    // Convertir <oembed url="..."> a <iframe> para YouTube, Spotify, Vimeo si vienen etiquetas oembed crudas
+    $html = preg_replace_callback('/<oembed\s+url=["\']([^"\']+)["\']\s*>\s*<\/oembed>/i', function($matches) {
 ```
 
 </details>
 
 ---
 
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `$c =`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 2:58 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+The user's request appears to confirm the previous steps: image conversion to a specific format and subsequent template and style adjustments. Verify that the image location is correct in the database table and confirm the file format, and if correct proceed to modify template and CSS as indicated. I must cross-reference the image path in the database to the file itself to prevent mismatches.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `ubicacion-croquis`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.159318307s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 2:59 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L309-329)</summary>
+
+**Path:** `Unknown file`
+
+```
+            $dimError = "Banner Hero: orientación debe ser Horizontal (ancho > alto). Recibido: {$imgW}×{$imgH}.";
+    } elseif (preg_match('/^carousel-/', $slot)) {
+        if ($imgW !== 800 || $imgH !== 580)
+            $dimError = "Carrusel Especialidades: se requiere exacto 800×580 px. Recibido: {$imgW}×{$imgH}.";
+    } elseif ($slot === 'ubicacion-croquis') {
+        if ($imgW > 756 || $imgH > 577)
+            $dimError = "Croquis de Ubicación: máximo 756×577 px. Recibido: {$imgW}×{$imgH}.";
+        elseif ($imgH >= $imgW)
+            $dimError = "Croquis de Ubicación: orientación debe ser Horizontal (ancho > alto). Recibido: {$imgW}×{$imgH}.";
+    } elseif (preg_match('/^promo-/', $slot)) {
+        if ($imgW !== 1200)
+            $dimError = "Card de Promociones: se requiere exacto 1200 px de ancho. Recibido: {$imgW}×{$imgH}.";
+        elseif ($imgH < 600 || $imgH > 675)
+            $dimError = "Card de Promociones: alto {$imgH} px fuera del rango 600–675 px. Recibido: {$imgW}×{$imgH}.";
+    } elseif (preg_match('/^calidad-/', $slot)) {
+        if ($imgW !== 800 || $imgH !== 580)
+            $dimError = "Galería de Calidad: se requiere exacto 800×580 px. Recibido: {$imgW}×{$imgH}.";
+    } elseif ($slot === 'seo-og') {
+        if ($imgW < 1200 || $imgW > 1920)
+            $dimError = "Open Graph (SEO): ancho {$imgW} px fuera del rango 1\u{202F}200–1\u{202F}920 px.";
+        elseif ($imgH >= $imgW)
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1259-1289)</summary>
+
+**Path:** `Unknown file`
+
+```
+                            <label for="file-croquis" class="btn btn-secondary">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                                Cambiar Imagen
+                            </label>
+
+                            <input type="file" accept="image/webp"
+                                   id="file-croquis" class="d-none"
+                                   data-upload-slot="ubicacion-croquis"
+                                   data-preview-id="prev-croquis"
+                                   data-target-input="url-img-croquis">
+                        </div>
+                        <input type="url" id="url-img-croquis"
+                               name="croquis__imagen_url"
+                               value="<?= h($croquisImgUrl) ?>"
+                               placeholder="/laesh-web-assets-uipv1a/cms/ubicacion-croquis-....webp"
+                               class="cms-img-url-input" data-no-limit>
+                        <?php $croquisBasename = basename($croquisImgUrl); ?>
+                        <span id="lbl-img-croquis" class="cms-img-filename-label"><?= h($croquisBasename) ?></span>
+                        <div class="field-group mt-3" style="background:#f0f9ff; border:1.5px solid #0ea5e9; border-radius:6px; padding:10px 12px; margin-top:12px;">
+                            <label style="font-size:0.8rem; font-weight:700; color:#0f172a; margin-bottom:6px; display:block;">📍 Coordenadas GPS (SSOT → Google Maps / Schema.org JSON-LD)</label>
+                            <div style="display:flex; gap:10px;">
+                                <div style="flex:1;">
+                                    <label style="font-size:0.75rem; color:#0369a1; margin-bottom:2px; display:block;">Latitud</label>
+                                    <input type="text" name="_cfg_geo_lat"
+                                           value="<?= htmlspecialchars(!empty($config['geo_lat']) ? $config['geo_lat'] : '17.8028691', ENT_QUOTES, 'UTF-8') ?>"
+                                           placeholder="17.8028691"
+                                           style="font-size:0.85rem; background:#ffffff; color:#0f172a; font-weight:600; width:100%;">
+                                </div>
+                                <div style="flex:1;">
+                                    <label style="font-size:0.75rem; color:#0369a1; margin-bottom:2px; display:block;">Longitud</label>
+                                    <input type="text" name="_cfg_geo_lng"
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1229-1259)</summary>
+
+**Path:** `Unknown file`
+
+```
+                        <textarea name="_cfg_maps_url" rows="3" placeholder="https://www.google.com/maps/dir/?api=1&destination=..."><?= htmlspecialchars($config['maps_url'] ?? '', ENT_QUOTES, 'UTF-8') ?></textarea>
+                        <small class="cms-help-text">Enlace directo completo utilizado al hacer clic en el botón <strong>"Mapa Interactivo ↗"</strong> para abrir la ruta en Google Maps (pestaña externa o app móvil).</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Croquis de Ubicación (Imagen) -->
+            <div class="editor-card" style="border: 2px solid #d97706; background: #fafafa; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+                <div class="editor-card-header" style="background: linear-gradient(135deg, #d97706 0%, #b45309 100%); padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.2);">
+                    <div class="card-title" style="color: #ffffff; font-weight: 800; font-size: 0.95rem;">Croquis de Ubicación (Imagen)</div>
+                </div>
+                <div class="editor-card-body" style="padding: 12px;">
+                    <div class="field-group">
+                        <label>Imagen del Croquis</label>
+                        <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px;">
+                            📐 <strong>Codec:</strong> WebP únicamente &nbsp;·&nbsp;
+                            <strong>Quality:</strong> 85 &nbsp;·&nbsp;
+                            <strong>Effort:</strong> 6 &nbsp;·&nbsp;
+                            <strong>Dimensiones:</strong> 756 px (máx) × 577 px (máx) &nbsp;·&nbsp;
+                            <strong>Alto:</strong> proporcional (auto) &nbsp;·&nbsp;
+                            <strong>Orientación Horizontal</strong> &nbsp;·&nbsp;
+                            <strong>Peso:</strong> Máximo 150 KB, Óptimo 60 KB
+                        </p>
+                        <?php $croquisImgUrl = cms($contenidos, 'ubicacion', 'croquis', 'imagen_url'); ?>
+                        <div class="image-upload-box">
+                            <img id="prev-croquis"
+                                 src="<?= h($croquisImgUrl) ?>"
+                                 alt="Croquis" class="img-preview-croquis"
+                                 onerror="this.hidden=true">
+
+                            <label for="file-croquis" class="btn btn-secondary">
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The code specifies image dimensions and quality constraints for 'ubicacion-croquis'. Specifically, the maximum dimensions are 756x577 pixels, WebP format with quality 85. The `admrc/index.php` file validates these dimensions. The system flags images exceeding those dimensions.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.060599974s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 2:59 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Initial assessment focuses on image dimension limits within the content management system, noting a conflict between current validation constraints and the needs of high-DPI displays. Retaining the existing dimensions maintains compatibility but risks suboptimal display on modern devices. Expanding the dimensions requires updating the validation code, which would enable better resolution on high-DPI screens.
+
+
+The image dimensions validation logic must be updated within the system's core to reflect the desired maximum of 1284x902 pixels. This involves modifying a specific conditional statement and updating the image upload validation message within the content management system. These updates ensure that the CMS correctly validates images according to the established size constraints. Also, the user should be advised that the CMS currently has a limit of 756x577 px for the location sketch.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.290507625s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
 ## User Request
 
-Muy bien ,que el color del contorno sea un color lila claro
+ . Actualiza el validador del CMS
+. ya la converti a webp, no toque su tamaño, revisala /home/carlos/Downloads/CROQUIS ACTUAL LAESH 2026.webp yo la subire via el cms.
+ 
 
 <details>
 <summary>Context</summary>
 
-**Active File:** `index.php`
-**Language:** php
+**Active File:** `landing.css`
+**Language:** css
 </details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 3:06 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+The WebP file's dimensions (1284x902) exceed the CMS validator's specified maximum size for the 'ubicacion-croquis' slot (756x577). Examining the PHP code in `laesh-swbldi/admrc/index.php` at lines 314-319 will verify the validator's logic and determine how to update it to accommodate the image's dimensions. The file size is very good, this should be an easy update.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `ubicacion-croquis`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.006354558s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 3:06 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `cms-upload.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L84-109)</summary>
+
+**Path:** `Unknown file`
+
+```
+                }
+
+                // ── Reglas por slot (alineadas con Guía CMS §5.1–§5.6) ──────────────
+                // Slots reales (data-upload-slot en gestion_web.php):
+                //   hero-{slide1…5}       → Banner Hero
+                //   carousel-{1…16}       → Carrusel Especialidades
+                //   ubicacion-croquis     → Croquis de Ubicación
+                //   promo-{lun…dom}       → Cards de Promociones
+                //   calidad-gallery{1…3}  → Galería de Calidad
+                //   (default)             → Imagen CMS genérica
+                function slotRules(s) {
+                    if (/^hero-/.test(s))              return { maxKb: 150, minW: 1280, maxW: 1920,                              landscape: true, label: 'Banner Hero',             hint: 'WebP · Quality 72–80 · Effort 6 · 1 280–1 920 px ancho · Orientación Horizontal · alto proporcional · máx. 150 KB, óptimo 60 KB' };
+                    if (/^carousel-/.test(s))          return { maxKb: 150, exactW: 800, exactH: 580,                                        label: 'Carrusel Especialidades', hint: 'WebP · Quality 75 · Effort 6 · exacto 800×580 px · máx. 150 KB, óptimo 60 KB' };
+                    if (/^ubicacion-croquis$/.test(s)) return { maxKb: 150, maxW: 756, maxH: 577, landscape: true,      label: 'Croquis de Ubicación',    hint: 'WebP · Quality 85 · Effort 6 · 756 × 577 px (máx) · Orientación Horizontal · máx. 150 KB, óptimo 60 KB' };
+                    if (/^promo-/.test(s))             return { maxKb: 150, exactW: 1200, minH: 600, maxH: 675,                              label: 'Card de Promociones',     hint: 'WebP · Quality 72 · Effort 6 · exacto 1200 px ancho · alto 600–675 px · máx. 150 KB, óptimo 60 KB' };
+                    if (/^calidad-/.test(s))           return { maxKb: 150, exactW: 800, exactH: 580,                                       label: 'Galería de Calidad',      hint: 'WebP · Quality 75 · Effort 6 · exacto 800×580 px · máx. 150 KB, óptimo 60 KB' };
+                    if (/^seo-og$/.test(s))            return { maxKb: 150, minW: 1200, maxW: 1920,                              landscape: true, label: 'Imagen Open Graph (SEO)', hint: 'WebP · 1 200 × 630 px recomendado (ratio 1.91:1) · Orientación Horizontal · máx. 150 KB, óptimo 60 KB' };
+                    return                                    { maxKb: 150, minW: 800,                                                        label: 'Imagen CMS',              hint: 'WebP · mín. 800 px ancho · máx. 150 KB, óptimo 60 KB' };
+                }
+                const rules = slotRules(slot);
+
+                // ── Validación de tamaño ─────────────────────────────────────────────
+                const sizeKb = (file.size / 1024).toFixed(1);
+                if (file.size > rules.maxKb * 1024) {
+                    showToast(
+                        `Peso ${sizeKb} KB supera el máximo de ${rules.maxKb} KB para ${rules.label}.<br>` +
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `cms-upload.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L109-149)</summary>
+
+**Path:** `Unknown file`
+
+```
+                        `Peso ${sizeKb} KB supera el máximo de ${rules.maxKb} KB para ${rules.label}.<br>` +
+                        'Optimiza la imagen (baja Quality o reduce dimensiones).',
+                        true
+                    );
+                    this.value = '';
+                    return;
+                }
+
+                // ── Validación de dimensiones (requiere cargar la imagen) ────────────
+                try {
+                    const objUrl = URL.createObjectURL(file);
+                    const img    = new Image();
+                    await new Promise((res, rej) => { img.onload = res; img.onerror = rej; img.src = objUrl; });
+                    URL.revokeObjectURL(objUrl);
+                    const w = img.naturalWidth, h = img.naturalHeight;
+
+                    // Dimensiones exactas (carrusel, croquis, promociones)
+                    if (rules.exactW !== undefined && w !== rules.exactW) {
+                        showToast(`Dimensiones incorrectas (${w}×${h} px) para ${rules.label}.<br><small>Requerido: ${rules.hint}</small>`, true);
+                        this.value = ''; return;
+                    }
+                    if (rules.exactH !== undefined && h !== rules.exactH) {
+                        showToast(`Dimensiones incorrectas (${w}×${h} px) para ${rules.label}.<br><small>Requerido: ${rules.hint}</small>`, true);
+                        this.value = ''; return;
+                    }
+
+                    // Rango de ancho (hero, banner, default)
+                    if (rules.minW !== undefined && w < rules.minW) {
+                        showToast(`Ancho ${w} px menor al mínimo de ${rules.minW} px para ${rules.label}. Spec: ${rules.hint}`, true);
+                        this.value = ''; return;
+                    }
+                    if (rules.maxW !== undefined && w > rules.maxW) {
+                        showToast(`Ancho ${w} px mayor al máximo de ${rules.maxW} px para ${rules.label}. Spec: ${rules.hint}`, true);
+                        this.value = ''; return;
+                    }
+
+                    // Rango de alto (hero)
+                    if (rules.minH !== undefined && h < rules.minH) {
+                        showToast(`Alto ${h} px menor al mínimo de ${rules.minH} px para ${rules.label}. Spec: ${rules.hint}`, true);
+                        this.value = ''; return;
+                    }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Both the client-side and server-side image upload validation check maximum width (`maxW`) and height (`maxH`). The decision is to update both locations. The initial update will target the client-side script's conditional block specifically for 'ubicacion-croquis'.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.114090885s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 3:06 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 3:07 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 3:07 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 3:07 pm
 
 ---
 
@@ -16691,67 +13738,43 @@ Muy bien ,que el color del contorno sea un color lila claro
 <details>
 <summary>Metadata</summary>
 
-- **Model:** Gemini 3.8 Flash (Low)
+- **Model:** Gemini 3.8 Flash (High)
 </details>
 
 ---
 
 <details>
-<summary>File: `Unknown file` (L2804-2853)</summary>
+<summary>File: `Unknown file` (L979-1004)</summary>
 
 **Path:** `Unknown file`
 
 ```
-        opacity: 1;
-        transform: translateY(0);
-    }
-/* ── Resalte luminoso y contorno de 5 segundos para estudio seleccionado en búsqueda ── */
-@keyframes estudioBuscadoOutline {
-    0% {
-        outline: 2.5px solid #71CA11;
-        outline-offset: 2px;
-        background-color: #f7fee7 !important;
-        box-shadow: 0 0 16px rgba(113, 202, 17, 0.45);
-        border-radius: 6px;
-    }
-    15% {
-        outline: 2.5px solid #0052B7;
-        outline-offset: 2px;
-        background-color: #eff6ff !important;
-        box-shadow: 0 0 18px rgba(0, 82, 183, 0.45);
-        border-radius: 6px;
-    }
-    30% {
-        outline: 2.5px solid #71CA11;
-        outline-offset: 2px;
-        background-color: #f7fee7 !important;
-        box-shadow: 0 0 16px rgba(113, 202, 17, 0.45);
-        border-radius: 6px;
-    }
-    75% {
-        outline: 2px solid rgba(113, 202, 17, 0.8);
-        outline-offset: 2px;
-        background-color: #f7fee7 !important;
-        box-shadow: 0 0 12px rgba(113, 202, 17, 0.25);
-        border-radius: 6px;
-    }
-    100% {
-        outline: 2px solid transparent;
-        outline-offset: 0;
-        background-color: transparent !important;
-        box-shadow: none;
-        border-radius: 0;
-    }
+    will-change: width;
 }
 
-.estudio-buscado-highlight {
-    animation: estudioBuscadoOutline 5s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
+/* ── GM-02: Croquis — imagen completa (contain) dentro de tarjeta fija ── */
+#map-static,
+.map-static-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    flex: 1;                /* ocupa el espacio restante de .map-card flex */
+    min-height: 0;
     position: relative;
-    z-index: 5;
-    transition: background-color 0.3s;
+    overflow: hidden;
+    background: #f0f2f4;
 }
-
-
+.map-zoom-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border-radius: inherit;
+    background: transparent;
+}
 ```
 
 </details>
@@ -16767,7 +13790,7 @@ Muy bien ,que el color del contorno sea un color lila claro
 <details>
 <summary>Metadata</summary>
 
-- **Model:** Gemini 3.8 Flash (Low)
+- **Model:** Gemini 3.8 Flash (High)
 </details>
 
 ---
@@ -16775,7 +13798,7 @@ Muy bien ,que el color del contorno sea un color lila claro
 ### Code Edit
 
 **Status:** Completed
-**Created:** 24 Sept 2026, 4:44 pm
+**Created:** 25 Sept 2026, 3:07 pm
 
 ---
 
@@ -16788,7 +13811,7 @@ Muy bien ,que el color del contorno sea un color lila claro
 <details>
 <summary>Metadata</summary>
 
-- **Model:** Gemini 3.8 Flash (Low)
+- **Model:** Gemini 3.8 Flash (High)
 </details>
 
 ---
@@ -16796,28 +13819,7 @@ Muy bien ,que el color del contorno sea un color lila claro
 ### Terminal Command Execution
 
 **Status:** Completed
-**Created:** 24 Sept 2026, 4:44 pm
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 24 Sept 2026, 4:45 pm
+**Created:** 25 Sept 2026, 3:07 pm
 
 ---
 
@@ -16826,2279 +13828,7 @@ Muy bien ,que el color del contorno sea un color lila claro
 <details>
 <summary>Metadata</summary>
 
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-## User Request
-
-Identifica, corrige y rectifica en todas las php, para que el panel de notificaciones ws, unicamente se muestre en Portal medico, Portal recepción; no debe aparecer en portal cms (/adrc/).
-
----
-
-### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 7:31 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `ws-client.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 7:31 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `notif-panel`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 7:32 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `ws-client.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-/**
- * ws-client.js — Cliente WebSocket Swoole v6 + Fallback Polling para Notificaciones en Vivo (LAESH)
- * 
- * Funcionalidades:
- * 1. Agrupación en abanicos descendentes: "📅 Hoy" y "🕒 Ayer y Anteriores".
- * 2. Globito rojo visible (bell-badge con .show .pulse y opacity:1) y contador en título (N) Recepción.
- * 3. Supresión de advertencias Autoplay/AudioContext inicializando audio exclusivamente tras gesto de usuario.
- */
-(function() {
-    'use strict';
-
-    var ws = null;
-    var reconnectInterval = 3000;
-    var maxReconnects = 3;
-    var reconnectAttempts = 0;
-    var pollingTimer = null;
-    var lastTimestamp = 0;
-    var seenNotifIds = {};
-    var unreadCount = 0;
-    var originalTitle = document.title;
-
-    // Control de AudioContext seguro (cero advertencias Autoplay)
-    var hasUserGesture = false;
-    var sharedAudioCtx = null;
-
-    function registerUserGesture() {
-        if (hasUserGesture) return;
-        hasUserGesture = true;
-        try {
-            var AudioCtx = window.AudioContext || window.webkitAudioContext;
-            if (AudioCtx && !sharedAudioCtx) {
-                sharedAudioCtx = new AudioCtx();
-            }
-        } catch (e) {}
-    }
-
-    ['click', 'keydown', 'touchstart', 'pointerdown'].forEach(function(evtName) {
-        document.addEventListener(evtName, registerUserGesture, { once: true, capture: true });
-    });
-
-    function getWsUrl() {
-        var host = window.location.hostname || 'localhost';
-        var protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-        return protocol + '//' + host + (window.location.port ? ':' + window.location.port : '') + '/ws/';
-    }
-
-    function pollNotifications() {
-        var baseDir = window.location.pathname.replace(/\/+$/, '');
-        var endpoint = baseDir + '/api/notificaciones?since=' + lastTimestamp;
-        fetch(endpoint, { cache: 'no-store' })
-            .then(function(res) { return res.json(); })
-            .then(function(data) {
-                if (data && data.success && Array.isArray(data.notificaciones)) {
-                    var newTs = data.timestamp || data.server_time;
-                    if (newTs) lastTimestamp = newTs;
-
-                    data.notificaciones.forEach(function(n) {
-                        if (n.id && seenNotifIds[n.id]) return;
-                        if (n.id) seenNotifIds[n.id] = true;
-
-                        handleWsEvent({
-                            event: n.tipo,
-                            folio: n.folio_referencia || '',
-                            folio_referencia: n.folio_referencia || '',
-                            orden_id: n.orden_id || null,
-                            titulo: (n.tipo === 'nueva_orden') ? 'Nueva Solicitud Médica Digital (' + (n.folio_referencia || '') + ')' : 'Actualización de Solicitud',
-                            mensaje: n.mensaje,
-                            creado_en: n.creado_en,
-                            // 2026-09-24: ya no se filtra por leido en el backend (ver
-                            // GET /api/notificaciones) — se pasa el estado para que el
-                            // panel distinga visualmente leída/no leída en vez de
-                            // ocultar por completo lo ya leído.
-                            leido: (n.leido === undefined || n.leido === null) ? 0 : n.leido
-                        });
-                    });
-                }
-            })
-            .catch(function(err) {});
-    }
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `ws-client.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L169-249)</summary>
-
-**Path:** `Unknown file`
-
-```
-        }
-    }
-
-    function resetNotifBadges() {
-        unreadCount = 0;
-        updateTitleCounter();
-        var badges = document.querySelectorAll('#badge-recepcion, #badge-resultados, #badge-notif-cms, .bell-badge');
-        badges.forEach(function(b) {
-            b.textContent = '0';
-            b.classList.remove('show', 'pulse');
-            b.style.opacity = '0';
-        });
-
-        // Sincronización SSOT en MariaDB: marcar notificaciones pendientes como leídas
-        var baseDir = window.location.pathname.replace(/\/+$/, '');
-        fetch(baseDir + '/api/notificaciones/marcar-leida', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ all: 1 })
-        }).catch(function() {});
-    }
-
-    // Asegurar estructura visual de abanicos en la barra lateral de notificaciones.
-    // 2026-09-24 (pedido explícito del usuario): el Portal Médico tenía un 3er
-    // abanico dedicado "Catálogo Actualizado" (2026-09-21) — se elimina por
-    // completo, junto con todo el código que lo creaba/enrutaba/renderizaba
-    // (ver handleWsEvent más abajo). catalogo_actualizado deja de generar
-    // CUALQUIER notificación visible para médico — RC/Admin no se tocan,
-    // conservan su comportamiento original (catalogo_actualizado dentro de
-    // Hoy/Ayer). El refresco silencioso de catalog-compiled.js que este mismo
-    // evento dispara (ver más abajo, fuera de este bloque) NO se toca — sigue
-    // aplicando para médico, es lo que mantiene sincronizada su lista de
-    // estudios en "Nueva Orden"; no es parte de la notificación que se quita.
-    function ensureAccordionStructure(container) {
-        if (container.querySelector('.notif-accordion-group')) return;
-
-        container.innerHTML =
-            '<div class="notif-accordion-group" style="display:flex; flex-direction:column; gap:8px;">' +
-                '<!-- Abanico Hoy -->' +
-                '<div class="notif-header-hoy" style="display:flex; align-items:center; justify-content:space-between; cursor:pointer; background:#eff6ff; padding:8px 12px; border-radius:6px; border-left:4px solid #0052b7;">' +
-                    '<span style="font-weight:600; font-size:0.85rem; color:#1e3a8a;">📅 Hoy</span>' +
-                    '<span class="badge-cnt-hoy" style="background:#0052b7; color:#fff; font-size:0.75rem; padding:2px 8px; border-radius:12px; font-weight:600;">0</span>' +
-                '</div>' +
-                '<div class="notif-body-hoy" style="display:flex; flex-direction:column; gap:6px;"></div>' +
-
-                '<!-- Abanico Ayer y Anteriores -->' +
-                '<div class="notif-header-anteriores" style="display:flex; align-items:center; justify-content:space-between; cursor:pointer; background:#f8fafc; padding:8px 12px; border-radius:6px; border-left:4px solid #64748b; margin-top:8px;">' +
-                    '<span style="font-weight:600; font-size:0.85rem; color:#475569;">🕒 Ayer y Anteriores</span>' +
-                    '<span class="badge-cnt-anteriores" style="background:#64748b; color:#fff; font-size:0.75rem; padding:2px 8px; border-radius:12px; font-weight:600;">0</span>' +
-                '</div>' +
-                '<div class="notif-body-anteriores" style="display:flex; flex-direction:column; gap:6px;"></div>' +
-            '</div>';
-
-        var headHoy = container.querySelector('.notif-header-hoy');
-        var bodyHoy = container.querySelector('.notif-body-hoy');
-        var headAnt = container.querySelector('.notif-header-anteriores');
-        var bodyAnt = container.querySelector('.notif-body-anteriores');
-
-        if (headHoy && bodyHoy) {
-            headHoy.addEventListener('click', function() {
-                bodyHoy.style.display = (bodyHoy.style.display === 'none') ? 'flex' : 'none';
-            });
-        }
-        if (headAnt && bodyAnt) {
-            headAnt.addEventListener('click', function() {
-                bodyAnt.style.display = (bodyAnt.style.display === 'none') ? 'flex' : 'none';
-            });
-        }
-    }
-
-    // 2026-09-21 (auditoría seguridad): titulo/mensaje llegan con texto de
-    // usuario sin sanear desde el servidor (nombre de paciente, motivo de
-    // cancelación, nombre de archivo PDF — ver commons/notifier.php callers).
-    // CSP de producción permite 'unsafe-inline', así que un payload tipo
-    // `<img src=x onerror=...>` en cualquiera de esos campos se ejecutaría sin
-    // restricción si se concatena crudo en innerHTML. Único punto de
-    // renderizado de estos campos — escapar aquí cubre WS en vivo y polling
-    // fallback (ambos pasan por handleWsEvent).
-    function escapeHtml(str) {
-        var div = document.createElement('div');
-        div.textContent = String(str == null ? '' : str);
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `ws-client.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L519-599)</summary>
-
-**Path:** `Unknown file`
-
-```
-            // 2026-09-24: tampoco cuenta ítems que ya llegan marcados leídos.
-            if (cntBadge && !yaLeido) {
-                cntBadge.textContent = parseInt(cntBadge.textContent || '0', 10) + 1;
-            }
-        });
-
-        // Refrescar el catálogo compilado en memoria (catalog-compiled.js) cuando el Admin / Recepción modifica MariaDB
-        if (data.event === 'catalogo_actualizado') {
-            var oldScript = document.getElementById('script-catalog-compiled');
-            if (oldScript) oldScript.remove();
-            var s = document.createElement('script');
-            s.id = 'script-catalog-compiled';
-            s.src = '/laesh-web-assets-uipv1a/js/catalog-compiled.js?v=' + Date.now();
-            s.onload = function() {
-                // Portal Médico: re-poblar grilla "20 Est.Med" con los datos frescos
-                if (typeof window.populateMandatoryGrid === 'function') window.populateMandatoryGrid();
-            };
-            document.head.appendChild(s);
-            console.info('[LAESH Notif] Catálogo compilado sincronizado en memoria (catalog-compiled.js)');
-        }
-
-        // Refrescar automáticamente la tabla de recepción o médicos (Hoy y Anteriores)
-        // Gap 4 (auditoría 2026-09-18): 'resultados_listos' es el nombre real del `tipo`
-        // en BD (commons/notifier.php) — cuando la notificación llega vía polling fallback
-        // (no WS en vivo), n.tipo trae ese valor, no 'resultado_disponible'. Sin esta rama,
-        // el badge/panel sí aparecía pero la tabla de resultados no se refrescaba sola.
-        if (data.event === 'nueva_orden' || data.event === 'orden_actualizada' || data.event === 'resultado_disponible' || data.event === 'resultados_listos') {
-            // FIX-SPASM (generalizado 2026-09-23): un refresh de tabla por WS en
-            // vivo (llega de la acción de OTRO usuario, no de esta pestaña) no debe
-            // robar el cursor/texto de un input activo — ni el form de Nueva Orden
-            // ni el motivo de cancelación inline (que vive DENTRO de la fila de la
-            // tabla misma). Antes esta protección solo cubría #form-orden en
-            // médico; recepción no tenía ninguna, y ninguno de los 2 cubría su
-            // propio input de motivo de cancelación (vive fuera de #form-orden).
-            // Ahora: si el foco activo está dentro de LA TABLA que se va a
-            // refrescar, o dentro del formulario de creación de orden del mismo
-            // portal, se difiere el refresh hasta que el usuario suelte el campo.
-            var refreshDeferrable = function(tabla, formOrdenId) {
-                if (!tabla) return;
-                var activeEl = document.activeElement;
-                var formOrden = formOrdenId ? document.getElementById(formOrdenId) : null;
-                var userIsTyping = activeEl &&
-                    (activeEl.tagName === 'INPUT' || activeEl.tagName === 'TEXTAREA') &&
-                    (tabla.contains(activeEl) || (formOrden && formOrden.contains(activeEl)));
-
-                var doRefresh = function() {
-                    if (typeof htmx !== 'undefined') {
-                        htmx.trigger(tabla, 'refresh');
-                    } else {
-                        var btnRefresh = document.getElementById('btn-refrescar-tabla');
-                        if (btnRefresh) btnRefresh.click();
-                    }
-                };
-
-                if (userIsTyping) {
-                    if (!activeEl._hasPendingRefresh) {
-                        activeEl._hasPendingRefresh = true;
-                        var _onBlur = function() {
-                            activeEl._hasPendingRefresh = false;
-                            activeEl.removeEventListener('blur', _onBlur);
-                            doRefresh();
-                        };
-                        activeEl.addEventListener('blur', _onBlur);
-                    }
-                } else {
-                    doRefresh();
-                }
-            };
-
-            refreshDeferrable(document.getElementById('tabla-recepcion'), null);
-            refreshDeferrable(document.getElementById('tabla-recepcion-anteriores'), null);
-            refreshDeferrable(document.getElementById('tabla-medico'), 'form-orden');
-            refreshDeferrable(document.getElementById('tabla-historial-completo'), 'form-orden');
-        }
-
-        // Feedback auditivo (solo si ya existió interacción de usuario) —
-        // catalogo_actualizado no suena, mismo criterio que el badge arriba.
-        if (!isCatalogoEvent) playChime();
-    }
-
-    function playChime() {
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `ws-client.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L599-638)</summary>
-
-**Path:** `Unknown file`
-
-```
-    function playChime() {
-        if (!hasUserGesture || !sharedAudioCtx) return;
-        try {
-            if (sharedAudioCtx.state === 'suspended') {
-                var p = sharedAudioCtx.resume();
-                if (p && typeof p.then === 'function') {
-                    p.then(function() { triggerTone(sharedAudioCtx); }).catch(function() {});
-                }
-            } else {
-                triggerTone(sharedAudioCtx);
-            }
-        } catch (e) {}
-    }
-
-    function triggerTone(audioCtx) {
-        try {
-            var osc = audioCtx.createOscillator();
-            var gain = audioCtx.createGain();
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(587.33, audioCtx.currentTime);
-            gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
-            osc.start();
-            osc.stop(audioCtx.currentTime + 0.15);
-        } catch (e) {}
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-        pollNotifications();
-        initWebSocket();
-
-        // Resetear globitos rojos y contador de pestaña al interactuar con el panel lateral
-        var toggleBtns = document.querySelectorAll('#bell-wrap-notif, #sidebar-right-toggle, .bell-wrap');
-        toggleBtns.forEach(function(btn) {
-            btn.addEventListener('click', resetNotifBadges);
-        });
-    });
-})();
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `ws-client.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L239-319)</summary>
-
-**Path:** `Unknown file`
-
-```
-    // 2026-09-21 (auditoría seguridad): titulo/mensaje llegan con texto de
-    // usuario sin sanear desde el servidor (nombre de paciente, motivo de
-    // cancelación, nombre de archivo PDF — ver commons/notifier.php callers).
-    // CSP de producción permite 'unsafe-inline', así que un payload tipo
-    // `<img src=x onerror=...>` en cualquiera de esos campos se ejecutaría sin
-    // restricción si se concatena crudo en innerHTML. Único punto de
-    // renderizado de estos campos — escapar aquí cubre WS en vivo y polling
-    // fallback (ambos pasan por handleWsEvent).
-    function escapeHtml(str) {
-        var div = document.createElement('div');
-        div.textContent = String(str == null ? '' : str);
-        return div.innerHTML;
-    }
-
-    function isCreatedToday(dateStr) {
-        if (!dateStr) return true; // notificaciones en vivo
-        var notifDate = new Date(dateStr);
-        if (isNaN(notifDate.getTime())) return true;
-        var today = new Date();
-        return notifDate.getFullYear() === today.getFullYear() &&
-               notifDate.getMonth() === today.getMonth() &&
-               notifDate.getDate() === today.getDate();
-    }
-
-    function handleWsEvent(data) {
-        if (!data || !data.event) return;
-
-        var isMedicoPortal = !!document.getElementById('tabla-medico');
-        var isCatalogoEvent = (data.event === 'catalogo_actualizado');
-        // 2026-09-24: catalogo_actualizado ya no genera NINGUNA notificación
-        // visible en el Portal Médico (pedido explícito del usuario, elimina
-        // el abanico dedicado que existía desde 2026-09-21). RC/Admin no se
-        // tocan. El refresco de catalog-compiled.js (más abajo) sigue
-        // aplicando para médico independientemente de este flag.
-        var skipNotifItem = (isMedicoPortal && isCatalogoEvent);
-
-        // GAP-NOTIF-01 (2026-09-22): catalogo_actualizado es sincronización
-        // administrativa en segundo plano ("no requiere acción suya", ver
-        // comentario de ensureAccordionStructure) — se sigue registrando en
-        // su propio abanico para trazabilidad, pero YA NO enciende la
-        // campanita/globito rojo ni el contador de pestaña. Diagnóstico real
-        // (2026-09-22): médicos/recepción reportaban una "alerta falsa" en
-        // cada login — el badge se encendía por un catalogo_actualizado
-        // genuinamente sin leer (acumulado de ediciones de catálogo de
-        // otros usuarios), pero como cae en un abanico colapsado por
-        // defecto y no en Hoy/Ayer (lo que el usuario revisa primero),
-        // percibía la alerta como "sin mensajes". Ver también el fix de
-        // actor_user_id en CatalogBuilder::build() — evita que Recepción/
-        // Admin se autonotifique al editar el catálogo.
-        // 2026-09-24: desde que el panel deja de filtrar por leido=0, este
-        // handler también recibe ítems que YA estaban marcados leídos (ej. se
-        // abrió el panel en otra pestaña, o se marcó "leer todo" antes de este
-        // poll) — esos no deben volver a sumar al contador de no-leídos.
-        var yaLeidoParaContador = !!(data.leido && Number(data.leido) === 1);
-        if (!isCatalogoEvent && !yaLeidoParaContador) {
-            // Incrementar contador de pestaña
-            unreadCount++;
-            updateTitleCounter();
-
-            // Actualizar globitos rojos de notificación con animación
-            var badges = document.querySelectorAll('#badge-recepcion, #badge-resultados, #badge-notif-cms, .bell-badge');
-            badges.forEach(function(b) {
-                var count = parseInt(b.textContent || '0', 10) + 1;
-                b.textContent = count;
-                b.classList.add('show', 'pulse');
-                b.style.display = 'inline-flex';
-                b.style.opacity = '1';
-            });
-        }
-
-        // Inyectar ítem visual en los abanicos del panel lateral — se omite
-        // por completo para catalogo_actualizado en médico (skipNotifItem).
-        var notifLists = skipNotifItem ? [] : document.querySelectorAll('.sidebar-right-body, .sidebar-right .sidebar-right-body, .sidebar-right .modal-body, #sidebar-right .sidebar-right-body, #sidebar-right .modal-body');
-        notifLists.forEach(function(container) {
-            ensureAccordionStructure(container);
-
-            var isToday = isCreatedToday(data.creado_en);
-            var targetBody = isToday ? container.querySelector('.notif-body-hoy') : container.querySelector('.notif-body-anteriores');
-            var cntBadge   = isToday ? container.querySelector('.badge-cnt-hoy') : container.querySelector('.badge-cnt-anteriores');
-
-            if (!targetBody) return;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `sidebar-right`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 7:32 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1754-1804)</summary>
-
-**Path:** `Unknown file`
-
-```
-        </div><!-- /panel-configuracion-general -->
-
-    </main><!-- /.cms-panels-scroll -->
-    </div><!-- /.cms-content-col -->
-
-    <!-- Región Lateral Derecha: Notificaciones -->
-    <aside class="sidebar-right" id="sidebar-right">
-        <div class="sidebar-right-toggle-row">
-            <div class="bell-wrap" id="bell-wrap-notif" title="Notificaciones">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-                <span class="bell-badge" id="badge-notif-cms" aria-label="Notificaciones pendientes">0</span>
-            </div>
-            <button type="button" class="sidebar-right-toggle" id="sidebar-right-toggle" title="Expandir / Colapsar">
-                <svg id="right-rail-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-            </button>
-        </div>
-        <div class="sidebar-right-content">
-            <div class="sidebar-right-header border-bottom pb-2 mb-3">
-                <h3 class="txt-main fw-600 font-mosquito txt-pgd mb-0 fs-sm">Notificaciones</h3>
-            </div>
-            <div class="sidebar-right-body" id="notif-list">
-                <p class="txt-muted txt-center-sm txt-muted-xs mt-4">No hay nuevas notificaciones</p>
-            </div>
-        </div>
-    </aside>
-</div>
-
-<!-- Toast de confirmación -->
-<div class="cms-toast" id="toast">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-    ¡Cambios publicados exitosamente en <strong>laesh.mx</strong>!
-</div>
-
-<!-- Configuración dinámica desde BD -->
-<meta name="cms-upload-url" content="<?= h($config['cms_upload_endpoint'] ?? '/laesh/adrc/cms/upload') ?>">
-
-<!-- CMS Upload — manejo de input[type=file][data-upload-slot] vía fetch multipart -->
-<script src="/laesh-web-assets-uipv1a/js/cms-upload.js?v=<?= time() ?>" defer></script>
-
-<script src="/laesh-web-assets-uipv1a/js/htmx.min.js"></script><!-- GAP-ARQ-01: requerido por hx-post /cms/save -->
-<script src="/laesh-web-assets-uipv1a/js/app.js?v=<?= time() ?>" defer></script>
-<script src="/laesh-web-assets-uipv1a/js/ws-client.js?v=<?= time() ?>" defer></script>
-<script src="/laesh-web-assets-uipv1a/js/portal-footer.js?v=<?= time() ?>" defer></script>
-<script src="/laesh-web-assets-uipv1a/js/sidebar-rail.js?v=<?= time() ?>" defer></script>
-
-<!-- CKEditor 5 — servido localmente (licencia GPL, sin CDN externo) -->
-<script src="/laesh-web-assets-uipv1a/js/ckeditor5.umd.js?v=<?= time() ?>"></script>
-<script src="/laesh-web-assets-uipv1a/js/ckeditor-init.js?v=<?= time() ?>" defer></script>
-<script src="/laesh-web-assets-uipv1a/js/cms-dirty-tracker.js?v=<?= time() ?>" defer></script>
-
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `badge-notif-cms`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 7:32 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 7:32 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 7:32 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `sistema.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-<?php
-/**
- * Panel Unificado de Administración del Sistema & Configuraciones Globales
- * URL:  /laesh/adrc/sistema
- * Acceso restringido: requiere permiso 'gestionar_cms' (rol ADMIN).
- *
- * Módulos integrados:
- *   1. Visor de Logs E2E (sys_logs, fallback_log, app.log, Nginx, PHP-FPM, Swoole)
- *   2. Configuraciones Comunes (Singletons institucionales compartidos)
- *   3. Configuraciones Proyecto 1: LAESH Sitio Web & CMS (exclusivas Web)
- *   4. Configuraciones Proyecto 2: LAESH Bloc Digital (exclusivas Bloc Digital)
- *   5. Todas las Configuraciones DB (tabla configuraciones completa)
- */
-
-use Common\Logger;
-
-Flight::rbac()->requirePermission('gestionar_cms', '/laesh/login/login.php?portal=admin');
-
-$db = Flight::db();
-
-// ── Procesar actualización de configuraciones (POST) ───────────────────────
-$flashMsg = null;
-$flashErr = false;
-
-// ── POST: Guardar log-levels en caliente (tab infra) ───────────────────────
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'save_log_levels') {
-    if (!\Common\CsrfGuard::isValid(rotate: false)) {
-        $flashMsg = 'Token CSRF inválido. Por favor recargue la página.';
-        $flashErr = true;
-    } else {
-        // Valores permitidos por parámetro (enum estricto)
-        $allowedVals = [
-            'nginx_error_level'           => ['debug','info','notice','warn','error','crit','alert','emerg'],
-            'mariadb_slow_query_log'      => ['ON','OFF'],
-            'mariadb_slow_query_time'     => null,   // numérico validado por separado
-            'mariadb_log_error_verbosity' => ['1','2','3'],
-            'mariadb_general_log'         => ['ON','OFF'],
-            'php_error_reporting'         => ['production','development','off'],
-            'app_log_level'               => ['DEBUG','INFO','WARN','ERROR','CRITICAL','OFF'],
-        ];
-        $logLevelsConf = '/opt/laesh/logs/log-levels.conf';
-        $errors = [];
-        $newVals = [];
-        foreach ($allowedVals as $param => $validSet) {
-            $raw = trim($_POST['ll'][$param] ?? '');
-            if ($validSet === null) {
-                // Numérico: mariadb_slow_query_time (0–300)
-                if (!is_numeric($raw) || (float)$raw < 0 || (float)$raw > 300) {
-                    $errors[] = "$param debe ser un número entre 0 y 300";
-                } else {
-                    $newVals[$param] = $raw;
-                }
-            } elseif (!in_array($raw, $validSet, true)) {
-                $errors[] = "$param: valor inválido '$raw'. Permitidos: " . implode(', ', $validSet);
-            } else {
-                $newVals[$param] = $raw;
-            }
-        }
-        if ($errors) {
-            $flashMsg = 'Errores de validación: ' . implode(' · ', $errors);
-            $flashErr = true;
-        } elseif (!is_writable($logLevelsConf)) {
-            $flashMsg = "No se puede escribir en $logLevelsConf — verificar permisos (664 root:www-data).";
-            $flashErr = true;
-        } else {
-            $lines = [];
-            foreach ($newVals as $k => $v) {
-                $lines[] = "$k=$v";
-            }
-            $written = file_put_contents($logLevelsConf, implode("\n", $lines) . "\n");
-            if ($written === false) {
-                $flashMsg = "Error al escribir $logLevelsConf.";
-                $flashErr = true;
-            } else {
-                $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-                Logger::log('INFO', "Log-levels actualizados vía sistema.php: " . implode(', ', array_map(fn($k,$v) => "$k=$v", array_keys($newVals), $newVals)), Flight::auth()->getUserId());
-                $flashMsg = '✅ log-levels.conf actualizado. El systemd path unit aplicará los cambios en ~1 segundo.';
-            }
-        }
-    }
-}
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'save_configs') {
-    if (!\Common\CsrfGuard::isValid()) {
-        $flashMsg = 'Token CSRF inválido. Por favor recargue la página.';
-        $flashErr = true;
-    } else {
-        $configsToSave = $_POST['cfg'] ?? [];
-        $stmt = $db->prepare("UPDATE `configuraciones` SET `valor` = :val WHERE `clave` = :key");
-        $updatedCount = 0;
-        foreach ($configsToSave as $key => $val) {
-            $stmt->execute([':val' => trim($val), ':key' => $key]);
-            $updatedCount += $stmt->rowCount();
-        }
-        Logger::log('INFO', "Administración del Sistema: {$updatedCount} configuraciones actualizadas.", Flight::auth()->getUserId());
-        $flashMsg = "¡{$updatedCount} parámetros de configuración guardados correctamente!";
-    }
-}
-
-// ── Cargar todas las configuraciones de MariaDB ───────────────────────────
-$rows = $db->query("SELECT `clave`, `valor`, `descripcion` FROM `configuraciones` ORDER BY `clave` ASC")->fetchAll(PDO::FETCH_ASSOC);
-$allConfigs = [];
-foreach ($rows as $r) {
-    $allConfigs[$r['clave']] = $r;
-}
-
-// ── Monitoreo QoS Notificaciones (Alerta de degradación de entrega) ───────
-$qosAlert = null;
-try {
-    $qosRow = $db->query("
-        SELECT 
-            COUNT(*) AS total,
-            SUM(entregado_ws = 0) AS fallbacks,
-            ROUND(IFNULL(SUM(entregado_ws = 0) / NULLIF(COUNT(*), 0) * 100, 0), 1) AS pct_fallback
-        FROM notificaciones
-        WHERE creado_en >= DATE_SUB(NOW(), INTERVAL 24 HOUR)
-    ")->fetch(\PDO::FETCH_ASSOC);
-
-    if ($qosRow && $qosRow['total'] > 0 && (float)$qosRow['pct_fallback'] >= 20.0) {
-        $qosAlert = [
-            'pct'       => (float)$qosRow['pct_fallback'],
-            'fallbacks' => (int)$qosRow['fallbacks'],
-            'total'     => (int)$qosRow['total']
-        ];
-    }
-} catch (\Throwable $e) {
-    // Si la consulta no puede ejecutarse, ignora la alerta sin romper la vista
-}
-
-// ── Clasificación ESTRICTA (0% Duplicados entre pestañas) ──────────────────
-// 1. Singletons institucionales y parámetros compartidos por Ambos Proyectos
-$keysComunes = [
-    'nombre_laboratorio',
-    'nombre_corto',
-    'direccion',
-    'direccion_calle',
-    'ciudad',
-    'estado',
-    'cp',
-    'telefono',
-    'whatsapp_numero',
-    'whatsapp_url',
-    'email_contacto',
-    'horario_semana',
-    'horario_domingo',
-    'hrs_open',
-    'hrs_close',
-    'dom_open',
-    'dom_close',
-    'responsable_nombre',
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `sistema.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L589-653)</summary>
-
-**Path:** `Unknown file`
-
-```
-            <?php foreach ($webGrouped as $secKey => $items):
-                $secLabel = $seccionNames[$secKey] ?? strtoupper($secKey);
-            ?>
-            <details class="accordion-item mb-2" style="border:1px solid var(--border); border-radius:8px; overflow:hidden;">
-                <summary class="accordion-summary" style="padding:12px 16px; background:var(--secondary-green); font-weight:700; color:var(--primary); cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
-                    <span>📂 <?= htmlspecialchars($secLabel) ?></span>
-                    <span class="badge badge-info" style="font-size:0.75rem; background:var(--primary); color:#fff; padding:2px 8px; border-radius:12px;"><?= count($items) ?> registros</span>
-                </summary>
-                <div class="accordion-body p-3" style="background:#fff; border-top:1px solid var(--border);">
-                    <table class="config-table" style="margin-top:0;">
-                        <thead>
-                            <tr>
-                                <th style="width:30%">Campo / Elemento en index.php</th>
-                                <th style="width:60%">Contenido en Base de Datos (Read-Only)</th>
-                                <th style="width:10%">Tipo</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($items as $item):
-                                $itemPath  = $item['seccion'] . '/' . $item['subseccion'] . '/' . $item['clave'];
-                                $displayLbl = $labelMap[$itemPath] ?? (($item['subseccion'] ? $item['subseccion'] . ' / ' : '') . $item['clave']);
-                            ?>
-                            <tr>
-                                <td>
-                                    <div class="config-key"><?= htmlspecialchars($displayLbl) ?></div>
-                                    <small class="txt-muted" style="font-size:0.75rem; font-family:monospace;"><?= htmlspecialchars($item['subseccion'] . ' → ' . $item['clave']) ?></small>
-                                </td>
-                                <td>
-                                    <textarea class="config-input" readonly rows="<?= min(max(substr_count($item['valor'], "\n") + 1, 2), 6) ?>" style="background:#f8fafc; color:#334155; font-family:monospace;"><?= htmlspecialchars($item['valor']) ?></textarea>
-                                </td>
-                                <td>
-                                    <span class="log-badge badge-debug"><?= htmlspecialchars($item['tipo'] ?? 'texto') ?></span>
-                                </td>
-                            </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                </div>
-            </details>
-            <?php endforeach; ?>
-        </div>
-    </section>
-    <?php endif; ?>
-    <?php endif; ?>
-
-    <header class="portal-header" style="margin-top: 3rem; padding: 1rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border);">
-        <div class="portal-header__brand" style="display: flex; align-items: center; gap: 10px;">
-            <span class="portal-header__icon" style="font-size: 1.5rem;">⚙️</span>
-            <div>
-                <div style="font-weight: 700; color: var(--primary);">Administración del Sistema</div>
-                <div class="txt-muted fs-sm">Plataforma Unificada LAESH</div>
-            </div>
-        </div>
-        <nav class="portal-header__nav" style="display: flex; gap: 10px; flex-wrap: wrap;">
-            <a href="/laesh/adrc/" class="btn btn-secondary">← CMS Admin</a>
-            <a href="/laesh/rc/" class="btn btn-secondary">Tablero Recepción</a>
-            <a href="/laesh/login/logout.php" class="btn btn-secondary">Cerrar Sesión</a>
-        </nav>
-    </header>
-
-</main>
-
-</body>
-</html>
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `log_viewer.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-<?php
-/**
- * Log Viewer — LAESH CMS Admin
- * URL:  /laesh/adrc/logs
- * Acceso restringido: requiere permiso 'gestionar_cms' (rol ADMIN).
- *
- * Muestra en tiempo real (tail) los logs del sistema:
- *   - app.log        → Logger::logToFile() (plano PHP)
- *   - sys_logs       → Tabla MariaDB (ingesta PSR-3)
- *   - fallback_log   → Tabla MariaDB (errores PDO/conectividad)
- *   - nginx access   → /opt/laesh/logs/nginx-access.log  (KVM2 Nginx nativo)
- *   - nginx error    → /opt/laesh/logs/nginx-error.log   (KVM2 Nginx nativo)
- *   - php-fpm errors → /opt/laesh/logs/php-fpm-error.log (KVM2 PHP-FPM nativo)
- */
-
-use Common\Logger;
-
-Flight::rbac()->requirePermission('gestionar_cms', '/laesh/login/login.php?portal=admin');
-
-$db = Flight::db();
-
-// ── Rutas de archivos de log (relativas al contenedor o path local) ────────
-$config  = require __DIR__ . '/../../commons/config.php';
-$appLog  = $config['app']['log_path'];                              // laesh-swbldi/logs/app.log
-
-// KVM2: logs en /opt/laesh/logs/ (Nginx nativo + PHP-FPM nativo)
-// Paths configurados en nginx-laesh-ip.conf / nginx-laesh-domain.conf + php-99-laesh.ini
-$nginxAccess = '/opt/laesh/logs/nginx-access.log';
-$nginxError  = '/opt/laesh/logs/nginx-error.log';
-$phpErrors   = '/opt/laesh/logs/php-fpm-error.log';
-$swooleLog   = '/opt/laesh/logs/swoole.log';
-$smtpCheckLog = '/opt/laesh/logs/smtp-check.log';
-
-// ── Parámetros de la petición ─────────────────────────────────────────────
-$logTab = $_GET['log_tab'] ?? $_GET['log'] ?? $_GET['tab'] ?? 'syslog';
-if ($logTab === 'logs') $logTab = 'syslog';
-
-$limit  = min((int)($_GET['limit'] ?? 100), 500);
-$search = trim($_GET['q'] ?? '');
-$level  = $_GET['level'] ?? '';
-
-/**
- * Lee las últimas $n líneas de un archivo plano.
- */
-function tailFile(string $path, int $lines = 100): array {
-    if (!is_readable($path)) {
-        return ["[Log no disponible en este entorno: {$path}]"];
-    }
-    $result = [];
-    $fp = fopen($path, 'r');
-    if (!$fp) return ["[No se pudo abrir el archivo]"];
-    // Leer al revés con fseek
-    fseek($fp, 0, SEEK_END);
-    $pos = ftell($fp);
-    $buffer = '';
-    $count  = 0;
-    while ($pos > 0 && $count < $lines) {
-        $chunkSize = min($pos, 4096);
-        $pos -= $chunkSize;
-        fseek($fp, $pos);
-        $buffer = fread($fp, $chunkSize) . $buffer;
-        $count  = substr_count($buffer, "\n");
-    }
-    fclose($fp);
-    $all = explode("\n", trim($buffer));
-    return array_slice($all, -$lines);
-}
-
-/**
- * Colorea niveles de log.
- */
-function levelBadge(string $text): string {
-    $map = [
-        'ERROR' => 'badge-error', 'FATAL' => 'badge-fatal',
-        'WARN'  => 'badge-warn',  'INFO'  => 'badge-info',
-        'DEBUG' => 'badge-debug',
-    ];
-    foreach ($map as $lvl => $cls) {
-        if (stripos($text, "[$lvl]") !== false || stripos($text, $lvl) === 0) {
-            return "<span class=\"log-badge {$cls}\">{$lvl}</span>";
-        }
-    }
-    return '';
-}
-
-// ── Consulta sys_logs ─────────────────────────────────────────────────────
-$sysLogs = [];
-if ($logTab === 'syslog') {
-    $where  = $level ? "AND level = :level" : "";
-    $search_sql = $search ? "AND message LIKE :q" : "";
-    $stmt = $db->prepare("
-        SELECT id, level, message, ip_address, user_id, created_at
-        FROM sys_logs
-        WHERE 1=1 {$where} {$search_sql}
-        ORDER BY id DESC
-        LIMIT :lim
-    ");
-    if ($level)  $stmt->bindValue(':level', strtoupper($level));
-    if ($search) $stmt->bindValue(':q', "%{$search}%");
-    $stmt->bindValue(':lim', $limit, \PDO::PARAM_INT);
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `log_viewer.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L299-353)</summary>
-
-**Path:** `Unknown file`
-
-```
-            ?>
-                <tr class="log-row <?= $rowCls ?>">
-                    <td class="log-date"><?= htmlspecialchars($row['dia']) ?></td>
-                    <td class="log-meta"><?= htmlspecialchars($row['tipo']) ?></td>
-                    <td class="log-id"><?= (int)$row['total'] ?></td>
-                    <td class="log-id"><?= (int)$row['fallbacks'] ?></td>
-                    <td><span class="log-badge <?= $pct >= 20 ? 'badge-error' : ($pct > 0 ? 'badge-warn' : 'badge-info') ?>"><?= $pct ?>%</span></td>
-                </tr>
-            <?php endforeach; endif; ?>
-            </tbody>
-        </table>
-
-        <h3 style="font-size:0.9rem;font-weight:700;color:var(--primary);margin:1.5rem 0 0.5rem;padding:0 4px;">
-            🔎 Motivos de fallback más frecuentes (últimos 30 días)
-        </h3>
-        <table class="log-table" id="log-reasons-table">
-            <thead><tr>
-                <th>Flujo (tipo)</th><th>Motivo</th><th>Ocurrencias</th>
-            </tr></thead>
-            <tbody>
-            <?php if (empty($wsReasons)): ?>
-                <tr><td colspan="3" class="txt-muted ta-center p-3">Sin fallos con motivo registrado ✅</td></tr>
-            <?php else: foreach ($wsReasons as $row): ?>
-                <tr class="log-row log-row--warn">
-                    <td class="log-meta"><?= htmlspecialchars($row['tipo']) ?></td>
-                    <td class="log-msg log-code"><?= htmlspecialchars($row['fallback_reason']) ?></td>
-                    <td class="log-id"><?= (int)$row['total'] ?></td>
-                </tr>
-            <?php endforeach; endif; ?>
-            </tbody>
-        </table>
-        </div>
-
-        <?php else: ?>
-        <!-- ── ARCHIVO PLANO ── -->
-        <div class="log-file-wrap" id="log-file-output">
-            <?php if (empty($fileLines) || (count($fileLines) === 1 && str_starts_with($fileLines[0], '[Log no disponible'))): ?>
-            <p class="txt-muted p-3">
-                <?= htmlspecialchars($fileLines[0] ?? 'Archivo vacío o no disponible en este entorno.') ?>
-            </p>
-            <?php else: foreach ($fileLines as $line):
-                if (trim($line) === '') continue;
-                $cls = '';
-                if (stripos($line, '[ERROR]') !== false || stripos($line, '[FATAL]') !== false) $cls = 'log-line--error';
-                elseif (stripos($line, '[WARN]') !== false) $cls = 'log-line--warn';
-                elseif (stripos($line, '[INFO]') !== false) $cls = 'log-line--info';
-            ?>
-            <div class="log-line <?= $cls ?>"><?= htmlspecialchars($line) ?></div>
-            <?php endforeach; endif; ?>
-        </div>
-        <?php endif; ?>
-    </div><!-- /.log-panel -->
-</div><!-- /.log-viewer-container -->
-<script src="/laesh-web-assets-uipv1a/js/log-viewer.js?v=<?= time() ?>" defer></script>
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L149-249)</summary>
-
-**Path:** `Unknown file`
-
-```
-        </div>
-        <div class="nav-item" id="nav-especialidades" data-panel="panel-especialidades" data-section="especialidades" data-tooltip="Carrusel y catálogo de estudios (#especialidades)" role="button" tabindex="0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2v6a2 2 0 0 0 .245.96l5.51 10.08A2 2 0 0 1 18 22H6a2 2 0 0 1-1.755-2.96l5.51-10.08A2 2 0 0 0 10 8V2"/></svg>
-            Estudios
-        </div>
-        <div class="nav-item" id="nav-promociones" data-panel="panel-promociones" data-section="promociones" data-tooltip="Banner promocional (#promociones)" role="button" tabindex="0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m8.5 8.5 7 7"/></svg>
-            Promociones Vigentes
-        </div>
-        <div class="nav-item" id="nav-calidad" data-panel="panel-calidad" data-section="calidad" data-tooltip="Galería de instalaciones (#calidad)" role="button" tabindex="0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-            Calidad e Instalaciones
-        </div>
-        <div class="nav-item" id="nav-ubicacion" data-panel="panel-ubicacion" data-section="ubicacion" data-tooltip="Teléfonos, dirección y mapa (#ubicacion)" role="button" tabindex="0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            Ubicación y Contacto
-        </div>
-        <div class="nav-item" id="nav-footer" data-panel="panel-footer" data-section="footer" data-tooltip="Pie de página: datos, horarios y créditos (#footer)" role="button" tabindex="0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="13" width="18" height="8" rx="2"/><path d="M3 7h18M7 3h10"/></svg>
-            Pie de Página
-        </div>
-        <div class="nav-item" id="nav-aviso-privacidad" data-panel="panel-aviso-privacidad" data-section="aviso-privacidad" data-tooltip="Aviso de Privacidad — contenido legal completo" role="button" tabindex="0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            Aviso de Privacidad
-        </div>
-        <div class="nav-item" id="nav-video-promo" data-panel="panel-video-promo" data-section="video-promo" data-tooltip="Video promocional con enlaces y reproductor embebido" role="button" tabindex="0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
-            Video promo
-        </div>
-        <div class="nav-item" id="nav-configuracion-general" data-panel="panel-configuracion-general" data-section="configuracion-general" data-tooltip="Orden vertical de secciones en la página de inicio" role="button" tabindex="0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
-            Ordenamiento
-        </div>
-        <div class="nav-item" id="nav-seo" data-panel="panel-seo" data-section="seo" data-tooltip="Metadatos, Open Graph y Schema.org" role="button" tabindex="0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
-            Metadatos
-        </div>
-
-        <!-- Ícono ⚙️ Sistema & Logs: visible únicamente en el rail colapsado de íconos (.sidebar-rail-only) -->
-        <a href="/laesh/adrc/sistema" class="nav-item sidebar-rail-only cursor-p" id="nav-sistema-rail" data-tooltip="Administración del Sistema y Logs" role="button" tabindex="0" style="text-decoration:none;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-            Sistema & Logs
-        </a>
-
-        <!-- Pub-meta y botón Publicar movidos al header nav (2026-08-27) -->
-
-        <div class="sidebar-mobile-only">
-            <div class="user-badge--sm">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--primary-green-dark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                <span>Admin: <strong class="strong-primary"><?= htmlspecialchars($nombreAdmin, ENT_QUOTES, 'UTF-8') ?></strong></span>
-            </div>
-            <a href="/laesh/login/logout.php" class="btn-logout--mobile">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-                Cerrar Sesión
-            </a>
-        </div>
-    </aside>
-
-    <!-- ====== MAIN + TABS (columna flex) ====== -->
-    <!--
-        Estructura: .cms-content-col (column flex) agrupa las tabs fijas arriba
-        y el área de paneles scrolleable abajo. Así las tabs NO quedan dentro del
-        scroll container y se "pegan" visualmente sin necesitar position:sticky.
-        Ver: gestion-web.css → .cms-content-col / .cms-panels-scroll
-    -->
-    <div class="cms-content-col">
-        <div class="cms-tabs" role="tablist" aria-label="Secciones del sitio web">
-            <div class="cms-tab active" id="tab-hero" role="tab" aria-selected="true" aria-controls="panel-hero" tabindex="0" data-section="hero">1. Banner Principal</div>
-            <div class="cms-tab" id="tab-quienes-somos" role="tab" aria-selected="false" aria-controls="panel-quienes-somos" tabindex="-1" data-section="quienes-somos">2. Quiénes somos</div>
-            <div class="cms-tab" id="tab-especialidades" role="tab" aria-selected="false" aria-controls="panel-especialidades" tabindex="-1" data-section="especialidades">3. Estudios</div>
-            <div class="cms-tab" id="tab-promociones" role="tab" aria-selected="false" aria-controls="panel-promociones" tabindex="-1" data-section="promociones">4. Promociones Vigentes</div>
-            <div class="cms-tab" id="tab-calidad" role="tab" aria-selected="false" aria-controls="panel-calidad" tabindex="-1" data-section="calidad">5. Calidad e Instalaciones</div>
-            <div class="cms-tab" id="tab-ubicacion" role="tab" aria-selected="false" aria-controls="panel-ubicacion" tabindex="-1" data-section="ubicacion">6. Ubicación y Contacto</div>
-            <div class="cms-tab" id="tab-footer" role="tab" aria-selected="false" aria-controls="panel-footer" tabindex="-1" data-section="footer">7. Pie de Página</div>
-            <div class="cms-tab" id="tab-aviso-privacidad" role="tab" aria-selected="false" aria-controls="panel-aviso-privacidad" tabindex="-1" data-section="aviso-privacidad">8. Aviso de Privacidad</div>
-            <div class="cms-tab" id="tab-video-promo" role="tab" aria-selected="false" aria-controls="panel-video-promo" tabindex="-1" data-section="video-promo">9. Video promo</div>
-            <div class="cms-tab" id="tab-configuracion-general" role="tab" aria-selected="false" aria-controls="panel-configuracion-general" tabindex="-1" data-section="configuracion-general">10. Ordenamiento</div>
-            <div class="cms-tab" id="tab-seo" role="tab" aria-selected="false" aria-controls="panel-seo" tabindex="-1" data-section="seo">11. Metadatos</div>
-            <!-- Separador visual (botón Preview movido al header nav) -->
-            <div class="cms-tabs-preview-sep" aria-hidden="true"></div>
-        </div><!-- /.cms-tabs -->
-
-        <!-- Área de paneles: esta zona scrollea; .cms-tabs queda fija arriba -->
-        <main class="cms-panels-scroll main-content--pad" id="main-content">
-
-        <!-- ================================================================
-             PANEL 1: HERO / BANNER PRINCIPAL
-             Sección: hero | Fuente HTML: #inicio
-             ================================================================ -->
-        <div id="panel-hero" class="cms-panel active" role="tabpanel" aria-labelledby="tab-hero" tabindex="0" data-section="hero">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">Edición de Banners del Carrusel Principal (#inicio)</h3>
-            </div>
-
-            <!-- ══ INDICACIÓN RÁPIDA DE IMÁGENES ══ -->
-            <p class="cms-img-hint" role="note">
-                <strong>Indicaciones de Carga de Imágenes:</strong>
-                Sobreescritura: La imagen previa se sobreescribe automáticamente al cargar una nueva.
-            </p>
-
-            <hr class="cms-section-sep">
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L79-139)</summary>
-
-**Path:** `Unknown file`
-
-```
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/style.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/gestion-web.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/ckeditor5.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/portal.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="/laesh-web-assets-uipv1a/css/targeting.css?v=<?= time() ?>">
-</head>
-<body class="portal-medico-body-layout">
-<a href="#main-content" class="skip-link">Ir al contenido principal</a>
-
-<!-- Encabezado Fijo con Breadcrumb -->
-<nav class="portal-access-header">
-    <div class="portal-header-left">
-        <a class="logo portal-access-link" href="/laesh/" target="_blank" rel="noopener">
-            <img src="/laesh-web-assets-uipv1a/img/logo-laesh.webp" alt="LAESH Logo" class="portal-logo" decoding="async" fetchpriority="high">
-        </a>
-        <div class="portal-header-divider"></div>
-        <div class="portal-breadcrumb-group">
-            <a href="/laesh/rc/" class="bc-home-link" title="Volver al Panel de Recepción">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                Recepción
-            </a>
-            <span class="header-sep-green">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-            </span>
-            <span class="txt-main fw-600 portal-h1">Admin</span>
-            <span class="header-sep-green">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-            </span>
-            <span id="header-bc-current" class="txt-pgd fw-bold">Banner Principal</span>
-        </div>
-    </div>
-    <div class="portal-header-right">
-        <span class="pub-meta-hdr"><?= htmlspecialchars($lastPubLabel, ENT_QUOTES, 'UTF-8') ?></span>
-        <button type="button" class="btn btn-primary btn-resultados-sm mr-2" id="btn-cms-save-action"
-                data-csrf="<?= htmlspecialchars($csrfToken, ENT_QUOTES, 'UTF-8') ?>"
-                data-endpoint="/laesh/adrc/cms/save">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
-            Publicar
-        </button>
-        <span class="hdr-sep-v" aria-hidden="true"></span>
-        <button type="button" class="btn btn-secondary mr-2" id="btn-preview-tabbar" title="Vista previa del sitio público sin publicar">
-            👁 Vista previa
-        </button>
-        <div class="user-badge-portal">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--primary-green-dark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            <span>Admin Web: <strong class="txt-pgd"><?= htmlspecialchars($nombreAdmin, ENT_QUOTES, 'UTF-8') ?></strong></span>
-        </div>
-        <a href="/laesh/login/logout.php" class="btn-back-primary" id="btn-logout">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-            Cerrar Sesión
-        </a>
-    </div>
-    <div class="portal-initials-mob portal-initials-mob--admin" aria-hidden="true">ADM</div>
-</nav>
-
-<div class="app-layout">
-    <!-- ====== SIDEBAR ====== -->
-    <aside class="sidebar">
-        <div class="sidebar-toggle-row">
-            <button type="button" class="sidebar-rail-toggle" id="sidebar-rail-toggle" title="Expandir / Colapsar menú">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-```
-
-</details>
-
----
-
-### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 7:33 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Execution Error
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 7:33 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `sidebar-right`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 7:33 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1754-1804)</summary>
-
-**Path:** `Unknown file`
-
-```
-        </div><!-- /panel-configuracion-general -->
-
-    </main><!-- /.cms-panels-scroll -->
-    </div><!-- /.cms-content-col -->
-
-    <!-- Región Lateral Derecha: Notificaciones -->
-    <aside class="sidebar-right" id="sidebar-right">
-        <div class="sidebar-right-toggle-row">
-            <div class="bell-wrap" id="bell-wrap-notif" title="Notificaciones">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-                <span class="bell-badge" id="badge-notif-cms" aria-label="Notificaciones pendientes">0</span>
-            </div>
-            <button type="button" class="sidebar-right-toggle" id="sidebar-right-toggle" title="Expandir / Colapsar">
-                <svg id="right-rail-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-            </button>
-        </div>
-        <div class="sidebar-right-content">
-            <div class="sidebar-right-header border-bottom pb-2 mb-3">
-                <h3 class="txt-main fw-600 font-mosquito txt-pgd mb-0 fs-sm">Notificaciones</h3>
-            </div>
-            <div class="sidebar-right-body" id="notif-list">
-                <p class="txt-muted txt-center-sm txt-muted-xs mt-4">No hay nuevas notificaciones</p>
-            </div>
-        </div>
-    </aside>
-</div>
-
-<!-- Toast de confirmación -->
-<div class="cms-toast" id="toast">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-    ¡Cambios publicados exitosamente en <strong>laesh.mx</strong>!
-</div>
-
-<!-- Configuración dinámica desde BD -->
-<meta name="cms-upload-url" content="<?= h($config['cms_upload_endpoint'] ?? '/laesh/adrc/cms/upload') ?>">
-
-<!-- CMS Upload — manejo de input[type=file][data-upload-slot] vía fetch multipart -->
-<script src="/laesh-web-assets-uipv1a/js/cms-upload.js?v=<?= time() ?>" defer></script>
-
-<script src="/laesh-web-assets-uipv1a/js/htmx.min.js"></script><!-- GAP-ARQ-01: requerido por hx-post /cms/save -->
-<script src="/laesh-web-assets-uipv1a/js/app.js?v=<?= time() ?>" defer></script>
-<script src="/laesh-web-assets-uipv1a/js/ws-client.js?v=<?= time() ?>" defer></script>
-<script src="/laesh-web-assets-uipv1a/js/portal-footer.js?v=<?= time() ?>" defer></script>
-<script src="/laesh-web-assets-uipv1a/js/sidebar-rail.js?v=<?= time() ?>" defer></script>
-
-<!-- CKEditor 5 — servido localmente (licencia GPL, sin CDN externo) -->
-<script src="/laesh-web-assets-uipv1a/js/ckeditor5.umd.js?v=<?= time() ?>"></script>
-<script src="/laesh-web-assets-uipv1a/js/ckeditor-init.js?v=<?= time() ?>" defer></script>
-<script src="/laesh-web-assets-uipv1a/js/cms-dirty-tracker.js?v=<?= time() ?>" defer></script>
-
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion-web.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-/* gestion-web.css — estilos específicos del portal de gestión web CMS
-   Extraídos de inline styles en gestion-web.html (P-LAESH-01, 2026-08-13) */
-
-/* ── FIX STICKY TABS (raíz estructural) ─────────────────────────────────────────
-   Problema: .main-content tiene overflow-y:auto pero la cadena de altura
-   (body → .app-layout → .main-content) no está acotada al viewport, por lo que
-   .main-content nunca genera un scroll container real; el scroll ocurre en el
-   viewport (body), y el sticky queda capturado en .main-content sin efecto.
-
-   Solución: separar tabs del área scrolleable.
-     - .cms-content-col  →  columna flex que reemplaza .main-content en el flex row
-                             de .app-layout; contiene las tabs arriba + el scroll abajo.
-     - .cms-panels-scroll → el único área que scrollea; las tabs quedan FUERA de él.
-     - La cadena de altura se aota via :has() solo en páginas con .cms-content-col.
-
-   Con esta estructura las tabs están fuera del scroll container → no necesitan
-   position:sticky; se "quedan fijas" porque el scroll pasa debajo de ellas.
-   ─────────────────────────────────────────────────────────────────────────────── */
-
-/* Cadena de altura acotada al viewport — solo en la página de CMS */
-:root:has(.cms-content-col) body {
-    height: 100dvh;
-    overflow: hidden;
-}
-:root:has(.cms-content-col) .app-layout {
-    height: 100%;
-    min-height: 0;
-    overflow: hidden;
-}
-
-/* Columna flex que reemplaza .main-content como hijo de .app-layout */
-.cms-content-col {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    min-height: 0;
-    background: var(--bg-page, #f8fafc);
-}
-
-/* Zona de paneles: la única que scrollea */
-.cms-panels-scroll {
-    flex: 1;
-    overflow-y: auto;
-    min-height: 0;
-    padding: 1.5rem 2.5rem 2.5rem;
-    background: var(--bg-page, #f8fafc);
-}
-@media (max-width: 900px) {
-    .cms-panels-scroll { padding: 1rem; }
-}
-
-/* ── Botones nav compactos (header) ── */
-.btn-nav-sm { font-size: 0.8rem; margin-left: 10px; padding: 4px 8px; }
-
-/* ── Logo bar del header ── */
-.logo-bar       { display: flex; align-items: center; gap: 16px; }
-.logo-link      { display: flex; align-items: center; text-decoration: none; }
-.divider-v      { width: 1px; height: 26px; background: #cbd5e1; margin: 0 4px; }
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `sidebar-right`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 7:34 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion-web.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L534-554)</summary>
-
-**Path:** `Unknown file`
-
-```
-    let lastRemitidosCMS = 0;
-    function refreshNotificacionesCMS() {
-        fetch('/laesh/admrc/api/notificaciones')
-            .then(res => res.json())
-            .then(data => {
-                if (data && data.success) {
-                    const count = data.emitidas || 0;
-                    const badge = document.getElementById('badge-notif-cms');
-
-                    if (badge) {
-                        badge.innerText = count;
-                        if (count > 0) {
-                            badge.classList.add('show');
-                            if (count > lastRemitidosCMS) {
-                                badge.classList.add('pulse');
-                                if (typeof playWhistle === 'function') {
-                                    playWhistle();
-                                }
-                                setTimeout(() => badge.classList.remove('pulse'), 3000);
-                            }
-                            document.title = `(${count}) Gestión Web - LAESH`;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion-web.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L549-574)</summary>
-
-**Path:** `Unknown file`
-
-```
-                                if (typeof playWhistle === 'function') {
-                                    playWhistle();
-                                }
-                                setTimeout(() => badge.classList.remove('pulse'), 3000);
-                            }
-                            document.title = `(${count}) Gestión Web - LAESH`;
-                        } else {
-                            badge.classList.remove('show');
-                            badge.classList.remove('pulse');
-                            document.title = "Gestión Web - LAESH";
-                        }
-                    }
-                    lastRemitidosCMS = count;
-                }
-            })
-            .catch(() => {});
-    }
-
-    // Inicializar y escuchar cambios de LocalStorage
-    refreshNotificacionesCMS();
-    setInterval(refreshNotificacionesCMS, 4000);
-    window.addEventListener('storage', refreshNotificacionesCMS);
-
-    // ── Drag-and-drop: Panel Orden de Secciones ───────────────────────────────
-    // Inicializa el reordenamiento HTML5 nativo en el panel configuracion-general.
-    // Solo se activa cuando el elemento #seccion-order-list existe en el DOM.
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion-web.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L524-539)</summary>
-
-**Path:** `Unknown file`
-
-```
-            // Insertar entre el label y el control
-            label.insertAdjacentElement('afterend', hint);
-        });
-    }
-
-    // Actualizar contadores al inicio y al cambiar de slide o ficha
-    setTimeout(refreshAllCharCounters, 100);
-    initCurrentValueLabels();
-
-    // Lógica reactiva para enterarse de notificaciones de recepción (labadmin)
-    let lastRemitidosCMS = 0;
-    function refreshNotificacionesCMS() {
-        fetch('/laesh/admrc/api/notificaciones')
-            .then(res => res.json())
-            .then(data => {
-                if (data && data.success) {
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `ws-client.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 7:34 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `sidebar-right`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 7:34 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `sidebar-rail.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file`</summary>
-
-**Path:** `Unknown file`
-
-```
-/**
- * sidebar-rail.js — LAESH Portal
- * Funcionalidades compartidas del sidebar colapsable en desktop (≥1025px):
- *
- *  1. syncPad  — mantiene .app-layout alineado bajo .portal-access-header fijo.
- *               (app.js hace lo mismo para medicos/labadmin; para gestion-web.html
- *               este script es el único que lo compensa.)
- *
- *  2. Rail toggle — botón #sidebar-rail-toggle que colapsa (65px) / expande (260px)
- *               el sidebar; persiste en localStorage['laesh_sidebar_expanded'].
- *               Al expandir, emite el evento 'laesh:sidebarExpand' para que el SFS
- *               de cada página sepa que debe cerrarse.
- *
- * Uso: <script src="/laesh-web-assets/js/sidebar-rail.js"></script>
- *       Incluir DESPUÉS de app.js (cuando aplique) y justo antes de </body>.
- *
- * API pública: window.laeshSidebarRail = { isExpanded, setExpanded }
- */
-(function () {
-    'use strict';
-
-    /* ── 1. syncPad ────────────────────────────────────────────────────────── */
-    /* Mide el portal-access-header y escribe paddingTop en .app-layout.
-       En medicos/labadmin app.js ya hace esto; la segunda llamada es inocua
-       (mismo valor). En gestion-web.html este bloque es el único que lo hace. */
-    var hdr = document.querySelector('.portal-access-header');
-    var lay = document.querySelector('.app-layout');
-
-    if (hdr && lay) {
-        function syncPad() {
-            if (window.innerWidth >= 1025) {
-                lay.style.paddingTop = hdr.getBoundingClientRect().height + 'px';
-            }
-            /* En tablet/móvil app.js ya gestiona el offset — no sobreescribir. */
-        }
-        requestAnimationFrame(syncPad);
-        window.addEventListener('resize', syncPad);
-    }
-
-    /* ── 2. Sidebar Rail toggle ────────────────────────────────────────────── */
-    var LS_KEY    = 'laesh_sidebar_expanded';
-    var sidebar   = document.querySelector('.app-layout > .sidebar');
-    var toggleBtn = document.getElementById('sidebar-rail-toggle');
-
-    /* Si la página no tiene rail (sin botón o sin sidebar) → salir sin error */
-    if (!sidebar || !toggleBtn) return;
-
-    var SVG_RIGHT = '<polyline points="9 18 15 12 9 6"/>';  /* › expandir  */
-    var SVG_LEFT  = '<polyline points="15 18 9 12 15 6"/>'; /* ‹ colapsar  */
-    var SVG_WRAP  = 'width="14" height="14" viewBox="0 0 24 24" fill="none" '
-                  + 'stroke="currentColor" stroke-width="2.5" '
-                  + 'stroke-linecap="round" stroke-linejoin="round"';
-
-    function isExpanded() {
-        return sidebar.classList.contains('sidebar-expanded');
-    }
-
-    function setExpanded(exp) {
-        if (exp) {
-            sidebar.classList.add('sidebar-expanded');
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `sidebar-rail.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L60-132)</summary>
-
-**Path:** `Unknown file`
-
-```
-            toggleBtn.innerHTML = '<svg ' + SVG_WRAP + '>' + SVG_LEFT + '</svg>';
-            try { sessionStorage.setItem(LS_KEY, '1'); } catch(e){}
-            /* Notificar a los SFS inline de cada página para que se cierren */
-            document.dispatchEvent(new CustomEvent('laesh:sidebarExpand'));
-        } else {
-            sidebar.classList.remove('sidebar-expanded');
-            toggleBtn.innerHTML = '<svg ' + SVG_WRAP + '>' + SVG_RIGHT + '</svg>';
-            try { sessionStorage.setItem(LS_KEY, '0'); } catch(e){}
-        }
-    }
-
-    /* Restaurar preferencia guardada (colapsado por defecto si no hay registro) */
-    var savedLeft = '0';
-    try { savedLeft = sessionStorage.getItem(LS_KEY); } catch(e){}
-    setExpanded(savedLeft === '1');
-
-    toggleBtn.addEventListener('click', function (e) {
-        e.stopPropagation();
-        setExpanded(!isExpanded());
-    });
-
-    /* ── 3. Sidebar Right Rail toggle ────────────────────────────────────────── */
-    var LS_KEY_RIGHT   = 'laesh_sidebar_right_expanded';
-    var sidebarRight   = document.getElementById('sidebar-right');
-    var toggleRightBtn = document.getElementById('sidebar-right-toggle');
-
-    if (sidebarRight && toggleRightBtn) {
-        var SVG_RIGHT_ARR = '<polyline points="9 18 15 12 9 6"/>';  /* › colapsar  */
-        var SVG_LEFT_ARR  = '<polyline points="15 18 9 12 15 6"/>'; /* ‹ expandir  */
-        var SVG_WRAP_ARR  = 'width="14" height="14" viewBox="0 0 24 24" fill="none" '
-                          + 'stroke="currentColor" stroke-width="2.5" '
-                          + 'stroke-linecap="round" stroke-linejoin="round"';
-
-        function isRightExpanded() {
-            return sidebarRight.classList.contains('sidebar-right-expanded');
-        }
-
-        function setRightExpanded(exp) {
-            var content = sidebarRight.querySelector('.sidebar-right-content');
-            if (exp) {
-                sidebarRight.classList.add('sidebar-right-expanded');
-                if (content) content.style.display = 'block';
-                toggleRightBtn.innerHTML = '<svg ' + SVG_WRAP_ARR + '>' + SVG_RIGHT_ARR + '</svg>';
-                try { sessionStorage.setItem(LS_KEY_RIGHT, '1'); } catch(e){}
-            } else {
-                sidebarRight.classList.remove('sidebar-right-expanded');
-                if (content) content.style.display = 'none';
-                toggleRightBtn.innerHTML = '<svg ' + SVG_WRAP_ARR + '>' + SVG_LEFT_ARR + '</svg>';
-                try { sessionStorage.setItem(LS_KEY_RIGHT, '0'); } catch(e){}
-            }
-        }
-
-        // Restore preference (collapsed by default to preserve workspace width)
-        var savedRight = '0';
-        try { savedRight = sessionStorage.getItem(LS_KEY_RIGHT); } catch(e){}
-        setRightExpanded(savedRight === '1');
-
-        toggleRightBtn.addEventListener('click', function (e) {
-            e.stopPropagation();
-            setRightExpanded(!isRightExpanded());
-        });
-    }
-
-    /* Exponer API para que el SFS inline de cada página consulte el estado */
-    window.laeshSidebarRail = { 
-        isExpanded: isExpanded, 
-        setExpanded: setExpanded,
-        isRightExpanded: typeof isRightExpanded === 'function' ? isRightExpanded : null,
-        setRightExpanded: typeof setRightExpanded === 'function' ? setRightExpanded : null
-    };
-
-})();
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `notificaciones`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 7:34 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion-web.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L533-572)</summary>
-
-**Path:** `Unknown file`
-
-```
-    // Lógica reactiva para enterarse de notificaciones de recepción (labadmin)
-    let lastRemitidosCMS = 0;
-    function refreshNotificacionesCMS() {
-        fetch('/laesh/admrc/api/notificaciones')
-            .then(res => res.json())
-            .then(data => {
-                if (data && data.success) {
-                    const count = data.emitidas || 0;
-                    const badge = document.getElementById('badge-notif-cms');
-
-                    if (badge) {
-                        badge.innerText = count;
-                        if (count > 0) {
-                            badge.classList.add('show');
-                            if (count > lastRemitidosCMS) {
-                                badge.classList.add('pulse');
-                                if (typeof playWhistle === 'function') {
-                                    playWhistle();
-                                }
-                                setTimeout(() => badge.classList.remove('pulse'), 3000);
-                            }
-                            document.title = `(${count}) Gestión Web - LAESH`;
-                        } else {
-                            badge.classList.remove('show');
-                            badge.classList.remove('pulse');
-                            document.title = "Gestión Web - LAESH";
-                        }
-                    }
-                    lastRemitidosCMS = count;
-                }
-            })
-            .catch(() => {});
-    }
-
-    // Inicializar y escuchar cambios de LocalStorage
-    refreshNotificacionesCMS();
-    setInterval(refreshNotificacionesCMS, 4000);
-    window.addEventListener('storage', refreshNotificacionesCMS);
-
-    // ── Drag-and-drop: Panel Orden de Secciones ───────────────────────────────
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `badge-notif-cms`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 7:34 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `app.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L589-614)</summary>
-
-**Path:** `Unknown file`
-
-```
-                if (targetNotif) {
-                    targetNotif.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-                setTimeout(function() { isScrolling = false; }, 400);
-            }
-
-            bellMob.addEventListener('click', scrollToNotif);
-            bellMob.addEventListener('touchend', scrollToNotif);
-
-            /* Sync notification badge count */
-            var existingBadge = document.getElementById('badge-resultados') || document.getElementById('badge-recepcion') || document.getElementById('badge-notif-cms');
-            var mobBadge = document.getElementById('badge-notif-mob');
-            if (existingBadge && mobBadge) {
-                mobBadge.textContent = existingBadge.textContent;
-                if (window.MutationObserver) {
-                    var observer = new MutationObserver(function() {
-                        mobBadge.textContent = existingBadge.textContent;
-                    });
-                    observer.observe(existingBadge, { childList: true, characterData: true, subtree: true });
-                }
-            }
-        }
-
-        updateConnectionStatus();
-    }
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `app.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L549-588)</summary>
-
-**Path:** `Unknown file`
-
-```
-            connDiv.className = 'connection-status';
-            connDiv.id = 'conn-status-desktop';
-            connDiv.innerHTML = '<span class="status-dot"></span>';
-            headerRight.insertBefore(connDiv, userBadge);
-        }
-
-        var initialsMob = document.querySelector('.portal-initials-mob');
-        var header = document.querySelector('.portal-access-header');
-        if (initialsMob && header && !document.getElementById('conn-status-mob')) {
-            var connDivMob = document.createElement('div');
-            connDivMob.className = 'connection-status-mob';
-            connDivMob.id = 'conn-status-mob';
-            connDivMob.innerHTML = '<span class="status-dot"></span>';
-            header.insertBefore(connDivMob, initialsMob);
-        }
-
-        /* Mobile Notification Bell Icon next to online status dot */
-        if (initialsMob && header && !document.getElementById('bell-wrap-mob')) {
-            var bellMob = document.createElement('div');
-            bellMob.className = 'bell-wrap-mob';
-            bellMob.id = 'bell-wrap-mob';
-            bellMob.title = 'Ver Notificaciones';
-            bellMob.setAttribute('role', 'button');
-            bellMob.setAttribute('tabindex', '0');
-            bellMob.setAttribute('aria-label', 'Ver Notificaciones');
-            bellMob.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span class="bell-badge" id="badge-notif-mob">0</span>';
-
-            var connMob = document.getElementById('conn-status-mob');
-            if (connMob) {
-                header.insertBefore(bellMob, connMob);
-            } else {
-                header.insertBefore(bellMob, initialsMob);
-            }
-
-            var isScrolling = false;
-            function scrollToNotif(e) {
-                if (isScrolling) return;
-                isScrolling = true;
-                e.preventDefault();
-                var targetNotif = document.getElementById('sidebar-right') || document.querySelector('.sidebar-right');
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
+- **Model:** Gemini 3.8 Flash (High)
 </details>
 
 ---
@@ -19149,27 +13879,111 @@ if ($logTab === 'syslog') {
  */
 
 // Helper: escape HTML seguro (alias de htmlspecialchars)
-function h(string $v): string {
-    return htmlspecialchars($v, ENT_QUOTES, 'UTF-8');
-}
-
-// Helper: recuperar valor de $contenidos con fallback
-function cms(array $c, string $sec, ?string $sub, string $clave, string $default = ''): string {
-    $val = $c[$sec][$sub ?? ''][$clave] ?? '';
-    return htmlspecialchars($val !== '' ? $val : $default, ENT_QUOTES, 'UTF-8');
-}
-
-// Helper: recuperar valor RAW de $contenidos para editores RTE (desescapa entidades codificadas para evitar doble escape en CKEditor)
-function cmsRaw(array $c, string $sec, ?string $sub, string $clave, string $default = ''): string {
-    $val = $c[$sec][$sub ?? ''][$clave] ?? '';
-    $raw = $val !== '' ? $val : $default;
-    while (str_contains($raw, '&lt;') && str_contains($raw, '&gt;')) {
-        $raw = htmlspecialchars_decode($raw, ENT_QUOTES);
-    }
-    return $raw;
-}
-
 ```
+
+</details>
+
+---
+
+## User Request
+
+la sugerencia/restricción quedo en cms :
+"Codec: WebP únicamente  ·  Quality: 85  ·  Effort: 6  ·  Dimensiones: 1284 px (máx) × 902 px (máx)  ·  Alto: proporcional (auto)  ·  Orientación Horizontal  ·  Peso: Máximo 150 KB, Óptimo 60 KB". signfica que no hay limite inferior para alto y ancho ?
+
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `gestion_web.php`
+**Language:** php
+
+**Open Files:**
+- `gestion_web.php`
+- `cms-upload.js`
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The provided constraints specify *maximum* dimensions for width and height (1284px and 902px respectively). The "proportional (auto)" height setting, in conjunction with the maximum width constraint, implies the height will be automatically calculated to maintain aspect ratio, but only up to the maximum height limit. Because only the maximum dimensions are given, there are no *explicit* minimum dimensions defined.
+
+
+Investigating the handling of image uploads, specifically "ubicacion-croquis," revealed the absence of minimum width/height constraints, despite the presence of maximum dimensions. This could lead to poor visual quality if the uploaded image is too small. Considering usability, it is necessary to determine if adding minimum dimension validation is warranted.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.764813191s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+## User Request
+
+similar alo realizado para imagen croquis  ,, realiza el mism analisis para todas las imagenes en /home/carlos/GitHub/caelitandem_home/portafolio-dev-2026/blocklabgd/v1.2/insumos-laesh/22sep/promociones diarias/
+donde las que se llamen de lunes a viernes van en la seccion:    y las que se llamne: galardonxx,diplomaxx, van en la seccion de  Calidad e Instalaciones
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `gestion_web.php`
+**Language:** php
+
+**Open Files:**
+- `cms-upload.js`
+- `gestion_web.php`
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Initial hypothesis: This image analysis mirrors a prior task involving detailed examination. The objective centers on rigorous image categorization within a specified directory. The approach requires identifying images based on naming conventions to direct them to appropriate sections.
+
+
+
+
+### Actions
+
+**Tool:** `list_dir`
+**Path:** `/home/carlos/GitHub/caelitandem_home/portafolio-dev-2026/blocklabgd/v1.2/insumos-laesh/22sep/promociones diarias`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.225266188s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>Directory: `promociones%20diarias` (11 items)</summary>
+
+**Path:** `home/carlos/GitHub/caelitandem_home/portafolio-dev-2026/blocklabgd/v1.2/insumos-laesh/22sep/promociones%20diarias`
+
+| Name | Type | Size |
+|------|------|------|
+| `diploma b.jpg` | File | 190532 bytes |
+| `diploma.jpg` | File | 300262 bytes |
+| `domingo.jpg` | File | 173550 bytes |
+| `galardon b.jpg` | File | 148663 bytes |
+| `galardon.jpg` | File | 210931 bytes |
+| `jueves.jpg` | File | 180243 bytes |
+| `lunes.jpg` | File | 158890 bytes |
+| `martes.jpg` | File | 184253 bytes |
+| `miercoles.jpg` | File | 180797 bytes |
+| `sabado.jpg` | File | 145554 bytes |
+| `viernes.jpg` | File | 155549 bytes |
 
 </details>
 
@@ -19179,183 +13993,42 @@ function cmsRaw(array $c, string $sec, ?string $sub, string $clave, string $defa
 
 ### Actions
 
-**Tool:** `view_file`
-**File:** `gestion_web.php`
+**Tool:** `run_command`
 
 <details>
 <summary>Metadata</summary>
 
-- **Model:** Gemini 3.8 Flash (Low)
+- **Model:** Gemini 3.8 Flash (High)
 </details>
 
 ---
 
-<details>
-<summary>File: `Unknown file` (L189-249)</summary>
+### Terminal Command Execution
 
-**Path:** `Unknown file`
-
-```
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-            Sistema & Logs
-        </a>
-
-        <!-- Pub-meta y botón Publicar movidos al header nav (2026-08-27) -->
-
-        <div class="sidebar-mobile-only">
-            <div class="user-badge--sm">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--primary-green-dark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                <span>Admin: <strong class="strong-primary"><?= htmlspecialchars($nombreAdmin, ENT_QUOTES, 'UTF-8') ?></strong></span>
-            </div>
-            <a href="/laesh/login/logout.php" class="btn-logout--mobile">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-                Cerrar Sesión
-            </a>
-        </div>
-    </aside>
-
-    <!-- ====== MAIN + TABS (columna flex) ====== -->
-    <!--
-        Estructura: .cms-content-col (column flex) agrupa las tabs fijas arriba
-        y el área de paneles scrolleable abajo. Así las tabs NO quedan dentro del
-        scroll container y se "pegan" visualmente sin necesitar position:sticky.
-        Ver: gestion-web.css → .cms-content-col / .cms-panels-scroll
-    -->
-    <div class="cms-content-col">
-        <div class="cms-tabs" role="tablist" aria-label="Secciones del sitio web">
-            <div class="cms-tab active" id="tab-hero" role="tab" aria-selected="true" aria-controls="panel-hero" tabindex="0" data-section="hero">1. Banner Principal</div>
-            <div class="cms-tab" id="tab-quienes-somos" role="tab" aria-selected="false" aria-controls="panel-quienes-somos" tabindex="-1" data-section="quienes-somos">2. Quiénes somos</div>
-            <div class="cms-tab" id="tab-especialidades" role="tab" aria-selected="false" aria-controls="panel-especialidades" tabindex="-1" data-section="especialidades">3. Estudios</div>
-            <div class="cms-tab" id="tab-promociones" role="tab" aria-selected="false" aria-controls="panel-promociones" tabindex="-1" data-section="promociones">4. Promociones Vigentes</div>
-            <div class="cms-tab" id="tab-calidad" role="tab" aria-selected="false" aria-controls="panel-calidad" tabindex="-1" data-section="calidad">5. Calidad e Instalaciones</div>
-            <div class="cms-tab" id="tab-ubicacion" role="tab" aria-selected="false" aria-controls="panel-ubicacion" tabindex="-1" data-section="ubicacion">6. Ubicación y Contacto</div>
-            <div class="cms-tab" id="tab-footer" role="tab" aria-selected="false" aria-controls="panel-footer" tabindex="-1" data-section="footer">7. Pie de Página</div>
-            <div class="cms-tab" id="tab-aviso-privacidad" role="tab" aria-selected="false" aria-controls="panel-aviso-privacidad" tabindex="-1" data-section="aviso-privacidad">8. Aviso de Privacidad</div>
-            <div class="cms-tab" id="tab-video-promo" role="tab" aria-selected="false" aria-controls="panel-video-promo" tabindex="-1" data-section="video-promo">9. Video promo</div>
-            <div class="cms-tab" id="tab-configuracion-general" role="tab" aria-selected="false" aria-controls="panel-configuracion-general" tabindex="-1" data-section="configuracion-general">10. Ordenamiento</div>
-            <div class="cms-tab" id="tab-seo" role="tab" aria-selected="false" aria-controls="panel-seo" tabindex="-1" data-section="seo">11. Metadatos</div>
-            <!-- Separador visual (botón Preview movido al header nav) -->
-            <div class="cms-tabs-preview-sep" aria-hidden="true"></div>
-        </div><!-- /.cms-tabs -->
-
-        <!-- Área de paneles: esta zona scrollea; .cms-tabs queda fija arriba -->
-        <main class="cms-panels-scroll main-content--pad" id="main-content">
-
-        <!-- ================================================================
-             PANEL 1: HERO / BANNER PRINCIPAL
-             Sección: hero | Fuente HTML: #inicio
-             ================================================================ -->
-        <div id="panel-hero" class="cms-panel active" role="tabpanel" aria-labelledby="tab-hero" tabindex="0" data-section="hero">
-            <div class="cms-panel-header">
-                <h3 class="cms-h3">Edición de Banners del Carrusel Principal (#inicio)</h3>
-            </div>
-
-            <!-- ══ INDICACIÓN RÁPIDA DE IMÁGENES ══ -->
-            <p class="cms-img-hint" role="note">
-                <strong>Indicaciones de Carga de Imágenes:</strong>
-                Sobreescritura: La imagen previa se sobreescribe automáticamente al cargar una nueva.
-            </p>
-
-            <hr class="cms-section-sep">
-```
-
-</details>
+**Status:** Completed
+**Created:** 25 Sept 2026, 3:22 pm
 
 ---
 
 ## Agent Response
 
-### Actions
+### Thinking
 
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1754-1808)</summary>
-
-**Path:** `Unknown file`
-
-```
-        </div><!-- /panel-configuracion-general -->
-
-    </main><!-- /.cms-panels-scroll -->
-    </div><!-- /.cms-content-col -->
-
-    <!-- Región Lateral Derecha: Notificaciones -->
-    <aside class="sidebar-right" id="sidebar-right">
-        <div class="sidebar-right-toggle-row">
-            <div class="bell-wrap" id="bell-wrap-notif" title="Notificaciones">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-                <span class="bell-badge" id="badge-notif-cms" aria-label="Notificaciones pendientes">0</span>
-            </div>
-            <button type="button" class="sidebar-right-toggle" id="sidebar-right-toggle" title="Expandir / Colapsar">
-                <svg id="right-rail-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-            </button>
-        </div>
-        <div class="sidebar-right-content">
-            <div class="sidebar-right-header border-bottom pb-2 mb-3">
-                <h3 class="txt-main fw-600 font-mosquito txt-pgd mb-0 fs-sm">Notificaciones</h3>
-            </div>
-            <div class="sidebar-right-body" id="notif-list">
-                <p class="txt-muted txt-center-sm txt-muted-xs mt-4">No hay nuevas notificaciones</p>
-            </div>
-        </div>
-    </aside>
-</div>
-
-<!-- Toast de confirmación -->
-<div class="cms-toast" id="toast">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-    ¡Cambios publicados exitosamente en <strong>laesh.mx</strong>!
-</div>
-
-<!-- Configuración dinámica desde BD -->
-<meta name="cms-upload-url" content="<?= h($config['cms_upload_endpoint'] ?? '/laesh/adrc/cms/upload') ?>">
-
-<!-- CMS Upload — manejo de input[type=file][data-upload-slot] vía fetch multipart -->
-<script src="/laesh-web-assets-uipv1a/js/cms-upload.js?v=<?= time() ?>" defer></script>
-
-<script src="/laesh-web-assets-uipv1a/js/htmx.min.js"></script><!-- GAP-ARQ-01: requerido por hx-post /cms/save -->
-<script src="/laesh-web-assets-uipv1a/js/app.js?v=<?= time() ?>" defer></script>
-<script src="/laesh-web-assets-uipv1a/js/ws-client.js?v=<?= time() ?>" defer></script>
-<script src="/laesh-web-assets-uipv1a/js/portal-footer.js?v=<?= time() ?>" defer></script>
-<script src="/laesh-web-assets-uipv1a/js/sidebar-rail.js?v=<?= time() ?>" defer></script>
-
-<!-- CKEditor 5 — servido localmente (licencia GPL, sin CDN externo) -->
-<script src="/laesh-web-assets-uipv1a/js/ckeditor5.umd.js?v=<?= time() ?>"></script>
-<script src="/laesh-web-assets-uipv1a/js/ckeditor-init.js?v=<?= time() ?>" defer></script>
-<script src="/laesh-web-assets-uipv1a/js/cms-dirty-tracker.js?v=<?= time() ?>" defer></script>
+Analyzing image files associated with daily promotions, noting consistent aspect ratios across all images. Examining file sizes to determine if any significant differences exist.
 
 
-<script src="/laesh-web-assets-uipv1a/js/gestion-web.js?v=<?= time() ?>" defer></script>
-</body>
-</html>
 
-```
-
-</details>
-
----
-
-## Agent Response
 
 ### Actions
 
 **Tool:** `view_file`
-**File:** `sistema.php`
+**File:** `promociones.php`
 
 <details>
 <summary>Metadata</summary>
 
-- **Model:** Gemini 3.8 Flash (Low)
+- **Thinking Duration:** 0.070699834s
+- **Model:** Gemini 3.8 Flash (High)
 </details>
 
 ---
@@ -19368,126 +14041,495 @@ function cmsRaw(array $c, string $sec, ?string $sub, string $clave, string $defa
 ```
 <?php
 /**
- * Panel Unificado de Administración del Sistema & Configuraciones Globales
- * URL:  /laesh/adrc/sistema
- * Acceso restringido: requiere permiso 'gestionar_cms' (rol ADMIN).
+ * sections/promociones.php — Partial: Promociones diarias
+ * Incluido desde website/index.php; hereda su scope completo.
+ * Variables esperadas: $promoH2, $promoSub, $promos, $waBase, $waTextoAg, $waSvg
  *
- * Módulos integrados:
- *   1. Visor de Logs E2E (sys_logs, fallback_log, app.log, Nginx, PHP-FPM, Swoole)
- *   2. Configuraciones Comunes (Singletons institucionales compartidos)
- *   3. Configuraciones Proyecto 1: LAESH Sitio Web & CMS (exclusivas Web)
- *   4. Configuraciones Proyecto 2: LAESH Bloc Digital (exclusivas Bloc Digital)
- *   5. Todas las Configuraciones DB (tabla configuraciones completa)
+ * Mejoras 2026-09-08:
+ *   · Badge "HOY" — derecha, violeta, detectado por dia() ISO-8601
+ *   · Precios en el mismo renglón que badges (derecha)
+ *   · "Ahorras $X" bajo precios cuando hay descuento
+ *   · Badge de muestra requerida (💉 / ☕ / 🔬 según texto)
+ *   · Descripción expandible si es larga (>220 chars)
+ *   · Overlay de imagen más visible (opacidad reducida)
+ *   · Mensaje WA incluye precio de oferta
  */
-
-use Common\Logger;
-
-Flight::rbac()->requirePermission('gestionar_cms', '/laesh/login/login.php?portal=admin');
-
-$db = Flight::db();
-
-// ── Procesar actualización de configuraciones (POST) ───────────────────────
-$flashMsg = null;
-$flashErr = false;
-
-// ── POST: Guardar log-levels en caliente (tab infra) ───────────────────────
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'save_log_levels') {
-    if (!\Common\CsrfGuard::isValid(rotate: false)) {
-        $flashMsg = 'Token CSRF inválido. Por favor recargue la página.';
-        $flashErr = true;
-    } else {
-        // Valores permitidos por parámetro (enum estricto)
-        $allowedVals = [
-            'nginx_error_level'           => ['debug','info','notice','warn','error','crit','alert','emerg'],
-            'mariadb_slow_query_log'      => ['ON','OFF'],
-            'mariadb_slow_query_time'     => null,   // numérico validado por separado
-            'mariadb_log_error_verbosity' => ['1','2','3'],
-            'mariadb_general_log'         => ['ON','OFF'],
-            'php_error_reporting'         => ['production','development','off'],
-            'app_log_level'               => ['DEBUG','INFO','WARN','ERROR','CRITICAL','OFF'],
-        ];
-        $logLevelsConf = '/opt/laesh/logs/log-levels.conf';
-        $errors = [];
-        $newVals = [];
-        foreach ($allowedVals as $param => $validSet) {
-            $raw = trim($_POST['ll'][$param] ?? '');
-            if ($validSet === null) {
-                // Numérico: mariadb_slow_query_time (0–300)
-                if (!is_numeric($raw) || (float)$raw < 0 || (float)$raw > 300) {
-                    $errors[] = "$param debe ser un número entre 0 y 300";
-                } else {
-                    $newVals[$param] = $raw;
-                }
-            } elseif (!in_array($raw, $validSet, true)) {
-                $errors[] = "$param: valor inválido '$raw'. Permitidos: " . implode(', ', $validSet);
-            } else {
-                $newVals[$param] = $raw;
-            }
-        }
-        if ($errors) {
-            $flashMsg = 'Errores de validación: ' . implode(' · ', $errors);
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `sistema.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L619-653)</summary>
-
-**Path:** `Unknown file`
-
-```
-                                <td>
-                                    <span class="log-badge badge-debug"><?= htmlspecialchars($item['tipo'] ?? 'texto') ?></span>
-                                </td>
-                            </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                </div>
-            </details>
-            <?php endforeach; ?>
-        </div>
-    </section>
-    <?php endif; ?>
-    <?php endif; ?>
-
-    <header class="portal-header" style="margin-top: 3rem; padding: 1rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border);">
-        <div class="portal-header__brand" style="display: flex; align-items: center; gap: 10px;">
-            <span class="portal-header__icon" style="font-size: 1.5rem;">⚙️</span>
-            <div>
-                <div style="font-weight: 700; color: var(--primary);">Administración del Sistema</div>
-                <div class="txt-muted fs-sm">Plataforma Unificada LAESH</div>
+?>
+        <!-- ══════════════════════════════════════════ PROMOCIONES ══ -->
+        <section id="promociones" class="sec-promo scroll-sm-top">
+            <div class="section-header animate-on-scroll">
+                <h2><?= h($promoH2) ?></h2>
+                <p><?= h($promoSub) ?></p>
             </div>
-        </div>
-        <nav class="portal-header__nav" style="display: flex; gap: 10px; flex-wrap: wrap;">
-            <a href="/laesh/adrc/" class="btn btn-secondary">← CMS Admin</a>
-            <a href="/laesh/rc/" class="btn btn-secondary">Tablero Recepción</a>
-            <a href="/laesh/login/logout.php" class="btn btn-secondary">Cerrar Sesión</a>
-        </nav>
-    </header>
+            <div class="promo-catalog-wrap animate-on-scroll">
+                <div class="catalog-grid">
+                <?php
+                // Día actual para badge "HOY" (ISO-8601: 1=lunes … 7=domingo)
+                $todayMap = [1=>'lunes',2=>'martes',3=>'miercoles',4=>'jueves',5=>'viernes',6=>'sabado',7=>'domingo'];
+                $todayKey = $todayMap[(int)date('N')] ?? '';
 
-</main>
+                /**
+                 * Normaliza un nombre de día eliminando acentos y espacios para comparación HOY.
+                 * Permite que "Miércoles" y "Sábado" (con acento) coincidan con las claves del mapa.
+                 */
+                function _normalizeDay(string $s): string {
+                    return strtr(strtolower(trim($s)),
+                        ['á'=>'a','é'=>'e','í'=>'i','ó'=>'o','ú'=>'u','ü'=>'u','ñ'=>'n']);
+                }
 
-</body>
-</html>
+                foreach ($promos as $p):
+                    // dia_semana contiene el Título / Etiqueta Superior de la Ficha
+                    $diaRaw    = $p['dia_semana'] ?? '';
+                    $diaKey    = _normalizeDay(strip_tags($diaRaw));
+                    $diaNombre = !empty($diaRaw) ? trim($diaRaw) : 'Promoción';
+                    $isHoy     = ($diaKey === $todayKey);
+                    $imgUrl    = $p['imagen_fondo'] ?? '';
 
+                    $diaPlain   = strip_tags($diaNombre);
+                    $waTextFull = $waTextoAg
+                        ? str_replace('{estudio}', $diaPlain, $waTextoAg)
+                        : '';
+                    $waCardUrl  = $waBase . ($waTextFull ? '?text=' . rawurlencode($waTextFull) : '');
+                ?>
+                    <div class="catalog-card <?= $isHoy ? 'catalog-card--hoy' : '' ?>"
+                         data-promo-img="<?= h($imgUrl) ?>"
+                         data-promo-title="<?= h($diaPlain) ?>"
+                         data-promo-title-html="<?= h($diaNombre) ?>"
+                         onclick="if(!event.target.closest('a')){ if(typeof window.openPromoModal==='function') window.openPromoModal('<?= h($imgUrl) ?>', this.getAttribute('data-promo-title-html')); }">
+
+                        <!-- Día / Título + badge HOY a la derecha -->
+                        <div class="catalog-card-day-row">
+                            <div class="catalog-card-day"><?= $diaNombre ?></div>
+                            <?php if ($isHoy): ?>
+                                <span class="catalog-badge badge-hoy">● HOY</span>
+                            <?php endif; ?>
+                        </div>
+
+                        <!-- Imagen rectangular completa horizontal con botón Agendar superpuesto transparente -->
+                        <?php if (!empty($imgUrl)): ?>
+                            <div class="catalog-card-img-wrap">
+                                <img src="<?= h($imgUrl) ?>" alt="<?= h($diaPlain) ?>" class="catalog-card-img" loading="lazy" decoding="async" width="400" height="200">
+                                <a href="<?= h($waCardUrl) ?>" target="_blank" rel="noopener noreferrer" class="catalog-card-btn-overlay" onclick="event.stopPropagation();">
+                                    Agendar <?= $waSvg ?>
+                                </a>
+                            </div>
+                        <?php else: ?>
+                            <div class="catalog-card-bottom-row" style="margin-top: auto;">
+                                <a href="<?= h($waCardUrl) ?>" target="_blank" rel="noopener noreferrer" class="catalog-card-btn-compact">
+                                    Agendar <?= $waSvg ?>
+                                </a>
+                            </div>
+                        <?php endif; ?>
+
+                    </div>
+                <?php endforeach; ?>
+                </div>
+            </div>
+        </section>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Analyzing code block, specifically lines 68-75 within `sections/promociones.php`, which appears to handle image display with an optional booking button overlay.  Hypothesis: This section likely renders a catalog card image if `imgUrl` is populated. The presence of the `loading="lazy"` attribute suggests optimization for image loading.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `catalog-card-img`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.107297928s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 3:23 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1579-1629)</summary>
+
+**Path:** `Unknown file`
+
+```
+    max-width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.catalog-card.has-bg-overlay {
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+/* Contenedores de imagen de promoción horizontal — ocupa el 100% del espacio libre vertical restante */
+.catalog-card-img-wrap {
+    width: 100%;
+    flex: 1 1 auto;
+    min-height: 160px;
+    margin: 0;
+    border-radius: 0;
+    overflow: hidden;
+    background-color: #f1f5f9;
+    position: relative;
+}
+
+.catalog-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    border: none;
+}
+
+/* Botón Agendar superpuesto semitransparente (Glassmorphism) sobre la imagen */
+.catalog-card-btn-overlay {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    background: rgba(15, 23, 42, 0.35);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    color: #ffffff;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    transition: all 0.25s ease;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `.catalog-grid`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 3:23 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1529-1574)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+/* ==========================================================================
+   SECCIÓN PROMOCIONES / CATÁLOGO (Estilo Fiel uipv2)
+   ========================================================================== */
+.promo-catalog-wrap {
+    max-width: 1380px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.catalog-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr); /* minmax(0,1fr) evita que el track crezca por min-content de hijos */
+    gap: 1.5rem;
+    margin-top: 2rem;
+    align-items: stretch;
+}
+
+/* R-MOB: 2 cols desde 480px (antes solo desde 640px) */
+@media (min-width: 480px) {
+    .catalog-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1024px) {
+    .catalog-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+/* PR-MOB-02 (actualizado): solo forzar 1 col en móvil muy estrecho (≤479px);
+   480-767px ahora muestra 2 cols, ganando area util en landscape/tablet */
+@media (max-width: 479px) {
+    .catalog-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ── Refined Minimal Rectangular Promo Cards ── */
+.catalog-card {
+    background-color: var(--bg-surface);
+    border-radius: 0.625rem; /* Rectangular con esquinas suaves */
+    border: 1px solid #cbd5e1;
+    padding: 0;   /* Padding cero para permitir que la imagen ocupe todo el espacio */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `modal-img-promo`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 3:23 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Investigating the dimensions required for the `promo-` slots within the CMS. Found a dimension check in the `index.php` file, specifically for slots starting with `promo-`. The dimensions are constrained to a width of 1200px and a height between 600-675px.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.124385969s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L989-1019)</summary>
+
+**Path:** `Unknown file`
+
+```
+                               class="cms-img-url-input" data-no-limit>
+                        <?php $imgBasename2 = $galImgUrl2 ? basename($galImgUrl2) : basename($imgDef2); ?>
+                        <span id="lbl-img-calidad-gallery2" class="cms-img-filename-label"><?= h($imgBasename2) ?></span>
+                    </div>
+                    <div class="field-group">
+                        <label>Título</label>
+                        <input type="text" name="gallery2__titulo"
+                               value="<?= cms($contenidos, 'calidad', 'gallery2', 'titulo', 'Química Clínica') ?>">
+                    </div>
+                    <div class="field-group">
+                        <label>Descripción</label>
+                        <input type="text" name="gallery2__descripcion"
+                               value="<?= cms($contenidos, 'calidad', 'gallery2', 'descripcion', 'Determinación automatizada de metabolitos, perfil lipídico y enzimas específicas.') ?>">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tarjeta 3 -->
+            <?php
+            $galImgUrl3 = cms($contenidos, 'calidad', 'gallery3', 'imagen_url');
+            $galActivo3 = cms($contenidos, 'calidad', 'gallery3', 'activo', '1');
+            $isActivo3  = ($galActivo3 !== '0');
+            $imgDef3    = ''; // sin fallback — imagen debe venir de CMS
+            ?>
+            <div class="editor-card" style="border: 2px solid #d97706; background: #fafafa; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+                <div class="editor-card-header" style="background: linear-gradient(135deg, #d97706 0%, #b45309 100%); padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.2); display:flex; justify-content:space-between; align-items:center;">
+                    <div class="card-title" style="color: #ffffff; font-weight: 800; font-size: 0.95rem;">Tarjeta 3 — Microbiología y Cultivos</div>
+                    <div style="display:flex; align-items:center; gap:0.5rem;">
+                        <label for="chk-calidad-gallery3-activo" style="display:inline-flex; align-items:center; gap:0.45rem; cursor:pointer; margin:0; font-size:0.85rem; font-weight:700;">
+                            <input type="hidden" name="gallery3__activo" value="0">
+                            <input type="checkbox" id="chk-calidad-gallery3-activo" name="gallery3__activo" value="1" <?= $isActivo3 ? 'checked' : '' ?>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `promo-lunes`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 3:23 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `data-upload-slot="promo`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 3:24 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L789-829)</summary>
+
+**Path:** `Unknown file`
+
+```
+                                    <!-- Título / Etiqueta Superior -->
+                                    <div class="field-group mb-3">
+                                        <label>✍️ Título / Etiqueta Superior de la Ficha <small class="txt-muted">(✍️ Contenido y Estilos RTE Editables)</small></label>
+                                        <div id="ck-promo-day-<?= $pId ?>" class="ck5-mount"></div>
+                                        <textarea id="ck-promo-day-<?= $pId ?>-data" name="promo_dia_semana_<?= $pId ?>" class="ck5-hidden-data" rows="2"><?= h(trim($p['dia_semana'])) ?></textarea>
+                                    </div>
+
+                                    <!-- Imagen de Fondo -->
+                                    <div class="field-group mb-2">
+                                        <label>Imagen de Fondo</label>
+                                        <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px; font-size: 0.78rem;">
+                                            📐 <strong>Dimensiones:</strong> 1200 px de ancho × (Rango de alto: 600 a 675 px) &nbsp;·&nbsp;
+                                            <strong>Codec:</strong> WebP únicamente &nbsp;·&nbsp;
+                                            <strong>Peso:</strong> Máximo 150 KB, Óptimo 60 KB
+                                        </p>
+                                        <div class="image-upload-box">
+                                            <img id="prev-promo-<?= $pId ?>"
+                                                 src="<?= !empty($imgUrl) ? h($imgUrl) : 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="90" height="60" viewBox="0 0 90 60"><rect width="100%" height="100%" fill="%23f1f5f9"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%2394a3b8" font-size="10" font-family="sans-serif">Sin Imagen</text></svg>' ?>"
+                                                 alt="Promoción <?= h(trim(strip_tags($diaLabel))) ?>" class="img-preview-sm"
+                                                 onerror="this.hidden=true">
+                                            <label for="file-promo-<?= $pId ?>" class="btn btn-secondary btn-sm">
+                                                Cambiar Imagen
+                                            </label>
+                                            <input type="file" accept="image/webp"
+                                                   id="file-promo-<?= $pId ?>" class="d-none"
+                                                   data-upload-slot="promo-<?= $pId ?>"
+                                                   data-preview-id="prev-promo-<?= $pId ?>"
+                                                   data-target-input="input-img-promo-<?= $pId ?>">
+                                        </div>
+                                        <input type="url" id="input-img-promo-<?= $pId ?>"
+                                               name="promo_img_<?= $pId ?>"
+                                               value="<?= h($imgUrl) ?>"
+                                               placeholder="/laesh-web-assets-uipv1a/cms/promo-<?= h(strtolower(trim(strip_tags($p['dia_semana'])))) ?>.webp"
+                                               class="cms-img-url-input" data-no-limit>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                    </div>
+                </div>
 ```
 
 </details>
@@ -19499,46 +14541,53 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 ### Actions
 
 **Tool:** `view_file`
-**File:** `log_viewer.php`
+**File:** `calidad.php`
 
 <details>
 <summary>Metadata</summary>
 
-- **Model:** Gemini 3.8 Flash (Low)
+- **Model:** Gemini 3.8 Flash (High)
 </details>
 
 ---
 
 <details>
-<summary>File: `Unknown file` (L329-353)</summary>
+<summary>File: `Unknown file`</summary>
 
 **Path:** `Unknown file`
 
 ```
-        </table>
-        </div>
-
-        <?php else: ?>
-        <!-- ── ARCHIVO PLANO ── -->
-        <div class="log-file-wrap" id="log-file-output">
-            <?php if (empty($fileLines) || (count($fileLines) === 1 && str_starts_with($fileLines[0], '[Log no disponible'))): ?>
-            <p class="txt-muted p-3">
-                <?= htmlspecialchars($fileLines[0] ?? 'Archivo vacío o no disponible en este entorno.') ?>
-            </p>
-            <?php else: foreach ($fileLines as $line):
-                if (trim($line) === '') continue;
-                $cls = '';
-                if (stripos($line, '[ERROR]') !== false || stripos($line, '[FATAL]') !== false) $cls = 'log-line--error';
-                elseif (stripos($line, '[WARN]') !== false) $cls = 'log-line--warn';
-                elseif (stripos($line, '[INFO]') !== false) $cls = 'log-line--info';
-            ?>
-            <div class="log-line <?= $cls ?>"><?= htmlspecialchars($line) ?></div>
-            <?php endforeach; endif; ?>
-        </div>
-        <?php endif; ?>
-    </div><!-- /.log-panel -->
-</div><!-- /.log-viewer-container -->
-<script src="/laesh-web-assets-uipv1a/js/log-viewer.js?v=<?= time() ?>" defer></script>
+<?php
+/**
+ * sections/calidad.php — Partial: Calidad / Galería
+ * Incluido desde website/index.php; hereda su scope completo.
+ * Variables esperadas: $calH2, $calSub, $calidadCards
+ */
+?>
+        <!-- ══════════════════════════════════════════════ CALIDAD ══ -->
+        <section id="calidad" class="sec-pad-1-5 scroll-sm-top">
+            <div class="section-header animate-on-scroll">
+                <!-- h2 y subtitulo desde web_contenidos (calidad/seccion) -->
+                <h2><?= h($calH2) ?></h2>
+                <p><?= h($calSub) ?></p>
+            </div>
+            <div class="map-bar">
+                <div class="specialties-carousel-viewport animate-on-scroll">
+                    <div class="calidad-cards-grid">
+                        <?php foreach ($calidadCards as $qc): ?>
+                        <div class="carousel-card">
+                            <img src="<?= h($qc['img']) ?>" alt="<?= h($qc['alt']) ?>"
+                                 width="800" height="580" loading="lazy" decoding="async">
+                            <div class="carousel-card__body ck5-output">
+                                <h3><?= h($qc['titulo']) ?></h3>
+                                <?php if ($qc['desc']): ?><p><?= h($qc['desc']) ?></p><?php endif; ?>
+                            </div>
+                        </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </div>
+        </section>
 
 ```
 
@@ -19551,12 +14600,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 ### Actions
 
 **Tool:** `grep_search`
-**Query:** `ws-client`
+**Query:** `calidad-cards-grid`
 
 <details>
 <summary>Metadata</summary>
 
-- **Model:** Gemini 3.8 Flash (Low)
+- **Model:** Gemini 3.8 Flash (High)
 </details>
 
 ---
@@ -19564,7 +14613,3203 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 ### Local File Search
 
 **Status:** Completed
-**Created:** 25 Sept 2026, 7:35 am
+**Created:** 25 Sept 2026, 3:24 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1914-1954)</summary>
+
+**Path:** `Unknown file`
+
+```
+   SECCIÓN CALIDAD — 3 Fichas Estáticas (Estructura Fiel Especialidades .carousel-card)
+   ========================================================================== */
+.calidad-cards-grid {
+    display: flex;
+    flex-wrap: wrap; /* R-MOB: permite 2 col en tablet sin romper 3 col en desktop */
+    gap: 2rem;
+    padding: 1rem 0;
+    margin-top: 0;
+    margin-bottom: 2rem;
+    width: 100%;
+    align-items: stretch;
+    box-sizing: border-box;
+}
+
+.calidad-cards-grid .carousel-card {
+    flex: 0 0 calc((100% - 4rem) / 3);
+    width: calc((100% - 4rem) / 3);
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+    overflow: hidden;
+    margin-bottom: 2px;
+}
+
+.calidad-cards-grid .carousel-card img {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+    height: 275px !important;
+    aspect-ratio: unset !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 12px 12px 0 0 !important;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1954-2004)</summary>
+
+**Path:** `Unknown file`
+
+```
+    border-radius: 12px 12px 0 0 !important;
+    box-sizing: border-box !important;
+}
+
+@media (min-width: 1920px) {
+    .calidad-cards-grid .carousel-card {
+        flex: 0 0 calc((100% - 4rem) / 3);
+    }
+    .calidad-cards-grid .carousel-card img {
+        height: 285px !important;
+    }
+}
+
+/* R-MOB: tablet/paisaje → 2 columnas (481px–1024px) */
+@media (max-width: 1024px) {
+    .calidad-cards-grid {
+        gap: 1rem;
+    }
+    .calidad-cards-grid .carousel-card {
+        flex: 0 0 calc(50% - 0.5rem);
+        width: calc(50% - 0.5rem);
+    }
+    .calidad-cards-grid .carousel-card img {
+        height: 230px !important;
+        /* object-position top center: la base tiene center !important → cover crops center
+           → top de imágenes de calidad se pierde; top center ancla el sujeto visible */
+        object-position: top center !important;
+    }
+}
+
+/* R-MOB: móvil retrato estrecho → 1 columna (≤480px) */
+@media (max-width: 480px) {
+    .calidad-cards-grid .carousel-card {
+        flex: 0 0 100%;
+        width: 100%;
+    }
+    .calidad-cards-grid .carousel-card img {
+        height: 210px !important;
+        object-position: top center !important;
+    }
+}
+
+
+
+.text-center-block {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* ── §CAT-INFO: Botón "+" + Tooltip de detalles por estudio ──────────────── */
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Initial examination involves detailed visual checks and dimensional analysis across image groups. Starting with the first group, named "PROMOCIONES DIARIAS," the image files from `lunes.jpg` through `viernes.jpg` require review. The initial step is a basic structural review.
+
+
+Image dimensions are consistent across all seven files at 1024x687px, an aspect ratio close to 3:2. Analysis of the container structure reveals responsive design with three columns on desktop, scaling down to one column on mobile, with specific width constraints for each card size depending on the device. When clicked, the modal displays the image at its full resolution, up to 80vh, suggesting the images are optimized for high-resolution display within the constraints of the responsive design.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.176102633s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 3:25 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `lunes.jpg`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+This image appears to be an advertisement for a hematological laboratory offering prenatal health checkups. It details required blood samples, fasting duration, and same-day results, alongside a list of included medical tests. The call to action is to schedule an appointment.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `galardon.jpg`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.105865737s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `galardon b.jpg`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `diploma.jpg`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `diploma b.jpg`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Observed two image pairs, each with a square and a landscape variant. Suspect the website's "Calidad" section might handle image display differently based on these aspect ratios. Need to examine the HTML code within `sections/calidad.php` to understand how images are rendered.
+
+
+The HTML iterates through image data, rendering each image with `width="800"` and `height="580"`. CSS overrides, however, force a fixed height and `object-fit: cover`, cropping images. This suggests the display is independent of the original aspect ratio and the CMS slot's recommended size.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.165558576s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 3:26 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 3:26 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 3:26 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 3:26 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Analyzing image dimensions: `promo-2-20260913-36fd13bd.webp` is 16:9, while `promo-1-20260913-27600325.webp` has a 1.85:1 aspect ratio. Examining the newly provided image `lunes.jpg` with a resolution of 1024x687.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.139964125s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 3:27 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Promo images are within the CMS size limit. Examining the dimensions and aspect ratio, the existing CMS rules need comparison. The current image ratio is different from the accepted ratios. Considering a 1200px width, the implications of scaling are to be assessed.
+
+
+The current CMS validator will reject the existing promo images due to the strict width requirement. Adapting images to the required size would involve undesirable padding. Modifying the validation rules to accept the original dimensions, or a defined range with an acceptable aspect ratio, appears to be the most sensible solution to preserve image integrity.
+
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.728360999s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 3:27 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Image aspect ratios must be considered. Observed image dimensions deviate significantly from the expected CMS slot dimensions. Square images will be distorted to fit the required aspect ratio.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.088534006s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 3:27 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Investigating the design choices behind `galardon b.jpg` and `diploma b.jpg`, observing the differing aspect ratios and cropping between image sizes. Noted the extra black background in the larger square versions and tighter horizontal cropping in the 1024x863 versions.
+
+Checking the `calidad.php` section to understand if it relates to these image design variations.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.107419885s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L329-369)</summary>
+
+**Path:** `Unknown file`
+
+```
+        'texto' => $cHtml,
+    ];
+}
+
+// ── 3e. Calidad gallery — 3 tarjetas (sin fallback) ────────────────────────
+$_calDef = [
+    1 => ['Área de Hematología',      'Análisis de biometría hemática y células sanguíneas con rigor científico y alta precisión.'],
+    2 => ['Química Clínica',          'Determinación automatizada de metabolitos, perfil lipídico y enzimas específicas.'],
+    3 => ['Microbiología y Cultivos', 'Aislamiento, tinción de Gram y pruebas de susceptibilidad a antimicrobianos.'],
+];
+$calidadCards = [];
+for ($qi = 1; $qi <= 3; $qi++) {
+    $qActivo = $c('calidad', "gallery{$qi}", 'activo', '1');
+    if ($qActivo === '0') continue; // Omitir tarjeta desactivada (apagada) desde el CMS
+    $calidadCards[$qi] = [
+        'img'    => $c('calidad', "gallery{$qi}", 'imagen_url', ''),
+        'alt'    => $_calDef[$qi][0],
+        'titulo' => $c('calidad', "gallery{$qi}", 'titulo',      $_calDef[$qi][0]),
+        'desc'   => $c('calidad', "gallery{$qi}", 'descripcion', $_calDef[$qi][1]),
+    ];
+}
+
+// ── 1d. Promociones vigentes → $promos ───────────────────────────────────────
+$promos = $_bypassCache ? null : \Common\Cache::get(\Common\Cache::KEY_PROMOS);
+if ($promos === null) {
+    $promoStmt = $db->query(
+        "SELECT id, dia_semana, imagen_fondo, activo
+         FROM catalogo_promociones
+         WHERE activo = 1
+         ORDER BY orden ASC, id ASC"
+    );
+    $promos = $promoStmt ? $promoStmt->fetchAll(\PDO::FETCH_ASSOC) : [];
+    if (!$_bypassCache) \Common\Cache::set(\Common\Cache::KEY_PROMOS, $promos);
+}
+
+// ── Inyectar borrador de promociones si es vista previa ──────────────────
+if ($isPreview && !empty($_SESSION['cms_draft']['promociones'])) {
+    $promoDraft = $_SESSION['cms_draft']['promociones'];
+    
+    // Si la DB trajo menos de 7 (o las que sean), igual debemos iterar
+    // o al revés: iteramos sobre los 7 IDs y construimos el array
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `calidad-gallery`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 3:28 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+`gestion_web.php` defines three slots for "Calidad" images, each with specific requirements: WebP format, quality 75, effort 6, 800x580 pixels, maximum 150 KB, and optimal 60 KB. Currently available images include `galardon.jpg` (1600x1600), `galardon b.jpg` (1024x863), `diploma.jpg` (1600x1600) and `diploma b.jpg` (1024x863). The system will now consider `galardon b.jpg` for potential use.
+
+
+The existing image styling (`object-fit: cover` with a fixed height) will cause significant cropping of the available images, especially the square ones, and will cut off vital information like logos and addresses. `galardon b.jpg` will also suffer from significant vertical cropping due to aspect ratio mismatch, though less than square images. The preferred solution involves either compositing the images onto an 800x580 canvas with a matching background or modifying the CSS to use `object-fit: contain` to preserve the image content. The optimal solution will require testing either of these alternatives.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.980989418s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 3:29 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 3:30 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+The request involves applying a similar analysis to multiple images within a specified directory. The key is to segregate the images based on their naming convention, specifically distinguishing those named with weekday references. It seems the analysis results must be organized into sections corresponding to these weekday and weekend groupings.
+
+
+Initial investigation reveals image sets categorized as "Daily Promotions" and "Quality & Installations", distinguished by filename patterns. Daily promotions show uniform dimensions, aspect ratio, and potential for file size reduction via WebP encoding. Existing CMS validation rules conflict with the observed image dimensions and display behavior across different screen sizes. The files starting with "galardon" or "diploma" will go into the Calidad e Instalaciones section.
+
+
+CMS validation rejects the "Daily Promotions" images due to width discrepancies. It seems adjusting the CMS validation rules to accept the native aspect ratio (1024x687px) is the preferred solution, avoiding image cropping or the need for manual resizing. An alternative is adapting the images to fit CMS dimensions.
+
+Analysis of the "Quality & Installations" images reveals two file versions: square (1600x1600px) and horizontal.
+
+
+The "Quality & Installations" image display has a critical conflict: the fixed-height, `object-fit: cover` CSS will crop square or near-square images, losing vital visual information like the PACAL logo or contact details. The CMS validation requires a different aspect ratio than the available images.
+
+The best solution seems to be compositing the horizontal images (like `galardon b.jpg`) onto an `800x580px` canvas with a solid background, ensuring complete visibility and CMS compatibility. This requires calculating the optimal margins to fit the images within the required dimensions.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 3.388855611s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+## User Request
+
+analiza es correcto esto:  para Promociones, entonces se queda tamaño nativo , conviertelas a webp, y has los ajustes de php,etc. ?
+
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `gestion_web.php`
+**Language:** php
+
+**Open Files:**
+- `gestion_web.php`
+- `cms-upload.js`
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The request concerns image optimization for "Promociones". The core question is whether to preserve the native image dimensions (1024x687px). Conversion to WebP format is also explicitly requested. Finally, the user asks about necessary adjustments to PHP, CMS validators, templates, and styles.
+
+
+Native image dimensions (1024x687px) are confirmed as optimal because they prevent distortion or clipping of critical information, maintain lightweight file sizes within CMS limits, ensure sharp rendering on both mobile and desktop, and preserve aspect ratio consistency across all seven images. The investigation shifts to pinpoint required adjustments in the codebase, starting with the CMS backend validator, specifically checking for instances where `promo-` slots and dimensions are handled, to address potential conflicts with the existing validation logic, where width is expected to be 1200px.
+
+
+The backend PHP validator and the CMS client-side validator both require adjustment to accommodate the optimal image dimensions and flexible width/height ranges, recognizing the previous 1200px constraint. Examining the PHP validation logic, alternative dimension checks are explored, including specific pixel values and ranges to determine the best approach. The analysis also extended to the client-side JavaScript validator to confirm that any implemented change is reflected within it.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 3.597689421s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1584-1619)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+.catalog-card.has-bg-overlay {
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+/* Contenedores de imagen de promoción horizontal — ocupa el 100% del espacio libre vertical restante */
+.catalog-card-img-wrap {
+    width: 100%;
+    flex: 1 1 auto;
+    min-height: 160px;
+    margin: 0;
+    border-radius: 0;
+    overflow: hidden;
+    background-color: #f1f5f9;
+    position: relative;
+}
+
+.catalog-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    border: none;
+}
+
+/* Botón Agendar superpuesto semitransparente (Glassmorphism) sobre la imagen */
+.catalog-card-btn-overlay {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The CSS defines an `aspect-ratio` for the image container. This aspect ratio, determined to be approximately 1.4905, dictates the proportional dimensions of each image. If this is the case, then all the images within the grid will have uniform proportions.
+
+
+The existing aspect ratio and `object-fit: cover` will ensure images display without cropping. Analyzing the modal's CSS reveals it uses `object-fit: contain`, displaying images legibly within 80vh. The existing PHP code validates image dimensions. Updating the validation logic will permit a wider range of image sizes, including the native optimal dimensions.
+
+
+The PHP code requires adjustment to allow for a wider range of image sizes, specifically for promotional cards. The current validation is too restrictive, as it only accepts precise dimensions and fails to accept an acceptable width/height ratio. The javascript code also has size constraints that should be considered. Revised logic should consider size range and orientation.
+
+
+`cms-upload.js` contains built-in dimension and orientation validation; leveraging its existing capabilities is the most straightforward approach. The promotional card's native optimal dimensions and hints need to be considered in order to fully determine applicable range. The `gestion_web.php` file provides some additional dimension info as well. The next step is to examine `sections/promociones.php`.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 3.832890256s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 3:45 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L314-329)</summary>
+
+**Path:** `Unknown file`
+
+```
+        if ($imgW > 1284 || $imgH > 902)
+            $dimError = "Croquis de Ubicación: máximo 1284×902 px. Recibido: {$imgW}×{$imgH}.";
+        elseif ($imgH >= $imgW)
+            $dimError = "Croquis de Ubicación: orientación debe ser Horizontal (ancho > alto). Recibido: {$imgW}×{$imgH}.";
+    } elseif (preg_match('/^promo-/', $slot)) {
+        if ($imgW !== 1200)
+            $dimError = "Card de Promociones: se requiere exacto 1200 px de ancho. Recibido: {$imgW}×{$imgH}.";
+        elseif ($imgH < 600 || $imgH > 675)
+            $dimError = "Card de Promociones: alto {$imgH} px fuera del rango 600–675 px. Recibido: {$imgW}×{$imgH}.";
+    } elseif (preg_match('/^calidad-/', $slot)) {
+        if ($imgW !== 800 || $imgH !== 580)
+            $dimError = "Galería de Calidad: se requiere exacto 800×580 px. Recibido: {$imgW}×{$imgH}.";
+    } elseif ($slot === 'seo-og') {
+        if ($imgW < 1200 || $imgW > 1920)
+            $dimError = "Open Graph (SEO): ancho {$imgW} px fuera del rango 1\u{202F}200–1\u{202F}920 px.";
+        elseif ($imgH >= $imgW)
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 3:45 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `cms-upload.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L94-104)</summary>
+
+**Path:** `Unknown file`
+
+```
+                function slotRules(s) {
+                    if (/^hero-/.test(s))              return { maxKb: 150, minW: 1280, maxW: 1920,                              landscape: true, label: 'Banner Hero',             hint: 'WebP · Quality 72–80 · Effort 6 · 1 280–1 920 px ancho · Orientación Horizontal · alto proporcional · máx. 150 KB, óptimo 60 KB' };
+                    if (/^carousel-/.test(s))          return { maxKb: 150, exactW: 800, exactH: 580,                                        label: 'Carrusel Especialidades', hint: 'WebP · Quality 75 · Effort 6 · exacto 800×580 px · máx. 150 KB, óptimo 60 KB' };
+                    if (/^ubicacion-croquis$/.test(s)) return { maxKb: 150, maxW: 1284, maxH: 902, landscape: true,      label: 'Croquis de Ubicación',    hint: 'WebP · Quality 85 · Effort 6 · 1 284 × 902 px (máx) · Orientación Horizontal · máx. 150 KB, óptimo 60 KB' };
+                    if (/^promo-/.test(s))             return { maxKb: 150, exactW: 1200, minH: 600, maxH: 675,                              label: 'Card de Promociones',     hint: 'WebP · Quality 72 · Effort 6 · exacto 1200 px ancho · alto 600–675 px · máx. 150 KB, óptimo 60 KB' };
+                    if (/^calidad-/.test(s))           return { maxKb: 150, exactW: 800, exactH: 580,                                       label: 'Galería de Calidad',      hint: 'WebP · Quality 75 · Effort 6 · exacto 800×580 px · máx. 150 KB, óptimo 60 KB' };
+                    if (/^seo-og$/.test(s))            return { maxKb: 150, minW: 1200, maxW: 1920,                              landscape: true, label: 'Imagen Open Graph (SEO)', hint: 'WebP · 1 200 × 630 px recomendado (ratio 1.91:1) · Orientación Horizontal · máx. 150 KB, óptimo 60 KB' };
+                    return                                    { maxKb: 150, minW: 800,                                                        label: 'Imagen CMS',              hint: 'WebP · mín. 800 px ancho · máx. 150 KB, óptimo 60 KB' };
+                }
+                const rules = slotRules(slot);
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 3:46 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L797-807)</summary>
+
+**Path:** `Unknown file`
+
+```
+                                    <div class="field-group mb-2">
+                                        <label>Imagen de Fondo</label>
+                                        <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px; font-size: 0.78rem;">
+                                            📐 <strong>Dimensiones:</strong> 1200 px de ancho × (Rango de alto: 600 a 675 px) &nbsp;·&nbsp;
+                                            <strong>Codec:</strong> WebP únicamente &nbsp;·&nbsp;
+                                            <strong>Peso:</strong> Máximo 150 KB, Óptimo 60 KB
+                                        </p>
+                                        <div class="image-upload-box">
+                                            <img id="prev-promo-<?= $pId ?>"
+                                                 src="<?= !empty($imgUrl) ? h($imgUrl) : 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="90" height="60" viewBox="0 0 90 60"><rect width="100%" height="100%" fill="%23f1f5f9"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%2394a3b8" font-size="10" font-family="sans-serif">Sin Imagen</text></svg>' ?>"
+                                                 alt="Promoción <?= h(trim(strip_tags($diaLabel))) ?>" class="img-preview-sm"
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 3:46 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `promociones.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L64-75)</summary>
+
+**Path:** `Unknown file`
+
+```
+                        </div>
+
+                        <!-- Imagen rectangular completa horizontal con botón Agendar superpuesto transparente -->
+                        <?php if (!empty($imgUrl)): ?>
+                            <div class="catalog-card-img-wrap">
+                                <img src="<?= h($imgUrl) ?>" alt="<?= h($diaPlain) ?>" class="catalog-card-img" loading="lazy" decoding="async" width="400" height="200">
+                                <a href="<?= h($waCardUrl) ?>" target="_blank" rel="noopener noreferrer" class="catalog-card-btn-overlay" onclick="event.stopPropagation();">
+                                    Agendar <?= $waSvg ?>
+                                </a>
+                            </div>
+                        <?php else: ?>
+                            <div class="catalog-card-bottom-row" style="margin-top: auto;">
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 3:47 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1589-1611)</summary>
+
+**Path:** `Unknown file`
+
+```
+
+/* Contenedores de imagen de promoción horizontal — ocupa el 100% del espacio libre vertical restante */
+.catalog-card-img-wrap {
+    width: 100%;
+    flex: 1 1 auto;
+    min-height: 160px;
+    margin: 0;
+    border-radius: 0;
+    overflow: hidden;
+    background-color: #f1f5f9;
+    position: relative;
+}
+
+.catalog-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    border: none;
+}
+
+/* Botón Agendar superpuesto semitransparente (Glassmorphism) sobre la imagen */
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The CSS for the image container, specifically `.catalog-card-img-wrap`, includes `aspect-ratio: 1024 / 687`. This is being set to ensure the container maintains a precise ratio (approximately 1.4905:1). This aspect ratio ensures the image display is correct.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.177730306s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 3:47 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 3:47 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Image processing completed, generating WebP files at the specified dimensions and quality. Confirmed successful conversion of seven images, each resulting in a file size between 71KB and 109KB. Two locations contain the output files: one for immediate use in the CMS, the other for project archival.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.063094290s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+## User Request
+
+. para  (galardon y diploma),  dame resumen de q se debe hacer
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `gestion_web.php`
+**Language:** php
+
+**Open Files:**
+- `cms-upload.js`
+- `gestion_web.php`
+</details>
+
+---
+
+### CORTEX_STEP_TYPE_KNOWLEDGE_ARTIFACTS
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 3:52 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Considering "galardon y diploma," the task requires a concise action plan. The previous processing of "Promociones" offers a template: keep native size, convert to WebP, and adjust the relevant PHP configurations. This structure should be applied to the new task.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.117695075s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 3:52 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 3:52 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `calidad-`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 3:52 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `calidad.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/**
+ * sections/calidad.php — Partial: Calidad / Galería
+ * Incluido desde website/index.php; hereda su scope completo.
+ * Variables esperadas: $calH2, $calSub, $calidadCards
+ */
+?>
+        <!-- ══════════════════════════════════════════════ CALIDAD ══ -->
+        <section id="calidad" class="sec-pad-1-5 scroll-sm-top">
+            <div class="section-header animate-on-scroll">
+                <!-- h2 y subtitulo desde web_contenidos (calidad/seccion) -->
+                <h2><?= h($calH2) ?></h2>
+                <p><?= h($calSub) ?></p>
+            </div>
+            <div class="map-bar">
+                <div class="specialties-carousel-viewport animate-on-scroll">
+                    <div class="calidad-cards-grid">
+                        <?php foreach ($calidadCards as $qc): ?>
+                        <div class="carousel-card">
+                            <img src="<?= h($qc['img']) ?>" alt="<?= h($qc['alt']) ?>"
+                                 width="800" height="580" loading="lazy" decoding="async">
+                            <div class="carousel-card__body ck5-output">
+                                <h3><?= h($qc['titulo']) ?></h3>
+                                <?php if ($qc['desc']): ?><p><?= h($qc['desc']) ?></p><?php endif; ?>
+                            </div>
+                        </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1914-2004)</summary>
+
+**Path:** `Unknown file`
+
+```
+/* ==========================================================================
+   SECCIÓN CALIDAD — 3 Fichas Estáticas (Estructura Fiel Especialidades .carousel-card)
+   ========================================================================== */
+.calidad-cards-grid {
+    display: flex;
+    flex-wrap: wrap; /* R-MOB: permite 2 col en tablet sin romper 3 col en desktop */
+    gap: 2rem;
+    padding: 1rem 0;
+    margin-top: 0;
+    margin-bottom: 2rem;
+    width: 100%;
+    align-items: stretch;
+    box-sizing: border-box;
+}
+
+.calidad-cards-grid .carousel-card {
+    flex: 0 0 calc((100% - 4rem) / 3);
+    width: calc((100% - 4rem) / 3);
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+    overflow: hidden;
+    margin-bottom: 2px;
+}
+
+.calidad-cards-grid .carousel-card img {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+    height: 275px !important;
+    aspect-ratio: unset !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 12px 12px 0 0 !important;
+    box-sizing: border-box !important;
+}
+
+@media (min-width: 1920px) {
+    .calidad-cards-grid .carousel-card {
+        flex: 0 0 calc((100% - 4rem) / 3);
+    }
+    .calidad-cards-grid .carousel-card img {
+        height: 285px !important;
+    }
+}
+
+/* R-MOB: tablet/paisaje → 2 columnas (481px–1024px) */
+@media (max-width: 1024px) {
+    .calidad-cards-grid {
+        gap: 1rem;
+    }
+    .calidad-cards-grid .carousel-card {
+        flex: 0 0 calc(50% - 0.5rem);
+        width: calc(50% - 0.5rem);
+    }
+    .calidad-cards-grid .carousel-card img {
+        height: 230px !important;
+        /* object-position top center: la base tiene center !important → cover crops center
+           → top de imágenes de calidad se pierde; top center ancla el sujeto visible */
+        object-position: top center !important;
+    }
+}
+
+/* R-MOB: móvil retrato estrecho → 1 columna (≤480px) */
+@media (max-width: 480px) {
+    .calidad-cards-grid .carousel-card {
+        flex: 0 0 100%;
+        width: 100%;
+    }
+    .calidad-cards-grid .carousel-card img {
+        height: 210px !important;
+        object-position: top center !important;
+    }
+}
+
+
+
+.text-center-block {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L319-339)</summary>
+
+**Path:** `Unknown file`
+
+```
+        if ($imgH >= $imgW)
+            $dimError = "Card de Promociones: orientación debe ser Horizontal (ancho > alto). Recibido: {$imgW}×{$imgH}.";
+        elseif ($imgW < 1000 || $imgW > 1200 || $imgH < 600 || $imgH > 800)
+            $dimError = "Card de Promociones: dimensiones requeridas 1024×687 px (óptimo nativo) o 1200×(600–675) px. Recibido: {$imgW}×{$imgH}.";
+    } elseif (preg_match('/^calidad-/', $slot)) {
+        if ($imgW !== 800 || $imgH !== 580)
+            $dimError = "Galería de Calidad: se requiere exacto 800×580 px. Recibido: {$imgW}×{$imgH}.";
+    } elseif ($slot === 'seo-og') {
+        if ($imgW < 1200 || $imgW > 1920)
+            $dimError = "Open Graph (SEO): ancho {$imgW} px fuera del rango 1\u{202F}200–1\u{202F}920 px.";
+        elseif ($imgH >= $imgW)
+            $dimError = "Open Graph (SEO): orientación debe ser Horizontal (ancho > alto). Recibido: {$imgW}×{$imgH}.";
+    } else {
+        if ($imgW < 800)
+            $dimError = "Imagen CMS genérica: ancho mínimo 800 px. Recibido: {$imgW} px.";
+    }
+    if ($dimError !== null) {
+        http_response_code(422);
+        echo json_encode(['ok' => false, 'msg' => $dimError]);
+        exit;
+    }
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L859-909)</summary>
+
+**Path:** `Unknown file`
+
+```
+                               value="<?= cms($contenidos, 'calidad', 'seccion', 'subtitulo', 'Conoce nuestras instalaciones equipadas con tecnología de vanguardia y un equipo comprometido con la excelencia diagnóstica.') ?>">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tarjeta 1 -->
+            <?php
+            $galImgUrl1 = cms($contenidos, 'calidad', 'gallery1', 'imagen_url');
+            $galActivo1 = cms($contenidos, 'calidad', 'gallery1', 'activo', '1');
+            $isActivo1  = ($galActivo1 !== '0');
+            $imgDef1    = ''; // sin fallback — imagen debe venir de CMS
+            ?>
+            <div class="editor-card" style="border: 2px solid #059669; background: #fafafa; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+                <div class="editor-card-header" style="background: linear-gradient(135deg, #059669 0%, #047857 100%); padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.2); display:flex; justify-content:space-between; align-items:center;">
+                    <div class="card-title" style="color: #ffffff; font-weight: 800; font-size: 0.95rem;">Tarjeta 1 — Área de Hematología</div>
+                    <div style="display:flex; align-items:center; gap:0.5rem;">
+                        <label for="chk-calidad-gallery1-activo" style="display:inline-flex; align-items:center; gap:0.45rem; cursor:pointer; margin:0; font-size:0.85rem; font-weight:700;">
+                            <input type="hidden" name="gallery1__activo" value="0">
+                            <input type="checkbox" id="chk-calidad-gallery1-activo" name="gallery1__activo" value="1" <?= $isActivo1 ? 'checked' : '' ?>
+                                   style="width:1.15rem; height:1.15rem; accent-color:#ffffff; cursor:pointer;"
+                                   onchange="var badge=this.nextElementSibling; if(this.checked){ badge.style.background='rgba(255,255,255,0.25)'; badge.style.color='#ffffff'; badge.textContent='Encendido'; } else { badge.style.background='#dc2626'; badge.style.color='#ffffff'; badge.textContent='Apagado'; }">
+                            <span class="operator-badge" style="background: <?= $isActivo1 ? 'rgba(255,255,255,0.25)' : '#dc2626' ?>; color: #ffffff; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; transition: all 0.2s ease;">
+                                <?= $isActivo1 ? 'Encendido' : 'Apagado' ?>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+                <div class="editor-card-body" style="padding: 12px;">
+                    <div class="field-group">
+                        <label>Imagen de Galería</label>
+                        <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px; font-size: 0.78rem;">
+                            📐 <strong>Codec:</strong> WebP únicamente &nbsp;·&nbsp;
+                            <strong>Quality:</strong> 75 &nbsp;·&nbsp;
+                            <strong>Effort:</strong> 6 &nbsp;·&nbsp;
+                            <strong>Dimensiones:</strong> 800 × 580 px (ratio ~1.38:1) &nbsp;·&nbsp;
+                            <strong>Orientación Horizontal</strong> &nbsp;·&nbsp;
+                            <strong>Peso:</strong> Máximo 150 KB, Óptimo 60 KB
+                        </p>
+                        <div class="image-upload-box">
+                            <img id="prev-calidad-gallery1"
+                                 src="<?= h($galImgUrl1) ?>"
+                                 alt="Área de Hematología" class="img-preview-sm"
+                                 onerror="this.hidden=true">
+                            <label for="file-calidad-gallery1" class="btn btn-secondary">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                                Cambiar Imagen
+                            </label>
+                            <input type="file" accept="image/webp"
+                                   id="file-calidad-gallery1" class="d-none"
+                                   data-upload-slot="calidad-gallery1"
+                                   data-preview-id="prev-calidad-gallery1"
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Investigating the user's request for a summary related to "galardon" and "diploma." Observed two versions of each image file exist, differing in dimensions and aspect ratio, located within a specific directory. The analysis requires clarifying the desired action based on these file variations. Considering the available options and the implied intent of summary.
+
+
+The website's image container has a fixed aspect ratio that conflicts with the required CMS image dimensions, leading to potential cropping of key visual elements. Employing a canvas-based approach allows fitting the original image within the necessary 800x580 dimensions without altering the CSS or code, preventing information loss. This involves placing the original image on a colored background that complements the existing image borders, preserving the integrity of logos and signatures.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.387244659s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 3:52 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 3:53 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+The images, "galardon b.jpg" and "diploma b.jpg," are intended for the "Calidad e Instalaciones" section. This section features three fixed cards. The image background colors differ; "galardon b.jpg" has a black background, while "diploma b.jpg" has a light blue one.
+
+
+Analysis indicates that cropping or resizing original images to the required 800x580 px format would truncate critical visual elements. The best approach involves creating an 800x580 canvas.  Scaling the "b" version of the images to a 580 px height and centering them on a canvas with a matching background color will avoid content loss and maintain the desired aspect ratio. The resulting images will be converted to WebP for optimization.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.978256647s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+## User Request
+
+DUda: los cambios realizados para Promociones Vigentes y los planeados para  Galardón y Diploma, se considero el q se mustren bien en dispositivos mobiles, vertical --telefono y tabletas ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `gestion_web.php`
+**Language:** php
+
+**Open Files:**
+- `cms-upload.js`
+- `gestion_web.php`
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `catalog-card`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 3:59 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1564-1624)</summary>
+
+**Path:** `Unknown file`
+
+```
+}
+
+/* ── Refined Minimal Rectangular Promo Cards ── */
+.catalog-card {
+    background-color: var(--bg-surface);
+    border-radius: 0.625rem; /* Rectangular con esquinas suaves */
+    border: 1px solid #cbd5e1;
+    padding: 0;   /* Padding cero para permitir que la imagen ocupe todo el espacio */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 220px;
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.catalog-card.has-bg-overlay {
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+/* Contenedores de imagen de promoción horizontal — ocupa el 100% del espacio libre vertical restante */
+.catalog-card-img-wrap {
+    width: 100%;
+    flex: 1 1 auto;
+    min-height: 160px;
+    aspect-ratio: 1024 / 687;
+    margin: 0;
+    border-radius: 0;
+    overflow: hidden;
+    background-color: #f1f5f9;
+    position: relative;
+}
+
+.catalog-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    border: none;
+}
+
+/* Botón Agendar superpuesto semitransparente (Glassmorphism) sobre la imagen */
+.catalog-card-btn-overlay {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    background: rgba(15, 23, 42, 0.35);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `promociones.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file`</summary>
+
+**Path:** `Unknown file`
+
+```
+<?php
+/**
+ * sections/promociones.php — Partial: Promociones diarias
+ * Incluido desde website/index.php; hereda su scope completo.
+ * Variables esperadas: $promoH2, $promoSub, $promos, $waBase, $waTextoAg, $waSvg
+ *
+ * Mejoras 2026-09-08:
+ *   · Badge "HOY" — derecha, violeta, detectado por dia() ISO-8601
+ *   · Precios en el mismo renglón que badges (derecha)
+ *   · "Ahorras $X" bajo precios cuando hay descuento
+ *   · Badge de muestra requerida (💉 / ☕ / 🔬 según texto)
+ *   · Descripción expandible si es larga (>220 chars)
+ *   · Overlay de imagen más visible (opacidad reducida)
+ *   · Mensaje WA incluye precio de oferta
+ */
+?>
+        <!-- ══════════════════════════════════════════ PROMOCIONES ══ -->
+        <section id="promociones" class="sec-promo scroll-sm-top">
+            <div class="section-header animate-on-scroll">
+                <h2><?= h($promoH2) ?></h2>
+                <p><?= h($promoSub) ?></p>
+            </div>
+            <div class="promo-catalog-wrap animate-on-scroll">
+                <div class="catalog-grid">
+                <?php
+                // Día actual para badge "HOY" (ISO-8601: 1=lunes … 7=domingo)
+                $todayMap = [1=>'lunes',2=>'martes',3=>'miercoles',4=>'jueves',5=>'viernes',6=>'sabado',7=>'domingo'];
+                $todayKey = $todayMap[(int)date('N')] ?? '';
+
+                /**
+                 * Normaliza un nombre de día eliminando acentos y espacios para comparación HOY.
+                 * Permite que "Miércoles" y "Sábado" (con acento) coincidan con las claves del mapa.
+                 */
+                function _normalizeDay(string $s): string {
+                    return strtr(strtolower(trim($s)),
+                        ['á'=>'a','é'=>'e','í'=>'i','ó'=>'o','ú'=>'u','ü'=>'u','ñ'=>'n']);
+                }
+
+                foreach ($promos as $p):
+                    // dia_semana contiene el Título / Etiqueta Superior de la Ficha
+                    $diaRaw    = $p['dia_semana'] ?? '';
+                    $diaKey    = _normalizeDay(strip_tags($diaRaw));
+                    $diaNombre = !empty($diaRaw) ? trim($diaRaw) : 'Promoción';
+                    $isHoy     = ($diaKey === $todayKey);
+                    $imgUrl    = $p['imagen_fondo'] ?? '';
+
+                    $diaPlain   = strip_tags($diaNombre);
+                    $waTextFull = $waTextoAg
+                        ? str_replace('{estudio}', $diaPlain, $waTextoAg)
+                        : '';
+                    $waCardUrl  = $waBase . ($waTextFull ? '?text=' . rawurlencode($waTextFull) : '');
+                ?>
+                    <div class="catalog-card <?= $isHoy ? 'catalog-card--hoy' : '' ?>"
+                         data-promo-img="<?= h($imgUrl) ?>"
+                         data-promo-title="<?= h($diaPlain) ?>"
+                         data-promo-title-html="<?= h($diaNombre) ?>"
+                         onclick="if(!event.target.closest('a')){ if(typeof window.openPromoModal==='function') window.openPromoModal('<?= h($imgUrl) ?>', this.getAttribute('data-promo-title-html')); }">
+
+                        <!-- Día / Título + badge HOY a la derecha -->
+                        <div class="catalog-card-day-row">
+                            <div class="catalog-card-day"><?= $diaNombre ?></div>
+                            <?php if ($isHoy): ?>
+                                <span class="catalog-badge badge-hoy">● HOY</span>
+                            <?php endif; ?>
+                        </div>
+
+                        <!-- Imagen rectangular completa horizontal con botón Agendar superpuesto transparente -->
+                        <?php if (!empty($imgUrl)): ?>
+                            <div class="catalog-card-img-wrap">
+                                <img src="<?= h($imgUrl) ?>" alt="<?= h($diaPlain) ?>" class="catalog-card-img" loading="lazy" decoding="async" width="1024" height="687">
+                                <a href="<?= h($waCardUrl) ?>" target="_blank" rel="noopener noreferrer" class="catalog-card-btn-overlay" onclick="event.stopPropagation();">
+                                    Agendar <?= $waSvg ?>
+                                </a>
+                            </div>
+                        <?php else: ?>
+                            <div class="catalog-card-bottom-row" style="margin-top: auto;">
+                                <a href="<?= h($waCardUrl) ?>" target="_blank" rel="noopener noreferrer" class="catalog-card-btn-compact">
+                                    Agendar <?= $waSvg ?>
+                                </a>
+                            </div>
+                        <?php endif; ?>
+
+                    </div>
+                <?php endforeach; ?>
+                </div>
+            </div>
+        </section>
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `.catalog-grid`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 3:59 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1534-1569)</summary>
+
+**Path:** `Unknown file`
+
+```
+    max-width: 1380px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.catalog-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr); /* minmax(0,1fr) evita que el track crezca por min-content de hijos */
+    gap: 1.5rem;
+    margin-top: 2rem;
+    align-items: stretch;
+}
+
+/* R-MOB: 2 cols desde 480px (antes solo desde 640px) */
+@media (min-width: 480px) {
+    .catalog-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1024px) {
+    .catalog-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+/* PR-MOB-02 (actualizado): solo forzar 1 col en móvil muy estrecho (≤479px);
+   480-767px ahora muestra 2 cols, ganando area util en landscape/tablet */
+@media (max-width: 479px) {
+    .catalog-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ── Refined Minimal Rectangular Promo Cards ── */
+.catalog-card {
+    background-color: var(--bg-surface);
+    border-radius: 0.625rem; /* Rectangular con esquinas suaves */
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Promociones display is governed by media queries, adjusting the catalog grid's column count based on screen width. Mobile view utilizes a single column, tablet/mobile landscape employs two columns, and desktop/large tablet displays three. The function of `.catalog-card-` remains to be determined.
+
+
+The `.catalog-card-img-wrap`'s aspect ratio matches the image, ensuring `object-fit: cover` renders the image perfectly across all screen sizes without cropping. On tap or click, `openPromoModal` displays the high-res image. Examining `landing.css` next, specifically the `.calidad-cards-grid` for layout behaviors.
+
+
+The `.calidad-cards-grid` uses a flexbox layout with media queries to adjust the number of columns based on screen width, similar to the `Promociones` grid. Desktop view uses a three-column layout, while tablet/landscape employs two, and mobile uses one. Each card's dimensions are calculated to ensure consistent spacing and responsiveness.
+
+
+Fixed image height combined with a varying card width across devices leads to inconsistent aspect ratios, which could result in cropping with `object-fit: cover`. The design likely aims for consistent image presentation regardless of device size, but this implementation appears flawed. The mobile `height: 210px` declaration necessitates further investigation for potential visual discrepancies.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `openPromoModal`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.605715063s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 3:59 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `website.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L919-959)</summary>
+
+**Path:** `Unknown file`
+
+```
+        modalObserver.observe(modal, { attributes: true, attributeFilter: ['class'] });
+    });
+
+    // Delegación global de clics y eventos táctiles para capturar cualquier tarjeta o imagen de promoción
+    function handlePromoCardInteraction(e) {
+        var btn = e.target.closest('.catalog-card-btn') || e.target.closest('.catalog-card-btn-overlay') || e.target.closest('a');
+        if (btn) return; // Permitir interacción normal en botones
+
+        var card = e.target.closest('.catalog-card') || e.target.closest('[data-promo-img]');
+        if (!card) return;
+
+        var imgSrc = card.getAttribute('data-promo-img');
+        if (!imgSrc || imgSrc.trim() === '') {
+            var imgEl = card.querySelector('.catalog-card-img') || card.querySelector('img');
+            if (imgEl) imgSrc = imgEl.getAttribute('src');
+        }
+        if (!imgSrc || imgSrc.trim() === '') return;
+
+        var title = card.getAttribute('data-promo-title') || 'Promoción — Imagen Completa';
+        if (typeof window.openPromoModal === 'function') {
+            window.openPromoModal(imgSrc, title);
+        }
+    }
+
+    document.addEventListener('click', handlePromoCardInteraction);
+
+    // Cierre al presionar la tecla Escape en cualquier dispositivo con teclado
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' || e.keyCode === 27) {
+            window.closePromoModal();
+        }
+    });
+
+    var promoModal = document.getElementById('modal-img-promo');
+    if (promoModal) {
+        var closeBtn = promoModal.querySelector('.close-modal');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', window.closePromoModal);
+        }
+        promoModal.addEventListener('click', function(e) {
+            if (e.target === promoModal) {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+`handlePromoCardInteraction` in `website.js` appears to manage interactions for promotional cards, targeting elements with the `.catalog-card` class and those using the `[data-promo-img]` attribute. The PHP code in `calidad.php` iterates through `$calidadCards`, displaying images and titles within a `carousel-card` structure. Comparing these suggests a potential connection between promotional elements and a carousel-style display.
+
+
+Promotional cards in vertical mobile view utilize a single-column grid, ensuring each card occupies 100% of the screen width. The `aspect-ratio` maintains image proportions, guaranteeing a complete display of card content without cropping. This layout automatically calculates the height of the image, resizing it proportionally based on the defined aspect ratio.
+
+
+The promotional cards' responsiveness is guaranteed by the `aspect-ratio` property, ensuring proper scaling across various devices. On vertical mobiles, the modal opens upon card interaction for detailed viewing. Vertical tablets utilize a two-column grid, while horizontal tablets/desktops display a three-column layout.
+
+
+The CSS defines a responsive layout for promotional cards, adapting to different screen sizes with a grid system and image height adjustments. A key concern is potential image cropping on mobile devices due to the `object-fit: cover` property and the specified image height. This is particularly relevant for images containing important content near the bottom, such as signatures or base details of a trophy. The calculation reveals that a significant portion of the image's bottom might be cropped in mobile view.
+
+
+The current CSS utilizes fixed heights that lead to image cropping, especially on mobile. The solution involves applying `aspect-ratio` to the image containers. Setting `aspect-ratio` to the intended image dimensions (`800 / 580`) ensures responsive scaling across devices. To address this issue, images need to be prepared with appropriate margins to prevent content from touching the edges and getting cut off.
+
+
+The initial CSS, with fixed heights, was likely suitable for the original images (hospital rooms), where cropping was acceptable. This is NOT ideal for documents/awards containing text, as the fixed height would likely crop content on various screen sizes. Changing the height to `auto` and applying `aspect-ratio` is the correct approach for diploma/award cards to avoid critical information being cropped. The change to `height: auto !important; aspect-ratio: 800 / 580 !important;` will be tested.
+
+
+The calculated card heights across different screen sizes (desktop, tablet, mobile) preserve the intended aspect ratio of 800:580. This eliminates image clipping and ensures the card scales smoothly without requiring complex media query adjustments. Applying `aspect-ratio` guarantees that image content, including signatures on awards, remains fully visible across all devices.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 7.828340809s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+## User Request
+
+a diferencia de lo hecho para promosiones,q fue una sola version de la imagen fisica y css; para 3. La Solución para que Galardón sera versiones diferentes de imagenes y de css ?
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `gestion_web.php`
+**Language:** php
+
+**Open Files:**
+- `cms-upload.js`
+- `gestion_web.php`
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The question clarifies whether "Galardón" and "Diploma" will require multiple image and CSS versions, unlike "promosiones" which used a single version. The implied need is likely for responsive design and different visual presentations based on the display context. Therefore, the hypothesis is different versions are needed.
+
+
+A single WebP image and a corresponding CSS rule (`aspect-ratio`, `width: 100%`, `height: auto`) will suffice for "Galardón" and "Diploma," just like "Promociones." This approach leverages the browser's ability to fluidly scale a single image across different screen sizes. The chosen image dimensions (800x580 px) and WebP format provide an optimized balance of file size and visual quality. The CMS will manage only one file per card.
+
+
+
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.121602214s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+## User Request
+
+realiza todos los cambios y ajustes de forma precisa, sin regresaiones, o impactos negativos
+
+<details>
+<summary>Context</summary>
+
+**Active File:** `gestion_web.php`
+**Language:** php
+
+**Open Files:**
+- `cms-upload.js`
+- `gestion_web.php`
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Preparing WebP image files for "Galardón" and "Diploma" is the initial step, requiring sourcing from the specified directory. Potential image files will be located to ensure correct format conversion.
+
+
+Comparing image variants to determine the best source for generating 800x580 WebP files, considering aspect ratio and potential padding. Specified file destinations identified to ensure correct storage of output WebP files.
+
+CSS will be adjusted to guarantee consistent image display within the defined dimensions, including `aspect-ratio` and `object-fit: cover` to prevent unintended cropping. Investigating media queries for conflicting height overrides and potential enhancements to the `carousel-card`'s interaction, such as a lightbox or modal, is the next focus.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.816989812s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 4:14 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 4:15 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 4:15 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 4:15 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 4:15 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 4:15 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Determining the scaling factor needed to fit the image `galardon b.jpg` (1024x863 px) within a target size of 800x580 px, focusing on height first. The scaling factor is calculated as 580/863, resulting in a scale of approximately 0.67207. Applying this scaling factor, the new width becomes approximately 688 px, and the new height is 580 px.
+
+The image dimensions after scaling will be 688x580 px and is centered horizontally within the 800x580 px canvas. Padding is calculated as (800 - 688) / 2 = 56 px on both the left and right sides, with no top or bottom padding.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.136847304s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 4:15 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 4:15 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+All edge colors share soft sky blue tones. It's potentially viable to generate a background canvas matching or blending with this sky blue, or alternatively, feather/blur the border to integrate it more naturally.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.061688104s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 4:16 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Assessing the visual characteristics of the input image is necessary. Generating test images involves resizing a specific input file to defined dimensions and centering it on a black canvas to test edge blending. Examining the input file's edges shows they are almost pure black, suggesting seamless blending should be achievable on a black background.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.044568608s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 4:16 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Examining image variations to understand edge treatment options, specifically blur versus solid rendering, and considering the edge gradient. The hypothesis emerged to replicate the edge pixels for seamless background extension. This involves mirroring the leftmost and rightmost columns, blurring the seam to achieve a smooth gradient at the borders for a zero-seam effect.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.077331919s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 4:17 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 4:17 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 4:17 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Verifying image sizes confirms they are within acceptable limits. The next step is examining a specific image for potential seam issues at the left and right border transition, focusing pixel inspection around defined `offset_x` values. This border inspection will focus on a black image.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.002234814s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 4:17 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Examining pixel values reveals a near-black transition in `galardon`. Hypothesis: a 3px horizontal feather/blend applied to the edges, combined with pixel replication, could create a seamless transition to black. Further testing shows edge replication plus smooth blending yields a completely seamless image for both `galardon` and `diploma`. Now the destination paths require examination.
+
+
+
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.065495229s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 4:17 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1919-2004)</summary>
+
+**Path:** `Unknown file`
+
+```
+    flex-wrap: wrap; /* R-MOB: permite 2 col en tablet sin romper 3 col en desktop */
+    gap: 2rem;
+    padding: 1rem 0;
+    margin-top: 0;
+    margin-bottom: 2rem;
+    width: 100%;
+    align-items: stretch;
+    box-sizing: border-box;
+}
+
+.calidad-cards-grid .carousel-card {
+    flex: 0 0 calc((100% - 4rem) / 3);
+    width: calc((100% - 4rem) / 3);
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+    overflow: hidden;
+    margin-bottom: 2px;
+}
+
+.calidad-cards-grid .carousel-card img {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+    height: 275px !important;
+    aspect-ratio: unset !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 12px 12px 0 0 !important;
+    box-sizing: border-box !important;
+}
+
+@media (min-width: 1920px) {
+    .calidad-cards-grid .carousel-card {
+        flex: 0 0 calc((100% - 4rem) / 3);
+    }
+    .calidad-cards-grid .carousel-card img {
+        height: 285px !important;
+    }
+}
+
+/* R-MOB: tablet/paisaje → 2 columnas (481px–1024px) */
+@media (max-width: 1024px) {
+    .calidad-cards-grid {
+        gap: 1rem;
+    }
+    .calidad-cards-grid .carousel-card {
+        flex: 0 0 calc(50% - 0.5rem);
+        width: calc(50% - 0.5rem);
+    }
+    .calidad-cards-grid .carousel-card img {
+        height: 230px !important;
+        /* object-position top center: la base tiene center !important → cover crops center
+           → top de imágenes de calidad se pierde; top center ancla el sujeto visible */
+        object-position: top center !important;
+    }
+}
+
+/* R-MOB: móvil retrato estrecho → 1 columna (≤480px) */
+@media (max-width: 480px) {
+    .calidad-cards-grid .carousel-card {
+        flex: 0 0 100%;
+        width: 100%;
+    }
+    .calidad-cards-grid .carousel-card img {
+        height: 210px !important;
+        object-position: top center !important;
+    }
+}
+
+
+
+.text-center-block {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+The image style definitions in `landing.css` for `.calidad-cards-grid .carousel-card img` currently use `width: 100% !important`, `max-width: 100% !important`, `min-width: 100% !important`, and `height: 275px !important`. This might be causing rendering issues. Investigating the interaction of these properties is key to understanding image display behavior.
+
+
+The initial approach with fixed width and height combined with `!important` declarations creates potential rendering conflicts, potentially causing unexpected image behavior across different screen sizes. Switching to `width: 100%`, `max-width: 100%`, `min-width: 100%`, `height: auto`, and setting a fixed `aspect-ratio` with `object-fit: cover` should provide better control over image display while maintaining aspect ratio and responsiveness, by ensuring the image always fills its container while maintaining its proportions. The updated styles should override previous ones, but testing is needed to ensure correct behavior.
+
+
+Adjusting the existing CSS, ensuring `object-position: center`, `display: block`, removing margins, padding and borders, and adding `border-radius` and `box-sizing: border-box` will improve visual consistency and layout control. Applying `aspect-ratio: 800 / 580` ensures the image dimensions are respected, allowing the image to scale proportionally with the container.  Calculating the expected image heights for desktop, tablet, and mobile reveals the necessity of adjusting the height settings in the media queries.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `carousel-card__body`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 1.798170097s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 4:18 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Clicking the card should open the modal; investigating the "calidad.php" section to confirm the expected behavior. The relevant code iterates through cards and renders their content; verification requires observing if the click interaction triggers modal display as intended.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `modal-img-promo`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.080619983s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 4:18 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+The global availability of `modal-img-promo` suggests a potential solution: applying `data-promo-img` to the `.carousel-card` element within `sections/calidad.php`. Examining lines 15-28 of `sections/calidad.php` will clarify the current structure. This will help determine if the attribute addition is possible. The aim is to make the diploma image fully viewable.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `landing.css`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.021877348s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L1939-1999)</summary>
+
+**Path:** `Unknown file`
+
+```
+    overflow: hidden;
+    margin-bottom: 2px;
+}
+
+.calidad-cards-grid .carousel-card img {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+    height: 275px !important;
+    aspect-ratio: unset !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 12px 12px 0 0 !important;
+    box-sizing: border-box !important;
+}
+
+@media (min-width: 1920px) {
+    .calidad-cards-grid .carousel-card {
+        flex: 0 0 calc((100% - 4rem) / 3);
+    }
+    .calidad-cards-grid .carousel-card img {
+        height: 285px !important;
+    }
+}
+
+/* R-MOB: tablet/paisaje → 2 columnas (481px–1024px) */
+@media (max-width: 1024px) {
+    .calidad-cards-grid {
+        gap: 1rem;
+    }
+    .calidad-cards-grid .carousel-card {
+        flex: 0 0 calc(50% - 0.5rem);
+        width: calc(50% - 0.5rem);
+    }
+    .calidad-cards-grid .carousel-card img {
+        height: 230px !important;
+        /* object-position top center: la base tiene center !important → cover crops center
+           → top de imágenes de calidad se pierde; top center ancla el sujeto visible */
+        object-position: top center !important;
+    }
+}
+
+/* R-MOB: móvil retrato estrecho → 1 columna (≤480px) */
+@media (max-width: 480px) {
+    .calidad-cards-grid .carousel-card {
+        flex: 0 0 100%;
+        width: 100%;
+    }
+    .calidad-cards-grid .carousel-card img {
+        height: 210px !important;
+        object-position: top center !important;
+    }
+}
+
+
+
+.text-center-block {
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Examining the image display within the carousel cards, the current styling is preventing proper aspect ratio and consistent sizing. The goal is to ensure the images fill the available space while maintaining correct proportions. Modifying the `landing.css` file involves applying `width`, `height`, `aspect-ratio`, and `object-fit` properties to the image elements. This should resolve the image display issues.
+
+
+The CSS defines responsiveness for the carousel card grid, adjusting column counts and image aspect ratios across different screen sizes. Examining the styles, there isn't a transition or hover effect explicitly defined for the carousel card, which might be a good addition for a premium feel. Now, I will check the `landing.css` file more thoroughly to make sure.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.460073070s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 4:18 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `calidad.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L14-29)</summary>
+
+**Path:** `Unknown file`
+
+```
+            <div class="map-bar">
+                <div class="specialties-carousel-viewport animate-on-scroll">
+                    <div class="calidad-cards-grid">
+                        <?php foreach ($calidadCards as $qc): ?>
+                        <div class="carousel-card">
+                            <img src="<?= h($qc['img']) ?>" alt="<?= h($qc['alt']) ?>"
+                                 width="800" height="580" loading="lazy" decoding="async">
+                            <div class="carousel-card__body ck5-output">
+                                <h3><?= h($qc['titulo']) ?></h3>
+                                <?php if ($qc['desc']): ?><p><?= h($qc['desc']) ?></p><?php endif; ?>
+                            </div>
+                        </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </div>
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Hypothesis: Adding the `carousel-card` class and relevant data attributes to the HTML element in `calidad.php`, along with a `cursor: pointer` style, should make the card clickable. The click should then trigger the `handlePromoCardInteraction` function. Verification involves examining `website.js` to confirm how the click event is handled, specifically how the `card` variable is determined.
+
+
+
+
+### Actions
+
+**Tool:** `replace_file_content`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.067025162s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Code Edit
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 4:18 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `gestion_web.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L884-909)</summary>
+
+**Path:** `Unknown file`
+
+```
+                    </div>
+                </div>
+                <div class="editor-card-body" style="padding: 12px;">
+                    <div class="field-group">
+                        <label>Imagen de Galería</label>
+                        <p class="cms-img-spec-hint" style="margin-top: 4px; margin-bottom: 8px; font-size: 0.78rem;">
+                            📐 <strong>Codec:</strong> WebP únicamente &nbsp;·&nbsp;
+                            <strong>Quality:</strong> 75 &nbsp;·&nbsp;
+                            <strong>Effort:</strong> 6 &nbsp;·&nbsp;
+                            <strong>Dimensiones:</strong> 800 × 580 px (ratio ~1.38:1) &nbsp;·&nbsp;
+                            <strong>Orientación Horizontal</strong> &nbsp;·&nbsp;
+                            <strong>Peso:</strong> Máximo 150 KB, Óptimo 60 KB
+                        </p>
+                        <div class="image-upload-box">
+                            <img id="prev-calidad-gallery1"
+                                 src="<?= h($galImgUrl1) ?>"
+                                 alt="Área de Hematología" class="img-preview-sm"
+                                 onerror="this.hidden=true">
+                            <label for="file-calidad-gallery1" class="btn btn-secondary">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                                Cambiar Imagen
+                            </label>
+                            <input type="file" accept="image/webp"
+                                   id="file-calidad-gallery1" class="d-none"
+                                   data-upload-slot="calidad-gallery1"
+                                   data-preview-id="prev-calidad-gallery1"
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 4:19 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 4:19 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 4:19 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 4:19 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 25 Sept 2026, 4:19 pm
+
+---
+
+## Agent Response
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+## User Request
+
+Analiza la php de Reportes y Estadísticas de /rc/ ,  funciona correctamente la funcionalidad de calendario desplegable y por captura  Periodo: Fecha  dd/mm/aaaa  al  dd/mm/aaaa ; identica gaps, issues,etc.
+
+
+---
+
+### CORTEX_STEP_TYPE_SYSTEM_MESSAGE
+
+**Status:** Completed
+**Created:** 26 Sept 2026, 7:28 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 26 Sept 2026, 7:28 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 26 Sept 2026, 7:28 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `run_command`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Terminal Command Execution
+
+**Status:** Completed
+**Created:** 26 Sept 2026, 7:28 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `Reportes y Estadísticas`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 26 Sept 2026, 7:28 pm
 
 ---
 
@@ -19578,256 +17823,98 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 <details>
 <summary>Metadata</summary>
 
-- **Model:** Gemini 3.8 Flash (Low)
+- **Model:** Gemini 3.8 Flash (High)
 </details>
 
 ---
 
 <details>
-<summary>File: `Unknown file` (L834-855)</summary>
+<summary>File: `Unknown file` (L479-559)</summary>
 
 **Path:** `Unknown file`
 
 ```
-            <!-- Región Lateral Derecha: Notificaciones (Scope 30) -->
-            <aside class="sidebar-right" id="sidebar-right">
-                <div class="sidebar-right-toggle-row">
-                    <!-- Campana siempre visible + badge de conteo -->
-                    <div class="bell-wrap" id="bell-wrap-notif" title="Notificaciones">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-                        <span class="bell-badge" id="badge-recepcion" aria-label="Notificaciones pendientes">0</span>
+                     dejada por una edición anterior sin limpiar. getElementById()
+                     siempre devuelve el PRIMER elemento con un id duplicado, así que
+                     el sidebar (data-panel=panel-reportes) mostraba esa copia vieja
+                     y ESTA copia real, con contenedores dinámicos id=container-*
+                     que sí llena filtrarEstadisticasAdmin(), nunca llegaba a
+                     mostrarse. La copia vieja (y un contenedor id panel-catalogos
+                     huérfano que había quedado abierto junto a ella) se eliminó completa. -->
+                <div id="panel-reportes" class="tab-panel d-none">
+                    <div class="modal-sect-hd">
+                        <h2 class="txt-pgd mb-0">Reportes y Estadísticas</h2>
+                        <div class="d-inline-flex-ac">
+                            <label for="filtro-periodo-admin" class="txt-muted-sm">Periodo:</label>
+                            <select id="filtro-periodo-admin" class="select-sm select-sm--bg">
+                                <option value="dia">Hoy</option>
+                                <option value="semana">Esta Semana</option>
+                                <option value="mes" selected>Este Mes</option>
+                                <option value="anio">Este Año</option>
+                                <option value="fecha">Fecha</option>
+                            </select>
+                            <span id="rango-fechas-admin" class="d-none flex-ic-8">
+                                <input type="date" id="fecha-inicio-admin" class="select-sm" onchange="filtrarEstadisticasAdmin()">
+                                <span class="txt-muted-sm">al</span>
+                                <input type="date" id="fecha-fin-admin" class="select-sm" onchange="filtrarEstadisticasAdmin()">
+                            </span>
+                        </div>
                     </div>
-                    <button type="button" class="sidebar-right-toggle" id="sidebar-right-toggle" title="Expandir / Colapsar notificaciones">
-                        <svg id="right-rail-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-                    </button>
-                </div>
-                <div class="sidebar-right-content">
-                    <div class="sidebar-right-header">
-                        <h3 class="txt-main fw-600 font-mosquito">Notificaciones</h3>
+                    
+                    <div class="grid-auto-200mb">
+                        <div class="card mb-0 ta-center pa-5">
+                            <div id="lbl-solicitudes-admin" class="txt-muted-xs-upper">Total Solicitudes Emitidas</div>
+                            <div id="stat-solicitudes-admin" class="stat-num stat-num--pgd">-</div>
+                        </div>
+                        <div class="card mb-0 ta-center pa-5">
+                            <div class="txt-muted-xs-upper">En Atención</div>
+                            <div id="stat-atencion-admin" class="stat-num stat-num--atn">-</div>
+                        </div>
+                        <div class="card mb-0 ta-center pa-5">
+                            <div class="txt-muted-xs-upper">Resultados Listos</div>
+                            <div id="stat-listos-admin" class="stat-num stat-num--lst">-</div>
+                        </div>
+                        <div class="card mb-0 ta-center pa-5">
+                            <div class="txt-muted-xs-upper">Cerradas Con Éxito</div>
+                            <div id="stat-cerradas-admin" class="stat-num stat-num--main">-</div>
+                        </div>
+                        <div class="card mb-0 ta-center pa-5">
+                            <div class="txt-muted-xs-upper">Canceladas</div>
+                            <div id="stat-canceladas-admin" class="stat-num stat-num--danger">-</div>
+                        </div>
                     </div>
-                    <div class="sidebar-right-body">
-                        <!-- Contenido de notificaciones para ser utilizado posteriormente -->
-                        <p class="txt-muted">No hay nuevas notificaciones</p>
-                    </div>
-                </div>
-            </aside>
-```
 
-</details>
+                    <div class="grid-auto-400">
+                        <!-- Distribución por Categorías -->
+                        <div class="card mb-0">
+                            <h3 class="txt-pgd-lg">Distribución de Estudios por Categoría</h3>
+                            <div class="col-group" id="container-categorias-stats">
+                                <div class="text-center txt-muted" style="padding:2rem;">Cargando categorías...</div>
+                            </div>
+                        </div>
 
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `medicos.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L709-732)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-            <!-- Región Lateral Derecha: Notificaciones (Scope 30) -->
-            <aside class="sidebar-right" id="sidebar-right">
-                <div class="sidebar-right-toggle-row">
-                    <!-- Campana siempre visible + badge de conteo -->
-                    <div class="bell-wrap" id="bell-wrap-notif" title="Notificaciones">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-                        <span class="bell-badge" id="badge-resultados" aria-label="Notificaciones pendientes">0</span>
-                    </div>
-                    <button type="button" class="sidebar-right-toggle" id="sidebar-right-toggle" title="Expandir / Colapsar notificaciones">
-                        <svg id="right-rail-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-                    </button>
-                </div>
-                <div class="sidebar-right-content">
-                    <div class="sidebar-right-header">
-                        <h3 class="txt-main fw-600 font-mosquito">Notificaciones</h3>
-                    </div>
-                    <div class="sidebar-right-body">
-                        <p class="txt-muted">No hay nuevas notificaciones</p>
+                        <!-- Top 5 Médicos con más Solicitudes Remitidas -->
+                        <div class="card mb-0">
+                            <h3 class="txt-pgd-lg">Top 5 Médicos con más Solicitudes Remitidas</h3>
+                            <div class="col-group" id="container-medicos-stats">
+                                <div class="text-center txt-muted" style="padding:2rem;">Cargando médicos...</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </aside>
-        </div>
 
-```
+                <!-- Panel 5: Catálogos (Scope 14) -->
+                <div id="panel-catalogos" class="tab-panel d-none">
+                    <!-- Fila 1: Pestañas superiores (100% Idénticas a gestion_web.php) -->
+                    <div class="cms-tabs" id="toggle-catalog-view" role="tablist" aria-label="Secciones de Catálogos de Análisis">
+                        <button type="button" class="cms-tab active" data-view="table" id="btn-view-table">1. Tabla</button>
+                        <button type="button" class="cms-tab" id="menu-gabinetes">2. Areas</button>
+                        <button type="button" class="cms-tab" id="menu-igabinetes">3. I.Areas</button>
+                        <button type="button" class="cms-tab" id="menu-20estmed">4. 20 Est.Med</button>
+                    </div>
 
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `portal.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L189-249)</summary>
-
-**Path:** `Unknown file`
-
-```
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 1.5rem;
-}
-.sidebar-search-row .sidebar-search-btn {
-    display: flex;           /* visible en desktop dentro de esta fila */
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    width: 38px; height: 38px;
-    border-radius: 8px;
-    background: var(--bg-page);
-    border: 1.5px solid #e2e8f0;
-    cursor: pointer;
-    color: var(--text-muted);
-    padding: 0;
-    font-size: 0;            /* oculta etiqueta "Buscar", solo icono SVG */
-    transition: background 0.15s, border-color 0.15s, color 0.15s;
-}@media (hover: hover) and (pointer: fine) {
-    .sidebar-search-row .sidebar-search-btn:hover,
-.sidebar-search-row .sidebar-search-btn.active {
-        background: rgba(0, 82, 183, 0.09);
-    border-color: var(--primary);
-    color: var(--primary);
-    }
-}
-/* Input — desktop: ancho fijo ≈ "Catálogo de Estudios" (20ch) + 5 extra
-   Tablet/móvil: se anula con flex:1 + width:auto!important en el bloque ≤1024px */
-.sidebar-search-row .sidebar-search-wrap {
-    flex: none;           /* desktop: no rellena todo el sidebar */
-    width: 20ch;          /* ≈ "Catálogo de Estudios" − 5 chars */
-    margin-bottom: 0 !important;
-    position: relative;
-}
-.sidebar-search-row .sidebar-search-wrap input { width: 100%; }
-
-/* ── Portal — Barra de tabs interna (p.ej. Generar Orden / Mis Órdenes) ── */
-.portal-tab-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 2px solid #e2e8f0;
-    margin-bottom: 1.5rem;
-}
-.tab-bar-btns {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-/* GAP-MD-08 (2026-09-22): clon móvil de paginación junto a la pestaña
-   "Órdenes Hoy" — oculto en desktop/tablet, donde la paginación real
-   sigue en el header de la grilla (ver @media max-width:767px). */
-.pag-tabbar-vsep,
-.pag-tabbar-mob {
-    display: none;
-}
-.btn-imprimir-texto {
-    display: inline; /* Visible en Desktop/Laptop (icono + texto completo) */
-}
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `portal.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L2449-2499)</summary>
-
-**Path:** `Unknown file`
-
-```
-}
-.chip-estudio-remove {
-    cursor: pointer;
-    color: #991b1b;
-    font-weight: 700;
-    font-size: 0.9rem;
-    line-height: 1;
-    padding: 0 2px;
-    border: none;
-    background: transparent;
-}
-.chip-estudio-remove:hover {
-    color: #dc2626;
-}
-
-@media (max-width: 900px) {
-    .estudios-split-container {
-        flex-direction: column;
-    }
-    .estudios-col-left,
-    .estudios-col-right {
-        flex: 0 0 100%;
-        max-width: 100%;
-    }
-    .orden-estudios-header-row {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 6px;
-    }
-    .estudios-header-left,
-    .estudios-header-right {
-        flex: 0 0 100%;
-        max-width: 100%;
-        width: 100%;
-    }
-    .orden-estudios-header-row .orden-estudios-label {
-        font-size: clamp(0.65rem, 2.6vw, 0.82rem) !important;
-        white-space: nowrap !important;
-        overflow: hidden !important;
-        text-overflow: ellipsis !important;
-        line-height: 1.25;
-        margin-bottom: 2px;
-    }
-    .estudios-autocomplete-wrap {
-        width: 100%;
-        max-width: 100%;
-    }
-    .estudios-mandatory-grid {
-        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)) !important;
-        gap: 4px !important;
-    }
+                    <!-- Fila 2: Título de Sección y Controles (Total, Buscador, + Añadir) en un solo renglón -->
+                    <div class="cms-panel-header" style="margin-top: 1rem; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
 ```
 
 </details>
@@ -19839,12 +17926,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 ### Actions
 
 **Tool:** `grep_search`
-**Query:** `.sidebar-right`
+**Query:** `filtrarEstadisticasAdmin`
 
 <details>
 <summary>Metadata</summary>
 
-- **Model:** Gemini 3.8 Flash (Low)
+- **Model:** Gemini 3.8 Flash (High)
 </details>
 
 ---
@@ -19852,7 +17939,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 ### Local File Search
 
 **Status:** Completed
-**Created:** 25 Sept 2026, 7:35 am
+**Created:** 26 Sept 2026, 7:28 pm
 
 ---
 
@@ -19861,48 +17948,178 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 ### Actions
 
 **Tool:** `view_file`
-**File:** `portal.css`
+**File:** `labadmin.js`
 
 <details>
 <summary>Metadata</summary>
 
-- **Model:** Gemini 3.8 Flash (Low)
+- **Model:** Gemini 3.8 Flash (High)
 </details>
 
 ---
 
 <details>
-<summary>File: `Unknown file` (L679-704)</summary>
+<summary>File: `Unknown file` (L169-324)</summary>
 
 **Path:** `Unknown file`
 
 ```
-    body.portal-medico-body-layout .app-layout {
-            width: 100%;        /* garantiza que el flex-child llene todo el ancho disponible */
-            flex: 1 0 auto;     /* crece para llenar el alto sin colapsar */
+                // Respaldo si ws-client.js no cargó por algún motivo — mismo
+                // comportamiento que tenía esta función antes de hoy.
+                verSolicitudDigital(targetFolio);
+            }
         }
-    .sidebar-right {
-            display: flex;
-            width: 65px;
-            background: var(--bg-surface);
-            border-left: 1px solid #e2e8f0;
-            padding: 1rem 0;
-            flex-direction: column;
-            gap: 1.25rem;
-            flex-shrink: 0;
-            transition: width 0.2s ease, padding 0.2s ease;
-            overflow: visible;
-            align-items: center;
+
+        async function filtrarEstadisticasAdmin() {
+            const select = document.getElementById('filtro-periodo-admin');
+            if (!select) return; // Salida segura si el panel de estadísticas no está presente en el DOM
+            
+            const val = select.value || 'mes';
+            
+            let lblText = val.toUpperCase();
+            let inicio = '';
+            let fin = '';
+            
+            if (val === 'fecha') {
+                const inputInicio = document.getElementById('fecha-inicio-admin');
+                const inputFin = document.getElementById('fecha-fin-admin');
+                inicio = inputInicio ? inputInicio.value : '';
+                fin = inputFin ? inputFin.value : '';
+                
+                if (!inicio || !fin) return; // Esperar a que ambas fechas estén seleccionadas
+                
+                const fInicio = inicio.split('-').reverse().join('/');
+                const fFin = fin.split('-').reverse().join('/');
+                lblText = `${fInicio} al ${fFin}`;
+            }
+            
+            // Set loading states con guardas defensivas
+            const statSolEl = document.getElementById('stat-solicitudes-admin');
+            const statAtnEl = document.getElementById('stat-atencion-admin');
+            const statLstEl = document.getElementById('stat-listos-admin');
+            const statCerEl = document.getElementById('stat-cerradas-admin');
+            const statCanEl = document.getElementById('stat-canceladas-admin');
+            const lblSolEl  = document.getElementById('lbl-solicitudes-admin');
+            
+            if (statSolEl) statSolEl.innerText = '...';
+            if (statAtnEl) statAtnEl.innerText = '...';
+            if (statLstEl) statLstEl.innerText = '...';
+            if (statCerEl) statCerEl.innerText = '...';
+            if (statCanEl) statCanEl.innerText = '...';
+            if (lblSolEl)  lblSolEl.innerText = `TOTAL SOLICITUDES (${lblText})`;
+            
+            const catContainer = document.getElementById('container-categorias-stats');
+            const medContainer = document.getElementById('container-medicos-stats');
+            
+            if (catContainer) catContainer.innerHTML = '<div class="text-center txt-muted" style="padding:2rem;">Cargando categorías...</div>';
+            if (medContainer) medContainer.innerHTML = '<div class="text-center txt-muted" style="padding:2rem;">Cargando médicos...</div>';
+            
+            try {
+                const response = await fetch(`/laesh/rc/api/estadisticas?rango=${encodeURIComponent(val)}&inicio=${encodeURIComponent(inicio)}&fin=${encodeURIComponent(fin)}`);
+                if (!response.ok) throw new Error('Error en API de estadísticas');
+                
+                const data = await response.json();
+                if (!data.success) throw new Error(data.error || 'Error interno');
+                
+                // Totals
+                if (statSolEl) statSolEl.innerText = (data.totales?.solicitudes ?? 0).toLocaleString();
+                if (statAtnEl) statAtnEl.innerText = (data.totales?.atencion ?? 0).toLocaleString();
+                if (statLstEl) statLstEl.innerText = (data.totales?.listos ?? 0).toLocaleString();
+                if (statCerEl) statCerEl.innerText = (data.totales?.cerradas ?? 0).toLocaleString();
+                if (statCanEl) statCanEl.innerText = (data.totales?.canceladas ?? 0).toLocaleString();
+
+                // Categories
+                if (catContainer) {
+                    if (!data.categorias || data.categorias.length === 0) {
+                        catContainer.innerHTML = '<div class="text-center txt-muted" style="padding:2rem;">No hay estudios en este periodo</div>';
+                    } else {
+                        let catHtml = '';
+                        const catColors = ['bar-color-green', 'bar-color-blue', 'bar-color-amber'];
+                        const totalCats = data.categorias.reduce((sum, c) => sum + parseInt(c.conteo, 10), 0) || 1;
+                        
+                        data.categorias.forEach((cat, idx) => {
+                            const pct = Math.round((parseInt(cat.conteo, 10) / totalCats) * 100);
+                            const color = catColors[idx % catColors.length];
+                            catHtml += `
+                            <div>
+                                <div class="progress-label">
+                                    <span>${cat.nombre}</span>
+                                    <span>${pct}% (${cat.conteo} estudios)</span>
+                                </div>
+                                <div class="progress-track">
+                                    <div class="bar-fill ${color}" style="width: ${pct}%;"></div>
+                                </div>
+                            </div>`;
+                        });
+                        catContainer.innerHTML = catHtml;
+                    }
+                }
+                
+                // Medicos
+                if (medContainer) {
+                    if (!data.medicos || data.medicos.length === 0) {
+                        medContainer.innerHTML = '<div class="text-center txt-muted" style="padding:2rem;">No hay solicitudes en este periodo</div>';
+                    } else {
+                        let medHtml = '';
+                        const medColors = ['bar-color-green', 'bar-color-blue', 'bar-color-amber', 'bar-color-purple', 'bar-color-red'];
+                        const totalMeds = data.medicos.reduce((sum, m) => sum + parseInt(m.conteo, 10), 0) || 1;
+                        
+                        data.medicos.forEach((med, idx) => {
+                            const pct = Math.round((parseInt(med.conteo, 10) / totalMeds) * 100);
+                            const color = medColors[idx % medColors.length];
+                            medHtml += `
+                            <div>
+                                <div class="progress-label">
+                                    <span>${med.nombre}</span>
+                                    <span>${pct}% (${med.conteo} solicitudes)</span>
+                                </div>
+                                <div class="progress-track">
+                                    <div class="bar-fill ${color}" style="width: ${pct}%;"></div>
+                                </div>
+                            </div>`;
+                        });
+                        medContainer.innerHTML = medHtml;
+                    }
+                }
+                
+            } catch (err) {
+                console.error('Error fetching estadísticas:', err);
+                if (statSolEl) statSolEl.innerText = 'Error';
+                if (statCanEl) statCanEl.innerText = 'Error';
+                if (catContainer) catContainer.innerHTML = '<div class="text-center" style="color:var(--color-danger); padding:2rem;">Error al cargar</div>';
+                if (medContainer) medContainer.innerHTML = '<div class="text-center" style="color:var(--color-danger); padding:2rem;">Error al cargar</div>';
+            }
         }
-    .sidebar-right.sidebar-right-expanded {
-            width: 15%;
-            padding: 1.5rem 1rem;
-            align-items: stretch;
+
+        function manejarCambioFiltroAdmin() {
+            const select = document.getElementById('filtro-periodo-admin');
+            if (!select) return;
+            const rangeContainer = document.getElementById('rango-fechas-admin');
+            if (select.value === 'fecha') {
+                if (rangeContainer) rangeContainer.style.display = 'inline-flex';
+                const inputInicio = document.getElementById('fecha-inicio-admin');
+                if (inputInicio) {
+                    try {
+                        inputInicio.showPicker();
+                    } catch (e) {
+                        inputInicio.click();
+                    }
+                }
+            } else {
+                if (rangeContainer) rangeContainer.style.display = 'none';
+                filtrarEstadisticasAdmin();
+            }
         }
-    .sidebar-right-header {
-            border-bottom: 2px solid rgba(0, 82, 183, 0.11);
-            padding-bottom: 0.5rem;
-            margin-bottom: 1rem;
+        window.filtrarEstadisticasAdmin = filtrarEstadisticasAdmin;
+        window.manejarCambioFiltroAdmin = manejarCambioFiltroAdmin;
+
+        // GAP 3: abre solicitud_dac_impr.php en overlay iframe (centralizado en app.js)
+        var _abrirSolOverlay = window._abrirSolOverlay || function(url) {
+            var prev = document.getElementById('sol-overlay');
+            if (prev) prev.remove();
+            var overlay = document.createElement('div');
+            overlay.id = 'sol-overlay';
+            overlay.className = 'sol-overlay';
 ```
 
 </details>
@@ -19913,59 +18130,104 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 
 ### Actions
 
-**Tool:** `view_file`
-**File:** `portal.css`
+**Tool:** `grep_search`
+**Query:** `manejarCambioFiltroAdmin`
 
 <details>
 <summary>Metadata</summary>
 
-- **Model:** Gemini 3.8 Flash (Low)
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 26 Sept 2026, 7:28 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Examining the HTML snippet, it appears to define a filter selection for a date range within an administrative interface. The default selected period is "Este Mes". Considering the context of "labadmin," it is likely that this filter affects the display of data related to lab activities or reporting within the administrative view.
+
+
+
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `labadmin.js`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.080890526s
+- **Model:** Gemini 3.8 Flash (High)
 </details>
 
 ---
 
 <details>
-<summary>File: `Unknown file` (L1989-2024)</summary>
+<summary>File: `Unknown file` (L859-909)</summary>
 
 **Path:** `Unknown file`
 
 ```
-        padding: 1.25rem;
-        box-sizing: border-box;
-    }
-    .sidebar-right {
-        order: 2;
-        flex: 0 0 auto;
-        width: calc(100% - 2.5rem);
-        margin: 0 1.25rem 1.5rem 1.25rem;
-        padding: 1rem 1.25rem;
-        background: #ffffff;
-        border: 1px solid #e2e8f0;
-        border-radius: 12px;
-        box-shadow: 0 2px 8px rgba(0, 82, 183, 0.06);
-        box-sizing: border-box;
-        display: flex;
-        flex-direction: column;
-        gap: 0.75rem;
-        align-items: stretch;
-    }
-    .sidebar-right-content {
-        display: block;
-        width: 100%;
-    }
-    .portal-footer {
-        order: 3;
-        flex: 0 0 auto;
-        width: 100%;
-        margin-top: auto;
-        margin-bottom: 0;
-        padding: 0.75rem 1rem;
-        height: auto;
-        max-height: none;
-        box-sizing: border-box;
-    }
-    .portal-footer-inner {
-            flex-direction: column;    /* apila las dos filas en móvil */
+
+    // Botón abrir modal médico
+    var btnAbrirMedico = document.getElementById('btn-abrir-modal-medico');
+    if (btnAbrirMedico) btnAbrirMedico.addEventListener('click', function() {
+        if (typeof window.abrirModalMedico === 'function') window.abrirModalMedico();
+    });
+
+    // Botón agregar estudio
+    var btnAgregarEstudio = document.getElementById('btn-agregar-estudio');
+    if (btnAgregarEstudio) {
+        btnAgregarEstudio.addEventListener('click', function() {
+            if (window.showToast) showToast('Agregar Estudio desde el Constructor en proceso...', 'info');
+        });
+    } 
+    
+    // Filtros — IDs corregidos para coincidir con los elements reales del HTML
+    var filtroSelects = [
+        ['filtro-periodo-admin',           function() { if (typeof window.manejarCambioFiltroAdmin === 'function') window.manejarCambioFiltroAdmin(); }],
+        ['filtro-periodo-historial-admin', function() { if (typeof window.filtrarHistorialAdmin === 'function') window.filtrarHistorialAdmin(); }]
+    ];
+    filtroSelects.forEach(function(pair) {
+        var el = document.getElementById(pair[0]);
+        if (el) el.addEventListener('change', pair[1]);
+    });
+
+    // Modal overlays (cerrar al click en backdrop — excluye modal-medico para requerir clic en cruz de cerrar)
+    var modals = [];
+    modals.forEach(function(pair) {
+        var m = document.getElementById(pair[0]);
+        if (m) m.addEventListener('click', function(e) {
+            if (e.target === this && typeof window[pair[1]] === 'function') window[pair[1]]();
+        });
+    });
+
+    // Close buttons
+    var closeMap = [
+        ['btn-cerrar-medico',          'cerrarModalMedico']
+    ];
+    closeMap.forEach(function(pair) {
+        var btn = document.getElementById(pair[0]);
+        if (btn) btn.addEventListener('click', function() {
+            if (typeof window[pair[1]] === 'function') window[pair[1]]();
+        });
+    });
+
+    // Form buttons médico
+    var btnLimpiarMedico  = document.getElementById('btn-limpiar-medico');
+    var btnGuardarMedico  = document.getElementById('btn-guardar-medico');
+    if (btnLimpiarMedico)   btnLimpiarMedico.addEventListener('click',  function() { if (typeof window.limpiarFormMedico === 'function') window.limpiarFormMedico(); });
+    if (btnGuardarMedico)   btnGuardarMedico.addEventListener('click',  function() { if (typeof window.guardarPerfilMedico === 'function') window.guardarPerfilMedico(); });
+
 ```
 
 </details>
@@ -19977,12 +18239,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 ### Actions
 
 **Tool:** `view_file`
-**File:** `ws-client.js`
+**File:** `index.php`
 
 <details>
 <summary>Metadata</summary>
 
-- **Model:** Gemini 3.8 Flash (Low)
+- **Model:** Gemini 3.8 Flash (High)
 </details>
 
 ---
@@ -19993,1897 +18255,155 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 **Path:** `Unknown file`
 
 ```
+<?php
 /**
- * ws-client.js — Cliente WebSocket Swoole v6 + Fallback Polling para Notificaciones en Vivo (LAESH)
- * 
- * Funcionalidades:
- * 1. Agrupación en abanicos descendentes: "📅 Hoy" y "🕒 Ayer y Anteriores".
- * 2. Globito rojo visible (bell-badge con .show .pulse y opacity:1) y contador en título (N) Recepción.
- * 3. Supresión de advertencias Autoplay/AudioContext inicializando audio exclusivamente tras gesto de usuario.
+ * rc/index.php — Router Flight PHP para el Portal Recepción
+ *
+ * Ubicación: laesh-swbldi/rc/index.php
+ * URL:       /laesh/rc/          (Alias en restaurantb.conf → laesh-swbldi/rc/)
+ *
+ * Fuente HTML: website/uipv1/labadmin.html  ← NUNCA BORRAR (R15.1 - Merge iterativo)
+ * Capas:       View (views/labadmin.php), Negocio (RC\Negocio\Ordenes), Commons (Common\*)
+ *
+ * Rutas:
+ *   GET  /             → Panel principal Recepción (requiere permiso gestionar_ordenes)
+ *   POST /orden/crear  → Crear orden de laboratorio vía Stored Procedure (HTMX)
  */
-(function() {
-    'use strict';
 
-    var ws = null;
-    var reconnectInterval = 3000;
-    var maxReconnects = 3;
-    var reconnectAttempts = 0;
-    var pollingTimer = null;
-    var lastTimestamp = 0;
-    var seenNotifIds = {};
-    var unreadCount = 0;
-    var originalTitle = document.title;
+declare(strict_types=1);
 
-    // Control de AudioContext seguro (cero advertencias Autoplay)
-    var hasUserGesture = false;
-    var sharedAudioCtx = null;
+require_once __DIR__ . '/../commons/commons.php';
 
-    function registerUserGesture() {
-        if (hasUserGesture) return;
-        hasUserGesture = true;
-        try {
-            var AudioCtx = window.AudioContext || window.webkitAudioContext;
-            if (AudioCtx && !sharedAudioCtx) {
-                sharedAudioCtx = new AudioCtx();
-            }
-        } catch (e) {}
-    }
+use Common\Logger;
+use Common\DB;
 
-    ['click', 'keydown', 'touchstart', 'pointerdown'].forEach(function(evtName) {
-        document.addEventListener(evtName, registerUserGesture, { once: true, capture: true });
-    });
+// ── Guard RBAC: Permite acceso a RECEPCION y ADMIN (ambos tienen gestionar_ordenes) ─
+Flight::rbac()->requirePermission(
+    'gestionar_ordenes',
+    '/laesh/login/login.php?portal=labadmin'
+);
 
-    function getWsUrl() {
-        var host = window.location.hostname || 'localhost';
-        var protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-        return protocol + '//' + host + (window.location.port ? ':' + window.location.port : '') + '/ws/';
-    }
+// ── GET / — Panel principal Portal Recepción ──────────────────────────────────
+Flight::route('GET /', function () {
+    $auth = Flight::auth();
+    $db   = Flight::db();
 
-    function pollNotifications() {
-        var baseDir = window.location.pathname.replace(/\/+$/, '');
-        var endpoint = baseDir + '/api/notificaciones?since=' + lastTimestamp;
-        fetch(endpoint, { cache: 'no-store' })
-            .then(function(res) { return res.json(); })
-            .then(function(data) {
-                if (data && data.success && Array.isArray(data.notificaciones)) {
-                    var newTs = data.timestamp || data.server_time;
-                    if (newTs) lastTimestamp = newTs;
+    $userId   = (int)$auth->getUserId();
+    $authRole = Flight::rbac()->getRole() ?? 'RECEPCION';
+    $isAdmin  = ($authRole === 'ADMIN' || Flight::rbac()->hasPermission('gestionar_cms'));
 
-                    data.notificaciones.forEach(function(n) {
-                        if (n.id && seenNotifIds[n.id]) return;
-                        if (n.id) seenNotifIds[n.id] = true;
+    // Obtener datos del empleado/usuario logueado
+    $stmt = $db->prepare("SELECT nombre, apellidos FROM empleados WHERE user_id = ? LIMIT 1");
+    $stmt->execute([$userId]);
+    $emp = $stmt->fetch(\PDO::FETCH_ASSOC);
 
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `ws-client.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L599-638)</summary>
-
-**Path:** `Unknown file`
-
-```
-    function playChime() {
-        if (!hasUserGesture || !sharedAudioCtx) return;
-        try {
-            if (sharedAudioCtx.state === 'suspended') {
-                var p = sharedAudioCtx.resume();
-                if (p && typeof p.then === 'function') {
-                    p.then(function() { triggerTone(sharedAudioCtx); }).catch(function() {});
-                }
-            } else {
-                triggerTone(sharedAudioCtx);
-            }
-        } catch (e) {}
-    }
-
-    function triggerTone(audioCtx) {
-        try {
-            var osc = audioCtx.createOscillator();
-            var gain = audioCtx.createGain();
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(587.33, audioCtx.currentTime);
-            gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
-            osc.start();
-            osc.stop(audioCtx.currentTime + 0.15);
-        } catch (e) {}
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-        pollNotifications();
-        initWebSocket();
-
-        // Resetear globitos rojos y contador de pestaña al interactuar con el panel lateral
-        var toggleBtns = document.querySelectorAll('#bell-wrap-notif, #sidebar-right-toggle, .bell-wrap');
-        toggleBtns.forEach(function(btn) {
-            btn.addEventListener('click', resetNotifBadges);
-        });
-    });
-})();
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion-web.html`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Execution Error
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 7:36 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `gestion-web.html`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 7:36 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1749-1804)</summary>
-
-**Path:** `Unknown file`
-
-```
-            }
-            #seccion-order-list [data-seccion-id].dnd-over {
-                border-color:var(--primary,#0052B7); box-shadow:0 0 0 2px rgba(0,82,183,.18);
-            }
-            </style>
-        </div><!-- /panel-configuracion-general -->
-
-    </main><!-- /.cms-panels-scroll -->
-    </div><!-- /.cms-content-col -->
-
-    <!-- Región Lateral Derecha: Notificaciones -->
-    <aside class="sidebar-right" id="sidebar-right">
-        <div class="sidebar-right-toggle-row">
-            <div class="bell-wrap" id="bell-wrap-notif" title="Notificaciones">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-                <span class="bell-badge" id="badge-notif-cms" aria-label="Notificaciones pendientes">0</span>
-            </div>
-            <button type="button" class="sidebar-right-toggle" id="sidebar-right-toggle" title="Expandir / Colapsar">
-                <svg id="right-rail-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-            </button>
-        </div>
-        <div class="sidebar-right-content">
-            <div class="sidebar-right-header border-bottom pb-2 mb-3">
-                <h3 class="txt-main fw-600 font-mosquito txt-pgd mb-0 fs-sm">Notificaciones</h3>
-            </div>
-            <div class="sidebar-right-body" id="notif-list">
-                <p class="txt-muted txt-center-sm txt-muted-xs mt-4">No hay nuevas notificaciones</p>
-            </div>
-        </div>
-    </aside>
-</div>
-
-<!-- Toast de confirmación -->
-<div class="cms-toast" id="toast">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-    ¡Cambios publicados exitosamente en <strong>laesh.mx</strong>!
-</div>
-
-<!-- Configuración dinámica desde BD -->
-<meta name="cms-upload-url" content="<?= h($config['cms_upload_endpoint'] ?? '/laesh/adrc/cms/upload') ?>">
-
-<!-- CMS Upload — manejo de input[type=file][data-upload-slot] vía fetch multipart -->
-<script src="/laesh-web-assets-uipv1a/js/cms-upload.js?v=<?= time() ?>" defer></script>
-
-<script src="/laesh-web-assets-uipv1a/js/htmx.min.js"></script><!-- GAP-ARQ-01: requerido por hx-post /cms/save -->
-<script src="/laesh-web-assets-uipv1a/js/app.js?v=<?= time() ?>" defer></script>
-<script src="/laesh-web-assets-uipv1a/js/ws-client.js?v=<?= time() ?>" defer></script>
-<script src="/laesh-web-assets-uipv1a/js/portal-footer.js?v=<?= time() ?>" defer></script>
-<script src="/laesh-web-assets-uipv1a/js/sidebar-rail.js?v=<?= time() ?>" defer></script>
-
-<!-- CKEditor 5 — servido localmente (licencia GPL, sin CDN externo) -->
-<script src="/laesh-web-assets-uipv1a/js/ckeditor5.umd.js?v=<?= time() ?>"></script>
-<script src="/laesh-web-assets-uipv1a/js/ckeditor-init.js?v=<?= time() ?>" defer></script>
-<script src="/laesh-web-assets-uipv1a/js/cms-dirty-tracker.js?v=<?= time() ?>" defer></script>
-
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L144-179)</summary>
-
-**Path:** `Unknown file`
-
-```
-            Banner Principal
-        </div>
-        <div class="nav-item" id="nav-quienes-somos" data-panel="panel-quienes-somos" data-section="quienes-somos" data-tooltip="Historia, Misión, Visión y Valores (#acerca-de)" role="button" tabindex="0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            Quiénes somos
-        </div>
-        <div class="nav-item" id="nav-especialidades" data-panel="panel-especialidades" data-section="especialidades" data-tooltip="Carrusel y catálogo de estudios (#especialidades)" role="button" tabindex="0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2v6a2 2 0 0 0 .245.96l5.51 10.08A2 2 0 0 1 18 22H6a2 2 0 0 1-1.755-2.96l5.51-10.08A2 2 0 0 0 10 8V2"/></svg>
-            Estudios
-        </div>
-        <div class="nav-item" id="nav-promociones" data-panel="panel-promociones" data-section="promociones" data-tooltip="Banner promocional (#promociones)" role="button" tabindex="0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m8.5 8.5 7 7"/></svg>
-            Promociones Vigentes
-        </div>
-        <div class="nav-item" id="nav-calidad" data-panel="panel-calidad" data-section="calidad" data-tooltip="Galería de instalaciones (#calidad)" role="button" tabindex="0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-            Calidad e Instalaciones
-        </div>
-        <div class="nav-item" id="nav-ubicacion" data-panel="panel-ubicacion" data-section="ubicacion" data-tooltip="Teléfonos, dirección y mapa (#ubicacion)" role="button" tabindex="0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            Ubicación y Contacto
-        </div>
-        <div class="nav-item" id="nav-footer" data-panel="panel-footer" data-section="footer" data-tooltip="Pie de página: datos, horarios y créditos (#footer)" role="button" tabindex="0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="13" width="18" height="8" rx="2"/><path d="M3 7h18M7 3h10"/></svg>
-            Pie de Página
-        </div>
-        <div class="nav-item" id="nav-aviso-privacidad" data-panel="panel-aviso-privacidad" data-section="aviso-privacidad" data-tooltip="Aviso de Privacidad — contenido legal completo" role="button" tabindex="0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            Aviso de Privacidad
-        </div>
-        <div class="nav-item" id="nav-video-promo" data-panel="panel-video-promo" data-section="video-promo" data-tooltip="Video promocional con enlaces y reproductor embebido" role="button" tabindex="0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
-            Video promo
-        </div>
-        <div class="nav-item" id="nav-configuracion-general" data-panel="panel-configuracion-general" data-section="configuracion-general" data-tooltip="Orden vertical de secciones en la página de inicio" role="button" tabindex="0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L119-143)</summary>
-
-**Path:** `Unknown file`
-
-```
-        <button type="button" class="btn btn-secondary mr-2" id="btn-preview-tabbar" title="Vista previa del sitio público sin publicar">
-            👁 Vista previa
-        </button>
-        <div class="user-badge-portal">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--primary-green-dark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            <span>Admin Web: <strong class="txt-pgd"><?= htmlspecialchars($nombreAdmin, ENT_QUOTES, 'UTF-8') ?></strong></span>
-        </div>
-        <a href="/laesh/login/logout.php" class="btn-back-primary" id="btn-logout">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-            Cerrar Sesión
-        </a>
-    </div>
-    <div class="portal-initials-mob portal-initials-mob--admin" aria-hidden="true">ADM</div>
-</nav>
-
-<div class="app-layout">
-    <!-- ====== SIDEBAR ====== -->
-    <aside class="sidebar">
-        <div class="sidebar-toggle-row">
-            <button type="button" class="sidebar-rail-toggle" id="sidebar-rail-toggle" title="Expandir / Colapsar menú">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-            </button>
-        </div>
-        <div class="nav-item active" id="nav-hero" data-panel="panel-hero" data-section="hero" data-tooltip="Banner y textos del carrusel principal (#inicio)" role="button" tabindex="0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion-web.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L699-724)</summary>
-
-**Path:** `Unknown file`
-
-```
-    background-color: rgba(0, 82, 183, 0.1);
-    border-bottom-color: var(--primary);
-}
-
-/* ── Clases extraídas de inline styles (Saneamiento R24-CSS-01 / CSP) ── */
-.portal-link-plain { text-decoration: none; }
-.sidebar-right-header { border-bottom: 2px solid rgba(0,82,183,0.11); padding-bottom: 0.5rem; margin-bottom: 1rem; }
-.notif-title { font-size: 0.95rem; margin: 0; color: var(--primary); }
-.notif-empty { font-size: 0.8rem; text-align: center; margin-top: 2rem; }
-
-/* ── CKEditor 5 — montaje en CMS (ck5-mount / ck5-hidden-data) ──────────────
-   Versión: 20260823k                                                         */
-
-/* Contenedor de montaje del editor */
-.ck5-mount {
-    border: 1px solid var(--border, #d1d5db);
-    border-radius: 6px;
-    overflow: hidden;
-    background: var(--bg-card, #fff);
-    min-height: 160px;
-}
-
-.ck5-mount,
-.ck5-mount .ck.ck-editor,
-.ck5-mount .ck-editor__main {
-    width: 100% !important;
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `sidebar-right`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 7:36 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion-web.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L529-574)</summary>
-
-**Path:** `Unknown file`
-
-```
-    // Actualizar contadores al inicio y al cambiar de slide o ficha
-    setTimeout(refreshAllCharCounters, 100);
-    initCurrentValueLabels();
-
-    // Lógica reactiva para enterarse de notificaciones de recepción (labadmin)
-    let lastRemitidosCMS = 0;
-    function refreshNotificacionesCMS() {
-        fetch('/laesh/admrc/api/notificaciones')
-            .then(res => res.json())
-            .then(data => {
-                if (data && data.success) {
-                    const count = data.emitidas || 0;
-                    const badge = document.getElementById('badge-notif-cms');
-
-                    if (badge) {
-                        badge.innerText = count;
-                        if (count > 0) {
-                            badge.classList.add('show');
-                            if (count > lastRemitidosCMS) {
-                                badge.classList.add('pulse');
-                                if (typeof playWhistle === 'function') {
-                                    playWhistle();
-                                }
-                                setTimeout(() => badge.classList.remove('pulse'), 3000);
-                            }
-                            document.title = `(${count}) Gestión Web - LAESH`;
-                        } else {
-                            badge.classList.remove('show');
-                            badge.classList.remove('pulse');
-                            document.title = "Gestión Web - LAESH";
-                        }
-                    }
-                    lastRemitidosCMS = count;
-                }
-            })
-            .catch(() => {});
-    }
-
-    // Inicializar y escuchar cambios de LocalStorage
-    refreshNotificacionesCMS();
-    setInterval(refreshNotificacionesCMS, 4000);
-    window.addEventListener('storage', refreshNotificacionesCMS);
-
-    // ── Drag-and-drop: Panel Orden de Secciones ───────────────────────────────
-    // Inicializa el reordenamiento HTML5 nativo en el panel configuracion-general.
-    // Solo se activa cuando el elemento #seccion-order-list existe en el DOM.
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `app.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L564-614)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-        /* Mobile Notification Bell Icon next to online status dot */
-        if (initialsMob && header && !document.getElementById('bell-wrap-mob')) {
-            var bellMob = document.createElement('div');
-            bellMob.className = 'bell-wrap-mob';
-            bellMob.id = 'bell-wrap-mob';
-            bellMob.title = 'Ver Notificaciones';
-            bellMob.setAttribute('role', 'button');
-            bellMob.setAttribute('tabindex', '0');
-            bellMob.setAttribute('aria-label', 'Ver Notificaciones');
-            bellMob.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span class="bell-badge" id="badge-notif-mob">0</span>';
-
-            var connMob = document.getElementById('conn-status-mob');
-            if (connMob) {
-                header.insertBefore(bellMob, connMob);
-            } else {
-                header.insertBefore(bellMob, initialsMob);
-            }
-
-            var isScrolling = false;
-            function scrollToNotif(e) {
-                if (isScrolling) return;
-                isScrolling = true;
-                e.preventDefault();
-                var targetNotif = document.getElementById('sidebar-right') || document.querySelector('.sidebar-right');
-                if (targetNotif) {
-                    targetNotif.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-                setTimeout(function() { isScrolling = false; }, 400);
-            }
-
-            bellMob.addEventListener('click', scrollToNotif);
-            bellMob.addEventListener('touchend', scrollToNotif);
-
-            /* Sync notification badge count */
-            var existingBadge = document.getElementById('badge-resultados') || document.getElementById('badge-recepcion') || document.getElementById('badge-notif-cms');
-            var mobBadge = document.getElementById('badge-notif-mob');
-            if (existingBadge && mobBadge) {
-                mobBadge.textContent = existingBadge.textContent;
-                if (window.MutationObserver) {
-                    var observer = new MutationObserver(function() {
-                        mobBadge.textContent = existingBadge.textContent;
-                    });
-                    observer.observe(existingBadge, { childList: true, characterData: true, subtree: true });
-                }
-            }
-        }
-
-        updateConnectionStatus();
-    }
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `app.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L514-544)</summary>
-
-**Path:** `Unknown file`
-
-```
-                !svg.getAttribute('title') && 
-                svg.getAttribute('role') !== 'img') {
-                svg.setAttribute('aria-hidden', 'true');
-                svg.setAttribute('focusable', 'false');
-            }
-        });
-    }
-    function run() { 
-        document.querySelectorAll('.ficha-dropdown').forEach(enableDrag); 
-        hideDecorativeSVGs();
-    }
-    if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', run); } else { run(); }
-})();
-
-// ── Connection Status Indicator (online / offline) ────────────────
-(function () {
-    'use strict';
-    function updateConnectionStatus() {
-        var isOnline = navigator.onLine;
-        document.querySelectorAll('.status-dot').forEach(function(dot) {
-            if (isOnline) {
-                dot.className = 'status-dot online';
-                dot.parentElement.title = 'Conexión: En Línea';
-            } else {
-                dot.className = 'status-dot offline';
-                dot.parentElement.title = 'Conexión: Fuera de Línea';
-            }
-        });
-    }
-
-    function initConnectionStatus() {
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `app.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L544-569)</summary>
-
-**Path:** `Unknown file`
-
-```
-    function initConnectionStatus() {
-        var headerRight = document.querySelector('.portal-header-right');
-        var userBadge = document.querySelector('.user-badge-portal');
-        if (headerRight && userBadge && !document.getElementById('conn-status-desktop')) {
-            var connDiv = document.createElement('div');
-            connDiv.className = 'connection-status';
-            connDiv.id = 'conn-status-desktop';
-            connDiv.innerHTML = '<span class="status-dot"></span>';
-            headerRight.insertBefore(connDiv, userBadge);
-        }
-
-        var initialsMob = document.querySelector('.portal-initials-mob');
-        var header = document.querySelector('.portal-access-header');
-        if (initialsMob && header && !document.getElementById('conn-status-mob')) {
-            var connDivMob = document.createElement('div');
-            connDivMob.className = 'connection-status-mob';
-            connDivMob.id = 'conn-status-mob';
-            connDivMob.innerHTML = '<span class="status-dot"></span>';
-            header.insertBefore(connDivMob, initialsMob);
-        }
-
-        /* Mobile Notification Bell Icon next to online status dot */
-        if (initialsMob && header && !document.getElementById('bell-wrap-mob')) {
-            var bellMob = document.createElement('div');
-            bellMob.className = 'bell-wrap-mob';
-            bellMob.id = 'bell-wrap-mob';
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `app.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L564-614)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-        /* Mobile Notification Bell Icon next to online status dot */
-        if (initialsMob && header && !document.getElementById('bell-wrap-mob')) {
-            var bellMob = document.createElement('div');
-            bellMob.className = 'bell-wrap-mob';
-            bellMob.id = 'bell-wrap-mob';
-            bellMob.title = 'Ver Notificaciones';
-            bellMob.setAttribute('role', 'button');
-            bellMob.setAttribute('tabindex', '0');
-            bellMob.setAttribute('aria-label', 'Ver Notificaciones');
-            bellMob.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span class="bell-badge" id="badge-notif-mob">0</span>';
-
-            var connMob = document.getElementById('conn-status-mob');
-            if (connMob) {
-                header.insertBefore(bellMob, connMob);
-            } else {
-                header.insertBefore(bellMob, initialsMob);
-            }
-
-            var isScrolling = false;
-            function scrollToNotif(e) {
-                if (isScrolling) return;
-                isScrolling = true;
-                e.preventDefault();
-                var targetNotif = document.getElementById('sidebar-right') || document.querySelector('.sidebar-right');
-                if (targetNotif) {
-                    targetNotif.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-                setTimeout(function() { isScrolling = false; }, 400);
-            }
-
-            bellMob.addEventListener('click', scrollToNotif);
-            bellMob.addEventListener('touchend', scrollToNotif);
-
-            /* Sync notification badge count */
-            var existingBadge = document.getElementById('badge-resultados') || document.getElementById('badge-recepcion') || document.getElementById('badge-notif-cms');
-            var mobBadge = document.getElementById('badge-notif-mob');
-            if (existingBadge && mobBadge) {
-                mobBadge.textContent = existingBadge.textContent;
-                if (window.MutationObserver) {
-                    var observer = new MutationObserver(function() {
-                        mobBadge.textContent = existingBadge.textContent;
-                    });
-                    observer.observe(existingBadge, { childList: true, characterData: true, subtree: true });
-                }
-            }
-        }
-
-        updateConnectionStatus();
-    }
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `app.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L564-604)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-        /* Mobile Notification Bell Icon next to online status dot */
-        if (initialsMob && header && !document.getElementById('bell-wrap-mob')) {
-            var bellMob = document.createElement('div');
-            bellMob.className = 'bell-wrap-mob';
-            bellMob.id = 'bell-wrap-mob';
-            bellMob.title = 'Ver Notificaciones';
-            bellMob.setAttribute('role', 'button');
-            bellMob.setAttribute('tabindex', '0');
-            bellMob.setAttribute('aria-label', 'Ver Notificaciones');
-            bellMob.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span class="bell-badge" id="badge-notif-mob">0</span>';
-
-            var connMob = document.getElementById('conn-status-mob');
-            if (connMob) {
-                header.insertBefore(bellMob, connMob);
-            } else {
-                header.insertBefore(bellMob, initialsMob);
-            }
-
-            var isScrolling = false;
-            function scrollToNotif(e) {
-                if (isScrolling) return;
-                isScrolling = true;
-                e.preventDefault();
-                var targetNotif = document.getElementById('sidebar-right') || document.querySelector('.sidebar-right');
-                if (targetNotif) {
-                    targetNotif.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-                setTimeout(function() { isScrolling = false; }, 400);
-            }
-
-            bellMob.addEventListener('click', scrollToNotif);
-            bellMob.addEventListener('touchend', scrollToNotif);
-
-            /* Sync notification badge count */
-            var existingBadge = document.getElementById('badge-resultados') || document.getElementById('badge-recepcion') || document.getElementById('badge-notif-cms');
-            var mobBadge = document.getElementById('badge-notif-mob');
-            if (existingBadge && mobBadge) {
-                mobBadge.textContent = existingBadge.textContent;
-                if (window.MutationObserver) {
-                    var observer = new MutationObserver(function() {
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `app.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L559-619)</summary>
-
-**Path:** `Unknown file`
-
-```
-            connDivMob.className = 'connection-status-mob';
-            connDivMob.id = 'conn-status-mob';
-            connDivMob.innerHTML = '<span class="status-dot"></span>';
-            header.insertBefore(connDivMob, initialsMob);
-        }
-
-        /* Mobile Notification Bell Icon next to online status dot */
-        if (initialsMob && header && !document.getElementById('bell-wrap-mob')) {
-            var bellMob = document.createElement('div');
-            bellMob.className = 'bell-wrap-mob';
-            bellMob.id = 'bell-wrap-mob';
-            bellMob.title = 'Ver Notificaciones';
-            bellMob.setAttribute('role', 'button');
-            bellMob.setAttribute('tabindex', '0');
-            bellMob.setAttribute('aria-label', 'Ver Notificaciones');
-            bellMob.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span class="bell-badge" id="badge-notif-mob">0</span>';
-
-            var connMob = document.getElementById('conn-status-mob');
-            if (connMob) {
-                header.insertBefore(bellMob, connMob);
-            } else {
-                header.insertBefore(bellMob, initialsMob);
-            }
-
-            var isScrolling = false;
-            function scrollToNotif(e) {
-                if (isScrolling) return;
-                isScrolling = true;
-                e.preventDefault();
-                var targetNotif = document.getElementById('sidebar-right') || document.querySelector('.sidebar-right');
-                if (targetNotif) {
-                    targetNotif.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-                setTimeout(function() { isScrolling = false; }, 400);
-            }
-
-            bellMob.addEventListener('click', scrollToNotif);
-            bellMob.addEventListener('touchend', scrollToNotif);
-
-            /* Sync notification badge count */
-            var existingBadge = document.getElementById('badge-resultados') || document.getElementById('badge-recepcion') || document.getElementById('badge-notif-cms');
-            var mobBadge = document.getElementById('badge-notif-mob');
-            if (existingBadge && mobBadge) {
-                mobBadge.textContent = existingBadge.textContent;
-                if (window.MutationObserver) {
-                    var observer = new MutationObserver(function() {
-                        mobBadge.textContent = existingBadge.textContent;
-                    });
-                    observer.observe(existingBadge, { childList: true, characterData: true, subtree: true });
-                }
-            }
-        }
-
-        updateConnectionStatus();
-    }
-
-    window.addEventListener('online', updateConnectionStatus);
-    window.addEventListener('offline', updateConnectionStatus);
-
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initConnectionStatus);
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `app.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L565-611)</summary>
-
-**Path:** `Unknown file`
-
-```
-        /* Mobile Notification Bell Icon next to online status dot */
-        if (initialsMob && header && !document.getElementById('bell-wrap-mob')) {
-            var bellMob = document.createElement('div');
-            bellMob.className = 'bell-wrap-mob';
-            bellMob.id = 'bell-wrap-mob';
-            bellMob.title = 'Ver Notificaciones';
-            bellMob.setAttribute('role', 'button');
-            bellMob.setAttribute('tabindex', '0');
-            bellMob.setAttribute('aria-label', 'Ver Notificaciones');
-            bellMob.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span class="bell-badge" id="badge-notif-mob">0</span>';
-
-            var connMob = document.getElementById('conn-status-mob');
-            if (connMob) {
-                header.insertBefore(bellMob, connMob);
-            } else {
-                header.insertBefore(bellMob, initialsMob);
-            }
-
-            var isScrolling = false;
-            function scrollToNotif(e) {
-                if (isScrolling) return;
-                isScrolling = true;
-                e.preventDefault();
-                var targetNotif = document.getElementById('sidebar-right') || document.querySelector('.sidebar-right');
-                if (targetNotif) {
-                    targetNotif.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-                setTimeout(function() { isScrolling = false; }, 400);
-            }
-
-            bellMob.addEventListener('click', scrollToNotif);
-            bellMob.addEventListener('touchend', scrollToNotif);
-
-            /* Sync notification badge count */
-            var existingBadge = document.getElementById('badge-resultados') || document.getElementById('badge-recepcion') || document.getElementById('badge-notif-cms');
-            var mobBadge = document.getElementById('badge-notif-mob');
-            if (existingBadge && mobBadge) {
-                mobBadge.textContent = existingBadge.textContent;
-                if (window.MutationObserver) {
-                    var observer = new MutationObserver(function() {
-                        mobBadge.textContent = existingBadge.textContent;
-                    });
-                    observer.observe(existingBadge, { childList: true, characterData: true, subtree: true });
-                }
-            }
-        }
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `app.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L565-611)</summary>
-
-**Path:** `Unknown file`
-
-```
-        /* Mobile Notification Bell Icon next to online status dot */
-        if (initialsMob && header && !document.getElementById('bell-wrap-mob')) {
-            var bellMob = document.createElement('div');
-            bellMob.className = 'bell-wrap-mob';
-            bellMob.id = 'bell-wrap-mob';
-            bellMob.title = 'Ver Notificaciones';
-            bellMob.setAttribute('role', 'button');
-            bellMob.setAttribute('tabindex', '0');
-            bellMob.setAttribute('aria-label', 'Ver Notificaciones');
-            bellMob.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span class="bell-badge" id="badge-notif-mob">0</span>';
-
-            var connMob = document.getElementById('conn-status-mob');
-            if (connMob) {
-                header.insertBefore(bellMob, connMob);
-            } else {
-                header.insertBefore(bellMob, initialsMob);
-            }
-
-            var isScrolling = false;
-            function scrollToNotif(e) {
-                if (isScrolling) return;
-                isScrolling = true;
-                e.preventDefault();
-                var targetNotif = document.getElementById('sidebar-right') || document.querySelector('.sidebar-right');
-                if (targetNotif) {
-                    targetNotif.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-                setTimeout(function() { isScrolling = false; }, 400);
-            }
-
-            bellMob.addEventListener('click', scrollToNotif);
-            bellMob.addEventListener('touchend', scrollToNotif);
-
-            /* Sync notification badge count */
-            var existingBadge = document.getElementById('badge-resultados') || document.getElementById('badge-recepcion') || document.getElementById('badge-notif-cms');
-            var mobBadge = document.getElementById('badge-notif-mob');
-            if (existingBadge && mobBadge) {
-                mobBadge.textContent = existingBadge.textContent;
-                if (window.MutationObserver) {
-                    var observer = new MutationObserver(function() {
-                        mobBadge.textContent = existingBadge.textContent;
-                    });
-                    observer.observe(existingBadge, { childList: true, characterData: true, subtree: true });
-                }
-            }
-        }
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion_web.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L1754-1804)</summary>
-
-**Path:** `Unknown file`
-
-```
-        </div><!-- /panel-configuracion-general -->
-
-    </main><!-- /.cms-panels-scroll -->
-    </div><!-- /.cms-content-col -->
-
-    <!-- Región Lateral Derecha: Notificaciones -->
-    <aside class="sidebar-right" id="sidebar-right">
-        <div class="sidebar-right-toggle-row">
-            <div class="bell-wrap" id="bell-wrap-notif" title="Notificaciones">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-                <span class="bell-badge" id="badge-notif-cms" aria-label="Notificaciones pendientes">0</span>
-            </div>
-            <button type="button" class="sidebar-right-toggle" id="sidebar-right-toggle" title="Expandir / Colapsar">
-                <svg id="right-rail-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-            </button>
-        </div>
-        <div class="sidebar-right-content">
-            <div class="sidebar-right-header border-bottom pb-2 mb-3">
-                <h3 class="txt-main fw-600 font-mosquito txt-pgd mb-0 fs-sm">Notificaciones</h3>
-            </div>
-            <div class="sidebar-right-body" id="notif-list">
-                <p class="txt-muted txt-center-sm txt-muted-xs mt-4">No hay nuevas notificaciones</p>
-            </div>
-        </div>
-    </aside>
-</div>
-
-<!-- Toast de confirmación -->
-<div class="cms-toast" id="toast">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-    ¡Cambios publicados exitosamente en <strong>laesh.mx</strong>!
-</div>
-
-<!-- Configuración dinámica desde BD -->
-<meta name="cms-upload-url" content="<?= h($config['cms_upload_endpoint'] ?? '/laesh/adrc/cms/upload') ?>">
-
-<!-- CMS Upload — manejo de input[type=file][data-upload-slot] vía fetch multipart -->
-<script src="/laesh-web-assets-uipv1a/js/cms-upload.js?v=<?= time() ?>" defer></script>
-
-<script src="/laesh-web-assets-uipv1a/js/htmx.min.js"></script><!-- GAP-ARQ-01: requerido por hx-post /cms/save -->
-<script src="/laesh-web-assets-uipv1a/js/app.js?v=<?= time() ?>" defer></script>
-<script src="/laesh-web-assets-uipv1a/js/ws-client.js?v=<?= time() ?>" defer></script>
-<script src="/laesh-web-assets-uipv1a/js/portal-footer.js?v=<?= time() ?>" defer></script>
-<script src="/laesh-web-assets-uipv1a/js/sidebar-rail.js?v=<?= time() ?>" defer></script>
-
-<!-- CKEditor 5 — servido localmente (licencia GPL, sin CDN externo) -->
-<script src="/laesh-web-assets-uipv1a/js/ckeditor5.umd.js?v=<?= time() ?>"></script>
-<script src="/laesh-web-assets-uipv1a/js/ckeditor-init.js?v=<?= time() ?>" defer></script>
-<script src="/laesh-web-assets-uipv1a/js/cms-dirty-tracker.js?v=<?= time() ?>" defer></script>
-
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 7:37 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `app.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L564-614)</summary>
-
-**Path:** `Unknown file`
-
-```
-
-        /* Mobile Notification Bell Icon next to online status dot */
-        if (initialsMob && header && !document.getElementById('bell-wrap-mob')) {
-            var bellMob = document.createElement('div');
-            bellMob.className = 'bell-wrap-mob';
-            bellMob.id = 'bell-wrap-mob';
-            bellMob.title = 'Ver Notificaciones';
-            bellMob.setAttribute('role', 'button');
-            bellMob.setAttribute('tabindex', '0');
-            bellMob.setAttribute('aria-label', 'Ver Notificaciones');
-            bellMob.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span class="bell-badge" id="badge-notif-mob">0</span>';
-
-            var connMob = document.getElementById('conn-status-mob');
-            if (connMob) {
-                header.insertBefore(bellMob, connMob);
-            } else {
-                header.insertBefore(bellMob, initialsMob);
-            }
-
-            var isScrolling = false;
-            function scrollToNotif(e) {
-                if (isScrolling) return;
-                isScrolling = true;
-                e.preventDefault();
-                var targetNotif = document.getElementById('sidebar-right') || document.querySelector('.sidebar-right');
-                if (targetNotif) {
-                    targetNotif.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-                setTimeout(function() { isScrolling = false; }, 400);
-            }
-
-            bellMob.addEventListener('click', scrollToNotif);
-            bellMob.addEventListener('touchend', scrollToNotif);
-
-            /* Sync notification badge count */
-            var existingBadge = document.getElementById('badge-resultados') || document.getElementById('badge-recepcion') || document.getElementById('badge-notif-cms');
-            var mobBadge = document.getElementById('badge-notif-mob');
-            if (existingBadge && mobBadge) {
-                mobBadge.textContent = existingBadge.textContent;
-                if (window.MutationObserver) {
-                    var observer = new MutationObserver(function() {
-                        mobBadge.textContent = existingBadge.textContent;
-                    });
-                    observer.observe(existingBadge, { childList: true, characterData: true, subtree: true });
-                }
-            }
-        }
-
-        updateConnectionStatus();
-    }
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 7:37 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion-web.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L529-574)</summary>
-
-**Path:** `Unknown file`
-
-```
-    // Actualizar contadores al inicio y al cambiar de slide o ficha
-    setTimeout(refreshAllCharCounters, 100);
-    initCurrentValueLabels();
-
-    // Lógica reactiva para enterarse de notificaciones de recepción (labadmin)
-    let lastRemitidosCMS = 0;
-    function refreshNotificacionesCMS() {
-        fetch('/laesh/admrc/api/notificaciones')
-            .then(res => res.json())
-            .then(data => {
-                if (data && data.success) {
-                    const count = data.emitidas || 0;
-                    const badge = document.getElementById('badge-notif-cms');
-
-                    if (badge) {
-                        badge.innerText = count;
-                        if (count > 0) {
-                            badge.classList.add('show');
-                            if (count > lastRemitidosCMS) {
-                                badge.classList.add('pulse');
-                                if (typeof playWhistle === 'function') {
-                                    playWhistle();
-                                }
-                                setTimeout(() => badge.classList.remove('pulse'), 3000);
-                            }
-                            document.title = `(${count}) Gestión Web - LAESH`;
-                        } else {
-                            badge.classList.remove('show');
-                            badge.classList.remove('pulse');
-                            document.title = "Gestión Web - LAESH";
-                        }
-                    }
-                    lastRemitidosCMS = count;
-                }
-            })
-            .catch(() => {});
-    }
-
-    // Inicializar y escuchar cambios de LocalStorage
-    refreshNotificacionesCMS();
-    setInterval(refreshNotificacionesCMS, 4000);
-    window.addEventListener('storage', refreshNotificacionesCMS);
-
-    // ── Drag-and-drop: Panel Orden de Secciones ───────────────────────────────
-    // Inicializa el reordenamiento HTML5 nativo en el panel configuracion-general.
-    // Solo se activa cuando el elemento #seccion-order-list existe en el DOM.
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 7:37 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `gestion-web.css`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L703-711)</summary>
-
-**Path:** `Unknown file`
-
-```
-/* ── Clases extraídas de inline styles (Saneamiento R24-CSS-01 / CSP) ── */
-.portal-link-plain { text-decoration: none; }
-.sidebar-right-header { border-bottom: 2px solid rgba(0,82,183,0.11); padding-bottom: 0.5rem; margin-bottom: 1rem; }
-.notif-title { font-size: 0.95rem; margin: 0; color: var(--primary); }
-.notif-empty { font-size: 0.8rem; text-align: center; margin-top: 2rem; }
-
-/* ── CKEditor 5 — montaje en CMS (ck5-mount / ck5-hidden-data) ──────────────
-   Versión: 20260823k                                                         */
-
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `badge-notif-cms`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 7:37 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `ws-client.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L169-184)</summary>
-
-**Path:** `Unknown file`
-
-```
-        }
-    }
-
-    function resetNotifBadges() {
-        unreadCount = 0;
-        updateTitleCounter();
-        var badges = document.querySelectorAll('#badge-recepcion, #badge-resultados, #badge-notif-cms, .bell-badge');
-        badges.forEach(function(b) {
-            b.textContent = '0';
-            b.classList.remove('show', 'pulse');
-            b.style.opacity = '0';
-        });
-
-        // Sincronización SSOT en MariaDB: marcar notificaciones pendientes como leídas
-        var baseDir = window.location.pathname.replace(/\/+$/, '');
-        fetch(baseDir + '/api/notificaciones/marcar-leida', {
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `ws-client.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L294-304)</summary>
-
-**Path:** `Unknown file`
-
-```
-            // Incrementar contador de pestaña
-            unreadCount++;
-            updateTitleCounter();
-
-            // Actualizar globitos rojos de notificación con animación
-            var badges = document.querySelectorAll('#badge-recepcion, #badge-resultados, #badge-notif-cms, .bell-badge');
-            badges.forEach(function(b) {
-                var count = parseInt(b.textContent || '0', 10) + 1;
-                b.textContent = count;
-                b.classList.add('show', 'pulse');
-                b.style.display = 'inline-flex';
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `ws-client.js`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L384-399)</summary>
-
-**Path:** `Unknown file`
-
-```
-                    // arriba) aplica para este tipo de ítem.
-                    if (!isCatalogoEvent) {
-                        unreadCount = Math.max(0, unreadCount - 1);
-                        updateTitleCounter();
-
-                        var bellBadges = document.querySelectorAll('#badge-recepcion, #badge-resultados, #badge-notif-cms, .bell-badge');
-                        bellBadges.forEach(function(b) {
-                            var nuevo = Math.max(0, parseInt(b.textContent || '0', 10) - 1);
-                            b.textContent = nuevo;
-                            if (nuevo === 0) {
-                                b.classList.remove('show', 'pulse');
-                                b.style.opacity = '0';
-                            }
-                        });
-                    }
-                }
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 7:38 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 7:38 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `replace_file_content`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Code Edit
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 7:38 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 7:38 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 7:38 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `ws-client`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 7:38 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `sidebar-right`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 7:38 am
-
----
-
-## Agent Response
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-## User Request
-
-Para pantallas de portal medico y recepción: Cuando ocurra la cancelación de la solicitud en alguna de las dos, que cuando se vaya a guardar en la bd, dicha acción: , al mensaje motivo de la cancelación se le concatene: Médico | Laesh. ejemplo:  
-SI el medico cancelo una orden diga:  Médico: msg motivo de la cancelación; y en en las pantallas de recepción en la columna de OBservaciones de mostrarse para esa orden: Cancelación del "Médico: msg motivo de la cancelación" y asi similar para el caso cuando Recepción cancele seria:  "Laesh: msg motivo de la cancelación".
-Identifica, corrige y rectifica, de haber gaps informa me.
-
-<details>
-<summary>Context</summary>
-
-**Active File:** `gestion_web.php`
-**Language:** php
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `cancelar`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 7:54 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L129-164)</summary>
-
-**Path:** `Unknown file`
-
-```
-                       . '<form id="' . $formId . '" hx-post="/laesh/rc/orden/subir-pdf" hx-encoding="multipart/form-data" hx-swap="none" class="d-none">'
-                       . '<input type="hidden" name="orden_id" value="' . $ordId . '">'
-                       . '<input type="hidden" name="csrf_token" value="' . $csrfEsc . '">'
-                       . '<input type="file" id="pdf-upload-input' . $sufijoId . '-' . $ordId . '" name="pdf_file" accept=".pdf" onchange="this.form.requestSubmit()">'
-                       . '</form>'
-                       . '</div>';
-        }
-        // H8: botón Cancelar — solo disponible en Remitido ($eId === 1)
-        // Motivo obligatorio: reveal inline (no modal)
-        if ($eId === 1) {
-            $btnAccion .= '<div class="cancelar-wrap" id="cancelar-wrap' . $sufijoId . '-' . $ordId . '" style="display:inline-flex; align-items:center; gap:0.4rem; white-space:nowrap;">'
-                        . '<button type="button" class="btn btn-dark btn-resultados-sm" id="btn-cancelar-trigger' . $sufijoId . '-' . $ordId . '" onclick="'
-                        . 'document.getElementById(\'cancelar-inline' . $sufijoId . '-' . $ordId . '\').style.display=\'inline-flex\'; this.style.display=\'none\';'
-                        . '">Cancelar</button>'
-                        . '<div id="cancelar-inline' . $sufijoId . '-' . $ordId . '" style="display:none; gap:0.3rem; align-items:center; white-space:nowrap;">'
-                        . '<input type="text" id="cancelar-motivo' . $sufijoId . '-' . $ordId . '" name="observacion" placeholder="Motivo de cancelación" class="form-input" style="font-size:0.78rem; width:160px;">'
-                        . '<button type="button" class="btn btn-dark btn-resultados-sm" hx-post="/laesh/rc/orden/estado" '
-                        . 'hx-vals=\'{"orden_id": ' . $ordId . ', "nuevo_estado_id": 5, "estado_actual_id": ' . $eId . ', "csrf_token": "' . $csrfEsc . '"}\' '
-                        . 'hx-include="#cancelar-motivo' . $sufijoId . '-' . $ordId . '" '
-                        . 'hx-swap="none">Confirmar</button>'
-                        . '<button type="button" class="btn-cancelar-close" title="Descartar cancelación" onclick="'
-                        . 'document.getElementById(\'cancelar-inline' . $sufijoId . '-' . $ordId . '\').style.display=\'none\'; '
-                        . 'document.getElementById(\'btn-cancelar-trigger' . $sufijoId . '-' . $ordId . '\').style.display=\'inline-flex\';'
-                        . '"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>'
-                        . '</div></div>';
-        }
-    } elseif ($eId === 3 || $eId === 4) {
-        $btnCerrar = ($eId === 3)
-            ? '<button type="button" class="btn btn-secondary btn-resultados-sm" hx-post="/laesh/rc/orden/estado" hx-vals=\'{"orden_id": ' . $ordId . ', "nuevo_estado_id": 4, "estado_actual_id": ' . $eId . ', "csrf_token": "' . $csrfEsc . '"}\' hx-swap="none">'
-            . '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg> Entregar y Cerrar'
-            . '</button>'
-            : '';
-        $btnAccion = '<div class="btn-group-inline" style="display:inline-flex; align-items:center; gap:0.4rem; white-space:nowrap;">'
-                   . '<a href="/laesh/rc/orden/pdf?id=' . $ordId . '" target="_blank" class="btn btn-secondary btn-resultados-sm btn-ver-res">'
-                   . '<svg class="icon-btn-left" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg> Estudio'
-                   . '</a>'
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L549-599)</summary>
-
-**Path:** `Unknown file`
-
-```
-    // 1. Renderear toda la tabla principal
-    echo '<table class="table" id="tabla-pacientes" style="margin-bottom: 0; width: 100%; min-width: 1400px; table-layout: fixed; border-collapse: collapse;">'
-       . '<colgroup>'
-       . '<col style="width: 50px;">'
-       . '<col style="width: 180px;">'
-       . '<col style="width: 220px;">'
-       . '<col style="width: 140px;">'
-       . '<col style="width: 110px;">'
-       . '<col style="width: 120px;">'
-       . '<col style="width: 200px;">'
-       . '<col style="width: 220px;">'
-       . '<col style="width: 160px;">'
-       . '</colgroup>'
-       . '<thead id="tabla-pacientes-thead">'
-       . rcRenderPacientesTablaHeader($sort, $dir, $q)
-       . '</thead>'
-       . rcRenderPacientesTablaBody($pacientesCatalog, $offset)
-       . '</table>';
-
-    // 3. OOB Swap para actualizar pie de paginación y contador total
-    $firstNum = $totalReg > 0 ? $offset + 1 : 0;
-    $lastNum  = min($offset + count($pacientesCatalog), $totalReg);
-    echo '<div id="pagination-info-pacientes" hx-swap-oob="outerHTML">'
-       . '<span class="txt-muted-sm fw-600">Mostrando ' . $firstNum . '-' . $lastNum . ' de ' . $totalReg . ' Pacientes</span>'
-       . '</div>';
-
-    $qParam = !empty($q) ? '&q=' . urlencode($q) : '';
-    echo '<div id="pagination-controls-pacientes" hx-swap-oob="outerHTML" class="d-inline-flex-ac" style="gap:0.5rem;">';
-    if ($page > 1) {
-        $prevPage = $page - 1;
-        echo '<button type="button" class="btn btn-secondary btn-sm" hx-get="/laesh/rc/tabla-pacientes?page=' . $prevPage . $qParam . '&sort=' . $sort . '&dir=' . $dir . '&per_page=' . $perPage . '" hx-target="#tabla-pacientes" hx-swap="outerHTML">‹ Anterior</button>';
+    if ($emp && !empty($emp['nombre'])) {
+        $nombreUsuario = trim($emp['nombre'] . ' ' . $emp['apellidos']);
     } else {
-        echo '<button type="button" class="btn btn-secondary btn-sm" disabled style="opacity:0.5;">‹ Anterior</button>';
+        $email = $auth->getEmail() ?? '';
+        $userPart = explode('@', $email)[0] ?? 'Usuario';
+        $nombreUsuario = ($authRole === 'ADMIN') ? 'Administrador' : ucfirst($userPart);
     }
-    echo '<span style="font-size:0.85rem; font-weight:600; color:#334155;">Pág. ' . $page . ' de ' . $totalPages . '</span>';
-    if ($page < $totalPages) {
-        $nextPage = $page + 1;
-        echo '<button type="button" class="btn btn-secondary btn-sm" hx-get="/laesh/rc/tabla-pacientes?page=' . $nextPage . $qParam . '&sort=' . $sort . '&dir=' . $dir . '&per_page=' . $perPage . '" hx-target="#tabla-pacientes" hx-swap="outerHTML">Siguiente ›</button>';
-    } else {
-        echo '<button type="button" class="btn btn-secondary btn-sm" disabled style="opacity:0.5;">Siguiente ›</button>';
+
+
+
+
+    // CSRF token (R14.12)
+    if (empty($_SESSION['csrf_token'])) {
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
     }
-    echo '</div>';
+
+    // Obtener órdenes recientes (hoy), órdenes anteriores, catálogo de pacientes, catálogos UI y KPIs reales desde la Capa de Negocio (PDO)
+    $ordenesRecientes        = \RC\Negocio\Ordenes::obtenerOrdenesRecientes(25, 0, '', 'fecha', 'DESC');
+    $totalOrdenesRecientes   = \RC\Negocio\Ordenes::contarOrdenesRecientes('');
+    $ordenesAnteriores       = \RC\Negocio\Ordenes::obtenerOrdenesAnteriores(25, 0, '', 'fecha', 'DESC');
+    $totalOrdenesAnteriores  = \RC\Negocio\Ordenes::contarOrdenesAnteriores('');
+    $pacientesCatalog        = \RC\Negocio\Ordenes::obtenerPacientes(25, 0, '', 'fecha', 'DESC');
+    $totalPacientes          = \RC\Negocio\Ordenes::contarPacientes('');
+    $catalogosUI             = \RC\Negocio\Ordenes::obtenerCatalogosUI();
+
+    // Obtener catálogo de médicos reales y top 5 desde MariaDB (vw_medicos_completos)
+    $medicosCatalog = \Common\DB::connect()->query(
+        "SELECT user_id, nombre_completo, cedula_profesional, especialidad, celular, total_ordenes 
+         FROM vw_medicos_completos 
+         ORDER BY total_ordenes DESC"
+    )->fetchAll(\PDO::FETCH_ASSOC) ?: [];
+
+    // SEC: frame-ancestors vía HTTP header real (meta tag es ignorado por browsers)
+    header('X-Frame-Options: DENY');
+    header('Content-Security-Policy: frame-ancestors \'none\'', false);
+
+    // Plates — directorio de vistas es rc/
+    Flight::view()->setDirectory(__DIR__);
+    echo Flight::view()->render('views/labadmin', [
+        'nombreUsuario'           => $nombreUsuario,
+        'rolUsuario'              => $authRole,
+        'isAdmin'                 => $isAdmin,
+        'csrfToken'               => $_SESSION['csrf_token'],
+        'ordenesRecientes'        => $ordenesRecientes,
+        'totalOrdenesRecientes'   => $totalOrdenesRecientes,
+        'ordenesAnteriores'       => $ordenesAnteriores,
+        'totalOrdenesAnteriores'  => $totalOrdenesAnteriores,
+        'pacientesCatalog'        => $pacientesCatalog,
+        'totalPacientes'          => $totalPacientes,
+        'catalogosUI'             => $catalogosUI,
+        'medicosCatalog'          => $medicosCatalog
+    ]);
 });
+
+// ── Helper: botones de acción de una orden (H1/H2/H7/H8, auditoría 2026-09-20) ──
+// Compartido entre /tabla-ordenes (hoy) y /tabla-ordenes-anteriores — antes cada
+// tabla duplicaba este bloque; ahora que se agrega csrf_token + estado_actual_id
+// + botón Cancelar a ambas, se centraliza para no repetir la misma lógica dos veces.
+```
+
+</details>
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `api/estadisticas`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 26 Sept 2026, 7:28 pm
+
+---
+
+## Agent Response
+
+### Actions
+
+**Tool:** `view_file`
+**File:** `index.php`
+
+<details>
+<summary>Metadata</summary>
+
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+<details>
+<summary>File: `Unknown file` (L604-729)</summary>
+
+**Path:** `Unknown file`
+
+```
 
 
 // ── GET /api/estadisticas — Estadísticas de Dashboard por Rango ─────────
@@ -21892,463 +18412,124 @@ Flight::route('GET /api/estadisticas', function () {
     Flight::rbac()->requirePermission('gestionar_ordenes'); // o la que aplique para dashboard
     
     $rango = $_GET['rango'] ?? 'dia';
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `/orden/estado`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 7:55 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L854-924)</summary>
-
-**Path:** `Unknown file`
-
-```
-// ── POST /orden/estado — Cambiar estado de una orden (HTMX) ─────────────────
-// H2 (auditoría 2026-09-20): antes sin validación CSRF — mismo patrón que
-// /orden/crear (CsrfGuard::isValid() con rotación de token tras éxito).
-Flight::route('POST /orden/estado', function () {
-    Flight::rbac()->requirePermission('gestionar_ordenes');
-
-    if (!\Common\CsrfGuard::isValid(rotate: false)) {
-        Logger::log('WARN', 'Token CSRF inválido en cambio de estado de orden por user_id=' . Flight::auth()->getUserId());
-        \Common\Response::htmxError('Token de seguridad inválido. Recarga la página.');
-    }
-
-    $ordenId        = (int)($_POST['orden_id'] ?? 0);
-    $nuevoEstadoId  = (int)($_POST['nuevo_estado_id'] ?? 0);
-    $observacion    = trim($_POST['observacion'] ?? '');
-    // H1/H7: estado que el caller vio al renderizar el botón — optimistic lock.
-    $estadoActualId = isset($_POST['estado_actual_id']) && $_POST['estado_actual_id'] !== ''
-        ? (int)$_POST['estado_actual_id'] : null;
-    $userId         = (int)Flight::auth()->getUserId();
-
-    if ($ordenId <= 0 || $nuevoEstadoId <= 0) {
-        \Common\Response::htmxError('Parámetros de orden no válidos.');
-    }
-
-    // H6: persist() de la notificación dentro de la MISMA transacción que el
-    // cambio de estado (DB::connect() es singleton — cambiarEstado() reusa esta
-    // conexión, el SP participa de esta transacción igual que en crearOrden()).
-    $db = \Common\DB::connect();
-    $db->beginTransaction();
-    try {
-        $resultado = \RC\Negocio\Ordenes::cambiarEstado($ordenId, $nuevoEstadoId, $userId, $observacion, $estadoActualId);
-
-        if (!$resultado['success']) {
-            $db->rollBack();
-            header('HX-Trigger: ' . json_encode([
-                'mostrarToast' => ['mensaje' => $resultado['error'] ?? 'Error al actualizar el estado.', 'tipo' => 'error']
-            ]));
-            \Common\Response::htmxError($resultado['error'] ?? 'Error al actualizar el estado.');
-        }
-
-        // Obtener médico asignado a la orden para notificarle
-        $medicoRow = $db->prepare("SELECT medico_id FROM ordenes WHERE id = ? LIMIT 1");
-        $medicoRow->execute([$ordenId]);
-        $medicoId = (int)($medicoRow->fetchColumn() ?: 0);
-
-        $titulo = ($nuevoEstadoId === 5)
-            ? 'Orden Cancelada (' . ($resultado['folio'] ?? '') . ')'
-            : ($nuevoEstadoId === 2 ? 'Paciente Recibido (' . ($resultado['folio'] ?? '') . ')' : 'Orden Actualizada (' . ($resultado['folio'] ?? '') . ')');
-
-        $mensajeNotif = ($nuevoEstadoId === 5)
-            ? "La orden {$resultado['folio']} fue cancelada por recepción. Motivo: {$observacion}"
-            : ($nuevoEstadoId === 2 ? "El paciente de la orden {$resultado['folio']} fue recibido en recepción." : "La orden {$resultado['folio']} ha cambiado de estado.");
-
-        $persisted = \Common\Notifier::persist($db, 'orden_actualizada', [
-            'folio'          => $resultado['folio'] ?? '',
-            'orden_id'       => $ordenId,
-            'medico_id'      => $medicoId,
-            'estado'         => $nuevoEstadoId,
-            'titulo'         => $titulo,
-            'mensaje'        => $mensajeNotif,
-            'actor_user_id'  => $userId,
-        ]);
-
-        $db->commit();
-    } catch (\Throwable $e) {
-        if ($db->inTransaction()) {
-            $db->rollBack();
-        }
-        \Common\DB::logFallback('ERROR', 'Fallo en POST /orden/estado', $e->getMessage());
-        header('HX-Trigger: ' . json_encode([
-            'mostrarToast' => ['mensaje' => 'Error al actualizar estado: ' . $e->getMessage(), 'tipo' => 'error']
-        ]));
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `index.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L619-684)</summary>
-
-**Path:** `Unknown file`
-
-```
-    \Common\Response::htmxSuccess($resultado['mensaje']);
+    $inicio = $_GET['inicio'] ?? '';
+    $fin = $_GET['fin'] ?? '';
+    
+    $datos = \RC\Negocio\Ordenes::obtenerEstadisticasRango($rango, $inicio, $fin);
+    echo json_encode($datos, JSON_UNESCAPED_UNICODE);
 });
 
-// ── POST /orden/cancelar — El médico cancela una orden propia (H8, 2026-09-20) ──
-// Precisión del usuario: solo mientras la orden siga en Remitido (estado 1) — una
-// vez que Recepción la puso En Atención, el médico ya no puede cancelarla desde
-// aquí. Ownership + estado se validan en MD\Negocio\Ordenes::cancelarOrdenPropia().
-Flight::route('POST /orden/cancelar', function () {
-    Flight::rbac()->requirePermission('ver_solicitud_digital');
-
-    if (!\Common\CsrfGuard::isValid(rotate: false)) {
-        Logger::log('WARN', 'Token CSRF inválido en cancelación de orden por médico user_id=' . Flight::auth()->getUserId());
-        header('HX-Trigger: ' . json_encode([
-            'mostrarToast' => ['mensaje' => 'Token de seguridad inválido. Recarga la página.', 'tipo' => 'error']
-        ]));
-        \Common\Response::htmxError('Token de seguridad inválido. Recarga la página.');
-    }
-
-    $ordenId     = (int)($_POST['orden_id'] ?? 0);
-    $observacion = trim($_POST['observacion'] ?? '');
-    $userId      = (int)Flight::auth()->getUserId();
-
-    if ($ordenId <= 0) {
-        header('HX-Trigger: ' . json_encode([
-            'mostrarToast' => ['mensaje' => 'Orden no válida.', 'tipo' => 'error']
-        ]));
-        \Common\Response::htmxError('Orden no válida.');
-    }
-
-    // Gap 2026-09-21 (auditoría WS): esta ruta cambiaba el estado a Cancelada
-    // pero nunca notificaba a Recepción/Admin — ni por WS ni por el fallback de
-    // polling, porque cancelarOrdenPropia() llama a cambiarEstado() directo, sin
-    // pasar por ningún Notifier::persist(). Mismo patrón H6 (transacción +
-    // persist antes del commit + push después) ya usado en rc/index.php
-    // POST /orden/estado, para que Recepción se entere en tiempo real igual
-    // que cuando es ella quien cancela.
-    $db = \Common\DB::connect();
-    $db->beginTransaction();
+// ── GET /api/medicos — Devuelve catálogo de médicos en JSON ─────────
+Flight::route('GET /api/medicos', function () {
+    header('Content-Type: application/json; charset=utf-8');
     try {
-        $resultado = \MD\Negocio\Ordenes::cancelarOrdenPropia($ordenId, $userId, $observacion);
-
-        if (!$resultado['success']) {
-            $db->rollBack();
-            header('HX-Trigger: ' . json_encode([
-                'mostrarToast' => ['mensaje' => $resultado['error'] ?? 'No se pudo cancelar la orden.', 'tipo' => 'error']
-            ]));
-            \Common\Response::htmxError($resultado['error'] ?? 'No se pudo cancelar la orden.');
-        }
-
-        $persisted = \Common\Notifier::persist($db, 'orden_actualizada', [
-            'folio'          => $resultado['folio'] ?? '',
-            'orden_id'       => $ordenId,
-            'medico_id'      => $userId,
-            'estado'         => 5,
-            'titulo'         => 'Orden Cancelada (' . ($resultado['folio'] ?? '') . ')',
-            'mensaje'        => "La orden {$resultado['folio']} fue cancelada por el médico. Motivo: {$observacion}",
-            'actor_user_id'  => $userId,
-        ]);
-
-        $db->commit();
+        $db = \Common\DB::connect();
+        $medicosCatalog = $db->query(
+            "SELECT user_id, nombre_completo, cedula_profesional, cedula_especialidad, especialidad, celular, 
+                    universidad_id, universidad_nombre, lugar_trabajo_id, lugar_trabajo_nombre, total_ordenes,
+                    estado_id, estado_nombre 
+             FROM vw_medicos_completos 
+             ORDER BY total_ordenes DESC"
+        )->fetchAll(\PDO::FETCH_ASSOC) ?: [];
+        echo json_encode(['success' => true, 'data' => $medicosCatalog], JSON_UNESCAPED_UNICODE);
     } catch (\Throwable $e) {
-        if ($db->inTransaction()) {
-            $db->rollBack();
-        }
-        \Common\DB::logFallback('ERROR', 'Fallo en POST /orden/cancelar (médico)', $e->getMessage());
-        header('HX-Trigger: ' . json_encode([
-```
+        echo json_encode(['success' => false, 'error' => $e->getMessage()]);
+    }
+});
 
-</details>
+// ── POST /api/medicos/cambiar-estado — Pausar o Reactivar perfil médico ─────────
+Flight::route('POST /api/medicos/cambiar-estado', function () {
+    Flight::rbac()->requirePermission('gestionar_ordenes');
+    header('Content-Type: application/json; charset=utf-8');
 
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `Ordenes.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L274-304)</summary>
-
-**Path:** `Unknown file`
-
-```
-     * la movió a 2+ justo mientras el médico decidía cancelar.
-     */
-    public static function cancelarOrdenPropia(int $ordenId, int $userId, string $observacion): array {
-        try {
-            $db = DB::connect();
-            $stmt = $db->prepare("SELECT medico_id, estado_id FROM ordenes WHERE id = ? LIMIT 1");
-            $stmt->execute([$ordenId]);
-            $orden = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            if (!$orden) {
-                return ['success' => false, 'error' => 'Orden no encontrada.'];
-            }
-            if ((int)$orden['medico_id'] !== $userId) {
-                Logger::log('WARN', "user_id={$userId} intentó cancelar orden {$ordenId} de otro médico (medico_id={$orden['medico_id']})", $userId);
-                return ['success' => false, 'error' => 'Esta orden no le pertenece.'];
-            }
-            if ((int)$orden['estado_id'] !== 1) {
-                return ['success' => false, 'error' => 'Solo puede cancelar mientras la orden esté en estado Remitido — Recepción ya la puso En Atención.'];
-            }
-
-            return \RC\Negocio\Ordenes::cambiarEstado($ordenId, 5, $userId, $observacion, 1);
-        } catch (Throwable $e) {
-            DB::logFallback('ERROR', 'Fallo en MD\Negocio\Ordenes::cancelarOrdenPropia', $e->getMessage());
-            return ['success' => false, 'error' => 'No se pudo cancelar la orden: ' . $e->getMessage()];
-        }
+    $rawInput = file_get_contents('php://input');
+    $payload = json_decode($rawInput, true);
+    if (!is_array($payload)) {
+        $payload = $_POST;
     }
 
-    /**
-     * Obtiene los datos del PDF de resultados de una orden, validando que
-     * pertenezca al médico logueado.
-     *
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `Ordenes.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L189-249)</summary>
-
-**Path:** `Unknown file`
-
-```
-                'edad_al_emitir' => $edad,
-                'diagnostico'    => $diagnostico,
-                'otros_estudios' => $otrosEstudios,
-                'estudios_json'  => $estudiosJson
-            ]);
-
-            // Obtener el folio generado por el Stored Procedure
-            $folioRow = $db->query("SELECT @p_folio AS folio")->fetch(PDO::FETCH_ASSOC);
-            $folio = $folioRow['folio'] ?? '1';
-
-            // Obtener la orden recién creada para responder con orden_id
-            $stmtOrd = $db->prepare("SELECT id FROM ordenes WHERE folio_unico = ? LIMIT 1");
-            $stmtOrd->execute([$folio]);
-            $ordenId = (int)$stmtOrd->fetchColumn();
-
-            // 5. Inserción en detalle_ordenes si se pasaron IDs de estudios
-            if (is_array($estudiosArray)) {
-                $stmtDet = $db->prepare("INSERT INTO detalle_ordenes (orden_id, estudio_id) VALUES (?, ?)");
-                foreach ($estudiosArray as $estudioId) {
-                    if (is_numeric($estudioId)) {
-                        $stmtDet->execute([$ordenId, $estudioId]);
-                    }
-                }
-            }
-
-            // 6. Actualizar contador de órdenes del médico en perfiles_medicos (GAP-03)
-            $db->prepare("UPDATE perfiles_medicos SET total_ordenes = total_ordenes + 1 WHERE user_id = ?")
-               ->execute([$medicoId]);
-
-            // 7. Auditoría y Trazabilidad en sys_logs y Logger
-            $pacienteNombre = trim(($datos['paciente_nombre'] ?? $datos['paciente'] ?? 'Paciente'));
-            Logger::logAlways('INFO', "Orden de Recepción {$folio} registrada correctamente para {$pacienteNombre}", $userId);
-
-            // 8. H6 — Outbox: persistir la notificación DENTRO de esta misma transacción.
-            // Si algo de lo anterior falla, la notificación tampoco se guarda a medias.
-            $persisted = \Common\Notifier::persist($db, 'nueva_orden', [
-                'folio'          => $folio,
-                'orden_id'       => $ordenId,
-                'titulo'         => 'Nueva Orden de Recepción (' . $folio . ')',
-                'mensaje'        => 'Orden emitida para ' . $pacienteNombre,
-                'actor_user_id'  => $userId,
-            ]);
-
-            $db->commit();
-
-            // 9. Push por WS — DESPUÉS del commit (H6). Si Swoole falla, la fila ya
-            // persistida en el paso 8 queda para el cron de reintento.
-            \Common\Notifier::push($persisted, 'nueva_orden', [
-                'folio'    => $folio,
-                'orden_id' => $ordenId,
-                'titulo'   => 'Nueva Orden de Recepción (' . $folio . ')',
-                'mensaje'  => 'Orden emitida para ' . $pacienteNombre,
-            ]);
-
-            return [
-                'success'  => true,
-                'folio'    => $folio,
-                'orden_id' => $ordenId,
-                'paciente' => $pacienteNombre,
-                'mensaje'  => "✓ Orden de Recepción {$folio} creada correctamente."
-            ];
-```
-
-</details>
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `view_file`
-**File:** `Ordenes.php`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-<details>
-<summary>File: `Unknown file` (L249-319)</summary>
-
-**Path:** `Unknown file`
-
-```
-            ];
-
-        } catch (Throwable $e) {
-            if ($db->inTransaction()) {
-                $db->rollBack();
-            }
-            // H3: MariaDB 1020 = conflicto de serialización transitorio, el propio
-            // motor sugiere reintentar. Máximo 3 intentos (evita loop infinito si el
-            // error fuera persistente por otra causa).
-            if ($intento < 5 && self::esConflictoSerializacion($e)) {
-                usleep(random_int(10000, 50000)); // 10-50ms — desincroniza reintentos simultáneos
-                return self::crearOrden($datos, $userId, $intento + 1);
-            }
-            DB::logFallback('ERROR', 'Fallo en RC\Negocio\Ordenes::crearOrden', $e->getMessage());
-            Logger::log('ERROR', 'Error al crear orden en recepción: ' . $e->getMessage(), $userId);
-            return [
-                'success' => false,
-                'error'   => 'No se pudo registrar la orden: ' . $e->getMessage()
-            ];
-        }
+    $submittedCsrf = $payload['csrf_token'] ?? null;
+    if (!\Common\CsrfGuard::isValid(rotate: false, submittedToken: $submittedCsrf)) {
+        // GAP-CSRF-02 (2026-09-23): estas 5 rutas devolvían el error CSRF con
+        // HTTP 200 (sin http_response_code) y sin Logger::log — invisible
+        // tanto en nginx-access.log como en app.log, imposible de auditar.
+        // Se homologa al patrón ya usado en /orden/estado y las rutas con
+        // Flight::json([...], 403) del resto del archivo.
+        Logger::log('WARN', 'Token CSRF inválido en ' . ($_SERVER['REQUEST_URI'] ?? 'ruta desconocida') . ' por user_id=' . Flight::auth()->getUserId());
+        http_response_code(403);
+        echo json_encode(['success' => false, 'error' => 'Token de seguridad CSRF inválido o expirado. Recarga la página.'], JSON_UNESCAPED_UNICODE);
+        return;
     }
 
-    /**
-     * H3 (auditoría 2026-09-20): detecta conflictos de serialización transitorios
-     * (MariaDB 1020 "Record has changed since last read... try restarting
-     * transaction", o 1213 deadlock) que ameritan reintentar toda la transacción,
-     * a diferencia de un error real (dato inválido, FK, etc.) que no se arregla
-     * reintentando.
-     */
-    public static function esConflictoSerializacion(Throwable $e): bool {
-        if (!$e instanceof \PDOException) return false;
-        $code = (string)($e->errorInfo[1] ?? '');
-        return $code === '1020' || $code === '1213';
+    $targetUserId  = (int)($payload['target_user_id'] ?? 0);
+    $nuevoEstadoId = (int)($payload['nuevo_estado_id'] ?? 1); // 1 = Activo, 2 = Pausado
+    $adminUserId   = (int)Flight::auth()->getUserId();
+
+    if ($targetUserId <= 0) {
+        echo json_encode(['success' => false, 'error' => 'ID de médico inválido']);
+        return;
     }
 
-    /**
-     * Obtiene las órdenes del día natural de HOY registradas o emitidas en Recepción con paginación, búsqueda y ordenamiento
-     */
-    public static function obtenerOrdenesRecientes(int $limit = 25, int $offset = 0, string $search = '', string $orderBy = 'fecha', string $orderDir = 'DESC'): array {
-        try {
-            $db = DB::connect();
+    $resultado = \RC\Negocio\Ordenes::cambiarEstadoMedico($targetUserId, $nuevoEstadoId, $adminUserId);
+    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
+});
 
-            $allowedSorts = [
-                'folio'           => 'CAST(o.folio_unico AS UNSIGNED)',
-                'paciente'        => 'o.paciente_nombre',
-                'medico'          => 'COALESCE(o.medico_nombre_completo, \'Médico General\')',
-                'fecha'           => 'o.hora_captura',
-                'fecha_resultado' => 'o.fecha_resultado',
-                'estado'          => 'o.estado_id',
-                'id'              => 'o.orden_id'
-            ];
-            $sortCol = $allowedSorts[$orderBy] ?? 'o.orden_id';
-            $dir = strtoupper($orderDir) === 'ASC' ? 'ASC' : 'DESC';
+// ── POST /api/medicos/asignar-password — Asignar/Cambiar contraseña de médico ─────────
+Flight::route('POST /api/medicos/asignar-password', function () {
+    Flight::rbac()->requirePermission('gestionar_ordenes');
+    header('Content-Type: application/json; charset=utf-8');
 
-            $whereSql = "WHERE DATE(o.hora_captura) = CURDATE()";
-            $params = [];
-            $search = trim(mb_strtolower($search, 'UTF-8'));
+    $rawInput = file_get_contents('php://input');
+    $payload = json_decode($rawInput, true);
+    if (!is_array($payload)) {
+        $payload = $_POST;
+    }
 
-            if ($search !== '') {
-                $whereSql .= " AND (LOWER(o.paciente_nombre) LIKE :q1 OR LOWER(o.medico_nombre_completo) LIKE :q2 OR LOWER(o.paciente_telefono) LIKE :q3 OR LOWER(o.diagnostico) LIKE :q4 OR LOWER(o.folio_unico) LIKE :q5) ";
-                $qVal = '%' . $search . '%';
-                $params[':q1'] = $qVal;
-                $params[':q2'] = $qVal;
-                $params[':q3'] = $qVal;
-                $params[':q4'] = $qVal;
-                $params[':q5'] = $qVal;
-            }
+    $submittedCsrf = $payload['csrf_token'] ?? null;
+    if (!\Common\CsrfGuard::isValid(rotate: false, submittedToken: $submittedCsrf)) {
+        // GAP-CSRF-02 (2026-09-23): estas 5 rutas devolvían el error CSRF con
+        // HTTP 200 (sin http_response_code) y sin Logger::log — invisible
+        // tanto en nginx-access.log como en app.log, imposible de auditar.
+        // Se homologa al patrón ya usado en /orden/estado y las rutas con
+        // Flight::json([...], 403) del resto del archivo.
+        Logger::log('WARN', 'Token CSRF inválido en ' . ($_SERVER['REQUEST_URI'] ?? 'ruta desconocida') . ' por user_id=' . Flight::auth()->getUserId());
+        http_response_code(403);
+        echo json_encode(['success' => false, 'error' => 'Token de seguridad CSRF inválido o expirado. Recarga la página.'], JSON_UNESCAPED_UNICODE);
+        return;
+    }
 
-            $limInt = max(1, $limit);
-            $offInt = max(0, $offset);
+    $targetUserId = (int)($payload['target_user_id'] ?? 0);
+    $newPassword  = trim($payload['new_password'] ?? '');
+    $adminUserId  = (int)Flight::auth()->getUserId();
 
+    if ($targetUserId <= 0) {
+        echo json_encode(['success' => false, 'error' => 'ID de médico inválido']);
+        return;
+    }
+
+    if (strlen($newPassword) < 8) {
+        echo json_encode(['success' => false, 'error' => 'La contraseña/NIP debe tener al menos 8 caracteres.']);
+        return;
+    }
+
+    $resultado = \RC\Negocio\Ordenes::restablecerPasswordMedico($targetUserId, $newPassword, $adminUserId);
+    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
+});
+
+// ── POST /api/medicos/sync — Sincronizar médicos (JS SPA) ─────────
+Flight::route('POST /api/medicos/sync', function () {
+    Flight::rbac()->requirePermission('gestionar_medicos');
+    header('Content-Type: application/json; charset=utf-8');
+    
+    $payload = json_decode(file_get_contents('php://input'), true) ?: [];
+    $submittedCsrf = $payload['csrf_token'] ?? null;
+    if (!\Common\CsrfGuard::isValid(rotate: false, submittedToken: $submittedCsrf)) {
+        // GAP-CSRF-02 (2026-09-23): estas 5 rutas devolvían el error CSRF con
+        // HTTP 200 (sin http_response_code) y sin Logger::log — invisible
+        // tanto en nginx-access.log como en app.log, imposible de auditar.
+        // Se homologa al patrón ya usado en /orden/estado y las rutas con
+        // Flight::json([...], 403) del resto del archivo.
+        Logger::log('WARN', 'Token CSRF inválido en ' . ($_SERVER['REQUEST_URI'] ?? 'ruta desconocida') . ' por user_id=' . Flight::auth()->getUserId());
 ```
 
 </details>
@@ -22360,12 +18541,12 @@ Flight::route('POST /orden/cancelar', function () {
 ### Actions
 
 **Tool:** `grep_search`
-**Query:** `function cambiarEstado`
+**Query:** `obtenerEstadisticasRango`
 
 <details>
 <summary>Metadata</summary>
 
-- **Model:** Gemini 3.8 Flash (Low)
+- **Model:** Gemini 3.8 Flash (High)
 </details>
 
 ---
@@ -22373,7 +18554,7 @@ Flight::route('POST /orden/cancelar', function () {
 ### Local File Search
 
 **Status:** Completed
-**Created:** 25 Sept 2026, 7:55 am
+**Created:** 26 Sept 2026, 7:28 pm
 
 ---
 
@@ -22387,91 +18568,192 @@ Flight::route('POST /orden/cancelar', function () {
 <details>
 <summary>Metadata</summary>
 
-- **Model:** Gemini 3.8 Flash (Low)
+- **Model:** Gemini 3.8 Flash (High)
 </details>
 
 ---
 
 <details>
-<summary>File: `Unknown file` (L514-584)</summary>
+<summary>File: `Unknown file` (L1379-1479)</summary>
 
 **Path:** `Unknown file`
 
 ```
-    public static function cambiarEstado(int $ordenId, int $nuevoEstadoId, int $userId, string $observacion = '', ?int $estadoEsperado = null): array {
+    }
+
+    /**
+     * Obtiene estadísticas dinámicas por rango de fechas (Dashboard SPA)
+     */
+    public static function obtenerEstadisticasRango(string $rango, string $inicio = '', string $fin = ''): array {
         try {
             $db = DB::connect();
-
-            // H8: motivo de cancelación obligatorio (precisión del usuario) — se
-            // valida aquí, antes de tocar el SP, para un mensaje de error claro.
-            if ($nuevoEstadoId === 5 && trim($observacion) === '') {
-                return ['success' => false, 'error' => 'Debe indicar el motivo de la cancelación.'];
+            
+            $whereSql = "";
+            $params = [];
+            
+            if ($rango === 'dia') {
+                $whereSql = "WHERE DATE(hora_captura) = CURDATE()";
+            } elseif ($rango === 'semana') {
+                $whereSql = "WHERE YEARWEEK(hora_captura, 1) = YEARWEEK(CURDATE(), 1)";
+            } elseif ($rango === 'mes') {
+                $whereSql = "WHERE YEAR(hora_captura) = YEAR(CURDATE()) AND MONTH(hora_captura) = MONTH(CURDATE())";
+            } elseif ($rango === 'anio') {
+                $whereSql = "WHERE YEAR(hora_captura) = YEAR(CURDATE())";
+            } elseif ($rango === 'fecha' && $inicio && $fin) {
+                $whereSql = "WHERE DATE(hora_captura) BETWEEN :inicio AND :fin";
+                $params[':inicio'] = $inicio;
+                $params[':fin'] = $fin;
+            } else {
+                $whereSql = "WHERE 1=1"; // fallback seguro
             }
 
-            $db->query("SET @p_prev = 0, @p_folio = '', @p_conf = 0, @p_inv = 0");
-            $stmt = $db->prepare("CALL CambiarEstadoOrden(?, ?, ?, ?, ?, @p_prev, @p_folio, @p_conf, @p_inv)");
-            $stmt->execute([$ordenId, $nuevoEstadoId, $userId, $observacion, $estadoEsperado]);
+            // 1. Totales de Órdenes
+            // H8 (auditoría 2026-09-20): agregado 'canceladas' (estado_id=5) — antes
+            // 'solicitudes' (COUNT total) las incluía pero ninguna columna las
+            // desglosaba, así que atencion+listos+cerradas no cuadraba con el total
+            // en cuanto existiera al menos una orden cancelada.
+            $stmtTotales = $db->prepare("
+                SELECT COUNT(*) as solicitudes,
+                       SUM(IF(estado_id=2,1,0)) as atencion,
+                       SUM(IF(estado_id=3,1,0)) as listos,
+                       SUM(IF(estado_id=4,1,0)) as cerradas,
+                       SUM(IF(estado_id=5,1,0)) as canceladas
+                FROM vw_ordenes_completas $whereSql
+            ");
+            $stmtTotales->execute($params);
+            $totales = $stmtTotales->fetch(PDO::FETCH_ASSOC) ?: ['solicitudes' => 0, 'atencion' => 0, 'listos' => 0, 'cerradas' => 0, 'canceladas' => 0];
 
-            $resRow = $db->query("SELECT @p_prev AS estado_anterior_id, @p_folio AS folio, @p_conf AS conflicto, @p_inv AS invalida")
-                          ->fetch(PDO::FETCH_ASSOC);
-            $folio            = $resRow['folio'] ?? '';
-            $estadoAnteriorId = (int)($resRow['estado_anterior_id'] ?? 0);
-            $conflicto        = (bool)($resRow['conflicto'] ?? false);
-            $invalida         = (bool)($resRow['invalida'] ?? false);
+            // 2. Top 5 Médicos
+            $stmtMedicos = $db->prepare("
+                SELECT COALESCE(medico_nombre_completo, 'Médico General') as nombre, COUNT(*) as conteo 
+                FROM vw_ordenes_completas $whereSql 
+                GROUP BY nombre ORDER BY conteo DESC LIMIT 5
+            ");
+            $stmtMedicos->execute($params);
+            $medicos = $stmtMedicos->fetchAll(PDO::FETCH_ASSOC) ?: [];
 
-            if (empty($folio)) {
-                return ['success' => false, 'error' => 'Orden no encontrada.'];
-            }
-
-            if ($conflicto) {
-                Logger::log('WARN', "Orden {$folio}: conflicto de estado (esperado={$estadoEsperado}, real={$estadoAnteriorId}) por user_id={$userId}", $userId);
-                return ['success' => false, 'error' => 'Esta orden ya fue actualizada por otro usuario. Recarga la página e intenta de nuevo.', 'conflicto' => true];
-            }
-
-            if ($invalida) {
-                Logger::log('WARN', "Orden {$folio}: transición inválida {$estadoAnteriorId} -> {$nuevoEstadoId} rechazada, user_id={$userId}", $userId);
-                return ['success' => false, 'error' => "No se puede cambiar la orden de su estado actual a este estado.", 'transicion_invalida' => true];
-            }
-
-            Logger::logAlways('INFO', "Orden {$folio} cambió de estado {$estadoAnteriorId} -> {$nuevoEstadoId} por user_id={$userId}", $userId);
+            // 3. Top 3 Categorías
+            // Requerimos usar detalle_ordenes y vw_ordenes_completas
+            $whereCatSql = str_replace('hora_captura', 'o.hora_captura', $whereSql);
+            $stmtCategorias = $db->prepare("
+                SELECT cat.categoria as nombre, COUNT(oe.estudio_id) as conteo 
+                FROM detalle_ordenes oe 
+                JOIN vw_estudios_catalogo cat ON cat.id = oe.estudio_id 
+                JOIN vw_ordenes_completas o ON o.orden_id = oe.orden_id
+                $whereCatSql
+                GROUP BY cat.categoria ORDER BY conteo DESC LIMIT 3
+            ");
+            $stmtCategorias->execute($params);
+            $categorias = $stmtCategorias->fetchAll(PDO::FETCH_ASSOC) ?: [];
 
             return [
                 'success' => true,
-                'folio'   => $folio,
-                'mensaje' => "✓ Orden {$folio} actualizada exitosamente."
+                'totales' => [
+                    'solicitudes' => (int)($totales['solicitudes'] ?? 0),
+                    'atencion'    => (int)($totales['atencion'] ?? 0),
+                    'listos'      => (int)($totales['listos'] ?? 0),
+                    'cerradas'    => (int)($totales['cerradas'] ?? 0),
+                    'canceladas'  => (int)($totales['canceladas'] ?? 0)
+                ],
+                'medicos' => $medicos,
+                'categorias' => $categorias
             ];
 
         } catch (Throwable $e) {
-            DB::logFallback('ERROR', 'Fallo en RC\Negocio\Ordenes::cambiarEstado', $e->getMessage());
-            return ['success' => false, 'error' => 'Error al actualizar estado: ' . $e->getMessage()];
+            DB::logFallback('ERROR', 'Fallo en RC\Negocio\Ordenes::obtenerEstadisticasRango', $e->getMessage());
+            return ['success' => false, 'error' => $e->getMessage()];
         }
     }
 
     /**
-     * Obtiene el listado de solicitudes/pacientes emitidas por todos los médicos con ordenamiento, filtro y paginación
-     */
-    public static function obtenerPacientes(int $limit = 25, int $offset = 0, string $search = '', string $orderBy = 'fecha', string $orderDir = 'DESC'): array {
-        try {
-            $db = DB::connect();
-            $allowedSorts = [
-                'fecha'    => 'orden_id',
-                'paciente' => 'paciente_nombre',
-                'medico'   => 'medico_nombre_completo'
-            ];
-            $sortCol = $allowedSorts[$orderBy] ?? 'orden_id';
-            $dir = strtoupper($orderDir) === 'ASC' ? 'ASC' : 'DESC';
-
-            $whereSql = '';
-            $params = [];
-            $search = trim(mb_strtolower($search, 'UTF-8'));
-
-            if ($search !== '') {
-                $whereSql = " WHERE (LOWER(paciente_nombre) LIKE :q1 OR LOWER(medico_nombre_completo) LIKE :q2 OR LOWER(paciente_telefono) LIKE :q3 OR LOWER(diagnostico) LIKE :q4 OR LOWER(folio_unico) LIKE :q5) ";
-                $qVal = '%' . $search . '%';
-                $params[':q1'] = $qVal;
+     * GAP-RC-01 (cerrado 2026-09-21): fuente única de verdad para la ventana de
+     * impresión de la Solicitud Digital — reemplaza el mecanismo anterior donde
+     * cada portal (Médico/Recepción) reconstruía manualmente los datos de la
+     * orden vía querystring, leyendo texto de celdas de tabla por índice
+     * (cells[N]) o atributos data-* que había que mantener sincronizados a mano
+     * en 3 archivos distintos. Ese diseño causó 4 bugs reales encontrados el
+     * mismo día por un médico probando en producción: grilla de estudios rota,
+     * diagnóstico perdido al reabrir, la fecha de la orden confundida con un
+     * estudio, y celular/edad/sexo faltantes — todos por el mismo patrón
+     * estructural (lógica duplicada entre medicos.js/labadmin.js + plumbing
+     * frágil de datos). Consultar la orden real por folio, una sola vez, desde
+     * un único método, elimina esa clase de bug de raíz.
+     *
+     * $medicoIdRestriccion: si se pasa, exige que la orden pertenezca a ese
 ```
 
 </details>
+
+---
+
+## Agent Response
+
+### Thinking
+
+Focusing on the `labadmin.php` file within the `/rc/views/` directory, specifically the "#panel-reportes" section, lines 487-54. The user wants to check the calendar functionality and date input feature. This analysis aims to identify any gaps or issues within this specific report generation module.
+
+
+The HTML structure in `labadmin.php` reveals a dropdown for selecting the reporting period, with options like "Hoy," "Semana," "Mes," "Año," and "Fecha." The "Fecha" option triggers the display of date input fields for manual date range selection; the `rango-fechas-admin` span is hidden by default and becomes visible when the "Fecha" option is selected.
+The date inputs utilize the `type="date"` attribute, and any change triggers the `filtrarEstadisticasAdmin()` function.
+Focusing on how the date inputs are handled is crucial, because any issues will impact date range reports.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `.d-none`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.882927291s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 26 Sept 2026, 7:29 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+The CSS defines a `.d-none` class which sets `display: none`.  However, JavaScript in `labadmin.js` conditionally sets `rangeContainer`'s style to `display: inline-flex` if the selected value is "fecha". This directly overrides any existing CSS rules. The JavaScript does *not* remove the `.d-none` class. Therefore, selecting "Fecha" will set `rangeContainer` to display `inline-flex` even if `.d-none` is present.
+
+
+`manejarCambioFiltroAdmin` initializes the date range picker but doesn't trigger the filtering directly; it only opens the date picker.  Selecting a start date fires `filtrarEstadisticasAdmin`, which checks for *both* start and end dates before proceeding.  The UI appears to require the user to explicitly select both dates, as the function returns if either is empty.
+
+
+The single-date selection requirement isn't automatically handled; the end date input remains empty.  The prompt explicitly requests a date range, despite the UI's "Fecha" label, indicating an expectation of a range. The date input's `onchange` event only triggers upon complete date entry and blur, not during typing. Consideration is needed for invalid date ranges (start after end).
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `vw_ordenes_completas`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 2.480903178s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 26 Sept 2026, 7:29 pm
 
 ---
 
@@ -22480,12 +18762,12 @@ Flight::route('POST /orden/cancelar', function () {
 ### Actions
 
 **Tool:** `grep_search`
-**Query:** `observacion`
+**Query:** `hora_captura`
 
 <details>
 <summary>Metadata</summary>
 
-- **Model:** Gemini 3.8 Flash (Low)
+- **Model:** Gemini 3.8 Flash (High)
 </details>
 
 ---
@@ -22493,7 +18775,37 @@ Flight::route('POST /orden/cancelar', function () {
 ### Local File Search
 
 **Status:** Completed
-**Created:** 25 Sept 2026, 7:55 am
+**Created:** 26 Sept 2026, 7:29 pm
+
+---
+
+## Agent Response
+
+### Thinking
+
+Analyzing the provided PHP code snippet, the logic suggests date-based filtering. The code constructs a SQL `WHERE` clause to filter by `hora_captura` (capture time) within a specified date range, which aligns with the user's description of a date-picker functionality. This suggests the date range input is used to filter reports.
+
+
+
+
+### Actions
+
+**Tool:** `grep_search`
+**Query:** `panel-reportes`
+
+<details>
+<summary>Metadata</summary>
+
+- **Thinking Duration:** 0.051168397s
+- **Model:** Gemini 3.8 Flash (High)
+</details>
+
+---
+
+### Local File Search
+
+**Status:** Completed
+**Created:** 26 Sept 2026, 7:29 pm
 
 ---
 
@@ -22502,53 +18814,73 @@ Flight::route('POST /orden/cancelar', function () {
 ### Actions
 
 **Tool:** `view_file`
-**File:** `index.php`
+**File:** `labadmin.js`
 
 <details>
 <summary>Metadata</summary>
 
-- **Model:** Gemini 3.8 Flash (Low)
+- **Model:** Gemini 3.8 Flash (High)
 </details>
 
 ---
 
 <details>
-<summary>File: `Unknown file` (L249-279)</summary>
+<summary>File: `Unknown file` (L344-394)</summary>
 
 **Path:** `Unknown file`
 
 ```
+            // consistente con medicos.js por si a futuro recepción también crea.
+            if (esNueva) p.set('nueva', '1');
+            _abrirSolOverlay('/laesh/rc/views/solicitud_dac_impr.php?' + p.toString());
+        }
 
-            // Corrección 2026-09-22: Diagnóstico ahora tiene su propia columna —
-            // Observaciones conserva solo el motivo de cancelación y el enlace
-            // al PDF de resultado ("otros estudios" ya no se muestra aquí).
-            $diagRaw = trim($ord['diagnostico'] ?? '');
-            if ($diagRaw === 'Estudios de Laboratorio' || $diagRaw === '') {
-                $diagDescr = '<span style="color:#94a3b8; font-style:italic;">—</span>';
+
+        // Cambiar Paneles / Tabs en Labadmin con actualización de Breadcrumb
+        // FUENTE DE VERDAD: textos deben ser idénticos a los del menú lateral izquierdo
+        const panelLabelsAdmin = {
+            'panel-ordenes':            'Solicitudes Hoy',
+            'panel-ordenes-anteriores': 'Solicitudes Anteriores',
+            'panel-pacientes':          'Pacientes',
+            'panel-medicos':            'Médicos',
+            'panel-reportes':           'Reportes y Estadísticas',
+            'panel-catalogos':          'Catálogos de Análisis'
+        };
+
+        function cambiarTabAdmin(panelId, el) {
+            document.querySelectorAll('.sidebar .nav-item').forEach(i => i.classList.remove('active'));
+            if (el) {
+                el.classList.add('active');
             } else {
-                $diagDescr = htmlspecialchars($diagRaw, ENT_QUOTES, 'UTF-8');
+                const navItem = document.querySelector(`.sidebar .nav-item[data-panel="${panelId}"]`);
+                if (navItem) navItem.classList.add('active');
+            }
+            document.querySelectorAll('.tab-panel').forEach(p => {
+                p.style.display = 'none';
+                p.classList.add('d-none');
+            });
+            const target = document.getElementById(panelId);
+            if (target) {
+                target.classList.remove('d-none');
+                target.style.display = 'block';
             }
 
-            if ($eId === 5) {
-                $motivoCanc = !empty($ord['motivo_cancelacion']) ? htmlspecialchars($ord['motivo_cancelacion'], ENT_QUOTES, 'UTF-8') : 'Orden cancelada';
-                $observacionesDescr = '<div class="motivo-cancelacion-box" style="color:#b91c1c; font-size:0.85rem; font-weight:600; line-height:1.35;">'
-                                    . '<span style="color:#991b1b; font-weight:700;">Cancelación:</span> ' . $motivoCanc
-                                    . '</div>';
-            } else {
-                // Corrección 2026-09-22: "otros estudios" ya no se muestra en
-                // Observaciones (esa columna es solo para motivo de cancelación
-                // y el enlace al PDF de resultado).
-                // 2026-09-23: Observaciones ya NO muestra nombre/link de archivos
-                // subidos — el acceso al PDF vive en los chips de parciales
-                // (columna Estado) y en el botón Acción/PDF una vez completada.
-                if ($eId === 2 && !empty($ord['parciales_fechas'])) {
-                    // 2026-09-24: antes se mostraba con solo estado_id=2, sin
-                    // importar si ya se había subido algún parcial. Ahora exige
-                    // al menos 1 fila en resultados_pdf (mismo condicional que
-                    // ya usan los chips de la columna Estado).
-                    $observacionesDescr = '<span style="color:#64748b;">Orden con resultados parciales incrementales.</span>';
-                } elseif ($eId !== 2 && !empty($ord['parciales_fechas'])) {
-                    // Tras "Completado" (o Cerrada) los chips de la columna Estado
+            const bc = document.getElementById('header-bc-current');
+            if (bc && panelLabelsAdmin[panelId]) {
+                bc.textContent = panelLabelsAdmin[panelId];
+            }
+            if (panelId === 'panel-catalogos') {
+                if (typeof window.loadCatalogTree === 'function') {
+                    window.loadCatalogTree();
+                }
+                const btnViewTable = document.getElementById('btn-view-table');
+                if (btnViewTable) {
+                    btnViewTable.click();
+                }
+            }
+            if (panelId === 'panel-medicos') {
+                var activeSubTab = document.querySelector('#toggle-medicos-view .cms-tab.active');
+                var viewType = activeSubTab ? activeSubTab.getAttribute('data-view') : 'table';
 ```
 
 </details>
@@ -22560,53 +18892,58 @@ Flight::route('POST /orden/cancelar', function () {
 ### Actions
 
 **Tool:** `view_file`
-**File:** `index.php`
+**File:** `labadmin.js`
 
 <details>
 <summary>Metadata</summary>
 
-- **Model:** Gemini 3.8 Flash (Low)
+- **Model:** Gemini 3.8 Flash (High)
 </details>
 
 ---
 
 <details>
-<summary>File: `Unknown file` (L204-234)</summary>
+<summary>File: `Unknown file` (L394-429)</summary>
 
 **Path:** `Unknown file`
 
 ```
+                var viewType = activeSubTab ? activeSubTab.getAttribute('data-view') : 'table';
+                if (viewType === 'universidades' && typeof window.initUniversidadesFlatGrid === 'function') {
+                    window.initUniversidadesFlatGrid();
+                } else if (viewType === 'centros-trabajo' && typeof window.initCentrosTrabajoFlatGrid === 'function') {
+                    window.initCentrosTrabajoFlatGrid();
+                } else if (typeof window.initMedicosFlatGrid === 'function') {
+                    window.initMedicosFlatGrid();
+                }
+            }
+        }
+        window.cambiarTabAdmin = cambiarTabAdmin;
 
-            $folio = htmlspecialchars($ord['folio'] ?? '', ENT_QUOTES, 'UTF-8');
-            $paciente = htmlspecialchars($ord['paciente_nombre'] ?? '', ENT_QUOTES, 'UTF-8');
+        // Refrescar tablas, badge y silbato cuando médico u otro tab actualiza localStorage
+        window.addEventListener('storage', function() {
+            refreshData();                                                           // actualiza tabla-recepcion + badge-recepcion + silbato si hay nuevas órdenes
+            if (typeof refreshHistorialAdmin === 'function') refreshHistorialAdmin(); // actualiza historial de Órdenes Anteriores
+        });
 
-            // Corrección 2026-09-22: Diagnóstico y Observaciones son columnas
-            // separadas — mismo patrón que rcRenderOrdenesTablaBody. Antes el
-            // mensaje de cancelación se mezclaba dentro de Diagnóstico.
-            // Observaciones ya no muestra "otros estudios" (solo cancelación).
-            $diagRaw = trim($ord['diagnostico'] ?? '');
-            $diag = ($diagRaw === '' || $diagRaw === 'Estudios de Laboratorio')
-                ? '<span style="color:#94a3b8; font-style:italic;">—</span>'
-                : htmlspecialchars($diagRaw, ENT_QUOTES, 'UTF-8');
+        // A-01: activación por teclado (Enter/Espacio) para role="button" en nav-items
+        // El listener de CLICK está en DOMContentLoaded (líneas P-LAESH-01) — no duplicar aquí.
+        document.querySelectorAll('.sidebar .nav-item').forEach(function(item) {
+            item.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.click();
+                }
+            });
+        });
 
-            if ($eId === 5) {
-                $motivoCanc = !empty($ord['motivo_cancelacion']) ? htmlspecialchars($ord['motivo_cancelacion'], ENT_QUOTES, 'UTF-8') : 'Orden cancelada';
-                $observacionesDescr = '<div class="motivo-cancelacion-box" style="color:#b91c1c; font-size:0.85rem; font-weight:600; line-height:1.35;">'
-                                    . '<span style="color:#991b1b; font-weight:700;">Cancelación:</span> ' . $motivoCanc
-                                    . '</div>';
-            } else {
-                // Corrección 2026-09-22: "otros estudios" ya no se muestra en
-                // Observaciones (esa columna es solo para motivo de cancelación).
-                if ($eId === 2 && !empty($ord['parciales_fechas'])) {
-                    // 2026-09-24: antes se mostraba con solo estado_id=2, sin
-                    // importar si ya se había subido algún parcial — el médico
-                    // veía "resultados parciales incrementales" desde el instante
-                    // en que Recepción recibía al paciente, antes de que existiera
-                    // ningún parcial real. Ahora exige al menos 1 fila en
-                    // resultados_pdf (mismo condicional que ya usan los chips).
-                    $observacionesDescr = '<span style="color:#64748b;">Orden con resultados parciales incrementales.</span>';
-                } elseif ($eId !== 2 && !empty($ord['parciales_fechas'])) {
-                    // Tras "Completado" (o Cerrada) los chips de la columna Estado
+        
+        function filtrarHistorialAdmin() {
+            var el = document.getElementById('filtro-periodo-historial-admin');
+            if (el) {
+                console.log("Filtrando historial de recepción por periodo:", el.value);
+            }
+        }
 ```
 
 </details>
@@ -22615,15 +18952,49 @@ Flight::route('POST /orden/cancelar', function () {
 
 ## Agent Response
 
+### Thinking
+
+The code lacks a condition to handle the 'panel-reportes' panel within the `cambiarTabAdmin` function. Investigating the call to `filtrarEstadisticasAdmin` revealed it is only executed once during the initial page load.
+
+
+On page load, the initial period filter is "mes," triggering a background statistics update. Clicking the sidebar link displays the report panel, but it doesn't refresh data, indicating a missing event listener. The period dropdown and date inputs, specifically their `onchange` events, call a function which appears to be responsible for data refreshing. This seems crucial to ensure the statistics update accordingly.
+
+
+`manejarCambioFiltroAdmin` controls the visibility of the date range input based on the selected filter. If the "fecha" option is chosen, the date range becomes visible and an attempt to show the date picker is made. If not "fecha", the date range is hidden, and `filtrarEstadisticasAdmin` is executed. The `filtrarEstadisticasAdmin` function checks for valid start and end dates before proceeding. The issue might be that `manejarCambioFiltroAdmin` isn't triggered on panel display.
+
+
+The date selection's label ("Fecha") is misleading since it requires a date *range*, not a single date. The code forces two dates to be selected. The system should either default the end date to the start date if only one is chosen or change the label to accurately represent its functionality. The calendar picker's `showPicker()` call directly triggers the `onchange` event, leading to a possible usability issue and unexpected behavior since its function's purpose is not yet fully understood.
+
+
+The date picker for the end date doesn't automatically open after selecting the start date, requiring an explicit click, which creates a poor user experience.  The desired behavior is to automatically focus on the second date input and potentially pre-fill it with the start date for suggestion. Using `onchange` events on date inputs presents a problem, as these events do not fire while the user is typing, which is how a user might naturally input a date range. This inconsistency between keyboard input and event triggering needs to be addressed for the date filter.
+
+
+The date input change event isn't triggered by typing; using the `input` event or handling Enter is necessary for keyboard input. The system doesn't validate if the start date is later than the end date, leading to incorrect results, with the backend returning a "success" response even with inverted dates, masking data retrieval errors.
+
+The current SQL `BETWEEN` clause doesn't handle the inverted date range, which causes the database to return no results for an inverted period. To resolve this, input date validation must be added. The start/end date inputs need constraints to prevent inverted ranges or an automated correction upon detection of inversion.
+
+
+The SQL query needs to handle inverted date ranges by using `LEAST` and `GREATEST` in the `BETWEEN` clause, or by swapping the date variables. Date input fields lack the `max` attribute, allowing users to select future dates; implementing `max="<?= date('Y-m-d') ?>"` restricts the calendar to current or past dates. The usage of `showPicker()` within the code has usability and compatibility issues. The function requires user activation and the current implementation is not universally functional.
+
+
+The date formatting in the statistics header currently displays redundant information when the start and end dates are the same. Need to implement a conditional check to display only the single date in such cases. The initial state of the date range inputs when the "Fecha" filter is selected is blank, hindering usability. A sensible default date range (e.g., current month) is necessary for better user experience.
+
+
+There's a discrepancy: the "Reportes" panel uses `filtro-periodo-admin` while "Solicitudes Anteriores" uses `filtro-periodo-historial-admin`. The `filtrarHistorialAdmin()` function is incomplete, logging the selected period but not actually filtering the data. This needs to be completed.
+
+
+
+
 ### Actions
 
 **Tool:** `grep_search`
-**Query:** `motivo_cancelacion`
+**Query:** `rango-fechas`
 
 <details>
 <summary>Metadata</summary>
 
-- **Model:** Gemini 3.8 Flash (Low)
+- **Thinking Duration:** 10.458479955s
+- **Model:** Gemini 3.8 Flash (High)
 </details>
 
 ---
@@ -22631,7 +19002,7 @@ Flight::route('POST /orden/cancelar', function () {
 ### Local File Search
 
 **Status:** Completed
-**Created:** 25 Sept 2026, 7:55 am
+**Created:** 26 Sept 2026, 7:29 pm
 
 ---
 
@@ -22640,48 +19011,48 @@ Flight::route('POST /orden/cancelar', function () {
 ### Actions
 
 **Tool:** `view_file`
-**File:** `Ordenes.php`
+**File:** `medicos.js`
 
 <details>
 <summary>Metadata</summary>
 
-- **Model:** Gemini 3.8 Flash (Low)
+- **Model:** Gemini 3.8 Flash (High)
 </details>
 
 ---
 
 <details>
-<summary>File: `Unknown file` (L319-344)</summary>
+<summary>File: `Unknown file` (L314-339)</summary>
 
 **Path:** `Unknown file`
 
 ```
+            if (elTiempo) elTiempo.innerText = tiempo;
+            if (document.getElementById('lbl-ordenes-medico')) document.getElementById('lbl-ordenes-medico').innerText = `ÓRDENES EMITIDAS (${lblText})`;
+        }
 
-            $sql = "
-                SELECT o.orden_id as id, o.folio_unico as folio, o.hora_captura as creado_en, o.fecha_resultado,
-                       o.diagnostico, o.otros_estudios, o.estudios_json as estudios, o.edad_al_emitir,
-                       o.paciente_nombre, o.paciente_sexo, o.paciente_telefono as telefono,
-                       COALESCE(o.medico_nombre_completo, 'Médico General') AS medico_nombre,
-                       COALESCE(o.medico_especialidad, 'Medicina General') AS medico_especialidad,
-                       COALESCE(o.medico_cedula, 'CED-N/A') AS medico_cedula,
-                       o.estado_id, o.estado_valor AS estado_nombre, o.estado_color AS color_badge,
-                       o.motivo_cancelacion,
-                       pdf.nombre_archivo AS pdf_nombre,
-                       pdf.folio_extraido,
-                       parc.parciales_fechas
-                FROM vw_ordenes_completas o
-                LEFT JOIN (
-                    SELECT p1.orden_id, p1.nombre_archivo, p1.folio_extraido
-                    FROM resultados_pdf p1
-                    INNER JOIN (
-                        SELECT orden_id, MAX(id) AS max_id
-                        FROM resultados_pdf
-                        GROUP BY orden_id
-                    ) p2 ON p1.id = p2.max_id
-                ) pdf ON pdf.orden_id = o.orden_id
-                LEFT JOIN (
-                    SELECT orden_id, GROUP_CONCAT(creado_en ORDER BY id ASC SEPARATOR '|') AS parciales_fechas
-                    FROM resultados_pdf
+        function manejarCambioFiltroMedico() {
+            const select = document.getElementById('filtro-periodo-medico');
+            const rangeContainer = document.getElementById('rango-fechas-medico');
+            if (select.value === 'fecha') {
+                rangeContainer.style.display = 'inline-flex';
+                const inputInicio = document.getElementById('fecha-inicio-medico');
+                try {
+                    inputInicio.showPicker();
+                } catch (e) {
+                    inputInicio.click();
+                }
+            } else {
+                rangeContainer.style.display = 'none';
+                filtrarEstadisticasMedico();
+            }
+        }
+
+        // Carga inicial — poblar cache de MariaDB y verificar notificaciones
+        refreshData();
+
+        // P-LAESH-FOLIO-EXTRAIDO-01 (2026-09-24): formatea m.fecha ("YYYY-MM-DD HH:mm:ss",
+        // MariaDB sin TZ) como "dd/mm HH:mm" para la fecha de solicitud en resultados de
 ```
 
 </details>
@@ -22690,131 +19061,25 @@ Flight::route('POST /orden/cancelar', function () {
 
 ## Agent Response
 
-### Actions
+### Thinking
 
-**Tool:** `grep_search`
-**Query:** `CambiarEstadoOrden`
+Functionality appears rudimentary. Initial tests suggest the date range input and calendar interaction work, although a deeper dive is required to identify edge cases and potential vulnerabilities. It's likely the system lacks robust input validation or error handling.
 
-<details>
-<summary>Metadata</summary>
 
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
+Analyzing the architecture reveals the view, client-side logic, API controller, and business logic components involved in date range selection. There are usability gaps in the date picker's flow, specifically that after selecting a start date, the end date picker doesn't automatically appear. The lack of intelligent pre-filling for date ranges also impacts user experience.
 
----
 
-### Local File Search
+The date selection has ambiguous labeling; a single "Fecha" option requires two date inputs for a date range, potentially confusing users who expect to view a single day. Input capture via keyboard is flawed, requiring the `change` event to fire on `blur` or Enter. This means updates aren't triggered immediately during typing. There is no validation for inverted date ranges and lacks an upper limit on the input dates.
 
-**Status:** Completed
-**Created:** 25 Sept 2026, 7:55 am
 
----
 
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `CREATE PROCEDURE `CambiarEstadoOrden``
 
 <details>
 <summary>Metadata</summary>
 
-- **Model:** Gemini 3.8 Flash (Low)
+- **Thinking Duration:** 1.636519153s
+- **Model:** Gemini 3.8 Flash (High)
 </details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 7:56 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `CambiarEstadoOrden`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Local File Search
-
-**Status:** CORTEX_STEP_STATUS_ERROR
-**Created:** 25 Sept 2026, 7:56 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `grep_search`
-**Query:** `CambiarEstadoOrden`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Local File Search
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 7:56 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 7:56 am
-
----
-
-## Agent Response
-
-### Actions
-
-**Tool:** `run_command`
-
-<details>
-<summary>Metadata</summary>
-
-- **Model:** Gemini 3.8 Flash (Low)
-</details>
-
----
-
-### Terminal Command Execution
-
-**Status:** Completed
-**Created:** 25 Sept 2026, 7:56 am
 
 ---
 
